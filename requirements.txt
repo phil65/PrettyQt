@@ -1,0 +1,2 @@
+qtpy >= 1.6.0
+qtawesome >= 0.5.6
