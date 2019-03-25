@@ -5,7 +5,7 @@
 
 import pathlib
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
 
 
 class FileDialog(QtWidgets.QFileDialog):
@@ -13,8 +13,11 @@ class FileDialog(QtWidgets.QFileDialog):
     simple dialog used to display some widget
     """
 
-    def __init__(self, path=None, mode=None, parent=None):
-        super().__init__(directory=path, parent=parent)
+    def __init__(self, path=None, mode=None, path_id=None, parent=None):
+        self.path_id = path_id
+        settings = QtCore.QSettings()
+        initial_path = settings.value(self.path_id, "")
+        super().__init__(directory=initial_path, parent=parent)
         self.setFileMode(QtWidgets.QFileDialog.ExistingFiles)
         self.set_accept_mode(mode)
 
@@ -49,9 +52,14 @@ class FileDialog(QtWidgets.QFileDialog):
 
     def choose(self):
         result = super().exec_()
-        if result == QtWidgets.QDialog.Accepted:
-            paths = self.selected_files()
-            return paths
+        if result != QtWidgets.QDialog.Accepted:
+            return None
+        paths = self.selected_files()
+        folder_path = paths[0].parent
+        if self.path_id:
+            settings = QtCore.QSettings()
+            settings.setValue(self.path_id, str(folder_path))
+        return paths
 
     def set_filter(self, extension_dict):
         # returns "Images (*.png *.xpm *.jpg);;Text files (*.txt);;XML files (*.xml)"
