@@ -20,4 +20,3 @@ class PushButton(QtWidgets.QPushButton):
             icon = qta.icon(icon)
         if icon:
             self.setIcon(icon)
-

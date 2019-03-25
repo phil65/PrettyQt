@@ -13,4 +13,3 @@ class RadioButton(QtWidgets.QRadioButton):
 
     def set_disabled(self):
         self.setEnabled(False)
-
