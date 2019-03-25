@@ -17,6 +17,7 @@ from .pushbutton import PushButton
 from .splashscreen import SplashScreen
 from .filedialog import FileDialog
 from .imageviewer import ImageViewer
+from .dialogbuttonbox import DialogButtonBox
 
 from .mainwindow import MainWindow
 
@@ -39,6 +40,7 @@ __all__ = ["FormLayout",
            "SplashScreen",
            "FileDialog",
            "ImageViewer",
+           "DialogButtonBox",
            "MainWindow",
            "WaitingSpinner",
            "Callout",
