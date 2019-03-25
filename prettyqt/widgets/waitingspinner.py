@@ -72,8 +72,8 @@ class BaseWaitingSpinner(QtWidgets.QWidget):
             painter.save()
             painter.translate(self._inner_radius + self._line_length,
                               self._inner_radius + self._line_length)
-            rotateAngle = float(360 * i) / float(self._line_num)
-            painter.rotate(rotateAngle)
+            rotate_angle = float(360 * i) / float(self._line_num)
+            painter.rotate(rotate_angle)
             painter.translate(self._inner_radius, 0)
             distance = self.linecount_distance_from_primary(i,
                                                             self._current_counter,
@@ -180,19 +180,19 @@ class BaseWaitingSpinner(QtWidgets.QWidget):
     def update_timer(self):
         self._timer.setInterval(1000 / (self._line_num * self._revolutions_per_second))
 
-    def linecount_distance_from_primary(self, current, primary, totalNrOfLines):
+    def linecount_distance_from_primary(self, current, primary, total_lines):
         distance = primary - current
         if distance < 0:
-            distance += totalNrOfLines
+            distance += total_lines
         return distance
 
-    def current_line_color(self, countDistance, totalNrOfLines, trailFadePerc,
-                           minOpacity, colorinput):
+    def current_line_color(self, countDistance, total_lines, trailFadePerc,
+                           min_opacity, colorinput):
         color = QtGui.QColor(colorinput)
         if countDistance == 0:
             return color
-        minAlphaF = minOpacity / 100.0
-        distanceThreshold = int(math.ceil((totalNrOfLines - 1) * trailFadePerc / 100.0))
+        minAlphaF = min_opacity / 100.0
+        distanceThreshold = int(math.ceil((total_lines - 1) * trailFadePerc / 100.0))
         if countDistance > distanceThreshold:
             color.setAlphaF(minAlphaF)
         else:
