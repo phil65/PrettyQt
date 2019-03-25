@@ -9,6 +9,8 @@ from .headerview import HeaderView
 from .image import Image
 from .imageviewer import ImageViewer
 from .menu import Menu
+from .slider import Slider
+from .styleoptionslider import QStyleOptionSlider
 from .spanslider import SpanSlider
 from .splashscreen import SplashScreen
 from .tabwidget import TabWidget
