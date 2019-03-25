@@ -6,7 +6,7 @@
 import pytest
 
 
-from prettyqt import callout
+from prettyqt import widgets
 
 
 @pytest.fixture
@@ -15,4 +15,4 @@ def response():
 
     See more at: http://doc.pytest.org/en/latest/fixture.html
     """
-    return callout.Callout()
+    return widgets.Callout()
