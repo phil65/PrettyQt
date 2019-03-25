@@ -43,10 +43,10 @@ class Toolbar(QtWidgets.QToolBar):
         self.addWidget(btn)
         return btn
 
-    def add_action(self, name: str, icon, callback: Callable, checkable=False):
+    def add_action(self, label: str, icon, callback: Callable, checkable=False):
         if isinstance(icon, str):
             icon = qta.icon(icon)
-        action = self.addAction(icon, name, callback)
+        action = self.addAction(icon, label, callback)
         if checkable:
             action.setCheckable(True)
         return action
