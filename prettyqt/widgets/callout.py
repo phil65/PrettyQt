@@ -14,7 +14,7 @@ class Callout(QtWidgets.QGraphicsItem):
         self.text = None
         self.text_rect = None
 
-    def boundingRect(self):
+    def boundingRect(self) -> QtCore.QRectF:
         anchor = self.mapFromParent(self.chart.mapToPosition(self.anchor))
         rect = QtCore.QRectF()
         rect.setLeft(min(self.rect.left(), anchor.x()))
@@ -83,7 +83,7 @@ class Callout(QtWidgets.QGraphicsItem):
         else:
             event.setAccepted(False)
 
-    def setText(self, text):
+    def setText(self, text: str):
         self.text = text
         metrics = QtGui.QFontMetrics(self.font)
         self.text_rect = metrics.boundingRect(QtCore.QRect(0, 0, 150, 150),

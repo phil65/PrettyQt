@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Callable, Optional, Any
+
 from qtpy import QtWidgets, QtCore
 import qtawesome as qta
 
@@ -29,7 +31,12 @@ class Menu(QtWidgets.QMenu):
         separator.setDefaultWidget(label)
         return separator
 
-    def add_action(self, label, callback, icon=None, checkable=False, shortcut=None):
+    def add_action(self,
+                   label: str,
+                   callback: Callable,
+                   icon: Optional[Any] = None,
+                   checkable: bool = False,
+                   shortcut: Optional[str] = None) -> QtWidgets.QAction:
         action = QtWidgets.QAction(label, parent=self)
         action.triggered.connect(callback)
         if icon:

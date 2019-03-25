@@ -12,7 +12,7 @@ class ButtonDelegate(QtWidgets.QItemDelegate):
         super().__init__(parent)
         self.fn_role = role
 
-    def createEditor(self, parent, option, index):
+    def createEditor(self, parent, option, index) -> QtWidgets.QPushButton:
         label = index.data()
         btn_callback = index.data(self.fn_role)
         btn = QtWidgets.QPushButton(label, parent)

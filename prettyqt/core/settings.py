@@ -25,7 +25,7 @@ class Settings(QtCore.QSettings):
             self.beginGroup(self.settings_id)
         return self
 
-    def __contains__(self, key):
+    def __contains__(self, key) -> bool:
         return self.contains(key)
 
     def __exit__(self, exc_type, exc_value, traceback):

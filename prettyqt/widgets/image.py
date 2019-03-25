@@ -17,7 +17,7 @@ class Image(QtWidgets.QLabel):
                      "</p></body></html>")
 
     @classmethod
-    def from_path(cls, path, parent=None):
+    def from_path(cls, path, parent=None) -> "Image":
         with open(path, mode="rb") as f:
             data = f.read()
         # Create widget

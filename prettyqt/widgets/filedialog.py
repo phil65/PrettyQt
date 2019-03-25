@@ -7,6 +7,11 @@ import pathlib
 
 from qtpy import QtWidgets, QtCore
 
+MODES = dict(existing_file=QtWidgets.QFileDialog.ExistingFile,
+             existing_files=QtWidgets.QFileDialog.ExistingFiles,
+             any_file=QtWidgets.QFileDialog.ExistingFiles,
+             directory=QtWidgets.QFileDialog.ExistingFiles)
+
 
 class FileDialog(QtWidgets.QFileDialog):
     """
@@ -21,17 +26,13 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setFileMode(QtWidgets.QFileDialog.ExistingFiles)
         self.set_accept_mode(mode)
 
-    def set_accept_mode(self, mode):
+    def set_accept_mode(self, mode: str):
         if mode == "save":
             self.setAcceptMode(self.AcceptSave)
         else:
             self.setAcceptMode(self.AcceptOpen)
 
-    def set_file_mode(self, mode):
-        MODES = dict(existing_file=QtWidgets.QFileDialog.ExistingFile,
-                     existing_files=QtWidgets.QFileDialog.ExistingFiles,
-                     any_file=QtWidgets.QFileDialog.ExistingFiles,
-                     directory=QtWidgets.QFileDialog.ExistingFiles)
+    def set_file_mode(self, mode: str):
         self.setFileMode(MODES[mode])
 
     def selected_files(self):

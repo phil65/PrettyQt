@@ -35,7 +35,11 @@ class MainWindow(QtWidgets.QMainWindow):
     #     super().closeEvent(event)
     #     event.accept()
 
-    def add_dockwidget(self, name, title, vertical=True, position=1):
+    def add_dockwidget(self,
+                       name: str,
+                       title: str,
+                       vertical: bool = True,
+                       position: int = 1) -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, name=name, title=title)
         widget = QtWidgets.QWidget()
         widget.setObjectName(f"{name}.widget")

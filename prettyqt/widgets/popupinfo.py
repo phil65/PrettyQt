@@ -36,7 +36,7 @@ class PopupInfo(QtWidgets.QDialog):
         self.move(x, y - 200)
         self.timer.start(2500)
 
-    def show_popup(self, text):
+    def show_popup(self, text: str):
         self.label.setText(f"<font color='white'>{text}</font>")
         self.show()
 

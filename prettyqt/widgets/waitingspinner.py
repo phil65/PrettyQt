@@ -104,20 +104,20 @@ class BaseWaitingSpinner(QtWidgets.QWidget):
             self._timer.stop()
             self._current_counter = 0
 
-    def set_line_num(self, lines):
+    def set_line_num(self, lines: int):
         self._line_num = lines
         self._current_counter = 0
         self.update_timer()
 
-    def set_line_length(self, length):
+    def set_line_length(self, length: int):
         self._line_length = length
         self.update_size()
 
-    def set_line_width(self, width):
+    def set_line_width(self, width: int):
         self._line_width = width
         self.update_size()
 
-    def set_inner_radius(self, radius):
+    def set_inner_radius(self, radius: int):
         self._inner_radius = radius
         self.update_size()
 
@@ -136,19 +136,19 @@ class BaseWaitingSpinner(QtWidgets.QWidget):
     def revolutions_per_second(self):
         return self._revolutions_per_second
 
-    def line_num(self):
+    def line_num(self) -> int:
         return self._line_num
 
-    def line_length(self):
+    def line_length(self) -> int:
         return self._line_length
 
-    def line_width(self):
+    def line_width(self) -> int:
         return self._line_width
 
-    def innerRadius(self):
+    def inner_radius(self) -> int:
         return self._inner_radius
 
-    def is_spinning(self):
+    def is_spinning(self) -> bool:
         return self._is_spinning
 
     def set_roundness(self, roundness):

@@ -19,20 +19,20 @@ class FormLayout(QtWidgets.QFormLayout):
     def __getitem__(self, index):
         return self.itemAt(index)
 
-    def set_size_mode(self, mode):
+    def set_size_mode(self, mode: str):
         self.setSizeConstraint(MODES[mode])
 
-    def set_label_widget(self, row, widget):
+    def set_label_widget(self, row: int, widget):
         if isinstance(widget, str):
             widget = QtWidgets.QLabel(widget)
         self.setWidget(row, QtWidgets.QFormLayout.LabelRole, widget)
 
-    def set_field_widget(self, row, widget):
+    def set_field_widget(self, row: int, widget):
         if isinstance(widget, str):
             widget = QtWidgets.QLabel(widget)
         self.setWidget(row, QtWidgets.QFormLayout.FieldRole, widget)
 
-    def set_spanning_widget(self, row, widget):
+    def set_spanning_widget(self, row: int, widget):
         if isinstance(widget, str):
             widget = QtWidgets.QLabel(widget)
         self.setWidget(row, QtWidgets.QFormLayout.SpanningRole, widget)
