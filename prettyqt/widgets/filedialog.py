@@ -23,7 +23,7 @@ class FileDialog(QtWidgets.QFileDialog):
         settings = QtCore.QSettings()
         initial_path = settings.value(self.path_id, "")
         super().__init__(directory=initial_path, parent=parent)
-        self.setFileMode(QtWidgets.QFileDialog.ExistingFiles)
+        self.set_file_mode("existing_files")
         self.set_accept_mode(mode)
 
     def set_accept_mode(self, mode: str):
