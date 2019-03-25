@@ -10,6 +10,9 @@ from qtpy import QtCore
 FORMATS = dict(native=QtCore.QSettings.NativeFormat,
                ini=QtCore.QSettings.IniFormat)
 
+SCOPES = dict(user=QtCore.QSettings.UserScope,
+              system=QtCore.QSettings.SystemScope)
+
 
 class Settings(QtCore.QSettings):
 
@@ -22,15 +25,32 @@ class Settings(QtCore.QSettings):
             self.beginGroup(self.settings_id)
         return self
 
+    def __contains__(self, key):
+        return self.contains(key)
+
     def __exit__(self, exc_type, exc_value, traceback):
         if self.settings_id:
             self.endGroup()
+
+    def set_value(self, key, value):
+        self.setValue(key, value)
+
+    def value(self, value, default=None):
+        self.value(value, default)
 
     @staticmethod
     def set_default_format(fmt):
         if fmt not in FORMATS:
             raise ValueError("Format must be either 'native' or 'ini'")
         QtCore.QSettings.setDefaultFormat(FORMATS[fmt])
+
+    @staticmethod
+    def set_path(fmt, scope, path):
+        if fmt not in FORMATS:
+            raise ValueError("Format must be either 'native' or 'ini'")
+        if scope not in SCOPES:
+            raise ValueError("Format must be either 'native' or 'ini'")
+        QtCore.QSettings.setPath(FORMATS[fmt], SCOPES[scope], path)
 
     @contextlib.contextmanager
     def group(self, prefix):
