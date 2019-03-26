@@ -16,3 +16,7 @@ def response():
     See more at: http://doc.pytest.org/en/latest/fixture.html
     """
     return widgets.Callout()
+
+
+def test():
+    return True
