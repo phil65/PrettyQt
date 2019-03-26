@@ -7,6 +7,9 @@ tox==3.7.0
 coverage==4.5.3
 Sphinx==1.8.5
 sphinx_rtd_theme>=0.4.3
+sphinx-autodoc-annotation==1.0.post1
+sphinx-autodoc-typehints==1.6.0
+sphinx-git==10.1.1
 twine==1.13.0
 
 PyQt5==5.12.1
