@@ -11,8 +11,8 @@ import qtawesome as qta
 
 class Menu(QtWidgets.QMenu):
 
-    def __init__(self, label=None, icon=None, parent=None):
-        super().__init__(label, parent=parent)
+    def __init__(self, title="", icon=None, parent=None):
+        super().__init__(title, parent=parent)
         self.set_icon(icon)
         self.setToolTipsVisible(True)
 
