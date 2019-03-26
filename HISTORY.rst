@@ -6,3 +6,8 @@ History
 ------------------
 
 * First release on PyPI.
+
+
+Git changelog
+------------------
+.. git_changelog::
