@@ -23,6 +23,14 @@ class Menu(QtWidgets.QMenu):
             self.setIcon(icon)
 
     def _separator(self, text: str) -> QtWidgets.QWidgetAction:
+        """returns a separator showing a label
+
+        Args:
+            text: Text to show on separator
+
+        Returns:
+            Separator widget
+        """
         label = QtWidgets.QLabel(text)
         label.setMinimumWidth(self.minimumWidth())
         label.setStyleSheet("background:lightgrey")
@@ -36,7 +44,20 @@ class Menu(QtWidgets.QMenu):
                    callback: Callable,
                    icon: Optional[Any] = None,
                    checkable: bool = False,
-                   shortcut: Optional[str] = None) -> QtWidgets.QAction:
+                   shortcut: Optional[str] = None
+                   ) -> QtWidgets.QAction:
+        """Add an action to the menu
+
+        Args:
+            label: Label for button
+            callback: gets called when action is triggered
+            icon: icon for button (default: {None})
+            checkable: as checkbox button (default: {False})
+            shortcut: Shortcut for action (a) (default: {None})
+
+        Returns:
+            Action added to menu
+        """
         action = QtWidgets.QAction(label, parent=self)
         action.triggered.connect(callback)
         if icon:
