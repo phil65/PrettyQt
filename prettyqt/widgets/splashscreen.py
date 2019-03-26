@@ -8,11 +8,11 @@ from qtpy import QtWidgets, QtCore, QtGui
 
 class SplashScreen(QtWidgets.QSplashScreen):
 
-    def __init__(self, path, width=None, parent=None):
+    def __init__(self, path, width=None):
         pix = QtGui.QPixmap(str(path))
         if width:
             pix = pix.scaledToWidth(width)
-        super().__init__(pix, parent=parent)
+        super().__init__(pix)
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint |
                             QtCore.Qt.FramelessWindowHint)
         self.setEnabled(False)
