@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+"""widgets module
+
+contains QtWidgets-based classes
+"""
+
 from .formlayout import FormLayout
 from .image import Image
 
