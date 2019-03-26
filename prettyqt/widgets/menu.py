@@ -17,6 +17,11 @@ class Menu(QtWidgets.QMenu):
         self.setToolTipsVisible(True)
 
     def set_icon(self, icon):
+        """set the icon for the menu
+
+        Args:
+            icon: icon to use
+        """
         if isinstance(icon, str):
             icon = qta.icon(icon)
         if icon:
