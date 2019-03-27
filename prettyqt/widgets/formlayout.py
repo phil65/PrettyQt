@@ -23,16 +23,34 @@ class FormLayout(QtWidgets.QFormLayout):
         self.setSizeConstraint(MODES[mode])
 
     def set_label_widget(self, row: int, widget):
+        """set a widget for the label position at given row
+
+        Args:
+            row: Row offset
+            widget: widget to get added to layout
+        """
         if isinstance(widget, str):
             widget = QtWidgets.QLabel(widget)
         self.setWidget(row, QtWidgets.QFormLayout.LabelRole, widget)
 
     def set_field_widget(self, row: int, widget):
+        """set a widget for the field position at given row
+
+        Args:
+            row: Row offset
+            widget: widget to get added to layout
+        """
         if isinstance(widget, str):
             widget = QtWidgets.QLabel(widget)
         self.setWidget(row, QtWidgets.QFormLayout.FieldRole, widget)
 
     def set_spanning_widget(self, row: int, widget):
+        """set a widget spanning label and field position at given row
+
+        Args:
+            row: Row offset
+            widget: widget to get added to layout
+        """
         if isinstance(widget, str):
             widget = QtWidgets.QLabel(widget)
         self.setWidget(row, QtWidgets.QFormLayout.SpanningRole, widget)
