@@ -6,16 +6,16 @@ PrettyQt
 .. image:: https://img.shields.io/pypi/v/prettyqt.svg
         :target: https://pypi.python.org/pypi/prettyqt
 
-.. image:: https://img.shields.io/travis/phil65/prettyqt.svg
-        :target: https://travis-ci.org/phil65/prettyqt
+.. image:: https://img.shields.io/travis/phil65/PrettyQt.svg
+        :target: https://travis-ci.org/phil65/PrettyQt
 
 .. image:: https://readthedocs.org/projects/prettyqt/badge/?version=latest
         :target: https://prettyqt.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
 
-.. image:: https://pyup.io/repos/github/phil65/prettyqt/shield.svg
-     :target: https://pyup.io/repos/github/phil65/prettyqt/
+.. image:: https://pyup.io/repos/github/phil65/PrettyQt/shield.svg
+     :target: https://pyup.io/repos/github/phil65/PrettyQt/
      :alt: Updates
 
 
