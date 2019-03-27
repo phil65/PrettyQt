@@ -49,23 +49,39 @@ class Settings(QtCore.QSettings):
         if fmt not in FORMATS:
             raise ValueError("Format must be either 'native' or 'ini'")
         if scope not in SCOPES:
-            raise ValueError("Format must be either 'native' or 'ini'")
+            raise ValueError("Format must be either 'user' or 'system'")
         QtCore.QSettings.setPath(FORMATS[fmt], SCOPES[scope], path)
 
     @contextlib.contextmanager
     def group(self, prefix):
+        """context manager for setting groups
+
+        Args:
+            prefix: setting prefix for group
+        """
         self.beginGroup(prefix)
         yield None
         self.endGroup()
 
     @contextlib.contextmanager
     def write_array(self, prefix, size=-1):
+        """context manager for writing arrays
+
+        Args:
+            prefix: prefix for settings array
+            size: size of settings array
+        """
         self.beginWriteArray(prefix, size)
         yield None
         self.endArray()
 
     @contextlib.contextmanager
     def read_array(self, prefix):
+        """context manager for reading arrays
+
+        Args:
+            prefix: prefix for settings array
+        """
         self.beginReadArray(prefix)
         yield None
         self.endArray()

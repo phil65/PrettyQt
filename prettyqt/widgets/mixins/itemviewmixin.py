@@ -107,11 +107,21 @@ class ItemViewMixin(object):
                 for x in self.selected_indexes())
 
     def current(self) -> Optional[int]:
+        """returns current index
+
+        Returns:
+            current index if available, else None
+        """
         if self.selectionModel() is None:
             return None
         return self.selectionModel().currentIndex()
 
     def current_data(self):
+        """returns data from current index (UserRole)
+
+        Returns:
+            UserRole data from current index if available, else None
+        """
         if self.model() is None:
             return None
         role = self.model().DATA_ROLE
@@ -128,8 +138,12 @@ class ItemViewMixin(object):
         return False
 
     def jump_to_column(self, col_num: int):
-        """
-        make sure column at index *col_num is visible
+        """make sure column at given index is visible
+
+        scrolls to column at given index
+
+        Args:
+            col_num: column to scroll to
         """
         if self.model() is None:
             return None
@@ -144,11 +158,26 @@ class ItemViewMixin(object):
             self.h_header().resizeSections(self.h_header().Interactive)
 
     def set_selection_mode(self, mode: str):
+        """set selection mode for given item view
+
+        Allowed values are "single", "extended", "multi" or "none"
+
+        Args:
+            mode: selection mode to use
+
+        Raises:
+            ValueError: mode does not exist
+        """
+        if mode not in SELECTION_MODES:
+            raise ValueError("Format must be either 'single', 'extended',"
+                             "'multi' or 'None'")
         self.setSelectionMode(SELECTION_MODES[mode])
 
     def add_item(self, item):
-        """
-        append an item to the list
+        """append an item to the model
+
+        Args:
+            item: item to add to model
         """
         if item is None:
             logging.error("Tried to add None")

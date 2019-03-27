@@ -44,7 +44,11 @@ class Slider(QtWidgets.QSlider):
         return self.orientation() == QtCore.Qt.Vertical
 
     def set_horizontal(self):
+        """set slider orientation to horizontal
+        """
         self.setOrientation(QtCore.Qt.Horizontal)
 
     def set_vertical(self):
+        """set slider orientation to vertical
+        """
         self.setOrientation(QtCore.Qt.Vertical)
