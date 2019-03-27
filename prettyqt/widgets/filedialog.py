@@ -12,6 +12,12 @@ MODES = dict(existing_file=QtWidgets.QFileDialog.ExistingFile,
              any_file=QtWidgets.QFileDialog.ExistingFiles,
              directory=QtWidgets.QFileDialog.ExistingFiles)
 
+LABELS = dict(look_in=QtWidgets.QFileDialog.LookIn,
+              filename=QtWidgets.QFileDialog.FileName,
+              filetype=QtWidgets.QFileDialog.FileType,
+              accept=QtWidgets.QFileDialog.Accept,
+              reject=QtWidgets.QFileDialog.Reject)
+
 
 class FileDialog(QtWidgets.QFileDialog):
     """
@@ -31,6 +37,11 @@ class FileDialog(QtWidgets.QFileDialog):
             self.setAcceptMode(self.AcceptSave)
         else:
             self.setAcceptMode(self.AcceptOpen)
+
+    def set_label_text(self, label):
+        if label not in LABELS:
+            raise ValueError(f"Invalid value. Valid values: {LABELS.keys()}")
+        self.setLabelText(LABELS[label])
 
     def set_file_mode(self, mode: str):
         self.setFileMode(MODES[mode])
