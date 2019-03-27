@@ -44,6 +44,14 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setLabelText(LABELS[label])
 
     def set_file_mode(self, mode: str):
+        """sets the file mode of the dialog
+
+        allowed values are 'existing_file', 'existing_files',
+        'any_file' and 'directory'
+
+        Args:
+            mode: mode to use
+        """
         self.setFileMode(MODES[mode])
 
     def selected_files(self):
@@ -74,11 +82,24 @@ class FileDialog(QtWidgets.QFileDialog):
         return paths
 
     def set_filter(self, extension_dict):
-        # returns "Images (*.png *.xpm *.jpg);;Text files (*.txt);;XML files (*.xml)"
+        """set filter based on given dictionary
+
+        dict must contain "'name': ['.ext1', '.ext2']" as key-value pairs
+
+        Args:
+            extension_dict: filter dictionary
+        """
         items = [f"{k} ({' '.join(f'*{ext}' for ext in v)})"
                  for k, v in extension_dict.items()]
         filter_str = ";;".join(items)
         self.setNameFilter(filter_str)
 
-    def directory(self):
+    def directory(self) -> pathlib.Path:
+        """return current directory
+
+        returns current directory level as a Pathlib object
+
+        Returns:
+            Pathlib object
+        """
         return pathlib.Path(super().directory())
