@@ -13,6 +13,7 @@ sphinx-git==10.1.1
 twine==1.13.0
 
 PyQt5==5.12.1
+qtpy == 1.7.0
 
 pytest==4.3.1
 pytest-runner==4.4
