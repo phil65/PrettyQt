@@ -20,6 +20,8 @@ class FormLayout(QtWidgets.QFormLayout):
         return self.itemAt(index)
 
     def set_size_mode(self, mode: str):
+        if mode not in MODES:
+            raise ValueError(f"{mode} not a valid size mode.")
         self.setSizeConstraint(MODES[mode])
 
     def set_label_widget(self, row: int, widget):
