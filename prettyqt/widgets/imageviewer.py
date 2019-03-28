@@ -25,16 +25,6 @@ class ImageViewer(QtWidgets.QWidget):
         self.show()
 
 
-def show():
-    """
-    open dialog and start eventloop
-    """
-    form = ImageViewer()
-    form.show()
-    form.exec_()
-    return form
-
-
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     ex = ImageViewer()
