@@ -26,8 +26,8 @@ from .dialogbuttonbox import DialogButtonBox
 
 from .mainwindow import MainWindow
 
-from .waitingspinner import WaitingSpinner
-from .callout import Callout
+from .composed.waitingspinner import WaitingSpinner
+from .composed.callout import Callout
 from .popupinfo import PopupInfo
 from .buttondelegate import ButtonDelegate
 
