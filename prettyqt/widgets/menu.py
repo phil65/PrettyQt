@@ -49,6 +49,7 @@ class Menu(QtWidgets.QMenu):
                    callback: Callable,
                    icon: Optional[Any] = None,
                    checkable: bool = False,
+                   checked: bool = False,
                    shortcut: Optional[str] = None
                    ) -> QtWidgets.QAction:
         """Add an action to the menu
@@ -58,6 +59,7 @@ class Menu(QtWidgets.QMenu):
             callback: gets called when action is triggered
             icon: icon for button (default: {None})
             checkable: as checkbox button (default: {False})
+            checked: if checkable, turn on by default (default: {False})
             shortcut: Shortcut for action (a) (default: {None})
 
         Returns:
@@ -71,6 +73,8 @@ class Menu(QtWidgets.QMenu):
             action.setIcon(icon)
         if shortcut:
             action.setShortcut(shortcut)
-        action.setCheckable(checkable)
+        if checkable:
+            action.setCheckable(True)
+            action.setChecked(checked)
         self.addAction(action)
         return action
