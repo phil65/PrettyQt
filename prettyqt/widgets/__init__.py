@@ -18,8 +18,11 @@ from .toolbar import Toolbar
 from .headerview import HeaderView
 from .dockwidget import DockWidget
 from .pushbutton import PushButton
+from .radiobutton import RadioButton
+from .textedit import TextEdit
 
 from .splashscreen import SplashScreen
+from .progressdialog import ProgressDialog
 from .filedialog import FileDialog
 from .imageviewer import ImageViewer
 from .dialogbuttonbox import DialogButtonBox
@@ -42,7 +45,10 @@ __all__ = ["FormLayout",
            "HeaderView",
            "DockWidget",
            "PushButton",
+           "RadioButton",
+           "TextEdit",
            "SplashScreen",
+           "ProgressDialog",
            "FileDialog",
            "ImageViewer",
            "DialogButtonBox",
