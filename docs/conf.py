@@ -49,7 +49,8 @@ extensions = ['sphinx.ext.napoleon',
               'sphinx_autodoc_typehints',
               'sphinx_git']
 
-intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None),
+                       'PyQt5': ('', 'pyqt5-modified-objects.inv')}
 
 # autodoc_mock_imports = ["qtpy", "PyQt5"]
 
