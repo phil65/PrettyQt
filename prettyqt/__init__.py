@@ -7,6 +7,6 @@ from . import widgets
 
 __author__ = """Philipp Temminghoff"""
 __email__ = 'phil65@kodi.tv'
-__version__ = '0.8.10'
+__version__ = '0.8.11'
 
 __all__ = ["core", "widgets"]
