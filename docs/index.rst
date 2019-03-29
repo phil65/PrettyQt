@@ -23,3 +23,4 @@ main
 ===================
 .. automodule:: prettyqt
    :members:
+   :show-inheritance:
