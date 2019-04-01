@@ -34,7 +34,10 @@ class ProgressDialog(QtWidgets.QProgressDialog):
         self.setLabelText(message)
         self.show()
 
-    def set_titlebar_buttons(self, minimize=False, maximize=False, close=False):
+    def set_titlebar_buttons(self,
+                             minimize: bool = False,
+                             maximize: bool = False,
+                             close: bool = False):
         self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
         self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, maximize)
         self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, close)
