@@ -15,6 +15,7 @@ from .spanslider import SpanSlider
 from .action import Action
 from .menu import Menu
 from .tabwidget import TabWidget
+from .tabbar import TabBar
 from .toolbar import Toolbar
 from .headerview import HeaderView
 from .dockwidget import DockWidget
@@ -43,6 +44,7 @@ __all__ = ["FormLayout",
            "Action",
            "Menu",
            "TabWidget",
+           "TabBar",
            "Toolbar",
            "HeaderView",
            "DockWidget",
