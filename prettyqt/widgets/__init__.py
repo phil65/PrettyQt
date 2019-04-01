@@ -14,8 +14,8 @@ from .spanslider import SpanSlider
 
 from .action import Action
 from .menu import Menu
-from .tabwidget import TabWidget
 from .tabbar import TabBar
+from .tabwidget import TabWidget
 from .toolbar import Toolbar
 from .headerview import HeaderView
 from .dockwidget import DockWidget
