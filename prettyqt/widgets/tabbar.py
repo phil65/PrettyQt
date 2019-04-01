@@ -14,6 +14,15 @@ SELECTION_MODES = dict(left=QtWidgets.QTabBar.SelectLeftTab,
                        right=QtWidgets.QTabBar.SelectRightTab,
                        previous=QtWidgets.QTabBar.SelectPreviousTab)
 
+SHAPES = dict(rounded_north=QtWidgets.QTabBar.RoundedNorth,
+              rounded_south=QtWidgets.QTabBar.RoundedSouth,
+              rounded_west=QtWidgets.QTabBar.RoundedWest,
+              rounded_east=QtWidgets.QTabBar.RoundedEast,
+              triangular_north=QtWidgets.QTabBar.TriangularNorth,
+              triangular_south=QtWidgets.QTabBar.TriangularSouth,
+              triangular_west=QtWidgets.QTabBar.TriangularWest,
+              triangular_east=QtWidgets.QTabBar.TriangularEast)
+
 
 class TabBar(QtWidgets.QTabBar):
     on_detach = QtCore.Signal(int, QtCore.QPoint)
@@ -30,6 +39,15 @@ class TabBar(QtWidgets.QTabBar):
     def mouseDoubleClickEvent(self, event):
         event.accept()
         self.on_detach.emit(self.tabAt(event.pos()), self.mouse_cursor.pos())
+
+    def set_icon_size(self, size):
+        self.setIconSize(QtCore.QSize(size, size))
+
+    def set_tab_button(self, index, widget, position="left"):
+        if position == "left":
+            self.setTabButton(index, QtWidgets.QTabBar.LeftSide, widget)
+        else:
+            self.setTabButton(index, QtWidgets.QTabBar.RightSide, widget)
 
     def set_remove_behaviour(self, mode):
         """sets the remove hehaviour
