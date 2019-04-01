@@ -30,7 +30,7 @@ class Toolbar(QtWidgets.QToolBar):
                         label: str,
                         icon,
                         menu: QtWidgets.QMenu,
-                        style: str) -> QtWidgets.QToolButton:
+                        style: str = None) -> QtWidgets.QToolButton:
         btn = QtWidgets.QToolButton()
         btn.setText(label)
         if style:
@@ -43,6 +43,13 @@ class Toolbar(QtWidgets.QToolBar):
         self.menu_buttons.append(btn)
         self.addWidget(btn)
         return btn
+
+    def set_style(self, style):
+        if style is None:
+            return None
+        self.setToolButtonStyle(style)
+        for btn in self.menu_buttons:
+            self.setToolButtonStyle(style)
 
     def add_action(self, label: str, icon, callback: Callable, checkable=False):
         if isinstance(icon, str):
