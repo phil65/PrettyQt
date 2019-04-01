@@ -12,6 +12,7 @@ from .slider import Slider
 from .styleoptionslider import StyleOptionSlider
 from .spanslider import SpanSlider
 
+from .action import Action
 from .menu import Menu
 from .tabwidget import TabWidget
 from .toolbar import Toolbar
@@ -39,6 +40,7 @@ __all__ = ["FormLayout",
            "Slider",
            "StyleOptionSlider",
            "SpanSlider",
+           "Action",
            "Menu",
            "TabWidget",
            "Toolbar",
