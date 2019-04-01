@@ -22,9 +22,9 @@ class Toolbar(QtWidgets.QToolBar):
     ICON_SIZE = 20
 
     def __init__(self, *args, **kwargs):
+        self.menu_buttons = list()
         super().__init__(*args, **kwargs)
         self.set_icon_size(self.ICON_SIZE)
-        self.update_settings()
 
     def add_menu_button(self,
                         label: str,
@@ -40,6 +40,7 @@ class Toolbar(QtWidgets.QToolBar):
             icon = qta.icon(icon)
         btn.setIcon(icon)
         btn.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+        self.menu_buttons.append(btn)
         self.addWidget(btn)
         return btn
 

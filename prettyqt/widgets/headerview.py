@@ -35,11 +35,6 @@ class HeaderView(QtWidgets.QHeaderView):
         return [model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
                 for i in range(self.count())]
 
-    # def load_section_visibility(self, dct):
-    #     for i, (k, v) in enumerate(self.section_labels()[1:], start=1):
-    #         value = bool_array[i - 1]
-    #         self.setSectionHidden(i, bool(value))
-
     def contextMenuEvent(self, event):
         """
         context menu for our files tree
