@@ -5,20 +5,22 @@ PrettyQt
 
 .. image:: https://img.shields.io/pypi/v/prettyqt.svg
         :target: https://pypi.python.org/pypi/prettyqt
+        :alt: PyPi
 
 .. image:: https://img.shields.io/travis/phil65/PrettyQt.svg
         :target: https://travis-ci.org/phil65/PrettyQt
+        :alt: Travis CI
 
 .. image:: https://readthedocs.org/projects/prettyqt/badge/?version=latest
         :target: https://prettyqt.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-
 .. image:: https://pyup.io/repos/github/phil65/PrettyQt/shield.svg
-     :target: https://pyup.io/repos/github/phil65/PrettyQt/
-     :alt: Updates
+        :target: https://pyup.io/repos/github/phil65/PrettyQt/
+        :alt: Updates
 
-
+.. image:: https://codecov.io/gh/phil65/PrettyQt/branch/master/graph/badge.svg
+        :target: https://codecov.io/gh/phil65/PrettyQt
 
 Pythonic layer on top of PyQt5 / PySide2
 
