@@ -54,3 +54,11 @@ class Toolbar(QtWidgets.QToolBar):
 
     def set_icon_size(self, size):
         self.setIconSize(QtCore.QSize(size, size))
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    widget = Toolbar()
+    widget.show()
+    app.exec_()

@@ -20,3 +20,11 @@ class PushButton(QtWidgets.QPushButton):
             icon = qta.icon(icon)
         if icon:
             self.setIcon(icon)
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    widget = PushButton("This is a test")
+    widget.show()
+    app.exec_()

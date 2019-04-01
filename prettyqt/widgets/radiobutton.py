@@ -13,3 +13,11 @@ class RadioButton(QtWidgets.QRadioButton):
 
     def set_disabled(self):
         self.setEnabled(False)
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    widget = RadioButton("This is a test")
+    widget.show()
+    app.exec_()

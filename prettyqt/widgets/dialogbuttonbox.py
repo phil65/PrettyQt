@@ -8,9 +8,6 @@ from qtpy import QtWidgets, QtCore
 
 class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
-    def __init__(self, path, width=None, parent=None):
-        pass
-
     def set_horizontal(self):
         self.setOrientation(QtCore.Qt.Horizontal)
 
@@ -26,3 +23,12 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
     def add_reject_button(self, button):
         self.addButton(button, QtWidgets.QDialogButtonBox.RejectRole)
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    widget = DialogButtonBox()
+    widget.set_buttons(None)
+    widget.show()
+    app.exec_()
