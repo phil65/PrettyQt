@@ -59,7 +59,7 @@ class Toolbar(QtWidgets.QToolBar):
             action.setCheckable(True)
         return action
 
-    def set_icon_size(self, size):
+    def set_icon_size(self, size: int):
         self.setIconSize(QtCore.QSize(size, size))
 
 

@@ -46,7 +46,7 @@ class ComboBox(QtWidgets.QComboBox):
         policy = SIZE_POLICIES.get(policy)
         self.setSizeAdjustPolicy(policy)
 
-    def set_icon_size(self, size):
+    def set_icon_size(self, size: int):
         self.setIconSize(QtCore.QSize(size, size))
 
     def set_min_char_length(self, chars):

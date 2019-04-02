@@ -40,7 +40,7 @@ class TabBar(QtWidgets.QTabBar):
         event.accept()
         self.on_detach.emit(self.tabAt(event.pos()), self.mouse_cursor.pos())
 
-    def set_icon_size(self, size):
+    def set_icon_size(self, size: int):
         self.setIconSize(QtCore.QSize(size, size))
 
     def set_tab_button(self, index, widget, position="left"):

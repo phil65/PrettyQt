@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtGui
 
 
 class PlainTextEdit(QtWidgets.QTextEdit):
@@ -14,22 +14,24 @@ class PlainTextEdit(QtWidgets.QTextEdit):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def set_font(self, font):
+    def set_font(self, font: QtGui.QFont):
         self.setFont(font)
 
-    def append(self, text):
+    def append(self, text: str):
         self.appendPlainText(text)
 
-    def set_text(self, text):
+    def set_text(self, text: str):
         self.setPlainText(text)
 
     def text(self):
         return self.toPlainText()
 
-    def set_read_only(self, value):
+    def set_read_only(self, value: bool):
         self.setReadOnly(value)
 
     def scroll_to_end(self):
+        """scroll to the end of the text
+        """
         self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
 
 
