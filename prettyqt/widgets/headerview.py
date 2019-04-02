@@ -25,6 +25,8 @@ class HeaderView(QtWidgets.QHeaderView):
         self.resizeSections(self.MODES[mode])
 
     def resize_mode(self, mode: str, col: Optional[int] = None):
+        if mode not in self.MODES:
+            raise ValueError("mode not existing")
         if col is None:
             self.setSectionResizeMode(self.MODES[mode])
         else:
