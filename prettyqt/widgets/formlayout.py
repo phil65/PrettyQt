@@ -4,6 +4,8 @@
 """
 
 from qtpy import QtWidgets
+from prettyqt import widgets
+
 
 MODES = {"maximum": QtWidgets.QLayout.SetMaximumSize,
          "fixed": QtWidgets.QLayout.SetFixedSize}
@@ -32,7 +34,7 @@ class FormLayout(QtWidgets.QFormLayout):
             widget: widget to get added to layout
         """
         if isinstance(widget, str):
-            widget = QtWidgets.QLabel(widget)
+            widget = widgets.Label(widget)
         self.setWidget(row, QtWidgets.QFormLayout.LabelRole, widget)
 
     def set_field_widget(self, row: int, widget):
@@ -43,7 +45,7 @@ class FormLayout(QtWidgets.QFormLayout):
             widget: widget to get added to layout
         """
         if isinstance(widget, str):
-            widget = QtWidgets.QLabel(widget)
+            widget = widgets.Label(widget)
         self.setWidget(row, QtWidgets.QFormLayout.FieldRole, widget)
 
     def set_spanning_widget(self, row: int, widget):
@@ -54,7 +56,7 @@ class FormLayout(QtWidgets.QFormLayout):
             widget: widget to get added to layout
         """
         if isinstance(widget, str):
-            widget = QtWidgets.QLabel(widget)
+            widget = widgets.Label(widget)
         self.setWidget(row, QtWidgets.QFormLayout.SpanningRole, widget)
 
     @classmethod
@@ -66,3 +68,15 @@ class FormLayout(QtWidgets.QFormLayout):
             if v is not None:
                 formlayout.set_field_widget(i, v)
         return formlayout
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    dct = {"key": widgets.Label("test"),
+           None: widgets.Label("test 2")}
+    layout = FormLayout.from_dict(dct)
+    widget = QtWidgets.QWidget()
+    widget.setLayout(layout)
+    widget.show()
+    app.exec_()
