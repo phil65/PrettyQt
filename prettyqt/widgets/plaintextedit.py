@@ -23,7 +23,7 @@ class PlainTextEdit(QtWidgets.QTextEdit):
     def set_text(self, text: str):
         self.setPlainText(text)
 
-    def text(self):
+    def text(self) -> str:
         return self.toPlainText()
 
     def set_read_only(self, value: bool):
