@@ -21,6 +21,7 @@ from .headerview import HeaderView
 from .dockwidget import DockWidget
 from .pushbutton import PushButton
 from .radiobutton import RadioButton
+from .combobox import ComboBox
 from .textedit import TextEdit
 
 from .splashscreen import SplashScreen
@@ -50,6 +51,7 @@ __all__ = ["FormLayout",
            "DockWidget",
            "PushButton",
            "RadioButton",
+           "ComboBox",
            "TextEdit",
            "SplashScreen",
            "ProgressDialog",
