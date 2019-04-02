@@ -35,6 +35,7 @@ from .mainwindow import MainWindow
 
 from .composed.waitingspinner import WaitingSpinner
 from .composed.callout import Callout
+from .composed.markdownwidget import MarkdownWindow, MarkdownWidget
 from .popupinfo import PopupInfo
 from .buttondelegate import ButtonDelegate
 
@@ -64,4 +65,6 @@ __all__ = ["FormLayout",
            "WaitingSpinner",
            "Callout",
            "PopupInfo",
-           "ButtonDelegate"]
+           "ButtonDelegate",
+           "MarkdownWindow",
+           "MarkdownWidget"]
