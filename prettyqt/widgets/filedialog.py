@@ -103,3 +103,11 @@ class FileDialog(QtWidgets.QFileDialog):
             Pathlib object
         """
         return pathlib.Path(super().directory())
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    widget = FileDialog(path_id="test")
+    widget.show()
+    app.exec_()
