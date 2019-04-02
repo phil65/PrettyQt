@@ -23,6 +23,7 @@ from .pushbutton import PushButton
 from .radiobutton import RadioButton
 from .combobox import ComboBox
 from .textedit import TextEdit
+from .plaintextedit import PlainTextEdit
 
 from .splashscreen import SplashScreen
 from .progressdialog import ProgressDialog
@@ -53,6 +54,7 @@ __all__ = ["FormLayout",
            "RadioButton",
            "ComboBox",
            "TextEdit",
+           "PlainTextEdit",
            "SplashScreen",
            "ProgressDialog",
            "FileDialog",
