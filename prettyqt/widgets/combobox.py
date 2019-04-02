@@ -41,6 +41,14 @@ class ComboBox(QtWidgets.QComboBox):
         self.setInsertPolicy(policy)
 
     def set_size_policy(self, policy):
+        """set size policy
+
+        Args:
+            policy: size policy to use
+
+        Raises:
+            ValueError: invalid size policy
+        """
         if policy not in SIZE_POLICIES:
             raise ValueError("Policy not available")
         policy = SIZE_POLICIES.get(policy)

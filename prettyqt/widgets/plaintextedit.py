@@ -27,6 +27,11 @@ class PlainTextEdit(QtWidgets.QTextEdit):
         return self.toPlainText()
 
     def set_read_only(self, value: bool):
+        """set test to read only
+
+        Args:
+            value: True, for read-only, otherwise False
+        """
         self.setReadOnly(value)
 
     def scroll_to_end(self):
