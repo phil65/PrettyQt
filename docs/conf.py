@@ -47,8 +47,7 @@ extensions = ['sphinx.ext.napoleon',
               # 'IPython.sphinxext.ipython_console_highlighting',
               'sphinx_autodoc_annotation',
               # "recommonmark",
-              'sphinx_autodoc_typehints',
-              'sphinx_git']
+              'sphinx_autodoc_typehints']
 
 intersphinx_mapping = {'python': ('https://docs.python.org/3', None),
                        'PyQt5': ('', 'pyqt5-modified-objects.inv')}
