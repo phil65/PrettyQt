@@ -6,6 +6,8 @@
 from typing import Callable, Optional, Any
 
 from qtpy import QtWidgets, QtCore
+from prettyqt import widgets
+
 import qtawesome as qta
 
 
@@ -50,7 +52,8 @@ class Menu(QtWidgets.QMenu):
                    icon: Optional[Any] = None,
                    checkable: bool = False,
                    checked: bool = False,
-                   shortcut: Optional[str] = None
+                   shortcut: Optional[str] = None,
+                   status_tip: Optional[str] = None
                    ) -> QtWidgets.QAction:
         """Add an action to the menu
 
@@ -61,20 +64,19 @@ class Menu(QtWidgets.QMenu):
             checkable: as checkbox button (default: {False})
             checked: if checkable, turn on by default (default: {False})
             shortcut: Shortcut for action (a) (default: {None})
+            status_tip: Status tip to be shown in status bar (default: {None})
 
         Returns:
             Action added to menu
         """
-        action = QtWidgets.QAction(label, parent=self)
+        action = widgets.Action(label, parent=self)
         action.triggered.connect(callback)
-        if icon:
-            if isinstance(icon, str):
-                icon = qta.icon(icon)
-            action.setIcon(icon)
-        if shortcut:
-            action.setShortcut(shortcut)
+        action.set_icon(icon)
+        action.set_shortcut(shortcut)
         if checkable:
             action.setCheckable(True)
             action.setChecked(checked)
+        if status_tip is not None:
+            action.setStatusTip(status_tip)
         self.addAction(action)
         return action
