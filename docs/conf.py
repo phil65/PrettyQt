@@ -46,6 +46,7 @@ extensions = ['sphinx.ext.napoleon',
               # 'IPython.sphinxext.ipython_directive',
               # 'IPython.sphinxext.ipython_console_highlighting',
               'sphinx_autodoc_annotation',
+              # "recommonmark",
               'sphinx_autodoc_typehints',
               'sphinx_git']
 
