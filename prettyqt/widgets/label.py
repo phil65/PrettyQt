@@ -15,6 +15,10 @@ V_ALIGNMENTS = dict(top=QtCore.Qt.AlignTop,
                     center=QtCore.Qt.AlignVCenter,
                     baseline=QtCore.Qt.AlignBaseline)
 
+TEXT_INTERACTION = dict(none=QtCore.Qt.NoTextInteraction,
+                        by_mouse=QtCore.Qt.NoTextInteraction,
+                        by_keyboard=QtCore.Qt.NoTextInteraction)
+
 
 class Label(QtWidgets.QLabel):
 
