@@ -5,6 +5,8 @@
 contains QtWidgets-based classes
 """
 
+from .application import Application
+
 from .widget import Widget
 from .formlayout import FormLayout
 
@@ -42,7 +44,8 @@ from .composed.imageviewer import ImageViewer
 from .composed.popupinfo import PopupInfo
 from .composed.buttondelegate import ButtonDelegate
 
-__all__ = ["Widget",
+__all__ = ["Application",
+           "Widget",
            "FormLayout",
            "Slider",
            "StyleOptionSlider",
