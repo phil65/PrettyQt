@@ -26,8 +26,11 @@ class Image(widgets.Label):
         super().__init__(*args, **kwargs)
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
+        self.set_image(path, width=300)
+
+    def set_image(self, path, width=300):
         self.setText("<html><head/><body><p>"
-                     f'<img src="{path}" width="300"/>'
+                     f'<img src="{path}" width="{width}"/>'
                      "</p></body></html>")
 
     @classmethod
@@ -37,7 +40,7 @@ class Image(widgets.Label):
         # Create widget
         pixmap = QtGui.QPixmap()
         pixmap.loadFromData(data)
-        label = cls(parent=parent)
+        label = widgets.Label(parent=parent)
         label.setPixmap(pixmap)
         label.resize(pixmap.width(), pixmap.height())
         return label
