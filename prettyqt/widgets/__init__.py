@@ -17,6 +17,7 @@ from .styleoptionslider import StyleOptionSlider
 
 from .action import Action
 from .menu import Menu
+from .menubar import MenuBar
 from .statusbar import StatusBar
 from .tabbar import TabBar
 from .tabwidget import TabWidget
@@ -55,6 +56,7 @@ __all__ = ["Application",
            "StyleOptionSlider",
            "Action",
            "Menu",
+           "MenuBar",
            "StatusBar",
            "TabWidget",
            "TabBar",
