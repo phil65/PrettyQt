@@ -24,6 +24,9 @@ class Dialog(QtWidgets.QDialog):
             self.layout = QtWidgets.QVBoxLayout()
         self.setLayout(self.layout)
 
+    def delete_on_close(self):
+        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+
     def add_widget(self, widget):
         self.layout.addWidget(widget)
 
