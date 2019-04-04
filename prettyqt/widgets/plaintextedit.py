@@ -6,7 +6,7 @@
 from qtpy import QtWidgets, QtGui
 
 
-class PlainTextEdit(QtWidgets.QTextEdit):
+class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def set_enabled(self):
         self.setEnabled(True)
