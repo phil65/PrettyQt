@@ -5,6 +5,25 @@
 
 from qtpy import QtWidgets, QtCore
 
+BUTTONS = dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
+               ok=QtWidgets.QDialogButtonBox.Ok,
+               save=QtWidgets.QDialogButtonBox.Save,
+               open=QtWidgets.QDialogButtonBox.Open,
+               close=QtWidgets.QDialogButtonBox.Close,
+               discard=QtWidgets.QDialogButtonBox.Discard,
+               apply=QtWidgets.QDialogButtonBox.Apply,
+               reset=QtWidgets.QDialogButtonBox.Reset,
+               restore_defaults=QtWidgets.QDialogButtonBox.RestoreDefaults,
+               help=QtWidgets.QDialogButtonBox.Help,
+               save_all=QtWidgets.QDialogButtonBox.SaveAll,
+               yes=QtWidgets.QDialogButtonBox.Yes,
+               yes_to_all=QtWidgets.QDialogButtonBox.YesToAll,
+               no=QtWidgets.QDialogButtonBox.No,
+               no_to_all=QtWidgets.QDialogButtonBox.NoToAll,
+               abort=QtWidgets.QDialogButtonBox.Abort,
+               retry=QtWidgets.QDialogButtonBox.Retry,
+               ignore=QtWidgets.QDialogButtonBox.Ignore)
+
 
 class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
@@ -14,9 +33,11 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def set_vertical(self):
         self.setOrientation(QtCore.Qt.Vertical)
 
-    def set_buttons(self, buttons):
-        self.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel |
-                                QtWidgets.QDialogButtonBox.Ok)
+    def add_buttons(self, buttons):
+        for btn in buttons:
+            if btn not in BUTTONS:
+                raise ValueError("button type not available")
+            self.addButton(BUTTONS[btn])
 
     def add_accept_button(self, button):
         self.addButton(button, QtWidgets.QDialogButtonBox.AcceptRole)
@@ -29,6 +50,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     widget = DialogButtonBox()
-    widget.set_buttons(None)
+    buttons = list(BUTTONS.keys())
+    widget.add_buttons(buttons)
     widget.show()
     app.exec_()
