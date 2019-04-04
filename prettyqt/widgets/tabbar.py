@@ -10,9 +10,9 @@ ELIDE_MODES = dict(left=QtCore.Qt.ElideLeft,
                    middle=QtCore.Qt.ElideMiddle,
                    none=QtCore.Qt.ElideNone)
 
-SELECTION_MODES = dict(left=QtWidgets.QTabBar.SelectLeftTab,
-                       right=QtWidgets.QTabBar.SelectRightTab,
-                       previous=QtWidgets.QTabBar.SelectPreviousTab)
+SELECTION_MODES = dict(left_tab=QtWidgets.QTabBar.SelectLeftTab,
+                       right_tab=QtWidgets.QTabBar.SelectRightTab,
+                       previous_tab=QtWidgets.QTabBar.SelectPreviousTab)
 
 SHAPES = dict(rounded_north=QtWidgets.QTabBar.RoundedNorth,
               rounded_south=QtWidgets.QTabBar.RoundedSouth,
