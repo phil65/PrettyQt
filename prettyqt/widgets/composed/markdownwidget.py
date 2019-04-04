@@ -59,7 +59,7 @@ class MarkdownWindow(QtWidgets.QMainWindow):
             self.statusBar().showMessage('File open canceled!')
 
 
-class MarkdownWidget(QtWebEngineWidgets.QWebEngineView):
+class MarkdownWidget(QtWidgets.QTextBrowser):
 
     # def dragEnterEvent(self, event):
     #     u = event.mimeData().urls()
@@ -88,7 +88,7 @@ class MarkdownWidget(QtWebEngineWidgets.QWebEngineView):
 def main():
     qtapp = QtWidgets.QApplication(sys.argv)
     reader = MarkdownWindow()
-    reader.web_view.load(QtCore.QUrl('blank'))
+    # reader.web_view.load(QtCore.QUrl('blank'))
     reader.show()
     qtapp.exec_()
 
