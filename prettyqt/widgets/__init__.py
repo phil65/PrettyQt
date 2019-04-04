@@ -28,6 +28,7 @@ from .label import Label
 from .pushbutton import PushButton
 from .radiobutton import RadioButton
 from .combobox import ComboBox
+from .lineedit import LineEdit
 from .textedit import TextEdit
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
@@ -67,6 +68,7 @@ __all__ = ["Application",
            "PushButton",
            "RadioButton",
            "ComboBox",
+           "LineEdit",
            "TextEdit",
            "PlainTextEdit",
            "TextBrowser",
