@@ -16,6 +16,7 @@ from .slider import Slider
 from .styleoptionslider import StyleOptionSlider
 
 from .action import Action
+from .toolbutton import ToolButton
 from .menu import Menu
 from .menubar import MenuBar
 from .statusbar import StatusBar
@@ -57,6 +58,7 @@ __all__ = ["Application",
            "Slider",
            "StyleOptionSlider",
            "Action",
+           "ToolButton",
            "Menu",
            "MenuBar",
            "StatusBar",
