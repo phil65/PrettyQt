@@ -7,8 +7,8 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
-MODES = {"maximum": QtWidgets.QLayout.SetMaximumSize,
-         "fixed": QtWidgets.QLayout.SetFixedSize}
+MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
+             fixed=QtWidgets.QLayout.SetFixedSize)
 
 
 class FormLayout(QtWidgets.QFormLayout):
