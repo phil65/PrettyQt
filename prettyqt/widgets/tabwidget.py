@@ -6,6 +6,7 @@
 from qtpy import QtWidgets, QtCore, QtGui
 
 import qtawesome as qta
+from prettyqt import widgets
 
 
 class TabWidget(QtWidgets.QTabWidget):
@@ -19,7 +20,7 @@ class TabWidget(QtWidgets.QTabWidget):
         super().__init__(*args, **kwargs)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.tabCloseRequested.connect(self.remove_tab)
-        self.tab_bar = TabBar(self)
+        self.tab_bar = widgets.TabBar(self)
         self.tab_bar.on_detach.connect(self.detach_tab)
 
         self.setTabBar(self.tab_bar)
@@ -131,23 +132,6 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         index = self.add_tab(widget, title, icon="mdi.widgets")
         self.setCurrentIndex(index)
-
-
-class TabBar(QtWidgets.QTabBar):
-    on_detach = QtCore.Signal(int, QtCore.QPoint)
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
-
-        self.setAcceptDrops(True)
-        self.setElideMode(QtCore.Qt.ElideRight)
-        self.setSelectionBehaviorOnRemove(QtWidgets.QTabBar.SelectLeftTab)
-        self.mouse_cursor = QtGui.QCursor()
-
-    #  Send the on_detach when a tab is double clicked
-    def mouseDoubleClickEvent(self, event):
-        event.accept()
-        self.on_detach.emit(self.tabAt(event.pos()), self.mouse_cursor.pos())
 
 
 #  When a tab is detached, the contents are placed into this QMainWindow.
