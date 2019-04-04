@@ -8,6 +8,8 @@ contains QtWidgets-based classes
 from .application import Application
 
 from .widget import Widget
+from .dialog import Dialog
+
 from .formlayout import FormLayout
 
 from .slider import Slider
@@ -46,6 +48,7 @@ from .composed.buttondelegate import ButtonDelegate
 
 __all__ = ["Application",
            "Widget",
+           "Dialog",
            "FormLayout",
            "Slider",
            "StyleOptionSlider",
