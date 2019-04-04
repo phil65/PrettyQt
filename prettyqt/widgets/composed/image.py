@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+import pathlib
+
 from qtpy import QtGui, QtWidgets, QtCore
 from prettyqt import widgets
 
@@ -29,8 +31,8 @@ class Image(widgets.Label):
                      "</p></body></html>")
 
     @classmethod
-    def from_path(cls, path, parent=None) -> "Image":
-        with open(path, mode="rb") as f:
+    def from_path(cls, path: pathlib.Path, parent=None) -> "Image":
+        with path.open(mode="rb") as f:
             data = f.read()
         # Create widget
         pixmap = QtGui.QPixmap()
