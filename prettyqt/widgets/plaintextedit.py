@@ -14,7 +14,12 @@ class PlainTextEdit(QtWidgets.QTextEdit):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def set_font(self, font: QtGui.QFont):
+    def set_font(self,
+                 font_name: str,
+                 font_size: int = -1,
+                 weight: int = -1,
+                 italic: bool = False):
+        font = QtGui.QFont(font_name, font_size, weight, italic)
         self.setFont(font)
 
     def append(self, text: str):
