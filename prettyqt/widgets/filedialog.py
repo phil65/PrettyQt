@@ -24,11 +24,11 @@ class FileDialog(QtWidgets.QFileDialog):
     simple dialog used to display some widget
     """
 
-    def __init__(self, path=None, mode=None, path_id=None, parent=None):
+    def __init__(self, path=None, mode=None, caption="", path_id=None, parent=None):
         self.path_id = path_id
         settings = QtCore.QSettings()
         initial_path = settings.value(self.path_id, "")
-        super().__init__(directory=initial_path, parent=parent)
+        super().__init__(directory=initial_path, caption=caption, parent=parent)
         self.set_file_mode("existing_files")
         self.set_accept_mode(mode)
 
@@ -108,6 +108,6 @@ class FileDialog(QtWidgets.QFileDialog):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    widget = FileDialog(path_id="test")
+    widget = FileDialog(path_id="test", caption="Some header")
     widget.show()
     app.exec_()
