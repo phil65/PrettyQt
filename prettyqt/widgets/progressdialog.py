@@ -21,12 +21,18 @@ class ProgressDialog(QtWidgets.QProgressDialog):
         progress_bar.setTextVisible(False)
         self.setBar(progress_bar)
 
-        self.setWindowIcon(qta.icon("mdi.timer-sand-empty", color="lightgray"))
+        self.set_icon("mdi.timer-sand-empty")
         self.setWindowModality(QtCore.Qt.ApplicationModal)
         self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.Window)
         self.set_titlebar_buttons()
         self.setCancelButton(None)
         self.cancel()
+
+    def set_icon(self, icon):
+        if icon:
+            if isinstance(icon, str):
+                icon = qta.icon(icon, color="lightgray")
+            self.setWindowIcon(icon)
 
     def open(self, message=None):
         if not message:
