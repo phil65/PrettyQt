@@ -44,3 +44,10 @@ class Application(QtWidgets.QApplication):
         cb = cls.clipboard()
         cb.clear(mode=cb.Clipboard)
         cb.setText(text, mode=cb.Clipboard)
+
+    @classmethod
+    def get_mainwindow(cls):
+        widget_list = cls.instance().topLevelWidgets()
+        for widget in widget_list:
+            if isinstance(widget, QtWidgets.QMainWindow):
+                return widget
