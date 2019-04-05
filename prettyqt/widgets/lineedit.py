@@ -48,6 +48,6 @@ class LineEdit(QtWidgets.QLineEdit):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    widget = PlainTextEdit("This is a test")
+    widget = LineEdit("This is a test")
     widget.show()
     app.exec_()
