@@ -10,5 +10,6 @@ contains QtCore-based classes
 from .settings import Settings
 from .size import Size
 from .rect import Rect
+from .filesystemmodel import FileSystemModel
 
-__all__ = ["Settings", "Size", "Rect"]
+__all__ = ["Settings", "Size", "Rect", "FileSystemModel"]
