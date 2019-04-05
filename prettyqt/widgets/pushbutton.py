@@ -22,7 +22,8 @@ class PushButton(QtWidgets.QPushButton):
             self.setIcon(icon)
 
     def set_style_icon(self, icon):
-        STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton)
+        STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton,
+                      maximise=QtWidgets.QStyle.SP_TitleBarMaxButton)
         qicon = self.style().standardIcon(STYLES[icon], None, self)
         self.setIcon(qicon)
 

@@ -31,9 +31,7 @@ class DockWidget(QtWidgets.QDockWidget):
         title_bar.setLayout(layout)
         maximise_button = widgets.PushButton()
         layout.addWidget(maximise_button)
-        style = QtWidgets.QStyle.SP_TitleBarMaxButton
-        icon = maximise_button.style().standardIcon(style, None, maximise_button)
-        maximise_button.setIcon(icon)
+        maximise_button.set_style_icon("maximise")
         maximise_button.clicked.connect(self.maximise)
         close_button = widgets.PushButton()
         close_button.set_style_icon("close")
