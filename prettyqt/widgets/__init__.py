@@ -41,6 +41,7 @@ from .progressdialog import ProgressDialog
 from .filedialog import FileDialog
 from .dialogbuttonbox import DialogButtonBox
 from .groupbox import GroupBox
+from .splitter import Splitter
 
 from .mainwindow import MainWindow
 
@@ -84,6 +85,7 @@ __all__ = ["Application",
            "FileDialog",
            "DialogButtonBox",
            "GroupBox",
+           "Splitter",
            "MainWindow",
            "SpanSlider",
            "WaitingSpinner",
