@@ -11,6 +11,8 @@ from .font import Font
 from .icon import Icon
 from .painter import Painter
 from .palette import Palette
+from .standarditem import StandardItem
+from .standarditemmodel import StandardItemModel
 from .textcharformat import TextCharFormat
 from .keysequence import KeySequence
 
@@ -21,5 +23,7 @@ __all__ = ["RegExpValidator",
            "Icon",
            "Painter",
            "Palette",
+           "StandardItem",
+           "StandardItemModel",
            "TextCharFormat",
            "KeySequence"]
