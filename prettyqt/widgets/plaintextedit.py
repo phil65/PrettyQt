@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtWidgets, QtGui
+from prettyqt import widgets, gui
 
 
 class PlainTextEdit(QtWidgets.QPlainTextEdit):
@@ -43,6 +44,20 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         """scroll to the end of the text
         """
         self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
+
+    def highlight_current_line(self):
+        extra_selections = []
+
+        if not self.isReadOnly():
+            selection = widgets.TextEdit.ExtraSelection()
+            line_color = gui.Color("yellow").lighter(160)
+            selection.format.setBackground(line_color)
+            selection.format.setProperty(QtGui.QTextFormat.FullWidthSelection, True)
+            selection.cursor = self.textCursor()
+            selection.cursor.clearSelection()
+            extra_selections.append(selection)
+
+        self.setExtraSelections(extra_selections)
 
 
 if __name__ == "__main__":
