@@ -12,6 +12,8 @@ from .settings import Settings
 from .size import Size
 from .rect import Rect
 from .mimedata import MimeData
+from .runnable import Runnable
+from .threadpool import ThreadPool
 from .filesystemmodel import FileSystemModel
 
 from qtpy.QtCore import Slot, Signal
@@ -23,4 +25,6 @@ __all__ = ["Object",
            "MimeData",
            "FileSystemModel",
            "Slot",
+           "Runnable",
+           "ThreadPool",
            "Signal"]
