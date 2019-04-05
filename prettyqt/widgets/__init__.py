@@ -9,6 +9,7 @@ from .application import Application
 
 from .widget import Widget
 from .dialog import Dialog
+from .messagebox import MessageBox
 
 from .formlayout import FormLayout
 from .boxlayout import BoxLayout
@@ -59,6 +60,7 @@ from .composed.buttondelegate import ButtonDelegate
 __all__ = ["Application",
            "Widget",
            "Dialog",
+           "MessageBox",
            "FormLayout",
            "BoxLayout",
            "GridLayout",
