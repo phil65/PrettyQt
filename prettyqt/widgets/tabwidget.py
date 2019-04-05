@@ -3,10 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore
 
 import qtawesome as qta
-from prettyqt import widgets
+from prettyqt import widgets, gui
 
 
 class TabWidget(QtWidgets.QTabWidget):
@@ -33,7 +33,7 @@ class TabWidget(QtWidgets.QTabWidget):
         QtWidgets.qApp.aboutToQuit.connect(self.close_detached_tabs)
 
         self.setEnabled(True)
-        font = QtGui.QFont()
+        font = gui.Font()
         font.setPointSize(9)
         self.setFont(font)
         self.setTabsClosable(True)
@@ -137,7 +137,7 @@ class TabWidget(QtWidgets.QTabWidget):
 #  When a tab is detached, the contents are placed into this QMainWindow.
 #  The tab can be re-attached by closing the dialog
 class DetachedTab(QtWidgets.QMainWindow):
-    on_close = QtCore.Signal(QtWidgets.QWidget, str, QtGui.QIcon)
+    on_close = QtCore.Signal(QtWidgets.QWidget, str, gui.Icon)
 
     def __init__(self, name, widget):
         super().__init__(None)
@@ -161,5 +161,7 @@ if __name__ == "__main__":
     tab_widget = TabWidget()
     widget = QtWidgets.QWidget()
     tab_widget.add_tab(widget, "Test")
+    widget_2 = QtWidgets.QWidget()
+    tab_widget.add_tab(widget_2, "Test 2")
     tab_widget.show()
     app.exec_()
