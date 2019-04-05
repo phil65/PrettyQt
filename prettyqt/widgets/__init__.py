@@ -39,6 +39,7 @@ from .splashscreen import SplashScreen
 from .progressdialog import ProgressDialog
 from .filedialog import FileDialog
 from .dialogbuttonbox import DialogButtonBox
+from .groupbox import GroupBox
 
 from .mainwindow import MainWindow
 
@@ -80,6 +81,7 @@ __all__ = ["Application",
            "ProgressDialog",
            "FileDialog",
            "DialogButtonBox",
+           "GroupBox",
            "MainWindow",
            "SpanSlider",
            "WaitingSpinner",
