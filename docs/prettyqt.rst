@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
 
     prettyqt.core
+    prettyqt.gui
     prettyqt.widgets
 
 Module contents

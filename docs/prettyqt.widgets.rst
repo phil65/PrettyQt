@@ -1,21 +1,44 @@
 prettyqt.widgets package
 ========================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    prettyqt.widgets.composed
+
 Submodules
 ----------
 
-prettyqt.widgets.buttondelegate module
---------------------------------------
+prettyqt.widgets.action module
+------------------------------
 
-.. automodule:: prettyqt.widgets.buttondelegate
+.. automodule:: prettyqt.widgets.action
     :members:
     :undoc-members:
     :show-inheritance:
 
-prettyqt.widgets.callout module
--------------------------------
+prettyqt.widgets.application module
+-----------------------------------
 
-.. automodule:: prettyqt.widgets.callout
+.. automodule:: prettyqt.widgets.application
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+prettyqt.widgets.checkbox module
+--------------------------------
+
+.. automodule:: prettyqt.widgets.checkbox
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+prettyqt.widgets.combobox module
+--------------------------------
+
+.. automodule:: prettyqt.widgets.combobox
     :members:
     :undoc-members:
     :show-inheritance:
@@ -60,6 +83,22 @@ prettyqt.widgets.formlayout module
     :undoc-members:
     :show-inheritance:
 
+prettyqt.widgets.graphicsitem module
+------------------------------------
+
+.. automodule:: prettyqt.widgets.graphicsitem
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+prettyqt.widgets.groupbox module
+--------------------------------
+
+.. automodule:: prettyqt.widgets.groupbox
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 prettyqt.widgets.headerview module
 ----------------------------------
 
@@ -68,18 +107,18 @@ prettyqt.widgets.headerview module
     :undoc-members:
     :show-inheritance:
 
-prettyqt.widgets.image module
+prettyqt.widgets.label module
 -----------------------------
 
-.. automodule:: prettyqt.widgets.image
+.. automodule:: prettyqt.widgets.label
     :members:
     :undoc-members:
     :show-inheritance:
 
-prettyqt.widgets.imageviewer module
------------------------------------
+prettyqt.widgets.lineedit module
+--------------------------------
 
-.. automodule:: prettyqt.widgets.imageviewer
+.. automodule:: prettyqt.widgets.lineedit
     :members:
     :undoc-members:
     :show-inheritance:
@@ -100,10 +139,26 @@ prettyqt.widgets.menu module
     :undoc-members:
     :show-inheritance:
 
-prettyqt.widgets.popupinfo module
----------------------------------
+prettyqt.widgets.menubar module
+-------------------------------
 
-.. automodule:: prettyqt.widgets.popupinfo
+.. automodule:: prettyqt.widgets.menubar
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+prettyqt.widgets.plaintextedit module
+-------------------------------------
+
+.. automodule:: prettyqt.widgets.plaintextedit
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+prettyqt.widgets.progressbar module
+-----------------------------------
+
+.. automodule:: prettyqt.widgets.progressbar
     :members:
     :undoc-members:
     :show-inheritance:
@@ -140,18 +195,18 @@ prettyqt.widgets.slider module
     :undoc-members:
     :show-inheritance:
 
-prettyqt.widgets.spanslider module
-----------------------------------
-
-.. automodule:: prettyqt.widgets.spanslider
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 prettyqt.widgets.splashscreen module
 ------------------------------------
 
 .. automodule:: prettyqt.widgets.splashscreen
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+prettyqt.widgets.statusbar module
+---------------------------------
+
+.. automodule:: prettyqt.widgets.statusbar
     :members:
     :undoc-members:
     :show-inheritance:
@@ -164,10 +219,34 @@ prettyqt.widgets.styleoptionslider module
     :undoc-members:
     :show-inheritance:
 
+prettyqt.widgets.tabbar module
+------------------------------
+
+.. automodule:: prettyqt.widgets.tabbar
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
 prettyqt.widgets.tabwidget module
 ---------------------------------
 
 .. automodule:: prettyqt.widgets.tabwidget
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+prettyqt.widgets.textbrowser module
+-----------------------------------
+
+.. automodule:: prettyqt.widgets.textbrowser
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+prettyqt.widgets.textedit module
+--------------------------------
+
+.. automodule:: prettyqt.widgets.textedit
     :members:
     :undoc-members:
     :show-inheritance:
@@ -180,10 +259,18 @@ prettyqt.widgets.toolbar module
     :undoc-members:
     :show-inheritance:
 
-prettyqt.widgets.waitingspinner module
---------------------------------------
+prettyqt.widgets.toolbutton module
+----------------------------------
 
-.. automodule:: prettyqt.widgets.waitingspinner
+.. automodule:: prettyqt.widgets.toolbutton
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+prettyqt.widgets.widget module
+------------------------------
+
+.. automodule:: prettyqt.widgets.widget
     :members:
     :undoc-members:
     :show-inheritance:
