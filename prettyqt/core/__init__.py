@@ -7,9 +7,12 @@ contains QtCore-based classes
 
 # from qtpy.QtCore import Signal
 
+from .object import Object
 from .settings import Settings
 from .size import Size
 from .rect import Rect
 from .filesystemmodel import FileSystemModel
 
-__all__ = ["Settings", "Size", "Rect", "FileSystemModel"]
+from qtpy.QtCore import Slot, Signal
+
+__all__ = ["Object", "Settings", "Size", "Rect", "FileSystemModel", "Slot", "Signal"]
