@@ -7,9 +7,6 @@ from qtpy import QtWidgets
 
 
 class StatusBar(QtWidgets.QStatusBar):
-    """
-    Customized StatusBar class
-    """
 
     def add_action(self, action):
         self.addAction(action)

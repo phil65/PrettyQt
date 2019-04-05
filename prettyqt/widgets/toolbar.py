@@ -15,9 +15,6 @@ STYLES = {"icon": QtCore.Qt.ToolButtonIconOnly,
 
 
 class Toolbar(QtWidgets.QToolBar):
-    """
-    Customized Toolbar class
-    """
 
     ICON_SIZE = 20
 
