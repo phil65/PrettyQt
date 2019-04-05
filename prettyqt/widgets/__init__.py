@@ -12,6 +12,7 @@ from .dialog import Dialog
 
 from .formlayout import FormLayout
 from .boxlayout import BoxLayout
+from .gridlayout import GridLayout
 
 from .slider import Slider
 from .styleoptionslider import StyleOptionSlider
@@ -60,6 +61,7 @@ __all__ = ["Application",
            "Dialog",
            "FormLayout",
            "BoxLayout",
+           "GridLayout",
            "Slider",
            "StyleOptionSlider",
            "Action",
