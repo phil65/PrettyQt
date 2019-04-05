@@ -13,6 +13,7 @@ from .size import Size
 from .rect import Rect
 from .mimedata import MimeData
 from .runnable import Runnable
+from .modelindex import ModelIndex
 from .threadpool import ThreadPool
 from .filesystemmodel import FileSystemModel
 
@@ -26,5 +27,6 @@ __all__ = ["Object",
            "FileSystemModel",
            "Slot",
            "Runnable",
+           "ModelIndex",
            "ThreadPool",
            "Signal"]
