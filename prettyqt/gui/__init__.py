@@ -10,6 +10,7 @@ from .color import Color
 from .font import Font
 from .icon import Icon
 from .textcharformat import TextCharFormat
+from .keysequence import KeySequence
 
 
-__all__ = ["RegExpValidator", "Color", "Font", "Icon", "TextCharFormat"]
+__all__ = ["RegExpValidator", "Color", "Font", "Icon", "TextCharFormat", "KeySequence"]
