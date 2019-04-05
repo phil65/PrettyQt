@@ -48,6 +48,8 @@ from .splitter import Splitter
 
 from .mainwindow import MainWindow
 
+from .itemdelegate import ItemDelegate
+
 from .composed.spanslider import SpanSlider
 from .composed.waitingspinner import WaitingSpinner
 from .composed.callout import Callout
@@ -93,6 +95,7 @@ __all__ = ["Application",
            "GroupBox",
            "Splitter",
            "MainWindow",
+           "ItemDelegate",
            "SpanSlider",
            "WaitingSpinner",
            "Callout",
