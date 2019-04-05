@@ -5,19 +5,19 @@
 
 from qtpy import QtWidgets, QtCore
 
+box = QtWidgets.QComboBox
+INSERT_POLICIES = dict(no_insert=box.NoInsert,
+                       top=box.InsertAtTop,
+                       current=box.InsertAtCurrent,
+                       bottom=box.InsertAtBottom,
+                       after_current=box.InsertAfterCurrent,
+                       before_current=box.InsertBeforeCurrent,
+                       alphabetically=box.InsertAlphabetically)
 
-INSERT_POLICIES = dict(no_insert=QtWidgets.QComboBox.NoInsert,
-                       top=QtWidgets.QComboBox.InsertAtTop,
-                       current=QtWidgets.QComboBox.InsertAtCurrent,
-                       bottom=QtWidgets.QComboBox.InsertAtBottom,
-                       after_current=QtWidgets.QComboBox.InsertAfterCurrent,
-                       before_current=QtWidgets.QComboBox.InsertBeforeCurrent,
-                       alphabetically=QtWidgets.QComboBox.InsertAlphabetically)
-
-SIZE_POLICIES = dict(content=QtWidgets.QComboBox.AdjustToContents,
-                     first_show=QtWidgets.QComboBox.AdjustToContentsOnFirstShow,
-                     min_length=QtWidgets.QComboBox.AdjustToMinimumContentsLength,
-                     min_length_with_icon=QtWidgets.QComboBox.AdjustToMinimumContentsLengthWithIcon)
+SIZE_POLICIES = dict(content=box.AdjustToContents,
+                     first_show=box.AdjustToContentsOnFirstShow,
+                     min_length=box.AdjustToMinimumContentsLength,
+                     min_length_with_icon=box.AdjustToMinimumContentsLengthWithIcon)
 
 
 class ComboBox(QtWidgets.QComboBox):
