@@ -3,7 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtGui
+from qtpy import QtWidgets
+from prettyqt import gui
 
 
 class LineEdit(QtWidgets.QLineEdit):
@@ -19,7 +20,7 @@ class LineEdit(QtWidgets.QLineEdit):
                  font_size: int = -1,
                  weight: int = -1,
                  italic: bool = False):
-        font = QtGui.QFont(font_name, font_size, weight, italic)
+        font = gui.Font(font_name, font_size, weight, italic)
         self.setFont(font)
 
     def append(self, text: str):
@@ -43,6 +44,12 @@ class LineEdit(QtWidgets.QLineEdit):
         """scroll to the end of the text
         """
         self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
+
+    def set_regex_validator(self, regex: str) -> gui.RegExpValidator:
+        validator = gui.RegExpValidator(self)
+        validator.set_regex(regex)
+        self.setValidator(validator)
+        return validator
 
 
 if __name__ == "__main__":
