@@ -40,6 +40,7 @@ from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
 from .progressbar import ProgressBar
 from .treeview import TreeView
+from .tableview import TableView
 
 from .splashscreen import SplashScreen
 from .progressdialog import ProgressDialog
@@ -92,6 +93,7 @@ __all__ = ["Application",
            "TextBrowser",
            "ProgressBar",
            "TreeView",
+           "TableView",
            "SplashScreen",
            "ProgressDialog",
            "FileDialog",
