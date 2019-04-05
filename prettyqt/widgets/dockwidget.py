@@ -43,3 +43,13 @@ class DockWidget(QtWidgets.QDockWidget):
         if not self.isFloating():
             self.setFloating(True)
         self.showMaximized()
+
+
+if __name__ == "__main__":
+    import sys
+    app = widgets.Application(sys.argv)
+    win = widgets.MainWindow()
+    dock_widget = DockWidget(name="aa", title="Test")
+    win.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_widget)
+    win.show()
+    app.exec_()

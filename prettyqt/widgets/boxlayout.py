@@ -29,7 +29,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    layout = BoxLayout()
+    layout = BoxLayout("vertical")
     widget = widgets.Widget()
     widget.setLayout(layout)
     widget.show()
