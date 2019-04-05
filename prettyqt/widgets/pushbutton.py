@@ -21,6 +21,11 @@ class PushButton(QtWidgets.QPushButton):
         if icon:
             self.setIcon(icon)
 
+    def set_style_icon(self, icon):
+        STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton)
+        qicon = self.style().standardIcon(STYLES[icon], None, self)
+        self.setIcon(qicon)
+
 
 if __name__ == "__main__":
     import sys

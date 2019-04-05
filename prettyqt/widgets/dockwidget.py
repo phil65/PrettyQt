@@ -5,6 +5,7 @@
 
 
 from qtpy import QtWidgets, QtCore
+from prettyqt import widgets
 
 
 class DockWidget(QtWidgets.QDockWidget):
@@ -28,17 +29,15 @@ class DockWidget(QtWidgets.QDockWidget):
         layout = QtWidgets.QHBoxLayout()
         layout.setAlignment(QtCore.Qt.AlignRight)
         title_bar.setLayout(layout)
-        maximise_button = QtWidgets.QPushButton()
+        maximise_button = widgets.PushButton()
         layout.addWidget(maximise_button)
         style = QtWidgets.QStyle.SP_TitleBarMaxButton
         icon = maximise_button.style().standardIcon(style, None, maximise_button)
         maximise_button.setIcon(icon)
         maximise_button.clicked.connect(self.maximise)
-        close_button = QtWidgets.QPushButton()
+        close_button = widgets.PushButton()
+        close_button.set_style_icon("close")
         layout.addWidget(close_button)
-        style = QtWidgets.QStyle.SP_TitleBarCloseButton
-        icon = close_button.style().standardIcon(style, None, close_button)
-        close_button.setIcon(icon)
         close_button.clicked.connect(self.close)
         # self.setTitleBarWidget(title_bar)
 
