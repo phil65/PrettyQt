@@ -3,6 +3,7 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Optional
 from qtpy import QtWidgets, QtCore
 import qtawesome as qta
 
@@ -20,9 +21,15 @@ class Application(QtWidgets.QApplication):
         translator.load(str(path))
         self.installTranslator(translator)
 
-    def set_metadata(self, app_name=None, org_name=None, org_domain=None):
+    def set_metadata(self,
+                     app_name: Optional[str] = None,
+                     app_version: Optional[str] = None,
+                     org_name: Optional[str] = None,
+                     org_domain: Optional[str] = None):
         if app_name:
             self.setApplicationName(app_name)
+        if app_version:
+            self.setApplicationVersion(app_name)
         if org_name:
             self.setOrganizationName(org_name)
         if org_domain:
