@@ -23,6 +23,10 @@ class Splitter(QtWidgets.QSplitter):
             splitter.addWidget(widget)
         return splitter
 
+    def set_expanding(self):
+        self.table.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
+                                 QtWidgets.QSizePolicy.Expanding)
+
 
 if __name__ == "__main__":
     import sys
