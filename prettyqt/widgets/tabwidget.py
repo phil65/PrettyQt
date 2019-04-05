@@ -133,10 +133,21 @@ class TabWidget(QtWidgets.QTabWidget):
         index = self.add_tab(widget, title, icon="mdi.widgets")
         self.setCurrentIndex(index)
 
+    def set_button(self, index, position, widget):
+        POSITONS = dict(left=QtWidgets.QTabBar.LeftSide,
+                        right=QtWidgets.QTabBar.RightSide)
+        self.tabBar().setTabButton(index, POSITONS[position], None)
 
-#  When a tab is detached, the contents are placed into this QMainWindow.
-#  The tab can be re-attached by closing the dialog
+
 class DetachedTab(QtWidgets.QMainWindow):
+    """window containing a detached tab
+
+    When a tab is detached, the contents are placed into this QMainWindow.
+    The tab can be re-attached by closing the dialog
+
+    Attributes:
+        on_close: signal, emitted when window is closed (widget, title, icon)
+    """
     on_close = QtCore.Signal(QtWidgets.QWidget, str, gui.Icon)
 
     def __init__(self, name, widget):
