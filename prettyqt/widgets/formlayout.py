@@ -45,7 +45,7 @@ class FormLayout(QtWidgets.QFormLayout):
 
         Args:
             row: Row offset
-            widget: widget to get added to layout
+            widget: widget / layout to get added to layout
         """
         if isinstance(widget, str):
             widget = widgets.Label(widget)
@@ -59,7 +59,7 @@ class FormLayout(QtWidgets.QFormLayout):
 
         Args:
             row: Row offset
-            widget: widget to get added to layout
+            widget: widget / layout to get added to layout
         """
         if isinstance(widget, str):
             widget = widgets.Label(widget)
