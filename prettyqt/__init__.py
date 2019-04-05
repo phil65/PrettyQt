@@ -9,4 +9,4 @@ __author__ = """Philipp Temminghoff"""
 __email__ = 'phil65@kodi.tv'
 __version__ = '0.9.0'
 
-__all__ = ["core", "widgets"]
+__all__ = ["core", "widgets", "gui"]
