@@ -11,7 +11,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
 
     def set_foreground_color(self, color_name):
         color = gui.Color()
-        color.setNamedColor(color_name)
+        color.set_color(color_name)
         self.setForeground(color)
 
     def set_font_weight(self, weight):
