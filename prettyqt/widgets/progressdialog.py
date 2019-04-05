@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtWidgets, QtCore
+from prettyqt import widgets
 import qtawesome as qta
 
 
@@ -16,7 +17,7 @@ class ProgressDialog(QtWidgets.QProgressDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        progress_bar = QtWidgets.QProgressBar()
+        progress_bar = widgets.ProgressBar()
         progress_bar.setRange(0, 0)
         progress_bar.setTextVisible(False)
         self.setBar(progress_bar)
@@ -47,3 +48,11 @@ class ProgressDialog(QtWidgets.QProgressDialog):
         self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
         self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, maximize)
         self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, close)
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    widget = ProgressDialog()
+    widget.show()
+    widget.exec_()
