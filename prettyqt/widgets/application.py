@@ -35,3 +35,12 @@ class Application(QtWidgets.QApplication):
     @classmethod
     def disable_window_help_button(cls):
         QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton)
+
+    @classmethod
+    def copy_to_clipboard(cls, text: str):
+        """
+        Sets clipboard to supplied text
+        """
+        cb = cls.clipboard()
+        cb.clear(mode=cb.Clipboard)
+        cb.setText(text, mode=cb.Clipboard)
