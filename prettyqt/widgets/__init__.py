@@ -34,6 +34,7 @@ from .lineedit import LineEdit
 from .textedit import TextEdit
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
+from .progressbar import ProgressBar
 
 from .splashscreen import SplashScreen
 from .progressdialog import ProgressDialog
@@ -77,6 +78,7 @@ __all__ = ["Application",
            "TextEdit",
            "PlainTextEdit",
            "TextBrowser",
+           "ProgressBar",
            "SplashScreen",
            "ProgressDialog",
            "FileDialog",
