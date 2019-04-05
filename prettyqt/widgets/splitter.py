@@ -8,6 +8,10 @@ from qtpy import QtWidgets, QtCore
 
 class Splitter(QtWidgets.QSplitter):
 
+    def __init__(self, orientation, parent=None):
+        o = QtCore.Qt.Vertical if orientation == "vertical" else QtCore.Qt.Horizontal
+        super().__init__(o, parent)
+
     def set_sizes(self):
         self.set_sizes()
 
