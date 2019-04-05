@@ -60,3 +60,11 @@ class Dialog(QtWidgets.QDialog):
     def open(self):
         self.show()
         self.exec_()
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    widget = Dialog()
+    widget.showMaximized()
+    app.exec_()
