@@ -3,10 +3,11 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui, QtWidgets, QtCore
+from qtpy import QtGui, QtCore
+from prettyqt import gui, widgets
 
 
-class Callout(QtWidgets.QGraphicsItem):
+class Callout(widgets.GraphicsItem):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -68,7 +69,7 @@ class Callout(QtWidgets.QGraphicsItem):
             path.lineTo(anchor)
             path.lineTo(point2)
             path = path.simplified()
-            painter.setBrush(QtGui.QColor(255, 255, 255))
+            painter.setBrush(gui.Color(255, 255, 255))
         painter.drawPath(path)
         painter.drawText(self.text_rect, self.text)
 
