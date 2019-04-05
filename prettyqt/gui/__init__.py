@@ -6,5 +6,6 @@ contains QtGui-based classes
 """
 
 from .regexpvalidator import RegExpValidator
+from .font import Font
 
-__all__ = ["RegExpValidator"]
+__all__ = ["RegExpValidator", "Font"]
