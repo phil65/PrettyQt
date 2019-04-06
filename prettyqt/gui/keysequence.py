@@ -18,7 +18,7 @@ class KeySequence(QtGui.QKeySequence):
             self.setRgb(*color)
 
     @classmethod
-    def from_key_and_mod(cls, key, mod):
+    def to_shortcut_str(cls, key, mod):
         mods = {QtCore.Qt.ShiftModifier: QtCore.Qt.SHIFT,
                 QtCore.Qt.ControlModifier: QtCore.Qt.CTRL,
                 QtCore.Qt.AltModifier: QtCore.Qt.ALT,
@@ -26,4 +26,4 @@ class KeySequence(QtGui.QKeySequence):
         for k, v in mods.items():
             if mod & k:
                 key += v
-        return cls(key)
+        return str(cls(key))
