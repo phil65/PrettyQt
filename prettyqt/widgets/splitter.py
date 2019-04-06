@@ -24,8 +24,8 @@ class Splitter(QtWidgets.QSplitter):
         return splitter
 
     def set_expanding(self):
-        self.table.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
-                                 QtWidgets.QSizePolicy.Expanding)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
+                           QtWidgets.QSizePolicy.Expanding)
 
 
 if __name__ == "__main__":
