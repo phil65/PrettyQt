@@ -27,8 +27,8 @@ class StatusBar(QtWidgets.QStatusBar):
 
 if __name__ == "__main__":
     import sys
-    app = QtWidgets.QApplication(sys.argv)
-    dlg = QtWidgets.QMainWindow()
+    app = widgets.Application(sys.argv)
+    dlg = widgets.MainWindow()
     status_bar = StatusBar()
     status_bar.setup_default_bar()
     dlg.setStatusBar(status_bar)

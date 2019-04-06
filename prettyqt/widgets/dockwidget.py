@@ -25,8 +25,8 @@ class DockWidget(QtWidgets.QDockWidget):
         self.setAllowedAreas(QtCore.Qt.AllDockWidgetAreas)
 
     def setup_title_bar(self):
-        title_bar = QtWidgets.QWidget()
-        layout = QtWidgets.QHBoxLayout()
+        title_bar = widgets.Widget()
+        layout = widgets.BoxLayout("horizontal")
         layout.setAlignment(QtCore.Qt.AlignRight)
         title_bar.setLayout(layout)
         maximise_button = widgets.PushButton()

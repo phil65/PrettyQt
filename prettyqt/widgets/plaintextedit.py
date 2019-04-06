@@ -20,7 +20,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
                  font_size: int = -1,
                  weight: int = -1,
                  italic: bool = False):
-        font = QtGui.QFont(font_name, font_size, weight, italic)
+        font = gui.Font(font_name, font_size, weight, italic)
         self.setFont(font)
 
     def append(self, text: str):
@@ -62,7 +62,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
 if __name__ == "__main__":
     import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application(sys.argv)
     widget = PlainTextEdit("This is a test")
     widget.show()
     app.exec_()
