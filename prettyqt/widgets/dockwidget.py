@@ -27,7 +27,7 @@ class DockWidget(QtWidgets.QDockWidget):
     def setup_title_bar(self):
         title_bar = widgets.Widget()
         layout = widgets.BoxLayout("horizontal")
-        layout.setAlignment(QtCore.Qt.AlignRight)
+        layout.set_alignment("right")
         title_bar.setLayout(layout)
         maximise_button = widgets.PushButton()
         layout.addWidget(maximise_button)
@@ -37,7 +37,7 @@ class DockWidget(QtWidgets.QDockWidget):
         close_button.set_style_icon("close")
         layout.addWidget(close_button)
         close_button.clicked.connect(self.close)
-        # self.setTitleBarWidget(title_bar)
+        self.setTitleBarWidget(title_bar)
 
     def maximise(self):
         if not self.isFloating():
@@ -50,6 +50,7 @@ if __name__ == "__main__":
     app = widgets.Application(sys.argv)
     win = widgets.MainWindow()
     dock_widget = DockWidget(name="aa", title="Test")
+    dock_widget.setup_title_bar()
     win.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_widget)
     win.show()
     app.exec_()
