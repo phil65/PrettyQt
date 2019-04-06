@@ -58,7 +58,6 @@ from .composed.spanslider import SpanSlider
 from .composed.waitingspinner import WaitingSpinner
 from .composed.callout import Callout
 from .composed.markdownwidget import MarkdownWindow, MarkdownWidget
-from .composed.image import Image
 from .composed.imageviewer import ImageViewer
 from .composed.popupinfo import PopupInfo
 from .composed.buttondelegate import ButtonDelegate

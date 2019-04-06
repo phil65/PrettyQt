@@ -3,7 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+import pathlib
+from qtpy import QtWidgets, QtCore, QtGui
+from prettyqt import widgets
 
 H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
                     right=QtCore.Qt.AlignRight,
@@ -32,6 +34,25 @@ class Label(QtWidgets.QLabel):
         else:
             return
         self.setAlignment(flag)
+
+    def set_image(self, path, width=300):
+        self.setScaledContents(True)
+        self.set_alignment(horizontal="center")
+        self.setText("<html><head/><body><p>"
+                     f'<img src="{path}" width="{width}"/>'
+                     "</p></body></html>")
+
+    @classmethod
+    def image_from_path(cls, path: pathlib.Path, parent=None) -> "Label":
+        with path.open(mode="rb") as f:
+            data = f.read()
+        # Create widget
+        pixmap = QtGui.QPixmap()
+        pixmap.loadFromData(data)
+        label = widgets.Label(parent=parent)
+        label.setPixmap(pixmap)
+        label.resize(pixmap.width(), pixmap.height())
+        return label
 
 
 if __name__ == "__main__":

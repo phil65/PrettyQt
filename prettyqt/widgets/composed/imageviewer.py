@@ -22,7 +22,7 @@ class ImageViewer(QtWidgets.QWidget):
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
         path = pathlib.Path("decisiontree.png")
-        self.image = widgets.Image.from_path(path, parent=self)
+        self.image = widgets.Label.image_from_path(path, parent=self)
         self.show()
 
 
