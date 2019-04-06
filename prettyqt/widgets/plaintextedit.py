@@ -59,6 +59,13 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
         self.setExtraSelections(extra_selections)
 
+    @classmethod
+    def get_result_widget(cls, *args, **kwargs):
+        widget = cls(*args, **kwargs)
+        widget.setReadOnly(True)
+        widget.set_font("Consolas")
+        return widget
+
 
 if __name__ == "__main__":
     import sys
