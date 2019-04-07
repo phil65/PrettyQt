@@ -9,6 +9,7 @@ from .regexpvalidator import RegExpValidator
 from .color import Color
 from .font import Font
 from .icon import Icon
+from .pixmap import Pixmap
 from .painter import Painter
 from .palette import Palette
 from .standarditem import StandardItem
@@ -21,6 +22,7 @@ __all__ = ["RegExpValidator",
            "Color",
            "Font",
            "Icon",
+           "Pixmap",
            "Painter",
            "Palette",
            "StandardItem",
