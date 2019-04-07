@@ -19,6 +19,7 @@ from .gridlayout import GridLayout
 
 from .slider import Slider
 from .styleoptionslider import StyleOptionSlider
+from .frame import Frame
 
 from .action import Action
 from .toolbutton import ToolButton
@@ -73,6 +74,7 @@ __all__ = ["Application",
            "GridLayout",
            "Slider",
            "StyleOptionSlider",
+           "Frame",
            "Action",
            "ToolButton",
            "Menu",
