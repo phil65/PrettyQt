@@ -3,13 +3,14 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore
+from prettyqt import gui
 
 
 class SplashScreen(QtWidgets.QSplashScreen):
 
     def __init__(self, path, width=None):
-        pix = QtGui.QPixmap(str(path))
+        pix = gui.Pixmap(str(path))
         if width:
             pix = pix.scaledToWidth(width)
         super().__init__(pix)

@@ -4,8 +4,9 @@
 """
 
 import pathlib
-from qtpy import QtWidgets, QtCore, QtGui
-from prettyqt import widgets
+from qtpy import QtWidgets, QtCore
+from prettyqt import gui
+
 
 H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
                     right=QtCore.Qt.AlignRight,
@@ -44,12 +45,8 @@ class Label(QtWidgets.QLabel):
 
     @classmethod
     def image_from_path(cls, path: pathlib.Path, parent=None) -> "Label":
-        with path.open(mode="rb") as f:
-            data = f.read()
-        # Create widget
-        pixmap = QtGui.QPixmap()
-        pixmap.loadFromData(data)
-        label = widgets.Label(parent=parent)
+        pixmap = gui.Pixmap.from_file(path)
+        label = cls(parent=parent)
         label.setPixmap(pixmap)
         label.resize(pixmap.width(), pixmap.height())
         return label
