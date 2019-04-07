@@ -11,6 +11,7 @@ from .object import Object
 from .settings import Settings
 from .size import Size
 from .rect import Rect
+from .regexp import RegExp
 from .mimedata import MimeData
 from .runnable import Runnable
 from .modelindex import ModelIndex
@@ -26,6 +27,7 @@ __all__ = ["Object",
            "MimeData",
            "FileSystemModel",
            "Slot",
+           "RegExp",
            "Runnable",
            "ModelIndex",
            "ThreadPool",
