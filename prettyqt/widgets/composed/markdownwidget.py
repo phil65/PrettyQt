@@ -5,7 +5,8 @@
 
 import sys
 
-from qtpy import QtCore, QtWidgets, QtGui, QtWebEngineWidgets
+from qtpy import QtWidgets
+from prettyqt import gui, widgets
 
 import markdown
 
@@ -27,12 +28,12 @@ class MarkdownWindow(QtWidgets.QMainWindow):
         # html_data = frame.toHtml()
 
     def create_menu(self):
-        act_exit = QtWidgets.QAction(QtGui.QIcon('exit.png'), '&Exit', self)
+        act_exit = widgets.Action(gui.Icon('exit.png'), '&Exit', self)
         act_exit.setShortcut('Ctrl+Q')
         act_exit.setStatusTip('Exit application')
         act_exit.triggered.connect(self.close)
 
-        act_open = QtWidgets.QAction(QtGui.QIcon('open.png'), '&Open', self)
+        act_open = widgets.Action(gui.Icon('open.png'), '&Open', self)
         act_open.setShortcut('Ctrl+O')
         act_open.setStatusTip('Open Markdown file')
         act_open.triggered.connect(self.open_new_file)
@@ -46,12 +47,12 @@ class MarkdownWindow(QtWidgets.QMainWindow):
 
     def open_new_file(self):
         try:
-            fname = QtWidgets.QFileDialog.getOpenFileName(self,
-                                                          'open file',
-                                                          '',
-                                                          'All Text Files (*.md *.markdown *.txt *.*)',
-                                                          None,
-                                                          QtWidgets.QFileDialog.DontUseNativeDialog)
+            fname = widgets.FileDialog.getOpenFileName(self,
+                                                       'open file',
+                                                       '',
+                                                       'All Text Files (*.md *.markdown *.txt *.*)',
+                                                       None,
+                                                       QtWidgets.QFileDialog.DontUseNativeDialog)
             self.web_view.show_markdown(fname[0])
         except UnicodeDecodeError:
             self.statusBar().showMessage('Please select only text files')
