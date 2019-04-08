@@ -36,7 +36,7 @@ class Settings(QtCore.QSettings):
         self.setValue(key, value)
 
     def value(self, value, default=None):
-        self.value(value, default)
+        super().value(value, default)
 
     @staticmethod
     def set_default_format(fmt):
