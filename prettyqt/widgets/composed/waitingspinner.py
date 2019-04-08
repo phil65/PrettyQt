@@ -50,7 +50,7 @@ class BaseWaitingSpinner(widgets.Widget):
         self._current_counter = 0
         self._is_spinning = False
 
-        self._timer = QtCore.QTimer(self)
+        self._timer = core.Timer(self)
         self._timer.timeout.connect(self.rotate)
         self.update_size()
         self.update_timer()

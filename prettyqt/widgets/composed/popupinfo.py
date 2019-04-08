@@ -4,7 +4,7 @@
 """
 
 from qtpy import QtCore
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
 class PopupInfo(widgets.Dialog):
@@ -14,7 +14,7 @@ class PopupInfo(widgets.Dialog):
 
     def __init__(self, parent=None, text=None):
         super().__init__(parent=parent)
-        self.timer = QtCore.QTimer()
+        self.timer = core.Timer()
         self.timer.timeout.connect(self.close)
         self.timer.setSingleShot(True)
         self.label = widgets.Label()
