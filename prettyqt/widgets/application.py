@@ -9,6 +9,8 @@ from typing import Optional
 from qtpy import QtWidgets, QtCore
 import qtawesome as qta
 
+from prettyqt import core
+
 
 class Application(QtWidgets.QApplication):
 
@@ -19,7 +21,7 @@ class Application(QtWidgets.QApplication):
             self.setWindowIcon(icon)
 
     def load_language_file(self, path):
-        translator = QtCore.QTranslator(self)
+        translator = core.Translator(self)
         translator.load(str(path))
         self.installTranslator(translator)
 
@@ -39,11 +41,11 @@ class Application(QtWidgets.QApplication):
 
     @classmethod
     def use_hdpi_bitmaps(cls):
-        QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps)
+        cls.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps)
 
     @classmethod
     def disable_window_help_button(cls):
-        QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton)
+        cls.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton)
 
     @classmethod
     def copy_to_clipboard(cls, text: str):
