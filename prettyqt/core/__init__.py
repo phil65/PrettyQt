@@ -12,6 +12,7 @@ from .settings import Settings
 from .size import Size
 from .point import Point
 from .timer import Timer
+from .translator import Translator
 from .rect import Rect
 from .regexp import RegExp
 from .mimedata import MimeData
@@ -27,6 +28,7 @@ __all__ = ["Object",
            "Size",
            "Point",
            "Timer",
+           "Translator",
            "Rect",
            "MimeData",
            "FileSystemModel",
