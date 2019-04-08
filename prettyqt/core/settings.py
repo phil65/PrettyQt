@@ -16,9 +16,9 @@ SCOPES = dict(user=QtCore.QSettings.UserScope,
 
 class Settings(QtCore.QSettings):
 
-    def __init__(self, settings_id=None):
+    def __init__(self, *args, settings_id=None):
         self.settings_id = settings_id
-        super().__init__()
+        super().__init__(*args)
 
     def __enter__(self):
         if self.settings_id:
@@ -88,4 +88,6 @@ class Settings(QtCore.QSettings):
 
 
 if __name__ == "__main__":
-    settings = Settings(settings_id="test")
+    settings = Settings("1", "2")
+    settings.set_value("test/test", 42)
+    print(settings.value("test/test"))

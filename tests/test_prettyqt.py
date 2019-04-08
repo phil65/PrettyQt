@@ -6,7 +6,7 @@
 import pytest
 
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
 @pytest.fixture
@@ -18,5 +18,8 @@ def response():
     return widgets.Callout()
 
 
-def test():
-    return True
+def test_settings():
+    settings = core.Settings("1", "2")
+    settings.set_value("test", "value")
+    assert settings.contains("test")
+    assert settings.value("test") == "value"
