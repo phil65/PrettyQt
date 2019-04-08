@@ -15,6 +15,9 @@ class Action(QtWidgets.QAction):
     def set_disabled(self):
         self.setEnabled(False)
 
+    def set_tooltip(self, text):
+        self.setToolTip(text)
+
     def set_icon(self, icon):
         if isinstance(icon, str):
             icon = qta.icon(icon)
