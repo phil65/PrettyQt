@@ -39,7 +39,7 @@ class BaseWaitingSpinner(widgets.Widget):
         super().__init__(parent=parent)
 
         # WAS IN initialize()
-        self._color = gui.Color(QtCore.Qt.black)
+        self._color = gui.Color("black")
         self._roundness = 100.0
         self._minimum_trail_opacity = 3.14159265358979323846
         self._trail_fade_percentage = 80.0
@@ -156,8 +156,8 @@ class BaseWaitingSpinner(widgets.Widget):
     def set_roundness(self, roundness):
         self._roundness = max(0.0, min(100.0, roundness))
 
-    def set_color(self, color=QtCore.Qt.black):
-        self._color = gui.Color(color)
+    def set_color(self, color="black"):
+        self._color = self._color.set_color(color)
 
     def set_revolutions_per_second(self, _revolutions_per_second):
         self._revolutions_per_second = _revolutions_per_second
@@ -188,22 +188,22 @@ class BaseWaitingSpinner(widgets.Widget):
             distance += total_lines
         return distance
 
-    def current_line_color(self, countDistance, total_lines, trailFadePerc,
+    def current_line_color(self, count_distance, total_lines, trailFadePerc,
                            min_opacity, colorinput):
         color = gui.Color(colorinput)
-        if countDistance == 0:
+        if count_distance == 0:
             return color
-        minAlphaF = min_opacity / 100.0
-        distanceThreshold = int(math.ceil((total_lines - 1) * trailFadePerc / 100.0))
-        if countDistance > distanceThreshold:
-            color.setAlphaF(minAlphaF)
+        min_alpha_f = min_opacity / 100.0
+        dist_threshold = int(math.ceil((total_lines - 1) * trailFadePerc / 100.0))
+        if count_distance > dist_threshold:
+            color.setAlphaF(min_alpha_f)
         else:
-            alphaDiff = color.alphaF() - minAlphaF
-            gradient = alphaDiff / float(distanceThreshold + 1)
-            resultAlpha = color.alphaF() - gradient * countDistance
+            alpha_diff = color.alphaF() - min_alpha_f
+            gradient = alpha_diff / float(dist_threshold + 1)
+            result_alpha = color.alphaF() - gradient * count_distance
             # If alpha is out of bounds, clip it.
-            resultAlpha = min(1.0, max(0.0, resultAlpha))
-            color.setAlphaF(resultAlpha)
+            result_alpha = min(1.0, max(0.0, result_alpha))
+            color.setAlphaF(result_alpha)
         return color
 
 

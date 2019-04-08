@@ -24,18 +24,18 @@
 
 from qtpy import QtWidgets, QtGui, QtCore
 
-from prettyqt.widgets import Slider, StyleOptionSlider
+from prettyqt import widgets, gui, core
 
-SLIDER_STYLE = QtWidgets.QStyle.CC_Slider
-HANDLE_STYLE = QtWidgets.QStyle.SC_SliderHandle
-GROOVE_STYLE = QtWidgets.QStyle.SC_SliderGroove
+SLIDER_STYLE = widgets.Style.CC_Slider
+HANDLE_STYLE = widgets.Style.SC_SliderHandle
+GROOVE_STYLE = widgets.Style.SC_SliderGroove
 
 
 def clamp(v, lower, upper):
     return min(upper, max(lower, v))
 
 
-class SpanSlider(Slider):
+class SpanSlider(widgets.Slider):
     NO_HANDLE = None
     LOWER_HANDLE = 1
     UPPER_HANDLE = 2
@@ -44,10 +44,10 @@ class SpanSlider(Slider):
     NO_CROSSING = 1
     NO_OVERLAPPING = 2
 
-    span_changed = QtCore.Signal(int, int)
-    lower_pos_changed = QtCore.Signal(int)
-    upper_pos_changed = QtCore.Signal(int)
-    slider_pressed = QtCore.Signal(object)
+    span_changed = core.Signal(int, int)
+    lower_pos_changed = core.Signal(int)
+    upper_pos_changed = core.Signal(int)
+    slider_pressed = core.Signal(object)
 
     def __init__(self, parent=None):
         super().__init__(QtCore.Qt.Horizontal, parent)
@@ -61,14 +61,14 @@ class SpanSlider(Slider):
         self.offset = 0
         self.position = 0
         self.last_pressed = self.NO_HANDLE
-        self.upper_pressed = QtWidgets.QStyle.SC_None
-        self.lower_pressed = QtWidgets.QStyle.SC_None
+        self.upper_pressed = widgets.Style.SC_None
+        self.lower_pressed = widgets.Style.SC_None
         self.movement = self.FREE_MOVEMENT
         self.main_control = self.LOWER_HANDLE
         self.first_movement = False
         self.block_tracking = False
-        self.gradient_left = self.palette().color(QtGui.QPalette.Dark).lighter(110)
-        self.gradient_right = self.palette().color(QtGui.QPalette.Dark).lighter(110)
+        self.gradient_left = self.palette().color(gui.Palette.Dark).lighter(110)
+        self.gradient_right = self.palette().color(gui.Palette.Dark).lighter(110)
 
     @QtCore.Property(int)
     def lower_value(self):
@@ -235,12 +235,12 @@ class SpanSlider(Slider):
         self.set_span(self.lower, self.upper)
 
     def paintEvent(self, event):
-        painter = QtWidgets.QStylePainter(self)
+        painter = widgets.StylePainter(self)
 
         # ticks
-        opt = StyleOptionSlider()
+        opt = widgets.StyleOptionSlider()
         self.initStyleOption(opt)
-        opt.subControls = QtWidgets.QStyle.SC_SliderTickmarks
+        opt.subControls = widgets.Style.SC_SliderTickmarks
         painter.drawComplexControl(SLIDER_STYLE, opt)
 
         # groove
@@ -261,11 +261,11 @@ class SpanSlider(Slider):
         minv = min(lrv, urv)
         maxv = max(lrv, urv)
         c = self.style().subControlRect(SLIDER_STYLE, opt, GROOVE_STYLE, self).center()
-        spanRect = QtCore.QRect(QtCore.QPoint(c.x() - 2, minv),
-                                QtCore.QPoint(c.x() + 1, maxv))
+        spanRect = core.Rect(core.Point(c.x() - 2, minv),
+                             core.Point(c.x() + 1, maxv))
         if self.is_horizontal():
-            spanRect = QtCore.QRect(QtCore.QPoint(minv, c.y() - 2),
-                                    QtCore.QPoint(maxv, c.y() + 1))
+            spanRect = core.Rect(core.Point(minv, c.y() - 2),
+                                 core.Point(maxv, c.y() + 1))
         self.draw_span(painter, spanRect)
 
         # handles
@@ -277,17 +277,17 @@ class SpanSlider(Slider):
             self.draw_handle(painter, self.UPPER_HANDLE)
 
     def setup_painter(self, painter, orientation, x1, y1, x2, y2):
-        highlight = self.palette().color(QtGui.QPalette.Highlight)
+        highlight = self.palette().color(gui.Palette.Highlight)
         gradient = QtGui.QLinearGradient(x1, y1, x2, y2)
         gradient.setColorAt(0, highlight.darker(120))
         gradient.setColorAt(1, highlight.lighter(108))
         painter.setBrush(gradient)
 
         val = 130 if orientation == QtCore.Qt.Horizontal else 150
-        painter.setPen(QtGui.QPen(highlight.darker(val), 0))
+        painter.setPen(gui.Pen(highlight.darker(val), 0))
 
     def draw_span(self, painter, rect):
-        opt = StyleOptionSlider()
+        opt = widgets.StyleOptionSlider()
         super().initStyleOption(opt)
 
         # area
@@ -298,7 +298,7 @@ class SpanSlider(Slider):
             groove.adjust(0, 0, 0, -1)
 
         # pen & brush
-        painter.setPen(QtGui.QPen(self.left_color, 0))
+        painter.setPen(gui.Pen(self.left_color, 0))
         if opt.is_horizontal():
             self.setup_painter(painter, opt.orientation, groove.center().x(),
                                groove.top(), groove.center().x(), groove.bottom())
@@ -314,7 +314,7 @@ class SpanSlider(Slider):
         painter.fillRect(intersected, gradient)
 
     def draw_handle(self, painter, handle):
-        opt = StyleOptionSlider()
+        opt = widgets.StyleOptionSlider()
         self._initStyleOption(opt, handle)
         opt.subControls = HANDLE_STYLE
         pressed = self.upper_pressed
@@ -323,7 +323,7 @@ class SpanSlider(Slider):
 
         if pressed == HANDLE_STYLE:
             opt.activeSubControls = pressed
-            opt.state |= QtWidgets.QStyle.State_Sunken
+            opt.state |= widgets.Style.State_Sunken
         painter.drawComplexControl(SLIDER_STYLE, opt)
 
     def _initStyleOption(self, option, handle):
@@ -336,7 +336,7 @@ class SpanSlider(Slider):
             option.sliderValue = self.lower
 
     def handle_mouse_press(self, pos, control, value, handle):
-        opt = StyleOptionSlider()
+        opt = widgets.StyleOptionSlider()
         self._initStyleOption(opt, handle)
         old_control = control
         control = self.style().hitTestComplexControl(SLIDER_STYLE, opt, pos, self)
@@ -375,9 +375,9 @@ class SpanSlider(Slider):
             event.ignore()
             return
 
-        opt = StyleOptionSlider()
+        opt = widgets.StyleOptionSlider()
         self.initStyleOption(opt)
-        m = self.style().pixelMetric(QtWidgets.QStyle.PM_MaximumDragDistance, opt, self)
+        m = self.style().pixelMetric(widgets.Style.PM_MaximumDragDistance, opt, self)
         new_pos = self.pixel_pos_to_value(self.pick(event.pos()) - self.offset)
         if m >= 0:
             r = self.rect().adjusted(-m, -m, m, m)
@@ -420,12 +420,12 @@ class SpanSlider(Slider):
     def mouseReleaseEvent(self, event):
         super().mouseReleaseEvent(event)
         self.setSliderDown(False)
-        self.lower_pressed = QtWidgets.QStyle.SC_None
-        self.upper_pressed = QtWidgets.QStyle.SC_None
+        self.lower_pressed = widgets.Style.SC_None
+        self.upper_pressed = widgets.Style.SC_None
         self.update()
 
     def pixel_pos_to_value(self, pos):
-        opt = StyleOptionSlider()
+        opt = widgets.StyleOptionSlider()
         self.initStyleOption(opt)
 
         slider_min = 0
@@ -442,21 +442,21 @@ class SpanSlider(Slider):
             slider_min = gr.y()
             slider_max = gr.bottom() - len_slider + 1
 
-        return QtWidgets.QStyle.sliderValueFromPosition(self.minimum(),
-                                                        self.maximum(),
-                                                        pos - slider_min,
-                                                        slider_max - slider_min,
-                                                        opt.upsideDown)
+        return widgets.Style.sliderValueFromPosition(self.minimum(),
+                                                     self.maximum(),
+                                                     pos - slider_min,
+                                                     slider_max - slider_min,
+                                                     opt.upsideDown)
 
 
 if __name__ == "__main__":
     import sys
 
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     slider = SpanSlider()
     slider.set_span(30, 70)
     slider.setRange(0, 100)
-    color = QtGui.QColor(QtCore.Qt.blue).lighter(150)
+    color = gui.Color("blue").lighter(150)
     slider.set_left_color(color)
     slider.set_right_color(color)
     slider.show()

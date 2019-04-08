@@ -3,8 +3,6 @@
 @author: Philipp Temminghoff
 """
 
-import sys
-
 from prettyqt import gui, widgets
 
 import markdown
@@ -86,11 +84,11 @@ class MarkdownWidget(widgets.TextBrowser):
 
 
 def main():
-    qtapp = widgets.Application(sys.argv)
+    app = widgets.Application.create_default_app()
     reader = MarkdownWindow()
     # reader.web_view.load(QtCore.QUrl('blank'))
     reader.show()
-    qtapp.exec_()
+    app.exec_()
 
 
 if __name__ == '__main__':

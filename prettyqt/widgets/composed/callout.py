@@ -4,7 +4,7 @@
 """
 
 from qtpy import QtGui, QtCore
-from prettyqt import gui, widgets
+from prettyqt import gui, widgets, core
 
 
 class Callout(widgets.GraphicsItem):
@@ -14,6 +14,7 @@ class Callout(widgets.GraphicsItem):
         self.anchor = QtCore.QPointF()
         self.text = None
         self.text_rect = None
+        self.font = gui.Font()
 
     def boundingRect(self) -> QtCore.QRectF:
         anchor = self.mapFromParent(self.chart.mapToPosition(self.anchor))
@@ -84,10 +85,10 @@ class Callout(widgets.GraphicsItem):
         else:
             event.setAccepted(False)
 
-    def setText(self, text: str):
+    def set_text(self, text: str):
         self.text = text
         metrics = QtGui.QFontMetrics(self.font)
-        self.text_rect = metrics.boundingRect(QtCore.QRect(0, 0, 150, 150),
+        self.text_rect = metrics.boundingRect(core.Rect(0, 0, 150, 150),
                                               QtCore.Qt.AlignLeft,
                                               self.text)
         self.text_rect.translate(5, 5)
@@ -100,3 +101,11 @@ class Callout(widgets.GraphicsItem):
     def updateGeometry(self):
         self.prepareGeometryChange()
         self.setPos(self.chart.mapToPosition(self.anchor) + QtCore.QPoint(10, -50))
+
+
+if __name__ == "__main__":
+    app = widgets.Application.create_default_app()
+    widget = Callout()
+    widget.set_text("test")
+    widget.show()
+    app.exec_()
