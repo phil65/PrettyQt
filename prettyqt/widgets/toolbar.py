@@ -3,10 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Callable
+from typing import Callable, Optional
 
 from qtpy import QtWidgets, QtCore
 import qtawesome as qta
+
+from prettyqt import widgets, core
 
 STYLES = dict(icon=QtCore.Qt.ToolButtonIconOnly,
               text=QtCore.Qt.ToolButtonTextOnly,
@@ -27,21 +29,17 @@ class Toolbar(QtWidgets.QToolBar):
                         label: str,
                         icon,
                         menu: QtWidgets.QMenu,
-                        style: str = None) -> QtWidgets.QToolButton:
-        btn = QtWidgets.QToolButton()
+                        style: Optional[str] = None) -> widgets.ToolButton:
+        btn = widgets.ToolButton.for_menu(menu)
         btn.setText(label)
         if style:
             btn.setToolButtonStyle(STYLES[style])
-        btn.setMenu(menu)
-        if isinstance(icon, str):
-            icon = qta.icon(icon)
-        btn.setIcon(icon)
-        btn.setPopupMode(QtWidgets.QToolButton.InstantPopup)
+        btn.set_icon(icon)
         self.menu_buttons.append(btn)
         self.addWidget(btn)
         return btn
 
-    def set_style(self, style):
+    def set_style(self, style: int):
         if style is None:
             return None
         self.setToolButtonStyle(style)
@@ -57,12 +55,11 @@ class Toolbar(QtWidgets.QToolBar):
         return action
 
     def set_icon_size(self, size: int):
-        self.setIconSize(QtCore.QSize(size, size))
+        self.setIconSize(core.Size(size, size))
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = Toolbar()
     widget.show()
     app.exec_()
