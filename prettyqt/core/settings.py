@@ -38,19 +38,19 @@ class Settings(QtCore.QSettings):
     def value(self, value, default=None):
         super().value(value, default)
 
-    @staticmethod
-    def set_default_format(fmt):
+    @classmethod
+    def set_default_format(cls, fmt):
         if fmt not in FORMATS:
             raise ValueError("Format must be either 'native' or 'ini'")
-        QtCore.QSettings.setDefaultFormat(FORMATS[fmt])
+        cls.setDefaultFormat(FORMATS[fmt])
 
-    @staticmethod
-    def set_path(fmt, scope, path):
+    @classmethod
+    def set_path(cls, fmt, scope, path):
         if fmt not in FORMATS:
             raise ValueError("Format must be either 'native' or 'ini'")
         if scope not in SCOPES:
             raise ValueError("Format must be either 'user' or 'system'")
-        QtCore.QSettings.setPath(FORMATS[fmt], SCOPES[scope], path)
+        cls.setPath(FORMATS[fmt], SCOPES[scope], path)
 
     @contextlib.contextmanager
     def group(self, prefix):

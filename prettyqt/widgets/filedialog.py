@@ -65,11 +65,11 @@ class FileDialog(QtWidgets.QFileDialog):
             return pathlib.Path(selected[0])
 
     def choose_folder(self):
-        self.setFileMode(QtWidgets.QFileDialog.Directory)
+        self.setFileMode(self.Directory)
         return self.choose()
 
     def open_file(self):
-        self.setFileMode(QtWidgets.QFileDialog.ExistingFile)
+        self.setFileMode(self.ExistingFile)
         return self.choose()
 
     def choose(self):
