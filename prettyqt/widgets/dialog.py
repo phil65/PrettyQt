@@ -4,7 +4,11 @@
 """
 
 from qtpy import QtWidgets, QtCore
+from prettyqt import widgets
 import qtawesome as qta
+
+MODALITIES = dict(window=QtCore.Qt.WindowModal,
+                  application=QtCore.Qt.ApplicationModal)
 
 
 class Dialog(QtWidgets.QDialog):
@@ -17,11 +21,8 @@ class Dialog(QtWidgets.QDialog):
         self.setWindowModality(QtCore.Qt.WindowModal)
         self.setWindowTitle(title)
         self.set_icon(icon)
-        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
-        if horizontal:
-            self.layout = QtWidgets.QHBoxLayout()
-        else:
-            self.layout = QtWidgets.QVBoxLayout()
+        self.delete_on_close()
+        self.layout = widgets.BoxLayout("horizontal" if horizontal else "vertical")
         self.setLayout(self.layout)
 
     def delete_on_close(self):
@@ -37,8 +38,8 @@ class Dialog(QtWidgets.QDialog):
             self.setWindowIcon(icon)
 
     def add_buttonbox(self):
-        button_box = QtWidgets.QDialogButtonBox(QtWidgets.QDialogButtonBox.Ok |
-                                                QtWidgets.QDialogButtonBox.Cancel)
+        button_box = widgets.DialogButtonBox()
+        button_box.add_buttons(["cancel", "ok"])
         button_box.accepted.connect(self.accepted)
         button_box.rejected.connect(self.reject)
         self.layout.addWidget(button_box)
@@ -64,7 +65,7 @@ class Dialog(QtWidgets.QDialog):
 
 if __name__ == "__main__":
     import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application(sys.argv)
     widget = Dialog()
     widget.showMaximized()
     app.exec_()
