@@ -3,11 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtCore, QtGui
 from prettyqt import gui, core
 
 
-class JsonHighlighter(QtGui.QSyntaxHighlighter):
+class JsonHighlighter(gui.SyntaxHighlighter):
 
     def __init__(self, parent=None):
         """ Constructor
@@ -15,16 +14,16 @@ class JsonHighlighter(QtGui.QSyntaxHighlighter):
         super().__init__(parent)
 
         self.symbol_format = gui.TextCharFormat()
-        self.symbol_format.setForeground(QtCore.Qt.red)
-        self.symbol_format.setFontWeight(QtGui.QFont.Bold)
+        self.symbol_format.set_foreground_color("red")
+        self.symbol_format.setFontWeight(gui.Font.Bold)
 
         self.name_format = gui.TextCharFormat()
-        self.name_format.setForeground(QtCore.Qt.blue)
-        self.name_format.setFontWeight(QtGui.QFont.Bold)
+        self.name_format.set_foreground_color("blue")
+        self.name_format.setFontWeight(gui.Font.Bold)
         self.name_format.setFontItalic(True)
 
         self.value_format = gui.TextCharFormat()
-        self.value_format.setForeground(QtCore.Qt.darkGreen)
+        self.value_format.set_foreground_color("darkgreen")
 
     def highlightBlock(self, text):
         """ Highlight a block of code using the rules outlined in the Constructor

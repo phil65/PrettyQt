@@ -3,7 +3,6 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui
 from prettyqt import gui, core
 
 
@@ -14,7 +13,7 @@ def return_format(color, style=""):
     fmt = gui.TextCharFormat()
     fmt.set_foreground_color(color)
     if "bold" in style:
-        fmt.setFontWeight(QtGui.QFont.Bold)
+        fmt.setFontWeight(gui.Font.Bold)
     if "italic" in style:
         fmt.setFontItalic(True)
 
@@ -63,7 +62,7 @@ BRACES = [
 ]
 
 
-class PythonHighlighter(QtGui.QSyntaxHighlighter):
+class PythonHighlighter(gui.SyntaxHighlighter):
     """Syntax highlighter for the Python language.
     """
 
