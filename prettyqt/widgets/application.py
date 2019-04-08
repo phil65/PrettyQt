@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+import sys
+
 from typing import Optional
 from qtpy import QtWidgets, QtCore
 import qtawesome as qta
@@ -58,3 +60,10 @@ class Application(QtWidgets.QApplication):
         for widget in widget_list:
             if isinstance(widget, QtWidgets.QMainWindow):
                 return widget
+
+    @classmethod
+    def create_default_app(cls) -> "Application":
+        cls.disable_window_help_button()
+        cls.use_hdpi_bitmaps()
+        app = cls(sys.argv)
+        return app
