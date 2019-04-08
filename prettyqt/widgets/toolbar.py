@@ -44,7 +44,7 @@ class Toolbar(QtWidgets.QToolBar):
             return None
         self.setToolButtonStyle(style)
         for btn in self.menu_buttons:
-            self.setToolButtonStyle(style)
+            btn.setToolButtonStyle(style)
 
     def add_action(self, label: str, icon, callback: Callable, checkable=False):
         if isinstance(icon, str):
