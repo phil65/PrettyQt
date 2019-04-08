@@ -12,3 +12,6 @@ class Painter(QtGui.QPainter):
         self.setCompositionMode(QtGui.QPainter.CompositionMode_SourceAtop)
         self.drawImage(point, frame_buffer)
         self.end()
+
+    def use_antialiasing(self):
+        self.setRenderHint(self.Antialiasing, True)

@@ -5,12 +5,11 @@
 
 import sys
 import pathlib
-from qtpy import QtWidgets
 
 from prettyqt import widgets
 
 
-class ImageViewer(QtWidgets.QWidget):
+class ImageViewer(widgets.Widget):
 
     def __init__(self, title="", parent=None):
         super().__init__(parent)
@@ -27,6 +26,6 @@ class ImageViewer(QtWidgets.QWidget):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application(sys.argv)
     ex = ImageViewer()
     sys.exit(app.exec_())

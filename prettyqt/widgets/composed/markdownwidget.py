@@ -11,7 +11,7 @@ from prettyqt import gui, widgets
 import markdown
 
 
-class MarkdownWindow(QtWidgets.QMainWindow):
+class MarkdownWindow(widgets.MainWindow):
 
     def __init__(self):
         super().__init__()
@@ -60,7 +60,7 @@ class MarkdownWindow(QtWidgets.QMainWindow):
             self.statusBar().showMessage('File open canceled!')
 
 
-class MarkdownWidget(QtWidgets.QTextBrowser):
+class MarkdownWidget(widgets.TextBrowser):
 
     # def dragEnterEvent(self, event):
     #     u = event.mimeData().urls()
@@ -87,7 +87,7 @@ class MarkdownWidget(QtWidgets.QTextBrowser):
 
 
 def main():
-    qtapp = QtWidgets.QApplication(sys.argv)
+    qtapp = widgets.Application(sys.argv)
     reader = MarkdownWindow()
     # reader.web_view.load(QtCore.QUrl('blank'))
     reader.show()

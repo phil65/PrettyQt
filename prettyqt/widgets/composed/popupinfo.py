@@ -3,10 +3,11 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore
+from prettyqt import widgets
 
 
-class PopupInfo(QtWidgets.QDialog):
+class PopupInfo(widgets.Dialog):
     """
     dialog overlay to show some info to user
     """
@@ -16,12 +17,12 @@ class PopupInfo(QtWidgets.QDialog):
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.close)
         self.timer.setSingleShot(True)
-        self.label = QtWidgets.QLabel()
+        self.label = widgets.Label()
         self.setWindowFlags(self.windowFlags() |
                             QtCore.Qt.Tool |
                             QtCore.Qt.WindowStaysOnTopHint |
                             QtCore.Qt.FramelessWindowHint)
-        layout = QtWidgets.QVBoxLayout()
+        layout = widgets.BoxLayout("vertical")
         self.setLayout(layout)
         self.setStyleSheet("background-color: black;")  # 2a82da
         layout.addWidget(self.label)
@@ -29,7 +30,7 @@ class PopupInfo(QtWidgets.QDialog):
 
     def show(self, *args, **kwargs):
         super().show(*args, **kwargs)
-        screen_geo = QtWidgets.QApplication.desktop().screenGeometry()
+        screen_geo = widgets.Application.desktop().screenGeometry()
         size = self.label.sizeHint()
         x = (screen_geo.width() - size.width()) / 2
         y = (screen_geo.height() - size.height()) / 2
@@ -43,7 +44,7 @@ class PopupInfo(QtWidgets.QDialog):
 
 if __name__ == "__main__":
     import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application(sys.argv)
     widget = PopupInfo()
     widget.show_popup("test")
     app.exec_()
