@@ -3,19 +3,20 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore
+from prettyqt import core, widgets
 
 
-class ButtonDelegate(QtWidgets.QItemDelegate):
+class ButtonDelegate(widgets.ItemDelegate):
 
     def __init__(self, parent, role=QtCore.Qt.UserRole):
         super().__init__(parent)
         self.fn_role = role
 
-    def createEditor(self, parent, option, index) -> QtWidgets.QPushButton:
+    def createEditor(self, parent, option, index) -> widgets.PushButton:
         label = index.data()
         btn_callback = index.data(self.fn_role)
-        btn = QtWidgets.QPushButton(label, parent)
+        btn = widgets.PushButton(label, parent)
         if not btn_callback:
             btn.setEnabled(False)
         else:
@@ -32,6 +33,6 @@ class ButtonDelegate(QtWidgets.QItemDelegate):
         pass
         # model.setData(index, editor.text())
 
-    @QtCore.Slot()
+    @core.Slot()
     def currentIndexChanged(self):
         self.commitData.emit(self.sender())

@@ -5,7 +5,6 @@
 
 import sys
 
-from qtpy import QtWidgets
 from prettyqt import gui, widgets
 
 import markdown
@@ -52,7 +51,7 @@ class MarkdownWindow(widgets.MainWindow):
                                                        '',
                                                        'All Text Files (*.md *.markdown *.txt *.*)',
                                                        None,
-                                                       QtWidgets.QFileDialog.DontUseNativeDialog)
+                                                       widgets.FileDialog.DontUseNativeDialog)
             self.web_view.show_markdown(fname[0])
         except UnicodeDecodeError:
             self.statusBar().showMessage('Please select only text files')
