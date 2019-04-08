@@ -4,9 +4,11 @@
 
 from . import core
 from . import widgets
+from . import gui
+from . import syntaxhighlighters
 
 __author__ = """Philipp Temminghoff"""
 __email__ = 'phil65@kodi.tv'
 __version__ = '0.13.0'
 
-__all__ = ["core", "widgets", "gui"]
+__all__ = ["core", "widgets", "gui", "syntaxhighlighters"]
