@@ -4,7 +4,8 @@
 """
 
 from qtpy import QtWidgets
-from prettyqt import gui
+
+from prettyqt import gui, widgets
 
 
 class LineEdit(QtWidgets.QLineEdit):
@@ -50,8 +51,7 @@ class LineEdit(QtWidgets.QLineEdit):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = LineEdit("This is a test")
     widget.show()
     app.exec_()

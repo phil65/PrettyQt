@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtWidgets
+
 from prettyqt import widgets
 
 
@@ -36,9 +37,9 @@ class FormLayout(QtWidgets.QFormLayout):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
         if isinstance(widget, QtWidgets.QLayout):
-            self.setLayout(row, QtWidgets.QFormLayout.LabelRole, widget)
+            self.setLayout(row, self.LabelRole, widget)
         else:
-            self.setWidget(row, QtWidgets.QFormLayout.LabelRole, widget)
+            self.setWidget(row, self.LabelRole, widget)
 
     def set_field_widget(self, row: int, widget):
         """set a widget for the field position at given row
@@ -50,9 +51,9 @@ class FormLayout(QtWidgets.QFormLayout):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
         if isinstance(widget, QtWidgets.QLayout):
-            self.setLayout(row, QtWidgets.QFormLayout.FieldRole, widget)
+            self.setLayout(row, self.FieldRole, widget)
         else:
-            self.setWidget(row, QtWidgets.QFormLayout.FieldRole, widget)
+            self.setWidget(row, self.FieldRole, widget)
 
     def set_spanning_widget(self, row: int, widget):
         """set a widget spanning label and field position at given row
@@ -64,9 +65,9 @@ class FormLayout(QtWidgets.QFormLayout):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
         if isinstance(widget, QtWidgets.QLayout):
-            self.setLayout(row, QtWidgets.QFormLayout.SpanningRole, widget)
+            self.setLayout(row, self.SpanningRole, widget)
         else:
-            self.setWidget(row, QtWidgets.QFormLayout.SpanningRole, widget)
+            self.setWidget(row, self.SpanningRole, widget)
 
     @classmethod
     def from_dict(cls, dct, parent=None):
@@ -80,12 +81,11 @@ class FormLayout(QtWidgets.QFormLayout):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     dct = {"key": widgets.Label("test"),
            None: widgets.Label("test 2")}
     layout = FormLayout.from_dict(dct)
-    widget = QtWidgets.QWidget()
+    widget = widgets.Widget()
     widget.setLayout(layout)
     widget.show()
     app.exec_()

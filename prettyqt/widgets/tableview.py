@@ -5,6 +5,8 @@
 
 from qtpy import QtWidgets
 
+from prettyqt import widgets
+
 
 class TableView(QtWidgets.QTableView):
 
@@ -16,9 +18,8 @@ class TableView(QtWidgets.QTableView):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    dlg = QtWidgets.QMainWindow()
+    app = widgets.Application.create_default_app()
+    dlg = widgets.MainWindow()
     status_bar = TableView()
     dlg.show()
     app.exec_()

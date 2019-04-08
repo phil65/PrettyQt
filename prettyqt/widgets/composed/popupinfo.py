@@ -43,8 +43,7 @@ class PopupInfo(widgets.Dialog):
 
 
 if __name__ == "__main__":
-    import sys
-    app = widgets.Application(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = PopupInfo()
     widget.show_popup("test")
     app.exec_()

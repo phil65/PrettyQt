@@ -5,7 +5,9 @@
 
 import pathlib
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets
+
+from prettyqt import widgets, core
 
 MODES = dict(existing_file=QtWidgets.QFileDialog.ExistingFile,
              existing_files=QtWidgets.QFileDialog.ExistingFiles,
@@ -26,7 +28,7 @@ class FileDialog(QtWidgets.QFileDialog):
 
     def __init__(self, path=None, mode=None, caption="", path_id=None, parent=None):
         self.path_id = path_id
-        settings = QtCore.QSettings()
+        settings = core.Settings()
         initial_path = settings.value(self.path_id, "")
         super().__init__(directory=initial_path, caption=caption, parent=parent)
         self.set_file_mode("existing_files")
@@ -77,7 +79,7 @@ class FileDialog(QtWidgets.QFileDialog):
         paths = self.selected_files()
         folder_path = paths[0].parent
         if self.path_id:
-            settings = QtCore.QSettings()
+            settings = core.Settings()
             settings.setValue(self.path_id, str(folder_path))
         return paths
 
@@ -106,8 +108,7 @@ class FileDialog(QtWidgets.QFileDialog):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = FileDialog(path_id="test", caption="Some header")
     widget.show()
     app.exec_()

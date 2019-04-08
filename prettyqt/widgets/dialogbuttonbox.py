@@ -5,6 +5,8 @@
 
 from qtpy import QtWidgets, QtCore
 
+from prettyqt import widgets
+
 BUTTONS = dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
                ok=QtWidgets.QDialogButtonBox.Ok,
                save=QtWidgets.QDialogButtonBox.Save,
@@ -47,8 +49,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = DialogButtonBox()
     buttons = list(BUTTONS.keys())
     widget.add_buttons(buttons)

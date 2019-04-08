@@ -5,6 +5,8 @@
 
 from qtpy import QtWidgets
 
+from prettyqt import widgets
+
 
 class MenuBar(QtWidgets.QMenuBar):
 
@@ -13,8 +15,7 @@ class MenuBar(QtWidgets.QMenuBar):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     win = QtWidgets.QMainWindow()
     menu_bar = MenuBar()
     win.setMenuBar(menu_bar)

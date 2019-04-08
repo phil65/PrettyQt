@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtWidgets, QtGui
+
 from prettyqt import widgets, gui
 
 
@@ -68,8 +69,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
 
 if __name__ == "__main__":
-    import sys
-    app = widgets.Application(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = PlainTextEdit("This is a test")
     widget.show()
     app.exec_()

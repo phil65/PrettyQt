@@ -6,6 +6,8 @@
 import qtawesome as qta
 from qtpy import QtWidgets
 
+from prettyqt import widgets
+
 
 class PushButton(QtWidgets.QPushButton):
 
@@ -29,8 +31,7 @@ class PushButton(QtWidgets.QPushButton):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = PushButton("This is a test")
     widget.show()
     app.exec_()

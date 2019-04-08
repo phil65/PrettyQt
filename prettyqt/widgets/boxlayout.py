@@ -37,8 +37,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
 
 
 if __name__ == "__main__":
-    import sys
-    app = widgets.Application(sys.argv)
+    app = widgets.Application.create_default_app()
     layout = BoxLayout("vertical")
     widget = widgets.Widget()
     widget.setLayout(layout)

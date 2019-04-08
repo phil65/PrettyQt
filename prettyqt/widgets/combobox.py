@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtWidgets, QtCore
+from prettyqt import widgets
 
 box = QtWidgets.QComboBox
 INSERT_POLICIES = dict(no_insert=box.NoInsert,
@@ -62,8 +63,7 @@ class ComboBox(QtWidgets.QComboBox):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = ComboBox()
     widget.add_item("test", data="aa")
     widget.show()

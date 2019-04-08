@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtWidgets, QtCore
+
 from prettyqt import widgets
 
 
@@ -30,8 +31,7 @@ class GridLayout(QtWidgets.QGridLayout):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     layout = GridLayout()
     widget = widgets.Widget()
     widget.setLayout(layout)

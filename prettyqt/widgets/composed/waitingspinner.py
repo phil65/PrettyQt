@@ -30,6 +30,7 @@ SOFTWARE.
 import math
 
 from qtpy import QtCore
+
 from prettyqt import widgets, core, gui
 
 
@@ -60,15 +61,15 @@ class BaseWaitingSpinner(widgets.Widget):
         self.setWindowModality(modality)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
-    def paintEvent(self, QPaintEvent):
+    def paintEvent(self, event):
         painter = gui.Painter(self)
-        painter.fillRect(self.rect(), QtCore.Qt.transparent)
+        painter.fill_rect(self.rect(), "transparent")
         painter.use_antialiasing()
 
         if self._current_counter >= self._line_num:
             self._current_counter = 0
 
-        painter.setPen(QtCore.Qt.NoPen)
+        painter.set_pen("none")
         for i in range(0, self._line_num):
             painter.save()
             painter.translate(self._inner_radius + self._line_length,
@@ -214,9 +215,9 @@ class WaitingSpinner(BaseWaitingSpinner):
         self._disable_parent = disable_parent
         self.additional_disabled = additional_disabled if additional_disabled else []
 
-    def paintEvent(self, QPaintEvent):
+    def paintEvent(self, event):
         self.update_position()
-        super().paintEvent(QPaintEvent)
+        super().paintEvent(event)
 
     def start(self):
         self.update_position()

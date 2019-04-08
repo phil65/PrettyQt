@@ -5,6 +5,8 @@
 
 from qtpy import QtWidgets, QtCore
 
+from prettyqt import widgets
+
 H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
                     right=QtCore.Qt.AlignRight,
                     center=QtCore.Qt.AlignHCenter)
@@ -17,8 +19,7 @@ class GroupBox(QtWidgets.QGroupBox):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = GroupBox()
     widget.show()
     app.exec_()

@@ -5,7 +5,7 @@
 
 import pathlib
 from qtpy import QtWidgets, QtCore
-from prettyqt import gui
+from prettyqt import gui, widgets
 
 
 H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
@@ -53,8 +53,7 @@ class Label(QtWidgets.QLabel):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = Label("test")
     widget.show()
     app.exec_()

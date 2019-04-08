@@ -4,8 +4,9 @@
 """
 
 from qtpy import QtWidgets, QtCore
-from prettyqt import widgets
 import qtawesome as qta
+
+from prettyqt import widgets
 
 MODALITIES = dict(window=QtCore.Qt.WindowModal,
                   application=QtCore.Qt.ApplicationModal)
@@ -64,8 +65,7 @@ class Dialog(QtWidgets.QDialog):
 
 
 if __name__ == "__main__":
-    import sys
-    app = widgets.Application(sys.argv)
+    app = widgets.Application.create_default_app()
     widget = Dialog()
     widget.showMaximized()
     app.exec_()
