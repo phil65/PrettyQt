@@ -35,8 +35,8 @@ class Settings(QtCore.QSettings):
     def set_value(self, key, value):
         self.setValue(key, value)
 
-    def value(self, value, default=None):
-        super().value(value, default)
+    def value(self, key, default=None):
+        return super().value(key, default)
 
     @classmethod
     def set_default_format(cls, fmt):
@@ -85,3 +85,7 @@ class Settings(QtCore.QSettings):
         self.beginReadArray(prefix)
         yield None
         self.endArray()
+
+
+if __name__ == "__main__":
+    settings = Settings(settings_id="test")
