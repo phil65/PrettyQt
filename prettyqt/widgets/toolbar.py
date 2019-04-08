@@ -33,18 +33,18 @@ class Toolbar(QtWidgets.QToolBar):
         btn = widgets.ToolButton.for_menu(menu)
         btn.setText(label)
         if style:
-            btn.setToolButtonStyle(STYLES[style])
+            btn.setToolButtonStyle(STYLES.get(style, "text_below_icon"))
         btn.set_icon(icon)
         self.menu_buttons.append(btn)
         self.addWidget(btn)
         return btn
 
-    def set_style(self, style: int):
+    def set_style(self, style: str):
         if style is None:
             return None
-        self.setToolButtonStyle(style)
+        self.setToolButtonStyle(STYLES.get(style, 0))
         for btn in self.menu_buttons:
-            btn.setToolButtonStyle(style)
+            btn.setToolButtonStyle(STYLES.get(style, 0))
 
     def add_action(self, label: str, icon, callback: Callable, checkable=False):
         if isinstance(icon, str):
