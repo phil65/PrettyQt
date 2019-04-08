@@ -15,6 +15,7 @@ from .palette import Palette
 from .standarditem import StandardItem
 from .standarditemmodel import StandardItemModel
 from .textcharformat import TextCharFormat
+from .syntaxhighlighter import SyntaxHighlighter
 from .keysequence import KeySequence
 
 
@@ -28,4 +29,5 @@ __all__ = ["RegExpValidator",
            "StandardItem",
            "StandardItemModel",
            "TextCharFormat",
+           "SyntaxHighlighter",
            "KeySequence"]
