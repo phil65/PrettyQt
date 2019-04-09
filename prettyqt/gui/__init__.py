@@ -14,6 +14,7 @@ from .pen import Pen
 from .pixmap import Pixmap
 from .painter import Painter
 from .palette import Palette
+from .cursor import Cursor
 from .standarditem import StandardItem
 from .standarditemmodel import StandardItemModel
 from .textcharformat import TextCharFormat
@@ -30,6 +31,7 @@ __all__ = ["RegExpValidator",
            "Pixmap",
            "Painter",
            "Palette",
+           "Cursor",
            "StandardItem",
            "StandardItemModel",
            "TextCharFormat",
