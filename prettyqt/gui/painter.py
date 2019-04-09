@@ -29,3 +29,7 @@ class Painter(QtGui.QPainter):
         if pen_type not in PEN_TYPES:
             raise ValueError("Invalid value for pen_type.")
         self.setPen(PEN_TYPES[pen_type])
+
+    def set_color(self, color):
+        color = QtGui.QColor(color)
+        self.setPen(color)
