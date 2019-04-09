@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from qtpy import QtWidgets, QtGui, QtCore
+from qtpy import QtGui, QtCore
 
 from prettyqt import widgets, gui, core
 
@@ -70,21 +70,21 @@ class SpanSlider(widgets.Slider):
         self.gradient_left = self.palette().color(gui.Palette.Dark).lighter(110)
         self.gradient_right = self.palette().color(gui.Palette.Dark).lighter(110)
 
-    @QtCore.Property(int)
+    @core.Property(int)
     def lower_value(self):
         return min(self.lower, self.upper)
 
     def set_lower_value(self, lower):
         self.set_span(lower, self.upper)
 
-    @QtCore.Property(int)
+    @core.Property(int)
     def upper_value(self):
         return max(self.lower, self.upper)
 
     def set_upper_value(self, upper):
         self.set_span(self.lower, upper)
 
-    @QtCore.Property(object)
+    @core.Property(object)
     def movement_mode(self):
         return self.movement
 
@@ -131,7 +131,7 @@ class SpanSlider(widgets.Slider):
             main = self.main_control == self.UPPER_HANDLE
             self.trigger_action(self.SliderMove, main)
 
-    @QtCore.Property(object)
+    @core.Property(object)
     def left_color(self):
         return self.gradient_left
 
@@ -139,7 +139,7 @@ class SpanSlider(widgets.Slider):
         self.gradient_left = color
         self.update()
 
-    @QtCore.Property(object)
+    @core.Property(object)
     def right_color(self):
         return self.gradient_right
 
@@ -151,11 +151,11 @@ class SpanSlider(widgets.Slider):
         if self.last_pressed == self.LOWER_HANDLE:
             if self.lower_pos != self.lower:
                 main = self.main_control == self.LOWER_HANDLE
-                self.trigger_action(QtWidgets.QAbstractSlider.SliderMove, main)
+                self.trigger_action(self.SliderMove, main)
         elif self.last_pressed == self.UPPER_HANDLE:
             if self.upper_pos != self.upper:
                 main = self.main_control == self.UPPER_HANDLE
-                self.trigger_action(QtWidgets.QAbstractSlider.SliderMove, main)
+                self.trigger_action(self.SliderMove, main)
 
     def pick(self, p):
         return p.x() if self.is_horizontal() else p.y()
@@ -175,22 +175,22 @@ class SpanSlider(widgets.Slider):
         alt_control = not main and alt_control == self.UPPER_HANDLE
         is_upper_handle = main_control or alt_control
         val = self.upper if is_upper_handle else self.lower
-        if action == QtWidgets.QAbstractSlider.SliderSingleStepAdd:
+        if action == self.SliderSingleStepAdd:
             up = is_upper_handle
             value = clamp(val + self.singleStep(), my_min, my_max)
-        elif action == QtWidgets.QAbstractSlider.SliderSingleStepSub:
+        elif action == self.SliderSingleStepSub:
             up = is_upper_handle
             value = clamp(val - self.singleStep(), my_min, my_max)
-        elif action == QtWidgets.QAbstractSlider.SliderToMinimum:
+        elif action == self.SliderToMinimum:
             value = my_min
             up = is_upper_handle
-        elif action == QtWidgets.QAbstractSlider.SliderToMaximum:
+        elif action == self.SliderToMaximum:
             value = my_max
             up = is_upper_handle
-        elif action == QtWidgets.QAbstractSlider.SliderMove:
+        elif action == self.SliderMove:
             up = is_upper_handle
             no = True
-        elif action == QtWidgets.QAbstractSlider.SliderNoAction:
+        elif action == self.SliderNoAction:
             no = True
 
         if not no and not up:
@@ -307,7 +307,7 @@ class SpanSlider(widgets.Slider):
                                groove.center().y(), groove.right(), groove.center().y())
 
         # draw groove
-        intersected = QtCore.QRectF(rect.intersected(groove))
+        intersected = core.RectF(rect.intersected(groove))
         gradient = QtGui.QLinearGradient(intersected.topLeft(), intersected.topRight())
         gradient.setColorAt(0, self.gradient_left)
         gradient.setColorAt(1, self.gradient_right)
@@ -450,8 +450,6 @@ class SpanSlider(widgets.Slider):
 
 
 if __name__ == "__main__":
-    import sys
-
     app = widgets.Application.create_default_app()
     slider = SpanSlider()
     slider.set_span(30, 70)
@@ -460,4 +458,4 @@ if __name__ == "__main__":
     slider.set_left_color(color)
     slider.set_right_color(color)
     slider.show()
-    sys.exit(app.exec_())
+    app.exec_()
