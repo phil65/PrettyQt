@@ -41,12 +41,9 @@ class MainWindow(QtWidgets.QMainWindow):
                        vertical: bool = True,
                        position: int = 1) -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, name=name, title=title)
-        widget = QtWidgets.QWidget()
+        widget = widgets.Widget()
         widget.setObjectName(f"{name}.widget")
-        if vertical:
-            layout = QtWidgets.QVBoxLayout(widget)
-        else:
-            layout = QtWidgets.QHBoxLayout(widget)
+        layout = widgets.BoxLayout("vertical" if vertical else "horizontal")
         layout.setContentsMargins(0, 0, 0, 0)
         dock_widget.setWidget(widget)
         self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dock_widget)
