@@ -14,6 +14,7 @@ from .point import Point
 from .timer import Timer
 from .translator import Translator
 from .rect import Rect
+from .rectf import RectF
 from .regexp import RegExp
 from .mimedata import MimeData
 from .runnable import Runnable
@@ -21,7 +22,7 @@ from .modelindex import ModelIndex
 from .threadpool import ThreadPool
 from .filesystemmodel import FileSystemModel
 
-from qtpy.QtCore import Slot, Signal
+from qtpy.QtCore import Slot, Signal, Property
 
 __all__ = ["Object",
            "Settings",
@@ -30,9 +31,11 @@ __all__ = ["Object",
            "Timer",
            "Translator",
            "Rect",
+           "RectF",
            "MimeData",
            "FileSystemModel",
            "Slot",
+           "Property",
            "RegExp",
            "Runnable",
            "ModelIndex",
