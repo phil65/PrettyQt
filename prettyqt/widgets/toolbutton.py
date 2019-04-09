@@ -26,8 +26,9 @@ class ToolButton(QtWidgets.QToolButton):
             self.setShortcut(shortcut)
 
     @classmethod
-    def for_menu(cls, menu):
+    def for_menu(cls, menu, icon=None):
         btn = cls()
         btn.setMenu(menu)
         btn.setPopupMode(cls.InstantPopup)
+        btn.set_icon(icon)
         return btn
