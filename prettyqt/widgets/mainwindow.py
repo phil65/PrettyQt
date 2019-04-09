@@ -3,8 +3,6 @@
 @author: Philipp Temminghoff
 """
 
-import sys
-
 from prettyqt import widgets
 from qtpy import QtWidgets, QtCore
 
@@ -51,6 +49,8 @@ class MainWindow(QtWidgets.QMainWindow):
         return dock_widget
 
     def toggle_fullscreen(self):
+        """toggle between fullscreen and regular size
+        """
         if self.isFullScreen():
             self.showNormal()
         else:
@@ -58,7 +58,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 if __name__ == "__main__":
-    app = widgets.Application(sys.argv)
+    app = widgets.Application.create_default_app()
     form = MainWindow()
     form.show()
     app.exec_()
