@@ -8,6 +8,7 @@ contains QtGui-based classes
 from .regexpvalidator import RegExpValidator
 from .color import Color
 from .font import Font
+from .fontmetrics import FontMetrics
 from .icon import Icon
 from .pen import Pen
 from .pixmap import Pixmap
@@ -23,6 +24,7 @@ from .keysequence import KeySequence
 __all__ = ["RegExpValidator",
            "Color",
            "Font",
+           "FontMetrics",
            "Icon",
            "Pen",
            "Pixmap",
