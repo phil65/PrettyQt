@@ -9,11 +9,13 @@ COLORS = dict(transparent=QtCore.Qt.transparent)
 
 PEN_TYPES = dict(none=QtCore.Qt.NoPen)
 
+COMP_MODES = dict(source_at_top=QtGui.QPainter.CompositionMode_SourceAtop)
+
 
 class Painter(QtGui.QPainter):
 
     def draw_image(self, point, frame_buffer):
-        self.setCompositionMode(QtGui.QPainter.CompositionMode_SourceAtop)
+        self.set_composition_mode("source_at_top")
         self.drawImage(point, frame_buffer)
         self.end()
 
@@ -33,3 +35,8 @@ class Painter(QtGui.QPainter):
     def set_color(self, color):
         color = QtGui.QColor(color)
         self.setPen(color)
+
+    def set_composition_mode(self, mode):
+        if mode not in COMP_MODES:
+            raise ValueError("Invalid value for composition mode.")
+        self.setCompositionMode(COMP_MODES[mode])
