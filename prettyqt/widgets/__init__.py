@@ -11,6 +11,7 @@ from .widget import Widget
 from .graphicsitem import GraphicsItem
 from .style import Style
 from .styleoption import StyleOption
+from .sizepolicy import SizePolicy
 from .stylepainter import StylePainter
 from .dialog import Dialog
 from .messagebox import MessageBox
@@ -70,6 +71,7 @@ __all__ = ["Application",
            "GraphicsItem",
            "Style",
            "StyleOption",
+           "SizePolicy",
            "StylePainter",
            "Dialog",
            "MessageBox",
