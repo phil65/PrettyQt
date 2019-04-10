@@ -43,13 +43,13 @@ class TabBar(QtWidgets.QTabBar):
     def set_icon_size(self, size: int):
         self.setIconSize(QtCore.QSize(size, size))
 
-    def set_tab_button(self, index, widget, position="left"):
+    def set_tab_button(self, index, widget, position: str = "left"):
         if position == "left":
             self.setTabButton(index, QtWidgets.QTabBar.LeftSide, widget)
         else:
             self.setTabButton(index, QtWidgets.QTabBar.RightSide, widget)
 
-    def set_remove_behaviour(self, mode):
+    def set_remove_behaviour(self, mode: str):
         """sets the remove hehaviour
 
         What tab should be set as current when removeTab is called
@@ -62,7 +62,7 @@ class TabBar(QtWidgets.QTabBar):
             raise ValueError("Mode not available")
         self.setSelectionBehaviorOnRemove(SELECTION_MODES[mode])
 
-    def set_elide_mode(self, mode):
+    def set_elide_mode(self, mode: str):
         if mode not in ELIDE_MODES:
             raise ValueError("Mode not available")
         self.setElideMode(ELIDE_MODES[mode])

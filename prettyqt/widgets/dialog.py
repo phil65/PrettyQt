@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Optional
+
 from qtpy import QtWidgets, QtCore
 import qtawesome as qta
 
@@ -16,7 +18,11 @@ class Dialog(QtWidgets.QDialog):
 
     DEFAULT_SIZE = (1500, 1000)
 
-    def __init__(self, title="", icon=None, parent=None, layout=None):
+    def __init__(self,
+                 title: str = "",
+                 icon=None,
+                 parent=None,
+                 layout: Optional[str] = None):
         super().__init__(parent=parent)
         if self.DEFAULT_SIZE:
             self.resize(*self.DEFAULT_SIZE)
@@ -29,7 +35,7 @@ class Dialog(QtWidgets.QDialog):
             self.layout = widgets.BoxLayout(layout)
             self.setLayout(self.layout)
 
-    def set_modality(self, modality="window"):
+    def set_modality(self, modality: str = "window"):
         if modality not in MODALITIES:
             raise ValueError("Invalid value for modality.")
         self.setWindowModality(MODALITIES[modality])

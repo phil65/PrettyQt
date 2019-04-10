@@ -29,19 +29,22 @@ class ComboBox(QtWidgets.QComboBox):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def add_item(self, label, data=None, icon=None):
+    def add_item(self,
+                 label: str,
+                 data=None,
+                 icon=None):
         if icon is not None:
             self.addItem(icon, label, userData=data)
         else:
             self.addItem(label, userData=data)
 
-    def set_insert_policy(self, policy):
+    def set_insert_policy(self, policy: str):
         if policy not in INSERT_POLICIES:
             raise ValueError("Policy not available")
         policy = INSERT_POLICIES.get(policy)
         self.setInsertPolicy(policy)
 
-    def set_size_policy(self, policy):
+    def set_size_policy(self, policy: str):
         """set size policy
 
         Args:
@@ -58,7 +61,7 @@ class ComboBox(QtWidgets.QComboBox):
     def set_icon_size(self, size: int):
         self.setIconSize(QtCore.QSize(size, size))
 
-    def set_min_char_length(self, chars):
+    def set_min_char_length(self, chars: int):
         self.setMinimumContentsLength(chars)
 
 

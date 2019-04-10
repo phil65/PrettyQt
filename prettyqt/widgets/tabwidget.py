@@ -37,7 +37,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self.setMovable(True)
 
     @QtCore.Slot(int, QtCore.QPoint)
-    def detach_tab(self, index, point):
+    def detach_tab(self, index: int, point: QtCore.QPoint):
         """
         Detach the tab by removing it's contents and placing them in
         a DetachedTab window

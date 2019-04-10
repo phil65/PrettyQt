@@ -20,16 +20,16 @@ class TransposeProxyModel(QtCore.QAbstractProxyModel):
     def mapToSource(self, proxy_index):
         return self._source_model.index(proxy_index.column(), proxy_index.row())
 
-    def index(self, row, column, parent=None):
+    def index(self, row: int, column: int, parent=None) -> QtCore.QModelIndex:
         return self.createIndex(row, column)
 
     def parent(self, index):
         return None
 
-    def rowCount(self, parent):
+    def rowCount(self, parent) -> int:
         return self._source_model.columnCount(parent)
 
-    def columnCount(self, parent):
+    def columnCount(self, parent) -> int:
         return self._source_model.rowCount(parent)
 
     def data(self, index, role=QtCore.Qt.DisplayRole):
@@ -37,5 +37,5 @@ class TransposeProxyModel(QtCore.QAbstractProxyModel):
             return False
         return self._source_model.data(self.mapFromSource(index), role)
 
-    def headerData(self, section, orientation, role):
+    def headerData(self, section: int, orientation, role):
         return self._source_model.headerData(section, orientation, role)

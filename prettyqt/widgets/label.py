@@ -3,8 +3,11 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Union, Optional
 import pathlib
+
 from qtpy import QtWidgets, QtCore
+
 from prettyqt import gui, widgets
 
 
@@ -25,7 +28,9 @@ TEXT_INTERACTION = dict(none=QtCore.Qt.NoTextInteraction,
 
 class Label(QtWidgets.QLabel):
 
-    def set_alignment(self, horizontal=None, vertical=None):
+    def set_alignment(self,
+                      horizontal: Optional[str]= None,
+                      vertical: Optional[str] = None):
         if horizontal is None and vertical is not None:
             flag = V_ALIGNMENTS.get(vertical)
         elif vertical is None and horizontal is not None:
@@ -36,7 +41,9 @@ class Label(QtWidgets.QLabel):
             return
         self.setAlignment(flag)
 
-    def set_image(self, path, width=300):
+    def set_image(self,
+                  path: Union[pathlib.Path, str],
+                  width: int = 300):
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText("<html><head/><body><p>"
@@ -44,7 +51,9 @@ class Label(QtWidgets.QLabel):
                      "</p></body></html>")
 
     @classmethod
-    def image_from_path(cls, path: pathlib.Path, parent=None) -> "Label":
+    def image_from_path(cls,
+                        path: Union[pathlib.Path, str],
+                        parent=None) -> "Label":
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)
         label.setPixmap(pixmap)

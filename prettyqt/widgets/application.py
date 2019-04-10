@@ -4,6 +4,7 @@
 """
 
 import sys
+import pathlib
 
 from typing import Optional
 from qtpy import QtWidgets, QtCore
@@ -20,7 +21,7 @@ class Application(QtWidgets.QApplication):
                 icon = qta.icon(icon, color="lightgray")
             self.setWindowIcon(icon)
 
-    def load_language_file(self, path):
+    def load_language_file(self, path: pathlib.Path):
         translator = core.Translator(self)
         translator.load(str(path))
         self.installTranslator(translator)
@@ -57,7 +58,7 @@ class Application(QtWidgets.QApplication):
         cb.setText(text, mode=cb.Clipboard)
 
     @classmethod
-    def get_mainwindow(cls):
+    def get_mainwindow(cls) -> Optional[QtWidgets.QMainWindow]:
         widget_list = cls.instance().topLevelWidgets()
         for widget in widget_list:
             if isinstance(widget, QtWidgets.QMainWindow):
