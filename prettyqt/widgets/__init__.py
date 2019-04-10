@@ -8,6 +8,7 @@ contains QtWidgets-based classes
 from .application import Application
 
 from .widget import Widget
+from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
 from .style import Style
 from .styleoption import StyleOption
@@ -70,6 +71,7 @@ from .composed.buttondelegate import ButtonDelegate
 
 __all__ = ["Application",
            "Widget",
+           "DesktopWidget",
            "GraphicsItem",
            "Style",
            "StyleOption",
