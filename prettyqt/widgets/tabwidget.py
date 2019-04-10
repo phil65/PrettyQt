@@ -3,10 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets, QtCore, QtGui
 
 import qtawesome as qta
-from prettyqt import widgets, gui
+from prettyqt import widgets
 
 
 class TabWidget(QtWidgets.QTabWidget):
@@ -33,9 +33,6 @@ class TabWidget(QtWidgets.QTabWidget):
         QtWidgets.qApp.aboutToQuit.connect(self.close_detached_tabs)
 
         self.setEnabled(True)
-        font = gui.Font()
-        font.setPointSize(9)
-        self.setFont(font)
         self.setTabsClosable(True)
         self.setMovable(True)
 
@@ -148,7 +145,7 @@ class DetachedTab(QtWidgets.QMainWindow):
     Attributes:
         on_close: signal, emitted when window is closed (widget, title, icon)
     """
-    on_close = QtCore.Signal(QtWidgets.QWidget, str, gui.Icon)
+    on_close = QtCore.Signal(QtWidgets.QWidget, str, QtGui.QIcon)
 
     def __init__(self, name, widget):
         super().__init__(None)
