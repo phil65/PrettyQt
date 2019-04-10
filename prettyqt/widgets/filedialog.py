@@ -3,6 +3,7 @@
 @author: Philipp Temminghoff
 """
 
+from typing import List
 import pathlib
 
 from qtpy import QtWidgets
@@ -41,7 +42,7 @@ class FileDialog(QtWidgets.QFileDialog):
         else:
             self.setAcceptMode(self.AcceptOpen)
 
-    def set_label_text(self, label):
+    def set_label_text(self, label: str):
         if label not in LABELS:
             raise ValueError(f"Invalid value. Valid values: {LABELS.keys()}")
         self.setLabelText(LABELS[label])
@@ -57,10 +58,10 @@ class FileDialog(QtWidgets.QFileDialog):
         """
         self.setFileMode(MODES[mode])
 
-    def selected_files(self):
+    def selected_files(self) -> List[pathlib.Path]:
         return [pathlib.Path(p) for p in self.selectedFiles()]
 
-    def selected_file(self):
+    def selected_file(self) -> pathlib.Path:
         selected = self.selectedFiles()
         if selected:
             return pathlib.Path(selected[0])
@@ -75,7 +76,7 @@ class FileDialog(QtWidgets.QFileDialog):
 
     def choose(self):
         result = super().exec_()
-        if result != QtWidgets.QDialog.Accepted:
+        if result != self.Accepted:
             return None
         paths = self.selected_files()
         folder_path = paths[0].parent
@@ -84,7 +85,7 @@ class FileDialog(QtWidgets.QFileDialog):
             settings.setValue(self.path_id, str(folder_path))
         return paths
 
-    def set_filter(self, extension_dict):
+    def set_filter(self, extension_dict: dict):
         """set filter based on given dictionary
 
         dict must contain "'name': ['.ext1', '.ext2']" as key-value pairs
