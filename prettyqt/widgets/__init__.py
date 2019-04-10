@@ -56,6 +56,7 @@ from .progressdialog import ProgressDialog
 from .fontdialog import FontDialog
 from .filedialog import FileDialog
 from .dialogbuttonbox import DialogButtonBox
+from .buttongroup import ButtonGroup
 from .groupbox import GroupBox
 from .splitter import Splitter
 
@@ -117,6 +118,7 @@ __all__ = ["Application",
            "FontDialog",
            "FileDialog",
            "DialogButtonBox",
+           "ButtonGroup",
            "GroupBox",
            "Splitter",
            "MainWindow",
