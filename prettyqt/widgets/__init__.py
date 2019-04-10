@@ -49,6 +49,7 @@ from .tableview import TableView
 
 from .splashscreen import SplashScreen
 from .progressdialog import ProgressDialog
+from .fontdialog import FontDialog
 from .filedialog import FileDialog
 from .dialogbuttonbox import DialogButtonBox
 from .groupbox import GroupBox
@@ -105,6 +106,7 @@ __all__ = ["Application",
            "TableView",
            "SplashScreen",
            "ProgressDialog",
+           "FontDialog",
            "FileDialog",
            "DialogButtonBox",
            "GroupBox",
