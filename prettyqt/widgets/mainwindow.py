@@ -6,6 +6,11 @@
 from prettyqt import widgets
 from qtpy import QtWidgets, QtCore
 
+DOCK_POSITIONS = dict(top=QtCore.Qt.TopDockWidgetArea,
+                      bottom=QtCore.Qt.BottomDockWidgetArea,
+                      left=QtCore.Qt.LeftDockWidgetArea,
+                      right=QtCore.Qt.RightDockWidgetArea)
+
 
 class MainWindow(QtWidgets.QMainWindow):
     """
@@ -37,9 +42,9 @@ class MainWindow(QtWidgets.QMainWindow):
                        name: str,
                        title: str,
                        vertical: bool = True,
-                       position: int = 1) -> widgets.DockWidget:
+                       position: str = "left") -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, name=name, title=title)
-        widget = QtWidgets.QWidget()
+        widget = widgets.Widget()
         widget.setObjectName(f"{name}.widget")
         if vertical:
             layout = QtWidgets.QVBoxLayout(widget)
@@ -47,6 +52,7 @@ class MainWindow(QtWidgets.QMainWindow):
             layout = QtWidgets.QHBoxLayout(widget)
         layout.setContentsMargins(0, 0, 0, 0)
         dock_widget.setWidget(widget)
+        position = DOCK_POSITIONS[position]
         self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dock_widget)
         dock_widget.layout = layout
         return dock_widget
