@@ -38,7 +38,7 @@ class Menu(QtWidgets.QMenu):
         Returns:
             Separator widget
         """
-        label = QtWidgets.QLabel(text)
+        label = widgets.Label(text)
         label.setMinimumWidth(self.minimumWidth())
         label.setStyleSheet("background:lightgrey")
         label.setAlignment(QtCore.Qt.AlignCenter)
@@ -54,7 +54,7 @@ class Menu(QtWidgets.QMenu):
                    checked: bool = False,
                    shortcut: Optional[str] = None,
                    status_tip: Optional[str] = None
-                   ) -> QtWidgets.QAction:
+                   ) -> widgets.Action:
         """Add an action to the menu
 
         Args:
