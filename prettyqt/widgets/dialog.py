@@ -16,15 +16,23 @@ class Dialog(QtWidgets.QDialog):
 
     DEFAULT_SIZE = (1500, 1000)
 
-    def __init__(self, title="", icon=None, parent=None, horizontal=False):
+    def __init__(self, title="", icon=None, parent=None, layout=None):
         super().__init__(parent=parent)
-        self.resize(*self.DEFAULT_SIZE)
-        self.setWindowModality(QtCore.Qt.WindowModal)
+        if self.DEFAULT_SIZE:
+            self.resize(*self.DEFAULT_SIZE)
+        self.set_modality("window")
         self.setWindowTitle(title)
         self.set_icon(icon)
         self.delete_on_close()
-        self.layout = widgets.BoxLayout("horizontal" if horizontal else "vertical")
-        self.setLayout(self.layout)
+        self.layout = None
+        if layout in ["horizontal", "vertical"]:
+            self.layout = widgets.BoxLayout(layout)
+            self.setLayout(self.layout)
+
+    def set_modality(self, modality="window"):
+        if modality not in MODALITIES:
+            raise ValueError("Invalid value for modality.")
+        self.setWindowModality(MODALITIES[modality])
 
     def delete_on_close(self):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
