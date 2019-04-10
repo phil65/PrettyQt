@@ -40,6 +40,8 @@ from .label import Label
 from .pushbutton import PushButton
 from .radiobutton import RadioButton
 from .combobox import ComboBox
+from .spinbox import SpinBox
+from .doublespinbox import DoubleSpinBox
 from .checkbox import CheckBox
 from .lineedit import LineEdit
 from .textedit import TextEdit
@@ -100,6 +102,8 @@ __all__ = ["Application",
            "PushButton",
            "RadioButton",
            "ComboBox",
+           "SpinBox",
+           "DoubleSpinBox",
            "CheckBox",
            "LineEdit",
            "TextEdit",
