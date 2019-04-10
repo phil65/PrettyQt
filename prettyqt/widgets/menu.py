@@ -5,7 +5,7 @@
 
 from typing import Callable, Optional, Any
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets
 from prettyqt import widgets
 
 import qtawesome as qta
@@ -29,7 +29,7 @@ class Menu(QtWidgets.QMenu):
         if icon:
             self.setIcon(icon)
 
-    def _separator(self, text: str) -> QtWidgets.QWidgetAction:
+    def _separator(self, text: str) -> widgets.WidgetAction:
         """returns a separator showing a label
 
         Args:
@@ -41,8 +41,8 @@ class Menu(QtWidgets.QMenu):
         label = widgets.Label(text)
         label.setMinimumWidth(self.minimumWidth())
         label.setStyleSheet("background:lightgrey")
-        label.setAlignment(QtCore.Qt.AlignCenter)
-        separator = QtWidgets.QWidgetAction(self)
+        label.set_alignment(horizontal="center")
+        separator = widgets.WidgetAction(self)
         separator.setDefaultWidget(label)
         return separator
 
