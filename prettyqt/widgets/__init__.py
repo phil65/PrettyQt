@@ -7,7 +7,7 @@ contains QtWidgets-based classes
 
 from .application import Application
 
-from .widget import Widget
+from .widget import Widget, WidgetMixin
 from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
 from .style import Style
@@ -75,6 +75,7 @@ from .composed.buttondelegate import ButtonDelegate
 from .composed.selectionwidget import SelectionWidget
 
 __all__ = ["Application",
+           "WidgetMixin",
            "Widget",
            "DesktopWidget",
            "GraphicsItem",

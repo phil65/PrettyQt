@@ -12,7 +12,7 @@ DOCK_POSITIONS = dict(top=QtCore.Qt.TopDockWidgetArea,
                       right=QtCore.Qt.RightDockWidgetArea)
 
 
-class MainWindow(QtWidgets.QMainWindow):
+class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
     """
     Class for our mainWindow
     includes all docks, a centralwidget and a toolbar
