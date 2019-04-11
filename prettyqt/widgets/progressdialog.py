@@ -4,8 +4,9 @@
 """
 
 from qtpy import QtWidgets, QtCore
-from prettyqt import widgets
 import qtawesome as qta
+
+from prettyqt import widgets
 
 
 class ProgressDialog(QtWidgets.QProgressDialog):

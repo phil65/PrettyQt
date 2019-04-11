@@ -5,8 +5,9 @@
 
 from typing import Dict
 
-from prettyqt import widgets
 from qtpy import QtWidgets, QtCore
+
+from prettyqt import widgets
 
 DOCK_POSITIONS = dict(top=QtCore.Qt.TopDockWidgetArea,
                       bottom=QtCore.Qt.BottomDockWidgetArea,

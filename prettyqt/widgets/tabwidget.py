@@ -6,6 +6,7 @@
 from qtpy import QtWidgets, QtCore, QtGui
 
 import qtawesome as qta
+
 from prettyqt import widgets
 
 

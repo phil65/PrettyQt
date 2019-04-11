@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtWidgets
+
 from prettyqt import gui
 
 

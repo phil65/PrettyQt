@@ -5,6 +5,7 @@
 
 
 from qtpy import QtWidgets, QtCore
+
 from prettyqt import widgets
 
 

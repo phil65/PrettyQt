@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtCore
+
 from prettyqt import core, widgets
 
 

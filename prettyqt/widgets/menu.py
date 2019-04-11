@@ -6,6 +6,7 @@
 from typing import Callable, Optional, Any
 
 from qtpy import QtWidgets
+
 from prettyqt import widgets
 
 import qtawesome as qta
