@@ -36,6 +36,9 @@ class GridLayout(QtWidgets.QGridLayout):
         else:
             return self.itemAt(idx)
 
+    def __len__(self):
+        return self.count()
+
     def set_size_mode(self, mode: str):
         if mode not in MODES:
             raise ValueError(f"{mode} not a valid size mode.")
