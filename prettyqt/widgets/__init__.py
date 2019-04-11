@@ -28,6 +28,7 @@ from .frame import Frame
 from .action import Action
 from .widgetaction import WidgetAction
 from .toolbutton import ToolButton
+from .tooltip import ToolTip
 from .menu import Menu
 from .menubar import MenuBar
 from .statusbar import StatusBar
@@ -92,6 +93,7 @@ __all__ = ["Application",
            "Action",
            "WidgetAction",
            "ToolButton",
+           "ToolTip",
            "Menu",
            "MenuBar",
            "StatusBar",
