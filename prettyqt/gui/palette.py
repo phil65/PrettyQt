@@ -8,6 +8,6 @@ from qtpy import QtGui
 
 class Palette(QtGui.QPalette):
 
-    def inactive_as_active(self):
+    def highlight_inactive(self):
         color = self.color(self.Active, self.Highlight)
         self.setColor(self.Inactive, self.Highlight, color)
