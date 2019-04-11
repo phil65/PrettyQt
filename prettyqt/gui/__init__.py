@@ -19,6 +19,7 @@ from .standarditem import StandardItem
 from .standarditemmodel import StandardItemModel
 from .textcharformat import TextCharFormat
 from .syntaxhighlighter import SyntaxHighlighter
+from .pdfwriter import PdfWriter
 from .keysequence import KeySequence
 
 
@@ -36,4 +37,5 @@ __all__ = ["RegExpValidator",
            "StandardItemModel",
            "TextCharFormat",
            "SyntaxHighlighter",
+           "PdfWriter",
            "KeySequence"]
