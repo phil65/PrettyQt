@@ -30,6 +30,12 @@ class GridLayout(QtWidgets.QGridLayout):
         else:
             self.addLayout(value, rowstart, colstart, rowspan, colspan)
 
+    def __getitem__(self, idx):
+        if isinstance(idx, tuple):
+            return self.itemAtPosition(*idx)
+        else:
+            return self.itemAt(idx)
+
     def set_size_mode(self, mode: str):
         if mode not in MODES:
             raise ValueError(f"{mode} not a valid size mode.")
