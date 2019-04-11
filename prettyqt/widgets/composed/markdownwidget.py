@@ -57,12 +57,12 @@ class MarkdownWindow(widgets.MainWindow):
 
     def open_new_file(self):
         try:
-            fname = widgets.FileDialog.getOpenFileName(self,
-                                                       'open file',
-                                                       '',
-                                                       'All Text Files (*.md *.markdown *.txt *.*)',
-                                                       None,
-                                                       widgets.FileDialog.DontUseNativeDialog)
+            dlg = widgets.FileDialog
+            fname = dlg.getOpenFileName(self,
+                                        'open file',
+                                        '',
+                                        'All Text Files (*.md *.markdown *.txt *.*)',
+                                        None)
             self.web_view.show_markdown(fname[0])
         except UnicodeDecodeError:
             self.statusBar().showMessage('Please select only text files')
