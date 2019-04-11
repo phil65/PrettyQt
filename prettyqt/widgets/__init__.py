@@ -71,6 +71,7 @@ from .composed.markdownwidget import MarkdownWindow, MarkdownWidget
 from .composed.imageviewer import ImageViewer
 from .composed.popupinfo import PopupInfo
 from .composed.buttondelegate import ButtonDelegate
+from .composed.selectionwidget import SelectionWidget
 
 __all__ = ["Application",
            "Widget",
@@ -128,6 +129,7 @@ __all__ = ["Application",
            "Callout",
            "PopupInfo",
            "ButtonDelegate",
+           "SelectionWidget",
            "Image",
            "ImageViewer",
            "MarkdownWindow",
