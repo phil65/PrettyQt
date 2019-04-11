@@ -68,7 +68,7 @@ from .itemdelegate import ItemDelegate
 from .composed.spanslider import SpanSlider
 from .composed.waitingspinner import WaitingSpinner
 from .composed.callout import Callout
-from .composed.markdownwidget import MarkdownWindow, MarkdownWidget
+from .composed.markdownwidget import MarkdownWindow
 from .composed.imageviewer import ImageViewer
 from .composed.popupinfo import PopupInfo
 from .composed.buttondelegate import ButtonDelegate
@@ -135,5 +135,4 @@ __all__ = ["Application",
            "SelectionWidget",
            "Image",
            "ImageViewer",
-           "MarkdownWindow",
-           "MarkdownWidget"]
+           "MarkdownWindow"]

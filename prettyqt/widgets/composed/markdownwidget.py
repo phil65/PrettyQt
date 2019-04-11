@@ -5,15 +5,13 @@
 
 from prettyqt import gui, widgets
 
-import markdown
-
 
 class MarkdownWindow(widgets.MainWindow):
 
     def __init__(self):
         super().__init__()
         self.resize(500, 500)
-        self.web_view = MarkdownWidget(self)
+        self.web_view = widgets.TextBrowser(self)
         self.setCentralWidget(self.web_view)
         # self.web_view.loadFinished.connect(self._load_finished)
         self.create_menu()
@@ -42,23 +40,6 @@ class MarkdownWindow(widgets.MainWindow):
         menu_file.addAction(act_open)
         menu_file.addAction(act_exit)
 
-    def open_new_file(self):
-        try:
-            fname = widgets.FileDialog.getOpenFileName(self,
-                                                       'open file',
-                                                       '',
-                                                       'All Text Files (*.md *.markdown *.txt *.*)',
-                                                       None,
-                                                       widgets.FileDialog.DontUseNativeDialog)
-            self.web_view.show_markdown(fname[0])
-        except UnicodeDecodeError:
-            self.statusBar().showMessage('Please select only text files')
-        except IOError:
-            self.statusBar().showMessage('File open canceled!')
-
-
-class MarkdownWidget(widgets.TextBrowser):
-
     # def dragEnterEvent(self, event):
     #     u = event.mimeData().urls()
     #     for url in u:
@@ -74,13 +55,19 @@ class MarkdownWidget(widgets.TextBrowser):
     #     event.accept()
     #     self.show_markdown(self.filePath)
 
-    def contextMenuEvent(self, event):
-        pass
-
-    def show_markdown(self, file_path):
-        markdown_file = open(file_path)
-        file_content = markdown_file.read()
-        self.setHtml(markdown.markdown(file_content))
+    def open_new_file(self):
+        try:
+            fname = widgets.FileDialog.getOpenFileName(self,
+                                                       'open file',
+                                                       '',
+                                                       'All Text Files (*.md *.markdown *.txt *.*)',
+                                                       None,
+                                                       widgets.FileDialog.DontUseNativeDialog)
+            self.web_view.show_markdown(fname[0])
+        except UnicodeDecodeError:
+            self.statusBar().showMessage('Please select only text files')
+        except IOError:
+            self.statusBar().showMessage('File open canceled!')
 
 
 def main():
