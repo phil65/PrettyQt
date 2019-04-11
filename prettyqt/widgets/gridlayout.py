@@ -19,6 +19,14 @@ ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
 
 class GridLayout(QtWidgets.QGridLayout):
 
+    def __setitem__(self, idx, value):
+        row, col = idx
+        rowlen = row.stop - row.start + 1 if isinstance(row, slice) else 1
+        collen = col.stop - col.start + 1 if isinstance(col, slice) else 1
+        rowstart = row.start if isinstance(row, slice) else row
+        colstart = col.start if isinstance(col, slice) else col
+        self.addWidget(value, rowstart, colstart, rowlen, collen)
+
     def set_size_mode(self, mode: str):
         if mode not in MODES:
             raise ValueError(f"{mode} not a valid size mode.")
@@ -33,6 +41,9 @@ class GridLayout(QtWidgets.QGridLayout):
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     layout = GridLayout()
+    layout[1, 5:6] = widgets.RadioButton("1")
+    layout[3:5, 7:8] = widgets.RadioButton("2")
+    layout[3:5, 1:4] = widgets.RadioButton("3")
     widget = widgets.Widget()
     widget.setLayout(layout)
     widget.show()
