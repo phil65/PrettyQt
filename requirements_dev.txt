@@ -9,7 +9,7 @@ tox==3.8.6
 coverage==4.5.3
 codecov==2.0.15
 
-Sphinx==2.0.0
+Sphinx==2.0.1
 sphinx_rtd_theme==0.4.3
 sphinx-autodoc-annotation==1.0.post1
 sphinx-autodoc-typehints==1.6.0
