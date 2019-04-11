@@ -21,11 +21,14 @@ class GridLayout(QtWidgets.QGridLayout):
 
     def __setitem__(self, idx, value):
         row, col = idx
-        rowlen = row.stop - row.start + 1 if isinstance(row, slice) else 1
-        collen = col.stop - col.start + 1 if isinstance(col, slice) else 1
+        rowspan = row.stop - row.start + 1 if isinstance(row, slice) else 1
+        colspan = col.stop - col.start + 1 if isinstance(col, slice) else 1
         rowstart = row.start if isinstance(row, slice) else row
         colstart = col.start if isinstance(col, slice) else col
-        self.addWidget(value, rowstart, colstart, rowlen, collen)
+        if isinstance(value, QtWidgets.QWidget):
+            self.addWidget(value, rowstart, colstart, rowspan, colspan)
+        else:
+            self.addLayout(value, rowstart, colstart, rowspan, colspan)
 
     def set_size_mode(self, mode: str):
         if mode not in MODES:
