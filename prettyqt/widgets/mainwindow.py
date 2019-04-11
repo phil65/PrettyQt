@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Dict
+
 from prettyqt import widgets
 from qtpy import QtWidgets, QtCore
 
@@ -37,6 +39,10 @@ class MainWindow(QtWidgets.QMainWindow):
     #     application.settings[f"{prefix}.state"] = self.saveState()
     #     super().closeEvent(event)
     #     event.accept()
+
+    def set_stylesheet(self, item, dct: Dict[str, str]) -> str:
+        ss = "; ".join(f"{k}: {v}" for k, v in dct.items())
+        self.setStyleSheet(f"{item} {{{ss};}}")
 
     def add_dockwidget(self,
                        name: str,
