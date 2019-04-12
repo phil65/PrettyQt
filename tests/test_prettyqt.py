@@ -23,3 +23,11 @@ def test_settings():
     settings.set_value("test", "value")
     assert settings.contains("test")
     assert settings.value("test") == "value"
+
+
+def test_textbrowser():
+    app = widgets.Application.create_default_app()
+    reader = widgets.TextBrowser()
+    reader.show()
+    reader.close()
+    assert True
