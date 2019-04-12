@@ -69,6 +69,6 @@ if __name__ == "__main__":
              "Tab": "\t",
              "Comma": ","}
     widget.add_items(items)
-    widget.add_custom(regex="\S{1}")
+    widget.add_custom(regex=r"\S{1}")
     widget.show()
     app.exec_()
