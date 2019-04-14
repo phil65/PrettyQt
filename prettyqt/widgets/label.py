@@ -29,7 +29,7 @@ TEXT_INTERACTION = dict(none=QtCore.Qt.NoTextInteraction,
 class Label(QtWidgets.QLabel):
 
     def set_alignment(self,
-                      horizontal: Optional[str]= None,
+                      horizontal: Optional[str] = None,
                       vertical: Optional[str] = None):
         if horizontal is None and vertical is not None:
             flag = V_ALIGNMENTS.get(vertical)
