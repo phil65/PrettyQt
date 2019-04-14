@@ -9,6 +9,6 @@ from . import syntaxhighlighters
 
 __author__ = """Philipp Temminghoff"""
 __email__ = "phil65@kodi.tv"
-__version__ = "0.14.2"
+__version__ = "0.15.0"
 
 __all__ = ["core", "widgets", "gui", "syntaxhighlighters"]
