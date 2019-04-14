@@ -57,6 +57,7 @@ from .splashscreen import SplashScreen
 from .progressdialog import ProgressDialog
 from .fontdialog import FontDialog
 from .filedialog import FileDialog
+from .colordialog import ColorDialog
 from .dialogbuttonbox import DialogButtonBox
 from .buttongroup import ButtonGroup
 from .groupbox import GroupBox
@@ -122,6 +123,7 @@ __all__ = ["Application",
            "ProgressDialog",
            "FontDialog",
            "FileDialog",
+           "ColorDialog",
            "DialogButtonBox",
            "ButtonGroup",
            "GroupBox",
