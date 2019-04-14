@@ -6,6 +6,7 @@
 import pathlib
 
 from qtpy import QtCore, QtWidgets
+from prettyqt import core
 
 
 class FileSystemModel(QtWidgets.QFileSystemModel):
@@ -25,3 +26,12 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             path = index.data(self.FilePathRole)
             return pathlib.Path(path)
         return super().data(index, role)
+
+    def yield_child_indexes(self, index):
+        if not self.hasChildren(index):
+            return None
+        path = self.filePath(index)
+        flags = self.filter() | QtCore.QDir.NoDotAndDotDot
+        it = core.DirIterator(path, flags)
+        while it.hasNext():
+            yield self.index(it.next())
