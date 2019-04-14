@@ -3,8 +3,6 @@
 @author: Philipp Temminghoff
 """
 
-import sys
-
 from qtpy import QtWidgets
 
 import markdown
@@ -44,10 +42,11 @@ class TextBrowser(QtWidgets.QTextBrowser):
 
 
 def main():
-    qtapp = QtWidgets.QApplication(sys.argv)
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
     reader = TextBrowser()
     reader.show()
-    qtapp.exec_()
+    app.exec_()
 
 
 if __name__ == '__main__':
