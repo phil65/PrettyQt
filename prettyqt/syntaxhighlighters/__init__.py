@@ -6,8 +6,7 @@ contains some custom syntax highlighers
 """
 
 from .jsonhighlighter import JsonHighlighter
-from .yamlhighlighter import YamlHighlighter
 from .pythonhighlighter import PythonHighlighter
-
+from .yamlhighlighter import YamlHighlighter
 
 __all__ = ["JsonHighlighter", "YamlHighlighter", "PythonHighlighter"]

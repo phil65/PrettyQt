@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
 COLORS = dict(transparent=QtCore.Qt.transparent)
 

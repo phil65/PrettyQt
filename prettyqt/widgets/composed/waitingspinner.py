@@ -31,7 +31,7 @@ import math
 
 from qtpy import QtCore
 
-from prettyqt import widgets, core, gui
+from prettyqt import core, gui, widgets
 
 
 class BaseWaitingSpinner(widgets.Widget):

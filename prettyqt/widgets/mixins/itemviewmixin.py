@@ -3,11 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Generator, Any, Optional, List
 import logging
+from typing import Any, Generator, List, Optional
 
 from qtpy import QtCore, QtWidgets
-
 
 SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
                        extended=QtWidgets.QAbstractItemView.ExtendedSelection,

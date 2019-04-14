@@ -3,8 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets
 import qtawesome as qta
+from qtpy import QtWidgets
 
 
 class WidgetAction(QtWidgets.QWidgetAction):

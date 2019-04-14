@@ -3,8 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-import sys
 import pathlib
+import sys
 
 from prettyqt import widgets
 

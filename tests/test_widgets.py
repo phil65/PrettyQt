@@ -5,8 +5,8 @@
 
 import pytest
 
-
 from prettyqt import widgets
+
 app = widgets.Application.create_default_app()
 
 

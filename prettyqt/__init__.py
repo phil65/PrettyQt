@@ -2,10 +2,7 @@
 
 """Top-level package for PrettyQt."""
 
-from . import core
-from . import widgets
-from . import gui
-from . import syntaxhighlighters
+from . import core, gui, syntaxhighlighters, widgets
 
 __author__ = """Philipp Temminghoff"""
 __email__ = "phil65@kodi.tv"

@@ -3,9 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
-from prettyqt import gui, widgets, core
+from prettyqt import core, gui, widgets
 
 
 class Callout(widgets.GraphicsItem):

@@ -3,9 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore, QtGui
-
 import qtawesome as qta
+from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import widgets
 

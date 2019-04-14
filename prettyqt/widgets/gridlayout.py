@@ -3,10 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
-
 
 MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
              fixed=QtWidgets.QLayout.SetFixedSize)

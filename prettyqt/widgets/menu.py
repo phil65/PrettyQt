@@ -3,13 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Callable, Optional, Any
+from typing import Any, Callable, Optional
 
+import qtawesome as qta
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-
-import qtawesome as qta
 
 
 class Menu(QtWidgets.QMenu):

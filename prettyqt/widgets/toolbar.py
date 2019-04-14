@@ -5,10 +5,10 @@
 
 from typing import Callable, Optional
 
-from qtpy import QtWidgets, QtCore
 import qtawesome as qta
+from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 
 STYLES = dict(icon=QtCore.Qt.ToolButtonIconOnly,
               text=QtCore.Qt.ToolButtonTextOnly,

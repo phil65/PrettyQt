@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from prettyqt import gui, core
+from prettyqt import core, gui
 
 
 class JsonHighlighter(gui.SyntaxHighlighter):

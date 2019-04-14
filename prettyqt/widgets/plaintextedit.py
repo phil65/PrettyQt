@@ -3,9 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtGui
+from qtpy import QtGui, QtWidgets
 
-from prettyqt import widgets, gui
+from prettyqt import gui, widgets
 
 
 class PlainTextEdit(QtWidgets.QPlainTextEdit):

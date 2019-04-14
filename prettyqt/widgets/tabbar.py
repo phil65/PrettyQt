@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
 ELIDE_MODES = dict(left=QtCore.Qt.ElideLeft,
                    right=QtCore.Qt.ElideRight,

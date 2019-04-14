@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Optional, Callable, Iterable
+from typing import Callable, Iterable, Optional
 
 from qtpy import QtCore, QtWidgets
 

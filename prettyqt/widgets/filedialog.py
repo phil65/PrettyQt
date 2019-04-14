@@ -3,12 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from typing import List
 import pathlib
+from typing import List
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 
 MODES = dict(existing_file=QtWidgets.QFileDialog.ExistingFile,
              existing_files=QtWidgets.QFileDialog.ExistingFiles,

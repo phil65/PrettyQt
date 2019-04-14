@@ -6,6 +6,7 @@
 import pathlib
 
 from qtpy import QtCore, QtWidgets
+
 from prettyqt import core
 
 

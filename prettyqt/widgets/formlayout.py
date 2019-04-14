@@ -7,7 +7,6 @@ from qtpy import QtWidgets
 
 from prettyqt import widgets
 
-
 MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
              fixed=QtWidgets.QLayout.SetFixedSize)
 

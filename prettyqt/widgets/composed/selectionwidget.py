@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 
 
 class SelectionWidget(widgets.GroupBox):

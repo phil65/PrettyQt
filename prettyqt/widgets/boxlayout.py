@@ -3,8 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
-
+from qtpy import QtCore, QtWidgets
 
 MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
              fixed=QtWidgets.QLayout.SetFixedSize)

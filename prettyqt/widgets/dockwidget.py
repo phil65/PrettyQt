@@ -4,7 +4,7 @@
 """
 
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
 

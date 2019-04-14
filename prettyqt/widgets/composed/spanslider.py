@@ -22,9 +22,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
-from prettyqt import widgets, gui, core
+from prettyqt import core, gui, widgets
 
 SLIDER_STYLE = widgets.Style.CC_Slider
 HANDLE_STYLE = widgets.Style.SC_SliderHandle

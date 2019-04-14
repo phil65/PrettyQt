@@ -3,13 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Union, Optional
 import pathlib
+from typing import Optional, Union
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
-
 
 H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
                     right=QtCore.Qt.AlignRight,

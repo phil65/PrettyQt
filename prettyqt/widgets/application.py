@@ -3,12 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-import sys
 import pathlib
-
+import sys
 from typing import Optional
-from qtpy import QtWidgets, QtCore
+
 import qtawesome as qta
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core
 

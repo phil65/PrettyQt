@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 BUTTONS = dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
                ok=QtWidgets.QDialogButtonBox.Ok,

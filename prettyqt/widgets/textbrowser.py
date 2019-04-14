@@ -3,10 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets
-
-import markdown
 import docutils.core
+import markdown
+from qtpy import QtWidgets
 
 
 class TextBrowser(QtWidgets.QTextBrowser):
