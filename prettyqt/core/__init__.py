@@ -13,6 +13,7 @@ from .size import Size
 from .point import Point
 from .timer import Timer
 from .translator import Translator
+from .thread import Thread
 from .rect import Rect
 from .rectf import RectF
 from .regexp import RegExp
@@ -31,6 +32,7 @@ __all__ = ["Object",
            "Point",
            "Timer",
            "Translator",
+           "Thread",
            "Rect",
            "RectF",
            "MimeData",
