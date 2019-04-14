@@ -5,8 +5,6 @@
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import widgets
-
 BUTTONS = dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
                ok=QtWidgets.QDialogButtonBox.Ok,
                save=QtWidgets.QDialogButtonBox.Save,
@@ -42,13 +40,14 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
             self.addButton(BUTTONS[btn])
 
     def add_accept_button(self, button):
-        self.addButton(button, QtWidgets.QDialogButtonBox.AcceptRole)
+        self.addButton(button, self.AcceptRole)
 
     def add_reject_button(self, button):
-        self.addButton(button, QtWidgets.QDialogButtonBox.RejectRole)
+        self.addButton(button, self.RejectRole)
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
     app = widgets.Application.create_default_app()
     widget = DialogButtonBox()
     buttons = list(BUTTONS.keys())

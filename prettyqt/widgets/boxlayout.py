@@ -5,8 +5,6 @@
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import widgets
-
 
 MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
              fixed=QtWidgets.QLayout.SetFixedSize)
@@ -41,6 +39,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
     app = widgets.Application.create_default_app()
     layout = BoxLayout("vertical")
     widget = widgets.Widget()
