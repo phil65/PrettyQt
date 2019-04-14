@@ -7,6 +7,10 @@ from qtpy import QtWidgets
 
 from prettyqt import widgets
 
+TRIGGERS = dict(none=QtWidgets.QAbstractItemView.DoubleClicked,
+                double_click=QtWidgets.QAbstractItemView.DoubleClicked,
+                edit_key=QtWidgets.QAbstractItemView.EditKeyPressed)
+
 
 class TableView(QtWidgets.QTableView):
 

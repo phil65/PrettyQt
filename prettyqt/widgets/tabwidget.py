@@ -137,7 +137,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self.tabBar().setTabButton(index, POSITONS[position], None)
 
 
-class DetachedTab(QtWidgets.QMainWindow):
+class DetachedTab(widgets.MainWindow):
     """window containing a detached tab
 
     When a tab is detached, the contents are placed into this QMainWindow.
@@ -168,9 +168,9 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     tab_widget = TabWidget()
-    widget = QtWidgets.QWidget()
+    widget = widgets.Widget()
     tab_widget.add_tab(widget, "Test")
-    widget_2 = QtWidgets.QWidget()
+    widget_2 = widgets.Widget()
     tab_widget.add_tab(widget_2, "Test 2")
     tab_widget.show()
     app.exec_()

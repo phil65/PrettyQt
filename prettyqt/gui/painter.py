@@ -40,3 +40,8 @@ class Painter(QtGui.QPainter):
         if mode not in COMP_MODES:
             raise ValueError("Invalid value for composition mode.")
         self.setCompositionMode(COMP_MODES[mode])
+
+    def draw_text(self, x, y, width, height, alignment, text):
+        # TODO
+        alignment = QtCore.Qt.AlignRight
+        self.drawText(x, y, width, height, alignment, text)
