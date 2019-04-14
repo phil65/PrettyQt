@@ -25,6 +25,11 @@ from .slider import Slider
 from .styleoptionslider import StyleOptionSlider
 from .frame import Frame
 
+
+from .dockwidget import DockWidget
+
+from .mainwindow import MainWindow
+
 from .action import Action
 from .widgetaction import WidgetAction
 from .toolbutton import ToolButton
@@ -36,7 +41,6 @@ from .tabbar import TabBar
 from .tabwidget import TabWidget
 from .toolbar import Toolbar
 from .headerview import HeaderView
-from .dockwidget import DockWidget
 from .label import Label
 from .pushbutton import PushButton
 from .radiobutton import RadioButton
@@ -62,8 +66,6 @@ from .dialogbuttonbox import DialogButtonBox
 from .buttongroup import ButtonGroup
 from .groupbox import GroupBox
 from .splitter import Splitter
-
-from .mainwindow import MainWindow
 
 from .itemdelegate import ItemDelegate
 
