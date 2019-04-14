@@ -15,11 +15,11 @@ class JsonHighlighter(gui.SyntaxHighlighter):
 
         self.symbol_format = gui.TextCharFormat()
         self.symbol_format.set_foreground_color("red")
-        self.symbol_format.setFontWeight(gui.Font.Bold)
+        self.symbol_format.set_font_weight("bold")
 
         self.name_format = gui.TextCharFormat()
         self.name_format.set_foreground_color("blue")
-        self.name_format.setFontWeight(gui.Font.Bold)
+        self.name_format.set_font_weight("bold")
         self.name_format.setFontItalic(True)
 
         self.value_format = gui.TextCharFormat()
@@ -29,26 +29,17 @@ class JsonHighlighter(gui.SyntaxHighlighter):
         """ Highlight a block of code using the rules outlined in the Constructor
         """
         expression = core.RegExp("(\\{|\\}|\\[|\\]|\\:|\\,)")
-        index = expression.indexIn(text)
-        while index >= 0:
-            length = expression.matchedLength()
+        for index, length in expression.matches_in_text(text):
             self.setFormat(index, length, self.symbol_format)
-            index = expression.indexIn(text, index + length)
 
         text.replace("\\\"", "  ")
 
         expression = core.RegExp("\".*\" *\\:")
         expression.setMinimal(True)
-        index = expression.indexIn(text)
-        while index >= 0:
-            length = expression.matchedLength()
-            self.setFormat(index, length - 1, self.name_format)
-            index = expression.indexIn(text, index + length)
+        for index, length in expression.matches_in_text(text):
+            self.setFormat(index, length, self.name_format)
 
         expression = core.RegExp("\\: *\".*\"")
         expression.setMinimal(True)
-        index = expression.indexIn(text)
-        while index >= 0:
-            length = expression.matchedLength()
-            self.setFormat(index, length - 1, self.value_format)
-            index = expression.indexIn(text, index + length)
+        for index, length in expression.matches_in_text(text):
+            self.setFormat(index, length, self.value_format)

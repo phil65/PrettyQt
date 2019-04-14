@@ -13,7 +13,7 @@ def return_format(color, style=""):
     fmt = gui.TextCharFormat()
     fmt.set_foreground_color(color)
     if "bold" in style:
-        fmt.setFontWeight(gui.Font.Bold)
+        fmt.set_font_weight("bold")
     if "italic" in style:
         fmt.setFontItalic(True)
 
@@ -128,8 +128,7 @@ class PythonHighlighter(gui.SyntaxHighlighter):
         self.setCurrentBlockState(0)
 
         # Do multi-line strings
-        in_multiline = self.match_multiline(text, *self.tri_single)
-        if not in_multiline:
+        if not self.match_multiline(text, *self.tri_single):
             self.match_multiline(text, *self.tri_double)
 
     def match_multiline(self, text, delimiter, in_state, style):

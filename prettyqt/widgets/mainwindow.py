@@ -24,10 +24,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
     # def load_window_state(self):
     #     prefix = os.environ["QT_API"]
-    #     geom = application.settings.get(f"{prefix}.geometry",
-    #                                     self.saveGeometry())
-    #     state = application.settings.get(f"{prefix}.state",
-    #                                      self.saveState())
+    #     geom = application.settings.get(f"{prefix}.geometry", self.saveGeometry())
+    #     state = application.settings.get(f"{prefix}.state", self.saveState())
     #     self.restoreGeometry(geom)
     #     self.restoreState(state)
 
