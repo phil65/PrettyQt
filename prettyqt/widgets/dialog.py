@@ -22,6 +22,7 @@ class Dialog(QtWidgets.QDialog):
                  title: str = "",
                  icon=None,
                  parent=None,
+                 delete_on_close: bool = True,
                  layout: Optional[str] = None):
         super().__init__(parent=parent)
         if self.DEFAULT_SIZE:
@@ -29,7 +30,8 @@ class Dialog(QtWidgets.QDialog):
         self.set_modality("window")
         self.setWindowTitle(title)
         self.set_icon(icon)
-        self.delete_on_close()
+        if delete_on_close:
+            self.delete_on_close()
         self.layout = None
         if layout in ["horizontal", "vertical"]:
             self.layout = widgets.BoxLayout(layout)
