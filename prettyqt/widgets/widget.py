@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from contextlib import contextmanager
+
 from qtpy import QtWidgets
 
 
@@ -13,6 +15,12 @@ class Widget(QtWidgets.QWidget):
 
     def set_disabled(self):
         self.setEnabled(False)
+
+    @contextmanager
+    def block_signals(self):
+        self.blockSignals(True)
+        yield None
+        self.blockSignals(False)
 
 
 if __name__ == "__main__":
