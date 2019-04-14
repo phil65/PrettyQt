@@ -50,6 +50,8 @@ from .doublespinbox import DoubleSpinBox
 from .checkbox import CheckBox
 from .lineedit import LineEdit
 from .textedit import TextEdit
+from .dateedit import DateEdit
+from .datetimeedit import DateTimeEdit
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
 from .progressbar import ProgressBar
@@ -115,6 +117,8 @@ __all__ = ["Application",
            "CheckBox",
            "LineEdit",
            "TextEdit",
+           "DateEdit",
+           "DateTimeEdit",
            "PlainTextEdit",
            "TextBrowser",
            "ProgressBar",
