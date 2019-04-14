@@ -6,6 +6,7 @@
 from typing import Dict
 
 from qtpy import QtWidgets, QtCore
+import qtawesome as qta
 
 from prettyqt import widgets
 
@@ -40,6 +41,12 @@ class MainWindow(QtWidgets.QMainWindow):
     #     application.settings[f"{prefix}.state"] = self.saveState()
     #     super().closeEvent(event)
     #     event.accept()
+
+    def set_icon(self, icon):
+        if icon:
+            if isinstance(icon, str):
+                icon = qta.icon(icon, color="lightgray")
+            self.setWindowIcon(icon)
 
     def set_stylesheet(self, item, dct: Dict[str, str]) -> str:
         ss = "; ".join(f"{k.replace('_', '-')}: {v}" for k, v in dct.items())
