@@ -21,3 +21,9 @@ def test_icon():
 def test_standarditemmodel():
     model = gui.StandardItemModel()
     model.add_item("test")
+
+
+def test_textcharformat():
+    fmt = gui.TextCharFormat()
+    fmt.set_font_weight("bold")
+    fmt.set_foreground_color("yellow")
