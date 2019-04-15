@@ -78,3 +78,74 @@ def test_dialogbuttonbox():
     box = widgets.DialogButtonBox()
     box.show()
     box.close()
+
+
+def test_dockwidget():
+    widget = widgets.DockWidget()
+    widget.show()
+    widget.close()
+
+
+def test_doublespinbox():
+    widget = widgets.DoubleSpinBox()
+    widget.show()
+    widget.close()
+
+
+def test_filedialog():
+    dlg = widgets.FileDialog()
+    dlg.show()
+    dlg.close()
+
+
+def test_fontdialog():
+    dlg = widgets.FontDialog()
+    dlg.show()
+    dlg.close()
+
+
+def test_formlayout():
+    widget = widgets.FormLayout()
+    return True
+
+
+def test_frame():
+    widget = widgets.Frame()
+    widget.show()
+    widget.close()
+
+
+def test_groupbox():
+    widget = widgets.GroupBox()
+    widget.show()
+    widget.close()
+
+
+def test_headerview():
+    widget = widgets.HeaderView(parent=None)
+    widget.show()
+    widget.close()
+
+
+def test_label():
+    widget = widgets.Label()
+    widget.show()
+    widget.close()
+
+
+def test_lineedit():
+    widget = widgets.LineEdit()
+    widget.show()
+    widget.close()
+
+
+def test_listview():
+    widget = widgets.ListView()
+    widget.show()
+    widget.close()
+
+
+def test_mainwindow():
+    widget = widgets.MainWindow()
+    widget.show()
+    widget.close()
