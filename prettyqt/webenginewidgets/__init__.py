@@ -4,7 +4,9 @@
 
 contains QtGui-based classes
 """
+try:
+    from .webengineview import WebEngineView
+    __all__ = ["WebEngineView"]
+except ModuleNotFoundError:
+    pass
 
-from .webengineview import WebEngineView
-
-__all__ = ["WebEngineView"]

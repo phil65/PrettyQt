@@ -18,7 +18,7 @@ install:
 # Command to run tests, e.g. python setup.py test
 script:
   - tox
-  - pytest --doctest-modules --cov=prettyqt
+  - python -m pytest --doctest-modules --cov=prettyqt
 
 after_success:
   - codecov
