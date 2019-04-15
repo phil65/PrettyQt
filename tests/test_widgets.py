@@ -134,7 +134,8 @@ def test_label():
 
 
 def test_lineedit():
-    widget = widgets.LineEdit()
+    widget = widgets.LineEdit("Test")
+    widget.set_regex_validator("[0-9]")
     widget.show()
     widget.close()
 
