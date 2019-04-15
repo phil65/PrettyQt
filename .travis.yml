@@ -16,7 +16,9 @@ install:
   - pip install -r requirements_dev.txt
 
 # Command to run tests, e.g. python setup.py test
-script: tox
+script:
+  - tox
+  - pytest --doctest-modules --cov=prettyqt
 
 after_success:
   - codecov
