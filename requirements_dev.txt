@@ -21,7 +21,7 @@ qtpy == 1.7.0
 qtawesome == 0.5.7
 Markdown == 3.1
 
-pytest==4.3.1
+pytest==4.4.0
 pytest-qt==3.2.2
 pytest-xvfb==1.2.0
 pytest-runner==4.4
