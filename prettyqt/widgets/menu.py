@@ -8,7 +8,7 @@ from typing import Any, Callable, Optional
 import qtawesome as qta
 from qtpy import QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
 class Menu(QtWidgets.QMenu):
@@ -17,6 +17,9 @@ class Menu(QtWidgets.QMenu):
         super().__init__(title, parent=parent)
         self.set_icon(icon)
         self.setToolTipsVisible(True)
+
+    def __iter__(self):
+        return iter(self.actions())
 
     def set_icon(self, icon):
         """set the icon for the menu
@@ -80,3 +83,12 @@ class Menu(QtWidgets.QMenu):
             action.setStatusTip(status_tip)
         self.addAction(action)
         return action
+
+
+if __name__ == "__main__":
+    app = widgets.Application.create_default_app()
+    menu = Menu("1")
+    action = widgets.Action("test")
+    menu.addAction(action)
+    menu.show()
+    menu.exec_(core.Point(200, 200))
