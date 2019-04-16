@@ -12,6 +12,7 @@ from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
 from .style import Style
 from .styleoption import StyleOption
+from .spaceritem import SpacerItem
 from .sizepolicy import SizePolicy
 from .stylepainter import StylePainter
 from .dialog import Dialog
@@ -86,6 +87,7 @@ __all__ = ["Application",
            "GraphicsItem",
            "Style",
            "StyleOption",
+           "SpacerItem",
            "SizePolicy",
            "StylePainter",
            "Dialog",
