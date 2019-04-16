@@ -18,6 +18,6 @@ class DateEdit(QtWidgets.QDateEdit):
 if __name__ == "__main__":
     from prettyqt import widgets
     app = widgets.Application.create_default_app()
-    widget = DateEdit("This is a test")
+    widget = DateEdit()
     widget.show()
     app.exec_()

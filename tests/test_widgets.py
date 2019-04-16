@@ -28,6 +28,7 @@ def test_textbrowser():
 
 def test_action():
     action = widgets.Action()
+    action.set_tooltip("test")
     return True
 
 
@@ -37,6 +38,7 @@ def test_application():
 
 def test_boxlayout():
     layout = widgets.BoxLayout("horizontal")
+    layout.add_widget(widgets.Widget())
     return True
 
 
@@ -106,6 +108,7 @@ def test_fontdialog():
 
 def test_formlayout():
     widget = widgets.FormLayout()
+    widget.set_size_mode("maximum")
     return True
 
 
