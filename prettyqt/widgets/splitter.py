@@ -8,7 +8,7 @@ from qtpy import QtCore, QtWidgets
 
 class Splitter(QtWidgets.QSplitter):
 
-    def __init__(self, orientation, parent=None):
+    def __init__(self, orientation="horizontal", parent=None):
         o = QtCore.Qt.Vertical if orientation == "vertical" else QtCore.Qt.Horizontal
         super().__init__(o, parent)
 
