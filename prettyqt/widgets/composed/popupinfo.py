@@ -15,15 +15,14 @@ class PopupInfo(QtWidgets.QDialog):
 
     def __init__(self, parent=None, text=None):
         super().__init__(parent=parent)
-        self.timer = core.Timer()
-        self.timer.timeout.connect(self.close)
-        self.timer.setSingleShot(True)
+        self.timer = core.Timer.single_shot(callback=self.close)
         self.label = widgets.Label()
         self.setWindowFlags(self.windowFlags() |
                             QtCore.Qt.Tool |
                             QtCore.Qt.WindowStaysOnTopHint |
                             QtCore.Qt.FramelessWindowHint)
         layout = widgets.BoxLayout("vertical")
+        layout.setContentsMargins(20, 20, 20, 20)
         self.setLayout(layout)
         self.setStyleSheet("background-color: black;")  # 2a82da
         layout.addWidget(self.label)

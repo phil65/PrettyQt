@@ -7,4 +7,10 @@ from qtpy import QtCore
 
 
 class Timer(QtCore.QTimer):
-    pass
+
+    @classmethod
+    def single_shot(cls, callback):
+        timer = cls()
+        timer.timeout.connect(callback)
+        timer.setSingleShot(True)
+        return timer
