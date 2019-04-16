@@ -4,7 +4,7 @@
 """
 
 import pathlib
-from typing import List
+from typing import List, Optional
 
 from qtpy import QtWidgets
 
@@ -61,20 +61,20 @@ class FileDialog(QtWidgets.QFileDialog):
     def selected_files(self) -> List[pathlib.Path]:
         return [pathlib.Path(p) for p in self.selectedFiles()]
 
-    def selected_file(self) -> pathlib.Path:
+    def selected_file(self) -> Optional[pathlib.Path]:
         selected = self.selectedFiles()
         if selected:
             return pathlib.Path(selected[0])
 
-    def choose_folder(self):
+    def choose_folder(self) -> Optional[List[pathlib.Path]]:
         self.setFileMode(self.Directory)
         return self.choose()
 
-    def open_file(self):
+    def open_file(self) -> Optional[List[pathlib.Path]]:
         self.setFileMode(self.ExistingFile)
         return self.choose()
 
-    def choose(self):
+    def choose(self) -> Optional[List[pathlib.Path]]:
         result = super().exec_()
         if result != self.Accepted:
             return None
