@@ -9,4 +9,3 @@ try:
     __all__ = ["WebEngineView"]
 except ModuleNotFoundError:
     pass
-
