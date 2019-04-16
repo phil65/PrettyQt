@@ -150,3 +150,61 @@ def test_mainwindow():
     widget = widgets.MainWindow()
     widget.show()
     widget.close()
+
+
+def test_menu():
+    menu = widgets.Menu("1")
+    action = widgets.Action("test")
+    menu.addAction(action)
+    menu.show()
+
+
+def test_menubar():
+    menu = widgets.MenuBar()
+    menu.show()
+
+
+def test_messagebox():
+    widget = widgets.MessageBox()
+    widget.show()
+
+
+def test_plaintextedit():
+    widget = widgets.PlainTextEdit()
+    widget.set_text("hallo")
+    widget.show()
+
+
+def test_progressbar():
+    widget = widgets.ProgressBar()
+    widget.show()
+
+
+def test_progressdialog():
+    widget = widgets.ProgressDialog()
+    widget.show()
+
+
+def test_pushbutton():
+    widget = widgets.PushButton("Test")
+    widget.show()
+
+
+def test_radiobutton():
+    widget = widgets.RadioButton("Test")
+    widget.show()
+
+
+def test_slider():
+    widget = widgets.Slider()
+    widget.show()
+
+
+def test_spinbox():
+    widget = widgets.SpinBox()
+    widget.show()
+
+
+def test_splitter():
+    widget = widgets.Splitter("vertical")
+    widget.show()
