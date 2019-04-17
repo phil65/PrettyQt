@@ -25,10 +25,10 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setFont(font)
 
     def append(self, text: str):
-        self.appendPlainText(text)
+        self.set_text(self.text() + text)
 
     def set_text(self, text: str):
-        self.setPlainText(text)
+        self.setText(text)
 
     def set_read_only(self, value: bool):
         """set test to read only
@@ -37,11 +37,6 @@ class LineEdit(QtWidgets.QLineEdit):
             value: True, for read-only, otherwise False
         """
         self.setReadOnly(value)
-
-    def scroll_to_end(self):
-        """scroll to the end of the text
-        """
-        self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
 
     def set_regex_validator(self, regex: str) -> gui.RegExpValidator:
         validator = gui.RegExpValidator(self)
