@@ -71,12 +71,17 @@ def test_dialog():
 
 def test_dialogbuttonbox():
     box = widgets.DialogButtonBox()
+    box.set_horizontal()
+    box.set_vertical()
+    box.add_buttons(["apply"])
     box.show()
     box.close()
 
 
 def test_dockwidget():
     widget = widgets.DockWidget()
+    widget.setup_title_bar()
+    widget.maximise()
     widget.show()
     widget.close()
 
