@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from qtpy import QtCore
+from prettyqt import core
 
 
 class TransposeProxyModel(QtCore.QAbstractProxyModel):
@@ -26,10 +27,10 @@ class TransposeProxyModel(QtCore.QAbstractProxyModel):
     def parent(self, index):
         return None
 
-    def rowCount(self, parent) -> int:
+    def rowCount(self, parent=core.ModelIndex()) -> int:
         return self._source_model.columnCount(parent)
 
-    def columnCount(self, parent) -> int:
+    def columnCount(self, parent=core.ModelIndex()) -> int:
         return self._source_model.rowCount(parent)
 
     def data(self, index, role=QtCore.Qt.DisplayRole):

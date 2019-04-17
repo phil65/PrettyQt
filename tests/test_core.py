@@ -17,6 +17,15 @@ def test_filesystemmodel():
     model.yield_child_indexes(idx)
 
 
+def test_transposeproxymodel():
+    source = core.FileSystemModel()
+    model = core.transposeproxymodel.TransposeProxyModel(source)
+    idx = model.index(0, 0)
+    model.data(idx)
+    model.columnCount()
+    model.rowCount()
+
+
 def test_settings():
     settings = core.Settings("1", "2")
     settings.set_value("test", "value")
