@@ -26,12 +26,21 @@ def test_action():
 
 
 def test_application():
+    app.set_icon("mdi.timer")
+    app.set_metadata(app_name="test",
+                     app_version="1.0.0",
+                     org_name="test",
+                     org_domain="test")
+    app.get_mainwindow()
     return True
 
 
 def test_boxlayout():
     layout = widgets.BoxLayout("horizontal")
-    layout.addWidget(widgets.Widget())
+    widget = widgets.Widget()
+    layout.addWidget(widget)
+    layout.set_size_mode("maximum")
+    assert(len(layout) == 1)
     return True
 
 
@@ -94,6 +103,9 @@ def test_doublespinbox():
 
 def test_filedialog():
     dlg = widgets.FileDialog()
+    dlg.set_label_text("accept", "test")
+    dlg.set_accept_mode("any_file")
+    dlg.set_filter(dict(a=[".csv"]))
     dlg.show()
     dlg.close()
 
@@ -114,6 +126,12 @@ def test_frame():
     widget = widgets.Frame()
     widget.show()
     widget.close()
+
+
+def test_gridlayout():
+    layout = widgets.GridLayout()
+    widget = widgets.Widget()
+    layout[0:1, 0:3] = widget
 
 
 def test_groupbox():
