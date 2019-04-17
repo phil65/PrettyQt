@@ -24,16 +24,13 @@ class TextEdit(QtWidgets.QTextEdit):
         font = gui.Font(font_name, font_size, weight, italic)
         self.setFont(font)
 
-    def append(self, text: str):
-        self.appendPlainText(text)
-
     def set_text(self, text: str):
         self.setPlainText(text)
 
     def text(self) -> str:
         return self.toPlainText()
 
-    def set_read_only(self, value: bool):
+    def set_read_only(self, value: bool = True):
         self.setReadOnly(value)
 
     def scroll_to_end(self):
