@@ -68,8 +68,8 @@ class PythonHighlighter(gui.SyntaxHighlighter):
 
     # Python keywords
 
-    def __init__(self, document):
-        super().__init__(document)
+    def __init__(self, parent=None):
+        super().__init__(parent)
 
         # Multi-line strings (expression, flag, style)
         # FIXME: The triple-quotes in these two lines will mess up the
