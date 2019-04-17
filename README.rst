@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fphil65%2FPrettyQt.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fphil65%2FPrettyQt?ref=badge_shield)
+
 ========
 PrettyQt
 ========
@@ -41,3 +43,7 @@ This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypack
 
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fphil65%2FPrettyQt.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fphil65%2FPrettyQt?ref=badge_large)
