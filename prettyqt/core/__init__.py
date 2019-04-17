@@ -10,6 +10,7 @@ contains QtCore-based classes
 from .object import Object
 from .settings import Settings
 from .size import Size
+from .sizef import SizeF
 from .point import Point
 from .timer import Timer
 from .translator import Translator
@@ -29,6 +30,7 @@ from qtpy.QtCore import Slot, Signal, Property
 __all__ = ["Object",
            "Settings",
            "Size",
+           "SizeF",
            "Point",
            "Timer",
            "Translator",
