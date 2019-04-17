@@ -5,7 +5,6 @@
 
 import pytest
 
-from qtpy import QtGui
 from prettyqt import widgets, core
 
 app = widgets.Application.create_default_app()
@@ -23,6 +22,10 @@ def response():
 def test_action():
     action = widgets.Action()
     action.set_tooltip("test")
+    action.set_enabled()
+    action.set_disabled()
+    action.set_icon("mdi.timer")
+    action.set_shortcut("Ctrl+A")
     return True
 
 
@@ -306,3 +309,14 @@ def test_widget():
         pass
     widget.set_enabled()
     widget.set_disabled()
+
+
+def test_widgetaction():
+    action = widgets.Action()
+    widgetaction = widgets.WidgetAction(action)
+    widgetaction.set_tooltip("test")
+    widgetaction.set_enabled()
+    widgetaction.set_disabled()
+    widgetaction.set_icon("mdi.timer")
+    widgetaction.set_shortcut("Ctrl+A")
+    return True
