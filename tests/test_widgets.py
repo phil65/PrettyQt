@@ -199,8 +199,12 @@ def test_mainwindow():
 
 def test_menu():
     menu = widgets.Menu("1")
-    action = widgets.Action("test")
-    menu.addAction(action)
+
+    def test():
+        pass
+
+    menu.add_action("test", test, icon="mdi.timer", shortcut="Ctrl+A", checkable=True)
+    menu._separator("test")
     menu.show()
 
 
