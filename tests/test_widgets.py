@@ -150,9 +150,11 @@ def test_headerview():
 
 
 def test_label():
-    widget = widgets.Label()
-    widget.show()
-    widget.close()
+    label = widgets.Label()
+    label.set_image("")
+    label.set_alignment(horizontal="left", vertical="top")
+    label.show()
+    label.close()
 
 
 def test_lineedit():
@@ -256,3 +258,11 @@ def test_toolbar():
 def test_treeview():
     widget = widgets.TreeView()
     widget.show()
+
+
+def test_widget():
+    widget = widgets.Widget()
+    with widget.block_signals():
+        pass
+    widget.set_enabled()
+    widget.set_disabled()
