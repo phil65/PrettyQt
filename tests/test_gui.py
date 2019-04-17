@@ -5,7 +5,7 @@
 
 import pytest
 
-from prettyqt import gui
+from prettyqt import gui, core
 from qtpy import QtCore
 
 
@@ -15,7 +15,7 @@ def test_color():
 
 
 def test_icon():
-    color = gui.Icon()
+    icon = gui.Icon()
 
 
 def test_keysequence():
@@ -31,3 +31,17 @@ def test_textcharformat():
     fmt = gui.TextCharFormat()
     fmt.set_font_weight("bold")
     fmt.set_foreground_color("yellow")
+
+
+def test_painter():
+    painter = gui.Painter()
+    painter.use_antialiasing()
+    painter.set_pen("none")
+    painter.fill_rect(core.Rect(), "transparent")
+    painter.set_color("black")
+    painter.set_composition_mode("source_at_top")
+
+
+def test_pdfwriter():
+    writer = gui.PdfWriter("test")
+    writer.setup(200)
