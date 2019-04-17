@@ -50,7 +50,7 @@ class Settings(QtCore.QSettings):
             raise ValueError("Format must be either 'native' or 'ini'")
         if scope not in SCOPES:
             raise ValueError("Format must be either 'user' or 'system'")
-        cls.setPath(FORMATS[fmt], SCOPES[scope], path)
+        cls.setPath(FORMATS[fmt], SCOPES[scope], str(path))
 
     @contextlib.contextmanager
     def group(self, prefix):
@@ -89,5 +89,3 @@ class Settings(QtCore.QSettings):
 
 if __name__ == "__main__":
     settings = Settings("1", "2")
-    settings.set_value("test/test", 42)
-    print(settings.value("test/test"))

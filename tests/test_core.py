@@ -3,6 +3,8 @@
 
 """Tests for `prettyqt` package."""
 
+import pathlib
+
 import pytest
 
 from prettyqt import core
@@ -20,6 +22,14 @@ def test_settings():
     settings.set_value("test", "value")
     assert settings.contains("test")
     assert settings.value("test") == "value"
+    with core.Settings("ab") as s:
+        s.set_value("test2", "xx")
+    with settings.write_array("test"):
+        pass
+    with settings.read_array("test"):
+        pass
+    path = pathlib.Path.cwd()
+    settings.set_path("native", "user", path)
 
 
 def test_regexp():
