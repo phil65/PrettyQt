@@ -132,6 +132,9 @@ def test_gridlayout():
     layout = widgets.GridLayout()
     widget = widgets.Widget()
     layout[0:1, 0:3] = widget
+    layout.set_size_mode("maximum")
+    layout.set_alignment("left")
+    assert len(layout) == len(list(layout)) == 1
 
 
 def test_groupbox():
