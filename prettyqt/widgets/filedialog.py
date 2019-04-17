@@ -42,10 +42,10 @@ class FileDialog(QtWidgets.QFileDialog):
         else:
             self.setAcceptMode(self.AcceptOpen)
 
-    def set_label_text(self, label: str):
+    def set_label_text(self, label: str, text: str):
         if label not in LABELS:
             raise ValueError(f"Invalid value. Valid values: {LABELS.keys()}")
-        self.setLabelText(LABELS[label])
+        self.setLabelText(LABELS[label], text)
 
     def set_file_mode(self, mode: str):
         """sets the file mode of the dialog
