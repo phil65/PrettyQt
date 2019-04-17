@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui
+from qtpy import QtGui, QtCore
 
 from prettyqt import core, gui, widgets
 
@@ -13,7 +13,7 @@ class PdfWriter(QtGui.QPdfWriter):
     def setup(self, size):
         dpi = widgets.DesktopWidget().logicalDpiX()
         self.setResolution(dpi)
-        self.setPageMargins(core.MarginsF(0, 0, 0, 0))
+        self.setPageMargins(QtCore.QMarginsF(0, 0, 0, 0))
         self.setPageSizeMM(core.SizeF(size.width(), size.height()) / dpi * 25.4)
 
     def testus(self):
