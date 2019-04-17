@@ -35,6 +35,9 @@ class GridLayout(QtWidgets.QGridLayout):
         else:
             return self.itemAt(idx)
 
+    def __iter__(self):
+        return iter(self[i] for i in range(self.count()) if self[i] is not None)
+
     def __len__(self):
         return self.count()
 
