@@ -11,7 +11,7 @@ from prettyqt import widgets
 
 class ImageViewer(widgets.Widget):
 
-    def __init__(self, title="", parent=None):
+    def __init__(self, title="", path=None, parent=None):
         super().__init__(parent)
         self.title = title
         self.left = 10
@@ -20,8 +20,10 @@ class ImageViewer(widgets.Widget):
         self.height = 480
         self.setWindowTitle(self.title)
         self.setGeometry(self.left, self.top, self.width, self.height)
-        path = pathlib.Path("decisiontree.png")
-        self.image = widgets.Label.image_from_path(path, parent=self)
+        self.path = None
+        if path:
+            path = pathlib.Path("decisiontree.png")
+            self.image = widgets.Label.image_from_path(path, parent=self)
         self.show()
 
 
