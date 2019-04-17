@@ -44,4 +44,4 @@ def test_painter():
 
 def test_pdfwriter():
     writer = gui.PdfWriter("test")
-    writer.setup(200)
+    writer.setup(core.RectF())

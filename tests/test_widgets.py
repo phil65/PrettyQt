@@ -5,7 +5,7 @@
 
 import pytest
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 app = widgets.Application.create_default_app()
 
@@ -235,6 +235,17 @@ def test_spinbox():
 def test_splitter():
     widget = widgets.Splitter("vertical")
     widget.show()
+
+
+def test_tabwidget():
+    widget = widgets.TabWidget()
+    widget.add_tab(widgets.Widget(), "mdi.timer")
+    widget.insert_tab(0, widgets.Widget(), "test", "mdi.timer")
+    widget.detach_tab(0, core.Point())
+    widget.remove_tab(0)
+    widget.show()
+    widget.close()
+    assert True
 
 
 def test_textbrowser():
