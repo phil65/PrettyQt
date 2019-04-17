@@ -6,6 +6,7 @@
 import pytest
 
 from prettyqt import gui
+from qtpy import QtCore
 
 
 def test_color():
@@ -15,6 +16,10 @@ def test_color():
 
 def test_icon():
     color = gui.Icon()
+
+
+def test_keysequence():
+    assert(gui.KeySequence.to_shortcut_str(0x41, QtCore.Qt.ShiftModifier) == "Shift+A")
 
 
 def test_standarditemmodel():

@@ -9,7 +9,8 @@ from prettyqt import syntaxhighlighters
 
 
 def test_jsonhighlighter():
-    syntaxhighlighters.JsonHighlighter()
+    highlighter = syntaxhighlighters.JsonHighlighter()
+    highlighter.highlightBlock('{"a": "b"}')
 
 
 def test_pythonhighlighter():

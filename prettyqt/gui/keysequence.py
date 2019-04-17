@@ -11,12 +11,6 @@ class KeySequence(QtGui.QKeySequence):
     def __str__(self):
         return self.toString()
 
-    def set_color(self, color):
-        if isinstance(color, str):
-            self.setNamedColor(color)
-        else:
-            self.setRgb(*color)
-
     @classmethod
     def to_shortcut_str(cls, key, mod):
         mods = {QtCore.Qt.ShiftModifier: QtCore.Qt.SHIFT,
