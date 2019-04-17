@@ -17,6 +17,8 @@ def test_buttondelegate():
 
 def test_callout():
     callout = widgets.Callout()
+    # callout.boundingRect()
+    callout.set_text("test")
 
 
 def test_imageviewer():

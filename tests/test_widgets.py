@@ -189,9 +189,12 @@ def test_listview():
 
 
 def test_mainwindow():
-    widget = widgets.MainWindow()
-    widget.show()
-    widget.close()
+    window = widgets.MainWindow()
+    window.set_icon("mdi.timer")
+    window.add_dockwidget("test", "Test")
+    window.toggle_fullscreen()
+    window.show()
+    window.close()
 
 
 def test_menu():
@@ -272,7 +275,14 @@ def test_textbrowser():
 
 def test_textedit():
     widget = widgets.TextEdit()
-    widget.set_text("hallo")
+    widget.set_text("test")
+    widget.append(" this")
+    assert(widget.text() == "test\n this")
+    widget.set_font("Consolas")
+    widget.set_enabled()
+    widget.set_read_only()
+    widget.scroll_to_end()
+    widget.set_disabled()
     widget.show()
 
 
