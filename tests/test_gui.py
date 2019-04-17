@@ -15,7 +15,6 @@ def test_color():
 
 def test_icon():
     color = gui.Icon()
-    color.set_size(20)
 
 
 def test_standarditemmodel():

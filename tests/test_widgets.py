@@ -38,7 +38,7 @@ def test_application():
 
 def test_boxlayout():
     layout = widgets.BoxLayout("horizontal")
-    layout.add_widget(widgets.Widget())
+    layout.addWidget(widgets.Widget())
     return True
 
 
