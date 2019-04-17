@@ -5,9 +5,10 @@
 
 import pytest
 
-from prettyqt import widgets, gui
+from prettyqt import widgets, gui, core
 
 app = widgets.Application.create_default_app()
+test_widget = widgets.Widget()
 
 
 def test_buttondelegate():
@@ -28,6 +29,7 @@ def test_markdownwidget():
 
 def test_popupinfo():
     popup = widgets.PopupInfo()
+    popup.show_popup("test")
 
 
 def test_selectionwidget():
@@ -51,6 +53,17 @@ def test_spanslider():
     color = gui.Color("blue").lighter(150)
     slider.set_left_color(color)
     slider.set_right_color(color)
+    slider.swap_controls()
+    slider.trigger_action(slider.SliderNoAction, True)
+    slider.trigger_action(slider.SliderSingleStepAdd, True)
+    slider.paintEvent(None)
+    slider.pixel_pos_to_value(100)
+    slider.draw_span(gui.Painter(), core.Rect())
+
 
 def test_waitingspinner():
-    action = widgets.WaitingSpinner(parent=None)
+    spinner = widgets.WaitingSpinner(parent=test_widget)
+    spinner.paintEvent(None)
+    spinner.start()
+    spinner.stop()
+    spinner.update_position()
