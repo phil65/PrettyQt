@@ -5,6 +5,7 @@
 
 import pytest
 
+from qtpy import QtGui
 from prettyqt import widgets, core
 
 app = widgets.Application.create_default_app()
@@ -73,7 +74,12 @@ def test_desktopwidget():
 
 
 def test_dialog():
-    dlg = widgets.Dialog()
+    dlg = widgets.Dialog(layout="horizontal")
+    dlg.set_modality()
+    dlg.delete_on_close()
+    dlg.add_widget(widgets.Widget())
+    dlg.set_icon("mdi.timer")
+    dlg.add_buttonbox()
     dlg.show()
     dlg.close()
 
@@ -104,7 +110,8 @@ def test_doublespinbox():
 def test_filedialog():
     dlg = widgets.FileDialog()
     dlg.set_label_text("accept", "test")
-    dlg.set_accept_mode("any_file")
+    dlg.set_accept_mode("open")
+    dlg.set_accept_mode("save")
     dlg.set_filter(dict(a=[".csv"]))
     dlg.show()
     dlg.close()
@@ -119,6 +126,14 @@ def test_fontdialog():
 def test_formlayout():
     widget = widgets.FormLayout()
     widget.set_size_mode("maximum")
+    widget.set_label_widget(0, "test")
+    widget.set_label_widget(0, widgets.Widget())
+    widget.set_field_widget(0, "test")
+    widget.set_field_widget(0, widgets.Widget())
+    widget.set_spanning_widget(0, "test")
+    widget.set_spanning_widget(0, widgets.Widget())
+    widget = widgets.FormLayout.from_dict({"2": "4"})
+    assert(len(widget) == 2)
     return True
 
 
