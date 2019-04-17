@@ -19,13 +19,6 @@ def response():
     return widgets.Callout()
 
 
-def test_textbrowser():
-    reader = widgets.TextBrowser()
-    reader.show()
-    reader.close()
-    assert True
-
-
 def test_action():
     action = widgets.Action()
     action.set_tooltip("test")
@@ -139,6 +132,9 @@ def test_label():
 def test_lineedit():
     widget = widgets.LineEdit("Test")
     widget.set_regex_validator("[0-9]")
+    widget.set_font("Consolas")
+    widget.setText("0")
+    widget.append("a")
     widget.show()
     widget.close()
 
@@ -210,4 +206,27 @@ def test_spinbox():
 
 def test_splitter():
     widget = widgets.Splitter("vertical")
+    widget.show()
+
+
+def test_textbrowser():
+    reader = widgets.TextBrowser()
+    reader.show()
+    reader.close()
+    assert True
+
+
+def test_textedit():
+    widget = widgets.TextEdit()
+    widget.set_text("hallo")
+    widget.show()
+
+
+def test_toolbar():
+    widget = widgets.Toolbar()
+    widget.show()
+
+
+def test_treeview():
+    widget = widgets.TreeView()
     widget.show()
