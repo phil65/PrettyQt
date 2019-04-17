@@ -18,6 +18,9 @@ class SelectionWidget(widgets.GroupBox):
 
         self.setLayout(self.layout)
 
+    def __iter__(self):
+        return iter(self.buttons.items())
+
     def add_items(self, dct):
         for k, v in dct.items():
             self.add_item(k, v)
