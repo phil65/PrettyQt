@@ -162,9 +162,25 @@ def test_groupbox():
 
 
 def test_headerview():
-    widget = widgets.HeaderView(parent=None)
-    widget.show()
-    widget.close()
+
+    def test():
+        pass
+
+    table = widgets.HeaderView(parent=None)
+    table = widgets.TableView()
+    model = core.FileSystemModel()
+    table.setModel(model)
+    header = widgets.HeaderView(parent=table)
+    header.resize_mode("interactive")
+    header.resize_mode("interactive", col=0)
+    header.resize_sections("interactive")
+    header.set_custom_menu(test)
+    header.set_sizes([100])
+    label = header.section_labels()
+    print(label)
+    table.setHorizontalHeader(header)
+    table.show()
+    table.close()
 
 
 def test_label():
@@ -244,6 +260,9 @@ def test_pushbutton():
 
 def test_radiobutton():
     widget = widgets.RadioButton("Test")
+    widget.set_icon("mdi.timer")
+    widget.set_enabled()
+    widget.set_disabled()
     widget.show()
 
 

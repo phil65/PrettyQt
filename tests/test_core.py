@@ -10,11 +10,12 @@ import pytest
 from prettyqt import core
 
 
-def test_filesystemmodel():
+def test_filesystemmodel(qtmodeltester):
     model = core.FileSystemModel()
     idx = model.index(0, 0)
     data = model.data(idx, model.DATA_ROLE)
     model.yield_child_indexes(idx)
+    # qtmodeltester.check(model, force_py=True)
 
 
 def test_transposeproxymodel():
