@@ -5,7 +5,7 @@
 
 from qtpy import QtGui, QtCore
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, widgets
 
 
 class PdfWriter(QtGui.QPdfWriter):
