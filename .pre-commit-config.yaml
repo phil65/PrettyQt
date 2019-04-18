@@ -5,3 +5,5 @@
     - id: check-ast
     - id: check-case-conflict
     - id: check-docstring-first
+    - id: requirements-txt-fixer
+    - id: flake8
