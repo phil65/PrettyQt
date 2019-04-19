@@ -128,6 +128,15 @@ def test_filedialog():
     dlg.close()
 
 
+def test_filesystemmodel():
+    model = widgets.FileSystemModel()
+    idx = model.index(0, 0)
+    data = model.data(idx, model.DATA_ROLE)
+    print(data)
+    model.yield_child_indexes(idx)
+    # qtmodeltester.check(model, force_py=True)
+
+
 def test_fontdialog():
     dlg = widgets.FontDialog()
     dlg.show()
@@ -176,7 +185,7 @@ def test_headerview():
 
     table = widgets.HeaderView(parent=None)
     table = widgets.TableView()
-    model = core.FileSystemModel()
+    model = widgets.FileSystemModel()
     table.setModel(model)
     header = widgets.HeaderView(parent=table)
     header.resize_mode("interactive")

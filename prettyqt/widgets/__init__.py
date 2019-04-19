@@ -18,6 +18,8 @@ from .stylepainter import StylePainter
 from .dialog import Dialog
 from .messagebox import MessageBox
 
+from .filesystemmodel import FileSystemModel
+
 from .formlayout import FormLayout
 from .boxlayout import BoxLayout
 from .gridlayout import GridLayout
@@ -92,6 +94,7 @@ __all__ = ["Application",
            "StylePainter",
            "Dialog",
            "MessageBox",
+           "FileSystemModel",
            "FormLayout",
            "BoxLayout",
            "GridLayout",

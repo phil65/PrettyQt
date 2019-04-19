@@ -23,7 +23,6 @@ from .runnable import Runnable
 from .modelindex import ModelIndex
 from .threadpool import ThreadPool
 from .diriterator import DirIterator
-from .filesystemmodel import FileSystemModel
 from .transposeproxymodel import TransposeProxyModel
 
 from qtpy.QtCore import Slot, Signal, Property
@@ -40,7 +39,6 @@ __all__ = ["Object",
            "RectF",
            "MimeData",
            "DirIterator",
-           "FileSystemModel",
            "Slot",
            "Property",
            "RegExp",

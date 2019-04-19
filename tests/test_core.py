@@ -5,20 +5,11 @@
 
 import pathlib
 
-from prettyqt import core
-
-
-def test_filesystemmodel():
-    model = core.FileSystemModel()
-    idx = model.index(0, 0)
-    data = model.data(idx, model.DATA_ROLE)
-    print(data)
-    model.yield_child_indexes(idx)
-    # qtmodeltester.check(model, force_py=True)
+from prettyqt import core, widgets
 
 
 def test_transposeproxymodel():
-    source = core.FileSystemModel()
+    source = widgets.FileSystemModel()
     model = core.transposeproxymodel.TransposeProxyModel(source)
     idx = model.index(0, 0)
     model.data(idx)
