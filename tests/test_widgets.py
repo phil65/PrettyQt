@@ -6,6 +6,8 @@
 import pytest
 
 from prettyqt import widgets, core
+from qtpy import QtCore
+
 
 app = widgets.Application.create_default_app()
 
@@ -84,8 +86,10 @@ def test_desktopwidget():
     widgets.DesktopWidget()
 
 
-def test_dialog():
+def test_dialog(qtbot):
     dlg = widgets.Dialog(layout="horizontal")
+    qtbot.addWidget(dlg)
+    qtbot.keyPress(dlg, QtCore.Qt.Key_F11)
     dlg.set_modality()
     dlg.delete_on_close()
     dlg.add_widget(widgets.Widget())
@@ -124,6 +128,8 @@ def test_filedialog():
     dlg.set_accept_mode("open")
     dlg.set_accept_mode("save")
     dlg.set_filter(dict(a=[".csv"]))
+    dlg.selected_file()
+    dlg.selected_files()
     dlg.show()
     dlg.close()
 
