@@ -5,7 +5,6 @@
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import widgets
 
 TRIGGERS = dict(none=QtWidgets.QAbstractItemView.DoubleClicked,
                 double_click=QtWidgets.QAbstractItemView.DoubleClicked,
@@ -36,6 +35,7 @@ class TableView(QtWidgets.QTableView):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
     app = widgets.Application.create_default_app()
     dlg = widgets.MainWindow()
     status_bar = TableView()

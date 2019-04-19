@@ -183,11 +183,11 @@ def test_headerview():
     def test():
         pass
 
-    table = widgets.HeaderView(parent=None)
     table = widgets.TableView()
     model = widgets.FileSystemModel()
     table.setModel(model)
     header = widgets.HeaderView(parent=table)
+    table.setHorizontalHeader(header)
     header.resize_mode("interactive")
     header.resize_mode("interactive", col=0)
     header.resize_sections("interactive")
@@ -195,7 +195,6 @@ def test_headerview():
     header.set_sizes([100])
     label = header.section_labels()
     print(label)
-    table.setHorizontalHeader(header)
     table.show()
     table.close()
 
