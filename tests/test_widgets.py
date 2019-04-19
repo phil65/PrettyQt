@@ -82,6 +82,18 @@ def test_combobox():
     box.close()
 
 
+def test_dateedit():
+    widget = widgets.DateEdit()
+    widget.set_disabled()
+    widget.set_enabled()
+
+
+def test_datetimeedit():
+    widget = widgets.DateTimeEdit()
+    widget.set_disabled()
+    widget.set_enabled()
+
+
 def test_desktopwidget():
     widgets.DesktopWidget()
 
