@@ -36,7 +36,8 @@ class TextBrowser(QtWidgets.QTextBrowser):
 
     def show_rst(self, file_path):
         with open(file_path) as f:
-            html = docutils.core.publish_string(f.read(), writer_name='html')
+            file_content = f.read()
+        html = docutils.core.publish_string(file_content, writer_name='html')
         self.setHtml(str(html))
 
 
