@@ -256,6 +256,14 @@ def test_messagebox():
 def test_plaintextedit():
     widget = widgets.PlainTextEdit()
     widget.set_text("hallo")
+    widget.set_disabled()
+    widget.set_enabled()
+    widget.set_font("Consolas")
+    widget.append(" test")
+    assert widget.text() == "hallo\n test"
+    widget.highlight_current_line()
+    widget.set_read_only()
+    widget.get_result_widget()
     widget.show()
 
 
