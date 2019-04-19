@@ -5,15 +5,14 @@
 
 import pathlib
 
-import pytest
-
 from prettyqt import core
 
 
-def test_filesystemmodel(qtmodeltester):
+def test_filesystemmodel():
     model = core.FileSystemModel()
     idx = model.index(0, 0)
     data = model.data(idx, model.DATA_ROLE)
+    print(data)
     model.yield_child_indexes(idx)
     # qtmodeltester.check(model, force_py=True)
 
@@ -49,7 +48,7 @@ def test_regexp():
 
 
 def test_threadpool():
-    pool = core.ThreadPool()
+    core.ThreadPool()
 
 
 def test_timer():

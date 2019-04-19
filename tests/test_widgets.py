@@ -50,7 +50,9 @@ def test_boxlayout():
 
 def test_buttongroup():
     group = widgets.ButtonGroup()
-    return True
+    btn = widgets.RadioButton("test")
+    group.addButton(btn)
+    return group
 
 
 def test_checkbox():
@@ -67,13 +69,19 @@ def test_colordialog():
 
 def test_combobox():
     box = widgets.ComboBox()
+    box.set_disabled()
+    box.set_enabled()
+    box.add_item("test", data="data", icon="mdi.timer")
+    box.set_insert_policy("bottom")
+    box.set_size_policy("first_show")
+    box.set_icon_size(10)
+    box.set_min_char_length(10)
     box.show()
     box.close()
 
 
 def test_desktopwidget():
-    box = widgets.DesktopWidget()
-    return True
+    widgets.DesktopWidget()
 
 
 def test_dialog():
@@ -314,6 +322,13 @@ def test_textedit():
 
 def test_toolbar():
     widget = widgets.Toolbar()
+    widget.add_menu_button("test,", "mdi.timer", menu=widgets.Menu())
+    widget.set_style("icon")
+
+    def test():
+        pass
+
+    widget.add_action("test", "mdi.timer", test, checkable=True)
     widget.show()
 
 
