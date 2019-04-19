@@ -6,7 +6,6 @@
 from typing import Callable, Iterable, Optional
 
 from qtpy import QtCore, QtWidgets
-from prettyqt import widgets, core
 
 
 class HeaderView(QtWidgets.QHeaderView):
@@ -63,11 +62,7 @@ class HeaderView(QtWidgets.QHeaderView):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
     app = widgets.Application.create_default_app()
-    table = widgets.TableView()
-    model = core.FileSystemModel()
-    table.setModel(model)
-    header = HeaderView(parent=table)
-    table.setHorizontalHeader(header)
-    table.show()
+    header = HeaderView(parent=None)
     app.exec_()
