@@ -33,7 +33,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def text(self) -> str:
         return self.toPlainText()
 
-    def set_read_only(self, value: bool):
+    def set_read_only(self, value: bool = True):
         """set test to read only
 
         Args:

@@ -30,7 +30,7 @@ class LineEdit(QtWidgets.QLineEdit):
     def set_text(self, text: str):
         self.setText(text)
 
-    def set_read_only(self, value: bool):
+    def set_read_only(self, value: bool = True):
         """set test to read only
 
         Args:
