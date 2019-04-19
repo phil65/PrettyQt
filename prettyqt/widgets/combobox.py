@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtCore, QtWidgets
+import qtawesome as qta
 
 box = QtWidgets.QComboBox
 INSERT_POLICIES = dict(no_insert=box.NoInsert,
@@ -33,6 +34,8 @@ class ComboBox(QtWidgets.QComboBox):
                  data=None,
                  icon=None):
         if icon is not None:
+            if isinstance(icon, str):
+                icon = qta.icon(icon)
             self.addItem(icon, label, userData=data)
         else:
             self.addItem(label, userData=data)
