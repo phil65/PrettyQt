@@ -23,6 +23,8 @@ from .runnable import Runnable
 from .modelindex import ModelIndex
 from .threadpool import ThreadPool
 from .diriterator import DirIterator
+from .abstractitemmodel import AbstractItemModel
+from .abstracttablemodel import AbstractTableModel
 from .transposeproxymodel import TransposeProxyModel
 
 from qtpy.QtCore import Slot, Signal, Property
@@ -46,4 +48,6 @@ __all__ = ["Object",
            "ModelIndex",
            "ThreadPool",
            "Signal",
+           "AbstractItemModel",
+           "AbstractTableModel",
            "TransposeProxyModel"]

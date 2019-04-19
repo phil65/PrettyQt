@@ -32,6 +32,40 @@ def test_settings():
     settings.set_path("native", "user", path)
 
 
+def test_abstractitemmodel():
+    model = core.AbstractItemModel()
+    with model.change_layout():
+        pass
+    with model.reset_model():
+        pass
+    with model.remove_rows():
+        pass
+    with model.remove_columns():
+        pass
+    with model.insert_rows():
+        pass
+    with model.insert_columns():
+        pass
+    # qtmodeltester.check(model, force_py=True)
+
+
+def test_abstracttablemodel():
+    model = core.AbstractTableModel()
+    with model.change_layout():
+        pass
+    with model.reset_model():
+        pass
+    with model.remove_rows():
+        pass
+    with model.remove_columns():
+        pass
+    with model.insert_rows():
+        pass
+    with model.insert_columns():
+        pass
+    # qtmodeltester.check(model, force_py=True)
+
+
 def test_regexp():
     regex = core.RegExp("[0-9]")
     a = list(regex.matches_in_text("0a4"))
