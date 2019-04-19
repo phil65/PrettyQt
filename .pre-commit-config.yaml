@@ -1,7 +1,7 @@
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v2.1.0  # Use the ref you want to point at
   hooks:
-    - id: trailing-whitespace
+    # - id: trailing-whitespace
     - id: check-ast
     - id: check-case-conflict
     - id: check-docstring-first
