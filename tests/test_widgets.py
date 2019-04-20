@@ -3,22 +3,8 @@
 
 """Tests for `prettyqt` package."""
 
-import pytest
-
 from prettyqt import widgets, core
 from qtpy import QtCore
-
-
-app = widgets.Application.create_default_app()
-
-
-@pytest.fixture
-def response():
-    """Sample pytest fixture.
-
-    See more at: http://doc.pytest.org/en/latest/fixture.html
-    """
-    return widgets.Callout()
 
 
 def test_action():
@@ -28,16 +14,6 @@ def test_action():
     action.set_disabled()
     action.set_icon("mdi.timer")
     action.set_shortcut("Ctrl+A")
-    return True
-
-
-def test_application():
-    app.set_icon("mdi.timer")
-    app.set_metadata(app_name="test",
-                     app_version="1.0.0",
-                     org_name="test",
-                     org_domain="test")
-    app.get_mainwindow()
     return True
 
 

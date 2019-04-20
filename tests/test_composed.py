@@ -6,7 +6,6 @@
 from prettyqt import widgets, gui, core
 from qtpy import QtCore
 
-app = widgets.Application.create_default_app()
 test_widget = widgets.Widget()
 
 
