@@ -70,13 +70,9 @@ class MarkdownWindow(widgets.MainWindow):
             self.statusBar().showMessage('File open canceled!')
 
 
-def main():
+if __name__ == '__main__':
     app = widgets.Application.create_default_app()
     reader = MarkdownWindow()
     # reader.web_view.load(QtCore.QUrl('blank'))
     reader.show()
     app.exec_()
-
-
-if __name__ == '__main__':
-    main()
