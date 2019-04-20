@@ -10,7 +10,10 @@ test_widget = widgets.Widget()
 
 
 def test_buttondelegate():
-    widgets.ButtonDelegate(parent=None)
+    widget = widgets.ButtonDelegate(parent=None)
+    widget.setEditorData(widgets.Widget(), None)
+    widget.createEditor(None, None, QtCore.QModelIndex())
+    widget.currentIndexChanged()
 
 
 def test_callout():
