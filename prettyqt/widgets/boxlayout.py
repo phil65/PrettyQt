@@ -37,6 +37,9 @@ class BoxLayout(QtWidgets.QBoxLayout):
             raise ValueError(f"{alignment} not a valid alignment.")
         self.setAlignment(ALIGNMENTS[alignment])
 
+    def set_margin(self, margin: int):
+        self.setContentsMargins(margin, margin, margin, margin)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets

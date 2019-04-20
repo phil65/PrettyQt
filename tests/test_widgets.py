@@ -46,6 +46,7 @@ def test_boxlayout():
     widget = widgets.Widget()
     layout.addWidget(widget)
     layout.set_size_mode("maximum")
+    layout.set_margin(0)
     assert(len(layout) == 1)
     return True
 
