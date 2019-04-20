@@ -131,6 +131,8 @@ def test_dockwidget():
 
 def test_doublespinbox():
     widget = widgets.DoubleSpinBox()
+    widget.set_disabled()
+    widget.set_enabled()
     widget.show()
     widget.close()
 
@@ -311,11 +313,17 @@ def test_radiobutton():
 
 def test_slider():
     widget = widgets.Slider()
+    widget.set_horizontal()
+    assert widget.is_horizontal()
+    widget.set_vertical()
+    assert widget.is_vertical()
     widget.show()
 
 
 def test_spinbox():
     widget = widgets.SpinBox()
+    widget.set_disabled()
+    widget.set_enabled()
     widget.show()
 
 
