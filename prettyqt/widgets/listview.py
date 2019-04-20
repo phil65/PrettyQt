@@ -33,6 +33,8 @@ class ListView(QtWidgets.QListView):
         """
         select all items from list (deselect when all selected)
         """
+        if self.selectionModel() is None:
+            return None
         if self.selectionModel().hasSelection():
             self.clearSelection()
         else:

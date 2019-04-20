@@ -240,6 +240,8 @@ def test_lineedit():
 
 def test_listview():
     widget = widgets.ListView()
+    widget.set_selection_mode("single")
+    widget.toggle_select_all()
     widget.show()
     widget.close()
 
