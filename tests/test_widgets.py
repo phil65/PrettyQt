@@ -281,6 +281,10 @@ def test_progressdialog():
 
 def test_pushbutton():
     widget = widgets.PushButton("Test")
+    widget.set_disabled()
+    widget.set_enabled()
+    widget.set_icon("mdi.timer")
+    widget.set_style_icon("close")
     widget.show()
 
 
