@@ -20,7 +20,7 @@ def test_transposeproxymodel():
 def test_settings():
     settings = core.Settings("1", "2")
     settings.set_value("test", "value")
-    assert settings.contains("test")
+    assert "test" in settings
     assert settings.value("test") == "value"
     with core.Settings("ab") as s:
         s.set_value("test2", "xx")
@@ -28,7 +28,10 @@ def test_settings():
         pass
     with settings.read_array("test"):
         pass
+    with settings.group("test"):
+        pass
     path = pathlib.Path.cwd()
+    settings.set_default_format("ini")
     settings.set_path("native", "user", path)
 
 
