@@ -271,6 +271,7 @@ def test_menubar():
 
 def test_messagebox():
     widget = widgets.MessageBox()
+    widget.set_icon("mdi.timer")
     widget.show()
 
 

@@ -4,18 +4,12 @@
 """
 
 import qtawesome as qta
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
 from prettyqt import widgets
 
 
 class MessageBox(QtWidgets.QMessageBox):
-
-    def set_horizontal(self):
-        self.setOrientation(QtCore.Qt.Horizontal)
-
-    def set_vertical(self):
-        self.setOrientation(QtCore.Qt.Vertical)
 
     def set_icon(self, icon):
         if icon:
