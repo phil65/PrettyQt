@@ -13,3 +13,18 @@ class Color(QtGui.QColor):
             self.setNamedColor(color)
         else:
             self.setRgb(*color)
+
+    @classmethod
+    def from_text(cls, text):
+        """Create a QColor from specified string"""
+        color = cls()
+        text = str(text)
+        if text.startswith("#") and len(text) == 7:
+            correct = "#0123456789abcdef"
+            for char in text:
+                if char.lower() not in correct:
+                    return color
+        elif text not in list(cls.colorNames()):
+            return color
+        color.setNamedColor(text)
+        return color
