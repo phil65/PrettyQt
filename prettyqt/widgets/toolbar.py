@@ -57,6 +57,9 @@ class Toolbar(QtWidgets.QToolBar):
     def set_icon_size(self, size: int):
         self.setIconSize(core.Size(size, size))
 
+    def set_font_size(self, size: int):
+        self.setStyleSheet(f"font-size: {size}pt;")
+
 
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
