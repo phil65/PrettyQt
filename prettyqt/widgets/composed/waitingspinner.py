@@ -188,13 +188,12 @@ class BaseWaitingSpinner(widgets.Widget):
             distance += total_lines
         return distance
 
-    def current_line_color(self, count_distance, total_lines, trailFadePerc,
-                           min_opacity, colorinput):
-        color = gui.Color(colorinput)
+    def current_line_color(self, count_distance, total_lines, fade_perc,
+                           min_opacity, color):
         if count_distance == 0:
             return color
         min_alpha_f = min_opacity / 100.0
-        dist_threshold = int(math.ceil((total_lines - 1) * trailFadePerc / 100.0))
+        dist_threshold = int(math.ceil((total_lines - 1) * fade_perc / 100.0))
         if count_distance > dist_threshold:
             color.setAlphaF(min_alpha_f)
         else:
