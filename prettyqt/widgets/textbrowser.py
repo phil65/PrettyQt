@@ -41,13 +41,9 @@ class TextBrowser(QtWidgets.QTextBrowser):
         self.setHtml(str(html))
 
 
-def main():
+if __name__ == '__main__':
     import sys
     app = QtWidgets.QApplication(sys.argv)
     reader = TextBrowser()
     reader.show()
     app.exec_()
-
-
-if __name__ == '__main__':
-    main()
