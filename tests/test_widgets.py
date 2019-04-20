@@ -60,6 +60,8 @@ def test_buttongroup():
 
 def test_checkbox():
     chk = widgets.CheckBox()
+    chk.set_disabled()
+    chk.set_enabled()
     chk.show()
     chk.close()
 
