@@ -3,16 +3,15 @@
 
 """Tests for `prettyqt` package."""
 
-import pytest
-
 from prettyqt import widgets, gui, core
+from qtpy import QtCore
 
 app = widgets.Application.create_default_app()
 test_widget = widgets.Widget()
 
 
 def test_buttondelegate():
-    delegate = widgets.ButtonDelegate(parent=None)
+    widgets.ButtonDelegate(parent=None)
 
 
 def test_callout():
@@ -23,10 +22,12 @@ def test_callout():
 
 def test_imageviewer():
     widget = widgets.ImageViewer()
+    widget.show()
 
 
 def test_markdownwidget():
     widget = widgets.MarkdownWindow()
+    widget.show()
 
 
 def test_popupinfo():
@@ -45,8 +46,9 @@ def test_selectionwidget():
     assert(choice == ";")
 
 
-def test_spanslider():
+def test_spanslider(qtbot):
     slider = widgets.SpanSlider()
+    qtbot.addWidget(slider)
     slider.set_lower_value(10)
     slider.set_upper_value(20)
     slider.set_lower_pos(15)
@@ -63,6 +65,9 @@ def test_spanslider():
     slider.pixel_pos_to_value(100)
     slider.draw_span(gui.Painter(), core.Rect())
     slider.move_pressed_handle()
+    slider.show()
+    qtbot.mouseClick(slider, QtCore.Qt.LeftButton)
+    qtbot.mouseMove(slider, core.Point(20, 20))
     assert(slider.movement_mode is None)
 
 
