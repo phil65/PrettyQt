@@ -19,7 +19,6 @@ class BoxLayout(QtWidgets.QBoxLayout):
     def __init__(self, orientation, parent=None):
         o = self.TopToBottom if orientation == "vertical" else self.LeftToRight
         super().__init__(o, parent)
-        self.setContentsMargins(0, 0, 0, 0)
 
     def __getitem__(self, index):
         return self.itemAt(index)
