@@ -3,8 +3,6 @@
 
 """Tests for `prettyqt` package."""
 
-import pytest
-
 from prettyqt import gui, core
 from qtpy import QtCore
 
@@ -16,6 +14,7 @@ def test_color():
 
 def test_icon():
     icon = gui.Icon()
+    icon.for_color("black")
 
 
 def test_keysequence():
