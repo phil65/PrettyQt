@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtWidgets, QtCore
+from prettyqt import gui
 
 
 TRIGGERS = dict(none=QtWidgets.QAbstractItemView.DoubleClicked,
@@ -34,6 +35,9 @@ class TableView(QtWidgets.QTableView):
 
     def set_horizontal_scrollbar_visibility(self, mode: str):
         self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
+
+    def set_vertical_scrollbar_visibility(self, mode: str):
+        self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
     def set_selection_behaviour(self, behaviour: str):
         """set selection behaviour for given item view
@@ -89,6 +93,13 @@ class TableView(QtWidgets.QTableView):
             return None
         idx = self.model().index(0, col_num)
         self.scrollTo(idx)
+
+    def highlight_when_inactive(self):
+        """also highlight items when widget does not have focus
+        """
+        p = gui.Palette()
+        p.highlight_inactive()
+        self.setPalette(p)
 
 
 if __name__ == "__main__":

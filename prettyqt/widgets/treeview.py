@@ -3,7 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
+from prettyqt import gui
 
 SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
                        extended=QtWidgets.QAbstractItemView.ExtendedSelection,
@@ -13,6 +14,10 @@ SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
 SELECTION_BEHAVIOURS = dict(rows=QtWidgets.QAbstractItemView.SelectRows,
                             items=QtWidgets.QAbstractItemView.SelectItems,
                             columns=QtWidgets.QAbstractItemView.SelectColumns)
+
+SCROLLBAR_POLICY = dict(always_on=QtCore.Qt.ScrollBarAlwaysOn,
+                        always_off=QtCore.Qt.ScrollBarAlwaysOff,
+                        as_needed=QtCore.Qt.ScrollBarAsNeeded)
 
 
 class TreeView(QtWidgets.QTreeView):
@@ -31,6 +36,12 @@ class TreeView(QtWidgets.QTreeView):
 
     def h_header(self):
         return self.header()
+
+    def set_horizontal_scrollbar_visibility(self, mode: str):
+        self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
+
+    def set_vertical_scrollbar_visibility(self, mode: str):
+        self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
     def set_selection_mode(self, mode: str):
         """set selection mode for given item view
@@ -86,6 +97,13 @@ class TreeView(QtWidgets.QTreeView):
             return None
         idx = self.model().index(0, col_num)
         self.scrollTo(idx)
+
+    def highlight_when_inactive(self):
+        """also highlight items when widget does not have focus
+        """
+        p = gui.Palette()
+        p.highlight_inactive()
+        self.setPalette(p)
 
 
 if __name__ == "__main__":
