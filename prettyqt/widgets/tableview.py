@@ -77,6 +77,19 @@ class TableView(QtWidgets.QTableView):
             return 0
         return len(self.selectionModel().selectedRows())
 
+    def jump_to_column(self, col_num: int):
+        """make sure column at given index is visible
+
+        scrolls to column at given index
+
+        Args:
+            col_num: column to scroll to
+        """
+        if self.model() is None:
+            return None
+        idx = self.model().index(0, col_num)
+        self.scrollTo(idx)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
