@@ -10,6 +10,10 @@ SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
                        multi=QtWidgets.QAbstractItemView.MultiSelection,
                        none=QtWidgets.QAbstractItemView.NoSelection)
 
+SELECTION_BEHAVIOURS = dict(rows=QtWidgets.QAbstractItemView.SelectRows,
+                            items=QtWidgets.QAbstractItemView.SelectItems,
+                            columns=QtWidgets.QAbstractItemView.SelectColumns)
+
 
 class TreeView(QtWidgets.QTreeView):
 
@@ -43,6 +47,32 @@ class TreeView(QtWidgets.QTreeView):
             raise ValueError("Format must be either 'single', 'extended',"
                              "'multi' or 'None'")
         self.setSelectionMode(SELECTION_MODES[mode])
+
+    def set_selection_behaviour(self, behaviour: str):
+        """set selection behaviour for given item view
+
+        Allowed values are "rows", "columns", "items"
+
+        Args:
+            behaviour: selection behaviour to use
+
+        Raises:
+            ValueError: behaviour does not exist
+        """
+        if behaviour not in SELECTION_BEHAVIOURS:
+            raise ValueError("invalid selection behaviour")
+        self.setSelectionBehavior(SELECTION_BEHAVIOURS[behaviour])
+
+    def num_selected(self) -> int:
+        """returns amount of selected rows
+
+        Returns:
+            amount of selected rows
+            int
+        """
+        if self.selectionModel() is None:
+            return 0
+        return len(self.selectionModel().selectedRows())
 
 
 if __name__ == "__main__":

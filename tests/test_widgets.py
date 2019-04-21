@@ -361,8 +361,20 @@ def test_toolbar():
     widget.show()
 
 
+def test_tableview():
+    widget = widgets.TableView()
+    widget.set_selection_mode("extended")
+    widget.set_selection_behaviour("rows")
+    widget.set_horizontal_scrollbar_visibility("always_on")
+    widget.num_selected()
+    widget.show()
+
+
 def test_treeview():
     widget = widgets.TreeView()
+    widget.set_selection_mode("extended")
+    widget.set_selection_behaviour("rows")
+    widget.num_selected()
     widget.show()
 
 
