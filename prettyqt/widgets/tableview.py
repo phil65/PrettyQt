@@ -85,6 +85,12 @@ class TableView(QtWidgets.QTableView):
     def set_vertical_scrollbar_visibility(self, mode: str):
         self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
+    def set_edit_triggers(self, *triggers):
+        for item in triggers:
+            if item not in TRIGGERS:
+                raise ValueError("trigger type not available")
+        self.setEditTriggers(sum(triggers))
+
     def set_selection_behaviour(self, behaviour: str):
         """set selection behaviour for given item view
 
