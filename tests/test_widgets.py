@@ -367,6 +367,7 @@ def test_tableview():
     widget.set_selection_behaviour("rows")
     widget.set_horizontal_scrollbar_visibility("always_on")
     widget.set_vertical_scrollbar_visibility("always_on")
+    widget.set_edit_triggers("edit_key")
     widget.num_selected()
     widget.jump_to_column(0)
     widget.highlight_when_inactive()

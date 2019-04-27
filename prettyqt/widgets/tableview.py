@@ -89,7 +89,7 @@ class TableView(QtWidgets.QTableView):
         for item in triggers:
             if item not in TRIGGERS:
                 raise ValueError("trigger type not available")
-        self.setEditTriggers(sum(triggers))
+        self.setEditTriggers(sum(TRIGGERS[t] for t in triggers))
 
     def set_selection_behaviour(self, behaviour: str):
         """set selection behaviour for given item view
