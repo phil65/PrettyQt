@@ -3,6 +3,9 @@
 @author: Philipp Temminghoff
 """
 
+import logging
+from typing import Optional
+
 from qtpy import QtWidgets, QtCore
 from prettyqt import gui
 
@@ -34,8 +37,51 @@ class TreeView(QtWidgets.QTreeView):
         self.setUniformRowHeights(True)
         self.set_selection_mode("extended")
 
+    def setModel(self, model):
+        """
+        delete old selection model explicitely, seems to help with memory usage
+        """
+        old_sel_model = self.selectionModel()
+        super().setModel(model)
+        if old_sel_model:
+            del old_sel_model
+
+    def selectAll(self):
+        """
+        Override, we dont want to selectAll for too many items for performance reasons
+        """
+        if self.model() is None:
+            return None
+        if self.model().rowCount() * self.model().columnCount() > 1_000_000:
+            logging.info("Too many cells to select.")
+            return None
+        super().selectAll()
+
     def h_header(self):
         return self.header()
+
+    def current_index(self) -> Optional[int]:
+        if self.selectionModel() is None:
+            return None
+        return self.selectionModel().currentIndex()
+
+    def current_data(self):
+        if self.model() is None:
+            return None
+        return self.current().data(QtCore.Qt.UserRole)
+
+    def setup_list_style(self):
+        self.setSelectionBehavior(self.SelectRows)
+        self.h_header().setStretchLastSection(True)
+        self.verticalHeader().setSectionResizeMode(self.verticalHeader().Fixed)
+        self.verticalHeader().setDefaultSectionSize(28)
+
+    def setup_dragdrop_move(self):
+        self.setDragEnabled(True)
+        self.setAcceptDrops(True)
+        self.setDragDropMode(self.DragDrop)
+        self.setDefaultDropAction(QtCore.Qt.MoveAction)
+        self.setDropIndicatorShown(True)
 
     def set_horizontal_scrollbar_visibility(self, mode: str):
         self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
@@ -104,6 +150,23 @@ class TreeView(QtWidgets.QTreeView):
         p = gui.Palette()
         p.highlight_inactive()
         self.setPalette(p)
+
+    def raise_dock(self) -> bool:
+        node = self
+        while node:
+            node = node.parent()
+            if isinstance(node, QtWidgets.QDockWidget):
+                node.setVisible(True)
+                node.raise_()
+                return True
+        return False
+
+    def adapt_sizes(self):
+        model = self.model()
+        if model is not None and (model.rowCount() * model.columnCount()) < 1000:
+            self.resizeColumnsToContents()
+        else:
+            self.h_header().resize_sections("interactive")
 
 
 if __name__ == "__main__":
