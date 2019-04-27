@@ -25,8 +25,11 @@ class ProgressDialog(QtWidgets.QProgressDialog):
 
         self.set_icon("mdi.timer-sand-empty")
         self.setWindowModality(QtCore.Qt.ApplicationModal)
-        self.setWindowFlags(QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.Window)
-        self.set_titlebar_buttons()
+        self.set_flags(minimize=False,
+                       maximize=False,
+                       close=False,
+                       stay_on_top=True,
+                       window=True)
         self.setCancelButton(None)
         self.cancel()
 
@@ -36,24 +39,31 @@ class ProgressDialog(QtWidgets.QProgressDialog):
                 icon = qta.icon(icon, color="lightgray")
             self.setWindowIcon(icon)
 
-    def open(self, message=None):
-        if not message:
-            message = "Processing..."
+    def show_message(self, message):
         self.setLabelText(message)
         self.show()
 
-    def set_titlebar_buttons(self,
-                             minimize: bool = False,
-                             maximize: bool = False,
-                             close: bool = False):
-        self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
-        self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, maximize)
-        self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, close)
+    def set_flags(self,
+                  minimize: bool = None,
+                  maximize: bool = None,
+                  close: bool = None,
+                  stay_on_top: bool = None,
+                  window: bool = None):
+        if minimize is not None:
+            self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
+        if maximize is not None:
+            self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, maximize)
+        if close is not None:
+            self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, close)
+        if stay_on_top is not None:
+            self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint, stay_on_top)
+        if window is not None:
+            self.setWindowFlag(QtCore.Qt.Window, window)
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     widget = ProgressDialog()
-    widget.show()
+    widget.show_message("test")
     widget.exec_()
