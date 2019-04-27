@@ -64,7 +64,7 @@ class TableView(QtWidgets.QTableView):
     def current_data(self):
         if self.model() is None:
             return None
-        return self.current().data(QtCore.Qt.UserRole)
+        return self.current_index().data(QtCore.Qt.UserRole)
 
     def setup_list_style(self):
         self.setSelectionBehavior(self.SelectRows)

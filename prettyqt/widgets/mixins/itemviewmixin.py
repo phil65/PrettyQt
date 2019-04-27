@@ -94,7 +94,7 @@ class ItemViewMixin(object):
         if self.model() is None:
             return None
         role = self.model().DATA_ROLE
-        return self.current().data(role)
+        return self.current_index().data(role)
 
     def add_item(self, item):
         """append an item to the model
