@@ -24,6 +24,7 @@ from .modelindex import ModelIndex
 from .threadpool import ThreadPool
 from .diriterator import DirIterator
 from .abstractitemmodel import AbstractItemModel
+from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel
 
 from qtpy.QtCore import Slot, Signal, Property
@@ -48,4 +49,5 @@ __all__ = ["Object",
            "ThreadPool",
            "Signal",
            "AbstractItemModel",
+           "SortFilterProxyModel",
            "AbstractTableModel"]
