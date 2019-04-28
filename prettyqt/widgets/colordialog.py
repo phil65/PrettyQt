@@ -5,11 +5,16 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, gui
 
 
 class ColorDialog(QtWidgets.QColorDialog):
-    pass
+
+    @classmethod
+    def get_color(cls, preset, parent=None):
+        if isinstance(preset, str):
+            preset = gui.Color(preset)
+        return cls.getColor(preset, parent)
 
 
 if __name__ == "__main__":
