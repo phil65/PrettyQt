@@ -12,7 +12,7 @@ from qtpy import QtWidgets, QtCore
 from prettyqt import gui
 
 
-TRIGGERS = dict(none=QtWidgets.QAbstractItemView.DoubleClicked,
+TRIGGERS = dict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
                 double_click=QtWidgets.QAbstractItemView.DoubleClicked,
                 edit_key=QtWidgets.QAbstractItemView.EditKeyPressed)
 
