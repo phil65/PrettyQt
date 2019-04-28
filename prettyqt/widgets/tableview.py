@@ -5,6 +5,8 @@
 
 from typing import Optional
 import logging
+import functools
+import operator
 
 from qtpy import QtWidgets, QtCore
 from prettyqt import gui
@@ -89,7 +91,8 @@ class TableView(QtWidgets.QTableView):
         for item in triggers:
             if item not in TRIGGERS:
                 raise ValueError("trigger type not available")
-        self.setEditTriggers(sum(TRIGGERS[t] for t in triggers))
+        flags = functools.reduce(operator.ior([TRIGGERS[t] for t in triggers]))
+        self.setEditTriggers(flags)
 
     def set_selection_behaviour(self, behaviour: str):
         """set selection behaviour for given item view
