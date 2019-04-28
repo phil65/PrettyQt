@@ -7,4 +7,6 @@ from qtpy import QtCore
 
 
 class MimeData(QtCore.QMimeData):
-    pass
+
+    def set_data(self, mime_type, data):
+        self.setData(mime_type, QtCore.QByteArray(data.encode()))
