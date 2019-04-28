@@ -15,6 +15,7 @@ from .pixmap import Pixmap
 from .painter import Painter
 from .palette import Palette
 from .cursor import Cursor
+from .polygonf import PolygonF
 from .standarditem import StandardItem
 from .standarditemmodel import StandardItemModel
 from .textcharformat import TextCharFormat
@@ -33,6 +34,7 @@ __all__ = ["RegExpValidator",
            "Painter",
            "Palette",
            "Cursor",
+           "PolygonF",
            "StandardItem",
            "StandardItemModel",
            "TextCharFormat",
