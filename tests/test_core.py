@@ -95,7 +95,7 @@ def test_settings():
     settings.set_value("test", "value")
     assert "test" in settings
     assert settings.value("test") == "value"
-    with core.Settings("ab") as s:
+    with core.Settings("ab", "cd") as s:
         s.set_value("test2", "xx")
     with settings.write_array("test"):
         pass

@@ -33,6 +33,8 @@ class Settings(QtCore.QSettings):
             self.endGroup()
 
     def set_value(self, key, value):
+        if not self.applicationName():
+            raise ValueError("no app name defined")
         self.setValue(key, value)
 
     def value(self, key, default=None):
