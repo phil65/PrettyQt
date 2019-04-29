@@ -173,6 +173,14 @@ class TableView(QtWidgets.QTableView):
         else:
             self.h_header().resize_sections("interactive")
 
+    def set_horizontal_scrollbar_width(self, width):
+        stylesheet = f"QScrollBar:horizontal {{height: {width}px;}}"
+        self.horizontalScrollBar().setStyleSheet(stylesheet)
+
+    def set_vertical_scrollbar_width(self, width):
+        stylesheet = f"QScrollBar:vertical {{height: {width}px;}}"
+        self.verticalScrollBar().setStyleSheet(stylesheet)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
