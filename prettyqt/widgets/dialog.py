@@ -16,7 +16,7 @@ MODALITIES = dict(window=QtCore.Qt.WindowModal,
 
 class Dialog(QtWidgets.QDialog):
 
-    DEFAULT_SIZE = (1500, 1000)
+    DEFAULT_SIZE = None
 
     def __init__(self,
                  title: str = "",
