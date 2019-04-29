@@ -4,14 +4,13 @@
 """
 
 from qtpy import QtGui
-import numpy as np
 
 
 class PolygonF(QtGui.QPolygonF):
-    pass
 
     @classmethod
     def from_xy(cls, xdata, ydata):
+        import numpy as np
         size = len(xdata)
         polyline = cls(size)
         pointer = polyline.data()
