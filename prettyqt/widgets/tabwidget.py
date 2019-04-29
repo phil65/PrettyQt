@@ -18,10 +18,8 @@ class TabWidget(QtWidgets.QTabWidget):
 
         # Basic initalization
         super().__init__(*args, **kwargs)
-        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
         self.tabCloseRequested.connect(self.remove_tab)
         self.tab_bar = widgets.TabBar(self)
-        self.tab_bar.on_detach.connect(self.detach_tab)
 
         self.setTabBar(self.tab_bar)
 
@@ -29,11 +27,9 @@ class TabWidget(QtWidgets.QTabWidget):
         # does not have a parent
         self.detached_tabs = dict()
 
-        # Close all detached tabs if the application is closed explicitly
+    def set_detachable(self):
+        self.tab_bar.on_detach.connect(self.detach_tab)
         QtWidgets.qApp.aboutToQuit.connect(self.close_detached_tabs)
-
-        self.setEnabled(True)
-        self.setTabsClosable(True)
         self.setMovable(True)
 
     @QtCore.Slot(int, QtCore.QPoint)
@@ -60,7 +56,7 @@ class TabWidget(QtWidgets.QTabWidget):
         # Create a new detached tab window
         detached_tab = DetachedTab(name, widget)
         detached_tab.setWindowModality(QtCore.Qt.NonModal)
-        detached_tab.setWindowIcon(icon)
+        detached_tab.set_icon(icon)
         detached_tab.setGeometry(widget_rect)
         detached_tab.on_close.connect(self.attach_tab)
         detached_tab.move(point)
@@ -111,7 +107,8 @@ class TabWidget(QtWidgets.QTabWidget):
         self.setCurrentIndex(index)
 
     def close_detached_tabs(self):
-        #  Close all tabs that are currently detached.
+        """Close all tabs that are currently detached
+        """
         for detached_tab in self.detached_tabs.values():
             detached_tab.close()
 
