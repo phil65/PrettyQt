@@ -3,12 +3,12 @@
 
 """Tests for `prettyqt` package."""
 
-from prettyqt import core, widgets
+from prettyqt import widgets, custom_models
 
 
 def test_transposeproxymodel():
     source = widgets.FileSystemModel()
-    model = core.transposeproxymodel.TransposeProxyModel(source)
+    model = custom_models.TransposeProxyModel(source)
     idx = model.index(0, 0)
     model.data(idx)
     model.columnCount()
