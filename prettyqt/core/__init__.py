@@ -22,6 +22,7 @@ from .mimedata import MimeData
 from .runnable import Runnable
 from .modelindex import ModelIndex
 from .threadpool import ThreadPool
+from .dir import Dir
 from .diriterator import DirIterator
 from .abstractitemmodel import AbstractItemModel
 from .sortfilterproxymodel import SortFilterProxyModel
@@ -40,6 +41,7 @@ __all__ = ["Object",
            "Rect",
            "RectF",
            "MimeData",
+           "Dir",
            "DirIterator",
            "Slot",
            "Property",
