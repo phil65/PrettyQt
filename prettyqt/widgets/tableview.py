@@ -171,7 +171,7 @@ class TableView(QtWidgets.QTableView):
         if model is not None and (model.rowCount() * model.columnCount()) < 1000:
             self.resizeColumnsToContents()
         else:
-            self.h_header().resize_sections("interactive")
+            self.h_header().resizeSections(self.h_header().Interactive)
 
     def set_horizontal_scrollbar_width(self, width):
         stylesheet = f"QScrollBar:horizontal {{height: {width}px;}}"
