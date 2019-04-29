@@ -89,6 +89,14 @@ class TreeView(QtWidgets.QTreeView):
     def set_vertical_scrollbar_visibility(self, mode: str):
         self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
+    def set_horizontal_scrollbar_width(self, width):
+        stylesheet = f"QScrollBar:horizontal {{height: {width}px;}}"
+        self.horizontalScrollBar().setStyleSheet(stylesheet)
+
+    def set_vertical_scrollbar_width(self, width):
+        stylesheet = f"QScrollBar:vertical {{height: {width}px;}}"
+        self.verticalScrollBar().setStyleSheet(stylesheet)
+
     def set_selection_mode(self, mode: str):
         """set selection mode for given item view
 
