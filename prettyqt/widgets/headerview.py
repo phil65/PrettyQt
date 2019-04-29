@@ -3,9 +3,11 @@
 @author: Philipp Temminghoff
 """
 
+import functools
 from typing import Callable, Iterable, Optional
 
 from qtpy import QtCore, QtWidgets
+from prettyqt import widgets
 
 
 class HeaderView(QtWidgets.QHeaderView):
@@ -41,19 +43,23 @@ class HeaderView(QtWidgets.QHeaderView):
         """
         context menu for our files tree
         """
-        menu = QtWidgets.QMenu(parent=self)
+        menu = widgets.Menu(parent=self)
         for i, header_label in enumerate(self.section_labels()[1:], start=1):
             act = menu.addAction(header_label)
             act.setCheckable(True)
             val = not self.isSectionHidden(i)
             act.setChecked(val)
-            self.setSectionHidden(i, val)
-            self.section_vis_changed.emit(i, val)
+            fn = functools.partial(self.change_section_vis, i=i, val=val)
+            act.triggered.connect(fn)
         menu.exec_(self.mapToGlobal(event.pos()))
 
     def set_custom_menu(self, method: Callable):
         self.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.customContextMenuRequested.connect(method)
+
+    def change_section_vis(self, i, val):
+        self.section_vis_changed.emit(i, val)
+        self.setSectionHidden(i, val)
 
     def set_sizes(self, sizes: Iterable):
         for i, size in enumerate(sizes):
@@ -62,7 +68,6 @@ class HeaderView(QtWidgets.QHeaderView):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
     app = widgets.Application.create_default_app()
     header = HeaderView(parent=None)
     app.exec_()
