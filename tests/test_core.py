@@ -5,16 +5,7 @@
 
 import pathlib
 
-from prettyqt import core, widgets
-
-
-def test_transposeproxymodel():
-    source = widgets.FileSystemModel()
-    model = core.transposeproxymodel.TransposeProxyModel(source)
-    idx = model.index(0, 0)
-    model.data(idx)
-    model.columnCount()
-    model.rowCount()
+from prettyqt import core
 
 
 def test_settings():
