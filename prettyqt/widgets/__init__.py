@@ -82,6 +82,7 @@ from .composed.imageviewer import ImageViewer
 from .composed.popupinfo import PopupInfo
 from .composed.buttondelegate import ButtonDelegate
 from .composed.selectionwidget import SelectionWidget
+from .composed.codeeditor import CodeEditor
 
 __all__ = ["Application",
            "Widget",
@@ -149,4 +150,5 @@ __all__ = ["Application",
            "SelectionWidget",
            "Image",
            "ImageViewer",
-           "MarkdownWindow"]
+           "MarkdownWindow",
+           "CodeEditor"]
