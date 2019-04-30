@@ -4,8 +4,7 @@
 """
 
 from qtpy import QtCore, QtGui
-
-COLORS = dict(transparent=QtCore.Qt.transparent)
+from prettyqt import gui
 
 PEN_TYPES = dict(none=QtCore.Qt.NoPen)
 
@@ -23,9 +22,9 @@ class Painter(QtGui.QPainter):
         self.setRenderHint(self.Antialiasing, True)
 
     def fill_rect(self, rect, color):
-        if color not in COLORS:
+        if color not in gui.Color.colorNames():
             raise ValueError("Invalid value for color.")
-        self.fillRect(rect, COLORS[color])
+        self.fillRect(rect, gui.Color(color))
 
     def set_pen(self, pen_type):
         if pen_type not in PEN_TYPES:
