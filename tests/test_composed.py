@@ -22,6 +22,13 @@ def test_callout():
     callout.set_text("test")
 
 
+def test_codeeditor():
+    editor = widgets.CodeEditor()
+    assert editor.text() == ""
+    editor.line_area_width()
+    editor.set_syntax("python")
+
+
 def test_imageviewer():
     widget = widgets.ImageViewer()
     widget.show()
