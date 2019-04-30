@@ -12,6 +12,7 @@ from .font import Font
 from .fontmetrics import FontMetrics
 from .icon import Icon
 from .pen import Pen
+from .picture import Picture
 from .pixmap import Pixmap
 from .painter import Painter
 from .palette import Palette
@@ -32,6 +33,7 @@ __all__ = ["RegExpValidator",
            "FontMetrics",
            "Icon",
            "Pen",
+           "Picture",
            "Pixmap",
            "Painter",
            "Palette",
