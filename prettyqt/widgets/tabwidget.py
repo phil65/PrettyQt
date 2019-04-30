@@ -127,10 +127,10 @@ class TabWidget(QtWidgets.QTabWidget):
         index = self.add_tab(widget, title, icon="mdi.widgets")
         self.setCurrentIndex(index)
 
-    def set_button(self, index, position, widget):
+    def set_button(self, index, position, widget=None):
         POSITONS = dict(left=QtWidgets.QTabBar.LeftSide,
                         right=QtWidgets.QTabBar.RightSide)
-        self.tabBar().setTabButton(index, POSITONS[position], None)
+        self.tabBar().setTabButton(index, POSITONS[position], widget)
 
 
 class DetachedTab(widgets.MainWindow):
