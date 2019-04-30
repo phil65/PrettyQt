@@ -73,8 +73,6 @@ class TreeView(QtWidgets.QTreeView):
     def setup_list_style(self):
         self.setSelectionBehavior(self.SelectRows)
         self.h_header().setStretchLastSection(True)
-        self.verticalHeader().setSectionResizeMode(self.verticalHeader().Fixed)
-        self.verticalHeader().setDefaultSectionSize(28)
 
     def setup_dragdrop_move(self):
         self.setDragEnabled(True)
@@ -172,7 +170,7 @@ class TreeView(QtWidgets.QTreeView):
     def adapt_sizes(self):
         model = self.model()
         if model is not None and (model.rowCount() * model.columnCount()) < 1000:
-            self.resizeColumnsToContents()
+            self.h_header().resizeSections(self.h_header().ResizeToContents)
         else:
             self.h_header().resize_sections("interactive")
 
