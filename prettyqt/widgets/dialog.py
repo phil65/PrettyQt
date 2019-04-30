@@ -37,6 +37,12 @@ class Dialog(QtWidgets.QDialog):
             self.layout = widgets.BoxLayout(layout)
             self.setLayout(self.layout)
 
+    def resize(self, *size):
+        if isinstance(size[0], tuple):
+            super().resize(*size[0])
+        else:
+            super().resize(*size)
+
     def set_modality(self, modality: str = "window"):
         if modality not in MODALITIES:
             raise ValueError("Invalid value for modality.")
