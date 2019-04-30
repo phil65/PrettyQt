@@ -7,5 +7,4 @@ from qtpy import QtGui
 
 
 class StandardItem(QtGui.QStandardItem):
-
     pass

@@ -30,12 +30,6 @@ def test_standarditemmodel():
     model.add_item("test")
 
 
-def test_textcharformat():
-    fmt = gui.TextCharFormat()
-    fmt.set_font_weight("bold")
-    fmt.set_foreground_color("yellow")
-
-
 def test_painter():
     painter = gui.Painter()
     painter.use_antialiasing()
@@ -48,3 +42,38 @@ def test_painter():
 def test_pdfwriter():
     writer = gui.PdfWriter("test")
     writer.setup(core.RectF())
+
+
+def test_pen():
+    gui.Pen()
+
+
+def test_picture():
+    gui.Picture()
+
+
+def test_pixmap():
+    gui.Pixmap()
+
+
+def test_polygonf():
+    gui.PolygonF()
+
+
+def test_regexpvalidator():
+    val = gui.RegExpValidator()
+    val.set_regex("[0-9]")
+
+
+def test_standarditem():
+    gui.StandardItem()
+
+
+def test_syntaxhighlighter():
+    gui.SyntaxHighlighter(None)
+
+
+def test_textcharformat():
+    fmt = gui.TextCharFormat()
+    fmt.set_font_weight("bold")
+    fmt.set_foreground_color("yellow")
