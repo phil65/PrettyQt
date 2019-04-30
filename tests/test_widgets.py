@@ -202,6 +202,7 @@ def test_label():
     label = widgets.Label()
     label.set_image("")
     label.set_alignment(horizontal="left", vertical="top")
+    label.set_text_interaction("by_mouse")
     label.show()
     label.close()
 

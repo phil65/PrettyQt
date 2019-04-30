@@ -21,8 +21,8 @@ V_ALIGNMENTS = dict(top=QtCore.Qt.AlignTop,
                     baseline=QtCore.Qt.AlignBaseline)
 
 TEXT_INTERACTION = dict(none=QtCore.Qt.NoTextInteraction,
-                        by_mouse=QtCore.Qt.NoTextInteraction,
-                        by_keyboard=QtCore.Qt.NoTextInteraction)
+                        by_mouse=QtCore.Qt.TextSelectableByMouse,
+                        by_keyboard=QtCore.Qt.TextSelectableByKeyboard)
 
 
 class Label(QtWidgets.QLabel):
@@ -39,6 +39,9 @@ class Label(QtWidgets.QLabel):
         else:
             return
         self.setAlignment(flag)
+
+    def set_text_interaction(self, interaction_type):
+        self.setTextInteractionFlags(TEXT_INTERACTION[interaction_type])
 
     def set_image(self,
                   path: Union[pathlib.Path, str],
