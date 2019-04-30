@@ -7,6 +7,10 @@ from prettyqt import gui, core
 from qtpy import QtCore
 
 
+def test_brush():
+    gui.Brush()
+
+
 def test_color():
     color = gui.Color()
     color.set_color("gray")
