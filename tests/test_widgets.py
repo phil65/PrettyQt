@@ -322,8 +322,12 @@ def test_tabwidget():
     widget = widgets.TabWidget()
     widget.add_tab(widgets.Widget(), "mdi.timer")
     widget.insert_tab(0, widgets.Widget(), "test", "mdi.timer")
+    widget.add_tab(widgets.Widget(), "test", "mdi.timer")
+    widget.set_button(0, "right", None)
+    widget.set_detachable()
     widget.detach_tab(0, core.Point())
     widget.remove_tab(0)
+    # widget.close_detached_tabs()
     widget.show()
     widget.close()
     assert True
@@ -385,6 +389,13 @@ def test_tableview():
 
 def test_treeview():
     widget = widgets.TreeView()
+    model = widgets.FileSystemModel()
+    widget.setModel(model)
+    widget.selectAll()
+    widget.h_header()
+    widget.setup_list_style()
+    widget.setup_dragdrop_move()
+    widget.current_index()
     widget.set_selection_mode("extended")
     widget.set_selection_behaviour("rows")
     widget.set_horizontal_scrollbar_visibility("always_on")
@@ -394,6 +405,8 @@ def test_treeview():
     widget.num_selected()
     widget.jump_to_column(0)
     widget.highlight_when_inactive()
+    widget.raise_dock()
+    widget.adapt_sizes()
     widget.show()
 
 
