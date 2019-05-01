@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Callable, Optional
+from typing import Callable
 
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
@@ -28,12 +28,10 @@ class Toolbar(QtWidgets.QToolBar):
     def add_menu_button(self,
                         label: str,
                         icon,
-                        menu: QtWidgets.QMenu,
-                        style: Optional[str] = None) -> widgets.ToolButton:
+                        menu: QtWidgets.QMenu) -> widgets.ToolButton:
         btn = widgets.ToolButton.for_menu(menu)
         btn.setText(label)
-        if style:
-            btn.setToolButtonStyle(STYLES.get(style, "text_below_icon"))
+        btn.setToolButtonStyle(self.toolButtonStyle())
         btn.set_icon(icon)
         self.menu_buttons.append(btn)
         self.addWidget(btn)
