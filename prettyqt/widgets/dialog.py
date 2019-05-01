@@ -27,7 +27,6 @@ class Dialog(QtWidgets.QDialog):
         super().__init__(parent=parent)
         if self.DEFAULT_SIZE:
             self.resize(*self.DEFAULT_SIZE)
-        self.set_modality("window")
         self.setWindowTitle(title)
         self.set_icon(icon)
         if delete_on_close:
