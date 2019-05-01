@@ -111,13 +111,13 @@ class ChartView(QtCharts.QChartView):
             painter.end()
         return image
 
-    def hide_legend(self):
-        self.chart().legend().hide()
+    # def hide_legend(self):
+    #     self.chart().hide_legend()
 
-    def show_legend(self):
-        self.chart().legend().show()
+    # def show_legend(self):
+    #     self.chart().show_legend()
 
-    def set_legend_alignment(self, alignment: str):
-        if alignment not in ALIGNMENTS:
-            raise ValueError(f"{alignment} not a valid alignment.")
-        self.chart().legend().setAlignment(ALIGNMENTS[alignment])
+    # def set_legend_alignment(self, alignment: str):
+    #     if alignment not in ALIGNMENTS:
+    #         raise ValueError(f"{alignment} not a valid alignment.")
+    #     self.chart().legend().setAlignment(ALIGNMENTS[alignment])

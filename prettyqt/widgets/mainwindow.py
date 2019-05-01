@@ -23,20 +23,23 @@ class MainWindow(QtWidgets.QMainWindow):
     """
 
     # def load_window_state(self):
-    #     prefix = os.environ["QT_API"]
-    #     geom = application.settings.get(f"{prefix}.geometry", self.saveGeometry())
-    #     state = application.settings.get(f"{prefix}.state", self.saveState())
-    #     self.restoreGeometry(geom)
-    #     self.restoreState(state)
+    #     geom = application.settings.get("mainwindow.geometry", None)
+    #     state = application.settings.get("mainwindow.state", None)
+    #     if geom is not None and state is not None:
+    #         try:
+    #             self.restoreGeometry(geom)
+    #             self.restoreState(state)
+    #         except TypeError:
+    #             logger.info("Wrong type for window state. Probably Qt binding switch?")
+    #             pass
 
     # def closeEvent(self, event):
     #     """
     #     override, gets executed when app gets closed.
     #     saves GUI settings
     #     """
-    #     prefix = os.environ["QT_API"]
-    #     application.settings[f"{prefix}.geometry"] = self.saveGeometry()
-    #     application.settings[f"{prefix}.state"] = self.saveState()
+    #     application.settings["mainwindow.geometry"] = self.saveGeometry()
+    #     application.settings["mainwindow.state"] = self.saveState()
     #     super().closeEvent(event)
     #     event.accept()
 

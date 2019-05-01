@@ -12,9 +12,6 @@ class Splitter(QtWidgets.QSplitter):
         o = QtCore.Qt.Vertical if orientation == "vertical" else QtCore.Qt.Horizontal
         super().__init__(o, parent)
 
-    def set_sizes(self):
-        self.set_sizes()
-
     @classmethod
     def from_widgets(cls, widgets, horizontal: bool = False, parent=None):
         orientation = QtCore.Qt.Horizontal if horizontal else QtCore.Qt.Vertical
