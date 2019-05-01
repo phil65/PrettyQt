@@ -1,4 +1,4 @@
-qtpy == 1.7.0
-qtawesome == 0.5.7
-Markdown == 3.1
-docutils == 0.14
+qtpy==1.7.0
+qtawesome==0.5.7
+Markdown==3.1
+docutils==0.14
