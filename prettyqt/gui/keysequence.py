@@ -12,7 +12,7 @@ class KeySequence(QtGui.QKeySequence):
         return self.toString()
 
     @classmethod
-    def to_shortcut_str(cls, key, mod):
+    def to_shortcut_str(cls, key, mod=0):
         mods = {QtCore.Qt.ShiftModifier: QtCore.Qt.SHIFT,
                 QtCore.Qt.ControlModifier: QtCore.Qt.CTRL,
                 QtCore.Qt.AltModifier: QtCore.Qt.ALT,
