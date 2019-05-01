@@ -23,6 +23,12 @@ class Toolbar(QtWidgets.QToolBar):
         self.set_icon_size(24)
         self.menu_buttons = list()
 
+    def set_enabled(self):
+        self.setEnabled(True)
+
+    def set_disabled(self):
+        self.setEnabled(False)
+
     def add_menu_button(self,
                         label: str,
                         icon,
