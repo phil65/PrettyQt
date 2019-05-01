@@ -27,6 +27,8 @@ def test_chartview(qtbot):
     qtbot.keyPress(widget, QtCore.Qt.Key_Right)
     qtbot.keyPress(widget, QtCore.Qt.Key_Up)
     qtbot.keyPress(widget, QtCore.Qt.Key_Down)
+    qtbot.mousePress(widget, QtCore.Qt.RightButton)
+    qtbot.mouseMove(widget, delay=100)
 
 
 def test_lineseries():
