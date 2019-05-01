@@ -55,6 +55,9 @@ class TableView(QtWidgets.QTableView):
         if old_sel_model:
             del old_sel_model
 
+    def set_table_color(self, color):
+        self.setStyleSheet(f"QHeaderView::section {{ background-color:{color} }}")
+
     def h_header(self):
         return self.horizontalHeader()
 
