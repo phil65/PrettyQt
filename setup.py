@@ -42,7 +42,7 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/phil65/prettyqt",
-    version="0.20.2",
+    version="0.20.3",
     zip_safe=False,
     cmdclass={"build_sphinx": BuildDoc}
 )
