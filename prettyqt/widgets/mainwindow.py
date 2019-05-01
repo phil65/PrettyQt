@@ -4,11 +4,12 @@
 """
 
 from typing import Dict
+import logging
 
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 DOCK_POSITIONS = dict(top=QtCore.Qt.TopDockWidgetArea,
                       bottom=QtCore.Qt.BottomDockWidgetArea,
@@ -22,26 +23,28 @@ class MainWindow(QtWidgets.QMainWindow):
     includes all docks, a centralwidget and a toolbar
     """
 
-    # def load_window_state(self):
-    #     geom = application.settings.get("mainwindow.geometry", None)
-    #     state = application.settings.get("mainwindow.state", None)
-    #     if geom is not None and state is not None:
-    #         try:
-    #             self.restoreGeometry(geom)
-    #             self.restoreState(state)
-    #         except TypeError:
-    #             logger.info("Wrong type for window state. Probably Qt binding switch?")
-    #             pass
+    def load_window_state(self):
+        settings = core.Settings()
+        geom = settings.value("mainwindow.geometry", None)
+        state = settings.value("mainwindow.state", None)
+        if geom is not None and state is not None:
+            try:
+                self.restoreGeometry(geom)
+                self.restoreState(state)
+            except TypeError:
+                logging.info("Wrong type for window state. Probably Qt binding switch?")
+                pass
 
-    # def closeEvent(self, event):
-    #     """
-    #     override, gets executed when app gets closed.
-    #     saves GUI settings
-    #     """
-    #     application.settings["mainwindow.geometry"] = self.saveGeometry()
-    #     application.settings["mainwindow.state"] = self.saveState()
-    #     super().closeEvent(event)
-    #     event.accept()
+    def closeEvent(self, event):
+        """
+        override, gets executed when app gets closed.
+        saves GUI settings
+        """
+        settings = core.Settings()
+        settings.set_value("mainwindow.geometry", self.saveGeometry())
+        settings.set_value("mainwindow.state", self.saveState())
+        super().closeEvent(event)
+        event.accept()
 
     def set_icon(self, icon):
         if icon:
