@@ -18,12 +18,10 @@ STYLES = dict(icon=QtCore.Qt.ToolButtonIconOnly,
 
 class Toolbar(QtWidgets.QToolBar):
 
-    ICON_SIZE = 20
-
     def __init__(self, *args, **kwargs):
-        self.menu_buttons = list()
         super().__init__(*args, **kwargs)
-        self.set_icon_size(self.ICON_SIZE)
+        self.set_icon_size(24)
+        self.menu_buttons = list()
 
     def add_menu_button(self,
                         label: str,
