@@ -8,6 +8,9 @@ from qtpy import QtGui
 
 class Color(QtGui.QColor):
 
+    def __str__(self):
+        return self.name()
+
     def set_color(self, color):
         if isinstance(color, str):
             self.setNamedColor(color)

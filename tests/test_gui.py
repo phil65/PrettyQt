@@ -14,6 +14,7 @@ def test_brush():
 def test_color():
     color = gui.Color()
     color.set_color("gray")
+    assert str(color) == "#808080"
 
 
 def test_icon():
