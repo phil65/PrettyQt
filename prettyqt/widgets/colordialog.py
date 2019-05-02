@@ -16,6 +16,9 @@ class ColorDialog(QtWidgets.QColorDialog):
             preset = gui.Color(preset)
         return cls.getColor(preset, parent)
 
+    def current_color(self):
+        return gui.Color(self.currentColor())
+
 
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()

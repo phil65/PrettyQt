@@ -3,7 +3,7 @@
 
 """Tests for `prettyqt` package."""
 
-from prettyqt import widgets, core
+from prettyqt import widgets, core, gui
 from qtpy import QtCore
 
 
@@ -44,6 +44,7 @@ def test_checkbox():
 
 def test_colordialog():
     dlg = widgets.ColorDialog()
+    assert str(dlg.current_color()) == str(gui.Color("white"))
     dlg.show()
     dlg.close()
 
