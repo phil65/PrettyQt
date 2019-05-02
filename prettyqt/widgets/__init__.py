@@ -20,6 +20,7 @@ from .messagebox import MessageBox
 
 from .filesystemmodel import FileSystemModel
 
+from .layout import Layout
 from .formlayout import FormLayout
 from .boxlayout import BoxLayout
 from .gridlayout import GridLayout
@@ -98,6 +99,7 @@ __all__ = ["Application",
            "Dialog",
            "MessageBox",
            "FileSystemModel",
+           "Layout",
            "FormLayout",
            "BoxLayout",
            "GridLayout",
