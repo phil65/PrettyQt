@@ -12,6 +12,7 @@ from .settings import Settings
 from .size import Size
 from .sizef import SizeF
 from .point import Point
+from .pointf import PointF
 from .timer import Timer
 from .translator import Translator
 from .thread import Thread
@@ -35,6 +36,7 @@ __all__ = ["Object",
            "Size",
            "SizeF",
            "Point",
+           "PointF",
            "Timer",
            "Translator",
            "Thread",
