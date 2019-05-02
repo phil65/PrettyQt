@@ -7,4 +7,6 @@ from qtpy import QtCore
 
 
 class Dir(QtCore.QDir):
-    pass
+
+    def __str__(self):
+        return self.absolutePath()

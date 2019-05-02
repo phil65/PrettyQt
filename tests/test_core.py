@@ -47,7 +47,7 @@ def test_abstracttablemodel():
 
 
 def test_dir():
-    core.Dir()
+    str(core.Dir())
 
 
 def test_diriterator():
