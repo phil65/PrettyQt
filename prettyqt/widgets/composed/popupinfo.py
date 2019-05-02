@@ -29,12 +29,13 @@ class PopupInfo(QtWidgets.QDialog):
         # signals.signals.popup_info.connect(self.popup)
 
     def show(self, *args, **kwargs):
-        super().show(*args, **kwargs)
+        self.hide()
         screen_geo = widgets.Application.desktop().screenGeometry()
         size = self.label.sizeHint()
         x = (screen_geo.width() - size.width()) / 2
         y = (screen_geo.height() - size.height()) / 2
         self.move(x, y - 200)
+        super().show(*args, **kwargs)
         self.timer.start(2500)
 
     def show_popup(self, text: str):
