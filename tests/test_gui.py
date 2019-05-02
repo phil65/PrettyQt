@@ -78,3 +78,7 @@ def test_textcharformat():
     fmt = gui.TextCharFormat()
     fmt.set_font_weight("bold")
     fmt.set_foreground_color("yellow")
+
+
+def test_validator():
+    gui.Validator()

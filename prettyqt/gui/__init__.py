@@ -5,6 +5,7 @@
 contains QtGui-based classes
 """
 
+from .validator import Validator
 from .regexpvalidator import RegExpValidator
 from .brush import Brush
 from .color import Color
@@ -26,7 +27,8 @@ from .pdfwriter import PdfWriter
 from .keysequence import KeySequence
 
 
-__all__ = ["RegExpValidator",
+__all__ = ["Validator",
+           "RegExpValidator",
            "Brush",
            "Color",
            "Font",
