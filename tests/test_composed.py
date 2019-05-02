@@ -16,6 +16,12 @@ def test_buttondelegate():
     widget.currentIndexChanged()
 
 
+def test_filechooserbutton():
+    btn = widgets.FileChooserButton()
+    btn.show()
+    btn.file_updated.connect(print)
+
+
 def test_codeeditor():
     editor = widgets.CodeEditor()
     assert editor.text() == ""

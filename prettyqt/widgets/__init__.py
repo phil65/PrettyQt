@@ -78,6 +78,7 @@ from .wizard import Wizard
 from .wizardpage import WizardPage
 from .itemdelegate import ItemDelegate
 
+from .composed.filechooserbutton import FileChooserButton
 from .composed.spanslider import SpanSlider
 from .composed.waitingspinner import WaitingSpinner
 from .composed.markdownwidget import MarkdownWindow
@@ -150,6 +151,7 @@ __all__ = ["Application",
            "WizardPage",
            "MainWindow",
            "ItemDelegate",
+           "FileChooserButton",
            "SpanSlider",
            "WaitingSpinner",
            "PopupInfo",
