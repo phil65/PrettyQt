@@ -16,12 +16,6 @@ def test_buttondelegate():
     widget.currentIndexChanged()
 
 
-def test_callout():
-    callout = widgets.Callout()
-    # callout.boundingRect()
-    callout.set_text("test")
-
-
 def test_codeeditor():
     editor = widgets.CodeEditor()
     assert editor.text() == ""
