@@ -387,6 +387,10 @@ def test_tableview():
     widget.show()
 
 
+def test_toolbox():
+    widgets.ToolBox()
+
+
 def test_treeview():
     widget = widgets.TreeView()
     model = widgets.FileSystemModel()
