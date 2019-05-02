@@ -427,3 +427,11 @@ def test_widgetaction():
     widgetaction.set_icon("mdi.timer")
     widgetaction.set_shortcut("Ctrl+A")
     return True
+
+
+def test_wizard():
+    widgets.Wizard()
+
+
+def test_wizardpage():
+    widgets.WizardPage()

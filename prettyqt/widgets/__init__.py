@@ -72,7 +72,8 @@ from .dialogbuttonbox import DialogButtonBox
 from .buttongroup import ButtonGroup
 from .groupbox import GroupBox
 from .splitter import Splitter
-
+from .wizard import Wizard
+from .wizardpage import WizardPage
 from .itemdelegate import ItemDelegate
 
 from .composed.spanslider import SpanSlider
@@ -141,6 +142,8 @@ __all__ = ["Application",
            "ButtonGroup",
            "GroupBox",
            "Splitter",
+           "Wizard",
+           "WizardPage",
            "MainWindow",
            "ItemDelegate",
            "SpanSlider",
