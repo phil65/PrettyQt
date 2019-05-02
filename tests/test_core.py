@@ -49,7 +49,8 @@ def test_abstracttablemodel():
 
 
 def test_dir():
-    str(core.Dir())
+    directory = core.Dir()
+    assert pathlib.Path(str(directory)) == directory.to_path()
 
 
 def test_diriterator():
