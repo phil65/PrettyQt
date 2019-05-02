@@ -5,6 +5,8 @@
 
 import pathlib
 
+import pytest
+
 from prettyqt import core
 
 
@@ -51,7 +53,7 @@ def test_dir():
 
 
 def test_diriterator():
-    for i in core.DirIterator(__file__):
+    for i in core.DirIterator(str(pathlib.Path.cwd())):
         pass
 
 
@@ -95,7 +97,7 @@ def test_settings():
     settings.set_value("test", "value")
     assert "test" in settings
     assert settings.value("test") == "value"
-    with core.Settings("ab", "cd") as s:
+    with core.Settings("ab", "cd", settings_id="test") as s:
         s.set_value("test2", "xx")
     with settings.write_array("test"):
         pass
@@ -105,7 +107,13 @@ def test_settings():
         pass
     path = pathlib.Path.cwd()
     settings.set_default_format("ini")
+    with pytest.raises(ValueError):
+        settings.set_default_format("ino")
     settings.set_path("native", "user", path)
+    with pytest.raises(ValueError):
+        settings.set_path("error", "user", path)
+    with pytest.raises(ValueError):
+        settings.set_path("native", "error", path)
 
 
 def test_size():
