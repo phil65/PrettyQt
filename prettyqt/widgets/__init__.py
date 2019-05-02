@@ -54,6 +54,7 @@ from .checkbox import CheckBox
 from .lineedit import LineEdit
 from .textedit import TextEdit
 from .dateedit import DateEdit
+from .timeedit import TimeEdit
 from .datetimeedit import DateTimeEdit
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
@@ -123,6 +124,7 @@ __all__ = ["Application",
            "LineEdit",
            "TextEdit",
            "DateEdit",
+           "TimeEdit",
            "DateTimeEdit",
            "PlainTextEdit",
            "TextBrowser",
