@@ -306,6 +306,17 @@ def test_slider():
     widget.show()
 
 
+def test_statusbar():
+    dlg = widgets.MainWindow()
+    status_bar = widgets.StatusBar()
+    status_bar.set_color("black")
+    label = widgets.Label("test")
+    status_bar.addWidget(label)
+    status_bar.setup_default_bar()
+    dlg.setStatusBar(status_bar)
+    dlg.show()
+
+
 def test_spinbox():
     widget = widgets.SpinBox()
     widget.set_disabled()

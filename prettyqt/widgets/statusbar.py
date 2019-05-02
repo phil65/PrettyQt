@@ -25,12 +25,18 @@ class StatusBar(QtWidgets.QStatusBar):
     def add_action(self, action):
         self.addAction(action)
 
+    def set_color(self, color):
+        self.setStyleSheet(f"background-color: {color};")
+
 
 if __name__ == "__main__":
     import sys
     app = widgets.Application(sys.argv)
     dlg = widgets.MainWindow()
     status_bar = StatusBar()
+    status_bar.set_color("black")
+    label = widgets.Label("test")
+    status_bar.addWidget(label)
     status_bar.setup_default_bar()
     dlg.setStatusBar(status_bar)
     dlg.show()
