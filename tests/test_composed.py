@@ -4,7 +4,7 @@
 """Tests for `prettyqt` package."""
 
 from prettyqt import widgets, gui, core
-from qtpy import QtCore
+from qtpy import QtCore, QtGui
 
 test_widget = widgets.Widget()
 
@@ -21,6 +21,10 @@ def test_codeeditor():
     assert editor.text() == ""
     editor.line_area_width()
     editor.set_syntax("python")
+    event = QtGui.QResizeEvent(core.Size(10, 10), core.Size(20, 20))
+    editor.resizeEvent(event)
+    event = QtGui.QPaintEvent(core.Rect(0, 0, 20, 20))
+    editor.line_area_paintevent(event)
 
 
 def test_imageviewer():
