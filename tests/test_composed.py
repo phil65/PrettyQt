@@ -70,7 +70,7 @@ def test_spanslider(qtbot):
     assert(slider.upper_value == 25)
     slider.set_lower_value(12)
     slider.set_upper_pos(20)
-    color = gui.Color("blue").lighter(150)
+    color = gui.Color("blue")
     slider.set_left_color(color)
     slider.set_right_color(color)
     slider.swap_controls()
