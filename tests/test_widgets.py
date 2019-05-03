@@ -191,6 +191,7 @@ def test_headerview():
     header.resize_mode("interactive")
     header.resize_mode("interactive", col=0)
     header.resize_sections("interactive")
+    header.set_contextmenu_policy("custom")
     header.set_custom_menu(test)
     header.set_sizes([100])
     label = header.section_labels()
