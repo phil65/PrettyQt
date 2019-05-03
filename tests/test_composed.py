@@ -16,6 +16,13 @@ def test_buttondelegate():
     widget.currentIndexChanged()
 
 
+def test_colorchooserbutton():
+    btn = widgets.ColorChooserButton()
+    btn.set_color("green")
+    btn.show()
+    btn.color_updated.connect(print)
+
+
 def test_filechooserbutton():
     btn = widgets.FileChooserButton()
     btn.show()
