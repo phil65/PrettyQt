@@ -327,6 +327,9 @@ def test_spinbox():
 
 def test_splitter():
     widget = widgets.Splitter("vertical")
+    test = widgets.Label("test")
+    widget.add_widget(test)
+    assert widget[0] == test
     widget.show()
 
 
