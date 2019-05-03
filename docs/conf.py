@@ -18,11 +18,7 @@
 # relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
 #
-import os
 import sys
-sys.path.insert(0, os.path.abspath('..'))
-print(sys.path)
-
 import prettyqt
 
 sys.setrecursionlimit(5000)
@@ -50,8 +46,7 @@ extensions = ['sphinx.ext.napoleon',
               # "recommonmark",
               'sphinx_autodoc_typehints']
 
-intersphinx_mapping = {'python': ('https://docs.python.org/3', None),
-                       'PyQt5': ('', 'pyqt5-modified-objects.inv')}
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
 
 # autodoc_mock_imports = ["qtpy", "PyQt5"]
 
