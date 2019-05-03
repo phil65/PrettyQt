@@ -38,6 +38,12 @@ def test_checkbox():
     chk = widgets.CheckBox()
     chk.set_disabled()
     chk.set_enabled()
+    import pickle
+    with open('chk.pkl', 'wb') as jar:
+        pickle.dump(chk, jar)
+    with open('chk.pkl', 'rb') as jar:
+        chk = pickle.load(jar)
+    assert bool(chk) is False
     chk.show()
     chk.close()
 
@@ -296,6 +302,12 @@ def test_radiobutton():
     widget.set_icon("mdi.timer")
     widget.set_enabled()
     widget.set_disabled()
+    import pickle
+    with open('rb.pkl', 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open('rb.pkl', 'rb') as jar:
+        widget = pickle.load(jar)
+    assert bool(widget) is False
     widget.show()
 
 

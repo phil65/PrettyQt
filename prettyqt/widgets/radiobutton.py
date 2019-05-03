@@ -9,6 +9,22 @@ import qtawesome as qta
 
 class RadioButton(QtWidgets.QRadioButton):
 
+    def __getstate__(self):
+        return dict(checkable=self.isCheckable(),
+                    checked=self.isChecked(),
+                    text=self.text(),
+                    enabled=self.isEnabled())
+
+    def __setstate__(self, state):
+        super().__init__()
+        self.setChecked(state["checked"])
+        self.setText(state["text"])
+        self.setEnabled(state["enabled"])
+        self.setCheckable(state["checkable"])
+
+    def __bool__(self):
+        return self.isChecked()
+
     def set_enabled(self):
         self.setEnabled(True)
 
@@ -27,5 +43,11 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     widget = RadioButton("This is a test")
     widget.set_icon("mdi.timer")
+    # widget.show()
+    import pickle
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open('data.pkl', 'rb') as jar:
+        widget = pickle.load(jar)
     widget.show()
     app.exec_()
