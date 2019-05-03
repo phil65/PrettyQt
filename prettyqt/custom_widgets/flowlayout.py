@@ -18,6 +18,12 @@ class FlowLayout(QtWidgets.QLayout):
 
         self.items = []
 
+    def __getitem__(self, index):
+        return self.itemAt(index)
+
+    def __iter__(self):
+        return iter(self[i] for i in range(self.count()))
+
     def __del__(self):
         item = self.takeAt(0)
         while item:

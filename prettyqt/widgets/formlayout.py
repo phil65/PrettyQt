@@ -21,8 +21,8 @@ class FormLayout(QtWidgets.QFormLayout):
     def __getitem__(self, index):
         return self.itemAt(index)
 
-    def __len__(self):
-        return self.count()
+    def __iter__(self):
+        return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
     def set_size_mode(self, mode: str):
         if mode not in MODES:

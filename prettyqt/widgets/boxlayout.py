@@ -23,6 +23,9 @@ class BoxLayout(QtWidgets.QBoxLayout):
     def __getitem__(self, index):
         return self.itemAt(index)
 
+    def __iter__(self):
+        return iter(self[i] for i in range(self.count()))
+
     def __len__(self):
         return self.count()
 
