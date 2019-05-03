@@ -28,3 +28,10 @@ Source code
    contributing
    authors
    history
+
+main
+===================
+.. automodule:: prettyqt
+   :members:
+   :show-inheritance:
+   :inherited-members:
