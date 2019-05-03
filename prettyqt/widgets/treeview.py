@@ -7,7 +7,7 @@ import logging
 from typing import Optional
 
 from qtpy import QtWidgets, QtCore
-from prettyqt import gui
+from prettyqt import gui, widgets
 
 SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
                        extended=QtWidgets.QAbstractItemView.ExtendedSelection,
@@ -35,6 +35,7 @@ class TreeView(QtWidgets.QTreeView):
 
         # misc
         self.setUniformRowHeights(True)
+        self.setHeader(widgets.HeaderView(parent=self))
         self.set_selection_mode("extended")
 
     def setModel(self, model):

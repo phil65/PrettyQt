@@ -9,7 +9,7 @@ import functools
 import operator
 
 from qtpy import QtWidgets, QtCore
-from prettyqt import gui
+from prettyqt import gui, widgets
 
 
 TRIGGERS = dict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
@@ -34,6 +34,7 @@ class TableView(QtWidgets.QTableView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.setHorizontalHeader(widgets.HeaderView(parent=self))
 
     def selectAll(self):
         """
@@ -186,7 +187,6 @@ class TableView(QtWidgets.QTableView):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
     app = widgets.Application.create_default_app()
     dlg = widgets.MainWindow()
     status_bar = TableView()
