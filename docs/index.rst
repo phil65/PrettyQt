@@ -1,14 +1,30 @@
 Welcome to PrettyQt's documentation!
 ======================================
 
+PrettyQt is a thin wrapper for PyQt5 / PySide2 APIs.
+
+Source code
+   https://github.com/phil65/prettyqt
+
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 4
+   :caption: PrettyQt
 
    readme
    installation
    usage
+
+.. toctree::
+   :maxdepth: 4
+   :caption: API
+
    modules
+
+.. toctree::
+   :maxdepth: 4
+   :caption: Other stuff
+
    contributing
    authors
    history
@@ -18,10 +34,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-main
-===================
-.. automodule:: prettyqt
-   :members:
-   :show-inheritance:
-   :inherited-members:
