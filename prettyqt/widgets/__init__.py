@@ -78,6 +78,7 @@ from .wizard import Wizard
 from .wizardpage import WizardPage
 from .itemdelegate import ItemDelegate
 
+from .composed.flowlayout import FlowLayout
 from .composed.colorchooserbutton import ColorChooserButton
 from .composed.filechooserbutton import FileChooserButton
 from .composed.spanslider import SpanSlider
@@ -152,6 +153,7 @@ __all__ = ["Application",
            "WizardPage",
            "MainWindow",
            "ItemDelegate",
+           "FlowLayout",
            "ColorChooserButton",
            "FileChooserButton",
            "SpanSlider",

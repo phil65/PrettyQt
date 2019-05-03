@@ -45,6 +45,18 @@ def test_imageviewer():
     widget.show()
 
 
+def test_flowlayout():
+    widget = widgets.Widget()
+    layout = widgets.FlowLayout()
+    layout.addWidget(widgets.PushButton("Short"))
+    layout.addWidget(widgets.PushButton("Longer"))
+    layout.addWidget(widgets.PushButton("Different text"))
+    layout.addWidget(widgets.PushButton("More text"))
+    layout.addWidget(widgets.PushButton("Even longer button text"))
+    widget.setLayout(layout)
+    widget.show()
+
+
 def test_markdownwidget():
     widget = widgets.MarkdownWindow()
     widget.show()
