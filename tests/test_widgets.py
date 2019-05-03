@@ -404,7 +404,16 @@ def test_tableview():
 
 
 def test_toolbox():
-    widgets.ToolBox()
+    w = widgets.Widget()
+    w2 = widgets.Widget()
+    w2.setObjectName("objectName")
+    tb = widgets.ToolBox()
+    tb.add_widget(w, "title")
+    tb.add_widget(w2)
+    for w in tb:
+        pass
+    assert tb[1] == w2
+    tb.show()
 
 
 def test_treeview():
