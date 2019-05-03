@@ -31,7 +31,7 @@ Source code
 
 main
 ===================
-.. automodule:: prettyqt
+.. automodule:: prettyqt.core
    :members:
    :show-inheritance:
    :inherited-members:
