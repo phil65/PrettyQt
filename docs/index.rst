@@ -20,6 +20,7 @@ Source code
    :caption: API
 
    modules
+   api
 
 .. toctree::
    :maxdepth: 4
@@ -29,9 +30,13 @@ Source code
    authors
    history
 
+
 main
 ===================
 .. automodule:: prettyqt.core
    :members:
    :show-inheritance:
-   :inherited-members:
+
+.. automodule:: prettyqt.widgets
+   :members:
+   :show-inheritance:

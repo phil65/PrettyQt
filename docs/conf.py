@@ -50,8 +50,6 @@ intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
 
 # autodoc_mock_imports = ["qtpy", "PyQt5"]
 
-# autodoc_mock_imports = ["qtpy", "PyQt5"]
-
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
 
