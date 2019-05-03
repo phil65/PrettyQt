@@ -350,7 +350,9 @@ def test_tabwidget():
     widget = widgets.TabWidget()
     widget.add_tab(widgets.Widget(), "mdi.timer")
     widget.insert_tab(0, widgets.Widget(), "test", "mdi.timer")
-    widget.add_tab(widgets.Widget(), "test", "mdi.timer")
+    w = widgets.Widget()
+    widget.add_tab(w, "test", "mdi.timer")
+    assert widget[2] == w
     widget.set_button(0, "right", None)
     widget.set_detachable()
     widget.detach_tab(0, core.Point())

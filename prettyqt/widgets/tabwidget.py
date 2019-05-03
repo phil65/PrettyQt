@@ -27,6 +27,9 @@ class TabWidget(QtWidgets.QTabWidget):
         # does not have a parent
         self.detached_tabs = dict()
 
+    def __getitem__(self, index):
+        return self.widget(index)
+
     def set_detachable(self):
         self.tab_bar.on_detach.connect(self.detach_tab)
         QtWidgets.qApp.aboutToQuit.connect(self.close_detached_tabs)
