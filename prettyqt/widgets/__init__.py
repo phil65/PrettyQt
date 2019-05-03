@@ -78,18 +78,6 @@ from .wizard import Wizard
 from .wizardpage import WizardPage
 from .itemdelegate import ItemDelegate
 
-from .composed.flowlayout import FlowLayout
-from .composed.colorchooserbutton import ColorChooserButton
-from .composed.filechooserbutton import FileChooserButton
-from .composed.spanslider import SpanSlider
-from .composed.waitingspinner import WaitingSpinner
-from .composed.markdownwidget import MarkdownWindow
-from .composed.imageviewer import ImageViewer
-from .composed.popupinfo import PopupInfo
-from .composed.buttondelegate import ButtonDelegate
-from .composed.selectionwidget import SelectionWidget
-from .composed.codeeditor import CodeEditor
-
 __all__ = ["Application",
            "Widget",
            "DesktopWidget",
@@ -152,16 +140,4 @@ __all__ = ["Application",
            "Wizard",
            "WizardPage",
            "MainWindow",
-           "ItemDelegate",
-           "FlowLayout",
-           "ColorChooserButton",
-           "FileChooserButton",
-           "SpanSlider",
-           "WaitingSpinner",
-           "PopupInfo",
-           "ButtonDelegate",
-           "SelectionWidget",
-           "Image",
-           "ImageViewer",
-           "MarkdownWindow",
-           "CodeEditor"]
+           "ItemDelegate"]

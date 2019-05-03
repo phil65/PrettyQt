@@ -3,34 +3,34 @@
 
 """Tests for `prettyqt` package."""
 
-from prettyqt import widgets, gui, core
+from prettyqt import widgets, gui, core, custom_widgets
 from qtpy import QtCore, QtGui
 
 test_widget = widgets.Widget()
 
 
 def test_buttondelegate():
-    widget = widgets.ButtonDelegate(parent=None)
+    widget = custom_widgets.ButtonDelegate(parent=None)
     widget.setEditorData(widgets.Widget(), None)
     widget.createEditor(None, None, QtCore.QModelIndex())
     widget.currentIndexChanged()
 
 
 def test_colorchooserbutton():
-    btn = widgets.ColorChooserButton()
+    btn = custom_widgets.ColorChooserButton()
     btn.set_color("green")
     btn.show()
     btn.color_updated.connect(print)
 
 
 def test_filechooserbutton():
-    btn = widgets.FileChooserButton()
+    btn = custom_widgets.FileChooserButton()
     btn.show()
     btn.file_updated.connect(print)
 
 
 def test_codeeditor():
-    editor = widgets.CodeEditor()
+    editor = custom_widgets.CodeEditor()
     assert editor.text() == ""
     editor.line_area_width()
     editor.set_syntax("python")
@@ -41,13 +41,13 @@ def test_codeeditor():
 
 
 def test_imageviewer():
-    widget = widgets.ImageViewer()
+    widget = custom_widgets.ImageViewer()
     widget.show()
 
 
 def test_flowlayout():
     widget = widgets.Widget()
-    layout = widgets.FlowLayout()
+    layout = custom_widgets.FlowLayout()
     layout.addWidget(widgets.PushButton("Short"))
     layout.addWidget(widgets.PushButton("Longer"))
     layout.addWidget(widgets.PushButton("Different text"))
@@ -58,17 +58,17 @@ def test_flowlayout():
 
 
 def test_markdownwidget():
-    widget = widgets.MarkdownWindow()
+    widget = custom_widgets.MarkdownWindow()
     widget.show()
 
 
 def test_popupinfo():
-    popup = widgets.PopupInfo()
+    popup = custom_widgets.PopupInfo()
     popup.show_popup("test")
 
 
 def test_selectionwidget():
-    widget = widgets.SelectionWidget()
+    widget = custom_widgets.SelectionWidget()
     items = {"Semicolon": ";",
              "Tab": "\t",
              "Comma": ","}
@@ -79,7 +79,7 @@ def test_selectionwidget():
 
 
 def test_spanslider(qtbot):
-    slider = widgets.SpanSlider()
+    slider = custom_widgets.SpanSlider()
     qtbot.addWidget(slider)
     slider.set_lower_value(10)
     slider.set_upper_value(20)
@@ -106,7 +106,7 @@ def test_spanslider(qtbot):
 
 
 def test_waitingspinner():
-    spinner = widgets.WaitingSpinner(parent=test_widget)
+    spinner = custom_widgets.WaitingSpinner(parent=test_widget)
     spinner.paintEvent(None)
     spinner.set_line_num(2)
     assert spinner.line_num() == 2
