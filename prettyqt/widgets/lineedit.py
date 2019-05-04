@@ -10,6 +10,20 @@ from prettyqt import gui, widgets
 
 class LineEdit(QtWidgets.QLineEdit):
 
+    def __getstate__(self):
+        return dict(text=self.text(),
+                    enabled=self.isEnabled(),
+                    font=gui.Font(self.font()))
+
+    def __setstate__(self, state):
+        super().__init__()
+        self.set_text(state["text"])
+        self.setEnabled(state["enabled"])
+        self.setFont(state["font"])
+
+    def font(self):
+        return gui.Font(super().font())
+
     def set_enabled(self):
         self.setEnabled(True)
 
@@ -48,5 +62,6 @@ class LineEdit(QtWidgets.QLineEdit):
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = LineEdit("This is a test")
+    widget.setFont(gui.Font("Consolas"))
     widget.show()
     app.exec_()

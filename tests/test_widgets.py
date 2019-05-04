@@ -241,6 +241,10 @@ def test_lineedit():
     widget.set_font("Consolas")
     widget.setText("0")
     widget.append("a")
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open('data.pkl', 'rb') as jar:
+        widget = pickle.load(jar)
     widget.show()
     widget.close()
 
@@ -295,6 +299,10 @@ def test_plaintextedit():
     widget.highlight_current_line()
     widget.set_read_only()
     widget.get_result_widget()
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open('data.pkl', 'rb') as jar:
+        widget = pickle.load(jar)
     widget.show()
 
 
