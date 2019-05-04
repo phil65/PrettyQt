@@ -331,6 +331,10 @@ def test_slider():
     assert widget.is_horizontal()
     widget.set_vertical()
     assert widget.is_vertical()
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open('data.pkl', 'rb') as jar:
+        widget = pickle.load(jar)
     widget.show()
 
 
@@ -349,6 +353,10 @@ def test_spinbox():
     widget = widgets.SpinBox()
     widget.set_disabled()
     widget.set_enabled()
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open('data.pkl', 'rb') as jar:
+        widget = pickle.load(jar)
     widget.show()
 
 
