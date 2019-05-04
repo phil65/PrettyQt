@@ -27,6 +27,13 @@ TEXT_INTERACTION = dict(none=QtCore.Qt.NoTextInteraction,
 
 class Label(QtWidgets.QLabel):
 
+    def __getstate__(self):
+        return dict(text=self.text())
+
+    def __setstate__(self, state):
+        super().__init__()
+        self.setText(state["text"])
+
     def set_alignment(self,
                       horizontal: Optional[str] = None,
                       vertical: Optional[str] = None):

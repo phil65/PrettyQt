@@ -23,6 +23,21 @@ SIZE_POLICIES = dict(content=box.AdjustToContents,
 
 class ComboBox(QtWidgets.QComboBox):
 
+    def __getstate__(self):
+        labels = [self.itemText(i) for i in range(self.count())]
+        data = [self.itemData(i) for i in range(self.count())]
+        return dict(index=self.currentIndex(),
+                    enabled=self.isEnabled(),
+                    labels=labels,
+                    data=data)
+
+    def __setstate__(self, state):
+        super().__init__()
+        for label, data in zip(state["labels"], state["data"]):
+            self.add_item(label, data)
+        self.setCurrentIndex(state["index"])
+        self.setEnabled(state["enabled"])
+
     def set_enabled(self):
         self.setEnabled(True)
 

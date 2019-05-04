@@ -3,6 +3,8 @@
 
 """Tests for `prettyqt` package."""
 
+import pickle
+
 from prettyqt import widgets, core, gui
 from qtpy import QtCore
 
@@ -64,6 +66,10 @@ def test_combobox():
     box.set_size_policy("first_show")
     box.set_icon_size(10)
     box.set_min_char_length(10)
+    with open('widget.pkl', 'wb') as jar:
+        pickle.dump(box, jar)
+    with open('widget.pkl', 'rb') as jar:
+        box = pickle.load(jar)
     box.show()
     box.close()
 
@@ -118,6 +124,10 @@ def test_doublespinbox():
     widget = widgets.DoubleSpinBox()
     widget.set_disabled()
     widget.set_enabled()
+    with open('widget.pkl', 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open('widget.pkl', 'rb') as jar:
+        widget = pickle.load(jar)
     widget.show()
     widget.close()
 
@@ -211,6 +221,10 @@ def test_label():
     label.set_image("")
     label.set_alignment(horizontal="left", vertical="top")
     label.set_text_interaction("by_mouse")
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(label, jar)
+    with open('data.pkl', 'rb') as jar:
+        label = pickle.load(jar)
     label.show()
     label.close()
 
