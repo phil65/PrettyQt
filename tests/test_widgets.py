@@ -16,6 +16,12 @@ def test_action():
     action.set_disabled()
     action.set_icon("mdi.timer")
     action.set_shortcut("Ctrl+A")
+    with open('rb.pkl', 'wb') as jar:
+        pickle.dump(action, jar)
+    with open('rb.pkl', 'rb') as jar:
+        action = pickle.load(jar)
+    assert action.shortcut().toString() == "Ctrl+A"
+    assert action.toolTip() == "test"
     return True
 
 
@@ -308,6 +314,10 @@ def test_pushbutton():
     widget.set_enabled()
     widget.set_icon("mdi.timer")
     widget.set_style_icon("close")
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open('data.pkl', 'rb') as jar:
+        widget = pickle.load(jar)
     widget.show()
 
 
@@ -316,7 +326,6 @@ def test_radiobutton():
     widget.set_icon("mdi.timer")
     widget.set_enabled()
     widget.set_disabled()
-    import pickle
     with open('rb.pkl', 'wb') as jar:
         pickle.dump(widget, jar)
     with open('rb.pkl', 'rb') as jar:

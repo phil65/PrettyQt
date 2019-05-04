@@ -9,6 +9,19 @@ from qtpy import QtWidgets
 
 class Action(QtWidgets.QAction):
 
+    def __getstate__(self):
+        return dict(text=self.text(),
+                    enabled=self.isEnabled(),
+                    shortcut=self.shortcut(),
+                    tooltip=self.toolTip())
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.setText(state["text"])
+        self.setEnabled(state["enabled"])
+        self.set_shortcut(state["shortcut"])
+        self.setToolTip(state["tooltip"])
+
     def set_enabled(self):
         self.setEnabled(True)
 

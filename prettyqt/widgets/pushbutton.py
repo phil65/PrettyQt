@@ -11,6 +11,15 @@ from prettyqt import widgets
 
 class PushButton(QtWidgets.QPushButton):
 
+    def __getstate__(self):
+        return dict(title=self.text(),
+                    enabled=self.isEnabled())
+
+    def __setstate__(self, state):
+        super().__init__()
+        self.setText(state["title"])
+        self.setEnabled(state["enabled"])
+
     def set_enabled(self):
         self.setEnabled(True)
 
@@ -33,5 +42,11 @@ class PushButton(QtWidgets.QPushButton):
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = PushButton("This is a test")
+    import pickle
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open('data.pkl', 'rb') as jar:
+        widget2 = pickle.load(jar)
+    assert widget2.text() == widget.text()
     widget.show()
     app.exec_()
