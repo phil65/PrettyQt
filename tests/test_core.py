@@ -4,6 +4,7 @@
 """Tests for `prettyqt` package."""
 
 import pathlib
+import pickle
 
 import pytest
 
@@ -85,6 +86,10 @@ def test_rectf():
 
 def test_regexp():
     regex = core.RegExp("[0-9]")
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(regex, jar)
+    with open('data.pkl', 'rb') as jar:
+        regex = pickle.load(jar)
     a = list(regex.matches_in_text("0a4"))
     assert len(a) == 2
 

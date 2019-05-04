@@ -3,6 +3,8 @@
 
 """Tests for `prettyqt` package."""
 
+import pickle
+
 from prettyqt import gui, core
 from qtpy import QtCore
 
@@ -64,6 +66,11 @@ def test_polygonf():
 def test_regexpvalidator():
     val = gui.RegExpValidator()
     val.set_regex("[0-9]")
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(val, jar)
+    with open('data.pkl', 'rb') as jar:
+        val = pickle.load(jar)
+    assert val.get_regex() == "[0-9]"
 
 
 def test_standarditem():
