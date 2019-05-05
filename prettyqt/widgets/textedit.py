@@ -38,6 +38,9 @@ class TextEdit(QtWidgets.QTextEdit):
         """
         self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
 
+    def set_color(self, color):
+        self.setStyleSheet(f"background-color: {color};")
+
 
 if __name__ == "__main__":
     import sys
