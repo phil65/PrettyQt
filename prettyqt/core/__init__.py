@@ -9,6 +9,8 @@ contains QtCore-based classes
 
 from .object import Object
 from .settings import Settings
+from .date import Date
+from .datetime import DateTime
 from .size import Size
 from .sizef import SizeF
 from .point import Point
@@ -33,6 +35,8 @@ from qtpy.QtCore import Slot, Signal, Property
 
 __all__ = ["Object",
            "Settings",
+           "Date",
+           "DateTime",
            "Size",
            "SizeF",
            "Point",
