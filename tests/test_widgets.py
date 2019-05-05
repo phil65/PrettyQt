@@ -261,9 +261,10 @@ def test_mainwindow():
     window = widgets.MainWindow()
     window.set_icon("mdi.timer")
     window.add_dockwidget("test", "Test")
-    window.toggle_fullscreen()
     window.show()
     window.close()
+    window.load_window_state()
+    window.toggle_fullscreen()
 
 
 def test_menu():
