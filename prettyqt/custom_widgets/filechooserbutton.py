@@ -15,6 +15,7 @@ class FileChooserButton(widgets.Widget):
 
     def __init__(self, extensions=None, parent=None):
         super().__init__(parent)
+        self.path = None
         self.extensions = extensions
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
@@ -28,6 +29,15 @@ class FileChooserButton(widgets.Widget):
         self.button.setDefaultAction(action)
         layout.addWidget(self.button)
 
+    def __getstate__(self):
+        return dict(path=self.path,
+                    enabled=self.isEnabled())
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.set_path(state["path"])
+        self.setEnabled(state["enabled"])
+
     @core.Slot()
     def open_file(self):
         dialog = widgets.FileDialog(parent=self,
@@ -36,17 +46,22 @@ class FileChooserButton(widgets.Widget):
             dialog.setNameFilter(self.extensions)
         if not dialog.open_file():
             return None
-        path = dialog.selected_file()
-        self.lineedit.setText(str(path))
-        self.file_updated.emit(path)
+        self.set_path(dialog.selected_file())
+        self.file_updated.emit(self.path)
 
     def set_path(self, path):
+        self.path = path
         self.lineedit.setText(str(path))
 
 
 if __name__ == "__main__":
     app = widgets.Application(sys.argv)
     btn = FileChooserButton()
+    import pickle
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(btn, jar)
+    with open('data.pkl', 'rb') as jar:
+        btn = pickle.load(jar)
     btn.show()
     btn.file_updated.connect(print)
     sys.exit(app.exec_())

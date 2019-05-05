@@ -26,6 +26,16 @@ class ColorChooserButton(widgets.Widget):
         self.button.setDefaultAction(action)
         layout.addWidget(self.button)
 
+    def __getstate__(self):
+        return dict(color=self.color,
+                    enabled=self.isEnabled())
+
+    def __setstate__(self, state):
+        self.__init__()
+        if state["color"]:
+            self.set_color(state["color"])
+        self.setEnabled(state["enabled"])
+
     @core.Slot()
     def choose_color(self):
         dlg = widgets.ColorDialog()
@@ -45,6 +55,11 @@ class ColorChooserButton(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.Application(sys.argv)
     btn = ColorChooserButton()
-    btn.show()
-    btn.color_updated.connect(print)
+    import pickle
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(btn, jar)
+    with open('data.pkl', 'rb') as jar:
+        btn2 = pickle.load(jar)
+    btn2.show()
+    btn2.color_updated.connect(print)
     sys.exit(app.exec_())
