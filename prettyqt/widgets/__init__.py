@@ -70,6 +70,7 @@ from .progressdialog import ProgressDialog
 from .fontdialog import FontDialog
 from .filedialog import FileDialog
 from .colordialog import ColorDialog
+from .inputdialog import InputDialog
 from .dialogbuttonbox import DialogButtonBox
 from .buttongroup import ButtonGroup
 from .groupbox import GroupBox
@@ -133,6 +134,7 @@ __all__ = ["Application",
            "FontDialog",
            "FileDialog",
            "ColorDialog",
+           "InputDialog",
            "DialogButtonBox",
            "ButtonGroup",
            "GroupBox",
