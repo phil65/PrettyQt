@@ -8,6 +8,10 @@ from qtpy import QtWidgets
 
 class DateEdit(QtWidgets.QDateEdit):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setCalendarPopup(True)
+
     def set_enabled(self):
         self.setEnabled(True)
 
