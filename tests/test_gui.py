@@ -16,6 +16,10 @@ def test_brush():
 def test_color():
     color = gui.Color()
     color.set_color("gray")
+    with open('data.pkl', 'wb') as jar:
+        pickle.dump(color, jar)
+    with open('data.pkl', 'rb') as jar:
+        color = pickle.load(jar)
     assert str(color) == "#808080"
 
 

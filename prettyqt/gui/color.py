@@ -11,6 +11,9 @@ class Color(QtGui.QColor):
     def __str__(self):
         return self.name()
 
+    def __reduce__(self):
+        return (self.__class__, (self.red(), self.green(), self.blue(), self.alpha()))
+
     def set_color(self, color):
         if isinstance(color, str):
             self.setNamedColor(color)
