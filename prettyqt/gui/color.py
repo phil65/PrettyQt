@@ -34,3 +34,6 @@ class Color(QtGui.QColor):
             return color
         color.setNamedColor(text)
         return color
+
+    def as_qt(self):
+        return QtGui.QColor(self)

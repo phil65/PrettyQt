@@ -12,4 +12,16 @@ STYLES = {QtCore.Qt.SolidLine: "Solid",
 
 
 class LineSeries(QtCharts.QLineSeries):
-    pass
+
+    def __getstate__(self):
+        return dict(points=self.pointsVector())
+
+    def __setstate__(self, state):
+        super().__init__()
+        super().append(state["points"])
+        pass
+
+
+if __name__ == "__main__":
+    line = LineSeries()
+    line.append(0, 1)
