@@ -3,6 +3,8 @@
 
 """Tests for `prettyqt` package."""
 
+import pickle
+
 from qtpy import QtCore
 from prettyqt import charts
 
@@ -32,7 +34,11 @@ def test_chartview(qtbot):
 
 
 def test_lineseries():
-    charts.LineSeries()
+    line = charts.LineSeries()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(line, jar)
+    with open("data.pkl", "rb") as jar:
+        line = pickle.load(jar)
 
 
 def test_scatterseries():
