@@ -30,6 +30,9 @@ class CheckBox(QtWidgets.QCheckBox):
     def set_disabled(self):
         self.setEnabled(False)
 
+    def get_value(self):
+        return self.isChecked()
+
 
 if __name__ == "__main__":
     import sys

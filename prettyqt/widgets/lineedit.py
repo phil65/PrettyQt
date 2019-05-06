@@ -61,6 +61,9 @@ class LineEdit(QtWidgets.QLineEdit):
     def set_color(self, color):
         self.setStyleSheet(f"background-color: {color};")
 
+    def get_value(self):
+        return self.text()
+
 
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
