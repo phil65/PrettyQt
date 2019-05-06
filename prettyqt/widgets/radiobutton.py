@@ -46,11 +46,5 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     widget = RadioButton("This is a test")
     widget.set_icon("mdi.timer")
-    # widget.show()
-    import pickle
-    with open('data.pkl', 'wb') as jar:
-        pickle.dump(widget, jar)
-    with open('data.pkl', 'rb') as jar:
-        widget = pickle.load(jar)
     widget.show()
     app.exec_()

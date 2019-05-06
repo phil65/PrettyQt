@@ -42,11 +42,5 @@ class PushButton(QtWidgets.QPushButton):
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = PushButton("This is a test")
-    import pickle
-    with open('data.pkl', 'wb') as jar:
-        pickle.dump(widget, jar)
-    with open('data.pkl', 'rb') as jar:
-        widget2 = pickle.load(jar)
-    assert widget2.text() == widget.text()
     widget.show()
     app.exec_()

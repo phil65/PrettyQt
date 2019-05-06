@@ -59,11 +59,6 @@ if __name__ == "__main__":
     app = widgets.Application(sys.argv)
     btn = ColorChooserButton()
     btn.set_color(gui.Color("green"))
-    import pickle
-    with open('data.pkl', 'wb') as jar:
-        pickle.dump(btn, jar)
-    with open('data.pkl', 'rb') as jar:
-        btn2 = pickle.load(jar)
-    btn2.show()
-    btn2.color_updated.connect(print)
+    btn.show()
+    btn.color_updated.connect(print)
     sys.exit(app.exec_())

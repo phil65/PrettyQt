@@ -57,11 +57,6 @@ class FileChooserButton(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.Application(sys.argv)
     btn = FileChooserButton()
-    import pickle
-    with open('data.pkl', 'wb') as jar:
-        pickle.dump(btn, jar)
-    with open('data.pkl', 'rb') as jar:
-        btn = pickle.load(jar)
     btn.show()
     btn.file_updated.connect(print)
     sys.exit(app.exec_())

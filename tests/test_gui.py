@@ -26,9 +26,9 @@ def test_color():
 def test_icon():
     icon = gui.Icon()
     icon.for_color("black")
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", 'wb') as jar:
         pickle.dump(icon, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", 'rb') as jar:
         icon = pickle.load(jar)
 
 
@@ -69,9 +69,9 @@ def test_pixmap():
 
 def test_polygonf():
     poly = gui.PolygonF()
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", 'wb') as jar:
         pickle.dump(poly, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", 'rb') as jar:
         poly = pickle.load(jar)
 
 
