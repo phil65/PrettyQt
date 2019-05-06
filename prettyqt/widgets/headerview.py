@@ -7,7 +7,7 @@ import functools
 from typing import Callable, Iterable, Optional
 
 from qtpy import QtCore, QtWidgets
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
 POLICIES = dict(custom=QtCore.Qt.CustomContextMenu,
@@ -26,6 +26,17 @@ class HeaderView(QtWidgets.QHeaderView):
         super().__init__(QtCore.Qt.Horizontal, parent=parent)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
+        self.widget_name = parent.objectName()
+
+    def save_state(self):
+        settings = core.Settings()
+        settings.setValue(f"{self.widget_name}.state", self.saveState())
+
+    def load_state(self):
+        settings = core.Settings()
+        state = settings.value(f"{self.widget_name}.state", None)
+        if state is not None:
+            self.restoreState(state)
 
     def resize_sections(self, mode: str):
         self.resizeSections(self.MODES[mode])
