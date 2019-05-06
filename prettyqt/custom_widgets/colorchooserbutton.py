@@ -47,7 +47,10 @@ class ColorChooserButton(widgets.Widget):
             self.color_updated.emit(dlg.current_color())
 
     def set_color(self, color):
-        self.color = gui.Color(color)
+        if isinstance(color, str):
+            self.color = gui.Color(color)
+        else:
+            self.color = color
         self.lineedit.setText(self.color.name().upper())
         self.button.setStyleSheet(f"background-color: {self.color.name()};")
 
@@ -55,6 +58,7 @@ class ColorChooserButton(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.Application(sys.argv)
     btn = ColorChooserButton()
+    btn.set_color(gui.Color("green"))
     import pickle
     with open('data.pkl', 'wb') as jar:
         pickle.dump(btn, jar)

@@ -24,6 +24,11 @@ class FormLayout(QtWidgets.QFormLayout):
     def __iter__(self):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
+    def __len__(self):
+        """needed for PySide2
+        """
+        return self.rowCount()
+
     def set_size_mode(self, mode: str):
         if mode not in MODES:
             raise ValueError(f"{mode} not a valid size mode.")
