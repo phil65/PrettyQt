@@ -26,6 +26,10 @@ def test_color():
 def test_icon():
     icon = gui.Icon()
     icon.for_color("black")
+    with open('date.pkl', 'wb') as jar:
+        pickle.dump(icon, jar)
+    with open('date.pkl', 'rb') as jar:
+        icon = pickle.load(jar)
 
 
 def test_keysequence():
@@ -64,7 +68,11 @@ def test_pixmap():
 
 
 def test_polygonf():
-    gui.PolygonF()
+    poly = gui.PolygonF()
+    with open('date.pkl', 'wb') as jar:
+        pickle.dump(poly, jar)
+    with open('date.pkl', 'rb') as jar:
+        poly = pickle.load(jar)
 
 
 def test_regexpvalidator():

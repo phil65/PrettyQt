@@ -3,10 +3,24 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui
+from qtpy import QtGui, QtCore
+from prettyqt import core
 
 
 class PolygonF(QtGui.QPolygonF):
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
+    def __getstate__(self):
+        ba = QtCore.QByteArray()
+        stream = QtCore.QDataStream(ba, QtCore.QIODevice.WriteOnly)
+        stream << self
+        return ba
+
+    def __setstate__(self, ba):
+        stream = QtCore.QDataStream(ba, QtCore.QIODevice.ReadOnly)
+        stream >> self
 
     @classmethod
     def from_xy(cls, xdata, ydata):
@@ -20,3 +34,7 @@ class PolygonF(QtGui.QPolygonF):
         memory[:(size - 1) * 2 + 1:2] = xdata
         memory[1:(size - 1) * 2 + 2:2] = ydata
         return polyline
+
+
+if __name__ == "__main__":
+    poly = PolygonF((core.Point(1, 1), core.Point(2, 2)))
