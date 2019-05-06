@@ -16,9 +16,9 @@ def test_action():
     action.set_disabled()
     action.set_icon("mdi.timer")
     action.set_shortcut("Ctrl+A")
-    with open('rb.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(action, jar)
-    with open('rb.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         action = pickle.load(jar)
     assert action.shortcut().toString() == "Ctrl+A"
     assert action.toolTip() == "test"
@@ -47,9 +47,9 @@ def test_checkbox():
     chk.set_disabled()
     chk.set_enabled()
     import pickle
-    with open('chk.pkl', 'wb') as jar:
+    with open("chk.pkl", "wb") as jar:
         pickle.dump(chk, jar)
-    with open('chk.pkl', 'rb') as jar:
+    with open("chk.pkl", "rb") as jar:
         chk = pickle.load(jar)
     assert bool(chk) is False
     chk.show()
@@ -72,9 +72,9 @@ def test_combobox():
     box.set_size_policy("first_show")
     box.set_icon_size(10)
     box.set_min_char_length(10)
-    with open('widget.pkl', 'wb') as jar:
+    with open("widget.pkl", "wb") as jar:
         pickle.dump(box, jar)
-    with open('widget.pkl', 'rb') as jar:
+    with open("widget.pkl", "rb") as jar:
         box = pickle.load(jar)
     box.show()
     box.close()
@@ -130,9 +130,9 @@ def test_doublespinbox():
     widget = widgets.DoubleSpinBox()
     widget.set_disabled()
     widget.set_enabled()
-    with open('widget.pkl', 'wb') as jar:
+    with open("widget.pkl", "wb") as jar:
         pickle.dump(widget, jar)
-    with open('widget.pkl', 'rb') as jar:
+    with open("widget.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.show()
     widget.close()
@@ -227,9 +227,9 @@ def test_label():
     label.set_image("")
     label.set_alignment(horizontal="left", vertical="top")
     label.set_text_interaction("by_mouse")
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(label, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         label = pickle.load(jar)
     label.show()
     label.close()
@@ -241,9 +241,9 @@ def test_lineedit():
     widget.set_font("Consolas")
     widget.setText("0")
     widget.append("a")
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.show()
     widget.close()
@@ -300,9 +300,9 @@ def test_plaintextedit():
     widget.highlight_current_line()
     widget.set_read_only()
     widget.get_result_widget()
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.show()
 
@@ -323,9 +323,9 @@ def test_pushbutton():
     widget.set_enabled()
     widget.set_icon("mdi.timer")
     widget.set_style_icon("close")
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.show()
 
@@ -335,9 +335,9 @@ def test_radiobutton():
     widget.set_icon("mdi.timer")
     widget.set_enabled()
     widget.set_disabled()
-    with open('rb.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
-    with open('rb.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     assert bool(widget) is False
     widget.show()
@@ -349,9 +349,9 @@ def test_slider():
     assert widget.is_horizontal()
     widget.set_vertical()
     assert widget.is_vertical()
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.show()
 
@@ -371,9 +371,9 @@ def test_spinbox():
     widget = widgets.SpinBox()
     widget.set_disabled()
     widget.set_enabled()
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.show()
 

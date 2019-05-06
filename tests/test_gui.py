@@ -16,9 +16,9 @@ def test_brush():
 def test_color():
     color = gui.Color()
     color.set_color("gray")
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(color, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         color = pickle.load(jar)
     assert str(color) == "#808080"
 
@@ -70,9 +70,9 @@ def test_polygonf():
 def test_regexpvalidator():
     val = gui.RegExpValidator()
     val.set_regex("[0-9]")
-    with open('data.pkl', 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(val, jar)
-    with open('data.pkl', 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         val = pickle.load(jar)
     assert val.get_regex() == "[0-9]"
 
