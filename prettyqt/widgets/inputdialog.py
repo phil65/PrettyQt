@@ -34,6 +34,14 @@ class InputDialog(QtWidgets.QInputDialog):
         if v[1]:
             return v[0]
 
+    @classmethod
+    def get_item(cls, items, title=None, label=None, icon=None):
+        par = widgets.Dialog()
+        par.set_icon(icon)
+        v = cls.getItem(par, title, label, items, editable=False)
+        if v[1]:
+            return v[0]
+
 
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
