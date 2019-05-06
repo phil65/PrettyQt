@@ -16,12 +16,4 @@ class DateTime(QtCore.QDateTime):
 if __name__ == "__main__":
     date = core.Date(2000, 11, 11)
     dt = DateTime(date)
-    print("here")
-    print(type(dt))
-    import pickle
-    with open('date.pkl', 'wb') as jar:
-        pickle.dump(dt, jar)
-    with open('date.pkl', 'rb') as jar:
-        dt = pickle.load(jar)
-    print(type(dt))
     print(dt.toPyDateTime())

@@ -21,9 +21,9 @@ def test_buttondelegate():
 def test_colorchooserbutton():
     btn = custom_widgets.ColorChooserButton()
     btn.set_color("green")
-    with open("rb.pkl", "wb") as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(btn, jar)
-    with open("rb.pkl", "rb") as jar:
+    with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
     btn.show()
     btn.color_updated.connect(print)
@@ -31,9 +31,9 @@ def test_colorchooserbutton():
 
 def test_filechooserbutton():
     btn = custom_widgets.FileChooserButton()
-    with open("rb.pkl", "wb") as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(btn, jar)
-    with open("rb.pkl", "rb") as jar:
+    with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
     btn.show()
     btn.file_updated.connect(print)

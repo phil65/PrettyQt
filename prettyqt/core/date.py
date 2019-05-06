@@ -15,10 +15,3 @@ class Date(QtCore.QDate):
 if __name__ == "__main__":
     dt = Date(2000, 11, 11)
     print(dt)
-    # widget.show()
-    import pickle
-    with open('date.pkl', 'wb') as jar:
-        pickle.dump(dt, jar)
-    with open('date.pkl', 'rb') as jar:
-        dt = pickle.load(jar)
-    print(dt)

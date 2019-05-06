@@ -47,9 +47,9 @@ def test_checkbox():
     chk.set_disabled()
     chk.set_enabled()
     import pickle
-    with open("chk.pkl", "wb") as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(chk, jar)
-    with open("chk.pkl", "rb") as jar:
+    with open("data.pkl", "rb") as jar:
         chk = pickle.load(jar)
     assert bool(chk) is False
     chk.show()
