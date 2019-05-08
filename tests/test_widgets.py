@@ -72,9 +72,9 @@ def test_combobox():
     box.set_size_policy("first_show")
     box.set_icon_size(10)
     box.set_min_char_length(10)
-    with open("widget.pkl", "wb") as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(box, jar)
-    with open("widget.pkl", "rb") as jar:
+    with open("data.pkl", "rb") as jar:
         box = pickle.load(jar)
     box.show()
     box.close()
@@ -130,9 +130,9 @@ def test_doublespinbox():
     widget = widgets.DoubleSpinBox()
     widget.set_disabled()
     widget.set_enabled()
-    with open("widget.pkl", "wb") as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
-    with open("widget.pkl", "rb") as jar:
+    with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.show()
     widget.close()
