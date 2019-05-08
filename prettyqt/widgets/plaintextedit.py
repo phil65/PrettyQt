@@ -35,7 +35,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         font = gui.Font(font_name, font_size, weight, italic)
         self.setFont(font)
 
-    def append(self, text: str):
+    def append_text(self, text: str):
         self.appendPlainText(text)
 
     def set_text(self, text: str):

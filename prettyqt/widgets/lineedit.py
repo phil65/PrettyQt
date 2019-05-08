@@ -38,7 +38,7 @@ class LineEdit(QtWidgets.QLineEdit):
         font = gui.Font(font_name, font_size, weight, italic)
         self.setFont(font)
 
-    def append(self, text: str):
+    def append_text(self, text: str):
         self.set_text(self.text() + text)
 
     def set_text(self, text: str):
@@ -68,6 +68,7 @@ class LineEdit(QtWidgets.QLineEdit):
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = LineEdit("This is a test")
+    widget.set_regex_validator("[0-9]+")
     widget.setFont(gui.Font("Consolas"))
     widget.show()
     app.exec_()

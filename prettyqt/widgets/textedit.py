@@ -27,6 +27,9 @@ class TextEdit(QtWidgets.QTextEdit):
     def set_text(self, text: str):
         self.setPlainText(text)
 
+    def append_text(self, text: str):
+        self.append(text)
+
     def text(self) -> str:
         return self.toPlainText()
 

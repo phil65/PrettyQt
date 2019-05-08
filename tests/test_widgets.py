@@ -239,8 +239,8 @@ def test_lineedit():
     widget = widgets.LineEdit("Test")
     widget.set_regex_validator("[0-9]")
     widget.set_font("Consolas")
-    widget.setText("0")
-    widget.append("a")
+    widget.set_text("0")
+    widget.append_text("a")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -295,7 +295,7 @@ def test_plaintextedit():
     widget.set_disabled()
     widget.set_enabled()
     widget.set_font("Consolas")
-    widget.append(" test")
+    widget.append_text(" test")
     assert widget.text() == "hallo\n test"
     widget.highlight_current_line()
     widget.set_read_only()
@@ -413,7 +413,7 @@ def test_textbrowser():
 def test_textedit():
     widget = widgets.TextEdit()
     widget.set_text("test")
-    widget.append(" this")
+    widget.append_text(" this")
     assert(widget.text() == "test\n this")
     widget.set_font("Consolas")
     widget.set_enabled()
