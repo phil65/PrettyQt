@@ -78,6 +78,7 @@ from .splitter import Splitter
 from .wizard import Wizard
 from .wizardpage import WizardPage
 from .itemdelegate import ItemDelegate
+from .styleditemdelegate import StyledItemDelegate
 
 __all__ = ["Application",
            "Widget",
@@ -142,4 +143,5 @@ __all__ = ["Application",
            "Wizard",
            "WizardPage",
            "MainWindow",
-           "ItemDelegate"]
+           "ItemDelegate",
+           "StyledItemDelegate"]
