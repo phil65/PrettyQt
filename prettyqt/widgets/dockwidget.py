@@ -8,6 +8,12 @@ from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
 
+ALLOWED_AREAS = dict(all=QtCore.Qt.AllDockWidgetAreas,
+                     left=QtCore.Qt.LeftDockWidgetArea,
+                     right=QtCore.Qt.RightDockWidgetArea,
+                     top=QtCore.Qt.TopDockWidgetArea,
+                     bottom=QtCore.Qt.BottomDockWidgetArea)
+
 
 class DockWidget(QtWidgets.QDockWidget):
     """
@@ -23,11 +29,15 @@ class DockWidget(QtWidgets.QDockWidget):
             self.setObjectName(name)
         if title:
             self.setWindowTitle(title)
-        self.setAllowedAreas(QtCore.Qt.AllDockWidgetAreas)
+        self.set_allowed_areas("all")
+
+    def set_allowed_areas(self, area):
+        self.setAllowedAreas(ALLOWED_AREAS[area])
 
     def setup_title_bar(self):
         title_bar = widgets.Widget()
         layout = widgets.BoxLayout("horizontal")
+        layout.set_margin(0)
         layout.set_alignment("right")
         title_bar.setLayout(layout)
         maximise_button = widgets.PushButton()
@@ -43,7 +53,10 @@ class DockWidget(QtWidgets.QDockWidget):
     def maximise(self):
         if not self.isFloating():
             self.setFloating(True)
-        self.showMaximized()
+        if not self.isMaximized():
+            self.showMaximized()
+        else:
+            self.showMinimized()
 
 
 if __name__ == "__main__":
