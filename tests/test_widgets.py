@@ -260,7 +260,8 @@ def test_listview():
 def test_mainwindow():
     window = widgets.MainWindow()
     window.set_icon("mdi.timer")
-    window.add_dockwidget("test", "Test")
+    w = widgets.DockWidget()
+    window.add_dockwidget(w, "left")
     window.show()
     window.close()
     window.load_window_state()

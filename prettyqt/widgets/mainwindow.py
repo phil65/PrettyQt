@@ -56,24 +56,25 @@ class MainWindow(QtWidgets.QMainWindow):
         ss = "; ".join(f"{k.replace('_', '-')}: {v}" for k, v in dct.items())
         self.setStyleSheet(f"{item} {{{ss};}}")
 
-    def add_dockwidget(self,
-                       name: str,
-                       title: str,
-                       vertical: bool = True,
-                       position: str = "left") -> widgets.DockWidget:
+    def add_widget_as_dock(self,
+                           name: str,
+                           title: str,
+                           vertical: bool = True,
+                           position: str = "left") -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, name=name, title=title)
         widget = widgets.Widget()
         widget.setObjectName(f"{name}.widget")
-        if vertical:
-            layout = QtWidgets.QVBoxLayout(widget)
-        else:
-            layout = QtWidgets.QHBoxLayout(widget)
-        layout.setContentsMargins(0, 0, 0, 0)
+        orientation = "vertical" if vertical else "horizontal"
+        layout = widgets.BoxLayout(orientation, widget)
+        layout.set_margin(0)
         dock_widget.setWidget(widget)
-        position = DOCK_POSITIONS[position]
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dock_widget)
+        self.add_dockwidget(dock_widget, position)
         dock_widget.layout = layout
         return dock_widget
+
+    def add_dockwidget(self, dockwidget, position):
+        position = DOCK_POSITIONS[position]
+        self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dockwidget)
 
     def toggle_fullscreen(self):
         """toggle between fullscreen and regular size

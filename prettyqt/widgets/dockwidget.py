@@ -64,6 +64,6 @@ if __name__ == "__main__":
     win = widgets.MainWindow()
     dock_widget = DockWidget(name="aa", title="Test")
     dock_widget.setup_title_bar()
-    win.addDockWidget(QtCore.Qt.DockWidgetArea(1), dock_widget)
+    win.add_dockwidget(dock_widget, "left")
     win.show()
     app.exec_()
