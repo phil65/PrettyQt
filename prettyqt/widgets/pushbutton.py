@@ -6,7 +6,7 @@
 import qtawesome as qta
 from qtpy import QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
 class PushButton(QtWidgets.QPushButton):
@@ -32,11 +32,12 @@ class PushButton(QtWidgets.QPushButton):
         if icon:
             self.setIcon(icon)
 
-    def set_style_icon(self, icon: str):
+    def set_style_icon(self, icon: str, size: int = 15):
         STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton,
                       maximise=QtWidgets.QStyle.SP_TitleBarMaxButton)
         qicon = self.style().standardIcon(STYLES[icon], None, self)
         self.setIcon(qicon)
+        self.setIconSize(core.Size(size, size))
 
 
 if __name__ == "__main__":
