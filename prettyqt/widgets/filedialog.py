@@ -12,8 +12,8 @@ from prettyqt import core, widgets
 
 MODES = dict(existing_file=QtWidgets.QFileDialog.ExistingFile,
              existing_files=QtWidgets.QFileDialog.ExistingFiles,
-             any_file=QtWidgets.QFileDialog.ExistingFiles,
-             directory=QtWidgets.QFileDialog.ExistingFiles)
+             any_file=QtWidgets.QFileDialog.AnyFile,
+             directory=QtWidgets.QFileDialog.Directory)
 
 LABELS = dict(look_in=QtWidgets.QFileDialog.LookIn,
               filename=QtWidgets.QFileDialog.FileName,
