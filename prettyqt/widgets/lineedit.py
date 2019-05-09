@@ -13,13 +13,15 @@ class LineEdit(QtWidgets.QLineEdit):
     def __getstate__(self):
         return dict(text=self.text(),
                     enabled=self.isEnabled(),
-                    font=gui.Font(self.font()))
+                    font=gui.Font(self.font()),
+                    validator=self.validator())
 
     def __setstate__(self, state):
         super().__init__()
         self.set_text(state["text"])
         self.setEnabled(state["enabled"])
         self.setFont(state["font"])
+        self.setValidator(state["validator"])
 
     def font(self):
         return gui.Font(super().font())
