@@ -9,12 +9,15 @@ from prettyqt import core
 
 class RegExpValidator(QtGui.QRegExpValidator):
 
+    def __repr__(self):
+        return f"RegExpValidator(RegExp('{self.get_regex()}'))"
+
     def __getstate__(self):
-        return dict(regex=core.RegExp(self.regExp()))
+        return dict(regexp=core.RegExp(self.regExp()))
 
     def __setstate__(self, state):
         super().__init__()
-        self.setRegExp(state["regex"])
+        self.setRegExp(state["regexp"])
 
     def set_regex(self, regex):
         re = core.RegExp(regex)

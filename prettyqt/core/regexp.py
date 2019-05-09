@@ -8,6 +8,9 @@ from qtpy import QtCore
 
 class RegExp(QtCore.QRegExp):
 
+    def __repr__(self):
+        return f"RegExp('{self.pattern()}')"
+
     def __reduce__(self):
         return (self.__class__, (self.pattern(),))
 
