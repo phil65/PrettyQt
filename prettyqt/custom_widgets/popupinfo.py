@@ -24,7 +24,9 @@ class PopupInfo(QtWidgets.QDialog):
         layout = widgets.BoxLayout("vertical")
         layout.setContentsMargins(20, 20, 20, 20)
         self.setLayout(layout)
-        self.setStyleSheet("background-color: black;")  # 2a82da
+        self.setStyleSheet("background-color: black;")
+        self.label.setStyleSheet("color: white;")
+        # self.setStyleSheet("")
         layout.addWidget(self.label)
         # signals.signals.popup_info.connect(self.popup)
 
@@ -39,7 +41,7 @@ class PopupInfo(QtWidgets.QDialog):
         self.timer.start(2500)
 
     def show_popup(self, text: str):
-        self.label.setText(f"<font color='white'>{text}</font>")
+        self.label.setText(text)
         self.show()
 
 
