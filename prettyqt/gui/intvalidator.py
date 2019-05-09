@@ -8,6 +8,9 @@ from qtpy import QtGui
 
 class IntValidator(QtGui.QIntValidator):
 
+    def __repr__(self):
+        return f"IntValidator({self.bottom()}, {self.top()})"
+
     def __getstate__(self):
         return dict(bottom=self.bottom(), top=self.top())
 
