@@ -7,4 +7,6 @@ from qtpy import QtCore
 
 
 class SizeF(QtCore.QSizeF):
-    pass
+
+    def __repr__(self):
+        return f"SizeF({self.width()}, {self.height()})"
