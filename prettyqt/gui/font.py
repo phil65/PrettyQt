@@ -8,10 +8,14 @@ from qtpy import QtGui
 
 class Font(QtGui.QFont):
 
+    def __repr__(self):
+        return (f"Font({self.family()}, {self.pointsize()}, "
+                f"{self.weight()}, {self.italic()})")
+
     def __getstate__(self):
         return dict(family=self.family(),
                     pointsize=self.pointSize(),
-                    bold=self.bold(),
+                    weight=self.weight(),
                     italic=self.italic())
 
     def __setstate__(self, state):
@@ -19,7 +23,7 @@ class Font(QtGui.QFont):
         self.setFamily(state["family"])
         if state["pointsize"] > -1:
             self.setPointSize(state["pointsize"])
-        self.setBold(state["bold"])
+        self.setWeight(state["weight"])
         self.setItalic(state["italic"])
 
     def set_size(self, size: int):
