@@ -40,10 +40,6 @@ class SpanSlider(widgets.Slider):
     LOWER_HANDLE = 1
     UPPER_HANDLE = 2
 
-    FREE_MOVEMENT = None
-    NO_CROSSING = 1
-    NO_OVERLAPPING = 2
-
     span_changed = core.Signal(int, int)
     lower_pos_changed = core.Signal(int)
     upper_pos_changed = core.Signal(int)
@@ -63,7 +59,7 @@ class SpanSlider(widgets.Slider):
         self.last_pressed = self.NO_HANDLE
         self.upper_pressed = widgets.Style.SC_None
         self.lower_pressed = widgets.Style.SC_None
-        self.movement = self.FREE_MOVEMENT
+        self.movement = "free"
         self.main_control = self.LOWER_HANDLE
         self.first_movement = False
         self.block_tracking = False
@@ -194,23 +190,23 @@ class SpanSlider(widgets.Slider):
             no = True
 
         if not no and not up:
-            if self.movement == self.NO_CROSSING:
+            if self.movement == "no_crossing":
                 value = min(value, self.upper)
-            elif self.movement == self.NO_OVERLAPPING:
+            elif self.movement == "no_overlap":
                 value = min(value, self.upper - 1)
 
-            if self.movement == self.FREE_MOVEMENT and value > self.upper:
+            if self.movement == "free" and value > self.upper:
                 self.swap_controls()
                 self.set_upper_pos(value)
             else:
                 self.set_lower_pos(value)
         elif not no:
-            if self.movement == self.NO_CROSSING:
+            if self.movement == "no_crossing":
                 value = max(value, self.lower)
-            elif self.movement == self.NO_OVERLAPPING:
+            elif self.movement == "no_overlap":
                 value = max(value, self.lower + 1)
 
-            if self.movement == self.FREE_MOVEMENT and value < self.lower:
+            if self.movement == "free" and value < self.lower:
                 self.swap_controls()
                 self.set_lower_pos(value)
             else:
@@ -394,23 +390,23 @@ class SpanSlider(widgets.Slider):
                 self.first_movement = False
 
         if self.lower_pressed == HANDLE_STYLE:
-            if self.movement == self.NO_CROSSING:
+            if self.movement == "no_crossing":
                 new_pos = min(new_pos, self.upper)
-            elif self.movement == self.NO_OVERLAPPING:
+            elif self.movement == "no_overlap":
                 new_pos = min(new_pos, self.upper - 1)
 
-            if self.movement == self.FREE_MOVEMENT and new_pos > self.upper:
+            if self.movement == "free" and new_pos > self.upper:
                 self.swap_controls()
                 self.set_upper_pos(new_pos)
             else:
                 self.set_lower_pos(new_pos)
         elif self.upper_pressed == HANDLE_STYLE:
-            if self.movement == self.NO_CROSSING:
+            if self.movement == "no_crossing":
                 new_pos = max(new_pos, self.lower_value)
-            elif self.movement == self.NO_OVERLAPPING:
+            elif self.movement == "no_overlap":
                 new_pos = max(new_pos, self.lower_value + 1)
 
-            if self.movement == self.FREE_MOVEMENT and new_pos < self.lower:
+            if self.movement == "free" and new_pos < self.lower:
                 self.swap_controls()
                 self.set_lower_pos(new_pos)
             else:
