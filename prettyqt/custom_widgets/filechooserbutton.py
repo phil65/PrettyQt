@@ -31,10 +31,11 @@ class FileChooserButton(widgets.Widget):
 
     def __getstate__(self):
         return dict(path=self.path,
+                    extensions=self.extensions,
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
-        self.__init__()
+        self.__init__(state["extensions"])
         self.set_path(state["path"])
         self.setEnabled(state["enabled"])
 
