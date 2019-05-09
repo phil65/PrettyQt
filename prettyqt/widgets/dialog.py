@@ -36,6 +36,9 @@ class Dialog(QtWidgets.QDialog):
             self.layout = widgets.BoxLayout(layout)
             self.setLayout(self.layout)
 
+    def __getitem__(self, index):
+        return self.findChild(index)
+
     def resize(self, *size):
         if isinstance(size[0], tuple):
             super().resize(*size[0])

@@ -23,6 +23,9 @@ class MainWindow(QtWidgets.QMainWindow):
     includes all docks, a centralwidget and a toolbar
     """
 
+    def __getitem__(self, index):
+        return self.findChild(index)
+
     def load_window_state(self):
         settings = core.Settings()
         geom = settings.value("mainwindow.geometry", None)
