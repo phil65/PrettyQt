@@ -112,7 +112,7 @@ def test_spanslider(qtbot):
     slider.show()
     qtbot.mouseClick(slider, QtCore.Qt.LeftButton)
     qtbot.mouseMove(slider, core.Point(20, 20))
-    assert(slider.movement_mode is None)
+    assert(slider.movement_mode == "free")
 
 
 def test_waitingspinner():
