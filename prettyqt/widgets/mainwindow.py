@@ -24,7 +24,7 @@ class MainWindow(QtWidgets.QMainWindow):
     """
 
     def __getitem__(self, index):
-        return self.findChild(index)
+        return self.findChild(QtWidgets.QWidget, index)
 
     def load_window_state(self):
         settings = core.Settings()
