@@ -64,6 +64,8 @@ from .progressbar import ProgressBar
 from .listview import ListView
 from .treeview import TreeView
 from .tableview import TableView
+from .itemdelegate import ItemDelegate
+from .styleditemdelegate import StyledItemDelegate
 
 from .splashscreen import SplashScreen
 from .progressdialog import ProgressDialog
@@ -77,8 +79,6 @@ from .groupbox import GroupBox
 from .splitter import Splitter
 from .wizard import Wizard
 from .wizardpage import WizardPage
-from .itemdelegate import ItemDelegate
-from .styleditemdelegate import StyledItemDelegate
 
 __all__ = ["Application",
            "Widget",
