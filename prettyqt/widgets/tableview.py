@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Optional
+from typing import Optional, List, Generator, Any
 import logging
 import functools
 import operator
@@ -74,6 +74,33 @@ class TableView(QtWidgets.QTableView):
         if self.model() is None:
             return None
         return self.current_index().data(QtCore.Qt.UserRole)
+
+    def selected_indexes(self) -> List[QtCore.QModelIndex]:
+        """
+        returns list of selected indexes in first row
+        """
+        indexes = (x for x in self.selectedIndexes() if x.column() == 0)
+        return sorted(indexes, key=lambda x: x.row())
+
+    def selected_names(self) -> Generator[Any, None, None]:
+        """
+        returns generator yielding item names
+        """
+        return (x.data(self.model().NAME_ROLE)
+                for x in self.selected_indexes())
+
+    def selected_rows(self) -> Generator[int, None, None]:
+        """
+        returns generator yielding row nums
+        """
+        return (x.row() for x in self.selected_indexes())
+
+    def selected_data(self) -> Generator[Any, None, None]:
+        """
+        returns generator yielding selected userData
+        """
+        return (x.data(self.model().QtCore.Qt.UserRole)
+                for x in self.selected_indexes())
 
     def setup_list_style(self):
         self.setSelectionBehavior(self.SelectRows)
