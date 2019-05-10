@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 
 class CheckBox(QtWidgets.QCheckBox):
 
+    def __repr__(self):
+        return f"CheckBox: {self.__getstate__()}"
+
     def __getstate__(self):
         return dict(checkable=self.isCheckable(),
                     checked=self.isChecked(),

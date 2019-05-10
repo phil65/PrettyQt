@@ -10,6 +10,9 @@ from prettyqt import gui, widgets
 
 class LineEdit(QtWidgets.QLineEdit):
 
+    def __repr__(self):
+        return f"LineEdit: {self.__getstate__()}"
+
     def __getstate__(self):
         return dict(text=self.text(),
                     enabled=self.isEnabled(),

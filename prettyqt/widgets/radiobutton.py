@@ -9,6 +9,9 @@ import qtawesome as qta
 
 class RadioButton(QtWidgets.QRadioButton):
 
+    def __repr__(self):
+        return f"RadioButton: {self.__getstate__()}"
+
     def __getstate__(self):
         return dict(checkable=self.isCheckable(),
                     checked=self.isChecked(),

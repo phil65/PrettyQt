@@ -10,6 +10,9 @@ from prettyqt import widgets
 
 class SpinBox(QtWidgets.QSpinBox):
 
+    def __repr__(self):
+        return f"SpinBox: {self.__getstate__()}"
+
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
                     value=self.value(),
@@ -33,5 +36,6 @@ class SpinBox(QtWidgets.QSpinBox):
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = SpinBox()
+    print(widget)
     widget.show()
     app.exec_()
