@@ -9,7 +9,7 @@ from qtpy import QtGui
 class Font(QtGui.QFont):
 
     def __repr__(self):
-        return (f"Font({self.family()}, {self.pointsize()}, "
+        return (f"Font({self.family()}, {self.pointSize()}, "
                 f"{self.weight()}, {self.italic()})")
 
     def __getstate__(self):
