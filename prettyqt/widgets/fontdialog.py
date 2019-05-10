@@ -4,11 +4,13 @@
 """
 
 from qtpy import QtWidgets
-from prettyqt import widgets
+from prettyqt import widgets, gui
 
 
 class FontDialog(QtWidgets.QFontDialog):
-    pass
+
+    def current_font(self):
+        return gui.Font(self.currentFont())
 
 
 if __name__ == "__main__":
