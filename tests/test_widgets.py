@@ -514,7 +514,8 @@ def test_widgetaction():
 
 
 def test_wizard():
-    widgets.Wizard()
+    w = widgets.Wizard()
+    w.add_widget_as_page(widgets.Widget())
 
 
 def test_wizardpage():
