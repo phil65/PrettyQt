@@ -12,10 +12,8 @@ class SelectionWidget(widgets.GroupBox):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.layout = widgets.BoxLayout("horizontal")
-        self.rb_other = widgets.RadioButton("Other")
+        self.rb_other = widgets.RadioButton()
         self.buttons = dict()
-        # self.rb_comma.setChecked(True)
-
         self.setLayout(self.layout)
 
     def __iter__(self):
@@ -38,13 +36,15 @@ class SelectionWidget(widgets.GroupBox):
             rb.setChecked(True)
         self.layout.addWidget(rb)
 
-    def add_custom(self, regex):
+    def add_custom(self, label="Other", regex=None):
         self.lineedit_custom_sep = widgets.LineEdit(self)
         # TODO: Enable this or add BAR radio and option.
         self.lineedit_custom_sep.setEnabled(False)
+        self.rb_other.setText(label)
         self.rb_other.toggled.connect(self.lineedit_custom_sep.setEnabled)
         self.lineedit_custom_sep.textChanged.connect(lambda: self.update_choice(True))
-        self.lineedit_custom_sep.set_regex_validator(regex)
+        if regex:
+            self.lineedit_custom_sep.set_regex_validator(regex)
         self.layout.addWidget(self.rb_other)
         self.layout.addWidget(self.lineedit_custom_sep)
 
@@ -72,6 +72,6 @@ if __name__ == "__main__":
              "Tab": "\t",
              "Comma": ","}
     widget.add_items(items)
-    widget.add_custom(regex=r"\S{1}")
+    widget.add_custom(label="custom", regex=r"\S{1}")
     widget.show()
     app.exec_()

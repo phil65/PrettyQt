@@ -83,7 +83,7 @@ def test_selectionwidget():
              "Tab": "\t",
              "Comma": ","}
     widget.add_items(items)
-    widget.add_custom(regex=r"\S{1}")
+    widget.add_custom(label="test", regex=r"\S{1}")
     choice = widget.current_choice()
     assert(choice == ";")
 
