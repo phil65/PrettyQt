@@ -21,6 +21,9 @@ LABELS = dict(look_in=QtWidgets.QFileDialog.LookIn,
               accept=QtWidgets.QFileDialog.Accept,
               reject=QtWidgets.QFileDialog.Reject)
 
+ACCEPT_MODES = dict(save=QtWidgets.QFileDialog.AcceptSave,
+                    open=QtWidgets.QFileDialog.AcceptOpen)
+
 
 class FileDialog(QtWidgets.QFileDialog):
     """
@@ -37,10 +40,7 @@ class FileDialog(QtWidgets.QFileDialog):
         self.set_accept_mode(mode)
 
     def set_accept_mode(self, mode: str):
-        if mode == "save":
-            self.setAcceptMode(self.AcceptSave)
-        else:
-            self.setAcceptMode(self.AcceptOpen)
+        self.setAcceptMode(ACCEPT_MODES[mode])
 
     def set_label_text(self, label: str, text: str):
         if label not in LABELS:
