@@ -37,7 +37,7 @@ class GridLayout(QtWidgets.QGridLayout):
         positions = []
         for i, item in enumerate(list(self)):
             widgets.append(item)
-            positions.append(self.get_item_pos(i))
+            positions.append(self.getItemPosition(i))
         return dict(widgets=widgets, positions=positions)
 
     def __setstate__(self, state):
@@ -61,9 +61,6 @@ class GridLayout(QtWidgets.QGridLayout):
 
     def __len__(self):
         return self.count()
-
-    def get_item_pos(self, index):
-        return self.getItemPosition(index)
 
     def set_size_mode(self, mode: str):
         if mode not in MODES:
