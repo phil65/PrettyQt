@@ -10,6 +10,14 @@ from prettyqt import gui, widgets
 
 class ColorDialog(QtWidgets.QColorDialog):
 
+    def __getstate__(self):
+        return dict(color=self.current_color())
+
+    def __setstate__(self, state):
+        self.__init__()
+        if state["color"]:
+            self.setCurrentColor(state["color"])
+
     @classmethod
     def get_color(cls, preset=None, allow_alpha=False, parent=None):
         if isinstance(preset, str):
