@@ -32,28 +32,35 @@ class Settings(QtCore.QSettings):
         if self.settings_id:
             self.endGroup()
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: str):
         return self.value(index)
 
-    def __setitem__(self, name, value):
+    def __setitem__(self, name: str, value):
         return self.setValue(name, value)
 
-    def set_value(self, key, value):
+    @classmethod
+    def from_dict(cls, dict: dict):
+        settings = cls()
+        for k, v in dict.items():
+            settings.set_value(k, v)
+        return settings
+
+    def set_value(self, key: str, value):
         if not self.applicationName():
             raise ValueError("no app name defined")
         self.setValue(key, value)
 
-    def value(self, key, default=None):
+    def value(self, key: str, default=None):
         return super().value(key, default)
 
     @classmethod
-    def set_default_format(cls, fmt):
+    def set_default_format(cls, fmt: str):
         if fmt not in FORMATS:
             raise ValueError("Format must be either 'native' or 'ini'")
         cls.setDefaultFormat(FORMATS[fmt])
 
     @classmethod
-    def set_path(cls, fmt, scope, path):
+    def set_path(cls, fmt, scope: str, path: str):
         if fmt not in FORMATS:
             raise ValueError("Format must be either 'native' or 'ini'")
         if scope not in SCOPES:
@@ -61,7 +68,7 @@ class Settings(QtCore.QSettings):
         cls.setPath(FORMATS[fmt], SCOPES[scope], str(path))
 
     @contextlib.contextmanager
-    def group(self, prefix):
+    def group(self, prefix: str):
         """context manager for setting groups
 
         Args:
@@ -72,7 +79,7 @@ class Settings(QtCore.QSettings):
         self.endGroup()
 
     @contextlib.contextmanager
-    def write_array(self, prefix, size=-1):
+    def write_array(self, prefix: str, size: int = -1):
         """context manager for writing arrays
 
         Args:
@@ -84,7 +91,7 @@ class Settings(QtCore.QSettings):
         self.endArray()
 
     @contextlib.contextmanager
-    def read_array(self, prefix):
+    def read_array(self, prefix: str):
         """context manager for reading arrays
 
         Args:
