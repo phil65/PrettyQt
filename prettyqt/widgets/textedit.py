@@ -10,6 +10,17 @@ from prettyqt import gui
 
 class TextEdit(QtWidgets.QTextEdit):
 
+    def __getstate__(self):
+        return dict(text=self.text(),
+                    enabled=self.isEnabled(),
+                    font=gui.Font(self.font()))
+
+    def __setstate__(self, state):
+        super().__init__()
+        self.set_text(state["text"])
+        self.setEnabled(state["enabled"])
+        self.setFont(state["font"])
+
     def set_enabled(self):
         self.setEnabled(True)
 
