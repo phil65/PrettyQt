@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+import datetime
+
 from qtpy import QtWidgets
 
 
@@ -30,7 +32,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def get_date(self):
+    def get_date(self) -> datetime.datetime:
         try:
             return self.dateTime().toPython()
         except TypeError:

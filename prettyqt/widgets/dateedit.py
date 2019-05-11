@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+import datetime
+
 from qtpy import QtWidgets
 
 
@@ -23,7 +25,7 @@ class DateEdit(QtWidgets.QDateEdit):
         self.setEnabled(state["enabled"])
         self.setDisplayFormat(state["display_format"])
 
-    def get_date(self):
+    def get_date(self) -> datetime.date:
         try:
             return self.date().toPython()
         except (TypeError, AttributeError):
