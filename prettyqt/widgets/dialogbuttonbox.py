@@ -27,6 +27,15 @@ BUTTONS = dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
 
 class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
+    def __len__(self):
+        return len(self.buttons())
+
+    def __getitem__(self, index):
+        return self.button(BUTTONS[index])
+
+    def __iter__(self):
+        return iter(self.buttons())
+
     def set_horizontal(self):
         self.setOrientation(QtCore.Qt.Horizontal)
 
