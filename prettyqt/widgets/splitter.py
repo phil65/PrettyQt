@@ -20,6 +20,22 @@ class Splitter(QtWidgets.QSplitter):
         else:
             return self.findChild(widgets.Widget, index)
 
+    def __getstate__(self):
+        return dict(items=self.get_children(),
+                    orientation=self.orientation(),
+                    handle_width=self.handleWidth(),
+                    children_collapsible=self.childrenCollapsible(),
+                    opaque_resize=self.opaqueResize())
+
+    def __setstate__(self, state):
+        self.__init__()
+        for item in state["items"]:
+            self.addWidget(item)
+        self.setOrientation(state["orientation"])
+        self.setHandleWidth(state["handle_width"])
+        self.setChildrenCollapsible(state["children_collapsible"])
+        self.setOpaqueResize(state["opaque_resize"])
+
     def __iter__(self):
         return iter(self[i] for i in range(self.count()))
 
