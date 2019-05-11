@@ -270,6 +270,8 @@ def test_lineedit():
     widget.set_font("Consolas")
     widget.set_text("0")
     widget.append_text("a")
+    widget.set_echo_mode("password")
+    widget.set_input_mask("X")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:

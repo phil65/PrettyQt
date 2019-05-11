@@ -7,6 +7,11 @@ from qtpy import QtWidgets
 
 from prettyqt import gui, widgets
 
+ECHO_MODES = dict(normal=QtWidgets.QLineEdit.Normal,
+                  no_echo=QtWidgets.QLineEdit.NoEcho,
+                  password=QtWidgets.QLineEdit.Password,
+                  echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit)
+
 
 class LineEdit(QtWidgets.QLineEdit):
 
@@ -17,7 +22,12 @@ class LineEdit(QtWidgets.QLineEdit):
         return dict(text=self.text(),
                     enabled=self.isEnabled(),
                     font=gui.Font(self.font()),
-                    validator=self.validator())
+                    validator=self.validator(),
+                    max_length=self.maxLength(),
+                    read_only=self.isReadOnly(),
+                    input_mask=self.inputMask(),
+                    has_frame=self.hasFrame(),
+                    placeholder_text=self.placeholderText())
 
     def __setstate__(self, state):
         super().__init__()
@@ -25,8 +35,13 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setEnabled(state["enabled"])
         self.setFont(state["font"])
         self.setValidator(state["validator"])
+        self.setInputMask(state["input_mask"])
+        self.setMaxLength(state["max_length"])
+        self.setPlaceholderText(state["placeholder_text"])
+        self.setReadOnly(state["read_only"])
+        self.setFrame(state["has_frame"])
 
-    def font(self):
+    def font(self) -> gui.Font:
         return gui.Font(super().font())
 
     def set_enabled(self):
@@ -63,10 +78,16 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setValidator(validator)
         return validator
 
-    def set_color(self, color):
+    def set_input_mask(self, mask: str):
+        self.setInputMask(mask)
+
+    def set_color(self, color: str):
         self.setStyleSheet(f"background-color: {color};")
 
-    def get_value(self):
+    def set_echo_mode(self, mode: str):
+        self.setEchoMode(ECHO_MODES[mode])
+
+    def get_value(self) -> str:
         return self.text()
 
 
