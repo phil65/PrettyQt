@@ -3,10 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 from qtpy.QtCharts import QtCharts
 
-from prettyqt import core, gui, charts, widgets
+from prettyqt import charts, core, gui, widgets
 
 ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
                   right=QtCore.Qt.AlignRight,

@@ -6,6 +6,7 @@
 import pickle
 
 from qtpy import QtCore
+
 from prettyqt import charts
 
 

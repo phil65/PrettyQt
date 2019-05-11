@@ -3,8 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from prettyqt import core, gui, syntaxhighlighters, widgets
 from qtpy import QtCore
+
+from prettyqt import core, gui, syntaxhighlighters, widgets
 
 
 class LineNumberArea(widgets.Widget):

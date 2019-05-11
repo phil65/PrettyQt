@@ -3,8 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtCore, QtWidgets
 import qtawesome as qta
+from qtpy import QtCore, QtWidgets
 
 box = QtWidgets.QComboBox
 INSERT_POLICIES = dict(no_insert=box.NoInsert,

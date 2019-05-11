@@ -5,8 +5,9 @@
 
 import pickle
 
-from prettyqt import widgets, core, gui
 from qtpy import QtCore
+
+from prettyqt import core, gui, widgets
 
 
 def test_action():

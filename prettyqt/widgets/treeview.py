@@ -4,9 +4,10 @@
 """
 
 import logging
-from typing import Optional, Generator, Any, List
+from typing import Any, Generator, List, Optional
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
+
 from prettyqt import gui, widgets
 
 SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,

@@ -3,8 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Optional
 import contextlib
+from typing import Optional
 
 from qtpy import QtCore
 

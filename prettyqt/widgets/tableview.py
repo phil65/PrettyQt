@@ -3,14 +3,14 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Optional, List, Generator, Any
-import logging
 import functools
+import logging
 import operator
+from typing import Any, Generator, List, Optional
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
+
 from prettyqt import gui, widgets
-
 
 TRIGGERS = dict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
                 double_click=QtWidgets.QAbstractItemView.DoubleClicked,

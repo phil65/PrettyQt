@@ -5,8 +5,8 @@
 
 import pathlib
 
-from qtpy import QtGui, QtCore
 import qtawesome as qta
+from qtpy import QtCore, QtGui
 
 from prettyqt import gui, widgets
 

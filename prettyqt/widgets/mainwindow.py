@@ -3,13 +3,13 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Dict
 import logging
+from typing import Dict
 
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 
 DOCK_POSITIONS = dict(top=QtCore.Qt.TopDockWidgetArea,
                       bottom=QtCore.Qt.BottomDockWidgetArea,

@@ -5,8 +5,9 @@
 
 import pickle
 
-from prettyqt import gui, core
 from qtpy import QtCore
+
+from prettyqt import core, gui
 
 
 def test_brush():

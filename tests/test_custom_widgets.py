@@ -5,8 +5,9 @@
 
 import pickle
 
-from prettyqt import widgets, gui, core, custom_widgets
 from qtpy import QtCore, QtGui
+
+from prettyqt import core, custom_widgets, gui, widgets
 
 test_widget = widgets.Widget()
 

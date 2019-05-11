@@ -7,8 +7,8 @@ import functools
 from typing import Callable, Iterable, Optional
 
 from qtpy import QtCore, QtWidgets
-from prettyqt import widgets, core
 
+from prettyqt import core, widgets
 
 POLICIES = dict(custom=QtCore.Qt.CustomContextMenu,
                 showhide_menu="showhide_menu")

@@ -4,7 +4,8 @@
 """
 
 from qtpy import QtWidgets
-from prettyqt import widgets, gui
+
+from prettyqt import gui, widgets
 
 
 class FontDialog(QtWidgets.QFontDialog):

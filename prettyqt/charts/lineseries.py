@@ -3,8 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy.QtCharts import QtCharts
 from qtpy import QtCore
+from qtpy.QtCharts import QtCharts
 
 STYLES = {QtCore.Qt.SolidLine: "Solid",
           QtCore.Qt.DotLine: "Dot",

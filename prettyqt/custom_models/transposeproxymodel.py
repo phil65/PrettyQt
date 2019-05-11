@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from qtpy import QtCore
+
 from prettyqt import core
 
 

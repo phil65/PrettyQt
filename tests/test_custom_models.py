@@ -3,7 +3,7 @@
 
 """Tests for `prettyqt` package."""
 
-from prettyqt import widgets, custom_models
+from prettyqt import custom_models, widgets
 
 
 def test_transposeproxymodel():

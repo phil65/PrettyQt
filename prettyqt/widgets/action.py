@@ -4,8 +4,7 @@
 """
 
 import qtawesome as qta
-from qtpy import QtWidgets, QtCore
-
+from qtpy import QtCore, QtWidgets
 
 PRIORITIES = dict(low=QtWidgets.QAction.LowPriority,
                   normal=QtWidgets.QAction.NormalPriority,

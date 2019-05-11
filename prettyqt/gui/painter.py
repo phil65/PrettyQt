@@ -4,7 +4,8 @@
 """
 
 from qtpy import QtCore, QtGui
-from prettyqt import gui, core
+
+from prettyqt import core, gui
 
 PEN_TYPES = dict(none=QtCore.Qt.NoPen)
 

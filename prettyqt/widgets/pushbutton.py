@@ -6,7 +6,7 @@
 import qtawesome as qta
 from qtpy import QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 
 
 class PushButton(QtWidgets.QPushButton):

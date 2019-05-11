@@ -5,7 +5,7 @@
 
 import sys
 
-from prettyqt import core, widgets, gui
+from prettyqt import core, gui, widgets
 
 
 class ColorChooserButton(widgets.Widget):

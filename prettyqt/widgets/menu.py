@@ -8,7 +8,7 @@ from typing import Any, Callable, Optional
 import qtawesome as qta
 from qtpy import QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 
 
 class Menu(QtWidgets.QMenu):
