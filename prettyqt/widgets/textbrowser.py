@@ -6,6 +6,7 @@
 import docutils.core
 import markdown
 from qtpy import QtWidgets
+from prettyqt import gui
 
 
 class TextBrowser(QtWidgets.QTextBrowser):
@@ -13,6 +14,17 @@ class TextBrowser(QtWidgets.QTextBrowser):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setOpenExternalLinks(True)
+
+    def __getstate__(self):
+        return dict(text=self.text(),
+                    enabled=self.isEnabled(),
+                    font=gui.Font(self.font()))
+
+    def __setstate__(self, state):
+        super().__init__()
+        self.setPlainText(state["text"])
+        self.setEnabled(state["enabled"])
+        self.setFont(state["font"])
 
     # def dragEnterEvent(self, event):
     #     u = event.mimeData().urls()
@@ -39,6 +51,9 @@ class TextBrowser(QtWidgets.QTextBrowser):
             file_content = f.read()
         html = docutils.core.publish_string(file_content, writer_name='html')
         self.setHtml(str(html))
+
+    def text(self):
+        return self.toPlainText()
 
 
 if __name__ == '__main__':

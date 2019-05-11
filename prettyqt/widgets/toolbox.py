@@ -6,7 +6,7 @@
 import qtawesome as qta
 from qtpy import QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, gui
 
 
 class ToolBox(QtWidgets.QToolBox):
@@ -21,7 +21,7 @@ class ToolBox(QtWidgets.QToolBox):
         children = list()
         for i, widget in enumerate(self.get_children()):
             dct = dict(widget=widget,
-                       icon=self.itemIcon(i),
+                       icon=gui.Icon(self.itemIcon(i)),
                        text=self.itemText(i),
                        enabled=self.isItemEnabled(i),
                        tooltip=self.itemToolTip(i))
@@ -32,7 +32,7 @@ class ToolBox(QtWidgets.QToolBox):
     def __setstate__(self, state):
         self.__init__()
         for i, item in enumerate(state["items"]):
-            self.addItem(item["widget"], item["icon"], item["title"])
+            self.addItem(item["widget"], item["icon"], item["text"])
             self.setItemEnabled(i, item["enabled"])
             self.setItemToolTip(i, item["tooltip"])
         self.setCurrentIndex(state["current_index"])

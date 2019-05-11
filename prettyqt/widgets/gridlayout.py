@@ -71,7 +71,7 @@ class GridLayout(QtWidgets.QGridLayout):
 
     def add_item(self, item, rowstart, colstart, rowspan=1, colspan=1):
         fn = self.addWidget if isinstance(item, QtWidgets.QWidget) else self.addLayout
-        fn(rowstart, colstart, rowspan, colspan)
+        fn(item, rowstart, colstart, rowspan, colspan)
 
 
 if __name__ == "__main__":

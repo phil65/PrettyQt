@@ -37,10 +37,13 @@ class Splitter(QtWidgets.QSplitter):
         self.setOpaqueResize(state["opaque_resize"])
 
     def __iter__(self):
-        return iter(self[i] for i in range(self.count()))
+        return iter(self.get_children())
 
     def __len__(self):
         return self.count()
+
+    def get_children(self):
+        return [self[i] for i in range(self.count())]
 
     def add_widget(self, widget):
         self.addWidget(widget)
