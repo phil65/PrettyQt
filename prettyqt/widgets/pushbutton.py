@@ -13,12 +13,16 @@ class PushButton(QtWidgets.QPushButton):
 
     def __getstate__(self):
         return dict(title=self.text(),
+                    checkable=self.isCheckable(),
+                    checked=self.isChecked(),
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
         super().__init__()
         self.setText(state["title"])
         self.setEnabled(state["enabled"])
+        self.setChecked(state["checked"])
+        self.setCheckable(state["checkable"])
 
     def set_enabled(self):
         self.setEnabled(True)
