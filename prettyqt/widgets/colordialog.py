@@ -7,6 +7,10 @@ from qtpy import QtWidgets
 
 from prettyqt import gui, widgets
 
+OPTIONS = dict(show_alpha=QtWidgets.QColorDialog.ShowAlphaChannel,
+               no_buttons=QtWidgets.QColorDialog.NoButtons,
+               no_native=QtWidgets.QColorDialog.DontUseNativeDialog)
+
 
 class ColorDialog(QtWidgets.QColorDialog):
 
