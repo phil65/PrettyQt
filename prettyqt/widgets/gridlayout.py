@@ -31,9 +31,13 @@ class GridLayout(QtWidgets.QGridLayout):
 
     def __getitem__(self, idx):
         if isinstance(idx, tuple):
-            return self.itemAtPosition(*idx)
+            item = self.itemAtPosition(*idx)
         else:
-            return self.itemAt(idx)
+            item = self.itemAt(idx)
+        widget = item.widget()
+        if widget is None:
+            widget = item.layout()
+        return widget
 
     def __iter__(self):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
