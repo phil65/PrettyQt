@@ -19,7 +19,7 @@ class Font(QtGui.QFont):
                     italic=self.italic())
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         self.setFamily(state["family"])
         if state["pointsize"] > -1:
             self.setPointSize(state["pointsize"])

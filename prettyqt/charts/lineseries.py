@@ -17,7 +17,7 @@ class LineSeries(QtCharts.QLineSeries):
         return dict(points=self.pointsVector())
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         super().append(state["points"])
         pass
 

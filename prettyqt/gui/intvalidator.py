@@ -15,7 +15,7 @@ class IntValidator(QtGui.QIntValidator):
         return dict(bottom=self.bottom(), top=self.top())
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         self.setRange(state["bottom"], state["top"])
 
 

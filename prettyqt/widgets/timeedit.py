@@ -19,7 +19,7 @@ class TimeEdit(QtWidgets.QTimeEdit):
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
-        super().__init__(state["time"])
+        self.__init__(state["time"])
         self.setEnabled(state["enabled"])
         self.setDisplayFormat(state["display_format"])
 

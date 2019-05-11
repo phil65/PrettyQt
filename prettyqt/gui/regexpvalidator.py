@@ -16,7 +16,7 @@ class RegExpValidator(QtGui.QRegExpValidator):
         return dict(regexp=core.RegExp(self.regExp()))
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         self.setRegExp(state["regexp"])
 
     def set_regex(self, regex):

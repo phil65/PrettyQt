@@ -15,7 +15,7 @@ class DoubleValidator(QtGui.QDoubleValidator):
         return dict(bottom=self.bottom(), top=self.top(), decimals=self.decimals())
 
     def __setstate__(self, state):
-        super().__init__(state["bottom"], state["top"], state["decimals"])
+        self.__init__(state["bottom"], state["top"], state["decimals"])
 
 
 if __name__ == "__main__":

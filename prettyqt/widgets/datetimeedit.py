@@ -19,7 +19,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
-        super().__init__(state["datetime"])
+        self.__init__(state["datetime"])
         self.setDateTime(state["datetime"])
         self.setEnabled(state["enabled"])
         self.setDisplayFormat(state["display_format"])
