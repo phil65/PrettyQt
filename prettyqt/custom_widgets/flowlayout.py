@@ -8,15 +8,21 @@ from prettyqt import widgets
 
 
 class FlowLayout(QtWidgets.QLayout):
+
     def __init__(self, parent=None, margin=0, spacing=-1):
         super().__init__(parent)
-
         if parent is not None:
             self.setMargin(margin)
-
         self.setSpacing(spacing)
-
         self.items = []
+
+    def __getstate__(self):
+        return dict(items=self.get_children())
+
+    def __setstate__(self, state):
+        self.__init__()
+        for item in state["items"]:
+            self.add_item(item)
 
     def __getitem__(self, index):
         item = self.itemAt(index)
@@ -26,15 +32,24 @@ class FlowLayout(QtWidgets.QLayout):
         return widget
 
     def __iter__(self):
-        return iter(self[i] for i in range(self.count()))
+        return iter(self.get_children())
 
     def __del__(self):
         item = self.takeAt(0)
         while item:
             item = self.takeAt(0)
 
+    def get_children(self):
+        return [self[i] for i in range(self.count())]
+
     def addItem(self, item):
         self.items.append(item)
+
+    def add_item(self, item):
+        if isinstance(item, QtWidgets.QWidget):
+            self.addWidget(item)
+        else:
+            self.addLayout(item)
 
     def count(self):
         return len(self.items)
@@ -115,11 +130,11 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     widget = QtWidgets.QWidget()
     layout = FlowLayout()
-    layout.addWidget(QtWidgets.QPushButton("Short"))
-    layout.addWidget(QtWidgets.QPushButton("Longer"))
-    layout.addWidget(QtWidgets.QPushButton("Different text"))
-    layout.addWidget(QtWidgets.QPushButton("More text"))
-    layout.addWidget(QtWidgets.QPushButton("Even longer button text"))
+    layout.addWidget(widgets.PushButton("Short"))
+    layout.addWidget(widgets.PushButton("Longer"))
+    layout.addWidget(widgets.PushButton("Different text"))
+    layout.addWidget(widgets.PushButton("More text"))
+    layout.addWidget(widgets.PushButton("Even longer button text"))
     widget.setLayout(layout)
     widget.show()
     sys.exit(app.exec_())

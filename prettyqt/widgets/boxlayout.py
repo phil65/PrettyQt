@@ -16,7 +16,7 @@ ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
 
 class BoxLayout(QtWidgets.QBoxLayout):
 
-    def __init__(self, orientation, parent=None):
+    def __init__(self, orientation="horizontal", parent=None):
         o = self.TopToBottom if orientation == "vertical" else self.LeftToRight
         super().__init__(o, parent)
 
@@ -27,11 +27,30 @@ class BoxLayout(QtWidgets.QBoxLayout):
             widget = item.layout()
         return widget
 
+    def __getstate__(self):
+        return dict(items=self.get_children(),
+                    direction=self.direction())
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.setDirection(state["direction"])
+        for item in state["items"]:
+            self.add_item(item)
+
     def __iter__(self):
-        return iter(self[i] for i in range(self.count()))
+        return iter(self.get_children())
 
     def __len__(self):
         return self.count()
+
+    def add_item(self, item):
+        if isinstance(item, QtWidgets.QWidget):
+            self.addWidget(item)
+        else:
+            self.addLayout(item)
+
+    def get_children(self):
+        return [self[i] for i in range(self.count())]
 
     def set_size_mode(self, mode: str):
         if mode not in MODES:
