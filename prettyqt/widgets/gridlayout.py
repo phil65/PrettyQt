@@ -29,6 +29,23 @@ class GridLayout(QtWidgets.QGridLayout):
         else:
             self.addLayout(value, rowstart, colstart, rowspan, colspan)
 
+    def __repr__(self):
+        return f"GridLayout: {self.__getstate__()}"
+
+    def __getstate__(self):
+        widgets = []
+        positions = []
+        for i, item in enumerate(list(self)):
+            widgets.append(item)
+            positions.append(self.get_item_pos(i))
+        return dict(widgets=widgets, positions=positions)
+
+    def __setstate__(self, state):
+        self.__init__()
+        for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
+            x, y, w, h = pos
+            self[x:x + w - 1, y:y + h - 1] = item
+
     def __getitem__(self, idx):
         if isinstance(idx, tuple):
             item = self.itemAtPosition(*idx)
@@ -45,6 +62,9 @@ class GridLayout(QtWidgets.QGridLayout):
     def __len__(self):
         return self.count()
 
+    def get_item_pos(self, index):
+        return self.getItemPosition(index)
+
     def set_size_mode(self, mode: str):
         if mode not in MODES:
             raise ValueError(f"{mode} not a valid size mode.")
@@ -59,10 +79,11 @@ class GridLayout(QtWidgets.QGridLayout):
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     layout = GridLayout()
-    layout[1, 5:6] = widgets.RadioButton("1")
+    layout[1, 5:6] = widgets.RadioButton("1 2 3 jk jkjl j kföldsjfköj")
     layout[3:5, 7:8] = widgets.RadioButton("2")
     layout[3:5, 1:4] = widgets.RadioButton("3")
     widget = widgets.Widget()
     widget.setLayout(layout)
+    print(layout)
     widget.show()
     app.exec_()
