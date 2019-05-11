@@ -12,6 +12,23 @@ class DateEdit(QtWidgets.QDateEdit):
         super().__init__(*args, **kwargs)
         self.setCalendarPopup(True)
 
+    def __getstate__(self):
+        return dict(calendar_popup=self.calendarPopup(),
+                    date=self.get_date(),
+                    display_format=self.displayFormat(),
+                    enabled=self.isEnabled())
+
+    def __setstate__(self, state):
+        super().__init__(state["date"])
+        self.setEnabled(state["enabled"])
+        self.setDisplayFormat(state["display_format"])
+
+    def get_date(self):
+        try:
+            return self.date().toPython()
+        except (TypeError, AttributeError):
+            return self.date().toPyDate()
+
     def set_enabled(self):
         self.setEnabled(True)
 
