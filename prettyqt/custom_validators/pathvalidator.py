@@ -10,6 +10,12 @@ from qtpy import QtGui
 
 class PathValidator(QtGui.QValidator):
 
+    def __getstate__(self):
+        return dict()
+
+    def __setstate__(self, state):
+        self.__init__()
+
     def validate(self, text, pos=0):
         if pathlib.Path(text).exists():
             return (self.Acceptable, text, pos)
