@@ -9,9 +9,9 @@ from prettyqt import core, widgets
 class SelectionWidget(widgets.GroupBox):
     option_changed = core.Signal(str)
 
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.layout = widgets.BoxLayout("horizontal")
+    def __init__(self, label="", layout="horizontal", parent=None):
+        super().__init__(label, parent)
+        self.layout = widgets.BoxLayout(layout)
         self.rb_other = widgets.RadioButton()
         self.buttons = dict()
         self.setLayout(self.layout)
