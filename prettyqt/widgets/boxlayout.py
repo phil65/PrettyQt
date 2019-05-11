@@ -20,6 +20,9 @@ class BoxLayout(QtWidgets.QBoxLayout):
         o = self.TopToBottom if orientation == "vertical" else self.LeftToRight
         super().__init__(o, parent)
 
+    def __repr__(self):
+        return f"BoxLayout: {self.__getstate__()}"
+
     def __getitem__(self, index):
         item = self.itemAt(index)
         widget = item.widget()
