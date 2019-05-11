@@ -24,6 +24,17 @@ BUTTONS = dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
                retry=QtWidgets.QDialogButtonBox.Retry,
                ignore=QtWidgets.QDialogButtonBox.Ignore)
 
+ROLES = dict(invalid=QtWidgets.QDialogButtonBox.InvalidRole,
+             accept=QtWidgets.QDialogButtonBox.AcceptRole,
+             reject=QtWidgets.QDialogButtonBox.RejectRole,
+             destructive=QtWidgets.QDialogButtonBox.DestructiveRole,
+             action=QtWidgets.QDialogButtonBox.ActionRole,
+             help=QtWidgets.QDialogButtonBox.HelpRole,
+             yes=QtWidgets.QDialogButtonBox.YesRole,
+             no=QtWidgets.QDialogButtonBox.NoRole,
+             apply=QtWidgets.QDialogButtonBox.ApplyRole,
+             reset=QtWidgets.QDialogButtonBox.ResetRole)
+
 
 class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
@@ -35,6 +46,9 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
     def __iter__(self):
         return iter(self.buttons())
+
+    def __contains__(self, item):
+        return self[item] is not None
 
     def set_horizontal(self):
         self.setOrientation(QtCore.Qt.Horizontal)
