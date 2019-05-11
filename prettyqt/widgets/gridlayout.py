@@ -18,16 +18,23 @@ ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
 
 class GridLayout(QtWidgets.QGridLayout):
 
+    def __getitem__(self, idx):
+        if isinstance(idx, tuple):
+            item = self.itemAtPosition(*idx)
+        else:
+            item = self.itemAt(idx)
+        widget = item.widget()
+        if widget is None:
+            widget = item.layout()
+        return widget
+
     def __setitem__(self, idx, value):
         row, col = idx
         rowspan = row.stop - row.start + 1 if isinstance(row, slice) else 1
         colspan = col.stop - col.start + 1 if isinstance(col, slice) else 1
         rowstart = row.start if isinstance(row, slice) else row
         colstart = col.start if isinstance(col, slice) else col
-        if isinstance(value, QtWidgets.QWidget):
-            self.addWidget(value, rowstart, colstart, rowspan, colspan)
-        else:
-            self.addLayout(value, rowstart, colstart, rowspan, colspan)
+        self.add_item(value, rowstart, colstart, rowspan, colspan)
 
     def __repr__(self):
         return f"GridLayout: {self.__getstate__()}"
@@ -46,16 +53,6 @@ class GridLayout(QtWidgets.QGridLayout):
             x, y, w, h = pos
             self[x:x + w - 1, y:y + h - 1] = item
 
-    def __getitem__(self, idx):
-        if isinstance(idx, tuple):
-            item = self.itemAtPosition(*idx)
-        else:
-            item = self.itemAt(idx)
-        widget = item.widget()
-        if widget is None:
-            widget = item.layout()
-        return widget
-
     def __iter__(self):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
@@ -71,6 +68,10 @@ class GridLayout(QtWidgets.QGridLayout):
         if alignment not in ALIGNMENTS:
             raise ValueError(f"{alignment} not a valid alignment.")
         self.setAlignment(ALIGNMENTS[alignment])
+
+    def add_item(self, item, rowstart, colstart, rowspan=1, colspan=1):
+        fn = self.addWidget if isinstance(item, QtWidgets.QWidget) else self.addLayout
+        fn(rowstart, colstart, rowspan, colspan)
 
 
 if __name__ == "__main__":
