@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtCore, QtWidgets
+from prettyqt import widgets
 
 
 class Splitter(QtWidgets.QSplitter):
@@ -13,7 +14,10 @@ class Splitter(QtWidgets.QSplitter):
         super().__init__(o, parent)
 
     def __getitem__(self, index):
-        return self.widget(index)
+        if isinstance(index, int):
+            return self.widget(index)
+        else:
+            return self.findChild(widgets.Widget, index)
 
     def __iter__(self):
         return iter(self[i] for i in range(self.count()))
