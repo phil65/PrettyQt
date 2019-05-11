@@ -541,6 +541,12 @@ def test_treeview():
 
 def test_widget():
     widget = widgets.Widget()
+    layout = widgets.BoxLayout()
+    widget.setLayout(layout)
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(widget, jar)
+    with open("data.pkl", "rb") as jar:
+        widget = pickle.load(jar)
     with widget.block_signals():
         pass
     widget.set_enabled()

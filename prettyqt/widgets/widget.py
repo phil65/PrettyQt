@@ -10,6 +10,13 @@ from qtpy import QtWidgets
 
 class Widget(QtWidgets.QWidget):
 
+    def __getstate__(self):
+        return dict(layout=self.layout())
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.setLayout(state["layout"])
+
     def set_enabled(self):
         self.setEnabled(True)
 
