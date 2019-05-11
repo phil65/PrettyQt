@@ -19,7 +19,11 @@ class FormLayout(QtWidgets.QFormLayout):
         self.setVerticalSpacing(8)
 
     def __getitem__(self, index):
-        return self.itemAt(index)
+        item = self.itemAt(index)
+        widget = item.widget()
+        if widget is None:
+            widget = item.layout()
+        return widget
 
     def __iter__(self):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)

@@ -21,7 +21,11 @@ class BoxLayout(QtWidgets.QBoxLayout):
         super().__init__(o, parent)
 
     def __getitem__(self, index):
-        return self.itemAt(index)
+        item = self.itemAt(index)
+        widget = item.widget()
+        if widget is None:
+            widget = item.layout()
+        return widget
 
     def __iter__(self):
         return iter(self[i] for i in range(self.count()))
@@ -48,6 +52,8 @@ if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     layout = BoxLayout("vertical")
     widget = widgets.Widget()
+    widget2 = widgets.RadioButton("Test")
+    layout.addWidget(widget2)
     widget.setLayout(layout)
     widget.show()
     app.exec_()
