@@ -17,8 +17,31 @@ class ToolBox(QtWidgets.QToolBox):
         else:
             return self.findChild(widgets.Widget, index)
 
+    def __getstate__(self):
+        children = list()
+        for i, widget in enumerate(self.get_children()):
+            dct = dict(widget=widget,
+                       icon=self.itemIcon(i),
+                       text=self.itemText(i),
+                       enabled=self.isItemEnabled(i),
+                       tooltip=self.itemToolTip(i))
+            children.append(dct)
+        return dict(items=children,
+                    current_index=self.currentIndex())
+
+    def __setstate__(self, state):
+        self.__init__()
+        for i, item in enumerate(state["items"]):
+            self.addItem(item["widget"], item["icon"], item["title"])
+            self.setItemEnabled(i, item["enabled"])
+            self.setItemToolTip(i, item["tooltip"])
+        self.setCurrentIndex(state["current_index"])
+
     def __iter__(self):
-        return iter(self[i] for i in range(self.count()))
+        return iter(self.get_children())
+
+    def get_children(self):
+        return [self[i] for i in range(self.count())]
 
     def add_widget(self, widget, title=None, icon=None):
         if title is None:
