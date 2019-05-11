@@ -11,6 +11,9 @@ from prettyqt import widgets, core
 
 class PushButton(QtWidgets.QPushButton):
 
+    def __repr__(self):
+        return f"PushButton: {self.__getstate__()}"
+
     def __getstate__(self):
         return dict(title=self.text(),
                     checkable=self.isCheckable(),
@@ -18,8 +21,7 @@ class PushButton(QtWidgets.QPushButton):
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
-        super().__init__()
-        self.setText(state["title"])
+        self.__init__(state["title"])
         self.setEnabled(state["enabled"])
         self.setChecked(state["checked"])
         self.setCheckable(state["checkable"])

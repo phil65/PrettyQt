@@ -16,6 +16,9 @@ class FlowLayout(QtWidgets.QLayout):
         self.setSpacing(spacing)
         self.items = []
 
+    def __repr__(self):
+        return f"FlowLayout: {self.__getstate__()}"
+
     def __getstate__(self):
         return dict(items=self.get_children())
 
