@@ -5,6 +5,13 @@
 
 from qtpy import QtCore, QtWidgets
 
+TICK_POSITIONS = dict(none=QtWidgets.QSlider.NoTicks,
+                      both_sides=QtWidgets.QSlider.NoTicks,
+                      above=QtWidgets.QSlider.NoTicks,
+                      below=QtWidgets.QSlider.NoTicks,
+                      left=QtWidgets.QSlider.NoTicks,
+                      right=QtWidgets.QSlider.NoTicks)
+
 
 class Slider(QtWidgets.QSlider):
 
@@ -46,3 +53,8 @@ class Slider(QtWidgets.QSlider):
         """set slider orientation to vertical
         """
         self.setOrientation(QtCore.Qt.Vertical)
+
+    def set_tick_position(self, position: str):
+        if position not in TICK_POSITIONS:
+            raise ValueError(f"{position} not a valid tick position.")
+        self.setTickPosition(TICK_POSITIONS[position])
