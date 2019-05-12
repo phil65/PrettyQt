@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets, gui
@@ -14,8 +16,8 @@ SYMBOLS = dict(up_down=QtWidgets.QSpinBox.UpDownArrows,
                plus_minus=QtWidgets.QSpinBox.PlusMinus,
                none=QtWidgets.QSpinBox.NoButtons)
 
-STEP_TYPES = dict(default=QtWidgets.QSpinBox.DefaultStepType,
-                  adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType)
+STEP_TYPES = bidict(dict(default=QtWidgets.QSpinBox.DefaultStepType,
+                         adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType))
 
 
 class SpinBox(QtWidgets.QSpinBox):
@@ -32,6 +34,10 @@ class SpinBox(QtWidgets.QSpinBox):
         return dict(range=(self.minimum(), self.maximum()),
                     value=self.value(),
                     enabled=self.isEnabled(),
+                    step_type=self.get_step_type(),
+                    prefix=self.prefix(),
+                    int_base=self.displayIntegerBase(),
+                    suffix=self.suffix(),
                     single_step=self.singleStep())
 
     def __setstate__(self, state):
@@ -40,6 +46,10 @@ class SpinBox(QtWidgets.QSpinBox):
         self.setValue(state["value"])
         self.setEnabled(state["enabled"])
         self.setSingleStep(state["single_step"])
+        self.setPrefix(state["prefix"])
+        self.setSuffix(state["suffix"])
+        self.setDisplayIntegerBase(state["int_base"])
+        self.set_step_type(state["step_type"])
 
     def set_enabled(self):
         self.setEnabled(True)
@@ -61,6 +71,9 @@ class SpinBox(QtWidgets.QSpinBox):
 
     def set_step_type(self, mode: str):
         self.setStepType(STEP_TYPES[mode])
+
+    def get_step_type(self):
+        return STEP_TYPES.inv[self.stepType()]
 
     def set_special_value(self, value: str):
         self.setSpecialValueText(value)

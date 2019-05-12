@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets, gui
@@ -14,8 +16,8 @@ SYMBOLS = dict(up_down=QtWidgets.QSpinBox.UpDownArrows,
                plus_minus=QtWidgets.QSpinBox.PlusMinus,
                none=QtWidgets.QSpinBox.NoButtons)
 
-STEP_TYPES = dict(default=QtWidgets.QSpinBox.DefaultStepType,
-                  adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType)
+STEP_TYPES = bidict(dict(default=QtWidgets.QSpinBox.DefaultStepType,
+                         adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType))
 
 
 class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
@@ -31,6 +33,7 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
                     enabled=self.isEnabled(),
                     step_type=self.get_step_type(),
                     prefix=self.prefix(),
+                    decimals=self.decimals(),
                     suffix=self.suffix(),
                     single_step=self.singleStep())
 
@@ -41,6 +44,7 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         self.setEnabled(state["enabled"])
         self.setPrefix(state["prefix"])
         self.setSuffix(state["suffix"])
+        self.setDecimals(state["decimals"])
         self.setSingleStep(state["single_step"])
         self.set_step_type(state["step_type"])
 
