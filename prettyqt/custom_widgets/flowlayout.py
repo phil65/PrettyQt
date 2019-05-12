@@ -23,6 +23,11 @@ class FlowLayout(QtWidgets.QLayout):
     def __getstate__(self):
         return dict(items=self.get_children())
 
+    def __add__(self, other):
+        if isinstance(other, (widgets.Widget, widgets.Layout)):
+            self.add_item(other)
+            return self
+
     def __setstate__(self, state):
         self.__init__()
         for item in state["items"]:

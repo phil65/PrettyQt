@@ -47,6 +47,11 @@ class BoxLayout(QtWidgets.QBoxLayout):
     def __len__(self):
         return self.count()
 
+    def __add__(self, other):
+        if isinstance(other, (widgets.Widget, widgets.Layout)):
+            self.add_item(other)
+            return self
+
     def add_item(self, item):
         if isinstance(item, QtWidgets.QWidget):
             self.addWidget(item)

@@ -44,6 +44,11 @@ class Splitter(QtWidgets.QSplitter):
     def __len__(self):
         return self.count()
 
+    def __add__(self, other):
+        if isinstance(other, widgets.Widget):
+            self.add_widget(other)
+            return self
+
     def get_children(self):
         return [self[i] for i in range(self.count())]
 

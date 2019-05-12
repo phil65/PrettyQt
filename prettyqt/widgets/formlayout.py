@@ -42,6 +42,14 @@ class FormLayout(QtWidgets.QFormLayout):
         """
         return self.rowCount()
 
+    def __add__(self, other):
+        if isinstance(other, (widgets.Widget, widgets.Layout)):
+            self.addRow(other)
+            return self
+        if isinstance(other, tuple):
+            self.addRow(*other)
+            return self
+
     def __getstate__(self):
         widgets = []
         positions = []
