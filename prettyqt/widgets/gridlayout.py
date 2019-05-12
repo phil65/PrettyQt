@@ -37,7 +37,7 @@ class GridLayout(QtWidgets.QGridLayout):
         self.add_item(value, rowstart, colstart, rowspan, colspan)
 
     def __repr__(self):
-        return f"GridLayout: {self.__getstate__()}"
+        return f"GridLayout: {self.count()} children"
 
     def __getstate__(self):
         widgets = []

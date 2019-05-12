@@ -21,7 +21,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
         super().__init__(o, parent)
 
     def __repr__(self):
-        return f"BoxLayout: {self.__getstate__()}"
+        return f"BoxLayout: {self.count()} children"
 
     def __getitem__(self, index):
         item = self.itemAt(index)
