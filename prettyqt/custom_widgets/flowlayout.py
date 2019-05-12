@@ -55,7 +55,7 @@ class FlowLayout(QtWidgets.QLayout):
         else:
             self.addLayout(item)
 
-    def count(self):
+    def count(self) -> int:
         return len(self.items)
 
     def itemAt(self, index):
@@ -77,12 +77,12 @@ class FlowLayout(QtWidgets.QLayout):
         return True
 
     def heightForWidth(self, width):
-        height = self.doLayout(QtCore.QRect(0, 0, width, 0), True)
+        height = self.do_layout(QtCore.QRect(0, 0, width, 0), True)
         return height
 
     def setGeometry(self, rect):
         super(FlowLayout, self).setGeometry(rect)
-        self.doLayout(rect, False)
+        self.do_layout(rect, False)
 
     def sizeHint(self):
         return self.minimumSize()
@@ -97,7 +97,7 @@ class FlowLayout(QtWidgets.QLayout):
                              2 * self.contentsMargins().top())
         return size
 
-    def doLayout(self, rect, testOnly):
+    def do_layout(self, rect, test_only):
         x = rect.x()
         y = rect.y()
         line_height = 0
@@ -118,7 +118,7 @@ class FlowLayout(QtWidgets.QLayout):
                 next_x = x + item.sizeHint().width() + spaceX
                 line_height = 0
 
-            if not testOnly:
+            if not test_only:
                 item.setGeometry(QtCore.QRect(QtCore.QPoint(x, y), item.sizeHint()))
 
             x = next_x

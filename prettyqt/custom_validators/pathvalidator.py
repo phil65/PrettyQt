@@ -16,7 +16,7 @@ class PathValidator(QtGui.QValidator):
     def __setstate__(self, state):
         self.__init__()
 
-    def validate(self, text, pos=0):
+    def validate(self, text: str, pos: int = 0):
         if pathlib.Path(text).exists():
             return (self.Acceptable, text, pos)
         return (self.Intermediate, text, pos)

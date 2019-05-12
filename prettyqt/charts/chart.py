@@ -52,10 +52,10 @@ class Chart(QtCharts.QChart):
             raise ValueError(f"{alignment} not a valid alignment.")
         self.legend().setAlignment(ALIGNMENTS[alignment])
 
-    def set_theme(self, theme_name):
+    def set_theme(self, theme_name: str):
         self.setTheme(THEMES[theme_name])
 
-    def set_animation_options(self, option):
+    def set_animation_options(self, option: str):
         self.setAnimationOptions(ANIMATION_OPTS[option])
 
     def apply_nice_numbers(self):
