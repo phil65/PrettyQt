@@ -5,10 +5,13 @@
 
 import pathlib
 
-from qtpy import QtGui
+from prettyqt import gui
 
 
-class PathValidator(QtGui.QValidator):
+class PathValidator(gui.Validator):
+
+    def __repr__(self):
+        return "PathValidator()"
 
     def __getstate__(self):
         return dict()

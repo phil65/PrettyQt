@@ -3,10 +3,13 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui
+from prettyqt import gui
 
 
-class CompositeValidator(QtGui.QValidator):
+class CompositeValidator(gui.Validator):
+
+    def __repr__(self):
+        return f"CompositeValidator({self.validators})"
 
     def __init__(self, validators, parent=None):
         super().__init__(parent)

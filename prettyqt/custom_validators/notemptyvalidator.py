@@ -3,10 +3,13 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui
+from prettyqt import gui
 
 
-class NotEmptyValidator(QtGui.QValidator):
+class NotEmptyValidator(gui.Validator):
+
+    def __repr__(self):
+        return "NotEmptyValidator()"
 
     def __getstate__(self):
         return dict()
