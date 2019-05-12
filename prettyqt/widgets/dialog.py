@@ -31,24 +31,24 @@ class Dialog(QtWidgets.QDialog):
         self.set_icon(icon)
         if delete_on_close:
             self.delete_on_close()
-        self.layout = None
+        self.box = None
         if layout in ["horizontal", "vertical"]:
-            self.layout = widgets.BoxLayout(layout)
-            self.setLayout(self.layout)
+            self.box = widgets.BoxLayout(layout)
+            self.setLayout(self.box)
 
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
 
     def __getstate__(self):
-        return dict(layout=self.layout,
+        return dict(layout=self.layout(),
                     title=self.windowTitle(),
                     is_maximized=self.isMaximized(),
                     has_sizegrip=self.isSizeGripEnabled(),
                     icon=gui.Icon(self.windowIcon()),
-                    size=self.size())
+                    size=(self.size().width(), self.size().height()))
 
     def __setstate__(self, state):
-        self.__init__()
+        super().__init__()
         self.setWindowTitle(state["title"])
         self.set_icon(state["icon"])
         if state["layout"]:
@@ -57,6 +57,7 @@ class Dialog(QtWidgets.QDialog):
         self.setSizeGripEnabled(state["has_sizegrip"])
         if state["is_maximized"]:
             self.showMaximized()
+        self.resize(*state["size"])
 
     def resize(self, *size):
         if isinstance(size[0], tuple):
@@ -73,7 +74,7 @@ class Dialog(QtWidgets.QDialog):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
     def add_widget(self, widget):
-        self.layout.addWidget(widget)
+        self.box.addWidget(widget)
         return widget
 
     def set_icon(self, icon):
@@ -87,7 +88,7 @@ class Dialog(QtWidgets.QDialog):
         button_box.add_buttons(["cancel", "ok"])
         button_box.accepted.connect(self.accepted)
         button_box.rejected.connect(self.reject)
-        self.layout.addWidget(button_box)
+        self.box.addWidget(button_box)
 
     def accepted(self):
         self.close()

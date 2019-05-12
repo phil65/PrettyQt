@@ -72,7 +72,7 @@ class MainWindow(QtWidgets.QMainWindow):
         layout.set_margin(0)
         dock_widget.setWidget(widget)
         self.add_dockwidget(dock_widget, position)
-        dock_widget.layout = layout
+        dock_widget.box = layout
         return dock_widget
 
     def add_dockwidget(self, dockwidget, position):
