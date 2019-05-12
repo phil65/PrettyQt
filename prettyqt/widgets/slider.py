@@ -27,7 +27,11 @@ class Slider(QtWidgets.QSlider):
         return dict(range=(self.minimum(), self.maximum()),
                     value=self.value(),
                     enabled=self.isEnabled(),
-                    single_step=self.singleStep())
+                    has_tracking=self.hasTracking(),
+                    inverted_controls=self.invertedControls(),
+                    inverted_appearance=self.invertedAppearance(),
+                    single_step=self.singleStep(),
+                    page_step=self.pageStep())
 
     def __setstate__(self, state):
         super().__init__()
@@ -35,6 +39,10 @@ class Slider(QtWidgets.QSlider):
         self.setValue(state["value"])
         self.setEnabled(state["enabled"])
         self.setSingleStep(state["single_step"])
+        self.setPageStep(state["page_step"])
+        self.setTracking(state["has_tracking"])
+        self.setInvertedControls(state["inverted_controls"])
+        self.setInvertedAppearance(state["inverted_appearance"])
 
     def is_horizontal(self) -> bool:
         """check if silder is horizontal
