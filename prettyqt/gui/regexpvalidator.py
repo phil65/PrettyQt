@@ -28,6 +28,10 @@ class RegExpValidator(QtGui.QRegExpValidator):
         val = self.regExp()
         return val.pattern()
 
+    def is_valid_value(self, value) -> bool:
+        val = self.validate(value, 0)
+        return val[0] == self.Acceptable
+
 
 if __name__ == "__main__":
     val = RegExpValidator()

@@ -19,6 +19,10 @@ class Validator(QtGui.QValidator):
         """
         return self.__add__(other)
 
+    def is_valid_value(self, value) -> bool:
+        val = self.validate(value)
+        return val[0] == self.Acceptable
+
 
 if __name__ == "__main__":
     val = Validator()

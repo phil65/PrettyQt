@@ -18,7 +18,6 @@ class NotZeroValidator(gui.Validator):
         self.__init__()
 
     def validate(self, text, pos=0):
-        print(type(text))
         if text == "0":
             return (self.Intermediate, text, pos)
         return (self.Acceptable, text, pos)

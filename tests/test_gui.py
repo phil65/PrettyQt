@@ -24,6 +24,13 @@ def test_color():
     assert str(color) == "#808080"
 
 
+def test_doublevalidator():
+    val = gui.DoubleValidator()
+    val.setRange(0, 9)
+    assert val.is_valid_value("4")
+    assert not val.is_valid_value("10")
+
+
 def test_icon():
     icon = gui.Icon()
     icon.for_color("black")
@@ -31,6 +38,13 @@ def test_icon():
         pickle.dump(icon, jar)
     with open("data.pkl", 'rb') as jar:
         icon = pickle.load(jar)
+
+
+def test_intvalidator():
+    val = gui.IntValidator()
+    val.setRange(0, 9)
+    assert val.is_valid_value("4")
+    assert not val.is_valid_value("10")
 
 
 def test_keysequence():
@@ -84,6 +98,7 @@ def test_regexpvalidator():
     with open("data.pkl", "rb") as jar:
         val = pickle.load(jar)
     assert val.get_regex() == "[0-9]"
+    assert val.is_valid_value("0")
 
 
 def test_standarditem():
