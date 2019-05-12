@@ -29,7 +29,10 @@ class Label(QtWidgets.QLabel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.openExternalLinks(True)
+        self.openExternalLinks()
+
+    def __repr__(self):
+        return f"Label('{self.text()}'')"
 
     def __getstate__(self):
         return dict(text=self.text(),
