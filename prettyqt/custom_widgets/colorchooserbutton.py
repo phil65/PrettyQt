@@ -12,9 +12,9 @@ class ColorChooserButton(widgets.Widget):
 
     value_changed = core.Signal(gui.Color)
 
-    def __init__(self, parent=None):
+    def __init__(self, color=None, parent=None):
         super().__init__(parent)
-        self.color = None
+        self.current_color = color
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit(self)
@@ -27,8 +27,11 @@ class ColorChooserButton(widgets.Widget):
         self.button.setDefaultAction(action)
         layout.addWidget(self.button)
 
+    def __repr__(self):
+        return f"ColorChooserButton({self.current_color})"
+
     def __getstate__(self):
-        return dict(color=self.color,
+        return dict(color=self.current_color,
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
@@ -40,8 +43,8 @@ class ColorChooserButton(widgets.Widget):
     @core.Slot()
     def choose_color(self):
         dlg = widgets.ColorDialog()
-        if self.color:
-            dlg.setCurrentColor(self.color)
+        if self.current_color:
+            dlg.setCurrentColor(self.current_color)
 
         if dlg.exec_():
             self.set_color(dlg.current_color())
@@ -49,11 +52,11 @@ class ColorChooserButton(widgets.Widget):
 
     def set_color(self, color):
         if isinstance(color, str):
-            self.color = gui.Color(color)
+            self.current_color = gui.Color(color)
         else:
-            self.color = color
-        self.lineedit.setText(self.color.name().upper())
-        self.button.setStyleSheet(f"background-color: {self.color.name()};")
+            self.current_color = color
+        self.lineedit.setText(self.current_color.name().upper())
+        self.button.setStyleSheet(f"background-color: {self.current_color.name()};")
 
     def is_valid(self):
         return self.lineedit.is_valid()

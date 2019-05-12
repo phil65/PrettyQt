@@ -12,9 +12,9 @@ class FontChooserButton(widgets.Widget):
 
     value_changed = core.Signal(gui.Font)
 
-    def __init__(self, parent=None):
+    def __init__(self, font=None, parent=None):
         super().__init__(parent)
-        self.current_font = None
+        self.current_font = font
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit(self)
@@ -25,6 +25,9 @@ class FontChooserButton(widgets.Widget):
         self.button = widgets.ToolButton(self)
         self.button.setDefaultAction(action)
         layout.addWidget(self.button)
+
+    def __repr__(self):
+        return f"FontChooserButton({self.current_font})"
 
     def __getstate__(self):
         return dict(font=self.current_font,
