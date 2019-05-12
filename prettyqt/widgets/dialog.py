@@ -48,7 +48,9 @@ class Dialog(QtWidgets.QDialog):
                     size=self.size())
 
     def __setstate__(self, state):
-        self.__init__(state["title"], state["icon"])
+        self.__init__()
+        self.setWindowTitle(state["title"])
+        self.set_icon(state["icon"])
         if state["layout"]:
             self.setLayout(state["layout"])
         self.resize(state["size"])
@@ -72,6 +74,7 @@ class Dialog(QtWidgets.QDialog):
 
     def add_widget(self, widget):
         self.layout.addWidget(widget)
+        return widget
 
     def set_icon(self, icon):
         if icon:
