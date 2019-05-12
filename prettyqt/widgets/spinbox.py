@@ -14,6 +14,9 @@ SYMBOLS = dict(up_down=QtWidgets.QSpinBox.UpDownArrows,
                plus_minus=QtWidgets.QSpinBox.PlusMinus,
                none=QtWidgets.QSpinBox.NoButtons)
 
+STEP_TYPES = dict(default=QtWidgets.QSpinBox.DefaultStepType,
+                  adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType)
+
 
 class SpinBox(QtWidgets.QSpinBox):
 
@@ -55,6 +58,9 @@ class SpinBox(QtWidgets.QSpinBox):
 
     def set_correction_mode(self, mode: str):
         self.setCorrectionMode(CORRECTION_MODES[mode])
+
+    def set_step_type(self, mode: str):
+        self.setStepType(STEP_TYPES[mode])
 
     def set_special_value(self, value: str):
         self.setSpecialValueText(value)
