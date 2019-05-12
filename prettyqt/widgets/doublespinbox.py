@@ -75,6 +75,12 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
     def set_special_value(self, value: str):
         self.setSpecialValueText(value)
 
+    def get_value(self):
+        return self.value()
+
+    def set_value(self, value):
+        self.setValue(value)
+
 
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
