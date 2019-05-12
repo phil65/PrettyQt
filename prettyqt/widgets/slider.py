@@ -25,6 +25,8 @@ class Slider(QtWidgets.QSlider):
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
                     value=self.value(),
+                    tooltip=self.toolTip(),
+                    statustip=self.statusTip(),
                     enabled=self.isEnabled(),
                     has_tracking=self.hasTracking(),
                     inverted_controls=self.invertedControls(),
@@ -36,6 +38,8 @@ class Slider(QtWidgets.QSlider):
         super().__init__()
         self.setRange(*state["range"])
         self.setValue(state["value"])
+        self.setToolTip(state["tooltip"])
+        self.setStatusTip(state["statustip"])
         self.setEnabled(state["enabled"])
         self.setSingleStep(state["single_step"])
         self.setPageStep(state["page_step"])
