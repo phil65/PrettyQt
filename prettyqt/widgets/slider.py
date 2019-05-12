@@ -58,3 +58,6 @@ class Slider(QtWidgets.QSlider):
         if position not in TICK_POSITIONS:
             raise ValueError(f"{position} not a valid tick position.")
         self.setTickPosition(TICK_POSITIONS[position])
+
+    def get_value(self):
+        return self.value()

@@ -21,6 +21,7 @@ class ColorChooserButton(widgets.Widget):
         self.lineedit.set_regex_validator(r"^#(?:[0-9a-fA-F]{6})$")
         layout.addWidget(self.lineedit)
         action = widgets.Action()
+        action.set_icon("mdi.format-color-fill")
         action.triggered.connect(self.choose_color)
         self.button = widgets.ToolButton(self)
         self.button.setDefaultAction(action)
@@ -53,6 +54,9 @@ class ColorChooserButton(widgets.Widget):
             self.color = color
         self.lineedit.setText(self.color.name().upper())
         self.button.setStyleSheet(f"background-color: {self.color.name()};")
+
+    def is_valid(self):
+        return self.lineedit.is_valid()
 
 
 if __name__ == "__main__":

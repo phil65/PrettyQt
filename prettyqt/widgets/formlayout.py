@@ -22,6 +22,9 @@ class FormLayout(QtWidgets.QFormLayout):
         self.set_size_mode("maximum")
         self.setVerticalSpacing(8)
 
+    def __repr__(self):
+        return f"FormLayout: {self.count()} children"
+
     def __getitem__(self, index):
         item = self.itemAt(index)
         widget = item.widget()
