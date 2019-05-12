@@ -6,6 +6,8 @@
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
+from prettyqt import gui
+
 box = QtWidgets.QComboBox
 INSERT_POLICIES = dict(no_insert=box.NoInsert,
                        top=box.InsertAtTop,
@@ -24,17 +26,16 @@ SIZE_POLICIES = dict(content=box.AdjustToContents,
 class ComboBox(QtWidgets.QComboBox):
 
     def __getstate__(self):
-        labels = [self.itemText(i) for i in range(self.count())]
-        data = [self.itemData(i) for i in range(self.count())]
+        items = [(self.itemText(i), self.itemData(i), self.item_icon(i))
+                 for i in range(self.count())]
         return dict(index=self.currentIndex(),
                     enabled=self.isEnabled(),
-                    labels=labels,
-                    data=data)
+                    items=items)
 
     def __setstate__(self, state):
         super().__init__()
-        for label, data in zip(state["labels"], state["data"]):
-            self.add_item(label, data)
+        for label, data, icon in state["items"]:
+            self.add_item(label, data, icon=icon)
         self.setCurrentIndex(state["index"])
         self.setEnabled(state["enabled"])
 
@@ -51,9 +52,12 @@ class ComboBox(QtWidgets.QComboBox):
         if icon is not None:
             if isinstance(icon, str):
                 icon = qta.icon(icon)
-            self.addItem(icon, label, userData=data)
+            self.addItem(gui.Icon(icon), label, userData=data)
         else:
             self.addItem(label, userData=data)
+
+    def item_icon(self, index):
+        return gui.Icon(self.itemIcon(index))
 
     def set_insert_policy(self, policy: str):
         if policy not in INSERT_POLICIES:
@@ -86,6 +90,6 @@ if __name__ == "__main__":
     from prettyqt import widgets
     app = widgets.Application.create_default_app()
     widget = ComboBox()
-    widget.add_item("test", data="aa")
+    widget.add_item("test", data="aa", icon="mdi.timer")
     widget.show()
     app.exec_()
