@@ -10,6 +10,10 @@ from prettyqt import widgets
 
 class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setLineEdit(widgets.LineEdit())
+
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
                     value=self.value(),
@@ -28,6 +32,12 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
 
     def set_disabled(self):
         self.setEnabled(False)
+
+    def is_valid(self):
+        return self.hasAcceptableInput()
+
+    def set_validator(self, validator):
+        self.lineEdit().setValidator(validator)
 
 
 if __name__ == "__main__":

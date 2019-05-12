@@ -10,6 +10,10 @@ from prettyqt import widgets
 
 class SpinBox(QtWidgets.QSpinBox):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setLineEdit(widgets.LineEdit())
+
     def __repr__(self):
         return f"SpinBox: {self.__getstate__()}"
 
@@ -31,6 +35,12 @@ class SpinBox(QtWidgets.QSpinBox):
 
     def set_disabled(self):
         self.setEnabled(False)
+
+    def is_valid(self):
+        return self.hasAcceptableInput()
+
+    def set_validator(self, validator):
+        self.lineEdit().setValidator(validator)
 
 
 if __name__ == "__main__":
