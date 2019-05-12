@@ -16,7 +16,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
 
     def __getstate__(self):
         return dict(calendar_popup=self.calendarPopup(),
-                    datetime=self.get_date(),
+                    datetime=self.get_datetime(),
                     datetime_range=(self.minimumDateTime(), self.maximumDateTime()),
                     display_format=self.displayFormat(),
                     enabled=self.isEnabled())
