@@ -20,7 +20,6 @@ class Slider(QtWidgets.QSlider):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setCalendarPopup(True)
         self.valueChanged.connect(self.value_changed)
 
     def __getstate__(self):
