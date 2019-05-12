@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Optional
+
 from prettyqt import core, widgets
 
 
@@ -28,7 +30,7 @@ class SelectionWidget(widgets.GroupBox):
             if data == value:
                 rb.setChecked(True)
 
-    def add_item(self, title, data=None):
+    def add_item(self, title: str, data=None):
         rb = widgets.RadioButton(title)
         rb.toggled.connect(self.update_choice)
         self.buttons[rb] = data
@@ -36,7 +38,7 @@ class SelectionWidget(widgets.GroupBox):
             rb.setChecked(True)
         self.layout.addWidget(rb)
 
-    def add_custom(self, label="Other", regex=None):
+    def add_custom(self, label: str = "Other", regex: Optional[str] = None):
         self.lineedit_custom_sep = widgets.LineEdit(self)
         # TODO: Enable this or add BAR radio and option.
         self.lineedit_custom_sep.setEnabled(False)

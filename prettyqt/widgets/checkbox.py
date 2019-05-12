@@ -41,7 +41,7 @@ class CheckBox(QtWidgets.QCheckBox):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def set_checkstate(self, state):
+    def set_checkstate(self, state: str):
         self.setCheckState(STATES[state])
 
     def get_checkstate(self):
