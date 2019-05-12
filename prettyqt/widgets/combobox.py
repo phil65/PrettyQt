@@ -6,7 +6,7 @@
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui
+from prettyqt import gui, core
 
 box = QtWidgets.QComboBox
 INSERT_POLICIES = dict(no_insert=box.NoInsert,
@@ -24,6 +24,8 @@ SIZE_POLICIES = dict(content=box.AdjustToContents,
 
 
 class ComboBox(QtWidgets.QComboBox):
+
+    value_changed = core.Signal(object)
 
     def __getstate__(self):
         items = [(self.itemText(i), self.itemData(i), self.item_icon(i))
@@ -50,9 +52,14 @@ class ComboBox(QtWidgets.QComboBox):
         self.setMinimumContentsLength(state["min_contents_length"])
         self.setDuplicatesEnabled(state["duplicates_enabled"])
         self.setFrame(state["has_frame"])
+        self.currentIndexChanged.connect(self.index_changed)
 
     def __len__(self):
         return self.count()
+
+    def index_changed(self, index):
+        data = self.itemData(index)
+        self.value_changed.emit(data)
 
     def set_enabled(self):
         self.setEnabled(True)

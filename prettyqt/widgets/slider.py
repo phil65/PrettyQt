@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtCore, QtWidgets
+from prettyqt import core
 
 TICK_POSITIONS = dict(none=QtWidgets.QSlider.NoTicks,
                       both_sides=QtWidgets.QSlider.NoTicks,
@@ -14,6 +15,13 @@ TICK_POSITIONS = dict(none=QtWidgets.QSlider.NoTicks,
 
 
 class Slider(QtWidgets.QSlider):
+
+    value_changed = core.Signal(int)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setCalendarPopup(True)
+        self.valueChanged.connect(self.value_changed)
 
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),

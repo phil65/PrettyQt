@@ -5,7 +5,7 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import gui, widgets, core
 
 ECHO_MODES = dict(normal=QtWidgets.QLineEdit.Normal,
                   no_echo=QtWidgets.QLineEdit.NoEcho,
@@ -15,9 +15,12 @@ ECHO_MODES = dict(normal=QtWidgets.QLineEdit.Normal,
 
 class LineEdit(QtWidgets.QLineEdit):
 
+    value_changed = core.Signal(str)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.textChanged.connect(self.set_validation_color)
+        self.textChanged.connect(self.value_changed)
 
     def __repr__(self):
         return f"LineEdit: {self.__getstate__()}"

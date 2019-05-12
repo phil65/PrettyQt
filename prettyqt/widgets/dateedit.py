@@ -7,12 +7,20 @@ import datetime
 
 from qtpy import QtWidgets
 
+from prettyqt import core
+
 
 class DateEdit(QtWidgets.QDateEdit):
+
+    value_changed = core.Signal(datetime.date)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setCalendarPopup(True)
+        self.dateChanged.connect(self.date_changed)
+
+    def date_changed(self, date):
+        self.value_changed.emit(self.get_date())
 
     def __getstate__(self):
         return dict(calendar_popup=self.calendarPopup(),

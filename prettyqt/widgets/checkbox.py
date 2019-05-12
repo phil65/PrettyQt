@@ -6,6 +6,7 @@
 from bidict import bidict
 
 from qtpy import QtWidgets, QtCore
+from prettyqt import core
 
 STATES = bidict(dict(unchecked=QtCore.Qt.Unchecked,
                      partial=QtCore.Qt.PartiallyChecked,
@@ -13,6 +14,12 @@ STATES = bidict(dict(unchecked=QtCore.Qt.Unchecked,
 
 
 class CheckBox(QtWidgets.QCheckBox):
+
+    value_changed = core.Signal(int)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.stateChanged.connect(self.value_changed)
 
     def __repr__(self):
         return f"CheckBox: {self.__getstate__()}"

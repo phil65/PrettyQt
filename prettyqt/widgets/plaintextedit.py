@@ -5,10 +5,16 @@
 
 from qtpy import QtGui, QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import gui, widgets, core
 
 
 class PlainTextEdit(QtWidgets.QPlainTextEdit):
+
+    value_changed = core.Signal()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.textChanged.connect(self.value_changed)
 
     def __getstate__(self):
         return dict(text=self.text(),

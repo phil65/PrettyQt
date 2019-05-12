@@ -40,7 +40,7 @@ class SpanSlider(widgets.Slider):
     LOWER_HANDLE = 1
     UPPER_HANDLE = 2
 
-    span_changed = core.Signal(int, int)
+    value_changed = core.Signal(int, int)
     lower_pos_changed = core.Signal(int)
     upper_pos_changed = core.Signal(int)
     slider_pressed = core.Signal(object)
@@ -100,7 +100,7 @@ class SpanSlider(widgets.Slider):
             self.upper_pos = upp
             changed = True
         if changed:
-            self.span_changed.emit(self.lower, self.upper)
+            self.value_changed.emit(self.lower, self.upper)
             self.update()
 
     def set_lower_pos(self, lower):

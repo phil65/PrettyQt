@@ -11,7 +11,7 @@ from prettyqt import core, widgets
 
 class FileChooserButton(widgets.Widget):
 
-    file_updated = core.Signal(pathlib.Path)
+    value_changed = core.Signal(pathlib.Path)
 
     def __init__(self, extensions=None, parent=None):
         super().__init__(parent)
@@ -48,7 +48,7 @@ class FileChooserButton(widgets.Widget):
         if not dialog.open_file():
             return None
         self.set_path(dialog.selected_file())
-        self.file_updated.emit(self.path)
+        self.value_changed.emit(self.path)
 
     def set_path(self, path):
         self.path = path
@@ -59,5 +59,5 @@ if __name__ == "__main__":
     app = widgets.Application(sys.argv)
     btn = FileChooserButton()
     btn.show()
-    btn.file_updated.connect(print)
+    btn.value_changed.connect(print)
     sys.exit(app.exec_())

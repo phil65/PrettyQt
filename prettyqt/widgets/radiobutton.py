@@ -5,9 +5,16 @@
 
 import qtawesome as qta
 from qtpy import QtWidgets
+from prettyqt import core
 
 
 class RadioButton(QtWidgets.QRadioButton):
+
+    value_changed = core.Signal(bool)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.toggled.connect(self.value_changed)
 
     def __repr__(self):
         return f"RadioButton: {self.__getstate__()}"

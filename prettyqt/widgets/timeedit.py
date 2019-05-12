@@ -6,13 +6,20 @@
 import datetime
 
 from qtpy import QtWidgets
+from prettyqt import core
 
 
 class TimeEdit(QtWidgets.QTimeEdit):
 
+    value_changed = core.Signal(datetime.time)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setCalendarPopup(True)
+        self.timeChanged.connect(self.time_changed)
+
+    def time_changed(self, date):
+        self.value_changed.emit(self.get_time())
 
     def __getstate__(self):
         return dict(calendar_popup=self.calendarPopup(),

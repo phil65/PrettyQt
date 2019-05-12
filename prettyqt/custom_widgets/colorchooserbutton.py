@@ -10,7 +10,7 @@ from prettyqt import core, gui, widgets
 
 class ColorChooserButton(widgets.Widget):
 
-    color_updated = core.Signal(gui.Color)
+    value_changed = core.Signal(gui.Color)
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -45,7 +45,7 @@ class ColorChooserButton(widgets.Widget):
 
         if dlg.exec_():
             self.set_color(dlg.current_color())
-            self.color_updated.emit(dlg.current_color())
+            self.value_changed.emit(dlg.current_color())
 
     def set_color(self, color):
         if isinstance(color, str):
@@ -64,5 +64,5 @@ if __name__ == "__main__":
     btn = ColorChooserButton()
     btn.set_color(gui.Color("green"))
     btn.show()
-    btn.color_updated.connect(print)
+    btn.value_changed.connect(print)
     sys.exit(app.exec_())

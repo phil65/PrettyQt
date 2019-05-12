@@ -27,7 +27,6 @@ def test_colorchooserbutton():
     with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
     btn.show()
-    btn.color_updated.connect(print)
 
 
 def test_filechooserbutton():
@@ -37,7 +36,6 @@ def test_filechooserbutton():
     with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
     btn.show()
-    btn.file_updated.connect(print)
 
 
 def test_codeeditor():

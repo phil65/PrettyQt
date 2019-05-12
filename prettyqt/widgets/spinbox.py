@@ -7,7 +7,7 @@ from bidict import bidict
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets, gui
+from prettyqt import widgets, gui, core
 
 CORRECTION_MODES = bidict(dict(to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
                                to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue))
@@ -22,9 +22,12 @@ STEP_TYPES = bidict(dict(default=QtWidgets.QSpinBox.DefaultStepType,
 
 class SpinBox(QtWidgets.QSpinBox):
 
+    value_changed = core.Signal(int)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setLineEdit(widgets.LineEdit())
+        self.valueChanged.connect(self.value_changed)
         self.setGroupSeparatorShown(True)
 
     def __repr__(self):
