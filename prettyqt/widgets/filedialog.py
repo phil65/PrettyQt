@@ -28,6 +28,10 @@ ACCEPT_MODES = bidict(dict(save=QtWidgets.QFileDialog.AcceptSave,
 VIEW_MODES = bidict(dict(detail=QtWidgets.QFileDialog.Detail,
                          list=QtWidgets.QFileDialog.List))
 
+FILTERS = bidict(dict(dirs=core.Dir.Dirs,
+                      all_dirs=core.Dir.AllDirs,
+                      files=core.Dir.Files))
+
 
 class FileDialog(QtWidgets.QFileDialog):
     """
@@ -46,7 +50,10 @@ class FileDialog(QtWidgets.QFileDialog):
     def __getstate__(self):
         return dict(file_mode=self.get_file_mode(),
                     accept_mode=self.get_accept_mode(),
+                    filter=int(self.filter()),
                     view_mode=self.get_view_mode(),
+                    name_filter=self.selectedNameFilter(),
+                    default_suffix=self.defaultSuffix(),
                     name_filters=self.nameFilters(),
                     supported_schemes=self.supportedSchemes())
 
@@ -55,7 +62,10 @@ class FileDialog(QtWidgets.QFileDialog):
         self.set_file_mode(state["file_mode"])
         self.set_accept_mode(state["accept_mode"])
         self.set_view_mode(state["view_mode"])
+        self.setFilter(core.Dir.Filters(state["filter"]))
         self.setNameFilters(state["name_filters"])
+        self.setNameFilter(state["name_filter"])
+        self.setDefaultSuffix(state["default_suffix"])
         self.setSupportedSchemes(state["supported_schemes"])
 
     def set_accept_mode(self, mode: str):
@@ -95,6 +105,11 @@ class FileDialog(QtWidgets.QFileDialog):
             mode: mode to use
         """
         self.setFileMode(MODES[mode])
+
+    # def set_filter(self, to_filter):
+    #     if to_filter not in FILTERS:
+    #         raise ValueError(f"Invalid value. Valid values: {FILTERS.keys()}")
+    #     self.setFilter(FILTERS[to_filter])
 
     def selected_files(self) -> List[pathlib.Path]:
         return [pathlib.Path(p) for p in self.selectedFiles()]
@@ -151,4 +166,5 @@ if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = FileDialog(path_id="test", caption="Some header")
     widget.show()
+    print(widget.__getstate__())
     app.exec_()
