@@ -399,6 +399,20 @@ def test_statusbar():
     dlg.show()
 
 
+def test_stackedlayout():
+    layout = widgets.StackedLayout()
+    widget = widgets.RadioButton("test")
+    layout.addWidget(widget)
+    layout.set_size_mode("maximum")
+    layout.set_margin(0)
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(layout, jar)
+    with open("data.pkl", "rb") as jar:
+        layout = pickle.load(jar)
+    assert(len(layout) == 1)
+    return True
+
+
 def test_spinbox():
     widget = widgets.SpinBox()
     widget.set_disabled()

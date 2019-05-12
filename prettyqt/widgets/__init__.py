@@ -23,6 +23,7 @@ from .filesystemmodel import FileSystemModel
 from .layout import Layout
 from .formlayout import FormLayout
 from .boxlayout import BoxLayout
+from .stackedlayout import StackedLayout
 from .gridlayout import GridLayout
 from .toolbox import ToolBox
 
@@ -95,6 +96,7 @@ __all__ = ["Application",
            "Layout",
            "FormLayout",
            "BoxLayout",
+           "StackedLayout",
            "GridLayout",
            "ToolBox",
            "Slider",
