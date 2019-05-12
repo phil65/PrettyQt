@@ -29,6 +29,9 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         return dict(range=(self.minimum(), self.maximum()),
                     value=self.value(),
                     enabled=self.isEnabled(),
+                    step_type=self.get_step_type(),
+                    prefix=self.prefix(),
+                    suffix=self.suffix(),
                     single_step=self.singleStep())
 
     def __setstate__(self, state):
@@ -36,7 +39,10 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         self.setRange(*state["range"])
         self.setValue(state["value"])
         self.setEnabled(state["enabled"])
+        self.setPrefix(state["prefix"])
+        self.setSuffix(state["suffix"])
         self.setSingleStep(state["single_step"])
+        self.set_step_type(state["step_type"])
 
     def set_enabled(self):
         self.setEnabled(True)
@@ -58,6 +64,9 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
 
     def set_step_type(self, mode: str):
         self.setStepType(STEP_TYPES[mode])
+
+    def get_step_type(self):
+        return STEP_TYPES.inv[self.stepType()]
 
     def set_special_value(self, value: str):
         self.setSpecialValueText(value)

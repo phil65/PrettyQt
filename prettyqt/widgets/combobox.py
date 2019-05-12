@@ -30,6 +30,12 @@ class ComboBox(QtWidgets.QComboBox):
                  for i in range(self.count())]
         return dict(index=self.currentIndex(),
                     enabled=self.isEnabled(),
+                    editable=self.isEditable(),
+                    max_count=self.maxCount(),
+                    has_frame=self.hasFrame(),
+                    max_visible_items=self.maxVisibleItems(),
+                    duplicates_enabled=self.duplicatesEnabled(),
+                    min_contents_length=self.minimumContentsLength(),
                     items=items)
 
     def __setstate__(self, state):
@@ -38,6 +44,15 @@ class ComboBox(QtWidgets.QComboBox):
             self.add_item(label, data, icon=icon)
         self.setCurrentIndex(state["index"])
         self.setEnabled(state["enabled"])
+        self.setEditable(state["editable"])
+        self.setMaxCount(state["max_count"])
+        self.setMaxVisibleItems(state["max_visible_items"])
+        self.setMinimumContentsLength(state["min_contents_length"])
+        self.setDuplicatesEnabled(state["duplicates_enabled"])
+        self.setFrame(state["has_frame"])
+
+    def __len__(self):
+        return self.count()
 
     def set_enabled(self):
         self.setEnabled(True)

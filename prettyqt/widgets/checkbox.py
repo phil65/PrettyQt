@@ -3,7 +3,13 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets
+from bidict import bidict
+
+from qtpy import QtWidgets, QtCore
+
+STATES = bidict(dict(unchecked=QtCore.Qt.Unchecked,
+                     partial=QtCore.Qt.PartiallyChecked,
+                     checked=QtCore.Qt.Checked))
 
 
 class CheckBox(QtWidgets.QCheckBox):
@@ -13,16 +19,18 @@ class CheckBox(QtWidgets.QCheckBox):
 
     def __getstate__(self):
         return dict(checkable=self.isCheckable(),
-                    checked=self.isChecked(),
+                    checkstate=self.get_checkstate(),
+                    is_tristate=self.isTristate(),
                     text=self.text(),
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
         super().__init__()
-        self.setChecked(state["checked"])
+        self.setCheckable(state["checkable"])
+        self.setTristate(state["is_tristate"])
+        self.set_checkstate(state["checkstate"])
         self.setText(state["text"])
         self.setEnabled(state["enabled"])
-        self.setCheckable(state["checkable"])
 
     def __bool__(self):
         return self.isChecked()
@@ -32,6 +40,12 @@ class CheckBox(QtWidgets.QCheckBox):
 
     def set_disabled(self):
         self.setEnabled(False)
+
+    def set_checkstate(self, state):
+        self.setCheckState(STATES[state])
+
+    def get_checkstate(self):
+        return STATES.inv[self.isTristate()]
 
     def get_value(self):
         return self.isChecked()
