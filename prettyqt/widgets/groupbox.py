@@ -15,19 +15,19 @@ H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
 class GroupBox(QtWidgets.QGroupBox):
 
     def __repr__(self):
-        return f"GroupBox: {self.__getstate__()}"
+        return f"GroupBox: {self.count()} children"
 
     def __getstate__(self):
         return dict(checkable=self.isCheckable(),
                     checked=self.isChecked(),
-                    # layout=self.layout(),
+                    layout=self.layout(),
                     flat=self.isFlat(),
                     # alignment=self.alignment(),
                     title=self.title())
 
     def __setstate__(self, state):
         self.__init__(state["title"])
-        # self.setLayout(state["layout"])
+        self.setLayout(state["layout"])
         self.setCheckable(state["checkable"])
         self.setChecked(state["checked"])
         self.setFlat(state["flat"])
@@ -35,6 +35,9 @@ class GroupBox(QtWidgets.QGroupBox):
 
     def set_alignment(self, alignment):
         self.setAlignment(H_ALIGNMENTS[alignment])
+
+    def set_layout(self, layout):
+        self.setLayout(layout)
 
 
 if __name__ == "__main__":

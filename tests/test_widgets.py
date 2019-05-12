@@ -226,6 +226,9 @@ def test_gridlayout():
 def test_groupbox():
     widget = widgets.GroupBox()
     widget.show()
+    ly = widgets.BoxLayout("horizontal")
+    widget.set_layout(ly)
+    widget.set_alignment("left")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
