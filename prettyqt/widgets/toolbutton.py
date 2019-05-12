@@ -9,6 +9,25 @@ from qtpy import QtWidgets
 
 class ToolButton(QtWidgets.QToolButton):
 
+    def __getstate__(self):
+        return dict(text=self.text(),
+                    icon=self.icon(),
+                    checkable=self.isCheckable(),
+                    checked=self.isChecked(),
+                    tooltip=self.toolTip(),
+                    statustip=self.statusTip(),
+                    enabled=self.isEnabled())
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.setText(state["text"])
+        self.set_icon(state["icon"])
+        self.setEnabled(state["enabled"])
+        self.setChecked(state["checked"])
+        self.setCheckable(state["checkable"])
+        self.setToolTip(state["tooltip"])
+        self.setStatusTip(state["statustip"])
+
     def set_enabled(self):
         self.setEnabled(True)
 
