@@ -22,7 +22,7 @@ class Splitter(QtWidgets.QSplitter):
 
     def __getstate__(self):
         return dict(items=self.get_children(),
-                    orientation=self.orientation(),
+                    orientation=int(self.orientation()),
                     handle_width=self.handleWidth(),
                     children_collapsible=self.childrenCollapsible(),
                     opaque_resize=self.opaqueResize())
@@ -31,7 +31,8 @@ class Splitter(QtWidgets.QSplitter):
         self.__init__()
         for item in state["items"]:
             self.addWidget(item)
-        self.setOrientation(state["orientation"])
+        orientation = QtCore.Qt.Orientation(state["orientation"])
+        self.setOrientation(orientation)
         self.setHandleWidth(state["handle_width"])
         self.setChildrenCollapsible(state["children_collapsible"])
         self.setOpaqueResize(state["opaque_resize"])

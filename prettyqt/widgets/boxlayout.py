@@ -32,11 +32,12 @@ class BoxLayout(QtWidgets.QBoxLayout):
 
     def __getstate__(self):
         return dict(items=self.get_children(),
-                    direction=self.direction())
+                    direction=int(self.direction()))
 
     def __setstate__(self, state):
         self.__init__()
-        self.setDirection(state["direction"])
+        direction = self.Direction(state["direction"])
+        self.setDirection(direction)
         for item in state["items"]:
             self.add_item(item)
 

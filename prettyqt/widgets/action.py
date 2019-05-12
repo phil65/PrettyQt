@@ -25,8 +25,8 @@ class Action(QtWidgets.QAction):
                     tooltip=self.toolTip(),
                     checkable=self.isCheckable(),
                     checked=self.isChecked(),
-                    priority=self.priority(),
-                    shortcut_context=self.shortcutContext(),
+                    priority=int(self.priority()),
+                    shortcut_context=int(self.shortcutContext()),
                     statustip=self.statusTip())
 
     def __setstate__(self, state):
@@ -37,8 +37,9 @@ class Action(QtWidgets.QAction):
         self.setToolTip(state["tooltip"])
         self.setStatusTip(state["statustip"])
         self.setChecked(state["checked"])
-        self.setPriority(state["priority"])
-        self.setShortcutContext(state["shortcut_context"])
+        self.setPriority(self.Priority(state["priority"]))
+        ctx = QtCore.Qt.ShortcutContext(state["shortcut_context"])
+        self.setShortcutContext(ctx)
         self.setCheckable(state["checkable"])
 
     def set_enabled(self):
