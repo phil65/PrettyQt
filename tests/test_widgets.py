@@ -89,6 +89,19 @@ def test_combobox():
     box.close()
 
 
+def test_commandlinkbutton():
+    widget = widgets.CommandLinkButton("Test")
+    widget.set_disabled()
+    widget.set_enabled()
+    widget.set_icon("mdi.timer")
+    widget.set_style_icon("close")
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(widget, jar)
+    with open("data.pkl", "rb") as jar:
+        widget = pickle.load(jar)
+    widget.show()
+
+
 def test_dateedit():
     widget = widgets.DateEdit()
     widget.set_disabled()

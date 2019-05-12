@@ -49,6 +49,7 @@ from .toolbar import Toolbar
 from .headerview import HeaderView
 from .label import Label
 from .pushbutton import PushButton
+from .commandlinkbutton import CommandLinkButton
 from .radiobutton import RadioButton
 from .combobox import ComboBox
 from .spinbox import SpinBox
@@ -116,6 +117,7 @@ __all__ = ["Application",
            "DockWidget",
            "Label",
            "PushButton",
+           "CommandLinkButton",
            "RadioButton",
            "ComboBox",
            "SpinBox",
