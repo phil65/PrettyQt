@@ -26,6 +26,8 @@ class TimeEdit(QtWidgets.QTimeEdit):
                     time=self.get_time(),
                     display_format=self.displayFormat(),
                     range=(self.min_time(), self.max_time()),
+                    tooltip=self.toolTip(),
+                    statustip=self.statusTip(),
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
@@ -33,6 +35,8 @@ class TimeEdit(QtWidgets.QTimeEdit):
         self.setEnabled(state["enabled"])
         self.setDisplayFormat(state["display_format"])
         self.set_range(*state["range"])
+        self.setToolTip(state["tooltip"])
+        self.setStatusTip(state["statustip"])
 
     def set_range(self, lower: datetime.time, upper: datetime.time):
         self.setToolTip(f"{lower} <= x <= {upper}")

@@ -37,6 +37,8 @@ class SpinBox(QtWidgets.QSpinBox):
         return dict(range=(self.minimum(), self.maximum()),
                     value=self.value(),
                     enabled=self.isEnabled(),
+                    tooltip=self.toolTip(),
+                    statustip=self.statusTip(),
                     prefix=self.prefix(),
                     suffix=self.suffix(),
                     int_base=self.displayIntegerBase(),
@@ -50,6 +52,8 @@ class SpinBox(QtWidgets.QSpinBox):
         self.setRange(*state["range"])
         self.setValue(state["value"])
         self.setEnabled(state["enabled"])
+        self.setToolTip(state["tooltip"])
+        self.setStatusTip(state["statustip"])
         self.setSingleStep(state["single_step"])
         self.setPrefix(state["prefix"])
         self.setSuffix(state["suffix"])

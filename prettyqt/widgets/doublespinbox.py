@@ -34,6 +34,8 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         return dict(range=(self.minimum(), self.maximum()),
                     value=self.value(),
                     enabled=self.isEnabled(),
+                    tooltip=self.toolTip(),
+                    statustip=self.statusTip(),
                     step_type=self.get_step_type(),
                     prefix=self.prefix(),
                     decimals=self.decimals(),
@@ -45,6 +47,8 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         self.setRange(*state["range"])
         self.setValue(state["value"])
         self.setEnabled(state["enabled"])
+        self.setToolTip(state["tooltip"])
+        self.setStatusTip(state["statustip"])
         self.setPrefix(state["prefix"])
         self.setSuffix(state["suffix"])
         self.setDecimals(state["decimals"])

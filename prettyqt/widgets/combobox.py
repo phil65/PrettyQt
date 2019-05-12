@@ -37,6 +37,8 @@ class ComboBox(QtWidgets.QComboBox):
         return dict(index=self.currentIndex(),
                     enabled=self.isEnabled(),
                     editable=self.isEditable(),
+                    tooltip=self.toolTip(),
+                    statustip=self.statusTip(),
                     max_count=self.maxCount(),
                     has_frame=self.hasFrame(),
                     max_visible_items=self.maxVisibleItems(),
@@ -50,6 +52,8 @@ class ComboBox(QtWidgets.QComboBox):
             self.add_item(label, data, icon=icon)
         self.setCurrentIndex(state["index"])
         self.setEnabled(state["enabled"])
+        self.setToolTip(state["tooltip"])
+        self.setStatusTip(state["statustip"])
         self.setEditable(state["editable"])
         self.setMaxCount(state["max_count"])
         self.setMaxVisibleItems(state["max_visible_items"])
