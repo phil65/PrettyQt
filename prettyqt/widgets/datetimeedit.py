@@ -17,7 +17,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
     def __getstate__(self):
         return dict(calendar_popup=self.calendarPopup(),
                     datetime=self.get_datetime(),
-                    range=(self.minimumDateTime(), self.maximumDateTime()),
+                    range=(self.min_datetime(), self.max_datetime()),
                     display_format=self.displayFormat(),
                     enabled=self.isEnabled())
 
@@ -53,11 +53,23 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         except TypeError:
             return self.dateTime().toPyDateTime()
 
+    def min_datetime(self):
+        try:
+            return self.minimumDateTime().toPython()
+        except (TypeError, AttributeError):
+            return self.minimumDateTime().toPyDateTime()
+
+    def max_datetime(self):
+        try:
+            return self.maximumDateTime().toPython()
+        except (TypeError, AttributeError):
+            return self.maximumDateTime().toPyDateTime()
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
     app = widgets.Application.create_default_app()
     widget = DateTimeEdit()
-    print(widget.get_datetime())
+    print(widget.__getstate__())
     widget.show()
     app.exec_()

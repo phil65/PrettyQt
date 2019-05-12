@@ -18,7 +18,7 @@ class TimeEdit(QtWidgets.QTimeEdit):
         return dict(calendar_popup=self.calendarPopup(),
                     time=self.get_time(),
                     display_format=self.displayFormat(),
-                    range=(self.minimumTime(), self.maximumTime()),
+                    range=(self.min_time(), self.max_time()),
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
@@ -48,6 +48,18 @@ class TimeEdit(QtWidgets.QTimeEdit):
 
     def set_disabled(self):
         self.setEnabled(False)
+
+    def min_time(self):
+        try:
+            return self.minimumTime().toPython()
+        except (TypeError, AttributeError):
+            return self.minimumTime().toPyTime()
+
+    def max_time(self):
+        try:
+            return self.maximumTime().toPython()
+        except (TypeError, AttributeError):
+            return self.maximumTime().toPyTime()
 
 
 if __name__ == "__main__":

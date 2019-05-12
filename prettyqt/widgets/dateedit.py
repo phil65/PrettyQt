@@ -18,7 +18,7 @@ class DateEdit(QtWidgets.QDateEdit):
         return dict(calendar_popup=self.calendarPopup(),
                     date=self.get_date(),
                     display_format=self.displayFormat(),
-                    range=(self.minimumDate(), self.maximumDate()),
+                    range=(self.min_date(), self.max_date()),
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
@@ -48,6 +48,18 @@ class DateEdit(QtWidgets.QDateEdit):
 
     def set_disabled(self):
         self.setEnabled(False)
+
+    def min_date(self):
+        try:
+            return self.minimumDate().toPython()
+        except (TypeError, AttributeError):
+            return self.minimumDate().toPyDate()
+
+    def max_date(self):
+        try:
+            return self.maximumDate().toPython()
+        except (TypeError, AttributeError):
+            return self.maximumDate().toPyDate()
 
 
 if __name__ == "__main__":
