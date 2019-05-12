@@ -8,7 +8,7 @@ from typing import Optional
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, gui
 
 MODALITIES = dict(window=QtCore.Qt.WindowModal,
                   application=QtCore.Qt.ApplicationModal)
@@ -38,6 +38,23 @@ class Dialog(QtWidgets.QDialog):
 
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
+
+    def __getstate__(self):
+        return dict(layout=self.layout,
+                    title=self.windowTitle(),
+                    is_maximized=self.isMaximized(),
+                    has_sizegrip=self.isSizeGripEnabled(),
+                    icon=gui.Icon(self.windowIcon()),
+                    size=self.size())
+
+    def __setstate__(self, state):
+        self.__init__(state["title"], state["icon"])
+        if state["layout"]:
+            self.setLayout(state["layout"])
+        self.resize(state["size"])
+        self.setSizeGripEnabled(state["has_sizegrip"])
+        if state["is_maximized"]:
+            self.showMaximized()
 
     def resize(self, *size):
         if isinstance(size[0], tuple):
@@ -91,5 +108,10 @@ class Dialog(QtWidgets.QDialog):
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = Dialog()
-    widget.showMaximized()
+    import pickle
+    with open("data.pkl", 'wb') as jar:
+        pickle.dump(widget, jar)
+    with open("data.pkl", 'rb') as jar:
+        widget = pickle.load(jar)
+    widget.show()
     app.exec_()
