@@ -17,6 +17,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
     def __getstate__(self):
         return dict(calendar_popup=self.calendarPopup(),
                     datetime=self.get_date(),
+                    datetime_range=(self.minimumDateTime(), self.maximumDateTime()),
                     display_format=self.displayFormat(),
                     enabled=self.isEnabled())
 
@@ -24,6 +25,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.__init__(state["datetime"])
         self.setDateTime(state["datetime"])
         self.setEnabled(state["enabled"])
+        self.setDateTimeRange(*state["datetime_range"])
         self.setDisplayFormat(state["display_format"])
 
     def set_enabled(self):
@@ -32,7 +34,19 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def get_date(self) -> datetime.datetime:
+    def set_range(self, lower: int, upper: int):
+        self.setDateTimeRange(lower, upper)
+
+    def set_format(self, fmt: str):
+        self.setDisplayFormat(fmt)
+
+    def get_value(self) -> datetime.datetime:
+        return self.get_datetime()
+
+    def set_value(self, value):
+        self.setDateTime(value)
+
+    def get_datetime(self) -> datetime.datetime:
         try:
             return self.dateTime().toPython()
         except TypeError:
@@ -43,6 +57,6 @@ if __name__ == "__main__":
     from prettyqt import widgets
     app = widgets.Application.create_default_app()
     widget = DateTimeEdit()
-    print(widget.get_date())
+    print(widget.get_datetime())
     widget.show()
     app.exec_()
