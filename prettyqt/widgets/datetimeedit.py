@@ -17,7 +17,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
     def __getstate__(self):
         return dict(calendar_popup=self.calendarPopup(),
                     datetime=self.get_datetime(),
-                    datetime_range=(self.minimumDateTime(), self.maximumDateTime()),
+                    range=(self.minimumDateTime(), self.maximumDateTime()),
                     display_format=self.displayFormat(),
                     enabled=self.isEnabled())
 
@@ -25,7 +25,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.__init__(state["datetime"])
         self.setDateTime(state["datetime"])
         self.setEnabled(state["enabled"])
-        self.setDateTimeRange(*state["datetime_range"])
+        self.set_range(*state["range"])
         self.setDisplayFormat(state["display_format"])
 
     def set_enabled(self):
@@ -34,7 +34,8 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def set_range(self, lower: int, upper: int):
+    def set_range(self, lower: datetime.datetime, upper: datetime.datetime):
+        self.setToolTip(f"{lower} <= x <= {upper}")
         self.setDateTimeRange(lower, upper)
 
     def set_format(self, fmt: str):

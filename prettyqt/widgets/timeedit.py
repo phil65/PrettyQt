@@ -18,12 +18,24 @@ class TimeEdit(QtWidgets.QTimeEdit):
         return dict(calendar_popup=self.calendarPopup(),
                     time=self.get_time(),
                     display_format=self.displayFormat(),
+                    range=(self.minimumTime(), self.maximumTime()),
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
         self.__init__(state["time"])
         self.setEnabled(state["enabled"])
         self.setDisplayFormat(state["display_format"])
+        self.set_range(*state["range"])
+
+    def set_range(self, lower: datetime.time, upper: datetime.time):
+        self.setToolTip(f"{lower} <= x <= {upper}")
+        self.setTimeRange(lower, upper)
+
+    def get_value(self):
+        return self.get_time()
+
+    def set_value(self, value):
+        return self.setTime(value)
 
     def get_time(self) -> datetime.time:
         try:
