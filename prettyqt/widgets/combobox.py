@@ -27,6 +27,10 @@ class ComboBox(QtWidgets.QComboBox):
 
     value_changed = core.Signal(object)
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.currentIndexChanged.connect(self.index_changed)
+
     def __getstate__(self):
         items = [(self.itemText(i), self.itemData(i), self.item_icon(i))
                  for i in range(self.count())]
@@ -52,7 +56,6 @@ class ComboBox(QtWidgets.QComboBox):
         self.setMinimumContentsLength(state["min_contents_length"])
         self.setDuplicatesEnabled(state["duplicates_enabled"])
         self.setFrame(state["has_frame"])
-        self.currentIndexChanged.connect(self.index_changed)
 
     def __len__(self):
         return self.count()
@@ -112,6 +115,9 @@ if __name__ == "__main__":
     from prettyqt import widgets
     app = widgets.Application.create_default_app()
     widget = ComboBox()
+    widget.value_changed.connect(print)
+    w = ComboBox()
     widget.add_item("test", data="aa", icon="mdi.timer")
+    widget.add_item("test2", data="aa2", icon="mdi.timer")
     widget.show()
     app.exec_()

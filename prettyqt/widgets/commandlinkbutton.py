@@ -11,6 +11,12 @@ from prettyqt import core, widgets
 
 class CommandLinkButton(QtWidgets.QCommandLinkButton):
 
+    value_changed = core.Signal(bool)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.toggled.connect(self.value_changed)
+
     def __repr__(self):
         return f"CommandLinkButton: {self.__getstate__()}"
 
