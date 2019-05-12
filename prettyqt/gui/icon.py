@@ -24,12 +24,15 @@ class Icon(QtGui.QIcon):
     def __getstate__(self):
         ba = QtCore.QByteArray()
         stream = QtCore.QDataStream(ba, QtCore.QIODevice.WriteOnly)
-        stream << self
+        pixmap = self.pixmap(QtCore.QSize(200, 200))
+        stream << pixmap
         return ba
 
     def __setstate__(self, ba):
         stream = QtCore.QDataStream(ba, QtCore.QIODevice.ReadOnly)
-        stream >> self
+        px = QtGui.QPixmap()
+        stream >> px
+        self.__init__(px)
 
     @classmethod
     def for_color(cls, color: str):
