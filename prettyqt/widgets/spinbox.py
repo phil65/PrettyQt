@@ -5,7 +5,14 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, gui
+
+CORRECTION_MODES = dict(to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
+                        to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue)
+
+SYMBOLS = dict(up_down=QtWidgets.QSpinBox.UpDownArrows,
+               plus_minus=QtWidgets.QSpinBox.PlusMinus,
+               none=QtWidgets.QSpinBox.NoButtons)
 
 
 class SpinBox(QtWidgets.QSpinBox):
@@ -13,6 +20,7 @@ class SpinBox(QtWidgets.QSpinBox):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setLineEdit(widgets.LineEdit())
+        self.setGroupSeparatorShown(True)
 
     def __repr__(self):
         return f"SpinBox: {self.__getstate__()}"
@@ -24,7 +32,7 @@ class SpinBox(QtWidgets.QSpinBox):
                     single_step=self.singleStep())
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         self.setRange(*state["range"])
         self.setValue(state["value"])
         self.setEnabled(state["enabled"])
@@ -36,16 +44,24 @@ class SpinBox(QtWidgets.QSpinBox):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         return self.hasAcceptableInput()
 
-    def set_validator(self, validator):
+    def set_validator(self, validator: gui.Validator):
         self.lineEdit().setValidator(validator)
+
+    def set_button_symbols(self, mode: str):
+        self.setButtonSymbols(SYMBOLS[mode])
+
+    def set_correction_mode(self, mode: str):
+        self.setCorrectionMode(CORRECTION_MODES[mode])
+
+    def set_special_value(self, value: str):
+        self.setSpecialValueText(value)
 
 
 if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = SpinBox()
-    print(widget)
     widget.show()
     app.exec_()
