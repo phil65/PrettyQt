@@ -110,6 +110,9 @@ class ComboBox(QtWidgets.QComboBox):
     def set_min_char_length(self, chars: int):
         self.setMinimumContentsLength(chars)
 
+    def get_value(self):
+        return self.currentData()
+
 
 if __name__ == "__main__":
     from prettyqt import widgets

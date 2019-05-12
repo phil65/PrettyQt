@@ -84,6 +84,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         widget.set_font("Consolas")
         return widget
 
+    def set_value(self, value: str):
+        self.setPlainText(value)
+
     def get_value(self):
         return self.text()
 

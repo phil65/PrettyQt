@@ -98,6 +98,9 @@ class LineEdit(QtWidgets.QLineEdit):
     def set_echo_mode(self, mode: str):
         self.setEchoMode(ECHO_MODES[mode])
 
+    def set_value(self, value: str):
+        self.setText(value)
+
     def get_value(self) -> str:
         return self.text()
 
