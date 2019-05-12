@@ -15,6 +15,10 @@ ECHO_MODES = dict(normal=QtWidgets.QLineEdit.Normal,
 
 class LineEdit(QtWidgets.QLineEdit):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.textChanged.connect(self.set_validation_color)
+
     def __repr__(self):
         return f"LineEdit: {self.__getstate__()}"
 
@@ -84,11 +88,18 @@ class LineEdit(QtWidgets.QLineEdit):
     def set_color(self, color: str):
         self.setStyleSheet(f"background-color: {color};")
 
+    def set_validation_color(self, state: bool):
+        color = "rgb(255, 175, 90)" if not self.is_valid() else "white"
+        self.set_color(color)
+
     def set_echo_mode(self, mode: str):
         self.setEchoMode(ECHO_MODES[mode])
 
     def get_value(self) -> str:
         return self.text()
+
+    def is_valid(self) -> bool:
+        return self.hasAcceptableInput()
 
 
 if __name__ == "__main__":
