@@ -18,7 +18,7 @@ class FlowLayout(QtWidgets.QLayout):
         self.items = []
 
     def __repr__(self):
-        return f"FlowLayout: {self.__getstate__()}"
+        return f"FlowLayout: {self.count()} children"
 
     def __getstate__(self):
         return dict(items=self.get_children())
