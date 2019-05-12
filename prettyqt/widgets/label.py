@@ -27,12 +27,20 @@ TEXT_INTERACTION = dict(none=QtCore.Qt.NoTextInteraction,
 
 class Label(QtWidgets.QLabel):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.openExternalLinks(True)
+
     def __getstate__(self):
-        return dict(text=self.text())
+        return dict(text=self.text(),
+                    scaled_contents=self.scaledContents(),
+                    word_wrap=self.wordWrap())
 
     def __setstate__(self, state):
         super().__init__()
         self.setText(state["text"])
+        self.setScaledContents(state["scaled_contents"])
+        self.setWordWrap(state["word_wrap"])
 
     def set_alignment(self,
                       horizontal: Optional[str] = None,
