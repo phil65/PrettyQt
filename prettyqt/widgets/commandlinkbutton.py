@@ -22,6 +22,7 @@ class CommandLinkButton(QtWidgets.QCommandLinkButton):
 
     def __getstate__(self):
         return dict(title=self.text(),
+                    icon=self.icon(),
                     description=self.description(),
                     checkable=self.isCheckable(),
                     checked=self.isChecked(),
@@ -32,6 +33,7 @@ class CommandLinkButton(QtWidgets.QCommandLinkButton):
     def __setstate__(self, state):
         self.__init__(state["title"])
         self.setDescription(state["description"])
+        self.set_icon(state["icon"])
         self.setEnabled(state["enabled"])
         self.setChecked(state["checked"])
         self.setCheckable(state["checkable"])
