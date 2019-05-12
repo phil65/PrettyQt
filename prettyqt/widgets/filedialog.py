@@ -6,23 +6,27 @@
 import pathlib
 from typing import List, Optional
 
+from bidict import bidict
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
 
-MODES = dict(existing_file=QtWidgets.QFileDialog.ExistingFile,
-             existing_files=QtWidgets.QFileDialog.ExistingFiles,
-             any_file=QtWidgets.QFileDialog.AnyFile,
-             directory=QtWidgets.QFileDialog.Directory)
+MODES = bidict(dict(existing_file=QtWidgets.QFileDialog.ExistingFile,
+                    existing_files=QtWidgets.QFileDialog.ExistingFiles,
+                    any_file=QtWidgets.QFileDialog.AnyFile,
+                    directory=QtWidgets.QFileDialog.Directory))
 
-LABELS = dict(look_in=QtWidgets.QFileDialog.LookIn,
-              filename=QtWidgets.QFileDialog.FileName,
-              filetype=QtWidgets.QFileDialog.FileType,
-              accept=QtWidgets.QFileDialog.Accept,
-              reject=QtWidgets.QFileDialog.Reject)
+LABELS = bidict(dict(look_in=QtWidgets.QFileDialog.LookIn,
+                     filename=QtWidgets.QFileDialog.FileName,
+                     filetype=QtWidgets.QFileDialog.FileType,
+                     accept=QtWidgets.QFileDialog.Accept,
+                     reject=QtWidgets.QFileDialog.Reject))
 
-ACCEPT_MODES = dict(save=QtWidgets.QFileDialog.AcceptSave,
-                    open=QtWidgets.QFileDialog.AcceptOpen)
+ACCEPT_MODES = bidict(dict(save=QtWidgets.QFileDialog.AcceptSave,
+                           open=QtWidgets.QFileDialog.AcceptOpen))
+
+VIEW_MODES = bidict(dict(detail=QtWidgets.QFileDialog.Detail,
+                         list=QtWidgets.QFileDialog.List))
 
 
 class FileDialog(QtWidgets.QFileDialog):
@@ -39,13 +43,47 @@ class FileDialog(QtWidgets.QFileDialog):
         self.set_file_mode("existing_files")
         self.set_accept_mode(mode)
 
+    def __getstate__(self):
+        return dict(file_mode=self.get_file_mode(),
+                    accept_mode=self.get_accept_mode(),
+                    view_mode=self.get_view_mode(),
+                    name_filters=self.nameFilters(),
+                    supported_schemes=self.supportedSchemes())
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.set_file_mode(state["file_mode"])
+        self.set_accept_mode(state["accept_mode"])
+        self.set_view_mode(state["view_mode"])
+        self.setNameFilters(state["name_filters"])
+        self.setSupportedSchemes(state["supported_schemes"])
+
     def set_accept_mode(self, mode: str):
+        if mode not in ACCEPT_MODES:
+            raise ValueError(f"Invalid value. Valid values: {ACCEPT_MODES.keys()}")
         self.setAcceptMode(ACCEPT_MODES[mode])
+
+    def get_accept_mode(self):
+        return ACCEPT_MODES.inv[self.acceptMode()]
+
+    def set_view_mode(self, mode: str):
+        if mode not in VIEW_MODES:
+            raise ValueError(f"Invalid value. Valid values: {VIEW_MODES.keys()}")
+        self.setViewMode(VIEW_MODES[mode])
+
+    def get_view_mode(self):
+        return VIEW_MODES.inv[self.viewMode()]
 
     def set_label_text(self, label: str, text: str):
         if label not in LABELS:
             raise ValueError(f"Invalid value. Valid values: {LABELS.keys()}")
         self.setLabelText(LABELS[label], text)
+
+    def get_label_text(self, label):
+        return self.labelText(LABELS.inv[label])
+
+    def get_file_mode(self):
+        return MODES.inv[self.fileMode()]
 
     def set_file_mode(self, mode: str):
         """sets the file mode of the dialog

@@ -163,6 +163,10 @@ def test_filedialog():
     dlg.set_filter(dict(a=[".csv"]))
     dlg.selected_file()
     dlg.selected_files()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(dlg, jar)
+    with open("data.pkl", "rb") as jar:
+        dlg = pickle.load(jar)
     dlg.show()
     dlg.close()
 
