@@ -3,17 +3,18 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
-PRIORITIES = dict(low=QtWidgets.QAction.LowPriority,
-                  normal=QtWidgets.QAction.NormalPriority,
-                  high=QtWidgets.QAction.HighPriority)
+PRIORITIES = bidict(dict(low=QtWidgets.QAction.LowPriority,
+                         normal=QtWidgets.QAction.NormalPriority,
+                         high=QtWidgets.QAction.HighPriority))
 
-CONTEXTS = dict(widget=QtCore.Qt.WidgetShortcut,
-                widget_with_children=QtCore.Qt.WidgetWithChildrenShortcut,
-                window=QtCore.Qt.WindowShortcut,
-                application=QtCore.Qt.ApplicationShortcut)
+CONTEXTS = bidict(dict(widget=QtCore.Qt.WidgetShortcut,
+                       widget_with_children=QtCore.Qt.WidgetWithChildrenShortcut,
+                       window=QtCore.Qt.WindowShortcut,
+                       application=QtCore.Qt.ApplicationShortcut))
 
 
 class Action(QtWidgets.QAction):
@@ -25,8 +26,8 @@ class Action(QtWidgets.QAction):
                     tooltip=self.toolTip(),
                     checkable=self.isCheckable(),
                     checked=self.isChecked(),
-                    priority=int(self.priority()),
-                    shortcut_context=int(self.shortcutContext()),
+                    priority=self.get_priority(),
+                    shortcut_context=self.get_shortcut_context(),
                     statustip=self.statusTip())
 
     def __setstate__(self, state):
@@ -37,9 +38,8 @@ class Action(QtWidgets.QAction):
         self.setToolTip(state["tooltip"])
         self.setStatusTip(state["statustip"])
         self.setChecked(state["checked"])
-        self.setPriority(self.Priority(state["priority"]))
-        ctx = QtCore.Qt.ShortcutContext(state["shortcut_context"])
-        self.setShortcutContext(ctx)
+        self.set_priority(state["priority"])
+        self.set_shortcut_context(state["shortcut_context"])
         self.setCheckable(state["checkable"])
 
     def set_enabled(self):
@@ -66,10 +66,16 @@ class Action(QtWidgets.QAction):
             raise ValueError(f"{priority} not a valid priority.")
         self.setPriority(PRIORITIES[priority])
 
+    def get_priority(self):
+        return PRIORITIES.inv[self.priority()]
+
     def set_shortcut_context(self, context: str):
         if context not in CONTEXTS:
             raise ValueError(f"{context} not a valid shortcut context.")
         self.setShortcutContext(CONTEXTS[context])
+
+    def get_shortcut_context(self):
+        return CONTEXTS.inv[self.shortcutContext()]
 
 
 if __name__ == "__main__":

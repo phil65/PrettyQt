@@ -3,16 +3,18 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets
 
-MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
-             fixed=QtWidgets.QLayout.SetFixedSize)
+MODES = bidict(dict(maximum=QtWidgets.QLayout.SetMaximumSize,
+                    fixed=QtWidgets.QLayout.SetFixedSize))
 
-ROLES = dict(left=QtWidgets.QFormLayout.LabelRole,
-             right=QtWidgets.QFormLayout.FieldRole,
-             both=QtWidgets.QFormLayout.SpanningRole)
+ROLES = bidict(dict(left=QtWidgets.QFormLayout.LabelRole,
+                    right=QtWidgets.QFormLayout.FieldRole,
+                    both=QtWidgets.QFormLayout.SpanningRole))
 
 
 class FormLayout(QtWidgets.QFormLayout):
@@ -45,7 +47,7 @@ class FormLayout(QtWidgets.QFormLayout):
         positions = []
         for i, item in enumerate(list(self)):
             widgets.append(item)
-            positions.append(self.getItemPosition(i))
+            positions.append(self.get_item_pos(i))
         return dict(widgets=widgets, positions=positions)
 
     def __setstate__(self, state):
@@ -89,9 +91,9 @@ class FormLayout(QtWidgets.QFormLayout):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
         if isinstance(widget, QtWidgets.QLayout):
-            self.setLayout(row, self.SpanningRole, widget)
+            self.setLayout(row, ROLES[role], widget)
         else:
-            self.setWidget(row, self.SpanningRole, widget)
+            self.setWidget(row, ROLES[role], widget)
 
     def get_widget(self, row: int, role: str = "both"):
         item = self.itemAt(row, ROLES[role])
@@ -100,9 +102,13 @@ class FormLayout(QtWidgets.QFormLayout):
             widget = item.layout()
         return widget
 
+    def get_item_pos(self, index):
+        pos = self.getItemPosition(index)
+        return pos[0], ROLES.inv[pos[1]]
+
     @classmethod
     def from_dict(cls, dct, parent=None):
-        formlayout = FormLayout(parent)
+        formlayout = cls(parent)
         for i, (k, v) in enumerate(dct.items(), start=1):
             if k is not None:
                 formlayout.set_label_widget(i, k)
@@ -117,7 +123,6 @@ if __name__ == "__main__":
            None: widgets.Label("test 2")}
     layout = FormLayout.from_dict(dct)
     layout.set_spanning_widget(3, "hallo")
-    print(layout.get_widget(3, role="both"))
     widget = widgets.Widget()
     widget.setLayout(layout)
     widget.show()

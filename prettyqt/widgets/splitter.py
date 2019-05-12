@@ -3,16 +3,19 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
+
+ORIENTATIONS = bidict(dict(horizontal=QtCore.Qt.Horizontal,
+                           vertical=QtCore.Qt.Vertical))
 
 
 class Splitter(QtWidgets.QSplitter):
 
     def __init__(self, orientation="horizontal", parent=None):
-        o = QtCore.Qt.Vertical if orientation == "vertical" else QtCore.Qt.Horizontal
-        super().__init__(o, parent)
+        super().__init__(ORIENTATIONS[orientation], parent)
 
     def __getitem__(self, index):
         if isinstance(index, int):
@@ -22,17 +25,15 @@ class Splitter(QtWidgets.QSplitter):
 
     def __getstate__(self):
         return dict(items=self.get_children(),
-                    orientation=int(self.orientation()),
+                    orientation=self.get_orientation(),
                     handle_width=self.handleWidth(),
                     children_collapsible=self.childrenCollapsible(),
                     opaque_resize=self.opaqueResize())
 
     def __setstate__(self, state):
-        self.__init__()
+        self.__init__(state["orientation"])
         for item in state["items"]:
             self.addWidget(item)
-        orientation = QtCore.Qt.Orientation(state["orientation"])
-        self.setOrientation(orientation)
         self.setHandleWidth(state["handle_width"])
         self.setChildrenCollapsible(state["children_collapsible"])
         self.setOpaqueResize(state["opaque_resize"])
@@ -51,7 +52,7 @@ class Splitter(QtWidgets.QSplitter):
 
     @classmethod
     def from_widgets(cls, widgets, horizontal: bool = False, parent=None):
-        orientation = QtCore.Qt.Horizontal if horizontal else QtCore.Qt.Vertical
+        orientation = "horizontal" if horizontal else "vertical"
         splitter = cls(orientation, parent=parent)
         for widget in widgets:
             splitter.addWidget(widget)
@@ -60,6 +61,12 @@ class Splitter(QtWidgets.QSplitter):
     def set_expanding(self):
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
                            QtWidgets.QSizePolicy.Expanding)
+
+    def set_orientation(self, orientation):
+        self.setOrientation(ORIENTATIONS[orientation])
+
+    def get_orientation(self):
+        return ORIENTATIONS.inv[self.orientation()]
 
 
 if __name__ == "__main__":
