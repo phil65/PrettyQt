@@ -18,8 +18,8 @@ class Icon(QtGui.QIcon):
             icon = str(icon)
         super().__init__(icon)
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()
 
     def __getstate__(self):
         ba = QtCore.QByteArray()
@@ -32,7 +32,7 @@ class Icon(QtGui.QIcon):
         stream = QtCore.QDataStream(ba, QtCore.QIODevice.ReadOnly)
         px = QtGui.QPixmap()
         stream >> px
-        self.__init__(px)
+        super().__init__(px)
 
     @classmethod
     def for_color(cls, color: str):
