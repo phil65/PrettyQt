@@ -16,6 +16,12 @@ SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
 
 class ListWidget(QtWidgets.QListWidget):
 
+    def __repr__(self):
+        return f"ListWidget: {self.count()} children"
+
+    def __getitem__(self, index):
+        return self.item(index)
+
     def __add__(self, other):
         if isinstance(other, QtWidgets.QListWidgetItem):
             self.addItem(other)

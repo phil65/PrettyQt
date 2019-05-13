@@ -13,6 +13,9 @@ class StandardItemModel(QtGui.QStandardItemModel):
     def __repr__(self):
         return f"StandardItemModel: {self.count()} children"
 
+    def __getitem__(self, index):
+        return self.item(index)
+
     def __iter__(self):
         return iter(self.get_children())
 
