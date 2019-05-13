@@ -13,7 +13,7 @@ class Wizard(QtWidgets.QWizard):
     def add_widget_as_page(self, widget):
         page = widgets.WizardPage(self)
         layout = widgets.BoxLayout("vertical", self)
-        layout.addWidget(widget)
+        layout += widget
         page.setLayout(layout)
 
 

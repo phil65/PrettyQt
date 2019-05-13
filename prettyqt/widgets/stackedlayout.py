@@ -62,8 +62,8 @@ if __name__ == "__main__":
     widget = widgets.Widget()
     widget2 = widgets.RadioButton("Test")
     widget3 = widgets.RadioButton("Test 2")
-    layout.addWidget(widget2)
-    layout.addWidget(widget3)
+    layout += widget2
+    layout += widget3
     widget.setLayout(layout)
     widget.show()
     app.exec_()

@@ -44,7 +44,7 @@ if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = GroupBox()
     ly = widgets.BoxLayout()
-    ly.addWidget(widgets.RadioButton("test"))
+    ly += widgets.RadioButton("test")
     widget.setLayout(ly)
     widget.show()
     app.exec_()

@@ -57,11 +57,11 @@ def test_imageviewer():
 def test_flowlayout():
     widget = widgets.Widget()
     layout = custom_widgets.FlowLayout()
-    layout.addWidget(widgets.PushButton("Short"))
-    layout.addWidget(widgets.PushButton("Longer"))
-    layout.addWidget(widgets.PushButton("Different text"))
-    layout.addWidget(widgets.PushButton("More text"))
-    layout.addWidget(widgets.PushButton("Even longer button text"))
+    layout += widgets.PushButton("Short")
+    layout += widgets.PushButton("Longer")
+    layout += widgets.PushButton("Different text")
+    layout += widgets.PushButton("More text")
+    layout += widgets.PushButton("Even longer button text")
     widget.setLayout(layout)
     widget.show()
 

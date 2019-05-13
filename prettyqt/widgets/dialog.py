@@ -74,7 +74,7 @@ class Dialog(QtWidgets.QDialog):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
     def add_widget(self, widget):
-        self.box.addWidget(widget)
+        self.box += widget
         return widget
 
     def set_icon(self, icon):
@@ -88,7 +88,7 @@ class Dialog(QtWidgets.QDialog):
         button_box.add_buttons(["cancel", "ok"])
         button_box.accepted.connect(self.accepted)
         button_box.rejected.connect(self.reject)
-        self.box.addWidget(button_box)
+        self.box += button_box
 
     def accepted(self):
         self.close()

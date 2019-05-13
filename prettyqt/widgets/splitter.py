@@ -60,7 +60,7 @@ class Splitter(QtWidgets.QSplitter):
         orientation = "horizontal" if horizontal else "vertical"
         splitter = cls(orientation, parent=parent)
         for widget in widgets:
-            splitter.addWidget(widget)
+            splitter += widget
         return splitter
 
     def set_expanding(self):

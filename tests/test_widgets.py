@@ -29,7 +29,7 @@ def test_action():
 def test_boxlayout():
     layout = widgets.BoxLayout("horizontal")
     widget = widgets.RadioButton("test")
-    layout.addWidget(widget)
+    layout += widget
     layout.set_size_mode("maximum")
     layout.set_margin(0)
     with open("data.pkl", "wb") as jar:
@@ -422,7 +422,7 @@ def test_statusbar():
 def test_stackedlayout():
     layout = widgets.StackedLayout()
     widget = widgets.RadioButton("test")
-    layout.addWidget(widget)
+    layout += widget
     layout.set_size_mode("maximum")
     layout.set_margin(0)
     with open("data.pkl", "wb") as jar:
@@ -447,7 +447,9 @@ def test_spinbox():
 def test_splitter():
     widget = widgets.Splitter("vertical")
     test = widgets.Label("test")
+    test2 = widgets.Label("test2")
     widget.add_widget(test)
+    widget += test2
     assert widget[0] == test
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
