@@ -27,16 +27,15 @@ class PopupInfo(QtWidgets.QDialog):
         self.setStyleSheet("background-color: black;")
         self.label.setStyleSheet("color: white;")
         # self.setStyleSheet("")
-        layout.addWidget(self.label)
+        layout += self.label
         # signals.signals.popup_info.connect(self.popup)
 
     def show(self, *args, **kwargs):
         self.hide()
         screen_geo = widgets.Application.desktop().screenGeometry()
         size = self.label.sizeHint()
-        x = (screen_geo.width() - size.width()) / 2
-        y = (screen_geo.height() - size.height()) / 2
-        self.move(x, y - 200)
+        new_size = (screen_geo - size) / 2
+        self.move(new_size.width(), new_size.height() - 200)
         super().show(*args, **kwargs)
         self.timer.start(2500)
 

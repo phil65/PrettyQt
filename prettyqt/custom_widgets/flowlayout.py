@@ -24,7 +24,7 @@ class FlowLayout(widgets.Layout):
         return dict(items=self.get_children())
 
     def __add__(self, other):
-        if isinstance(other, (widgets.Widget, widgets.Layout)):
+        if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
             self.add_item(other)
             return self
 
@@ -86,7 +86,7 @@ class FlowLayout(widgets.Layout):
         return height
 
     def setGeometry(self, rect):
-        super(FlowLayout, self).setGeometry(rect)
+        super().setGeometry(rect)
         self.do_layout(rect, False)
 
     def sizeHint(self):
@@ -139,11 +139,11 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     widget = QtWidgets.QWidget()
     layout = FlowLayout()
-    layout.addWidget(widgets.PushButton("Short"))
-    layout.addWidget(widgets.PushButton("Longer"))
-    layout.addWidget(widgets.PushButton("Different text"))
-    layout.addWidget(widgets.PushButton("More text"))
-    layout.addWidget(widgets.PushButton("Even longer button text"))
+    layout += widgets.PushButton("Short")
+    layout += widgets.PushButton("Longer")
+    layout += widgets.PushButton("Different text")
+    layout += widgets.PushButton("More text")
+    layout += widgets.PushButton("Even longer button text")
     widget.setLayout(layout)
     widget.show()
     sys.exit(app.exec_())
