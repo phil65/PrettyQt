@@ -33,7 +33,7 @@ class StackedLayout(QtWidgets.QStackedLayout):
         return self.count()
 
     def __add__(self, other):
-        if isinstance(other, (widgets.Widget, widgets.Layout)):
+        if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
             self.add_item(other)
             return self
 

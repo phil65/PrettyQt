@@ -43,7 +43,7 @@ class FormLayout(QtWidgets.QFormLayout):
         return self.rowCount()
 
     def __add__(self, other):
-        if isinstance(other, (widgets.Widget, widgets.Layout)):
+        if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
             self.addRow(other)
             return self
         if isinstance(other, tuple):
