@@ -21,6 +21,11 @@ class Menu(QtWidgets.QMenu):
     def __iter__(self):
         return iter(self.actions())
 
+    def __add__(self, other):
+        if isinstance(other, QtWidgets.QAction):
+            self.addAction(other)
+            return self
+
     def set_icon(self, icon):
         """set the icon for the menu
 

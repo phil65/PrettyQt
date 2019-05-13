@@ -10,6 +10,11 @@ from prettyqt import widgets
 
 class MenuBar(QtWidgets.QMenuBar):
 
+    def __add__(self, other):
+        if isinstance(other, QtWidgets.QAction):
+            self.add_action(other)
+            return self
+
     def add_action(self, action):
         self.addAction(action)
 

@@ -14,6 +14,14 @@ class StatusBar(QtWidgets.QStatusBar):
         super().__init__(*args, **kwargs)
         self.progress_bar = widgets.ProgressBar()
 
+    def __add__(self, other):
+        if isinstance(other, QtWidgets.QAction):
+            self.add_action(other)
+            return self
+        if isinstance(other, QtWidgets.QWidget):
+            self.addWidget(other)
+            return self
+
     def setup_default_bar(self):
         # This is simply to show the bar
         self.progress_bar.hide()
