@@ -24,6 +24,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         return dict(text=self.text(),
                     tooltip=self.toolTip(),
                     statustip=self.statusTip(),
+                    checkstate=self.get_checkstate(),
                     icon=gui.Icon(self.icon()),
                     data=self.data(QtCore.Qt.UserRole))
 
@@ -34,3 +35,22 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         self.setStatusTip(state["statustip"])
         self.setData(QtCore.Qt.UserRole, state["data"])
         self.setIcon(state["icon"])
+        self.set_checkstate(state["checkstate"])
+
+    def set_checkstate(self, state: str):
+        """set checkstate of the checkbox
+
+        valid values are: unchecked, partial, checked
+
+        Args:
+            state: checkstate to use
+
+        Raises:
+            ValueError: invalid checkstate
+        """
+        if state not in STATES:
+            raise ValueError("Invalid checkstate.")
+        self.setCheckState(STATES[state])
+
+    def get_checkstate(self):
+        return STATES.inv[self.checkState()]

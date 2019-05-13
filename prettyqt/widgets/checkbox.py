@@ -55,10 +55,22 @@ class CheckBox(QtWidgets.QCheckBox):
         self.setEnabled(False)
 
     def set_checkstate(self, state: str):
+        """set checkstate of the checkbox
+
+        valid values are: unchecked, partial, checked
+
+        Args:
+            state: checkstate to use
+
+        Raises:
+            ValueError: invalid checkstate
+        """
+        if state not in STATES:
+            raise ValueError("Invalid checkstate.")
         self.setCheckState(STATES[state])
 
     def get_checkstate(self):
-        return STATES.inv[self.isTristate()]
+        return STATES.inv[self.checkState()]
 
     def get_value(self):
         return self.isChecked()
