@@ -51,6 +51,14 @@ def test_keysequence():
     assert(gui.KeySequence.to_shortcut_str(0x41, QtCore.Qt.ShiftModifier) == "Shift+A")
 
 
+def test_standarditem():
+    s = gui.StandardItem()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(s, jar)
+    with open("data.pkl", "rb") as jar:
+        s = pickle.load(jar)
+
+
 def test_standarditemmodel():
     model = gui.StandardItemModel()
     model.add_item("test")
@@ -99,10 +107,6 @@ def test_regexpvalidator():
         val = pickle.load(jar)
     assert val.get_regex() == "[0-9]"
     assert val.is_valid_value("0")
-
-
-def test_standarditem():
-    gui.StandardItem()
 
 
 def test_syntaxhighlighter():
