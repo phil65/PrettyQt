@@ -34,8 +34,9 @@ class PopupInfo(QtWidgets.QDialog):
         self.hide()
         screen_geo = widgets.Application.desktop().screenGeometry()
         size = self.label.sizeHint()
-        new_size = (screen_geo - size) / 2
-        self.move(new_size.width(), new_size.height() - 200)
+        x = (screen_geo.width() - size.width()) / 2
+        y = (screen_geo.height() - size.height()) / 2
+        self.move(x, y - 200)
         super().show(*args, **kwargs)
         self.timer.start(2500)
 
