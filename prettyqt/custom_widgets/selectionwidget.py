@@ -13,10 +13,10 @@ class SelectionWidget(widgets.GroupBox):
 
     def __init__(self, label="", layout="horizontal", parent=None):
         super().__init__(label, parent)
-        self.layout = widgets.BoxLayout(layout)
+        self.box = widgets.BoxLayout(layout)
         self.rb_other = widgets.RadioButton()
         self.buttons = dict()
-        self.setLayout(self.layout)
+        self.setLayout(self.box)
 
     def __iter__(self):
         return iter(self.buttons.items())
@@ -36,7 +36,7 @@ class SelectionWidget(widgets.GroupBox):
         self.buttons[rb] = data
         if len(self.buttons) == 1:
             rb.setChecked(True)
-        self.layout.addWidget(rb)
+        self.box += rb
 
     def add_custom(self, label: str = "Other", regex: Optional[str] = None):
         self.lineedit_custom_sep = widgets.LineEdit(self)
@@ -47,8 +47,8 @@ class SelectionWidget(widgets.GroupBox):
         self.lineedit_custom_sep.textChanged.connect(lambda: self.update_choice(True))
         if regex:
             self.lineedit_custom_sep.set_regex_validator(regex)
-        self.layout.addWidget(self.rb_other)
-        self.layout.addWidget(self.lineedit_custom_sep)
+        self.box += self.rb_other
+        self.box += self.lineedit_custom_sep
 
     def current_choice(self):
         for k, v in self.buttons.items():
