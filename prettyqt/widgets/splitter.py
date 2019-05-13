@@ -45,9 +45,10 @@ class Splitter(QtWidgets.QSplitter):
         return self.count()
 
     def __add__(self, other):
-        if isinstance(other, widgets.Widget):
+        if isinstance(other, QtWidgets.QWidget):
             self.add_widget(other)
             return self
+        raise TypeError(f"Invalid type: {type(other)}")
 
     def get_children(self):
         return [self[i] for i in range(self.count())]

@@ -36,7 +36,7 @@ class Label(QtWidgets.QLabel):
 
     def __getstate__(self):
         return dict(text=self.text(),
-                    scaled_contents=self.scaledContents(),
+                    scaled_contents=self.hasScaledContents(),
                     word_wrap=self.wordWrap())
 
     def __setstate__(self, state):
