@@ -14,6 +14,11 @@ class StandardItemModel(QtGui.QStandardItemModel):
         items = [self.item(index) for index in range(self.rowCount())]
         return iter(items)
 
+    def __add__(self, other):
+        if isinstance(other, QtGui.QStandardItem):
+            self.appendRow(other)
+            return self
+
     def add_item(self, label):
         item = gui.StandardItem(label)
         self.appendRow(item)

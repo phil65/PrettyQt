@@ -62,6 +62,9 @@ def test_standarditem():
 def test_standarditemmodel():
     model = gui.StandardItemModel()
     model.add_item("test")
+    for item in model:
+        pass
+    model += gui.StandardItem("Item")
 
 
 def test_painter():
