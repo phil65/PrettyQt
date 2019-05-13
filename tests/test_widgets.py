@@ -308,6 +308,14 @@ def test_listview():
     widget.close()
 
 
+def test_listwidgetitem():
+    item = widgets.ListWidgetItem()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(item, jar)
+    with open("data.pkl", "rb") as jar:
+        item = pickle.load(jar)
+
+
 def test_mainwindow():
     window = widgets.MainWindow()
     window.set_icon("mdi.timer")

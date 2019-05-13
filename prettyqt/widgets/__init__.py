@@ -36,6 +36,7 @@ from .dockwidget import DockWidget
 
 from .mainwindow import MainWindow
 
+from .listwidgetitem import ListWidgetItem
 from .action import Action
 from .widgetaction import WidgetAction
 from .toolbutton import ToolButton
@@ -104,6 +105,7 @@ __all__ = ["Application",
            "Slider",
            "StyleOptionSlider",
            "Frame",
+           "ListWidgetItem",
            "Action",
            "WidgetAction",
            "ToolButton",
