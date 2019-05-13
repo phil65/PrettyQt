@@ -6,6 +6,8 @@
 from qtpy import QtWidgets, QtCore
 import qtawesome as qta
 
+from prettyqt import widgets
+
 SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
                        extended=QtWidgets.QAbstractItemView.ExtendedSelection,
                        multi=QtWidgets.QAbstractItemView.MultiSelection,
@@ -50,7 +52,7 @@ class ListWidget(QtWidgets.QListWidget):
                  label: str,
                  data=None,
                  icon=None):
-        item = QtWidgets.QListWidgetItem(label)
+        item = widgets.ListWidgetItem(label)
         if icon is not None:
             if isinstance(icon, str):
                 icon = qta.icon(icon)
@@ -63,6 +65,7 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     widget = ListWidget()
+    widget.add_item("test", icon="mdi.timer")
     widget.add_item("test", icon="mdi.timer")
     widget.show()
     app.exec_()
