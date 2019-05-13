@@ -21,7 +21,8 @@ class PushButton(QtWidgets.QPushButton):
         return f"PushButton: {self.__getstate__()}"
 
     def __getstate__(self):
-        return dict(text=self.text(),
+        return dict(object_name=self.objectName(),
+                    text=self.text(),
                     icon=gui.Icon(self.icon()),
                     checkable=self.isCheckable(),
                     checked=self.isChecked(),
@@ -31,6 +32,7 @@ class PushButton(QtWidgets.QPushButton):
 
     def __setstate__(self, state):
         self.__init__(state["text"])
+        self.setObjectName(state["object_name"])
         self.set_icon(state["icon"])
         self.setEnabled(state["enabled"])
         self.setChecked(state["checked"])

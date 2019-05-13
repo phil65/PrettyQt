@@ -20,7 +20,8 @@ class RadioButton(QtWidgets.QRadioButton):
         return f"RadioButton: {self.__getstate__()}"
 
     def __getstate__(self):
-        return dict(checkable=self.isCheckable(),
+        return dict(object_name=self.objectName(),
+                    checkable=self.isCheckable(),
                     icon=gui.Icon(self.icon()),
                     checked=self.isChecked(),
                     text=self.text(),
@@ -30,6 +31,7 @@ class RadioButton(QtWidgets.QRadioButton):
 
     def __setstate__(self, state):
         super().__init__()
+        self.setObjectName(state["object_name"])
         self.set_icon(state["icon"])
         self.setChecked(state["checked"])
         self.setText(state["text"])

@@ -25,7 +25,8 @@ class CheckBox(QtWidgets.QCheckBox):
         return f"CheckBox: {self.__getstate__()}"
 
     def __getstate__(self):
-        return dict(checkable=self.isCheckable(),
+        return dict(object_name=self.objectName(),
+                    checkable=self.isCheckable(),
                     checkstate=self.get_checkstate(),
                     tooltip=self.toolTip(),
                     statustip=self.statusTip(),
@@ -35,6 +36,7 @@ class CheckBox(QtWidgets.QCheckBox):
 
     def __setstate__(self, state):
         super().__init__()
+        self.setObjectName(state["object_name"])
         self.setCheckable(state["checkable"])
         self.setTristate(state["is_tristate"])
         self.set_checkstate(state["checkstate"])
