@@ -6,7 +6,7 @@
 import qtawesome as qta
 from qtpy import QtWidgets
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, gui
 
 
 class CommandLinkButton(QtWidgets.QCommandLinkButton):
@@ -22,7 +22,7 @@ class CommandLinkButton(QtWidgets.QCommandLinkButton):
 
     def __getstate__(self):
         return dict(title=self.text(),
-                    icon=self.icon(),
+                    icon=gui.Icon(self.icon()),
                     description=self.description(),
                     checkable=self.isCheckable(),
                     checked=self.isChecked(),

@@ -6,12 +6,14 @@
 import qtawesome as qta
 from qtpy import QtWidgets
 
+from prettyqt import gui
+
 
 class ToolButton(QtWidgets.QToolButton):
 
     def __getstate__(self):
         return dict(text=self.text(),
-                    icon=self.icon(),
+                    icon=gui.Icon(self.icon()),
                     checkable=self.isCheckable(),
                     checked=self.isChecked(),
                     tooltip=self.toolTip(),

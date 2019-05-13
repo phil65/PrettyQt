@@ -6,7 +6,7 @@
 import qtawesome as qta
 from qtpy import QtWidgets
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, gui
 
 
 class PushButton(QtWidgets.QPushButton):
@@ -22,7 +22,7 @@ class PushButton(QtWidgets.QPushButton):
 
     def __getstate__(self):
         return dict(text=self.text(),
-                    icon=self.icon(),
+                    icon=gui.Icon(self.icon()),
                     checkable=self.isCheckable(),
                     checked=self.isChecked(),
                     tooltip=self.toolTip(),

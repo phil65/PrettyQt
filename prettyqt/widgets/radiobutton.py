@@ -5,7 +5,7 @@
 
 import qtawesome as qta
 from qtpy import QtWidgets
-from prettyqt import core
+from prettyqt import core, gui
 
 
 class RadioButton(QtWidgets.QRadioButton):
@@ -21,7 +21,7 @@ class RadioButton(QtWidgets.QRadioButton):
 
     def __getstate__(self):
         return dict(checkable=self.isCheckable(),
-                    icon=self.icon(),
+                    icon=gui.Icon(self.icon()),
                     checked=self.isChecked(),
                     text=self.text(),
                     tooltip=self.toolTip(),
