@@ -21,6 +21,23 @@ class ListWidget(QtWidgets.QListWidget):
             self.addItem(other)
             return self
 
+    def __iter__(self):
+        return iter(self.get_children())
+
+    def __len__(self):
+        return self.count()
+
+    def __getstate__(self):
+        return dict(items=self.get_children())
+
+    def __setstate__(self, state):
+        self.__init__()
+        for item in state["items"]:
+            self.addItem(item)
+
+    def get_children(self):
+        return [self.item(index) for index in range(self.count())]
+
     def set_selection_mode(self, mode: str):
         """set selection mode for given item view
 
