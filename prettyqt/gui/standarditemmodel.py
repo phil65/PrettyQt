@@ -10,6 +10,9 @@ from prettyqt import gui
 
 class StandardItemModel(QtGui.QStandardItemModel):
 
+    def __repr__(self):
+        return f"StandardItemModel: {self.count()} children"
+
     def __iter__(self):
         return iter(self.get_children())
 
