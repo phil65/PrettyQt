@@ -64,6 +64,10 @@ def test_standarditemmodel():
     model.add_item("test")
     for item in model:
         pass
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(model, jar)
+    with open("data.pkl", "rb") as jar:
+        model = pickle.load(jar)
     model += gui.StandardItem("Item")
 
 
