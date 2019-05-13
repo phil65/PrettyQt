@@ -7,4 +7,6 @@ from qtpy import QtWidgets
 
 
 class Layout(QtWidgets.QLayout):
-    pass
+
+    def set_margin(self, margin: int):
+        self.setContentsMargins(margin, margin, margin, margin)

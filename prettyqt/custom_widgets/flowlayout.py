@@ -8,12 +8,12 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import widgets
 
 
-class FlowLayout(QtWidgets.QLayout):
+class FlowLayout(widgets.Layout):
 
     def __init__(self, parent=None, margin=0, spacing=-1):
         super().__init__(parent)
         if parent is not None:
-            self.setMargin(margin)
+            self.set_margin(margin)
         self.setSpacing(spacing)
         self.items = []
 
