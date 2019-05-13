@@ -63,6 +63,7 @@ from .datetimeedit import DateTimeEdit
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
 from .progressbar import ProgressBar
+from .listwidget import ListWidget
 from .listview import ListView
 from .treeview import TreeView
 from .tableview import TableView
@@ -132,6 +133,7 @@ __all__ = ["Application",
            "TextBrowser",
            "ProgressBar",
            "ListView",
+           "ListWidget",
            "TreeView",
            "TableView",
            "SplashScreen",
