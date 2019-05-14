@@ -32,6 +32,11 @@ SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
 
 class TableView(QtWidgets.QTableView):
 
+    def __len__(self):
+        if self.model() is not None:
+            return self.model().rowCount()
+        return 0
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setObjectName(self.__class__.__name__)

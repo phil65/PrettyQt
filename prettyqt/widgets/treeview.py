@@ -26,6 +26,11 @@ SCROLLBAR_POLICY = dict(always_on=QtCore.Qt.ScrollBarAlwaysOn,
 
 class TreeView(QtWidgets.QTreeView):
 
+    def __len__(self):
+        if self.model() is not None:
+            return self.model().rowCount()
+        return 0
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setObjectName(self.__class__.__name__)

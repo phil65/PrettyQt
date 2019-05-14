@@ -13,6 +13,9 @@ class AbstractTableModel(QtCore.QAbstractTableModel):
 
     HEADER = []
 
+    def __len__(self):
+        return self.rowCount()
+
     def headerData(self, offset: int, orientation, role):
         if role == QtCore.Qt.DisplayRole:
             if orientation == QtCore.Qt.Horizontal:
