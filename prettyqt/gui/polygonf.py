@@ -5,8 +5,6 @@
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import core
-
 
 class PolygonF(QtGui.QPolygonF):
 
@@ -38,4 +36,5 @@ class PolygonF(QtGui.QPolygonF):
 
 
 if __name__ == "__main__":
+    from prettyqt import core
     poly = PolygonF((core.Point(1, 1), core.Point(2, 2)))

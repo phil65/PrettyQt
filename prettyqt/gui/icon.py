@@ -8,7 +8,7 @@ import pathlib
 import qtawesome as qta
 from qtpy import QtCore, QtGui
 
-from prettyqt import gui, widgets
+from prettyqt import gui
 
 
 class Icon(QtGui.QIcon):
@@ -47,5 +47,6 @@ class Icon(QtGui.QIcon):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
     app = widgets.Application.create_default_app()
     icon = Icon.for_color("green")

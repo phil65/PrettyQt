@@ -6,7 +6,7 @@
 from qtpy import QtCore, QtWidgets
 from qtpy.QtCharts import QtCharts
 
-from prettyqt import charts, core, gui, widgets
+from prettyqt import charts, core, gui
 
 ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
                   right=QtCore.Qt.AlignRight,
@@ -65,7 +65,7 @@ class ChartView(QtCharts.QChartView):
         override to allow dragging the chart
         """
         if event.button() == QtCore.Qt.RightButton:
-            widgets.Application.restoreOverrideCursor()
+            QtWidgets.QApplication.restoreOverrideCursor()
             event.accept()
             return None
         super().mouseReleaseEvent(event)
@@ -76,7 +76,7 @@ class ChartView(QtCharts.QChartView):
         """
         if event.button() == QtCore.Qt.RightButton:
             cursor = gui.Cursor(QtCore.Qt.SizeAllCursor)
-            widgets.Application.setOverrideCursor(cursor)
+            QtWidgets.QApplication.setOverrideCursor(cursor)
             self.last_mouse_pos = event.pos()
             event.accept()
 
@@ -96,7 +96,7 @@ class ChartView(QtCharts.QChartView):
             self.last_mouse_pos = event.pos()
             event.accept()
 
-            widgets.Application.restoreOverrideCursor()
+            QtWidgets.QApplication.restoreOverrideCursor()
 
         super().mouseMoveEvent(event)
 
