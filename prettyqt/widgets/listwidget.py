@@ -3,15 +3,17 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
+
 from qtpy import QtWidgets, QtCore
 import qtawesome as qta
 
 from prettyqt import widgets
 
-SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
-                       extended=QtWidgets.QAbstractItemView.ExtendedSelection,
-                       multi=QtWidgets.QAbstractItemView.MultiSelection,
-                       none=QtWidgets.QAbstractItemView.NoSelection)
+SELECTION_MODES = bidict(dict(single=QtWidgets.QAbstractItemView.SingleSelection,
+                              extended=QtWidgets.QAbstractItemView.ExtendedSelection,
+                              multi=QtWidgets.QAbstractItemView.MultiSelection,
+                              none=QtWidgets.QAbstractItemView.NoSelection))
 
 
 class ListWidget(QtWidgets.QListWidget):
@@ -34,15 +36,24 @@ class ListWidget(QtWidgets.QListWidget):
         return self.count()
 
     def __getstate__(self):
-        return dict(items=self.get_children())
+        return dict(items=self.get_children(),
+                    selection_mode=self.get_selection_mode(),
+                    sorting_enabled=self.isSortingEnabled(),
+                    current_row=self.currentRow())
 
     def __setstate__(self, state):
         self.__init__()
+        self.set_selection_mode(state["selection_mode"])
+        self.setSortingEnabled(state["sorting_enabled"])
+        self.setCurrentRow(state["current_row"])
         for item in state["items"]:
             self.addItem(item)
 
     def get_children(self):
         return [self.item(index) for index in range(self.count())]
+
+    def get_selection_mode(self):
+        return SELECTION_MODES.inv[self.selectionMode()]
 
     def set_selection_mode(self, mode: str):
         """set selection mode for given item view

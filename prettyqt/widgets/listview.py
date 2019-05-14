@@ -3,15 +3,20 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
+
 from qtpy import QtWidgets
 
-SELECTION_MODES = dict(single=QtWidgets.QAbstractItemView.SingleSelection,
-                       extended=QtWidgets.QAbstractItemView.ExtendedSelection,
-                       multi=QtWidgets.QAbstractItemView.MultiSelection,
-                       none=QtWidgets.QAbstractItemView.NoSelection)
+SELECTION_MODES = bidict(dict(single=QtWidgets.QAbstractItemView.SingleSelection,
+                              extended=QtWidgets.QAbstractItemView.ExtendedSelection,
+                              multi=QtWidgets.QAbstractItemView.MultiSelection,
+                              none=QtWidgets.QAbstractItemView.NoSelection))
 
 
 class ListView(QtWidgets.QListView):
+
+    def get_selection_mode(self):
+        return SELECTION_MODES.inv[self.selectionMode()]
 
     def set_selection_mode(self, mode: str):
         """set selection mode for given item view
