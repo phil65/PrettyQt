@@ -63,6 +63,7 @@ class Application(QtWidgets.QApplication):
         for widget in widget_list:
             if isinstance(widget, QtWidgets.QMainWindow):
                 return widget
+        return None
 
     @classmethod
     def create_default_app(cls) -> "Application":

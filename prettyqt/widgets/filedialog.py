@@ -116,8 +116,7 @@ class FileDialog(QtWidgets.QFileDialog):
 
     def selected_file(self) -> Optional[pathlib.Path]:
         selected = self.selectedFiles()
-        if selected:
-            return pathlib.Path(selected[0])
+        return pathlib.Path(selected[0]) if selected else None
 
     def choose_folder(self) -> Optional[List[pathlib.Path]]:
         self.setFileMode(self.Directory)

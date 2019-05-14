@@ -57,7 +57,9 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def set_stylesheet(self, item, dct: Dict[str, str]) -> str:
         ss = "; ".join(f"{k.replace('_', '-')}: {v}" for k, v in dct.items())
-        self.setStyleSheet(f"{item} {{{ss};}}")
+        stylesheet = f"{item} {{{ss};}}"
+        self.setStyleSheet(stylesheet)
+        return stylesheet
 
     def add_widget_as_dock(self,
                            name: str,

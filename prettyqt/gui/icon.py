@@ -35,8 +35,8 @@ class Icon(QtGui.QIcon):
         super().__init__(px)
 
     @classmethod
-    def for_color(cls, color: str):
-        color = gui.Color.from_text(color)
+    def for_color(cls, color_str: str):
+        color = gui.Color.from_text(color_str)
         if color.isValid():
             bitmap = gui.Pixmap(16, 16)
             bitmap.fill(color)
