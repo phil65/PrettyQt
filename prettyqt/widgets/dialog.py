@@ -48,17 +48,16 @@ class Dialog(QtWidgets.QDialog):
                     size=(self.size().width(), self.size().height()))
 
     def __setstate__(self, state):
-        super().__init__()
-        self.setWindowTitle(state["title"])
-        self.set_icon(state["icon"])
+        self.__init__(title=state["title"],
+                      icon=state["icon"])
         if state["layout"]:
             self.setLayout(state["layout"])
+        self.box = state["layout"]
         self.resize(state["size"])
         self.setSizeGripEnabled(state["has_sizegrip"])
+        self.resize(*state["size"])
         if state["is_maximized"]:
             self.showMaximized()
-        self.resize(*state["size"])
-        self.box = self.layout()
 
     def resize(self, *size):
         if isinstance(size[0], tuple):
@@ -85,11 +84,10 @@ class Dialog(QtWidgets.QDialog):
             self.setWindowIcon(icon)
 
     def add_buttonbox(self):
-        button_box = widgets.DialogButtonBox()
-        button_box.add_buttons(["cancel", "ok"])
-        button_box.accepted.connect(self.accepted)
-        button_box.rejected.connect(self.reject)
+        button_box = widgets.DialogButtonBox.create(ok=self.accepted,
+                                                    cancel=self.reject)
         self.box += button_box
+        return button_box
 
     def accepted(self):
         self.close()
