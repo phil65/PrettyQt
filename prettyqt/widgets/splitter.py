@@ -6,8 +6,6 @@
 from bidict import bidict
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets
-
 ORIENTATIONS = bidict(dict(horizontal=QtCore.Qt.Horizontal,
                            vertical=QtCore.Qt.Vertical))
 
@@ -21,7 +19,7 @@ class Splitter(QtWidgets.QSplitter):
         if isinstance(index, int):
             return self.widget(index)
         else:
-            return self.findChild(widgets.Widget, index)
+            return self.findChild(QtWidgets.QWidget, index)
 
     def __getstate__(self):
         return dict(items=self.get_children(),

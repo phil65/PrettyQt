@@ -31,7 +31,7 @@ class TabWidget(QtWidgets.QTabWidget):
         if isinstance(index, int):
             return self.widget(index)
         else:
-            return self.findChild(widgets.Widget, index)
+            return self.findChild(QtWidgets.QWidget, index)
 
     def set_detachable(self):
         self.tab_bar.on_detach.connect(self.detach_tab)

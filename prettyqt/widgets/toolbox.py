@@ -15,7 +15,7 @@ class ToolBox(QtWidgets.QToolBox):
         if isinstance(index, int):
             return self.widget(index)
         else:
-            return self.findChild(widgets.Widget, index)
+            return self.findChild(QtWidgets.QWidget, index)
 
     def __getstate__(self):
         children = list()
