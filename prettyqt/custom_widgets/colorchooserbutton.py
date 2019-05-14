@@ -62,6 +62,12 @@ class ColorChooserButton(widgets.Widget):
     def is_valid(self):
         return self.lineedit.is_valid()
 
+    def get_value(self):
+        return self.current_color
+
+    def set_value(self, value):
+        self.set_color(value)
+
 
 if __name__ == "__main__":
     app = widgets.Application(sys.argv)

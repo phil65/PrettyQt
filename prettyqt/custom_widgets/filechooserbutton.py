@@ -54,6 +54,12 @@ class FileChooserButton(widgets.Widget):
         self.path = path
         self.lineedit.setText(str(path))
 
+    def get_value(self):
+        return self.path
+
+    def set_value(self, value):
+        self.set_path(value)
+
 
 if __name__ == "__main__":
     app = widgets.Application(sys.argv)
