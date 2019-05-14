@@ -20,6 +20,7 @@ class GroupBox(QtWidgets.QGroupBox):
     def __getstate__(self):
         return dict(checkable=self.isCheckable(),
                     checked=self.isChecked(),
+                    tooltip=self.toolTip(),
                     layout=self.layout(),
                     flat=self.isFlat(),
                     # alignment=self.alignment(),
@@ -31,6 +32,7 @@ class GroupBox(QtWidgets.QGroupBox):
         self.setCheckable(state["checkable"])
         self.setChecked(state["checked"])
         self.setFlat(state["flat"])
+        self.setToolTip(state["tooltip"])
         # self.setAlignment(state["alignment"])
 
     def set_alignment(self, alignment):
@@ -38,6 +40,10 @@ class GroupBox(QtWidgets.QGroupBox):
 
     def set_layout(self, layout):
         self.setLayout(layout)
+
+    def set_enabled(self, state):
+        for widget in self.layout():
+            widget.setEnabled(state)
 
 
 if __name__ == "__main__":
