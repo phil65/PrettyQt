@@ -19,9 +19,6 @@ class StandardItemModel(QtGui.QStandardItemModel):
     def __iter__(self):
         return iter(self.get_children())
 
-    def get_children(self):
-        return [self.item(index) for index in range(self.rowCount())]
-
     def __getstate__(self):
         return dict(items=self.get_children())
 
@@ -34,6 +31,9 @@ class StandardItemModel(QtGui.QStandardItemModel):
         if isinstance(other, QtGui.QStandardItem):
             self.appendRow(other)
             return self
+
+    def get_children(self):
+        return [self.item(index) for index in range(self.rowCount())]
 
     def add_item(self, label):
         item = gui.StandardItem(label)

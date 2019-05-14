@@ -23,20 +23,20 @@ class MarkdownWindow(widgets.MainWindow):
         # html_data = frame.toHtml()
 
     def create_menu(self):
-        act_exit = widgets.Action(gui.Icon('exit.png'), '&Exit', self)
-        act_exit.setShortcut('Ctrl+Q')
-        act_exit.setStatusTip('Exit application')
+        act_exit = widgets.Action(gui.Icon("exit.png"), "&Exit", self)
+        act_exit.setShortcut("Ctrl+Q")
+        act_exit.setStatusTip("Exit application")
         act_exit.triggered.connect(self.close)
 
-        act_open = widgets.Action(gui.Icon('open.png'), '&Open', self)
-        act_open.setShortcut('Ctrl+O')
-        act_open.setStatusTip('Open Markdown file')
+        act_open = widgets.Action(gui.Icon("open.png"), "&Open", self)
+        act_open.setShortcut("Ctrl+O")
+        act_open.setStatusTip("Open Markdown file")
         act_open.triggered.connect(self.open_new_file)
 
         self.statusBar()
 
         menubar = self.menuBar()
-        menu_file = menubar.addMenu('&File')
+        menu_file = menubar.addMenu("&File")
         menu_file.addAction(act_open)
         menu_file.addAction(act_exit)
 
@@ -45,8 +45,8 @@ class MarkdownWindow(widgets.MainWindow):
     #     for url in u:
     #         file_path = os.path.abspath(url.toLocalFile())
 
-    #         ext = file_path.split('.')[-1]
-    #         if ext in ['txt', 'md', 'markdown']:
+    #         ext = file_path.split(".")[-1]
+    #         if ext in ["txt", "md", "markdown"]:
     #             event.accept()
     #         else:
     #             event.ignore()
@@ -59,20 +59,20 @@ class MarkdownWindow(widgets.MainWindow):
         try:
             dlg = widgets.FileDialog
             fname = dlg.getOpenFileName(self,
-                                        'open file',
-                                        '',
-                                        'All Text Files (*.md *.markdown *.txt *.*)',
+                                        "open file",
+                                        "",
+                                        "All Text Files (*.md *.markdown *.txt *.*)",
                                         None)
             self.web_view.show_markdown(fname[0])
         except UnicodeDecodeError:
-            self.statusBar().showMessage('Please select only text files')
+            self.statusBar().showMessage("Please select only text files")
         except IOError:
-            self.statusBar().showMessage('File open canceled!')
+            self.statusBar().showMessage("File open canceled!")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     reader = MarkdownWindow()
-    # reader.web_view.load(QtCore.QUrl('blank'))
+    # reader.web_view.load(QtCore.QUrl("blank"))
     reader.show()
     app.exec_()
