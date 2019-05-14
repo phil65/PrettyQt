@@ -34,6 +34,15 @@ class FormLayout(QtWidgets.QFormLayout):
             widget = item.layout()
         return widget
 
+    def __setitem__(self, index, value):
+        if isinstance(index, tuple):
+            row = index[0]
+            role = index[1]
+        else:
+            row = index
+            role = "both"
+        self.set_widget(value, row, role)
+
     def __iter__(self):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
@@ -68,33 +77,6 @@ class FormLayout(QtWidgets.QFormLayout):
             raise ValueError(f"{mode} not a valid size mode.")
         self.setSizeConstraint(MODES[mode])
 
-    def set_label_widget(self, row: int, widget):
-        """set a widget for the label position at given row
-
-        Args:
-            row: Row offset
-            widget: widget to get added to layout
-        """
-        self.set_widget(widget, row, "left")
-
-    def set_field_widget(self, row: int, widget):
-        """set a widget for the field position at given row
-
-        Args:
-            row: Row offset
-            widget: widget / layout to get added to layout
-        """
-        self.set_widget(widget, row, "right")
-
-    def set_spanning_widget(self, row: int, widget):
-        """set a widget spanning label and field position at given row
-
-        Args:
-            row: Row offset
-            widget: widget / layout to get added to layout
-        """
-        self.set_widget(widget, row, "both")
-
     def set_widget(self, widget, row, role: str = "both"):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
@@ -119,9 +101,9 @@ class FormLayout(QtWidgets.QFormLayout):
         formlayout = cls(parent)
         for i, (k, v) in enumerate(dct.items(), start=1):
             if k is not None:
-                formlayout.set_label_widget(i, k)
+                formlayout[i, "left"] = k
             if v is not None:
-                formlayout.set_field_widget(i, v)
+                formlayout[i, "right"] = v
         return formlayout
 
 
@@ -130,7 +112,7 @@ if __name__ == "__main__":
     dct = {"key": widgets.Label("test"),
            None: widgets.Label("test 2")}
     layout = FormLayout.from_dict(dct)
-    layout.set_spanning_widget(3, "hallo")
+    layout[3] = "hellooo"
     widget = widgets.Widget()
     widget.setLayout(layout)
     widget.show()

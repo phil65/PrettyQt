@@ -202,12 +202,12 @@ def test_fontdialog():
 def test_formlayout():
     widget = widgets.FormLayout()
     widget.set_size_mode("maximum")
-    widget.set_label_widget(0, "test")
-    widget.set_label_widget(1, widgets.RadioButton("hallo"))
-    widget.set_field_widget(0, "test")
-    widget.set_field_widget(1, widgets.RadioButton("hallo"))
-    widget.set_spanning_widget(2, "test")
-    widget.set_spanning_widget(3, widgets.RadioButton("hallo"))
+    widget[0, "left"] = "test"
+    widget[1, "left"] = widgets.RadioButton("hallo")
+    widget[1, "right"] = "test"
+    widget[1, "right"] = widgets.RadioButton("hallo")
+    widget[2] = "test"
+    widget[3] = widgets.RadioButton("hallo")
     widget = widgets.FormLayout.from_dict({"2": "4"})
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
