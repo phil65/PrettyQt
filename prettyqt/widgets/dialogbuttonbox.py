@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import List
+
 from qtpy import QtCore, QtWidgets
 
 BUTTONS = dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
@@ -50,23 +52,34 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def __contains__(self, item):
         return self[item] is not None
 
+    @classmethod
+    def create(cls, **kwargs):
+        box = cls()
+        for k, v in kwargs.items():
+            btn = box.add_button(k)
+            btn.clicked.connect(v)
+        return box
+
     def set_horizontal(self):
         self.setOrientation(QtCore.Qt.Horizontal)
 
     def set_vertical(self):
         self.setOrientation(QtCore.Qt.Vertical)
 
-    def add_buttons(self, buttons):
+    def add_buttons(self, buttons: List[str]):
         for btn in buttons:
-            if btn not in BUTTONS:
-                raise ValueError("button type not available")
-            self.addButton(BUTTONS[btn])
+            self.add_button(btn)
+
+    def add_button(self, button: str):
+        if button not in BUTTONS:
+            raise ValueError("button type not available")
+        return self.addButton(BUTTONS[button])
 
     def add_accept_button(self, button):
-        self.addButton(button, self.AcceptRole)
+        return self.addButton(button, self.AcceptRole)
 
     def add_reject_button(self, button):
-        self.addButton(button, self.RejectRole)
+        return self.addButton(button, self.RejectRole)
 
 
 if __name__ == "__main__":
