@@ -31,8 +31,8 @@ class TextBrowser(QtWidgets.QTextBrowser):
     #     for url in u:
     #         file_path = os.path.abspath(url.toLocalFile())
 
-    #         ext = file_path.split('.')[-1]
-    #         if ext in ['txt', 'md', 'markdown']:
+    #         ext = file_path.split(".")[-1]
+    #         if ext in ["txt", "md", "markdown"]:
     #             event.accept()
     #         else:
     #             event.ignore()
@@ -49,14 +49,14 @@ class TextBrowser(QtWidgets.QTextBrowser):
     def show_rst(self, file_path):
         with open(file_path) as f:
             file_content = f.read()
-        html = docutils.core.publish_string(file_content, writer_name='html')
+        html = docutils.core.publish_string(file_content, writer_name="html")
         self.setHtml(str(html))
 
     def text(self):
         return self.toPlainText()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     reader = TextBrowser()
