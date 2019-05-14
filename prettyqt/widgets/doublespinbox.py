@@ -9,12 +9,12 @@ from qtpy import QtWidgets
 
 from prettyqt import widgets, gui, core
 
-CORRECTION_MODES = dict(to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
-                        to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue)
+CORRECTION_MODES = bidict(dict(to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
+                               to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue))
 
-SYMBOLS = dict(up_down=QtWidgets.QSpinBox.UpDownArrows,
-               plus_minus=QtWidgets.QSpinBox.PlusMinus,
-               none=QtWidgets.QSpinBox.NoButtons)
+SYMBOLS = bidict(dict(up_down=QtWidgets.QSpinBox.UpDownArrows,
+                      plus_minus=QtWidgets.QSpinBox.PlusMinus,
+                      none=QtWidgets.QSpinBox.NoButtons))
 
 STEP_TYPES = bidict(dict(default=QtWidgets.QSpinBox.DefaultStepType,
                          adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType))
@@ -76,13 +76,13 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
     def set_step_type(self, mode: str):
         self.setStepType(STEP_TYPES[mode])
 
-    def get_step_type(self):
+    def get_step_type(self) -> str:
         return STEP_TYPES.inv[self.stepType()]
 
     def set_special_value(self, value: str):
         self.setSpecialValueText(value)
 
-    def get_value(self):
+    def get_value(self) -> float:
         return self.value()
 
     def set_value(self, value):

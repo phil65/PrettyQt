@@ -50,7 +50,7 @@ class Splitter(QtWidgets.QSplitter):
             return self
         raise TypeError(f"Invalid type: {type(other)}")
 
-    def get_children(self):
+    def get_children(self) -> list:
         return [self[i] for i in range(self.count())]
 
     def add_widget(self, widget):
@@ -68,10 +68,10 @@ class Splitter(QtWidgets.QSplitter):
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
                            QtWidgets.QSizePolicy.Expanding)
 
-    def set_orientation(self, orientation):
+    def set_orientation(self, orientation: str):
         self.setOrientation(ORIENTATIONS[orientation])
 
-    def get_orientation(self):
+    def get_orientation(self) -> str:
         return ORIENTATIONS.inv[self.orientation()]
 
 

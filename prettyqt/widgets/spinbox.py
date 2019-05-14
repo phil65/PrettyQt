@@ -74,7 +74,7 @@ class SpinBox(QtWidgets.QSpinBox):
     def set_validator(self, validator: gui.Validator):
         self.lineEdit().setValidator(validator)
 
-    def get_button_symbols(self):
+    def get_button_symbols(self) -> str:
         return SYMBOLS.inv[self.buttonSymbols()]
 
     def set_button_symbols(self, mode: str):
@@ -83,22 +83,22 @@ class SpinBox(QtWidgets.QSpinBox):
     def set_correction_mode(self, mode: str):
         self.setCorrectionMode(CORRECTION_MODES[mode])
 
-    def get_correction_mode(self):
+    def get_correction_mode(self) -> str:
         return CORRECTION_MODES.inv[self.correctionMode()]
 
     def set_step_type(self, mode: str):
         self.setStepType(STEP_TYPES[mode])
 
-    def get_step_type(self):
+    def get_step_type(self) -> str:
         return STEP_TYPES.inv[self.stepType()]
 
     def set_special_value(self, value: str):
         self.setSpecialValueText(value)
 
-    def get_value(self):
+    def get_value(self) -> int:
         return self.value()
 
-    def set_value(self, value):
+    def set_value(self, value: int):
         self.setValue(value)
 
 
