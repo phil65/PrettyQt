@@ -18,7 +18,7 @@ STATES = bidict(dict(unchecked=QtCore.Qt.Unchecked,
 class ListWidgetItem(QtWidgets.QListWidgetItem):
 
     def __repr__(self):
-        return f"ListWidgetItem({self.icon()}, {repr(self.text())})"
+        return f"ListWidgetItem({self.icon()}, {self.text()!r})"
 
     def __getstate__(self):
         return dict(text=self.text(),

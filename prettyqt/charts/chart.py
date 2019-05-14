@@ -49,7 +49,7 @@ class Chart(QtCharts.QChart):
 
     def set_legend_alignment(self, alignment: str):
         if alignment not in ALIGNMENTS:
-            raise ValueError(f"{alignment} not a valid alignment.")
+            raise ValueError(f"{alignment!r} not a valid alignment.")
         self.legend().setAlignment(ALIGNMENTS[alignment])
 
     def set_theme(self, theme_name: str):

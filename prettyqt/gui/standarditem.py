@@ -11,7 +11,7 @@ from prettyqt import gui
 class StandardItem(QtGui.QStandardItem):
 
     def __repr__(self):
-        return f"StandardItem({self.icon()}, {repr(self.text())})"
+        return f"StandardItem({self.icon()}, {self.text()!r})"
 
     def __getstate__(self):
         return dict(text=self.text(),

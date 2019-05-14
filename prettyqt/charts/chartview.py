@@ -119,5 +119,5 @@ class ChartView(QtCharts.QChartView):
 
     # def set_legend_alignment(self, alignment: str):
     #     if alignment not in ALIGNMENTS:
-    #         raise ValueError(f"{alignment} not a valid alignment.")
+    #         raise ValueError(f"{alignment!r} not a valid alignment.")
     #     self.chart().legend().setAlignment(ALIGNMENTS[alignment])
