@@ -42,8 +42,8 @@ class CheckBox(QtWidgets.QCheckBox):
         self.set_checkstate(state["checkstate"])
         self.setText(state["text"])
         self.setEnabled(state["enabled"])
-        self.setToolTip(state["tooltip"])
-        self.setStatusTip(state["statustip"])
+        self.setToolTip(state.get("tooltip", ""))
+        self.setStatusTip(state.get("statustip", ""))
 
     def __bool__(self):
         return self.isChecked()

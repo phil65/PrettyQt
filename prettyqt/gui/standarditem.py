@@ -23,7 +23,7 @@ class StandardItem(QtGui.QStandardItem):
     def __setstate__(self, state):
         self.__init__()
         self.setText(state["text"])
-        self.setToolTip(state["tooltip"])
-        self.setStatusTip(state["statustip"])
+        self.setToolTip(state.get("tooltip", ""))
+        self.setStatusTip(state.get("statustip", ""))
         self.setData(state["data"])
         self.setIcon(state["icon"])

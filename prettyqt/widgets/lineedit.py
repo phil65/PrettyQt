@@ -49,8 +49,8 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setPlaceholderText(state["placeholder_text"])
         self.setReadOnly(state["read_only"])
         self.setFrame(state["has_frame"])
-        self.setToolTip(state["tooltip"])
-        self.setStatusTip(state["statustip"])
+        self.setToolTip(state.get("tooltip", ""))
+        self.setStatusTip(state.get("statustip", ""))
 
     def font(self) -> gui.Font:
         return gui.Font(super().font())

@@ -37,8 +37,8 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.setEnabled(state["enabled"])
         self.set_range(*state["range"])
         self.setDisplayFormat(state["display_format"])
-        self.setToolTip(state["tooltip"])
-        self.setStatusTip(state["statustip"])
+        self.setToolTip(state.get("tooltip", ""))
+        self.setStatusTip(state.get("statustip", ""))
 
     def set_enabled(self):
         self.setEnabled(True)
