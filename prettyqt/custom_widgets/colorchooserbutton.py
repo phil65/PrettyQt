@@ -17,13 +17,13 @@ class ColorChooserButton(widgets.Widget):
         self.current_color = color
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
-        self.lineedit = widgets.LineEdit(self)
+        self.lineedit = widgets.LineEdit()
         self.lineedit.set_regex_validator(r"^#(?:[0-9a-fA-F]{6})$")
         layout += self.lineedit
         action = widgets.Action()
         action.set_icon("mdi.format-color-fill")
         action.triggered.connect(self.choose_color)
-        self.button = widgets.ToolButton(self)
+        self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
         layout += self.button
 

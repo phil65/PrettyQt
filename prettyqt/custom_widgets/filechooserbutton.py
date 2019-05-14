@@ -19,13 +19,13 @@ class FileChooserButton(widgets.Widget):
         self.extensions = extensions
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
-        self.lineedit = widgets.LineEdit(self)
+        self.lineedit = widgets.LineEdit()
         layout += self.lineedit
         action = widgets.Action()
         action.set_icon("mdi.file-outline")
         action.triggered.connect(self.open_file)
 
-        self.button = widgets.ToolButton(self)
+        self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
         layout += self.button
 
