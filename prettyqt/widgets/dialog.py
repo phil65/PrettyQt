@@ -58,6 +58,7 @@ class Dialog(QtWidgets.QDialog):
         if state["is_maximized"]:
             self.showMaximized()
         self.resize(*state["size"])
+        self.box = self.layout()
 
     def resize(self, *size):
         if isinstance(size[0], tuple):
