@@ -4,6 +4,7 @@
 """Tests for `prettyqt` package."""
 
 import pickle
+import datetime
 
 from qtpy import QtCore
 
@@ -23,7 +24,6 @@ def test_action():
         action = pickle.load(jar)
     assert action.shortcut().toString() == "Ctrl+A"
     assert action.toolTip() == "test"
-    return True
 
 
 def test_boxlayout():
@@ -37,14 +37,14 @@ def test_boxlayout():
     with open("data.pkl", "rb") as jar:
         layout = pickle.load(jar)
     assert len(layout) == 1
-    return True
+    repr(layout)
 
 
 def test_buttongroup():
     group = widgets.ButtonGroup()
     btn = widgets.RadioButton("test")
-    group.addButton(btn)
-    return group
+    group.addButton(btn, id=2)
+    assert group[2] == btn
 
 
 def test_checkbox():
@@ -59,6 +59,7 @@ def test_checkbox():
     assert bool(chk) is False
     chk.show()
     chk.close()
+    repr(chk)
 
 
 def test_colordialog():
@@ -87,6 +88,7 @@ def test_combobox():
         box = pickle.load(jar)
     box.show()
     box.close()
+    repr(box)
 
 
 def test_commandlinkbutton():
@@ -100,6 +102,7 @@ def test_commandlinkbutton():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.show()
+    repr(widget)
 
 
 def test_dateedit():
@@ -110,6 +113,7 @@ def test_dateedit():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    repr(widget)
 
 
 def test_datetimeedit():
@@ -120,6 +124,7 @@ def test_datetimeedit():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    repr(widget)
 
 
 def test_desktopwidget():
@@ -166,6 +171,7 @@ def test_doublespinbox():
         widget = pickle.load(jar)
     widget.show()
     widget.close()
+    repr(widget)
 
 
 def test_filedialog():
@@ -214,7 +220,7 @@ def test_formlayout():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     assert len(widget) == 2
-    return True
+    repr(widget)
 
 
 def test_frame():
@@ -234,6 +240,7 @@ def test_gridlayout():
     with open("data.pkl", "rb") as jar:
         layout = pickle.load(jar)
     assert len(layout) == len(list(layout)) == 1
+    repr(layout)
 
 
 def test_groupbox():
@@ -247,6 +254,7 @@ def test_groupbox():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.close()
+    repr(widget)
 
 
 def test_headerview():
@@ -282,6 +290,7 @@ def test_label():
         label = pickle.load(jar)
     label.show()
     label.close()
+    repr(label)
 
 
 def test_lineedit():
@@ -316,6 +325,12 @@ def test_listwidget():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    assert len(widget) == 2
+    for item in widget:
+        pass
+    item = widgets.ListWidgetItem()
+    widget += item
+    repr(widget)
 
 
 def test_listwidgetitem():
@@ -324,6 +339,7 @@ def test_listwidgetitem():
         pickle.dump(item, jar)
     with open("data.pkl", "rb") as jar:
         item = pickle.load(jar)
+    repr(item)
 
 
 def test_mainwindow():
@@ -514,6 +530,7 @@ def test_textedit():
     widget.set_read_only()
     widget.scroll_to_end()
     widget.set_disabled()
+    widget.set_color("black")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -521,17 +538,48 @@ def test_textedit():
     widget.show()
 
 
+def test_timeedit():
+    widget = widgets.TimeEdit()
+    widget.set_disabled()
+    widget.set_enabled()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(widget, jar)
+    with open("data.pkl", "rb") as jar:
+        widget = pickle.load(jar)
+    widget.set_range(datetime.time(1, 1, 1), datetime.time(3, 3, 3))
+    assert widget.get_time() == widget.min_time()
+    assert widget.max_time() == datetime.time(3, 3, 3)
+
+
 def test_toolbar():
     widget = widgets.Toolbar()
     widget.add_menu_button("test,", "mdi.timer", menu=widgets.Menu())
     widget.set_style("icon")
     widget.set_font_size(10)
+    widget.set_enabled()
+    widget.set_disabled()
 
     def test():
         pass
 
     widget.add_action("test", "mdi.timer", test, checkable=True)
     widget.show()
+
+
+def test_toolbutton():
+    tb = widgets.ToolButton()
+    tb.set_disabled()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(tb, jar)
+    with open("data.pkl", "rb") as jar:
+        tb = pickle.load(jar)
+    tb.set_enabled()
+    tb.set_shortcut("Ctrl+A")
+
+
+def test_tabbar():
+    widget = widgets.TabBar()
+    widget.set_icon_size(20)
 
 
 def test_tableview():
@@ -558,10 +606,11 @@ def test_tableview():
 def test_toolbox():
     w = widgets.RadioButton("test1")
     w2 = widgets.RadioButton("test2")
-    w2.setObjectName("objectName")
+    w2.setObjectName("test_name")
     tb = widgets.ToolBox()
-    tb.add_widget(w, "title")
+    tb.add_widget(w, "title", "mdi.timer")
     tb.add_widget(w2)
+    assert tb["test_name"] == w2
     for w in tb:
         pass
     assert tb[1] == w2
