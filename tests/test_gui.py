@@ -34,9 +34,9 @@ def test_doublevalidator():
 def test_icon():
     icon = gui.Icon()
     icon.for_color("black")
-    with open("data.pkl", 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(icon, jar)
-    with open("data.pkl", 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         icon = pickle.load(jar)
 
 
@@ -48,7 +48,7 @@ def test_intvalidator():
 
 
 def test_keysequence():
-    assert(gui.KeySequence.to_shortcut_str(0x41, QtCore.Qt.ShiftModifier) == "Shift+A")
+    assert gui.KeySequence.to_shortcut_str(0x41, QtCore.Qt.ShiftModifier) == "Shift+A"
 
 
 def test_standarditem():
@@ -99,9 +99,9 @@ def test_pixmap():
 
 def test_polygonf():
     poly = gui.PolygonF()
-    with open("data.pkl", 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(poly, jar)
-    with open("data.pkl", 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         poly = pickle.load(jar)
 
 

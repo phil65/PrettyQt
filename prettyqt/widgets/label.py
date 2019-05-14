@@ -32,7 +32,7 @@ class Label(QtWidgets.QLabel):
         self.openExternalLinks()
 
     def __repr__(self):
-        return f"Label('{self.text()}'')"
+        return f"Label({self.text()!r})"
 
     def __getstate__(self):
         return dict(text=self.text(),
@@ -67,7 +67,7 @@ class Label(QtWidgets.QLabel):
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText("<html><head/><body><p>"
-                     f'<img src="{path}" width="{width}"/>'
+                     f"<img src={str(path)!r} width={str(width)!r}/>"
                      "</p></body></html>")
 
     @classmethod

@@ -84,7 +84,7 @@ def test_selectionwidget():
     widget.add_items(items)
     widget.add_custom(label="test", regex=r"\S{1}")
     choice = widget.current_choice()
-    assert(choice == ";")
+    assert choice == ";"
 
 
 def test_spanslider(qtbot):
@@ -94,8 +94,8 @@ def test_spanslider(qtbot):
     slider.set_upper_value(20)
     slider.set_lower_pos(15)
     slider.set_upper_pos(25)
-    assert(slider.lower_value == 15)
-    assert(slider.upper_value == 25)
+    assert slider.lower_value == 15
+    assert slider.upper_value == 25
     slider.set_lower_value(12)
     slider.set_upper_pos(20)
     color = gui.Color("blue")
@@ -111,7 +111,7 @@ def test_spanslider(qtbot):
     slider.show()
     qtbot.mouseClick(slider, QtCore.Qt.LeftButton)
     qtbot.mouseMove(slider, core.Point(20, 20))
-    assert(slider.movement_mode == "free")
+    assert slider.movement_mode == "free"
 
 
 def test_waitingspinner():

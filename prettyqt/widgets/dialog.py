@@ -113,9 +113,9 @@ if __name__ == "__main__":
     app = widgets.Application.create_default_app()
     widget = Dialog()
     import pickle
-    with open("data.pkl", 'wb') as jar:
+    with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
-    with open("data.pkl", 'rb') as jar:
+    with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.show()
     app.exec_()

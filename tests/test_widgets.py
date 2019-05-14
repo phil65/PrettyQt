@@ -36,7 +36,7 @@ def test_boxlayout():
         pickle.dump(layout, jar)
     with open("data.pkl", "rb") as jar:
         layout = pickle.load(jar)
-    assert(len(layout) == 1)
+    assert len(layout) == 1
     return True
 
 
@@ -213,7 +213,7 @@ def test_formlayout():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    assert(len(widget) == 2)
+    assert len(widget) == 2
     return True
 
 
@@ -447,7 +447,7 @@ def test_stackedlayout():
         pickle.dump(layout, jar)
     with open("data.pkl", "rb") as jar:
         layout = pickle.load(jar)
-    assert(len(layout) == 1)
+    assert len(layout) == 1
     return True
 
 
@@ -508,7 +508,7 @@ def test_textedit():
     widget = widgets.TextEdit()
     widget.set_text("test")
     widget.append_text(" this")
-    assert(widget.text() == "test\n this")
+    assert widget.text() == "test\n this"
     widget.set_font("Consolas")
     widget.set_enabled()
     widget.set_read_only()
