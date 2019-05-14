@@ -56,7 +56,8 @@ class ColorChooserButton(widgets.Widget):
         else:
             self.current_color = color
         self.lineedit.setText(self.current_color.name().upper())
-        self.button.setStyleSheet(f"background-color: {self.current_color.name()};")
+        icon = gui.Icon.for_color(self.current_color)
+        self.button.setIcon(icon)
 
     def is_valid(self):
         return self.lineedit.is_valid()
