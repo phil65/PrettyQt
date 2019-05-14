@@ -38,6 +38,9 @@ class Settings(QtCore.QSettings):
     def __setitem__(self, name: str, value):
         return self.setValue(name, value)
 
+    def __iter__(self):
+        return iter(self.allKeys())
+
     @classmethod
     def from_dict(cls, dict: dict):
         settings = cls()
