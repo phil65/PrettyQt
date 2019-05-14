@@ -48,16 +48,17 @@ class Dialog(QtWidgets.QDialog):
                     size=(self.size().width(), self.size().height()))
 
     def __setstate__(self, state):
-        self.__init__(title=state["title"],
-                      icon=state["icon"])
+        self.__init__()
+        self.setWindowTitle(state["title"])
+        self.set_icon(state["icon"])
         if state["layout"]:
             self.setLayout(state["layout"])
-        self.box = state["layout"]
         self.resize(state["size"])
         self.setSizeGripEnabled(state["has_sizegrip"])
-        self.resize(*state["size"])
         if state["is_maximized"]:
             self.showMaximized()
+        self.resize(*state["size"])
+        self.box = self.layout()
 
     def resize(self, *size):
         if isinstance(size[0], tuple):
