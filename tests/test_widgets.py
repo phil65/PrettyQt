@@ -139,6 +139,12 @@ def test_dialog(qtbot):
     dlg.delete_on_close()
     dlg.add_widget(widgets.RadioButton("test"))
     dlg.set_icon("mdi.timer")
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(dlg, jar)
+    with open("data.pkl", "rb") as jar:
+        dlg = pickle.load(jar)
+    dlg.resize(0, 400)
+    dlg.resize((0, 400))
     dlg.add_buttonbox()
     dlg.show()
     dlg.close()
