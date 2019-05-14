@@ -15,7 +15,7 @@ H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
 class GroupBox(QtWidgets.QGroupBox):
 
     def __repr__(self):
-        return f"GroupBox: {self.count()} children"
+        return f"GroupBox({self.title()!r})"
 
     def __getstate__(self):
         return dict(checkable=self.isCheckable(),
