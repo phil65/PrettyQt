@@ -84,5 +84,14 @@ dist: clean ## builds source and wheel package
 # install: clean ## install the package to the active Python's site-packages
 # 	python setup.py install
 
-bumpdev: ## dev version bump
-	bump2version patch
+bump-minor: ## minor version bump
+	bump2version minor --allow-dirty
+	pip install -e .
+
+bump-patch: ## patch version bump
+	bump2version patch --allow-dirty
+	pip install -e .
+
+bump-major: ## major version bump
+	bump2version major --allow-dirty
+	pip install -e .
