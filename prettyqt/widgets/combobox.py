@@ -6,7 +6,7 @@
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, core
+from prettyqt import gui, core, widgets
 
 box = QtWidgets.QComboBox
 INSERT_POLICIES = dict(no_insert=box.NoInsert,
@@ -70,12 +70,6 @@ class ComboBox(QtWidgets.QComboBox):
         data = self.itemData(index)
         self.value_changed.emit(data)
 
-    def set_enabled(self):
-        self.setEnabled(True)
-
-    def set_disabled(self):
-        self.setEnabled(False)
-
     def add_item(self,
                  label: str,
                  data=None,
@@ -122,8 +116,10 @@ class ComboBox(QtWidgets.QComboBox):
         return self.currentData()
 
 
+ComboBox.__bases__[0].__bases__ = (widgets.Widget,)
+
+
 if __name__ == "__main__":
-    from prettyqt import widgets
     app = widgets.app()
     widget = ComboBox()
     widget.value_changed.connect(print)

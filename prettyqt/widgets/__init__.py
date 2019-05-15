@@ -7,6 +7,7 @@ contains QtWidgets-based classes
 
 from .application import Application
 from .widget import Widget
+from .abstractbutton import AbstractButton
 from .abstractspinbox import AbstractSpinBox
 from .abstractitemview import AbstractItemView
 from .desktopwidget import DesktopWidget
@@ -54,9 +55,9 @@ from .checkbox import CheckBox
 from .lineedit import LineEdit
 from .keysequenceedit import KeySequenceEdit
 from .textedit import TextEdit
+from .datetimeedit import DateTimeEdit
 from .dateedit import DateEdit
 from .timeedit import TimeEdit
-from .datetimeedit import DateTimeEdit
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
 from .progressbar import ProgressBar
@@ -94,6 +95,7 @@ def app():
 
 __all__ = ["app",
            "Application",
+           "AbstractButton",
            "AbstractSpinBox",
            "AbstractItemView",
            "Widget",

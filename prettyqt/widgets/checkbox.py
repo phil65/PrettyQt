@@ -21,9 +21,6 @@ class CheckBox(QtWidgets.QCheckBox):
         super().__init__(*args, **kwargs)
         self.stateChanged.connect(self.value_changed)
 
-    def __repr__(self):
-        return f"CheckBox: {self.__getstate__()}"
-
     def __getstate__(self):
         return dict(object_name=self.objectName(),
                     checkable=self.isCheckable(),
@@ -48,12 +45,6 @@ class CheckBox(QtWidgets.QCheckBox):
     def __bool__(self):
         return self.isChecked()
 
-    def set_enabled(self):
-        self.setEnabled(True)
-
-    def set_disabled(self):
-        self.setEnabled(False)
-
     def set_checkstate(self, state: str):
         """set checkstate of the checkbox
 
@@ -77,6 +68,9 @@ class CheckBox(QtWidgets.QCheckBox):
 
     def set_value(self, value: bool):
         self.setChecked(value)
+
+
+CheckBox.__bases__[0].__bases__ = (widgets.AbstractButton,)
 
 
 if __name__ == "__main__":
