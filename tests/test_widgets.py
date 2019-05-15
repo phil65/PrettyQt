@@ -218,13 +218,15 @@ def test_fontdialog():
 def test_formlayout():
     widget = widgets.FormLayout()
     widget.set_size_mode("maximum")
-    widget[0, "left"] = "test"
-    widget[1, "left"] = widgets.RadioButton("hallo")
-    widget[1, "right"] = "test"
-    widget[1, "right"] = widgets.RadioButton("hallo")
-    widget[2] = "test"
-    widget[3] = widgets.RadioButton("hallo")
-    widget = widgets.FormLayout.from_dict({"2": "4"})
+    widget[0, "left"] = "0, left"
+    widget[1, "left"] = widgets.RadioButton("1, left")
+    widget[0, "right"] = "label 1 right"
+    widget[1, "right"] = widgets.RadioButton("1, right")
+    widget[2] = "by str"
+    widget[3] = widgets.RadioButton("widget[3]")
+    widget += widgets.RadioButton("added with +=")
+    widget += ("added with +=", widgets.RadioButton("tuple"))
+    widget = widgets.FormLayout.from_dict({"from": "dict"})
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -243,6 +245,7 @@ def test_gridlayout():
     layout = widgets.GridLayout()
     widget = widgets.RadioButton()
     layout[0:1, 0:3] = widget
+    assert layout[0, 0] == widget
     layout.set_size_mode("maximum")
     layout.set_alignment("left")
     with open("data.pkl", "wb") as jar:
@@ -258,11 +261,13 @@ def test_groupbox():
     widget.show()
     ly = widgets.BoxLayout("horizontal")
     widget.set_layout(ly)
+    ly += widgets.RadioButton("+=")
     widget.set_alignment("left")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    widget.set_enabled(False)
     widget.close()
     repr(widget)
 
@@ -323,6 +328,8 @@ def test_listview():
     widget = widgets.ListView()
     widget.set_selection_mode("single")
     widget.toggle_select_all()
+    widget.set_selection_mode("multi")
+    assert widget.get_selection_mode() == "multi"
     widget.show()
     widget.close()
 
@@ -380,6 +387,7 @@ def test_menu():
 
 def test_menubar():
     menu = widgets.MenuBar()
+    menu += widgets.Action("test")
     menu.show()
 
 
@@ -400,6 +408,9 @@ def test_plaintextedit():
     widget.highlight_current_line()
     widget.set_read_only()
     widget.get_result_widget()
+    widget.scroll_to_end()
+    widget.set_value("test")
+    assert widget.get_value() == "test"
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -440,6 +451,9 @@ def test_radiobutton():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     assert bool(widget) is False
+    repr(widget)
+    widget.set_value(True)
+    assert widget.get_value() is True
     widget.show()
 
 
@@ -457,14 +471,14 @@ def test_slider():
 
 
 def test_statusbar():
-    dlg = widgets.MainWindow()
+    widget = widgets.MainWindow()
     status_bar = widgets.StatusBar()
     status_bar.set_color("black")
     label = widgets.Label("test")
     status_bar.addWidget(label)
     status_bar.setup_default_bar()
-    dlg.setStatusBar(status_bar)
-    dlg.show()
+    widget.setStatusBar(status_bar)
+    widget.show()
 
 
 def test_stackedlayout():
@@ -485,10 +499,15 @@ def test_spinbox():
     widget = widgets.SpinBox()
     widget.set_disabled()
     widget.set_enabled()
+    widget.set_value(10)
+    widget.set_special_value("test")
+    assert widget.is_valid()
+    assert widget.get_value() == 10
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    repr(widget)
     widget.show()
 
 
@@ -498,11 +517,16 @@ def test_splitter():
     test2 = widgets.Label("test2")
     widget.add_widget(test)
     widget += test2
+    assert len(widget) == 2
     assert widget[0] == test
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    for item in widget:
+        pass
+    widget.set_expanding()
+    widget.set_orientation("horizontal")
     widget.show()
 
 
@@ -581,14 +605,14 @@ def test_toolbar():
 
 
 def test_toolbutton():
-    tb = widgets.ToolButton()
-    tb.set_disabled()
+    widget = widgets.ToolButton()
+    widget.set_disabled()
     with open("data.pkl", "wb") as jar:
-        pickle.dump(tb, jar)
+        pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
-        tb = pickle.load(jar)
-    tb.set_enabled()
-    tb.set_shortcut("Ctrl+A")
+        widget = pickle.load(jar)
+    widget.set_enabled()
+    widget.set_shortcut("Ctrl+A")
 
 
 def test_tabbar():
@@ -621,18 +645,18 @@ def test_toolbox():
     w = widgets.RadioButton("test1")
     w2 = widgets.RadioButton("test2")
     w2.setObjectName("test_name")
-    tb = widgets.ToolBox()
-    tb.add_widget(w, "title", "mdi.timer")
-    tb.add_widget(w2)
-    assert tb["test_name"] == w2
-    for w in tb:
+    widget = widgets.ToolBox()
+    widget.add_widget(w, "title", "mdi.timer")
+    widget.add_widget(w2)
+    assert widget["test_name"] == w2
+    for w in widget:
         pass
-    assert tb[1] == w2
+    assert widget[1] == w2
     with open("data.pkl", "wb") as jar:
-        pickle.dump(tb, jar)
+        pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
-        tb = pickle.load(jar)
-    tb.show()
+        widget = pickle.load(jar)
+    widget.show()
 
 
 def test_treeview():
