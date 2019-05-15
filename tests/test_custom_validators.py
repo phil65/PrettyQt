@@ -19,6 +19,7 @@ def test_pathvalidator():
         val = pickle.load(jar)
     assert val.is_valid_value(str(pathlib.Path.cwd()))
     assert not val.is_valid_value("abs")
+    repr(val)
 
 
 def test_notzerovalidator():
@@ -29,6 +30,7 @@ def test_notzerovalidator():
         val = pickle.load(jar)
     assert val.is_valid_value("1")
     assert not val.is_valid_value("0")
+    repr(val)
 
 
 def test_notemptyvalidator():
@@ -39,6 +41,7 @@ def test_notemptyvalidator():
         val = pickle.load(jar)
     assert val.is_valid_value("1")
     assert not val.is_valid_value("")
+    repr(val)
 
 
 def test_compositevalidator():
@@ -53,3 +56,4 @@ def test_compositevalidator():
     assert not val.is_valid_value("")
     assert not val.is_valid_value("0")
     val1 + val2
+    repr(val)

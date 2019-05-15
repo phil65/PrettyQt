@@ -154,7 +154,11 @@ def test_dialogbuttonbox():
     box = widgets.DialogButtonBox()
     box.set_horizontal()
     box.set_vertical()
-    box.add_buttons(["apply"])
+    btn = box.add_button("apply")
+    assert len(box) == 1
+    assert btn == box["apply"]
+    for item in box:
+        pass
     box.show()
     box.close()
 
@@ -357,6 +361,10 @@ def test_mainwindow():
     window.close()
     window.load_window_state()
     window.toggle_fullscreen()
+    window.toggle_fullscreen()
+    ss = dict(width="1px", border="none")
+    window.set_stylesheet("QMainWindow::separator", ss)
+    window.add_widget_as_dock("test", "Title")
 
 
 def test_menu():

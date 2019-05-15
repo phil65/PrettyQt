@@ -49,6 +49,14 @@ def test_abstracttablemodel():
     # qtmodeltester.check(model, force_py=True)
 
 
+def test_date():
+    date = core.Date(1, 1, 2000)
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(date, jar)
+    with open("data.pkl", "rb") as jar:
+        date = pickle.load(jar)
+
+
 def test_dir():
     directory = core.Dir()
     assert pathlib.Path(str(directory)) == directory.to_path()
@@ -73,15 +81,23 @@ def test_object():
 
 
 def test_point():
-    core.Point()
+    p = core.Point()
+    repr(p)
+
+
+def test_pointf():
+    p = core.PointF()
+    repr(p)
 
 
 def test_rect():
-    core.Rect()
+    rect = core.Rect()
+    repr(rect)
 
 
 def test_rectf():
-    core.RectF()
+    rect = core.RectF()
+    repr(rect)
 
 
 def test_regexp():
@@ -111,6 +127,11 @@ def test_settings():
         pass
     with settings.group("test"):
         pass
+    settings["test2"] = "xyz"
+    assert settings["test2"] == "xyz"
+    settings.setdefault("test3", "abc")
+    assert settings.get("test3") == "abc"
+    del settings["test3"]
     path = pathlib.Path.cwd()
     settings.set_default_format("ini")
     with pytest.raises(ValueError):
@@ -121,14 +142,17 @@ def test_settings():
     with pytest.raises(ValueError):
         settings.set_path("native", "error", path)
     s = core.Settings.from_dict(dict(a="b"))
+    repr(s)
 
 
 def test_size():
-    core.Size()
+    size = core.Size()
+    repr(size)
 
 
 def test_sizef():
-    core.SizeF()
+    size = core.SizeF()
+    repr(size)
 
 
 def test_sortfilterproxymodel():
