@@ -72,8 +72,11 @@ class CheckBox(QtWidgets.QCheckBox):
     def get_checkstate(self):
         return STATES.inv[self.checkState()]
 
-    def get_value(self):
+    def get_value(self) -> bool:
         return self.isChecked()
+
+    def set_value(self, value: bool):
+        self.setChecked(value)
 
 
 if __name__ == "__main__":
