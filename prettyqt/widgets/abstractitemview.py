@@ -11,15 +11,11 @@ import operator
 from qtpy import QtCore, QtWidgets
 from bidict import bidict
 
-from prettyqt import gui
+from prettyqt import gui, widgets
 
 TRIGGERS = dict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
                 double_click=QtWidgets.QAbstractItemView.DoubleClicked,
                 edit_key=QtWidgets.QAbstractItemView.EditKeyPressed)
-
-SCROLLBAR_POLICY = dict(always_on=QtCore.Qt.ScrollBarAlwaysOn,
-                        always_off=QtCore.Qt.ScrollBarAlwaysOff,
-                        as_needed=QtCore.Qt.ScrollBarAsNeeded)
 
 SELECTION_BEHAVIOURS = dict(rows=QtWidgets.QAbstractItemView.SelectRows,
                             columns=QtWidgets.QAbstractItemView.SelectColumns,
@@ -108,20 +104,6 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setDefaultDropAction(QtCore.Qt.MoveAction)
         self.setDropIndicatorShown(True)
 
-    def set_horizontal_scrollbar_visibility(self, mode: str):
-        self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
-
-    def set_vertical_scrollbar_visibility(self, mode: str):
-        self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
-
-    def set_horizontal_scrollbar_width(self, width):
-        stylesheet = f"QScrollBar:horizontal {{height: {width}px;}}"
-        self.horizontalScrollBar().setStyleSheet(stylesheet)
-
-    def set_vertical_scrollbar_width(self, width):
-        stylesheet = f"QScrollBar:vertical {{height: {width}px;}}"
-        self.verticalScrollBar().setStyleSheet(stylesheet)
-
     def set_edit_triggers(self, *triggers):
         for item in triggers:
             if item not in TRIGGERS:
@@ -203,3 +185,6 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
                 node.raise_()
                 return True
         return False
+
+
+AbstractItemView.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)

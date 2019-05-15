@@ -7,6 +7,8 @@ contains QtWidgets-based classes
 
 from .application import Application
 from .widget import Widget
+from .frame import Frame
+from .abstractscrollarea import AbstractScrollArea
 from .abstractbutton import AbstractButton
 from .abstractspinbox import AbstractSpinBox
 from .abstractitemview import AbstractItemView
@@ -25,7 +27,6 @@ from .filesystemmodel import FileSystemModel
 
 from .slider import Slider
 from .styleoptionslider import StyleOptionSlider
-from .frame import Frame
 
 
 from .dockwidget import DockWidget
@@ -97,6 +98,7 @@ __all__ = ["app",
            "Application",
            "AbstractButton",
            "AbstractSpinBox",
+           "AbstractScrollArea",
            "AbstractItemView",
            "Widget",
            "DesktopWidget",
