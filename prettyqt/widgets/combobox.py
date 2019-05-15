@@ -80,6 +80,8 @@ class ComboBox(QtWidgets.QComboBox):
                  label: str,
                  data=None,
                  icon=None):
+        if data is None:
+            data = label
         if icon is not None:
             if isinstance(icon, str):
                 icon = qta.icon(icon)
