@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
+
 import logging
 from typing import Dict
 
@@ -15,6 +17,10 @@ DOCK_POSITIONS = dict(top=QtCore.Qt.TopDockWidgetArea,
                       bottom=QtCore.Qt.BottomDockWidgetArea,
                       left=QtCore.Qt.LeftDockWidgetArea,
                       right=QtCore.Qt.RightDockWidgetArea)
+
+MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
+                         application=QtCore.Qt.ApplicationModal,
+                         none=QtCore.Qt.NonModal))
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -88,6 +94,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.showNormal()
         else:
             self.showFullScreen()
+
+    def set_modality(self, modality: str = "window"):
+        if modality not in MODALITIES:
+            raise ValueError("Invalid value for modality.")
+        self.setWindowModality(MODALITIES[modality])
 
 
 if __name__ == "__main__":
