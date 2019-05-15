@@ -38,3 +38,4 @@ COPY_ACTION = QtCore.Qt.CopyAction
 CTRL_MOD = QtCore.Qt.ControlModifier
 
 KEY_F11 = QtCore.Qt.Key_F11
+KEY_DELETE = QtCore.Qt.Key_Delete
