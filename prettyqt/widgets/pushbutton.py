@@ -31,10 +31,11 @@ class PushButton(QtWidgets.QPushButton):
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
-        self.__init__(state["text"])
-        self.setObjectName(state["object_name"])
+        self.__init__()
+        self.setText(state["text"])
+        self.setObjectName(state.get("object_name", ""))
         self.set_icon(state["icon"])
-        self.setEnabled(state["enabled"])
+        self.setEnabled(state.get("enabled", True))
         self.setChecked(state.get("checked", False))
         self.setCheckable(state["checkable"])
         self.setToolTip(state.get("tooltip", ""))

@@ -24,7 +24,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def __setstate__(self, state):
         super().__init__()
         self.set_text(state["text"])
-        self.setEnabled(state["enabled"])
+        self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])
 
     def set_enabled(self):

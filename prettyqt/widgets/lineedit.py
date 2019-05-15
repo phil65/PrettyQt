@@ -41,7 +41,7 @@ class LineEdit(QtWidgets.QLineEdit):
     def __setstate__(self, state):
         super().__init__()
         self.set_text(state["text"])
-        self.setEnabled(state["enabled"])
+        self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])
         self.setValidator(state["validator"])
         self.setInputMask(state["input_mask"])

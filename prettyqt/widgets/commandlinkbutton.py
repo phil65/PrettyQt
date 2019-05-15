@@ -33,10 +33,10 @@ class CommandLinkButton(QtWidgets.QCommandLinkButton):
 
     def __setstate__(self, state):
         self.__init__(state["title"])
-        self.setObjectName(state["object_name"])
-        self.setDescription(state["description"])
+        self.setObjectName(state.get("object_name", ""))
+        self.setDescription(state.get("description", ""))
         self.set_icon(state["icon"])
-        self.setEnabled(state["enabled"])
+        self.setEnabled(state.get("enabled", True))
         self.setChecked(state.get("checked", False))
         self.setCheckable(state["checkable"])
         self.setToolTip(state.get("tooltip", ""))

@@ -32,8 +32,8 @@ class Action(QtWidgets.QAction):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setText(state["text"])
-        self.setEnabled(state["enabled"])
+        self.setText(state.get("text", ""))
+        self.setEnabled(state.get("enabled", True))
         self.set_shortcut(state["shortcut"])
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))

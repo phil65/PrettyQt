@@ -51,7 +51,7 @@ class SpinBox(QtWidgets.QSpinBox):
         self.__init__()
         self.setRange(*state["range"])
         self.setValue(state["value"])
-        self.setEnabled(state["enabled"])
+        self.setEnabled(state.get("enabled", True))
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
         self.setSingleStep(state["single_step"])

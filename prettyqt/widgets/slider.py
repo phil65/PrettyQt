@@ -40,7 +40,7 @@ class Slider(QtWidgets.QSlider):
         self.setValue(state["value"])
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
-        self.setEnabled(state["enabled"])
+        self.setEnabled(state.get("enabled", True))
         self.setSingleStep(state["single_step"])
         self.setPageStep(state["page_step"])
         self.setTracking(state["has_tracking"])

@@ -36,12 +36,12 @@ class CheckBox(QtWidgets.QCheckBox):
 
     def __setstate__(self, state):
         super().__init__()
-        self.setObjectName(state["object_name"])
+        self.setObjectName(state.get("object_name", ""))
         self.setCheckable(state["checkable"])
-        self.setTristate(state["is_tristate"])
+        self.setTristate(state.get("is_tristate", False))
         self.set_checkstate(state["checkstate"])
-        self.setText(state["text"])
-        self.setEnabled(state["enabled"])
+        self.setText(state.get("text", ""))
+        self.setEnabled(state.get("enabled", True))
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
 

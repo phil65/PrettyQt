@@ -31,11 +31,11 @@ class RadioButton(QtWidgets.QRadioButton):
 
     def __setstate__(self, state):
         super().__init__()
-        self.setObjectName(state["object_name"])
+        self.setObjectName(state.get("object_name", ""))
         self.set_icon(state["icon"])
         self.setChecked(state.get("checked", False))
-        self.setText(state["text"])
-        self.setEnabled(state["enabled"])
+        self.setText(state.get("text", ""))
+        self.setEnabled(state.get("enabled", True))
         self.setCheckable(state["checkable"])
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))

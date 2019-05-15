@@ -30,7 +30,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setText(state["text"])
+        self.setText(state.get("text", ""))
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
         self.setData(QtCore.Qt.UserRole, state["data"])

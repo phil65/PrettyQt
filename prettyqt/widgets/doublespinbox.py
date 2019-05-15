@@ -46,7 +46,7 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         self.__init__()
         self.setRange(*state["range"])
         self.setValue(state["value"])
-        self.setEnabled(state["enabled"])
+        self.setEnabled(state.get("enabled", True))
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
         self.setPrefix(state["prefix"])

@@ -19,7 +19,7 @@ class CompositeValidator(gui.Validator):
         return dict(validators=self.validators)
 
     def __setstate__(self, state):
-        self.__init__(state["validators"])
+        self.__init__(state.get("validators", []))
 
     def validate(self, text, pos=0):
         vals = [v.validate(text, pos)[0] for v in self.validators]
