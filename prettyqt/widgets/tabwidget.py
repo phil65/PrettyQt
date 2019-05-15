@@ -6,7 +6,7 @@
 import qtawesome as qta
 from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
 class TabWidget(QtWidgets.QTabWidget):
@@ -38,7 +38,7 @@ class TabWidget(QtWidgets.QTabWidget):
         QtWidgets.qApp.aboutToQuit.connect(self.close_detached_tabs)
         self.setMovable(True)
 
-    @QtCore.Slot(int, QtCore.QPoint)
+    @core.Slot(int, QtCore.QPoint)
     def detach_tab(self, index: int, point: QtCore.QPoint):
         """
         Detach the tab by removing it's contents and placing them in
@@ -61,7 +61,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
         # Create a new detached tab window
         detached_tab = DetachedTab(name, widget)
-        detached_tab.setWindowModality(QtCore.Qt.NonModal)
+        detached_tab.set_modality("none")
         detached_tab.set_icon(icon)
         detached_tab.setGeometry(widget_rect)
         detached_tab.on_close.connect(self.attach_tab)
@@ -118,14 +118,14 @@ class TabWidget(QtWidgets.QTabWidget):
         for detached_tab in self.detached_tabs.values():
             detached_tab.close()
 
-    @QtCore.Slot(int)
+    @core.Slot(int)
     def remove_tab(self, index: int):
         widget = self.widget(index)
         self.removeTab(index)
         if widget is not None:
             widget.deleteLater()
 
-    @QtCore.Slot(object, str)
+    @core.Slot(object, str)
     def open_widget(self, widget: QtWidgets.QWidget, title: str = "Unnamed"):
         """
         create a tab containing delivered widget
@@ -148,7 +148,7 @@ class DetachedTab(widgets.MainWindow):
     Attributes:
         on_close: signal, emitted when window is closed (widget, title, icon)
     """
-    on_close = QtCore.Signal(QtWidgets.QWidget, str, QtGui.QIcon)
+    on_close = core.Signal(QtWidgets.QWidget, str, QtGui.QIcon)
 
     def __init__(self, name, widget):
         super().__init__(None)
@@ -167,8 +167,7 @@ class DetachedTab(widgets.MainWindow):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.app()
     tab_widget = TabWidget()
     widget = widgets.Widget()
     tab_widget.add_tab(widget, "Test")

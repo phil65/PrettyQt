@@ -122,5 +122,4 @@ if __name__ == "__main__":
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
-    app.exec_()
+    widget.show_blocking()
