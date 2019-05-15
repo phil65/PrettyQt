@@ -5,8 +5,13 @@
 
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
+from bidict import bidict
 
 from prettyqt import widgets
+
+MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
+                         application=QtCore.Qt.ApplicationModal,
+                         none=QtCore.Qt.NonModal))
 
 
 class ProgressDialog(QtWidgets.QProgressDialog):
@@ -24,7 +29,7 @@ class ProgressDialog(QtWidgets.QProgressDialog):
         self.setBar(progress_bar)
 
         self.set_icon("mdi.timer-sand-empty")
-        self.setWindowModality(QtCore.Qt.ApplicationModal)
+        self.set_modality("application")
         self.set_flags(minimize=False,
                        maximize=False,
                        close=False,
@@ -60,10 +65,17 @@ class ProgressDialog(QtWidgets.QProgressDialog):
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
 
+    def set_modality(self, modality: str = "window"):
+        if modality not in MODALITIES:
+            raise ValueError("Invalid value for modality.")
+        self.setWindowModality(MODALITIES[modality])
+
+    def get_modality(self):
+        return MODALITIES.inv[self.windowModality()]
+
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.app()
     widget = ProgressDialog()
     widget.show_message("test")
     widget.exec_()

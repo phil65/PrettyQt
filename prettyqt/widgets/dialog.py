@@ -5,13 +5,15 @@
 
 from typing import Optional
 
+from bidict import bidict
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets, gui
 
-MODALITIES = dict(window=QtCore.Qt.WindowModal,
-                  application=QtCore.Qt.ApplicationModal)
+MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
+                         application=QtCore.Qt.ApplicationModal,
+                         none=QtCore.Qt.NonModal))
 
 
 class Dialog(QtWidgets.QDialog):
@@ -70,6 +72,9 @@ class Dialog(QtWidgets.QDialog):
         if modality not in MODALITIES:
             raise ValueError("Invalid value for modality.")
         self.setWindowModality(MODALITIES[modality])
+
+    def get_modality(self):
+        return MODALITIES.inv[self.windowModality()]
 
     def delete_on_close(self):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
