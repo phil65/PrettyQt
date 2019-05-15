@@ -86,6 +86,8 @@ class ListWidget(QtWidgets.QListWidget):
                  label: str,
                  data=None,
                  icon=None):
+        if data is None:
+            data = label
         item = widgets.ListWidgetItem(label)
         if icon is not None:
             if isinstance(icon, str):
