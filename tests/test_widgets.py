@@ -104,6 +104,9 @@ def test_dateedit():
     widget = widgets.DateEdit()
     widget.set_disabled()
     widget.set_enabled()
+    dt = datetime.date(2000, 11, 11)
+    widget.set_value(dt)
+    assert widget.get_value() == dt
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -115,6 +118,9 @@ def test_datetimeedit():
     widget = widgets.DateTimeEdit()
     widget.set_disabled()
     widget.set_enabled()
+    dt = datetime.datetime(2000, 11, 11)
+    widget.set_value(dt)
+    assert widget.get_value() == dt
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -537,8 +543,12 @@ def test_timeedit():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.set_range(datetime.time(1, 1, 1), datetime.time(3, 3, 3))
+    widget.set_value(datetime.time(0, 0, 0))
     assert widget.get_time() == widget.min_time()
     assert widget.max_time() == datetime.time(3, 3, 3)
+    dt = datetime.time(2, 2, 2)
+    widget.set_value(dt)
+    assert widget.get_value() == dt
 
 
 def test_toolbar():
