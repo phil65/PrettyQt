@@ -20,13 +20,6 @@ from .messagebox import MessageBox
 
 from .filesystemmodel import FileSystemModel
 
-from .layout import Layout
-from .formlayout import FormLayout
-from .boxlayout import BoxLayout
-from .stackedlayout import StackedLayout
-from .gridlayout import GridLayout
-from .toolbox import ToolBox
-
 from .slider import Slider
 from .styleoptionslider import StyleOptionSlider
 from .frame import Frame
@@ -57,6 +50,7 @@ from .spinbox import SpinBox
 from .doublespinbox import DoubleSpinBox
 from .checkbox import CheckBox
 from .lineedit import LineEdit
+from .keysequenceedit import KeySequenceEdit
 from .textedit import TextEdit
 from .dateedit import DateEdit
 from .timeedit import TimeEdit
@@ -70,6 +64,13 @@ from .treeview import TreeView
 from .tableview import TableView
 from .itemdelegate import ItemDelegate
 from .styleditemdelegate import StyledItemDelegate
+
+from .layout import Layout
+from .formlayout import FormLayout
+from .boxlayout import BoxLayout
+from .stackedlayout import StackedLayout
+from .gridlayout import GridLayout
+from .toolbox import ToolBox
 
 from .splashscreen import SplashScreen
 from .progressdialog import ProgressDialog
@@ -134,6 +135,7 @@ __all__ = ["app",
            "DoubleSpinBox",
            "CheckBox",
            "LineEdit",
+           "KeySequenceEdit",
            "TextEdit",
            "DateEdit",
            "TimeEdit",
