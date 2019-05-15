@@ -38,6 +38,8 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
                     statustip=self.statusTip(),
                     step_type=self.get_step_type(),
                     prefix=self.prefix(),
+                    correction_mode=self.get_correction_mode(),
+                    button_symbols=self.get_button_symbols(),
                     decimals=self.decimals(),
                     suffix=self.suffix(),
                     single_step=self.singleStep())
@@ -54,6 +56,8 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         self.setDecimals(state["decimals"])
         self.setSingleStep(state["single_step"])
         self.set_step_type(state["step_type"])
+        self.set_correction_mode(state["correction_mode"])
+        self.set_button_symbols(state["button_symbols"])
 
     def set_enabled(self):
         self.setEnabled(True)
@@ -70,8 +74,14 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
     def set_button_symbols(self, mode: str):
         self.setButtonSymbols(SYMBOLS[mode])
 
+    def get_button_symbols(self) -> str:
+        return SYMBOLS.inv[self.buttonSymbols()]
+
     def set_correction_mode(self, mode: str):
         self.setCorrectionMode(CORRECTION_MODES[mode])
+
+    def get_correction_mode(self) -> str:
+        return CORRECTION_MODES.inv[self.correctionMode()]
 
     def set_step_type(self, mode: str):
         self.setStepType(STEP_TYPES[mode])
