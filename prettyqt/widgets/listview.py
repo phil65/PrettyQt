@@ -3,36 +3,11 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets
-
-SELECTION_MODES = bidict(dict(single=QtWidgets.QAbstractItemView.SingleSelection,
-                              extended=QtWidgets.QAbstractItemView.ExtendedSelection,
-                              multi=QtWidgets.QAbstractItemView.MultiSelection,
-                              none=QtWidgets.QAbstractItemView.NoSelection))
+from prettyqt import widgets
 
 
 class ListView(QtWidgets.QListView):
-
-    def get_selection_mode(self):
-        return SELECTION_MODES.inv[self.selectionMode()]
-
-    def set_selection_mode(self, mode: str):
-        """set selection mode for given item view
-
-        Allowed values are "single", "extended", "multi" or "none"
-
-        Args:
-            mode: selection mode to use
-
-        Raises:
-            ValueError: mode does not exist
-        """
-        if mode not in SELECTION_MODES:
-            raise ValueError("Format must be either 'single', 'extended',"
-                             "'multi' or 'None'")
-        self.setSelectionMode(SELECTION_MODES[mode])
 
     def toggle_select_all(self):
         """
@@ -44,6 +19,9 @@ class ListView(QtWidgets.QListView):
             self.clearSelection()
         else:
             self.selectAll()
+
+
+ListView.__bases__[0].__bases__ = (widgets.AbstractItemView,)
 
 
 if __name__ == "__main__":

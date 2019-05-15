@@ -6,7 +6,7 @@ contains QtWidgets-based classes
 """
 
 from .application import Application
-
+from .abstractitemview import AbstractItemView
 from .widget import Widget
 from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
@@ -64,8 +64,8 @@ from .datetimeedit import DateTimeEdit
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
 from .progressbar import ProgressBar
-from .listwidget import ListWidget
 from .listview import ListView
+from .listwidget import ListWidget
 from .treeview import TreeView
 from .tableview import TableView
 from .itemdelegate import ItemDelegate
@@ -91,6 +91,7 @@ def app():
 
 __all__ = ["app",
            "Application",
+           "AbstractItemView",
            "Widget",
            "DesktopWidget",
            "GraphicsItem",
