@@ -55,8 +55,11 @@ class RadioButton(QtWidgets.QRadioButton):
         if icon:
             self.setIcon(icon)
 
-    def get_value(self):
+    def get_value(self) -> bool:
         return self.isChecked()
+
+    def set_value(self, value: bool):
+        self.setChecked(value)
 
 
 if __name__ == "__main__":
