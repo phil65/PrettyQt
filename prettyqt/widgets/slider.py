@@ -3,15 +3,15 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
+
 from qtpy import QtCore, QtWidgets
 from prettyqt import core
 
-TICK_POSITIONS = dict(none=QtWidgets.QSlider.NoTicks,
-                      both_sides=QtWidgets.QSlider.NoTicks,
-                      above=QtWidgets.QSlider.NoTicks,
-                      below=QtWidgets.QSlider.NoTicks,
-                      left=QtWidgets.QSlider.NoTicks,
-                      right=QtWidgets.QSlider.NoTicks)
+TICK_POSITIONS = bidict(dict(none=QtWidgets.QSlider.NoTicks,
+                             both_sides=QtWidgets.QSlider.TicksBothSides,
+                             above=QtWidgets.QSlider.TicksAbove,
+                             below=QtWidgets.QSlider.TicksBelow))
 
 
 class Slider(QtWidgets.QSlider):
@@ -29,6 +29,8 @@ class Slider(QtWidgets.QSlider):
                     statustip=self.statusTip(),
                     enabled=self.isEnabled(),
                     has_tracking=self.hasTracking(),
+                    tick_position=self.get_tick_position(),
+                    tick_interval=self.tickInterval(),
                     inverted_controls=self.invertedControls(),
                     inverted_appearance=self.invertedAppearance(),
                     single_step=self.singleStep(),
@@ -46,6 +48,8 @@ class Slider(QtWidgets.QSlider):
         self.setTracking(state["has_tracking"])
         self.setInvertedControls(state["inverted_controls"])
         self.setInvertedAppearance(state["inverted_appearance"])
+        self.set_tick_position(state["tick_position"])
+        self.setTickInterval(state["tick_interval"])
 
     def is_horizontal(self) -> bool:
         """check if silder is horizontal
@@ -77,6 +81,9 @@ class Slider(QtWidgets.QSlider):
         if position not in TICK_POSITIONS:
             raise ValueError(f"{position} not a valid tick position.")
         self.setTickPosition(TICK_POSITIONS[position])
+
+    def get_tick_position(self):
+        return TICK_POSITIONS.inv[self.tickPosition()]
 
     def get_value(self):
         return self.value()
