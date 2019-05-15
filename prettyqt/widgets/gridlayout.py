@@ -59,6 +59,10 @@ class GridLayout(QtWidgets.QGridLayout):
     def __len__(self):
         return self.count()
 
+    def __add__(self, other):
+        self[self.rowCount(), 0:self.columnCount()] = other
+        return self
+
     def set_size_mode(self, mode: str):
         if mode not in MODES:
             raise ValueError(f"{mode} not a valid size mode.")
@@ -80,6 +84,8 @@ if __name__ == "__main__":
     layout[1, 5:6] = widgets.RadioButton("1 2 3 jk jkjl j kföldsjfköj")
     layout[3:5, 7:8] = widgets.RadioButton("2")
     layout[3:5, 1:4] = widgets.RadioButton("3")
+    layout += widgets.RadioButton("3")
+    layout += widgets.RadioButton("4")
     widget = widgets.Widget()
     widget.setLayout(layout)
     print(layout)
