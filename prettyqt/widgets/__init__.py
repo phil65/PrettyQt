@@ -15,7 +15,7 @@ from .styleoption import StyleOption
 from .spaceritem import SpacerItem
 from .sizepolicy import SizePolicy
 from .stylepainter import StylePainter
-from .dialog import Dialog
+from .dialog import BaseDialog, Dialog
 from .messagebox import MessageBox
 from .errormessage import ErrorMessage
 
@@ -102,6 +102,7 @@ __all__ = ["app",
            "SpacerItem",
            "SizePolicy",
            "StylePainter",
+           "BaseDialog",
            "Dialog",
            "MessageBox",
            "ErrorMessage",

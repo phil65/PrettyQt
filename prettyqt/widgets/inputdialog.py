@@ -43,7 +43,7 @@ class InputDialog(QtWidgets.QInputDialog):
             return v[0]
 
 
-InputDialog.__bases__[0].__bases__ = (widgets.Dialog,)
+InputDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

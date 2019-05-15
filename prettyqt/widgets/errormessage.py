@@ -12,7 +12,7 @@ class ErrorMessage(QtWidgets.QErrorMessage):
     pass
 
 
-ErrorMessage.__bases__[0].__bases__ = (widgets.Dialog,)
+ErrorMessage.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

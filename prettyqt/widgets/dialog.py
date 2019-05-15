@@ -16,27 +16,7 @@ MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
                          none=QtCore.Qt.NonModal))
 
 
-class Dialog(QtWidgets.QDialog):
-
-    DEFAULT_SIZE = None
-
-    def __init__(self,
-                 title: str = "",
-                 icon=None,
-                 parent=None,
-                 delete_on_close: bool = True,
-                 layout: Optional[str] = None):
-        super().__init__(parent=parent)
-        if self.DEFAULT_SIZE:
-            self.resize(*self.DEFAULT_SIZE)
-        self.setWindowTitle(title)
-        self.set_icon(icon)
-        if delete_on_close:
-            self.delete_on_close()
-        self.box = None
-        if layout in ["horizontal", "vertical"]:
-            self.box = widgets.BoxLayout(layout)
-            self.setLayout(self.box)
+class BaseDialog(QtWidgets.QDialog):
 
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
@@ -68,6 +48,17 @@ class Dialog(QtWidgets.QDialog):
         else:
             super().resize(*size)
 
+    def keyPressEvent(self, e):
+        if e.key() == QtCore.Qt.Key_Escape:
+            self.close()
+        elif e.key() == QtCore.Qt.Key_F11:
+            if self.isMaximized():
+                self.showNormal()
+            else:
+                self.showMaximized()
+        else:
+            super().keyPressEvent(e)
+
     def set_modality(self, modality: str = "window"):
         if modality not in MODALITIES:
             raise ValueError("Invalid value for modality.")
@@ -98,20 +89,49 @@ class Dialog(QtWidgets.QDialog):
     def accepted(self):
         self.close()
 
-    def keyPressEvent(self, e):
-        if e.key() == QtCore.Qt.Key_Escape:
-            self.close()
-        elif e.key() == QtCore.Qt.Key_F11:
-            if self.isMaximized():
-                self.showNormal()
-            else:
-                self.showMaximized()
-        else:
-            super().keyPressEvent(e)
-
     def show_blocking(self):
         self.show()
         self.exec_()
+
+    def set_flags(self,
+                  minimize: bool = None,
+                  maximize: bool = None,
+                  close: bool = None,
+                  stay_on_top: bool = None,
+                  window: bool = None):
+        if minimize is not None:
+            self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
+        if maximize is not None:
+            self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, maximize)
+        if close is not None:
+            self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, close)
+        if stay_on_top is not None:
+            self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint, stay_on_top)
+        if window is not None:
+            self.setWindowFlag(QtCore.Qt.Window, window)
+
+
+class Dialog(BaseDialog):
+
+    DEFAULT_SIZE = None
+
+    def __init__(self,
+                 title: str = "",
+                 icon=None,
+                 parent=None,
+                 delete_on_close: bool = True,
+                 layout: Optional[str] = None):
+        super().__init__(parent=parent)
+        if self.DEFAULT_SIZE:
+            self.resize(*self.DEFAULT_SIZE)
+        self.setWindowTitle(title)
+        self.set_icon(icon)
+        if delete_on_close:
+            self.delete_on_close()
+        self.box = None
+        if layout in ["horizontal", "vertical"]:
+            self.box = widgets.BoxLayout(layout)
+            self.setLayout(self.box)
 
 
 if __name__ == "__main__":

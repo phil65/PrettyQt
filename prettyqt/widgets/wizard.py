@@ -17,7 +17,7 @@ class Wizard(QtWidgets.QWizard):
         page.setLayout(layout)
 
 
-Wizard.__bases__[0].__bases__ = (widgets.Dialog,)
+Wizard.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

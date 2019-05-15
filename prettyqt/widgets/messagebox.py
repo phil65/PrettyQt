@@ -12,7 +12,7 @@ class MessageBox(QtWidgets.QMessageBox):
     pass
 
 
-MessageBox.__bases__[0].__bases__ = (widgets.Dialog,)
+MessageBox.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

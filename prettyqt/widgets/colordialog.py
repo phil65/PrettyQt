@@ -35,7 +35,7 @@ class ColorDialog(QtWidgets.QColorDialog):
         return gui.Color(self.currentColor())
 
 
-ColorDialog.__bases__[0].__bases__ = (widgets.Dialog,)
+ColorDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

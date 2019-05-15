@@ -14,7 +14,7 @@ class FontDialog(QtWidgets.QFontDialog):
         return gui.Font(self.currentFont())
 
 
-FontDialog.__bases__[0].__bases__ = (widgets.Dialog,)
+FontDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

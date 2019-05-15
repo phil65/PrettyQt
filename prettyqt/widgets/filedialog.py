@@ -163,7 +163,7 @@ class FileDialog(QtWidgets.QFileDialog):
         return pathlib.Path(super().directory())
 
 
-FileDialog.__bases__[0].__bases__ = (widgets.Dialog,)
+FileDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

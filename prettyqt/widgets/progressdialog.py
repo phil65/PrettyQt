@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
 from prettyqt import widgets
 
@@ -15,7 +15,7 @@ class ProgressDialog(QtWidgets.QProgressDialog):
     """
 
     def __init__(self, parent=None):
-        super().__init__(parent)
+        super().__init__(parent=parent)
 
         progress_bar = widgets.ProgressBar()
         progress_bar.setRange(0, 0)
@@ -36,25 +36,8 @@ class ProgressDialog(QtWidgets.QProgressDialog):
         self.setLabelText(message)
         self.show()
 
-    def set_flags(self,
-                  minimize: bool = None,
-                  maximize: bool = None,
-                  close: bool = None,
-                  stay_on_top: bool = None,
-                  window: bool = None):
-        if minimize is not None:
-            self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
-        if maximize is not None:
-            self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, maximize)
-        if close is not None:
-            self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, close)
-        if stay_on_top is not None:
-            self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint, stay_on_top)
-        if window is not None:
-            self.setWindowFlag(QtCore.Qt.Window, window)
 
-
-ProgressDialog.__bases__[0].__bases__ = (widgets.Dialog,)
+ProgressDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":
