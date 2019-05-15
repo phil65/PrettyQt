@@ -133,11 +133,8 @@ class FlowLayout(widgets.Layout):
 
 
 if __name__ == '__main__':
-
-    import sys
-
-    app = QtWidgets.QApplication(sys.argv)
-    widget = QtWidgets.QWidget()
+    app = widgets.Application.create_default_app()
+    widget = widgets.Widget()
     layout = FlowLayout()
     layout += widgets.PushButton("Short")
     layout += widgets.PushButton("Longer")
@@ -146,4 +143,4 @@ if __name__ == '__main__':
     layout += widgets.PushButton("Even longer button text")
     widget.setLayout(layout)
     widget.show()
-    sys.exit(app.exec_())
+    app.exec_()
