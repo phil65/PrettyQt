@@ -3,15 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtCore, QtWidgets
-
-MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
-             fixed=QtWidgets.QLayout.SetFixedSize)
-
-ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
-                  right=QtCore.Qt.AlignRight,
-                  top=QtCore.Qt.AlignTop,
-                  bottom=QtCore.Qt.AlignBottom)
+from qtpy import QtWidgets
+from prettyqt import widgets
 
 
 class BoxLayout(QtWidgets.QBoxLayout):
@@ -19,9 +12,6 @@ class BoxLayout(QtWidgets.QBoxLayout):
     def __init__(self, orientation="horizontal", parent=None):
         o = self.TopToBottom if orientation == "vertical" else self.LeftToRight
         super().__init__(o, parent)
-
-    def __repr__(self):
-        return f"BoxLayout: {self.count()} children"
 
     def __getitem__(self, index):
         item = self.itemAt(index)
@@ -61,18 +51,8 @@ class BoxLayout(QtWidgets.QBoxLayout):
     def get_children(self):
         return [self[i] for i in range(self.count())]
 
-    def set_size_mode(self, mode: str):
-        if mode not in MODES:
-            raise ValueError(f"{mode} not a valid size mode.")
-        self.setSizeConstraint(MODES[mode])
 
-    def set_alignment(self, alignment: str):
-        if alignment not in ALIGNMENTS:
-            raise ValueError(f"{alignment!r} not a valid alignment.")
-        self.setAlignment(ALIGNMENTS[alignment])
-
-    def set_margin(self, margin: int):
-        self.setContentsMargins(margin, margin, margin, margin)
+BoxLayout.__bases__[0].__bases__ = (widgets.Layout,)
 
 
 if __name__ == "__main__":

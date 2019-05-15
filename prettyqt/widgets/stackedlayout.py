@@ -4,9 +4,7 @@
 """
 
 from qtpy import QtWidgets
-
-MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
-             fixed=QtWidgets.QLayout.SetFixedSize)
+from prettyqt import widgets
 
 
 class StackedLayout(QtWidgets.QStackedLayout):
@@ -46,13 +44,8 @@ class StackedLayout(QtWidgets.QStackedLayout):
     def get_children(self):
         return [self[i] for i in range(self.count())]
 
-    def set_size_mode(self, mode: str):
-        if mode not in MODES:
-            raise ValueError(f"{mode} not a valid size mode.")
-        self.setSizeConstraint(MODES[mode])
 
-    def set_margin(self, margin: int):
-        self.setContentsMargins(margin, margin, margin, margin)
+StackedLayout.__bases__[0].__bases__ = (widgets.Layout,)
 
 
 if __name__ == "__main__":

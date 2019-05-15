@@ -17,9 +17,6 @@ class FlowLayout(widgets.Layout):
         self.setSpacing(spacing)
         self.items = []
 
-    def __repr__(self):
-        return f"FlowLayout: {self.count()} children"
-
     def __getstate__(self):
         return dict(items=self.get_children())
 
@@ -47,6 +44,11 @@ class FlowLayout(widgets.Layout):
         item = self.takeAt(0)
         while item:
             item = self.takeAt(0)
+
+    def __len__(self):
+        """needed for PySide2
+        """
+        return self.count()
 
     def get_children(self):
         return [self[i] for i in range(self.count())]
@@ -141,6 +143,7 @@ if __name__ == '__main__':
     layout += widgets.PushButton("Different text")
     layout += widgets.PushButton("More text")
     layout += widgets.PushButton("Even longer button text")
+    print(len(layout))
     widget.setLayout(layout)
     widget.show()
     app.exec_()

@@ -9,9 +9,6 @@ from qtpy import QtWidgets
 
 from prettyqt import widgets
 
-MODES = bidict(dict(maximum=QtWidgets.QLayout.SetMaximumSize,
-                    fixed=QtWidgets.QLayout.SetFixedSize))
-
 ROLES = bidict(dict(left=QtWidgets.QFormLayout.LabelRole,
                     right=QtWidgets.QFormLayout.FieldRole,
                     both=QtWidgets.QFormLayout.SpanningRole))
@@ -23,9 +20,6 @@ class FormLayout(QtWidgets.QFormLayout):
         super().__init__(*args, **kwargs)
         self.set_size_mode("maximum")
         self.setVerticalSpacing(8)
-
-    def __repr__(self):
-        return f"FormLayout: {self.count()} children"
 
     def __getitem__(self, index):
         item = self.itemAt(index)
@@ -72,11 +66,6 @@ class FormLayout(QtWidgets.QFormLayout):
         for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
             self.set_widget(item, pos[0], pos[1])
 
-    def set_size_mode(self, mode: str):
-        if mode not in MODES:
-            raise ValueError(f"{mode} not a valid size mode.")
-        self.setSizeConstraint(MODES[mode])
-
     def set_widget(self, widget, row, role: str = "both"):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
@@ -105,6 +94,9 @@ class FormLayout(QtWidgets.QFormLayout):
             if v is not None:
                 formlayout[i, "right"] = v
         return formlayout
+
+
+FormLayout.__bases__[0].__bases__ = (widgets.Layout,)
 
 
 if __name__ == "__main__":

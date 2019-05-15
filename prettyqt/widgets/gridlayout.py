@@ -3,17 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
 from prettyqt import widgets
-
-MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
-             fixed=QtWidgets.QLayout.SetFixedSize)
-
-ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
-                  right=QtCore.Qt.AlignRight,
-                  top=QtCore.Qt.AlignTop,
-                  bottom=QtCore.Qt.AlignBottom)
 
 
 class GridLayout(QtWidgets.QGridLayout):
@@ -35,9 +27,6 @@ class GridLayout(QtWidgets.QGridLayout):
         rowstart = row.start if isinstance(row, slice) else row
         colstart = col.start if isinstance(col, slice) else col
         self.add_item(value, rowstart, colstart, rowspan, colspan)
-
-    def __repr__(self):
-        return f"GridLayout: {self.count()} children"
 
     def __getstate__(self):
         widgets = []
@@ -63,19 +52,12 @@ class GridLayout(QtWidgets.QGridLayout):
         self[self.rowCount(), 0:self.columnCount()] = other
         return self
 
-    def set_size_mode(self, mode: str):
-        if mode not in MODES:
-            raise ValueError(f"{mode} not a valid size mode.")
-        self.setSizeConstraint(MODES[mode])
-
-    def set_alignment(self, alignment: str):
-        if alignment not in ALIGNMENTS:
-            raise ValueError(f"{alignment!r} not a valid alignment.")
-        self.setAlignment(ALIGNMENTS[alignment])
-
     def add_item(self, item, rowstart, colstart, rowspan=1, colspan=1):
         fn = self.addWidget if isinstance(item, QtWidgets.QWidget) else self.addLayout
         fn(item, rowstart, colstart, rowspan, colspan)
+
+
+GridLayout.__bases__[0].__bases__ = (widgets.Layout,)
 
 
 if __name__ == "__main__":
