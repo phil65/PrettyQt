@@ -6,9 +6,9 @@ contains QtWidgets-based classes
 """
 
 from .application import Application
+from .widget import Widget
 from .abstractspinbox import AbstractSpinBox
 from .abstractitemview import AbstractItemView
-from .widget import Widget
 from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
 from .style import Style

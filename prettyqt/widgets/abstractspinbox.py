@@ -65,6 +65,9 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         self.setValue(value)
 
 
+AbstractSpinBox.__bases__[0].__bases__ = (widgets.Widget,)
+
+
 if __name__ == "__main__":
     app = widgets.app()
     widget = AbstractSpinBox()

@@ -7,7 +7,7 @@ import datetime
 
 from qtpy import QtWidgets
 
-from prettyqt import core
+from prettyqt import core, widgets
 
 
 class DateTimeEdit(QtWidgets.QDateTimeEdit):
@@ -39,12 +39,6 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.setDisplayFormat(state["display_format"])
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
-
-    def set_enabled(self):
-        self.setEnabled(True)
-
-    def set_disabled(self):
-        self.setEnabled(False)
 
     def set_range(self, lower: datetime.datetime, upper: datetime.datetime):
         self.setToolTip(f"{lower} <= x <= {upper}")
@@ -78,8 +72,10 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
             return self.maximumDateTime().toPyDateTime()
 
 
+DateTimeEdit.__bases__[0].__bases__ = (widgets.AbstractSpinBox,)
+
+
 if __name__ == "__main__":
-    from prettyqt import widgets
     app = widgets.app()
     widget = DateTimeEdit()
     print(widget.__getstate__())
