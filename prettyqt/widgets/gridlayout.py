@@ -75,7 +75,7 @@ class GridLayout(QtWidgets.QGridLayout):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     layout = GridLayout()
     layout[1, 5:6] = widgets.RadioButton("1 2 3 jk jkjl j kföldsjfköj")
     layout[3:5, 7:8] = widgets.RadioButton("2")

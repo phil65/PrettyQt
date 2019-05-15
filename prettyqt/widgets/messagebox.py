@@ -19,7 +19,7 @@ class MessageBox(QtWidgets.QMessageBox):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = MessageBox()
     widget.show()
     app.exec_()

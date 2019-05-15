@@ -113,7 +113,7 @@ class LineEdit(QtWidgets.QLineEdit):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = LineEdit("This is a test")
     widget.set_regex_validator("[0-9]+")
     widget.setFont(gui.Font("Consolas"))

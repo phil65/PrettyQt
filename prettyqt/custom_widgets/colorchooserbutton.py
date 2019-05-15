@@ -3,8 +3,6 @@
 @author: Philipp Temminghoff
 """
 
-import sys
-
 from prettyqt import core, gui, widgets
 
 
@@ -70,9 +68,9 @@ class ColorChooserButton(widgets.Widget):
 
 
 if __name__ == "__main__":
-    app = widgets.Application(sys.argv)
+    app = widgets.app()
     btn = ColorChooserButton()
     btn.set_color(gui.Color("green"))
     btn.show()
     btn.value_changed.connect(print)
-    sys.exit(app.exec_())
+    app.exec_()

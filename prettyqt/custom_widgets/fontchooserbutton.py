@@ -3,8 +3,6 @@
 @author: Philipp Temminghoff
 """
 
-import sys
-
 from prettyqt import core, gui, widgets
 
 
@@ -58,9 +56,9 @@ class FontChooserButton(widgets.Widget):
 
 
 if __name__ == "__main__":
-    app = widgets.Application(sys.argv)
+    app = widgets.app()
     btn = FontChooserButton()
     btn.set_font("Consolas")
     btn.show()
     btn.value_changed.connect(print)
-    sys.exit(app.exec_())
+    app.exec_()

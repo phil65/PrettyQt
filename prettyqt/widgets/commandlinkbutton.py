@@ -63,7 +63,7 @@ class CommandLinkButton(QtWidgets.QCommandLinkButton):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = CommandLinkButton("This is a test")
     widget.show()
     app.exec_()

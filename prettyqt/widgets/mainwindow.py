@@ -91,7 +91,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     form = MainWindow()
     form.show()
     app.exec_()

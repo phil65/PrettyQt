@@ -108,7 +108,7 @@ class FormLayout(QtWidgets.QFormLayout):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     dct = {"key": widgets.Label("test"),
            None: widgets.Label("test 2")}
     layout = FormLayout.from_dict(dct)

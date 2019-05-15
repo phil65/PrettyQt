@@ -4,7 +4,6 @@
 """
 
 import pathlib
-import sys
 
 from prettyqt import core, widgets
 
@@ -62,8 +61,8 @@ class FileChooserButton(widgets.Widget):
 
 
 if __name__ == "__main__":
-    app = widgets.Application(sys.argv)
+    app = widgets.app()
     btn = FileChooserButton()
     btn.show()
     btn.value_changed.connect(print)
-    sys.exit(app.exec_())
+    app.exec_()

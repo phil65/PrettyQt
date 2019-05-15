@@ -18,9 +18,8 @@ class Wizard(QtWidgets.QWizard):
 
 
 if __name__ == "__main__":
-    import sys
-    app = widgets.Application(sys.argv)
+    app = widgets.app()
     dlg = Wizard()
     dlg.add_widget_as_page(widgets.RadioButton("test"))
     dlg.show()
-    sys.exit(app.exec_())
+    app.exec_()

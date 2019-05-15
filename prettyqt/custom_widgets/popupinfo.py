@@ -46,7 +46,7 @@ class PopupInfo(QtWidgets.QDialog):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = PopupInfo()
     widget.show_popup("test")
     app.exec_()

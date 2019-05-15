@@ -84,7 +84,13 @@ from .splitter import Splitter
 from .wizard import Wizard
 from .wizardpage import WizardPage
 
-__all__ = ["Application",
+
+def app():
+    return Application.create_default_app()
+
+
+__all__ = ["app",
+           "Application",
            "Widget",
            "DesktopWidget",
            "GraphicsItem",

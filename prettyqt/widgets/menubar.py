@@ -20,7 +20,7 @@ class MenuBar(QtWidgets.QMenuBar):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     win = QtWidgets.QMainWindow()
     menu_bar = MenuBar()
     win.setMenuBar(menu_bar)

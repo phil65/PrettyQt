@@ -80,7 +80,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = DateTimeEdit()
     print(widget.__getstate__())
     widget.show()

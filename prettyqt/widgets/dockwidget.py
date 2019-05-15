@@ -60,7 +60,7 @@ class DockWidget(QtWidgets.QDockWidget):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     win = widgets.MainWindow()
     dock_widget = DockWidget(name="aa", title="Test")
     dock_widget.setup_title_bar()

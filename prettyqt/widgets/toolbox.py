@@ -55,7 +55,7 @@ class ToolBox(QtWidgets.QToolBox):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     w = widgets.Widget()
     w2 = widgets.Widget()
     w2.setObjectName("objectName")

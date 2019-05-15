@@ -18,7 +18,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     path = path = "E:\\dev\\datacook\\processanalyzer\\docs\\index.html"
     widget = WebEngineView.from_local_file(path)
     widget.show()

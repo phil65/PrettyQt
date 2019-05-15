@@ -6,7 +6,7 @@
 from bidict import bidict
 
 from qtpy import QtWidgets, QtCore
-from prettyqt import core
+from prettyqt import core, widgets
 
 STATES = bidict(dict(unchecked=QtCore.Qt.Unchecked,
                      partial=QtCore.Qt.PartiallyChecked,
@@ -80,8 +80,7 @@ class CheckBox(QtWidgets.QCheckBox):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = widgets.app()
     widget = CheckBox("test")
     widget.show()
     app.exec_()

@@ -75,7 +75,7 @@ class TimeEdit(QtWidgets.QTimeEdit):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = TimeEdit()
     widget.show()
     app.exec_()

@@ -93,7 +93,7 @@ class CodeEditor(widgets.PlainTextEdit):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     dlg = CodeEditor()
     dlg.show()
     app.exec_()

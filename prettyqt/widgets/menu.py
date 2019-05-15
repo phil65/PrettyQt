@@ -91,7 +91,7 @@ class Menu(QtWidgets.QMenu):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     menu = Menu("1")
     action = widgets.Action("test")
     menu.addAction(action)

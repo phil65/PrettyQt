@@ -38,8 +38,7 @@ class StatusBar(QtWidgets.QStatusBar):
 
 
 if __name__ == "__main__":
-    import sys
-    app = widgets.Application(sys.argv)
+    app = widgets.app()
     dlg = widgets.MainWindow()
     status_bar = StatusBar()
     status_bar.set_color("black")

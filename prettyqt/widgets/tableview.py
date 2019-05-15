@@ -222,7 +222,7 @@ class TableView(QtWidgets.QTableView):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     dlg = widgets.MainWindow()
     status_bar = TableView()
     dlg.show()

@@ -446,7 +446,7 @@ class SpanSlider(widgets.Slider):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     slider = SpanSlider()
     slider.set_span(30, 70)
     slider.setRange(0, 100)

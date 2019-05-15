@@ -26,7 +26,7 @@ class NotEmptyValidator(gui.Validator):
 if __name__ == "__main__":
     from prettyqt import widgets
     val = NotEmptyValidator()
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = widgets.LineEdit("This is a test")
     widget.setValidator(val)
     widget.show()

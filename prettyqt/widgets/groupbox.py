@@ -47,7 +47,7 @@ class GroupBox(QtWidgets.QGroupBox):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = GroupBox()
     ly = widgets.BoxLayout()
     ly += widgets.RadioButton("test")

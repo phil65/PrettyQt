@@ -3,8 +3,6 @@
 @author: Philipp Temminghoff
 """
 
-import sys
-
 from prettyqt import widgets
 
 
@@ -21,6 +19,6 @@ class ImageViewer(widgets.Widget):
 
 
 if __name__ == "__main__":
-    app = widgets.Application(sys.argv)
+    app = widgets.app()
     ex = ImageViewer()
-    sys.exit(app.exec_())
+    app.exec_()

@@ -80,7 +80,7 @@ class Action(QtWidgets.QAction):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     action = Action("This is a test")
     print(action.__getstate__())
     app.exec_()

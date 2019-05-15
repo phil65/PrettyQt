@@ -92,7 +92,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = PlainTextEdit("This is a test")
     widget.show()
     app.exec_()

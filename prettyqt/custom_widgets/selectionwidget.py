@@ -68,7 +68,7 @@ class SelectionWidget(widgets.GroupBox):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = SelectionWidget()
     items = {"Semicolon": ";",
              "Tab": "\t",

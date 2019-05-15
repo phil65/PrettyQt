@@ -45,7 +45,7 @@ if __name__ == "__main__":
     from prettyqt import widgets
     model = gui.StandardItemModel()
     model.add_item("test")
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     w = widgets.ListView()
     w.setModel(model)
     model += gui.StandardItem("Item")

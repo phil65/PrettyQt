@@ -76,7 +76,7 @@ class DateEdit(QtWidgets.QDateEdit):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = DateEdit()
     widget.show()
     app.exec_()

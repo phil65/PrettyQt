@@ -162,7 +162,7 @@ class FileDialog(QtWidgets.QFileDialog):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     widget = FileDialog(path_id="test", caption="Some header")
     widget.show()
     print(widget.__getstate__())

@@ -86,6 +86,6 @@ class HeaderView(QtWidgets.QHeaderView):
 
 
 if __name__ == "__main__":
-    app = widgets.Application.create_default_app()
+    app = widgets.app()
     header = HeaderView(parent=None)
     app.exec_()
