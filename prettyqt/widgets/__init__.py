@@ -17,6 +17,7 @@ from .sizepolicy import SizePolicy
 from .stylepainter import StylePainter
 from .dialog import Dialog
 from .messagebox import MessageBox
+from .errormessage import ErrorMessage
 
 from .filesystemmodel import FileSystemModel
 
@@ -103,6 +104,7 @@ __all__ = ["app",
            "StylePainter",
            "Dialog",
            "MessageBox",
+           "ErrorMessage",
            "FileSystemModel",
            "Layout",
            "FormLayout",
