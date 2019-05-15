@@ -104,7 +104,7 @@ class Dialog(QtWidgets.QDialog):
         else:
             super().keyPressEvent(e)
 
-    def open(self):
+    def show_blocking(self):
         self.show()
         self.exec_()
 
