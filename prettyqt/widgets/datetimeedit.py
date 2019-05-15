@@ -56,7 +56,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
     def get_value(self) -> datetime.datetime:
         return self.get_datetime()
 
-    def set_value(self, value):
+    def set_value(self, value: datetime.datetime):
         self.setDateTime(value)
 
     def get_datetime(self) -> datetime.datetime:
@@ -65,13 +65,13 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         except TypeError:
             return self.dateTime().toPyDateTime()
 
-    def min_datetime(self):
+    def min_datetime(self) -> datetime.datetime:
         try:
             return self.minimumDateTime().toPython()
         except (TypeError, AttributeError):
             return self.minimumDateTime().toPyDateTime()
 
-    def max_datetime(self):
+    def max_datetime(self) -> datetime.datetime:
         try:
             return self.maximumDateTime().toPython()
         except (TypeError, AttributeError):

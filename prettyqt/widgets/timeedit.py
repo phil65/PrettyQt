@@ -42,10 +42,10 @@ class TimeEdit(QtWidgets.QTimeEdit):
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setTimeRange(lower, upper)
 
-    def get_value(self):
+    def get_value(self) -> datetime.time:
         return self.get_time()
 
-    def set_value(self, value):
+    def set_value(self, value: datetime.time):
         return self.setTime(value)
 
     def get_time(self) -> datetime.time:
@@ -60,13 +60,13 @@ class TimeEdit(QtWidgets.QTimeEdit):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def min_time(self):
+    def min_time(self) -> datetime.time:
         try:
             return self.minimumTime().toPython()
         except (TypeError, AttributeError):
             return self.minimumTime().toPyTime()
 
-    def max_time(self):
+    def max_time(self) -> datetime.time:
         try:
             return self.maximumTime().toPython()
         except (TypeError, AttributeError):

@@ -46,7 +46,7 @@ class DateEdit(QtWidgets.QDateEdit):
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setDateRange(lower, upper)
 
-    def get_value(self):
+    def get_value(self) -> datetime.date:
         return self.get_date()
 
     def get_date(self) -> datetime.date:
@@ -61,13 +61,13 @@ class DateEdit(QtWidgets.QDateEdit):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def min_date(self):
+    def min_date(self) -> datetime.date:
         try:
             return self.minimumDate().toPython()
         except (TypeError, AttributeError):
             return self.minimumDate().toPyDate()
 
-    def max_date(self):
+    def max_date(self) -> datetime.date:
         try:
             return self.maximumDate().toPython()
         except (TypeError, AttributeError):
