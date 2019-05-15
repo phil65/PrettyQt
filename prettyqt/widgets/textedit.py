@@ -5,16 +5,19 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import gui, core
+from prettyqt import gui, core, widgets
 
 
 class TextEdit(QtWidgets.QTextEdit):
 
-    value_changed = core.Signal()
+    value_changed = core.Signal(str)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.textChanged.connect(self.value_changed)
+        self.textChanged.connect(self.on_value_change)
+
+    def on_value_change(self):
+        self.value_changed.emit(self.text())
 
     def __getstate__(self):
         return dict(text=self.text(),
@@ -26,12 +29,6 @@ class TextEdit(QtWidgets.QTextEdit):
         self.set_text(state["text"])
         self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])
-
-    def set_enabled(self):
-        self.setEnabled(True)
-
-    def set_disabled(self):
-        self.setEnabled(False)
 
     def set_font(self,
                  font_name: str,
@@ -53,13 +50,8 @@ class TextEdit(QtWidgets.QTextEdit):
     def set_read_only(self, value: bool = True):
         self.setReadOnly(value)
 
-    def scroll_to_end(self):
-        """scroll to the end of the text
-        """
-        self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
 
-    def set_color(self, color):
-        self.setStyleSheet(f"background-color: {color};")
+TextEdit.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 
 
 if __name__ == "__main__":

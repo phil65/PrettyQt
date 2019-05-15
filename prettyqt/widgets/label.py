@@ -81,6 +81,9 @@ class Label(QtWidgets.QLabel):
         return label
 
 
+Label.__bases__[0].__bases__ = (widgets.Frame,)
+
+
 if __name__ == "__main__":
     app = widgets.app()
     widget = Label("test")

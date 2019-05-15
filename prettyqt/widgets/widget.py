@@ -29,6 +29,13 @@ class Widget(QtWidgets.QWidget):
         yield None
         self.blockSignals(False)
 
+    def set_expanding(self):
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
+                           QtWidgets.QSizePolicy.Expanding)
+
+    def set_color(self, color):
+        self.setStyleSheet(f"background-color: {color};")
+
 
 if __name__ == "__main__":
     import sys

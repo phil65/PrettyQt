@@ -54,6 +54,11 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         stylesheet = f"QScrollBar:vertical {{height: {width}px;}}"
         self.verticalScrollBar().setStyleSheet(stylesheet)
 
+    def scroll_to_end(self):
+        """scroll to the end of the text
+        """
+        self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
+
 
 AbstractScrollArea.__bases__[0].__bases__ = (widgets.Frame,)
 

@@ -54,6 +54,9 @@ class ToolBox(QtWidgets.QToolBox):
             self.addItem(widget, title)
 
 
+ToolBox.__bases__[0].__bases__ = (widgets.Frame,)
+
+
 if __name__ == "__main__":
     app = widgets.app()
     w = widgets.Widget()

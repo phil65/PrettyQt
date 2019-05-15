@@ -25,12 +25,6 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
     def __repr__(self):
         return f"{self.__class__.__name__}: {self.__getstate__()}"
 
-    def set_enabled(self):
-        self.setEnabled(True)
-
-    def set_disabled(self):
-        self.setEnabled(False)
-
     def is_valid(self) -> bool:
         return self.hasAcceptableInput()
 

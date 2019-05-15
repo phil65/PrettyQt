@@ -27,12 +27,6 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])
 
-    def set_enabled(self):
-        self.setEnabled(True)
-
-    def set_disabled(self):
-        self.setEnabled(False)
-
     def set_font(self,
                  font_name: str,
                  font_size: int = -1,
@@ -57,11 +51,6 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             value: True, for read-only, otherwise False
         """
         self.setReadOnly(value)
-
-    def scroll_to_end(self):
-        """scroll to the end of the text
-        """
-        self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
 
     def highlight_current_line(self):
         extra_selections = []
@@ -89,6 +78,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def get_value(self):
         return self.text()
+
+
+PlainTextEdit.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 
 
 if __name__ == "__main__":

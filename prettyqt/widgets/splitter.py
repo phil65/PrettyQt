@@ -5,6 +5,7 @@
 
 from bidict import bidict
 from qtpy import QtCore, QtWidgets
+from prettyqt import widgets
 
 ORIENTATIONS = bidict(dict(horizontal=QtCore.Qt.Horizontal,
                            vertical=QtCore.Qt.Vertical))
@@ -62,15 +63,14 @@ class Splitter(QtWidgets.QSplitter):
             splitter += widget
         return splitter
 
-    def set_expanding(self):
-        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
-                           QtWidgets.QSizePolicy.Expanding)
-
     def set_orientation(self, orientation: str):
         self.setOrientation(ORIENTATIONS[orientation])
 
     def get_orientation(self) -> str:
         return ORIENTATIONS.inv[self.orientation()]
+
+
+Splitter.__bases__[0].__bases__ = (widgets.Frame,)
 
 
 if __name__ == "__main__":

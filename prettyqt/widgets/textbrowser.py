@@ -6,10 +6,12 @@
 import docutils.core
 import markdown
 from qtpy import QtWidgets
-from prettyqt import gui
+from prettyqt import gui, widgets, core
 
 
 class TextBrowser(QtWidgets.QTextBrowser):
+
+    value_changed = core.Signal(str)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -54,6 +56,9 @@ class TextBrowser(QtWidgets.QTextBrowser):
 
     def text(self):
         return self.toPlainText()
+
+
+TextBrowser.__bases__[0].__bases__ = (widgets.TextEdit,)
 
 
 if __name__ == "__main__":
