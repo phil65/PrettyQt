@@ -43,6 +43,9 @@ class InputDialog(QtWidgets.QInputDialog):
             return v[0]
 
 
+InputDialog.__bases__[0].__bases__ = (widgets.Dialog,)
+
+
 if __name__ == "__main__":
     app = widgets.app()
     result = InputDialog.get_text("a", "b", icon="mdi.timer")

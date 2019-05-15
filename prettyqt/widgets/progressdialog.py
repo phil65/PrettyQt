@@ -3,15 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-import qtawesome as qta
 from qtpy import QtCore, QtWidgets
-from bidict import bidict
 
 from prettyqt import widgets
-
-MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
-                         application=QtCore.Qt.ApplicationModal,
-                         none=QtCore.Qt.NonModal))
 
 
 class ProgressDialog(QtWidgets.QProgressDialog):
@@ -38,12 +32,6 @@ class ProgressDialog(QtWidgets.QProgressDialog):
         self.setCancelButton(None)
         self.cancel()
 
-    def set_icon(self, icon):
-        if icon:
-            if isinstance(icon, str):
-                icon = qta.icon(icon, color="lightgray")
-            self.setWindowIcon(icon)
-
     def show_message(self, message):
         self.setLabelText(message)
         self.show()
@@ -65,13 +53,8 @@ class ProgressDialog(QtWidgets.QProgressDialog):
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
 
-    def set_modality(self, modality: str = "window"):
-        if modality not in MODALITIES:
-            raise ValueError("Invalid value for modality.")
-        self.setWindowModality(MODALITIES[modality])
 
-    def get_modality(self):
-        return MODALITIES.inv[self.windowModality()]
+ProgressDialog.__bases__[0].__bases__ = (widgets.Dialog,)
 
 
 if __name__ == "__main__":

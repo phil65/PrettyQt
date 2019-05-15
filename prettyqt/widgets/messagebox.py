@@ -3,19 +3,16 @@
 @author: Philipp Temminghoff
 """
 
-import qtawesome as qta
 from qtpy import QtWidgets
 
 from prettyqt import widgets
 
 
 class MessageBox(QtWidgets.QMessageBox):
+    pass
 
-    def set_icon(self, icon):
-        if icon:
-            if isinstance(icon, str):
-                icon = qta.icon(icon, color="lightgray")
-            self.setWindowIcon(icon)
+
+MessageBox.__bases__[0].__bases__ = (widgets.Dialog,)
 
 
 if __name__ == "__main__":
