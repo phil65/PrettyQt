@@ -41,25 +41,25 @@ def test_boxlayout():
 
 
 def test_buttongroup():
-    group = widgets.ButtonGroup()
+    widget = widgets.ButtonGroup()
     btn = widgets.RadioButton("test")
-    group.addButton(btn, id=2)
-    assert group[2] == btn
+    widget.addButton(btn, id=2)
+    assert widget[2] == btn
 
 
 def test_checkbox():
-    chk = widgets.CheckBox()
-    chk.set_disabled()
-    chk.set_enabled()
+    widget = widgets.CheckBox()
+    widget.set_disabled()
+    widget.set_enabled()
     import pickle
     with open("data.pkl", "wb") as jar:
-        pickle.dump(chk, jar)
+        pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
-        chk = pickle.load(jar)
-    assert bool(chk) is False
-    chk.show()
-    chk.close()
-    repr(chk)
+        widget = pickle.load(jar)
+    assert bool(widget) is False
+    widget.set_value(True)
+    assert widget.get_value() is True
+    repr(widget)
 
 
 def test_colordialog():
@@ -69,8 +69,6 @@ def test_colordialog():
         pickle.dump(dlg, jar)
     with open("data.pkl", "rb") as jar:
         dlg = pickle.load(jar)
-    dlg.show()
-    dlg.close()
 
 
 def test_combobox():
@@ -86,8 +84,6 @@ def test_combobox():
         pickle.dump(box, jar)
     with open("data.pkl", "rb") as jar:
         box = pickle.load(jar)
-    box.show()
-    box.close()
     repr(box)
 
 
@@ -101,7 +97,6 @@ def test_commandlinkbutton():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
     repr(widget)
 
 
@@ -146,8 +141,6 @@ def test_dialog(qtbot):
     dlg.resize(0, 400)
     dlg.resize((0, 400))
     dlg.add_buttonbox()
-    dlg.show()
-    dlg.close()
 
 
 def test_dialogbuttonbox():
@@ -159,16 +152,12 @@ def test_dialogbuttonbox():
     assert btn == box["apply"]
     for item in box:
         pass
-    box.show()
-    box.close()
 
 
 def test_dockwidget():
     widget = widgets.DockWidget()
     widget.setup_title_bar()
     widget.maximise()
-    widget.show()
-    widget.close()
 
 
 def test_doublespinbox():
@@ -179,8 +168,6 @@ def test_doublespinbox():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
-    widget.close()
     repr(widget)
 
 
@@ -196,8 +183,6 @@ def test_filedialog():
         pickle.dump(dlg, jar)
     with open("data.pkl", "rb") as jar:
         dlg = pickle.load(jar)
-    dlg.show()
-    dlg.close()
 
 
 def test_filesystemmodel():
@@ -210,9 +195,7 @@ def test_filesystemmodel():
 
 
 def test_fontdialog():
-    dlg = widgets.FontDialog()
-    dlg.show()
-    dlg.close()
+    widgets.FontDialog()
 
 
 def test_formlayout():
@@ -236,9 +219,7 @@ def test_formlayout():
 
 
 def test_frame():
-    widget = widgets.Frame()
-    widget.show()
-    widget.close()
+    widgets.Frame()
 
 
 def test_gridlayout():
@@ -258,7 +239,6 @@ def test_gridlayout():
 
 def test_groupbox():
     widget = widgets.GroupBox()
-    widget.show()
     ly = widgets.BoxLayout("horizontal")
     widget.set_layout(ly)
     ly += widgets.RadioButton("+=")
@@ -268,7 +248,6 @@ def test_groupbox():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.set_enabled(False)
-    widget.close()
     repr(widget)
 
 
@@ -290,8 +269,6 @@ def test_headerview():
     header.set_sizes([100])
     label = header.section_labels()
     print(label)
-    table.show()
-    table.close()
 
 
 def test_label():
@@ -303,8 +280,6 @@ def test_label():
         pickle.dump(label, jar)
     with open("data.pkl", "rb") as jar:
         label = pickle.load(jar)
-    label.show()
-    label.close()
     repr(label)
 
 
@@ -320,8 +295,6 @@ def test_lineedit():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
-    widget.close()
 
 
 def test_listview():
@@ -330,8 +303,6 @@ def test_listview():
     widget.toggle_select_all()
     widget.set_selection_mode("multi")
     assert widget.get_selection_mode() == "multi"
-    widget.show()
-    widget.close()
 
 
 def test_listwidget():
@@ -382,19 +353,16 @@ def test_menu():
 
     menu.add_action("test", test, icon="mdi.timer", shortcut="Ctrl+A", checkable=True)
     menu._separator("test")
-    menu.show()
 
 
 def test_menubar():
     menu = widgets.MenuBar()
     menu += widgets.Action("test")
-    menu.show()
 
 
 def test_messagebox():
     widget = widgets.MessageBox()
     widget.set_icon("mdi.timer")
-    widget.show()
 
 
 def test_plaintextedit():
@@ -415,17 +383,14 @@ def test_plaintextedit():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
 
 
 def test_progressbar():
-    widget = widgets.ProgressBar()
-    widget.show()
+    widgets.ProgressBar()
 
 
 def test_progressdialog():
-    widget = widgets.ProgressDialog()
-    widget.show()
+    widgets.ProgressDialog()
 
 
 def test_pushbutton():
@@ -438,7 +403,6 @@ def test_pushbutton():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
 
 
 def test_radiobutton():
@@ -454,7 +418,6 @@ def test_radiobutton():
     repr(widget)
     widget.set_value(True)
     assert widget.get_value() is True
-    widget.show()
 
 
 def test_slider():
@@ -467,7 +430,6 @@ def test_slider():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
 
 
 def test_statusbar():
@@ -478,7 +440,6 @@ def test_statusbar():
     status_bar.addWidget(label)
     status_bar.setup_default_bar()
     widget.setStatusBar(status_bar)
-    widget.show()
 
 
 def test_stackedlayout():
@@ -508,7 +469,6 @@ def test_spinbox():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     repr(widget)
-    widget.show()
 
 
 def test_splitter():
@@ -527,7 +487,6 @@ def test_splitter():
         pass
     widget.set_expanding()
     widget.set_orientation("horizontal")
-    widget.show()
 
 
 def test_tabwidget():
@@ -542,9 +501,6 @@ def test_tabwidget():
     widget.detach_tab(0, core.Point())
     widget.remove_tab(0)
     # widget.close_detached_tabs()
-    widget.show()
-    widget.close()
-    assert True
 
 
 def test_textbrowser():
@@ -553,9 +509,6 @@ def test_textbrowser():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
-    widget.close()
-    assert True
 
 
 def test_textedit():
@@ -573,7 +526,6 @@ def test_textedit():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
 
 
 def test_timeedit():
@@ -601,7 +553,6 @@ def test_toolbar():
         pass
 
     widget.add_action("test", "mdi.timer", test, checkable=True)
-    widget.show()
 
 
 def test_toolbutton():
@@ -638,7 +589,6 @@ def test_tableview():
     widget.num_selected()
     widget.jump_to_column(0)
     widget.highlight_when_inactive()
-    widget.show()
 
 
 def test_toolbox():
@@ -656,7 +606,6 @@ def test_toolbox():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
-    widget.show()
 
 
 def test_treeview():
@@ -679,7 +628,6 @@ def test_treeview():
     widget.highlight_when_inactive()
     widget.raise_dock()
     widget.adapt_sizes()
-    widget.show()
 
 
 def test_widget():

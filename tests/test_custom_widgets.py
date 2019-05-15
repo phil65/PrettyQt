@@ -26,7 +26,6 @@ def test_colorchooserbutton():
         pickle.dump(btn, jar)
     with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
-    btn.show()
 
 
 def test_filechooserbutton():
@@ -35,7 +34,6 @@ def test_filechooserbutton():
         pickle.dump(btn, jar)
     with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
-    btn.show()
 
 
 def test_codeeditor():
@@ -50,8 +48,7 @@ def test_codeeditor():
 
 
 def test_imageviewer():
-    widget = custom_widgets.ImageViewer()
-    widget.show()
+    custom_widgets.ImageViewer()
 
 
 def test_flowlayout():
@@ -63,12 +60,10 @@ def test_flowlayout():
     layout += widgets.PushButton("More text")
     layout += widgets.PushButton("Even longer button text")
     widget.setLayout(layout)
-    widget.show()
 
 
 def test_markdownwidget():
-    widget = custom_widgets.MarkdownWindow()
-    widget.show()
+    custom_widgets.MarkdownWindow()
 
 
 def test_popupinfo():
@@ -108,7 +103,6 @@ def test_spanslider(qtbot):
     slider.pixel_pos_to_value(100)
     slider.draw_span(gui.Painter(), core.Rect())
     slider.move_pressed_handle()
-    slider.show()
     qtbot.mouseClick(slider, QtCore.Qt.LeftButton)
     qtbot.mouseMove(slider, core.Point(20, 20))
     assert slider.movement_mode == "free"
