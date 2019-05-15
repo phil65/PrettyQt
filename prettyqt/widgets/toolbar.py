@@ -23,12 +23,6 @@ class Toolbar(QtWidgets.QToolBar):
         self.set_icon_size(24)
         self.menu_buttons = list()
 
-    def set_enabled(self):
-        self.setEnabled(True)
-
-    def set_disabled(self):
-        self.setEnabled(False)
-
     def add_menu_button(self,
                         label: str,
                         icon,
@@ -61,6 +55,9 @@ class Toolbar(QtWidgets.QToolBar):
 
     def set_font_size(self, size: int):
         self.setStyleSheet(f"font-size: {size}pt;")
+
+
+Toolbar.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

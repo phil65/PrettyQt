@@ -55,12 +55,6 @@ class LineEdit(QtWidgets.QLineEdit):
     def font(self) -> gui.Font:
         return gui.Font(super().font())
 
-    def set_enabled(self):
-        self.setEnabled(True)
-
-    def set_disabled(self):
-        self.setEnabled(False)
-
     def set_font(self,
                  font_name: str,
                  font_size: int = -1,
@@ -110,6 +104,9 @@ class LineEdit(QtWidgets.QLineEdit):
 
     def is_valid(self) -> bool:
         return self.hasAcceptableInput()
+
+
+LineEdit.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

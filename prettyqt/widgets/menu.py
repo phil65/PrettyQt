@@ -90,6 +90,9 @@ class Menu(QtWidgets.QMenu):
         return action
 
 
+Menu.__bases__[0].__bases__ = (widgets.Widget,)
+
+
 if __name__ == "__main__":
     app = widgets.app()
     menu = Menu("1")

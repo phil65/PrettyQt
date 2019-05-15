@@ -7,6 +7,9 @@ from typing import List
 
 from qtpy import QtCore, QtWidgets
 
+from prettyqt import widgets
+
+
 BUTTONS = dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
                ok=QtWidgets.QDialogButtonBox.Ok,
                save=QtWidgets.QDialogButtonBox.Save,
@@ -80,6 +83,9 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
     def add_reject_button(self, button):
         return self.addButton(button, self.RejectRole)
+
+
+DialogButtonBox.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

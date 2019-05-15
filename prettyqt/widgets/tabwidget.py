@@ -166,6 +166,9 @@ class DetachedTab(widgets.MainWindow):
         self.on_close.emit(self.widget, self.objectName(), self.windowIcon())
 
 
+TabWidget.__bases__[0].__bases__ = (widgets.Widget,)
+
+
 if __name__ == "__main__":
     app = widgets.app()
     tab_widget = TabWidget()

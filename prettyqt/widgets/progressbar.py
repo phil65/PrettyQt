@@ -5,6 +5,8 @@
 
 from qtpy import QtWidgets
 
+from prettyqt import widgets
+
 
 class ProgressBar(QtWidgets.QProgressBar):
     """Progress dialog
@@ -14,6 +16,9 @@ class ProgressBar(QtWidgets.QProgressBar):
 
     def set_range(self, start, end):
         self.setRange(start, end)
+
+
+ProgressBar.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

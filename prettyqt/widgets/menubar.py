@@ -19,6 +19,9 @@ class MenuBar(QtWidgets.QMenuBar):
         self.addAction(action)
 
 
+MenuBar.__bases__[0].__bases__ = (widgets.Widget,)
+
+
 if __name__ == "__main__":
     app = widgets.app()
     win = QtWidgets.QMainWindow()

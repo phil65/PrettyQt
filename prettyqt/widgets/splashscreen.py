@@ -5,7 +5,7 @@
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui
+from prettyqt import gui, widgets
 
 
 class SplashScreen(QtWidgets.QSplashScreen):
@@ -25,3 +25,6 @@ class SplashScreen(QtWidgets.QSplashScreen):
 
     def __exit__(self, typ, value, traceback):
         self.hide()
+
+
+SplashScreen.__bases__[0].__bases__ = (widgets.Widget,)

@@ -59,6 +59,9 @@ class DockWidget(QtWidgets.QDockWidget):
             self.showMinimized()
 
 
+DockWidget.__bases__[0].__bases__ = (widgets.Widget,)
+
+
 if __name__ == "__main__":
     app = widgets.app()
     win = widgets.MainWindow()
