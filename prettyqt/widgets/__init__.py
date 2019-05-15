@@ -6,6 +6,7 @@ contains QtWidgets-based classes
 """
 
 from .application import Application
+from .abstractspinbox import AbstractSpinBox
 from .abstractitemview import AbstractItemView
 from .widget import Widget
 from .desktopwidget import DesktopWidget
@@ -93,6 +94,7 @@ def app():
 
 __all__ = ["app",
            "Application",
+           "AbstractSpinBox",
            "AbstractItemView",
            "Widget",
            "DesktopWidget",

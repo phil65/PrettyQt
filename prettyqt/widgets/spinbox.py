@@ -3,21 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets
 
-from prettyqt import widgets, gui, core
-
-CORRECTION_MODES = bidict(dict(to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
-                               to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue))
-
-SYMBOLS = bidict(dict(up_down=QtWidgets.QSpinBox.UpDownArrows,
-                      plus_minus=QtWidgets.QSpinBox.PlusMinus,
-                      none=QtWidgets.QSpinBox.NoButtons))
-
-STEP_TYPES = bidict(dict(default=QtWidgets.QSpinBox.DefaultStepType,
-                         adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType))
+from prettyqt import widgets, core
 
 
 class SpinBox(QtWidgets.QSpinBox):
@@ -29,9 +17,6 @@ class SpinBox(QtWidgets.QSpinBox):
         self.setLineEdit(widgets.LineEdit())
         self.valueChanged.connect(self.value_changed)
         self.setGroupSeparatorShown(True)
-
-    def __repr__(self):
-        return f"SpinBox: {self.__getstate__()}"
 
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
@@ -62,44 +47,8 @@ class SpinBox(QtWidgets.QSpinBox):
         self.setDisplayIntegerBase(state["int_base"])
         self.set_step_type(state["step_type"])
 
-    def set_enabled(self):
-        self.setEnabled(True)
 
-    def set_disabled(self):
-        self.setEnabled(False)
-
-    def is_valid(self) -> bool:
-        return self.hasAcceptableInput()
-
-    def set_validator(self, validator: gui.Validator):
-        self.lineEdit().setValidator(validator)
-
-    def get_button_symbols(self) -> str:
-        return SYMBOLS.inv[self.buttonSymbols()]
-
-    def set_button_symbols(self, mode: str):
-        self.setButtonSymbols(SYMBOLS[mode])
-
-    def set_correction_mode(self, mode: str):
-        self.setCorrectionMode(CORRECTION_MODES[mode])
-
-    def get_correction_mode(self) -> str:
-        return CORRECTION_MODES.inv[self.correctionMode()]
-
-    def set_step_type(self, mode: str):
-        self.setStepType(STEP_TYPES[mode])
-
-    def get_step_type(self) -> str:
-        return STEP_TYPES.inv[self.stepType()]
-
-    def set_special_value(self, value: str):
-        self.setSpecialValueText(value)
-
-    def get_value(self) -> int:
-        return self.value()
-
-    def set_value(self, value: int):
-        self.setValue(value)
+SpinBox.__bases__[0].__bases__ = (widgets.AbstractSpinBox,)
 
 
 if __name__ == "__main__":
