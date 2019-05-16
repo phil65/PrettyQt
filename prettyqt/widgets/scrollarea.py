@@ -1,0 +1,26 @@
+# -*- coding: utf-8 -*-
+"""
+@author: Philipp Temminghoff
+"""
+
+from qtpy import QtWidgets
+
+from prettyqt import widgets
+
+
+class ScrollArea(QtWidgets.QScrollArea):
+
+    def __getstate__(self):
+        return dict(widget=self.widget(),
+                    resizable=self.widgetResizable())
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.set_widget(state["widget"])
+        self.setWidgetResizable(state["resizable"])
+
+    def set_widget(self, widget):
+        self.setWidget(widget)
+
+
+ScrollArea.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
