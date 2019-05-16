@@ -27,6 +27,16 @@ class MdiArea(QtWidgets.QMdiArea):
             return self
 
     def set_view_mode(self, mode):
+        """set view mode for the MDI area
+
+        Valid values are "default" and "tabbed"
+
+        Args:
+            mode: view mode to use
+
+        Raises:
+            ValueError: view mode does not exist
+        """
         if mode not in VIEW_MODES:
             raise ValueError("Invalid value for mode.")
         self.setViewMode(VIEW_MODES[mode])
@@ -35,6 +45,16 @@ class MdiArea(QtWidgets.QMdiArea):
         return VIEW_MODES.inv[self.viewMode()]
 
     def set_window_order(self, mode):
+        """set the window order behaviour for the MDI area
+
+        Valid values are "creation", "stacking", "activation"
+
+        Args:
+            mode: window order behaviour to use
+
+        Raises:
+            ValueError: window order mode not existing.
+        """
         if mode not in WINDOW_ORDERS:
             raise ValueError("Invalid value for mode.")
         self.setViewMode(WINDOW_ORDERS[mode])
@@ -43,7 +63,7 @@ class MdiArea(QtWidgets.QMdiArea):
         return WINDOW_ORDERS.inv[self.viewMode()]
 
     def add_item(self, item):
-        if not isinstance(item, widgets.MdiSubWindow):
+        if not isinstance(item, QtWidgets.QMdiSubWindow):
             widget = widgets.MdiSubWindow()
             widget.setWidget(item)
             self.addSubWindow(widget)
