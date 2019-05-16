@@ -17,9 +17,9 @@ TRIGGERS = dict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
                 double_click=QtWidgets.QAbstractItemView.DoubleClicked,
                 edit_key=QtWidgets.QAbstractItemView.EditKeyPressed)
 
-SELECTION_BEHAVIOURS = dict(rows=QtWidgets.QAbstractItemView.SelectRows,
-                            columns=QtWidgets.QAbstractItemView.SelectColumns,
-                            items=QtWidgets.QAbstractItemView.SelectItems)
+SELECTION_BEHAVIOURS = bidict(dict(rows=QtWidgets.QAbstractItemView.SelectRows,
+                                   columns=QtWidgets.QAbstractItemView.SelectColumns,
+                                   items=QtWidgets.QAbstractItemView.SelectItems))
 
 SELECTION_MODES = bidict(dict(single=QtWidgets.QAbstractItemView.SingleSelection,
                               extended=QtWidgets.QAbstractItemView.ExtendedSelection,
@@ -125,6 +125,9 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if behaviour not in SELECTION_BEHAVIOURS:
             raise ValueError("invalid selection behaviour")
         self.setSelectionBehavior(SELECTION_BEHAVIOURS[behaviour])
+
+    def get_selection_behaviour(self):
+        return SELECTION_BEHAVIOURS.inv[self.selectionBehavior()]
 
     def set_selection_mode(self, mode: str):
         """set selection mode for given item view

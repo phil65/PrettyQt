@@ -3,9 +3,16 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
 from qtpy import QtGui
 
 from prettyqt import gui
+
+
+WEIGHTS = bidict(dict(thin=QtGui.QFont.Thin,
+                      light=QtGui.QFont.Light,
+                      medium=QtGui.QFont.Medium,
+                      bold=QtGui.QFont.Bold))
 
 
 class TextCharFormat(QtGui.QTextCharFormat):
@@ -16,10 +23,9 @@ class TextCharFormat(QtGui.QTextCharFormat):
         self.setForeground(color)
 
     def set_font_weight(self, weight):
-        WEIGHTS = dict(thin=QtGui.QFont.Thin,
-                       light=QtGui.QFont.Light,
-                       medium=QtGui.QFont.Medium,
-                       bold=QtGui.QFont.Bold)
         if weight not in WEIGHTS:
             raise ValueError("Invalid font weight")
         self.setFontWeight(WEIGHTS[weight])
+
+    def get_font_weight(self):
+        return WEIGHTS.inv[self.fontWeight()]
