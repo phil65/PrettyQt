@@ -13,9 +13,9 @@ from bidict import bidict
 
 from prettyqt import gui, widgets
 
-TRIGGERS = dict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
-                double_click=QtWidgets.QAbstractItemView.DoubleClicked,
-                edit_key=QtWidgets.QAbstractItemView.EditKeyPressed)
+TRIGGERS = bidict(dict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
+                       double_click=QtWidgets.QAbstractItemView.DoubleClicked,
+                       edit_key=QtWidgets.QAbstractItemView.EditKeyPressed))
 
 SELECTION_BEHAVIOURS = bidict(dict(rows=QtWidgets.QAbstractItemView.SelectRows,
                                    columns=QtWidgets.QAbstractItemView.SelectColumns,
@@ -110,6 +110,10 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
                 raise ValueError("trigger type not available")
         flags = functools.reduce(operator.ior, [TRIGGERS[t] for t in triggers])
         self.setEditTriggers(flags)
+
+    def get_edit_triggers(self):
+        current_triggers = self.editTriggers()
+        return [k for k, v in TRIGGERS.items() if v & current_triggers]
 
     def set_selection_behaviour(self, behaviour: str):
         """set selection behaviour for given item view
