@@ -11,15 +11,16 @@ class CompositeValidator(gui.Validator):
     def __repr__(self):
         return f"CompositeValidator({self.validators})"
 
-    def __init__(self, validators, parent=None):
+    def __init__(self, validators=None, parent=None):
         super().__init__(parent)
-        self.validators = validators
+        self.validators = validators if validators is not None else []
 
     def __getstate__(self):
         return dict(validators=self.validators)
 
     def __setstate__(self, state):
-        self.__init__(state.get("validators", []))
+        self.__init__()
+        self.validators = state.get("validators", [])
 
     def validate(self, text, pos=0):
         vals = [v.validate(text, pos)[0] for v in self.validators]
