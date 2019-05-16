@@ -3,11 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
 
 import logging
-from typing import Dict
 
+from bidict import bidict
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
@@ -83,12 +82,6 @@ class MainWindow(QtWidgets.QMainWindow):
             if isinstance(icon, str):
                 icon = qta.icon(icon, color="lightgray")
             self.setWindowIcon(icon)
-
-    def set_stylesheet(self, item, dct: Dict[str, str]) -> str:
-        ss = "; ".join(f"{k.replace('_', '-')}: {v}" for k, v in dct.items())
-        stylesheet = f"{item} {{{ss};}}"
-        self.setStyleSheet(stylesheet)
-        return stylesheet
 
     def add_widget_as_dock(self,
                            name: str,

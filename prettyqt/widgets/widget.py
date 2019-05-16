@@ -3,6 +3,7 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Dict
 from contextlib import contextmanager
 
 from qtpy import QtWidgets
@@ -41,6 +42,12 @@ class Widget(QtWidgets.QWidget):
 
     def set_color(self, color):
         self.setStyleSheet(f"background-color: {color};")
+
+    def set_stylesheet(self, item, dct: Dict[str, str]) -> str:
+        ss = "; ".join(f"{k.replace('_', '-')}: {v}" for k, v in dct.items())
+        stylesheet = f"{item} {{{ss};}}"
+        self.setStyleSheet(stylesheet)
+        return stylesheet
 
 
 if __name__ == "__main__":
