@@ -46,7 +46,7 @@ from .menubar import MenuBar
 from .statusbar import StatusBar
 from .tabbar import TabBar
 from .tabwidget import TabWidget
-from .toolbar import Toolbar
+from .toolbar import ToolBar
 from .headerview import HeaderView
 from .label import Label
 from .pushbutton import PushButton
@@ -139,7 +139,7 @@ __all__ = ["app",
            "StatusBar",
            "TabWidget",
            "TabBar",
-           "Toolbar",
+           "ToolBar",
            "HeaderView",
            "DockWidget",
            "Label",
