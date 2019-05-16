@@ -22,9 +22,6 @@ class Layout(QtWidgets.QLayout):
     def __repr__(self):
         return f"{self.__class__.__name__}: {len(self)} children"
 
-    def set_layout(self, layout):
-        self.setLayout(layout)
-
     def set_margin(self, margin: int):
         self.setContentsMargins(margin, margin, margin, margin)
 

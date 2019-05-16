@@ -8,6 +8,8 @@ from contextlib import contextmanager
 
 from qtpy import QtWidgets
 
+from prettyqt import widgets
+
 
 class Widget(QtWidgets.QWidget):
 
@@ -48,6 +50,23 @@ class Widget(QtWidgets.QWidget):
         stylesheet = f"{item} {{{ss};}}"
         self.setStyleSheet(stylesheet)
         return stylesheet
+
+    def set_layout(self, layout):
+        if layout in ["horizontal", "vertical"]:
+            self.box = widgets.BoxLayout(layout)
+            self.setLayout(self.box)
+        elif layout == "grid":
+            self.box = widgets.GridLayout()
+        elif layout == "form":
+            self.box = widgets.FormLayout()
+        elif layout == "stacked":
+            self.box = widgets.StackedLayout()
+        elif layout == "flow":
+            from prettyqt import custom_widgets
+            self.box = custom_widgets.FlowLayout()
+        else:
+            self.box = layout
+        self.setLayout(self.box)
 
 
 if __name__ == "__main__":

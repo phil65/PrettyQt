@@ -38,9 +38,6 @@ class GroupBox(QtWidgets.QGroupBox):
     def set_alignment(self, alignment):
         self.setAlignment(H_ALIGNMENTS[alignment])
 
-    def set_layout(self, layout):
-        self.setLayout(layout)
-
     def set_enabled(self, state):
         for widget in self.layout():
             widget.setEnabled(state)
