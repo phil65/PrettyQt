@@ -5,8 +5,8 @@
 
 from bidict import bidict
 
-from qtpy import QtWidgets
-from prettyqt import widgets
+from qtpy import QtCore, QtWidgets
+from prettyqt import core, widgets
 
 TICK_POSITIONS = bidict(dict(none=QtWidgets.QSlider.NoTicks,
                              both_sides=QtWidgets.QSlider.TicksBothSides,
@@ -14,17 +14,21 @@ TICK_POSITIONS = bidict(dict(none=QtWidgets.QSlider.NoTicks,
                              below=QtWidgets.QSlider.TicksBelow))
 
 
-class Slider(QtWidgets.QSlider):
+class AbstractSlider(QtWidgets.QAbstractSlider):
+
+    value_changed = core.Signal(int)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.valueChanged.connect(self.on_value_change)
+
+    def on_value_change(self):
+        self.value_changed.emit(self.value())
 
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
                     value=self.value(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    enabled=self.isEnabled(),
                     has_tracking=self.hasTracking(),
-                    tick_position=self.get_tick_position(),
-                    tick_interval=self.tickInterval(),
                     inverted_controls=self.invertedControls(),
                     inverted_appearance=self.invertedAppearance(),
                     single_step=self.singleStep(),
@@ -34,32 +38,51 @@ class Slider(QtWidgets.QSlider):
         self.__init__()
         self.setRange(*state["range"])
         self.setValue(state["value"])
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
-        self.setEnabled(state.get("enabled", True))
         self.setSingleStep(state["single_step"])
         self.setPageStep(state["page_step"])
         self.setTracking(state["has_tracking"])
         self.setInvertedControls(state["inverted_controls"])
         self.setInvertedAppearance(state["inverted_appearance"])
-        self.set_tick_position(state["tick_position"])
-        self.setTickInterval(state["tick_interval"])
 
-    def set_tick_position(self, position: str):
-        if position not in TICK_POSITIONS:
-            raise ValueError(f"{position} not a valid tick position.")
-        self.setTickPosition(TICK_POSITIONS[position])
+    def is_horizontal(self) -> bool:
+        """check if silder is horizontal
 
-    def get_tick_position(self):
-        return TICK_POSITIONS.inv[self.tickPosition()]
+        Returns:
+            True if horizontal, else False
+        """
+        return self.orientation() == QtCore.Qt.Horizontal
+
+    def is_vertical(self) -> bool:
+        """check if silder is vertical
+
+        Returns:
+            True if vertical, else False
+        """
+        return self.orientation() == QtCore.Qt.Vertical
+
+    def set_horizontal(self):
+        """set slider orientation to horizontal
+        """
+        self.setOrientation(QtCore.Qt.Horizontal)
+
+    def set_vertical(self):
+        """set slider orientation to vertical
+        """
+        self.setOrientation(QtCore.Qt.Vertical)
+
+    def get_value(self):
+        return self.value()
+
+    def set_value(self, value: int):
+        return self.set_value()
 
 
-Slider.__bases__[0].__bases__ = (widgets.AbstractSlider,)
+AbstractSlider.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
-    slider = Slider()
+    slider = AbstractSlider()
     slider.setRange(0, 100)
     slider.value_changed.connect(print)
     slider.show()

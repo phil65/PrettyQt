@@ -22,7 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from qtpy import QtCore, QtGui, QtWidgets
+from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui, widgets
 
@@ -45,8 +45,11 @@ class SpanSlider(widgets.Slider):
     upper_pos_changed = core.Signal(int)
     slider_pressed = core.Signal(object)
 
+    def on_value_change(self):
+        self.value_changed.emit(self.lower, self.upper)
+
     def __init__(self, parent=None):
-        QtWidgets.QSlider.__init__(self, QtCore.Qt.Horizontal, parent)
+        super().__init__(QtCore.Qt.Horizontal, parent)
         self.rangeChanged.connect(self.update_range)
         self.sliderReleased.connect(self.move_pressed_handle)
 
@@ -100,7 +103,7 @@ class SpanSlider(widgets.Slider):
             self.upper_pos = upp
             changed = True
         if changed:
-            self.value_changed.emit(self.lower, self.upper)
+            self.on_value_change()
             self.update()
 
     def set_lower_pos(self, lower):

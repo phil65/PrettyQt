@@ -8,6 +8,7 @@ contains QtWidgets-based classes
 from .application import Application
 from .widget import Widget
 from .frame import Frame
+from .abstractslider import AbstractSlider
 from .abstractscrollarea import AbstractScrollArea
 from .abstractbutton import AbstractButton
 from .abstractspinbox import AbstractSpinBox
@@ -100,6 +101,7 @@ def app():
 
 __all__ = ["app",
            "Application",
+           "AbstractSlider",
            "AbstractButton",
            "AbstractSpinBox",
            "AbstractScrollArea",
