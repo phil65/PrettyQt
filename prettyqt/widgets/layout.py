@@ -3,16 +3,18 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
+
 from qtpy import QtWidgets, QtCore
 
 
-MODES = dict(maximum=QtWidgets.QLayout.SetMaximumSize,
-             fixed=QtWidgets.QLayout.SetFixedSize)
+MODES = bidict(dict(maximum=QtWidgets.QLayout.SetMaximumSize,
+                    fixed=QtWidgets.QLayout.SetFixedSize))
 
-ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
-                  right=QtCore.Qt.AlignRight,
-                  top=QtCore.Qt.AlignTop,
-                  bottom=QtCore.Qt.AlignBottom)
+ALIGNMENTS = bidict(dict(left=QtCore.Qt.AlignLeft,
+                         right=QtCore.Qt.AlignRight,
+                         top=QtCore.Qt.AlignTop,
+                         bottom=QtCore.Qt.AlignBottom))
 
 
 class Layout(QtWidgets.QLayout):
@@ -28,7 +30,13 @@ class Layout(QtWidgets.QLayout):
             raise ValueError(f"{mode} not a valid size mode.")
         self.setSizeConstraint(MODES[mode])
 
+    def get_size_mode(self):
+        return MODES.inv[self.sizeConstraint()]
+
     def set_alignment(self, alignment: str):
         if alignment not in ALIGNMENTS:
             raise ValueError(f"{alignment!r} not a valid alignment.")
         self.setAlignment(ALIGNMENTS[alignment])
+
+    def get_alignment(self):
+        return MODES.inv[self.alignment()]

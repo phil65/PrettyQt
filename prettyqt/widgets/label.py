@@ -6,6 +6,7 @@
 import pathlib
 from typing import Optional, Union
 
+from bidict import bidict
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
@@ -20,9 +21,9 @@ V_ALIGNMENTS = dict(top=QtCore.Qt.AlignTop,
                     center=QtCore.Qt.AlignVCenter,
                     baseline=QtCore.Qt.AlignBaseline)
 
-TEXT_INTERACTION = dict(none=QtCore.Qt.NoTextInteraction,
-                        by_mouse=QtCore.Qt.TextSelectableByMouse,
-                        by_keyboard=QtCore.Qt.TextSelectableByKeyboard)
+TEXT_INTERACTION = bidict(dict(none=QtCore.Qt.NoTextInteraction,
+                               by_mouse=QtCore.Qt.TextSelectableByMouse,
+                               by_keyboard=QtCore.Qt.TextSelectableByKeyboard))
 
 
 class Label(QtWidgets.QLabel):
@@ -60,6 +61,9 @@ class Label(QtWidgets.QLabel):
 
     def set_text_interaction(self, interaction_type):
         self.setTextInteractionFlags(TEXT_INTERACTION[interaction_type])
+
+    def get_text_interaction(self):
+        return TEXT_INTERACTION.inv[self.textInteractionFlags()]
 
     def set_image(self,
                   path: Union[pathlib.Path, str],
