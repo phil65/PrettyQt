@@ -62,6 +62,7 @@ from .textedit import TextEdit
 from .datetimeedit import DateTimeEdit
 from .dateedit import DateEdit
 from .timeedit import TimeEdit
+from .calendarwidget import CalendarWidget
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
 from .progressbar import ProgressBar
@@ -155,6 +156,7 @@ __all__ = ["app",
            "DateEdit",
            "TimeEdit",
            "DateTimeEdit",
+           "CalendarWidget",
            "PlainTextEdit",
            "TextBrowser",
            "ProgressBar",
