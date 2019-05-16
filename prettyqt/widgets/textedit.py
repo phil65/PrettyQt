@@ -55,8 +55,7 @@ TextEdit.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication([])
     widget = TextEdit("This is a test")
     widget.show()
     app.exec_()

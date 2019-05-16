@@ -90,8 +90,7 @@ class Slider(QtWidgets.QSlider):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication([])
     slider = Slider()
     slider.setRange(0, 100)
     slider.value_changed.connect(print)

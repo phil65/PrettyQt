@@ -45,8 +45,7 @@ TreeView.__bases__[0].__bases__ = (widgets.AbstractItemView,)
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication([])
     dlg = QtWidgets.QMainWindow()
     status_bar = TreeView()
     dlg.show()

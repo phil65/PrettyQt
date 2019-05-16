@@ -59,8 +59,7 @@ TextBrowser.__bases__[0].__bases__ = (widgets.TextEdit,)
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication([])
     reader = TextBrowser()
     reader.show()
     app.exec_()

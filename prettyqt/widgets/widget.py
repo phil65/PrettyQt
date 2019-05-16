@@ -44,8 +44,7 @@ class Widget(QtWidgets.QWidget):
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication([])
     widget = Widget()
     widget.show()
     app.exec_()

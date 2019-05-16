@@ -63,8 +63,7 @@ class ListWidget(QtWidgets.QListWidget):
 ListWidget.__bases__[0].__bases__ = (widgets.ListView,)
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication([])
     widget = ListWidget()
     widget.add_item("test", icon="mdi.timer")
     widget.add_item("test", icon="mdi.timer")

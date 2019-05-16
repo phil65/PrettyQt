@@ -22,8 +22,7 @@ ProgressBar.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication([])
     widget = ProgressBar()
     widget.show()
     app.exec_()

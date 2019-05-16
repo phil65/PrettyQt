@@ -29,8 +29,7 @@ RadioButton.__bases__[0].__bases__ = (widgets.AbstractButton,)
 
 
 if __name__ == "__main__":
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
+    app = QtWidgets.QApplication([])
     widget = RadioButton("This is a test")
     widget.set_icon("mdi.timer")
     widget.show()
