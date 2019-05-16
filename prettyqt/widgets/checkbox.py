@@ -32,7 +32,7 @@ class CheckBox(QtWidgets.QCheckBox):
                     enabled=self.isEnabled())
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         self.setObjectName(state.get("object_name", ""))
         self.setCheckable(state["checkable"])
         self.setTristate(state.get("is_tristate", False))

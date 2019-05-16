@@ -39,7 +39,7 @@ class LineEdit(QtWidgets.QLineEdit):
                     placeholder_text=self.placeholderText())
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         self.set_text(state["text"])
         self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])

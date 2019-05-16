@@ -37,7 +37,7 @@ class Slider(QtWidgets.QSlider):
                     page_step=self.pageStep())
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         self.setRange(*state["range"])
         self.setValue(state["value"])
         self.setToolTip(state.get("tooltip", ""))
@@ -87,3 +87,13 @@ class Slider(QtWidgets.QSlider):
 
     def get_value(self):
         return self.value()
+
+
+if __name__ == "__main__":
+    import sys
+    app = QtWidgets.QApplication(sys.argv)
+    slider = Slider()
+    slider.setRange(0, 100)
+    slider.value_changed.connect(print)
+    slider.show()
+    app.exec_()

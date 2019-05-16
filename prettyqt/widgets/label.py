@@ -40,7 +40,7 @@ class Label(QtWidgets.QLabel):
                     word_wrap=self.wordWrap())
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         self.setText(state.get("text", ""))
         self.setScaledContents(state["scaled_contents"])
         self.setWordWrap(state["word_wrap"])

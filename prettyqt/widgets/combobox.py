@@ -48,7 +48,7 @@ class ComboBox(QtWidgets.QComboBox):
                     items=items)
 
     def __setstate__(self, state):
-        super().__init__()
+        self.__init__()
         for label, data, icon in state["items"]:
             self.add_item(label, data, icon=icon)
         self.setObjectName(state.get("object_name", ""))
