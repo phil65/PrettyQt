@@ -42,12 +42,6 @@ class BaseDialog(QtWidgets.QDialog):
         self.resize(*state["size"])
         self.box = self.layout()
 
-    def resize(self, *size):
-        if isinstance(size[0], tuple):
-            super().resize(*size[0])
-        else:
-            super().resize(*size)
-
     def keyPressEvent(self, e):
         if e.key() == QtCore.Qt.Key_Escape:
             self.close()
@@ -109,6 +103,9 @@ class BaseDialog(QtWidgets.QDialog):
             self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint, stay_on_top)
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
+
+
+BaseDialog.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 class Dialog(BaseDialog):

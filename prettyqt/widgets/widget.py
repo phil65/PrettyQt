@@ -17,6 +17,12 @@ class Widget(QtWidgets.QWidget):
         self.__init__()
         self.setLayout(state["layout"])
 
+    def resize(self, *size):
+        if isinstance(size[0], tuple):
+            super().resize(*size[0])
+        else:
+            super().resize(*size)
+
     def set_enabled(self):
         self.setEnabled(True)
 
