@@ -552,7 +552,7 @@ def test_timeedit():
 
 
 def test_toolbar():
-    widget = widgets.Toolbar()
+    widget = widgets.ToolBar()
     widget.add_menu_button("test,", "mdi.timer", menu=widgets.Menu())
     widget.set_style("icon")
     widget.set_font_size(10)
