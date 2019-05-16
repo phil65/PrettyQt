@@ -11,24 +11,11 @@ from qtpy import QtCore
 
 class AbstractItemModel(QtCore.QAbstractItemModel):
 
-    HEADER = []
-
     def __repr__(self):
         return f"{self.__class__.__name__}: {self.rowCount()} children"
 
     def __len__(self):
         return self.rowCount()
-
-    def headerData(self, offset: int, orientation, role):
-        if role == QtCore.Qt.DisplayRole:
-            if orientation == QtCore.Qt.Horizontal:
-                return self.HEADER[offset]
-
-    def columnCount(self, parent=None):
-        return len(self.HEADER)
-
-    def rowCount(self, parent=None):
-        return 0
 
     @contextlib.contextmanager
     def change_layout(self):

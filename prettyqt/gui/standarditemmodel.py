@@ -25,16 +25,19 @@ class StandardItemModel(QtGui.QStandardItemModel):
             self.appendRow(item)
 
     def __add__(self, other):
-        if isinstance(other, QtGui.QStandardItem):
-            self.appendRow(other)
+        if isinstance(other, (QtGui.QStandardItem, str)):
+            self.add_item(other)
             return self
+        raise TypeError("wrong type for addition")
 
     def get_children(self):
         return [self.item(index) for index in range(self.rowCount())]
 
-    def add_item(self, label):
-        item = gui.StandardItem(label)
+    def add_item(self, item) -> int:
+        if isinstance(item, str):
+            item = gui.StandardItem(item)
         self.appendRow(item)
+        return self.rowCount()
 
 
 StandardItemModel.__bases__[0].__bases__ = (core.AbstractItemModel,)
