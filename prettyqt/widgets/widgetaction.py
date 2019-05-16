@@ -3,27 +3,13 @@
 @author: Philipp Temminghoff
 """
 
-import qtawesome as qta
 from qtpy import QtWidgets
+
+from prettyqt import widgets
 
 
 class WidgetAction(QtWidgets.QWidgetAction):
+    pass
 
-    def set_enabled(self):
-        self.setEnabled(True)
 
-    def set_disabled(self):
-        self.setEnabled(False)
-
-    def set_tooltip(self, text: str):
-        self.setToolTip(text)
-
-    def set_icon(self, icon):
-        if isinstance(icon, str):
-            icon = qta.icon(icon)
-        if icon:
-            self.setIcon(icon)
-
-    def set_shortcut(self, shortcut):
-        if shortcut:
-            self.setShortcut(shortcut)
+WidgetAction.__bases__[0].__bases__ = (widgets.Action,)

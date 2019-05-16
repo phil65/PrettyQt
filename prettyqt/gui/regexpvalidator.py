@@ -5,7 +5,7 @@
 
 from qtpy import QtGui
 
-from prettyqt import core
+from prettyqt import core, gui
 
 
 class RegExpValidator(QtGui.QRegExpValidator):
@@ -28,9 +28,8 @@ class RegExpValidator(QtGui.QRegExpValidator):
         val = self.regExp()
         return val.pattern()
 
-    def is_valid_value(self, value) -> bool:
-        val = self.validate(value, 0)
-        return val[0] == self.Acceptable
+
+RegExpValidator.__bases__[0].__bases__ = (gui.Validator,)
 
 
 if __name__ == "__main__":

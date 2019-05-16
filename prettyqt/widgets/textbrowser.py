@@ -54,9 +54,6 @@ class TextBrowser(QtWidgets.QTextBrowser):
         html = docutils.core.publish_string(file_content, writer_name="html")
         self.setHtml(str(html))
 
-    def text(self):
-        return self.toPlainText()
-
 
 TextBrowser.__bases__[0].__bases__ = (widgets.TextEdit,)
 

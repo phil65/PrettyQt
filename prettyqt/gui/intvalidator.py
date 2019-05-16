@@ -5,6 +5,8 @@
 
 from qtpy import QtGui
 
+from prettyqt import gui
+
 
 class IntValidator(QtGui.QIntValidator):
 
@@ -17,9 +19,8 @@ class IntValidator(QtGui.QIntValidator):
     def __setstate__(self, state):
         self.__init__(state["bottom"], state["top"])
 
-    def is_valid_value(self, value) -> bool:
-        val = self.validate(value, 0)
-        return val[0] == self.Acceptable
+
+IntValidator.__bases__[0].__bases__ = (gui.Validator,)
 
 
 if __name__ == "__main__":

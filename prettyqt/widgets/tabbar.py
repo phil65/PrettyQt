@@ -5,6 +5,8 @@
 
 from qtpy import QtCore, QtGui, QtWidgets
 
+from prettyqt import widgets
+
 ELIDE_MODES = dict(left=QtCore.Qt.ElideLeft,
                    right=QtCore.Qt.ElideRight,
                    middle=QtCore.Qt.ElideMiddle,
@@ -66,3 +68,6 @@ class TabBar(QtWidgets.QTabBar):
         if mode not in ELIDE_MODES:
             raise ValueError("Mode not available")
         self.setElideMode(ELIDE_MODES[mode])
+
+
+TabBar.__bases__[0].__bases__ = (widgets.Widget,)

@@ -20,7 +20,8 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.dateTimeChanged.connect(self.datetime_changed)
 
     def datetime_changed(self, date):
-        self.value_changed.emit(self.get_datetime())
+        dt = self.get_datetime()
+        self.value_changed.emit(dt)
 
     def __getstate__(self):
         return dict(calendar_popup=self.calendarPopup(),
@@ -71,6 +72,42 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         except (TypeError, AttributeError):
             return self.maximumDateTime().toPyDateTime()
 
+    def min_date(self) -> datetime.date:
+        try:
+            return self.minimumDate().toPython()
+        except (TypeError, AttributeError):
+            return self.minimumDate().toPyDate()
+
+    def max_date(self) -> datetime.date:
+        try:
+            return self.maximumDate().toPython()
+        except (TypeError, AttributeError):
+            return self.maximumDate().toPyDate()
+
+    def get_date(self) -> datetime.date:
+        try:
+            return self.date().toPython()
+        except (TypeError, AttributeError):
+            return self.date().toPyDate()
+
+    def min_time(self) -> datetime.time:
+        try:
+            return self.minimumTime().toPython()
+        except (TypeError, AttributeError):
+            return self.minimumTime().toPyTime()
+
+    def max_time(self) -> datetime.time:
+        try:
+            return self.maximumTime().toPython()
+        except (TypeError, AttributeError):
+            return self.maximumTime().toPyTime()
+
+    def get_time(self) -> datetime.time:
+        try:
+            return self.time().toPython()
+        except (TypeError, AttributeError):
+            return self.time().toPyTime()
+
 
 DateTimeEdit.__bases__[0].__bases__ = (widgets.AbstractSpinBox,)
 
@@ -78,6 +115,5 @@ DateTimeEdit.__bases__[0].__bases__ = (widgets.AbstractSpinBox,)
 if __name__ == "__main__":
     app = widgets.app()
     widget = DateTimeEdit()
-    print(widget.__getstate__())
     widget.show()
     app.exec_()

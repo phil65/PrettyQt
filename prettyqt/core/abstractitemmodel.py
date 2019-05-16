@@ -13,6 +13,9 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
 
     HEADER = []
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}: {self.rowCount()} children"
+
     def __len__(self):
         return self.rowCount()
 

@@ -6,20 +6,12 @@
 import datetime
 
 from qtpy import QtWidgets
-from prettyqt import core
+from prettyqt import widgets, core
 
 
 class TimeEdit(QtWidgets.QTimeEdit):
 
-    value_changed = core.Signal(datetime.time)
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.setCalendarPopup(True)
-        self.timeChanged.connect(self.time_changed)
-
-    def time_changed(self, date):
-        self.value_changed.emit(self.get_time())
+    value_changed = core.Signal(datetime.datetime)
 
     def __getstate__(self):
         return dict(calendar_popup=self.calendarPopup(),
@@ -48,29 +40,8 @@ class TimeEdit(QtWidgets.QTimeEdit):
     def set_value(self, value: datetime.time):
         return self.setTime(value)
 
-    def get_time(self) -> datetime.time:
-        try:
-            return self.time().toPython()
-        except (TypeError, AttributeError):
-            return self.time().toPyTime()
 
-    def set_enabled(self):
-        self.setEnabled(True)
-
-    def set_disabled(self):
-        self.setEnabled(False)
-
-    def min_time(self) -> datetime.time:
-        try:
-            return self.minimumTime().toPython()
-        except (TypeError, AttributeError):
-            return self.minimumTime().toPyTime()
-
-    def max_time(self) -> datetime.time:
-        try:
-            return self.maximumTime().toPython()
-        except (TypeError, AttributeError):
-            return self.maximumTime().toPyTime()
+TimeEdit.__bases__[0].__bases__ = (widgets.DateTimeEdit,)
 
 
 if __name__ == "__main__":

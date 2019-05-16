@@ -8,6 +8,9 @@ from qtpy import QtGui
 
 class Validator(QtGui.QValidator):
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}()"
+
     def __add__(self, other):
         if isinstance(other, Validator):
             from prettyqt import custom_validators
@@ -19,8 +22,8 @@ class Validator(QtGui.QValidator):
         """
         return self.__add__(other)
 
-    def is_valid_value(self, value) -> bool:
-        val = self.validate(value)
+    def is_valid_value(self, value, pos=0) -> bool:
+        val = self.validate(value, pos)
         return val[0] == self.Acceptable
 
 

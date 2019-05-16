@@ -5,13 +5,10 @@
 
 from qtpy import QtGui
 
-from prettyqt import gui
+from prettyqt import gui, core
 
 
 class StandardItemModel(QtGui.QStandardItemModel):
-
-    def __repr__(self):
-        return f"StandardItemModel: {self.count()} children"
 
     def __getitem__(self, index):
         return self.item(index)
@@ -38,6 +35,9 @@ class StandardItemModel(QtGui.QStandardItemModel):
     def add_item(self, label):
         item = gui.StandardItem(label)
         self.appendRow(item)
+
+
+StandardItemModel.__bases__[0].__bases__ = (core.AbstractItemModel,)
 
 
 if __name__ == "__main__":
