@@ -21,6 +21,11 @@ WINDOW_ORDERS = bidict(dict(creation=QtWidgets.QMdiArea.CreationOrder,
 
 class MdiArea(QtWidgets.QMdiArea):
 
+    def __add__(self, other):
+        if isinstance(other, QtWidgets.QWidget):
+            self.add_item(other)
+            return self
+
     def set_view_mode(self, mode):
         if mode not in VIEW_MODES:
             raise ValueError("Invalid value for mode.")
@@ -37,6 +42,14 @@ class MdiArea(QtWidgets.QMdiArea):
     def get_window_order(self):
         return WINDOW_ORDERS.inv[self.viewMode()]
 
+    def add_item(self, item):
+        if not isinstance(item, widgets.MdiSubWindow):
+            widget = widgets.MdiSubWindow()
+            widget.setWidget(item)
+            self.addSubWindow(widget)
+        else:
+            self.addSubWindow(item)
+
 
 MdiArea.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 
@@ -44,5 +57,9 @@ MdiArea.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 if __name__ == "__main__":
     app = widgets.app()
     widget = MdiArea()
+    le = widgets.LineEdit("test")
+    le2 = widgets.LineEdit("test")
+    widget.add_item(le)
+    widget.add_item(le2)
     widget.show()
     app.exec_()
