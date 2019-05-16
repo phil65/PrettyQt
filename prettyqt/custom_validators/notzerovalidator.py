@@ -8,9 +8,6 @@ from prettyqt import gui
 
 class NotZeroValidator(gui.Validator):
 
-    def __repr__(self):
-        return "NotZeroValidator()"
-
     def __getstate__(self):
         return dict()
 

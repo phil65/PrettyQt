@@ -10,9 +10,6 @@ from prettyqt import gui
 
 class PathValidator(gui.Validator):
 
-    def __repr__(self):
-        return "PathValidator()"
-
     def __getstate__(self):
         return dict()
 

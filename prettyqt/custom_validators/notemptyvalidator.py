@@ -8,9 +8,6 @@ from prettyqt import gui
 
 class NotEmptyValidator(gui.Validator):
 
-    def __repr__(self):
-        return "NotEmptyValidator()"
-
     def __getstate__(self):
         return dict()
 
