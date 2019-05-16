@@ -56,11 +56,15 @@ class FlowLayout(widgets.Layout):
     def addItem(self, item):
         self.items.append(item)
 
-    def add_item(self, item):
+    def add_item(self, item) -> int:
         if isinstance(item, QtWidgets.QWidget):
-            self.addWidget(item)
+            return self.addWidget(item)
+        elif isinstance(item, QtWidgets.QLayout):
+            w = widgets.Widget()
+            w.setLayout(item)
+            return self.addWidget(w)
         else:
-            self.addLayout(item)
+            raise TypeError("add_item only supports widgets and layouts")
 
     def count(self) -> int:
         return len(self.items)
@@ -138,6 +142,7 @@ if __name__ == '__main__':
     app = widgets.app()
     widget = widgets.Widget()
     layout = FlowLayout()
+    layout += FlowLayout()
     layout += widgets.PushButton("Short")
     layout += widgets.PushButton("Longer")
     layout += widgets.PushButton("Different text")

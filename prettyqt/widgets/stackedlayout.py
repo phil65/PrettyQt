@@ -35,11 +35,15 @@ class StackedLayout(QtWidgets.QStackedLayout):
             self.add_item(other)
             return self
 
-    def add_item(self, item):
+    def add_item(self, item) -> int:
         if isinstance(item, QtWidgets.QWidget):
-            self.addWidget(item)
+            return self.addWidget(item)
+        elif isinstance(item, QtWidgets.QLayout):
+            w = widgets.Widget()
+            w.setLayout(item)
+            return self.addWidget(w)
         else:
-            self.addLayout(item)
+            raise TypeError("add_item only supports widgets and layouts")
 
     def get_children(self):
         return [self[i] for i in range(self.count())]
