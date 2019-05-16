@@ -22,6 +22,13 @@ MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
                          application=QtCore.Qt.ApplicationModal,
                          none=QtCore.Qt.NonModal))
 
+TOOLBAR_AREAS = bidict(dict(left=QtCore.Qt.LeftToolBarArea,
+                            right=QtCore.Qt.RightToolBarArea,
+                            top=QtCore.Qt.TopToolBarArea,
+                            bottom=QtCore.Qt.BottomToolBarArea,
+                            all=QtCore.Qt.AllToolBarAreas,
+                            none=QtCore.Qt.NoToolBarArea))
+
 
 class MainWindow(QtWidgets.QMainWindow):
     """
@@ -31,6 +38,22 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
+
+    def add_toolbar(self, toolbar, position):
+        """adds a toolbar to the mainmenu at specified area
+
+        Valid values for position: "left", "right", "top", "bottom"
+
+        Args:
+            toolbar: toolbar to use
+            position: position of the toolbar
+
+        Raises:
+            ValueError: position does not exist
+        """
+        if position not in TOOLBAR_AREAS:
+            raise ValueError("Position not existing")
+        self.addToolBar(position, TOOLBAR_AREAS[position])
 
     def load_window_state(self):
         settings = core.Settings()
@@ -96,6 +119,16 @@ class MainWindow(QtWidgets.QMainWindow):
             self.showFullScreen()
 
     def set_modality(self, modality: str = "window"):
+        """set modality for the window
+
+        Valid values for modality: "modeless", "window", "application"
+
+        Args:
+            modality: modality for the main window (default: {"window"})
+
+        Raises:
+            ValueError: modality type does not exist
+        """
         if modality not in MODALITIES:
             raise ValueError("Invalid value for modality.")
         self.setWindowModality(MODALITIES[modality])
