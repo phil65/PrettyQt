@@ -57,9 +57,6 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
     def set_table_color(self, color):
         self.setStyleSheet(f"QHeaderView::section {{ background-color:{color} }}")
 
-    def h_header(self):
-        return self.horizontalHeader()
-
     def current_index(self) -> Optional[int]:
         if self.selectionModel() is None:
             return None
