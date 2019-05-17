@@ -31,9 +31,6 @@ class TabWidget(QtWidgets.QTabWidget):
         # does not have a parent
         self.detached_tabs = dict()
 
-    def __repr__(self):
-        return f"{self.__class__.__name__}: {self.__getstate__()}"
-
     def __len__(self):
         return self.count()
 

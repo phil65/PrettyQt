@@ -13,9 +13,6 @@ from prettyqt import core, widgets, gui
 
 class AbstractButton(QtWidgets.QAbstractButton):
 
-    def __repr__(self):
-        return f"{self.__class__.__name__}: {self.__getstate__()}"
-
     def __getstate__(self):
         return dict(object_name=self.objectName(),
                     text=self.text(),

@@ -17,6 +17,9 @@ POLICIES = dict(custom=QtCore.Qt.CustomContextMenu,
 
 class Widget(QtWidgets.QWidget):
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}: {self.__getstate__()}"
+
     def __getstate__(self):
         return dict(layout=self.layout(),
                     size_policy=self.get_size_policy())

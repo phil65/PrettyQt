@@ -34,6 +34,9 @@ CONTROL_TYPES = bidict(dict(default=QtWidgets.QSizePolicy.DefaultType,
 
 class SizePolicy(QtWidgets.QSizePolicy):
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}: {self.__getstate__()}"
+
     def __getstate__(self):
         return dict(has_height_for_width=self.hasHeightForWidth(),
                     has_width_for_height=self.hasWidthForHeight(),

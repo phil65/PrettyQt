@@ -21,6 +21,9 @@ class Icon(QtGui.QIcon):
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}()"
+
     def __bool__(self):
         return not bool(self.isNull())
 

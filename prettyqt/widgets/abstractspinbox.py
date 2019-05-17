@@ -22,9 +22,6 @@ STEP_TYPES = bidict(dict(default=QtWidgets.QSpinBox.DefaultStepType,
 
 class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
 
-    def __repr__(self):
-        return f"{self.__class__.__name__}: {self.__getstate__()}"
-
     def is_valid(self) -> bool:
         return self.hasAcceptableInput()
 
