@@ -12,7 +12,15 @@ from prettyqt import core
 
 
 def test_abstracttablemodel():
-    model = core.AbstractTableModel()
+
+    class Test(core.AbstractTableModel):
+        def rowCount(self, parent=None):
+            return 0
+
+        def columnCount(self, parent=None):
+            return 0
+
+    model = Test()
     assert model.rowCount() == 0
     assert model.columnCount() == 0
     with model.change_layout():
