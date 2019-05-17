@@ -22,11 +22,12 @@ class BaseDialog(QtWidgets.QDialog):
         return self.findChild(QtWidgets.QWidget, index)
 
     def __getstate__(self):
+        icon = gui.Icon(self.windowIcon())
         return dict(layout=self.layout(),
                     title=self.windowTitle(),
                     is_maximized=self.isMaximized(),
                     has_sizegrip=self.isSizeGripEnabled(),
-                    icon=gui.Icon(self.windowIcon()),
+                    icon=icon if not icon.isNull() else None,
                     size=(self.size().width(), self.size().height()))
 
     def __setstate__(self, state):

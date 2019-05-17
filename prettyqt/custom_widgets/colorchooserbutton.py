@@ -55,7 +55,7 @@ class ColorChooserButton(widgets.Widget):
             self.current_color = color
         self.lineedit.setText(self.current_color.name().upper())
         icon = gui.Icon.for_color(self.current_color)
-        self.button.setIcon(icon)
+        self.button.set_icon(icon)
 
     def is_valid(self):
         return self.lineedit.is_valid()

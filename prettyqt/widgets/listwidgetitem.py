@@ -3,9 +3,11 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Union
 from bidict import bidict
 
-from qtpy import QtWidgets, QtCore
+import qtawesome as qta
+from qtpy import QtWidgets, QtCore, QtGui
 
 from prettyqt import gui
 
@@ -25,7 +27,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
                     tooltip=self.toolTip(),
                     statustip=self.statusTip(),
                     checkstate=self.get_checkstate(),
-                    icon=gui.Icon(self.icon()),
+                    icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
                     data=self.data(QtCore.Qt.UserRole))
 
     def __setstate__(self, state):
@@ -34,8 +36,20 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
         self.setData(QtCore.Qt.UserRole, state["data"])
-        self.setIcon(state["icon"])
+        self.set_icon(state["icon"])
         self.set_checkstate(state["checkstate"])
+
+    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+        """set the icon for the action
+
+        Args:
+            icon: icon to use
+        """
+        if icon is None:
+            icon = gui.Icon()
+        elif isinstance(icon, str):
+            icon = qta.icon(icon)
+        self.setIcon(icon)
 
     def set_checkstate(self, state: str):
         """set checkstate of the checkbox

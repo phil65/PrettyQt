@@ -19,7 +19,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def __getstate__(self):
         return dict(object_name=self.objectName(),
                     text=self.text(),
-                    icon=gui.Icon(self.icon()),
+                    icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
                     checkable=self.isCheckable(),
                     checked=self.isChecked(),
                     tooltip=self.toolTip(),
@@ -53,7 +53,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
         STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton,
                       maximise=QtWidgets.QStyle.SP_TitleBarMaxButton)
         qicon = self.style().standardIcon(STYLES[icon], None, self)
-        self.setIcon(qicon)
+        self.set_icon(qicon)
         self.setIconSize(core.Size(size, size))
 
     def set_shortcut(self, shortcut):

@@ -21,6 +21,9 @@ class Icon(QtGui.QIcon):
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
 
+    def __bool__(self):
+        return not bool(self.isNull())
+
     def __getstate__(self):
         ba = QtCore.QByteArray()
         stream = QtCore.QDataStream(ba, QtCore.QIODevice.WriteOnly)
