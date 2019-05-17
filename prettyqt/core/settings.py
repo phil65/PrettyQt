@@ -7,6 +7,9 @@ import contextlib
 
 from qtpy import QtCore
 
+from prettyqt import core
+
+
 FORMATS = dict(native=QtCore.QSettings.NativeFormat,
                ini=QtCore.QSettings.IniFormat)
 
@@ -149,6 +152,9 @@ class Settings(QtCore.QSettings):
     def update(self, other):
         for k, v in other.items():
             self.set_value(k, v)
+
+
+Settings.__bases__[0].__bases__ = (core.Object,)
 
 
 if __name__ == "__main__":
