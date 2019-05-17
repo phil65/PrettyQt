@@ -14,3 +14,6 @@ class Object(QtCore.QObject):
             if isinstance(v, QtCore.QObject):
                 dct[k] = v.to_json()
         return dct
+
+    def set_object_name(self, name: str):
+        self.setObjectName(name)
