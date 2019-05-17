@@ -76,7 +76,8 @@ class Widget(QtWidgets.QWidget):
             self.box = custom_widgets.FlowLayout()
         else:
             self.box = layout
-        self.setLayout(self.box)
+        if self.box is not None:
+            self.setLayout(self.box)
 
 
 Widget.__bases__[0].__bases__ = (core.Object, QtGui.QPaintDevice)
