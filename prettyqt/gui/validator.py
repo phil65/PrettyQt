@@ -5,6 +5,8 @@
 
 from qtpy import QtGui
 
+from prettyqt import core
+
 
 class Validator(QtGui.QValidator):
 
@@ -25,6 +27,9 @@ class Validator(QtGui.QValidator):
     def is_valid_value(self, value, pos=0) -> bool:
         val = self.validate(value, pos)
         return val[0] == self.Acceptable
+
+
+Validator.__bases__[0].__bases__ = (core.Object,)
 
 
 if __name__ == "__main__":
