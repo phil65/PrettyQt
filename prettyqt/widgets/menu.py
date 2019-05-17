@@ -3,12 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Optional, Union
 
 import qtawesome as qta
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtGui
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, gui
 
 
 class Menu(QtWidgets.QMenu):
@@ -26,16 +26,17 @@ class Menu(QtWidgets.QMenu):
             self.addAction(other)
             return self
 
-    def set_icon(self, icon):
+    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
         """set the icon for the menu
 
         Args:
             icon: icon to use
         """
-        if isinstance(icon, str):
+        if icon is None:
+            icon = gui.Icon()
+        elif isinstance(icon, str):
             icon = qta.icon(icon)
-        if icon:
-            self.setIcon(icon)
+        self.setIcon(icon)
 
     def _separator(self, text: str) -> widgets.WidgetAction:
         """returns a separator showing a label

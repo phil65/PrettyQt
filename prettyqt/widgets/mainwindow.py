@@ -3,14 +3,14 @@
 @author: Philipp Temminghoff
 """
 
-
+from typing import Union
 import logging
 
 from bidict import bidict
 import qtawesome as qta
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets, QtGui
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, gui
 
 DOCK_POSITIONS = dict(top=QtCore.Qt.TopDockWidgetArea,
                       bottom=QtCore.Qt.BottomDockWidgetArea,
@@ -77,11 +77,17 @@ class MainWindow(QtWidgets.QMainWindow):
         super().closeEvent(event)
         event.accept()
 
-    def set_icon(self, icon):
-        if icon:
-            if isinstance(icon, str):
-                icon = qta.icon(icon, color="lightgray")
-            self.setWindowIcon(icon)
+    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+        """set the icon for the menu
+
+        Args:
+            icon: icon to use
+        """
+        if icon is None:
+            icon = gui.Icon()
+        elif isinstance(icon, str):
+            icon = qta.icon(icon, color="lightgray")
+        self.setWindowIcon(icon)
 
     def add_widget_as_dock(self,
                            name: str,
@@ -125,6 +131,17 @@ class MainWindow(QtWidgets.QMainWindow):
         if modality not in MODALITIES:
             raise ValueError("Invalid value for modality.")
         self.setWindowModality(MODALITIES[modality])
+
+    def get_modality(self) -> str:
+        """get the current modality modes as a string
+
+        Possible values: "modeless", "window", "application"
+
+        Returns:
+            modality mode
+            str
+        """
+        return MODALITIES.inv[self.windowModality()]
 
 
 MainWindow.__bases__[0].__bases__ = (widgets.Widget,)

@@ -3,11 +3,11 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Optional
+from typing import Optional, Union
 
 from bidict import bidict
 import qtawesome as qta
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets, QtGui
 
 from prettyqt import widgets, gui
 
@@ -54,11 +54,29 @@ class BaseDialog(QtWidgets.QDialog):
             super().keyPressEvent(e)
 
     def set_modality(self, modality: str = "window"):
+        """set modality for the dialog
+
+        Valid values for modality: "modeless", "window", "application"
+
+        Args:
+            modality: modality for the main window (default: {"window"})
+
+        Raises:
+            ValueError: modality type does not exist
+        """
         if modality not in MODALITIES:
             raise ValueError("Invalid value for modality.")
         self.setWindowModality(MODALITIES[modality])
 
-    def get_modality(self):
+    def get_modality(self) -> str:
+        """get the current modality modes as a string
+
+        Possible values: "modeless", "window", "application"
+
+        Returns:
+            modality mode
+            str
+        """
         return MODALITIES.inv[self.windowModality()]
 
     def delete_on_close(self):
@@ -68,11 +86,17 @@ class BaseDialog(QtWidgets.QDialog):
         self.box += widget
         return widget
 
-    def set_icon(self, icon):
-        if icon:
-            if isinstance(icon, str):
-                icon = qta.icon(icon, color="lightgray")
-            self.setWindowIcon(icon)
+    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+        """set the icon for the menu
+
+        Args:
+            icon: icon to use
+        """
+        if icon is None:
+            icon = gui.Icon()
+        elif isinstance(icon, str):
+            icon = qta.icon(icon, color="lightgray")
+        self.setWindowIcon(icon)
 
     def add_buttonbox(self):
         button_box = widgets.DialogButtonBox.create(ok=self.accepted,

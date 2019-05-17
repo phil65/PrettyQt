@@ -3,9 +3,13 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Union
+
 from bidict import bidict
 import qtawesome as qta
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets, QtGui
+
+from prettyqt import gui
 
 PRIORITIES = bidict(dict(low=QtWidgets.QAction.LowPriority,
                          normal=QtWidgets.QAction.NormalPriority,
@@ -51,11 +55,17 @@ class Action(QtWidgets.QAction):
     def set_tooltip(self, text: str):
         self.setToolTip(text)
 
-    def set_icon(self, icon):
-        if isinstance(icon, str):
+    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+        """set the icon for the action
+
+        Args:
+            icon: icon to use
+        """
+        if icon is None:
+            icon = gui.Icon()
+        elif isinstance(icon, str):
             icon = qta.icon(icon)
-        if icon:
-            self.setIcon(icon)
+        self.setIcon(icon)
 
     def set_shortcut(self, shortcut):
         if shortcut:

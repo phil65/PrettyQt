@@ -5,21 +5,27 @@
 
 import pathlib
 import sys
-from typing import Optional
+from typing import Optional, Union
 
 import qtawesome as qta
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets, QtGui
 
-from prettyqt import core
+from prettyqt import core, gui
 
 
 class Application(QtWidgets.QApplication):
 
-    def set_icon(self, icon):
-        if icon:
-            if isinstance(icon, str):
-                icon = qta.icon(icon, color="lightgray")
-            self.setWindowIcon(icon)
+    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+        """set the icon for the menu
+
+        Args:
+            icon: icon to use
+        """
+        if icon is None:
+            icon = gui.Icon()
+        elif isinstance(icon, str):
+            icon = qta.icon(icon, color="lightgray")
+        self.setWindowIcon(icon)
 
     def load_language_file(self, path: pathlib.Path):
         translator = core.Translator(self)
