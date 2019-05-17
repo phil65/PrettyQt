@@ -22,7 +22,7 @@ class Widget(QtWidgets.QWidget):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setLayout(state["layout"])
+        self.set_layout(state["layout"])
 
     def resize(self, *size):
         if isinstance(size[0], tuple):
@@ -65,7 +65,6 @@ class Widget(QtWidgets.QWidget):
     def set_layout(self, layout):
         if layout in ["horizontal", "vertical"]:
             self.box = widgets.BoxLayout(layout)
-            self.setLayout(self.box)
         elif layout == "grid":
             self.box = widgets.GridLayout()
         elif layout == "form":

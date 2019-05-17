@@ -14,7 +14,7 @@ class Wizard(QtWidgets.QWizard):
         page = widgets.WizardPage(self)
         layout = widgets.BoxLayout("vertical", self)
         layout += widget
-        page.setLayout(layout)
+        page.set_layout(layout)
 
 
 Wizard.__bases__[0].__bases__ = (widgets.BaseDialog,)

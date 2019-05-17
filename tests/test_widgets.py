@@ -647,7 +647,7 @@ def test_treeview():
 def test_widget():
     widget = widgets.Widget()
     layout = widgets.BoxLayout()
-    widget.setLayout(layout)
+    widget.set_layout(layout)
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:

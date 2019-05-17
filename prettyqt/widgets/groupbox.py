@@ -28,7 +28,7 @@ class GroupBox(QtWidgets.QGroupBox):
 
     def __setstate__(self, state):
         self.__init__(state["title"])
-        self.setLayout(state["layout"])
+        self.set_layout(state["layout"])
         self.setCheckable(state["checkable"])
         self.setChecked(state.get("checked", False))
         self.setFlat(state["flat"])
@@ -51,6 +51,6 @@ if __name__ == "__main__":
     widget = GroupBox()
     ly = widgets.BoxLayout()
     ly += widgets.RadioButton("test")
-    widget.setLayout(ly)
+    widget.set_layout(ly)
     widget.show()
     app.exec_()

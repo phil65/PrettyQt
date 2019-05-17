@@ -139,6 +139,6 @@ if __name__ == '__main__':
     layout += widgets.PushButton("More text")
     layout += widgets.PushButton("Even longer button text")
     print(len(layout))
-    widget.setLayout(layout)
+    widget.set_layout(layout)
     widget.show()
     app.exec_()

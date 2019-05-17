@@ -39,7 +39,7 @@ class DockWidget(QtWidgets.QDockWidget):
         layout = widgets.BoxLayout("horizontal")
         layout.set_margin(0)
         layout.set_alignment("right")
-        title_bar.setLayout(layout)
+        title_bar.set_layout(layout)
         maximise_button = widgets.PushButton()
         layout += maximise_button
         maximise_button.set_style_icon("maximise")

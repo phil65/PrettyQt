@@ -68,7 +68,7 @@ class FormLayout(QtWidgets.QFormLayout):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
         if isinstance(widget, QtWidgets.QLayout):
-            self.setLayout(row, ROLES[role], widget)
+            self.set_layout(row, ROLES[role], widget)
         else:
             self.setWidget(row, ROLES[role], widget)
 
@@ -110,6 +110,6 @@ if __name__ == "__main__":
     layout = FormLayout.from_dict(dct)
     layout[3] = "hellooo"
     widget = widgets.Widget()
-    widget.setLayout(layout)
+    widget.set_layout(layout)
     widget.show()
     app.exec_()

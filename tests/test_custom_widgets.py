@@ -59,7 +59,7 @@ def test_flowlayout():
     layout += widgets.PushButton("Different text")
     layout += widgets.PushButton("More text")
     layout += widgets.PushButton("Even longer button text")
-    widget.setLayout(layout)
+    widget.set_layout(layout)
 
 
 def test_markdownwidget():

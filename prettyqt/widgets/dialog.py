@@ -35,7 +35,7 @@ class BaseDialog(QtWidgets.QDialog):
         self.setWindowTitle(state["title"])
         self.set_icon(state["icon"])
         if state["layout"]:
-            self.setLayout(state["layout"])
+            self.set_layout(state["layout"])
         self.resize(state["size"])
         self.setSizeGripEnabled(state["has_sizegrip"])
         if state["is_maximized"]:
@@ -153,7 +153,7 @@ class Dialog(BaseDialog):
         self.box = None
         if layout in ["horizontal", "vertical"]:
             self.box = widgets.BoxLayout(layout)
-            self.setLayout(self.box)
+            self.set_layout(self.box)
 
 
 if __name__ == "__main__":

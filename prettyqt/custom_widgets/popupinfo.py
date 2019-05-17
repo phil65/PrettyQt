@@ -23,7 +23,7 @@ class PopupInfo(QtWidgets.QDialog):
                             QtCore.Qt.FramelessWindowHint)
         layout = widgets.BoxLayout("vertical")
         layout.set_margin(20)
-        self.setLayout(layout)
+        self.set_layout(layout)
         self.setStyleSheet("background-color: black;")
         self.label.setStyleSheet("color: white;")
         # self.setStyleSheet("")

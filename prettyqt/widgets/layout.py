@@ -47,7 +47,7 @@ class Layout(QtWidgets.QLayout):
             return self.addWidget(item)
         elif isinstance(item, QtWidgets.QLayout):
             w = widgets.Widget()
-            w.setLayout(item)
+            w.set_layout(item)
             return self.addWidget(w)
         else:
             raise TypeError("add_item only supports widgets and layouts")

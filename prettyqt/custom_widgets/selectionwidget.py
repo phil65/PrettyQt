@@ -16,7 +16,7 @@ class SelectionWidget(widgets.GroupBox):
         self.box = widgets.BoxLayout(layout)
         self.rb_other = widgets.RadioButton()
         self.buttons = dict()
-        self.setLayout(self.box)
+        self.set_layout(self.box)
 
     def __iter__(self):
         return iter(self.buttons.items())
