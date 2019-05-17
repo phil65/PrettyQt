@@ -349,6 +349,10 @@ def test_mainwindow():
     ss = dict(width="1px", border="none")
     window.set_stylesheet("QMainWindow::separator", ss)
     window.add_widget_as_dock("test", "Title")
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(window, jar)
+    with open("data.pkl", "rb") as jar:
+        window = pickle.load(jar)
 
 
 def test_menu():

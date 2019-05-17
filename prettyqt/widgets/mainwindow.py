@@ -38,6 +38,26 @@ class MainWindow(QtWidgets.QMainWindow):
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
 
+    def __getstate__(self):
+        icon = gui.Icon(self.windowIcon())
+        return dict(central_widget=self.centralWidget(),
+                    title=self.windowTitle(),
+                    is_maximized=self.isMaximized(),
+                    icon=icon if not icon.isNull() else None,
+                    size=(self.size().width(), self.size().height()))
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.setWindowTitle(state["title"])
+        self.set_icon(state["icon"])
+        if state["central_widget"]:
+            self.setCentralWidget(state["central_widget"])
+        self.resize(state["size"])
+        if state["is_maximized"]:
+            self.showMaximized()
+        self.resize(*state["size"])
+        self.box = self.layout()
+
     def add_toolbar(self, toolbar, position):
         """adds a toolbar to the mainmenu at specified area
 
