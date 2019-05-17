@@ -67,6 +67,7 @@ from .calendarwidget import CalendarWidget
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
 from .progressbar import ProgressBar
+from .columnview import ColumnView
 from .listview import ListView
 from .listwidget import ListWidget
 from .treeview import TreeView
@@ -162,6 +163,7 @@ __all__ = ["app",
            "PlainTextEdit",
            "TextBrowser",
            "ProgressBar",
+           "ColumnView",
            "ListView",
            "ListWidget",
            "TreeView",
