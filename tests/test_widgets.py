@@ -382,7 +382,7 @@ def test_plaintextedit():
     widget.highlight_current_line()
     widget.set_read_only()
     widget.get_result_widget()
-    widget.scroll_to_end()
+    widget.scroll_to_bottom()
     widget.set_value("test")
     assert widget.get_value() == "test"
     with open("data.pkl", "wb") as jar:
@@ -525,7 +525,7 @@ def test_textedit():
     widget.set_font("Consolas")
     widget.set_enabled()
     widget.set_read_only()
-    widget.scroll_to_end()
+    widget.scroll_to_bottom()
     widget.set_disabled()
     widget.set_color("black")
     with open("data.pkl", "wb") as jar:

@@ -181,6 +181,20 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         idx = self.model().index(0, col_num)
         self.scrollTo(idx)
 
+    def scroll_to_top(self):
+        """override to use abstractitemview-way of scrolling to top
+        """
+        self.scrollToTop()
+
+    def scroll_to_bottom(self):
+        """override to use abstractitemview-way of scrolling to bottom
+        """
+        self.scrollToBottom()
+
+    def select_last_row(self):
+        idx = self.model().createIndex(self.model().rowCount() - 1, 0)
+        self.setCurrentIndex(idx)
+
     def highlight_when_inactive(self):
         """also highlight items when widget does not have focus
         """
