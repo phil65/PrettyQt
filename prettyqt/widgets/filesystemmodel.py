@@ -36,3 +36,6 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
         it = core.DirIterator(path, flags)
         while it.hasNext():
             yield self.index(it.next())
+
+
+FileSystemModel.__bases__[0].__bases__ = (core.AbstractItemModel,)
