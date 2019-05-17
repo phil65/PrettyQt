@@ -18,11 +18,13 @@ POLICIES = dict(custom=QtCore.Qt.CustomContextMenu,
 class Widget(QtWidgets.QWidget):
 
     def __getstate__(self):
-        return dict(layout=self.layout())
+        return dict(layout=self.layout(),
+                    size_policy=self.get_size_policy())
 
     def __setstate__(self, state):
         self.__init__()
         self.set_layout(state["layout"])
+        self.setSizePolicy(state["size_policy"])
 
     def resize(self, *size):
         if isinstance(size[0], tuple):
@@ -45,6 +47,30 @@ class Widget(QtWidgets.QWidget):
     def set_expanding(self):
         self.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
                            QtWidgets.QSizePolicy.Expanding)
+
+    def set_size_policy(self, horizontal: str, vertical: str):
+        """sets the sizes policy
+
+        possible values for both parameters are "fixed", "minimum", "maximum",
+        "preferred", "expanding", "minimum_expanding" and "ignored"
+
+        Args:
+            horizontal: horizontal size policy
+            vertical: vertical size policy
+        """
+        self.sizePolicy().set_horizontal_policy(horizontal)
+        self.sizePolicy().set_vertical_policy(vertical)
+
+    def get_size_policy(self):
+        qpol = self.sizePolicy()
+        pol = widgets.SizePolicy(qpol.horizontalPolicy(),
+                                 qpol.verticalPolicy(),
+                                 qpol.controlType())
+        pol.setHeightForWidth(qpol.hasHeightForWidth())
+        pol.setWidthForHeight(qpol.hasWidthForHeight())
+        pol.setHorizontalStretch(qpol.horizontalStretch())
+        pol.setVerticalStretch(qpol.verticalStretch())
+        return pol
 
     def set_color(self, color):
         self.setStyleSheet(f"background-color: {color};")
