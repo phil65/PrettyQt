@@ -7,7 +7,7 @@ from bidict import bidict
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 MODES = bidict(dict(maximum=QtWidgets.QLayout.SetMaximumSize,
                     fixed=QtWidgets.QLayout.SetFixedSize))
@@ -51,3 +51,6 @@ class Layout(QtWidgets.QLayout):
             return self.addWidget(w)
         else:
             raise TypeError("add_item only supports widgets and layouts")
+
+
+Layout.__bases__[0].__bases__ = (core.Object, QtWidgets.QLayoutItem)

@@ -6,9 +6,9 @@
 from typing import Dict, Callable
 from contextlib import contextmanager
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets, QtCore, QtGui
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
 POLICIES = dict(custom=QtCore.Qt.CustomContextMenu,
@@ -77,6 +77,9 @@ class Widget(QtWidgets.QWidget):
         else:
             self.box = layout
         self.setLayout(self.box)
+
+
+Widget.__bases__[0].__bases__ = (core.Object, QtGui.QPaintDevice)
 
 
 if __name__ == "__main__":
