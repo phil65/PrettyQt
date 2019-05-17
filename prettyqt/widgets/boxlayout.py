@@ -43,10 +43,8 @@ class BoxLayout(QtWidgets.QBoxLayout):
             return self
 
     def add_item(self, item):
-        if isinstance(item, QtWidgets.QWidget):
-            self.addWidget(item)
-        else:
-            self.addLayout(item)
+        fn = self.addWidget if isinstance(item, QtWidgets.QWidget) else self.addLayout
+        fn(item)
 
     def get_children(self):
         return [self[i] for i in range(self.count())]

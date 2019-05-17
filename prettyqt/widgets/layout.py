@@ -7,6 +7,7 @@ from bidict import bidict
 
 from qtpy import QtWidgets, QtCore
 
+from prettyqt import widgets
 
 MODES = bidict(dict(maximum=QtWidgets.QLayout.SetMaximumSize,
                     fixed=QtWidgets.QLayout.SetFixedSize))
@@ -40,3 +41,13 @@ class Layout(QtWidgets.QLayout):
 
     def get_alignment(self) -> str:
         return MODES.inv[self.alignment()]
+
+    def add_item(self, item) -> int:
+        if isinstance(item, QtWidgets.QWidget):
+            return self.addWidget(item)
+        elif isinstance(item, QtWidgets.QLayout):
+            w = widgets.Widget()
+            w.setLayout(item)
+            return self.addWidget(w)
+        else:
+            raise TypeError("add_item only supports widgets and layouts")

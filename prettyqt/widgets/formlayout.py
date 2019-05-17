@@ -46,12 +46,10 @@ class FormLayout(QtWidgets.QFormLayout):
         return self.rowCount()
 
     def __add__(self, other):
-        if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
-            self.addRow(other)
+        if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout, tuple)):
+            self.add_item(other)
             return self
-        if isinstance(other, tuple):
-            self.addRow(*other)
-            return self
+        raise TypeError("Wrong type for addition")
 
     def __getstate__(self):
         widgets = []
@@ -94,6 +92,12 @@ class FormLayout(QtWidgets.QFormLayout):
             if v is not None:
                 formlayout[i, "right"] = v
         return formlayout
+
+    def add_item(self, item):
+        if isinstance(item, (QtWidgets.QWidget, QtWidgets.QLayout)):
+            self.addRow(item)
+        if isinstance(item, tuple):
+            self.addRow(*item)
 
 
 FormLayout.__bases__[0].__bases__ = (widgets.Layout,)
