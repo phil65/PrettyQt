@@ -3,12 +3,16 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Dict
+from typing import Dict, Callable
 from contextlib import contextmanager
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
+
+
+POLICIES = dict(custom=QtCore.Qt.CustomContextMenu,
+                showhide_menu="showhide_menu")
 
 
 class Widget(QtWidgets.QWidget):
@@ -50,6 +54,13 @@ class Widget(QtWidgets.QWidget):
         stylesheet = f"{item} {{{ss};}}"
         self.setStyleSheet(stylesheet)
         return stylesheet
+
+    def set_contextmenu_policy(self, policy):
+        self.setContextMenuPolicy(POLICIES[policy])
+
+    def set_custom_menu(self, method: Callable):
+        self.set_contextmenu_policy("custom")
+        self.customContextMenuRequested.connect(method)
 
     def set_layout(self, layout):
         if layout in ["horizontal", "vertical"]:

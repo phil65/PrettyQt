@@ -4,14 +4,11 @@
 """
 
 import functools
-from typing import Callable, Iterable, Optional
+from typing import Iterable, Optional
 
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-
-POLICIES = dict(custom=QtCore.Qt.CustomContextMenu,
-                showhide_menu="showhide_menu")
 
 
 class HeaderView(QtWidgets.QHeaderView):
@@ -54,9 +51,6 @@ class HeaderView(QtWidgets.QHeaderView):
         return [model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
                 for i in range(self.count())]
 
-    def set_contextmenu_policy(self, policy):
-        self.setContextMenuPolicy(POLICIES[policy])
-
     def contextMenuEvent(self, event):
         """
         context menu for our files tree
@@ -70,10 +64,6 @@ class HeaderView(QtWidgets.QHeaderView):
             fn = functools.partial(self.change_section_vis, i=i, val=val)
             act.triggered.connect(fn)
         menu.exec_(self.mapToGlobal(event.pos()))
-
-    def set_custom_menu(self, method: Callable):
-        self.set_contextmenu_policy("custom")
-        self.customContextMenuRequested.connect(method)
 
     def change_section_vis(self, i, val):
         self.section_vis_changed.emit(i, val)
