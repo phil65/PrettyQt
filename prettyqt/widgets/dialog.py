@@ -47,10 +47,7 @@ class BaseDialog(QtWidgets.QDialog):
         if e.key() == QtCore.Qt.Key_Escape:
             self.close()
         elif e.key() == QtCore.Qt.Key_F11:
-            if self.isMaximized():
-                self.showNormal()
-            else:
-                self.showMaximized()
+            self.showNormal() if self.isMaximized() else self.showMaximized()
         else:
             super().keyPressEvent(e)
 
