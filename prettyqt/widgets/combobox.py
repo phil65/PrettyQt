@@ -92,11 +92,13 @@ class ComboBox(QtWidgets.QComboBox):
         policy = INSERT_POLICIES.get(policy)
         self.setInsertPolicy(policy)
 
-    def set_size_policy(self, policy: str):
-        """set size policy
+    def set_size_adjust_policy(self, policy: str):
+        """set size adjust policy
+
+        possible values are "content", "first_show", "min_length", "min_length_with_icon"
 
         Args:
-            policy: size policy to use
+            policy: size adjust policy to use
 
         Raises:
             ValueError: invalid size policy
@@ -105,6 +107,17 @@ class ComboBox(QtWidgets.QComboBox):
             raise ValueError("Policy not available")
         policy = SIZE_POLICIES.get(policy)
         self.setSizeAdjustPolicy(policy)
+
+    def get_size_adjust_policy(self) -> str:
+        """returns size adjust policy
+
+        possible values are "content", "first_show", "min_length", "min_length_with_icon"
+
+        Returns:
+            [description]
+            [type]
+        """
+        return SIZE_POLICIES.inv[self.sizeAdjustPolicy()]
 
     def set_icon_size(self, size: int):
         self.setIconSize(QtCore.QSize(size, size))
