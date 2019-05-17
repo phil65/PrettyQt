@@ -11,25 +11,6 @@ import pytest
 from prettyqt import core
 
 
-def test_abstractitemmodel():
-    model = core.AbstractItemModel()
-    assert model.rowCount() == 0
-    assert model.columnCount() == 0
-    with model.change_layout():
-        pass
-    with model.reset_model():
-        pass
-    with model.remove_rows():
-        pass
-    with model.remove_columns():
-        pass
-    with model.insert_rows():
-        pass
-    with model.insert_columns():
-        pass
-    # qtmodeltester.check(model, force_py=True)
-
-
 def test_abstracttablemodel():
     model = core.AbstractTableModel()
     assert model.rowCount() == 0
