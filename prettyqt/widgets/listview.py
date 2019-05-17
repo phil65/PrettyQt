@@ -8,17 +8,7 @@ from prettyqt import widgets
 
 
 class ListView(QtWidgets.QListView):
-
-    def toggle_select_all(self):
-        """
-        select all items from list (deselect when all selected)
-        """
-        if self.selectionModel() is None:
-            return None
-        if self.selectionModel().hasSelection():
-            self.clearSelection()
-        else:
-            self.selectAll()
+    pass
 
 
 ListView.__bases__[0].__bases__ = (widgets.AbstractItemView,)

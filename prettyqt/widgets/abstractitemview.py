@@ -54,6 +54,17 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if old_sel_model:
             del old_sel_model
 
+    def toggle_select_all(self):
+        """
+        select all items from list (deselect when all selected)
+        """
+        if self.selectionModel() is None:
+            return None
+        if self.selectionModel().hasSelection():
+            self.clearSelection()
+        else:
+            self.selectAll()
+
     def set_table_color(self, color):
         self.setStyleSheet(f"QHeaderView::section {{ background-color:{color} }}")
 
