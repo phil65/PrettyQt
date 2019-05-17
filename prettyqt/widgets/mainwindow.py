@@ -17,10 +17,6 @@ DOCK_POSITIONS = dict(top=QtCore.Qt.TopDockWidgetArea,
                       left=QtCore.Qt.LeftDockWidgetArea,
                       right=QtCore.Qt.RightDockWidgetArea)
 
-MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
-                         application=QtCore.Qt.ApplicationModal,
-                         none=QtCore.Qt.NonModal))
-
 TOOLBAR_AREAS = bidict(dict(left=QtCore.Qt.LeftToolBarArea,
                             right=QtCore.Qt.RightToolBarArea,
                             top=QtCore.Qt.TopToolBarArea,
@@ -136,32 +132,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.showNormal()
         else:
             self.showFullScreen()
-
-    def set_modality(self, modality: str = "window"):
-        """set modality for the window
-
-        Valid values for modality: "modeless", "window", "application"
-
-        Args:
-            modality: modality for the main window (default: {"window"})
-
-        Raises:
-            ValueError: modality type does not exist
-        """
-        if modality not in MODALITIES:
-            raise ValueError("Invalid value for modality.")
-        self.setWindowModality(MODALITIES[modality])
-
-    def get_modality(self) -> str:
-        """get the current modality modes as a string
-
-        Possible values: "modeless", "window", "application"
-
-        Returns:
-            modality mode
-            str
-        """
-        return MODALITIES.inv[self.windowModality()]
 
 
 MainWindow.__bases__[0].__bases__ = (widgets.Widget,)

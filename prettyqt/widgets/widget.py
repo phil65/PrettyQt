@@ -6,6 +6,7 @@
 from typing import Dict, Callable
 from contextlib import contextmanager
 
+from bidict import bidict
 from qtpy import QtWidgets, QtCore, QtGui
 
 from prettyqt import widgets, core
@@ -13,6 +14,10 @@ from prettyqt import widgets, core
 
 POLICIES = dict(custom=QtCore.Qt.CustomContextMenu,
                 showhide_menu="showhide_menu")
+
+MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
+                         application=QtCore.Qt.ApplicationModal,
+                         none=QtCore.Qt.NonModal))
 
 
 class Widget(QtWidgets.QWidget):
@@ -40,6 +45,35 @@ class Widget(QtWidgets.QWidget):
 
     def set_disabled(self):
         self.setEnabled(False)
+
+    def set_title(self, title: str):
+        self.setWindowTitle(title)
+
+    def set_modality(self, modality: str = "window"):
+        """set modality for the dialog
+
+        Valid values for modality: "modeless", "window", "application"
+
+        Args:
+            modality: modality for the main window (default: {"window"})
+
+        Raises:
+            ValueError: modality type does not exist
+        """
+        if modality not in MODALITIES:
+            raise ValueError("Invalid value for modality.")
+        self.setWindowModality(MODALITIES[modality])
+
+    def get_modality(self) -> str:
+        """get the current modality modes as a string
+
+        Possible values: "modeless", "window", "application"
+
+        Returns:
+            modality mode
+            str
+        """
+        return MODALITIES.inv[self.windowModality()]
 
     @contextmanager
     def block_signals(self):

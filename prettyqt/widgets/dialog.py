@@ -5,15 +5,10 @@
 
 from typing import Optional, Union
 
-from bidict import bidict
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets, QtGui
 
 from prettyqt import widgets, gui
-
-MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
-                         application=QtCore.Qt.ApplicationModal,
-                         none=QtCore.Qt.NonModal))
 
 
 class BaseDialog(QtWidgets.QDialog):
@@ -50,32 +45,6 @@ class BaseDialog(QtWidgets.QDialog):
             self.showNormal() if self.isMaximized() else self.showMaximized()
         else:
             super().keyPressEvent(e)
-
-    def set_modality(self, modality: str = "window"):
-        """set modality for the dialog
-
-        Valid values for modality: "modeless", "window", "application"
-
-        Args:
-            modality: modality for the main window (default: {"window"})
-
-        Raises:
-            ValueError: modality type does not exist
-        """
-        if modality not in MODALITIES:
-            raise ValueError("Invalid value for modality.")
-        self.setWindowModality(MODALITIES[modality])
-
-    def get_modality(self) -> str:
-        """get the current modality modes as a string
-
-        Possible values: "modeless", "window", "application"
-
-        Returns:
-            modality mode
-            str
-        """
-        return MODALITIES.inv[self.windowModality()]
 
     def delete_on_close(self):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
