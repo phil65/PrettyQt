@@ -108,7 +108,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         flags = functools.reduce(operator.ior, [TRIGGERS[t] for t in triggers])
         self.setEditTriggers(flags)
 
-    def get_edit_triggers(self):
+    def get_edit_triggers(self) -> list:
         current_triggers = self.editTriggers()
         return [k for k, v in TRIGGERS.items() if v & current_triggers]
 
@@ -127,7 +127,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             raise ValueError("invalid selection behaviour")
         self.setSelectionBehavior(SELECTION_BEHAVIOURS[behaviour])
 
-    def get_selection_behaviour(self):
+    def get_selection_behaviour(self) -> str:
         return SELECTION_BEHAVIOURS.inv[self.selectionBehavior()]
 
     def set_selection_mode(self, mode: str):
@@ -146,7 +146,15 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
                              "'multi' or 'None'")
         self.setSelectionMode(SELECTION_MODES[mode])
 
-    def get_selection_mode(self):
+    def get_selection_mode(self) -> str:
+        """returns current selection mode
+
+        Possible values: "single", "extended", "multi" or "none"
+
+        Returns:
+            selection mode
+            str
+        """
         return SELECTION_MODES.inv[self.selectionMode()]
 
     def num_selected(self) -> int:

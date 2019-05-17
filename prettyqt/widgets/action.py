@@ -76,7 +76,7 @@ class Action(QtWidgets.QAction):
             raise ValueError(f"{priority} not a valid priority.")
         self.setPriority(PRIORITIES[priority])
 
-    def get_priority(self):
+    def get_priority(self) -> str:
         return PRIORITIES.inv[self.priority()]
 
     def set_shortcut_context(self, context: str):
@@ -84,7 +84,7 @@ class Action(QtWidgets.QAction):
             raise ValueError(f"{context} not a valid shortcut context.")
         self.setShortcutContext(CONTEXTS[context])
 
-    def get_shortcut_context(self):
+    def get_shortcut_context(self) -> str:
         return CONTEXTS.inv[self.shortcutContext()]
 
 

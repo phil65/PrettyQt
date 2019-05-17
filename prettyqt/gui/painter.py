@@ -3,19 +3,21 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
+
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
 
-PEN_TYPES = dict(none=QtCore.Qt.NoPen)
+PEN_TYPES = bidict(dict(none=QtCore.Qt.NoPen))
 
-COMP_MODES = dict(source_at_top=QtGui.QPainter.CompositionMode_SourceAtop)
+COMP_MODES = bidict(dict(source_at_top=QtGui.QPainter.CompositionMode_SourceAtop))
 
-PATTERNS = dict(solid=QtCore.Qt.SolidPattern,
-                none=QtCore.Qt.NoBrush,
-                cross=QtCore.Qt.CrossPattern,
-                linear_gradient=QtCore.Qt.LinearGradientPattern,
-                radial_gradient=QtCore.Qt.RadialGradientPattern)
+PATTERNS = bidict(dict(solid=QtCore.Qt.SolidPattern,
+                       none=QtCore.Qt.NoBrush,
+                       cross=QtCore.Qt.CrossPattern,
+                       linear_gradient=QtCore.Qt.LinearGradientPattern,
+                       radial_gradient=QtCore.Qt.RadialGradientPattern))
 
 
 class Painter(QtGui.QPainter):
@@ -39,19 +41,25 @@ class Painter(QtGui.QPainter):
             color = gui.Brush(color, PATTERNS[pattern])
         self.fillRect(rect, color)
 
-    def set_pen(self, pen_type):
+    def set_pen(self, pen_type: str):
         if pen_type not in PEN_TYPES:
             raise ValueError("Invalid value for pen_type.")
         self.setPen(PEN_TYPES[pen_type])
+
+    def get_pen(self) -> str:
+        return PEN_TYPES.inv[self.pen()]
 
     def set_color(self, color):
         color = QtGui.QColor(color)
         self.setPen(color)
 
-    def set_composition_mode(self, mode):
+    def set_composition_mode(self, mode: str):
         if mode not in COMP_MODES:
             raise ValueError("Invalid value for composition mode.")
         self.setCompositionMode(COMP_MODES[mode])
+
+    def get_composition_mode(self) -> str:
+        return COMP_MODES.inv[self.compositionMode()]
 
     def draw_text(self, x, y, width, height, alignment, text):
         # TODO

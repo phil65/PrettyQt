@@ -52,7 +52,7 @@ class Splitter(QtWidgets.QSplitter):
     def get_children(self) -> list:
         return [self[i] for i in range(self.count())]
 
-    def add_widget(self, widget):
+    def add_widget(self, widget: QtWidgets.QWidget):
         self.addWidget(widget)
 
     @classmethod

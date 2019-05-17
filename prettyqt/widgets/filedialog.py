@@ -75,7 +75,7 @@ class FileDialog(QtWidgets.QFileDialog):
             raise ValueError(f"Invalid value. Valid values: {ACCEPT_MODES.keys()}")
         self.setAcceptMode(ACCEPT_MODES[mode])
 
-    def get_accept_mode(self):
+    def get_accept_mode(self) -> str:
         return ACCEPT_MODES.inv[self.acceptMode()]
 
     def set_view_mode(self, mode: str):
@@ -83,7 +83,7 @@ class FileDialog(QtWidgets.QFileDialog):
             raise ValueError(f"Invalid value. Valid values: {VIEW_MODES.keys()}")
         self.setViewMode(VIEW_MODES[mode])
 
-    def get_view_mode(self):
+    def get_view_mode(self) -> str:
         return VIEW_MODES.inv[self.viewMode()]
 
     def set_label_text(self, label: str, text: str):
@@ -91,10 +91,10 @@ class FileDialog(QtWidgets.QFileDialog):
             raise ValueError(f"Invalid value. Valid values: {LABELS.keys()}")
         self.setLabelText(LABELS[label], text)
 
-    def get_label_text(self, label):
+    def get_label_text(self, label) -> str:
         return self.labelText(LABELS.inv[label])
 
-    def get_file_mode(self):
+    def get_file_mode(self) -> str:
         return MODES.inv[self.fileMode()]
 
     def set_file_mode(self, mode: str):

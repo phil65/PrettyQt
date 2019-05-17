@@ -60,7 +60,7 @@ class CheckBox(QtWidgets.QCheckBox):
             raise ValueError("Invalid checkstate.")
         self.setCheckState(STATES[state])
 
-    def get_checkstate(self):
+    def get_checkstate(self) -> bool:
         return STATES.inv[self.checkState()]
 
     def get_value(self) -> bool:

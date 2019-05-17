@@ -30,7 +30,7 @@ class Layout(QtWidgets.QLayout):
             raise ValueError(f"{mode} not a valid size mode.")
         self.setSizeConstraint(MODES[mode])
 
-    def get_size_mode(self):
+    def get_size_mode(self) -> str:
         return MODES.inv[self.sizeConstraint()]
 
     def set_alignment(self, alignment: str):
@@ -38,5 +38,5 @@ class Layout(QtWidgets.QLayout):
             raise ValueError(f"{alignment!r} not a valid alignment.")
         self.setAlignment(ALIGNMENTS[alignment])
 
-    def get_alignment(self):
+    def get_alignment(self) -> str:
         return MODES.inv[self.alignment()]

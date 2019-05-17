@@ -46,7 +46,7 @@ class TabBar(QtWidgets.QTabBar):
     def set_icon_size(self, size: int):
         self.setIconSize(QtCore.QSize(size, size))
 
-    def set_tab_button(self, index, widget, position: str = "left"):
+    def set_tab_button(self, index: int, widget, position: str = "left"):
         if position == "left":
             self.setTabButton(index, QtWidgets.QTabBar.LeftSide, widget)
         else:
@@ -65,7 +65,7 @@ class TabBar(QtWidgets.QTabBar):
             raise ValueError("Mode not available")
         self.setSelectionBehaviorOnRemove(SELECTION_MODES[mode])
 
-    def get_remove_behaviour(self):
+    def get_remove_behaviour(self) -> str:
         return SELECTION_MODES.inv[self.selectionBehaviorOnRemove()]
 
     def set_elide_mode(self, mode: str):
@@ -73,7 +73,7 @@ class TabBar(QtWidgets.QTabBar):
             raise ValueError("Mode not available")
         self.setElideMode(ELIDE_MODES[mode])
 
-    def get_elide_mode(self):
+    def get_elide_mode(self) -> str:
         return ELIDE_MODES.inv[self.elideMode()]
 
 

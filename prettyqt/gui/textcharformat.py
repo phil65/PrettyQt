@@ -22,10 +22,10 @@ class TextCharFormat(QtGui.QTextCharFormat):
         color.set_color(color_name)
         self.setForeground(color)
 
-    def set_font_weight(self, weight):
+    def set_font_weight(self, weight: str):
         if weight not in WEIGHTS:
             raise ValueError("Invalid font weight")
         self.setFontWeight(WEIGHTS[weight])
 
-    def get_font_weight(self):
+    def get_font_weight(self) -> str:
         return WEIGHTS.inv[self.fontWeight()]

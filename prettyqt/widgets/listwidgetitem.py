@@ -52,5 +52,5 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
             raise ValueError("Invalid checkstate.")
         self.setCheckState(STATES[state])
 
-    def get_checkstate(self):
+    def get_checkstate(self) -> str:
         return STATES.inv[self.checkState()]

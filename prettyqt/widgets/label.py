@@ -59,10 +59,10 @@ class Label(QtWidgets.QLabel):
             return
         self.setAlignment(flag)
 
-    def set_text_interaction(self, interaction_type):
+    def set_text_interaction(self, interaction_type: str):
         self.setTextInteractionFlags(TEXT_INTERACTION[interaction_type])
 
-    def get_text_interaction(self):
+    def get_text_interaction(self) -> str:
         return TEXT_INTERACTION.inv[self.textInteractionFlags()]
 
     def set_image(self,
