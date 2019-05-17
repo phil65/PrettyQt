@@ -26,6 +26,9 @@ SHAPES = bidict(dict(rounded_north=QtWidgets.QTabBar.RoundedNorth,
                      triangular_west=QtWidgets.QTabBar.TriangularWest,
                      triangular_east=QtWidgets.QTabBar.TriangularEast))
 
+POSITIONS = dict(left=QtWidgets.QTabBar.LeftSide,
+                 right=QtWidgets.QTabBar.RightSide)
+
 
 class TabBar(QtWidgets.QTabBar):
     on_detach = QtCore.Signal(int, QtCore.QPoint)
@@ -38,6 +41,12 @@ class TabBar(QtWidgets.QTabBar):
         self.set_remove_behaviour("left_tab")
         self.mouse_cursor = QtGui.QCursor()
 
+    def __getitem__(self, index):
+        return self.tabButton(index[0], POSITIONS[index[1]])
+
+    def __setitem__(self, index, value):
+        self.set_tab(index[0], index[1], value)
+
     #  Send the on_detach when a tab is double clicked
     def mouseDoubleClickEvent(self, event):
         event.accept()
@@ -46,11 +55,8 @@ class TabBar(QtWidgets.QTabBar):
     def set_icon_size(self, size: int):
         self.setIconSize(QtCore.QSize(size, size))
 
-    def set_tab_button(self, index: int, widget, position: str = "left"):
-        if position == "left":
-            self.setTabButton(index, QtWidgets.QTabBar.LeftSide, widget)
-        else:
-            self.setTabButton(index, QtWidgets.QTabBar.RightSide, widget)
+    def set_tab(self, index: int, position, widget):
+        self.setTabButton(index, POSITIONS[position], widget)
 
     def set_remove_behaviour(self, mode: str):
         """sets the remove hehaviour
