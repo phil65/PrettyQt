@@ -3,10 +3,14 @@
 @author: Philipp Temminghoff
 """
 
+from bidict import bidict
 import qtawesome as qta
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import widgets, core, gui
+
+TAB_SHAPES = bidict(dict(rounded=QtWidgets.QTabWidget.Rounded,
+                         triangular=QtWidgets.QTabWidget.Triangular))
 
 
 class TabWidget(QtWidgets.QTabWidget):
@@ -41,17 +45,49 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def __getstate__(self):
         return dict(tabbar=self.tabBar(),
-                    widgets=self.get_children())
-
-    def get_children(self):
-        return [(self.widget(i), self.tabText(i), self.tab_icon(i))
-                for i in range(self.count())]
+                    widgets=self.get_children(),
+                    movable=self.isMovable(),
+                    document_mode=self.documentMode(),
+                    current_index=self.currentIndex(),
+                    tab_shape=self.get_tab_shape(),
+                    # elide_mode=self.get_elide_mode(),
+                    icon_size=self.iconSize())
 
     def __setstate__(self, state):
         self.__init__()
         self.setTabBar(state["tabbar"])
-        for (widget, name, icon) in state["widgets"]:
-            self.add_tab(widget, name, icon)
+        self.setDocumentMode(state.get("document_mode", False))
+        self.setMovable(state.get("movable", False))
+        self.set_tab_shape(state.get("tab_shape", "rounded"))
+        self.setIconSize(state["icon_size"])
+        for (widget, name, icon, tooltip, whatsthis) in state["widgets"]:
+            i = self.add_tab(widget, name, icon)
+            self.setTabToolTip(i, tooltip)
+            self.setTabWhatsThis(i, whatsthis)
+        self.setCurrentIndex(state.get("index", 0))
+
+    def set_tab_shape(self, shape: str):
+        """set tab shape for the tabwidget
+
+        Valid values are "rounded" and "triangular"
+
+        Args:
+            shape: tab shape to use
+
+        Raises:
+            ValueError: tab shape does not exist
+        """
+        if shape not in TAB_SHAPES:
+            raise ValueError("Invalid value for shape.")
+        self.setTabShape(TAB_SHAPES[shape])
+
+    def get_tab_shape(self) -> str:
+        return TAB_SHAPES.inv[self.tabShape()]
+
+    def get_children(self):
+        return [(self.widget(i), self.tabText(i), self.tab_icon(i),
+                 self.tabToolTip(i), self.tabWhatsThis(i))
+                for i in range(self.count())]
 
     def tab_icon(self, i):
         return gui.Icon(self.tabIcon(i))

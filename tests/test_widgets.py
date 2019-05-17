@@ -509,6 +509,10 @@ def test_tabwidget():
     widget.set_tab(0, "right", None)
     widget.set_detachable()
     widget.detach_tab(0, core.Point())
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(widget, jar)
+    with open("data.pkl", "rb") as jar:
+        widget = pickle.load(jar)
     widget.remove_tab(0)
     # widget.close_detached_tabs()
 
