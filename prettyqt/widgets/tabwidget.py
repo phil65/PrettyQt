@@ -6,7 +6,7 @@
 import qtawesome as qta
 from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import widgets, core, gui
 
 
 class TabWidget(QtWidgets.QTabWidget):
@@ -27,11 +27,34 @@ class TabWidget(QtWidgets.QTabWidget):
         # does not have a parent
         self.detached_tabs = dict()
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}: {self.__getstate__()}"
+
+    def __len__(self):
+        return self.count()
+
     def __getitem__(self, index):
         if isinstance(index, int):
             return self.widget(index)
         else:
             return self.findChild(QtWidgets.QWidget, index)
+
+    def __getstate__(self):
+        return dict(tabbar=self.tabBar(),
+                    widgets=self.get_children())
+
+    def get_children(self):
+        return [(self.widget(i), self.tabText(i), self.tab_icon(i))
+                for i in range(self.count())]
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.setTabBar(state["tabbar"])
+        for (widget, name, icon) in state["widgets"]:
+            self.add_tab(widget, name, icon)
+
+    def tab_icon(self, i):
+        return gui.Icon(self.tabIcon(i))
 
     def set_detachable(self):
         self.tab_bar.on_detach.connect(self.detach_tab)
