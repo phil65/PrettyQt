@@ -23,7 +23,7 @@ SCROLLBAR_POLICY = dict(always_on=QtCore.Qt.ScrollBarAlwaysOn,
 
 class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
 
-    def set_size_policy(self, policy: str):
+    def set_size_adjust_policy(self, policy: str):
         """set size policy
 
         Args:
@@ -37,7 +37,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         policy = SIZE_POLICIES.get(policy)
         self.setSizeAdjustPolicy(policy)
 
-    def get_size_policy(self) -> str:
+    def get_size_adjust_policy(self) -> str:
         """returns size policy
 
         possible values are "content", "first_show", "ignored"
@@ -46,7 +46,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             [description]
             [type]
         """
-        return SIZE_POLICIES.inv[self.sizePolicy()]
+        return SIZE_POLICIES.inv[self.sizeAdjustPolicy()]
 
     def set_horizontal_scrollbar_visibility(self, mode: str):
         """sets the horizontal scrollbar visibility

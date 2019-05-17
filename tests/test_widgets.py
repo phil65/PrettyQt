@@ -77,7 +77,7 @@ def test_combobox():
     box.set_enabled()
     box.add_item("test", data="data", icon="mdi.timer")
     box.set_insert_policy("bottom")
-    box.set_size_policy("first_show")
+    box.set_size_adjust_policy("first_show")
     box.set_icon_size(10)
     box.set_min_char_length(10)
     with open("data.pkl", "wb") as jar:
