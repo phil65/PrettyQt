@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+import datetime
+
 from bidict import bidict
 from qtpy import QtWidgets
 
@@ -24,8 +26,14 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
         self.__init__()
         self.setSelectedDate(state["date"])
 
-    def get_value(self):
-        return self.selectedDate()
+    def get_date(self) -> datetime.date:
+        try:
+            return self.selectedDate().toPyDate()  # pyqt5
+        except (TypeError, AttributeError):
+            return self.selectedDate().toPython()
+
+    def get_value(self) -> datetime.date:
+        return self.get_date()
 
     def set_value(self, value):
         self.setSelectedDate(value)
