@@ -32,6 +32,7 @@ from .threadpool import ThreadPool
 from .dir import Dir
 from .diriterator import DirIterator
 from .abstractitemmodel import AbstractItemModel
+from .abstractproxymodel import AbstractProxyModel
 from .abstractlistmodel import AbstractListModel
 from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel
@@ -72,6 +73,7 @@ __all__ = ["Object",
            "ThreadPool",
            "Signal",
            "AbstractItemModel",
+           "AbstractProxyModel",
            "AbstractListModel",
            "SortFilterProxyModel",
            "AbstractTableModel"]

@@ -8,6 +8,8 @@ from typing import Optional
 
 from qtpy import QtCore
 
+from prettyqt import core
+
 
 class AbstractItemModel(QtCore.QAbstractItemModel):
 
@@ -84,3 +86,6 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         self.beginInsertColumns(parent, first, last)
         yield None
         self.endInsertColumns()
+
+
+AbstractItemModel.__bases__[0].__bases__ = (core.Object,)
