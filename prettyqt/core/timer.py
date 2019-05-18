@@ -5,6 +5,8 @@
 
 from qtpy import QtCore
 
+from prettyqt import core
+
 
 class Timer(QtCore.QTimer):
 
@@ -14,3 +16,6 @@ class Timer(QtCore.QTimer):
         timer.timeout.connect(callback)
         timer.setSingleShot(True)
         return timer
+
+
+Timer.__bases__[0].__bases__ = (core.Object,)
