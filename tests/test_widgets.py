@@ -495,7 +495,7 @@ def test_splitter():
         widget = pickle.load(jar)
     for item in widget:
         pass
-    widget.set_expanding()
+    widget.set_size_policy("expanding", "expanding")
     widget.set_orientation("horizontal")
 
 

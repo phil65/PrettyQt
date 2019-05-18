@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Dict, Callable
+from typing import Dict, Callable, Optional
 from contextlib import contextmanager
 
 from bidict import bidict
@@ -81,11 +81,9 @@ class Widget(QtWidgets.QWidget):
         yield None
         self.blockSignals(False)
 
-    def set_expanding(self):
-        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding,
-                           QtWidgets.QSizePolicy.Expanding)
-
-    def set_size_policy(self, horizontal: str, vertical: str):
+    def set_size_policy(self,
+                        horizontal: Optional[str] = None,
+                        vertical: Optional[str] = None):
         """sets the sizes policy
 
         possible values for both parameters are "fixed", "minimum", "maximum",
@@ -95,11 +93,17 @@ class Widget(QtWidgets.QWidget):
             horizontal: horizontal size policy
             vertical: vertical size policy
         """
-        self.sizePolicy().set_horizontal_policy(horizontal)
-        self.sizePolicy().set_vertical_policy(vertical)
+        sp = self.get_size_policy()
+        if horizontal is not None:
+            sp.set_horizontal_policy(horizontal)
+        if vertical is not None:
+            sp.set_vertical_policy(vertical)
+        self.setSizePolicy(sp)
 
     def get_size_policy(self):
         qpol = self.sizePolicy()
+        if isinstance(qpol, widgets.SizePolicy):
+            return qpol
         pol = widgets.SizePolicy(qpol.horizontalPolicy(),
                                  qpol.verticalPolicy(),
                                  qpol.controlType())
