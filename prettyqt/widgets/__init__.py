@@ -38,6 +38,7 @@ from .dockwidget import DockWidget
 from .mainwindow import MainWindow
 
 from .listwidgetitem import ListWidgetItem
+from .treewidgetitem import TreeWidgetItem
 from .action import Action
 from .widgetaction import WidgetAction
 from .toolbutton import ToolButton
@@ -71,6 +72,7 @@ from .columnview import ColumnView
 from .listview import ListView
 from .listwidget import ListWidget
 from .treeview import TreeView
+from .treewidget import TreeWidget
 from .tableview import TableView
 from .itemdelegate import ItemDelegate
 from .styleditemdelegate import StyledItemDelegate
@@ -133,6 +135,7 @@ __all__ = ["app",
            "StyleOptionSlider",
            "Frame",
            "ListWidgetItem",
+           "TreeWidgetItem",
            "Action",
            "WidgetAction",
            "ToolButton",
@@ -167,6 +170,7 @@ __all__ = ["app",
            "ListView",
            "ListWidget",
            "TreeView",
+           "TreeWidget",
            "TableView",
            "SplashScreen",
            "ProgressDialog",
