@@ -23,9 +23,26 @@ class TextCharFormat(QtGui.QTextCharFormat):
         self.setForeground(color)
 
     def set_font_weight(self, weight: str):
+        """sets the font weight
+
+        Valid values are "thin", "light", "medium" and "bold"
+
+        Args:
+            weight: font weight
+
+        Raises:
+            ValueError: invalid font weight
+        """
         if weight not in WEIGHTS:
             raise ValueError("Invalid font weight")
         self.setFontWeight(WEIGHTS[weight])
 
     def get_font_weight(self) -> str:
+        """get current font weight
+
+        Possible values are "thin", "light", "medium" or "bold"
+
+        Returns:
+            current font weight
+        """
         return WEIGHTS.inv[self.fontWeight()]
