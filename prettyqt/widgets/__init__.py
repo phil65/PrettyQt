@@ -15,6 +15,7 @@ from .abstractspinbox import AbstractSpinBox
 from .abstractitemview import AbstractItemView
 from .mdisubwindow import MdiSubWindow
 from .mdiarea import MdiArea
+from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
@@ -111,6 +112,7 @@ __all__ = ["app",
            "AbstractItemView",
            "MdiSubWindow",
            "MdiArea",
+           "ScrollBar",
            "ScrollArea",
            "Widget",
            "DesktopWidget",

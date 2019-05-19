@@ -23,6 +23,11 @@ SCROLLBAR_POLICY = bidict(dict(always_on=QtCore.Qt.ScrollBarAlwaysOn,
 
 class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setHorizontalScrollBar(widgets.ScrollBar())
+        self.setVerticalScrollBar(widgets.ScrollBar())
+
     def set_size_adjust_policy(self, policy: str):
         """set size adjust policy
 
