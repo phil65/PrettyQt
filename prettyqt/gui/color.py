@@ -38,5 +38,9 @@ class Color(QtGui.QColor):
         color.setNamedColor(text)
         return color
 
+    @classmethod
+    def from_cmyk(cls, *args, **kwargs):
+        return cls(cls.fromCmykF(*args, **kwargs))
+
     def as_qt(self):
         return QtGui.QColor(self)
