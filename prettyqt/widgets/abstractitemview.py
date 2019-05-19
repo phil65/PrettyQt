@@ -164,7 +164,6 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
 
         Returns:
             selection mode
-            str
         """
         return SELECTION_MODES.inv[self.selectionMode()]
 
@@ -173,7 +172,6 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
 
         Returns:
             amount of selected rows
-            int
         """
         if self.selectionModel() is None:
             return 0

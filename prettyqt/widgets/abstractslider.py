@@ -84,7 +84,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         return self.value()
 
     def set_value(self, value: int):
-        return self.setValue(value)
+        self.setValue(value)
 
 
 AbstractSlider.__bases__[0].__bases__ = (widgets.Widget,)

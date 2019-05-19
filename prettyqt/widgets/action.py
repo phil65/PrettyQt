@@ -72,19 +72,53 @@ class Action(QtWidgets.QAction):
             self.setShortcut(shortcut)
 
     def set_priority(self, priority: str):
+        """set priority of the action
+
+        Allowed values are "low", "normal", "high"
+
+        Args:
+            mode: priority for the action
+
+        Raises:
+            ValueError: priority does not exist
+        """
         if priority not in PRIORITIES:
             raise ValueError(f"{priority} not a valid priority.")
         self.setPriority(PRIORITIES[priority])
 
     def get_priority(self) -> str:
+        """returns current priority
+
+        Possible values: "low", "normal", "high"
+
+        Returns:
+            selection mode
+        """
         return PRIORITIES.inv[self.priority()]
 
     def set_shortcut_context(self, context: str):
+        """set shortcut context
+
+        Allowed values are "widget", "widget_with_children", "window", "application"
+
+        Args:
+            mode: shortcut context
+
+        Raises:
+            ValueError: shortcut context does not exist
+        """
         if context not in CONTEXTS:
             raise ValueError(f"{context} not a valid shortcut context.")
         self.setShortcutContext(CONTEXTS[context])
 
     def get_shortcut_context(self) -> str:
+        """returns shortcut context
+
+        Possible values: "widget", "widget_with_children", "window", "application"
+
+        Returns:
+            shortcut context
+        """
         return CONTEXTS.inv[self.shortcutContext()]
 
 
