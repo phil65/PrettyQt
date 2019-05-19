@@ -89,8 +89,8 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         Raises:
             ValueError: invalid step type
         """
-        if mode not in CORRECTION_MODES:
-            raise ValueError("Invalid correction mode.")
+        if mode not in STEP_TYPES:
+            raise ValueError("Invalid step type.")
         self.setStepType(STEP_TYPES[mode])
 
     def get_step_type(self) -> str:

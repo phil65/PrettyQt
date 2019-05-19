@@ -4,13 +4,14 @@
 """
 
 from qtpy import QtWidgets
+from bidict import bidict
 
 from prettyqt import gui, widgets, core
 
-ECHO_MODES = dict(normal=QtWidgets.QLineEdit.Normal,
-                  no_echo=QtWidgets.QLineEdit.NoEcho,
-                  password=QtWidgets.QLineEdit.Password,
-                  echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit)
+ECHO_MODES = bidict(dict(normal=QtWidgets.QLineEdit.Normal,
+                         no_echo=QtWidgets.QLineEdit.NoEcho,
+                         password=QtWidgets.QLineEdit.Password,
+                         echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit))
 
 
 class LineEdit(QtWidgets.QLineEdit):
@@ -94,7 +95,29 @@ class LineEdit(QtWidgets.QLineEdit):
         self.set_color(color)
 
     def set_echo_mode(self, mode: str):
+        """set echo mode
+
+        Valid values are "normal", "no_echo", "password", "echo_on_edit"
+
+        Args:
+            policy: echo mode to use
+
+        Raises:
+            ValueError: invalid echo mode
+        """
+        if mode not in ECHO_MODES:
+            raise ValueError("Invalid echo mode")
         self.setEchoMode(ECHO_MODES[mode])
+
+    def get_echo_mode(self) -> str:
+        """returns echo mode
+
+        possible values are "normal", "no_echo", "password", "echo_on_edit"
+
+        Returns:
+            echo mode
+        """
+        return ECHO_MODES.inv[self.echoMode()]
 
     def set_value(self, value: str):
         self.setText(value)
