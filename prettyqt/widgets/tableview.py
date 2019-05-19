@@ -21,9 +21,9 @@ class TableView(QtWidgets.QTableView):
         return self.horizontalHeader()
 
     def setup_list_style(self):
-        self.setSelectionBehavior(self.SelectRows)
+        self.set_selection_behaviour("rows")
         self.h_header().setStretchLastSection(True)
-        self.verticalHeader().setSectionResizeMode(self.verticalHeader().Fixed)
+        self.verticalHeader().resize_mode("fixed")
         self.verticalHeader().setDefaultSectionSize(28)
 
     def adapt_sizes(self):
@@ -31,7 +31,7 @@ class TableView(QtWidgets.QTableView):
         if model is not None and (model.rowCount() * model.columnCount()) < 1000:
             self.resizeColumnsToContents()
         else:
-            self.h_header().resizeSections(self.h_header().Interactive)
+            self.h_header().resize_sections("interactive")
 
 
 TableView.__bases__[0].__bases__ = (widgets.AbstractItemView,)

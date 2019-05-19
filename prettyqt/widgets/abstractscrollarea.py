@@ -102,6 +102,6 @@ AbstractScrollArea.__bases__[0].__bases__ = (widgets.Frame,)
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = AbstractScrollArea("This is a test")
+    widget = AbstractScrollArea()
     widget.show()
     app.exec_()
