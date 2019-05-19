@@ -13,6 +13,12 @@ H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
 
 
 class GroupBox(QtWidgets.QGroupBox):
+    """GroupBox widget
+
+    A group box provides a frame, a title on top, a keyboard shortcut,
+    and displays various other widgets inside itself.
+    The keyboard shortcut moves keyboard focus to one of the group box's child widgets.
+    """
 
     def __repr__(self):
         return f"GroupBox({self.title()!r})"

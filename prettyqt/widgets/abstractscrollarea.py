@@ -24,13 +24,13 @@ SCROLLBAR_POLICY = dict(always_on=QtCore.Qt.ScrollBarAlwaysOn,
 class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
 
     def set_size_adjust_policy(self, policy: str):
-        """set size policy
+        """set size adjust policy
 
         Args:
-            policy: size policy to use
+            policy: size adjust policy to use
 
         Raises:
-            ValueError: invalid size policy
+            ValueError: invalid size adjust policy
         """
         if policy not in SIZE_POLICIES:
             raise ValueError("Policy not available")
@@ -38,13 +38,12 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         self.setSizeAdjustPolicy(policy)
 
     def get_size_adjust_policy(self) -> str:
-        """returns size policy
+        """returns size adjust policy
 
         possible values are "content", "first_show", "ignored"
 
         Returns:
-            [description]
-            [type]
+            size adjust policy
         """
         return SIZE_POLICIES.inv[self.sizeAdjustPolicy()]
 
