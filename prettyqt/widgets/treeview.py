@@ -23,7 +23,7 @@ class TreeView(QtWidgets.QTreeView):
         self.setWordWrap(False)
 
         # misc
-        self.setHeader(widgets.HeaderView(parent=self))
+        self.setHeader(widgets.HeaderView("horizontal", parent=self))
         self.set_selection_mode("extended")
 
     def h_header(self):

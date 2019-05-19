@@ -13,8 +13,8 @@ class TableView(QtWidgets.QTableView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setObjectName(self.__class__.__name__)
-        self.setHorizontalHeader(widgets.HeaderView(parent=self))
-        self.setVerticalHeader(widgets.HeaderView(parent=self))
+        self.setHorizontalHeader(widgets.HeaderView("horizontal", parent=self))
+        self.setVerticalHeader(widgets.HeaderView("vertical", parent=self))
         self.setAlternatingRowColors(True)
         self.setWordWrap(False)
 

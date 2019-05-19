@@ -20,8 +20,9 @@ class HeaderView(QtWidgets.QHeaderView):
 
     section_vis_changed = QtCore.Signal(int, bool)
 
-    def __init__(self, parent):
-        super().__init__(QtCore.Qt.Horizontal, parent=parent)
+    def __init__(self, orientation=None, parent=None):
+        o = QtCore.Qt.Vertical if orientation == "vertical" else QtCore.Qt.Horizontal
+        super().__init__(o, parent=parent)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
         self.widget_name = parent.objectName()
