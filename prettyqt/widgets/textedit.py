@@ -30,6 +30,11 @@ class TextEdit(QtWidgets.QTextEdit):
         self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])
 
+    def __add__(self, other):
+        if isinstance(other, str):
+            self.append_text(other)
+            return self
+
     def set_font(self,
                  font_name: str,
                  font_size: int = -1,

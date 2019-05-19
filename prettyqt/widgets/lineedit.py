@@ -53,6 +53,11 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
 
+    def __add__(self, other):
+        if isinstance(other, str):
+            self.append_text(other)
+            return self
+
     def font(self) -> gui.Font:
         return gui.Font(super().font())
 
