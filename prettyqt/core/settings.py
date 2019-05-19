@@ -5,16 +5,17 @@
 
 import contextlib
 
+from bidict import bidict
 from qtpy import QtCore
 
 from prettyqt import core
 
 
-FORMATS = dict(native=QtCore.QSettings.NativeFormat,
-               ini=QtCore.QSettings.IniFormat)
+FORMATS = bidict(dict(native=QtCore.QSettings.NativeFormat,
+                      ini=QtCore.QSettings.IniFormat))
 
-SCOPES = dict(user=QtCore.QSettings.UserScope,
-              system=QtCore.QSettings.SystemScope)
+SCOPES = bidict(dict(user=QtCore.QSettings.UserScope,
+                     system=QtCore.QSettings.SystemScope))
 
 
 class Settings(QtCore.QSettings):
@@ -73,9 +74,40 @@ class Settings(QtCore.QSettings):
 
     @classmethod
     def set_default_format(cls, fmt: str):
+        """sets the default format
+
+        possible values are "native", "ini"
+
+        Args:
+            mode: the default format to use
+
+        Raises:
+            ValueError: invalid format
+        """
         if fmt not in FORMATS:
             raise ValueError("Format must be either 'native' or 'ini'")
         cls.setDefaultFormat(FORMATS[fmt])
+
+    @classmethod
+    def get_default_format(cls) -> str:
+        """returns default settings format
+
+        possible values are "native", "ini"
+
+        Returns:
+            default settings format
+        """
+        return FORMATS.inv[cls.defaultFormat()]
+
+    def get_scope(self) -> str:
+        """returns scope
+
+        possible values are "user", "system"
+
+        Returns:
+            scope
+        """
+        return SCOPES.inv[self.scope()]
 
     @classmethod
     def set_path(cls, fmt, scope: str, path: str):
