@@ -7,13 +7,14 @@ from typing import Callable
 
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
+from bidict import bidict
 
 from prettyqt import core, widgets
 
-STYLES = dict(icon=QtCore.Qt.ToolButtonIconOnly,
-              text=QtCore.Qt.ToolButtonTextOnly,
-              text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
-              text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon)
+STYLES = bidict(dict(icon=QtCore.Qt.ToolButtonIconOnly,
+                     text=QtCore.Qt.ToolButtonTextOnly,
+                     text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
+                     text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon))
 
 
 class ToolBar(QtWidgets.QToolBar):
@@ -41,6 +42,9 @@ class ToolBar(QtWidgets.QToolBar):
         self.setToolButtonStyle(STYLES.get(style, 0))
         for btn in self.menu_buttons:
             btn.setToolButtonStyle(STYLES.get(style, 0))
+
+    def get_style(self) -> str:
+        return STYLES.inv[self.toolButtonStyle()]
 
     def add_action(self, label: str, icon, callback: Callable, checkable=False):
         if isinstance(icon, str):

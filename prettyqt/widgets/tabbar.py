@@ -26,8 +26,8 @@ SHAPES = bidict(dict(rounded_north=QtWidgets.QTabBar.RoundedNorth,
                      triangular_west=QtWidgets.QTabBar.TriangularWest,
                      triangular_east=QtWidgets.QTabBar.TriangularEast))
 
-POSITIONS = dict(left=QtWidgets.QTabBar.LeftSide,
-                 right=QtWidgets.QTabBar.RightSide)
+POSITIONS = bidict(dict(left=QtWidgets.QTabBar.LeftSide,
+                        right=QtWidgets.QTabBar.RightSide))
 
 
 class TabBar(QtWidgets.QTabBar):
@@ -91,14 +91,38 @@ class TabBar(QtWidgets.QTabBar):
         self.setSelectionBehaviorOnRemove(REMOVE_BEHAVIOURS[mode])
 
     def get_remove_behaviour(self) -> str:
+        """returns remove behaviour
+
+        possible values are "left_tab", "right_tab", "previous_tab"
+
+        Returns:
+            remove behaviour
+        """
         return REMOVE_BEHAVIOURS.inv[self.selectionBehaviorOnRemove()]
 
     def set_elide_mode(self, mode: str):
+        """set elide mode
+
+        Valid values are "left", "right", "middle", "none"
+
+        Args:
+            policy: elide mode to use
+
+        Raises:
+            ValueError: invalid elide mode
+        """
         if mode not in ELIDE_MODES:
             raise ValueError("Mode not available")
         self.setElideMode(ELIDE_MODES[mode])
 
     def get_elide_mode(self) -> str:
+        """returns elide mode
+
+        possible values are "left", "right", "middle", "none"
+
+        Returns:
+            elide mode
+        """
         return ELIDE_MODES.inv[self.elideMode()]
 
 
