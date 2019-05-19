@@ -81,6 +81,12 @@ class Widget(QtWidgets.QWidget):
         yield None
         self.blockSignals(False)
 
+    @contextmanager
+    def updates_off(self):
+        self.setUpdatesEnabled(False)
+        yield None
+        self.setUpdatesEnabled(True)
+
     def set_size_policy(self,
                         horizontal: Optional[str] = None,
                         vertical: Optional[str] = None):
@@ -122,7 +128,7 @@ class Widget(QtWidgets.QWidget):
         self.setStyleSheet(stylesheet)
         return stylesheet
 
-    def set_contextmenu_policy(self, policy):
+    def set_contextmenu_policy(self, policy: str):
         self.setContextMenuPolicy(POLICIES[policy])
 
     def set_custom_menu(self, method: Callable):
