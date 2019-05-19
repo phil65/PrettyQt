@@ -12,11 +12,20 @@ class MenuBar(QtWidgets.QMenuBar):
 
     def __add__(self, other):
         if isinstance(other, QtWidgets.QAction):
-            self.add_action(other)
+            self.add_item(other)
             return self
 
     def add_action(self, action):
-        self.addAction(action)
+        return self.addAction(action)
+
+    def add_menu(self, menu):
+        return self.addMenu(menu)
+
+    def add_item(self, item):
+        if isinstance(item, QtWidgets.QMenu):
+            return self.add_menu(item)
+        else:
+            return self.add_action(item)
 
 
 MenuBar.__bases__[0].__bases__ = (widgets.Widget,)
