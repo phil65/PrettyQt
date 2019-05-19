@@ -105,12 +105,12 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
     def scroll_to_top(self):
         """scroll to the top of the scroll area
         """
-        self.verticalScrollBar().setValue(self.verticalScrollBar().minimum())
+        self.verticalScrollBar().scroll_to_min()
 
     def scroll_to_bottom(self):
-        """scroll to the end of the scroll area
+        """scroll to the bottom of the scroll area
         """
-        self.verticalScrollBar().setValue(self.verticalScrollBar().maximum())
+        self.verticalScrollBar().scroll_to_max()
 
 
 AbstractScrollArea.__bases__[0].__bases__ = (widgets.Frame,)
