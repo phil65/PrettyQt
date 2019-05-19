@@ -106,7 +106,7 @@ class ChartView(QtCharts.QChartView):
         if gl_widget:
             painter = gui.Painter(image)
             d = gl_widget.mapToGlobal(core.Point()) - self.mapToGlobal(core.Point())
-            painter.set_composition_mode("source_at_top")
+            painter.set_composition_mode("source_atop")
             painter.drawImage(d, gl_widget.grabFramebuffer())
             painter.end()
         return image

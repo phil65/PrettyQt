@@ -11,7 +11,17 @@ from prettyqt import core, gui
 
 PEN_TYPES = bidict(dict(none=QtCore.Qt.NoPen))
 
-COMP_MODES = bidict(dict(source_at_top=QtGui.QPainter.CompositionMode_SourceAtop))
+COMP_MODES = bidict(dict(source_over=QtGui.QPainter.CompositionMode_SourceOver,
+                         destination_over=QtGui.QPainter.CompositionMode_DestinationOver,
+                         clear=QtGui.QPainter.CompositionMode_Clear,
+                         source=QtGui.QPainter.CompositionMode_Source,
+                         destination=QtGui.QPainter.CompositionMode_Destination,
+                         source_in=QtGui.QPainter.CompositionMode_SourceIn,
+                         destination_in=QtGui.QPainter.CompositionMode_DestinationIn,
+                         source_out=QtGui.QPainter.CompositionMode_SourceOut,
+                         destination_out=QtGui.QPainter.CompositionMode_DestinationOut,
+                         source_atop=QtGui.QPainter.CompositionMode_SourceAtop,
+                         destination_atop=QtGui.QPainter.CompositionMode_DestinationAtop))
 
 PATTERNS = bidict(dict(solid=QtCore.Qt.SolidPattern,
                        none=QtCore.Qt.NoBrush,
@@ -23,7 +33,7 @@ PATTERNS = bidict(dict(solid=QtCore.Qt.SolidPattern,
 class Painter(QtGui.QPainter):
 
     def draw_image(self, point, frame_buffer):
-        self.set_composition_mode("source_at_top")
+        self.set_composition_mode("source_atop")
         self.drawImage(point, frame_buffer)
         self.end()
 
@@ -59,6 +69,15 @@ class Painter(QtGui.QPainter):
         self.setCompositionMode(COMP_MODES[mode])
 
     def get_composition_mode(self) -> str:
+        """get the current composition mode
+
+Possible values: "source_over", "destination_over", "clear", "source",
+                 "destination", "source_in", "destination_in", "source_out",
+                 "destination_out", "source_atop", "destination_atop",
+
+        Returns:
+            composition mode
+        """
         return COMP_MODES.inv[self.compositionMode()]
 
     def draw_text(self, x, y, width, height, alignment, text):

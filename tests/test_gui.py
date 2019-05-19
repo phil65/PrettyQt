@@ -77,7 +77,7 @@ def test_painter():
     painter.set_pen("none")
     painter.fill_rect(core.Rect(), "transparent")
     painter.set_color("black")
-    painter.set_composition_mode("source_at_top")
+    painter.set_composition_mode("source_atop")
 
 
 def test_pdfwriter():
