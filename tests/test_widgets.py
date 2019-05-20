@@ -6,6 +6,7 @@
 import pickle
 import datetime
 
+import pytest
 from qtpy import QtCore
 
 from prettyqt import core, gui, widgets
@@ -31,6 +32,8 @@ def test_boxlayout():
     widget = widgets.RadioButton("test")
     layout += widget
     layout.set_size_mode("maximum")
+    with pytest.raises(ValueError):
+        layout.set_size_mode("bla")
     layout.set_margin(0)
     with open("data.pkl", "wb") as jar:
         pickle.dump(layout, jar)
@@ -77,7 +80,11 @@ def test_combobox():
     box.set_enabled()
     box.add_item("test", data="data", icon="mdi.timer")
     box.set_insert_policy("bottom")
+    with pytest.raises(ValueError):
+        box.set_insert_policy("bla")
     box.set_size_adjust_policy("first_show")
+    with pytest.raises(ValueError):
+        box.set_size_adjust_policy("bla")
     box.set_icon_size(10)
     box.set_min_char_length(10)
     with open("data.pkl", "wb") as jar:
@@ -92,7 +99,8 @@ def test_commandlinkbutton():
     widget.set_disabled()
     widget.set_enabled()
     widget.set_icon("mdi.timer")
-    widget.set_style_icon("close")
+    with pytest.raises(ValueError):
+        widget.set_style_icon("bla")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -181,7 +189,11 @@ def test_filedialog():
     dlg = widgets.FileDialog()
     dlg.set_label_text("accept", "test")
     dlg.set_accept_mode("open")
+    with pytest.raises(ValueError):
+        dlg.set_accept_mode("bla")
     dlg.set_accept_mode("save")
+    with pytest.raises(ValueError):
+        dlg.set_accept_mode("bla")
     dlg.set_filter(dict(a=[".csv"]))
     dlg.selected_file()
     dlg.selected_files()
@@ -207,6 +219,8 @@ def test_fontdialog():
 def test_formlayout():
     widget = widgets.FormLayout()
     widget.set_size_mode("maximum")
+    with pytest.raises(ValueError):
+        widget.set_size_mode("bla")
     widget[0, "left"] = "0, left"
     widget[1, "left"] = widgets.RadioButton("1, left")
     widget[0, "right"] = "label 1 right"
