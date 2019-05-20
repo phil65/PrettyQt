@@ -70,6 +70,13 @@ class ComboBox(QtWidgets.QComboBox):
         data = self.itemData(index)
         self.value_changed.emit(data)
 
+    def add_items(self, items):
+        for i in items:
+            if isinstance(i, (tuple, list)):
+                self.add_item(*i)
+            else:
+                self.add_item(i)
+
     def add_item(self,
                  label: str,
                  data=None,
