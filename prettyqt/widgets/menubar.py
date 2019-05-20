@@ -15,10 +15,10 @@ class MenuBar(QtWidgets.QMenuBar):
             self.add_item(other)
             return self
 
-    def add_action(self, action):
+    def add_action(self, action: QtWidgets.QAction):
         return self.addAction(action)
 
-    def add_menu(self, menu):
+    def add_menu(self, menu: QtWidgets.QMenu):
         return self.addMenu(menu)
 
     def add_item(self, item):
