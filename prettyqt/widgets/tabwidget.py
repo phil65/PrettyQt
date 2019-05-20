@@ -134,7 +134,12 @@ class TabWidget(QtWidgets.QTabWidget):
         # Create a reference to maintain access to the detached tab
         self.detached_tabs[name] = detached_tab
 
-    def add_tab(self, widget, label, icon=None):
+    def add_tab(self, item, label, icon=None):
+        if isinstance(item, QtWidgets.QLayout):
+            widget = widgets.Widget()
+            widget.set_layout(item)
+        else:
+            widget = item
         if icon is None:
             return self.addTab(widget, label)
         else:
