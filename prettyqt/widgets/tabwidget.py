@@ -140,7 +140,7 @@ class TabWidget(QtWidgets.QTabWidget):
             widget.set_layout(item)
         else:
             widget = item
-        if icon is None:
+        if not icon:
             return self.addTab(widget, label)
         else:
             if isinstance(icon, str):
@@ -148,7 +148,7 @@ class TabWidget(QtWidgets.QTabWidget):
             return self.addTab(widget, icon, label)
 
     def insert_tab(self, pos, widget, label, icon=None):
-        if icon is None:
+        if not icon:
             return self.insertTab(pos, widget, label)
         else:
             if isinstance(icon, str):

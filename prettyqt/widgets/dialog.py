@@ -59,7 +59,7 @@ class BaseDialog(QtWidgets.QDialog):
         Args:
             icon: icon to use
         """
-        if icon is None:
+        if not icon:
             icon = gui.Icon()
         elif isinstance(icon, str):
             icon = qta.icon(icon, color="lightgray")
