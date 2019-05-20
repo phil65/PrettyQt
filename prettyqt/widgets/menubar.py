@@ -11,7 +11,7 @@ from prettyqt import widgets
 class MenuBar(QtWidgets.QMenuBar):
 
     def __add__(self, other):
-        if isinstance(other, QtWidgets.QAction):
+        if isinstance(other, (QtWidgets.QAction, QtWidgets.QMenu)):
             self.add_item(other)
             return self
 
