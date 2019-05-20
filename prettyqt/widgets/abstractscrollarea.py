@@ -85,7 +85,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             raise ValueError("Invalid scrollbar policy")
         self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
-    def set_vertical_scrollbar_visibility(self, mode: str):
+    def set_vertical_scrollbar_policy(self, mode: str):
         """sets the vertical scrollbar visibility
 
         possible values are "always_on", "always_off", "as_needed"
