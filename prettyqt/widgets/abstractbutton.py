@@ -10,6 +10,9 @@ from qtpy import QtWidgets, QtGui
 
 from prettyqt import core, widgets, gui
 
+STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton,
+              maximise=QtWidgets.QStyle.SP_TitleBarMaxButton)
+
 
 class AbstractButton(QtWidgets.QAbstractButton):
 
@@ -47,8 +50,8 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.setIcon(icon)
 
     def set_style_icon(self, icon: str, size: int = 15):
-        STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton,
-                      maximise=QtWidgets.QStyle.SP_TitleBarMaxButton)
+        if icon not in STYLES:
+            raise ValueError(f"{icon!r} not a valid icon.")
         qicon = self.style().standardIcon(STYLES[icon], None, self)
         self.set_icon(qicon)
         self.setIconSize(core.Size(size, size))

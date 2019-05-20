@@ -5,7 +5,7 @@
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
 class FlowLayout(widgets.Layout):
@@ -78,8 +78,7 @@ class FlowLayout(widgets.Layout):
         return True
 
     def heightForWidth(self, width):
-        height = self.do_layout(QtCore.QRect(0, 0, width, 0), True)
-        return height
+        return self.do_layout(core.Rect(0, 0, width, 0), True)
 
     def setGeometry(self, rect):
         super().setGeometry(rect)
@@ -89,13 +88,13 @@ class FlowLayout(widgets.Layout):
         return self.minimumSize()
 
     def minimumSize(self):
-        size = QtCore.QSize()
+        size = core.Size()
 
         for item in self.items:
             size = size.expandedTo(item.minimumSize())
 
-        size += QtCore.QSize(2 * self.contentsMargins().top(),
-                             2 * self.contentsMargins().top())
+        margin_width = 2 * self.contentsMargins().top()
+        size += core.Size(margin_width, margin_width)
         return size
 
     def do_layout(self, rect, test_only):
@@ -106,21 +105,21 @@ class FlowLayout(widgets.Layout):
         for item in self.items:
             wid = item.widget()
             pb = widgets.SizePolicy.PushButton
-            spaceX = self.spacing() + wid.style().layoutSpacing(pb,
-                                                                pb,
-                                                                QtCore.Qt.Horizontal)
-            spaceY = self.spacing() + wid.style().layoutSpacing(pb,
-                                                                pb,
-                                                                QtCore.Qt.Vertical)
-            next_x = x + item.sizeHint().width() + spaceX
-            if next_x - spaceX > rect.right() and line_height > 0:
+            space_x = self.spacing() + wid.style().layoutSpacing(pb,
+                                                                 pb,
+                                                                 QtCore.Qt.Horizontal)
+            space_y = self.spacing() + wid.style().layoutSpacing(pb,
+                                                                 pb,
+                                                                 QtCore.Qt.Vertical)
+            next_x = x + item.sizeHint().width() + space_x
+            if next_x - space_x > rect.right() and line_height > 0:
                 x = rect.x()
-                y = y + line_height + spaceY
-                next_x = x + item.sizeHint().width() + spaceX
+                y = y + line_height + space_y
+                next_x = x + item.sizeHint().width() + space_x
                 line_height = 0
 
             if not test_only:
-                item.setGeometry(QtCore.QRect(QtCore.QPoint(x, y), item.sizeHint()))
+                item.setGeometry(core.Rect(core.Point(x, y), item.sizeHint()))
 
             x = next_x
             line_height = max(line_height, item.sizeHint().height())
@@ -138,7 +137,6 @@ if __name__ == '__main__':
     layout += widgets.PushButton("Different text")
     layout += widgets.PushButton("More text")
     layout += widgets.PushButton("Even longer button text")
-    print(len(layout))
     widget.set_layout(layout)
     widget.show()
     app.exec_()
