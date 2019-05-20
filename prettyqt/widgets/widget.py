@@ -12,8 +12,12 @@ from qtpy import QtWidgets, QtCore, QtGui
 from prettyqt import widgets, core
 
 
-POLICIES = dict(custom=QtCore.Qt.CustomContextMenu,
-                showhide_menu="showhide_menu")
+POLICIES = bidict(dict(none=QtCore.Qt.NoContextMenu,
+                       prevent=QtCore.Qt.PreventContextMenu,
+                       default=QtCore.Qt.DefaultContextMenu,
+                       actions=QtCore.Qt.ActionsContextMenu,
+                       custom=QtCore.Qt.CustomContextMenu,
+                       showhide_menu="showhide_menu"))
 
 MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
                          application=QtCore.Qt.ApplicationModal,
@@ -123,7 +127,31 @@ class Widget(QtWidgets.QWidget):
         return stylesheet
 
     def set_contextmenu_policy(self, policy: str):
+        """set contextmenu policy for given item view
+
+        Allowed values are "none", "prevent", "default", "actions",
+                           "custom", "showhide_menu"
+
+        Args:
+            policy: contextmenu policy to use
+
+        Raises:
+            ValueError: policy does not exist
+        """
+        if policy not in POLICIES:
+            raise ValueError("invalid selection behaviour")
         self.setContextMenuPolicy(POLICIES[policy])
+
+    def get_contextmenu_policy(self) -> str:
+        """returns current contextmenu policy
+
+        Possible values: "none", "prevent", "default", "actions",
+                         "custom", "showhide_menu"
+
+        Returns:
+            contextmenu policy
+        """
+        return POLICIES.inv[self.contextMenuPolicy()]
 
     def set_custom_menu(self, method: Callable):
         self.set_contextmenu_policy("custom")
