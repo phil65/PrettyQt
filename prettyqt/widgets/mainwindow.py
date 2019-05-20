@@ -31,6 +31,13 @@ class MainWindow(QtWidgets.QMainWindow):
     includes all docks, a centralwidget and a toolbar
     """
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setDockOptions(self.AllowTabbedDocks |
+                            self.AllowNestedDocks |
+                            self.GroupedDragging |
+                            self.AnimatedDocks)
+
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
 
