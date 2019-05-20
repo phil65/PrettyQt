@@ -46,6 +46,9 @@ class Action(QtWidgets.QAction):
         self.set_shortcut_context(state["shortcut_context"])
         self.setCheckable(state["checkable"])
 
+    def set_text(self, text: str):
+        self.setText(text)
+
     def set_enabled(self):
         self.setEnabled(True)
 
