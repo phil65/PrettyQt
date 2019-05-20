@@ -5,7 +5,7 @@ from qtpy import QtCore
 from prettyqt import core
 
 
-class TransposeProxyModel(QtCore.QAbstractProxyModel):
+class TransposeProxyModel(core.AbstractProxyModel):
 
     def __init__(self, source_model):
         super().__init__()

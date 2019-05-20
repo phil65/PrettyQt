@@ -75,6 +75,7 @@ from .listwidget import ListWidget
 from .treeview import TreeView
 from .treewidget import TreeWidget
 from .tableview import TableView
+from .abstractitemdelegate import AbstractItemDelegate
 from .itemdelegate import ItemDelegate
 from .styleditemdelegate import StyledItemDelegate
 
@@ -187,5 +188,6 @@ __all__ = ["app",
            "Wizard",
            "WizardPage",
            "MainWindow",
+           "AbstractItemDelegate",
            "ItemDelegate",
            "StyledItemDelegate"]

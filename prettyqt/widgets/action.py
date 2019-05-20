@@ -9,7 +9,7 @@ from bidict import bidict
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets, QtGui
 
-from prettyqt import gui
+from prettyqt import gui, core
 
 PRIORITIES = bidict(dict(low=QtWidgets.QAction.LowPriority,
                          normal=QtWidgets.QAction.NormalPriority,
@@ -120,6 +120,9 @@ class Action(QtWidgets.QAction):
             shortcut context
         """
         return CONTEXTS.inv[self.shortcutContext()]
+
+
+Action.__bases__[0].__bases__ = (core.Object,)
 
 
 if __name__ == "__main__":
