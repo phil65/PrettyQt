@@ -18,12 +18,25 @@ class TableView(QtWidgets.QTableView):
         self.setAlternatingRowColors(True)
         self.setWordWrap(False)
 
+    @property
     def h_header(self):
         return self.horizontalHeader()
 
+    @h_header.setter
+    def h_header(self, header):
+        self.setHorizontalHeader(header)
+
+    @property
+    def v_header(self):
+        return self.verticalHeader()
+
+    @v_header.setter
+    def v_header(self, header):
+        self.setVerticalHeader(header)
+
     def setup_list_style(self):
         self.set_selection_behaviour("rows")
-        self.h_header().setStretchLastSection(True)
+        self.h_header.setStretchLastSection(True)
         self.verticalHeader().resize_mode("fixed")
         self.verticalHeader().setDefaultSectionSize(28)
 
@@ -32,14 +45,13 @@ class TableView(QtWidgets.QTableView):
         if model is not None and (model.rowCount() * model.columnCount()) < 1000:
             self.resizeColumnsToContents()
         else:
-            self.h_header().resize_sections("interactive")
+            self.h_header.resize_sections("interactive")
 
 
 TableView.__bases__[0].__bases__ = (widgets.AbstractItemView,)
 
 if __name__ == "__main__":
     app = widgets.app()
-    dlg = widgets.MainWindow()
-    status_bar = TableView()
-    dlg.show()
+    widget = TableView()
+    widget.show()
     app.exec_()

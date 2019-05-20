@@ -25,8 +25,24 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setHorizontalScrollBar(widgets.ScrollBar())
-        self.setVerticalScrollBar(widgets.ScrollBar())
+        self.h_scrollbar = widgets.ScrollBar()
+        self.v_scrollbar = widgets.ScrollBar()
+
+    @property
+    def h_scrollbar(self):
+        return self.horizontalScrollbar()
+
+    @h_scrollbar.setter
+    def h_scrollbar(self, scrollbar):
+        self.setHorizontalScrollBar(scrollbar)
+
+    @property
+    def v_scrollbar(self):
+        return self.verticalScrollBar()
+
+    @v_scrollbar.setter
+    def v_scrollbar(self, scrollbar):
+        self.setVerticalScrollBar(scrollbar)
 
     def set_size_adjust_policy(self, policy: str):
         """set size adjust policy
@@ -54,7 +70,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         """
         return SIZE_POLICIES.inv[self.sizeAdjustPolicy()]
 
-    def set_horizontal_scrollbar_visibility(self, mode: str):
+    def set_horizontal_scrollbar_policy(self, mode: str):
         """sets the horizontal scrollbar visibility
 
         possible values are "always_on", "always_off", "as_needed"

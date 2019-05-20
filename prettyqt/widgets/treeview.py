@@ -23,22 +23,27 @@ class TreeView(QtWidgets.QTreeView):
         self.setWordWrap(False)
 
         # misc
-        self.setHeader(widgets.HeaderView("horizontal", parent=self))
+        self.h_header = widgets.HeaderView("horizontal", parent=self)
         self.set_selection_mode("extended")
 
+    @property
     def h_header(self):
         return self.header()
 
+    @h_header.setter
+    def h_header(self, header):
+        self.setHeader(header)
+
     def setup_list_style(self):
         self.setSelectionBehavior(self.SelectRows)
-        self.h_header().setStretchLastSection(True)
+        self.h_header.setStretchLastSection(True)
 
     def adapt_sizes(self):
         model = self.model()
         if model is not None and (model.rowCount() * model.columnCount()) < 1000:
-            self.h_header().resizeSections(self.h_header().ResizeToContents)
+            self.h_header.resizeSections(self.h_header.ResizeToContents)
         else:
-            self.h_header().resize_sections("interactive")
+            self.h_header.resize_sections("interactive")
 
 
 TreeView.__bases__[0].__bases__ = (widgets.AbstractItemView,)
