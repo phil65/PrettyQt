@@ -56,8 +56,8 @@ class Menu(QtWidgets.QMenu):
         return separator
 
     def add_action(self,
-                   label: str,
-                   callback: Callable,
+                   label: Union[str, widgets.Action],
+                   callback: Callable = None,
                    icon: Optional[Any] = None,
                    checkable: bool = False,
                    checked: bool = False,
@@ -78,15 +78,19 @@ class Menu(QtWidgets.QMenu):
         Returns:
             Action added to menu
         """
-        action = widgets.Action(label, parent=self)
-        action.triggered.connect(callback)
-        action.set_icon(icon)
-        action.set_shortcut(shortcut)
-        if checkable:
-            action.setCheckable(True)
-            action.setChecked(checked)
-        if status_tip is not None:
-            action.setStatusTip(status_tip)
+        if isinstance(label, str):
+            action = widgets.Action(label, parent=self)
+            if callback:
+                action.triggered.connect(callback)
+            action.set_icon(icon)
+            action.set_shortcut(shortcut)
+            if checkable:
+                action.setCheckable(True)
+                action.setChecked(checked)
+            if status_tip is not None:
+                action.setStatusTip(status_tip)
+        else:
+            action = label
         self.addAction(action)
         return action
 
