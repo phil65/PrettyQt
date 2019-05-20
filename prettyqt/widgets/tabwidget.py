@@ -79,6 +79,13 @@ class TabWidget(QtWidgets.QTabWidget):
         self.setTabShape(TAB_SHAPES[shape])
 
     def get_tab_shape(self) -> str:
+        """returns tab shape
+
+        possible values are "roundes", "triangular"
+
+        Returns:
+            tab shape
+        """
         return TAB_SHAPES.inv[self.tabShape()]
 
     def get_children(self):

@@ -67,4 +67,11 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         self.setCheckState(STATES[state])
 
     def get_checkstate(self) -> str:
+        """returns checkstate
+
+        possible values are "unchecked", "partial", "checked"
+
+        Returns:
+            checkstate
+        """
         return STATES.inv[self.checkState()]

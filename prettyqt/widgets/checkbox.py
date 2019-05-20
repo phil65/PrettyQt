@@ -61,6 +61,13 @@ class CheckBox(QtWidgets.QCheckBox):
         self.setCheckState(STATES[state])
 
     def get_checkstate(self) -> bool:
+        """returns checkstate
+
+        possible values are "unchecked", "partial", "checked"
+
+        Returns:
+            checkstate
+        """
         return STATES.inv[self.checkState()]
 
     def get_value(self) -> bool:

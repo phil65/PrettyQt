@@ -71,37 +71,93 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setSupportedSchemes(state["supported_schemes"])
 
     def set_accept_mode(self, mode: str):
+        """set accept mode
+
+        possible values are "save", "open"
+
+        Args:
+            mode: accept mode to use
+
+        Raises:
+            ValueError: invalid accept mode
+        """
         if mode not in ACCEPT_MODES:
             raise ValueError(f"Invalid value. Valid values: {ACCEPT_MODES.keys()}")
         self.setAcceptMode(ACCEPT_MODES[mode])
 
     def get_accept_mode(self) -> str:
+        """returns accept mode
+
+        possible values are "save", "open"
+
+        Returns:
+            accept mode
+        """
         return ACCEPT_MODES.inv[self.acceptMode()]
 
     def set_view_mode(self, mode: str):
+        """set view mode
+
+        possible values are "detail", "list"
+
+        Args:
+            mode: view mode to use
+
+        Raises:
+            ValueError: invalid view mode
+        """
         if mode not in VIEW_MODES:
             raise ValueError(f"Invalid value. Valid values: {VIEW_MODES.keys()}")
         self.setViewMode(VIEW_MODES[mode])
 
     def get_view_mode(self) -> str:
+        """returns view mode
+
+        possible values are "detail", "list"
+
+        Returns:
+            view mode
+        """
         return VIEW_MODES.inv[self.viewMode()]
 
     def set_label_text(self, label: str, text: str):
+        """sets the label text for button label
+
+        possible values for label are "look_in", "filename", "filetype",
+        "accept", "reject"
+
+        Args:
+            label: button to set text for
+            text: text to use
+        """
         if label not in LABELS:
             raise ValueError(f"Invalid value. Valid values: {LABELS.keys()}")
         self.setLabelText(LABELS[label], text)
 
     def get_label_text(self, label) -> str:
+        """returns label text
+
+        possible values are "look_in", "filename", "filetype", "accept", "reject"
+
+        Returns:
+            label text
+        """
         return self.labelText(LABELS.inv[label])
 
     def get_file_mode(self) -> str:
+        """returns file mode
+
+        possible values are "existing_file", "existing_files", "any_file", "directory"
+
+        Returns:
+            file mode
+        """
         return MODES.inv[self.fileMode()]
 
     def set_file_mode(self, mode: str):
         """sets the file mode of the dialog
 
-        allowed values are 'existing_file', 'existing_files',
-        'any_file' and 'directory'
+        allowed values are "existing_file", "existing_files", "any_file" "directory"
 
         Args:
             mode: mode to use
