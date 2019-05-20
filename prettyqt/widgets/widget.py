@@ -76,12 +76,6 @@ class Widget(QtWidgets.QWidget):
         return MODALITIES.inv[self.windowModality()]
 
     @contextmanager
-    def block_signals(self):
-        self.blockSignals(True)
-        yield None
-        self.blockSignals(False)
-
-    @contextmanager
     def updates_off(self):
         self.setUpdatesEnabled(False)
         yield None

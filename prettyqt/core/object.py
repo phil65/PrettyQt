@@ -3,10 +3,18 @@
 @author: Philipp Temminghoff
 """
 
+from contextlib import contextmanager
+
 from qtpy import QtCore
 
 
 class Object(QtCore.QObject):
+
+    @contextmanager
+    def block_signals(self):
+        self.blockSignals(True)
+        yield None
+        self.blockSignals(False)
 
     def to_json(self):
         dct = self.__getstate__()
