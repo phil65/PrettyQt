@@ -426,10 +426,6 @@ class SpanSlider(widgets.Slider):
     def pixel_pos_to_value(self, pos):
         opt = widgets.StyleOptionSlider()
         self.initStyleOption(opt)
-
-        slider_min = 0
-        slider_max = 0
-        len_slider = 0
         gr = self.style().subControlRect(SLIDER_STYLE, opt, GROOVE_STYLE, self)
         sr = self.style().subControlRect(SLIDER_STYLE, opt, HANDLE_STYLE, self)
         if self.is_horizontal():
