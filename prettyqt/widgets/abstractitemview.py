@@ -139,6 +139,13 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setSelectionBehavior(SELECTION_BEHAVIOURS[behaviour])
 
     def get_selection_behaviour(self) -> str:
+        """returns current selection behaviour
+
+        Possible values: "rows", "columns", "items"
+
+        Returns:
+            selection behaviour
+        """
         return SELECTION_BEHAVIOURS.inv[self.selectionBehavior()]
 
     def set_selection_mode(self, mode: str):

@@ -92,7 +92,7 @@ class Action(QtWidgets.QAction):
         Possible values: "low", "normal", "high"
 
         Returns:
-            selection mode
+            priority
         """
         return PRIORITIES.inv[self.priority()]
 

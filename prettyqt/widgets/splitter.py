@@ -64,9 +64,28 @@ class Splitter(QtWidgets.QSplitter):
         return splitter
 
     def set_orientation(self, orientation: str):
+        """set the orientation of the splitter
+
+        Allowed values are "horizontal", "vertical"
+
+        Args:
+            mode: orientation for the splitter
+
+        Raises:
+            ValueError: orientation does not exist
+        """
+        if orientation not in ORIENTATIONS:
+            raise ValueError(f"{orientation} not a valid orientation.")
         self.setOrientation(ORIENTATIONS[orientation])
 
     def get_orientation(self) -> str:
+        """returns current orientation
+
+        Possible values: "horizontal", "vertical"
+
+        Returns:
+            orientation
+        """
         return ORIENTATIONS.inv[self.orientation()]
 
 
