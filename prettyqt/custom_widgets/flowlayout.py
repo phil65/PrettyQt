@@ -105,15 +105,12 @@ class FlowLayout(widgets.Layout):
         for item in self.items:
             wid = item.widget()
             pb = widgets.SizePolicy.PushButton
-            space_x = self.spacing() + wid.style().layoutSpacing(pb,
-                                                                 pb,
-                                                                 QtCore.Qt.Horizontal)
-            space_y = self.spacing() + wid.style().layoutSpacing(pb,
-                                                                 pb,
-                                                                 QtCore.Qt.Vertical)
+            space = self.spacing()
+            space_x = space + wid.style().layoutSpacing(pb, pb, QtCore.Qt.Horizontal)
             next_x = x + item.sizeHint().width() + space_x
             if next_x - space_x > rect.right() and line_height > 0:
                 x = rect.x()
+                space_y = space + wid.style().layoutSpacing(pb, pb, QtCore.Qt.Vertical)
                 y = y + line_height + space_y
                 next_x = x + item.sizeHint().width() + space_x
                 line_height = 0
