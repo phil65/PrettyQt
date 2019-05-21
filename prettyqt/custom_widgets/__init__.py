@@ -9,6 +9,7 @@ from .colorchooserbutton import ColorChooserButton
 from .filechooserbutton import FileChooserButton
 from .fontchooserbutton import FontChooserButton
 from .spanslider import SpanSlider
+from .labeledslider import LabeledSlider
 from .waitingspinner import WaitingSpinner
 from .markdownwidget import MarkdownWindow
 from .imageviewer import ImageViewer
@@ -22,6 +23,7 @@ __all__ = ["FlowLayout",
            "FileChooserButton",
            "FontChooserButton",
            "SpanSlider",
+           "LabeledSlider",
            "WaitingSpinner",
            "PopupInfo",
            "ButtonDelegate",
