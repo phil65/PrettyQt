@@ -43,7 +43,7 @@ class MessageBox(QtWidgets.QMessageBox):
     def message(cls, msg, title=None, icon=None):
         m = cls(cls.NoIcon, title, msg)
         m.set_icon(icon)
-        m.exec_()
+        return BUTTONS.inv[m.exec_()]
 
     def set_icon(self, icon):
         if icon in ICONS:
