@@ -62,6 +62,13 @@ def test_flowlayout():
     widget.set_layout(layout)
 
 
+def test_labeledslider(qtbot):
+    slider = custom_widgets.LabeledSlider(["test1", "test2"])
+    qtbot.addWidget(slider)
+    qtbot.mouseClick(slider.sl, QtCore.Qt.LeftButton)
+    qtbot.mouseMove(slider.sl, core.Point(20, 20))
+
+
 def test_markdownwidget():
     custom_widgets.MarkdownWindow()
 
