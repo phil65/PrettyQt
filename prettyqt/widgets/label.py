@@ -11,15 +11,15 @@ from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
 
-H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
-                    right=QtCore.Qt.AlignRight,
-                    center=QtCore.Qt.AlignHCenter,
-                    justify=QtCore.Qt.AlignJustify)
+H_ALIGNMENTS = bidict(dict(left=QtCore.Qt.AlignLeft,
+                           right=QtCore.Qt.AlignRight,
+                           center=QtCore.Qt.AlignHCenter,
+                           justify=QtCore.Qt.AlignJustify))
 
-V_ALIGNMENTS = dict(top=QtCore.Qt.AlignTop,
-                    bottom=QtCore.Qt.AlignBottom,
-                    center=QtCore.Qt.AlignVCenter,
-                    baseline=QtCore.Qt.AlignBaseline)
+V_ALIGNMENTS = bidict(dict(top=QtCore.Qt.AlignTop,
+                           bottom=QtCore.Qt.AlignBottom,
+                           center=QtCore.Qt.AlignVCenter,
+                           baseline=QtCore.Qt.AlignBaseline))
 
 TEXT_INTERACTION = bidict(dict(none=QtCore.Qt.NoTextInteraction,
                                by_mouse=QtCore.Qt.TextSelectableByMouse,
