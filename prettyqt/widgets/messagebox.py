@@ -16,6 +16,26 @@ ICONS = bidict(dict(none=QtWidgets.QMessageBox.NoIcon,
                     critical=QtWidgets.QMessageBox.Critical,
                     question=QtWidgets.QMessageBox.Question))
 
+BUTTONS = bidict(dict(none=QtWidgets.QMessageBox.NoButton,
+                      cancel=QtWidgets.QMessageBox.Cancel,
+                      ok=QtWidgets.QMessageBox.Ok,
+                      save=QtWidgets.QMessageBox.Save,
+                      open=QtWidgets.QMessageBox.Open,
+                      close=QtWidgets.QMessageBox.Close,
+                      discard=QtWidgets.QMessageBox.Discard,
+                      apply=QtWidgets.QMessageBox.Apply,
+                      reset=QtWidgets.QMessageBox.Reset,
+                      restore_defaults=QtWidgets.QMessageBox.RestoreDefaults,
+                      help=QtWidgets.QMessageBox.Help,
+                      save_all=QtWidgets.QMessageBox.SaveAll,
+                      yes=QtWidgets.QMessageBox.Yes,
+                      yes_to_all=QtWidgets.QMessageBox.YesToAll,
+                      no=QtWidgets.QMessageBox.No,
+                      no_to_all=QtWidgets.QMessageBox.NoToAll,
+                      abort=QtWidgets.QMessageBox.Abort,
+                      retry=QtWidgets.QMessageBox.Retry,
+                      ignore=QtWidgets.QMessageBox.Ignore))
+
 
 class MessageBox(QtWidgets.QMessageBox):
 
@@ -30,6 +50,30 @@ class MessageBox(QtWidgets.QMessageBox):
             self.setIcon(ICONS[icon])
             return None
         super().set_icon(icon)
+
+    def get_standard_buttons(self) -> list:
+        return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
+
+    def add_button(self, button: str):
+        """add a default button
+
+        Valid arguments: "none", "cancel", "ok", "save", "open", "close",
+                         "discard", "apply", "reset", "restore_defaults",
+                         "help", "save_all", "yes", "yes_to_all", "no",
+                         "no_to_all", "abort", "retry", "ignore"
+
+        Args:
+            button: button to add
+
+        Returns:
+            created button
+
+        Raises:
+            ValueError: Button type not available
+        """
+        if button not in BUTTONS:
+            raise ValueError("button type not available")
+        return self.addButton(BUTTONS[button])
 
 
 MessageBox.__bases__[0].__bases__ = (widgets.BaseDialog,)
