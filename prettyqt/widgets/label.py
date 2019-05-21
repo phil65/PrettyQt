@@ -77,15 +77,53 @@ class Label(QtWidgets.QLabel):
         self.setAlignment(flag)
 
     def set_text_format(self, text_format: str):
+        """set the text format
+
+        Allowed values are "rich", "plain", "auto"
+
+        Args:
+            mode: text format to use
+
+        Raises:
+            ValueError: text format does not exist
+        """
+        if text_format not in TEXT_FORMATS:
+            raise ValueError("Invalid text format")
         self.setTextFormat(TEXT_FORMATS[text_format])
 
     def get_text_format(self) -> str:
+        """returns current text format
+
+        Possible values: "rich", "plain", "auto"
+
+        Returns:
+            text format
+        """
         return TEXT_FORMATS.inv[self.textFormat()]
 
     def set_text_interaction(self, interaction_type: str):
+        """set the text interaction mode
+
+        Allowed values are "none", "by_mouse", "by_keyboard"
+
+        Args:
+            mode: text interaction mode to use
+
+        Raises:
+            ValueError: text interaction mode does not exist
+        """
+        if interaction_type not in TEXT_INTERACTION:
+            raise ValueError("Invalid text interaction mode")
         self.setTextInteractionFlags(TEXT_INTERACTION[interaction_type])
 
     def get_text_interaction(self) -> str:
+        """returns current text interaction mode
+
+        Possible values: "none", "by_mouse", "by_keyboard"
+
+        Returns:
+            text interaction mode
+        """
         return TEXT_INTERACTION.inv[self.textInteractionFlags()]
 
     def set_image(self,
