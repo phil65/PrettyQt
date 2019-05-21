@@ -81,6 +81,15 @@ class Painter(QtGui.QPainter):
         self.setPen(color)
 
     def set_composition_mode(self, mode: str):
+        """set the current composition mode
+
+        Possible values: "source_over", "destination_over", "clear", "source",
+                         "destination", "source_in", "destination_in", "source_out",
+                         "destination_out", "source_atop", "destination_atop",
+
+        Raises:
+            ValueError: composition mode does not exist
+        """
         if mode not in COMP_MODES:
             raise ValueError("Invalid value for composition mode.")
         self.setCompositionMode(COMP_MODES[mode])
