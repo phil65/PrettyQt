@@ -74,6 +74,22 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
             self.add_button(btn)
 
     def add_button(self, button: str):
+        """add a default button
+
+        Valid arguments: "cancel", "ok", "save", "open", "close",
+                         "discard", "apply", "reset", "restore_defaults",
+                         "help", "save_all", "yes", "yes_to_all", "no",
+                         "no_to_all", "abort", "retry", "ignore"
+
+        Args:
+            button: button to add
+
+        Returns:
+            created button
+
+        Raises:
+            ValueError: Button type not available
+        """
         if button not in BUTTONS:
             raise ValueError("button type not available")
         return self.addButton(BUTTONS[button])
