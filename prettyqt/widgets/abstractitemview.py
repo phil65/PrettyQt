@@ -120,8 +120,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setEditTriggers(flags)
 
     def get_edit_triggers(self) -> list:
-        current_triggers = self.editTriggers()
-        return [k for k, v in TRIGGERS.items() if v & current_triggers]
+        return [k for k, v in TRIGGERS.items() if v & self.editTriggers()]
 
     def set_selection_behaviour(self, behaviour: str):
         """set selection behaviour for given item view
