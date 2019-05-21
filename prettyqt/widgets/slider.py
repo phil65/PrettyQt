@@ -6,7 +6,7 @@
 from bidict import bidict
 
 from qtpy import QtWidgets
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 TICK_POSITIONS = bidict(dict(none=QtWidgets.QSlider.NoTicks,
                              both_sides=QtWidgets.QSlider.TicksBothSides,
@@ -15,6 +15,8 @@ TICK_POSITIONS = bidict(dict(none=QtWidgets.QSlider.NoTicks,
 
 
 class Slider(QtWidgets.QSlider):
+
+    value_changed = core.Signal(int)
 
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
