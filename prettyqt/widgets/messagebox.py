@@ -20,10 +20,16 @@ ICONS = bidict(dict(none=QtWidgets.QMessageBox.NoIcon,
 class MessageBox(QtWidgets.QMessageBox):
 
     @classmethod
-    def message(cls, msg, title=None, msg_type=None):
+    def message(cls, msg, title=None, icon=None):
         m = cls(cls.NoIcon, title, msg)
-        m.setIcon(ICONS[msg_type])
+        m.set_icon(icon)
         m.exec_()
+
+    def set_icon(self, icon):
+        if icon in ICONS:
+            self.setIcon(ICONS[icon])
+            return None
+        super().set_icon(icon)
 
 
 MessageBox.__bases__[0].__bases__ = (widgets.BaseDialog,)
