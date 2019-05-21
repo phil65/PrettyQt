@@ -43,13 +43,16 @@ class MessageBox(QtWidgets.QMessageBox):
     def message(cls, msg, title=None, icon=None):
         m = cls(cls.NoIcon, title, msg)
         m.set_icon(icon)
-        return BUTTONS.inv[m.exec_()]
+        return m.show_modal()
 
     def set_icon(self, icon):
         if icon in ICONS:
             self.setIcon(ICONS[icon])
             return None
         super().set_icon(icon)
+
+    def show_modal(self):
+        return BUTTONS.inv[self.exec_()]
 
     def get_standard_buttons(self) -> list:
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
@@ -81,6 +84,6 @@ MessageBox.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = MessageBox.message("Test", "header", "warning")
-    widget.show()
+    ret = MessageBox.message("Test", "header", "warning")
+    print(ret)
     app.exec_()
