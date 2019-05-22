@@ -76,7 +76,7 @@ class BaseDialog(QtWidgets.QDialog):
 
     def show_blocking(self):
         self.show()
-        self.exec_()
+        return self.exec_()
 
     def set_flags(self,
                   minimize: bool = None,

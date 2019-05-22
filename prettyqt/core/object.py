@@ -10,6 +10,13 @@ from qtpy import QtCore
 
 class Object(QtCore.QObject):
 
+    def __getstate__(self):
+        return dict(object_name=self.objectName())
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.setObjectName(state["object_name"])
+
     @contextmanager
     def block_signals(self):
         self.blockSignals(True)

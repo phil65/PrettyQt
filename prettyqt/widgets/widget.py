@@ -31,12 +31,18 @@ class Widget(QtWidgets.QWidget):
 
     def __getstate__(self):
         return dict(layout=self.layout(),
-                    size_policy=self.get_size_policy())
+                    size_policy=self.get_size_policy(),
+                    accessible_name=self.accessibleName(),
+                    tooltip=self.toolTip(),
+                    statustip=self.statusTip())
 
     def __setstate__(self, state):
         self.__init__()
         self.set_layout(state["layout"])
         self.setSizePolicy(state["size_policy"])
+        self.setAccessibleName(state["accessible_name"])
+        self.setToolTip(state.get("tooltip", ""))
+        self.setStatusTip(state.get("statustip", ""))
 
     def resize(self, *size):
         if isinstance(size[0], tuple):

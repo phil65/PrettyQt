@@ -34,7 +34,7 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setRange(*state["range"])
+        self.set_range(*state["range"])
         self.setValue(state["value"])
         self.setEnabled(state.get("enabled", True))
         self.setToolTip(state.get("tooltip", ""))
@@ -46,6 +46,9 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         self.set_step_type(state["step_type"])
         self.set_correction_mode(state["correction_mode"])
         self.set_button_symbols(state["button_symbols"])
+
+    def set_range(self, start, end):
+        self.setRange(start, end)
 
 
 DoubleSpinBox.__bases__[0].__bases__ = (widgets.AbstractSpinBox,)
