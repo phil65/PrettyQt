@@ -4,7 +4,6 @@
 """
 
 from qtpy import QtWidgets, QtCore
-import qtawesome as qta
 
 from prettyqt import widgets
 
@@ -52,10 +51,7 @@ class ListWidget(QtWidgets.QListWidget):
         if data is None:
             data = label
         item = widgets.ListWidgetItem(label)
-        if icon is not None:
-            if isinstance(icon, str):
-                icon = qta.icon(icon)
-            item.setIcon(icon)
+        item.set_icon(icon)
         item.setData(QtCore.Qt.UserRole, data)
         self.addItem(item)
 
