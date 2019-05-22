@@ -48,6 +48,10 @@ class SpinBox(QtWidgets.QSpinBox):
         self.set_step_type(state["step_type"])
 
     def set_range(self, start, end):
+        if start is None:
+            start = -2147483647
+        if end is None:
+            end = 2147483647
         self.setRange(start, end)
 
 

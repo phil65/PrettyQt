@@ -48,6 +48,10 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         self.set_button_symbols(state["button_symbols"])
 
     def set_range(self, start, end):
+        if start is None:
+            start = -float("inf")
+        if end is None:
+            end = float("inf")
         self.setRange(start, end)
 
 
