@@ -44,6 +44,13 @@ class ListWidget(QtWidgets.QListWidget):
     def get_children(self):
         return [self.item(index) for index in range(self.count())]
 
+    def add_items(self, items):
+        for i in items:
+            if isinstance(i, (tuple, list)):
+                self.add_item(*i)
+            else:
+                self.add_item(i)
+
     def add_item(self,
                  label: str,
                  data=None,
@@ -54,6 +61,15 @@ class ListWidget(QtWidgets.QListWidget):
         item.set_icon(icon)
         item.setData(QtCore.Qt.UserRole, data)
         self.addItem(item)
+
+    def get_value(self):
+        return self.currentItem().data(QtCore.Qt.UserRole)
+
+    def set_value(self, value):
+        for i in self.get_children():
+            if i.data(QtCore.Qt.UserRole) == value:
+                self.setCurrentItem(i)
+                break
 
 
 ListWidget.__bases__[0].__bases__ = (widgets.ListView,)
