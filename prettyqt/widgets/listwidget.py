@@ -8,6 +8,10 @@ from qtpy import QtWidgets, QtCore
 from prettyqt import widgets
 
 
+class NoData(object):
+    pass
+
+
 class ListWidget(QtWidgets.QListWidget):
 
     def __repr__(self):
@@ -53,9 +57,9 @@ class ListWidget(QtWidgets.QListWidget):
 
     def add_item(self,
                  label: str,
-                 data=None,
+                 data=NoData,
                  icon=None):
-        if data is None:
+        if data is NoData:
             data = label
         item = widgets.ListWidgetItem(label)
         item.set_icon(icon)

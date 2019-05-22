@@ -23,6 +23,10 @@ SIZE_POLICIES = dict(content=box.AdjustToContents,
                      min_length_with_icon=box.AdjustToMinimumContentsLengthWithIcon)
 
 
+class NoData(object):
+    pass
+
+
 class ComboBox(QtWidgets.QComboBox):
 
     value_changed = core.Signal(object)
@@ -79,9 +83,9 @@ class ComboBox(QtWidgets.QComboBox):
 
     def add_item(self,
                  label: str,
-                 data=None,
+                 data=NoData,
                  icon=None):
-        if data is None:
+        if data is NoData:
             data = label
         if icon is not None:
             if isinstance(icon, str):
@@ -154,7 +158,17 @@ class ComboBox(QtWidgets.QComboBox):
         self.setMinimumContentsLength(chars)
 
     def get_value(self):
+        # if all(self.itemData(i) is None for i in range(self.count())):
+        #     return self.currentText()
+        # else:
+        #     return self.currentData()
         return self.currentData()
+
+    def set_value(self, value):
+        for i in range(self.count()):
+            if self.itemData(i) == value:
+                self.setCurrentIndex(i)
+                break
 
 
 ComboBox.__bases__[0].__bases__ = (widgets.Widget,)
