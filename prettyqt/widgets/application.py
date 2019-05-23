@@ -46,6 +46,9 @@ class Application(QtWidgets.QApplication):
         if org_domain:
             self.setOrganizationDomain(org_domain)
 
+    def main_loop(self):
+        return self.exec_()
+
     @classmethod
     def use_hdpi_bitmaps(cls):
         cls.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps)
