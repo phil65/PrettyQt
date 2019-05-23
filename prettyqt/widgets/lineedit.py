@@ -89,6 +89,14 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setValidator(validator)
         return validator
 
+    def set_range(self, lower, upper):
+        val = gui.IntValidator()
+        val.setRange(lower, upper)
+        self.set_validator(val)
+
+    def set_validator(self, validator: gui.Validator):
+        self.setValidator(validator)
+
     def set_input_mask(self, mask: str):
         self.setInputMask(mask)
 
