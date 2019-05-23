@@ -78,7 +78,7 @@ def test_combobox():
     box = widgets.ComboBox()
     box.set_disabled()
     box.set_enabled()
-    box.add_item("test", data="data", icon="mdi.timer")
+    box.add("test", data="data", icon="mdi.timer")
     box.set_insert_policy("bottom")
     with pytest.raises(ValueError):
         box.set_insert_policy("bla")
@@ -327,8 +327,8 @@ def test_listview():
 
 def test_listwidget():
     widget = widgets.ListWidget()
-    widget.add_item("test", icon="mdi.timer")
-    widget.add_item("test", icon="mdi.timer")
+    widget.add("test", icon="mdi.timer")
+    widget.add("test", icon="mdi.timer")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:

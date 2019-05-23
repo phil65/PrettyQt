@@ -23,7 +23,7 @@ class MdiArea(QtWidgets.QMdiArea):
 
     def __add__(self, other):
         if isinstance(other, QtWidgets.QWidget):
-            self.add_item(other)
+            self.add(other)
             return self
 
     def set_view_mode(self, mode: str):
@@ -62,7 +62,7 @@ class MdiArea(QtWidgets.QMdiArea):
     def get_window_order(self) -> str:
         return WINDOW_ORDERS.inv[self.viewMode()]
 
-    def add_item(self, item: QtWidgets.QWidget):
+    def add(self, item: QtWidgets.QWidget):
         if not isinstance(item, QtWidgets.QMdiSubWindow):
             widget = widgets.MdiSubWindow()
             widget.setWidget(item)
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     widget = MdiArea()
     le = widgets.LineEdit("test")
     le2 = widgets.LineEdit("test")
-    widget.add_item(le)
-    widget.add_item(le2)
+    widget.add(le)
+    widget.add(le2)
     widget.show()
     app.exec_()

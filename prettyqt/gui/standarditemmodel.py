@@ -26,14 +26,14 @@ class StandardItemModel(QtGui.QStandardItemModel):
 
     def __add__(self, other):
         if isinstance(other, (QtGui.QStandardItem, str)):
-            self.add_item(other)
+            self.add(other)
             return self
         raise TypeError("wrong type for addition")
 
     def get_children(self):
         return [self.item(index) for index in range(self.rowCount())]
 
-    def add_item(self, item) -> int:
+    def add(self, item) -> int:
         if isinstance(item, str):
             item = gui.StandardItem(item)
         self.appendRow(item)
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     import pickle
     from prettyqt import widgets
     model = gui.StandardItemModel()
-    model.add_item("test")
+    model.add("test")
     app = widgets.app()
     w = widgets.ListView()
     w.setModel(model)

@@ -22,13 +22,13 @@ class FlowLayout(widgets.Layout):
 
     def __add__(self, other):
         if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
-            self.add_item(other)
+            self.add(other)
             return self
 
     def __setstate__(self, state):
         self.__init__()
         for item in state["items"]:
-            self.add_item(item)
+            self.add(item)
 
     def __getitem__(self, index):
         item = self.itemAt(index)

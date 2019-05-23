@@ -47,7 +47,7 @@ class FormLayout(QtWidgets.QFormLayout):
 
     def __add__(self, other):
         if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout, tuple)):
-            self.add_item(other)
+            self.add(other)
             return self
         raise TypeError("Wrong type for addition")
 
@@ -93,7 +93,7 @@ class FormLayout(QtWidgets.QFormLayout):
                 formlayout[i, "right"] = v
         return formlayout
 
-    def add_item(self, item):
+    def add(self, item):
         if isinstance(item, (QtWidgets.QWidget, QtWidgets.QLayout)):
             self.addRow(item)
         if isinstance(item, tuple):

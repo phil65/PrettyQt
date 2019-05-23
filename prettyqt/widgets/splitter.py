@@ -45,7 +45,7 @@ class Splitter(QtWidgets.QSplitter):
 
     def __add__(self, other):
         if isinstance(other, (QtWidgets.QLayout, QtWidgets.QWidget)):
-            self.add_item(other)
+            self.add(other)
             return self
         raise TypeError(f"Invalid type: {type(other)}")
 
@@ -60,7 +60,7 @@ class Splitter(QtWidgets.QSplitter):
         widget.set_layout(layout)
         self.addWidget(widget)
 
-    def add_item(self, item):
+    def add(self, item):
         if isinstance(item, QtWidgets.QWidget):
             self.add_widget(item)
         else:

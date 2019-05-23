@@ -26,7 +26,7 @@ class GridLayout(QtWidgets.QGridLayout):
         colspan = col.stop - col.start + 1 if isinstance(col, slice) else 1
         rowstart = row.start if isinstance(row, slice) else row
         colstart = col.start if isinstance(col, slice) else col
-        self.add_item(value, rowstart, colstart, rowspan, colspan)
+        self.add(value, rowstart, colstart, rowspan, colspan)
 
     def __getstate__(self):
         widgets = []
@@ -52,7 +52,7 @@ class GridLayout(QtWidgets.QGridLayout):
         self[self.rowCount(), 0:self.columnCount()] = other
         return self
 
-    def add_item(self, item, rowstart, colstart, rowspan=1, colspan=1):
+    def add(self, item, rowstart, colstart, rowspan=1, colspan=1):
         fn = self.addWidget if isinstance(item, QtWidgets.QWidget) else self.addLayout
         fn(item, rowstart, colstart, rowspan, colspan)
 

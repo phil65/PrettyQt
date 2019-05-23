@@ -51,14 +51,14 @@ class ListWidget(QtWidgets.QListWidget):
     def add_items(self, items):
         for i in items:
             if isinstance(i, (tuple, list)):
-                self.add_item(*i)
+                self.add(*i)
             else:
-                self.add_item(i)
+                self.add(i)
 
-    def add_item(self,
-                 label: str,
-                 data=NoData,
-                 icon=None):
+    def add(self,
+            label: str,
+            data=NoData,
+            icon=None):
         if data is NoData:
             data = label
         item = widgets.ListWidgetItem(label)
@@ -81,7 +81,7 @@ ListWidget.__bases__[0].__bases__ = (widgets.ListView,)
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     widget = ListWidget()
-    widget.add_item("test", icon="mdi.timer")
-    widget.add_item("test", icon="mdi.timer")
+    widget.add("test", icon="mdi.timer")
+    widget.add("test", icon="mdi.timer")
     widget.show()
     app.exec_()

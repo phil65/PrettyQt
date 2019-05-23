@@ -61,7 +61,7 @@ def test_standarditem():
 
 def test_standarditemmodel():
     model = gui.StandardItemModel()
-    model.add_item("test")
+    model.add("test")
     for item in model:
         pass
     with open("data.pkl", "wb") as jar:

@@ -54,7 +54,7 @@ class ComboBox(QtWidgets.QComboBox):
     def __setstate__(self, state):
         self.__init__()
         for label, data, icon in state["items"]:
-            self.add_item(label, data, icon=icon)
+            self.add(label, data, icon=icon)
         self.setObjectName(state.get("object_name", ""))
         self.setCurrentIndex(state["index"])
         self.setEnabled(state.get("enabled", True))
@@ -77,14 +77,14 @@ class ComboBox(QtWidgets.QComboBox):
     def add_items(self, items):
         for i in items:
             if isinstance(i, (tuple, list)):
-                self.add_item(*i)
+                self.add(*i)
             else:
-                self.add_item(i)
+                self.add(i)
 
-    def add_item(self,
-                 label: str,
-                 data=NoData,
-                 icon=None):
+    def add(self,
+            label: str,
+            data=NoData,
+            icon=None):
         if data is NoData:
             data = label
         if icon is not None:
@@ -179,7 +179,7 @@ if __name__ == "__main__":
     widget = ComboBox()
     widget.value_changed.connect(print)
     w = ComboBox()
-    widget.add_item("test", data="aa", icon="mdi.timer")
-    widget.add_item("test2", data="aa2", icon="mdi.timer")
+    widget.add("test", data="aa", icon="mdi.timer")
+    widget.add("test2", data="aa2", icon="mdi.timer")
     widget.show()
     app.exec_()

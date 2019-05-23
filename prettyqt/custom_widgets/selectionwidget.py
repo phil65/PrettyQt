@@ -24,20 +24,20 @@ class SelectionWidget(widgets.GroupBox):
     def add_items(self, items):
         if isinstance(items, dict):
             for k, v in items.items():
-                self.add_item(k, v)
+                self.add(k, v)
         else:
             for i in items:
                 if isinstance(i, tuple):
-                    self.add_item(*i)
+                    self.add(*i)
                 else:
-                    self.add_item(i)
+                    self.add(i)
 
     def select_radio_by_data(self, value):
         for rb, data in self.buttons.items():
             if data == value:
                 rb.setChecked(True)
 
-    def add_item(self, title: str, data=None):
+    def add(self, title: str, data=None):
         rb = widgets.RadioButton(title)
         rb.toggled.connect(self.update_choice)
         self.buttons[rb] = data

@@ -29,7 +29,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
         direction = self.Direction(state["direction"])
         self.setDirection(direction)
         for item in state["items"]:
-            self.add_item(item)
+            self.add(item)
 
     def __iter__(self):
         return iter(self.get_children())
@@ -39,10 +39,10 @@ class BoxLayout(QtWidgets.QBoxLayout):
 
     def __add__(self, other):
         if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
-            self.add_item(other)
+            self.add(other)
             return self
 
-    def add_item(self, item):
+    def add(self, item):
         fn = self.addWidget if isinstance(item, QtWidgets.QWidget) else self.addLayout
         fn(item)
 

@@ -42,7 +42,7 @@ class Layout(QtWidgets.QLayout):
     def get_alignment(self) -> str:
         return MODES.inv[self.alignment()]
 
-    def add_item(self, item) -> int:
+    def add(self, item) -> int:
         if isinstance(item, QtWidgets.QWidget):
             return self.addWidget(item)
         elif isinstance(item, QtWidgets.QLayout):

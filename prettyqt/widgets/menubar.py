@@ -12,7 +12,7 @@ class MenuBar(QtWidgets.QMenuBar):
 
     def __add__(self, other):
         if isinstance(other, (QtWidgets.QAction, QtWidgets.QMenu)):
-            self.add_item(other)
+            self.add(other)
             return self
 
     def add_action(self, action: QtWidgets.QAction):
@@ -21,7 +21,7 @@ class MenuBar(QtWidgets.QMenuBar):
     def add_menu(self, menu: QtWidgets.QMenu):
         return self.addMenu(menu)
 
-    def add_item(self, item):
+    def add(self, item):
         if isinstance(item, QtWidgets.QMenu):
             return self.add_menu(item)
         else:

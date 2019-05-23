@@ -166,11 +166,11 @@ class ChoiceItem(DataItem):
         for item in choices:
             if isinstance(item, tuple):
                 if len(item) == 2:
-                    self.widget.add_item(item[1], item[0])
+                    self.widget.add(item[1], item[0])
                 elif len(item) == 3:
-                    self.widget.add_item(item[1], item[0], item[2])
+                    self.widget.add(item[1], item[0], item[2])
             else:
-                self.widget.add_item(item)
+                self.widget.add(item)
         if default is not None:
             self.widget.set_value(default)
 
