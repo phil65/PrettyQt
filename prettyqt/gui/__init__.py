@@ -5,6 +5,7 @@
 contains QtGui-based classes
 """
 
+from .guiapplication import GuiApplication
 from .validator import Validator
 from .regexpvalidator import RegExpValidator
 from .intvalidator import IntValidator
@@ -29,7 +30,8 @@ from .pdfwriter import PdfWriter
 from .keysequence import KeySequence
 
 
-__all__ = ["Validator",
+__all__ = ["GuiApplication",
+           "Validator",
            "RegExpValidator",
            "IntValidator",
            "DoubleValidator",

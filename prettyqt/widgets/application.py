@@ -80,3 +80,6 @@ class Application(QtWidgets.QApplication):
         cls.use_hdpi_bitmaps()
         app = cls(sys.argv)
         return app
+
+
+Application.__bases__[0].__bases__ = (gui.GuiApplication,)
