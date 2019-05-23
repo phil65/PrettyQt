@@ -16,6 +16,12 @@ class PushButton(QtWidgets.QPushButton):
         super().__init__(*args, **kwargs)
         self.toggled.connect(self.value_changed)
 
+    def get_value(self):
+        return None
+
+    def set_value(self, value):
+        return None
+
 
 PushButton.__bases__[0].__bases__ = (widgets.AbstractButton,)
 
