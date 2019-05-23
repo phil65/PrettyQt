@@ -21,9 +21,16 @@ class SelectionWidget(widgets.GroupBox):
     def __iter__(self):
         return iter(self.buttons.items())
 
-    def add_items(self, dct):
-        for k, v in dct.items():
-            self.add_item(k, v)
+    def add_items(self, items):
+        if isinstance(items, dict):
+            for k, v in items.items():
+                self.add_item(k, v)
+        else:
+            for i in items:
+                if isinstance(i, tuple):
+                    self.add_item(*i)
+                else:
+                    self.add_item(i)
 
     def select_radio_by_data(self, value):
         for rb, data in self.buttons.items():
@@ -35,7 +42,8 @@ class SelectionWidget(widgets.GroupBox):
         rb.toggled.connect(self.update_choice)
         self.buttons[rb] = data
         if len(self.buttons) == 1:
-            rb.setChecked(True)
+            with rb.block_signals():
+                rb.setChecked(True)
         self.box += rb
 
     def add_custom(self, label: str = "Other", regex: Optional[str] = None):
@@ -65,6 +73,12 @@ class SelectionWidget(widgets.GroupBox):
         choice = self.current_choice()
         if len(choice) > 0:
             self.option_changed.emit(choice)
+
+    def set_value(self, value):
+        self.select_radio_by_data(value)
+
+    def get_value(self):
+        return self.current_choice()
 
 
 if __name__ == "__main__":
