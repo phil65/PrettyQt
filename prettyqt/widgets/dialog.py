@@ -66,13 +66,10 @@ class BaseDialog(QtWidgets.QDialog):
         self.setWindowIcon(icon)
 
     def add_buttonbox(self):
-        button_box = widgets.DialogButtonBox.create(ok=self.accepted,
+        button_box = widgets.DialogButtonBox.create(ok=self.accept,
                                                     cancel=self.reject)
         self.box += button_box
         return button_box
-
-    def accepted(self):
-        self.close()
 
     def show_blocking(self):
         self.show()

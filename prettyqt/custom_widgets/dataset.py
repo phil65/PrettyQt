@@ -260,7 +260,7 @@ class DataSet(object, metaclass=DataSetMeta):
         # bbox = widgets.DialogButtonBox(widgets.DialogButtonBox.Ok |
         #                                widgets.DialogButtonBox.Cancel)
         # self.dialog.box += bbox
-        # bbox.accepted.connect(self.dialog.accepted)
+        # bbox.accepted.connect(self.dialog.accept)
         # bbox.rejected.connect(self.dialog.reject)
 
     def edit(self):
