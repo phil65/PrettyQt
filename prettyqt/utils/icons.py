@@ -7,29 +7,16 @@ for full list, see:
 """
 
 import qtawesome as qta
+from prettyqt import gui
 
 
-class IconProvider(object):
-    ICONS: dict = dict()
-    WINDOW_ICONS: dict = dict()
-
-
-def reset_icons():
-    IconProvider.ICONS = dict()
-
-
-def get_icon(name):
-    if name not in IconProvider.ICONS:
-        IconProvider.ICONS[name] = qta.icon(name)
-    return IconProvider.ICONS[name]
-
-
-def get_window_icon(name):
-    if name not in IconProvider.WINDOW_ICONS:
-        IconProvider.WINDOW_ICONS[name] = qta.icon(name, color="lightgray")
-    return IconProvider.WINDOW_ICONS[name]
+def get_icon(icon):
+    if not icon:
+        icon = gui.Icon()
+    elif isinstance(icon, str):
+        icon = qta.icon(icon)
+    return icon
 
 
 def set_defaults(*args, **kwargs):
     qta.set_defaults(*args, **kwargs)
-    reset_icons()
