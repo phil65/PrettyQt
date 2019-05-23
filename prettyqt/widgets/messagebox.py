@@ -43,7 +43,7 @@ class MessageBox(QtWidgets.QMessageBox):
     def message(cls, msg, title=None, icon=None):
         m = cls(cls.NoIcon, title, msg)
         m.set_icon(icon)
-        return m.show_modal()
+        return m.show_blocking()
 
     def set_icon(self, icon):
         if icon in ICONS:
@@ -51,7 +51,7 @@ class MessageBox(QtWidgets.QMessageBox):
             return None
         super().set_icon(icon)
 
-    def show_modal(self):
+    def show_blocking(self):
         return BUTTONS.inv[self.exec_()]
 
     def get_standard_buttons(self) -> list:
