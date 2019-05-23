@@ -22,6 +22,11 @@ STEP_TYPES = bidict(dict(default=QtWidgets.QSpinBox.DefaultStepType,
 
 class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setLineEdit(widgets.LineEdit())
+        self.setGroupSeparatorShown(True)
+
     def is_valid(self) -> bool:
         return self.hasAcceptableInput()
 

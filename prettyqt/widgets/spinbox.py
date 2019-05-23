@@ -14,9 +14,7 @@ class SpinBox(QtWidgets.QSpinBox):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setLineEdit(widgets.LineEdit())
         self.valueChanged.connect(self.value_changed)
-        self.setGroupSeparatorShown(True)
 
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
