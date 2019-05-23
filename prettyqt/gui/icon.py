@@ -40,6 +40,10 @@ class Icon(QtGui.QIcon):
         stream >> px
         super().__init__(px)
 
+    @staticmethod
+    def by_name(name):
+        return qta.icon(name)
+
     @classmethod
     def for_color(cls, color_str: str):
         color = gui.Color.from_text(color_str)
