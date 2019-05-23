@@ -34,8 +34,8 @@ class Slider(QtWidgets.QSlider):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setRange(*state["range"])
-        self.setValue(state["value"])
+        self.set_range(*state["range"])
+        self.set_value(state["value"])
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
         self.setEnabled(state.get("enabled", True))
