@@ -17,10 +17,10 @@ class PushButton(QtWidgets.QPushButton):
         self.toggled.connect(self.value_changed)
 
     def get_value(self):
-        return None
+        return self.isChecked()
 
     def set_value(self, value):
-        return None
+        self.setChecked(value)
 
 
 PushButton.__bases__[0].__bases__ = (widgets.AbstractButton,)
