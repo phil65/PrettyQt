@@ -49,7 +49,7 @@ class GridLayout(QtWidgets.QGridLayout):
         return self.count()
 
     def __add__(self, other):
-        self[self.rowCount(), 0:self.columnCount()] = other
+        self[self.rowCount(), 0:self.columnCount() - 1] = other
         return self
 
     def add(self, item, rowstart, colstart, rowspan=1, colspan=1):
