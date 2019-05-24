@@ -40,7 +40,7 @@ class ComboBox(QtWidgets.QComboBox):
     def __getstate__(self):
         items = [(self.itemText(i), self.itemData(i), self.item_icon(i))
                  for i in range(self.count())]
-        return dict(object_name=self.objectName(),
+        return dict(object_name=self.id,
                     index=self.currentIndex(),
                     enabled=self.isEnabled(),
                     editable=self.isEditable(),
@@ -57,7 +57,7 @@ class ComboBox(QtWidgets.QComboBox):
         self.__init__()
         for label, data, icon in state["items"]:
             self.add(label, data, icon=icon)
-        self.setObjectName(state.get("object_name", ""))
+        self.id = state.get("object_name", "")
         self.setCurrentIndex(state["index"])
         self.setEnabled(state.get("enabled", True))
         self.setToolTip(state.get("tooltip", ""))

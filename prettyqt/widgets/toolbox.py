@@ -45,7 +45,7 @@ class ToolBox(QtWidgets.QToolBox):
 
     def add_widget(self, widget, title=None, icon=None):
         if title is None:
-            title = widget.objectName()
+            title = widget.id
         if isinstance(icon, str):
             icon = qta.icon(icon)
         if icon:
@@ -61,7 +61,7 @@ if __name__ == "__main__":
     app = widgets.app()
     w = widgets.Widget()
     w2 = widgets.Widget()
-    w2.setObjectName("objectName")
+    w2.id = "objectName"
     tb = ToolBox()
     tb.add_widget(w, "title")
     tb.add_widget(w2)

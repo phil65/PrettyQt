@@ -17,7 +17,7 @@ STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton,
 class AbstractButton(QtWidgets.QAbstractButton):
 
     def __getstate__(self):
-        return dict(object_name=self.objectName(),
+        return dict(object_name=self.id,
                     text=self.text(),
                     icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
                     checkable=self.isCheckable(),
@@ -29,7 +29,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def __setstate__(self, state):
         self.__init__()
         self.setText(state["text"])
-        self.setObjectName(state.get("object_name", ""))
+        self.id = state.get("object_name", "")
         self.set_icon(state["icon"])
         self.setEnabled(state.get("enabled", True))
         self.setChecked(state.get("checked", False))

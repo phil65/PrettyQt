@@ -26,9 +26,9 @@ class DockWidget(QtWidgets.QDockWidget):
         title = kwargs.pop("title", None)
         super().__init__(*args, **kwargs)
         if name:
-            self.setObjectName(name)
+            self.id = name
         if title:
-            self.setWindowTitle(title)
+            self.title = title
         self.set_allowed_areas("all")
 
     def set_allowed_areas(self, area):

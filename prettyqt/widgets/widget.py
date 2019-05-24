@@ -50,6 +50,14 @@ class Widget(QtWidgets.QWidget):
         else:
             super().resize(*size)
 
+    @property
+    def title(self) -> str:
+        return self.windowTitle()
+
+    @title.setter
+    def title(self, name: str):
+        self.setWindowTitle(name)
+
     def set_enabled(self):
         self.setEnabled(True)
 

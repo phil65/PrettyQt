@@ -22,7 +22,7 @@ class CheckBox(QtWidgets.QCheckBox):
         self.stateChanged.connect(self.value_changed)
 
     def __getstate__(self):
-        return dict(object_name=self.objectName(),
+        return dict(object_name=self.id,
                     checkable=self.isCheckable(),
                     checkstate=self.get_checkstate(),
                     tooltip=self.toolTip(),
@@ -33,7 +33,7 @@ class CheckBox(QtWidgets.QCheckBox):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setObjectName(state.get("object_name", ""))
+        self.id = state.get("object_name", "")
         self.setCheckable(state["checkable"])
         self.setTristate(state.get("is_tristate", False))
         self.set_checkstate(state["checkstate"])

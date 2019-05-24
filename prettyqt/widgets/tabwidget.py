@@ -219,8 +219,8 @@ class DetachedTab(widgets.MainWindow):
     def __init__(self, name, widget):
         super().__init__(None)
 
-        self.setObjectName(name)
-        self.setWindowTitle(name)
+        self.id = name
+        self.title = name
 
         self.widget = widget
         self.setCentralWidget(self.widget)
@@ -229,7 +229,7 @@ class DetachedTab(widgets.MainWindow):
     #  If the window is closed, emit the on_close and give the
     #  content widget back to the DetachableTabWidget
     def closeEvent(self, event):
-        self.on_close.emit(self.widget, self.objectName(), self.windowIcon())
+        self.on_close.emit(self.widget, self.id, self.windowIcon())
 
 
 TabWidget.__bases__[0].__bases__ = (widgets.Widget,)

@@ -12,7 +12,7 @@ class TreeView(QtWidgets.QTreeView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setObjectName(self.__class__.__name__)
+        self.id = self.__class__.__name__
 
         # visual settings
         self.setAnimated(True)

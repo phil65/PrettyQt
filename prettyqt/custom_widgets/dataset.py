@@ -246,7 +246,7 @@ class DataSet(object, metaclass=DataSetMeta):
         self.dialog = widgets.BaseDialog()
         self.dialog.set_modality("application")
         self.dialog.setMinimumWidth(400)
-        self.dialog.setWindowTitle(title)
+        self.dialog.title = title
         self.dialog.set_icon(icon)
         self.dialog.set_layout("grid")
         self.dialog.box.setSpacing(20)
@@ -254,7 +254,7 @@ class DataSet(object, metaclass=DataSetMeta):
         for i, (k, item) in enumerate(self._items.items()):
             self.dialog.box[i, item.label_col] = widgets.Label(item.label)
             self.dialog.box[i, item.label_col + 1:item.label_col + 3] = item.widget
-            item.widget.set_object_name(k)
+            item.widget.id = k
             for active in item.active_on:
                 item.widget.setEnabled(self._items[active].widget.get_value())
                 self._items[active].widget.value_changed.connect(item.widget.setEnabled)
@@ -276,13 +276,13 @@ class DataSet(object, metaclass=DataSetMeta):
         return self.dialog.show_blocking()
 
     def to_dict(self):
-        return {item.objectName(): item.get_value()
+        return {item.id: item.get_value()
                 for item in self.dialog.layout()
-                if item.objectName()}
+                if item.id}
 
     def from_dict(self, dct):
         for item in self.dialog.layout():
-            name = item.objectName()
+            name = item.id
             if name in dct:
                 item.set_value(dct[name])
 

@@ -41,7 +41,7 @@ class FileDialog(QtWidgets.QFileDialog):
     def __init__(self, path=None, mode="open", caption="", path_id=None, parent=None):
         super().__init__(parent=parent)
         self.setDirectory(path)
-        self.setWindowTitle(caption)
+        self.title = caption
         self.path_id = path_id
         if path_id and path is None:
             settings = core.Settings()

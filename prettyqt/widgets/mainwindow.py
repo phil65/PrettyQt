@@ -51,7 +51,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setWindowTitle(state["title"])
+        self.title = state["title"]
         self.set_icon(state["icon"])
         if state["central_widget"]:
             self.setCentralWidget(state["central_widget"])
@@ -119,7 +119,7 @@ class MainWindow(QtWidgets.QMainWindow):
                            position: str = "left") -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, name=name, title=title)
         widget = widgets.Widget()
-        widget.setObjectName(f"{name}.widget")
+        widget.id = f"{name}.widget"
         orientation = "vertical" if vertical else "horizontal"
         layout = widgets.BoxLayout(orientation, widget)
         layout.set_margin(0)

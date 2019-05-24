@@ -626,7 +626,7 @@ def test_tableview():
 def test_toolbox():
     w = widgets.RadioButton("test1")
     w2 = widgets.RadioButton("test2")
-    w2.setObjectName("test_name")
+    w2.id = "test_name"
     widget = widgets.ToolBox()
     widget.add_widget(w, "title", "mdi.timer")
     widget.add_widget(w2)

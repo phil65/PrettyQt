@@ -25,7 +25,7 @@ class HeaderView(QtWidgets.QHeaderView):
         super().__init__(o, parent=parent)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
-        self.widget_name = parent.objectName()
+        self.widget_name = parent.id
 
     def save_state(self):
         settings = core.Settings()
