@@ -26,6 +26,9 @@ class Menu(QtWidgets.QMenu):
             self.addAction(other)
             return self
 
+    def add(self, value):
+        self.addAction(value)
+
     def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
         """set the icon for the menu
 
