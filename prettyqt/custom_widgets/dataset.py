@@ -119,9 +119,13 @@ class BoolItem(DataItem):
         * check [bool]: if False, value is not checked (optional, default=True)
     """
 
-    def __init__(self, label, default=None, check=True):
+    def __init__(self, label, default=None, check=True, use_push=True):
         super().__init__(label, default=default, check=check)
-        self.widget = widgets.CheckBox()
+        if use_push:
+            self.widget = widgets.PushButton()
+            self.widget.setCheckable(True)
+        else:
+            self.widget = widgets.CheckBox()
         if default is not None:
             self.widget.set_value(default)
 
@@ -241,6 +245,7 @@ class DataSet(object, metaclass=DataSetMeta):
         # self.widget = custom_widgets.SettingsWidget()
         self.dialog = widgets.BaseDialog()
         self.dialog.set_modality("application")
+        self.dialog.setMinimumWidth(400)
         self.dialog.setWindowTitle(title)
         self.dialog.set_icon(icon)
         self.dialog.set_layout("grid")
@@ -256,6 +261,10 @@ class DataSet(object, metaclass=DataSetMeta):
             for active in item.not_active_on:
                 item.widget.setDisabled(self._items[active].widget.get_value())
                 self._items[active].widget.value_changed.connect(item.widget.setDisabled)
+        if comment:
+            label = widgets.Label(comment)
+            label.setWordWrap(True)
+            self.dialog.box[i + 1, 0:3] = label
         self.dialog.add_buttonbox()
         # bbox = widgets.DialogButtonBox(widgets.DialogButtonBox.Ok |
         #                                widgets.DialogButtonBox.Cancel)
