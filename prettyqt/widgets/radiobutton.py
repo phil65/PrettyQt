@@ -18,6 +18,14 @@ class RadioButton(QtWidgets.QRadioButton):
     def __bool__(self):
         return self.isChecked()
 
+    @property
+    def is_on(self) -> bool:
+        return self.isChecked()
+
+    @is_on.setter
+    def is_on(self, state: bool):
+        self.setChecked(state)
+
     def get_value(self) -> bool:
         return self.isChecked()
 

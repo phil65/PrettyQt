@@ -45,6 +45,14 @@ class CheckBox(QtWidgets.QCheckBox):
     def __bool__(self):
         return self.isChecked()
 
+    @property
+    def is_on(self) -> bool:
+        return self.isChecked()
+
+    @is_on.setter
+    def is_on(self, state: bool):
+        self.setChecked(state)
+
     def set_checkstate(self, state: str):
         """set checkstate of the checkbox
 

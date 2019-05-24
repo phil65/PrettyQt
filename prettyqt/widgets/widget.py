@@ -58,6 +58,14 @@ class Widget(QtWidgets.QWidget):
     def title(self, name: str):
         self.setWindowTitle(name)
 
+    @property
+    def enabled(self) -> bool:
+        return self.isEnabled()
+
+    @enabled.setter
+    def enabled(self, state: bool):
+        self.setEnabled(state)
+
     def set_enabled(self):
         self.setEnabled(True)
 
