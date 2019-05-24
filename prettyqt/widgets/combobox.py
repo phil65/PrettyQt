@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Iterable
+
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
@@ -70,11 +72,11 @@ class ComboBox(QtWidgets.QComboBox):
     def __len__(self):
         return self.count()
 
-    def index_changed(self, index):
+    def index_changed(self, index: int):
         data = self.itemData(index)
         self.value_changed.emit(data)
 
-    def add_items(self, items):
+    def add_items(self, items: Iterable):
         for i in items:
             if isinstance(i, (tuple, list)):
                 self.add(*i)
@@ -94,7 +96,7 @@ class ComboBox(QtWidgets.QComboBox):
         else:
             self.addItem(label, userData=data)
 
-    def item_icon(self, index):
+    def item_icon(self, index: int):
         return gui.Icon(self.itemIcon(index))
 
     def set_insert_policy(self, policy: str):
