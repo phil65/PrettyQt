@@ -119,7 +119,7 @@ class BoolItem(DataItem):
         * check [bool]: if False, value is not checked (optional, default=True)
     """
 
-    def __init__(self, label, default=None, check=True, use_push=True):
+    def __init__(self, label, default=None, check=True, use_push=False):
         super().__init__(label, default=default, check=check)
         if use_push:
             self.widget = widgets.PushButton()
@@ -282,9 +282,8 @@ class DataSet(object, metaclass=DataSetMeta):
 
     def from_dict(self, dct):
         for item in self.dialog.layout():
-            name = item.id
-            if name in dct:
-                item.set_value(dct[name])
+            if item.id in dct and dct[item.id] is not None:
+                item.set_value(dct[item.id])
 
 
 if __name__ == "__main__":
