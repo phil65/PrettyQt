@@ -67,12 +67,12 @@ class ListWidget(QtWidgets.QListWidget):
         self.addItem(item)
 
     def get_value(self):
-        return self.currentItem().data(QtCore.Qt.UserRole)
+        return [i.data(QtCore.Qt.UserRole) for i in self.selectedItems()]
 
     def set_value(self, value):
         for i in self.get_children():
-            if i.data(QtCore.Qt.UserRole) == value:
-                self.setCurrentItem(i)
+            if i.data(QtCore.Qt.UserRole) in value:
+                self.setSelected(i)
                 break
 
 
