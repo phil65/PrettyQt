@@ -179,15 +179,25 @@ class ChoiceItem(DataItem):
             self.widget.set_value(default)
 
 
+class MultipleChoiceItem(DataItem):
+
+    def __init__(self, label, choices, default=None, check=True):
+        super().__init__(label, default=default, check=check)
+        self.widget = widgets.ListWidget()
+        self.widget.set_selection_mode("multi")
+        for item in choices:
+            if isinstance(item, tuple):
+                if len(item) == 2:
+                    self.widget.add(item[1], item[0])
+                elif len(item) == 3:
+                    self.widget.add(item[1], item[0], item[2])
+            else:
+                self.widget.add(item)
+        if default is not None:
+            self.widget.set_value(default)
+
+
 class FileSaveItem(DataItem):
-    """
-    Construct a path data item for a file to be saved
-        * label [string]: name
-        * formats [string (or string list)]: wildcard filter
-        * default [string]: default value (optional)
-        * basedir [string]: default base directory (optional)
-        * check [bool]: if False, value is not checked (optional, default=True)
-    """
 
     def __init__(self, label, formats="*", default=None, basedir=None, check=True):
         super().__init__(label, default=default, check=check)
