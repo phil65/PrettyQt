@@ -12,10 +12,11 @@ class FileChooserButton(widgets.Widget):
 
     value_changed = core.Signal(pathlib.Path)
 
-    def __init__(self, extensions=None, parent=None):
+    def __init__(self, extensions=None, mode="save", parent=None):
         super().__init__(parent)
         self.path = None
         self.extensions = extensions
+        self.mode = mode
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
@@ -42,6 +43,7 @@ class FileChooserButton(widgets.Widget):
     def open_file(self):
         dialog = widgets.FileDialog(parent=self,
                                     path_id="file_path")
+        dialog.set_accept_mode(self.mode)
         if self.extensions:
             dialog.setNameFilter(self.extensions)
         if not dialog.open_file():
