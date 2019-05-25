@@ -84,7 +84,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         self.setRange(min_val, max_val)
 
     def get_value(self):
-        return self.value()
+        return super().value()
 
     def set_value(self, value: int):
         self.setValue(value)
