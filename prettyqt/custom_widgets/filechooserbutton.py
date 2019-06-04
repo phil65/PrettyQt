@@ -20,6 +20,7 @@ class FileChooserButton(widgets.Widget):
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
+        self.lineedit.set_read_only()
         layout += self.lineedit
         action = widgets.Action()
         action.set_icon("mdi.file-outline")
