@@ -179,6 +179,10 @@ class ChoiceItem(DataItem):
             self.widget.set_value(default)
 
 
+class ImageChoiceItem(ChoiceItem):
+    pass
+
+
 class MultipleChoiceItem(DataItem):
 
     def __init__(self, label, choices, default=None, check=True):
