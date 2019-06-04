@@ -18,7 +18,7 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
 
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
-                    value=self.value(),
+                    value=super().value(),
                     enabled=self.isEnabled(),
                     tooltip=self.toolTip(),
                     statustip=self.statusTip(),
