@@ -3,6 +3,7 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Optional
 import pathlib
 
 from prettyqt import core, widgets
@@ -42,8 +43,7 @@ class FileChooserButton(widgets.Widget):
 
     @core.Slot()
     def open_file(self):
-        dialog = widgets.FileDialog(parent=self,
-                                    path_id="file_path")
+        dialog = widgets.FileDialog(parent=self, path_id="file_path")
         dialog.set_accept_mode(self.mode)
         if self.extensions:
             dialog.setNameFilter(self.extensions)
@@ -56,7 +56,7 @@ class FileChooserButton(widgets.Widget):
         self.path = path
         self.lineedit.setText(str(path))
 
-    def get_value(self):
+    def get_value(self) -> Optional[pathlib.Path]:
         return self.path
 
     def set_value(self, value):
