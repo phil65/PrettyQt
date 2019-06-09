@@ -5,17 +5,17 @@
 
 import contextlib
 
-from bidict import bidict
 from qtpy import QtCore
 
 from prettyqt import core
+from prettyqt.utils.bidict import bidict
 
 
-FORMATS = bidict(dict(native=QtCore.QSettings.NativeFormat,
-                      ini=QtCore.QSettings.IniFormat))
+FORMATS = bidict(native=QtCore.QSettings.NativeFormat,
+                 ini=QtCore.QSettings.IniFormat)
 
-SCOPES = bidict(dict(user=QtCore.QSettings.UserScope,
-                     system=QtCore.QSettings.SystemScope))
+SCOPES = bidict(user=QtCore.QSettings.UserScope,
+                system=QtCore.QSettings.SystemScope)
 
 
 class Settings(QtCore.QSettings):

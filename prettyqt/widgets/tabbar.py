@@ -3,31 +3,32 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import widgets
+from prettyqt.utils.bidict import bidict
 
-ELIDE_MODES = bidict(dict(left=QtCore.Qt.ElideLeft,
-                          right=QtCore.Qt.ElideRight,
-                          middle=QtCore.Qt.ElideMiddle,
-                          none=QtCore.Qt.ElideNone))
 
-REMOVE_BEHAVIOURS = bidict(dict(left_tab=QtWidgets.QTabBar.SelectLeftTab,
-                                right_tab=QtWidgets.QTabBar.SelectRightTab,
-                                previous_tab=QtWidgets.QTabBar.SelectPreviousTab))
+ELIDE_MODES = bidict(left=QtCore.Qt.ElideLeft,
+                     right=QtCore.Qt.ElideRight,
+                     middle=QtCore.Qt.ElideMiddle,
+                     none=QtCore.Qt.ElideNone)
 
-SHAPES = bidict(dict(rounded_north=QtWidgets.QTabBar.RoundedNorth,
-                     rounded_south=QtWidgets.QTabBar.RoundedSouth,
-                     rounded_west=QtWidgets.QTabBar.RoundedWest,
-                     rounded_east=QtWidgets.QTabBar.RoundedEast,
-                     triangular_north=QtWidgets.QTabBar.TriangularNorth,
-                     triangular_south=QtWidgets.QTabBar.TriangularSouth,
-                     triangular_west=QtWidgets.QTabBar.TriangularWest,
-                     triangular_east=QtWidgets.QTabBar.TriangularEast))
+REMOVE_BEHAVIOURS = bidict(left_tab=QtWidgets.QTabBar.SelectLeftTab,
+                           right_tab=QtWidgets.QTabBar.SelectRightTab,
+                           previous_tab=QtWidgets.QTabBar.SelectPreviousTab)
 
-POSITIONS = bidict(dict(left=QtWidgets.QTabBar.LeftSide,
-                        right=QtWidgets.QTabBar.RightSide))
+SHAPES = bidict(rounded_north=QtWidgets.QTabBar.RoundedNorth,
+                rounded_south=QtWidgets.QTabBar.RoundedSouth,
+                rounded_west=QtWidgets.QTabBar.RoundedWest,
+                rounded_east=QtWidgets.QTabBar.RoundedEast,
+                triangular_north=QtWidgets.QTabBar.TriangularNorth,
+                triangular_south=QtWidgets.QTabBar.TriangularSouth,
+                triangular_west=QtWidgets.QTabBar.TriangularWest,
+                triangular_east=QtWidgets.QTabBar.TriangularEast)
+
+POSITIONS = bidict(left=QtWidgets.QTabBar.LeftSide,
+                   right=QtWidgets.QTabBar.RightSide)
 
 
 class TabBar(QtWidgets.QTabBar):

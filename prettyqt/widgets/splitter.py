@@ -3,12 +3,14 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
 from qtpy import QtCore, QtWidgets
-from prettyqt import widgets
 
-ORIENTATIONS = bidict(dict(horizontal=QtCore.Qt.Horizontal,
-                           vertical=QtCore.Qt.Vertical))
+from prettyqt import widgets
+from prettyqt.utils.bidict import bidict
+
+
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
+                      vertical=QtCore.Qt.Vertical)
 
 
 class Splitter(QtWidgets.QSplitter):

@@ -3,19 +3,19 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets, core
+from prettyqt.utils.bidict import bidict
 
-MODES = bidict(dict(maximum=QtWidgets.QLayout.SetMaximumSize,
-                    fixed=QtWidgets.QLayout.SetFixedSize))
 
-ALIGNMENTS = bidict(dict(left=QtCore.Qt.AlignLeft,
-                         right=QtCore.Qt.AlignRight,
-                         top=QtCore.Qt.AlignTop,
-                         bottom=QtCore.Qt.AlignBottom))
+MODES = bidict(maximum=QtWidgets.QLayout.SetMaximumSize,
+               fixed=QtWidgets.QLayout.SetFixedSize)
+
+ALIGNMENTS = bidict(left=QtCore.Qt.AlignLeft,
+                    right=QtCore.Qt.AlignRight,
+                    top=QtCore.Qt.AlignTop,
+                    bottom=QtCore.Qt.AlignBottom)
 
 
 class Layout(QtWidgets.QLayout):

@@ -6,22 +6,22 @@
 from typing import Dict, Callable, Optional
 from contextlib import contextmanager
 
-from bidict import bidict
 from qtpy import QtWidgets, QtCore, QtGui
 
 from prettyqt import widgets, core
+from prettyqt.utils.bidict import bidict
 
 
-POLICIES = bidict(dict(none=QtCore.Qt.NoContextMenu,
-                       prevent=QtCore.Qt.PreventContextMenu,
-                       default=QtCore.Qt.DefaultContextMenu,
-                       actions=QtCore.Qt.ActionsContextMenu,
-                       custom=QtCore.Qt.CustomContextMenu,
-                       showhide_menu="showhide_menu"))
+POLICIES = bidict(none=QtCore.Qt.NoContextMenu,
+                  prevent=QtCore.Qt.PreventContextMenu,
+                  default=QtCore.Qt.DefaultContextMenu,
+                  actions=QtCore.Qt.ActionsContextMenu,
+                  custom=QtCore.Qt.CustomContextMenu,
+                  showhide_menu="showhide_menu")
 
-MODALITIES = bidict(dict(window=QtCore.Qt.WindowModal,
-                         application=QtCore.Qt.ApplicationModal,
-                         none=QtCore.Qt.NonModal))
+MODALITIES = bidict(window=QtCore.Qt.WindowModal,
+                    application=QtCore.Qt.ApplicationModal,
+                    none=QtCore.Qt.NonModal)
 
 
 class Widget(QtWidgets.QWidget):

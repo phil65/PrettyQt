@@ -9,22 +9,23 @@ import logging
 import operator
 
 from qtpy import QtCore, QtWidgets
-from bidict import bidict
 
 from prettyqt import gui, widgets
+from prettyqt.utils.bidict import bidict
 
-TRIGGERS = bidict(dict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
-                       double_click=QtWidgets.QAbstractItemView.DoubleClicked,
-                       edit_key=QtWidgets.QAbstractItemView.EditKeyPressed))
 
-SELECTION_BEHAVIOURS = bidict(dict(rows=QtWidgets.QAbstractItemView.SelectRows,
-                                   columns=QtWidgets.QAbstractItemView.SelectColumns,
-                                   items=QtWidgets.QAbstractItemView.SelectItems))
+TRIGGERS = bidict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
+                  double_click=QtWidgets.QAbstractItemView.DoubleClicked,
+                  edit_key=QtWidgets.QAbstractItemView.EditKeyPressed)
 
-SELECTION_MODES = bidict(dict(single=QtWidgets.QAbstractItemView.SingleSelection,
-                              extended=QtWidgets.QAbstractItemView.ExtendedSelection,
-                              multi=QtWidgets.QAbstractItemView.MultiSelection,
-                              none=QtWidgets.QAbstractItemView.NoSelection))
+SELECTION_BEHAVIOURS = bidict(rows=QtWidgets.QAbstractItemView.SelectRows,
+                              columns=QtWidgets.QAbstractItemView.SelectColumns,
+                              items=QtWidgets.QAbstractItemView.SelectItems)
+
+SELECTION_MODES = bidict(single=QtWidgets.QAbstractItemView.SingleSelection,
+                         extended=QtWidgets.QAbstractItemView.ExtendedSelection,
+                         multi=QtWidgets.QAbstractItemView.MultiSelection,
+                         none=QtWidgets.QAbstractItemView.NoSelection)
 
 
 class AbstractItemView(QtWidgets.QAbstractItemView):

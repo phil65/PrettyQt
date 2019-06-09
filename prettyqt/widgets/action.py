@@ -5,20 +5,21 @@
 
 from typing import Union
 
-from bidict import bidict
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets, QtGui
 
 from prettyqt import gui, core
+from prettyqt.utils.bidict import bidict
 
-PRIORITIES = bidict(dict(low=QtWidgets.QAction.LowPriority,
-                         normal=QtWidgets.QAction.NormalPriority,
-                         high=QtWidgets.QAction.HighPriority))
 
-CONTEXTS = bidict(dict(widget=QtCore.Qt.WidgetShortcut,
-                       widget_with_children=QtCore.Qt.WidgetWithChildrenShortcut,
-                       window=QtCore.Qt.WindowShortcut,
-                       application=QtCore.Qt.ApplicationShortcut))
+PRIORITIES = bidict(low=QtWidgets.QAction.LowPriority,
+                    normal=QtWidgets.QAction.NormalPriority,
+                    high=QtWidgets.QAction.HighPriority)
+
+CONTEXTS = bidict(widget=QtCore.Qt.WidgetShortcut,
+                  widget_with_children=QtCore.Qt.WidgetWithChildrenShortcut,
+                  window=QtCore.Qt.WindowShortcut,
+                  application=QtCore.Qt.ApplicationShortcut)
 
 
 class Action(QtWidgets.QAction):

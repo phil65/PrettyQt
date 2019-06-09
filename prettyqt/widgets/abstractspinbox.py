@@ -3,21 +3,21 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets
 
 from prettyqt import widgets, gui
+from prettyqt.utils.bidict import bidict
 
-CORRECTION_MODES = bidict(dict(to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
-                               to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue))
 
-SYMBOLS = bidict(dict(up_down=QtWidgets.QSpinBox.UpDownArrows,
-                      plus_minus=QtWidgets.QSpinBox.PlusMinus,
-                      none=QtWidgets.QSpinBox.NoButtons))
+CORRECTION_MODES = bidict(to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
+                          to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue)
 
-STEP_TYPES = bidict(dict(default=QtWidgets.QSpinBox.DefaultStepType,
-                         adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType))
+SYMBOLS = bidict(up_down=QtWidgets.QSpinBox.UpDownArrows,
+                 plus_minus=QtWidgets.QSpinBox.PlusMinus,
+                 none=QtWidgets.QSpinBox.NoButtons)
+
+STEP_TYPES = bidict(default=QtWidgets.QSpinBox.DefaultStepType,
+                    adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType)
 
 
 class AbstractSpinBox(QtWidgets.QAbstractSpinBox):

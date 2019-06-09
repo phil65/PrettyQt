@@ -3,16 +3,16 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
 from qtpy import QtGui
 
 from prettyqt import gui
+from prettyqt.utils.bidict import bidict
 
 
-WEIGHTS = bidict(dict(thin=QtGui.QFont.Thin,
-                      light=QtGui.QFont.Light,
-                      medium=QtGui.QFont.Medium,
-                      bold=QtGui.QFont.Bold))
+WEIGHTS = bidict(thin=QtGui.QFont.Thin,
+                 light=QtGui.QFont.Light,
+                 medium=QtGui.QFont.Medium,
+                 bold=QtGui.QFont.Bold)
 
 
 class TextCharFormat(QtGui.QTextCharFormat):

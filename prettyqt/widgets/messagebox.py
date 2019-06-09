@@ -3,38 +3,37 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets
 
 from prettyqt import widgets
+from prettyqt.utils.bidict import bidict
 
 
-ICONS = bidict(dict(none=QtWidgets.QMessageBox.NoIcon,
-                    information=QtWidgets.QMessageBox.Information,
-                    warning=QtWidgets.QMessageBox.Warning,
-                    critical=QtWidgets.QMessageBox.Critical,
-                    question=QtWidgets.QMessageBox.Question))
+ICONS = bidict(none=QtWidgets.QMessageBox.NoIcon,
+               information=QtWidgets.QMessageBox.Information,
+               warning=QtWidgets.QMessageBox.Warning,
+               critical=QtWidgets.QMessageBox.Critical,
+               question=QtWidgets.QMessageBox.Question)
 
-BUTTONS = bidict(dict(none=QtWidgets.QMessageBox.NoButton,
-                      cancel=QtWidgets.QMessageBox.Cancel,
-                      ok=QtWidgets.QMessageBox.Ok,
-                      save=QtWidgets.QMessageBox.Save,
-                      open=QtWidgets.QMessageBox.Open,
-                      close=QtWidgets.QMessageBox.Close,
-                      discard=QtWidgets.QMessageBox.Discard,
-                      apply=QtWidgets.QMessageBox.Apply,
-                      reset=QtWidgets.QMessageBox.Reset,
-                      restore_defaults=QtWidgets.QMessageBox.RestoreDefaults,
-                      help=QtWidgets.QMessageBox.Help,
-                      save_all=QtWidgets.QMessageBox.SaveAll,
-                      yes=QtWidgets.QMessageBox.Yes,
-                      yes_to_all=QtWidgets.QMessageBox.YesToAll,
-                      no=QtWidgets.QMessageBox.No,
-                      no_to_all=QtWidgets.QMessageBox.NoToAll,
-                      abort=QtWidgets.QMessageBox.Abort,
-                      retry=QtWidgets.QMessageBox.Retry,
-                      ignore=QtWidgets.QMessageBox.Ignore))
+BUTTONS = bidict(none=QtWidgets.QMessageBox.NoButton,
+                 cancel=QtWidgets.QMessageBox.Cancel,
+                 ok=QtWidgets.QMessageBox.Ok,
+                 save=QtWidgets.QMessageBox.Save,
+                 open=QtWidgets.QMessageBox.Open,
+                 close=QtWidgets.QMessageBox.Close,
+                 discard=QtWidgets.QMessageBox.Discard,
+                 apply=QtWidgets.QMessageBox.Apply,
+                 reset=QtWidgets.QMessageBox.Reset,
+                 restore_defaults=QtWidgets.QMessageBox.RestoreDefaults,
+                 help=QtWidgets.QMessageBox.Help,
+                 save_all=QtWidgets.QMessageBox.SaveAll,
+                 yes=QtWidgets.QMessageBox.Yes,
+                 yes_to_all=QtWidgets.QMessageBox.YesToAll,
+                 no=QtWidgets.QMessageBox.No,
+                 no_to_all=QtWidgets.QMessageBox.NoToAll,
+                 abort=QtWidgets.QMessageBox.Abort,
+                 retry=QtWidgets.QMessageBox.Retry,
+                 ignore=QtWidgets.QMessageBox.Ignore)
 
 
 class MessageBox(QtWidgets.QMessageBox):

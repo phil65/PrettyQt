@@ -3,22 +3,21 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
+from prettyqt.utils.bidict import bidict
 
 
-H_ALIGNMENTS = bidict(dict(left=QtCore.Qt.AlignLeft,
-                           right=QtCore.Qt.AlignRight,
-                           center=QtCore.Qt.AlignHCenter,
-                           justify=QtCore.Qt.AlignJustify))
+H_ALIGNMENTS = bidict(left=QtCore.Qt.AlignLeft,
+                      right=QtCore.Qt.AlignRight,
+                      center=QtCore.Qt.AlignHCenter,
+                      justify=QtCore.Qt.AlignJustify)
 
-V_ALIGNMENTS = bidict(dict(top=QtCore.Qt.AlignTop,
-                           bottom=QtCore.Qt.AlignBottom,
-                           center=QtCore.Qt.AlignVCenter,
-                           baseline=QtCore.Qt.AlignBaseline))
+V_ALIGNMENTS = bidict(top=QtCore.Qt.AlignTop,
+                      bottom=QtCore.Qt.AlignBottom,
+                      center=QtCore.Qt.AlignVCenter,
+                      baseline=QtCore.Qt.AlignBaseline)
 
 
 class SplashScreen(QtWidgets.QSplashScreen):

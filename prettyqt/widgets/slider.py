@@ -3,15 +3,15 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets
-from prettyqt import widgets, core
 
-TICK_POSITIONS = bidict(dict(none=QtWidgets.QSlider.NoTicks,
-                             both_sides=QtWidgets.QSlider.TicksBothSides,
-                             above=QtWidgets.QSlider.TicksAbove,
-                             below=QtWidgets.QSlider.TicksBelow))
+from prettyqt import widgets, core
+from prettyqt.utils.bidict import bidict
+
+TICK_POSITIONS = bidict(none=QtWidgets.QSlider.NoTicks,
+                        both_sides=QtWidgets.QSlider.TicksBothSides,
+                        above=QtWidgets.QSlider.TicksAbove,
+                        below=QtWidgets.QSlider.TicksBelow)
 
 
 class Slider(QtWidgets.QSlider):

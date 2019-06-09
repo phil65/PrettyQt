@@ -3,15 +3,15 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets
 
 from prettyqt import widgets
+from prettyqt.utils.bidict import bidict
 
-ROLES = bidict(dict(left=QtWidgets.QFormLayout.LabelRole,
-                    right=QtWidgets.QFormLayout.FieldRole,
-                    both=QtWidgets.QFormLayout.SpanningRole))
+
+ROLES = bidict(left=QtWidgets.QFormLayout.LabelRole,
+               right=QtWidgets.QFormLayout.FieldRole,
+               both=QtWidgets.QFormLayout.SpanningRole)
 
 
 class FormLayout(QtWidgets.QFormLayout):

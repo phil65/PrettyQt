@@ -5,44 +5,44 @@
 
 from typing import List
 
-from bidict import bidict
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets, core
+from prettyqt.utils.bidict import bidict
 
 
-BUTTONS = bidict(dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
-                      ok=QtWidgets.QDialogButtonBox.Ok,
-                      save=QtWidgets.QDialogButtonBox.Save,
-                      open=QtWidgets.QDialogButtonBox.Open,
-                      close=QtWidgets.QDialogButtonBox.Close,
-                      discard=QtWidgets.QDialogButtonBox.Discard,
-                      apply=QtWidgets.QDialogButtonBox.Apply,
-                      reset=QtWidgets.QDialogButtonBox.Reset,
-                      restore_defaults=QtWidgets.QDialogButtonBox.RestoreDefaults,
-                      help=QtWidgets.QDialogButtonBox.Help,
-                      save_all=QtWidgets.QDialogButtonBox.SaveAll,
-                      yes=QtWidgets.QDialogButtonBox.Yes,
-                      yes_to_all=QtWidgets.QDialogButtonBox.YesToAll,
-                      no=QtWidgets.QDialogButtonBox.No,
-                      no_to_all=QtWidgets.QDialogButtonBox.NoToAll,
-                      abort=QtWidgets.QDialogButtonBox.Abort,
-                      retry=QtWidgets.QDialogButtonBox.Retry,
-                      ignore=QtWidgets.QDialogButtonBox.Ignore))
+BUTTONS = bidict(cancel=QtWidgets.QDialogButtonBox.Cancel,
+                 ok=QtWidgets.QDialogButtonBox.Ok,
+                 save=QtWidgets.QDialogButtonBox.Save,
+                 open=QtWidgets.QDialogButtonBox.Open,
+                 close=QtWidgets.QDialogButtonBox.Close,
+                 discard=QtWidgets.QDialogButtonBox.Discard,
+                 apply=QtWidgets.QDialogButtonBox.Apply,
+                 reset=QtWidgets.QDialogButtonBox.Reset,
+                 restore_defaults=QtWidgets.QDialogButtonBox.RestoreDefaults,
+                 help=QtWidgets.QDialogButtonBox.Help,
+                 save_all=QtWidgets.QDialogButtonBox.SaveAll,
+                 yes=QtWidgets.QDialogButtonBox.Yes,
+                 yes_to_all=QtWidgets.QDialogButtonBox.YesToAll,
+                 no=QtWidgets.QDialogButtonBox.No,
+                 no_to_all=QtWidgets.QDialogButtonBox.NoToAll,
+                 abort=QtWidgets.QDialogButtonBox.Abort,
+                 retry=QtWidgets.QDialogButtonBox.Retry,
+                 ignore=QtWidgets.QDialogButtonBox.Ignore)
 
-ROLES = bidict(dict(invalid=QtWidgets.QDialogButtonBox.InvalidRole,
-                    accept=QtWidgets.QDialogButtonBox.AcceptRole,
-                    reject=QtWidgets.QDialogButtonBox.RejectRole,
-                    destructive=QtWidgets.QDialogButtonBox.DestructiveRole,
-                    action=QtWidgets.QDialogButtonBox.ActionRole,
-                    help=QtWidgets.QDialogButtonBox.HelpRole,
-                    yes=QtWidgets.QDialogButtonBox.YesRole,
-                    no=QtWidgets.QDialogButtonBox.NoRole,
-                    apply=QtWidgets.QDialogButtonBox.ApplyRole,
-                    reset=QtWidgets.QDialogButtonBox.ResetRole))
+ROLES = bidict(invalid=QtWidgets.QDialogButtonBox.InvalidRole,
+               accept=QtWidgets.QDialogButtonBox.AcceptRole,
+               reject=QtWidgets.QDialogButtonBox.RejectRole,
+               destructive=QtWidgets.QDialogButtonBox.DestructiveRole,
+               action=QtWidgets.QDialogButtonBox.ActionRole,
+               help=QtWidgets.QDialogButtonBox.HelpRole,
+               yes=QtWidgets.QDialogButtonBox.YesRole,
+               no=QtWidgets.QDialogButtonBox.NoRole,
+               apply=QtWidgets.QDialogButtonBox.ApplyRole,
+               reset=QtWidgets.QDialogButtonBox.ResetRole)
 
-ORIENTATIONS = bidict(dict(horizontal=QtCore.Qt.Horizontal,
-                           vertical=QtCore.Qt.Vertical))
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
+                      vertical=QtCore.Qt.Vertical)
 
 
 class DialogButtonBox(QtWidgets.QDialogButtonBox):

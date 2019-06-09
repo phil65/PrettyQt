@@ -4,14 +4,15 @@
 """
 
 from qtpy import QtWidgets
-from bidict import bidict
 
 from prettyqt import gui, widgets, core
+from prettyqt.utils.bidict import bidict
 
-ECHO_MODES = bidict(dict(normal=QtWidgets.QLineEdit.Normal,
-                         no_echo=QtWidgets.QLineEdit.NoEcho,
-                         password=QtWidgets.QLineEdit.Password,
-                         echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit))
+
+ECHO_MODES = bidict(normal=QtWidgets.QLineEdit.Normal,
+                    no_echo=QtWidgets.QLineEdit.NoEcho,
+                    password=QtWidgets.QLineEdit.Password,
+                    echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit)
 
 
 class LineEdit(QtWidgets.QLineEdit):

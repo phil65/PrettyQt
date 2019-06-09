@@ -3,14 +3,14 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets
+
 from prettyqt import widgets
+from prettyqt.utils.bidict import bidict
 
 
-VIEW_MODES = bidict(dict(list=QtWidgets.QListView.ListMode,
-                         icon=QtWidgets.QListView.IconMode))
+VIEW_MODES = bidict(list=QtWidgets.QListView.ListMode,
+                    icon=QtWidgets.QListView.IconMode)
 
 
 class ListView(QtWidgets.QListView):

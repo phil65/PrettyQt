@@ -3,31 +3,31 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
+from prettyqt.utils.bidict import bidict
 
-PEN_TYPES = bidict(dict(none=QtCore.Qt.NoPen))
 
-COMP_MODES = bidict(dict(source_over=QtGui.QPainter.CompositionMode_SourceOver,
-                         destination_over=QtGui.QPainter.CompositionMode_DestinationOver,
-                         clear=QtGui.QPainter.CompositionMode_Clear,
-                         source=QtGui.QPainter.CompositionMode_Source,
-                         destination=QtGui.QPainter.CompositionMode_Destination,
-                         source_in=QtGui.QPainter.CompositionMode_SourceIn,
-                         destination_in=QtGui.QPainter.CompositionMode_DestinationIn,
-                         source_out=QtGui.QPainter.CompositionMode_SourceOut,
-                         destination_out=QtGui.QPainter.CompositionMode_DestinationOut,
-                         source_atop=QtGui.QPainter.CompositionMode_SourceAtop,
-                         destination_atop=QtGui.QPainter.CompositionMode_DestinationAtop))
+PEN_TYPES = bidict(none=QtCore.Qt.NoPen)
 
-PATTERNS = bidict(dict(solid=QtCore.Qt.SolidPattern,
-                       none=QtCore.Qt.NoBrush,
-                       cross=QtCore.Qt.CrossPattern,
-                       linear_gradient=QtCore.Qt.LinearGradientPattern,
-                       radial_gradient=QtCore.Qt.RadialGradientPattern))
+COMP_MODES = bidict(source_over=QtGui.QPainter.CompositionMode_SourceOver,
+                    destination_over=QtGui.QPainter.CompositionMode_DestinationOver,
+                    clear=QtGui.QPainter.CompositionMode_Clear,
+                    source=QtGui.QPainter.CompositionMode_Source,
+                    destination=QtGui.QPainter.CompositionMode_Destination,
+                    source_in=QtGui.QPainter.CompositionMode_SourceIn,
+                    destination_in=QtGui.QPainter.CompositionMode_DestinationIn,
+                    source_out=QtGui.QPainter.CompositionMode_SourceOut,
+                    destination_out=QtGui.QPainter.CompositionMode_DestinationOut,
+                    source_atop=QtGui.QPainter.CompositionMode_SourceAtop,
+                    destination_atop=QtGui.QPainter.CompositionMode_DestinationAtop)
+
+PATTERNS = bidict(solid=QtCore.Qt.SolidPattern,
+                  none=QtCore.Qt.NoBrush,
+                  cross=QtCore.Qt.CrossPattern,
+                  linear_gradient=QtCore.Qt.LinearGradientPattern,
+                  radial_gradient=QtCore.Qt.RadialGradientPattern)
 
 
 class Painter(QtGui.QPainter):

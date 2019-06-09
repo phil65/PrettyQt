@@ -6,31 +6,32 @@
 import pathlib
 from typing import List, Optional
 
-from bidict import bidict
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
+from prettyqt.utils.bidict import bidict
 
-MODES = bidict(dict(existing_file=QtWidgets.QFileDialog.ExistingFile,
-                    existing_files=QtWidgets.QFileDialog.ExistingFiles,
-                    any_file=QtWidgets.QFileDialog.AnyFile,
-                    directory=QtWidgets.QFileDialog.Directory))
 
-LABELS = bidict(dict(look_in=QtWidgets.QFileDialog.LookIn,
-                     filename=QtWidgets.QFileDialog.FileName,
-                     filetype=QtWidgets.QFileDialog.FileType,
-                     accept=QtWidgets.QFileDialog.Accept,
-                     reject=QtWidgets.QFileDialog.Reject))
+MODES = bidict(existing_file=QtWidgets.QFileDialog.ExistingFile,
+               existing_files=QtWidgets.QFileDialog.ExistingFiles,
+               any_file=QtWidgets.QFileDialog.AnyFile,
+               directory=QtWidgets.QFileDialog.Directory)
 
-ACCEPT_MODES = bidict(dict(save=QtWidgets.QFileDialog.AcceptSave,
-                           open=QtWidgets.QFileDialog.AcceptOpen))
+LABELS = bidict(look_in=QtWidgets.QFileDialog.LookIn,
+                filename=QtWidgets.QFileDialog.FileName,
+                filetype=QtWidgets.QFileDialog.FileType,
+                accept=QtWidgets.QFileDialog.Accept,
+                reject=QtWidgets.QFileDialog.Reject)
 
-VIEW_MODES = bidict(dict(detail=QtWidgets.QFileDialog.Detail,
-                         list=QtWidgets.QFileDialog.List))
+ACCEPT_MODES = bidict(save=QtWidgets.QFileDialog.AcceptSave,
+                      open=QtWidgets.QFileDialog.AcceptOpen)
 
-FILTERS = bidict(dict(dirs=core.Dir.Dirs,
-                      all_dirs=core.Dir.AllDirs,
-                      files=core.Dir.Files))
+VIEW_MODES = bidict(detail=QtWidgets.QFileDialog.Detail,
+                    list=QtWidgets.QFileDialog.List)
+
+FILTERS = bidict(dirs=core.Dir.Dirs,
+                 all_dirs=core.Dir.AllDirs,
+                 files=core.Dir.Files)
 
 
 class FileDialog(QtWidgets.QFileDialog):

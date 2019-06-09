@@ -6,17 +6,17 @@
 import functools
 from typing import Iterable, Optional
 
-from bidict import bidict
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
+from prettyqt.utils.bidict import bidict
 
 
 class HeaderView(QtWidgets.QHeaderView):
-    MODES = bidict(dict(interactive=QtWidgets.QHeaderView.Interactive,
-                        fixed=QtWidgets.QHeaderView.Fixed,
-                        stretch=QtWidgets.QHeaderView.Stretch,
-                        resize_to_contents=QtWidgets.QHeaderView.ResizeToContents))
+    MODES = bidict(interactive=QtWidgets.QHeaderView.Interactive,
+                   fixed=QtWidgets.QHeaderView.Fixed,
+                   stretch=QtWidgets.QHeaderView.Stretch,
+                   resize_to_contents=QtWidgets.QHeaderView.ResizeToContents)
 
     section_vis_changed = QtCore.Signal(int, bool)
 

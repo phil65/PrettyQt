@@ -3,14 +3,15 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
 import qtawesome as qta
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import widgets, core, gui
+from prettyqt.utils.bidict import bidict
 
-TAB_SHAPES = bidict(dict(rounded=QtWidgets.QTabWidget.Rounded,
-                         triangular=QtWidgets.QTabWidget.Triangular))
+
+TAB_SHAPES = bidict(rounded=QtWidgets.QTabWidget.Rounded,
+                    triangular=QtWidgets.QTabWidget.Triangular)
 
 
 class TabWidget(QtWidgets.QTabWidget):

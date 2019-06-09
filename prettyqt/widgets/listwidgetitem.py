@@ -4,17 +4,17 @@
 """
 
 from typing import Union
-from bidict import bidict
 
 import qtawesome as qta
 from qtpy import QtWidgets, QtCore, QtGui
 
 from prettyqt import gui
+from prettyqt.utils.bidict import bidict
 
 
-STATES = bidict(dict(unchecked=QtCore.Qt.Unchecked,
-                     partial=QtCore.Qt.PartiallyChecked,
-                     checked=QtCore.Qt.Checked))
+STATES = bidict(unchecked=QtCore.Qt.Unchecked,
+                partial=QtCore.Qt.PartiallyChecked,
+                checked=QtCore.Qt.Checked)
 
 
 class ListWidgetItem(QtWidgets.QListWidgetItem):

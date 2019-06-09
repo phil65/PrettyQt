@@ -7,14 +7,15 @@ from typing import Callable
 
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets
-from bidict import bidict
 
 from prettyqt import core, widgets
+from prettyqt.utils.bidict import bidict
 
-STYLES = bidict(dict(icon=QtCore.Qt.ToolButtonIconOnly,
-                     text=QtCore.Qt.ToolButtonTextOnly,
-                     text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
-                     text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon))
+
+STYLES = bidict(icon=QtCore.Qt.ToolButtonIconOnly,
+                text=QtCore.Qt.ToolButtonTextOnly,
+                text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
+                text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon)
 
 
 class ToolBar(QtWidgets.QToolBar):

@@ -9,20 +9,21 @@ import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, core, widgets
+from prettyqt.utils.bidict import bidict
 
 box = QtWidgets.QComboBox
-INSERT_POLICIES = dict(no_insert=box.NoInsert,
-                       top=box.InsertAtTop,
-                       current=box.InsertAtCurrent,
-                       bottom=box.InsertAtBottom,
-                       after_current=box.InsertAfterCurrent,
-                       before_current=box.InsertBeforeCurrent,
-                       alphabetically=box.InsertAlphabetically)
+INSERT_POLICIES = bidict(no_insert=box.NoInsert,
+                         top=box.InsertAtTop,
+                         current=box.InsertAtCurrent,
+                         bottom=box.InsertAtBottom,
+                         after_current=box.InsertAfterCurrent,
+                         before_current=box.InsertBeforeCurrent,
+                         alphabetically=box.InsertAlphabetically)
 
-SIZE_POLICIES = dict(content=box.AdjustToContents,
-                     first_show=box.AdjustToContentsOnFirstShow,
-                     min_length=box.AdjustToMinimumContentsLength,
-                     min_length_with_icon=box.AdjustToMinimumContentsLengthWithIcon)
+SIZE_POLICIES = bidict(content=box.AdjustToContents,
+                       first_show=box.AdjustToContentsOnFirstShow,
+                       min_length=box.AdjustToMinimumContentsLength,
+                       min_length_with_icon=box.AdjustToMinimumContentsLengthWithIcon)
 
 
 class NoData(object):
@@ -125,7 +126,7 @@ class ComboBox(QtWidgets.QComboBox):
         Returns:
             insert policy
         """
-        return SIZE_POLICIES.inv[self.sizeAdjustPolicy()]
+        return INSERT_POLICIES.inv[self.insertPolicy()]
 
     def set_size_adjust_policy(self, policy: str):
         """set size adjust policy

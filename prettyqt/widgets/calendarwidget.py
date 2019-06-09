@@ -5,16 +5,17 @@
 
 import datetime
 
-from bidict import bidict
 from qtpy import QtWidgets
 
 from prettyqt import widgets
+from prettyqt.utils.bidict import bidict
 
-SELECTION_MODES = bidict(dict(none=QtWidgets.QCalendarWidget.NoSelection,
-                              single=QtWidgets.QCalendarWidget.SingleSelection))
 
-HEADER_FORMATS = bidict(dict(none=QtWidgets.QCalendarWidget.NoVerticalHeader,
-                             week_numbers=QtWidgets.QCalendarWidget.ISOWeekNumbers))
+SELECTION_MODES = bidict(none=QtWidgets.QCalendarWidget.NoSelection,
+                         single=QtWidgets.QCalendarWidget.SingleSelection)
+
+HEADER_FORMATS = bidict(none=QtWidgets.QCalendarWidget.NoVerticalHeader,
+                        week_numbers=QtWidgets.QCalendarWidget.ISOWeekNumbers)
 
 
 class CalendarWidget(QtWidgets.QCalendarWidget):

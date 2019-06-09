@@ -3,21 +3,21 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
+from prettyqt.utils.bidict import bidict
 
 
-POPUP_MODES = bidict(dict(delayed=QtWidgets.QToolButton.DelayedPopup,
-                          menu_button=QtWidgets.QToolButton.MenuButtonPopup,
-                          instant=QtWidgets.QToolButton.InstantPopup))
+POPUP_MODES = bidict(delayed=QtWidgets.QToolButton.DelayedPopup,
+                     menu_button=QtWidgets.QToolButton.MenuButtonPopup,
+                     instant=QtWidgets.QToolButton.InstantPopup)
 
-ARROW_TYPES = bidict(dict(none=QtCore.Qt.NoArrow,
-                          up=QtCore.Qt.UpArrow,
-                          down=QtCore.Qt.DownArrow,
-                          left=QtCore.Qt.LeftArrow,
-                          right=QtCore.Qt.RightArrow))
+ARROW_TYPES = bidict(none=QtCore.Qt.NoArrow,
+                     up=QtCore.Qt.UpArrow,
+                     down=QtCore.Qt.DownArrow,
+                     left=QtCore.Qt.LeftArrow,
+                     right=QtCore.Qt.RightArrow)
 
 
 class ToolButton(QtWidgets.QToolButton):

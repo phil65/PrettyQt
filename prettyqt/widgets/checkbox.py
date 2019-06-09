@@ -3,14 +3,15 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets, QtCore
-from prettyqt import core, widgets
 
-STATES = bidict(dict(unchecked=QtCore.Qt.Unchecked,
-                     partial=QtCore.Qt.PartiallyChecked,
-                     checked=QtCore.Qt.Checked))
+from prettyqt import core, widgets
+from prettyqt.utils.bidict import bidict
+
+
+STATES = bidict(unchecked=QtCore.Qt.Unchecked,
+                partial=QtCore.Qt.PartiallyChecked,
+                checked=QtCore.Qt.Checked)
 
 
 class CheckBox(QtWidgets.QCheckBox):

@@ -3,20 +3,19 @@
 @author: Philipp Temminghoff
 """
 
-from bidict import bidict
-
 from qtpy import QtWidgets
 
 from prettyqt import widgets
+from prettyqt.utils.bidict import bidict
 
 
-VIEW_MODES = bidict(dict(default=QtWidgets.QMdiArea.SubWindowView,
-                         tabbed=QtWidgets.QMdiArea.TabbedView))
+VIEW_MODES = bidict(default=QtWidgets.QMdiArea.SubWindowView,
+                    tabbed=QtWidgets.QMdiArea.TabbedView)
 
 
-WINDOW_ORDERS = bidict(dict(creation=QtWidgets.QMdiArea.CreationOrder,
-                            stacking=QtWidgets.QMdiArea.StackingOrder,
-                            activation=QtWidgets.QMdiArea.ActivationHistoryOrder))
+WINDOW_ORDERS = bidict(creation=QtWidgets.QMdiArea.CreationOrder,
+                       stacking=QtWidgets.QMdiArea.StackingOrder,
+                       activation=QtWidgets.QMdiArea.ActivationHistoryOrder)
 
 
 class MdiArea(QtWidgets.QMdiArea):

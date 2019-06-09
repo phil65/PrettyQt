@@ -6,23 +6,24 @@
 from typing import Union
 import logging
 
-from bidict import bidict
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets, QtGui
 
 from prettyqt import core, widgets, gui
+from prettyqt.utils.bidict import bidict
 
-DOCK_POSITIONS = dict(top=QtCore.Qt.TopDockWidgetArea,
-                      bottom=QtCore.Qt.BottomDockWidgetArea,
-                      left=QtCore.Qt.LeftDockWidgetArea,
-                      right=QtCore.Qt.RightDockWidgetArea)
 
-TOOLBAR_AREAS = bidict(dict(left=QtCore.Qt.LeftToolBarArea,
-                            right=QtCore.Qt.RightToolBarArea,
-                            top=QtCore.Qt.TopToolBarArea,
-                            bottom=QtCore.Qt.BottomToolBarArea,
-                            all=QtCore.Qt.AllToolBarAreas,
-                            none=QtCore.Qt.NoToolBarArea))
+DOCK_POSITIONS = bidict(top=QtCore.Qt.TopDockWidgetArea,
+                        bottom=QtCore.Qt.BottomDockWidgetArea,
+                        left=QtCore.Qt.LeftDockWidgetArea,
+                        right=QtCore.Qt.RightDockWidgetArea)
+
+TOOLBAR_AREAS = bidict(left=QtCore.Qt.LeftToolBarArea,
+                       right=QtCore.Qt.RightToolBarArea,
+                       top=QtCore.Qt.TopToolBarArea,
+                       bottom=QtCore.Qt.BottomToolBarArea,
+                       all=QtCore.Qt.AllToolBarAreas,
+                       none=QtCore.Qt.NoToolBarArea)
 
 
 class MainWindow(QtWidgets.QMainWindow):
