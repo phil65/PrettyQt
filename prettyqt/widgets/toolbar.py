@@ -9,7 +9,7 @@ import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 STYLES = bidict(icon=QtCore.Qt.ToolButtonIconOnly,

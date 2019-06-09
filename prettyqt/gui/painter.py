@@ -6,7 +6,7 @@
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 PEN_TYPES = bidict(none=QtCore.Qt.NoPen)

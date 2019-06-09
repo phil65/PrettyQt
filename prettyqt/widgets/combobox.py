@@ -9,7 +9,7 @@ import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, core, widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 box = QtWidgets.QComboBox
 INSERT_POLICIES = bidict(no_insert=box.NoInsert,

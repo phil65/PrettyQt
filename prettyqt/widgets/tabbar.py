@@ -6,7 +6,7 @@
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 ELIDE_MODES = bidict(left=QtCore.Qt.ElideLeft,

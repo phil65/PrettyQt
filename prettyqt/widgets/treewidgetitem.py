@@ -9,7 +9,7 @@ import qtawesome as qta
 from qtpy import QtWidgets, QtCore, QtGui
 
 from prettyqt import gui
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 STATES = bidict(unchecked=QtCore.Qt.Unchecked,

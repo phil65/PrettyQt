@@ -9,7 +9,7 @@ import qtawesome as qta
 from qtpy import QtCore, QtWidgets, QtGui
 
 from prettyqt import gui, core
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 PRIORITIES = bidict(low=QtWidgets.QAction.LowPriority,

@@ -6,7 +6,7 @@
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 area = QtWidgets.QAbstractScrollArea

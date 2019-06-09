@@ -9,7 +9,7 @@ from typing import Iterable, Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 class HeaderView(QtWidgets.QHeaderView):

@@ -6,7 +6,7 @@
 from qtpy import QtWidgets
 
 from prettyqt import gui, widgets, core
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 ECHO_MODES = bidict(normal=QtWidgets.QLineEdit.Normal,

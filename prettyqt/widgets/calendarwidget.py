@@ -8,7 +8,7 @@ import datetime
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 SELECTION_MODES = bidict(none=QtWidgets.QCalendarWidget.NoSelection,

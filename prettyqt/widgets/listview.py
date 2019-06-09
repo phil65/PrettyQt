@@ -6,7 +6,7 @@
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 VIEW_MODES = bidict(list=QtWidgets.QListView.ListMode,

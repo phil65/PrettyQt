@@ -6,7 +6,7 @@
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 TICK_POSITIONS = bidict(none=QtWidgets.QSlider.NoTicks,

@@ -6,7 +6,7 @@
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 ROLES = bidict(left=QtWidgets.QFormLayout.LabelRole,

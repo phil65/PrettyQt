@@ -10,7 +10,7 @@ import qtawesome as qta
 from qtpy import QtCore, QtWidgets, QtGui
 
 from prettyqt import core, widgets, gui
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 DOCK_POSITIONS = bidict(top=QtCore.Qt.TopDockWidgetArea,

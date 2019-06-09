@@ -6,7 +6,7 @@
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 H_ALIGNMENTS = bidict(left=QtCore.Qt.AlignLeft,

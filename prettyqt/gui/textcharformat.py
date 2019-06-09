@@ -6,7 +6,7 @@
 from qtpy import QtGui
 
 from prettyqt import gui
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 WEIGHTS = bidict(thin=QtGui.QFont.Thin,

@@ -8,7 +8,7 @@ import contextlib
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 FORMATS = bidict(native=QtCore.QSettings.NativeFormat,

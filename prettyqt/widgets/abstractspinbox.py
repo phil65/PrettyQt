@@ -6,7 +6,7 @@
 from qtpy import QtWidgets
 
 from prettyqt import widgets, gui
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 CORRECTION_MODES = bidict(to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,

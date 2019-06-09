@@ -9,7 +9,7 @@ from typing import List, Optional
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 MODES = bidict(existing_file=QtWidgets.QFileDialog.ExistingFile,

@@ -6,7 +6,7 @@
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets, core
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 MODES = bidict(maximum=QtWidgets.QLayout.SetMaximumSize,

@@ -5,7 +5,7 @@
 
 from qtpy import QtWidgets
 
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 SIZE_POLICIES = bidict(fixed=QtWidgets.QSizePolicy.Fixed,

@@ -8,7 +8,7 @@ from typing import List
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets, core
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 BUTTONS = bidict(cancel=QtWidgets.QDialogButtonBox.Cancel,

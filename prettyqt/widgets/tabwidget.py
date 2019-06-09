@@ -7,7 +7,7 @@ import qtawesome as qta
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import widgets, core, gui
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 TAB_SHAPES = bidict(rounded=QtWidgets.QTabWidget.Rounded,

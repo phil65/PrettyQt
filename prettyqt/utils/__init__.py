@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
+"""
+@author: Philipp Temminghoff
+"""
 
-from bidict import bidict as bdct
+import bidict as bdct
 
 
-class bidict(bdct):
+class bidict(bdct.bidict):
 
     def __init__(self, *args, **kwargs):
         super().__init__(kwargs)

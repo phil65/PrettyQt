@@ -9,7 +9,7 @@ from contextlib import contextmanager
 from qtpy import QtWidgets, QtCore, QtGui
 
 from prettyqt import widgets, core
-from prettyqt.utils.bidict import bidict
+from prettyqt.utils import bidict
 
 
 POLICIES = bidict(none=QtCore.Qt.NoContextMenu,
