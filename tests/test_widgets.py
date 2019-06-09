@@ -50,6 +50,11 @@ def test_buttongroup():
     assert widget[2] == btn
 
 
+def test_calendarwiget():
+    widget = widgets.CalendarWidget()
+    assert widget.get_date() == widget.get_value()
+
+
 def test_checkbox():
     widget = widgets.CheckBox()
     widget.set_disabled()
@@ -79,7 +84,9 @@ def test_combobox():
     box.set_disabled()
     box.set_enabled()
     box.add("test", data="data", icon="mdi.timer")
+    assert len(box) == 1
     box.set_insert_policy("bottom")
+    assert box.get_insert_policy() == "bottom"
     with pytest.raises(ValueError):
         box.set_insert_policy("bla")
     box.set_size_adjust_policy("first_show")
@@ -646,13 +653,24 @@ def test_treeview():
     widget.setModel(model)
     widget.selectAll()
     widget.h_header
+    # widget.h_scrollbar
+    widget.v_scrollbar
+    widget.set_size_adjust_policy("content")
+    with pytest.raises(ValueError):
+        widget.set_size_adjust_policy("test")
+    assert widget.get_size_adjust_policy() == "content"
     widget.setup_list_style()
     widget.setup_dragdrop_move()
+    widget.scroll_to_top()
     widget.current_index()
     widget.set_selection_mode("extended")
     widget.set_selection_behaviour("rows")
     widget.set_horizontal_scrollbar_policy("always_on")
     widget.set_vertical_scrollbar_policy("always_on")
+    with pytest.raises(ValueError):
+        widget.set_horizontal_scrollbar_policy("test")
+    with pytest.raises(ValueError):
+        widget.set_vertical_scrollbar_policy("test")
     widget.set_horizontal_scrollbar_width(12)
     widget.set_vertical_scrollbar_width(12)
     widget.num_selected()
