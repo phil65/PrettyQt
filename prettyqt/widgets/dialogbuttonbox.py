@@ -5,43 +5,53 @@
 
 from typing import List
 
+from bidict import bidict
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
-BUTTONS = dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
-               ok=QtWidgets.QDialogButtonBox.Ok,
-               save=QtWidgets.QDialogButtonBox.Save,
-               open=QtWidgets.QDialogButtonBox.Open,
-               close=QtWidgets.QDialogButtonBox.Close,
-               discard=QtWidgets.QDialogButtonBox.Discard,
-               apply=QtWidgets.QDialogButtonBox.Apply,
-               reset=QtWidgets.QDialogButtonBox.Reset,
-               restore_defaults=QtWidgets.QDialogButtonBox.RestoreDefaults,
-               help=QtWidgets.QDialogButtonBox.Help,
-               save_all=QtWidgets.QDialogButtonBox.SaveAll,
-               yes=QtWidgets.QDialogButtonBox.Yes,
-               yes_to_all=QtWidgets.QDialogButtonBox.YesToAll,
-               no=QtWidgets.QDialogButtonBox.No,
-               no_to_all=QtWidgets.QDialogButtonBox.NoToAll,
-               abort=QtWidgets.QDialogButtonBox.Abort,
-               retry=QtWidgets.QDialogButtonBox.Retry,
-               ignore=QtWidgets.QDialogButtonBox.Ignore)
+BUTTONS = bidict(dict(cancel=QtWidgets.QDialogButtonBox.Cancel,
+                      ok=QtWidgets.QDialogButtonBox.Ok,
+                      save=QtWidgets.QDialogButtonBox.Save,
+                      open=QtWidgets.QDialogButtonBox.Open,
+                      close=QtWidgets.QDialogButtonBox.Close,
+                      discard=QtWidgets.QDialogButtonBox.Discard,
+                      apply=QtWidgets.QDialogButtonBox.Apply,
+                      reset=QtWidgets.QDialogButtonBox.Reset,
+                      restore_defaults=QtWidgets.QDialogButtonBox.RestoreDefaults,
+                      help=QtWidgets.QDialogButtonBox.Help,
+                      save_all=QtWidgets.QDialogButtonBox.SaveAll,
+                      yes=QtWidgets.QDialogButtonBox.Yes,
+                      yes_to_all=QtWidgets.QDialogButtonBox.YesToAll,
+                      no=QtWidgets.QDialogButtonBox.No,
+                      no_to_all=QtWidgets.QDialogButtonBox.NoToAll,
+                      abort=QtWidgets.QDialogButtonBox.Abort,
+                      retry=QtWidgets.QDialogButtonBox.Retry,
+                      ignore=QtWidgets.QDialogButtonBox.Ignore))
 
-ROLES = dict(invalid=QtWidgets.QDialogButtonBox.InvalidRole,
-             accept=QtWidgets.QDialogButtonBox.AcceptRole,
-             reject=QtWidgets.QDialogButtonBox.RejectRole,
-             destructive=QtWidgets.QDialogButtonBox.DestructiveRole,
-             action=QtWidgets.QDialogButtonBox.ActionRole,
-             help=QtWidgets.QDialogButtonBox.HelpRole,
-             yes=QtWidgets.QDialogButtonBox.YesRole,
-             no=QtWidgets.QDialogButtonBox.NoRole,
-             apply=QtWidgets.QDialogButtonBox.ApplyRole,
-             reset=QtWidgets.QDialogButtonBox.ResetRole)
+ROLES = bidict(dict(invalid=QtWidgets.QDialogButtonBox.InvalidRole,
+                    accept=QtWidgets.QDialogButtonBox.AcceptRole,
+                    reject=QtWidgets.QDialogButtonBox.RejectRole,
+                    destructive=QtWidgets.QDialogButtonBox.DestructiveRole,
+                    action=QtWidgets.QDialogButtonBox.ActionRole,
+                    help=QtWidgets.QDialogButtonBox.HelpRole,
+                    yes=QtWidgets.QDialogButtonBox.YesRole,
+                    no=QtWidgets.QDialogButtonBox.NoRole,
+                    apply=QtWidgets.QDialogButtonBox.ApplyRole,
+                    reset=QtWidgets.QDialogButtonBox.ResetRole))
+
+ORIENTATIONS = bidict(dict(horizontal=QtCore.Qt.Horizontal,
+                           vertical=QtCore.Qt.Vertical))
 
 
 class DialogButtonBox(QtWidgets.QDialogButtonBox):
+
+    button_clicked = core.Signal(str)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.clicked.connect(self.on_click)
 
     def __len__(self):
         return len(self.buttons())
@@ -63,15 +73,42 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
             btn.clicked.connect(v)
         return box
 
+    def on_click(self, button):
+        self.button_clicked.emit(button.objectName())
+
     def set_horizontal(self):
         self.setOrientation(QtCore.Qt.Horizontal)
 
     def set_vertical(self):
         self.setOrientation(QtCore.Qt.Vertical)
 
+    def set_orientation(self, orientation: str):
+        """set the orientation of the splitter
+
+        Allowed values are "horizontal", "vertical"
+
+        Args:
+            mode: orientation for the splitter
+
+        Raises:
+            ValueError: orientation does not exist
+        """
+        if orientation not in ORIENTATIONS:
+            raise ValueError(f"{orientation} not a valid orientation.")
+        self.setOrientation(ORIENTATIONS[orientation])
+
+    def get_orientation(self) -> str:
+        """returns current orientation
+
+        Possible values: "horizontal", "vertical"
+
+        Returns:
+            orientation
+        """
+        return ORIENTATIONS.inv[self.orientation()]
+
     def add_buttons(self, buttons: List[str]):
-        for btn in buttons:
-            self.add_button(btn)
+        return [self.add_button(btn) for btn in buttons]
 
     def add_button(self, button: str):
         """add a default button
@@ -92,13 +129,19 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         """
         if button not in BUTTONS:
             raise ValueError("button type not available")
-        return self.addButton(BUTTONS[button])
+        btn = self.addButton(BUTTONS[button])
+        btn.setObjectName(button)
+        return btn
 
-    def add_accept_button(self, button):
-        return self.addButton(button, self.AcceptRole)
+    def add_accept_button(self, button: QtWidgets.QPushButton):
+        btn = self.addButton(button, self.AcceptRole)
+        btn.setObjectName(button)
+        return btn
 
-    def add_reject_button(self, button):
-        return self.addButton(button, self.RejectRole)
+    def add_reject_button(self, button: QtWidgets.QPushButton):
+        btn = self.addButton(button, self.RejectRole)
+        btn.setObjectName(button)
+        return btn
 
 
 DialogButtonBox.__bases__[0].__bases__ = (widgets.Widget,)
@@ -110,5 +153,6 @@ if __name__ == "__main__":
     widget = DialogButtonBox()
     buttons = list(BUTTONS.keys())
     widget.add_buttons(buttons)
+    widget.button_clicked.connect(print)
     widget.show()
     app.exec_()
