@@ -36,6 +36,15 @@ def test_filechooserbutton():
         btn = pickle.load(jar)
 
 
+def test_fontchooserbutton():
+    btn = custom_widgets.FontChooserButton()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(btn, jar)
+    with open("data.pkl", "rb") as jar:
+        btn = pickle.load(jar)
+    btn.set_font("Consolas")
+
+
 def test_codeeditor():
     editor = custom_widgets.CodeEditor()
     assert editor.text() == ""
@@ -54,12 +63,21 @@ def test_imageviewer():
 def test_flowlayout():
     widget = widgets.Widget()
     layout = custom_widgets.FlowLayout()
-    layout += widgets.PushButton("Short")
+    btn = widgets.PushButton("Short")
+    layout += btn
     layout += widgets.PushButton("Longer")
     layout += widgets.PushButton("Different text")
     layout += widgets.PushButton("More text")
     layout += widgets.PushButton("Even longer button text")
     widget.set_layout(layout)
+    assert layout[0] == btn
+    for i in range(len(layout)):
+        pass
+    layout.get_children()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(layout, jar)
+    with open("data.pkl", "rb") as jar:
+        layout = pickle.load(jar)
 
 
 def test_labeledslider(qtbot):
