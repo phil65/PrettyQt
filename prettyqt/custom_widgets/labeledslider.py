@@ -37,8 +37,7 @@ class LabeledSlider(widgets.Widget):
 
         self.sl = widgets.Slider(orientation, self)
         self.sl.value_changed.connect(self.value_changed)
-        self.sl.setMinimum(0)
-        self.sl.setMaximum(len(labels) - 1)
+        self.sl.set_range(0, len(labels) - 1)
         self.sl.setValue(0)
         if orientation == QtCore.Qt.Horizontal:
             self.sl.setTickPosition(widgets.Slider.TicksBelow)

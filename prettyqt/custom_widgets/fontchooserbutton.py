@@ -15,12 +15,12 @@ class FontChooserButton(widgets.Widget):
         self.current_font = font
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
-        self.lineedit = widgets.LineEdit(self)
+        self.lineedit = widgets.LineEdit()
         self.lineedit.set_read_only()
         layout += self.lineedit
         action = widgets.Action()
         action.triggered.connect(self.choose_font)
-        self.button = widgets.ToolButton(self)
+        self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
         layout += self.button
 
