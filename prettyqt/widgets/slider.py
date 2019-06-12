@@ -48,12 +48,38 @@ class Slider(QtWidgets.QSlider):
         self.setTickInterval(state["tick_interval"])
 
     def set_tick_position(self, position: str):
+        """sets the tick position for the slider
+
+        allowed values are "none", "both_sides", "above", "below", "left", "right"
+        for vertical orientation of the slider,
+        "above" equals to "left" and "below" to "right"
+
+        Args:
+            position: position for the ticks
+        """
+        if position == "left":
+            position = "above"
+        elif position == "right":
+            position = "below"
         if position not in TICK_POSITIONS:
             raise ValueError(f"{position} not a valid tick position.")
         self.setTickPosition(TICK_POSITIONS[position])
 
     def get_tick_position(self) -> str:
-        return TICK_POSITIONS.inv[self.tickPosition()]
+        """returns tick position
+
+        possible values are "none", "both_sides", "above", "below"
+
+        Returns:
+            tick position
+        """
+        val = TICK_POSITIONS.inv[self.tickPosition()]
+        # if self.is_vertical():
+        #     if val == "above":
+        #         return "left"
+        #     elif val == "below":
+        #         return "right"
+        return val
 
 
 Slider.__bases__[0].__bases__ = (widgets.AbstractSlider,)
