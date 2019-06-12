@@ -11,20 +11,14 @@ class LabeledSlider(widgets.Widget):
 
     value_changed = core.Signal(int)
 
-    def __init__(self, labels, orientation=QtCore.Qt.Horizontal, parent=None):
+    def __init__(self, labels, orientation="horizontal", parent=None):
         super().__init__(parent=parent)
 
-        levels = range(len(labels))
         if not isinstance(labels, (tuple, list)):
             raise Exception("<labels> is a list or tuple.")
+        levels = range(len(labels))
         self.levels = list(zip(levels, labels))
-
-        if orientation == QtCore.Qt.Horizontal:
-            self.layout = widgets.BoxLayout("vertical", self)
-        elif orientation == QtCore.Qt.Vertical:
-            self.layout = widgets.BoxLayout("horizontal", self)
-        else:
-            raise Exception("<orientation> wrong.")
+        self.layout = widgets.BoxLayout(orientation, self)
 
         # gives some space to print labels
         self.left_margin = 10
@@ -35,15 +29,15 @@ class LabeledSlider(widgets.Widget):
         self.layout.setContentsMargins(self.left_margin, self.top_margin,
                                        self.right_margin, self.bottom_margin)
 
-        self.sl = widgets.Slider(orientation, self)
+        self.sl = widgets.Slider(orientation)
         self.sl.value_changed.connect(self.value_changed)
         self.sl.set_range(0, len(labels) - 1)
-        self.sl.setValue(0)
+        self.sl.set_value(0)
         if orientation == QtCore.Qt.Horizontal:
-            self.sl.setTickPosition(widgets.Slider.TicksBelow)
+            self.sl.set_tick_position("below")
             self.sl.setMinimumWidth(300)  # just to make it easier to read
         else:
-            self.sl.setTickPosition(widgets.Slider.TicksLeft)
+            self.sl.set_tick_position("left")
             self.sl.setMinimumHeight(300)  # just to make it easier to read
         self.sl.setTickInterval(1)
         self.sl.setSingleStep(1)
@@ -115,9 +109,7 @@ class LabeledSlider(widgets.Widget):
                     self.layout.setContentsMargins(self.left_margin,
                                                    self.top_margin, self.right_margin,
                                                    self.bottom_margin)
-
-            pos = core.Point(left, bottom)
-            painter.drawText(pos, v_str)
+            painter.drawText(left, bottom, v_str)
 
         return
 
