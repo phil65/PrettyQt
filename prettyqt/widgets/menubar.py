@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Union
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets
@@ -15,10 +17,18 @@ class MenuBar(QtWidgets.QMenuBar):
             self.add(other)
             return self
 
-    def add_action(self, action: QtWidgets.QAction):
+    def add_action(self, action: Union[QtWidgets.QAction, str]):
+        if isinstance(action, str):
+            action = widgets.Action(action)
+            self.addAction(action)
+            return action
         return self.addAction(action)
 
-    def add_menu(self, menu: QtWidgets.QMenu):
+    def add_menu(self, menu: Union[QtWidgets.QMenu, str]):
+        if isinstance(menu, str):
+            menu = widgets.Menu(menu)
+            self.addMenu(menu)
+            return menu
         return self.addMenu(menu)
 
     def add(self, item):
@@ -35,6 +45,7 @@ if __name__ == "__main__":
     app = widgets.app()
     win = QtWidgets.QMainWindow()
     menu_bar = MenuBar()
+    act = menu_bar.add_menu("test")
     win.setMenuBar(menu_bar)
     win.show()
     app.exec_()
