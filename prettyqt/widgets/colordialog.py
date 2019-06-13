@@ -23,7 +23,10 @@ class ColorDialog(QtWidgets.QColorDialog):
             self.setCurrentColor(state["color"])
 
     @classmethod
-    def get_color(cls, preset=None, allow_alpha=False, parent=None):
+    def get_color(cls,
+                  preset=None,
+                  allow_alpha: bool = False,
+                  parent=None) -> gui.Color:
         if isinstance(preset, str):
             preset = gui.Color(preset)
         if preset is None:
@@ -31,7 +34,7 @@ class ColorDialog(QtWidgets.QColorDialog):
         kwargs = dict(options=cls.ShowAlphaChannel) if allow_alpha else dict()
         return gui.Color(cls.getColor(preset, parent, **kwargs))
 
-    def current_color(self):
+    def current_color(self) -> gui.Color:
         return gui.Color(self.currentColor())
 
 

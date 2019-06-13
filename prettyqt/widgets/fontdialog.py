@@ -10,7 +10,7 @@ from prettyqt import gui, widgets
 
 class FontDialog(QtWidgets.QFontDialog):
 
-    def current_font(self):
+    def current_font(self) -> gui.Font:
         return gui.Font(self.currentFont())
 
 
