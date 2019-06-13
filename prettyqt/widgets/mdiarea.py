@@ -28,7 +28,7 @@ class MdiArea(QtWidgets.QMdiArea):
     def set_view_mode(self, mode: str):
         """set view mode for the MDI area
 
-        Valid values are "default" and "tabbed"
+        Valid values are "default", "tabbed"
 
         Args:
             mode: view mode to use
@@ -41,6 +41,13 @@ class MdiArea(QtWidgets.QMdiArea):
         self.setViewMode(VIEW_MODES[mode])
 
     def get_view_mode(self) -> str:
+        """returns current view mode
+
+        Possible values: "default", "tabbed"
+
+        Returns:
+            view mode
+        """
         return VIEW_MODES.inv[self.viewMode()]
 
     def set_window_order(self, mode: str):
@@ -59,6 +66,13 @@ class MdiArea(QtWidgets.QMdiArea):
         self.setViewMode(WINDOW_ORDERS[mode])
 
     def get_window_order(self) -> str:
+        """returns current view mode
+
+        Possible values: "creation", "stacking", "activation"
+
+        Returns:
+            view mode
+        """
         return WINDOW_ORDERS.inv[self.viewMode()]
 
     def add(self, item: QtWidgets.QWidget):

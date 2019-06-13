@@ -45,6 +45,13 @@ class ToolBar(QtWidgets.QToolBar):
             btn.setToolButtonStyle(STYLES.get(style, 0))
 
     def get_style(self) -> str:
+        """returns current style
+
+        Possible values: "icon", "text", "text_below_icon", "text_beside_icon"
+
+        Returns:
+            style
+        """
         return STYLES.inv[self.toolButtonStyle()]
 
     def add_action(self, label: str, icon, callback: Callable, checkable=False):

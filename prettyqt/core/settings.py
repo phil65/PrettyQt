@@ -111,10 +111,19 @@ class Settings(QtCore.QSettings):
 
     @classmethod
     def set_path(cls, fmt, scope: str, path: str):
+        """sets the path to the settings file
+
+        Args:
+            fmt: the default format to use
+            scope: the scope to use
+
+        Raises:
+            ValueError: invalid format or scope
+        """
         if fmt not in FORMATS:
             raise ValueError("Format must be either 'native' or 'ini'")
         if scope not in SCOPES:
-            raise ValueError("Format must be either 'user' or 'system'")
+            raise ValueError("Scope must be either 'user' or 'system'")
         cls.setPath(FORMATS[fmt], SCOPES[scope], str(path))
 
     @contextlib.contextmanager

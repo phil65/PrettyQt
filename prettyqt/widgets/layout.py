@@ -27,19 +27,53 @@ class Layout(QtWidgets.QLayout):
         self.setContentsMargins(margin, margin, margin, margin)
 
     def set_size_mode(self, mode: str):
+        """set the size mode of the layout
+
+        Allowed values are "maximum", "fixed"
+
+        Args:
+            mode: size mode for the layout
+
+        Raises:
+            ValueError: size mode does not exist
+        """
         if mode not in MODES:
             raise ValueError(f"{mode} not a valid size mode.")
         self.setSizeConstraint(MODES[mode])
 
     def get_size_mode(self) -> str:
+        """returns current size mode
+
+        Possible values: "maximum", "fixed"
+
+        Returns:
+            size mode
+        """
         return MODES.inv[self.sizeConstraint()]
 
     def set_alignment(self, alignment: str):
+        """set the alignment of the layout
+
+        Allowed values are "left", "right", "top", "bottom"
+
+        Args:
+            mode: alignment for the layout
+
+        Raises:
+            ValueError: alignment does not exist
+        """
         if alignment not in ALIGNMENTS:
             raise ValueError(f"{alignment!r} not a valid alignment.")
         self.setAlignment(ALIGNMENTS[alignment])
 
     def get_alignment(self) -> str:
+        """returns current alignment
+
+        Possible values: "left", "right", "top", "bottom"
+
+        Returns:
+            alignment
+        """
         return MODES.inv[self.alignment()]
 
     def add(self, item) -> int:
