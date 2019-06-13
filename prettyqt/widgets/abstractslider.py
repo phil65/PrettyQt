@@ -14,13 +14,16 @@ TICK_POSITIONS = bidict(none=QtWidgets.QSlider.NoTicks,
                         above=QtWidgets.QSlider.TicksAbove,
                         below=QtWidgets.QSlider.TicksBelow)
 
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
+                      vertical=QtCore.Qt.Vertical)
+
 
 class AbstractSlider(QtWidgets.QAbstractSlider):
 
     value_changed = core.Signal(int)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, orientation="horizontal", parent=None):
+        super().__init__(ORIENTATIONS[orientation], parent)
         self.valueChanged.connect(self.on_value_change)
 
     def on_value_change(self):
@@ -37,8 +40,8 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setRange(*state["range"])
-        self.setValue(state["value"])
+        self.set_range(*state["range"])
+        self.set_value(state["value"])
         self.setSingleStep(state["single_step"])
         self.setPageStep(state["page_step"])
         self.setTracking(state["has_tracking"])

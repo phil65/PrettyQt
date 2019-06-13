@@ -49,7 +49,7 @@ class SpanSlider(widgets.Slider):
         self.value_changed.emit(self.lower, self.upper)
 
     def __init__(self, parent=None):
-        super().__init__(QtCore.Qt.Horizontal, parent)
+        super().__init__("horizontal", parent)
         self.rangeChanged.connect(self.update_range)
         self.sliderReleased.connect(self.move_pressed_handle)
 
