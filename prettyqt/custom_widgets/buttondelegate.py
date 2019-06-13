@@ -27,12 +27,10 @@ class ButtonDelegate(widgets.ItemDelegate):
 
     def setEditorData(self, editor, index):
         editor.blockSignals(True)
-        # editor.setCurrentIndex(int(index.model().data(index)))
         editor.blockSignals(False)
 
     def setModelData(self, editor, model, index):
         pass
-        # model.setData(index, editor.text())
 
     @core.Slot()
     def currentIndexChanged(self):

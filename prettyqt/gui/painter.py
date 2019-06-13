@@ -106,7 +106,5 @@ class Painter(QtGui.QPainter):
         """
         return COMP_MODES.inv[self.compositionMode()]
 
-    def draw_text(self, x, y, width, height, alignment, text):
-        # TODO
-        alignment = QtCore.Qt.AlignRight
-        self.drawText(x, y, width, height, alignment, text)
+    def draw_text(self, x, y, text):
+        self.drawText(x, y, text)

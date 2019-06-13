@@ -130,17 +130,9 @@ class SpanSlider(widgets.Slider):
             main = self.main_control == self.UPPER_HANDLE
             self.trigger_action(self.SliderMove, main)
 
-    @core.Property(object)
-    def left_color(self):
-        return self.gradient_left
-
     def set_left_color(self, color):
         self.gradient_left = color
         self.update()
-
-    @core.Property(object)
-    def right_color(self):
-        return self.gradient_right
 
     def set_right_color(self, color):
         self.gradient_right = color
@@ -297,7 +289,7 @@ class SpanSlider(widgets.Slider):
             groove.adjust(0, 0, 0, -1)
 
         # pen & brush
-        painter.setPen(gui.Pen(self.left_color, 0))
+        painter.setPen(gui.Pen(self.gradient_left, 0))
         if opt.is_horizontal():
             self.setup_painter(painter, opt.orientation, groove.center().x(),
                                groove.top(), groove.center().x(), groove.bottom())
@@ -419,8 +411,7 @@ class SpanSlider(widgets.Slider):
     def mouseReleaseEvent(self, event):
         super().mouseReleaseEvent(event)
         self.setSliderDown(False)
-        self.lower_pressed = widgets.Style.SC_None
-        self.upper_pressed = widgets.Style.SC_None
+        self.lower_pressed = self.upper_pressed = widgets.Style.SC_None
         self.update()
 
     def pixel_pos_to_value(self, pos):
@@ -449,8 +440,8 @@ if __name__ == "__main__":
     slider = SpanSlider()
     slider.set_span(30, 70)
     slider.setRange(0, 100)
-    color = gui.Color("blue").lighter(150)
-    slider.set_left_color(color)
-    slider.set_right_color(color)
+    # color = gui.Color("blue").lighter(150)
+    # slider.set_left_color(color)
+    # slider.set_right_color(color)
     slider.show()
     app.exec_()
