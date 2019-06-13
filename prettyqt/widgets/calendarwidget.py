@@ -18,6 +18,9 @@ HEADER_FORMATS = bidict(none=QtWidgets.QCalendarWidget.NoVerticalHeader,
                         week_numbers=QtWidgets.QCalendarWidget.ISOWeekNumbers)
 
 
+QtWidgets.QCalendarWidget.__bases__ = (widgets.Widget,)
+
+
 class CalendarWidget(QtWidgets.QCalendarWidget):
 
     def __getstate__(self):
@@ -38,9 +41,6 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
 
     def set_value(self, value):
         self.setSelectedDate(value)
-
-
-CalendarWidget.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

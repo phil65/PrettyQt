@@ -8,8 +8,8 @@ from qtpy import QtWidgets
 from prettyqt import gui
 
 
+QtWidgets.QStylePainter.__bases__ = (gui.Painter,)
+
+
 class StylePainter(QtWidgets.QStylePainter):
     pass
-
-
-StylePainter.__bases__[0].__bases__ = (gui.Painter,)

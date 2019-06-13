@@ -8,9 +8,9 @@ from qtpy import QtCore
 from prettyqt import core
 
 
+QtCore.QSortFilterProxyModel.__bases__ = (core.AbstractProxyModel,)
+
+
 class SortFilterProxyModel(QtCore.QSortFilterProxyModel):
 
     HEADER = []
-
-
-SortFilterProxyModel.__bases__[0].__bases__ = (core.AbstractProxyModel,)

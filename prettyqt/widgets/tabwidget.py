@@ -14,6 +14,9 @@ TAB_SHAPES = bidict(rounded=QtWidgets.QTabWidget.Rounded,
                     triangular=QtWidgets.QTabWidget.Triangular)
 
 
+QtWidgets.QTabWidget.__bases__ = (widgets.Widget,)
+
+
 class TabWidget(QtWidgets.QTabWidget):
     """
     Widget for managing the tabs section
@@ -231,9 +234,6 @@ class DetachedTab(widgets.MainWindow):
     #  content widget back to the DetachableTabWidget
     def closeEvent(self, event):
         self.on_close.emit(self.widget, self.id, self.windowIcon())
-
-
-TabWidget.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

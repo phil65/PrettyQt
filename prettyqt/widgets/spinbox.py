@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets, core
 
 
+QtWidgets.QSpinBox.__bases__ = (widgets.AbstractSpinBox,)
+
+
 class SpinBox(QtWidgets.QSpinBox):
 
     value_changed = core.Signal(int)
@@ -51,9 +54,6 @@ class SpinBox(QtWidgets.QSpinBox):
         if end is None:
             end = 2147483647
         self.setRange(start, end)
-
-
-SpinBox.__bases__[0].__bases__ = (widgets.AbstractSpinBox,)
 
 
 if __name__ == "__main__":

@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import gui, core, widgets
 
 
+QtWidgets.QTextEdit.__bases__ = (widgets.AbstractScrollArea,)
+
+
 class TextEdit(QtWidgets.QTextEdit):
 
     value_changed = core.Signal(str)
@@ -54,9 +57,6 @@ class TextEdit(QtWidgets.QTextEdit):
 
     def set_read_only(self, value: bool = True):
         self.setReadOnly(value)
-
-
-TextEdit.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 
 
 if __name__ == "__main__":

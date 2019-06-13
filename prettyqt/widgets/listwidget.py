@@ -8,6 +8,9 @@ from qtpy import QtWidgets, QtCore
 from prettyqt import widgets
 
 
+QtWidgets.QListWidget.__bases__ = (widgets.ListView,)
+
+
 class NoData(object):
     pass
 
@@ -75,8 +78,6 @@ class ListWidget(QtWidgets.QListWidget):
                 self.setSelected(i)
                 break
 
-
-ListWidget.__bases__[0].__bases__ = (widgets.ListView,)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])

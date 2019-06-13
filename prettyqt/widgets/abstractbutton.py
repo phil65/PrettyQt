@@ -14,6 +14,9 @@ STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton,
               maximise=QtWidgets.QStyle.SP_TitleBarMaxButton)
 
 
+QtWidgets.QAbstractButton.__bases__ = (widgets.Widget,)
+
+
 class AbstractButton(QtWidgets.QAbstractButton):
 
     def __getstate__(self):
@@ -59,9 +62,6 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def set_shortcut(self, shortcut):
         if shortcut:
             self.setShortcut(shortcut)
-
-
-AbstractButton.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

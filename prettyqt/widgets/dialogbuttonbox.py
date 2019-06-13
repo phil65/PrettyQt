@@ -45,6 +45,9 @@ ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
                       vertical=QtCore.Qt.Vertical)
 
 
+QtWidgets.QDialogButtonBox.__bases__ = (widgets.Widget,)
+
+
 class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
     button_clicked = core.Signal(str)
@@ -142,9 +145,6 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         btn = self.addButton(button, self.RejectRole)
         btn.setObjectName(button)
         return btn
-
-
-DialogButtonBox.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

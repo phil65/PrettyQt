@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QTreeView.__bases__ = (widgets.AbstractItemView,)
+
+
 class TreeView(QtWidgets.QTreeView):
 
     def __init__(self, *args, **kwargs):
@@ -44,9 +47,6 @@ class TreeView(QtWidgets.QTreeView):
             self.h_header.resizeSections(self.h_header.ResizeToContents)
         else:
             self.h_header.resize_sections("interactive")
-
-
-TreeView.__bases__[0].__bases__ = (widgets.AbstractItemView,)
 
 
 if __name__ == "__main__":

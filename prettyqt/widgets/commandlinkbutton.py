@@ -8,12 +8,12 @@ from qtpy import QtWidgets
 from prettyqt import widgets, core
 
 
+QtWidgets.QCommandLinkButton.__bases__ = (widgets.PushButton,)
+
+
 class CommandLinkButton(QtWidgets.QCommandLinkButton):
 
     value_changed = core.Signal(bool)
-
-
-CommandLinkButton.__bases__[0].__bases__ = (widgets.PushButton,)
 
 
 if __name__ == "__main__":

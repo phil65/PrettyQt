@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QScrollArea.__bases__ = (widgets.AbstractScrollArea,)
+
+
 class ScrollArea(QtWidgets.QScrollArea):
 
     def __getstate__(self):
@@ -21,6 +24,3 @@ class ScrollArea(QtWidgets.QScrollArea):
 
     def set_widget(self, widget):
         self.setWidget(widget)
-
-
-ScrollArea.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)

@@ -18,6 +18,9 @@ STYLES = bidict(icon=QtCore.Qt.ToolButtonIconOnly,
                 text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon)
 
 
+QtWidgets.QToolBar.__bases__ = (widgets.Widget,)
+
+
 class ToolBar(QtWidgets.QToolBar):
 
     def __init__(self, *args, **kwargs):
@@ -67,9 +70,6 @@ class ToolBar(QtWidgets.QToolBar):
 
     def set_font_size(self, size: int):
         self.setStyleSheet(f"font-size: {size}pt;")
-
-
-ToolBar.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

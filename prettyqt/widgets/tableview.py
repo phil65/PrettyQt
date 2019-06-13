@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QTableView.__bases__ = (widgets.AbstractItemView,)
+
+
 class TableView(QtWidgets.QTableView):
 
     def __init__(self, *args, **kwargs):
@@ -47,8 +50,6 @@ class TableView(QtWidgets.QTableView):
         else:
             self.h_header.resize_sections("interactive")
 
-
-TableView.__bases__[0].__bases__ = (widgets.AbstractItemView,)
 
 if __name__ == "__main__":
     app = widgets.app()

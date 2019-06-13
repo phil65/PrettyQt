@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QProgressDialog.__bases__ = (widgets.BaseDialog,)
+
+
 class ProgressDialog(QtWidgets.QProgressDialog):
     """Progress dialog
 
@@ -35,9 +38,6 @@ class ProgressDialog(QtWidgets.QProgressDialog):
     def show_message(self, message):
         self.setLabelText(message)
         self.show()
-
-
-ProgressDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

@@ -10,6 +10,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QMenuBar.__bases__ = (widgets.Widget,)
+
+
 class MenuBar(QtWidgets.QMenuBar):
 
     def __add__(self, other):
@@ -36,9 +39,6 @@ class MenuBar(QtWidgets.QMenuBar):
             return self.add_menu(item)
         else:
             return self.add_action(item)
-
-
-MenuBar.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

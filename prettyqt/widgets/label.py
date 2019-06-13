@@ -31,6 +31,9 @@ TEXT_FORMATS = bidict(rich=QtCore.Qt.RichText,
                       auto=QtCore.Qt.AutoText)
 
 
+QtWidgets.QLabel.__bases__ = (widgets.Frame,)
+
+
 class Label(QtWidgets.QLabel):
 
     def __init__(self, *args, **kwargs):
@@ -145,9 +148,6 @@ class Label(QtWidgets.QLabel):
         label.setPixmap(pixmap)
         label.resize(pixmap.width(), pixmap.height())
         return label
-
-
-Label.__bases__[0].__bases__ = (widgets.Frame,)
 
 
 if __name__ == "__main__":

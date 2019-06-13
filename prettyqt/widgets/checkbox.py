@@ -14,6 +14,9 @@ STATES = bidict(unchecked=QtCore.Qt.Unchecked,
                 checked=QtCore.Qt.Checked)
 
 
+QtWidgets.QCheckBox.__bases__ = (widgets.AbstractButton,)
+
+
 class CheckBox(QtWidgets.QCheckBox):
 
     value_changed = core.Signal(int)
@@ -84,9 +87,6 @@ class CheckBox(QtWidgets.QCheckBox):
 
     def set_value(self, value: bool):
         self.setChecked(value)
-
-
-CheckBox.__bases__[0].__bases__ = (widgets.AbstractButton,)
 
 
 if __name__ == "__main__":

@@ -7,6 +7,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QBoxLayout.__bases__ = (widgets.Layout,)
+
+
 class BoxLayout(QtWidgets.QBoxLayout):
 
     def __init__(self, orientation="horizontal", parent=None):
@@ -48,9 +51,6 @@ class BoxLayout(QtWidgets.QBoxLayout):
 
     def get_children(self):
         return [self[i] for i in range(self.count())]
-
-
-BoxLayout.__bases__[0].__bases__ = (widgets.Layout,)
 
 
 if __name__ == "__main__":

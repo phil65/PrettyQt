@@ -8,8 +8,8 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QWidgetAction.__bases__ = (widgets.Action,)
+
+
 class WidgetAction(QtWidgets.QWidgetAction):
     pass
-
-
-WidgetAction.__bases__[0].__bases__ = (widgets.Action,)

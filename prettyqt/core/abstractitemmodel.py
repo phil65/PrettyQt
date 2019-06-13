@@ -11,6 +11,9 @@ from qtpy import QtCore
 from prettyqt import core
 
 
+QtCore.QAbstractItemModel.__bases__ = (core.Object,)
+
+
 class AbstractItemModel(QtCore.QAbstractItemModel):
 
     def __repr__(self):
@@ -86,6 +89,3 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         self.beginInsertColumns(parent, first, last)
         yield None
         self.endInsertColumns()
-
-
-AbstractItemModel.__bases__[0].__bases__ = (core.Object,)

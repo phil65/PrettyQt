@@ -13,6 +13,9 @@ ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
                       vertical=QtCore.Qt.Vertical)
 
 
+QtWidgets.QSplitter.__bases__ = (widgets.Frame,)
+
+
 class Splitter(QtWidgets.QSplitter):
 
     def __init__(self, orientation="horizontal", parent=None):
@@ -100,9 +103,6 @@ class Splitter(QtWidgets.QSplitter):
             orientation
         """
         return ORIENTATIONS.inv[self.orientation()]
-
-
-Splitter.__bases__[0].__bases__ = (widgets.Frame,)
 
 
 if __name__ == "__main__":

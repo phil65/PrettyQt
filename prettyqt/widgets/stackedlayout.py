@@ -7,6 +7,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QStackedLayout.__bases__ = (widgets.Layout,)
+
+
 class StackedLayout(QtWidgets.QStackedLayout):
 
     def __getitem__(self, index):
@@ -37,9 +40,6 @@ class StackedLayout(QtWidgets.QStackedLayout):
 
     def get_children(self):
         return [self[i] for i in range(self.count())]
-
-
-StackedLayout.__bases__[0].__bases__ = (widgets.Layout,)
 
 
 if __name__ == "__main__":

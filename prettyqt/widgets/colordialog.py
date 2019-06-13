@@ -12,6 +12,9 @@ OPTIONS = dict(show_alpha=QtWidgets.QColorDialog.ShowAlphaChannel,
                no_native=QtWidgets.QColorDialog.DontUseNativeDialog)
 
 
+QtWidgets.QColorDialog.__bases__ = (widgets.BaseDialog,)
+
+
 class ColorDialog(QtWidgets.QColorDialog):
 
     def __getstate__(self):
@@ -36,9 +39,6 @@ class ColorDialog(QtWidgets.QColorDialog):
 
     def current_color(self) -> gui.Color:
         return gui.Color(self.currentColor())
-
-
-ColorDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

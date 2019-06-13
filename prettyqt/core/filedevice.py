@@ -8,8 +8,8 @@ from qtpy import QtCore
 from prettyqt import core
 
 
+QtCore.QFileDevice.__bases__ = (core.IODevice,)
+
+
 class FileDevice(QtCore.QFileDevice):
     pass
-
-
-FileDevice.__bases__[0].__bases__ = (core.IODevice,)

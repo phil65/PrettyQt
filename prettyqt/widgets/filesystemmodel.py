@@ -10,6 +10,9 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core
 
 
+QtWidgets.QFileSystemModel.__bases__ = (core.AbstractItemModel,)
+
+
 class FileSystemModel(QtWidgets.QFileSystemModel):
     """
     Class to populate a filesystem treeview
@@ -36,6 +39,3 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
         it = core.DirIterator(path, flags)
         while it.hasNext():
             yield self.index(it.next())
-
-
-FileSystemModel.__bases__[0].__bases__ = (core.AbstractItemModel,)

@@ -8,11 +8,11 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QTreeWidget.__bases__ = (widgets.TreeView,)
+
+
 class TreeWidget(QtWidgets.QTreeWidget):
     pass
-
-
-TreeWidget.__bases__[0].__bases__ = (widgets.TreeView,)
 
 
 if __name__ == "__main__":

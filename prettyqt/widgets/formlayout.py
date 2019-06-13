@@ -14,6 +14,9 @@ ROLES = bidict(left=QtWidgets.QFormLayout.LabelRole,
                both=QtWidgets.QFormLayout.SpanningRole)
 
 
+QtWidgets.QFormLayout.__bases__ = (widgets.Layout,)
+
+
 class FormLayout(QtWidgets.QFormLayout):
 
     def __init__(self, *args, **kwargs):
@@ -98,9 +101,6 @@ class FormLayout(QtWidgets.QFormLayout):
             self.addRow(item)
         if isinstance(item, tuple):
             self.addRow(*item)
-
-
-FormLayout.__bases__[0].__bases__ = (widgets.Layout,)
 
 
 if __name__ == "__main__":

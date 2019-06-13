@@ -18,6 +18,9 @@ ALIGNMENTS = bidict(left=QtCore.Qt.AlignLeft,
                     bottom=QtCore.Qt.AlignBottom)
 
 
+QtWidgets.QLayout.__bases__ = (core.Object, QtWidgets.QLayoutItem)
+
+
 class Layout(QtWidgets.QLayout):
 
     def __repr__(self):
@@ -85,6 +88,3 @@ class Layout(QtWidgets.QLayout):
             return self.addWidget(w)
         else:
             raise TypeError("add_item only supports widgets and layouts")
-
-
-Layout.__bases__[0].__bases__ = (core.Object, QtWidgets.QLayoutItem)

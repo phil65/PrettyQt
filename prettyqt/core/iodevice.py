@@ -8,8 +8,8 @@ from qtpy import QtCore
 from prettyqt import core
 
 
+QtCore.QIODevice.__bases__ = (core.Object,)
+
+
 class IODevice(QtCore.QIODevice):
     pass
-
-
-IODevice.__bases__[0].__bases__ = (core.Object,)

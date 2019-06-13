@@ -9,6 +9,9 @@ from qtpy import QtWidgets
 from prettyqt import gui, widgets, core
 
 
+QtWidgets.QTextBrowser.__bases__ = (widgets.TextEdit,)
+
+
 class TextBrowser(QtWidgets.QTextBrowser):
 
     value_changed = core.Signal(str)
@@ -53,9 +56,6 @@ class TextBrowser(QtWidgets.QTextBrowser):
             file_content = f.read()
         html = docutils.core.publish_string(file_content, writer_name="html")
         self.setHtml(str(html))
-
-
-TextBrowser.__bases__[0].__bases__ = (widgets.TextEdit,)
 
 
 if __name__ == "__main__":

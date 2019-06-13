@@ -8,6 +8,9 @@ from qtpy import QtGui, QtWidgets
 from prettyqt import gui, widgets, core
 
 
+QtWidgets.QPlainTextEdit.__bases__ = (widgets.AbstractScrollArea,)
+
+
 class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     value_changed = core.Signal()
@@ -83,9 +86,6 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def get_value(self):
         return self.text()
-
-
-PlainTextEdit.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 
 
 if __name__ == "__main__":

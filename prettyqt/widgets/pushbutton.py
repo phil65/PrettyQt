@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import core, widgets
 
 
+QtWidgets.QPushButton.__bases__ = (widgets.AbstractButton,)
+
+
 class PushButton(QtWidgets.QPushButton):
 
     value_changed = core.Signal(bool)
@@ -29,9 +32,6 @@ class PushButton(QtWidgets.QPushButton):
     @is_on.setter
     def is_on(self, state: bool):
         self.setChecked(state)
-
-
-PushButton.__bases__[0].__bases__ = (widgets.AbstractButton,)
 
 
 if __name__ == "__main__":

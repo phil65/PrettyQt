@@ -8,6 +8,9 @@ from qtpy import QtGui
 from prettyqt import core, gui
 
 
+QtGui.QRegExpValidator.__bases__ = (gui.Validator,)
+
+
 class RegExpValidator(QtGui.QRegExpValidator):
 
     def __repr__(self):
@@ -27,9 +30,6 @@ class RegExpValidator(QtGui.QRegExpValidator):
     def get_regex(self) -> str:
         val = self.regExp()
         return val.pattern()
-
-
-RegExpValidator.__bases__[0].__bases__ = (gui.Validator,)
 
 
 if __name__ == "__main__":

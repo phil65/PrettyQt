@@ -20,6 +20,9 @@ ARROW_TYPES = bidict(none=QtCore.Qt.NoArrow,
                      right=QtCore.Qt.RightArrow)
 
 
+QtWidgets.QToolButton.__bases__ = (widgets.AbstractButton,)
+
+
 class ToolButton(QtWidgets.QToolButton):
 
     @classmethod
@@ -79,6 +82,3 @@ class ToolButton(QtWidgets.QToolButton):
             arrow type
         """
         return ARROW_TYPES.inv[self.arrowType()]
-
-
-ToolButton.__bases__[0].__bases__ = (widgets.AbstractButton,)

@@ -22,6 +22,9 @@ CONTEXTS = bidict(widget=QtCore.Qt.WidgetShortcut,
                   application=QtCore.Qt.ApplicationShortcut)
 
 
+QtWidgets.QAction.__bases__ = (core.Object,)
+
+
 class Action(QtWidgets.QAction):
 
     def __getstate__(self):
@@ -124,9 +127,6 @@ class Action(QtWidgets.QAction):
             shortcut context
         """
         return CONTEXTS.inv[self.shortcutContext()]
-
-
-Action.__bases__[0].__bases__ = (core.Object,)
 
 
 if __name__ == "__main__":

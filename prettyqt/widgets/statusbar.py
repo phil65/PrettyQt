@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QStatusBar.__bases__ = (widgets.Widget,)
+
+
 class StatusBar(QtWidgets.QStatusBar):
 
     def __init__(self, *args, **kwargs):
@@ -41,9 +44,6 @@ class StatusBar(QtWidgets.QStatusBar):
             self.addPermanentWidget(widget)
         else:
             self.addWidget(widget)
-
-
-StatusBar.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

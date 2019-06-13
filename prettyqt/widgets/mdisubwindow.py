@@ -8,11 +8,11 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QMdiSubWindow.__bases__ = (widgets.Widget,)
+
+
 class MdiSubWindow(QtWidgets.QMdiSubWindow):
     pass
-
-
-MdiSubWindow.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

@@ -24,6 +24,9 @@ MODALITIES = bidict(window=QtCore.Qt.WindowModal,
                     none=QtCore.Qt.NonModal)
 
 
+QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
+
+
 class Widget(QtWidgets.QWidget):
 
     def __repr__(self):
@@ -195,9 +198,6 @@ class Widget(QtWidgets.QWidget):
             self.box = layout
         if self.box is not None:
             self.setLayout(self.box)
-
-
-Widget.__bases__[0].__bases__ = (core.Object, QtGui.QPaintDevice)
 
 
 if __name__ == "__main__":

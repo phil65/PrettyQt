@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QGridLayout.__bases__ = (widgets.Layout,)
+
+
 class GridLayout(QtWidgets.QGridLayout):
 
     def __getitem__(self, idx):
@@ -55,9 +58,6 @@ class GridLayout(QtWidgets.QGridLayout):
     def add(self, item, rowstart, colstart, rowspan=1, colspan=1):
         fn = self.addWidget if isinstance(item, QtWidgets.QWidget) else self.addLayout
         fn(item, rowstart, colstart, rowspan, colspan)
-
-
-GridLayout.__bases__[0].__bases__ = (widgets.Layout,)
 
 
 if __name__ == "__main__":

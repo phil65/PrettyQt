@@ -18,6 +18,9 @@ SCOPES = bidict(user=QtCore.QSettings.UserScope,
                 system=QtCore.QSettings.SystemScope)
 
 
+QtCore.QSettings.__bases__ = (core.Object,)
+
+
 class Settings(QtCore.QSettings):
 
     def __repr__(self):
@@ -193,9 +196,6 @@ class Settings(QtCore.QSettings):
     def update(self, other):
         for k, v in other.items():
             self.set_value(k, v)
-
-
-Settings.__bases__[0].__bases__ = (core.Object,)
 
 
 if __name__ == "__main__":

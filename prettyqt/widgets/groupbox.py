@@ -12,6 +12,9 @@ H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
                     center=QtCore.Qt.AlignHCenter)
 
 
+QtWidgets.QGroupBox.__bases__ = (widgets.Widget,)
+
+
 class GroupBox(QtWidgets.QGroupBox):
     """GroupBox widget
 
@@ -47,9 +50,6 @@ class GroupBox(QtWidgets.QGroupBox):
     def set_enabled(self, state):
         for widget in self.layout():
             widget.setEnabled(state)
-
-
-GroupBox.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

@@ -15,6 +15,9 @@ ECHO_MODES = bidict(normal=QtWidgets.QLineEdit.Normal,
                     echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit)
 
 
+QtWidgets.QLineEdit.__bases__ = (widgets.Widget,)
+
+
 class LineEdit(QtWidgets.QLineEdit):
 
     value_changed = core.Signal(str)
@@ -141,9 +144,6 @@ class LineEdit(QtWidgets.QLineEdit):
 
     def is_valid(self) -> bool:
         return self.hasAcceptableInput()
-
-
-LineEdit.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

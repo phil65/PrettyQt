@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QInputDialog.__bases__ = (widgets.BaseDialog,)
+
+
 class InputDialog(QtWidgets.QInputDialog):
 
     @classmethod
@@ -41,9 +44,6 @@ class InputDialog(QtWidgets.QInputDialog):
         v = cls.getItem(par, title, label, items, editable=False)
         if v[1]:
             return v[0]
-
-
-InputDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

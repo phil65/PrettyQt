@@ -13,6 +13,9 @@ from qtpy import QtCore, QtWidgets, QtGui
 from prettyqt import core, gui
 
 
+QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
+
+
 class Application(QtWidgets.QApplication):
 
     def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
@@ -80,6 +83,3 @@ class Application(QtWidgets.QApplication):
         cls.use_hdpi_bitmaps()
         app = cls(sys.argv)
         return app
-
-
-Application.__bases__[0].__bases__ = (gui.GuiApplication,)

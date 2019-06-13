@@ -26,6 +26,9 @@ TOOLBAR_AREAS = bidict(left=QtCore.Qt.LeftToolBarArea,
                        none=QtCore.Qt.NoToolBarArea)
 
 
+QtWidgets.QMainWindow.__bases__ = (widgets.Widget,)
+
+
 class MainWindow(QtWidgets.QMainWindow):
     """
     Class for our mainWindow
@@ -140,9 +143,6 @@ class MainWindow(QtWidgets.QMainWindow):
             self.showNormal()
         else:
             self.showFullScreen()
-
-
-MainWindow.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

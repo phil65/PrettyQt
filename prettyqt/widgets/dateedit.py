@@ -10,6 +10,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets, core
 
 
+QtWidgets.QDateEdit.__bases__ = (widgets.DateTimeEdit,)
+
+
 class DateEdit(QtWidgets.QDateEdit):
 
     value_changed = core.Signal(datetime.datetime)
@@ -40,9 +43,6 @@ class DateEdit(QtWidgets.QDateEdit):
 
     def get_value(self) -> datetime.date:
         return self.get_date()
-
-
-DateEdit.__bases__[0].__bases__ = (widgets.DateTimeEdit,)
 
 
 if __name__ == "__main__":

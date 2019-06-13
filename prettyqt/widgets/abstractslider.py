@@ -18,6 +18,9 @@ ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
                       vertical=QtCore.Qt.Vertical)
 
 
+QtWidgets.QAbstractSlider.__bases__ = (widgets.Widget,)
+
+
 class AbstractSlider(QtWidgets.QAbstractSlider):
 
     value_changed = core.Signal(int)
@@ -92,9 +95,6 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
 
     def set_value(self, value: int):
         self.setValue(value)
-
-
-AbstractSlider.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

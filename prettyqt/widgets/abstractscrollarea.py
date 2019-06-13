@@ -21,6 +21,9 @@ SCROLLBAR_POLICY = bidict(always_on=QtCore.Qt.ScrollBarAlwaysOn,
                           as_needed=QtCore.Qt.ScrollBarAsNeeded)
 
 
+QtWidgets.QAbstractScrollArea.__bases__ = (widgets.Frame,)
+
+
 class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
 
     def __init__(self, *args, **kwargs):
@@ -152,9 +155,6 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         """scroll to the bottom of the scroll area
         """
         self.verticalScrollBar().scroll_to_max()
-
-
-AbstractScrollArea.__bases__[0].__bases__ = (widgets.Frame,)
 
 
 if __name__ == "__main__":

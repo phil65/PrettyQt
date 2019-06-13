@@ -18,6 +18,9 @@ WINDOW_ORDERS = bidict(creation=QtWidgets.QMdiArea.CreationOrder,
                        activation=QtWidgets.QMdiArea.ActivationHistoryOrder)
 
 
+QtWidgets.QMdiArea.__bases__ = (widgets.AbstractScrollArea,)
+
+
 class MdiArea(QtWidgets.QMdiArea):
 
     def __add__(self, other):
@@ -82,9 +85,6 @@ class MdiArea(QtWidgets.QMdiArea):
             self.addSubWindow(widget)
         else:
             self.addSubWindow(item)
-
-
-MdiArea.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 
 
 if __name__ == "__main__":

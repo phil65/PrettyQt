@@ -7,11 +7,11 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QColumnView.__bases__ = (widgets.AbstractItemView,)
+
+
 class ColumnView(QtWidgets.QColumnView):
     pass
-
-
-ColumnView.__bases__[0].__bases__ = (widgets.AbstractItemView,)
 
 
 if __name__ == "__main__":

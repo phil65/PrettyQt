@@ -36,6 +36,9 @@ BUTTONS = bidict(none=QtWidgets.QMessageBox.NoButton,
                  ignore=QtWidgets.QMessageBox.Ignore)
 
 
+QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
+
+
 class MessageBox(QtWidgets.QMessageBox):
 
     @classmethod
@@ -76,9 +79,6 @@ class MessageBox(QtWidgets.QMessageBox):
         if button not in BUTTONS:
             raise ValueError("button type not available")
         return self.addButton(BUTTONS[button])
-
-
-MessageBox.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

@@ -8,6 +8,9 @@ from qtpy import QtGui
 from prettyqt import gui, core
 
 
+QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
+
+
 class StandardItemModel(QtGui.QStandardItemModel):
 
     def __getitem__(self, index):
@@ -38,9 +41,6 @@ class StandardItemModel(QtGui.QStandardItemModel):
             item = gui.StandardItem(item)
         self.appendRow(item)
         return self.rowCount()
-
-
-StandardItemModel.__bases__[0].__bases__ = (core.AbstractItemModel,)
 
 
 if __name__ == "__main__":

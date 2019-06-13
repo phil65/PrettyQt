@@ -8,8 +8,8 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QWizardPage.__bases__ = (widgets.Widget,)
+
+
 class WizardPage(QtWidgets.QWizardPage):
     pass
-
-
-WizardPage.__bases__[0].__bases__ = (widgets.Widget,)

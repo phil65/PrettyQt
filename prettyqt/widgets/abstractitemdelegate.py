@@ -8,8 +8,8 @@ from qtpy import QtWidgets
 from prettyqt import core
 
 
+QtWidgets.QAbstractItemDelegate.__bases__ = (core.Object,)
+
+
 class AbstractItemDelegate(QtWidgets.QAbstractItemDelegate):
     pass
-
-
-AbstractItemDelegate.__bases__[0].__bases__ = (core.Object,)

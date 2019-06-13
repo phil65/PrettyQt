@@ -8,8 +8,8 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QFrame.__bases__ = (widgets.Widget,)
+
+
 class Frame(QtWidgets.QFrame):
     pass
-
-
-Frame.__bases__[0].__bases__ = (widgets.Widget,)

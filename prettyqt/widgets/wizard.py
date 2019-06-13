@@ -8,6 +8,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 
 
+QtWidgets.QWizard.__bases__ = (widgets.BaseDialog,)
+
+
 class Wizard(QtWidgets.QWizard):
 
     def add_widget_as_page(self, widget):
@@ -15,9 +18,6 @@ class Wizard(QtWidgets.QWizard):
         layout = widgets.BoxLayout("vertical", self)
         layout += widget
         page.set_layout(layout)
-
-
-Wizard.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

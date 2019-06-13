@@ -11,6 +11,9 @@ from qtpy import QtCore, QtWidgets, QtGui
 from prettyqt import widgets, gui
 
 
+QtWidgets.QDialog.__bases__ = (widgets.Widget,)
+
+
 class BaseDialog(QtWidgets.QDialog):
 
     def __getitem__(self, index):
@@ -91,9 +94,6 @@ class BaseDialog(QtWidgets.QDialog):
             self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint, stay_on_top)
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
-
-
-BaseDialog.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 class Dialog(BaseDialog):

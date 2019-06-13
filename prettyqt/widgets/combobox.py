@@ -30,6 +30,9 @@ class NoData(object):
     pass
 
 
+QtWidgets.QComboBox.__bases__ = (widgets.Widget,)
+
+
 class ComboBox(QtWidgets.QComboBox):
 
     value_changed = core.Signal(object)
@@ -172,9 +175,6 @@ class ComboBox(QtWidgets.QComboBox):
             if self.itemData(i) == value:
                 self.setCurrentIndex(i)
                 break
-
-
-ComboBox.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

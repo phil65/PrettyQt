@@ -14,6 +14,9 @@ TICK_POSITIONS = bidict(none=QtWidgets.QSlider.NoTicks,
                         below=QtWidgets.QSlider.TicksBelow)
 
 
+QtWidgets.QSlider.__bases__ = (widgets.AbstractSlider,)
+
+
 class Slider(QtWidgets.QSlider):
 
     value_changed = core.Signal(int)
@@ -80,9 +83,6 @@ class Slider(QtWidgets.QSlider):
         #     elif val == "below":
         #         return "right"
         return val
-
-
-Slider.__bases__[0].__bases__ = (widgets.AbstractSlider,)
 
 
 if __name__ == "__main__":

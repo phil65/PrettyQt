@@ -28,6 +28,9 @@ SELECTION_MODES = bidict(single=QtWidgets.QAbstractItemView.SingleSelection,
                          none=QtWidgets.QAbstractItemView.NoSelection)
 
 
+QtWidgets.QAbstractItemView.__bases__ = (widgets.AbstractScrollArea,)
+
+
 class AbstractItemView(QtWidgets.QAbstractItemView):
 
     def __len__(self):
@@ -227,6 +230,3 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
                 node.raise_()
                 return True
         return False
-
-
-AbstractItemView.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)

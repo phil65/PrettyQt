@@ -20,6 +20,9 @@ V_ALIGNMENTS = bidict(top=QtCore.Qt.AlignTop,
                       baseline=QtCore.Qt.AlignBaseline)
 
 
+QtWidgets.QSplashScreen.__bases__ = (widgets.Widget,)
+
+
 class SplashScreen(QtWidgets.QSplashScreen):
 
     def __init__(self, path, width=None):
@@ -42,6 +45,3 @@ class SplashScreen(QtWidgets.QSplashScreen):
         self.showMessage(text,
                          color=gui.Color(color),
                          alignment=H_ALIGNMENTS[h_align] | V_ALIGNMENTS[v_align])
-
-
-SplashScreen.__bases__[0].__bases__ = (widgets.Widget,)

@@ -20,6 +20,9 @@ STEP_TYPES = bidict(default=QtWidgets.QSpinBox.DefaultStepType,
                     adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType)
 
 
+QtWidgets.QAbstractSpinBox.__bases__ = (widgets.Widget,)
+
+
 class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
 
     def __init__(self, *args, **kwargs):
@@ -116,9 +119,6 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
 
     def set_value(self, value: int):
         self.setValue(value)
-
-
-AbstractSpinBox.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

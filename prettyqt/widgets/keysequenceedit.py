@@ -8,6 +8,9 @@ from qtpy import QtWidgets, QtGui
 from prettyqt import widgets, core, gui
 
 
+QtWidgets.QKeySequenceEdit.__bases__ = (widgets.Widget,)
+
+
 class KeySequenceEdit(QtWidgets.QKeySequenceEdit):
 
     value_changed = core.Signal(QtGui.QKeySequence)
@@ -28,9 +31,6 @@ class KeySequenceEdit(QtWidgets.QKeySequenceEdit):
 
     def is_valid(self) -> bool:
         return True
-
-
-KeySequenceEdit.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

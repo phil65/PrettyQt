@@ -16,6 +16,9 @@ ALLOWED_AREAS = bidict(all=QtCore.Qt.AllDockWidgetAreas,
                        bottom=QtCore.Qt.BottomDockWidgetArea)
 
 
+QtWidgets.QDockWidget.__bases__ = (widgets.Widget,)
+
+
 class DockWidget(QtWidgets.QDockWidget):
     """
     Customized DockWidget class
@@ -58,9 +61,6 @@ class DockWidget(QtWidgets.QDockWidget):
             self.showMaximized()
         else:
             self.showMinimized()
-
-
-DockWidget.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

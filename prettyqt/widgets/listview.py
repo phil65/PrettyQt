@@ -13,6 +13,9 @@ VIEW_MODES = bidict(list=QtWidgets.QListView.ListMode,
                     icon=QtWidgets.QListView.IconMode)
 
 
+QtWidgets.QListView.__bases__ = (widgets.AbstractItemView,)
+
+
 class ListView(QtWidgets.QListView):
 
     def set_view_mode(self, mode: str):
@@ -39,9 +42,6 @@ class ListView(QtWidgets.QListView):
             view mode
         """
         return VIEW_MODES.inv[self.viewMode()]
-
-
-ListView.__bases__[0].__bases__ = (widgets.AbstractItemView,)
 
 
 if __name__ == "__main__":

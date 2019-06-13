@@ -9,6 +9,9 @@ from qtpy import QtWidgets
 from prettyqt import widgets, gui
 
 
+QtWidgets.QToolBox.__bases__ = (widgets.Frame,)
+
+
 class ToolBox(QtWidgets.QToolBox):
 
     def __getitem__(self, index):
@@ -52,9 +55,6 @@ class ToolBox(QtWidgets.QToolBox):
             self.addItem(widget, icon, title)
         else:
             self.addItem(widget, title)
-
-
-ToolBox.__bases__[0].__bases__ = (widgets.Frame,)
 
 
 if __name__ == "__main__":

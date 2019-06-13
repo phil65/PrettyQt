@@ -34,6 +34,9 @@ FILTERS = bidict(dirs=core.Dir.Dirs,
                  files=core.Dir.Files)
 
 
+QtWidgets.QFileDialog.__bases__ = (widgets.BaseDialog,)
+
+
 class FileDialog(QtWidgets.QFileDialog):
     """
     simple dialog used to display some widget
@@ -218,9 +221,6 @@ class FileDialog(QtWidgets.QFileDialog):
             Pathlib object
         """
         return pathlib.Path(super().directory())
-
-
-FileDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

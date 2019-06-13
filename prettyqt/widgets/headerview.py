@@ -12,6 +12,9 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
 
+QtWidgets.QHeaderView.__bases__ = (widgets.AbstractItemView,)
+
+
 class HeaderView(QtWidgets.QHeaderView):
     MODES = bidict(interactive=QtWidgets.QHeaderView.Interactive,
                    fixed=QtWidgets.QHeaderView.Fixed,
@@ -75,9 +78,6 @@ class HeaderView(QtWidgets.QHeaderView):
         for i, size in enumerate(sizes):
             if size is not None:
                 self.resizeSection(i, size)
-
-
-HeaderView.__bases__[0].__bases__ = (widgets.AbstractItemView,)
 
 
 if __name__ == "__main__":

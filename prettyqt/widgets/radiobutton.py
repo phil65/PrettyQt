@@ -7,6 +7,9 @@ from qtpy import QtWidgets
 from prettyqt import core, widgets
 
 
+QtWidgets.QRadioButton.__bases__ = (widgets.AbstractButton,)
+
+
 class RadioButton(QtWidgets.QRadioButton):
 
     value_changed = core.Signal(bool)
@@ -31,9 +34,6 @@ class RadioButton(QtWidgets.QRadioButton):
 
     def set_value(self, value: bool):
         self.setChecked(value)
-
-
-RadioButton.__bases__[0].__bases__ = (widgets.AbstractButton,)
 
 
 if __name__ == "__main__":

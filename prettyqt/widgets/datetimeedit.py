@@ -10,6 +10,9 @@ from qtpy import QtWidgets
 from prettyqt import core, widgets
 
 
+QtWidgets.QDateTimeEdit.__bases__ = (widgets.AbstractSpinBox,)
+
+
 class DateTimeEdit(QtWidgets.QDateTimeEdit):
 
     value_changed = core.Signal(datetime.datetime)
@@ -107,9 +110,6 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
             return self.time().toPython()
         except (TypeError, AttributeError):
             return self.time().toPyTime()
-
-
-DateTimeEdit.__bases__[0].__bases__ = (widgets.AbstractSpinBox,)
 
 
 if __name__ == "__main__":

@@ -11,6 +11,9 @@ from qtpy import QtWidgets, QtGui
 from prettyqt import core, widgets, gui
 
 
+QtWidgets.QMenu.__bases__ = (widgets.Widget,)
+
+
 class Menu(QtWidgets.QMenu):
 
     def __init__(self, title="", icon=None, parent=None):
@@ -99,9 +102,6 @@ class Menu(QtWidgets.QMenu):
 
     def add_menu(self, menu: QtWidgets.QMenu):
         return self.addAction(menu.menuAction())
-
-
-Menu.__bases__[0].__bases__ = (widgets.Widget,)
 
 
 if __name__ == "__main__":

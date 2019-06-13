@@ -8,13 +8,13 @@ from qtpy import QtWidgets
 from prettyqt import gui, widgets
 
 
+QtWidgets.QFontDialog.__bases__ = (widgets.BaseDialog,)
+
+
 class FontDialog(QtWidgets.QFontDialog):
 
     def current_font(self) -> gui.Font:
         return gui.Font(self.currentFont())
-
-
-FontDialog.__bases__[0].__bases__ = (widgets.BaseDialog,)
 
 
 if __name__ == "__main__":

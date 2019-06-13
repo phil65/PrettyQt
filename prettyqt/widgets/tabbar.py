@@ -31,6 +31,9 @@ POSITIONS = bidict(left=QtWidgets.QTabBar.LeftSide,
                    right=QtWidgets.QTabBar.RightSide)
 
 
+QtWidgets.QTabBar.__bases__ = (widgets.Widget,)
+
+
 class TabBar(QtWidgets.QTabBar):
     on_detach = QtCore.Signal(int, QtCore.QPoint)
 
@@ -125,6 +128,3 @@ class TabBar(QtWidgets.QTabBar):
             elide mode
         """
         return ELIDE_MODES.inv[self.elideMode()]
-
-
-TabBar.__bases__[0].__bases__ = (widgets.Widget,)
