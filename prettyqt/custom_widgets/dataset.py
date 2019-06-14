@@ -280,11 +280,6 @@ class DataSet(object, metaclass=DataSetMeta):
             label.setWordWrap(True)
             self.dialog.box[i + 1, 0:3] = label
         self.dialog.add_buttonbox()
-        # bbox = widgets.DialogButtonBox(widgets.DialogButtonBox.Ok |
-        #                                widgets.DialogButtonBox.Cancel)
-        # self.dialog.box += bbox
-        # bbox.accepted.connect(self.dialog.accept)
-        # bbox.rejected.connect(self.dialog.reject)
 
     def edit(self):
         return self.dialog.show_blocking()
