@@ -27,8 +27,8 @@ class Settings(QtCore.QSettings):
         return f"Settings: {self.as_dict()}"
 
     def __init__(self, *args, settings_id=None):
-        self.settings_id = settings_id
         super().__init__(*args)
+        self.settings_id = settings_id
 
     def __enter__(self):
         if self.settings_id:
