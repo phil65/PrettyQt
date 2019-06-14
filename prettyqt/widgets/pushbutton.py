@@ -15,8 +15,10 @@ class PushButton(QtWidgets.QPushButton):
 
     value_changed = core.Signal(bool)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, label=None, parent=None, callback=None):
+        super().__init__(label, parent)
+        if callback:
+            self.clicked.connect(callback)
         self.toggled.connect(self.value_changed)
 
     def get_value(self):
