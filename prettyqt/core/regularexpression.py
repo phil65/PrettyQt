@@ -16,8 +16,11 @@ class RegularExpression(QtCore.QRegularExpression):
 
     def matches_in_text(self, text):
         result = self.match(text)
-        for i, hit in enumerate(result.capturedTexts()):
-            yield result.capturedStart(i), result.capturedLength(i)
+        while result.hasMatch():
+            length = result.capturedLength(0)
+            index = result.capturedStart(0)
+            yield index, length
+            result = self.match(text, index + length)
 
 
 if __name__ == "__main__":

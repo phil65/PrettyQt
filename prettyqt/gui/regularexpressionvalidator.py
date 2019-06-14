@@ -24,7 +24,7 @@ class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
         self.setRegularExpression(state["regexp"])
 
     def set_regex(self, regex: str):
-        re = core.RegExp(regex)
+        re = core.RegularExpression(regex)
         self.setRegularExpression(re)
 
     def get_regex(self) -> str:

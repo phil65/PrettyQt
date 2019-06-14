@@ -87,8 +87,8 @@ class LineEdit(QtWidgets.QLineEdit):
         """
         self.setReadOnly(value)
 
-    def set_regex_validator(self, regex: str) -> gui.RegExpValidator:
-        validator = gui.RegExpValidator(self)
+    def set_regex_validator(self, regex: str) -> gui.RegularExpressionValidator:
+        validator = gui.RegularExpressionValidator(self)
         validator.set_regex(regex)
         self.setValidator(validator)
         return validator

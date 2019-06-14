@@ -99,6 +99,16 @@ def test_regexp():
     assert len(a) == 2
 
 
+def test_regularexpression():
+    regex = core.RegularExpression("[0-9]")
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(regex, jar)
+    with open("data.pkl", "rb") as jar:
+        regex = pickle.load(jar)
+    a = list(regex.matches_in_text("0a4"))
+    assert len(a) == 2
+
+
 def test_runnable():
     core.Runnable()
 

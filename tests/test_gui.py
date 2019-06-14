@@ -116,6 +116,17 @@ def test_regexpvalidator():
     assert val.is_valid_value("0")
 
 
+def test_regularexpressionvalidator():
+    val = gui.RegularExpressionValidator()
+    val.set_regex("[0-9]")
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(val, jar)
+    with open("data.pkl", "rb") as jar:
+        val = pickle.load(jar)
+    assert val.get_regex() == "[0-9]"
+    assert val.is_valid_value("0")
+
+
 def test_syntaxhighlighter():
     gui.SyntaxHighlighter(None)
 
