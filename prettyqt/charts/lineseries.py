@@ -5,21 +5,33 @@
 
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
+from prettyqt import core, charts
 
 STYLES = {QtCore.Qt.SolidLine: "Solid",
           QtCore.Qt.DotLine: "Dot",
           QtCore.Qt.DashDotLine: "Dash-dot"}
 
 
+QtCharts.QLineSeries.__bases__ = (charts.XYSeries,)
+
+
 class LineSeries(QtCharts.QLineSeries):
 
-    def __getstate__(self):
-        return dict(points=self.pointsVector())
+    """
+    QLineSeries with some custom properties
+    """
 
-    def __setstate__(self, state):
-        self.__init__()
-        super().append(state["points"])
-        pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._process_name = ""
+
+    @core.Property(object)
+    def process_name(self):
+        return self._process_name
+
+    @process_name.setter
+    def process_name(self, value):
+        self._process_name = value
 
 
 if __name__ == "__main__":
