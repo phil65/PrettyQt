@@ -7,7 +7,7 @@ from qtpy.QtCharts import QtCharts
 from prettyqt import charts
 
 
-QtCharts.ScatterSeries.__bases__ = (charts.XYSeries,)
+QtCharts.QScatterSeries.__bases__ = (charts.XYSeries,)
 
 
 class ScatterSeries(QtCharts.QScatterSeries):
