@@ -6,6 +6,11 @@
 from prettyqt import core, gui
 
 
+BRACKETS = core.RegularExpression("(\\{|\\}|\\[|\\]|\\:|\\,)")
+REGEXP1 = core.RegularExpression("\".*\" *\\:")
+REGEXP2 = core.RegularExpression("\\: *\".*\"")
+
+
 class JsonHighlighter(gui.SyntaxHighlighter):
 
     def __init__(self, parent=None):
@@ -28,18 +33,20 @@ class JsonHighlighter(gui.SyntaxHighlighter):
     def highlightBlock(self, text):
         """ Highlight a block of code using the rules outlined in the Constructor
         """
-        expression = core.RegExp("(\\{|\\}|\\[|\\]|\\:|\\,)")
-        for index, length in expression.matches_in_text(text):
+        for index, length in BRACKETS.matches_in_text(text):
             self.setFormat(index, length, self.symbol_format)
 
         text.replace("\\\"", "  ")
-
-        expression = core.RegExp("\".*\" *\\:")
-        expression.setMinimal(True)
-        for index, length in expression.matches_in_text(text):
+        for index, length in REGEXP1.matches_in_text(text):
             self.setFormat(index, length, self.name_format)
-
-        expression = core.RegExp("\\: *\".*\"")
-        expression.setMinimal(True)
-        for index, length in expression.matches_in_text(text):
+        for index, length in REGEXP2.matches_in_text(text):
             self.setFormat(index, length, self.value_format)
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+    app = widgets.app()
+    editor = widgets.PlainTextEdit()
+    highlighter = JsonHighlighter(editor.document())
+    editor.show()
+    app.exec_()
