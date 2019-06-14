@@ -8,6 +8,7 @@ contains QtGui-based classes
 from .guiapplication import GuiApplication
 from .validator import Validator
 from .regexpvalidator import RegExpValidator
+from .regularexpressionvalidator import RegularExpressionValidator
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
 from .brush import Brush
@@ -33,6 +34,7 @@ from .keysequence import KeySequence
 __all__ = ["GuiApplication",
            "Validator",
            "RegExpValidator",
+           "RegularExpressionValidator",
            "IntValidator",
            "DoubleValidator",
            "Brush",
