@@ -72,8 +72,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def create(cls, **kwargs):
         box = cls()
         for k, v in kwargs.items():
-            btn = box.add_default_button(k)
-            btn.clicked.connect(v)
+            box.add_default_button(k, callback=v)
         return box
 
     def on_click(self, button):
@@ -110,10 +109,10 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         """
         return ORIENTATIONS.inv[self.orientation()]
 
-    def add_buttons(self, buttons: List[str]):
+    def add_default_buttons(self, buttons: List[str]):
         return [self.add_default_button(btn) for btn in buttons]
 
-    def add_default_button(self, button: str):
+    def add_default_button(self, button: str, callback=None):
         """add a default button
 
         Valid arguments: "cancel", "ok", "save", "open", "close",
@@ -123,6 +122,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
         Args:
             button: button to add
+            callback: function to call when button gets clicked
 
         Returns:
             created button
@@ -134,17 +134,30 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
             raise ValueError("button type not available")
         btn = self.addButton(BUTTONS[button])
         btn.setObjectName(button)
+        if callback:
+            btn.clicked.connect(callback)
         return btn
 
-    def add_accept_button(self, button: QtWidgets.QPushButton):
-        btn = self.addButton(button, self.AcceptRole)
-        btn.setObjectName(button)
-        return btn
+    def add_button(self, button, role="accept", callback=None):
+        """add a button
 
-    def add_reject_button(self, button: QtWidgets.QPushButton):
-        btn = self.addButton(button, self.RejectRole)
-        btn.setObjectName(button)
-        return btn
+        Args:
+            button: button to add
+            role: role of the button
+            callback: function to call when button gets clicked
+
+        Returns:
+            created button
+
+        Raises:
+            ValueError: Button type not available
+        """
+        if isinstance(button, str):
+            button = widgets.PushButton(button)
+        self.addButton(button, ROLES[role])
+        if callback:
+            button.clicked.connect(callback)
+        return button
 
 
 if __name__ == "__main__":
@@ -152,7 +165,7 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = DialogButtonBox()
     buttons = list(BUTTONS.keys())
-    widget.add_buttons(buttons)
+    widget.add_default_buttons(buttons)
     widget.button_clicked.connect(print)
     widget.show()
     app.exec_()
