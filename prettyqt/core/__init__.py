@@ -26,6 +26,7 @@ from .thread import Thread
 # from .rect import Rect
 # from .rectf import RectF
 from .regexp import RegExp
+from .regularexpression import RegularExpression
 from .mimedata import MimeData
 from .runnable import Runnable
 from .modelindex import ModelIndex
@@ -70,6 +71,7 @@ __all__ = ["Object",
            "Slot",
            "Property",
            "RegExp",
+           "RegularExpression",
            "Runnable",
            "ModelIndex",
            "ThreadPool",
