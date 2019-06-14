@@ -72,7 +72,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def create(cls, **kwargs):
         box = cls()
         for k, v in kwargs.items():
-            btn = box.add_button(k)
+            btn = box.add_default_button(k)
             btn.clicked.connect(v)
         return box
 
@@ -111,9 +111,9 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         return ORIENTATIONS.inv[self.orientation()]
 
     def add_buttons(self, buttons: List[str]):
-        return [self.add_button(btn) for btn in buttons]
+        return [self.add_default_button(btn) for btn in buttons]
 
-    def add_button(self, button: str):
+    def add_default_button(self, button: str):
         """add a default button
 
         Valid arguments: "cancel", "ok", "save", "open", "close",

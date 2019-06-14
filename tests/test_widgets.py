@@ -168,7 +168,7 @@ def test_dialogbuttonbox():
     box = widgets.DialogButtonBox()
     box.set_horizontal()
     box.set_vertical()
-    btn = box.add_button("apply")
+    btn = box.add_default_button("apply")
     assert len(box) == 1
     assert btn == box["apply"]
     for item in box:
