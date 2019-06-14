@@ -15,3 +15,6 @@ class MimeData(QtCore.QMimeData):
 
     def set_data(self, mime_type, data):
         self.setData(mime_type, QtCore.QByteArray(data.encode()))
+
+    def get_data(self, mime_type):
+        return bytes(self.data(mime_type)).decode()

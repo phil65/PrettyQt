@@ -199,6 +199,12 @@ class Widget(QtWidgets.QWidget):
         if self.box is not None:
             self.setLayout(self.box)
 
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QtWidgets.QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])

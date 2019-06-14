@@ -130,6 +130,9 @@ class Label(QtWidgets.QLabel):
         """
         return TEXT_INTERACTION.inv[self.textInteractionFlags()]
 
+    def set_text(self, text: str):
+        self.setText(text)
+
     def set_image(self,
                   path: Union[pathlib.Path, str],
                   width: int = 300):
