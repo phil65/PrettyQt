@@ -58,6 +58,14 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if old_sel_model:
             del old_sel_model
 
+    def set_delegate(self, delegate, column=None, row=None):
+        if column is not None:
+            self.setItemDelegateForColumn(column, delegate)
+        elif row is not None:
+            self.setItemDelegateForRow(column, delegate)
+        else:
+            self.setItemDelegate(delegate)
+
     def toggle_select_all(self):
         """
         select all items from list (deselect when all selected)
