@@ -22,10 +22,11 @@ class LineEdit(QtWidgets.QLineEdit):
 
     value_changed = core.Signal(str)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, default_value="", read_only=False, parent=None):
+        super().__init__(default_value, parent)
         self.textChanged.connect(self.set_validation_color)
         self.textChanged.connect(self.value_changed)
+        self.set_read_only(read_only)
 
     def __repr__(self):
         return f"LineEdit: {self.__getstate__()}"

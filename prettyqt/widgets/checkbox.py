@@ -21,9 +21,10 @@ class CheckBox(QtWidgets.QCheckBox):
 
     value_changed = core.Signal(int)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, label="", parent=None, checked=False):
+        super().__init__(label, parent)
         self.stateChanged.connect(self.value_changed)
+        self.setChecked(checked)
 
     def __getstate__(self):
         return dict(object_name=self.id,
