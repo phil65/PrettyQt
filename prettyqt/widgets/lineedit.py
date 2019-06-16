@@ -65,14 +65,6 @@ class LineEdit(QtWidgets.QLineEdit):
     def font(self) -> gui.Font:
         return gui.Font(super().font())
 
-    def set_font(self,
-                 font_name: str,
-                 font_size: int = -1,
-                 weight: int = -1,
-                 italic: bool = False):
-        font = gui.Font(font_name, font_size, weight, italic)
-        self.setFont(font)
-
     def append_text(self, text: str):
         self.set_text(self.text() + text)
 

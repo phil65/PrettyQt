@@ -38,14 +38,6 @@ class TextEdit(QtWidgets.QTextEdit):
             self.append_text(other)
             return self
 
-    def set_font(self,
-                 font_name: str,
-                 font_size: int = -1,
-                 weight: int = -1,
-                 italic: bool = False):
-        font = gui.Font(font_name, font_size, weight, italic)
-        self.setFont(font)
-
     def set_text(self, text: str):
         self.setPlainText(text)
 

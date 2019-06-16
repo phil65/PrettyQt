@@ -8,7 +8,7 @@ from contextlib import contextmanager
 
 from qtpy import QtWidgets, QtCore, QtGui
 
-from prettyqt import widgets, core
+from prettyqt import widgets, core, gui
 from prettyqt.utils import bidict
 
 
@@ -77,6 +77,16 @@ class Widget(QtWidgets.QWidget):
 
     def set_title(self, title: str):
         self.setWindowTitle(title)
+
+    def set_font(self,
+                 font_name: Optional[str] = None,
+                 font_size: int = -1,
+                 weight: int = -1,
+                 italic: bool = False):
+        if font_name is None:
+            font_name = self.font().family()
+        font = gui.Font(font_name, font_size, weight, italic)
+        self.setFont(font)
 
     def set_modality(self, modality: str = "window"):
         """set modality for the dialog
