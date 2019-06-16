@@ -69,7 +69,7 @@ class CodeEditor(widgets.PlainTextEdit):
 
     def line_area_paintevent(self, event):
         painter = gui.Painter(self.line_area)
-        painter.fillRect(event.rect(), gui.Color("lightgray"))
+        painter.fill_rect(event.rect(), "lightgray")
 
         block = self.firstVisibleBlock()
         block_number = block.blockNumber()
