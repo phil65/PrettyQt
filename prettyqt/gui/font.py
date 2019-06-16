@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtGui
+from prettyqt import gui
 
 
 class Font(QtGui.QFont):
@@ -25,6 +26,10 @@ class Font(QtGui.QFont):
             self.setPointSize(state["pointsize"])
         self.setWeight(state["weight"])
         self.setItalic(state["italic"])
+
+    @property
+    def metrics(self):
+        return gui.FontMetrics(self)
 
     def set_size(self, size: int):
         pass
