@@ -53,6 +53,12 @@ class Widget(QtWidgets.QWidget):
         else:
             super().resize(*size)
 
+    def set_min_size(self, *size):
+        self.setMinimumSize(*size)
+
+    def set_max_size(self, *size):
+        self.setMaximumSize(*size)
+
     @property
     def title(self) -> str:
         return self.windowTitle()
@@ -82,11 +88,12 @@ class Widget(QtWidgets.QWidget):
                  font_name: Optional[str] = None,
                  font_size: int = -1,
                  weight: int = -1,
-                 italic: bool = False):
+                 italic: bool = False) -> gui.Font:
         if font_name is None:
             font_name = self.font().family()
         font = gui.Font(font_name, font_size, weight, italic)
         self.setFont(font)
+        return font
 
     def set_modality(self, modality: str = "window"):
         """set modality for the dialog
