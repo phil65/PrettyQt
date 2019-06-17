@@ -19,7 +19,8 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         super().__init__(parent)
         self.valueChanged.connect(self.value_changed)
         self.set_range(min_value, max_value)
-        self.set_value(default_value)
+        if default_value is not None:
+            self.set_value(default_value)
 
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
