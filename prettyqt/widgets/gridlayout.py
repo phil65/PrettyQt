@@ -59,6 +59,9 @@ class GridLayout(QtWidgets.QGridLayout):
         fn = self.addWidget if isinstance(item, QtWidgets.QWidget) else self.addLayout
         fn(item, rowstart, colstart, rowspan, colspan)
 
+    def append(self, item):
+        self[self.rowCount(), 0:self.columnCount() - 1] = item
+
 
 if __name__ == "__main__":
     app = widgets.app()

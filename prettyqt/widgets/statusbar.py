@@ -45,6 +45,9 @@ class StatusBar(QtWidgets.QStatusBar):
         else:
             self.addWidget(widget)
 
+    def show_message(self, message: str, timeout=0):
+        self.showMessage(message, timeout)
+
 
 if __name__ == "__main__":
     app = widgets.app()

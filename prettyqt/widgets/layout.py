@@ -29,6 +29,9 @@ class Layout(QtWidgets.QLayout):
     def set_margin(self, margin: int):
         self.setContentsMargins(margin, margin, margin, margin)
 
+    def set_spacing(self, pixels: int):
+        self.setSpacing(pixels)
+
     def set_size_mode(self, mode: str):
         """set the size mode of the layout
 

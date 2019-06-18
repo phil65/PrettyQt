@@ -62,6 +62,9 @@ class Action(QtWidgets.QAction):
     def set_tooltip(self, text: str):
         self.setToolTip(text)
 
+    def set_checked(self, value: bool):
+        self.setChecked(value)
+
     def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
         """set the icon for the action
 
