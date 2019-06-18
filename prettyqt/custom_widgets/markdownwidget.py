@@ -11,7 +11,7 @@ class MarkdownWindow(widgets.MainWindow):
     def __init__(self):
         super().__init__()
         self.resize(500, 500)
-        self.web_view = widgets.TextBrowser(self)
+        self.web_view = widgets.TextBrowser()
         self.setCentralWidget(self.web_view)
         # self.web_view.loadFinished.connect(self._load_finished)
         self.create_menu()
@@ -24,12 +24,12 @@ class MarkdownWindow(widgets.MainWindow):
 
     def create_menu(self):
         act_exit = widgets.Action(gui.Icon("exit.png"), "&Exit", self)
-        act_exit.setShortcut("Ctrl+Q")
+        act_exit.set_shortcut("Ctrl+Q")
         act_exit.setStatusTip("Exit application")
         act_exit.triggered.connect(self.close)
 
         act_open = widgets.Action(gui.Icon("open.png"), "&Open", self)
-        act_open.setShortcut("Ctrl+O")
+        act_open.set_shortcut("Ctrl+O")
         act_open.setStatusTip("Open Markdown file")
         act_open.triggered.connect(self.open_new_file)
 

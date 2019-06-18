@@ -43,13 +43,13 @@ class SelectionWidget(widgets.GroupBox):
         self.buttons[rb] = data
         if len(self.buttons) == 1:
             with rb.block_signals():
-                rb.setChecked(True)
+                rb.set_value(True)
         self.box += rb
 
     def add_custom(self, label: str = "Other", regex: Optional[str] = None):
         self.lineedit_custom_sep = widgets.LineEdit()
         # TODO: Enable this or add BAR radio and option.
-        self.lineedit_custom_sep.setEnabled(False)
+        self.lineedit_custom_sep.set_disabled()
         self.rb_other.setText(label)
         self.rb_other.toggled.connect(self.lineedit_custom_sep.set_enabled)
         self.lineedit_custom_sep.textChanged.connect(lambda: self.update_choice(True))

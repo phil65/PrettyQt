@@ -75,8 +75,8 @@ class Widget(QtWidgets.QWidget):
     def enabled(self, state: bool):
         self.setEnabled(state)
 
-    def set_enabled(self):
-        self.setEnabled(True)
+    def set_enabled(self, enabled: bool = True):
+        self.setEnabled(enabled)
 
     def set_disabled(self):
         self.setEnabled(False)

@@ -14,7 +14,7 @@ class FlowLayout(widgets.Layout):
         super().__init__(parent)
         if parent is not None:
             self.set_margin(margin)
-        self.setSpacing(spacing)
+        self.set_spacing(spacing)
         self.items = []
 
     def __getstate__(self):

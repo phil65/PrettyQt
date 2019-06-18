@@ -40,7 +40,7 @@ class LabeledSlider(widgets.Widget):
         self.sl.setTickInterval(1)
         self.sl.setSingleStep(1)
 
-        self.layout.addWidget(self.sl)
+        self.layout.add(self.sl)
 
     def paintEvent(self, e):
 

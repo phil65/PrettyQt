@@ -3,12 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore
 
 from prettyqt import core, widgets
 
 
-class PopupInfo(QtWidgets.QDialog):
+class PopupInfo(widgets.Dialog):
     """
     dialog overlay to show some info to user
     """
