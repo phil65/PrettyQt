@@ -12,7 +12,6 @@ class ColorChooserButton(widgets.Widget):
 
     def __init__(self, color=None, parent=None):
         super().__init__(parent)
-        self.current_color = color
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
@@ -24,6 +23,8 @@ class ColorChooserButton(widgets.Widget):
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
         layout += self.button
+        if color is not None:
+            self.set_color(color)
 
     def __repr__(self):
         return f"ColorChooserButton({self.current_color})"
@@ -53,11 +54,11 @@ class ColorChooserButton(widgets.Widget):
             self.current_color = gui.Color(color)
         else:
             self.current_color = color
-        self.lineedit.setText(self.current_color.name().upper())
+        self.lineedit.set_text(self.current_color.name().upper())
         icon = gui.Icon.for_color(self.current_color)
         self.button.set_icon(icon)
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         return self.lineedit.is_valid()
 
     def get_value(self):
@@ -69,8 +70,7 @@ class ColorChooserButton(widgets.Widget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    btn = ColorChooserButton()
-    btn.set_color(gui.Color("green"))
+    btn = ColorChooserButton(gui.Color("green"))
     btn.show()
     btn.value_changed.connect(print)
     app.exec_()
