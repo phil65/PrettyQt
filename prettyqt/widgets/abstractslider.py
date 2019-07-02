@@ -6,16 +6,6 @@
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict
-
-
-TICK_POSITIONS = bidict(none=QtWidgets.QSlider.NoTicks,
-                        both_sides=QtWidgets.QSlider.TicksBothSides,
-                        above=QtWidgets.QSlider.TicksAbove,
-                        below=QtWidgets.QSlider.TicksBelow)
-
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
-                      vertical=QtCore.Qt.Vertical)
 
 
 QtWidgets.QAbstractSlider.__bases__ = (widgets.Widget,)
@@ -24,10 +14,6 @@ QtWidgets.QAbstractSlider.__bases__ = (widgets.Widget,)
 class AbstractSlider(QtWidgets.QAbstractSlider):
 
     value_changed = core.Signal(int)
-
-    def __init__(self, orientation="horizontal", parent=None):
-        super().__init__(ORIENTATIONS[orientation], parent)
-        self.valueChanged.connect(self.on_value_change)
 
     def on_value_change(self):
         self.value_changed.emit(self.value())

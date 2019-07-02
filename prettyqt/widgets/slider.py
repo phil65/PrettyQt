@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets, core
 from prettyqt.utils import bidict
@@ -13,6 +13,9 @@ TICK_POSITIONS = bidict(none=QtWidgets.QSlider.NoTicks,
                         above=QtWidgets.QSlider.TicksAbove,
                         below=QtWidgets.QSlider.TicksBelow)
 
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
+                      vertical=QtCore.Qt.Vertical)
+
 
 QtWidgets.QSlider.__bases__ = (widgets.AbstractSlider,)
 
@@ -20,6 +23,10 @@ QtWidgets.QSlider.__bases__ = (widgets.AbstractSlider,)
 class Slider(QtWidgets.QSlider):
 
     value_changed = core.Signal(int)
+
+    def __init__(self, orientation="horizontal", parent=None):
+        super().__init__(ORIENTATIONS[orientation], parent)
+        self.valueChanged.connect(self.on_value_change)
 
     def __getstate__(self):
         return dict(range=(self.minimum(), self.maximum()),
