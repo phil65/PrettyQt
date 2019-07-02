@@ -275,12 +275,13 @@ class DataSet(object, metaclass=DataSetMeta):
         self.dialog.title = title
         self.dialog.set_icon(icon)
         self.dialog.set_layout("grid")
-        self.dialog.box.setSpacing(20)
+        self.dialog.box.set_spacing(20)
         self.dialog.box.set_margin(20)
         for i, (k, item) in enumerate(self._items.items()):
             self.dialog.box[i, item.label_col] = widgets.Label(item.label)
             self.dialog.box[i, item.label_col + 1:item.label_col + 3] = item.widget
             item.widget.id = k
+            item.widget.value_changed.connect(self.on_update)
             for active in item.active_on:
                 item.widget.setEnabled(self._items[active].widget.get_value())
                 self._items[active].widget.value_changed.connect(item.widget.setEnabled)
@@ -291,7 +292,11 @@ class DataSet(object, metaclass=DataSetMeta):
             label = widgets.Label(comment)
             label.setWordWrap(True)
             self.dialog.box[i + 1, 0:3] = label
-        self.dialog.add_buttonbox()
+        button_box = widgets.DialogButtonBox()
+        self.ok_btn = button_box.add_default_button("ok", callback=self.dialog.accept)
+        button_box.add_default_button("cancel", callback=self.dialog.reject)
+        self.dialog.box.append(button_box)
+        self.on_update()
 
     def edit(self):
         return self.dialog.show_blocking()
@@ -306,12 +311,18 @@ class DataSet(object, metaclass=DataSetMeta):
             if item.id in dct and dct[item.id] is not None:
                 item.set_value(dct[item.id])
 
+    def on_update(self):
+        is_valid = all(i.is_valid() for i in self._items.values())
+        self.ok_btn.setEnabled(is_valid)
+
 
 if __name__ == "__main__":
     app = widgets.app()
 
     class Test(DataSet):
         boolitem = BoolItem(label="My first one")
+        string1 = StringItem(label="My first one", regex="[0-9]")
+        string2 = StringItem(label="My second one", notempty=True)
         stringitem = ChoiceItem(label="A", choices=["A", "B"]).set_not_active("boolitem")
         floatitem = FloatItem(label="My first one").set_active("boolitem")
 
