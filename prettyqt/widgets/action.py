@@ -53,8 +53,8 @@ class Action(QtWidgets.QAction):
     def set_text(self, text: str):
         self.setText(text)
 
-    def set_enabled(self):
-        self.setEnabled(True)
+    def set_enabled(self, enabled: bool = True):
+        self.setEnabled(enabled)
 
     def set_disabled(self):
         self.setEnabled(False)
