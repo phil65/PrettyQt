@@ -46,7 +46,7 @@ class FileChooserButton(widgets.Widget):
         dialog = widgets.FileDialog(parent=self, path_id="file_path")
         dialog.set_accept_mode(self.mode)
         if self.extensions:
-            dialog.setNameFilter(self.extensions)
+            dialog.set_filter(self.extensions)
         if not dialog.open_file():
             return None
         self.set_path(dialog.selected_file())

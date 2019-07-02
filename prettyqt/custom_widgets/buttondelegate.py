@@ -19,7 +19,7 @@ class ButtonDelegate(widgets.ItemDelegate):
         btn_callback = index.data(self.fn_role)
         btn = widgets.PushButton(label, parent)
         if not btn_callback:
-            btn.setEnabled(False)
+            btn.set_disabled()
         else:
             btn.clicked.connect(btn_callback)
         # btn.setStyleSheet("border:1px;")
