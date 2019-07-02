@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from prettyqt import custom_widgets, widgets
+from prettyqt import custom_widgets, widgets, custom_validators, gui
 
 
 class DataItem(object):
@@ -38,6 +38,9 @@ class DataItem(object):
         # self.set_prop("display", active=prop)
         self.not_active_on.append(prop)
         return self
+
+    def is_valid(self):
+        return True
 
 
 class FloatItem(DataItem):
@@ -102,12 +105,21 @@ class StringItem(DataItem):
         * notempty [bool]: if True, empty string is not a valid value (opt.)
     """
 
-    def __init__(self, label, default=None, notempty=None,
-                 regex=None):
+    def __init__(self, label, default=None, notempty=False, regex=None):
         super().__init__(label, default=default)
         self.widget = widgets.LineEdit()
+        if notempty:
+            val = custom_validators.NotEmptyValidator()
+            self.widget.set_validator(val)
+        if regex is not None:
+            val = gui.RegExpValidator()
+            val.set_regex(regex)
+            self.widget.set_validator(val)
         if default is not None:
             self.widget.set_value(default)
+
+    def is_valid(self):
+        return self.widget.is_valid()
 
 
 class BoolItem(DataItem):
