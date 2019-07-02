@@ -84,6 +84,7 @@ class LineEdit(QtWidgets.QLineEdit):
         validator = gui.RegExpValidator(self)
         validator.set_regex(regex)
         self.setValidator(validator)
+        self.set_validation_color()
         return validator
 
     def set_range(self, lower, upper):
@@ -93,6 +94,7 @@ class LineEdit(QtWidgets.QLineEdit):
 
     def set_validator(self, validator: gui.Validator):
         self.setValidator(validator)
+        self.set_validation_color()
 
     def set_input_mask(self, mask: str):
         self.setInputMask(mask)
@@ -100,7 +102,7 @@ class LineEdit(QtWidgets.QLineEdit):
     def set_color(self, color: str):
         self.setStyleSheet(f"background-color: {color};")
 
-    def set_validation_color(self, state: bool):
+    def set_validation_color(self, state: bool = True):
         color = "rgb(255, 175, 90)" if not self.is_valid() else "white"
         self.set_color(color)
 
