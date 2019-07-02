@@ -36,6 +36,5 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             return None
         path = self.filePath(index)
         flags = self.filter() | QtCore.QDir.NoDotAndDotDot
-        it = core.DirIterator(path, flags)
-        while it.hasNext():
-            yield self.index(it.next())
+        for it in core.DirIterator(path, flags):
+            yield self.index(it)
