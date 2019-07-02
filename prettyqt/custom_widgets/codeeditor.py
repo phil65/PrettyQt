@@ -52,7 +52,7 @@ class CodeEditor(widgets.PlainTextEdit):
 
     def line_area_width(self) -> int:
         digits = len(str(self.blockCount()))
-        space = 3 + self.fontMetrics().width("9") * digits
+        space = 3 + self.fontMetrics().boundingRect("9").width() * digits
         return space
 
     def update_line_area_width(self, _):

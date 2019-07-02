@@ -5,7 +5,7 @@
 
 from qtpy import QtCore
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, gui
 
 
 class PopupInfo(widgets.Dialog):
@@ -32,7 +32,7 @@ class PopupInfo(widgets.Dialog):
 
     def show(self, *args, **kwargs):
         self.hide()
-        screen_geo = widgets.Application.desktop().screenGeometry()
+        screen_geo = gui.GuiApplication.screens()[0].geometry()
         size = self.label.sizeHint()
         x = (screen_geo.width() - size.width()) / 2
         y = (screen_geo.height() - size.height()) / 2
