@@ -8,7 +8,10 @@ contains QtGui-based classes
 from .guiapplication import GuiApplication
 from .validator import Validator
 from .regexpvalidator import RegExpValidator
-from .regularexpressionvalidator import RegularExpressionValidator
+try:
+    from .regularexpressionvalidator import RegularExpressionValidator
+except AttributeError:
+    pass
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
 from .brush import Brush
