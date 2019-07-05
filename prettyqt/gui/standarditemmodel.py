@@ -3,12 +3,19 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui
+from qtpy import QtGui, QtCore
 
 from prettyqt import gui, core
 
 
 QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
+
+MATCH_FLAGS = dict(exact=QtCore.Qt.MatchExactly,
+                   contains=QtCore.Qt.MatchContains,
+                   starts_with=QtCore.Qt.MatchStartsWith,
+                   ends_with=QtCore.Qt.MatchEndsWith,
+                   wildcard=QtCore.Qt.MatchWildcard,
+                   regex=QtCore.Qt.MatchRegExp)
 
 
 class StandardItemModel(QtGui.QStandardItemModel):
@@ -41,6 +48,11 @@ class StandardItemModel(QtGui.QStandardItemModel):
             item = gui.StandardItem(item)
         self.appendRow(item)
         return self.rowCount()
+
+    def find_items(self, text: str, column: int = 0, mode: str = "exact") -> list:
+        if mode not in MATCH_FLAGS:
+            raise ValueError()
+        return self.findItems(text, MATCH_FLAGS[mode], column)
 
 
 if __name__ == "__main__":
