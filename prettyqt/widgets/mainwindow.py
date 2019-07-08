@@ -65,7 +65,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.resize(*state["size"])
         self.box = self.layout()
 
-    def add_toolbar(self, toolbar, position):
+    def add_toolbar(self, toolbar, position: str = "top"):
         """adds a toolbar to the mainmenu at specified area
 
         Valid values for position: "left", "right", "top", "bottom"
@@ -79,7 +79,23 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         if position not in TOOLBAR_AREAS:
             raise ValueError("Position not existing")
-        self.addToolBar(position, TOOLBAR_AREAS[position])
+        self.addToolBar(TOOLBAR_AREAS[position], toolbar)
+
+    def add_toolbar_break(self, position: str = "top"):
+        """Adds a toolbar break to the given area
+        after all the other objects that are present.
+
+        Valid values for position: "left", "right", "top", "bottom"
+
+        Args:
+            position: position of the toolbar
+
+        Raises:
+            ValueError: position does not exist
+        """
+        if position not in TOOLBAR_AREAS:
+            raise ValueError("Position not existing")
+        self.addToolBarBreak(TOOLBAR_AREAS[position])
 
     def load_window_state(self):
         settings = core.Settings()
