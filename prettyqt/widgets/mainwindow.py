@@ -152,6 +152,10 @@ class MainWindow(QtWidgets.QMainWindow):
         position = DOCK_POSITIONS[position]
         self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dockwidget)
 
+    def remove_dockwidgets(self, dockwidgets: list):
+        for i in dockwidgets:
+            self.removeDockWidget(i)
+
     def toggle_fullscreen(self):
         """toggle between fullscreen and regular size
         """
