@@ -34,6 +34,9 @@ class MenuBar(QtWidgets.QMenuBar):
             return menu
         return self.addMenu(menu)
 
+    def add_separator(self):
+        self.addSeparator()
+
     def add(self, item):
         if isinstance(item, QtWidgets.QMenu):
             return self.add_menu(item)
