@@ -58,6 +58,9 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if old_sel_model:
             del old_sel_model
 
+    def set_model(self, model):
+        self.setModel(model)
+
     def set_delegate(self, delegate, column=None, row=None):
         if column is not None:
             self.setItemDelegateForColumn(column, delegate)
