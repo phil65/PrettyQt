@@ -37,6 +37,12 @@ class TreeView(QtWidgets.QTreeView):
     def h_header(self, header):
         self.setHeader(header)
 
+    def expand_all(self):
+        self.expandAll()
+
+    def set_indentation(self, indentation: int):
+        self.setIndentation(indentation)
+
     def setup_list_style(self):
         self.setSelectionBehavior(self.SelectRows)
         self.h_header.setStretchLastSection(True)
