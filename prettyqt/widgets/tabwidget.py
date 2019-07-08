@@ -22,10 +22,10 @@ class TabWidget(QtWidgets.QTabWidget):
     Widget for managing the tabs section
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, parent=None, closable=False, detachable=False):
 
         # Basic initalization
-        super().__init__(*args, **kwargs)
+        super().__init__(parent)
         self.tabCloseRequested.connect(self.remove_tab)
         self.tab_bar = widgets.TabBar(self)
 
@@ -34,6 +34,9 @@ class TabWidget(QtWidgets.QTabWidget):
         # Used to keep a reference to detached tabs since their QMainWindow
         # does not have a parent
         self.detached_tabs = dict()
+        if detachable:
+            self.set_detachable()
+        self.set_closable(closable)
 
     def __len__(self):
         return self.count()
@@ -104,6 +107,9 @@ class TabWidget(QtWidgets.QTabWidget):
         self.tab_bar.on_detach.connect(self.detach_tab)
         QtWidgets.qApp.aboutToQuit.connect(self.close_detached_tabs)
         self.setMovable(True)
+
+    def set_closable(self, closable: bool = True):
+        self.setTabsClosable(closable)
 
     @core.Slot(int, QtCore.QPoint)
     def detach_tab(self, index: int, point: QtCore.QPoint):
