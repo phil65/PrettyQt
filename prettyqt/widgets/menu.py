@@ -44,6 +44,9 @@ class Menu(QtWidgets.QMenu):
             icon = qta.icon(icon)
         self.setIcon(icon)
 
+    def add_separator(self):
+        self.addSeparator()
+
     def _separator(self, text: str) -> widgets.WidgetAction:
         """returns a separator showing a label
 
