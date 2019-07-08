@@ -10,7 +10,7 @@ from typing import Optional, Union
 import qtawesome as qta
 from qtpy import QtCore, QtWidgets, QtGui
 
-from prettyqt import core, gui
+from prettyqt import core, gui, widgets
 
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
@@ -48,6 +48,18 @@ class Application(QtWidgets.QApplication):
             self.setOrganizationName(org_name)
         if org_domain:
             self.setOrganizationDomain(org_domain)
+
+    def about_popup(self, title="About"):
+        text = (f"{self.applicationName()}\n\n"
+                f"{self.organizationName()}\n"
+                f"{self.applicationVersion()}\n"
+                f"{self.organizationDomain()}")
+        popup = widgets.MessageBox(widgets.MessageBox.NoIcon,
+                                   title,
+                                   text,
+                                   buttons=widgets.MessageBox.Ok)
+        popup.set_icon("mdi.information-outline")
+        popup.exec_()
 
     def main_loop(self):
         return self.exec_()
