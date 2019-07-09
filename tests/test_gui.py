@@ -24,6 +24,14 @@ def test_color():
     with open("data.pkl", "rb") as jar:
         color = pickle.load(jar)
     assert str(color) == "#808080"
+    repr(color)
+    # color.as_qt()
+
+
+def test_cursor():
+    cursor = gui.Cursor()
+    cursor.set_shape("arrow")
+    assert cursor.get_shape() == "arrow"
 
 
 def test_doublevalidator():
@@ -35,6 +43,14 @@ def test_doublevalidator():
         val = pickle.load(jar)
     assert val.is_valid_value("4")
     assert not val.is_valid_value("10")
+    repr(val)
+
+
+def test_font():
+    font = gui.Font("Consolas")
+    repr(font)
+    font.metrics
+    font = gui.Font.mono()
 
 
 def test_icon():
@@ -55,6 +71,7 @@ def test_intvalidator():
         val = pickle.load(jar)
     assert val.is_valid_value("4")
     assert not val.is_valid_value("10")
+    repr(val)
 
 
 def test_keysequence():
@@ -67,6 +84,8 @@ def test_standarditem():
         pickle.dump(s, jar)
     with open("data.pkl", "rb") as jar:
         s = pickle.load(jar)
+    repr(s)
+    s.set_icon("mdi.timer")
 
 
 def test_standarditemmodel():
@@ -79,10 +98,14 @@ def test_standarditemmodel():
     with open("data.pkl", "rb") as jar:
         model = pickle.load(jar)
     model += gui.StandardItem("Item")
+    model[0]
+    assert len(model.find_items("test")) == 1
+    with pytest.raises(ValueError):
+        model.find_items("test", mode="wrong_mode")
 
 
 def test_painter():
-    painter = gui.Painter()
+    painter = gui.Painter(gui.Image())
     painter.use_antialiasing()
     painter.set_pen("none")
     painter.fill_rect(core.Rect(), "transparent")
@@ -90,6 +113,8 @@ def test_painter():
     painter.set_composition_mode("source_atop")
     with pytest.raises(ValueError):
         painter.set_composition_mode("test")
+    with pytest.raises(ValueError):
+        painter.set_pen("test")
     # assert painter.get_composition_mode() == "source_atop"
 
 
@@ -128,6 +153,7 @@ def test_regexpvalidator():
         val = pickle.load(jar)
     assert val.get_regex() == "[0-9]"
     assert val.is_valid_value("0")
+    repr(val)
 
 
 @pytest.mark.skipif(qtpy.API == "pyside2",
@@ -141,6 +167,7 @@ def test_regularexpressionvalidator():
         val = pickle.load(jar)
     assert val.get_regex() == "[0-9]"
     assert val.is_valid_value("0")
+    repr(val)
 
 
 def test_syntaxhighlighter():
@@ -150,7 +177,10 @@ def test_syntaxhighlighter():
 def test_textcharformat():
     fmt = gui.TextCharFormat()
     fmt.set_font_weight("bold")
+    assert fmt.get_font_weight() == "bold"
     fmt.set_foreground_color("yellow")
+    with pytest.raises(ValueError):
+        fmt.set_font_weight("test")
 
 
 def test_validator():
