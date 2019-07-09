@@ -3,6 +3,7 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Union
 import pathlib
 
 from qtpy import QtGui
@@ -16,7 +17,9 @@ QtGui.QPixmap.__bases__ = (gui.PaintDevice,)
 class Pixmap(QtGui.QPixmap):
 
     @classmethod
-    def from_file(cls, path: pathlib.Path):
+    def from_file(cls, path: Union[pathlib.Path, str]):
+        if isinstance(path, str):
+            path = pathlib.Path(path)
         with path.open(mode="rb") as f:
             data = f.read()
         # Create widget
