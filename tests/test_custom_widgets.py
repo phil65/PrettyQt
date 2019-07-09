@@ -8,6 +8,7 @@ import pickle
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, custom_widgets, gui, widgets
+import prettyqt.custom_widgets.dataset as fo
 
 test_widget = widgets.Widget()
 
@@ -26,6 +27,19 @@ def test_colorchooserbutton():
         pickle.dump(btn, jar)
     with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
+
+
+def test_dataset():
+
+    class Test(fo.DataSet):
+        i1 = fo.BoolItem(label="My first one")
+        string1 = fo.StringItem(label="My first one", regex="[0-9]")
+        string2 = fo.StringItem(label="My second one", notempty=True)
+        stringitem = fo.ChoiceItem(label="A", choices=["A", "B"]).set_not_active("i1")
+        floatitem = fo.FloatItem(label="My first one").set_active("i1")
+
+    dlg = Test(icon="mdi.timer")
+    dlg.i1
 
 
 def test_filechooserbutton():
