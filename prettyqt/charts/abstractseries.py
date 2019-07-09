@@ -20,10 +20,10 @@ class AbstractSeries(QtCharts.QAbstractSeries):
         super().__init__(*args, **kwargs)
         self._group = ""
 
-    @core.Property(object)
-    def group(self):
+    def get_group(self):
         return self._group
 
-    @group.setter
-    def group(self, value):
+    def set_group(self, value):
         self._group = value
+
+    group = core.Property(str, get_group, set_group)

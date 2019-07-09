@@ -25,13 +25,13 @@ class LineSeries(QtCharts.QLineSeries):
         super().__init__(*args, **kwargs)
         self._process_name = ""
 
-    @core.Property(object)
-    def process_name(self):
+    def get_process_name(self):
         return self._process_name
 
-    @process_name.setter
-    def process_name(self, value):
+    def set_process_name(self, value):
         self._process_name = value
+
+    process_name = core.Property(str, get_process_name, set_process_name)
 
 
 if __name__ == "__main__":
