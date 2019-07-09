@@ -5,7 +5,7 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, gui
 from prettyqt.utils import bidict
 
 
@@ -17,6 +17,10 @@ WINDOW_ORDERS = bidict(creation=QtWidgets.QMdiArea.CreationOrder,
                        stacking=QtWidgets.QMdiArea.StackingOrder,
                        activation=QtWidgets.QMdiArea.ActivationHistoryOrder)
 
+TAB_POSITIONS = bidict(north=QtWidgets.QTabWidget.North,
+                       south=QtWidgets.QTabWidget.South,
+                       west=QtWidgets.QTabWidget.West,
+                       east=QtWidgets.QTabWidget.East)
 
 QtWidgets.QMdiArea.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -77,6 +81,36 @@ class MdiArea(QtWidgets.QMdiArea):
             view mode
         """
         return WINDOW_ORDERS.inv[self.activationOrder()]
+
+    def set_tab_position(self, position: str):
+        """set tab position for the MDI area
+
+        Valid values are "north", "south", "west", "east"
+
+        Args:
+            position: tabs position to use
+
+        Raises:
+            ValueError: tab position does not exist
+        """
+        if position not in TAB_POSITIONS:
+            raise ValueError("Invalid value for tab position.")
+        self.setTabPosition(TAB_POSITIONS[position])
+
+    def get_tab_position(self) -> str:
+        """returns current tab position
+
+        Possible values: "north", "south", "west", "east"
+
+        Returns:
+            tab position
+        """
+        return TAB_POSITIONS.inv[self.tabPosition()]
+
+    def set_background(self, bg_color):
+        if isinstance(bg_color, str):
+            bg_color = gui.Brush(gui.Color("black"))
+        self.setBackground(bg_color)
 
     def add(self, item: QtWidgets.QWidget):
         if not isinstance(item, QtWidgets.QMdiSubWindow):

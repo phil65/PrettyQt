@@ -382,6 +382,10 @@ def test_mdiarea():
     assert area.get_window_order() == "activation"
     area.set_view_mode("default")
     assert area.get_view_mode() == "default"
+    area.set_tab_position("north")
+    assert area.get_tab_position() == "north"
+    area.set_background("black")
+    area.add(widgets.Widget())
 
 
 def test_menu():
