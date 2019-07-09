@@ -376,6 +376,14 @@ def test_mainwindow():
         window = pickle.load(jar)
 
 
+def test_mdiarea():
+    area = widgets.MdiArea()
+    area.set_window_order("activation")
+    assert area.get_window_order() == "activation"
+    area.set_view_mode("default")
+    assert area.get_view_mode() == "default"
+
+
 def test_menu():
     menu = widgets.Menu("1")
 
@@ -388,7 +396,11 @@ def test_menu():
 
 def test_menubar():
     menu = widgets.MenuBar()
-    menu += widgets.Action("test")
+    menu += widgets.Action("TestAction")
+    menu += widgets.Menu("TestMenu")
+    menu.add_action(widgets.Action("TestAction 2"))
+    menu.add_menu(widgets.Menu("TestMenu 2"))
+    menu.add_separator()
 
 
 def test_messagebox():
