@@ -88,6 +88,8 @@ def test_painter():
     painter.fill_rect(core.Rect(), "transparent")
     painter.set_color("black")
     painter.set_composition_mode("source_atop")
+    with pytest.raises(ValueError):
+        painter.set_composition_mode("test")
     # assert painter.get_composition_mode() == "source_atop"
 
 
