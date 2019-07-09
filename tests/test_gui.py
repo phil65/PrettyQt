@@ -31,6 +31,8 @@ def test_color():
 def test_cursor():
     cursor = gui.Cursor()
     cursor.set_shape("arrow")
+    with pytest.raises(ValueError):
+        cursor.set_shape("test")
     assert cursor.get_shape() == "arrow"
 
 
