@@ -29,6 +29,10 @@ def test_color():
 def test_doublevalidator():
     val = gui.DoubleValidator()
     val.setRange(0, 9)
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(val, jar)
+    with open("data.pkl", "rb") as jar:
+        val = pickle.load(jar)
     assert val.is_valid_value("4")
     assert not val.is_valid_value("10")
 
@@ -45,6 +49,10 @@ def test_icon():
 def test_intvalidator():
     val = gui.IntValidator()
     val.setRange(0, 9)
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(val, jar)
+    with open("data.pkl", "rb") as jar:
+        val = pickle.load(jar)
     assert val.is_valid_value("4")
     assert not val.is_valid_value("10")
 
@@ -80,6 +88,7 @@ def test_painter():
     painter.fill_rect(core.Rect(), "transparent")
     painter.set_color("black")
     painter.set_composition_mode("source_atop")
+    # assert painter.get_composition_mode() == "source_atop"
 
 
 def test_pdfwriter():
@@ -88,7 +97,8 @@ def test_pdfwriter():
 
 
 def test_pen():
-    gui.Pen()
+    pen = gui.Pen()
+    pen.set_color("blue")
 
 
 def test_picture():
