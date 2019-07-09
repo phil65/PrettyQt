@@ -7,6 +7,11 @@ import pathlib
 
 from qtpy import QtGui
 
+from prettyqt import gui
+
+
+QtGui.QPixmap.__bases__ = (gui.PaintDevice,)
+
 
 class Pixmap(QtGui.QPixmap):
 
