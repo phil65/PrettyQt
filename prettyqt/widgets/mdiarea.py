@@ -66,17 +66,17 @@ class MdiArea(QtWidgets.QMdiArea):
         """
         if mode not in WINDOW_ORDERS:
             raise ValueError("Invalid value for mode.")
-        self.setViewMode(WINDOW_ORDERS[mode])
+        self.setActivationOrder(WINDOW_ORDERS[mode])
 
     def get_window_order(self) -> str:
-        """returns current view mode
+        """returns current window order
 
         Possible values: "creation", "stacking", "activation"
 
         Returns:
             view mode
         """
-        return WINDOW_ORDERS.inv[self.viewMode()]
+        return WINDOW_ORDERS.inv[self.activationOrder()]
 
     def add(self, item: QtWidgets.QWidget):
         if not isinstance(item, QtWidgets.QMdiSubWindow):
