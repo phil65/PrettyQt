@@ -24,7 +24,3 @@ def create_ui(source, target):
     # os.system(f"pyrcc5.exe -o {resources_output_path} {resources_path}")
     # print(f"created {resources_output_path}.")
     #  pyrcc5.exe -o resources.py .\resources.qrc
-
-
-if __name__ == "__main__":
-    create_ui()
