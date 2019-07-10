@@ -65,6 +65,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.resize(*state["size"])
         self.box = self.layout()
 
+    def set_widget(self, widget):
+        self.setCentralWidget(widget)
+
     def add_toolbar(self, toolbar, position: str = "top"):
         """adds a toolbar to the mainmenu at specified area
 

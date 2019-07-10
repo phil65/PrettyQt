@@ -35,6 +35,9 @@ class DockWidget(QtWidgets.QDockWidget):
             self.title = title
         self.set_allowed_areas("all")
 
+    def set_widget(self, widget):
+        self.setWidget(widget)
+
     def set_allowed_areas(self, area):
         self.setAllowedAreas(ALLOWED_AREAS[area])
 
