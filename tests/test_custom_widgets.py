@@ -27,18 +27,30 @@ def test_colorchooserbutton():
         pickle.dump(btn, jar)
     with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
+    repr(btn)
+    assert btn.get_value() == gui.Color("green")
+    btn.set_value("blue")
+    assert btn.is_valid()
 
 
 def test_dataset():
 
     class Test(fo.DataSet):
         i1 = fo.BoolItem(label="My first one")
+        i2 = fo.BoolItem(label="My first one", use_push=True)
         string1 = fo.StringItem(label="My first one", regex="[0-9]")
         string2 = fo.StringItem(label="My second one", notempty=True)
-        stringitem = fo.ChoiceItem(label="A", choices=["A", "B"]).set_not_active("i1")
-        floatitem = fo.FloatItem(label="My first one").set_active("i1")
+        choiceitem = fo.ChoiceItem(label="A", choices=["A", "B"]).set_not_active("i1")
+        mchoiceitem = fo.MultipleChoiceItem(label="A", choices=["A", "B"])
+        floatitem = fo.FloatItem(label="FloatItem").set_active("i1")
+        intitem = fo.IntItem(label="IntItem").set_active("i1")
+        coloritem = fo.ColorItem(label="ColorItem", default="green")
+        filesaveitem = fo.FileSaveItem(label="FileSaveItem")
+        buttonitem = fo.ButtonItem(label="FileSaveItem", callback=print)
 
     dlg = Test(icon="mdi.timer")
+    dlg.to_dict()
+    dlg.from_dict(dict(i1=True))
     dlg.i1
 
 
@@ -48,6 +60,8 @@ def test_filechooserbutton():
         pickle.dump(btn, jar)
     with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
+    btn.set_value("/")
+    btn.get_value()
 
 
 def test_fontchooserbutton():
@@ -57,6 +71,7 @@ def test_fontchooserbutton():
     with open("data.pkl", "rb") as jar:
         btn = pickle.load(jar)
     btn.set_font("Consolas")
+    repr(btn)
 
 
 def test_codeeditor():
@@ -99,6 +114,7 @@ def test_labeledslider(qtbot):
     qtbot.addWidget(slider)
     qtbot.mouseClick(slider.sl, QtCore.Qt.LeftButton)
     qtbot.mouseMove(slider.sl, core.Point(20, 20))
+    slider.paintEvent(None)
 
 
 def test_markdownwidget():
@@ -116,9 +132,16 @@ def test_selectionwidget():
              "Tab": "\t",
              "Comma": ","}
     widget.add_items(items)
+    widget.add_items(("a", "b"))
     widget.add_custom(label="test", regex=r"\S{1}")
+    for i in widget:
+        pass
+    widget.select_radio_by_data(";")
     choice = widget.current_choice()
     assert choice == ";"
+    widget.set_value(",")
+    assert widget.get_value() == ","
+    widget.update_choice(True)
 
 
 def test_spanslider(qtbot):

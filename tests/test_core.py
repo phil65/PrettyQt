@@ -66,7 +66,13 @@ def test_modelindex():
 
 
 def test_object():
-    core.Object()
+    obj = core.Object()
+    obj.set_object_name("test")
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(obj, jar)
+    with open("data.pkl", "rb") as jar:
+        obj = pickle.load(jar)
+    assert obj.id == "test"
 
 
 def test_point():
