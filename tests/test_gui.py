@@ -110,7 +110,10 @@ def test_painter():
     painter = gui.Painter(gui.Image())
     painter.use_antialiasing()
     painter.set_pen("none")
+    painter.fill_rect((0, 1, 3, 5), "transparent")
     painter.fill_rect(core.Rect(), "transparent")
+    with pytest.raises(ValueError):
+        painter.fill_rect(core.Rect(), "testus")
     painter.set_color("black")
     painter.set_composition_mode("source_atop")
     with pytest.raises(ValueError):
