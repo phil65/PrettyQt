@@ -31,7 +31,7 @@ class LabeledSlider(widgets.Widget):
         self.sl.value_changed.connect(self.value_changed)
         self.sl.set_range(0, len(labels) - 1)
         self.sl.set_value(0)
-        if orientation == QtCore.Qt.Horizontal:
+        if orientation == "horizontal":
             self.sl.set_tick_position("below")
             self.sl.setMinimumWidth(300)
         else:
