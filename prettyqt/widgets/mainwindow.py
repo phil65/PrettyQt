@@ -159,6 +159,12 @@ class MainWindow(QtWidgets.QMainWindow):
         for i in dockwidgets:
             self.removeDockWidget(i)
 
+    def get_docks(self) -> list:
+        return self.findChildren(QtWidgets.QDockWidget)
+
+    def get_toolbars(self) -> list:
+        return self.findChildren(QtWidgets.QToolBar)
+
     def toggle_fullscreen(self):
         """toggle between fullscreen and regular size
         """
