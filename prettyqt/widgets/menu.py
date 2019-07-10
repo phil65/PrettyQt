@@ -24,6 +24,9 @@ class Menu(QtWidgets.QMenu):
     def __iter__(self):
         return iter(self.actions())
 
+    def __len__(self):
+        return len(self.actions())
+
     def __add__(self, other):
         if isinstance(other, QtWidgets.QAction):
             self.addAction(other)
