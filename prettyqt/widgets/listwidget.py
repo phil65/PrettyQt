@@ -6,7 +6,13 @@
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets, core
+from prettyqt.utils import bidict
 
+
+SCROLL_HINTS = bidict(ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
+                      position_at_top=QtWidgets.QAbstractItemView.PositionAtTop,
+                      position_at_bottom=QtWidgets.QAbstractItemView.PositionAtBottom,
+                      position_at_center=QtWidgets.QAbstractItemView.PositionAtCenter)
 
 QtWidgets.QListWidget.__bases__ = (widgets.ListView,)
 
@@ -87,6 +93,9 @@ class ListWidget(QtWidgets.QListWidget):
             if i.data(QtCore.Qt.UserRole) in value:
                 self.setSelected(i)
                 break
+
+    def scroll_to_item(self, item, mode: str):
+        self.scrollToItem(item, SCROLL_HINTS[mode])
 
 
 if __name__ == "__main__":
