@@ -5,7 +5,7 @@
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import widgets
+from prettyqt import widgets, core
 
 
 QtWidgets.QListWidget.__bases__ = (widgets.ListView,)
@@ -16,6 +16,12 @@ class NoData(object):
 
 
 class ListWidget(QtWidgets.QListWidget):
+
+    value_changed = core.Signal(object)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.itemSelectionChanged.connect(self.index_changed)
 
     def __repr__(self):
         return f"ListWidget: {self.count()} children"
@@ -47,6 +53,10 @@ class ListWidget(QtWidgets.QListWidget):
         self.setCurrentRow(state["current_row"])
         for item in state["items"]:
             self.addItem(item)
+
+    def index_changed(self):
+        data = self.get_value()
+        self.value_changed.emit(data)
 
     def get_children(self):
         return [self.item(index) for index in range(self.count())]
