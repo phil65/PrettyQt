@@ -40,15 +40,15 @@ class Action(QtWidgets.QAction):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setText(state.get("text", ""))
-        self.setEnabled(state.get("enabled", True))
+        self.set_text(state.get("text", ""))
+        self.set_enabled(state.get("enabled", True))
         self.set_shortcut(state["shortcut"])
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
-        self.setChecked(state.get("checked", False))
+        self.set_tooltip(state.get("tooltip", ""))
+        self.set_statustip(state.get("statustip", ""))
+        self.set_checked(state.get("checked", False))
         self.set_priority(state["priority"])
         self.set_shortcut_context(state["shortcut_context"])
-        self.setCheckable(state["checkable"])
+        self.set_checkable(state["checkable"])
 
     def set_text(self, text: str):
         self.setText(text)
@@ -62,8 +62,14 @@ class Action(QtWidgets.QAction):
     def set_tooltip(self, text: str):
         self.setToolTip(text)
 
+    def set_statustip(self, text: str):
+        self.setStatusTip(text)
+
     def set_checked(self, value: bool):
         self.setChecked(value)
+
+    def set_checkable(self, value: bool):
+        self.setCheckable(value)
 
     def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
         """set the icon for the action
