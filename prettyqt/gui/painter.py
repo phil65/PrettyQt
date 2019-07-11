@@ -32,10 +32,15 @@ PATTERNS = bidict(solid=QtCore.Qt.SolidPattern,
 
 class Painter(QtGui.QPainter):
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, typ, value, traceback):
+        self.end()
+
     def draw_image(self, point, frame_buffer):
         self.set_composition_mode("source_atop")
         self.drawImage(point, frame_buffer)
-        self.end()
 
     def use_antialiasing(self):
         self.setRenderHint(self.Antialiasing, True)

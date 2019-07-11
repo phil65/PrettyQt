@@ -104,11 +104,10 @@ class ChartView(QtCharts.QChartView):
         image = self.grab()
         gl_widget = self.findChild(QtWidgets.QOpenGLWidget)
         if gl_widget:
-            painter = gui.Painter(image)
             d = gl_widget.mapToGlobal(core.Point()) - self.mapToGlobal(core.Point())
-            painter.set_composition_mode("source_atop")
-            painter.drawImage(d, gl_widget.grabFramebuffer())
-            painter.end()
+            with gui.Painter(image) as painter:
+                painter.set_composition_mode("source_atop")
+                painter.drawImage(d, gl_widget.grabFramebuffer())
         return image
 
     # def hide_legend(self):
