@@ -57,30 +57,25 @@ class Layout(QtWidgets.QLayout):
         """
         return MODES.inv[self.sizeConstraint()]
 
-    def set_alignment(self, alignment: str):
-        """set the alignment of the layout
+    def set_alignment(self, alignment: str, item=None):
+        """Sets the alignment for widget / layout to alignment and
+        returns true if w is found in this layout (not including child layouts)
 
-        Allowed values are "left", "right", "top", "bottom"
+        Allowed values for alignment:  "left", "right", "top", "bottom"
 
         Args:
-            mode: alignment for the layout
+            alignment: alignment for the layout
+            item: set alignment for specific child only
 
         Raises:
             ValueError: alignment does not exist
         """
         if alignment not in ALIGNMENTS:
             raise ValueError(f"{alignment!r} not a valid alignment.")
-        self.setAlignment(ALIGNMENTS[alignment])
-
-    def get_alignment(self) -> str:
-        """returns current alignment
-
-        Possible values: "left", "right", "top", "bottom"
-
-        Returns:
-            alignment
-        """
-        return MODES.inv[self.alignment()]
+        if item is not None:
+            return self.setAlignment(item, ALIGNMENTS[alignment])
+        else:
+            return self.setAlignment(ALIGNMENTS[alignment])
 
     def add(self, item) -> int:
         if isinstance(item, QtWidgets.QWidget):
