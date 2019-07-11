@@ -35,7 +35,7 @@ class FontChooserButton(widgets.Widget):
         self.__init__()
         if state["font"]:
             self.set_font(state["font"])
-        self.setEnabled(state.get("enabled", True))
+        self.set_enabled(state.get("enabled", True))
 
     @core.Slot()
     def choose_font(self):

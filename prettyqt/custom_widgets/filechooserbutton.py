@@ -39,7 +39,7 @@ class FileChooserButton(widgets.Widget):
     def __setstate__(self, state):
         self.__init__(state["extensions"])
         self.set_path(state["path"])
-        self.setEnabled(state.get("enabled", True))
+        self.set_enabled(state.get("enabled", True))
 
     @core.Slot()
     def open_file(self):
@@ -54,7 +54,7 @@ class FileChooserButton(widgets.Widget):
 
     def set_path(self, path):
         self.path = path
-        self.lineedit.setText(str(path))
+        self.lineedit.set_text(str(path))
 
     def get_value(self) -> Optional[pathlib.Path]:
         return self.path
