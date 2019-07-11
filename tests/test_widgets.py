@@ -32,6 +32,9 @@ def test_boxlayout():
     widget = widgets.RadioButton("test")
     layout += widget
     layout.set_size_mode("maximum")
+    assert layout.get_size_mode() == "maximum"
+    layout.set_alignment("left")
+    # assert layout.get_alignment() == "left"
     with pytest.raises(ValueError):
         layout.set_size_mode("bla")
     layout.set_margin(0)
@@ -433,7 +436,14 @@ def test_plaintextedit():
 
 
 def test_progressbar():
-    widgets.ProgressBar()
+    bar = widgets.ProgressBar()
+    bar.set_alignment("left")
+    print(bar.alignment())
+    bar.set_alignment("right")
+    print(bar.alignment())
+    # assert bar.get_alignment() == "left"
+    bar.set_text_direction("top_to_bottom")
+    assert bar.get_text_direction() == "top_to_bottom"
 
 
 def test_progressdialog():
