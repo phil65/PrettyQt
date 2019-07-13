@@ -17,9 +17,9 @@ sphinx-autodoc-typehints==1.6.0
 
 twine==1.13.0
 
-PyQt5==5.12.3
-PyQtWebEngine==5.12.1
-PyQtChart==5.12
+PyQt5==5.13.0
+PyQtWebEngine==5.13.0
+PyQtChart==5.13.0
 
 pytest==4.3.1
 pytest-qt==3.2.2
