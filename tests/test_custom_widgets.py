@@ -110,6 +110,7 @@ def test_flowlayout():
 
 
 def test_labeledslider(qtbot):
+    slider = custom_widgets.LabeledSlider(["test1", "test2"], "vertical")
     slider = custom_widgets.LabeledSlider(["test1", "test2"])
     qtbot.addWidget(slider)
     qtbot.mouseClick(slider.sl, QtCore.Qt.LeftButton)

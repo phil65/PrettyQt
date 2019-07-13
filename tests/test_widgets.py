@@ -154,7 +154,6 @@ def test_dialog(qtbot):
     dlg = widgets.Dialog(layout="horizontal")
     qtbot.addWidget(dlg)
     qtbot.keyPress(dlg, QtCore.Qt.Key_F11)
-    dlg.set_modality()
     dlg.delete_on_close()
     dlg.add_widget(widgets.RadioButton("test"))
     dlg.set_icon("mdi.timer")
@@ -295,6 +294,7 @@ def test_headerview():
     header.resize_mode("interactive", col=0)
     header.resize_sections("interactive")
     header.set_contextmenu_policy("custom")
+    assert header.get_contextmenu_policy() == "custom"
     header.set_custom_menu(test)
     header.set_sizes([100])
     label = header.section_labels()
@@ -718,6 +718,21 @@ def test_widget():
         pass
     widget.set_enabled()
     widget.set_disabled()
+    widget.set_min_size(1, 1)
+    widget.set_max_size(2, 2)
+    widget.title = "test"
+    assert widget.title == "test"
+    with widget.updates_off():
+        widget.set_title("test2")
+    widget.enabled = True
+    assert widget.enabled is True
+    widget.set_modality("window")
+    assert widget.get_modality() == "window"
+    widget.center()
+    widget.set_layout("horizontal")
+    widget.set_layout("form")
+    widget.set_layout("stacked")
+    widget.set_layout("flow")
 
 
 def test_widgetaction():
