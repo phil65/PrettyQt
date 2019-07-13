@@ -171,7 +171,10 @@ def test_dialogbuttonbox():
     box.set_horizontal()
     box.set_vertical()
     btn = box.add_default_button("apply")
-    assert len(box) == 1
+    box.set_orientation("horizontal")
+    assert box.get_orientation() == "horizontal"
+    box.add_button("test", callback=print)
+    assert len(box) == 2
     assert btn == box["apply"]
     for item in box:
         pass
@@ -370,6 +373,11 @@ def test_mainwindow():
     window.load_window_state()
     window.toggle_fullscreen()
     window.toggle_fullscreen()
+    window.add_toolbar(widgets.ToolBar())
+    assert len(window.get_toolbars()) == 1
+    assert len(window.get_docks()) == 1
+    window.remove_dockwidgets([w])
+    window.add_toolbar_break()
     ss = dict(width="1px", border="none")
     window.set_stylesheet("QMainWindow::separator", ss)
     window.add_widget_as_dock("test", "Title")
@@ -382,10 +390,16 @@ def test_mainwindow():
 def test_mdiarea():
     area = widgets.MdiArea()
     area.set_window_order("activation")
+    with pytest.raises(ValueError):
+        area.set_window_order("test")
     assert area.get_window_order() == "activation"
     area.set_view_mode("default")
+    with pytest.raises(ValueError):
+        area.set_view_mode("test")
     assert area.get_view_mode() == "default"
     area.set_tab_position("north")
+    with pytest.raises(ValueError):
+        area.set_tab_position("test")
     assert area.get_tab_position() == "north"
     area.set_background("black")
     area.add(widgets.Widget())
@@ -399,6 +413,7 @@ def test_menu():
 
     menu.add_action("test", test, icon="mdi.timer", shortcut="Ctrl+A", checkable=True)
     menu._separator("test")
+    menu.add_separator()
 
 
 def test_menubar():
@@ -496,6 +511,7 @@ def test_statusbar():
     label = widgets.Label("test")
     status_bar.addWidget(label)
     status_bar.setup_default_bar()
+    status_bar.show_message("test")
     widget.setStatusBar(status_bar)
 
 
@@ -704,6 +720,17 @@ def test_treeview():
     widget.highlight_when_inactive()
     widget.raise_dock()
     widget.adapt_sizes()
+
+
+def test_treewidgetitem():
+    item = widgets.TreeWidgetItem()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(item, jar)
+    with open("data.pkl", "rb") as jar:
+        item = pickle.load(jar)
+    item.set_icon("mdi.timer")
+    item.set_checkstate("unchecked")
+    assert item.get_checkstate() == "unchecked"
 
 
 def test_widget():

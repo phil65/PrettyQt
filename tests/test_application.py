@@ -15,4 +15,5 @@ def test_application():
                      org_name="test",
                      org_domain="test")
     app.get_mainwindow()
+    app.copy_to_clipboard("test")
     return True
