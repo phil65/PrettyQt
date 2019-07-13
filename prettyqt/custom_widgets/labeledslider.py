@@ -15,7 +15,7 @@ class LabeledSlider(widgets.Widget):
         super().__init__(parent=parent)
 
         if not isinstance(labels, (tuple, list)):
-            raise Exception("<labels> is a list or tuple.")
+            raise ValueError("<labels> must be a list or tuple.")
         levels = range(len(labels))
         self.levels = list(zip(levels, labels))
         self.layout = widgets.BoxLayout(orientation, self)
@@ -61,7 +61,7 @@ class LabeledSlider(widgets.Widget):
             # get the size of the label
             rect = painter.drawText(core.Rect(), QtCore.Qt.TextDontPrint, v_str)
 
-            if self.sl.orientation() == QtCore.Qt.Horizontal:
+            if self.sl.is_horizontal():
                 x_loc = widgets.Style.sliderPositionFromValue(self.sl.minimum(),
                                                               self.sl.maximum(),
                                                               v,
@@ -118,7 +118,7 @@ if __name__ == '__main__':
     ha = widgets.BoxLayout("horizontal")
     frame.setLayout(ha)
 
-    w = LabeledSlider(labels=["test", "test2", "test3"], orientation=QtCore.Qt.Vertical)
+    w = LabeledSlider(labels=["test", "test2", "test3"], orientation="vertical")
 
     ha.addWidget(w)
     frame.show()
