@@ -85,12 +85,12 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         self.setOrientation(QtCore.Qt.Vertical)
 
     def set_orientation(self, orientation: str):
-        """set the orientation of the splitter
+        """set the orientation of the button box
 
         Allowed values are "horizontal", "vertical"
 
         Args:
-            mode: orientation for the splitter
+            mode: orientation for the button box
 
         Raises:
             ValueError: orientation does not exist
