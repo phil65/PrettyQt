@@ -23,19 +23,20 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         return f"TreeWidgetItem()"
 
     def __getstate__(self):
-        return dict(text=self.text(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
+        icon = self.icon(0)
+        return dict(text=self.text(0),
+                    tooltip=self.toolTip(0),
+                    statustip=self.statusTip(0),
                     checkstate=self.get_checkstate(),
-                    icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
-                    data=self.data(QtCore.Qt.UserRole))
+                    icon=gui.Icon(icon) if not icon.isNull() else None,
+                    data=self.data(0, QtCore.Qt.UserRole))
 
     def __setstate__(self, state):
         self.__init__()
-        self.setText(state.get("text", ""))
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
-        self.setData(QtCore.Qt.UserRole, state["data"])
+        self.setText(0, state.get("text", ""))
+        self.setToolTip(0, state.get("tooltip", ""))
+        self.setStatusTip(0, state.get("statustip", ""))
+        self.setData(0, QtCore.Qt.UserRole, state["data"])
         self.set_icon(state["icon"])
         self.set_checkstate(state["checkstate"])
 
@@ -49,7 +50,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
             icon = gui.Icon()
         elif isinstance(icon, str):
             icon = qta.icon(icon)
-        self.setIcon(icon)
+        self.setIcon(0, icon)
 
     def set_checkstate(self, state: str):
         """set checkstate of the checkbox
@@ -64,7 +65,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         """
         if state not in STATES:
             raise ValueError("Invalid checkstate.")
-        self.setCheckState(STATES[state])
+        self.setCheckState(0, STATES[state])
 
     def get_checkstate(self) -> str:
         """returns checkstate
@@ -74,4 +75,4 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         Returns:
             checkstate
         """
-        return STATES.inv[self.checkState()]
+        return STATES.inv[self.checkState(0)]
