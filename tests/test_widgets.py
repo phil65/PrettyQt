@@ -56,6 +56,10 @@ def test_buttongroup():
 def test_calendarwiget():
     widget = widgets.CalendarWidget()
     assert widget.get_date() == widget.get_value()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(widget, jar)
+    with open("data.pkl", "rb") as jar:
+        widget = pickle.load(jar)
 
 
 def test_checkbox():
@@ -95,6 +99,7 @@ def test_combobox():
     box.set_size_adjust_policy("first_show")
     with pytest.raises(ValueError):
         box.set_size_adjust_policy("bla")
+    assert box.get_size_adjust_policy() == "first_show"
     box.set_icon_size(10)
     box.set_min_char_length(10)
     with open("data.pkl", "wb") as jar:
@@ -178,6 +183,7 @@ def test_dialogbuttonbox():
     assert btn == box["apply"]
     for item in box:
         pass
+    btn = box.add_default_buttons(["ok"])
 
 
 def test_dockwidget():
@@ -204,8 +210,6 @@ def test_filedialog():
     with pytest.raises(ValueError):
         dlg.set_accept_mode("bla")
     dlg.set_accept_mode("save")
-    with pytest.raises(ValueError):
-        dlg.set_accept_mode("bla")
     dlg.set_filter(dict(a=[".csv"]))
     dlg.selected_file()
     dlg.selected_files()
@@ -215,13 +219,14 @@ def test_filedialog():
         dlg = pickle.load(jar)
 
 
-def test_filesystemmodel():
+def test_filesystemmodel(qtmodeltester):
     model = widgets.FileSystemModel()
     idx = model.index(0, 0)
     data = model.data(idx, model.DATA_ROLE)
     print(data)
     model.yield_child_indexes(idx)
-    # qtmodeltester.check(model, force_py=True)
+    # modeltest.ModelTest(model)
+    # qtmodeltester.check(model, force_py=False)
 
 
 def test_fontdialog():
@@ -304,11 +309,24 @@ def test_headerview():
     print(label)
 
 
+def test_keysequenceedit():
+    seq = gui.KeySequence("Ctrl+A")
+    edit = widgets.KeySequenceEdit(seq)
+    edit.set_value("Ctrl+A")
+    assert edit.get_value() == "Ctrl+A"
+    assert edit.is_valid()
+    repr(edit)
+
+
 def test_label():
     label = widgets.Label()
     label.set_image("")
+    label.set_text("testus")
     label.set_alignment(horizontal="left", vertical="top")
     label.set_text_interaction("by_mouse")
+    with pytest.raises(ValueError):
+        label.set_text_interaction("test")
+    # assert label.get_text_interaction() == "by_mouse"
     with open("data.pkl", "wb") as jar:
         pickle.dump(label, jar)
     with open("data.pkl", "rb") as jar:
@@ -323,11 +341,17 @@ def test_lineedit():
     widget.set_text("0")
     widget.append_text("a")
     widget.set_echo_mode("password")
+    with pytest.raises(ValueError):
+        widget.set_echo_mode("test")
+    assert widget.get_echo_mode() == "password"
     widget.set_input_mask("X")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    repr(widget)
+    widget.set_range(0, 10)
+    widget.set_value("5")
 
 
 def test_listview():
@@ -361,6 +385,11 @@ def test_listwidgetitem():
     with open("data.pkl", "rb") as jar:
         item = pickle.load(jar)
     repr(item)
+    item.set_icon("mdi.timer")
+    item.set_checkstate("unchecked")
+    with pytest.raises(ValueError):
+        item.set_checkstate("test")
+    assert item.get_checkstate() == "unchecked"
 
 
 def test_mainwindow():
@@ -406,12 +435,21 @@ def test_mdiarea():
 
 
 def test_menu():
-    menu = widgets.Menu("1")
+    menu = widgets.Menu("1", icon="mdi.timer")
+    menu.add(widgets.Action("TestAction"))
 
     def test():
         pass
 
-    menu.add_action("test", test, icon="mdi.timer", shortcut="Ctrl+A", checkable=True)
+    menu.add_action("test", test,
+                    icon="mdi.timer",
+                    shortcut="Ctrl+A",
+                    checkable=True,
+                    status_tip="test")
+    assert len(menu) == 1
+    for item in menu:
+        pass
+    menu.add_menu(widgets.Menu())
     menu._separator("test")
     menu.add_separator()
 
@@ -427,7 +465,9 @@ def test_menubar():
 
 def test_messagebox():
     widget = widgets.MessageBox()
+    widget.set_icon("warning")
     widget.set_icon("mdi.timer")
+    widget.add_button("ok")
 
 
 def test_plaintextedit():
@@ -444,6 +484,7 @@ def test_plaintextedit():
     widget.scroll_to_bottom()
     widget.set_value("test")
     assert widget.get_value() == "test"
+    widget += "append"
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -454,8 +495,11 @@ def test_progressbar():
     bar = widgets.ProgressBar()
     bar.set_alignment("left")
     bar.set_alignment("right")
+    with pytest.raises(ValueError):
+        bar.set_alignment("test")
     # assert bar.get_alignment() == "left"
     bar.set_text_direction("top_to_bottom")
+    bar.set_range(0, 20)
     # assert bar.get_text_direction() == "top_to_bottom"
 
 
@@ -510,6 +554,7 @@ def test_statusbar():
     status_bar.addWidget(label)
     status_bar.setup_default_bar()
     status_bar.show_message("test")
+    status_bar.add_action(widgets.Action())
     widget.setStatusBar(status_bar)
 
 
@@ -558,6 +603,16 @@ def test_splitter():
         pass
     widget.set_size_policy("expanding", "expanding")
     widget.set_orientation("horizontal")
+    with pytest.raises(ValueError):
+        widget.set_orientation("test")
+    widget.add_layout(widgets.BoxLayout("horizontal"))
+
+
+def test_styleoptionslider():
+    slider = widgets.StyleOptionSlider()
+    slider.is_vertical()
+    slider.set_horizontal()
+    slider.set_vertical()
 
 
 def test_tabwidget():
@@ -648,6 +703,11 @@ def test_toolbutton():
 def test_tabbar():
     widget = widgets.TabBar()
     widget.set_icon_size(20)
+    with pytest.raises(ValueError):
+        widget.set_remove_behaviour("test")
+    assert widget.get_remove_behaviour() == "left_tab"
+    with pytest.raises(ValueError):
+        widget.set_elide_mode("test")
 
 
 def test_tableview():
@@ -728,6 +788,8 @@ def test_treewidgetitem():
         item = pickle.load(jar)
     item.set_icon("mdi.timer")
     item.set_checkstate("unchecked")
+    with pytest.raises(ValueError):
+        item.set_checkstate("test")
     assert item.get_checkstate() == "unchecked"
 
 
