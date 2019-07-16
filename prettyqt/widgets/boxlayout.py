@@ -12,9 +12,11 @@ QtWidgets.QBoxLayout.__bases__ = (widgets.Layout,)
 
 class BoxLayout(QtWidgets.QBoxLayout):
 
-    def __init__(self, orientation="horizontal", parent=None):
+    def __init__(self, orientation="horizontal", parent=None, margin=None):
         o = self.TopToBottom if orientation == "vertical" else self.LeftToRight
         super().__init__(o, parent)
+        if margin is not None:
+            self.set_margin(margin)
 
     def __getitem__(self, index):
         item = self.itemAt(index)
