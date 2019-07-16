@@ -360,6 +360,10 @@ def test_listview():
     widget.toggle_select_all()
     widget.set_selection_mode("multi")
     assert widget.get_selection_mode() == "multi"
+    widget.set_view_mode("icon")
+    with pytest.raises(ValueError):
+        widget.set_view_mode("test")
+    assert widget.get_view_mode() == "icon"
 
 
 def test_listwidget():
@@ -371,6 +375,8 @@ def test_listwidget():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     assert len(widget) == 2
+    assert widget[0] is not None
+    widget.index_changed()
     for item in widget:
         pass
     item = widgets.ListWidgetItem()
@@ -461,6 +467,8 @@ def test_menubar():
     menu.add_action(widgets.Action("TestAction 2"))
     menu.add_menu(widgets.Menu("TestMenu 2"))
     menu.add_separator()
+    menu.add_action("test")
+    menu.add_menu("test")
 
 
 def test_messagebox():
@@ -508,7 +516,7 @@ def test_progressdialog():
 
 
 def test_pushbutton():
-    widget = widgets.PushButton("Test")
+    widget = widgets.PushButton("Test", callback=print)
     widget.set_disabled()
     widget.set_enabled()
     widget.set_icon("mdi.timer")
@@ -517,6 +525,9 @@ def test_pushbutton():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    widget.is_on = False
+    assert widget.is_on is False
+    widget.set_value(True)
 
 
 def test_radiobutton():
@@ -532,6 +543,15 @@ def test_radiobutton():
     repr(widget)
     widget.set_value(True)
     assert widget.get_value() is True
+
+
+def test_scrollarea():
+    widget = widgets.ScrollArea()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(widget, jar)
+    with open("data.pkl", "rb") as jar:
+        widget = pickle.load(jar)
+    widget.set_widget(widgets.Widget())
 
 
 def test_slider():
@@ -616,9 +636,10 @@ def test_styleoptionslider():
 
 
 def test_tabwidget():
-    widget = widgets.TabWidget()
+    widget = widgets.TabWidget(detachable=True)
     widget.add_tab(widgets.Widget(), "mdi.timer")
     widget.insert_tab(0, widgets.Widget(), "test", "mdi.timer")
+    assert len(widget) == 2
     w = widgets.Widget()
     widget.add_tab(w, "test", "mdi.timer")
     assert widget[2] == w
@@ -629,7 +650,11 @@ def test_tabwidget():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    with pytest.raises(ValueError):
+        widget.set_tab_shape("test")
     widget.remove_tab(0)
+    widget.add_tab(widgets.BoxLayout("horizontal"), "mdi.timer")
+    widget.close_detached_tabs()
     # widget.close_detached_tabs()
 
 
@@ -698,6 +723,11 @@ def test_toolbutton():
         widget = pickle.load(jar)
     widget.set_enabled()
     widget.set_shortcut("Ctrl+A")
+    with pytest.raises(ValueError):
+        widget.set_popup_mode("test")
+    assert widget.get_popup_mode() == "delayed"
+    widget.set_arrow_type("left")
+    assert widget.get_arrow_type() == "left"
 
 
 def test_tabbar():
@@ -728,6 +758,9 @@ def test_tableview():
     widget.num_selected()
     widget.jump_to_column(0)
     widget.highlight_when_inactive()
+    assert widget.h_header is not None
+    widget.v_header = widgets.HeaderView("vertical", parent=widget)
+    assert widget.v_header is not None
 
 
 def test_toolbox():
