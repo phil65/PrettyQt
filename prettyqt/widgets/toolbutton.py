@@ -61,7 +61,7 @@ class ToolButton(QtWidgets.QToolButton):
     def set_arrow_type(self, mode: str):
         """sets the arrow type of the toolbutton
 
-        valid values are: "delayed", "menu_button", "instant"
+        valid values are: "none", "up", "down", "left", "right"
 
         Args:
             mode: arrow type to use
@@ -76,7 +76,7 @@ class ToolButton(QtWidgets.QToolButton):
     def get_arrow_type(self) -> str:
         """returns arrow type
 
-        possible values are "delayed", "menu_button", "instant"
+        possible values are "none", "up", "down", "left", "right"
 
         Returns:
             arrow type
