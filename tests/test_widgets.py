@@ -75,6 +75,10 @@ def test_checkbox():
     widget.set_value(True)
     assert widget.get_value() is True
     repr(widget)
+    with pytest.raises(ValueError):
+        widget.set_checkstate("test")
+    widget.is_on = False
+    assert widget.is_on is False
 
 
 def test_colordialog():
@@ -190,6 +194,7 @@ def test_dockwidget():
     widget = widgets.DockWidget()
     widget.setup_title_bar()
     widget.maximise()
+    widget.set_widget(widgets.Widget())
 
 
 def test_doublespinbox():
@@ -543,6 +548,8 @@ def test_radiobutton():
     repr(widget)
     widget.set_value(True)
     assert widget.get_value() is True
+    # widget.is_on = False
+    # assert widget.is_on is False
 
 
 def test_scrollarea():
@@ -564,6 +571,8 @@ def test_slider():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    with pytest.raises(ValueError):
+        widget.set_tick_position("test")
 
 
 def test_statusbar():
@@ -605,6 +614,13 @@ def test_spinbox():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     repr(widget)
+
+
+def test_splashscreen():
+    scr = widgets.SplashScreen(path="")
+    with scr:
+        pass
+    scr.set_text("test")
 
 
 def test_splitter():
