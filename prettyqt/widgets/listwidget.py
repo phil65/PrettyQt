@@ -94,7 +94,7 @@ class ListWidget(QtWidgets.QListWidget):
                 self.setSelected(i)
                 break
 
-    def scroll_to_item(self, item, mode: str):
+    def scroll_to_item(self, item, mode: str = "ensure_visible"):
         if mode not in SCROLL_HINTS:
             raise ValueError("Invalid scroll mode")
         self.scrollToItem(item, SCROLL_HINTS[mode])
