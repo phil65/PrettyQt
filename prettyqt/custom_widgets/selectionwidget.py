@@ -9,7 +9,7 @@ from prettyqt import core, widgets
 
 
 class SelectionWidget(widgets.GroupBox):
-    option_changed = core.Signal(str)
+    value_changed = core.Signal(str)
 
     def __init__(self, label="", layout="horizontal", parent=None):
         super().__init__(title=label, parent=parent)
@@ -72,7 +72,7 @@ class SelectionWidget(widgets.GroupBox):
             return None
         choice = self.current_choice()
         if len(choice) > 0:
-            self.option_changed.emit(choice)
+            self.value_changed.emit(choice)
 
     def set_value(self, value):
         self.select_radio_by_data(value)
