@@ -28,7 +28,7 @@ def test_action():
 
 
 def test_boxlayout():
-    layout = widgets.BoxLayout("horizontal")
+    layout = widgets.BoxLayout("horizontal", margin=0)
     widget = widgets.RadioButton("test")
     layout += widget
     layout.set_size_mode("maximum")
@@ -147,6 +147,7 @@ def test_datetimeedit():
     widget.set_enabled()
     dt = datetime.datetime(2000, 11, 11)
     widget.set_value(dt)
+    widget.set_format("dd.MM.yyyy")
     assert widget.get_value() == dt
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
@@ -277,6 +278,7 @@ def test_gridlayout():
         layout = pickle.load(jar)
     assert len(layout) == len(list(layout)) == 1
     repr(layout)
+    layout += widgets.RadioButton()
 
 
 def test_groupbox():
@@ -357,6 +359,7 @@ def test_lineedit():
     repr(widget)
     widget.set_range(0, 10)
     widget.set_value("5")
+    widget += "append"
 
 
 def test_listview():
@@ -380,7 +383,11 @@ def test_listwidget():
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     assert len(widget) == 2
-    assert widget[0] is not None
+    item = widget[0]
+    assert item is not None
+    widget.scroll_to_item(item, mode="ensure_visible")
+    with pytest.raises(ValueError):
+        widget.scroll_to_item(item, mode="test")
     widget.index_changed()
     for item in widget:
         pass
@@ -598,11 +605,13 @@ def test_stackedlayout():
     with open("data.pkl", "rb") as jar:
         layout = pickle.load(jar)
     assert len(layout) == 1
+    for item in layout:
+        pass
     return True
 
 
 def test_spinbox():
-    widget = widgets.SpinBox()
+    widget = widgets.SpinBox(default_value=5)
     widget.set_disabled()
     widget.set_enabled()
     widget.set_value(10)
@@ -617,7 +626,7 @@ def test_spinbox():
 
 
 def test_splashscreen():
-    scr = widgets.SplashScreen(path="")
+    scr = widgets.SplashScreen(path="", width=100)
     with scr:
         pass
     scr.set_text("test")
@@ -697,6 +706,7 @@ def test_textedit():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    widget += "append"
 
 
 def test_timeedit():
@@ -742,6 +752,8 @@ def test_toolbutton():
     with pytest.raises(ValueError):
         widget.set_popup_mode("test")
     assert widget.get_popup_mode() == "delayed"
+    with pytest.raises(ValueError):
+        widget.set_arrow_type("test")
     widget.set_arrow_type("left")
     assert widget.get_arrow_type() == "left"
 
@@ -759,7 +771,12 @@ def test_tabbar():
 def test_tableview():
     widget = widgets.TableView()
     widget.set_selection_mode("extended")
+    with pytest.raises(ValueError):
+        widget.set_selection_mode("test")
     widget.set_selection_behaviour("rows")
+    assert widget.get_selection_behaviour() == "rows"
+    with pytest.raises(ValueError):
+        widget.set_selection_behaviour("test")
     widget.set_horizontal_scrollbar_policy("always_on")
     widget.set_vertical_scrollbar_policy("always_on")
     widget.set_horizontal_scrollbar_width(12)
@@ -774,6 +791,10 @@ def test_tableview():
     widget.num_selected()
     widget.jump_to_column(0)
     widget.highlight_when_inactive()
+    widget.set_table_color("black")
+    widget.scroll_to_bottom()
+    assert len(widget.selected_indexes()) == 0
+    widget.get_edit_triggers()
     assert widget.h_header is not None
     widget.v_header = widgets.HeaderView("vertical", parent=widget)
     assert widget.v_header is not None
