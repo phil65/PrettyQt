@@ -65,7 +65,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if column is not None:
             self.setItemDelegateForColumn(column, delegate)
         elif row is not None:
-            self.setItemDelegateForRow(column, delegate)
+            self.setItemDelegateForRow(row, delegate)
         else:
             self.setItemDelegate(delegate)
 
