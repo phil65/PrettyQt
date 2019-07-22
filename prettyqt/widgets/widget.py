@@ -222,6 +222,16 @@ class Widget(QtWidgets.QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
+    def raise_dock(self) -> bool:
+        node = self
+        while node:
+            node = node.parent()
+            if isinstance(node, QtWidgets.QDockWidget):
+                node.setVisible(True)
+                node.raise_()
+                return True
+        return False
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])

@@ -231,13 +231,3 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         p = gui.Palette()
         p.highlight_inactive()
         self.setPalette(p)
-
-    def raise_dock(self) -> bool:
-        node = self
-        while node:
-            node = node.parent()
-            if isinstance(node, QtWidgets.QDockWidget):
-                node.setVisible(True)
-                node.raise_()
-                return True
-        return False
