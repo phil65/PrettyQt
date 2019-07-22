@@ -163,8 +163,7 @@ class MainWindow(QtWidgets.QMainWindow):
         widget = widgets.Widget()
         widget.id = f"{name}.widget"
         orientation = "vertical" if vertical else "horizontal"
-        layout = widgets.BoxLayout(orientation, widget)
-        layout.set_margin(0)
+        layout = widgets.BoxLayout(orientation, widget, margin=0)
         dock_widget.setWidget(widget)
         self.add_dockwidget(dock_widget, position)
         dock_widget.box = layout

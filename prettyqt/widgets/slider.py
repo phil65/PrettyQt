@@ -71,7 +71,7 @@ class Slider(QtWidgets.QSlider):
             position = "above"
         elif position == "right":
             position = "below"
-        if position not in TICK_POSITIONS:
+        elif position not in TICK_POSITIONS:
             raise ValueError(f"{position} not a valid tick position.")
         self.setTickPosition(TICK_POSITIONS[position])
 
