@@ -91,17 +91,20 @@ def test_imageviewer():
 
 def test_flowlayout():
     widget = widgets.Widget()
-    layout = custom_widgets.FlowLayout()
+    layout = custom_widgets.FlowLayout(margin=1)
     btn = widgets.PushButton("Short")
     layout += btn
     layout += widgets.PushButton("Longer")
     layout += widgets.PushButton("Different text")
     layout += widgets.PushButton("More text")
     layout += widgets.PushButton("Even longer button text")
+    layout.do_layout(core.Rect(), False)
+    layout.sizeHint()
     widget.set_layout(layout)
     assert layout[0] == btn
-    for i in range(len(layout)):
+    for i in layout:
         pass
+    assert len(layout) == 5
     layout.get_children()
     with open("data.pkl", "wb") as jar:
         pickle.dump(layout, jar)
