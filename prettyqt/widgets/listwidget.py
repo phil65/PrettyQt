@@ -91,7 +91,7 @@ class ListWidget(QtWidgets.QListWidget):
     def set_value(self, value):
         for i in self.get_children():
             if i.data(QtCore.Qt.UserRole) in value:
-                self.setSelected(i)
+                self.setCurrentItem(i)
                 break
 
     def scroll_to_item(self, item, mode: str = "ensure_visible"):
