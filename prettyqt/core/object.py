@@ -40,3 +40,10 @@ class Object(QtCore.QObject):
     @id.setter
     def id(self, name: str):
         self.setObjectName(name)
+
+    def find_children(self, typ, recursive: bool = True):
+        if recursive:
+            flag = QtCore.Qt.FindChildrenRecursively
+        else:
+            flag = QtCore.Qt.FindDirectChildrenOnly
+        return self.findChildren(typ, options=flag)
