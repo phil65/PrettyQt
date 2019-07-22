@@ -6,6 +6,7 @@
 from prettyqt import widgets
 
 app = widgets.Application.create_default_app()
+app = widgets.app()
 
 
 def test_application():

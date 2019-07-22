@@ -17,6 +17,7 @@ def test_action():
     action.set_tooltip("test")
     action.set_enabled()
     action.set_disabled()
+    action.set_icon(None)
     action.set_icon("mdi.timer")
     action.set_shortcut("Ctrl+A")
     with open("data.pkl", "wb") as jar:
@@ -25,12 +26,19 @@ def test_action():
         action = pickle.load(jar)
     assert action.shortcut().toString() == "Ctrl+A"
     assert action.toolTip() == "test"
+    action.set_priority("low")
+    assert action.get_priority() == "low"
+    action.set_shortcut_context("widget_with_children")
+    assert action.get_shortcut_context() == "widget_with_children"
 
 
 def test_boxlayout():
     layout = widgets.BoxLayout("horizontal", margin=0)
     widget = widgets.RadioButton("test")
     layout += widget
+    layout2 = widgets.BoxLayout("horizontal")
+    layout += layout2
+    assert layout[1] == layout2
     layout.set_size_mode("maximum")
     assert layout.get_size_mode() == "maximum"
     layout.set_alignment("left")
@@ -42,7 +50,7 @@ def test_boxlayout():
         pickle.dump(layout, jar)
     with open("data.pkl", "rb") as jar:
         layout = pickle.load(jar)
-    assert len(layout) == 1
+    assert len(layout) == 2
     repr(layout)
 
 
@@ -201,7 +209,7 @@ def test_dockwidget():
 
 
 def test_doublespinbox():
-    widget = widgets.DoubleSpinBox()
+    widget = widgets.DoubleSpinBox(default_value=5)
     widget.set_disabled()
     widget.set_enabled()
     with open("data.pkl", "wb") as jar:
@@ -458,6 +466,7 @@ def test_mdiarea():
 def test_menu():
     menu = widgets.Menu("1", icon="mdi.timer")
     menu.add(widgets.Action("TestAction"))
+    menu += widgets.Action("TestAction")
 
     def test():
         pass
@@ -583,6 +592,7 @@ def test_slider():
         widget = pickle.load(jar)
     with pytest.raises(ValueError):
         widget.set_tick_position("test")
+    widget.set_tick_position("right")
 
 
 def test_statusbar():
@@ -733,6 +743,8 @@ def test_toolbar():
     widget = widgets.ToolBar()
     widget.add_menu_button("test,", "mdi.timer", menu=widgets.Menu())
     widget.set_style("icon")
+    widget.set_style(None)
+    assert widget.get_style() == "icon"
     widget.set_font_size(10)
     widget.set_enabled()
     widget.set_disabled()
