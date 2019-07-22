@@ -73,6 +73,7 @@ def test_object():
     with open("data.pkl", "rb") as jar:
         obj = pickle.load(jar)
     assert obj.id == "test"
+    obj.find_children(core.Object, recursive=False)
 
 
 def test_point():
