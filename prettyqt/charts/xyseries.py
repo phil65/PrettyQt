@@ -17,7 +17,8 @@ class XYSeries(QtCharts.QXYSeries):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._process_name = ""
+        # self._process_name = ""
+        self.setUseOpenGL()
 
     def __getstate__(self):
         return dict(points=self.pointsVector())
