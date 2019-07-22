@@ -195,7 +195,9 @@ def test_dockwidget():
     widget = widgets.DockWidget()
     widget.setup_title_bar()
     widget.maximise()
-    widget.set_widget(widgets.Widget())
+    w = widgets.Widget()
+    widget.set_widget(w)
+    w.raise_dock()
 
 
 def test_doublespinbox():
@@ -783,6 +785,8 @@ def test_tableview():
     widget.set_horizontal_scrollbar_width(12)
     widget.set_vertical_scrollbar_width(12)
     widget.set_edit_triggers("edit_key")
+    with pytest.raises(ValueError):
+        widget.set_edit_triggers("test")
     widget.selectAll()
     widget.current_index()
     widget.current_data()
@@ -794,6 +798,9 @@ def test_tableview():
     widget.highlight_when_inactive()
     widget.set_table_color("black")
     widget.scroll_to_bottom()
+    widget.selected_data()
+    widget.selected_rows()
+    widget.selected_names()
     assert len(widget.selected_indexes()) == 0
     widget.get_edit_triggers()
     assert widget.h_header is not None
@@ -820,6 +827,7 @@ def test_toolbox():
 
 def test_treeview():
     widget = widgets.TreeView()
+    assert len(widget) == 0
     model = widgets.FileSystemModel()
     widget.setModel(model)
     widget.selectAll()
@@ -849,6 +857,14 @@ def test_treeview():
     widget.highlight_when_inactive()
     widget.raise_dock()
     widget.adapt_sizes()
+    model = gui.StandardItemModel()
+    model.add("test")
+    widget.setModel(model)
+    widget.set_delegate(widgets.StyledItemDelegate())
+    widget.set_delegate(widgets.StyledItemDelegate(), column=0)
+    widget.set_delegate(widgets.StyledItemDelegate(), row=0)
+    widget.toggle_select_all()
+    widget.toggle_select_all()
 
 
 def test_treewidgetitem():
