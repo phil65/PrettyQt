@@ -170,7 +170,7 @@ class MainWindow(QtWidgets.QMainWindow):
         dock_widget.box = layout
         return dock_widget
 
-    def add_dockwidget(self, dockwidget, position):
+    def add_dockwidget(self, dockwidget, position: str = "left"):
         position = DOCK_POSITIONS[position]
         self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dockwidget)
 
