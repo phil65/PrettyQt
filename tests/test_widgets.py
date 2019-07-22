@@ -324,6 +324,8 @@ def test_headerview():
     header.resize_mode("interactive", col=0)
     header.resize_sections("interactive")
     header.set_contextmenu_policy("custom")
+    with pytest.raises(ValueError):
+        header.set_contextmenu_policy("test")
     assert header.get_contextmenu_policy() == "custom"
     header.set_custom_menu(test)
     header.set_sizes([100])
@@ -404,6 +406,8 @@ def test_listwidget():
     with pytest.raises(ValueError):
         widget.scroll_to_item(item, mode="test")
     widget.index_changed()
+    widget.add_items(["a", "b"])
+    widget.set_value("b")
     for item in widget:
         pass
     item = widgets.ListWidgetItem()
@@ -537,6 +541,8 @@ def test_progressbar():
         bar.set_alignment("test")
     # assert bar.get_alignment() == "left"
     bar.set_text_direction("top_to_bottom")
+    with pytest.raises(ValueError):
+        bar.set_text_direction("test")
     bar.set_range(0, 20)
     # assert bar.get_text_direction() == "top_to_bottom"
 
@@ -670,6 +676,7 @@ def test_splitter():
     with pytest.raises(ValueError):
         widget.set_orientation("test")
     widget.add_layout(widgets.BoxLayout("horizontal"))
+    widgets.Splitter.from_widgets([widgets.Widget()])
 
 
 def test_styleoptionslider():
@@ -891,6 +898,7 @@ def test_treeview():
 
 def test_treewidgetitem():
     item = widgets.TreeWidgetItem()
+    repr(item)
     with open("data.pkl", "wb") as jar:
         pickle.dump(item, jar)
     with open("data.pkl", "rb") as jar:
@@ -923,6 +931,8 @@ def test_widget():
     widget.enabled = True
     assert widget.enabled is True
     widget.set_modality("window")
+    with pytest.raises(ValueError):
+        widget.set_modality("test")
     assert widget.get_modality() == "window"
     widget.center()
     widget.set_layout("horizontal")
