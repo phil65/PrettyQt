@@ -10,6 +10,16 @@ from qtpy import QtWidgets
 from prettyqt import core, widgets
 
 
+SECTIONS = dict(none=QtWidgets.QDateTimeEdit.NoSection,
+                am_pm=QtWidgets.QDateTimeEdit.AmPmSection,
+                msec=QtWidgets.QDateTimeEdit.MSecSection,
+                second=QtWidgets.QDateTimeEdit.SecondSection,
+                minute=QtWidgets.QDateTimeEdit.MinuteSection,
+                hour=QtWidgets.QDateTimeEdit.HourSection,
+                day=QtWidgets.QDateTimeEdit.DaySection,
+                month=QtWidgets.QDateTimeEdit.MonthSection,
+                year=QtWidgets.QDateTimeEdit.YearSection)
+
 QtWidgets.QDateTimeEdit.__bases__ = (widgets.AbstractSpinBox,)
 
 
