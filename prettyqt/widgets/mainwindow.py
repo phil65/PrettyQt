@@ -68,6 +68,25 @@ class MainWindow(QtWidgets.QMainWindow):
     def set_widget(self, widget):
         self.setCentralWidget(widget)
 
+    def createPopupMenu(self):
+        # qactions = self.createPopupMenu()
+        menu = widgets.Menu(parent=self)
+        for i, item in enumerate(self.get_docks()):
+            action = widgets.Action(item.windowTitle(), parent=self)
+            action.set_checkable(True)
+            action.toggled.connect(item.setVisible)
+            action.set_checked(item.isVisible())
+            action.setShortcut(f"Ctrl+Shift+{i}")
+            menu.add_action(action)
+        menu.add_separator()
+        for i in self.get_toolbars():
+            action = widgets.Action(i.windowTitle(), parent=self)
+            action.set_checkable(True)
+            action.toggled.connect(i.setVisible)
+            action.set_checked(i.isVisible())
+            menu.add_action(action)
+        return menu
+
     def add_toolbar(self, toolbar, position: str = "top"):
         """adds a toolbar to the mainmenu at specified area
 
@@ -160,10 +179,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.removeDockWidget(i)
 
     def get_docks(self) -> list:
-        return self.findChildren(QtWidgets.QDockWidget)
+        return self.find_children(QtWidgets.QDockWidget, recursive=False)
 
     def get_toolbars(self) -> list:
-        return self.findChildren(QtWidgets.QToolBar)
+        return self.find_children(QtWidgets.QToolBar, recursive=False)
 
     def toggle_fullscreen(self):
         """toggle between fullscreen and regular size
