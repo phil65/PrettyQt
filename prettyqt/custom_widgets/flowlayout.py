@@ -10,9 +10,9 @@ from prettyqt import widgets, core
 
 class FlowLayout(widgets.Layout):
 
-    def __init__(self, parent=None, margin=0, spacing=-1):
+    def __init__(self, parent=None, margin=None, spacing=-1):
         super().__init__(parent)
-        if parent is not None:
+        if margin is not None:
             self.set_margin(margin)
         self.set_spacing(spacing)
         self.items = []
