@@ -616,7 +616,11 @@ def test_statusbar():
     status_bar.setup_default_bar()
     status_bar.show_message("test")
     status_bar.add_action(widgets.Action())
+    status_bar += widgets.Action()
     widget.setStatusBar(status_bar)
+    status_bar.add_widget(widgets.Widget())
+    status_bar += widgets.Widget()
+    status_bar.add_widget(widgets.Widget(), permanent=True)
 
 
 def test_stackedlayout():

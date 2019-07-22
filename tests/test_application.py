@@ -11,6 +11,7 @@ app = widgets.app()
 
 def test_application():
     app.set_icon("mdi.timer")
+    app.set_icon(None)
     app.set_metadata(app_name="test",
                      app_version="1.0.0",
                      org_name="test",
