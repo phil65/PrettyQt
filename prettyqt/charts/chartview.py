@@ -6,7 +6,7 @@
 from qtpy import QtCore, QtWidgets
 from qtpy.QtCharts import QtCharts
 
-from prettyqt import charts, core, gui
+from prettyqt import charts, core, gui, widgets
 
 ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
                   right=QtCore.Qt.AlignRight,
@@ -99,6 +99,24 @@ class ChartView(QtCharts.QChartView):
             QtWidgets.QApplication.restoreOverrideCursor()
 
         super().mouseMoveEvent(event)
+
+    @core.Slot()
+    def save(self):
+        """
+        let user choose folder and save chart as an image file
+        """
+        dlg = widgets.FileDialog(mode="save", caption="Save image")
+        filters = {"Bmp files": [".bmp"],
+                   "Jpeg files": [".jpg"],
+                   "Png files": [".png"]}
+        dlg.set_filter(filters)
+        filename = dlg.open_file()
+        if not filename:
+            return None
+        self.chart().show_legend()
+        image = self.get_image()
+        image.save(filename[0])
+        self.chart().hide_legend()
 
     def get_image(self):
         image = self.grab()
