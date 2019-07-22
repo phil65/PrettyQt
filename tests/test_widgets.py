@@ -427,6 +427,7 @@ def test_mainwindow():
     window.add_toolbar_break()
     ss = dict(width="1px", border="none")
     window.set_stylesheet("QMainWindow::separator", ss)
+    window.createPopupMenu()
     window.add_widget_as_dock("test", "Title")
     with open("data.pkl", "wb") as jar:
         pickle.dump(window, jar)
