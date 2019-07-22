@@ -189,11 +189,16 @@ def test_dialogbuttonbox():
     box.set_horizontal()
     box.set_vertical()
     btn = box.add_default_button("apply")
+    with pytest.raises(ValueError):
+        btn = box.add_default_button("test")
     box.set_orientation("horizontal")
+    with pytest.raises(ValueError):
+        box.set_orientation("test")
     assert box.get_orientation() == "horizontal"
     box.add_button("test", callback=print)
     assert len(box) == 2
     assert btn == box["apply"]
+    assert "apply" in box
     for item in box:
         pass
     btn = box.add_default_buttons(["ok"])
@@ -513,6 +518,7 @@ def test_plaintextedit():
     widget.highlight_current_line()
     widget.set_read_only()
     widget.get_result_widget()
+    widget.scroll_to_top()
     widget.scroll_to_bottom()
     widget.set_value("test")
     assert widget.get_value() == "test"
@@ -850,6 +856,10 @@ def test_treeview():
     with pytest.raises(ValueError):
         widget.set_size_adjust_policy("test")
     assert widget.get_size_adjust_policy() == "content"
+    widget.set_scrollbar_policy("always_on")
+    with pytest.raises(ValueError):
+        widget.set_scrollbar_policy("test")
+    widget.set_scrollbar_width(10)
     widget.setup_list_style()
     widget.setup_dragdrop_move()
     widget.scroll_to_top()
