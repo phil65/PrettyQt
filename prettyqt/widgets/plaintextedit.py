@@ -15,13 +15,15 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     value_changed = core.Signal()
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, text="", parent=None, read_only=False):
+        super().__init__(text, parent)
         self.textChanged.connect(self.value_changed)
+        self.set_read_only(read_only)
 
     def __getstate__(self):
         return dict(text=self.text(),
                     enabled=self.isEnabled(),
+                    read_only=self.isReadOnly(),
                     font=gui.Font(self.font()))
 
     def __setstate__(self, state):
@@ -29,6 +31,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         self.set_text(state["text"])
         self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])
+        self.setReadOnly(state["read_only"])
 
     def __add__(self, other):
         if isinstance(other, str):
