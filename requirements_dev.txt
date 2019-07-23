@@ -1,6 +1,6 @@
 -r requirements.txt
 
-pip==19.2
+pip==19.2.1
 bump2version==0.5.10
 wheel==0.33.4
 
