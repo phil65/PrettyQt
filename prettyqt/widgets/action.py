@@ -28,7 +28,8 @@ QtWidgets.QAction.__bases__ = (core.Object,)
 class Action(QtWidgets.QAction):
 
     def __init__(self, text="", icon=None, parent=None, shortcut="", tooltip=""):
-        super().__init__(text, parent)
+        super().__init__(parent)
+        self.set_text(text)
         self.set_icon(icon)
         self.set_shortcut(shortcut)
         self.set_tooltip(tooltip)
