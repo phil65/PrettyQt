@@ -898,6 +898,7 @@ def test_treeview():
     widget.set_delegate(widgets.StyledItemDelegate(), row=0)
     widget.toggle_select_all()
     widget.toggle_select_all()
+    widget.update_row(0)
 
 
 def test_treewidgetitem():

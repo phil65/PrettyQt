@@ -58,6 +58,11 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if old_sel_model:
             del old_sel_model
 
+    def update_row(self, row):
+        start_index = self.index(row, 0)
+        end_index = self.index(row, self.columnCount() - 1)
+        self.dataChanged.emit(start_index, end_index)
+
     def set_model(self, model):
         self.setModel(model)
 
