@@ -21,7 +21,6 @@ from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
 from .style import Style
 from .styleoption import StyleOption
-from .spaceritem import SpacerItem
 from .sizepolicy import SizePolicy
 from .stylepainter import StylePainter
 from .dialog import BaseDialog, Dialog
@@ -81,6 +80,7 @@ from .styleditemdelegate import StyledItemDelegate
 
 from .layoutitem import LayoutItem
 from .layout import Layout
+from .spaceritem import SpacerItem
 from .formlayout import FormLayout
 from .boxlayout import BoxLayout
 from .stackedlayout import StackedLayout

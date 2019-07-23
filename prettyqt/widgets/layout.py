@@ -18,7 +18,7 @@ ALIGNMENTS = bidict(left=QtCore.Qt.AlignLeft,
                     bottom=QtCore.Qt.AlignBottom)
 
 
-QtWidgets.QLayout.__bases__ = (core.Object, QtWidgets.QLayoutItem)
+QtWidgets.QLayout.__bases__ = (core.Object, widgets.LayoutItem)
 
 
 class Layout(QtWidgets.QLayout):
