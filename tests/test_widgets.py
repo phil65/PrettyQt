@@ -840,6 +840,11 @@ def test_tableview():
     assert widget.v_header is not None
 
 
+def test_tablewidget():
+    widget = widgets.TableWidget()
+    widget.sort()
+
+
 def test_toolbox():
     w = widgets.RadioButton("test1")
     w2 = widgets.RadioButton("test2")
@@ -902,6 +907,11 @@ def test_treeview():
     widget.toggle_select_all()
     widget.toggle_select_all()
     model.update_row(0)
+
+
+def test_treewidget():
+    widget = widgets.TreeWidget()
+    widget.sort()
 
 
 def test_treewidgetitem():
