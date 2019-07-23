@@ -118,7 +118,9 @@ def test_combobox():
         pickle.dump(box, jar)
     with open("data.pkl", "rb") as jar:
         box = pickle.load(jar)
-    repr(box)
+    box.add("test2", data="data", icon="mdi.timer")
+    box.set_text("test2")
+    assert box.text() == "test2"
 
 
 def test_commandlinkbutton():
@@ -898,7 +900,7 @@ def test_treeview():
     widget.set_delegate(widgets.StyledItemDelegate(), row=0)
     widget.toggle_select_all()
     widget.toggle_select_all()
-    widget.update_row(0)
+    model.update_row(0)
 
 
 def test_treewidgetitem():
