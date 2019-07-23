@@ -27,6 +27,12 @@ QtWidgets.QAction.__bases__ = (core.Object,)
 
 class Action(QtWidgets.QAction):
 
+    def __init__(self, text="", icon=None, parent=None, shortcut="", tooltip=""):
+        super().__init__(text, parent)
+        self.set_icon(icon)
+        self.set_shortcut(shortcut)
+        self.set_tooltip(tooltip)
+
     def __getstate__(self):
         return dict(text=self.text(),
                     enabled=self.isEnabled(),

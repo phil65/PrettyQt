@@ -23,12 +23,12 @@ class MarkdownWindow(widgets.MainWindow):
         # html_data = frame.toHtml()
 
     def create_menu(self):
-        act_exit = widgets.Action(gui.Icon("exit.png"), "&Exit", self)
+        act_exit = widgets.Action(text="&Exit", icon=gui.Icon("exit.png"), parent=self)
         act_exit.set_shortcut("Ctrl+Q")
         act_exit.setStatusTip("Exit application")
         act_exit.triggered.connect(self.close)
 
-        act_open = widgets.Action(gui.Icon("open.png"), "&Open", self)
+        act_open = widgets.Action(text="&Open", icon=gui.Icon("open.png"), parent=self)
         act_open.set_shortcut("Ctrl+O")
         act_open.setStatusTip("Open Markdown file")
         act_open.triggered.connect(self.open_new_file)
