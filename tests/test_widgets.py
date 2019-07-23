@@ -30,6 +30,7 @@ def test_action():
     assert action.get_priority() == "low"
     action.set_shortcut_context("widget_with_children")
     assert action.get_shortcut_context() == "widget_with_children"
+    action.set_menu(widgets.Menu())
 
 
 def test_boxlayout():

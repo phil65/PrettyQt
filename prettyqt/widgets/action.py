@@ -87,6 +87,9 @@ class Action(QtWidgets.QAction):
         if shortcut:
             self.setShortcut(shortcut)
 
+    def set_menu(self, menu):
+        self.setMenu(menu)
+
     def set_priority(self, priority: str):
         """set priority of the action
 
