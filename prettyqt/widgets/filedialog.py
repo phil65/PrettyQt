@@ -42,11 +42,14 @@ class FileDialog(QtWidgets.QFileDialog):
     simple dialog used to display some widget
     """
 
-    def __init__(self, path=None, mode="open", caption="", path_id=None, parent=None):
+    def __init__(self, path=None, mode="open", caption="", path_id=None,
+                 extension_filter=None, parent=None):
         super().__init__(parent=parent)
         self.setDirectory(path)
         self.title = caption
         self.path_id = path_id
+        if extension_filter:
+            self.set_filter(extension_filter)
         if path_id and path is None:
             settings = core.Settings()
             path = settings.value(self.path_id, "")
