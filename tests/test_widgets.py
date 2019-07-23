@@ -512,6 +512,11 @@ def test_messagebox():
     widget.set_icon("warning")
     widget.set_icon("mdi.timer")
     widget.add_button("ok")
+    widget.set_text_format("rich")
+    with pytest.raises(ValueError):
+        widget.set_text_format("test")
+    assert widget.get_text_format() == "rich"
+    widget.get_standard_buttons()
 
 
 def test_plaintextedit():

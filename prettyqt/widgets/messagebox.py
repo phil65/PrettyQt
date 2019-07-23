@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
 from prettyqt.utils import bidict
@@ -35,11 +35,21 @@ BUTTONS = bidict(none=QtWidgets.QMessageBox.NoButton,
                  retry=QtWidgets.QMessageBox.Retry,
                  ignore=QtWidgets.QMessageBox.Ignore)
 
+TEXT_FORMATS = bidict(rich=QtCore.Qt.RichText,
+                      plain=QtCore.Qt.PlainText,
+                      auto=QtCore.Qt.AutoText)
+
 
 QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 
 
 class MessageBox(QtWidgets.QMessageBox):
+
+    def __init__(self, icon=None, title="", message="", parent=None):
+        super().__init__(parent)
+        self.set_icon(icon)
+        self.setText(title)
+        self.setDetailedText(message)
 
     @classmethod
     def message(cls, msg, title=None, icon=None):
@@ -80,9 +90,41 @@ class MessageBox(QtWidgets.QMessageBox):
             raise ValueError("button type not available")
         return self.addButton(BUTTONS[button])
 
+    # @classmethod
+    # def show_exception(cls, exception):
+    #     header = str(exception[0])
+    #     error_text = str(exception[1])
+    #     widgets.MessageBox.message(error_text, header, "mdi.exclamation")
+
+    def set_text_format(self, text_format: str):
+        """set the text format
+
+        Allowed values are "rich", "plain", "auto"
+
+        Args:
+            mode: text format to use
+
+        Raises:
+            ValueError: text format does not exist
+        """
+        if text_format not in TEXT_FORMATS:
+            raise ValueError("Invalid text format")
+        self.setTextFormat(TEXT_FORMATS[text_format])
+
+    def get_text_format(self) -> str:
+        """returns current text format
+
+        Possible values: "rich", "plain", "auto"
+
+        Returns:
+            text format
+        """
+        return TEXT_FORMATS.inv[self.textFormat()]
+
 
 if __name__ == "__main__":
     app = widgets.app()
-    ret = MessageBox.message("Test", "header", "warning")
+    ret = MessageBox("warning", "header", "detailedtext")
+    ret.show()
     print(ret)
     app.exec_()
