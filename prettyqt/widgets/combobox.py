@@ -176,6 +176,12 @@ class ComboBox(QtWidgets.QComboBox):
                 self.setCurrentIndex(i)
                 break
 
+    def set_text(self, text):
+        self.setCurrentText(text)
+
+    def text(self):
+        return self.currentText()
+
 
 if __name__ == "__main__":
     app = widgets.app()
