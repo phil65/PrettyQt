@@ -407,7 +407,7 @@ def test_listwidget():
     widget.scroll_to_item(item, mode="ensure_visible")
     with pytest.raises(ValueError):
         widget.scroll_to_item(item, mode="test")
-    widget.index_changed()
+    widget.on_index_change()
     widget.add_items(["a", "b"])
     widget.set_value("b")
     for item in widget:

@@ -25,12 +25,13 @@ class ListWidget(QtWidgets.QListWidget):
 
     value_changed = core.Signal(object)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.itemSelectionChanged.connect(self.index_changed)
+    def __init__(self, parent=None, selection_mode="single"):
+        super().__init__(parent)
+        self.itemSelectionChanged.connect(self.on_index_change)
+        self.set_selection_mode(selection_mode)
 
     def __repr__(self):
-        return f"ListWidget: {self.count()} children"
+        return f"ListWidget: {self.count()} items"
 
     def __getitem__(self, index):
         return self.item(index)
@@ -60,7 +61,7 @@ class ListWidget(QtWidgets.QListWidget):
         for item in state["items"]:
             self.addItem(item)
 
-    def index_changed(self):
+    def on_index_change(self):
         data = self.get_value()
         self.value_changed.emit(data)
 
