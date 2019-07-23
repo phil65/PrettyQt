@@ -14,6 +14,7 @@ SCROLL_HINTS = bidict(ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
                       position_at_bottom=QtWidgets.QAbstractItemView.PositionAtBottom,
                       position_at_center=QtWidgets.QAbstractItemView.PositionAtCenter)
 
+
 QtWidgets.QListWidget.__bases__ = (widgets.ListView,)
 
 
@@ -60,6 +61,10 @@ class ListWidget(QtWidgets.QListWidget):
         self.setCurrentRow(state["current_row"])
         for item in state["items"]:
             self.addItem(item)
+
+    def sort(self, reverse=False):
+        order = QtCore.Qt.DescendingOrder if reverse else QtCore.Qt.AscendingOrder
+        self.sortItems(order)
 
     def on_index_change(self):
         data = self.get_value()

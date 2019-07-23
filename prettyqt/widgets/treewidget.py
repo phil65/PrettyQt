@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
 
@@ -12,7 +12,10 @@ QtWidgets.QTreeWidget.__bases__ = (widgets.TreeView,)
 
 
 class TreeWidget(QtWidgets.QTreeWidget):
-    pass
+
+    def sort(self, column=0, reverse=False):
+        order = QtCore.Qt.DescendingOrder if reverse else QtCore.Qt.AscendingOrder
+        self.sortItems(column, order)
 
 
 if __name__ == "__main__":
