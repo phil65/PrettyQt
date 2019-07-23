@@ -24,7 +24,12 @@ V_ALIGNMENTS = bidict(top=QtCore.Qt.AlignTop,
 
 TEXT_INTERACTION = bidict(none=QtCore.Qt.NoTextInteraction,
                           by_mouse=QtCore.Qt.TextSelectableByMouse,
-                          by_keyboard=QtCore.Qt.TextSelectableByKeyboard)
+                          by_keyboard=QtCore.Qt.TextSelectableByKeyboard,
+                          accessible_by_mouse=QtCore.Qt.LinksAccessibleByMouse,
+                          accessible_by_keyboard=QtCore.Qt.LinksAccessibleByKeyboard,
+                          text_editable=QtCore.Qt.TextEditable,
+                          like_text_editor=QtCore.Qt.TextEditorInteraction,
+                          like_text_browser=QtCore.Qt.TextBrowserInteraction)
 
 TEXT_FORMATS = bidict(rich=QtCore.Qt.RichText,
                       plain=QtCore.Qt.PlainText,
