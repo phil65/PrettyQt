@@ -79,6 +79,7 @@ from .abstractitemdelegate import AbstractItemDelegate
 from .itemdelegate import ItemDelegate
 from .styleditemdelegate import StyledItemDelegate
 
+from .layoutitem import LayoutItem
 from .layout import Layout
 from .formlayout import FormLayout
 from .boxlayout import BoxLayout
@@ -130,6 +131,7 @@ __all__ = ["app",
            "MessageBox",
            "ErrorMessage",
            "FileSystemModel",
+           "LayoutItem",
            "Layout",
            "FormLayout",
            "BoxLayout",
