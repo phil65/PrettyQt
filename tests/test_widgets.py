@@ -773,6 +773,9 @@ def test_toolbar():
     widget.set_font_size(10)
     widget.set_enabled()
     widget.set_disabled()
+    assert widget.is_area_allowed("top")
+    with pytest.raises(ValueError):
+        widget.is_area_allowed("test")
 
     def test():
         pass

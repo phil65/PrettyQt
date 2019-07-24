@@ -17,6 +17,13 @@ STYLES = bidict(icon=QtCore.Qt.ToolButtonIconOnly,
                 text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
                 text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon)
 
+TOOLBAR_AREAS = bidict(left=QtCore.Qt.LeftToolBarArea,
+                       right=QtCore.Qt.RightToolBarArea,
+                       top=QtCore.Qt.TopToolBarArea,
+                       bottom=QtCore.Qt.BottomToolBarArea,
+                       all=QtCore.Qt.AllToolBarAreas,
+                       none=QtCore.Qt.NoToolBarArea)
+
 
 QtWidgets.QToolBar.__bases__ = (widgets.Widget,)
 
@@ -70,6 +77,21 @@ class ToolBar(QtWidgets.QToolBar):
 
     def set_font_size(self, size: int):
         self.setStyleSheet(f"font-size: {size}pt;")
+
+    def is_area_allowed(self, area: str):
+        """check if toolbar is allowed at specified area
+
+        Valid values for area: "left", "right", "top", "bottom"
+
+        Args:
+            area: area of the toolbar
+
+        Raises:
+            ValueError: area does not exist
+        """
+        if area not in TOOLBAR_AREAS:
+            raise ValueError("Area not existing")
+        return self.isAreaAllowed(TOOLBAR_AREAS[area])
 
 
 if __name__ == "__main__":
