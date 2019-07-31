@@ -7,7 +7,7 @@ wheel==0.33.4
 flake8==3.7.8
 tox==3.13.2
 
-coverage==4.5.3
+coverage==4.5.4
 codecov==2.0.15
 
 Sphinx==2.1.2
