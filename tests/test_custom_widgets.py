@@ -36,15 +36,15 @@ def test_colorchooserbutton():
 def test_dataset():
 
     class Test(fo.DataSet):
-        i1 = fo.BoolItem(label="My first one")
-        i2 = fo.BoolItem(label="My first one", use_push=True)
-        string1 = fo.StringItem(label="My first one", regex="[0-9]")
-        string2 = fo.StringItem(label="My second one", notempty=True)
-        choiceitem = fo.ChoiceItem(label="A", choices=["A", "B"]).set_not_active("i1")
+        i1 = fo.Bool(label="My first one")
+        i2 = fo.Bool(label="My first one", use_push=True)
+        string1 = fo.String(label="My first one", regex="[0-9]")
+        string2 = fo.String(label="My second one", notempty=True)
+        choiceitem = fo.Enum(label="A", choices=["A", "B"]).set_not_active("i1")
         mchoiceitem = fo.MultipleChoiceItem(label="A", choices=["A", "B"])
-        floatitem = fo.FloatItem(label="FloatItem").set_active("i1")
-        intitem = fo.IntItem(label="IntItem").set_active("i1")
-        coloritem = fo.ColorItem(label="ColorItem", default="green")
+        floatitem = fo.Float(label="FloatItem").set_active("i1")
+        intitem = fo.Int(label="IntItem").set_active("i1")
+        coloritem = fo.Color(label="ColorItem", value="green")
         filesaveitem = fo.FileSaveItem(label="FileSaveItem")
         buttonitem = fo.ButtonItem(label="FileSaveItem", callback=print)
 
