@@ -74,9 +74,10 @@ class MainWindow(QtWidgets.QMainWindow):
         for i, item in enumerate(self.get_docks()):
             action = widgets.Action(item.windowTitle(), parent=self)
             action.set_checkable(True)
-            action.toggled.connect(item.setVisible)
             action.set_checked(item.isVisible())
-            action.setShortcut(f"Ctrl+Shift+{i}")
+            action.set_shortcut(f"Ctrl+Shift+{i}")
+            action.set_shortcut_context("application")
+            action.toggled.connect(item.setVisible)
             menu.add_action(action)
         menu.add_separator()
         for i in self.get_toolbars():
