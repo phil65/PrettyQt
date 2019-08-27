@@ -24,6 +24,12 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         """
         return self.rowCount()
 
+    def rows(self):
+        return self.rowCount()
+
+    def columns(self):
+        return self.columnCount()
+
     @contextlib.contextmanager
     def change_layout(self):
         """content manager to change the layout
