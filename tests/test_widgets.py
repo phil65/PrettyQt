@@ -971,7 +971,7 @@ def test_widget():
 
 def test_widgetaction():
     action = widgets.Action()
-    widgetaction = widgets.WidgetAction(action)
+    widgetaction = widgets.WidgetAction(parent=action)
     widgetaction.set_tooltip("test")
     widgetaction.set_enabled()
     widgetaction.set_disabled()
