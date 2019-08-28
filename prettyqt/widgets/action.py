@@ -147,6 +147,9 @@ class Action(QtWidgets.QAction):
         """
         return CONTEXTS.inv[self.shortcutContext()]
 
+    def show_shortcut_in_contextmenu(self, state: bool = True):
+        self.setShortcutVisibleInContextMenu(state)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
