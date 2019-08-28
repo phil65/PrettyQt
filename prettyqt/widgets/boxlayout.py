@@ -54,6 +54,12 @@ class BoxLayout(QtWidgets.QBoxLayout):
     def get_children(self):
         return [self[i] for i in range(self.count())]
 
+    def add_stretch(self, stretch: int = 0):
+        self.addStretch(stretch)
+
+    def add_spacing(self, size: int):
+        self.addSpacing(size)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets

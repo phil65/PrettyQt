@@ -53,6 +53,8 @@ def test_boxlayout():
         layout = pickle.load(jar)
     assert len(layout) == 2
     repr(layout)
+    layout.add_stretch(1)
+    layout.add_spacing(1)
 
 
 def test_buttongroup():
