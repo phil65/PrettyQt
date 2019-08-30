@@ -10,7 +10,7 @@ import operator
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import gui, widgets, constants
 from prettyqt.utils import bidict
 
 
@@ -104,7 +104,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         returns generator yielding item names
         """
-        return (x.data(self.model().NAME_ROLE)
+        return (x.data(constants.NAME_ROLE)
                 for x in self.selected_indexes())
 
     def selected_rows(self) -> Generator[int, None, None]:
@@ -117,7 +117,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         returns generator yielding selected userData
         """
-        return (x.data(self.model().QtCore.Qt.UserRole)
+        return (x.data(constants.USER_ROLE)
                 for x in self.selected_indexes())
 
     def setup_dragdrop_move(self):
