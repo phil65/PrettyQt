@@ -7,6 +7,8 @@ from qtpy import QtCore
 
 DISPLAY_ROLE = QtCore.Qt.DisplayRole
 USER_ROLE = QtCore.Qt.UserRole
+SORT_ROLE = QtCore.Qt.UserRole + 1
+NAME_ROLE = QtCore.Qt.UserRole + 2
 EDIT_ROLE = QtCore.Qt.EditRole
 BACKGROUND_ROLE = QtCore.Qt.BackgroundRole
 TOOLTIP_ROLE = QtCore.Qt.ToolTipRole
