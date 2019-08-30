@@ -33,6 +33,9 @@ class ToolButton(QtWidgets.QToolButton):
         btn.set_icon(icon)
         return btn
 
+    def set_default_action(self, action):
+        self.setDefaultAction(action)
+
     def set_popup_mode(self, mode: str):
         """sets the popup mode of the toolbutton
 
