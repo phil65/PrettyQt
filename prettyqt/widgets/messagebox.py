@@ -50,7 +50,7 @@ class MessageBox(QtWidgets.QMessageBox):
         self.set_icon(icon)
         self.setText(title)
         self.setDetailedText(message)
-        if buttons and isinstance(buttons, list):
+        if isinstance(buttons, list):
             for b in buttons:
                 self.add_button(b)
 
