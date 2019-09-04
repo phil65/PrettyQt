@@ -45,11 +45,14 @@ QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 
 class MessageBox(QtWidgets.QMessageBox):
 
-    def __init__(self, icon=None, title="", message="", parent=None):
+    def __init__(self, icon=None, title="", message="", buttons=None, parent=None):
         super().__init__(parent)
         self.set_icon(icon)
         self.setText(title)
         self.setDetailedText(message)
+        if buttons and isinstance(buttons, list):
+            for b in buttons:
+                self.add_button(b)
 
     @classmethod
     def message(cls, msg, title=None, icon=None):
