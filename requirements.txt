@@ -1,4 +1,4 @@
-bidict==0.18.2
+bidict==0.18.3
 qtpy==1.9.0
 qtawesome==0.6.0
 Markdown==3.1.1
