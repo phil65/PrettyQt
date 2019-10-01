@@ -15,7 +15,7 @@ sphinx_rtd_theme==0.4.3
 sphinx-autodoc-annotation==1.0.post1
 sphinx-autodoc-typehints==1.8.0
 
-twine==1.14.0
+twine==2.0.0
 
 PyQt5==5.13.0
 PyQtWebEngine==5.13.1
