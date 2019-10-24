@@ -45,18 +45,23 @@ QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 
 class MessageBox(QtWidgets.QMessageBox):
 
-    def __init__(self, icon=None, title="", message="", buttons=None, parent=None):
+    def __init__(self, icon=None, title=None, text="", details="", buttons=None,
+                 parent=None):
         super().__init__(parent)
         self.set_icon(icon)
-        self.setText(title)
-        self.setDetailedText(message)
+        self.setText(text)
+        self.setWindowTitle(title)
+        self.setWindowFlags(QtCore.Qt.Dialog |
+                            QtCore.Qt.WindowTitleHint |
+                            QtCore.Qt.CustomizeWindowHint)
+        self.setDetailedText(details)
         if isinstance(buttons, list):
             for b in buttons:
                 self.add_button(b)
 
     @classmethod
-    def message(cls, msg, title=None, icon=None):
-        m = cls(cls.NoIcon, title, msg)
+    def message(cls, text, title=None, icon=None):
+        m = cls(cls.NoIcon, title, text)
         m.set_icon(icon)
         return m.show_blocking()
 
@@ -127,7 +132,7 @@ class MessageBox(QtWidgets.QMessageBox):
 
 if __name__ == "__main__":
     app = widgets.app()
-    ret = MessageBox("warning", "header", "detailedtext")
+    ret = MessageBox(icon="warning", title="header", text="text", details="details")
     ret.show()
     print(ret)
     app.exec_()
