@@ -72,6 +72,12 @@ class Label(QtWidgets.QLabel):
         self.setScaledContents(state["scaled_contents"])
         self.setWordWrap(state["word_wrap"])
 
+    def allow_links(self):
+        # self.setText("<a href=\"http://example.com/\">Click Here!</a>")
+        self.setTextFormat(QtCore.Qt.RichText)
+        self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
+        self.setOpenExternalLinks(True)
+
     def set_alignment(self,
                       horizontal: Optional[str] = None,
                       vertical: Optional[str] = None):
@@ -160,6 +166,6 @@ class Label(QtWidgets.QLabel):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = Label("test")
+    widget = Label("http://www.test.de")
     widget.show()
     app.exec_()
