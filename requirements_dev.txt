@@ -13,7 +13,7 @@ codecov==2.0.15
 Sphinx==2.2.0
 sphinx_rtd_theme==0.4.3
 sphinx-autodoc-annotation==1.0.post1
-sphinx-autodoc-typehints==1.8.0
+sphinx-autodoc-typehints==1.10.0
 
 twine==2.0.0
 
