@@ -4,25 +4,25 @@ pip==19.3.1
 bump2version==0.5.11
 wheel==0.33.6
 
-flake8==3.7.8
+flake8==3.7.9
 tox==3.14.0
 
 coverage==4.5.4
 codecov==2.0.15
 
-Sphinx==2.2.0
+Sphinx==2.2.1
 sphinx_rtd_theme==0.4.3
 sphinx-autodoc-annotation==1.0.post1
-sphinx-autodoc-typehints==1.8.0
+sphinx-autodoc-typehints==1.10.2
 
 twine==2.0.0
 
 PyQt5==5.13.0
 PyQtWebEngine==5.13.2
-PyQtChart==5.13.0
+PyQtChart==5.13.1
 
-pytest==5.2.1
+pytest==5.2.2
 pytest-qt==3.2.2
 pytest-xvfb==1.2.0
-pytest-runner==5.1
+pytest-runner==5.2
 pytest-cov==2.8.1
