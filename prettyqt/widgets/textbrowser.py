@@ -4,7 +4,6 @@
 """
 
 import docutils.core
-import markdown
 from qtpy import QtWidgets
 from prettyqt import gui, widgets, core
 
@@ -49,7 +48,7 @@ class TextBrowser(QtWidgets.QTextBrowser):
     def show_markdown(self, file_path):
         with open(file_path) as f:
             file_content = f.read()
-        self.setHtml(markdown.markdown(file_content))
+        self.setMarkdown(file_content)
 
     def show_rst(self, file_path):
         with open(file_path) as f:
