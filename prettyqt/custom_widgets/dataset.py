@@ -302,7 +302,7 @@ class DataSet(object, metaclass=DataSetMeta):
                 for item in self.dialog.layout()
                 if item.id}
 
-    def from_dict(self, dct):
+    def build_from_dict(self, dct):
         for item in self.dialog.layout():
             if item.id in dct and dct[item.id] is not None:
                 item.set_value(dct[item.id])

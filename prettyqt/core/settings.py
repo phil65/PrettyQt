@@ -5,11 +5,9 @@
 
 import contextlib
 
-from qtpy import QtCore
-
 from prettyqt import core
 from prettyqt.utils import bidict
-
+from qtpy import QtCore
 
 FORMATS = bidict(native=QtCore.QSettings.NativeFormat,
                  ini=QtCore.QSettings.IniFormat)
@@ -58,9 +56,9 @@ class Settings(QtCore.QSettings):
         return len(self.allKeys())
 
     @classmethod
-    def from_dict(cls, dict: dict):
+    def build_from_dict(cls, dct: dict):
         settings = cls()
-        for k, v in dict.items():
+        for k, v in dct.items():
             settings.set_value(k, v)
         return settings
 

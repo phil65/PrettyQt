@@ -272,7 +272,7 @@ def test_formlayout():
     widget[3] = widgets.RadioButton("widget[3]")
     widget += widgets.RadioButton("added with +=")
     widget += ("added with +=", widgets.RadioButton("tuple"))
-    widget = widgets.FormLayout.from_dict({"from": "dict"})
+    widget = widgets.FormLayout.build_from_dict({"from": "dict"})
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:

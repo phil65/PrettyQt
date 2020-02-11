@@ -147,7 +147,7 @@ def test_settings():
         settings.set_path("error", "user", path)
     with pytest.raises(ValueError):
         settings.set_path("native", "error", path)
-    s = core.Settings.from_dict(dict(a="b"))
+    s = core.Settings.build_from_dict(dict(a="b"))
     repr(s)
 
 

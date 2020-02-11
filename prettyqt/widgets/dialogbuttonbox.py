@@ -5,11 +5,9 @@
 
 from typing import List
 
-from qtpy import QtCore, QtWidgets
-
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 from prettyqt.utils import bidict
-
+from qtpy import QtCore, QtWidgets
 
 BUTTONS = bidict(cancel=QtWidgets.QDialogButtonBox.Cancel,
                  ok=QtWidgets.QDialogButtonBox.Ok,

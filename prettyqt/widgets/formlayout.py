@@ -87,7 +87,7 @@ class FormLayout(QtWidgets.QFormLayout):
         return pos[0], ROLES.inv[pos[1]]
 
     @classmethod
-    def from_dict(cls, dct, parent=None):
+    def build_from_dict(cls, dct, parent=None):
         formlayout = cls(parent)
         for i, (k, v) in enumerate(dct.items(), start=1):
             if k is not None:
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     app = widgets.app()
     dct = {"key": widgets.Label("test"),
            None: widgets.Label("test 2")}
-    layout = FormLayout.from_dict(dct)
+    layout = FormLayout.build_from_dict(dct)
     layout[3] = "hellooo"
     widget = widgets.Widget()
     widget.set_layout(layout)
