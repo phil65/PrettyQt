@@ -5,6 +5,7 @@ language: python
 python:
   - "3.6"
   - "3.7"
+  - "3.8"
   # PyPy versions
   # - "pypy3.6-alpha"
 
@@ -13,8 +14,8 @@ install:
   - pip install --upgrade pip
   - pip install -U tox-travis
   - sudo apt-get -y install python3-pyqt5
-  - pip install -r requirements.txt
   - pip install -r requirements_dev.txt
+  - pip install -r requirements.txt
 
 # Command to run tests, e.g. python setup.py test
 script:
