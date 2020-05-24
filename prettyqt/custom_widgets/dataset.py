@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from prettyqt import custom_widgets, widgets, custom_validators, gui
+from prettyqt import custom_validators, custom_widgets, gui, widgets
 
 
 class DataItem(object):
@@ -13,6 +13,7 @@ class DataItem(object):
         self.label_col = 0
         self.active_on = list()
         self.not_active_on = list()
+        self.widget = None
 
     def __get__(self, instance, owner):
         return self.widget.get_value()
@@ -265,11 +266,18 @@ class DataSet(object, metaclass=DataSetMeta):
 
     def __init__(self, title=None, comment=None, icon=""):
         # self.widget = custom_widgets.SettingsWidget()
+        self.dialog_title = title
+        self.dialog_comment = comment
+        self.dialog_icon = icon
+        self.dialog = None
+        self.create_dialog()
+
+    def create_dialog(self):
         self.dialog = widgets.BaseDialog()
         self.dialog.set_modality("application")
         self.dialog.setMinimumWidth(400)
-        self.dialog.title = title
-        self.dialog.set_icon(icon)
+        self.dialog.title = self.dialog_title
+        self.dialog.set_icon(self.dialog_icon)
         self.dialog.set_layout("grid")
         self.dialog.box.set_spacing(20)
         self.dialog.box.set_margin(20)
@@ -284,8 +292,8 @@ class DataSet(object, metaclass=DataSetMeta):
             for active in item.not_active_on:
                 item.widget.setDisabled(self._items[active].widget.get_value())
                 self._items[active].widget.value_changed.connect(item.widget.setDisabled)
-        if comment:
-            label = widgets.Label(comment)
+        if self.dialog_comment:
+            label = widgets.Label(self.dialog_comment)
             label.setWordWrap(True)
             self.dialog.box[i + 1, 0:3] = label
         button_box = widgets.DialogButtonBox()
@@ -293,6 +301,7 @@ class DataSet(object, metaclass=DataSetMeta):
         button_box.add_default_button("cancel", callback=self.dialog.reject)
         self.dialog.box.append(button_box)
         self.on_update()
+        return self.dialog
 
     def edit(self):
         return self.dialog.show_blocking()
