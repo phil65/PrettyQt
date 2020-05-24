@@ -3,11 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
 from prettyqt.utils import bidict
-
 
 area = QtWidgets.QAbstractScrollArea
 
@@ -143,7 +142,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         Args:
             width: width in pixels
         """
-        stylesheet = f"QScrollBar:vertical {{height: {width}px;}}"
+        stylesheet = f"QScrollBar:vertical {{width: {width}px;}}"
         self.verticalScrollBar().setStyleSheet(stylesheet)
 
     def scroll_to_top(self):
