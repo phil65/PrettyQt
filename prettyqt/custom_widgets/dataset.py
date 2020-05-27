@@ -62,12 +62,20 @@ class Float(DataItem):
                  unit="", step=0.1, slider=False, check=True):
         super().__init__(label, value=value, min_val=min_val,
                          max_val=max_val, unit=unit, check=check)
+        self.value = value
+        self.range = (min_val, max_val)
+        self.step = step
+        self.unit = unit
+        self.widget = self.create_widget()
+
+    def create_widget(self):
         self.widget = widgets.DoubleSpinBox()
-        self.widget.set_range(min_val, max_val)
-        self.widget.setSingleStep(step)
-        self.widget.setSuffix(unit)
-        if value is not None:
-            self.widget.set_value(value)
+        self.widget.set_range(*self.range)
+        self.widget.setSingleStep(self.step)
+        self.widget.setSuffix(self.unit)
+        if self.value is not None:
+            self.widget.set_value(self.value)
+        return self.widget
 
 
 class Int(DataItem):
@@ -87,15 +95,24 @@ class Int(DataItem):
                  unit="", step=1, slider=False, check=True):
         super().__init__(label, value=value, min_val=min_val, max_val=max_val,
                          unit=unit, check=check)
-        if slider:
+        self.value = value
+        self.range = (min_val, max_val)
+        self.step = step
+        self.unit = unit
+        self.slider = slider
+        self.widget = self.create_widget()
+
+    def create_widget(self):
+        if self.slider:
             self.widget = widgets.Slider()
         else:
             self.widget = widgets.SpinBox()
-            self.widget.setSuffix(unit)
-        self.widget.set_range(min_val, max_val)
-        self.widget.setSingleStep(step)
-        if value is not None:
-            self.widget.set_value(value)
+            self.widget.setSuffix(self.unit)
+        self.widget.set_range(*self.range)
+        self.widget.setSingleStep(self.step)
+        if self.value is not None:
+            self.widget.set_value(self.value)
+        return self.widget
 
 
 class String(DataItem):
@@ -108,16 +125,23 @@ class String(DataItem):
 
     def __init__(self, label, value=None, notempty=False, regex=None):
         super().__init__(label, value=value)
+        self.value = value
+        self.notempty = notempty
+        self.regex = regex
+        self.widget = self.create_widget()
+
+    def create_widget(self):
         self.widget = widgets.LineEdit()
-        if notempty:
+        if self.notempty:
             val = custom_validators.NotEmptyValidator()
             self.widget.set_validator(val)
-        if regex is not None:
+        if self.regex is not None:
             val = gui.RegExpValidator()
-            val.set_regex(regex)
+            val.set_regex(self.regex)
             self.widget.set_validator(val)
-        if value is not None:
-            self.widget.set_value(value)
+        if self.value is not None:
+            self.widget.set_value(self.value)
+        return self.widget
 
     def is_valid(self):
         return self.widget.is_valid()
@@ -134,13 +158,19 @@ class Bool(DataItem):
 
     def __init__(self, label, value=None, check=True, use_push=False):
         super().__init__(label, value=value, check=check)
-        if use_push:
+        self.use_push = use_push
+        self.value = value
+        self.widget = self.create_widget()
+
+    def create_widget(self):
+        if self.use_push:
             self.widget = widgets.PushButton()
             self.widget.setCheckable(True)
         else:
             self.widget = widgets.CheckBox()
-        if value is not None:
-            self.widget.set_value(value)
+        if self.value is not None:
+            self.widget.set_value(self.value)
+        return self.widget
 
 
 class Color(DataItem):
@@ -155,9 +185,14 @@ class Color(DataItem):
 
     def __init__(self, label, value=None, check=True):
         super().__init__(label, value=value, check=check)
+        self.value = value
+        self.widget = self.create_widget()
+
+    def create_widget(self):
         self.widget = custom_widgets.ColorChooserButton()
-        if value is not None:
-            self.widget.set_value(value)
+        if self.value is not None:
+            self.widget.set_value(self.value)
+        return self.widget
 
 
 class Enum(DataItem):
@@ -176,11 +211,17 @@ class Enum(DataItem):
 
     def __init__(self, label, choices, value=None, check=True, radio=False):
         super().__init__(label, value=value, check=check)
-        if radio:
+        self.value = value
+        self.radio = radio
+        self.choices = choices
+        self.widget = self.create_widget()
+
+    def create_widget(self):
+        if self.radio:
             self.widget = custom_widgets.SelectionWidget(layout="vertical")
         else:
             self.widget = widgets.ComboBox()
-        for item in choices:
+        for item in self.choices:
             if isinstance(item, tuple):
                 if len(item) == 2:
                     self.widget.add(item[1], item[0])
@@ -188,17 +229,23 @@ class Enum(DataItem):
                     self.widget.add(item[1], item[0], item[2])
             else:
                 self.widget.add(item)
-        if value is not None:
-            self.widget.set_value(value)
+        if self.value is not None:
+            self.widget.set_value(self.value)
+        return self.widget
 
 
 class MultipleChoiceItem(DataItem):
 
     def __init__(self, label, choices, value=None, check=True):
         super().__init__(label, value=value, check=check)
+        self.value = value
+        self.choices = choices
+        self.widget = self.create_widget()
+
+    def create_widget(self):
         self.widget = widgets.ListWidget()
         self.widget.set_selection_mode("multi")
-        for item in choices:
+        for item in self.choices:
             if isinstance(item, tuple):
                 if len(item) == 2:
                     self.widget.add(item[1], item[0])
@@ -206,17 +253,23 @@ class MultipleChoiceItem(DataItem):
                     self.widget.add(item[1], item[0], item[2])
             else:
                 self.widget.add(item)
-        if value is not None:
-            self.widget.set_value(value)
+        if self.value is not None:
+            self.widget.set_value(self.value)
+        return self.widget
 
 
 class FileSaveItem(DataItem):
 
     def __init__(self, label, formats="*", value=None, basedir=None, check=True):
         super().__init__(label, value=value, check=check)
+        self.value = value
+        self.widget = self.create_widget()
+
+    def create_widget(self):
         self.widget = custom_widgets.FileChooserButton()
-        if value is not None:
-            self.widget.set_value(value)
+        if self.value is not None:
+            self.widget.set_value(self.value)
+        return self.widget
 
 
 class ButtonItem(DataItem):
@@ -240,9 +293,15 @@ class ButtonItem(DataItem):
 
     def __init__(self, label, callback, icon=None, value=None, check=True):
         super().__init__("", value=value, check=check)
-        self.widget = widgets.PushButton(label)
-        if value is not None:
-            self.widget.set_value(value)
+        self.button_label = label
+        self.value = value
+        self.widget = self.create_widget()
+
+        def create_widget(self):
+            self.widget = widgets.PushButton(self.button_label)
+            if self.value is not None:
+                self.widget.set_value(self.value)
+            return self.widget
 
 
 class DataSetMeta(type):
@@ -269,39 +328,40 @@ class DataSet(object, metaclass=DataSetMeta):
         self.dialog_title = title
         self.dialog_comment = comment
         self.dialog_icon = icon
-        self.dialog = None
-        self.create_dialog()
+        self.dialog = self.create_dialog()
 
     def create_dialog(self):
-        self.dialog = widgets.BaseDialog()
-        self.dialog.set_modality("application")
-        self.dialog.setMinimumWidth(400)
-        self.dialog.title = self.dialog_title
-        self.dialog.set_icon(self.dialog_icon)
-        self.dialog.set_layout("grid")
-        self.dialog.box.set_spacing(20)
-        self.dialog.box.set_margin(20)
+        dialog = widgets.BaseDialog()
+        dialog.set_modality("application")
+        dialog.setMinimumWidth(400)
+        dialog.title = self.dialog_title
+        dialog.set_icon(self.dialog_icon)
+        dialog.set_layout("grid")
+        dialog.box.set_spacing(20)
+        dialog.box.set_margin(20)
         for i, (k, item) in enumerate(self._items.items()):
-            self.dialog.box[i, item.label_col] = widgets.Label(item.label)
-            self.dialog.box[i, item.label_col + 1:item.label_col + 3] = item.widget
-            item.widget.id = k
-            item.widget.value_changed.connect(self.on_update)
+            dialog.box[i, item.label_col] = widgets.Label(item.label)
+            widget = item.create_widget()
+            dialog.box[i, item.label_col + 1:item.label_col + 3] = widget
+            widget.id = k
+            widget.value_changed.connect(self.on_update)
             for active in item.active_on:
-                item.widget.setEnabled(self._items[active].widget.get_value())
-                self._items[active].widget.value_changed.connect(item.widget.setEnabled)
+                widget.setEnabled(self._items[active].widget.get_value())
+                self._items[active].widget.value_changed.connect(widget.setEnabled)
             for active in item.not_active_on:
-                item.widget.setDisabled(self._items[active].widget.get_value())
-                self._items[active].widget.value_changed.connect(item.widget.setDisabled)
+                widget.setDisabled(self._items[active].widget.get_value())
+                self._items[active].widget.value_changed.connect(widget.setDisabled)
         if self.dialog_comment:
             label = widgets.Label(self.dialog_comment)
             label.setWordWrap(True)
-            self.dialog.box[i + 1, 0:3] = label
+            dialog.box[i + 1, 0:3] = label
         button_box = widgets.DialogButtonBox()
-        self.ok_btn = button_box.add_default_button("ok", callback=self.dialog.accept)
-        button_box.add_default_button("cancel", callback=self.dialog.reject)
-        self.dialog.box.append(button_box)
+        self.ok_btn = button_box.add_default_button("ok", callback=dialog.accept)
+        button_box.add_default_button("cancel", callback=dialog.reject)
+        dialog.box.append(button_box)
         self.on_update()
-        return self.dialog
+        self.dialog = dialog
+        return dialog
 
     def edit(self):
         return self.dialog.show_blocking()
