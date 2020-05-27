@@ -6,9 +6,8 @@
 import qtawesome as qta
 from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import widgets, core, gui
+from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict
-
 
 TAB_SHAPES = bidict(rounded=QtWidgets.QTabWidget.Rounded,
                     triangular=QtWidgets.QTabWidget.Triangular)
@@ -105,7 +104,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def set_detachable(self):
         self.tab_bar.on_detach.connect(self.detach_tab)
-        QtWidgets.qApp.aboutToQuit.connect(self.close_detached_tabs)
+        widgets.app().aboutToQuit.connect(self.close_detached_tabs)
         self.setMovable(True)
 
     def set_closable(self, closable: bool = True):
