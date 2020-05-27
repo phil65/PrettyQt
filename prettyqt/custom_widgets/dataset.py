@@ -297,11 +297,11 @@ class ButtonItem(DataItem):
         self.value = value
         self.widget = self.create_widget()
 
-        def create_widget(self):
-            self.widget = widgets.PushButton(self.button_label)
-            if self.value is not None:
-                self.widget.set_value(self.value)
-            return self.widget
+    def create_widget(self):
+        self.widget = widgets.PushButton(self.button_label)
+        if self.value is not None:
+            self.widget.set_value(self.value)
+        return self.widget
 
 
 class DataSetMeta(type):
