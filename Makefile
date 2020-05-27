@@ -85,13 +85,13 @@ dist: clean ## builds source and wheel package
 # 	python setup.py install
 
 bump-minor: ## minor version bump
-	bump2version minor --allow-dirty
+	bump2version minor --allow-dirty --tag
 	pip install -e .
 
 bump-patch: ## patch version bump
-	bump2version patch --allow-dirty
+	bump2version patch --allow-dirty --tag
 	pip install -e .
 
 bump-major: ## major version bump
-	bump2version major --allow-dirty
+	bump2version major --allow-dirty --tag
 	pip install -e .
