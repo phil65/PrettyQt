@@ -24,7 +24,6 @@ PyQtChart==5.14.0
 
 pytest==5.4.2
 pytest-qt==3.3.0
-pytest-xvfb==1.2.0
 PyVirtualDisplay==0.2.5
 pytest-runner==5.2
 pytest-cov==2.9.0
