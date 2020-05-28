@@ -295,12 +295,14 @@ class ButtonItem(DataItem):
         super().__init__("", value=value, check=check)
         self.button_label = label
         self.value = value
+        self.callback = callback
         self.widget = self.create_widget()
 
     def create_widget(self):
         self.widget = widgets.PushButton(self.button_label)
         if self.value is not None:
             self.widget.set_value(self.value)
+        self.widget.clicked.connect(self.callback)
         return self.widget
 
 
