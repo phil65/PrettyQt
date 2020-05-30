@@ -3,13 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Optional, Union
+from typing import Union
 
 import qtawesome as qta
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import widgets, gui
-
+from prettyqt import gui, widgets
 
 QtWidgets.QDialog.__bases__ = (widgets.Widget,)
 
@@ -105,7 +104,7 @@ class Dialog(BaseDialog):
                  icon=None,
                  parent=None,
                  delete_on_close: bool = True,
-                 layout: Optional[str] = None):
+                 layout: Union[None, str, QtWidgets.QLayout] = None):
         super().__init__(parent=parent)
         if self.DEFAULT_SIZE:
             self.resize(*self.DEFAULT_SIZE)
@@ -113,18 +112,16 @@ class Dialog(BaseDialog):
         self.set_icon(icon)
         if delete_on_close:
             self.delete_on_close()
-        self.box = None
-        if layout in ["horizontal", "vertical"]:
-            self.box = widgets.BoxLayout(layout)
-            self.set_layout(self.box)
+        if layout is not None:
+            self.set_layout(layout)
 
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = Dialog()
+    w = Dialog()
     import pickle
     with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
+        pickle.dump(w, jar)
     with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
-    widget.show_blocking()
+        w = pickle.load(jar)
+    w.show_blocking()
