@@ -3,15 +3,14 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Union
 import logging
+from typing import Union
 
 import qtawesome as qta
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import core, widgets, gui
+from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict
-
 
 DOCK_POSITIONS = bidict(top=QtCore.Qt.TopDockWidgetArea,
                         bottom=QtCore.Qt.BottomDockWidgetArea,
@@ -130,7 +129,6 @@ class MainWindow(QtWidgets.QMainWindow):
                 self.restoreState(state)
             except TypeError:
                 logging.info("Wrong type for window state. Probably Qt binding switch?")
-                pass
 
     def closeEvent(self, event):
         """

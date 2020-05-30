@@ -8,7 +8,6 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
-
 ROLES = bidict(left=QtWidgets.QFormLayout.LabelRole,
                right=QtWidgets.QFormLayout.FieldRole,
                both=QtWidgets.QFormLayout.SpanningRole)
@@ -55,12 +54,12 @@ class FormLayout(QtWidgets.QFormLayout):
         raise TypeError("Wrong type for addition")
 
     def __getstate__(self):
-        widgets = []
+        widget_list = []
         positions = []
         for i, item in enumerate(list(self)):
-            widgets.append(item)
+            widget_list.append(item)
             positions.append(self.get_item_pos(i))
-        return dict(widgets=widgets, positions=positions)
+        return dict(widgets=widget_list, positions=positions)
 
     def __setstate__(self, state):
         self.__init__()
@@ -109,7 +108,7 @@ if __name__ == "__main__":
            None: widgets.Label("test 2")}
     layout = FormLayout.build_from_dict(dct)
     layout[3] = "hellooo"
-    widget = widgets.Widget()
-    widget.set_layout(layout)
-    widget.show()
+    w = widgets.Widget()
+    w.set_layout(layout)
+    w.show()
     app.exec_()
