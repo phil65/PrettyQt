@@ -3,16 +3,15 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Optional, Generator, Any, List
 import functools
 import logging
 import operator
+from typing import Any, Generator, List, Optional
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, widgets, constants
+from prettyqt import constants, gui, widgets
 from prettyqt.utils import bidict
-
 
 TRIGGERS = bidict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
                   double_click=QtWidgets.QAbstractItemView.DoubleClicked,
@@ -127,7 +126,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setDefaultDropAction(QtCore.Qt.MoveAction)
         self.setDropIndicatorShown(True)
 
-    def set_edit_triggers(self, *triggers):
+    def set_edit_triggers(self, *triggers: str):
         for item in triggers:
             if item not in TRIGGERS:
                 raise ValueError("trigger type not available")
