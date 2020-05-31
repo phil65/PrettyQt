@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+import functools
+import operator
 import pathlib
 from typing import Optional, Union
 
@@ -10,7 +12,6 @@ from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
 from prettyqt.utils import bidict
-
 
 H_ALIGNMENTS = bidict(left=QtCore.Qt.AlignLeft,
                       right=QtCore.Qt.AlignRight,
@@ -116,10 +117,10 @@ class Label(QtWidgets.QLabel):
         """
         return TEXT_FORMATS.inv[self.textFormat()]
 
-    def set_text_interaction(self, interaction_type: str):
+    def set_text_interaction(self, *types: str):
         """set the text interaction mode
 
-        Allowed values are "none", "by_mouse", "by_keyboard"
+        Allowed values are "none", "by_mouse", "by_keyboard", "text_editable"
 
         Args:
             mode: text interaction mode to use
@@ -127,19 +128,21 @@ class Label(QtWidgets.QLabel):
         Raises:
             ValueError: text interaction mode does not exist
         """
-        if interaction_type not in TEXT_INTERACTION:
-            raise ValueError("Invalid text interaction mode")
-        self.setTextInteractionFlags(TEXT_INTERACTION[interaction_type])
+        for item in types:
+            if item not in TEXT_INTERACTION:
+                raise ValueError("Invalid text interaction mode")
+        flags = functools.reduce(operator.ior, [TEXT_INTERACTION[t] for t in types])
+        self.setTextInteractionFlags(flags)
 
     def get_text_interaction(self) -> str:
         """returns current text interaction mode
 
-        Possible values: "none", "by_mouse", "by_keyboard"
+        Possible values: "none", "by_mouse", "by_keyboard", "text_editable"
 
         Returns:
-            text interaction mode
+            list of text interaction modes
         """
-        return TEXT_INTERACTION.inv[self.textInteractionFlags()]
+        return [k for k, v in TEXT_INTERACTION.items() if v & self.textInteractionFlags()]
 
     def set_text(self, text: str):
         self.setText(text)
