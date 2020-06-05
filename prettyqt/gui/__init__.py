@@ -18,7 +18,7 @@ from .brush import Brush
 from .color import Color
 from .font import Font
 from .fontmetrics import FontMetrics
-
+from .region import Region
 from .paintdevice import PaintDevice
 from .icon import Icon
 from .image import Image
@@ -47,6 +47,7 @@ __all__ = ["GuiApplication",
            "Color",
            "Font",
            "FontMetrics",
+           "Region",
            "PaintDevice",
            "Icon",
            "Image",
