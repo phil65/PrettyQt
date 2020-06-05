@@ -74,6 +74,7 @@ from .listwidget import ListWidget
 from .treeview import TreeView
 from .treewidget import TreeWidget
 from .tableview import TableView
+from .tablewidgetitem import TableWidgetItem
 from .tablewidget import TableWidget
 from .abstractitemdelegate import AbstractItemDelegate
 from .itemdelegate import ItemDelegate
@@ -180,6 +181,7 @@ __all__ = ["app",
            "TreeView",
            "TreeWidget",
            "TableView",
+           "TableWidgetItem",
            "TableWidget",
            "SplashScreen",
            "ProgressDialog",
