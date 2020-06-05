@@ -3,9 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
 ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
@@ -20,5 +20,7 @@ class ScrollBar(QtWidgets.QScrollBar):
     value_changed = core.Signal(int)
 
     def __init__(self, orientation="horizontal", parent=None):
-        super().__init__(ORIENTATIONS[orientation], parent)
+        if orientation in ORIENTATIONS:
+            orientation = ORIENTATIONS[orientation]
+        super().__init__(orientation, parent)
         self.valueChanged.connect(self.on_value_change)
