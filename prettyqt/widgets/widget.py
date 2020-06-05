@@ -3,14 +3,13 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Dict, Callable, Optional
 from contextlib import contextmanager
+from typing import Callable, Dict, Optional
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import widgets, core, gui
+from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict
-
 
 POLICIES = bidict(none=QtCore.Qt.NoContextMenu,
                   prevent=QtCore.Qt.PreventContextMenu,
