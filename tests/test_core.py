@@ -59,6 +59,10 @@ def test_diriterator():
 def test_mimedata():
     mime_data = core.MimeData()
     mime_data.set_data("type a", "data")
+    assert mime_data.get_data("type a") == "data"
+    dct = dict(a=2, b="test")
+    mime_data.set_json_data("type a", dct)
+    assert mime_data.get_json_data("type a") == dct
 
 
 def test_modelindex():
