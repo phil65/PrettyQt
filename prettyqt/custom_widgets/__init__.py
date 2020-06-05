@@ -15,6 +15,7 @@ from .markdownwidget import MarkdownWindow
 from .imageviewer import ImageViewer
 from .popupinfo import PopupInfo
 from .buttondelegate import ButtonDelegate
+from .radiodelegate import RadioDelegate
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
 
@@ -27,6 +28,7 @@ __all__ = ["FlowLayout",
            "WaitingSpinner",
            "PopupInfo",
            "ButtonDelegate",
+           "RadioDelegate",
            "SelectionWidget",
            "Image",
            "ImageViewer",

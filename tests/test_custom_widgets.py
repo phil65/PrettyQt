@@ -7,8 +7,8 @@ import pickle
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import core, custom_widgets, gui, widgets
 import prettyqt.custom_widgets.dataset as fo
+from prettyqt import core, custom_widgets, gui, widgets
 
 test_widget = widgets.Widget()
 
@@ -18,6 +18,19 @@ def test_buttondelegate():
     widget.setEditorData(widgets.Widget(), None)
     widget.createEditor(None, None, QtCore.QModelIndex())
     widget.currentIndexChanged()
+
+
+def test_radiodelegate():
+    widget = widgets.TableWidget()
+    widget.setColumnCount(3)
+    widget.insertRow(0)
+    widget.setHorizontalHeaderLabels(['LIB', 'CELL', 'area'])
+    item = widgets.TableWidgetItem("test")
+    widget.setItem(0, 0, item)
+    widget.setItem(1, 1, widgets.TableWidgetItem("test"))
+    delegate = custom_widgets.RadioDelegate(widget, ["a", "b"])
+    widget.setItemDelegateForColumn(0, delegate)
+    widget.openPersistentEditor(item)
 
 
 def test_colorchooserbutton():
