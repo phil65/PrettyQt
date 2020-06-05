@@ -3,8 +3,8 @@
 
 """Tests for `prettyqt` package."""
 
-import pickle
 import datetime
+import pickle
 
 import pytest
 from qtpy import QtCore
@@ -837,6 +837,15 @@ def test_tableview():
     widget.setup_dragdrop_move()
     widget.num_selected()
     widget.jump_to_column(0)
+    widget.set_scroll_mode("item")
+    widget.set_vertical_scroll_mode("item")
+    widget.set_horizontal_scroll_mode("item")
+    with pytest.raises(ValueError):
+        widget.set_scroll_mode("aa")
+    with pytest.raises(ValueError):
+        widget.set_vertical_scroll_mode("aa")
+    with pytest.raises(ValueError):
+        widget.set_horizontal_scroll_mode("aa")
     widget.highlight_when_inactive()
     widget.set_table_color("black")
     widget.scroll_to_bottom()

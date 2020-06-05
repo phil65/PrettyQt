@@ -26,6 +26,8 @@ SELECTION_MODES = bidict(single=QtWidgets.QAbstractItemView.SingleSelection,
                          multi=QtWidgets.QAbstractItemView.MultiSelection,
                          none=QtWidgets.QAbstractItemView.NoSelection)
 
+SCROLL_MODES = bidict(item=QtWidgets.QAbstractItemView.ScrollPerItem,
+                      pixel=QtWidgets.QAbstractItemView.ScrollPerPixel)
 
 QtWidgets.QAbstractItemView.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -186,6 +188,52 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             selection mode
         """
         return SELECTION_MODES.inv[self.selectionMode()]
+
+    def set_scroll_mode(self, mode: str):
+        """sets the scroll mode for both directions
+
+        possible values are "item", "pixel"
+
+        Args:
+            mode: mode to set
+
+        Raises:
+            ValueError: invalid scroll mode
+        """
+        if mode not in SCROLL_MODES:
+            raise ValueError("Invalid scroll mode")
+        self.setHorizontalScrollMode(SCROLL_MODES[mode])
+        self.setVerticalScrollMode(SCROLL_MODES[mode])
+
+    def set_horizontal_scroll_mode(self, mode: str):
+        """sets the horizontal scroll mode
+
+        possible values are "item", "pixel"
+
+        Args:
+            mode: mode to set
+
+        Raises:
+            ValueError: invalid scroll mode
+        """
+        if mode not in SCROLL_MODES:
+            raise ValueError("Invalid scroll mode")
+        self.setHorizontalScrollMode(SCROLL_MODES[mode])
+
+    def set_vertical_scroll_mode(self, mode: str):
+        """sets the vertical scroll mode
+
+        possible values are "item", "pixel"
+
+        Args:
+            mode: mode to set
+
+        Raises:
+            ValueError: invalid scroll mode
+        """
+        if mode not in SCROLL_MODES:
+            raise ValueError("Invalid scroll mode")
+        self.setVerticalScrollMode(SCROLL_MODES[mode])
 
     def num_selected(self) -> int:
         """returns amount of selected rows
