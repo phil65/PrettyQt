@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+import pathlib
+
 from prettyqt import custom_validators, custom_widgets, gui, widgets
 
 
@@ -263,6 +265,7 @@ class FileSaveItem(DataItem):
     def __init__(self, label, formats="*", value=None, basedir=None, check=True):
         super().__init__(label, value=value, check=check)
         self.value = value
+        self.formats = formats.lstrip(".")
         self.widget = self.create_widget()
 
     def create_widget(self):
@@ -369,9 +372,11 @@ class DataSet(object, metaclass=DataSetMeta):
         return self.dialog.show_blocking()
 
     def to_dict(self):
-        return {item.id: item.get_value()
-                for item in self.dialog.layout()
-                if item.id}
+        dct = {item.id: item.get_value()
+               for item in self.dialog.layout()
+               if item.id}
+        return {a: (str(b) if isinstance(b, pathlib.Path) else b)
+                for a, b in dct.items()}
 
     def build_from_dict(self, dct):
         for item in self.dialog.layout():
