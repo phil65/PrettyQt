@@ -32,6 +32,7 @@ from .runnable import Runnable
 from .modelindex import ModelIndex
 from .threadpool import ThreadPool
 from .dir import Dir
+from .event import Event
 from .itemselectionmodel import ItemSelectionModel
 from .diriterator import DirIterator
 from .abstractitemmodel import AbstractItemModel
@@ -68,6 +69,7 @@ __all__ = ["Object",
            "RectF",
            "MimeData",
            "Dir",
+           "Event",
            "DirIterator",
            "ItemSelectionModel",
            "Slot",
