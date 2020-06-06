@@ -6,10 +6,9 @@
 from typing import Any, Callable, Optional, Union
 
 import qtawesome as qta
-from qtpy import QtWidgets, QtGui
+from qtpy import QtGui, QtWidgets
 
-from prettyqt import core, widgets, gui
-
+from prettyqt import core, gui, widgets
 
 QtWidgets.QMenu.__bases__ = (widgets.Widget,)
 
@@ -47,18 +46,17 @@ class Menu(QtWidgets.QMenu):
             icon = qta.icon(icon)
         self.setIcon(icon)
 
-    def add_separator(self):
-        self.addSeparator()
-
-    def _separator(self, text: str) -> widgets.WidgetAction:
-        """returns a separator showing a label
+    def add_separator(self, text: str) -> widgets.WidgetAction:
+        """adds a separator showing an optional label
 
         Args:
             text: Text to show on separator
 
         Returns:
-            Separator widget
+            Separator action
         """
+        if text is None:
+            return self.addSeparator()
         label = widgets.Label(text)
         label.setMinimumWidth(self.minimumWidth())
         label.setStyleSheet("background:lightgrey")
