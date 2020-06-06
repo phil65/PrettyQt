@@ -63,6 +63,7 @@ class Menu(QtWidgets.QMenu):
         label.set_alignment(horizontal="center")
         separator = widgets.WidgetAction(parent=self)
         separator.setDefaultWidget(label)
+        self.add(separator)
         return separator
 
     def add_action(self,

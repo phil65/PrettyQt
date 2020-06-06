@@ -494,7 +494,7 @@ def test_menu():
     for item in menu:
         pass
     menu.add_menu(widgets.Menu())
-    menu._separator("test")
+    menu.add_separator("test")
     menu.add_separator()
 
 
