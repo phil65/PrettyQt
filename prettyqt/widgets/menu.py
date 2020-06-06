@@ -46,7 +46,7 @@ class Menu(QtWidgets.QMenu):
             icon = qta.icon(icon)
         self.setIcon(icon)
 
-    def add_separator(self, text: str) -> widgets.WidgetAction:
+    def add_separator(self, text: Optional[str] = None) -> widgets.WidgetAction:
         """adds a separator showing an optional label
 
         Args:
@@ -55,14 +55,16 @@ class Menu(QtWidgets.QMenu):
         Returns:
             Separator action
         """
-        if text is None:
-            return self.addSeparator()
-        label = widgets.Label(text)
-        label.setMinimumWidth(self.minimumWidth())
-        label.setStyleSheet("background:lightgrey")
-        label.set_alignment(horizontal="center")
         separator = widgets.WidgetAction(parent=self)
-        separator.setDefaultWidget(label)
+        if text is None:
+            separator.setSeparator(True)
+        else:
+            label = widgets.Label(text)
+            label.setMinimumWidth(self.minimumWidth())
+            label.setStyleSheet("background:lightgrey")
+            label.set_alignment(horizontal="center")
+            separator = widgets.WidgetAction(parent=self)
+            separator.setDefaultWidget(label)
         self.add(separator)
         return separator
 
