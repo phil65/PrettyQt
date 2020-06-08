@@ -11,16 +11,22 @@ SORT_ROLE = QtCore.Qt.UserRole + 1
 NAME_ROLE = QtCore.Qt.UserRole + 2
 EDIT_ROLE = QtCore.Qt.EditRole
 BACKGROUND_ROLE = QtCore.Qt.BackgroundRole
+FOREGROUND_ROLE = QtCore.Qt.ForegroundRole
 TOOLTIP_ROLE = QtCore.Qt.ToolTipRole
 STATUSTIP_ROLE = QtCore.Qt.StatusTipRole
 DECORATION_ROLE = QtCore.Qt.DecorationRole
 CHECKSTATE_ROLE = QtCore.Qt.CheckStateRole
 ALIGNMENT_ROLE = QtCore.Qt.TextAlignmentRole
+FONT_ROLE = QtCore.Qt.FontRole
 
+ALIGN_LEFT = QtCore.Qt.AlignLeft
 ALIGN_RIGHT = QtCore.Qt.AlignRight
 ALIGN_CENTER = QtCore.Qt.AlignCenter
 ALIGN_BOTTOM = QtCore.Qt.AlignBottom
+ALIGN_V_CENTER = QtCore.Qt.AlignVCenter
+
 HORIZONTAL = QtCore.Qt.Horizontal
+VERTICAL = QtCore.Qt.Vertical
 
 ASCENDING = QtCore.Qt.AscendingOrder
 
