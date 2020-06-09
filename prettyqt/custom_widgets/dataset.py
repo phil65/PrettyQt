@@ -335,7 +335,6 @@ class DataSet(object, metaclass=DataSetMeta):
         self.dialog_title = title
         self.dialog_comment = comment
         self.dialog_icon = icon
-        self.dialog = self.create_dialog()
 
     def create_dialog(self):
         dialog = widgets.BaseDialog()
@@ -367,23 +366,33 @@ class DataSet(object, metaclass=DataSetMeta):
         button_box.add_default_button("cancel", callback=dialog.reject)
         dialog.box.append(button_box)
         self.on_update()
-        self.dialog = dialog
         return dialog
 
-    def edit(self):
-        return self.dialog.show_blocking()
+    def edit(self, preset: dict = None):
+        dialog = self.create_dialog()
+        if preset:
+            for item in dialog.layout():
+                if item.id in preset and preset[item.id] is not None:
+                    item.set_value(preset[item.id])
+
+        if not dialog.show_blocking():
+            return False
+        new_values = {item.id: item.get_value()
+                      for item in dialog.layout()
+                      if item.id}
+        # new_values = {a: (str(b) if isinstance(b, pathlib.Path) else b)
+        #               for a, b in dct.items()}
+        for k, item in self._items.items():
+            if k in new_values:
+                item.value = new_values[k]
+        return True
 
     def to_dict(self):
-        dct = {item.id: item.get_value()
-               for item in self.dialog.layout()
-               if item.id}
+        dct = {k: v.value
+               for k, v in self._items.items()
+               if not isinstance(v, ButtonItem)}
         return {a: (str(b) if isinstance(b, pathlib.Path) else b)
                 for a, b in dct.items()}
-
-    def build_from_dict(self, dct):
-        for item in self.dialog.layout():
-            if item.id in dct and dct[item.id] is not None:
-                item.set_value(dct[item.id])
 
     def on_update(self):
         is_valid = all(i.is_valid() for i in self._items.values())
@@ -402,6 +411,6 @@ if __name__ == "__main__":
 
     dlg = Test(icon="mdi.timer")
     # dlg.widget.value_changed.connect(print)
-    if dlg.edit():
+    if dlg.edit(dict(boolitem=True)):
         from pprint import pprint
         pprint(dlg.to_dict())

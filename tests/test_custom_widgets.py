@@ -63,8 +63,6 @@ def test_dataset():
 
     dlg = Test(icon="mdi.timer")
     dlg.to_dict()
-    dlg.build_from_dict(dict(i1=True))
-    dlg.i1
 
 
 def test_filechooserbutton():
