@@ -85,6 +85,15 @@ def test_fontchooserbutton():
     repr(btn)
 
 
+def test_inputandslider():
+    w = custom_widgets.InputAndSlider()
+    w.set_range(0, 10)
+    w.set_value(5)
+    assert w.get_value() == 5
+    w.set_step_size(2)
+    assert w.is_valid()
+
+
 def test_codeeditor():
     editor = custom_widgets.CodeEditor()
     assert editor.text() == ""

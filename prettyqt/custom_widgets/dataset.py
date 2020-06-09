@@ -107,12 +107,12 @@ class Int(DataItem):
 
     def create_widget(self):
         if self.slider:
-            self.widget = widgets.Slider()
+            self.widget = custom_widgets.InputAndSlider()
         else:
             self.widget = widgets.SpinBox()
             self.widget.setSuffix(self.unit)
         self.widget.set_range(*self.range)
-        self.widget.setSingleStep(self.step)
+        self.widget.set_step_size(self.step)
         if self.value is not None:
             self.widget.set_value(self.value)
         return self.widget

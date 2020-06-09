@@ -5,8 +5,7 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets, core
-
+from prettyqt import core, widgets
 
 QtWidgets.QSpinBox.__bases__ = (widgets.AbstractSpinBox,)
 
@@ -57,6 +56,9 @@ class SpinBox(QtWidgets.QSpinBox):
         if end is None:
             end = 2147483647
         self.setRange(start, end)
+
+    def set_step_size(self, step_size):
+        self.setSingleStep(step_size)
 
 
 if __name__ == "__main__":
