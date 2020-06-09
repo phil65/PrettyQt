@@ -3,6 +3,7 @@
 @author: Philipp Temminghoff
 """
 
+import functools
 import pathlib
 
 from prettyqt import custom_validators, custom_widgets, gui, widgets
@@ -305,7 +306,8 @@ class ButtonItem(DataItem):
         self.widget = widgets.PushButton(self.button_label)
         if self.value is not None:
             self.widget.set_value(self.value)
-        self.widget.clicked.connect(self.callback)
+        callback = functools.partial(self.callback, parent=self.widget.window())
+        self.widget.clicked.connect(callback)
         return self.widget
 
 
