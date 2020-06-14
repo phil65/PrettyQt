@@ -6,11 +6,10 @@
 from typing import Union
 
 import qtawesome as qta
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import gui, core
+from prettyqt import core, gui
 from prettyqt.utils import bidict
-
 
 PRIORITIES = bidict(low=QtWidgets.QAction.LowPriority,
                     normal=QtWidgets.QAction.NormalPriority,
@@ -27,7 +26,7 @@ QtWidgets.QAction.__bases__ = (core.Object,)
 
 class Action(QtWidgets.QAction):
 
-    def __init__(self, text="", icon=None, parent=None, shortcut="", tooltip=""):
+    def __init__(self, parent=None, text="", icon=None, shortcut="", tooltip=""):
         super().__init__(parent)
         self.set_text(text)
         self.set_icon(icon)
