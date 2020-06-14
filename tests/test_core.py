@@ -33,6 +33,8 @@ def test_abstracttablemodel():
         pass
     with model.insert_rows():
         pass
+    with model.append_rows(1):
+        pass
     with model.insert_columns():
         pass
     # qtmodeltester.check(model, force_py=True)
