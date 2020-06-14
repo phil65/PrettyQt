@@ -94,6 +94,9 @@ class BaseDialog(QtWidgets.QDialog):
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
 
+    def is_accepted(self):
+        return self.result() == QtWidgets.QDialog.Accepted
+
 
 class Dialog(BaseDialog):
 

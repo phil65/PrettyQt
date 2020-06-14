@@ -7,7 +7,6 @@ from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
 
-
 QtWidgets.QAbstractSlider.__bases__ = (widgets.Widget,)
 
 
@@ -75,6 +74,9 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
 
     def set_range(self, min_val, max_val):
         self.setRange(min_val, max_val)
+
+    def set_step_size(self, step_size):
+        self.setSingleStep(step_size)
 
     def get_value(self):
         return super().value()

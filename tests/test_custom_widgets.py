@@ -63,8 +63,6 @@ def test_dataset():
 
     dlg = Test(icon="mdi.timer")
     dlg.to_dict()
-    dlg.build_from_dict(dict(i1=True))
-    dlg.i1
 
 
 def test_filechooserbutton():
@@ -85,6 +83,15 @@ def test_fontchooserbutton():
         btn = pickle.load(jar)
     btn.set_font("Consolas")
     repr(btn)
+
+
+def test_inputandslider():
+    w = custom_widgets.InputAndSlider()
+    w.set_range(0, 10)
+    w.set_value(5)
+    assert w.get_value() == 5
+    w.set_step_size(2)
+    assert w.is_valid()
 
 
 def test_codeeditor():

@@ -12,7 +12,7 @@ with open("README.rst") as readme_file:
 with open("HISTORY.rst") as history_file:
     history = history_file.read()
 
-requirements = ["qtpy", "docutils", "qtawesome", "bidict"]
+requirements = ["qtpy", "docutils", "qtawesome", "bidict", "orjson"]
 
 setup_requirements = ["pytest-runner", ]
 
@@ -42,7 +42,7 @@ setup(
     test_suite="tests",
     tests_require=test_requirements,
     url="https://github.com/phil65/prettyqt",
-    version="0.54.0",
+    version="0.57.0",
     zip_safe=False,
     cmdclass={"build_sphinx": BuildDoc}
 )
