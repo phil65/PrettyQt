@@ -94,6 +94,12 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             return None
         return self.current_index().data(QtCore.Qt.UserRole)
 
+    def current_row(self) -> Optional[int]:
+        return self.current_index().row()
+
+    def current_column(self) -> Optional[int]:
+        return self.current_index().column()
+
     def selected_indexes(self) -> List[QtCore.QModelIndex]:
         """
         returns list of selected indexes in first row
