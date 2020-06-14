@@ -9,7 +9,6 @@ from qtpy import QtWidgets
 
 from prettyqt import widgets
 
-
 QtWidgets.QMenuBar.__bases__ = (widgets.Widget,)
 
 
@@ -22,7 +21,7 @@ class MenuBar(QtWidgets.QMenuBar):
 
     def add_action(self, action: Union[QtWidgets.QAction, str]):
         if isinstance(action, str):
-            action = widgets.Action(action)
+            action = widgets.Action(text=action)
             self.addAction(action)
             return action
         return self.addAction(action)

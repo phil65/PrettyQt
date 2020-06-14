@@ -71,7 +71,7 @@ class MainWindow(QtWidgets.QMainWindow):
         # qactions = self.createPopupMenu()
         menu = widgets.Menu(parent=self)
         for i, item in enumerate(self.get_docks()):
-            action = widgets.Action(item.windowTitle(), parent=self)
+            action = widgets.Action(text=item.windowTitle(), parent=self)
             action.set_checkable(True)
             action.set_checked(item.isVisible())
             action.set_shortcut(f"Ctrl+Shift+{i}")
@@ -80,7 +80,7 @@ class MainWindow(QtWidgets.QMainWindow):
             menu.add_action(action)
         menu.add_separator()
         for i in self.get_toolbars():
-            action = widgets.Action(i.windowTitle(), parent=self)
+            action = widgets.Action(text=i.windowTitle(), parent=self)
             action.set_checkable(True)
             action.toggled.connect(i.setVisible)
             action.set_checked(i.isVisible())

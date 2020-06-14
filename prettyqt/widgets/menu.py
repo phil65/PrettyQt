@@ -92,7 +92,7 @@ class Menu(QtWidgets.QMenu):
             Action added to menu
         """
         if isinstance(label, str):
-            action = widgets.Action(label, parent=self)
+            action = widgets.Action(text=label, parent=self)
             if callback:
                 action.triggered.connect(callback)
             action.set_icon(icon)
@@ -117,7 +117,7 @@ class Menu(QtWidgets.QMenu):
 if __name__ == "__main__":
     app = widgets.app()
     menu = Menu("1")
-    action = widgets.Action("test")
+    action = widgets.Action(text="test")
     menu.addAction(action)
     menu.show()
     menu.exec_(core.Point(200, 200))

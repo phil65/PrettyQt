@@ -479,8 +479,8 @@ def test_mdiarea():
 
 def test_menu():
     menu = widgets.Menu("1", icon="mdi.timer")
-    menu.add(widgets.Action("TestAction"))
-    menu += widgets.Action("TestAction")
+    menu.add(widgets.Action(text="TestAction"))
+    menu += widgets.Action(text="TestAction")
 
     def test():
         pass
@@ -500,9 +500,9 @@ def test_menu():
 
 def test_menubar():
     menu = widgets.MenuBar()
-    menu += widgets.Action("TestAction")
+    menu += widgets.Action(text="TestAction")
     menu += widgets.Menu("TestMenu")
-    menu.add_action(widgets.Action("TestAction 2"))
+    menu.add_action(widgets.Action(text="TestAction 2"))
     menu.add_menu(widgets.Menu("TestMenu 2"))
     menu.add_separator()
     menu.add_action("test")
