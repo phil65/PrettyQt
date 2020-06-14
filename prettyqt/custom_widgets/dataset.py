@@ -5,6 +5,7 @@
 
 import functools
 import pathlib
+from typing import Optional
 
 from prettyqt import custom_validators, custom_widgets, gui, widgets
 
@@ -153,7 +154,7 @@ class Bool(DataItem):
         * check [bool]: if False, value is not checked (optional, value=True)
     """
 
-    def __init__(self, label, value=None, check=True, use_push=False):
+    def __init__(self, label, value=False, check=True, use_push=False):
         super().__init__(label, value=value, check=check)
         self.use_push = use_push
         self.value = value
@@ -360,12 +361,12 @@ class DataSet(object, metaclass=DataSetMeta):
         if self.dialog_comment:
             label = widgets.Label(self.dialog_comment)
             label.setWordWrap(True)
-            dialog.box[i + 1, 0:3] = label
+            dialog.box[len(self._items) + 1, 0:3] = label
         dialog.box.append(button_box)
         on_update()
         return dialog
 
-    def edit(self, preset: dict = None):
+    def edit(self, preset: Optional[dict] = None) -> bool:
         dialog = self.create_dialog()
         if preset:
             for item in dialog.layout():
@@ -384,7 +385,7 @@ class DataSet(object, metaclass=DataSetMeta):
                 item.value = new_values[k]
         return True
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         dct = {k: v.value
                for k, v in self._items.items()
                if not isinstance(v, ButtonItem)}
@@ -402,7 +403,7 @@ if __name__ == "__main__":
         stringitem = Enum(label="A", choices=["A", "B"]).set_not_active("boolitem")
         floatitem = Float(label="My first one").set_active("boolitem")
 
-    dlg = Test(icon="mdi.timer")
+    dlg = Test(icon="mdi.timer", comment="hallo")
     # dlg.widget.value_changed.connect(print)
     if dlg.edit(dict(boolitem=True)):
         from pprint import pprint
