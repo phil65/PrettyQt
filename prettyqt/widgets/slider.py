@@ -25,7 +25,9 @@ class Slider(QtWidgets.QSlider):
     value_changed = core.Signal(int)
 
     def __init__(self, orientation="horizontal", parent=None):
-        super().__init__(ORIENTATIONS[orientation], parent)
+        if orientation in ORIENTATIONS:
+            orientation = ORIENTATIONS[orientation]
+        super().__init__(orientation, parent)
         self.valueChanged.connect(self.on_value_change)
 
     def __getstate__(self):
