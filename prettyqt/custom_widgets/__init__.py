@@ -4,6 +4,7 @@
 
 """
 
+from .image import Image
 from .flowlayout import FlowLayout
 from .colorchooserbutton import ColorChooserButton
 from .filechooserbutton import FileChooserButton
@@ -20,7 +21,8 @@ from .radiodelegate import RadioDelegate
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
 
-__all__ = ["FlowLayout",
+__all__ = ["Image",
+           "FlowLayout",
            "ColorChooserButton",
            "FileChooserButton",
            "FontChooserButton",
