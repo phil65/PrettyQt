@@ -71,7 +71,7 @@ class SelectionWidget(widgets.GroupBox):
         if not checked:
             return None
         choice = self.current_choice()
-        if len(choice) > 0:
+        if choice is not None:
             self.value_changed.emit(choice)
 
     def set_value(self, value):
