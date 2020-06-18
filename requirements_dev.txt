@@ -12,7 +12,7 @@ coverage==5.1
 codecov==2.1.7
 
 Sphinx==3.1.1
-sphinx_rtd_theme==0.4.3
+sphinx_rtd_theme==0.5.0
 sphinx-autodoc-annotation==1.0.post1
 sphinx-autodoc-typehints==1.10.3
 
