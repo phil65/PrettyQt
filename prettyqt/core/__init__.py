@@ -8,6 +8,7 @@ contains QtCore-based classes
 # from qtpy.QtCore import Signal
 
 from .object import Object
+from .url import Url
 from .coreapplication import CoreApplication
 from .iodevice import IODevice
 from .filedevice import FileDevice
@@ -50,6 +51,7 @@ from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
 
 __all__ = ["Object",
+           "Url",
            "CoreApplication",
            "IODevice",
            "FileDevice",
