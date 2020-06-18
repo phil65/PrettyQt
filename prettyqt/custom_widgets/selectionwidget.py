@@ -9,7 +9,7 @@ from prettyqt import core, widgets
 
 
 class SelectionWidget(widgets.GroupBox):
-    value_changed = core.Signal(str)
+    value_changed = core.Signal(object)
 
     def __init__(self, label="", layout="horizontal", parent=None):
         super().__init__(title=label, parent=parent)
