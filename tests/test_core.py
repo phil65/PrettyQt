@@ -187,3 +187,9 @@ def test_timer():
 
 def test_translator():
     core.Translator()
+
+
+def test_url():
+    url = core.Url()
+    url.to_path()
+    assert not url.is_local_file()
