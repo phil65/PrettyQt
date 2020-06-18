@@ -61,8 +61,9 @@ def test_dataset():
         filesaveitem = fo.FileSaveItem(label="FileSaveItem")
         buttonitem = fo.ButtonItem(label="FileSaveItem", callback=print)
 
-    dlg = Test(icon="mdi.timer")
-    dlg.to_dict()
+    settings = Test(icon="mdi.timer")
+    settings.create_dialog()
+    settings.to_dict()
 
 
 def test_filechooserbutton():
@@ -201,7 +202,9 @@ def test_spanslider(qtbot):
     slider.move_pressed_handle()
     qtbot.mouseClick(slider, QtCore.Qt.LeftButton)
     qtbot.mouseMove(slider, core.Point(20, 20))
+    qtbot.mouseMove(slider, core.Point(0, 0), delay=10)
     assert slider.movement_mode == "free"
+    slider.set_movement_mode("no_overlap")
 
 
 def test_waitingspinner():

@@ -331,6 +331,8 @@ def test_headerview():
     table.setHorizontalHeader(header)
     header.resize_mode("interactive")
     header.resize_mode("interactive", col=0)
+    with pytest.raises(ValueError):
+        header.resize_mode("test")
     header.resize_sections("interactive")
     header.set_contextmenu_policy("custom")
     with pytest.raises(ValueError):
@@ -338,8 +340,10 @@ def test_headerview():
     assert header.get_contextmenu_policy() == "custom"
     header.set_custom_menu(test)
     header.set_sizes([100])
-    label = header.section_labels()
-    print(label)
+    assert header.section_labels() == ['Name', 'Size', 'Type', 'Date Modified']
+    header.save_state()
+    header.load_state()
+    header.change_section_vis(0, True)
 
 
 def test_keysequenceedit():

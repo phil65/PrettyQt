@@ -11,7 +11,6 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
-
 QtWidgets.QHeaderView.__bases__ = (widgets.AbstractItemView,)
 
 
@@ -51,7 +50,7 @@ class HeaderView(QtWidgets.QHeaderView):
         else:
             self.setSectionResizeMode(col, self.MODES[mode])
 
-    def section_labels(self):
+    def section_labels(self) -> list:
         model = self.parent().model()
         return [model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
                 for i in range(self.count())]
