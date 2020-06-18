@@ -4,12 +4,12 @@
 """
 
 import datetime
+from typing import Optional
 
 from qtpy import QtWidgets
 
 from prettyqt import widgets
 from prettyqt.utils import bidict
-
 
 SELECTION_MODES = bidict(none=QtWidgets.QCalendarWidget.NoSelection,
                          single=QtWidgets.QCalendarWidget.SingleSelection)
@@ -41,6 +41,33 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
 
     def set_value(self, value):
         self.setSelectedDate(value)
+
+    def set_selection_mode(self, mode: Optional[str]):
+        """set selection mode for given calendar widget
+
+        Allowed values are "single" or "none"
+
+        Args:
+            mode: selection mode to use
+
+        Raises:
+            ValueError: mode does not exist
+        """
+        if mode is None:
+            mode = "none"
+        if mode not in SELECTION_MODES:
+            raise ValueError("Format must be either 'single' or 'None'")
+        self.setSelectionMode(SELECTION_MODES[mode])
+
+    def get_selection_mode(self) -> str:
+        """returns current selection mode
+
+        Possible values: "single" or "none"
+
+        Returns:
+            selection mode
+        """
+        return SELECTION_MODES.inv[self.selectionMode()]
 
 
 if __name__ == "__main__":

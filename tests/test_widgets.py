@@ -67,6 +67,10 @@ def test_buttongroup():
 def test_calendarwiget():
     widget = widgets.CalendarWidget()
     assert widget.get_date() == widget.get_value()
+    widget.set_selection_mode("single")
+    assert widget.get_selection_mode() == "single"
+    with pytest.raises(ValueError):
+        widget.set_selection_mode("test")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -386,6 +390,7 @@ def test_lineedit():
 
 def test_listview():
     widget = widgets.ListView()
+    widget.set_selection_mode(None)
     widget.set_selection_mode("single")
     widget.toggle_select_all()
     widget.set_selection_mode("multi")
@@ -826,6 +831,7 @@ def test_tableview():
     widget.set_vertical_scrollbar_policy("always_on")
     widget.set_horizontal_scrollbar_width(12)
     widget.set_vertical_scrollbar_width(12)
+    widget.set_edit_triggers(None)
     widget.set_edit_triggers("edit_key")
     with pytest.raises(ValueError):
         widget.set_edit_triggers("test")

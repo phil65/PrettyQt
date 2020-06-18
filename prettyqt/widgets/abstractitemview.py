@@ -134,7 +134,8 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setDefaultDropAction(QtCore.Qt.MoveAction)
         self.setDropIndicatorShown(True)
 
-    def set_edit_triggers(self, *triggers: str):
+    def set_edit_triggers(self, *triggers: Optional[str]):
+        triggers = ["none" if t is None else t for t in triggers]
         for item in triggers:
             if item not in TRIGGERS:
                 raise ValueError("trigger type not available")
@@ -169,7 +170,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         return SELECTION_BEHAVIOURS.inv[self.selectionBehavior()]
 
-    def set_selection_mode(self, mode: str):
+    def set_selection_mode(self, mode: Optional[str]):
         """set selection mode for given item view
 
         Allowed values are "single", "extended", "multi" or "none"
@@ -180,6 +181,8 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         Raises:
             ValueError: mode does not exist
         """
+        if mode is None:
+            mode = "none"
         if mode not in SELECTION_MODES:
             raise ValueError("Format must be either 'single', 'extended',"
                              "'multi' or 'None'")
