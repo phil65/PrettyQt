@@ -152,12 +152,22 @@ def test_popupinfo():
 
 def test_selectionwidget():
     widget = custom_widgets.SelectionWidget()
+
+    class Test(object):
+        pass
+    test = Test()
     items = {"Semicolon": ";",
-             "Tab": "\t",
-             "Comma": ","}
+             "Tab": "tab",
+             "Comma": ",",
+             "class": test}
     widget.add_items(items)
     widget.add_items(("a", "b"))
     widget.add_custom(label="test", regex=r"\S{1}")
+    radiobuttons = [k for k, v in widget.buttons.items()]
+    radiobuttons[1].click()
+    assert widget.get_value() == "tab"
+    radiobuttons[3].click()
+    assert widget.current_choice() == test
     for i in widget:
         pass
     widget.select_radio_by_data(";")
