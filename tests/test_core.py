@@ -177,8 +177,10 @@ def test_settings():
         pass
 
     settings.set_default_format("ini")
+    assert settings.get_default_format() == "ini"
     with pytest.raises(ValueError):
         settings.set_default_format("ino")
+    assert settings.get_scope() == "user"
     settings.set_path("native", "user", path)
     with pytest.raises(ValueError):
         settings.set_path("error", "user", path)
