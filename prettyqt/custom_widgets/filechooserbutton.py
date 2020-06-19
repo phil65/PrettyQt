@@ -13,11 +13,22 @@ class FileChooserButton(widgets.Widget):
 
     value_changed = core.Signal(pathlib.Path)
 
-    def __init__(self, extensions=None, mode="save", parent=None):
+    def __init__(self, extensions=None, mode="save", file_mode="existing_files",
+                 parent=None):
+        """initialize FileChooserButton
+
+        Args:
+            extensions: list of allowed extensions (default: {None})
+            mode: Accept mode ("save" or "load") (default: {"save"})
+            file_mode: File mode ("existing_files", "existing_file", "any_file",
+                                  or "folder") (default: {"existing_files"})
+            parent: parent widget (default: {None})
+        """
         super().__init__(parent)
         self.path = None
         self.extensions = extensions
         self.mode = mode
+        self.file_mode = file_mode
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
@@ -43,8 +54,10 @@ class FileChooserButton(widgets.Widget):
 
     @core.Slot()
     def open_file(self):
-        dialog = widgets.FileDialog(parent=self, path_id="file_path")
-        dialog.set_accept_mode(self.mode)
+        dialog = widgets.FileDialog(parent=self,
+                                    path_id="file_path",
+                                    mode=self.mode,
+                                    file_mode=self.file_mode)
         if self.extensions:
             dialog.set_filter(self.extensions)
         if not dialog.open_file():
