@@ -241,6 +241,9 @@ def test_filedialog():
         dlg.set_accept_mode("bla")
     dlg.set_accept_mode("save")
     dlg.set_extension_filter(dict(a=[".csv"]))
+    dlg.set_filter("all_dirs")
+    with pytest.raises(ValueError):
+        dlg.set_filter("test")
     dlg.selected_file()
     dlg.selected_files()
     with open("data.pkl", "wb") as jar:
