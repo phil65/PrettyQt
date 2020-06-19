@@ -6,6 +6,7 @@ contains custom models
 """
 
 
+from .selectionmixin import SelectionMixin
 from .transposeproxymodel import TransposeProxyModel
 
-__all__ = ["TransposeProxyModel"]
+__all__ = ["SelectionMixin", "TransposeProxyModel"]
