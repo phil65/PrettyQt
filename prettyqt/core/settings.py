@@ -86,7 +86,7 @@ class Settings(QtCore.QSettings):
             ValueError: invalid format
         """
         if fmt not in FORMATS:
-            raise ValueError("Format must be either 'native' or 'ini'")
+            raise ValueError(f"Invalid value. Valid values: {FORMATS.keys()}")
         cls.setDefaultFormat(FORMATS[fmt])
 
     @classmethod
@@ -122,9 +122,9 @@ class Settings(QtCore.QSettings):
             ValueError: invalid format or scope
         """
         if fmt not in FORMATS:
-            raise ValueError("Format must be either 'native' or 'ini'")
+            raise ValueError(f"Invalid format. Valid values: {FORMATS.keys()}")
         if scope not in SCOPES:
-            raise ValueError("Scope must be either 'user' or 'system'")
+            raise ValueError(f"Invalid scape. Valid values: {SCOPES.keys()}")
         cls.setPath(FORMATS[fmt], SCOPES[scope], str(path))
 
     @contextlib.contextmanager

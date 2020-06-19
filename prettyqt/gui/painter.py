@@ -46,6 +46,8 @@ class Painter(QtGui.QPainter):
         self.setRenderHint(self.Antialiasing, True)
 
     def fill_rect(self, rect, color, pattern="solid"):
+        if pattern not in PATTERNS:
+            raise ValueError(f"Invalid pattern. Valid values: {PATTERNS.keys()}")
         if isinstance(rect, tuple):
             rect = core.Rect(*rect)
         if isinstance(color, str):
@@ -68,7 +70,7 @@ class Painter(QtGui.QPainter):
             ValueError: pen type does not exist
         """
         if pen_type not in PEN_TYPES:
-            raise ValueError("Invalid value for pen_type.")
+            raise ValueError(f"Invalid pen type. Valid values: {PEN_TYPES.keys()}")
         self.setPen(PEN_TYPES[pen_type])
 
     def get_pen(self) -> str:
@@ -96,7 +98,8 @@ class Painter(QtGui.QPainter):
             ValueError: composition mode does not exist
         """
         if mode not in COMP_MODES:
-            raise ValueError("Invalid value for composition mode.")
+            raise ValueError("Invalid composition mode."
+                             f" Valid values: {COMP_MODES.keys()}")
         self.setCompositionMode(COMP_MODES[mode])
 
     def get_composition_mode(self) -> str:
