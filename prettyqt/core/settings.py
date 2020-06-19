@@ -28,13 +28,13 @@ class Settings(QtCore.QSettings):
         super().__init__(*args)
         self.settings_id = settings_id
 
+    def __contains__(self, key) -> bool:
+        return self.contains(key)
+
     def __enter__(self):
         if self.settings_id:
             self.beginGroup(self.settings_id)
         return self
-
-    def __contains__(self, key) -> bool:
-        return self.contains(key)
 
     def __exit__(self, exc_type, exc_value, traceback):
         if self.settings_id:
