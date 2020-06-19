@@ -63,7 +63,7 @@ class MarkdownWindow(widgets.MainWindow):
                                         "",
                                         "All Text Files (*.md *.markdown *.txt *.*)",
                                         None)
-            self.web_view.show_markdown(fname[0])
+            self.web_view.set_markdown_file(fname[0])
         except UnicodeDecodeError:
             self.statusBar().showMessage("Please select only text files")
         except IOError:

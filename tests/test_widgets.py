@@ -738,6 +738,8 @@ def test_textbrowser():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    widget.set_markdown("test")
+    widget.set_rst("test")
 
 
 def test_textedit():

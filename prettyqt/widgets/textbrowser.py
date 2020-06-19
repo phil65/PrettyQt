@@ -5,8 +5,10 @@
 
 import docutils.core
 from qtpy import QtWidgets
-from prettyqt import gui, widgets, core
+from typing import Union
+import pathlib
 
+from prettyqt import gui, widgets, core
 
 QtWidgets.QTextBrowser.__bases__ = (widgets.TextEdit,)
 
@@ -43,17 +45,27 @@ class TextBrowser(QtWidgets.QTextBrowser):
 
     # def dropEvent(self, event):
     #     event.accept()
-    #     self.show_markdown(self.filePath)
+    #     self.show_markdown_file(self.filePath)
 
-    def show_markdown(self, file_path):
-        with open(file_path) as f:
+    def set_markdown_file(self, file_path: Union[str, pathlib.Path]):
+        if isinstance(file_path, str):
+            file_path = pathlib.Path(file_path)
+        with file_path.open() as f:
             file_content = f.read()
-        self.setMarkdown(file_content)
+        self.set_markdown(file_content)
 
-    def show_rst(self, file_path):
-        with open(file_path) as f:
+    def set_markdown(self, source: str):
+        self.setMarkdown(source)
+
+    def set_rst_file(self, file_path: Union[str, pathlib.Path]):
+        if isinstance(file_path, str):
+            file_path = pathlib.Path(file_path)
+        with file_path.open() as f:
             file_content = f.read()
-        html = docutils.core.publish_string(file_content, writer_name="html")
+        self.set_rst(file_content)
+
+    def set_rst(self, source: str):
+        html = docutils.core.publish_string(source, writer_name="html")
         self.setHtml(str(html))
 
 
