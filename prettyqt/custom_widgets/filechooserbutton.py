@@ -3,8 +3,8 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Optional
 import pathlib
+from typing import Optional
 
 from prettyqt import core, widgets
 
@@ -21,7 +21,7 @@ class FileChooserButton(widgets.Widget):
             extensions: list of allowed extensions (default: {None})
             mode: Accept mode ("save" or "load") (default: {"save"})
             file_mode: File mode ("existing_files", "existing_file", "any_file",
-                                  or "folder") (default: {"existing_files"})
+                                  or "directory") (default: {"existing_files"})
             parent: parent widget (default: {None})
         """
         super().__init__(parent)
@@ -35,7 +35,10 @@ class FileChooserButton(widgets.Widget):
         self.lineedit.set_read_only()
         layout += self.lineedit
         action = widgets.Action()
-        action.set_icon("mdi.file-outline")
+        if self.file_mode == "directory":
+            action.set_icon("mdi.folder-outline")
+        else:
+            action.set_icon("mdi.file-outline")
         action.triggered.connect(self.open_file)
 
         self.button = widgets.ToolButton()
@@ -60,7 +63,7 @@ class FileChooserButton(widgets.Widget):
                                     file_mode=self.file_mode)
         if self.extensions:
             dialog.set_filter(self.extensions)
-        if not dialog.open_file():
+        if not dialog.choose():
             return None
         self.set_path(dialog.selected_file())
         self.value_changed.emit(self.path)
