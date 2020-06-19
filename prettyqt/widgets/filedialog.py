@@ -4,7 +4,7 @@
 """
 
 import pathlib
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from qtpy import QtWidgets
 
@@ -41,17 +41,23 @@ class FileDialog(QtWidgets.QFileDialog):
     simple dialog used to display some widget
     """
 
-    def __init__(self, path=None, mode="open", caption="", path_id=None,
-                 extension_filter=None, file_mode="existing_files", parent=None):
+    def __init__(self,
+                 path: Union[None, str, pathlib.Path] = None,
+                 mode: str = "open",
+                 caption: Optional[str] = None,
+                 path_id: Optional[str] = None,
+                 extension_filter: Optional[dict] = None,
+                 file_mode: str = "existing_files",
+                 parent=None):
         super().__init__(parent=parent)
-        self.setDirectory(path)
         self.title = caption
         self.path_id = path_id
         if extension_filter:
-            self.set_filter(extension_filter)
+            self.set_extension_filter(extension_filter)
         if path_id and path is None:
             settings = core.Settings()
             path = settings.value(self.path_id, "")
+        self.set_directory(path)
         self.set_file_mode(file_mode)
         self.set_accept_mode(mode)
 
@@ -170,10 +176,10 @@ class FileDialog(QtWidgets.QFileDialog):
         """
         self.setFileMode(MODES[mode])
 
-    # def set_filter(self, to_filter):
-    #     if to_filter not in FILTERS:
-    #         raise ValueError(f"Invalid value. Valid values: {FILTERS.keys()}")
-    #     self.setFilter(FILTERS[to_filter])
+    def set_filter(self, to_filter):
+        if to_filter not in FILTERS:
+            raise ValueError(f"Invalid filter. Valid values: {FILTERS.keys()}")
+        self.setFilter(FILTERS[to_filter])
 
     def selected_files(self) -> List[pathlib.Path]:
         return [pathlib.Path(p) for p in self.selectedFiles()]
@@ -201,7 +207,7 @@ class FileDialog(QtWidgets.QFileDialog):
             settings.setValue(self.path_id, str(folder_path))
         return paths
 
-    def set_filter(self, extension_dict: dict):
+    def set_extension_filter(self, extension_dict: dict):
         """set filter based on given dictionary
 
         dict must contain "'name': ['.ext1', '.ext2']" as key-value pairs
@@ -223,6 +229,13 @@ class FileDialog(QtWidgets.QFileDialog):
             Pathlib object
         """
         return pathlib.Path(super().directory())
+
+    def set_directory(self, path: Union[None, str, pathlib.Path]):
+        """set start directory
+        """
+        if isinstance(path, pathlib.Path):
+            path = str(path)
+        self.setDirectory(path)
 
 
 if __name__ == "__main__":
