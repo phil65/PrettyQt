@@ -43,7 +43,7 @@ class FileDialog(QtWidgets.QFileDialog):
     """
 
     def __init__(self, path=None, mode="open", caption="", path_id=None,
-                 extension_filter=None, parent=None):
+                 extension_filter=None, file_mode="existing_files", parent=None):
         super().__init__(parent=parent)
         self.setDirectory(path)
         self.title = caption
@@ -53,7 +53,7 @@ class FileDialog(QtWidgets.QFileDialog):
         if path_id and path is None:
             settings = core.Settings()
             path = settings.value(self.path_id, "")
-        self.set_file_mode("existing_files")
+        self.set_file_mode(file_mode)
         self.set_accept_mode(mode)
 
     def __getstate__(self):
