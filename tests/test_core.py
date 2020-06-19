@@ -40,18 +40,30 @@ def test_abstracttablemodel():
     # qtmodeltester.check(model, force_py=True)
 
 
+def test_buffer():
+    buf = core.Buffer()
+    with buf.open_file("read_only"):
+        pass
+
+
 def test_date():
     date = core.Date(1, 1, 2000)
     with open("data.pkl", "wb") as jar:
         pickle.dump(date, jar)
     with open("data.pkl", "rb") as jar:
-        date = pickle.load(jar)
+        new = pickle.load(jar)
+    assert date == new
 
 
-def test_buffer():
-    buf = core.Buffer()
-    with buf.open_file("read_only"):
-        pass
+def test_datetime():
+    date = core.Date(2000, 11, 11)
+    dt = core.DateTime(date)
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(dt, jar)
+    with open("data.pkl", "rb") as jar:
+        new = pickle.load(jar)
+    assert dt == new
+    repr(dt)
 
 
 def test_dir():
@@ -61,6 +73,12 @@ def test_dir():
 
 def test_diriterator():
     for i in core.DirIterator(str(pathlib.Path.cwd())):
+        pass
+
+
+def test_file():
+    buf = core.File()
+    with buf.open_file("read_only"):
         pass
 
 
