@@ -5,8 +5,7 @@
 
 from qtpy import QtCore, QtWebEngineWidgets
 
-from prettyqt import widgets
-
+from prettyqt import core, widgets
 
 QtWebEngineWidgets.QWebEngineView.__bases__ = (widgets.Widget,)
 
@@ -19,6 +18,16 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
         reader = cls()
         reader.setUrl(url)
         return reader
+
+    def set_url(self, url):
+        if isinstance(url, str):
+            url = core.Url(url)
+        self.setUrl(url)
+
+    def load_url(self, url):
+        if isinstance(url, str):
+            url = core.Url(url)
+        self.load(url)
 
 
 if __name__ == "__main__":
