@@ -48,6 +48,12 @@ def test_date():
         date = pickle.load(jar)
 
 
+def test_buffer():
+    buf = core.Buffer()
+    with buf.open_file("read_only"):
+        pass
+
+
 def test_dir():
     directory = core.Dir()
     assert pathlib.Path(str(directory)) == directory.to_path()
