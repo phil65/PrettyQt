@@ -132,6 +132,7 @@ def test_regexp():
         pickle.dump(regex, jar)
     with open("data.pkl", "rb") as jar:
         regex = pickle.load(jar)
+    repr(regex)
     a = list(regex.matches_in_text("0a4"))
     assert len(a) == 2
 
@@ -142,6 +143,7 @@ def test_regularexpression():
         pickle.dump(regex, jar)
     with open("data.pkl", "rb") as jar:
         regex = pickle.load(jar)
+    repr(regex)
     a = list(regex.matches_in_text("0a4"))
     assert len(a) == 2
 
@@ -152,7 +154,9 @@ def test_runnable():
 
 def test_settings():
     settings = core.Settings("1", "2")
+    settings.clear()
     settings.set_value("test", "value")
+    assert len(settings) == 1
     assert "test" in settings
     assert settings.value("test") == "value"
     with core.Settings("ab", "cd", settings_id="test") as s:
@@ -169,6 +173,9 @@ def test_settings():
     assert settings.get("test3") == "abc"
     del settings["test3"]
     path = pathlib.Path.cwd()
+    for i in settings:
+        pass
+
     settings.set_default_format("ini")
     with pytest.raises(ValueError):
         settings.set_default_format("ino")
