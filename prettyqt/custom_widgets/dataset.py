@@ -272,27 +272,24 @@ class ButtonItem(DataItem):
         * label [string]: text shown on the button
         * callback [function]: function with four params (dataset, item, value, parent)
             - dataset [DataSet]: instance of the parent dataset
-            - item [DataItem]: instance of ButtonItem (i.e. self)
-            - value [unspecified]: value of ButtonItem (default ButtonItem
+            - item [DataItem]: instance of Button (i.e. self)
+            - value [unspecified]: value of Button (default Button
               value or last value returned by the callback)
             - parent [QObject]: button's parent widget
         * icon [QIcon or string]: icon show on the button (optional)
-          (string: icon filename as in guidata/guiqwt image search paths)
-        * value [unspecified]: default value passed to the callback (optional)
         * check [bool]: if False, value is not checked (optional, value=True)
-
-    The value of this item is unspecified but is passed to the callback along
-    with the whole dataset. The value is assigned the callback`s return value.
     """
 
     def __init__(self, label, callback, icon=None, value=None, check=True):
         super().__init__("", value=value, check=check)
         self.button_label = label
+        self.icon = icon
         self.value = value
         self.callback = callback
 
     def create_widget(self):
         widget = widgets.PushButton(self.button_label)
+        widget.set_icon(self.icon)
         if self.value is not None:
             widget.set_value(self.value)
         callback = functools.partial(self.callback, parent=widget.window())
