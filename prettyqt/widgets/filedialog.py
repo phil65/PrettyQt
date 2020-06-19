@@ -11,7 +11,6 @@ from qtpy import QtWidgets
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
-
 MODES = bidict(existing_file=QtWidgets.QFileDialog.ExistingFile,
                existing_files=QtWidgets.QFileDialog.ExistingFiles,
                any_file=QtWidgets.QFileDialog.AnyFile,
@@ -184,11 +183,11 @@ class FileDialog(QtWidgets.QFileDialog):
         return pathlib.Path(selected[0]) if selected else None
 
     def choose_folder(self) -> Optional[List[pathlib.Path]]:
-        self.setFileMode(self.Directory)
+        self.set_file_mode("directory")
         return self.choose()
 
     def open_file(self) -> Optional[List[pathlib.Path]]:
-        self.setFileMode(self.ExistingFile)
+        self.set_file_mode("existing_file")
         return self.choose()
 
     def choose(self) -> Optional[List[pathlib.Path]]:
