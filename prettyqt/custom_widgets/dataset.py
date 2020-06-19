@@ -229,7 +229,7 @@ class Enum(DataItem):
         return widget
 
 
-class MultipleChoiceItem(DataItem):
+class MultipleChoice(DataItem):
 
     def __init__(self, label, choices, value=None, check=True):
         super().__init__(label, value=value, check=check)
@@ -252,21 +252,42 @@ class MultipleChoiceItem(DataItem):
         return widget
 
 
-class FileSaveItem(DataItem):
+class File(DataItem):
 
-    def __init__(self, label, formats="*", value=None, basedir=None, check=True):
+    def __init__(self, label, formats="*", value=None, save=True,
+                 root=None, check=True):
         super().__init__(label, value=value, check=check)
         self.value = value
         self.formats = formats.lstrip(".")
+        self.root = root
+        self.save = save
 
     def create_widget(self):
-        widget = custom_widgets.FileChooserButton()
+        file_mode = "any_file" if self.save else "existing_file"
+        mode = "save" if self.save else "open"
+        widget = custom_widgets.FileChooserButton(file_mode=file_mode,
+                                                  mode=mode,
+                                                  path=self.root)
         if self.value is not None:
             widget.set_value(self.value)
         return widget
 
 
-class ButtonItem(DataItem):
+class Folder(DataItem):
+
+    def __init__(self, label, value=None, basedir=None, mode="open", check=True):
+        super().__init__(label, value=value, check=check)
+        self.value = value
+        self.mode = mode
+
+    def create_widget(self):
+        widget = custom_widgets.FileChooserButton(file_mode="directory", mode=self.mode)
+        if self.value is not None:
+            widget.set_value(self.value)
+        return widget
+
+
+class Button(DataItem):
     """
     Construct a simple button that calls a method when hit
         * label [string]: text shown on the button
@@ -330,7 +351,7 @@ class DataSet(object, metaclass=DataSetMeta):
         dialog.title = self.dialog_title
         dialog.set_icon(self.dialog_icon)
         dialog.set_layout("grid")
-        dialog.box.set_spacing(20)
+        dialog.box.set_spacing(10)
         dialog.box.set_margin(20)
 
         button_box = widgets.DialogButtonBox()
@@ -385,7 +406,7 @@ class DataSet(object, metaclass=DataSetMeta):
     def to_dict(self) -> dict:
         dct = {k: v.value
                for k, v in self._items.items()
-               if not isinstance(v, ButtonItem)}
+               if not isinstance(v, Button)}
         return {a: (str(b) if isinstance(b, pathlib.Path) else b)
                 for a, b in dct.items()}
 
@@ -394,11 +415,14 @@ if __name__ == "__main__":
     app = widgets.app()
 
     class Test(DataSet):
-        boolitem = Bool(label="My first one")
-        string1 = String(label="My first one", regex="[0-9]")
-        string2 = String(label="My second one", notempty=True)
-        stringitem = Enum(label="A", choices=["A", "B"]).set_not_active("boolitem")
-        floatitem = Float(label="My first one").set_active("boolitem")
+        boolitem = Bool(label="Bool")
+        string1 = String(label="String Regex 0-9", regex="[0-9]")
+        string2 = String(label="String Notempty", notempty=True)
+        enum = Enum(label="Enum", choices=["A", "B"]).set_not_active("boolitem")
+        floatitem = Float(label="Float").set_active("boolitem")
+        fileitem = File(label="File")
+        folderitem = Folder(label="Folder")
+        buttonitem = Button(label="Folder", icon="mdi.folder", callback=print)
 
     dlg = Test(icon="mdi.timer", comment="hallo")
     # dlg.widget.value_changed.connect(print)
