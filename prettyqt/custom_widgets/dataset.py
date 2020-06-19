@@ -267,7 +267,7 @@ class File(DataItem):
         mode = "save" if self.save else "open"
         widget = custom_widgets.FileChooserButton(file_mode=file_mode,
                                                   mode=mode,
-                                                  path=self.root)
+                                                  root=self.root)
         if self.value is not None:
             widget.set_value(self.value)
         return widget
@@ -275,13 +275,16 @@ class File(DataItem):
 
 class Folder(DataItem):
 
-    def __init__(self, label, value=None, basedir=None, mode="open", check=True):
+    def __init__(self, label, value=None, root=None, mode="open", check=True):
         super().__init__(label, value=value, check=check)
         self.value = value
         self.mode = mode
+        self.root = root
 
     def create_widget(self):
-        widget = custom_widgets.FileChooserButton(file_mode="directory", mode=self.mode)
+        widget = custom_widgets.FileChooserButton(file_mode="directory",
+                                                  mode=self.mode,
+                                                  root=self.root)
         if self.value is not None:
             widget.set_value(self.value)
         return widget
