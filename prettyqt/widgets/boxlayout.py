@@ -49,7 +49,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
 
     def add(self, *item):
         for i in item:
-            if isinstance(item, QtWidgets.QWidget):
+            if isinstance(i, QtWidgets.QWidget):
                 self.addWidget(i)
             else:
                 self.addLayout(i)
