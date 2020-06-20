@@ -87,6 +87,13 @@ def test_fontchooserbutton():
     repr(btn)
 
 
+def test_iconlabel():
+    w = custom_widgets.IconLabel()
+    w.set_text("test")
+    assert w.text() == "test"
+    repr(w)
+
+
 def test_inputandslider():
     w = custom_widgets.InputAndSlider()
     w.set_range(0, 10)

@@ -5,6 +5,7 @@
 """
 
 from .image import Image
+from .iconlabel import IconLabel
 from .flowlayout import FlowLayout
 from .colorchooserbutton import ColorChooserButton
 from .filechooserbutton import FileChooserButton
@@ -22,6 +23,7 @@ from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
 
 __all__ = ["Image",
+           "IconLabel",
            "FlowLayout",
            "ColorChooserButton",
            "FileChooserButton",
@@ -34,7 +36,6 @@ __all__ = ["Image",
            "ButtonDelegate",
            "RadioDelegate",
            "SelectionWidget",
-           "Image",
            "ImageViewer",
            "MarkdownWindow",
            "CodeEditor"]
