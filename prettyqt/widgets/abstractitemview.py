@@ -54,9 +54,15 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         delete old selection model explicitely, seems to help with memory usage
         """
+        old_model = self.model()
         old_sel_model = self.selectionModel()
-        super().setModel(model)
+        if old_model is not None or model is not None:
+            super().setModel(model)
+        # if old_model:
+        #     old_model.deleteLater()
+        #     del old_model
         if old_sel_model:
+            old_sel_model.deleteLater()
             del old_sel_model
 
     def set_model(self, model):
