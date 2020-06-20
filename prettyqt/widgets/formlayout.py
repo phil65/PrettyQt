@@ -95,11 +95,12 @@ class FormLayout(QtWidgets.QFormLayout):
                 formlayout[i, "right"] = v
         return formlayout
 
-    def add(self, item):
-        if isinstance(item, (QtWidgets.QWidget, QtWidgets.QLayout)):
-            self.addRow(item)
-        if isinstance(item, tuple):
-            self.addRow(*item)
+    def add(self, *item):
+        for i in item:
+            if isinstance(i, (QtWidgets.QWidget, QtWidgets.QLayout)):
+                self.addRow(i)
+            if isinstance(i, tuple):
+                self.addRow(*i)
 
 
 if __name__ == "__main__":

@@ -3,11 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 from prettyqt.utils import bidict
-
 
 MODES = bidict(maximum=QtWidgets.QLayout.SetMaximumSize,
                fixed=QtWidgets.QLayout.SetFixedSize)
@@ -77,12 +76,13 @@ class Layout(QtWidgets.QLayout):
         else:
             return self.setAlignment(ALIGNMENTS[alignment])
 
-    def add(self, item) -> int:
-        if isinstance(item, QtWidgets.QWidget):
-            return self.addWidget(item)
-        elif isinstance(item, QtWidgets.QLayout):
-            w = widgets.Widget()
-            w.set_layout(item)
-            return self.addWidget(w)
-        else:
-            raise TypeError("add_item only supports widgets and layouts")
+    def add(self, *item):
+        for i in item:
+            if isinstance(i, QtWidgets.QWidget):
+                self.addWidget(i)
+            elif isinstance(i, QtWidgets.QLayout):
+                w = widgets.Widget()
+                w.set_layout(i)
+                self.addWidget(w)
+            else:
+                raise TypeError("add_item only supports widgets and layouts")

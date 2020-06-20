@@ -4,8 +4,8 @@
 """
 
 from qtpy import QtWidgets
-from prettyqt import widgets
 
+from prettyqt import widgets
 
 QtWidgets.QBoxLayout.__bases__ = (widgets.Layout,)
 
@@ -47,9 +47,12 @@ class BoxLayout(QtWidgets.QBoxLayout):
             self.add(other)
             return self
 
-    def add(self, item):
-        fn = self.addWidget if isinstance(item, QtWidgets.QWidget) else self.addLayout
-        fn(item)
+    def add(self, *item):
+        for i in item:
+            if isinstance(item, QtWidgets.QWidget):
+                self.addWidget(i)
+            else:
+                self.addLayout(i)
 
     def get_children(self):
         return [self[i] for i in range(self.count())]

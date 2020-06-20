@@ -36,11 +36,12 @@ class MenuBar(QtWidgets.QMenuBar):
     def add_separator(self):
         self.addSeparator()
 
-    def add(self, item):
-        if isinstance(item, QtWidgets.QMenu):
-            return self.add_menu(item)
-        else:
-            return self.add_action(item)
+    def add(self, *item):
+        for i in item:
+            if isinstance(i, QtWidgets.QMenu):
+                return self.add_menu(i)
+            else:
+                return self.add_action(i)
 
 
 if __name__ == "__main__":

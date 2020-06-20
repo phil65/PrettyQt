@@ -5,9 +5,8 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets, gui
+from prettyqt import gui, widgets
 from prettyqt.utils import bidict
-
 
 VIEW_MODES = bidict(default=QtWidgets.QMdiArea.SubWindowView,
                     tabbed=QtWidgets.QMdiArea.TabbedView)
@@ -112,13 +111,14 @@ class MdiArea(QtWidgets.QMdiArea):
             bg_color = gui.Brush(gui.Color("black"))
         self.setBackground(bg_color)
 
-    def add(self, item: QtWidgets.QWidget):
-        if not isinstance(item, QtWidgets.QMdiSubWindow):
-            widget = widgets.MdiSubWindow()
-            widget.setWidget(item)
-            self.addSubWindow(widget)
-        else:
-            self.addSubWindow(item)
+    def add(self, *item: QtWidgets.QWidget):
+        for i in item:
+            if not isinstance(i, QtWidgets.QMdiSubWindow):
+                widget = widgets.MdiSubWindow()
+                widget.setWidget(i)
+                self.addSubWindow(widget)
+            else:
+                self.addSubWindow(i)
 
 
 if __name__ == "__main__":

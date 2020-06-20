@@ -3,10 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
-from prettyqt import gui, core
-
+from prettyqt import core, gui
 
 QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
 
@@ -43,11 +42,11 @@ class StandardItemModel(QtGui.QStandardItemModel):
     def get_children(self):
         return [self.item(index) for index in range(self.rowCount())]
 
-    def add(self, item) -> int:
-        if isinstance(item, str):
-            item = gui.StandardItem(item)
-        self.appendRow(item)
-        return self.rowCount()
+    def add(self, *item):
+        for i in item:
+            if isinstance(i, str):
+                i = gui.StandardItem(i)
+            self.appendRow(i)
 
     def find_items(self, text: str, column: int = 0, mode: str = "exact") -> list:
         if mode not in MATCH_FLAGS:

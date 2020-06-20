@@ -8,7 +8,6 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
-
 ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
                       vertical=QtCore.Qt.Vertical)
 
@@ -65,11 +64,12 @@ class Splitter(QtWidgets.QSplitter):
         widget.set_layout(layout)
         self.addWidget(widget)
 
-    def add(self, item):
-        if isinstance(item, QtWidgets.QWidget):
-            self.add_widget(item)
-        else:
-            self.add_layout(item)
+    def add(self, *item):
+        for i in item:
+            if isinstance(i, QtWidgets.QWidget):
+                self.add_widget(i)
+            else:
+                self.add_layout(i)
 
     @classmethod
     def from_widgets(cls, widgets, horizontal: bool = False, parent=None):
