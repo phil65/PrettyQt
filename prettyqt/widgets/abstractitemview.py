@@ -76,6 +76,11 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         else:
             self.setItemDelegate(delegate)
 
+    def open_persistent_editor_for_column(self, column: int):
+        model = self.model()
+        for row in range(0, model.rowCount()):
+            self.openPersistentEditor(model.index(row, column))
+
     def toggle_select_all(self):
         """
         select all items from list (deselect when all selected)

@@ -920,6 +920,7 @@ def test_treeview():
     widget.setup_dragdrop_move()
     widget.scroll_to_top()
     widget.current_index()
+    widget.open_persistent_editor_for_column(0)
     widget.set_selection_mode("extended")
     widget.set_selection_behaviour("rows")
     widget.set_horizontal_scrollbar_policy("always_on")
