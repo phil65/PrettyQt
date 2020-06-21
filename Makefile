@@ -87,11 +87,14 @@ dist: clean ## builds source and wheel package
 bump-minor: ## minor version bump
 	bump2version minor --allow-dirty --tag
 	pip install -e .
+	git push
 
 bump-patch: ## patch version bump
 	bump2version patch --allow-dirty --tag
 	pip install -e .
+	git push
 
 bump-major: ## major version bump
 	bump2version major --allow-dirty --tag
 	pip install -e .
+	git push
