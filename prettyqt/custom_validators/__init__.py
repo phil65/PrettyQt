@@ -6,9 +6,15 @@ contains custom models
 """
 
 
-from .pathvalidator import PathValidator
+from .compositevalidator import CompositeValidator
 from .notemptyvalidator import NotEmptyValidator
 from .notzerovalidator import NotZeroValidator
-from .compositevalidator import CompositeValidator
+from .pathvalidator import PathValidator
+from .regexvalidators import FloatListValidator, IntListValidator
 
-__all__ = ["PathValidator", "NotEmptyValidator", "NotZeroValidator", "CompositeValidator"]
+__all__ = ["PathValidator",
+           "NotEmptyValidator",
+           "IntListValidator",
+           "FloatListValidator",
+           "NotZeroValidator",
+           "CompositeValidator"]
