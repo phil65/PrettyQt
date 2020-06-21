@@ -5,7 +5,7 @@
 
 from typing import Optional
 
-from prettyqt import core, widgets
+from prettyqt import core, gui, widgets
 
 
 class SelectionWidget(widgets.GroupBox):
@@ -45,6 +45,14 @@ class SelectionWidget(widgets.GroupBox):
             with rb.block_signals():
                 rb.set_value(True)
         self.box += rb
+
+    def add_tooltip_icon(self, text: str):
+        label = widgets.Label(text)
+        label.setToolTip(text)
+        icon = gui.Icon.by_name("mdi.help-circle-outline")
+        pixmap = icon.pixmap(core.Size(20, 20))
+        label.setPixmap(pixmap)
+        self.box += label
 
     def add_custom(self, label: str = "Other", regex: Optional[str] = None):
         self.lineedit_custom_sep = widgets.LineEdit()

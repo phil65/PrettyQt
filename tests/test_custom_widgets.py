@@ -171,6 +171,7 @@ def test_selectionwidget():
              "class": test}
     widget.add_items(items)
     widget.add_items(("a", "b"))
+    widget.add_tooltip_icon("test")
     widget.add_custom(label="test", regex=r"\S{1}")
     radiobuttons = [k for k, v in widget.buttons.items()]
     radiobuttons[1].click()
