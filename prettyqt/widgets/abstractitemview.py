@@ -68,18 +68,25 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
     def set_model(self, model):
         self.setModel(model)
 
-    def set_delegate(self, delegate, column=None, row=None):
+    def set_delegate(self,
+                     delegate,
+                     column: Optional[int] = None,
+                     row: Optional[int] = None,
+                     persistent: bool = False):
         if column is not None:
             self.setItemDelegateForColumn(column, delegate)
+            if persistent:
+                model = self.model()
+                for i in range(0, model.rowCount()):
+                    self.openPersistentEditor(model.index(i, column))
         elif row is not None:
             self.setItemDelegateForRow(row, delegate)
+            if persistent:
+                model = self.model()
+                for i in range(0, model.columnCount()):
+                    self.openPersistentEditor(model.index(row, i))
         else:
             self.setItemDelegate(delegate)
-
-    def open_persistent_editor_for_column(self, column: int):
-        model = self.model()
-        for row in range(0, model.rowCount()):
-            self.openPersistentEditor(model.index(row, column))
 
     def toggle_select_all(self):
         """
