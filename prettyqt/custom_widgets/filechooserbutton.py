@@ -18,7 +18,8 @@ class FileChooserButton(widgets.Widget):
         """initialize FileChooserButton
 
         Args:
-            extensions: list of allowed extensions (default: {None})
+            extensions: dict allowed extensions (default: {None})
+                        form: "'name': ['.ext1', '.ext2']"
             mode: Accept mode ("save" or "load") (default: {"save"})
             file_mode: File mode ("existing_files", "existing_file", "any_file",
                                   or "directory") (default: {"existing_files"})
