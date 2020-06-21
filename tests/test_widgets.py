@@ -547,6 +547,9 @@ def test_plaintextedit():
     widget.scroll_to_top()
     widget.scroll_to_bottom()
     widget.set_value("test")
+    widget.set_wrap_mode("anywhere")
+    with pytest.raises(ValueError):
+        widget.set_wrap_mode("test")
     assert widget.get_value() == "test"
     widget += "append"
     with open("data.pkl", "wb") as jar:

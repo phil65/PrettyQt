@@ -6,7 +6,14 @@
 from qtpy import QtGui, QtWidgets
 
 from prettyqt import gui, widgets, core
+from prettyqt.utils import bidict
 
+
+WRAP_MODES = bidict(none=QtGui.QTextOption.NoWrap,
+                    word=QtGui.QTextOption.WordWrap,
+                    manual=QtGui.QTextOption.ManualWrap,
+                    anywhere=QtGui.QTextOption.WrapAnywhere,
+                    boundary_or_anywhere=QtGui.QTextOption.WrapAtWordBoundaryOrAnywhere)
 
 QtWidgets.QPlainTextEdit.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -75,6 +82,21 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         widget.setReadOnly(True)
         widget.set_font("Consolas")
         return widget
+
+    def set_wrap_mode(self, mode: str):
+        """set wrap mode
+
+        Allowed values are "none", "word", "manual", "anywhere", "boundary_or_anywhere"
+
+        Args:
+            style: wrap mode to use
+
+        Raises:
+            ValueError: mode does not exist
+        """
+        if mode not in WRAP_MODES:
+            raise ValueError(f"invalid wrap mode. Allowed values: {WRAP_MODES.keys()}")
+        self.setWordWrapMode(WRAP_MODES[mode])
 
     def set_value(self, value: str):
         self.setPlainText(value)
