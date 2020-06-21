@@ -61,6 +61,8 @@ def test_dataset():
         fileitem = fo.File(label="File")
         folderitem = fo.Folder(label="File")
         buttonitem = fo.Button(label="Button", callback=print)
+        intlist = fo.IntList(label="Button", value=[1, 2, 3])
+        intlist = fo.FloatList(label="Button", value=[1.1, 2, 3])
 
     settings = Test(icon="mdi.timer")
     settings.create_dialog()

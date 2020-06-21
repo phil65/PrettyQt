@@ -145,6 +145,46 @@ class String(DataItem):
         return widget
 
 
+class IntList(DataItem):
+    """
+    Construct an IntList data item
+        * label [string]: name
+        * value [string]: default value (optional)
+        * notempty [bool]: if True, empty string is not a valid value (opt.)
+    """
+
+    def __init__(self, label, value=None, allow_single=False):
+        super().__init__(label, value=value)
+        self.value = value
+        self.allow_single = allow_single
+
+    def create_widget(self):
+        widget = custom_widgets.ListInput(allow_single=self.allow_single)
+        if self.value is not None:
+            widget.set_value(self.value)
+        return widget
+
+
+class FloatList(DataItem):
+    """
+    Construct an FloatList data item
+        * label [string]: name
+        * value [string]: default value (optional)
+        * notempty [bool]: if True, empty string is not a valid value (opt.)
+    """
+
+    def __init__(self, label, value=None, allow_single=False):
+        super().__init__(label, value=value)
+        self.value = value
+        self.allow_single = allow_single
+
+    def create_widget(self):
+        widget = custom_widgets.ListInput(allow_single=self.allow_single, typ=float)
+        if self.value is not None:
+            widget.set_value(self.value)
+        return widget
+
+
 class Bool(DataItem):
     """
     Construct a boolean data item
