@@ -16,8 +16,7 @@ class OptionalWidget(widgets.GroupBox):
         self.toggled.connect(self.widget.setEnabled)
 
     def __getattr__(self, value):
-        print(value)
-        return self.widget.__getattr__(value)
+        return self.widget.__getattribute__(value)
 
     @property
     def enabled(self) -> bool:
