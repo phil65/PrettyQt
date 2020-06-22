@@ -57,6 +57,13 @@ class DataItem(object):
             return custom_widgets.OptionalWidget(widget, self.optional)
         return widget
 
+    def _create_widget(self):
+        return None
+
+
+class Fixed(DataItem):
+    pass
+
 
 class Float(DataItem):
     """
@@ -405,6 +412,7 @@ class DataSet(object, metaclass=DataSetMeta):
         self.ok_btn = button_box.add_default_button("ok", callback=dialog.accept)
         button_box.add_default_button("cancel", callback=dialog.reject)
         widget_dict = {k: v.create_widget() for k, v in self._items.items()}
+        widget_dict = {k: v for k, v in widget_dict.items() if v is not None}
 
         def on_update():
             is_valid = all(i.is_valid() if hasattr(i, "is_valid") else True
