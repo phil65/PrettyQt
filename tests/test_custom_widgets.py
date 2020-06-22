@@ -69,6 +69,20 @@ def test_dataset():
     settings.to_dict()
 
 
+def test_stringornumberwidget():
+    widget = custom_widgets.StringOrNumberWidget()
+    widget.get_value()
+    widget.on_value_change()
+
+
+def test_optionalwidget():
+    w = widgets.RadioButton()
+    container = custom_widgets.OptionalWidget(w, "Test")
+    container.get_value()
+    container.enabled = False
+    assert container.enabled is False
+
+
 def test_filechooserbutton():
     btn = custom_widgets.FileChooserButton()
     with open("data.pkl", "wb") as jar:
