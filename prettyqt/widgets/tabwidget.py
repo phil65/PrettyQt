@@ -69,6 +69,9 @@ class TabWidget(QtWidgets.QTabWidget):
             self.setTabWhatsThis(i, whatsthis)
         self.setCurrentIndex(state.get("index", 0))
 
+    def set_document_mode(self, state=True):
+        self.setDocumentMode(state)
+
     def set_tab_shape(self, shape: str):
         """set tab shape for the tabwidget
 
