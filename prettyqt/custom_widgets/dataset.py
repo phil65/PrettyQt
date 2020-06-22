@@ -11,9 +11,10 @@ from prettyqt import custom_validators, custom_widgets, gui, widgets
 
 
 class DataItem(object):
-    def __init__(self, label, *args, **kwargs):
-        self.value = None
+    def __init__(self, label, value=None, optional=False):
+        self.value = value
         self.label = label
+        self.optional = optional
         self.colspan = 1
         self.label_col = 0
         self.active_on = list()
@@ -47,6 +48,12 @@ class DataItem(object):
     def is_valid(self):
         return True
 
+    def create_widget(self):
+        widget = self._create_widget()
+        if self.optional:
+            return custom_widgets.OptionalWidget(widget, self.optional)
+        return widget
+
 
 class Float(DataItem):
     """
@@ -63,15 +70,13 @@ class Float(DataItem):
     """
 
     def __init__(self, label, value=None, min_val=None, max_val=None,
-                 unit="", step=0.1, slider=False, check=True):
-        super().__init__(label, value=value, min_val=min_val,
-                         max_val=max_val, unit=unit, check=check)
-        self.value = value
+                 unit="", step=0.1, slider=False, optional=False):
+        super().__init__(label, value=value, optional=optional)
         self.range = (min_val, max_val)
         self.step = step
         self.unit = unit
 
-    def create_widget(self):
+    def _create_widget(self):
         widget = widgets.DoubleSpinBox()
         widget.set_range(*self.range)
         widget.setSingleStep(self.step)
@@ -95,16 +100,14 @@ class Int(DataItem):
     """
 
     def __init__(self, label, value=None, min_val=0, max_val=None,
-                 unit="", step=1, slider=False, check=True):
-        super().__init__(label, value=value, min_val=min_val, max_val=max_val,
-                         unit=unit, check=check)
-        self.value = value
+                 unit="", step=1, slider=False, optional=False):
+        super().__init__(label, value=value, optional=optional)
         self.range = (min_val, max_val)
         self.step = step
         self.unit = unit
         self.slider = slider
 
-    def create_widget(self):
+    def _create_widget(self):
         if self.slider:
             widget = custom_widgets.InputAndSlider()
         else:
@@ -125,13 +128,12 @@ class String(DataItem):
         * notempty [bool]: if True, empty string is not a valid value (opt.)
     """
 
-    def __init__(self, label, value=None, notempty=False, regex=None):
-        super().__init__(label, value=value)
-        self.value = value
+    def __init__(self, label, value=None, notempty=False, regex=None, optional=False):
+        super().__init__(label, value=value, optional=optional)
         self.notempty = notempty
         self.regex = regex
 
-    def create_widget(self):
+    def _create_widget(self):
         widget = widgets.LineEdit()
         if self.notempty:
             val = custom_validators.NotEmptyValidator()
@@ -153,12 +155,11 @@ class IntList(DataItem):
         * notempty [bool]: if True, empty string is not a valid value (opt.)
     """
 
-    def __init__(self, label, value=None, allow_single=False):
-        super().__init__(label, value=value)
-        self.value = value
+    def __init__(self, label, value=None, allow_single=False, optional=False):
+        super().__init__(label, value=value, optional=optional)
         self.allow_single = allow_single
 
-    def create_widget(self):
+    def _create_widget(self):
         widget = custom_widgets.ListInput(allow_single=self.allow_single)
         if self.value is not None:
             widget.set_value(self.value)
@@ -173,12 +174,11 @@ class FloatList(DataItem):
         * notempty [bool]: if True, empty string is not a valid value (opt.)
     """
 
-    def __init__(self, label, value=None, allow_single=False):
-        super().__init__(label, value=value)
-        self.value = value
+    def __init__(self, label, value=None, allow_single=False, optional=False):
+        super().__init__(label, value=value, optional=optional)
         self.allow_single = allow_single
 
-    def create_widget(self):
+    def _create_widget(self):
         widget = custom_widgets.ListInput(allow_single=self.allow_single, typ=float)
         if self.value is not None:
             widget.set_value(self.value)
@@ -194,12 +194,11 @@ class Bool(DataItem):
         * check [bool]: if False, value is not checked (optional, value=True)
     """
 
-    def __init__(self, label, value=False, check=True, use_push=False):
-        super().__init__(label, value=value, check=check)
+    def __init__(self, label, value=False, optional=False, use_push=False):
+        super().__init__(label, value=value, optional=optional)
         self.use_push = use_push
-        self.value = value
 
-    def create_widget(self):
+    def _create_widget(self):
         if self.use_push:
             widget = widgets.PushButton()
             widget.setCheckable(True)
@@ -220,11 +219,10 @@ class Color(DataItem):
     Color values are encoded as hexadecimal strings or Qt color names
     """
 
-    def __init__(self, label, value=None, check=True):
-        super().__init__(label, value=value, check=check)
-        self.value = value
+    def __init__(self, label, value=None, optional=False):
+        super().__init__(label, value=value, optional=optional)
 
-    def create_widget(self):
+    def _create_widget(self):
         widget = custom_widgets.ColorChooserButton()
         if self.value is not None:
             widget.set_value(self.value)
@@ -245,13 +243,12 @@ class Enum(DataItem):
           (default is False)
     """
 
-    def __init__(self, label, choices, value=None, check=True, radio=False):
-        super().__init__(label, value=value, check=check)
-        self.value = value
+    def __init__(self, label, choices, value=None, optional=False, radio=False):
+        super().__init__(label, value=value, optional=optional)
         self.radio = radio
         self.choices = choices
 
-    def create_widget(self):
+    def _create_widget(self):
         if self.radio:
             widget = custom_widgets.SelectionWidget(layout="vertical")
         else:
@@ -271,12 +268,11 @@ class Enum(DataItem):
 
 class MultipleChoice(DataItem):
 
-    def __init__(self, label, choices, value=None, check=True):
-        super().__init__(label, value=value, check=check)
-        self.value = value
+    def __init__(self, label, choices, value=None, optional=False):
+        super().__init__(label, value=value, optional=optional)
         self.choices = choices
 
-    def create_widget(self):
+    def _create_widget(self):
         widget = widgets.ListWidget()
         widget.set_selection_mode("multi")
         for item in self.choices:
@@ -295,14 +291,13 @@ class MultipleChoice(DataItem):
 class File(DataItem):
 
     def __init__(self, label, formats="*", value=None, save=True,
-                 root=None, check=True):
-        super().__init__(label, value=value, check=check)
-        self.value = value
+                 root=None, optional=False):
+        super().__init__(label, value=value, optional=optional)
         self.formats = formats.lstrip(".")
         self.root = root
         self.save = save
 
-    def create_widget(self):
+    def _create_widget(self):
         file_mode = "any_file" if self.save else "existing_file"
         mode = "save" if self.save else "open"
         widget = custom_widgets.FileChooserButton(file_mode=file_mode,
@@ -315,16 +310,24 @@ class File(DataItem):
 
 class Folder(DataItem):
 
-    def __init__(self, label, value=None, root=None, mode="open", check=True):
-        super().__init__(label, value=value, check=check)
-        self.value = value
+    def __init__(self, label, value=None, root=None, mode="open", optional=False):
+        super().__init__(label, value=value, optional=optional)
         self.mode = mode
         self.root = root
 
-    def create_widget(self):
+    def _create_widget(self):
         widget = custom_widgets.FileChooserButton(file_mode="directory",
                                                   mode=self.mode,
                                                   root=self.root)
+        if self.value is not None:
+            widget.set_value(self.value)
+        return widget
+
+
+class StringOrNumber(DataItem):
+
+    def _create_widget(self):
+        widget = custom_widgets.StringOrNumberWidget(self.label)
         if self.value is not None:
             widget.set_value(self.value)
         return widget
@@ -344,14 +347,13 @@ class Button(DataItem):
         * check [bool]: if False, value is not checked (optional, value=True)
     """
 
-    def __init__(self, label, callback, icon=None, value=None, check=True):
-        super().__init__("", value=value, check=check)
+    def __init__(self, label, callback, icon=None, value=None):
+        super().__init__("", value=value)
         self.button_label = label
         self.icon = icon
-        self.value = value
         self.callback = callback
 
-    def create_widget(self):
+    def _create_widget(self):
         widget = widgets.PushButton(self.button_label)
         widget.set_icon(self.icon)
         if self.value is not None:
@@ -463,9 +465,10 @@ if __name__ == "__main__":
         string2 = String(label="String Notempty", notempty=True)
         enum = Enum(label="Enum", choices=["A", "B"]).set_not_active("boolitem")
         floatitem = Float(label="Float").set_active("boolitem")
-        fileitem = File(label="File")
+        fileitem = File(label="File", optional="Activate")
         folderitem = Folder(label="Folder")
         buttonitem = Button(label="Folder", icon="mdi.folder", callback=print)
+        stringornumber = StringOrNumber(label="StringOrNumber", value=2.4)
 
     dlg = Test(icon="mdi.timer", comment="hallo")
     # dlg.widget.value_changed.connect(print)
