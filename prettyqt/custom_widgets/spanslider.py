@@ -45,9 +45,6 @@ class SpanSlider(widgets.Slider):
     upper_pos_changed = core.Signal(int)
     slider_pressed = core.Signal(object)
 
-    def on_value_change(self):
-        self.value_changed.emit(self.lower, self.upper)
-
     def __init__(self, parent=None):
         super().__init__("horizontal", parent)
         self.rangeChanged.connect(self.update_range)
@@ -82,6 +79,16 @@ class SpanSlider(widgets.Slider):
 
     def set_upper_value(self, upper):
         self.set_span(self.lower, upper)
+
+    def on_value_change(self):
+        self.value_changed.emit(self.lower, self.upper)
+
+    def get_value(self):
+        return (self.lower, self.upper)
+
+    def set_value(self, value):
+        self.set_lower_value(value[0])
+        self.set_upper_value(value[1])
 
     @core.Property(object)
     def movement_mode(self):
@@ -435,11 +442,34 @@ class SpanSlider(widgets.Slider):
                                                      opt.upsideDown)
 
 
+class SpanSliderWidget(widgets.Widget):
+
+    def __init__(self, *args, parent=None, **kwargs):
+        super().__init__(parent=parent)
+        self.set_layout("grid")
+        self.slider = SpanSlider()
+        self.label_lower = widgets.Label()
+        self.label_upper = widgets.Label()
+        self.box[0, 0:3] = self.slider
+        self.box[1, 0] = self.label_lower
+        self.box[1, 3] = self.label_upper
+        self.slider.value_changed.connect(self.on_value_change)
+
+    def __getattr__(self, value):
+        return self.slider.__getattribute__(value)
+
+    def on_value_change(self):
+        self.label_lower.set_text(str(self.slider.lower_pos))
+        self.label_upper.set_text(str(self.slider.upper_pos))
+
+
 if __name__ == "__main__":
     app = widgets.app()
-    slider = SpanSlider()
+    layout = widgets.BoxLayout("horizontal")
+    slider = SpanSliderWidget()
     slider.set_span(30, 70)
     slider.setRange(0, 100)
+    slider.value_changed.connect(print)
     # color = gui.Color("blue").lighter(150)
     # slider.set_left_color(color)
     # slider.set_right_color(color)
