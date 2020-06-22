@@ -48,6 +48,9 @@ class GroupBox(QtWidgets.QGroupBox):
         self.setToolTip(state.get("tooltip", ""))
         # self.setAlignment(state["alignment"])
 
+    def set_title(self, title: str):
+        self.setTitle(title)
+
     def set_alignment(self, alignment):
         self.setAlignment(H_ALIGNMENTS[alignment])
 
