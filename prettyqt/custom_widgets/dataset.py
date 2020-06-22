@@ -12,7 +12,7 @@ from prettyqt import custom_validators, custom_widgets, gui, widgets
 
 class DataItem(object):
     def __init__(self, label, value=None, optional=False):
-        self.value = value
+        self.set_value(value)
         self.label = label
         self.optional = optional
         self.colspan = 1
@@ -30,6 +30,9 @@ class DataItem(object):
         self.label_col = col
         self.colspan = colspan
         return self
+
+    def set_value(self, value):
+        self.value = value
 
     def store(self, prop):
         # self.set_prop("display", store=prop)
@@ -194,16 +197,15 @@ class Bool(DataItem):
         * check [bool]: if False, value is not checked (optional, value=True)
     """
 
-    def __init__(self, label, value=False, optional=False, use_push=False):
+    def __init__(self, label, value=False, optional=False,
+                 true_value=True, false_value=False):
         super().__init__(label, value=value, optional=optional)
-        self.use_push = use_push
+        self.true_value = true_value
+        self.false_value = false_value
 
     def _create_widget(self):
-        if self.use_push:
-            widget = widgets.PushButton()
-            widget.setCheckable(True)
-        else:
-            widget = widgets.CheckBox()
+        widget = custom_widgets.MappedCheckBox(true_value=self.true_value,
+                                               false_value=self.false_value)
         if self.value is not None:
             widget.set_value(self.value)
         return widget
@@ -445,7 +447,7 @@ class DataSet(object, metaclass=DataSetMeta):
         #               for a, b in dct.items()}
         for k, item in self._items.items():
             if k in new_values:
-                item.value = new_values[k]
+                item.set_value(new_values[k])
         return True
 
     def to_dict(self) -> dict:

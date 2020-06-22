@@ -50,7 +50,6 @@ def test_dataset():
 
     class Test(fo.DataSet):
         i1 = fo.Bool(label="My first one")
-        i2 = fo.Bool(label="My first one", use_push=True)
         string1 = fo.String(label="My first one", regex="[0-9]")
         string2 = fo.String(label="My second one", notempty=True)
         choiceitem = fo.Enum(label="A", choices=["A", "B"]).set_not_active("i1")
@@ -59,7 +58,8 @@ def test_dataset():
         intitem = fo.Int(label="IntItem").set_active("i1")
         coloritem = fo.Color(label="ColorItem", value="green")
         fileitem = fo.File(label="File")
-        folderitem = fo.Folder(label="File")
+        folderitem = fo.Folder(label="File", optional="Test")
+        stringornumber = fo.StringOrNumber(label="Test")
         buttonitem = fo.Button(label="Button", callback=print)
         intlist = fo.IntList(label="Button", value=[1, 2, 3])
         intlist = fo.FloatList(label="Button", value=[1.1, 2, 3])
@@ -81,6 +81,14 @@ def test_optionalwidget():
     container.get_value()
     container.enabled = False
     assert container.enabled is False
+
+
+def test_mappedcheckbox():
+    widget = custom_widgets.MappedCheckBox(true_value=0, false_value=1)
+    widget.set_value(0)
+    assert widget.get_value() == 0
+    widget.setChecked(False)
+    assert widget.get_value() == 1
 
 
 def test_filechooserbutton():
