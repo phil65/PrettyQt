@@ -22,6 +22,11 @@ class TextCharFormat(QtGui.QTextCharFormat):
         color.set_color(color_name)
         self.setForeground(color)
 
+    def set_background_color(self, color_name):
+        color = gui.Color()
+        color.set_color(color_name)
+        self.setBackground(color)
+
     def set_font_weight(self, weight: str):
         """sets the font weight
 
