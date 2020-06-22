@@ -83,6 +83,9 @@ class Widget(QtWidgets.QWidget):
     def set_title(self, title: str):
         self.setWindowTitle(title)
 
+    def set_tooltip(self, text: str):
+        self.setToolTip(text)
+
     def set_font(self,
                  font_name: Optional[str] = None,
                  font_size: int = -1,
