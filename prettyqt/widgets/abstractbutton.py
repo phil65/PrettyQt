@@ -63,6 +63,9 @@ class AbstractButton(QtWidgets.QAbstractButton):
         if shortcut:
             self.setShortcut(shortcut)
 
+    def set_text(self, text: str):
+        self.setText(text)
+
 
 if __name__ == "__main__":
     app = widgets.app()
