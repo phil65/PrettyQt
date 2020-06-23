@@ -146,26 +146,32 @@ class TabWidget(QtWidgets.QTabWidget):
         # Create a reference to maintain access to the detached tab
         self.detached_tabs[name] = detached_tab
 
-    def add_tab(self, item, label, icon=None):
+    def add_tab(self, item, label, icon=None, show=False):
         if isinstance(item, QtWidgets.QLayout):
             widget = widgets.Widget()
             widget.set_layout(item)
         else:
             widget = item
         if not icon:
-            return self.addTab(widget, label)
+            index = self.addTab(widget, label)
         else:
             if isinstance(icon, str):
                 icon = qta.icon(icon)
-            return self.addTab(widget, icon, label)
+            index = self.addTab(widget, icon, label)
+        if show:
+            self.setCurrentIndex(index)
+        return index
 
-    def insert_tab(self, pos, widget, label, icon=None):
+    def insert_tab(self, pos, widget, label, icon=None, show=False):
         if not icon:
-            return self.insertTab(pos, widget, label)
+            index = self.insertTab(pos, widget, label)
         else:
             if isinstance(icon, str):
                 icon = qta.icon(icon)
-            return self.insertTab(pos, widget, icon, label)
+            index = self.insertTab(pos, widget, icon, label)
+        if show:
+            self.setCurrentIndex(index)
+        return index
 
     def attach_tab(self, widget, name, icon, insert_at=None):
         """
@@ -186,11 +192,9 @@ class TabWidget(QtWidgets.QTabWidget):
         # Determine if the given image and the main window icon are the same.
         # If they are, then do not add the icon to the tab
         if insert_at is None:
-            index = self.add_tab(widget, name, icon=icon)
+            self.add_tab(widget, name, icon=icon, show=True)
         else:
-            index = self.insert_tab(insert_at, widget, name, icon=icon)
-        # Make this tab the current tab
-        self.setCurrentIndex(index)
+            self.insert_tab(insert_at, widget, name, icon=icon, show=True)
 
     def close_detached_tabs(self):
         """Close all tabs that are currently detached
@@ -210,8 +214,7 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         create a tab containing delivered widget
         """
-        index = self.add_tab(widget, title, icon="mdi.widgets")
-        self.setCurrentIndex(index)
+        self.add_tab(widget, title, icon="mdi.widgets", show=True)
 
     def set_tab(self, index, position: str, widget=None):
         self.tabBar().set_tab(index, position, widget)
