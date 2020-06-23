@@ -15,6 +15,7 @@ class RegexEditorWidget(widgets.Widget):
         self.resize(537, 377)
         self.set_title(title)
         self.set_layout("vertical")
+        self.prog = None
         self.groupbox = widgets.GroupBox(title="Regular expression")
         self.grid = widgets.GridLayout(self.groupbox)
         self.label_error = widgets.Label("label_error")
@@ -26,6 +27,8 @@ class RegexEditorWidget(widgets.Widget):
         self.layout_toprow.add(self.lineedit_regex)
         self.cb_ignorecase = widgets.CheckBox("Ignore case")
         self.layout_toprow.add(self.cb_ignorecase)
+        self.cb_multiline = widgets.CheckBox("Multi-Line")
+        self.layout_toprow.add(self.cb_multiline)
         self.grid.add(self.layout_toprow, 1, 0)
         self.box.add(self.groupbox)
         self.groupbox_teststring = widgets.GroupBox(title="Test strings")
@@ -34,24 +37,32 @@ class RegexEditorWidget(widgets.Widget):
         self.textedit_teststring.set_min_size(400, 0)
         self.layout_teststring.add(self.textedit_teststring, 0, 0)
         self.box.add(self.groupbox_teststring)
-        self.groupbox_result = widgets.GroupBox(title="Match result")
-        self.layout_result = widgets.GridLayout(self.groupbox_result)
-        self.textedit_result = widgets.PlainTextEdit()
-        self.textedit_result.set_min_size(400, 0)
-        self.textedit_result.set_read_only()
-        self.layout_result.add(self.textedit_result, 0, 0)
-        self.box.add(self.groupbox_result)
+        self.groupbox_substitution = widgets.GroupBox(title="Substitution",
+                                                      checkable=True)
+        self.layout_substitution = widgets.GridLayout(self.groupbox_substitution)
+        self.lineedit_substitution = widgets.LineEdit()
+        self.lineedit_substitution.textChanged.connect(self.update_sub_textedit)
+        self.textedit_substitution = widgets.PlainTextEdit()
+        self.groupbox_substitution.toggled.connect(self.lineedit_substitution.setVisible)
+        self.groupbox_substitution.toggled.connect(self.textedit_substitution.setVisible)
+        self.textedit_substitution.set_min_size(400, 0)
+        self.textedit_substitution.set_read_only()
+        self.layout_substitution.add(self.lineedit_substitution, 0, 0)
+        self.layout_substitution.add(self.textedit_substitution, 1, 0)
+        self.box.add(self.groupbox_substitution)
         self.cb_quickref = widgets.CheckBox("Show Regular Expression Quick Reference")
         self.box.add(self.cb_quickref)
         self.label_error.hide()
-        self._mapping = {re.IGNORECASE: self.cb_ignorecase}
+        self._mapping = {re.IGNORECASE: self.cb_ignorecase,
+                         re.MULTILINE: self.cb_multiline}
         self.lineedit_regex.textChanged.connect(self._update_view)
-        self.textedit_teststring.textChanged.connect(self._update_view)
-        doc = self.textedit_result.document()
+        doc = self.textedit_teststring.document()
         self._highlighter = match_highlighter.MatchHighlighter(doc)
         self._highlighter.rehighlight()
         self.cb_quickref.stateChanged.connect(self.quick_ref_requested)
         self.cb_ignorecase.stateChanged.connect(self._update_view)
+        self.cb_multiline.stateChanged.connect(self._update_view)
+        self.textedit_teststring.textChanged.connect(self._update_view)
 
     @property
     def string(self):
@@ -94,20 +105,32 @@ class RegexEditorWidget(widgets.Widget):
             widget.setChecked(bool(value & flg))
 
     def _update_view(self, *args):
-        if not self.regex:
-            self.label_error.hide()
-            self._highlighter.set_prog(None)
-            return None
-        try:
-            prog = re.compile(self.regex, self.compile_flags)
-        except sre_constants.error as e:
-            self.label_error.show()
-            self.label_error.set_text('Error: %s' % e)
-            self._highlighter.set_prog(None)
+        with self.textedit_teststring.block_signals():
+            if not self.regex:
+                self.label_error.hide()
+                self._highlighter.set_prog(None)
+                return None
+            try:
+                self.prog = re.compile(self.regex, self.compile_flags)
+            except sre_constants.error as e:
+                self.prog = None
+                self.label_error.show()
+                self.label_error.set_text('Error: %s' % e)
+                self._highlighter.set_prog(None)
+            else:
+                self.label_error.hide()
+                self._highlighter.set_prog(self.prog)
+        if self.lineedit_substitution.text():
+            self.update_sub_textedit()
+
+    def update_sub_textedit(self):
+        if self.prog:
+            text = self.textedit_teststring.text()
+            replace_with = self.lineedit_substitution.text()
+            substituted = self.prog.sub(replace_with, text)
+            self.textedit_substitution.set_text(substituted)
         else:
-            self.label_error.hide()
-            self.textedit_result.set_text(self.textedit_teststring.text())
-            self._highlighter.set_prog(prog)
+            self.textedit_substitution.set_text("")
 
 
 if __name__ == "__main__":
