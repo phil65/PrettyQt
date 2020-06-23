@@ -3,6 +3,9 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Union
+import pathlib
+
 from qtpy import QtCore, QtWebEngineWidgets
 
 from prettyqt import core, widgets
@@ -19,13 +22,17 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
         reader.setUrl(url)
         return reader
 
-    def set_url(self, url):
-        if isinstance(url, str):
+    def set_url(self, url: Union[str, pathlib.Path]):
+        if isinstance(url, pathlib.Path):
+            url = QtCore.QUrl.fromLocalFile(str(url))
+        elif isinstance(url, str):
             url = core.Url(url)
         self.setUrl(url)
 
-    def load_url(self, url):
-        if isinstance(url, str):
+    def load_url(self, url: Union[str, pathlib.Path]):
+        if isinstance(url, pathlib.Path):
+            url = QtCore.QUrl.fromLocalFile(str(url))
+        elif isinstance(url, str):
             url = core.Url(url)
         self.load(url)
 
