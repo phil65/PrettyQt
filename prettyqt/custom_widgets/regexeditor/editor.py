@@ -120,8 +120,7 @@ class RegexEditorWidget(widgets.Widget):
             else:
                 self.label_error.hide()
                 self._highlighter.set_prog(self.prog)
-        if self.lineedit_substitution.text():
-            self.update_sub_textedit()
+        self.update_sub_textedit()
 
     def update_sub_textedit(self):
         if self.prog:
