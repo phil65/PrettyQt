@@ -17,14 +17,18 @@ WEIGHTS = bidict(thin=QtGui.QFont.Thin,
 
 class TextCharFormat(QtGui.QTextCharFormat):
 
-    def set_foreground_color(self, color_name):
-        color = gui.Color()
-        color.set_color(color_name)
+    def set_foreground_color(self, color):
+        if isinstance(color, (list, tuple)):
+            color = gui.Color(*color)
+        else:
+            color = gui.Color(color)
         self.setForeground(color)
 
-    def set_background_color(self, color_name):
-        color = gui.Color()
-        color.set_color(color_name)
+    def set_background_color(self, color):
+        if isinstance(color, (list, tuple)):
+            color = gui.Color(*color)
+        else:
+            color = gui.Color(color)
         self.setBackground(color)
 
     def set_font_weight(self, weight: str):
