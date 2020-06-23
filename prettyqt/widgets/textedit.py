@@ -50,6 +50,11 @@ class TextEdit(QtWidgets.QTextEdit):
     def set_read_only(self, value: bool = True):
         self.setReadOnly(value)
 
+    def set_text_color(self, color):
+        if isinstance(color, str):
+            color = gui.Color(color)
+        self.setTextColor(color)
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
