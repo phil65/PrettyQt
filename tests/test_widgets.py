@@ -363,8 +363,14 @@ def test_label():
     label = widgets.Label()
     label.set_image("")
     label.set_text("testus")
+    with pytest.raises(ValueError):
+        label.set_text_format("test")
     label.set_alignment(horizontal="left", vertical="top")
+    label.set_alignment(vertical="bottom")
     label.set_text_interaction("by_mouse")
+    expected = ['by_mouse', 'like_text_editor', 'like_text_browser']
+    assert label.get_text_interaction() == expected
+    label.allow_links()
     with pytest.raises(ValueError):
         label.set_text_interaction("test")
     # assert label.get_text_interaction() == "by_mouse"
@@ -458,6 +464,8 @@ def test_mainwindow():
     window.toggle_fullscreen()
     window.toggle_fullscreen()
     window.add_toolbar(widgets.ToolBar())
+    with pytest.raises(ValueError):
+        window.add_toolbar(widgets.ToolBar(), position="test")
     assert len(window.get_toolbars()) == 1
     assert len(window.get_docks()) == 1
     window.remove_dockwidgets([w])
@@ -470,6 +478,7 @@ def test_mainwindow():
         pickle.dump(window, jar)
     with open("data.pkl", "rb") as jar:
         window = pickle.load(jar)
+    window.set_icon(None)
 
 
 def test_mdiarea():
@@ -523,13 +532,15 @@ def test_menubar():
 
 
 def test_messagebox():
-    widget = widgets.MessageBox()
+    widget = widgets.MessageBox(buttons=["reset"])
     widget.set_icon("warning")
     widget.set_icon("mdi.timer")
     widget.add_button("ok")
     widget.set_text_format("rich")
     with pytest.raises(ValueError):
         widget.set_text_format("test")
+    with pytest.raises(ValueError):
+        widget.add_button("test")
     assert widget.get_text_format() == "rich"
     widget.get_standard_buttons()
 
@@ -582,6 +593,7 @@ def test_pushbutton():
     widget.set_text("test")
     widget.set_disabled()
     widget.set_enabled()
+    assert widget.get_value() is False
     widget.set_icon("mdi.timer")
     widget.set_style_icon("close")
     with open("data.pkl", "wb") as jar:
