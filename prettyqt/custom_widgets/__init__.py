@@ -26,6 +26,7 @@ from .buttondelegate import ButtonDelegate
 from .radiodelegate import RadioDelegate
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
+from .regexeditor.editor import RegexEditorWidget
 
 __all__ = ["Image",
            "ListInput",
@@ -48,4 +49,5 @@ __all__ = ["Image",
            "SelectionWidget",
            "ImageViewer",
            "MarkdownWindow",
-           "CodeEditor"]
+           "CodeEditor",
+           "RegexEditorWidget"]
