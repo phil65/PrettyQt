@@ -184,6 +184,7 @@ def test_textcharformat():
     fmt.set_font_weight("bold")
     assert fmt.get_font_weight() == "bold"
     fmt.set_foreground_color("yellow")
+    fmt.set_background_color("yellow")
     with pytest.raises(ValueError):
         fmt.set_font_weight("test")
 

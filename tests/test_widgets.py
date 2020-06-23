@@ -310,6 +310,7 @@ def test_gridlayout():
 
 def test_groupbox():
     widget = widgets.GroupBox()
+    widget.set_title("test")
     ly = widgets.BoxLayout("horizontal")
     widget.set_layout(ly)
     ly += widgets.RadioButton("+=")
@@ -578,6 +579,7 @@ def test_progressdialog():
 
 def test_pushbutton():
     widget = widgets.PushButton("Test", callback=print)
+    widget.set_text("test")
     widget.set_disabled()
     widget.set_enabled()
     widget.set_icon("mdi.timer")
@@ -718,6 +720,7 @@ def test_styleoptionslider():
 def test_tabwidget():
     widget = widgets.TabWidget(detachable=True)
     widget.add_tab(widgets.Widget(), "mdi.timer")
+    widget.set_document_mode(True)
     widget.insert_tab(0, widgets.Widget(), "test", "mdi.timer")
     assert len(widget) == 2
     w = widgets.Widget()
@@ -967,6 +970,7 @@ def test_treewidgetitem():
 
 def test_widget():
     widget = widgets.Widget()
+    widget.set_tooltip("test")
     layout = widgets.BoxLayout()
     widget.set_layout(layout)
     with open("data.pkl", "wb") as jar:
