@@ -4,6 +4,7 @@
 """Tests for `prettyqt` package."""
 
 import pickle
+import re
 
 from qtpy import QtCore, QtGui
 
@@ -53,6 +54,15 @@ def test_colorchooserbutton():
     assert btn.get_value() == gui.Color("green")
     btn.set_value("blue")
     assert btn.is_valid()
+
+
+def test_regexeditor():
+    widget = custom_widgets.RegexEditorWidget()
+    widget.regex = "[0-9]"
+    assert widget.regex == "[0-9]"
+    widget.string = "test123"
+    assert widget.string == "test123"
+    widget.compile_flags = re.IGNORECASE
 
 
 def test_dataset():
