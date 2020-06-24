@@ -167,3 +167,12 @@ class PythonHighlighter(gui.SyntaxHighlighter):
 
         # Return True if still inside a multi-line string, False otherwise
         return self.currentBlockState() == in_state
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+    app = widgets.app()
+    editor = widgets.PlainTextEdit()
+    highlighter = PythonHighlighter(editor.document())
+    editor.show()
+    app.exec_()

@@ -59,3 +59,12 @@ class YamlHighlighter(gui.SyntaxHighlighter):
         self.rules.append((core.RegExp(r), gui.TextCharFormat(f)))
         r.setPattern(r"<\\?xml.*\\?>")
         self.rules.append((core.RegExp(r), gui.TextCharFormat(f)))
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+    app = widgets.app()
+    editor = widgets.PlainTextEdit()
+    highlighter = YamlHighlighter(editor.document())
+    editor.show()
+    app.exec_()
