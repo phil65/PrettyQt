@@ -49,9 +49,9 @@ class MatchHighlighter(gui.SyntaxHighlighter):
             elif ends_in_line:
                 # if self.previousBlockState() == 1:
                 # print(f"ends: {end}")
-                self.colorize(0, end, i)
+                self.colorize(0, end - start, i)
                 # self.setCurrentBlockState(-1)
             elif starts_in_line:
                 # print(f"starts: {line_pos}")
                 # self.setCurrentBlockState(1)
-                self.colorize(start - start_char, end_char, i)
+                self.colorize(start - start_char, end - start, i)
