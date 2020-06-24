@@ -839,6 +839,12 @@ def test_toolbutton():
         widget.set_arrow_type("test")
     widget.set_arrow_type("left")
     assert widget.get_arrow_type() == "left"
+    menu = widgets.Menu()
+    act = widgets.Action()
+    act.id = "test"
+    menu.add(act)
+    widget.setMenu(menu)
+    assert widget["test"] == act
 
 
 def test_tabbar():

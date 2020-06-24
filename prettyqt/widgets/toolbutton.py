@@ -25,6 +25,10 @@ QtWidgets.QToolButton.__bases__ = (widgets.AbstractButton,)
 
 class ToolButton(QtWidgets.QToolButton):
 
+    def __getitem__(self, item):
+        menu = self.menu()
+        return menu[item]
+
     @classmethod
     def for_menu(cls, menu, icon=None):
         btn = cls()
@@ -85,3 +89,7 @@ class ToolButton(QtWidgets.QToolButton):
             arrow type
         """
         return ARROW_TYPES.inv[self.arrowType()]
+
+
+if __name__ == "__main__":
+    w = ToolButton()
