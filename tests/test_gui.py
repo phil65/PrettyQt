@@ -106,6 +106,13 @@ def test_standarditemmodel():
         model.find_items("test", mode="wrong_mode")
 
 
+def test_textcursor():
+    cursor = gui.TextCursor()
+    cursor.set_position(1, "move")
+    cursor.move_position("start", "move", 1)
+    cursor.select("document")
+
+
 def test_painter():
     painter = gui.Painter(gui.Image())
     painter.use_antialiasing()

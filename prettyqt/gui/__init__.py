@@ -32,6 +32,7 @@ from .polygonf import PolygonF
 from .standarditem import StandardItem
 from .standarditemmodel import StandardItemModel
 from .textcharformat import TextCharFormat
+from .textcursor import TextCursor
 from .syntaxhighlighter import SyntaxHighlighter
 from .pdfwriter import PdfWriter
 from .keysequence import KeySequence
@@ -61,6 +62,7 @@ __all__ = ["GuiApplication",
            "StandardItem",
            "StandardItemModel",
            "TextCharFormat",
+           "TextCursor",
            "SyntaxHighlighter",
            "PdfWriter",
            "KeySequence"]
