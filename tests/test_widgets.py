@@ -502,7 +502,12 @@ def test_mdiarea():
 def test_menu():
     menu = widgets.Menu("1", icon="mdi.timer")
     menu.add(widgets.Action(text="TestAction"))
-    menu += widgets.Action(text="TestAction")
+    act = widgets.Action(text="TestAction")
+    act.id = "test"
+    menu += act
+    assert menu["test"] == act
+    with pytest.raises(KeyError):
+        menu["bla"]
 
     def test():
         pass
@@ -512,7 +517,7 @@ def test_menu():
                     shortcut="Ctrl+A",
                     checkable=True,
                     status_tip="test")
-    assert len(menu) == 1
+    assert len(menu) == 3
     for item in menu:
         pass
     menu.add_menu(widgets.Menu())

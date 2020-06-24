@@ -28,12 +28,19 @@ class Menu(QtWidgets.QMenu):
 
     def __add__(self, other):
         if isinstance(other, QtWidgets.QAction):
-            self.addAction(other)
+            self.add(other)
             return self
+        raise TypeError("Invalid Type")
+
+    def __getitem__(self, item):
+        for action in self.actions():
+            if action.id == item:
+                return action
+        raise KeyError(f"Action {item} not in menu")
 
     def add(self, *item):
         for i in item:
-            self.addAction(i)
+            self.add_action(i)
 
     def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
         """set the icon for the menu
@@ -105,6 +112,7 @@ class Menu(QtWidgets.QMenu):
                 action.setStatusTip(status_tip)
         else:
             action = label
+            action.setParent(self)
         self.addAction(action)
         return action
 
