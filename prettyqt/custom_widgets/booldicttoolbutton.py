@@ -12,15 +12,10 @@ class BoolDictToolButton(widgets.ToolButton):
         super().__init__(parent=parent)
         self.set_text(title)
         self.set_icon(icon)
-        menu = widgets.Menu()
-        self.setMenu(menu)
+        self.setMenu(widgets.Menu())
         self.set_popup_mode("instant")
-        for k, v in dct.items():
-            action = widgets.Action()
-            action.set_text(v)
-            action.setCheckable(True)
-            action.id = k
-            menu.add(action)
+        if dct:
+            self.set_dict(dct)
 
     def __getitem__(self, key):
         menu = self.menu()
@@ -29,6 +24,15 @@ class BoolDictToolButton(widgets.ToolButton):
     def __setitem__(self, key, value):
         menu = self.menu()
         menu[key].setChecked(value)
+
+    def set_dict(self, dct):
+        menu = self.menu()
+        for k, v in dct.items():
+            action = widgets.Action()
+            action.set_text(v)
+            action.setCheckable(True)
+            action.id = k
+            menu.add(action)
 
     def as_dict(self):
         return {act.id: act.isChecked() for act in self.menu()}
