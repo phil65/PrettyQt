@@ -339,6 +339,9 @@ def test_headerview():
         header.resize_mode("test")
     header.resize_sections("interactive")
     header.set_contextmenu_policy("custom")
+    header.set_default_section_size(None)
+    header.set_default_section_size(30)
+    header.stretch_last_section()
     with pytest.raises(ValueError):
         header.set_contextmenu_policy("test")
     assert header.get_contextmenu_policy() == "custom"
@@ -347,7 +350,7 @@ def test_headerview():
     assert header.section_labels() == ['Name', 'Size', 'Type', 'Date Modified']
     header.save_state()
     header.load_state()
-    header.change_section_vis(0, True)
+    header.set_section_hidden(0, True)
 
 
 def test_keysequenceedit():

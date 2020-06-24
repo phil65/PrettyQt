@@ -65,18 +65,27 @@ class HeaderView(QtWidgets.QHeaderView):
             act.setCheckable(True)
             val = not self.isSectionHidden(i)
             act.setChecked(val)
-            fn = functools.partial(self.change_section_vis, i=i, val=val)
+            fn = functools.partial(self.set_section_hidden, i=i, hide=val)
             act.triggered.connect(fn)
         menu.exec_(self.mapToGlobal(event.pos()))
 
-    def change_section_vis(self, i, val):
-        self.section_vis_changed.emit(i, val)
-        self.setSectionHidden(i, val)
+    def set_section_hidden(self, i: int, hide: bool):
+        self.section_vis_changed.emit(i, hide)
+        self.setSectionHidden(i, hide)
 
     def set_sizes(self, sizes: Iterable):
         for i, size in enumerate(sizes):
             if size is not None:
                 self.resizeSection(i, size)
+
+    def set_default_section_size(self, size):
+        if size is None:
+            self.resetDefaultSectionSize()
+        else:
+            self.setDefaultSectionSize(size)
+
+    def stretch_last_section(self, stretch: bool = True):
+        self.setStretchLastSection(stretch)
 
 
 if __name__ == "__main__":
