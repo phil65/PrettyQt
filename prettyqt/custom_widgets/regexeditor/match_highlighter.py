@@ -37,13 +37,15 @@ class MatchHighlighter(gui.SyntaxHighlighter):
         if not self.spans or not text:
             return None
         for i, (start, end) in enumerate(self.spans):
-            match_len = end - start
+            if end < start_char:
+                continue
+            if start > end_char:
+                break
             starts_in_line = start_char <= start <= end_char
             ends_in_line = start_char <= end <= end_char
-            line_pos = start - start_char
             if starts_in_line and ends_in_line:
                 # print(f"in line: {line_pos} - {line_pos + match_len}")
-                self.colorize(line_pos, match_len, i)
+                self.colorize(start - start_char, end - start, i)
             elif ends_in_line:
                 # if self.previousBlockState() == 1:
                 # print(f"ends: {end}")
@@ -52,4 +54,4 @@ class MatchHighlighter(gui.SyntaxHighlighter):
             elif starts_in_line:
                 # print(f"starts: {line_pos}")
                 # self.setCurrentBlockState(1)
-                self.colorize(line_pos, end_char, i)
+                self.colorize(start - start_char, end_char, i)
