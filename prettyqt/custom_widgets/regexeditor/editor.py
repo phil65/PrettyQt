@@ -10,19 +10,20 @@ from prettyqt.custom_widgets.regexeditor import match_highlighter
 class RegexEditorWidget(widgets.Widget):
     quick_ref_requested = core.Signal(int)
 
-    def __init__(self, title="Regex Editor", parent=None):
+    def __init__(self, title="Regex Editor", regex="", teststring="", parent=None):
         super().__init__(parent)
-        self.resize(537, 377)
+        self.resize(800, 600)
         self.set_title(title)
         self.set_layout("vertical")
         self.prog = None
+        self.matches = None
         self.groupbox = widgets.GroupBox(title="Regular expression")
         self.grid = widgets.GridLayout(self.groupbox)
         self.label_error = widgets.Label("label_error")
         self.label_error.setStyleSheet("color: #FF0000;")
         self.grid.add(self.label_error, 2, 0)
         self.layout_toprow = widgets.BoxLayout("horizontal")
-        self.lineedit_regex = widgets.LineEdit()
+        self.lineedit_regex = widgets.LineEdit(regex)
         self.lineedit_regex.set_min_size(400, 0)
         self.layout_toprow.add(self.lineedit_regex)
         self.tb_flags = custom_widgets.BoolDictToolButton("Flags",
@@ -32,7 +33,7 @@ class RegexEditorWidget(widgets.Widget):
         self.box.add(self.groupbox)
         self.groupbox_teststring = widgets.GroupBox(title="Test strings")
         self.layout_teststring = widgets.GridLayout(self.groupbox_teststring)
-        self.textedit_teststring = widgets.PlainTextEdit()
+        self.textedit_teststring = widgets.PlainTextEdit(teststring)
         self.textedit_teststring.set_min_size(400, 0)
         self.layout_teststring.add(self.textedit_teststring, 0, 0)
         self.box.add(self.groupbox_teststring)
@@ -70,6 +71,7 @@ class RegexEditorWidget(widgets.Widget):
                          "dotall": re.DOTALL,
                          "verbose": re.VERBOSE}
         self.tb_flags.set_dict(dct)
+        self._update_view()
 
     @property
     def string(self):
@@ -111,22 +113,26 @@ class RegexEditorWidget(widgets.Widget):
         for identifier, flag in self._mapping.items():
             self.tb_flags[identifier] = bool(value & flag)
 
-    def _update_view(self, *args):
+    def _update_view(self):
+        self.prog = None
+        self.matches = None
         with self.textedit_teststring.block_signals():
             if not self.regex:
                 self.label_error.hide()
-                self._highlighter.set_prog(None)
+                self._highlighter.set_spans(None)
                 return None
             try:
                 self.prog = re.compile(self.regex, self.compile_flags)
             except sre_constants.error as e:
-                self.prog = None
                 self.label_error.show()
                 self.label_error.set_text('Error: %s' % e)
-                self._highlighter.set_prog(None)
+                self._highlighter.set_spans(None)
             else:
                 self.label_error.hide()
-                self._highlighter.set_prog(self.prog)
+                text = self.textedit_teststring.text()
+                self.matches = list(self.prog.finditer(text))
+                spans = [m.span() for m in self.matches]
+                self._highlighter.set_spans(spans)
         self.update_sub_textedit()
 
     def update_sub_textedit(self):
