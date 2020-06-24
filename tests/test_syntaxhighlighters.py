@@ -3,8 +3,6 @@
 
 """Tests for `prettyqt` package."""
 
-import pytest
-
 from prettyqt import syntaxhighlighters
 
 
@@ -20,3 +18,7 @@ def test_pythonhighlighter():
 
 def test_yamlhighlighter():
     syntaxhighlighters.YamlHighlighter()
+
+
+def test_xmlhighlighter():
+    syntaxhighlighters.XmlHighlighter()
