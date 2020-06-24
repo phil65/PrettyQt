@@ -13,6 +13,15 @@ from prettyqt import core, custom_widgets, gui, widgets
 test_widget = widgets.Widget()
 
 
+def test_booldicttoolbutton():
+    dct = dict(a="test",
+               b="test2")
+    w = custom_widgets.BoolDictToolButton("Title", None, dct)
+    w["a"] = True
+    assert w["a"] is True
+    assert w.as_dict() == dict(a=True, b=False)
+
+
 def test_buttondelegate():
     widget = custom_widgets.ButtonDelegate(parent=None)
     widget.setEditorData(widgets.Widget(), None)

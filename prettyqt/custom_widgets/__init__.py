@@ -6,6 +6,7 @@
 
 from .image import Image
 from .listinput import ListInput
+from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .mappedcheckbox import MappedCheckBox
 from .stringornumberwidget import StringOrNumberWidget
@@ -28,6 +29,7 @@ from .codeeditor import CodeEditor
 
 __all__ = ["Image",
            "ListInput",
+           "BoolDictToolButton",
            "OptionalWidget",
            "MappedCheckBox",
            "StringOrNumberWidget",
