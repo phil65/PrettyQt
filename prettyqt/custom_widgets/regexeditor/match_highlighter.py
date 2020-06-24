@@ -20,7 +20,7 @@ class MatchHighlighter(gui.SyntaxHighlighter):
         text = self.document().toPlainText()
         if self.prog is not None:
             self.matches = [m.span() for m in self.prog.finditer(text)]
-            print(self.matches)
+            # print(self.matches)
         self.rehighlight()
 
     def highlightBlock(self, text):
