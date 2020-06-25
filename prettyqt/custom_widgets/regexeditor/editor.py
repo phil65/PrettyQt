@@ -142,6 +142,8 @@ class RegexEditorWidget(widgets.Widget):
             if not self.regex:
                 self.label_error.hide()
                 self._highlighter.set_spans(None)
+                self.table_matches.setModel(None)
+                self.label_num_matches.set_text("0 matches")
                 return None
             try:
                 self.prog = re.compile(self.regex, self.compile_flags)
@@ -149,10 +151,14 @@ class RegexEditorWidget(widgets.Widget):
                 self.label_error.show()
                 self.label_error.set_text(f"Error: {e}")
                 self._highlighter.set_spans(None)
+                self.table_matches.setModel(None)
+                self.label_num_matches.set_text("0 matches")
             except re._regex_core.error as e:
                 self.label_error.show()
                 self.label_error.set_text(f"Error: {e}")
                 self._highlighter.set_spans(None)
+                self.table_matches.setModel(None)
+                self.label_num_matches.set_text("0 matches")
             else:
                 self.label_error.hide()
                 text = self.textedit_teststring.text()
