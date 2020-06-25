@@ -6,7 +6,7 @@
 from prettyqt import gui
 
 
-class MatchHighlighter(gui.SyntaxHighlighter):
+class RegexMatchHighlighter(gui.SyntaxHighlighter):
 
     def __init__(self, document):
         super().__init__(document)

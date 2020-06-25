@@ -3,7 +3,7 @@ This module contains the editor widget implementation.
 """
 import sre_constants
 from prettyqt import widgets, core, custom_widgets, custom_models, constants
-from prettyqt.custom_widgets.regexeditor import match_highlighter
+from prettyqt.syntaxhighlighters import RegexMatchHighlighter
 try:
     import regex as re
 except ImportError:
@@ -72,7 +72,7 @@ class RegexEditorWidget(widgets.Widget):
         self.label_error.hide()
         self.lineedit_regex.textChanged.connect(self._update_view)
         doc = self.textedit_teststring.document()
-        self._highlighter = match_highlighter.MatchHighlighter(doc)
+        self._highlighter = RegexMatchHighlighter(doc)
         self._highlighter.rehighlight()
         self.cb_quickref.stateChanged.connect(self.quick_ref_requested)
         self.tb_flags.triggered.connect(self._update_view)
