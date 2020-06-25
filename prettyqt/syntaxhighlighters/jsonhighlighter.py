@@ -10,37 +10,30 @@ BRACKETS = core.RegularExpression("(\\{|\\}|\\[|\\]|\\:|\\,)")
 REGEXP1 = core.RegularExpression("\".*\" *\\:")
 REGEXP2 = core.RegularExpression("\\: *\".*\"")
 
+SYMBOL_FORMAT = gui.TextCharFormat()
+SYMBOL_FORMAT.set_foreground_color("red")
+SYMBOL_FORMAT.set_font_weight("bold")
+
+NAME_FORMAT = gui.TextCharFormat()
+NAME_FORMAT.set_foreground_color("blue")
+
+VALUE_FORMAT = gui.TextCharFormat()
+VALUE_FORMAT.set_foreground_color("darkgreen")
+
 
 class JsonHighlighter(gui.SyntaxHighlighter):
-
-    def __init__(self, parent=None):
-        """ Constructor
-        """
-        super().__init__(parent)
-
-        self.symbol_format = gui.TextCharFormat()
-        self.symbol_format.set_foreground_color("red")
-        self.symbol_format.set_font_weight("bold")
-
-        self.name_format = gui.TextCharFormat()
-        self.name_format.set_foreground_color("blue")
-        self.name_format.set_font_weight("bold")
-        self.name_format.setFontItalic(True)
-
-        self.value_format = gui.TextCharFormat()
-        self.value_format.set_foreground_color("darkgreen")
 
     def highlightBlock(self, text):
         """ Highlight a block of code using the rules outlined in the Constructor
         """
         for index, length in BRACKETS.matches_in_text(text):
-            self.setFormat(index, length, self.symbol_format)
+            self.setFormat(index, length, SYMBOL_FORMAT)
 
         text.replace("\\\"", "  ")
         for index, length in REGEXP1.matches_in_text(text):
-            self.setFormat(index, length, self.name_format)
+            self.setFormat(index, length, NAME_FORMAT)
         for index, length in REGEXP2.matches_in_text(text):
-            self.setFormat(index, length, self.value_format)
+            self.setFormat(index, length, VALUE_FORMAT)
 
 
 if __name__ == "__main__":

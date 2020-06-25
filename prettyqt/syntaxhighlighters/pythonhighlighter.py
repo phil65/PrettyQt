@@ -61,6 +61,44 @@ BRACES = [
     r"\{", r"\}", r"\(", r"\)", r"\[", r"\]",
 ]
 
+# Multi-line strings (expression, flag, style)
+# FIXME: The triple-quotes in these two lines will mess up the
+# syntax highlighting from this point onward
+TRI_SINGLE = (core.RegExp("'''"), 1, STYLES["string2"])
+TRI_DOUBLE = (core.RegExp('"""'), 2, STYLES["string2"])
+
+RULES = []
+
+# Keyword, operator, and brace rules
+RULES += [(r"\b%s\b" % w, 0, STYLES["keyword"])
+          for w in KEYWORDS]
+RULES += [(r"%s" % o, 0, STYLES["operator"])
+          for o in OPERATORS]
+RULES += [(r"%s" % b, 0, STYLES["brace"])
+          for b in BRACES]
+
+# All other rules
+RULES += [
+    # 'self'
+    (r"\bself\b", 0, STYLES["self"]),
+    # Double-quoted string, possibly containing escape sequences
+    (r'"[^"\\]*(\\.[^"\\]*)*"', 0, STYLES["string"]),
+    # Single-quoted string, possibly containing escape sequences
+    (r"'[^'\\]*(\\.[^'\\]*)*'", 0, STYLES["string"]),
+    # 'def' followed by an identifier
+    (r"\bdef\b\s*(\w+)", 1, STYLES["defclass"]),
+    # 'class' followed by an identifier
+    (r"\bclass\b\s*(\w+)", 1, STYLES["defclass"]),
+    # From '#' until a newline
+    (r"#[^\n]*", 0, STYLES["comment"]),
+    # Numeric literals
+    (r"\b[+-]?[0-9]+[lL]?\b", 0, STYLES["numbers"]),
+    (r"\b[+-]?0[xX][0-9A-Fa-f]+[lL]?\b", 0, STYLES["numbers"]),
+    (r"\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b", 0, STYLES["numbers"]),
+]
+
+RULES = [(core.RegExp(pat), index, fmt) for (pat, index, fmt) in RULES]
+
 
 class PythonHighlighter(gui.SyntaxHighlighter):
     """Syntax highlighter for the Python language.
@@ -70,52 +108,13 @@ class PythonHighlighter(gui.SyntaxHighlighter):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-
-        # Multi-line strings (expression, flag, style)
-        # FIXME: The triple-quotes in these two lines will mess up the
-        # syntax highlighting from this point onward
-        self.tri_single = (core.RegExp("'''"), 1, STYLES["string2"])
-        self.tri_double = (core.RegExp('"""'), 2, STYLES["string2"])
-
-        rules = []
-
-        # Keyword, operator, and brace rules
-        rules += [(r"\b%s\b" % w, 0, STYLES["keyword"])
-                  for w in KEYWORDS]
-        rules += [(r"%s" % o, 0, STYLES["operator"])
-                  for o in OPERATORS]
-        rules += [(r"%s" % b, 0, STYLES["brace"])
-                  for b in BRACES]
-
-        # All other rules
-        rules += [
-            # 'self'
-            (r"\bself\b", 0, STYLES["self"]),
-            # Double-quoted string, possibly containing escape sequences
-            (r'"[^"\\]*(\\.[^"\\]*)*"', 0, STYLES["string"]),
-            # Single-quoted string, possibly containing escape sequences
-            (r"'[^'\\]*(\\.[^'\\]*)*'", 0, STYLES["string"]),
-            # 'def' followed by an identifier
-            (r"\bdef\b\s*(\w+)", 1, STYLES["defclass"]),
-            # 'class' followed by an identifier
-            (r"\bclass\b\s*(\w+)", 1, STYLES["defclass"]),
-            # From '#' until a newline
-            (r"#[^\n]*", 0, STYLES["comment"]),
-            # Numeric literals
-            (r"\b[+-]?[0-9]+[lL]?\b", 0, STYLES["numbers"]),
-            (r"\b[+-]?0[xX][0-9A-Fa-f]+[lL]?\b", 0, STYLES["numbers"]),
-            (r"\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b", 0, STYLES["numbers"]),
-        ]
-
         # Build a core.RegExp for each pattern
-        self.rules = [(core.RegExp(pat), index, fmt)
-                      for (pat, index, fmt) in rules]
 
     def highlightBlock(self, text):
         """Apply syntax highlighting to the given block of text.
         """
         # Do other syntax formatting
-        for expression, nth, fmt in self.rules:
+        for expression, nth, fmt in RULES:
             index = expression.indexIn(text)
 
             while index >= 0:
@@ -128,8 +127,8 @@ class PythonHighlighter(gui.SyntaxHighlighter):
         self.setCurrentBlockState(0)
 
         # Do multi-line strings
-        if not self.match_multiline(text, *self.tri_single):
-            self.match_multiline(text, *self.tri_double)
+        if not self.match_multiline(text, *TRI_SINGLE):
+            self.match_multiline(text, *TRI_DOUBLE)
 
     def match_multiline(self, text, delimiter, in_state, style):
         """Do highlighting of multi-line strings. ``delimiter`` should be a
