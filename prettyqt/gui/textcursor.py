@@ -57,3 +57,7 @@ class TextCursor(QtGui.QTextCursor):
         if selection in SELECTION_TYPES:
             selection = SELECTION_TYPES[selection]
         super().select(selection)
+
+    def select_text(self, start_pos: int, end_pos: int):
+        self.set_position(start_pos)
+        self.set_position(end_pos, mode="keep")
