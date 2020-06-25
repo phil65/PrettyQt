@@ -61,6 +61,10 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def text(self) -> str:
         return self.toPlainText()
 
+    def select_text(self, start: int, end: int):
+        with self.create_cursor() as c:
+            c.select_text(start, end)
+
     def set_read_only(self, value: bool = True):
         """set test to read only
 

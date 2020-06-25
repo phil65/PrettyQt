@@ -55,6 +55,10 @@ class TextEdit(QtWidgets.QTextEdit):
     def text(self) -> str:
         return self.toPlainText()
 
+    def select_text(self, start: int, end: int):
+        with self.create_cursor() as c:
+            c.select_text(start, end)
+
     def set_read_only(self, value: bool = True):
         self.setReadOnly(value)
 

@@ -557,6 +557,7 @@ def test_plaintextedit():
     widget = widgets.PlainTextEdit("This is a test")
     with widget.create_cursor() as c:
         c.select_text(2, 4)
+    widget.select_text(2, 4)
     widget.set_text("hallo")
     widget.set_disabled()
     widget.set_enabled()
@@ -778,6 +779,7 @@ def test_textedit():
     widget.set_text("test")
     with widget.create_cursor() as c:
         c.select_text(1, 3)
+    widget.select_text(1, 3)
     widget.append_text(" this")
     assert widget.text() == "test\n this"
     widget.set_font("Consolas")
