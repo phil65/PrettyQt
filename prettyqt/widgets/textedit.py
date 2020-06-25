@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+import contextlib
+
 from qtpy import QtWidgets
 
 from prettyqt import gui, core, widgets
@@ -19,9 +21,6 @@ class TextEdit(QtWidgets.QTextEdit):
         super().__init__(*args, **kwargs)
         self.textChanged.connect(self.on_value_change)
 
-    def on_value_change(self):
-        self.value_changed.emit(self.text())
-
     def __getstate__(self):
         return dict(text=self.text(),
                     enabled=self.isEnabled(),
@@ -37,6 +36,15 @@ class TextEdit(QtWidgets.QTextEdit):
         if isinstance(other, str):
             self.append_text(other)
             return self
+
+    def on_value_change(self):
+        self.value_changed.emit(self.text())
+
+    @contextlib.contextmanager
+    def create_cursor(self):
+        cursor = gui.TextCursor(self.document())
+        yield cursor
+        self.setTextCursor(cursor)
 
     def set_text(self, text: str):
         self.setPlainText(text)

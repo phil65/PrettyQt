@@ -3,11 +3,12 @@
 @author: Philipp Temminghoff
 """
 
+import contextlib
+
 from qtpy import QtGui, QtWidgets
 
-from prettyqt import gui, widgets, core
+from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict
-
 
 WRAP_MODES = bidict(none=QtGui.QTextOption.NoWrap,
                     word=QtGui.QTextOption.WordWrap,
@@ -44,6 +45,12 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         if isinstance(other, str):
             self.append_text(other)
             return self
+
+    @contextlib.contextmanager
+    def create_cursor(self):
+        cursor = gui.TextCursor(self.document())
+        yield cursor
+        self.setTextCursor(cursor)
 
     def append_text(self, text: str):
         self.appendPlainText(text)
@@ -108,5 +115,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 if __name__ == "__main__":
     app = widgets.app()
     widget = PlainTextEdit("This is a test")
+    with widget.create_cursor() as c:
+        c.select_text(2, 4)
     widget.show()
     app.exec_()
