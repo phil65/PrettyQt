@@ -4,6 +4,7 @@
 """
 
 from qtpy import QtCore
+from prettyqt import core
 
 
 class RegularExpressionMatchIterator(QtCore.QRegularExpressionMatchIterator):
@@ -16,8 +17,11 @@ class RegularExpressionMatchIterator(QtCore.QRegularExpressionMatchIterator):
 
     def __next__(self):
         if self.hasNext():
-            return self.next()
+            return core.RegularExpressionMatch(self.next())
         raise StopIteration
+
+    def peek_next(self):
+        return core.RegularExpressionMatch(self.peekNext())
 
 
 if __name__ == "__main__":
