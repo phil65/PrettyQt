@@ -149,6 +149,12 @@ def test_regularexpressionmatch():
     assert match.endpos is None
 
 
+def test_regularexpressionmatchiterator():
+    it = core.RegularExpressionMatchIterator()
+    for i in it:
+        pass
+
+
 def test_regularexpression():
     regex = core.RegularExpression("[0-9]")
     with open("data.pkl", "wb") as jar:
