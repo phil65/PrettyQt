@@ -4,33 +4,45 @@
 based on http://www.yasinuludag.com/blog/?p=49
 """
 
-from prettyqt import core, gui
+from prettyqt import core, gui, syntaxhighlighters
 
 HIGHLIGHT_RULES = []
 
-ELEMENT_FORMAT = gui.TextCharFormat()
-ELEMENT_FORMAT.set_foreground_color("blue")
-HIGHLIGHT_RULES.append((core.RegExp(r"\\b[A-Za-z0-9_]+(?=[\s/>])"), ELEMENT_FORMAT))
-ATTR_FORMAT = gui.TextCharFormat()
-ATTR_FORMAT.setFontItalic(True)
-ATTR_FORMAT.set_foreground_color("lightgreen")
-HIGHLIGHT_RULES.append((core.RegExp(r"\\b[A-Za-z0-9_]+(?=\\=)"), ATTR_FORMAT))
-HIGHLIGHT_RULES.append((core.RegExp(r"="), ATTR_FORMAT))
 
-LINE_COMMENT_FORMAT = gui.TextCharFormat()
-LINE_COMMENT_FORMAT.set_foreground_color("lightgrey")
-HIGHLIGHT_RULES.append((core.RegExp(r"<!--[^\n]*-->"), LINE_COMMENT_FORMAT))
+class Rule(syntaxhighlighters.HighlightRule):
+    pass
 
-TEXT_FORMAT = gui.TextCharFormat()
-TEXT_FORMAT.set_foreground_color("black")
-# (?<=...)  - lookbehind is not supported
-HIGHLIGHT_RULES.append((core.RegExp(r">(.+)(?=</)"), TEXT_FORMAT))
 
-KEYWORD_FORMAT = gui.TextCharFormat()
-KEYWORD_FORMAT.set_foreground_color("red")
-KEYWORD_FORMAT.setFontWeight(gui.Font.Bold)
-KEYWORD_PATTERNS = ["\\b?xml\\b", "/>", ">", "<", "</"]
-HIGHLIGHT_RULES += [(core.RegExp(p), KEYWORD_FORMAT) for p in KEYWORD_PATTERNS]
+class Element(Rule):
+    regex = r"\\b[A-Za-z0-9_]+(?=[\s/>])"
+    color = "blue"
+
+
+class Attribute(Rule):
+    regex = r"\\b[A-Za-z0-9_]+(?=\\=)"
+    color = "darkgreen"
+    italic = True
+
+
+class EqualSign(Rule):
+    regex = r"="
+    color = "darkgreen"
+
+
+class LineComment(Rule):
+    regex = r"<!--[^\n]*-->"
+    color = "lightgrey"
+
+
+class Text(Rule):
+    regex = r">(.+)(?=</)"
+
+
+class Keyword(Rule):
+    regex = ["\\b?xml\\b", "/>", ">", "<", "</"]
+    bold = True
+    color = "red"
+
 
 VALUE_FORMAT = gui.TextCharFormat()
 VALUE_FORMAT.set_foreground_color("orange")
@@ -44,19 +56,18 @@ class XmlHighlighter(gui.SyntaxHighlighter):
 
     def highlightBlock(self, text):
         # for every pattern
-        for pattern, format in HIGHLIGHT_RULES:
+        for pattern, fmt in Rule.yield_rules():
             # Create a regular expression from the retrieved pattern
-            expression = core.RegExp(pattern)
             # Check what index that expression occurs at with the ENTIRE text
-            index = expression.indexIn(text)
+            index = pattern.indexIn(text)
             # While the index is greater than 0
             while index >= 0:
                 # Get the length of how long the expression is true,
                 # set the format from the start to the length with the text format
-                length = expression.matchedLength()
-                self.setFormat(index, length, format)
+                length = pattern.matchedLength()
+                self.setFormat(index, length, fmt)
                 # Set index to where the expression ends in the text
-                index = expression.indexIn(text, index + length)
+                index = pattern.indexIn(text, index + length)
 
         # HANDLE QUOTATION MARKS NOW.. WE WANT TO START WITH " AND END WITH "..
         # A THIRD " SHOULD NOT CAUSE THE WORDS INBETWEEN SECOND AND THIRD

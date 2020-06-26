@@ -6,7 +6,7 @@
 # multimaster_fkie/node_manager_fkie/src/node_manager_fkie/yaml_highlighter.py
 
 
-from prettyqt import core, gui
+from prettyqt import core, gui, syntaxhighlighters
 
 COMMENT_START = core.RegExp("#")
 COMMENT_END = core.RegExp("\n|\r")  # Unused?
@@ -14,47 +14,68 @@ COMMENT_FORMAT = gui.TextCharFormat()
 COMMENT_FORMAT.setFontItalic(True)
 COMMENT_FORMAT.set_foreground_color("darkgray")
 
-RULES = []
-f = gui.TextCharFormat()
-r = core.RegExp()
-r.setMinimal(True)
-f.setFontWeight(gui.Font.Normal)
-f.set_foreground_color("blue")
-tag_list = ["\\btrue\\b", "\\bfalse\\b"]
-for tag in tag_list:
-    r.setPattern(tag)
-    RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-f.setForeground(gui.Color(127, 64, 127))
-r.setPattern(r"\\d+")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-f.set_foreground_color("darkblue")
-r.setPattern(r"^\s*[_.\w]*\s*:")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-f.set_foreground_color("darkblue")
-r.setPattern(r":\s*:[_\.\w]*$|:\s*\@[_\.\w]*$")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-f.setFontWeight(gui.Font.Bold)
-f.set_foreground_color("darkred")
-r.setPattern(r"^\s*-")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-f.set_foreground_color("darkred")
-r.setPattern(r"^---$")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-f.set_foreground_color("darkgreen")
-r.setPattern(r"[\[\]\{\}\,]")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-f.setFontWeight(gui.Font.Normal)
-f.set_foreground_color("darkorange")
-r.setPattern(r"\".*\"|\'.*\'")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-f.setForeground(gui.Color(127, 64, 127))
-r.setPattern(r"\\$\\(.*\\)")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-f.set_foreground_color("lightgray")
-r.setPattern(r"<!DOCTYPE.*>")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
-r.setPattern(r"<\\?xml.*\\?>")
-RULES.append((core.RegExp(r), gui.TextCharFormat(f)))
+
+class Rule(syntaxhighlighters.HighlightRule):
+    minimal = True
+
+
+class Bool(Rule):
+    regex = ["\\btrue\\b", "\\bfalse\\b"]
+    color = "blue"
+    bold = True
+
+
+class Decimal(Rule):
+    regex = r"\d+"
+    color = "darkMagenta"
+
+
+class Rule2(Rule):
+    regex = r"^\s*[_.\w]*\s*:"
+    color = "blue"
+
+
+class Rule3(Rule):
+    regex = r":\s*:[_\.\w]*$|:\s*\@[_\.\w]*$"
+    color = "blue"
+
+
+class ListMember(Rule):
+    regex = r"^\s*-"
+    color = "red"
+    bold = True
+
+
+class DocumentStart(Rule):
+    regex = r"^---$"
+    color = "red"
+    bold = True
+
+
+class Brackets(Rule):
+    regex = r"[\[\]\{\}\,]"
+    color = "darkgreen"
+    bold = True
+
+
+class Rule7(Rule):
+    regex = r"\".*\"|\'.*\'"
+    color = "darkorange"
+
+
+class Rule8(Rule):
+    regex = r"\$\(.*\)"
+    color = "orange"
+
+
+class DocType(Rule):
+    regex = r"<!DOCTYPE.*>"
+    color = "lightgray"
+
+
+class Xml(Rule):
+    regex = r"<\?xml.*\?>"
+    color = "lightgray"
 
 
 class YamlHighlighter(gui.SyntaxHighlighter):
@@ -63,7 +84,7 @@ class YamlHighlighter(gui.SyntaxHighlighter):
     """
 
     def highlightBlock(self, text):
-        for pattern, form in RULES:
+        for pattern, form in Rule.yield_rules():
             index = pattern.indexIn(text)
             while index >= 0:
                 length = pattern.matchedLength()
@@ -71,12 +92,12 @@ class YamlHighlighter(gui.SyntaxHighlighter):
                 index = pattern.indexIn(text, index + length)
     # mark comment blocks
         self.setCurrentBlockState(0)
-        startIndex = 0
+        start_index = 0
         if self.previousBlockState() != 1:
-            startIndex = COMMENT_START.indexIn(text)
-            if startIndex >= 0:
-                commentLength = len(text) - startIndex
-                self.setFormat(startIndex, commentLength, COMMENT_FORMAT)
+            start_index = COMMENT_START.indexIn(text)
+            if start_index >= 0:
+                comment_len = len(text) - start_index
+                self.setFormat(start_index, comment_len, COMMENT_FORMAT)
 
 
 if __name__ == "__main__":

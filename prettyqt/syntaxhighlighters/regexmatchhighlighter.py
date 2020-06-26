@@ -5,15 +5,16 @@
 
 from prettyqt import gui
 
+FORMAT_1 = gui.TextCharFormat()
+FORMAT_1.set_background_color("lightgreen")
+FORMAT_2 = gui.TextCharFormat()
+FORMAT_2.set_background_color("lightblue")
+
 
 class RegexMatchHighlighter(gui.SyntaxHighlighter):
 
-    def __init__(self, document):
+    def __init__(self, document=None):
         super().__init__(document)
-        self._format_1 = gui.TextCharFormat()
-        self._format_1.set_background_color("lightgreen")
-        self._format_2 = gui.TextCharFormat()
-        self._format_2.set_background_color("lightblue")
         self.spans = []
 
     def set_spans(self, spans):
@@ -22,7 +23,7 @@ class RegexMatchHighlighter(gui.SyntaxHighlighter):
         self.rehighlight()
 
     def colorize(self, line_pos, match_len, match_num):
-        fmt = self._format_1 if match_num % 2 == 0 else self._format_2
+        fmt = FORMAT_1 if match_num % 2 == 0 else FORMAT_2
         self.setFormat(line_pos, match_len, fmt)
 
     def highlightBlock(self, text):
