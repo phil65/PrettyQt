@@ -26,6 +26,7 @@ from .translator import Translator
 from .thread import Thread
 # from .rect import Rect
 # from .rectf import RectF
+from .regularexpressionmatch import RegularExpressionMatch
 from .regexp import RegExp
 from .regularexpression import RegularExpression
 from .mimedata import MimeData
@@ -76,6 +77,7 @@ __all__ = ["Object",
            "ItemSelectionModel",
            "Slot",
            "Property",
+           "RegularExpressionMatch",
            "RegExp",
            "RegularExpression",
            "Runnable",

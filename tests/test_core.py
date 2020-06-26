@@ -137,6 +137,18 @@ def test_regexp():
     assert len(a) == 2
 
 
+def test_regularexpressionmatch():
+    match = core.RegularExpressionMatch()
+    match.group()
+    match.groups()
+    match.groupdict()
+    match.start()
+    match.end()
+    match.span()
+    assert match.pos is None
+    assert match.endpos is None
+
+
 def test_regularexpression():
     regex = core.RegularExpression("[0-9]")
     with open("data.pkl", "wb") as jar:
