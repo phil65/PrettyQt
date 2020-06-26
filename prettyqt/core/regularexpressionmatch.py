@@ -8,6 +8,12 @@ from qtpy import QtCore
 
 class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.string = None
+        self.pos = None
+        self.endpos = None
+
     def __repr__(self):
         return "RegularExpressionMatch()"
 
@@ -39,16 +45,8 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     def end(self, group: int = 0):
         return self.capturedEnd(group)
 
-    def span(self, group: int = 0):
+    def span(self, group: int = 0) -> tuple:
         return (self.start(group), self.end(group))
-
-    @property
-    def pos(self):
-        pass
-
-    @property
-    def endpos(self):
-        pass
 
     @property
     def lastindex(self):
@@ -64,10 +62,6 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     @property
     def re(self):
         return self.regularExpression()
-
-    @property
-    def string(self):
-        pass
 
 
 if __name__ == "__main__":
