@@ -3,39 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from prettyqt import core, gui
-
-
-def return_format(color, style=""):
-    """
-    Return a QTextCharFormat with the given attributes.
-    """
-    fmt = gui.TextCharFormat()
-    fmt.set_foreground_color(color)
-    if "bold" in style:
-        fmt.set_font_weight("bold")
-    if "italic" in style:
-        fmt.setFontItalic(True)
-
-    return fmt
-
-
-# Syntax styles that can be shared by all languages
-
-STYLES = {
-    "keyword": return_format([200, 120, 50], "bold"),
-    "operator": return_format([150, 150, 150]),
-    "brace": return_format("darkGray"),
-    "defclass": return_format([20, 20, 255], "bold"),
-    "string": return_format([20, 110, 100]),
-    "string2": return_format([30, 120, 110]),
-    "comment": return_format([128, 128, 128]),
-    "self": return_format([150, 85, 140], "italic"),
-    "numbers": return_format([100, 150, 190]),
-}
+from prettyqt import core, gui, syntaxhighlighters
 
 KEYWORDS = [
-    "and", "assert", "break", "class", "continue", "def",
+    "and", "assert", "break", "continue", "class", "def"
     "del", "elif", "else", "except", "exec", "finally",
     "for", "from", "global", "if", "import", "in",
     "is", "lambda", "not", "or", "pass", "print",
@@ -43,78 +14,99 @@ KEYWORDS = [
     "None", "True", "False",
 ]
 
-# Python operators
 OPERATORS = [
     "=",
-    # Comparison
     "==", "!=", "<", "<=", ">", ">=",
-    # Arithmetic
     r"\+", "-", r"\*", "/", "//", r"\%", r"\*\*",
-    # In-place
     r"\+=", "-=", r"\*=", "/=", r"\%=",
-    # Bitwise
     r"\^", r"\|", r"\&", r"\~", ">>", "<<",
 ]
 
-# Python braces
-BRACES = [
-    r"\{", r"\}", r"\(", r"\)", r"\[", r"\]",
-]
+
+class Rule(syntaxhighlighters.HighlightRule):
+    nth = 0
+
+    @classmethod
+    def yield_rules(cls):
+        for Rule in cls.__subclasses__():
+            if isinstance(Rule.compiled, list):
+                for i in Rule.compiled:
+                    yield (i, Rule.nth, Rule.format)
+            else:
+                yield (Rule.compiled, Rule.nth, Rule.format)
+
+
+class Keyword(Rule):
+    regex = r"\b%s\b" % "|".join(KEYWORDS)
+    color = gui.Color(200, 120, 50)
+    bold = True
+
+
+class Operator(Rule):
+    regex = r"%s" % "|".join(OPERATORS)
+    color = gui.Color(150, 150, 150)
+
+
+class Bracket(Rule):
+    regex = r"[\[\]\{\}\(\)]"
+    color = "darkgray"
+
+
+class Self(Rule):
+    regex = r"\bself\b"
+    color = gui.Color(150, 85, 140)
+    italic = True
+
+
+class String(Rule):
+    regex = [r'"[^"\\]*(\\.[^"\\]*)*"', r"'[^'\\]*(\\.[^'\\]*)*'"]
+    color = gui.Color(20, 110, 100)
+
+
+class Def(Rule):
+    regex = r"\bdef\b\s*(\w+)"
+    color = gui.Color(20, 20, 255)
+    bold = True
+    nth = 1
+
+
+class Class(Rule):
+    regex = r"\bclass\b\s*(\w+)"
+    color = gui.Color(20, 20, 255)
+    bold = True
+    nth = 1
+
+
+class Comment(Rule):
+    regex = r"#[^\n]*"
+    color = "lightgray"
+
+
+class Number(Rule):
+    regex = [r"\b[+-]?[0-9]+[lL]?\b",
+             r"\b[+-]?0[xX][0-9A-Fa-f]+[lL]?\b",
+             r"\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b"]
+    color = gui.Color(100, 150, 190)
+
 
 # Multi-line strings (expression, flag, style)
 # FIXME: The triple-quotes in these two lines will mess up the
 # syntax highlighting from this point onward
-TRI_SINGLE = (core.RegExp("'''"), 1, STYLES["string2"])
-TRI_DOUBLE = (core.RegExp('"""'), 2, STYLES["string2"])
-
-RULES = []
-
-# Keyword, operator, and brace rules
-RULES += [(r"\b%s\b" % w, 0, STYLES["keyword"])
-          for w in KEYWORDS]
-RULES += [(r"%s" % o, 0, STYLES["operator"])
-          for o in OPERATORS]
-RULES += [(r"%s" % b, 0, STYLES["brace"])
-          for b in BRACES]
-
-# All other rules
-RULES += [
-    # 'self'
-    (r"\bself\b", 0, STYLES["self"]),
-    # Double-quoted string, possibly containing escape sequences
-    (r'"[^"\\]*(\\.[^"\\]*)*"', 0, STYLES["string"]),
-    # Single-quoted string, possibly containing escape sequences
-    (r"'[^'\\]*(\\.[^'\\]*)*'", 0, STYLES["string"]),
-    # 'def' followed by an identifier
-    (r"\bdef\b\s*(\w+)", 1, STYLES["defclass"]),
-    # 'class' followed by an identifier
-    (r"\bclass\b\s*(\w+)", 1, STYLES["defclass"]),
-    # From '#' until a newline
-    (r"#[^\n]*", 0, STYLES["comment"]),
-    # Numeric literals
-    (r"\b[+-]?[0-9]+[lL]?\b", 0, STYLES["numbers"]),
-    (r"\b[+-]?0[xX][0-9A-Fa-f]+[lL]?\b", 0, STYLES["numbers"]),
-    (r"\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b", 0, STYLES["numbers"]),
-]
-
-RULES = [(core.RegExp(pat), index, fmt) for (pat, index, fmt) in RULES]
+fmt = gui.TextCharFormat()
+fmt.set_foreground_color([30, 120, 110])
+TRI_SINGLE = (core.RegExp("'''"), 1, fmt)
+TRI_DOUBLE = (core.RegExp('"""'), 2, fmt)
 
 
 class PythonHighlighter(gui.SyntaxHighlighter):
     """Syntax highlighter for the Python language.
     """
 
-    # Python keywords
-
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        # Build a core.RegExp for each pattern
-
     def highlightBlock(self, text):
         """Apply syntax highlighting to the given block of text.
         """
         # Do other syntax formatting
-        for expression, nth, fmt in RULES:
+        for expression, nth, fmt in Rule.yield_rules():
             index = expression.indexIn(text)
 
             while index >= 0:
