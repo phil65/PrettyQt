@@ -27,6 +27,7 @@ from .thread import Thread
 # from .rect import Rect
 # from .rectf import RectF
 from .regularexpressionmatch import RegularExpressionMatch
+from .regularexpressionmatchiterator import RegularExpressionMatchIterator
 from .regexp import RegExp
 from .regularexpression import RegularExpression
 from .mimedata import MimeData
@@ -78,6 +79,7 @@ __all__ = ["Object",
            "Slot",
            "Property",
            "RegularExpressionMatch",
+           "RegularExpressionMatchIterator",
            "RegExp",
            "RegularExpression",
            "Runnable",
