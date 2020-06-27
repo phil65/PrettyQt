@@ -20,7 +20,7 @@ class Rule(syntaxhighlighters.HighlightRule):
 
 
 class Bool(Rule):
-    regex = ["\\btrue\\b", "\\bfalse\\b"]
+    regex = [r"\btrue\b", r"\bfalse\b"]
     color = "blue"
     bold = True
 
