@@ -39,14 +39,14 @@ class TextCharFormat(QtGui.QTextCharFormat):
     def set_foreground_color(self, color):
         if isinstance(color, (list, tuple)):
             color = gui.Color(*color)
-        else:
+        elif not isinstance(color, (QtGui.QColor, QtGui.QBrush)):
             color = gui.Color(color)
         self.setForeground(color)
 
     def set_background_color(self, color):
         if isinstance(color, (list, tuple)):
             color = gui.Color(*color)
-        else:
+        elif not isinstance(color, (QtGui.QColor, QtGui.QBrush)):
             color = gui.Color(color)
         self.setBackground(color)
 
