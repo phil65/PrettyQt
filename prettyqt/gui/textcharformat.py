@@ -14,6 +14,15 @@ WEIGHTS = bidict(thin=QtGui.QFont.Thin,
                  medium=QtGui.QFont.Medium,
                  bold=QtGui.QFont.Bold)
 
+UNDERLINE_STYLES = bidict(none=QtGui.QTextCharFormat.NoUnderline,
+                          single=QtGui.QTextCharFormat.SingleUnderline,
+                          dash=QtGui.QTextCharFormat.DashUnderline,
+                          dot=QtGui.QTextCharFormat.DotLine,
+                          dashdot=QtGui.QTextCharFormat.DashDotLine,
+                          dashdotline=QtGui.QTextCharFormat.DashDotDotLine,
+                          wave=QtGui.QTextCharFormat.WaveUnderline,
+                          spellcheck=QtGui.QTextCharFormat.SpellCheckUnderline)
+
 
 class TextCharFormat(QtGui.QTextCharFormat):
 
@@ -55,3 +64,30 @@ class TextCharFormat(QtGui.QTextCharFormat):
             current font weight
         """
         return WEIGHTS.inv[self.fontWeight()]
+
+    def set_underline_style(self, style: str):
+        """sets the underline style
+
+        Valid values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
+        "wave", "spellcheck"
+
+        Args:
+            style: underline style
+
+        Raises:
+            ValueError: invalid underline style
+        """
+        if style not in UNDERLINE_STYLES:
+            raise ValueError("Invalid underline style")
+        self.setUnderlineStyle(UNDERLINE_STYLES[style])
+
+    def get_underline_style(self) -> str:
+        """get current underline style
+
+        Possible values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
+        "wave", "spellcheck"
+
+        Returns:
+            current underline style
+        """
+        return UNDERLINE_STYLES.inv[self.underlineStyle()]
