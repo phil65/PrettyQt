@@ -32,11 +32,6 @@ class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
         """
         # Do other syntax formatting
         for expression, nth, fmt in self.yield_rules():
-            index = expression.indexIn(text)
-
-            while index >= 0:
-                # We actually want the index of the nth match
-                index = expression.pos(nth)
-                length = len(expression.cap(nth))
-                self.setFormat(index, length, fmt)
-                index = expression.indexIn(text, index + length)
+            for match in expression.finditer(text):
+                span = match.span(nth)
+                self.setFormat(span[0], span[1] - span[0], fmt)

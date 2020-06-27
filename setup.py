@@ -12,7 +12,7 @@ with open("README.rst") as readme_file:
 with open("HISTORY.rst") as history_file:
     history = history_file.read()
 
-requirements = ["qtpy", "docutils", "qtawesome", "bidict", "orjson"]
+requirements = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex"]
 
 setup_requirements = ["pytest-runner", ]
 
