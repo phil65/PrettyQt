@@ -79,16 +79,9 @@ class Xml(Rule):
 
 
 class YamlHighlighter(gui.SyntaxHighlighter):
-    """
-    Enabled the syntax highlightning for the yaml files.
-    """
-
     RULES = Rule.__subclasses__()
 
     def highlightBlock(self, text):
-        """Apply syntax highlighting to the given block of text.
-        """
-        # Do other syntax formatting
         super().highlightBlock(text)
         self.setCurrentBlockState(0)
         start_index = 0

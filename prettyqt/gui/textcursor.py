@@ -51,6 +51,12 @@ class TextCursor(QtGui.QTextCursor):
         return self.movePosition(op, mode, n)
 
     def set_position(self, pos: int, mode: str = "move"):
+        """set cursor to given position
+
+        Args:
+            pos: Cursor position
+            mode: Move mode (default: {"move"})
+        """
         self.setPosition(pos, MOVE_MODES[mode])
 
     def select(self, selection):
@@ -59,5 +65,11 @@ class TextCursor(QtGui.QTextCursor):
         super().select(selection)
 
     def select_text(self, start_pos: int, end_pos: int):
+        """select text from start position to end position
+
+        Args:
+            start_pos: Start position
+            end_pos: End position
+        """
         self.set_position(start_pos)
         self.set_position(end_pos, mode="keep")
