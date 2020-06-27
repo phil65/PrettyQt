@@ -7,7 +7,6 @@ from qtpy import QtGui
 
 from prettyqt import core, gui
 
-
 QtGui.QRegularExpressionValidator.__bases__ = (gui.Validator,)
 
 
@@ -21,7 +20,7 @@ class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
 
     def __setstate__(self, state):
         self.__init__()
-        self.setRegularExpression(state["regexp"])
+        self.set_regex(state["regexp"])
 
     def set_regex(self, regex: str):
         re = core.RegularExpression(regex)
@@ -33,5 +32,11 @@ class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+    app = widgets.app()
+    w = widgets.LineEdit()
     val = RegularExpressionValidator()
     val.set_regex(r"\w\d\d")
+    w.set_validator(val)
+    w.show()
+    app.exec_()
