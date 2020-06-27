@@ -6,8 +6,8 @@
 # multimaster_fkie/node_manager_fkie/src/node_manager_fkie/yaml_highlighter.py
 
 from dataclasses import dataclass
-
-from prettyqt import core, gui
+import regex as re
+from prettyqt import gui
 
 
 @dataclass
@@ -23,12 +23,10 @@ class HighlightRule(object):
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
         if isinstance(cls.regex, str):
-            cls.compiled = core.RegExp(cls.regex)
+            cls.compiled = re.compile(cls.regex)
             # cls.compiled.setMinimal(True)
         else:
-            cls.compiled = [core.RegExp(r) for r in cls.regex]
-            for r in cls.compiled:
-                r.setMinimal(cls.minimal)
+            cls.compiled = [re.compile(r) for r in cls.regex]
         cls.format = cls.get_format()
 
     @classmethod
