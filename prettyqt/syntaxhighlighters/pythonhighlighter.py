@@ -24,16 +24,7 @@ OPERATORS = [
 
 
 class Rule(syntaxhighlighters.HighlightRule):
-    nth = 0
-
-    @classmethod
-    def yield_rules(cls):
-        for Rule in cls.__subclasses__():
-            if isinstance(Rule.compiled, list):
-                for i in Rule.compiled:
-                    yield (i, Rule.nth, Rule.format)
-            else:
-                yield (Rule.compiled, Rule.nth, Rule.format)
+    pass
 
 
 class Keyword(Rule):
@@ -101,23 +92,14 @@ TRI_DOUBLE = (core.RegExp('"""'), 2, fmt)
 class PythonHighlighter(gui.SyntaxHighlighter):
     """Syntax highlighter for the Python language.
     """
+    RULES = Rule.__subclasses__()
 
     def highlightBlock(self, text):
         """Apply syntax highlighting to the given block of text.
         """
         # Do other syntax formatting
-        for expression, nth, fmt in Rule.yield_rules():
-            index = expression.indexIn(text)
-
-            while index >= 0:
-                # We actually want the index of the nth match
-                index = expression.pos(nth)
-                length = len(expression.cap(nth))
-                self.setFormat(index, length, fmt)
-                index = expression.indexIn(text, index + length)
-
+        super().highlightBlock(text)
         self.setCurrentBlockState(0)
-
         # Do multi-line strings
         if not self.match_multiline(text, *TRI_SINGLE):
             self.match_multiline(text, *TRI_DOUBLE)

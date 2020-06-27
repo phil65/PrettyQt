@@ -6,9 +6,9 @@
 from prettyqt import core, gui
 
 
-BRACKETS = core.RegularExpression("(\\{|\\}|\\[|\\]|\\:|\\,)")
-REGEXP1 = core.RegularExpression("\".*\" *\\:")
-REGEXP2 = core.RegularExpression("\\: *\".*\"")
+BRACKETS = core.RegularExpression(r"(\{|\}|\[|\]|\:|\,)")
+REGEXP1 = core.RegularExpression(r"\".*\" *\:")
+REGEXP2 = core.RegularExpression(r"\: *\".*\"")
 
 SYMBOL_FORMAT = gui.TextCharFormat()
 SYMBOL_FORMAT.set_foreground_color("red")
@@ -26,14 +26,14 @@ class JsonHighlighter(gui.SyntaxHighlighter):
     def highlightBlock(self, text):
         """ Highlight a block of code using the rules outlined in the Constructor
         """
-        for index, length in BRACKETS.matches_in_text(text):
-            self.setFormat(index, length, SYMBOL_FORMAT)
+        for m in BRACKETS.finditer(text):
+            self.setFormat(m.span()[0], m.span()[1] - m.span()[0], SYMBOL_FORMAT)
 
         text.replace("\\\"", "  ")
-        for index, length in REGEXP1.matches_in_text(text):
-            self.setFormat(index, length, NAME_FORMAT)
-        for index, length in REGEXP2.matches_in_text(text):
-            self.setFormat(index, length, VALUE_FORMAT)
+        for m in REGEXP1.finditer(text):
+            self.setFormat(m.span()[0], m.span()[1] - m.span()[0], NAME_FORMAT)
+        for m in REGEXP2.finditer(text):
+            self.setFormat(m.span()[0], m.span()[1] - m.span()[0], VALUE_FORMAT)
 
 
 if __name__ == "__main__":

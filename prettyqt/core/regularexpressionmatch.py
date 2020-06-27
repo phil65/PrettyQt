@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Union
+
 from qtpy import QtCore
 
 
@@ -20,7 +22,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     def __getitem__(self, item):
         return self.group(item)
 
-    def group(self, *groups):
+    def group(self, *groups) -> Union[tuple, str]:
         if len(groups) > 1:
             return tuple(self.captured(i) for i in groups)
         if len(groups) == 0:
@@ -39,17 +41,17 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         names = self.re.namedCaptureGroups()
         return {names[i]: groups[i] for i in range(self.re.captureCount())}
 
-    def start(self, group: int = 0):
+    def start(self, group: int = 0) -> int:
         return self.capturedStart(group)
 
-    def end(self, group: int = 0):
+    def end(self, group: int = 0) -> int:
         return self.capturedEnd(group)
 
     def span(self, group: int = 0) -> tuple:
         return (self.start(group), self.end(group))
 
     @property
-    def lastindex(self):
+    def lastindex(self) -> int:
         idx = self.lastCapturedIndex()
         return None if idx == -1 else idx
 

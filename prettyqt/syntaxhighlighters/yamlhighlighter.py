@@ -83,14 +83,13 @@ class YamlHighlighter(gui.SyntaxHighlighter):
     Enabled the syntax highlightning for the yaml files.
     """
 
+    RULES = Rule.__subclasses__()
+
     def highlightBlock(self, text):
-        for pattern, form in Rule.yield_rules():
-            index = pattern.indexIn(text)
-            while index >= 0:
-                length = pattern.matchedLength()
-                self.setFormat(index, length, form)
-                index = pattern.indexIn(text, index + length)
-    # mark comment blocks
+        """Apply syntax highlighting to the given block of text.
+        """
+        # Do other syntax formatting
+        super().highlightBlock(text)
         self.setCurrentBlockState(0)
         start_index = 0
         if self.previousBlockState() != 1:

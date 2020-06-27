@@ -34,30 +34,25 @@ class RegularExpression(QtCore.QRegularExpression):
     def __reduce__(self):
         return (self.__class__, (self.pattern(),))
 
-    def matches_in_text(self, text):
-        result = self.match(text)
-        while result.hasMatch():
-            length = result.capturedLength(0)
-            index = result.capturedStart(0)
-            yield index, length
-            result = self.match(text, index + length)
-
-    def match(self, *args, **kwargs):
+    def match(self, *args, **kwargs) -> core.RegularExpressionMatch:
         match = super().match(*args, **kwargs)
         return core.RegularExpressionMatch(match)
 
-    def globalMatch(self, *args, **kwargs):
+    def globalMatch(self, *args, **kwargs) -> core.RegularExpressionMatchIterator:
         it = super().globalMatch(*args, **kwargs)
         return core.RegularExpressionMatchIterator(it)
 
-    def finditer(self, string: str, pos: int = 0, endpos: Optional[int] = None):
+    def finditer(self,
+                 string: str,
+                 pos: int = 0,
+                 endpos: Optional[int] = None) -> core.RegularExpressionMatch:
         for match in self.globalMatch(string[:endpos], offset=pos):
             match.pos = pos
             match.endpos = endpos
             match.string = string
             yield match
 
-    def findall(self, string: str, pos: int = 0, endpos: Optional[int] = None):
+    def findall(self, string: str, pos: int = 0, endpos: Optional[int] = None) -> list:
         matches = [m for m in self.globalMatch(string[:endpos], offset=pos)]
         return [m.groups() if len(m.groups()) > 1 else m.group(0) for m in matches]
 
@@ -69,7 +64,6 @@ class RegularExpression(QtCore.QRegularExpression):
 
 
 if __name__ == "__main__":
+    print("here")
     reg = RegularExpression()
-    reg.setPattern("[0-9]+ [a-z] [0-9]+")
-    for i in reg.matches_in_text("033 a 03444"):
-        print(i)
+    reg.setPattern("[0-9]+")

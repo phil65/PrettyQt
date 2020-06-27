@@ -18,6 +18,7 @@ class HighlightRule(object):
     bold = False
     minimal = False
     font_size = None
+    nth = 0
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
@@ -40,12 +41,3 @@ class HighlightRule(object):
         if cls.bold:
             fmt.set_font_weight("bold")
         return fmt
-
-    @classmethod
-    def yield_rules(cls):
-        for Rule in cls.__subclasses__():
-            if isinstance(Rule.compiled, list):
-                for i in Rule.compiled:
-                    yield (i, Rule.format)
-            else:
-                yield (Rule.compiled, Rule.format)

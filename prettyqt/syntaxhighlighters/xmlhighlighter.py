@@ -14,12 +14,12 @@ class Rule(syntaxhighlighters.HighlightRule):
 
 
 class Element(Rule):
-    regex = r"\\b[A-Za-z0-9_]+(?=[\s/>])"
+    regex = r"\b[A-Za-z0-9_]+(?=[\s/>])"
     color = "blue"
 
 
 class Attribute(Rule):
-    regex = r"\\b[A-Za-z0-9_]+(?=\\=)"
+    regex = r"\b[A-Za-z0-9_]+(?=\=)"
     color = "darkgreen"
     italic = True
 
@@ -39,7 +39,7 @@ class Text(Rule):
 
 
 class Keyword(Rule):
-    regex = ["\\b?xml\\b", "/>", ">", "<", "</"]
+    regex = [r"\b?xml\b", "/>", ">", "<", "</"]
     bold = True
     color = "red"
 
@@ -52,23 +52,10 @@ VALUE_END_EXPRESSION = core.RegExp(r"\"(?=[\s></])")
 
 class XmlHighlighter(gui.SyntaxHighlighter):
 
-    # VIRTUAL FUNCTION WE OVERRIDE THAT DOES ALL THE COLLORING
+    RULES = Rule.__subclasses__()
 
     def highlightBlock(self, text):
-        # for every pattern
-        for pattern, fmt in Rule.yield_rules():
-            # Create a regular expression from the retrieved pattern
-            # Check what index that expression occurs at with the ENTIRE text
-            index = pattern.indexIn(text)
-            # While the index is greater than 0
-            while index >= 0:
-                # Get the length of how long the expression is true,
-                # set the format from the start to the length with the text format
-                length = pattern.matchedLength()
-                self.setFormat(index, length, fmt)
-                # Set index to where the expression ends in the text
-                index = pattern.indexIn(text, index + length)
-
+        super().highlightBlock(text)
         # HANDLE QUOTATION MARKS NOW.. WE WANT TO START WITH " AND END WITH "..
         # A THIRD " SHOULD NOT CAUSE THE WORDS INBETWEEN SECOND AND THIRD
         # TO BE COLORED

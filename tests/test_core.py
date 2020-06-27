@@ -133,8 +133,6 @@ def test_regexp():
     with open("data.pkl", "rb") as jar:
         regex = pickle.load(jar)
     repr(regex)
-    a = list(regex.matches_in_text("0a4"))
-    assert len(a) == 2
 
 
 def test_regularexpressionmatch():
@@ -162,8 +160,6 @@ def test_regularexpression():
     with open("data.pkl", "rb") as jar:
         regex = pickle.load(jar)
     repr(regex)
-    a = list(regex.matches_in_text("0a4"))
-    assert len(a) == 2
 
 
 def test_runnable():
