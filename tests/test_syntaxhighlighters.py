@@ -28,7 +28,7 @@ def test_xmlhighlighter():
 
 
 def test_markdownhighlighter():
-    highlighter = syntaxhighlighters.XmlHighlighter()
+    highlighter = syntaxhighlighters.MarkdownHighlighter()
     highlighter.highlightBlock("### Headline")
 
 

@@ -11,10 +11,13 @@ from .pythonhighlighter import PythonHighlighter
 from .yamlhighlighter import YamlHighlighter
 from .xmlhighlighter import XmlHighlighter
 from .regexmatchhighlighter import RegexMatchHighlighter
+from .markdownhighlighter import MarkdownHighlighter
+
 
 __all__ = ["HighlightRule",
            "JsonHighlighter",
            "YamlHighlighter",
            "PythonHighlighter",
            "XmlHighlighter",
-           "RegexMatchHighlighter"]
+           "RegexMatchHighlighter",
+           "MarkdownHighlighter"]
