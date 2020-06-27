@@ -10,6 +10,7 @@ class RegularExpressionValidator(gui.Validator):
 
     def __init__(self, regex=None):
         super().__init__()
+        self.regex = None
         self.set_regex(regex)
 
     def __repr__(self):

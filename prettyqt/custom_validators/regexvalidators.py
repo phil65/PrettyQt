@@ -3,10 +3,48 @@
 @author: Philipp Temminghoff
 """
 
+import regex as re
+
 from prettyqt import gui
 
 
-class IntListValidator(gui.RegExpValidator):
+class RegexValidator(gui.Validator):
+
+    def __init__(self, regex=None):
+        super().__init__()
+        self.regex = None
+        if regex:
+            self.set_regex(regex)
+
+    def __repr__(self):
+        return f"RegexValidator({self.get_regex()!r})"
+
+    def __getstate__(self):
+        return dict(regexp=self.regex)
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.set_regex(state["regexp"])
+
+    def set_regex(self, regex: str):
+        self.regex = re.compile(regex)
+
+    def get_regex(self) -> str:
+        return self.regex.pattern
+
+    def validate(self, text, pos=0):
+        if text == "":
+            return (self.Intermediate, text, pos)
+        match = self.regex.match(text, partial=True)
+        if match is None:
+            return (self.Invalid, text, pos)
+        if match.partial:
+            return (self.Intermediate, text, pos)
+        else:
+            return (self.Acceptable, text, pos)
+
+
+class IntListValidator(RegexValidator):
 
     def __repr__(self):
         return f"IntListValidator(allow_single={self.allow_single})"
@@ -20,7 +58,7 @@ class IntListValidator(gui.RegExpValidator):
             self.set_regex(r"^[0-9][0-9\,]+[0-9]$")
 
 
-class FloatListValidator(gui.RegExpValidator):
+class FloatListValidator(RegexValidator):
 
     def __repr__(self):
         return f"FloatListValidator(allow_single={self.allow_single})"
@@ -33,3 +71,14 @@ class FloatListValidator(gui.RegExpValidator):
         else:
             self.set_regex(r"^(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)"
                            r"(\s*,\s*-?\d+(\.\d+)?)*$")
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+    app = widgets.app()
+    w = widgets.LineEdit()
+    val = RegexValidator()
+    val.set_regex(r"\w\d\d")
+    w.set_validator(val)
+    w.show()
+    app.exec_()
