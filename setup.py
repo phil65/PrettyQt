@@ -2,21 +2,25 @@
 # -*- coding: utf-8 -*-
 
 """The setup script."""
-
+import sys
 from setuptools import find_packages, setup
 from sphinx.setup_command import BuildDoc
 
 with open("README.rst") as readme_file:
-    readme = readme_file.read()
+    README = readme_file.read()
 
 with open("HISTORY.rst") as history_file:
-    history = history_file.read()
+    HISTORY = history_file.read()
 
-requirements = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex"]
+version = '.'.join(map(str, sys.version_info))
 
-setup_requirements = ["pytest-runner", ]
+REQUIRES_PYTHON = ">=3.6.0"
+REQUIREMENTS = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex"]
+SETUP_REQUIREMENTS = ["pytest-runner", ]
+TEST_REQUIREMENTS = ["pytest", "pytest-xvfb", "pytest-qt"]
 
-test_requirements = ["pytest", "pytest-xvfb", "pytest-qt"]
+if version == '3.6':
+    REQUIREMENTS.append("dataclasses")
 
 setup(
     author="Philipp Temminghoff",
@@ -30,17 +34,18 @@ setup(
         "Programming Language :: Python :: 3.7",
     ],
     description="Pythonic layer on top of PyQt5 / PySide2",
-    install_requires=requirements,
+    install_requires=REQUIREMENTS,
     license="MIT license",
-    long_description=readme + "\n\n" + history,
+    python_requires=REQUIRES_PYTHON,
+    long_description=README + "\n\n" + HISTORY,
     long_description_content_type="text/x-rst",
     include_package_data=True,
     keywords="prettyqt",
     name="prettyqt",
     packages=find_packages(),
-    setup_requires=setup_requirements,
+    setup_requires=SETUP_REQUIREMENTS,
     test_suite="tests",
-    tests_require=test_requirements,
+    tests_require=TEST_REQUIREMENTS,
     url="https://github.com/phil65/prettyqt",
     version="0.67.1",
     zip_safe=False,

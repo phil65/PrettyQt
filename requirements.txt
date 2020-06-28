@@ -4,3 +4,4 @@ qtawesome==0.7.2
 docutils==0.16
 orjson==3.1.2
 regex==2020.6.8
+dataclasses==0.7; python_version < '3.7'
