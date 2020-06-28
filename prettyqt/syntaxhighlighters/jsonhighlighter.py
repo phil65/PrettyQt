@@ -3,12 +3,14 @@
 @author: Philipp Temminghoff
 """
 
-from prettyqt import core, gui
+import regex as re
+
+from prettyqt import gui
 
 
-BRACKETS = core.RegularExpression(r"(\{|\}|\[|\]|\:|\,)")
-REGEXP1 = core.RegularExpression(r"\".*\" *\:")
-REGEXP2 = core.RegularExpression(r"\: *\".*\"")
+BRACKETS = re.compile(r"(\{|\}|\[|\]|\:|\,)")
+REGEXP1 = re.compile(r"\".*\" *\:")
+REGEXP2 = re.compile(r"\: *\".*\"")
 
 SYMBOL_FORMAT = gui.TextCharFormat()
 SYMBOL_FORMAT.set_foreground_color("red")
