@@ -103,6 +103,11 @@ def test_optionalwidget():
     assert container.enabled is False
 
 
+def test_singlelinetextedit():
+    w = custom_widgets.SingleLineTextEdit()
+    w.set_text("test")
+
+
 def test_mappedcheckbox():
     widget = custom_widgets.MappedCheckBox(true_value=0, false_value=1)
     widget.set_value(0)

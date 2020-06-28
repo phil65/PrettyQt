@@ -8,6 +8,7 @@ from .image import Image
 from .listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
+from .singlelinetextedit import SingleLineTextEdit
 from .mappedcheckbox import MappedCheckBox
 from .stringornumberwidget import StringOrNumberWidget
 from .iconlabel import IconLabel
@@ -32,6 +33,7 @@ __all__ = ["Image",
            "ListInput",
            "BoolDictToolButton",
            "OptionalWidget",
+           "SingleLineTextEdit",
            "MappedCheckBox",
            "StringOrNumberWidget",
            "IconLabel",
