@@ -85,3 +85,14 @@ def test_floatlistvalidator():
     with open("data.pkl", "rb") as jar:
         val = pickle.load(jar)
     repr(val)
+
+
+def test_regularexpressionvalidator():
+    val = custom_validators.RegularExpressionValidator()
+    assert val.is_valid_value("[") is False
+    assert val.is_valid_value("[0-9]") is True
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(val, jar)
+    with open("data.pkl", "rb") as jar:
+        val = pickle.load(jar)
+    repr(val)
