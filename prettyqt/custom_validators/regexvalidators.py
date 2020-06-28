@@ -8,7 +8,7 @@ import regex as re
 from prettyqt import gui
 
 
-class RegexValidator(gui.Validator):
+class BaseRegexValidator(gui.Validator):
 
     def __init__(self, regex=None):
         super().__init__()
@@ -17,7 +17,7 @@ class RegexValidator(gui.Validator):
             self.set_regex(regex)
 
     def __repr__(self):
-        return f"RegexValidator({self.get_regex()!r})"
+        return f"BaseRegexValidator({self.get_regex()!r})"
 
     def __getstate__(self):
         return dict(regexp=self.regex)
@@ -44,7 +44,7 @@ class RegexValidator(gui.Validator):
             return (self.Acceptable, text, pos)
 
 
-class IntListValidator(RegexValidator):
+class IntListValidator(BaseRegexValidator):
 
     def __repr__(self):
         return f"IntListValidator(allow_single={self.allow_single})"
@@ -58,7 +58,7 @@ class IntListValidator(RegexValidator):
             self.set_regex(r"^[0-9][0-9\,]+[0-9]$")
 
 
-class FloatListValidator(RegexValidator):
+class FloatListValidator(BaseRegexValidator):
 
     def __repr__(self):
         return f"FloatListValidator(allow_single={self.allow_single})"
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     from prettyqt import widgets
     app = widgets.app()
     w = widgets.LineEdit()
-    val = RegexValidator()
+    val = BaseRegexValidator()
     val.set_regex(r"\w\d\d")
     w.set_validator(val)
     w.show()
