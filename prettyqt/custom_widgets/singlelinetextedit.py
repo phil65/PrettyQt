@@ -19,7 +19,7 @@ class SingleLineTextEdit(widgets.PlainTextEdit):
 
     def _on_text_changed(self):
         text = self.text()
-        with widget.current_cursor() as c:
+        with self.current_cursor() as c:
             pos = c.position()
             num_linebreaks = text.count("\n")
             with self.block_signals():
