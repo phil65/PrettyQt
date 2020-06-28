@@ -22,6 +22,35 @@ MODALITIES = bidict(window=QtCore.Qt.WindowModal,
                     application=QtCore.Qt.ApplicationModal,
                     none=QtCore.Qt.NonModal)
 
+CURSOR_SHAPES = bidict(arrow=QtCore.Qt.ArrowCursor,
+                       uparrow=QtCore.Qt.UpArrowCursor,
+                       cross=QtCore.Qt.CrossCursor,
+                       wait=QtCore.Qt.WaitCursor,
+                       caret=QtCore.Qt.IBeamCursor,
+                       size_vertical=QtCore.Qt.SizeVerCursor,
+                       size_horizonal=QtCore.Qt.SizeHorCursor,
+                       size_topright=QtCore.Qt.SizeBDiagCursor,
+                       size_topleft=QtCore.Qt.SizeFDiagCursor,
+                       size_all=QtCore.Qt.SizeAllCursor,
+                       blank=QtCore.Qt.BlankCursor,
+                       split_vertical=QtCore.Qt.SplitVCursor,
+                       split_horizontal=QtCore.Qt.SplitHCursor,
+                       pointing_hand=QtCore.Qt.PointingHandCursor,
+                       forbidden=QtCore.Qt.ForbiddenCursor,
+                       open_hand=QtCore.Qt.OpenHandCursor,
+                       closed_hand=QtCore.Qt.ClosedHandCursor,
+                       whats_this=QtCore.Qt.WhatsThisCursor,
+                       busy=QtCore.Qt.BusyCursor,
+                       drag_move=QtCore.Qt.DragMoveCursor,
+                       drag_copy=QtCore.Qt.DragCopyCursor,
+                       drag_link=QtCore.Qt.DragLinkCursor,
+                       bitmap=QtCore.Qt.BitmapCursor)
+
+FOCUS_POLICIES = bidict(tab=QtCore.Qt.TabFocus,
+                        click=QtCore.Qt.ClickFocus,
+                        strong=QtCore.Qt.StrongFocus,
+                        wheel=QtCore.Qt.WheelFocus,
+                        none=QtCore.Qt.NoFocus)
 
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
@@ -233,6 +262,21 @@ class Widget(QtWidgets.QWidget):
                 node.raise_()
                 return True
         return False
+
+    def set_cursor(self, cursor: str):
+        if cursor not in CURSOR_SHAPES:
+            raise ValueError(f"Invalid cursor '{cursor}'. "
+                             f"Valid values: {CURSOR_SHAPES.keys()}")
+        self.setCursor(CURSOR_SHAPES[cursor])
+
+    def set_focus_policy(self, policy: str):
+        if policy not in FOCUS_POLICIES:
+            raise ValueError(f"Invalid policy '{policy}'. "
+                             f"Valid values: {FOCUS_POLICIES.keys()}")
+        self.setFocusPolicy(FOCUS_POLICIES[policy])
+
+    def get_focus_policy(self) -> str:
+        return FOCUS_POLICIES.inv[self.focusPolicy()]
 
 
 if __name__ == "__main__":

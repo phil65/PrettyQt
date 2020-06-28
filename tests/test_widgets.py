@@ -1004,6 +1004,13 @@ def test_treewidgetitem():
 def test_widget():
     widget = widgets.Widget()
     widget.set_tooltip("test")
+    widget.set_cursor("caret")
+    with pytest.raises(ValueError):
+        widget.set_cursor("test")
+    widget.set_focus_policy("strong")
+    assert widget.get_focus_policy() == "strong"
+    with pytest.raises(ValueError):
+        widget.set_focus_policy("test")
     layout = widgets.BoxLayout()
     widget.set_layout(layout)
     with open("data.pkl", "wb") as jar:
