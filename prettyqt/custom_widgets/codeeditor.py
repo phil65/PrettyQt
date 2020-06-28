@@ -27,8 +27,8 @@ class CodeEditor(widgets.PlainTextEdit):
               "json": syntaxhighlighters.YamlHighlighter}
     supported_langs = lexers.keys()
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, language="python", parent=None):
+        super().__init__(parent=parent)
         self.line_area = LineNumberArea(self)
 
         self.blockCountChanged.connect(self.update_line_area_width)
@@ -38,7 +38,7 @@ class CodeEditor(widgets.PlainTextEdit):
 
         self.update_line_area_width(0)
         self.highlight_current_line()
-        self.highlighter = self.lexers["python"](self.document())
+        self.highlighter = self.lexers[language](self.document())
 
     def resizeEvent(self, event):
         super().resizeEvent(event)

@@ -157,6 +157,25 @@ class String(DataItem):
         return widget
 
 
+class Code(DataItem):
+    """
+    Construct a code data item
+        * label [string]: name
+        * value [string]: default value (optional)
+        * language [string]: language for syntax highlighting
+    """
+
+    def __init__(self, label, value=None, language="python", optional=False):
+        super().__init__(label, value=value, optional=optional)
+        self.language = language
+
+    def _create_widget(self):
+        widget = custom_widgets.CodeEditor()
+        if self.value is not None:
+            widget.set_value(self.value)
+        return widget
+
+
 class IntList(DataItem):
     """
     Construct an IntList data item
@@ -479,6 +498,7 @@ if __name__ == "__main__":
         folderitem = Folder(label="Folder")
         buttonitem = Button(label="Folder", icon="mdi.folder", callback=print)
         stringornumber = StringOrNumber(label="StringOrNumber", value=2.4)
+        code = Code(label="Test", value="class Test")
 
     dlg = Test(icon="mdi.timer", comment="hallo")
     # dlg.widget.value_changed.connect(print)
