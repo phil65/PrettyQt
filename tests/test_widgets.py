@@ -557,6 +557,8 @@ def test_plaintextedit():
     widget = widgets.PlainTextEdit("This is a test")
     with widget.create_cursor() as c:
         c.select_text(2, 4)
+    with widget.current_cursor() as c:
+        c.select_text(2, 4)
     widget.select_text(2, 4)
     widget.set_text("hallo")
     widget.set_disabled()
@@ -573,6 +575,9 @@ def test_plaintextedit():
     widget.set_wrap_mode("anywhere")
     with pytest.raises(ValueError):
         widget.set_wrap_mode("test")
+    widget.set_line_wrap_mode("widget_width")
+    with pytest.raises(ValueError):
+        widget.set_line_wrap_mode("test")
     assert widget.get_value() == "test"
     widget += "append"
     with open("data.pkl", "wb") as jar:

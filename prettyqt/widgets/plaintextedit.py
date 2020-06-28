@@ -16,6 +16,9 @@ WRAP_MODES = bidict(none=QtGui.QTextOption.NoWrap,
                     anywhere=QtGui.QTextOption.WrapAnywhere,
                     boundary_or_anywhere=QtGui.QTextOption.WrapAtWordBoundaryOrAnywhere)
 
+LINE_WRAP_MODES = bidict(none=QtWidgets.QPlainTextEdit.NoWrap,
+                         widget_width=QtWidgets.QPlainTextEdit.WidgetWidth)
+
 QtWidgets.QPlainTextEdit.__bases__ = (widgets.AbstractScrollArea,)
 
 
@@ -49,6 +52,12 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     @contextlib.contextmanager
     def create_cursor(self):
         cursor = gui.TextCursor(self.document())
+        yield cursor
+        self.setTextCursor(cursor)
+
+    @contextlib.contextmanager
+    def current_cursor(self):
+        cursor = gui.TextCursor(self.textCursor())
         yield cursor
         self.setTextCursor(cursor)
 
@@ -95,19 +104,35 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         return widget
 
     def set_wrap_mode(self, mode: str):
-        """set wrap mode
+        """set word wrap mode
 
         Allowed values are "none", "word", "manual", "anywhere", "boundary_or_anywhere"
 
         Args:
-            style: wrap mode to use
+            style: word wrap mode to use
 
         Raises:
-            ValueError: mode does not exist
+            ValueError: wrap mode does not exist
         """
         if mode not in WRAP_MODES:
             raise ValueError(f"invalid wrap mode. Allowed values: {WRAP_MODES.keys()}")
         self.setWordWrapMode(WRAP_MODES[mode])
+
+    def set_line_wrap_mode(self, mode: str):
+        """set line wrap mode
+
+        Allowed values are "none" and "widget width"
+
+        Args:
+            style: line wrap mode to use
+
+        Raises:
+            ValueError: line wrap mode does not exist
+        """
+        if mode not in LINE_WRAP_MODES:
+            raise ValueError(f"invalid wrap mode. "
+                             f"Allowed values: {LINE_WRAP_MODES.keys()}")
+        self.setLineWrapMode(LINE_WRAP_MODES[mode])
 
     def set_value(self, value: str):
         self.setPlainText(value)
@@ -119,7 +144,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 if __name__ == "__main__":
     app = widgets.app()
     widget = PlainTextEdit("This is a test")
-    with widget.create_cursor() as c:
+    with widget.current_cursor() as c:
         c.select_text(2, 4)
     widget.show()
     app.exec_()
