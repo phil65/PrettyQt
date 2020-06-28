@@ -31,7 +31,7 @@ from .filesystemmodel import FileSystemModel
 
 from .slider import Slider
 from .styleoptionslider import StyleOptionSlider
-
+from .styleoptionframe import StyleOptionFrame
 
 from .dockwidget import DockWidget
 
@@ -142,6 +142,7 @@ __all__ = ["app",
            "ToolBox",
            "Slider",
            "StyleOptionSlider",
+           "StyleOptionFrame",
            "Frame",
            "ListWidgetItem",
            "TreeWidgetItem",
