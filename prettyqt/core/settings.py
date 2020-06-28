@@ -124,7 +124,7 @@ class Settings(QtCore.QSettings):
         if fmt not in FORMATS:
             raise ValueError(f"Invalid format. Valid values: {FORMATS.keys()}")
         if scope not in SCOPES:
-            raise ValueError(f"Invalid scape. Valid values: {SCOPES.keys()}")
+            raise ValueError(f"Invalid scope. Valid values: {SCOPES.keys()}")
         cls.setPath(FORMATS[fmt], SCOPES[scope], str(path))
 
     @contextlib.contextmanager
