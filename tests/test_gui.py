@@ -55,6 +55,13 @@ def test_font():
     font = gui.Font.mono()
 
 
+def test_fontmetrics():
+    font = gui.Font("Consolas")
+    fontmetrics = gui.FontMetrics(font)
+    val = fontmetrics.elided_text("This is a test", mode="right", width=40)
+    assert len(val) == 3
+
+
 def test_icon():
     icon = gui.Icon()
     icon.for_color("black")
