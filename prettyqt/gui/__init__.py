@@ -15,6 +15,7 @@ except AttributeError:
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
 from .brush import Brush
+from .textblockuserdata import TextBlockUserData
 from .color import Color
 from .font import Font
 from .fontmetrics import FontMetrics
@@ -45,6 +46,7 @@ __all__ = ["GuiApplication",
            "IntValidator",
            "DoubleValidator",
            "Brush",
+           "TextBlockUserData",
            "Color",
            "Font",
            "FontMetrics",
