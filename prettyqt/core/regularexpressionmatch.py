@@ -48,7 +48,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         return self.capturedEnd(group)
 
     def span(self, group: int = 0) -> tuple:
-        return (self.start(group), self.end(group))
+        return (self.capturedStart(group), self.capturedEnd(group))
 
     @property
     def lastindex(self) -> int:
@@ -64,6 +64,10 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     @property
     def re(self):
         return self.regularExpression()
+
+    @property
+    def partial(self):
+        return self.hasPartialMatch()
 
 
 if __name__ == "__main__":
