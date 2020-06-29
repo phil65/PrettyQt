@@ -10,6 +10,7 @@ from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .singlelinetextedit import SingleLineTextEdit
 from .mappedcheckbox import MappedCheckBox
+from .promptlineedit import PromptLineEdit
 from .stringornumberwidget import StringOrNumberWidget
 from .iconlabel import IconLabel
 from .flowlayout import FlowLayout
@@ -35,6 +36,7 @@ __all__ = ["Image",
            "OptionalWidget",
            "SingleLineTextEdit",
            "MappedCheckBox",
+           "PromptLineEdit",
            "StringOrNumberWidget",
            "IconLabel",
            "FlowLayout",
