@@ -7,8 +7,6 @@ python:
   - "3.6"
   - "3.7"
   - "3.8"
-  # PyPy versions
-  # - "pypy3.6-alpha"
 addons:
   apt:
     packages:
