@@ -11,6 +11,7 @@ from .optionalwidget import OptionalWidget
 from .singlelinetextedit import SingleLineTextEdit
 from .mappedcheckbox import MappedCheckBox
 from .promptlineedit import PromptLineEdit
+from .flagselectionwidget import FlagSelectionWidget
 from .stringornumberwidget import StringOrNumberWidget
 from .iconlabel import IconLabel
 from .flowlayout import FlowLayout
@@ -38,6 +39,7 @@ __all__ = ["Image",
            "SingleLineTextEdit",
            "MappedCheckBox",
            "PromptLineEdit",
+           "FlagSelectionWidget",
            "StringOrNumberWidget",
            "IconLabel",
            "FlowLayout",

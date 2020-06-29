@@ -89,6 +89,14 @@ def test_dataset():
     settings.to_dict()
 
 
+def test_flagselectionwidget():
+    widget = custom_widgets.FlagSelectionWidget()
+    items = {"MultiLine": 0,
+             "Ignore case": 2}
+    widget.add_items(items)
+    assert widget.get_value() == 0
+
+
 def test_stringornumberwidget():
     widget = custom_widgets.StringOrNumberWidget()
     widget.get_value()
