@@ -2,7 +2,7 @@
 
 """gui module
 
-contains QtGui-based classes
+contains QWebEngineView-based classes
 """
 try:
     from .webengineview import WebEngineView
