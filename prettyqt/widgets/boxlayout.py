@@ -18,13 +18,6 @@ class BoxLayout(QtWidgets.QBoxLayout):
         if margin is not None:
             self.set_margin(margin)
 
-    def __getitem__(self, index):
-        item = self.itemAt(index)
-        widget = item.widget()
-        if widget is None:
-            widget = item.layout()
-        return widget
-
     def __getstate__(self):
         return dict(items=self.get_children(),
                     direction=int(self.direction()))
@@ -38,9 +31,6 @@ class BoxLayout(QtWidgets.QBoxLayout):
 
     def __iter__(self):
         return iter(self.get_children())
-
-    def __len__(self):
-        return self.count()
 
     def __add__(self, other):
         if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):

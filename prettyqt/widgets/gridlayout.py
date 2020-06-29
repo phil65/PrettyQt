@@ -48,9 +48,6 @@ class GridLayout(QtWidgets.QGridLayout):
     def __iter__(self):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
-    def __len__(self):
-        return self.count()
-
     def __add__(self, other):
         self[self.rowCount(), 0:self.columnCount() - 1] = other
         return self

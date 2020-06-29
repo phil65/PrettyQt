@@ -23,13 +23,6 @@ class FormLayout(QtWidgets.QFormLayout):
         self.set_size_mode("maximum")
         self.setVerticalSpacing(8)
 
-    def __getitem__(self, index):
-        item = self.itemAt(index)
-        widget = item.widget()
-        if widget is None:
-            widget = item.layout()
-        return widget
-
     def __setitem__(self, index, value):
         if isinstance(index, tuple):
             row = index[0]

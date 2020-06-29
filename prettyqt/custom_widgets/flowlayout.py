@@ -30,13 +30,6 @@ class FlowLayout(widgets.Layout):
         for item in state["items"]:
             self.add(item)
 
-    def __getitem__(self, index):
-        item = self.itemAt(index)
-        widget = item.widget()
-        if widget is None:
-            widget = item.layout()
-        return widget
-
     def __iter__(self):
         return iter(self.get_children())
 
@@ -44,11 +37,6 @@ class FlowLayout(widgets.Layout):
         item = self.takeAt(0)
         while item:
             item = self.takeAt(0)
-
-    def __len__(self):
-        """needed for PySide2
-        """
-        return self.count()
 
     def get_children(self):
         return [self[i] for i in range(self.count())]

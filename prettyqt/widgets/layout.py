@@ -22,6 +22,16 @@ QtWidgets.QLayout.__bases__ = (core.Object, widgets.LayoutItem)
 
 class Layout(QtWidgets.QLayout):
 
+    def __getitem__(self, index):
+        item = self.itemAt(index)
+        widget = item.widget()
+        if widget is None:
+            widget = item.layout()
+        return widget
+
+    def __len__(self):
+        return self.count()
+
     def __repr__(self):
         return f"{self.__class__.__name__}: {len(self)} children"
 
