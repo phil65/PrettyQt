@@ -66,6 +66,9 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def set_text(self, text: str):
         self.setText(text)
 
+    def set_icon_size(self, size: int):
+        self.setIconSize(core.Size(size, size))
+
 
 if __name__ == "__main__":
     app = widgets.app()

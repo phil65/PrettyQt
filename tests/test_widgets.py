@@ -847,6 +847,7 @@ def test_toolbutton():
         widget = pickle.load(jar)
     widget.set_enabled()
     widget.set_shortcut("Ctrl+A")
+    widget.set_icon_size(20)
     with pytest.raises(ValueError):
         widget.set_popup_mode("test")
     assert widget.get_popup_mode() == "delayed"
