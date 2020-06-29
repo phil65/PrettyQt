@@ -584,6 +584,7 @@ def test_plaintextedit():
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
+    widget.set_regex_validator("[0-9]")
 
 
 def test_progressbar():

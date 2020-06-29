@@ -28,7 +28,8 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def __init__(self, text="", parent=None, read_only=False):
         super().__init__(text, parent)
-        self.textChanged.connect(self.value_changed)
+        self.validator = None
+        self.textChanged.connect(self._on_value_change)
         self.set_read_only(read_only)
 
     def __getstate__(self):
@@ -134,6 +135,30 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
                              f"Allowed values: {LINE_WRAP_MODES.keys()}")
         self.setLineWrapMode(LINE_WRAP_MODES[mode])
 
+    def _on_value_change(self):
+        self.value_changed.emit()
+        if self.validator is not None:
+            self.set_validation_color()
+
+    def set_validation_color(self, state: bool = True):
+        color = "rgb(255, 175, 90)" if not self.is_valid() else "white"
+        self.set_background_color(color)
+
+    def set_validator(self, validator: gui.Validator):
+        self.validator = validator
+        self.set_validation_color()
+
+    def set_regex_validator(self, regex: str, flags=0) -> gui.RegExpValidator:
+        validator = gui.RegularExpressionValidator(self)
+        validator.set_regex(regex, flags)
+        self.set_validator(validator)
+        return validator
+
+    def is_valid(self):
+        if self.validator is None:
+            return True
+        return self.validator.is_valid_value(self.text())
+
     def set_value(self, value: str):
         self.setPlainText(value)
 
@@ -142,8 +167,11 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
 
 if __name__ == "__main__":
+    from prettyqt import custom_validators
+    val = custom_validators.RegularExpressionValidator()
     app = widgets.app()
     widget = PlainTextEdit("This is a test")
+    widget.set_validator(val)
     with widget.current_cursor() as c:
         c.select_text(2, 4)
     widget.show()
