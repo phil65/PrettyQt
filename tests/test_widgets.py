@@ -853,6 +853,9 @@ def test_toolbutton():
     with pytest.raises(ValueError):
         widget.set_arrow_type("test")
     widget.set_arrow_type("left")
+    with pytest.raises(ValueError):
+        widget.set_style("test")
+    widget.set_style("text_below_icon")
     assert widget.get_arrow_type() == "left"
     menu = widgets.Menu()
     act = widgets.Action()

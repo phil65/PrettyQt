@@ -19,6 +19,10 @@ ARROW_TYPES = bidict(none=QtCore.Qt.NoArrow,
                      left=QtCore.Qt.LeftArrow,
                      right=QtCore.Qt.RightArrow)
 
+STYLES = bidict(icon=QtCore.Qt.ToolButtonIconOnly,
+                text=QtCore.Qt.ToolButtonTextOnly,
+                text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
+                text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon)
 
 QtWidgets.QToolButton.__bases__ = (widgets.AbstractButton,)
 
@@ -89,6 +93,11 @@ class ToolButton(QtWidgets.QToolButton):
             arrow type
         """
         return ARROW_TYPES.inv[self.arrowType()]
+
+    def set_style(self, style: str):
+        if style not in STYLES:
+            raise ValueError("Invalid style.")
+        self.setToolButtonStyle(STYLES[style])
 
 
 if __name__ == "__main__":
