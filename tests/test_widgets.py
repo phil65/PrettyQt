@@ -750,7 +750,7 @@ def test_tabwidget():
     widget = widgets.TabWidget(detachable=True)
     widget.add_tab(widgets.Widget(), "mdi.timer", show=True)
     widget.set_document_mode(True)
-    widget.insert_tab(0, widgets.Widget(), "test", "mdi.timer", show=True)
+    widget.add_tab(widgets.Widget(), "test", "mdi.timer", position=0, show=True)
     assert len(widget) == 2
     w = widgets.Widget()
     widget.add_tab(w, "test", "mdi.timer")

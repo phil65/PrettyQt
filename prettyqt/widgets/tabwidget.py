@@ -146,29 +146,20 @@ class TabWidget(QtWidgets.QTabWidget):
         # Create a reference to maintain access to the detached tab
         self.detached_tabs[name] = detached_tab
 
-    def add_tab(self, item, label, icon=None, show=False):
+    def add_tab(self, item, label: str, icon=None, position=None, show: bool = False):
         if isinstance(item, QtWidgets.QLayout):
             widget = widgets.Widget()
             widget.set_layout(item)
         else:
             widget = item
+        if position is None:
+            position = len(self)
         if not icon:
-            index = self.addTab(widget, label)
+            index = self.insertTab(position, widget, label)
         else:
             if isinstance(icon, str):
                 icon = qta.icon(icon)
-            index = self.addTab(widget, icon, label)
-        if show:
-            self.setCurrentIndex(index)
-        return index
-
-    def insert_tab(self, pos, widget, label, icon=None, show=False):
-        if not icon:
-            index = self.insertTab(pos, widget, label)
-        else:
-            if isinstance(icon, str):
-                icon = qta.icon(icon)
-            index = self.insertTab(pos, widget, icon, label)
+            index = self.insertTab(position, widget, icon, label)
         if show:
             self.setCurrentIndex(index)
         return index
@@ -191,10 +182,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
         # Determine if the given image and the main window icon are the same.
         # If they are, then do not add the icon to the tab
-        if insert_at is None:
-            self.add_tab(widget, name, icon=icon, show=True)
-        else:
-            self.insert_tab(insert_at, widget, name, icon=icon, show=True)
+        self.add_tab(widget, name, icon=icon, position=insert_at, show=True)
 
     def close_detached_tabs(self):
         """Close all tabs that are currently detached
