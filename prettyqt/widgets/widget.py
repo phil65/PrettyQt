@@ -5,6 +5,8 @@
 
 from contextlib import contextmanager
 from typing import Callable, Dict, Optional
+import operator
+import functools
 
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -51,6 +53,13 @@ FOCUS_POLICIES = bidict(tab=QtCore.Qt.TabFocus,
                         strong=QtCore.Qt.StrongFocus,
                         wheel=QtCore.Qt.WheelFocus,
                         none=QtCore.Qt.NoFocus)
+
+WINDOW_FLAGS = bidict(frameless=QtCore.Qt.FramelessWindowHint,
+                      popup=QtCore.Qt.Popup,
+                      stay_on_top=QtCore.Qt.WindowStaysOnTopHint,
+                      tool=QtCore.Qt.Tool,
+                      window_title=QtCore.Qt.WindowTitleHint,
+                      customize_window=QtCore.Qt.CustomizeWindowHint)
 
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
@@ -125,6 +134,35 @@ class Widget(QtWidgets.QWidget):
         font = gui.Font(font_name, font_size, weight, italic)
         self.setFont(font)
         return font
+
+    def set_window_flags(self, *flags: str, append: bool = False):
+        for flag in flags:
+            if flag not in WINDOW_FLAGS:
+                raise ValueError("Invalid window flag")
+        flags = functools.reduce(operator.ior, [WINDOW_FLAGS[t] for t in flags])
+        if append:
+            flags = flags | self.windowFlags()
+        self.setWindowFlags(flags)
+
+    def set_flags(self,
+                  minimize: Optional[bool] = None,
+                  maximize: Optional[bool] = None,
+                  close: Optional[bool] = None,
+                  stay_on_top: Optional[bool] = None,
+                  frameless: Optional[bool] = None,
+                  window: Optional[bool] = None):
+        if minimize is not None:
+            self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
+        if maximize is not None:
+            self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, maximize)
+        if close is not None:
+            self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, close)
+        if stay_on_top is not None:
+            self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint, stay_on_top)
+        if frameless is not None:
+            self.setWindowFlag(QtCore.Qt.FramelessWindowHint, frameless)
+        if window is not None:
+            self.setWindowFlag(QtCore.Qt.Window, window)
 
     def set_modality(self, modality: str = "window"):
         """set modality for the dialog

@@ -77,23 +77,6 @@ class BaseDialog(QtWidgets.QDialog):
         self.show()
         return bool(self.exec_())
 
-    def set_flags(self,
-                  minimize: bool = None,
-                  maximize: bool = None,
-                  close: bool = None,
-                  stay_on_top: bool = None,
-                  window: bool = None):
-        if minimize is not None:
-            self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
-        if maximize is not None:
-            self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, maximize)
-        if close is not None:
-            self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, close)
-        if stay_on_top is not None:
-            self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint, stay_on_top)
-        if window is not None:
-            self.setWindowFlag(QtCore.Qt.Window, window)
-
     def is_accepted(self):
         return self.result() == QtWidgets.QDialog.Accepted
 
