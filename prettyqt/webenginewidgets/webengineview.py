@@ -36,6 +36,9 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
             url = core.Url(url)
         self.load(url)
 
+    def set_zoom(self, zoom: float):
+        self.setZoomFactor(zoom)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
