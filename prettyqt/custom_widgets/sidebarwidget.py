@@ -1,11 +1,18 @@
-from prettyqt import widgets
+# -*- coding: utf-8 -*-
+"""
+@author: Philipp Temminghoff
+"""
+
+from prettyqt import widgets, gui
+import qtawesome as qta
 
 
 class SidebarWidget(widgets.MainWindow):
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent=None)
         self.sidebar_widget = widgets.ToolBar()
+        self.sidebar_widget.id = "SidebarWidget"
         self.sidebar_widget.set_style("text_below_icon")
         self.sidebar_widget.setFloatable(False)
         self.sidebar_widget.set_allowed_areas("all")
@@ -20,9 +27,8 @@ class SidebarWidget(widgets.MainWindow):
         w.set_layout(main_layout)
         self.setCentralWidget(w)
 
-    def add_tab(self, title, widget, icon=None, show=True):
-        page = widgets.MainWindow()
-        page.setCentralWidget(widget)
+    def add_tab(self, item, title: str, icon=None, show: bool = False):
+        page = item
         self.area.box.add(page)
         # button = widgets.ToolButton()
         # button.set_text(title)
@@ -32,6 +38,10 @@ class SidebarWidget(widgets.MainWindow):
         # button.clicked.connect(lambda: self.area.box.setCurrentWidget(page))
         # self.sidebar_widget.addWidget(button)
         self.sidebar_widget.add_separator()
+        if icon is None:
+            icon = gui.Icon()
+        elif isinstance(icon, str):
+            icon = qta.icon(icon)
         act = self.sidebar_widget.add_action(title,
                                              icon,
                                              lambda: self.set_tab(page),
@@ -40,7 +50,9 @@ class SidebarWidget(widgets.MainWindow):
         if len(self.area.box) == 1:
             button.setChecked(True)
         page._button = button
-        self.area.box.setCurrentWidget(page)
+        if show:
+            self.area.box.setCurrentWidget(page)
+        return page
 
     def set_tab(self, widget):
         current = self.area.box.currentWidget()
@@ -59,9 +71,9 @@ if __name__ == '__main__':
     page_1 = widgets.PlainTextEdit()
     page_2 = widgets.ColorDialog()
     page_3 = widgets.FileDialog()
-    ex.add_tab("Text", page_1, "mdi.timer")
-    ex.add_tab("Color", page_2, "mdi.format-color-fill")
-    ex.add_tab("Help", page_3, "mdi.help-circle-outline")
-    ex.show_tab(0)
+    ex.add_tab(page_1, "Text", "mdi.timer")
+    ex.add_tab(page_2, "Color", "mdi.format-color-fill")
+    ex.add_tab(page_3, "Help", "mdi.help-circle-outline")
+    # ex.show_tab(0)
     ex.show()
     app.exec_()
