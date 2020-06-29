@@ -20,10 +20,10 @@ class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
 
     def __setstate__(self, state):
         self.__init__()
-        self.set_regex(state["regexp"])
+        self.setRegularExpression(state["regexp"])
 
-    def set_regex(self, regex: str):
-        re = core.RegularExpression(regex)
+    def set_regex(self, regex: str, flags=0):
+        re = core.RegularExpression(regex, flags)
         self.setRegularExpression(re)
 
     def get_regex(self) -> str:

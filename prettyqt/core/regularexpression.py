@@ -36,6 +36,11 @@ MATCH_OPTIONS = bidict(none=QtCore.QRegularExpression.NoMatchOption,
 
 class RegularExpression(QtCore.QRegularExpression):
 
+    def __init__(self, pattern="", flags=FLAGS["none"]):
+        if isinstance(flags, int):
+            flags = core.RegularExpression.PatternOptions(flags)
+        super().__init__(pattern, flags)
+
     def __repr__(self):
         return f"RegularExpression({self.pattern()!r})"
 

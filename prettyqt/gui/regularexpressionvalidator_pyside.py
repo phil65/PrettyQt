@@ -21,7 +21,7 @@ class RegularExpressionValidator(gui.Validator):
 
     def __setstate__(self, state):
         self.__init__()
-        self.set_regex(state["regexp"])
+        self.regex = state["regexp"]
 
     def setRegularExpression(self, re):
         self.regex = re
@@ -29,8 +29,8 @@ class RegularExpressionValidator(gui.Validator):
     def regularExpression(self):
         return self.regex
 
-    def set_regex(self, regex: str):
-        self.regex = core.RegularExpression(regex)
+    def set_regex(self, regex: str, flags=0):
+        self.regex = core.RegularExpression(regex, flags)
 
     def get_regex(self) -> str:
         return self.regex.pattern()
