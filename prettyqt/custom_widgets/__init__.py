@@ -14,6 +14,7 @@ from .promptlineedit import PromptLineEdit
 from .stringornumberwidget import StringOrNumberWidget
 from .iconlabel import IconLabel
 from .flowlayout import FlowLayout
+from .sidebarwidget import SidebarWidget
 from .colorchooserbutton import ColorChooserButton
 from .filechooserbutton import FileChooserButton
 from .fontchooserbutton import FontChooserButton
@@ -40,6 +41,7 @@ __all__ = ["Image",
            "StringOrNumberWidget",
            "IconLabel",
            "FlowLayout",
+           "SidebarWidget",
            "ColorChooserButton",
            "FileChooserButton",
            "FontChooserButton",
