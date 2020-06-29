@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Optional, Union
+
 import qtawesome as qta
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -69,7 +71,7 @@ class TabWidget(QtWidgets.QTabWidget):
             self.setTabWhatsThis(i, whatsthis)
         self.setCurrentIndex(state.get("index", 0))
 
-    def set_document_mode(self, state=True):
+    def set_document_mode(self, state: bool = True):
         self.setDocumentMode(state)
 
     def set_tab_shape(self, shape: str):
@@ -102,7 +104,7 @@ class TabWidget(QtWidgets.QTabWidget):
                  self.tabToolTip(i), self.tabWhatsThis(i))
                 for i in range(self.count())]
 
-    def tab_icon(self, i):
+    def tab_icon(self, i: int):
         return gui.Icon(self.tabIcon(i))
 
     def set_detachable(self):
@@ -146,7 +148,12 @@ class TabWidget(QtWidgets.QTabWidget):
         # Create a reference to maintain access to the detached tab
         self.detached_tabs[name] = detached_tab
 
-    def add_tab(self, item, label: str, icon=None, position=None, show: bool = False):
+    def add_tab(self,
+                item,
+                label: str,
+                icon: Union[QtGui.QIcon, str, None] = None,
+                position: Optional[int] = None,
+                show: bool = False):
         if isinstance(item, QtWidgets.QLayout):
             widget = widgets.Widget()
             widget.set_layout(item)
@@ -164,7 +171,11 @@ class TabWidget(QtWidgets.QTabWidget):
             self.setCurrentIndex(index)
         return index
 
-    def attach_tab(self, widget, name, icon, insert_at=None):
+    def attach_tab(self,
+                   widget,
+                   name: str,
+                   icon: Union[QtGui.QIcon, str, None] = None,
+                   insert_at: Optional[int] = None):
         """
         Re-attach the tab by removing the content from the DetachedTab window,
         closing it, and placing the content back into the DetachableTabWidget
