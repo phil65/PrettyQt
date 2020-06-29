@@ -792,7 +792,7 @@ def test_textedit():
     widget.set_read_only()
     widget.scroll_to_bottom()
     widget.set_disabled()
-    widget.set_color("black")
+    widget.set_background_color("black")
     widget.set_text_color("red")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)

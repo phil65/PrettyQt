@@ -190,7 +190,7 @@ class Widget(QtWidgets.QWidget):
         pol.setVerticalStretch(qpol.verticalStretch())
         return pol
 
-    def set_color(self, color):
+    def set_background_color(self, color):
         self.setStyleSheet(f"background-color: {color};")
 
     def set_stylesheet(self, item, dct: Dict[str, str]) -> str:

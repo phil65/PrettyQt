@@ -99,12 +99,9 @@ class LineEdit(QtWidgets.QLineEdit):
     def set_input_mask(self, mask: str):
         self.setInputMask(mask)
 
-    def set_color(self, color: str):
-        self.setStyleSheet(f"background-color: {color};")
-
     def set_validation_color(self, state: bool = True):
         color = "rgb(255, 175, 90)" if not self.is_valid() else "white"
-        self.set_color(color)
+        self.set_background_color(color)
 
     def set_echo_mode(self, mode: str):
         """set echo mode
