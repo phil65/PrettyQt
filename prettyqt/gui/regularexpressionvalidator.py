@@ -16,11 +16,11 @@ class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
         return f"RegularExpressionValidator(RegularExpression({self.get_regex()!r}))"
 
     def __getstate__(self):
-        return dict(regexp=core.RegularExpression(self.regularExpression()))
+        return dict(pattern=core.RegularExpression(self.regularExpression()))
 
     def __setstate__(self, state):
         self.__init__()
-        self.setRegularExpression(state["regexp"])
+        self.setRegularExpression(state["pattern"])
 
     def set_regex(self, regex: str, flags=0):
         re = core.RegularExpression(regex, flags)

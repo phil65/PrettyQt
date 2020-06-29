@@ -37,15 +37,18 @@ MATCH_OPTIONS = bidict(none=QtCore.QRegularExpression.NoMatchOption,
 class RegularExpression(QtCore.QRegularExpression):
 
     def __init__(self, pattern="", flags=FLAGS["none"]):
-        if isinstance(flags, int):
-            flags = core.RegularExpression.PatternOptions(flags)
-        super().__init__(pattern, flags)
+        if isinstance(pattern, QtCore.QRegularExpression):
+            super().__init__(pattern)
+        else:
+            if isinstance(flags, int):
+                flags = core.RegularExpression.PatternOptions(flags)
+            super().__init__(pattern, flags)
 
     def __repr__(self):
         return f"RegularExpression({self.pattern()!r})"
 
     def __reduce__(self):
-        return (self.__class__, (self.pattern(),))
+        return (self.__class__, (self.pattern(), int(self.flags)))
 
     def globalMatch(self, *args, **kwargs) -> core.RegularExpressionMatchIterator:
         it = super().globalMatch(*args, **kwargs)
@@ -107,7 +110,36 @@ class RegularExpression(QtCore.QRegularExpression):
         return res[0]
 
     def split(self, string: str, maxsplit: int = 0):
-        pass
+        result = list()
+        matches = self.global_match(string)
+        matches = list(matches)
+        if 0 < maxsplit <= len(matches):
+            remainder = string[matches[maxsplit - 1].end():]
+            print(remainder)
+        else:
+            print(None)
+            remainder = None
+        if maxsplit > 0:
+            matches = matches[:maxsplit]
+        prev_match = None
+        m = matches[0]
+        if m.start() == 0:
+            result.append("")
+        else:
+            result.append(string[0:m.start()])
+        for g in m.groups():
+            result.append(g)
+        prev_match = m
+        for m in matches[1:]:
+            result.append(string[prev_match.end():m.start()])
+            for g in m.groups():
+                result.append(g)
+            if m.end() == len(string):
+                result.append("")
+            prev_match = m
+        if remainder:
+            result.append(remainder)
+        return result
 
     @property
     def groups(self):
@@ -116,6 +148,10 @@ class RegularExpression(QtCore.QRegularExpression):
     @property
     def groupindex(self):
         return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1)}
+
+    @property
+    def flags(self):
+        return self.patternOptions()
 
 
 if __name__ == "__main__":
