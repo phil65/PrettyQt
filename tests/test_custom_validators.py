@@ -87,8 +87,8 @@ def test_floatlistvalidator():
     repr(val)
 
 
-def test_regularexpressionvalidator():
-    val = custom_validators.RegularExpressionValidator()
+def test_regexpatternvalidator():
+    val = custom_validators.RegexPatternValidator()
     assert val.is_valid_value("[") is False
     assert val.is_valid_value("[0-9]") is True
     with open("data.pkl", "wb") as jar:

@@ -11,7 +11,7 @@ from .notemptyvalidator import NotEmptyValidator
 from .notzerovalidator import NotZeroValidator
 from .pathvalidator import PathValidator
 from .regexvalidators import FloatListValidator, IntListValidator
-from .regularexpressionvalidator import RegularExpressionValidator
+from .regexpatternvalidator import RegexPatternValidator
 
 __all__ = ["PathValidator",
            "NotEmptyValidator",
@@ -19,4 +19,4 @@ __all__ = ["PathValidator",
            "FloatListValidator",
            "NotZeroValidator",
            "CompositeValidator",
-           "RegularExpressionValidator"]
+           "RegexPatternValidator"]

@@ -9,7 +9,7 @@ import sre_constants
 from prettyqt import gui
 
 
-class RegularExpressionValidator(gui.Validator):
+class RegexPatternValidator(gui.Validator):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -17,7 +17,7 @@ class RegularExpressionValidator(gui.Validator):
         self.compiled = None
 
     def __repr__(self):
-        return "RegularExpressionValidator()"
+        return "RegexPatternValidator()"
 
     def validate(self, text, pos=0):
         # if text == "":
@@ -42,7 +42,7 @@ if __name__ == "__main__":
     from prettyqt import widgets
     app = widgets.app()
     w = widgets.LineEdit()
-    val = RegularExpressionValidator()
+    val = RegexPatternValidator()
     w.set_validator(val)
     w.show()
     app.exec_()
