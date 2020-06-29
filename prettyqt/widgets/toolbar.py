@@ -47,12 +47,30 @@ class ToolBar(QtWidgets.QToolBar):
         self.addWidget(btn)
         return btn
 
+    def add_separator(self, text=None):
+        """adds a separator showing an optional label
+
+        Args:
+            text: Text to show on separator
+
+        Returns:
+            Separator action
+        """
+        if text is None:
+            self.addSeparator()
+        else:
+            label = widgets.Label(text)
+            label.setMinimumWidth(self.minimumWidth())
+            label.setStyleSheet("background:lightgrey")
+            label.set_alignment(horizontal="center")
+            self.addWidget(label)
+
     def set_style(self, style: str):
         if style is None:
             return None
-        self.setToolButtonStyle(STYLES.get(style, 0))
+        self.setToolButtonStyle(STYLES[style])
         for btn in self.menu_buttons:
-            btn.setToolButtonStyle(STYLES.get(style, 0))
+            btn.set_style(style)
 
     def get_style(self) -> str:
         """returns current style
@@ -92,6 +110,9 @@ class ToolBar(QtWidgets.QToolBar):
         if area not in TOOLBAR_AREAS:
             raise ValueError("Area not existing")
         return self.isAreaAllowed(TOOLBAR_AREAS[area])
+
+    def set_allowed_areas(self, areas):
+        self.setAllowedAreas(TOOLBAR_AREAS[areas])
 
 
 if __name__ == "__main__":

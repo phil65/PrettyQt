@@ -824,6 +824,8 @@ def test_toolbar():
     widget.add_menu_button("test,", "mdi.timer", menu=widgets.Menu())
     widget.set_style("icon")
     widget.set_style(None)
+    widget.add_separator("Test")
+    widget.add_separator()
     assert widget.get_style() == "icon"
     widget.set_font_size(10)
     widget.set_enabled()
