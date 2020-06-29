@@ -80,11 +80,10 @@ class LineEdit(QtWidgets.QLineEdit):
         """
         self.setReadOnly(value)
 
-    def set_regex_validator(self, regex: str) -> gui.RegExpValidator:
-        validator = gui.RegExpValidator(self)
-        validator.set_regex(regex)
-        self.setValidator(validator)
-        self.set_validation_color()
+    def set_regex_validator(self, regex: str, flags=0) -> gui.RegExpValidator:
+        validator = gui.RegularExpressionValidator(self)
+        validator.set_regex(regex, flags)
+        self.set_validator(validator)
         return validator
 
     def set_range(self, lower, upper):
