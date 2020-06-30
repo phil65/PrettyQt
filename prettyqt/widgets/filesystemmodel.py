@@ -8,7 +8,29 @@ import pathlib
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core
+from prettyqt.utils import bidict
 
+
+OPTIONS = bidict(dont_watch_changes=QtWidgets.QFileSystemModel.DontWatchForChanges,
+                 dont_resolve_symlinks=QtWidgets.QFileSystemModel.DontResolveSymlinks,
+                 no_custom_icons=QtWidgets.QFileSystemModel.DontUseCustomDirectoryIcons)
+
+FILTERS = bidict(dirs=core.Dir.Dirs,
+                 all_dirs=core.Dir.AllDirs,
+                 files=core.Dir.Files,
+                 drives=core.Dir.Drives,
+                 no_sym_links=core.Dir.NoSymLinks,
+                 no_dot_and_dotdot=core.Dir.NoDotAndDotDot,
+                 no_dot=core.Dir.NoDot,
+                 no_dotdot=core.Dir.NoDotDot,
+                 all_entries=core.Dir.AllEntries,
+                 readable=core.Dir.Readable,
+                 writable=core.Dir.Writable,
+                 executable=core.Dir.Executable,
+                 modified=core.Dir.Modified,
+                 hidden=core.Dir.Hidden,
+                 system=core.Dir.System,
+                 case_sensitive=core.Dir.CaseSensitive)
 
 QtWidgets.QFileSystemModel.__bases__ = (core.AbstractItemModel,)
 
@@ -23,7 +45,6 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setReadOnly(False)
-        self.setRootPath(QtCore.QDir.rootPath())
 
     def data(self, index, role=QtCore.Qt.DisplayRole):
         if role == self.DATA_ROLE:
@@ -38,3 +59,26 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
         flags = self.filter() | QtCore.QDir.NoDotAndDotDot
         for it in core.DirIterator(path, flags):
             yield self.index(it)
+
+    def resolve_sym_links(self, resolve: bool):
+        self.setResolveSymlinks(resolve)
+
+    def watch_for_changes(self, watch: bool):
+        self.setOption(OPTIONS["dont_watch_changes"], not watch)
+
+    def use_custom_icons(self, use: bool):
+        self.setOption(OPTIONS["no_custom_icons"], not use)
+
+    def set_root_path(self, path: str):
+        if path == "/":
+            path = core.Dir.rootPath()
+        self.setRootPath(path)
+
+    def set_name_filters(self, filters, hide=False):
+        self.setNameFilters(filters)
+        self.setNameFilterDisables(not hide)
+
+    def set_filter(self, filter_mode: str):
+        if filter_mode not in FILTERS:
+            raise ValueError(f"Invalid value. Valid values: {FILTERS.keys()}")
+        self.setFilter(FILTERS[filter_mode])

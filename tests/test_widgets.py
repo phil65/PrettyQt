@@ -254,10 +254,17 @@ def test_filedialog():
 
 def test_filesystemmodel(qtmodeltester):
     model = widgets.FileSystemModel()
+    model.set_root_path("/")
     idx = model.index(0, 0)
-    data = model.data(idx, model.DATA_ROLE)
-    print(data)
+    model.data(idx, model.DATA_ROLE)
     model.yield_child_indexes(idx)
+    model.watch_for_changes(False)
+    model.resolve_sym_links(False)
+    model.use_custom_icons(False)
+    model.set_name_filters(["test"], hide=True)
+    model.set_filter("drives")
+    with pytest.raises(ValueError):
+        model.set_filter("test")
     # modeltest.ModelTest(model)
     # qtmodeltester.check(model, force_py=False)
 
