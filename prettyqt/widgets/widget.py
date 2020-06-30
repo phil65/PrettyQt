@@ -96,6 +96,18 @@ class Widget(QtWidgets.QWidget):
     def set_max_size(self, *size):
         self.setMaximumSize(*size)
 
+    def set_min_width(self, width: int):
+        self.setMinimumWidth(width)
+
+    def set_max_width(self, width: int):
+        self.setMaximumWidth(width)
+
+    def set_min_height(self, height: int):
+        self.setMinimumHeight(height)
+
+    def set_max_height(self, height: int):
+        self.setMaximumHeight(height)
+
     @property
     def title(self) -> str:
         return self.windowTitle()

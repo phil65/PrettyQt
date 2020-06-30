@@ -1018,6 +1018,10 @@ def test_widget():
     widget = widgets.Widget()
     widget.set_tooltip("test")
     widget.set_cursor("caret")
+    widget.set_min_width(100)
+    widget.set_max_width(100)
+    widget.set_min_height(200)
+    widget.set_max_height(200)
     with pytest.raises(ValueError):
         widget.set_cursor("test")
     widget.set_focus_policy("strong")
