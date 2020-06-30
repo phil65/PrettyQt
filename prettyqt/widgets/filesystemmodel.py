@@ -82,3 +82,14 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
         if filter_mode not in FILTERS:
             raise ValueError(f"Invalid value. Valid values: {FILTERS.keys()}")
         self.setFilter(FILTERS[filter_mode])
+
+    def get_paths(self, indexes):
+        paths = [i.data(self.DATA_ROLE) for i in indexes]
+        if not paths:
+            return []
+        if paths[0] == "":
+            paths = [folder / filename
+                     for folder in paths
+                     for filename in folder.iterdir()
+                     if (folder / filename).is_file()]
+        return paths
