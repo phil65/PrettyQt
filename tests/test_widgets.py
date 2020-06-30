@@ -1022,6 +1022,7 @@ def test_widget():
     widget.set_max_width(100)
     widget.set_min_height(200)
     widget.set_max_height(200)
+    widget.set_font_size(20)
     with pytest.raises(ValueError):
         widget.set_cursor("test")
     widget.set_focus_policy("strong")

@@ -328,6 +328,11 @@ class Widget(QtWidgets.QWidget):
     def get_focus_policy(self) -> str:
         return FOCUS_POLICIES.inv[self.focusPolicy()]
 
+    def set_font_size(self, size: int):
+        font = self.font()
+        font.setPointSize(size)
+        self.setFont(font)
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
