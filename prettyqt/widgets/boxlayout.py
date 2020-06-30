@@ -29,9 +29,6 @@ class BoxLayout(QtWidgets.QBoxLayout):
         for item in state["items"]:
             self.add(item)
 
-    def __iter__(self):
-        return iter(self.get_children())
-
     def __add__(self, other):
         if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
             self.add(other)
@@ -43,9 +40,6 @@ class BoxLayout(QtWidgets.QBoxLayout):
                 self.addWidget(i)
             else:
                 self.addLayout(i)
-
-    def get_children(self):
-        return [self[i] for i in range(self.count())]
 
     def add_stretch(self, stretch: int = 0):
         self.addStretch(stretch)

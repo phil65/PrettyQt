@@ -20,16 +20,10 @@ class StackedLayout(QtWidgets.QStackedLayout):
         for item in state["items"]:
             self.add(item)
 
-    def __iter__(self):
-        return iter(self.get_children())
-
     def __add__(self, other):
         if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
             self.add(other)
             return self
-
-    def get_children(self):
-        return [self[i] for i in range(self.count())]
 
 
 if __name__ == "__main__":

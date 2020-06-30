@@ -30,16 +30,10 @@ class FlowLayout(widgets.Layout):
         for item in state["items"]:
             self.add(item)
 
-    def __iter__(self):
-        return iter(self.get_children())
-
     def __del__(self):
         item = self.takeAt(0)
         while item:
             item = self.takeAt(0)
-
-    def get_children(self):
-        return [self[i] for i in range(self.count())]
 
     def addItem(self, item):
         self.items.append(item)
