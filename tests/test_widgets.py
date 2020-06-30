@@ -683,6 +683,7 @@ def test_stackedlayout():
     layout = widgets.StackedLayout()
     widget = widgets.RadioButton("test")
     layout += widget
+    layout.set_current_widget(widget)
     layout.set_size_mode("maximum")
     layout.set_margin(0)
     with open("data.pkl", "wb") as jar:

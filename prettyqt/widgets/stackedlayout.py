@@ -25,6 +25,9 @@ class StackedLayout(QtWidgets.QStackedLayout):
             self.add(other)
             return self
 
+    def set_current_widget(self, widget):
+        self.setCurrentWidget(widget)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
