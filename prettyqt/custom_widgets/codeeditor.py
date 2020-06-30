@@ -29,15 +29,17 @@ class CodeEditor(widgets.PlainTextEdit):
 
     def __init__(self, language="python", parent=None):
         super().__init__(parent=parent)
+        self.highlighter = None
         self.line_area = LineNumberArea(self)
-
         self.blockCountChanged.connect(self.update_line_area_width)
         self.updateRequest.connect(self.update_line_area)
         self.cursorPositionChanged.connect(self.highlight_current_line)
         self.set_font("Consolas")
-
         self.update_line_area_width(0)
         self.highlight_current_line()
+        self.set_syntaxhighlighter(language)
+
+    def set_syntaxhighlighter(self, language: str):
         self.highlighter = self.lexers[language](self.document())
 
     def resizeEvent(self, event):
