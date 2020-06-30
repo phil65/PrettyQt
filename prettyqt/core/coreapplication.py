@@ -12,4 +12,7 @@ QtCore.QCoreApplication.__bases__ = (core.Object,)
 
 
 class CoreApplication(QtCore.QCoreApplication):
-    pass
+
+    @classmethod
+    def call_on_exit(cls, func):
+        cls.instance().aboutToQuit.connect(func)

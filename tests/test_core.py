@@ -46,6 +46,12 @@ def test_buffer():
         pass
 
 
+def test_coreapplication():
+    def test():
+        pass
+    core.CoreApplication.call_on_exit(test)
+
+
 def test_date():
     date = core.Date(1, 1, 2000)
     with open("data.pkl", "wb") as jar:
