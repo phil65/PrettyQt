@@ -8,8 +8,12 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
-MODES = bidict(maximum=QtWidgets.QLayout.SetMaximumSize,
-               fixed=QtWidgets.QLayout.SetFixedSize)
+MODES = bidict(default=QtWidgets.QLayout.SetDefaultConstraint,
+               fixed=QtWidgets.QLayout.SetFixedSize,
+               minimum=QtWidgets.QLayout.SetMinimumSize,
+               maximum=QtWidgets.QLayout.SetMaximumSize,
+               min_and_max=QtWidgets.QLayout.SetMinAndMaxSize,
+               none=QtWidgets.QLayout.SetNoConstraint)
 
 ALIGNMENTS = bidict(left=QtCore.Qt.AlignLeft,
                     right=QtCore.Qt.AlignRight,
@@ -44,7 +48,7 @@ class Layout(QtWidgets.QLayout):
     def set_size_mode(self, mode: str):
         """set the size mode of the layout
 
-        Allowed values are "maximum", "fixed"
+        Allowed values are "default", "fixed", "minimum", "maximum", "min_and_max", "none"
 
         Args:
             mode: size mode for the layout
@@ -59,7 +63,7 @@ class Layout(QtWidgets.QLayout):
     def get_size_mode(self) -> str:
         """returns current size mode
 
-        Possible values: "maximum", "fixed"
+        Possible values: "default", "fixed", "minimum", "maximum", "min_and_max", "none"
 
         Returns:
             size mode
