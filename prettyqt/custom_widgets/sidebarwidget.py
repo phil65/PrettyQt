@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Callable, Optional
+from typing import Callable, Optional, Union
 
 from prettyqt import widgets
 from prettyqt.utils import icons
@@ -31,7 +31,8 @@ class SidebarWidget(widgets.MainWindow):
         w.set_layout(main_layout)
         self.setCentralWidget(w)
 
-    def add_tab(self, item,
+    def add_tab(self,
+                item,
                 title: str,
                 icon: icons.IconType = None,
                 show: bool = False,
@@ -68,11 +69,15 @@ class SidebarWidget(widgets.MainWindow):
             self.area.box.setCurrentWidget(page)
         return page
 
-    def set_tab(self, widget):
+    def set_tab(self, item: Union[int, widgets.Widget]):
+        if isinstance(item, int):
+            item = self.area.box[item]
+        if item not in self.area.box:
+            raise ValueError("Layout does not contain the chosen widget")
         current = self.area.box.currentWidget()
         current._button.setChecked(False)
-        self.area.box.setCurrentWidget(widget)
-        widget._button.setChecked(True)
+        self.area.box.setCurrentWidget(item)
+        item._button.setChecked(True)
 
     def show_tab(self, index):
         widget = self.area.box[index]
