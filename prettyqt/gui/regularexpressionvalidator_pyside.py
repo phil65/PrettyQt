@@ -17,7 +17,7 @@ class RegularExpressionValidator(gui.Validator):
         return f"RegularExpressionValidator(RegularExpression({self.get_regex()!r}))"
 
     def __getstate__(self):
-        return dict(regexp=core.RegularExpression(self.regularExpression()))
+        return dict(regexp=core.RegularExpression(self.regex))
 
     def __setstate__(self, state):
         self.__init__()
