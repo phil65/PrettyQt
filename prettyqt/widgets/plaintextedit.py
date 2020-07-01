@@ -9,6 +9,7 @@ from qtpy import QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict
+from prettyqt.gui import textcursor
 
 WRAP_MODES = bidict(none=QtGui.QTextOption.NoWrap,
                     word=QtGui.QTextOption.WordWrap,
@@ -18,6 +19,10 @@ WRAP_MODES = bidict(none=QtGui.QTextOption.NoWrap,
 
 LINE_WRAP_MODES = bidict(none=QtWidgets.QPlainTextEdit.NoWrap,
                          widget_width=QtWidgets.QPlainTextEdit.WidgetWidth)
+
+MOVE_OPERATIONS = textcursor.MOVE_OPERATIONS
+MOVE_MODES = textcursor.MOVE_MODES
+
 
 QtWidgets.QPlainTextEdit.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -62,8 +67,18 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         yield cursor
         self.setTextCursor(cursor)
 
-    def append_text(self, text: str):
-        self.appendPlainText(text)
+    def move_cursor(self, operation: str, mode: str = "move") -> bool:
+        op = MOVE_OPERATIONS[operation]
+        mode = MOVE_MODES[mode]
+        self.moveCursor(op, mode)
+
+    def append_text(self, text: str, newline: bool = True):
+        if newline:
+            self.appendPlainText(text)
+        else:
+            self.move_cursor("end")
+            self.insertPlainText(text)
+            self.move_cursor("end")
 
     def set_text(self, text: str):
         self.setPlainText(text)

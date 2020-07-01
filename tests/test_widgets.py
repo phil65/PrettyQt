@@ -573,6 +573,7 @@ def test_plaintextedit(qtbot):
     widget.set_enabled()
     widget.set_font("Consolas")
     widget.append_text(" test")
+    widget.append_text(" test", newline=False)
     assert widget.text() == "hallo\n test"
     widget.highlight_current_line()
     widget.set_read_only()
@@ -746,7 +747,7 @@ def test_splitter(qtbot):
     with pytest.raises(ValueError):
         widget.set_orientation("test")
     widget.add_layout(widgets.BoxLayout("horizontal"))
-    widgets.Splitter.from_widgets([widgets.Widget()])
+    widgets.Splitter.from_widgets(widgets.Widget())
 
 
 def test_styleoptionslider(qtbot):
