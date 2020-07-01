@@ -12,6 +12,15 @@ addons:
     packages:
       - x11-utils
       - libxkbcommon-x11-0
+      - libxcb-icccm4
+      - libxcb-image0
+      - libxcb-keysyms1
+      - libxcb-randr0
+      - libxcb-render-util0
+      - libxcb-xinerama0
+      - libxcb-xfixes0
+      - python3-pyqt5
+      - python3-pyqt5.qtwebengine
 services: xvfb
 env:
   global:
@@ -20,7 +29,6 @@ env:
 install:
   - pip install --upgrade pip
   - pip install -U tox-travis
-  - sudo apt-get -y install python3-pyqt5
   - pip install -r requirements_dev.txt
   - pip install -r requirements.txt
 
