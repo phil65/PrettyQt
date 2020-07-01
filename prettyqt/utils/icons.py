@@ -6,15 +6,27 @@ for full list, see:
 - https://cdn.materialdesignicons.com/3.0.39/
 """
 
+from typing import Union
+import pathlib
+
 import qtawesome as qta
+from qtpy import QtGui
 from prettyqt import gui
 
 
-def get_icon(icon):
-    if not icon:
+IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
+
+
+def get_icon(icon: IconType):
+    if icon is None:
         icon = gui.Icon()
     elif isinstance(icon, str):
-        icon = qta.icon(icon)
+        if icon.startswith("mdi."):
+            icon = qta.icon(icon)
+        else:
+            icon = gui.Icon(icon)
+    elif isinstance(icon, pathlib.Path):
+        icon = gui.Icon(icon)
     return icon
 
 
