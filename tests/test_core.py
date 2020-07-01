@@ -46,7 +46,7 @@ def test_buffer():
         pass
 
 
-def test_coreapplication():
+def test_coreapplication(qapp):
     def test():
         pass
     core.CoreApplication.call_on_exit(test)
@@ -172,7 +172,7 @@ def test_runnable():
     core.Runnable()
 
 
-def test_settings():
+def test_settings(qapp):
     settings = core.Settings("1", "2")
     settings.clear()
     settings.set_value("test", "value")

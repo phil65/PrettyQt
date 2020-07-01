@@ -11,10 +11,8 @@ from qtpy import QtCore, QtGui
 import prettyqt.custom_widgets.dataset as fo
 from prettyqt import core, custom_widgets, gui, widgets
 
-test_widget = widgets.Widget()
 
-
-def test_booldicttoolbutton():
+def test_booldicttoolbutton(qtbot):
     dct = dict(a="test",
                b="test2")
     w = custom_widgets.BoolDictToolButton("Title", None, dct)
@@ -23,14 +21,14 @@ def test_booldicttoolbutton():
     assert w.as_dict() == dict(a=True, b=False)
 
 
-def test_buttondelegate():
+def test_buttondelegate(qtbot):
     widget = custom_widgets.ButtonDelegate(parent=None)
     widget.setEditorData(widgets.Widget(), None)
     widget.createEditor(None, None, QtCore.QModelIndex())
     widget.currentIndexChanged()
 
 
-def test_radiodelegate():
+def test_radiodelegate(qtbot):
     widget = widgets.TableWidget()
     widget.setColumnCount(3)
     widget.insertRow(0)
@@ -43,7 +41,7 @@ def test_radiodelegate():
     widget.openPersistentEditor(item)
 
 
-def test_colorchooserbutton():
+def test_colorchooserbutton(qtbot):
     btn = custom_widgets.ColorChooserButton()
     btn.set_color("green")
     with open("data.pkl", "wb") as jar:
@@ -56,7 +54,7 @@ def test_colorchooserbutton():
     assert btn.is_valid()
 
 
-def test_regexeditor():
+def test_regexeditor(qtbot):
     widget = custom_widgets.RegexEditorWidget()
     widget.regex = "[0-9]"
     assert widget.regex == "[0-9]"
@@ -65,7 +63,7 @@ def test_regexeditor():
     widget.compile_flags = re.IGNORECASE
 
 
-def test_dataset():
+def test_dataset(qtbot):
 
     class Test(fo.DataSet):
         i1 = fo.Bool(label="My first one")
@@ -89,7 +87,7 @@ def test_dataset():
     settings.to_dict()
 
 
-def test_flagselectionwidget():
+def test_flagselectionwidget(qtbot):
     widget = custom_widgets.FlagSelectionWidget()
     items = {"MultiLine": 0,
              "Ignore case": 2}
@@ -97,13 +95,13 @@ def test_flagselectionwidget():
     assert widget.get_value() == 0
 
 
-def test_stringornumberwidget():
+def test_stringornumberwidget(qtbot):
     widget = custom_widgets.StringOrNumberWidget()
     widget.get_value()
     widget.on_value_change()
 
 
-def test_optionalwidget():
+def test_optionalwidget(qtbot):
     w = widgets.RadioButton()
     container = custom_widgets.OptionalWidget(w, "Test")
     container.get_value()
@@ -111,12 +109,12 @@ def test_optionalwidget():
     assert container.enabled is False
 
 
-def test_singlelinetextedit():
+def test_singlelinetextedit(qtbot):
     w = custom_widgets.SingleLineTextEdit()
     w.set_text("test")
 
 
-def test_mappedcheckbox():
+def test_mappedcheckbox(qtbot):
     widget = custom_widgets.MappedCheckBox(true_value=0, false_value=1)
     widget.set_value(0)
     assert widget.get_value() == 0
@@ -124,7 +122,7 @@ def test_mappedcheckbox():
     assert widget.get_value() == 1
 
 
-def test_filechooserbutton():
+def test_filechooserbutton(qtbot):
     btn = custom_widgets.FileChooserButton()
     with open("data.pkl", "wb") as jar:
         pickle.dump(btn, jar)
@@ -134,7 +132,7 @@ def test_filechooserbutton():
     btn.get_value()
 
 
-def test_fontchooserbutton():
+def test_fontchooserbutton(qtbot):
     btn = custom_widgets.FontChooserButton()
     with open("data.pkl", "wb") as jar:
         pickle.dump(btn, jar)
@@ -144,14 +142,14 @@ def test_fontchooserbutton():
     repr(btn)
 
 
-def test_iconlabel():
+def test_iconlabel(qtbot):
     w = custom_widgets.IconLabel()
     w.set_text("test")
     assert w.text() == "test"
     repr(w)
 
 
-def test_inputandslider():
+def test_inputandslider(qtbot):
     w = custom_widgets.InputAndSlider()
     w.set_range(0, 10)
     w.set_value(5)
@@ -160,7 +158,7 @@ def test_inputandslider():
     assert w.is_valid()
 
 
-def test_codeeditor():
+def test_codeeditor(qtbot):
     editor = custom_widgets.CodeEditor()
     assert editor.text() == ""
     editor.line_area_width()
@@ -171,11 +169,11 @@ def test_codeeditor():
     editor.line_area_paintevent(event)
 
 
-def test_imageviewer():
+def test_imageviewer(qtbot):
     custom_widgets.ImageViewer()
 
 
-def test_flowlayout():
+def test_flowlayout(qtbot):
     widget = widgets.Widget()
     layout = custom_widgets.FlowLayout(margin=1)
     btn = widgets.PushButton("Short")
@@ -207,16 +205,16 @@ def test_labeledslider(qtbot):
     slider.paintEvent(None)
 
 
-def test_markdownwidget():
+def test_markdownwidget(qtbot):
     custom_widgets.MarkdownWindow()
 
 
-def test_popupinfo():
+def test_popupinfo(qtbot):
     popup = custom_widgets.PopupInfo()
     popup.show_popup("test")
 
 
-def test_promptlineedit():
+def test_promptlineedit(qtbot):
     widget = custom_widgets.PromptLineEdit()
     widget.prompt_text = "test"
     assert widget.prompt_text == "test"
@@ -225,7 +223,7 @@ def test_promptlineedit():
     widget.set_text("test")
 
 
-def test_selectionwidget():
+def test_selectionwidget(qtbot):
     widget = custom_widgets.SelectionWidget()
 
     class Test(object):
@@ -282,7 +280,8 @@ def test_spanslider(qtbot):
     slider.set_movement_mode("no_overlap")
 
 
-def test_waitingspinner():
+def test_waitingspinner(qtbot):
+    test_widget = widgets.Widget()
     spinner = custom_widgets.WaitingSpinner(parent=test_widget)
     spinner.paintEvent(None)
     spinner.set_line_num(2)

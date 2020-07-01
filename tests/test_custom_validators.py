@@ -6,9 +6,7 @@
 import pickle
 import pathlib
 
-from prettyqt import custom_validators, widgets
-
-test_widget = widgets.Widget()
+from prettyqt import custom_validators
 
 
 def test_pathvalidator():

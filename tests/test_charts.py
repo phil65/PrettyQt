@@ -10,7 +10,7 @@ from qtpy import QtCore
 from prettyqt import charts
 
 
-def test_chart():
+def test_chart(qtbot):
     chart = charts.Chart(parent=None)
     chart.hide_legend()
     chart.show_legend()
@@ -34,7 +34,7 @@ def test_chartview(qtbot):
     qtbot.mouseMove(widget, delay=100)
 
 
-def test_lineseries():
+def test_lineseries(qtbot):
     line = charts.LineSeries()
     with open("data.pkl", "wb") as jar:
         pickle.dump(line, jar)
@@ -42,5 +42,5 @@ def test_lineseries():
         line = pickle.load(jar)
 
 
-def test_scatterseries():
+def test_scatterseries(qtbot):
     charts.ScatterSeries()
