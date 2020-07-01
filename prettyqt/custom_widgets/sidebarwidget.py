@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Callable
+from typing import Callable, Optional
 
 from prettyqt import widgets
 from prettyqt.utils import icons
@@ -20,6 +20,7 @@ class SidebarWidget(widgets.MainWindow):
         self.sidebar.setFloatable(False)
         self.sidebar.set_allowed_areas("all")
         self.sidebar.set_icon_size(60)
+        self.spacer_action = self.sidebar.add_spacer()
         self.add_toolbar(self.sidebar, "left")
         self.area = widgets.Widget()
         self.area.set_layout("stacked")
@@ -30,7 +31,12 @@ class SidebarWidget(widgets.MainWindow):
         w.set_layout(main_layout)
         self.setCentralWidget(w)
 
-    def add_tab(self, item, title: str, icon=None, show: bool = False):
+    def add_tab(self, item,
+                title: str,
+                icon: icons.IconType = None,
+                show: bool = False,
+                shortcut: Optional[str] = None,
+                area: str = "top"):
         page = item
         self.area.box.add(page)
         # button = widgets.ToolButton()
@@ -41,10 +47,19 @@ class SidebarWidget(widgets.MainWindow):
         # button.clicked.connect(lambda: self.area.box.setCurrentWidget(page))
         # self.sidebar.addWidget(button)
         # self.sidebar.add_separator()
-        act = self.sidebar.add_action(title,
-                                      icon,
-                                      lambda: self.set_tab(page),
-                                      checkable=True)
+        if area == "top":
+            act = widgets.Action(text=title,
+                                 icon=icon,
+                                 shortcut=shortcut,
+                                 parent=self.sidebar)
+            act.setCheckable(True)
+            act.triggered.connect(lambda: self.set_tab(page))
+            self.sidebar.insertAction(self.spacer_action, act)
+        else:
+            act = self.sidebar.add_action(title,
+                                          icon,
+                                          lambda: self.set_tab(page),
+                                          checkable=True)
         button = self.sidebar.widgetForAction(act)
         if len(self.area.box) == 1:
             button.setChecked(True)
@@ -66,12 +81,19 @@ class SidebarWidget(widgets.MainWindow):
     def add_spacer(self):
         self.sidebar.add_spacer()
 
+    def add_separator(self, text: Optional[str] = None, area: str = "top"):
+        if area == "top":
+            self.sidebar.add_separator(text, before=self.spacer_action)
+        else:
+            self.sidebar.add_separator(text)
+
     def add_action(self,
                    title: str,
                    icon: icons.IconType = None,
                    callback: Callable = None,
                    checkable: bool = False,
-                   shortcut: bool = None):
+                   shortcut: Optional[str] = None,
+                   area: str = "top"):
         # act = self.sidebar.add_action(label=title,
         #                                      icon=icon,
         #                                      callback=callback,
@@ -82,7 +104,10 @@ class SidebarWidget(widgets.MainWindow):
         act.setCheckable(checkable)
         if callback:
             act.triggered.connect(callback)
-        self.sidebar.addAction(act)
+        if area == "top":
+            self.sidebar.insertAction(self.spacer_action, act)
+        if area == "bottom":
+            self.sidebar.addAction(act)
         return act
 
 
@@ -93,8 +118,7 @@ if __name__ == '__main__':
     page_2 = widgets.ColorDialog()
     page_3 = widgets.FileDialog()
     ex.add_tab(page_1, "Text", "mdi.timer")
-    ex.add_tab(page_2, "Color", "mdi.format-color-fill")
-    ex.add_spacer()
+    ex.add_tab(page_2, "Color", "mdi.format-color-fill", area="bottom")
     ex.add_tab(page_3, "Help", "mdi.help-circle-outline")
     # ex.show_tab(0)
     ex.show()
