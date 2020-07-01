@@ -21,6 +21,7 @@ addons:
       - libxcb-xfixes0
       - python3-pyqt5
       - python3-pyqt5.qtwebengine
+      - python3-pyqt5.qtchart
 services: xvfb
 env:
   global:
