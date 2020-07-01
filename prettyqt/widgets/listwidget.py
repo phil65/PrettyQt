@@ -6,7 +6,7 @@
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets, core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, icons
 
 
 SCROLL_HINTS = bidict(ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
@@ -83,7 +83,7 @@ class ListWidget(QtWidgets.QListWidget):
     def add(self,
             label: str,
             data=NoData,
-            icon=None):
+            icon: icons.IconType = None):
         if data is NoData:
             data = label
         item = widgets.ListWidgetItem(label)

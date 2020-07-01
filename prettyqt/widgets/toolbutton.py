@@ -6,7 +6,7 @@
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, icons
 
 
 POPUP_MODES = bidict(delayed=QtWidgets.QToolButton.DelayedPopup,
@@ -34,7 +34,7 @@ class ToolButton(QtWidgets.QToolButton):
         return menu[item]
 
     @classmethod
-    def for_menu(cls, menu, icon=None):
+    def for_menu(cls, menu: QtWidgets.QMenu, icon: icons.IconType = None):
         btn = cls()
         btn.setMenu(menu)
         btn.set_popup_mode("instant")

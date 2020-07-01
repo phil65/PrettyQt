@@ -6,7 +6,7 @@
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, icons
 
 
 ICONS = bidict(none=QtWidgets.QMessageBox.NoIcon,
@@ -60,12 +60,12 @@ class MessageBox(QtWidgets.QMessageBox):
                 self.add_button(b)
 
     @classmethod
-    def message(cls, text, title=None, icon=None):
+    def message(cls, text: str, title: str = None, icon: icons.IconType = None):
         m = cls(cls.NoIcon, title, text)
         m.set_icon(icon)
         return m.show_blocking()
 
-    def set_icon(self, icon):
+    def set_icon(self, icon: icons.IconType):
         if icon in ICONS:
             self.setIcon(ICONS[icon])
             return None
