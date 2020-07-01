@@ -46,23 +46,30 @@ class ToolBar(QtWidgets.QToolBar):
         self.addWidget(btn)
         return btn
 
-    def add_separator(self, text=None):
+    def add_separator(self, text: Optional[str] = None, before: QtWidgets.QAction = None):
         """adds a separator showing an optional label
 
         Args:
             text: Text to show on separator
+            before: insert separator before specific action
 
         Returns:
             Separator action
         """
         if text is None:
-            self.addSeparator()
+            if before:
+                self.insertSeparator(before)
+            else:
+                self.addSeparator()
         else:
             label = widgets.Label(text)
             label.setMinimumWidth(self.minimumWidth())
             label.setStyleSheet("background:lightgrey")
             label.set_alignment(horizontal="center")
-            self.addWidget(label)
+            if before:
+                self.insertWidget(before, label)
+            else:
+                self.addWidget(label)
 
     def set_style(self, style: str):
         if style is None:
@@ -97,7 +104,7 @@ class ToolBar(QtWidgets.QToolBar):
     def add_spacer(self):
         spacer = widgets.Widget()
         spacer.set_size_policy("expanding", "expanding")
-        self.addWidget(spacer)
+        return self.addWidget(spacer)
 
     def set_icon_size(self, size: int):
         self.setIconSize(core.Size(size, size))
