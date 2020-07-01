@@ -3,12 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Union
-
-import qtawesome as qta
 from qtpy import QtGui
 
 from prettyqt import gui
+from prettyqt.utils import icons
 
 
 class StandardItem(QtGui.QStandardItem):
@@ -31,14 +29,11 @@ class StandardItem(QtGui.QStandardItem):
         self.setData(state["data"])
         self.set_icon(state["icon"])
 
-    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+    def set_icon(self, icon: icons.IconType):
         """set the icon for the action
 
         Args:
             icon: icon to use
         """
-        if not icon:
-            icon = gui.Icon()
-        elif isinstance(icon, str):
-            icon = qta.icon(icon)
+        icon = icons.get_icon(icon)
         self.setIcon(icon)

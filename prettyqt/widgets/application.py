@@ -5,12 +5,12 @@
 
 import pathlib
 import sys
-from typing import Optional, Union
+from typing import Optional
 
-import qtawesome as qta
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
+from prettyqt.utils import icons
 
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
@@ -18,16 +18,13 @@ QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
 class Application(QtWidgets.QApplication):
 
-    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+    def set_icon(self, icon: icons.IconType):
         """set the icon for the menu
 
         Args:
             icon: icon to use
         """
-        if not icon:
-            icon = gui.Icon()
-        elif isinstance(icon, str):
-            icon = qta.icon(icon, color="lightgray")
+        icon = icons.get_icon(icon, color="lightgray")
         self.setWindowIcon(icon)
 
     def load_language_file(self, path: pathlib.Path):
@@ -92,6 +89,7 @@ class Application(QtWidgets.QApplication):
     @classmethod
     def create_default_app(cls) -> "Application":
         cls.disable_window_help_button()
+        # cls.setAttribute(QtCore.Qt.AA_UseOpenGLES)
         cls.use_hdpi_bitmaps()
         app = cls(sys.argv)
         return app

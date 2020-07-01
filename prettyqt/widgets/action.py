@@ -3,13 +3,11 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Union
 
-import qtawesome as qta
-from qtpy import QtCore, QtGui, QtWidgets
+from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui
-from prettyqt.utils import bidict
+from prettyqt import core
+from prettyqt.utils import bidict, icons
 
 PRIORITIES = bidict(low=QtWidgets.QAction.LowPriority,
                     normal=QtWidgets.QAction.NormalPriority,
@@ -77,16 +75,13 @@ class Action(QtWidgets.QAction):
     def set_checkable(self, value: bool):
         self.setCheckable(value)
 
-    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+    def set_icon(self, icon: icons.IconType):
         """set the icon for the action
 
         Args:
             icon: icon to use
         """
-        if not icon:
-            icon = gui.Icon()
-        elif isinstance(icon, str):
-            icon = qta.icon(icon)
+        icon = icons.get_icon(icon)
         self.setIcon(icon)
 
     def set_shortcut(self, shortcut):

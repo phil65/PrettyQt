@@ -5,11 +5,10 @@
 
 from typing import Iterable
 
-import qtawesome as qta
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, core, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, icons
 
 box = QtWidgets.QComboBox
 INSERT_POLICIES = bidict(no_insert=box.NoInsert,
@@ -90,12 +89,11 @@ class ComboBox(QtWidgets.QComboBox):
     def add(self,
             label: str,
             data=NoData,
-            icon=None):
+            icon: icons.IconType = None):
         if data is NoData:
             data = label
         if icon is not None:
-            if isinstance(icon, str):
-                icon = qta.icon(icon)
+            icon = icons.get_icon(icon)
             self.addItem(gui.Icon(icon), label, userData=data)
         else:
             self.addItem(label, userData=data)

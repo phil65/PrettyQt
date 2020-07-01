@@ -3,12 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Union
-
-import qtawesome as qta
-from qtpy import QtWidgets, QtGui
+from qtpy import QtWidgets
 
 from prettyqt import core, widgets, gui
+from prettyqt.utils import icons
 
 STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton,
               maximise=QtWidgets.QStyle.SP_TitleBarMaxButton)
@@ -40,16 +38,13 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
 
-    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+    def set_icon(self, icon: icons.IconType):
         """set the icon for the button
 
         Args:
             icon: icon to use
         """
-        if not icon:
-            icon = gui.Icon()
-        elif isinstance(icon, str):
-            icon = qta.icon(icon)
+        icon = icons.get_icon(icon)
         self.setIcon(icon)
 
     def set_style_icon(self, icon: str, size: int = 15):

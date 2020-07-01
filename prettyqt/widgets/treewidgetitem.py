@@ -3,13 +3,10 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Union
-
-import qtawesome as qta
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import gui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, icons
 
 
 STATES = bidict(unchecked=QtCore.Qt.Unchecked,
@@ -20,7 +17,7 @@ STATES = bidict(unchecked=QtCore.Qt.Unchecked,
 class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
 
     def __repr__(self):
-        return f"TreeWidgetItem()"
+        return "TreeWidgetItem()"
 
     def __getstate__(self):
         icon = self.icon(0)
@@ -40,16 +37,13 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         self.set_icon(state["icon"])
         self.set_checkstate(state["checkstate"])
 
-    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+    def set_icon(self, icon: icons.IconType):
         """set the icon for the action
 
         Args:
             icon: icon to use
         """
-        if not icon:
-            icon = gui.Icon()
-        elif isinstance(icon, str):
-            icon = qta.icon(icon)
+        icon = icons.get_icon(icon)
         self.setIcon(0, icon)
 
     def set_checkstate(self, state: str):

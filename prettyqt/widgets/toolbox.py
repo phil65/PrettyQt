@@ -3,10 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-import qtawesome as qta
+from typing import Optional
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets, gui
+from prettyqt.utils import icons
 
 
 QtWidgets.QToolBox.__bases__ = (widgets.Frame,)
@@ -43,15 +45,17 @@ class ToolBox(QtWidgets.QToolBox):
     def __iter__(self):
         return iter(self.get_children())
 
-    def get_children(self):
+    def get_children(self) -> list:
         return [self[i] for i in range(self.count())]
 
-    def add_widget(self, widget, title=None, icon=None):
+    def add_widget(self,
+                   widget,
+                   title: Optional[str] = None,
+                   icon: icons.IconType = None):
         if title is None:
             title = widget.id
-        if isinstance(icon, str):
-            icon = qta.icon(icon)
         if icon:
+            icon = icons.get_icon(icon)
             self.addItem(widget, icon, title)
         else:
             self.addItem(widget, title)

@@ -3,9 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Callable, Union, Optional
+from typing import Callable, Optional
 
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
 from prettyqt.utils import bidict, icons
@@ -36,7 +36,7 @@ class ToolBar(QtWidgets.QToolBar):
 
     def add_menu_button(self,
                         label: str,
-                        icon,
+                        icon: icons.IconType,
                         menu: QtWidgets.QMenu) -> widgets.ToolButton:
         btn = widgets.ToolButton.for_menu(menu)
         btn.setText(label)
@@ -83,7 +83,7 @@ class ToolBar(QtWidgets.QToolBar):
 
     def add_action(self,
                    label: str,
-                   icon: Union[QtGui.QIcon, str, None] = None,
+                   icon: icons.IconType = None,
                    callback: Optional[Callable] = None,
                    checkable: bool = False):
         icon = icons.get_icon(icon)

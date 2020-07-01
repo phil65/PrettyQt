@@ -4,13 +4,11 @@
 """
 
 import logging
-from typing import Union
 
-import qtawesome as qta
-from qtpy import QtCore, QtGui, QtWidgets
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, icons
 
 DOCK_POSITIONS = bidict(top=QtCore.Qt.TopDockWidgetArea,
                         bottom=QtCore.Qt.BottomDockWidgetArea,
@@ -141,16 +139,13 @@ class MainWindow(QtWidgets.QMainWindow):
         super().closeEvent(event)
         event.accept()
 
-    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+    def set_icon(self, icon: icons.IconType):
         """set the icon for the menu
 
         Args:
             icon: icon to use
         """
-        if not icon:
-            icon = gui.Icon()
-        elif isinstance(icon, str):
-            icon = qta.icon(icon, color="lightgray")
+        icon = icons.get_icon(icon, color="lightgray")
         self.setWindowIcon(icon)
 
     def add_widget_as_dock(self,

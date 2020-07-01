@@ -3,13 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Optional, Union
+from typing import Optional
 
-import qtawesome as qta
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, icons
 
 TAB_SHAPES = bidict(rounded=QtWidgets.QTabWidget.Rounded,
                     triangular=QtWidgets.QTabWidget.Triangular)
@@ -151,7 +150,7 @@ class TabWidget(QtWidgets.QTabWidget):
     def add_tab(self,
                 item,
                 label: str,
-                icon: Union[QtGui.QIcon, str, None] = None,
+                icon: icons.IconType = None,
                 position: Optional[int] = None,
                 show: bool = False):
         if isinstance(item, QtWidgets.QLayout):
@@ -164,8 +163,7 @@ class TabWidget(QtWidgets.QTabWidget):
         if not icon:
             index = self.insertTab(position, widget, label)
         else:
-            if isinstance(icon, str):
-                icon = qta.icon(icon)
+            icon = icons.get_icon(icon)
             index = self.insertTab(position, widget, icon, label)
         if show:
             self.setCurrentIndex(index)
@@ -174,7 +172,7 @@ class TabWidget(QtWidgets.QTabWidget):
     def attach_tab(self,
                    widget,
                    name: str,
-                   icon: Union[QtGui.QIcon, str, None] = None,
+                   icon: icons.IconType = None,
                    insert_at: Optional[int] = None):
         """
         Re-attach the tab by removing the content from the DetachedTab window,

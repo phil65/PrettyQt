@@ -5,10 +5,10 @@
 
 from typing import Any, Callable, Optional, Union
 
-import qtawesome as qta
-from qtpy import QtGui, QtWidgets
+from qtpy import QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, widgets
+from prettyqt.utils import icons
 
 QtWidgets.QMenu.__bases__ = (widgets.Widget,)
 
@@ -42,16 +42,13 @@ class Menu(QtWidgets.QMenu):
         for i in item:
             self.add_action(i)
 
-    def set_icon(self, icon: Union[QtGui.QIcon, str, None]):
+    def set_icon(self, icon: icons.IconType):
         """set the icon for the menu
 
         Args:
             icon: icon to use
         """
-        if not icon:
-            icon = gui.Icon()
-        elif isinstance(icon, str):
-            icon = qta.icon(icon)
+        icon = icons.get_icon(icon)
         self.setIcon(icon)
 
     def add_separator(self, text: Optional[str] = None) -> widgets.WidgetAction:
