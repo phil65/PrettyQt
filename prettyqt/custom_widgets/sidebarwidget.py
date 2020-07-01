@@ -3,21 +3,24 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Callable
+
 from prettyqt import widgets
+from prettyqt.utils import icons
 
 
 class SidebarWidget(widgets.MainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent=None)
-        self.sidebar_widget = widgets.ToolBar()
-        self.sidebar_widget.id = "SidebarWidget"
-        self.sidebar_widget.title = "Sidebar"
-        self.sidebar_widget.set_style("text_below_icon")
-        self.sidebar_widget.setFloatable(False)
-        self.sidebar_widget.set_allowed_areas("all")
-        self.sidebar_widget.set_icon_size(60)
-        self.add_toolbar(self.sidebar_widget, "left")
+        self.sidebar = widgets.ToolBar()
+        self.sidebar.id = "SidebarWidget"
+        self.sidebar.title = "Sidebar"
+        self.sidebar.set_style("text_below_icon")
+        self.sidebar.setFloatable(False)
+        self.sidebar.set_allowed_areas("all")
+        self.sidebar.set_icon_size(60)
+        self.add_toolbar(self.sidebar, "left")
         self.area = widgets.Widget()
         self.area.set_layout("stacked")
 
@@ -36,13 +39,13 @@ class SidebarWidget(widgets.MainWindow):
         # button.setFixedSize(80, 80)
         # button.set_icon(icon)
         # button.clicked.connect(lambda: self.area.box.setCurrentWidget(page))
-        # self.sidebar_widget.addWidget(button)
-        # self.sidebar_widget.add_separator()
-        act = self.sidebar_widget.add_action(title,
-                                             icon,
-                                             lambda: self.set_tab(page),
-                                             checkable=True)
-        button = self.sidebar_widget.widgetForAction(act)
+        # self.sidebar.addWidget(button)
+        # self.sidebar.add_separator()
+        act = self.sidebar.add_action(title,
+                                      icon,
+                                      lambda: self.set_tab(page),
+                                      checkable=True)
+        button = self.sidebar.widgetForAction(act)
         if len(self.area.box) == 1:
             button.setChecked(True)
         page._button = button
@@ -60,6 +63,28 @@ class SidebarWidget(widgets.MainWindow):
         widget = self.area.box[index]
         self.area.box.setCurrentWidget(widget)
 
+    def add_spacer(self):
+        self.sidebar.add_spacer()
+
+    def add_action(self,
+                   title: str,
+                   icon: icons.IconType = None,
+                   callback: Callable = None,
+                   checkable: bool = False,
+                   shortcut: bool = None):
+        # act = self.sidebar.add_action(label=title,
+        #                                      icon=icon,
+        #                                      callback=callback,
+        #                                      checkable=checkable)
+        act = widgets.Action(text=title,
+                             icon=icon,
+                             shortcut=shortcut)
+        act.setCheckable(checkable)
+        if callback:
+            act.triggered.connect(callback)
+        self.sidebar.addAction(act)
+        return act
+
 
 if __name__ == '__main__':
     app = widgets.app()
@@ -69,6 +94,7 @@ if __name__ == '__main__':
     page_3 = widgets.FileDialog()
     ex.add_tab(page_1, "Text", "mdi.timer")
     ex.add_tab(page_2, "Color", "mdi.format-color-fill")
+    ex.add_spacer()
     ex.add_tab(page_3, "Help", "mdi.help-circle-outline")
     # ex.show_tab(0)
     ex.show()
