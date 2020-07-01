@@ -573,8 +573,8 @@ def test_plaintextedit(qtbot):
     widget.set_enabled()
     widget.set_font("Consolas")
     widget.append_text(" test")
-    widget.append_text(" test", newline=False)
-    assert widget.text() == "hallo\n test"
+    widget.append_text("test", newline=False)
+    assert widget.text() == "hallo\n testtest"
     widget.highlight_current_line()
     widget.set_read_only()
     widget.get_result_widget()
