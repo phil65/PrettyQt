@@ -835,6 +835,7 @@ def test_toolbar():
     widget.set_style(None)
     widget.add_separator("Test")
     widget.add_separator()
+    widget.add_spacer()
     assert widget.get_style() == "icon"
     widget.set_font_size(10)
     widget.set_enabled()

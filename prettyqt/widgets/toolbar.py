@@ -3,13 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from typing import Callable
+from typing import Callable, Union, Optional
 
-import qtawesome as qta
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets, QtGui
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, icons
 
 
 STYLES = bidict(icon=QtCore.Qt.ToolButtonIconOnly,
@@ -82,13 +81,23 @@ class ToolBar(QtWidgets.QToolBar):
         """
         return STYLES.inv[self.toolButtonStyle()]
 
-    def add_action(self, label: str, icon, callback: Callable, checkable=False):
-        if isinstance(icon, str):
-            icon = qta.icon(icon)
-        action = self.addAction(icon, label, callback)
+    def add_action(self,
+                   label: str,
+                   icon: Union[QtGui.QIcon, str, None] = None,
+                   callback: Optional[Callable] = None,
+                   checkable: bool = False):
+        icon = icons.get_icon(icon)
+        action = self.addAction(icon, label)
+        if callback is not None:
+            action.triggered.connect(callback)
         if checkable:
             action.setCheckable(True)
         return action
+
+    def add_spacer(self):
+        spacer = widgets.Widget()
+        spacer.set_size_policy("expanding", "expanding")
+        self.addWidget(spacer)
 
     def set_icon_size(self, size: int):
         self.setIconSize(core.Size(size, size))
