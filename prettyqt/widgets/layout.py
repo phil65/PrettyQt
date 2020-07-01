@@ -42,6 +42,9 @@ class Layout(QtWidgets.QLayout):
     def __iter__(self):
         return iter(self[i] for i in range(self.count()))
 
+    def __contains__(self, item):
+        return item in self.get_children()
+
     def get_children(self):
         return list(self)
 
