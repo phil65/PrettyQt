@@ -3,8 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from prettyqt import widgets, gui
-import qtawesome as qta
+from prettyqt import widgets
 
 
 class SidebarWidget(widgets.MainWindow):
@@ -38,11 +37,7 @@ class SidebarWidget(widgets.MainWindow):
         # button.set_icon(icon)
         # button.clicked.connect(lambda: self.area.box.setCurrentWidget(page))
         # self.sidebar_widget.addWidget(button)
-        self.sidebar_widget.add_separator()
-        if icon is None:
-            icon = gui.Icon()
-        elif isinstance(icon, str):
-            icon = qta.icon(icon)
+        # self.sidebar_widget.add_separator()
         act = self.sidebar_widget.add_action(title,
                                              icon,
                                              lambda: self.set_tab(page),
