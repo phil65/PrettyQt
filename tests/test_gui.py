@@ -59,7 +59,7 @@ def test_fontmetrics():
     font = gui.Font("Consolas")
     fontmetrics = gui.FontMetrics(font)
     val = fontmetrics.elided_text("This is a test", mode="right", width=40)
-    assert len(val) == 3
+    assert len(val) < 5
 
 
 def test_icon():

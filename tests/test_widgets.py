@@ -691,6 +691,7 @@ def test_stackedlayout():
     layout = widgets.StackedLayout()
     widget = widgets.RadioButton("test")
     layout += widget
+    assert widget in layout
     layout.set_current_widget(widget)
     layout.set_size_mode("maximum")
     layout.set_margin(0)
