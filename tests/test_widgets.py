@@ -747,7 +747,7 @@ def test_splitter(qtbot):
     with pytest.raises(ValueError):
         widget.set_orientation("test")
     widget.add_layout(widgets.BoxLayout("horizontal"))
-    widgets.Splitter.from_widgets(widgets.Widget())
+    widgets.Splitter.from_widgets([widgets.Widget()])
 
 
 def test_styleoptionslider(qtbot):
