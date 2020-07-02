@@ -4,54 +4,69 @@
 """
 
 import sys
-import collections
 import logging
 
 from prettyqt import gui, widgets
 from prettyqt.utils import signallogger
 
 
-Point = collections.namedtuple('Point', ['x', 'y'])
+red_text = gui.TextCharFormat(text_color="red", bold=True)
+green_text = gui.TextCharFormat(text_color="green", bold=True)
+blue_text = gui.TextCharFormat(text_color="red", bold=True)
+orange_text = gui.TextCharFormat(text_color="orange", bold=True)
 
 
-class HighlightRule(object):
+class Highlighter(object):
     placeholder: str
     color = "black"
     italic = False
     bold = False
+    value = None
+
+    def __init__(self, formatter):
+        self.formatter = formatter
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
-        cls.format = cls.create_format()
-
-    @classmethod
-    def create_format(cls):
-        fmt = gui.TextCharFormat()
-        fmt.setFontItalic(cls.italic)
-        fmt.set_foreground_color(cls.color)
-        if cls.font_size:
-            fmt.setFontPointSize(cls.font_size)
-        if cls.bold:
-            fmt.set_font_weight("bold")
-        return fmt
+        cls.format = gui.TextCharFormat(cls.color, cls.bold, cls.italic)
 
     def get_format(self, value):
         return self.format
 
+    def get_value(self):
+        return str(self.value())
 
-class AscTime(HighlightRule):
+
+class AscTime(Highlighter):
     placeholder = "%(asctime)s"
-    color = "green"
+    italic = True
+
+    def get_value(self, record):
+        return self.formatter.formatTime(record)
 
 
-class Message(HighlightRule):
+class Message(Highlighter):
     placeholder = "%(message)s"
-    color = "blue"
+    bold = True
+
+    def get_value(self, record):
+        return record.msg
 
 
-class LevelName(HighlightRule):
+class LevelName(Highlighter):
     placeholder = "%(levelname)s"
     color = "red"
+    formats = dict(DEBUG=green_text,
+                   INFO=blue_text,
+                   WARNING=orange_text,
+                   CRITICAL=red_text,
+                   ERROR=red_text)
+
+    def get_value(self, record):
+        return record.levelname
+
+    def get_format(self, value):
+        return self.formats[value]
 
 
 class LogTextEdit(widgets.PlainTextEdit):
@@ -65,39 +80,38 @@ class LogTextEdit(widgets.PlainTextEdit):
         # self.handler.log_line.connect(self.append_text)
         self.handler = signallogger.RecordSignalLogger()
         self.handler.log_record.connect(self.append_record)
-        logger.addHandler(self.handler)
-        self.handler.setLevel(logging.WARNING)
-        self.formatter = logging.Formatter('%(asctime)s - %(message)s')
+        self.handler.setLevel(logging.INFO)
+        self.formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         self.handler.setFormatter(self.formatter)
+        self.rules = [klass(self.formatter) for klass in Highlighter.__subclasses__()]
+        logger.addHandler(self.handler)
 
     def append_record(self, record):
-        print(self.formatter.formatTime(record))
-        dct = {"%(asctime)s": self.formatter.formatTime(record),
-               # "%(created)f": record.created,
-               # "%(filename)s": record.filename,
-               # "%(funcName)s": record.funcName,
-               "%(levelname)s": record.levelname,
-               "%(levelno)s": record.levelno,
-               # "%(lineno)d": record.lineno,
-               "%(message)s": record.msg,
-               # "%(module)s": record.module,
-               # "%(msecs)d": record.msecs,
-               # "%(name)s": record.name,
-               # "%(pathname)s": record.pathname,
-               # "%(process)d": record.process,
-               # "%(processName)s": record.processName,
-               # "%(relativeCreated)s": record.relativeCreated,
-               # "%(thread)d": record.thread,
-               "%(threadName)s": record.threadName}
         template = self.formatter._fmt
-        replacements = dict()
-        for placeholder, value in dct.items():
-            pos = template.find(placeholder)
-            if pos > -1:
-                template = template.replace(placeholder, str(value))
-                replacements[placeholder] = (pos, pos + len(value))
-        print(replacements)
+        start_of_line = len(self.text())
         self.append_text(template)
+        with self.current_cursor() as c:
+            c.move_position("end")
+            for r in self.rules:
+                c.move_position("start_of_block")
+                c.move_position("end_of_block", "keep")
+                line_text = c.selectedText()
+                pos = line_text.find(r.placeholder)
+                if pos > -1:
+                    pos += start_of_line
+                    if start_of_line != 0:
+                        pos += 1
+                    c.set_position(pos)
+                    end = pos + len(r.placeholder)
+                    c.select_text(pos, end)
+                    value = r.get_value(record)
+                    # print(f"replacing {r.placeholder} ({pos} - {end}) with {value}")
+                    c.insertText(value)
+                    c.select_text(pos, pos + len(value))
+                    text = c.selectedText()
+                    fmt = r.get_format(text)
+                    c.setCharFormat(fmt)
+            c.clearSelection()
 
 
 if __name__ == "__main__":
