@@ -26,7 +26,7 @@ class Highlighter(object):
         cls.format = gui.TextCharFormat(cls.color, cls.bold, cls.italic)
         text = re.escape(cls.placeholder)
         last_char = text[-1]
-        cls.pattern = re.compile(f"{text[:-1]}.*?{last_char}")
+        cls.pattern = re.compile(f"{text[:-1]}(.*?{last_char})")
 
     def get_format(self, value):
         return self.format
@@ -191,7 +191,7 @@ class LogTextEdit(widgets.PlainTextEdit):
         self.handler.log_record.connect(self.append_record)
         self.handler.setLevel(logging.INFO)
         logger.addHandler(self.handler)
-        fmt = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        fmt = logging.Formatter('%(asctime)s - %(levelname)-10s - %(message)s')
         self.set_formatter(fmt)
 
     def wheelEvent(self, event):
@@ -223,18 +223,18 @@ class LogTextEdit(widgets.PlainTextEdit):
                 matches = list(r.pattern.finditer(line_text))
                 for m in reversed(matches):
                     c.move_position("end_of_block")
-                    pos = m.start() + start_of_line
+                    pos = m.start(0) + start_of_line
                     if start_of_line != 0:
                         pos += 1
                     c.set_position(pos)
-                    end = pos + m.end() - m.start()
+                    end = pos + m.end(0) - m.start(0)
                     c.select_text(pos, end)
-                    value = r.format_string(record)
+                    fmt_string = r.format_string(record)
+                    value = f"%{m.group(1)}" % fmt_string
                     # print(f"replacing {r.placeholder} ({pos} - {end}) with {value}")
                     c.insertText(value)
                     c.select_text(pos, pos + len(value))
-                    text = c.selectedText()
-                    fmt = r.get_format(text)
+                    fmt = r.get_format(fmt_string)
                     c.setCharFormat(fmt)
             c.clearSelection()
 
