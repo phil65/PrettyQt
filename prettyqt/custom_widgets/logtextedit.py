@@ -5,6 +5,7 @@
 
 import sys
 import logging
+import re
 
 from prettyqt import gui, widgets
 from prettyqt.utils import signallogger
@@ -29,6 +30,7 @@ class Highlighter(object):
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
         cls.format = gui.TextCharFormat(cls.color, cls.bold, cls.italic)
+        cls.pattern = re.compile(re.escape(cls.placeholder))
 
     def get_format(self, value):
         return self.format
@@ -205,22 +207,22 @@ class LogTextEdit(widgets.PlainTextEdit):
                 c.move_position("start_of_block")
                 c.move_position("end_of_block", "keep")
                 line_text = c.selectedText()
-                pos = line_text.find(r.placeholder)
-                if pos == -1:
-                    continue
-                pos += start_of_line
-                if start_of_line != 0:
-                    pos += 1
-                c.set_position(pos)
-                end = pos + len(r.placeholder)
-                c.select_text(pos, end)
-                value = r.get_value(record)
-                # print(f"replacing {r.placeholder} ({pos} - {end}) with {value}")
-                c.insertText(value)
-                c.select_text(pos, pos + len(value))
-                text = c.selectedText()
-                fmt = r.get_format(text)
-                c.setCharFormat(fmt)
+                matches = list(r.pattern.finditer(line_text))
+                for m in reversed(matches):
+                    c.move_position("end_of_block")
+                    pos = m.start() + start_of_line
+                    if start_of_line != 0:
+                        pos += 1
+                    c.set_position(pos)
+                    end = pos + len(r.placeholder)
+                    c.select_text(pos, end)
+                    value = r.get_value(record)
+                    # print(f"replacing {r.placeholder} ({pos} - {end}) with {value}")
+                    c.insertText(value)
+                    c.select_text(pos, pos + len(value))
+                    text = c.selectedText()
+                    fmt = r.get_format(text)
+                    c.setCharFormat(fmt)
             c.clearSelection()
 
 
