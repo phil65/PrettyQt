@@ -24,7 +24,9 @@ class Highlighter(object):
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
         cls.format = gui.TextCharFormat(cls.color, cls.bold, cls.italic)
-        cls.pattern = re.compile(re.escape(cls.placeholder))
+        text = re.escape(cls.placeholder)
+        last_char = text[-1]
+        cls.pattern = re.compile(f"{text[:-1]}.*?{last_char}")
 
     def get_format(self, value):
         return self.format
