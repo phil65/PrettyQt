@@ -219,9 +219,7 @@ class LogTextEdit(widgets.PlainTextEdit):
             c.move_position("start_of_block")
             start_pos = c.position()
             for r in self.rules:
-                c.set_position(start_pos)
-                c.move_position("end_of_block", "keep")
-                line_text = c.selectedText()
+                line_text = c.select_text(start_pos, "end_of_block")
                 matches = list(r.pattern.finditer(line_text))
                 for m in reversed(matches):
                     c.move_position("end_of_block")

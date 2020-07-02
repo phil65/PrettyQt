@@ -68,15 +68,24 @@ class TextCursor(QtGui.QTextCursor):
             selection = SELECTION_TYPES[selection]
         super().select(selection)
 
-    def select_text(self, start_pos: int, end_pos: int):
-        """select text from start position to end position
+    def select_text(self, start_pos: Union[int, str], end_pos: Union[int, str]) -> str:
+        """select text from start position to end position.
+
+        Positions can be either an integer index or a move operation
 
         Args:
             start_pos: Start position
             end_pos: End position
         """
-        self.set_position(start_pos)
-        self.set_position(end_pos, mode="keep")
+        if isinstance(start_pos, int):
+            self.set_position(start_pos)
+        else:
+            self.move_position(start_pos, "move")
+        if isinstance(end_pos, int):
+            self.set_position(end_pos, mode="keep")
+        else:
+            self.move_position(end_pos, mode="keep")
+        return self.selectedText()
 
     def replace_text(self, start_pos: int, len_or_op: Union[str, int], to_replace: str):
         self.set_position(start_pos)
