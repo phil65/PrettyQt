@@ -119,6 +119,8 @@ def test_textcursor():
     cursor.move_position("start", "move", 1)
     cursor.select("document")
     cursor.select_text(1, 3)
+    with cursor.edit_block():
+        pass
 
 
 def test_painter():

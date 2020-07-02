@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+import contextlib
+
 from qtpy import QtGui
 
 from prettyqt.utils import bidict
@@ -73,3 +75,9 @@ class TextCursor(QtGui.QTextCursor):
         """
         self.set_position(start_pos)
         self.set_position(end_pos, mode="keep")
+
+    @contextlib.contextmanager
+    def edit_block(self):
+        self.beginEditBlock()
+        yield
+        self.endEditBlock()
