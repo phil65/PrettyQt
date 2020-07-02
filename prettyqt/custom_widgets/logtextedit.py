@@ -165,7 +165,7 @@ class LevelName(Highlighter):
     formats = dict(DEBUG=gui.TextCharFormat(text_color="green", bold=True),
                    INFO=gui.TextCharFormat(text_color="blue", bold=True),
                    WARNING=gui.TextCharFormat(text_color="orange", bold=True),
-                   CRITICAL=gui.TextCharFormat(text_color="red", bold=True),
+                   CRITICAL=gui.TextCharFormat(text_color="darkorange", bold=True),
                    ERROR=gui.TextCharFormat(text_color="red", bold=True))
 
     def format_string(self, record):
@@ -225,7 +225,7 @@ class LogTextEdit(widgets.PlainTextEdit):
                     if start_of_line != 0:
                         pos += 1
                     c.set_position(pos)
-                    end = pos + len(r.placeholder)
+                    end = pos + m.end() - m.start()
                     c.select_text(pos, end)
                     value = r.format_string(record)
                     # print(f"replacing {r.placeholder} ({pos} - {end}) with {value}")
