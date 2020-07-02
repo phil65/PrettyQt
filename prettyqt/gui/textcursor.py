@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Union
+
 import contextlib
 
 from qtpy import QtGui
@@ -75,6 +77,15 @@ class TextCursor(QtGui.QTextCursor):
         """
         self.set_position(start_pos)
         self.set_position(end_pos, mode="keep")
+
+    def replace_text(self, start_pos: int, len_or_op: Union[str, int], to_replace: str):
+        self.set_position(start_pos)
+        if isinstance(len_or_op, int):
+            self.set_position(start_pos + len_or_op, "keep")
+        else:
+            self.move_position(len_or_op, "keep")
+        self.insertText(to_replace)
+        self.clearSelection()
 
     @contextlib.contextmanager
     def edit_block(self):

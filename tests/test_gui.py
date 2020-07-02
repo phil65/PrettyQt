@@ -118,6 +118,7 @@ def test_textcursor():
     cursor.set_position(1, "move")
     cursor.move_position("start", "move", 1)
     cursor.select("document")
+    cursor.replace_text(0, 2, "test")
     cursor.select_text(1, 3)
     with cursor.edit_block():
         pass
