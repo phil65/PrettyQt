@@ -7,14 +7,8 @@ import sys
 import logging
 import re
 
-from prettyqt import gui, widgets
+from prettyqt import gui, widgets, constants
 from prettyqt.utils import signallogger
-
-
-red_text = gui.TextCharFormat(text_color="red", bold=True)
-green_text = gui.TextCharFormat(text_color="green", bold=True)
-blue_text = gui.TextCharFormat(text_color="red", bold=True)
-orange_text = gui.TextCharFormat(text_color="orange", bold=True)
 
 
 class Highlighter(object):
@@ -162,11 +156,11 @@ class PathName(Highlighter):
 class LevelName(Highlighter):
     placeholder = "%(levelname)s"
     color = "red"
-    formats = dict(DEBUG=green_text,
-                   INFO=blue_text,
-                   WARNING=orange_text,
-                   CRITICAL=red_text,
-                   ERROR=red_text)
+    formats = dict(DEBUG=gui.TextCharFormat(text_color="green", bold=True),
+                   INFO=gui.TextCharFormat(text_color="blue", bold=True),
+                   WARNING=gui.TextCharFormat(text_color="orange", bold=True),
+                   CRITICAL=gui.TextCharFormat(text_color="red", bold=True),
+                   ERROR=gui.TextCharFormat(text_color="red", bold=True))
 
     def get_value(self, record):
         return record.levelname
@@ -189,8 +183,17 @@ class LogTextEdit(widgets.PlainTextEdit):
         self.handler.log_record.connect(self.append_record)
         self.handler.setLevel(logging.INFO)
         logger.addHandler(self.handler)
-        fmt = logging.Formatter('%(levelname)s - %(levelname)s - %(message)s')
+        fmt = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         self.set_formatter(fmt)
+
+    def wheelEvent(self, event):
+        """
+        handle wheel event for zooming
+        """
+        if event.modifiers() & constants.CTRL_MOD:
+            self.zoomIn() if event.angleDelta().y() > 0 else self.zoomOut()
+        else:
+            super().wheelEvent(event)
 
     def set_formatter(self, formatter):
         self.formatter = formatter
