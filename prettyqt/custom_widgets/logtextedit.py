@@ -29,7 +29,7 @@ class Highlighter(object):
     def get_format(self, value):
         return self.format
 
-    def get_value(self):
+    def format_string(self):
         raise NotImplementedError()
 
 
@@ -37,7 +37,7 @@ class AscTime(Highlighter):
     placeholder = "%(asctime)s"
     italic = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return self.formatter.formatTime(record)
 
 
@@ -45,15 +45,21 @@ class Message(Highlighter):
     placeholder = "%(message)s"
     bold = True
 
-    def get_value(self, record):
-        return record.msg % record.args
+    def format_string(self, record):
+        if isinstance(record.msg, Exception):
+            val = self.formatter.formatException(record.exc_info)
+        else:
+            val = record.msg % record.args
+        if "\n" in val:
+            val = f"\n{val}"
+        return val
 
 
 class FileName(Highlighter):
     placeholder = "%(filename)s"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return record.filename
 
 
@@ -61,7 +67,7 @@ class FuncName(Highlighter):
     placeholder = "%(funcName)s"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return record.funcName
 
 
@@ -69,7 +75,7 @@ class Module(Highlighter):
     placeholder = "%(module)s"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return record.module
 
 
@@ -77,7 +83,7 @@ class Created(Highlighter):
     placeholder = "%(created)f"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return str(record.created)
 
 
@@ -85,7 +91,7 @@ class LineNo(Highlighter):
     placeholder = "%(lineno)d"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return str(record.lineno)
 
 
@@ -93,7 +99,7 @@ class Msecs(Highlighter):
     placeholder = "%(msecs)d"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return str(record.msecs)
 
 
@@ -101,7 +107,7 @@ class Process(Highlighter):
     placeholder = "%(process)d"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return str(record.process)
 
 
@@ -109,7 +115,7 @@ class Thread(Highlighter):
     placeholder = "%(thread)d"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return str(record.thread)
 
 
@@ -117,7 +123,7 @@ class ThreadName(Highlighter):
     placeholder = "%(threadName)s"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return record.threadName
 
 
@@ -125,7 +131,7 @@ class ProcessName(Highlighter):
     placeholder = "%(processName)s"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return record.processName
 
 
@@ -133,7 +139,7 @@ class RelativeCreated(Highlighter):
     placeholder = "%(relativeCreated)s"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return record.relativeCreated
 
 
@@ -141,7 +147,7 @@ class Name(Highlighter):
     placeholder = "%(name)s"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return record.name
 
 
@@ -149,7 +155,7 @@ class PathName(Highlighter):
     placeholder = "%(pathname)s"
     bold = True
 
-    def get_value(self, record):
+    def format_string(self, record):
         return record.pathname
 
 
@@ -162,7 +168,7 @@ class LevelName(Highlighter):
                    CRITICAL=gui.TextCharFormat(text_color="red", bold=True),
                    ERROR=gui.TextCharFormat(text_color="red", bold=True))
 
-    def get_value(self, record):
+    def format_string(self, record):
         return record.levelname
 
     def get_format(self, value):
@@ -206,8 +212,10 @@ class LogTextEdit(widgets.PlainTextEdit):
         self.append_text(template)
         with self.current_cursor() as c:
             c.move_position("end")
+            c.move_position("start_of_block")
+            start_pos = c.position()
             for r in self.rules:
-                c.move_position("start_of_block")
+                c.set_position(start_pos)
                 c.move_position("end_of_block", "keep")
                 line_text = c.selectedText()
                 matches = list(r.pattern.finditer(line_text))
@@ -219,7 +227,7 @@ class LogTextEdit(widgets.PlainTextEdit):
                     c.set_position(pos)
                     end = pos + len(r.placeholder)
                     c.select_text(pos, end)
-                    value = r.get_value(record)
+                    value = r.format_string(record)
                     # print(f"replacing {r.placeholder} ({pos} - {end}) with {value}")
                     c.insertText(value)
                     c.select_text(pos, pos + len(value))
@@ -235,6 +243,14 @@ if __name__ == "__main__":
     w.set_layout("vertical")
     widget = LogTextEdit()
     logger = logging.getLogger()
+
+    def raise_exc():
+        try:
+            raise Exception("test")
+        except Exception as e:
+            logger.exception(e)
+
+    w.box.add(widgets.PushButton("Raise", callback=raise_exc))
     w.box.add(widgets.PushButton("Debug", callback=lambda: logger.debug("Debug")))
     w.box.add(widgets.PushButton("Info", callback=lambda: logger.info("Info")))
     w.box.add(widgets.PushButton("Warning", callback=lambda: logger.warning("Warning")))
