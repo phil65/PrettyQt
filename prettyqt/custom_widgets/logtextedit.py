@@ -20,13 +20,10 @@ class Highlighter(object):
 
     def __init__(self, formatter):
         self.formatter = formatter
-
-    def __init_subclass__(cls, **kwargs):
-        super().__init_subclass__(**kwargs)
-        cls.format = gui.TextCharFormat(cls.color, cls.bold, cls.italic)
-        text = re.escape(cls.placeholder)
-        last_char = text[-1]
-        cls.pattern = re.compile(f"{text[:-1]}(.*?{last_char})")
+        self.format = gui.TextCharFormat(self.color, self.bold, self.italic)
+        text = re.escape(self.placeholder)
+        self.pattern = re.compile(f"{text[:-1]}(.*?{text[-1]})")
+        self.is_included = self.pattern.search(self.formatter._fmt) is not None
 
     def get_format(self, value):
         return self.format
@@ -206,9 +203,8 @@ class LogTextEdit(widgets.PlainTextEdit):
     def set_formatter(self, formatter):
         self.formatter = formatter
         self.handler.setFormatter(self.formatter)
-        self.rules = [klass(self.formatter)
-                      for klass in Highlighter.__subclasses__()
-                      if klass.pattern.search(self.formatter._fmt) is not None]
+        rules = [klass(self.formatter) for klass in Highlighter.__subclasses__()]
+        self.rules = [r for r in rules if r.is_included]
 
     def append_record(self, record):
         start_of_line = len(self.text())
