@@ -191,7 +191,7 @@ class LogTextEdit(widgets.PlainTextEdit):
         self.handler.log_record.connect(self.append_record)
         self.handler.setLevel(logging.INFO)
         logger.addHandler(self.handler)
-        fmt = logging.Formatter('%(asctime)s - %(levelname)-10s - %(message)s')
+        fmt = logging.Formatter('%(asctime)s - %(levelname)-7s - %(message)s')
         self.set_formatter(fmt)
 
     def wheelEvent(self, event):
@@ -206,7 +206,9 @@ class LogTextEdit(widgets.PlainTextEdit):
     def set_formatter(self, formatter):
         self.formatter = formatter
         self.handler.setFormatter(self.formatter)
-        self.rules = [klass(self.formatter) for klass in Highlighter.__subclasses__()]
+        self.rules = [klass(self.formatter)
+                      for klass in Highlighter.__subclasses__()
+                      if klass.pattern.search(self.formatter._fmt) is not None]
 
     def append_record(self, record):
         template = self.formatter._fmt
