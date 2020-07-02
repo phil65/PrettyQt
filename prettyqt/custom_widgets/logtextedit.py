@@ -222,7 +222,6 @@ class LogTextEdit(widgets.PlainTextEdit):
                 line_text = c.select_text(start_pos, "end_of_block")
                 matches = list(r.pattern.finditer(line_text))
                 for m in reversed(matches):
-                    c.move_position("end_of_block")
                     pos = m.start(0) + start_of_line
                     if start_of_line != 0:
                         pos += 1
