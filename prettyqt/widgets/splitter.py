@@ -72,7 +72,7 @@ class Splitter(QtWidgets.QSplitter):
                 self.add_layout(i)
 
     @classmethod
-    def from_widgets(cls, widgets, horizontal: bool = False, parent=None):
+    def from_widgets(cls, *widgets, horizontal: bool = False, parent=None):
         orientation = "horizontal" if horizontal else "vertical"
         splitter = cls(orientation, parent=parent)
         for widget in widgets:
