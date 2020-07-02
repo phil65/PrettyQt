@@ -80,21 +80,27 @@ class TextCursor(QtGui.QTextCursor):
         if isinstance(start_pos, int):
             self.set_position(start_pos)
         else:
-            self.move_position(start_pos, "move")
+            self.move_position(start_pos)
         if isinstance(end_pos, int):
             self.set_position(end_pos, mode="keep")
         else:
             self.move_position(end_pos, mode="keep")
         return self.selectedText()
 
-    def replace_text(self, start_pos: int, len_or_op: Union[str, int], to_replace: str):
-        self.set_position(start_pos)
-        if isinstance(len_or_op, int):
-            self.set_position(start_pos + len_or_op, "keep")
+    def replace_text(self,
+                     start_pos: int,
+                     end_pos: Union[str, int],
+                     to_replace: str):
+        if isinstance(start_pos, int):
+            self.set_position(start_pos)
         else:
-            self.move_position(len_or_op, "keep")
+            self.move_position(start_pos)
+        if isinstance(end_pos, int):
+            self.set_position(end_pos, mode="keep")
+        else:
+            self.move_position(end_pos, mode="keep")
         self.insertText(to_replace)
-        self.clearSelection()
+        self.select_text(start_pos, start_pos + len(to_replace))
 
     @contextlib.contextmanager
     def edit_block(self):

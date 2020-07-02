@@ -211,9 +211,8 @@ class LogTextEdit(widgets.PlainTextEdit):
                       if klass.pattern.search(self.formatter._fmt) is not None]
 
     def append_record(self, record):
-        template = self.formatter._fmt
         start_of_line = len(self.text())
-        self.append_text(template)
+        self.append_text(self.formatter._fmt)
         with self.current_cursor() as c:
             c.move_position("end")
             c.move_position("start_of_block")
@@ -225,14 +224,10 @@ class LogTextEdit(widgets.PlainTextEdit):
                     pos = m.start(0) + start_of_line
                     if start_of_line != 0:
                         pos += 1
-                    c.set_position(pos)
                     end = pos + m.end(0) - m.start(0)
-                    c.select_text(pos, end)
                     fmt_string = r.format_string(record)
                     value = f"%{m.group(1)}" % fmt_string
-                    # print(f"replacing {r.placeholder} ({pos} - {end}) with {value}")
-                    c.insertText(value)
-                    c.select_text(pos, pos + len(value))
+                    c.replace_text(pos, end, value)
                     fmt = r.get_format(fmt_string)
                     c.setCharFormat(fmt)
             c.clearSelection()
