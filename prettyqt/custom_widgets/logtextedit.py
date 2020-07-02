@@ -34,7 +34,7 @@ class Highlighter(object):
         return self.format
 
     def get_value(self):
-        return str(self.value())
+        raise NotImplementedError()
 
 
 class AscTime(Highlighter):
@@ -50,7 +50,111 @@ class Message(Highlighter):
     bold = True
 
     def get_value(self, record):
-        return record.msg
+        return record.msg % record.args
+
+
+class FileName(Highlighter):
+    placeholder = "%(filename)s"
+    bold = True
+
+    def get_value(self, record):
+        return record.filename
+
+
+class FuncName(Highlighter):
+    placeholder = "%(funcName)s"
+    bold = True
+
+    def get_value(self, record):
+        return record.funcName
+
+
+class Module(Highlighter):
+    placeholder = "%(module)s"
+    bold = True
+
+    def get_value(self, record):
+        return record.module
+
+
+class Created(Highlighter):
+    placeholder = "%(created)f"
+    bold = True
+
+    def get_value(self, record):
+        return str(record.created)
+
+
+class LineNo(Highlighter):
+    placeholder = "%(lineno)d"
+    bold = True
+
+    def get_value(self, record):
+        return str(record.lineno)
+
+
+class Msecs(Highlighter):
+    placeholder = "%(msecs)d"
+    bold = True
+
+    def get_value(self, record):
+        return str(record.msecs)
+
+
+class Process(Highlighter):
+    placeholder = "%(process)d"
+    bold = True
+
+    def get_value(self, record):
+        return str(record.process)
+
+
+class Thread(Highlighter):
+    placeholder = "%(thread)d"
+    bold = True
+
+    def get_value(self, record):
+        return str(record.thread)
+
+
+class ThreadName(Highlighter):
+    placeholder = "%(threadName)s"
+    bold = True
+
+    def get_value(self, record):
+        return record.threadName
+
+
+class ProcessName(Highlighter):
+    placeholder = "%(processName)s"
+    bold = True
+
+    def get_value(self, record):
+        return record.processName
+
+
+class RelativeCreated(Highlighter):
+    placeholder = "%(relativeCreated)s"
+    bold = True
+
+    def get_value(self, record):
+        return record.relativeCreated
+
+
+class Name(Highlighter):
+    placeholder = "%(name)s"
+    bold = True
+
+    def get_value(self, record):
+        return record.name
+
+
+class PathName(Highlighter):
+    placeholder = "%(pathname)s"
+    bold = True
+
+    def get_value(self, record):
+        return record.pathname
 
 
 class LevelName(Highlighter):
@@ -74,6 +178,7 @@ class LogTextEdit(widgets.PlainTextEdit):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_font("Consolas")
+        self.formatter = None
         self.append_text(f"Python version: {sys.version}")
         logger = logging.getLogger()
         # self.handler = signallogger.LineSignalLogger()
@@ -81,10 +186,14 @@ class LogTextEdit(widgets.PlainTextEdit):
         self.handler = signallogger.RecordSignalLogger()
         self.handler.log_record.connect(self.append_record)
         self.handler.setLevel(logging.INFO)
-        self.formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        logger.addHandler(self.handler)
+        fmt = logging.Formatter('%(levelname)s - %(levelname)s - %(message)s')
+        self.set_formatter(fmt)
+
+    def set_formatter(self, formatter):
+        self.formatter = formatter
         self.handler.setFormatter(self.formatter)
         self.rules = [klass(self.formatter) for klass in Highlighter.__subclasses__()]
-        logger.addHandler(self.handler)
 
     def append_record(self, record):
         template = self.formatter._fmt
@@ -97,20 +206,21 @@ class LogTextEdit(widgets.PlainTextEdit):
                 c.move_position("end_of_block", "keep")
                 line_text = c.selectedText()
                 pos = line_text.find(r.placeholder)
-                if pos > -1:
-                    pos += start_of_line
-                    if start_of_line != 0:
-                        pos += 1
-                    c.set_position(pos)
-                    end = pos + len(r.placeholder)
-                    c.select_text(pos, end)
-                    value = r.get_value(record)
-                    # print(f"replacing {r.placeholder} ({pos} - {end}) with {value}")
-                    c.insertText(value)
-                    c.select_text(pos, pos + len(value))
-                    text = c.selectedText()
-                    fmt = r.get_format(text)
-                    c.setCharFormat(fmt)
+                if pos == -1:
+                    continue
+                pos += start_of_line
+                if start_of_line != 0:
+                    pos += 1
+                c.set_position(pos)
+                end = pos + len(r.placeholder)
+                c.select_text(pos, end)
+                value = r.get_value(record)
+                # print(f"replacing {r.placeholder} ({pos} - {end}) with {value}")
+                c.insertText(value)
+                c.select_text(pos, pos + len(value))
+                text = c.selectedText()
+                fmt = r.get_format(text)
+                c.setCharFormat(fmt)
             c.clearSelection()
 
 
