@@ -36,6 +36,13 @@ STYLE_HINTS = bidict(any=QtGui.QFont.AnyStyle,
 
 class TextCharFormat(QtGui.QTextCharFormat):
 
+    def __init__(self, text_color="black", bold=False, italic=False):
+        super().__init__()
+        self.set_foreground_color(text_color)
+        if bold:
+            self.set_font_weight("bold")
+        self.setFontItalic(italic)
+
     def set_foreground_color(self, color):
         if isinstance(color, (list, tuple)):
             color = gui.Color(*color)
@@ -117,3 +124,6 @@ class TextCharFormat(QtGui.QTextCharFormat):
         if hint not in STYLE_HINTS:
             raise ValueError("Invalid font style hint")
         self.setFontStyleHint(STYLE_HINTS[hint])
+
+    def select_full_width(self, value: bool = True):
+        self.setProperty(QtGui.QTextFormat.FullWidthSelection, value)

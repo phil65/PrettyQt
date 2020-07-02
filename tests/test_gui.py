@@ -204,6 +204,9 @@ def test_textcharformat():
     fmt.set_background_color("yellow")
     with pytest.raises(ValueError):
         fmt.set_font_weight("test")
+    fmt = gui.TextCharFormat(bold=True)
+    assert fmt.get_font_weight() == "bold"
+    fmt.select_full_width()
 
 
 def test_validator():
