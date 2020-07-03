@@ -11,6 +11,18 @@ from abc import ABC, abstractmethod
 from prettyqt import gui, widgets, constants
 from prettyqt.utils import signallogger
 
+# from SublimeText Regex:
+# (?x:
+#   (?:.? [<>=^])?     # fill align
+#   [ +-]?             # sign
+#   \#?                # alternate form
+#   # technically, octal and hexadecimal integers are also supported as 'width'
+#   \d*                # width
+#   ,?                 # thousands separator
+#   (?:\.\d+)?         # precision
+#   [bcdeEfFgGnosxX%]? # type
+# )
+
 
 class Highlighter(ABC):
     placeholder: str
