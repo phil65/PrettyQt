@@ -36,9 +36,6 @@ class StatusBar(QtWidgets.QStatusBar):
     def add_action(self, action):
         self.addAction(action)
 
-    def set_color(self, color):
-        self.setStyleSheet(f"background-color: {color};")
-
     def add_widget(self, widget, permanent=False):
         if permanent:
             self.addPermanentWidget(widget)

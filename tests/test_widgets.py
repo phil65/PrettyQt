@@ -675,7 +675,6 @@ def test_slider(qtbot):
 def test_statusbar(qtbot):
     widget = widgets.MainWindow()
     status_bar = widgets.StatusBar()
-    status_bar.set_color("black")
     label = widgets.Label("test")
     status_bar.addWidget(label)
     status_bar.setup_default_bar()
