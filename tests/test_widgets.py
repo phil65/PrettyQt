@@ -494,10 +494,10 @@ def test_mainwindow(qtbot):
 
 def test_mdiarea(qtbot):
     area = widgets.MdiArea()
-    area.set_window_order("activation")
+    area.set_window_order("activation_history")
     with pytest.raises(ValueError):
         area.set_window_order("test")
-    assert area.get_window_order() == "activation"
+    assert area.get_window_order() == "activation_history"
     area.set_view_mode("default")
     with pytest.raises(ValueError):
         area.set_view_mode("test")

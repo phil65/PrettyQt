@@ -14,7 +14,7 @@ VIEW_MODES = bidict(default=QtWidgets.QMdiArea.SubWindowView,
 
 WINDOW_ORDERS = bidict(creation=QtWidgets.QMdiArea.CreationOrder,
                        stacking=QtWidgets.QMdiArea.StackingOrder,
-                       activation=QtWidgets.QMdiArea.ActivationHistoryOrder)
+                       activation_history=QtWidgets.QMdiArea.ActivationHistoryOrder)
 
 TAB_POSITIONS = bidict(north=QtWidgets.QTabWidget.North,
                        south=QtWidgets.QTabWidget.South,
@@ -59,7 +59,7 @@ class MdiArea(QtWidgets.QMdiArea):
     def set_window_order(self, mode: str):
         """set the window order behaviour for the MDI area
 
-        Valid values are "creation", "stacking", "activation"
+        Valid values are "creation", "stacking", "activation_history"
 
         Args:
             mode: window order behaviour to use
@@ -74,7 +74,7 @@ class MdiArea(QtWidgets.QMdiArea):
     def get_window_order(self) -> str:
         """returns current window order
 
-        Possible values: "creation", "stacking", "activation"
+        Possible values: "creation", "stacking", "activation_history"
 
         Returns:
             view mode
