@@ -4,7 +4,20 @@
 """
 
 from qtpy import QtGui
+
 from prettyqt import gui
+from prettyqt.utils import bidict
+
+
+STYLE_HINTS = bidict(any=QtGui.QFont.AnyStyle,
+                     sans_serif=QtGui.QFont.SansSerif,
+                     serif=QtGui.QFont.Serif,
+                     typewriter=QtGui.QFont.TypeWriter,
+                     decorative=QtGui.QFont.Decorative,
+                     monospace=QtGui.QFont.Monospace,
+                     fantasy=QtGui.QFont.Fantasy,
+                     cursive=QtGui.QFont.Cursive,
+                     system=QtGui.QFont.System)
 
 
 class Font(QtGui.QFont):
@@ -39,6 +52,22 @@ class Font(QtGui.QFont):
         font = cls("Consolas", size)
         # font.setStyleHint()
         return font
+
+    def set_style_hint(self, hint: str):
+        """sets the style hint
+
+        Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",
+        "monospace", "fantasy", "cursive", "system"
+
+        Args:
+            hint: style hint
+
+        Raises:
+            ValueError: invalid style hint
+        """
+        if hint not in STYLE_HINTS:
+            raise ValueError("Invalid style hint")
+        self.setStyleHint(STYLE_HINTS[hint])
 
 
 if __name__ == "__main__":

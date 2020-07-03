@@ -23,15 +23,7 @@ UNDERLINE_STYLES = bidict(none=QtGui.QTextCharFormat.NoUnderline,
                           wave=QtGui.QTextCharFormat.WaveUnderline,
                           spellcheck=QtGui.QTextCharFormat.SpellCheckUnderline)
 
-STYLE_HINTS = bidict(any=QtGui.QFont.AnyStyle,
-                     sans_serif=QtGui.QFont.SansSerif,
-                     serif=QtGui.QFont.Serif,
-                     typewriter=QtGui.QFont.TypeWriter,
-                     decorative=QtGui.QFont.Decorative,
-                     monospace=QtGui.QFont.Monospace,
-                     fantasy=QtGui.QFont.Fantasy,
-                     cursive=QtGui.QFont.Cursive,
-                     system=QtGui.QFont.System)
+STYLE_HINTS = gui.font.STYLE_HINTS
 
 
 class TextCharFormat(QtGui.QTextCharFormat):
@@ -109,7 +101,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         """
         return UNDERLINE_STYLES.inv[self.underlineStyle()]
 
-    def set_font_style_hint(self, hint):
+    def set_font_style_hint(self, hint: str):
         """sets the font style hint
 
         Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",

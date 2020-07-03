@@ -53,6 +53,9 @@ def test_font():
     repr(font)
     font.metrics
     font = gui.Font.mono()
+    with pytest.raises(ValueError):
+        font.set_style_hint("test")
+    font.set_style_hint("monospace")
 
 
 def test_fontmetrics():
