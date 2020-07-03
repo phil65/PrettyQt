@@ -211,7 +211,8 @@ class LogTextEdit(widgets.PlainTextEdit):
     def append_record(self, record):
         start_of_line = len(self.text())
         self.append_text(self.formatter._fmt)
-        with self.current_cursor() as c:
+        old_fmt = self.textCursor().charFormat()
+        with self.create_cursor() as c:
             c.move_position("end")
             c.move_position("start_of_block")
             start_pos = c.position()
@@ -228,7 +229,8 @@ class LogTextEdit(widgets.PlainTextEdit):
                     c.replace_text(pos, end, value)
                     fmt = r.get_format(fmt_string)
                     c.setCharFormat(fmt)
-            c.clearSelection()
+                    c.clearSelection()
+                    c.setCharFormat(old_fmt)
 
 
 if __name__ == "__main__":
