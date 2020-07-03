@@ -6,12 +6,13 @@
 import sys
 import logging
 import re
+from abc import ABC, abstractmethod
 
 from prettyqt import gui, widgets, constants
 from prettyqt.utils import signallogger
 
 
-class Highlighter(object):
+class Highlighter(ABC):
     placeholder: str
     color = "black"
     italic = False
@@ -25,9 +26,10 @@ class Highlighter(object):
         self.pattern = re.compile(f"{text[:-1]}(.*?{text[-1]})")
         self.is_included = self.pattern.search(self.formatter._fmt) is not None
 
-    def get_format(self, value):
+    def get_format(self, value) -> gui.TextCharFormat:
         return self.format
 
+    @abstractmethod
     def format_string(self):
         raise NotImplementedError()
 
@@ -36,7 +38,7 @@ class AscTime(Highlighter):
     placeholder = "%(asctime)s"
     italic = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return self.formatter.formatTime(record)
 
 
@@ -44,7 +46,7 @@ class Message(Highlighter):
     placeholder = "%(message)s"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         if isinstance(record.msg, Exception):
             val = self.formatter.formatException(record.exc_info)
         else:
@@ -58,7 +60,7 @@ class FileName(Highlighter):
     placeholder = "%(filename)s"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return record.filename
 
 
@@ -66,7 +68,7 @@ class FuncName(Highlighter):
     placeholder = "%(funcName)s"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return record.funcName
 
 
@@ -74,7 +76,7 @@ class Module(Highlighter):
     placeholder = "%(module)s"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return record.module
 
 
@@ -82,7 +84,7 @@ class Created(Highlighter):
     placeholder = "%(created)f"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return str(record.created)
 
 
@@ -90,7 +92,7 @@ class LineNo(Highlighter):
     placeholder = "%(lineno)d"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return str(record.lineno)
 
 
@@ -98,7 +100,7 @@ class Msecs(Highlighter):
     placeholder = "%(msecs)d"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return str(record.msecs)
 
 
@@ -106,7 +108,7 @@ class Process(Highlighter):
     placeholder = "%(process)d"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return str(record.process)
 
 
@@ -114,7 +116,7 @@ class Thread(Highlighter):
     placeholder = "%(thread)d"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return str(record.thread)
 
 
@@ -122,7 +124,7 @@ class ThreadName(Highlighter):
     placeholder = "%(threadName)s"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return record.threadName
 
 
@@ -130,7 +132,7 @@ class ProcessName(Highlighter):
     placeholder = "%(processName)s"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return record.processName
 
 
@@ -138,7 +140,7 @@ class RelativeCreated(Highlighter):
     placeholder = "%(relativeCreated)s"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return record.relativeCreated
 
 
@@ -146,7 +148,7 @@ class Name(Highlighter):
     placeholder = "%(name)s"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return record.name
 
 
@@ -154,7 +156,7 @@ class PathName(Highlighter):
     placeholder = "%(pathname)s"
     bold = True
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return record.pathname
 
 
@@ -167,10 +169,10 @@ class LevelName(Highlighter):
                    CRITICAL=gui.TextCharFormat(text_color="darkorange", bold=True),
                    ERROR=gui.TextCharFormat(text_color="red", bold=True))
 
-    def format_string(self, record):
+    def format_string(self, record: logging.LogRecord) -> str:
         return record.levelname
 
-    def get_format(self, value):
+    def get_format(self, value) -> gui.TextCharFormat:
         return self.formats[value]
 
 
