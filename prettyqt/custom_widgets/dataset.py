@@ -13,6 +13,7 @@ from prettyqt import custom_validators, custom_widgets, gui, widgets
 class DataItem(object):
     def __init__(self, label, value=None, optional=False):
         self.set_value(value)
+        self.name = None
         self.label = label
         self.optional = optional
         self.colspan = 1
@@ -403,6 +404,7 @@ class DataSetMeta(type):
         items = {item._name: item for b in filtered for item in b._items}
         for attrname, value in list(dct.items()):
             if isinstance(value, DataItem):
+                value.name = attrname
                 items[attrname] = value
         dct["_items"] = items
         return type.__new__(mcs, name, bases, dct)
