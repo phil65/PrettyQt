@@ -225,7 +225,10 @@ class LogTextEdit(widgets.PlainTextEdit):
                         pos += 1
                     end = pos + m.end(0) - m.start(0)
                     fmt_string = r.format_string(record)
-                    value = f"%{m.group(1)}" % fmt_string
+                    try:
+                        value = f"%{m.group(1)}" % fmt_string
+                    except TypeError:
+                        value = fmt_string
                     c.replace_text(pos, end, value)
                     fmt = r.get_format(fmt_string)
                     c.setCharFormat(fmt)
