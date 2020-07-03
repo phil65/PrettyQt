@@ -123,6 +123,7 @@ def test_textcursor():
     cursor.select("document")
     cursor.replace_text(0, 2, "test")
     cursor.select_text(1, 3)
+    cursor.span()
     with cursor.edit_block():
         pass
 

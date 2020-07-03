@@ -68,6 +68,9 @@ class TextCursor(QtGui.QTextCursor):
             selection = SELECTION_TYPES[selection]
         super().select(selection)
 
+    def span(self) -> tuple:
+        return (self.anchor(), self.position())
+
     def select_text(self, start_pos: Union[int, str], end_pos: Union[int, str]) -> str:
         """select text from start position to end position.
 
