@@ -3,8 +3,6 @@
 @author: Philipp Temminghoff
 """
 
-from __future__ import annotations
-
 import pathlib
 import sys
 from typing import Optional
@@ -89,7 +87,7 @@ class Application(QtWidgets.QApplication):
         return None
 
     @classmethod
-    def create_default_app(cls) -> Application:
+    def create_default_app(cls) -> "Application":
         cls.disable_window_help_button()
         # cls.setAttribute(QtCore.Qt.AA_UseOpenGLES)
         cls.use_hdpi_bitmaps()
