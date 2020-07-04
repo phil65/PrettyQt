@@ -58,6 +58,7 @@ deploy:
       python: 3.7
   - provider: pages
     cleanup: False
+    strategy: git
     local_dir: docs/site
     token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
     keep_history: true
