@@ -1,0 +1,4 @@
+core module
+==============
+
+::: prettyqt.core

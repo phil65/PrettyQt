@@ -4,7 +4,6 @@
 """The setup script."""
 import sys
 from setuptools import find_packages, setup
-from sphinx.setup_command import BuildDoc
 
 with open("README.rst") as readme_file:
     README = readme_file.read()
@@ -48,6 +47,5 @@ setup(
     tests_require=TEST_REQUIREMENTS,
     url="https://github.com/phil65/prettyqt",
     version="0.73.1",
-    zip_safe=False,
-    cmdclass={"build_sphinx": BuildDoc}
+    zip_safe=False
 )

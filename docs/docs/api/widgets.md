@@ -1,0 +1,4 @@
+Widgets module
+==============
+
+::: prettyqt.widgets

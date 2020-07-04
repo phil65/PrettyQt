@@ -39,6 +39,7 @@ script:
 
 after_success:
   - codecov
+  - mkdocs gh-deploy
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the
@@ -55,3 +56,12 @@ deploy:
     tags: true
     repo: phil65/PrettyQt
     python: 3.7
+
+deploy:
+  provider: pages
+  cleanup: False
+  local_dir: docs/site
+  github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: master

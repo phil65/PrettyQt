@@ -9,7 +9,7 @@ try:
 except:
 	from urllib.request import pathname2url
 
-webbrowser.open("file://" + pathname2url(os.path.abspath(sys.argv[1])))
+webbrowser.open("file:" + pathname2url(os.path.abspath(sys.argv[1])))
 endef
 export BROWSER_PYSCRIPT
 
@@ -65,13 +65,9 @@ coverage: ## check code coverage quickly with the default Python
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
-docs: ## generate Sphinx HTML documentation, including API docs
-	rm -f docs/prettyqt.rst
-	rm -f docs/modules.rst
-	sphinx-apidoc -o docs/ prettyqt
-	$(MAKE) -C docs clean
-	$(MAKE) -C docs html
-	$(BROWSER) docs/_build/html/index.html
+docs: ## generate HTML documentation
+	$(MAKE) -C docs build
+	$(BROWSER) docs/site/index.html
 
 release: dist ## package and upload a release
 	twine upload dist/*

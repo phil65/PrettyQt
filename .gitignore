@@ -53,20 +53,11 @@ data.pkl
 *.mo
 *.pot
 
-# Django stuff:
-*.log
-local_settings.py
-
-# Flask stuff:
-instance/
-.webassets-cache
-
 # Scrapy stuff:
 .scrapy
 
-# Sphinx documentation
-docs/_build/
-docs/prettyqt*.rst
+# Mkdocs documentation
+docs/site/
 
 # PyBuilder
 target/
@@ -99,7 +90,7 @@ ENV/
 .ropeproject
 
 # mkdocs documentation
-/site
+docs/site
 
 # mypy
 .mypy_cache/
