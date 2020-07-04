@@ -39,7 +39,7 @@ script:
 
 after_success:
   - codecov
-  - mkdocs gh-deploy
+  - make docs
 
 # Assuming you have installed the travis-ci CLI tool, after you
 # create the Github repo and add it to Travis, run the
