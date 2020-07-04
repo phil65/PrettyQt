@@ -1,4 +1,4 @@
-Widgets module
+widgets module
 ==============
 
 ::: prettyqt.widgets

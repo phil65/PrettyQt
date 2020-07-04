@@ -1,0 +1,4 @@
+charts module
+=============
+
+::: prettyqt.charts
