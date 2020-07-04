@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from __future__ import annotations
+
 import pathlib
 import sys
 from typing import Optional
@@ -62,12 +64,12 @@ class Application(QtWidgets.QApplication):
         return self.exec_()
 
     @classmethod
-    def use_hdpi_bitmaps(cls):
-        cls.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps)
+    def use_hdpi_bitmaps(cls, state: bool = True):
+        cls.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, state)
 
     @classmethod
-    def disable_window_help_button(cls):
-        cls.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton)
+    def disable_window_help_button(cls, state: bool = True):
+        cls.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton, state)
 
     @classmethod
     def copy_to_clipboard(cls, text: str):
@@ -87,7 +89,7 @@ class Application(QtWidgets.QApplication):
         return None
 
     @classmethod
-    def create_default_app(cls) -> "Application":
+    def create_default_app(cls) -> Application:
         cls.disable_window_help_button()
         # cls.setAttribute(QtCore.Qt.AA_UseOpenGLES)
         cls.use_hdpi_bitmaps()
