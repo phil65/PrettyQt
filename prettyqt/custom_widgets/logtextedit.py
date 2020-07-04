@@ -35,7 +35,8 @@ class Highlighter(ABC):
         self.formatter = formatter
         self.format = gui.TextCharFormat(self.color, self.bold, self.italic)
         text = re.escape(self.placeholder)
-        self.pattern = re.compile(f"{text[:-1]}(.*?{text[-1]})")
+        pat = fr"{text[:-1]}([ +-]?\#?\#?\d*,?(?:\.\d+)?[bcdeEfFgGnosxX%]?)"
+        self.pattern = re.compile(pat)
         self.is_included = self.pattern.search(self.formatter._fmt) is not None
 
     def get_format(self, value) -> gui.TextCharFormat:
@@ -202,7 +203,7 @@ class LogTextEdit(widgets.PlainTextEdit):
         self.handler.log_record.connect(self.append_record)
         self.handler.setLevel(logging.INFO)
         logger.addHandler(self.handler)
-        fmt = logging.Formatter('%(asctime)s - %(levelname)-7s - %(message)s')
+        fmt = logging.Formatter('%(asctime)s  %(levelname)i  %(message)s')
         self.set_formatter(fmt)
 
     def wheelEvent(self, event):
@@ -239,7 +240,7 @@ class LogTextEdit(widgets.PlainTextEdit):
                     fmt_string = r.format_string(record)
                     try:
                         value = f"%{m.group(1)}" % fmt_string
-                    except TypeError:
+                    except (TypeError, ValueError):
                         value = fmt_string
                     c.replace_text(pos, end, value)
                     fmt = r.get_format(fmt_string)
