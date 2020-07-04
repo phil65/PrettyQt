@@ -77,7 +77,7 @@ class MessageBox(QtWidgets.QMessageBox):
     def get_standard_buttons(self) -> list:
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
 
-    def add_button(self, button: str):
+    def add_button(self, button: str) -> QtWidgets.QPushButton:
         """add a default button
 
         Valid arguments: "none", "cancel", "ok", "save", "open", "close",
@@ -110,7 +110,7 @@ class MessageBox(QtWidgets.QMessageBox):
         Allowed values are "rich", "plain", "auto"
 
         Args:
-            mode: text format to use
+            text_format: text format to use
 
         Raises:
             ValueError: text format does not exist

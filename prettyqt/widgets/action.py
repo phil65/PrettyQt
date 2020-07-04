@@ -101,7 +101,7 @@ class Action(QtWidgets.QAction):
         Allowed values are "low", "normal", "high"
 
         Args:
-            mode: priority for the action
+            priority: priority for the action
 
         Raises:
             ValueError: priority does not exist
@@ -126,7 +126,7 @@ class Action(QtWidgets.QAction):
         Allowed values are "widget", "widget_with_children", "window", "application"
 
         Args:
-            mode: shortcut context
+            context: shortcut context
 
         Raises:
             ValueError: shortcut context does not exist

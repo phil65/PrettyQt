@@ -32,7 +32,7 @@ class Cursor(QtGui.QCursor):
             raise ValueError("Invalid shape type.")
         self.setShape(SHAPES[shape])
 
-    def get_shape(self):
+    def get_shape(self) -> str:
         """returns current cursor shape
 
         Possible values: "arrow", "uparrow", "cross", "wait", "caret"

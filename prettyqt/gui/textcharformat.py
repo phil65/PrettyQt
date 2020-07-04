@@ -108,7 +108,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         "monospace", "fantasy", "cursive", "system"
 
         Args:
-            style: font style hint
+            hint: font style hint
 
         Raises:
             ValueError: invalid font style hint

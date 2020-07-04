@@ -91,7 +91,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             c.select_text(start, end)
 
     def set_read_only(self, value: bool = True):
-        """set test to read only
+        """make the PlainTextEdit read-only
 
         Args:
             value: True, for read-only, otherwise False
@@ -125,7 +125,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         Allowed values are "none", "word", "manual", "anywhere", "boundary_or_anywhere"
 
         Args:
-            style: word wrap mode to use
+            mode: word wrap mode to use
 
         Raises:
             ValueError: wrap mode does not exist
@@ -140,7 +140,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         Allowed values are "none" and "widget width"
 
         Args:
-            style: line wrap mode to use
+            mode: line wrap mode to use
 
         Raises:
             ValueError: line wrap mode does not exist

@@ -98,7 +98,7 @@ class Label(QtWidgets.QLabel):
         Allowed values are "rich", "plain", "auto"
 
         Args:
-            mode: text format to use
+            text_format: text format to use
 
         Raises:
             ValueError: text format does not exist
@@ -123,7 +123,7 @@ class Label(QtWidgets.QLabel):
         Allowed values are "none", "by_mouse", "by_keyboard", "text_editable"
 
         Args:
-            mode: text interaction mode to use
+            types: text interaction mode to use
 
         Raises:
             ValueError: text interaction mode does not exist

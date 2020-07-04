@@ -3,7 +3,7 @@
 @author: Philipp Temminghoff
 """
 
-from typing import List
+from typing import List, Callable, Union, Optional
 
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
@@ -88,7 +88,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         Allowed values are "horizontal", "vertical"
 
         Args:
-            mode: orientation for the button box
+            orientation: orientation for the button box
 
         Raises:
             ValueError: orientation does not exist
@@ -110,7 +110,9 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def add_default_buttons(self, buttons: List[str]):
         return [self.add_default_button(btn) for btn in buttons]
 
-    def add_default_button(self, button: str, callback=None):
+    def add_default_button(self,
+                           button: str,
+                           callback: Optional[Callable] = None) -> QtWidgets.QPushButton:
         """add a default button
 
         Valid arguments: "cancel", "ok", "save", "open", "close",
@@ -136,7 +138,10 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
             btn.clicked.connect(callback)
         return btn
 
-    def add_button(self, button, role="accept", callback=None):
+    def add_button(self,
+                   button: Union[QtWidgets.QPushButton, str],
+                   role: str = "accept",
+                   callback: Optional[Callable] = None) -> widgets.PushButton:
         """add a button
 
         Args:

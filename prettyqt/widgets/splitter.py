@@ -85,7 +85,7 @@ class Splitter(QtWidgets.QSplitter):
         Allowed values are "horizontal", "vertical"
 
         Args:
-            mode: orientation for the splitter
+            orientation: orientation for the splitter
 
         Raises:
             ValueError: orientation does not exist

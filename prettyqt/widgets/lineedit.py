@@ -108,7 +108,7 @@ class LineEdit(QtWidgets.QLineEdit):
         Valid values are "normal", "no_echo", "password", "echo_on_edit"
 
         Args:
-            policy: echo mode to use
+            mode: echo mode to use
 
         Raises:
             ValueError: invalid echo mode

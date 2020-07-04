@@ -80,7 +80,7 @@ class Settings(QtCore.QSettings):
         possible values are "native", "ini"
 
         Args:
-            mode: the default format to use
+            fmt: the default format to use
 
         Raises:
             ValueError: invalid format

@@ -36,7 +36,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         Allowed values are "left", "right", "top", "bottom"
 
         Args:
-            mode: alignment for the layout
+            alignment: alignment for the layout
 
         Raises:
             ValueError: alignment does not exist
@@ -61,7 +61,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         Allowed values are "top_to_bottom", "bottom_to_top"
 
         Args:
-            mode: text direction for the layout
+            text_direction: text direction for the layout
 
         Raises:
             ValueError: text direction does not exist

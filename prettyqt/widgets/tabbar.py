@@ -110,7 +110,7 @@ class TabBar(QtWidgets.QTabBar):
         Valid values are "left", "right", "middle", "none"
 
         Args:
-            policy: elide mode to use
+            mode: elide mode to use
 
         Raises:
             ValueError: invalid elide mode
