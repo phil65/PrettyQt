@@ -98,6 +98,7 @@ def test_standarditem():
         s = pickle.load(jar)
     repr(s)
     s.set_icon("mdi.timer")
+    s.clone()
 
 
 def test_standarditemmodel():

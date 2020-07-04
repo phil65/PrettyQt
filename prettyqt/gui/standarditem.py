@@ -3,9 +3,9 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtGui
+from qtpy import QtGui, QtCore
 
-from prettyqt import gui
+from prettyqt import gui, core
 from prettyqt.utils import icons
 
 
@@ -28,6 +28,16 @@ class StandardItem(QtGui.QStandardItem):
         self.setStatusTip(state.get("statustip", ""))
         self.setData(state["data"])
         self.set_icon(state["icon"])
+
+    def clone(self):
+        item = self.__class__()
+        ba = QtCore.QByteArray()
+        ds = QtCore.QDataStream(ba, core.IODevice.WriteOnly)
+        ds << self
+        ds = QtCore.QDataStream(ba)
+        ds >> item
+        assert type(item) == StandardItem
+        return item
 
     def set_icon(self, icon: icons.IconType):
         """set the icon for the action
