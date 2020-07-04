@@ -46,18 +46,18 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if self.model() is None:
             return None
         if self.model().rowCount() * self.model().columnCount() > 1_000_000:
-            logging.info("Too many cells to select.")
+            logging.warning("Too many cells to select.")
             return None
         super().selectAll()
 
-    def setModel(self, model):
+    def set_model(self, model: Optional[QtCore.QAbstractItemModel]):
         """
         delete old selection model explicitely, seems to help with memory usage
         """
         old_model = self.model()
         old_sel_model = self.selectionModel()
         if old_model is not None or model is not None:
-            super().setModel(model)
+            self.setModel(model)
         # if old_model:
         #     old_model.deleteLater()
         #     del old_model
@@ -65,11 +65,8 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             old_sel_model.deleteLater()
             del old_sel_model
 
-    def set_model(self, model):
-        self.setModel(model)
-
     def set_delegate(self,
-                     delegate,
+                     delegate: QtWidgets.QItemDelegate,
                      column: Optional[int] = None,
                      row: Optional[int] = None,
                      persistent: bool = False):
