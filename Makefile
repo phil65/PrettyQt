@@ -33,7 +33,7 @@ clean: ## remove all build, test, coverage and Python artifacts
 	git clean -dfX
 
 lint: ## check style with flake8
-	flake8 prettyqt tests
+	flake8 prettyqt
 
 test: ## run tests quickly with the default Python
 	py.test
@@ -62,7 +62,28 @@ dist: clean ## builds source and wheel package
 bump: ## version bump
 # 	git stash --include-untracked
 	cz bump --changelog --no-verify
+	mv CHANGELOG.md docs/docs/changelog.md
+	git add docs/docs/changelog.md
+	git commit --amend --no-edit
 # 	git stash apply
 # 	git push --tags
 # 	git push
 # 	pip install -e .
+
+bump-minor: ## minor version bump
+	bump2version minor --allow-dirty --tag
+	git push --tags
+	git push
+	pip install -e .
+
+bump-patch: ## patch version bump
+	bump2version patch --allow-dirty --tag
+	git push --tags
+	git push
+	pip install -e .
+
+bump-major: ## major version bump
+	bump2version major --allow-dirty --tag
+	git push --tags
+	git push
+	pip install -e .
