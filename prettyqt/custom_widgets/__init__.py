@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-
 """custom_widgets module
-
 """
 
 from .image import Image
@@ -9,6 +7,7 @@ from .listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .singlelinetextedit import SingleLineTextEdit
+from .regexinput import RegexInput
 from .mappedcheckbox import MappedCheckBox
 from .promptlineedit import PromptLineEdit
 from .logtextedit import LogTextEdit
@@ -38,6 +37,7 @@ __all__ = ["Image",
            "BoolDictToolButton",
            "OptionalWidget",
            "SingleLineTextEdit",
+           "RegexInput",
            "MappedCheckBox",
            "PromptLineEdit",
            "LogTextEdit",
