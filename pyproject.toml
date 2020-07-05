@@ -119,14 +119,10 @@ exclude = '''
   | tests/.*/setup.py
 )/
 '''
-[build-system]
-requires = ["poetry_core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
-
-
 [tool.commitizen]
 name = "cz_conventional_commits"
 version = "0.75.9"
+tag_format = "v$version"
 version_files = [
     "prettyqt/__init__.py:__version__",
     "setup.py:version",
@@ -144,3 +140,8 @@ style = [
     ["text", ""],
     ["disabled", "fg:#858585 italic"]
 ]
+[build-system]
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+
