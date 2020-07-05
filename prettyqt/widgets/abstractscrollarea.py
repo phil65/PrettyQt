@@ -28,22 +28,24 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         super().__init__(*args, **kwargs)
         self.h_scrollbar = widgets.ScrollBar()
         self.v_scrollbar = widgets.ScrollBar()
+        self.setHorizontalScrollBar(self.h_scrollbar)
+        self.setVerticalScrollBar(self.v_scrollbar)
 
-    @property
-    def h_scrollbar(self):
-        return self.horizontalScrollbar()
+    # @property
+    # def h_scrollbar(self):
+    #     return self.horizontalScrollbar()
 
-    @h_scrollbar.setter
-    def h_scrollbar(self, scrollbar):
-        self.setHorizontalScrollBar(scrollbar)
+    # @h_scrollbar.setter
+    # def h_scrollbar(self, scrollbar):
+    #     self.setHorizontalScrollBar(scrollbar)
 
-    @property
-    def v_scrollbar(self):
-        return self.verticalScrollBar()
+    # @property
+    # def v_scrollbar(self):
+    #     return self.verticalScrollBar()
 
-    @v_scrollbar.setter
-    def v_scrollbar(self, scrollbar):
-        self.setVerticalScrollBar(scrollbar)
+    # @v_scrollbar.setter
+    # def v_scrollbar(self, scrollbar):
+    #     self.setVerticalScrollBar(scrollbar)
 
     def set_size_adjust_policy(self, policy: str):
         """set size adjust policy
