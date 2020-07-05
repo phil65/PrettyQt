@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Optional, Tuple, List
+from typing import Optional, Tuple, List, Iterator, Union, Callable, Dict
 import re
 
 from qtpy import QtCore
@@ -26,55 +26,229 @@ MAP = bidict({re.IGNORECASE: QtCore.QRegularExpression.CaseInsensitiveOption,
               re.VERBOSE: QtCore.QRegularExpression.ExtendedPatternSyntaxOption})
 
 
-def compile(pattern, flags=0):
-    flag = QtCore.QRegularExpression.NoPatternOption
-    for k, v in MAP.items():
-        if k & flags:
-            flag |= v
-    return core.RegularExpression(pattern, flag)
+class Match(core.RegularExpressionMatch):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.string = None
+        self.pos = None
+        self.endpos = None
+
+    def __repr__(self):
+        return f"<re.Match object; span={self.span()}, match={self.groups()}>"
+
+    def __getitem__(self, item):
+        return self.group(item)
+
+    def group(self, *groups) -> Union[tuple, str]:
+        if len(groups) > 1:
+            return tuple(self.captured(i) for i in groups)
+        if len(groups) == 0:
+            return self.captured(0)
+        return self.captured(groups[0])
+
+    def groups(self, default=None) -> tuple:
+        if self.lastindex is None:
+            return tuple()
+        return (self.group(i) if i <= self.lastindex else default
+                for i in range(self.re.captureCount()))
+
+    def groupdict(self, default=None) -> dict:
+        groups = [self.group(i) if i <= self.lastindex else default
+                  for i in range(self.re.captureCount())]
+        names = self.re.namedCaptureGroups()
+        return {names[i]: groups[i] for i in range(self.re.captureCount())}
+
+    def start(self, group: int = 0) -> int:
+        return self.capturedStart(group)
+
+    def end(self, group: int = 0) -> int:
+        return self.capturedEnd(group)
+
+    def span(self, group: int = 0) -> tuple:
+        return (self.capturedStart(group), self.capturedEnd(group))
+
+    @property
+    def lastindex(self) -> Optional[int]:
+        idx = self.lastCapturedIndex()
+        return None if idx == -1 else idx
+
+    @property
+    def lastgroup(self) -> str:
+        if self.lastCapturedIndex() == -1:
+            return None
+        return self.re.namedCaptureGroups()[self.lastCapturedIndex()]
+
+    @property
+    def re(self):
+        return self.regularExpression()
+
+    @property
+    def partial(self):
+        return self.hasPartialMatch()
 
 
-def search(pattern, string, flags=0) -> Optional[core.RegularExpression]:
+class Pattern(core.RegularExpression):
+
+    def __init__(self, pattern="", flags=0):
+        flag = QtCore.QRegularExpression.NoPatternOption
+        for k, v in MAP.items():
+            if k & flags:
+                flag |= v
+        super().__init__(pattern, flags)
+
+    def __repr__(self):
+        return f"RegularExpression({self.pattern()!r})"
+
+    def match(self,
+              string: str,
+              pos: int = 0,
+              endpos: Optional[int] = None) -> Optional[Match]:
+        match = super().match(string[:endpos], pos)
+        return Match(match) if match.hasMatch() else None
+
+    def fullmatch(self,
+                  string: str,
+                  pos: int = 0,
+                  endpos: Optional[int] = None) -> Optional[Match]:
+        if endpos:
+            string = string[:endpos]
+        match = super().match(string, pos)
+        if match.hasMatch() and len(string) == match.end() - match.start():
+            return Match(match)
+        else:
+            return None
+
+    def finditer(self,
+                 string: str,
+                 pos: int = 0,
+                 endpos: Optional[int] = None) -> Iterator[Match]:
+        for match in self.globalMatch(string[:endpos], offset=pos):
+            match.pos = pos
+            match.endpos = endpos
+            match.string = string
+            yield match
+
+    def findall(self,
+                string: str,
+                pos: int = 0,
+                endpos: Optional[int] = None) -> list:
+        matches = [m for m in self.globalMatch(string[:endpos], offset=pos)]
+        return [m.groups() if len(m.groups()) > 1 else m.group(0) for m in matches]
+
+    def subn(self, repl: Union[str, Callable], string: str, count: int = 0):
+        result = string
+        matches = self.global_match(string)
+        matches = list(matches)
+        if count > 0:
+            matches = matches[:count]
+        matches = list(reversed(matches))
+        for m in matches:
+            to_replace = repl if isinstance(repl, str) else repl(m)
+            for j in range(self.groups):
+                to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
+            for j in self.groupindex.keys():
+                to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
+            result = result[:m.start()] + to_replace + result[m.end():]
+        return (result, min(len(matches), count))
+
+    def sub(self, repl: Union[str, Callable], string: str, count: int = 0):
+        res = self.subn(repl, string, count)
+        return res[0]
+
+    def search(self, string: str, pos: int = 0, endpos: Optional[int] = None):
+        match = super().match(string[:endpos], pos)
+        return match if match.hasMatch() else None
+
+    def split(self, string: str, maxsplit: int = 0):
+        result = list()
+        matches = self.global_match(string)
+        matches = list(matches)
+        prev_match = None
+        num_split = min(maxsplit, len(matches)) if maxsplit > 0 else len(matches)
+        if matches[0].start() == 0:
+            result.append("")
+        else:
+            result.append(string[0:matches[0].start()])
+        for m in matches[:num_split]:
+            print(m.span())
+            if prev_match is not None:
+                result.append(string[prev_match.end():m.start()])
+            for g in m.groups():
+                result.append(g)
+            prev_match = m
+        if matches[num_split - 1].end() == len(string):
+            result.append("")
+        if maxsplit > 0:
+            remainder_start = matches[maxsplit].end()
+            result.append(string[remainder_start:])
+        return result
+
+    @property
+    def groups(self) -> int:
+        return self.captureCount()
+
+    @property
+    def groupindex(self) -> Dict[int, str]:
+        return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1)}
+
+    @property
+    def flags(self):
+        return self.patternOptions()
+
+
+def compile(pattern: str, flags: int = 0):
+    return Pattern(pattern, flags)
+
+
+def search(pattern: str, string: str, flags: int = 0) -> Optional[core.RegularExpression]:
     compiled = compile(pattern, flags)
-    return compiled.search(string)
+    match = compiled.search(string)
+    return match
 
 
-def match(pattern, string, flags=0) -> Optional[core.RegularExpression]:
+def match(pattern: str, string: str, flags: int = 0) -> Optional[core.RegularExpression]:
     compiled = compile(pattern, flags)
     return compiled.match(string)
 
 
-def fullmatch(pattern, string, flags=0) -> Optional[core.RegularExpression]:
+def fullmatch(pattern: str,
+              string: str,
+              flags: int = 0) -> Optional[core.RegularExpression]:
     compiled = compile(pattern, flags)
     return compiled.fullmatch(string)
 
 
-# def split(pattern, string, maxsplit=0, flags=0) -> list:
+# def split(pattern: str, string: str, maxsplit=0, flags=0) -> list:
 #     compiled = compile(pattern, flags)
 #     return compiled.split(string, maxsplit)
 
 
-def findall(pattern, string, flags=0) -> List[str]:
+def findall(pattern: str, string: str, flags: int = 0) -> List[str]:
     compiled = compile(pattern, flags)
     return compiled.findall(string)
 
 
-def finditer(pattern, string, flags=0):
+def finditer(pattern, string: str, flags: int = 0):
     compiled = compile(pattern, flags)
     return compiled.finditer(string)
 
 
-def sub(pattern, repl, string, count=0, flags=0) -> str:
+def sub(pattern: str, repl: str, string: str, count: int = 0, flags: int = 0) -> str:
     compiled = compile(pattern, flags)
     return compiled.sub(repl, string, count)
 
 
-def subn(pattern, repl, string, count=0, flags=0) -> Tuple[str, int]:
+def subn(pattern: str,
+         repl: str,
+         string: str,
+         count: int = 0,
+         flags: int = 0) -> Tuple[str, int]:
     compiled = compile(pattern, flags)
     return compiled.subn(repl, string, count)
 
 
-def escape(pattern):
+def escape(pattern: str):
     dont_escape = ['!', '"', '%', "'", ',', '/', ':', ';', '<', '=', '>', '@', "`"]
     result = core.RegularExpression.escape(pattern)
     for i in dont_escape:
