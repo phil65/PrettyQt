@@ -15,6 +15,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
     def __init__(self, owner, chs):
         super().__init__(owner)
         self.items = chs
+        self.choices = [None for i in self.items]
 
     def createEditor(self, parent, option, index):
         editor = widgets.Widget(parent)
@@ -83,6 +84,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         button = editor.buttonGroup.checkedId()
         if button >= 0:
             model.setData(index, self.items[button], QtCore.Qt.DisplayRole)
+            self.choices[button] = index.row()
 
 
 if __name__ == "__main__":
@@ -90,12 +92,16 @@ if __name__ == "__main__":
     widget = widgets.TableWidget()
     widget.setColumnCount(3)
     widget.insertRow(0)
+    widget.insertRow(0)
     widget.setHorizontalHeaderLabels(['LIB', 'CELL', 'area'])
     item = widgets.TableWidgetItem("test")
     widget.setItem(0, 0, item)
     widget.setItem(1, 1, widgets.TableWidgetItem("test"))
+    widget.setItem(1, 2, widgets.TableWidgetItem("test"))
+    widget.setItem(2, 1, widgets.TableWidgetItem("test"))
     delegate = RadioDelegate(widget, ["a", "b"])
     widget.setItemDelegateForColumn(0, delegate)
     widget.openPersistentEditor(item)
     widget.show()
     app.exec_()
+    print(delegate.choices)
