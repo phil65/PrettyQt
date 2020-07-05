@@ -11,15 +11,23 @@ from prettyqt import custom_validators, custom_widgets, gui, widgets
 
 
 class DataItem(object):
-    def __init__(self, label, value=None, optional=False):
+    def __init__(self,
+                 label,
+                 value=None,
+                 optional=False,
+                 include=True,
+                 enabled_on=None,
+                 disabled_on=None):
         self.set_value(value)
+        self.enabled_on = [enabled_on] if enabled_on else list()
+        self.disabled_on = [disabled_on] if disabled_on else list()
         self.name = None
         self.label = label
         self.optional = optional
+        self.include = include
         self.colspan = 1
         self.label_col = 0
-        self.active_on = list()
-        self.not_active_on = list()
+        self.is_enabled = True
 
     def __get__(self, instance, owner):
         return self.value
@@ -37,16 +45,6 @@ class DataItem(object):
 
     def store(self, prop):
         # self.set_prop("display", store=prop)
-        return self
-
-    def set_active(self, prop):
-        # self.set_prop("display", active=prop)
-        self.active_on.append(prop)
-        return self
-
-    def set_not_active(self, prop):
-        # self.set_prop("display", active=prop)
-        self.not_active_on.append(prop)
         return self
 
     def is_valid(self):
@@ -81,8 +79,8 @@ class Float(DataItem):
     """
 
     def __init__(self, label, value=None, min_val=None, max_val=None,
-                 unit="", step=0.1, slider=False, optional=False):
-        super().__init__(label, value=value, optional=optional)
+                 unit="", step=0.1, slider=False, **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.range = (min_val, max_val)
         self.step = step
         self.unit = unit
@@ -111,8 +109,8 @@ class Int(DataItem):
     """
 
     def __init__(self, label, value=None, min_val=0, max_val=None,
-                 unit="", step=1, slider=False, optional=False):
-        super().__init__(label, value=value, optional=optional)
+                 unit="", step=1, slider=False, **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.range = (min_val, max_val)
         self.step = step
         self.unit = unit
@@ -131,6 +129,40 @@ class Int(DataItem):
         return widget
 
 
+class Range(DataItem):
+    """
+    Construct a Range data item
+        * label [string]: name
+        * value [int]: default value (optional)
+        * min [int]: minimum value (optional)
+        * max [int]: maximum value (optional)
+        * unit [string]: physical unit (optional)
+        * slider [bool]: if True, shows a slider widget right after the line
+          edit widget (default is False)
+        * check [bool]: if False, value is not checked (optional, value=True)
+    """
+
+    def __init__(self,
+                 label,
+                 value=None,
+                 min_val=0,
+                 max_val=1,
+                 **kwargs):
+        super().__init__(label, value=value, **kwargs)
+        self.range = (min_val, max_val)
+        # self.step = step
+        # self.unit = unit
+
+    def _create_widget(self):
+        widget = custom_widgets.SpanSliderWidget()
+        # widget.setSuffix(self.unit)
+        widget.set_range(*self.range)
+        widget.set_step_size(self.step)
+        if self.value is not None:
+            widget.set_value(self.value)
+        return widget
+
+
 class String(DataItem):
     """
     Construct a string data item
@@ -139,8 +171,13 @@ class String(DataItem):
         * notempty [bool]: if True, empty string is not a valid value (opt.)
     """
 
-    def __init__(self, label, value=None, notempty=False, regex=None, optional=False):
-        super().__init__(label, value=value, optional=optional)
+    def __init__(self,
+                 label,
+                 value=None,
+                 notempty=False,
+                 regex=None,
+                 **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.notempty = notempty
         self.regex = regex
 
@@ -166,12 +203,42 @@ class Code(DataItem):
         * language [string]: language for syntax highlighting
     """
 
-    def __init__(self, label, value=None, language="python", optional=False):
-        super().__init__(label, value=value, optional=optional)
+    def __init__(self,
+                 label,
+                 value=None,
+                 language="python",
+                 **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.language = language
 
     def _create_widget(self):
         widget = custom_widgets.CodeEditor()
+        if self.value is not None:
+            widget.set_value(self.value)
+        return widget
+
+
+class Regex(DataItem):
+    """
+    Construct a code data item
+        * label [string]: name
+        * value [string]: default value (optional)
+        * language [string]: language for syntax highlighting
+    """
+
+    def __init__(self,
+                 label: str,
+                 value=None,
+                 show_flags: bool = True,
+                 show_error: bool = False,
+                 **kwargs):
+        super().__init__(label, value=value, **kwargs)
+        self.show_flags = show_flags
+        self.show_error = show_error
+
+    def _create_widget(self):
+        widget = custom_widgets.RegexInput(show_flags=self.show_flags,
+                                           show_error=self.show_error)
         if self.value is not None:
             widget.set_value(self.value)
         return widget
@@ -185,8 +252,12 @@ class IntList(DataItem):
         * notempty [bool]: if True, empty string is not a valid value (opt.)
     """
 
-    def __init__(self, label, value=None, allow_single=False, optional=False):
-        super().__init__(label, value=value, optional=optional)
+    def __init__(self,
+                 label,
+                 value=None,
+                 allow_single=False,
+                 **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.allow_single = allow_single
 
     def _create_widget(self):
@@ -204,8 +275,12 @@ class FloatList(DataItem):
         * notempty [bool]: if True, empty string is not a valid value (opt.)
     """
 
-    def __init__(self, label, value=None, allow_single=False, optional=False):
-        super().__init__(label, value=value, optional=optional)
+    def __init__(self,
+                 label,
+                 value=None,
+                 allow_single=False,
+                 **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.allow_single = allow_single
 
     def _create_widget(self):
@@ -224,9 +299,13 @@ class Bool(DataItem):
         * check [bool]: if False, value is not checked (optional, value=True)
     """
 
-    def __init__(self, label, value=False, optional=False,
-                 true_value=True, false_value=False):
-        super().__init__(label, value=value, optional=optional)
+    def __init__(self,
+                 label,
+                 value=False,
+                 true_value=True,
+                 false_value=False,
+                 **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.true_value = true_value
         self.false_value = false_value
 
@@ -248,8 +327,8 @@ class Color(DataItem):
     Color values are encoded as hexadecimal strings or Qt color names
     """
 
-    def __init__(self, label, value=None, optional=False):
-        super().__init__(label, value=value, optional=optional)
+    def __init__(self, label, value=None, **kwargs):
+        super().__init__(label, value=value, **kwargs)
 
     def _create_widget(self):
         widget = custom_widgets.ColorChooserButton()
@@ -272,8 +351,13 @@ class Enum(DataItem):
           (default is False)
     """
 
-    def __init__(self, label, choices, value=None, optional=False, radio=False):
-        super().__init__(label, value=value, optional=optional)
+    def __init__(self,
+                 label,
+                 choices,
+                 value=None,
+                 radio=False,
+                 **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.radio = radio
         self.choices = choices
 
@@ -297,8 +381,8 @@ class Enum(DataItem):
 
 class MultipleChoice(DataItem):
 
-    def __init__(self, label, choices, value=None, optional=False):
-        super().__init__(label, value=value, optional=optional)
+    def __init__(self, label, choices, value=None, **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.choices = choices
 
     def _create_widget(self):
@@ -320,8 +404,8 @@ class MultipleChoice(DataItem):
 class File(DataItem):
 
     def __init__(self, label, formats="*", value=None, save=True,
-                 root=None, optional=False):
-        super().__init__(label, value=value, optional=optional)
+                 root=None, **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.formats = formats.lstrip(".")
         self.root = root
         self.save = save
@@ -339,8 +423,13 @@ class File(DataItem):
 
 class Folder(DataItem):
 
-    def __init__(self, label, value=None, root=None, mode="open", optional=False):
-        super().__init__(label, value=value, optional=optional)
+    def __init__(self,
+                 label,
+                 value=None,
+                 root=None,
+                 mode="open",
+                 **kwargs):
+        super().__init__(label, value=value, **kwargs)
         self.mode = mode
         self.root = root
 
@@ -377,7 +466,7 @@ class Button(DataItem):
     """
 
     def __init__(self, label, callback, icon=None, value=None):
-        super().__init__("", value=value)
+        super().__init__("", value=value, include=False)
         self.button_label = label
         self.icon = icon
         self.callback = callback
@@ -402,6 +491,7 @@ class DataSetMeta(type):
     def __new__(mcs, name, bases, dct):
         filtered = [b for b in bases if getattr(b, "__metaclass__", None) is DataSetMeta]
         items = {item._name: item for b in filtered for item in b._items}
+        # items should contain DataItems of parent classes
         for attrname, value in list(dct.items()):
             if isinstance(value, DataItem):
                 value.name = attrname
@@ -441,15 +531,17 @@ class DataSet(object, metaclass=DataSetMeta):
             self.ok_btn.setEnabled(is_valid)
 
         for i, (k, item) in enumerate(self._items.items()):
+            if k not in widget_dict:
+                continue
             dialog.box[i, item.label_col] = widgets.Label(item.label)
             dialog.box[i, item.label_col + 1:item.label_col + 3] = widget_dict[k]
             widget = widget_dict[k]
             widget.id = k
             widget.value_changed.connect(on_update)
-            for active in item.active_on:
+            for active in item.enabled_on:
                 widget.setEnabled(widget_dict[active].get_value())
                 widget_dict[active].value_changed.connect(widget.setEnabled)
-            for active in item.not_active_on:
+            for active in item.disabled_on:
                 widget.setDisabled(widget_dict[active].get_value())
                 widget_dict[active].value_changed.connect(widget.setDisabled)
         if self.dialog_comment:
@@ -472,19 +564,21 @@ class DataSet(object, metaclass=DataSetMeta):
         new_values = {item.id: item.get_value()
                       for item in dialog.layout()
                       if item.id}
+        enabled = {item.id: item.isEnabled()
+                   for item in dialog.layout()
+                   if item.id}
         # new_values = {a: (str(b) if isinstance(b, pathlib.Path) else b)
         #               for a, b in dct.items()}
         for k, item in self._items.items():
             if k in new_values:
                 item.set_value(new_values[k])
+                item.is_enabled = enabled[k]
         return True
 
     def to_dict(self) -> dict:
-        dct = {k: v.value
-               for k, v in self._items.items()
-               if not isinstance(v, Button)}
-        return {a: (str(b) if isinstance(b, pathlib.Path) else b)
-                for a, b in dct.items()}
+        return {k: (str(v.value) if isinstance(v.value, pathlib.Path) else v.value)
+                for k, v in self._items.items()
+                if v.include and v.is_enabled}
 
 
 if __name__ == "__main__":
@@ -492,15 +586,19 @@ if __name__ == "__main__":
 
     class Test(DataSet):
         boolitem = Bool(label="Bool")
-        string1 = String(label="String Regex 0-9", regex="[0-9]")
-        string2 = String(label="String Notempty", notempty=True)
-        enum = Enum(label="Enum", choices=["A", "B"]).set_not_active("boolitem")
-        floatitem = Float(label="Float").set_active("boolitem")
+        string1 = String(label="String Regex 0-9")
+        string2 = String(label="String Notempty")
+        enum = Enum(label="Enum", choices=["A", "B"], disabled_on="boolitem")
+        floatitem = Float(label="Float", enabled_on="boolitem")
         fileitem = File(label="File", optional="Activate")
-        folderitem = Folder(label="Folder")
+        folderitem = Folder(label="Folder", include=False)
         buttonitem = Button(label="Folder", icon="mdi.folder", callback=print)
         stringornumber = StringOrNumber(label="StringOrNumber", value=2.4)
         code = Code(label="Test", value="class Test")
+        # code = Regex(label="Test", value="[", show_error=False)
+
+    # class Test2(Test):
+    #     boolitem = None
 
     dlg = Test(icon="mdi.timer", comment="hallo")
     # dlg.widget.value_changed.connect(print)
