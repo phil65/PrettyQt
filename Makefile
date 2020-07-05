@@ -63,9 +63,9 @@ dist: clean ## builds source and wheel package
 # 	python setup.py install
 
 bump: ## version bump
-	git stash --include-untracked
+# 	git stash --include-untracked
 	cz bump --changelog
-	git stash apply
+# 	git stash apply
 	git push --tags
 	git push
 	pip install -e .
