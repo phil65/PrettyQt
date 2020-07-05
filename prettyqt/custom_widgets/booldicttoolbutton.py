@@ -30,7 +30,7 @@ class BoolDictToolButton(widgets.ToolButton):
             action = widgets.Action()
             action.set_text(v)
             action.setCheckable(True)
-            action.id = k
+            action.set_id(k)
             menu.add(action)
 
     def as_dict(self):

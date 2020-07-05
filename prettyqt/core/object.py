@@ -14,7 +14,7 @@ class Object(QtCore.QObject):
 
     def __setstate__(self, state):
         self.__init__()
-        self.id = state["object_name"]
+        self.set_id(state["object_name"])
 
     @contextmanager
     def block_signals(self):
@@ -29,7 +29,7 @@ class Object(QtCore.QObject):
                 dct[k] = v.to_json()
         return dct
 
-    def set_object_name(self, name: str):
+    def set_id(self, name: str):
         self.setObjectName(name)
 
     @property

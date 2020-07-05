@@ -14,7 +14,8 @@ class TableView(QtWidgets.QTableView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.id = self.__class__.__name__
+        class_name = type(self).__name__
+        self.set_id(class_name)
         self.setHorizontalHeader(widgets.HeaderView("horizontal", parent=self))
         self.setVerticalHeader(widgets.HeaderView("vertical", parent=self))
         self.setAlternatingRowColors(True)

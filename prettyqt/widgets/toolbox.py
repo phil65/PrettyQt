@@ -64,7 +64,6 @@ if __name__ == "__main__":
     app = widgets.app()
     w = widgets.Widget()
     w2 = widgets.Widget()
-    w2.id = "objectName"
     tb = ToolBox()
     tb.add_widget(w, "title")
     tb.add_widget(w2)

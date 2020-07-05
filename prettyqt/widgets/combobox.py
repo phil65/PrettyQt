@@ -59,7 +59,7 @@ class ComboBox(QtWidgets.QComboBox):
         self.__init__()
         for label, data, icon in state["items"]:
             self.add(label, data, icon=icon)
-        self.id = state.get("object_name", "")
+        self.set_id(state.get("object_name", ""))
         self.setCurrentIndex(state["index"])
         self.setEnabled(state.get("enabled", True))
         self.setToolTip(state.get("tooltip", ""))

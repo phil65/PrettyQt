@@ -13,7 +13,7 @@ class SidebarWidget(widgets.MainWindow):
     def __init__(self, parent=None):
         super().__init__(parent=None)
         self.sidebar = widgets.ToolBar()
-        self.sidebar.id = "SidebarWidget"
+        self.sidebar.set_id("SidebarWidget")
         self.sidebar.set_title("Sidebar")
         self.sidebar.set_style("text_below_icon")
         self.sidebar.setFloatable(False)

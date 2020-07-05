@@ -29,7 +29,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def __setstate__(self, state):
         self.__init__()
         self.setText(state["text"])
-        self.id = state.get("object_name", "")
+        self.set_id(state.get("object_name", ""))
         self.set_icon(state["icon"])
         self.setEnabled(state.get("enabled", True))
         self.setChecked(state.get("checked", False))

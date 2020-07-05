@@ -37,7 +37,7 @@ class CheckBox(QtWidgets.QCheckBox):
 
     def __setstate__(self, state):
         self.__init__()
-        self.id = state.get("object_name", "")
+        self.set_id(state.get("object_name", ""))
         self.setCheckable(state["checkable"])
         self.setTristate(state.get("is_tristate", False))
         self.set_checkstate(state["checkstate"])

@@ -103,7 +103,7 @@ def test_modelindex():
 
 def test_object():
     obj = core.Object()
-    obj.set_object_name("test")
+    obj.set_id("test")
     with open("data.pkl", "wb") as jar:
         pickle.dump(obj, jar)
     with open("data.pkl", "rb") as jar:

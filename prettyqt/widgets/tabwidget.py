@@ -230,7 +230,7 @@ class DetachedTab(widgets.MainWindow):
     def __init__(self, name, widget):
         super().__init__(None)
 
-        self.id = name
+        self.set_id(name)
         self.set_title(name)
 
         self.widget = widget
