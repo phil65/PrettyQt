@@ -6,7 +6,7 @@ import sys
 import pathlib
 from setuptools import find_packages, setup
 
-README = pathlib.Path("docs/docs/README.md").read_text()
+README = pathlib.Path("docs/docs/index.md").read_text()
 HISTORY = pathlib.Path("HISTORY.md").read_text()
 
 REQUIREMENTS = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex"]
