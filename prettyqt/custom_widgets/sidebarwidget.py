@@ -14,7 +14,7 @@ class SidebarWidget(widgets.MainWindow):
         super().__init__(parent=None)
         self.sidebar = widgets.ToolBar()
         self.sidebar.id = "SidebarWidget"
-        self.sidebar.title = "Sidebar"
+        self.sidebar.set_title("Sidebar")
         self.sidebar.set_style("text_below_icon")
         self.sidebar.setFloatable(False)
         self.sidebar.set_allowed_areas("all")

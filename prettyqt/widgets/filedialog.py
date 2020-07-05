@@ -49,7 +49,7 @@ class FileDialog(QtWidgets.QFileDialog):
                  file_mode: str = "existing_files",
                  parent=None):
         super().__init__(parent=parent)
-        self.title = caption
+        self.set_title(caption)
         self.path_id = path_id
         if extension_filter:
             self.set_extension_filter(extension_filter)

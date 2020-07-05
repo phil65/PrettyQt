@@ -10,7 +10,7 @@ class ImageViewer(widgets.Widget):
     def __init__(self, title="", path=None, parent=None):
         super().__init__(parent)
         if title:
-            self.title = title
+            self.set_title(title)
         self.image = None
         if path:
             self.image = widgets.Label.image_from_path(path, parent=self)

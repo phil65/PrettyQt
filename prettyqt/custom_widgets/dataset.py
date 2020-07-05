@@ -512,7 +512,7 @@ class DataSet(object, metaclass=DataSetMeta):
         dialog = widgets.BaseDialog()
         dialog.set_modality("application")
         dialog.setMinimumWidth(400)
-        dialog.title = self.dialog_title
+        dialog.set_title(self.dialog_title)
         dialog.set_icon(self.dialog_icon)
         dialog.set_layout("grid")
         dialog.box.set_spacing(10)

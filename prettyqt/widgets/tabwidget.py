@@ -231,7 +231,7 @@ class DetachedTab(widgets.MainWindow):
         super().__init__(None)
 
         self.id = name
-        self.title = name
+        self.set_title(name)
 
         self.widget = widget
         self.setCentralWidget(self.widget)

@@ -28,7 +28,7 @@ class BaseDialog(QtWidgets.QDialog):
 
     def __setstate__(self, state):
         self.__init__()
-        self.title = state["title"]
+        self.set_title(state["title"])
         self.set_icon(state["icon"])
         if state["layout"]:
             self.set_layout(state["layout"])
@@ -90,7 +90,7 @@ class Dialog(BaseDialog):
         super().__init__(parent=parent)
         if self.DEFAULT_SIZE:
             self.resize(*self.DEFAULT_SIZE)
-        self.title = title
+        self.set_title(title)
         self.set_icon(icon)
         if delete_on_close:
             self.delete_on_close()

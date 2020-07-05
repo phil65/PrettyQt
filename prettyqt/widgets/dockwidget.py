@@ -31,7 +31,7 @@ class DockWidget(QtWidgets.QDockWidget):
         if name:
             self.id = name
         if title:
-            self.title = title
+            self.set_title(title)
         self.set_allowed_areas("all")
 
     def set_widget(self, widget):

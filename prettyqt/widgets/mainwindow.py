@@ -51,7 +51,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def __setstate__(self, state):
         self.__init__()
-        self.title = state["title"]
+        self.set_title(state["title"])
         self.set_icon(state["icon"])
         if state["central_widget"]:
             self.setCentralWidget(state["central_widget"])
