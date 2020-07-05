@@ -2,6 +2,7 @@ site_name: PrettyQt
 site_url: https://readthedocs.org/projects/prettyqt/
 nav:
     - Home: index.md
+    # - API: mkapi/api/prettyqt
     - API:
         - core: api/core.md
         - gui: api/gui.md
@@ -27,7 +28,9 @@ plugins:
           python:
             rendering:
               show_source: true
-
+            selection:
+              inherited_members: true
+    # - mkapi
 markdown_extensions:
     # - smarty
     - codehilite
