@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-@author: Philipp Temminghoff
 based on http://www.yasinuludag.com/blog/?p=49
 """
 

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-@author: Philipp Temminghoff
 
 for full list, see:
 - https://cdn.materialdesignicons.com/3.0.39/

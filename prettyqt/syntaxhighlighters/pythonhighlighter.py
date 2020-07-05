@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@author: Philipp Temminghoff
+Syntax highlighter for the programming language Python
 """
 
 from prettyqt import core, gui, syntaxhighlighters

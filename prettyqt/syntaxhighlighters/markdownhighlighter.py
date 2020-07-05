@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-@author: Philipp Temminghoff
+Syntax highlighter for Markdown markup language
 """
 
 from prettyqt import syntaxhighlighters, core, gui

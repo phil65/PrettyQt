@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-@author: Philipp Temminghoff
 """
 
 # based on https://stackoverflow.com/questions/58891116/delegate-with-radio-buttons

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 """
-@author: Philipp Temminghoff
 """
 # see https://github.com/ITVRoC/SeekurJr/blob/master/seekur_12.04/packages/
 # multimaster_fkie/node_manager_fkie/src/node_manager_fkie/yaml_highlighter.py
