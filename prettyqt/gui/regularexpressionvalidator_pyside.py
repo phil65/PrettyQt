@@ -28,13 +28,13 @@ class RegularExpressionValidator(gui.Validator):
     def regularExpression(self):
         return self.regex
 
-    def set_regex(self, regex: str, flags=0):
+    def set_regex(self, regex: str, flags: int = 0):
         self.regex = core.RegularExpression(regex, flags)
 
     def get_regex(self) -> str:
         return self.regex.pattern()
 
-    def validate(self, text, pos=0):
+    def validate(self, text: str, pos: int = 0) -> tuple:
         if text == "":
             return (self.Intermediate, text, pos)
         match = self.regex.match(text, match_type="prefer_first")

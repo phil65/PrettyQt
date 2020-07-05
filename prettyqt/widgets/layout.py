@@ -44,7 +44,7 @@ class Layout(QtWidgets.QLayout):
     def __contains__(self, item):
         return item in self.get_children()
 
-    def get_children(self):
+    def get_children(self) -> list:
         return list(self)
 
     def set_margin(self, margin: int):

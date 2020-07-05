@@ -21,11 +21,11 @@ class RegexMatchHighlighter(gui.SyntaxHighlighter):
         # print(self.spans)
         self.rehighlight()
 
-    def colorize(self, line_pos, match_len, match_num):
+    def _colorize(self, line_pos, match_len, match_num):
         fmt = FORMAT_1 if match_num % 2 == 0 else FORMAT_2
         self.setFormat(line_pos, match_len, fmt)
 
-    def highlightBlock(self, text):
+    def highlightBlock(self, text: str):
         block = self.currentBlock()
         # line_no = block.blockNumber()
         # if line_no == 0:
@@ -45,13 +45,13 @@ class RegexMatchHighlighter(gui.SyntaxHighlighter):
             ends_in_line = start_char <= end <= end_char
             if starts_in_line and ends_in_line:
                 # print(f"in line: {line_pos} - {line_pos + match_len}")
-                self.colorize(start - start_char, end - start, i)
+                self._colorize(start - start_char, end - start, i)
             elif ends_in_line:
                 # if self.previousBlockState() == 1:
                 # print(f"ends: {end}")
-                self.colorize(0, end - start, i)
+                self._colorize(0, end - start, i)
                 # self.setCurrentBlockState(-1)
             elif starts_in_line:
                 # print(f"starts: {line_pos}")
                 # self.setCurrentBlockState(1)
-                self.colorize(start - start_char, end - start, i)
+                self._colorize(start - start_char, end - start, i)

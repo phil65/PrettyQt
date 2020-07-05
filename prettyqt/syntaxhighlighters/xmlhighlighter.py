@@ -53,7 +53,7 @@ class XmlHighlighter(gui.SyntaxHighlighter):
 
     RULES = Rule.__subclasses__()
 
-    def highlightBlock(self, text):
+    def highlightBlock(self, text: str):
         super().highlightBlock(text)
         # HANDLE QUOTATION MARKS NOW.. WE WANT TO START WITH " AND END WITH "..
         # A THIRD " SHOULD NOT CAUSE THE WORDS INBETWEEN SECOND AND THIRD

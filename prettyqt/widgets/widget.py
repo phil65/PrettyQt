@@ -181,7 +181,7 @@ class Widget(QtWidgets.QWidget):
         Valid values for modality: "modeless", "window", "application"
 
         Args:
-            modality: modality for the main window (default: {"window"})
+            modality: modality for the main window
 
         Raises:
             ValueError: modality type does not exist

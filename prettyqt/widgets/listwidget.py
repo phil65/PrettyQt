@@ -69,7 +69,7 @@ class ListWidget(QtWidgets.QListWidget):
         data = self.get_value()
         self.value_changed.emit(data)
 
-    def get_children(self):
+    def get_children(self) -> list:
         return [self.item(index) for index in range(self.count())]
 
     def add_items(self, items):

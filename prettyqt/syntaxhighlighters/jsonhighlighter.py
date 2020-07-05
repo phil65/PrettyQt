@@ -24,7 +24,7 @@ VALUE_FORMAT.set_foreground_color("darkgreen")
 
 class JsonHighlighter(gui.SyntaxHighlighter):
 
-    def highlightBlock(self, text):
+    def highlightBlock(self, text: str):
         """ Highlight a block of code using the rules outlined in the Constructor
         """
         for m in BRACKETS.finditer(text):

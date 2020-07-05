@@ -81,9 +81,9 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
 
         Args:
             string: string to search for
-            backward: search backwards (default: {False})
-            case_sensitive: case-sensitive search (default: {False})
-            callback: result callback (default: {None})
+            backward: search backwards
+            case_sensitive: case-sensitive search
+            callback: result callback
         """
         if callback is None:
 

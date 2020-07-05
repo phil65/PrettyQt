@@ -20,13 +20,13 @@ class Validator(QtGui.QValidator):
             from prettyqt import custom_validators
             return custom_validators.CompositeValidator([self, other])
 
-    def __radd__(self, other):
+    def __radd__(self, other: QtGui.QValidator):
         """
         needed for sum()
         """
         return self.__add__(other)
 
-    def is_valid_value(self, value, pos=0) -> bool:
+    def is_valid_value(self, value: str, pos: int = 0) -> bool:
         val = self.validate(value, pos)
         return val[0] == self.Acceptable
 

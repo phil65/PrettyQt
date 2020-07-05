@@ -12,7 +12,7 @@ QtGui.QSyntaxHighlighter.__bases__ = (core.Object,)
 
 class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
 
-    RULES = []
+    RULES: list = []
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -26,7 +26,7 @@ class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
             else:
                 yield (Rule.compiled, Rule.nth, Rule.format)
 
-    def highlightBlock(self, text):
+    def highlightBlock(self, text: str):
         """Apply syntax highlighting to the given block of text.
         """
         # Do other syntax formatting

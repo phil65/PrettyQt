@@ -80,7 +80,7 @@ class Xml(Rule):
 class YamlHighlighter(gui.SyntaxHighlighter):
     RULES = Rule.__subclasses__()
 
-    def highlightBlock(self, text):
+    def highlightBlock(self, text: str):
         super().highlightBlock(text)
         self.setCurrentBlockState(0)
         start_index = 0

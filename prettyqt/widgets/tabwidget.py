@@ -97,12 +97,12 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         return TAB_SHAPES.inv[self.tabShape()]
 
-    def get_children(self):
+    def get_children(self) -> list:
         return [(self.widget(i), self.tabText(i), self.tab_icon(i),
                  self.tabToolTip(i), self.tabWhatsThis(i))
                 for i in range(self.count())]
 
-    def tab_icon(self, i: int):
+    def tab_icon(self, i: int) -> gui.Icon:
         return gui.Icon(self.tabIcon(i))
 
     def set_detachable(self):

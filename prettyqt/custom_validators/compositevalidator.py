@@ -21,7 +21,7 @@ class CompositeValidator(gui.Validator):
         self.__init__()
         self.validators = state.get("validators", [])
 
-    def validate(self, text, pos=0):
+    def validate(self, text: str, pos: int = 0) -> tuple:
         vals = [v.validate(text, pos)[0] for v in self.validators]
         return (min(vals), text, pos)
 

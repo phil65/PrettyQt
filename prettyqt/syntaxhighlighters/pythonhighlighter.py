@@ -94,7 +94,7 @@ class PythonHighlighter(gui.SyntaxHighlighter):
     """
     RULES = Rule.__subclasses__()
 
-    def highlightBlock(self, text):
+    def highlightBlock(self, text: str):
         """Apply syntax highlighting to the given block of text.
         """
         # Do other syntax formatting

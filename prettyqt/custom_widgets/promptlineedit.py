@@ -33,14 +33,14 @@ class PromptLineEdit(widgets.LineEdit):
         self.button.clicked.connect(self.clear_clicked.emit)
 
     @property
-    def prompt_text(self):
+    def prompt_text(self) -> str:
         """
         Gets/Sets the prompt text.
         """
         return self._prompt_text
 
     @prompt_text.setter
-    def prompt_text(self, prompt):
+    def prompt_text(self, prompt: str):
         self._prompt_text = prompt
         self.update()
 
@@ -70,7 +70,7 @@ class PromptLineEdit(widgets.LineEdit):
         self.button.resize(core.Size(self._margin, self.height() - 2))
         self.button.move(self.width() - self._margin - 3, 1)
 
-    def set_button_visible(self, visible):
+    def set_button_visible(self, visible: bool):
         """
         Sets the clear button as ``visible``
         :param visible: Visible state (True = visible, False = hidden).
@@ -83,7 +83,7 @@ class PromptLineEdit(widgets.LineEdit):
             right = 0
         self.setTextMargins(left, top, right, bottom)
 
-    def _on_text_changed(self, text):
+    def _on_text_changed(self, text: str):
         """Text changed, update Clear button visibility
         """
         self.set_button_visible(len(text) > 0)

@@ -88,12 +88,12 @@ class MarkdownHighlighter(gui.SyntaxHighlighter):
 
     RULES = Rule.__subclasses__()
 
-    def highlightBlock(self, text):
+    def highlightBlock(self, text: str):
         super().highlightBlock(text)
         self.setCurrentBlockState(0)
-        self.match_multiline(text, *TRI_SINGLE)
+        self._match_multiline(text, *TRI_SINGLE)
 
-    def match_multiline(self, text, delimiter, style):
+    def _match_multiline(self, text, delimiter, style):
         # If inside triple-single quotes, start at 0
         if self.previousBlockState() == 1:
             start = 0

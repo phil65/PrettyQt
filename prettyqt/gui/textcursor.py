@@ -58,7 +58,7 @@ class TextCursor(QtGui.QTextCursor):
 
         Args:
             pos: Cursor position
-            mode: Move mode (default: {"move"})
+            mode: Move mode
         """
         self.setPosition(pos, MOVE_MODES[mode])
 
@@ -106,6 +106,8 @@ class TextCursor(QtGui.QTextCursor):
 
     @contextlib.contextmanager
     def edit_block(self):
+        """Context manager for edit blocks. Can be used for undo actions.
+        """
         self.beginEditBlock()
         yield
         self.endEditBlock()

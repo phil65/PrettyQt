@@ -40,7 +40,7 @@ class Icon(QtGui.QIcon):
         super().__init__(px)
 
     @staticmethod
-    def by_name(name):
+    def by_name(name: str):
         return qta.icon(name)
 
     @classmethod

@@ -3,7 +3,7 @@
 """
 
 import pathlib
-from typing import Optional
+from typing import Optional, Union
 
 from prettyqt import core, widgets
 
@@ -17,12 +17,12 @@ class FileChooserButton(widgets.Widget):
         """initialize FileChooserButton
 
         Args:
-            extensions: dict allowed extensions (default: {None})
+            extensions: dict allowed extensions
                         form: "'name': ['.ext1', '.ext2']"
-            mode: Accept mode ("save" or "load") (default: {"save"})
+            mode: Accept mode ("save" or "load")
             file_mode: File mode ("existing_files", "existing_file", "any_file",
-                                  or "directory") (default: {"existing_files"})
-            parent: parent widget (default: {None})
+                                  or "directory")
+            parent: parent widget
         """
         super().__init__(parent)
         self.path = None
@@ -70,7 +70,7 @@ class FileChooserButton(widgets.Widget):
         self.set_path(dialog.selected_file())
         self.value_changed.emit(self.path)
 
-    def set_path(self, path):
+    def set_path(self, path: Union[str, pathlib.Path]):
         self.path = path
         self.lineedit.set_text(str(path))
 

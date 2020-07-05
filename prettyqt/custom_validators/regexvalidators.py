@@ -31,7 +31,7 @@ class BaseRegexValidator(gui.Validator):
     def get_regex(self) -> str:
         return self.regex.pattern
 
-    def validate(self, text, pos=0):
+    def validate(self, text: str, pos: int = 0) -> tuple:
         if text == "":
             return (self.Intermediate, text, pos)
         match = self.regex.match(text, partial=True)

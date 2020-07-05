@@ -86,11 +86,11 @@ class Menu(QtWidgets.QMenu):
         Args:
             label: Label for button
             callback: gets called when action is triggered
-            icon: icon for button (default: {None})
-            checkable: as checkbox button (default: {False})
-            checked: if checkable, turn on by default (default: {False})
-            shortcut: Shortcut for action (a) (default: {None})
-            status_tip: Status tip to be shown in status bar (default: {None})
+            icon: icon for button
+            checkable: as checkbox button
+            checked: if checkable, turn on by default
+            shortcut: Shortcut for action
+            status_tip: Status tip to be shown in status bar
 
         Returns:
             Action added to menu

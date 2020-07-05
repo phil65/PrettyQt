@@ -53,7 +53,7 @@ class FileDialog(QtWidgets.QFileDialog):
         self.path_id = path_id
         if extension_filter:
             self.set_extension_filter(extension_filter)
-        if path_id and path is None:
+        if path_id is not None and path is None:
             settings = core.Settings()
             path = settings.value(self.path_id, "")
         self.set_directory(path)

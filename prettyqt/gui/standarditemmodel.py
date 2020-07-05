@@ -38,7 +38,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
             return self
         raise TypeError("wrong type for addition")
 
-    def get_children(self):
+    def get_children(self) -> list:
         return [self.item(index) for index in range(self.rowCount())]
 
     def add(self, *item):
