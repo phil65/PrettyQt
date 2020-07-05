@@ -3,20 +3,14 @@
 
 """The setup script."""
 import sys
+import pathlib
 from setuptools import find_packages, setup
 
-with open("README.md") as readme_file:
-    README = readme_file.read()
+README = pathlib.Path("README.md").read_text()
+HISTORY = pathlib.Path("HISTORY.md").read_text()
 
-with open("HISTORY.md") as history_file:
-    HISTORY = history_file.read()
-
-version = '.'.join(map(str, sys.version_info))
-
-REQUIRES_PYTHON = ">=3.6.0"
 REQUIREMENTS = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex"]
-
-
+version = '.'.join(map(str, sys.version_info))
 if version == '3.6':
     REQUIREMENTS.append("dataclasses")
 
@@ -34,7 +28,7 @@ setup(
     description="Pythonic layer on top of PyQt5 / PySide2",
     install_requires=REQUIREMENTS,
     license="MIT license",
-    python_requires=REQUIRES_PYTHON,
+    python_requires=">=3.6.0",
     long_description=README + "\n\n" + HISTORY,
     long_description_content_type="text/markdown",
     include_package_data=True,
