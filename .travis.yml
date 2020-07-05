@@ -61,7 +61,7 @@ deploy:
     cleanup: False
     strategy: git
     local_dir: docs/site
-    github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+    token: $GITHUB_TOKEN
     keep_history: true
     on:
       tags: true
