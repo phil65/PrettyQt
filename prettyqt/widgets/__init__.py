@@ -106,7 +106,7 @@ from .wizardpage import WizardPage
 def app():
     if Application.instance() is not None:
         return Application.instance()
-    return Application.create_default_app()
+    return Application([])
 
 
 __all__ = ["app",
