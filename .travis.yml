@@ -39,6 +39,7 @@ script:
 
 after_success:
   - codecov
+  - python setup.py install
   - make docs
 
 # Assuming you have installed the travis-ci CLI tool, after you
