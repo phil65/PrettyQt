@@ -9,6 +9,7 @@ import logging
 
 try:
     from .webengineview import WebEngineView
-    __all__ = ["WebEngineView"]
+    from .webenginepage import WebEnginePage
+    __all__ = ["WebEngineView", "WebEnginePage"]
 except ModuleNotFoundError:
     logging.warning("Tried to import WebEngineView but not installed.")

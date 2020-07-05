@@ -12,3 +12,11 @@ def test_webengineview(qapp):
     widget.set_url("http://www.google.de")
     widget.load_url("http://www.google.de")
     widget.find_text("test", backward=True, case_sensitive=True, callback=None)
+
+
+def test_webenginepage(qapp):
+    widget = webenginewidgets.WebEnginePage()
+    widget.set_zoom(1.5)
+    widget.set_url("http://www.google.de")
+    widget.load_url("http://www.google.de")
+    widget.find_text("test", backward=True, case_sensitive=True, callback=None)
