@@ -6,6 +6,7 @@
 from qtpy import QtWidgets
 
 from prettyqt import gui, widgets
+from prettyqt.utils import colors
 
 OPTIONS = dict(show_alpha=QtWidgets.QColorDialog.ShowAlphaChannel,
                no_buttons=QtWidgets.QColorDialog.NoButtons,
@@ -27,13 +28,10 @@ class ColorDialog(QtWidgets.QColorDialog):
 
     @classmethod
     def get_color(cls,
-                  preset=None,
+                  preset: colors.ColorType = None,
                   allow_alpha: bool = False,
                   parent=None) -> gui.Color:
-        if isinstance(preset, str):
-            preset = gui.Color(preset)
-        if preset is None:
-            preset = gui.Color()
+        preset = colors.get_color(preset)
         kwargs = dict(options=cls.ShowAlphaChannel) if allow_alpha else dict()
         return gui.Color(cls.getColor(preset, parent, **kwargs))
 

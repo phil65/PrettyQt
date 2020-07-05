@@ -25,6 +25,7 @@
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui, widgets
+from prettyqt.utils import colors
 
 SLIDER_STYLE = widgets.Style.CC_Slider
 HANDLE_STYLE = widgets.Style.SC_SliderHandle
@@ -137,11 +138,11 @@ class SpanSlider(widgets.Slider):
             main = self.main_control == self.UPPER_HANDLE
             self.trigger_action(self.SliderMove, main)
 
-    def set_left_color(self, color):
+    def set_left_color(self, color: colors.ColorType):
         self.gradient_left = color
         self.update()
 
-    def set_right_color(self, color):
+    def set_right_color(self, color: colors.ColorType):
         self.gradient_right = color
         self.update()
 

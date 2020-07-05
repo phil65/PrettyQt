@@ -32,6 +32,7 @@ import math
 from qtpy import QtCore
 
 from prettyqt import core, gui, widgets
+from prettyqt.utils import colors
 
 
 class BaseWaitingSpinner(widgets.Widget):
@@ -156,8 +157,8 @@ class BaseWaitingSpinner(widgets.Widget):
     def set_roundness(self, roundness):
         self._roundness = max(0.0, min(100.0, roundness))
 
-    def set_color(self, color="black"):
-        self._color = self._color.set_color(color)
+    def set_color(self, color: colors.ColorType = "black"):
+        self._color = colors.get_color(color)
 
     def set_revolutions_per_second(self, _revolutions_per_second):
         self._revolutions_per_second = _revolutions_per_second

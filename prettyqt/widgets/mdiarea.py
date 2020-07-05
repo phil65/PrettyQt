@@ -3,10 +3,12 @@
 @author: Philipp Temminghoff
 """
 
-from qtpy import QtWidgets
+from typing import Union
+
+from qtpy import QtWidgets, QtGui
 
 from prettyqt import gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, colors
 
 VIEW_MODES = bidict(default=QtWidgets.QMdiArea.SubWindowView,
                     tabbed=QtWidgets.QMdiArea.TabbedView)
@@ -20,6 +22,8 @@ TAB_POSITIONS = bidict(north=QtWidgets.QTabWidget.North,
                        south=QtWidgets.QTabWidget.South,
                        west=QtWidgets.QTabWidget.West,
                        east=QtWidgets.QTabWidget.East)
+
+PATTERNS = gui.painter.PATTERNS
 
 QtWidgets.QMdiArea.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -106,10 +110,16 @@ class MdiArea(QtWidgets.QMdiArea):
         """
         return TAB_POSITIONS.inv[self.tabPosition()]
 
-    def set_background(self, bg_color):
-        if isinstance(bg_color, str):
-            bg_color = gui.Brush(gui.Color("black"))
-        self.setBackground(bg_color)
+    def set_background(self,
+                       brush_or_color: Union[QtGui.QBrush, colors.ColorType],
+                       pattern: str = "solid"):
+        if isinstance(brush_or_color, QtGui.QBrush):
+            self.setBackground(brush_or_color)
+        else:
+            pattern = PATTERNS[pattern]
+            color = colors.get_color(brush_or_color)
+            brush = gui.Brush(color, pattern)
+            self.setBackground(brush)
 
     def add(self, *item: QtWidgets.QWidget):
         for i in item:
@@ -124,6 +134,7 @@ class MdiArea(QtWidgets.QMdiArea):
 if __name__ == "__main__":
     app = widgets.app()
     widget = MdiArea()
+    widget.set_background("green", "cross")
     le = widgets.LineEdit("test")
     le2 = widgets.LineEdit("test")
     widget.add(le)

@@ -8,7 +8,7 @@ import contextlib
 from qtpy import QtWidgets
 
 from prettyqt import gui, core, widgets
-
+from prettyqt.utils import colors
 
 QtWidgets.QTextEdit.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -62,9 +62,8 @@ class TextEdit(QtWidgets.QTextEdit):
     def set_read_only(self, value: bool = True):
         self.setReadOnly(value)
 
-    def set_text_color(self, color):
-        if isinstance(color, str):
-            color = gui.Color(color)
+    def set_text_color(self, color: colors.ColorType):
+        color = colors.get_color(color)
         self.setTextColor(color)
 
 

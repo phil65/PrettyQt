@@ -5,12 +5,11 @@
 
 from qtpy import QtGui
 
-from prettyqt import gui
+from prettyqt.utils import colors
 
 
 class Pen(QtGui.QPen):
 
-    def set_color(self, color):
-        if isinstance(color, str):
-            color = gui.Color(color)
+    def set_color(self, color: colors.ColorType):
+        color = colors.get_color(color)
         self.setColor(color)

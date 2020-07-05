@@ -3,11 +3,12 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Union
+
 from qtpy import QtGui
 
+from prettyqt.utils import bidict, colors
 from prettyqt import gui
-from prettyqt.utils import bidict
-
 
 WEIGHTS = bidict(thin=QtGui.QFont.Thin,
                  light=QtGui.QFont.Light,
@@ -28,25 +29,24 @@ STYLE_HINTS = gui.font.STYLE_HINTS
 
 class TextCharFormat(QtGui.QTextCharFormat):
 
-    def __init__(self, text_color="black", bold=False, italic=False):
+    def __init__(self,
+                 text_color: Union[colors.ColorType, QtGui.QBrush] = "black",
+                 bold: bool = False,
+                 italic: bool = False):
         super().__init__()
         self.set_foreground_color(text_color)
         if bold:
             self.set_font_weight("bold")
         self.setFontItalic(italic)
 
-    def set_foreground_color(self, color):
-        if isinstance(color, (list, tuple)):
-            color = gui.Color(*color)
-        elif not isinstance(color, (QtGui.QColor, QtGui.QBrush)):
-            color = gui.Color(color)
+    def set_foreground_color(self, color: Union[colors.ColorType, QtGui.QBrush]):
+        if not isinstance(color, QtGui.QBrush):
+            color = colors.get_color(color)
         self.setForeground(color)
 
-    def set_background_color(self, color):
-        if isinstance(color, (list, tuple)):
-            color = gui.Color(*color)
-        elif not isinstance(color, (QtGui.QColor, QtGui.QBrush)):
-            color = gui.Color(color)
+    def set_background_color(self, color: Union[colors.ColorType, QtGui.QBrush]):
+        if not isinstance(color, QtGui.QBrush):
+            color = colors.get_color(color)
         self.setBackground(color)
 
     def set_font_weight(self, weight: str):

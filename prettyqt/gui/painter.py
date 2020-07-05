@@ -6,7 +6,7 @@
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, colors
 
 
 PEN_TYPES = bidict(none=QtCore.Qt.NoPen)
@@ -83,8 +83,8 @@ class Painter(QtGui.QPainter):
         """
         return PEN_TYPES.inv[self.pen()]
 
-    def set_color(self, color):
-        color = QtGui.QColor(color)
+    def set_color(self, color: colors.ColorType):
+        color = colors.get_color(color)
         self.setPen(color)
 
     def set_composition_mode(self, mode: str):

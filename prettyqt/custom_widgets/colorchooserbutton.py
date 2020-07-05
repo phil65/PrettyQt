@@ -4,6 +4,7 @@
 """
 
 from prettyqt import core, gui, widgets
+from prettyqt.utils import colors
 
 
 class ColorChooserButton(widgets.Widget):
@@ -48,11 +49,8 @@ class ColorChooserButton(widgets.Widget):
             self.set_color(dlg.current_color())
             self.value_changed.emit(dlg.current_color())
 
-    def set_color(self, color):
-        if isinstance(color, str):
-            self.current_color = gui.Color(color)
-        else:
-            self.current_color = color
+    def set_color(self, color: colors.ColorType):
+        self.current_color = colors.get_color(color)
         self.lineedit.set_text(self.current_color.name().upper())
         icon = gui.Icon.for_color(self.current_color)
         self.button.set_icon(icon)
