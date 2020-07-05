@@ -66,3 +66,21 @@ bump: ## version bump
 # 	git push --tags
 # 	git push
 # 	pip install -e .
+
+bump-minor: ## minor version bump
+	bump2version minor --allow-dirty --tag
+	git push --tags
+	git push
+	pip install -e .
+
+bump-patch: ## patch version bump
+	bump2version patch --allow-dirty --tag
+	git push --tags
+	git push
+	pip install -e .
+
+bump-major: ## major version bump
+	bump2version major --allow-dirty --tag
+	git push --tags
+	git push
+	pip install -e .

@@ -126,19 +126,8 @@ tag_format = "v$version"
 version_files = [
     "prettyqt/__init__.py:__version__",
     "setup.py:version",
-    "pyproject.toml:version"
-]
-style = [
-    ["qmark", "fg:#ff9d00 bold"],
-    ["question", "bold"],
-    ["answer", "fg:#ff9d00 bold"],
-    ["pointer", "fg:#ff9d00 bold"],
-    ["highlighted", "fg:#ff9d00 bold"],
-    ["selected", "fg:#cc5454"],
-    ["separator", "fg:#cc5454"],
-    ["instruction", ""],
-    ["text", ""],
-    ["disabled", "fg:#858585 italic"]
+    "pyproject.toml:version",
+    "setup.cfg:current_version"
 ]
 [build-system]
 requires = ["poetry_core>=1.0.0"]
