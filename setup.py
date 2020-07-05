@@ -8,15 +8,14 @@ from setuptools import find_packages, setup
 with open("README.md") as readme_file:
     README = readme_file.read()
 
-with open("HISTORY.rst") as history_file:
+with open("HISTORY.md") as history_file:
     HISTORY = history_file.read()
 
 version = '.'.join(map(str, sys.version_info))
 
 REQUIRES_PYTHON = ">=3.6.0"
 REQUIREMENTS = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex"]
-SETUP_REQUIREMENTS = ["pytest-runner", ]
-TEST_REQUIREMENTS = ["pytest", "pytest-xvfb", "pytest-qt"]
+
 
 if version == '3.6':
     REQUIREMENTS.append("dataclasses")
@@ -37,14 +36,12 @@ setup(
     license="MIT license",
     python_requires=REQUIRES_PYTHON,
     long_description=README + "\n\n" + HISTORY,
-    long_description_content_type="text/x-rst",
+    long_description_content_type="text/markdown",
     include_package_data=True,
     keywords="prettyqt",
     name="prettyqt",
     packages=find_packages(),
-    setup_requires=SETUP_REQUIREMENTS,
     test_suite="tests",
-    tests_require=TEST_REQUIREMENTS,
     url="https://github.com/phil65/prettyqt",
     version="0.74.2",
     zip_safe=False
