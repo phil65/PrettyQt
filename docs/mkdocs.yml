@@ -14,6 +14,7 @@ nav:
         - custom_validators: api/custom_validators.md
         # - utils: api/utils.md
         # - constants: api/constants.md
+    - Contributing: contributing.md
 
 theme:
     name: material

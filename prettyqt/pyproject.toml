@@ -2,7 +2,7 @@
 name = "PrettyQt"
 version = "0.73.1"
 description = "A pythonic layer on top of qtpy"
-readme = 'README.rst'
+readme = 'README.md'
 repository = "https://github.com/phil65/prettyqt"
 homepage = "https://github.com/phil65/prettyqt"
 authors = ["phil65 <philipptemminghoff@googlemail.com>"]
