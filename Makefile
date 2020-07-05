@@ -44,9 +44,12 @@ coverage: ## check code coverage quickly with the default Python
 	coverage html
 	$(BROWSER) htmlcov/index.html
 
-docs: ## generate HTML documentation
-	$(MAKE) -C docs build
-	$(BROWSER) docs/site/index.html
+docs: ## builds the documentation
+	mkdocs build
+
+serve: ## run html server watching file changes in realtime
+	$(BROWSER) site/index.html
+	mkdocs serve
 
 release: dist ## package and upload a release
 	twine upload dist/*
@@ -62,8 +65,8 @@ dist: clean ## builds source and wheel package
 bump: ## version bump
 # 	git stash --include-untracked
 	cz bump --changelog --no-verify
-	mv CHANGELOG.md docs/docs/changelog.md
-	git add docs/docs/changelog.md
+	mv CHANGELOG.md docs/changelog.md
+	git add docs/changelog.md
 	git commit --amend --no-edit
 # 	git stash apply
 # 	git push --tags

@@ -58,7 +58,7 @@ data.pkl
 .scrapy
 
 # Mkdocs documentation
-docs/site/
+site/
 
 # PyBuilder
 target/

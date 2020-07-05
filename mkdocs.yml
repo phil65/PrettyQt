@@ -18,7 +18,7 @@ nav:
 
 theme:
     name: material
-    custom_dir: theme_customizations/
+    custom_dir: docs/theme_customizations/
 plugins:
     - search
     - mkdocstrings:

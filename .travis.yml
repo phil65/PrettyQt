@@ -51,7 +51,7 @@ deploy:
   - provider: pages
     skip_cleanup: true
     strategy: git
-    local_dir: docs/site
+    local_dir: site
     token: $GITHUB_TOKEN
     keep_history: true
     on:
