@@ -46,6 +46,6 @@ setup(
     test_suite="tests",
     tests_require=TEST_REQUIREMENTS,
     url="https://github.com/phil65/prettyqt",
-    version="0.74.0",
+    version="0.74.1",
     zip_safe=False
 )
