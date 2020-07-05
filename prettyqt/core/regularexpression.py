@@ -4,7 +4,6 @@
 """
 
 from typing import Union, Callable, Optional, Iterator
-import re
 
 from qtpy import QtCore
 
@@ -19,11 +18,6 @@ FLAGS = bidict(none=QtCore.QRegularExpression.NoPatternOption,
                inverted_greedyness=QtCore.QRegularExpression.InvertedGreedinessOption,
                dont_capture=QtCore.QRegularExpression.DontCaptureOption,
                unicode=QtCore.QRegularExpression.UseUnicodePropertiesOption)
-
-MAP = bidict({re.IGNORECASE: QtCore.QRegularExpression.CaseInsensitiveOption,
-              re.MULTILINE: QtCore.QRegularExpression.MultilineOption,
-              re.DOTALL: QtCore.QRegularExpression.DotMatchesEverythingOption,
-              re.VERBOSE: QtCore.QRegularExpression.ExtendedPatternSyntaxOption})
 
 MATCH_TYPES = bidict(normal=QtCore.QRegularExpression.NormalMatch,
                      prefer_complete=QtCore.QRegularExpression.PartialPreferCompleteMatch,
@@ -62,7 +56,11 @@ class RegularExpression(QtCore.QRegularExpression):
         options = MATCH_OPTIONS["anchored"] if anchored else MATCH_OPTIONS["none"]
         return self.globalMatch(text, offset, MATCH_TYPES[match_type], options)
 
-    def match(self, text, offset=0, match_type="normal", anchored=False):
+    def match(self,
+              text: str,
+              offset: int = 0,
+              match_type: str = "normal",
+              anchored: bool = False):
         if isinstance(match_type, str):
             match_type = MATCH_TYPES[match_type]
         if isinstance(anchored, bool):
@@ -71,6 +69,15 @@ class RegularExpression(QtCore.QRegularExpression):
             options = anchored
         match = super().match(text, offset, match_type, options)
         return core.RegularExpressionMatch(match)
+
+    def fullmatch(self, string: str, pos: int = 0, endpos: Optional[int] = None):
+        if endpos:
+            string = string[:endpos]
+        match = super().match(string, pos)
+        if match.hasMatch() and len(string) == match.end() - match.start():
+            return core.RegularExpressionMatch(match)
+        else:
+            return None
 
     def finditer(self,
                  string: str,
@@ -108,6 +115,10 @@ class RegularExpression(QtCore.QRegularExpression):
     def sub(self, repl: Union[str, Callable], string: str, count: int = 0):
         res = self.subn(repl, string, count)
         return res[0]
+
+    def search(self, string: str, pos: int = 0, endpos: Optional[int] = None):
+        match = super().match(string[:endpos], pos)
+        return match if match.hasMatch() else None
 
     def split(self, string: str, maxsplit: int = 0):
         result = list()
