@@ -14,6 +14,9 @@ QtWebEngineWidgets.QWebEnginePage.__bases__ = (core.Object,)
 
 
 class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
+    """A web engine page holds the contents of an HTML document,
+    the history of navigated links, and actions.
+        """
 
     def set_url(self, url: Union[str, pathlib.Path]):
         """set the url of the WebEnginePage.
@@ -89,11 +92,11 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
                 pass
 
             callback = do_nothing
-        flag = QtWebEngineWidgets.QWebEnginePage.FindFlag()
+        flag = self.FindFlag()
         if case_sensitive:
-            flag |= QtWebEngineWidgets.QWebEnginePage.FindCaseSensitively
+            flag |= self.FindCaseSensitively
         if backward:
-            flag |= QtWebEngineWidgets.QWebEnginePage.FindBackward
+            flag |= self.FindBackward
         self.findText(string, flag, callback)
 
 
