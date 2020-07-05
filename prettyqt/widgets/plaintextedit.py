@@ -112,13 +112,6 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
         self.setExtraSelections(extra_selections)
 
-    @classmethod
-    def get_result_widget(cls, *args, **kwargs):
-        widget = cls(*args, **kwargs)
-        widget.setReadOnly(True)
-        widget.set_font("Consolas")
-        return widget
-
     def set_wrap_mode(self, mode: str):
         """set word wrap mode
 
@@ -153,15 +146,15 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def _on_value_change(self):
         self.value_changed.emit()
         if self.validator is not None:
-            self.set_validation_color()
+            self._set_validation_color()
 
-    def set_validation_color(self, state: bool = True):
-        color = "rgb(255, 175, 90)" if not self.is_valid() else "white"
+    def _set_validation_color(self, state: bool = True):
+        color = "orange" if not self.is_valid() else "white"
         self.set_background_color(color)
 
     def set_validator(self, validator: gui.Validator):
         self.validator = validator
-        self.set_validation_color()
+        self._set_validation_color()
 
     def set_regex_validator(self, regex: str, flags=0) -> gui.RegExpValidator:
         validator = gui.RegularExpressionValidator(self)

@@ -577,7 +577,6 @@ def test_plaintextedit(qtbot):
     assert widget.text() == "hallo\n testtest"
     widget.highlight_current_line()
     widget.set_read_only()
-    widget.get_result_widget()
     widget.scroll_to_top()
     widget.scroll_to_bottom()
     widget.set_value("test")

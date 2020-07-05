@@ -24,7 +24,7 @@ class LineEdit(QtWidgets.QLineEdit):
 
     def __init__(self, default_value="", read_only=False, parent=None):
         super().__init__(default_value, parent)
-        self.textChanged.connect(self.set_validation_color)
+        self.textChanged.connect(self._set_validation_color)
         self.textChanged.connect(self.value_changed)
         self.set_read_only(read_only)
 
@@ -93,13 +93,13 @@ class LineEdit(QtWidgets.QLineEdit):
 
     def set_validator(self, validator: gui.Validator):
         self.setValidator(validator)
-        self.set_validation_color()
+        self._set_validation_color()
 
     def set_input_mask(self, mask: str):
         self.setInputMask(mask)
 
-    def set_validation_color(self, state: bool = True):
-        color = "rgb(255, 175, 90)" if not self.is_valid() else "white"
+    def _set_validation_color(self, state: bool = True):
+        color = "orange" if not self.is_valid() else "white"
         self.set_background_color(color)
 
     def set_echo_mode(self, mode: str):
