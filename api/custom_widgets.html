@@ -198,6 +198,39 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate">
+    checkboxdelegate
+  </a>
+<nav aria-label="checkboxdelegate" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate">
+    CheckBoxDelegate
+  </a>
+<nav aria-label="CheckBoxDelegate" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate.createEditor">
+    createEditor()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate.setEditorData">
+    setEditorData()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate.setModelData">
+    setModelData()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor">
     codeeditor
   </a>
@@ -760,6 +793,39 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.custom_widgets.buttondelegate.ButtonDelegate.setModelData">
+    setModelData()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate">
+    checkboxdelegate
+  </a>
+<nav aria-label="checkboxdelegate" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate">
+    CheckBoxDelegate
+  </a>
+<nav aria-label="CheckBoxDelegate" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate.createEditor">
+    createEditor()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate.setEditorData">
+    setEditorData()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate.setModelData">
     setModelData()
   </a>
 </li>
@@ -1409,6 +1475,161 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 </div>
 </div>
 <div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.custom_widgets.checkboxdelegate">
+<code>checkboxdelegate</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate">
+<code>CheckBoxDelegate</code>
+</h3>
+<div class="doc doc-contents">
+<p>A delegate that places a fully functioning CheckBox in every
+cell of the column to which it's applied</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate.createEditor">
+<code class="highlight language-python">
+createEditor<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>override
+instanciate the editor widget and initialize it
+also connect currentIndexChanged signal</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/checkboxdelegate.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>23
+24
+25
+26
+27
+28
+29
+30
+31</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    override</span>
+<span class="sd">    instanciate the editor widget and initialize it</span>
+<span class="sd">    also connect currentIndexChanged signal</span>
+<span class="sd">    """</span>
+    <span class="n">cb</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">CheckBox</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+    <span class="n">cb</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">cb</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate.setEditorData">
+<code class="highlight language-python">
+setEditorData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>override
+set correct initial value for editor widget</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/checkboxdelegate.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>33
+34
+35
+36
+37
+38
+39
+40</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    override</span>
+<span class="sd">    set correct initial value for editor widget</span>
+<span class="sd">    """</span>
+    <span class="n">current_selection</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">cb</span><span class="o">.</span><span class="n">block_signals</span><span class="p">():</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">current_selection</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.checkboxdelegate.CheckBoxDelegate.setModelData">
+<code class="highlight language-python">
+setModelData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combo</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>override, gets called on self.commitData (?)
+apply the newly selected dtype to the column if possible</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/checkboxdelegate.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combo</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    override, gets called on self.commitData (?)</span>
+<span class="sd">    apply the newly selected dtype to the column if possible</span>
+<span class="sd">    """</span>
+    <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">combo</span><span class="o">.</span><span class="n">currentText</span><span class="p">()]</span>
+    <span class="c1"># s = model.data(index, model.DATA_ROLE)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">DTYPE_ROLE</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.codeeditor">
 <code>codeeditor</code>
 </h2>
@@ -1871,7 +2092,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <td><code>extensions</code></td>
 <td><code></code></td>
 <td>
-<p>dict allowed extensions (default: {None})
+<p>dict allowed extensions
         form: "'name': ['.ext1', '.ext2']"</p>
 </td>
 <td><code>None</code></td>
@@ -1880,7 +2101,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <td><code>mode</code></td>
 <td><code></code></td>
 <td>
-<p>Accept mode ("save" or "load") (default: {"save"})</p>
+<p>Accept mode ("save" or "load")</p>
 </td>
 <td><code>'save'</code></td>
 </tr>
@@ -1889,7 +2110,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <td><code></code></td>
 <td>
 <p>File mode ("existing_files", "existing_file", "any_file",
-                  or "directory") (default: {"existing_files"})</p>
+                  or "directory")</p>
 </td>
 <td><code>'existing_files'</code></td>
 </tr>
@@ -1897,7 +2118,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <td><code>parent</code></td>
 <td><code></code></td>
 <td>
-<p>parent widget (default: {None})</p>
+<p>parent widget</p>
 </td>
 <td><code>None</code></td>
 </tr>
@@ -1951,12 +2172,12 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     <span class="sd">"""initialize FileChooserButton</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        extensions: dict allowed extensions (default: {None})</span>
+<span class="sd">        extensions: dict allowed extensions</span>
 <span class="sd">                    form: "'name': ['.ext1', '.ext2']"</span>
-<span class="sd">        mode: Accept mode ("save" or "load") (default: {"save"})</span>
+<span class="sd">        mode: Accept mode ("save" or "load")</span>
 <span class="sd">        file_mode: File mode ("existing_files", "existing_file", "any_file",</span>
-<span class="sd">                              or "directory") (default: {"existing_files"})</span>
-<span class="sd">        parent: parent widget (default: {None})</span>
+<span class="sd">                              or "directory")</span>
+<span class="sd">        parent: parent widget</span>
 <span class="sd">    """</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
@@ -2646,7 +2867,7 @@ show<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <div class="doc doc-object doc-attribute">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit.prompt_text">
 <code class="highlight">
-prompt_text        </code>
+prompt_text: <span class="nb">str</span> </code>
 <span class="doc doc-properties">
 <small class="doc doc-property doc-property-property"><code>property</code></small>
 <small class="doc doc-property doc-property-writable"><code>writable</code></small>
@@ -2784,7 +3005,7 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visible</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visible</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Sets the clear button as ``visible``</span>
 <span class="sd">    :param visible: Visible state (True = visible, False = hidden).</span>
@@ -2835,8 +3056,7 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>19
-20
+<pre><span></span>20
 21
 22
 23
@@ -2858,7 +3078,8 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 39
 40
 41
-42</pre>
+42
+43</pre>
 </div>
 </td>
 <td class="code">
@@ -2908,8 +3129,7 @@ eventFilter<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>44
-45
+<pre><span></span>45
 46
 47
 48
@@ -2928,7 +3148,8 @@ eventFilter<span class="p">(</span><span class="bp">self</span><span class="p">,
 61
 62
 63
-64</pre>
+64
+65</pre>
 </div>
 </td>
 <td class="code">
@@ -2975,10 +3196,10 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>77
-78
+<pre><span></span>78
 79
-80</pre>
+80
+81</pre>
 </div>
 </td>
 <td class="code">
@@ -3008,10 +3229,11 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>82
-83
+<pre><span></span>83
 84
-85</pre>
+85
+86
+87</pre>
 </div>
 </td>
 <td class="code">
@@ -3020,6 +3242,7 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
     <span class="n">button</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">buttonGroup</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">button</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">button</span><span class="p">],</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="n">button</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()</span>
 </code></pre>
 </div>
 </td>
@@ -3041,8 +3264,7 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>66
-67
+<pre><span></span>67
 68
 69
 70
@@ -3050,7 +3272,8 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
 72
 73
 74
-75</pre>
+75
+76</pre>
 </div>
 </td>
 <td class="code">
