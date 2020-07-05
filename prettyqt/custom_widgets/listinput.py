@@ -11,8 +11,6 @@ class ListInput(widgets.LineEdit):
 
     def __init__(self, default_value="", typ=int, allow_single=False, parent=None):
         super().__init__(parent=parent)
-        self.textChanged.connect(self.set_validation_color)
-        self.textChanged.connect(self.value_changed)
         if typ is int:
             val = custom_validators.IntListValidator(allow_single=allow_single)
         elif typ is float:
