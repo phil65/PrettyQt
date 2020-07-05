@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "PrettyQt"
-version = "0.76.1"
+version = "0.76.2"
 description = "A pythonic layer on top of qtpy"
 readme = 'docs/docs/index.md'
 repository = "https://github.com/phil65/prettyqt"
@@ -121,7 +121,7 @@ exclude = '''
 '''
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.76.1"
+version = "0.76.2"
 tag_format = "v$version"
 version_files = [
     "prettyqt/__init__.py:__version__",
