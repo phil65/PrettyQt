@@ -62,7 +62,8 @@ dist: clean ## builds source and wheel package
 bump: ## version bump
 # 	git stash --include-untracked
 	cz bump --changelog --no-verify
-	git add CHANGELOG.md
+	mv CHANGELOG.md docs/docs/changelog.md
+	git add docs/docs/changelog.md
 	git commit --amend --no-edit
 # 	git stash apply
 # 	git push --tags
