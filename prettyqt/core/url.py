@@ -13,6 +13,11 @@ class Url(QtCore.QUrl):
     #     return self.absolutePath()
 
     def to_path(self) -> pathlib.Path:
+        """get pathlib object from the URL
+
+        Returns:
+            Path
+        """
         return pathlib.Path(self.path())
 
     def is_local_file(self) -> bool:
