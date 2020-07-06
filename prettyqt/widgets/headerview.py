@@ -26,15 +26,15 @@ class HeaderView(QtWidgets.QHeaderView):
         super().__init__(o, parent=parent)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
-        self.widget_name = parent.id
+        self._widget_name = parent.id if parent is not None else ""
 
     def save_state(self):
         settings = core.Settings()
-        settings.setValue(f"{self.widget_name}.state", self.saveState())
+        settings.setValue(f"{self._widget_name}.state", self.saveState())
 
     def load_state(self):
         settings = core.Settings()
-        state = settings.value(f"{self.widget_name}.state", None)
+        state = settings.value(f"{self._widget_name}.state", None)
         if state is not None:
             self.restoreState(state)
 
