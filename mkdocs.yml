@@ -16,6 +16,7 @@ nav:
         # - utils: api/utils.md
         # - constants: api/constants.md
     - Contributing: contributing.md
+    - Changelog: changelog.md
 
 theme:
     name: material

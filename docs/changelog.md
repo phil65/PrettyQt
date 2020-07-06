@@ -1,16 +1,9 @@
 ## v0.76.2 (2020-07-06)
 
-### Fix
+### Refactor
 
-- build stuff
-- remove changelog
-- add changelog
-
-## 'v0.76.1 (2020-07-05')
-
-### Fix
-
-- rem tox
+- dont use property setter widget.id
+- dont use property setter widget.title
 
 ## 'v0.76.0 (2020-07-05')
 
