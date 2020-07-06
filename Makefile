@@ -13,6 +13,14 @@ webbrowser.open("file:" + pathname2url(os.path.abspath(sys.argv[1])))
 endef
 export BROWSER_PYSCRIPT
 
+define BUMP_SCRIPT
+import os
+import prettyqt
+version = prettyqt.__version__
+os.system(f'cz changelog --unreleased-version "v{version}')
+endef
+export BUMP_SCRIPT
+
 define PRINT_HELP_PYSCRIPT
 import re, sys
 
@@ -61,6 +69,10 @@ dist: clean ## builds source and wheel package
 
 # install: clean ## install the package to the active Python's site-packages
 # 	python setup.py install
+
+changelog: ## create changelog
+	python -c "$$BUMP_SCRIPT"
+	mv CHANGELOG.md docs/changelog.md
 
 bump: ## version bump
 	git stash --include-untracked
