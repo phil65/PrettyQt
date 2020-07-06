@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
@@ -48,7 +50,13 @@ QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 
 class MessageBox(QtWidgets.QMessageBox):
     def __init__(
-        self, icon=None, title=None, text="", details="", buttons=None, parent=None
+        self,
+        icon: icons.IconType = None,
+        title: Optional[str] = None,
+        text: str = "",
+        details: str = "",
+        buttons: Optional[list] = None,
+        parent=None,
     ):
         super().__init__(parent)
         self.set_icon(icon)

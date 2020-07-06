@@ -265,7 +265,7 @@ class Widget(QtWidgets.QWidget):
     def set_background_color(self, color):
         self.setStyleSheet(f"background-color: {color};")
 
-    def set_stylesheet(self, item, dct: Dict[str, str]) -> str:
+    def set_stylesheet(self, item: str, dct: Dict[str, str]) -> str:
         ss = "; ".join(f"{k.replace('_', '-')}: {v}" for k, v in dct.items())
         stylesheet = f"{item} {{{ss};}}"
         self.setStyleSheet(stylesheet)
