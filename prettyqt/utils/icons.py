@@ -21,7 +21,7 @@ def get_icon(icon: IconType, color: str = "black"):
         icon = gui.Icon()
     elif isinstance(icon, str):
         if icon.startswith("mdi."):
-            icon = qta.icon(icon, color=color)
+            icon = gui.Icon(qta.icon(icon, color=color))
         else:
             icon = gui.Icon(icon)
     elif isinstance(icon, pathlib.Path):
