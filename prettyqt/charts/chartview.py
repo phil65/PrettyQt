@@ -107,7 +107,7 @@ class ChartView(QtCharts.QChartView):
         """
         dlg = widgets.FileDialog(mode="save", caption="Save image")
         filters = {"Bmp files": [".bmp"], "Jpeg files": [".jpg"], "Png files": [".png"]}
-        dlg.set_filter(filters)
+        dlg.set_extension_filter(filters)
         filename = dlg.open_file()
         if not filename:
             return None
