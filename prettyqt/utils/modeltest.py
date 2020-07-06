@@ -21,7 +21,6 @@
 ##
 #############################################################################
 
-import sip
 from PyQt5 import QtCore, QtGui
 
 # This was originally a Trolltech file.  The QBzr folks did some work to
@@ -42,7 +41,7 @@ class ModelTest(QtCore.QObject):
         """
         QtCore.QObject.__init__(self, parent)
         self._model = _model
-        self.model = sip.cast(_model, QtCore.QAbstractItemModel)
+        self.model = _model
         self.insert = []
         self.remove = []
         self.fetchingMore = False
