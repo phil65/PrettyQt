@@ -60,7 +60,7 @@ class MessageBox(QtWidgets.QMessageBox):
 
     @classmethod
     def message(cls, text: str, title: str = None, icon: icons.IconType = None):
-        m = cls(cls.NoIcon, title, text)
+        m = cls("none", title, text)
         m.set_icon(icon)
         return m.show_blocking()
 
