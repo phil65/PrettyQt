@@ -1,23 +1,17 @@
-.PHONY: clean clean-test clean-pyc clean-build docs help
+.PHONY: help clean lint test docs serve release bump
 .DEFAULT_GOAL := help
 
 define BROWSER_PYSCRIPT
 import os, webbrowser, sys
-
-try:
-	from urllib import pathname2url
-except:
-	from urllib.request import pathname2url
-
+from urllib.request import pathname2url
 webbrowser.open("file:" + pathname2url(os.path.abspath(sys.argv[1])))
 endef
 export BROWSER_PYSCRIPT
 
 define BUMP_SCRIPT
-import os
-import prettyqt
+import os, prettyqt
 version = prettyqt.__version__
-os.system(f'cz changelog --unreleased-version "v{version}')
+os.system(f'cz changelog --unreleased-version "v{version}"')
 endef
 export BUMP_SCRIPT
 
@@ -45,12 +39,6 @@ lint: ## check style with flake8
 
 test: ## run tests quickly with the default Python
 	py.test
-
-coverage: ## check code coverage quickly with the default Python
-	coverage run --source prettyqt -m pytest
-	coverage report -m
-	coverage html
-	$(BROWSER) htmlcov/index.html
 
 docs: ## builds the documentation
 	mkdocs build
