@@ -9,7 +9,7 @@ nav:
         - widgets: api/widgets.md
         - charts: api/charts.md
         - webenginewidgets: api/webenginewidgets.md
-        # - syntaxhighlighters: api/syntaxhighlighters.md
+        - syntaxhighlighters: api/syntaxhighlighters.md
         - custom_models: api/custom_models.md
         - custom_widgets: api/custom_widgets.md
         - custom_validators: api/custom_validators.md

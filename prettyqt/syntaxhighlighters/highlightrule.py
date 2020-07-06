@@ -4,6 +4,8 @@
 # see https://github.com/ITVRoC/SeekurJr/blob/master/seekur_12.04/packages/
 # multimaster_fkie/node_manager_fkie/src/node_manager_fkie/yaml_highlighter.py
 
+from typing import Optional
+
 from dataclasses import dataclass
 import regex as re
 from prettyqt import gui
@@ -11,13 +13,13 @@ from prettyqt import gui
 
 @dataclass
 class HighlightRule(object):
-    regex = ""
-    color = "black"
-    italic = False
-    bold = False
-    minimal = False
-    font_size = None
-    nth = 0
+    regex: str = ""
+    color: str = "black"
+    italic: bool = False
+    bold: bool = False
+    minimal: bool = False
+    font_size: Optional[int] = None
+    nth: int = 0
 
     def __init_subclass__(cls, **kwargs):
         super().__init_subclass__(**kwargs)
