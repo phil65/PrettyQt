@@ -68,7 +68,8 @@ class MessageBox(QtWidgets.QMessageBox):
         if icon in ICONS:
             self.setIcon(ICONS[icon])
             return None
-        super().set_icon(icon)
+        icon = icons.get_icon(icon)
+        self.setIconPixmap(icon.get_pixmap(size=64))
 
     def show_blocking(self):
         return BUTTONS.inv[self.exec_()]
@@ -132,6 +133,7 @@ class MessageBox(QtWidgets.QMessageBox):
 if __name__ == "__main__":
     app = widgets.app()
     ret = MessageBox(icon="warning", title="header", text="text", details="details")
+    ret.set_icon("mdi.folder")
     ret.show()
     print(ret)
     app.exec_()
