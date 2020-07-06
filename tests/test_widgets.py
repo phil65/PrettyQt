@@ -1032,6 +1032,8 @@ def test_widget(qtbot):
     widget.set_min_height(200)
     widget.set_max_height(200)
     widget.set_font_size(20)
+    widget.set_id("test")
+    widget.set_unique_id()
     with pytest.raises(ValueError):
         widget.set_cursor("test")
     widget.set_focus_policy("strong")
