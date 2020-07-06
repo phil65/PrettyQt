@@ -48,11 +48,11 @@ class RegexInput(widgets.Widget):
             self.label_error.set_text(message)
 
     @property
-    def pattern(self):
+    def pattern(self) -> str:
         return self.lineedit.text()
 
     @pattern.setter
-    def pattern(self, value):
+    def pattern(self, value: str):
         self.lineedit.set_text(value)
 
     @property
@@ -82,7 +82,7 @@ class RegexInput(widgets.Widget):
     def get_value(self):
         return re.compile(self.pattern, self.compile_flags)
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         return self.lineedit.is_valid()
 
 

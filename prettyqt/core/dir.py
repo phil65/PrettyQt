@@ -12,5 +12,5 @@ class Dir(QtCore.QDir):
     def __str__(self):
         return self.absolutePath()
 
-    def to_path(self):
+    def to_path(self) -> pathlib.Path:
         return pathlib.Path(self.absolutePath())
