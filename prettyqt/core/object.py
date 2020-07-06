@@ -3,8 +3,12 @@
 """
 
 from contextlib import contextmanager
+import itertools
+import collections
 
 from qtpy import QtCore
+
+counter_dict = collections.defaultdict(itertools.count)
 
 
 class Object(QtCore.QObject):
@@ -29,8 +33,16 @@ class Object(QtCore.QObject):
                 dct[k] = v.to_json()
         return dct
 
+    def set_unique_id(self):
+        class_name = type(self).__name__
+        count = next(counter_dict[class_name])
+        self.set_id(f"{class_name}_{count}")
+
     def set_id(self, name: str):
         self.setObjectName(name)
+
+    def get_id(self):
+        return self.objectName()
 
     @property
     def id(self) -> str:
