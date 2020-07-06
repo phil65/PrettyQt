@@ -41,5 +41,5 @@ class Color(QtGui.QColor):
     def from_cmyk(cls, *args, **kwargs):
         return cls(cls.fromCmykF(*args, **kwargs))
 
-    def as_qt(self):
-        return QtGui.QColor(*self.getRgb())
+    def as_qt(self) -> QtGui.QColor:
+        return QtGui.QColor(self)

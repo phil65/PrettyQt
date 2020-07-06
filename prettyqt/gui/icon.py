@@ -39,22 +39,22 @@ class Icon(QtGui.QIcon):
         stream >> px
         super().__init__(px)
 
-    @staticmethod
-    def by_name(name: str):
-        return qta.icon(name)
+    @classmethod
+    def by_name(cls, name: str) -> "Icon":
+        return cls(qta.icon(name))
 
     @classmethod
-    def for_color(cls, color_str: str):
+    def for_color(cls, color_str: str) -> "Icon":
         color = gui.Color.from_text(color_str)
         if color.isValid():
             bitmap = gui.Pixmap(16, 16)
             bitmap.fill(color)
             icon = gui.Icon(bitmap)
         else:
-            icon = qta.icon("mdi.card-outline")
+            icon = cls(qta.icon("mdi.card-outline"))
         return icon
 
-    def get_pixmap(self, size):
+    def get_pixmap(self, size: int) -> QtGui.QPixmap:
         size = core.Size(size, size)
         return self.pixmap(size)
 
