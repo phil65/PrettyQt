@@ -95,16 +95,24 @@ class Widget(QtWidgets.QWidget):
     def set_max_size(self, *size):
         self.setMaximumSize(*size)
 
-    def set_min_width(self, width: int):
+    def set_min_width(self, width: Optional[int]):
+        if width is None:
+            width = 0
         self.setMinimumWidth(width)
 
-    def set_max_width(self, width: int):
+    def set_max_width(self, width: Optional[int]):
+        if width is None:
+            width = QtWidgets.QWIDGETSIZE_MAX
         self.setMaximumWidth(width)
 
-    def set_min_height(self, height: int):
+    def set_min_height(self, height: Optional[int]):
+        if height is None:
+            height = 0
         self.setMinimumHeight(height)
 
-    def set_max_height(self, height: int):
+    def set_max_height(self, height: Optional[int]):
+        if height is None:
+            height = QtWidgets.QWIDGETSIZE_MAX
         self.setMaximumHeight(height)
 
     @property
