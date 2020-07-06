@@ -30,7 +30,7 @@ plugins:
             rendering:
               show_source: true
             selection:
-              inherited_members: true
+              inherited_members: false
     # - mkapi
 markdown_extensions:
     # - smarty
