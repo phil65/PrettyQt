@@ -19,3 +19,8 @@
   hooks:
     - id: commitizen
       stages: [commit-msg]
+- repo: https://github.com/ambv/black
+  rev: stable
+  hooks:
+    - id: black
+      language_version: python3.7
