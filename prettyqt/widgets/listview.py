@@ -8,15 +8,13 @@ from prettyqt import widgets
 from prettyqt.utils import bidict
 
 
-VIEW_MODES = bidict(list=QtWidgets.QListView.ListMode,
-                    icon=QtWidgets.QListView.IconMode)
+VIEW_MODES = bidict(list=QtWidgets.QListView.ListMode, icon=QtWidgets.QListView.IconMode)
 
 
 QtWidgets.QListView.__bases__ = (widgets.AbstractItemView,)
 
 
 class ListView(QtWidgets.QListView):
-
     def set_view_mode(self, mode: str):
         """set view mode
 

@@ -15,6 +15,6 @@ class TextBlockUserData(QtGui.QTextBlockUserData):
         super().__init__()
 
     def __repr__(self):
-        attrs = [i for i in dir(self) if not i.startswith('__')]
+        attrs = [i for i in dir(self) if not i.startswith("__")]
         kwds = ", ".join("%s=%r" % (attr, getattr(self, attr)) for attr in attrs)
         return f"{self.__class__.__name__}({kwds})"

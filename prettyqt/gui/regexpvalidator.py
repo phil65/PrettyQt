@@ -11,7 +11,6 @@ QtGui.QRegExpValidator.__bases__ = (gui.Validator,)
 
 
 class RegExpValidator(QtGui.QRegExpValidator):
-
     def __repr__(self):
         return f"RegExpValidator(RegExp({self.get_regex()!r}))"
 

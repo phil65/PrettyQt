@@ -10,7 +10,6 @@ QtWidgets.QBoxLayout.__bases__ = (widgets.Layout,)
 
 
 class BoxLayout(QtWidgets.QBoxLayout):
-
     def __init__(self, orientation="horizontal", parent=None, margin=None):
         o = self.TopToBottom if orientation == "vertical" else self.LeftToRight
         super().__init__(o, parent)
@@ -18,8 +17,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
             self.set_margin(margin)
 
     def __getstate__(self):
-        return dict(items=self.get_children(),
-                    direction=int(self.direction()))
+        return dict(items=self.get_children(), direction=int(self.direction()))
 
     def __setstate__(self, state):
         self.__init__()
@@ -49,6 +47,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     layout = BoxLayout("vertical")
     widget = widgets.Widget()

@@ -218,6 +218,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     editor = widgets.PlainTextEdit()
     highlighter = PygmentsHighlighter(editor.document())

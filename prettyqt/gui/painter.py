@@ -10,27 +10,30 @@ from prettyqt.utils import bidict, colors
 
 PEN_TYPES = bidict(none=QtCore.Qt.NoPen)
 
-COMP_MODES = bidict(source_over=QtGui.QPainter.CompositionMode_SourceOver,
-                    destination_over=QtGui.QPainter.CompositionMode_DestinationOver,
-                    clear=QtGui.QPainter.CompositionMode_Clear,
-                    source=QtGui.QPainter.CompositionMode_Source,
-                    destination=QtGui.QPainter.CompositionMode_Destination,
-                    source_in=QtGui.QPainter.CompositionMode_SourceIn,
-                    destination_in=QtGui.QPainter.CompositionMode_DestinationIn,
-                    source_out=QtGui.QPainter.CompositionMode_SourceOut,
-                    destination_out=QtGui.QPainter.CompositionMode_DestinationOut,
-                    source_atop=QtGui.QPainter.CompositionMode_SourceAtop,
-                    destination_atop=QtGui.QPainter.CompositionMode_DestinationAtop)
+COMP_MODES = bidict(
+    source_over=QtGui.QPainter.CompositionMode_SourceOver,
+    destination_over=QtGui.QPainter.CompositionMode_DestinationOver,
+    clear=QtGui.QPainter.CompositionMode_Clear,
+    source=QtGui.QPainter.CompositionMode_Source,
+    destination=QtGui.QPainter.CompositionMode_Destination,
+    source_in=QtGui.QPainter.CompositionMode_SourceIn,
+    destination_in=QtGui.QPainter.CompositionMode_DestinationIn,
+    source_out=QtGui.QPainter.CompositionMode_SourceOut,
+    destination_out=QtGui.QPainter.CompositionMode_DestinationOut,
+    source_atop=QtGui.QPainter.CompositionMode_SourceAtop,
+    destination_atop=QtGui.QPainter.CompositionMode_DestinationAtop,
+)
 
-PATTERNS = bidict(solid=QtCore.Qt.SolidPattern,
-                  none=QtCore.Qt.NoBrush,
-                  cross=QtCore.Qt.CrossPattern,
-                  linear_gradient=QtCore.Qt.LinearGradientPattern,
-                  radial_gradient=QtCore.Qt.RadialGradientPattern)
+PATTERNS = bidict(
+    solid=QtCore.Qt.SolidPattern,
+    none=QtCore.Qt.NoBrush,
+    cross=QtCore.Qt.CrossPattern,
+    linear_gradient=QtCore.Qt.LinearGradientPattern,
+    radial_gradient=QtCore.Qt.RadialGradientPattern,
+)
 
 
 class Painter(QtGui.QPainter):
-
     def __enter__(self):
         return self
 
@@ -97,8 +100,9 @@ class Painter(QtGui.QPainter):
             ValueError: composition mode does not exist
         """
         if mode not in COMP_MODES:
-            raise ValueError("Invalid composition mode."
-                             f" Valid values: {COMP_MODES.keys()}")
+            raise ValueError(
+                "Invalid composition mode." f" Valid values: {COMP_MODES.keys()}"
+            )
         self.setCompositionMode(COMP_MODES[mode])
 
     def get_composition_mode(self) -> str:

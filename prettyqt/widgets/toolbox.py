@@ -14,7 +14,6 @@ QtWidgets.QToolBox.__bases__ = (widgets.Frame,)
 
 
 class ToolBox(QtWidgets.QToolBox):
-
     def __getitem__(self, index):
         if isinstance(index, int):
             return self.widget(index)
@@ -24,14 +23,15 @@ class ToolBox(QtWidgets.QToolBox):
     def __getstate__(self):
         children = list()
         for i, widget in enumerate(self.get_children()):
-            dct = dict(widget=widget,
-                       icon=gui.Icon(self.itemIcon(i)),
-                       text=self.itemText(i),
-                       enabled=self.isItemEnabled(i),
-                       tooltip=self.itemToolTip(i))
+            dct = dict(
+                widget=widget,
+                icon=gui.Icon(self.itemIcon(i)),
+                text=self.itemText(i),
+                enabled=self.isItemEnabled(i),
+                tooltip=self.itemToolTip(i),
+            )
             children.append(dct)
-        return dict(items=children,
-                    current_index=self.currentIndex())
+        return dict(items=children, current_index=self.currentIndex())
 
     def __setstate__(self, state):
         self.__init__()
@@ -47,10 +47,9 @@ class ToolBox(QtWidgets.QToolBox):
     def get_children(self) -> list:
         return [self[i] for i in range(self.count())]
 
-    def add_widget(self,
-                   widget,
-                   title: Optional[str] = None,
-                   icon: icons.IconType = None):
+    def add_widget(
+        self, widget, title: Optional[str] = None, icon: icons.IconType = None
+    ):
         if title is None:
             title = widget.id
         if icon:

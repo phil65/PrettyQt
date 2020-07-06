@@ -8,10 +8,12 @@ from prettyqt import gui, widgets, core
 from prettyqt.utils import bidict
 
 
-ECHO_MODES = bidict(normal=QtWidgets.QLineEdit.Normal,
-                    no_echo=QtWidgets.QLineEdit.NoEcho,
-                    password=QtWidgets.QLineEdit.Password,
-                    echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit)
+ECHO_MODES = bidict(
+    normal=QtWidgets.QLineEdit.Normal,
+    no_echo=QtWidgets.QLineEdit.NoEcho,
+    password=QtWidgets.QLineEdit.Password,
+    echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit,
+)
 
 
 QtWidgets.QLineEdit.__bases__ = (widgets.Widget,)
@@ -31,17 +33,19 @@ class LineEdit(QtWidgets.QLineEdit):
         return f"LineEdit: {self.__getstate__()}"
 
     def __getstate__(self):
-        return dict(text=self.text(),
-                    enabled=self.isEnabled(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    font=gui.Font(self.font()),
-                    validator=self.validator(),
-                    max_length=self.maxLength(),
-                    read_only=self.isReadOnly(),
-                    input_mask=self.inputMask(),
-                    has_frame=self.hasFrame(),
-                    placeholder_text=self.placeholderText())
+        return dict(
+            text=self.text(),
+            enabled=self.isEnabled(),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+            font=gui.Font(self.font()),
+            validator=self.validator(),
+            max_length=self.maxLength(),
+            read_only=self.isReadOnly(),
+            input_mask=self.inputMask(),
+            has_frame=self.hasFrame(),
+            placeholder_text=self.placeholderText(),
+        )
 
     def __setstate__(self, state):
         self.__init__()

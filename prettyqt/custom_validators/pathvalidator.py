@@ -8,7 +8,6 @@ from prettyqt import gui
 
 
 class PathValidator(gui.Validator):
-
     def __getstate__(self):
         return dict()
 
@@ -23,6 +22,7 @@ class PathValidator(gui.Validator):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     val = PathValidator()
     app = widgets.app()
     widget = widgets.LineEdit("This is a test")

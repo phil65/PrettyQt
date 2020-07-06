@@ -14,7 +14,6 @@ QtCore.QBuffer.__bases__ = (core.IODevice,)
 
 
 class Buffer(QtCore.QBuffer):
-
     @contextlib.contextmanager
     def open_file(self, flag):
         if flag in OPEN_MODES:

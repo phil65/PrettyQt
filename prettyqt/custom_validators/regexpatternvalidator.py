@@ -9,7 +9,6 @@ from prettyqt import gui
 
 
 class RegexPatternValidator(gui.Validator):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.error_message = ""
@@ -39,6 +38,7 @@ class RegexPatternValidator(gui.Validator):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     w = widgets.LineEdit()
     val = RegexPatternValidator()

@@ -12,7 +12,6 @@ OPTS = json.OPT_NAIVE_UTC | json.OPT_SERIALIZE_NUMPY
 
 
 class MimeData(QtCore.QMimeData):
-
     def set_data(self, mime_type: str, data: str):
         self.setData(mime_type, QtCore.QByteArray(data.encode()))
 

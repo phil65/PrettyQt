@@ -6,7 +6,6 @@ from prettyqt import gui, widgets
 
 
 class MarkdownWindow(widgets.MainWindow):
-
     def __init__(self):
         super().__init__()
         self.resize(500, 500)
@@ -16,10 +15,10 @@ class MarkdownWindow(widgets.MainWindow):
         self.create_menu()
 
     # def _load_finished(self):
-        # frame = self.web_view.page()
-        # self.web_view.page().setViewportSize(frame.contentsSize())
-        # self.resize(frame.contentsSize())
-        # html_data = frame.toHtml()
+    # frame = self.web_view.page()
+    # self.web_view.page().setViewportSize(frame.contentsSize())
+    # self.resize(frame.contentsSize())
+    # html_data = frame.toHtml()
 
     def create_menu(self):
         act_exit = widgets.Action(text="&Exit", icon=gui.Icon("exit.png"), parent=self)
@@ -57,11 +56,9 @@ class MarkdownWindow(widgets.MainWindow):
     def open_new_file(self):
         try:
             dlg = widgets.FileDialog
-            fname = dlg.getOpenFileName(self,
-                                        "open file",
-                                        "",
-                                        "All Text Files (*.md *.markdown *.txt *.*)",
-                                        None)
+            fname = dlg.getOpenFileName(
+                self, "open file", "", "All Text Files (*.md *.markdown *.txt *.*)", None
+            )
             self.web_view.set_markdown_file(fname[0])
         except UnicodeDecodeError:
             self.statusBar().showMessage("Please select only text files")

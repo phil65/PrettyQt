@@ -11,7 +11,6 @@ QtWidgets.QGridLayout.__bases__ = (widgets.Layout,)
 
 
 class GridLayout(QtWidgets.QGridLayout):
-
     def __getitem__(self, idx):
         if isinstance(idx, tuple):
             item = self.itemAtPosition(*idx)
@@ -42,13 +41,13 @@ class GridLayout(QtWidgets.QGridLayout):
         self.__init__()
         for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
             x, y, w, h = pos
-            self[x:x + w - 1, y:y + h - 1] = item
+            self[x : x + w - 1, y : y + h - 1] = item
 
     def __iter__(self):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
     def __add__(self, other):
-        self[self.rowCount(), 0:self.columnCount() - 1] = other
+        self[self.rowCount(), 0 : self.columnCount() - 1] = other
         return self
 
     def add(self, item, rowstart, colstart, rowspan=1, colspan=1):
@@ -56,7 +55,7 @@ class GridLayout(QtWidgets.QGridLayout):
         fn(item, rowstart, colstart, rowspan, colspan)
 
     def append(self, item):
-        self[self.rowCount(), 0:self.columnCount() - 1] = item
+        self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
 
 if __name__ == "__main__":

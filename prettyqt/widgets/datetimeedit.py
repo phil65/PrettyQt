@@ -9,15 +9,17 @@ from qtpy import QtWidgets
 from prettyqt import core, widgets
 
 
-SECTIONS = dict(none=QtWidgets.QDateTimeEdit.NoSection,
-                am_pm=QtWidgets.QDateTimeEdit.AmPmSection,
-                msec=QtWidgets.QDateTimeEdit.MSecSection,
-                second=QtWidgets.QDateTimeEdit.SecondSection,
-                minute=QtWidgets.QDateTimeEdit.MinuteSection,
-                hour=QtWidgets.QDateTimeEdit.HourSection,
-                day=QtWidgets.QDateTimeEdit.DaySection,
-                month=QtWidgets.QDateTimeEdit.MonthSection,
-                year=QtWidgets.QDateTimeEdit.YearSection)
+SECTIONS = dict(
+    none=QtWidgets.QDateTimeEdit.NoSection,
+    am_pm=QtWidgets.QDateTimeEdit.AmPmSection,
+    msec=QtWidgets.QDateTimeEdit.MSecSection,
+    second=QtWidgets.QDateTimeEdit.SecondSection,
+    minute=QtWidgets.QDateTimeEdit.MinuteSection,
+    hour=QtWidgets.QDateTimeEdit.HourSection,
+    day=QtWidgets.QDateTimeEdit.DaySection,
+    month=QtWidgets.QDateTimeEdit.MonthSection,
+    year=QtWidgets.QDateTimeEdit.YearSection,
+)
 
 QtWidgets.QDateTimeEdit.__bases__ = (widgets.AbstractSpinBox,)
 
@@ -36,13 +38,15 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.value_changed.emit(dt)
 
     def __getstate__(self):
-        return dict(calendar_popup=self.calendarPopup(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    datetime=self.get_datetime(),
-                    range=(self.min_datetime(), self.max_datetime()),
-                    display_format=self.displayFormat(),
-                    enabled=self.isEnabled())
+        return dict(
+            calendar_popup=self.calendarPopup(),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+            datetime=self.get_datetime(),
+            range=(self.min_datetime(), self.max_datetime()),
+            display_format=self.displayFormat(),
+            enabled=self.isEnabled(),
+        )
 
     def __setstate__(self, state):
         self.__init__(state["datetime"])

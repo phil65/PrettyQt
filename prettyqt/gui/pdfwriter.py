@@ -8,7 +8,6 @@ from prettyqt import core, widgets
 
 
 class PdfWriter(QtGui.QPdfWriter):
-
     def setup(self, size):
         dpi = widgets.DesktopWidget().logicalDpiX()
         self.setResolution(dpi)

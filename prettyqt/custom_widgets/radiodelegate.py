@@ -38,7 +38,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         layout.addStretch(1)
 
         # set a property that will be used for the mask
-        editor.setProperty('offMask', gui.Region(editor.rect()))
+        editor.setProperty("offMask", gui.Region(editor.rect()))
         editor.installEventFilter(self)
         return editor
 
@@ -58,7 +58,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
             source.clearMask()
         elif event.type() == core.Event.FocusOut:
             # another widget has requested focus, set the mask
-            source.setMask(source.property('offMask'))
+            source.setMask(source.property("offMask"))
             # update the table viewport to get rid of possible
             # grid lines left after masking
             source.parent().update()
@@ -72,7 +72,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         editor.setGeometry(rect)
         # create a new mask based on the option rectangle, then apply it
         mask = gui.Region(0, 0, option.rect.width(), option.rect.height())
-        editor.setProperty('offMask', mask)
+        editor.setProperty("offMask", mask)
         editor.setMask(mask)
 
     def setEditorData(self, editor, index):
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     widget.setColumnCount(3)
     widget.insertRow(0)
     widget.insertRow(0)
-    widget.setHorizontalHeaderLabels(['LIB', 'CELL', 'area'])
+    widget.setHorizontalHeaderLabels(["LIB", "CELL", "area"])
     item = widgets.TableWidgetItem("test")
     widget.setItem(0, 0, item)
     widget.setItem(1, 1, widgets.TableWidgetItem("test"))

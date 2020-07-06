@@ -7,10 +7,12 @@ from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts, core, gui, widgets
 
-ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
-                  right=QtCore.Qt.AlignRight,
-                  top=QtCore.Qt.AlignTop,
-                  bottom=QtCore.Qt.AlignBottom)
+ALIGNMENTS = dict(
+    left=QtCore.Qt.AlignLeft,
+    right=QtCore.Qt.AlignRight,
+    top=QtCore.Qt.AlignTop,
+    bottom=QtCore.Qt.AlignBottom,
+)
 
 ZOOM_IN_FACTOR = 1.1
 ZOOM_OUT_FACTOR = 1.0 / ZOOM_IN_FACTOR
@@ -18,7 +20,6 @@ SCROLL_STEP_SIZE = 10
 
 
 class ChartView(QtCharts.QChartView):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         chart = charts.Chart()
@@ -105,9 +106,7 @@ class ChartView(QtCharts.QChartView):
         let user choose folder and save chart as an image file
         """
         dlg = widgets.FileDialog(mode="save", caption="Save image")
-        filters = {"Bmp files": [".bmp"],
-                   "Jpeg files": [".jpg"],
-                   "Png files": [".png"]}
+        filters = {"Bmp files": [".bmp"], "Jpeg files": [".jpg"], "Png files": [".png"]}
         dlg.set_filter(filters)
         filename = dlg.open_file()
         if not filename:

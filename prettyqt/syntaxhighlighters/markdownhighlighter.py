@@ -14,12 +14,12 @@ class Rule(syntaxhighlighters.HighlightRule):
 
 class Link(Rule):
     regex = r'\[(.+)\]\(([^ ]+)( "(.+)")?\)'
-    color = '#61AFE9'
+    color = "#61AFE9"
 
 
 class Image(Rule):
     regex = r'\!\[(.+)\]\(([^ ]+)( "(.+)")?\)'
-    color = '#2B65D1'
+    color = "#2B65D1"
 
 
 class Heading1(Rule):
@@ -123,6 +123,7 @@ class MarkdownHighlighter(gui.SyntaxHighlighter):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     editor = widgets.PlainTextEdit()
     highlighter = MarkdownHighlighter(editor.document())

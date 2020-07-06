@@ -29,8 +29,7 @@ class ColorChooserButton(widgets.Widget):
         return f"ColorChooserButton({self.current_color})"
 
     def __getstate__(self):
-        return dict(color=self.current_color,
-                    enabled=self.isEnabled())
+        return dict(color=self.current_color, enabled=self.isEnabled())
 
     def __setstate__(self, state):
         self.__init__()

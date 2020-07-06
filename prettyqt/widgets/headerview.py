@@ -14,10 +14,12 @@ QtWidgets.QHeaderView.__bases__ = (widgets.AbstractItemView,)
 
 
 class HeaderView(QtWidgets.QHeaderView):
-    MODES = bidict(interactive=QtWidgets.QHeaderView.Interactive,
-                   fixed=QtWidgets.QHeaderView.Fixed,
-                   stretch=QtWidgets.QHeaderView.Stretch,
-                   resize_to_contents=QtWidgets.QHeaderView.ResizeToContents)
+    MODES = bidict(
+        interactive=QtWidgets.QHeaderView.Interactive,
+        fixed=QtWidgets.QHeaderView.Fixed,
+        stretch=QtWidgets.QHeaderView.Stretch,
+        resize_to_contents=QtWidgets.QHeaderView.ResizeToContents,
+    )
 
     section_vis_changed = QtCore.Signal(int, bool)
 
@@ -51,8 +53,10 @@ class HeaderView(QtWidgets.QHeaderView):
 
     def section_labels(self) -> list:
         model = self.parent().model()
-        return [model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
-                for i in range(self.count())]
+        return [
+            model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
+            for i in range(self.count())
+        ]
 
     def contextMenuEvent(self, event):
         """

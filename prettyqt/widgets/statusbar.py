@@ -11,7 +11,6 @@ QtWidgets.QStatusBar.__bases__ = (widgets.Widget,)
 
 
 class StatusBar(QtWidgets.QStatusBar):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.progress_bar = widgets.ProgressBar()

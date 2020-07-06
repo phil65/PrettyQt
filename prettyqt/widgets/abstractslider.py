@@ -17,13 +17,15 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         self.value_changed.emit(self.value())
 
     def __getstate__(self):
-        return dict(range=(self.minimum(), self.maximum()),
-                    value=self.value(),
-                    has_tracking=self.hasTracking(),
-                    inverted_controls=self.invertedControls(),
-                    inverted_appearance=self.invertedAppearance(),
-                    single_step=self.singleStep(),
-                    page_step=self.pageStep())
+        return dict(
+            range=(self.minimum(), self.maximum()),
+            value=self.value(),
+            has_tracking=self.hasTracking(),
+            inverted_controls=self.invertedControls(),
+            inverted_appearance=self.invertedAppearance(),
+            single_step=self.singleStep(),
+            page_step=self.pageStep(),
+        )
 
     def __setstate__(self, state):
         self.__init__()

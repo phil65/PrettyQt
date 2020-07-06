@@ -6,7 +6,6 @@ from qtpy import QtCore
 
 
 class RegExp(QtCore.QRegExp):
-
     def __repr__(self):
         return f"RegExp({self.pattern()!r})"
 

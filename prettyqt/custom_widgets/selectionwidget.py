@@ -91,9 +91,7 @@ class SelectionWidget(widgets.GroupBox):
 if __name__ == "__main__":
     app = widgets.app()
     widget = SelectionWidget()
-    items = {"Semicolon": ";",
-             "Tab": "\t",
-             "Comma": ","}
+    items = {"Semicolon": ";", "Tab": "\t", "Comma": ","}
     widget.add_items(items)
     widget.add_custom(label="custom", regex=r"\S{1}")
     widget.show()

@@ -8,26 +8,31 @@ from prettyqt import widgets
 from prettyqt.utils import bidict
 
 
-ELIDE_MODES = bidict(left=QtCore.Qt.ElideLeft,
-                     right=QtCore.Qt.ElideRight,
-                     middle=QtCore.Qt.ElideMiddle,
-                     none=QtCore.Qt.ElideNone)
+ELIDE_MODES = bidict(
+    left=QtCore.Qt.ElideLeft,
+    right=QtCore.Qt.ElideRight,
+    middle=QtCore.Qt.ElideMiddle,
+    none=QtCore.Qt.ElideNone,
+)
 
-REMOVE_BEHAVIOURS = bidict(left_tab=QtWidgets.QTabBar.SelectLeftTab,
-                           right_tab=QtWidgets.QTabBar.SelectRightTab,
-                           previous_tab=QtWidgets.QTabBar.SelectPreviousTab)
+REMOVE_BEHAVIOURS = bidict(
+    left_tab=QtWidgets.QTabBar.SelectLeftTab,
+    right_tab=QtWidgets.QTabBar.SelectRightTab,
+    previous_tab=QtWidgets.QTabBar.SelectPreviousTab,
+)
 
-SHAPES = bidict(rounded_north=QtWidgets.QTabBar.RoundedNorth,
-                rounded_south=QtWidgets.QTabBar.RoundedSouth,
-                rounded_west=QtWidgets.QTabBar.RoundedWest,
-                rounded_east=QtWidgets.QTabBar.RoundedEast,
-                triangular_north=QtWidgets.QTabBar.TriangularNorth,
-                triangular_south=QtWidgets.QTabBar.TriangularSouth,
-                triangular_west=QtWidgets.QTabBar.TriangularWest,
-                triangular_east=QtWidgets.QTabBar.TriangularEast)
+SHAPES = bidict(
+    rounded_north=QtWidgets.QTabBar.RoundedNorth,
+    rounded_south=QtWidgets.QTabBar.RoundedSouth,
+    rounded_west=QtWidgets.QTabBar.RoundedWest,
+    rounded_east=QtWidgets.QTabBar.RoundedEast,
+    triangular_north=QtWidgets.QTabBar.TriangularNorth,
+    triangular_south=QtWidgets.QTabBar.TriangularSouth,
+    triangular_west=QtWidgets.QTabBar.TriangularWest,
+    triangular_east=QtWidgets.QTabBar.TriangularEast,
+)
 
-POSITIONS = bidict(left=QtWidgets.QTabBar.LeftSide,
-                   right=QtWidgets.QTabBar.RightSide)
+POSITIONS = bidict(left=QtWidgets.QTabBar.LeftSide, right=QtWidgets.QTabBar.RightSide)
 
 
 QtWidgets.QTabBar.__bases__ = (widgets.Widget,)
@@ -51,13 +56,15 @@ class TabBar(QtWidgets.QTabBar):
         self.set_tab(index[0], index[1], value)
 
     def __getstate__(self):
-        return dict(movable=self.isMovable(),
-                    document_mode=self.documentMode(),
-                    current_index=self.currentIndex(),
-                    # shape=self.shape(),
-                    draw_base=self.drawBase(),
-                    elide_mode=self.get_elide_mode(),
-                    icon_size=self.iconSize())
+        return dict(
+            movable=self.isMovable(),
+            document_mode=self.documentMode(),
+            current_index=self.currentIndex(),
+            # shape=self.shape(),
+            draw_base=self.drawBase(),
+            elide_mode=self.get_elide_mode(),
+            icon_size=self.iconSize(),
+        )
 
     def __setstate__(self, state):
         self.__init__()

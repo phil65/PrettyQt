@@ -8,9 +8,11 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
 
-STATES = bidict(unchecked=QtCore.Qt.Unchecked,
-                partial=QtCore.Qt.PartiallyChecked,
-                checked=QtCore.Qt.Checked)
+STATES = bidict(
+    unchecked=QtCore.Qt.Unchecked,
+    partial=QtCore.Qt.PartiallyChecked,
+    checked=QtCore.Qt.Checked,
+)
 
 
 QtWidgets.QCheckBox.__bases__ = (widgets.AbstractButton,)
@@ -26,14 +28,16 @@ class CheckBox(QtWidgets.QCheckBox):
         self.setChecked(checked)
 
     def __getstate__(self):
-        return dict(object_name=self.id,
-                    checkable=self.isCheckable(),
-                    checkstate=self.get_checkstate(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    is_tristate=self.isTristate(),
-                    text=self.text(),
-                    enabled=self.isEnabled())
+        return dict(
+            object_name=self.id,
+            checkable=self.isCheckable(),
+            checkstate=self.get_checkstate(),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+            is_tristate=self.isTristate(),
+            text=self.text(),
+            enabled=self.isEnabled(),
+        )
 
     def __setstate__(self, state):
         self.__init__()

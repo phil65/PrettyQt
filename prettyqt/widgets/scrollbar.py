@@ -7,8 +7,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
-                      vertical=QtCore.Qt.Vertical)
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
 
 
 QtWidgets.QScrollBar.__bases__ = (widgets.AbstractSlider,)

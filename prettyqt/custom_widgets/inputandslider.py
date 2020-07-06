@@ -24,6 +24,7 @@ class InputAndSlider(widgets.Widget):
             self.set_range(*bounds)
         self.spinbox.valueChanged.connect(self.slider.set_value)
         self.slider.valueChanged.connect(self.spinbox.set_value)
+
     # def __getstate__(self):
     #     return dict(path=self.path,
     #                 extensions=self.extensions,

@@ -9,21 +9,24 @@ from prettyqt.utils import bidict
 
 area = QtWidgets.QAbstractScrollArea
 
-SIZE_POLICIES = bidict(content=area.AdjustToContents,
-                       first_show=area.AdjustToContentsOnFirstShow,
-                       ignored=area.AdjustIgnored)
+SIZE_POLICIES = bidict(
+    content=area.AdjustToContents,
+    first_show=area.AdjustToContentsOnFirstShow,
+    ignored=area.AdjustIgnored,
+)
 
 
-SCROLLBAR_POLICY = bidict(always_on=QtCore.Qt.ScrollBarAlwaysOn,
-                          always_off=QtCore.Qt.ScrollBarAlwaysOff,
-                          as_needed=QtCore.Qt.ScrollBarAsNeeded)
+SCROLLBAR_POLICY = bidict(
+    always_on=QtCore.Qt.ScrollBarAlwaysOn,
+    always_off=QtCore.Qt.ScrollBarAlwaysOff,
+    as_needed=QtCore.Qt.ScrollBarAsNeeded,
+)
 
 
 QtWidgets.QAbstractScrollArea.__bases__ = (widgets.Frame,)
 
 
 class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.h_scrollbar = widgets.ScrollBar()

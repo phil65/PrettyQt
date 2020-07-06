@@ -8,10 +8,12 @@ from prettyqt import widgets, core
 from prettyqt.utils import bidict, icons
 
 
-SCROLL_HINTS = bidict(ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
-                      position_at_top=QtWidgets.QAbstractItemView.PositionAtTop,
-                      position_at_bottom=QtWidgets.QAbstractItemView.PositionAtBottom,
-                      position_at_center=QtWidgets.QAbstractItemView.PositionAtCenter)
+SCROLL_HINTS = bidict(
+    ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
+    position_at_top=QtWidgets.QAbstractItemView.PositionAtTop,
+    position_at_bottom=QtWidgets.QAbstractItemView.PositionAtBottom,
+    position_at_center=QtWidgets.QAbstractItemView.PositionAtCenter,
+)
 
 
 QtWidgets.QListWidget.__bases__ = (widgets.ListView,)
@@ -48,10 +50,12 @@ class ListWidget(QtWidgets.QListWidget):
         return self.count()
 
     def __getstate__(self):
-        return dict(items=self.get_children(),
-                    selection_mode=self.get_selection_mode(),
-                    sorting_enabled=self.isSortingEnabled(),
-                    current_row=self.currentRow())
+        return dict(
+            items=self.get_children(),
+            selection_mode=self.get_selection_mode(),
+            sorting_enabled=self.isSortingEnabled(),
+            current_row=self.currentRow(),
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -79,10 +83,7 @@ class ListWidget(QtWidgets.QListWidget):
             else:
                 self.add(i)
 
-    def add(self,
-            label: str,
-            data=NoData,
-            icon: icons.IconType = None):
+    def add(self, label: str, data=NoData, icon: icons.IconType = None):
         if data is NoData:
             data = label
         item = widgets.ListWidgetItem(label)

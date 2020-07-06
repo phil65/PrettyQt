@@ -11,7 +11,6 @@ QtWidgets.QTreeView.__bases__ = (widgets.AbstractItemView,)
 
 
 class TreeView(QtWidgets.QTreeView):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         class_name = type(self).__name__

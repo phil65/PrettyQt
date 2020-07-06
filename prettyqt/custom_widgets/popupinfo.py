@@ -16,10 +16,12 @@ class PopupInfo(widgets.Dialog):
         super().__init__(parent=parent)
         self.timer = core.Timer.single_shot(callback=self.close)
         self.label = widgets.Label()
-        self.setWindowFlags(self.windowFlags() |
-                            QtCore.Qt.Tool |
-                            QtCore.Qt.WindowStaysOnTopHint |
-                            QtCore.Qt.FramelessWindowHint)
+        self.setWindowFlags(
+            self.windowFlags()
+            | QtCore.Qt.Tool
+            | QtCore.Qt.WindowStaysOnTopHint
+            | QtCore.Qt.FramelessWindowHint
+        )
         layout = widgets.BoxLayout("vertical")
         layout.set_margin(20)
         self.set_layout(layout)

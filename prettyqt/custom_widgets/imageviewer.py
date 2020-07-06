@@ -6,7 +6,6 @@ from prettyqt import widgets
 
 
 class ImageViewer(widgets.Widget):
-
     def __init__(self, title="", path=None, parent=None):
         super().__init__(parent)
         if title:

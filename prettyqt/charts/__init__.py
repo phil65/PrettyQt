@@ -10,9 +10,11 @@ from .lineseries import LineSeries
 from .chart import Chart
 from .chartview import ChartView
 
-__all__ = ["AbstractSeries",
-           "XYSeries",
-           "ChartView",
-           "Chart",
-           "LineSeries",
-           "ScatterSeries"]
+__all__ = [
+    "AbstractSeries",
+    "XYSeries",
+    "ChartView",
+    "Chart",
+    "LineSeries",
+    "ScatterSeries",
+]

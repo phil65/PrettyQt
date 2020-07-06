@@ -26,11 +26,9 @@ class ProgressDialog(QtWidgets.QProgressDialog):
 
         self.set_icon("mdi.timer-sand-empty")
         self.set_modality("application")
-        self.set_flags(minimize=False,
-                       maximize=False,
-                       close=False,
-                       stay_on_top=True,
-                       window=True)
+        self.set_flags(
+            minimize=False, maximize=False, close=False, stay_on_top=True, window=True
+        )
         self.setCancelButton(None)
         self.cancel()
 

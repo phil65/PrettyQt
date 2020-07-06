@@ -6,7 +6,6 @@ from qtpy import QtGui
 
 
 class Color(QtGui.QColor):
-
     def __repr__(self):
         return f"Color({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
 

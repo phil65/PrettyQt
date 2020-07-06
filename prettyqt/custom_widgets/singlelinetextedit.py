@@ -6,7 +6,6 @@ from prettyqt import gui, widgets
 
 
 class SingleLineTextEdit(widgets.PlainTextEdit):
-
     def __init__(self, parent=None):
         super().__init__(parent=parent)
         self.textChanged.connect(self._on_text_changed)

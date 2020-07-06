@@ -7,7 +7,6 @@ from prettyqt import core
 
 
 class RegularExpressionMatchIterator(QtCore.QRegularExpressionMatchIterator):
-
     def __repr__(self):
         return "RegularExpressionMatchIterator()"
 

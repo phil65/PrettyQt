@@ -6,7 +6,6 @@ from prettyqt import widgets
 
 
 class OptionalWidget(widgets.GroupBox):
-
     def __init__(self, widget, title="", parent=None):
         super().__init__(checkable=True, title=title)
         self.set_layout("vertical")

@@ -8,23 +8,26 @@ from prettyqt import gui
 from prettyqt.utils import bidict, icons
 
 
-STATES = bidict(unchecked=QtCore.Qt.Unchecked,
-                partial=QtCore.Qt.PartiallyChecked,
-                checked=QtCore.Qt.Checked)
+STATES = bidict(
+    unchecked=QtCore.Qt.Unchecked,
+    partial=QtCore.Qt.PartiallyChecked,
+    checked=QtCore.Qt.Checked,
+)
 
 
 class ListWidgetItem(QtWidgets.QListWidgetItem):
-
     def __repr__(self):
         return f"ListWidgetItem({self.icon()}, {self.text()!r})"
 
     def __getstate__(self):
-        return dict(text=self.text(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    checkstate=self.get_checkstate(),
-                    icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
-                    data=self.data(QtCore.Qt.UserRole))
+        return dict(
+            text=self.text(),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+            checkstate=self.get_checkstate(),
+            icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
+            data=self.data(QtCore.Qt.UserRole),
+        )
 
     def __setstate__(self, state):
         self.__init__()

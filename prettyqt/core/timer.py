@@ -11,7 +11,6 @@ QtCore.QTimer.__bases__ = (core.Object,)
 
 
 class Timer(QtCore.QTimer):
-
     @classmethod
     def single_shot(cls, callback):
         timer = cls()

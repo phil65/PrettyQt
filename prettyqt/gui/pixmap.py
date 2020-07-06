@@ -14,7 +14,6 @@ QtGui.QPixmap.__bases__ = (gui.PaintDevice,)
 
 
 class Pixmap(QtGui.QPixmap):
-
     @classmethod
     def from_file(cls, path: Union[pathlib.Path, str]):
         if isinstance(path, str):

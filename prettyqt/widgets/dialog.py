@@ -13,18 +13,19 @@ QtWidgets.QDialog.__bases__ = (widgets.Widget,)
 
 
 class BaseDialog(QtWidgets.QDialog):
-
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
 
     def __getstate__(self):
         icon = gui.Icon(self.windowIcon())
-        return dict(layout=self.layout(),
-                    title=self.windowTitle(),
-                    is_maximized=self.isMaximized(),
-                    has_sizegrip=self.isSizeGripEnabled(),
-                    icon=icon if not icon.isNull() else None,
-                    size=(self.size().width(), self.size().height()))
+        return dict(
+            layout=self.layout(),
+            title=self.windowTitle(),
+            is_maximized=self.isMaximized(),
+            has_sizegrip=self.isSizeGripEnabled(),
+            icon=icon if not icon.isNull() else None,
+            size=(self.size().width(), self.size().height()),
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -64,8 +65,7 @@ class BaseDialog(QtWidgets.QDialog):
         self.setWindowIcon(icon)
 
     def add_buttonbox(self):
-        button_box = widgets.DialogButtonBox.create(ok=self.accept,
-                                                    cancel=self.reject)
+        button_box = widgets.DialogButtonBox.create(ok=self.accept, cancel=self.reject)
         self.box += button_box
         return button_box
 
@@ -81,12 +81,14 @@ class Dialog(BaseDialog):
 
     DEFAULT_SIZE = None
 
-    def __init__(self,
-                 title: str = "",
-                 icon=None,
-                 parent=None,
-                 delete_on_close: bool = True,
-                 layout: Union[None, str, QtWidgets.QLayout] = None):
+    def __init__(
+        self,
+        title: str = "",
+        icon=None,
+        parent=None,
+        delete_on_close: bool = True,
+        layout: Union[None, str, QtWidgets.QLayout] = None,
+    ):
         super().__init__(parent=parent)
         if self.DEFAULT_SIZE:
             self.resize(*self.DEFAULT_SIZE)
@@ -102,6 +104,7 @@ if __name__ == "__main__":
     app = widgets.app()
     w = Dialog()
     import pickle
+
     with open("data.pkl", "wb") as jar:
         pickle.dump(w, jar)
     with open("data.pkl", "rb") as jar:

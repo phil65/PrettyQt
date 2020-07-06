@@ -7,11 +7,13 @@ __email__ = "phil65@kodi.tv"
 __version__ = "0.76.2"
 
 
-__all__ = ["core",
-           "gui",
-           "widgets",
-           "custom_widgets",
-           "custom_models",
-           "syntaxhighlighters",
-           "charts",
-           "webenginewidgets"]
+__all__ = [
+    "core",
+    "gui",
+    "widgets",
+    "custom_widgets",
+    "custom_models",
+    "syntaxhighlighters",
+    "charts",
+    "webenginewidgets",
+]

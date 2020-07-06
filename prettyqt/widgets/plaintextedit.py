@@ -10,14 +10,18 @@ from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict
 from prettyqt.gui import textcursor
 
-WRAP_MODES = bidict(none=QtGui.QTextOption.NoWrap,
-                    word=QtGui.QTextOption.WordWrap,
-                    manual=QtGui.QTextOption.ManualWrap,
-                    anywhere=QtGui.QTextOption.WrapAnywhere,
-                    boundary_or_anywhere=QtGui.QTextOption.WrapAtWordBoundaryOrAnywhere)
+WRAP_MODES = bidict(
+    none=QtGui.QTextOption.NoWrap,
+    word=QtGui.QTextOption.WordWrap,
+    manual=QtGui.QTextOption.ManualWrap,
+    anywhere=QtGui.QTextOption.WrapAnywhere,
+    boundary_or_anywhere=QtGui.QTextOption.WrapAtWordBoundaryOrAnywhere,
+)
 
-LINE_WRAP_MODES = bidict(none=QtWidgets.QPlainTextEdit.NoWrap,
-                         widget_width=QtWidgets.QPlainTextEdit.WidgetWidth)
+LINE_WRAP_MODES = bidict(
+    none=QtWidgets.QPlainTextEdit.NoWrap,
+    widget_width=QtWidgets.QPlainTextEdit.WidgetWidth,
+)
 
 MOVE_OPERATIONS = textcursor.MOVE_OPERATIONS
 MOVE_MODES = textcursor.MOVE_MODES
@@ -37,10 +41,12 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         self.set_read_only(read_only)
 
     def __getstate__(self):
-        return dict(text=self.text(),
-                    enabled=self.isEnabled(),
-                    read_only=self.isReadOnly(),
-                    font=gui.Font(self.font()))
+        return dict(
+            text=self.text(),
+            enabled=self.isEnabled(),
+            read_only=self.isReadOnly(),
+            font=gui.Font(self.font()),
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -138,8 +144,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             ValueError: line wrap mode does not exist
         """
         if mode not in LINE_WRAP_MODES:
-            raise ValueError(f"invalid wrap mode. "
-                             f"Allowed values: {LINE_WRAP_MODES.keys()}")
+            raise ValueError(
+                f"invalid wrap mode. " f"Allowed values: {LINE_WRAP_MODES.keys()}"
+            )
         self.setLineWrapMode(LINE_WRAP_MODES[mode])
 
     def _on_value_change(self):
@@ -175,6 +182,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
 if __name__ == "__main__":
     from prettyqt import custom_validators
+
     val = custom_validators.RegularExpressionValidator()
     app = widgets.app()
     widget = PlainTextEdit("This is a test")

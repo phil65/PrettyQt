@@ -8,11 +8,9 @@ from prettyqt import gui, widgets
 
 
 class IconLabel(widgets.Widget):
-
-    def __init__(self, text=None,
-                 tooltip="",
-                 icon="mdi.help-circle-outline",
-                 parent=None):
+    def __init__(
+        self, text=None, tooltip="", icon="mdi.help-circle-outline", parent=None
+    ):
         super().__init__(parent=parent)
         self.set_layout("horizontal")
         self.label = widgets.Label(text)

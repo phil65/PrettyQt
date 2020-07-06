@@ -17,6 +17,7 @@ from .buffer import Buffer
 from .settings import Settings
 from .date import Date
 from .datetime import DateTime
+
 # from .size import Size
 # from .sizef import SizeF
 # from .point import Point
@@ -24,6 +25,7 @@ from .datetime import DateTime
 from .timer import Timer
 from .translator import Translator
 from .thread import Thread
+
 # from .rect import Rect
 # from .rectf import RectF
 from .regularexpressionmatch import RegularExpressionMatch
@@ -52,42 +54,44 @@ from qtpy.QtCore import QSizeF as SizeF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
 
-__all__ = ["Object",
-           "Url",
-           "CoreApplication",
-           "IODevice",
-           "FileDevice",
-           "File",
-           "Buffer",
-           "Settings",
-           "Date",
-           "DateTime",
-           "Size",
-           "SizeF",
-           "Point",
-           "PointF",
-           "Timer",
-           "Translator",
-           "Thread",
-           "Rect",
-           "RectF",
-           "MimeData",
-           "Dir",
-           "Event",
-           "DirIterator",
-           "ItemSelectionModel",
-           "Slot",
-           "Property",
-           "RegularExpressionMatch",
-           "RegularExpressionMatchIterator",
-           "RegExp",
-           "RegularExpression",
-           "Runnable",
-           "ModelIndex",
-           "ThreadPool",
-           "Signal",
-           "AbstractItemModel",
-           "AbstractProxyModel",
-           "AbstractListModel",
-           "SortFilterProxyModel",
-           "AbstractTableModel"]
+__all__ = [
+    "Object",
+    "Url",
+    "CoreApplication",
+    "IODevice",
+    "FileDevice",
+    "File",
+    "Buffer",
+    "Settings",
+    "Date",
+    "DateTime",
+    "Size",
+    "SizeF",
+    "Point",
+    "PointF",
+    "Timer",
+    "Translator",
+    "Thread",
+    "Rect",
+    "RectF",
+    "MimeData",
+    "Dir",
+    "Event",
+    "DirIterator",
+    "ItemSelectionModel",
+    "Slot",
+    "Property",
+    "RegularExpressionMatch",
+    "RegularExpressionMatchIterator",
+    "RegExp",
+    "RegularExpression",
+    "Runnable",
+    "ModelIndex",
+    "ThreadPool",
+    "Signal",
+    "AbstractItemModel",
+    "AbstractProxyModel",
+    "AbstractListModel",
+    "SortFilterProxyModel",
+    "AbstractTableModel",
+]

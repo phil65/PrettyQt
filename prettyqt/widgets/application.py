@@ -16,7 +16,6 @@ QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
 
 class Application(QtWidgets.QApplication):
-
     def set_icon(self, icon: icons.IconType):
         """set the icon for the menu
 
@@ -31,11 +30,13 @@ class Application(QtWidgets.QApplication):
         translator.load(str(path))
         self.installTranslator(translator)
 
-    def set_metadata(self,
-                     app_name: Optional[str] = None,
-                     app_version: Optional[str] = None,
-                     org_name: Optional[str] = None,
-                     org_domain: Optional[str] = None):
+    def set_metadata(
+        self,
+        app_name: Optional[str] = None,
+        app_version: Optional[str] = None,
+        org_name: Optional[str] = None,
+        org_domain: Optional[str] = None,
+    ):
         if app_name:
             self.setApplicationName(app_name)
         if app_version:
@@ -46,14 +47,15 @@ class Application(QtWidgets.QApplication):
             self.setOrganizationDomain(org_domain)
 
     def about_popup(self, title="About"):
-        text = (f"{self.applicationName()}\n\n"
-                f"{self.organizationName()}\n"
-                f"{self.applicationVersion()}\n"
-                f"{self.organizationDomain()}")
-        popup = widgets.MessageBox(widgets.MessageBox.NoIcon,
-                                   title,
-                                   text,
-                                   buttons=widgets.MessageBox.Ok)
+        text = (
+            f"{self.applicationName()}\n\n"
+            f"{self.organizationName()}\n"
+            f"{self.applicationVersion()}\n"
+            f"{self.organizationDomain()}"
+        )
+        popup = widgets.MessageBox(
+            widgets.MessageBox.NoIcon, title, text, buttons=widgets.MessageBox.Ok
+        )
         popup.set_icon("mdi.information-outline")
         popup.exec_()
 

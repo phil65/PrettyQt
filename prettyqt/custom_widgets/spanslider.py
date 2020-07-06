@@ -222,12 +222,16 @@ class SpanSlider(widgets.Slider):
     def swap_controls(self):
         self.lower, self.upper = self.upper, self.lower
         self.lower_pressed, self.upper_pressed = self.upper_pressed, self.lower_pressed
-        self.last_pressed = (self.UPPER_HANDLE if
-                             self.last_pressed == self.LOWER_HANDLE
-                             else self.LOWER_HANDLE)
-        self.main_control = (self.UPPER_HANDLE if
-                             self.main_control == self.LOWER_HANDLE
-                             else self.LOWER_HANDLE)
+        self.last_pressed = (
+            self.UPPER_HANDLE
+            if self.last_pressed == self.LOWER_HANDLE
+            else self.LOWER_HANDLE
+        )
+        self.main_control = (
+            self.UPPER_HANDLE
+            if self.main_control == self.LOWER_HANDLE
+            else self.LOWER_HANDLE
+        )
 
     def update_range(self, min_, max_):
         # set_span() takes care of keeping span in range
@@ -260,11 +264,9 @@ class SpanSlider(widgets.Slider):
         minv = min(lrv, urv)
         maxv = max(lrv, urv)
         c = self.style().subControlRect(SLIDER_STYLE, opt, GROOVE_STYLE, self).center()
-        spanRect = core.Rect(core.Point(c.x() - 2, minv),
-                             core.Point(c.x() + 1, maxv))
+        spanRect = core.Rect(core.Point(c.x() - 2, minv), core.Point(c.x() + 1, maxv))
         if self.is_horizontal():
-            spanRect = core.Rect(core.Point(minv, c.y() - 2),
-                                 core.Point(maxv, c.y() + 1))
+            spanRect = core.Rect(core.Point(minv, c.y() - 2), core.Point(maxv, c.y() + 1))
         self.draw_span(painter, spanRect)
 
         # handles
@@ -299,11 +301,23 @@ class SpanSlider(widgets.Slider):
         # pen & brush
         painter.setPen(gui.Pen(self.gradient_left, 0))
         if opt.is_horizontal():
-            self.setup_painter(painter, opt.orientation, groove.center().x(),
-                               groove.top(), groove.center().x(), groove.bottom())
+            self.setup_painter(
+                painter,
+                opt.orientation,
+                groove.center().x(),
+                groove.top(),
+                groove.center().x(),
+                groove.bottom(),
+            )
         else:
-            self.setup_painter(painter, opt.orientation, groove.left(),
-                               groove.center().y(), groove.right(), groove.center().y())
+            self.setup_painter(
+                painter,
+                opt.orientation,
+                groove.left(),
+                groove.center().y(),
+                groove.right(),
+                groove.center().y(),
+            )
 
         # draw groove
         intersected = core.RectF(rect.intersected(groove))
@@ -355,22 +369,19 @@ class SpanSlider(widgets.Slider):
             event.ignore()
             return
 
-        self.upper_pressed = self.handle_mouse_press(event.pos(),
-                                                     self.upper_pressed,
-                                                     self.upper,
-                                                     self.UPPER_HANDLE)
+        self.upper_pressed = self.handle_mouse_press(
+            event.pos(), self.upper_pressed, self.upper, self.UPPER_HANDLE
+        )
         if self.upper_pressed != HANDLE_STYLE:
-            self.lower_pressed = self.handle_mouse_press(event.pos(),
-                                                         self.lower_pressed,
-                                                         self.lower,
-                                                         self.LOWER_HANDLE)
+            self.lower_pressed = self.handle_mouse_press(
+                event.pos(), self.lower_pressed, self.lower, self.LOWER_HANDLE
+            )
 
         self.first_movement = True
         event.accept()
 
     def mouseMoveEvent(self, event):
-        if (self.lower_pressed != HANDLE_STYLE and
-                self.upper_pressed != HANDLE_STYLE):
+        if self.lower_pressed != HANDLE_STYLE and self.upper_pressed != HANDLE_STYLE:
             event.ignore()
             return
 
@@ -436,15 +447,16 @@ class SpanSlider(widgets.Slider):
             slider_min = gr.y()
             slider_max = gr.bottom() - len_slider + 1
 
-        return widgets.Style.sliderValueFromPosition(self.minimum(),
-                                                     self.maximum(),
-                                                     pos - slider_min,
-                                                     slider_max - slider_min,
-                                                     opt.upsideDown)
+        return widgets.Style.sliderValueFromPosition(
+            self.minimum(),
+            self.maximum(),
+            pos - slider_min,
+            slider_max - slider_min,
+            opt.upsideDown,
+        )
 
 
 class SpanSliderWidget(widgets.Widget):
-
     def __init__(self, *args, parent=None, **kwargs):
         super().__init__(parent=parent)
         self.set_layout("grid")

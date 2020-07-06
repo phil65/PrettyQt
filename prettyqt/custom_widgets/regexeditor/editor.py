@@ -4,6 +4,7 @@ This module contains the editor widget implementation.
 import sre_constants
 from prettyqt import widgets, core, custom_widgets, custom_models, constants
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
+
 try:
     import regex as re
 except ImportError:
@@ -31,8 +32,9 @@ class RegexEditorWidget(widgets.Widget):
         self.lineedit_regex = widgets.LineEdit(regex)
         self.lineedit_regex.set_min_size(400, 0)
         self.layout_toprow.add(self.lineedit_regex)
-        self.tb_flags = custom_widgets.BoolDictToolButton("Flags",
-                                                          icon="mdi.flag-variant-outline")
+        self.tb_flags = custom_widgets.BoolDictToolButton(
+            "Flags", icon="mdi.flag-variant-outline"
+        )
         self.layout_toprow.add(self.tb_flags)
         self.grid.add(self.layout_toprow, 1, 0)
         self.left_layout.add(self.groupbox)
@@ -44,8 +46,9 @@ class RegexEditorWidget(widgets.Widget):
         self.label_num_matches = widgets.Label("No match")
         self.label_num_matches.set_alignment("center")
         self.left_layout.add(self.groupbox_teststring)
-        self.groupbox_substitution = widgets.GroupBox(title="Substitution",
-                                                      checkable=True)
+        self.groupbox_substitution = widgets.GroupBox(
+            title="Substitution", checkable=True
+        )
         self.layout_substitution = widgets.GridLayout(self.groupbox_substitution)
         self.lineedit_substitution = widgets.LineEdit()
         self.lineedit_substitution.textChanged.connect(self.update_sub_textedit)
@@ -77,16 +80,20 @@ class RegexEditorWidget(widgets.Widget):
         self.cb_quickref.stateChanged.connect(self.quick_ref_requested)
         self.tb_flags.triggered.connect(self._update_view)
         self.textedit_teststring.textChanged.connect(self._update_view)
-        dct = {"multiline": "MultiLine",
-               "ignorecase": "Ignore case",
-               "ascii": "ASCII-only matching",
-               "dotall": "Dot matches newline",
-               "verbose": "Ignore whitespace"}
-        self._mapping = {"ignorecase": re.IGNORECASE,
-                         "multiline": re.MULTILINE,
-                         "ascii": re.ASCII,
-                         "dotall": re.DOTALL,
-                         "verbose": re.VERBOSE}
+        dct = {
+            "multiline": "MultiLine",
+            "ignorecase": "Ignore case",
+            "ascii": "ASCII-only matching",
+            "dotall": "Dot matches newline",
+            "verbose": "Ignore whitespace",
+        }
+        self._mapping = {
+            "ignorecase": re.IGNORECASE,
+            "multiline": re.MULTILINE,
+            "ascii": re.ASCII,
+            "dotall": re.DOTALL,
+            "verbose": re.VERBOSE,
+        }
         self.tb_flags.set_dict(dct)
         self._update_view()
 

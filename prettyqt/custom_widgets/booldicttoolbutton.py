@@ -6,7 +6,6 @@ from prettyqt import widgets
 
 
 class BoolDictToolButton(widgets.ToolButton):
-
     def __init__(self, title, icon=None, dct=None, parent=None):
         super().__init__(parent=parent)
         self.set_text(title)
@@ -39,8 +38,7 @@ class BoolDictToolButton(widgets.ToolButton):
 
 if __name__ == "__main__":
     app = widgets.app()
-    dct = dict(a="test",
-               b="test2")
+    dct = dict(a="test", b="test2")
     w = BoolDictToolButton("Title", None, dct)
     w.show()
     app.exec_()

@@ -9,18 +9,23 @@ from qtpy import QtWidgets, QtGui
 from prettyqt import gui, widgets
 from prettyqt.utils import bidict, colors
 
-VIEW_MODES = bidict(default=QtWidgets.QMdiArea.SubWindowView,
-                    tabbed=QtWidgets.QMdiArea.TabbedView)
+VIEW_MODES = bidict(
+    default=QtWidgets.QMdiArea.SubWindowView, tabbed=QtWidgets.QMdiArea.TabbedView
+)
 
 
-WINDOW_ORDERS = bidict(creation=QtWidgets.QMdiArea.CreationOrder,
-                       stacking=QtWidgets.QMdiArea.StackingOrder,
-                       activation_history=QtWidgets.QMdiArea.ActivationHistoryOrder)
+WINDOW_ORDERS = bidict(
+    creation=QtWidgets.QMdiArea.CreationOrder,
+    stacking=QtWidgets.QMdiArea.StackingOrder,
+    activation_history=QtWidgets.QMdiArea.ActivationHistoryOrder,
+)
 
-TAB_POSITIONS = bidict(north=QtWidgets.QTabWidget.North,
-                       south=QtWidgets.QTabWidget.South,
-                       west=QtWidgets.QTabWidget.West,
-                       east=QtWidgets.QTabWidget.East)
+TAB_POSITIONS = bidict(
+    north=QtWidgets.QTabWidget.North,
+    south=QtWidgets.QTabWidget.South,
+    west=QtWidgets.QTabWidget.West,
+    east=QtWidgets.QTabWidget.East,
+)
 
 PATTERNS = gui.painter.PATTERNS
 
@@ -28,7 +33,6 @@ QtWidgets.QMdiArea.__bases__ = (widgets.AbstractScrollArea,)
 
 
 class MdiArea(QtWidgets.QMdiArea):
-
     def __add__(self, other):
         if isinstance(other, QtWidgets.QWidget):
             self.add(other)
@@ -109,9 +113,11 @@ class MdiArea(QtWidgets.QMdiArea):
         """
         return TAB_POSITIONS.inv[self.tabPosition()]
 
-    def set_background(self,
-                       brush_or_color: Union[QtGui.QBrush, colors.ColorType],
-                       pattern: str = "solid"):
+    def set_background(
+        self,
+        brush_or_color: Union[QtGui.QBrush, colors.ColorType],
+        pattern: str = "solid",
+    ):
         if isinstance(brush_or_color, QtGui.QBrush):
             self.setBackground(brush_or_color)
         else:

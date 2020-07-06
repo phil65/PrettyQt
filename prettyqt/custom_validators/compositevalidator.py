@@ -6,7 +6,6 @@ from prettyqt import gui
 
 
 class CompositeValidator(gui.Validator):
-
     def __repr__(self):
         return f"CompositeValidator({self.validators})"
 
@@ -29,6 +28,7 @@ class CompositeValidator(gui.Validator):
 if __name__ == "__main__":
     from prettyqt import widgets
     from prettyqt import custom_validators
+
     val1 = custom_validators.NotEmptyValidator()
     val2 = custom_validators.PathValidator()
     val = CompositeValidator([val1, val2])

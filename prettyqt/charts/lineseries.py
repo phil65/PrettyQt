@@ -6,9 +6,11 @@ from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
 from prettyqt import core, charts
 
-STYLES = {QtCore.Qt.SolidLine: "Solid",
-          QtCore.Qt.DotLine: "Dot",
-          QtCore.Qt.DashDotLine: "Dash-dot"}
+STYLES = {
+    QtCore.Qt.SolidLine: "Solid",
+    QtCore.Qt.DotLine: "Dot",
+    QtCore.Qt.DashDotLine: "Dash-dot",
+}
 
 
 QtCharts.QLineSeries.__bases__ = (charts.XYSeries,)

@@ -11,7 +11,6 @@ from prettyqt import gui, core
 
 
 class Icon(QtGui.QIcon):
-
     def __init__(self, icon=None):
         if isinstance(icon, pathlib.Path):
             icon = str(icon)
@@ -61,5 +60,6 @@ class Icon(QtGui.QIcon):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     icon = Icon.for_color("green")

@@ -10,18 +10,21 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
-SELECTION_MODES = bidict(none=QtWidgets.QCalendarWidget.NoSelection,
-                         single=QtWidgets.QCalendarWidget.SingleSelection)
+SELECTION_MODES = bidict(
+    none=QtWidgets.QCalendarWidget.NoSelection,
+    single=QtWidgets.QCalendarWidget.SingleSelection,
+)
 
-HEADER_FORMATS = bidict(none=QtWidgets.QCalendarWidget.NoVerticalHeader,
-                        week_numbers=QtWidgets.QCalendarWidget.ISOWeekNumbers)
+HEADER_FORMATS = bidict(
+    none=QtWidgets.QCalendarWidget.NoVerticalHeader,
+    week_numbers=QtWidgets.QCalendarWidget.ISOWeekNumbers,
+)
 
 
 QtWidgets.QCalendarWidget.__bases__ = (widgets.Widget,)
 
 
 class CalendarWidget(QtWidgets.QCalendarWidget):
-
     def __getstate__(self):
         return dict(date=self.selectedDate())
 

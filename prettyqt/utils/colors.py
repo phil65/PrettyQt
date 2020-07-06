@@ -11,8 +11,9 @@ from qtpy import QtGui, QtCore
 from prettyqt import gui
 
 
-ColorType = Union[str, int, QtGui.QRgba64, QtCore.Qt.GlobalColor,
-                  QtGui.QColor, tuple, None]
+ColorType = Union[
+    str, int, QtGui.QRgba64, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None
+]
 
 
 def get_color(color: ColorType) -> gui.Color:

@@ -6,9 +6,9 @@ from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
 
-H_ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
-                    right=QtCore.Qt.AlignRight,
-                    center=QtCore.Qt.AlignHCenter)
+H_ALIGNMENTS = dict(
+    left=QtCore.Qt.AlignLeft, right=QtCore.Qt.AlignRight, center=QtCore.Qt.AlignHCenter
+)
 
 
 QtWidgets.QGroupBox.__bases__ = (widgets.Widget,)
@@ -30,13 +30,15 @@ class GroupBox(QtWidgets.QGroupBox):
         return f"GroupBox({self.title()!r})"
 
     def __getstate__(self):
-        return dict(checkable=self.isCheckable(),
-                    checked=self.isChecked(),
-                    tooltip=self.toolTip(),
-                    layout=self.layout(),
-                    flat=self.isFlat(),
-                    # alignment=self.alignment(),
-                    title=self.title())
+        return dict(
+            checkable=self.isCheckable(),
+            checked=self.isChecked(),
+            tooltip=self.toolTip(),
+            layout=self.layout(),
+            flat=self.isFlat(),
+            # alignment=self.alignment(),
+            title=self.title(),
+        )
 
     def __setstate__(self, state):
         self.__init__(state["title"])

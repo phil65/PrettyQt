@@ -12,7 +12,6 @@ QtWidgets.QMenuBar.__bases__ = (widgets.Widget,)
 
 
 class MenuBar(QtWidgets.QMenuBar):
-
     def __add__(self, other):
         if isinstance(other, (QtWidgets.QAction, QtWidgets.QMenu)):
             self.add(other)

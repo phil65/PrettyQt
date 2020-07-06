@@ -7,11 +7,9 @@ from prettyqt.utils import bidict
 
 
 class MappedCheckBox(widgets.CheckBox):
-
     def __init__(self, *args, true_value=True, false_value=False, **kwargs):
         super().__init__(*args, **kwargs)
-        dct = {True: true_value,
-               False: false_value}
+        dct = {True: true_value, False: false_value}
         self.map = bidict(dct)
 
     def get_value(self):

@@ -6,7 +6,6 @@ from prettyqt import gui
 
 
 class NotEmptyValidator(gui.Validator):
-
     def __getstate__(self):
         return dict()
 
@@ -21,6 +20,7 @@ class NotEmptyValidator(gui.Validator):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     val = NotEmptyValidator()
     app = widgets.app()
     widget = widgets.LineEdit("This is a test")

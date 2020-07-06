@@ -8,7 +8,6 @@ from prettyqt import widgets, core
 
 
 class FlowLayout(widgets.Layout):
-
     def __init__(self, parent=None, margin=None, spacing=-1):
         super().__init__(parent)
         if margin is not None:
@@ -105,7 +104,7 @@ class FlowLayout(widgets.Layout):
         return y + line_height - rect.y()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.Widget()
     layout = FlowLayout()

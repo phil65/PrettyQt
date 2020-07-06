@@ -10,33 +10,35 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict, icons
 
 
-STYLES = bidict(icon=QtCore.Qt.ToolButtonIconOnly,
-                text=QtCore.Qt.ToolButtonTextOnly,
-                text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
-                text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon)
+STYLES = bidict(
+    icon=QtCore.Qt.ToolButtonIconOnly,
+    text=QtCore.Qt.ToolButtonTextOnly,
+    text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
+    text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon,
+)
 
-TOOLBAR_AREAS = bidict(left=QtCore.Qt.LeftToolBarArea,
-                       right=QtCore.Qt.RightToolBarArea,
-                       top=QtCore.Qt.TopToolBarArea,
-                       bottom=QtCore.Qt.BottomToolBarArea,
-                       all=QtCore.Qt.AllToolBarAreas,
-                       none=QtCore.Qt.NoToolBarArea)
+TOOLBAR_AREAS = bidict(
+    left=QtCore.Qt.LeftToolBarArea,
+    right=QtCore.Qt.RightToolBarArea,
+    top=QtCore.Qt.TopToolBarArea,
+    bottom=QtCore.Qt.BottomToolBarArea,
+    all=QtCore.Qt.AllToolBarAreas,
+    none=QtCore.Qt.NoToolBarArea,
+)
 
 
 QtWidgets.QToolBar.__bases__ = (widgets.Widget,)
 
 
 class ToolBar(QtWidgets.QToolBar):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_icon_size(24)
         self.menu_buttons = list()
 
-    def add_menu_button(self,
-                        label: str,
-                        icon: icons.IconType,
-                        menu: QtWidgets.QMenu) -> widgets.ToolButton:
+    def add_menu_button(
+        self, label: str, icon: icons.IconType, menu: QtWidgets.QMenu
+    ) -> widgets.ToolButton:
         btn = widgets.ToolButton.for_menu(menu)
         btn.setText(label)
         btn.setToolButtonStyle(self.toolButtonStyle())
@@ -45,9 +47,9 @@ class ToolBar(QtWidgets.QToolBar):
         self.addWidget(btn)
         return btn
 
-    def add_separator(self,
-                      text: Optional[str] = None,
-                      before: QtWidgets.QAction = None) -> QtWidgets.QAction:
+    def add_separator(
+        self, text: Optional[str] = None, before: QtWidgets.QAction = None
+    ) -> QtWidgets.QAction:
         """adds a separator showing an optional label
 
         Args:
@@ -89,11 +91,13 @@ class ToolBar(QtWidgets.QToolBar):
         """
         return STYLES.inv[self.toolButtonStyle()]
 
-    def add_action(self,
-                   label: str,
-                   icon: icons.IconType = None,
-                   callback: Optional[Callable] = None,
-                   checkable: bool = False):
+    def add_action(
+        self,
+        label: str,
+        icon: icons.IconType = None,
+        callback: Optional[Callable] = None,
+        checkable: bool = False,
+    ):
         icon = icons.get_icon(icon)
         action = self.addAction(icon, label)
         if callback is not None:

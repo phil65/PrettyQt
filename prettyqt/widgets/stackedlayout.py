@@ -10,7 +10,6 @@ QtWidgets.QStackedLayout.__bases__ = (widgets.Layout,)
 
 
 class StackedLayout(QtWidgets.QStackedLayout):
-
     def __getstate__(self):
         return dict(items=self.get_children())
 
@@ -30,6 +29,7 @@ class StackedLayout(QtWidgets.QStackedLayout):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     layout = StackedLayout()
     widget = widgets.Widget()

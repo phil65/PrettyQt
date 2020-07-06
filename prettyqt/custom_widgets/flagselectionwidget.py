@@ -57,10 +57,10 @@ class FlagSelectionWidget(widgets.GroupBox):
 
 if __name__ == "__main__":
     import re
+
     app = widgets.app()
     widget = FlagSelectionWidget()
-    items = {"MultiLine": re.MULTILINE,
-             "Ignore case": re.IGNORECASE}
+    items = {"MultiLine": re.MULTILINE, "Ignore case": re.IGNORECASE}
     widget.add_items(items)
     widget.show()
     app.exec_()

@@ -6,7 +6,6 @@ from qtpy import QtCore
 
 
 class DirIterator(QtCore.QDirIterator):
-
     def __iter__(self):
         return self
 

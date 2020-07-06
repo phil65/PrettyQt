@@ -8,26 +8,31 @@ from prettyqt import widgets
 from prettyqt.utils import bidict, icons
 
 
-POPUP_MODES = bidict(delayed=QtWidgets.QToolButton.DelayedPopup,
-                     menu_button=QtWidgets.QToolButton.MenuButtonPopup,
-                     instant=QtWidgets.QToolButton.InstantPopup)
+POPUP_MODES = bidict(
+    delayed=QtWidgets.QToolButton.DelayedPopup,
+    menu_button=QtWidgets.QToolButton.MenuButtonPopup,
+    instant=QtWidgets.QToolButton.InstantPopup,
+)
 
-ARROW_TYPES = bidict(none=QtCore.Qt.NoArrow,
-                     up=QtCore.Qt.UpArrow,
-                     down=QtCore.Qt.DownArrow,
-                     left=QtCore.Qt.LeftArrow,
-                     right=QtCore.Qt.RightArrow)
+ARROW_TYPES = bidict(
+    none=QtCore.Qt.NoArrow,
+    up=QtCore.Qt.UpArrow,
+    down=QtCore.Qt.DownArrow,
+    left=QtCore.Qt.LeftArrow,
+    right=QtCore.Qt.RightArrow,
+)
 
-STYLES = bidict(icon=QtCore.Qt.ToolButtonIconOnly,
-                text=QtCore.Qt.ToolButtonTextOnly,
-                text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
-                text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon)
+STYLES = bidict(
+    icon=QtCore.Qt.ToolButtonIconOnly,
+    text=QtCore.Qt.ToolButtonTextOnly,
+    text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
+    text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon,
+)
 
 QtWidgets.QToolButton.__bases__ = (widgets.AbstractButton,)
 
 
 class ToolButton(QtWidgets.QToolButton):
-
     def __getitem__(self, item):
         menu = self.menu()
         return menu[item]

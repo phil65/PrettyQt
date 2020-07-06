@@ -11,7 +11,6 @@ QtWidgets.QInputDialog.__bases__ = (widgets.BaseDialog,)
 
 
 class InputDialog(QtWidgets.QInputDialog):
-
     @classmethod
     def get_int(cls, title=None, label=None, icon=None):
         par = widgets.Dialog()

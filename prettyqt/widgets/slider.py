@@ -7,13 +7,14 @@ from qtpy import QtWidgets, QtCore
 from prettyqt import widgets, core
 from prettyqt.utils import bidict
 
-TICK_POSITIONS = bidict(none=QtWidgets.QSlider.NoTicks,
-                        both_sides=QtWidgets.QSlider.TicksBothSides,
-                        above=QtWidgets.QSlider.TicksAbove,
-                        below=QtWidgets.QSlider.TicksBelow)
+TICK_POSITIONS = bidict(
+    none=QtWidgets.QSlider.NoTicks,
+    both_sides=QtWidgets.QSlider.TicksBothSides,
+    above=QtWidgets.QSlider.TicksAbove,
+    below=QtWidgets.QSlider.TicksBelow,
+)
 
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
-                      vertical=QtCore.Qt.Vertical)
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
 
 
 QtWidgets.QSlider.__bases__ = (widgets.AbstractSlider,)
@@ -30,18 +31,20 @@ class Slider(QtWidgets.QSlider):
         self.valueChanged.connect(self.on_value_change)
 
     def __getstate__(self):
-        return dict(range=(self.minimum(), self.maximum()),
-                    value=self.value(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    enabled=self.isEnabled(),
-                    has_tracking=self.hasTracking(),
-                    tick_position=self.get_tick_position(),
-                    tick_interval=self.tickInterval(),
-                    inverted_controls=self.invertedControls(),
-                    inverted_appearance=self.invertedAppearance(),
-                    single_step=self.singleStep(),
-                    page_step=self.pageStep())
+        return dict(
+            range=(self.minimum(), self.maximum()),
+            value=self.value(),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+            enabled=self.isEnabled(),
+            has_tracking=self.hasTracking(),
+            tick_position=self.get_tick_position(),
+            tick_interval=self.tickInterval(),
+            inverted_controls=self.invertedControls(),
+            inverted_appearance=self.invertedAppearance(),
+            single_step=self.singleStep(),
+            page_step=self.pageStep(),
+        )
 
     def __setstate__(self, state):
         self.__init__()

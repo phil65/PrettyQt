@@ -9,26 +9,31 @@ from qtpy import QtCore
 from prettyqt import core
 from prettyqt.utils import bidict
 
-FLAGS = bidict(none=QtCore.QRegularExpression.NoPatternOption,
-               ignorecase=QtCore.QRegularExpression.CaseInsensitiveOption,
-               dotall=QtCore.QRegularExpression.DotMatchesEverythingOption,
-               multiline=QtCore.QRegularExpression.MultilineOption,
-               verbose=QtCore.QRegularExpression.ExtendedPatternSyntaxOption,
-               inverted_greedyness=QtCore.QRegularExpression.InvertedGreedinessOption,
-               dont_capture=QtCore.QRegularExpression.DontCaptureOption,
-               unicode=QtCore.QRegularExpression.UseUnicodePropertiesOption)
+FLAGS = bidict(
+    none=QtCore.QRegularExpression.NoPatternOption,
+    ignorecase=QtCore.QRegularExpression.CaseInsensitiveOption,
+    dotall=QtCore.QRegularExpression.DotMatchesEverythingOption,
+    multiline=QtCore.QRegularExpression.MultilineOption,
+    verbose=QtCore.QRegularExpression.ExtendedPatternSyntaxOption,
+    inverted_greedyness=QtCore.QRegularExpression.InvertedGreedinessOption,
+    dont_capture=QtCore.QRegularExpression.DontCaptureOption,
+    unicode=QtCore.QRegularExpression.UseUnicodePropertiesOption,
+)
 
-MATCH_TYPES = bidict(normal=QtCore.QRegularExpression.NormalMatch,
-                     prefer_complete=QtCore.QRegularExpression.PartialPreferCompleteMatch,
-                     prefer_first=QtCore.QRegularExpression.PartialPreferFirstMatch,
-                     no_match=QtCore.QRegularExpression.NoMatch)
+MATCH_TYPES = bidict(
+    normal=QtCore.QRegularExpression.NormalMatch,
+    prefer_complete=QtCore.QRegularExpression.PartialPreferCompleteMatch,
+    prefer_first=QtCore.QRegularExpression.PartialPreferFirstMatch,
+    no_match=QtCore.QRegularExpression.NoMatch,
+)
 
-MATCH_OPTIONS = bidict(none=QtCore.QRegularExpression.NoMatchOption,
-                       anchored=QtCore.QRegularExpression.AnchoredMatchOption)
+MATCH_OPTIONS = bidict(
+    none=QtCore.QRegularExpression.NoMatchOption,
+    anchored=QtCore.QRegularExpression.AnchoredMatchOption,
+)
 
 
 class RegularExpression(QtCore.QRegularExpression):
-
     def __init__(self, pattern="", flags=FLAGS["none"]):
         if isinstance(pattern, QtCore.QRegularExpression):
             super().__init__(pattern)
@@ -47,19 +52,23 @@ class RegularExpression(QtCore.QRegularExpression):
         it = super().globalMatch(*args, **kwargs)
         return core.RegularExpressionMatchIterator(it)
 
-    def global_match(self,
-                     text: str,
-                     offset: int = 0,
-                     match_type: str = "normal",
-                     anchored: bool = False):
+    def global_match(
+        self,
+        text: str,
+        offset: int = 0,
+        match_type: str = "normal",
+        anchored: bool = False,
+    ):
         options = MATCH_OPTIONS["anchored"] if anchored else MATCH_OPTIONS["none"]
         return self.globalMatch(text, offset, MATCH_TYPES[match_type], options)
 
-    def match(self,
-              text: str,
-              offset: int = 0,
-              match_type: str = "normal",
-              anchored: bool = False):
+    def match(
+        self,
+        text: str,
+        offset: int = 0,
+        match_type: str = "normal",
+        anchored: bool = False,
+    ):
         if isinstance(match_type, str):
             match_type = MATCH_TYPES[match_type]
         if isinstance(anchored, bool):
@@ -78,20 +87,16 @@ class RegularExpression(QtCore.QRegularExpression):
         else:
             return None
 
-    def finditer(self,
-                 string: str,
-                 pos: int = 0,
-                 endpos: Optional[int] = None) -> Iterator[core.RegularExpressionMatch]:
+    def finditer(
+        self, string: str, pos: int = 0, endpos: Optional[int] = None
+    ) -> Iterator[core.RegularExpressionMatch]:
         for match in self.globalMatch(string[:endpos], offset=pos):
             match.pos = pos
             match.endpos = endpos
             match.string = string
             yield match
 
-    def findall(self,
-                string: str,
-                pos: int = 0,
-                endpos: Optional[int] = None) -> list:
+    def findall(self, string: str, pos: int = 0, endpos: Optional[int] = None) -> list:
         matches = [m for m in self.globalMatch(string[:endpos], offset=pos)]
         return [m.groups() if len(m.groups()) > 1 else m.group(0) for m in matches]
 
@@ -108,7 +113,7 @@ class RegularExpression(QtCore.QRegularExpression):
                 to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
             for j in self.groupindex.keys():
                 to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
-            result = result[:m.start()] + to_replace + result[m.end():]
+            result = result[: m.start()] + to_replace + result[m.end() :]
         return (result, min(len(matches), count))
 
     def sub(self, repl: Union[str, Callable], string: str, count: int = 0):
@@ -124,7 +129,7 @@ class RegularExpression(QtCore.QRegularExpression):
         matches = self.global_match(string)
         matches = list(matches)
         if 0 < maxsplit <= len(matches):
-            remainder = string[matches[maxsplit - 1].end():]
+            remainder = string[matches[maxsplit - 1].end() :]
             print(remainder)
         else:
             print(None)
@@ -136,12 +141,12 @@ class RegularExpression(QtCore.QRegularExpression):
         if m.start() == 0:
             result.append("")
         else:
-            result.append(string[0:m.start()])
+            result.append(string[0 : m.start()])
         for g in m.groups():
             result.append(g)
         prev_match = m
         for m in matches[1:]:
-            result.append(string[prev_match.end():m.start()])
+            result.append(string[prev_match.end() : m.start()])
             for g in m.groups():
                 result.append(g)
             if m.end() == len(string):
@@ -166,4 +171,4 @@ class RegularExpression(QtCore.QRegularExpression):
 
 if __name__ == "__main__":
     reg = RegularExpression()
-    reg.setPattern('-{1,2}')
+    reg.setPattern("-{1,2}")

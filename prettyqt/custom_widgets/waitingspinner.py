@@ -73,24 +73,30 @@ class BaseWaitingSpinner(widgets.Widget):
         painter.set_pen("none")
         for i in range(0, self._line_num):
             painter.save()
-            painter.translate(self._inner_radius + self._line_length,
-                              self._inner_radius + self._line_length)
+            painter.translate(
+                self._inner_radius + self._line_length,
+                self._inner_radius + self._line_length,
+            )
             rotate_angle = float(360 * i) / float(self._line_num)
             painter.rotate(rotate_angle)
             painter.translate(self._inner_radius, 0)
-            distance = self.linecount_distance_from_primary(i,
-                                                            self._current_counter,
-                                                            self._line_num)
-            color = self.current_line_color(distance,
-                                            self._line_num,
-                                            self._trail_fade_percentage,
-                                            self._minimum_trail_opacity,
-                                            self._color)
+            distance = self.linecount_distance_from_primary(
+                i, self._current_counter, self._line_num
+            )
+            color = self.current_line_color(
+                distance,
+                self._line_num,
+                self._trail_fade_percentage,
+                self._minimum_trail_opacity,
+                self._color,
+            )
             painter.setBrush(color)
-            rect = core.Rect(0, -self._line_width / 2,
-                             self._line_length, self._line_width)
-            painter.drawRoundedRect(rect, self._roundness,
-                                    self._roundness, QtCore.Qt.RelativeSize)
+            rect = core.Rect(
+                0, -self._line_width / 2, self._line_length, self._line_width
+            )
+            painter.drawRoundedRect(
+                rect, self._roundness, self._roundness, QtCore.Qt.RelativeSize
+            )
             painter.restore()
 
     def start(self):
@@ -189,8 +195,9 @@ class BaseWaitingSpinner(widgets.Widget):
             distance += total_lines
         return distance
 
-    def current_line_color(self, count_distance, total_lines, fade_perc,
-                           min_opacity, color):
+    def current_line_color(
+        self, count_distance, total_lines, fade_perc, min_opacity, color
+    ):
         if count_distance == 0:
             return color
         min_alpha_f = min_opacity / 100.0
@@ -208,8 +215,14 @@ class BaseWaitingSpinner(widgets.Widget):
 
 
 class WaitingSpinner(BaseWaitingSpinner):
-    def __init__(self, parent, center_on_parent=True, disable_parent=True,
-                 modality=QtCore.Qt.NonModal, additional_disabled=None):
+    def __init__(
+        self,
+        parent,
+        center_on_parent=True,
+        disable_parent=True,
+        modality=QtCore.Qt.NonModal,
+        additional_disabled=None,
+    ):
         super().__init__(parent=parent, modality=modality)
         self._center_on_parent = center_on_parent
         self._disable_parent = disable_parent
@@ -236,5 +249,7 @@ class WaitingSpinner(BaseWaitingSpinner):
 
     def update_position(self):
         if self.parentWidget() and self._center_on_parent:
-            self.move(self.parentWidget().width() / 2 - self.width() / 2,
-                      self.parentWidget().height() / 2 - self.height() / 2)
+            self.move(
+                self.parentWidget().width() / 2 - self.width() / 2,
+                self.parentWidget().height() / 2 - self.height() / 2,
+            )

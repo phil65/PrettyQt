@@ -10,7 +10,6 @@ QtGui.QRegularExpressionValidator.__bases__ = (gui.Validator,)
 
 
 class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
-
     def __repr__(self):
         return f"RegularExpressionValidator(RegularExpression({self.get_regex()!r}))"
 
@@ -32,6 +31,7 @@ class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     w = widgets.LineEdit()
     val = RegularExpressionValidator()

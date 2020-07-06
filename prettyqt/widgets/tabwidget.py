@@ -9,8 +9,9 @@ from qtpy import QtCore, QtGui, QtWidgets
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, icons
 
-TAB_SHAPES = bidict(rounded=QtWidgets.QTabWidget.Rounded,
-                    triangular=QtWidgets.QTabWidget.Triangular)
+TAB_SHAPES = bidict(
+    rounded=QtWidgets.QTabWidget.Rounded, triangular=QtWidgets.QTabWidget.Triangular
+)
 
 
 QtWidgets.QTabWidget.__bases__ = (widgets.Widget,)
@@ -47,14 +48,16 @@ class TabWidget(QtWidgets.QTabWidget):
             return self.findChild(QtWidgets.QWidget, index)
 
     def __getstate__(self):
-        return dict(tabbar=self.tabBar(),
-                    widgets=self.get_children(),
-                    movable=self.isMovable(),
-                    document_mode=self.documentMode(),
-                    current_index=self.currentIndex(),
-                    tab_shape=self.get_tab_shape(),
-                    # elide_mode=self.get_elide_mode(),
-                    icon_size=self.iconSize())
+        return dict(
+            tabbar=self.tabBar(),
+            widgets=self.get_children(),
+            movable=self.isMovable(),
+            document_mode=self.documentMode(),
+            current_index=self.currentIndex(),
+            tab_shape=self.get_tab_shape(),
+            # elide_mode=self.get_elide_mode(),
+            icon_size=self.iconSize(),
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -98,9 +101,16 @@ class TabWidget(QtWidgets.QTabWidget):
         return TAB_SHAPES.inv[self.tabShape()]
 
     def get_children(self) -> list:
-        return [(self.widget(i), self.tabText(i), self.tab_icon(i),
-                 self.tabToolTip(i), self.tabWhatsThis(i))
-                for i in range(self.count())]
+        return [
+            (
+                self.widget(i),
+                self.tabText(i),
+                self.tab_icon(i),
+                self.tabToolTip(i),
+                self.tabWhatsThis(i),
+            )
+            for i in range(self.count())
+        ]
 
     def tab_icon(self, i: int) -> gui.Icon:
         return gui.Icon(self.tabIcon(i))
@@ -146,12 +156,14 @@ class TabWidget(QtWidgets.QTabWidget):
         # Create a reference to maintain access to the detached tab
         self.detached_tabs[name] = detached_tab
 
-    def add_tab(self,
-                item,
-                label: str,
-                icon: icons.IconType = None,
-                position: Optional[int] = None,
-                show: bool = False):
+    def add_tab(
+        self,
+        item,
+        label: str,
+        icon: icons.IconType = None,
+        position: Optional[int] = None,
+        show: bool = False,
+    ):
         if isinstance(item, QtWidgets.QLayout):
             widget = widgets.Widget()
             widget.set_layout(item)
@@ -168,11 +180,13 @@ class TabWidget(QtWidgets.QTabWidget):
             self.setCurrentIndex(index)
         return index
 
-    def attach_tab(self,
-                   widget,
-                   name: str,
-                   icon: icons.IconType = None,
-                   insert_at: Optional[int] = None):
+    def attach_tab(
+        self,
+        widget,
+        name: str,
+        icon: icons.IconType = None,
+        insert_at: Optional[int] = None,
+    ):
         """
         Re-attach the tab by removing the content from the DetachedTab window,
         closing it, and placing the content back into the DetachableTabWidget
@@ -225,6 +239,7 @@ class DetachedTab(widgets.MainWindow):
     Attributes:
         on_close: signal, emitted when window is closed (widget, title, icon)
     """
+
     on_close = core.Signal(QtWidgets.QWidget, str, QtGui.QIcon)
 
     def __init__(self, name, widget):

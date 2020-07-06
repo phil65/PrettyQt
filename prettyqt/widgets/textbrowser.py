@@ -21,9 +21,9 @@ class TextBrowser(QtWidgets.QTextBrowser):
         self.setOpenExternalLinks(True)
 
     def __getstate__(self):
-        return dict(text=self.text(),
-                    enabled=self.isEnabled(),
-                    font=gui.Font(self.font()))
+        return dict(
+            text=self.text(), enabled=self.isEnabled(), font=gui.Font(self.font())
+        )
 
     def __setstate__(self, state):
         self.__init__()

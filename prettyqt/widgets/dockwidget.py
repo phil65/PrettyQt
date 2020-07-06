@@ -8,11 +8,13 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
-ALLOWED_AREAS = bidict(all=QtCore.Qt.AllDockWidgetAreas,
-                       left=QtCore.Qt.LeftDockWidgetArea,
-                       right=QtCore.Qt.RightDockWidgetArea,
-                       top=QtCore.Qt.TopDockWidgetArea,
-                       bottom=QtCore.Qt.BottomDockWidgetArea)
+ALLOWED_AREAS = bidict(
+    all=QtCore.Qt.AllDockWidgetAreas,
+    left=QtCore.Qt.LeftDockWidgetArea,
+    right=QtCore.Qt.RightDockWidgetArea,
+    top=QtCore.Qt.TopDockWidgetArea,
+    bottom=QtCore.Qt.BottomDockWidgetArea,
+)
 
 
 QtWidgets.QDockWidget.__bases__ = (widgets.Widget,)

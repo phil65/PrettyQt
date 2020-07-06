@@ -21,9 +21,11 @@ class LineNumberArea(widgets.Widget):
 
 class CodeEditor(widgets.PlainTextEdit):
 
-    lexers = {"python": syntaxhighlighters.PythonHighlighter,
-              "yaml": syntaxhighlighters.JsonHighlighter,
-              "json": syntaxhighlighters.YamlHighlighter}
+    lexers = {
+        "python": syntaxhighlighters.PythonHighlighter,
+        "yaml": syntaxhighlighters.JsonHighlighter,
+        "json": syntaxhighlighters.YamlHighlighter,
+    }
     supported_langs = lexers.keys()
 
     def __init__(self, language="python", parent=None):

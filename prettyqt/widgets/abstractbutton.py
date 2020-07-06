@@ -7,24 +7,27 @@ from qtpy import QtWidgets
 from prettyqt import core, widgets, gui
 from prettyqt.utils import icons
 
-STYLES = dict(close=QtWidgets.QStyle.SP_TitleBarCloseButton,
-              maximise=QtWidgets.QStyle.SP_TitleBarMaxButton)
+STYLES = dict(
+    close=QtWidgets.QStyle.SP_TitleBarCloseButton,
+    maximise=QtWidgets.QStyle.SP_TitleBarMaxButton,
+)
 
 
 QtWidgets.QAbstractButton.__bases__ = (widgets.Widget,)
 
 
 class AbstractButton(QtWidgets.QAbstractButton):
-
     def __getstate__(self):
-        return dict(object_name=self.id,
-                    text=self.text(),
-                    icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
-                    checkable=self.isCheckable(),
-                    checked=self.isChecked(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    enabled=self.isEnabled())
+        return dict(
+            object_name=self.id,
+            text=self.text(),
+            icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
+            checkable=self.isCheckable(),
+            checked=self.isChecked(),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+            enabled=self.isEnabled(),
+        )
 
     def __setstate__(self, state):
         self.__init__()

@@ -27,8 +27,7 @@ class FontChooserButton(widgets.Widget):
         return f"FontChooserButton({self.current_font})"
 
     def __getstate__(self):
-        return dict(font=self.current_font,
-                    enabled=self.isEnabled())
+        return dict(font=self.current_font, enabled=self.isEnabled())
 
     def __setstate__(self, state):
         self.__init__()

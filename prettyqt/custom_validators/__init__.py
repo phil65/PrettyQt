@@ -13,10 +13,12 @@ from .pathvalidator import PathValidator
 from .regexvalidators import FloatListValidator, IntListValidator
 from .regexpatternvalidator import RegexPatternValidator
 
-__all__ = ["PathValidator",
-           "NotEmptyValidator",
-           "IntListValidator",
-           "FloatListValidator",
-           "NotZeroValidator",
-           "CompositeValidator",
-           "RegexPatternValidator"]
+__all__ = [
+    "PathValidator",
+    "NotEmptyValidator",
+    "IntListValidator",
+    "FloatListValidator",
+    "NotZeroValidator",
+    "CompositeValidator",
+    "RegexPatternValidator",
+]

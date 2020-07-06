@@ -7,23 +7,26 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
-SHADOWS = bidict(plain=QtWidgets.QFrame.Plain,
-                 raised=QtWidgets.QFrame.Raised,
-                 sunken=QtWidgets.QFrame.Sunken)
+SHADOWS = bidict(
+    plain=QtWidgets.QFrame.Plain,
+    raised=QtWidgets.QFrame.Raised,
+    sunken=QtWidgets.QFrame.Sunken,
+)
 
-SHAPES = bidict(no_frame=QtWidgets.QFrame.NoFrame,
-                box=QtWidgets.QFrame.Box,
-                panel=QtWidgets.QFrame.Panel,
-                styled_panel=QtWidgets.QFrame.StyledPanel,
-                h_line=QtWidgets.QFrame.HLine,
-                v_line=QtWidgets.QFrame.VLine,
-                win_panel=QtWidgets.QFrame.WinPanel)
+SHAPES = bidict(
+    no_frame=QtWidgets.QFrame.NoFrame,
+    box=QtWidgets.QFrame.Box,
+    panel=QtWidgets.QFrame.Panel,
+    styled_panel=QtWidgets.QFrame.StyledPanel,
+    h_line=QtWidgets.QFrame.HLine,
+    v_line=QtWidgets.QFrame.VLine,
+    win_panel=QtWidgets.QFrame.WinPanel,
+)
 
 QtWidgets.QFrame.__bases__ = (widgets.Widget,)
 
 
 class Frame(QtWidgets.QFrame):
-
     def set_frame_style(self, style: str):
         """set frame style
 

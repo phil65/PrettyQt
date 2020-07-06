@@ -8,6 +8,7 @@ contains QtGui-based classes
 from .guiapplication import GuiApplication
 from .validator import Validator
 from .regexpvalidator import RegExpValidator
+
 try:
     from .regularexpressionvalidator import RegularExpressionValidator
 except AttributeError:
@@ -39,32 +40,34 @@ from .pdfwriter import PdfWriter
 from .keysequence import KeySequence
 
 
-__all__ = ["GuiApplication",
-           "Validator",
-           "RegExpValidator",
-           "RegularExpressionValidator",
-           "IntValidator",
-           "DoubleValidator",
-           "Brush",
-           "TextBlockUserData",
-           "Color",
-           "Font",
-           "FontMetrics",
-           "Region",
-           "PaintDevice",
-           "Icon",
-           "Image",
-           "Pen",
-           "Picture",
-           "Pixmap",
-           "Painter",
-           "Palette",
-           "Cursor",
-           "PolygonF",
-           "StandardItem",
-           "StandardItemModel",
-           "TextCharFormat",
-           "TextCursor",
-           "SyntaxHighlighter",
-           "PdfWriter",
-           "KeySequence"]
+__all__ = [
+    "GuiApplication",
+    "Validator",
+    "RegExpValidator",
+    "RegularExpressionValidator",
+    "IntValidator",
+    "DoubleValidator",
+    "Brush",
+    "TextBlockUserData",
+    "Color",
+    "Font",
+    "FontMetrics",
+    "Region",
+    "PaintDevice",
+    "Icon",
+    "Image",
+    "Pen",
+    "Picture",
+    "Pixmap",
+    "Painter",
+    "Palette",
+    "Cursor",
+    "PolygonF",
+    "StandardItem",
+    "StandardItemModel",
+    "TextCharFormat",
+    "TextCursor",
+    "SyntaxHighlighter",
+    "PdfWriter",
+    "KeySequence",
+]

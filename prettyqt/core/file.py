@@ -14,7 +14,6 @@ QtCore.QFile.__bases__ = (core.FileDevice,)
 
 
 class File(QtCore.QFile):
-
     @contextlib.contextmanager
     def open_file(self, flag):
         if flag in OPEN_MODES:

@@ -8,7 +8,6 @@ from prettyqt import core
 
 
 class DateTime(QtCore.QDateTime):
-
     def __repr__(self):
         return f"DateTime({self.date()}, {self.time()})"
 

@@ -8,16 +8,17 @@ from prettyqt import core, gui
 
 QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
 
-MATCH_FLAGS = dict(exact=QtCore.Qt.MatchExactly,
-                   contains=QtCore.Qt.MatchContains,
-                   starts_with=QtCore.Qt.MatchStartsWith,
-                   ends_with=QtCore.Qt.MatchEndsWith,
-                   wildcard=QtCore.Qt.MatchWildcard,
-                   regex=QtCore.Qt.MatchRegExp)
+MATCH_FLAGS = dict(
+    exact=QtCore.Qt.MatchExactly,
+    contains=QtCore.Qt.MatchContains,
+    starts_with=QtCore.Qt.MatchStartsWith,
+    ends_with=QtCore.Qt.MatchEndsWith,
+    wildcard=QtCore.Qt.MatchWildcard,
+    regex=QtCore.Qt.MatchRegExp,
+)
 
 
 class StandardItemModel(QtGui.QStandardItemModel):
-
     def __getitem__(self, index):
         return self.item(index)
 
@@ -56,6 +57,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
 if __name__ == "__main__":
     import pickle
     from prettyqt import widgets
+
     model = gui.StandardItemModel()
     model.add("test")
     app = widgets.app()

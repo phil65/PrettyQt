@@ -7,13 +7,17 @@ from qtpy import QtWidgets, QtCore
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
-TEXT_DIRECTIONS = bidict(top_to_bottom=QtWidgets.QProgressBar.TopToBottom,
-                         bottom_to_top=QtWidgets.QProgressBar.BottomToTop)
+TEXT_DIRECTIONS = bidict(
+    top_to_bottom=QtWidgets.QProgressBar.TopToBottom,
+    bottom_to_top=QtWidgets.QProgressBar.BottomToTop,
+)
 
-ALIGNMENTS = bidict(left=QtCore.Qt.AlignLeft,
-                    right=QtCore.Qt.AlignRight,
-                    top=QtCore.Qt.AlignTop,
-                    bottom=QtCore.Qt.AlignBottom)
+ALIGNMENTS = bidict(
+    left=QtCore.Qt.AlignLeft,
+    right=QtCore.Qt.AlignRight,
+    top=QtCore.Qt.AlignTop,
+    bottom=QtCore.Qt.AlignBottom,
+)
 
 
 QtWidgets.QProgressBar.__bases__ = (widgets.Widget,)

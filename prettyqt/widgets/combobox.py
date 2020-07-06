@@ -10,18 +10,22 @@ from prettyqt import gui, core, widgets
 from prettyqt.utils import bidict, icons
 
 box = QtWidgets.QComboBox
-INSERT_POLICIES = bidict(no_insert=box.NoInsert,
-                         top=box.InsertAtTop,
-                         current=box.InsertAtCurrent,
-                         bottom=box.InsertAtBottom,
-                         after_current=box.InsertAfterCurrent,
-                         before_current=box.InsertBeforeCurrent,
-                         alphabetically=box.InsertAlphabetically)
+INSERT_POLICIES = bidict(
+    no_insert=box.NoInsert,
+    top=box.InsertAtTop,
+    current=box.InsertAtCurrent,
+    bottom=box.InsertAtBottom,
+    after_current=box.InsertAfterCurrent,
+    before_current=box.InsertBeforeCurrent,
+    alphabetically=box.InsertAlphabetically,
+)
 
-SIZE_POLICIES = bidict(content=box.AdjustToContents,
-                       first_show=box.AdjustToContentsOnFirstShow,
-                       min_length=box.AdjustToMinimumContentsLength,
-                       min_length_with_icon=box.AdjustToMinimumContentsLengthWithIcon)
+SIZE_POLICIES = bidict(
+    content=box.AdjustToContents,
+    first_show=box.AdjustToContentsOnFirstShow,
+    min_length=box.AdjustToMinimumContentsLength,
+    min_length_with_icon=box.AdjustToMinimumContentsLengthWithIcon,
+)
 
 
 class NoData(object):
@@ -40,20 +44,24 @@ class ComboBox(QtWidgets.QComboBox):
         self.currentIndexChanged.connect(self.index_changed)
 
     def __getstate__(self):
-        items = [(self.itemText(i), self.itemData(i), self.item_icon(i))
-                 for i in range(self.count())]
-        return dict(object_name=self.id,
-                    index=self.currentIndex(),
-                    enabled=self.isEnabled(),
-                    editable=self.isEditable(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    max_count=self.maxCount(),
-                    has_frame=self.hasFrame(),
-                    max_visible_items=self.maxVisibleItems(),
-                    duplicates_enabled=self.duplicatesEnabled(),
-                    min_contents_length=self.minimumContentsLength(),
-                    items=items)
+        items = [
+            (self.itemText(i), self.itemData(i), self.item_icon(i))
+            for i in range(self.count())
+        ]
+        return dict(
+            object_name=self.id,
+            index=self.currentIndex(),
+            enabled=self.isEnabled(),
+            editable=self.isEditable(),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+            max_count=self.maxCount(),
+            has_frame=self.hasFrame(),
+            max_visible_items=self.maxVisibleItems(),
+            duplicates_enabled=self.duplicatesEnabled(),
+            min_contents_length=self.minimumContentsLength(),
+            items=items,
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -85,10 +93,7 @@ class ComboBox(QtWidgets.QComboBox):
             else:
                 self.add(i)
 
-    def add(self,
-            label: str,
-            data=NoData,
-            icon: icons.IconType = None):
+    def add(self, label: str, data=NoData, icon: icons.IconType = None):
         if data is NoData:
             data = label
         if icon is not None:

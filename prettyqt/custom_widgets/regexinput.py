@@ -14,8 +14,9 @@ class RegexInput(widgets.Widget):
         super().__init__(parent=parent)
         self.set_layout("grid")
         self.lineedit = custom_widgets.SingleLineTextEdit()
-        self.tb_flags = custom_widgets.BoolDictToolButton("Flags",
-                                                          icon="mdi.flag-variant-outline")
+        self.tb_flags = custom_widgets.BoolDictToolButton(
+            "Flags", icon="mdi.flag-variant-outline"
+        )
         self.label_error = widgets.Label()
         self.label_error.setStyleSheet("color: #FF0000;")
         self.box[0, 0:1] = self.lineedit
@@ -27,16 +28,20 @@ class RegexInput(widgets.Widget):
         self.lineedit.textChanged.connect(self._on_value_change)
         val = custom_validators.RegexPatternValidator()
         self.lineedit.set_validator(val)
-        dct = {"multiline": "MultiLine",
-               "ignorecase": "Ignore case",
-               "ascii": "ASCII-only matching",
-               "dotall": "Dot matches newline",
-               "verbose": "Ignore whitespace"}
-        self._mapping = {"ignorecase": re.IGNORECASE,
-                         "multiline": re.MULTILINE,
-                         "ascii": re.ASCII,
-                         "dotall": re.DOTALL,
-                         "verbose": re.VERBOSE}
+        dct = {
+            "multiline": "MultiLine",
+            "ignorecase": "Ignore case",
+            "ascii": "ASCII-only matching",
+            "dotall": "Dot matches newline",
+            "verbose": "Ignore whitespace",
+        }
+        self._mapping = {
+            "ignorecase": re.IGNORECASE,
+            "multiline": re.MULTILINE,
+            "ascii": re.ASCII,
+            "dotall": re.DOTALL,
+            "verbose": re.VERBOSE,
+        }
         self.tb_flags.set_dict(dct)
 
     def _on_value_change(self):

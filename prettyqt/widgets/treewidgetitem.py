@@ -8,24 +8,27 @@ from prettyqt import gui
 from prettyqt.utils import bidict, icons
 
 
-STATES = bidict(unchecked=QtCore.Qt.Unchecked,
-                partial=QtCore.Qt.PartiallyChecked,
-                checked=QtCore.Qt.Checked)
+STATES = bidict(
+    unchecked=QtCore.Qt.Unchecked,
+    partial=QtCore.Qt.PartiallyChecked,
+    checked=QtCore.Qt.Checked,
+)
 
 
 class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
-
     def __repr__(self):
         return "TreeWidgetItem()"
 
     def __getstate__(self):
         icon = self.icon(0)
-        return dict(text=self.text(0),
-                    tooltip=self.toolTip(0),
-                    statustip=self.statusTip(0),
-                    checkstate=self.get_checkstate(),
-                    icon=gui.Icon(icon) if not icon.isNull() else None,
-                    data=self.data(0, QtCore.Qt.UserRole))
+        return dict(
+            text=self.text(0),
+            tooltip=self.toolTip(0),
+            statustip=self.statusTip(0),
+            checkstate=self.get_checkstate(),
+            icon=gui.Icon(icon) if not icon.isNull() else None,
+            data=self.data(0, QtCore.Qt.UserRole),
+        )
 
     def __setstate__(self, state):
         self.__init__()

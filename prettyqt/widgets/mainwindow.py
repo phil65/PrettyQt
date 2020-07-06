@@ -9,17 +9,21 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, icons
 
-DOCK_POSITIONS = bidict(top=QtCore.Qt.TopDockWidgetArea,
-                        bottom=QtCore.Qt.BottomDockWidgetArea,
-                        left=QtCore.Qt.LeftDockWidgetArea,
-                        right=QtCore.Qt.RightDockWidgetArea)
+DOCK_POSITIONS = bidict(
+    top=QtCore.Qt.TopDockWidgetArea,
+    bottom=QtCore.Qt.BottomDockWidgetArea,
+    left=QtCore.Qt.LeftDockWidgetArea,
+    right=QtCore.Qt.RightDockWidgetArea,
+)
 
-TOOLBAR_AREAS = bidict(left=QtCore.Qt.LeftToolBarArea,
-                       right=QtCore.Qt.RightToolBarArea,
-                       top=QtCore.Qt.TopToolBarArea,
-                       bottom=QtCore.Qt.BottomToolBarArea,
-                       all=QtCore.Qt.AllToolBarAreas,
-                       none=QtCore.Qt.NoToolBarArea)
+TOOLBAR_AREAS = bidict(
+    left=QtCore.Qt.LeftToolBarArea,
+    right=QtCore.Qt.RightToolBarArea,
+    top=QtCore.Qt.TopToolBarArea,
+    bottom=QtCore.Qt.BottomToolBarArea,
+    all=QtCore.Qt.AllToolBarAreas,
+    none=QtCore.Qt.NoToolBarArea,
+)
 
 
 QtWidgets.QMainWindow.__bases__ = (widgets.Widget,)
@@ -33,21 +37,25 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setDockOptions(self.AllowTabbedDocks |
-                            self.AllowNestedDocks |
-                            self.GroupedDragging |
-                            self.AnimatedDocks)
+        self.setDockOptions(
+            self.AllowTabbedDocks
+            | self.AllowNestedDocks
+            | self.GroupedDragging
+            | self.AnimatedDocks
+        )
 
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
 
     def __getstate__(self):
         icon = gui.Icon(self.windowIcon())
-        return dict(central_widget=self.centralWidget(),
-                    title=self.windowTitle(),
-                    is_maximized=self.isMaximized(),
-                    icon=icon if not icon.isNull() else None,
-                    size=(self.size().width(), self.size().height()))
+        return dict(
+            central_widget=self.centralWidget(),
+            title=self.windowTitle(),
+            is_maximized=self.isMaximized(),
+            icon=icon if not icon.isNull() else None,
+            size=(self.size().width(), self.size().height()),
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -147,11 +155,9 @@ class MainWindow(QtWidgets.QMainWindow):
         icon = icons.get_icon(icon, color="lightgray")
         self.setWindowIcon(icon)
 
-    def add_widget_as_dock(self,
-                           name: str,
-                           title: str,
-                           vertical: bool = True,
-                           position: str = "left") -> widgets.DockWidget:
+    def add_widget_as_dock(
+        self, name: str, title: str, vertical: bool = True, position: str = "left"
+    ) -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, name=name, title=title)
         widget = widgets.Widget()
         widget.set_id(f"{name}.widget")

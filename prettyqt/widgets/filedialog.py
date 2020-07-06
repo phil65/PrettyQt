@@ -10,26 +10,28 @@ from qtpy import QtWidgets
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
-MODES = bidict(existing_file=QtWidgets.QFileDialog.ExistingFile,
-               existing_files=QtWidgets.QFileDialog.ExistingFiles,
-               any_file=QtWidgets.QFileDialog.AnyFile,
-               directory=QtWidgets.QFileDialog.Directory)
+MODES = bidict(
+    existing_file=QtWidgets.QFileDialog.ExistingFile,
+    existing_files=QtWidgets.QFileDialog.ExistingFiles,
+    any_file=QtWidgets.QFileDialog.AnyFile,
+    directory=QtWidgets.QFileDialog.Directory,
+)
 
-LABELS = bidict(look_in=QtWidgets.QFileDialog.LookIn,
-                filename=QtWidgets.QFileDialog.FileName,
-                filetype=QtWidgets.QFileDialog.FileType,
-                accept=QtWidgets.QFileDialog.Accept,
-                reject=QtWidgets.QFileDialog.Reject)
+LABELS = bidict(
+    look_in=QtWidgets.QFileDialog.LookIn,
+    filename=QtWidgets.QFileDialog.FileName,
+    filetype=QtWidgets.QFileDialog.FileType,
+    accept=QtWidgets.QFileDialog.Accept,
+    reject=QtWidgets.QFileDialog.Reject,
+)
 
-ACCEPT_MODES = bidict(save=QtWidgets.QFileDialog.AcceptSave,
-                      open=QtWidgets.QFileDialog.AcceptOpen)
+ACCEPT_MODES = bidict(
+    save=QtWidgets.QFileDialog.AcceptSave, open=QtWidgets.QFileDialog.AcceptOpen
+)
 
-VIEW_MODES = bidict(detail=QtWidgets.QFileDialog.Detail,
-                    list=QtWidgets.QFileDialog.List)
+VIEW_MODES = bidict(detail=QtWidgets.QFileDialog.Detail, list=QtWidgets.QFileDialog.List)
 
-FILTERS = bidict(dirs=core.Dir.Dirs,
-                 all_dirs=core.Dir.AllDirs,
-                 files=core.Dir.Files)
+FILTERS = bidict(dirs=core.Dir.Dirs, all_dirs=core.Dir.AllDirs, files=core.Dir.Files)
 
 
 QtWidgets.QFileDialog.__bases__ = (widgets.BaseDialog,)
@@ -40,14 +42,16 @@ class FileDialog(QtWidgets.QFileDialog):
     simple dialog used to display some widget
     """
 
-    def __init__(self,
-                 path: Union[None, str, pathlib.Path] = None,
-                 mode: str = "open",
-                 caption: Optional[str] = None,
-                 path_id: Optional[str] = None,
-                 extension_filter: Optional[dict] = None,
-                 file_mode: str = "existing_files",
-                 parent=None):
+    def __init__(
+        self,
+        path: Union[None, str, pathlib.Path] = None,
+        mode: str = "open",
+        caption: Optional[str] = None,
+        path_id: Optional[str] = None,
+        extension_filter: Optional[dict] = None,
+        file_mode: str = "existing_files",
+        parent=None,
+    ):
         super().__init__(parent=parent)
         self.set_title(caption)
         self.path_id = path_id
@@ -61,14 +65,16 @@ class FileDialog(QtWidgets.QFileDialog):
         self.set_accept_mode(mode)
 
     def __getstate__(self):
-        return dict(file_mode=self.get_file_mode(),
-                    accept_mode=self.get_accept_mode(),
-                    filter=int(self.filter()),
-                    view_mode=self.get_view_mode(),
-                    name_filter=self.selectedNameFilter(),
-                    default_suffix=self.defaultSuffix(),
-                    name_filters=self.nameFilters(),
-                    supported_schemes=self.supportedSchemes())
+        return dict(
+            file_mode=self.get_file_mode(),
+            accept_mode=self.get_accept_mode(),
+            filter=int(self.filter()),
+            view_mode=self.get_view_mode(),
+            name_filter=self.selectedNameFilter(),
+            default_suffix=self.defaultSuffix(),
+            name_filters=self.nameFilters(),
+            supported_schemes=self.supportedSchemes(),
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -214,8 +220,9 @@ class FileDialog(QtWidgets.QFileDialog):
         Args:
             extension_dict: filter dictionary
         """
-        items = [f"{k} ({' '.join(f'*{ext}' for ext in v)})"
-                 for k, v in extension_dict.items()]
+        items = [
+            f"{k} ({' '.join(f'*{ext}' for ext in v)})" for k, v in extension_dict.items()
+        ]
         filter_str = ";;".join(items)
         self.setNameFilter(filter_str)
 

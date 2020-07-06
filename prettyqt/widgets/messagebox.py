@@ -8,51 +8,55 @@ from prettyqt import widgets
 from prettyqt.utils import bidict, icons
 
 
-ICONS = bidict(none=QtWidgets.QMessageBox.NoIcon,
-               information=QtWidgets.QMessageBox.Information,
-               warning=QtWidgets.QMessageBox.Warning,
-               critical=QtWidgets.QMessageBox.Critical,
-               question=QtWidgets.QMessageBox.Question)
+ICONS = bidict(
+    none=QtWidgets.QMessageBox.NoIcon,
+    information=QtWidgets.QMessageBox.Information,
+    warning=QtWidgets.QMessageBox.Warning,
+    critical=QtWidgets.QMessageBox.Critical,
+    question=QtWidgets.QMessageBox.Question,
+)
 
-BUTTONS = bidict(none=QtWidgets.QMessageBox.NoButton,
-                 cancel=QtWidgets.QMessageBox.Cancel,
-                 ok=QtWidgets.QMessageBox.Ok,
-                 save=QtWidgets.QMessageBox.Save,
-                 open=QtWidgets.QMessageBox.Open,
-                 close=QtWidgets.QMessageBox.Close,
-                 discard=QtWidgets.QMessageBox.Discard,
-                 apply=QtWidgets.QMessageBox.Apply,
-                 reset=QtWidgets.QMessageBox.Reset,
-                 restore_defaults=QtWidgets.QMessageBox.RestoreDefaults,
-                 help=QtWidgets.QMessageBox.Help,
-                 save_all=QtWidgets.QMessageBox.SaveAll,
-                 yes=QtWidgets.QMessageBox.Yes,
-                 yes_to_all=QtWidgets.QMessageBox.YesToAll,
-                 no=QtWidgets.QMessageBox.No,
-                 no_to_all=QtWidgets.QMessageBox.NoToAll,
-                 abort=QtWidgets.QMessageBox.Abort,
-                 retry=QtWidgets.QMessageBox.Retry,
-                 ignore=QtWidgets.QMessageBox.Ignore)
+BUTTONS = bidict(
+    none=QtWidgets.QMessageBox.NoButton,
+    cancel=QtWidgets.QMessageBox.Cancel,
+    ok=QtWidgets.QMessageBox.Ok,
+    save=QtWidgets.QMessageBox.Save,
+    open=QtWidgets.QMessageBox.Open,
+    close=QtWidgets.QMessageBox.Close,
+    discard=QtWidgets.QMessageBox.Discard,
+    apply=QtWidgets.QMessageBox.Apply,
+    reset=QtWidgets.QMessageBox.Reset,
+    restore_defaults=QtWidgets.QMessageBox.RestoreDefaults,
+    help=QtWidgets.QMessageBox.Help,
+    save_all=QtWidgets.QMessageBox.SaveAll,
+    yes=QtWidgets.QMessageBox.Yes,
+    yes_to_all=QtWidgets.QMessageBox.YesToAll,
+    no=QtWidgets.QMessageBox.No,
+    no_to_all=QtWidgets.QMessageBox.NoToAll,
+    abort=QtWidgets.QMessageBox.Abort,
+    retry=QtWidgets.QMessageBox.Retry,
+    ignore=QtWidgets.QMessageBox.Ignore,
+)
 
-TEXT_FORMATS = bidict(rich=QtCore.Qt.RichText,
-                      plain=QtCore.Qt.PlainText,
-                      auto=QtCore.Qt.AutoText)
+TEXT_FORMATS = bidict(
+    rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
+)
 
 
 QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 
 
 class MessageBox(QtWidgets.QMessageBox):
-
-    def __init__(self, icon=None, title=None, text="", details="", buttons=None,
-                 parent=None):
+    def __init__(
+        self, icon=None, title=None, text="", details="", buttons=None, parent=None
+    ):
         super().__init__(parent)
         self.set_icon(icon)
         self.setText(text)
         self.setWindowTitle(title)
-        self.setWindowFlags(QtCore.Qt.Dialog |
-                            QtCore.Qt.WindowTitleHint |
-                            QtCore.Qt.CustomizeWindowHint)
+        self.setWindowFlags(
+            QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint | QtCore.Qt.CustomizeWindowHint
+        )
         self.setDetailedText(details)
         if isinstance(buttons, list):
             for b in buttons:

@@ -54,7 +54,8 @@ class LabeledSlider(widgets.Widget):
 
         length = style.pixelMetric(widgets.Style.PM_SliderLength, st_slider, self.sl)
         available = style.pixelMetric(
-            widgets.Style.PM_SliderSpaceAvailable, st_slider, self.sl)
+            widgets.Style.PM_SliderSpaceAvailable, st_slider, self.sl
+        )
 
         for v, v_str in self.levels:
 
@@ -62,10 +63,9 @@ class LabeledSlider(widgets.Widget):
             rect = painter.drawText(core.Rect(), QtCore.Qt.TextDontPrint, v_str)
 
             if self.sl.is_horizontal():
-                x_loc = widgets.Style.sliderPositionFromValue(self.sl.minimum(),
-                                                              self.sl.maximum(),
-                                                              v,
-                                                              available)
+                x_loc = widgets.Style.sliderPositionFromValue(
+                    self.sl.minimum(), self.sl.maximum(), v, available
+                )
                 # I assume the offset is half the length of slider, therefore
                 # + length//2
                 x_loc += length // 2
@@ -81,22 +81,26 @@ class LabeledSlider(widgets.Widget):
                     if self.bottom_margin <= rect.height():
                         self.bottom_margin = rect.height()
 
-                    self.layout.setContentsMargins(self.left_margin,
-                                                   self.top_margin, self.right_margin,
-                                                   self.bottom_margin)
+                    self.layout.setContentsMargins(
+                        self.left_margin,
+                        self.top_margin,
+                        self.right_margin,
+                        self.bottom_margin,
+                    )
 
                 if v == self.sl.maximum() and rect.width() // 2 >= self.right_margin:
                     self.right_margin = rect.width() // 2
-                    self.layout.setContentsMargins(self.left_margin,
-                                                   self.top_margin, self.right_margin,
-                                                   self.bottom_margin)
+                    self.layout.setContentsMargins(
+                        self.left_margin,
+                        self.top_margin,
+                        self.right_margin,
+                        self.bottom_margin,
+                    )
 
             else:
-                y_loc = widgets.Style.sliderPositionFromValue(self.sl.minimum(),
-                                                              self.sl.maximum(),
-                                                              v,
-                                                              available,
-                                                              upsideDown=True)
+                y_loc = widgets.Style.sliderPositionFromValue(
+                    self.sl.minimum(), self.sl.maximum(), v, available, upsideDown=True
+                )
 
                 bottom = y_loc + length // 2 + rect.height() // 2 + self.top_margin - 3
                 # there is a 3 px offset that I can't attribute to any metric
@@ -104,15 +108,18 @@ class LabeledSlider(widgets.Widget):
                 left = self.left_margin - rect.width()
                 if left <= 0:
                     self.left_margin = rect.width() + 2
-                    self.layout.setContentsMargins(self.left_margin,
-                                                   self.top_margin, self.right_margin,
-                                                   self.bottom_margin)
+                    self.layout.setContentsMargins(
+                        self.left_margin,
+                        self.top_margin,
+                        self.right_margin,
+                        self.bottom_margin,
+                    )
             painter.drawText(left, bottom, v_str)
 
         return
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = widgets.Application([])
     frame = widgets.Widget()
     ha = widgets.BoxLayout("horizontal")

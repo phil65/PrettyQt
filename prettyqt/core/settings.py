@@ -8,18 +8,15 @@ from prettyqt import core
 from prettyqt.utils import bidict
 from qtpy import QtCore
 
-FORMATS = bidict(native=QtCore.QSettings.NativeFormat,
-                 ini=QtCore.QSettings.IniFormat)
+FORMATS = bidict(native=QtCore.QSettings.NativeFormat, ini=QtCore.QSettings.IniFormat)
 
-SCOPES = bidict(user=QtCore.QSettings.UserScope,
-                system=QtCore.QSettings.SystemScope)
+SCOPES = bidict(user=QtCore.QSettings.UserScope, system=QtCore.QSettings.SystemScope)
 
 
 QtCore.QSettings.__bases__ = (core.Object,)
 
 
 class Settings(QtCore.QSettings):
-
     def __repr__(self):
         return f"Settings: {self.as_dict()}"
 
@@ -160,7 +157,7 @@ class Settings(QtCore.QSettings):
         yield None
         self.endArray()
 
-# Dictionary interface
+    # Dictionary interface
 
     def get(self, key, default=None):
         return super().value(key, default)

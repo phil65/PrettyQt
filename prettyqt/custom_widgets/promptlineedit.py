@@ -15,9 +15,9 @@ class PromptLineEdit(widgets.LineEdit):
     #: Signal emitted when the embedded button is clicked
     clear_clicked = core.Signal()
 
-    def __init__(self, parent=None,
-                 prompt_text='Search',
-                 button_icon="mdi.delete-circle-outline"):
+    def __init__(
+        self, parent=None, prompt_text="Search", button_icon="mdi.delete-circle-outline"
+    ):
         super().__init__(parent)
         self._margin = self.sizeHint().height() - 2
         self._spacing = 0
@@ -53,11 +53,13 @@ class PromptLineEdit(widgets.LineEdit):
 
             left, top, right, bottom = self.getTextMargins()
 
-            va = self.style().visualAlignment(
-                self.layoutDirection(), self.alignment())
-            rect = self.style().subElementRect(
-                widgets.Style.SE_LineEditContents, option, self).adjusted(
-                    2, 0, 0, 0).adjusted(left, top, -right, -bottom)
+            va = self.style().visualAlignment(self.layoutDirection(), self.alignment())
+            rect = (
+                self.style()
+                .subElementRect(widgets.Style.SE_LineEditContents, option, self)
+                .adjusted(2, 0, 0, 0)
+                .adjusted(left, top, -right, -bottom)
+            )
             fm = gui.FontMetrics(self.font())
             text = fm.elided_text(self._prompt_text, mode="right", width=rect.width())
             painter = gui.Painter(self)

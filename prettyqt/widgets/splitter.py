@@ -7,15 +7,13 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal,
-                      vertical=QtCore.Qt.Vertical)
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
 
 
 QtWidgets.QSplitter.__bases__ = (widgets.Frame,)
 
 
 class Splitter(QtWidgets.QSplitter):
-
     def __init__(self, orientation="horizontal", parent=None):
         super().__init__(ORIENTATIONS[orientation], parent)
 
@@ -26,11 +24,13 @@ class Splitter(QtWidgets.QSplitter):
             return self.findChild(QtWidgets.QWidget, index)
 
     def __getstate__(self):
-        return dict(items=self.get_children(),
-                    orientation=self.get_orientation(),
-                    handle_width=self.handleWidth(),
-                    children_collapsible=self.childrenCollapsible(),
-                    opaque_resize=self.opaqueResize())
+        return dict(
+            items=self.get_children(),
+            orientation=self.get_orientation(),
+            handle_width=self.handleWidth(),
+            children_collapsible=self.childrenCollapsible(),
+            opaque_resize=self.opaqueResize(),
+        )
 
     def __setstate__(self, state):
         self.__init__(state["orientation"])

@@ -58,11 +58,13 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         """
         self.setZoomFactor(zoom)
 
-    def find_text(self,
-                  string: str,
-                  backward: bool = False,
-                  case_sensitive: bool = False,
-                  callback: Callable = None):
+    def find_text(
+        self,
+        string: str,
+        backward: bool = False,
+        case_sensitive: bool = False,
+        callback: Callable = None,
+    ):
         """Find text in the current page
 
         Finds the specified string, subString, in the page, using the given options.
@@ -101,6 +103,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     path = path = "E:\\dev\\datacook\\processanalyzer\\docs\\index.html"
     widget = WebEnginePage()

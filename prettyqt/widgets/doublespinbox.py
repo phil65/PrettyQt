@@ -22,18 +22,20 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
             self.set_value(default_value)
 
     def __getstate__(self):
-        return dict(range=(self.minimum(), self.maximum()),
-                    value=super().value(),
-                    enabled=self.isEnabled(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    step_type=self.get_step_type(),
-                    prefix=self.prefix(),
-                    correction_mode=self.get_correction_mode(),
-                    button_symbols=self.get_button_symbols(),
-                    decimals=self.decimals(),
-                    suffix=self.suffix(),
-                    single_step=self.singleStep())
+        return dict(
+            range=(self.minimum(), self.maximum()),
+            value=super().value(),
+            enabled=self.isEnabled(),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+            step_type=self.get_step_type(),
+            prefix=self.prefix(),
+            correction_mode=self.get_correction_mode(),
+            button_symbols=self.get_button_symbols(),
+            decimals=self.decimals(),
+            suffix=self.suffix(),
+            single_step=self.singleStep(),
+        )
 
     def __setstate__(self, state):
         self.__init__()

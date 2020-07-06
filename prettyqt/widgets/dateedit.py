@@ -17,13 +17,15 @@ class DateEdit(QtWidgets.QDateEdit):
     value_changed = core.Signal(datetime.datetime)
 
     def __getstate__(self):
-        return dict(calendar_popup=self.calendarPopup(),
-                    date=self.get_date(),
-                    display_format=self.displayFormat(),
-                    range=(self.min_date(), self.max_date()),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip(),
-                    enabled=self.isEnabled())
+        return dict(
+            calendar_popup=self.calendarPopup(),
+            date=self.get_date(),
+            display_format=self.displayFormat(),
+            range=(self.min_date(), self.max_date()),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+            enabled=self.isEnabled(),
+        )
 
     def __setstate__(self, state):
         self.__init__(state["date"])
@@ -46,6 +48,7 @@ class DateEdit(QtWidgets.QDateEdit):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     widget = DateEdit()
     widget.show()

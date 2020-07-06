@@ -11,7 +11,6 @@ FORMAT_2.set_background_color("lightblue")
 
 
 class RegexMatchHighlighter(gui.SyntaxHighlighter):
-
     def __init__(self, document=None):
         super().__init__(document)
         self.spans = []

@@ -175,11 +175,13 @@ class PathName(Highlighter):
 class LevelName(Highlighter):
     placeholder = "%(levelname)s"
     color = "red"
-    formats = dict(DEBUG=gui.TextCharFormat(text_color="green", bold=True),
-                   INFO=gui.TextCharFormat(text_color="blue", bold=True),
-                   WARNING=gui.TextCharFormat(text_color="orange", bold=True),
-                   CRITICAL=gui.TextCharFormat(text_color="darkorange", bold=True),
-                   ERROR=gui.TextCharFormat(text_color="red", bold=True))
+    formats = dict(
+        DEBUG=gui.TextCharFormat(text_color="green", bold=True),
+        INFO=gui.TextCharFormat(text_color="blue", bold=True),
+        WARNING=gui.TextCharFormat(text_color="orange", bold=True),
+        CRITICAL=gui.TextCharFormat(text_color="darkorange", bold=True),
+        ERROR=gui.TextCharFormat(text_color="red", bold=True),
+    )
 
     def format_string(self, record: logging.LogRecord) -> str:
         return record.levelname
@@ -189,7 +191,6 @@ class LevelName(Highlighter):
 
 
 class LogTextEdit(widgets.PlainTextEdit):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_font("Consolas")
@@ -202,7 +203,7 @@ class LogTextEdit(widgets.PlainTextEdit):
         self.handler.log_record.connect(self.append_record)
         self.handler.setLevel(logging.INFO)
         logger.addHandler(self.handler)
-        fmt = logging.Formatter('%(asctime)s  %(levelname)i  %(message)s')
+        fmt = logging.Formatter("%(asctime)s  %(levelname)i  %(message)s")
         self.set_formatter(fmt)
 
     def wheelEvent(self, event):
@@ -265,8 +266,9 @@ if __name__ == "__main__":
     w.box.add(widgets.PushButton("Debug", callback=lambda: logger.debug("Debug")))
     w.box.add(widgets.PushButton("Info", callback=lambda: logger.info("Info")))
     w.box.add(widgets.PushButton("Warning", callback=lambda: logger.warning("Warning")))
-    w.box.add(widgets.PushButton("Critical",
-                                 callback=lambda: logger.critical("Critical")))
+    w.box.add(
+        widgets.PushButton("Critical", callback=lambda: logger.critical("Critical"))
+    )
     w.box.add(widget)
     w.show()
     app.exec_()

@@ -11,7 +11,6 @@ QtGui.QDoubleValidator.__bases__ = (gui.Validator,)
 
 
 class DoubleValidator(QtGui.QDoubleValidator):
-
     def __repr__(self):
         return f"DoubleValidator({self.bottom()}, {self.top()}, {self.decimals()})"
 

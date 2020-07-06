@@ -8,7 +8,6 @@ from prettyqt import gui
 
 
 class BaseRegexValidator(gui.Validator):
-
     def __init__(self, regex=None):
         super().__init__()
         self.regex = None
@@ -44,7 +43,6 @@ class BaseRegexValidator(gui.Validator):
 
 
 class IntListValidator(BaseRegexValidator):
-
     def __repr__(self):
         return f"IntListValidator(allow_single={self.allow_single})"
 
@@ -58,7 +56,6 @@ class IntListValidator(BaseRegexValidator):
 
 
 class FloatListValidator(BaseRegexValidator):
-
     def __repr__(self):
         return f"FloatListValidator(allow_single={self.allow_single})"
 
@@ -68,12 +65,14 @@ class FloatListValidator(BaseRegexValidator):
         if allow_single:
             self.set_regex(r"^(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)*$")
         else:
-            self.set_regex(r"^(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)"
-                           r"(\s*,\s*-?\d+(\.\d+)?)*$")
+            self.set_regex(
+                r"^(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)" r"(\s*,\s*-?\d+(\.\d+)?)*$"
+            )
 
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     w = widgets.LineEdit()
     val = BaseRegexValidator()

@@ -12,7 +12,6 @@ counter_dict = collections.defaultdict(itertools.count)
 
 
 class Object(QtCore.QObject):
-
     def __getstate__(self):
         return dict(object_name=self.objectName())
 

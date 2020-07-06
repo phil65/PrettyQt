@@ -8,26 +8,32 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core
 from prettyqt.utils import bidict, icons
 
-PRIORITIES = bidict(low=QtWidgets.QAction.LowPriority,
-                    normal=QtWidgets.QAction.NormalPriority,
-                    high=QtWidgets.QAction.HighPriority)
+PRIORITIES = bidict(
+    low=QtWidgets.QAction.LowPriority,
+    normal=QtWidgets.QAction.NormalPriority,
+    high=QtWidgets.QAction.HighPriority,
+)
 
-CONTEXTS = bidict(widget=QtCore.Qt.WidgetShortcut,
-                  widget_with_children=QtCore.Qt.WidgetWithChildrenShortcut,
-                  window=QtCore.Qt.WindowShortcut,
-                  application=QtCore.Qt.ApplicationShortcut)
+CONTEXTS = bidict(
+    widget=QtCore.Qt.WidgetShortcut,
+    widget_with_children=QtCore.Qt.WidgetWithChildrenShortcut,
+    window=QtCore.Qt.WindowShortcut,
+    application=QtCore.Qt.ApplicationShortcut,
+)
 
 
 QtWidgets.QAction.__bases__ = (core.Object,)
 
 
 class Action(QtWidgets.QAction):
-
-    def __init__(self, parent=None,
-                 text: str = "",
-                 icon: icons.IconType = None,
-                 shortcut: str = "",
-                 tooltip: str = ""):
+    def __init__(
+        self,
+        parent=None,
+        text: str = "",
+        icon: icons.IconType = None,
+        shortcut: str = "",
+        tooltip: str = "",
+    ):
         super().__init__(parent)
         self.set_text(text)
         self.set_icon(icon)
@@ -35,15 +41,17 @@ class Action(QtWidgets.QAction):
         self.set_tooltip(tooltip)
 
     def __getstate__(self):
-        return dict(text=self.text(),
-                    enabled=self.isEnabled(),
-                    shortcut=self.shortcut(),
-                    tooltip=self.toolTip(),
-                    checkable=self.isCheckable(),
-                    checked=self.isChecked(),
-                    priority=self.get_priority(),
-                    shortcut_context=self.get_shortcut_context(),
-                    statustip=self.statusTip())
+        return dict(
+            text=self.text(),
+            enabled=self.isEnabled(),
+            shortcut=self.shortcut(),
+            tooltip=self.toolTip(),
+            checkable=self.isCheckable(),
+            checked=self.isChecked(),
+            priority=self.get_priority(),
+            shortcut_context=self.get_shortcut_context(),
+            statustip=self.statusTip(),
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -150,6 +158,7 @@ class Action(QtWidgets.QAction):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     action = Action("This is a test")
     print(action.__getstate__())

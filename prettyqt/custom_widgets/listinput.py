@@ -7,7 +7,6 @@ from prettyqt.utils import helpers
 
 
 class ListInput(widgets.LineEdit):
-
     def __init__(self, default_value="", typ=int, allow_single=False, parent=None):
         super().__init__(parent=parent)
         if typ is int:

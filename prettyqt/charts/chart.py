@@ -5,25 +5,28 @@
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
 
-THEMES = {"Light": QtCharts.QChart.ChartThemeLight,
-          "Blue Cerulean": QtCharts.QChart.ChartThemeBlueCerulean,
-          "Dark": QtCharts.QChart.ChartThemeDark,
-          "Brown Sand": QtCharts.QChart.ChartThemeBrownSand,
-          "Blue NCS": QtCharts.QChart.ChartThemeBlueNcs,
-          "High Contrast": QtCharts.QChart.ChartThemeHighContrast,
-          "Blue Icy": QtCharts.QChart.ChartThemeBlueIcy,
-          "Qt": QtCharts.QChart.ChartThemeQt}
+THEMES = {
+    "Light": QtCharts.QChart.ChartThemeLight,
+    "Blue Cerulean": QtCharts.QChart.ChartThemeBlueCerulean,
+    "Dark": QtCharts.QChart.ChartThemeDark,
+    "Brown Sand": QtCharts.QChart.ChartThemeBrownSand,
+    "Blue NCS": QtCharts.QChart.ChartThemeBlueNcs,
+    "High Contrast": QtCharts.QChart.ChartThemeHighContrast,
+    "Blue Icy": QtCharts.QChart.ChartThemeBlueIcy,
+    "Qt": QtCharts.QChart.ChartThemeQt,
+}
 
-ALIGNMENTS = dict(left=QtCore.Qt.AlignLeft,
-                  right=QtCore.Qt.AlignRight,
-                  top=QtCore.Qt.AlignTop,
-                  bottom=QtCore.Qt.AlignBottom)
+ALIGNMENTS = dict(
+    left=QtCore.Qt.AlignLeft,
+    right=QtCore.Qt.AlignRight,
+    top=QtCore.Qt.AlignTop,
+    bottom=QtCore.Qt.AlignBottom,
+)
 
 ANIMATION_OPTS = dict(series=QtCharts.QChart.SeriesAnimations)
 
 
 class Chart(QtCharts.QChart):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.max_x = 0

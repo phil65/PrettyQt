@@ -7,16 +7,17 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
-ROLES = bidict(left=QtWidgets.QFormLayout.LabelRole,
-               right=QtWidgets.QFormLayout.FieldRole,
-               both=QtWidgets.QFormLayout.SpanningRole)
+ROLES = bidict(
+    left=QtWidgets.QFormLayout.LabelRole,
+    right=QtWidgets.QFormLayout.FieldRole,
+    both=QtWidgets.QFormLayout.SpanningRole,
+)
 
 
 QtWidgets.QFormLayout.__bases__ = (widgets.Layout,)
 
 
 class FormLayout(QtWidgets.QFormLayout):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_size_mode("maximum")
@@ -97,8 +98,7 @@ class FormLayout(QtWidgets.QFormLayout):
 
 if __name__ == "__main__":
     app = widgets.app()
-    dct = {"key": widgets.Label("test"),
-           None: widgets.Label("test 2")}
+    dct = {"key": widgets.Label("test"), None: widgets.Label("test 2")}
     layout = FormLayout.build_from_dict(dct)
     layout[3] = "hellooo"
     w = widgets.Widget()

@@ -10,26 +10,30 @@ from prettyqt import core
 from prettyqt.utils import bidict
 
 
-OPTIONS = bidict(dont_watch_changes=QtWidgets.QFileSystemModel.DontWatchForChanges,
-                 dont_resolve_symlinks=QtWidgets.QFileSystemModel.DontResolveSymlinks,
-                 no_custom_icons=QtWidgets.QFileSystemModel.DontUseCustomDirectoryIcons)
+OPTIONS = bidict(
+    dont_watch_changes=QtWidgets.QFileSystemModel.DontWatchForChanges,
+    dont_resolve_symlinks=QtWidgets.QFileSystemModel.DontResolveSymlinks,
+    no_custom_icons=QtWidgets.QFileSystemModel.DontUseCustomDirectoryIcons,
+)
 
-FILTERS = bidict(dirs=core.Dir.Dirs,
-                 all_dirs=core.Dir.AllDirs,
-                 files=core.Dir.Files,
-                 drives=core.Dir.Drives,
-                 no_sym_links=core.Dir.NoSymLinks,
-                 no_dot_and_dotdot=core.Dir.NoDotAndDotDot,
-                 no_dot=core.Dir.NoDot,
-                 no_dotdot=core.Dir.NoDotDot,
-                 all_entries=core.Dir.AllEntries,
-                 readable=core.Dir.Readable,
-                 writable=core.Dir.Writable,
-                 executable=core.Dir.Executable,
-                 modified=core.Dir.Modified,
-                 hidden=core.Dir.Hidden,
-                 system=core.Dir.System,
-                 case_sensitive=core.Dir.CaseSensitive)
+FILTERS = bidict(
+    dirs=core.Dir.Dirs,
+    all_dirs=core.Dir.AllDirs,
+    files=core.Dir.Files,
+    drives=core.Dir.Drives,
+    no_sym_links=core.Dir.NoSymLinks,
+    no_dot_and_dotdot=core.Dir.NoDotAndDotDot,
+    no_dot=core.Dir.NoDot,
+    no_dotdot=core.Dir.NoDotDot,
+    all_entries=core.Dir.AllEntries,
+    readable=core.Dir.Readable,
+    writable=core.Dir.Writable,
+    executable=core.Dir.Executable,
+    modified=core.Dir.Modified,
+    hidden=core.Dir.Hidden,
+    system=core.Dir.System,
+    case_sensitive=core.Dir.CaseSensitive,
+)
 
 QtWidgets.QFileSystemModel.__bases__ = (core.AbstractItemModel,)
 
@@ -38,6 +42,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
     """
     Class to populate a filesystem treeview
     """
+
     DATA_ROLE = QtCore.Qt.UserRole + 33
     content_type = "files"
 
@@ -87,8 +92,10 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
         if not paths:
             return []
         if paths[0] == "":
-            paths = [folder / filename
-                     for folder in paths
-                     for filename in folder.iterdir()
-                     if (folder / filename).is_file()]
+            paths = [
+                folder / filename
+                for folder in paths
+                for filename in folder.iterdir()
+                if (folder / filename).is_file()
+            ]
         return paths

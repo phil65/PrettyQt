@@ -14,7 +14,6 @@ QtCore.QAbstractItemModel.__bases__ = (core.Object,)
 
 
 class AbstractItemModel(QtCore.QAbstractItemModel):
-
     def __repr__(self):
         return f"{self.__class__.__name__}: {self.rowCount()} children"
 
@@ -61,10 +60,12 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         self.dataChanged.emit(start_index, end_index)
 
     @contextlib.contextmanager
-    def remove_rows(self,
-                    first: Optional[int] = None,
-                    last: Optional[int] = None,
-                    parent: Optional[QtCore.QModelIndex] = None):
+    def remove_rows(
+        self,
+        first: Optional[int] = None,
+        last: Optional[int] = None,
+        parent: Optional[QtCore.QModelIndex] = None,
+    ):
         parent = QtCore.QModelIndex() if parent is None else parent
         first = first if first is not None else 0
         last = last if last is not None else self.rowCount()
@@ -73,10 +74,12 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         self.endRemoveRows()
 
     @contextlib.contextmanager
-    def remove_columns(self,
-                       first: Optional[int] = None,
-                       last: Optional[int] = None,
-                       parent: Optional[QtCore.QModelIndex] = None):
+    def remove_columns(
+        self,
+        first: Optional[int] = None,
+        last: Optional[int] = None,
+        parent: Optional[QtCore.QModelIndex] = None,
+    ):
         parent = QtCore.QModelIndex() if parent is None else parent
         first = first if first is not None else 0
         last = last if last is not None else self.rowCount()
@@ -85,10 +88,12 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         self.endRemoveColumns()
 
     @contextlib.contextmanager
-    def insert_rows(self,
-                    first: Optional[int] = None,
-                    last: Optional[int] = None,
-                    parent: Optional[QtCore.QModelIndex] = None):
+    def insert_rows(
+        self,
+        first: Optional[int] = None,
+        last: Optional[int] = None,
+        parent: Optional[QtCore.QModelIndex] = None,
+    ):
         parent = QtCore.QModelIndex() if parent is None else parent
         first = first if first is not None else 0
         last = last if last is not None else self.rowCount()
@@ -97,19 +102,19 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         self.endInsertRows()
 
     @contextlib.contextmanager
-    def append_rows(self,
-                    num_rows: int,
-                    parent: Optional[QtCore.QModelIndex] = None):
+    def append_rows(self, num_rows: int, parent: Optional[QtCore.QModelIndex] = None):
         parent = QtCore.QModelIndex() if parent is None else parent
         self.beginInsertRows(parent, self.rowCount(), self.rowCount() + num_rows - 1)
         yield None
         self.endInsertRows()
 
     @contextlib.contextmanager
-    def insert_columns(self,
-                       first: Optional[int] = None,
-                       last: Optional[int] = None,
-                       parent: Optional[QtCore.QModelIndex] = None):
+    def insert_columns(
+        self,
+        first: Optional[int] = None,
+        last: Optional[int] = None,
+        parent: Optional[QtCore.QModelIndex] = None,
+    ):
         parent = QtCore.QModelIndex() if parent is None else parent
         first = first if first is not None else 0
         last = last if last is not None else self.rowCount()

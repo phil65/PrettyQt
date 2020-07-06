@@ -12,27 +12,34 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import constants, gui, widgets
 from prettyqt.utils import bidict
 
-TRIGGERS = bidict(none=QtWidgets.QAbstractItemView.NoEditTriggers,
-                  double_click=QtWidgets.QAbstractItemView.DoubleClicked,
-                  edit_key=QtWidgets.QAbstractItemView.EditKeyPressed)
+TRIGGERS = bidict(
+    none=QtWidgets.QAbstractItemView.NoEditTriggers,
+    double_click=QtWidgets.QAbstractItemView.DoubleClicked,
+    edit_key=QtWidgets.QAbstractItemView.EditKeyPressed,
+)
 
-SELECTION_BEHAVIOURS = bidict(rows=QtWidgets.QAbstractItemView.SelectRows,
-                              columns=QtWidgets.QAbstractItemView.SelectColumns,
-                              items=QtWidgets.QAbstractItemView.SelectItems)
+SELECTION_BEHAVIOURS = bidict(
+    rows=QtWidgets.QAbstractItemView.SelectRows,
+    columns=QtWidgets.QAbstractItemView.SelectColumns,
+    items=QtWidgets.QAbstractItemView.SelectItems,
+)
 
-SELECTION_MODES = bidict(single=QtWidgets.QAbstractItemView.SingleSelection,
-                         extended=QtWidgets.QAbstractItemView.ExtendedSelection,
-                         multi=QtWidgets.QAbstractItemView.MultiSelection,
-                         none=QtWidgets.QAbstractItemView.NoSelection)
+SELECTION_MODES = bidict(
+    single=QtWidgets.QAbstractItemView.SingleSelection,
+    extended=QtWidgets.QAbstractItemView.ExtendedSelection,
+    multi=QtWidgets.QAbstractItemView.MultiSelection,
+    none=QtWidgets.QAbstractItemView.NoSelection,
+)
 
-SCROLL_MODES = bidict(item=QtWidgets.QAbstractItemView.ScrollPerItem,
-                      pixel=QtWidgets.QAbstractItemView.ScrollPerPixel)
+SCROLL_MODES = bidict(
+    item=QtWidgets.QAbstractItemView.ScrollPerItem,
+    pixel=QtWidgets.QAbstractItemView.ScrollPerPixel,
+)
 
 QtWidgets.QAbstractItemView.__bases__ = (widgets.AbstractScrollArea,)
 
 
 class AbstractItemView(QtWidgets.QAbstractItemView):
-
     def __len__(self):
         if self.model() is not None:
             return self.model().rowCount()
@@ -64,11 +71,13 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             old_sel_model.deleteLater()
             del old_sel_model
 
-    def set_delegate(self,
-                     delegate: QtWidgets.QItemDelegate,
-                     column: Optional[int] = None,
-                     row: Optional[int] = None,
-                     persistent: bool = False):
+    def set_delegate(
+        self,
+        delegate: QtWidgets.QItemDelegate,
+        column: Optional[int] = None,
+        row: Optional[int] = None,
+        persistent: bool = False,
+    ):
         if column is not None:
             self.setItemDelegateForColumn(column, delegate)
             if persistent:
@@ -125,8 +134,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         returns generator yielding item names
         """
-        return (x.data(constants.NAME_ROLE)
-                for x in self.selected_indexes())
+        return (x.data(constants.NAME_ROLE) for x in self.selected_indexes())
 
     def selected_rows(self) -> Generator[int, None, None]:
         """
@@ -138,8 +146,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         returns generator yielding selected userData
         """
-        return (x.data(constants.USER_ROLE)
-                for x in self.selected_indexes())
+        return (x.data(constants.USER_ROLE) for x in self.selected_indexes())
 
     def setup_dragdrop_move(self):
         self.setDragEnabled(True)
@@ -198,8 +205,9 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if mode is None:
             mode = "none"
         if mode not in SELECTION_MODES:
-            raise ValueError("Format must be either 'single', 'extended',"
-                             "'multi' or 'None'")
+            raise ValueError(
+                "Format must be either 'single', 'extended'," "'multi' or 'None'"
+            )
         self.setSelectionMode(SELECTION_MODES[mode])
 
     def get_selection_mode(self) -> str:

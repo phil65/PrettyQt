@@ -9,7 +9,6 @@ from prettyqt.utils import icons
 
 
 class SidebarWidget(widgets.MainWindow):
-
     def __init__(self, parent=None):
         super().__init__(parent=None)
         self.sidebar = widgets.ToolBar()
@@ -30,13 +29,15 @@ class SidebarWidget(widgets.MainWindow):
         w.set_layout(main_layout)
         self.setCentralWidget(w)
 
-    def add_tab(self,
-                item,
-                title: str,
-                icon: icons.IconType = None,
-                show: bool = False,
-                shortcut: Optional[str] = None,
-                area: str = "top"):
+    def add_tab(
+        self,
+        item,
+        title: str,
+        icon: icons.IconType = None,
+        show: bool = False,
+        shortcut: Optional[str] = None,
+        area: str = "top",
+    ):
         page = item
         self.area.box.add(page)
         # button = widgets.ToolButton()
@@ -48,18 +49,16 @@ class SidebarWidget(widgets.MainWindow):
         # self.sidebar.addWidget(button)
         # self.sidebar.add_separator()
         if area == "top":
-            act = widgets.Action(text=title,
-                                 icon=icon,
-                                 shortcut=shortcut,
-                                 parent=self.sidebar)
+            act = widgets.Action(
+                text=title, icon=icon, shortcut=shortcut, parent=self.sidebar
+            )
             act.setCheckable(True)
             act.triggered.connect(lambda: self.set_tab(page))
             self.sidebar.insertAction(self.spacer_action, act)
         else:
-            act = self.sidebar.add_action(title,
-                                          icon,
-                                          lambda: self.set_tab(page),
-                                          checkable=True)
+            act = self.sidebar.add_action(
+                title, icon, lambda: self.set_tab(page), checkable=True
+            )
         button = self.sidebar.widgetForAction(act)
         if len(self.area.box) == 1:
             button.setChecked(True)
@@ -91,20 +90,20 @@ class SidebarWidget(widgets.MainWindow):
         else:
             self.sidebar.add_separator(text)
 
-    def add_action(self,
-                   title: str,
-                   icon: icons.IconType = None,
-                   callback: Callable = None,
-                   checkable: bool = False,
-                   shortcut: Optional[str] = None,
-                   area: str = "top"):
+    def add_action(
+        self,
+        title: str,
+        icon: icons.IconType = None,
+        callback: Callable = None,
+        checkable: bool = False,
+        shortcut: Optional[str] = None,
+        area: str = "top",
+    ):
         # act = self.sidebar.add_action(label=title,
         #                                      icon=icon,
         #                                      callback=callback,
         #                                      checkable=checkable)
-        act = widgets.Action(text=title,
-                             icon=icon,
-                             shortcut=shortcut)
+        act = widgets.Action(text=title, icon=icon, shortcut=shortcut)
         act.setCheckable(checkable)
         if callback:
             act.triggered.connect(callback)
@@ -115,7 +114,7 @@ class SidebarWidget(widgets.MainWindow):
         return act
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app = widgets.app()
     ex = SidebarWidget()
     page_1 = widgets.PlainTextEdit()

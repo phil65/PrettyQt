@@ -6,20 +6,65 @@ Syntax highlighter for the programming language Python
 from prettyqt import core, gui, syntaxhighlighters
 
 KEYWORDS = [
-    "and", "assert", "break", "continue", "class", "def"
-    "del", "elif", "else", "except", "exec", "finally",
-    "for", "from", "global", "if", "import", "in",
-    "is", "lambda", "not", "or", "pass", "print",
-    "raise", "return", "try", "while", "yield",
-    "None", "True", "False",
+    "and",
+    "assert",
+    "break",
+    "continue",
+    "class",
+    "def" "del",
+    "elif",
+    "else",
+    "except",
+    "exec",
+    "finally",
+    "for",
+    "from",
+    "global",
+    "if",
+    "import",
+    "in",
+    "is",
+    "lambda",
+    "not",
+    "or",
+    "pass",
+    "print",
+    "raise",
+    "return",
+    "try",
+    "while",
+    "yield",
+    "None",
+    "True",
+    "False",
 ]
 
 OPERATORS = [
     "=",
-    "==", "!=", "<", "<=", ">", ">=",
-    r"\+", "-", r"\*", "/", "//", r"\%", r"\*\*",
-    r"\+=", "-=", r"\*=", "/=", r"\%=",
-    r"\^", r"\|", r"\&", r"\~", ">>", "<<",
+    "==",
+    "!=",
+    "<",
+    "<=",
+    ">",
+    ">=",
+    r"\+",
+    "-",
+    r"\*",
+    "/",
+    "//",
+    r"\%",
+    r"\*\*",
+    r"\+=",
+    "-=",
+    r"\*=",
+    "/=",
+    r"\%=",
+    r"\^",
+    r"\|",
+    r"\&",
+    r"\~",
+    ">>",
+    "<<",
 ]
 
 
@@ -74,9 +119,11 @@ class Comment(Rule):
 
 
 class Number(Rule):
-    regex = [r"\b[+-]?[0-9]+[lL]?\b",
-             r"\b[+-]?0[xX][0-9A-Fa-f]+[lL]?\b",
-             r"\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b"]
+    regex = [
+        r"\b[+-]?[0-9]+[lL]?\b",
+        r"\b[+-]?0[xX][0-9A-Fa-f]+[lL]?\b",
+        r"\b[+-]?[0-9]+(?:\.[0-9]+)?(?:[eE][+-]?[0-9]+)?\b",
+    ]
     color = gui.Color(100, 150, 190)
 
 
@@ -92,6 +139,7 @@ TRI_DOUBLE = (core.RegExp('"""'), 2, fmt)
 class PythonHighlighter(gui.SyntaxHighlighter):
     """Syntax highlighter for the Python language.
     """
+
     RULES = Rule.__subclasses__()
 
     def highlightBlock(self, text: str):
@@ -144,6 +192,7 @@ class PythonHighlighter(gui.SyntaxHighlighter):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     editor = widgets.PlainTextEdit()
     highlighter = PythonHighlighter(editor.document())

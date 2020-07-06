@@ -13,7 +13,6 @@ QtWidgets.QMenu.__bases__ = (widgets.Widget,)
 
 
 class Menu(QtWidgets.QMenu):
-
     def __init__(self, title: str = "", icon: icons.IconType = None, parent=None):
         super().__init__(title, parent=parent)
         self.set_icon(icon)
@@ -72,15 +71,16 @@ class Menu(QtWidgets.QMenu):
         self.add(separator)
         return separator
 
-    def add_action(self,
-                   label: Union[str, widgets.Action],
-                   callback: Callable = None,
-                   icon: Optional[Any] = None,
-                   checkable: bool = False,
-                   checked: bool = False,
-                   shortcut: Optional[str] = None,
-                   status_tip: Optional[str] = None
-                   ) -> widgets.Action:
+    def add_action(
+        self,
+        label: Union[str, widgets.Action],
+        callback: Callable = None,
+        icon: Optional[Any] = None,
+        checkable: bool = False,
+        checked: bool = False,
+        shortcut: Optional[str] = None,
+        status_tip: Optional[str] = None,
+    ) -> widgets.Action:
         """Add an action to the menu
 
         Args:

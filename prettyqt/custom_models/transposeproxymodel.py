@@ -6,7 +6,6 @@ from prettyqt import core
 
 
 class TransposeProxyModel(core.AbstractProxyModel):
-
     def __init__(self, source_model):
         super().__init__()
         self._source_model = None

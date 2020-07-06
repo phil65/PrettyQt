@@ -8,7 +8,6 @@ from qtpy import QtCore
 
 
 class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.string = None
@@ -31,12 +30,16 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     def groups(self, default=None) -> tuple:
         if self.lastindex is None:
             return tuple()
-        return (self.group(i) if i <= self.lastindex else default
-                for i in range(self.re.captureCount()))
+        return (
+            self.group(i) if i <= self.lastindex else default
+            for i in range(self.re.captureCount())
+        )
 
     def groupdict(self, default=None) -> dict:
-        groups = [self.group(i) if i <= self.lastindex else default
-                  for i in range(self.re.captureCount())]
+        groups = [
+            self.group(i) if i <= self.lastindex else default
+            for i in range(self.re.captureCount())
+        ]
         names = self.re.namedCaptureGroups()
         return {names[i]: groups[i] for i in range(self.re.captureCount())}
 

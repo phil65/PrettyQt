@@ -47,6 +47,7 @@ class RegexMatchesModel(core.AbstractTableModel):
 
 if __name__ == "__main__":
     import re
+
     app = widgets.Application([])
     view = widgets.TableView()
     teststring = "fjdjkslfj355fjdkj 55 55454"

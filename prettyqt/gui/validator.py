@@ -11,13 +11,13 @@ QtGui.QValidator.__bases__ = (core.Object,)
 
 
 class Validator(QtGui.QValidator):
-
     def __repr__(self):
         return f"{self.__class__.__name__}()"
 
     def __add__(self, other):
         if isinstance(other, Validator):
             from prettyqt import custom_validators
+
             return custom_validators.CompositeValidator([self, other])
 
     def __radd__(self, other: QtGui.QValidator):

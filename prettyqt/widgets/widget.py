@@ -12,68 +12,79 @@ from qtpy import QtCore, QtGui, QtWidgets
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict
 
-POLICIES = bidict(none=QtCore.Qt.NoContextMenu,
-                  prevent=QtCore.Qt.PreventContextMenu,
-                  default=QtCore.Qt.DefaultContextMenu,
-                  actions=QtCore.Qt.ActionsContextMenu,
-                  custom=QtCore.Qt.CustomContextMenu,
-                  showhide_menu="showhide_menu")
+POLICIES = bidict(
+    none=QtCore.Qt.NoContextMenu,
+    prevent=QtCore.Qt.PreventContextMenu,
+    default=QtCore.Qt.DefaultContextMenu,
+    actions=QtCore.Qt.ActionsContextMenu,
+    custom=QtCore.Qt.CustomContextMenu,
+    showhide_menu="showhide_menu",
+)
 
-MODALITIES = bidict(window=QtCore.Qt.WindowModal,
-                    application=QtCore.Qt.ApplicationModal,
-                    none=QtCore.Qt.NonModal)
+MODALITIES = bidict(
+    window=QtCore.Qt.WindowModal,
+    application=QtCore.Qt.ApplicationModal,
+    none=QtCore.Qt.NonModal,
+)
 
-CURSOR_SHAPES = bidict(arrow=QtCore.Qt.ArrowCursor,
-                       uparrow=QtCore.Qt.UpArrowCursor,
-                       cross=QtCore.Qt.CrossCursor,
-                       wait=QtCore.Qt.WaitCursor,
-                       caret=QtCore.Qt.IBeamCursor,
-                       size_vertical=QtCore.Qt.SizeVerCursor,
-                       size_horizonal=QtCore.Qt.SizeHorCursor,
-                       size_topright=QtCore.Qt.SizeBDiagCursor,
-                       size_topleft=QtCore.Qt.SizeFDiagCursor,
-                       size_all=QtCore.Qt.SizeAllCursor,
-                       blank=QtCore.Qt.BlankCursor,
-                       split_vertical=QtCore.Qt.SplitVCursor,
-                       split_horizontal=QtCore.Qt.SplitHCursor,
-                       pointing_hand=QtCore.Qt.PointingHandCursor,
-                       forbidden=QtCore.Qt.ForbiddenCursor,
-                       open_hand=QtCore.Qt.OpenHandCursor,
-                       closed_hand=QtCore.Qt.ClosedHandCursor,
-                       whats_this=QtCore.Qt.WhatsThisCursor,
-                       busy=QtCore.Qt.BusyCursor,
-                       drag_move=QtCore.Qt.DragMoveCursor,
-                       drag_copy=QtCore.Qt.DragCopyCursor,
-                       drag_link=QtCore.Qt.DragLinkCursor,
-                       bitmap=QtCore.Qt.BitmapCursor)
+CURSOR_SHAPES = bidict(
+    arrow=QtCore.Qt.ArrowCursor,
+    uparrow=QtCore.Qt.UpArrowCursor,
+    cross=QtCore.Qt.CrossCursor,
+    wait=QtCore.Qt.WaitCursor,
+    caret=QtCore.Qt.IBeamCursor,
+    size_vertical=QtCore.Qt.SizeVerCursor,
+    size_horizonal=QtCore.Qt.SizeHorCursor,
+    size_topright=QtCore.Qt.SizeBDiagCursor,
+    size_topleft=QtCore.Qt.SizeFDiagCursor,
+    size_all=QtCore.Qt.SizeAllCursor,
+    blank=QtCore.Qt.BlankCursor,
+    split_vertical=QtCore.Qt.SplitVCursor,
+    split_horizontal=QtCore.Qt.SplitHCursor,
+    pointing_hand=QtCore.Qt.PointingHandCursor,
+    forbidden=QtCore.Qt.ForbiddenCursor,
+    open_hand=QtCore.Qt.OpenHandCursor,
+    closed_hand=QtCore.Qt.ClosedHandCursor,
+    whats_this=QtCore.Qt.WhatsThisCursor,
+    busy=QtCore.Qt.BusyCursor,
+    drag_move=QtCore.Qt.DragMoveCursor,
+    drag_copy=QtCore.Qt.DragCopyCursor,
+    drag_link=QtCore.Qt.DragLinkCursor,
+    bitmap=QtCore.Qt.BitmapCursor,
+)
 
-FOCUS_POLICIES = bidict(tab=QtCore.Qt.TabFocus,
-                        click=QtCore.Qt.ClickFocus,
-                        strong=QtCore.Qt.StrongFocus,
-                        wheel=QtCore.Qt.WheelFocus,
-                        none=QtCore.Qt.NoFocus)
+FOCUS_POLICIES = bidict(
+    tab=QtCore.Qt.TabFocus,
+    click=QtCore.Qt.ClickFocus,
+    strong=QtCore.Qt.StrongFocus,
+    wheel=QtCore.Qt.WheelFocus,
+    none=QtCore.Qt.NoFocus,
+)
 
-WINDOW_FLAGS = bidict(frameless=QtCore.Qt.FramelessWindowHint,
-                      popup=QtCore.Qt.Popup,
-                      stay_on_top=QtCore.Qt.WindowStaysOnTopHint,
-                      tool=QtCore.Qt.Tool,
-                      window_title=QtCore.Qt.WindowTitleHint,
-                      customize_window=QtCore.Qt.CustomizeWindowHint)
+WINDOW_FLAGS = bidict(
+    frameless=QtCore.Qt.FramelessWindowHint,
+    popup=QtCore.Qt.Popup,
+    stay_on_top=QtCore.Qt.WindowStaysOnTopHint,
+    tool=QtCore.Qt.Tool,
+    window_title=QtCore.Qt.WindowTitleHint,
+    customize_window=QtCore.Qt.CustomizeWindowHint,
+)
 
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
 
 class Widget(QtWidgets.QWidget):
-
     def __repr__(self):
         return f"{self.__class__.__name__}: {self.__getstate__()}"
 
     def __getstate__(self):
-        return dict(layout=self.layout(),
-                    size_policy=self.get_size_policy(),
-                    accessible_name=self.accessibleName(),
-                    tooltip=self.toolTip(),
-                    statustip=self.statusTip())
+        return dict(
+            layout=self.layout(),
+            size_policy=self.get_size_policy(),
+            accessible_name=self.accessibleName(),
+            tooltip=self.toolTip(),
+            statustip=self.statusTip(),
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -143,11 +154,13 @@ class Widget(QtWidgets.QWidget):
     def set_tooltip(self, text: str):
         self.setToolTip(text)
 
-    def set_font(self,
-                 font_name: Optional[str] = None,
-                 font_size: int = -1,
-                 weight: int = -1,
-                 italic: bool = False) -> gui.Font:
+    def set_font(
+        self,
+        font_name: Optional[str] = None,
+        font_size: int = -1,
+        weight: int = -1,
+        italic: bool = False,
+    ) -> gui.Font:
         if font_name is None:
             font_name = self.font().family()
         font = gui.Font(font_name, font_size, weight, italic)
@@ -163,13 +176,15 @@ class Widget(QtWidgets.QWidget):
             flags = flags | self.windowFlags()
         self.setWindowFlags(flags)
 
-    def set_flags(self,
-                  minimize: Optional[bool] = None,
-                  maximize: Optional[bool] = None,
-                  close: Optional[bool] = None,
-                  stay_on_top: Optional[bool] = None,
-                  frameless: Optional[bool] = None,
-                  window: Optional[bool] = None):
+    def set_flags(
+        self,
+        minimize: Optional[bool] = None,
+        maximize: Optional[bool] = None,
+        close: Optional[bool] = None,
+        stay_on_top: Optional[bool] = None,
+        frameless: Optional[bool] = None,
+        window: Optional[bool] = None,
+    ):
         if minimize is not None:
             self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
         if maximize is not None:
@@ -215,9 +230,9 @@ class Widget(QtWidgets.QWidget):
         yield None
         self.setUpdatesEnabled(True)
 
-    def set_size_policy(self,
-                        horizontal: Optional[str] = None,
-                        vertical: Optional[str] = None):
+    def set_size_policy(
+        self, horizontal: Optional[str] = None, vertical: Optional[str] = None
+    ):
         """sets the sizes policy
 
         possible values for both parameters are "fixed", "minimum", "maximum",
@@ -238,9 +253,9 @@ class Widget(QtWidgets.QWidget):
         qpol = self.sizePolicy()
         if isinstance(qpol, widgets.SizePolicy):
             return qpol
-        pol = widgets.SizePolicy(qpol.horizontalPolicy(),
-                                 qpol.verticalPolicy(),
-                                 qpol.controlType())
+        pol = widgets.SizePolicy(
+            qpol.horizontalPolicy(), qpol.verticalPolicy(), qpol.controlType()
+        )
         pol.setHeightForWidth(qpol.hasHeightForWidth())
         pol.setWidthForHeight(qpol.hasWidthForHeight())
         pol.setHorizontalStretch(qpol.horizontalStretch())
@@ -298,6 +313,7 @@ class Widget(QtWidgets.QWidget):
             self.box = widgets.StackedLayout()
         elif layout == "flow":
             from prettyqt import custom_widgets
+
             self.box = custom_widgets.FlowLayout()
         else:
             self.box = layout
@@ -322,14 +338,16 @@ class Widget(QtWidgets.QWidget):
 
     def set_cursor(self, cursor: str):
         if cursor not in CURSOR_SHAPES:
-            raise ValueError(f"Invalid cursor '{cursor}'. "
-                             f"Valid values: {CURSOR_SHAPES.keys()}")
+            raise ValueError(
+                f"Invalid cursor '{cursor}'. " f"Valid values: {CURSOR_SHAPES.keys()}"
+            )
         self.setCursor(CURSOR_SHAPES[cursor])
 
     def set_focus_policy(self, policy: str):
         if policy not in FOCUS_POLICIES:
-            raise ValueError(f"Invalid policy '{policy}'. "
-                             f"Valid values: {FOCUS_POLICIES.keys()}")
+            raise ValueError(
+                f"Invalid policy '{policy}'. " f"Valid values: {FOCUS_POLICIES.keys()}"
+            )
         self.setFocusPolicy(FOCUS_POLICIES[policy])
 
     def get_focus_policy(self) -> str:

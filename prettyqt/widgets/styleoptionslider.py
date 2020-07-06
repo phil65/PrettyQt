@@ -26,7 +26,6 @@ from qtpy import QtCore, QtWidgets
 
 
 class StyleOptionSlider(QtWidgets.QStyleOptionSlider):
-
     def is_horizontal(self) -> bool:
         """check if silder is horizontal
 

@@ -8,28 +8,33 @@ from prettyqt import gui
 from prettyqt.utils import bidict
 
 
-STYLE_HINTS = bidict(any=QtGui.QFont.AnyStyle,
-                     sans_serif=QtGui.QFont.SansSerif,
-                     serif=QtGui.QFont.Serif,
-                     typewriter=QtGui.QFont.TypeWriter,
-                     decorative=QtGui.QFont.Decorative,
-                     monospace=QtGui.QFont.Monospace,
-                     fantasy=QtGui.QFont.Fantasy,
-                     cursive=QtGui.QFont.Cursive,
-                     system=QtGui.QFont.System)
+STYLE_HINTS = bidict(
+    any=QtGui.QFont.AnyStyle,
+    sans_serif=QtGui.QFont.SansSerif,
+    serif=QtGui.QFont.Serif,
+    typewriter=QtGui.QFont.TypeWriter,
+    decorative=QtGui.QFont.Decorative,
+    monospace=QtGui.QFont.Monospace,
+    fantasy=QtGui.QFont.Fantasy,
+    cursive=QtGui.QFont.Cursive,
+    system=QtGui.QFont.System,
+)
 
 
 class Font(QtGui.QFont):
-
     def __repr__(self):
-        return (f"Font({self.family()}, {self.pointSize()}, "
-                f"{self.weight()}, {self.italic()})")
+        return (
+            f"Font({self.family()}, {self.pointSize()}, "
+            f"{self.weight()}, {self.italic()})"
+        )
 
     def __getstate__(self):
-        return dict(family=self.family(),
-                    pointsize=self.pointSize(),
-                    weight=self.weight(),
-                    italic=self.italic())
+        return dict(
+            family=self.family(),
+            pointsize=self.pointSize(),
+            weight=self.weight(),
+            italic=self.italic(),
+        )
 
     def __setstate__(self, state):
         self.__init__()

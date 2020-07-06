@@ -20,14 +20,17 @@ MULTILINE = re.MULTILINE
 DOTALL = re.DOTALL
 VERBOSE = re.VERBOSE
 
-MAP = bidict({re.IGNORECASE: QtCore.QRegularExpression.CaseInsensitiveOption,
-              re.MULTILINE: QtCore.QRegularExpression.MultilineOption,
-              re.DOTALL: QtCore.QRegularExpression.DotMatchesEverythingOption,
-              re.VERBOSE: QtCore.QRegularExpression.ExtendedPatternSyntaxOption})
+MAP = bidict(
+    {
+        re.IGNORECASE: QtCore.QRegularExpression.CaseInsensitiveOption,
+        re.MULTILINE: QtCore.QRegularExpression.MultilineOption,
+        re.DOTALL: QtCore.QRegularExpression.DotMatchesEverythingOption,
+        re.VERBOSE: QtCore.QRegularExpression.ExtendedPatternSyntaxOption,
+    }
+)
 
 
 class Match(core.RegularExpressionMatch):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.string = None
@@ -50,12 +53,16 @@ class Match(core.RegularExpressionMatch):
     def groups(self, default=None) -> tuple:
         if self.lastindex is None:
             return tuple()
-        return (self.group(i) if i <= self.lastindex else default
-                for i in range(self.re.captureCount()))
+        return (
+            self.group(i) if i <= self.lastindex else default
+            for i in range(self.re.captureCount())
+        )
 
     def groupdict(self, default=None) -> dict:
-        groups = [self.group(i) if i <= self.lastindex else default
-                  for i in range(self.re.captureCount())]
+        groups = [
+            self.group(i) if i <= self.lastindex else default
+            for i in range(self.re.captureCount())
+        ]
         names = self.re.namedCaptureGroups()
         return {names[i]: groups[i] for i in range(self.re.captureCount())}
 
@@ -89,7 +96,6 @@ class Match(core.RegularExpressionMatch):
 
 
 class Pattern(core.RegularExpression):
-
     def __init__(self, pattern="", flags=0):
         flag = QtCore.QRegularExpression.NoPatternOption
         for k, v in MAP.items():
@@ -100,17 +106,15 @@ class Pattern(core.RegularExpression):
     def __repr__(self):
         return f"RegularExpression({self.pattern()!r})"
 
-    def match(self,
-              string: str,
-              pos: int = 0,
-              endpos: Optional[int] = None) -> Optional[Match]:
+    def match(
+        self, string: str, pos: int = 0, endpos: Optional[int] = None
+    ) -> Optional[Match]:
         match = super().match(string[:endpos], pos)
         return Match(match) if match.hasMatch() else None
 
-    def fullmatch(self,
-                  string: str,
-                  pos: int = 0,
-                  endpos: Optional[int] = None) -> Optional[Match]:
+    def fullmatch(
+        self, string: str, pos: int = 0, endpos: Optional[int] = None
+    ) -> Optional[Match]:
         if endpos:
             string = string[:endpos]
         match = super().match(string, pos)
@@ -119,20 +123,16 @@ class Pattern(core.RegularExpression):
         else:
             return None
 
-    def finditer(self,
-                 string: str,
-                 pos: int = 0,
-                 endpos: Optional[int] = None) -> Iterator[Match]:
+    def finditer(
+        self, string: str, pos: int = 0, endpos: Optional[int] = None
+    ) -> Iterator[Match]:
         for match in self.globalMatch(string[:endpos], offset=pos):
             match.pos = pos
             match.endpos = endpos
             match.string = string
             yield match
 
-    def findall(self,
-                string: str,
-                pos: int = 0,
-                endpos: Optional[int] = None) -> list:
+    def findall(self, string: str, pos: int = 0, endpos: Optional[int] = None) -> list:
         matches = [m for m in self.globalMatch(string[:endpos], offset=pos)]
         return [m.groups() if len(m.groups()) > 1 else m.group(0) for m in matches]
 
@@ -149,7 +149,7 @@ class Pattern(core.RegularExpression):
                 to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
             for j in self.groupindex.keys():
                 to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
-            result = result[:m.start()] + to_replace + result[m.end():]
+            result = result[: m.start()] + to_replace + result[m.end() :]
         return (result, min(len(matches), count))
 
     def sub(self, repl: Union[str, Callable], string: str, count: int = 0):
@@ -169,11 +169,11 @@ class Pattern(core.RegularExpression):
         if matches[0].start() == 0:
             result.append("")
         else:
-            result.append(string[0:matches[0].start()])
+            result.append(string[0 : matches[0].start()])
         for m in matches[:num_split]:
             print(m.span())
             if prev_match is not None:
-                result.append(string[prev_match.end():m.start()])
+                result.append(string[prev_match.end() : m.start()])
             for g in m.groups():
                 result.append(g)
             prev_match = m
@@ -212,9 +212,9 @@ def match(pattern: str, string: str, flags: int = 0) -> Optional[core.RegularExp
     return compiled.match(string)
 
 
-def fullmatch(pattern: str,
-              string: str,
-              flags: int = 0) -> Optional[core.RegularExpression]:
+def fullmatch(
+    pattern: str, string: str, flags: int = 0
+) -> Optional[core.RegularExpression]:
     compiled = compile(pattern, flags)
     return compiled.fullmatch(string)
 
@@ -239,17 +239,15 @@ def sub(pattern: str, repl: str, string: str, count: int = 0, flags: int = 0) ->
     return compiled.sub(repl, string, count)
 
 
-def subn(pattern: str,
-         repl: str,
-         string: str,
-         count: int = 0,
-         flags: int = 0) -> Tuple[str, int]:
+def subn(
+    pattern: str, repl: str, string: str, count: int = 0, flags: int = 0
+) -> Tuple[str, int]:
     compiled = compile(pattern, flags)
     return compiled.subn(repl, string, count)
 
 
 def escape(pattern: str):
-    dont_escape = ['!', '"', '%', "'", ',', '/', ':', ';', '<', '=', '>', '@', "`"]
+    dont_escape = ["!", '"', "%", "'", ",", "/", ":", ";", "<", "=", ">", "@", "`"]
     result = core.RegularExpression.escape(pattern)
     for i in dont_escape:
         result.replace(i, r"\i")

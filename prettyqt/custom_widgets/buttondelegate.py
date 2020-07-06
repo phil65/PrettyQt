@@ -8,7 +8,6 @@ from prettyqt import core, widgets
 
 
 class ButtonDelegate(widgets.ItemDelegate):
-
     def __init__(self, parent, role=QtCore.Qt.UserRole):
         super().__init__(parent)
         self.fn_role = role

@@ -9,29 +9,34 @@ from qtpy import QtGui
 from prettyqt.utils import bidict, colors
 from prettyqt import gui
 
-WEIGHTS = bidict(thin=QtGui.QFont.Thin,
-                 light=QtGui.QFont.Light,
-                 medium=QtGui.QFont.Medium,
-                 bold=QtGui.QFont.Bold)
+WEIGHTS = bidict(
+    thin=QtGui.QFont.Thin,
+    light=QtGui.QFont.Light,
+    medium=QtGui.QFont.Medium,
+    bold=QtGui.QFont.Bold,
+)
 
-UNDERLINE_STYLES = bidict(none=QtGui.QTextCharFormat.NoUnderline,
-                          single=QtGui.QTextCharFormat.SingleUnderline,
-                          dash=QtGui.QTextCharFormat.DashUnderline,
-                          dot=QtGui.QTextCharFormat.DotLine,
-                          dashdot=QtGui.QTextCharFormat.DashDotLine,
-                          dashdotline=QtGui.QTextCharFormat.DashDotDotLine,
-                          wave=QtGui.QTextCharFormat.WaveUnderline,
-                          spellcheck=QtGui.QTextCharFormat.SpellCheckUnderline)
+UNDERLINE_STYLES = bidict(
+    none=QtGui.QTextCharFormat.NoUnderline,
+    single=QtGui.QTextCharFormat.SingleUnderline,
+    dash=QtGui.QTextCharFormat.DashUnderline,
+    dot=QtGui.QTextCharFormat.DotLine,
+    dashdot=QtGui.QTextCharFormat.DashDotLine,
+    dashdotline=QtGui.QTextCharFormat.DashDotDotLine,
+    wave=QtGui.QTextCharFormat.WaveUnderline,
+    spellcheck=QtGui.QTextCharFormat.SpellCheckUnderline,
+)
 
 STYLE_HINTS = gui.font.STYLE_HINTS
 
 
 class TextCharFormat(QtGui.QTextCharFormat):
-
-    def __init__(self,
-                 text_color: Union[colors.ColorType, QtGui.QBrush] = "black",
-                 bold: bool = False,
-                 italic: bool = False):
+    def __init__(
+        self,
+        text_color: Union[colors.ColorType, QtGui.QBrush] = "black",
+        bold: bool = False,
+        italic: bool = False,
+    ):
         super().__init__()
         self.set_foreground_color(text_color)
         if bold:

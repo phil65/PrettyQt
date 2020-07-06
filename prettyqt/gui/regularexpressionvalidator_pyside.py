@@ -6,7 +6,6 @@ from prettyqt import core, gui
 
 
 class RegularExpressionValidator(gui.Validator):
-
     def __init__(self, regex=None):
         super().__init__()
         self.regex = None
@@ -47,6 +46,7 @@ class RegularExpressionValidator(gui.Validator):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+
     app = widgets.app()
     w = widgets.LineEdit()
     val = RegularExpressionValidator()

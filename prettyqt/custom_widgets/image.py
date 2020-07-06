@@ -11,7 +11,6 @@ from prettyqt import gui, widgets
 
 
 class Image(widgets.Label):
-
     def __init__(self, path=None, parent=None):
         super().__init__(parent=parent)
         if path:
@@ -21,10 +20,12 @@ class Image(widgets.Label):
         return f"Image({self.text()!r})"
 
     def __getstate__(self):
-        return dict(text=self.text(),
-                    scaled_contents=self.hasScaledContents(),
-                    margin=self.margin(),
-                    alignment=int(self.alignment()))
+        return dict(
+            text=self.text(),
+            scaled_contents=self.hasScaledContents(),
+            margin=self.margin(),
+            alignment=int(self.alignment()),
+        )
 
     def __setstate__(self, state):
         self.__init__()
@@ -33,19 +34,17 @@ class Image(widgets.Label):
         self.setAlignment(QtCore.Qt.Alignment(state.get("alignment")))
         self.setScaledContents(state["scaled_contents"])
 
-    def set_image(self,
-                  path: Union[pathlib.Path, str],
-                  width: int = 300):
+    def set_image(self, path: Union[pathlib.Path, str], width: int = 300):
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
-        self.setText("<html><head/><body><p>"
-                     f"<img src={str(path)!r} width={str(width)!r}/>"
-                     "</p></body></html>")
+        self.setText(
+            "<html><head/><body><p>"
+            f"<img src={str(path)!r} width={str(width)!r}/>"
+            "</p></body></html>"
+        )
 
     @classmethod
-    def from_path(cls,
-                  path: Union[pathlib.Path, str],
-                  parent=None) -> "Image":
+    def from_path(cls, path: Union[pathlib.Path, str], parent=None) -> "Image":
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)
         label.setPixmap(pixmap)

@@ -8,22 +8,27 @@ from prettyqt import widgets, gui
 from prettyqt.utils import bidict
 
 
-CORRECTION_MODES = bidict(to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
-                          to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue)
+CORRECTION_MODES = bidict(
+    to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
+    to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue,
+)
 
-SYMBOLS = bidict(up_down=QtWidgets.QSpinBox.UpDownArrows,
-                 plus_minus=QtWidgets.QSpinBox.PlusMinus,
-                 none=QtWidgets.QSpinBox.NoButtons)
+SYMBOLS = bidict(
+    up_down=QtWidgets.QSpinBox.UpDownArrows,
+    plus_minus=QtWidgets.QSpinBox.PlusMinus,
+    none=QtWidgets.QSpinBox.NoButtons,
+)
 
-STEP_TYPES = bidict(default=QtWidgets.QSpinBox.DefaultStepType,
-                    adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType)
+STEP_TYPES = bidict(
+    default=QtWidgets.QSpinBox.DefaultStepType,
+    adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType,
+)
 
 
 QtWidgets.QAbstractSpinBox.__bases__ = (widgets.Widget,)
 
 
 class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setLineEdit(widgets.LineEdit())

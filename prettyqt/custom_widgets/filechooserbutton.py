@@ -12,8 +12,14 @@ class FileChooserButton(widgets.Widget):
 
     value_changed = core.Signal(pathlib.Path)
 
-    def __init__(self, extensions=None, mode="save", file_mode="existing_files",
-                 root=None, parent=None):
+    def __init__(
+        self,
+        extensions=None,
+        mode="save",
+        file_mode="existing_files",
+        root=None,
+        parent=None,
+    ):
         """initialize FileChooserButton
 
         Args:
@@ -47,9 +53,7 @@ class FileChooserButton(widgets.Widget):
         layout += self.button
 
     def __getstate__(self):
-        return dict(path=self.path,
-                    extensions=self.extensions,
-                    enabled=self.isEnabled())
+        return dict(path=self.path, extensions=self.extensions, enabled=self.isEnabled())
 
     def __setstate__(self, state):
         self.__init__(state["extensions"])
@@ -58,11 +62,13 @@ class FileChooserButton(widgets.Widget):
 
     @core.Slot()
     def open_file(self):
-        dialog = widgets.FileDialog(parent=self,
-                                    path_id="file_path",
-                                    mode=self.mode,
-                                    path=self.root,
-                                    file_mode=self.file_mode)
+        dialog = widgets.FileDialog(
+            parent=self,
+            path_id="file_path",
+            mode=self.mode,
+            path=self.root,
+            file_mode=self.file_mode,
+        )
         if self.extensions:
             dialog.set_extension_filter(self.extensions)
         if not dialog.choose():
