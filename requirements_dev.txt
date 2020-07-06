@@ -8,7 +8,7 @@ setuptools==47.3.1
 flake8==3.8.3
 tox==3.16.1
 
-coverage==5.1
+coverage==5.2
 codecov==2.1.7
 
 mkdocs==1.1.2
