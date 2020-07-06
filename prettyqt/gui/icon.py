@@ -7,7 +7,7 @@ import pathlib
 import qtawesome as qta
 from qtpy import QtCore, QtGui
 
-from prettyqt import gui
+from prettyqt import gui, core
 
 
 class Icon(QtGui.QIcon):
@@ -53,6 +53,10 @@ class Icon(QtGui.QIcon):
         else:
             icon = qta.icon("mdi.card-outline")
         return icon
+
+    def get_pixmap(self, size):
+        size = core.Size(size, size)
+        return self.pixmap(size)
 
 
 if __name__ == "__main__":
