@@ -136,6 +136,11 @@
     </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="syntaxhighlighters.html" title="syntaxhighlighters">
+      syntaxhighlighters
+    </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="custom_models.html" title="custom_models">
       custom_models
     </a>
@@ -746,6 +751,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="../contributing.html" title="Contributing">
       Contributing
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../changelog.html" title="Changelog">
+      Changelog
     </a>
 </li>
 </ul>
@@ -1376,7 +1386,8 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>16
+<pre><span></span>15
+16
 17
 18
 19
@@ -1384,8 +1395,7 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 21
 22
 23
-24
-25</pre>
+24</pre>
 </div>
 </td>
 <td class="code">
@@ -1421,9 +1431,9 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>27
-28
-29</pre>
+<pre><span></span>26
+27
+28</pre>
 </div>
 </td>
 <td class="code">
@@ -1452,8 +1462,8 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>31
-32</pre>
+<pre><span></span>30
+31</pre>
 </div>
 </td>
 <td class="code">
@@ -1654,12 +1664,12 @@ resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>44
-45
-46
+<pre><span></span>46
 47
 48
-49</pre>
+49
+50
+51</pre>
 </div>
 </td>
 <td class="code">
@@ -1836,13 +1846,13 @@ set_pos<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>34
-35
-36
+<pre><span></span>36
 37
 38
 39
-40</pre>
+40
+41
+42</pre>
 </div>
 </td>
 <td class="code">
@@ -1891,16 +1901,16 @@ __new__<span class="p">(</span><span class="n">mcs</span><span class="p">,</span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>490
-491
-492
-493
-494
-495
-496
-497
-498
-499</pre>
+<pre><span></span>473
+474
+475
+476
+477
+478
+479
+480
+481
+482</pre>
 </div>
 </td>
 <td class="code">
@@ -2162,13 +2172,25 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 44
 45
 46
-47</pre>
+47
+48
+49
+50
+51
+52
+53</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"save"</span><span class="p">,</span> <span class="n">file_mode</span><span class="o">=</span><span class="s2">"existing_files"</span><span class="p">,</span>
-             <span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">extensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s2">"save"</span><span class="p">,</span>
+    <span class="n">file_mode</span><span class="o">=</span><span class="s2">"existing_files"</span><span class="p">,</span>
+    <span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sd">"""initialize FileChooserButton</span>
 
 <span class="sd">    Args:</span>
@@ -2239,8 +2261,8 @@ addItem<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>37
-38</pre>
+<pre><span></span>36
+37</pre>
 </div>
 </td>
 <td class="code">
@@ -2268,8 +2290,8 @@ count<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>40
-41</pre>
+<pre><span></span>39
+40</pre>
 </div>
 </td>
 <td class="code">
@@ -2297,8 +2319,8 @@ expandingDirections<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>55
-56</pre>
+<pre><span></span>54
+55</pre>
 </div>
 </td>
 <td class="code">
@@ -2326,8 +2348,8 @@ hasHeightForWidth<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>58
-59</pre>
+<pre><span></span>57
+58</pre>
 </div>
 </td>
 <td class="code">
@@ -2355,8 +2377,8 @@ heightForWidth<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>61
-62</pre>
+<pre><span></span>60
+61</pre>
 </div>
 </td>
 <td class="code">
@@ -2384,11 +2406,11 @@ itemAt<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>43
+<pre><span></span>42
+43
 44
 45
-46
-47</pre>
+46</pre>
 </div>
 </td>
 <td class="code">
@@ -2419,15 +2441,15 @@ minimumSize<span class="p">(</span><span class="bp">self</span><span class="p">)
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>71
+<pre><span></span>70
+71
 72
 73
 74
 75
 76
 77
-78
-79</pre>
+78</pre>
 </div>
 </td>
 <td class="code">
@@ -2462,9 +2484,9 @@ setGeometry<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>64
-65
-66</pre>
+<pre><span></span>63
+64
+65</pre>
 </div>
 </td>
 <td class="code">
@@ -2493,8 +2515,8 @@ sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>68
-69</pre>
+<pre><span></span>67
+68</pre>
 </div>
 </td>
 <td class="code">
@@ -2522,11 +2544,11 @@ takeAt<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>49
+<pre><span></span>48
+49
 50
 51
-52
-53</pre>
+52</pre>
 </div>
 </td>
 <td class="code">
@@ -2642,7 +2664,14 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 109
 110
 111
-112</pre>
+112
+113
+114
+115
+116
+117
+118
+119</pre>
 </div>
 </td>
 <td class="code">
@@ -2659,7 +2688,8 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 
     <span class="n">length</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">pixelMetric</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PM_SliderLength</span><span class="p">,</span> <span class="n">st_slider</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="p">)</span>
     <span class="n">available</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">pixelMetric</span><span class="p">(</span>
-        <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PM_SliderSpaceAvailable</span><span class="p">,</span> <span class="n">st_slider</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="p">)</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PM_SliderSpaceAvailable</span><span class="p">,</span> <span class="n">st_slider</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span>
+    <span class="p">)</span>
 
     <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">v_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">:</span>
 
@@ -2667,10 +2697,9 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <span class="n">rect</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(),</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">TextDontPrint</span><span class="p">,</span> <span class="n">v_str</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">is_horizontal</span><span class="p">():</span>
-            <span class="n">x_loc</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">sliderPositionFromValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">minimum</span><span class="p">(),</span>
-                                                          <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">maximum</span><span class="p">(),</span>
-                                                          <span class="n">v</span><span class="p">,</span>
-                                                          <span class="n">available</span><span class="p">)</span>
+            <span class="n">x_loc</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">sliderPositionFromValue</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">minimum</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">maximum</span><span class="p">(),</span> <span class="n">v</span><span class="p">,</span> <span class="n">available</span>
+            <span class="p">)</span>
             <span class="c1"># I assume the offset is half the length of slider, therefore</span>
             <span class="c1"># + length//2</span>
             <span class="n">x_loc</span> <span class="o">+=</span> <span class="n">length</span> <span class="o">//</span> <span class="mi">2</span>
@@ -2686,22 +2715,26 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">():</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
 
-                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span><span class="p">,</span>
-                                               <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
-                                               <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span>
+                <span class="p">)</span>
 
             <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">maximum</span><span class="p">()</span> <span class="ow">and</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span><span class="p">,</span>
-                                               <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
-                                               <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span>
+                <span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">y_loc</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">sliderPositionFromValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">minimum</span><span class="p">(),</span>
-                                                          <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">maximum</span><span class="p">(),</span>
-                                                          <span class="n">v</span><span class="p">,</span>
-                                                          <span class="n">available</span><span class="p">,</span>
-                                                          <span class="n">upsideDown</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">y_loc</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">sliderPositionFromValue</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">minimum</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">maximum</span><span class="p">(),</span> <span class="n">v</span><span class="p">,</span> <span class="n">available</span><span class="p">,</span> <span class="n">upsideDown</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span>
 
             <span class="n">bottom</span> <span class="o">=</span> <span class="n">y_loc</span> <span class="o">+</span> <span class="n">length</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span> <span class="o">-</span> <span class="mi">3</span>
             <span class="c1"># there is a 3 px offset that I can't attribute to any metric</span>
@@ -2709,9 +2742,12 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
             <span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">-</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span><span class="p">,</span>
-                                               <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
-                                               <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span>
+                <span class="p">)</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">v_str</span><span class="p">)</span>
 
     <span class="k">return</span>
@@ -2754,14 +2790,14 @@ wheelEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>208
-209
+<pre><span></span>209
 210
 211
 212
 213
 214
-215</pre>
+215
+216</pre>
 </div>
 </td>
 <td class="code">
@@ -2814,15 +2850,15 @@ show<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>32
-33
-34
+<pre><span></span>34
 35
 36
 37
 38
 39
-40</pre>
+40
+41
+42</pre>
 </div>
 </td>
 <td class="code">
@@ -2908,7 +2944,9 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 62
 63
 64
-65</pre>
+65
+66
+67</pre>
 </div>
 </td>
 <td class="code">
@@ -2922,11 +2960,13 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 
         <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getTextMargins</span><span class="p">()</span>
 
-        <span class="n">va</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">visualAlignment</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">())</span>
-        <span class="n">rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">subElementRect</span><span class="p">(</span>
-            <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">SE_LineEditContents</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span>
-                <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="o">-</span><span class="n">right</span><span class="p">,</span> <span class="o">-</span><span class="n">bottom</span><span class="p">)</span>
+        <span class="n">va</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">visualAlignment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">())</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">subElementRect</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">SE_LineEditContents</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="o">-</span><span class="n">right</span><span class="p">,</span> <span class="o">-</span><span class="n">bottom</span><span class="p">)</span>
+        <span class="p">)</span>
         <span class="n">fm</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">FontMetrics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
         <span class="n">text</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">elided_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prompt_text</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
         <span class="n">painter</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -2953,11 +2993,11 @@ resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>67
-68
-69
+<pre><span></span>69
 70
-71</pre>
+71
+72
+73</pre>
 </div>
 </td>
 <td class="code">
@@ -2989,9 +3029,7 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>73
-74
-75
+<pre><span></span>75
 76
 77
 78
@@ -3000,7 +3038,9 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
 81
 82
 83
-84</pre>
+84
+85
+86</pre>
 </div>
 </td>
 <td class="code">
@@ -3105,7 +3145,7 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
     <span class="n">layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># set a property that will be used for the mask</span>
-    <span class="n">editor</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s1">'offMask'</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="n">editor</span><span class="o">.</span><span class="n">rect</span><span class="p">()))</span>
+    <span class="n">editor</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">"offMask"</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="n">editor</span><span class="o">.</span><span class="n">rect</span><span class="p">()))</span>
     <span class="n">editor</span><span class="o">.</span><span class="n">installEventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">editor</span>
 </code></pre>
@@ -3170,7 +3210,7 @@ eventFilter<span class="p">(</span><span class="bp">self</span><span class="p">,
         <span class="n">source</span><span class="o">.</span><span class="n">clearMask</span><span class="p">()</span>
     <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">core</span><span class="o">.</span><span class="n">Event</span><span class="o">.</span><span class="n">FocusOut</span><span class="p">:</span>
         <span class="c1"># another widget has requested focus, set the mask</span>
-        <span class="n">source</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s1">'offMask'</span><span class="p">))</span>
+        <span class="n">source</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s2">"offMask"</span><span class="p">))</span>
         <span class="c1"># update the table viewport to get rid of possible</span>
         <span class="c1"># grid lines left after masking</span>
         <span class="n">source</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -3286,7 +3326,7 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
     <span class="n">editor</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
     <span class="c1"># create a new mask based on the option rectangle, then apply it</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
-    <span class="n">editor</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s1">'offMask'</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+    <span class="n">editor</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">"offMask"</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
     <span class="n">editor</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -3411,19 +3451,7 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>371
-372
-373
-374
-375
-376
-377
-378
-379
-380
-381
-382
-383
+<pre><span></span>383
 384
 385
 386
@@ -3457,14 +3485,24 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
 414
 415
 416
-417</pre>
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span> <span class="ow">and</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span><span class="p">):</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
         <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
         <span class="k">return</span>
 
@@ -3530,23 +3568,21 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>353
-354
-355
-356
-357
-358
-359
-360
-361
-362
-363
-364
-365
-366
-367
+<pre><span></span>367
 368
-369</pre>
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381</pre>
 </div>
 </td>
 <td class="code">
@@ -3556,15 +3592,13 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
         <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
         <span class="k">return</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_mouse_press</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">(),</span>
-                                                 <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span><span class="p">,</span>
-                                                 <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span>
-                                                 <span class="bp">self</span><span class="o">.</span><span class="n">UPPER_HANDLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_mouse_press</span><span class="p">(</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">UPPER_HANDLE</span>
+    <span class="p">)</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_mouse_press</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">(),</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span>
-                                                     <span class="bp">self</span><span class="o">.</span><span class="n">LOWER_HANDLE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_mouse_press</span><span class="p">(</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">LOWER_HANDLE</span>
+        <span class="p">)</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">first_movement</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
@@ -3589,11 +3623,11 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>419
-420
-421
-422
-423</pre>
+<pre><span></span>430
+431
+432
+433
+434</pre>
 </div>
 </td>
 <td class="code">
@@ -3624,11 +3658,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>236
-237
-238
-239
-240
+<pre><span></span>240
 241
 242
 243
@@ -3664,7 +3694,9 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 273
 274
 275
-276</pre>
+276
+277
+278</pre>
 </div>
 </td>
 <td class="code">
@@ -3696,11 +3728,9 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="n">minv</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lrv</span><span class="p">,</span> <span class="n">urv</span><span class="p">)</span>
     <span class="n">maxv</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lrv</span><span class="p">,</span> <span class="n">urv</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">subControlRect</span><span class="p">(</span><span class="n">SLIDER_STYLE</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">GROOVE_STYLE</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
-    <span class="n">spanRect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">minv</span><span class="p">),</span>
-                         <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxv</span><span class="p">))</span>
+    <span class="n">spanRect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">minv</span><span class="p">),</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxv</span><span class="p">))</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_horizontal</span><span class="p">():</span>
-        <span class="n">spanRect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">minv</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span>
-                             <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">maxv</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">spanRect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">minv</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">maxv</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">draw_span</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">spanRect</span><span class="p">)</span>
 
     <span class="c1"># handles</span>
@@ -3770,36 +3800,42 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94</pre>
+<pre><span></span> 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100</pre>
 </div>
 </td>
 <td class="code">
@@ -3815,24 +3851,30 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="s2">"none"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">):</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span>
-                          <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="n">rotate_angle</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">360</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">)</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotate_angle</span><span class="p">)</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linecount_distance_from_primary</span><span class="p">(</span><span class="n">i</span><span class="p">,</span>
-                                                        <span class="bp">self</span><span class="o">.</span><span class="n">_current_counter</span><span class="p">,</span>
-                                                        <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">)</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_line_color</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">,</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_trail_fade_percentage</span><span class="p">,</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_minimum_trail_opacity</span><span class="p">,</span>
-                                        <span class="bp">self</span><span class="o">.</span><span class="n">_color</span><span class="p">)</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linecount_distance_from_primary</span><span class="p">(</span>
+            <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_counter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span>
+        <span class="p">)</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_line_color</span><span class="p">(</span>
+            <span class="n">distance</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_trail_fade_percentage</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_minimum_trail_opacity</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_color</span><span class="p">,</span>
+        <span class="p">)</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
-        <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
-                         <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span>
-                                <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RelativeSize</span><span class="p">)</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+            <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span>
+        <span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span>
+            <span class="n">rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RelativeSize</span>
+        <span class="p">)</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
 </code></pre>
 </div>
@@ -3864,9 +3906,9 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>218
-219
-220</pre>
+<pre><span></span>231
+232
+233</pre>
 </div>
 </td>
 <td class="code">
