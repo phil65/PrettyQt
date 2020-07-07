@@ -76,7 +76,7 @@ bump: ## version bump
 	cz bump --changelog --no-verify
 	cp CHANGELOG.md docs/changelog.md
 	git add --all
-	git commit --amend --no-edit
+	git commit --amend --no-edit --no-verify
 	python -c "$$TAG_SCRIPT"
 	git stash apply
 # 	git push --tags
