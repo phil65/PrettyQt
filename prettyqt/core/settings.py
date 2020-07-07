@@ -2,6 +2,9 @@
 """
 """
 
+from typing import Optional, List, Union, Mapping
+
+import pathlib
 import contextlib
 
 from prettyqt import core
@@ -17,14 +20,14 @@ QtCore.QSettings.__bases__ = (core.Object,)
 
 
 class Settings(QtCore.QSettings):
-    def __repr__(self):
-        return f"Settings: {self.as_dict()}"
-
-    def __init__(self, *args, settings_id=None):
+    def __init__(self, *args, settings_id: Optional[str] = None):
         super().__init__(*args)
         self.settings_id = settings_id
 
-    def __contains__(self, key) -> bool:
+    def __repr__(self):
+        return f"Settings: {self.as_dict()}"
+
+    def __contains__(self, key: str) -> bool:
         return self.contains(key)
 
     def __enter__(self):
@@ -107,7 +110,7 @@ class Settings(QtCore.QSettings):
         return SCOPES.inv[self.scope()]
 
     @classmethod
-    def set_path(cls, fmt, scope: str, path: str):
+    def set_path(cls, fmt: str, scope: str, path: Union[str, pathlib.Path]):
         """sets the path to the settings file
 
         Args:
@@ -159,15 +162,15 @@ class Settings(QtCore.QSettings):
 
     # Dictionary interface
 
-    def get(self, key, default=None):
+    def get(self, key: str, default=None):
         return super().value(key, default)
 
-    def setdefault(self, key, default=None):
+    def setdefault(self, key: str, default=None):
         if not self.contains(key):
             self.set_value(key, default)
         return self
 
-    def keys(self):
+    def keys(self) -> List[str]:
         return self.allKeys()
 
     def values(self):
@@ -176,18 +179,18 @@ class Settings(QtCore.QSettings):
     def items(self):
         return zip(self.keys(), self.values())
 
-    def pop(self, key, default=None):
+    def pop(self, key: str, default=None):
         if self.contains(key):
             return self.value(key)
         elif default is not None:
             return default
         raise KeyError("Value not set.")
 
-    def popitem(self):
+    def popitem(self) -> tuple:
         key = self.keys()[0]
         return (key, self.value(key))
 
-    def update(self, other):
+    def update(self, other: Mapping):
         for k, v in other.items():
             self.set_value(k, v)
 

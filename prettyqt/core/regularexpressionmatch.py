@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Union
+from typing import Union, Optional
 
 from qtpy import QtCore
 
@@ -53,12 +53,12 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         return (self.capturedStart(group), self.capturedEnd(group))
 
     @property
-    def lastindex(self) -> int:
+    def lastindex(self) -> Optional[int]:
         idx = self.lastCapturedIndex()
         return None if idx == -1 else idx
 
     @property
-    def lastgroup(self):
+    def lastgroup(self) -> Optional[str]:
         if self.lastCapturedIndex() == -1:
             return None
         return self.re.namedCaptureGroups()[self.lastCapturedIndex()]

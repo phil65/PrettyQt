@@ -12,4 +12,4 @@ QtCore.QSortFilterProxyModel.__bases__ = (core.AbstractProxyModel,)
 
 class SortFilterProxyModel(QtCore.QSortFilterProxyModel):
 
-    HEADER = []
+    HEADER: list = []

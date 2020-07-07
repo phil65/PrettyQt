@@ -43,7 +43,7 @@ class Match(core.RegularExpressionMatch):
     def __getitem__(self, item):
         return self.group(item)
 
-    def group(self, *groups) -> Union[tuple, str]:
+    def group(self, *groups: Union[str, int]) -> Union[tuple, str]:
         if len(groups) > 1:
             return tuple(self.captured(i) for i in groups)
         if len(groups) == 0:
@@ -81,7 +81,7 @@ class Match(core.RegularExpressionMatch):
         return None if idx == -1 else idx
 
     @property
-    def lastgroup(self) -> str:
+    def lastgroup(self) -> Optional[str]:
         if self.lastCapturedIndex() == -1:
             return None
         return self.re.namedCaptureGroups()[self.lastCapturedIndex()]
@@ -189,7 +189,7 @@ class Pattern(core.RegularExpression):
         return self.captureCount()
 
     @property
-    def groupindex(self) -> Dict[int, str]:
+    def groupindex(self) -> Dict[str, int]:
         return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1)}
 
     @property

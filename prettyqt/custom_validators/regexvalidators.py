@@ -46,7 +46,7 @@ class IntListValidator(BaseRegexValidator):
     def __repr__(self):
         return f"IntListValidator(allow_single={self.allow_single})"
 
-    def __init__(self, allow_single=True, parent=None):
+    def __init__(self, allow_single: bool = True, parent=None):
         super().__init__(parent)
         self.allow_single = allow_single
         if allow_single:
@@ -59,7 +59,7 @@ class FloatListValidator(BaseRegexValidator):
     def __repr__(self):
         return f"FloatListValidator(allow_single={self.allow_single})"
 
-    def __init__(self, allow_single=True, parent=None):
+    def __init__(self, allow_single: bool = True, parent=None):
         super().__init__(parent)
         self.allow_single = allow_single
         if allow_single:

@@ -5,7 +5,7 @@
 import functools
 import operator
 import pathlib
-from typing import Optional, Union
+from typing import Optional, Union, List
 
 from qtpy import QtCore, QtWidgets
 
@@ -140,7 +140,7 @@ class Label(QtWidgets.QLabel):
         flags = functools.reduce(operator.ior, [TEXT_INTERACTION[t] for t in types])
         self.setTextInteractionFlags(flags)
 
-    def get_text_interaction(self) -> str:
+    def get_text_interaction(self) -> List[str]:
         """returns current text interaction mode
 
         Possible values: "none", "by_mouse", "by_keyboard", "text_editable"

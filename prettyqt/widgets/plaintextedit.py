@@ -72,7 +72,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         yield cursor
         self.setTextCursor(cursor)
 
-    def move_cursor(self, operation: str, mode: str = "move") -> bool:
+    def move_cursor(self, operation: str, mode: str = "move"):
         op = MOVE_OPERATIONS[operation]
         mode = MOVE_MODES[mode]
         self.moveCursor(op, mode)
@@ -183,7 +183,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 if __name__ == "__main__":
     from prettyqt import custom_validators
 
-    val = custom_validators.RegularExpressionValidator()
+    val = custom_validators.RegexPatternValidator()
     app = widgets.app()
     widget = PlainTextEdit("This is a test")
     widget.set_validator(val)

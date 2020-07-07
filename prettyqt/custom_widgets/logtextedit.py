@@ -42,7 +42,7 @@ class Highlighter(ABC):
         return self.format
 
     @abstractmethod
-    def format_string(self):
+    def format_string(self, record: logging.LogRecord):
         raise NotImplementedError()
 
 
@@ -153,7 +153,7 @@ class RelativeCreated(Highlighter):
     bold = True
 
     def format_string(self, record: logging.LogRecord) -> str:
-        return record.relativeCreated
+        return str(record.relativeCreated)
 
 
 class Name(Highlighter):

@@ -2,6 +2,7 @@
 """
 """
 
+from typing import Optional
 
 from qtpy import QtCore, QtWidgets
 
@@ -31,7 +32,7 @@ class Action(QtWidgets.QAction):
         parent=None,
         text: str = "",
         icon: icons.IconType = None,
-        shortcut: str = "",
+        shortcut: Optional[str] = None,
         tooltip: str = "",
     ):
         super().__init__(parent)

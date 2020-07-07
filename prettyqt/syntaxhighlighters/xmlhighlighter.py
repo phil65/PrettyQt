@@ -5,8 +5,6 @@ based on http://www.yasinuludag.com/blog/?p=49
 
 from prettyqt import core, gui, syntaxhighlighters
 
-HIGHLIGHT_RULES = []
-
 
 class Rule(syntaxhighlighters.HighlightRule):
     pass

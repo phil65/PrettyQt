@@ -5,7 +5,7 @@ Syntax highlighter for Markdown markup language
 
 from prettyqt import syntaxhighlighters, core, gui
 
-BASE_FONT = 12
+BASE_FONT = 12.0
 
 
 class Rule(syntaxhighlighters.HighlightRule):
