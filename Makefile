@@ -15,6 +15,15 @@ os.system(f'cz changelog --unreleased-version "v{version}"')
 endef
 export BUMP_SCRIPT
 
+define TAG_SCRIPT
+import os, prettyqt
+version = prettyqt.__version__
+os.system(f'git tag -d v{version}')
+os.system(f'git tag v{version}')
+endef
+export TAG_SCRIPT
+
+
 define PRINT_HELP_PYSCRIPT
 import re, sys
 
@@ -65,9 +74,10 @@ changelog: ## create changelog
 bump: ## version bump
 	git stash --include-untracked
 	cz bump --changelog --no-verify
-	mv CHANGELOG.md docs/changelog.md
-	git add docs/changelog.md
+	cp CHANGELOG.md docs/changelog.md
+	git add --all
 	git commit --amend --no-edit
+	python -c "$$TAG_SCRIPT"
 	git stash apply
 # 	git push --tags
 # 	git push
