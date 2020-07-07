@@ -49,6 +49,7 @@ after_success:
 
 deploy:
   - provider: pages
+    edge: true
     cleanup: false
     strategy: git
     local_dir: site
@@ -59,6 +60,7 @@ deploy:
       repo: phil65/PrettyQt
       python: 3.7
   - provider: pypi
+    edge: true
     distributions: sdist bdist_wheel
     cleanup: false
     username: phil65
