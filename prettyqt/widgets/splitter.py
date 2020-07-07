@@ -15,7 +15,9 @@ QtWidgets.QSplitter.__bases__ = (widgets.Frame,)
 
 class Splitter(QtWidgets.QSplitter):
     def __init__(self, orientation="horizontal", parent=None):
-        super().__init__(ORIENTATIONS[orientation], parent)
+        if orientation in ORIENTATIONS:
+            orientation = ORIENTATIONS[orientation]
+        super().__init__(orientation, parent)
 
     def __getitem__(self, index):
         if isinstance(index, int):
