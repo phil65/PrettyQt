@@ -53,12 +53,14 @@ class Match(core.RegularExpressionMatch):
     def groups(self, default=None) -> tuple:
         if self.lastindex is None:
             return tuple()
-        return (
+        return tuple(
             self.group(i) if i <= self.lastindex else default
             for i in range(self.re.captureCount())
         )
 
     def groupdict(self, default=None) -> dict:
+        if self.lastindex is None:
+            return dict()
         groups = [
             self.group(i) if i <= self.lastindex else default
             for i in range(self.re.captureCount())
