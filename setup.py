@@ -10,8 +10,8 @@ README = pathlib.Path("docs/index.md").read_text()
 HISTORY = pathlib.Path("HISTORY.md").read_text()
 
 REQUIREMENTS = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex"]
-version = '.'.join(map(str, sys.version_info))
-if version == '3.6':
+version = ".".join(map(str, sys.version_info))
+if version == "3.6":
     REQUIREMENTS.append("dataclasses")
 
 setup(
@@ -39,5 +39,5 @@ setup(
     test_suite="tests",
     url="https://github.com/phil65/prettyqt",
     version="0.77.1",
-    zip_safe=False
+    zip_safe=False,
 )
