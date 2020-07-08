@@ -46,8 +46,10 @@ class Settings(QtCore.QSettings):
     def __setitem__(self, name: str, value):
         return self.set_value(name, value)
 
-    def __delitem__(self, index: str):
-        return self.remove(index)
+    def __delitem__(self, key: str):
+        if not self.contains(key):
+            raise KeyError(key)
+        return self.remove(key)
 
     def __iter__(self):
         return iter(self.allKeys())

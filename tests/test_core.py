@@ -189,6 +189,10 @@ def test_settings(qapp):
         pass
     with settings.group("test"):
         pass
+    with pytest.raises(KeyError):
+        del settings["some value"]
+    with pytest.raises(KeyError):
+        settings.pop("some value2")
     settings["test2"] = "xyz"
     assert settings["test2"] == "xyz"
     settings.setdefault("test3", "abc")
