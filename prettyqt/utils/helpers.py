@@ -50,6 +50,3 @@ def is_dark_mode() -> bool:
         return darkdetect.isDark()
     else:
         return False
-
-
-print(is_dark_mode())
