@@ -885,9 +885,9 @@ globalMatch<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>51
-52
-53</pre>
+<pre><span></span>52
+53
+54</pre>
 </div>
 </td>
 <td class="code">
@@ -916,8 +916,7 @@ match<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>65
-66
+<pre><span></span>66
 67
 68
 69
@@ -930,7 +929,8 @@ match<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 76
 77
 78
-79</pre>
+79
+80</pre>
 </div>
 </td>
 <td class="code">
@@ -1010,16 +1010,16 @@ get_default_format<span class="p">()</span> </code>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>88
-89
-90
-91
-92
-93
-94
-95
-96
-97</pre>
+<pre><span></span> 99
+100
+101
+102
+103
+104
+105
+106
+107
+108</pre>
 </div>
 </td>
 <td class="code">
@@ -1073,15 +1073,15 @@ get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 99
-100
-101
-102
-103
-104
-105
-106
-107</pre>
+<pre><span></span>110
+111
+112
+113
+114
+115
+116
+117
+118</pre>
 </div>
 </td>
 <td class="code">
@@ -1137,16 +1137,16 @@ group<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>126
-127
-128
-129
-130
-131
-132
-133
-134
-135</pre>
+<pre><span></span>137
+138
+139
+140
+141
+142
+143
+144
+145
+146</pre>
 </div>
 </td>
 <td class="code">
@@ -1203,16 +1203,16 @@ read_array<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>149
-150
-151
-152
-153
-154
-155
-156
-157
-158</pre>
+<pre><span></span>160
+161
+162
+163
+164
+165
+166
+167
+168
+169</pre>
 </div>
 </td>
 <td class="code">
@@ -1290,21 +1290,21 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
+<pre><span></span>83
 84
 85
-86</pre>
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97</pre>
 </div>
 </td>
 <td class="code">
@@ -1355,7 +1355,7 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 <tbody>
 <tr>
 <td><code>fmt</code></td>
-<td><code></code></td>
+<td><code>str</code></td>
 <td>
 <p>the default format to use</p>
 </td>
@@ -1394,28 +1394,28 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
+<pre><span></span>120
 121
 122
 123
-124</pre>
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""sets the path to the settings file</span>
 
 <span class="sd">    Args:</span>
@@ -1451,14 +1451,28 @@ value<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>69
-70</pre>
+<pre><span></span>73
+74
+75
+76
+77
+78
+79
+80
+81</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">default</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+    <span class="c1"># this is for migration</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">"value"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">val</span><span class="p">:</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="n">val</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">val</span><span class="p">[</span><span class="s2">"value"</span><span class="p">]</span>
 </code></pre>
 </div>
 </td>
@@ -1509,17 +1523,17 @@ write_array<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147</pre>
+<pre><span></span>148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158</pre>
 </div>
 </td>
 <td class="code">

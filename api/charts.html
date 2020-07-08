@@ -515,12 +515,12 @@ apply_nice_numbers<span class="p">(</span><span class="bp">self</span><span clas
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>63
-64
+<pre><span></span>64
 65
 66
 67
-68</pre>
+68
+69</pre>
 </div>
 </td>
 <td class="code">
@@ -552,14 +552,14 @@ update_boundaries<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>37
-38
+<pre><span></span>38
 39
 40
 41
 42
 43
-44</pre>
+44
+45</pre>
 </div>
 </td>
 <td class="code">
@@ -594,8 +594,7 @@ make sure that we dont zoom out too far</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>70
-71
+<pre><span></span>71
 72
 73
 74
@@ -609,7 +608,8 @@ make sure that we dont zoom out too far</p>
 82
 83
 84
-85</pre>
+85
+86</pre>
 </div>
 </td>
 <td class="code">
@@ -669,8 +669,7 @@ keyPressEvent<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>31
-32
+<pre><span></span>32
 33
 34
 35
@@ -692,7 +691,8 @@ keyPressEvent<span class="p">(</span><span class="bp">self</span><span class="p"
 51
 52
 53
-54</pre>
+54
+55</pre>
 </div>
 </td>
 <td class="code">
@@ -742,8 +742,7 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 85
- 86
+<pre><span></span> 86
  87
  88
  89
@@ -758,7 +757,8 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
  98
  99
 100
-101</pre>
+101
+102</pre>
 </div>
 </td>
 <td class="code">
@@ -801,8 +801,7 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>73
-74
+<pre><span></span>74
 75
 76
 77
@@ -811,7 +810,8 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
 80
 81
 82
-83</pre>
+83
+84</pre>
 </div>
 </td>
 <td class="code">
@@ -848,15 +848,15 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>63
-64
+<pre><span></span>64
 65
 66
 67
 68
 69
 70
-71</pre>
+71
+72</pre>
 </div>
 </td>
 <td class="code">
@@ -891,8 +891,7 @@ save<span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>103
-104
+<pre><span></span>104
 105
 106
 107
@@ -905,7 +904,8 @@ save<span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 114
 115
 116
-117</pre>
+117
+118</pre>
 </div>
 </td>
 <td class="code">
@@ -917,7 +917,7 @@ save<span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <span class="sd">    """</span>
     <span class="n">dlg</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileDialog</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"save"</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="s2">"Save image"</span><span class="p">)</span>
     <span class="n">filters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Bmp files"</span><span class="p">:</span> <span class="p">[</span><span class="s2">".bmp"</span><span class="p">],</span> <span class="s2">"Jpeg files"</span><span class="p">:</span> <span class="p">[</span><span class="s2">".jpg"</span><span class="p">],</span> <span class="s2">"Png files"</span><span class="p">:</span> <span class="p">[</span><span class="s2">".png"</span><span class="p">]}</span>
-    <span class="n">dlg</span><span class="o">.</span><span class="n">set_filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
+    <span class="n">dlg</span><span class="o">.</span><span class="n">set_extension_filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">open_file</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -946,12 +946,12 @@ wheelEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>56
-57
+<pre><span></span>57
 58
 59
 60
-61</pre>
+61
+62</pre>
 </div>
 </td>
 <td class="code">

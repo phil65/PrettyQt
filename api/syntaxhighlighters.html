@@ -658,7 +658,7 @@
 </span>
 </h3>
 <div class="doc doc-contents">
-<p>HighlightRule(regex: str = '', color: str = 'black', italic: bool = False, bold: bool = False, minimal: bool = False, font_size: Union[int, NoneType] = None, nth: int = 0)</p>
+<p>HighlightRule(regex: Union[str, List[str]] = '', color: str = 'black', italic: bool = False, bold: bool = False, minimal: bool = False, font_size: Union[float, NoneType] = None, nth: int = 0)</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.highlightrule.HighlightRule.__init_subclass__">
@@ -679,14 +679,14 @@ overridden to extend subclasses.</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>24
-25
+<pre><span></span>25
 26
 27
 28
 29
 30
-31</pre>
+31
+32</pre>
 </div>
 </td>
 <td class="code">
@@ -804,10 +804,10 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>91
-92
+<pre><span></span>92
 93
-94</pre>
+94
+95</pre>
 </div>
 </td>
 <td class="code">
@@ -1239,15 +1239,15 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>145
-146
+<pre><span></span>146
 147
 148
 149
 150
 151
 152
-153</pre>
+153
+154</pre>
 </div>
 </td>
 <td class="code">
@@ -1286,8 +1286,7 @@ inside a multi-line string when this function is finished.</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>155
-156
+<pre><span></span>156
 157
 158
 159
@@ -1321,7 +1320,8 @@ inside a multi-line string when this function is finished.</p>
 187
 188
 189
-190</pre>
+190
+191</pre>
 </div>
 </td>
 <td class="code">
@@ -1401,8 +1401,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>27
-28
+<pre><span></span>28
 29
 30
 31
@@ -1430,7 +1429,8 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 53
 54
 55
-56</pre>
+56
+57</pre>
 </div>
 </td>
 <td class="code">
@@ -1505,7 +1505,9 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>56
+<pre><span></span>54
+55
+56
 57
 58
 59
@@ -1521,9 +1523,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 69
 70
 71
-72
-73
-74</pre>
+72</pre>
 </div>
 </td>
 <td class="code">
@@ -1586,15 +1586,15 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>83
-84
+<pre><span></span>84
 85
 86
 87
 88
 89
 90
-91</pre>
+91
+92</pre>
 </div>
 </td>
 <td class="code">
