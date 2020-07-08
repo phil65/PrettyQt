@@ -1,3 +1,9 @@
+## v0.79.0 (2020-07-08)
+
+### Feat
+
+- add widgets.Application.get_widget
+
 ## v0.78.0 (2020-07-08)
 
 ### Feat
