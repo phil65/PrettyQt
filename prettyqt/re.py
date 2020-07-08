@@ -2,13 +2,14 @@
 """
 """
 
-from typing import Optional, Tuple, List, Iterator, Union, Callable, Dict
 import re
+from typing import Callable, Dict, Iterator, List, Optional, Tuple, Union
 
 from qtpy import QtCore
 
 from prettyqt import core
 from prettyqt.utils import bidict
+
 
 # IGNORECASE = QtCore.QRegularExpression.CaseInsensitiveOption
 # MULTILINE = QtCore.QRegularExpression.MultilineOption

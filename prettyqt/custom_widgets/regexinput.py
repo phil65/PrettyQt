@@ -3,7 +3,8 @@
 """
 
 import regex as re
-from prettyqt import core, widgets, custom_widgets, custom_validators
+
+from prettyqt import core, custom_validators, custom_widgets, widgets
 
 
 class RegexInput(widgets.Widget):

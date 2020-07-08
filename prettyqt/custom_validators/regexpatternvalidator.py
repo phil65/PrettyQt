@@ -2,8 +2,9 @@
 """
 """
 
-import regex as re
 import sre_constants
+
+import regex as re
 
 from prettyqt import gui
 

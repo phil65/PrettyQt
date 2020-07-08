@@ -2,12 +2,13 @@
 """
 """
 
-from typing import Union, Callable, Optional, Iterator
+from typing import Callable, Iterator, Optional, Union
 
 from qtpy import QtCore
 
 from prettyqt import core
 from prettyqt.utils import bidict
+
 
 FLAGS = bidict(
     none=QtCore.QRegularExpression.NoPatternOption,

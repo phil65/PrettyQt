@@ -4,7 +4,9 @@
 
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
-from prettyqt import core, charts
+
+from prettyqt import charts, core
+
 
 STYLES = {
     QtCore.Qt.SolidLine: "Solid",

@@ -7,6 +7,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
+
 area = QtWidgets.QAbstractScrollArea
 
 SIZE_POLICIES = bidict(

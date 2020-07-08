@@ -2,12 +2,13 @@
 """
 """
 
-from typing import Union, Callable
 import pathlib
+from typing import Callable, Union
 
 from qtpy import QtWebEngineWidgets
 
 from prettyqt import core
+
 
 QtWebEngineWidgets.QWebEnginePage.__bases__ = (core.Object,)
 

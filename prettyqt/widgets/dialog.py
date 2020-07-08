@@ -9,6 +9,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import gui, widgets
 from prettyqt.utils import icons
 
+
 QtWidgets.QDialog.__bases__ = (widgets.Widget,)
 
 

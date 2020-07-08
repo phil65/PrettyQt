@@ -2,11 +2,12 @@
 """
 """
 
+import collections
 from contextlib import contextmanager
 import itertools
-import collections
 
 from qtpy import QtCore
+
 
 counter_dict = collections.defaultdict(itertools.count)
 

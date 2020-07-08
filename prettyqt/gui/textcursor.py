@@ -2,9 +2,8 @@
 """
 """
 
-from typing import Union
-
 import contextlib
+from typing import Union
 
 from qtpy import QtGui
 

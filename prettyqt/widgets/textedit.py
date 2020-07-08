@@ -6,8 +6,9 @@ import contextlib
 
 from qtpy import QtWidgets
 
-from prettyqt import gui, core, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.utils import colors
+
 
 QtWidgets.QTextEdit.__bases__ = (widgets.AbstractScrollArea,)
 

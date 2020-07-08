@@ -10,6 +10,7 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
+
 SELECTION_MODES = bidict(
     none=QtWidgets.QCalendarWidget.NoSelection,
     single=QtWidgets.QCalendarWidget.SingleSelection,

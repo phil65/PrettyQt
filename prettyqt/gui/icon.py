@@ -4,10 +4,11 @@
 
 import pathlib
 
+
 import qtawesome as qta
 from qtpy import QtCore, QtGui
 
-from prettyqt import gui, core
+from prettyqt import core, gui
 
 
 class Icon(QtGui.QIcon):

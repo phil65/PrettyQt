@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from prettyqt import gui
-
 from pygments.formatters.html import HtmlFormatter
-from pygments.lexer import RegexLexer, _TokenType, Text, Error
+from pygments.lexer import Error, RegexLexer, Text, _TokenType
 from pygments.lexers import Python3Lexer
 from pygments.styles import get_style_by_name
+
+from prettyqt import gui
 
 
 def qstring_length(text):

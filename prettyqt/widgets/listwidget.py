@@ -2,9 +2,9 @@
 """
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 from prettyqt.utils import bidict, icons
 
 

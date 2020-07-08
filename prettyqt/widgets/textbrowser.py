@@ -2,12 +2,15 @@
 """
 """
 
+import pathlib
+from typing import Union
+
+
 import docutils.core
 from qtpy import QtWidgets
-from typing import Union
-import pathlib
 
-from prettyqt import gui, widgets, core
+from prettyqt import core, gui, widgets
+
 
 QtWidgets.QTextBrowser.__bases__ = (widgets.TextEdit,)
 

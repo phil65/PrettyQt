@@ -6,6 +6,7 @@ from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
 
+
 H_ALIGNMENTS = dict(
     left=QtCore.Qt.AlignLeft, right=QtCore.Qt.AlignRight, center=QtCore.Qt.AlignHCenter
 )

@@ -2,7 +2,7 @@
 """
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui
 from prettyqt.utils import bidict, icons

@@ -7,6 +7,7 @@ from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts, core, gui, widgets
 
+
 ALIGNMENTS = dict(
     left=QtCore.Qt.AlignLeft,
     right=QtCore.Qt.AlignRight,

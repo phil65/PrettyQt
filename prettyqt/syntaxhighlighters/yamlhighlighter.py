@@ -7,6 +7,7 @@
 
 from prettyqt import core, gui, syntaxhighlighters
 
+
 COMMENT_START = core.RegExp("#")
 COMMENT_END = core.RegExp("\n|\r")  # Unused?
 COMMENT_FORMAT = gui.TextCharFormat()

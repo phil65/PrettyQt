@@ -23,6 +23,7 @@
 
 from PyQt5 import QtCore, QtGui
 
+
 # This was originally a Trolltech file.  The QBzr folks did some work to
 # bring it up to date, and I've done some work on top of theirs to fix a few
 # minor bugs.

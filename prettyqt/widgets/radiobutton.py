@@ -3,6 +3,7 @@
 """
 
 from qtpy import QtWidgets
+
 from prettyqt import core, widgets
 
 

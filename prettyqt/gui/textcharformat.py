@@ -6,8 +6,9 @@ from typing import Union
 
 from qtpy import QtGui
 
-from prettyqt.utils import bidict, colors
 from prettyqt import gui
+from prettyqt.utils import bidict, colors
+
 
 WEIGHTS = bidict(
     thin=QtGui.QFont.Thin,

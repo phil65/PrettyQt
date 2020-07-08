@@ -5,6 +5,7 @@ Syntax highlighter for the programming language Python
 
 from prettyqt import core, gui, syntaxhighlighters
 
+
 KEYWORDS = [
     "and",
     "assert",

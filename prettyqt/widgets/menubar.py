@@ -8,6 +8,7 @@ from qtpy import QtWidgets
 
 from prettyqt import widgets
 
+
 QtWidgets.QMenuBar.__bases__ = (widgets.Widget,)
 
 

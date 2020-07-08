@@ -3,7 +3,7 @@
 """
 
 
-from prettyqt import constants, widgets, core
+from prettyqt import constants, core, widgets
 
 
 class RegexMatchesModel(core.AbstractTableModel):

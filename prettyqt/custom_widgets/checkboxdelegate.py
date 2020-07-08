@@ -6,6 +6,7 @@ import logging
 
 from prettyqt import core, widgets
 
+
 logger = logging.getLogger(__name__)
 
 

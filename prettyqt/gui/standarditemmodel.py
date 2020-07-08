@@ -6,6 +6,7 @@ from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
 
+
 QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
 
 MATCH_FLAGS = dict(
@@ -56,6 +57,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
 
 if __name__ == "__main__":
     import pickle
+
     from prettyqt import widgets
 
     model = gui.StandardItemModel()

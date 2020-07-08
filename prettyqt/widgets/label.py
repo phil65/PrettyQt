@@ -5,12 +5,13 @@
 import functools
 import operator
 import pathlib
-from typing import Optional, Union, List
+from typing import List, Optional, Union
 
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
 from prettyqt.utils import bidict
+
 
 H_ALIGNMENTS = bidict(
     left=QtCore.Qt.AlignLeft,

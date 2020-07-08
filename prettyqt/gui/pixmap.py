@@ -2,8 +2,8 @@
 """
 """
 
-from typing import Union
 import pathlib
+from typing import Union
 
 from qtpy import QtGui
 

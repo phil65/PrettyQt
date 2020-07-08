@@ -9,6 +9,7 @@ from qtpy import QtCore, QtGui, QtWidgets
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, icons
 
+
 TAB_SHAPES = bidict(
     rounded=QtWidgets.QTabWidget.Rounded, triangular=QtWidgets.QTabWidget.Triangular
 )

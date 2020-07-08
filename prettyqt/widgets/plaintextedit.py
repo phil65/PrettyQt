@@ -7,8 +7,9 @@ import contextlib
 from qtpy import QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict
 from prettyqt.gui import textcursor
+from prettyqt.utils import bidict
+
 
 WRAP_MODES = bidict(
     none=QtGui.QTextOption.NoWrap,

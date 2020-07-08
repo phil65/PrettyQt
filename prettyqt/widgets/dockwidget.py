@@ -8,6 +8,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
+
 ALLOWED_AREAS = bidict(
     all=QtCore.Qt.AllDockWidgetAreas,
     left=QtCore.Qt.LeftDockWidgetArea,

@@ -7,7 +7,8 @@ for full list, see:
 
 from typing import Union
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
+
 from prettyqt import gui
 
 

@@ -2,9 +2,9 @@
 """
 """
 
-from qtpy import QtWidgets, QtGui
+from qtpy import QtGui, QtWidgets
 
-from prettyqt import widgets, core, gui
+from prettyqt import core, gui, widgets
 
 
 QtWidgets.QKeySequenceEdit.__bases__ = (widgets.Widget,)

@@ -27,6 +27,7 @@ from qtpy import QtCore, QtGui
 from prettyqt import core, gui, widgets
 from prettyqt.utils import colors
 
+
 SLIDER_STYLE = widgets.Style.CC_Slider
 HANDLE_STYLE = widgets.Style.SC_SliderHandle
 GROOVE_STYLE = widgets.Style.SC_SliderGroove

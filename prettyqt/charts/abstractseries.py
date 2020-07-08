@@ -3,6 +3,7 @@
 """
 
 from qtpy.QtCharts import QtCharts
+
 from prettyqt import core
 
 

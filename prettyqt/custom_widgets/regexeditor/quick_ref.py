@@ -1,8 +1,9 @@
 """
 Contains the quick reference widget
 """
-from prettyqt import widgets
 import pathlib
+
+from prettyqt import widgets
 
 
 class QuickRefWidget(widgets.Widget):

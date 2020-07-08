@@ -2,9 +2,9 @@
 
 # credits to https://stackoverflow.com/a/54819051
 
-from prettyqt import widgets, core, gui
-
 from qtpy import QtCore
+
+from prettyqt import core, gui, widgets
 
 
 class LabeledSlider(widgets.Widget):

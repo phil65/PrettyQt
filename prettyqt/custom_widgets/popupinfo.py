@@ -4,7 +4,7 @@
 
 from qtpy import QtCore
 
-from prettyqt import core, widgets, gui
+from prettyqt import core, gui, widgets
 
 
 class PopupInfo(widgets.Dialog):

@@ -2,11 +2,13 @@
 """
 """
 
-from typing import List, Callable, Union, Optional
+from typing import Callable, List, Optional, Union
+
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
-from qtpy import QtCore, QtWidgets
+
 
 BUTTONS = bidict(
     cancel=QtWidgets.QDialogButtonBox.Cancel,

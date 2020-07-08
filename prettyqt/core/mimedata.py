@@ -2,10 +2,11 @@
 """
 """
 
+import orjson as json
 from qtpy import QtCore
 
-import orjson as json
 from prettyqt import core
+
 
 QtCore.QMimeData.__bases__ = (core.Object,)
 OPTS = json.OPT_NAIVE_UTC | json.OPT_SERIALIZE_NUMPY

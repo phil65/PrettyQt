@@ -26,8 +26,7 @@ class CompositeValidator(gui.Validator):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-    from prettyqt import custom_validators
+    from prettyqt import custom_validators, widgets
 
     val1 = custom_validators.NotEmptyValidator()
     val2 = custom_validators.PathValidator()

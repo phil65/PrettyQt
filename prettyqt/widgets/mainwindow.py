@@ -9,6 +9,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, icons
 
+
 DOCK_POSITIONS = bidict(
     top=QtCore.Qt.TopDockWidgetArea,
     bottom=QtCore.Qt.BottomDockWidgetArea,

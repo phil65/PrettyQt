@@ -4,7 +4,7 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import gui, widgets, core
+from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict
 
 

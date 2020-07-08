@@ -7,6 +7,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
+
 MODES = bidict(
     default=QtWidgets.QLayout.SetDefaultConstraint,
     fixed=QtWidgets.QLayout.SetFixedSize,

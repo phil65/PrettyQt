@@ -12,6 +12,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import constants, gui, widgets
 from prettyqt.utils import bidict
 
+
 TRIGGERS = bidict(
     none=QtWidgets.QAbstractItemView.NoEditTriggers,
     double_click=QtWidgets.QAbstractItemView.DoubleClicked,

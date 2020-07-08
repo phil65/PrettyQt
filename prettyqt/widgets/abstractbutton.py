@@ -4,8 +4,9 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import core, widgets, gui
+from prettyqt import core, gui, widgets
 from prettyqt.utils import icons
+
 
 STYLES = dict(
     close=QtWidgets.QStyle.SP_TitleBarCloseButton,

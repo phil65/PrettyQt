@@ -4,7 +4,7 @@
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 
 
 class FlowLayout(widgets.Layout):

@@ -3,14 +3,15 @@
 """
 
 from contextlib import contextmanager
-from typing import Callable, Dict, Optional
-import operator
 import functools
+import operator
+from typing import Callable, Dict, Optional
 
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict
+
 
 POLICIES = bidict(
     none=QtCore.Qt.NoContextMenu,

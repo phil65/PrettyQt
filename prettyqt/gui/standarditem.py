@@ -2,9 +2,9 @@
 """
 """
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
-from prettyqt import gui, core
+from prettyqt import core, gui
 from prettyqt.utils import icons
 
 

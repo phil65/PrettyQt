@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from pygments.lexer import RegexLexer, bygroups
-from pygments.token import Keyword, Name, Comment, Operator, Text, Number, Token
+from pygments.token import Comment, Keyword, Name, Number, Operator, Text, Token
+
 
 __all__ = ["RegularExpressionLexer"]
 

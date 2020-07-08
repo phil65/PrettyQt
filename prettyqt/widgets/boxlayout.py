@@ -6,6 +6,7 @@ from qtpy import QtWidgets
 
 from prettyqt import widgets
 
+
 QtWidgets.QBoxLayout.__bases__ = (widgets.Layout,)
 
 

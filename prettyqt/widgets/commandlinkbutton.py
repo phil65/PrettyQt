@@ -4,7 +4,7 @@
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 
 
 QtWidgets.QCommandLinkButton.__bases__ = (widgets.PushButton,)

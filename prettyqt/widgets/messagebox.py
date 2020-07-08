@@ -4,7 +4,7 @@
 
 from typing import Optional
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
 from prettyqt.utils import bidict, icons

@@ -4,8 +4,8 @@
 
 from qtpy import QtCore
 
-from prettyqt.utils import bidict
 from prettyqt import core
+from prettyqt.utils import bidict
 
 
 OPEN_MODES = bidict(

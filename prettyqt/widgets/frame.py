@@ -7,6 +7,7 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
+
 SHADOWS = bidict(
     plain=QtWidgets.QFrame.Plain,
     raised=QtWidgets.QFrame.Raised,

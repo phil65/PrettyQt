@@ -4,10 +4,11 @@
 # see https://github.com/ITVRoC/SeekurJr/blob/master/seekur_12.04/packages/
 # multimaster_fkie/node_manager_fkie/src/node_manager_fkie/yaml_highlighter.py
 
-from typing import Optional, Union, List
-
 from dataclasses import dataclass
+from typing import List, Optional, Union
+
 import regex as re
+
 from prettyqt import gui
 
 

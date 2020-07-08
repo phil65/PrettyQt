@@ -2,13 +2,14 @@
 """
 """
 
-import sys
+from abc import ABC, abstractmethod
 import logging
 import re
-from abc import ABC, abstractmethod
+import sys
 
-from prettyqt import gui, widgets, constants
+from prettyqt import constants, gui, widgets
 from prettyqt.utils import signallogger
+
 
 # from SublimeText Regex:
 # (?x:

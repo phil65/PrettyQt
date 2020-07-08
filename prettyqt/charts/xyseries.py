@@ -3,7 +3,9 @@
 """
 
 from qtpy.QtCharts import QtCharts
+
 from prettyqt import charts
+
 
 QtCharts.QXYSeries.__bases__ = (charts.AbstractSeries,)
 

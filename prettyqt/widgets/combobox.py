@@ -6,8 +6,9 @@ from typing import Iterable
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, core, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, icons
+
 
 box = QtWidgets.QComboBox
 INSERT_POLICIES = bidict(

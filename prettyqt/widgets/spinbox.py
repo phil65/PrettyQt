@@ -6,6 +6,7 @@ from qtpy import QtWidgets
 
 from prettyqt import core, widgets
 
+
 QtWidgets.QSpinBox.__bases__ = (widgets.AbstractSpinBox,)
 
 

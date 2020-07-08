@@ -10,6 +10,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
+
 QtWidgets.QHeaderView.__bases__ = (widgets.AbstractItemView,)
 
 

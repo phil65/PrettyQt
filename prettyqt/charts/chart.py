@@ -5,6 +5,7 @@
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
 
+
 THEMES = {
     "Light": QtCharts.QChart.ChartThemeLight,
     "Blue Cerulean": QtCharts.QChart.ChartThemeBlueCerulean,

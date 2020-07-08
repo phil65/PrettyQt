@@ -3,7 +3,8 @@
 Syntax highlighter for Markdown markup language
 """
 
-from prettyqt import syntaxhighlighters, core, gui
+from prettyqt import core, gui, syntaxhighlighters
+
 
 BASE_FONT = 12.0
 

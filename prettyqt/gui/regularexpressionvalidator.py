@@ -6,6 +6,7 @@ from qtpy import QtGui
 
 from prettyqt import core, gui
 
+
 QtGui.QRegularExpressionValidator.__bases__ = (gui.Validator,)
 
 

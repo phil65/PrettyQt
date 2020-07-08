@@ -4,10 +4,11 @@
 
 from typing import Union
 
-from qtpy import QtWidgets, QtGui
+from qtpy import QtGui, QtWidgets
 
 from prettyqt import gui, widgets
 from prettyqt.utils import bidict, colors
+
 
 VIEW_MODES = bidict(
     default=QtWidgets.QMdiArea.SubWindowView, tabbed=QtWidgets.QMdiArea.TabbedView

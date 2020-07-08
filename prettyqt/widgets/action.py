@@ -9,6 +9,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core
 from prettyqt.utils import bidict, icons
 
+
 PRIORITIES = bidict(
     low=QtWidgets.QAction.LowPriority,
     normal=QtWidgets.QAction.NormalPriority,

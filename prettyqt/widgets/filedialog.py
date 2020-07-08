@@ -10,6 +10,7 @@ from qtpy import QtWidgets
 from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
+
 MODES = bidict(
     existing_file=QtWidgets.QFileDialog.ExistingFile,
     existing_files=QtWidgets.QFileDialog.ExistingFiles,

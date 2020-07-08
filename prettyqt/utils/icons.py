@@ -5,11 +5,13 @@ for full list, see:
 - https://cdn.materialdesignicons.com/3.0.39/
 """
 
-from typing import Union
 import pathlib
+from typing import Union
+
 
 import qtawesome as qta
 from qtpy import QtGui
+
 from prettyqt import gui
 
 

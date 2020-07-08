@@ -4,6 +4,7 @@
 
 from prettyqt import gui
 
+
 FORMAT_1 = gui.TextCharFormat()
 FORMAT_1.set_background_color("lightgreen")
 FORMAT_2 = gui.TextCharFormat()

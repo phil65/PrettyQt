@@ -2,7 +2,7 @@
 """
 """
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt.utils import bidict
 

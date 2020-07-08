@@ -6,6 +6,7 @@ for full list, see:
 """
 
 import logging
+
 from prettyqt import core
 
 

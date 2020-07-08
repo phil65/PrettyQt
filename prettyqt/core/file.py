@@ -8,6 +8,7 @@ from qtpy import QtCore
 
 from prettyqt import core
 
+
 OPEN_MODES = core.iodevice.OPEN_MODES
 
 QtCore.QFile.__bases__ = (core.FileDevice,)

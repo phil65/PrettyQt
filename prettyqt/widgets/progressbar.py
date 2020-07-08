@@ -2,10 +2,11 @@
 """
 """
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
 from prettyqt.utils import bidict
+
 
 TEXT_DIRECTIONS = bidict(
     top_to_bottom=QtWidgets.QProgressBar.TopToBottom,

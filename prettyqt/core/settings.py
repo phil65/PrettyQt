@@ -2,14 +2,15 @@
 """
 """
 
-from typing import Optional, List, Union, Mapping
-
-import pathlib
 import contextlib
+import pathlib
+from typing import List, Mapping, Optional, Union
+
+from qtpy import QtCore
 
 from prettyqt import core
 from prettyqt.utils import bidict
-from qtpy import QtCore
+
 
 FORMATS = bidict(native=QtCore.QSettings.NativeFormat, ini=QtCore.QSettings.IniFormat)
 

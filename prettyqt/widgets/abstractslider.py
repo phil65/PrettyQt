@@ -6,6 +6,7 @@ from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
 
+
 QtWidgets.QAbstractSlider.__bases__ = (widgets.Widget,)
 
 
