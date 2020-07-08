@@ -15,15 +15,6 @@ os.system(f'cz changelog --unreleased-version "v{version}"')
 endef
 export BUMP_SCRIPT
 
-define TAG_SCRIPT
-import os, prettyqt
-version = prettyqt.__version__
-os.system(f'git tag -d v{version}')
-os.system(f'git tag v{version}')
-endef
-export TAG_SCRIPT
-
-
 define PRINT_HELP_PYSCRIPT
 import re, sys
 
@@ -72,16 +63,7 @@ changelog: ## create changelog
 	mv CHANGELOG.md docs/changelog.md
 
 bump: ## version bump
-	git stash --include-untracked
-	cz bump --changelog --no-verify
-	cp CHANGELOG.md docs/changelog.md
-	git add --all
-	git commit --amend --no-edit --no-verify
-	python -c "$$TAG_SCRIPT"
-	git stash apply
-# 	git push --tags
-# 	git push
-# 	pip install -e .
+	poetry run python prettyqt/scripts/bump.py
 
 bump-minor: ## minor version bump
 	bump2version minor --allow-dirty --tag
