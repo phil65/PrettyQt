@@ -68,10 +68,17 @@ class Settings(QtCore.QSettings):
     def set_value(self, key: str, value):
         if not self.applicationName():
             raise ValueError("no app name defined")
-        self.setValue(key, value)
+        self.setValue(key, dict(value=value))
 
     def value(self, key: str, default=None):
-        return super().value(key, default)
+        if not self.contains(key):
+            return default
+        val = super().value(key)
+        # this is for migration
+        if not isinstance(val, dict) or "value" not in val:
+            val = dict(value=val)
+            self.set_value(key, val)
+        return val["value"]
 
     @classmethod
     def set_default_format(cls, fmt: str):
@@ -198,5 +205,7 @@ class Settings(QtCore.QSettings):
 
 if __name__ == "__main__":
     settings = Settings("1", "2")
-    settings["1"] = "hallo"
+    settings["1"] = True
+    print(settings["1"])
+    print(type(settings.get("1")))
     del settings["hallo"]
