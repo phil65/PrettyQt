@@ -25,6 +25,7 @@ class SidebarWidget(widgets.MainWindow):
 
         main_layout = widgets.BoxLayout("horizontal")
         main_layout.addWidget(self.area)
+        main_layout.set_margin(0)
         w = widgets.Widget()
         w.set_layout(main_layout)
         self.setCentralWidget(w)
