@@ -71,6 +71,11 @@ WINDOW_FLAGS = bidict(
     customize_window=QtCore.Qt.CustomizeWindowHint,
 )
 
+ATTRIBUTES = bidict(
+    native_window=QtCore.Qt.WA_NativeWindow,
+    no_native_ancestors=QtCore.Qt.WA_DontCreateNativeAncestors,
+)
+
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
 
@@ -198,6 +203,11 @@ class Widget(QtWidgets.QWidget):
             self.setWindowFlag(QtCore.Qt.FramelessWindowHint, frameless)
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
+
+    def set_attribute(self, attribute: str, state: bool):
+        if attribute not in ATTRIBUTES:
+            raise ValueError(f"Invalid attribute '{attribute}'.")
+        self.setAttribute(ATTRIBUTES[attribute], state)
 
     def set_modality(self, modality: str = "window"):
         """set modality for the dialog
