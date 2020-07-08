@@ -1,3 +1,10 @@
+## v0.80.0 (2020-07-08)
+
+### Feat
+
+- add Widget.set_attribute
+- add margin keyword argument to Widget.set_layout
+
 ## v0.79.1 (2020-07-08)
 
 ### Fix
