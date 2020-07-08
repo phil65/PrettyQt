@@ -1,3 +1,10 @@
+## v0.81.0 (2020-07-08)
+
+### Feat
+
+- allow setting window icon color
+- os dark mode detection
+
 ## v0.80.1 (2020-07-08)
 
 ### Fix
