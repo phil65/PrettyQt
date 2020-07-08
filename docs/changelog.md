@@ -1,3 +1,9 @@
+## v0.79.1 (2020-07-08)
+
+### Fix
+
+- remove Qt logger on Application exit
+
 ## v0.79.0 (2020-07-08)
 
 ### Feat
