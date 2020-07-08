@@ -127,14 +127,15 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def load_window_state(self):
         settings = core.Settings()
-        geom = settings.value("mainwindow.geometry", None)
-        state = settings.value("mainwindow.state", None)
+        geom = settings.get("mainwindow.geometry")
+        state = settings.get("mainwindow.state")
         if geom is not None and state is not None:
             try:
+                logging.debug("Loading window state...")
                 self.restoreGeometry(geom)
                 self.restoreState(state)
             except TypeError:
-                logging.info("Wrong type for window state. Probably Qt binding switch?")
+                logging.error("Wrong type for window state. Probably Qt binding switch?")
 
     def closeEvent(self, event):
         """
@@ -142,8 +143,9 @@ class MainWindow(QtWidgets.QMainWindow):
         saves GUI settings
         """
         settings = core.Settings()
-        settings.set_value("mainwindow.geometry", self.saveGeometry())
-        settings.set_value("mainwindow.state", self.saveState())
+        logging.debug("Saving window state...")
+        settings["mainwindow.geometry"] = self.saveGeometry()
+        settings["mainwindow.state"] = self.saveState()
         super().closeEvent(event)
         event.accept()
 
