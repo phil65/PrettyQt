@@ -1,3 +1,9 @@
+## v0.80.1 (2020-07-08)
+
+### Fix
+
+- Settings.value() returned wrong type
+
 ## v0.80.0 (2020-07-08)
 
 ### Feat
