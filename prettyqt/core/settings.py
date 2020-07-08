@@ -44,7 +44,7 @@ class Settings(QtCore.QSettings):
         return self.value(index)
 
     def __setitem__(self, name: str, value):
-        return self.setValue(name, value)
+        return self.set_value(name, value)
 
     def __delitem__(self, index: str):
         return self.remove(index)
@@ -164,7 +164,7 @@ class Settings(QtCore.QSettings):
     # Dictionary interface
 
     def get(self, key: str, default=None):
-        return super().value(key, default)
+        return self.value(key, default)
 
     def setdefault(self, key: str, default=None):
         if not self.contains(key):
