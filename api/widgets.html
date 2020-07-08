@@ -6445,7 +6445,7 @@ copy_to_clipboard<span class="p">(</span><span class="n">text</span><span class=
 set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set the icon for the menu</p>
+<p>set the default window icon</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6486,12 +6486,12 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
-    <span class="sd">"""set the icon for the menu</span>
+    <span class="sd">"""set the default window icon</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"lightgray"</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -7290,7 +7290,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"lightgray"</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -10621,7 +10621,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"lightgray"</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
