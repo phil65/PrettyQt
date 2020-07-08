@@ -16,6 +16,13 @@ ColorType = Union[
     str, int, QtGui.QRgba64, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None
 ]
 
+WINDOW_ICON_COLOR = "darkcyan"
+
+
+def set_window_icon_color(color):
+    global WINDOW_ICON_COLOR
+    WINDOW_ICON_COLOR = color
+
 
 def get_color(color: ColorType) -> gui.Color:
     """get gui.Color instance for given parameter

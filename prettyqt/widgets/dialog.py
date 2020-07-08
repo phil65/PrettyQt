@@ -7,7 +7,7 @@ from typing import Union
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import icons
+from prettyqt.utils import icons, colors
 
 
 QtWidgets.QDialog.__bases__ = (widgets.Widget,)
@@ -62,7 +62,7 @@ class BaseDialog(QtWidgets.QDialog):
         Args:
             icon: icon to use
         """
-        icon = icons.get_icon(icon, color="lightgray")
+        icon = icons.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
     def add_buttonbox(self):

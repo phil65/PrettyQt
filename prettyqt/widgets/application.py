@@ -9,7 +9,7 @@ from typing import Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import icons
+from prettyqt.utils import icons, colors
 
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
@@ -17,12 +17,12 @@ QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
 class Application(QtWidgets.QApplication):
     def set_icon(self, icon: icons.IconType):
-        """set the icon for the menu
+        """set the default window icon
 
         Args:
             icon: icon to use
         """
-        icon = icons.get_icon(icon, color="lightgray")
+        icon = icons.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
     def load_language_file(self, path: pathlib.Path):

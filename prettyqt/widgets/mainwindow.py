@@ -7,7 +7,7 @@ import logging
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, icons
+from prettyqt.utils import bidict, icons, colors
 
 
 DOCK_POSITIONS = bidict(
@@ -163,7 +163,7 @@ class MainWindow(QtWidgets.QMainWindow):
         Args:
             icon: icon to use
         """
-        icon = icons.get_icon(icon, color="lightgray")
+        icon = icons.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
     def add_widget_as_dock(
