@@ -42,7 +42,7 @@ class HeaderView(QtWidgets.QHeaderView):
 
     def load_state(self):
         settings = core.Settings()
-        state = settings.value(f"{self._widget_name}.state", None)
+        state = settings.get(f"{self._widget_name}.state", None)
         if state is not None:
             self.restoreState(state)
 

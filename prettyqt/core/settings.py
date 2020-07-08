@@ -76,8 +76,8 @@ class Settings(QtCore.QSettings):
         val = super().value(key)
         # this is for migration
         if not isinstance(val, dict) or "value" not in val:
-            val = dict(value=val)
             self.set_value(key, val)
+            return val
         return val["value"]
 
     @classmethod

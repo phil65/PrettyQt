@@ -177,9 +177,10 @@ def test_settings(qapp):
     settings = core.Settings("1", "2")
     settings.clear()
     settings.set_value("test", "value")
+    assert settings.get("empty") is None
     assert len(settings) == 1
     assert "test" in settings
-    assert settings.value("test") == "value"
+    assert settings.get("test") == "value"
     with core.Settings(settings_id="test") as s:
         s.set_value("test2", "xx")
     with settings.write_array("test"):

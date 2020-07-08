@@ -60,7 +60,7 @@ class FileDialog(QtWidgets.QFileDialog):
             self.set_extension_filter(extension_filter)
         if path_id is not None and path is None:
             settings = core.Settings()
-            path = settings.value(path_id, "")
+            path = settings.get(path_id, "")
         self.set_directory(path)
         self.set_file_mode(file_mode)
         self.set_accept_mode(mode)
