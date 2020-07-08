@@ -125,29 +125,37 @@ class MainWindow(QtWidgets.QMainWindow):
             raise ValueError("Position not existing")
         self.addToolBarBreak(TOOLBAR_AREAS[position])
 
-    def load_window_state(self):
+    def load_window_state(self, recursive=False):
         settings = core.Settings()
-        geom = settings.get("mainwindow.geometry")
-        state = settings.get("mainwindow.state")
+        name = self.get_id()
+        geom = settings.get(f"{name}.geometry")
+        state = settings.get(f"{name}.state")
         if geom is not None and state is not None:
             try:
-                logging.debug("Loading window state...")
+                logging.debug(f"Loading window state for {name}...")
                 self.restoreGeometry(geom)
                 self.restoreState(state)
             except TypeError:
                 logging.error("Wrong type for window state. Probably Qt binding switch?")
+        if recursive:
+            for window in self.find_children(MainWindow, recursive=True):
+                if window.get_id():
+                    window.load_window_state()
 
-    def closeEvent(self, event):
+    def save_window_state(self, recursive=False):
         """
         override, gets executed when app gets closed.
         saves GUI settings
         """
         settings = core.Settings()
-        logging.debug("Saving window state...")
-        settings["mainwindow.geometry"] = self.saveGeometry()
-        settings["mainwindow.state"] = self.saveState()
-        super().closeEvent(event)
-        event.accept()
+        name = self.get_id()
+        logging.debug(f"Saving window state for {name}...")
+        settings[f"{name}.geometry"] = self.saveGeometry()
+        settings[f"{name}.state"] = self.saveState()
+        if recursive:
+            for window in self.find_children(MainWindow, recursive=True):
+                if window.get_id():
+                    window.save_window_state()
 
     def set_icon(self, icon: icons.IconType):
         """set the icon for the menu
