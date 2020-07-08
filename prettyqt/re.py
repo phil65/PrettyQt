@@ -199,7 +199,7 @@ class Pattern(core.RegularExpression):
         return self.patternOptions()
 
 
-def compile(pattern: str, flags: int = 0):
+def compile(pattern: str, flags: int = 0) -> Pattern:
     return Pattern(pattern, flags)
 
 
@@ -253,7 +253,7 @@ def escape(pattern: str):
     result = core.RegularExpression.escape(pattern)
     for i in dont_escape:
         result.replace(i, r"\i")
-    assert result == re.escape(pattern)
+    return result
 
 
 if __name__ == "__main__":
