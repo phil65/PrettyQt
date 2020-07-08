@@ -3,6 +3,7 @@
 """
 import warnings
 import functools
+import sys
 
 
 def string_to_num_array(array: str) -> list:
@@ -27,3 +28,28 @@ def deprecated(func):
         return func(*args, **kwargs)
 
     return new_func
+
+
+def is_dark_mode() -> bool:
+    if sys.platform.startswith("win"):
+        import winreg
+
+        REG_PATH = r"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
+        try:
+            registry_key = winreg.OpenKey(
+                winreg.HKEY_CURRENT_USER, REG_PATH, 0, winreg.KEY_READ
+            )
+            value, regtype = winreg.QueryValueEx(registry_key, "AppsUseLightTheme")
+            winreg.CloseKey(registry_key)
+            return value == 0
+        except WindowsError:
+            return False
+    elif sys.platform == "darwin":
+        import darkdetect
+
+        return darkdetect.isDark()
+    else:
+        return False
+
+
+print(is_dark_mode())
