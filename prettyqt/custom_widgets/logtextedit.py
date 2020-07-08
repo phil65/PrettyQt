@@ -202,6 +202,7 @@ class LogTextEdit(widgets.PlainTextEdit):
         # self.handler.log_line.connect(self.append_text)
         self.handler = signallogger.RecordSignalLogger()
         self.handler.log_record.connect(self.append_record)
+        widgets.Application.call_on_exit(lambda: logger.removeHandler(self.handler))
         self.handler.setLevel(logging.INFO)
         logger.addHandler(self.handler)
         fmt = logging.Formatter("%(asctime)s  %(levelname)i  %(message)s")
