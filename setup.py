@@ -7,7 +7,7 @@ import pathlib
 from setuptools import find_packages, setup
 
 README = pathlib.Path("docs/index.md").read_text()
-HISTORY = pathlib.Path("HISTORY.md").read_text()
+HISTORY = pathlib.Path("CHANGELOG.md").read_text()
 
 REQUIREMENTS = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex"]
 version = ".".join(map(str, sys.version_info))
