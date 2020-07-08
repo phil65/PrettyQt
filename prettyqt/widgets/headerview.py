@@ -28,7 +28,7 @@ class HeaderView(QtWidgets.QHeaderView):
 
     section_vis_changed = QtCore.Signal(int, bool)
 
-    def __init__(self, orientation=None, parent=None):
+    def __init__(self, orientation, parent=None):
         if orientation in ORIENTATIONS:
             orientation = ORIENTATIONS[orientation]
         super().__init__(orientation, parent=parent)
