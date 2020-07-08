@@ -11,6 +11,9 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
 
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
+
+
 QtWidgets.QHeaderView.__bases__ = (widgets.AbstractItemView,)
 
 
@@ -25,8 +28,9 @@ class HeaderView(QtWidgets.QHeaderView):
     section_vis_changed = QtCore.Signal(int, bool)
 
     def __init__(self, orientation=None, parent=None):
-        o = QtCore.Qt.Vertical if orientation == "vertical" else QtCore.Qt.Horizontal
-        super().__init__(o, parent=parent)
+        if orientation in ORIENTATIONS:
+            orientation = ORIENTATIONS[orientation]
+        super().__init__(orientation, parent=parent)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
         self._widget_name = parent.id if parent is not None else ""
