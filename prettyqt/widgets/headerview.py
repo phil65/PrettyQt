@@ -8,7 +8,7 @@ from typing import Iterable, Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, helpers
 
 
 ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
@@ -49,7 +49,11 @@ class HeaderView(QtWidgets.QHeaderView):
     def resize_sections(self, mode: str):
         self.resizeSections(MODES[mode])
 
+    @helpers.deprecated
     def resize_mode(self, mode: str, col: Optional[int] = None):
+        self.set_resize_mode(mode, col)
+
+    def set_resize_mode(self, mode: str, col: Optional[int] = None):
         if mode not in MODES:
             raise ValueError("mode not existing")
         if col is None:

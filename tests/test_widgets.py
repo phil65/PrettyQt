@@ -341,10 +341,10 @@ def test_headerview(qtbot):
     table.setModel(model)
     header = widgets.HeaderView("horizontal", parent=table)
     table.setHorizontalHeader(header)
-    header.resize_mode("interactive")
-    header.resize_mode("interactive", col=0)
+    header.set_resize_mode("interactive")
+    header.set_resize_mode("interactive", col=0)
     with pytest.raises(ValueError):
-        header.resize_mode("test")
+        header.set_resize_mode("test")
     header.resize_sections("interactive")
     header.set_contextmenu_policy("custom")
     header.set_default_section_size(None)
