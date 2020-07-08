@@ -13,17 +13,18 @@ from prettyqt.utils import bidict
 
 ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
 
+MODES = bidict(
+    interactive=QtWidgets.QHeaderView.Interactive,
+    fixed=QtWidgets.QHeaderView.Fixed,
+    stretch=QtWidgets.QHeaderView.Stretch,
+    resize_to_contents=QtWidgets.QHeaderView.ResizeToContents,
+)
+
 
 QtWidgets.QHeaderView.__bases__ = (widgets.AbstractItemView,)
 
 
 class HeaderView(QtWidgets.QHeaderView):
-    MODES = bidict(
-        interactive=QtWidgets.QHeaderView.Interactive,
-        fixed=QtWidgets.QHeaderView.Fixed,
-        stretch=QtWidgets.QHeaderView.Stretch,
-        resize_to_contents=QtWidgets.QHeaderView.ResizeToContents,
-    )
 
     section_vis_changed = QtCore.Signal(int, bool)
 
@@ -46,15 +47,15 @@ class HeaderView(QtWidgets.QHeaderView):
             self.restoreState(state)
 
     def resize_sections(self, mode: str):
-        self.resizeSections(self.MODES[mode])
+        self.resizeSections(MODES[mode])
 
     def resize_mode(self, mode: str, col: Optional[int] = None):
-        if mode not in self.MODES:
+        if mode not in MODES:
             raise ValueError("mode not existing")
         if col is None:
-            self.setSectionResizeMode(self.MODES[mode])
+            self.setSectionResizeMode(MODES[mode])
         else:
-            self.setSectionResizeMode(col, self.MODES[mode])
+            self.setSectionResizeMode(col, MODES[mode])
 
     def section_labels(self) -> list:
         model = self.parent().model()
