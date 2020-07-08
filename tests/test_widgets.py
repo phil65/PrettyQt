@@ -82,6 +82,7 @@ def test_checkbox(qtbot):
     widget.set_disabled()
     widget.set_enabled()
     import pickle
+
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -332,14 +333,13 @@ def test_groupbox(qtbot):
 
 
 def test_headerview(qtbot):
-
     def test():
         pass
 
     table = widgets.TableView()
     model = widgets.FileSystemModel()
     table.setModel(model)
-    header = widgets.HeaderView(parent=table)
+    header = widgets.HeaderView("horizontal", parent=table)
     table.setHorizontalHeader(header)
     header.resize_mode("interactive")
     header.resize_mode("interactive", col=0)
@@ -355,7 +355,7 @@ def test_headerview(qtbot):
     assert header.get_contextmenu_policy() == "custom"
     header.set_custom_menu(test)
     header.set_sizes([100])
-    assert header.section_labels() == ['Name', 'Size', 'Type', 'Date Modified']
+    assert header.section_labels() == ["Name", "Size", "Type", "Date Modified"]
     header.save_state()
     header.load_state()
     header.set_section_hidden(0, True)
@@ -379,7 +379,7 @@ def test_label(qtbot):
     label.set_alignment(horizontal="left", vertical="top")
     label.set_alignment(vertical="bottom")
     label.set_text_interaction("by_mouse")
-    expected = ['by_mouse', 'like_text_editor', 'like_text_browser']
+    expected = ["by_mouse", "like_text_editor", "like_text_browser"]
     assert label.get_text_interaction() == expected
     label.allow_links()
     with pytest.raises(ValueError):
@@ -523,11 +523,14 @@ def test_menu(qtbot):
     def test():
         pass
 
-    menu.add_action("test", test,
-                    icon="mdi.timer",
-                    shortcut="Ctrl+A",
-                    checkable=True,
-                    status_tip="test")
+    menu.add_action(
+        "test",
+        test,
+        icon="mdi.timer",
+        shortcut="Ctrl+A",
+        checkable=True,
+        status_tip="test",
+    )
     assert len(menu) == 3
     for item in menu:
         pass

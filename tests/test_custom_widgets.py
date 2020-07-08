@@ -13,8 +13,7 @@ from prettyqt import core, custom_widgets, gui, widgets
 
 
 def test_booldicttoolbutton(qtbot):
-    dct = dict(a="test",
-               b="test2")
+    dct = dict(a="test", b="test2")
     w = custom_widgets.BoolDictToolButton("Title", None, dct)
     w["a"] = True
     assert w["a"] is True
@@ -32,7 +31,7 @@ def test_radiodelegate(qtbot):
     widget = widgets.TableWidget()
     widget.setColumnCount(3)
     widget.insertRow(0)
-    widget.setHorizontalHeaderLabels(['LIB', 'CELL', 'area'])
+    widget.setHorizontalHeaderLabels(["LIB", "CELL", "area"])
     item = widgets.TableWidgetItem("test")
     widget.setItem(0, 0, item)
     widget.setItem(1, 1, widgets.TableWidgetItem("test"))
@@ -64,7 +63,6 @@ def test_regexeditor(qtbot):
 
 
 def test_dataset(qtbot):
-
     class Test(fo.DataSet):
         i1 = fo.Bool(label="My first one")
         string1 = fo.String(label="My first one", regex="[0-9]")
@@ -89,8 +87,7 @@ def test_dataset(qtbot):
 
 def test_flagselectionwidget(qtbot):
     widget = custom_widgets.FlagSelectionWidget()
-    items = {"MultiLine": 0,
-             "Ignore case": 2}
+    items = {"MultiLine": 0, "Ignore case": 2}
     widget.add_items(items)
     assert widget.get_value() == 0
 
@@ -228,11 +225,9 @@ def test_selectionwidget(qtbot):
 
     class Test(object):
         pass
+
     test = Test()
-    items = {"Semicolon": ";",
-             "Tab": "tab",
-             "Comma": ",",
-             "class": test}
+    items = {"Semicolon": ";", "Tab": "tab", "Comma": ",", "class": test}
     widget.add_items(items)
     widget.add_items(("a", "b"))
     widget.add_tooltip_icon("test")

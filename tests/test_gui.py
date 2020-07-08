@@ -184,8 +184,7 @@ def test_regexpvalidator():
     repr(val)
 
 
-@pytest.mark.skipif(qtpy.API == "pyside2",
-                    reason="Only supported in PyQt5")
+@pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
 def test_regularexpressionvalidator():
     val = gui.RegularExpressionValidator()
     val.set_regex("[0-9]")

@@ -12,7 +12,6 @@ from prettyqt import core
 
 
 def test_abstracttablemodel():
-
     class Test(core.AbstractTableModel):
         def rowCount(self, parent=None):
             return 0
@@ -49,6 +48,7 @@ def test_buffer():
 def test_coreapplication(qapp):
     def test():
         pass
+
     core.CoreApplication.call_on_exit(test)
 
 
@@ -235,6 +235,7 @@ def test_threadpool():
 def test_timer():
     def test():
         pass
+
     core.Timer.single_shot(test)
 
 
