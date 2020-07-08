@@ -5,7 +5,7 @@
 from contextlib import contextmanager
 import functools
 import operator
-from typing import Callable, Dict, Optional
+from typing import Callable, Dict, Optional, Union
 
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -303,7 +303,9 @@ class Widget(QtWidgets.QWidget):
         self.set_contextmenu_policy("custom")
         self.customContextMenuRequested.connect(method)
 
-    def set_layout(self, layout):
+    def set_layout(
+        self, layout: Union[str, QtWidgets.QLayout], margin: Optional[int] = None
+    ):
         if layout in ["horizontal", "vertical"]:
             self.box = widgets.BoxLayout(layout)
         elif layout == "grid":
@@ -318,8 +320,11 @@ class Widget(QtWidgets.QWidget):
             self.box = custom_widgets.FlowLayout()
         else:
             self.box = layout
-        if self.box is not None:
-            self.setLayout(self.box)
+        if self.box is None:
+            return None
+        self.setLayout(self.box)
+        if margin is not None:
+            self.box.setContentsMargins(margin, margin, margin, margin)
 
     def center(self):
         qr = self.frameGeometry()
