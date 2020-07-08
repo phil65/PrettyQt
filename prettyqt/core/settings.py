@@ -176,7 +176,8 @@ class Settings(QtCore.QSettings):
     def setdefault(self, key: str, default=None):
         if not self.contains(key):
             self.set_value(key, default)
-        return self
+            return default
+        return self.value(key)
 
     def keys(self) -> List[str]:
         return self.allKeys()
@@ -187,12 +188,10 @@ class Settings(QtCore.QSettings):
     def items(self):
         return zip(self.keys(), self.values())
 
-    def pop(self, key: str, default=None):
+    def pop(self, key: str):
         if self.contains(key):
             return self.value(key)
-        elif default is not None:
-            return default
-        raise KeyError("Value not set.")
+        raise KeyError(key)
 
     def popitem(self) -> tuple:
         key = self.keys()[0]
