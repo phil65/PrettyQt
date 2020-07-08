@@ -8,6 +8,7 @@ import pickle
 
 import pytest
 
+from qtpy import QtCore
 from prettyqt import core
 
 
@@ -179,7 +180,7 @@ def test_settings(qapp):
     assert len(settings) == 1
     assert "test" in settings
     assert settings.value("test") == "value"
-    with core.Settings("ab", "cd", settings_id="test") as s:
+    with core.Settings(settings_id="test") as s:
         s.set_value("test2", "xx")
     with settings.write_array("test"):
         pass
@@ -195,6 +196,18 @@ def test_settings(qapp):
     path = pathlib.Path.cwd()
     for i in settings:
         pass
+    settings["test"] = True
+    assert settings["test"] is True
+    settings["test"] = "test"
+    assert settings["test"] == "test"
+    settings["test"] = dict(a="b")
+    assert settings["test"] == dict(a="b")
+    settings["test"] = (1, "b")
+    assert settings["test"] == (1, "b")
+    settings["test"] = QtCore.QByteArray(b"test")
+    assert settings["test"] == QtCore.QByteArray(b"test")
+    settings["test"] = b"test"
+    assert settings["test"] == b"test"
 
     settings.set_default_format("ini")
     assert settings.get_default_format() == "ini"
