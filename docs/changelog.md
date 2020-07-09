@@ -1,3 +1,11 @@
+## v0.83.0 (2020-07-09)
+
+### Feat
+
+- add Label.set_point_size
+- add self for label methods to allow chaining
+- Font.current_font context manager
+
 ## v0.82.0 (2020-07-09)
 
 ### Feat
