@@ -56,6 +56,9 @@ def test_font():
     with pytest.raises(ValueError):
         font.set_style_hint("test")
     font.set_style_hint("monospace")
+    font.set_weight("thin")
+    with pytest.raises(ValueError):
+        font.set_weight("test")
 
 
 def test_fontmetrics():

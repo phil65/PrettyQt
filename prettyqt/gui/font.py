@@ -20,6 +20,18 @@ STYLE_HINTS = bidict(
     system=QtGui.QFont.System,
 )
 
+WEIGHTS = bidict(
+    thin=QtGui.QFont.Thin,
+    extra_light=QtGui.QFont.ExtraLight,
+    light=QtGui.QFont.Light,
+    normal=QtGui.QFont.Normal,
+    medium=QtGui.QFont.Medium,
+    demi_bold=QtGui.QFont.DemiBold,
+    bold=QtGui.QFont.Bold,
+    extra_bold=QtGui.QFont.ExtraBold,
+    black=QtGui.QFont.Black,
+)
+
 
 class Font(QtGui.QFont):
     def __repr__(self):
@@ -72,6 +84,22 @@ class Font(QtGui.QFont):
         if hint not in STYLE_HINTS:
             raise ValueError("Invalid style hint")
         self.setStyleHint(STYLE_HINTS[hint])
+
+    def set_weight(self, weight: str):
+        """sets the font weight
+
+        Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
+                         "normal", "black"
+
+        Args:
+            weight: font weight
+
+        Raises:
+            ValueError: invalid font weight
+        """
+        if weight not in WEIGHTS:
+            raise ValueError(f"Invalid weight '{weight}'")
+        self.setWeight(WEIGHTS[weight])
 
 
 if __name__ == "__main__":
