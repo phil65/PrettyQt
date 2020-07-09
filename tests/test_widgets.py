@@ -374,6 +374,11 @@ def test_label(qtbot):
     label = widgets.Label()
     label.set_image("")
     label.set_text("testus")
+    label.set_bold()
+    label.set_italic()
+    label.set_weight("extra_light")
+    with pytest.raises(ValueError):
+        label.set_weight("test")
     with pytest.raises(ValueError):
         label.set_text_format("test")
     label.set_alignment(horizontal="left", vertical="top")

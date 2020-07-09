@@ -42,6 +42,8 @@ TEXT_FORMATS = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
 )
 
+WEIGHTS = gui.font.WEIGHTS
+
 
 QtWidgets.QLabel.__bases__ = (widgets.Frame,)
 
@@ -153,6 +155,28 @@ class Label(QtWidgets.QLabel):
 
     def set_text(self, text: str):
         self.setText(text)
+
+    def set_bold(self, bold: bool = True):
+        self.font().setBold(bold)
+
+    def set_italic(self, italic: bool = True):
+        self.font().setItalic(italic)
+
+    def set_weight(self, weight: str):
+        """sets the font weight
+
+        Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
+                         "normal", "black"
+
+        Args:
+            weight: font weight
+
+        Raises:
+            ValueError: invalid font weight
+        """
+        if weight not in WEIGHTS:
+            raise ValueError(f"Invalid weight '{weight}'")
+        self.font().setWeight(WEIGHTS[weight])
 
     def set_image(self, path: Union[pathlib.Path, str], width: int = 300):
         self.setScaledContents(True)
