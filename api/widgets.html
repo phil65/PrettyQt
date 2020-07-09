@@ -9020,15 +9020,15 @@ get_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>119
-120
-121
-122
-123
-124
+<pre><span></span>124
 125
 126
-127</pre>
+127
+128
+129
+130
+131
+132</pre>
 </div>
 </td>
 <td class="code">
@@ -9081,15 +9081,15 @@ get_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>146
-147
-148
-149
-150
-151
-152
+<pre><span></span>152
 153
-154</pre>
+154
+155
+156
+157
+158
+159
+160</pre>
 </div>
 </td>
 <td class="code">
@@ -9163,11 +9163,7 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>104
-105
-106
-107
-108
+<pre><span></span>108
 109
 110
 111
@@ -9176,7 +9172,12 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 114
 115
 116
-117</pre>
+117
+118
+119
+120
+121
+122</pre>
 </div>
 </td>
 <td class="code">
@@ -9195,6 +9196,7 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
     <span class="k">if</span> <span class="n">text_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TEXT_FORMATS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid text format"</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTextFormat</span><span class="p">(</span><span class="n">TEXT_FORMATS</span><span class="p">[</span><span class="n">text_format</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span>
 </code></pre>
 </div>
 </td>
@@ -9255,12 +9257,7 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>129
-130
-131
-132
-133
-134
+<pre><span></span>134
 135
 136
 137
@@ -9270,7 +9267,13 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 141
 142
 143
-144</pre>
+144
+145
+146
+147
+148
+149
+150</pre>
 </div>
 </td>
 <td class="code">
@@ -9291,6 +9294,7 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid text interaction mode"</span><span class="p">)</span>
     <span class="n">flags</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">ior</span><span class="p">,</span> <span class="p">[</span><span class="n">TEXT_INTERACTION</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">types</span><span class="p">])</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTextInteractionFlags</span><span class="p">(</span><span class="n">flags</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span>
 </code></pre>
 </div>
 </td>
@@ -9307,7 +9311,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents">
 <p>sets the font weight</p>
 <p>Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                 "normal", "black"</p>
+                 "extra_bold", normal", "black"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9352,21 +9356,24 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>165
-166
-167
-168
-169
-170
-171
-172
-173
-174
-175
-176
-177
-178
-179</pre>
+<pre><span></span>184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201</pre>
 </div>
 </td>
 <td class="code">
@@ -9375,7 +9382,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="sd">"""sets the font weight</span>
 
 <span class="sd">    Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",</span>
-<span class="sd">                     "normal", "black"</span>
+<span class="sd">                     "extra_bold", normal", "black"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        weight: font weight</span>
@@ -9385,7 +9392,10 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WEIGHTS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid weight '</span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">()</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">()</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span>
 </code></pre>
 </div>
 </td>
