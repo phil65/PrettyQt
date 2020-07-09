@@ -1,3 +1,10 @@
+## v0.82.0 (2020-07-09)
+
+### Feat
+
+- add Label.set_bold / set_italic / set_weight
+- added Font.set_weight
+
 ## v0.81.0 (2020-07-08)
 
 ### Feat
