@@ -5,6 +5,8 @@
 import functools
 import operator
 import pathlib
+import contextlib
+
 from typing import List, Optional, Union
 
 from qtpy import QtCore, QtWidgets
@@ -157,10 +159,14 @@ class Label(QtWidgets.QLabel):
         self.setText(text)
 
     def set_bold(self, bold: bool = True):
-        self.font().setBold(bold)
+        font = self.font()
+        font.setBold(bold)
+        self.setFont(font)
 
     def set_italic(self, italic: bool = True):
-        self.font().setItalic(italic)
+        font = self.font()
+        font.setItalic(italic)
+        self.setFont(font)
 
     def set_weight(self, weight: str):
         """sets the font weight
@@ -176,7 +182,15 @@ class Label(QtWidgets.QLabel):
         """
         if weight not in WEIGHTS:
             raise ValueError(f"Invalid weight '{weight}'")
-        self.font().setWeight(WEIGHTS[weight])
+        font = self.font()
+        font.setWeight(WEIGHTS[weight])
+        self.setFont(font)
+
+    @contextlib.contextmanager
+    def current_font(self):
+        font = self.font()
+        yield font
+        self.setFont(font)
 
     def set_image(self, path: Union[pathlib.Path, str], width: int = 300):
         self.setScaledContents(True)
