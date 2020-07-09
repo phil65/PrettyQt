@@ -89,7 +89,7 @@ class Font(QtGui.QFont):
         """sets the font weight
 
         Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                         "normal", "black"
+                         "extra_bold", normal", "black"
 
         Args:
             weight: font weight
