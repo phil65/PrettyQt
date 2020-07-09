@@ -89,6 +89,7 @@ class Label(QtWidgets.QLabel):
         self.setTextFormat(QtCore.Qt.RichText)
         self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
         self.setOpenExternalLinks(True)
+        return self
 
     def set_alignment(
         self, horizontal: Optional[str] = None, vertical: Optional[str] = None
@@ -102,6 +103,7 @@ class Label(QtWidgets.QLabel):
         else:
             return
         self.setAlignment(flag)
+        return self
 
     def set_text_format(self, text_format: str):
         """set the text format
@@ -117,6 +119,7 @@ class Label(QtWidgets.QLabel):
         if text_format not in TEXT_FORMATS:
             raise ValueError("Invalid text format")
         self.setTextFormat(TEXT_FORMATS[text_format])
+        return self
 
     def get_text_format(self) -> str:
         """returns current text format
@@ -144,6 +147,7 @@ class Label(QtWidgets.QLabel):
                 raise ValueError("Invalid text interaction mode")
         flags = functools.reduce(operator.ior, [TEXT_INTERACTION[t] for t in types])
         self.setTextInteractionFlags(flags)
+        return self
 
     def get_text_interaction(self) -> List[str]:
         """returns current text interaction mode
@@ -157,16 +161,19 @@ class Label(QtWidgets.QLabel):
 
     def set_text(self, text: str):
         self.setText(text)
+        return self
 
     def set_bold(self, bold: bool = True):
         font = self.font()
         font.setBold(bold)
         self.setFont(font)
+        return self
 
     def set_italic(self, italic: bool = True):
         font = self.font()
         font.setItalic(italic)
         self.setFont(font)
+        return self
 
     def set_weight(self, weight: str):
         """sets the font weight
@@ -185,6 +192,7 @@ class Label(QtWidgets.QLabel):
         font = self.font()
         font.setWeight(WEIGHTS[weight])
         self.setFont(font)
+        return self
 
     @contextlib.contextmanager
     def current_font(self):
@@ -200,6 +208,7 @@ class Label(QtWidgets.QLabel):
             f"<img src={str(path)!r} width={str(width)!r}/>"
             "</p></body></html>"
         )
+        return self
 
     @classmethod
     def image_from_path(cls, path: Union[pathlib.Path, str], parent=None) -> "Label":
