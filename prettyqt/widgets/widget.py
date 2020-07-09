@@ -10,7 +10,7 @@ from typing import Callable, Dict, Optional, Union
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, icons, colors
 
 
 POLICIES = bidict(
@@ -105,6 +105,15 @@ class Widget(QtWidgets.QWidget):
             super().resize(*size[0])
         else:
             super().resize(*size)
+
+    def set_icon(self, icon: icons.IconType):
+        """set the window icon
+
+        Args:
+            icon: icon to use
+        """
+        icon = icons.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
+        self.setWindowIcon(icon)
 
     def set_min_size(self, *size):
         self.setMinimumSize(*size)

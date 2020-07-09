@@ -7,7 +7,7 @@ import logging
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, icons, colors
+from prettyqt.utils import bidict
 
 
 DOCK_POSITIONS = bidict(
@@ -156,15 +156,6 @@ class MainWindow(QtWidgets.QMainWindow):
             for window in self.find_children(MainWindow, recursive=True):
                 if window.get_id():
                     window.save_window_state()
-
-    def set_icon(self, icon: icons.IconType):
-        """set the icon for the menu
-
-        Args:
-            icon: icon to use
-        """
-        icon = icons.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
-        self.setWindowIcon(icon)
 
     def add_widget_as_dock(
         self, name: str, title: str, vertical: bool = True, position: str = "left"

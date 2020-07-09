@@ -7,7 +7,6 @@ from typing import Union
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import icons, colors
 
 
 QtWidgets.QDialog.__bases__ = (widgets.Widget,)
@@ -55,15 +54,6 @@ class BaseDialog(QtWidgets.QDialog):
     def add_widget(self, widget):
         self.box += widget
         return widget
-
-    def set_icon(self, icon: icons.IconType):
-        """set the icon for the menu
-
-        Args:
-            icon: icon to use
-        """
-        icon = icons.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
-        self.setWindowIcon(icon)
 
     def add_buttonbox(self):
         button_box = widgets.DialogButtonBox.create(ok=self.accept, cancel=self.reject)
