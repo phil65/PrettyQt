@@ -61,6 +61,7 @@ class SidebarWidget(widgets.MainWindow):
                 title, icon, lambda: self.set_tab(page), checkable=True
             )
         button = self.sidebar.widgetForAction(act)
+        button.setFixedWidth(100)
         if len(self.area.box) == 1:
             button.setChecked(True)
         page._button = button
@@ -112,6 +113,8 @@ class SidebarWidget(widgets.MainWindow):
             self.sidebar.insertAction(self.spacer_action, act)
         if area == "bottom":
             self.sidebar.addAction(act)
+        button = self.sidebar.widgetForAction(act)
+        button.setFixedWidth(100)
         return act
 
 
