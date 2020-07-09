@@ -1,3 +1,9 @@
+## v0.83.1 (2020-07-09)
+
+### Refactor
+
+- move set_icon from window classes to widget class
+
 ## v0.83.0 (2020-07-09)
 
 ### Feat
