@@ -175,6 +175,12 @@ class Label(QtWidgets.QLabel):
         self.setFont(font)
         return self
 
+    def set_point_size(self, size: int):
+        font = self.font()
+        font.setPointSize(size)
+        self.setFont(font)
+        return self
+
     def set_weight(self, weight: str):
         """sets the font weight
 

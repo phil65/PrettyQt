@@ -377,6 +377,7 @@ def test_label(qtbot):
     label.set_bold()
     label.set_italic()
     label.set_weight("extra_light")
+    label.set_point_size(14)
     with pytest.raises(ValueError):
         label.set_weight("test")
     with pytest.raises(ValueError):
