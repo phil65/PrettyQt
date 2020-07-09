@@ -10,13 +10,6 @@ from prettyqt import gui
 from prettyqt.utils import bidict, colors
 
 
-WEIGHTS = bidict(
-    thin=QtGui.QFont.Thin,
-    light=QtGui.QFont.Light,
-    medium=QtGui.QFont.Medium,
-    bold=QtGui.QFont.Bold,
-)
-
 UNDERLINE_STYLES = bidict(
     none=QtGui.QTextCharFormat.NoUnderline,
     single=QtGui.QTextCharFormat.SingleUnderline,
@@ -27,6 +20,9 @@ UNDERLINE_STYLES = bidict(
     wave=QtGui.QTextCharFormat.WaveUnderline,
     spellcheck=QtGui.QTextCharFormat.SpellCheckUnderline,
 )
+
+
+WEIGHTS = gui.font.WEIGHTS
 
 STYLE_HINTS = gui.font.STYLE_HINTS
 
@@ -57,7 +53,8 @@ class TextCharFormat(QtGui.QTextCharFormat):
     def set_font_weight(self, weight: str):
         """sets the font weight
 
-        Valid values are "thin", "light", "medium" and "bold"
+        Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
+                         "normal", "black"
 
         Args:
             weight: font weight
