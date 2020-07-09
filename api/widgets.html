@@ -626,11 +626,6 @@
     keyPressEvent()
   </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.widgets.dialog.BaseDialog.set_icon">
-    set_icon()
-  </a>
-</li>
 </ul>
 </nav>
 </li>
@@ -1083,11 +1078,6 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.mainwindow.MainWindow.save_window_state">
     save_window_state()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.widgets.mainwindow.MainWindow.set_icon">
-    set_icon()
   </a>
 </li>
 <li class="md-nav__item">
@@ -1691,6 +1681,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.widget.Widget.set_contextmenu_policy">
     set_contextmenu_policy()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.widget.Widget.set_icon">
+    set_icon()
   </a>
 </li>
 <li class="md-nav__item">
@@ -2258,11 +2253,6 @@
     keyPressEvent()
   </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.widgets.dialog.BaseDialog.set_icon">
-    set_icon()
-  </a>
-</li>
 </ul>
 </nav>
 </li>
@@ -2715,11 +2705,6 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.mainwindow.MainWindow.save_window_state">
     save_window_state()
-  </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.widgets.mainwindow.MainWindow.set_icon">
-    set_icon()
   </a>
 </li>
 <li class="md-nav__item">
@@ -3323,6 +3308,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.widget.Widget.set_contextmenu_policy">
     set_contextmenu_policy()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.widget.Widget.set_icon">
+    set_icon()
   </a>
 </li>
 <li class="md-nav__item">
@@ -7222,13 +7212,13 @@ keyPressEvent<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>44
+<pre><span></span>43
+44
 45
 46
 47
 48
-49
-50</pre>
+49</pre>
 </div>
 </td>
 <td class="code">
@@ -7240,68 +7230,6 @@ keyPressEvent<span class="p">(</span><span class="bp">self</span><span class="p"
         <span class="bp">self</span><span class="o">.</span><span class="n">showNormal</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isMaximized</span><span class="p">()</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">showMaximized</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.widgets.dialog.BaseDialog.set_icon">
-<code class="highlight language-python">
-set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
-<p>set the icon for the menu</p>
-<p><strong>Parameters:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>icon</code></td>
-<td><code>Optional[Union[PyQt5.QtGui.QIcon, str, pathlib.Path]]</code></td>
-<td>
-<p>icon to use</p>
-</td>
-<td><em>required</em></td>
-</tr>
-</tbody>
-</table>
-<details class="quote">
-<summary>Source code in <code>prettyqt/widgets/dialog.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>59
-60
-61
-62
-63
-64
-65
-66</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
-    <span class="sd">"""set the icon for the menu</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        icon: icon to use</span>
-<span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
 </td>
@@ -10685,68 +10613,6 @@ saves GUI settings</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.widgets.mainwindow.MainWindow.set_icon">
-<code class="highlight language-python">
-set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
-<p>set the icon for the menu</p>
-<p><strong>Parameters:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>icon</code></td>
-<td><code>Optional[Union[PyQt5.QtGui.QIcon, str, pathlib.Path]]</code></td>
-<td>
-<p>icon to use</p>
-</td>
-<td><em>required</em></td>
-</tr>
-</tbody>
-</table>
-<details class="quote">
-<summary>Source code in <code>prettyqt/widgets/mainwindow.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>160
-161
-162
-163
-164
-165
-166
-167</pre>
-</div>
-</td>
-<td class="code">
-<div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
-    <span class="sd">"""set the icon for the menu</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        icon: icon to use</span>
-<span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
-</code></pre>
-</div>
-</td>
-</tr>
-</table>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.mainwindow.MainWindow.toggle_fullscreen">
 <code class="highlight language-python">
 toggle_fullscreen<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
@@ -10759,13 +10625,13 @@ toggle_fullscreen<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>196
-197
-198
-199
-200
-201
-202</pre>
+<pre><span></span>187
+188
+189
+190
+191
+192
+193</pre>
 </div>
 </td>
 <td class="code">
@@ -11847,7 +11713,7 @@ get_text_format<span class="p">(</span><span class="bp">self</span><span class="
 set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set the icon for the menu</p>
+<p>set the window icon</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -15330,16 +15196,16 @@ get_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>301
-302
-303
-304
-305
-306
-307
-308
-309
-310</pre>
+<pre><span></span>310
+311
+312
+313
+314
+315
+316
+317
+318
+319</pre>
 </div>
 </td>
 <td class="code">
@@ -15394,16 +15260,16 @@ str</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>227
-228
-229
-230
-231
-232
-233
-234
-235
-236</pre>
+<pre><span></span>236
+237
+238
+239
+240
+241
+242
+243
+244
+245</pre>
 </div>
 </td>
 <td class="code">
@@ -15515,21 +15381,21 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>285
-286
-287
-288
-289
-290
-291
-292
-293
-294
+<pre><span></span>294
 295
 296
 297
 298
-299</pre>
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308</pre>
 </div>
 </td>
 <td class="code">
@@ -15549,6 +15415,68 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
     <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">POLICIES</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"invalid selection behaviour"</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setContextMenuPolicy</span><span class="p">(</span><span class="n">POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.widget.Widget.set_icon">
+<code class="highlight language-python">
+set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>set the window icon</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>icon</code></td>
+<td><code>Optional[Union[PyQt5.QtGui.QIcon, str, pathlib.Path]]</code></td>
+<td>
+<p>icon to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>109
+110
+111
+112
+113
+114
+115
+116</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="sd">"""set the window icon</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        icon: icon to use</span>
+<span class="sd">    """</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
 </td>
@@ -15609,20 +15537,20 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>212
-213
-214
-215
-216
-217
-218
-219
-220
-221
+<pre><span></span>221
 222
 223
 224
-225</pre>
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234</pre>
 </div>
 </td>
 <td class="code">
@@ -15693,16 +15621,7 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>244
-245
-246
-247
-248
-249
-250
-251
-252
-253
+<pre><span></span>253
 254
 255
 256
@@ -15710,7 +15629,16 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 258
 259
 260
-261</pre>
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270</pre>
 </div>
 </td>
 <td class="code">
