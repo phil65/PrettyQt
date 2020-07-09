@@ -212,6 +212,11 @@
     set_style_hint()
   </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.font.Font.set_weight">
+    set_weight()
+  </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -591,6 +596,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.gui.font.Font.set_style_hint">
     set_style_hint()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.font.Font.set_weight">
+    set_weight()
   </a>
 </li>
 </ul>
@@ -1186,21 +1196,21 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
+<pre><span></span>72
 73
-74</pre>
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86</pre>
 </div>
 </td>
 <td class="code">
@@ -1220,6 +1230,101 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="k">if</span> <span class="n">hint</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STYLE_HINTS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid style hint"</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setStyleHint</span><span class="p">(</span><span class="n">STYLE_HINTS</span><span class="p">[</span><span class="n">hint</span><span class="p">])</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_weight">
+<code class="highlight language-python">
+set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>sets the font weight</p>
+<p>Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
+                 "normal", "black"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>weight</code></td>
+<td><code>str</code></td>
+<td>
+<p>font weight</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ValueError</code></td>
+<td>
+<p>invalid font weight</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/font.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span> 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""sets the font weight</span>
+
+<span class="sd">    Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",</span>
+<span class="sd">                     "normal", "black"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        weight: font weight</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        ValueError: invalid font weight</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WEIGHTS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid weight '</span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
 </code></pre>
 </div>
 </td>
@@ -1852,15 +1957,15 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>72
+<pre><span></span>69
+70
+71
+72
 73
 74
 75
 76
-77
-78
-79
-80</pre>
+77</pre>
 </div>
 </td>
 <td class="code">
@@ -1914,16 +2019,16 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 98
+<pre><span></span> 95
+ 96
+ 97
+ 98
  99
 100
 101
 102
 103
-104
-105
-106
-107</pre>
+104</pre>
 </div>
 </td>
 <td class="code">
@@ -1999,7 +2104,10 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>109
+<pre><span></span>106
+107
+108
+109
 110
 111
 112
@@ -2010,10 +2118,7 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 117
 118
 119
-120
-121
-122
-123</pre>
+120</pre>
 </div>
 </td>
 <td class="code">
@@ -2048,7 +2153,8 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 </h4>
 <div class="doc doc-contents">
 <p>sets the font weight</p>
-<p>Valid values are "thin", "light", "medium" and "bold"</p>
+<p>Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
+                 "normal", "black"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2093,7 +2199,11 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>57
+<pre><span></span>53
+54
+55
+56
+57
 58
 59
 60
@@ -2103,10 +2213,7 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 64
 65
 66
-67
-68
-69
-70</pre>
+67</pre>
 </div>
 </td>
 <td class="code">
@@ -2114,7 +2221,8 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""sets the font weight</span>
 
-<span class="sd">    Valid values are "thin", "light", "medium" and "bold"</span>
+<span class="sd">    Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",</span>
+<span class="sd">                     "normal", "black"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        weight: font weight</span>
@@ -2186,7 +2294,10 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>82
+<pre><span></span>79
+80
+81
+82
 83
 84
 85
@@ -2197,10 +2308,7 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 90
 91
 92
-93
-94
-95
-96</pre>
+93</pre>
 </div>
 </td>
 <td class="code">
