@@ -1,3 +1,10 @@
+## v0.84.0 (2020-07-10)
+
+### Feat
+
+- **sidebarwidget**: allow setting tab by object id
+- **Object**: name kwarg for Object.find_children, add Object.find_child
+
 ## v0.83.1 (2020-07-09)
 
 ### Refactor
