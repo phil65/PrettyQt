@@ -12,6 +12,7 @@ class SingleLineTextEdit(widgets.PlainTextEdit):
         font_metrics = gui.FontMetrics(self.font())
         self.row_height = font_metrics.lineSpacing()
         self.setFixedHeight(self.row_height * 1.5)
+        self.set_size_policy(vertical="fixed")
         self.set_line_wrap_mode("none")
         self.set_scrollbar_policy("always_off")
 
