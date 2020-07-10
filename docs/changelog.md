@@ -1,3 +1,17 @@
+## v0.85.0 (2020-07-10)
+
+### Feat
+
+- **dataset**: add RegexPattern DataItem
+- **RegexEditor**: use syntaxhighlighter for pattern
+- **RegexInput**: use syntaxhighlighter for pattern
+- **PlainTextEdit**: add set_syntaxhighlighter method
+- **Label**: add set_color method
+
+### Refactor
+
+- **CodeEditor**: use pygments for syntax highlighting
+
 ## v0.84.0 (2020-07-10)
 
 ### Feat
