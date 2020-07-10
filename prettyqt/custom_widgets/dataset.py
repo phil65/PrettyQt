@@ -204,6 +204,29 @@ class String(DataItem):
         return widget
 
 
+class RegexPattern(DataItem):
+    """
+    Construct a string data item
+        * label [string]: name
+        * value [string]: default value (optional)
+        * notempty [bool]: if True, empty string is not a valid value (opt.)
+    """
+
+    def __init__(self, label, value=None, notempty=False, **kwargs):
+        super().__init__(label, value=value, **kwargs)
+        self.notempty = notempty
+
+    def _create_widget(self):
+        widget = custom_widgets.SingleLineTextEdit()
+        if self.notempty:
+            val = custom_validators.NotEmptyValidator()
+            widget.set_validator(val)
+        widget.set_syntaxhighlighter("regex")
+        if self.value is not None:
+            widget.set_value(self.value)
+        return widget
+
+
 class Code(DataItem):
     """
     Construct a code data item
@@ -576,7 +599,8 @@ if __name__ == "__main__":
         buttonitem = Button(label="Folder", icon="mdi.folder", callback=print)
         stringornumber = StringOrNumber(label="StringOrNumber", value=2.4)
         code = Code(label="Test", value="class Test")
-        # code = Regex(label="Test", value="[", show_error=False)
+        regexpattern = RegexPattern("RegexPattern")
+        regex = Regex(label="Test", value="[", show_error=False)
 
     # class Test2(Test):
     #     boolitem = None
