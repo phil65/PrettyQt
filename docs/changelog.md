@@ -1,3 +1,9 @@
+## v0.85.1 (2020-07-10)
+
+### Fix
+
+- add missing pygments requirement
+
 ## v0.85.0 (2020-07-10)
 
 ### Feat
