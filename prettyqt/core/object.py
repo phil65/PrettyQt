@@ -2,6 +2,7 @@
 """
 """
 
+from typing import Optional, Union
 import collections
 from contextlib import contextmanager
 import itertools
@@ -52,9 +53,26 @@ class Object(QtCore.QObject):
     def id(self, name: str):
         self.setObjectName(name)
 
-    def find_children(self, typ, recursive: bool = True):
+    def find_children(
+        self,
+        typ=QtCore.QObject,
+        name: Optional[Union[str, QtCore.QRegularExpression]] = None,
+        recursive: bool = True,
+    ):
         if recursive:
             flag = QtCore.Qt.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindDirectChildrenOnly
-        return self.findChildren(typ, options=flag)
+        return self.findChildren(typ, name=name, options=flag)
+
+    def find_child(
+        self,
+        typ=QtCore.QObject,
+        name: Optional[Union[str, QtCore.QRegularExpression]] = None,
+        recursive: bool = True,
+    ):
+        if recursive:
+            flag = QtCore.Qt.FindChildrenRecursively
+        else:
+            flag = QtCore.Qt.FindDirectChildrenOnly
+        return self.findChild(typ, name, options=flag)

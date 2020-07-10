@@ -9,7 +9,7 @@ import pickle
 import pytest
 
 from qtpy import QtCore
-from prettyqt import core
+from prettyqt import core, widgets
 
 
 def test_abstracttablemodel():
@@ -110,7 +110,16 @@ def test_object():
     with open("data.pkl", "rb") as jar:
         obj = pickle.load(jar)
     assert obj.id == "test"
-    obj.find_children(core.Object, recursive=False)
+    w = widgets.Splitter("horizontal")
+    w1 = widgets.PushButton()
+    w1.set_id("w1")
+    w2 = widgets.PlainTextEdit()
+    w2.set_id("w2")
+    w.add(w1, w2)
+    assert w.find_children(widgets.PushButton, recursive=False) == [w1]
+    assert w.find_children(core.Object, name="w2", recursive=False) == [w2]
+    assert w.find_child(widgets.PlainTextEdit, recursive=True) == w2
+    assert w.find_child(core.Object, name="w2", recursive=False) == w2
 
 
 def test_point():
