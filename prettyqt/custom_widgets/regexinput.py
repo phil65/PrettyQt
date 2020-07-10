@@ -15,6 +15,7 @@ class RegexInput(widgets.Widget):
         super().__init__(parent=parent)
         self.set_layout("grid")
         self.lineedit = custom_widgets.SingleLineTextEdit()
+        self.lineedit.set_syntaxhighlighter("regex")
         self.tb_flags = custom_widgets.BoolDictToolButton(
             "Flags", icon="mdi.flag-variant-outline"
         )
