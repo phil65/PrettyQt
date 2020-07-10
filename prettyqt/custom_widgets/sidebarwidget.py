@@ -4,6 +4,8 @@
 
 from typing import Callable, Optional, Union
 
+from qtpy import QtWidgets
+
 from prettyqt import widgets
 from prettyqt.utils import icons
 
@@ -69,9 +71,11 @@ class SidebarWidget(widgets.MainWindow):
             self.area.box.setCurrentWidget(page)
         return page
 
-    def set_tab(self, item: Union[int, widgets.Widget]):
+    def set_tab(self, item: Union[str, int, widgets.Widget]):
         if isinstance(item, int):
             item = self.area.box[item]
+        elif isinstance(item, str):
+            item = self.find_child(QtWidgets.QWidget, name=item, recursive=False)
         if item not in self.area.box:
             raise ValueError("Layout does not contain the chosen widget")
         current = self.area.box.currentWidget()
