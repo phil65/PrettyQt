@@ -41,7 +41,7 @@ class Object(QtCore.QObject):
     def set_id(self, name: str):
         self.setObjectName(name)
 
-    def get_id(self):
+    def get_id(self) -> str:
         return self.objectName()
 
     @property
