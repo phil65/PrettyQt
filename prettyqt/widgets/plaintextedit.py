@@ -6,7 +6,7 @@ import contextlib
 
 from qtpy import QtGui, QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, gui, widgets, syntaxhighlighters
 from prettyqt.gui import textcursor
 from prettyqt.utils import bidict
 
@@ -88,6 +88,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def set_text(self, text: str):
         self.setPlainText(text)
+
+    def set_syntaxhighlighter(self, syntax: str):
+        self._hl = syntaxhighlighters.PygmentsHighlighter(self.document(), syntax)
 
     def text(self) -> str:
         return self.toPlainText()
