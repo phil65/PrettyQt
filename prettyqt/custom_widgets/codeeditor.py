@@ -4,7 +4,7 @@
 
 from qtpy import QtCore
 
-from prettyqt import core, gui, syntaxhighlighters, widgets
+from prettyqt import core, gui, widgets
 
 
 class LineNumberArea(widgets.Widget):
@@ -20,17 +20,8 @@ class LineNumberArea(widgets.Widget):
 
 
 class CodeEditor(widgets.PlainTextEdit):
-
-    lexers = {
-        "python": syntaxhighlighters.PythonHighlighter,
-        "yaml": syntaxhighlighters.JsonHighlighter,
-        "json": syntaxhighlighters.YamlHighlighter,
-    }
-    supported_langs = lexers.keys()
-
     def __init__(self, language="python", parent=None):
         super().__init__(parent=parent)
-        self.highlighter = None
         self.line_area = LineNumberArea(self)
         self.blockCountChanged.connect(self.update_line_area_width)
         self.updateRequest.connect(self.update_line_area)
@@ -39,9 +30,6 @@ class CodeEditor(widgets.PlainTextEdit):
         self.update_line_area_width(0)
         self.highlight_current_line()
         self.set_syntaxhighlighter(language)
-
-    def set_syntaxhighlighter(self, language: str):
-        self.highlighter = self.lexers[language](self.document())
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
@@ -89,10 +77,6 @@ class CodeEditor(widgets.PlainTextEdit):
             top = bottom
             bottom = top + self.blockBoundingRect(block).height()
             block_number += 1
-
-    def set_syntax(self, language: str):
-        lexer = self.lexers[language]
-        self.highlighter = lexer(self.document())
 
 
 if __name__ == "__main__":

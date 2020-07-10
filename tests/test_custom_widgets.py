@@ -159,7 +159,7 @@ def test_codeeditor(qtbot):
     editor = custom_widgets.CodeEditor()
     assert editor.text() == ""
     editor.line_area_width()
-    editor.set_syntax("python")
+    editor.set_syntaxhighlighter("python")
     event = QtGui.QResizeEvent(core.Size(10, 10), core.Size(20, 20))
     editor.resizeEvent(event)
     event = QtGui.QPaintEvent(core.Rect(0, 0, 20, 20))
