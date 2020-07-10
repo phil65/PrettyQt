@@ -31,7 +31,9 @@ class RegexEditorWidget(widgets.Widget):
         self.label_error.set_color("red")
         self.grid.add(self.label_error, 2, 0)
         self.layout_toprow = widgets.BoxLayout("horizontal")
-        self.lineedit_regex = widgets.LineEdit(regex)
+        self.lineedit_regex = custom_widgets.SingleLineTextEdit()
+        self.lineedit_regex.set_syntaxhighlighter("regex")
+        self.lineedit_regex.set_text(regex)
         self.lineedit_regex.set_min_size(400, 0)
         self.layout_toprow.add(self.lineedit_regex)
         self.tb_flags = custom_widgets.BoolDictToolButton(
