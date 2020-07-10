@@ -27,8 +27,8 @@ class RegexEditorWidget(widgets.Widget):
         self.matches = None
         self.groupbox = widgets.GroupBox(title="Regular expression")
         self.grid = widgets.GridLayout(self.groupbox)
-        self.label_error = widgets.Label("label_error")
-        self.label_error.setStyleSheet("color: #FF0000;")
+        self.label_error = widgets.Label()
+        self.label_error.set_color("red")
         self.grid.add(self.label_error, 2, 0)
         self.layout_toprow = widgets.BoxLayout("horizontal")
         self.lineedit_regex = widgets.LineEdit(regex)

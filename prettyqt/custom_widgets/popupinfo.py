@@ -25,8 +25,8 @@ class PopupInfo(widgets.Dialog):
         layout = widgets.BoxLayout("vertical")
         layout.set_margin(20)
         self.set_layout(layout)
-        self.setStyleSheet("background-color: black;")
-        self.label.setStyleSheet("color: white;")
+        self.set_background_color("black")
+        self.label.set_color("white")
         # self.setStyleSheet("")
         layout += self.label
         # signals.signals.popup_info.connect(self.popup)
