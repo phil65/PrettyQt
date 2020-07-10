@@ -12,7 +12,7 @@ from typing import List, Optional, Union
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, colors
 
 
 H_ALIGNMENTS = bidict(
@@ -198,6 +198,11 @@ class Label(QtWidgets.QLabel):
         font = self.font()
         font.setWeight(WEIGHTS[weight])
         self.setFont(font)
+        return self
+
+    def set_color(self, color: colors.ColorType):
+        color = colors.get_color(color)
+        self.setStyleSheet(f"color: {color.name()};")
         return self
 
     @contextlib.contextmanager
