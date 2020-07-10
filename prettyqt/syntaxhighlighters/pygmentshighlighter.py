@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
+import pathlib
+
 from pygments.formatters.html import HtmlFormatter
 from pygments.lexer import Error, RegexLexer, Text, _TokenType
-from pygments.lexers import Python3Lexer
+from pygments.lexers import get_lexer_by_name, load_lexer_from_file
 from pygments.styles import get_style_by_name
 
 from prettyqt import gui
@@ -101,7 +103,12 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self._document = self.document()
         self._formatter = HtmlFormatter(nowrap=True)
         self.set_style("default")
-        self._lexer = Python3Lexer()
+        if lexer == "regex":
+            path = pathlib.Path(__file__).parent
+            path = path / "pygments" / "regularexpressionlexer.py"
+            self._lexer = load_lexer_from_file(str(path))
+        else:
+            self._lexer = get_lexer_by_name(lexer)
 
     def highlightBlock(self, string):
         """ Highlight a block of text.
@@ -221,6 +228,6 @@ if __name__ == "__main__":
 
     app = widgets.app()
     editor = widgets.PlainTextEdit()
-    highlighter = PygmentsHighlighter(editor.document())
+    highlighter = PygmentsHighlighter(editor.document(), lexer="regex")
     editor.show()
     app.exec_()

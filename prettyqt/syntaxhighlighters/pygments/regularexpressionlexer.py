@@ -3,10 +3,7 @@ from pygments.lexer import RegexLexer, bygroups
 from pygments.token import Comment, Keyword, Name, Number, Operator, Text, Token
 
 
-__all__ = ["RegularExpressionLexer"]
-
-
-class RegularExpressionLexer(RegexLexer):
+class CustomLexer(RegexLexer):
     name = "regex"
     aliases = ["regex"]
     filenames = []

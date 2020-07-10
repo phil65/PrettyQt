@@ -12,6 +12,7 @@ from .yamlhighlighter import YamlHighlighter
 from .xmlhighlighter import XmlHighlighter
 from .regexmatchhighlighter import RegexMatchHighlighter
 from .markdownhighlighter import MarkdownHighlighter
+from .pygmentshighlighter import PygmentsHighlighter
 
 
 __all__ = [
@@ -22,4 +23,5 @@ __all__ = [
     "XmlHighlighter",
     "RegexMatchHighlighter",
     "MarkdownHighlighter",
+    "PygmentsHighlighter",
 ]
