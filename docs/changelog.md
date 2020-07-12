@@ -1,3 +1,9 @@
+## v0.88.0 (2020-07-13)
+
+### Feat
+
+- **ComboBox**: set_data method
+
 ## v0.87.0 (2020-07-13)
 
 ### Feat
