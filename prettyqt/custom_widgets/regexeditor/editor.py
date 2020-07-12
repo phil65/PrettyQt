@@ -27,19 +27,10 @@ class RegexEditorWidget(widgets.Widget):
         self.matches = None
         self.groupbox = widgets.GroupBox(title="Regular expression")
         self.grid = widgets.GridLayout(self.groupbox)
-        self.label_error = widgets.Label()
-        self.label_error.set_color("red")
-        self.grid.add(self.label_error, 2, 0)
         self.layout_toprow = widgets.BoxLayout("horizontal")
-        self.lineedit_regex = custom_widgets.SingleLineTextEdit()
-        self.lineedit_regex.set_syntaxhighlighter("regex")
-        self.lineedit_regex.set_text(regex)
-        self.lineedit_regex.set_min_size(400, 0)
-        self.layout_toprow.add(self.lineedit_regex)
-        self.tb_flags = custom_widgets.BoolDictToolButton(
-            "Flags", icon="mdi.flag-variant-outline"
-        )
-        self.layout_toprow.add(self.tb_flags)
+        self.regexinput = custom_widgets.RegexInput()
+        self.regexinput.set_min_size(400, 0)
+        self.layout_toprow.add(self.regexinput)
         self.grid.add(self.layout_toprow, 1, 0)
         self.left_layout.add(self.groupbox)
         self.groupbox_teststring = widgets.GroupBox(title="Test strings")
@@ -71,75 +62,22 @@ class RegexEditorWidget(widgets.Widget):
         self.right_layout.add(self.label_num_matches)
         self.right_layout.add(self.table_matches)
         model = custom_models.RegexMatchesModel([])
-        self.table_matches.setModel(model)
+        self.table_matches.set_model(model)
         self.table_matches.setColumnWidth(0, 60)
         self.table_matches.setColumnWidth(1, 60)
         self.groupbox_substitution.toggled.connect(self.lineedit_substitution.setVisible)
         self.groupbox_substitution.toggled.connect(self.textedit_substitution.setVisible)
-        self.label_error.hide()
-        self.lineedit_regex.textChanged.connect(self._update_view)
+        self.regexinput.lineedit.textChanged.connect(self._update_view)
         doc = self.textedit_teststring.document()
         self._highlighter = RegexMatchHighlighter(doc)
         self._highlighter.rehighlight()
         self.cb_quickref.stateChanged.connect(self.quick_ref_requested)
         self.tb_flags.triggered.connect(self._update_view)
         self.textedit_teststring.textChanged.connect(self._update_view)
-        dct = {
-            "multiline": "MultiLine",
-            "ignorecase": "Ignore case",
-            "ascii": "ASCII-only matching",
-            "dotall": "Dot matches newline",
-            "verbose": "Ignore whitespace",
-        }
-        self._mapping = {
-            "ignorecase": re.IGNORECASE,
-            "multiline": re.MULTILINE,
-            "ascii": re.ASCII,
-            "dotall": re.DOTALL,
-            "verbose": re.VERBOSE,
-        }
-        self.tb_flags.set_dict(dct)
         self._update_view()
 
-    @property
-    def string(self):
-        """
-        Gets/Sets the test string
-        """
-        return self.textedit_teststring.text()
-
-    @string.setter
-    def string(self, value):
-        self.textedit_teststring.set_text(value)
-
-    @property
-    def regex(self):
-        """
-        Gets/Sets the regular expression
-        :return:
-        """
-        return self.lineedit_regex.text()
-
-    @regex.setter
-    def regex(self, value):
-        self.lineedit_regex.set_text(value)
-
-    @property
-    def compile_flags(self):
-        """
-        Gets/Sets the compile flags
-        :return:
-        """
-        ret_val = 0
-        for identifier, flag in self._mapping.items():
-            if self.tb_flags[identifier]:
-                ret_val |= flag
-        return ret_val
-
-    @compile_flags.setter
-    def compile_flags(self, value):
-        for identifier, flag in self._mapping.items():
-            self.tb_flags[identifier] = bool(value & flag)
+    def __getattr__(self, attr):
+        return self.regexinput.__getattribute__(attr)
 
     def on_match_list_current_change(self, index_new, index_old):
         model = self.table_matches.model()
@@ -150,33 +88,27 @@ class RegexEditorWidget(widgets.Widget):
         self.prog = None
         self.matches = None
         with self.textedit_teststring.block_signals():
-            if not self.regex:
-                self.label_error.hide()
+            if not self.pattern:
                 self._highlighter.set_spans(None)
-                self.table_matches.setModel(None)
+                self.table_matches.set_model(None)
                 self.label_num_matches.set_text("0 matches")
                 return None
             try:
-                self.prog = re.compile(self.regex, self.compile_flags)
-            except sre_constants.error as e:
-                self.label_error.show()
-                self.label_error.set_text(f"Error: {e}")
+                self.prog = re.compile(self.pattern, self.compile_flags)
+            except sre_constants.error:
                 self._highlighter.set_spans(None)
-                self.table_matches.setModel(None)
+                self.table_matches.set_model(None)
                 self.label_num_matches.set_text("0 matches")
-            except re._regex_core.error as e:
-                self.label_error.show()
-                self.label_error.set_text(f"Error: {e}")
+            except re._regex_core.error:
                 self._highlighter.set_spans(None)
-                self.table_matches.setModel(None)
+                self.table_matches.set_model(None)
                 self.label_num_matches.set_text("0 matches")
             else:
-                self.label_error.hide()
                 text = self.textedit_teststring.text()
                 self.matches = list(self.prog.finditer(text))
                 self.label_num_matches.set_text(f"{len(self.matches)} matches")
                 model = custom_models.RegexMatchesModel(self.matches)
-                self.table_matches.setModel(model)
+                self.table_matches.set_model(model)
                 sel_model = self.table_matches.selectionModel()
                 sel_model.currentChanged.connect(self.on_match_list_current_change)
                 spans = [m.span() for m in self.matches]
