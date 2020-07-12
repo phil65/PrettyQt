@@ -107,12 +107,12 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         """
         self.setReadOnly(value)
 
-    def highlight_current_line(self):
+    def highlight_current_line(self, color="yellow"):
         extra_selections = []
 
         if not self.isReadOnly():
             selection = widgets.TextEdit.ExtraSelection()
-            line_color = gui.Color("yellow").lighter(160)
+            line_color = gui.Color(color)
             selection.format.setBackground(line_color)
             selection.format.setProperty(QtGui.QTextFormat.FullWidthSelection, True)
             selection.cursor = self.textCursor()
