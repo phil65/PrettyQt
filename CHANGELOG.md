@@ -1,3 +1,9 @@
+## v0.86.3 (2020-07-12)
+
+### Refactor
+
+- **RegexEditor**: code cleanup
+
 ## v0.86.2 (2020-07-12)
 
 ### Fix
