@@ -185,6 +185,12 @@ class ComboBox(QtWidgets.QComboBox):
     def set_text(self, text):
         self.setCurrentText(text)
 
+    def set_data(self, data):
+        idx = self.findData(data)
+        if idx == -1:
+            raise ValueError("invalid data")
+        self.setCurrentIndex(idx)
+
     def text(self):
         return self.currentText()
 
