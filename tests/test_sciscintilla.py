@@ -3,9 +3,13 @@
 
 """Tests for `prettyqt` package."""
 
+import pytest
+import qtpy
+
 from prettyqt import scintilla, gui
 
 
+@pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
 def test_sciscintilla(qtbot):
     widget = scintilla.SciScintilla()
     widget.define_marker("circle", 0)
