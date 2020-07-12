@@ -29,7 +29,7 @@ class Cursor(QtGui.QCursor):
             ValueError: shape does not exist
         """
         if shape not in SHAPES:
-            raise ValueError("Invalid shape type.")
+            raise ValueError(f"Invalid shape type '{shape}.")
         self.setShape(SHAPES[shape])
 
     def get_shape(self) -> str:
