@@ -2,6 +2,7 @@
 """
 """
 
+from typing import Optional
 
 from prettyqt import constants, core, widgets
 
@@ -10,9 +11,9 @@ class RegexMatchesModel(core.AbstractTableModel):
 
     HEADER = ["Start", "End", "Value", "Groups"]
 
-    def __init__(self, matches, parent=None):
+    def __init__(self, matches: Optional[list] = None, parent=None):
         super().__init__(parent=parent)
-        self.matches = matches
+        self.matches = matches if matches else list()
 
     def columnCount(self, parent=None):
         return len(self.HEADER)
