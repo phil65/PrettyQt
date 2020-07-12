@@ -193,6 +193,13 @@ class RegexEditorWidget(widgets.Widget):
             self.textedit_substitution.set_text("")
 
 
+def run():
+    app = widgets.app()
+    widget = RegexEditorWidget()
+    widget.show()
+    app.main_loop()
+
+
 if __name__ == "__main__":
     app = widgets.app()
     teststring = "aa356aa356aa356aa356aa356aa356aa356aa3a356aa356"

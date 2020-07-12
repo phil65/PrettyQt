@@ -11,7 +11,7 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-regexeditor = "prettyqt.custom_widgets.regexeditor.editor"
+regexeditor = "prettyqt.custom_widgets.regexeditor.editor:run"
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -21,7 +21,7 @@ qtawesome = "^0"
 docutils = "^0"
 orjson = "^3.2.0"
 regex = "^2020.6.8"
-dataclasses = {version = "^0", python="<3.7"}
+dataclasses = {version = "^0", python="~3.6"}
 
 PyQt5 = {version = "^5.15.0", optional=true}
 PyQtWebEngine = {version = "^5.15.0", optional=true}
