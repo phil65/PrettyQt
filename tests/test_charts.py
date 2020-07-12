@@ -21,6 +21,7 @@ def test_chart(qtbot):
 
 def test_chartview(qtbot):
     widget = charts.ChartView(parent=None)
+    widget.show()
     widget.get_image()
     qtbot.addWidget(widget)
     qtbot.keyPress(widget, QtCore.Qt.Key_F11)

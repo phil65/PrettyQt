@@ -181,6 +181,7 @@ def test_desktopwidget(qtbot):
 def test_dialog(qtbot):
     dlg = widgets.Dialog(layout="horizontal")
     qtbot.addWidget(dlg)
+    dlg.show()
     qtbot.keyPress(dlg, QtCore.Qt.Key_F11)
     dlg.delete_on_close()
     dlg.add_widget(widgets.RadioButton("test"))
