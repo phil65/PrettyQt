@@ -1,3 +1,9 @@
+## v0.87.0 (2020-07-13)
+
+### Feat
+
+- **ComboBox**: allow dict for add_items
+
 ## v0.86.3 (2020-07-12)
 
 ### Refactor
