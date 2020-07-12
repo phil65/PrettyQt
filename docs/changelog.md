@@ -1,3 +1,10 @@
+## v0.86.0 (2020-07-12)
+
+### Feat
+
+- add Scintilla CodeEditor
+- **PlainTextEdit**: add color argument for highlight_current_line
+
 ## v0.85.1 (2020-07-10)
 
 ### Fix
