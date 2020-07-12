@@ -3,6 +3,8 @@
 @author: Philipp Temminghoff
 """
 
+from typing import Optional
+
 from PyQt5 import Qsci
 
 from prettyqt import gui, widgets
@@ -91,7 +93,7 @@ MARKERS = bidict(
 WRAP_MODES = bidict(
     none=Qsci.QsciScintilla.WrapNone,
     word=Qsci.QsciScintilla.WrapWord,
-    character=Qsci.QsciScintilla.WrapCharacter,
+    anywhere=Qsci.QsciScintilla.WrapCharacter,
     whitespace=Qsci.QsciScintilla.WrapWhitespace,
 )
 
@@ -119,12 +121,14 @@ class SciScintilla(Qsci.QsciScintilla):
         # self.define_marker("right_arrow", ARROW_MARKER_NUM)
         # self.set_marker_background_color("red", ARROW_MARKER_NUM)
         self.set_brace_matching("sloppy")
-        self.highlight_current_line("#ffe4e4")
+        self.highlight_current_line()
 
         # Don't want to see the horizontal scrollbar at all
         # Use raw message to Scintilla here (all messages are documented
         # here: http://www.scintilla.org/ScintillaDoc.html)
         # self.SendScintilla(Qsci.QsciScintilla.SCI_SETHSCROLLBAR, 0)
+        self.SendScintilla(self.SCI_SETSCROLLWIDTHTRACKING, True)
+        self.SendScintilla(self.SCI_SETSCROLLWIDTH, 5)
         self.language = None
         self._lexer = None
 
@@ -134,14 +138,20 @@ class SciScintilla(Qsci.QsciScintilla):
     def set_margins_background_color(self, color: colors.ColorType):
         self.setMarginsBackgroundColor(colors.get_color(color))
 
-    def highlight_current_line(self, color: colors.ColorType):
+    def highlight_current_line(self, color: colors.ColorType = "yellow"):
         self.setCaretLineVisible(color is not None)
         self.setCaretLineBackgroundColor(colors.get_color(color))
 
-    def set_brace_matching(self, match_type: str):
+    def set_brace_matching(self, match_type: Optional[str]):
+        if match_type is None:
+            match_type = "none"
+        if match_type not in MATCH_TYPES:
+            raise ValueError(f"Invalid match type '{match_type}.")
         self.setBraceMatching(MATCH_TYPES[match_type])
 
-    def define_marker(self, marker: str, num):
+    def define_marker(self, marker: str, num: int):
+        if marker not in MARKERS:
+            raise ValueError(f"Invalid marker '{marker}.")
         self.markerDefine(MARKERS[marker], num)
 
     def set_text(self, text: str):
@@ -178,12 +188,19 @@ class SciScintilla(Qsci.QsciScintilla):
     def on_margin_clicked(self, nmargin, nline, modifiers):
         self.toggle_marker(nline, ARROW_MARKER_NUM)
 
-    def toggle_marker(self, nline, marker_num):
+    def toggle_marker(self, nline: int, marker_num: int):
         # Toggle marker for the line the margin was clicked on
         if self.markersAtLine(nline) != 0:
             self.markerDelete(nline, marker_num)
         else:
             self.markerAdd(nline, marker_num)
+
+    def set_wrap_mode(self, mode: Optional[str]):
+        if mode is None:
+            mode = "none"
+        if mode not in WRAP_MODES:
+            raise ValueError(f"Invalid wrap mode '{mode}.")
+        self.setWrapMode(WRAP_MODES[mode])
 
     def get_value(self) -> str:
         return self.text()
@@ -196,5 +213,6 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = SciScintilla()
     widget.set_syntaxhighlighter("python")
+    widget.set_wrap_mode("anywhere")
     widget.show()
     app.exec_()
