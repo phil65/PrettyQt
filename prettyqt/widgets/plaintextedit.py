@@ -14,7 +14,6 @@ from prettyqt.utils import bidict
 WRAP_MODES = bidict(
     none=QtGui.QTextOption.NoWrap,
     word=QtGui.QTextOption.WordWrap,
-    manual=QtGui.QTextOption.ManualWrap,
     anywhere=QtGui.QTextOption.WrapAnywhere,
     boundary_or_anywhere=QtGui.QTextOption.WrapAtWordBoundaryOrAnywhere,
 )
@@ -124,7 +123,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def set_wrap_mode(self, mode: str):
         """set word wrap mode
 
-        Allowed values are "none", "word", "manual", "anywhere", "boundary_or_anywhere"
+        Allowed values are "none", "word", "anywhere", "boundary_or_anywhere"
 
         Args:
             mode: word wrap mode to use
