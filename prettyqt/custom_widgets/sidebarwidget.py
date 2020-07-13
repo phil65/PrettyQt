@@ -13,7 +13,7 @@ from prettyqt.utils import icons
 class SidebarWidget(widgets.MainWindow):
     BUTTON_WIDTH = 100
 
-    def __init__(self, parent=None, show_settings=False):
+    def __init__(self, parent=None, show_settings=False, main_layout="vertical"):
         super().__init__(parent=None)
         self.sidebar = widgets.ToolBar()
         self.sidebar.set_id("SidebarWidget")
@@ -37,12 +37,11 @@ class SidebarWidget(widgets.MainWindow):
         self.add_toolbar(self.sidebar, "left")
         self.area = widgets.Widget()
         self.area.set_layout("stacked")
-
-        main_layout = widgets.BoxLayout("horizontal")
-        main_layout.addWidget(self.area)
-        main_layout.set_margin(0)
         w = widgets.Widget()
         w.set_layout(main_layout)
+        self.main_layout = w.box
+        self.main_layout.set_margin(0)
+        self.main_layout += self.area
         self.setCentralWidget(w)
 
     def on_orientation_change(self, orientation):
