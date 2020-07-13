@@ -122,7 +122,7 @@ class ToolBar(QtWidgets.QToolBar):
     def is_area_allowed(self, area: str):
         """check if toolbar is allowed at specified area
 
-        Valid values for area: "left", "right", "top", "bottom"
+        Valid values for area: "left", "right", "top", "bottom", "all"
 
         Args:
             area: area of the toolbar
@@ -131,7 +131,7 @@ class ToolBar(QtWidgets.QToolBar):
             ValueError: area does not exist
         """
         if area not in TOOLBAR_AREAS:
-            raise ValueError("Area not existing")
+            raise ValueError(f"Invalid area '{area}'")
         return self.isAreaAllowed(TOOLBAR_AREAS[area])
 
     def set_allowed_areas(self, *areas: str):
