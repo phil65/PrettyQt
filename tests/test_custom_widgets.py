@@ -228,7 +228,7 @@ def test_selectionwidget(qtbot):
         pass
 
     test = Test()
-    items = {"Semicolon": ";", "Tab": "tab", "Comma": ",", "class": test}
+    items = {";": "Semicolon", "tab": "Tab", ",": "Comma", test: "class"}
     widget.add_items(items)
     widget.add_items(("a", "b"))
     widget.add_tooltip_icon("test")

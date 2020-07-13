@@ -24,10 +24,10 @@ class SelectionWidget(widgets.GroupBox):
     def add_items(self, items):
         if isinstance(items, dict):
             for k, v in items.items():
-                self.add(k, v)
+                self.add(v, k)
         else:
             for i in items:
-                if isinstance(i, tuple):
+                if isinstance(i, (tuple, list)):
                     self.add(*i)
                 else:
                     self.add(i)
@@ -36,6 +36,7 @@ class SelectionWidget(widgets.GroupBox):
         for rb, data in self.buttons.items():
             if data == value:
                 rb.setChecked(True)
+                break
 
     def add(self, title: str, data=None):
         rb = widgets.RadioButton(title)
@@ -91,7 +92,7 @@ class SelectionWidget(widgets.GroupBox):
 if __name__ == "__main__":
     app = widgets.app()
     widget = SelectionWidget()
-    items = {"Semicolon": ";", "Tab": "\t", "Comma": ","}
+    items = {";": "Semicolon", "\t": "Tab", ",": "Comma"}
     widget.add_items(items)
     widget.add_custom(label="custom", regex=r"\S{1}")
     widget.show()
