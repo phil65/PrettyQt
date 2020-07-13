@@ -1,3 +1,10 @@
+## v0.90.0 (2020-07-13)
+
+### Feat
+
+- **Toolbar**: allow combinations of allowed areas for set_allowed_areas
+- **SidebarWidget**: add optional settings menu
+
 ## v0.89.1 (2020-07-13)
 
 ### Refactor
