@@ -91,11 +91,12 @@ class ComboBox(QtWidgets.QComboBox):
         if isinstance(items, dict):
             for k, v in items.items():
                 self.addItem(v, userData=k)
-        for i in items:
-            if isinstance(i, (tuple, list)):
-                self.add(*i)
-            else:
-                self.addItem(i, i)
+        else:
+            for i in items:
+                if isinstance(i, (tuple, list)):
+                    self.add(*i)
+                else:
+                    self.addItem(i, i)
 
     def add(self, label: str, data=NoData, icon: icons.IconType = None):
         if data is NoData:
