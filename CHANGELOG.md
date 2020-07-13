@@ -1,3 +1,10 @@
+## v0.91.0 (2020-07-13)
+
+### Feat
+
+- **SidebarWidget**: allow choosing layout
+- **MainWindow**: add show_blocking method
+
 ## v0.90.0 (2020-07-13)
 
 ### Feat
