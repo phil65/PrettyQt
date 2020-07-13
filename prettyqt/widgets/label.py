@@ -105,6 +105,10 @@ class Label(QtWidgets.QLabel):
         self.setAlignment(flag)
         return self
 
+    def set_indent(self, indent: int):
+        self.setIndent(indent)
+        return self
+
     def set_text_format(self, text_format: str):
         """set the text format
 
