@@ -178,6 +178,10 @@ class MainWindow(QtWidgets.QMainWindow):
         for i in dockwidgets:
             self.removeDockWidget(i)
 
+    def show_blocking(self):
+        self.set_modality("application")
+        self.show()
+
     def get_docks(self) -> list:
         return self.find_children(QtWidgets.QDockWidget, recursive=False)
 
