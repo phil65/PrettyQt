@@ -1,3 +1,9 @@
+## v0.89.1 (2020-07-13)
+
+### Refactor
+
+- **SelectionWidget**: switch to {data: label} dicts for add_items to be in line with RadioButton
+
 ## v0.89.0 (2020-07-13)
 
 ### Feat
