@@ -1,3 +1,13 @@
+## v0.88.1 (2020-07-13)
+
+### Refactor
+
+- **ComboBox**: use set_data for set_value
+
+### Fix
+
+- **ComboBox**: fix add_items method
+
 ## v0.88.0 (2020-07-13)
 
 ### Feat
