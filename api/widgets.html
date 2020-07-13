@@ -14372,9 +14372,7 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>50
-51
-52
+<pre><span></span>52
 53
 54
 55
@@ -14397,7 +14395,9 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 72
 73
 74
-75</pre>
+75
+76
+77</pre>
 </div>
 </td>
 <td class="code">
@@ -14467,15 +14467,15 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>84
-85
-86
+<pre><span></span>86
 87
 88
 89
 90
 91
-92</pre>
+92
+93
+94</pre>
 </div>
 </td>
 <td class="code">
@@ -14504,7 +14504,7 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 </h4>
 <div class="doc doc-contents">
 <p>check if toolbar is allowed at specified area</p>
-<p>Valid values for area: "left", "right", "top", "bottom"</p>
+<p>Valid values for area: "left", "right", "top", "bottom", "all"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -14549,9 +14549,7 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>120
-121
-122
+<pre><span></span>122
 123
 124
 125
@@ -14562,7 +14560,9 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 130
 131
 132
-133</pre>
+133
+134
+135</pre>
 </div>
 </td>
 <td class="code">
@@ -14570,7 +14570,7 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 <pre><span></span><code><span class="k">def</span> <span class="nf">is_area_allowed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""check if toolbar is allowed at specified area</span>
 
-<span class="sd">    Valid values for area: "left", "right", "top", "bottom"</span>
+<span class="sd">    Valid values for area: "left", "right", "top", "bottom", "all"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        area: area of the toolbar</span>
@@ -14579,7 +14579,7 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        ValueError: area does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">area</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TOOLBAR_AREAS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Area not existing"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid area '</span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isAreaAllowed</span><span class="p">(</span><span class="n">TOOLBAR_AREAS</span><span class="p">[</span><span class="n">area</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -15171,8 +15171,7 @@ get_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 </h4>
 <div class="doc doc-contents">
 <p>returns current contextmenu policy</p>
-<p>Possible values: "none", "prevent", "default", "actions",
-                 "custom", "showhide_menu"</p>
+<p>Possible values: "none", "prevent", "default", "actions", "custom"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -15196,16 +15195,15 @@ get_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>310
+<pre><span></span>309
+310
 311
 312
 313
 314
 315
 316
-317
-318
-319</pre>
+317</pre>
 </div>
 </td>
 <td class="code">
@@ -15213,13 +15211,12 @@ get_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""returns current contextmenu policy</span>
 
-<span class="sd">    Possible values: "none", "prevent", "default", "actions",</span>
-<span class="sd">                     "custom", "showhide_menu"</span>
+<span class="sd">    Possible values: "none", "prevent", "default", "actions", "custom"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        contextmenu policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">POLICIES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contextMenuPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">CONTEXT_POLICIES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contextMenuPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </td>
@@ -15335,8 +15332,7 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 </h4>
 <div class="doc doc-contents">
 <p>set contextmenu policy for given item view</p>
-<p>Allowed values are "none", "prevent", "default", "actions",
-                   "custom", "showhide_menu"</p>
+<p>Allowed values are "none", "prevent", "default", "actions", "custom"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -15394,8 +15390,7 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 304
 305
 306
-307
-308</pre>
+307</pre>
 </div>
 </td>
 <td class="code">
@@ -15403,8 +15398,7 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""set contextmenu policy for given item view</span>
 
-<span class="sd">    Allowed values are "none", "prevent", "default", "actions",</span>
-<span class="sd">                       "custom", "showhide_menu"</span>
+<span class="sd">    Allowed values are "none", "prevent", "default", "actions", "custom"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: contextmenu policy to use</span>
@@ -15412,9 +15406,9 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: policy does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">POLICIES</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONTEXT_POLICIES</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"invalid selection behaviour"</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setContextMenuPolicy</span><span class="p">(</span><span class="n">POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setContextMenuPolicy</span><span class="p">(</span><span class="n">CONTEXT_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </td>
