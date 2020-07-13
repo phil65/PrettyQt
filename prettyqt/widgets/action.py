@@ -6,8 +6,8 @@ from typing import Optional
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core
-from prettyqt.utils import bidict, icons
+from prettyqt import core, gui
+from prettyqt.utils import bidict
 
 
 PRIORITIES = bidict(
@@ -32,7 +32,7 @@ class Action(QtWidgets.QAction):
         self,
         parent=None,
         text: str = "",
-        icon: icons.IconType = None,
+        icon: gui.icon.IconType = None,
         shortcut: Optional[str] = None,
         tooltip: str = "",
     ):
@@ -88,13 +88,13 @@ class Action(QtWidgets.QAction):
     def set_checkable(self, value: bool):
         self.setCheckable(value)
 
-    def set_icon(self, icon: icons.IconType):
+    def set_icon(self, icon: gui.icon.IconType):
         """set the icon for the action
 
         Args:
             icon: icon to use
         """
-        icon = icons.get_icon(icon)
+        icon = gui.icon.get_icon(icon)
         self.setIcon(icon)
 
     def set_shortcut(self, shortcut):

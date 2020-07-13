@@ -7,7 +7,6 @@ from typing import Optional
 from qtpy import QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import icons
 
 
 QtWidgets.QToolBox.__bases__ = (widgets.Frame,)
@@ -48,12 +47,12 @@ class ToolBox(QtWidgets.QToolBox):
         return [self[i] for i in range(self.count())]
 
     def add_widget(
-        self, widget, title: Optional[str] = None, icon: icons.IconType = None
+        self, widget, title: Optional[str] = None, icon: gui.icon.IconType = None
     ):
         if title is None:
             title = widget.id
         if icon:
-            icon = icons.get_icon(icon)
+            icon = gui.icon.get_icon(icon)
             self.addItem(widget, icon, title)
         else:
             self.addItem(widget, title)

@@ -5,6 +5,7 @@
 contains QtGui-based classes
 """
 
+from .icon import Icon
 from .guiapplication import GuiApplication
 from .validator import Validator
 from .regexpvalidator import RegExpValidator
@@ -22,7 +23,6 @@ from .font import Font
 from .fontmetrics import FontMetrics
 from .region import Region
 from .paintdevice import PaintDevice
-from .icon import Icon
 from .image import Image
 from .pen import Pen
 from .picture import Picture

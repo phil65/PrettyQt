@@ -4,8 +4,8 @@
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets
-from prettyqt.utils import bidict, icons
+from prettyqt import core, gui, widgets
+from prettyqt.utils import bidict
 
 
 SCROLL_HINTS = bidict(
@@ -83,7 +83,7 @@ class ListWidget(QtWidgets.QListWidget):
             else:
                 self.add(i)
 
-    def add(self, label: str, data=NoData, icon: icons.IconType = None):
+    def add(self, label: str, data=NoData, icon: gui.icon.IconType = None):
         if data is NoData:
             data = label
         item = widgets.ListWidgetItem(label)

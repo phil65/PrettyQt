@@ -5,7 +5,6 @@
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import icons
 
 
 STYLES = dict(
@@ -41,13 +40,13 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
 
-    def set_icon(self, icon: icons.IconType):
+    def set_icon(self, icon: gui.icon.IconType):
         """set the icon for the button
 
         Args:
             icon: icon to use
         """
-        icon = icons.get_icon(icon)
+        icon = gui.icon.get_icon(icon)
         self.setIcon(icon)
 
     def set_style_icon(self, icon: str, size: int = 15):

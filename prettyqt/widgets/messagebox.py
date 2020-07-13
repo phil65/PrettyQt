@@ -6,8 +6,8 @@ from typing import Optional
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets
-from prettyqt.utils import bidict, icons
+from prettyqt import gui, widgets
+from prettyqt.utils import bidict
 
 
 ICONS = bidict(
@@ -51,7 +51,7 @@ QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 class MessageBox(QtWidgets.QMessageBox):
     def __init__(
         self,
-        icon: icons.IconType = None,
+        icon: gui.icon.IconType = None,
         title: Optional[str] = None,
         text: str = "",
         details: str = "",
@@ -71,16 +71,16 @@ class MessageBox(QtWidgets.QMessageBox):
                 self.add_button(b)
 
     @classmethod
-    def message(cls, text: str, title: str = None, icon: icons.IconType = None):
+    def message(cls, text: str, title: str = None, icon: gui.icon.IconType = None):
         m = cls("none", title, text)
         m.set_icon(icon)
         return m.show_blocking()
 
-    def set_icon(self, icon: icons.IconType):
+    def set_icon(self, icon: gui.icon.IconType):
         if icon in ICONS:
             self.setIcon(ICONS[icon])
             return None
-        icon = icons.get_icon(icon)
+        icon = gui.icon.get_icon(icon)
         self.setIconPixmap(icon.get_pixmap(size=64))
 
     def show_blocking(self):

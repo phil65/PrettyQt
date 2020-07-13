@@ -5,7 +5,6 @@
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
-from prettyqt.utils import icons
 
 
 class StandardItem(QtGui.QStandardItem):
@@ -39,11 +38,11 @@ class StandardItem(QtGui.QStandardItem):
         assert type(item) == StandardItem
         return item
 
-    def set_icon(self, icon: icons.IconType):
+    def set_icon(self, icon: gui.icon.IconType):
         """set the icon for the action
 
         Args:
             icon: icon to use
         """
-        icon = icons.get_icon(icon)
+        icon = gui.icon.get_icon(icon)
         self.setIcon(icon)

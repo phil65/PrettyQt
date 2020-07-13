@@ -9,20 +9,20 @@ from typing import Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import icons, colors
+from prettyqt.utils import colors
 
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
 
 class Application(QtWidgets.QApplication):
-    def set_icon(self, icon: icons.IconType):
+    def set_icon(self, icon: gui.icon.IconType):
         """set the default window icon
 
         Args:
             icon: icon to use
         """
-        icon = icons.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
+        icon = gui.icon.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
     def load_language_file(self, path: pathlib.Path):

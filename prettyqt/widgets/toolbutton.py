@@ -4,8 +4,8 @@
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets
-from prettyqt.utils import bidict, icons
+from prettyqt import gui, widgets
+from prettyqt.utils import bidict
 
 
 POPUP_MODES = bidict(
@@ -38,7 +38,7 @@ class ToolButton(QtWidgets.QToolButton):
         return menu[item]
 
     @classmethod
-    def for_menu(cls, menu: QtWidgets.QMenu, icon: icons.IconType = None):
+    def for_menu(cls, menu: QtWidgets.QMenu, icon: gui.icon.IconType = None):
         btn = cls()
         btn.setMenu(menu)
         btn.set_popup_mode("instant")

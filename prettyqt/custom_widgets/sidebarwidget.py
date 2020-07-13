@@ -6,8 +6,7 @@ from typing import Callable, Optional, Union
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import widgets
-from prettyqt.utils import icons
+from prettyqt import gui, widgets
 
 
 class SidebarWidget(widgets.MainWindow):
@@ -56,7 +55,7 @@ class SidebarWidget(widgets.MainWindow):
         self,
         item,
         title: str,
-        icon: icons.IconType = None,
+        icon: gui.icon.IconType = None,
         show: bool = False,
         shortcut: Optional[str] = None,
         area: str = "top",
@@ -119,7 +118,7 @@ class SidebarWidget(widgets.MainWindow):
     def add_action(
         self,
         title: str,
-        icon: icons.IconType = None,
+        icon: gui.icon.IconType = None,
         callback: Callable = None,
         checkable: bool = False,
         shortcut: Optional[str] = None,

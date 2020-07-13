@@ -6,15 +6,14 @@ from typing import Any, Callable, Optional, Union
 
 from qtpy import QtWidgets
 
-from prettyqt import core, widgets
-from prettyqt.utils import icons
+from prettyqt import core, gui, widgets
 
 
 QtWidgets.QMenu.__bases__ = (widgets.Widget,)
 
 
 class Menu(QtWidgets.QMenu):
-    def __init__(self, title: str = "", icon: icons.IconType = None, parent=None):
+    def __init__(self, title: str = "", icon: gui.icon.IconType = None, parent=None):
         super().__init__(title, parent=parent)
         self.set_icon(icon)
         self.setToolTipsVisible(True)
@@ -41,13 +40,13 @@ class Menu(QtWidgets.QMenu):
         for i in item:
             self.add_action(i)
 
-    def set_icon(self, icon: icons.IconType):
+    def set_icon(self, icon: gui.icon.IconType):
         """set the icon for the menu
 
         Args:
             icon: icon to use
         """
-        icon = icons.get_icon(icon)
+        icon = gui.icon.get_icon(icon)
         self.setIcon(icon)
 
     def add_separator(self, text: Optional[str] = None) -> widgets.WidgetAction:

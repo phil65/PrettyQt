@@ -7,7 +7,7 @@ from typing import Iterable, Union
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, icons
+from prettyqt.utils import bidict
 
 
 box = QtWidgets.QComboBox
@@ -98,11 +98,11 @@ class ComboBox(QtWidgets.QComboBox):
                 else:
                     self.addItem(i, i)
 
-    def add(self, label: str, data=NoData, icon: icons.IconType = None):
+    def add(self, label: str, data=NoData, icon: gui.icon.IconType = None):
         if data is NoData:
             data = label
         if icon is not None:
-            icon = icons.get_icon(icon)
+            icon = gui.icon.get_icon(icon)
             self.addItem(gui.Icon(icon), label, userData=data)
         else:
             self.addItem(label, userData=data)

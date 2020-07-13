@@ -7,7 +7,7 @@ from typing import Optional
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, icons
+from prettyqt.utils import bidict
 
 
 TAB_SHAPES = bidict(
@@ -161,7 +161,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self,
         item,
         label: str,
-        icon: icons.IconType = None,
+        icon: gui.icon.IconType = None,
         position: Optional[int] = None,
         show: bool = False,
     ):
@@ -175,7 +175,7 @@ class TabWidget(QtWidgets.QTabWidget):
         if not icon:
             index = self.insertTab(position, widget, label)
         else:
-            icon = icons.get_icon(icon)
+            icon = gui.icon.get_icon(icon)
             index = self.insertTab(position, widget, icon, label)
         if show:
             self.setCurrentIndex(index)
@@ -185,7 +185,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self,
         widget,
         name: str,
-        icon: icons.IconType = None,
+        icon: gui.icon.IconType = None,
         insert_at: Optional[int] = None,
     ):
         """

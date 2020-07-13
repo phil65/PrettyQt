@@ -10,7 +10,8 @@ try:
 except ImportError:
     from PySide2 import QtWinExtras
 
-from prettyqt.utils import bidict, icons
+from prettyqt import gui
+from prettyqt.utils import bidict
 
 TYPES = bidict(
     custom=QtWinExtras.QWinJumpListCategory.Custom,
@@ -44,9 +45,9 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
         title: str,
         exe_path: Union[str, pathlib.Path],
         arguments: Optional[list] = None,
-        icon: icons.IconType = None,
+        icon: gui.icon.IconType = None,
     ):
-        icon = icons.get_icon(icon)
+        icon = gui.icon.get_icon(icon)
         if arguments is None:
             arguments = []
         self.addLink(icon, title, str(exe_path), arguments)

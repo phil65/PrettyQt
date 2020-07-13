@@ -5,7 +5,7 @@
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui
-from prettyqt.utils import bidict, icons
+from prettyqt.utils import bidict
 
 
 STATES = bidict(
@@ -39,13 +39,13 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         self.set_icon(state["icon"])
         self.set_checkstate(state["checkstate"])
 
-    def set_icon(self, icon: icons.IconType):
+    def set_icon(self, icon: gui.icon.IconType):
         """set the icon for the action
 
         Args:
             icon: icon to use
         """
-        icon = icons.get_icon(icon)
+        icon = gui.icon.get_icon(icon)
         self.setIcon(0, icon)
 
     def set_checkstate(self, state: str):

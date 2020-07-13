@@ -8,8 +8,8 @@ import operator
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets
-from prettyqt.utils import bidict, icons
+from prettyqt import core, gui, widgets
+from prettyqt.utils import bidict
 
 
 STYLES = bidict(
@@ -39,7 +39,7 @@ class ToolBar(QtWidgets.QToolBar):
         self.menu_buttons = list()
 
     def add_menu_button(
-        self, label: str, icon: icons.IconType, menu: QtWidgets.QMenu
+        self, label: str, icon: gui.icon.IconType, menu: QtWidgets.QMenu
     ) -> widgets.ToolButton:
         btn = widgets.ToolButton.for_menu(menu)
         btn.setText(label)
@@ -96,11 +96,11 @@ class ToolBar(QtWidgets.QToolBar):
     def add_action(
         self,
         label: str,
-        icon: icons.IconType = None,
+        icon: gui.icon.IconType = None,
         callback: Optional[Callable] = None,
         checkable: bool = False,
     ):
-        icon = icons.get_icon(icon)
+        icon = gui.icon.get_icon(icon)
         action = self.addAction(icon, label)
         if callback is not None:
             action.triggered.connect(callback)
