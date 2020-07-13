@@ -11,6 +11,8 @@ from prettyqt.utils import icons
 
 
 class SidebarWidget(widgets.MainWindow):
+    BUTTON_WIDTH = 100
+
     def __init__(self, parent=None):
         super().__init__(parent=None)
         self.sidebar = widgets.ToolBar()
@@ -63,7 +65,7 @@ class SidebarWidget(widgets.MainWindow):
                 title, icon, lambda: self.set_tab(page), checkable=True
             )
         button = self.sidebar.widgetForAction(act)
-        button.setFixedWidth(100)
+        button.setFixedWidth(self.BUTTON_WIDTH)
         if len(self.area.box) == 1:
             button.setChecked(True)
         page._button = button
@@ -118,7 +120,7 @@ class SidebarWidget(widgets.MainWindow):
         if area == "bottom":
             self.sidebar.addAction(act)
         button = self.sidebar.widgetForAction(act)
-        button.setFixedWidth(100)
+        button.setFixedWidth(self.BUTTON_WIDTH)
         return act
 
 
