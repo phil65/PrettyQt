@@ -4,7 +4,7 @@
 
 from typing import Callable, Optional, Union
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
 from prettyqt.utils import icons
@@ -13,7 +13,7 @@ from prettyqt.utils import icons
 class SidebarWidget(widgets.MainWindow):
     BUTTON_WIDTH = 100
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, show_settings=False):
         super().__init__(parent=None)
         self.sidebar = widgets.ToolBar()
         self.sidebar.set_id("SidebarWidget")
@@ -22,7 +22,17 @@ class SidebarWidget(widgets.MainWindow):
         self.sidebar.set_contextmenu_policy("prevent")
         self.sidebar.setFloatable(False)
         self.sidebar.set_allowed_areas("all")
+        self.settings_menu = widgets.Menu()
         self.sidebar.set_icon_size(60)
+        if show_settings:
+            self.settings_btn = self.sidebar.add_menu_button(
+                "", icon="mdi.settings", menu=self.settings_menu
+            )
+            self.settings_btn.setFixedWidth(self.BUTTON_WIDTH)
+            self.settings_btn.setFixedHeight(24)
+            self.settings_btn.set_style("icon")
+            self.sidebar.orientationChanged.connect(self.on_orientation_change)
+            self.sidebar.add_separator()
         self.spacer_action = self.sidebar.add_spacer()
         self.add_toolbar(self.sidebar, "left")
         self.area = widgets.Widget()
@@ -34,6 +44,14 @@ class SidebarWidget(widgets.MainWindow):
         w = widgets.Widget()
         w.set_layout(main_layout)
         self.setCentralWidget(w)
+
+    def on_orientation_change(self, orientation):
+        if orientation == QtCore.Qt.Horizontal:
+            self.settings_btn.setFixedWidth(34)
+            self.settings_btn.setFixedHeight(34)
+        else:
+            self.settings_btn.setFixedWidth(self.BUTTON_WIDTH)
+            self.settings_btn.setFixedHeight(24)
 
     def add_tab(
         self,
@@ -127,7 +145,7 @@ class SidebarWidget(widgets.MainWindow):
 
 if __name__ == "__main__":
     app = widgets.app()
-    ex = SidebarWidget()
+    ex = SidebarWidget(show_settings=True)
     page_1 = widgets.PlainTextEdit()
     page_2 = widgets.ColorDialog()
     page_3 = widgets.FileDialog()
