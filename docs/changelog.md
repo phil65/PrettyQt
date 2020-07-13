@@ -1,3 +1,9 @@
+## v0.89.0 (2020-07-13)
+
+### Feat
+
+- **SidebarWidget**: make button width configurable
+
 ## v0.88.1 (2020-07-13)
 
 ### Refactor
