@@ -3,6 +3,8 @@
 """
 
 from typing import Callable, Optional
+import functools
+import operator
 
 from qtpy import QtCore, QtWidgets
 
@@ -132,8 +134,9 @@ class ToolBar(QtWidgets.QToolBar):
             raise ValueError("Area not existing")
         return self.isAreaAllowed(TOOLBAR_AREAS[area])
 
-    def set_allowed_areas(self, areas):
-        self.setAllowedAreas(TOOLBAR_AREAS[areas])
+    def set_allowed_areas(self, *areas: str):
+        flag = functools.reduce(operator.ior, [TOOLBAR_AREAS[t] for t in areas])
+        self.setAllowedAreas(flag)
 
 
 if __name__ == "__main__":
