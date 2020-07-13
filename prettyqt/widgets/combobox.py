@@ -178,10 +178,7 @@ class ComboBox(QtWidgets.QComboBox):
         return self.currentData()
 
     def set_value(self, value):
-        for i in range(self.count()):
-            if self.itemData(i) == value:
-                self.setCurrentIndex(i)
-                break
+        self.set_data(value)
 
     def set_text(self, text):
         self.setCurrentText(text)
