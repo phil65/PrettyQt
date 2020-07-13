@@ -19,6 +19,7 @@ class SidebarWidget(widgets.MainWindow):
         self.sidebar.set_id("SidebarWidget")
         self.sidebar.set_title("Sidebar")
         self.sidebar.set_style("text_below_icon")
+        self.sidebar.set_contextmenu_policy("prevent")
         self.sidebar.setFloatable(False)
         self.sidebar.set_allowed_areas("all")
         self.sidebar.set_icon_size(60)
