@@ -87,7 +87,7 @@ def test_dataset(qtbot):
 
 def test_flagselectionwidget(qtbot):
     widget = custom_widgets.FlagSelectionWidget()
-    items = {"MultiLine": 0, "Ignore case": 2}
+    items = {0: "MultiLine", 2: "Ignore case"}
     widget.add_items(items)
     assert widget.get_value() == 0
 

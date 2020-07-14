@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Mapping, Union, Iterable
+
 from prettyqt import core, widgets
 
 
@@ -17,10 +19,10 @@ class FlagSelectionWidget(widgets.GroupBox):
     def __iter__(self):
         return iter(self.buttons.items())
 
-    def add_items(self, items):
-        if isinstance(items, dict):
+    def add_items(self, items: Union[Iterable, Mapping]):
+        if isinstance(items, Mapping):
             for k, v in items.items():
-                self.add(k, v)
+                self.add(v, k)
         else:
             for i in items:
                 if isinstance(i, tuple):
@@ -60,7 +62,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     widget = FlagSelectionWidget()
-    items = {"MultiLine": re.MULTILINE, "Ignore case": re.IGNORECASE}
+    items = {re.MULTILINE: "MultiLine", re.IGNORECASE: "Ignore case"}
     widget.add_items(items)
     widget.show()
     app.exec_()
