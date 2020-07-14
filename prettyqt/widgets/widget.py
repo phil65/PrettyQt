@@ -381,6 +381,9 @@ class Widget(QtWidgets.QWidget):
         font.setPointSize(size)
         self.setFont(font)
 
+    def font_metrics(self):
+        return gui.FontMetrics(self.fontMetrics())
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
