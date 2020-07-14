@@ -1,3 +1,15 @@
+## v0.94.0 (2020-07-14)
+
+### Feat
+
+- **Widget**: add Widget.font_metrics()
+- **SpacerItem**: allow strings for size policy in ctor
+- allow Mapping for listwidget.add_items
+
+### Refactor
+
+- change to {value: label} dicts for FlagSelectionWidget.add_items
+
 ## v0.93.1 (2020-07-14)
 
 ### Refactor
