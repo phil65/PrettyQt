@@ -766,6 +766,14 @@ def test_styleoptionslider(qtbot):
     slider.set_vertical()
 
 
+def test_systemtrayicon(qtbot):
+    icon = widgets.SystemTrayIcon()
+    icon.set_icon("mdi.folder")
+    icon.show_message("test", "", "critical")
+    icon.show_message("test", "", "mdi.folder")
+    icon.show_message("test", "")
+
+
 def test_tabwidget(qtbot):
     widget = widgets.TabWidget(detachable=True)
     widget.add_tab(widgets.Widget(), "mdi.timer", show=True)

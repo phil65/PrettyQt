@@ -79,6 +79,7 @@ from .tablewidget import TableWidget
 from .abstractitemdelegate import AbstractItemDelegate
 from .itemdelegate import ItemDelegate
 from .styleditemdelegate import StyledItemDelegate
+from .systemtrayicon import SystemTrayIcon
 
 from .layoutitem import LayoutItem
 from .layout import Layout
@@ -201,4 +202,5 @@ __all__ = [
     "AbstractItemDelegate",
     "ItemDelegate",
     "StyledItemDelegate",
+    "SystemTrayIcon",
 ]
