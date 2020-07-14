@@ -56,7 +56,11 @@ class SelectionWidget(widgets.GroupBox):
         self.box += label
 
     def add_custom(
-        self, label: str = "Other", typ: str = "string", regex: Optional[str] = None
+        self,
+        label: str = "Other",
+        typ: str = "string",
+        default=None,
+        regex: Optional[str] = None,
     ):
         if typ == "string":
             self.widget_custom = widgets.LineEdit()
@@ -68,6 +72,8 @@ class SelectionWidget(widgets.GroupBox):
             raise ValueError(typ)
         # TODO: Enable this or add BAR radio and option.
         self.widget_custom.set_disabled()
+        if default is not None:
+            self.widget_custom.set_value(default)
         self.rb_other.setText(label)
         self.rb_other.toggled.connect(self.widget_custom.set_enabled)
         self.widget_custom.value_changed.connect(lambda: self.update_choice(True))
