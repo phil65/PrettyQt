@@ -13,7 +13,7 @@ class SelectionWidget(widgets.GroupBox):
     def __init__(self, label="", layout="horizontal", parent=None):
         super().__init__(title=label, parent=parent)
         self.box = widgets.BoxLayout(layout)
-        self.lineedit_custom = widgets.LineEdit()
+        self.widget_custom = None
         self.rb_other = widgets.RadioButton()
         self.buttons = dict()
         self.set_layout(self.box)
@@ -55,23 +55,33 @@ class SelectionWidget(widgets.GroupBox):
         label.setPixmap(pixmap)
         self.box += label
 
-    def add_custom(self, label: str = "Other", regex: Optional[str] = None):
+    def add_custom(
+        self, label: str = "Other", typ: str = "string", regex: Optional[str] = None
+    ):
+        if typ == "string":
+            self.widget_custom = widgets.LineEdit()
+        elif typ == "int":
+            self.widget_custom = widgets.SpinBox()
+        elif typ == "float":
+            self.widget_custom = widgets.DoubleSpinBox()
+        else:
+            raise ValueError(typ)
         # TODO: Enable this or add BAR radio and option.
-        self.lineedit_custom.set_disabled()
+        self.widget_custom.set_disabled()
         self.rb_other.setText(label)
-        self.rb_other.toggled.connect(self.lineedit_custom.set_enabled)
-        self.lineedit_custom.textChanged.connect(lambda: self.update_choice(True))
-        if regex:
-            self.lineedit_custom.set_regex_validator(regex)
+        self.rb_other.toggled.connect(self.widget_custom.set_enabled)
+        self.widget_custom.value_changed.connect(lambda: self.update_choice(True))
+        if regex and typ == "string":
+            self.widget_custom.set_regex_validator(regex)
         self.box += self.rb_other
-        self.box += self.lineedit_custom
+        self.box += self.widget_custom
 
     def current_choice(self):
         for k, v in self.buttons.items():
             if k.isChecked():
                 return v
         if self.rb_other.isChecked():
-            return self.lineedit_custom.text()
+            return self.widget_custom.get_value()
         return
 
     @core.Slot(bool)
@@ -94,6 +104,7 @@ if __name__ == "__main__":
     widget = SelectionWidget()
     items = {";": "Semicolon", "\t": "Tab", ",": "Comma"}
     widget.add_items(items)
-    widget.add_custom(label="custom", regex=r"\S{1}")
+    widget.add_custom(label="custom", typ="float")
     widget.show()
     app.exec_()
+    print(widget.get_value())
