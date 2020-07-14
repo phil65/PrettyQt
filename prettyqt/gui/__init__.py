@@ -23,6 +23,7 @@ from .font import Font
 from .fontmetrics import FontMetrics
 from .region import Region
 from .paintdevice import PaintDevice
+from .pagedpaintdevice import PagedPaintDevice
 from .image import Image
 from .pen import Pen
 from .picture import Picture
@@ -54,6 +55,7 @@ __all__ = [
     "FontMetrics",
     "Region",
     "PaintDevice",
+    "PagedPaintDevice",
     "Icon",
     "Image",
     "Pen",
