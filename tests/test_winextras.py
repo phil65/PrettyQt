@@ -3,17 +3,25 @@
 
 """Tests for `prettyqt` package."""
 
+import sys
 import pathlib
 
-from prettyqt import winextras
+import pytest
+
+try:
+    from prettyqt import winextras
+except (ImportError, ModuleNotFoundError):
+    pass
 
 
+@pytest.mark.skipif(sys.patform != "win32", reason="Only supported on windows")
 def test_winjumplistcategory(qapp):
     cat = winextras.WinJumpListCategory()
     assert len(cat) == 0
     assert cat.get_type() == "custom"
 
 
+@pytest.mark.skipif(sys.patform != "win32", reason="Only supported on windows")
 def test_winjumplistitem(qapp):
     item = winextras.WinJumpListItem("destination")
     item.set_title("test")
@@ -27,6 +35,7 @@ def test_winjumplistitem(qapp):
     assert item.get_type() == "destination"
 
 
+@pytest.mark.skipif(sys.patform != "win32", reason="Only supported on windows")
 def test_winjumplist(qapp):
     jumplist = winextras.WinJumpList()
     jumplist.add_category("Test")
