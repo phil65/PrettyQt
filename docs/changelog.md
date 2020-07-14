@@ -1,3 +1,9 @@
+## v0.93.1 (2020-07-14)
+
+### Refactor
+
+- typecheck for Mapping instead of dict for combobox / selectionwidget add_items method
+
 ## v0.93.0 (2020-07-14)
 
 ### Feat
