@@ -715,6 +715,10 @@ def test_stackedlayout(qtbot):
     return True
 
 
+def test_spaceritem(qtbot):
+    widgets.SpacerItem(0, 0, "expanding", "expanding")
+
+
 def test_spinbox(qtbot):
     widget = widgets.SpinBox(default_value=5)
     widget.set_disabled()
@@ -1051,6 +1055,7 @@ def test_widget(qtbot):
     widget.set_min_height(200)
     widget.set_max_height(200)
     widget.set_font_size(20)
+    widget.font_metrics()
     widget.set_id("test")
     widget.set_unique_id()
     with pytest.raises(ValueError):
