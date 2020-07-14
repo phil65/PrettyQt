@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Union, Iterable, Mapping
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
@@ -76,12 +78,16 @@ class ListWidget(QtWidgets.QListWidget):
     def get_children(self) -> list:
         return [self.item(index) for index in range(self.count())]
 
-    def add_items(self, items):
-        for i in items:
-            if isinstance(i, (tuple, list)):
-                self.add(*i)
-            else:
-                self.add(i)
+    def add_items(self, items: Union[Iterable, Mapping]):
+        if isinstance(items, Mapping):
+            for k, v in items.items():
+                self.add(v, k)
+        else:
+            for i in items:
+                if isinstance(i, (tuple, list)):
+                    self.add(*i)
+                else:
+                    self.add(i)
 
     def add(self, label: str, data=NoData, icon: gui.icon.IconType = None):
         if data is NoData:
