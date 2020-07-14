@@ -35,7 +35,7 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
         return TYPES.inv[self.type()]
 
     def add_destination(self, destination: Union[str, pathlib.Path]):
-        self.addDestination(destination)
+        self.addDestination(str(destination))
 
     def set_title(self, title: str):
         self.setTitle(title)
