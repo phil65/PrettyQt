@@ -204,6 +204,18 @@ class Settings(QtCore.QSettings):
             self.set_value(k, v)
 
 
+def register_extensions(*exts, app_name=None, app_path=None):
+    s = Settings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.NativeFormat)
+    if app_path is None:
+        app_path = core.Dir.toNativeSeparators(core.CoreApplication.applicationFilePath())
+    if app_name is None:
+        app_name = core.CoreApplication.applicationName()
+    for ext in exts:
+        s.setValue(f"{ext}/DefaultIcon/.", app_path)  # perhaps ,0 after app_path
+        s.setValue(f"{ext}/.", app_name)
+    s.setValue(f"{app_name}/shell/open/command/.", app_path + " %1")
+
+
 if __name__ == "__main__":
     settings = Settings("1", "2")
     settings["1"] = True
