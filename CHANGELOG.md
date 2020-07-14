@@ -1,3 +1,13 @@
+## v0.93.0 (2020-07-14)
+
+### Feat
+
+- add register_extensions function to settings module
+
+### Refactor
+
+- **Settings**: do not override value method
+
 ## v0.92.1 (2020-07-14)
 
 ### Fix
