@@ -1438,6 +1438,29 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.systemtrayicon">
+    systemtrayicon
+  </a>
+<nav aria-label="systemtrayicon" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.systemtrayicon.SystemTrayIcon">
+    SystemTrayIcon
+  </a>
+<nav aria-label="SystemTrayIcon" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.systemtrayicon.SystemTrayIcon.set_icon">
+    set_icon()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.tabbar">
     tabbar
   </a>
@@ -3065,6 +3088,29 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.systemtrayicon">
+    systemtrayicon
+  </a>
+<nav aria-label="systemtrayicon" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.systemtrayicon.SystemTrayIcon">
+    SystemTrayIcon
+  </a>
+<nav aria-label="SystemTrayIcon" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.systemtrayicon.SystemTrayIcon.set_icon">
+    set_icon()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.tabbar">
     tabbar
   </a>
@@ -3392,25 +3438,25 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>44
+<pre><span></span>43
+44
 45
 46
 47
 48
 49
-50
-51</pre>
+50</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""set the icon for the button</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -6177,13 +6223,13 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""set the icon for the action</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -6485,13 +6531,13 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""set the default window icon</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -8948,15 +8994,15 @@ get_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>124
-125
-126
-127
-128
+<pre><span></span>128
 129
 130
 131
-132</pre>
+132
+133
+134
+135
+136</pre>
 </div>
 </td>
 <td class="code">
@@ -9009,15 +9055,15 @@ get_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>152
-153
-154
-155
-156
+<pre><span></span>156
 157
 158
 159
-160</pre>
+160
+161
+162
+163
+164</pre>
 </div>
 </td>
 <td class="code">
@@ -9091,11 +9137,7 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>108
-109
-110
-111
-112
+<pre><span></span>112
 113
 114
 115
@@ -9105,7 +9147,11 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 119
 120
 121
-122</pre>
+122
+123
+124
+125
+126</pre>
 </div>
 </td>
 <td class="code">
@@ -9185,11 +9231,7 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>134
-135
-136
-137
-138
+<pre><span></span>138
 139
 140
 141
@@ -9201,7 +9243,11 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 147
 148
 149
-150</pre>
+150
+151
+152
+153
+154</pre>
 </div>
 </td>
 <td class="code">
@@ -9284,11 +9330,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>184
-185
-186
-187
-188
+<pre><span></span>188
 189
 190
 191
@@ -9301,7 +9343,11 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 198
 199
 200
-201</pre>
+201
+202
+203
+204
+205</pre>
 </div>
 </td>
 <td class="code">
@@ -10262,13 +10308,13 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""set the icon for the action</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -11245,7 +11291,8 @@ add_action<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 75
+<pre><span></span> 74
+ 75
  76
  77
  78
@@ -11283,8 +11330,7 @@ add_action<span class="p">(</span><span class="bp">self</span><span class="p">,<
 110
 111
 112
-113
-114</pre>
+113</pre>
 </div>
 </td>
 <td class="code">
@@ -11388,7 +11434,8 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>53
+<pre><span></span>52
+53
 54
 55
 56
@@ -11407,8 +11454,7 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 69
 70
 71
-72
-73</pre>
+72</pre>
 </div>
 </td>
 <td class="code">
@@ -11476,25 +11522,25 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>44
+<pre><span></span>43
+44
 45
 46
 47
 48
 49
-50
-51</pre>
+50</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""set the icon for the menu</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -11751,11 +11797,11 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">icon</span> <span class="ow">in</span> <span class="n">ICONS</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">ICONS</span><span class="p">[</span><span class="n">icon</span><span class="p">])</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIconPixmap</span><span class="p">(</span><span class="n">icon</span><span class="o">.</span><span class="n">get_pixmap</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">64</span><span class="p">))</span>
 </code></pre>
 </div>
@@ -13443,6 +13489,86 @@ set_vertical<span class="p">(</span><span class="bp">self</span><span class="p">
 </div>
 </div>
 <div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.widgets.systemtrayicon">
+<code>systemtrayicon</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.widgets.systemtrayicon.SystemTrayIcon">
+<code>SystemTrayIcon</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.systemtrayicon.SystemTrayIcon.set_icon">
+<code class="highlight language-python">
+set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>set the system tray icon</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>icon</code></td>
+<td><code>Optional[Union[PyQt5.QtGui.QIcon, str, pathlib.Path]]</code></td>
+<td>
+<p>icon to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/systemtrayicon.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>27
+28
+29
+30
+31
+32
+33
+34</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="sd">"""set the system tray icon</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        icon: icon to use</span>
+<span class="sd">    """</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.widgets.tabbar">
 <code>tabbar</code>
 </h2>
@@ -13949,7 +14075,7 @@ closing it, and placing the content back into the DetachableTabWidget</p>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">widget</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">insert_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""</span>
@@ -15130,13 +15256,13 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""set the icon for the action</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -15463,13 +15589,13 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">icons</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""set the window icon</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">icons</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
