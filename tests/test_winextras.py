@@ -8,10 +8,7 @@ import pathlib
 
 import pytest
 
-try:
-    from prettyqt import winextras
-except (ImportError, ModuleNotFoundError):
-    pass
+from prettyqt import winextras
 
 
 @pytest.mark.skipif(sys.platform != "win32", reason="Only supported on windows")
