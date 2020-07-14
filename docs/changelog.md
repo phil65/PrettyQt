@@ -1,3 +1,11 @@
+## v0.95.0 (2020-07-14)
+
+### Feat
+
+- **SelectionWidget**: different options for custom type
+- add PagedPaintDevice
+- **Widget**: add set_margin method
+
 ## v0.94.0 (2020-07-14)
 
 ### Feat
