@@ -1,3 +1,11 @@
+## v0.92.0 (2020-07-14)
+
+### Feat
+
+- add widgets.SystemTrayIcon
+- add winextras module
+- **Label**: set_indent method
+
 ## v0.91.0 (2020-07-13)
 
 ### Feat
