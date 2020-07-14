@@ -1,3 +1,9 @@
+## v0.96.0 (2020-07-14)
+
+### Feat
+
+- **SelectionWidget**: default keyword argument for add_custom
+
 ## v0.95.0 (2020-07-14)
 
 ### Feat
