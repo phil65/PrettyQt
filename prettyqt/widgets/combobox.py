@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Iterable, Union
+from typing import Iterable, Union, Mapping
 
 from qtpy import QtCore, QtWidgets
 
@@ -87,8 +87,8 @@ class ComboBox(QtWidgets.QComboBox):
         data = self.itemData(index)
         self.value_changed.emit(data)
 
-    def add_items(self, items: Union[Iterable, dict]):
-        if isinstance(items, dict):
+    def add_items(self, items: Union[Iterable, Mapping]):
+        if isinstance(items, Mapping):
             for k, v in items.items():
                 self.addItem(v, userData=k)
         else:

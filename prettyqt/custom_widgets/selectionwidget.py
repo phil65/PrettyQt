@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Optional
+from typing import Optional, Mapping, Iterable, Union
 
 from prettyqt import core, gui, widgets
 
@@ -21,8 +21,8 @@ class SelectionWidget(widgets.GroupBox):
     def __iter__(self):
         return iter(self.buttons.items())
 
-    def add_items(self, items):
-        if isinstance(items, dict):
+    def add_items(self, items: Union[Iterable, Mapping]):
+        if isinstance(items, Mapping):
             for k, v in items.items():
                 self.add(v, k)
         else:
