@@ -41,7 +41,7 @@ class Settings(QtCore.QSettings):
             self.endGroup()
 
     def __getitem__(self, index: str):
-        return self.value(index)
+        return self.get_value(index)
 
     def __setitem__(self, name: str, value):
         return self.set_value(name, value)
@@ -72,10 +72,10 @@ class Settings(QtCore.QSettings):
             raise ValueError("no app name defined")
         self.setValue(key, dict(value=value))
 
-    def value(self, key: str, default=None):
+    def get_value(self, key: str, default=None):
         if not self.contains(key):
             return default
-        val = super().value(key)
+        val = self.value(key)
         # this is for migration
         if not isinstance(val, dict) or "value" not in val:
             self.set_value(key, val)
@@ -173,31 +173,31 @@ class Settings(QtCore.QSettings):
     # Dictionary interface
 
     def get(self, key: str, default=None):
-        return self.value(key, default)
+        return self.get_value(key, default)
 
     def setdefault(self, key: str, default=None):
         if not self.contains(key):
             self.set_value(key, default)
             return default
-        return self.value(key)
+        return self.get_value(key)
 
     def keys(self) -> List[str]:
         return self.allKeys()
 
     def values(self):
-        return (self.value(key) for key in self.allKeys())
+        return (self.get_value(key) for key in self.allKeys())
 
     def items(self):
         return zip(self.keys(), self.values())
 
     def pop(self, key: str):
         if self.contains(key):
-            return self.value(key)
+            return self.get_value(key)
         raise KeyError(key)
 
     def popitem(self) -> tuple:
         key = self.keys()[0]
-        return (key, self.value(key))
+        return (key, self.get_value(key))
 
     def update(self, other: Mapping):
         for k, v in other.items():
