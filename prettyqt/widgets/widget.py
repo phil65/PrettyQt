@@ -384,6 +384,9 @@ class Widget(QtWidgets.QWidget):
     def font_metrics(self):
         return gui.FontMetrics(self.fontMetrics())
 
+    def set_margin(self, margin: int):
+        self.setContentsMargins(margin, margin, margin, margin)
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
