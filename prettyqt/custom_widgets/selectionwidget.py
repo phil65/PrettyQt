@@ -79,8 +79,10 @@ class SelectionWidget(widgets.GroupBox):
         self.widget_custom.value_changed.connect(lambda: self.update_choice(True))
         if regex and typ == "string":
             self.widget_custom.set_regex_validator(regex)
-        self.box += self.rb_other
-        self.box += self.widget_custom
+        layout = widgets.BoxLayout("horizontal")
+        layout += self.rb_other
+        layout += self.widget_custom
+        self.box += layout
 
     def current_choice(self):
         for k, v in self.buttons.items():
@@ -107,7 +109,7 @@ class SelectionWidget(widgets.GroupBox):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = SelectionWidget()
+    widget = SelectionWidget(layout="horizontal")
     items = {";": "Semicolon", "\t": "Tab", ",": "Comma"}
     widget.add_items(items)
     widget.add_custom(label="custom", typ="float")
