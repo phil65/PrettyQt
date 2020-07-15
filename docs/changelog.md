@@ -1,3 +1,9 @@
+## v0.98.4 (2020-07-15)
+
+### Fix
+
+- use qta default icon color instead of black for default
+
 ## v0.98.3 (2020-07-15)
 
 ### Refactor
