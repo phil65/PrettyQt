@@ -1,3 +1,11 @@
+## v0.98.3 (2020-07-15)
+
+### Refactor
+
+- properly set stylesheets by using contextmanager
+- **FontDialog**: do not override current_font contextmanager
+- move current_font context manager to Widget class
+
 ## v0.98.2 (2020-07-15)
 
 ### Fix
