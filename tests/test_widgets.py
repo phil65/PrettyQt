@@ -502,11 +502,14 @@ def test_listwidgetitem(qtbot):
 def test_mainwindow(qtbot):
     window = widgets.MainWindow()
     window.set_icon("mdi.timer")
-    w = widgets.DockWidget()
-    window.add_dockwidget(w, "left")
+    dockwidget = widgets.DockWidget()
+    window.add_dockwidget(dockwidget, "left")
+    widget = widgets.MainWindow()
+    window.set_widget(widget)
     window.show()
     window.close()
-    window.load_window_state()
+    window.save_window_state(recursive=True)
+    window.load_window_state(recursive=True)
     window.toggle_fullscreen()
     window.toggle_fullscreen()
     window.add_toolbar(widgets.ToolBar())
@@ -514,7 +517,7 @@ def test_mainwindow(qtbot):
         window.add_toolbar(widgets.ToolBar(), position="test")
     assert len(window.get_toolbars()) == 1
     assert len(window.get_docks()) == 1
-    window.remove_dockwidgets([w])
+    window.remove_dockwidgets([dockwidget])
     window.add_toolbar_break()
     with window.edit_stylesheet() as ss:
         ss.QMainWindow.separator.setValues(width="1px", border="none")
