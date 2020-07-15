@@ -1,3 +1,11 @@
+## v0.97.0 (2020-07-15)
+
+### Feat
+
+- **gui**: add FontDatabase
+- **widgets**: add Completer
+- **widgets**: add ActionGroup
+
 ## v0.96.0 (2020-07-14)
 
 ### Feat
