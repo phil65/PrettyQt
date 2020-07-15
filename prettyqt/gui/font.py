@@ -61,7 +61,7 @@ class Font(QtGui.QFont):
         return gui.FontMetrics(self)
 
     def set_size(self, size: int):
-        pass
+        self.setPointSize(size)
 
     @classmethod
     def mono(cls, size=8):
