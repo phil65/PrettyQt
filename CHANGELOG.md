@@ -1,3 +1,13 @@
+## v0.98.0 (2020-07-15)
+
+### Feat
+
+- **widgets**: add StyleFactory
+
+### Refactor
+
+- **FontDatabase**: make add_fonts_from_folder a classmethod
+
 ## v0.97.0 (2020-07-15)
 
 ### Feat
