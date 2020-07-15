@@ -1,5 +1,5 @@
 site_name: PrettyQt
-site_url: https://readthedocs.org/projects/prettyqt/
+site_url: https://phil65.github.io/PrettyQt/
 nav:
     - Home: index.md
     # - API: mkapi/api/prettyqt
