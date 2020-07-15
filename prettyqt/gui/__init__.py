@@ -21,6 +21,7 @@ from .textblockuserdata import TextBlockUserData
 from .color import Color
 from .font import Font
 from .fontmetrics import FontMetrics
+from .fontdatabase import FontDatabase
 from .region import Region
 from .paintdevice import PaintDevice
 from .pagedpaintdevice import PagedPaintDevice
@@ -53,6 +54,7 @@ __all__ = [
     "Color",
     "Font",
     "FontMetrics",
+    "FontDatabase",
     "Region",
     "PaintDevice",
     "PagedPaintDevice",

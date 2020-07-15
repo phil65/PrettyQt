@@ -5,6 +5,7 @@
 
 import pickle
 import pytest
+import pathlib
 
 from qtpy import QtCore
 import qtpy
@@ -59,6 +60,13 @@ def test_font():
     font.set_weight("thin")
     with pytest.raises(ValueError):
         font.set_weight("test")
+
+
+def test_fontdatabase():
+    db = gui.FontDatabase()
+    p = pathlib.Path()
+    db.add_fonts_from_folder(p)
+    db.get_system_font("smallest_readable")
 
 
 def test_fontmetrics():
