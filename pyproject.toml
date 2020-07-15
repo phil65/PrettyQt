@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "PrettyQt"
+name = "prettyqt"
 version = "0.98.0"
 description = "A pythonic layer on top of qtpy"
 readme = 'docs/index.md'
@@ -30,6 +30,7 @@ PyQtChart = {version = "^5.15.0", optional=true}
 QScintilla = {version = "^2.11.5", optional=true}
 darkdetect = {version = "^0", markers = "sys_platform == 'darwin'"}
 pygments = "^2.6.1"
+qstylizer = "^0.1.9"
 
 
 [tool.poetry.dev-dependencies]

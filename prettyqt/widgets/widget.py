@@ -5,9 +5,10 @@
 from contextlib import contextmanager
 import functools
 import operator
-from typing import Callable, Dict, Optional, Union
+from typing import Callable, Optional, Union
 
 from qtpy import QtCore, QtGui, QtWidgets
+import qstylizer.parser
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, colors
@@ -282,14 +283,16 @@ class Widget(QtWidgets.QWidget):
         pol.setVerticalStretch(qpol.verticalStretch())
         return pol
 
-    def set_background_color(self, color):
-        self.setStyleSheet(f"background-color: {color};")
+    def set_background_color(self, color: colors.ColorType):
+        col_str = "" if color is None else colors.get_color(color).name()
+        with self.edit_stylesheet() as ss:
+            ss.backgroundColor.setValue(col_str)
 
-    def set_stylesheet(self, item: str, dct: Dict[str, str]) -> str:
-        ss = "; ".join(f"{k.replace('_', '-')}: {v}" for k, v in dct.items())
-        stylesheet = f"{item} {{{ss};}}"
-        self.setStyleSheet(stylesheet)
-        return stylesheet
+    @contextmanager
+    def edit_stylesheet(self):
+        ss = qstylizer.parser.parse(self.styleSheet())
+        yield ss
+        self.setStyleSheet(ss.toString())
 
     def set_contextmenu_policy(self, policy: str):
         """set contextmenu policy for given item view

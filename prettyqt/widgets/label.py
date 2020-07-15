@@ -205,8 +205,12 @@ class Label(QtWidgets.QLabel):
         return self
 
     def set_color(self, color: colors.ColorType):
-        color = colors.get_color(color)
-        self.setStyleSheet(f"color: {color.name()};")
+        with self.edit_stylesheet() as ss:
+            if color is None:
+                ss.color.setValue("")
+            else:
+                color = colors.get_color(color)
+                ss.color.setValue(color.name())
         return self
 
     @contextlib.contextmanager

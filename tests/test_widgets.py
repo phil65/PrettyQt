@@ -404,6 +404,8 @@ def test_label(qtbot):
     label.set_indent(4)
     label.set_weight("extra_light")
     label.set_point_size(14)
+    label.set_color("red")
+    label.set_color(None)
     with pytest.raises(ValueError):
         label.set_weight("test")
     with pytest.raises(ValueError):
@@ -513,8 +515,8 @@ def test_mainwindow(qtbot):
     assert len(window.get_docks()) == 1
     window.remove_dockwidgets([w])
     window.add_toolbar_break()
-    ss = dict(width="1px", border="none")
-    window.set_stylesheet("QMainWindow::separator", ss)
+    with window.edit_stylesheet() as ss:
+        ss.QMainWindow.separator.setValues(width="1px", border="none")
     window.createPopupMenu()
     window.add_widget_as_dock("test", "Title")
     with open("data.pkl", "wb") as jar:
