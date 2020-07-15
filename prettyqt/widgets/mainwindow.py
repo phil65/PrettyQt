@@ -26,6 +26,7 @@ TOOLBAR_AREAS = bidict(
     none=QtCore.Qt.NoToolBarArea,
 )
 
+logger = logging.getLogger(__name__)
 
 QtWidgets.QMainWindow.__bases__ = (widgets.Widget,)
 
@@ -132,11 +133,11 @@ class MainWindow(QtWidgets.QMainWindow):
         state = settings.get(f"{name}.state")
         if geom is not None and state is not None:
             try:
-                logging.debug(f"Loading window state for {name}...")
+                logger.debug(f"Loading window state for {name}...")
                 self.restoreGeometry(geom)
                 self.restoreState(state)
             except TypeError:
-                logging.error("Wrong type for window state. Probably Qt binding switch?")
+                logger.error("Wrong type for window state. Probably Qt binding switch?")
         if recursive:
             for window in self.find_children(MainWindow, recursive=True):
                 if window.get_id():
@@ -149,7 +150,7 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         settings = core.Settings()
         name = self.get_id()
-        logging.debug(f"Saving window state for {name}...")
+        logger.debug(f"Saving window state for {name}...")
         settings[f"{name}.geometry"] = self.saveGeometry()
         settings[f"{name}.state"] = self.saveState()
         if recursive:

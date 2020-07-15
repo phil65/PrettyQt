@@ -12,6 +12,7 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import constants, gui, widgets
 from prettyqt.utils import bidict
 
+logger = logging.getLogger(__name__)
 
 TRIGGERS = bidict(
     none=QtWidgets.QAbstractItemView.NoEditTriggers,
@@ -53,7 +54,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if self.model() is None:
             return None
         if self.model().rowCount() * self.model().columnCount() > 1_000_000:
-            logging.warning("Too many cells to select.")
+            logger.warning("Too many cells to select.")
             return None
         super().selectAll()
 
