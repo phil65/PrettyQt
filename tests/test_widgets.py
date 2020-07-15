@@ -153,6 +153,22 @@ def test_commandlinkbutton(qtbot):
     repr(widget)
 
 
+def test_completer(qtbot):
+    completer = widgets.Completer()
+    completer.set_sort_mode("unsorted")
+    with pytest.raises(ValueError):
+        completer.set_sort_mode("test")
+    assert completer.get_sort_mode() == "unsorted"
+    completer.set_completion_mode("popup")
+    with pytest.raises(ValueError):
+        completer.set_completion_mode("test")
+    assert completer.get_completion_mode() == "popup"
+    completer.set_filter_mode("contains")
+    with pytest.raises(ValueError):
+        completer.set_filter_mode("test")
+    assert completer.get_filter_mode() == "contains"
+
+
 def test_dateedit(qtbot):
     widget = widgets.DateEdit()
     widget.set_disabled()

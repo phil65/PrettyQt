@@ -68,6 +68,7 @@ from .timeedit import TimeEdit
 from .calendarwidget import CalendarWidget
 from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
+from .completer import Completer
 from .progressbar import ProgressBar
 from .columnview import ColumnView
 from .listview import ListView
@@ -179,6 +180,7 @@ __all__ = [
     "CalendarWidget",
     "PlainTextEdit",
     "TextBrowser",
+    "Completer",
     "ProgressBar",
     "ColumnView",
     "ListView",
