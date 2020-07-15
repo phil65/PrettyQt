@@ -102,7 +102,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setInputMask(mask)
 
     def _set_validation_color(self, state: bool = True):
-        color = "orange" if not self.is_valid() else "white"
+        color = "orange" if not self.is_valid() else None
         self.set_background_color(color)
 
     def set_echo_mode(self, mode: str):

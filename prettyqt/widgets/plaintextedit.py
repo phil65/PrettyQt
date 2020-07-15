@@ -158,7 +158,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             self._set_validation_color()
 
     def _set_validation_color(self, state: bool = True):
-        color = "orange" if not self.is_valid() else "white"
+        color = "orange" if not self.is_valid() else None
         self.set_background_color(color)
 
     def set_validator(self, validator: gui.Validator):
