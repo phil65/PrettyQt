@@ -3,7 +3,7 @@
 """
 
 import pathlib
-from typing import Union
+from typing import Union, Optional
 
 
 import qtawesome as qta
@@ -15,17 +15,13 @@ from prettyqt import core, gui
 IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
 
 
-def get_icon(icon: IconType, color: str = "black"):
-    if icon is None:
-        icon = gui.Icon()
-    elif isinstance(icon, str):
-        if icon.startswith("mdi."):
-            icon = gui.Icon(qta.icon(icon, color=color))
+def get_icon(icon: IconType, color: Optional[str] = None):
+    if isinstance(icon, str) and icon.startswith("mdi."):
+        if color is not None:
+            return Icon(qta.icon(icon, color=color))
         else:
-            icon = gui.Icon(icon)
-    elif isinstance(icon, pathlib.Path):
-        icon = gui.Icon(icon)
-    return icon
+            return Icon(qta.icon(icon))
+    return Icon(icon)
 
 
 def set_defaults(*args, **kwargs):
@@ -70,7 +66,7 @@ class Icon(QtGui.QIcon):
         if color.isValid():
             bitmap = gui.Pixmap(16, 16)
             bitmap.fill(color)
-            icon = gui.Icon(bitmap)
+            icon = cls(bitmap)
         else:
             icon = cls(qta.icon("mdi.card-outline"))
         return icon
