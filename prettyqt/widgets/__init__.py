@@ -40,6 +40,7 @@ from .mainwindow import MainWindow
 from .listwidgetitem import ListWidgetItem
 from .treewidgetitem import TreeWidgetItem
 from .action import Action
+from .actiongroup import ActionGroup
 from .widgetaction import WidgetAction
 from .toolbutton import ToolButton
 from .tooltip import ToolTip
@@ -149,6 +150,7 @@ __all__ = [
     "ListWidgetItem",
     "TreeWidgetItem",
     "Action",
+    "ActionGroup",
     "WidgetAction",
     "ToolButton",
     "ToolTip",

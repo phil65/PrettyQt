@@ -33,6 +33,14 @@ def test_action(qtbot):
     action.set_menu(widgets.Menu())
 
 
+def test_actiongroup(qtbot):
+    group = widgets.ActionGroup(None)
+    group.set_exclusion_policy("exclusive")
+    with pytest.raises(ValueError):
+        group.set_exclusion_policy("test")
+    assert group.get_exclusion_policy() == "exclusive"
+
+
 def test_boxlayout(qtbot):
     layout = widgets.BoxLayout("horizontal", margin=0)
     widget = widgets.RadioButton("test")
