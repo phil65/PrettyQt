@@ -138,8 +138,8 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         Args:
             width: width in pixels
         """
-        stylesheet = f"QScrollBar:horizontal {{height: {width}px;}}"
-        self.horizontalScrollBar().setStyleSheet(stylesheet)
+        with self.h_scrollbar.edit_stylesheet() as ss:
+            ss.QScrollBar.horizontal.height.setValue(f"{width}px")
 
     def set_vertical_scrollbar_width(self, width: int):
         """sets the vertical scrollbar width
@@ -147,8 +147,8 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         Args:
             width: width in pixels
         """
-        stylesheet = f"QScrollBar:vertical {{width: {width}px;}}"
-        self.verticalScrollBar().setStyleSheet(stylesheet)
+        with self.v_scrollbar.edit_stylesheet() as ss:
+            ss.QScrollBar.horizontal.height.setValue(f"{width}px")
 
     def scroll_to_top(self):
         """scroll to the top of the scroll area

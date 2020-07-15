@@ -20,7 +20,6 @@ class ButtonDelegate(widgets.ItemDelegate):
             btn.set_disabled()
         else:
             btn.clicked.connect(btn_callback)
-        # btn.setStyleSheet("border:1px;")
         return btn
 
     def setEditorData(self, editor, index):

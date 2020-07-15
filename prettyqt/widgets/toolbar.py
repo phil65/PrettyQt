@@ -69,7 +69,8 @@ class ToolBar(QtWidgets.QToolBar):
         else:
             label = widgets.Label(text)
             label.setMinimumWidth(self.minimumWidth())
-            label.setStyleSheet("background:lightgrey")
+            with label.edit_stylesheet() as ss:
+                ss.background.setValue("lightgrey")
             label.set_alignment(horizontal="center")
             if before:
                 return self.insertWidget(before, label)
@@ -117,7 +118,8 @@ class ToolBar(QtWidgets.QToolBar):
         self.setIconSize(core.Size(size, size))
 
     def set_font_size(self, size: int):
-        self.setStyleSheet(f"font-size: {size}pt;")
+        with self.current_font() as font:
+            font.set_size(size)
 
     def is_area_allowed(self, area: str):
         """check if toolbar is allowed at specified area

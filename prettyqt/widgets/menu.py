@@ -64,7 +64,8 @@ class Menu(QtWidgets.QMenu):
         else:
             label = widgets.Label(text)
             label.setMinimumWidth(self.minimumWidth())
-            label.setStyleSheet("background:lightgrey")
+            with label.edit_stylesheet() as ss:
+                ss.background.setValue("lightgrey")
             label.set_alignment(horizontal="center")
             separator = widgets.WidgetAction(parent=self)
             separator.setDefaultWidget(label)

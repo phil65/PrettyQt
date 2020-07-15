@@ -27,7 +27,6 @@ class PopupInfo(widgets.Dialog):
         self.set_layout(layout)
         self.set_background_color("black")
         self.label.set_color("white")
-        # self.setStyleSheet("")
         layout += self.label
         # signals.signals.popup_info.connect(self.popup)
 

@@ -24,7 +24,8 @@ class PromptLineEdit(widgets.LineEdit):
         self._prompt_text = prompt_text
         self.button = widgets.ToolButton(self)
         self.button.set_icon(button_icon)
-        self.button.setStyleSheet("QToolButton { border: none; padding: 0px; }")
+        with self.button.edit_stylesheet() as ss:
+            ss.QToolButton.setValues(border=None, padding="0px")
         self.button.set_cursor("arrow")
         self.button.set_focus_policy("none")
         self.set_button_visible(False)

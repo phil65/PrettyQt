@@ -107,7 +107,8 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             self.selectAll()
 
     def set_table_color(self, color: str):
-        self.setStyleSheet(f"QHeaderView::section {{ background-color:{color} }}")
+        with self.edit_stylesheet() as ss:
+            ss.QHeaderView.section.backgroundColor.setValue(color)
 
     def current_index(self) -> Optional[QtCore.QModelIndex]:
         if self.selectionModel() is None:
