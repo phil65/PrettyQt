@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "prettyqt"
+name = "PrettyQt"
 version = "0.98.1"
 description = "A pythonic layer on top of qtpy"
 readme = 'docs/index.md'
