@@ -1,3 +1,13 @@
+## v0.98.1 (2020-07-15)
+
+### Fix
+
+- correctly reset stylesheet for widget validation background
+
+### Refactor
+
+- use qstylizer for stylesheet editing
+
 ## v0.98.0 (2020-07-15)
 
 ### Feat
