@@ -21,13 +21,22 @@ SYSTEM_FONTS = bidict(
 
 
 class FontDatabase(QtGui.QFontDatabase):
-    def add_fonts_from_folder(self, path: Union[str, pathlib.Path]):
+    @classmethod
+    def add_fonts_from_folder(cls, path: Union[str, pathlib.Path]):
         for p in path.iterdir():
             if p.suffix.lower() in [".ttf", ".otf"]:
                 logger.debug(f"adding font {p} to database.")
-                self.addApplicationFont(str(p))
+                cls.addApplicationFont(str(p))
 
     def get_system_font(self, font_type: str):
         if font_type not in SYSTEM_FONTS:
             raise ValueError(f"Invalid font type '{font_type}'")
         return self.systemFont(SYSTEM_FONTS[font_type])
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
+    db = FontDatabase()
+    print(db.families())
