@@ -55,4 +55,4 @@ changelog: ## create changelog
 	mv CHANGELOG.md docs/changelog.md
 
 bump: ## version bump
-	poetry run python prettyqt/scripts/bump.py
+	poetry run python scripts/bump.py
