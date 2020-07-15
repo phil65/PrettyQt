@@ -5,7 +5,6 @@
 import functools
 import operator
 import pathlib
-import contextlib
 
 from typing import List, Optional, Union
 
@@ -212,12 +211,6 @@ class Label(QtWidgets.QLabel):
                 color = colors.get_color(color)
                 ss.color.setValue(color.name())
         return self
-
-    @contextlib.contextmanager
-    def current_font(self):
-        font = self.font()
-        yield font
-        self.setFont(font)
 
     def set_image(self, path: Union[pathlib.Path, str], width: int = 300):
         self.setScaledContents(True)

@@ -294,6 +294,12 @@ class Widget(QtWidgets.QWidget):
         yield ss
         self.setStyleSheet(ss.toString())
 
+    @contextmanager
+    def current_font(self):
+        font = gui.Font(self.font())
+        yield font
+        self.setFont(font)
+
     def set_contextmenu_policy(self, policy: str):
         """set contextmenu policy for given item view
 
