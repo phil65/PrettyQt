@@ -48,18 +48,12 @@ pip install prettyqt
 
 ## Installation from sources
 
+This project uses poetry for dependency management and packaging. Install this first.
 In the `prettyqt` directory (same one where you found this file after
 cloning the git repo), execute:
 
 ```sh
-python setup.py install
-```
-
-or for installing in [development mode](https://pip.pypa.io/en/latest/reference/pip_install.html#editable-installs):
-
-
-```sh
-python -m pip install -e .
+poetry install
 ```
 
 ## License
