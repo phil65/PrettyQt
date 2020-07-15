@@ -11,7 +11,7 @@ QtWidgets.QFontDialog.__bases__ = (widgets.BaseDialog,)
 
 
 class FontDialog(QtWidgets.QFontDialog):
-    def current_font(self) -> gui.Font:
+    def get_current_font(self) -> gui.Font:
         return gui.Font(self.currentFont())
 
 

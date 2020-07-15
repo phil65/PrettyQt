@@ -297,7 +297,8 @@ def test_filesystemmodel(qtmodeltester):
 
 
 def test_fontdialog(qtbot):
-    widgets.FontDialog()
+    dlg = widgets.FontDialog()
+    dlg.get_current_font()
 
 
 def test_formlayout(qtbot):
