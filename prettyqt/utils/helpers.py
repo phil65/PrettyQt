@@ -32,18 +32,14 @@ def deprecated(func):
 
 def is_dark_mode() -> bool:
     if sys.platform.startswith("win"):
-        import winreg
+        from prettyqt import core
 
-        REG_PATH = r"Software\Microsoft\Windows\CurrentVersion\Themes\Personalize"
-        try:
-            registry_key = winreg.OpenKey(
-                winreg.HKEY_CURRENT_USER, REG_PATH, 0, winreg.KEY_READ
-            )
-            value, regtype = winreg.QueryValueEx(registry_key, "AppsUseLightTheme")
-            winreg.CloseKey(registry_key)
-            return value == 0
-        except WindowsError:
-            return False
+        p = (
+            "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\"
+            "Themes\\Personalize"
+        )
+        s = core.Settings(p, core.Settings.NativeFormat)
+        return s.value("AppsUseLightTheme") == 0
     elif sys.platform == "darwin":
         import darkdetect
 
