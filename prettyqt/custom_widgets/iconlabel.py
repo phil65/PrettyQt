@@ -17,7 +17,7 @@ class IconLabel(widgets.Widget):
         self.label.setMargin(10)
         self.label.set_size_policy(horizontal="minimum")
         self.tooltip = tooltip
-        icon = gui.Icon.by_name(icon)
+        icon = gui.icon.get_icon(icon)
         self.icon = widgets.Label()
         self.icon.setToolTip(tooltip)
         self.icon.set_size_policy(horizontal="minimum")

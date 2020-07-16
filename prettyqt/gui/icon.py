@@ -14,14 +14,29 @@ from prettyqt import core, gui
 
 IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
 
+icon_cache = dict()
 
-def get_icon(icon: IconType, color: Optional[str] = None):
+
+def get_icon(icon: IconType, color: Optional[str] = None, as_qicon: bool = False):
+    """
+    qtawesome already caches icons, but since we construct our own subclassed icon,
+    we cache, too
+    """
+    if isinstance(icon, QtGui.QIcon):
+        return icon if as_qicon else Icon(icon)
+    if isinstance(icon, pathlib.Path):
+        icon = str(icon)
+    if (icon, color, as_qicon) in icon_cache:
+        return icon_cache[(icon, color, as_qicon)]
     if isinstance(icon, str) and icon.startswith("mdi."):
         if color is not None:
-            return Icon(qta.icon(icon, color=color))
+            new = qta.icon(icon, color=color)
         else:
-            return Icon(qta.icon(icon))
-    return Icon(icon)
+            new = qta.icon(icon)
+    else:
+        new = QtGui.QIcon(icon)
+    icon_cache[(icon, color, as_qicon)] = new if as_qicon else Icon(new)
+    return new
 
 
 def set_defaults(*args, **kwargs):
@@ -29,14 +44,6 @@ def set_defaults(*args, **kwargs):
 
 
 class Icon(QtGui.QIcon):
-    def __init__(self, icon=None):
-        if isinstance(icon, pathlib.Path):
-            icon = str(icon)
-        super().__init__(icon)
-
-    # def __reduce__(self):
-    #     return type(self), (), self.__getstate__()
-
     def __repr__(self):
         return f"{self.__class__.__name__}()"
 
@@ -55,10 +62,6 @@ class Icon(QtGui.QIcon):
         px = QtGui.QPixmap()
         stream >> px
         super().__init__(px)
-
-    @classmethod
-    def by_name(cls, name: str) -> "Icon":
-        return cls(qta.icon(name))
 
     @classmethod
     def for_color(cls, color_str: str) -> "Icon":
