@@ -1,3 +1,13 @@
+## v0.98.5 (2020-07-17)
+
+### Perf
+
+- add icon cache
+
+### Refactor
+
+- use core.Settings for windows dark mode detection
+
 ## v0.98.4 (2020-07-15)
 
 ### Fix
