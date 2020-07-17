@@ -11,7 +11,7 @@ class FontChooserButton(widgets.Widget):
 
     def __init__(self, font=None, parent=None):
         super().__init__(parent)
-        self.current_font = font
+        self._current_font = font
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
@@ -24,10 +24,10 @@ class FontChooserButton(widgets.Widget):
         layout += self.button
 
     def __repr__(self):
-        return f"FontChooserButton({self.current_font})"
+        return f"FontChooserButton({self._current_font})"
 
     def __getstate__(self):
-        return dict(font=self.current_font, enabled=self.isEnabled())
+        return dict(font=self._current_font, enabled=self.isEnabled())
 
     def __setstate__(self, state):
         self.__init__()
@@ -38,8 +38,8 @@ class FontChooserButton(widgets.Widget):
     @core.Slot()
     def choose_font(self):
         dlg = widgets.FontDialog()
-        if self.current_font:
-            dlg.setCurrentFont(self.current_font)
+        if self._current_font:
+            dlg.setCurrentFont(self._current_font)
 
         if dlg.exec_():
             self.set_font(dlg.current_font())
@@ -47,10 +47,16 @@ class FontChooserButton(widgets.Widget):
 
     def set_font(self, font):
         if isinstance(font, str):
-            self.current_font = gui.Font(font)
+            self._current_font = gui.Font(font)
         else:
-            self.current_font = font
-        self.lineedit.setText(self.current_font.family())
+            self._current_font = font
+        self.lineedit.setText(self._current_font.family())
+
+    def set_value(self, value):
+        self.set_font(value)
+
+    def get_value(self):
+        return self._current_font
 
 
 if __name__ == "__main__":

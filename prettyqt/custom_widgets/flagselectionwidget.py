@@ -25,10 +25,10 @@ class FlagSelectionWidget(widgets.GroupBox):
                 self.add(v, k)
         else:
             for i in items:
-                if isinstance(i, tuple):
+                if isinstance(i, Iterable):
                     self.add(*i)
                 else:
-                    self.add(i)
+                    raise TypeError("Invalid item type")
 
     def add(self, title: str, flag):
         checkbox = widgets.CheckBox(title)

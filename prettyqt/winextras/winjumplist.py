@@ -17,6 +17,7 @@ class WinJumpList(QtWinExtras.QWinJumpList):
     def add_category(self, title: str) -> winextras.WinJumpListCategory:
         cat = winextras.WinJumpListCategory(title)
         self.addCategory(cat)
+        return cat
 
     def get_recent(self):
         return self.recent()

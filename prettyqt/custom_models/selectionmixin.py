@@ -5,14 +5,16 @@
 from typing import Dict
 
 from prettyqt import constants
+from qtpy import QtCore
 
 
 class SelectionMixin(object):
 
     CHECKSTATE: Dict = {}  # column: identifier
+    dataChanged: QtCore.Signal
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self):
+        super().__init__()
         self.selected = dict()
 
     def setData(self, index, value, role):

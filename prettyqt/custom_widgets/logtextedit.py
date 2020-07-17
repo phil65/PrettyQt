@@ -195,7 +195,6 @@ class LogTextEdit(widgets.PlainTextEdit):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_font("Consolas")
-        self.formatter = None
         self.append_text(f"Python version: {sys.version}")
         logger = logging.getLogger()
         # self.handler = signallogger.LineSignalLogger()

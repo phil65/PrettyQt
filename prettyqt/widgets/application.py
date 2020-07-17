@@ -5,12 +5,14 @@
 import pathlib
 import sys
 from typing import Optional
+import logging
 
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import colors
 
+logger = logging.getLogger(__name__)
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
@@ -89,7 +91,11 @@ class Application(QtWidgets.QApplication):
 
     @classmethod
     def get_widget(cls, name: str) -> Optional[QtWidgets.QWidget]:
-        return cls.get_mainwindow().findChild(QtWidgets.QWidget, name)
+        mw = cls.get_mainwindow()
+        if mw is None:
+            logger.warning("Trying to get widget from nonexistent mainwindow")
+            return None
+        return mw.findChild(QtWidgets.QWidget, name)
         # widget_list = cls.instance().allWidgets()
         # for widget in widget_list:
         #     if isinstance(widget, QtWidgets.QWidget) and widget.objectName() == name:

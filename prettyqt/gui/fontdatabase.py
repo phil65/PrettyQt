@@ -23,6 +23,8 @@ SYSTEM_FONTS = bidict(
 class FontDatabase(QtGui.QFontDatabase):
     @classmethod
     def add_fonts_from_folder(cls, path: Union[str, pathlib.Path]):
+        if isinstance(path, str):
+            path = pathlib.Path(path)
         for p in path.iterdir():
             if p.suffix.lower() in [".ttf", ".otf"]:
                 logger.debug(f"adding font {p} to database.")

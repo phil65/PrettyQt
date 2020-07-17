@@ -344,10 +344,10 @@ class Widget(QtWidgets.QWidget):
             from prettyqt import custom_widgets
 
             self.box = custom_widgets.FlowLayout()
-        else:
+        elif isinstance(layout, QtWidgets.QLayout):
             self.box = layout
-        if self.box is None:
-            return None
+        else:
+            raise ValueError("Invalid Layout")
         self.setLayout(self.box)
         if margin is not None:
             self.box.setContentsMargins(margin, margin, margin, margin)

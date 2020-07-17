@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
@@ -52,7 +54,7 @@ class SpinBox(QtWidgets.QSpinBox):
         self.setDisplayIntegerBase(state["int_base"])
         self.set_step_type(state["step_type"])
 
-    def set_range(self, start, end):
+    def set_range(self, start: Optional[int], end: Optional[int]):
         if start is None:
             start = -2147483647
         if end is None:

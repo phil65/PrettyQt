@@ -2,6 +2,7 @@
 """
 """
 
+from typing import List
 import logging
 
 from qtpy import QtCore, QtWidgets
@@ -183,10 +184,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.set_modality("application")
         self.show()
 
-    def get_docks(self) -> list:
+    def get_docks(self) -> List[QtWidgets.QDockWidget]:
         return self.find_children(QtWidgets.QDockWidget, recursive=False)
 
-    def get_toolbars(self) -> list:
+    def get_toolbars(self) -> List[QtWidgets.QToolBar]:
         return self.find_children(QtWidgets.QToolBar, recursive=False)
 
     def toggle_fullscreen(self):
