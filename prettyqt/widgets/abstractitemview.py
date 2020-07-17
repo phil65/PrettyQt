@@ -38,6 +38,13 @@ SCROLL_MODES = bidict(
     pixel=QtWidgets.QAbstractItemView.ScrollPerPixel,
 )
 
+SCROLL_HINTS = bidict(
+    ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
+    position_at_top=QtWidgets.QAbstractItemView.PositionAtTop,
+    position_at_bottom=QtWidgets.QAbstractItemView.PositionAtBottom,
+    position_at_center=QtWidgets.QAbstractItemView.PositionAtCenter,
+)
+
 QtWidgets.QAbstractItemView.__bases__ = (widgets.AbstractScrollArea,)
 
 
@@ -305,6 +312,11 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
     def select_last_row(self):
         idx = self.model().createIndex(self.model().rowCount() - 1, 0)
         self.setCurrentIndex(idx)
+
+    def scroll_to(self, index, mode: str = "ensure_visible"):
+        if mode not in SCROLL_HINTS:
+            raise ValueError("Invalid scroll mode")
+        self.scrollTo(index, SCROLL_HINTS[mode])
 
     def highlight_when_inactive(self):
         """also highlight items when widget does not have focus
