@@ -14,6 +14,7 @@ class SidebarWidget(widgets.MainWindow):
 
     def __init__(self, parent=None, show_settings=False, main_layout="vertical"):
         super().__init__(parent=None)
+        self.button_map = dict()
         self.sidebar = widgets.ToolBar()
         self.sidebar.set_id("SidebarWidget")
         self.sidebar.set_title("Sidebar")
@@ -85,7 +86,7 @@ class SidebarWidget(widgets.MainWindow):
         button.setFixedWidth(self.BUTTON_WIDTH)
         if len(self.area.box) == 1:
             button.setChecked(True)
-        page._button = button
+        self.button_map[page] = button
         if show:
             self.area.box.setCurrentWidget(page)
         return page
@@ -98,9 +99,9 @@ class SidebarWidget(widgets.MainWindow):
         if item not in self.area.box:
             raise ValueError("Layout does not contain the chosen widget")
         current = self.area.box.currentWidget()
-        current._button.setChecked(False)
+        self.button_map[current].setChecked(False)
         self.area.box.setCurrentWidget(item)
-        item._button.setChecked(True)
+        self.button_map[item].setChecked(True)
 
     def show_tab(self, index):
         widget = self.area.box[index]
