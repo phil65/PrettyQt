@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Iterable, Union, Mapping
+from typing import Iterable, Union, Mapping, Any
 
 from qtpy import QtCore, QtWidgets
 
@@ -107,7 +107,7 @@ class ComboBox(QtWidgets.QComboBox):
         else:
             self.addItem(label, userData=data)
 
-    def item_icon(self, index: int):
+    def item_icon(self, index: int) -> gui.Icon:
         return gui.Icon(self.itemIcon(index))
 
     def set_insert_policy(self, policy: str):
@@ -170,26 +170,26 @@ class ComboBox(QtWidgets.QComboBox):
     def set_min_char_length(self, chars: int):
         self.setMinimumContentsLength(chars)
 
-    def get_value(self):
+    def get_value(self) -> Any:
         # if all(self.itemData(i) is None for i in range(self.count())):
         #     return self.currentText()
         # else:
         #     return self.currentData()
         return self.currentData()
 
-    def set_value(self, value):
+    def set_value(self, value: Any):
         self.set_data(value)
 
-    def set_text(self, text):
+    def set_text(self, text: str):
         self.setCurrentText(text)
 
-    def set_data(self, data):
+    def set_data(self, data: Any):
         idx = self.findData(data)
         if idx == -1:
             raise ValueError("invalid data")
         self.setCurrentIndex(idx)
 
-    def text(self):
+    def text(self) -> str:
         return self.currentText()
 
 

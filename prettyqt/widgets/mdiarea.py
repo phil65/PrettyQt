@@ -28,7 +28,7 @@ TAB_POSITIONS = bidict(
     east=QtWidgets.QTabWidget.East,
 )
 
-PATTERNS = gui.painter.PATTERNS
+PATTERNS = gui.painter.PATTERNS  # type: ignore
 
 QtWidgets.QMdiArea.__bases__ = (widgets.AbstractScrollArea,)
 

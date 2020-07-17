@@ -330,8 +330,10 @@ class Widget(QtWidgets.QWidget):
         self.customContextMenuRequested.connect(method)
 
     def set_layout(
-        self, layout: Union[str, QtWidgets.QLayout], margin: Optional[int] = None
+        self, layout: Union[str, QtWidgets.QLayout, None], margin: Optional[int] = None
     ):
+        if layout is None:
+            return None
         if layout in ["horizontal", "vertical"]:
             self.box = widgets.BoxLayout(layout)
         elif layout == "grid":

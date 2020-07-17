@@ -126,36 +126,37 @@ class RegularExpression(QtCore.QRegularExpression):
         return match if match.hasMatch() else None
 
     def split(self, string: str, maxsplit: int = 0):
-        result = list()
-        matches = self.global_match(string)
-        matches = list(matches)
-        if 0 < maxsplit <= len(matches):
-            remainder = string[matches[maxsplit - 1].end() :]
-            print(remainder)
-        else:
-            print(None)
-            remainder = None
-        if maxsplit > 0:
-            matches = matches[:maxsplit]
-        prev_match = None
-        m = matches[0]
-        if m.start() == 0:
-            result.append("")
-        else:
-            result.append(string[0 : m.start()])
-        for g in m.groups():
-            result.append(g)
-        prev_match = m
-        for m in matches[1:]:
-            result.append(string[prev_match.end() : m.start()])
-            for g in m.groups():
-                result.append(g)
-            if m.end() == len(string):
-                result.append("")
-            prev_match = m
-        if remainder:
-            result.append(remainder)
-        return result
+        raise NotImplementedError()
+        # result = list()
+        # matches = self.global_match(string)
+        # matches = list(matches)
+        # if 0 < maxsplit <= len(matches):
+        #     remainder = string[matches[maxsplit - 1].end() :]
+        #     print(remainder)
+        # else:
+        #     print(None)
+        #     remainder = None
+        # if maxsplit > 0:
+        #     matches = matches[:maxsplit]
+        # prev_match = None
+        # m = matches[0]
+        # if m.start() == 0:
+        #     result.append("")
+        # else:
+        #     result.append(string[0 : m.start()])
+        # for g in m.groups():
+        #     result.append(g)
+        # prev_match = m
+        # for m in matches[1:]:
+        #     result.append(string[prev_match.end() : m.start()])
+        #     for g in m.groups():
+        #         result.append(g)
+        #     if m.end() == len(string):
+        #         result.append("")
+        #     prev_match = m
+        # if remainder:
+        #     result.append(remainder)
+        # return result
 
     @property
     def groups(self):

@@ -3,14 +3,10 @@ This module contains the editor widget implementation.
 """
 import sre_constants
 
+import regex as re
+
 from prettyqt import constants, core, custom_models, custom_widgets, widgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
-
-
-try:
-    import regex as re
-except ImportError:
-    import re
 
 
 class RegexEditorWidget(widgets.Widget):

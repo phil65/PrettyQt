@@ -3,7 +3,9 @@
 """
 
 import pathlib
-from typing import Optional, Union
+from typing import Optional, Union, List, Dict
+
+from qtpy import QtWidgets
 
 from prettyqt import core, widgets
 
@@ -14,11 +16,11 @@ class FileChooserButton(widgets.Widget):
 
     def __init__(
         self,
-        extensions=None,
-        mode="save",
-        file_mode="existing_files",
-        root=None,
-        parent=None,
+        extensions: Optional[Dict[str, List[str]]] = None,
+        mode: str = "save",
+        file_mode: str = "existing_files",
+        root: Union[None, str, pathlib.Path] = None,
+        parent: Optional[QtWidgets.QWidget] = None,
     ):
         """initialize FileChooserButton
 
@@ -83,7 +85,7 @@ class FileChooserButton(widgets.Widget):
     def get_value(self) -> Optional[pathlib.Path]:
         return self.path
 
-    def set_value(self, value):
+    def set_value(self, value: Union[str, pathlib.Path]):
         self.set_path(value)
 
 

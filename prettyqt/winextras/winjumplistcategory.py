@@ -6,7 +6,7 @@ from typing import Union, Optional
 import pathlib
 
 try:
-    from PyQt5 import QtWinExtras
+    from PyQt5 import QtWinExtras  # type: ignore
 except ImportError:
     from PySide2 import QtWinExtras
 

@@ -22,9 +22,9 @@ UNDERLINE_STYLES = bidict(
 )
 
 
-WEIGHTS = gui.font.WEIGHTS
+WEIGHTS = gui.font.WEIGHTS  # type: ignore
 
-STYLE_HINTS = gui.font.STYLE_HINTS
+STYLE_HINTS = gui.font.STYLE_HINTS  # type: ignore
 
 
 class TextCharFormat(QtGui.QTextCharFormat):

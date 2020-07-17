@@ -109,7 +109,7 @@ class Pattern(core.RegularExpression):
     def __repr__(self):
         return f"RegularExpression({self.pattern()!r})"
 
-    def match(
+    def match(  # type: ignore[override]
         self, string: str, pos: int = 0, endpos: Optional[int] = None
     ) -> Optional[Match]:
         match = super().match(string[:endpos], pos)
@@ -150,8 +150,8 @@ class Pattern(core.RegularExpression):
             to_replace = repl if isinstance(repl, str) else repl(m)
             for j in range(self.groups):
                 to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
-            for j in self.groupindex.keys():
-                to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
+            for k, v in self.groupindex.items():
+                to_replace = to_replace.replace(fr"\g<{k}>", m.group(v))
             result = result[: m.start()] + to_replace + result[m.end() :]
         return (result, min(len(matches), count))
 

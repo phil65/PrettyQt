@@ -2,15 +2,14 @@
 """
 """
 
-from typing import Optional, Union
-import collections
+from typing import Optional, Union, DefaultDict
+from collections import defaultdict
 from contextlib import contextmanager
 import itertools
 
 from qtpy import QtCore
 
-
-counter_dict = collections.defaultdict(itertools.count)
+counter_dict: DefaultDict = defaultdict(itertools.count)
 
 
 class Object(QtCore.QObject):

@@ -2,12 +2,20 @@
 """
 """
 
+from typing import List, Union, Optional, Type
+from qtpy import QtWidgets
 from prettyqt import custom_validators, widgets
 from prettyqt.utils import helpers
 
 
 class ListInput(widgets.LineEdit):
-    def __init__(self, default_value="", typ=int, allow_single=False, parent=None):
+    def __init__(
+        self,
+        default_value: Union[List[float], str] = "",
+        typ: Type = int,
+        allow_single: bool = False,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(parent=parent)
         if typ is int:
             val = custom_validators.IntListValidator(allow_single=allow_single)
@@ -18,10 +26,10 @@ class ListInput(widgets.LineEdit):
         self.set_validator(val)
         self.set_value(default_value)
 
-    def get_value(self) -> list:
+    def get_value(self) -> List[float]:  # type: ignore[override]
         return helpers.string_to_num_array(self.text())
 
-    def set_value(self, value):
+    def set_value(self, value: Union[List[float], str]):
         if isinstance(value, list):
             value = str(value)[1:-1].replace(" ", "")
         self.set_text(value)

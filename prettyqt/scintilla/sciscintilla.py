@@ -5,7 +5,7 @@
 
 from typing import Optional
 
-from PyQt5 import Qsci
+from PyQt5 import Qsci  # type: ignore
 
 from prettyqt import gui, widgets
 from prettyqt.utils import colors, bidict
@@ -178,9 +178,10 @@ class SciScintilla(Qsci.QsciScintilla):
         self.setFont(font)
         self.setMarginsFont(font)
         lexer = self._lexer
-        lexer.setDefaultFont(font)
-        lexer.setFont(font)
-        self.setLexer(lexer)
+        if lexer is not None:
+            lexer.setDefaultFont(font)
+            lexer.setFont(font)
+            self.setLexer(lexer)
 
     def set_read_only(self, value: bool = True):
         self.setReadOnly(value)

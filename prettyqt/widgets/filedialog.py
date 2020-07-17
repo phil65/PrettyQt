@@ -51,7 +51,7 @@ class FileDialog(QtWidgets.QFileDialog):
         path_id: Optional[str] = None,
         extension_filter: Optional[dict] = None,
         file_mode: str = "existing_files",
-        parent=None,
+        parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent=parent)
         self.set_title(caption)
@@ -182,7 +182,7 @@ class FileDialog(QtWidgets.QFileDialog):
         """
         self.setFileMode(MODES[mode])
 
-    def set_filter(self, to_filter):
+    def set_filter(self, to_filter: str):
         if to_filter not in FILTERS:
             raise ValueError(f"Invalid filter. Valid values: {FILTERS.keys()}")
         self.setFilter(FILTERS[to_filter])

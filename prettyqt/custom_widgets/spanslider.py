@@ -22,6 +22,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+from typing import Tuple
+
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui, widgets
@@ -69,37 +71,37 @@ class SpanSlider(widgets.Slider):
         self.gradient_right = self.palette().color(gui.Palette.Dark).lighter(110)
 
     @core.Property(int)
-    def lower_value(self):
+    def lower_value(self) -> int:
         return min(self.lower, self.upper)
 
-    def set_lower_value(self, lower):
+    def set_lower_value(self, lower: int):
         self.set_span(lower, self.upper)
 
     @core.Property(int)
     def upper_value(self):
         return max(self.lower, self.upper)
 
-    def set_upper_value(self, upper):
+    def set_upper_value(self, upper: int):
         self.set_span(self.lower, upper)
 
     def on_value_change(self):
         self.value_changed.emit(self.lower, self.upper)
 
-    def get_value(self):
+    def get_value(self) -> Tuple[int, int]:
         return (self.lower, self.upper)
 
-    def set_value(self, value):
+    def set_value(self, value: Tuple[int, int]):
         self.set_lower_value(value[0])
         self.set_upper_value(value[1])
 
     @core.Property(object)
-    def movement_mode(self):
+    def movement_mode(self) -> str:
         return self.movement
 
-    def set_movement_mode(self, mode):
+    def set_movement_mode(self, mode: str):
         self.movement = mode
 
-    def set_span(self, lower, upper):
+    def set_span(self, lower: int, upper: int):
         low = clamp(min(lower, upper), self.minimum(), self.maximum())
         upp = clamp(max(lower, upper), self.minimum(), self.maximum())
         changed = False
@@ -115,7 +117,7 @@ class SpanSlider(widgets.Slider):
             self.on_value_change()
             self.update()
 
-    def set_lower_pos(self, lower):
+    def set_lower_pos(self, lower: int):
         if self.lower_pos == lower:
             return None
         self.lower_pos = lower
@@ -127,7 +129,7 @@ class SpanSlider(widgets.Slider):
             main = self.main_control == self.LOWER_HANDLE
             self.trigger_action(self.SliderMove, main)
 
-    def set_upper_pos(self, upper):
+    def set_upper_pos(self, upper: int):
         if self.upper_pos == upper:
             return None
         self.upper_pos = upper

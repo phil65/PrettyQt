@@ -88,7 +88,7 @@ class SelectionWidget(widgets.GroupBox):
         for k, v in self.buttons.items():
             if k.isChecked():
                 return v
-        if self.rb_other.isChecked():
+        if self.rb_other.isChecked() and self.widget_custom is not None:
             return self.widget_custom.get_value()
         return
 

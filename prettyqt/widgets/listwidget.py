@@ -2,21 +2,13 @@
 """
 """
 
-from typing import Union, Iterable, Mapping
+from typing import Union, Iterable, Mapping, List, Any
 
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict
 
-
-SCROLL_HINTS = bidict(
-    ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
-    position_at_top=QtWidgets.QAbstractItemView.PositionAtTop,
-    position_at_bottom=QtWidgets.QAbstractItemView.PositionAtBottom,
-    position_at_center=QtWidgets.QAbstractItemView.PositionAtCenter,
-)
-
+SCROLL_HINTS = widgets.abstractitemview.SCROLL_HINTS  # type: ignore
 
 QtWidgets.QListWidget.__bases__ = (widgets.ListView,)
 
@@ -29,7 +21,7 @@ class ListWidget(QtWidgets.QListWidget):
 
     value_changed = core.Signal(object)
 
-    def __init__(self, parent=None, selection_mode="single"):
+    def __init__(self, parent=None, selection_mode: str = "single"):
         super().__init__(parent)
         self.itemSelectionChanged.connect(self.on_index_change)
         self.set_selection_mode(selection_mode)
@@ -37,8 +29,8 @@ class ListWidget(QtWidgets.QListWidget):
     def __repr__(self):
         return f"ListWidget: {self.count()} items"
 
-    def __getitem__(self, index):
-        return self.item(index)
+    def __getitem__(self, row: int):
+        return self.item(row)
 
     def __add__(self, other):
         if isinstance(other, QtWidgets.QListWidgetItem):
@@ -67,7 +59,7 @@ class ListWidget(QtWidgets.QListWidget):
         for item in state["items"]:
             self.addItem(item)
 
-    def sort(self, reverse=False):
+    def sort(self, reverse: bool = False):
         order = QtCore.Qt.DescendingOrder if reverse else QtCore.Qt.AscendingOrder
         self.sortItems(order)
 
@@ -76,7 +68,7 @@ class ListWidget(QtWidgets.QListWidget):
         self.value_changed.emit(data)
 
     def get_children(self) -> list:
-        return [self.item(index) for index in range(self.count())]
+        return [self.item(row) for row in range(self.count())]
 
     def add_items(self, items: Union[Iterable, Mapping]):
         if isinstance(items, Mapping):
@@ -97,7 +89,7 @@ class ListWidget(QtWidgets.QListWidget):
         item.setData(QtCore.Qt.UserRole, data)
         self.addItem(item)
 
-    def get_value(self):
+    def get_value(self) -> List[Any]:
         return [i.data(QtCore.Qt.UserRole) for i in self.selectedItems()]
 
     def set_value(self, value):

@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional, Callable
+
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
@@ -14,16 +16,21 @@ class PushButton(QtWidgets.QPushButton):
 
     value_changed = core.Signal(bool)
 
-    def __init__(self, label=None, parent=None, callback=None):
+    def __init__(
+        self,
+        label: Optional[str] = None,
+        parent: Optional[QtWidgets.QWidget] = None,
+        callback: Optional[Callable] = None,
+    ):
         super().__init__(label, parent)
         if callback:
             self.clicked.connect(callback)
         self.toggled.connect(self.value_changed)
 
-    def get_value(self):
+    def get_value(self) -> bool:
         return self.isChecked()
 
-    def set_value(self, value):
+    def set_value(self, value: bool):
         self.setChecked(value)
 
     @property

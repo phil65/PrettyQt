@@ -3,7 +3,7 @@
 """
 
 import pathlib
-from typing import Union, Optional
+from typing import Union, Optional, Dict, Tuple
 
 
 import qtawesome as qta
@@ -14,7 +14,8 @@ from prettyqt import core, gui
 
 IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
 
-icon_cache = dict()
+key_type = Tuple[Optional[str], Optional[str], bool]
+icon_cache: Dict[key_type, QtGui.QIcon] = dict()
 
 
 def get_icon(icon: IconType, color: Optional[str] = None, as_qicon: bool = False):

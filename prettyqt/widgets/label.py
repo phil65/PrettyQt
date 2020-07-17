@@ -43,7 +43,7 @@ TEXT_FORMATS = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
 )
 
-WEIGHTS = gui.font.WEIGHTS
+WEIGHTS = gui.font.WEIGHTS  # type: ignore
 
 
 QtWidgets.QLabel.__bases__ = (widgets.Frame,)

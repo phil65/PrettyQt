@@ -20,8 +20,8 @@ MATCH_FLAGS = dict(
 
 
 class StandardItemModel(QtGui.QStandardItemModel):
-    def __getitem__(self, index):
-        return self.item(index)
+    def __getitem__(self, row: int):
+        return self.item(row)
 
     def __iter__(self):
         return iter(self.get_children())
