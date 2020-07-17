@@ -84,13 +84,13 @@ class FormLayout(QtWidgets.QFormLayout):
         formlayout = cls(parent)
         for i, (k, v) in enumerate(dct.items(), start=1):
             if k is not None:
-                formlayout[i, "left"] = k
+                formlayout.set_widget(k, i, "left")
             if v is not None:
-                formlayout[i, "right"] = v
+                formlayout.set_widget(v, i, "right")
         return formlayout
 
-    def add(self, *item):
-        for i in item:
+    def add(self, *items):
+        for i in items:
             if isinstance(i, (QtWidgets.QWidget, QtWidgets.QLayout)):
                 self.addRow(i)
             if isinstance(i, tuple):
