@@ -33,7 +33,7 @@ class FileChooserButton(widgets.Widget):
             parent: parent widget
         """
         super().__init__(parent)
-        self.path = None
+        self.path: Optional[pathlib.Path] = None
         self.extensions = extensions
         self.mode = mode
         self.file_mode = file_mode
@@ -78,9 +78,12 @@ class FileChooserButton(widgets.Widget):
         self.set_path(dialog.selected_file())
         self.value_changed.emit(self.path)
 
-    def set_path(self, path: Union[str, pathlib.Path]):
-        self.path = path
-        self.lineedit.set_text(str(path))
+    def set_path(self, path: Union[str, pathlib.Path, None]):
+        if isinstance(path, str):
+            self.path = pathlib.Path(path)
+        else:
+            self.path = path
+        self.lineedit.set_text(str(path) if path is not None else "")
 
     def get_value(self) -> Optional[pathlib.Path]:
         return self.path
