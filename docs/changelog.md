@@ -1,3 +1,15 @@
+## v0.99.0 (2020-07-18)
+
+### Refactor
+
+- **FileChooserButton**: typing and fixes
+- **Dataset**: typing and fixes
+- **SidebarWidget**: use button map instead of attaching button to widget
+
+### Feat
+
+- **AbstractItemView**: add scroll_to method
+
 ## v0.98.5 (2020-07-17)
 
 ### Perf
