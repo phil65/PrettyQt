@@ -5,12 +5,14 @@
 import contextlib
 import pathlib
 from typing import List, Mapping, Optional, Union
+import logging
 
 from qtpy import QtCore
 
 from prettyqt import core
 from prettyqt.utils import bidict
 
+logger = logging.getLogger(__name__)
 
 FORMATS = bidict(native=QtCore.QSettings.NativeFormat, ini=QtCore.QSettings.IniFormat)
 
@@ -205,6 +207,7 @@ class Settings(QtCore.QSettings):
 
 
 def register_extensions(*exts, app_name=None, app_path=None):
+    logger.debug(f"assigning extensions {exts} to {app_name}")
     s = Settings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.NativeFormat)
     if app_path is None:
         app_path = core.Dir.toNativeSeparators(core.CoreApplication.applicationFilePath())
