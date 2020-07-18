@@ -13,7 +13,9 @@ from .regexpvalidator import RegExpValidator
 try:
     from .regularexpressionvalidator import RegularExpressionValidator
 except AttributeError:
-    from .regularexpressionvalidator_pyside import RegularExpressionValidator
+    from .regularexpressionvalidator_pyside import (  # type: ignore
+        RegularExpressionValidator,
+    )
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
 from .brush import Brush

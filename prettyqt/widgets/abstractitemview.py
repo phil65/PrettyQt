@@ -127,11 +127,15 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             return None
         return self.current_index().data(QtCore.Qt.UserRole)
 
-    def current_row(self) -> int:
-        return self.current_index().row()
+    def current_row(self) -> Optional[int]:
+        if self.selectionModel() is None:
+            return None
+        return self.selectionModel().currentIndex().row()
 
-    def current_column(self) -> int:
-        return self.current_index().column()
+    def current_column(self) -> Optional[int]:
+        if self.selectionModel() is None:
+            return None
+        return self.selectionModel().currentIndex().column()
 
     def selected_indexes(self) -> List[QtCore.QModelIndex]:
         """
@@ -166,11 +170,11 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setDropIndicatorShown(True)
 
     def set_edit_triggers(self, *triggers: Optional[str]):
-        triggers = ["none" if t is None else t for t in triggers]
-        for item in triggers:
+        items = ["none" if t is None else t for t in triggers]
+        for item in items:
             if item not in TRIGGERS:
                 raise ValueError("trigger type not available")
-        flags = functools.reduce(operator.ior, [TRIGGERS[t] for t in triggers])
+        flags = functools.reduce(operator.ior, [TRIGGERS[t] for t in items])
         self.setEditTriggers(flags)
 
     def get_edit_triggers(self) -> list:

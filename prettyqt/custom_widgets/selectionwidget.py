@@ -71,14 +71,16 @@ class SelectionWidget(widgets.GroupBox):
         else:
             raise ValueError(typ)
         # TODO: Enable this or add BAR radio and option.
-        self.widget_custom.set_disabled()
+        self.widget_custom.set_disabled()  # type: ignore
         if default is not None:
-            self.widget_custom.set_value(default)
+            self.widget_custom.set_value(default)  # type: ignore
         self.rb_other.setText(label)
-        self.rb_other.toggled.connect(self.widget_custom.set_enabled)
-        self.widget_custom.value_changed.connect(lambda: self.update_choice(True))
+        self.rb_other.toggled.connect(self.widget_custom.set_enabled)  # type: ignore
+        self.widget_custom.value_changed.connect(  # type: ignore
+            lambda: self.update_choice(True)
+        )
         if regex and typ == "string":
-            self.widget_custom.set_regex_validator(regex)
+            self.widget_custom.set_regex_validator(regex)  # type: ignore
         layout = widgets.BoxLayout("horizontal")
         layout += self.rb_other
         layout += self.widget_custom
