@@ -53,9 +53,9 @@ class BaseWaitingSpinner(widgets.Widget):
         self._is_spinning = False
 
         self._timer = core.Timer(self)
-        self._timer.timeout.connect(self.rotate)
-        self.update_size()
-        self.update_timer()
+        self._timer.timeout.connect(self._rotate)
+        self._update_size()
+        self._update_timer()
         self.hide()
         # END initialize()
 
@@ -116,19 +116,19 @@ class BaseWaitingSpinner(widgets.Widget):
     def set_line_num(self, lines: int):
         self._line_num = lines
         self._current_counter = 0
-        self.update_timer()
+        self._update_timer()
 
     def set_line_length(self, length: int):
         self._line_length = length
-        self.update_size()
+        self._update_size()
 
     def set_line_width(self, width: int):
         self._line_width = width
-        self.update_size()
+        self._update_size()
 
     def set_inner_radius(self, radius: int):
         self._inner_radius = radius
-        self.update_size()
+        self._update_size()
 
     def color(self):
         return self._color
@@ -168,7 +168,7 @@ class BaseWaitingSpinner(widgets.Widget):
 
     def set_revolutions_per_second(self, _revolutions_per_second):
         self._revolutions_per_second = _revolutions_per_second
-        self.update_timer()
+        self._update_timer()
 
     def set_trail_fade_percentage(self, trail):
         self._trail_fade_percentage = trail
@@ -176,17 +176,17 @@ class BaseWaitingSpinner(widgets.Widget):
     def set_minimum_trail_opacity(self, minimum_trail_opacity):
         self._minimum_trail_opacity = minimum_trail_opacity
 
-    def rotate(self):
+    def _rotate(self):
         self._current_counter += 1
         if self._current_counter >= self._line_num:
             self._current_counter = 0
         self.update()
 
-    def update_size(self):
+    def _update_size(self):
         size = (self._inner_radius + self._line_length) * 2
         self.setFixedSize(size, size)
 
-    def update_timer(self):
+    def _update_timer(self):
         self._timer.setInterval(1000 / (self._line_num * self._revolutions_per_second))
 
     def linecount_distance_from_primary(self, current, primary, total_lines):
@@ -229,11 +229,11 @@ class WaitingSpinner(BaseWaitingSpinner):
         self.additional_disabled = additional_disabled if additional_disabled else []
 
     def paintEvent(self, event):
-        self.update_position()
+        self._update_position()
         super().paintEvent(event)
 
     def start(self):
-        self.update_position()
+        self._update_position()
         super().start()
         if self.parentWidget and self._disable_parent:
             self.parentWidget().setEnabled(False)
@@ -247,7 +247,7 @@ class WaitingSpinner(BaseWaitingSpinner):
             for item in self.additional_disabled:
                 item.setEnabled(True)
 
-    def update_position(self):
+    def _update_position(self):
         if self.parentWidget() and self._center_on_parent:
             self.move(
                 self.parentWidget().width() / 2 - self.width() / 2,
