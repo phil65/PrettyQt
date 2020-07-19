@@ -76,6 +76,11 @@ def test_fontmetrics():
     assert len(val) < 5
 
 
+def test_guiapplication():
+    with gui.GuiApplication.override_cursor("forbidden"):
+        pass
+
+
 def test_icon():
     icon = gui.Icon()
     icon.for_color("black")
