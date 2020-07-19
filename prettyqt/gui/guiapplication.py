@@ -43,7 +43,15 @@ class GuiApplication(QtGui.QGuiApplication):
     @classmethod
     @contextlib.contextmanager
     def override_cursor(cls, cursor: str):
+        cls.set_override_cursor(cursor)
+        yield cursor
+        cls.restore_override_cursor()
+
+    @classmethod
+    def set_override_cursor(cls, cursor: str):
         cursor = gui.Cursor(CURSOR_SHAPES[cursor])
         cls.setOverrideCursor(cursor)
-        yield cursor
+
+    @classmethod
+    def restore_override_cursor(cls):
         cls.restoreOverrideCursor()
