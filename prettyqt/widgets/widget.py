@@ -222,7 +222,7 @@ class Widget(QtWidgets.QWidget):
     def set_modality(self, modality: str = "window"):
         """set modality for the dialog
 
-        Valid values for modality: "modeless", "window", "application"
+        Valid values for modality: "none", "window", "application"
 
         Args:
             modality: modality for the main window
@@ -237,7 +237,7 @@ class Widget(QtWidgets.QWidget):
     def get_modality(self) -> str:
         """get the current modality modes as a string
 
-        Possible values: "modeless", "window", "application"
+        Possible values: "none", "window", "application"
 
         Returns:
             modality mode
