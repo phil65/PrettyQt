@@ -2,11 +2,11 @@
 """
 """
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets, QtGui
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts, core, gui, widgets
-
+from prettyqt.utils import helpers
 
 ALIGNMENTS = dict(
     left=QtCore.Qt.AlignLeft,
@@ -101,8 +101,12 @@ class ChartView(QtCharts.QChartView):
 
         super().mouseMoveEvent(event)
 
-    @core.Slot()
+    @helpers.deprecated
     def save(self):
+        self.save_as_image()
+
+    @core.Slot()
+    def save_as_image(self):
         """
         let user choose folder and save chart as an image file
         """
@@ -117,7 +121,7 @@ class ChartView(QtCharts.QChartView):
         image.save(filename[0])
         self.chart().hide_legend()
 
-    def get_image(self):
+    def get_image(self) -> QtGui.QPixmap:
         image = self.grab()
         gl_widget = self.findChild(QtWidgets.QOpenGLWidget)
         if gl_widget:
