@@ -9,7 +9,7 @@ from qtpy import QtCore
 from prettyqt import core
 
 
-OPEN_MODES = core.iodevice.OPEN_MODES
+OPEN_MODES = core.iodevice.OPEN_MODES  # type: ignore
 
 QtCore.QFile.__bases__ = (core.FileDevice,)
 

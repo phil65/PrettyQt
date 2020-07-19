@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Optional, Union, DefaultDict
+from typing import Optional, Union, DefaultDict, List
 from collections import defaultdict
 from contextlib import contextmanager
 import itertools
@@ -57,7 +57,7 @@ class Object(QtCore.QObject):
         typ=QtCore.QObject,
         name: Optional[Union[str, QtCore.QRegularExpression]] = None,
         recursive: bool = True,
-    ):
+    ) -> List[QtCore.QObject]:
         if recursive:
             flag = QtCore.Qt.FindChildrenRecursively
         else:

@@ -63,7 +63,7 @@ class RegexInput(widgets.Widget):
         self.lineedit.set_text(value)
 
     @property
-    def compile_flags(self):
+    def compile_flags(self) -> int:
         ret_val = 0
         for identifier, flag in self._mapping.items():
             if self.tb_flags[identifier]:
@@ -71,7 +71,7 @@ class RegexInput(widgets.Widget):
         return ret_val
 
     @compile_flags.setter
-    def compile_flags(self, value):
+    def compile_flags(self, value: int):
         for identifier, flag in self._mapping.items():
             self.tb_flags[identifier] = bool(value & flag)
 

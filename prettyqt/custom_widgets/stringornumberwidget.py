@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Union
+
 from prettyqt import core, widgets
 
 
@@ -36,14 +38,14 @@ class StringOrNumberWidget(widgets.GroupBox):
         value = self.get_value()
         self.value_changed.emit(value)
 
-    def get_value(self):
+    def get_value(self) -> Union[float, str]:
         if self.rb_spinbox.isChecked():
             val = self.spinbox.get_value()
             return int(val) if val.is_integer() else val
         else:
             return self.lineedit.get_value()
 
-    def set_value(self, value):
+    def set_value(self, value: Union[float, str]):
         if isinstance(value, str):
             self.rb_lineedit.setChecked(True)
             self.lineedit.set_value(value)

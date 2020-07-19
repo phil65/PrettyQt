@@ -28,15 +28,16 @@ SOFTWARE.
 """
 
 import math
+from typing import Optional
 
-from qtpy import QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import colors
 
 
 class BaseWaitingSpinner(widgets.Widget):
-    def __init__(self, parent, modality=QtCore.Qt.NonModal):
+    def __init__(self, parent: Optional[QtWidgets.QWidget], modality: str = "none"):
         super().__init__(parent=parent)
 
         # WAS IN initialize()
@@ -59,7 +60,7 @@ class BaseWaitingSpinner(widgets.Widget):
         self.hide()
         # END initialize()
 
-        self.setWindowModality(modality)
+        self.set_modality(modality)
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
     def paintEvent(self, event):
@@ -130,19 +131,19 @@ class BaseWaitingSpinner(widgets.Widget):
         self._inner_radius = radius
         self._update_size()
 
-    def color(self):
+    def color(self) -> gui.Color:
         return self._color
 
-    def roundness(self):
+    def roundness(self) -> float:
         return self._roundness
 
-    def minimum_trail_opacity(self):
+    def minimum_trail_opacity(self) -> float:
         return self._minimum_trail_opacity
 
-    def trail_fade_percentage(self):
+    def trail_fade_percentage(self) -> float:
         return self._trail_fade_percentage
 
-    def revolutions_per_second(self):
+    def revolutions_per_second(self) -> float:
         return self._revolutions_per_second
 
     def line_num(self) -> int:
@@ -160,20 +161,20 @@ class BaseWaitingSpinner(widgets.Widget):
     def is_spinning(self) -> bool:
         return self._is_spinning
 
-    def set_roundness(self, roundness):
+    def set_roundness(self, roundness: float):
         self._roundness = max(0.0, min(100.0, roundness))
 
     def set_color(self, color: colors.ColorType = "black"):
         self._color = colors.get_color(color)
 
-    def set_revolutions_per_second(self, _revolutions_per_second):
+    def set_revolutions_per_second(self, _revolutions_per_second: float):
         self._revolutions_per_second = _revolutions_per_second
         self._update_timer()
 
-    def set_trail_fade_percentage(self, trail):
+    def set_trail_fade_percentage(self, trail: float):
         self._trail_fade_percentage = trail
 
-    def set_minimum_trail_opacity(self, minimum_trail_opacity):
+    def set_minimum_trail_opacity(self, minimum_trail_opacity: float):
         self._minimum_trail_opacity = minimum_trail_opacity
 
     def _rotate(self):
@@ -189,15 +190,22 @@ class BaseWaitingSpinner(widgets.Widget):
     def _update_timer(self):
         self._timer.setInterval(1000 / (self._line_num * self._revolutions_per_second))
 
-    def linecount_distance_from_primary(self, current, primary, total_lines):
+    def linecount_distance_from_primary(
+        self, current: int, primary: int, total_lines: int
+    ) -> int:
         distance = primary - current
         if distance < 0:
             distance += total_lines
         return distance
 
     def current_line_color(
-        self, count_distance, total_lines, fade_perc, min_opacity, color
-    ):
+        self,
+        count_distance: int,
+        total_lines: int,
+        fade_perc: float,
+        min_opacity: float,
+        color: gui.Color,
+    ) -> gui.Color:
         if count_distance == 0:
             return color
         min_alpha_f = min_opacity / 100.0
@@ -217,10 +225,10 @@ class BaseWaitingSpinner(widgets.Widget):
 class WaitingSpinner(BaseWaitingSpinner):
     def __init__(
         self,
-        parent,
-        center_on_parent=True,
-        disable_parent=True,
-        modality=QtCore.Qt.NonModal,
+        parent: Optional[QtWidgets.QWidget],
+        center_on_parent: bool = True,
+        disable_parent: bool = True,
+        modality: str = "none",
         additional_disabled=None,
     ):
         super().__init__(parent=parent, modality=modality)

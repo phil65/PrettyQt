@@ -12,6 +12,7 @@ class SelectionMixin(object):
 
     CHECKSTATE: Dict = {}  # column: identifier
     dataChanged: QtCore.Signal
+    DATA_ROLE: int
 
     def __init__(self):
         super().__init__()
@@ -45,7 +46,7 @@ class SelectionMixin(object):
             return flags | constants.IS_CHECKABLE
         return flags
 
-    def _get_selection_id(self, index):
+    def _get_selection_id(self, index: QtCore.QModelIndex):
         item = index.data(self.DATA_ROLE)
         id_fn = self.CHECKSTATE.get(index.column())
         if id_fn:

@@ -35,17 +35,16 @@ from .styleoptionslider import StyleOptionSlider
 from .styleoptionframe import StyleOptionFrame
 
 from .dockwidget import DockWidget
-
+from .action import Action
+from .actiongroup import ActionGroup
+from .widgetaction import WidgetAction
+from .menu import Menu
 from .mainwindow import MainWindow
 
 from .listwidgetitem import ListWidgetItem
 from .treewidgetitem import TreeWidgetItem
-from .action import Action
-from .actiongroup import ActionGroup
-from .widgetaction import WidgetAction
 from .toolbutton import ToolButton
 from .tooltip import ToolTip
-from .menu import Menu
 from .menubar import MenuBar
 from .statusbar import StatusBar
 from .tabbar import TabBar

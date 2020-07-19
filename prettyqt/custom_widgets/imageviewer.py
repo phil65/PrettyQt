@@ -2,11 +2,21 @@
 """
 """
 
+from typing import Optional, Union
+import pathlib
+
+from qtpy import QtWidgets
+
 from prettyqt import widgets
 
 
 class ImageViewer(widgets.Widget):
-    def __init__(self, title="", path=None, parent=None):
+    def __init__(
+        self,
+        title: str = "",
+        path: Union[pathlib.Path, str] = None,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(parent)
         if title:
             self.set_title(title)

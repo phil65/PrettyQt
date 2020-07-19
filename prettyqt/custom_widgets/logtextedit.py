@@ -2,7 +2,6 @@
 """
 """
 
-from abc import ABC, abstractmethod
 import logging
 import re
 import sys
@@ -24,25 +23,26 @@ from prettyqt.utils import signallogger
 # )
 
 
-class Highlighter(ABC):
+class Highlighter(object):
     placeholder: str
     color = "black"
     italic = False
     bold = False
     value = None
 
-    def __init__(self, formatter):
+    def __init__(self, formatter: logging.Formatter):
         self.formatter = formatter
         self.format = gui.TextCharFormat(self.color, self.bold, self.italic)
         text = re.escape(self.placeholder)
         pat = fr"{text[:-1]}([ +-]?\#?\#?\d*,?(?:\.\d+)?[bcdeEfFgGnosxX%]?)"
         self.pattern = re.compile(pat)
+        if self.formatter._fmt is None:
+            raise TypeError("Formatter does not contain format string")
         self.is_included = self.pattern.search(self.formatter._fmt) is not None
 
     def get_format(self, value) -> gui.TextCharFormat:
         return self.format
 
-    @abstractmethod
     def format_string(self, record: logging.LogRecord):
         raise NotImplementedError()
 
@@ -60,7 +60,7 @@ class Message(Highlighter):
     bold = True
 
     def format_string(self, record: logging.LogRecord) -> str:
-        if isinstance(record.msg, Exception):
+        if isinstance(record.msg, Exception) and record.exc_info is not None:
             val = self.formatter.formatException(record.exc_info)
         else:
             val = record.msg % record.args
@@ -216,14 +216,16 @@ class LogTextEdit(widgets.PlainTextEdit):
         else:
             super().wheelEvent(event)
 
-    def set_formatter(self, formatter):
+    def set_formatter(self, formatter: logging.Formatter):
         self.formatter = formatter
         self.handler.setFormatter(self.formatter)
         rules = [klass(self.formatter) for klass in Highlighter.__subclasses__()]
         self.rules = [r for r in rules if r.is_included]
 
-    def append_record(self, record):
+    def append_record(self, record: logging.LogRecord):
         start_of_line = len(self.text())
+        if self.formatter._fmt is None:
+            raise TypeError("Formatter does not contain format string")
         self.append_text(self.formatter._fmt)
         old_fmt = self.textCursor().charFormat()
         with self.create_cursor() as c:

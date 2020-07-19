@@ -2,9 +2,11 @@
 """
 """
 
+from typing import Optional, List
+
 from qtpy import QtWidgets
 
-from prettyqt import widgets
+from prettyqt import gui, widgets
 
 
 QtWidgets.QInputDialog.__bases__ = (widgets.BaseDialog,)
@@ -12,36 +14,55 @@ QtWidgets.QInputDialog.__bases__ = (widgets.BaseDialog,)
 
 class InputDialog(QtWidgets.QInputDialog):
     @classmethod
-    def get_int(cls, title=None, label=None, icon=None):
+    def get_int(
+        cls,
+        title: Optional[str] = None,
+        label: Optional[str] = None,
+        icon: gui.icon.IconType = None,
+    ) -> Optional[int]:
         par = widgets.Dialog()
         par.set_icon(icon)
         v = cls.getInt(par, title, label)
-        if v[1]:
-            return v[0]
+        return v[0] if v[1] else None
 
     @classmethod
-    def get_float(cls, title=None, label=None, icon=None):
+    def get_float(
+        cls,
+        title: Optional[str] = None,
+        label: Optional[str] = None,
+        icon: gui.icon.IconType = None,
+    ) -> Optional[float]:
         par = widgets.Dialog()
         par.set_icon(icon)
         v = cls.getDouble(par, title, label)
-        if v[1]:
-            return v[0]
+        return v[0] if v[1] else None
 
     @classmethod
-    def get_text(cls, title=None, label=None, icon=None, default_value=""):
+    def get_text(
+        cls,
+        title: Optional[str] = None,
+        label: Optional[str] = None,
+        icon: gui.icon.IconType = None,
+        default_value: str = "",
+    ) -> Optional[str]:
         par = widgets.Dialog()
         par.set_icon(icon)
         v = cls.getText(par, title, label, text=default_value)
-        if v[1]:
-            return v[0]
+        return v[0] if v[1] else None
 
     @classmethod
-    def get_item(cls, items, title=None, label=None, icon=None):
+    def get_item(
+        cls,
+        items: List[str],
+        title: Optional[str] = None,
+        label: Optional[str] = None,
+        icon: gui.icon.IconType = None,
+        editable: bool = False,
+    ) -> Optional[str]:
         par = widgets.Dialog()
         par.set_icon(icon)
-        v = cls.getItem(par, title, label, items, editable=False)
-        if v[1]:
-            return v[0]
+        v = cls.getItem(par, title, label, items, editable=editable)
+        return v[0] if v[1] else None
 
 
 if __name__ == "__main__":

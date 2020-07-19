@@ -72,10 +72,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.resize(*state["size"])
         self.box = self.layout()
 
-    def set_widget(self, widget):
+    def set_widget(self, widget: QtWidgets.QWidget):
         self.setCentralWidget(widget)
 
-    def createPopupMenu(self):
+    def createPopupMenu(self) -> widgets.Menu:
         # qactions = self.createPopupMenu()
         menu = widgets.Menu(parent=self)
         for i, item in enumerate(self.get_docks()):
@@ -87,15 +87,15 @@ class MainWindow(QtWidgets.QMainWindow):
             action.toggled.connect(item.setVisible)
             menu.add_action(action)
         menu.add_separator()
-        for i in self.get_toolbars():
-            action = widgets.Action(text=i.windowTitle(), parent=self)
+        for tb in self.get_toolbars():
+            action = widgets.Action(text=tb.windowTitle(), parent=self)
             action.set_checkable(True)
-            action.toggled.connect(i.setVisible)
-            action.set_checked(i.isVisible())
+            action.toggled.connect(tb.setVisible)
+            action.set_checked(tb.isVisible())
             menu.add_action(action)
         return menu
 
-    def add_toolbar(self, toolbar, position: str = "top"):
+    def add_toolbar(self, toolbar: QtWidgets.QToolBar, position: str = "top"):
         """adds a toolbar to the mainmenu at specified area
 
         Valid values for position: "left", "right", "top", "bottom"

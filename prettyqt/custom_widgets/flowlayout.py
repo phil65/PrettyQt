@@ -39,13 +39,13 @@ class FlowLayout(widgets.Layout):
     def count(self) -> int:
         return len(self.items)
 
-    def itemAt(self, index):
+    def itemAt(self, index: int):
         if 0 <= index < len(self.items):
             return self.items[index]
 
         return None
 
-    def takeAt(self, index):
+    def takeAt(self, index: int):
         if 0 <= index < len(self.items):
             return self.items.pop(index)
 
@@ -54,17 +54,17 @@ class FlowLayout(widgets.Layout):
     def expandingDirections(self):
         return QtCore.Qt.Orientations(QtCore.Qt.Orientation(0))
 
-    def hasHeightForWidth(self):
+    def hasHeightForWidth(self) -> bool:
         return True
 
-    def heightForWidth(self, width):
+    def heightForWidth(self, width: int):
         return self.do_layout(core.Rect(0, 0, width, 0), True)
 
-    def setGeometry(self, rect):
+    def setGeometry(self, rect: QtCore.QRect):
         super().setGeometry(rect)
         self.do_layout(rect, False)
 
-    def sizeHint(self):
+    def sizeHint(self) -> core.Size:
         return self.minimumSize()
 
     def minimumSize(self):
@@ -77,7 +77,7 @@ class FlowLayout(widgets.Layout):
         size += core.Size(margin_width, margin_width)
         return size
 
-    def do_layout(self, rect, test_only):
+    def do_layout(self, rect: QtCore.QRect, test_only: bool):
         x = rect.x()
         y = rect.y()
         line_height = 0
