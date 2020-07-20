@@ -6784,14 +6784,14 @@ copy_to_clipboard<span class="p">(</span><span class="n">text</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>75
+<pre><span></span>74
+75
 76
 77
 78
 79
 80
-81
-82</pre>
+81</pre>
 </div>
 </td>
 <td class="code">
@@ -6846,14 +6846,14 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>21
+<pre><span></span>20
+21
 22
 23
 24
 25
 26
-27
-28</pre>
+27</pre>
 </div>
 </td>
 <td class="code">
@@ -11173,7 +11173,7 @@ add_toolbar<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tbody>
 <tr>
 <td><code>toolbar</code></td>
-<td><code></code></td>
+<td><code>QToolBar</code></td>
 <td>
 <p>toolbar to use</p>
 </td>
@@ -11231,7 +11231,7 @@ add_toolbar<span class="p">(</span><span class="bp">self</span><span class="p">,
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">add_toolbar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolbar</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"top"</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">add_toolbar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolbar</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolBar</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"top"</span><span class="p">):</span>
     <span class="sd">"""adds a toolbar to the mainmenu at specified area</span>
 
 <span class="sd">    Valid values for position: "left", "right", "top", "bottom"</span>
@@ -11385,7 +11385,7 @@ createPopupMenu<span class="p">(</span><span class="bp">self</span><span class="
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">createPopupMenu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">createPopupMenu</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Menu</span><span class="p">:</span>
     <span class="c1"># qactions = self.createPopupMenu()</span>
     <span class="n">menu</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_docks</span><span class="p">()):</span>
@@ -11397,11 +11397,11 @@ createPopupMenu<span class="p">(</span><span class="bp">self</span><span class="
         <span class="n">action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">setVisible</span><span class="p">)</span>
         <span class="n">menu</span><span class="o">.</span><span class="n">add_action</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
     <span class="n">menu</span><span class="o">.</span><span class="n">add_separator</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_toolbars</span><span class="p">():</span>
-        <span class="n">action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">i</span><span class="o">.</span><span class="n">windowTitle</span><span class="p">(),</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">tb</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_toolbars</span><span class="p">():</span>
+        <span class="n">action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="n">tb</span><span class="o">.</span><span class="n">windowTitle</span><span class="p">(),</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">action</span><span class="o">.</span><span class="n">set_checkable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">setVisible</span><span class="p">)</span>
-        <span class="n">action</span><span class="o">.</span><span class="n">set_checked</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">isVisible</span><span class="p">())</span>
+        <span class="n">action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">tb</span><span class="o">.</span><span class="n">setVisible</span><span class="p">)</span>
+        <span class="n">action</span><span class="o">.</span><span class="n">set_checked</span><span class="p">(</span><span class="n">tb</span><span class="o">.</span><span class="n">isVisible</span><span class="p">())</span>
         <span class="n">menu</span><span class="o">.</span><span class="n">add_action</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">menu</span>
 </code></pre>
@@ -16170,7 +16170,7 @@ get_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 </h4>
 <div class="doc doc-contents">
 <p>get the current modality modes as a string</p>
-<p>Possible values: "modeless", "window", "application"</p>
+<p>Possible values: "none", "window", "application"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -16212,7 +16212,7 @@ str</p>
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_modality</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""get the current modality modes as a string</span>
 
-<span class="sd">    Possible values: "modeless", "window", "application"</span>
+<span class="sd">    Possible values: "none", "window", "application"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        modality mode</span>
@@ -16424,7 +16424,7 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 </h4>
 <div class="doc doc-contents">
 <p>set modality for the dialog</p>
-<p>Valid values for modality: "modeless", "window", "application"</p>
+<p>Valid values for modality: "none", "window", "application"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -16490,7 +16490,7 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_modality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modality</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"window"</span><span class="p">):</span>
     <span class="sd">"""set modality for the dialog</span>
 
-<span class="sd">    Valid values for modality: "modeless", "window", "application"</span>
+<span class="sd">    Valid values for modality: "none", "window", "application"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        modality: modality for the main window</span>
