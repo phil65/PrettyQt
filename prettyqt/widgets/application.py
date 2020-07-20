@@ -3,7 +3,6 @@
 """
 
 import pathlib
-import sys
 from typing import Optional
 import logging
 
@@ -101,11 +100,3 @@ class Application(QtWidgets.QApplication):
         #     if isinstance(widget, QtWidgets.QWidget) and widget.objectName() == name:
         #         return widget
         # return None
-
-    @classmethod
-    def create_default_app(cls) -> "Application":
-        cls.disable_window_help_button()
-        # cls.setAttribute(QtCore.Qt.AA_UseOpenGLES)
-        cls.use_hdpi_bitmaps()
-        app = cls(sys.argv)
-        return app
