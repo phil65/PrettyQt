@@ -1,3 +1,13 @@
+## v0.101.0 (2020-07-20)
+
+### Feat
+
+- **MessageBox**: add detail_text keyword argument to message method
+
+### Fix
+
+- correct return type for gui.icon.get_icon
+
 ## v0.100.0 (2020-07-20)
 
 ### Feat
