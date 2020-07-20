@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Optional
+from typing import Optional, List
 
 from qtpy import QtCore, QtWidgets
 
@@ -83,10 +83,10 @@ class MessageBox(QtWidgets.QMessageBox):
         icon = gui.icon.get_icon(icon)
         self.setIconPixmap(icon.get_pixmap(size=64))
 
-    def show_blocking(self):
+    def show_blocking(self) -> str:
         return BUTTONS.inv[self.exec_()]
 
-    def get_standard_buttons(self) -> list:
+    def get_standard_buttons(self) -> List[str]:
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
 
     def add_button(self, button: str) -> QtWidgets.QPushButton:
