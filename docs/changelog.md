@@ -1,3 +1,11 @@
+## v0.100.0 (2020-07-20)
+
+### Feat
+
+- **ToolTip**: add show_text method
+- **GuiApplication**: add set_override_cursor / restore_override_cursor methods
+- **GuiApplication**: add override_cursor context manager
+
 ## v0.99.0 (2020-07-18)
 
 ### Refactor
