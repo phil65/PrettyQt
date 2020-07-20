@@ -36,8 +36,9 @@ def get_icon(icon: IconType, color: Optional[str] = None, as_qicon: bool = False
             new = qta.icon(icon)
     else:
         new = QtGui.QIcon(icon)
-    icon_cache[(icon, color, as_qicon)] = new if as_qicon else Icon(new)
-    return new
+    icon = new if as_qicon else Icon(new)
+    icon_cache[(icon, color, as_qicon)] = icon
+    return icon
 
 
 def set_defaults(*args, **kwargs):
