@@ -2,6 +2,7 @@
 """
 """
 
+from typing import Optional
 import logging
 import re
 import sys
@@ -25,10 +26,9 @@ from prettyqt.utils import signallogger
 
 class Highlighter(object):
     placeholder: str
-    color = "black"
-    italic = False
-    bold = False
-    value = None
+    color: Optional[str] = None
+    italic: bool = False
+    bold: bool = False
 
     def __init__(self, formatter: logging.Formatter):
         self.formatter = formatter

@@ -30,12 +30,13 @@ STYLE_HINTS = gui.font.STYLE_HINTS  # type: ignore
 class TextCharFormat(QtGui.QTextCharFormat):
     def __init__(
         self,
-        text_color: Union[colors.ColorType, QtGui.QBrush] = "black",
+        text_color: Union[colors.ColorType, QtGui.QBrush] = None,
         bold: bool = False,
         italic: bool = False,
     ):
         super().__init__()
-        self.set_foreground_color(text_color)
+        if text_color is not None:
+            self.set_foreground_color(text_color)
         if bold:
             self.set_font_weight("bold")
         self.setFontItalic(italic)
