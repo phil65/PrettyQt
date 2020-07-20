@@ -2,6 +2,7 @@
 """
 """
 
+from typing import Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
@@ -30,7 +31,9 @@ class ProgressBar(QtWidgets.QProgressBar):
     wrapper for QtWidgets.QProgressBar
     """
 
-    def __init__(self, text_visible=True, parent=None):
+    def __init__(
+        self, text_visible: bool = True, parent: Optional[QtWidgets.QWidget] = None
+    ):
         super().__init__(parent=parent)
         self.setTextVisible(text_visible)
 
@@ -84,7 +87,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         """
         return TEXT_DIRECTIONS.inv[self.textDirection()]
 
-    def set_range(self, start, end):
+    def set_range(self, start: int, end: int):
         self.setRange(start, end)
 
 

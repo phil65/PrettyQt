@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Optional, Mapping, Iterable, Union
+from typing import Optional, Mapping, Iterable, Union, Dict, Any
 
 from prettyqt import core, gui, widgets
 
@@ -10,12 +10,12 @@ from prettyqt import core, gui, widgets
 class SelectionWidget(widgets.GroupBox):
     value_changed = core.Signal(object)
 
-    def __init__(self, label="", layout="horizontal", parent=None):
+    def __init__(self, label: str = "", layout="horizontal", parent=None):
         super().__init__(title=label, parent=parent)
         self.box = widgets.BoxLayout(layout)
-        self.widget_custom = None
+        self.widget_custom: Optional[widgets.Widget] = None
         self.rb_other = widgets.RadioButton()
-        self.buttons = dict()
+        self.buttons: Dict[widgets.RadioButton, Any] = dict()
         self.set_layout(self.box)
 
     def __iter__(self):
@@ -59,7 +59,7 @@ class SelectionWidget(widgets.GroupBox):
         self,
         label: str = "Other",
         typ: str = "string",
-        default=None,
+        default: Union[None, float, str] = None,
         regex: Optional[str] = None,
     ):
         if typ == "string":

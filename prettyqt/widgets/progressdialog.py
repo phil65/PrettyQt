@@ -32,7 +32,7 @@ class ProgressDialog(QtWidgets.QProgressDialog):
         self.setCancelButton(None)
         self.cancel()
 
-    def show_message(self, message):
+    def show_message(self, message: str):
         self.setLabelText(message)
         self.show()
 

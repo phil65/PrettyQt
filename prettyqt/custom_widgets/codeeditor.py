@@ -20,7 +20,7 @@ class LineNumberArea(widgets.Widget):
 
 
 class CodeEditor(widgets.PlainTextEdit):
-    def __init__(self, language="python", parent=None):
+    def __init__(self, language: str = "python", parent=None):
         super().__init__(parent=parent)
         self.line_area = LineNumberArea(self)
         self.blockCountChanged.connect(self.update_line_area_width)

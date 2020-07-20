@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Callable, Optional, Union
+from typing import Callable, Optional, Union, Dict
 
 from qtpy import QtWidgets, QtCore
 
@@ -12,9 +12,9 @@ from prettyqt import gui, widgets
 class SidebarWidget(widgets.MainWindow):
     BUTTON_WIDTH = 100
 
-    def __init__(self, parent=None, show_settings=False, main_layout="vertical"):
+    def __init__(self, parent=None, show_settings: bool = False, main_layout="vertical"):
         super().__init__(parent=None)
-        self.button_map = dict()
+        self.button_map: Dict[QtWidgets.QWidget, QtWidgets.QToolButton] = dict()
         self.sidebar = widgets.ToolBar()
         self.sidebar.set_id("SidebarWidget")
         self.sidebar.set_title("Sidebar")

@@ -16,7 +16,10 @@ class PromptLineEdit(widgets.LineEdit):
     clear_clicked = core.Signal()
 
     def __init__(
-        self, parent=None, prompt_text="Search", button_icon="mdi.delete-circle-outline"
+        self,
+        parent=None,
+        prompt_text: str = "Search",
+        button_icon: gui.icon.IconType = "mdi.delete-circle-outline",
     ):
         super().__init__(parent)
         self._margin = self.sizeHint().height() - 2

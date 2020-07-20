@@ -19,7 +19,7 @@ class RegularExpressionMatchIterator(QtCore.QRegularExpressionMatchIterator):
             return core.RegularExpressionMatch(self.next())
         raise StopIteration
 
-    def peek_next(self):
+    def peek_next(self) -> core.RegularExpressionMatch:
         return core.RegularExpressionMatch(self.peekNext())
 
 

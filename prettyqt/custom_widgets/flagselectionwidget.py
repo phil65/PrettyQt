@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Mapping, Union, Iterable
+from typing import Mapping, Union, Iterable, Dict
 
 from prettyqt import core, widgets
 
@@ -10,10 +10,10 @@ from prettyqt import core, widgets
 class FlagSelectionWidget(widgets.GroupBox):
     value_changed = core.Signal(int)
 
-    def __init__(self, label="", layout="vertical", parent=None):
+    def __init__(self, label: str = "", layout="vertical", parent=None):
         super().__init__(title=label, parent=parent)
         self.box = widgets.BoxLayout(layout)
-        self.buttons = dict()
+        self.buttons: Dict[widgets.CheckBox, int] = dict()
         self.set_layout(self.box)
 
     def __iter__(self):
@@ -30,13 +30,13 @@ class FlagSelectionWidget(widgets.GroupBox):
                 else:
                     raise TypeError("Invalid item type")
 
-    def add(self, title: str, flag):
+    def add(self, title: str, flag: int):
         checkbox = widgets.CheckBox(title)
         checkbox.toggled.connect(self.update_choice)
         self.buttons[checkbox] = flag
         self.box += checkbox
 
-    def current_choice(self):
+    def current_choice(self) -> int:
         ret_val = 0
         for btn, flag in self.buttons.items():
             if btn.isChecked():
@@ -44,11 +44,11 @@ class FlagSelectionWidget(widgets.GroupBox):
         return int(ret_val)
 
     @core.Slot(bool)
-    def update_choice(self, checked):
+    def update_choice(self, checked: bool):
         choice = self.current_choice()
         self.value_changed.emit(choice)
 
-    def set_value(self, value):
+    def set_value(self, value: int):
         value = int(value)
         for btn, flag in self.buttons.items():
             btn.setChecked(bool(value & flag))
