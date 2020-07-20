@@ -23,8 +23,7 @@ class ButtonDelegate(widgets.ItemDelegate):
         return btn
 
     def setEditorData(self, editor, index):
-        editor.blockSignals(True)
-        editor.blockSignals(False)
+        pass
 
     def setModelData(self, editor, model, index):
         pass
