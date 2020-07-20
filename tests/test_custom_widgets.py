@@ -5,6 +5,7 @@
 
 import pickle
 import re
+import logging
 
 from qtpy import QtCore, QtGui
 
@@ -201,6 +202,23 @@ def test_labeledslider(qtbot):
     qtbot.mouseClick(slider.sl, QtCore.Qt.LeftButton)
     qtbot.mouseMove(slider.sl, core.Point(20, 20))
     slider.paintEvent(None)
+
+
+def test_logtextedit(qtbot):
+    textedit = custom_widgets.LogTextEdit()
+    fmt = logging.Formatter(
+        "%(asctime)s  %(levelname)i  %(message)s %(filename)s "
+        "%(funcName)s %(module)s %(created)f %(lineno)d %(msecs)d "
+        "%(process)d %(thread)d %(threadName)s %(processName)s "
+        "%(relativeCreated)s %(name)s %(pathname)s"
+    )
+    textedit.set_formatter(fmt)
+    logger = logging.getLogger()
+    logger.info("Test")
+    try:
+        raise Exception
+    except Exception as e:
+        logger.exception(e)
 
 
 def test_markdownwidget(qtbot):

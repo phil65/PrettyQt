@@ -27,14 +27,20 @@ def test_action(qtbot):
     assert action.shortcut().toString() == "Ctrl+A"
     assert action.toolTip() == "test"
     action.set_priority("low")
+    with pytest.raises(ValueError):
+        action.set_priority("test")
     assert action.get_priority() == "low"
     action.set_shortcut_context("widget_with_children")
+    with pytest.raises(ValueError):
+        action.set_shortcut_context("test")
     assert action.get_shortcut_context() == "widget_with_children"
+    action.show_shortcut_in_contextmenu()
     action.set_menu(widgets.Menu())
 
 
 def test_actiongroup(qtbot):
     group = widgets.ActionGroup(None)
+    group.set_exclusion_policy(None)
     group.set_exclusion_policy("exclusive")
     with pytest.raises(ValueError):
         group.set_exclusion_policy("test")
@@ -51,6 +57,9 @@ def test_boxlayout(qtbot):
     layout.set_size_mode("maximum")
     assert layout.get_size_mode() == "maximum"
     layout.set_alignment("left")
+    layout.set_alignment("left", widget)
+    with pytest.raises(ValueError):
+        layout.set_alignment("test")
     # assert layout.get_alignment() == "left"
     with pytest.raises(ValueError):
         layout.set_size_mode("bla")
@@ -75,6 +84,8 @@ def test_buttongroup(qtbot):
 def test_calendarwiget(qtbot):
     widget = widgets.CalendarWidget()
     assert widget.get_date() == widget.get_value()
+    widget.set_value(datetime.date(2000, 10, 10))
+    widget.set_selection_mode(None)
     widget.set_selection_mode("single")
     assert widget.get_selection_mode() == "single"
     with pytest.raises(ValueError):
@@ -137,6 +148,11 @@ def test_combobox(qtbot):
     box.add("test2", data="data", icon="mdi.timer")
     box.set_text("test2")
     assert box.text() == "test2"
+    box.add_items(dict(a="b"))
+    box.add_items(["a"])
+    box.add_items([("a", "x")])
+    box.get_value()
+    box.set_value("x")
 
 
 def test_commandlinkbutton(qtbot):
@@ -155,6 +171,7 @@ def test_commandlinkbutton(qtbot):
 
 def test_completer(qtbot):
     completer = widgets.Completer()
+    completer.set_sort_mode(None)
     completer.set_sort_mode("unsorted")
     with pytest.raises(ValueError):
         completer.set_sort_mode("test")
@@ -324,21 +341,28 @@ def test_formlayout(qtbot):
 
 
 def test_frame(qtbot):
-    widgets.Frame()
+    frame = widgets.Frame()
+    frame.set_frame_style("raised")
+    assert frame.get_frame_style() == "raised"
+    with pytest.raises(ValueError):
+        frame.set_frame_style("test")
 
 
 def test_gridlayout(qtbot):
     layout = widgets.GridLayout()
+    layout2 = widgets.GridLayout()
     widget = widgets.RadioButton()
     layout[0:1, 0:3] = widget
+    layout[5, 5] = layout2
     assert layout[0, 0] == widget
+    assert layout[5, 5] == layout2
     layout.set_size_mode("maximum")
     layout.set_alignment("left")
     with open("data.pkl", "wb") as jar:
         pickle.dump(layout, jar)
     with open("data.pkl", "rb") as jar:
         layout = pickle.load(jar)
-    assert len(layout) == len(list(layout)) == 1
+    assert len(layout) == len(list(layout)) == 2
     repr(layout)
     layout += widgets.RadioButton()
 
@@ -546,6 +570,9 @@ def test_mdiarea(qtbot):
     assert area.get_tab_position() == "north"
     area.set_background("black")
     area.add(widgets.Widget())
+    area += widgets.Widget()
+    sub = widgets.MdiSubWindow()
+    area.add(sub)
 
 
 def test_menu(qtbot):
@@ -746,7 +773,8 @@ def test_stackedlayout(qtbot):
 
 
 def test_spaceritem(qtbot):
-    widgets.SpacerItem(0, 0, "expanding", "expanding")
+    item = widgets.SpacerItem(0, 0, "expanding", "expanding")
+    item.change_size(0, 0)
 
 
 def test_spinbox(qtbot):
@@ -755,6 +783,12 @@ def test_spinbox(qtbot):
     widget.set_enabled()
     widget.set_value(10)
     widget.set_special_value("test")
+    with pytest.raises(ValueError):
+        widget.set_button_symbols("test")
+    with pytest.raises(ValueError):
+        widget.set_correction_mode("test")
+    with pytest.raises(ValueError):
+        widget.set_step_type("test")
     assert widget.is_valid()
     assert widget.get_value() == 10
     with open("data.pkl", "wb") as jar:
@@ -929,6 +963,10 @@ def test_toolbutton(qtbot):
     menu.add(act)
     widget.setMenu(menu)
     assert widget["test"] == act
+
+
+def test_tooltip(qtbot):
+    widgets.ToolTip.show_text(text="test")
 
 
 def test_tabbar(qtbot):
