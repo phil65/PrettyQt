@@ -3,6 +3,7 @@
 """
 
 import contextlib
+from typing import Optional
 
 from qtpy import QtGui, QtWidgets
 
@@ -88,8 +89,10 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def set_text(self, text: str):
         self.setPlainText(text)
 
-    def set_syntaxhighlighter(self, syntax: str):
+    def set_syntaxhighlighter(self, syntax: str, style: Optional[str] = None):
         self._hl = syntaxhighlighters.PygmentsHighlighter(self.document(), syntax)
+        if style is not None:
+            self._hl.set_style(style)
 
     def text(self) -> str:
         return self.toPlainText()
