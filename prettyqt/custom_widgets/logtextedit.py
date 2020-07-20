@@ -204,7 +204,7 @@ class LogTextEdit(widgets.PlainTextEdit):
         widgets.Application.call_on_exit(lambda: logger.removeHandler(self.handler))
         self.handler.setLevel(logging.INFO)
         logger.addHandler(self.handler)
-        fmt = logging.Formatter("%(asctime)s  %(levelname)i  %(message)s")
+        fmt = logging.Formatter("%(asctime)s  %(levelname)s  %(message)s")
         self.set_formatter(fmt)
 
     def wheelEvent(self, event):
