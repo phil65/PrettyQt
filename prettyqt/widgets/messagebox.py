@@ -71,9 +71,17 @@ class MessageBox(QtWidgets.QMessageBox):
                 self.add_button(b)
 
     @classmethod
-    def message(cls, text: str, title: str = None, icon: gui.icon.IconType = None):
+    def message(
+        cls,
+        text: str,
+        title: str = None,
+        icon: gui.icon.IconType = None,
+        detail_text: Optional[str] = None,
+    ) -> str:
         m = cls("none", title, text)
         m.set_icon(icon)
+        if detail_text is not None:
+            m.setDetailedText(detail_text)
         return m.show_blocking()
 
     def set_icon(self, icon: gui.icon.IconType):
