@@ -245,12 +245,6 @@ class Widget(QtWidgets.QWidget):
         """
         return MODALITIES.inv[self.windowModality()]
 
-    @contextmanager
-    def updates_off(self):
-        self.setUpdatesEnabled(False)
-        yield None
-        self.setUpdatesEnabled(True)
-
     def set_size_policy(
         self, horizontal: Optional[str] = None, vertical: Optional[str] = None
     ):
@@ -287,6 +281,12 @@ class Widget(QtWidgets.QWidget):
         col_str = "" if color is None else colors.get_color(color).name()
         with self.edit_stylesheet() as ss:
             ss.backgroundColor.setValue(col_str)
+
+    @contextmanager
+    def updates_off(self):
+        self.setUpdatesEnabled(False)
+        yield None
+        self.setUpdatesEnabled(True)
 
     @contextmanager
     def edit_stylesheet(self):
