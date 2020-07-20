@@ -1,3 +1,9 @@
+## v0.101.1 (2020-07-20)
+
+### Fix
+
+- **LogTextEdit**: better integrate with custom qstylesheets
+
 ## v0.101.0 (2020-07-20)
 
 ### Feat
