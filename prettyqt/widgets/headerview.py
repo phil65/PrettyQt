@@ -3,7 +3,7 @@
 """
 
 import functools
-from typing import Iterable, Optional, Union
+from typing import Iterable, Optional, Union, List
 
 from qtpy import QtCore, QtWidgets
 
@@ -61,7 +61,7 @@ class HeaderView(QtWidgets.QHeaderView):
         else:
             self.setSectionResizeMode(col, MODES[mode])
 
-    def section_labels(self) -> list:
+    def section_labels(self) -> List[str]:
         model = self.parent().model()
         return [
             model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)

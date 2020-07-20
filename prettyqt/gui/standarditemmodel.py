@@ -2,6 +2,8 @@
 """
 """
 
+from typing import List
+
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
@@ -49,7 +51,9 @@ class StandardItemModel(QtGui.QStandardItemModel):
                 i = gui.StandardItem(i)
             self.appendRow(i)
 
-    def find_items(self, text: str, column: int = 0, mode: str = "exact") -> list:
+    def find_items(
+        self, text: str, column: int = 0, mode: str = "exact"
+    ) -> List[QtGui.QStandardItem]:
         if mode not in MATCH_FLAGS:
             raise ValueError()
         return self.findItems(text, MATCH_FLAGS[mode], column)

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 """
 """
+
+from typing import List
 import warnings
 import functools
 import sys
 
 
-def string_to_num_array(array: str) -> list:
+def string_to_num_array(array: str) -> List[float]:
     floats = [float(i) for i in array.split(",")]
     return [int(i) if i.is_integer() else i for i in floats]
 
