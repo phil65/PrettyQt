@@ -127,22 +127,25 @@ class MainWindow(QtWidgets.QMainWindow):
             raise ValueError("Position not existing")
         self.addToolBarBreak(TOOLBAR_AREAS[position])
 
-    def load_window_state(self, recursive=False):
+    def load_window_state(self, recursive=False) -> bool:
         settings = core.Settings()
         name = self.get_id()
         geom = settings.get(f"{name}.geometry")
         state = settings.get(f"{name}.state")
+        restored = False
         if geom is not None and state is not None:
             try:
                 logger.debug(f"Loading window state for {name}...")
                 self.restoreGeometry(geom)
                 self.restoreState(state)
+                restored = True
             except TypeError:
                 logger.error("Wrong type for window state. Probably Qt binding switch?")
         if recursive:
             for window in self.find_children(MainWindow, recursive=True):
                 if window.get_id():
                     window.load_window_state()
+        return restored
 
     def save_window_state(self, recursive=False):
         """
