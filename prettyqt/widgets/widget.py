@@ -360,16 +360,6 @@ class Widget(QtWidgets.QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def raise_dock(self) -> bool:
-        node = self
-        while node:
-            node = node.parent()
-            if isinstance(node, QtWidgets.QDockWidget):
-                node.setVisible(True)
-                node.raise_()
-                return True
-        return False
-
     def set_cursor(self, cursor: str):
         if cursor not in CURSOR_SHAPES:
             raise ValueError(

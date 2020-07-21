@@ -7,7 +7,7 @@ from collections import defaultdict
 from contextlib import contextmanager
 import itertools
 
-from qtpy import QtCore
+from qtpy import QtCore, QtWidgets
 
 counter_dict: DefaultDict = defaultdict(itertools.count)
 
@@ -83,3 +83,11 @@ class Object(QtCore.QObject):
             if isinstance(node, typ):
                 return node
         return None
+
+    def raise_dock(self) -> bool:
+        w = self.find_parent(QtWidgets.QDockWidget)
+        if w is None:
+            return False
+        w.setVisible(True)
+        w.raise_()
+        return True
