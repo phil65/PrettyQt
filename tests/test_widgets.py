@@ -437,6 +437,7 @@ def test_label(qtbot):
         label.set_text_format("test")
     label.set_alignment(horizontal="left", vertical="top")
     label.set_alignment(vertical="bottom")
+    label.set_alignment()
     label.set_text_interaction("by_mouse")
     expected = ["by_mouse", "like_text_editor", "like_text_browser"]
     assert label.get_text_interaction() == expected
@@ -502,6 +503,7 @@ def test_listwidget(qtbot):
     widget.on_index_change()
     widget.add_items(["a", "b"])
     widget.set_value("b")
+    widget.sort()
     for item in widget:
         pass
     item = widgets.ListWidgetItem()
@@ -529,7 +531,9 @@ def test_mainwindow(qtbot):
     dockwidget = widgets.DockWidget()
     window.add_dockwidget(dockwidget, "left")
     widget = widgets.MainWindow()
+    widget.set_id("test")
     window.set_widget(widget)
+    assert window["test"] == widget
     window.show()
     window.close()
     window.save_window_state(recursive=True)
@@ -543,6 +547,8 @@ def test_mainwindow(qtbot):
     assert len(window.get_docks()) == 1
     window.remove_dockwidgets([dockwidget])
     window.add_toolbar_break()
+    with pytest.raises(ValueError):
+        window.add_toolbar_break("test")
     with window.edit_stylesheet() as ss:
         ss.QMainWindow.separator.setValues(width="1px", border="none")
     window.createPopupMenu()
@@ -667,10 +673,12 @@ def test_progressbar(qtbot):
     bar = widgets.ProgressBar()
     bar.set_alignment("left")
     bar.set_alignment("right")
+    assert bar.get_alignment() == "right"
     with pytest.raises(ValueError):
         bar.set_alignment("test")
     # assert bar.get_alignment() == "left"
     bar.set_text_direction("top_to_bottom")
+    # assert bar.get_text_direction() == "top_to_bottom"
     with pytest.raises(ValueError):
         bar.set_text_direction("test")
     bar.set_range(0, 20)
@@ -722,6 +730,13 @@ def test_scrollarea(qtbot):
     with open("data.pkl", "rb") as jar:
         widget = pickle.load(jar)
     widget.set_widget(widgets.Widget())
+
+
+def test_sizepolicy(qtbot):
+    pol = widgets.SizePolicy()
+    repr(pol)
+    pol.set_control_type("toolbutton")
+    assert pol.get_control_type() == "toolbutton"
 
 
 def test_slider(qtbot):
@@ -947,6 +962,8 @@ def test_toolbutton(qtbot):
     widget.set_enabled()
     widget.set_shortcut("Ctrl+A")
     widget.set_icon_size(20)
+    action = widgets.Action()
+    widget.set_default_action(action)
     with pytest.raises(ValueError):
         widget.set_popup_mode("test")
     assert widget.get_popup_mode() == "delayed"
@@ -1119,13 +1136,20 @@ def test_widget(qtbot):
     widget.set_tooltip("test")
     widget.set_cursor("caret")
     widget.set_min_width(100)
+    widget.set_min_width(None)
     widget.set_max_width(100)
+    widget.set_max_width(None)
     widget.set_min_height(200)
+    widget.set_min_height(None)
     widget.set_max_height(200)
+    widget.set_max_height(None)
     widget.set_font_size(20)
     widget.font_metrics()
     widget.set_id("test")
     widget.set_unique_id()
+    widget.set_attribute("native_window")
+    with pytest.raises(ValueError):
+        widget.set_attribute("test")
     with pytest.raises(ValueError):
         widget.set_cursor("test")
     widget.set_focus_policy("strong")
@@ -1134,6 +1158,8 @@ def test_widget(qtbot):
         widget.set_focus_policy("test")
     layout = widgets.BoxLayout()
     widget.set_layout(layout)
+    with pytest.raises(ValueError):
+        widget.set_layout("test")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -1155,10 +1181,11 @@ def test_widget(qtbot):
         widget.set_modality("test")
     assert widget.get_modality() == "window"
     widget.center()
-    widget.set_layout("horizontal")
+    widget.set_layout("horizontal", margin=2)
     widget.set_layout("form")
     widget.set_layout("stacked")
     widget.set_layout("flow")
+    widget.set_margin(2)
 
 
 def test_widgetaction(qtbot):

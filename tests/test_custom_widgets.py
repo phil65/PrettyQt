@@ -206,6 +206,7 @@ def test_labeledslider(qtbot):
 
 def test_logtextedit(qtbot):
     textedit = custom_widgets.LogTextEdit()
+    textedit.show()
     fmt = logging.Formatter(
         "%(asctime)s  %(levelname)i  %(message)s %(filename)s "
         "%(funcName)s %(module)s %(created)f %(lineno)d %(msecs)d "
