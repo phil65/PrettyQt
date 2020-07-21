@@ -75,3 +75,11 @@ class Object(QtCore.QObject):
         else:
             flag = QtCore.Qt.FindDirectChildrenOnly
         return self.findChild(typ, name, options=flag)
+
+    def find_parent(self, typ: QtCore.QObject) -> Optional[QtCore.QObject]:
+        node = self
+        while node:
+            node = node.parent()
+            if isinstance(node, typ):
+                return node
+        return None
