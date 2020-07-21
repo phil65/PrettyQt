@@ -76,12 +76,15 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindDirectChildrenOnly
         return self.findChild(typ, name, options=flag)
 
-    def find_parent(self, typ: QtCore.QObject) -> Optional[QtCore.QObject]:
+    def find_parent(
+        self, typ: QtCore.QObject, name: Optional[str] = None
+    ) -> Optional[QtCore.QObject]:
         node = self
         while node:
             node = node.parent()
             if isinstance(node, typ):
-                return node
+                if name is None or node.objectName() == name:
+                    return node
         return None
 
     def raise_dock(self) -> bool:
