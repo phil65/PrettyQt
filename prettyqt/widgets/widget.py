@@ -214,7 +214,7 @@ class Widget(QtWidgets.QWidget):
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
 
-    def set_attribute(self, attribute: str, state: bool):
+    def set_attribute(self, attribute: str, state: bool = True):
         if attribute not in ATTRIBUTES:
             raise ValueError(f"Invalid attribute '{attribute}'.")
         self.setAttribute(ATTRIBUTES[attribute], state)
