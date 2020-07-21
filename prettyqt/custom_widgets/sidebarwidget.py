@@ -11,8 +11,14 @@ from prettyqt import gui, widgets
 
 class SidebarWidget(widgets.MainWindow):
     BUTTON_WIDTH = 100
+    SETTINGS_BUTTON_HEIGHT = 28
 
-    def __init__(self, parent=None, show_settings: bool = False, main_layout="vertical"):
+    def __init__(
+        self,
+        parent: Optional[QtWidgets.QWidget] = None,
+        show_settings: bool = False,
+        main_layout: Union[str, QtWidgets.QLayout] = "vertical",
+    ):
         super().__init__(parent=None)
         self.button_map: Dict[QtWidgets.QWidget, QtWidgets.QToolButton] = dict()
         self.sidebar = widgets.ToolBar()
@@ -29,7 +35,7 @@ class SidebarWidget(widgets.MainWindow):
                 "", icon="mdi.settings", menu=self.settings_menu
             )
             self.settings_btn.setFixedWidth(self.BUTTON_WIDTH)
-            self.settings_btn.setFixedHeight(24)
+            self.settings_btn.setFixedHeight(self.SETTINGS_BUTTON_HEIGHT)
             self.settings_btn.set_style("icon")
             self.sidebar.orientationChanged.connect(self.on_orientation_change)
             self.sidebar.add_separator()
@@ -44,31 +50,30 @@ class SidebarWidget(widgets.MainWindow):
         self.main_layout += self.area
         self.setCentralWidget(w)
 
-    def on_orientation_change(self, orientation):
+    def on_orientation_change(self, orientation: QtCore.Qt.Orientation):
         if orientation == QtCore.Qt.Horizontal:
             self.settings_btn.setFixedWidth(34)
             self.settings_btn.setFixedHeight(34)
         else:
             self.settings_btn.setFixedWidth(self.BUTTON_WIDTH)
-            self.settings_btn.setFixedHeight(24)
+            self.settings_btn.setFixedHeight(self.SETTINGS_BUTTON_HEIGHT)
 
     def add_tab(
         self,
-        item,
+        item: QtWidgets.QWidget,
         title: str,
         icon: gui.icon.IconType = None,
         show: bool = False,
         shortcut: Optional[str] = None,
         area: str = "top",
     ):
-        page = item
-        self.area.box.add(page)
+        self.area.box.add(item)
         # button = widgets.ToolButton()
         # button.set_text(title)
         # button.set_icon_size(40)
         # button.setFixedSize(80, 80)
         # button.set_icon(icon)
-        # button.clicked.connect(lambda: self.area.box.setCurrentWidget(page))
+        # button.clicked.connect(lambda: self.area.box.setCurrentWidget(item))
         # self.sidebar.addWidget(button)
         # self.sidebar.add_separator()
         if area == "top":
@@ -76,20 +81,19 @@ class SidebarWidget(widgets.MainWindow):
                 text=title, icon=icon, shortcut=shortcut, parent=self.sidebar
             )
             act.setCheckable(True)
-            act.triggered.connect(lambda: self.set_tab(page))
+            act.triggered.connect(lambda: self.set_tab(item))
             self.sidebar.insertAction(self.spacer_action, act)
         else:
             act = self.sidebar.add_action(
-                title, icon, lambda: self.set_tab(page), checkable=True
+                title, icon, lambda: self.set_tab(item), checkable=True
             )
         button = self.sidebar.widgetForAction(act)
         button.setFixedWidth(self.BUTTON_WIDTH)
         if len(self.area.box) == 1:
             button.setChecked(True)
-        self.button_map[page] = button
+        self.button_map[item] = button
         if show:
-            self.area.box.setCurrentWidget(page)
-        return page
+            self.area.box.setCurrentWidget(item)
 
     def set_tab(self, item: Union[str, int, widgets.Widget]):
         if isinstance(item, int):
@@ -107,8 +111,8 @@ class SidebarWidget(widgets.MainWindow):
         widget = self.area.box[index]
         self.area.box.setCurrentWidget(widget)
 
-    def add_spacer(self):
-        self.sidebar.add_spacer()
+    def add_spacer(self) -> widgets.Widget:
+        return self.sidebar.add_spacer()
 
     def add_separator(self, text: Optional[str] = None, area: str = "top"):
         if area == "top":
