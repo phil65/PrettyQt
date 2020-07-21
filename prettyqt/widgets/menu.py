@@ -32,7 +32,7 @@ class Menu(QtWidgets.QMenu):
 
     def __getitem__(self, item: str):
         for action in self.actions():
-            if action.get_id() == item:
+            if action.objectName() == item:
                 return action
         raise KeyError(f"Action {item} not in menu")
 
@@ -116,7 +116,7 @@ class Menu(QtWidgets.QMenu):
     def add_actions(self, actions: List[QtWidgets.QAction]):
         self.addActions(actions)
 
-    def add_menu(self, menu: QtWidgets.QMenu):
+    def add_menu(self, menu: QtWidgets.QMenu) -> QtWidgets.QAction:
         return self.addAction(menu.menuAction())
 
 
