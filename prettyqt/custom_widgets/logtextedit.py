@@ -7,7 +7,7 @@ import logging
 import re
 import sys
 
-from prettyqt import constants, gui, widgets
+from prettyqt import gui, widgets
 from prettyqt.utils import signallogger
 
 
@@ -194,6 +194,7 @@ class LevelName(Highlighter):
 class LogTextEdit(widgets.PlainTextEdit):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.allow_wheel_zoom()
         self.set_font("Consolas")
         self.append_text(f"Python version: {sys.version}")
         logger = logging.getLogger()
@@ -206,15 +207,6 @@ class LogTextEdit(widgets.PlainTextEdit):
         logger.addHandler(self.handler)
         fmt = logging.Formatter("%(asctime)s  %(levelname)s  %(message)s")
         self.set_formatter(fmt)
-
-    def wheelEvent(self, event):
-        """
-        handle wheel event for zooming
-        """
-        if event.modifiers() & constants.CTRL_MOD:
-            self.zoomIn() if event.angleDelta().y() > 0 else self.zoomOut()
-        else:
-            super().wheelEvent(event)
 
     def set_formatter(self, formatter: logging.Formatter):
         self.formatter = formatter

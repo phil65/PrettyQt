@@ -7,7 +7,7 @@ from typing import Optional
 
 from qtpy import QtGui, QtWidgets
 
-from prettyqt import core, gui, widgets, syntaxhighlighters
+from prettyqt import core, gui, widgets, syntaxhighlighters, constants
 from prettyqt.gui import textcursor
 from prettyqt.utils import bidict
 
@@ -37,6 +37,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def __init__(self, text="", parent=None, read_only=False):
         super().__init__(text, parent)
+        self._allow_wheel_zoom = False
         self.validator = None
         self.textChanged.connect(self._on_value_change)
         self.set_read_only(read_only)
@@ -60,6 +61,20 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         if isinstance(other, str):
             self.append_text(other)
             return self
+
+    def wheelEvent(self, event):
+        """
+        handle wheel event for zooming
+        """
+        if not self._allow_wheel_zoom:
+            return None
+        if event.modifiers() & constants.CTRL_MOD:
+            self.zoomIn() if event.angleDelta().y() > 0 else self.zoomOut()
+        else:
+            super().wheelEvent(event)
+
+    def allow_wheel_zoom(self, do_zoom: bool = True):
+        self._allow_wheel_zoom = do_zoom
 
     @contextlib.contextmanager
     def create_cursor(self):

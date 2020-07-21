@@ -644,6 +644,7 @@ def test_plaintextedit(qtbot):
     widget.select_text(2, 4)
     widget.set_text("hallo")
     widget.set_disabled()
+    widget.allow_wheel_zoom()
     widget.set_enabled()
     widget.set_font("Consolas")
     widget.append_text(" test")
