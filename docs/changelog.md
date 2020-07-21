@@ -1,3 +1,17 @@
+## v0.102.0 (2020-07-21)
+
+### Refactor
+
+- move raise_dock to from Widget to Object
+- **SidebarWidget**: some code cleanup, make settings button size configurable
+- **Widget**: default state to True for set_attribute
+- **MainWindow**: add return value for load_window_state
+
+### Feat
+
+- **Object**: add find_parent method
+- **PlainTextEdit**: add style kwarg to set_syntaxhighlighter
+
 ## v0.101.1 (2020-07-20)
 
 ### Fix
