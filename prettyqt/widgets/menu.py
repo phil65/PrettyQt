@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Any, Callable, Optional, Union
+from typing import Any, Callable, Optional, Union, List
 
 from qtpy import QtWidgets
 
@@ -30,9 +30,9 @@ class Menu(QtWidgets.QMenu):
             return self
         raise TypeError("Invalid Type")
 
-    def __getitem__(self, item):
+    def __getitem__(self, item: str):
         for action in self.actions():
-            if action.id == item:
+            if action.get_id() == item:
                 return action
         raise KeyError(f"Action {item} not in menu")
 
@@ -113,7 +113,7 @@ class Menu(QtWidgets.QMenu):
         self.addAction(action)
         return action
 
-    def add_actions(self, actions):
+    def add_actions(self, actions: List[QtWidgets.QAction]):
         self.addActions(actions)
 
     def add_menu(self, menu: QtWidgets.QMenu):
