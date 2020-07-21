@@ -202,6 +202,7 @@ def test_labeledslider(qtbot):
     qtbot.mouseClick(slider.sl, QtCore.Qt.LeftButton)
     qtbot.mouseMove(slider.sl, core.Point(20, 20))
     slider.paintEvent(None)
+    slider.hide()
 
 
 def test_logtextedit(qtbot):
@@ -220,6 +221,7 @@ def test_logtextedit(qtbot):
         raise Exception
     except Exception as e:
         logger.exception(e)
+    textedit.hide()
 
 
 def test_markdownwidget(qtbot):

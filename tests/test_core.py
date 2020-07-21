@@ -120,6 +120,7 @@ def test_object():
     assert w.find_children(core.Object, name="w2", recursive=False) == [w2]
     assert w.find_child(widgets.PlainTextEdit, recursive=True) == w2
     assert w.find_child(core.Object, name="w2", recursive=False) == w2
+    assert w2.find_parent(widgets.Splitter) == w
 
 
 def test_point():

@@ -247,7 +247,7 @@ def test_dialogbuttonbox(qtbot):
     with pytest.raises(ValueError):
         box.set_orientation("test")
     assert box.get_orientation() == "horizontal"
-    box.add_button("test", callback=print)
+    box.add_button("test_dialogbuttonbox", callback=print)
     assert len(box) == 2
     assert btn == box["apply"]
     assert "apply" in box
@@ -278,7 +278,7 @@ def test_doublespinbox(qtbot):
 
 def test_filedialog(qtbot):
     dlg = widgets.FileDialog()
-    dlg.set_label_text("accept", "test")
+    dlg.set_label_text("accept", "test_filedialog")
     dlg.set_accept_mode("open")
     with pytest.raises(ValueError):
         dlg.set_accept_mode("bla")
@@ -369,7 +369,7 @@ def test_gridlayout(qtbot):
 
 def test_groupbox(qtbot):
     widget = widgets.GroupBox()
-    widget.set_title("test")
+    widget.set_title("test_groupbox")
     ly = widgets.BoxLayout("horizontal")
     widget.set_layout(ly)
     ly += widgets.RadioButton("+=")
@@ -423,7 +423,7 @@ def test_keysequenceedit(qtbot):
 def test_label(qtbot):
     label = widgets.Label()
     label.set_image("")
-    label.set_text("testus")
+    label.set_text("test_label")
     label.set_bold()
     label.set_italic()
     label.set_indent(4)
@@ -453,7 +453,7 @@ def test_label(qtbot):
 
 
 def test_lineedit(qtbot):
-    widget = widgets.LineEdit("Test")
+    widget = widgets.LineEdit("test_lineedit")
     widget.set_regex_validator("[0-9]")
     widget.set_font("Consolas")
     widget.set_text("0")
@@ -488,8 +488,8 @@ def test_listview(qtbot):
 
 def test_listwidget(qtbot):
     widget = widgets.ListWidget()
-    widget.add("test", icon="mdi.timer")
-    widget.add("test", icon="mdi.timer")
+    widget.add("test_listwidget", icon="mdi.timer")
+    widget.add("test_listwidget", icon="mdi.timer")
     with open("data.pkl", "wb") as jar:
         pickle.dump(widget, jar)
     with open("data.pkl", "rb") as jar:
@@ -595,7 +595,7 @@ def test_menu(qtbot):
         pass
 
     menu.add_action(
-        "test",
+        "test_menu",
         test,
         icon="mdi.timer",
         shortcut="Ctrl+A",
@@ -606,7 +606,7 @@ def test_menu(qtbot):
     for item in menu:
         pass
     menu.add_menu(widgets.Menu())
-    menu.add_separator("test")
+    menu.add_separator("test_menu")
     menu.add_separator()
 
 
@@ -617,8 +617,8 @@ def test_menubar(qtbot):
     menu.add_action(widgets.Action(text="TestAction 2"))
     menu.add_menu(widgets.Menu("TestMenu 2"))
     menu.add_separator()
-    menu.add_action("test")
-    menu.add_menu("test")
+    menu.add_action("test_menubar")
+    menu.add_menu("test_menubar")
 
 
 def test_messagebox(qtbot):
@@ -690,8 +690,8 @@ def test_progressdialog(qtbot):
 
 
 def test_pushbutton(qtbot):
-    widget = widgets.PushButton("Test", callback=print)
-    widget.set_text("test")
+    widget = widgets.PushButton("test_pushbutton", callback=print)
+    widget.set_text("test_pushbutton")
     widget.set_disabled()
     widget.set_enabled()
     assert widget.get_value() is False
@@ -707,7 +707,7 @@ def test_pushbutton(qtbot):
 
 
 def test_radiobutton(qtbot):
-    widget = widgets.RadioButton("Test")
+    widget = widgets.RadioButton("test_radiobutton")
     widget.set_icon("mdi.timer")
     widget.set_enabled()
     widget.set_disabled()
@@ -757,10 +757,10 @@ def test_slider(qtbot):
 def test_statusbar(qtbot):
     widget = widgets.MainWindow()
     status_bar = widgets.StatusBar()
-    label = widgets.Label("test")
+    label = widgets.Label("test_statusbar")
     status_bar.addWidget(label)
     status_bar.setup_default_bar()
-    status_bar.show_message("test")
+    status_bar.show_message("test_statusbar")
     status_bar.add_action(widgets.Action())
     status_bar += widgets.Action()
     widget.setStatusBar(status_bar)
@@ -771,7 +771,7 @@ def test_statusbar(qtbot):
 
 def test_stackedlayout(qtbot):
     layout = widgets.StackedLayout()
-    widget = widgets.RadioButton("test")
+    widget = widgets.RadioButton("test_stackedlayout")
     layout += widget
     assert widget in layout
     layout.set_current_widget(widget)
@@ -784,7 +784,6 @@ def test_stackedlayout(qtbot):
     assert len(layout) == 1
     for item in layout:
         pass
-    return True
 
 
 def test_spaceritem(qtbot):
@@ -797,7 +796,7 @@ def test_spinbox(qtbot):
     widget.set_disabled()
     widget.set_enabled()
     widget.set_value(10)
-    widget.set_special_value("test")
+    widget.set_special_value("test_spinbox")
     with pytest.raises(ValueError):
         widget.set_button_symbols("test")
     with pytest.raises(ValueError):
@@ -822,8 +821,8 @@ def test_splashscreen(qtbot):
 
 def test_splitter(qtbot):
     widget = widgets.Splitter("vertical")
-    test = widgets.Label("test")
-    test2 = widgets.Label("test2")
+    test = widgets.Label("test_splitter")
+    test2 = widgets.Label("test_splitter")
     widget.add_widget(test)
     widget += test2
     assert len(widget) == 2
@@ -861,10 +860,10 @@ def test_tabwidget(qtbot):
     widget = widgets.TabWidget(detachable=True)
     widget.add_tab(widgets.Widget(), "mdi.timer", show=True)
     widget.set_document_mode(True)
-    widget.add_tab(widgets.Widget(), "test", "mdi.timer", position=0, show=True)
+    widget.add_tab(widgets.Widget(), "test_tabwidget", "mdi.timer", position=0, show=True)
     assert len(widget) == 2
     w = widgets.Widget()
-    widget.add_tab(w, "test", "mdi.timer")
+    widget.add_tab(w, "test_tabwidget", "mdi.timer")
     assert widget[2] == w
     widget.set_tab(0, "right", None)
     widget.set_detachable()
@@ -894,11 +893,11 @@ def test_textbrowser(qtbot):
 def test_textedit(qtbot):
     widget = widgets.TextEdit()
     widget.set_text("test")
+    widget.append_text(" this")
+    assert widget.text() == "test\n this"
     with widget.create_cursor() as c:
         c.select_text(1, 3)
     widget.select_text(1, 3)
-    widget.append_text(" this")
-    assert widget.text() == "test\n this"
     widget.set_font("Consolas")
     widget.set_enabled()
     widget.set_read_only()
