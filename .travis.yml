@@ -19,6 +19,7 @@ addons:
       - libxcb-render-util0
       - libxcb-xinerama0
       - libxcb-xfixes0
+      - libpulse-mainloop-glib0
       - python3-pyqt5
       - python3-pyqt5.qtwebengine
 services: xvfb
