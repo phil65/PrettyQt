@@ -275,3 +275,4 @@ def test_url():
     url = core.Url()
     url.to_path()
     assert not url.is_local_file()
+    repr(url)
