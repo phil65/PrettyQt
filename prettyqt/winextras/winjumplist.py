@@ -19,13 +19,13 @@ class WinJumpList(QtWinExtras.QWinJumpList):
         self.addCategory(cat)
         return cat
 
-    def get_recent(self):
+    def get_recent(self) -> QtWinExtras.QWinJumpListCategory:
         return self.recent()
 
-    def get_frequent(self):
+    def get_frequent(self) -> QtWinExtras.QWinJumpListCategory:
         return self.frequent()
 
-    def get_tasks(self):
+    def get_tasks(self) -> QtWinExtras.QWinJumpListCategory:
         return self.tasks()
 
 

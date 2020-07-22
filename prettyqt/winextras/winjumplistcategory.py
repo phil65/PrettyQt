@@ -13,6 +13,7 @@ except ImportError:
 from prettyqt import gui
 from prettyqt.utils import bidict
 
+
 TYPES = bidict(
     custom=QtWinExtras.QWinJumpListCategory.Custom,
     recent=QtWinExtras.QWinJumpListCategory.Recent,
@@ -25,7 +26,7 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
     def __contains__(self, item):
         return item in self.items()
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.count()
 
     def __bool__(self):
@@ -34,10 +35,10 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
     def get_type(self) -> str:
         return TYPES.inv[self.type()]
 
-    def add_destination(self, destination: Union[str, pathlib.Path]):
+    def add_destination(self, destination: Union[str, pathlib.Path]) -> None:
         self.addDestination(str(destination))
 
-    def set_title(self, title: str):
+    def set_title(self, title: str) -> None:
         self.setTitle(title)
 
     def add_link(
@@ -46,7 +47,7 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
         exe_path: Union[str, pathlib.Path],
         arguments: Optional[list] = None,
         icon: gui.icon.IconType = None,
-    ):
+    ) -> None:
         icon = gui.icon.get_icon(icon)
         if arguments is None:
             arguments = []

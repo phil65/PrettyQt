@@ -227,7 +227,7 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         self.add_tab(widget, title, icon="mdi.widgets", show=True)
 
-    def set_tab(self, index, position: str, widget=None):
+    def set_tab(self, index, position: str, widget: Optional[QtWidgets.QWidget] = None):
         self.tabBar().set_tab(index, position, widget)
 
 

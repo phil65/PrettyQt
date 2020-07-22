@@ -6,6 +6,7 @@ contains QtWidgets-based classes
 """
 
 from .application import Application
+from .sizepolicy import SizePolicy
 from .widget import Widget
 from .frame import Frame
 from .abstractslider import AbstractSlider
@@ -21,7 +22,6 @@ from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
 from .style import Style
 from .styleoption import StyleOption
-from .sizepolicy import SizePolicy
 from .stylepainter import StylePainter
 from .stylefactory import StyleFactory
 from .dialog import BaseDialog, Dialog

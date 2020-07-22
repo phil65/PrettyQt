@@ -5,10 +5,11 @@
 from contextlib import contextmanager
 import functools
 import operator
-from typing import Callable, Optional, Union
+from typing import Dict, Iterator, Callable, Optional, Union, Any
 
 from qtpy import QtCore, QtGui, QtWidgets
 import qstylizer.parser
+import qstylizer.style
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, colors
@@ -81,10 +82,10 @@ QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
 
 class Widget(QtWidgets.QWidget):
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}: {self.__getstate__()}"
 
-    def __getstate__(self):
+    def __getstate__(self) -> Dict[str, Any]:
         return dict(
             layout=self.layout(),
             size_policy=self.get_size_policy(),
@@ -93,21 +94,21 @@ class Widget(QtWidgets.QWidget):
             statustip=self.statusTip(),
         )
 
-    def __setstate__(self, state):
-        self.__init__()
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        super().__init__()
         self.set_layout(state["layout"])
         self.setSizePolicy(state["size_policy"])
         self.setAccessibleName(state["accessible_name"])
         self.setToolTip(state.get("tooltip", ""))
         self.setStatusTip(state.get("statustip", ""))
 
-    def resize(self, *size):
+    def resize(self, *size) -> None:
         if isinstance(size[0], tuple):
             super().resize(*size[0])
         else:
             super().resize(*size)
 
-    def set_icon(self, icon: gui.icon.IconType):
+    def set_icon(self, icon: gui.icon.IconType) -> None:
         """set the window icon
 
         Args:
@@ -116,28 +117,28 @@ class Widget(QtWidgets.QWidget):
         icon = gui.icon.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
-    def set_min_size(self, *size):
+    def set_min_size(self, *size) -> None:
         self.setMinimumSize(*size)
 
-    def set_max_size(self, *size):
+    def set_max_size(self, *size) -> None:
         self.setMaximumSize(*size)
 
-    def set_min_width(self, width: Optional[int]):
+    def set_min_width(self, width: Optional[int]) -> None:
         if width is None:
             width = 0
         self.setMinimumWidth(width)
 
-    def set_max_width(self, width: Optional[int]):
+    def set_max_width(self, width: Optional[int]) -> None:
         if width is None:
             width = QtWidgets.QWIDGETSIZE_MAX
         self.setMaximumWidth(width)
 
-    def set_min_height(self, height: Optional[int]):
+    def set_min_height(self, height: Optional[int]) -> None:
         if height is None:
             height = 0
         self.setMinimumHeight(height)
 
-    def set_max_height(self, height: Optional[int]):
+    def set_max_height(self, height: Optional[int]) -> None:
         if height is None:
             height = QtWidgets.QWIDGETSIZE_MAX
         self.setMaximumHeight(height)
@@ -158,16 +159,16 @@ class Widget(QtWidgets.QWidget):
     def enabled(self, state: bool):
         self.setEnabled(state)
 
-    def set_enabled(self, enabled: bool = True):
+    def set_enabled(self, enabled: bool = True) -> None:
         self.setEnabled(enabled)
 
-    def set_disabled(self):
+    def set_disabled(self) -> None:
         self.setEnabled(False)
 
-    def set_title(self, title: str):
+    def set_title(self, title: str) -> None:
         self.setWindowTitle(title)
 
-    def set_tooltip(self, text: str):
+    def set_tooltip(self, text: str) -> None:
         self.setToolTip(text)
 
     def set_font(
@@ -200,7 +201,7 @@ class Widget(QtWidgets.QWidget):
         stay_on_top: Optional[bool] = None,
         frameless: Optional[bool] = None,
         window: Optional[bool] = None,
-    ):
+    ) -> None:
         if minimize is not None:
             self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
         if maximize is not None:
@@ -214,12 +215,12 @@ class Widget(QtWidgets.QWidget):
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
 
-    def set_attribute(self, attribute: str, state: bool = True):
+    def set_attribute(self, attribute: str, state: bool = True) -> None:
         if attribute not in ATTRIBUTES:
             raise ValueError(f"Invalid attribute '{attribute}'.")
         self.setAttribute(ATTRIBUTES[attribute], state)
 
-    def set_modality(self, modality: str = "window"):
+    def set_modality(self, modality: str = "window") -> None:
         """set modality for the dialog
 
         Valid values for modality: "none", "window", "application"
@@ -247,7 +248,7 @@ class Widget(QtWidgets.QWidget):
 
     def set_size_policy(
         self, horizontal: Optional[str] = None, vertical: Optional[str] = None
-    ):
+    ) -> None:
         """sets the sizes policy
 
         possible values for both parameters are "fixed", "minimum", "maximum",
@@ -264,7 +265,7 @@ class Widget(QtWidgets.QWidget):
             sp.set_vertical_policy(vertical)
         self.setSizePolicy(sp)
 
-    def get_size_policy(self):
+    def get_size_policy(self) -> widgets.SizePolicy:
         qpol = self.sizePolicy()
         if isinstance(qpol, widgets.SizePolicy):
             return qpol
@@ -277,30 +278,30 @@ class Widget(QtWidgets.QWidget):
         pol.setVerticalStretch(qpol.verticalStretch())
         return pol
 
-    def set_background_color(self, color: colors.ColorType):
+    def set_background_color(self, color: colors.ColorType) -> None:
         col_str = "" if color is None else colors.get_color(color).name()
         with self.edit_stylesheet() as ss:
             ss.backgroundColor.setValue(col_str)
 
     @contextmanager
-    def updates_off(self):
+    def updates_off(self) -> Iterator[None]:
         self.setUpdatesEnabled(False)
         yield None
         self.setUpdatesEnabled(True)
 
     @contextmanager
-    def edit_stylesheet(self):
+    def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
         ss = qstylizer.parser.parse(self.styleSheet())
         yield ss
         self.setStyleSheet(ss.toString())
 
     @contextmanager
-    def current_font(self):
+    def current_font(self) -> Iterator[gui.Font]:
         font = gui.Font(self.font())
         yield font
         self.setFont(font)
 
-    def set_contextmenu_policy(self, policy: str):
+    def set_contextmenu_policy(self, policy: str) -> None:
         """set contextmenu policy for given item view
 
         Allowed values are "none", "prevent", "default", "actions", "custom"
@@ -325,13 +326,13 @@ class Widget(QtWidgets.QWidget):
         """
         return CONTEXT_POLICIES.inv[self.contextMenuPolicy()]
 
-    def set_custom_menu(self, method: Callable):
+    def set_custom_menu(self, method: Callable) -> None:
         self.set_contextmenu_policy("custom")
         self.customContextMenuRequested.connect(method)
 
     def set_layout(
         self, layout: Union[str, QtWidgets.QLayout, None], margin: Optional[int] = None
-    ):
+    ) -> None:
         if layout is None:
             return None
         if layout in ["horizontal", "vertical"]:
@@ -354,20 +355,20 @@ class Widget(QtWidgets.QWidget):
         if margin is not None:
             self.box.setContentsMargins(margin, margin, margin, margin)
 
-    def center(self):
+    def center(self) -> None:
         qr = self.frameGeometry()
         cp = gui.GuiApplication.screens()[0].geometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def set_cursor(self, cursor: str):
+    def set_cursor(self, cursor: str) -> None:
         if cursor not in CURSOR_SHAPES:
             raise ValueError(
                 f"Invalid cursor '{cursor}'. " f"Valid values: {CURSOR_SHAPES.keys()}"
             )
         self.setCursor(CURSOR_SHAPES[cursor])
 
-    def set_focus_policy(self, policy: str):
+    def set_focus_policy(self, policy: str) -> None:
         if policy not in FOCUS_POLICIES:
             raise ValueError(
                 f"Invalid policy '{policy}'. " f"Valid values: {FOCUS_POLICIES.keys()}"
@@ -377,15 +378,15 @@ class Widget(QtWidgets.QWidget):
     def get_focus_policy(self) -> str:
         return FOCUS_POLICIES.inv[self.focusPolicy()]
 
-    def set_font_size(self, size: int):
+    def set_font_size(self, size: int) -> None:
         font = self.font()
         font.setPointSize(size)
         self.setFont(font)
 
-    def font_metrics(self):
+    def font_metrics(self) -> gui.FontMetrics:
         return gui.FontMetrics(self.fontMetrics())
 
-    def set_margin(self, margin: int):
+    def set_margin(self, margin: int) -> None:
         self.setContentsMargins(margin, margin, margin, margin)
 
 
