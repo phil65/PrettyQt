@@ -8,6 +8,8 @@ nav:
         - gui: api/gui.md
         - widgets: api/widgets.md
         - charts: api/charts.md
+        - multimedia: api/multimedia.md
+        - multimediawidgets: api/multimediawidgets.md
         - webenginewidgets: api/webenginewidgets.md
         - syntaxhighlighters: api/syntaxhighlighters.md
         - custom_models: api/custom_models.md
