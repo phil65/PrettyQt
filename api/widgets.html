@@ -1313,6 +1313,11 @@
     set_wrap_mode()
   </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.plaintextedit.PlainTextEdit.wheelEvent">
+    wheelEvent()
+  </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -1809,6 +1814,16 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="charts.html" title="charts">
       charts
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="multimedia.html" title="multimedia">
+      multimedia
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="multimediawidgets.html" title="multimediawidgets">
+      multimediawidgets
     </a>
 </li>
 <li class="md-nav__item">
@@ -3037,6 +3052,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.plaintextedit.PlainTextEdit.set_wrap_mode">
     set_wrap_mode()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.plaintextedit.PlainTextEdit.wheelEvent">
+    wheelEvent()
   </a>
 </li>
 </ul>
@@ -6624,15 +6644,15 @@ get_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>44
-45
-46
-47
-48
-49
-50
+<pre><span></span>50
 51
-52</pre>
+52
+53
+54
+55
+56
+57
+58</pre>
 </div>
 </td>
 <td class="code">
@@ -6706,13 +6726,7 @@ set_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>27
-28
-29
-30
-31
-32
-33
+<pre><span></span>33
 34
 35
 36
@@ -6721,7 +6735,13 @@ set_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
 39
 40
 41
-42</pre>
+42
+43
+44
+45
+46
+47
+48</pre>
 </div>
 </td>
 <td class="code">
@@ -7098,15 +7118,15 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>79
-80
-81
-82
-83
-84
-85
-86
-87</pre>
+<pre><span></span>86
+87
+88
+89
+90
+91
+92
+93
+94</pre>
 </div>
 </td>
 <td class="code">
@@ -7180,20 +7200,20 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>64
-65
-66
-67
-68
-69
-70
-71
+<pre><span></span>71
 72
 73
 74
 75
 76
-77</pre>
+77
+78
+79
+80
+81
+82
+83
+84</pre>
 </div>
 </td>
 <td class="code">
@@ -9468,15 +9488,15 @@ __len__<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>39
-40
-41
-42</pre>
+<pre><span></span>41
+42
+43
+44</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">"""needed for PySide2</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
@@ -9715,9 +9735,7 @@ contextMenuEvent<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>71
-72
-73
+<pre><span></span>73
 74
 75
 76
@@ -9727,7 +9745,9 @@ contextMenuEvent<span class="p">(</span><span class="bp">self</span><span class=
 80
 81
 82
-83</pre>
+83
+84
+85</pre>
 </div>
 </td>
 <td class="code">
@@ -10499,8 +10519,8 @@ font<span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>69
-70</pre>
+<pre><span></span>76
+77</pre>
 </div>
 </td>
 <td class="code">
@@ -10546,15 +10566,15 @@ get_echo_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>123
-124
-125
-126
-127
-128
-129
-130
-131</pre>
+<pre><span></span>130
+131
+132
+133
+134
+135
+136
+137
+138</pre>
 </div>
 </td>
 <td class="code">
@@ -10628,20 +10648,20 @@ set_echo_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>108
-109
-110
-111
-112
-113
-114
-115
+<pre><span></span>115
 116
 117
 118
 119
 120
-121</pre>
+121
+122
+123
+124
+125
+126
+127
+128</pre>
 </div>
 </td>
 <td class="code">
@@ -10702,13 +10722,13 @@ set_read_only<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>78
-79
-80
-81
-82
-83
-84</pre>
+<pre><span></span>85
+86
+87
+88
+89
+90
+91</pre>
 </div>
 </td>
 <td class="code">
@@ -12099,12 +12119,7 @@ add_action<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 75
- 76
- 77
- 78
- 79
- 80
+<pre><span></span> 80
  81
  82
  83
@@ -12138,7 +12153,12 @@ add_action<span class="p">(</span><span class="bp">self</span><span class="p">,<
 111
 112
 113
-114</pre>
+114
+115
+116
+117
+118
+119</pre>
 </div>
 </td>
 <td class="code">
@@ -12242,12 +12262,7 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>52
-53
-54
-55
-56
-57
+<pre><span></span>57
 58
 59
 60
@@ -12263,7 +12278,12 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 70
 71
 72
-73</pre>
+73
+74
+75
+76
+77
+78</pre>
 </div>
 </td>
 <td class="code">
@@ -12332,14 +12352,14 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>43
-44
-45
-46
-47
-48
+<pre><span></span>48
 49
-50</pre>
+50
+51
+52
+53
+54
+55</pre>
 </div>
 </td>
 <td class="code">
@@ -12783,22 +12803,22 @@ set_line_wrap_mode<span class="p">(</span><span class="bp">self</span><span clas
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156</pre>
+<pre><span></span>161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176</pre>
 </div>
 </td>
 <td class="code">
@@ -12861,13 +12881,13 @@ set_read_only<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>104
-105
-106
-107
-108
-109
-110</pre>
+<pre><span></span>124
+125
+126
+127
+128
+129
+130</pre>
 </div>
 </td>
 <td class="code">
@@ -12939,20 +12959,20 @@ set_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>126
-127
-128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139</pre>
+<pre><span></span>146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159</pre>
 </div>
 </td>
 <td class="code">
@@ -12971,6 +12991,51 @@ set_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WRAP_MODES</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"invalid wrap mode. Allowed values: </span><span class="si">{</span><span class="n">WRAP_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWordWrapMode</span><span class="p">(</span><span class="n">WRAP_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.plaintextedit.PlainTextEdit.wheelEvent">
+<code class="highlight language-python">
+wheelEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>handle wheel event for zooming</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/plaintextedit.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>70
+71
+72
+73
+74
+75
+76
+77
+78
+79</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">wheelEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="sd">"""</span>
+<span class="sd">    handle wheel event for zooming</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_wheel_zoom</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">modifiers</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CTRL_MOD</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">zoomIn</span><span class="p">()</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">angleDelta</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">zoomOut</span><span class="p">()</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">wheelEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </code></pre>
 </div>
 </td>
@@ -13382,8 +13447,7 @@ get_control_type<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>108
-109
+<pre><span></span>109
 110
 111
 112
@@ -13392,7 +13456,8 @@ get_control_type<span class="p">(</span><span class="bp">self</span><span class=
 115
 116
 117
-118</pre>
+118
+119</pre>
 </div>
 </td>
 <td class="code">
@@ -13448,8 +13513,7 @@ get_horizontal_policy<span class="p">(</span><span class="bp">self</span><span c
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>64
-65
+<pre><span></span>65
 66
 67
 68
@@ -13457,7 +13521,8 @@ get_horizontal_policy<span class="p">(</span><span class="bp">self</span><span c
 70
 71
 72
-73</pre>
+73
+74</pre>
 </div>
 </td>
 <td class="code">
@@ -13512,8 +13577,7 @@ get_vertical_policy<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>86
-87
+<pre><span></span>87
 88
 89
 90
@@ -13521,7 +13585,8 @@ get_vertical_policy<span class="p">(</span><span class="bp">self</span><span cla
 92
 93
 94
-95</pre>
+95
+96</pre>
 </div>
 </td>
 <td class="code">
@@ -13581,8 +13646,7 @@ set_control_type<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>120
-121
+<pre><span></span>121
 122
 123
 124
@@ -13591,12 +13655,13 @@ set_control_type<span class="p">(</span><span class="bp">self</span><span class=
 127
 128
 129
-130</pre>
+130
+131</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_control_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_control_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""sets the control type</span>
 
 <span class="sd">    possible values are "default", "buttonbox", "checkbox", "combobox", "frame",</span>
@@ -13651,8 +13716,7 @@ set_horizontal_policy<span class="p">(</span><span class="bp">self</span><span c
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>75
-76
+<pre><span></span>76
 77
 78
 79
@@ -13660,12 +13724,13 @@ set_horizontal_policy<span class="p">(</span><span class="bp">self</span><span c
 81
 82
 83
-84</pre>
+84
+85</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""sets the horizontal policy</span>
 
 <span class="sd">    possible values are "fixed", "minimum", "maximum", "preferred",</span>
@@ -13719,8 +13784,7 @@ set_vertical_policy<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 97
- 98
+<pre><span></span> 98
  99
 100
 101
@@ -13728,12 +13792,13 @@ set_vertical_policy<span class="p">(</span><span class="bp">self</span><span cla
 103
 104
 105
-106</pre>
+106
+107</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""sets the horizontal policy</span>
 
 <span class="sd">    possible values are "fixed", "minimum", "maximum", "preferred",</span>
@@ -13800,21 +13865,21 @@ get_tick_position<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97</pre>
+<pre><span></span> 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103</pre>
 </div>
 </td>
 <td class="code">
@@ -13879,13 +13944,7 @@ for vertical orientation of the slider,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>65
-66
-67
-68
-69
-70
-71
+<pre><span></span>71
 72
 73
 74
@@ -13895,7 +13954,13 @@ for vertical orientation of the slider,
 78
 79
 80
-81</pre>
+81
+82
+83
+84
+85
+86
+87</pre>
 </div>
 </td>
 <td class="code">
@@ -13974,15 +14039,15 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 99
-100
-101
-102
-103
-104
-105
-106
-107</pre>
+<pre><span></span>110
+111
+112
+113
+114
+115
+116
+117
+118</pre>
 </div>
 </td>
 <td class="code">
@@ -14056,20 +14121,20 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97</pre>
+<pre><span></span> 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108</pre>
 </div>
 </td>
 <td class="code">
@@ -14247,7 +14312,7 @@ set_horizontal<span class="p">(</span><span class="bp">self</span><span class="p
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""set slider orientation to horizontal</span>
 <span class="sd">    """</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span>
@@ -14280,7 +14345,7 @@ set_vertical<span class="p">(</span><span class="bp">self</span><span class="p">
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""set slider orientation to vertical</span>
 <span class="sd">    """</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Vertical</span>
@@ -14421,15 +14486,15 @@ get_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>133
-134
-135
-136
-137
+<pre><span></span>137
 138
 139
 140
-141</pre>
+141
+142
+143
+144
+145</pre>
 </div>
 </td>
 <td class="code">
@@ -14482,15 +14547,15 @@ get_remove_behaviour<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>108
-109
-110
-111
-112
+<pre><span></span>112
 113
 114
 115
-116</pre>
+116
+117
+118
+119
+120</pre>
 </div>
 </td>
 <td class="code">
@@ -14525,9 +14590,9 @@ mouseDoubleClickEvent<span class="p">(</span><span class="bp">self</span><span c
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>80
-81
-82</pre>
+<pre><span></span>82
+83
+84</pre>
 </div>
 </td>
 <td class="code">
@@ -14595,11 +14660,7 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>118
-119
-120
-121
-122
+<pre><span></span>122
 123
 124
 125
@@ -14608,12 +14669,16 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 128
 129
 130
-131</pre>
+131
+132
+133
+134
+135</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""set elide mode</span>
 
 <span class="sd">    Valid values are "left", "right", "middle", "none"</span>
@@ -14669,18 +14734,18 @@ set_icon_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>84
-85
-86
+<pre><span></span>86
 87
 88
 89
-90</pre>
+90
+91
+92</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set the icon size for the tabs</span>
 
 <span class="sd">    Args:</span>
@@ -14732,23 +14797,23 @@ Possible values: left, right, previous</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 95
- 96
- 97
- 98
- 99
+<pre><span></span> 99
 100
 101
 102
 103
 104
 105
-106</pre>
+106
+107
+108
+109
+110</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_remove_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_remove_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""sets the remove hehaviour</span>
 
 <span class="sd">    What tab should be set as current when removeTab is called</span>
@@ -14808,8 +14873,8 @@ closeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>258
-259</pre>
+<pre><span></span>265
+266</pre>
 </div>
 </td>
 <td class="code">
@@ -14852,12 +14917,7 @@ closing it, and placing the content back into the DetachableTabWidget</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>184
-185
-186
-187
-188
-189
+<pre><span></span>189
 190
 191
 192
@@ -14876,14 +14936,19 @@ closing it, and placing the content back into the DetachableTabWidget</p>
 205
 206
 207
-208</pre>
+208
+209
+210
+211
+212
+213</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">attach_tab</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">widget</span><span class="p">,</span>
+    <span class="n">widget</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">],</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">insert_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -14927,16 +14992,16 @@ close_detached_tabs<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>210
-211
-212
-213
-214</pre>
+<pre><span></span>215
+216
+217
+218
+219</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">close_detached_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">close_detached_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Close all tabs that are currently detached</span>
 <span class="sd">    """</span>
     <span class="k">for</span> <span class="n">detached_tab</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">detached_tabs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
@@ -14965,12 +15030,7 @@ a DetachedTab window</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>127
-128
-129
-130
-131
-132
+<pre><span></span>132
 133
 134
 135
@@ -14996,13 +15056,18 @@ a DetachedTab window</p>
 155
 156
 157
-158</pre>
+158
+159
+160
+161
+162
+163</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">detach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">detach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""</span>
 <span class="sd">    Detach the tab by removing it's contents and placing them in</span>
 <span class="sd">    a DetachedTab window</span>
@@ -15072,15 +15137,15 @@ get_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 94
- 95
- 96
- 97
- 98
- 99
+<pre><span></span> 99
 100
 101
-102</pre>
+102
+103
+104
+105
+106
+107</pre>
 </div>
 </td>
 <td class="code">
@@ -15115,12 +15180,12 @@ open_widget<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>223
-224
-225
-226
-227
-228</pre>
+<pre><span></span>228
+229
+230
+231
+232
+233</pre>
 </div>
 </td>
 <td class="code">
@@ -15191,12 +15256,7 @@ set_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>79
-80
-81
-82
-83
-84
+<pre><span></span>84
 85
 86
 87
@@ -15204,12 +15264,17 @@ set_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 89
 90
 91
-92</pre>
+92
+93
+94
+95
+96
+97</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_tab_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_tab_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""set tab shape for the tabwidget</span>
 
 <span class="sd">    Valid values are "rounded" and "triangular"</span>
@@ -16133,15 +16198,15 @@ get_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>318
-319
+<pre><span></span>319
 320
 321
 322
 323
 324
 325
-326</pre>
+326
+327</pre>
 </div>
 </td>
 <td class="code">
@@ -16195,8 +16260,7 @@ str</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>237
-238
+<pre><span></span>238
 239
 240
 241
@@ -16204,7 +16268,8 @@ str</p>
 243
 244
 245
-246</pre>
+246
+247</pre>
 </div>
 </td>
 <td class="code">
@@ -16241,16 +16306,16 @@ resize(self, int, int)</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>104
-105
+<pre><span></span>105
 106
 107
-108</pre>
+108
+109</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">size</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">tuple</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="o">*</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
@@ -16315,8 +16380,7 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>303
-304
+<pre><span></span>304
 305
 306
 307
@@ -16328,12 +16392,13 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 313
 314
 315
-316</pre>
+316
+317</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""set contextmenu policy for given item view</span>
 
 <span class="sd">    Allowed values are "none", "prevent", "default", "actions", "custom"</span>
@@ -16389,19 +16454,19 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>110
-111
+<pre><span></span>111
 112
 113
 114
 115
 116
-117</pre>
+117
+118</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""set the window icon</span>
 
 <span class="sd">    Args:</span>
@@ -16469,8 +16534,7 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>222
-223
+<pre><span></span>223
 224
 225
 226
@@ -16482,12 +16546,13 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 232
 233
 234
-235</pre>
+235
+236</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_modality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modality</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"window"</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_modality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modality</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"window"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""set modality for the dialog</span>
 
 <span class="sd">    Valid values for modality: "none", "window", "application"</span>
@@ -16553,8 +16618,7 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>248
-249
+<pre><span></span>249
 250
 251
 252
@@ -16570,14 +16634,15 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 262
 263
 264
-265</pre>
+265
+266</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_size_policy</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">horizontal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">vertical</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""sets the sizes policy</span>
 
 <span class="sd">    possible values for both parameters are "fixed", "minimum", "maximum",</span>

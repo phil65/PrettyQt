@@ -131,6 +131,16 @@
     </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="multimedia.html" title="multimedia">
+      multimedia
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="multimediawidgets.html" title="multimediawidgets">
+      multimediawidgets
+    </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="webenginewidgets.html" title="webenginewidgets">
       webenginewidgets
     </a>
@@ -527,9 +537,9 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>23
-24
-25</pre>
+<pre><span></span>30
+31
+32</pre>
 </div>
 </td>
 <td class="code">
@@ -729,9 +739,7 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>21
-22
-23
+<pre><span></span>23
 24
 25
 26
@@ -745,7 +753,9 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 34
 35
 36
-37</pre>
+37
+38
+39</pre>
 </div>
 </td>
 <td class="code">
@@ -806,21 +816,25 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>33
-34
-35
-36
-37
-38
-39
-40
+<pre><span></span>40
 41
-42</pre>
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Validator not initialized"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
     <span class="n">match</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
