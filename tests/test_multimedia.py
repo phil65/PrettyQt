@@ -5,7 +5,7 @@
 
 import pytest
 
-from prettyqt import multimedia
+from prettyqt import multimedia, core
 
 URL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
@@ -29,3 +29,8 @@ def test_mediaplayer():
     player = multimedia.MediaPlayer()
     assert player.get_state() == "stopped"
     assert player.get_media_status() == "no_media"
+
+
+def test_mediacontent():
+    cont = multimedia.MediaContent()
+    assert cont.get_url() == core.Url("")

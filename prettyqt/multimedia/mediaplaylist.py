@@ -29,13 +29,18 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
         return self.mediaCount()
 
     def __getitem__(self, item):
-        return self.media(item)
+        return multimedia.MediaContent(self.media(item))
 
     def __delitem__(self, item):
         self.removeMedia(item)
 
     def __iter__(self):
         return iter(self[i] for i in range(self.mediaCount()))
+
+    # def serialize(self):
+    #     return dict(current_index=self.currentIndex(),
+    #                 playback_mode=self.get_playback_mode(),
+    #                 items=list(self))
 
     def add_media(
         self, media: Union[pathlib.Path, str], pos: Optional[int] = None
