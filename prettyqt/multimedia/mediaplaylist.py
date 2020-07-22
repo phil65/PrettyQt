@@ -25,7 +25,7 @@ QtMultimedia.QMediaPlaylist.__bases__ = (core.Object, multimedia.MediaBindableIn
 class MediaPlaylist(QtMultimedia.QMediaPlaylist):
     playback_mode_changed = core.Signal(str)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.mediaCount()
 
     def __getitem__(self, item):

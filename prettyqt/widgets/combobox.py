@@ -80,7 +80,7 @@ class ComboBox(QtWidgets.QComboBox):
         self.setDuplicatesEnabled(state["duplicates_enabled"])
         self.setFrame(state["has_frame"])
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.count()
 
     def index_changed(self, index: int):

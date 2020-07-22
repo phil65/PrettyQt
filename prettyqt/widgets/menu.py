@@ -26,7 +26,7 @@ class Menu(QtWidgets.QMenu):
     def __iter__(self):
         return iter(self.actions())
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.actions())
 
     def __add__(self, other):

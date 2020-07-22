@@ -58,7 +58,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         super().__init__(*args, **kwargs)
         self.clicked.connect(self.on_click)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.buttons())
 
     def __getitem__(self, index):

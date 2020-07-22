@@ -52,7 +52,7 @@ class Splitter(QtWidgets.QSplitter):
     def __iter__(self):
         return iter(self.get_children())
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.count()
 
     def __add__(self, other):

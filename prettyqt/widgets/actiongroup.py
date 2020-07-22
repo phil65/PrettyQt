@@ -24,6 +24,9 @@ class ActionGroup(QtWidgets.QActionGroup):
     def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
 
+    def __len__(self) -> int:
+        return len(self.actions())
+
     def set_exclusion_policy(self, policy: Optional[str]):
         """set exclusion policy to use
 

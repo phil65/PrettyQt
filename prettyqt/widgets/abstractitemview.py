@@ -49,7 +49,7 @@ QtWidgets.QAbstractItemView.__bases__ = (widgets.AbstractScrollArea,)
 
 
 class AbstractItemView(QtWidgets.QAbstractItemView):
-    def __len__(self):
+    def __len__(self) -> int:
         if self.model() is not None:
             return self.model().rowCount()
         return 0

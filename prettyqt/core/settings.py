@@ -56,7 +56,7 @@ class Settings(QtCore.QSettings):
     def __iter__(self):
         return iter(self.allKeys())
 
-    def __len__(self):
+    def __len__(self) -> int:
         return len(self.allKeys())
 
     @classmethod

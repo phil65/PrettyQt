@@ -36,7 +36,7 @@ class Layout(QtWidgets.QLayout):
             widget = item.layout()
         return widget
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.count()
 
     def __repr__(self):

@@ -42,7 +42,7 @@ class ListWidget(QtWidgets.QListWidget):
     def __iter__(self):
         return iter(self.get_children())
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.count()
 
     def __getstate__(self):
