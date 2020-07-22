@@ -5,6 +5,7 @@
 from qtpy import QtWidgets
 
 from prettyqt.utils import bidict
+from typing import Dict, Any
 
 
 SIZE_POLICIES = bidict(
@@ -37,7 +38,7 @@ CONTROL_TYPES = bidict(
 
 
 class SizePolicy(QtWidgets.QSizePolicy):
-    def __repr__(self):
+    def __repr__(self) -> str:
         return f"{self.__class__.__name__}: {self.__getstate__()}"
 
     def __getstate__(self):
@@ -51,8 +52,8 @@ class SizePolicy(QtWidgets.QSizePolicy):
             retain_size_when_hidden=self.retainSizeWhenHidden(),
         )
 
-    def __setstate__(self, state):
-        self.__init__()
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        super().__init__()
         self.setHeightForWidth(state["has_height_for_width"])
         self.setWidthForHeight(state["has_width_for_height"])
         self.setHorizontalStretch(state["horizontal_stretch"])
@@ -72,7 +73,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
         """
         return SIZE_POLICIES.inv[self.horizontalPolicy()]
 
-    def set_horizontal_policy(self, mode: str):
+    def set_horizontal_policy(self, mode: str) -> None:
         """sets the horizontal policy
 
         possible values are "fixed", "minimum", "maximum", "preferred",
@@ -94,7 +95,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
         """
         return SIZE_POLICIES.inv[self.verticalPolicy()]
 
-    def set_vertical_policy(self, mode: str):
+    def set_vertical_policy(self, mode: str) -> None:
         """sets the horizontal policy
 
         possible values are "fixed", "minimum", "maximum", "preferred",
@@ -117,7 +118,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
         """
         return CONTROL_TYPES.inv[self.controlType()]
 
-    def set_control_type(self, mode: str):
+    def set_control_type(self, mode: str) -> None:
         """sets the control type
 
         possible values are "default", "buttonbox", "checkbox", "combobox", "frame",
