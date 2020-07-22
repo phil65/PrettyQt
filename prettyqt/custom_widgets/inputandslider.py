@@ -2,7 +2,10 @@
 """
 """
 
+from typing import Optional
 import pathlib
+
+from qtpy import QtWidgets
 
 from prettyqt import core, widgets
 
@@ -11,7 +14,9 @@ class InputAndSlider(widgets.Widget):
 
     value_changed = core.Signal(pathlib.Path)
 
-    def __init__(self, bounds=None, parent=None):
+    def __init__(
+        self, bounds: Optional[tuple] = None, parent: Optional[QtWidgets.QWidget] = None
+    ):
         super().__init__(parent)
         self.path = None
         layout = widgets.BoxLayout("horizontal", self)

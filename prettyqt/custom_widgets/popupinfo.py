@@ -2,7 +2,9 @@
 """
 """
 
-from qtpy import QtCore
+from typing import Optional
+
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
 
@@ -12,7 +14,9 @@ class PopupInfo(widgets.Dialog):
     dialog overlay to show some info to user
     """
 
-    def __init__(self, parent=None, text=None):
+    def __init__(
+        self, parent: Optional[QtWidgets.QWidget] = None, text: Optional[str] = None
+    ):
         super().__init__(parent=parent)
         self.timer = core.Timer.single_shot(callback=self.close)
         self.label = widgets.Label()

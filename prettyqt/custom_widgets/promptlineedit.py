@@ -3,6 +3,10 @@
 credits to PyQode Authors
 """
 
+from typing import Optional
+
+from qtpy import QtWidgets
+
 from prettyqt import core, gui, widgets
 
 
@@ -17,7 +21,7 @@ class PromptLineEdit(widgets.LineEdit):
 
     def __init__(
         self,
-        parent=None,
+        parent: Optional[QtWidgets.QWidget] = None,
         prompt_text: str = "Search",
         button_icon: gui.icon.IconType = "mdi.delete-circle-outline",
     ):

@@ -2,6 +2,10 @@
 """
 """
 
+from typing import Optional
+
+from qtpy import QtWidgets
+
 from prettyqt import core, gui, widgets
 from prettyqt.utils import colors
 
@@ -10,7 +14,7 @@ class ColorChooserButton(widgets.Widget):
 
     value_changed = core.Signal(gui.Color)
 
-    def __init__(self, color=None, parent=None):
+    def __init__(self, color=None, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)

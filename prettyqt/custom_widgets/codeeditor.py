@@ -2,7 +2,9 @@
 """
 """
 
-from qtpy import QtCore
+from typing import Optional
+
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
 
@@ -20,7 +22,9 @@ class LineNumberArea(widgets.Widget):
 
 
 class CodeEditor(widgets.PlainTextEdit):
-    def __init__(self, language: str = "python", parent=None):
+    def __init__(
+        self, language: str = "python", parent: Optional[QtWidgets.QWidget] = None
+    ):
         super().__init__(parent=parent)
         self.line_area = LineNumberArea(self)
         self.blockCountChanged.connect(self.update_line_area_width)

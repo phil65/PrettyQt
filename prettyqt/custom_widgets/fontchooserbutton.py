@@ -2,6 +2,10 @@
 """
 """
 
+from typing import Optional
+
+from qtpy import QtWidgets
+
 from prettyqt import core, gui, widgets
 
 
@@ -9,7 +13,7 @@ class FontChooserButton(widgets.Widget):
 
     value_changed = core.Signal(gui.Font)
 
-    def __init__(self, font=None, parent=None):
+    def __init__(self, font=None, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
         self._current_font = font
         layout = widgets.BoxLayout("horizontal", self)

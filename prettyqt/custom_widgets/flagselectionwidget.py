@@ -2,7 +2,9 @@
 """
 """
 
-from typing import Mapping, Union, Iterable, Dict
+from typing import Mapping, Union, Iterable, Dict, Optional
+
+from qtpy import QtWidgets
 
 from prettyqt import core, widgets
 
@@ -10,7 +12,12 @@ from prettyqt import core, widgets
 class FlagSelectionWidget(widgets.GroupBox):
     value_changed = core.Signal(int)
 
-    def __init__(self, label: str = "", layout="vertical", parent=None):
+    def __init__(
+        self,
+        label: str = "",
+        layout: str = "vertical",
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(title=label, parent=parent)
         self.box = widgets.BoxLayout(layout)
         self.buttons: Dict[widgets.CheckBox, int] = dict()

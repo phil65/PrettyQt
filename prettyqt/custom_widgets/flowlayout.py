@@ -2,18 +2,25 @@
 """
 """
 
+from typing import Optional, List
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
 
 
 class FlowLayout(widgets.Layout):
-    def __init__(self, parent=None, margin=None, spacing=-1):
+    def __init__(
+        self,
+        parent: Optional[QtWidgets.QWidget] = None,
+        margin: Optional[int] = None,
+        spacing: int = -1,
+    ):
         super().__init__(parent)
         if margin is not None:
             self.set_margin(margin)
         self.set_spacing(spacing)
-        self.items = []
+        self.items: List[QtWidgets.QLayoutItem] = []
 
     def __getstate__(self):
         return dict(items=self.get_children())

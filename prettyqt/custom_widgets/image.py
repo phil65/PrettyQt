@@ -3,15 +3,19 @@
 """
 
 import pathlib
-from typing import Union
+from typing import Union, Optional
 
-from qtpy import QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
 
 
 class Image(widgets.Label):
-    def __init__(self, path=None, parent=None):
+    def __init__(
+        self,
+        path: Union[pathlib.Path, str] = None,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(parent=parent)
         if path:
             self.set_image(path)

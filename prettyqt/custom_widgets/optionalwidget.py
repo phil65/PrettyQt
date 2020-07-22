@@ -2,11 +2,20 @@
 """
 """
 
+from typing import Optional
+
+from qtpy import QtWidgets
+
 from prettyqt import widgets
 
 
 class OptionalWidget(widgets.GroupBox):
-    def __init__(self, widget, title="", parent=None):
+    def __init__(
+        self,
+        widget: QtWidgets.QWidget,
+        title: str = "",
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(checkable=True, title=title)
         self.set_layout("vertical")
         self.box.add(widget)

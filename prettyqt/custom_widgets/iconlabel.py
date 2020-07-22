@@ -2,14 +2,20 @@
 """
 """
 
-from qtpy import QtCore
+from typing import Optional
+
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
 
 
 class IconLabel(widgets.Widget):
     def __init__(
-        self, text=None, tooltip="", icon="mdi.help-circle-outline", parent=None
+        self,
+        text: Optional[str] = None,
+        tooltip: str = "",
+        icon: gui.icon.IconType = "mdi.help-circle-outline",
+        parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent=parent)
         self.set_layout("horizontal")

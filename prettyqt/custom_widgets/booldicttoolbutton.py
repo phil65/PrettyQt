@@ -2,11 +2,21 @@
 """
 """
 
-from prettyqt import widgets
+from typing import Dict, Optional
+
+from qtpy import QtWidgets
+
+from prettyqt import widgets, gui
 
 
 class BoolDictToolButton(widgets.ToolButton):
-    def __init__(self, title, icon=None, dct=None, parent=None):
+    def __init__(
+        self,
+        title: str,
+        icon: gui.icon.IconType = None,
+        dct: Dict[str, str] = None,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(parent=parent)
         self.set_text(title)
         self.set_icon(icon)

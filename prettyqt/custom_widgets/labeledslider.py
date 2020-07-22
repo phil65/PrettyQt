@@ -2,7 +2,9 @@
 
 # credits to https://stackoverflow.com/a/54819051
 
-from qtpy import QtCore
+from typing import Optional, List
+
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
 
@@ -11,7 +13,12 @@ class LabeledSlider(widgets.Widget):
 
     value_changed = core.Signal(int)
 
-    def __init__(self, labels, orientation="horizontal", parent=None):
+    def __init__(
+        self,
+        labels: List[str],
+        orientation: str = "horizontal",
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(parent=parent)
 
         if not isinstance(labels, (tuple, list)):
