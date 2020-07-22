@@ -1,3 +1,14 @@
+## v0.103.0 (2020-07-22)
+
+### Feat
+
+- **ActionGroup**: add __getitem__ method
+- **MediaContent**: add get_url method
+- add multimediawidgets module
+- add multimedia module
+- **PlainTextEdit**: add allow_wheel_zoom method
+- **Object**: name kwarg for find_parent method
+
 ## v0.102.0 (2020-07-21)
 
 ### Refactor
