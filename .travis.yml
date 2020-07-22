@@ -20,6 +20,8 @@ addons:
       - libxcb-xinerama0
       - libxcb-xfixes0
       - libpulse-mainloop-glib0
+      - libgstreamer1.0-0
+      - gstreamer1.0-tools
       - python3-pyqt5
       - python3-pyqt5.qtwebengine
 services: xvfb
