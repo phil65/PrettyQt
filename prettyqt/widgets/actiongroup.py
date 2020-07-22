@@ -27,6 +27,9 @@ class ActionGroup(QtWidgets.QActionGroup):
     def __len__(self) -> int:
         return len(self.actions())
 
+    def __getitem__(self, item: int):
+        return self.actions()[item]
+
     def set_exclusion_policy(self, policy: Optional[str]):
         """set exclusion policy to use
 
@@ -60,4 +63,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     action = ActionGroup()
+    act = widgets.Action()
+    action.addAction(act)
+    print(act in action)
     app.exec_()

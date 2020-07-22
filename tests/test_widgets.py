@@ -42,6 +42,11 @@ def test_actiongroup(qtbot):
     group = widgets.ActionGroup(None)
     group.set_exclusion_policy(None)
     group.set_exclusion_policy("exclusive")
+    act = widgets.Action()
+    group.addAction(act)
+    assert group[0] == act
+    assert act in group
+    assert len(group) == 1
     with pytest.raises(ValueError):
         group.set_exclusion_policy("test")
     assert group.get_exclusion_policy() == "exclusive"
