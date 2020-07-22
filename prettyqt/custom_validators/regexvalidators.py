@@ -2,13 +2,18 @@
 """
 """
 
+from typing import Optional
+
+from qtpy import QtCore
 import regex as re
 
 from prettyqt import gui
 
 
 class BaseRegexValidator(gui.Validator):
-    def __init__(self, parent=None, regex=None):
+    def __init__(
+        self, parent: Optional[QtCore.QObject] = None, regex: Optional[str] = None
+    ):
         super().__init__(parent)
         self.regex = None
         if regex:
@@ -28,9 +33,13 @@ class BaseRegexValidator(gui.Validator):
         self.regex = re.compile(regex)
 
     def get_regex(self) -> str:
+        if self.regex is None:
+            raise TypeError("Validator not initialized")
         return self.regex.pattern
 
     def validate(self, text: str, pos: int = 0) -> tuple:
+        if self.regex is None:
+            raise TypeError("Validator not initialized")
         if text == "":
             return (self.Intermediate, text, pos)
         match = self.regex.match(text, partial=True)

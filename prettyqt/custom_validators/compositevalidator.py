@@ -2,18 +2,23 @@
 """
 """
 
-from typing import List
+from typing import List, Optional
 
+from qtpy import QtCore
 from prettyqt import gui
 
 
 class CompositeValidator(gui.Validator):
-    def __repr__(self):
-        return f"CompositeValidator({self.validators})"
-
-    def __init__(self, validators: List[gui.Validator] = None, parent=None):
+    def __init__(
+        self,
+        validators: List[gui.Validator] = None,
+        parent: Optional[QtCore.QObject] = None,
+    ):
         super().__init__(parent)
         self.validators = validators if validators is not None else []
+
+    def __repr__(self):
+        return f"CompositeValidator({self.validators})"
 
     def __getstate__(self):
         return dict(validators=self.validators)

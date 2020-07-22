@@ -3,15 +3,17 @@
 """
 
 import sre_constants
+from typing import Optional
 
+from qtpy import QtCore
 import regex as re
 
 from prettyqt import gui
 
 
 class RegexPatternValidator(gui.Validator):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, parent: Optional[QtCore.QObject] = None):
+        super().__init__(parent)
         self.error_message = ""
         self.compiled = None
 
