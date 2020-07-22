@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Optional, Dict
+from typing import Union, Optional, Dict
 
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -28,7 +28,7 @@ class TabWidget(QtWidgets.QTabWidget):
         parent: Optional[QtWidgets.QWidget] = None,
         closable: bool = False,
         detachable: bool = False,
-    ):
+    ) -> None:
 
         # Basic initalization
         super().__init__(parent)
@@ -44,10 +44,10 @@ class TabWidget(QtWidgets.QTabWidget):
             self.set_detachable()
         self.set_closable(closable)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.count()
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
         else:
@@ -78,10 +78,10 @@ class TabWidget(QtWidgets.QTabWidget):
             self.setTabWhatsThis(i, whatsthis)
         self.setCurrentIndex(state.get("index", 0))
 
-    def set_document_mode(self, state: bool = True):
+    def set_document_mode(self, state: bool = True) -> None:
         self.setDocumentMode(state)
 
-    def set_tab_shape(self, shape: str):
+    def set_tab_shape(self, shape: str) -> None:
         """set tab shape for the tabwidget
 
         Valid values are "rounded" and "triangular"
@@ -121,16 +121,16 @@ class TabWidget(QtWidgets.QTabWidget):
     def tab_icon(self, i: int) -> gui.Icon:
         return gui.Icon(self.tabIcon(i))
 
-    def set_detachable(self):
+    def set_detachable(self) -> None:
         self.tab_bar.on_detach.connect(self.detach_tab)
         widgets.app().aboutToQuit.connect(self.close_detached_tabs)
         self.setMovable(True)
 
-    def set_closable(self, closable: bool = True):
+    def set_closable(self, closable: bool = True) -> None:
         self.setTabsClosable(closable)
 
     @core.Slot(int, QtCore.QPoint)
-    def detach_tab(self, index: int, point: QtCore.QPoint):
+    def detach_tab(self, index: int, point: QtCore.QPoint) -> None:
         """
         Detach the tab by removing it's contents and placing them in
         a DetachedTab window
@@ -164,12 +164,12 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def add_tab(
         self,
-        item,
+        item: Union[QtWidgets.QWidget, QtWidgets.QLayout],
         label: str,
         icon: gui.icon.IconType = None,
         position: Optional[int] = None,
         show: bool = False,
-    ):
+    ) -> int:
         if isinstance(item, QtWidgets.QLayout):
             widget = widgets.Widget()
             widget.set_layout(item)
@@ -188,7 +188,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def attach_tab(
         self,
-        widget,
+        widget: Union[QtWidgets.QWidget, QtWidgets.QLayout],
         name: str,
         icon: gui.icon.IconType = None,
         insert_at: Optional[int] = None,
@@ -212,14 +212,14 @@ class TabWidget(QtWidgets.QTabWidget):
         # If they are, then do not add the icon to the tab
         self.add_tab(widget, name, icon=icon, position=insert_at, show=True)
 
-    def close_detached_tabs(self):
+    def close_detached_tabs(self) -> None:
         """Close all tabs that are currently detached
         """
         for detached_tab in self.detached_tabs.values():
             detached_tab.close()
 
     @core.Slot(int)
-    def remove_tab(self, index: int):
+    def remove_tab(self, index: int) -> None:
         widget = self.widget(index)
         self.removeTab(index)
         if widget is not None:
@@ -232,7 +232,9 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         self.add_tab(widget, title, icon="mdi.widgets", show=True)
 
-    def set_tab(self, index, position: str, widget: Optional[QtWidgets.QWidget] = None):
+    def set_tab(
+        self, index: int, position: str, widget: Optional[QtWidgets.QWidget] = None
+    ) -> None:
         self.tabBar().set_tab(index, position, widget)
 
 

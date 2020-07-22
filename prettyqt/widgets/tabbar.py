@@ -43,7 +43,7 @@ QtWidgets.QTabBar.__bases__ = (widgets.Widget,)
 class TabBar(QtWidgets.QTabBar):
     on_detach = QtCore.Signal(int, QtCore.QPoint)
 
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None) -> None:
         super().__init__(parent)
 
         self.setAcceptDrops(True)
@@ -83,7 +83,7 @@ class TabBar(QtWidgets.QTabBar):
         event.accept()
         self.on_detach.emit(self.tabAt(event.pos()), self.mouse_cursor.pos())
 
-    def set_icon_size(self, size: int):
+    def set_icon_size(self, size: int) -> None:
         """Set the icon size for the tabs
 
         Args:
@@ -91,10 +91,12 @@ class TabBar(QtWidgets.QTabBar):
         """
         self.setIconSize(QtCore.QSize(size, size))
 
-    def set_tab(self, index: int, position, widget):
+    def set_tab(
+        self, index: int, position: str, widget: Optional[QtWidgets.QWidget]
+    ) -> None:
         self.setTabButton(index, POSITIONS[position], widget)
 
-    def set_remove_behaviour(self, mode: str):
+    def set_remove_behaviour(self, mode: str) -> None:
         """sets the remove hehaviour
 
         What tab should be set as current when removeTab is called
@@ -117,7 +119,7 @@ class TabBar(QtWidgets.QTabBar):
         """
         return REMOVE_BEHAVIOURS.inv[self.selectionBehaviorOnRemove()]
 
-    def set_elide_mode(self, mode: str):
+    def set_elide_mode(self, mode: str) -> None:
         """set elide mode
 
         Valid values are "left", "right", "middle", "none"
