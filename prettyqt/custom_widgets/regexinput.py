@@ -2,6 +2,9 @@
 """
 """
 
+from typing import Optional
+
+from qtpy import QtWidgets
 import regex as re
 
 from prettyqt import core, custom_validators, custom_widgets, widgets
@@ -11,7 +14,12 @@ class RegexInput(widgets.Widget):
 
     value_changed = core.Signal()
 
-    def __init__(self, show_flags=True, show_error=True, parent=None):
+    def __init__(
+        self,
+        show_flags: bool = True,
+        show_error: bool = True,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(parent=parent)
         self.set_layout("grid")
         self.lineedit = custom_widgets.SingleLineTextEdit()

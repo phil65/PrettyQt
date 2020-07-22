@@ -223,7 +223,9 @@ class Label(QtWidgets.QLabel):
         return self
 
     @classmethod
-    def image_from_path(cls, path: Union[pathlib.Path, str], parent=None) -> "Label":
+    def image_from_path(
+        cls, path: Union[pathlib.Path, str], parent: Optional[QtWidgets.QWidget] = None
+    ) -> "Label":
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)
         label.setPixmap(pixmap)

@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import widgets
@@ -41,7 +43,7 @@ QtWidgets.QTabBar.__bases__ = (widgets.Widget,)
 class TabBar(QtWidgets.QTabBar):
     on_detach = QtCore.Signal(int, QtCore.QPoint)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
 
         self.setAcceptDrops(True)

@@ -16,7 +16,13 @@ class SpinBox(QtWidgets.QSpinBox):
 
     value_changed = core.Signal(int)
 
-    def __init__(self, parent=None, min_value=None, max_value=None, default_value=None):
+    def __init__(
+        self,
+        parent: Optional[QtWidgets.QWidget] = None,
+        min_value: Optional[int] = None,
+        max_value: Optional[int] = None,
+        default_value: Optional[int] = None,
+    ):
         super().__init__(parent)
         self.valueChanged.connect(self.value_changed)
         self.set_range(min_value, max_value)

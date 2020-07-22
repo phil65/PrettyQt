@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Union, Optional
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
@@ -18,7 +20,11 @@ class ScrollBar(QtWidgets.QScrollBar):
 
     value_changed = core.Signal(int)
 
-    def __init__(self, orientation="horizontal", parent=None):
+    def __init__(
+        self,
+        orientation: Union[int, str] = "horizontal",
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         if orientation in ORIENTATIONS:
             orientation = ORIENTATIONS[orientation]
         super().__init__(orientation, parent)

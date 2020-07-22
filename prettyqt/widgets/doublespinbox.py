@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
@@ -14,7 +16,13 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
 
     value_changed = core.Signal(float)
 
-    def __init__(self, parent=None, min_value=None, max_value=None, default_value=None):
+    def __init__(
+        self,
+        parent: Optional[QtWidgets.QWidget] = None,
+        min_value: Optional[float] = None,
+        max_value: Optional[float] = None,
+        default_value: Optional[float] = None,
+    ):
         super().__init__(parent)
         self.valueChanged.connect(self.value_changed)
         self.set_range(min_value, max_value)

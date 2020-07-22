@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets
@@ -16,7 +18,7 @@ class ProgressDialog(QtWidgets.QProgressDialog):
     wrapper for QtWidgets.QProgressDialog
     """
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent=parent)
 
         progress_bar = widgets.ProgressBar()

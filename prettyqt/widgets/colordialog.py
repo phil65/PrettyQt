@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtWidgets
 
 from prettyqt import gui, widgets
@@ -29,7 +31,10 @@ class ColorDialog(QtWidgets.QColorDialog):
 
     @classmethod
     def get_color(
-        cls, preset: colors.ColorType = None, allow_alpha: bool = False, parent=None
+        cls,
+        preset: colors.ColorType = None,
+        allow_alpha: bool = False,
+        parent: Optional[QtWidgets.QWidget] = None,
     ) -> gui.Color:
         preset = colors.get_color(preset)
         kwargs = dict(options=cls.ShowAlphaChannel) if allow_alpha else dict()

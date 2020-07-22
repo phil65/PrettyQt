@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
@@ -22,7 +24,12 @@ class CheckBox(QtWidgets.QCheckBox):
 
     value_changed = core.Signal(int)
 
-    def __init__(self, label="", parent=None, checked=False):
+    def __init__(
+        self,
+        label: str = "",
+        parent: Optional[QtWidgets.QWidget] = None,
+        checked: bool = False,
+    ):
         super().__init__(label, parent)
         self.stateChanged.connect(self.value_changed)
         self.setChecked(checked)

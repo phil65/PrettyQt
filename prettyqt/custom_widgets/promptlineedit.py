@@ -25,7 +25,7 @@ class PromptLineEdit(widgets.LineEdit):
         prompt_text: str = "Search",
         button_icon: gui.icon.IconType = "mdi.delete-circle-outline",
     ):
-        super().__init__(parent)
+        super().__init__(parent=parent)
         self._margin = self.sizeHint().height() - 2
         self._spacing = 0
         self._prompt_text = prompt_text

@@ -19,7 +19,7 @@ class SidebarWidget(widgets.MainWindow):
         show_settings: bool = False,
         main_layout: Union[str, QtWidgets.QLayout] = "vertical",
     ):
-        super().__init__(parent=None)
+        super().__init__(parent=parent)
         self.button_map: Dict[QtWidgets.QWidget, QtWidgets.QToolButton] = dict()
         self.sidebar = widgets.ToolBar()
         self.sidebar.set_id("SidebarWidget")

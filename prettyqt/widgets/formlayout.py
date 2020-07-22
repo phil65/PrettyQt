@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional, Dict
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets
@@ -80,7 +82,11 @@ class FormLayout(QtWidgets.QFormLayout):
         return pos[0], ROLES.inv[pos[1]]
 
     @classmethod
-    def build_from_dict(cls, dct, parent=None):
+    def build_from_dict(
+        cls,
+        dct: Dict[QtWidgets.QWidget, QtWidgets.QWidget],
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         formlayout = cls(parent)
         for i, (k, v) in enumerate(dct.items(), start=1):
             if k is not None:

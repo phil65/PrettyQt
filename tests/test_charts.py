@@ -11,7 +11,7 @@ from prettyqt import charts
 
 
 def test_chart(qtbot):
-    chart = charts.Chart(parent=None)
+    chart = charts.Chart()
     chart.hide_legend()
     chart.show_legend()
     chart.set_legend_alignment("right")
@@ -20,7 +20,7 @@ def test_chart(qtbot):
 
 
 def test_chartview(qtbot):
-    widget = charts.ChartView(parent=None)
+    widget = charts.ChartView()
     widget.show()
     widget.get_image()
     qtbot.addWidget(widget)

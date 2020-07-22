@@ -2,6 +2,8 @@
 """
 """
 
+from typing import List
+
 from prettyqt import gui
 
 
@@ -9,7 +11,7 @@ class CompositeValidator(gui.Validator):
     def __repr__(self):
         return f"CompositeValidator({self.validators})"
 
-    def __init__(self, validators=None, parent=None):
+    def __init__(self, validators: List[gui.Validator] = None, parent=None):
         super().__init__(parent)
         self.validators = validators if validators is not None else []
 

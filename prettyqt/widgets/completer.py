@@ -33,7 +33,7 @@ QtWidgets.QCompleter.__bases__ = (core.Object,)
 
 
 class Completer(QtWidgets.QCompleter):
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
 
     def set_sort_mode(self, mode: Optional[str]):

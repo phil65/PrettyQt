@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
@@ -23,7 +25,12 @@ class LineEdit(QtWidgets.QLineEdit):
 
     value_changed = core.Signal(str)
 
-    def __init__(self, default_value="", read_only=False, parent=None):
+    def __init__(
+        self,
+        default_value: str = "",
+        read_only: bool = False,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(default_value, parent)
         self.textChanged.connect(self._set_validation_color)
         self.textChanged.connect(self.value_changed)

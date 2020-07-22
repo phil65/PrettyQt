@@ -21,7 +21,7 @@ QtWidgets.QActionGroup.__bases__ = (core.Object,)
 
 
 class ActionGroup(QtWidgets.QActionGroup):
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
 
     def set_exclusion_policy(self, policy: Optional[str]):

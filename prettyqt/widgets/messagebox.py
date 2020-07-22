@@ -56,7 +56,7 @@ class MessageBox(QtWidgets.QMessageBox):
         text: str = "",
         details: str = "",
         buttons: Optional[list] = None,
-        parent=None,
+        parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent)
         self.set_icon(icon)

@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Union, Optional
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
@@ -15,7 +17,11 @@ QtWidgets.QSplitter.__bases__ = (widgets.Frame,)
 
 
 class Splitter(QtWidgets.QSplitter):
-    def __init__(self, orientation="horizontal", parent=None):
+    def __init__(
+        self,
+        orientation: Union[str, int] = "horizontal",
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         if orientation in ORIENTATIONS:
             orientation = ORIENTATIONS[orientation]
         super().__init__(orientation, parent)
@@ -74,7 +80,12 @@ class Splitter(QtWidgets.QSplitter):
                 self.add_layout(i)
 
     @classmethod
-    def from_widgets(cls, *widgets, horizontal: bool = False, parent=None):
+    def from_widgets(
+        cls,
+        *widgets: QtWidgets.QWidget,
+        horizontal: bool = False,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         orientation = "horizontal" if horizontal else "vertical"
         splitter = cls(orientation, parent=parent)
         for widget in widgets:

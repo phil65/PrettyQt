@@ -2,8 +2,10 @@
 This module contains the editor widget implementation.
 """
 import sre_constants
+from typing import Optional
 
 import regex as re
+from qtpy import QtWidgets
 
 from prettyqt import constants, core, custom_models, custom_widgets, widgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
@@ -12,7 +14,13 @@ from prettyqt.syntaxhighlighters import RegexMatchHighlighter
 class RegexEditorWidget(widgets.Widget):
     quick_ref_requested = core.Signal(int)
 
-    def __init__(self, title="Regex Editor", regex="", teststring="", parent=None):
+    def __init__(
+        self,
+        title: str = "Regex Editor",
+        regex: str = "",
+        teststring: str = "",
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(parent)
         self.resize(1200, 800)
         self.set_title(title)

@@ -2,11 +2,15 @@
 """
 """
 
+from typing import Optional
+
+from qtpy import QtWidgets
+
 from prettyqt import gui, widgets
 
 
 class SingleLineTextEdit(widgets.PlainTextEdit):
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent=parent)
         self.textChanged.connect(self._on_text_changed)
         font_metrics = gui.FontMetrics(self.font())

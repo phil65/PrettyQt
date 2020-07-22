@@ -35,10 +35,15 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     value_changed = core.Signal()
 
-    def __init__(self, text="", parent=None, read_only=False):
+    def __init__(
+        self,
+        text: str = "",
+        parent: Optional[QtWidgets.QWidget] = None,
+        read_only: bool = False,
+    ):
         super().__init__(text, parent)
         self._allow_wheel_zoom = False
-        self.validator = None
+        self.validator: Optional[QtGui.QValidator] = None
         self.textChanged.connect(self._on_value_change)
         self.set_read_only(read_only)
 
@@ -179,7 +184,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         color = "orange" if not self.is_valid() else None
         self.set_background_color(color)
 
-    def set_validator(self, validator: gui.Validator):
+    def set_validator(self, validator: Optional[QtGui.QValidator]):
         self.validator = validator
         self._set_validation_color()
 

@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
@@ -23,7 +25,12 @@ class GroupBox(QtWidgets.QGroupBox):
     The keyboard shortcut moves keyboard focus to one of the group box's child widgets.
     """
 
-    def __init__(self, title="", checkable=False, parent=None):
+    def __init__(
+        self,
+        title: str = "",
+        checkable: bool = False,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(title, parent)
         self.setCheckable(checkable)
 

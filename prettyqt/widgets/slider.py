@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional, Union
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
@@ -25,7 +27,11 @@ class Slider(QtWidgets.QSlider):
 
     value_changed = core.Signal(int)
 
-    def __init__(self, orientation="horizontal", parent=None):
+    def __init__(
+        self,
+        orientation: Union[str, int] = "horizontal",
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         if orientation in ORIENTATIONS:
             orientation = ORIENTATIONS[orientation]
         super().__init__(orientation, parent)

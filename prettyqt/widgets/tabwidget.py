@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Optional
+from typing import Optional, Dict
 
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -23,7 +23,12 @@ class TabWidget(QtWidgets.QTabWidget):
     Widget for managing the tabs section
     """
 
-    def __init__(self, parent=None, closable=False, detachable=False):
+    def __init__(
+        self,
+        parent: Optional[QtWidgets.QWidget] = None,
+        closable: bool = False,
+        detachable: bool = False,
+    ):
 
         # Basic initalization
         super().__init__(parent)
@@ -34,7 +39,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
         # Used to keep a reference to detached tabs since their QMainWindow
         # does not have a parent
-        self.detached_tabs = dict()
+        self.detached_tabs: Dict[str, DetachedTab] = dict()
         if detachable:
             self.set_detachable()
         self.set_closable(closable)

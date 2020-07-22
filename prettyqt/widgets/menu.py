@@ -13,7 +13,12 @@ QtWidgets.QMenu.__bases__ = (widgets.Widget,)
 
 
 class Menu(QtWidgets.QMenu):
-    def __init__(self, title: str = "", icon: gui.icon.IconType = None, parent=None):
+    def __init__(
+        self,
+        title: str = "",
+        icon: gui.icon.IconType = None,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(title, parent=parent)
         self.set_icon(icon)
         self.setToolTipsVisible(True)

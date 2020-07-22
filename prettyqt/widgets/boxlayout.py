@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets
@@ -11,7 +13,12 @@ QtWidgets.QBoxLayout.__bases__ = (widgets.Layout,)
 
 
 class BoxLayout(QtWidgets.QBoxLayout):
-    def __init__(self, orientation="horizontal", parent=None, margin=None):
+    def __init__(
+        self,
+        orientation="horizontal",
+        parent: Optional[QtWidgets.QWidget] = None,
+        margin: Optional[int] = None,
+    ):
         o = self.TopToBottom if orientation == "vertical" else self.LeftToRight
         super().__init__(o, parent)
         if margin is not None:

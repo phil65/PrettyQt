@@ -22,9 +22,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from typing import Tuple
+from typing import Tuple, Optional
 
-from qtpy import QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import colors
@@ -49,7 +49,7 @@ class SpanSlider(widgets.Slider):
     upper_pos_changed = core.Signal(int)
     slider_pressed = core.Signal(object)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__("horizontal", parent)
         self.rangeChanged.connect(self.update_range)
         self.sliderReleased.connect(self.move_pressed_handle)
@@ -460,7 +460,7 @@ class SpanSlider(widgets.Slider):
 
 
 class SpanSliderWidget(widgets.Widget):
-    def __init__(self, *args, parent=None, **kwargs):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent=parent)
         self.set_layout("grid")
         self.slider = SpanSlider()

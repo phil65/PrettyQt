@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Union
+from typing import Union, Optional
 
 from qtpy import QtCore, QtWidgets
 
@@ -51,11 +51,11 @@ class BaseDialog(QtWidgets.QDialog):
     def delete_on_close(self):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
-    def add_widget(self, widget):
+    def add_widget(self, widget: QtWidgets.QWidget):
         self.box += widget
         return widget
 
-    def add_buttonbox(self):
+    def add_buttonbox(self) -> widgets.DialogButtonBox:
         button_box = widgets.DialogButtonBox.create(ok=self.accept, cancel=self.reject)
         self.box += button_box
         return button_box
@@ -64,7 +64,7 @@ class BaseDialog(QtWidgets.QDialog):
         self.show()
         return bool(self.exec_())
 
-    def is_accepted(self):
+    def is_accepted(self) -> bool:
         return self.result() == QtWidgets.QDialog.Accepted
 
 
@@ -76,7 +76,7 @@ class Dialog(BaseDialog):
         self,
         title: str = "",
         icon=None,
-        parent=None,
+        parent: Optional[QtWidgets.QWidget] = None,
         delete_on_close: bool = True,
         layout: Union[None, str, QtWidgets.QLayout] = None,
     ):

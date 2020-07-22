@@ -2,7 +2,9 @@
 """
 """
 
-from typing import Union
+from typing import Union, Optional
+
+from qtpy import QtWidgets
 
 from prettyqt import core, widgets
 
@@ -11,7 +13,7 @@ class StringOrNumberWidget(widgets.GroupBox):
 
     value_changed = core.Signal(object)
 
-    def __init__(self, title="", parent=None):
+    def __init__(self, title: str = "", parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(checkable=False, title=title)
         self.set_layout("vertical")
         self.rb_lineedit = widgets.RadioButton("String")

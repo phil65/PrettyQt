@@ -4,13 +4,20 @@
 
 from typing import Optional, Mapping, Iterable, Union, Dict, Any
 
+from qtpy import QtWidgets
+
 from prettyqt import core, gui, widgets
 
 
 class SelectionWidget(widgets.GroupBox):
     value_changed = core.Signal(object)
 
-    def __init__(self, label: str = "", layout="horizontal", parent=None):
+    def __init__(
+        self,
+        label: str = "",
+        layout: str = "horizontal",
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(title=label, parent=parent)
         self.box = widgets.BoxLayout(layout)
         self.widget_custom: Optional[widgets.Widget] = None

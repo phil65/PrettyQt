@@ -24,6 +24,8 @@ from .style import Style
 from .styleoption import StyleOption
 from .stylepainter import StylePainter
 from .stylefactory import StyleFactory
+from .pushbutton import PushButton
+from .dialogbuttonbox import DialogButtonBox
 from .dialog import BaseDialog, Dialog
 from .messagebox import MessageBox
 from .errormessage import ErrorMessage
@@ -52,7 +54,6 @@ from .tabwidget import TabWidget
 from .toolbar import ToolBar
 from .headerview import HeaderView
 from .label import Label
-from .pushbutton import PushButton
 from .commandlinkbutton import CommandLinkButton
 from .radiobutton import RadioButton
 from .combobox import ComboBox
@@ -98,7 +99,6 @@ from .fontdialog import FontDialog
 from .filedialog import FileDialog
 from .colordialog import ColorDialog
 from .inputdialog import InputDialog
-from .dialogbuttonbox import DialogButtonBox
 from .buttongroup import ButtonGroup
 from .groupbox import GroupBox
 from .splitter import Splitter

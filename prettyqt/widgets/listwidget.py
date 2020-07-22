@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Union, Iterable, Mapping, List, Any
+from typing import Union, Iterable, Mapping, List, Any, Optional
 
 from qtpy import QtCore, QtWidgets
 
@@ -21,7 +21,9 @@ class ListWidget(QtWidgets.QListWidget):
 
     value_changed = core.Signal(object)
 
-    def __init__(self, parent=None, selection_mode: str = "single"):
+    def __init__(
+        self, parent: Optional[QtWidgets.QWidget] = None, selection_mode: str = "single"
+    ):
         super().__init__(parent)
         self.itemSelectionChanged.connect(self.on_index_change)
         self.set_selection_mode(selection_mode)
