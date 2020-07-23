@@ -29,7 +29,7 @@ class ChartView(QtCharts.QChartView):
         self.setRubberBand(self.RectangleRubberBand)
         # self.setDragMode(self.RubberBandDrag)
 
-    def keyPressEvent(self, event):
+    def keyPressEvent(self, event: QtGui.QKeyEvent):
         """
         handle keypress events to allow navigation via keyboard
         """
@@ -54,14 +54,14 @@ class ChartView(QtCharts.QChartView):
             return super().keyPressEvent(event)
         event.accept()
 
-    def wheelEvent(self, event):
+    def wheelEvent(self, event: QtGui.QWheelEvent):
         """
         handle wheel event for zooming
         """
         fct = ZOOM_IN_FACTOR if event.angleDelta().y() > 0 else ZOOM_OUT_FACTOR
         self.chart().zoom_by_factor(fct)
 
-    def mouseReleaseEvent(self, event):
+    def mouseReleaseEvent(self, event: QtGui.QMouseEvent):
         """
         override to allow dragging the chart
         """
@@ -71,7 +71,7 @@ class ChartView(QtCharts.QChartView):
             return None
         super().mouseReleaseEvent(event)
 
-    def mousePressEvent(self, event):
+    def mousePressEvent(self, event: QtGui.QMouseEvent):
         """
         override to allow dragging the chart
         """
@@ -83,7 +83,7 @@ class ChartView(QtCharts.QChartView):
 
         super().mousePressEvent(event)
 
-    def mouseMoveEvent(self, event):
+    def mouseMoveEvent(self, event: QtGui.QMouseEvent):
         """
         override to allow dragging the chart
         """
