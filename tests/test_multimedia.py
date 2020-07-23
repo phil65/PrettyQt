@@ -25,6 +25,20 @@ def test_mediaplaylist():
     assert playlist.get_playback_mode() == "sequential"
 
 
+def test_audioencodersettings():
+    settings = multimedia.AudioEncoderSettings()
+    dct = settings.to_dict()
+    new_settings = multimedia.AudioEncoderSettings.from_dict(dct)
+    assert new_settings.to_dict() == dct
+
+
+def test_videoencodersettings():
+    settings = multimedia.VideoEncoderSettings()
+    dct = settings.to_dict()
+    new_settings = multimedia.VideoEncoderSettings.from_dict(dct)
+    assert new_settings.to_dict() == dct
+
+
 def test_mediaplayer():
     player = multimedia.MediaPlayer()
     assert player.get_state() == "stopped"
