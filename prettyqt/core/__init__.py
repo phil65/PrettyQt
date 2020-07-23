@@ -18,7 +18,8 @@ from .settings import Settings
 from .date import Date
 from .datetime import DateTime
 
-# from .size import Size
+from .size import Size
+
 # from .sizef import SizeF
 # from .point import Point
 # from .pointf import PointF
@@ -49,7 +50,6 @@ from .abstracttablemodel import AbstractTableModel
 from qtpy.QtCore import Slot, Signal, Property
 from qtpy.QtCore import QPoint as Point
 from qtpy.QtCore import QPointF as PointF
-from qtpy.QtCore import QSize as Size
 from qtpy.QtCore import QSizeF as SizeF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
