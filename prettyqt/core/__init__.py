@@ -7,6 +7,14 @@ contains QtCore-based classes
 
 # from qtpy.QtCore import Signal
 
+from qtpy.QtCore import Slot, Signal, Property
+from qtpy.QtCore import QModelIndex as ModelIndex
+from qtpy.QtCore import QPoint as Point
+from qtpy.QtCore import QPointF as PointF
+from qtpy.QtCore import QSizeF as SizeF
+from qtpy.QtCore import QRect as Rect
+from qtpy.QtCore import QRectF as RectF
+
 from .object import Object
 from .url import Url
 from .coreapplication import CoreApplication
@@ -35,7 +43,8 @@ from .regexp import RegExp
 from .regularexpression import RegularExpression
 from .mimedata import MimeData
 from .runnable import Runnable
-from .modelindex import ModelIndex
+
+# from .modelindex import ModelIndex
 from .threadpool import ThreadPool
 from .dir import Dir
 from .event import Event
@@ -46,13 +55,6 @@ from .abstractproxymodel import AbstractProxyModel
 from .abstractlistmodel import AbstractListModel
 from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel
-
-from qtpy.QtCore import Slot, Signal, Property
-from qtpy.QtCore import QPoint as Point
-from qtpy.QtCore import QPointF as PointF
-from qtpy.QtCore import QSizeF as SizeF
-from qtpy.QtCore import QRect as Rect
-from qtpy.QtCore import QRectF as RectF
 
 __all__ = [
     "Object",

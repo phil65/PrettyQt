@@ -1,6 +1,16 @@
-## v0.103.0 (2020-07-22)
+## v0.103.0 (2020-07-23)
 
-## v0.103.0 (2020-07-22)
+### Feat
+
+- **multimedia**: add MediaRecorder
+- **AbstractItemModel**: add __getitem__ method
+- **multimedia**: add VideoEncoderSettings / AudioEncoderSettings
+
+### Refactor
+
+- use subclassed core.Size
+
+## v.0.103.0 (2020-07-22)
 
 ### Feat
 
