@@ -673,7 +673,7 @@
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.highlightrule.HighlightRule.__init_subclass__">
 <code class="highlight language-python">
-__init_subclass__<span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> </code>
+__init_subclass__<span class="p">()</span> </code>
 <span class="doc doc-properties">
 <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
 <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -689,26 +689,26 @@ overridden to extend subclasses.</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>25
-26
-27
+<pre><span></span>27
 28
 29
 30
 31
-32</pre>
+32
+33
+34</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">regex</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">compiled</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">regex</span><span class="p">)</span>
         <span class="c1"># cls.compiled.setMinimal(True)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">compiled</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">regex</span><span class="p">]</span>
-    <span class="bp">cls</span><span class="o">.</span><span class="n">format</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_format</span><span class="p">()</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">fmt</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_format</span><span class="p">()</span>
 </code></pre>
 </div>
 </td>
