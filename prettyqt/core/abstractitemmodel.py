@@ -3,7 +3,7 @@
 """
 
 import contextlib
-from typing import Optional
+from typing import Optional, Tuple
 
 from qtpy import QtCore
 
@@ -15,12 +15,15 @@ QtCore.QAbstractItemModel.__bases__ = (core.Object,)
 
 class AbstractItemModel(QtCore.QAbstractItemModel):
     def __repr__(self):
-        return f"{self.__class__.__name__}: {self.rowCount()} children"
+        return f"{self.__class__.__name__}: {self.rowCount()} rows"
 
     def __len__(self) -> int:
         """return amount of rows
         """
         return self.rowCount()
+
+    def __getitem__(self, index: Tuple[int, int]):
+        return self.index(*index)
 
     def rows(self) -> int:
         return self.rowCount()
