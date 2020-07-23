@@ -45,6 +45,15 @@ def test_mediaplayer():
     assert player.get_media_status() == "no_media"
 
 
+def test_mediarecorder():
+    player = multimedia.MediaPlayer()
+    recorder = multimedia.MediaRecorder(player)
+    settings = recorder.get_video_settings()
+    recorder.set_video_settings(settings)
+    settings = recorder.get_audio_settings()
+    recorder.set_audio_settings(settings)
+
+
 def test_mediacontent():
     cont = multimedia.MediaContent()
     assert cont.get_url() == core.Url("")

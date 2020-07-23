@@ -11,6 +11,7 @@ from .mediacontent import MediaContent
 from .mediacontrol import MediaControl
 from .mediaplaylist import MediaPlaylist
 from .mediaplayer import MediaPlayer
+from .mediarecorder import MediaRecorder
 
 __all__ = [
     "MediaBindableInterface",
@@ -21,4 +22,5 @@ __all__ = [
     "MediaObject",
     "MediaPlaylist",
     "MediaPlayer",
+    "MediaRecorder",
 ]
