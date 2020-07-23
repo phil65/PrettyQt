@@ -21,15 +21,17 @@ class HighlightRule(object):
     minimal: bool = False
     font_size: Optional[float] = None
     nth: int = 0
+    compiled = None
+    fmt = None
 
-    def __init_subclass__(cls, **kwargs):
-        super().__init_subclass__(**kwargs)
+    def __init_subclass__(cls):
+        super().__init_subclass__()
         if isinstance(cls.regex, str):
             cls.compiled = re.compile(cls.regex)
             # cls.compiled.setMinimal(True)
         else:
             cls.compiled = [re.compile(r) for r in cls.regex]
-        cls.format = cls.get_format()
+        cls.fmt = cls.get_format()
 
     @classmethod
     def get_format(cls):

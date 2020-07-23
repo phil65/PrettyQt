@@ -31,9 +31,13 @@ class RegularExpressionValidator(gui.Validator):
         self.regex = core.RegularExpression(regex, flags)
 
     def get_regex(self) -> str:
+        if self.regex is None:
+            raise TypeError()
         return self.regex.pattern()
 
     def validate(self, text: str, pos: int = 0) -> tuple:
+        if self.regex is None:
+            raise TypeError()
         if text == "":
             return (self.Intermediate, text, pos)
         match = self.regex.match(text, match_type="prefer_first")

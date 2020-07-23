@@ -8,7 +8,7 @@ from prettyqt import core
 class TransposeProxyModel(core.AbstractProxyModel):
     def __init__(self, source_model):
         super().__init__()
-        self._source_model = None
+        self._source_model = source_model
         self.setSourceModel(source_model)
 
     def setSourceModel(self, source_model):

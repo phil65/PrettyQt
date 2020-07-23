@@ -2,7 +2,7 @@
 This module contains the editor widget implementation.
 """
 import sre_constants
-from typing import Optional
+from typing import Optional, Pattern, Match, List
 
 import regex as re
 from qtpy import QtWidgets
@@ -28,8 +28,8 @@ class RegexEditorWidget(widgets.Widget):
         self.set_layout("horizontal")
         self.left_layout = widgets.BoxLayout("vertical")
         self.right_layout = widgets.BoxLayout("vertical")
-        self.prog = None
-        self.matches = None
+        self.prog: Optional[Pattern] = None
+        self.matches: List[Match] = list()
         self.groupbox = widgets.GroupBox(title="Regular expression")
         self.grid = widgets.GridLayout(self.groupbox)
         self.layout_toprow = widgets.BoxLayout("horizontal")
@@ -86,9 +86,9 @@ class RegexEditorWidget(widgets.Widget):
         span = model.data(index_new, constants.USER_ROLE)
         self.textedit_teststring.select_text(*span)
 
-    def _update_view(self):
+    def _update_view(self) -> None:
         self.prog = None
-        self.matches = None
+        self.matches = list()
         with self.textedit_teststring.block_signals():
             if not self.pattern:
                 self._highlighter.set_spans(None)

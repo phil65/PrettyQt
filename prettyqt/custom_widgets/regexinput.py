@@ -54,11 +54,11 @@ class RegexInput(widgets.Widget):
         }
         self.tb_flags.set_dict(dct)
 
-    def _on_value_change(self):
+    def _on_value_change(self) -> None:
         self.value_changed.emit()
         if self.lineedit.is_valid():
             self.label_error.set_text("")
-        else:
+        elif self.lineedit.validator is not None:
             message = self.lineedit.validator.error_message
             self.label_error.set_text(message)
 

@@ -123,9 +123,10 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return self.selectionModel().currentIndex()
 
     def current_data(self):
-        if self.model() is None:
+        if self.selectionModel() is None:
             return None
-        return self.current_index().data(QtCore.Qt.UserRole)
+        idx = self.selectionModel().currentIndex()
+        return idx.data(QtCore.Qt.UserRole)
 
     def current_row(self) -> Optional[int]:
         if self.selectionModel() is None:

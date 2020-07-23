@@ -22,9 +22,9 @@ class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
         for Rule in cls.RULES:
             if isinstance(Rule.compiled, list):
                 for i in Rule.compiled:
-                    yield (i, Rule.nth, Rule.format)
+                    yield (i, Rule.nth, Rule.fmt)
             else:
-                yield (Rule.compiled, Rule.nth, Rule.format)
+                yield (Rule.compiled, Rule.nth, Rule.fmt)
 
     def highlightBlock(self, text: str):
         """Apply syntax highlighting to the given block of text.

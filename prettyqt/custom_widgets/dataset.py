@@ -14,7 +14,7 @@ class DataItem(object):
         self,
         label: str,
         value=None,
-        optional: bool = False,
+        optional: Optional[str] = None,
         include: bool = True,
         enabled_on=None,
         disabled_on=None,
