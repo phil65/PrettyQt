@@ -2,9 +2,11 @@
 """
 """
 
+from typing import Optional
+
 from qtpy import QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, constants
 
 
 QtWidgets.QTreeView.__bases__ = (widgets.AbstractItemView,)
@@ -51,6 +53,11 @@ class TreeView(QtWidgets.QTreeView):
             self.h_header.resizeSections(self.h_header.ResizeToContents)
         else:
             self.h_header.resize_sections("interactive")
+
+    def sort_by_column(self, column: Optional[int], ascending: bool = True):
+        column = -1 if column is None else column
+        order = constants.ASCENDING if ascending else constants.DESCENDING
+        self.sortByColumn(column, order)
 
 
 if __name__ == "__main__":

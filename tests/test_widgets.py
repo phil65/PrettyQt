@@ -1016,6 +1016,7 @@ def test_tableview(qtbot):
     widget.set_vertical_scrollbar_width(12)
     widget.set_edit_triggers(None)
     widget.set_edit_triggers("edit_key")
+    widget.sort_by_column(0)
     with pytest.raises(ValueError):
         widget.set_edit_triggers("test")
     widget.selectAll()
@@ -1089,6 +1090,7 @@ def test_treeview(qtbot):
     widget.set_scrollbar_width(10)
     widget.setup_list_style()
     widget.setup_dragdrop_move()
+    widget.sort_by_column(0)
     widget.scroll_to_top()
     widget.current_index()
     widget.set_selection_mode("extended")

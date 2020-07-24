@@ -29,6 +29,7 @@ HORIZONTAL = QtCore.Qt.Horizontal
 VERTICAL = QtCore.Qt.Vertical
 
 ASCENDING = QtCore.Qt.AscendingOrder
+DESCENDING = QtCore.Qt.DescendingOrder
 
 DROP_ENABLED = QtCore.Qt.ItemIsDropEnabled
 DRAG_ENABLED = QtCore.Qt.ItemIsDragEnabled
