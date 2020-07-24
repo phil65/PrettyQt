@@ -272,7 +272,8 @@ def test_translator():
 
 
 def test_url():
-    url = core.Url()
-    url.to_path()
-    assert not url.is_local_file()
+    path = pathlib.Path.home()
+    url = core.Url(path)
+    assert str(url) == str(url.to_path())
+    assert url.is_local_file()
     repr(url)
