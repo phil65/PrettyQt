@@ -3,6 +3,8 @@
 
 """Tests for `prettyqt` package."""
 
+import pathlib
+
 import pytest
 
 from prettyqt import multimedia, core
@@ -58,6 +60,11 @@ def test_mediarecorder():
     recorder.set_video_settings(settings)
     settings = recorder.get_audio_settings()
     recorder.set_audio_settings(settings)
+    recorder.get_availability()
+    p = pathlib.Path.home()
+    recorder.set_output_location(p)
+    recorder.get_output_location()
+    # assert str(recorder.get_output_location()) == str(p)
 
 
 def test_mediacontent():

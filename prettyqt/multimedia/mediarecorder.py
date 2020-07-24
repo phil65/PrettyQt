@@ -2,6 +2,9 @@
 """
 """
 
+import pathlib
+from typing import Union
+
 from qtpy import QtMultimedia
 
 from prettyqt import core, multimedia
@@ -32,6 +35,13 @@ MEDIA_STATUS = bidict(
     finalizing=QtMultimedia.QMediaRecorder.FinalizingStatus,
 )
 
+AVAILABILITY_STATUS = bidict(
+    available=QtMultimedia.QMultimedia.Available,
+    service_missing=QtMultimedia.QMultimedia.ServiceMissing,
+    resource_error=QtMultimedia.QMultimedia.ResourceError,
+    busy=QtMultimedia.QMultimedia.Busy,
+)
+
 
 QtMultimedia.QMediaRecorder.__bases__ = (
     core.Object,
@@ -47,7 +57,7 @@ class MediaRecorder(QtMultimedia.QMediaRecorder):
             settings = settings.VideoEncoderSettings.from_dict(settings)
         self.setVideoSettings(settings)
 
-    def get_video_settings(self):
+    def get_video_settings(self) -> multimedia.VideoEncoderSettings:
         return multimedia.VideoEncoderSettings(self.videoSettings())
 
     def set_audio_settings(self, settings):
@@ -57,5 +67,14 @@ class MediaRecorder(QtMultimedia.QMediaRecorder):
             settings = settings.AudioEncoderSettings.from_dict(settings)
         self.setAudioSettings(settings)
 
-    def get_audio_settings(self):
+    def get_audio_settings(self) -> multimedia.AudioEncoderSettings:
         return multimedia.AudioEncoderSettings(self.audioSettings())
+
+    def get_availability(self) -> str:
+        return AVAILABILITY_STATUS.inv[self.availability()]
+
+    def set_output_location(self, path: Union[pathlib.Path, str]):
+        self.setOutputLocation(core.Url(path))
+
+    def get_output_location(self) -> str:
+        return str(core.Url(self.outputLocation()))
