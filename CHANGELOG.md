@@ -1,3 +1,19 @@
+## v0.105.0 (2020-07-24)
+
+### Feat
+
+- **MediaRecorder**: some new methods
+- sort_by_column for tableview and treeview
+- **multimedia**: dict-setter and getter for encodersettings
+
+### Refactor
+
+- improve Url-Pathlib interoperability
+
+### Fix
+
+- **PopupInfo**: use PrimaryScreen geometry instead of screens[0] for positioning
+
 ## v0.104.0 (2020-07-23)
 
 ### Feat
