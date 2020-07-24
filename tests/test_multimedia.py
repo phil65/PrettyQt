@@ -29,6 +29,9 @@ def test_audioencodersettings():
     settings = multimedia.AudioEncoderSettings()
     dct = settings.to_dict()
     new_settings = multimedia.AudioEncoderSettings.from_dict(dct)
+    for key in settings:
+        settings[key] = settings[key]
+    assert len(settings) == 7
     assert new_settings.to_dict() == dct
 
 
@@ -36,6 +39,9 @@ def test_videoencodersettings():
     settings = multimedia.VideoEncoderSettings()
     dct = settings.to_dict()
     new_settings = multimedia.VideoEncoderSettings.from_dict(dct)
+    for key in settings:
+        settings[key] = settings[key]
+    assert len(settings) == 7
     assert new_settings.to_dict() == dct
 
 

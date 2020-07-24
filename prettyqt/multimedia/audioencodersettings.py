@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """
 """
+
+from typing import Dict, Any
 from dataclasses import dataclass, asdict
 
 from qtpy import QtMultimedia
@@ -28,12 +30,37 @@ class Settings(object):
     channel_count: int
     codec: str
     encoding_mode: str
-    encoding_options: dict
+    encoding_options: Dict[str, Any]
     quality: str
     sample_rate: int
 
 
 class AudioEncoderSettings(QtMultimedia.QAudioEncoderSettings):
+    def __getitem__(self, index: str):
+        return self.to_dict()[index]
+
+    def __setitem__(self, index: str, value):
+        if index == "bitrate":
+            self.setBitRate(value)
+        elif index == "channel_count":
+            self.setChannelCount(value)
+        elif index == "codec":
+            self.setCodec(value)
+        elif index == "encoding_mode":
+            self.set_encoding_mode(value)
+        elif index == "encoding_options":
+            self.setEncodingOptions(value)
+        elif index == "quality":
+            self.set_quality(value)
+        elif index == "sample_rate":
+            self.setSampleRate(value)
+
+    def __iter__(self):
+        return iter(self.to_dict().keys())
+
+    def __len__(self):
+        return len(self.to_dict())
+
     def set_encoding_mode(self, mode: str):
         if mode not in ENCODING_MODES:
             raise ValueError()
@@ -61,7 +88,7 @@ class AudioEncoderSettings(QtMultimedia.QAudioEncoderSettings):
             sample_rate=self.sampleRate(),
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
         return asdict(self.to_dataclass())
 
     @classmethod
@@ -77,6 +104,6 @@ class AudioEncoderSettings(QtMultimedia.QAudioEncoderSettings):
         return instance
 
     @classmethod
-    def from_dict(cls, data: dict) -> "AudioEncoderSettings":
+    def from_dict(cls, data: Dict[str, Any]) -> "AudioEncoderSettings":
         settings = Settings(**data)
         return cls.from_dataclass(settings)

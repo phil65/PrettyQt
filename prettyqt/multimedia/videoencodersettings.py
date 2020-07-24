@@ -2,9 +2,9 @@
 """
 """
 from dataclasses import dataclass, asdict
-from typing import Tuple
+from typing import Tuple, Dict, Any
 
-from qtpy import QtMultimedia, QtCore
+from qtpy import QtMultimedia
 
 from prettyqt.utils import bidict
 
@@ -29,13 +29,38 @@ class Settings(object):
     bitrate: int
     codec: str
     encoding_mode: str
-    encoding_options: dict
+    encoding_options: Dict[str, Any]
     quality: str
     frame_rate: float
     resolution: Tuple[int, int]
 
 
 class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
+    def __getitem__(self, index: str):
+        return self.to_dict()[index]
+
+    def __setitem__(self, index: str, value):
+        if index == "bitrate":
+            self.setBitRate(value)
+        elif index == "codec":
+            self.setCodec(value)
+        elif index == "encoding_mode":
+            self.set_encoding_mode(value)
+        elif index == "encoding_options":
+            self.setEncodingOptions(value)
+        elif index == "frame_rate":
+            self.setFrameRate(value)
+        elif index == "resolution":
+            self.setResolution(*value)
+        elif index == "quality":
+            self.set_quality(value)
+
+    def __iter__(self):
+        return iter(self.to_dict().keys())
+
+    def __len__(self):
+        return len(self.to_dict())
+
     def set_encoding_mode(self, mode: str):
         if mode not in ENCODING_MODES:
             raise ValueError()
@@ -64,7 +89,7 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
             quality=self.get_quality(),
         )
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
         return asdict(self.to_dataclass())
 
     @classmethod
@@ -74,11 +99,12 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
         instance.setCodec(data.codec)
         instance.set_encoding_mode(data.encoding_mode)
         instance.setEncodingOptions(data.encoding_options)
-        instance.setResolution(QtCore.QSize(*data.resolution))
+        instance.setFrameRate(data.frame_rate)
+        instance.setResolution(*data.resolution)
         instance.set_quality(data.quality)
         return instance
 
     @classmethod
-    def from_dict(cls, data: dict) -> "VideoEncoderSettings":
+    def from_dict(cls, data: Dict[str, Any]) -> "VideoEncoderSettings":
         settings = Settings(**data)
         return cls.from_dataclass(settings)
