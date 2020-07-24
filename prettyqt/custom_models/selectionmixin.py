@@ -18,7 +18,7 @@ class SelectionMixin(object):
         super().__init__()
         self.selected = dict()
 
-    def setData(self, index, value, role):
+    def setData(self, index: QtCore.QModelIndex, value, role):
         if not index.isValid():
             return False
         elif role == constants.CHECKSTATE_ROLE:
@@ -26,9 +26,9 @@ class SelectionMixin(object):
             self.selected[name] = not self.selected[name]
             self.dataChanged.emit(index, index)
             return True
-        return super().setData(index, value, role)
+        return super().setData(index, value, role)  # type: ignore
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(self, index: QtCore.QModelIndex, role=constants.DISPLAY_ROLE):
         if not index.isValid():
             return False
         if role == constants.CHECKSTATE_ROLE:
@@ -38,10 +38,10 @@ class SelectionMixin(object):
                 if name not in self.selected:
                     self.selected[name] = selected
                 return selected
-        return super().data(index, role)
+        return super().data(index, role)  # type: ignore
 
-    def flags(self, index):
-        flags = super().flags(index)
+    def flags(self, index: QtCore.QModelIndex):
+        flags = super().flags(index)  # type: ignore
         if index.column() in self.CHECKSTATE:
             return flags | constants.IS_CHECKABLE
         return flags

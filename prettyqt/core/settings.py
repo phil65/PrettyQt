@@ -4,7 +4,7 @@
 
 import contextlib
 import pathlib
-from typing import List, Mapping, Optional, Union
+from typing import List, Mapping, Optional, Union, Dict, Any
 import logging
 
 from qtpy import QtCore
@@ -60,7 +60,7 @@ class Settings(QtCore.QSettings):
         return len(self.allKeys())
 
     @classmethod
-    def build_from_dict(cls, dct: dict):
+    def build_from_dict(cls, dct: Dict[str, Any]):
         settings = cls()
         for k, v in dct.items():
             settings.set_value(k, v)

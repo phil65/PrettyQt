@@ -3,7 +3,7 @@
 """
 
 import pathlib
-from typing import List, Optional, Union
+from typing import List, Optional, Union, Dict
 
 from qtpy import QtWidgets
 
@@ -213,7 +213,7 @@ class FileDialog(QtWidgets.QFileDialog):
             settings.setValue(self.path_id, str(folder_path))
         return paths
 
-    def set_extension_filter(self, extension_dict: dict):
+    def set_extension_filter(self, extension_dict: Dict[str, List[str]]):
         """set filter based on given dictionary
 
         dict must contain "'name': ['.ext1', '.ext2']" as key-value pairs
