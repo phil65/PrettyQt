@@ -36,7 +36,7 @@ class PopupInfo(widgets.Dialog):
 
     def show(self, *args, **kwargs):
         self.hide()
-        screen_geo = gui.GuiApplication.screens()[0].geometry()
+        screen_geo = gui.GuiApplication.primaryScreen().geometry()
         size = self.label.sizeHint()
         x = (screen_geo.width() - size.width()) / 2
         y = (screen_geo.height() - size.height()) / 2
