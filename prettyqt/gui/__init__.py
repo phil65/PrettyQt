@@ -5,6 +5,12 @@
 contains QtGui-based classes
 """
 
+from qtpy.QtGui import QKeyEvent as KeyEvent
+from qtpy.QtGui import QMouseEvent as MouseEvent
+from qtpy.QtGui import QWheelEvent as WheelEvent
+from qtpy.QtGui import QActionEvent as ActionEvent
+from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
+
 from .icon import Icon
 from .guiapplication import GuiApplication
 from .validator import Validator
@@ -45,6 +51,11 @@ from .keysequence import KeySequence
 
 
 __all__ = [
+    "KeyEvent",
+    "MouseEvent",
+    "WheelEvent",
+    "ActionEvent",
+    "ContextMenuEvent",
     "GuiApplication",
     "Validator",
     "RegExpValidator",
