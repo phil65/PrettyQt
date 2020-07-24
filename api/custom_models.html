@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/custom_models.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.4.0" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.0" name="generator"/>
 <title>custom_models - PrettyQt</title>
-<link href="../assets/stylesheets/main.fe0cca5b.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.b5d04df8.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -623,7 +623,7 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.columnCount">
 <code class="highlight language-python">
-columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">prettyqt</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">modelindex</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f4ff0fbb250</span><span class="o">&gt;</span><span class="p">)</span> </code>
+columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fc377d435d0</span><span class="o">&gt;</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
 <p>columnCount(self, parent: QModelIndex = QModelIndex()) -&gt; int</p>
@@ -670,7 +670,7 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapFromSource</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="n">role</span><span class="p">)</span>
@@ -759,7 +759,7 @@ mapFromSource<span class="p">(</span><span class="bp">self</span><span class="p"
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">mapFromSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_index</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">mapFromSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">source_index</span><span class="o">.</span><span class="n">column</span><span class="p">(),</span> <span class="n">source_index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
 </code></pre>
 </div>
@@ -788,7 +788,7 @@ mapToSource<span class="p">(</span><span class="bp">self</span><span class="p">,
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">mapToSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_index</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">mapToSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">proxy_index</span><span class="o">.</span><span class="n">column</span><span class="p">(),</span> <span class="n">proxy_index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
 </code></pre>
 </div>
@@ -818,7 +818,7 @@ parent(self) -&gt; QObject</p>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">):</span>
     <span class="k">return</span> <span class="kc">None</span>
 </code></pre>
 </div>
@@ -831,7 +831,7 @@ parent(self) -&gt; QObject</p>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.rowCount">
 <code class="highlight language-python">
-rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">prettyqt</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">modelindex</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f4ff0fbb050</span><span class="o">&gt;</span><span class="p">)</span> </code>
+rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fc377d431d0</span><span class="o">&gt;</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
 <p>rowCount(self, parent: QModelIndex = QModelIndex()) -&gt; int</p>
@@ -877,7 +877,7 @@ setSourceModel<span class="p">(</span><span class="bp">self</span><span class="p
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span> <span class="o">=</span> <span class="n">source_model</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">source_model</span><span class="p">)</span>
 </code></pre>
@@ -949,8 +949,8 @@ setSourceModel<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.d710d30a.min.js"></script>
-<script src="../assets/javascripts/bundle.b39636ac.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
+<script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
