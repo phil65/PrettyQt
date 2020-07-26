@@ -1756,6 +1756,29 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.undoview">
+    undoview
+  </a>
+<nav aria-label="undoview" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.undoview.UndoView">
+    UndoView
+  </a>
+<nav aria-label="UndoView" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.undoview.UndoView.set_clean_icon">
+    set_clean_icon()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.widget">
     widget
   </a>
@@ -3488,6 +3511,29 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.treewidgetitem.TreeWidgetItem.set_icon">
     set_icon()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.undoview">
+    undoview
+  </a>
+<nav aria-label="undoview" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.undoview.UndoView">
+    UndoView
+  </a>
+<nav aria-label="UndoView" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.undoview.UndoView.set_clean_icon">
+    set_clean_icon()
   </a>
 </li>
 </ul>
@@ -9697,12 +9743,9 @@ set_frame_style<span class="p">(</span><span class="bp">self</span><span class="
 </h3>
 <div class="doc doc-contents">
 <p>GroupBox widget</p>
-<div class="codehilite">
-<pre><span></span><code><span class="err">A group box provides a frame, a title on top, a keyboard shortcut,</span>
-<span class="err">and displays various other widgets inside itself.</span>
-<span class="err">The keyboard shortcut moves keyboard focus to one of the group box's child widgets.</span>
-</code></pre>
-</div>
+<p>A group box provides a frame, a title on top, a keyboard shortcut,
+and displays various other widgets inside itself.
+The keyboard shortcut moves keyboard focus to one of the group box's child widgets.</p>
 <div class="doc doc-children">
 </div>
 </div>
@@ -13062,10 +13105,7 @@ wheelEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </h3>
 <div class="doc doc-contents">
 <p>Progress dialog</p>
-<div class="codehilite">
-<pre><span></span><code><span class="err">wrapper for QtWidgets.QProgressBar</span>
-</code></pre>
-</div>
+<p>wrapper for QtWidgets.QProgressBar</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.progressbar.ProgressBar.get_alignment">
@@ -13391,10 +13431,7 @@ set_text_direction<span class="p">(</span><span class="bp">self</span><span clas
 </h3>
 <div class="doc doc-contents">
 <p>Progress dialog</p>
-<div class="codehilite">
-<pre><span></span><code><span class="err">wrapper for QtWidgets.QProgressDialog</span>
-</code></pre>
-</div>
+<p>wrapper for QtWidgets.QProgressDialog</p>
 <div class="doc doc-children">
 </div>
 </div>
@@ -14851,14 +14888,27 @@ Possible values: left, right, previous</p>
 </h3>
 <div class="doc doc-contents">
 <p>window containing a detached tab</p>
-<div class="codehilite">
-<pre><span></span><code><span class="k">When</span> <span class="n">a</span> <span class="n">tab</span> <span class="k">is</span> <span class="n">detached</span><span class="p">,</span> <span class="n">the</span> <span class="n">contents</span> <span class="k">are</span> <span class="n">placed</span> <span class="k">into</span> <span class="n">this</span> <span class="n">QMainWindow</span><span class="p">.</span>
-<span class="n">The</span> <span class="n">tab</span> <span class="n">can</span> <span class="n">be</span> <span class="n">re</span><span class="o">-</span><span class="n">attached</span> <span class="k">by</span> <span class="n">closing</span> <span class="n">the</span> <span class="n">dialog</span>
-
-<span class="o">!!!</span> <span class="n">attributes</span>
-    <span class="n">on_close</span><span class="p">:</span> <span class="n">signal</span><span class="p">,</span> <span class="n">emitted</span> <span class="k">when</span> <span class="n">window</span> <span class="k">is</span> <span class="n">closed</span> <span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span>
-</code></pre>
-</div>
+<p>When a tab is detached, the contents are placed into this QMainWindow.
+The tab can be re-attached by closing the dialog</p>
+<p><strong>Attributes:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>on_close</code></td>
+<td><code></code></td>
+<td>
+<p>signal, emitted when window is closed (widget, title, icon)</p>
+</td>
+</tr>
+</tbody>
+</table>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.tabwidget.DetachedTab.closeEvent">
@@ -16141,6 +16191,86 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    """</span>
     <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.widgets.undoview">
+<code>undoview</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.widgets.undoview.UndoView">
+<code>UndoView</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.undoview.UndoView.set_clean_icon">
+<code class="highlight language-python">
+set_clean_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>set the icon for the clean button</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>icon</code></td>
+<td><code>Optional[Union[PyQt5.QtGui.QIcon, str, pathlib.Path]]</code></td>
+<td>
+<p>icon to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/undoview.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>19
+20
+21
+22
+23
+24
+25
+26</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="sd">"""set the icon for the clean button</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        icon: icon to use</span>
+<span class="sd">    """</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCleanIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
 </td>
