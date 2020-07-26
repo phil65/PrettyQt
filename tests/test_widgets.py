@@ -1138,6 +1138,39 @@ def test_treewidgetitem(qtbot):
     assert item.get_checkstate() == "unchecked"
 
 
+def test_undocommand():
+    cmd = widgets.UndoCommand()
+    cmd2 = widgets.UndoCommand(cmd)
+    assert cmd[0] == cmd2
+    assert len(cmd) == 1
+
+
+def test_undostack():
+    stack = widgets.UndoStack()
+    cmd = stack.add_command("test", redo=lambda: print("a"), undo=lambda: print("b"))
+    assert stack[0] == cmd
+    assert len(stack) == 1
+    with stack.create_macro("test"):
+        pass
+
+
+def test_undogroup():
+    group = widgets.UndoGroup()
+    stack = widgets.UndoStack()
+    group.addStack(stack)
+    assert len(group) == 1
+    assert group[0] == stack
+
+
+def test_undoview(qtbot):
+    view = widgets.UndoView()
+    stack = widgets.UndoStack()
+    cmd = stack.add_command("test", redo=lambda: print("a"), undo=lambda: print("b"))
+    view.set_clean_icon("mdi.folder")
+    view.set_value(stack)
+    assert view[0] == cmd
+
+
 def test_widget(qtbot):
     widget = widgets.Widget()
     widget.set_tooltip("test")

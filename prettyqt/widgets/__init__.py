@@ -105,6 +105,11 @@ from .splitter import Splitter
 from .wizard import Wizard
 from .wizardpage import WizardPage
 
+from .undocommand import UndoCommand
+from .undostack import UndoStack
+from .undogroup import UndoGroup
+from .undoview import UndoView
+
 
 def app():
     if Application.instance() is not None:
@@ -208,4 +213,8 @@ __all__ = [
     "ItemDelegate",
     "StyledItemDelegate",
     "SystemTrayIcon",
+    "UndoCommand",
+    "UndoStack",
+    "UndoGroup",
+    "UndoView",
 ]
