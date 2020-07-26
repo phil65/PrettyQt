@@ -37,8 +37,11 @@ clean: ## remove all build, test, coverage and Python artifacts
 lint: ## check style with flake8
 	flake8 prettyqt
 
-test: ## run tests quickly with the default Python
-	py.test
+test: ## run tests
+	poetry run pytest # --mypy
+
+mypy: ## run mypy type checking
+	poetry run mypy prettyqt
 
 docs: ## builds the documentation
 	mkdocs build
