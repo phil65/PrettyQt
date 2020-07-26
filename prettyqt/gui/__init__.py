@@ -48,6 +48,7 @@ from .textcursor import TextCursor
 from .syntaxhighlighter import SyntaxHighlighter
 from .pdfwriter import PdfWriter
 from .keysequence import KeySequence
+from .desktopservices import DesktopServices
 
 
 __all__ = [
@@ -87,4 +88,5 @@ __all__ = [
     "SyntaxHighlighter",
     "PdfWriter",
     "KeySequence",
+    "DesktopServices",
 ]

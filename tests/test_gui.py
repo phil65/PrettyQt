@@ -37,6 +37,10 @@ def test_cursor():
     assert cursor.get_shape() == "arrow"
 
 
+def test_desktopservices():
+    gui.DesktopServices.open_url("test")
+
+
 def test_doublevalidator():
     val = gui.DoubleValidator()
     val.setRange(0, 9)
