@@ -1,3 +1,12 @@
+## v0.106.0 (2020-07-26)
+
+### Feat
+
+- **gui**: add DesktopServices class
+- **multimedia**: add AudioRecorder class
+- **core**: add StandardPaths class
+- **widgets**: add Undo classes
+
 ## v0.105.0 (2020-07-24)
 
 ### Feat
