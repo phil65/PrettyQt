@@ -248,6 +248,15 @@ def test_sizef():
     repr(size)
 
 
+def test_standardpaths():
+    path = core.StandardPaths.get_writable_location("cache")
+    assert path is not None
+    path = core.StandardPaths.get_standard_locations("cache")
+    assert path != []
+    name = core.StandardPaths.get_display_name("cache")
+    assert name == "Cache"
+
+
 def test_sortfilterproxymodel():
     core.SortFilterProxyModel()
 

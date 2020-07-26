@@ -55,6 +55,7 @@ from .abstractproxymodel import AbstractProxyModel
 from .abstractlistmodel import AbstractListModel
 from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel
+from .standardpaths import StandardPaths
 
 __all__ = [
     "Object",
@@ -96,4 +97,5 @@ __all__ = [
     "AbstractListModel",
     "SortFilterProxyModel",
     "AbstractTableModel",
+    "StandardPaths",
 ]
