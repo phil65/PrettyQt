@@ -1,3 +1,9 @@
+## v0.107.0 (2020-07-29)
+
+### Feat
+
+- **GridLayout**: also allow adding LayoutItems via add method
+
 ## v0.106.1 (2020-07-29)
 
 ### Fix
