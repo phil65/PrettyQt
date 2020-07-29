@@ -123,7 +123,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def set_detachable(self) -> None:
         self.tab_bar.on_detach.connect(self.detach_tab)
-        widgets.app().aboutToQuit.connect(self.close_detached_tabs)
+        widgets.Application.call_on_exit(self.close_detached_tabs)
         self.setMovable(True)
 
     def set_closable(self, closable: bool = True) -> None:
@@ -215,8 +215,9 @@ class TabWidget(QtWidgets.QTabWidget):
     def close_detached_tabs(self) -> None:
         """Close all tabs that are currently detached
         """
-        for detached_tab in self.detached_tabs.values():
-            detached_tab.close()
+        tabs = list(self.detached_tabs.values())
+        for tab in tabs:
+            tab.close()
 
     @core.Slot(int)
     def remove_tab(self, index: int) -> None:
