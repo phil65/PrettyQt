@@ -64,7 +64,7 @@ class HeaderView(QtWidgets.QHeaderView):
             self.setSectionResizeMode(col, MODES[mode])
 
     def section_labels(self) -> List[str]:
-        model = self.parent().model()
+        model = self.model()
         return [
             model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
             for i in range(self.count())
