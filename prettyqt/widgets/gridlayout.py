@@ -53,8 +53,10 @@ class GridLayout(QtWidgets.QGridLayout):
     def add(self, item, rowstart, colstart, rowspan=1, colspan=1):
         if isinstance(item, QtWidgets.QWidget):
             self.addWidget(item, rowstart, colstart, rowspan, colspan)
-        else:
+        elif isinstance(item, QtWidgets.QLayout):
             self.addLayout(item, rowstart, colstart, rowspan, colspan)
+        else:
+            self.addItem(item, rowstart, colstart, rowspan, colspan)
 
     def append(self, item):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
