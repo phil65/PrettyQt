@@ -34,7 +34,7 @@ qstylizer = "^0.1.9"
 
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.4.3"
+pytest = "^6.0.0"
 pip = "^20.1.1"
 flake8 = "^3.8.3"
 pytest-qt = "^3.3.0"
@@ -59,9 +59,9 @@ minversion = "6.0"
 testpaths = [
     "tests",
 ]
-collect_ignore = ['setup.py']
 junit_family = "xunit2"
 qt_api = "pyqt5"
+qt_log_level_fail = "CRITICAL"
 
 [tool.isort]
 line_length = 90
