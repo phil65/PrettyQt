@@ -2,7 +2,7 @@
 """
 """
 
-from typing import Callable, Optional
+from typing import Callable, Optional, Dict, Any
 import functools
 import operator
 
@@ -37,6 +37,13 @@ class ToolBar(QtWidgets.QToolBar):
         super().__init__(*args, **kwargs)
         self.set_icon_size(24)
         self.menu_buttons = list()
+
+    def __getstate__(self) -> Dict[str, Any]:
+        return dict(actions=self.actions())
+
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        super().__init__()
+        self.addActions(state["actions"])
 
     def add_menu_button(
         self, label: str, icon: gui.icon.IconType, menu: QtWidgets.QMenu

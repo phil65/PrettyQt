@@ -2,6 +2,7 @@
 """
 """
 
+from typing import Dict, Any
 
 from qtpy import QtCore, QtWidgets
 
@@ -36,6 +37,13 @@ class DockWidget(QtWidgets.QDockWidget):
         if title:
             self.set_title(title)
         self.set_allowed_areas("all")
+
+    def __getstate__(self) -> Dict[str, Any]:
+        return dict(widget=self.widget())
+
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        super().__init__()
+        self.set_widget(state["widget"])
 
     def set_widget(self, widget):
         self.setWidget(widget)
