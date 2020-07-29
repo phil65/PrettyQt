@@ -1,3 +1,11 @@
+## v0.106.1 (2020-07-29)
+
+### Fix
+
+- **TabWidget**: correctly close detached tabs on app close
+- pickle fixes for toolbar and dockwidget
+- **PygmentsHighlighter**: catch pygments KeyError
+
 ## v0.106.0 (2020-07-26)
 
 ### Feat
