@@ -88,7 +88,7 @@ class HeaderView(QtWidgets.QHeaderView):
         self.section_vis_changed.emit(i, hide)
         self.setSectionHidden(i, hide)
 
-    def set_sizes(self, sizes: Iterable):
+    def set_sizes(self, sizes: Iterable[Optional[int]]):
         for i, size in enumerate(sizes):
             if size is not None:
                 self.resizeSection(i, size)
