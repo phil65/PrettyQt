@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pathlib
+import logging
 
 from pygments.formatters.html import HtmlFormatter
 from pygments.lexer import Error, RegexLexer, Text, _TokenType
@@ -8,6 +9,8 @@ from pygments.lexers import get_lexer_by_name, load_lexer_from_file
 from pygments.styles import get_style_by_name
 
 from prettyqt import gui
+
+logger = logging.getLogger(__name__)
 
 
 def qstring_length(text):
@@ -192,7 +195,12 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         """ Returns a QTextCharFormat for token by reading a Pygments style.
         """
         result = gui.TextCharFormat()
-        for key, value in style.style_for_token(token).items():
+        try:
+            token_style = style.style_for_token(token)
+        except KeyError as e:
+            logger.exception(e)
+            return result
+        for key, value in token_style.items():
             if value:
                 if key == "color":
                     result.set_foreground_color(self._get_brush(value))
