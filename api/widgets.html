@@ -14923,8 +14923,8 @@ closeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>265
-266</pre>
+<pre><span></span>266
+267</pre>
 </div>
 </td>
 <td class="code">
@@ -15046,7 +15046,8 @@ close_detached_tabs<span class="p">(</span><span class="bp">self</span><span cla
 216
 217
 218
-219</pre>
+219
+220</pre>
 </div>
 </td>
 <td class="code">
@@ -15054,8 +15055,9 @@ close_detached_tabs<span class="p">(</span><span class="bp">self</span><span cla
 <pre><span></span><code><span class="k">def</span> <span class="nf">close_detached_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Close all tabs that are currently detached</span>
 <span class="sd">    """</span>
-    <span class="k">for</span> <span class="n">detached_tab</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">detached_tabs</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">detached_tab</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">tabs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">detached_tabs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="k">for</span> <span class="n">tab</span> <span class="ow">in</span> <span class="n">tabs</span><span class="p">:</span>
+        <span class="n">tab</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre>
 </div>
 </td>
@@ -15230,12 +15232,12 @@ open_widget<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>228
-229
+<pre><span></span>229
 230
 231
 232
-233</pre>
+233
+234</pre>
 </div>
 </td>
 <td class="code">
@@ -15423,14 +15425,7 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>52
-53
-54
-55
-56
-57
-58
-59
+<pre><span></span>59
 60
 61
 62
@@ -15449,7 +15444,14 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 75
 76
 77
-78</pre>
+78
+79
+80
+81
+82
+83
+84
+85</pre>
 </div>
 </td>
 <td class="code">
@@ -15520,15 +15522,15 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>87
-88
-89
-90
-91
-92
-93
-94
-95</pre>
+<pre><span></span> 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102</pre>
 </div>
 </td>
 <td class="code">
@@ -15602,20 +15604,20 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>124
-125
-126
-127
-128
-129
-130
-131
+<pre><span></span>131
 132
 133
 134
 135
 136
-137</pre>
+137
+138
+139
+140
+141
+142
+143
+144</pre>
 </div>
 </td>
 <td class="code">
