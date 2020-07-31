@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class CheckBoxDelegate(widgets.ItemDelegate):
     """
     A delegate that places a fully functioning CheckBox in every
-    cell of the column to which it's applied
+    cell of the column to which it's applied.
     """
 
     def __init__(self, *args, **kwargs):
@@ -21,7 +21,7 @@ class CheckBoxDelegate(widgets.ItemDelegate):
 
     def createEditor(self, parent, option, index):
         """
-        override
+        Override.
         instanciate the editor widget and initialize it
         also connect currentIndexChanged signal
         """
@@ -31,7 +31,7 @@ class CheckBoxDelegate(widgets.ItemDelegate):
 
     def setEditorData(self, cb, index):
         """
-        override
+        Override.
         set correct initial value for editor widget
         """
         current_selection = index.data()
@@ -40,8 +40,8 @@ class CheckBoxDelegate(widgets.ItemDelegate):
 
     def setModelData(self, combo, model, index):
         """
-        override, gets called on self.commitData (?)
-        apply the newly selected dtype to the column if possible
+        Override, gets called on self.commitData (?).
+        apply the newly selected dtype to the column if possible.
         """
         dtype = self.dtypes[combo.currentText()]
         # s = model.data(index, model.DATA_ROLE)
