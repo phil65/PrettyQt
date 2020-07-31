@@ -21,3 +21,17 @@ def test_radiodelegate(qtbot, tablewidget):
     tablewidget.setItemDelegateForColumn(0, delegate)
     tablewidget.openPersistentEditor(tablewidget[0, 0])
     tablewidget.hide()
+
+
+def test_icondelegate(qtbot, tablewidget):
+    delegate = custom_delegates.IconDelegate()
+    tablewidget.show()
+    tablewidget.setItemDelegateForColumn(0, delegate)
+    tablewidget.hide()
+
+
+def test_nofocusdelegate(qtbot, tablewidget):
+    delegate = custom_delegates.NoFocusDelegate()
+    tablewidget.show()
+    tablewidget.setItemDelegateForColumn(0, delegate)
+    tablewidget.hide()
