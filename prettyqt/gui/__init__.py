@@ -9,6 +9,7 @@ from qtpy.QtGui import QKeyEvent as KeyEvent
 from qtpy.QtGui import QMouseEvent as MouseEvent
 from qtpy.QtGui import QWheelEvent as WheelEvent
 from qtpy.QtGui import QActionEvent as ActionEvent
+from qtpy.QtGui import QShowEvent as ShowEvent
 from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
 from .icon import Icon
@@ -56,6 +57,7 @@ __all__ = [
     "MouseEvent",
     "WheelEvent",
     "ActionEvent",
+    "ShowEvent",
     "ContextMenuEvent",
     "GuiApplication",
     "Validator",
