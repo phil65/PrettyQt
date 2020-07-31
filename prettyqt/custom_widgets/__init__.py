@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Custom_widgets module."""
+"""Module containing custom widget classes."""
 
 from .image import Image
 from .listinput import ListInput

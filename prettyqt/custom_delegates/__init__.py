@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+"""Module containing custom delegate classes."""
 
 from .buttondelegate import ButtonDelegate
 from .radiodelegate import RadioDelegate
