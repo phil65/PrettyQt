@@ -1,3 +1,17 @@
+## v0.108.0 (2020-07-31)
+
+### Feat
+
+- **custom_delegates**: add IconDelegate and NoFocusDelegate
+- **TableWidet**: add __getitem__ and __setitem__ methods
+- **Icon**: add from_image method
+- allow str for layout.__getitem__ (uses objectName)
+- **SidebarWidget**: add set_marker method
+
+### Refactor
+
+- move delegates to separate module
+
 ## v0.107.0 (2020-07-29)
 
 ### Feat
