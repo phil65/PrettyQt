@@ -76,6 +76,10 @@ class Icon(QtGui.QIcon):
             icon = cls(qta.icon("mdi.card-outline"))
         return icon
 
+    @classmethod
+    def from_image(cls, image: QtGui.QImage):
+        return cls(gui.Pixmap.fromImage(image))
+
     def get_pixmap(self, size: int) -> QtGui.QPixmap:
         size = core.Size(size, size)
         return self.pixmap(size)
