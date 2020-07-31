@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""charts module
+"""constants module
 """
 
 from qtpy import QtCore
@@ -43,6 +43,7 @@ NO_CHILDREN = QtCore.Qt.NoItemFlags
 MOVE_ACTION = QtCore.Qt.MoveAction
 COPY_ACTION = QtCore.Qt.CopyAction
 
+TEXT_WORD_WRAP = QtCore.Qt.TextWordWrap
 
 CTRL_MOD = QtCore.Qt.ControlModifier
 
