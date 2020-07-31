@@ -1049,9 +1049,11 @@ def test_tableview(qtbot):
     assert widget.v_header is not None
 
 
-def test_tablewidget(qtbot):
-    widget = widgets.TableWidget()
-    widget.sort()
+def test_tablewidget(qtbot, tablewidget):
+    tablewidget.sort()
+    item = widgets.TableWidgetItem("test")
+    tablewidget[0, 0] = item
+    assert tablewidget[0, 0] == item
 
 
 def test_toolbox(qtbot):
