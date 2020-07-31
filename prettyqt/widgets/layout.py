@@ -2,6 +2,8 @@
 """
 """
 
+from typing import Union, Optional
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
@@ -29,11 +31,16 @@ QtWidgets.QLayout.__bases__ = (core.Object, widgets.LayoutItem)
 
 
 class Layout(QtWidgets.QLayout):
-    def __getitem__(self, index):
-        item = self.itemAt(index)
-        widget = item.widget()
-        if widget is None:
-            widget = item.layout()
+    def __getitem__(
+        self, index: Union[str, int]
+    ) -> Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
+        if isinstance(index, int):
+            item = self.itemAt(index)
+            widget = item.widget()
+            if widget is None:
+                widget = item.layout()
+        else:
+            widget = self.find_child(typ=QtCore.QObject, name=index)
         return widget
 
     def __len__(self) -> int:

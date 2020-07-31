@@ -2,8 +2,9 @@
 """
 """
 
-from qtpy import QtWidgets
+from typing import Union, Optional
 
+from qtpy import QtWidgets, QtCore
 from prettyqt import widgets
 
 
@@ -11,11 +12,15 @@ QtWidgets.QGridLayout.__bases__ = (widgets.Layout,)
 
 
 class GridLayout(QtWidgets.QGridLayout):
-    def __getitem__(self, idx):
+    def __getitem__(
+        self, idx: Union[tuple, int, str]
+    ) -> Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
         if isinstance(idx, tuple):
             item = self.itemAtPosition(*idx)
-        else:
+        elif isinstance(idx, int):
             item = self.itemAt(idx)
+        else:
+            return self.find_child(QtCore.QObject, idx)
         widget = item.widget()
         if widget is None:
             widget = item.layout()
