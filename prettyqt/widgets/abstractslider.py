@@ -37,7 +37,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         self.setInvertedAppearance(state["inverted_appearance"])
 
     def is_horizontal(self) -> bool:
-        """check if silder is horizontal
+        """Check if silder is horizontal.
 
         Returns:
             True if horizontal, else False
@@ -45,7 +45,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         return self.orientation() == QtCore.Qt.Horizontal
 
     def is_vertical(self) -> bool:
-        """check if silder is vertical
+        """Check if silder is vertical.
 
         Returns:
             True if vertical, else False
@@ -53,22 +53,22 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         return self.orientation() == QtCore.Qt.Vertical
 
     def set_horizontal(self):
-        """set slider orientation to horizontal
+        """Set slider orientation to horizontal.
         """
         self.setOrientation(QtCore.Qt.Horizontal)
 
     def set_vertical(self):
-        """set slider orientation to vertical
+        """Set slider orientation to vertical.
         """
         self.setOrientation(QtCore.Qt.Vertical)
 
     def scroll_to_min(self):
-        """scroll to the minimum value of the slider
+        """Scroll to the minimum value of the slider.
         """
         self.setValue(self.minimum())
 
     def scroll_to_max(self):
-        """scroll to the maximum value of the slider
+        """Scroll to the maximum value of the slider.
         """
         self.setValue(self.maximum())
 

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-based on http://www.yasinuludag.com/blog/?p=49
+Based on http://www.yasinuludag.com/blog/?p=49 .
 """
 
 from prettyqt import core, gui, syntaxhighlighters

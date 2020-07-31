@@ -87,7 +87,7 @@ class Action(QtWidgets.QAction):
         self.setCheckable(value)
 
     def set_icon(self, icon: gui.icon.IconType):
-        """set the icon for the action
+        """Set the icon for the action
 
         Args:
             icon: icon to use
@@ -103,7 +103,7 @@ class Action(QtWidgets.QAction):
         self.setMenu(menu)
 
     def set_priority(self, priority: str):
-        """set priority of the action
+        """Set priority of the action
 
         Allowed values are "low", "normal", "high"
 
@@ -118,7 +118,7 @@ class Action(QtWidgets.QAction):
         self.setPriority(PRIORITIES[priority])
 
     def get_priority(self) -> str:
-        """returns current priority
+        """Return current priority
 
         Possible values: "low", "normal", "high"
 
@@ -128,7 +128,7 @@ class Action(QtWidgets.QAction):
         return PRIORITIES.inv[self.priority()]
 
     def set_shortcut_context(self, context: str):
-        """set shortcut context
+        """Set shortcut context
 
         Allowed values are "widget", "widget_with_children", "window", "application"
 
@@ -143,7 +143,7 @@ class Action(QtWidgets.QAction):
         self.setShortcutContext(CONTEXTS[context])
 
     def get_shortcut_context(self) -> str:
-        """returns shortcut context
+        """Return shortcut context
 
         Possible values: "widget", "widget_with_children", "window", "application"
 

@@ -39,7 +39,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.setStatusTip(state.get("statustip", ""))
 
     def set_icon(self, icon: gui.icon.IconType):
-        """set the icon for the button
+        """Set the icon for the button
 
         Args:
             icon: icon to use

@@ -154,7 +154,9 @@ class PythonHighlighter(gui.SyntaxHighlighter):
             self.match_multiline(text, *TRI_DOUBLE)
 
     def match_multiline(self, text, delimiter, in_state, style):
-        """Do highlighting of multi-line strings. ``delimiter`` should be a
+        """Do highlighting of multi-line strings.
+
+        ``delimiter`` should be a
         ``core.RegExp`` for triple-single-quotes or triple-double-quotes, and
         ``in_state`` should be a unique integer to represent the corresponding
         state changes when inside those strings. Returns True if we're still

@@ -95,7 +95,7 @@ class TabBar(QtWidgets.QTabBar):
         self.setTabButton(index, POSITIONS[position], widget)
 
     def set_remove_behaviour(self, mode: str) -> None:
-        """sets the remove hehaviour
+        """Set the remove hehaviour
 
         What tab should be set as current when removeTab is called
         if the removed tab is also the current tab.
@@ -108,7 +108,7 @@ class TabBar(QtWidgets.QTabBar):
         self.setSelectionBehaviorOnRemove(REMOVE_BEHAVIOURS[mode])
 
     def get_remove_behaviour(self) -> str:
-        """returns remove behaviour
+        """Return remove behaviour
 
         possible values are "left_tab", "right_tab", "previous_tab"
 
@@ -118,7 +118,7 @@ class TabBar(QtWidgets.QTabBar):
         return REMOVE_BEHAVIOURS.inv[self.selectionBehaviorOnRemove()]
 
     def set_elide_mode(self, mode: str) -> None:
-        """set elide mode
+        """Set elide mode
 
         Valid values are "left", "right", "middle", "none"
 
@@ -133,7 +133,7 @@ class TabBar(QtWidgets.QTabBar):
         self.setElideMode(ELIDE_MODES[mode])
 
     def get_elide_mode(self) -> str:
-        """returns elide mode
+        """Return elide mode
 
         possible values are "left", "right", "middle", "none"
 

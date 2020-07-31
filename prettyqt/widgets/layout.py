@@ -63,7 +63,7 @@ class Layout(QtWidgets.QLayout):
         self.setSpacing(pixels)
 
     def set_size_mode(self, mode: str):
-        """set the size mode of the layout
+        """Set the size mode of the layout.
 
         Allowed values are "default", "fixed", "minimum", "maximum", "min_and_max", "none"
 
@@ -78,7 +78,7 @@ class Layout(QtWidgets.QLayout):
         self.setSizeConstraint(MODES[mode])
 
     def get_size_mode(self) -> str:
-        """returns current size mode
+        """Return current size mode.
 
         Possible values: "default", "fixed", "minimum", "maximum", "min_and_max", "none"
 
@@ -88,8 +88,8 @@ class Layout(QtWidgets.QLayout):
         return MODES.inv[self.sizeConstraint()]
 
     def set_alignment(self, alignment: str, item=None):
-        """Sets the alignment for widget / layout to alignment and
-        returns true if w is found in this layout (not including child layouts)
+        """Set the alignment for widget / layout to alignment and
+        returns true if w is found in this layout (not including child layouts).
 
         Allowed values for alignment:  "left", "right", "top", "bottom"
 

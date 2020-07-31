@@ -43,7 +43,7 @@ class RegexMatchesModel(core.AbstractTableModel):
 
     def rowCount(self, parent=None):
         """
-        required override for AbstractitemModels
+        Required override for AbstractitemModels.
         """
         return len(self.matches)
 

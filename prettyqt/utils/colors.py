@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-
-for full list, see:
-- https://cdn.materialdesignicons.com/3.0.39/
-"""
 
 from typing import Union
 
@@ -25,7 +20,7 @@ def set_window_icon_color(color):
 
 
 def get_color(color: ColorType) -> gui.Color:
-    """get gui.Color instance for given parameter
+    """Get gui.Color instance for given parameter
 
     named colors are 'aliceblue', 'antiquewhite', 'aqua', 'aquamarine',
     'azure', 'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet',

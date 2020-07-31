@@ -9,7 +9,7 @@ from prettyqt import core, gui, widgets
 
 class PopupInfo(widgets.Dialog):
     """
-    dialog overlay to show some info to user
+    Dialog overlay to show some info to user.
     """
 
     def __init__(

@@ -47,7 +47,7 @@ class ToolButton(QtWidgets.QToolButton):
         self.setDefaultAction(action)
 
     def set_popup_mode(self, mode: str):
-        """sets the popup mode of the toolbutton
+        """Set the popup mode of the toolbutton.
 
         valid values are: "delayed", "menu_button", "instant"
 
@@ -62,7 +62,7 @@ class ToolButton(QtWidgets.QToolButton):
         self.setPopupMode(POPUP_MODES[mode])
 
     def get_popup_mode(self) -> str:
-        """returns popup mode
+        """Return popup mode.
 
         possible values are "delayed", "menu_button", "instant"
 
@@ -72,7 +72,7 @@ class ToolButton(QtWidgets.QToolButton):
         return POPUP_MODES.inv[self.popupMode()]
 
     def set_arrow_type(self, mode: str):
-        """sets the arrow type of the toolbutton
+        """Set the arrow type of the toolbutton.
 
         valid values are: "none", "up", "down", "left", "right"
 
@@ -87,7 +87,7 @@ class ToolButton(QtWidgets.QToolButton):
         self.setArrowType(ARROW_TYPES[mode])
 
     def get_arrow_type(self) -> str:
-        """returns arrow type
+        """Return arrow type.
 
         possible values are "none", "up", "down", "left", "right"
 

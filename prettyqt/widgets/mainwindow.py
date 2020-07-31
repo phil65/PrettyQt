@@ -32,8 +32,9 @@ QtWidgets.QMainWindow.__bases__ = (widgets.Widget,)
 
 class MainWindow(QtWidgets.QMainWindow):
     """
-    Class for our mainWindow
-    includes all docks, a centralwidget and a toolbar
+    Class for our mainWindow.
+
+    Includes all docks, a centralwidget and a toolbar
     """
 
     def __init__(self, *args, **kwargs):
@@ -94,7 +95,7 @@ class MainWindow(QtWidgets.QMainWindow):
         return menu
 
     def add_toolbar(self, toolbar: QtWidgets.QToolBar, position: str = "top"):
-        """adds a toolbar to the mainmenu at specified area
+        """Adds a toolbar to the mainmenu at specified area.
 
         Valid values for position: "left", "right", "top", "bottom"
 
@@ -147,8 +148,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def save_window_state(self, recursive=False):
         """
-        override, gets executed when app gets closed.
-        saves GUI settings
+        Save current window state as QSetting.
+
+        Args:
+            recursive (bool, optional): Description
         """
         settings = core.Settings()
         name = self.get_id()
@@ -192,7 +195,7 @@ class MainWindow(QtWidgets.QMainWindow):
         return self.find_children(QtWidgets.QToolBar, recursive=False)
 
     def toggle_fullscreen(self):
-        """toggle between fullscreen and regular size
+        """Toggle between fullscreen and regular size.
         """
         if self.isFullScreen():
             self.showNormal()

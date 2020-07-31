@@ -35,7 +35,7 @@ class Chart(QtCharts.QChart):
 
     def update_boundaries(self):
         """
-        set new min/max values based on axis
+        Set new min/max values based on axis.
         """
         self.max_x = self.axisX().max()
         self.max_y = self.axisY().max()
@@ -61,14 +61,15 @@ class Chart(QtCharts.QChart):
 
     def apply_nice_numbers(self):
         """
-        adjust both axis to display nice round numbers
+        Adjust both axis to display nice round numbers.
         """
         self.axisX().applyNiceNumbers()
         self.axisY().applyNiceNumbers()
 
     def zoom_by_factor(self, factor: float):
         """
-        zoom in/out by factor (1.0 = no change)
+        Zoom in/out by factor (1.0 = no change).
+
         make sure that we dont zoom out too far
         """
         self.zoom(factor)

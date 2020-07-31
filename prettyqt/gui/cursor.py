@@ -16,7 +16,7 @@ SHAPES = bidict(
 
 class Cursor(QtGui.QCursor):
     def set_shape(self, shape: str):
-        """sets cursor shape
+        """Set cursor shape
 
         Allowed values are "arrow", "uparrow", "cross", "wait", "caret"
 
@@ -31,7 +31,7 @@ class Cursor(QtGui.QCursor):
         self.setShape(SHAPES[shape])
 
     def get_shape(self) -> str:
-        """returns current cursor shape
+        """Return current cursor shape
 
         Possible values: "arrow", "uparrow", "cross", "wait", "caret"
 

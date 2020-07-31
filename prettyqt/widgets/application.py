@@ -16,7 +16,7 @@ QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
 class Application(QtWidgets.QApplication):
     def set_icon(self, icon: gui.icon.IconType):
-        """set the default window icon
+        """Set the default window icon
 
         Args:
             icon: icon to use

@@ -15,7 +15,7 @@ class UndoView(QtWidgets.QUndoView):
         return self.stack()[index]
 
     def set_clean_icon(self, icon: gui.icon.IconType):
-        """set the icon for the clean button
+        """Set the icon for the clean button.
 
         Args:
             icon: icon to use

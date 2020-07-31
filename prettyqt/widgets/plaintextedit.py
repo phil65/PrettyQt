@@ -67,7 +67,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def wheelEvent(self, event):
         """
-        handle wheel event for zooming
+        Handle wheel event for zooming.
         """
         if not self._allow_wheel_zoom:
             return None
@@ -120,7 +120,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             c.select_text(start, end)
 
     def set_read_only(self, value: bool = True):
-        """make the PlainTextEdit read-only
+        """Make the PlainTextEdit read-only.
 
         Args:
             value: True, for read-only, otherwise False
@@ -142,7 +142,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         self.setExtraSelections(extra_selections)
 
     def set_wrap_mode(self, mode: str):
-        """set word wrap mode
+        """Set word wrap mode.
 
         Allowed values are "none", "word", "anywhere", "boundary_or_anywhere"
 
@@ -157,7 +157,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         self.setWordWrapMode(WRAP_MODES[mode])
 
     def set_line_wrap_mode(self, mode: str):
-        """set line wrap mode
+        """Set line wrap mode.
 
         Allowed values are "none" and "widget width"
 

@@ -107,7 +107,7 @@ class Label(QtWidgets.QLabel):
         return self
 
     def set_text_format(self, text_format: str):
-        """set the text format
+        """Set the text format.
 
         Allowed values are "rich", "plain", "auto"
 
@@ -123,7 +123,7 @@ class Label(QtWidgets.QLabel):
         return self
 
     def get_text_format(self) -> str:
-        """returns current text format
+        """Return current text format.
 
         Possible values: "rich", "plain", "auto"
 
@@ -133,7 +133,7 @@ class Label(QtWidgets.QLabel):
         return TEXT_FORMATS.inv[self.textFormat()]
 
     def set_text_interaction(self, *types: str):
-        """set the text interaction mode
+        """Set the text interaction mode.
 
         Allowed values are "none", "by_mouse", "by_keyboard", "text_editable"
 
@@ -151,7 +151,7 @@ class Label(QtWidgets.QLabel):
         return self
 
     def get_text_interaction(self) -> List[str]:
-        """returns current text interaction mode
+        """Return current text interaction mode.
 
         Possible values: "none", "by_mouse", "by_keyboard", "text_editable"
 
@@ -183,7 +183,7 @@ class Label(QtWidgets.QLabel):
         return self
 
     def set_weight(self, weight: str):
-        """sets the font weight
+        """Set the font weight.
 
         Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
                          "extra_bold", normal", "black"

@@ -29,7 +29,7 @@ class ActionGroup(QtWidgets.QActionGroup):
         return self.actions()[item]
 
     def set_exclusion_policy(self, policy: Optional[str]):
-        """set exclusion policy to use
+        """Set exclusion policy to use
 
         Allowed values are "none", "exclusive", "exclusive_optional"
 
@@ -46,7 +46,7 @@ class ActionGroup(QtWidgets.QActionGroup):
         self.setExclusionPolicy(POLICIES[policy])
 
     def get_exclusion_policy(self) -> str:
-        """returns current exclusion policy
+        """Return current exclusion policy
 
         Possible values: "none", "exclusive", "exclusive_optional"
 

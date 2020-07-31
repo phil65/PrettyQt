@@ -44,7 +44,7 @@ class Menu(QtWidgets.QMenu):
             self.add_action(i)
 
     def set_icon(self, icon: gui.icon.IconType):
-        """set the icon for the menu
+        """Set the icon for the menu.
 
         Args:
             icon: icon to use
@@ -53,7 +53,7 @@ class Menu(QtWidgets.QMenu):
         self.setIcon(icon)
 
     def add_separator(self, text: Optional[str] = None) -> widgets.WidgetAction:
-        """adds a separator showing an optional label
+        """Adds a separator showing an optional label.
 
         Args:
             text: Text to show on separator
@@ -85,7 +85,7 @@ class Menu(QtWidgets.QMenu):
         shortcut: Optional[str] = None,
         status_tip: Optional[str] = None,
     ) -> widgets.Action:
-        """Add an action to the menu
+        """Add an action to the menu.
 
         Args:
             label: Label for button

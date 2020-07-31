@@ -57,7 +57,7 @@ class ToolBar(QtWidgets.QToolBar):
     def add_separator(
         self, text: Optional[str] = None, before: QtWidgets.QAction = None
     ) -> QtWidgets.QAction:
-        """adds a separator showing an optional label
+        """Adds a separator showing an optional label.
 
         Args:
             text: Text to show on separator
@@ -90,7 +90,7 @@ class ToolBar(QtWidgets.QToolBar):
             btn.set_style(style)
 
     def get_style(self) -> str:
-        """returns current style
+        """Return current style.
 
         Possible values: "icon", "text", "text_below_icon", "text_beside_icon"
 
@@ -127,7 +127,7 @@ class ToolBar(QtWidgets.QToolBar):
             font.set_size(size)
 
     def is_area_allowed(self, area: str):
-        """check if toolbar is allowed at specified area
+        """Check if toolbar is allowed at specified area.
 
         Valid values for area: "left", "right", "top", "bottom", "all"
 

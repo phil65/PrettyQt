@@ -107,7 +107,7 @@ class Widget(QtWidgets.QWidget):
             super().resize(*size)
 
     def set_icon(self, icon: gui.icon.IconType) -> None:
-        """set the window icon
+        """Set the window icon.
 
         Args:
             icon: icon to use
@@ -219,7 +219,7 @@ class Widget(QtWidgets.QWidget):
         self.setAttribute(ATTRIBUTES[attribute], state)
 
     def set_modality(self, modality: str = "window") -> None:
-        """set modality for the dialog
+        """Set modality for the dialog.
 
         Valid values for modality: "none", "window", "application"
 
@@ -234,7 +234,7 @@ class Widget(QtWidgets.QWidget):
         self.setWindowModality(MODALITIES[modality])
 
     def get_modality(self) -> str:
-        """get the current modality modes as a string
+        """Get the current modality modes as a string.
 
         Possible values: "none", "window", "application"
 
@@ -247,7 +247,7 @@ class Widget(QtWidgets.QWidget):
     def set_size_policy(
         self, horizontal: Optional[str] = None, vertical: Optional[str] = None
     ) -> None:
-        """sets the sizes policy
+        """Set the sizes policy.
 
         possible values for both parameters are "fixed", "minimum", "maximum",
         "preferred", "expanding", "minimum_expanding" and "ignored"
@@ -300,7 +300,7 @@ class Widget(QtWidgets.QWidget):
         self.setFont(font)
 
     def set_contextmenu_policy(self, policy: str) -> None:
-        """set contextmenu policy for given item view
+        """Set contextmenu policy for given item view.
 
         Allowed values are "none", "prevent", "default", "actions", "custom"
 
@@ -315,7 +315,7 @@ class Widget(QtWidgets.QWidget):
         self.setContextMenuPolicy(CONTEXT_POLICIES[policy])
 
     def get_contextmenu_policy(self) -> str:
-        """returns current contextmenu policy
+        """Return current contextmenu policy.
 
         Possible values: "none", "prevent", "default", "actions", "custom"
 

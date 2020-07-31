@@ -80,7 +80,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self.setDocumentMode(state)
 
     def set_tab_shape(self, shape: str) -> None:
-        """set tab shape for the tabwidget
+        """Set tab shape for the tabwidget.
 
         Valid values are "rounded" and "triangular"
 
@@ -95,7 +95,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self.setTabShape(TAB_SHAPES[shape])
 
     def get_tab_shape(self) -> str:
-        """returns tab shape
+        """Return tab shape.
 
         possible values are "roundes", "triangular"
 
@@ -227,7 +227,7 @@ class TabWidget(QtWidgets.QTabWidget):
     @core.Slot(object, str)
     def open_widget(self, widget: QtWidgets.QWidget, title: str = "Unnamed"):
         """
-        create a tab containing delivered widget
+        Create a tab containing delivered widget.
         """
         self.add_tab(widget, title, icon="mdi.widgets", show=True)
 
@@ -238,7 +238,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
 
 class DetachedTab(widgets.MainWindow):
-    """window containing a detached tab
+    """Window containing a detached tab.
 
     When a tab is detached, the contents are placed into this QMainWindow.
     The tab can be re-attached by closing the dialog

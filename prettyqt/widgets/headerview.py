@@ -70,7 +70,7 @@ class HeaderView(QtWidgets.QHeaderView):
 
     def contextMenuEvent(self, event):
         """
-        context menu for our files tree
+        Context menu for our files tree.
         """
         menu = widgets.Menu(parent=self)
         for i, header_label in enumerate(self.section_labels()[1:], start=1):

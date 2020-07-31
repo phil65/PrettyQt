@@ -109,7 +109,7 @@ class ComboBox(QtWidgets.QComboBox):
         return gui.Icon(self.itemIcon(index))
 
     def set_insert_policy(self, policy: str):
-        """set insert policy
+        """Set insert policy.
 
         valid values are "no_insert", "top", "current", "bottom", "after_current",
         "before_current", "alphabetically"
@@ -126,7 +126,7 @@ class ComboBox(QtWidgets.QComboBox):
         self.setInsertPolicy(policy)
 
     def get_insert_policy(self) -> str:
-        """returns insert policy
+        """Return insert policy.
 
         possible values are "no_insert", "top", "current", "bottom", "after_current",
         "before_current", "alphabetically"
@@ -137,7 +137,7 @@ class ComboBox(QtWidgets.QComboBox):
         return INSERT_POLICIES.inv[self.insertPolicy()]
 
     def set_size_adjust_policy(self, policy: str):
-        """set size adjust policy
+        """Set size adjust policy.
 
         possible values are "content", "first_show", "min_length", "min_length_with_icon"
 
@@ -153,7 +153,7 @@ class ComboBox(QtWidgets.QComboBox):
         self.setSizeAdjustPolicy(policy)
 
     def get_size_adjust_policy(self) -> str:
-        """returns size adjust policy
+        """Return size adjust policy.
 
         possible values are "content", "first_show", "min_length", "min_length_with_icon"
 

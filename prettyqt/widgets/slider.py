@@ -67,7 +67,7 @@ class Slider(QtWidgets.QSlider):
         self.setTickInterval(state["tick_interval"])
 
     def set_tick_position(self, position: str):
-        """sets the tick position for the slider
+        """Set the tick position for the slider
 
         allowed values are "none", "both_sides", "above", "below", "left", "right"
         for vertical orientation of the slider,
@@ -85,7 +85,7 @@ class Slider(QtWidgets.QSlider):
         self.setTickPosition(TICK_POSITIONS[position])
 
     def get_tick_position(self) -> str:
-        """returns tick position
+        """Return tick position
 
         possible values are "none", "both_sides", "above", "below"
 

@@ -51,7 +51,7 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
             return self.insertMedia(pos, mediacontent)
 
     def set_playback_mode(self, mode: str):
-        """set playback mode for given item view
+        """Set playback mode for given item view
 
         Allowed values are "item_once", "item_in_loop", "sequential", "loop", "random"
 
@@ -66,7 +66,7 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
         self.setPlaybackMode(PLAYBACK_MODES[mode])
 
     def get_playback_mode(self) -> str:
-        """returns current playback mode
+        """Return current playback mode
 
         Possible values: "item_once", "item_in_loop", "sequential", "loop", "random"
 

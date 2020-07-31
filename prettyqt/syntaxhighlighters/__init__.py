@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""syntaxhighlighters module
+"""syntaxhighlighters module.
 
 contains some custom syntax highlighers
 """

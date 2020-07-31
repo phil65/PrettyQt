@@ -27,7 +27,7 @@ QtWidgets.QFrame.__bases__ = (widgets.Widget,)
 
 class Frame(QtWidgets.QFrame):
     def set_frame_style(self, style: str):
-        """set frame style
+        """Set frame style.
 
         Allowed values are "plain", "raised", "sunken"
 
@@ -42,7 +42,7 @@ class Frame(QtWidgets.QFrame):
         self.setFrameStyle(SHADOWS[style])
 
     def get_frame_style(self) -> str:
-        """returns current frame style
+        """Return current frame style.
 
         Possible values: "plain", "raised", "sunken"
 

@@ -13,7 +13,7 @@ from prettyqt import core, gui, widgets
 class PromptLineEdit(widgets.LineEdit):
 
     """
-    Extends QLineEdit to show a prompt text and a clear icon
+    Extends QLineEdit to show a prompt text and a clear icon.
     """
 
     #: Signal emitted when the embedded button is clicked
@@ -82,8 +82,10 @@ class PromptLineEdit(widgets.LineEdit):
 
     def set_button_visible(self, visible: bool):
         """
-        Sets the clear button as ``visible``
-        :param visible: Visible state (True = visible, False = hidden).
+        Sets the clear button as ``visible``.
+
+        Args:
+            visible (bool): Visibility of button
         """
         self.button.setVisible(visible)
         left, top, right, bottom = self.getTextMargins()
@@ -94,7 +96,7 @@ class PromptLineEdit(widgets.LineEdit):
         self.setTextMargins(left, top, right, bottom)
 
     def _on_text_changed(self, text: str):
-        """Text changed, update Clear button visibility
+        """Text changed, update Clear button visibility.
         """
         self.set_button_visible(len(text) > 0)
 

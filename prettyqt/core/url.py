@@ -24,7 +24,7 @@ class Url(QtCore.QUrl):
         return self.toString(self.PreferLocalFile)
 
     def to_path(self) -> pathlib.Path:
-        """get pathlib object from the URL
+        """Get pathlib object from the URL
 
         Returns:
             Path

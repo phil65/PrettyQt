@@ -96,7 +96,7 @@ class MessageBox(QtWidgets.QMessageBox):
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
 
     def add_button(self, button: str) -> QtWidgets.QPushButton:
-        """add a default button
+        """Add a default button.
 
         Valid arguments: "none", "cancel", "ok", "save", "open", "close",
                          "discard", "apply", "reset", "restore_defaults",
@@ -123,7 +123,7 @@ class MessageBox(QtWidgets.QMessageBox):
     #     widgets.MessageBox.message(error_text, header, "mdi.exclamation")
 
     def set_text_format(self, text_format: str):
-        """set the text format
+        """Set the text format
 
         Allowed values are "rich", "plain", "auto"
 
@@ -138,7 +138,7 @@ class MessageBox(QtWidgets.QMessageBox):
         self.setTextFormat(TEXT_FORMATS[text_format])
 
     def get_text_format(self) -> str:
-        """returns current text format
+        """Return current text format.
 
         Possible values: "rich", "plain", "auto"
 

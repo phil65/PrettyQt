@@ -29,7 +29,7 @@ class ChartView(QtCharts.QChartView):
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         """
-        handle keypress events to allow navigation via keyboard
+        Handle keypress events to allow navigation via keyboard.
         """
         key = event.key()
         if key == QtCore.Qt.Key_Escape:
@@ -54,14 +54,14 @@ class ChartView(QtCharts.QChartView):
 
     def wheelEvent(self, event: QtGui.QWheelEvent):
         """
-        handle wheel event for zooming
+        Handle wheel event for zooming.
         """
         fct = ZOOM_IN_FACTOR if event.angleDelta().y() > 0 else ZOOM_OUT_FACTOR
         self.chart().zoom_by_factor(fct)
 
     def mouseReleaseEvent(self, event: QtGui.QMouseEvent):
         """
-        override to allow dragging the chart
+        Override to allow dragging the chart.
         """
         if event.button() == QtCore.Qt.RightButton:
             widgets.Application.restoreOverrideCursor()
@@ -71,7 +71,7 @@ class ChartView(QtCharts.QChartView):
 
     def mousePressEvent(self, event: QtGui.QMouseEvent):
         """
-        override to allow dragging the chart
+        Override to allow dragging the chart.
         """
         if event.button() == QtCore.Qt.RightButton:
             cursor = gui.Cursor(QtCore.Qt.SizeAllCursor)
@@ -83,7 +83,7 @@ class ChartView(QtCharts.QChartView):
 
     def mouseMoveEvent(self, event: QtGui.QMouseEvent):
         """
-        override to allow dragging the chart
+        Override to allow dragging the chart.
         """
         # pan the chart with a middle mouse drag
         if event.buttons() & QtCore.Qt.RightButton:
@@ -106,7 +106,7 @@ class ChartView(QtCharts.QChartView):
     @core.Slot()
     def save_as_image(self):
         """
-        let user choose folder and save chart as an image file
+        Let user choose folder and save chart as an image file.
         """
         dlg = widgets.FileDialog(mode="save", caption="Save image")
         filters = {"Bmp files": [".bmp"], "Jpeg files": [".jpg"], "Png files": [".png"]}

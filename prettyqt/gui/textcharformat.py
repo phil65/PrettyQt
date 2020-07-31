@@ -50,7 +50,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         self.setBackground(color)
 
     def set_font_weight(self, weight: str):
-        """sets the font weight
+        """Set the font weight.
 
         Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
                          "extra_bold", normal", "black"
@@ -66,7 +66,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         self.setFontWeight(WEIGHTS[weight])
 
     def get_font_weight(self) -> str:
-        """get current font weight
+        """Get current font weight.
 
         Possible values are "thin", "light", "medium" or "bold"
 
@@ -76,7 +76,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         return WEIGHTS.inv[self.fontWeight()]
 
     def set_underline_style(self, style: str):
-        """sets the underline style
+        """Set the underline style.
 
         Valid values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
         "wave", "spellcheck"
@@ -92,7 +92,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         self.setUnderlineStyle(UNDERLINE_STYLES[style])
 
     def get_underline_style(self) -> str:
-        """get current underline style
+        """Get current underline style.
 
         Possible values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
         "wave", "spellcheck"
@@ -103,7 +103,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         return UNDERLINE_STYLES.inv[self.underlineStyle()]
 
     def set_font_style_hint(self, hint: str):
-        """sets the font style hint
+        """Set the font style hint.
 
         Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",
         "monospace", "fantasy", "cursive", "system"

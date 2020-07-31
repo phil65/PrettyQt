@@ -53,7 +53,7 @@ class TextCursor(QtGui.QTextCursor):
         return self.movePosition(op, mode, n)
 
     def set_position(self, pos: int, mode: str = "move"):
-        """set cursor to given position
+        """Set cursor to given position
 
         Args:
             pos: Cursor position

@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""
-winextras module
+"""winextras module.
 
-contains QWebEngineView-based classes
+contains QtWinExtras-based classes
 """
 
 try:

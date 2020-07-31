@@ -72,7 +72,7 @@ class ModelTest(QtCore.QObject):
 
     def nonDestructiveBasicTest(self):
         """
-        nonDestructiveBasicTest tries to call a number of the basic functions (not all)
+        Try to call a number of the basic functions (not all)
         to make sure the model doesn't outright segfault,
         testing the functions that makes sense.
         """
@@ -113,7 +113,7 @@ class ModelTest(QtCore.QObject):
     def rowCount(self):
         """
         Tests self.model's implementation of QtCore.QAbstractItemModel::rowCount()
-        and hasChildren()
+        and hasChildren().
 
         self.models that are dynamically populated are not as fully tested here.
         """
@@ -139,7 +139,7 @@ class ModelTest(QtCore.QObject):
     def columnCount(self):
         """
         Tests self.model's implementation of QtCore.QAbstractItemModel::columnCount()
-        and hasChildren()
+        and hasChildren().
         """
         # check top row
         topidx = self.model.index(0, 0, QtCore.QModelIndex())
@@ -155,7 +155,7 @@ class ModelTest(QtCore.QObject):
 
     def hasIndex(self):
         """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::hasIndex()
+        Tests self.model's implementation of QtCore.QAbstractItemModel::hasIndex().
         """
         # Make sure that invalid values returns an invalid index
         assert self.model.hasIndex(-2, -2) is False
@@ -177,7 +177,7 @@ class ModelTest(QtCore.QObject):
 
     def index(self):
         """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::index()
+        Tests self.model's implementation of QtCore.QAbstractItemModel::index().
         """
         # Make sure that invalid values returns an invalid index
         assert self.model.index(-2, -2, QtCore.QModelIndex()) == QtCore.QModelIndex()
@@ -204,7 +204,7 @@ class ModelTest(QtCore.QObject):
 
     def parent(self):
         """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::parent()
+        Tests self.model's implementation of QtCore.QAbstractItemModel::parent().
         """
         # Make sure the self.model wont crash and will return an invalid QModelIndex
         # when asked for the parent of an invalid index
@@ -244,7 +244,7 @@ class ModelTest(QtCore.QObject):
 
     def data(self):
         """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::data()
+        Tests self.model's implementation of QtCore.QAbstractItemModel::data().
         """
         # Invalid index should return an invalid qvariant
         qvar = self.model.data(QtCore.QModelIndex(), QtCore.Qt.DisplayRole)
@@ -349,7 +349,7 @@ class ModelTest(QtCore.QObject):
 
     def rowsAboutToBeInserted(self, parent, start, end):
         """
-        Store what is about to be inserted to make sure it actually happens
+        Store what is about to be inserted to make sure it actually happens.
         """
         c = {}
         c["parent"] = parent
@@ -360,7 +360,7 @@ class ModelTest(QtCore.QObject):
 
     def rowsInserted(self, parent, start, end):
         """
-        Confirm that what was said was going to happen actually did
+        Confirm that what was said was going to happen actually did.
         """
         c = self.insert.pop()
         assert c["parent"] == parent
@@ -388,7 +388,7 @@ class ModelTest(QtCore.QObject):
 
     def rowsRemoved(self, parent, start, end):
         """
-        Confirm that what was said was going to happen actually did
+        Confirm that what was said was going to happen actually did.
         """
         c = self.remove.pop()
         assert c["parent"] == parent

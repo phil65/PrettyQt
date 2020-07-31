@@ -12,6 +12,15 @@ class IconDelegate(widgets.StyledItemDelegate):
         option: QtWidgets.QStyleOptionViewItem,
         index: QtCore.QModelIndex,
     ):
+        """
+        override to paint an icon based on given Pixmap / Color / Icon
+        Pixmap / Color / Icon must be set to 'QtCore.Qt.UserRole + 1000'
+
+        Args:
+            painter (QtGui.QPainter): painter to paint the icon
+            option (QtWidgets.QStyleOptionViewItem): state of the item to be displayed
+            index (QtCore.QModelIndex): index which gets decorated
+        """
         super().paint(painter, option, index)
         value = index.data(DecorationRole2)
         if value:

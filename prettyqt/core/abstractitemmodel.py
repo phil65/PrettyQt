@@ -16,7 +16,7 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         return f"{self.__class__.__name__}: {self.rowCount()} rows"
 
     def __len__(self) -> int:
-        """return amount of rows
+        """Return amount of rows.
         """
         return self.rowCount()
 
@@ -31,7 +31,7 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
 
     @contextlib.contextmanager
     def change_layout(self):
-        """content manager to change the layout
+        """Context manager to change the layout.
 
         wraps calls with correct signals
         emitted at beginning: layoutAboutToBeChanged
@@ -44,7 +44,7 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
 
     @contextlib.contextmanager
     def reset_model(self):
-        """content manager to reset the model
+        """Context manager to reset the model.
 
         wraps calls with correct signals
         emitted at beginning: beginResetModel

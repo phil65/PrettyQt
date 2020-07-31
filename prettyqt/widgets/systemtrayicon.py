@@ -23,7 +23,7 @@ MESSAGE_ICONS = bidict(
 
 class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
     def set_icon(self, icon: gui.icon.IconType):
-        """set the system tray icon
+        """Set the system tray icon
 
         Args:
             icon: icon to use

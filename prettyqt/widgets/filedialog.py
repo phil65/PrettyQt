@@ -87,7 +87,7 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setSupportedSchemes(state["supported_schemes"])
 
     def set_accept_mode(self, mode: str):
-        """set accept mode
+        """Set accept mode.
 
         possible values are "save", "open"
 
@@ -102,7 +102,7 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setAcceptMode(ACCEPT_MODES[mode])
 
     def get_accept_mode(self) -> str:
-        """returns accept mode
+        """Return accept mode.
 
         possible values are "save", "open"
 
@@ -112,7 +112,7 @@ class FileDialog(QtWidgets.QFileDialog):
         return ACCEPT_MODES.inv[self.acceptMode()]
 
     def set_view_mode(self, mode: str):
-        """set view mode
+        """Set view mode.
 
         possible values are "detail", "list"
 
@@ -127,7 +127,7 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setViewMode(VIEW_MODES[mode])
 
     def get_view_mode(self) -> str:
-        """returns view mode
+        """Return view mode.
 
         possible values are "detail", "list"
 
@@ -137,7 +137,7 @@ class FileDialog(QtWidgets.QFileDialog):
         return VIEW_MODES.inv[self.viewMode()]
 
     def set_label_text(self, label: str, text: str):
-        """sets the label text for button label
+        """Set the label text for button label.
 
         possible values for label are "look_in", "filename", "filetype",
         "accept", "reject"
@@ -151,7 +151,7 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setLabelText(LABELS[label], text)
 
     def get_label_text(self, label) -> str:
-        """returns label text
+        """Return label text.
 
         possible values are "look_in", "filename", "filetype", "accept", "reject"
 
@@ -161,7 +161,7 @@ class FileDialog(QtWidgets.QFileDialog):
         return self.labelText(LABELS.inv[label])
 
     def get_file_mode(self) -> str:
-        """returns file mode
+        """Return file mode.
 
         possible values are "existing_file", "existing_files", "any_file", "directory"
 
@@ -171,7 +171,7 @@ class FileDialog(QtWidgets.QFileDialog):
         return MODES.inv[self.fileMode()]
 
     def set_file_mode(self, mode: str):
-        """sets the file mode of the dialog
+        """Set the file mode of the dialog.
 
         allowed values are "existing_file", "existing_files", "any_file" "directory"
 
@@ -212,7 +212,7 @@ class FileDialog(QtWidgets.QFileDialog):
         return paths
 
     def set_extension_filter(self, extension_dict: Dict[str, List[str]]):
-        """set filter based on given dictionary
+        """Set filter based on given dictionary.
 
         dict must contain "'name': ['.ext1', '.ext2']" as key-value pairs
 
@@ -226,7 +226,7 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setNameFilter(filter_str)
 
     def directory(self) -> pathlib.Path:
-        """return current directory
+        """Return current directory.
 
         returns current directory level as a Pathlib object
 
@@ -236,7 +236,7 @@ class FileDialog(QtWidgets.QFileDialog):
         return pathlib.Path(super().directory())
 
     def set_directory(self, path: Union[None, str, pathlib.Path]):
-        """set start directory
+        """Set start directory.
         """
         if isinstance(path, pathlib.Path):
             path = str(path)

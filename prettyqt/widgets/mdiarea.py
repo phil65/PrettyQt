@@ -38,7 +38,7 @@ class MdiArea(QtWidgets.QMdiArea):
             return self
 
     def set_view_mode(self, mode: str):
-        """set view mode for the MDI area
+        """Set view mode for the MDI area.
 
         Valid values are "default", "tabbed"
 
@@ -53,7 +53,7 @@ class MdiArea(QtWidgets.QMdiArea):
         self.setViewMode(VIEW_MODES[mode])
 
     def get_view_mode(self) -> str:
-        """returns current view mode
+        """Return current view mode.
 
         Possible values: "default", "tabbed"
 
@@ -63,7 +63,7 @@ class MdiArea(QtWidgets.QMdiArea):
         return VIEW_MODES.inv[self.viewMode()]
 
     def set_window_order(self, mode: str):
-        """set the window order behaviour for the MDI area
+        """Set the window order behaviour for the MDI area.
 
         Valid values are "creation", "stacking", "activation_history"
 
@@ -78,7 +78,7 @@ class MdiArea(QtWidgets.QMdiArea):
         self.setActivationOrder(WINDOW_ORDERS[mode])
 
     def get_window_order(self) -> str:
-        """returns current window order
+        """Return current window order.
 
         Possible values: "creation", "stacking", "activation_history"
 
@@ -88,7 +88,7 @@ class MdiArea(QtWidgets.QMdiArea):
         return WINDOW_ORDERS.inv[self.activationOrder()]
 
     def set_tab_position(self, position: str):
-        """set tab position for the MDI area
+        """Set tab position for the MDI area.
 
         Valid values are "north", "south", "west", "east"
 
@@ -103,7 +103,7 @@ class MdiArea(QtWidgets.QMdiArea):
         self.setTabPosition(TAB_POSITIONS[position])
 
     def get_tab_position(self) -> str:
-        """returns current tab position
+        """Return current tab position.
 
         Possible values: "north", "south", "west", "east"
 

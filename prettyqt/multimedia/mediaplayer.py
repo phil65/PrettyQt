@@ -38,7 +38,7 @@ QtMultimedia.QMediaPlayer.__bases__ = (multimedia.MediaObject,)
 
 class MediaPlayer(QtMultimedia.QMediaPlayer):
     def get_state(self) -> str:
-        """returns current state
+        """Return current state
 
         Possible values: "stopped", "playing", "paused"
 
@@ -48,7 +48,7 @@ class MediaPlayer(QtMultimedia.QMediaPlayer):
         return STATES.inv[self.state()]
 
     def get_media_status(self) -> str:
-        """returns current media status
+        """Return current media status
 
         Possible values: "unknown", "no_media", "loading", "loaded", "stalled",
                          "buffering", "buffered", "end", "invalid"

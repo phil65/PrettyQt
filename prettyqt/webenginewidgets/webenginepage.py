@@ -14,10 +14,10 @@ QtWebEngineWidgets.QWebEnginePage.__bases__ = (core.Object,)
 class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
     """A web engine page holds the contents of an HTML document,
     the history of navigated links, and actions.
-        """
+    """
 
     def set_url(self, url: Union[str, pathlib.Path]):
-        """set the url of the WebEnginePage.
+        """Set the url of the WebEnginePage.
 
         Clears the Page and loads the URL.
 
@@ -31,7 +31,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         self.setUrl(url)
 
     def load_url(self, url: Union[str, pathlib.Path]):
-        """load the URL
+        """Load the URL.
 
         Loads the specified url and displays it.
 
@@ -48,7 +48,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         self.load(url)
 
     def set_zoom(self, zoom: float):
-        """Set the zoom factor for the Page
+        """Set the zoom factor for the Page.
 
         Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.
 
@@ -64,7 +64,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         case_sensitive: bool = False,
         callback: Callable = None,
     ):
-        """Find text in the current page
+        """Find text in the current page.
 
         Finds the specified string, subString, in the page, using the given options.
         The findTextFinished() signal is emitted when a string search is completed.

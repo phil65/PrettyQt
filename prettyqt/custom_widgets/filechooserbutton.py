@@ -20,7 +20,7 @@ class FileChooserButton(widgets.Widget):
         root: Union[None, str, pathlib.Path] = None,
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        """initialize FileChooserButton
+        """initialize FileChooserButton.
 
         Args:
             extensions: dict allowed extensions

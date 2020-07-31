@@ -39,7 +39,7 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         self.lineEdit().setValidator(validator)
 
     def get_button_symbols(self) -> str:
-        """returns button symbol type
+        """Return button symbol type
 
         possible values are "none", "up_down", "plus_minus"
 
@@ -49,7 +49,7 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         return SYMBOLS.inv[self.buttonSymbols()]
 
     def set_button_symbols(self, mode: str):
-        """sets button symbol type
+        """Set button symbol type
 
         possible values are "none", "up_down", "plus_minus"
 
@@ -64,7 +64,7 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         self.setButtonSymbols(SYMBOLS[mode])
 
     def set_correction_mode(self, mode: str):
-        """sets correction mode
+        """Set correction mode
 
         possible values are "to_previous", "to_nearest"
 
@@ -79,7 +79,7 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         self.setCorrectionMode(CORRECTION_MODES[mode])
 
     def get_correction_mode(self) -> str:
-        """returns correction mode
+        """Return correction mode
 
         possible values are "to_previous", "to_nearest"
 
@@ -89,7 +89,7 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         return CORRECTION_MODES.inv[self.correctionMode()]
 
     def set_step_type(self, mode: str):
-        """sets step type
+        """Set step type
 
         possible values are "default", "adaptive"
 
@@ -104,7 +104,7 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         self.setStepType(STEP_TYPES[mode])
 
     def get_step_type(self) -> str:
-        """returns step type
+        """Return step type
 
         possible values are "default", "adaptive"
 

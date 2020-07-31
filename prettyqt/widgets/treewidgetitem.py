@@ -38,7 +38,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         self.set_checkstate(state["checkstate"])
 
     def set_icon(self, icon: gui.icon.IconType):
-        """set the icon for the action
+        """Set the icon for the action.
 
         Args:
             icon: icon to use
@@ -47,7 +47,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         self.setIcon(0, icon)
 
     def set_checkstate(self, state: str):
-        """set checkstate of the checkbox
+        """Set checkstate of the checkbox.
 
         valid values are: unchecked, partial, checked
 
@@ -62,7 +62,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         self.setCheckState(0, STATES[state])
 
     def get_checkstate(self) -> str:
-        """returns checkstate
+        """Return checkstate.
 
         possible values are "unchecked", "partial", "checked"
 

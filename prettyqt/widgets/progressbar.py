@@ -24,7 +24,7 @@ QtWidgets.QProgressBar.__bases__ = (widgets.Widget,)
 
 
 class ProgressBar(QtWidgets.QProgressBar):
-    """Progress dialog
+    """Progress dialog.
 
     wrapper for QtWidgets.QProgressBar
     """
@@ -36,7 +36,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         self.setTextVisible(text_visible)
 
     def set_alignment(self, alignment: str):
-        """set the alignment of the layout
+        """Set the alignment of the layout.
 
         Allowed values are "left", "right", "top", "bottom"
 
@@ -51,7 +51,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         self.setAlignment(ALIGNMENTS[alignment])
 
     def get_alignment(self) -> str:
-        """returns current alignment
+        """Return current alignment.
 
         Possible values: "left", "right", "top", "bottom"
 
@@ -61,7 +61,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         return ALIGNMENTS.inv[self.alignment()]
 
     def set_text_direction(self, text_direction: str):
-        """set the text direction of the layout
+        """Set the text direction of the layout.
 
         Allowed values are "top_to_bottom", "bottom_to_top"
 
@@ -76,7 +76,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         self.setTextDirection(TEXT_DIRECTIONS[text_direction])
 
     def get_text_direction(self) -> str:
-        """returns current text direction
+        """Return current text direction.
 
         Possible values are "top_to_bottom", "bottom_to_top"
 

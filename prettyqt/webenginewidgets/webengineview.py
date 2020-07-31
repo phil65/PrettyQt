@@ -13,7 +13,7 @@ QtWebEngineWidgets.QWebEngineView.__bases__ = (widgets.Widget,)
 
 class WebEngineView(QtWebEngineWidgets.QWebEngineView):
     def set_url(self, url: Union[str, pathlib.Path]):
-        """set the url of the WebEngineView.
+        """Set the url of the WebEngineView.
 
         Clears the view and loads the URL.
 

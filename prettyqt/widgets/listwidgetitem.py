@@ -37,7 +37,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         self.set_checkstate(state["checkstate"])
 
     def set_icon(self, icon: gui.icon.IconType):
-        """set the icon for the action
+        """Set the icon for the action.
 
         Args:
             icon: icon to use
@@ -46,7 +46,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         self.setIcon(icon)
 
     def set_checkstate(self, state: str):
-        """set checkstate of the checkbox
+        """Set checkstate of the checkbox.
 
         valid values are: unchecked, partial, checked
 
@@ -61,7 +61,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         self.setCheckState(STATES[state])
 
     def get_checkstate(self) -> str:
-        """returns checkstate
+        """Return checkstate.
 
         possible values are "unchecked", "partial", "checked"
 

@@ -54,7 +54,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
 
     def selectAll(self):
         """
-        Override, we dont want to selectAll for too many items for performance reasons
+        Override, we dont want to selectAll for too many items for performance reasons.
         """
         if self.model() is None:
             return None
@@ -65,7 +65,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
 
     def set_model(self, model: Optional[QtCore.QAbstractItemModel]):
         """
-        delete old selection model explicitely, seems to help with memory usage
+        Delete old selection model explicitely, seems to help with memory usage.
         """
         old_model = self.model()
         old_sel_model = self.selectionModel()
@@ -102,7 +102,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
 
     def toggle_select_all(self):
         """
-        select all items from list (deselect when all selected)
+        Select all items from list (deselect when all selected).
         """
         if self.selectionModel() is None:
             return None
@@ -138,26 +138,26 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
 
     def selected_indexes(self) -> List[QtCore.QModelIndex]:
         """
-        returns list of selected indexes in first row
+        Returns list of selected indexes in first row.
         """
         indexes = (x for x in self.selectedIndexes() if x.column() == 0)
         return sorted(indexes, key=lambda x: x.row())
 
     def selected_names(self) -> Generator[Any, None, None]:
         """
-        returns generator yielding item names
+        Returns generator yielding item names.
         """
         return (x.data(constants.NAME_ROLE) for x in self.selected_indexes())
 
     def selected_rows(self) -> Generator[int, None, None]:
         """
-        returns generator yielding row nums
+        Returns generator yielding row nums.
         """
         return (x.row() for x in self.selected_indexes())
 
     def selected_data(self) -> Generator[Any, None, None]:
         """
-        returns generator yielding selected userData
+        Returns generator yielding selected userData.
         """
         return (x.data(constants.USER_ROLE) for x in self.selected_indexes())
 
@@ -180,7 +180,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return [k for k, v in TRIGGERS.items() if v & self.editTriggers()]
 
     def set_selection_behaviour(self, behaviour: str):
-        """set selection behaviour for given item view
+        """Set selection behaviour for given item view
 
         Allowed values are "rows", "columns", "items"
 
@@ -195,7 +195,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setSelectionBehavior(SELECTION_BEHAVIOURS[behaviour])
 
     def get_selection_behaviour(self) -> str:
-        """returns current selection behaviour
+        """Return current selection behaviour
 
         Possible values: "rows", "columns", "items"
 
@@ -205,7 +205,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return SELECTION_BEHAVIOURS.inv[self.selectionBehavior()]
 
     def set_selection_mode(self, mode: Optional[str]):
-        """set selection mode for given item view
+        """Set selection mode for given item view
 
         Allowed values are "single", "extended", "multi" or "none"
 
@@ -224,7 +224,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setSelectionMode(SELECTION_MODES[mode])
 
     def get_selection_mode(self) -> str:
-        """returns current selection mode
+        """Return current selection mode
 
         Possible values: "single", "extended", "multi" or "none"
 
@@ -234,7 +234,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return SELECTION_MODES.inv[self.selectionMode()]
 
     def set_scroll_mode(self, mode: str):
-        """sets the scroll mode for both directions
+        """Set the scroll mode for both directions
 
         possible values are "item", "pixel"
 
@@ -250,7 +250,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setVerticalScrollMode(SCROLL_MODES[mode])
 
     def set_horizontal_scroll_mode(self, mode: str):
-        """sets the horizontal scroll mode
+        """Set the horizontal scroll mode
 
         possible values are "item", "pixel"
 
@@ -265,7 +265,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setHorizontalScrollMode(SCROLL_MODES[mode])
 
     def set_vertical_scroll_mode(self, mode: str):
-        """sets the vertical scroll mode
+        """Set the vertical scroll mode
 
         possible values are "item", "pixel"
 
@@ -280,7 +280,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setVerticalScrollMode(SCROLL_MODES[mode])
 
     def num_selected(self) -> int:
-        """returns amount of selected rows
+        """Return amount of selected rows
 
         Returns:
             amount of selected rows

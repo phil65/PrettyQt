@@ -84,7 +84,7 @@ class Settings(QtCore.QSettings):
 
     @classmethod
     def set_default_format(cls, fmt: str):
-        """sets the default format
+        """Set the default format.
 
         possible values are "native", "ini"
 
@@ -100,7 +100,7 @@ class Settings(QtCore.QSettings):
 
     @classmethod
     def get_default_format(cls) -> str:
-        """returns default settings format
+        """Return default settings format.
 
         possible values are "native", "ini"
 
@@ -110,7 +110,7 @@ class Settings(QtCore.QSettings):
         return FORMATS.inv[cls.defaultFormat()]
 
     def get_scope(self) -> str:
-        """returns scope
+        """Return scope.
 
         possible values are "user", "system"
 
@@ -121,7 +121,7 @@ class Settings(QtCore.QSettings):
 
     @classmethod
     def set_path(cls, fmt: str, scope: str, path: Union[str, pathlib.Path]):
-        """sets the path to the settings file
+        """Set the path to the settings file.
 
         Args:
             fmt: the default format to use
@@ -138,7 +138,7 @@ class Settings(QtCore.QSettings):
 
     @contextlib.contextmanager
     def group(self, prefix: str):
-        """context manager for setting groups
+        """Context manager for setting groups.
 
         Args:
             prefix: setting prefix for group
@@ -149,7 +149,7 @@ class Settings(QtCore.QSettings):
 
     @contextlib.contextmanager
     def write_array(self, prefix: str, size: int = -1):
-        """context manager for writing arrays
+        """Context manager for writing arrays.
 
         Args:
             prefix: prefix for settings array
@@ -161,7 +161,7 @@ class Settings(QtCore.QSettings):
 
     @contextlib.contextmanager
     def read_array(self, prefix: str):
-        """context manager for reading arrays
+        """Context manager for reading arrays.
 
         Args:
             prefix: prefix for settings array

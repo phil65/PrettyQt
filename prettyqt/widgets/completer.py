@@ -35,7 +35,7 @@ class Completer(QtWidgets.QCompleter):
         super().__init__(parent)
 
     def set_sort_mode(self, mode: Optional[str]):
-        """set sort mode to use
+        """Set sort mode to use.
 
         Allowed values are "unsorted", "case_sensitive", "case_insensitive"
 
@@ -52,7 +52,7 @@ class Completer(QtWidgets.QCompleter):
         self.setModelSorting(SORT_MODES[mode])
 
     def get_sort_mode(self) -> str:
-        """returns current sort mode
+        """Return current sort mode.
 
         Possible values: "unsorted", "case_sensitive", "case_insensitive"
 
@@ -62,7 +62,7 @@ class Completer(QtWidgets.QCompleter):
         return SORT_MODES.inv[self.modelSorting()]
 
     def set_completion_mode(self, mode: str):
-        """set completion mode to use
+        """Set completion mode to use.
 
         Allowed values are "popup", "inline", "unfiltered_popup"
 
@@ -77,7 +77,7 @@ class Completer(QtWidgets.QCompleter):
         self.setCompletionMode(COMPLETION_MODES[mode])
 
     def get_completion_mode(self) -> str:
-        """returns current completion mode
+        """Return current completion mode.
 
         Possible values: "popup", "inline", "unfiltered_popup"
 
@@ -87,7 +87,7 @@ class Completer(QtWidgets.QCompleter):
         return COMPLETION_MODES.inv[self.completionMode()]
 
     def set_filter_mode(self, mode: str):
-        """set filter mode to use
+        """Set filter mode to use.
 
         Allowed values are "starts_with", "contains", "ends_with"
 
@@ -102,7 +102,7 @@ class Completer(QtWidgets.QCompleter):
         self.setFilterMode(FILTER_MODES[mode])
 
     def get_filter_mode(self) -> str:
-        """returns current filter mode
+        """Return current filter mode.
 
         Possible values: "starts_with", "contains", "ends_with"
 
