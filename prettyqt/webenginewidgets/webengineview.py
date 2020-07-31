@@ -27,7 +27,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
         self.setUrl(url)
 
     def load_url(self, url: Union[str, pathlib.Path]):
-        """load the URL
+        """Load the URL.
 
         Loads the specified url and displays it.
 
@@ -44,7 +44,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
         self.load(url)
 
     def set_zoom(self, zoom: float):
-        """Set the zoom factor for the view
+        """Set the zoom factor for the view.
 
         Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.
 
@@ -60,7 +60,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
         case_sensitive: bool = False,
         callback: Callable = None,
     ):
-        """Find text in the current page
+        """Find text in the current page.
 
         Finds the specified string, subString, in the page, using the given options.
         The findTextFinished() signal is emitted when a string search is completed.

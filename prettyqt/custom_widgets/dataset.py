@@ -32,9 +32,7 @@ class DataItem(object):
         return self.value
 
     def set_pos(self, col=0, colspan=None):
-        """
-        Set data item's position on a GUI layout
-        """
+        """Set data item's position on a GUI layout."""
         self.label_col = col
         self.colspan = colspan
         return self
@@ -64,19 +62,6 @@ class Fixed(DataItem):
 
 
 class Float(DataItem):
-    """
-    Construct a float data item
-        * label [string]: name
-        * value [float]: default value (optional)
-        * min [float]: minimum value (optional)
-        * max [float]: maximum value (optional)
-        * slider [bool]: if True, shows a slider widget right after the line
-          edit widget (default is False)
-        * step [float]: step between tick values with a slider widget (optional)
-        * unit [string]: physical unit (optional)
-        * check [bool]: if False, value is not checked (optional, value=True)
-    """
-
     def __init__(
         self,
         label: str,
@@ -104,18 +89,6 @@ class Float(DataItem):
 
 
 class Int(DataItem):
-    """
-    Construct an integer data item
-        * label [string]: name
-        * value [int]: default value (optional)
-        * min [int]: minimum value (optional)
-        * max [int]: maximum value (optional)
-        * unit [string]: physical unit (optional)
-        * slider [bool]: if True, shows a slider widget right after the line
-          edit widget (default is False)
-        * check [bool]: if False, value is not checked (optional, value=True)
-    """
-
     def __init__(
         self,
         label: str,
@@ -147,18 +120,6 @@ class Int(DataItem):
 
 
 class Range(DataItem):
-    """
-    Construct a Range data item
-        * label [string]: name
-        * value [int]: default value (optional)
-        * min [int]: minimum value (optional)
-        * max [int]: maximum value (optional)
-        * unit [string]: physical unit (optional)
-        * slider [bool]: if True, shows a slider widget right after the line
-          edit widget (default is False)
-        * check [bool]: if False, value is not checked (optional, value=True)
-    """
-
     def __init__(
         self, label: str, value=None, min_val: int = 0, max_val: int = 1, **kwargs
     ):
@@ -178,13 +139,6 @@ class Range(DataItem):
 
 
 class String(DataItem):
-    """
-    Construct a string data item
-        * label [string]: name
-        * value [string]: default value (optional)
-        * notempty [bool]: if True, empty string is not a valid value (opt.)
-    """
-
     def __init__(
         self,
         label: str,
@@ -212,13 +166,6 @@ class String(DataItem):
 
 
 class RegexPattern(DataItem):
-    """
-    Construct a string data item
-        * label [string]: name
-        * value [string]: default value (optional)
-        * notempty [bool]: if True, empty string is not a valid value (opt.)
-    """
-
     def __init__(
         self, label: str, value: Optional[str] = None, notempty: bool = False, **kwargs
     ):
@@ -237,13 +184,6 @@ class RegexPattern(DataItem):
 
 
 class Code(DataItem):
-    """
-    Construct a code data item
-        * label [string]: name
-        * value [string]: default value (optional)
-        * language [string]: language for syntax highlighting
-    """
-
     def __init__(
         self, label: str, value: Optional[str] = None, language: str = "python", **kwargs
     ):
@@ -258,13 +198,6 @@ class Code(DataItem):
 
 
 class Regex(DataItem):
-    """
-    Construct a code data item
-        * label [string]: name
-        * value [string]: default value (optional)
-        * language [string]: language for syntax highlighting
-    """
-
     def __init__(
         self,
         label: str,
@@ -287,13 +220,6 @@ class Regex(DataItem):
 
 
 class IntList(DataItem):
-    """
-    Construct an IntList data item
-        * label [string]: name
-        * value [string]: default value (optional)
-        * notempty [bool]: if True, empty string is not a valid value (opt.)
-    """
-
     def __init__(
         self,
         label: str,
@@ -312,13 +238,6 @@ class IntList(DataItem):
 
 
 class FloatList(DataItem):
-    """
-    Construct an FloatList data item
-        * label [string]: name
-        * value [string]: default value (optional)
-        * notempty [bool]: if True, empty string is not a valid value (opt.)
-    """
-
     def __init__(
         self,
         label: str,
@@ -337,14 +256,6 @@ class FloatList(DataItem):
 
 
 class Bool(DataItem):
-    """
-    Construct a boolean data item
-        * text [string]: form's field name (optional)
-        * label [string]: name
-        * value [string]: default value (optional)
-        * check [bool]: if False, value is not checked (optional, value=True)
-    """
-
     def __init__(
         self,
         label: str,
@@ -366,15 +277,6 @@ class Bool(DataItem):
 
 
 class Color(DataItem):
-    """
-    Construct a color data item
-        * label [string]: name
-        * value [string]: default value (optional)
-        * check [bool]: if False, value is not checked (optional, value=True)
-
-    Color values are encoded as hexadecimal strings or Qt color names
-    """
-
     def __init__(self, label: str, value=None, **kwargs):
         super().__init__(label, value=value, **kwargs)
 
@@ -386,19 +288,6 @@ class Color(DataItem):
 
 
 class Enum(DataItem):
-    """
-    Construct a data item for a list of choices.
-        * label [string]: name
-        * choices [list, tuple or function]: string list or (key, label) list
-          function of two arguments (item, value) returning a list of tuples
-          (key, label: str, image) where image is an icon path, a QIcon instance
-          or a function of one argument (key) returning a QIcon instance
-        * value [-]: default label or default key (optional)
-        * check [bool]: if False, value is not checked (optional, value=True)
-        * radio [bool]: if True, shows radio buttons instead of a combo box
-          (default is False)
-    """
-
     def __init__(
         self,
         label: str,
@@ -515,19 +404,6 @@ class StringOrNumber(DataItem):
 
 
 class Button(DataItem):
-    """
-    Construct a simple button that calls a method when hit
-        * label [string]: text shown on the button
-        * callback [function]: function with four params (dataset, item, value, parent)
-            - dataset [DataSet]: instance of the parent dataset
-            - item [DataItem]: instance of Button (i.e. self)
-            - value [unspecified]: value of Button (default Button
-              value or last value returned by the callback)
-            - parent [QObject]: button's parent widget
-        * icon [QIcon or string]: icon show on the button (optional)
-        * check [bool]: if False, value is not checked (optional, value=True)
-    """
-
     def __init__(self, label: str, callback: Callable, icon: gui.icon.IconType = None):
         super().__init__("", value=None, include=False)
         self.button_label = label
@@ -543,13 +419,6 @@ class Button(DataItem):
 
 
 class DataSetMeta(type):
-    """
-    DataSet metaclass
-
-    Create class attribute `_items`: list of the DataSet class attributes,
-    created in the same order as these attributes were written
-    """
-
     def __new__(mcs, name, bases, dct):
         filtered = [b for b in bases if getattr(b, "__metaclass__", None) is DataSetMeta]
         items = {item._name: item for b in filtered for item in b._items}

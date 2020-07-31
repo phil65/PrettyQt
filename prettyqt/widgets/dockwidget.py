@@ -21,9 +21,9 @@ QtWidgets.QDockWidget.__bases__ = (widgets.Widget,)
 
 
 class DockWidget(QtWidgets.QDockWidget):
-    """
-    Customized DockWidget class
-    contains a custom TitleBar with maximise button
+    """Customized DockWidget class.
+
+    Contains a custom TitleBar with maximise button
     """
 
     def __init__(self, *args, **kwargs):

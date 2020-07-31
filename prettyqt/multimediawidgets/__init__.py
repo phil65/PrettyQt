@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""multimediawidgets module
-"""
+"""Multimediawidgets module."""
 
 from .videowidgetcontrol import VideoWidgetControl
 from .videowidget import VideoWidget

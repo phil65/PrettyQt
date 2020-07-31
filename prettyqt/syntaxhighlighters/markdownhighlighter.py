@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Syntax highlighter for Markdown markup language
-"""
+"""Syntax highlighter for Markdown markup language."""
 
 from prettyqt import core, gui, syntaxhighlighters
 

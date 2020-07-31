@@ -16,7 +16,7 @@ QtWidgets.QGroupBox.__bases__ = (widgets.Widget,)
 
 
 class GroupBox(QtWidgets.QGroupBox):
-    """GroupBox widget
+    """GroupBox widget.
 
     A group box provides a frame, a title on top, a keyboard shortcut,
     and displays various other widgets inside itself.

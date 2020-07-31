@@ -1,6 +1,4 @@
-"""
-Contains the quick reference widget
-"""
+"""Contains the quick reference widget."""
 import pathlib
 
 from prettyqt import widgets

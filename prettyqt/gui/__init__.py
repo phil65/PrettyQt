@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""gui module
+"""Gui module.
 
-contains QtGui-based classes
+Contains QtGui-based classes
 """
 
 from qtpy.QtGui import QKeyEvent as KeyEvent

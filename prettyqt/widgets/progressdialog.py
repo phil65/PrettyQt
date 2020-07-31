@@ -11,9 +11,9 @@ QtWidgets.QProgressDialog.__bases__ = (widgets.BaseDialog,)
 
 
 class ProgressDialog(QtWidgets.QProgressDialog):
-    """Progress dialog
+    """Progress dialog.
 
-    wrapper for QtWidgets.QProgressDialog
+    Wrapper for QtWidgets.QProgressDialog
     """
 
     def __init__(self, parent: Optional[QtWidgets.QWidget] = None):

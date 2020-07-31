@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""core module
+"""Core module.
 
-contains QtCore-based classes
+Contains QtCore-based classes
 """
 
 # from qtpy.QtCore import Signal

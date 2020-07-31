@@ -59,7 +59,7 @@ class Painter(QtGui.QPainter):
         self.fillRect(rect, color)
 
     def set_pen(self, pen_type: str):
-        """Set pen type to use
+        """Set pen type to use.
 
         Allowed values are "none",
 
@@ -74,7 +74,7 @@ class Painter(QtGui.QPainter):
         self.setPen(PEN_TYPES[pen_type])
 
     def get_pen(self) -> str:
-        """Return current pen type
+        """Return current pen type.
 
         Possible values: "none",
 
@@ -88,7 +88,7 @@ class Painter(QtGui.QPainter):
         self.setPen(color)
 
     def set_composition_mode(self, mode: str):
-        """Set the current composition mode
+        """Set the current composition mode.
 
         Possible values: "source_over", "destination_over", "clear", "source",
                          "destination", "source_in", "destination_in", "source_out",
@@ -104,7 +104,7 @@ class Painter(QtGui.QPainter):
         self.setCompositionMode(COMP_MODES[mode])
 
     def get_composition_mode(self) -> str:
-        """Get the current composition mode
+        """Get the current composition mode.
 
         Possible values: "source_over", "destination_over", "clear", "source",
                          "destination", "source_in", "destination_in", "source_out",

@@ -1,6 +1,5 @@
-"""
-This module contains the editor widget implementation.
-"""
+"""This module contains the editor widget implementation."""
+
 import sre_constants
 from typing import Optional, Pattern, Match, List
 

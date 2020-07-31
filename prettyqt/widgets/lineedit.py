@@ -81,7 +81,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setText(text)
 
     def set_read_only(self, value: bool = True):
-        """Set test to read only
+        """Set text to read-only.
 
         Args:
             value: True, for read-only, otherwise False
@@ -111,7 +111,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self.set_background_color(color)
 
     def set_echo_mode(self, mode: str):
-        """Set echo mode
+        """Set echo mode.
 
         Valid values are "normal", "no_echo", "password", "echo_on_edit"
 
@@ -126,7 +126,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setEchoMode(ECHO_MODES[mode])
 
     def get_echo_mode(self) -> str:
-        """Return echo mode
+        """Return echo mode.
 
         possible values are "normal", "no_echo", "password", "echo_on_edit"
 

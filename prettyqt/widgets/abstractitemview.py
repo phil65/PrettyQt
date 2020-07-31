@@ -53,9 +53,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return 0
 
     def selectAll(self):
-        """
-        Override, we dont want to selectAll for too many items for performance reasons.
-        """
+        """Override, we dont want to selectAll for too many items bc of performance."""
         if self.model() is None:
             return None
         if self.model().rowCount() * self.model().columnCount() > 1_000_000:
@@ -64,9 +62,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         super().selectAll()
 
     def set_model(self, model: Optional[QtCore.QAbstractItemModel]):
-        """
-        Delete old selection model explicitely, seems to help with memory usage.
-        """
+        """Delete old selection model explicitely, seems to help with memory usage."""
         old_model = self.model()
         old_sel_model = self.selectionModel()
         if old_model is not None or model is not None:
@@ -101,9 +97,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             self.setItemDelegate(delegate)
 
     def toggle_select_all(self):
-        """
-        Select all items from list (deselect when all selected).
-        """
+        """Select all items from list (deselect when all selected)."""
         if self.selectionModel() is None:
             return None
         if self.selectionModel().hasSelection():
@@ -137,28 +131,20 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return self.selectionModel().currentIndex().column()
 
     def selected_indexes(self) -> List[QtCore.QModelIndex]:
-        """
-        Returns list of selected indexes in first row.
-        """
+        """Returns list of selected indexes in first row."""
         indexes = (x for x in self.selectedIndexes() if x.column() == 0)
         return sorted(indexes, key=lambda x: x.row())
 
     def selected_names(self) -> Generator[Any, None, None]:
-        """
-        Returns generator yielding item names.
-        """
+        """Returns generator yielding item names."""
         return (x.data(constants.NAME_ROLE) for x in self.selected_indexes())
 
     def selected_rows(self) -> Generator[int, None, None]:
-        """
-        Returns generator yielding row nums.
-        """
+        """Returns generator yielding row nums."""
         return (x.row() for x in self.selected_indexes())
 
     def selected_data(self) -> Generator[Any, None, None]:
-        """
-        Returns generator yielding selected userData.
-        """
+        """Returns generator yielding selected userData."""
         return (x.data(constants.USER_ROLE) for x in self.selected_indexes())
 
     def setup_dragdrop_move(self):
@@ -180,7 +166,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return [k for k, v in TRIGGERS.items() if v & self.editTriggers()]
 
     def set_selection_behaviour(self, behaviour: str):
-        """Set selection behaviour for given item view
+        """Set selection behaviour for given item view.
 
         Allowed values are "rows", "columns", "items"
 
@@ -195,7 +181,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setSelectionBehavior(SELECTION_BEHAVIOURS[behaviour])
 
     def get_selection_behaviour(self) -> str:
-        """Return current selection behaviour
+        """Return current selection behaviour.
 
         Possible values: "rows", "columns", "items"
 
@@ -205,7 +191,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return SELECTION_BEHAVIOURS.inv[self.selectionBehavior()]
 
     def set_selection_mode(self, mode: Optional[str]):
-        """Set selection mode for given item view
+        """Set selection mode for given item view.
 
         Allowed values are "single", "extended", "multi" or "none"
 
@@ -224,7 +210,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setSelectionMode(SELECTION_MODES[mode])
 
     def get_selection_mode(self) -> str:
-        """Return current selection mode
+        """Return current selection mode.
 
         Possible values: "single", "extended", "multi" or "none"
 
@@ -234,7 +220,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return SELECTION_MODES.inv[self.selectionMode()]
 
     def set_scroll_mode(self, mode: str):
-        """Set the scroll mode for both directions
+        """Set the scroll mode for both directions.
 
         possible values are "item", "pixel"
 
@@ -250,7 +236,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setVerticalScrollMode(SCROLL_MODES[mode])
 
     def set_horizontal_scroll_mode(self, mode: str):
-        """Set the horizontal scroll mode
+        """Set the horizontal scroll mode.
 
         possible values are "item", "pixel"
 
@@ -265,7 +251,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setHorizontalScrollMode(SCROLL_MODES[mode])
 
     def set_vertical_scroll_mode(self, mode: str):
-        """Set the vertical scroll mode
+        """Set the vertical scroll mode.
 
         possible values are "item", "pixel"
 
@@ -280,7 +266,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setVerticalScrollMode(SCROLL_MODES[mode])
 
     def num_selected(self) -> int:
-        """Return amount of selected rows
+        """Return amount of selected rows.
 
         Returns:
             amount of selected rows
@@ -290,7 +276,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         return len(self.selectionModel().selectedRows())
 
     def jump_to_column(self, col_num: int):
-        """make sure column at given index is visible
+        """Make sure column at given index is visible.
 
         scrolls to column at given index
 
@@ -303,13 +289,11 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.scrollTo(idx)
 
     def scroll_to_top(self):
-        """override to use abstractitemview-way of scrolling to top
-        """
+        """Override to use abstractitemview-way of scrolling to top."""
         self.scrollToTop()
 
     def scroll_to_bottom(self):
-        """override to use abstractitemview-way of scrolling to bottom
-        """
+        """Override to use abstractitemview-way of scrolling to bottom."""
         self.scrollToBottom()
 
     def select_last_row(self):
@@ -322,8 +306,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.scrollTo(index, SCROLL_HINTS[mode])
 
     def highlight_when_inactive(self):
-        """also highlight items when widget does not have focus
-        """
+        """Highlight items when widget does not have focus."""
         p = gui.Palette()
         p.highlight_inactive()
         self.setPalette(p)

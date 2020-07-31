@@ -14,7 +14,7 @@ QtWidgets.QListView.__bases__ = (widgets.AbstractItemView,)
 
 class ListView(QtWidgets.QListView):
     def set_view_mode(self, mode: str):
-        """Set view mode
+        """Set view mode.
 
         possible values are "list", "icon"
 
@@ -29,7 +29,7 @@ class ListView(QtWidgets.QListView):
         self.setViewMode(VIEW_MODES[mode])
 
     def get_view_mode(self) -> str:
-        """Return view mode
+        """Return view mode.
 
         possible values are "list", "icon"
 

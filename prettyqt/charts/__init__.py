@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""charts module
-"""
+"""Charts module."""
 
 from .abstractseries import AbstractSeries
 from .xyseries import XYSeries

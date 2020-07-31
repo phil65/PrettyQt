@@ -53,23 +53,19 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         return self.orientation() == QtCore.Qt.Vertical
 
     def set_horizontal(self):
-        """Set slider orientation to horizontal.
-        """
+        """Set slider orientation to horizontal."""
         self.setOrientation(QtCore.Qt.Horizontal)
 
     def set_vertical(self):
-        """Set slider orientation to vertical.
-        """
+        """Set slider orientation to vertical."""
         self.setOrientation(QtCore.Qt.Vertical)
 
     def scroll_to_min(self):
-        """Scroll to the minimum value of the slider.
-        """
+        """Scroll to the minimum value of the slider."""
         self.setValue(self.minimum())
 
     def scroll_to_max(self):
-        """Scroll to the maximum value of the slider.
-        """
+        """Scroll to the maximum value of the slider."""
         self.setValue(self.maximum())
 
     def set_range(self, min_val: int, max_val: int):

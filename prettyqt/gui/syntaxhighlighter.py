@@ -25,8 +25,7 @@ class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
                 yield (Rule.compiled, Rule.nth, Rule.fmt)
 
     def highlightBlock(self, text: str):
-        """Apply syntax highlighting to the given block of text.
-        """
+        """Apply syntax highlighting to the given block of text."""
         # Do other syntax formatting
         for expression, nth, fmt in self.yield_rules():
             for match in expression.finditer(text):

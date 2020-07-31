@@ -17,9 +17,10 @@ icon_cache: Dict[key_type, QtGui.QIcon] = dict()
 
 
 def get_icon(icon: IconType, color: Optional[str] = None, as_qicon: bool = False):
-    """
-    qtawesome already caches icons, but since we construct our own subclassed icon,
-    we cache, too
+    """Get icon with given color.
+
+    Qtawesome already caches icons, but since we construct our own subclassed icon,
+    we cache, too.
     """
     if isinstance(icon, QtGui.QIcon):
         return icon if as_qicon else Icon(icon)

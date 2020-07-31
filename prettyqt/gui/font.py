@@ -68,7 +68,7 @@ class Font(QtGui.QFont):
         return font
 
     def set_style_hint(self, hint: str):
-        """Set the style hint
+        """Set the style hint.
 
         Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",
         "monospace", "fantasy", "cursive", "system"
@@ -84,7 +84,7 @@ class Font(QtGui.QFont):
         self.setStyleHint(STYLE_HINTS[hint])
 
     def set_weight(self, weight: str):
-        """Set the font weight
+        """Set the font weight.
 
         Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
                          "extra_bold", normal", "black"

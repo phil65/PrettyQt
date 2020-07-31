@@ -4,8 +4,7 @@ from qtpy import QtGui
 
 
 class TextBlockUserData(QtGui.QTextBlockUserData):
-    """ Storage for the user data associated with each line.
-    """
+    """Storage for the user data associated with each line."""
 
     def __init__(self, **kwds):
         for key, value in kwds.items():

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Syntax highlighter for the programming language Python
-"""
+"""Syntax highlighter for the programming language Python."""
 
 from prettyqt import core, gui, syntaxhighlighters
 
@@ -138,14 +136,12 @@ TRI_DOUBLE = (core.RegExp('"""'), 2, fmt)
 
 
 class PythonHighlighter(gui.SyntaxHighlighter):
-    """Syntax highlighter for the Python language.
-    """
+    """Syntax highlighter for the Python language."""
 
     RULES = Rule.__subclasses__()
 
     def highlightBlock(self, text: str):
-        """Apply syntax highlighting to the given block of text.
-        """
+        """Apply syntax highlighting to the given block of text."""
         # Do other syntax formatting
         super().highlightBlock(text)
         self.setCurrentBlockState(0)

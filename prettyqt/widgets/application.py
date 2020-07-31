@@ -16,7 +16,7 @@ QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
 class Application(QtWidgets.QApplication):
     def set_icon(self, icon: gui.icon.IconType):
-        """Set the default window icon
+        """Set the default window icon.
 
         Args:
             icon: icon to use
@@ -71,9 +71,7 @@ class Application(QtWidgets.QApplication):
 
     @classmethod
     def copy_to_clipboard(cls, text: str):
-        """
-        Sets clipboard to supplied text
-        """
+        """Sets clipboard to supplied text."""
         cb = cls.clipboard()
         cb.clear(mode=cb.Clipboard)
         cb.setText(text, mode=cb.Clipboard)

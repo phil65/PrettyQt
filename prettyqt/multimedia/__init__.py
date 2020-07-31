@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""multimedia module
-"""
+"""Multimedia module."""
 
 from .mediabindableinterface import MediaBindableInterface
 from .videoencodersettings import VideoEncoderSettings

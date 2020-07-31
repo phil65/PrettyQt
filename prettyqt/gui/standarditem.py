@@ -37,7 +37,7 @@ class StandardItem(QtGui.QStandardItem):
         return item
 
     def set_icon(self, icon: gui.icon.IconType):
-        """Set the icon for the action
+        """Set the icon for the action.
 
         Args:
             icon: icon to use

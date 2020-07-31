@@ -12,8 +12,8 @@ class IconDelegate(widgets.StyledItemDelegate):
         option: QtWidgets.QStyleOptionViewItem,
         index: QtCore.QModelIndex,
     ):
-        """
-        override to paint an icon based on given Pixmap / Color / Icon
+        """Override to paint an icon based on given Pixmap / Color / Icon.
+
         Pixmap / Color / Icon must be set to 'QtCore.Qt.UserRole + 1000'
 
         Args:

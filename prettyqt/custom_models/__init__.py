@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-"""custom_models module
+"""Custom_models module.
 
-contains custom models
+Contains custom models
 """
 
 

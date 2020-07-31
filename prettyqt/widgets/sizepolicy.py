@@ -61,7 +61,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
         self.setRetainSizeWhenHidden(state["retain_size_when_hidden"])
 
     def get_horizontal_policy(self) -> str:
-        """Return size policy
+        """Return size policy.
 
         possible values are "fixed", "minimum", "maximum", "preferred",
         "expanding", "minimum_expanding" and "ignored"
@@ -72,7 +72,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
         return SIZE_POLICIES.inv[self.horizontalPolicy()]
 
     def set_horizontal_policy(self, mode: str) -> None:
-        """Set the horizontal policy
+        """Set the horizontal policy.
 
         possible values are "fixed", "minimum", "maximum", "preferred",
         "expanding", "minimum_expanding" and "ignored"
@@ -83,7 +83,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
         self.setHorizontalPolicy(SIZE_POLICIES[mode])
 
     def get_vertical_policy(self) -> str:
-        """Return size policy
+        """Return size policy.
 
         possible values are "fixed", "minimum", "maximum", "preferred",
         "expanding", "minimum_expanding" and "ignored"
@@ -94,7 +94,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
         return SIZE_POLICIES.inv[self.verticalPolicy()]
 
     def set_vertical_policy(self, mode: str) -> None:
-        """Set the horizontal policy
+        """Set the horizontal policy.
 
         possible values are "fixed", "minimum", "maximum", "preferred",
         "expanding", "minimum_expanding" and "ignored"
@@ -105,7 +105,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
         self.setVerticalPolicy(SIZE_POLICIES[mode])
 
     def get_control_type(self) -> str:
-        """Return control type
+        """Return control type.
 
         possible values are "default", "buttonbox", "checkbox", "combobox", "frame",
         "groupbox", "label", "line", "lineedit", "pushbutton", "radiobutton", "slider",
@@ -117,7 +117,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
         return CONTROL_TYPES.inv[self.controlType()]
 
     def set_control_type(self, mode: str) -> None:
-        """Set the control type
+        """Set the control type.
 
         possible values are "default", "buttonbox", "checkbox", "combobox", "frame",
         "groupbox", "label", "line", "lineedit", "pushbutton", "radiobutton", "slider",

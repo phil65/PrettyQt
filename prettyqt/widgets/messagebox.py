@@ -123,7 +123,7 @@ class MessageBox(QtWidgets.QMessageBox):
     #     widgets.MessageBox.message(error_text, header, "mdi.exclamation")
 
     def set_text_format(self, text_format: str):
-        """Set the text format
+        """Set the text format.
 
         Allowed values are "rich", "plain", "auto"
 

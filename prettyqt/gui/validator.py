@@ -19,9 +19,7 @@ class Validator(QtGui.QValidator):
             return custom_validators.CompositeValidator([self, other])
 
     def __radd__(self, other: QtGui.QValidator):
-        """
-        needed for sum()
-        """
+        """Needed for sum()."""
         return self.__add__(other)
 
     def is_valid_value(self, value: str, pos: int = 0) -> bool:

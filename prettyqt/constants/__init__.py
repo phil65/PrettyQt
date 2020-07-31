@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""constants module
-"""
+"""Constants module."""
 
 from qtpy import QtCore
 

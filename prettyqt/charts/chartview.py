@@ -28,9 +28,7 @@ class ChartView(QtCharts.QChartView):
         # self.setDragMode(self.RubberBandDrag)
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
-        """
-        Handle keypress events to allow navigation via keyboard.
-        """
+        """Handle keypress events to allow navigation via keyboard."""
         key = event.key()
         if key == QtCore.Qt.Key_Escape:
             self.chart().zoomReset()
@@ -53,16 +51,12 @@ class ChartView(QtCharts.QChartView):
         event.accept()
 
     def wheelEvent(self, event: QtGui.QWheelEvent):
-        """
-        Handle wheel event for zooming.
-        """
+        """Handle wheel event for zooming."""
         fct = ZOOM_IN_FACTOR if event.angleDelta().y() > 0 else ZOOM_OUT_FACTOR
         self.chart().zoom_by_factor(fct)
 
     def mouseReleaseEvent(self, event: QtGui.QMouseEvent):
-        """
-        Override to allow dragging the chart.
-        """
+        """Override to allow dragging the chart."""
         if event.button() == QtCore.Qt.RightButton:
             widgets.Application.restoreOverrideCursor()
             event.accept()
@@ -70,9 +64,7 @@ class ChartView(QtCharts.QChartView):
         super().mouseReleaseEvent(event)
 
     def mousePressEvent(self, event: QtGui.QMouseEvent):
-        """
-        Override to allow dragging the chart.
-        """
+        """Override to allow dragging the chart."""
         if event.button() == QtCore.Qt.RightButton:
             cursor = gui.Cursor(QtCore.Qt.SizeAllCursor)
             widgets.Application.setOverrideCursor(cursor)
@@ -82,9 +74,7 @@ class ChartView(QtCharts.QChartView):
         super().mousePressEvent(event)
 
     def mouseMoveEvent(self, event: QtGui.QMouseEvent):
-        """
-        Override to allow dragging the chart.
-        """
+        """Override to allow dragging the chart."""
         # pan the chart with a middle mouse drag
         if event.buttons() & QtCore.Qt.RightButton:
             if not self.last_mouse_pos:
@@ -105,9 +95,7 @@ class ChartView(QtCharts.QChartView):
 
     @core.Slot()
     def save_as_image(self):
-        """
-        Let user choose folder and save chart as an image file.
-        """
+        """Let user choose folder and save chart as an image file."""
         dlg = widgets.FileDialog(mode="save", caption="Save image")
         filters = {"Bmp files": [".bmp"], "Jpeg files": [".jpg"], "Png files": [".png"]}
         dlg.set_extension_filter(filters)

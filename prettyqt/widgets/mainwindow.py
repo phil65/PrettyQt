@@ -31,8 +31,7 @@ QtWidgets.QMainWindow.__bases__ = (widgets.Widget,)
 
 
 class MainWindow(QtWidgets.QMainWindow):
-    """
-    Class for our mainWindow.
+    """Class for our mainWindow.
 
     Includes all docks, a centralwidget and a toolbar
     """
@@ -111,8 +110,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.addToolBar(TOOLBAR_AREAS[position], toolbar)
 
     def add_toolbar_break(self, position: str = "top"):
-        """Adds a toolbar break to the given area
-        after all the other objects that are present.
+        """Adds a toolbar break to the given area behind the last item.
 
         Valid values for position: "left", "right", "top", "bottom"
 
@@ -147,8 +145,7 @@ class MainWindow(QtWidgets.QMainWindow):
         return restored
 
     def save_window_state(self, recursive=False):
-        """
-        Save current window state as QSetting.
+        """Save current window state as QSetting.
 
         Args:
             recursive (bool, optional): Description
@@ -195,8 +192,7 @@ class MainWindow(QtWidgets.QMainWindow):
         return self.find_children(QtWidgets.QToolBar, recursive=False)
 
     def toggle_fullscreen(self):
-        """Toggle between fullscreen and regular size.
-        """
+        """Toggle between fullscreen and regular size."""
         if self.isFullScreen():
             self.showNormal()
         else:

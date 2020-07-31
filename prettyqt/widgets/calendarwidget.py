@@ -44,7 +44,7 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
         self.setSelectedDate(value)
 
     def set_selection_mode(self, mode: Optional[str]):
-        """Set selection mode for given calendar widget
+        """Set selection mode for given calendar widget.
 
         Allowed values are "single" or "none"
 
@@ -61,7 +61,7 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
         self.setSelectionMode(SELECTION_MODES[mode])
 
     def get_selection_mode(self) -> str:
-        """Return current selection mode
+        """Return current selection mode.
 
         Possible values: "single" or "none"
 

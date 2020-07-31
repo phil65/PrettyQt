@@ -9,10 +9,7 @@ QtCharts.QXYSeries.__bases__ = (charts.AbstractSeries,)
 
 
 class XYSeries(QtCharts.QXYSeries):
-
-    """
-    QXYSeries with some custom properties.
-    """
+    """QXYSeries with some custom properties."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

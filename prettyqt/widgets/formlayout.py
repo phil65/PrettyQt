@@ -37,8 +37,7 @@ class FormLayout(QtWidgets.QFormLayout):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
     def __len__(self) -> int:
-        """needed for PySide2
-        """
+        """Needed for PySide2."""
         return self.rowCount()
 
     def __add__(self, other):

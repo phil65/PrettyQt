@@ -66,9 +66,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             return self
 
     def wheelEvent(self, event):
-        """
-        Handle wheel event for zooming.
-        """
+        """Handle wheel event for zooming."""
         if not self._allow_wheel_zoom:
             return None
         if event.modifiers() & constants.CTRL_MOD:

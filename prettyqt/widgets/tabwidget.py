@@ -17,9 +17,7 @@ QtWidgets.QTabWidget.__bases__ = (widgets.Widget,)
 
 
 class TabWidget(QtWidgets.QTabWidget):
-    """
-    Widget for managing the tabs section
-    """
+    """Widget for managing the tabs section."""
 
     def __init__(
         self,
@@ -129,12 +127,14 @@ class TabWidget(QtWidgets.QTabWidget):
 
     @core.Slot(int, QtCore.QPoint)
     def detach_tab(self, index: int, point: QtCore.QPoint) -> None:
-        """
-        Detach the tab by removing it's contents and placing them in
-        a DetachedTab window
+        """Detach tab by removing its contents and placing them in a DetachedTab window.
 
-        @param index    index location of the tab to be detached
-        @param point    screen pos for creating the new DetachedTab window
+        Args:
+            index (int): index location of the tab to be detached
+            point (QtCore.QPoint): screen pos for creating the new DetachedTab window
+
+        Returns:
+            None: Description
         """
         # Get the tab content
         name = self.tabText(index)
@@ -191,16 +191,19 @@ class TabWidget(QtWidgets.QTabWidget):
         icon: gui.icon.IconType = None,
         insert_at: Optional[int] = None,
     ):
-        """
+        """Re-attach tab.
+
         Re-attach the tab by removing the content from the DetachedTab window,
-        closing it, and placing the content back into the DetachableTabWidget
+        closing it, and placing the content back into the DetachableTabWidget.
 
-        @param    widget    the content widget from the DetachedTab window
-        @param    name             the name of the detached tab
-        @param    icon             the window icon for the detached tab
-        @param    insert_at         insert the re-attached tab at the given index
+        Args:
+            widget (Union[QtWidgets.QWidget, QtWidgets.QLayout]): the content widget
+                from the DetachedTab window
+            name (str): the name of the detached tab
+            icon (gui.icon.IconType, optional): the window icon for the detached tab
+            insert_at (Optional[int], optional): insert the re-attached tab at the
+                given index
         """
-
         widget.setParent(self)
 
         # Remove the reference
@@ -211,8 +214,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self.add_tab(widget, name, icon=icon, position=insert_at, show=True)
 
     def close_detached_tabs(self) -> None:
-        """Close all tabs that are currently detached
-        """
+        """Close all tabs that are currently detached."""
         tabs = list(self.detached_tabs.values())
         for tab in tabs:
             tab.close()
@@ -226,9 +228,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
     @core.Slot(object, str)
     def open_widget(self, widget: QtWidgets.QWidget, title: str = "Unnamed"):
-        """
-        Create a tab containing delivered widget.
-        """
+        """Create a tab containing delivered widget."""
         self.add_tab(widget, title, icon="mdi.widgets", show=True)
 
     def set_tab(

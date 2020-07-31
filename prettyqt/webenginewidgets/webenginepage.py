@@ -12,9 +12,7 @@ QtWebEngineWidgets.QWebEnginePage.__bases__ = (core.Object,)
 
 
 class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
-    """A web engine page holds the contents of an HTML document,
-    the history of navigated links, and actions.
-    """
+    """A web engine page holds the HTML document contents, link history + actions."""
 
     def set_url(self, url: Union[str, pathlib.Path]):
         """Set the url of the WebEnginePage.

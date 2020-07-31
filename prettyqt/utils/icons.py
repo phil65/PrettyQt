@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-For full list, see:
-- https://cdn.materialdesignicons.com/4.9.95/ .
-"""
+"""For full list, see: https://cdn.materialdesignicons.com/4.9.95/ ."""
 
 import qtawesome as qta
 

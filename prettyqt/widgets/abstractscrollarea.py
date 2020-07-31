@@ -50,7 +50,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
     #     self.setVerticalScrollBar(scrollbar)
 
     def set_size_adjust_policy(self, policy: str):
-        """Set size adjust policy
+        """Set size adjust policy.
 
         Valid values are "content", "first_show", "ignored"
 
@@ -66,7 +66,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         self.setSizeAdjustPolicy(policy)
 
     def get_size_adjust_policy(self) -> str:
-        """Return size adjust policy
+        """Return size adjust policy.
 
         possible values are "content", "first_show", "ignored"
 
@@ -76,7 +76,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         return SIZE_POLICIES.inv[self.sizeAdjustPolicy()]
 
     def set_scrollbar_policy(self, mode: str):
-        """Set the policy for both scrollbars
+        """Set the policy for both scrollbars.
 
         possible values are "always_on", "always_off", "as_needed"
 
@@ -92,7 +92,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
     def set_horizontal_scrollbar_policy(self, mode: str):
-        """Set the horizontal scrollbar visibility
+        """Set the horizontal scrollbar visibility.
 
         possible values are "always_on", "always_off", "as_needed"
 
@@ -107,7 +107,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
     def set_vertical_scrollbar_policy(self, mode: str):
-        """Set the vertical scrollbar visibility
+        """Set the vertical scrollbar visibility.
 
         possible values are "always_on", "always_off", "as_needed"
 
@@ -122,7 +122,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
     def set_scrollbar_width(self, width: int):
-        """Set the width for both scrollbars
+        """Set the width for both scrollbars.
 
         Args:
             width: width in pixels
@@ -131,7 +131,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         self.set_vertical_scrollbar_width(width)
 
     def set_horizontal_scrollbar_width(self, width: int):
-        """Set the horizontal scrollbar width
+        """Set the horizontal scrollbar width.
 
         Args:
             width: width in pixels
@@ -140,7 +140,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             ss.QScrollBar.horizontal.height.setValue(f"{width}px")
 
     def set_vertical_scrollbar_width(self, width: int):
-        """Set the vertical scrollbar width
+        """Set the vertical scrollbar width.
 
         Args:
             width: width in pixels
@@ -149,13 +149,11 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             ss.QScrollBar.horizontal.height.setValue(f"{width}px")
 
     def scroll_to_top(self):
-        """scroll to the top of the scroll area
-        """
+        """Scroll to the top of the scroll area."""
         self.verticalScrollBar().scroll_to_min()
 
     def scroll_to_bottom(self):
-        """scroll to the bottom of the scroll area
-        """
+        """Scroll to the bottom of the scroll area."""
         self.verticalScrollBar().scroll_to_max()
 
 

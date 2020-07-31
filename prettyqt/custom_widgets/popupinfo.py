@@ -8,9 +8,7 @@ from prettyqt import core, gui, widgets
 
 
 class PopupInfo(widgets.Dialog):
-    """
-    Dialog overlay to show some info to user.
-    """
+    """Dialog overlay to show some info to user."""
 
     def __init__(
         self, parent: Optional[QtWidgets.QWidget] = None, text: Optional[str] = None

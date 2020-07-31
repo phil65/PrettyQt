@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""custom_widgets module
-"""
+"""Custom_widgets module."""
 
 from .image import Image
 from .listinput import ListInput

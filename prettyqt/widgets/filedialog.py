@@ -37,9 +37,7 @@ QtWidgets.QFileDialog.__bases__ = (widgets.BaseDialog,)
 
 
 class FileDialog(QtWidgets.QFileDialog):
-    """
-    simple dialog used to display some widget
-    """
+    """Simple dialog used to display some widget."""
 
     def __init__(
         self,
@@ -236,8 +234,7 @@ class FileDialog(QtWidgets.QFileDialog):
         return pathlib.Path(super().directory())
 
     def set_directory(self, path: Union[None, str, pathlib.Path]):
-        """Set start directory.
-        """
+        """Set start directory."""
         if isinstance(path, pathlib.Path):
             path = str(path)
         self.setDirectory(path)

@@ -85,7 +85,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         self.setOrientation(QtCore.Qt.Vertical)
 
     def set_orientation(self, orientation: str):
-        """Set the orientation of the button box
+        """Set the orientation of the button box.
 
         Allowed values are "horizontal", "vertical"
 
@@ -100,7 +100,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         self.setOrientation(ORIENTATIONS[orientation])
 
     def get_orientation(self) -> str:
-        """Return current orientation
+        """Return current orientation.
 
         Possible values: "horizontal", "vertical"
 
@@ -115,7 +115,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def add_default_button(
         self, button: str, callback: Optional[Callable] = None
     ) -> QtWidgets.QPushButton:
-        """Add a default button
+        """Add a default button.
 
         Valid arguments: "cancel", "ok", "save", "open", "close",
                          "discard", "apply", "reset", "restore_defaults",
@@ -146,7 +146,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         role: str = "accept",
         callback: Optional[Callable] = None,
     ) -> widgets.PushButton:
-        """Add a button
+        """Add a button.
 
         Args:
             button: button to add

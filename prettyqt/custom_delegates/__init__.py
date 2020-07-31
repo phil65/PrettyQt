@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-"""custom_widgets module
-"""
+
 from .buttondelegate import ButtonDelegate
 from .radiodelegate import RadioDelegate
 from .icondelegate import IconDelegate

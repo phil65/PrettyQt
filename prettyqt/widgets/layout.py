@@ -88,8 +88,9 @@ class Layout(QtWidgets.QLayout):
         return MODES.inv[self.sizeConstraint()]
 
     def set_alignment(self, alignment: str, item=None):
-        """Set the alignment for widget / layout to alignment and
-        returns true if w is found in this layout (not including child layouts).
+        """Set the alignment for widget / layout to alignment.
+
+        Returns true if w is found in this layout (not including child layouts).
 
         Allowed values for alignment:  "left", "right", "top", "bottom"
 

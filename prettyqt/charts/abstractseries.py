@@ -9,10 +9,7 @@ QtCharts.QAbstractSeries.__bases__ = (core.Object,)
 
 
 class AbstractSeries(QtCharts.QAbstractSeries):
-
-    """
-    QAbstractSeries with some custom properties
-    """
+    """QAbstractSeries with some custom properties."""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

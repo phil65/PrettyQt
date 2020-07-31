@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""gui module
+"""Webenginewidgets module.
 
 contains QWebEngineView-based classes
 """

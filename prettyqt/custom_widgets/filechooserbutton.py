@@ -20,7 +20,7 @@ class FileChooserButton(widgets.Widget):
         root: Union[None, str, pathlib.Path] = None,
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        """initialize FileChooserButton.
+        """Initialize FileChooserButton.
 
         Args:
             extensions: dict allowed extensions
@@ -28,6 +28,7 @@ class FileChooserButton(widgets.Widget):
             mode: Accept mode ("save" or "load")
             file_mode: File mode ("existing_files", "existing_file", "any_file",
                                   or "directory")
+            root: Root path
             parent: parent widget
         """
         super().__init__(parent)

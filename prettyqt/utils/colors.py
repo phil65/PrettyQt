@@ -20,7 +20,7 @@ def set_window_icon_color(color):
 
 
 def get_color(color: ColorType) -> gui.Color:
-    """Get gui.Color instance for given parameter
+    """Get gui.Color instance for given parameter.
 
     named colors are 'aliceblue', 'antiquewhite', 'aqua', 'aquamarine',
     'azure', 'beige', 'bisque', 'black', 'blanchedalmond', 'blue', 'blueviolet',

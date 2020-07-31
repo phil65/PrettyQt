@@ -37,8 +37,9 @@ from PyQt5 import QtCore, QtGui
 
 class ModelTest(QtCore.QObject):
     def __init__(self, _model, verbose=True, parent=None):
-        """
-        Connect to all of the models signals, Whenever anything happens check everything.
+        """Connect to all of the models signals.
+
+        Whenever anything happens check everything.
         """
         QtCore.QObject.__init__(self, parent)
         self._model = _model
@@ -71,11 +72,6 @@ class ModelTest(QtCore.QObject):
         self.runAllTests()
 
     def nonDestructiveBasicTest(self):
-        """
-        Try to call a number of the basic functions (not all)
-        to make sure the model doesn't outright segfault,
-        testing the functions that makes sense.
-        """
         assert self.model.buddy(QtCore.QModelIndex()) == QtCore.QModelIndex()
         self.model.canFetchMore(QtCore.QModelIndex())
         assert self.model.columnCount(QtCore.QModelIndex()) >= 0
@@ -111,9 +107,7 @@ class ModelTest(QtCore.QObject):
         self.model.supportedDropActions()
 
     def rowCount(self):
-        """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::rowCount()
-        and hasChildren().
+        """Test implementation of rowCount hasChildren method.
 
         self.models that are dynamically populated are not as fully tested here.
         """
@@ -137,10 +131,7 @@ class ModelTest(QtCore.QObject):
         # but this catches the big mistakes
 
     def columnCount(self):
-        """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::columnCount()
-        and hasChildren().
-        """
+        """Test implementation of columnCount and hasChildren method."""
         # check top row
         topidx = self.model.index(0, 0, QtCore.QModelIndex())
         assert self.model.columnCount(topidx) >= 0
@@ -154,9 +145,7 @@ class ModelTest(QtCore.QObject):
         # but this catches the big mistakes
 
     def hasIndex(self):
-        """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::hasIndex().
-        """
+        """Test implementation of hasIndex method."""
         # Make sure that invalid values returns an invalid index
         assert self.model.hasIndex(-2, -2) is False
         assert self.model.hasIndex(-2, 0) is False
@@ -176,9 +165,7 @@ class ModelTest(QtCore.QObject):
         # but this catches the big mistakes
 
     def index(self):
-        """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::index().
-        """
+        """Test implementation of index method."""
         # Make sure that invalid values returns an invalid index
         assert self.model.index(-2, -2, QtCore.QModelIndex()) == QtCore.QModelIndex()
         assert self.model.index(-2, 0, QtCore.QModelIndex()) == QtCore.QModelIndex()
@@ -203,9 +190,7 @@ class ModelTest(QtCore.QObject):
         # but this catches the big mistakes
 
     def parent(self):
-        """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::parent().
-        """
+        """Test implementation of parent method."""
         # Make sure the self.model wont crash and will return an invalid QModelIndex
         # when asked for the parent of an invalid index
         assert self.model.parent(QtCore.QModelIndex()) == QtCore.QModelIndex()
@@ -243,9 +228,7 @@ class ModelTest(QtCore.QObject):
         self.checkChildren(QtCore.QModelIndex())
 
     def data(self):
-        """
-        Tests self.model's implementation of QtCore.QAbstractItemModel::data().
-        """
+        """Test implementation of data method."""
         # Invalid index should return an invalid qvariant
         qvar = self.model.data(QtCore.QModelIndex(), QtCore.Qt.DisplayRole)
         assert qvar is None
@@ -348,9 +331,7 @@ class ModelTest(QtCore.QObject):
         print("------------------------------") if self._verbose else None
 
     def rowsAboutToBeInserted(self, parent, start, end):
-        """
-        Store what is about to be inserted to make sure it actually happens.
-        """
+        """Store what is about to be inserted to make sure it actually happens."""
         c = {}
         c["parent"] = parent
         c["oldSize"] = self.model.rowCount(parent)
@@ -359,9 +340,7 @@ class ModelTest(QtCore.QObject):
         self.insert.append(c)
 
     def rowsInserted(self, parent, start, end):
-        """
-        Confirm that what was said was going to happen actually did.
-        """
+        """Confirm that what was said was going to happen actually did."""
         c = self.insert.pop()
         assert c["parent"] == parent
         assert c["oldSize"] + (end - start + 1) == self.model.rowCount(parent)
@@ -376,9 +355,7 @@ class ModelTest(QtCore.QObject):
         assert c["next"] == self.model.data(self.model.index(end + 1, 0, c["parent"]))
 
     def rowsAboutToBeRemoved(self, parent, start, end):
-        """
-        Store what is about to be inserted to make sure it actually happens
-        """
+        """Store what is about to be inserted to make sure it actually happens."""
         c = {}
         c["parent"] = parent
         c["oldSize"] = self.model.rowCount(parent)
@@ -387,9 +364,7 @@ class ModelTest(QtCore.QObject):
         self.remove.append(c)
 
     def rowsRemoved(self, parent, start, end):
-        """
-        Confirm that what was said was going to happen actually did.
-        """
+        """Confirm that what was said was going to happen actually did."""
         c = self.remove.pop()
         assert c["parent"] == parent
         assert c["oldSize"] - (end - start + 1) == self.model.rowCount(parent)
@@ -397,8 +372,7 @@ class ModelTest(QtCore.QObject):
         assert c["next"] == self.model.data(self.model.index(start, 0, c["parent"]))
 
     def checkChildren(self, parent, depth=0):
-        """
-        Called from parent() test.
+        """Called from parent() test.
 
         A self.model that returns an index of parent X should also return X when asking
         for the parent of the index

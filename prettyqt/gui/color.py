@@ -21,7 +21,7 @@ class Color(QtGui.QColor):
 
     @classmethod
     def from_text(cls, text):
-        """Create a QColor from specified string"""
+        """Create a QColor from specified string."""
         color = cls()
         text = str(text)
         if text.startswith("#") and len(text) == 7:

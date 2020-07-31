@@ -27,7 +27,7 @@ from qtpy import QtCore, QtWidgets
 
 class StyleOptionSlider(QtWidgets.QStyleOptionSlider):
     def is_horizontal(self) -> bool:
-        """check if silder is horizontal
+        """Check if silder is horizontal.
 
         Returns:
             True if horizontal, else False
@@ -35,7 +35,7 @@ class StyleOptionSlider(QtWidgets.QStyleOptionSlider):
         return self.orientation == QtCore.Qt.Horizontal
 
     def is_vertical(self) -> bool:
-        """check if silder is vertical
+        """Check if silder is vertical.
 
         Returns:
             True if vertical, else False
@@ -43,11 +43,9 @@ class StyleOptionSlider(QtWidgets.QStyleOptionSlider):
         return self.orientation == QtCore.Qt.Vertical
 
     def set_horizontal(self) -> None:
-        """Set slider orientation to horizontal
-        """
+        """Set slider orientation to horizontal."""
         self.orientation = QtCore.Qt.Horizontal
 
     def set_vertical(self) -> None:
-        """Set slider orientation to vertical
-        """
+        """Set slider orientation to vertical."""
         self.orientation = QtCore.Qt.Vertical

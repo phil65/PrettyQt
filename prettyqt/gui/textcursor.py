@@ -53,7 +53,7 @@ class TextCursor(QtGui.QTextCursor):
         return self.movePosition(op, mode, n)
 
     def set_position(self, pos: int, mode: str = "move"):
-        """Set cursor to given position
+        """Set cursor to given position.
 
         Args:
             pos: Cursor position
@@ -70,7 +70,7 @@ class TextCursor(QtGui.QTextCursor):
         return (self.anchor(), self.position())
 
     def select_text(self, start_pos: Union[int, str], end_pos: Union[int, str]) -> str:
-        """select text from start position to end position.
+        """Select text from start position to end position.
 
         Positions can be either an integer index or a move operation
 
@@ -102,8 +102,7 @@ class TextCursor(QtGui.QTextCursor):
 
     @contextlib.contextmanager
     def edit_block(self):
-        """Context manager for edit blocks. Can be used for undo actions.
-        """
+        """Context manager for edit blocks. Can be used for undo actions."""
         self.beginEditBlock()
         yield
         self.endEditBlock()
