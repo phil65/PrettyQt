@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-"""
 
 from typing import Optional, Mapping, Iterable, Union, Dict, Any
 

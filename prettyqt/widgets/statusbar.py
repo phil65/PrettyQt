@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-"""
 
 from typing import Union
 from qtpy import QtWidgets

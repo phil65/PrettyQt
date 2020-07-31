@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-"""
 
 from typing import Callable, Optional, Dict, Any
 import functools

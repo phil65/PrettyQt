@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-"""
 from dataclasses import dataclass, asdict
 from typing import Tuple, Dict, Any
 

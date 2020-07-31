@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-"""
 
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts

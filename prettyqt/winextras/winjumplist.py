@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-"""
 
 try:
     from PyQt5 import QtWinExtras  # type: ignore

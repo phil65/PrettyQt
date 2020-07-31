@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-"""gui module
+"""
+winextras module
 
 contains QWebEngineView-based classes
 """

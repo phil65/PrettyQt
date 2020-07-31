@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-"""
 
 import os
 import toml
@@ -9,9 +7,9 @@ import subprocess
 
 
 if __name__ == "__main__":
-    text = subprocess.check_output("git stash --include-untracked")
-    stashed = text != b"No local changes to save\n"
-    print(text)
+    output = subprocess.check_output("git stash --include-untracked")
+    stashed = output != b"No local changes to save\n"
+    print(output)
     os.system("cz bump --no-verify")
     dct = toml.load("pyproject.toml")
     version = dct["tool"]["poetry"]["version"]

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""charts module
+"""multimedia module
 """
 
 from .mediabindableinterface import MediaBindableInterface

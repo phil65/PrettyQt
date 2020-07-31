@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-"""
 
 import re
 from typing import Callable, Dict, Iterator, List, Optional, Tuple, Union
