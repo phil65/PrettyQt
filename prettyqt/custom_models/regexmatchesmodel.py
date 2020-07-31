@@ -63,7 +63,7 @@ if __name__ == "__main__":
     matches = list(compiled.finditer(teststring))
     model = RegexMatchesModel(matches)
 
-    view.setModel(model)
+    view.set_model(model)
     dlg = widgets.Dialog(layout="horizontal")
     dlg.add_widget(view)
     dlg.show_blocking()

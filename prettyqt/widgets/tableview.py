@@ -60,5 +60,6 @@ class TableView(QtWidgets.QTableView):
 if __name__ == "__main__":
     app = widgets.app()
     widget = TableView()
+    widget.set_model(widgets.FileSystemModel())
     widget.show()
     app.exec_()

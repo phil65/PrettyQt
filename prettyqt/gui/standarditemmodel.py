@@ -68,7 +68,7 @@ if __name__ == "__main__":
     model.add("test")
     app = widgets.app()
     w = widgets.ListView()
-    w.setModel(model)
+    w.set_model(model)
     model += gui.StandardItem("Item")
     for item in model:
         pass
