@@ -26,11 +26,13 @@ from .waitingspinner import WaitingSpinner
 from .markdownwidget import MarkdownWindow
 from .imageviewer import ImageViewer
 from .popupinfo import PopupInfo
-from .buttondelegate import ButtonDelegate
-from .radiodelegate import RadioDelegate
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
 from .regexeditor.editor import RegexEditorWidget
+
+# Deprecated: should be imported from custom_delegates instead
+from prettyqt.custom_delegates.buttondelegate import ButtonDelegate
+from prettyqt.custom_delegates.radiodelegate import RadioDelegate
 
 __all__ = [
     "Image",

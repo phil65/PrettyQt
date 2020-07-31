@@ -21,26 +21,6 @@ def test_booldicttoolbutton(qtbot):
     assert w.as_dict() == dict(a=True, b=False)
 
 
-def test_buttondelegate(qtbot):
-    widget = custom_widgets.ButtonDelegate(parent=None)
-    widget.setEditorData(widgets.Widget(), None)
-    widget.createEditor(None, None, QtCore.QModelIndex())
-    widget.currentIndexChanged()
-
-
-def test_radiodelegate(qtbot):
-    widget = widgets.TableWidget()
-    widget.setColumnCount(3)
-    widget.insertRow(0)
-    widget.setHorizontalHeaderLabels(["LIB", "CELL", "area"])
-    item = widgets.TableWidgetItem("test")
-    widget.setItem(0, 0, item)
-    widget.setItem(1, 1, widgets.TableWidgetItem("test"))
-    delegate = custom_widgets.RadioDelegate(widget, ["a", "b"])
-    widget.setItemDelegateForColumn(0, delegate)
-    widget.openPersistentEditor(item)
-
-
 def test_colorchooserbutton(qtbot):
     btn = custom_widgets.ColorChooserButton()
     btn.set_color("green")

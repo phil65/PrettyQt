@@ -15,6 +15,7 @@ nav:
         - custom_models: api/custom_models.md
         - custom_widgets: api/custom_widgets.md
         - custom_validators: api/custom_validators.md
+        - custom_delegates: api/custom_delegates.md
         # - utils: api/utils.md
         # - constants: api/constants.md
     - Contributing: contributing.md
