@@ -4,9 +4,23 @@
 
 from typing import Callable, Optional, Union, Dict
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets, QtCore, QtGui
 
 from prettyqt import gui, widgets
+
+
+def create_dot_pixmap(color="red", size=16):
+    col = gui.Color(color)
+    px = gui.Pixmap(size, size)
+    px.fill(QtCore.Qt.transparent)
+    px_size = px.rect().adjusted(1, 1, -1, -1)
+    painter = gui.Painter(px)
+    painter.setRenderHint(QtGui.QPainter.Antialiasing)
+    painter.setBrush(col)
+    painter.setPen(gui.Pen(gui.Color(15, 15, 15), 1.25))
+    painter.drawEllipse(px_size)
+    painter.end()
+    return px
 
 
 class SidebarWidget(widgets.MainWindow):
@@ -21,6 +35,7 @@ class SidebarWidget(widgets.MainWindow):
     ):
         super().__init__(parent=parent)
         self.button_map: Dict[QtWidgets.QWidget, QtWidgets.QToolButton] = dict()
+        self.icon_map: Dict[QtWidgets.QWidget, gui.Icon] = dict()
         self.sidebar = widgets.ToolBar()
         self.sidebar.set_id("SidebarWidget")
         self.sidebar.set_title("Sidebar")
@@ -37,7 +52,7 @@ class SidebarWidget(widgets.MainWindow):
             self.settings_btn.setFixedWidth(self.BUTTON_WIDTH)
             self.settings_btn.setFixedHeight(self.SETTINGS_BUTTON_HEIGHT)
             self.settings_btn.set_style("icon")
-            self.sidebar.orientationChanged.connect(self.on_orientation_change)
+            self.sidebar.orientationChanged.connect(self._on_orientation_change)
             self.sidebar.add_separator()
         self.spacer_action = self.sidebar.add_spacer()
         self.add_toolbar(self.sidebar, "left")
@@ -50,7 +65,7 @@ class SidebarWidget(widgets.MainWindow):
         self.main_layout += self.area
         self.setCentralWidget(w)
 
-    def on_orientation_change(self, orientation: QtCore.Qt.Orientation):
+    def _on_orientation_change(self, orientation: QtCore.Qt.Orientation):
         if orientation == QtCore.Qt.Horizontal:
             self.settings_btn.setFixedWidth(34)
             self.settings_btn.setFixedHeight(34)
@@ -92,24 +107,37 @@ class SidebarWidget(widgets.MainWindow):
         if len(self.area.box) == 1:
             button.setChecked(True)
         self.button_map[item] = button
+        self.icon_map[item] = gui.icon.get_icon(icon)
         if show:
             self.area.box.setCurrentWidget(item)
 
-    def set_tab(self, item: Union[str, int, widgets.Widget]):
+    def set_marker(self, item: Union[str, int, widgets.Widget], color="red"):
+        widget = self._get_widget(item)
+        template = self.icon_map[widget]
+        px = template.pixmap(100, 100)
+        painter = gui.Painter(px)
+        dot = create_dot_pixmap(color)
+        painter.drawPixmap(QtCore.QPoint(0, 0), dot)
+        painter.end()
+        icon = gui.Icon()
+        icon.addPixmap(px)
+        self.button_map[widget].set_icon(icon)
+
+    def _get_widget(self, item: Union[str, int, widgets.Widget]):
         if isinstance(item, int):
             item = self.area.box[item]
         elif isinstance(item, str):
             item = self.find_child(QtWidgets.QWidget, name=item, recursive=False)
         if item not in self.area.box:
             raise ValueError("Layout does not contain the chosen widget")
+        return item
+
+    def set_tab(self, item: Union[str, int, widgets.Widget]):
+        widget = self._get_widget(item)
         current = self.area.box.currentWidget()
         self.button_map[current].setChecked(False)
-        self.area.box.setCurrentWidget(item)
-        self.button_map[item].setChecked(True)
-
-    def show_tab(self, index):
-        widget = self.area.box[index]
         self.area.box.setCurrentWidget(widget)
+        self.button_map[widget].setChecked(True)
 
     def add_spacer(self) -> widgets.Widget:
         return self.sidebar.add_spacer()
@@ -155,6 +183,6 @@ if __name__ == "__main__":
     ex.add_tab(page_1, "Text", "mdi.timer")
     ex.add_tab(page_2, "Color", "mdi.format-color-fill", area="bottom")
     ex.add_tab(page_3, "Help", "mdi.help-circle-outline")
-    # ex.show_tab(0)
+    ex.set_marker(page_3)
     ex.show()
     app.exec_()

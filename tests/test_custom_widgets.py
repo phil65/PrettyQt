@@ -107,6 +107,18 @@ def test_optionalwidget(qtbot):
     assert container.enabled is False
 
 
+def test_sidebarwidget(qtbot):
+    ex = custom_widgets.SidebarWidget(show_settings=True)
+    page_1 = widgets.PlainTextEdit()
+    page_2 = widgets.ColorDialog()
+    page_3 = widgets.FileDialog()
+    ex.add_tab(page_1, "Text", "mdi.timer")
+    ex.add_tab(page_2, "Color", "mdi.format-color-fill", area="bottom")
+    ex.add_tab(page_3, "Help", "mdi.help-circle-outline")
+    ex.set_marker(page_3)
+    ex.set_tab(page_2)
+
+
 def test_singlelinetextedit(qtbot):
     w = custom_widgets.SingleLineTextEdit()
     w.set_text("test")
