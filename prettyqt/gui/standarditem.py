@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from qtpy import QtCore, QtGui
+from qtpy import QtGui
 
 from prettyqt import core, gui
 
@@ -28,11 +28,7 @@ class StandardItem(QtGui.QStandardItem):
 
     def clone(self):
         item = self.__class__()
-        ba = QtCore.QByteArray()
-        ds = QtCore.QDataStream(ba, core.IODevice.WriteOnly)
-        ds << self
-        ds = QtCore.QDataStream(ba)
-        ds >> item
+        core.DataStream.copy_data(self, item)
         assert type(item) == StandardItem
         return item
 

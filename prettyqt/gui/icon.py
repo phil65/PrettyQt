@@ -5,7 +5,7 @@ from typing import Union, Optional, Dict, Tuple
 
 
 import qtawesome as qta
-from qtpy import QtCore, QtGui
+from qtpy import QtGui
 
 from prettyqt import core, gui
 
@@ -52,16 +52,12 @@ class Icon(QtGui.QIcon):
         return not bool(self.isNull())
 
     def __getstate__(self):
-        ba = QtCore.QByteArray()
-        stream = QtCore.QDataStream(ba, QtCore.QIODevice.WriteOnly)
         pixmap = self.pixmap(256, 256)
-        stream << pixmap
-        return ba
+        return core.DataStream.create_bytearray(pixmap)
 
     def __setstate__(self, ba):
-        stream = QtCore.QDataStream(ba, QtCore.QIODevice.ReadOnly)
         px = QtGui.QPixmap()
-        stream >> px
+        core.DataStream.write_bytearray(ba, px)
         super().__init__(px)
 
     @classmethod

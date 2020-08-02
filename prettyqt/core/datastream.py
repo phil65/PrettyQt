@@ -2,6 +2,7 @@
 
 from qtpy import QtCore
 
+from prettyqt import core
 from prettyqt.utils import bidict
 
 
@@ -65,3 +66,20 @@ class DataStream(QtCore.QDataStream):
             floating point precision
         """
         return FLOAT_PRECISION.inv[self.floatingPointPrecision()]
+
+    @classmethod
+    def create_bytearray(cls, data) -> QtCore.QByteArray:
+        ba = QtCore.QByteArray()
+        stream = cls(ba, core.IODevice.WriteOnly)
+        stream << data
+        return ba
+
+    @classmethod
+    def write_bytearray(cls, ba: QtCore.QByteArray, write_to):
+        stream = cls(ba, core.IODevice.ReadOnly)
+        stream >> write_to
+
+    @classmethod
+    def copy_data(cls, source, dest):
+        ba = cls.create_bytearray(source)
+        cls.write_bytearray(ba, dest)
