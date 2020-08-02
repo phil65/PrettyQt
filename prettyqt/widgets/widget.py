@@ -3,7 +3,7 @@
 from contextlib import contextmanager
 import functools
 import operator
-from typing import Dict, Iterator, Callable, Optional, Union, Any
+from typing import Dict, Iterator, Callable, Optional, Union, Any, Generator
 
 from qtpy import QtCore, QtGui, QtWidgets
 import qstylizer.parser
@@ -82,6 +82,21 @@ QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 class Widget(QtWidgets.QWidget):
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}: {self.serialize_fields()}"
+
+    def __pretty__(
+        self, fmt: Callable[[Any], Any], **kwargs: Any
+    ) -> Generator[Any, None, None]:
+        """Provide a human readable representations of objects.
+
+        Used by devtools (https://python-devtools.helpmanual.io/).
+        """
+        yield self.__class__.__name__ + "("
+        yield 1
+        for k, v in self.serialize().items():
+            yield f"{k}={v!r}"
+            yield 0
+        yield -1
+        yield ")"
 
     def serialize_fields(self) -> Dict[str, Any]:
         icon = gui.Icon(self.windowIcon())
