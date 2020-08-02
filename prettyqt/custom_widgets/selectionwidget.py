@@ -56,7 +56,7 @@ class SelectionWidget(widgets.GroupBox):
         label = widgets.Label(text)
         label.setToolTip(text)
         icon = gui.icon.get_icon("mdi.help-circle-outline")
-        pixmap = icon.pixmap(core.Size(20, 20))
+        pixmap = icon.pixmap(20, 20)
         label.setPixmap(pixmap)
         self.box += label
 

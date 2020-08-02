@@ -54,7 +54,7 @@ class Icon(QtGui.QIcon):
     def __getstate__(self):
         ba = QtCore.QByteArray()
         stream = QtCore.QDataStream(ba, QtCore.QIODevice.WriteOnly)
-        pixmap = self.pixmap(QtCore.QSize(256, 256))
+        pixmap = self.pixmap(256, 256)
         stream << pixmap
         return ba
 

@@ -2,7 +2,7 @@
 
 from typing import Optional
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
 from prettyqt import gui, widgets
 
@@ -25,7 +25,7 @@ class IconLabel(widgets.Widget):
         self.icon = widgets.Label()
         self.icon.setToolTip(tooltip)
         self.icon.set_size_policy(horizontal="minimum")
-        pixmap = icon.pixmap(QtCore.QSize(20, 20))
+        pixmap = icon.pixmap(20, 20)
         self.icon.setPixmap(pixmap)
         self.box += self.label
         self.box += self.icon
