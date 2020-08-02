@@ -1,3 +1,10 @@
+## v0.110.1 (2020-08-03)
+
+### Fix
+
+- **LogTextEdit**: improve exception handling
+- **SidebarWidget**: some fixes related to set_marker
+
 ## v0.110.0 (2020-08-02)
 
 ### Refactor
