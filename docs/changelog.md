@@ -1,3 +1,16 @@
+## v0.109.0 (2020-08-02)
+
+### Feat
+
+- **widget**: add __pretty__ method for devtools
+- **GridLayout**: allow adding tuples/lists
+
+### Refactor
+
+- rework widget pickling
+- move CheckboxDelegate to custom_delegates
+- pickle stuff for undocommand
+
 ## v0.108.0 (2020-07-31)
 
 ### Feat
