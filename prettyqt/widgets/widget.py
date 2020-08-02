@@ -109,6 +109,7 @@ class Widget(QtWidgets.QWidget):
             window_title=self.windowTitle(),
             enabled=self.isEnabled(),
             visible=self.isVisible(),
+            stylesheet=self.styleSheet(),
             icon=icon if not icon.isNull() else None,
             modality=self.get_modality(),
             whats_this=self.whatsThis(),
