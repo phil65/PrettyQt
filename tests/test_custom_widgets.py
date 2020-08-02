@@ -200,6 +200,7 @@ def test_labeledslider(qtbot):
 def test_logtextedit(qtbot):
     textedit = custom_widgets.LogTextEdit()
     textedit.show()
+    logger = logging.getLogger()
     fmt = logging.Formatter(
         "%(asctime)s  %(levelname)i  %(message)s %(filename)s "
         "%(funcName)s %(module)s %(created)f %(lineno)d %(msecs)d "
@@ -207,8 +208,7 @@ def test_logtextedit(qtbot):
         "%(relativeCreated)s %(name)s %(pathname)s"
     )
     textedit.set_formatter(fmt)
-    logger = logging.getLogger()
-    logger.info("Test")
+    logger.warning("Test")
     try:
         raise Exception
     except Exception as e:

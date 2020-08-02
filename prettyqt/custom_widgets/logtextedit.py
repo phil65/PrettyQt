@@ -197,6 +197,7 @@ class LevelName(Highlighter):
 class LogTextEdit(widgets.PlainTextEdit):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.rules = []
         self.allow_wheel_zoom()
         self.set_font("Consolas")
         self.append_text(f"Python version: {sys.version}")
@@ -213,10 +214,10 @@ class LogTextEdit(widgets.PlainTextEdit):
 
     def set_formatter(self, formatter: logging.Formatter):
         self.formatter = formatter
-        logger.info("Setting formatter template to %s", self.formatter._fmt)
-        self.handler.setFormatter(self.formatter)
         rules = [klass(self.formatter) for klass in Highlighter.__subclasses__()]
         self.rules = [r for r in rules if r.is_included]
+        logger.info("Setting LogTextEdit formatter template to %s", self.formatter._fmt)
+        self.handler.setFormatter(self.formatter)
 
     def append_record(self, record: logging.LogRecord):
         start_of_line = len(self.text())
