@@ -2,7 +2,7 @@
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui
+from prettyqt import gui, core
 from prettyqt.utils import bidict
 
 
@@ -17,7 +17,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
     def __repr__(self):
         return f"ListWidgetItem({self.icon()}, {self.text()!r})"
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             text=self.text(),
             tooltip=self.toolTip(),
@@ -27,14 +27,12 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
             data=self.data(QtCore.Qt.UserRole),
         )
 
-    def __setstate__(self, state):
+    def __getstate__(self):
+        return core.DataStream.create_bytearray(self)
+
+    def __setstate__(self, ba):
         self.__init__()
-        self.setText(state.get("text", ""))
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
-        self.setData(QtCore.Qt.UserRole, state["data"])
-        self.set_icon(state["icon"])
-        self.set_checkstate(state["checkstate"])
+        core.DataStream.write_bytearray(ba, self)
 
     def set_icon(self, icon: gui.icon.IconType):
         """Set the icon for the action.
@@ -69,3 +67,8 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
             checkstate
         """
         return STATES.inv[self.checkState()]
+
+
+if __name__ == "__main__":
+    item = ListWidgetItem()
+    item.setData(1000, "test")

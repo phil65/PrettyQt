@@ -9,7 +9,7 @@ class StandardItem(QtGui.QStandardItem):
     def __repr__(self):
         return f"StandardItem({self.icon()}, {self.text()!r})"
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             text=self.text(),
             tooltip=self.toolTip(),
@@ -18,13 +18,12 @@ class StandardItem(QtGui.QStandardItem):
             data=self.data(),
         )
 
-    def __setstate__(self, state):
+    def __getstate__(self):
+        return core.DataStream.create_bytearray(self)
+
+    def __setstate__(self, ba):
         self.__init__()
-        self.setText(state.get("text", ""))
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
-        self.setData(state["data"])
-        self.set_icon(state["icon"])
+        core.DataStream.write_bytearray(ba, self)
 
     def clone(self):
         item = self.__class__()
@@ -40,3 +39,8 @@ class StandardItem(QtGui.QStandardItem):
         """
         icon = gui.icon.get_icon(icon)
         self.setIcon(icon)
+
+
+if __name__ == "__main__":
+    item = StandardItem()
+    item.setData("test", 1000)

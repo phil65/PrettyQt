@@ -2,7 +2,7 @@
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui
+from prettyqt import gui, core
 from prettyqt.utils import bidict
 
 
@@ -17,7 +17,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
     def __repr__(self):
         return "TreeWidgetItem()"
 
-    def __getstate__(self):
+    def serialize_fields(self):
         icon = self.icon(0)
         return dict(
             text=self.text(0),
@@ -28,14 +28,12 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
             data=self.data(0, QtCore.Qt.UserRole),
         )
 
-    def __setstate__(self, state):
+    def __getstate__(self):
+        return core.DataStream.create_bytearray(self)
+
+    def __setstate__(self, ba):
         self.__init__()
-        self.setText(0, state.get("text", ""))
-        self.setToolTip(0, state.get("tooltip", ""))
-        self.setStatusTip(0, state.get("statustip", ""))
-        self.setData(0, QtCore.Qt.UserRole, state["data"])
-        self.set_icon(state["icon"])
-        self.set_checkstate(state["checkstate"])
+        core.DataStream.write_bytearray(ba, self)
 
     def set_icon(self, icon: gui.icon.IconType):
         """Set the icon for the action.
@@ -70,3 +68,8 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
             checkstate
         """
         return STATES.inv[self.checkState(0)]
+
+
+if __name__ == "__main__":
+    item = TreeWidgetItem()
+    item.setData(0, 1000, "test")
