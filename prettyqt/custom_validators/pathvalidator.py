@@ -6,12 +6,6 @@ from prettyqt import gui
 
 
 class PathValidator(gui.Validator):
-    def __getstate__(self):
-        return dict()
-
-    def __setstate__(self, state):
-        self.__init__()
-
     def validate(self, text: str, pos: int = 0):
         if pathlib.Path(text).exists():
             return (self.Acceptable, text, pos)

@@ -29,6 +29,16 @@ def test_pickle(name, cls):
         widget = pickle.load(jar)
 
 
+@pytest.mark.parametrize("name, cls", clsmembers)
+def test_repr(name, cls):
+    try:
+        widget = cls()
+    except Exception:
+        return None
+    else:
+        repr(widget)
+
+
 def test_action(qtbot):
     action = widgets.Action()
     action.set_tooltip("test")
@@ -83,7 +93,6 @@ def test_boxlayout(qtbot):
         layout.set_size_mode("bla")
     layout.set_margin(0)
     assert len(layout) == 2
-    repr(layout)
     layout.add_stretch(1)
     layout.add_spacing(1)
 
@@ -113,7 +122,6 @@ def test_checkbox(qtbot):
     assert bool(widget) is False
     widget.set_value(True)
     assert widget.get_value() is True
-    repr(widget)
     with pytest.raises(ValueError):
         widget.set_checkstate("test")
     widget.is_on = False
@@ -158,7 +166,6 @@ def test_commandlinkbutton(qtbot):
     widget.set_icon("mdi.timer")
     with pytest.raises(ValueError):
         widget.set_style_icon("bla")
-    repr(widget)
 
 
 def test_completer(qtbot):
@@ -185,7 +192,6 @@ def test_dateedit(qtbot):
     dt = datetime.date(2000, 11, 11)
     widget.set_value(dt)
     assert widget.get_value() == dt
-    repr(widget)
 
 
 def test_datetimeedit(qtbot):
@@ -196,7 +202,6 @@ def test_datetimeedit(qtbot):
     widget.set_value(dt)
     widget.set_format("dd.MM.yyyy")
     assert widget.get_value() == dt
-    repr(widget)
 
 
 def test_desktopwidget(qtbot):
@@ -249,7 +254,6 @@ def test_doublespinbox(qtbot):
     widget = widgets.DoubleSpinBox(default_value=5)
     widget.set_disabled()
     widget.set_enabled()
-    repr(widget)
 
 
 def test_filedialog(qtbot):
@@ -305,7 +309,6 @@ def test_formlayout(qtbot):
     widget += ("added with +=", widgets.RadioButton("tuple"))
     widget = widgets.FormLayout.build_from_dict({"from": "dict"})
     assert len(widget) == 2
-    repr(widget)
 
 
 def test_frame(qtbot):
@@ -327,7 +330,6 @@ def test_gridlayout(qtbot):
     layout.set_size_mode("maximum")
     layout.set_alignment("left")
     assert len(layout) == len(list(layout)) == 2
-    repr(layout)
     layout += widgets.RadioButton()
 
 
@@ -339,7 +341,6 @@ def test_groupbox(qtbot):
     ly += widgets.RadioButton("+=")
     widget.set_alignment("left")
     widget.set_enabled(False)
-    repr(widget)
 
 
 def test_headerview(qtbot):
@@ -377,7 +378,6 @@ def test_keysequenceedit(qtbot):
     edit.set_value("Ctrl+A")
     assert edit.get_value() == "Ctrl+A"
     assert edit.is_valid()
-    repr(edit)
 
 
 def test_label(qtbot):
@@ -405,7 +405,6 @@ def test_label(qtbot):
     with pytest.raises(ValueError):
         label.set_text_interaction("test")
     # assert label.get_text_interaction() == "by_mouse"
-    repr(label)
 
 
 def test_lineedit(qtbot):
@@ -419,7 +418,6 @@ def test_lineedit(qtbot):
         widget.set_echo_mode("test")
     assert widget.get_echo_mode() == "password"
     widget.set_input_mask("X")
-    repr(widget)
     widget.set_range(0, 10)
     widget.set_value("5")
     widget += "append"
@@ -456,12 +454,10 @@ def test_listwidget(qtbot):
         pass
     item = widgets.ListWidgetItem()
     widget += item
-    repr(widget)
 
 
 def test_listwidgetitem(qtbot):
     item = widgets.ListWidgetItem()
-    repr(item)
     item.set_icon("mdi.timer")
     item.set_checkstate("unchecked")
     with pytest.raises(ValueError):
@@ -645,7 +641,6 @@ def test_radiobutton(qtbot):
     widget.set_enabled()
     widget.set_disabled()
     assert bool(widget) is False
-    repr(widget)
     widget.set_value(True)
     assert widget.get_value() is True
     # widget.is_on = False
@@ -659,7 +654,6 @@ def test_scrollarea(qtbot):
 
 def test_sizepolicy(qtbot):
     pol = widgets.SizePolicy()
-    repr(pol)
     pol.set_control_type("toolbutton")
     assert pol.get_control_type() == "toolbutton"
 
@@ -722,7 +716,6 @@ def test_spinbox(qtbot):
         widget.set_step_type("test")
     assert widget.is_valid()
     assert widget.get_value() == 10
-    repr(widget)
 
 
 def test_splashscreen(qtbot):
@@ -1007,7 +1000,6 @@ def test_treewidget(qtbot):
 
 def test_treewidgetitem(qtbot):
     item = widgets.TreeWidgetItem()
-    repr(item)
     item.set_icon("mdi.timer")
     item.set_checkstate("unchecked")
     with pytest.raises(ValueError):

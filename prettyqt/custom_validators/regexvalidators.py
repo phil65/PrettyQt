@@ -20,12 +20,8 @@ class BaseRegexValidator(gui.Validator):
     def __repr__(self):
         return f"BaseRegexValidator({self.get_regex()!r})"
 
-    def __getstate__(self):
-        return dict(regexp=self.regex)
-
-    def __setstate__(self, state):
-        self.__init__()
-        self.set_regex(state["regexp"])
+    def __reduce__(self):
+        return (self.__class__, (self.get_regex(),))
 
     def set_regex(self, regex: str):
         self.regex = re.compile(regex)
@@ -58,6 +54,9 @@ class IntListValidator(BaseRegexValidator):
         else:
             self.set_regex(r"^[0-9][0-9\,]+[0-9]$")
 
+    def __reduce__(self):
+        return (self.__class__, (self.allow_single,))
+
     def __repr__(self):
         return f"IntListValidator(allow_single={self.allow_single})"
 
@@ -72,6 +71,9 @@ class FloatListValidator(BaseRegexValidator):
             self.set_regex(
                 r"^(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)" r"(\s*,\s*-?\d+(\.\d+)?)*$"
             )
+
+    def __reduce__(self):
+        return (self.__class__, (self.allow_single,))
 
     def __repr__(self):
         return f"FloatListValidator(allow_single={self.allow_single})"
