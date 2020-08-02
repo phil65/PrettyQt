@@ -37,7 +37,7 @@ class Layout(QtWidgets.QLayout):
             widget = item.widget()
             if widget is None:
                 widget = item.layout()
-        else:
+        elif isinstance(index, str):
             widget = self.find_child(typ=QtCore.QObject, name=index)
         return widget
 
