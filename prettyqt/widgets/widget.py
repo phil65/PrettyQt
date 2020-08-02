@@ -83,6 +83,14 @@ class Widget(QtWidgets.QWidget):
     def __repr__(self) -> str:
         return f"{self.__class__.__name__}: {self.serialize_fields()}"
 
+    def __setstate__(self, state: Dict[str, Any]) -> None:
+        super().__init__()
+        self.set_layout(state["layout"])
+        self.setSizePolicy(state["size_policy"])
+        self.setAccessibleName(state["accessible_name"])
+        self.setToolTip(state.get("tooltip", ""))
+        self.setStatusTip(state.get("statustip", ""))
+
     def __pretty__(
         self, fmt: Callable[[Any], Any], **kwargs: Any
     ) -> Generator[Any, None, None]:
@@ -93,7 +101,11 @@ class Widget(QtWidgets.QWidget):
         yield self.__class__.__name__ + "("
         yield 1
         for k, v in self.serialize().items():
-            yield f"{k}={v!r}"
+            yield f"{k}="
+            if hasattr(v, "__pretty__"):
+                yield from v.__pretty__(fmt, **kwargs)
+            else:
+                yield f"{v!r}"
             yield 0
         yield -1
         yield ")"
@@ -117,14 +129,6 @@ class Widget(QtWidgets.QWidget):
             focus_policy=self.get_focus_policy(),
             statustip=self.statusTip(),
         )
-
-    def __setstate__(self, state: Dict[str, Any]) -> None:
-        super().__init__()
-        self.set_layout(state["layout"])
-        self.setSizePolicy(state["size_policy"])
-        self.setAccessibleName(state["accessible_name"])
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
 
     def resize(self, *size) -> None:
         if isinstance(size[0], tuple):
