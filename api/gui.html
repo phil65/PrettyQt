@@ -1865,26 +1865,18 @@ clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>29
+<pre><span></span>28
+29
 30
 31
-32
-33
-34
-35
-36
-37</pre>
+32</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
-    <span class="n">ba</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">()</span>
-    <span class="n">ds</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QDataStream</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">IODevice</span><span class="o">.</span><span class="n">WriteOnly</span><span class="p">)</span>
-    <span class="n">ds</span> <span class="o">&lt;&lt;</span> <span class="bp">self</span>
-    <span class="n">ds</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QDataStream</span><span class="p">(</span><span class="n">ba</span><span class="p">)</span>
-    <span class="n">ds</span> <span class="o">&gt;&gt;</span> <span class="n">item</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">copy_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="n">StandardItem</span>
     <span class="k">return</span> <span class="n">item</span>
 </code></pre>
@@ -1929,14 +1921,14 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>39
+<pre><span></span>34
+35
+36
+37
+38
+39
 40
-41
-42
-43
-44
-45
-46</pre>
+41</pre>
 </div>
 </td>
 <td class="code">

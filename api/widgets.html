@@ -1389,6 +1389,11 @@
 <nav aria-label="SizePolicy" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.sizepolicy.SizePolicy.__pretty__">
+    __pretty__()
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.sizepolicy.SizePolicy.get_control_type">
     get_control_type()
   </a>
@@ -3162,6 +3167,11 @@
   </a>
 <nav aria-label="SizePolicy" class="md-nav">
 <ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.sizepolicy.SizePolicy.__pretty__">
+    __pretty__()
+  </a>
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.sizepolicy.SizePolicy.get_control_type">
     get_control_type()
@@ -10255,15 +10265,15 @@ get_size_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>80
-81
-82
-83
-84
-85
-86
-87
-88</pre>
+<pre><span></span>87
+88
+89
+90
+91
+92
+93
+94
+95</pre>
 </div>
 </td>
 <td class="code">
@@ -10346,14 +10356,7 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
+<pre><span></span> 97
  98
  99
 100
@@ -10365,7 +10368,14 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 106
 107
 108
-109</pre>
+109
+110
+111
+112
+113
+114
+115
+116</pre>
 </div>
 </td>
 <td class="code">
@@ -10450,20 +10460,20 @@ set_size_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>65
-66
-67
-68
-69
-70
-71
-72
+<pre><span></span>72
 73
 74
 75
 76
 77
-78</pre>
+78
+79
+80
+81
+82
+83
+84
+85</pre>
 </div>
 </td>
 <td class="code">
@@ -10970,15 +10980,15 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>63
+<pre><span></span>61
+62
+63
 64
 65
 66
 67
 68
-69
-70
-71</pre>
+69</pre>
 </div>
 </td>
 <td class="code">
@@ -11052,7 +11062,9 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>48
+<pre><span></span>46
+47
+48
 49
 50
 51
@@ -11063,9 +11075,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 56
 57
 58
-59
-60
-61</pre>
+59</pre>
 </div>
 </td>
 <td class="code">
@@ -11126,14 +11136,14 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>39
+<pre><span></span>37
+38
+39
 40
 41
 42
 43
-44
-45
-46</pre>
+44</pre>
 </div>
 </td>
 <td class="code">
@@ -13424,6 +13434,63 @@ set_text_direction<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-contents">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.sizepolicy.SizePolicy.__pretty__">
+<code class="highlight language-python">
+__pretty__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> </code>
+<span class="doc doc-properties">
+<small class="doc doc-property doc-property-special"><code>special</code></small>
+</span>
+</h4>
+<div class="doc doc-contents">
+<p>Provide a human readable representations of objects.</p>
+<p>Used by devtools (https://python-devtools.helpmanual.io/).</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/sizepolicy.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">__pretty__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+    <span class="sd">"""Provide a human readable representations of objects.</span>
+
+<span class="sd">    Used by devtools (https://python-devtools.helpmanual.io/).</span>
+<span class="sd">    """</span>
+    <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">"("</span>
+    <span class="k">yield</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">v</span><span class="si">!r}</span><span class="s2">"</span>
+        <span class="k">yield</span> <span class="mi">0</span>
+    <span class="k">yield</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="k">yield</span> <span class="s2">")"</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.sizepolicy.SizePolicy.get_control_type">
 <code class="highlight language-python">
 get_control_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
@@ -13456,17 +13523,17 @@ get_control_type<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117</pre>
+<pre><span></span>122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132</pre>
 </div>
 </td>
 <td class="code">
@@ -13522,16 +13589,16 @@ get_horizontal_policy<span class="p">(</span><span class="bp">self</span><span c
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>63
-64
-65
-66
-67
-68
-69
-70
-71
-72</pre>
+<pre><span></span>78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
 </div>
 </td>
 <td class="code">
@@ -13586,16 +13653,16 @@ get_vertical_policy<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>85
-86
-87
-88
-89
-90
-91
-92
-93
-94</pre>
+<pre><span></span>100
+101
+102
+103
+104
+105
+106
+107
+108
+109</pre>
 </div>
 </td>
 <td class="code">
@@ -13655,17 +13722,17 @@ set_control_type<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>119
-120
-121
-122
-123
-124
-125
-126
-127
-128
-129</pre>
+<pre><span></span>134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144</pre>
 </div>
 </td>
 <td class="code">
@@ -13725,16 +13792,16 @@ set_horizontal_policy<span class="p">(</span><span class="bp">self</span><span c
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+<pre><span></span>89
+90
+91
+92
+93
+94
+95
+96
+97
+98</pre>
 </div>
 </td>
 <td class="code">
@@ -13793,16 +13860,16 @@ set_vertical_policy<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 96
- 97
- 98
- 99
-100
-101
-102
-103
-104
-105</pre>
+<pre><span></span>111
+112
+113
+114
+115
+116
+117
+118
+119
+120</pre>
 </div>
 </td>
 <td class="code">
@@ -16076,15 +16143,15 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>64
+<pre><span></span>62
+63
+64
 65
 66
 67
 68
 69
-70
-71
-72</pre>
+70</pre>
 </div>
 </td>
 <td class="code">
@@ -16158,7 +16225,9 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>49
+<pre><span></span>47
+48
+49
 50
 51
 52
@@ -16169,9 +16238,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 57
 58
 59
-60
-61
-62</pre>
+60</pre>
 </div>
 </td>
 <td class="code">
@@ -16232,14 +16299,14 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>40
+<pre><span></span>38
+39
+40
 41
 42
 43
 44
-45
-46
-47</pre>
+45</pre>
 </div>
 </td>
 <td class="code">
@@ -16375,20 +16442,24 @@ __pretty__<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99</pre>
+<pre><span></span> 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111</pre>
 </div>
 </td>
 <td class="code">
@@ -16403,7 +16474,11 @@ __pretty__<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">"("</span>
     <span class="k">yield</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">serialize</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">yield</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">=</span><span class="si">{</span><span class="n">v</span><span class="si">!r}</span><span class="s2">"</span>
+        <span class="k">yield</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">="</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s2">"__pretty__"</span><span class="p">):</span>
+            <span class="k">yield from</span> <span class="n">v</span><span class="o">.</span><span class="n">__pretty__</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">v</span><span class="si">!r}</span><span class="s2">"</span>
         <span class="k">yield</span> <span class="mi">0</span>
     <span class="k">yield</span> <span class="o">-</span><span class="mi">1</span>
     <span class="k">yield</span> <span class="s2">")"</span>
@@ -16446,15 +16521,15 @@ get_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>342
-343
-344
-345
-346
-347
+<pre><span></span>347
 348
 349
-350</pre>
+350
+351
+352
+353
+354
+355</pre>
 </div>
 </td>
 <td class="code">
@@ -16508,16 +16583,16 @@ str</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>261
-262
-263
-264
-265
-266
+<pre><span></span>266
 267
 268
 269
-270</pre>
+270
+271
+272
+273
+274
+275</pre>
 </div>
 </td>
 <td class="code">
@@ -16554,11 +16629,11 @@ resize(self, int, int)</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>128
-129
-130
-131
-132</pre>
+<pre><span></span>133
+134
+135
+136
+137</pre>
 </div>
 </td>
 <td class="code">
@@ -16628,12 +16703,7 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>327
-328
-329
-330
-331
-332
+<pre><span></span>332
 333
 334
 335
@@ -16641,7 +16711,12 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 337
 338
 339
-340</pre>
+340
+341
+342
+343
+344
+345</pre>
 </div>
 </td>
 <td class="code">
@@ -16702,14 +16777,14 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>134
-135
-136
-137
-138
-139
+<pre><span></span>139
 140
-141</pre>
+141
+142
+143
+144
+145
+146</pre>
 </div>
 </td>
 <td class="code">
@@ -16782,12 +16857,7 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>246
-247
-248
-249
-250
-251
+<pre><span></span>251
 252
 253
 254
@@ -16795,7 +16865,12 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 256
 257
 258
-259</pre>
+259
+260
+261
+262
+263
+264</pre>
 </div>
 </td>
 <td class="code">
@@ -16866,12 +16941,7 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>272
-273
-274
-275
-276
-277
+<pre><span></span>277
 278
 279
 280
@@ -16883,7 +16953,12 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 286
 287
 288
-289</pre>
+289
+290
+291
+292
+293
+294</pre>
 </div>
 </td>
 <td class="code">
