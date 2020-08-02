@@ -111,6 +111,8 @@ class SidebarWidget(widgets.MainWindow):
 
     def set_marker(self, item: Union[str, int, widgets.Widget], color="red"):
         widget = self._get_widget(item)
+        if widget == self._get_current_widget():
+            return None
         template = self.icon_map[widget]
         px = template.pixmap(100, 100)
         painter = gui.Painter(px)
@@ -125,10 +127,15 @@ class SidebarWidget(widgets.MainWindow):
         if isinstance(item, int):
             item = self.area.box[item]
         elif isinstance(item, str):
-            item = self.find_child(QtWidgets.QWidget, name=item, recursive=False)
+            item = self.area.find_child(QtWidgets.QWidget, name=item, recursive=False)
         if item not in self.area.box:
             raise ValueError("Layout does not contain the chosen widget")
         return item
+
+    def _get_current_widget(self) -> QtWidgets.QWidget:
+        for k, v in self.button_map.items():
+            if v.isChecked():
+                return k
 
     def set_tab(self, item: Union[str, int, widgets.Widget]):
         widget = self._get_widget(item)
