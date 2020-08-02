@@ -50,7 +50,11 @@ class GridLayout(QtWidgets.QGridLayout):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
     def __add__(self, other):
-        self[self.rowCount(), 0 : self.columnCount() - 1] = other
+        if isinstance(other, (tuple, list)):
+            for i, control in enumerate(other):
+                self[self.rowCount(), i] = other
+        else:
+            self[self.rowCount(), 0 : self.columnCount() - 1] = other
         return self
 
     def add(self, item, rowstart, colstart, rowspan=1, colspan=1):
