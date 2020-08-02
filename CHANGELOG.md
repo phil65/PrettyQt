@@ -1,3 +1,16 @@
+## v0.110.0 (2020-08-02)
+
+### Refactor
+
+- improve serialization for listitems
+- Validator pickle work
+
+### Feat
+
+- **Image**: allow pickling
+- **DataStream**: add create_bytearray / write_bytearray / copy_data methods
+- **core**: add DataStream class
+
 ## v0.109.0 (2020-08-02)
 
 ### Feat
