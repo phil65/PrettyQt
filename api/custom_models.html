@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/custom_models.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.0" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.1" name="generator"/>
 <title>custom_models - PrettyQt</title>
-<link href="../assets/stylesheets/main.b5d04df8.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.5d00201e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -440,8 +440,8 @@
 <h2 class="hidden-toc" href="#prettyqt.custom_models" id="prettyqt.custom_models" style="visibility: hidden; width: 0; height: 0;">
 </h2>
 <div class="doc doc-contents first">
-<p>custom_models module</p>
-<p>contains custom models</p>
+<p>Custom_models module.</p>
+<p>Contains custom models</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_models.regexmatchesmodel">
@@ -468,8 +468,8 @@ columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>22
-23</pre>
+<pre><span></span>20
+21</pre>
 </div>
 </td>
 <td class="code">
@@ -497,7 +497,9 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>30
+<pre><span></span>28
+29
+30
 31
 32
 33
@@ -509,9 +511,7 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 39
 40
 41
-42
-43
-44</pre>
+42</pre>
 </div>
 </td>
 <td class="code">
@@ -552,10 +552,10 @@ headerData<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>25
-26
-27
-28</pre>
+<pre><span></span>23
+24
+25
+26</pre>
 </div>
 </td>
 <td class="code">
@@ -578,26 +578,22 @@ headerData<span class="p">(</span><span class="bp">self</span><span class="p">,<
 rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>required override for AbstractitemModels</p>
+<p>Required override for AbstractitemModels.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>46
-47
-48
-49
-50</pre>
+<pre><span></span>44
+45
+46</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    required override for AbstractitemModels</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Required override for AbstractitemModels."""</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matches</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -628,7 +624,7 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.columnCount">
 <code class="highlight language-python">
-columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fde389f2a50</span><span class="o">&gt;</span><span class="p">)</span> </code>
+columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f8c8eeb9b50</span><span class="o">&gt;</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
 <p>columnCount(self, parent: QModelIndex = QModelIndex()) -&gt; int</p>
@@ -836,7 +832,7 @@ parent(self) -&gt; QObject</p>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.rowCount">
 <code class="highlight language-python">
-rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fde389f29d0</span><span class="o">&gt;</span><span class="p">)</span> </code>
+rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f8c8eeb9ad0</span><span class="o">&gt;</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
 <p>rowCount(self, parent: QModelIndex = QModelIndex()) -&gt; int</p>
@@ -954,14 +950,14 @@ setSourceModel<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
-<script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.592d4e23.min.js"></script>
+<script src="../assets/javascripts/bundle.073197b2.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../assets/javascripts/worker/search.01088dc6.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

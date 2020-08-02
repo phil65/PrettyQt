@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/multimedia.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.0" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.1" name="generator"/>
 <title>multimedia - PrettyQt</title>
-<link href="../assets/stylesheets/main.b5d04df8.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.5d00201e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -406,7 +406,7 @@
 <h2 class="hidden-toc" href="#prettyqt.multimedia" id="prettyqt.multimedia" style="visibility: hidden; width: 0; height: 0;">
 </h2>
 <div class="doc doc-contents first">
-<p>charts module</p>
+<p>Multimedia module.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.multimedia.audioencodersettings">
@@ -448,7 +448,7 @@
 get_media_status<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>returns current media status</p>
+<p>Return current media status.</p>
 <p>Possible values: "unknown", "no_media", "loading", "loaded", "stalled",
                  "buffering", "buffered", "end", "invalid"</p>
 <p><strong>Returns:</strong></p>
@@ -474,22 +474,22 @@ get_media_status<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>52
+<pre><span></span>50
+51
+52
 53
 54
 55
 56
 57
 58
-59
-60
-61</pre>
+59</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_media_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""returns current media status</span>
+    <span class="sd">"""Return current media status.</span>
 
 <span class="sd">    Possible values: "unknown", "no_media", "loading", "loaded", "stalled",</span>
 <span class="sd">                     "buffering", "buffered", "end", "invalid"</span>
@@ -512,7 +512,7 @@ get_media_status<span class="p">(</span><span class="bp">self</span><span class=
 get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>returns current state</p>
+<p>Return current state.</p>
 <p>Possible values: "stopped", "playing", "paused"</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -537,21 +537,21 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>42
+<pre><span></span>40
+41
+42
 43
 44
 45
 46
 47
-48
-49
-50</pre>
+48</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""returns current state</span>
+    <span class="sd">"""Return current state.</span>
 
 <span class="sd">    Possible values: "stopped", "playing", "paused"</span>
 
@@ -591,7 +591,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 get_playback_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>returns current playback mode</p>
+<p>Return current playback mode.</p>
 <p>Possible values: "item_once", "item_in_loop", "sequential", "loop", "random"</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -616,21 +616,21 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>70
+<pre><span></span>68
+69
+70
 71
 72
 73
 74
 75
-76
-77
-78</pre>
+76</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""returns current playback mode</span>
+    <span class="sd">"""Return current playback mode.</span>
 
 <span class="sd">    Possible values: "item_once", "item_in_loop", "sequential", "loop", "random"</span>
 
@@ -652,7 +652,7 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 set_playback_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set playback mode for given item view</p>
+<p>Set playback mode for given item view.</p>
 <p>Allowed values are "item_once", "item_in_loop", "sequential", "loop", "random"</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -698,7 +698,9 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>55
+<pre><span></span>53
+54
+55
 56
 57
 58
@@ -709,15 +711,13 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 63
 64
 65
-66
-67
-68</pre>
+66</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""set playback mode for given item view</span>
+    <span class="sd">"""Set playback mode for given item view.</span>
 
 <span class="sd">    Allowed values are "item_once", "item_in_loop", "sequential", "loop", "random"</span>
 
@@ -821,14 +821,14 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
-<script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.592d4e23.min.js"></script>
+<script src="../assets/javascripts/bundle.073197b2.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../assets/javascripts/worker/search.01088dc6.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

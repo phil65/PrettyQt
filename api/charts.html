@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/charts.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.0" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.1" name="generator"/>
 <title>charts - PrettyQt</title>
-<link href="../assets/stylesheets/main.b5d04df8.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.5d00201e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -484,7 +484,7 @@
 <h2 class="hidden-toc" href="#prettyqt.charts" id="prettyqt.charts" style="visibility: hidden; width: 0; height: 0;">
 </h2>
 <div class="doc doc-contents first">
-<p>charts module</p>
+<p>Charts module.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.charts.abstractseries">
@@ -497,7 +497,7 @@
 <code>AbstractSeries</code>
 </h3>
 <div class="doc doc-contents">
-<p>QAbstractSeries with some custom properties</p>
+<p>QAbstractSeries with some custom properties.</p>
 <div class="doc doc-children">
 </div>
 </div>
@@ -523,27 +523,23 @@
 apply_nice_numbers<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>adjust both axis to display nice round numbers</p>
+<p>Adjust both axis to display nice round numbers.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/charts/chart.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>64
-65
-66
-67
-68
-69</pre>
+<pre><span></span>60
+61
+62
+63</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">apply_nice_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    adjust both axis to display nice round numbers</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Adjust both axis to display nice round numbers."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">applyNiceNumbers</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">axisY</span><span class="p">()</span><span class="o">.</span><span class="n">applyNiceNumbers</span><span class="p">()</span>
 </code></pre>
@@ -560,29 +556,25 @@ apply_nice_numbers<span class="p">(</span><span class="bp">self</span><span clas
 update_boundaries<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set new min/max values based on axis</p>
+<p>Set new min/max values based on axis.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/charts/chart.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>38
+<pre><span></span>36
+37
+38
 39
 40
-41
-42
-43
-44
-45</pre>
+41</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">update_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    set new min/max values based on axis</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Set new min/max values based on axis."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">max_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">max_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisY</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">min_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
@@ -601,15 +593,21 @@ update_boundaries<span class="p">(</span><span class="bp">self</span><span class
 zoom_by_factor<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>zoom in/out by factor (1.0 = no change)
-make sure that we dont zoom out too far</p>
+<p>Zoom in/out by factor (1.0 = no change).</p>
+<p>Make sure that we dont zoom out too far</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/charts/chart.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>71
+<pre><span></span>65
+66
+67
+68
+69
+70
+71
 72
 73
 74
@@ -618,21 +616,15 @@ make sure that we dont zoom out too far</p>
 77
 78
 79
-80
-81
-82
-83
-84
-85
-86</pre>
+80</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">zoom_by_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    zoom in/out by factor (1.0 = no change)</span>
-<span class="sd">    make sure that we dont zoom out too far</span>
+    <span class="sd">"""Zoom in/out by factor (1.0 = no change).</span>
+
+<span class="sd">    Make sure that we dont zoom out too far</span>
 <span class="sd">    """</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">zoom</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_x</span><span class="p">:</span>
@@ -677,14 +669,16 @@ make sure that we dont zoom out too far</p>
 keyPressEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>handle keypress events to allow navigation via keyboard</p>
+<p>Handle keypress events to allow navigation via keyboard.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>32
+<pre><span></span>30
+31
+32
 33
 34
 35
@@ -703,19 +697,13 @@ keyPressEvent<span class="p">(</span><span class="bp">self</span><span class="p"
 48
 49
 50
-51
-52
-53
-54
-55</pre>
+51</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QKeyEvent</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    handle keypress events to allow navigation via keyboard</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Handle keypress events to allow navigation via keyboard."""</span>
     <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key_Escape</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">zoomReset</span><span class="p">()</span>
@@ -750,38 +738,34 @@ keyPressEvent<span class="p">(</span><span class="bp">self</span><span class="p"
 mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>override to allow dragging the chart</p>
+<p>Override to allow dragging the chart.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 86
- 87
- 88
- 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102</pre>
+<pre><span></span>76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    override to allow dragging the chart</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Override to allow dragging the chart."""</span>
     <span class="c1"># pan the chart with a middle mouse drag</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">buttons</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_mouse_pos</span><span class="p">:</span>
@@ -809,32 +793,28 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
 mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>override to allow dragging the chart</p>
+<p>Override to allow dragging the chart.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84</pre>
+<pre><span></span>66
+67
+68
+69
+70
+71
+72
+73
+74</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    override to allow dragging the chart</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Override to allow dragging the chart."""</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeAllCursor</span><span class="p">)</span>
         <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">setOverrideCursor</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
@@ -856,30 +836,26 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
 mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>override to allow dragging the chart</p>
+<p>Override to allow dragging the chart.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>64
-65
-66
-67
-68
-69
-70
-71
-72</pre>
+<pre><span></span>58
+59
+60
+61
+62
+63
+64</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    override to allow dragging the chart</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Override to allow dragging the chart."""</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
         <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">restoreOverrideCursor</span><span class="p">()</span>
         <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
@@ -899,37 +875,33 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
 save_as_image<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>let user choose folder and save chart as an image file</p>
+<p>Let user choose folder and save chart as an image file.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122</pre>
+<pre><span></span> 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">save_as_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    let user choose folder and save chart as an image file</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Let user choose folder and save chart as an image file."""</span>
     <span class="n">dlg</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileDialog</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"save"</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="s2">"Save image"</span><span class="p">)</span>
     <span class="n">filters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Bmp files"</span><span class="p">:</span> <span class="p">[</span><span class="s2">".bmp"</span><span class="p">],</span> <span class="s2">"Jpeg files"</span><span class="p">:</span> <span class="p">[</span><span class="s2">".jpg"</span><span class="p">],</span> <span class="s2">"Png files"</span><span class="p">:</span> <span class="p">[</span><span class="s2">".png"</span><span class="p">]}</span>
     <span class="n">dlg</span><span class="o">.</span><span class="n">set_extension_filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
@@ -954,27 +926,23 @@ save_as_image<span class="p">(</span><span class="bp">self</span><span class="p"
 wheelEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>handle wheel event for zooming</p>
+<p>Handle wheel event for zooming.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>57
-58
-59
-60
-61
-62</pre>
+<pre><span></span>53
+54
+55
+56</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">wheelEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QWheelEvent</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    handle wheel event for zooming</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Handle wheel event for zooming."""</span>
     <span class="n">fct</span> <span class="o">=</span> <span class="n">ZOOM_IN_FACTOR</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">angleDelta</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">ZOOM_OUT_FACTOR</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">zoom_by_factor</span><span class="p">(</span><span class="n">fct</span><span class="p">)</span>
 </code></pre>
@@ -1002,7 +970,7 @@ wheelEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <code>LineSeries</code>
 </h3>
 <div class="doc doc-contents">
-<p>QLineSeries with some custom properties</p>
+<p>QLineSeries with some custom properties.</p>
 <div class="doc doc-children">
 </div>
 </div>
@@ -1021,7 +989,7 @@ wheelEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <code>XYSeries</code>
 </h3>
 <div class="doc doc-contents">
-<p>QXYSeries with some custom properties</p>
+<p>QXYSeries with some custom properties.</p>
 <div class="doc doc-children">
 </div>
 </div>
@@ -1084,14 +1052,14 @@ wheelEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
-<script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.592d4e23.min.js"></script>
+<script src="../assets/javascripts/bundle.073197b2.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../assets/javascripts/worker/search.01088dc6.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

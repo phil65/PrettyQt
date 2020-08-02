@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/core.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.0" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.1" name="generator"/>
 <title>core - PrettyQt</title>
-<link href="../assets/stylesheets/main.b5d04df8.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.5d00201e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -604,8 +604,8 @@
 <h2 class="hidden-toc" href="#prettyqt.core" id="prettyqt.core" style="visibility: hidden; width: 0; height: 0;">
 </h2>
 <div class="doc doc-contents first">
-<p>core module</p>
-<p>contains QtCore-based classes</p>
+<p>Core module.</p>
+<p>Contains QtCore-based classes</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.abstractitemmodel">
@@ -628,24 +628,22 @@ __len__<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </span>
 </h4>
 <div class="doc doc-contents">
-<p>return amount of rows</p>
+<p>Return amount of rows.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>20
-21
-22
-23</pre>
+<pre><span></span>18
+19
+20</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">"""return amount of rows</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Return amount of rows."""</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
 </code></pre>
 </div>
@@ -661,7 +659,7 @@ __len__<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 change_layout<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>content manager to change the layout</p>
+<p>Context manager to change the layout.</p>
 <p>wraps calls with correct signals
 emitted at beginning: layoutAboutToBeChanged
 emitted at end: layoutChanged</p>
@@ -671,7 +669,10 @@ emitted at end: layoutChanged</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>34
+<pre><span></span>31
+32
+33
+34
 35
 36
 37
@@ -679,17 +680,14 @@ emitted at end: layoutChanged</p>
 39
 40
 41
-42
-43
-44
-45</pre>
+42</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">change_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""content manager to change the layout</span>
+    <span class="sd">"""Context manager to change the layout.</span>
 
 <span class="sd">    wraps calls with correct signals</span>
 <span class="sd">    emitted at beginning: layoutAboutToBeChanged</span>
@@ -713,7 +711,7 @@ emitted at end: layoutChanged</p>
 reset_model<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>content manager to reset the model</p>
+<p>Context manager to reset the model.</p>
 <p>wraps calls with correct signals
 emitted at beginning: beginResetModel
 emitted at end: endResetModel</p>
@@ -723,7 +721,10 @@ emitted at end: endResetModel</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>47
+<pre><span></span>44
+45
+46
+47
 48
 49
 50
@@ -731,17 +732,14 @@ emitted at end: endResetModel</p>
 52
 53
 54
-55
-56
-57
-58</pre>
+55</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">reset_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""content manager to reset the model</span>
+    <span class="sd">"""Context manager to reset the model.</span>
 
 <span class="sd">    wraps calls with correct signals</span>
 <span class="sd">    emitted at beginning: beginResetModel</span>
@@ -793,8 +791,8 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 9
-10</pre>
+<pre><span></span>7
+8</pre>
 </div>
 </td>
 <td class="code">
@@ -843,8 +841,8 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>14
-15</pre>
+<pre><span></span>12
+13</pre>
 </div>
 </td>
 <td class="code">
@@ -890,9 +888,9 @@ globalMatch<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>56
-57
-58</pre>
+<pre><span></span>54
+55
+56</pre>
 </div>
 </td>
 <td class="code">
@@ -921,7 +919,9 @@ match<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>70
+<pre><span></span>68
+69
+70
 71
 72
 73
@@ -933,9 +933,7 @@ match<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 79
 80
 81
-82
-83
-84</pre>
+82</pre>
 </div>
 </td>
 <td class="code">
@@ -990,7 +988,7 @@ get_default_format<span class="p">()</span> </code>
 </span>
 </h4>
 <div class="doc doc-contents">
-<p>returns default settings format</p>
+<p>Return default settings format.</p>
 <p>possible values are "native", "ini"</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -1015,23 +1013,23 @@ get_default_format<span class="p">()</span> </code>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>103
+<pre><span></span>101
+102
+103
 104
 105
 106
 107
 108
 109
-110
-111
-112</pre>
+110</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">get_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""returns default settings format</span>
+    <span class="sd">"""Return default settings format.</span>
 
 <span class="sd">    possible values are "native", "ini"</span>
 
@@ -1053,7 +1051,7 @@ get_default_format<span class="p">()</span> </code>
 get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>returns scope</p>
+<p>Return scope.</p>
 <p>possible values are "user", "system"</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -1078,21 +1076,21 @@ get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>114
+<pre><span></span>112
+113
+114
 115
 116
 117
 118
 119
-120
-121
-122</pre>
+120</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""returns scope</span>
+    <span class="sd">"""Return scope.</span>
 
 <span class="sd">    possible values are "user", "system"</span>
 
@@ -1114,7 +1112,7 @@ get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</
 group<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>context manager for setting groups</p>
+<p>Context manager for setting groups.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1142,23 +1140,23 @@ group<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>141
+<pre><span></span>139
+140
+141
 142
 143
 144
 145
 146
 147
-148
-149
-150</pre>
+148</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""context manager for setting groups</span>
+    <span class="sd">"""Context manager for setting groups.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        prefix: setting prefix for group</span>
@@ -1180,7 +1178,7 @@ group<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 read_array<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>context manager for reading arrays</p>
+<p>Context manager for reading arrays.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1208,23 +1206,23 @@ read_array<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>164
+<pre><span></span>162
+163
+164
 165
 166
 167
 168
 169
 170
-171
-172
-173</pre>
+171</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">read_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""context manager for reading arrays</span>
+    <span class="sd">"""Context manager for reading arrays.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        prefix: prefix for settings array</span>
@@ -1249,7 +1247,7 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
 </span>
 </h4>
 <div class="doc doc-contents">
-<p>sets the default format</p>
+<p>Set the default format.</p>
 <p>possible values are "native", "ini"</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1295,28 +1293,28 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 87
- 88
- 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101</pre>
+<pre><span></span>85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">set_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""sets the default format</span>
+    <span class="sd">"""Set the default format.</span>
 
 <span class="sd">    possible values are "native", "ini"</span>
 
@@ -1346,7 +1344,7 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 </span>
 </h4>
 <div class="doc doc-contents">
-<p>sets the path to the settings file</p>
+<p>Set the path to the settings file.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1399,7 +1397,9 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>124
+<pre><span></span>122
+123
+124
 125
 126
 127
@@ -1412,16 +1412,14 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 134
 135
 136
-137
-138
-139</pre>
+137</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
-    <span class="sd">"""sets the path to the settings file</span>
+    <span class="sd">"""Set the path to the settings file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        fmt: the default format to use</span>
@@ -1449,7 +1447,7 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 write_array<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>context manager for writing arrays</p>
+<p>Context manager for writing arrays.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1485,7 +1483,9 @@ write_array<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>152
+<pre><span></span>150
+151
+152
 153
 154
 155
@@ -1493,16 +1493,14 @@ write_array<span class="p">(</span><span class="bp">self</span><span class="p">,
 157
 158
 159
-160
-161
-162</pre>
+160</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">write_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">"""context manager for writing arrays</span>
+    <span class="sd">"""Context manager for writing arrays.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        prefix: prefix for settings array</span>
@@ -1543,7 +1541,7 @@ write_array<span class="p">(</span><span class="bp">self</span><span class="p">,
 to_path<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>get pathlib object from the URL</p>
+<p>Get pathlib object from the URL.</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1567,19 +1565,19 @@ to_path<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>28
+<pre><span></span>26
+27
+28
 29
 30
 31
-32
-33
-34</pre>
+32</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">to_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
-    <span class="sd">"""get pathlib object from the URL</span>
+    <span class="sd">"""Get pathlib object from the URL.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Path</span>
@@ -1654,14 +1652,14 @@ to_path<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
-<script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.592d4e23.min.js"></script>
+<script src="../assets/javascripts/bundle.073197b2.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../assets/javascripts/worker/search.01088dc6.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

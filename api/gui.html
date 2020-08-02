@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/gui.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.0" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.1" name="generator"/>
 <title>gui - PrettyQt</title>
-<link href="../assets/stylesheets/main.b5d04df8.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.5d00201e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -894,8 +894,8 @@
 <h2 class="hidden-toc" href="#prettyqt.gui" id="prettyqt.gui" style="visibility: hidden; width: 0; height: 0;">
 </h2>
 <div class="doc doc-contents first">
-<p>gui module</p>
-<p>contains QtGui-based classes</p>
+<p>Gui module.</p>
+<p>Contains QtGui-based classes</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.gui.color">
@@ -925,8 +925,8 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>15
-16</pre>
+<pre><span></span>13
+14</pre>
 </div>
 </td>
 <td class="code">
@@ -950,14 +950,16 @@ from_text<span class="p">(</span><span class="n">text</span><span class="p">)</s
 </span>
 </h4>
 <div class="doc doc-contents">
-<p>Create a QColor from specified string</p>
+<p>Create a QColor from specified string.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>24
+<pre><span></span>22
+23
+24
 25
 26
 27
@@ -968,16 +970,14 @@ from_text<span class="p">(</span><span class="n">text</span><span class="p">)</s
 32
 33
 34
-35
-36
-37</pre>
+35</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_text</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-    <span class="sd">"""Create a QColor from specified string"""</span>
+    <span class="sd">"""Create a QColor from specified string."""</span>
     <span class="n">color</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
     <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"#"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
@@ -1021,7 +1021,7 @@ from_text<span class="p">(</span><span class="n">text</span><span class="p">)</s
 get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>returns current cursor shape</p>
+<p>Return current cursor shape.</p>
 <p>Possible values: "arrow", "uparrow", "cross", "wait", "caret"</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -1046,21 +1046,21 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>35
+<pre><span></span>33
+34
+35
 36
 37
 38
 39
 40
-41
-42
-43</pre>
+41</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""returns current cursor shape</span>
+    <span class="sd">"""Return current cursor shape.</span>
 
 <span class="sd">    Possible values: "arrow", "uparrow", "cross", "wait", "caret"</span>
 
@@ -1082,7 +1082,7 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>sets cursor shape</p>
+<p>Set cursor shape.</p>
 <p>Allowed values are "arrow", "uparrow", "cross", "wait", "caret"</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1128,7 +1128,9 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>20
+<pre><span></span>18
+19
+20
 21
 22
 23
@@ -1139,15 +1141,13 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 28
 29
 30
-31
-32
-33</pre>
+31</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""sets cursor shape</span>
+    <span class="sd">"""Set cursor shape.</span>
 
 <span class="sd">    Allowed values are "arrow", "uparrow", "cross", "wait", "caret"</span>
 
@@ -1192,7 +1192,7 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>sets the style hint</p>
+<p>Set the style hint.</p>
 <p>Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",
 "monospace", "fantasy", "cursive", "system"</p>
 <p><strong>Parameters:</strong></p>
@@ -1239,7 +1239,9 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>72
+<pre><span></span>70
+71
+72
 73
 74
 75
@@ -1251,15 +1253,13 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 81
 82
 83
-84
-85
-86</pre>
+84</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""sets the style hint</span>
+    <span class="sd">"""Set the style hint.</span>
 
 <span class="sd">    Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",</span>
 <span class="sd">    "monospace", "fantasy", "cursive", "system"</span>
@@ -1287,7 +1287,7 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>sets the font weight</p>
+<p>Set the font weight.</p>
 <p>Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
                  "extra_bold", normal", "black"</p>
 <p><strong>Parameters:</strong></p>
@@ -1334,7 +1334,9 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 88
+<pre><span></span> 86
+ 87
+ 88
  89
  90
  91
@@ -1346,15 +1348,13 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
  97
  98
  99
-100
-101
-102</pre>
+100</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""sets the font weight</span>
+    <span class="sd">"""Set the font weight.</span>
 
 <span class="sd">    Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",</span>
 <span class="sd">                     "extra_bold", normal", "black"</span>
@@ -1394,15 +1394,18 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 get_icon<span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_qicon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> </code>
 </h3>
 <div class="doc doc-contents">
-<p>qtawesome already caches icons, but since we construct our own subclassed icon,
-we cache, too</p>
+<p>Get icon with given color.</p>
+<p>Qtawesome already caches icons, but since we construct our own subclassed icon,
+we cache, too.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/icon.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>21
+<pre><span></span>19
+20
+21
 22
 23
 24
@@ -1421,16 +1424,16 @@ we cache, too</p>
 37
 38
 39
-40
-41</pre>
+40</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">:</span> <span class="n">IconType</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">as_qicon</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    qtawesome already caches icons, but since we construct our own subclassed icon,</span>
-<span class="sd">    we cache, too</span>
+    <span class="sd">"""Get icon with given color.</span>
+
+<span class="sd">    Qtawesome already caches icons, but since we construct our own subclassed icon,</span>
+<span class="sd">    we cache, too.</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">icon</span> <span class="k">if</span> <span class="n">as_qicon</span> <span class="k">else</span> <span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
@@ -1477,7 +1480,7 @@ we cache, too</p>
 get_composition_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>get the current composition mode</p>
+<p>Get the current composition mode.</p>
 <p>Possible values: "source_over", "destination_over", "clear", "source",
                  "destination", "source_in", "destination_in", "source_out",
                  "destination_out", "source_atop", "destination_atop",</p>
@@ -1504,7 +1507,9 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>108
+<pre><span></span>106
+107
+108
 109
 110
 111
@@ -1512,15 +1517,13 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 113
 114
 115
-116
-117
-118</pre>
+116</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_composition_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""get the current composition mode</span>
+    <span class="sd">"""Get the current composition mode.</span>
 
 <span class="sd">    Possible values: "source_over", "destination_over", "clear", "source",</span>
 <span class="sd">                     "destination", "source_in", "destination_in", "source_out",</span>
@@ -1544,7 +1547,7 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>returns current pen type</p>
+<p>Return current pen type.</p>
 <p>Possible values: "none",</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -1569,21 +1572,21 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>78
+<pre><span></span>76
+77
+78
 79
 80
 81
 82
 83
-84
-85
-86</pre>
+84</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""returns current pen type</span>
+    <span class="sd">"""Return current pen type.</span>
 
 <span class="sd">    Possible values: "none",</span>
 
@@ -1605,7 +1608,7 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 set_composition_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set the current composition mode</p>
+<p>Set the current composition mode.</p>
 <p>Possible values: "source_over", "destination_over", "clear", "source",
                  "destination", "source_in", "destination_in", "source_out",
                  "destination_out", "source_atop", "destination_atop",</p>
@@ -1632,7 +1635,9 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 92
+<pre><span></span> 90
+ 91
+ 92
  93
  94
  95
@@ -1644,15 +1649,13 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 101
 102
 103
-104
-105
-106</pre>
+104</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_composition_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""set the current composition mode</span>
+    <span class="sd">"""Set the current composition mode.</span>
 
 <span class="sd">    Possible values: "source_over", "destination_over", "clear", "source",</span>
 <span class="sd">                     "destination", "source_in", "destination_in", "source_out",</span>
@@ -1680,7 +1683,7 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pen_type</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set pen type to use</p>
+<p>Set pen type to use.</p>
 <p>Allowed values are "none",</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1726,7 +1729,9 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>63
+<pre><span></span>61
+62
+63
 64
 65
 66
@@ -1737,15 +1742,13 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 71
 72
 73
-74
-75
-76</pre>
+74</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pen_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""set pen type to use</span>
+    <span class="sd">"""Set pen type to use.</span>
 
 <span class="sd">    Allowed values are "none",</span>
 
@@ -1797,7 +1800,9 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>38
+<pre><span></span>36
+37
+38
 39
 40
 41
@@ -1805,9 +1810,7 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 43
 44
 45
-46
-47
-48</pre>
+46</pre>
 </div>
 </td>
 <td class="code">
@@ -1862,15 +1865,15 @@ clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>31
+<pre><span></span>29
+30
+31
 32
 33
 34
 35
 36
-37
-38
-39</pre>
+37</pre>
 </div>
 </td>
 <td class="code">
@@ -1898,7 +1901,7 @@ clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set the icon for the action</p>
+<p>Set the icon for the action.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1926,20 +1929,20 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>41
+<pre><span></span>39
+40
+41
 42
 43
 44
 45
-46
-47
-48</pre>
+46</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
-    <span class="sd">"""set the icon for the action</span>
+    <span class="sd">"""Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
@@ -1985,21 +1988,19 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>29
+<pre><span></span>27
+28
+29
 30
 31
 32
-33
-34
-35
-36</pre>
+33</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""Apply syntax highlighting to the given block of text.</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Apply syntax highlighting to the given block of text."""</span>
     <span class="c1"># Do other syntax formatting</span>
     <span class="k">for</span> <span class="n">expression</span><span class="p">,</span> <span class="n">nth</span><span class="p">,</span> <span class="n">fmt</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">yield_rules</span><span class="p">():</span>
         <span class="k">for</span> <span class="n">match</span> <span class="ow">in</span> <span class="n">expression</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
@@ -2056,7 +2057,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 get_font_weight<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>get current font weight</p>
+<p>Get current font weight.</p>
 <p>Possible values are "thin", "light", "medium" or "bold"</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -2081,21 +2082,21 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>70
+<pre><span></span>68
+69
+70
 71
 72
 73
 74
 75
-76
-77
-78</pre>
+76</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""get current font weight</span>
+    <span class="sd">"""Get current font weight.</span>
 
 <span class="sd">    Possible values are "thin", "light", "medium" or "bold"</span>
 
@@ -2117,7 +2118,7 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 get_underline_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>get current underline style</p>
+<p>Get current underline style.</p>
 <p>Possible values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
 "wave", "spellcheck"</p>
 <p><strong>Returns:</strong></p>
@@ -2143,22 +2144,22 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 96
+<pre><span></span> 94
+ 95
+ 96
  97
  98
  99
 100
 101
 102
-103
-104
-105</pre>
+103</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""get current underline style</span>
+    <span class="sd">"""Get current underline style.</span>
 
 <span class="sd">    Possible values are "none", "single", "dash", "dot", "dashdot", "dashdotline",</span>
 <span class="sd">    "wave", "spellcheck"</span>
@@ -2181,7 +2182,7 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 set_font_style_hint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>sets the font style hint</p>
+<p>Set the font style hint.</p>
 <p>Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",
 "monospace", "fantasy", "cursive", "system"</p>
 <p><strong>Parameters:</strong></p>
@@ -2228,7 +2229,9 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>107
+<pre><span></span>105
+106
+107
 108
 109
 110
@@ -2240,15 +2243,13 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 116
 117
 118
-119
-120
-121</pre>
+119</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_font_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""sets the font style hint</span>
+    <span class="sd">"""Set the font style hint.</span>
 
 <span class="sd">    Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",</span>
 <span class="sd">    "monospace", "fantasy", "cursive", "system"</span>
@@ -2276,7 +2277,7 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 set_font_weight<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>sets the font weight</p>
+<p>Set the font weight.</p>
 <p>Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
                  "extra_bold", normal", "black"</p>
 <p><strong>Parameters:</strong></p>
@@ -2323,7 +2324,9 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>54
+<pre><span></span>52
+53
+54
 55
 56
 57
@@ -2335,15 +2338,13 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 63
 64
 65
-66
-67
-68</pre>
+66</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""sets the font weight</span>
+    <span class="sd">"""Set the font weight.</span>
 
 <span class="sd">    Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",</span>
 <span class="sd">                     "extra_bold", normal", "black"</span>
@@ -2371,7 +2372,7 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 set_underline_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>sets the underline style</p>
+<p>Set the underline style.</p>
 <p>Valid values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
 "wave", "spellcheck"</p>
 <p><strong>Parameters:</strong></p>
@@ -2418,7 +2419,9 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>80
+<pre><span></span>78
+79
+80
 81
 82
 83
@@ -2430,15 +2433,13 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 89
 90
 91
-92
-93
-94</pre>
+92</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""sets the underline style</span>
+    <span class="sd">"""Set the underline style.</span>
 
 <span class="sd">    Valid values are "none", "single", "dash", "dot", "dashdot", "dashdotline",</span>
 <span class="sd">    "wave", "spellcheck"</span>
@@ -2491,21 +2492,19 @@ edit_block<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>105
+<pre><span></span>103
+104
+105
 106
 107
-108
-109
-110
-111</pre>
+108</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">edit_block</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""Context manager for edit blocks. Can be used for undo actions.</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Context manager for edit blocks. Can be used for undo actions."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">beginEditBlock</span><span class="p">()</span>
     <span class="k">yield</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">endEditBlock</span><span class="p">()</span>
@@ -2530,10 +2529,10 @@ select<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>66
-67
-68
-69</pre>
+<pre><span></span>64
+65
+66
+67</pre>
 </div>
 </td>
 <td class="code">
@@ -2556,7 +2555,7 @@ select<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 select_text<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">,</span> <span class="n">end_pos</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>select text from start position to end position.</p>
+<p>Select text from start position to end position.</p>
 <p>Positions can be either an integer index or a move operation</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -2593,7 +2592,9 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>74
+<pre><span></span>72
+73
+74
 75
 76
 77
@@ -2608,15 +2609,13 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 86
 87
 88
-89
-90
-91</pre>
+89</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">select_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">end_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""select text from start position to end position.</span>
+    <span class="sd">"""Select text from start position to end position.</span>
 
 <span class="sd">    Positions can be either an integer index or a move operation</span>
 
@@ -2647,7 +2646,7 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 set_position<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'move'</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set cursor to given position</p>
+<p>Set cursor to given position.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2683,20 +2682,20 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>57
+<pre><span></span>55
+56
+57
 58
 59
 60
 61
-62
-63
-64</pre>
+62</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"move"</span><span class="p">):</span>
-    <span class="sd">"""set cursor to given position</span>
+    <span class="sd">"""Set cursor to given position.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        pos: Cursor position</span>
@@ -2738,26 +2737,22 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </span>
 </h4>
 <div class="doc doc-contents">
-<p>needed for sum()</p>
+<p>Needed for sum().</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/validator.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>23
-24
-25
-26
-27</pre>
+<pre><span></span>21
+22
+23</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QValidator</span><span class="p">):</span>
-    <span class="sd">"""</span>
-<span class="sd">    needed for sum()</span>
-<span class="sd">    """</span>
+    <span class="sd">"""Needed for sum()."""</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -2828,14 +2823,14 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
-<script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.592d4e23.min.js"></script>
+<script src="../assets/javascripts/bundle.073197b2.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../assets/javascripts/worker/search.01088dc6.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/webenginewidgets.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.0" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.1" name="generator"/>
 <title>webenginewidgets - PrettyQt</title>
-<link href="../assets/stylesheets/main.b5d04df8.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.5d00201e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -390,7 +390,7 @@
 <h2 class="hidden-toc" href="#prettyqt.webenginewidgets" id="prettyqt.webenginewidgets" style="visibility: hidden; width: 0; height: 0;">
 </h2>
 <div class="doc doc-contents first">
-<p>gui module</p>
+<p>Webenginewidgets module.</p>
 <p>contains QWebEngineView-based classes</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
@@ -404,8 +404,7 @@
 <code>WebEnginePage</code>
 </h3>
 <div class="doc doc-contents">
-<p>A web engine page holds the contents of an HTML document,
-the history of navigated links, and actions.</p>
+<p>A web engine page holds the HTML document contents, link history + actions.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginepage.WebEnginePage.find_text">
@@ -413,7 +412,7 @@ the history of navigated links, and actions.</p>
 find_text<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>Find text in the current page</p>
+<p>Find text in the current page.</p>
 <p>Finds the specified string, subString, in the page, using the given options.
 The findTextFinished() signal is emitted when a string search is completed.</p>
 <p>To clear the search highlight, just pass an empty string.</p>
@@ -475,47 +474,47 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 62
- 63
- 64
- 65
- 66
- 67
- 68
- 69
- 70
- 71
- 72
- 73
- 74
- 75
- 76
- 77
- 78
- 79
- 80
- 81
- 82
- 83
- 84
- 85
- 86
- 87
- 88
- 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102</pre>
+<pre><span></span>58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98</pre>
 </div>
 </td>
 <td class="code">
@@ -527,7 +526,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
     <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">"""Find text in the current page</span>
+    <span class="sd">"""Find text in the current page.</span>
 
 <span class="sd">    Finds the specified string, subString, in the page, using the given options.</span>
 <span class="sd">    The findTextFinished() signal is emitted when a string search is completed.</span>
@@ -575,7 +574,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
 load_url<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>load the URL</p>
+<p>Load the URL.</p>
 <p>Loads the specified url and displays it.</p>
 <p>Note: The Page remains the same until enough data has arrived
 to display the new URL.</p>
@@ -606,7 +605,11 @@ to display the new URL.</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>35
+<pre><span></span>31
+32
+33
+34
+35
 36
 37
 38
@@ -617,17 +620,13 @@ to display the new URL.</p>
 43
 44
 45
-46
-47
-48
-49
-50</pre>
+46</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
-    <span class="sd">"""load the URL</span>
+    <span class="sd">"""Load the URL.</span>
 
 <span class="sd">    Loads the specified url and displays it.</span>
 
@@ -656,7 +655,7 @@ to display the new URL.</p>
 set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set the url of the WebEnginePage.</p>
+<p>Set the url of the WebEnginePage.</p>
 <p>Clears the Page and loads the URL.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -685,7 +684,11 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>21
+<pre><span></span>17
+18
+19
+20
+21
 22
 23
 24
@@ -693,17 +696,13 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 26
 27
 28
-29
-30
-31
-32
-33</pre>
+29</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
-    <span class="sd">"""set the url of the WebEnginePage.</span>
+    <span class="sd">"""Set the url of the WebEnginePage.</span>
 
 <span class="sd">    Clears the Page and loads the URL.</span>
 
@@ -729,7 +728,7 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>Set the zoom factor for the Page</p>
+<p>Set the zoom factor for the Page.</p>
 <p>Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -758,21 +757,21 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>52
+<pre><span></span>48
+49
+50
+51
+52
 53
 54
 55
-56
-57
-58
-59
-60</pre>
+56</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="sd">"""Set the zoom factor for the Page</span>
+    <span class="sd">"""Set the zoom factor for the Page.</span>
 
 <span class="sd">    Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</span>
 
@@ -812,7 +811,7 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 find_text<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>Find text in the current page</p>
+<p>Find text in the current page.</p>
 <p>Finds the specified string, subString, in the page, using the given options.
 The findTextFinished() signal is emitted when a string search is completed.</p>
 <p>To clear the search highlight, just pass an empty string.</p>
@@ -874,7 +873,9 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>58
+<pre><span></span>56
+57
+58
 59
 60
 61
@@ -912,9 +913,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
 93
 94
 95
-96
-97
-98</pre>
+96</pre>
 </div>
 </td>
 <td class="code">
@@ -926,7 +925,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
     <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">"""Find text in the current page</span>
+    <span class="sd">"""Find text in the current page.</span>
 
 <span class="sd">    Finds the specified string, subString, in the page, using the given options.</span>
 <span class="sd">    The findTextFinished() signal is emitted when a string search is completed.</span>
@@ -974,7 +973,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
 load_url<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>load the URL</p>
+<p>Load the URL.</p>
 <p>Loads the specified url and displays it.</p>
 <p>Note: The view remains the same until enough data has arrived
 to display the new URL.</p>
@@ -1005,7 +1004,9 @@ to display the new URL.</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>31
+<pre><span></span>29
+30
+31
 32
 33
 34
@@ -1018,15 +1019,13 @@ to display the new URL.</p>
 41
 42
 43
-44
-45
-46</pre>
+44</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
-    <span class="sd">"""load the URL</span>
+    <span class="sd">"""Load the URL.</span>
 
 <span class="sd">    Loads the specified url and displays it.</span>
 
@@ -1055,7 +1054,7 @@ to display the new URL.</p>
 set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>set the url of the WebEngineView.</p>
+<p>Set the url of the WebEngineView.</p>
 <p>Clears the view and loads the URL.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1084,7 +1083,9 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>17
+<pre><span></span>15
+16
+17
 18
 19
 20
@@ -1094,15 +1095,13 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 24
 25
 26
-27
-28
-29</pre>
+27</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
-    <span class="sd">"""set the url of the WebEngineView.</span>
+    <span class="sd">"""Set the url of the WebEngineView.</span>
 
 <span class="sd">    Clears the view and loads the URL.</span>
 
@@ -1128,7 +1127,7 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>Set the zoom factor for the view</p>
+<p>Set the zoom factor for the view.</p>
 <p>Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1157,21 +1156,21 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>48
+<pre><span></span>46
+47
+48
 49
 50
 51
 52
 53
-54
-55
-56</pre>
+54</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="sd">"""Set the zoom factor for the view</span>
+    <span class="sd">"""Set the zoom factor for the view.</span>
 
 <span class="sd">    Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</span>
 
@@ -1248,14 +1247,14 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
-<script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.592d4e23.min.js"></script>
+<script src="../assets/javascripts/bundle.073197b2.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+            worker: "../assets/javascripts/worker/search.01088dc6.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
