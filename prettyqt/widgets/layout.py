@@ -45,13 +45,20 @@ class Layout(QtWidgets.QLayout):
         return self.count()
 
     def __repr__(self):
-        return f"{self.__class__.__name__}: {len(self)} children"
+        return f"{self.__class__.__name__}()"
 
     def __iter__(self):
         return iter(self[i] for i in range(self.count()))
 
     def __contains__(self, item):
         return item in self.get_children()
+
+    def serialize_fields(self):
+        return dict(
+            size_mode=self.get_size_mode(),
+            spacing=self.spacing(),
+            enabled=self.isEnabled(),
+        )
 
     def get_children(self) -> list:
         return list(self)
