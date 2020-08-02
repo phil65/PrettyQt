@@ -40,7 +40,7 @@ class Action(QtWidgets.QAction):
         self.set_shortcut(shortcut)
         self.set_tooltip(tooltip)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             text=self.text(),
             enabled=self.isEnabled(),
@@ -161,5 +161,4 @@ if __name__ == "__main__":
 
     app = widgets.app()
     action = Action("This is a test")
-    print(action.__getstate__())
     app.exec_()

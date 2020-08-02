@@ -30,7 +30,7 @@ class ColorChooserButton(widgets.Widget):
     def __repr__(self):
         return f"ColorChooserButton({self.current_color})"
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(color=self.current_color, enabled=self.isEnabled())
 
     def __setstate__(self, state):

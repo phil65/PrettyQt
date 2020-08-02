@@ -61,7 +61,7 @@ class FileDialog(QtWidgets.QFileDialog):
         self.set_file_mode(file_mode)
         self.set_accept_mode(mode)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             file_mode=self.get_file_mode(),
             accept_mode=self.get_accept_mode(),

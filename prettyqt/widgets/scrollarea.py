@@ -9,7 +9,7 @@ QtWidgets.QScrollArea.__bases__ = (widgets.AbstractScrollArea,)
 
 
 class ScrollArea(QtWidgets.QScrollArea):
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(widget=self.widget(), resizable=self.widgetResizable())
 
     def __setstate__(self, state):

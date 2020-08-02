@@ -35,11 +35,10 @@ class GroupBox(QtWidgets.QGroupBox):
     def __repr__(self):
         return f"GroupBox({self.title()!r})"
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             checkable=self.isCheckable(),
             checked=self.isChecked(),
-            tooltip=self.toolTip(),
             layout=self.layout(),
             flat=self.isFlat(),
             # alignment=self.alignment(),

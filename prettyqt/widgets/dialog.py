@@ -4,7 +4,7 @@ from typing import Union, Optional
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import widgets
 
 
 QtWidgets.QDialog.__bases__ = (widgets.Widget,)
@@ -14,20 +14,17 @@ class BaseDialog(QtWidgets.QDialog):
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
 
-    def __getstate__(self):
-        icon = gui.Icon(self.windowIcon())
+    def serialize_fields(self):
         return dict(
             layout=self.layout(),
-            title=self.windowTitle(),
             is_maximized=self.isMaximized(),
             has_sizegrip=self.isSizeGripEnabled(),
-            icon=icon if not icon.isNull() else None,
             size=(self.size().width(), self.size().height()),
         )
 
     def __setstate__(self, state):
         self.__init__()
-        self.set_title(state["title"])
+        self.set_title(state["window_title"])
         self.set_icon(state["icon"])
         if state["layout"]:
             self.set_layout(state["layout"])

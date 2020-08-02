@@ -28,10 +28,8 @@ class InputAndSlider(widgets.Widget):
         self.spinbox.valueChanged.connect(self.slider.set_value)
         self.slider.valueChanged.connect(self.spinbox.set_value)
 
-    # def __getstate__(self):
-    #     return dict(path=self.path,
-    #                 extensions=self.extensions,
-    #                 enabled=self.isEnabled())
+    def serialize_fields(self):
+        return dict(path=self.path)
 
     # def __setstate__(self, state):
     #     self.__init__(state["extensions"])

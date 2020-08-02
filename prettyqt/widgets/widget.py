@@ -81,14 +81,24 @@ QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
 class Widget(QtWidgets.QWidget):
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}: {self.__getstate__()}"
+        return f"{self.__class__.__name__}: {self.serialize_fields()}"
 
-    def __getstate__(self) -> Dict[str, Any]:
+    def serialize_fields(self) -> Dict[str, Any]:
+        icon = gui.Icon(self.windowIcon())
         return dict(
-            layout=self.layout(),
+            layout=self.layout() if isinstance(self.layout(), widgets.Layout) else None,
             size_policy=self.get_size_policy(),
             accessible_name=self.accessibleName(),
             tooltip=self.toolTip(),
+            tooltip_duration=self.toolTipDuration(),
+            window_title=self.windowTitle(),
+            enabled=self.isEnabled(),
+            visible=self.isVisible(),
+            icon=icon if not icon.isNull() else None,
+            modality=self.get_modality(),
+            whats_this=self.whatsThis(),
+            contextmenu_policy=self.get_contextmenu_policy(),
+            focus_policy=self.get_focus_policy(),
             statustip=self.statusTip(),
         )
 

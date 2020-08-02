@@ -9,7 +9,7 @@ QtWidgets.QStackedLayout.__bases__ = (widgets.Layout,)
 
 
 class StackedLayout(QtWidgets.QStackedLayout):
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(items=self.get_children())
 
     def __setstate__(self, state):

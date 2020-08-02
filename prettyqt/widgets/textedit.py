@@ -20,10 +20,8 @@ class TextEdit(QtWidgets.QTextEdit):
         super().__init__(*args, **kwargs)
         self.textChanged.connect(self.on_value_change)
 
-    def __getstate__(self):
-        return dict(
-            text=self.text(), enabled=self.isEnabled(), font=gui.Font(self.font())
-        )
+    def serialize_fields(self):
+        return dict(text=self.text(), font=gui.Font(self.font()))
 
     def __setstate__(self, state):
         self.__init__()

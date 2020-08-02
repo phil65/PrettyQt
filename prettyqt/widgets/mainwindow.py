@@ -5,7 +5,7 @@ import logging
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, widgets
 from prettyqt.utils import bidict
 
 
@@ -48,19 +48,16 @@ class MainWindow(QtWidgets.QMainWindow):
     def __getitem__(self, index):
         return self.findChild(QtWidgets.QWidget, index)
 
-    def __getstate__(self):
-        icon = gui.Icon(self.windowIcon())
+    def serialize_fields(self):
         return dict(
             central_widget=self.centralWidget(),
-            title=self.windowTitle(),
             is_maximized=self.isMaximized(),
-            icon=icon if not icon.isNull() else None,
             size=(self.size().width(), self.size().height()),
         )
 
     def __setstate__(self, state):
         self.__init__()
-        self.set_title(state["title"])
+        self.set_title(state["window_title"])
         self.set_icon(state["icon"])
         if state["central_widget"]:
             self.setCentralWidget(state["central_widget"])

@@ -32,7 +32,7 @@ class GridLayout(QtWidgets.QGridLayout):
         colstart = col.start if isinstance(col, slice) else col
         self.add(value, rowstart, colstart, rowspan, colspan)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         widgets = []
         positions = []
         for i, item in enumerate(list(self)):

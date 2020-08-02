@@ -45,12 +45,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         self.textChanged.connect(self._on_value_change)
         self.set_read_only(read_only)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
-            text=self.text(),
-            enabled=self.isEnabled(),
-            read_only=self.isReadOnly(),
-            font=gui.Font(self.font()),
+            text=self.text(), read_only=self.isReadOnly(), font=gui.Font(self.font()),
         )
 
     def __setstate__(self, state):

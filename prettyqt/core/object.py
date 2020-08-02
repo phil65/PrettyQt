@@ -11,12 +11,24 @@ counter_dict: DefaultDict = defaultdict(itertools.count)
 
 
 class Object(QtCore.QObject):
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(object_name=self.objectName())
 
     def __setstate__(self, state):
         self.__init__()
         self.set_id(state["object_name"])
+
+    def __getstate__(self):
+        return self.serialize()
+
+    def serialize(self):
+        classes = type(self).mro()
+        dct = dict()
+        for klass in reversed(classes):
+            if "serialize_fields" in klass.__dict__:
+                data = klass.serialize_fields(self)
+                dct.update(data)
+        return dct
 
     @contextmanager
     def block_signals(self):

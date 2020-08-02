@@ -35,15 +35,12 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         dt = self.get_datetime()
         self.value_changed.emit(dt)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             calendar_popup=self.calendarPopup(),
-            tooltip=self.toolTip(),
-            statustip=self.statusTip(),
             datetime=self.get_datetime(),
             range=(self.min_datetime(), self.max_datetime()),
             display_format=self.displayFormat(),
-            enabled=self.isEnabled(),
         )
 
     def __setstate__(self, state):

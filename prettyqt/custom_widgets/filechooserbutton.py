@@ -53,7 +53,7 @@ class FileChooserButton(widgets.Widget):
         self.button.setDefaultAction(action)
         layout += self.button
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(path=self.path, extensions=self.extensions, enabled=self.isEnabled())
 
     def __setstate__(self, state):

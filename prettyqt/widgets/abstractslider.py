@@ -15,7 +15,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
     def on_value_change(self):
         self.value_changed.emit(self.value())
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             range=(self.minimum(), self.maximum()),
             value=self.value(),

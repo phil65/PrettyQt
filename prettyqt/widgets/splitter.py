@@ -30,7 +30,7 @@ class Splitter(QtWidgets.QSplitter):
         else:
             return self.findChild(QtWidgets.QWidget, index)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             items=self.get_children(),
             orientation=self.get_orientation(),

@@ -3,6 +3,7 @@
 
 """Tests for `prettyqt` package."""
 
+import inspect
 import datetime
 import pickle
 
@@ -10,6 +11,22 @@ import pytest
 from qtpy import QtCore
 
 from prettyqt import core, gui, widgets
+
+clsmembers = inspect.getmembers(widgets, inspect.isclass)
+clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
+clsmembers = [tpl for tpl in clsmembers if core.Object in tpl[1].mro()]
+
+
+@pytest.mark.parametrize("name, cls", clsmembers)
+def test_pickle(name, cls):
+    try:
+        widget = cls()
+    except Exception:
+        return None
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(widget, jar)
+    with open("data.pkl", "rb") as jar:
+        widget = pickle.load(jar)
 
 
 def test_action(qtbot):
@@ -20,10 +37,6 @@ def test_action(qtbot):
     action.set_icon(None)
     action.set_icon("mdi.timer")
     action.set_shortcut("Ctrl+A")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(action, jar)
-    with open("data.pkl", "rb") as jar:
-        action = pickle.load(jar)
     assert action.shortcut().toString() == "Ctrl+A"
     assert action.toolTip() == "test"
     action.set_priority("low")
@@ -69,10 +82,6 @@ def test_boxlayout(qtbot):
     with pytest.raises(ValueError):
         layout.set_size_mode("bla")
     layout.set_margin(0)
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(layout, jar)
-    with open("data.pkl", "rb") as jar:
-        layout = pickle.load(jar)
     assert len(layout) == 2
     repr(layout)
     layout.add_stretch(1)
@@ -95,22 +104,12 @@ def test_calendarwiget(qtbot):
     assert widget.get_selection_mode() == "single"
     with pytest.raises(ValueError):
         widget.set_selection_mode("test")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
 
 
 def test_checkbox(qtbot):
     widget = widgets.CheckBox()
     widget.set_disabled()
     widget.set_enabled()
-    import pickle
-
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     assert bool(widget) is False
     widget.set_value(True)
     assert widget.get_value() is True
@@ -124,10 +123,6 @@ def test_checkbox(qtbot):
 def test_colordialog(qtbot):
     dlg = widgets.ColorDialog()
     assert str(dlg.current_color()) == str(gui.Color("white"))
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(dlg, jar)
-    with open("data.pkl", "rb") as jar:
-        dlg = pickle.load(jar)
 
 
 def test_combobox(qtbot):
@@ -146,10 +141,6 @@ def test_combobox(qtbot):
     assert box.get_size_adjust_policy() == "first_show"
     box.set_icon_size(10)
     box.set_min_char_length(10)
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(box, jar)
-    with open("data.pkl", "rb") as jar:
-        box = pickle.load(jar)
     box.add("test2", data="data", icon="mdi.timer")
     box.set_text("test2")
     assert box.text() == "test2"
@@ -167,10 +158,6 @@ def test_commandlinkbutton(qtbot):
     widget.set_icon("mdi.timer")
     with pytest.raises(ValueError):
         widget.set_style_icon("bla")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     repr(widget)
 
 
@@ -198,10 +185,6 @@ def test_dateedit(qtbot):
     dt = datetime.date(2000, 11, 11)
     widget.set_value(dt)
     assert widget.get_value() == dt
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     repr(widget)
 
 
@@ -213,10 +196,6 @@ def test_datetimeedit(qtbot):
     widget.set_value(dt)
     widget.set_format("dd.MM.yyyy")
     assert widget.get_value() == dt
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     repr(widget)
 
 
@@ -232,10 +211,6 @@ def test_dialog(qtbot):
     dlg.delete_on_close()
     dlg.add_widget(widgets.RadioButton("test"))
     dlg.set_icon("mdi.timer")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(dlg, jar)
-    with open("data.pkl", "rb") as jar:
-        dlg = pickle.load(jar)
     dlg.resize(0, 400)
     dlg.resize((0, 400))
     dlg.add_buttonbox()
@@ -274,10 +249,6 @@ def test_doublespinbox(qtbot):
     widget = widgets.DoubleSpinBox(default_value=5)
     widget.set_disabled()
     widget.set_enabled()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     repr(widget)
 
 
@@ -294,10 +265,6 @@ def test_filedialog(qtbot):
         dlg.set_filter("test")
     dlg.selected_file()
     dlg.selected_files()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(dlg, jar)
-    with open("data.pkl", "rb") as jar:
-        dlg = pickle.load(jar)
 
 
 def test_filesystemmodel(qtmodeltester):
@@ -337,10 +304,6 @@ def test_formlayout(qtbot):
     widget += widgets.RadioButton("added with +=")
     widget += ("added with +=", widgets.RadioButton("tuple"))
     widget = widgets.FormLayout.build_from_dict({"from": "dict"})
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     assert len(widget) == 2
     repr(widget)
 
@@ -363,10 +326,6 @@ def test_gridlayout(qtbot):
     assert layout[5, 5] == layout2
     layout.set_size_mode("maximum")
     layout.set_alignment("left")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(layout, jar)
-    with open("data.pkl", "rb") as jar:
-        layout = pickle.load(jar)
     assert len(layout) == len(list(layout)) == 2
     repr(layout)
     layout += widgets.RadioButton()
@@ -379,10 +338,6 @@ def test_groupbox(qtbot):
     widget.set_layout(ly)
     ly += widgets.RadioButton("+=")
     widget.set_alignment("left")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     widget.set_enabled(False)
     repr(widget)
 
@@ -393,7 +348,7 @@ def test_headerview(qtbot):
 
     table = widgets.TableView()
     model = widgets.FileSystemModel()
-    table.setModel(model)
+    table.set_model(model)
     header = widgets.HeaderView("horizontal", parent=table)
     table.setHorizontalHeader(header)
     header.set_resize_mode("interactive")
@@ -450,10 +405,6 @@ def test_label(qtbot):
     with pytest.raises(ValueError):
         label.set_text_interaction("test")
     # assert label.get_text_interaction() == "by_mouse"
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(label, jar)
-    with open("data.pkl", "rb") as jar:
-        label = pickle.load(jar)
     repr(label)
 
 
@@ -468,10 +419,6 @@ def test_lineedit(qtbot):
         widget.set_echo_mode("test")
     assert widget.get_echo_mode() == "password"
     widget.set_input_mask("X")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     repr(widget)
     widget.set_range(0, 10)
     widget.set_value("5")
@@ -495,10 +442,6 @@ def test_listwidget(qtbot):
     widget = widgets.ListWidget()
     widget.add("test_listwidget", icon="mdi.timer")
     widget.add("test_listwidget", icon="mdi.timer")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     assert len(widget) == 2
     item = widget[0]
     assert item is not None
@@ -518,10 +461,6 @@ def test_listwidget(qtbot):
 
 def test_listwidgetitem(qtbot):
     item = widgets.ListWidgetItem()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(item, jar)
-    with open("data.pkl", "rb") as jar:
-        item = pickle.load(jar)
     repr(item)
     item.set_icon("mdi.timer")
     item.set_checkstate("unchecked")
@@ -558,10 +497,6 @@ def test_mainwindow(qtbot):
         ss.QMainWindow.separator.setValues(width="1px", border="none")
     window.createPopupMenu()
     window.add_widget_as_dock("test", "Title")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(window, jar)
-    with open("data.pkl", "rb") as jar:
-        window = pickle.load(jar)
     window.set_icon(None)
 
 
@@ -668,10 +603,6 @@ def test_plaintextedit(qtbot):
         widget.set_line_wrap_mode("test")
     assert widget.get_value() == "test"
     widget += "append"
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     widget.set_regex_validator("[0-9]")
 
 
@@ -703,10 +634,6 @@ def test_pushbutton(qtbot):
     assert widget.get_value() is False
     widget.set_icon("mdi.timer")
     widget.set_style_icon("close")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     widget.is_on = False
     assert widget.is_on is False
     widget.set_value(True)
@@ -717,10 +644,6 @@ def test_radiobutton(qtbot):
     widget.set_icon("mdi.timer")
     widget.set_enabled()
     widget.set_disabled()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     assert bool(widget) is False
     repr(widget)
     widget.set_value(True)
@@ -731,10 +654,6 @@ def test_radiobutton(qtbot):
 
 def test_scrollarea(qtbot):
     widget = widgets.ScrollArea()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     widget.set_widget(widgets.Widget())
 
 
@@ -751,10 +670,6 @@ def test_slider(qtbot):
     assert widget.is_horizontal()
     widget.set_vertical()
     assert widget.is_vertical()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     with pytest.raises(ValueError):
         widget.set_tick_position("test")
     widget.set_tick_position("right")
@@ -783,10 +698,6 @@ def test_stackedlayout(qtbot):
     layout.set_current_widget(widget)
     layout.set_size_mode("maximum")
     layout.set_margin(0)
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(layout, jar)
-    with open("data.pkl", "rb") as jar:
-        layout = pickle.load(jar)
     assert len(layout) == 1
     for item in layout:
         pass
@@ -811,10 +722,6 @@ def test_spinbox(qtbot):
         widget.set_step_type("test")
     assert widget.is_valid()
     assert widget.get_value() == 10
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     repr(widget)
 
 
@@ -833,10 +740,6 @@ def test_splitter(qtbot):
     widget += test2
     assert len(widget) == 2
     assert widget[0] == test
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     for item in widget:
         pass
     widget.set_size_policy("expanding", "expanding")
@@ -874,13 +777,9 @@ def test_tabwidget(qtbot):
     widget.set_tab(0, "right", None)
     widget.set_detachable()
     widget.detach_tab(0, core.Point())
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     with pytest.raises(ValueError):
         widget.set_tab_shape("test")
-    widget.remove_tab(0)
+    widget.remove_tab(1)
     widget.add_tab(widgets.BoxLayout("horizontal"), "mdi.timer")
     widget.close_detached_tabs()
     # widget.close_detached_tabs()
@@ -888,10 +787,6 @@ def test_tabwidget(qtbot):
 
 def test_textbrowser(qtbot):
     widget = widgets.TextBrowser()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     widget.set_markdown("test")
     widget.set_rst("test")
 
@@ -911,10 +806,6 @@ def test_textedit(qtbot):
     widget.set_disabled()
     widget.set_background_color("black")
     widget.set_text_color("red")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     widget += "append"
 
 
@@ -922,10 +813,6 @@ def test_timeedit(qtbot):
     widget = widgets.TimeEdit()
     widget.set_disabled()
     widget.set_enabled()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     widget.set_range(datetime.time(1, 1, 1), datetime.time(3, 3, 3))
     widget.set_value(datetime.time(0, 0, 0))
     assert widget.get_time() == widget.min_time()
@@ -960,10 +847,6 @@ def test_toolbar(qtbot):
 def test_toolbutton(qtbot):
     widget = widgets.ToolButton()
     widget.set_disabled()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     widget.set_enabled()
     widget.set_shortcut("Ctrl+A")
     widget.set_icon_size(20)
@@ -1067,17 +950,13 @@ def test_toolbox(qtbot):
     for w in widget:
         pass
     assert widget[1] == w2
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
 
 
 def test_treeview(qtbot):
     widget = widgets.TreeView()
     assert len(widget) == 0
     model = widgets.FileSystemModel()
-    widget.setModel(model)
+    widget.set_model(model)
     widget.selectAll()
     widget.h_header
     # widget.h_scrollbar
@@ -1112,7 +991,7 @@ def test_treeview(qtbot):
     widget.adapt_sizes()
     model = gui.StandardItemModel()
     model.add("test")
-    widget.setModel(model)
+    widget.set_model(model)
     widget.set_delegate(widgets.StyledItemDelegate())
     widget.set_delegate(widgets.StyledItemDelegate(), column=0, persistent=True)
     widget.set_delegate(widgets.StyledItemDelegate(), row=0, persistent=True)
@@ -1129,10 +1008,6 @@ def test_treewidget(qtbot):
 def test_treewidgetitem(qtbot):
     item = widgets.TreeWidgetItem()
     repr(item)
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(item, jar)
-    with open("data.pkl", "rb") as jar:
-        item = pickle.load(jar)
     item.set_icon("mdi.timer")
     item.set_checkstate("unchecked")
     with pytest.raises(ValueError):
@@ -1202,10 +1077,6 @@ def test_widget(qtbot):
     widget.set_layout(layout)
     with pytest.raises(ValueError):
         widget.set_layout("test")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(widget, jar)
-    with open("data.pkl", "rb") as jar:
-        widget = pickle.load(jar)
     with widget.block_signals():
         pass
     widget.set_enabled()

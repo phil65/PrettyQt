@@ -55,7 +55,7 @@ class TabBar(QtWidgets.QTabBar):
     def __setitem__(self, index, value):
         self.set_tab(index[0], index[1], value)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             movable=self.isMovable(),
             document_mode=self.documentMode(),

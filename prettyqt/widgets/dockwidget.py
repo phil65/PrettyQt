@@ -36,7 +36,7 @@ class DockWidget(QtWidgets.QDockWidget):
             self.set_title(title)
         self.set_allowed_areas("all")
 
-    def __getstate__(self) -> Dict[str, Any]:
+    def serialize_fields(self) -> Dict[str, Any]:
         return dict(widget=self.widget())
 
     def __setstate__(self, state: Dict[str, Any]) -> None:

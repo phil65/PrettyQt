@@ -28,8 +28,8 @@ class FontChooserButton(widgets.Widget):
     def __repr__(self):
         return f"FontChooserButton({self._current_font})"
 
-    def __getstate__(self):
-        return dict(font=self._current_font, enabled=self.isEnabled())
+    def serialize_fields(self):
+        return dict(font=self._current_font)
 
     def __setstate__(self, state):
         self.__init__()

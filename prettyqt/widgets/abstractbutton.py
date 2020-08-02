@@ -15,16 +15,12 @@ QtWidgets.QAbstractButton.__bases__ = (widgets.Widget,)
 
 
 class AbstractButton(QtWidgets.QAbstractButton):
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
-            object_name=self.id,
             text=self.text(),
             icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
             checkable=self.isCheckable(),
             checked=self.isChecked(),
-            tooltip=self.toolTip(),
-            statustip=self.statusTip(),
-            enabled=self.isEnabled(),
         )
 
     def __setstate__(self, state):

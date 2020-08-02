@@ -32,6 +32,12 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         self.setLineEdit(widgets.LineEdit())
         self.setGroupSeparatorShown(True)
 
+    def serialize_fields(self):
+        return dict(
+            button_symbols=self.get_button_symbols(),
+            correction_mode=self.get_correction_mode(),
+        )
+
     def is_valid(self) -> bool:
         return self.hasAcceptableInput()
 

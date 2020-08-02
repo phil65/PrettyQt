@@ -36,7 +36,7 @@ class ToolBar(QtWidgets.QToolBar):
         self.set_icon_size(24)
         self.menu_buttons = list()
 
-    def __getstate__(self) -> Dict[str, Any]:
+    def serialize_fields(self) -> Dict[str, Any]:
         return dict(actions=self.actions())
 
     def __setstate__(self, state: Dict[str, Any]) -> None:

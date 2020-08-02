@@ -49,7 +49,7 @@ class TabWidget(QtWidgets.QTabWidget):
         else:
             return self.findChild(QtWidgets.QWidget, index)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             tabbar=self.tabBar(),
             widgets=self.get_children(),

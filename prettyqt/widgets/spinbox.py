@@ -27,20 +27,15 @@ class SpinBox(QtWidgets.QSpinBox):
         if default_value is not None:
             self.set_value(default_value)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             range=(self.minimum(), self.maximum()),
             value=self.value(),
-            enabled=self.isEnabled(),
-            tooltip=self.toolTip(),
-            statustip=self.statusTip(),
             prefix=self.prefix(),
             suffix=self.suffix(),
-            int_base=self.displayIntegerBase(),
             step_type=self.get_step_type(),
-            button_symbols=self.get_button_symbols(),
-            correction_mode=self.get_correction_mode(),
             single_step=self.singleStep(),
+            int_base=self.displayIntegerBase(),
         )
 
     def __setstate__(self, state):

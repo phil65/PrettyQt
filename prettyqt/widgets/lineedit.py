@@ -35,14 +35,11 @@ class LineEdit(QtWidgets.QLineEdit):
         self.set_read_only(read_only)
 
     def __repr__(self):
-        return f"LineEdit: {self.__getstate__()}"
+        return f"LineEdit: {self.serialize_fields()}"
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             text=self.text(),
-            enabled=self.isEnabled(),
-            tooltip=self.toolTip(),
-            statustip=self.statusTip(),
             font=gui.Font(self.font()),
             validator=self.validator(),
             max_length=self.maxLength(),

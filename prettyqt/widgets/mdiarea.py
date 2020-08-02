@@ -37,6 +37,9 @@ class MdiArea(QtWidgets.QMdiArea):
             self.add(other)
             return self
 
+    def serialize_fields(self):
+        return dict(view_mode=self.get_view_mode(), window_order=self.get_window_order())
+
     def set_view_mode(self, mode: str):
         """Set view mode for the MDI area.
 

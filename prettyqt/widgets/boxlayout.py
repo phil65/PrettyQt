@@ -22,7 +22,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
         if margin is not None:
             self.set_margin(margin)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(items=self.get_children(), direction=int(self.direction()))
 
     def __setstate__(self, state):

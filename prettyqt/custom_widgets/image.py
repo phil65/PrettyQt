@@ -21,7 +21,7 @@ class Image(widgets.Label):
     def __repr__(self):
         return f"Image({self.text()!r})"
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             text=self.text(),
             scaled_contents=self.hasScaledContents(),

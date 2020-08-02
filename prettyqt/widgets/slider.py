@@ -35,20 +35,9 @@ class Slider(QtWidgets.QSlider):
         super().__init__(orientation, parent)
         self.valueChanged.connect(self.on_value_change)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
-            range=(self.minimum(), self.maximum()),
-            value=self.value(),
-            tooltip=self.toolTip(),
-            statustip=self.statusTip(),
-            enabled=self.isEnabled(),
-            has_tracking=self.hasTracking(),
-            tick_position=self.get_tick_position(),
-            tick_interval=self.tickInterval(),
-            inverted_controls=self.invertedControls(),
-            inverted_appearance=self.invertedAppearance(),
-            single_step=self.singleStep(),
-            page_step=self.pageStep(),
+            tick_position=self.get_tick_position(), tick_interval=self.tickInterval(),
         )
 
     def __setstate__(self, state):

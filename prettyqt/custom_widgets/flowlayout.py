@@ -20,7 +20,7 @@ class FlowLayout(widgets.Layout):
         self.set_spacing(spacing)
         self.items: List[QtWidgets.QLayoutItem] = []
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(items=self.get_children())
 
     def __add__(self, other):

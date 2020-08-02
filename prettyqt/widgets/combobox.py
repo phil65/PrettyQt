@@ -42,18 +42,14 @@ class ComboBox(QtWidgets.QComboBox):
         super().__init__(*args, **kwargs)
         self.currentIndexChanged.connect(self.index_changed)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         items = [
             (self.itemText(i), self.itemData(i), self.item_icon(i))
             for i in range(self.count())
         ]
         return dict(
-            object_name=self.id,
             index=self.currentIndex(),
-            enabled=self.isEnabled(),
             editable=self.isEditable(),
-            tooltip=self.toolTip(),
-            statustip=self.statusTip(),
             max_count=self.maxCount(),
             has_frame=self.hasFrame(),
             max_visible_items=self.maxVisibleItems(),

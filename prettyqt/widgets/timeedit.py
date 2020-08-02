@@ -14,15 +14,12 @@ class TimeEdit(QtWidgets.QTimeEdit):
 
     value_changed = core.Signal(datetime.datetime)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             calendar_popup=self.calendarPopup(),
             time=self.get_time(),
             display_format=self.displayFormat(),
             range=(self.min_time(), self.max_time()),
-            tooltip=self.toolTip(),
-            statustip=self.statusTip(),
-            enabled=self.isEnabled(),
         )
 
     def __setstate__(self, state):

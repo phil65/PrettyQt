@@ -17,7 +17,7 @@ class ToolBox(QtWidgets.QToolBox):
         else:
             return self.findChild(QtWidgets.QWidget, index)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         children = list()
         for i, widget in enumerate(self.get_children()):
             dct = dict(

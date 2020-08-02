@@ -55,7 +55,7 @@ class Label(QtWidgets.QLabel):
     def __repr__(self):
         return f"Label({self.text()!r})"
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             text=self.text(),
             scaled_contents=self.hasScaledContents(),

@@ -32,16 +32,12 @@ class CheckBox(QtWidgets.QCheckBox):
         self.stateChanged.connect(self.value_changed)
         self.setChecked(checked)
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
-            object_name=self.id,
             checkable=self.isCheckable(),
             checkstate=self.get_checkstate(),
-            tooltip=self.toolTip(),
-            statustip=self.statusTip(),
             is_tristate=self.isTristate(),
             text=self.text(),
-            enabled=self.isEnabled(),
         )
 
     def __setstate__(self, state):

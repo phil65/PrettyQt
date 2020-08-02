@@ -46,7 +46,7 @@ class FormLayout(QtWidgets.QFormLayout):
             return self
         raise TypeError("Wrong type for addition")
 
-    def __getstate__(self):
+    def serialize_fields(self):
         widget_list = []
         positions = []
         for i, item in enumerate(list(self)):

@@ -43,7 +43,7 @@ class ListWidget(QtWidgets.QListWidget):
     def __len__(self) -> int:
         return self.count()
 
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(
             items=self.get_children(),
             selection_mode=self.get_selection_mode(),

@@ -19,7 +19,7 @@ QtWidgets.QColorDialog.__bases__ = (widgets.BaseDialog,)
 
 
 class ColorDialog(QtWidgets.QColorDialog):
-    def __getstate__(self):
+    def serialize_fields(self):
         return dict(color=self.current_color())
 
     def __setstate__(self, state):
