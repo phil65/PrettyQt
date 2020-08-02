@@ -32,7 +32,6 @@ darkdetect = {version = "^0", markers = "sys_platform == 'darwin'"}
 pygments = "^2.6.1"
 qstylizer = "^0.1.9"
 
-
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.0"
 pip = "^20.1.1"
@@ -50,6 +49,7 @@ mkdocstrings = "^0"
 pymdown-extensions = "^7.1"
 twine = "^3.2.0"
 black = "^19.10b0"
+devtools = "^0"
 
 [tool.poetry.extras]
 pyqt5 = ["PyQt5", "PyQtWebEngine", "PyQtChart", "QScintilla"]
