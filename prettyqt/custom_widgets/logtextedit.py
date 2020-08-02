@@ -4,10 +4,13 @@ from typing import Optional
 import logging
 import re
 import sys
+import traceback
 
 from prettyqt import gui, widgets
 from prettyqt.utils import signallogger
 
+
+logger = logging.getLogger(__name__)
 
 # from SublimeText Regex:
 # (?x:
@@ -58,8 +61,10 @@ class Message(Highlighter):
     bold = True
 
     def format_string(self, record: logging.LogRecord) -> str:
-        if isinstance(record.msg, Exception) and record.exc_info is not None:
+        if record.exc_info is not None:
             val = self.formatter.formatException(record.exc_info)
+        elif isinstance(record.msg, Exception):
+            val = traceback.format_exc()
         else:
             val = record.msg % record.args
         if "\n" in val:
@@ -208,6 +213,7 @@ class LogTextEdit(widgets.PlainTextEdit):
 
     def set_formatter(self, formatter: logging.Formatter):
         self.formatter = formatter
+        logger.info("Setting formatter template to %s", self.formatter._fmt)
         self.handler.setFormatter(self.formatter)
         rules = [klass(self.formatter) for klass in Highlighter.__subclasses__()]
         self.rules = [r for r in rules if r.is_included]
