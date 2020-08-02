@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from typing import Callable, Any, Generator, Dict
 from qtpy import QtWidgets
 
 from prettyqt.utils import bidict
-from typing import Dict, Any
 
 
 SIZE_POLICIES = bidict(
@@ -59,6 +59,21 @@ class SizePolicy(QtWidgets.QSizePolicy):
         self.set_horizontal_policy(state["horizontal_policy"])
         self.set_vertical_policy(state["vertical_policy"])
         self.setRetainSizeWhenHidden(state["retain_size_when_hidden"])
+
+    def __pretty__(
+        self, fmt: Callable[[Any], Any], **kwargs: Any
+    ) -> Generator[Any, None, None]:
+        """Provide a human readable representations of objects.
+
+        Used by devtools (https://python-devtools.helpmanual.io/).
+        """
+        yield self.__class__.__name__ + "("
+        yield 1
+        for k, v in self.__getstate__().items():
+            yield f"{k}={v!r}"
+            yield 0
+        yield -1
+        yield ")"
 
     def get_horizontal_policy(self) -> str:
         """Return size policy.
