@@ -16,6 +16,7 @@ from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
 
 from .object import Object
+from .datastream import DataStream
 from .url import Url
 from .coreapplication import CoreApplication
 from .iodevice import IODevice
@@ -59,6 +60,7 @@ from .standardpaths import StandardPaths
 
 __all__ = [
     "Object",
+    "DataStream",
     "Url",
     "CoreApplication",
     "IODevice",

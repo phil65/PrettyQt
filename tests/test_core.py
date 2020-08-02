@@ -53,6 +53,18 @@ def test_coreapplication(qapp):
     core.CoreApplication.call_on_exit(test)
 
 
+def test_datastream():
+    stream = core.DataStream()
+    stream.set_float_precision("double")
+    with pytest.raises(ValueError):
+        stream.set_float_precision("test")
+    assert stream.get_float_precision() == "double"
+    stream.set_byte_order("big_endian")
+    with pytest.raises(ValueError):
+        stream.set_byte_order("test")
+    assert stream.get_byte_order() == "big_endian"
+
+
 def test_date():
     date = core.Date(1, 1, 2000)
     with open("data.pkl", "wb") as jar:
