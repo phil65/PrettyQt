@@ -296,8 +296,7 @@ def test_filesystemmodel(qtmodeltester):
 
 def test_fontcombobox(qtbot):
     widget = widgets.FontComboBox()
-    font = gui.Font("Courier")
-    widget.set_value(font)
+    font = widget.get_current_font()
     assert font == widget.get_value()
     widget.set_font_filters("scalable")
     assert widget.get_font_filters() == ["scalable"]
