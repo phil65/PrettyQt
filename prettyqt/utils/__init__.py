@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 """Module containing helper functions."""
 
+from typing import Mapping, Union, Iterable
+
 import bidict as bdct
 
 
@@ -20,9 +22,12 @@ class InvalidParamError(ValueError):
         valid_options: allowed options
     """
 
-    def __init__(self, value, valid_options):
+    def __init__(self, value, valid_options: Union[Iterable, Mapping, bidict]):
         self.value = value
-        self.valid_options = valid_options.keys()
+        if isinstance(valid_options, Mapping):
+            self.valid_options = valid_options.keys()
+        else:
+            self.valid_options = valid_options
         opts = " / ".join(repr(opt) for opt in valid_options)
         self.message = f"Invalid value: {value!r}. Allowed options are {opts}."
         super().__init__(self.message)
