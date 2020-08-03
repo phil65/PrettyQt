@@ -266,6 +266,8 @@ def test_standardpaths():
     assert path is not None
     path = core.StandardPaths.get_standard_locations("cache")
     assert path != []
+    path = core.StandardPaths["cache"]
+    assert path != []
     name = core.StandardPaths.get_display_name("cache")
     assert name == "Cache"
 
