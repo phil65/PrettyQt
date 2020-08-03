@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import functools
 import logging
-import operator
 from typing import Any, Generator, List, Optional
 
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import constants, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, helpers
 
 logger = logging.getLogger(__name__)
 
@@ -159,7 +157,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         for item in items:
             if item not in TRIGGERS:
                 raise InvalidParamError(item, TRIGGERS)
-        flags = functools.reduce(operator.ior, [TRIGGERS[t] for t in items])
+        flags = helpers.merge_flags(items, TRIGGERS)
         self.setEditTriggers(flags)
 
     def get_edit_triggers(self) -> List[str]:

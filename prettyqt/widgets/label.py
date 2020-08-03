@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import functools
-import operator
 import pathlib
 
 from typing import List, Optional, Union
@@ -9,7 +7,7 @@ from typing import List, Optional, Union
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import bidict, colors, InvalidParamError
+from prettyqt.utils import bidict, colors, InvalidParamError, helpers
 
 
 H_ALIGNMENTS = bidict(
@@ -146,7 +144,7 @@ class Label(QtWidgets.QLabel):
         for item in types:
             if item not in TEXT_INTERACTION:
                 raise InvalidParamError(item, TEXT_INTERACTION)
-        flags = functools.reduce(operator.ior, [TEXT_INTERACTION[t] for t in types])
+        flags = helpers.merge_flags(types, TEXT_INTERACTION)
         self.setTextInteractionFlags(flags)
         return self
 

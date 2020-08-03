@@ -4,11 +4,16 @@ from typing import List
 import warnings
 import functools
 import sys
+import operator
 
 
 def string_to_num_array(array: str) -> List[float]:
     floats = [float(i) for i in array.split(",")]
     return [int(i) if i.is_integer() else i for i in floats]
+
+
+def merge_flags(flags, mapping):
+    return functools.reduce(operator.ior, [mapping[t] for t in flags])
 
 
 def deprecated(func):

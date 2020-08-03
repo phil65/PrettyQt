@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from typing import Callable, Optional, Dict, Any
-import functools
-import operator
 
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, helpers
 
 
 STYLES = bidict(
@@ -142,7 +140,10 @@ class ToolBar(QtWidgets.QToolBar):
         return self.isAreaAllowed(TOOLBAR_AREAS[area])
 
     def set_allowed_areas(self, *areas: str):
-        flag = functools.reduce(operator.ior, [TOOLBAR_AREAS[t] for t in areas])
+        for area in areas:
+            if area not in TOOLBAR_AREAS:
+                raise InvalidParamError(area, TOOLBAR_AREAS)
+        flag = helpers.merge_flags(areas, TOOLBAR_AREAS)
         self.setAllowedAreas(flag)
 
 

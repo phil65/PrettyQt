@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from contextlib import contextmanager
-import functools
-import operator
+
 from typing import Dict, Iterator, Callable, Optional, Union, Any, Generator
 
 from qtpy import QtCore, QtGui, QtWidgets
@@ -10,7 +9,7 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, colors, InvalidParamError
+from prettyqt.utils import bidict, colors, InvalidParamError, helpers
 
 
 CONTEXT_POLICIES = bidict(
@@ -216,7 +215,7 @@ class Widget(QtWidgets.QWidget):
         for flag in flags:
             if flag not in WINDOW_FLAGS:
                 raise InvalidParamError(flag, WINDOW_FLAGS)
-        flags = functools.reduce(operator.ior, [WINDOW_FLAGS[t] for t in flags])
+        flags = helpers.merge_flags(flags, WINDOW_FLAGS)
         if append:
             flags = flags | self.windowFlags()
         self.setWindowFlags(flags)
