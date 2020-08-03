@@ -1,0 +1,88 @@
+# -*- coding: utf-8 -*-
+
+from typing import List
+
+from qtpy import QtGui, QtWidgets
+
+from prettyqt import core, gui, widgets
+from prettyqt.utils import bidict, InvalidParamError, helpers
+
+
+FONT_FILTERS = bidict(
+    all=QtWidgets.QFontComboBox.AllFonts,
+    scalable=QtWidgets.QFontComboBox.ScalableFonts,
+    non_scalable=QtWidgets.QFontComboBox.NonScalableFonts,
+    monospaced=QtWidgets.QFontComboBox.MonospacedFonts,
+    proportional=QtWidgets.QFontComboBox.ProportionalFonts,
+)
+
+
+QtWidgets.QFontComboBox.__bases__ = (widgets.ComboBox,)
+
+
+class FontComboBox(QtWidgets.QFontComboBox):
+
+    value_changed = core.Signal(object)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.currentIndexChanged.connect(self.index_changed)
+
+    def serialize_fields(self):
+        return dict(
+            current_font=gui.Font(self.currentFont()),
+            font_filters=self.get_font_filters(),
+        )
+
+    def __setstate__(self, state):
+        self.__init__()
+        self.set_font_filters(*state.get("font_filters", []))
+        self.setCurrentFont(state["current_font"])
+
+    def set_font_filters(self, *filters: str):
+        """Set font filters.
+
+        valid values are "all", "scalable", "non_scalable", "monospaced", "proportional"
+
+        Args:
+            filters: font filters to use
+
+        Raises:
+            InvalidParamError: invalid font filters
+        """
+        if not filters:
+            filters = ("all",)
+        for item in filters:
+            if item not in FONT_FILTERS:
+                raise InvalidParamError(item, FONT_FILTERS)
+        flags = helpers.merge_flags(filters, FONT_FILTERS)
+        self.setFontFilters(flags)
+
+    def get_font_filters(self) -> List[str]:
+        """Return list of font filters.
+
+        possible included values are "all", "scalable", "non_scalable", "monospaced",
+        "proportional"
+
+        Returns:
+            font filter list
+        """
+        return [k for k, v in FONT_FILTERS.items() if v & self.fontFilters()]
+
+    def set_value(self, value: QtGui.QFont):
+        self.setCurrentFont(value)
+
+    def get_value(self) -> gui.Font:
+        return self.get_current_font()
+
+    def get_current_font(self) -> gui.Font:
+        return gui.Font(self.currentFont())
+
+
+if __name__ == "__main__":
+    app = widgets.app()
+    widget = FontComboBox()
+    widget.value_changed.connect(print)
+    widget.set_value(gui.Font("Script"))
+    widget.show()
+    app.exec_()

@@ -57,6 +57,7 @@ from .label import Label
 from .commandlinkbutton import CommandLinkButton
 from .radiobutton import RadioButton
 from .combobox import ComboBox
+from .fontcombobox import FontComboBox
 from .spinbox import SpinBox
 from .doublespinbox import DoubleSpinBox
 from .checkbox import CheckBox
@@ -174,6 +175,7 @@ __all__ = [
     "CommandLinkButton",
     "RadioButton",
     "ComboBox",
+    "FontComboBox",
     "SpinBox",
     "DoubleSpinBox",
     "CheckBox",

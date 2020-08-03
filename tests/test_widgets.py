@@ -294,6 +294,17 @@ def test_filesystemmodel(qtmodeltester):
     # qtmodeltester.check(model, force_py=False)
 
 
+def test_fontcombobox(qtbot):
+    widget = widgets.FontComboBox()
+    font = gui.Font("Courier")
+    widget.set_value(font)
+    assert font == widget.get_value()
+    widget.set_font_filters("scalable")
+    assert widget.get_font_filters() == ["scalable"]
+    with pytest.raises(InvalidParamError):
+        widget.set_font_filters("test")
+
+
 def test_fontdialog(qtbot):
     dlg = widgets.FontDialog()
     dlg.get_current_font()
