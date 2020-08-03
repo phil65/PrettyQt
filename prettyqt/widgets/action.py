@@ -42,12 +42,18 @@ class Action(QtWidgets.QAction):
         icon: gui.icon.IconType = None,
         shortcut: Optional[str] = None,
         tooltip: str = "",
+        checkable: bool = False,
+        statustip: str = "",
+        enabled: bool = True,
     ):
         super().__init__(parent)
         self.set_text(text)
         self.set_icon(icon)
         self.set_shortcut(shortcut)
         self.set_tooltip(tooltip)
+        self.set_checkable(checkable)
+        self.set_statustip(statustip)
+        self.set_enabled(enabled)
 
     def serialize_fields(self):
         return dict(
