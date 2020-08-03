@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/gui.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.1" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.2" name="generator"/>
 <title>gui - PrettyQt</title>
-<link href="../assets/stylesheets/main.5d00201e.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.25b81cc6.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -1046,15 +1046,15 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>33
-34
-35
-36
-37
-38
+<pre><span></span>38
 39
 40
-41</pre>
+41
+42
+43
+44
+45
+46</pre>
 </div>
 </td>
 <td class="code">
@@ -1115,7 +1115,7 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>shape does not exist</p>
 </td>
@@ -1128,12 +1128,7 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>18
-19
-20
-21
-22
-23
+<pre><span></span>23
 24
 25
 26
@@ -1141,7 +1136,12 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 28
 29
 30
-31</pre>
+31
+32
+33
+34
+35
+36</pre>
 </div>
 </td>
 <td class="code">
@@ -1155,10 +1155,10 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <span class="sd">        shape: shape to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: shape does not exist</span>
+<span class="sd">        InvalidParamError: shape does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">shape</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SHAPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid shape type '</span><span class="si">{</span><span class="n">shape</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">SHAPES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setShape</span><span class="p">(</span><span class="n">SHAPES</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -1226,7 +1226,7 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid style hint</p>
 </td>
@@ -1268,10 +1268,10 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        hint: style hint</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid style hint</span>
+<span class="sd">        InvalidParamError: invalid style hint</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">hint</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STYLE_HINTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid style hint"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="n">STYLE_HINTS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setStyleHint</span><span class="p">(</span><span class="n">STYLE_HINTS</span><span class="p">[</span><span class="n">hint</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -1321,7 +1321,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid font weight</p>
 </td>
@@ -1363,10 +1363,10 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <span class="sd">        weight: font weight</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid font weight</span>
+<span class="sd">        InvalidParamError: invalid font weight</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WEIGHTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid weight '</span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">WEIGHTS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -1507,7 +1507,9 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>106
+<pre><span></span>104
+105
+106
 107
 108
 109
@@ -1515,9 +1517,7 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 111
 112
 113
-114
-115
-116</pre>
+114</pre>
 </div>
 </td>
 <td class="code">
@@ -1622,7 +1622,7 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>composition mode does not exist</p>
 </td>
@@ -1647,9 +1647,7 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
  99
 100
 101
-102
-103
-104</pre>
+102</pre>
 </div>
 </td>
 <td class="code">
@@ -1662,12 +1660,10 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">                     "destination_out", "source_atop", "destination_atop",</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: composition mode does not exist</span>
+<span class="sd">        InvalidParamError: composition mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">COMP_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">"Invalid composition mode."</span> <span class="sa">f</span><span class="s2">" Valid values: </span><span class="si">{</span><span class="n">COMP_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">COMP_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">COMP_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -1716,7 +1712,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>pen type does not exist</p>
 </td>
@@ -1756,10 +1752,10 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <span class="sd">        pen_type: pen type to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: pen type does not exist</span>
+<span class="sd">        InvalidParamError: pen type does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">pen_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PEN_TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid pen type. Valid values: </span><span class="si">{</span><span class="n">PEN_TYPES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">pen_type</span><span class="p">,</span> <span class="n">PEN_TYPES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">PEN_TYPES</span><span class="p">[</span><span class="n">pen_type</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -2208,7 +2204,7 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid font style hint</p>
 </td>
@@ -2250,10 +2246,10 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">        hint: font style hint</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid font style hint</span>
+<span class="sd">        InvalidParamError: invalid font style hint</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">hint</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STYLE_HINTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid font style hint"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="n">STYLE_HINTS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setFontStyleHint</span><span class="p">(</span><span class="n">STYLE_HINTS</span><span class="p">[</span><span class="n">hint</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -2303,7 +2299,7 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid font weight</p>
 </td>
@@ -2345,10 +2341,10 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        weight: font weight</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid font weight</span>
+<span class="sd">        InvalidParamError: invalid font weight</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WEIGHTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid font weight"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">WEIGHTS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setFontWeight</span><span class="p">(</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -2398,7 +2394,7 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid underline style</p>
 </td>
@@ -2440,10 +2436,10 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">        style: underline style</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid underline style</span>
+<span class="sd">        InvalidParamError: invalid underline style</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">UNDERLINE_STYLES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid underline style"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">UNDERLINE_STYLES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setUnderlineStyle</span><span class="p">(</span><span class="n">UNDERLINE_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -2816,7 +2812,7 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </footer>
 </div>
 <script src="../assets/javascripts/vendor.592d4e23.min.js"></script>
-<script src="../assets/javascripts/bundle.073197b2.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/bundle.806ca5c4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",

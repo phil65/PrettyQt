@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/core.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.1" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.2" name="generator"/>
 <title>core - PrettyQt</title>
-<link href="../assets/stylesheets/main.5d00201e.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.25b81cc6.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -1012,7 +1012,7 @@ set_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid order</p>
 </td>
@@ -1052,10 +1052,10 @@ set_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        order: byte order to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid order</span>
+<span class="sd">        InvalidParamError: invalid order</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">order</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">BYTE_ORDER</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid byte order."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">order</span><span class="p">,</span> <span class="n">BYTE_ORDER</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setByteOrder</span><span class="p">(</span><span class="n">BYTE_ORDER</span><span class="p">[</span><span class="n">order</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -1104,7 +1104,7 @@ set_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid precision</p>
 </td>
@@ -1144,10 +1144,10 @@ set_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">        precision: floating point precision</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid precision</span>
+<span class="sd">        InvalidParamError: invalid precision</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">precision</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FLOAT_PRECISION</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid precision."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="n">FLOAT_PRECISION</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setFloatingPointPrecision</span><span class="p">(</span><span class="n">FLOAT_PRECISION</span><span class="p">[</span><span class="n">precision</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -1680,7 +1680,7 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid format</p>
 </td>
@@ -1722,10 +1722,10 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
 <span class="sd">        fmt: the default format to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid format</span>
+<span class="sd">        InvalidParamError: invalid format</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FORMATS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid value. Valid values: </span><span class="si">{</span><span class="n">FORMATS</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">FORMATS</span><span class="p">)</span>
     <span class="bp">cls</span><span class="o">.</span><span class="n">setDefaultFormat</span><span class="p">(</span><span class="n">FORMATS</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -1784,7 +1784,7 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid format or scope</p>
 </td>
@@ -1826,12 +1826,12 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 <span class="sd">        scope: the scope to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid format or scope</span>
+<span class="sd">        InvalidParamError: invalid format or scope</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FORMATS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid format. Valid values: </span><span class="si">{</span><span class="n">FORMATS</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">FORMATS</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">scope</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCOPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid scope. Valid values: </span><span class="si">{</span><span class="n">SCOPES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">SCOPES</span><span class="p">)</span>
     <span class="bp">cls</span><span class="o">.</span><span class="n">setPath</span><span class="p">(</span><span class="n">FORMATS</span><span class="p">[</span><span class="n">fmt</span><span class="p">],</span> <span class="n">SCOPES</span><span class="p">[</span><span class="n">scope</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 </code></pre>
 </div>
@@ -2053,7 +2053,7 @@ to_path<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </footer>
 </div>
 <script src="../assets/javascripts/vendor.592d4e23.min.js"></script>
-<script src="../assets/javascripts/bundle.073197b2.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/bundle.806ca5c4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",

@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/widgets.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.1" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.2" name="generator"/>
 <title>widgets - PrettyQt</title>
-<link href="../assets/stylesheets/main.5d00201e.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.25b81cc6.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -457,6 +457,11 @@
 <nav aria-label="Action" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.action.Action.get_menu_role">
+    get_menu_role()
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.action.Action.get_priority">
     get_priority()
   </a>
@@ -469,6 +474,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.action.Action.set_icon">
     set_icon()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.action.Action.set_menu_role">
+    set_menu_role()
   </a>
 </li>
 <li class="md-nav__item">
@@ -853,6 +863,34 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.filesystemmodel.FileSystemModel.data">
     data()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.fontcombobox">
+    fontcombobox
+  </a>
+<nav aria-label="fontcombobox" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.fontcombobox.FontComboBox">
+    FontComboBox
+  </a>
+<nav aria-label="FontComboBox" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.fontcombobox.FontComboBox.get_font_filters">
+    get_font_filters()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.fontcombobox.FontComboBox.set_font_filters">
+    set_font_filters()
   </a>
 </li>
 </ul>
@@ -2236,6 +2274,11 @@
 <nav aria-label="Action" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.action.Action.get_menu_role">
+    get_menu_role()
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.action.Action.get_priority">
     get_priority()
   </a>
@@ -2248,6 +2291,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.action.Action.set_icon">
     set_icon()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.action.Action.set_menu_role">
+    set_menu_role()
   </a>
 </li>
 <li class="md-nav__item">
@@ -2632,6 +2680,34 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.filesystemmodel.FileSystemModel.data">
     data()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.fontcombobox">
+    fontcombobox
+  </a>
+<nav aria-label="fontcombobox" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.fontcombobox.FontComboBox">
+    FontComboBox
+  </a>
+<nav aria-label="FontComboBox" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.fontcombobox.FontComboBox.get_font_filters">
+    get_font_filters()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.fontcombobox.FontComboBox.set_font_filters">
+    set_font_filters()
   </a>
 </li>
 </ul>
@@ -3758,15 +3834,15 @@ get_selection_behaviour<span class="p">(</span><span class="bp">self</span><span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>183
+<pre><span></span>181
+182
+183
 184
 185
 186
 187
 188
-189
-190
-191</pre>
+189</pre>
 </div>
 </td>
 <td class="code">
@@ -3819,15 +3895,15 @@ get_selection_mode<span class="p">(</span><span class="bp">self</span><span clas
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>212
+<pre><span></span>208
+209
+210
+211
+212
 213
 214
 215
-216
-217
-218
-219
-220</pre>
+216</pre>
 </div>
 </td>
 <td class="code">
@@ -3862,11 +3938,11 @@ highlight_when_inactive<span class="p">(</span><span class="bp">self</span><span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>308
-309
-310
-311
-312</pre>
+<pre><span></span>304
+305
+306
+307
+308</pre>
 </div>
 </td>
 <td class="code">
@@ -3919,18 +3995,18 @@ jump_to_column<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>278
+<pre><span></span>274
+275
+276
+277
+278
 279
 280
 281
 282
 283
 284
-285
-286
-287
-288
-289</pre>
+285</pre>
 </div>
 </td>
 <td class="code">
@@ -3985,15 +4061,15 @@ num_selected<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>268
+<pre><span></span>264
+265
+266
+267
+268
 269
 270
 271
-272
-273
-274
-275
-276</pre>
+272</pre>
 </div>
 </td>
 <td class="code">
@@ -4028,9 +4104,9 @@ scroll_to_bottom<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>295
-296
-297</pre>
+<pre><span></span>291
+292
+293</pre>
 </div>
 </td>
 <td class="code">
@@ -4059,9 +4135,9 @@ scroll_to_top<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>291
-292
-293</pre>
+<pre><span></span>287
+288
+289</pre>
 </div>
 </td>
 <td class="code">
@@ -4090,14 +4166,14 @@ selectAll<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>55
+<pre><span></span>53
+54
+55
 56
 57
 58
 59
-60
-61
-62</pre>
+60</pre>
 </div>
 </td>
 <td class="code">
@@ -4131,9 +4207,9 @@ selected_data<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>146
-147
-148</pre>
+<pre><span></span>144
+145
+146</pre>
 </div>
 </td>
 <td class="code">
@@ -4162,10 +4238,10 @@ selected_indexes<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>133
-134
-135
-136</pre>
+<pre><span></span>131
+132
+133
+134</pre>
 </div>
 </td>
 <td class="code">
@@ -4195,9 +4271,9 @@ selected_names<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>138
-139
-140</pre>
+<pre><span></span>136
+137
+138</pre>
 </div>
 </td>
 <td class="code">
@@ -4226,9 +4302,9 @@ selected_rows<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>142
-143
-144</pre>
+<pre><span></span>140
+141
+142</pre>
 </div>
 </td>
 <td class="code">
@@ -4283,7 +4359,7 @@ set_horizontal_scroll_mode<span class="p">(</span><span class="bp">self</span><s
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid scroll mode</p>
 </td>
@@ -4296,7 +4372,11 @@ set_horizontal_scroll_mode<span class="p">(</span><span class="bp">self</span><s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>238
+<pre><span></span>234
+235
+236
+237
+238
 239
 240
 241
@@ -4305,11 +4385,7 @@ set_horizontal_scroll_mode<span class="p">(</span><span class="bp">self</span><s
 244
 245
 246
-247
-248
-249
-250
-251</pre>
+247</pre>
 </div>
 </td>
 <td class="code">
@@ -4323,10 +4399,10 @@ set_horizontal_scroll_mode<span class="p">(</span><span class="bp">self</span><s
 <span class="sd">        mode: mode to set</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid scroll mode</span>
+<span class="sd">        InvalidParamError: invalid scroll mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLL_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid scroll mode"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLL_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalScrollMode</span><span class="p">(</span><span class="n">SCROLL_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -4349,7 +4425,9 @@ set_model<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>64
+<pre><span></span>62
+63
+64
 65
 66
 67
@@ -4358,9 +4436,7 @@ set_model<span class="p">(</span><span class="bp">self</span><span class="p">,</
 70
 71
 72
-73
-74
-75</pre>
+73</pre>
 </div>
 </td>
 <td class="code">
@@ -4424,7 +4500,7 @@ set_scroll_mode<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid scroll mode</p>
 </td>
@@ -4437,7 +4513,11 @@ set_scroll_mode<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>222
+<pre><span></span>218
+219
+220
+221
+222
 223
 224
 225
@@ -4447,11 +4527,7 @@ set_scroll_mode<span class="p">(</span><span class="bp">self</span><span class="
 229
 230
 231
-232
-233
-234
-235
-236</pre>
+232</pre>
 </div>
 </td>
 <td class="code">
@@ -4465,10 +4541,10 @@ set_scroll_mode<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        mode: mode to set</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid scroll mode</span>
+<span class="sd">        InvalidParamError: invalid scroll mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLL_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid scroll mode"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLL_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalScrollMode</span><span class="p">(</span><span class="n">SCROLL_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setVerticalScrollMode</span><span class="p">(</span><span class="n">SCROLL_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
@@ -4518,7 +4594,7 @@ set_selection_behaviour<span class="p">(</span><span class="bp">self</span><span
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>behaviour does not exist</p>
 </td>
@@ -4531,7 +4607,9 @@ set_selection_behaviour<span class="p">(</span><span class="bp">self</span><span
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>168
+<pre><span></span>166
+167
+168
 169
 170
 171
@@ -4542,9 +4620,7 @@ set_selection_behaviour<span class="p">(</span><span class="bp">self</span><span
 176
 177
 178
-179
-180
-181</pre>
+179</pre>
 </div>
 </td>
 <td class="code">
@@ -4558,10 +4634,10 @@ set_selection_behaviour<span class="p">(</span><span class="bp">self</span><span
 <span class="sd">        behaviour: selection behaviour to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: behaviour does not exist</span>
+<span class="sd">        InvalidParamError: behaviour does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">behaviour</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SELECTION_BEHAVIOURS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"invalid selection behaviour"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">behaviour</span><span class="p">,</span> <span class="n">SELECTION_BEHAVIOURS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setSelectionBehavior</span><span class="p">(</span><span class="n">SELECTION_BEHAVIOURS</span><span class="p">[</span><span class="n">behaviour</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -4610,7 +4686,7 @@ set_selection_mode<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>mode does not exist</p>
 </td>
@@ -4623,7 +4699,9 @@ set_selection_mode<span class="p">(</span><span class="bp">self</span><span clas
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>193
+<pre><span></span>191
+192
+193
 194
 195
 196
@@ -4636,11 +4714,7 @@ set_selection_mode<span class="p">(</span><span class="bp">self</span><span clas
 203
 204
 205
-206
-207
-208
-209
-210</pre>
+206</pre>
 </div>
 </td>
 <td class="code">
@@ -4654,14 +4728,12 @@ set_selection_mode<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">        mode: selection mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: mode does not exist</span>
+<span class="sd">        InvalidParamError: mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">mode</span> <span class="o">=</span> <span class="s2">"none"</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SELECTION_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">"Format must be either 'single', 'extended',"</span> <span class="s2">"'multi' or 'None'"</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SELECTION_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setSelectionMode</span><span class="p">(</span><span class="n">SELECTION_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -4710,7 +4782,7 @@ set_vertical_scroll_mode<span class="p">(</span><span class="bp">self</span><spa
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid scroll mode</p>
 </td>
@@ -4723,7 +4795,11 @@ set_vertical_scroll_mode<span class="p">(</span><span class="bp">self</span><spa
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>253
+<pre><span></span>249
+250
+251
+252
+253
 254
 255
 256
@@ -4732,11 +4808,7 @@ set_vertical_scroll_mode<span class="p">(</span><span class="bp">self</span><spa
 259
 260
 261
-262
-263
-264
-265
-266</pre>
+262</pre>
 </div>
 </td>
 <td class="code">
@@ -4750,10 +4822,10 @@ set_vertical_scroll_mode<span class="p">(</span><span class="bp">self</span><spa
 <span class="sd">        mode: mode to set</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid scroll mode</span>
+<span class="sd">        InvalidParamError: invalid scroll mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLL_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid scroll mode"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLL_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setVerticalScrollMode</span><span class="p">(</span><span class="n">SCROLL_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -4776,14 +4848,14 @@ toggle_select_all<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 99
+<pre><span></span> 97
+ 98
+ 99
 100
 101
 102
 103
-104
-105
-106</pre>
+104</pre>
 </div>
 </td>
 <td class="code">
@@ -4984,7 +5056,7 @@ set_horizontal_scrollbar_policy<span class="p">(</span><span class="bp">self</sp
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid scrollbar policy</p>
 </td>
@@ -5024,10 +5096,10 @@ set_horizontal_scrollbar_policy<span class="p">(</span><span class="bp">self</sp
 <span class="sd">        mode: visibilty to set</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid scrollbar policy</span>
+<span class="sd">        InvalidParamError: invalid scrollbar policy</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid scrollbar policy"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalScrollBarPolicy</span><span class="p">(</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -5138,7 +5210,7 @@ set_scrollbar_policy<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid scrollbar policy</p>
 </td>
@@ -5179,10 +5251,10 @@ set_scrollbar_policy<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">        mode: visibilty to set</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid scrollbar policy</span>
+<span class="sd">        InvalidParamError: invalid scrollbar policy</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid scrollbar policy"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalScrollBarPolicy</span><span class="p">(</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setVerticalScrollBarPolicy</span><span class="p">(</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
@@ -5294,7 +5366,7 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid size adjust policy</p>
 </td>
@@ -5335,10 +5407,10 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">        policy: size adjust policy to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid size adjust policy</span>
+<span class="sd">        InvalidParamError: invalid size adjust policy</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SIZE_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Policy not available"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">SIZE_POLICIES</span><span class="p">)</span>
     <span class="n">policy</span> <span class="o">=</span> <span class="n">SIZE_POLICIES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setSizeAdjustPolicy</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
 </code></pre>
@@ -5388,7 +5460,7 @@ set_vertical_scrollbar_policy<span class="p">(</span><span class="bp">self</span
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid scrollbar policy</p>
 </td>
@@ -5428,10 +5500,10 @@ set_vertical_scrollbar_policy<span class="p">(</span><span class="bp">self</span
 <span class="sd">        mode: visibilty to set</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid scrollbar policy</span>
+<span class="sd">        InvalidParamError: invalid scrollbar policy</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid scrollbar policy"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setVerticalScrollBarPolicy</span><span class="p">(</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -5997,7 +6069,7 @@ set_button_symbols<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid button symbol type</p>
 </td>
@@ -6037,10 +6109,10 @@ set_button_symbols<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">        mode: button symbol type to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid button symbol type</span>
+<span class="sd">        InvalidParamError: invalid button symbol type</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SYMBOLS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid button symbol type."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SYMBOLS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setButtonSymbols</span><span class="p">(</span><span class="n">SYMBOLS</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -6089,7 +6161,7 @@ set_correction_mode<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid correction mode</p>
 </td>
@@ -6129,10 +6201,10 @@ set_correction_mode<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">        mode: correction mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid correction mode</span>
+<span class="sd">        InvalidParamError: invalid correction mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CORRECTION_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid correction mode."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">CORRECTION_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCorrectionMode</span><span class="p">(</span><span class="n">CORRECTION_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -6181,7 +6253,7 @@ set_step_type<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid step type</p>
 </td>
@@ -6221,10 +6293,10 @@ set_step_type<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        mode: step type to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid step type</span>
+<span class="sd">        InvalidParamError: invalid step type</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STEP_TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid step type."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">STEP_TYPES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setStepType</span><span class="p">(</span><span class="n">STEP_TYPES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -6252,6 +6324,70 @@ set_step_type<span class="p">(</span><span class="bp">self</span><span class="p"
 </h3>
 <div class="doc doc-contents">
 <div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.action.Action.get_menu_role">
+<code class="highlight language-python">
+get_menu_role<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Return menu role.</p>
+<p>Possible values: "none", "text_heuristic", "application_specific", "about_qt",
+"about", "preferences", "quit"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>menu role</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>195
+196
+197
+198
+199
+200
+201
+202
+203
+204</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_menu_role</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return menu role.</span>
+
+<span class="sd">    Possible values: "none", "text_heuristic", "application_specific", "about_qt",</span>
+<span class="sd">    "about", "preferences", "quit"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        menu role</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">ROLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">menuRole</span><span class="p">()]</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.action.Action.get_priority">
 <code class="highlight language-python">
@@ -6283,15 +6419,15 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>120
-121
-122
-123
-124
-125
-126
-127
-128</pre>
+<pre><span></span>144
+145
+146
+147
+148
+149
+150
+151
+152</pre>
 </div>
 </td>
 <td class="code">
@@ -6344,15 +6480,15 @@ get_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>145
-146
-147
-148
-149
-150
-151
-152
-153</pre>
+<pre><span></span>169
+170
+171
+172
+173
+174
+175
+176
+177</pre>
 </div>
 </td>
 <td class="code">
@@ -6408,14 +6544,14 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>89
-90
-91
-92
-93
-94
-95
-96</pre>
+<pre><span></span>113
+114
+115
+116
+117
+118
+119
+120</pre>
 </div>
 </td>
 <td class="code">
@@ -6428,6 +6564,101 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    """</span>
     <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.action.Action.set_menu_role">
+<code class="highlight language-python">
+set_menu_role<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set menu role.</p>
+<p>Allowed values are "none", "text_heuristic", "application_specific", "about_qt",
+"about", "preferences", "quit"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>role</code></td>
+<td><code>str</code></td>
+<td>
+<p>menu role</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>menu role does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_menu_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set menu role.</span>
+
+<span class="sd">    Allowed values are "none", "text_heuristic", "application_specific", "about_qt",</span>
+<span class="sd">    "about", "preferences", "quit"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        role: menu role</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: menu role does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">role</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ROLES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">role</span><span class="p">,</span> <span class="n">ROLES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setMenuRole</span><span class="p">(</span><span class="n">ROLES</span><span class="p">[</span><span class="n">role</span><span class="p">])</span>
 </code></pre>
 </div>
 </td>
@@ -6475,7 +6706,7 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>priority does not exist</p>
 </td>
@@ -6488,20 +6719,20 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118</pre>
+<pre><span></span>129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142</pre>
 </div>
 </td>
 <td class="code">
@@ -6515,10 +6746,10 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <span class="sd">        priority: priority for the action</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: priority does not exist</span>
+<span class="sd">        InvalidParamError: priority does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">priority</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PRIORITIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">priority</span><span class="si">}</span><span class="s2"> not a valid priority."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">priority</span><span class="p">,</span> <span class="n">PRIORITIES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setPriority</span><span class="p">(</span><span class="n">PRIORITIES</span><span class="p">[</span><span class="n">priority</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -6567,7 +6798,7 @@ set_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>shortcut context does not exist</p>
 </td>
@@ -6580,20 +6811,20 @@ set_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143</pre>
+<pre><span></span>154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167</pre>
 </div>
 </td>
 <td class="code">
@@ -6607,10 +6838,10 @@ set_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">        context: shortcut context</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: shortcut context does not exist</span>
+<span class="sd">        InvalidParamError: shortcut context does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">context</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONTEXTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2"> not a valid shortcut context."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">CONTEXTS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setShortcutContext</span><span class="p">(</span><span class="n">CONTEXTS</span><span class="p">[</span><span class="n">context</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -6738,7 +6969,7 @@ set_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>exclusion policy does not exist</p>
 </td>
@@ -6780,12 +7011,12 @@ set_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">        policy: exclusion policy to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: exclusion policy does not exist</span>
+<span class="sd">        InvalidParamError: exclusion policy does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">policy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">policy</span> <span class="o">=</span> <span class="s2">"none"</span>
     <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid exclusion policy. Valid values: </span><span class="si">{</span><span class="n">POLICIES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">POLICIES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setExclusionPolicy</span><span class="p">(</span><span class="n">POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -7033,7 +7264,7 @@ set_selection_mode<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>mode does not exist</p>
 </td>
@@ -7075,12 +7306,12 @@ set_selection_mode<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">        mode: selection mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: mode does not exist</span>
+<span class="sd">        InvalidParamError: mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">mode</span> <span class="o">=</span> <span class="s2">"none"</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SELECTION_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Format must be either 'single' or 'None'"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SELECTION_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setSelectionMode</span><span class="p">(</span><span class="n">SELECTION_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -7208,7 +7439,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid checkstate</p>
 </td>
@@ -7248,10 +7479,10 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        state: checkstate to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid checkstate</span>
+<span class="sd">        InvalidParamError: invalid checkstate</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid checkstate."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">STATES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">STATES</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -7311,16 +7542,16 @@ get_insert_policy<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>124
-125
-126
-127
-128
+<pre><span></span>128
 129
 130
 131
 132
-133</pre>
+133
+134
+135
+136
+137</pre>
 </div>
 </td>
 <td class="code">
@@ -7374,15 +7605,15 @@ get_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>151
-152
-153
-154
-155
+<pre><span></span>155
 156
 157
 158
-159</pre>
+159
+160
+161
+162
+163</pre>
 </div>
 </td>
 <td class="code">
@@ -7444,7 +7675,7 @@ set_insert_policy<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid insert policy</p>
 </td>
@@ -7457,11 +7688,7 @@ set_insert_policy<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>107
-108
-109
-110
-111
+<pre><span></span>111
 112
 113
 114
@@ -7472,7 +7699,11 @@ set_insert_policy<span class="p">(</span><span class="bp">self</span><span class
 119
 120
 121
-122</pre>
+122
+123
+124
+125
+126</pre>
 </div>
 </td>
 <td class="code">
@@ -7487,10 +7718,10 @@ set_insert_policy<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">        policy: insert policy to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid insert policy</span>
+<span class="sd">        InvalidParamError: invalid insert policy</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">INSERT_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Policy not available"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">INSERT_POLICIES</span><span class="p">)</span>
     <span class="n">policy</span> <span class="o">=</span> <span class="n">INSERT_POLICIES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setInsertPolicy</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
 </code></pre>
@@ -7540,7 +7771,7 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid size adjust policy</p>
 </td>
@@ -7553,11 +7784,7 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>135
-136
-137
-138
-139
+<pre><span></span>139
 140
 141
 142
@@ -7567,7 +7794,11 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 146
 147
 148
-149</pre>
+149
+150
+151
+152
+153</pre>
 </div>
 </td>
 <td class="code">
@@ -7581,10 +7812,10 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">        policy: size adjust policy to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid size adjust policy</span>
+<span class="sd">        InvalidParamError: invalid size adjust policy</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SIZE_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Policy not available"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">SIZE_POLICIES</span><span class="p">)</span>
     <span class="n">policy</span> <span class="o">=</span> <span class="n">SIZE_POLICIES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setSizeAdjustPolicy</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
 </code></pre>
@@ -7835,7 +8066,7 @@ set_completion_mode<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>completion mode does not exist</p>
 </td>
@@ -7875,10 +8106,10 @@ set_completion_mode<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">        mode: completion mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: completion mode does not exist</span>
+<span class="sd">        InvalidParamError: completion mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">COMPLETION_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid mode. Valid values: </span><span class="si">{</span><span class="n">COMPLETION_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">COMPLETION_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCompletionMode</span><span class="p">(</span><span class="n">COMPLETION_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -7927,7 +8158,7 @@ set_filter_mode<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>filter mode does not exist</p>
 </td>
@@ -7967,10 +8198,10 @@ set_filter_mode<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        mode: filter mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: filter mode does not exist</span>
+<span class="sd">        InvalidParamError: filter mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FILTER_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid mode. Valid values: </span><span class="si">{</span><span class="n">FILTER_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">FILTER_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setFilterMode</span><span class="p">(</span><span class="n">FILTER_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -8019,7 +8250,7 @@ set_sort_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>sort mode does not exist</p>
 </td>
@@ -8061,12 +8292,12 @@ set_sort_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        mode: sort mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: sort mode does not exist</span>
+<span class="sd">        InvalidParamError: sort mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">mode</span> <span class="o">=</span> <span class="s2">"unsorted"</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SORT_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid sort mode. Valid values: </span><span class="si">{</span><span class="n">SORT_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SORT_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setModelSorting</span><span class="p">(</span><span class="n">SORT_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -8222,7 +8453,7 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>Button type not available</p>
 </td>
@@ -8281,7 +8512,7 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <span class="sd">        created button</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: Button type not available</span>
+<span class="sd">        InvalidParamError: Button type not available</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
@@ -8364,7 +8595,7 @@ add_default_button<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>Button type not available</p>
 </td>
@@ -8426,10 +8657,10 @@ add_default_button<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">        created button</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: Button type not available</span>
+<span class="sd">        InvalidParamError: Button type not available</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">button</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">BUTTONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"button type not available"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">BUTTONS</span><span class="p">)</span>
     <span class="n">btn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">addButton</span><span class="p">(</span><span class="n">BUTTONS</span><span class="p">[</span><span class="n">button</span><span class="p">])</span>
     <span class="n">btn</span><span class="o">.</span><span class="n">setObjectName</span><span class="p">(</span><span class="n">button</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">callback</span><span class="p">:</span>
@@ -8583,7 +8814,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>orientation does not exist</p>
 </td>
@@ -8623,10 +8854,10 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        orientation: orientation for the button box</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: orientation does not exist</span>
+<span class="sd">        InvalidParamError: orientation does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ORIENTATIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">orientation</span><span class="si">}</span><span class="s2"> not a valid orientation."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">ORIENTATIONS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">ORIENTATIONS</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -9019,7 +9250,7 @@ set_accept_mode<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid accept mode</p>
 </td>
@@ -9059,10 +9290,10 @@ set_accept_mode<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        mode: accept mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid accept mode</span>
+<span class="sd">        InvalidParamError: invalid accept mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ACCEPT_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid value. Valid values: </span><span class="si">{</span><span class="n">ACCEPT_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ACCEPT_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setAcceptMode</span><span class="p">(</span><span class="n">ACCEPT_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -9317,7 +9548,7 @@ set_label_text<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        text: text to use</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">label</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LABELS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid value. Valid values: </span><span class="si">{</span><span class="n">LABELS</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">LABELS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setLabelText</span><span class="p">(</span><span class="n">LABELS</span><span class="p">[</span><span class="n">label</span><span class="p">],</span> <span class="n">text</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -9366,7 +9597,7 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid view mode</p>
 </td>
@@ -9406,10 +9637,10 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        mode: view mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid view mode</span>
+<span class="sd">        InvalidParamError: invalid view mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VIEW_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid value. Valid values: </span><span class="si">{</span><span class="n">VIEW_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">VIEW_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setViewMode</span><span class="p">(</span><span class="n">VIEW_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -9465,6 +9696,188 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">FilePathRole</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.widgets.fontcombobox">
+<code>fontcombobox</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.widgets.fontcombobox.FontComboBox">
+<code>FontComboBox</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.fontcombobox.FontComboBox.get_font_filters">
+<code class="highlight language-python">
+get_font_filters<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Return list of font filters.</p>
+<p>possible included values are "all", "scalable", "non_scalable", "monospaced",
+"proportional"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>List[str]</code></td>
+<td>
+<p>font filter list</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/fontcombobox.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>61
+62
+63
+64
+65
+66
+67
+68
+69
+70</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_font_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">"""Return list of font filters.</span>
+
+<span class="sd">    possible included values are "all", "scalable", "non_scalable", "monospaced",</span>
+<span class="sd">    "proportional"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        font filter list</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">FONT_FILTERS</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fontFilters</span><span class="p">()]</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.fontcombobox.FontComboBox.set_font_filters">
+<code class="highlight language-python">
+set_font_filters<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">filters</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set font filters.</p>
+<p>valid values are "all", "scalable", "non_scalable", "monospaced", "proportional"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>filters</code></td>
+<td><code>str</code></td>
+<td>
+<p>font filters to use</p>
+</td>
+<td><code>()</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid font filters</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/fontcombobox.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">filters</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set font filters.</span>
+
+<span class="sd">    valid values are "all", "scalable", "non_scalable", "monospaced", "proportional"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        filters: font filters to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid font filters</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">filters</span><span class="p">:</span>
+        <span class="n">filters</span> <span class="o">=</span> <span class="p">(</span><span class="s2">"all"</span><span class="p">,)</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FONT_FILTERS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">FONT_FILTERS</span><span class="p">)</span>
+    <span class="n">flags</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">merge_flags</span><span class="p">(</span><span class="n">filters</span><span class="p">,</span> <span class="n">FONT_FILTERS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFontFilters</span><span class="p">(</span><span class="n">flags</span><span class="p">)</span>
 </code></pre>
 </div>
 </td>
@@ -9643,7 +10056,7 @@ set_frame_style<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>style does not exist</p>
 </td>
@@ -9683,10 +10096,10 @@ set_frame_style<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        style: frame style to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: style does not exist</span>
+<span class="sd">        InvalidParamError: style does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SHADOWS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"invalid frame style"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">SHADOWS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">SHADOWS</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -9832,15 +10245,15 @@ get_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>125
+<pre><span></span>123
+124
+125
 126
 127
 128
 129
 130
-131
-132
-133</pre>
+131</pre>
 </div>
 </td>
 <td class="code">
@@ -9893,15 +10306,15 @@ get_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>153
+<pre><span></span>151
+152
+153
 154
 155
 156
 157
 158
-159
-160
-161</pre>
+159</pre>
 </div>
 </td>
 <td class="code">
@@ -9962,7 +10375,7 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>text format does not exist</p>
 </td>
@@ -9975,7 +10388,9 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>109
+<pre><span></span>107
+108
+109
 110
 111
 112
@@ -9987,9 +10402,7 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 118
 119
 120
-121
-122
-123</pre>
+121</pre>
 </div>
 </td>
 <td class="code">
@@ -10003,10 +10416,10 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        text_format: text format to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: text format does not exist</span>
+<span class="sd">        InvalidParamError: text format does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">text_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TEXT_FORMATS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid text format"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">text_format</span><span class="p">,</span> <span class="n">TEXT_FORMATS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTextFormat</span><span class="p">(</span><span class="n">TEXT_FORMATS</span><span class="p">[</span><span class="n">text_format</span><span class="p">])</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre>
@@ -10056,7 +10469,7 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>text interaction mode does not exist</p>
 </td>
@@ -10069,7 +10482,9 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>135
+<pre><span></span>133
+134
+135
 136
 137
 138
@@ -10083,9 +10498,7 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 146
 147
 148
-149
-150
-151</pre>
+149</pre>
 </div>
 </td>
 <td class="code">
@@ -10099,12 +10512,12 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">        types: text interaction mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: text interaction mode does not exist</span>
+<span class="sd">        InvalidParamError: text interaction mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">types</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TEXT_INTERACTION</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid text interaction mode"</span><span class="p">)</span>
-    <span class="n">flags</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">reduce</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">ior</span><span class="p">,</span> <span class="p">[</span><span class="n">TEXT_INTERACTION</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">types</span><span class="p">])</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">TEXT_INTERACTION</span><span class="p">)</span>
+    <span class="n">flags</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">merge_flags</span><span class="p">(</span><span class="n">types</span><span class="p">,</span> <span class="n">TEXT_INTERACTION</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTextInteractionFlags</span><span class="p">(</span><span class="n">flags</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre>
@@ -10155,7 +10568,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid font weight</p>
 </td>
@@ -10168,7 +10581,9 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>185
+<pre><span></span>183
+184
+185
 186
 187
 188
@@ -10183,9 +10598,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 197
 198
 199
-200
-201
-202</pre>
+200</pre>
 </div>
 </td>
 <td class="code">
@@ -10200,10 +10613,10 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <span class="sd">        weight: font weight</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid font weight</span>
+<span class="sd">        InvalidParamError: invalid font weight</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WEIGHTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid weight '</span><span class="si">{</span><span class="n">weight</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">WEIGHTS</span><span class="p">)</span>
     <span class="n">font</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">()</span>
     <span class="n">font</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
@@ -10343,7 +10756,7 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>alignment does not exist</p>
 </td>
@@ -10392,10 +10805,10 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        item: set alignment for specific child only</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: alignment does not exist</span>
+<span class="sd">        InvalidParamError: alignment does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">alignment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALIGNMENTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">alignment</span><span class="si">!r}</span><span class="s2"> not a valid alignment."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">ALIGNMENTS</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
@@ -10447,7 +10860,7 @@ set_size_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>size mode does not exist</p>
 </td>
@@ -10487,10 +10900,10 @@ set_size_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        mode: size mode for the layout</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: size mode does not exist</span>
+<span class="sd">        InvalidParamError: size mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">mode</span><span class="si">}</span><span class="s2"> not a valid size mode."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setSizeConstraint</span><span class="p">(</span><span class="n">MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -10647,7 +11060,7 @@ set_echo_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid echo mode</p>
 </td>
@@ -10687,10 +11100,10 @@ set_echo_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        mode: echo mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid echo mode</span>
+<span class="sd">        InvalidParamError: invalid echo mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ECHO_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid echo mode"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ECHO_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setEchoMode</span><span class="p">(</span><span class="n">ECHO_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -10878,7 +11291,7 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid view mode</p>
 </td>
@@ -10918,10 +11331,10 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        mode: view mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid view mode</span>
+<span class="sd">        InvalidParamError: invalid view mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VIEW_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid value. Valid values: </span><span class="si">{</span><span class="n">VIEW_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">VIEW_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setViewMode</span><span class="p">(</span><span class="n">VIEW_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -11049,7 +11462,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid checkstate</p>
 </td>
@@ -11089,10 +11502,10 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        state: checkstate to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid checkstate</span>
+<span class="sd">        InvalidParamError: invalid checkstate</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid checkstate."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">STATES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">STATES</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -11231,7 +11644,7 @@ add_toolbar<span class="p">(</span><span class="bp">self</span><span class="p">,
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>position does not exist</p>
 </td>
@@ -11273,10 +11686,10 @@ add_toolbar<span class="p">(</span><span class="bp">self</span><span class="p">,
 <span class="sd">        position: position of the toolbar</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: position does not exist</span>
+<span class="sd">        InvalidParamError: position does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TOOLBAR_AREAS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Position not existing"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">TOOLBAR_AREAS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">addToolBar</span><span class="p">(</span><span class="n">TOOLBAR_AREAS</span><span class="p">[</span><span class="n">position</span><span class="p">],</span> <span class="n">toolbar</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -11325,7 +11738,7 @@ add_toolbar_break<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>position does not exist</p>
 </td>
@@ -11365,10 +11778,10 @@ add_toolbar_break<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">        position: position of the toolbar</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: position does not exist</span>
+<span class="sd">        InvalidParamError: position does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TOOLBAR_AREAS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Position not existing"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">TOOLBAR_AREAS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">addToolBarBreak</span><span class="p">(</span><span class="n">TOOLBAR_AREAS</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -11794,7 +12207,7 @@ set_tab_position<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>tab position does not exist</p>
 </td>
@@ -11834,10 +12247,10 @@ set_tab_position<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">        position: tabs position to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: tab position does not exist</span>
+<span class="sd">        InvalidParamError: tab position does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TAB_POSITIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid value for tab position."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">TAB_POSITIONS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTabPosition</span><span class="p">(</span><span class="n">TAB_POSITIONS</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -11886,7 +12299,7 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>view mode does not exist</p>
 </td>
@@ -11926,10 +12339,10 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        mode: view mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: view mode does not exist</span>
+<span class="sd">        InvalidParamError: view mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VIEW_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid value for mode."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">VIEW_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setViewMode</span><span class="p">(</span><span class="n">VIEW_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -11978,7 +12391,7 @@ set_window_order<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>window order mode not existing.</p>
 </td>
@@ -12018,10 +12431,10 @@ set_window_order<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">        mode: window order behaviour to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: window order mode not existing.</span>
+<span class="sd">        InvalidParamError: window order mode not existing.</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WINDOW_ORDERS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid value for mode."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">WINDOW_ORDERS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setActivationOrder</span><span class="p">(</span><span class="n">WINDOW_ORDERS</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -12335,8 +12748,8 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
         <span class="k">with</span> <span class="n">label</span><span class="o">.</span><span class="n">edit_stylesheet</span><span class="p">()</span> <span class="k">as</span> <span class="n">ss</span><span class="p">:</span>
             <span class="n">ss</span><span class="o">.</span><span class="n">background</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">"lightgrey"</span><span class="p">)</span>
         <span class="n">label</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">horizontal</span><span class="o">=</span><span class="s2">"center"</span><span class="p">)</span>
-        <span class="n">separator</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">WidgetAction</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">separator</span><span class="o">.</span><span class="n">setDefaultWidget</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">separator</span><span class="o">.</span><span class="n">setEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">separator</span>
 </code></pre>
@@ -12486,7 +12899,7 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>Button type not available</p>
 </td>
@@ -12538,10 +12951,10 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <span class="sd">        created button</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: Button type not available</span>
+<span class="sd">        InvalidParamError: Button type not available</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">button</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">BUTTONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"button type not available"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">button</span><span class="p">,</span> <span class="n">BUTTONS</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">addButton</span><span class="p">(</span><span class="n">BUTTONS</span><span class="p">[</span><span class="n">button</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -12709,7 +13122,7 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>text format does not exist</p>
 </td>
@@ -12749,10 +13162,10 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        text_format: text format to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: text format does not exist</span>
+<span class="sd">        InvalidParamError: text format does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">text_format</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TEXT_FORMATS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid text format"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">text_format</span><span class="p">,</span> <span class="n">TEXT_FORMATS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTextFormat</span><span class="p">(</span><span class="n">TEXT_FORMATS</span><span class="p">[</span><span class="n">text_format</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -12819,7 +13232,7 @@ set_line_wrap_mode<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>line wrap mode does not exist</p>
 </td>
@@ -12845,9 +13258,7 @@ set_line_wrap_mode<span class="p">(</span><span class="bp">self</span><span clas
 164
 165
 166
-167
-168
-169</pre>
+167</pre>
 </div>
 </td>
 <td class="code">
@@ -12861,12 +13272,10 @@ set_line_wrap_mode<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">        mode: line wrap mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: line wrap mode does not exist</span>
+<span class="sd">        InvalidParamError: line wrap mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LINE_WRAP_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">"invalid wrap mode. "</span> <span class="sa">f</span><span class="s2">"Allowed values: </span><span class="si">{</span><span class="n">LINE_WRAP_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
-        <span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">LINE_WRAP_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setLineWrapMode</span><span class="p">(</span><span class="n">LINE_WRAP_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -12975,7 +13384,7 @@ set_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>wrap mode does not exist</p>
 </td>
@@ -13015,10 +13424,10 @@ set_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        mode: word wrap mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: wrap mode does not exist</span>
+<span class="sd">        InvalidParamError: wrap mode does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WRAP_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"invalid wrap mode. Allowed values: </span><span class="si">{</span><span class="n">WRAP_MODES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">WRAP_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWordWrapMode</span><span class="p">(</span><span class="n">WRAP_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -13250,7 +13659,7 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>alignment does not exist</p>
 </td>
@@ -13290,10 +13699,10 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        alignment: alignment for the layout</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: alignment does not exist</span>
+<span class="sd">        InvalidParamError: alignment does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">alignment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALIGNMENTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">alignment</span><span class="si">!r}</span><span class="s2"> not a valid alignment."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">ALIGNMENTS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -13342,7 +13751,7 @@ set_text_direction<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>text direction does not exist</p>
 </td>
@@ -13382,10 +13791,10 @@ set_text_direction<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">        text_direction: text direction for the layout</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: text direction does not exist</span>
+<span class="sd">        InvalidParamError: text direction does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">text_direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TEXT_DIRECTIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">text_direction</span><span class="si">!r}</span><span class="s2"> not a valid text direction."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">text_direction</span><span class="p">,</span> <span class="n">TEXT_DIRECTIONS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTextDirection</span><span class="p">(</span><span class="n">TEXT_DIRECTIONS</span><span class="p">[</span><span class="n">text_direction</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -14056,7 +14465,7 @@ for vertical orientation of the slider,
     <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="s2">"right"</span><span class="p">:</span>
         <span class="n">position</span> <span class="o">=</span> <span class="s2">"below"</span>
     <span class="k">elif</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TICK_POSITIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">position</span><span class="si">}</span><span class="s2"> not a valid tick position."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">TICK_POSITIONS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTickPosition</span><span class="p">(</span><span class="n">TICK_POSITIONS</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -14184,7 +14593,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>orientation does not exist</p>
 </td>
@@ -14224,10 +14633,10 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        orientation: orientation for the splitter</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: orientation does not exist</span>
+<span class="sd">        InvalidParamError: orientation does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ORIENTATIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">orientation</span><span class="si">}</span><span class="s2"> not a valid orientation."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">ORIENTATIONS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">ORIENTATIONS</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -14719,7 +15128,7 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid elide mode</p>
 </td>
@@ -14759,10 +15168,10 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        mode: elide mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid elide mode</span>
+<span class="sd">        InvalidParamError: invalid elide mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ELIDE_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Mode not available"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ELIDE_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setElideMode</span><span class="p">(</span><span class="n">ELIDE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -14895,7 +15304,7 @@ Possible values: left, right, previous</p>
 <span class="sd">        mode: new remove behaviour</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">REMOVE_BEHAVIOURS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Mode not available"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">REMOVE_BEHAVIOURS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setSelectionBehaviorOnRemove</span><span class="p">(</span><span class="n">REMOVE_BEHAVIOURS</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -15421,7 +15830,7 @@ set_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>tab shape does not exist</p>
 </td>
@@ -15461,10 +15870,10 @@ set_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">        shape: tab shape to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: tab shape does not exist</span>
+<span class="sd">        InvalidParamError: tab shape does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">shape</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TAB_SHAPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid value for shape."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">TAB_SHAPES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTabShape</span><span class="p">(</span><span class="n">TAB_SHAPES</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -15551,7 +15960,9 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>57
+<pre><span></span>55
+56
+57
 58
 59
 60
@@ -15575,9 +15986,7 @@ add_separator<span class="p">(</span><span class="bp">self</span><span class="p"
 78
 79
 80
-81
-82
-83</pre>
+81</pre>
 </div>
 </td>
 <td class="code">
@@ -15648,15 +16057,15 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100</pre>
+<pre><span></span>90
+91
+92
+93
+94
+95
+96
+97
+98</pre>
 </div>
 </td>
 <td class="code">
@@ -15717,7 +16126,7 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>area does not exist</p>
 </td>
@@ -15730,7 +16139,9 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>129
+<pre><span></span>127
+128
+129
 130
 131
 132
@@ -15741,9 +16152,7 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 137
 138
 139
-140
-141
-142</pre>
+140</pre>
 </div>
 </td>
 <td class="code">
@@ -15757,10 +16166,10 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        area: area of the toolbar</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: area does not exist</span>
+<span class="sd">        InvalidParamError: area does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">area</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TOOLBAR_AREAS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Invalid area '</span><span class="si">{</span><span class="n">area</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">TOOLBAR_AREAS</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isAreaAllowed</span><span class="p">(</span><span class="n">TOOLBAR_AREAS</span><span class="p">[</span><span class="n">area</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -15949,7 +16358,7 @@ set_arrow_type<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid arrow type</p>
 </td>
@@ -15989,10 +16398,10 @@ set_arrow_type<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        mode: arrow type to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid arrow type</span>
+<span class="sd">        InvalidParamError: invalid arrow type</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ARROW_TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid arrow type."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ARROW_TYPES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setArrowType</span><span class="p">(</span><span class="n">ARROW_TYPES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -16041,7 +16450,7 @@ set_popup_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid popup mode</p>
 </td>
@@ -16081,10 +16490,10 @@ set_popup_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        mode: popup mode to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid popup mode</span>
+<span class="sd">        InvalidParamError: invalid popup mode</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">POPUP_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid mode."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">POPUP_MODES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setPopupMode</span><span class="p">(</span><span class="n">POPUP_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -16212,7 +16621,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>invalid checkstate</p>
 </td>
@@ -16252,10 +16661,10 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        state: checkstate to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: invalid checkstate</span>
+<span class="sd">        InvalidParamError: invalid checkstate</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid checkstate."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">STATES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">STATES</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -16442,7 +16851,8 @@ __pretty__<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 94
+<pre><span></span> 93
+ 94
  95
  96
  97
@@ -16458,8 +16868,7 @@ __pretty__<span class="p">(</span><span class="bp">self</span><span class="p">,<
 107
 108
 109
-110
-111</pre>
+110</pre>
 </div>
 </td>
 <td class="code">
@@ -16521,15 +16930,15 @@ get_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>347
+<pre><span></span>346
+347
 348
 349
 350
 351
 352
 353
-354
-355</pre>
+354</pre>
 </div>
 </td>
 <td class="code">
@@ -16583,7 +16992,8 @@ str</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>266
+<pre><span></span>265
+266
 267
 268
 269
@@ -16591,8 +17001,7 @@ str</p>
 271
 272
 273
-274
-275</pre>
+274</pre>
 </div>
 </td>
 <td class="code">
@@ -16629,11 +17038,11 @@ resize(self, int, int)</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>133
+<pre><span></span>132
+133
 134
 135
-136
-137</pre>
+136</pre>
 </div>
 </td>
 <td class="code">
@@ -16690,7 +17099,7 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>policy does not exist</p>
 </td>
@@ -16703,7 +17112,8 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>332
+<pre><span></span>331
+332
 333
 334
 335
@@ -16715,8 +17125,7 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 341
 342
 343
-344
-345</pre>
+344</pre>
 </div>
 </td>
 <td class="code">
@@ -16730,10 +17139,10 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">        policy: contextmenu policy to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: policy does not exist</span>
+<span class="sd">        InvalidParamError: policy does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONTEXT_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"invalid selection behaviour"</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">CONTEXT_POLICIES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setContextMenuPolicy</span><span class="p">(</span><span class="n">CONTEXT_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -16777,14 +17186,14 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>139
+<pre><span></span>138
+139
 140
 141
 142
 143
 144
-145
-146</pre>
+145</pre>
 </div>
 </td>
 <td class="code">
@@ -16844,7 +17253,7 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>ValueError</code></td>
+<td><code>InvalidParamError</code></td>
 <td>
 <p>modality type does not exist</p>
 </td>
@@ -16857,7 +17266,8 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>251
+<pre><span></span>250
+251
 252
 253
 254
@@ -16869,8 +17279,7 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 260
 261
 262
-263
-264</pre>
+263</pre>
 </div>
 </td>
 <td class="code">
@@ -16884,10 +17293,10 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <span class="sd">        modality: modality for the main window</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: modality type does not exist</span>
+<span class="sd">        InvalidParamError: modality type does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">modality</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MODALITIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid value for modality."</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">modality</span><span class="p">,</span> <span class="n">MODALITIES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWindowModality</span><span class="p">(</span><span class="n">MODALITIES</span><span class="p">[</span><span class="n">modality</span><span class="p">])</span>
 </code></pre>
 </div>
@@ -16941,7 +17350,8 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>277
+<pre><span></span>276
+277
 278
 279
 280
@@ -16957,8 +17367,7 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 290
 291
 292
-293
-294</pre>
+293</pre>
 </div>
 </td>
 <td class="code">
@@ -17051,7 +17460,7 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 </footer>
 </div>
 <script src="../assets/javascripts/vendor.592d4e23.min.js"></script>
-<script src="../assets/javascripts/bundle.073197b2.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/bundle.806ca5c4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
