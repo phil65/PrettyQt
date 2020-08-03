@@ -51,7 +51,7 @@ class GroupBox(QtWidgets.QGroupBox):
         self.setCheckable(state["checkable"])
         self.setChecked(state.get("checked", False))
         self.setFlat(state["flat"])
-        self.setToolTip(state.get("tooltip", ""))
+        self.setToolTip(state.get("tool_tip", ""))
         # self.setAlignment(state["alignment"])
 
     def set_title(self, title: str):

@@ -12,8 +12,8 @@ class StandardItem(QtGui.QStandardItem):
     def serialize_fields(self):
         return dict(
             text=self.text(),
-            tooltip=self.toolTip(),
-            statustip=self.statusTip(),
+            tool_tip=self.toolTip(),
+            status_tip=self.statusTip(),
             icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
             data=self.data(),
         )

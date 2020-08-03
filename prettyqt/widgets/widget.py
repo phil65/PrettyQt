@@ -88,8 +88,8 @@ class Widget(QtWidgets.QWidget):
         self.set_layout(state["layout"])
         self.setSizePolicy(state["size_policy"])
         self.setAccessibleName(state["accessible_name"])
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
+        self.setToolTip(state.get("tool_tip", ""))
+        self.setStatusTip(state.get("status_tip", ""))
 
     def __pretty__(
         self, fmt: Callable[[Any], Any], **kwargs: Any
@@ -116,7 +116,7 @@ class Widget(QtWidgets.QWidget):
             layout=self.layout() if isinstance(self.layout(), widgets.Layout) else None,
             size_policy=self.get_size_policy(),
             accessible_name=self.accessibleName(),
-            tooltip=self.toolTip(),
+            tool_tip=self.toolTip(),
             tooltip_duration=self.toolTipDuration(),
             window_title=self.windowTitle(),
             enabled=self.isEnabled(),
@@ -127,7 +127,7 @@ class Widget(QtWidgets.QWidget):
             whats_this=self.whatsThis(),
             contextmenu_policy=self.get_contextmenu_policy(),
             focus_policy=self.get_focus_policy(),
-            statustip=self.statusTip(),
+            status_tip=self.statusTip(),
         )
 
     def resize(self, *size) -> None:

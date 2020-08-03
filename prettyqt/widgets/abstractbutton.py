@@ -31,8 +31,8 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.setEnabled(state.get("enabled", True))
         self.setChecked(state.get("checked", False))
         self.setCheckable(state["checkable"])
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
+        self.setToolTip(state.get("tool_tip", ""))
+        self.setStatusTip(state.get("status_tip", ""))
 
     def set_icon(self, icon: gui.icon.IconType):
         """Set the icon for the button.

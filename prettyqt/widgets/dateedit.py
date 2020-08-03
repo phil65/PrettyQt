@@ -27,8 +27,8 @@ class DateEdit(QtWidgets.QDateEdit):
         self.setEnabled(state.get("enabled", True))
         self.setDisplayFormat(state["display_format"])
         self.set_range(*state["range"])
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
+        self.setToolTip(state.get("tool_tip", ""))
+        self.setStatusTip(state.get("status_tip", ""))
 
     def set_value(self, value):
         return self.setDate(value)

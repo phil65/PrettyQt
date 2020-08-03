@@ -25,7 +25,7 @@ class ToolBox(QtWidgets.QToolBox):
                 icon=gui.Icon(self.itemIcon(i)),
                 text=self.itemText(i),
                 enabled=self.isItemEnabled(i),
-                tooltip=self.itemToolTip(i),
+                tool_tip=self.itemToolTip(i),
             )
             children.append(dct)
         return dict(items=children, current_index=self.currentIndex())
@@ -35,7 +35,7 @@ class ToolBox(QtWidgets.QToolBox):
         for i, item in enumerate(state["items"]):
             self.addItem(item["widget"], item["icon"], item["text"])
             self.setItemEnabled(i, item["enabled"])
-            self.setItemToolTip(i, item["tooltip"])
+            self.setItemToolTip(i, item["tool_tip"])
         self.setCurrentIndex(state["current_index"])
 
     def __iter__(self):

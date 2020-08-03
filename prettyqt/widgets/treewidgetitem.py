@@ -21,8 +21,8 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         icon = self.icon(0)
         return dict(
             text=self.text(0),
-            tooltip=self.toolTip(0),
-            statustip=self.statusTip(0),
+            tool_tip=self.toolTip(0),
+            status_tip=self.statusTip(0),
             checkstate=self.get_checkstate(),
             icon=gui.Icon(icon) if not icon.isNull() else None,
             data=self.data(0, QtCore.Qt.UserRole),

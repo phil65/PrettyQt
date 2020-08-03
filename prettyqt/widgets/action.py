@@ -55,7 +55,7 @@ class Action(QtWidgets.QAction):
             enabled=self.isEnabled(),
             font=gui.Font(self.font()),
             shortcut=self.shortcut(),
-            tooltip=self.toolTip(),
+            tool_tip=self.toolTip(),
             checkable=self.isCheckable(),
             checked=self.isChecked(),
             icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
@@ -65,7 +65,7 @@ class Action(QtWidgets.QAction):
             shortcut_visible=self.isShortcutVisibleInContextMenu(),
             menu_role=self.get_menu_role(),
             shortcut_context=self.get_shortcut_context(),
-            statustip=self.statusTip(),
+            status_tip=self.statusTip(),
         )
 
     def __setstate__(self, state):
@@ -73,8 +73,8 @@ class Action(QtWidgets.QAction):
         self.set_text(state.get("text", ""))
         self.set_enabled(state.get("enabled", True))
         self.set_shortcut(state["shortcut"])
-        self.set_tooltip(state.get("tooltip", ""))
-        self.set_statustip(state.get("statustip", ""))
+        self.set_tooltip(state.get("tool_tip", ""))
+        self.set_statustip(state.get("status_tip", ""))
         self.set_checked(state.get("checked", False))
         self.set_priority(state["priority"])
         self.set_shortcut_context(state["shortcut_context"])

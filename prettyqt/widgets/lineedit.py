@@ -60,8 +60,8 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setPlaceholderText(state["placeholder_text"])
         self.setReadOnly(state["read_only"])
         self.setFrame(state["has_frame"])
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
+        self.setToolTip(state.get("tool_tip", ""))
+        self.setStatusTip(state.get("status_tip", ""))
 
     def __add__(self, other):
         if isinstance(other, str):

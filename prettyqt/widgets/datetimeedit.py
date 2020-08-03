@@ -49,8 +49,8 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.setEnabled(state.get("enabled", True))
         self.set_range(*state["range"])
         self.setDisplayFormat(state["display_format"])
-        self.setToolTip(state.get("tooltip", ""))
-        self.setStatusTip(state.get("statustip", ""))
+        self.setToolTip(state.get("tool_tip", ""))
+        self.setStatusTip(state.get("status_tip", ""))
 
     def set_range(self, lower: datetime.datetime, upper: datetime.datetime):
         self.setToolTip(f"{lower} <= x <= {upper}")
