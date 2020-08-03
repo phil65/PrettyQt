@@ -8,22 +8,21 @@ from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-box = QtWidgets.QComboBox
 INSERT_POLICIES = bidict(
-    no_insert=box.NoInsert,
-    top=box.InsertAtTop,
-    current=box.InsertAtCurrent,
-    bottom=box.InsertAtBottom,
-    after_current=box.InsertAfterCurrent,
-    before_current=box.InsertBeforeCurrent,
-    alphabetically=box.InsertAlphabetically,
+    no_insert=QtWidgets.QComboBox.NoInsert,
+    top=QtWidgets.QComboBox.InsertAtTop,
+    current=QtWidgets.QComboBox.InsertAtCurrent,
+    bottom=QtWidgets.QComboBox.InsertAtBottom,
+    after_current=QtWidgets.QComboBox.InsertAfterCurrent,
+    before_current=QtWidgets.QComboBox.InsertBeforeCurrent,
+    alphabetically=QtWidgets.QComboBox.InsertAlphabetically,
 )
 
 SIZE_POLICIES = bidict(
-    content=box.AdjustToContents,
-    first_show=box.AdjustToContentsOnFirstShow,
-    min_length=box.AdjustToMinimumContentsLength,
-    min_length_with_icon=box.AdjustToMinimumContentsLengthWithIcon,
+    content=QtWidgets.QComboBox.AdjustToContents,
+    first_show=QtWidgets.QComboBox.AdjustToContentsOnFirstShow,
+    min_length=QtWidgets.QComboBox.AdjustToMinimumContentsLength,
+    min_length_with_icon=QtWidgets.QComboBox.AdjustToMinimumContentsLengthWithIcon,
 )
 
 
@@ -52,7 +51,12 @@ class ComboBox(QtWidgets.QComboBox):
             editable=self.isEditable(),
             max_count=self.maxCount(),
             has_frame=self.hasFrame(),
+            icon_size=self.iconSize(),
+            insert_policy=self.insertPolicy(),
+            model_column=self.modelColumn(),
+            placeholder_text=self.placeholderText(),
             max_visible_items=self.maxVisibleItems(),
+            size_adjust_policy=self.get_size_adjust_policy(),
             duplicates_enabled=self.duplicatesEnabled(),
             min_contents_length=self.minimumContentsLength(),
             items=items,
