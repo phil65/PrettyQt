@@ -21,6 +21,15 @@ CONTEXTS = bidict(
     application=QtCore.Qt.ApplicationShortcut,
 )
 
+ROLES = bidict(
+    none=QtWidgets.QAction.NoRole,
+    text_heuristic=QtWidgets.QAction.TextHeuristicRole,
+    application_specific=QtWidgets.QAction.ApplicationSpecificRole,
+    about_qt=QtWidgets.QAction.AboutQtRole,
+    about=QtWidgets.QAction.AboutRole,
+    preferences=QtWidgets.QAction.PreferencesRole,
+    quit=QtWidgets.QAction.QuitRole,
+)
 
 QtWidgets.QAction.__bases__ = (core.Object,)
 
@@ -44,11 +53,17 @@ class Action(QtWidgets.QAction):
         return dict(
             text=self.text(),
             enabled=self.isEnabled(),
+            font=gui.Font(self.font()),
             shortcut=self.shortcut(),
             tooltip=self.toolTip(),
             checkable=self.isCheckable(),
             checked=self.isChecked(),
+            icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
+            icon_text=self.iconText(),
             priority=self.get_priority(),
+            icon_visible=self.isIconVisibleInMenu(),
+            shortcut_visible=self.isShortcutVisibleInContextMenu(),
+            menu_role=self.get_menu_role(),
             shortcut_context=self.get_shortcut_context(),
             statustip=self.statusTip(),
         )
@@ -151,6 +166,33 @@ class Action(QtWidgets.QAction):
             shortcut context
         """
         return CONTEXTS.inv[self.shortcutContext()]
+
+    def set_menu_role(self, role: str):
+        """Set menu role.
+
+        Allowed values are "none", "text_heuristic", "application_specific", "about_qt",
+        "about", "preferences", "quit"
+
+        Args:
+            role: menu role
+
+        Raises:
+            ValueError: menu role does not exist
+        """
+        if role not in ROLES:
+            raise ValueError(f"{role} not a valid menu role.")
+        self.setMenuRole(ROLES[role])
+
+    def get_menu_role(self) -> str:
+        """Return menu role.
+
+        Possible values: "none", "text_heuristic", "application_specific", "about_qt",
+        "about", "preferences", "quit"
+
+        Returns:
+            menu role
+        """
+        return ROLES.inv[self.menuRole()]
 
     def show_shortcut_in_contextmenu(self, state: bool = True):
         self.setShortcutVisibleInContextMenu(state)

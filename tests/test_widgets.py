@@ -53,6 +53,10 @@ def test_action(qtbot):
     with pytest.raises(ValueError):
         action.set_priority("test")
     assert action.get_priority() == "low"
+    action.set_menu_role("preferences")
+    with pytest.raises(ValueError):
+        action.set_menu_role("test")
+    assert action.get_menu_role() == "preferences"
     action.set_shortcut_context("widget_with_children")
     with pytest.raises(ValueError):
         action.set_shortcut_context("test")
