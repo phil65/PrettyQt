@@ -70,8 +70,8 @@ class Menu(QtWidgets.QMenu):
             with label.edit_stylesheet() as ss:
                 ss.background.setValue("lightgrey")
             label.set_alignment(horizontal="center")
-            separator = widgets.WidgetAction(parent=self)
             separator.setDefaultWidget(label)
+            separator.setEnabled(False)
         self.add(separator)
         return separator
 
