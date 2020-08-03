@@ -4,7 +4,7 @@
 
 __author__ = """Philipp Temminghoff"""
 __email__ = "phil65@kodi.tv"
-__version__ = "0.110.2"
+__version__ = "0.111.0"
 
 
 __all__ = [

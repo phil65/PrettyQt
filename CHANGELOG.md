@@ -1,3 +1,20 @@
+## v0.111.0 (2020-08-03)
+
+### Feat
+
+- **widgets**: add FontComboBox
+- **StandardPaths**: add __class_getitem__ method
+- **Action**: some more ctor kwargs
+- **Action**: add get/set_menu_role methods, some pickle work
+
+### Refactor
+
+- custom Exception for wrong params
+
+### Fix
+
+- **Menu**: disable separator widgetAction
+
 ## v0.110.2 (2020-08-03)
 
 ### Fix
