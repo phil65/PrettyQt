@@ -9,7 +9,7 @@ from typing import List, Optional, Union
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import bidict, colors
+from prettyqt.utils import bidict, colors, InvalidParamError
 
 
 H_ALIGNMENTS = bidict(
@@ -115,10 +115,10 @@ class Label(QtWidgets.QLabel):
             text_format: text format to use
 
         Raises:
-            ValueError: text format does not exist
+            InvalidParamError: text format does not exist
         """
         if text_format not in TEXT_FORMATS:
-            raise ValueError("Invalid text format")
+            raise InvalidParamError(text_format, TEXT_FORMATS)
         self.setTextFormat(TEXT_FORMATS[text_format])
         return self
 
@@ -141,11 +141,11 @@ class Label(QtWidgets.QLabel):
             types: text interaction mode to use
 
         Raises:
-            ValueError: text interaction mode does not exist
+            InvalidParamError: text interaction mode does not exist
         """
         for item in types:
             if item not in TEXT_INTERACTION:
-                raise ValueError("Invalid text interaction mode")
+                raise InvalidParamError(item, TEXT_INTERACTION)
         flags = functools.reduce(operator.ior, [TEXT_INTERACTION[t] for t in types])
         self.setTextInteractionFlags(flags)
         return self
@@ -192,10 +192,10 @@ class Label(QtWidgets.QLabel):
             weight: font weight
 
         Raises:
-            ValueError: invalid font weight
+            InvalidParamError: invalid font weight
         """
         if weight not in WEIGHTS:
-            raise ValueError(f"Invalid weight '{weight}'")
+            raise InvalidParamError(weight, WEIGHTS)
         font = self.font()
         font.setWeight(WEIGHTS[weight])
         self.setFont(font)

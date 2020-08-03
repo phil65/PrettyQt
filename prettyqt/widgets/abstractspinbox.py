@@ -3,7 +3,7 @@
 from qtpy import QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 CORRECTION_MODES = bidict(
@@ -63,10 +63,10 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
             mode: button symbol type to use
 
         Raises:
-            ValueError: invalid button symbol type
+            InvalidParamError: invalid button symbol type
         """
         if mode not in SYMBOLS:
-            raise ValueError("Invalid button symbol type.")
+            raise InvalidParamError(mode, SYMBOLS)
         self.setButtonSymbols(SYMBOLS[mode])
 
     def set_correction_mode(self, mode: str):
@@ -78,10 +78,10 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
             mode: correction mode to use
 
         Raises:
-            ValueError: invalid correction mode
+            InvalidParamError: invalid correction mode
         """
         if mode not in CORRECTION_MODES:
-            raise ValueError("Invalid correction mode.")
+            raise InvalidParamError(mode, CORRECTION_MODES)
         self.setCorrectionMode(CORRECTION_MODES[mode])
 
     def get_correction_mode(self) -> str:
@@ -103,10 +103,10 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
             mode: step type to use
 
         Raises:
-            ValueError: invalid step type
+            InvalidParamError: invalid step type
         """
         if mode not in STEP_TYPES:
-            raise ValueError("Invalid step type.")
+            raise InvalidParamError(mode, STEP_TYPES)
         self.setStepType(STEP_TYPES[mode])
 
     def get_step_type(self) -> str:

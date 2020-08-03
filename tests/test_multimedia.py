@@ -8,6 +8,7 @@ import pathlib
 import pytest
 
 from prettyqt import multimedia, core
+from prettyqt.utils import InvalidParamError
 
 URL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
@@ -22,7 +23,7 @@ def test_mediaplaylist():
         pass
     assert playlist[0] is not None
     playlist.set_playback_mode("sequential")
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         playlist.set_playback_mode("test")
     assert playlist.get_playback_mode() == "sequential"
 

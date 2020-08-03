@@ -5,7 +5,7 @@ from typing import Callable, List, Optional, Union
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 BUTTONS = bidict(
@@ -93,10 +93,10 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
             orientation: orientation for the button box
 
         Raises:
-            ValueError: orientation does not exist
+            InvalidParamError: orientation does not exist
         """
         if orientation not in ORIENTATIONS:
-            raise ValueError(f"{orientation} not a valid orientation.")
+            raise InvalidParamError(orientation, ORIENTATIONS)
         self.setOrientation(ORIENTATIONS[orientation])
 
     def get_orientation(self) -> str:
@@ -130,10 +130,10 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
             created button
 
         Raises:
-            ValueError: Button type not available
+            InvalidParamError: Button type not available
         """
         if button not in BUTTONS:
-            raise ValueError("button type not available")
+            raise InvalidParamError(button, BUTTONS)
         btn = self.addButton(BUTTONS[button])
         btn.setObjectName(button)
         if callback:
@@ -157,7 +157,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
             created button
 
         Raises:
-            ValueError: Button type not available
+            InvalidParamError: Button type not available
         """
         if isinstance(button, str):
             button = widgets.PushButton(button)

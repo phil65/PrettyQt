@@ -5,7 +5,7 @@ from typing import Optional
 from qtpy import QtWidgets
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 POLICIES = bidict(
@@ -37,12 +37,12 @@ class ActionGroup(QtWidgets.QActionGroup):
             policy: exclusion policy to use
 
         Raises:
-            ValueError: exclusion policy does not exist
+            InvalidParamError: exclusion policy does not exist
         """
         if policy is None:
             policy = "none"
         if policy not in POLICIES:
-            raise ValueError(f"Invalid exclusion policy. Valid values: {POLICIES.keys()}")
+            raise InvalidParamError(policy, POLICIES)
         self.setExclusionPolicy(POLICIES[policy])
 
     def get_exclusion_policy(self) -> str:

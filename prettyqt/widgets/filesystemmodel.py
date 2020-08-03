@@ -5,7 +5,7 @@ import pathlib
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 OPTIONS = bidict(
@@ -80,7 +80,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
 
     def set_filter(self, filter_mode: str):
         if filter_mode not in FILTERS:
-            raise ValueError(f"Invalid value. Valid values: {FILTERS.keys()}")
+            raise InvalidParamError(filter_mode, FILTERS)
         self.setFilter(FILTERS[filter_mode])
 
     def get_paths(self, indexes):

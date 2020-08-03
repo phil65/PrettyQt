@@ -5,7 +5,7 @@ from typing import Optional, List
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 ICONS = bidict(
@@ -110,10 +110,10 @@ class MessageBox(QtWidgets.QMessageBox):
             created button
 
         Raises:
-            ValueError: Button type not available
+            InvalidParamError: Button type not available
         """
         if button not in BUTTONS:
-            raise ValueError("button type not available")
+            raise InvalidParamError(button, BUTTONS)
         return self.addButton(BUTTONS[button])
 
     # @classmethod
@@ -131,10 +131,10 @@ class MessageBox(QtWidgets.QMessageBox):
             text_format: text format to use
 
         Raises:
-            ValueError: text format does not exist
+            InvalidParamError: text format does not exist
         """
         if text_format not in TEXT_FORMATS:
-            raise ValueError("Invalid text format")
+            raise InvalidParamError(text_format, TEXT_FORMATS)
         self.setTextFormat(TEXT_FORMATS[text_format])
 
     def get_text_format(self) -> str:

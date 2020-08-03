@@ -5,7 +5,7 @@ from typing import List
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
-
+from prettyqt.utils import InvalidParamError
 
 QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
 
@@ -53,7 +53,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
         self, text: str, column: int = 0, mode: str = "exact"
     ) -> List[QtGui.QStandardItem]:
         if mode not in MATCH_FLAGS:
-            raise ValueError()
+            raise InvalidParamError(mode, MATCH_FLAGS)
         return self.findItems(text, MATCH_FLAGS[mode], column)
 
 

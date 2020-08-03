@@ -5,7 +5,7 @@ from typing import Optional
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 ECHO_MODES = bidict(
@@ -116,10 +116,10 @@ class LineEdit(QtWidgets.QLineEdit):
             mode: echo mode to use
 
         Raises:
-            ValueError: invalid echo mode
+            InvalidParamError: invalid echo mode
         """
         if mode not in ECHO_MODES:
-            raise ValueError("Invalid echo mode")
+            raise InvalidParamError(mode, ECHO_MODES)
         self.setEchoMode(ECHO_MODES[mode])
 
     def get_echo_mode(self) -> str:

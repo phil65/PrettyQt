@@ -5,7 +5,7 @@ from typing import Optional
 from PyQt5 import Qsci  # type: ignore
 
 from prettyqt import gui, widgets
-from prettyqt.utils import colors, bidict
+from prettyqt.utils import colors, bidict, InvalidParamError
 
 ARROW_MARKER_NUM = 8
 
@@ -143,12 +143,12 @@ class SciScintilla(Qsci.QsciScintilla):
         if match_type is None:
             match_type = "none"
         if match_type not in MATCH_TYPES:
-            raise ValueError(f"Invalid match type '{match_type}.")
+            raise InvalidParamError(match_type, MATCH_TYPES)
         self.setBraceMatching(MATCH_TYPES[match_type])
 
     def define_marker(self, marker: str, num: int):
         if marker not in MARKERS:
-            raise ValueError(f"Invalid marker '{marker}.")
+            raise InvalidParamError(marker, MARKERS)
         self.markerDefine(MARKERS[marker], num)
 
     def set_text(self, text: str):
@@ -197,7 +197,7 @@ class SciScintilla(Qsci.QsciScintilla):
         if mode is None:
             mode = "none"
         if mode not in WRAP_MODES:
-            raise ValueError(f"Invalid wrap mode '{mode}.")
+            raise InvalidParamError(mode, WRAP_MODES)
         self.setWrapMode(WRAP_MODES[mode])
 
     def get_value(self) -> str:

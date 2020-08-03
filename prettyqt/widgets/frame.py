@@ -3,7 +3,7 @@
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 SHADOWS = bidict(
@@ -35,10 +35,10 @@ class Frame(QtWidgets.QFrame):
             style: frame style to use
 
         Raises:
-            ValueError: style does not exist
+            InvalidParamError: style does not exist
         """
         if style not in SHADOWS:
-            raise ValueError("invalid frame style")
+            raise InvalidParamError(style, SHADOWS)
         self.setFrameStyle(SHADOWS[style])
 
     def get_frame_style(self) -> str:

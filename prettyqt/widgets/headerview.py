@@ -6,7 +6,7 @@ from typing import Iterable, Optional, Union, List
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict, helpers
+from prettyqt.utils import bidict, helpers, InvalidParamError
 
 
 ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
@@ -55,7 +55,7 @@ class HeaderView(QtWidgets.QHeaderView):
 
     def set_resize_mode(self, mode: str, col: Optional[int] = None):
         if mode not in MODES:
-            raise ValueError("mode not existing")
+            raise InvalidParamError(mode, MODES)
         if col is None:
             self.setSectionResizeMode(MODES[mode])
         else:

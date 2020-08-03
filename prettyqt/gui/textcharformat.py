@@ -5,7 +5,7 @@ from typing import Union
 from qtpy import QtGui
 
 from prettyqt import gui
-from prettyqt.utils import bidict, colors
+from prettyqt.utils import bidict, colors, InvalidParamError
 
 
 UNDERLINE_STYLES = bidict(
@@ -59,10 +59,10 @@ class TextCharFormat(QtGui.QTextCharFormat):
             weight: font weight
 
         Raises:
-            ValueError: invalid font weight
+            InvalidParamError: invalid font weight
         """
         if weight not in WEIGHTS:
-            raise ValueError("Invalid font weight")
+            raise InvalidParamError(weight, WEIGHTS)
         self.setFontWeight(WEIGHTS[weight])
 
     def get_font_weight(self) -> str:
@@ -85,10 +85,10 @@ class TextCharFormat(QtGui.QTextCharFormat):
             style: underline style
 
         Raises:
-            ValueError: invalid underline style
+            InvalidParamError: invalid underline style
         """
         if style not in UNDERLINE_STYLES:
-            raise ValueError("Invalid underline style")
+            raise InvalidParamError(style, UNDERLINE_STYLES)
         self.setUnderlineStyle(UNDERLINE_STYLES[style])
 
     def get_underline_style(self) -> str:
@@ -112,10 +112,10 @@ class TextCharFormat(QtGui.QTextCharFormat):
             hint: font style hint
 
         Raises:
-            ValueError: invalid font style hint
+            InvalidParamError: invalid font style hint
         """
         if hint not in STYLE_HINTS:
-            raise ValueError("Invalid font style hint")
+            raise InvalidParamError(hint, STYLE_HINTS)
         self.setFontStyleHint(STYLE_HINTS[hint])
 
     def select_full_width(self, value: bool = True):

@@ -5,7 +5,7 @@ from typing import Optional, Union
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 TICK_POSITIONS = bidict(
@@ -70,7 +70,7 @@ class Slider(QtWidgets.QSlider):
         elif position == "right":
             position = "below"
         elif position not in TICK_POSITIONS:
-            raise ValueError(f"{position} not a valid tick position.")
+            raise InvalidParamError(position, TICK_POSITIONS)
         self.setTickPosition(TICK_POSITIONS[position])
 
     def get_tick_position(self) -> str:

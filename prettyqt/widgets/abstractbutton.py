@@ -3,7 +3,7 @@
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
-
+from prettyqt.utils import InvalidParamError
 
 STYLES = dict(
     close=QtWidgets.QStyle.SP_TitleBarCloseButton,
@@ -45,7 +45,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
 
     def set_style_icon(self, icon: str, size: int = 15):
         if icon not in STYLES:
-            raise ValueError(f"{icon!r} not a valid icon.")
+            raise InvalidParamError(icon, STYLES)
         qicon = self.style().standardIcon(STYLES[icon], None, self)
         self.set_icon(qicon)
         self.setIconSize(core.Size(size, size))

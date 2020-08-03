@@ -3,7 +3,7 @@
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 VIEW_MODES = bidict(list=QtWidgets.QListView.ListMode, icon=QtWidgets.QListView.IconMode)
@@ -22,10 +22,10 @@ class ListView(QtWidgets.QListView):
             mode: view mode to use
 
         Raises:
-            ValueError: invalid view mode
+            InvalidParamError: invalid view mode
         """
         if mode not in VIEW_MODES:
-            raise ValueError(f"Invalid value. Valid values: {VIEW_MODES.keys()}")
+            raise InvalidParamError(mode, VIEW_MODES)
         self.setViewMode(VIEW_MODES[mode])
 
     def get_view_mode(self) -> str:

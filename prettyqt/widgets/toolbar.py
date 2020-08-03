@@ -7,7 +7,7 @@ import operator
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 STYLES = bidict(
@@ -135,10 +135,10 @@ class ToolBar(QtWidgets.QToolBar):
             area: area of the toolbar
 
         Raises:
-            ValueError: area does not exist
+            InvalidParamError: area does not exist
         """
         if area not in TOOLBAR_AREAS:
-            raise ValueError(f"Invalid area '{area}'")
+            raise InvalidParamError(area, TOOLBAR_AREAS)
         return self.isAreaAllowed(TOOLBAR_AREAS[area])
 
     def set_allowed_areas(self, *areas: str):

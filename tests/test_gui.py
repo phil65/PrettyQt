@@ -11,6 +11,7 @@ from qtpy import QtCore
 import qtpy
 
 from prettyqt import core, gui
+from prettyqt.utils import InvalidParamError
 
 
 def test_brush():
@@ -32,7 +33,7 @@ def test_color():
 def test_cursor():
     cursor = gui.Cursor()
     cursor.set_shape("arrow")
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         cursor.set_shape("test")
     assert cursor.get_shape() == "arrow"
 
@@ -58,11 +59,11 @@ def test_font():
     repr(font)
     font.metrics
     font = gui.Font.mono()
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         font.set_style_hint("test")
     font.set_style_hint("monospace")
     font.set_weight("thin")
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         font.set_weight("test")
 
 
@@ -133,7 +134,7 @@ def test_standarditemmodel():
     model += gui.StandardItem("Item")
     model[0]
     assert len(model.find_items("test")) == 1
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         model.find_items("test", mode="wrong_mode")
 
 
@@ -159,9 +160,9 @@ def test_painter():
         painter.fill_rect(core.Rect(), "testus")
     painter.set_color("black")
     painter.set_composition_mode("source_atop")
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         painter.set_composition_mode("test")
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         painter.set_pen("test")
     # assert painter.get_composition_mode() == "source_atop"
 
@@ -227,7 +228,7 @@ def test_textcharformat():
     assert fmt.get_font_weight() == "bold"
     fmt.set_foreground_color("yellow")
     fmt.set_background_color("yellow")
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         fmt.set_font_weight("test")
     fmt = gui.TextCharFormat(bold=True)
     assert fmt.get_font_weight() == "bold"

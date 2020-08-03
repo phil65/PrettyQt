@@ -3,6 +3,8 @@
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
 
+from prettyqt.utils import InvalidParamError
+
 
 THEMES = {
     "Light": QtCharts.QChart.ChartThemeLight,
@@ -48,7 +50,7 @@ class Chart(QtCharts.QChart):
 
     def set_legend_alignment(self, alignment: str):
         if alignment not in ALIGNMENTS:
-            raise ValueError(f"{alignment!r} not a valid alignment.")
+            raise InvalidParamError(alignment, ALIGNMENTS)
         self.legend().setAlignment(ALIGNMENTS[alignment])
 
     def set_theme(self, theme_name: str):

@@ -5,6 +5,7 @@ from typing import Union, Iterable, Mapping, List, Any, Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
+from prettyqt.utils import InvalidParamError
 
 SCROLL_HINTS = widgets.abstractitemview.SCROLL_HINTS  # type: ignore
 
@@ -100,7 +101,7 @@ class ListWidget(QtWidgets.QListWidget):
 
     def scroll_to_item(self, item, mode: str = "ensure_visible"):
         if mode not in SCROLL_HINTS:
-            raise ValueError("Invalid scroll mode")
+            raise InvalidParamError(mode, SCROLL_HINTS)
         self.scrollToItem(item, SCROLL_HINTS[mode])
 
 

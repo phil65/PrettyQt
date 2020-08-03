@@ -5,7 +5,7 @@ from typing import Union, Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
@@ -99,10 +99,10 @@ class Splitter(QtWidgets.QSplitter):
             orientation: orientation for the splitter
 
         Raises:
-            ValueError: orientation does not exist
+            InvalidParamError: orientation does not exist
         """
         if orientation not in ORIENTATIONS:
-            raise ValueError(f"{orientation} not a valid orientation.")
+            raise InvalidParamError(orientation, ORIENTATIONS)
         self.setOrientation(ORIENTATIONS[orientation])
 
     def get_orientation(self) -> str:

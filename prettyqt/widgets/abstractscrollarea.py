@@ -3,7 +3,7 @@
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 area = QtWidgets.QAbstractScrollArea
@@ -58,10 +58,10 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             policy: size adjust policy to use
 
         Raises:
-            ValueError: invalid size adjust policy
+            InvalidParamError: invalid size adjust policy
         """
         if policy not in SIZE_POLICIES:
-            raise ValueError("Policy not available")
+            raise InvalidParamError(policy, SIZE_POLICIES)
         policy = SIZE_POLICIES.get(policy)
         self.setSizeAdjustPolicy(policy)
 
@@ -84,10 +84,10 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             mode: visibilty to set
 
         Raises:
-            ValueError: invalid scrollbar policy
+            InvalidParamError: invalid scrollbar policy
         """
         if mode not in SCROLLBAR_POLICY:
-            raise ValueError("Invalid scrollbar policy")
+            raise InvalidParamError(mode, SCROLLBAR_POLICY)
         self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
         self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
@@ -100,10 +100,10 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             mode: visibilty to set
 
         Raises:
-            ValueError: invalid scrollbar policy
+            InvalidParamError: invalid scrollbar policy
         """
         if mode not in SCROLLBAR_POLICY:
-            raise ValueError("Invalid scrollbar policy")
+            raise InvalidParamError(mode, SCROLLBAR_POLICY)
         self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
     def set_vertical_scrollbar_policy(self, mode: str):
@@ -115,10 +115,10 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             mode: visibilty to set
 
         Raises:
-            ValueError: invalid scrollbar policy
+            InvalidParamError: invalid scrollbar policy
         """
         if mode not in SCROLLBAR_POLICY:
-            raise ValueError("Invalid scrollbar policy")
+            raise InvalidParamError(mode, SCROLLBAR_POLICY)
         self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
     def set_scrollbar_width(self, width: int):

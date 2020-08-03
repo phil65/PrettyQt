@@ -5,7 +5,7 @@ from typing import Optional
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 COMPLETION_MODES = bidict(
@@ -43,12 +43,12 @@ class Completer(QtWidgets.QCompleter):
             mode: sort mode to use
 
         Raises:
-            ValueError: sort mode does not exist
+            InvalidParamError: sort mode does not exist
         """
         if mode is None:
             mode = "unsorted"
         if mode not in SORT_MODES:
-            raise ValueError(f"Invalid sort mode. Valid values: {SORT_MODES.keys()}")
+            raise InvalidParamError(mode, SORT_MODES)
         self.setModelSorting(SORT_MODES[mode])
 
     def get_sort_mode(self) -> str:
@@ -70,10 +70,10 @@ class Completer(QtWidgets.QCompleter):
             mode: completion mode to use
 
         Raises:
-            ValueError: completion mode does not exist
+            InvalidParamError: completion mode does not exist
         """
         if mode not in COMPLETION_MODES:
-            raise ValueError(f"Invalid mode. Valid values: {COMPLETION_MODES.keys()}")
+            raise InvalidParamError(mode, COMPLETION_MODES)
         self.setCompletionMode(COMPLETION_MODES[mode])
 
     def get_completion_mode(self) -> str:
@@ -95,10 +95,10 @@ class Completer(QtWidgets.QCompleter):
             mode: filter mode to use
 
         Raises:
-            ValueError: filter mode does not exist
+            InvalidParamError: filter mode does not exist
         """
         if mode not in FILTER_MODES:
-            raise ValueError(f"Invalid mode. Valid values: {FILTER_MODES.keys()}")
+            raise InvalidParamError(mode, FILTER_MODES)
         self.setFilterMode(FILTER_MODES[mode])
 
     def get_filter_mode(self) -> str:

@@ -3,7 +3,7 @@
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 POPUP_MODES = bidict(
@@ -55,10 +55,10 @@ class ToolButton(QtWidgets.QToolButton):
             mode: popup mode to use
 
         Raises:
-            ValueError: invalid popup mode
+            InvalidParamError: invalid popup mode
         """
         if mode not in POPUP_MODES:
-            raise ValueError("Invalid mode.")
+            raise InvalidParamError(mode, POPUP_MODES)
         self.setPopupMode(POPUP_MODES[mode])
 
     def get_popup_mode(self) -> str:
@@ -80,10 +80,10 @@ class ToolButton(QtWidgets.QToolButton):
             mode: arrow type to use
 
         Raises:
-            ValueError: invalid arrow type
+            InvalidParamError: invalid arrow type
         """
         if mode not in ARROW_TYPES:
-            raise ValueError("Invalid arrow type.")
+            raise InvalidParamError(mode, ARROW_TYPES)
         self.setArrowType(ARROW_TYPES[mode])
 
     def get_arrow_type(self) -> str:
@@ -98,7 +98,7 @@ class ToolButton(QtWidgets.QToolButton):
 
     def set_style(self, style: str):
         if style not in STYLES:
-            raise ValueError("Invalid style.")
+            raise InvalidParamError(style, STYLES)
         self.setToolButtonStyle(STYLES[style])
 
 

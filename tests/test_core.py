@@ -10,6 +10,7 @@ import pytest
 
 from qtpy import QtCore
 from prettyqt import core, widgets
+from prettyqt.utils import InvalidParamError
 
 
 def test_abstracttablemodel():
@@ -56,11 +57,11 @@ def test_coreapplication(qapp):
 def test_datastream():
     stream = core.DataStream()
     stream.set_float_precision("double")
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         stream.set_float_precision("test")
     assert stream.get_float_precision() == "double"
     stream.set_byte_order("big_endian")
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         stream.set_byte_order("test")
     assert stream.get_byte_order() == "big_endian"
 
@@ -238,13 +239,13 @@ def test_settings(qapp):
 
     settings.set_default_format("ini")
     assert settings.get_default_format() == "ini"
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         settings.set_default_format("ino")
     assert settings.get_scope() == "user"
     settings.set_path("native", "user", path)
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         settings.set_path("error", "user", path)
-    with pytest.raises(ValueError):
+    with pytest.raises(InvalidParamError):
         settings.set_path("native", "error", path)
     s = core.Settings.build_from_dict(dict(a="b"))
     repr(s)

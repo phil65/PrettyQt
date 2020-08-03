@@ -5,7 +5,7 @@ from typing import Union, Optional, Dict
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 TAB_SHAPES = bidict(
@@ -86,10 +86,10 @@ class TabWidget(QtWidgets.QTabWidget):
             shape: tab shape to use
 
         Raises:
-            ValueError: tab shape does not exist
+            InvalidParamError: tab shape does not exist
         """
         if shape not in TAB_SHAPES:
-            raise ValueError("Invalid value for shape.")
+            raise InvalidParamError(shape, TAB_SHAPES)
         self.setTabShape(TAB_SHAPES[shape])
 
     def get_tab_shape(self) -> str:

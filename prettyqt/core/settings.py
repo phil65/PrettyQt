@@ -8,7 +8,7 @@ import logging
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 logger = logging.getLogger(__name__)
 
@@ -69,7 +69,7 @@ class Settings(QtCore.QSettings):
 
     def set_value(self, key: str, value):
         if not self.applicationName():
-            raise ValueError("no app name defined")
+            raise RuntimeError("no app name defined")
         self.setValue(key, dict(value=value))
 
     def get_value(self, key: str, default=None):
@@ -92,10 +92,10 @@ class Settings(QtCore.QSettings):
             fmt: the default format to use
 
         Raises:
-            ValueError: invalid format
+            InvalidParamError: invalid format
         """
         if fmt not in FORMATS:
-            raise ValueError(f"Invalid value. Valid values: {FORMATS.keys()}")
+            raise InvalidParamError(fmt, FORMATS)
         cls.setDefaultFormat(FORMATS[fmt])
 
     @classmethod
@@ -128,12 +128,12 @@ class Settings(QtCore.QSettings):
             scope: the scope to use
 
         Raises:
-            ValueError: invalid format or scope
+            InvalidParamError: invalid format or scope
         """
         if fmt not in FORMATS:
-            raise ValueError(f"Invalid format. Valid values: {FORMATS.keys()}")
+            raise InvalidParamError(fmt, FORMATS)
         if scope not in SCOPES:
-            raise ValueError(f"Invalid scope. Valid values: {SCOPES.keys()}")
+            raise InvalidParamError(scope, SCOPES)
         cls.setPath(FORMATS[fmt], SCOPES[scope], str(path))
 
     @contextlib.contextmanager

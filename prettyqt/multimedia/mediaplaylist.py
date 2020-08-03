@@ -6,7 +6,7 @@ from typing import Union, Optional
 from qtpy import QtMultimedia
 
 from prettyqt import core, multimedia
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 PLAYBACK_MODES = bidict(
@@ -59,10 +59,10 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
             mode: playback mode to use
 
         Raises:
-            ValueError: mode does not exist
+            InvalidParamError: mode does not exist
         """
         if mode not in PLAYBACK_MODES:
-            raise ValueError("invalid playback mode")
+            raise InvalidParamError(mode, PLAYBACK_MODES)
         self.setPlaybackMode(PLAYBACK_MODES[mode])
 
     def get_playback_mode(self) -> str:

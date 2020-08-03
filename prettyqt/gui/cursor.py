@@ -2,7 +2,7 @@
 
 from qtpy import QtCore, QtGui
 
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 SHAPES = bidict(
@@ -24,10 +24,10 @@ class Cursor(QtGui.QCursor):
             shape: shape to use
 
         Raises:
-            ValueError: shape does not exist
+            InvalidParamError: shape does not exist
         """
         if shape not in SHAPES:
-            raise ValueError(f"Invalid shape type '{shape}.")
+            raise InvalidParamError(shape, SHAPES)
         self.setShape(SHAPES[shape])
 
     def get_shape(self) -> str:

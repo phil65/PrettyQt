@@ -3,7 +3,7 @@
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 FLOAT_PRECISION = bidict(
@@ -26,10 +26,10 @@ class DataStream(QtCore.QDataStream):
             order: byte order to use
 
         Raises:
-            ValueError: invalid order
+            InvalidParamError: invalid order
         """
         if order not in BYTE_ORDER:
-            raise ValueError("Invalid byte order.")
+            raise InvalidParamError(order, BYTE_ORDER)
         self.setByteOrder(BYTE_ORDER[order])
 
     def get_byte_order(self) -> bool:
@@ -51,10 +51,10 @@ class DataStream(QtCore.QDataStream):
             precision: floating point precision
 
         Raises:
-            ValueError: invalid precision
+            InvalidParamError: invalid precision
         """
         if precision not in FLOAT_PRECISION:
-            raise ValueError("Invalid precision.")
+            raise InvalidParamError(precision, FLOAT_PRECISION)
         self.setFloatingPointPrecision(FLOAT_PRECISION[precision])
 
     def get_float_precision(self) -> bool:

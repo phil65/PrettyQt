@@ -3,7 +3,7 @@
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 STATES = bidict(
@@ -53,10 +53,10 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
             state: checkstate to use
 
         Raises:
-            ValueError: invalid checkstate
+            InvalidParamError: invalid checkstate
         """
         if state not in STATES:
-            raise ValueError("Invalid checkstate.")
+            raise InvalidParamError(state, STATES)
         self.setCheckState(0, STATES[state])
 
     def get_checkstate(self) -> str:

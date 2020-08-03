@@ -10,7 +10,7 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, colors
+from prettyqt.utils import bidict, colors, InvalidParamError
 
 
 CONTEXT_POLICIES = bidict(
@@ -215,7 +215,7 @@ class Widget(QtWidgets.QWidget):
     def set_window_flags(self, *flags: str, append: bool = False):
         for flag in flags:
             if flag not in WINDOW_FLAGS:
-                raise ValueError("Invalid window flag")
+                raise InvalidParamError(flag, WINDOW_FLAGS)
         flags = functools.reduce(operator.ior, [WINDOW_FLAGS[t] for t in flags])
         if append:
             flags = flags | self.windowFlags()
@@ -245,7 +245,7 @@ class Widget(QtWidgets.QWidget):
 
     def set_attribute(self, attribute: str, state: bool = True) -> None:
         if attribute not in ATTRIBUTES:
-            raise ValueError(f"Invalid attribute '{attribute}'.")
+            raise InvalidParamError(attribute, ATTRIBUTES)
         self.setAttribute(ATTRIBUTES[attribute], state)
 
     def set_modality(self, modality: str = "window") -> None:
@@ -257,10 +257,10 @@ class Widget(QtWidgets.QWidget):
             modality: modality for the main window
 
         Raises:
-            ValueError: modality type does not exist
+            InvalidParamError: modality type does not exist
         """
         if modality not in MODALITIES:
-            raise ValueError("Invalid value for modality.")
+            raise InvalidParamError(modality, MODALITIES)
         self.setWindowModality(MODALITIES[modality])
 
     def get_modality(self) -> str:
@@ -338,10 +338,10 @@ class Widget(QtWidgets.QWidget):
             policy: contextmenu policy to use
 
         Raises:
-            ValueError: policy does not exist
+            InvalidParamError: policy does not exist
         """
         if policy not in CONTEXT_POLICIES:
-            raise ValueError("invalid selection behaviour")
+            raise InvalidParamError(policy, CONTEXT_POLICIES)
         self.setContextMenuPolicy(CONTEXT_POLICIES[policy])
 
     def get_contextmenu_policy(self) -> str:
@@ -391,16 +391,12 @@ class Widget(QtWidgets.QWidget):
 
     def set_cursor(self, cursor: str) -> None:
         if cursor not in CURSOR_SHAPES:
-            raise ValueError(
-                f"Invalid cursor '{cursor}'. " f"Valid values: {CURSOR_SHAPES.keys()}"
-            )
+            raise InvalidParamError(cursor, CURSOR_SHAPES)
         self.setCursor(CURSOR_SHAPES[cursor])
 
     def set_focus_policy(self, policy: str) -> None:
         if policy not in FOCUS_POLICIES:
-            raise ValueError(
-                f"Invalid policy '{policy}'. " f"Valid values: {FOCUS_POLICIES.keys()}"
-            )
+            raise InvalidParamError(policy, FOCUS_POLICIES)
         self.setFocusPolicy(FOCUS_POLICIES[policy])
 
     def get_focus_policy(self) -> str:

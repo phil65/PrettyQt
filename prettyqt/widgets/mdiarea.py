@@ -5,7 +5,7 @@ from typing import Union
 from qtpy import QtGui, QtWidgets
 
 from prettyqt import gui, widgets
-from prettyqt.utils import bidict, colors
+from prettyqt.utils import bidict, colors, InvalidParamError
 
 
 VIEW_MODES = bidict(
@@ -49,10 +49,10 @@ class MdiArea(QtWidgets.QMdiArea):
             mode: view mode to use
 
         Raises:
-            ValueError: view mode does not exist
+            InvalidParamError: view mode does not exist
         """
         if mode not in VIEW_MODES:
-            raise ValueError("Invalid value for mode.")
+            raise InvalidParamError(mode, VIEW_MODES)
         self.setViewMode(VIEW_MODES[mode])
 
     def get_view_mode(self) -> str:
@@ -74,10 +74,10 @@ class MdiArea(QtWidgets.QMdiArea):
             mode: window order behaviour to use
 
         Raises:
-            ValueError: window order mode not existing.
+            InvalidParamError: window order mode not existing.
         """
         if mode not in WINDOW_ORDERS:
-            raise ValueError("Invalid value for mode.")
+            raise InvalidParamError(mode, WINDOW_ORDERS)
         self.setActivationOrder(WINDOW_ORDERS[mode])
 
     def get_window_order(self) -> str:
@@ -99,10 +99,10 @@ class MdiArea(QtWidgets.QMdiArea):
             position: tabs position to use
 
         Raises:
-            ValueError: tab position does not exist
+            InvalidParamError: tab position does not exist
         """
         if position not in TAB_POSITIONS:
-            raise ValueError("Invalid value for tab position.")
+            raise InvalidParamError(position, TAB_POSITIONS)
         self.setTabPosition(TAB_POSITIONS[position])
 
     def get_tab_position(self) -> str:

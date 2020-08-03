@@ -6,7 +6,7 @@ import logging
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 DOCK_POSITIONS = bidict(
@@ -100,10 +100,10 @@ class MainWindow(QtWidgets.QMainWindow):
             position: position of the toolbar
 
         Raises:
-            ValueError: position does not exist
+            InvalidParamError: position does not exist
         """
         if position not in TOOLBAR_AREAS:
-            raise ValueError("Position not existing")
+            raise InvalidParamError(position, TOOLBAR_AREAS)
         self.addToolBar(TOOLBAR_AREAS[position], toolbar)
 
     def add_toolbar_break(self, position: str = "top"):
@@ -115,10 +115,10 @@ class MainWindow(QtWidgets.QMainWindow):
             position: position of the toolbar
 
         Raises:
-            ValueError: position does not exist
+            InvalidParamError: position does not exist
         """
         if position not in TOOLBAR_AREAS:
-            raise ValueError("Position not existing")
+            raise InvalidParamError(position, TOOLBAR_AREAS)
         self.addToolBarBreak(TOOLBAR_AREAS[position])
 
     def load_window_state(self, recursive=False) -> bool:

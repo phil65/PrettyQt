@@ -8,7 +8,7 @@ from typing import Any, Generator, List, Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import constants, gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 logger = logging.getLogger(__name__)
 
@@ -158,7 +158,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         items = ["none" if t is None else t for t in triggers]
         for item in items:
             if item not in TRIGGERS:
-                raise ValueError("trigger type not available")
+                raise InvalidParamError(item, TRIGGERS)
         flags = functools.reduce(operator.ior, [TRIGGERS[t] for t in items])
         self.setEditTriggers(flags)
 
@@ -174,10 +174,10 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             behaviour: selection behaviour to use
 
         Raises:
-            ValueError: behaviour does not exist
+            InvalidParamError: behaviour does not exist
         """
         if behaviour not in SELECTION_BEHAVIOURS:
-            raise ValueError("invalid selection behaviour")
+            raise InvalidParamError(behaviour, SELECTION_BEHAVIOURS)
         self.setSelectionBehavior(SELECTION_BEHAVIOURS[behaviour])
 
     def get_selection_behaviour(self) -> str:
@@ -199,14 +199,12 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             mode: selection mode to use
 
         Raises:
-            ValueError: mode does not exist
+            InvalidParamError: mode does not exist
         """
         if mode is None:
             mode = "none"
         if mode not in SELECTION_MODES:
-            raise ValueError(
-                "Format must be either 'single', 'extended'," "'multi' or 'None'"
-            )
+            raise InvalidParamError(mode, SELECTION_MODES)
         self.setSelectionMode(SELECTION_MODES[mode])
 
     def get_selection_mode(self) -> str:
@@ -228,10 +226,10 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             mode: mode to set
 
         Raises:
-            ValueError: invalid scroll mode
+            InvalidParamError: invalid scroll mode
         """
         if mode not in SCROLL_MODES:
-            raise ValueError("Invalid scroll mode")
+            raise InvalidParamError(mode, SCROLL_MODES)
         self.setHorizontalScrollMode(SCROLL_MODES[mode])
         self.setVerticalScrollMode(SCROLL_MODES[mode])
 
@@ -244,10 +242,10 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             mode: mode to set
 
         Raises:
-            ValueError: invalid scroll mode
+            InvalidParamError: invalid scroll mode
         """
         if mode not in SCROLL_MODES:
-            raise ValueError("Invalid scroll mode")
+            raise InvalidParamError(mode, SCROLL_MODES)
         self.setHorizontalScrollMode(SCROLL_MODES[mode])
 
     def set_vertical_scroll_mode(self, mode: str):
@@ -259,10 +257,10 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             mode: mode to set
 
         Raises:
-            ValueError: invalid scroll mode
+            InvalidParamError: invalid scroll mode
         """
         if mode not in SCROLL_MODES:
-            raise ValueError("Invalid scroll mode")
+            raise InvalidParamError(mode, SCROLL_MODES)
         self.setVerticalScrollMode(SCROLL_MODES[mode])
 
     def num_selected(self) -> int:
@@ -302,7 +300,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
 
     def scroll_to(self, index, mode: str = "ensure_visible"):
         if mode not in SCROLL_HINTS:
-            raise ValueError("Invalid scroll mode")
+            raise InvalidParamError(mode, SCROLL_HINTS)
         self.scrollTo(index, SCROLL_HINTS[mode])
 
     def highlight_when_inactive(self):

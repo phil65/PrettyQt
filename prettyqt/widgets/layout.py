@@ -5,7 +5,7 @@ from typing import Union, Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 MODES = bidict(
@@ -78,10 +78,10 @@ class Layout(QtWidgets.QLayout):
             mode: size mode for the layout
 
         Raises:
-            ValueError: size mode does not exist
+            InvalidParamError: size mode does not exist
         """
         if mode not in MODES:
-            raise ValueError(f"{mode} not a valid size mode.")
+            raise InvalidParamError(mode, MODES)
         self.setSizeConstraint(MODES[mode])
 
     def get_size_mode(self) -> str:
@@ -106,10 +106,10 @@ class Layout(QtWidgets.QLayout):
             item: set alignment for specific child only
 
         Raises:
-            ValueError: alignment does not exist
+            InvalidParamError: alignment does not exist
         """
         if alignment not in ALIGNMENTS:
-            raise ValueError(f"{alignment!r} not a valid alignment.")
+            raise InvalidParamError(alignment, ALIGNMENTS)
         if item is not None:
             return self.setAlignment(item, ALIGNMENTS[alignment])
         else:

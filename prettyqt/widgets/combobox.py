@@ -5,7 +5,7 @@ from typing import Iterable, Union, Mapping, Any
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 box = QtWidgets.QComboBox
@@ -114,10 +114,10 @@ class ComboBox(QtWidgets.QComboBox):
             policy: insert policy to use
 
         Raises:
-            ValueError: invalid insert policy
+            InvalidParamError: invalid insert policy
         """
         if policy not in INSERT_POLICIES:
-            raise ValueError("Policy not available")
+            raise InvalidParamError(policy, INSERT_POLICIES)
         policy = INSERT_POLICIES.get(policy)
         self.setInsertPolicy(policy)
 
@@ -141,10 +141,10 @@ class ComboBox(QtWidgets.QComboBox):
             policy: size adjust policy to use
 
         Raises:
-            ValueError: invalid size adjust policy
+            InvalidParamError: invalid size adjust policy
         """
         if policy not in SIZE_POLICIES:
-            raise ValueError("Policy not available")
+            raise InvalidParamError(policy, SIZE_POLICIES)
         policy = SIZE_POLICIES.get(policy)
         self.setSizeAdjustPolicy(policy)
 

@@ -5,7 +5,7 @@ from typing import Optional
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 ELIDE_MODES = bidict(
@@ -104,7 +104,7 @@ class TabBar(QtWidgets.QTabBar):
             mode: new remove behaviour
         """
         if mode not in REMOVE_BEHAVIOURS:
-            raise ValueError("Mode not available")
+            raise InvalidParamError(mode, REMOVE_BEHAVIOURS)
         self.setSelectionBehaviorOnRemove(REMOVE_BEHAVIOURS[mode])
 
     def get_remove_behaviour(self) -> str:
@@ -126,10 +126,10 @@ class TabBar(QtWidgets.QTabBar):
             mode: elide mode to use
 
         Raises:
-            ValueError: invalid elide mode
+            InvalidParamError: invalid elide mode
         """
         if mode not in ELIDE_MODES:
-            raise ValueError("Mode not available")
+            raise InvalidParamError(mode, ELIDE_MODES)
         self.setElideMode(ELIDE_MODES[mode])
 
     def get_elide_mode(self) -> str:

@@ -2,7 +2,7 @@
 
 from qtpy import QtCore, QtGui
 
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 ELIDE_MODES = bidict(
@@ -16,5 +16,5 @@ ELIDE_MODES = bidict(
 class FontMetrics(QtGui.QFontMetrics):
     def elided_text(self, text: str, mode: str, width: int, flags=0) -> str:
         if mode not in ELIDE_MODES:
-            raise ValueError("Mode not available")
+            raise InvalidParamError(mode, ELIDE_MODES)
         return self.elidedText(text, ELIDE_MODES[mode], width, flags)

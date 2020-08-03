@@ -4,7 +4,7 @@ from typing import Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 TEXT_DIRECTIONS = bidict(
@@ -44,10 +44,10 @@ class ProgressBar(QtWidgets.QProgressBar):
             alignment: alignment for the layout
 
         Raises:
-            ValueError: alignment does not exist
+            InvalidParamError: alignment does not exist
         """
         if alignment not in ALIGNMENTS:
-            raise ValueError(f"{alignment!r} not a valid alignment.")
+            raise InvalidParamError(alignment, ALIGNMENTS)
         self.setAlignment(ALIGNMENTS[alignment])
 
     def get_alignment(self) -> str:
@@ -69,10 +69,10 @@ class ProgressBar(QtWidgets.QProgressBar):
             text_direction: text direction for the layout
 
         Raises:
-            ValueError: text direction does not exist
+            InvalidParamError: text direction does not exist
         """
         if text_direction not in TEXT_DIRECTIONS:
-            raise ValueError(f"{text_direction!r} not a valid text direction.")
+            raise InvalidParamError(text_direction, TEXT_DIRECTIONS)
         self.setTextDirection(TEXT_DIRECTIONS[text_direction])
 
     def get_text_direction(self) -> str:

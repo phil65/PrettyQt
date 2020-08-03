@@ -3,7 +3,7 @@
 from qtpy import QtGui
 
 from prettyqt import gui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 STYLE_HINTS = bidict(
@@ -77,10 +77,10 @@ class Font(QtGui.QFont):
             hint: style hint
 
         Raises:
-            ValueError: invalid style hint
+            InvalidParamError: invalid style hint
         """
         if hint not in STYLE_HINTS:
-            raise ValueError("Invalid style hint")
+            raise InvalidParamError(hint, STYLE_HINTS)
         self.setStyleHint(STYLE_HINTS[hint])
 
     def set_weight(self, weight: str):
@@ -93,10 +93,10 @@ class Font(QtGui.QFont):
             weight: font weight
 
         Raises:
-            ValueError: invalid font weight
+            InvalidParamError: invalid font weight
         """
         if weight not in WEIGHTS:
-            raise ValueError(f"Invalid weight '{weight}'")
+            raise InvalidParamError(weight, WEIGHTS)
         self.setWeight(WEIGHTS[weight])
 
 

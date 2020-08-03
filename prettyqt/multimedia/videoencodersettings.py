@@ -4,7 +4,7 @@ from typing import Tuple, Dict, Any
 
 from qtpy import QtMultimedia
 
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 QUALITIES = bidict(
     very_low=QtMultimedia.QMultimedia.VeryLowQuality,
@@ -61,7 +61,7 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
 
     def set_encoding_mode(self, mode: str):
         if mode not in ENCODING_MODES:
-            raise ValueError()
+            raise InvalidParamError(mode, ENCODING_MODES)
         self.setEncodingMode(ENCODING_MODES[mode])
 
     def get_encoding_mode(self) -> str:
@@ -69,7 +69,7 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
 
     def set_quality(self, quality: str):
         if quality not in QUALITIES:
-            raise ValueError()
+            raise InvalidParamError(quality, QUALITIES)
         self.setQuality(QUALITIES[quality])
 
     def get_quality(self) -> str:

@@ -7,7 +7,7 @@ from qtpy import QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets, syntaxhighlighters, constants
 from prettyqt.gui import textcursor
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 WRAP_MODES = bidict(
@@ -145,10 +145,10 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             mode: word wrap mode to use
 
         Raises:
-            ValueError: wrap mode does not exist
+            InvalidParamError: wrap mode does not exist
         """
         if mode not in WRAP_MODES:
-            raise ValueError(f"invalid wrap mode. Allowed values: {WRAP_MODES.keys()}")
+            raise InvalidParamError(mode, WRAP_MODES)
         self.setWordWrapMode(WRAP_MODES[mode])
 
     def set_line_wrap_mode(self, mode: str):
@@ -160,12 +160,10 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
             mode: line wrap mode to use
 
         Raises:
-            ValueError: line wrap mode does not exist
+            InvalidParamError: line wrap mode does not exist
         """
         if mode not in LINE_WRAP_MODES:
-            raise ValueError(
-                f"invalid wrap mode. " f"Allowed values: {LINE_WRAP_MODES.keys()}"
-            )
+            raise InvalidParamError(mode, LINE_WRAP_MODES)
         self.setLineWrapMode(LINE_WRAP_MODES[mode])
 
     def _on_value_change(self):

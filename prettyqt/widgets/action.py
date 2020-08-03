@@ -5,7 +5,7 @@ from typing import Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 PRIORITIES = bidict(
@@ -135,10 +135,10 @@ class Action(QtWidgets.QAction):
             priority: priority for the action
 
         Raises:
-            ValueError: priority does not exist
+            InvalidParamError: priority does not exist
         """
         if priority not in PRIORITIES:
-            raise ValueError(f"{priority} not a valid priority.")
+            raise InvalidParamError(priority, PRIORITIES)
         self.setPriority(PRIORITIES[priority])
 
     def get_priority(self) -> str:
@@ -160,10 +160,10 @@ class Action(QtWidgets.QAction):
             context: shortcut context
 
         Raises:
-            ValueError: shortcut context does not exist
+            InvalidParamError: shortcut context does not exist
         """
         if context not in CONTEXTS:
-            raise ValueError(f"{context} not a valid shortcut context.")
+            raise InvalidParamError(context, CONTEXTS)
         self.setShortcutContext(CONTEXTS[context])
 
     def get_shortcut_context(self) -> str:
@@ -186,10 +186,10 @@ class Action(QtWidgets.QAction):
             role: menu role
 
         Raises:
-            ValueError: menu role does not exist
+            InvalidParamError: menu role does not exist
         """
         if role not in ROLES:
-            raise ValueError(f"{role} not a valid menu role.")
+            raise InvalidParamError(role, ROLES)
         self.setMenuRole(ROLES[role])
 
     def get_menu_role(self) -> str:

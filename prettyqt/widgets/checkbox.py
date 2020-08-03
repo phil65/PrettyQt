@@ -5,7 +5,7 @@ from typing import Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 STATES = bidict(
@@ -71,10 +71,10 @@ class CheckBox(QtWidgets.QCheckBox):
             state: checkstate to use
 
         Raises:
-            ValueError: invalid checkstate
+            InvalidParamError: invalid checkstate
         """
         if state not in STATES:
-            raise ValueError("Invalid checkstate.")
+            raise InvalidParamError(state, STATES)
         self.setCheckState(STATES[state])
 
     def get_checkstate(self) -> bool:

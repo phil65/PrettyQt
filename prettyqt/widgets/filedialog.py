@@ -6,7 +6,7 @@ from typing import List, Optional, Union, Dict
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 MODES = bidict(
@@ -93,10 +93,10 @@ class FileDialog(QtWidgets.QFileDialog):
             mode: accept mode to use
 
         Raises:
-            ValueError: invalid accept mode
+            InvalidParamError: invalid accept mode
         """
         if mode not in ACCEPT_MODES:
-            raise ValueError(f"Invalid value. Valid values: {ACCEPT_MODES.keys()}")
+            raise InvalidParamError(mode, ACCEPT_MODES)
         self.setAcceptMode(ACCEPT_MODES[mode])
 
     def get_accept_mode(self) -> str:
@@ -118,10 +118,10 @@ class FileDialog(QtWidgets.QFileDialog):
             mode: view mode to use
 
         Raises:
-            ValueError: invalid view mode
+            InvalidParamError: invalid view mode
         """
         if mode not in VIEW_MODES:
-            raise ValueError(f"Invalid value. Valid values: {VIEW_MODES.keys()}")
+            raise InvalidParamError(mode, VIEW_MODES)
         self.setViewMode(VIEW_MODES[mode])
 
     def get_view_mode(self) -> str:
@@ -145,7 +145,7 @@ class FileDialog(QtWidgets.QFileDialog):
             text: text to use
         """
         if label not in LABELS:
-            raise ValueError(f"Invalid value. Valid values: {LABELS.keys()}")
+            raise InvalidParamError(label, LABELS)
         self.setLabelText(LABELS[label], text)
 
     def get_label_text(self, label) -> str:
@@ -180,7 +180,7 @@ class FileDialog(QtWidgets.QFileDialog):
 
     def set_filter(self, to_filter: str):
         if to_filter not in FILTERS:
-            raise ValueError(f"Invalid filter. Valid values: {FILTERS.keys()}")
+            raise InvalidParamError(to_filter, FILTERS)
         self.setFilter(FILTERS[to_filter])
 
     def selected_files(self) -> List[pathlib.Path]:

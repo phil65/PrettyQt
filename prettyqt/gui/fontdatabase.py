@@ -6,7 +6,7 @@ import pathlib
 
 from qtpy import QtGui
 
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ class FontDatabase(QtGui.QFontDatabase):
 
     def get_system_font(self, font_type: str):
         if font_type not in SYSTEM_FONTS:
-            raise ValueError(f"Invalid font type '{font_type}'")
+            raise InvalidParamError(font_type, SYSTEM_FONTS)
         return self.systemFont(SYSTEM_FONTS[font_type])
 
 
