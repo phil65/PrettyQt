@@ -10,6 +10,9 @@ class MappedCheckBox(widgets.CheckBox):
         dct = {True: true_value, False: false_value}
         self.map = bidict(dct)
 
+    def serialize_fields(self):
+        return dict(map=self.map)
+
     def get_value(self):
         return self.map[self.isChecked()]
 
