@@ -3,6 +3,7 @@
 
 """Tests for `prettyqt` package."""
 
+import sys
 import pathlib
 import pickle
 
@@ -266,8 +267,9 @@ def test_standardpaths():
     assert path is not None
     path = core.StandardPaths.get_standard_locations("cache")
     assert path != []
-    path = core.StandardPaths["cache"]
-    assert path != []
+    if sys.version_info >= (3, 7):
+        path = core.StandardPaths["cache"]
+        assert path != []
     name = core.StandardPaths.get_display_name("cache")
     assert name == "Cache"
 
