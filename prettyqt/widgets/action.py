@@ -51,8 +51,10 @@ class Action(QtWidgets.QAction):
 
     def serialize_fields(self):
         return dict(
+            auto_repeat=self.autoRepeat(),
             text=self.text(),
             enabled=self.isEnabled(),
+            visible=self.isVisible(),
             font=gui.Font(self.font()),
             shortcut=self.shortcut(),
             tool_tip=self.toolTip(),
@@ -66,6 +68,7 @@ class Action(QtWidgets.QAction):
             menu_role=self.get_menu_role(),
             shortcut_context=self.get_shortcut_context(),
             status_tip=self.statusTip(),
+            whats_this=self.whatsThis(),
         )
 
     def __setstate__(self, state):
