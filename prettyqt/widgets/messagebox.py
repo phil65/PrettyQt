@@ -54,6 +54,7 @@ class MessageBox(QtWidgets.QMessageBox):
         icon: gui.icon.IconType = None,
         title: Optional[str] = None,
         text: str = "",
+        informative_text: str = "",
         details: str = "",
         buttons: Optional[list] = None,
         parent: Optional[QtWidgets.QWidget] = None,
@@ -61,6 +62,7 @@ class MessageBox(QtWidgets.QMessageBox):
         super().__init__(parent)
         self.set_icon(icon)
         self.setText(text)
+        self.setInformativeText(informative_text)
         self.setWindowTitle(title)
         self.setWindowFlags(
             QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint | QtCore.Qt.CustomizeWindowHint
