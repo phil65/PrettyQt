@@ -303,3 +303,19 @@ def test_url():
     assert str(url) == str(url.to_path())
     assert url.is_local_file()
     repr(url)
+
+
+def test_versionnumber():
+    a = core.VersionNumber(1, 2, 3)
+    b = core.VersionNumber("1.2.4")
+    c = core.VersionNumber((1, 2, 5))
+    assert a < b
+    assert b <= c
+    assert a == str(a)
+    assert c > b
+    assert b >= a
+    assert a < str(b)
+    assert b <= str(c)
+    assert c > str(b)
+    assert b >= str(a)
+    assert repr(a) == "VersionNumber(1, 2, 3)"
