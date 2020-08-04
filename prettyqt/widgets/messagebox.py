@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import sys
+import traceback
 from typing import Optional, List
 
 from qtpy import QtCore, QtWidgets
@@ -81,6 +83,13 @@ class MessageBox(QtWidgets.QMessageBox):
         if detail_text is not None:
             m.setDetailedText(detail_text)
         return m.show_blocking()
+
+    @classmethod
+    def show_exception(cls, exception: Exception):
+        exctype, value = sys.exc_info()[:2]
+        tb = traceback.format_exc()
+        dlg = cls(text=str(value), title=str(exctype), icon="critical", details=tb)
+        dlg.show_blocking()
 
     def set_icon(self, icon: gui.icon.IconType):
         if icon in ICONS:
