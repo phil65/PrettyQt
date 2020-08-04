@@ -5,6 +5,7 @@
 contains QtWidgets-based classes
 """
 
+from .style import Style
 from .application import Application
 from .sizepolicy import SizePolicy
 from .widget import Widget
@@ -20,7 +21,6 @@ from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
-from .style import Style
 from .styleoption import StyleOption
 from .stylepainter import StylePainter
 from .stylefactory import StyleFactory

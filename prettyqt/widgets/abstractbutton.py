@@ -5,11 +5,7 @@ from qtpy import QtWidgets
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
 
-STYLES = dict(
-    close=QtWidgets.QStyle.SP_TitleBarCloseButton,
-    maximise=QtWidgets.QStyle.SP_TitleBarMaxButton,
-)
-
+STYLES = widgets.style.STYLES
 
 QtWidgets.QAbstractButton.__bases__ = (widgets.Widget,)
 
