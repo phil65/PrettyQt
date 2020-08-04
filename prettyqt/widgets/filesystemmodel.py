@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pathlib
+from typing import Union
 
 from qtpy import QtCore, QtWidgets
 
@@ -70,9 +71,16 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
     def use_custom_icons(self, use: bool):
         self.setOption(OPTIONS["no_custom_icons"], not use)
 
-    def set_root_path(self, path: str):
-        if path == "/":
+    def set_root_path(self, path: Union[str, pathlib.Path]):
+        path = str(path)
+        if path in ["/", "root"]:
             path = core.Dir.rootPath()
+        elif path == "home":
+            path = core.Dir.homePath()
+        elif path == "temp":
+            path = core.Dir.tempPath()
+        elif path == "current":
+            path = core.Dir.currentPath()
         self.setRootPath(path)
 
     def set_name_filters(self, filters, hide=False):
