@@ -8,11 +8,12 @@ from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 
-OPTIONS = bidict(
-    dont_watch_changes=QtWidgets.QFileSystemModel.DontWatchForChanges,
-    dont_resolve_symlinks=QtWidgets.QFileSystemModel.DontResolveSymlinks,
-    no_custom_icons=QtWidgets.QFileSystemModel.DontUseCustomDirectoryIcons,
-)
+if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+    OPTIONS = bidict(
+        dont_watch_changes=QtWidgets.QFileSystemModel.DontWatchForChanges,
+        dont_resolve_symlinks=QtWidgets.QFileSystemModel.DontResolveSymlinks,
+        no_custom_icons=QtWidgets.QFileSystemModel.DontUseCustomDirectoryIcons,
+    )
 
 FILTERS = bidict(
     dirs=core.Dir.Dirs,

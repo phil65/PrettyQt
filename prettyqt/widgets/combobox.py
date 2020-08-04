@@ -46,7 +46,7 @@ class ComboBox(QtWidgets.QComboBox):
             (self.itemText(i), self.itemData(i), self.item_icon(i))
             for i in range(self.count())
         ]
-        return dict(
+        dct = dict(
             index=self.currentIndex(),
             editable=self.isEditable(),
             max_count=self.maxCount(),
@@ -54,13 +54,15 @@ class ComboBox(QtWidgets.QComboBox):
             icon_size=self.iconSize(),
             insert_policy=self.insertPolicy(),
             model_column=self.modelColumn(),
-            placeholder_text=self.placeholderText(),
             max_visible_items=self.maxVisibleItems(),
             size_adjust_policy=self.get_size_adjust_policy(),
             duplicates_enabled=self.duplicatesEnabled(),
             min_contents_length=self.minimumContentsLength(),
             items=items,
         )
+        if core.VersionNumber.get_qt_version() >= (5, 15, 0):
+            dct["placeholder_text"] = self.placeholderText()
+        return dct
 
     def __setstate__(self, state):
         self.__init__()

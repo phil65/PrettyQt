@@ -68,16 +68,17 @@ def test_action(qtbot):
 
 def test_actiongroup(qtbot):
     group = widgets.ActionGroup(None)
-    group.set_exclusion_policy(None)
-    group.set_exclusion_policy("exclusive")
+    if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+        group.set_exclusion_policy(None)
+        group.set_exclusion_policy("exclusive")
+        with pytest.raises(InvalidParamError):
+            group.set_exclusion_policy("test")
+        assert group.get_exclusion_policy() == "exclusive"
     act = widgets.Action()
     group.addAction(act)
     assert group[0] == act
     assert act in group
     assert len(group) == 1
-    with pytest.raises(InvalidParamError):
-        group.set_exclusion_policy("test")
-    assert group.get_exclusion_policy() == "exclusive"
 
 
 def test_boxlayout(qtbot):
@@ -283,9 +284,10 @@ def test_filesystemmodel(qtmodeltester):
     model.get_paths([idx])
     model.data(idx, model.DATA_ROLE)
     model.yield_child_indexes(idx)
-    model.watch_for_changes(False)
+    if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+        model.watch_for_changes(False)
+        model.use_custom_icons(False)
     model.resolve_sym_links(False)
-    model.use_custom_icons(False)
     model.set_name_filters(["test"], hide=True)
     model.set_filter("drives")
     with pytest.raises(InvalidParamError):
@@ -795,7 +797,8 @@ def test_tabwidget(qtbot):
 
 def test_textbrowser(qtbot):
     widget = widgets.TextBrowser()
-    widget.set_markdown("test")
+    if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+        widget.set_markdown("test")
     widget.set_rst("test")
 
 

@@ -6,7 +6,7 @@ from typing import Optional, List
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import gui, widgets, core
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -43,7 +43,8 @@ BUTTONS = bidict(
 TEXT_FORMATS = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
 )
-
+if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+    TEXT_FORMATS["markdown"] = QtCore.Qt.MarkdownText
 
 QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 

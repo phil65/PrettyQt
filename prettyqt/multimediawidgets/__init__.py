@@ -2,7 +2,10 @@
 
 """Multimediawidgets module."""
 
-from .videowidgetcontrol import VideoWidgetControl
+from prettyqt import core
+
+if core.VersionNumber.get_qt_version() >= (5, 13, 0):
+    from .videowidgetcontrol import VideoWidgetControl
 from .videowidget import VideoWidget
 
 __all__ = [

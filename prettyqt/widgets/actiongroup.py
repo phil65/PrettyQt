@@ -7,12 +7,12 @@ from qtpy import QtWidgets
 from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
-
-POLICIES = bidict(
-    none=QtWidgets.QActionGroup.ExclusionPolicy(0),
-    exclusive=QtWidgets.QActionGroup.ExclusionPolicy.Exclusive,
-    exclusive_optional=QtWidgets.QActionGroup.ExclusionPolicy.ExclusiveOptional,
-)
+if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+    POLICIES = bidict(
+        none=QtWidgets.QActionGroup.ExclusionPolicy(0),
+        exclusive=QtWidgets.QActionGroup.ExclusionPolicy.Exclusive,
+        exclusive_optional=QtWidgets.QActionGroup.ExclusionPolicy.ExclusiveOptional,
+    )
 
 
 QtWidgets.QActionGroup.__bases__ = (core.Object,)
