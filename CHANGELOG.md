@@ -1,3 +1,21 @@
+## v0.112.0 (2020-08-04)
+
+### Feat
+
+- **utils**: add install_exceptionhook method
+- **FileSystemModel**: add some more shortcuts for set_root_path
+- **core**: add VersionNumber class
+- **Application**: add get_icon method
+- **MessageBox**: add show_exception method
+
+### Refactor
+
+- improve compat with older Qt Versions
+
+### Fix
+
+- another test fix
+
 ## v0.111.1 (2020-08-03)
 
 ### Fix
