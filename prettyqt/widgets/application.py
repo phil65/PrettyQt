@@ -7,9 +7,11 @@ import logging
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import colors
+from prettyqt.utils import colors, InvalidParamError
 
 logger = logging.getLogger(__name__)
+
+STYLES = widgets.style.STYLES
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
@@ -96,3 +98,12 @@ class Application(QtWidgets.QApplication):
         #     if isinstance(widget, QtWidgets.QWidget) and widget.objectName() == name:
         #         return widget
         # return None
+
+    @classmethod
+    def get_icon(cls, icon: str):
+        style = cls.style()
+        # icon_size = style.pixelMetric(QtWidgets.QStyle.PM_MessageBoxIconSize)
+        if icon not in STYLES:
+            raise InvalidParamError(icon, STYLES)
+        icon = style.standardIcon(STYLES[icon])
+        return gui.Icon(icon)
