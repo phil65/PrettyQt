@@ -72,6 +72,10 @@ class Settings(QtCore.QSettings):
             raise RuntimeError("no app name defined")
         self.setValue(key, dict(value=value))
 
+    def set_values(self, dct: Dict[str, Any]):
+        for k, v in dct.items():
+            self.set_value(k, v)
+
     def get_value(self, key: str, default=None):
         if not self.contains(key):
             return default
