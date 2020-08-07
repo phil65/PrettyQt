@@ -358,7 +358,10 @@ class Widget(QtWidgets.QWidget):
         self.customContextMenuRequested.connect(method)
 
     def set_layout(
-        self, layout: Union[str, QtWidgets.QLayout, None], margin: Optional[int] = None
+        self,
+        layout: Union[str, QtWidgets.QLayout, None],
+        margin: Optional[int] = None,
+        spacing: Optional[int] = None,
     ) -> None:
         if layout is None:
             return None
@@ -381,6 +384,8 @@ class Widget(QtWidgets.QWidget):
         self.setLayout(self.box)
         if margin is not None:
             self.box.setContentsMargins(margin, margin, margin, margin)
+        if spacing is not None:
+            self.box.setSpacing(spacing)
 
     def center(self) -> None:
         qr = self.frameGeometry()
