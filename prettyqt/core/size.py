@@ -10,6 +10,9 @@ class Size(QtCore.QSize):
     def __getitem__(self, index) -> int:
         return (self.width(), self.height())[index]
 
+    def __reduce__(self):
+        return (self.__class__, (self.width(), self.height()))
+
 
 if __name__ == "__main__":
     size = Size(10, 20)

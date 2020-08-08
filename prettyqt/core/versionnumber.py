@@ -16,6 +16,9 @@ class VersionNumber(QtCore.QVersionNumber):
     def __repr__(self):
         return f"VersionNumber({self.major()}, {self.minor()}, {self.micro()})"
 
+    def __reduce__(self):
+        return (self.__class__, (self.major(), self.minor(), self.micro()))
+
     def __str__(self):
         return self.toString()
 
