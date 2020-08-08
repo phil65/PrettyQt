@@ -3,7 +3,7 @@
 from typing import Callable, Any, Generator, Dict
 from qtpy import QtWidgets
 
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, helpers
 
 
 SIZE_POLICIES = bidict(
@@ -37,7 +37,9 @@ CONTROL_TYPES = bidict(
 
 class SizePolicy(QtWidgets.QSizePolicy):
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}: {self.__getstate__()}"
+        cls_name = self.__class__.__name__
+        params = helpers.format_kwargs(self.__getstate__())
+        return f"{cls_name}({params})"
 
     def __getstate__(self):
         return dict(

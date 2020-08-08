@@ -5,7 +5,7 @@ from typing import Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, helpers
 
 
 PRIORITIES = bidict(
@@ -54,6 +54,10 @@ class Action(QtWidgets.QAction):
         self.set_checkable(checkable)
         self.set_statustip(statustip)
         self.set_enabled(enabled)
+
+    def __repr__(self) -> str:
+        cls_name = self.__class__.__name__
+        return f"{cls_name}({helpers.format_kwargs(self.serialize_fields())})"
 
     def serialize_fields(self):
         return dict(

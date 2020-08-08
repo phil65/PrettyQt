@@ -80,7 +80,9 @@ QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
 class Widget(QtWidgets.QWidget):
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}: {self.serialize_fields()}"
+        cls_name = self.__class__.__name__
+        params = helpers.format_kwargs(self.serialize_fields())
+        return f"{cls_name}({params})"
 
     def __setstate__(self, state: Dict[str, Any]) -> None:
         super().__init__()
