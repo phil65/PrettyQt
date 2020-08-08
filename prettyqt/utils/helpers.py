@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from typing import Dict, Any
 from typing import List
 import warnings
 import functools
@@ -16,11 +17,27 @@ def merge_flags(flags, mapping):
     return functools.reduce(operator.ior, [mapping[t] for t in flags])
 
 
+def format_kwargs(kwargs: Dict[str, Any]) -> str:
+    kwarg_list = [f"{k}={repr(v)}" for k, v in kwargs.items()]
+    return ", ".join(kwarg_list)
+
+
+def cut_off_str(obj, max_len: int):
+    """Create a string representation of an object, no longer than max_len characters.
+
+    Uses repr(obj) to create the string representation. If this is longer than max_len -3
+    characters, the last three will be replaced with elipsis.
+    """
+    s = repr(obj)
+    if len(s) > max_len - 3:
+        s = s[: max_len - 3] + "..."
+    return s
+
+
 def deprecated(func):
     """A decorator which can be used to mark functions as deprecated.
 
-    It will result in a warning being emitted
-    when the function is used.
+    It will result in a warning being emitted when the function is used.
     """
 
     @functools.wraps(func)
