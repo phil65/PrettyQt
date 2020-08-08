@@ -12,6 +12,7 @@ from qtpy.QtGui import QActionEvent as ActionEvent
 from qtpy.QtGui import QShowEvent as ShowEvent
 from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
+from .gradient import Gradient
 from .icon import Icon
 from .guiapplication import GuiApplication
 from .validator import Validator
@@ -59,6 +60,7 @@ __all__ = [
     "ActionEvent",
     "ShowEvent",
     "ContextMenuEvent",
+    "Gradient",
     "GuiApplication",
     "Validator",
     "RegExpValidator",

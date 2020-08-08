@@ -81,6 +81,19 @@ def test_fontmetrics():
     assert len(val) < 5
 
 
+def test_gradient():
+    grad = gui.Gradient()
+    grad.set_coordinate_mode("object")
+    assert grad.get_coordinate_mode() == "object"
+    with pytest.raises(InvalidParamError):
+        grad.set_coordinate_mode("test")
+    grad.set_spread("repeat")
+    assert grad.get_spread() == "repeat"
+    with pytest.raises(InvalidParamError):
+        grad.set_spread("test")
+    assert grad.get_type() == "none"
+
+
 def test_guiapplication():
     with gui.GuiApplication.override_cursor("forbidden"):
         pass
