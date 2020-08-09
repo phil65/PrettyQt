@@ -21,6 +21,9 @@ from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
+from .graphicsobject import GraphicsObject
+from .graphicseffect import GraphicsEffect
+from .graphicsopacityeffect import GraphicsOpacityEffect
 from .styleoption import StyleOption
 from .stylepainter import StylePainter
 from .stylefactory import StyleFactory
@@ -133,6 +136,9 @@ __all__ = [
     "Widget",
     "DesktopWidget",
     "GraphicsItem",
+    "GraphicsObject",
+    "GraphicsEffect",
+    "GraphicsOpacityEffect",
     "Style",
     "StyleOption",
     "SpacerItem",
