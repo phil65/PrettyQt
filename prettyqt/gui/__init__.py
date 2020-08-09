@@ -12,6 +12,7 @@ from qtpy.QtGui import QActionEvent as ActionEvent
 from qtpy.QtGui import QShowEvent as ShowEvent
 from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
+from .keysequence import KeySequence
 from .gradient import Gradient
 from .icon import Icon
 from .guiapplication import GuiApplication
@@ -49,7 +50,6 @@ from .textcharformat import TextCharFormat
 from .textcursor import TextCursor
 from .syntaxhighlighter import SyntaxHighlighter
 from .pdfwriter import PdfWriter
-from .keysequence import KeySequence
 from .desktopservices import DesktopServices
 
 
