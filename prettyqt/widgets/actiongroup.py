@@ -28,6 +28,9 @@ class ActionGroup(QtWidgets.QActionGroup):
     def __getitem__(self, item: int):
         return self.actions()[item]
 
+    def serialize_fields(self):
+        return dict(exclusion_policy=self.get_exclusion_policy())
+
     def set_exclusion_policy(self, policy: Optional[str]):
         """Set exclusion policy to use.
 

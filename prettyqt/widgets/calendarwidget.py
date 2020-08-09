@@ -25,7 +25,7 @@ QtWidgets.QCalendarWidget.__bases__ = (widgets.Widget,)
 
 class CalendarWidget(QtWidgets.QCalendarWidget):
     def serialize_fields(self):
-        return dict(date=self.selectedDate())
+        return dict(date=self.get_date())
 
     def __setstate__(self, state):
         self.__init__()
