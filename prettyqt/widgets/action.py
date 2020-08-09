@@ -43,6 +43,7 @@ class Action(QtWidgets.QAction):
         shortcut: Optional[str] = None,
         tooltip: str = "",
         checkable: bool = False,
+        checked: bool = False,
         statustip: str = "",
         enabled: bool = True,
     ):
@@ -52,6 +53,7 @@ class Action(QtWidgets.QAction):
         self.set_shortcut(shortcut)
         self.set_tooltip(tooltip)
         self.set_checkable(checkable)
+        self.set_checked(checked)
         self.set_statustip(statustip)
         self.set_enabled(enabled)
 
