@@ -66,7 +66,7 @@ class Action(QtWidgets.QAction):
             enabled=self.isEnabled(),
             visible=self.isVisible(),
             font=gui.Font(self.font()),
-            shortcut=self.shortcut(),
+            shortcut=self.get_shortcut(),
             tool_tip=self.toolTip(),
             checkable=self.isCheckable(),
             checked=self.isChecked(),
@@ -126,6 +126,12 @@ class Action(QtWidgets.QAction):
     def set_shortcut(self, shortcut):
         if shortcut:
             self.setShortcut(shortcut)
+
+    def get_shortcut(self) -> Optional[gui.KeySequence]:
+        shortcut = gui.KeySequence(self.shortcut())
+        if not shortcut:
+            return None
+        return shortcut
 
     def set_menu(self, menu):
         self.setMenu(menu)
