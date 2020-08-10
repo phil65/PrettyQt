@@ -103,6 +103,16 @@ def test_file():
         pass
 
 
+def test_line():
+    line = core.Line()
+    p1 = core.Point(0, 0)
+    p2 = core.Point(1, 1)
+    line[0] = p1
+    line[1] = p2
+    assert line[0] == p1
+    assert line[1] == p2
+
+
 def test_mimedata():
     mime_data = core.MimeData()
     mime_data.set_data("type a", "data")
