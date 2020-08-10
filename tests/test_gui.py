@@ -182,6 +182,16 @@ def test_painter():
     # assert painter.get_composition_mode() == "source_atop"
 
 
+def test_palette():
+    pal = gui.Palette()
+    assert len(pal.get_colors()) == 11
+    pal.highlight_inactive()
+    pal.set_color("background", "red")
+    color = gui.Color("red")
+    pal["button"] = color
+    assert pal["button"] == color
+
+
 def test_pdfwriter():
     writer = gui.PdfWriter("test")
     writer.setup(core.RectF())
