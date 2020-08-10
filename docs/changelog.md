@@ -1,3 +1,27 @@
+## v0.113.0 (2020-08-10)
+
+### Feat
+
+- **gui**: add PainterPath class
+- **gui**: add Polygon class
+- **gui**: palette improvements
+- **core**: add Line class
+- **core**: add TransposeProxyModel / ConcatenateTablesProxyModel
+- add ObjectBrowser
+- **widgets**: add GraphicsEffect / GraphicsObject / GraphicsOpacityEffect
+- **Action**: "checked" param for ctor
+- **gui**: some magic methods + get_matches for KeySequence
+- **core**: allow pickling VersionNumber / Size / Dir
+- **gui**: add Gradient class
+- add ColumnItemModel / ColumnItem
+- **Settings**: add set_values method
+- **Widget**: spacing kwarg for set_layout
+
+### Refactor
+
+- add serialization stuff
+- improve some repr methods
+
 ## v0.112.0 (2020-08-04)
 
 ### Feat
