@@ -218,6 +218,14 @@ def test_polygonf():
         poly = pickle.load(jar)
 
 
+def test_polygon():
+    poly = gui.Polygon()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(poly, jar)
+    with open("data.pkl", "rb") as jar:
+        poly = pickle.load(jar)
+
+
 def test_regexpvalidator():
     val = gui.RegExpValidator()
     val.set_regex("[0-9]")

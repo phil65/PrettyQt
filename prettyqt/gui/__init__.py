@@ -43,6 +43,7 @@ from .pixmap import Pixmap
 from .painter import Painter
 from .palette import Palette
 from .cursor import Cursor
+from .polygon import Polygon
 from .polygonf import PolygonF
 from .standarditem import StandardItem
 from .standarditemmodel import StandardItemModel
@@ -84,6 +85,7 @@ __all__ = [
     "Painter",
     "Palette",
     "Cursor",
+    "Polygon",
     "PolygonF",
     "StandardItem",
     "StandardItemModel",
