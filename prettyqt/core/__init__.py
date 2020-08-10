@@ -14,7 +14,7 @@ from qtpy.QtCore import QPointF as PointF
 from qtpy.QtCore import QSizeF as SizeF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
-
+from prettyqt import core
 from .object import Object
 from .versionnumber import VersionNumber
 from .datastream import DataStream
@@ -59,6 +59,10 @@ from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel
 from .standardpaths import StandardPaths
 
+if core.VersionNumber.get_qt_version() >= (5, 13, 0):
+    from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
+    from .transposeproxymodel import TransposeProxyModel
+
 __all__ = [
     "Object",
     "DataStream",
@@ -100,6 +104,8 @@ __all__ = [
     "AbstractProxyModel",
     "AbstractListModel",
     "SortFilterProxyModel",
+    "ConcatenateTablesProxyModel",
+    "TransposeProxyModel",
     "AbstractTableModel",
     "StandardPaths",
 ]
