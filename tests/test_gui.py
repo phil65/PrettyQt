@@ -122,6 +122,8 @@ def test_intvalidator():
 
 def test_keysequence():
     assert gui.KeySequence.to_shortcut_str(0x41, QtCore.Qt.ShiftModifier) == "Shift+A"
+    seq = gui.KeySequence("Ctrl+C")
+    assert seq.get_matches("Ctrl+C") == "exact"
 
 
 def test_standarditem():
