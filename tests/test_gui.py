@@ -182,6 +182,16 @@ def test_painter():
     # assert painter.get_composition_mode() == "source_atop"
 
 
+def test_painterpath():
+    path = gui.PainterPath()
+    rect = core.RectF(0, 0, 1, 1)
+    path.addRect(rect)
+    assert len(path) == 5
+    assert bool(path)
+    assert core.PointF(0.5, 0.5) in path
+    path[1] = (0.5, 0.5)
+
+
 def test_palette():
     pal = gui.Palette()
     assert len(pal.get_colors()) == 11

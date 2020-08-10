@@ -41,6 +41,7 @@ from .pen import Pen
 from .picture import Picture
 from .pixmap import Pixmap
 from .painter import Painter
+from .painterpath import PainterPath
 from .palette import Palette
 from .cursor import Cursor
 from .polygon import Polygon
@@ -83,6 +84,7 @@ __all__ = [
     "Picture",
     "Pixmap",
     "Painter",
+    "PainterPath",
     "Palette",
     "Cursor",
     "Polygon",
