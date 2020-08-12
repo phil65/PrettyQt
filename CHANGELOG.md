@@ -1,3 +1,17 @@
+## v0.115.0 (2020-08-12)
+
+### Feat
+
+- **Polygon**: add add_points method
+- **Object**: add store_widget_states / restore_widget_states
+- **Painter**: add paint_on, set_transparent_background, set_brush
+- **PainterPath**: add add_rect method
+- **Application**: add __class_getitem__
+
+### Fix
+
+- **RegexEditor**: correctly initialize dialog
+
 ## v0.114.1 (2020-08-12)
 
 ### Fix
