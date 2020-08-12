@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/widgets.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.3" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.5" name="generator"/>
 <title>widgets - PrettyQt</title>
-<link href="../assets/stylesheets/main.947af8d5.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.63b94e9e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -10162,17 +10162,17 @@ contextMenuEvent<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>71
-72
-73
-74
-75
-76
-77
-78
-79
+<pre><span></span>79
 80
-81</pre>
+81
+82
+83
+84
+85
+86
+87
+88
+89</pre>
 </div>
 </td>
 <td class="code">
@@ -15655,7 +15655,7 @@ detach_tab<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">)</span>
+<pre><span></span><code><span class="nd">@autoslot</span><span class="o">.</span><span class="n">AutoSlot</span>
 <span class="k">def</span> <span class="nf">detach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Detach tab by removing its contents and placing them in a DetachedTab window.</span>
 
@@ -15779,7 +15779,7 @@ open_widget<span class="p">(</span><span class="bp">self</span><span class="p">,
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">(</span><span class="nb">object</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<pre><span></span><code><span class="nd">@autoslot</span><span class="o">.</span><span class="n">AutoSlot</span>
 <span class="k">def</span> <span class="nf">open_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Unnamed"</span><span class="p">):</span>
     <span class="sd">"""Create a tab containing delivered widget."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_tab</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">"mdi.widgets"</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -17459,14 +17459,14 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.c3dc8c49.min.js"></script>
+<script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
 <script src="../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.8e2cddea.min.js"
+            worker: "../assets/javascripts/worker/search.fae956e7.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
