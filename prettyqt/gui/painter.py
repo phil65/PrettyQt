@@ -9,11 +9,11 @@ from prettyqt import core, gui
 from prettyqt.utils import bidict, colors, InvalidParamError
 
 
-PEN_STYLES = gui.pen.PEN_STYLES
+PEN_STYLES = gui.pen.PEN_STYLES  # type: ignore
 
-JOIN_STYLES = gui.pen.JOIN_STYLES
+JOIN_STYLES = gui.pen.JOIN_STYLES  # type: ignore
 
-CAP_STYLES = gui.pen.CAP_STYLES
+CAP_STYLES = gui.pen.CAP_STYLES  # type: ignore
 
 COMP_MODES = bidict(
     source_over=QtGui.QPainter.CompositionMode_SourceOver,
