@@ -190,6 +190,7 @@ def test_painterpath():
     assert bool(path)
     assert core.PointF(0.5, 0.5) in path
     path[1] = (0.5, 0.5)
+    path.add_rect(QtCore.QRect(0, 0, 1, 1))
 
 
 def test_palette():

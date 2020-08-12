@@ -30,3 +30,8 @@ class PainterPath(QtGui.QPainterPath):
 
     def __contains__(self, item: Union[QtCore.QPointF, QtCore.QRectF, "PainterPath"]):
         return self.contains(item)
+
+    def add_rect(self, rect: Union[QtCore.QRectF, QtCore.QRect]):
+        if isinstance(rect, QtCore.QRect):
+            rect = QtCore.QRectF(rect)
+        self.addRect(rect)
