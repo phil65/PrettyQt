@@ -91,7 +91,7 @@ def AutoSlot(func):
     ellipses (`...`) or `pass` to fill in the body.
     """
     args, kwargs = _build_arguments(func)
-    print(f"Auto-slot for {func.__name__}: args: {args}, kwargs: {kwargs}")
+    logger.debug(f"Auto-slot for {func.__name__}: args: {args}, kwargs: {kwargs}")
 
     core.Slot(*args, **kwargs)(func)
 
