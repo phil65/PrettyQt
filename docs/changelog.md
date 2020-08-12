@@ -1,3 +1,9 @@
+## v0.114.1 (2020-08-12)
+
+### Fix
+
+- **HeaderView**: fix saving state
+
 ## v0.114.0 (2020-08-12)
 
 ### Refactor
