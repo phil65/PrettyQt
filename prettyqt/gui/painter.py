@@ -9,7 +9,11 @@ from prettyqt import core, gui
 from prettyqt.utils import bidict, colors, InvalidParamError
 
 
-PEN_TYPES = bidict(none=QtCore.Qt.NoPen)
+PEN_STYLES = gui.pen.PEN_STYLES
+
+JOIN_STYLES = gui.pen.JOIN_STYLES
+
+CAP_STYLES = gui.pen.CAP_STYLES
 
 COMP_MODES = bidict(
     source_over=QtGui.QPainter.CompositionMode_SourceOver,
@@ -31,6 +35,12 @@ PATTERNS = bidict(
     cross=QtCore.Qt.CrossPattern,
     linear_gradient=QtCore.Qt.LinearGradientPattern,
     radial_gradient=QtCore.Qt.RadialGradientPattern,
+)
+
+CLIP_OPERATIONS = bidict(
+    none=QtCore.Qt.NoClip,
+    replace=QtCore.Qt.ReplaceClip,
+    intersect=QtCore.Qt.IntersectClip,
 )
 
 
@@ -67,30 +77,38 @@ class Painter(QtGui.QPainter):
             color = gui.Brush(color, PATTERNS[pattern])
         self.fillRect(rect, color)
 
-    def set_pen(self, pen_type: str):
-        """Set pen type to use.
-
-        Allowed values are "none",
+    def set_pen(
+        self,
+        style: str = "solid",
+        width: int = 1,
+        color: colors.ColorType = "black",
+        join_style: str = "bevel",
+        cap_style: str = "square",
+    ):
+        """Set pen to use.
 
         Args:
-            pen_type: pen type to use
-
-        Raises:
-            InvalidParamError: pen type does not exist
+            style: pen style to use
+            width: pen width
+            color: pen color
+            join_style: pen join style to use
+            cap_style: pen cap style to use
         """
-        if pen_type not in PEN_TYPES:
-            raise InvalidParamError(pen_type, PEN_TYPES)
-        self.setPen(PEN_TYPES[pen_type])
+        pen = gui.Pen()
+        pen.set_style(style)
+        pen.set_cap_style(cap_style)
+        pen.set_join_style(join_style)
+        pen.setWidth(width)
+        pen.set_color(color)
+        self.setPen(pen)
 
     def get_pen(self) -> str:
-        """Return current pen type.
-
-        Possible values: "none",
+        """Return current pen.
 
         Returns:
-            pen type
+            current pen
         """
-        return PEN_TYPES.inv[self.pen()]
+        return gui.Pen(self.pen())
 
     def set_color(self, color: colors.ColorType):
         color = colors.get_color(color)
@@ -136,3 +154,14 @@ class Painter(QtGui.QPainter):
 
     def draw_text(self, x, y, text):
         self.drawText(x, y, text)
+
+    def set_clip_path(self, path: QtGui.QPainterPath, operation: str = "replace"):
+        if operation not in CLIP_OPERATIONS:
+            raise InvalidParamError(operation, CLIP_OPERATIONS)
+        self.setClipPath(path, CLIP_OPERATIONS[operation])
+
+    @contextlib.contextmanager
+    def clip_path(self, operation: str = "replace"):
+        path = gui.PainterPath()
+        yield path
+        self.set_clip_path(path, operation)

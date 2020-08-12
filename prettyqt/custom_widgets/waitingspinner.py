@@ -70,7 +70,7 @@ class BaseWaitingSpinner(widgets.Widget):
         if self._current_counter >= self._line_num:
             self._current_counter = 0
 
-        painter.set_pen("none")
+        painter.set_pen(style="none")
         for i in range(0, self._line_num):
             painter.save()
             painter.translate(
