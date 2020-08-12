@@ -104,6 +104,14 @@ def test_singlelinetextedit(qtbot):
     w.set_text("test")
 
 
+def test_timeline(qtbot):
+    tl = custom_widgets.Timeline(60, 60)
+    sample = custom_widgets.VideoSample(20)
+    tl += sample
+    tl.show()
+    tl.close()
+
+
 def test_mappedcheckbox(qtbot):
     widget = custom_widgets.MappedCheckBox(true_value=0, false_value=1)
     widget.set_value(0)

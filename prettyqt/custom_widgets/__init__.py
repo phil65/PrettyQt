@@ -27,6 +27,7 @@ from .imageviewer import ImageViewer
 from .popupinfo import PopupInfo
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
+from .timeline import Timeline, VideoSample
 from .regexeditor.editor import RegexEditorWidget
 
 # Deprecated: should be imported from custom_delegates instead
@@ -62,5 +63,7 @@ __all__ = [
     "ImageViewer",
     "MarkdownWindow",
     "CodeEditor",
+    "Timeline",
+    "VideoSample",
     "RegexEditorWidget",
 ]
