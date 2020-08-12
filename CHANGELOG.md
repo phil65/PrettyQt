@@ -1,3 +1,14 @@
+## v0.114.0 (2020-08-12)
+
+### Refactor
+
+- use AutoSlot decorator
+
+### Feat
+
+- add autoslot decorator
+- add prettyqt.debug
+
 ## v0.113.0 (2020-08-10)
 
 ### Feat
