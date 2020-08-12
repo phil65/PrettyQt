@@ -5,7 +5,7 @@ from typing import Union, Optional, Dict
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, autoslot
 
 
 TAB_SHAPES = bidict(
@@ -125,7 +125,7 @@ class TabWidget(QtWidgets.QTabWidget):
     def set_closable(self, closable: bool = True) -> None:
         self.setTabsClosable(closable)
 
-    @core.Slot(int, QtCore.QPoint)
+    @autoslot.AutoSlot
     def detach_tab(self, index: int, point: QtCore.QPoint) -> None:
         """Detach tab by removing its contents and placing them in a DetachedTab window.
 
@@ -219,14 +219,14 @@ class TabWidget(QtWidgets.QTabWidget):
         for tab in tabs:
             tab.close()
 
-    @core.Slot(int)
+    @autoslot.AutoSlot
     def remove_tab(self, index: int) -> None:
         widget = self.widget(index)
         self.removeTab(index)
         if widget is not None:
             widget.deleteLater()
 
-    @core.Slot(object, str)
+    @autoslot.AutoSlot
     def open_widget(self, widget: QtWidgets.QWidget, title: str = "Unnamed"):
         """Create a tab containing delivered widget."""
         self.add_tab(widget, title, icon="mdi.widgets", show=True)

@@ -5,6 +5,7 @@ from typing import Optional, Mapping, Iterable, Union, Dict, Any
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
+from prettyqt.utils import autoslot
 
 
 class SelectionWidget(widgets.GroupBox):
@@ -99,8 +100,8 @@ class SelectionWidget(widgets.GroupBox):
             return self.widget_custom.get_value()
         return
 
-    @core.Slot(bool)
-    def update_choice(self, checked):
+    @autoslot.AutoSlot
+    def update_choice(self, checked: bool):
         if not checked:
             return None
         choice = self.current_choice()

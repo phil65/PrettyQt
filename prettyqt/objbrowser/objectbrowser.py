@@ -10,6 +10,7 @@ from prettyqt import core, gui, widgets, constants
 
 from prettyqt.objbrowser.treemodel import TreeProxyModel, TreeModel
 from prettyqt.objbrowser.attribute_model import DEFAULT_ATTR_COLS, DEFAULT_ATTR_DETAILS
+from prettyqt.utils import autoslot
 
 logger = logging.getLogger(__name__)
 
@@ -324,8 +325,10 @@ class ObjectBrowser(widgets.MainWindow):
             logger.debug(f"Saving new settings: {new}")
             settings.set_values(new)
 
-    @core.Slot(core.ModelIndex, core.ModelIndex)
-    def _update_details(self, current_index, _previous_index):
+    @autoslot.AutoSlot
+    def _update_details(
+        self, current_index: core.ModelIndex, _previous_index: core.ModelIndex
+    ):
         """Show the object details in the editor given an index."""
         tree_item = self._proxy_tree_model.treeItem(current_index)
         self._update_details_for_item(tree_item)
