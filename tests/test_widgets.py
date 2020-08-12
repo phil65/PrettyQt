@@ -7,6 +7,11 @@ import inspect
 import datetime
 import pickle
 
+# import logging
+import tempfile
+import pathlib
+import os
+
 import pytest
 from qtpy import QtCore
 
@@ -16,6 +21,8 @@ from prettyqt.utils import InvalidParamError
 clsmembers = inspect.getmembers(widgets, inspect.isclass)
 clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
 clsmembers = [tpl for tpl in clsmembers if core.Object in tpl[1].mro()]
+
+# logger = logging.getLogger(__name__)
 
 
 @pytest.mark.parametrize("name, cls", clsmembers)
@@ -796,10 +803,17 @@ def test_tabwidget(qtbot):
 
 
 def test_textbrowser(qtbot):
+    tmp = tempfile.NamedTemporaryFile(delete=False)
+    tmp.write(b"Test")
+    tmp.close()
+    path = pathlib.Path(tempfile.gettempdir()) / tmp.name
     widget = widgets.TextBrowser()
     if core.VersionNumber.get_qt_version() >= (5, 14, 0):
         widget.set_markdown("test")
+        widget.set_markdown_file(str(path))
     widget.set_rst("test")
+    widget.set_rst_file(str(path))
+    os.unlink(tmp.name)
 
 
 def test_textedit(qtbot):
