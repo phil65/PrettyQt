@@ -126,7 +126,7 @@ def test_modelindex():
     core.ModelIndex()
 
 
-def test_object():
+def test_object(qapp):
     obj = core.Object()
     obj.set_id("test")
     with open("data.pkl", "wb") as jar:
@@ -139,12 +139,20 @@ def test_object():
     w1.set_id("w1")
     w2 = widgets.PlainTextEdit()
     w2.set_id("w2")
-    w.add(w1, w2)
+    w3 = widgets.MainWindow()
+    w3.set_id("w3")
+    w4 = widgets.TableView()
+    w4.set_id("w4")
+    w.add(w1, w2, w3, w4)
     assert w.find_children(widgets.PushButton, recursive=False) == [w1]
     assert w.find_children(core.Object, name="w2", recursive=False) == [w2]
     assert w.find_child(widgets.PlainTextEdit, recursive=True) == w2
     assert w.find_child(core.Object, name="w2", recursive=False) == w2
     assert w2.find_parent(widgets.Splitter) == w
+    layout = widgets.BoxLayout("vertical")
+    layout.add(w)
+    layout.store_widget_states()
+    layout.restore_widget_states()
 
 
 def test_point():
