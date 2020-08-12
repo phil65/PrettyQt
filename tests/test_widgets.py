@@ -813,7 +813,7 @@ def test_textbrowser(qtbot):
         widget.set_markdown_file(str(path))
     widget.set_rst("test")
     widget.set_rst_file(str(path))
-    os.unlink(tmp.name)
+    os.unlink(str(path))
 
 
 def test_textedit(qtbot):
