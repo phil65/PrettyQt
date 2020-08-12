@@ -241,6 +241,7 @@ def test_polygon():
         pickle.dump(poly, jar)
     with open("data.pkl", "rb") as jar:
         poly = pickle.load(jar)
+    poly.add_points((0, 1), core.Point(2, 2))
 
 
 def test_regexpvalidator():

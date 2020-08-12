@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Union, Tuple
+
 from qtpy import QtGui
 
 from prettyqt import core
@@ -14,6 +16,12 @@ class Polygon(QtGui.QPolygon):
 
     def __setstate__(self, ba):
         core.DataStream.write_bytearray(ba, self)
+
+    def add_points(self, *points: Union[Tuple[float, float], core.Point]):
+        for p in points:
+            if isinstance(p, tuple):
+                p = core.Point(*p)
+            self << p
 
     @classmethod
     def from_xy(cls, xdata, ydata):
