@@ -69,7 +69,7 @@ class HeaderView(QtWidgets.QHeaderView):
         else:
             self.setSectionResizeMode(col, MODES[mode])
 
-    def section_labels(self) -> List[str]:
+    def get_section_labels(self) -> List[str]:
         model = self.model()
         return [
             model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
@@ -79,14 +79,20 @@ class HeaderView(QtWidgets.QHeaderView):
     def contextMenuEvent(self, event):
         """Context menu for our files tree."""
         menu = widgets.Menu(parent=self)
-        for i, header_label in enumerate(self.section_labels()[1:], start=1):
-            act = menu.addAction(header_label)
-            act.setCheckable(True)
-            val = not self.isSectionHidden(i)
-            act.setChecked(val)
-            fn = functools.partial(self.set_section_hidden, i=i, hide=val)
-            act.triggered.connect(fn)
+        actions = self.get_header_actions()
+        menu.add_actions(actions)
         menu.exec_(self.mapToGlobal(event.pos()))
+
+    def get_header_actions(self) -> List[widgets.Action]:
+        actions = list()
+        labels = self.get_section_labels()[1:]
+        for i, header_label in enumerate(labels, start=1):
+            val = not self.isSectionHidden(i)
+            action = widgets.Action(text=header_label, checkable=True, checked=val)
+            fn = functools.partial(self.set_section_hidden, i=i, hide=val)
+            action.triggered.connect(fn)
+            actions.append(action)
+        return actions
 
     def set_section_hidden(self, i: int, hide: bool):
         self.section_vis_changed.emit(i, hide)
