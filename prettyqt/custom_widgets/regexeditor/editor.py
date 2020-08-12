@@ -38,10 +38,10 @@ class RegexEditorWidget(widgets.Widget):
         self.grid.add(self.layout_toprow, 1, 0)
         self.left_layout.add(self.groupbox)
         self.groupbox_teststring = widgets.GroupBox(title="Test strings")
-        self.layout_teststring = widgets.GridLayout(self.groupbox_teststring)
+        self.groupbox_teststring.set_layout("grid")
         self.textedit_teststring = widgets.PlainTextEdit(teststring)
         self.textedit_teststring.set_min_size(400, 0)
-        self.layout_teststring.add(self.textedit_teststring, 0, 0)
+        self.groupbox_teststring.box.add(self.textedit_teststring, 0, 0)
         self.label_num_matches = widgets.Label("No match")
         self.label_num_matches.set_alignment("center")
         self.left_layout.add(self.groupbox_teststring)
@@ -75,6 +75,7 @@ class RegexEditorWidget(widgets.Widget):
         self.cb_quickref.stateChanged.connect(self.quick_ref_requested)
         self.regexinput.value_changed.connect(self._update_view)
         self.textedit_teststring.textChanged.connect(self._update_view)
+        self.regexinput.pattern = regex
         self._update_view()
 
     def __getattr__(self, attr):
@@ -135,6 +136,8 @@ def run():
 
 if __name__ == "__main__":
     app = widgets.app()
+    app.setApplicationName("Test")
+    app.setOrganizationName("Test")
     teststring = "aa356aa356aa356aa356aa356aa356aa356aa3a356aa356"
     widget = RegexEditorWidget(regex="aa[0-9]", teststring=teststring)
     widget.show()
