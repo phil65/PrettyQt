@@ -217,6 +217,18 @@ def test_pdfwriter():
 def test_pen():
     pen = gui.Pen()
     pen.set_color("blue")
+    pen.set_cap_style("round")
+    with pytest.raises(InvalidParamError):
+        pen.set_cap_style("test")
+    assert pen.get_cap_style() == "round"
+    pen.set_join_style("bevel")
+    with pytest.raises(InvalidParamError):
+        pen.set_join_style("test")
+    assert pen.get_join_style() == "bevel"
+    pen.set_style("dash_dot")
+    with pytest.raises(InvalidParamError):
+        pen.set_style("test")
+    assert pen.get_style() == "dash_dot"
 
 
 def test_picture():
