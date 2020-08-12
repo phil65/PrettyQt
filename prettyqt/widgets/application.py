@@ -17,6 +17,12 @@ QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
 
 class Application(QtWidgets.QApplication):
+    def __class_getitem__(cls, name: str) -> QtWidgets.QWidget:
+        widget = cls.get_widget(name)
+        if widget is None:
+            raise ValueError(f"Widget {name!r} does not exist.")
+        return widget
+
     def set_icon(self, icon: gui.icon.IconType):
         """Set the default window icon.
 
