@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 
+from typing import Union
+import contextlib
+
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
@@ -36,6 +39,12 @@ class Painter(QtGui.QPainter):
         return self
 
     def __exit__(self, typ, value, traceback):
+        self.end()
+
+    @contextlib.contextmanager
+    def paint_on(self, obj):
+        self.begin(obj)
+        yield self
         self.end()
 
     def draw_image(self, point, frame_buffer):
@@ -86,6 +95,18 @@ class Painter(QtGui.QPainter):
     def set_color(self, color: colors.ColorType):
         color = colors.get_color(color)
         self.setPen(color)
+
+    def set_brush(self, brush: Union[QtGui.QBrush, colors.ColorType]):
+        if not isinstance(brush, QtGui.QBrush):
+            brush = colors.get_color(brush)
+        self.setBrush(brush)
+
+    def set_transparent_background(self, transparent: bool = True):
+        if transparent:
+            mode = QtCore.Qt.TransparentMode
+        else:
+            mode = QtCore.Qt.OpaqueMode
+        self.setBackgroundMode(mode)
 
     def set_composition_mode(self, mode: str):
         """Set the current composition mode.

@@ -10,7 +10,7 @@ import pathlib
 from qtpy import QtCore
 import qtpy
 
-from prettyqt import core, gui
+from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
 
 
@@ -169,6 +169,12 @@ def test_painter():
     painter = gui.Painter(gui.Image())
     painter.use_antialiasing()
     painter.set_pen("none")
+    painter.set_transparent_background(False)
+    painter.set_transparent_background(True)
+    painter.set_brush(gui.Brush())
+    with painter.paint_on(widgets.Widget()):
+        pass
+    painter.set_brush(gui.Color("red"))
     painter.fill_rect((0, 1, 3, 5), "transparent")
     painter.fill_rect(core.Rect(), "transparent")
     with pytest.raises(ValueError):
