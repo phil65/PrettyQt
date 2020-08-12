@@ -36,15 +36,23 @@ class HeaderView(QtWidgets.QHeaderView):
         self.setSectionsClickable(True)
         self._widget_name = parent.id if parent is not None else ""
 
-    def save_state(self):
-        settings = core.Settings()
-        settings.setValue(f"{self._widget_name}.state", self.saveState())
+    def save_state(
+        self, settings: Optional[core.Settings] = None, key: Optional[str] = None
+    ):
+        settings = core.Settings() if settings is None else settings
+        key = f"{self._widget_name}.state" if key is None else key
+        settings.set_value(key, self.saveState())
 
-    def load_state(self):
-        settings = core.Settings()
-        state = settings.get(f"{self._widget_name}.state", None)
+    def load_state(
+        self, settings: Optional[core.Settings] = None, key: Optional[str] = None
+    ) -> bool:
+        settings = core.Settings() if settings is None else settings
+        key = f"{self._widget_name}.state" if key is None else key
+        state = settings.get(key, None)
         if state is not None:
             self.restoreState(state)
+            return True
+        return False
 
     def resize_sections(self, mode: str):
         self.resizeSections(MODES[mode])
