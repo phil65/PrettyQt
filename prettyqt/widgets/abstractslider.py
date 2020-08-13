@@ -3,7 +3,18 @@
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
+from prettyqt.utils import bidict, InvalidParamError
 
+SLIDER_ACTIONS = bidict(
+    none=QtWidgets.QAbstractSlider.SliderNoAction,
+    single_step_add=QtWidgets.QAbstractSlider.SliderSingleStepAdd,
+    single_step_sub=QtWidgets.QAbstractSlider.SliderSingleStepSub,
+    page_step_add=QtWidgets.QAbstractSlider.SliderPageStepAdd,
+    page_step_sub=QtWidgets.QAbstractSlider.SliderPageStepSub,
+    to_minimum=QtWidgets.QAbstractSlider.SliderToMinimum,
+    to_maximum=QtWidgets.QAbstractSlider.SliderToMaximum,
+    move=QtWidgets.QAbstractSlider.SliderMove,
+)
 
 QtWidgets.QAbstractSlider.__bases__ = (widgets.Widget,)
 
@@ -73,6 +84,44 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
 
     def set_step_size(self, step_size: int):
         self.setSingleStep(step_size)
+
+    def set_repeat_action(self, action: str, threshold: int = 500, repeat_time: int = 50):
+        """Set the repeat action.
+
+        Valid values are "none", "single_step_add", "single_step_sub", "page_step_add",
+        "page_step_sub", "to_minimum", "to_maximum", "move"
+
+        Args:
+            action: repeat action
+
+        Raises:
+            InvalidParamError: invalid repeat action
+        """
+        if action not in SLIDER_ACTIONS:
+            raise InvalidParamError(action, SLIDER_ACTIONS)
+        self.setRepeatAction(SLIDER_ACTIONS[action], threshold, repeat_time)
+
+    def get_repeat_action(self) -> str:
+        """Get current repeat action.
+
+        Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
+        "page_step_sub", "to_minimum", "to_maximum", "move"
+
+        Returns:
+            current repeat action
+        """
+        return SLIDER_ACTIONS.inv[self.repeatAction()]
+
+    def trigger_action(self, action: str):
+        """Trigger slider action.
+
+        Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
+        "page_step_sub", "to_minimum", "to_maximum", "move"
+
+        """
+        if action not in SLIDER_ACTIONS:
+            raise InvalidParamError(action, SLIDER_ACTIONS)
+        self.triggerAction(SLIDER_ACTIONS[action])
 
     def get_value(self):
         return self.value()
