@@ -16,6 +16,13 @@ class MenuBar(QtWidgets.QMenuBar):
             self.add(other)
             return self
 
+    def serialize_fields(self):
+        return dict(
+            default_up=self.isDefaultUp(),
+            native_menu_bar=self.isNativeMenuBar(),
+            actions=self.actions(),
+        )
+
     def add_action(self, action: Union[QtWidgets.QAction, str]):
         if isinstance(action, str):
             action = widgets.Action(text=action)
