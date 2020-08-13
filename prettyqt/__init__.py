@@ -15,8 +15,7 @@ def debug():
     try:
         from prettyqt.objbrowser import objectbrowser
 
-        print(frame.f_back.f_locals)
-        objectbrowser.ObjectBrowser.browse(frame.f_back.f_locals)
+        objectbrowser.ObjectBrowser.browse(frame.f_back.f_globals)
     finally:
         del frame
 
