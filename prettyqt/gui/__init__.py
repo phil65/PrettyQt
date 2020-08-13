@@ -14,6 +14,7 @@ from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
 from .keysequence import KeySequence
 from .gradient import Gradient
+from .lineargradient import LinearGradient
 from .icon import Icon
 from .guiapplication import GuiApplication
 from .validator import Validator
@@ -63,6 +64,7 @@ __all__ = [
     "ShowEvent",
     "ContextMenuEvent",
     "Gradient",
+    "LinearGradient",
     "GuiApplication",
     "Validator",
     "RegExpValidator",
