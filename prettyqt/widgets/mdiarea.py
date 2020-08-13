@@ -38,7 +38,13 @@ class MdiArea(QtWidgets.QMdiArea):
             return self
 
     def serialize_fields(self):
-        return dict(view_mode=self.get_view_mode(), window_order=self.get_window_order())
+        return dict(
+            view_mode=self.get_view_mode(),
+            window_order=self.get_window_order(),
+            tab_position=self.get_tab_position(),
+            background=self.get_background(),
+            document_mode=self.documentMode(),
+        )
 
     def set_view_mode(self, mode: str):
         """Set view mode for the MDI area.
@@ -127,6 +133,9 @@ class MdiArea(QtWidgets.QMdiArea):
             color = colors.get_color(brush_or_color)
             brush = gui.Brush(color, pattern)
             self.setBackground(brush)
+
+    def get_background(self) -> gui.Brush:
+        return gui.Brush(self.background())
 
     def add(self, *item: QtWidgets.QWidget):
         for i in item:
