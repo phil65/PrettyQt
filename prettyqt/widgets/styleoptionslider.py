@@ -49,3 +49,6 @@ class StyleOptionSlider(QtWidgets.QStyleOptionSlider):
     def set_vertical(self) -> None:
         """Set slider orientation to vertical."""
         self.orientation = QtCore.Qt.Vertical
+
+    def get_orientation(self) -> str:
+        return "horizontal" if self.is_horizontal() else "vertical"
