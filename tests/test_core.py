@@ -97,6 +97,21 @@ def test_diriterator():
         pass
 
 
+def test_easingcurve():
+    c = core.EasingCurve()
+    c.set_type("in_cubic")
+    assert c.get_type() == "in_cubic"
+
+    def custom(val):
+        return 1
+
+    c.set_custom_type(custom)
+    assert c.get_custom_type() == custom
+    assert c.get_type() == "custom"
+    with pytest.raises(InvalidParamError):
+        c.set_type("test")
+
+
 def test_file():
     buf = core.File()
     with buf.open_file("read_only"):

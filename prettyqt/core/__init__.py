@@ -15,6 +15,7 @@ from qtpy.QtCore import QSizeF as SizeF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
 from .line import Line
+from .easingcurve import EasingCurve
 from prettyqt import core
 from .object import Object
 from .versionnumber import VersionNumber
@@ -82,6 +83,7 @@ __all__ = [
     "Point",
     "PointF",
     "Line",
+    "EasingCurve",
     "Timer",
     "Translator",
     "Thread",
