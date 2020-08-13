@@ -272,12 +272,17 @@ def test_selectionwidget(qtbot):
 def test_spanslider(qtbot):
     slider = custom_widgets.SpanSlider()
     qtbot.addWidget(slider)
+    slider.show()
     slider.set_lower_value(10)
     slider.set_upper_value(20)
     slider.set_lower_pos(15)
+    slider.set_lower_pos(15)
+    slider.set_upper_pos(25)
     slider.set_upper_pos(25)
     assert slider.lower_value == 15
     assert slider.upper_value == 25
+    slider.set_value((16, 24))
+    assert slider.get_value() == (16, 24)
     slider.set_lower_value(12)
     slider.set_upper_pos(20)
     color = gui.Color("blue")
@@ -295,6 +300,7 @@ def test_spanslider(qtbot):
     qtbot.mouseMove(slider, core.Point(0, 0), delay=10)
     assert slider.movement_mode == "free"
     slider.set_movement_mode("no_overlap")
+    slider.close()
 
 
 def test_waitingspinner(qtbot):
