@@ -15,8 +15,6 @@ from .abstractscrollarea import AbstractScrollArea
 from .abstractbutton import AbstractButton
 from .abstractspinbox import AbstractSpinBox
 from .abstractitemview import AbstractItemView
-from .mdisubwindow import MdiSubWindow
-from .mdiarea import MdiArea
 from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .desktopwidget import DesktopWidget
@@ -54,6 +52,8 @@ from .menubar import MenuBar
 from .statusbar import StatusBar
 from .tabbar import TabBar
 from .tabwidget import TabWidget
+from .mdisubwindow import MdiSubWindow
+from .mdiarea import MdiArea
 from .toolbar import ToolBar
 from .headerview import HeaderView
 from .label import Label
