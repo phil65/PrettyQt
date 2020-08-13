@@ -101,6 +101,8 @@ def test_easingcurve():
     c = core.EasingCurve()
     c.set_type("in_cubic")
     assert c.get_type() == "in_cubic"
+    assert c[0] == 0
+    assert c[1] == 1
 
     def custom(val):
         return 1
