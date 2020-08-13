@@ -12,6 +12,9 @@ QtGui.QPixmap.__bases__ = (gui.PaintDevice,)
 
 
 class Pixmap(QtGui.QPixmap):
+    def __bool__(self):
+        return not self.isNull()
+
     @classmethod
     def from_file(cls, path: Union[pathlib.Path, str]):
         if isinstance(path, str):
@@ -22,3 +25,11 @@ class Pixmap(QtGui.QPixmap):
         pixmap = cls()
         pixmap.loadFromData(data)
         return pixmap
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
+    p = Pixmap()
+    print(bool(p))

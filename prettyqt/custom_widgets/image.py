@@ -21,6 +21,9 @@ class Image(widgets.Label):
     def __repr__(self):
         return f"Image({self.text()!r})"
 
+    def __bool__(self):
+        return not self.isNull()
+
     def serialize_fields(self):
         return dict(
             text=self.text(),
