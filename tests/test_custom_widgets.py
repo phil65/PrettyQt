@@ -288,17 +288,17 @@ def test_spanslider(qtbot):
     color = gui.Color("blue")
     slider.set_left_color(color)
     slider.set_right_color(color)
-    slider.swap_controls()
+    slider._swap_controls()
     slider.trigger_action(slider.SliderNoAction, True)
     slider.trigger_action(slider.SliderSingleStepAdd, True)
     slider.paintEvent(None)
-    slider.pixel_pos_to_value(100)
-    slider.draw_span(gui.Painter(), core.Rect())
-    slider.move_pressed_handle()
+    slider._pixel_pos_to_value(100)
+    slider._draw_span(gui.Painter(), core.Rect())
+    slider._move_pressed_handle()
     qtbot.mouseClick(slider, QtCore.Qt.LeftButton)
     qtbot.mouseMove(slider, core.Point(20, 20))
     qtbot.mouseMove(slider, core.Point(0, 0), delay=10)
-    assert slider.movement_mode == "free"
+    assert slider.get_movement_mode() == "free"
     slider.set_movement_mode("no_overlap")
     slider.close()
 
