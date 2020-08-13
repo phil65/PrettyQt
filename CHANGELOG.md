@@ -1,3 +1,21 @@
+## v0.116.0 (2020-08-13)
+
+### Feat
+
+- **gui**: add LinearGradient
+- **AbstractSlider**: add get/set_repeat_action and trigger_action methods
+- **TabWidget**: add get/set_tab_position methods
+- **Image/Pixmap**: add __bool__ method
+- **MenuBar**: serialize stuff
+- **MdiArea**: serialize stuff
+- **Brush**: allow pickling + add get_texture_image method
+- **custom_widgets**: add Timeline
+- **Pen**: add methods for setting and getting style / join style / cap style
+
+### Refactor
+
+- **Painter**: rework set_pen / get_pen
+
 ## v0.115.0 (2020-08-12)
 
 ### Feat
