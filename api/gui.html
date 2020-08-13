@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/gui.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.5" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.6" name="generator"/>
 <title>gui - PrettyQt</title>
 <link href="../assets/stylesheets/main.63b94e9e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -333,6 +333,54 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.gui.painter.Painter.set_pen">
     set_pen()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen">
+    pen
+  </a>
+<nav aria-label="pen" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen">
+    Pen
+  </a>
+<nav aria-label="Pen" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.get_cap_style">
+    get_cap_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.get_join_style">
+    get_join_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.get_style">
+    get_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.set_cap_style">
+    set_cap_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.set_join_style">
+    set_join_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.set_style">
+    set_style()
   </a>
 </li>
 </ul>
@@ -837,6 +885,54 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.gui.painter.Painter.set_pen">
     set_pen()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen">
+    pen
+  </a>
+<nav aria-label="pen" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen">
+    Pen
+  </a>
+<nav aria-label="Pen" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.get_cap_style">
+    get_cap_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.get_join_style">
+    get_join_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.get_style">
+    get_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.set_cap_style">
+    set_cap_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.set_join_style">
+    set_join_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.pen.Pen.set_style">
+    set_style()
   </a>
 </li>
 </ul>
@@ -2120,17 +2216,17 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>125
-126
-127
-128
-129
-130
-131
-132
-133
-134
-135</pre>
+<pre><span></span>143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153</pre>
 </div>
 </td>
 <td class="code">
@@ -2160,8 +2256,7 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>Return current pen type.</p>
-<p>Possible values: "none",</p>
+<p>Return current pen.</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2174,7 +2269,7 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <tr>
 <td><code>str</code></td>
 <td>
-<p>pen type</p>
+<p>current pen</p>
 </td>
 </tr>
 </tbody>
@@ -2185,28 +2280,24 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>85
-86
-87
-88
-89
-90
-91
-92
-93</pre>
+<pre><span></span>105
+106
+107
+108
+109
+110
+111</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""Return current pen type.</span>
-
-<span class="sd">    Possible values: "none",</span>
+    <span class="sd">"""Return current pen.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        pen type</span>
+<span class="sd">        current pen</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">PEN_TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="p">())</span>
 </code></pre>
 </div>
 </td>
@@ -2248,19 +2339,19 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>111
-112
-113
-114
-115
-116
-117
-118
-119
-120
-121
-122
-123</pre>
+<pre><span></span>129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141</pre>
 </div>
 </td>
 <td class="code">
@@ -2289,11 +2380,10 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painter.Painter.set_pen">
 <code class="highlight language-python">
-set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pen_type</span><span class="p">)</span> </code>
+set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'solid'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">join_style</span><span class="o">=</span><span class="s1">'bevel'</span><span class="p">,</span> <span class="n">cap_style</span><span class="o">=</span><span class="s1">'square'</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>Set pen type to use.</p>
-<p>Allowed values are "none",</p>
+<p>Set pen to use.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2306,10 +2396,341 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </thead>
 <tbody>
 <tr>
-<td><code>pen_type</code></td>
+<td><code>style</code></td>
 <td><code>str</code></td>
 <td>
-<p>pen type to use</p>
+<p>pen style to use</p>
+</td>
+<td><code>'solid'</code></td>
+</tr>
+<tr>
+<td><code>width</code></td>
+<td><code>int</code></td>
+<td>
+<p>pen width</p>
+</td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>color</code></td>
+<td><code>Optional[Union[str, int, PyQt5.QtGui.QRgba64, PyQt5.QtCore.Qt.GlobalColor, PyQt5.QtGui.QColor, tuple]]</code></td>
+<td>
+<p>pen color</p>
+</td>
+<td><code>'black'</code></td>
+</tr>
+<tr>
+<td><code>join_style</code></td>
+<td><code>str</code></td>
+<td>
+<p>pen join style to use</p>
+</td>
+<td><code>'bevel'</code></td>
+</tr>
+<tr>
+<td><code>cap_style</code></td>
+<td><code>str</code></td>
+<td>
+<p>pen cap style to use</p>
+</td>
+<td><code>'square'</code></td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span> 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_pen</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"solid"</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">colors</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">"black"</span><span class="p">,</span>
+    <span class="n">join_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"bevel"</span><span class="p">,</span>
+    <span class="n">cap_style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"square"</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">"""Set pen to use.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        style: pen style to use</span>
+<span class="sd">        width: pen width</span>
+<span class="sd">        color: pen color</span>
+<span class="sd">        join_style: pen join style to use</span>
+<span class="sd">        cap_style: pen cap style to use</span>
+<span class="sd">    """</span>
+    <span class="n">pen</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span><span class="p">()</span>
+    <span class="n">pen</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+    <span class="n">pen</span><span class="o">.</span><span class="n">set_cap_style</span><span class="p">(</span><span class="n">cap_style</span><span class="p">)</span>
+    <span class="n">pen</span><span class="o">.</span><span class="n">set_join_style</span><span class="p">(</span><span class="n">join_style</span><span class="p">)</span>
+    <span class="n">pen</span><span class="o">.</span><span class="n">setWidth</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
+    <span class="n">pen</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.gui.pen">
+<code>pen</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.gui.pen.Pen">
+<code>Pen</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.get_cap_style">
+<code class="highlight language-python">
+get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Return current cap style.</p>
+<p>Possible values: "flat", "square", "round"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>cap style</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>50
+51
+52
+53
+54
+55
+56
+57
+58</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current cap style.</span>
+
+<span class="sd">    Possible values: "flat", "square", "round"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        cap style</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">CAP_STYLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">capStyle</span><span class="p">()]</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.get_join_style">
+<code class="highlight language-python">
+get_join_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Return current join style.</p>
+<p>Possible values: "miter", "bevel", "round", "svg_miter"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>join style</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>75
+76
+77
+78
+79
+80
+81
+82
+83</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current join style.</span>
+
+<span class="sd">    Possible values: "miter", "bevel", "round", "svg_miter"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        join style</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">JOIN_STYLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">joinStyle</span><span class="p">()]</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.get_style">
+<code class="highlight language-python">
+get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Return current pen style.</p>
+<p>Possible values: "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",
+"custom_dash"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>pen style</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>101
+102
+103
+104
+105
+106
+107
+108
+109
+110</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current pen style.</span>
+
+<span class="sd">    Possible values: "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",</span>
+<span class="sd">    "custom_dash"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        pen style</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">PEN_STYLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()]</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.set_cap_style">
+<code class="highlight language-python">
+set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set cap style to use.</p>
+<p>Allowed values are "flat", "square", "round"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>style</code></td>
+<td><code>str</code></td>
+<td>
+<p>cap style to use</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -2327,49 +2748,236 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tr>
 <td><code>InvalidParamError</code></td>
 <td>
-<p>pen type does not exist</p>
+<p>cap style does not exist</p>
 </td>
 </tr>
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
+<summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
 <table class="highlighttable">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
+<pre><span></span>35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</pre>
 </div>
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pen_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""Set pen type to use.</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set cap style to use.</span>
 
-<span class="sd">    Allowed values are "none",</span>
+<span class="sd">    Allowed values are "flat", "square", "round"</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        pen_type: pen type to use</span>
+<span class="sd">        style: cap style to use</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        InvalidParamError: pen type does not exist</span>
+<span class="sd">        InvalidParamError: cap style does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">pen_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PEN_TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">pen_type</span><span class="p">,</span> <span class="n">PEN_TYPES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">PEN_TYPES</span><span class="p">[</span><span class="n">pen_type</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CAP_STYLES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">CAP_STYLES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCapStyle</span><span class="p">(</span><span class="n">CAP_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.set_join_style">
+<code class="highlight language-python">
+set_join_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set join style to use.</p>
+<p>Allowed values are "miter", "bevel", "round", "svg_miter"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>style</code></td>
+<td><code>str</code></td>
+<td>
+<p>join style to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>join style does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set join style to use.</span>
+
+<span class="sd">    Allowed values are "miter", "bevel", "round", "svg_miter"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        style: join style to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: join style does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">JOIN_STYLES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">JOIN_STYLES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setJoinStyle</span><span class="p">(</span><span class="n">JOIN_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.set_style">
+<code class="highlight language-python">
+set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set pen style to use.</p>
+<p>Allowed values are "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",
+"custom_dash"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>style</code></td>
+<td><code>str</code></td>
+<td>
+<p>pen style to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>pen style does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set pen style to use.</span>
+
+<span class="sd">    Allowed values are "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",</span>
+<span class="sd">    "custom_dash"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        style: pen style to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: pen style does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PEN_STYLES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">PEN_STYLES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">PEN_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </td>
@@ -3475,7 +4083,7 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </footer>
 </div>
 <script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
-<script src="../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",

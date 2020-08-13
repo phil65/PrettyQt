@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/widgets.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.5" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.6" name="generator"/>
 <title>widgets - PrettyQt</title>
 <link href="../assets/stylesheets/main.63b94e9e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -361,6 +361,11 @@
 <nav aria-label="AbstractSlider" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.get_repeat_action">
+    get_repeat_action()
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.is_horizontal">
     is_horizontal()
   </a>
@@ -386,8 +391,18 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.set_repeat_action">
+    set_repeat_action()
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.set_vertical">
     set_vertical()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.trigger_action">
+    trigger_action()
   </a>
 </li>
 </ul>
@@ -1674,6 +1689,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.tabwidget.TabWidget.get_tab_position">
+    get_tab_position()
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.tabwidget.TabWidget.get_tab_shape">
     get_tab_shape()
   </a>
@@ -1681,6 +1701,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.tabwidget.TabWidget.open_widget">
     open_widget()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.tabwidget.TabWidget.set_tab_position">
+    set_tab_position()
   </a>
 </li>
 <li class="md-nav__item">
@@ -2178,6 +2203,11 @@
 <nav aria-label="AbstractSlider" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.get_repeat_action">
+    get_repeat_action()
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.is_horizontal">
     is_horizontal()
   </a>
@@ -2203,8 +2233,18 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.set_repeat_action">
+    set_repeat_action()
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.set_vertical">
     set_vertical()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.abstractslider.AbstractSlider.trigger_action">
+    trigger_action()
   </a>
 </li>
 </ul>
@@ -3491,6 +3531,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.tabwidget.TabWidget.get_tab_position">
+    get_tab_position()
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.tabwidget.TabWidget.get_tab_shape">
     get_tab_shape()
   </a>
@@ -3498,6 +3543,11 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.widgets.tabwidget.TabWidget.open_widget">
     open_widget()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.tabwidget.TabWidget.set_tab_position">
+    set_tab_position()
   </a>
 </li>
 <li class="md-nav__item">
@@ -5594,6 +5644,70 @@ set_vertical_scrollbar_width<span class="p">(</span><span class="bp">self</span>
 <div class="doc doc-contents">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.abstractslider.AbstractSlider.get_repeat_action">
+<code class="highlight language-python">
+get_repeat_action<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Get current repeat action.</p>
+<p>Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
+"page_step_sub", "to_minimum", "to_maximum", "move"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>current repeat action</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>104
+105
+106
+107
+108
+109
+110
+111
+112
+113</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_repeat_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Get current repeat action.</span>
+
+<span class="sd">    Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",</span>
+<span class="sd">    "page_step_sub", "to_minimum", "to_maximum", "move"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        current repeat action</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">SLIDER_ACTIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">repeatAction</span><span class="p">()]</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.abstractslider.AbstractSlider.is_horizontal">
 <code class="highlight language-python">
 is_horizontal<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
@@ -5623,13 +5737,13 @@ is_horizontal<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>39
-40
-41
-42
-43
-44
-45</pre>
+<pre><span></span>50
+51
+52
+53
+54
+55
+56</pre>
 </div>
 </td>
 <td class="code">
@@ -5679,13 +5793,13 @@ is_vertical<span class="p">(</span><span class="bp">self</span><span class="p">)
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>47
-48
-49
-50
-51
-52
-53</pre>
+<pre><span></span>58
+59
+60
+61
+62
+63
+64</pre>
 </div>
 </td>
 <td class="code">
@@ -5718,9 +5832,9 @@ scroll_to_max<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>67
-68
-69</pre>
+<pre><span></span>78
+79
+80</pre>
 </div>
 </td>
 <td class="code">
@@ -5749,9 +5863,9 @@ scroll_to_min<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>63
-64
-65</pre>
+<pre><span></span>74
+75
+76</pre>
 </div>
 </td>
 <td class="code">
@@ -5780,9 +5894,9 @@ set_horizontal<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>55
-56
-57</pre>
+<pre><span></span>66
+67
+68</pre>
 </div>
 </td>
 <td class="code">
@@ -5790,6 +5904,101 @@ set_horizontal<span class="p">(</span><span class="bp">self</span><span class="p
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Set slider orientation to horizontal."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.abstractslider.AbstractSlider.set_repeat_action">
+<code class="highlight language-python">
+set_repeat_action<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">repeat_time</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set the repeat action.</p>
+<p>Valid values are "none", "single_step_add", "single_step_sub", "page_step_add",
+"page_step_sub", "to_minimum", "to_maximum", "move"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>action</code></td>
+<td><code>str</code></td>
+<td>
+<p>repeat action</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid repeat action</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span> 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_repeat_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">repeat_time</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">):</span>
+    <span class="sd">"""Set the repeat action.</span>
+
+<span class="sd">    Valid values are "none", "single_step_add", "single_step_sub", "page_step_add",</span>
+<span class="sd">    "page_step_sub", "to_minimum", "to_maximum", "move"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        action: repeat action</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid repeat action</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">action</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SLIDER_ACTIONS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">SLIDER_ACTIONS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setRepeatAction</span><span class="p">(</span><span class="n">SLIDER_ACTIONS</span><span class="p">[</span><span class="n">action</span><span class="p">],</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">repeat_time</span><span class="p">)</span>
 </code></pre>
 </div>
 </td>
@@ -5811,9 +6020,9 @@ set_vertical<span class="p">(</span><span class="bp">self</span><span class="p">
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>59
-60
-61</pre>
+<pre><span></span>70
+71
+72</pre>
 </div>
 </td>
 <td class="code">
@@ -5821,6 +6030,53 @@ set_vertical<span class="p">(</span><span class="bp">self</span><span class="p">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Set slider orientation to vertical."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Vertical</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.abstractslider.AbstractSlider.trigger_action">
+<code class="highlight language-python">
+trigger_action<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Trigger slider action.</p>
+<p>Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
+"page_step_sub", "to_minimum", "to_maximum", "move"</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>115
+116
+117
+118
+119
+120
+121
+122
+123
+124</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Trigger slider action.</span>
+
+<span class="sd">    Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",</span>
+<span class="sd">    "page_step_sub", "to_minimum", "to_maximum", "move"</span>
+
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">action</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SLIDER_ACTIONS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">SLIDER_ACTIONS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">triggerAction</span><span class="p">(</span><span class="n">SLIDER_ACTIONS</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
 </code></pre>
 </div>
 </td>
@@ -10167,12 +10423,7 @@ contextMenuEvent<span class="p">(</span><span class="bp">self</span><span class=
 81
 82
 83
-84
-85
-86
-87
-88
-89</pre>
+84</pre>
 </div>
 </td>
 <td class="code">
@@ -10180,13 +10431,8 @@ contextMenuEvent<span class="p">(</span><span class="bp">self</span><span class=
 <pre><span></span><code><span class="k">def</span> <span class="nf">contextMenuEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="sd">"""Context menu for our files tree."""</span>
     <span class="n">menu</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">header_label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">section_labels</span><span class="p">()[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">act</span> <span class="o">=</span> <span class="n">menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">header_label</span><span class="p">)</span>
-        <span class="n">act</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isSectionHidden</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-        <span class="n">act</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
-        <span class="n">fn</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">set_section_hidden</span><span class="p">,</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">hide</span><span class="o">=</span><span class="n">val</span><span class="p">)</span>
-        <span class="n">act</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header_actions</span><span class="p">()</span>
+    <span class="n">menu</span><span class="o">.</span><span class="n">add_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
     <span class="n">menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()))</span>
 </code></pre>
 </div>
@@ -12016,15 +12262,15 @@ get_tab_position<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>108
-109
-110
-111
-112
-113
-114
+<pre><span></span>114
 115
-116</pre>
+116
+117
+118
+119
+120
+121
+122</pre>
 </div>
 </td>
 <td class="code">
@@ -12077,15 +12323,15 @@ get_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>58
-59
-60
-61
-62
-63
-64
+<pre><span></span>64
 65
-66</pre>
+66
+67
+68
+69
+70
+71
+72</pre>
 </div>
 </td>
 <td class="code">
@@ -12138,15 +12384,15 @@ get_window_order<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>83
-84
-85
-86
-87
-88
-89
+<pre><span></span>89
 90
-91</pre>
+91
+92
+93
+94
+95
+96
+97</pre>
 </div>
 </td>
 <td class="code">
@@ -12220,20 +12466,20 @@ set_tab_position<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 93
- 94
- 95
- 96
- 97
- 98
- 99
+<pre><span></span> 99
 100
 101
 102
 103
 104
 105
-106</pre>
+106
+107
+108
+109
+110
+111
+112</pre>
 </div>
 </td>
 <td class="code">
@@ -12312,20 +12558,20 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>43
-44
-45
-46
-47
-48
-49
+<pre><span></span>49
 50
 51
 52
 53
 54
 55
-56</pre>
+56
+57
+58
+59
+60
+61
+62</pre>
 </div>
 </td>
 <td class="code">
@@ -12404,20 +12650,20 @@ set_window_order<span class="p">(</span><span class="bp">self</span><span class=
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>68
-69
-70
-71
-72
-73
-74
+<pre><span></span>74
 75
 76
 77
 78
 79
 80
-81</pre>
+81
+82
+83
+84
+85
+86
+87</pre>
 </div>
 </td>
 <td class="code">
@@ -15367,8 +15613,8 @@ closeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>264
-265</pre>
+<pre><span></span>296
+297</pre>
 </div>
 </td>
 <td class="code">
@@ -15455,34 +15701,34 @@ given index</p>
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>187
-188
-189
-190
-191
-192
-193
-194
-195
-196
-197
-198
-199
-200
-201
-202
-203
-204
-205
-206
-207
-208
-209
-210
-211
-212
-213
-214</pre>
+<pre><span></span>219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246</pre>
 </div>
 </td>
 <td class="code">
@@ -15536,11 +15782,11 @@ close_detached_tabs<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>216
-217
-218
-219
-220</pre>
+<pre><span></span>248
+249
+250
+251
+252</pre>
 </div>
 </td>
 <td class="code">
@@ -15617,40 +15863,40 @@ detach_tab<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>128
-129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141
-142
-143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153
-154
-155
-156
-157
-158
-159
-160
-161</pre>
+<pre><span></span>160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193</pre>
 </div>
 </td>
 <td class="code">
@@ -15698,13 +15944,74 @@ detach_tab<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.tabwidget.TabWidget.get_tab_position">
+<code class="highlight language-python">
+get_tab_position<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Return tab position.</p>
+<p>possible values are "north", "south", "east", "west"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>tab position</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/tabwidget.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>127
+128
+129
+130
+131
+132
+133
+134
+135</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_tab_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return tab position.</span>
+
+<span class="sd">    possible values are "north", "south", "east", "west"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        tab position</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">TAB_POSITIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tabPosition</span><span class="p">()]</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.tabwidget.TabWidget.get_tab_shape">
 <code class="highlight language-python">
 get_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
 <p>Return tab shape.</p>
-<p>possible values are "roundes", "triangular"</p>
+<p>possible values are "rounded", "triangular"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -15728,15 +16035,15 @@ get_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 95
- 96
- 97
- 98
- 99
-100
-101
-102
-103</pre>
+<pre><span></span>102
+103
+104
+105
+106
+107
+108
+109
+110</pre>
 </div>
 </td>
 <td class="code">
@@ -15744,7 +16051,7 @@ get_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_tab_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return tab shape.</span>
 
-<span class="sd">    possible values are "roundes", "triangular"</span>
+<span class="sd">    possible values are "rounded", "triangular"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tab shape</span>
@@ -15771,10 +16078,10 @@ open_widget<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>229
-230
-231
-232</pre>
+<pre><span></span>261
+262
+263
+264</pre>
 </div>
 </td>
 <td class="code">
@@ -15783,6 +16090,98 @@ open_widget<span class="p">(</span><span class="bp">self</span><span class="p">,
 <span class="k">def</span> <span class="nf">open_widget</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"Unnamed"</span><span class="p">):</span>
     <span class="sd">"""Create a tab containing delivered widget."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_tab</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">icon</span><span class="o">=</span><span class="s2">"mdi.widgets"</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.tabwidget.TabWidget.set_tab_position">
+<code class="highlight language-python">
+set_tab_position<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set tab position for the tabwidget.</p>
+<p>Valid values are "north", "south", "east", "west"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>position</code></td>
+<td><code>str</code></td>
+<td>
+<p>tab position to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>tab position does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/tabwidget.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_tab_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""Set tab position for the tabwidget.</span>
+
+<span class="sd">    Valid values are "north", "south", "east", "west"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        position: tab position to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: tab position does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TAB_POSITIONS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">TAB_POSITIONS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTabPosition</span><span class="p">(</span><span class="n">TAB_POSITIONS</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 </code></pre>
 </div>
 </td>
@@ -15843,20 +16242,20 @@ set_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93</pre>
+<pre><span></span> 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100</pre>
 </div>
 </td>
 <td class="code">
@@ -17460,7 +17859,7 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
 </footer>
 </div>
 <script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
-<script src="../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",

@@ -7,7 +7,7 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/custom_widgets.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.5" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.6" name="generator"/>
 <title>custom_widgets - PrettyQt</title>
 <link href="../assets/stylesheets/main.63b94e9e.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
@@ -484,6 +484,59 @@
     paintEvent()
   </a>
 </li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.trigger_action">
+    trigger_action()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline">
+    timeline
+  </a>
+<nav aria-label="timeline" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline">
+    Timeline
+  </a>
+<nav aria-label="Timeline" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.enterEvent">
+    enterEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.leaveEvent">
+    leaveEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mouseMoveEvent">
+    mouseMoveEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mousePressEvent">
+    mousePressEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mouseReleaseEvent">
+    mouseReleaseEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.paintEvent">
+    paintEvent()
+  </a>
+</li>
 </ul>
 </nav>
 </li>
@@ -876,6 +929,59 @@
 </li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.paintEvent">
+    paintEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.trigger_action">
+    trigger_action()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline">
+    timeline
+  </a>
+<nav aria-label="timeline" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline">
+    Timeline
+  </a>
+<nav aria-label="Timeline" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.enterEvent">
+    enterEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.leaveEvent">
+    leaveEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mouseMoveEvent">
+    mouseMoveEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mousePressEvent">
+    mousePressEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mouseReleaseEvent">
+    mouseReleaseEvent()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.paintEvent">
     paintEvent()
   </a>
 </li>
@@ -2503,6 +2609,551 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </details>
 </div>
 </div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider.SpanSlider.trigger_action">
+<code class="highlight language-python">
+trigger_action<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">main</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Trigger slider action.</p>
+<p>Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
+"page_step_sub", "to_minimum", "to_maximum", "move"</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">main</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">no</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">up</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">my_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span><span class="p">()</span>
+    <span class="n">my_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span><span class="p">()</span>
+    <span class="n">alt_control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LOWER_HANDLE</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_control</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">LOWER_HANDLE</span><span class="p">:</span>
+        <span class="n">alt_control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">UPPER_HANDLE</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">block_tracking</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">main_control</span> <span class="o">=</span> <span class="n">main</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_control</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">UPPER_HANDLE</span>
+    <span class="n">alt_control</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">main</span> <span class="ow">and</span> <span class="n">alt_control</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">UPPER_HANDLE</span>
+    <span class="n">is_upper_handle</span> <span class="o">=</span> <span class="n">main_control</span> <span class="ow">or</span> <span class="n">alt_control</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span> <span class="k">if</span> <span class="n">is_upper_handle</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span>
+    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">SliderSingleStepAdd</span><span class="p">:</span>
+        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">SliderSingleStepSub</span><span class="p">:</span>
+        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">SliderToMinimum</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">my_min</span>
+        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">SliderToMaximum</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">my_max</span>
+        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">SliderMove</span><span class="p">:</span>
+        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+        <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">SliderNoAction</span><span class="p">:</span>
+        <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">no</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">up</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"no_crossing"</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"no_overlap"</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"free"</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">swap_controls</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">no</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"no_crossing"</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"no_overlap"</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"free"</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">swap_controls</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">block_tracking</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lower_pos</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">upper_pos</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.custom_widgets.timeline">
+<code>timeline</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline">
+<code>Timeline</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.enterEvent">
+<code class="highlight language-python">
+enterEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>enterEvent(self, QEvent)</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>188
+189</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">enterEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.leaveEvent">
+<code class="highlight language-python">
+leaveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>leaveEvent(self, QEvent)</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>191
+192
+193</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">leaveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.mouseMoveEvent">
+<code class="highlight language-python">
+mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>mouseMoveEvent(self, QMouseEvent)</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+
+    <span class="c1"># if mouse is being pressed, update pointer</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">clicking</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_selection</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_time_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.mousePressEvent">
+<code class="highlight language-python">
+mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>mousePressEvent(self, QMouseEvent)</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_time_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_selection</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clicking</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Set clicking check to true</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.mouseReleaseEvent">
+<code class="highlight language-python">
+mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>mouseReleaseEvent(self, QMouseEvent)</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>184
+185
+186</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clicking</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Set clicking check to false</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.paintEvent">
+<code class="highlight language-python">
+paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>paintEvent(self, QPaintEvent)</p>
+<details class="quote">
+<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span> 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+    <span class="n">qp</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">()</span>
+    <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Draw time</span>
+    <span class="n">scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">qp</span><span class="o">.</span><span class="n">paint_on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text_color</span><span class="p">)</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">)</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">use_antialiasing</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">():</span>
+            <span class="n">time_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_time_string</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignHCenter</span><span class="p">,</span> <span class="n">time_string</span><span class="p">)</span>
+            <span class="n">w</span> <span class="o">+=</span> <span class="mi">100</span>
+        <span class="c1"># Draw down line</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">PEN_COLOR</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="mi">40</span><span class="p">)</span>
+
+        <span class="c1"># Draw dash lines</span>
+        <span class="n">point</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">text_color</span><span class="p">)</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="k">while</span> <span class="n">point</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">():</span>
+            <span class="n">y2</span> <span class="o">=</span> <span class="mi">30</span> <span class="k">if</span> <span class="n">point</span> <span class="o">%</span> <span class="mi">30</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">20</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">point</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">point</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+            <span class="n">point</span> <span class="o">+=</span> <span class="mi">10</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span><span class="p">:</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="mi">40</span><span class="p">)</span>
+
+        <span class="n">poly</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Polygon</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_time_pos</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+            <span class="n">poly</span><span class="o">.</span><span class="n">add_points</span><span class="p">((</span><span class="n">val</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+            <span class="n">poly</span><span class="o">.</span><span class="n">add_points</span><span class="p">((</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
+
+        <span class="c1"># Draw samples</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">video_samples</span><span class="p">:</span>
+            <span class="n">scaled_dur</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="n">scale</span>
+            <span class="n">scaled_t</span> <span class="o">=</span> <span class="n">t</span> <span class="o">/</span> <span class="n">scale</span>
+            <span class="n">t</span> <span class="o">+=</span> <span class="n">sample</span><span class="o">.</span><span class="n">duration</span>
+            <span class="c1"># Clear clip path</span>
+            <span class="k">with</span> <span class="n">qp</span><span class="o">.</span><span class="n">clip_path</span><span class="p">()</span> <span class="k">as</span> <span class="n">path</span><span class="p">:</span>
+                <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="n">scaled_t</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">scaled_dur</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">addRoundedRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+            <span class="c1"># Draw sample</span>
+            <span class="n">path</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">PainterPath</span><span class="p">()</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">sample</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="n">scaled_t</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="n">scaled_dur</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">addRoundedRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+            <span class="n">sample</span><span class="o">.</span><span class="n">start_pos</span> <span class="o">=</span> <span class="n">scaled_t</span>
+            <span class="n">sample</span><span class="o">.</span><span class="n">end_pos</span> <span class="o">=</span> <span class="n">scaled_t</span> <span class="o">+</span> <span class="n">scaled_dur</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">fillPath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">sample</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">drawPath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+            <span class="c1"># Draw preview pictures</span>
+            <span class="k">if</span> <span class="n">sample</span><span class="o">.</span><span class="n">picture</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">pic_width</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">picture</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">pic_width</span> <span class="o">&lt;</span> <span class="n">scaled_dur</span><span class="p">:</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="n">pic_width</span>
+                <span class="n">pic</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">picture</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="n">scaled_dur</span>
+                <span class="n">pic</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">picture</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">scaled_dur</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">qp</span><span class="o">.</span><span class="n">clip_path</span><span class="p">()</span> <span class="k">as</span> <span class="n">path</span><span class="p">:</span>
+                <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="n">scaled_t</span><span class="p">,</span> <span class="mf">52.5</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+                <span class="n">path</span><span class="o">.</span><span class="n">addRoundedRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+            <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">scaled_t</span><span class="p">,</span> <span class="mf">52.5</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">pic</span><span class="p">)</span>
+
+        <span class="c1"># Clear clip path</span>
+        <span class="k">with</span> <span class="n">qp</span><span class="o">.</span><span class="n">clip_path</span><span class="p">()</span> <span class="k">as</span> <span class="n">path</span><span class="p">:</span>
+            <span class="n">path</span><span class="o">.</span><span class="n">add_rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">())</span>
+
+        <span class="c1"># Draw pointer</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">PEN_COLOR</span><span class="p">)</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">set_brush</span><span class="p">(</span><span class="n">PEN_COLOR</span><span class="p">)</span>
+
+        <span class="n">qp</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">poly</span><span class="p">)</span>
+        <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -2603,7 +3254,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_counter</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_counter</span> <span class="o">=</span> <span class="mi">0</span>
 
-    <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="s2">"none"</span><span class="p">)</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">):</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
@@ -2741,7 +3392,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </footer>
 </div>
 <script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
-<script src="../assets/javascripts/bundle.f9edbbd5.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
