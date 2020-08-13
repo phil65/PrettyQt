@@ -12,6 +12,12 @@ TAB_SHAPES = bidict(
     rounded=QtWidgets.QTabWidget.Rounded, triangular=QtWidgets.QTabWidget.Triangular
 )
 
+TAB_POSITIONS = bidict(
+    north=QtWidgets.QTabWidget.North,
+    south=QtWidgets.QTabWidget.South,
+    west=QtWidgets.QTabWidget.West,
+    east=QtWidgets.QTabWidget.East,
+)
 
 QtWidgets.QTabWidget.__bases__ = (widgets.Widget,)
 
@@ -59,6 +65,7 @@ class TabWidget(QtWidgets.QTabWidget):
             tab_shape=self.get_tab_shape(),
             # elide_mode=self.get_elide_mode(),
             icon_size=self.iconSize(),
+            tab_position=self.get_tab_position(),
         )
 
     def __setstate__(self, state):
@@ -95,12 +102,37 @@ class TabWidget(QtWidgets.QTabWidget):
     def get_tab_shape(self) -> str:
         """Return tab shape.
 
-        possible values are "roundes", "triangular"
+        possible values are "rounded", "triangular"
 
         Returns:
             tab shape
         """
         return TAB_SHAPES.inv[self.tabShape()]
+
+    def set_tab_position(self, position: str) -> None:
+        """Set tab position for the tabwidget.
+
+        Valid values are "north", "south", "east", "west"
+
+        Args:
+            position: tab position to use
+
+        Raises:
+            InvalidParamError: tab position does not exist
+        """
+        if position not in TAB_POSITIONS:
+            raise InvalidParamError(position, TAB_POSITIONS)
+        self.setTabPosition(TAB_POSITIONS[position])
+
+    def get_tab_position(self) -> str:
+        """Return tab position.
+
+        possible values are "north", "south", "east", "west"
+
+        Returns:
+            tab position
+        """
+        return TAB_POSITIONS.inv[self.tabPosition()]
 
     def get_children(self) -> list:
         return [
