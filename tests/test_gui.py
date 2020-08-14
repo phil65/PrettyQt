@@ -241,14 +241,44 @@ def test_pixmap():
 
 def test_polygonf():
     poly = gui.PolygonF()
+    poly.add_points((0, 0), (2, 0), (2, 1), (0, 1))
+    poly2 = gui.PolygonF()
+    poly2.add_points((1, 0), (3, 0), (3, 1), (1, 1))
     with open("data.pkl", "wb") as jar:
         pickle.dump(poly, jar)
     with open("data.pkl", "rb") as jar:
         poly = pickle.load(jar)
+    union = poly | poly2
+    intersect = poly & poly2
+    sub = union - intersect
+    xor = poly ^ poly2
+    assert sub == xor
+    polygon = poly.to_polygon()
+    assert type(polygon) == gui.Polygon
+    poly.add_points((0, 1), core.Point(2, 2))
 
 
 def test_polygon():
-    poly = gui.Polygon()
+    rect1 = core.Rect(0, 0, 2, 1)
+    rect2 = core.Rect(1, 0, 2, 1)
+    poly = gui.Polygon(rect1, closed=True)
+    poly2 = gui.Polygon(rect2, closed=True)
+    intersect = poly & poly2
+    expected = gui.Polygon(core.Rect(1, 0, 1, 1), closed=True)
+    assert intersect == expected
+    assert intersect.get_points() == [
+        core.Point(1, 0),
+        core.Point(2, 0),
+        core.Point(2, 1),
+        core.Point(1, 1),
+        core.Point(1, 0),
+    ]
+    union = poly | poly2
+    expected = gui.Polygon(core.Rect(0, 0, 3, 1), closed=True)
+    assert union == expected
+    sub = union - intersect
+    xor = poly ^ poly2
+    assert sub == xor
     with open("data.pkl", "wb") as jar:
         pickle.dump(poly, jar)
     with open("data.pkl", "rb") as jar:

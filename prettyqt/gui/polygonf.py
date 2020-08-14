@@ -1,11 +1,45 @@
 # -*- coding: utf-8 -*-
 
-from qtpy import QtGui
+from typing import Union, Tuple
 
-from prettyqt import core
+from qtpy import QtGui, QtCore
+
+from prettyqt import core, gui
 
 
 class PolygonF(QtGui.QPolygonF):
+    def __len__(self) -> int:
+        return self.size()
+
+    def __bool__(self):
+        return not self.isEmpty()
+
+    def __contains__(self, point: QtCore.QPointF) -> bool:
+        return self.containsPoint(point, QtCore.Qt.OddEvenFill)
+
+    def __getitem__(self, index: int) -> core.Point:
+        return self.at(index)
+
+    # def __setitem__(self, index: int, value: Union[QtCore.QPoint, Tuple[int, int]]):
+    #     if isinstance(value, tuple):
+    #         self.setPoint(index, *value)
+    #     else:
+    #         self.setPoint(index, value)
+
+    def __sub__(self, other: QtGui.QPolygonF) -> "PolygonF":
+        return PolygonF(self.subtracted(other))
+
+    def __and__(self, other: QtGui.QPolygonF) -> "PolygonF":  # &
+        return PolygonF(self.intersected(other))
+
+    def __xor__(self, other: QtGui.QPolygonF) -> "PolygonF":  # ^
+        union = self | other
+        intersect = self & other
+        return union - intersect
+
+    def __or__(self, other: QtGui.QPolygonF) -> "PolygonF":  # |
+        return PolygonF(self.united(other))
+
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
@@ -14,6 +48,21 @@ class PolygonF(QtGui.QPolygonF):
 
     def __setstate__(self, ba):
         core.DataStream.write_bytearray(ba, self)
+
+    # def get_point(self, index: int) -> core.Point:
+    #     return core.Point(self.point(index))
+
+    # def get_points(self) -> List[core.Point]:
+    #     return [self.get_point(i) for i in range(len(self))]
+
+    def add_points(self, *points: Union[Tuple[float, float], core.Point]):
+        for p in points:
+            if isinstance(p, tuple):
+                p = core.Point(*p)
+            self << p
+
+    def to_polygon(self):
+        return gui.Polygon(self.toPolygon())
 
     @classmethod
     def from_xy(cls, xdata, ydata):
@@ -32,3 +81,6 @@ class PolygonF(QtGui.QPolygonF):
 
 if __name__ == "__main__":
     poly = PolygonF((core.Point(1, 1), core.Point(2, 2)))
+    poly2 = PolygonF((core.Point(1, 1), core.Point(2, 2)))
+    new = poly | poly2
+    print(type(new))
