@@ -12,12 +12,11 @@ def create_dot_pixmap(color="red", size=16):
     px = gui.Pixmap(size, size)
     px.fill(QtCore.Qt.transparent)
     px_size = px.rect().adjusted(1, 1, -1, -1)
-    painter = gui.Painter(px)
-    painter.setRenderHint(QtGui.QPainter.Antialiasing)
-    painter.setBrush(col)
-    painter.setPen(gui.Pen(gui.Color(15, 15, 15), 1.25))
-    painter.drawEllipse(px_size)
-    painter.end()
+    with gui.Painter(px) as painter:
+        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+        painter.setBrush(col)
+        painter.setPen(gui.Pen(gui.Color(15, 15, 15), 1.25))
+        painter.drawEllipse(px_size)
     return px
 
 
