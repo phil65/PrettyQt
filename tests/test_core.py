@@ -361,6 +361,11 @@ def test_timer():
         pass
 
     core.Timer.single_shot(test)
+    timer = core.Timer()
+    timer.set_type("coarse")
+    with pytest.raises(InvalidParamError):
+        timer.set_type("test")
+    assert timer.get_type() == "coarse"
 
 
 def test_translator():
