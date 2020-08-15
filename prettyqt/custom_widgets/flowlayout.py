@@ -38,19 +38,19 @@ class FlowLayout(widgets.Layout):
         while item:
             item = self.takeAt(0)
 
-    def addItem(self, item):
+    def addItem(self, item: QtWidgets.QLayoutItem):
         self.items.append(item)
 
     def count(self) -> int:
         return len(self.items)
 
-    def itemAt(self, index: int):
+    def itemAt(self, index: int) -> Optional[QtWidgets.QLayoutItem]:
         if 0 <= index < len(self.items):
             return self.items[index]
 
         return None
 
-    def takeAt(self, index: int):
+    def takeAt(self, index: int) -> Optional[QtWidgets.QLayoutItem]:
         if 0 <= index < len(self.items):
             return self.items.pop(index)
 
