@@ -13,6 +13,12 @@ QtCore.QFile.__bases__ = (core.FileDevice,)
 
 
 class File(QtCore.QFile):
+    def __repr__(self):
+        return f"File('{self.fileName()}')"
+
+    def __str__(self):
+        return self.fileName()
+
     @contextlib.contextmanager
     def open_file(self, flag):
         if flag in OPEN_MODES:

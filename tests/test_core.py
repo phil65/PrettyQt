@@ -133,6 +133,8 @@ def test_file():
     buf = core.File()
     with buf.open_file("read_only"):
         pass
+    str(buf)
+    repr(buf)
 
 
 def test_line():
