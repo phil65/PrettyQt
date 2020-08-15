@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from qtpy import QtCore, QtWidgets
 
@@ -24,11 +24,14 @@ class Splitter(QtWidgets.QSplitter):
             orientation = ORIENTATIONS[orientation]
         super().__init__(orientation, parent)
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: Union[int, str]):
         if isinstance(index, int):
             return self.widget(index)
         else:
             return self.findChild(QtWidgets.QWidget, index)
+
+    def __setitem__(self, index: int, value: QtWidgets.QWidget):
+        self.replaceWidget(index, value)
 
     def serialize_fields(self):
         return dict(
@@ -53,13 +56,13 @@ class Splitter(QtWidgets.QSplitter):
     def __len__(self) -> int:
         return self.count()
 
-    def __add__(self, other):
+    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
         if isinstance(other, (QtWidgets.QLayout, QtWidgets.QWidget)):
             self.add(other)
             return self
         raise TypeError(f"Invalid type: {type(other)}")
 
-    def get_children(self) -> list:
+    def get_children(self) -> List[QtWidgets.QWidget]:
         return [self[i] for i in range(self.count())]
 
     def add_widget(self, widget: QtWidgets.QWidget):
@@ -70,7 +73,7 @@ class Splitter(QtWidgets.QSplitter):
         widget.set_layout(layout)
         self.addWidget(widget)
 
-    def add(self, *item):
+    def add(self, *item: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
         for i in item:
             if isinstance(i, QtWidgets.QWidget):
                 self.add_widget(i)
