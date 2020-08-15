@@ -26,8 +26,8 @@ QtWidgets.QFrame.__bases__ = (widgets.Widget,)
 
 
 class Frame(QtWidgets.QFrame):
-    def set_frame_style(self, style: str):
-        """Set frame style.
+    def set_frame_shadow(self, style: str):
+        """Set frame shadow.
 
         Allowed values are "plain", "raised", "sunken"
 
@@ -39,14 +39,39 @@ class Frame(QtWidgets.QFrame):
         """
         if style not in SHADOWS:
             raise InvalidParamError(style, SHADOWS)
-        self.setFrameStyle(SHADOWS[style])
+        self.setFrameShadow(SHADOWS[style])
 
-    def get_frame_style(self) -> str:
-        """Return current frame style.
+    def get_frame_shadow(self) -> str:
+        """Return current frame shadow.
 
         Possible values: "plain", "raised", "sunken"
 
         Returns:
             frame style
         """
-        return SHADOWS.inv[self.frameStyle()]
+        return SHADOWS.inv[self.frameShadow()]
+
+    def set_frame_shape(self, shape: str):
+        """Set frame shape.
+
+        Allowed values are "plain", "raised", "sunken"
+
+        Args:
+            shape: frame shape to use
+
+        Raises:
+            InvalidParamError: shape does not exist
+        """
+        if shape not in SHAPES:
+            raise InvalidParamError(shape, SHAPES)
+        self.setFrameShape(SHAPES[shape])
+
+    def get_frame_shape(self) -> str:
+        """Return current frame shape.
+
+        Possible values: "plain", "raised", "sunken"
+
+        Returns:
+            frame shape
+        """
+        return SHAPES.inv[self.frameShape()]

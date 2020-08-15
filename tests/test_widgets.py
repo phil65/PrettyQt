@@ -337,10 +337,14 @@ def test_formlayout(qtbot):
 
 def test_frame(qtbot):
     frame = widgets.Frame()
-    frame.set_frame_style("raised")
-    assert frame.get_frame_style() == "raised"
+    frame.set_frame_shadow("raised")
+    assert frame.get_frame_shadow() == "raised"
     with pytest.raises(InvalidParamError):
-        frame.set_frame_style("test")
+        frame.set_frame_shadow("test")
+    frame.set_frame_shape("panel")
+    assert frame.get_frame_shape() == "panel"
+    with pytest.raises(InvalidParamError):
+        frame.set_frame_shape("test")
 
 
 def test_gridlayout(qtbot):
