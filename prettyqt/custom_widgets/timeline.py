@@ -1,6 +1,6 @@
-from typing import List
+from typing import List, Optional
 
-from qtpy import QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt import gui, core, widgets
 from prettyqt.utils import colors
@@ -13,12 +13,17 @@ FONT = gui.Font("Decorative", 10)
 
 
 class VideoSample:
-    def __init__(self, duration, color=QtCore.Qt.darkYellow, picture=None):
+    def __init__(
+        self,
+        duration: int,
+        color: colors.ColorType = "yellow",
+        picture: Optional[QtGui.QPixmap] = None,
+    ):
         self.duration = duration
-        self.color = color  # Floating color
-        self.def_color = color  # DefaultColor
+        self.color = colors.get_color(color)  # Floating color
+        self.def_color = colors.get_color(color)  # DefaultColor
         self.picture = None if picture is None else picture.scaledToHeight(45)
-        self.start_pos = 0  # Inicial position
+        self.start_pos = 0  # Initial position
         self.end_pos = self.duration  # End position
 
 
@@ -62,10 +67,17 @@ class Timeline(widgets.Widget):
     def __setitem__(self, index: int, value: VideoSample):
         self.video_samples[index] = value
 
-    def __add__(self, other):
+    def __add__(self, other: VideoSample):
         if isinstance(other, (VideoSample)):
             self.add(other)
             return self
+
+    def add_sample(
+        self, duration: int, color: colors.ColorType, picture: Optional[QtGui.QPixmap]
+    ) -> VideoSample:
+        sample = VideoSample(duration, color, picture)
+        self.add(sample)
+        return sample
 
     def add(self, sample: VideoSample):
         self.video_samples.append(sample)
@@ -164,7 +176,7 @@ class Timeline(widgets.Widget):
             x = self.pos.x()
             self.pointer_pos = x
             self.position_changed.emit(x)
-            self.check_selection(x)
+            self._check_selection(x)
             self.pointer_time_pos = self.pointer_pos * self.get_scale()
 
         self.update()
@@ -176,7 +188,7 @@ class Timeline(widgets.Widget):
             self.position_changed.emit(x)
             self.pointer_time_pos = self.pointer_pos * self.get_scale()
 
-            self.check_selection(x)
+            self._check_selection(x)
 
             self.update()
             self.clicking = True  # Set clicking check to true
@@ -192,7 +204,7 @@ class Timeline(widgets.Widget):
         self.is_in = False
         self.update()
 
-    def check_selection(self, x: int):
+    def _check_selection(self, x: int):
         # Check if user clicked in video sample
         for sample in self.video_samples:
             if sample.start_pos < x < sample.end_pos:
@@ -226,7 +238,9 @@ class Timeline(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.app()
     tl = Timeline(60, 60)
-    sample = VideoSample(20)
+    icon = gui.icon.get_icon("mdi.folder")
+    px = icon.pixmap(256, 256)
+    sample = VideoSample(20, picture=px)
     tl += sample
     tl.show()
     app.exec_()
