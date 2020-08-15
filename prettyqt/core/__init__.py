@@ -18,6 +18,10 @@ from .line import Line
 from .easingcurve import EasingCurve
 from prettyqt import core
 from .object import Object
+from .abstractanimation import AbstractAnimation
+from .animationgroup import AnimationGroup
+from .variantanimation import VariantAnimation
+from .propertyanimation import PropertyAnimation
 from .versionnumber import VersionNumber
 from .datastream import DataStream
 from .url import Url
@@ -84,6 +88,10 @@ __all__ = [
     "PointF",
     "Line",
     "EasingCurve",
+    "AbstractAnimation",
+    "AnimationGroup",
+    "VariantAnimation",
+    "PropertyAnimation",
     "Timer",
     "Translator",
     "Thread",

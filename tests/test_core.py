@@ -14,6 +14,19 @@ from prettyqt import core, widgets
 from prettyqt.utils import InvalidParamError
 
 
+def test_animationgroup():
+    group = core.AnimationGroup()
+    anim = core.PropertyAnimation()
+    anim2 = core.PropertyAnimation()
+    group += anim
+    group += anim2
+    assert group[0] == anim
+    assert len(group) == 2
+    del group[0]
+    assert len(group) == 1
+    group[1] = core.PropertyAnimation()
+
+
 def test_abstracttablemodel():
     class Test(core.AbstractTableModel):
         def rowCount(self, parent=None):
@@ -180,6 +193,24 @@ def test_point():
 def test_pointf():
     p = core.PointF()
     repr(p)
+
+
+def test_propertyanimation():
+    animation = core.PropertyAnimation()
+    button = widgets.PushButton()
+    animation.set_easing("in_cubic")
+    assert animation.get_easing() == "in_cubic"
+    animation.set_direction("forward")
+    with pytest.raises(InvalidParamError):
+        animation.set_direction("test")
+    assert animation.get_direction() == "forward"
+    assert animation.get_state() == "stopped"
+    animation.setDuration(100)
+    assert len(animation) == 100
+    animation.apply_to(button, "geometry")
+    with pytest.raises(InvalidParamError):
+        animation.start_animation("test")
+    animation.start_animation("keep")
 
 
 def test_rect():
