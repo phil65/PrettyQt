@@ -769,6 +769,8 @@ def test_splitter(qtbot):
         widget.set_orientation("test")
     widget.add_layout(widgets.BoxLayout("horizontal"))
     widgets.Splitter.from_widgets(widgets.Widget())
+    test3 = widgets.Label("test_splitter")
+    widget[0] = test3
 
 
 def test_styleoptionslider(qtbot):
