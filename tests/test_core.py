@@ -103,6 +103,8 @@ def test_datetime():
 def test_dir():
     directory = core.Dir()
     assert pathlib.Path(str(directory)) == directory.to_path()
+    assert directory.to_path() / "test" == (directory / "test").to_path()
+    repr(directory)
 
 
 def test_diriterator():
