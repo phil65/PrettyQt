@@ -3,7 +3,7 @@
 from qtpy import QtGui
 
 from prettyqt import gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, prettyprinter
 
 
 STYLE_HINTS = bidict(
@@ -31,7 +31,7 @@ WEIGHTS = bidict(
 )
 
 
-class Font(QtGui.QFont):
+class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
     def __repr__(self):
         return (
             f"Font('{self.family()}', {self.pointSize()}, "
@@ -45,6 +45,9 @@ class Font(QtGui.QFont):
             weight=self.weight(),
             italic=self.italic(),
         )
+
+    def serialize(self):
+        return self.__getstate__()
 
     def __setstate__(self, state):
         self.__init__()

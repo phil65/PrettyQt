@@ -2,14 +2,14 @@
 
 from contextlib import contextmanager
 
-from typing import Dict, Iterator, Callable, Optional, Union, Any, Generator
+from typing import Dict, Iterator, Callable, Optional, Union, Any
 
 from qtpy import QtCore, QtGui, QtWidgets
 import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, colors, InvalidParamError, helpers
+from prettyqt.utils import bidict, colors, InvalidParamError, helpers, prettyprinter
 
 
 CONTEXT_POLICIES = bidict(
@@ -78,7 +78,7 @@ ATTRIBUTES = bidict(
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
 
-class Widget(QtWidgets.QWidget):
+class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def __repr__(self) -> str:
         cls_name = self.__class__.__name__
         params = helpers.format_kwargs(self.serialize_fields())
@@ -91,25 +91,6 @@ class Widget(QtWidgets.QWidget):
         self.setAccessibleName(state["accessible_name"])
         self.setToolTip(state.get("tool_tip", ""))
         self.setStatusTip(state.get("status_tip", ""))
-
-    def __pretty__(
-        self, fmt: Callable[[Any], Any], **kwargs: Any
-    ) -> Generator[Any, None, None]:
-        """Provide a human readable representations of objects.
-
-        Used by devtools (https://python-devtools.helpmanual.io/).
-        """
-        yield self.__class__.__name__ + "("
-        yield 1
-        for k, v in self.serialize().items():
-            yield f"{k}="
-            if hasattr(v, "__pretty__"):
-                yield from v.__pretty__(fmt, **kwargs)
-            else:
-                yield f"{v!r}"
-            yield 0
-        yield -1
-        yield ")"
 
     def serialize_fields(self) -> Dict[str, Any]:
         icon = gui.Icon(self.windowIcon())

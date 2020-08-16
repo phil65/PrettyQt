@@ -5,7 +5,7 @@ from typing import Optional
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui
-from prettyqt.utils import bidict, InvalidParamError, helpers
+from prettyqt.utils import bidict, InvalidParamError, helpers, prettyprinter
 
 
 PRIORITIES = bidict(
@@ -34,7 +34,7 @@ ROLES = bidict(
 QtWidgets.QAction.__bases__ = (core.Object,)
 
 
-class Action(QtWidgets.QAction):
+class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
     def __init__(
         self,
         parent=None,
