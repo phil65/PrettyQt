@@ -347,6 +347,17 @@ def test_frame(qtbot):
         frame.set_frame_shape("test")
 
 
+def test_graphicsitem(qtbot):
+    item = widgets.GraphicsItem()
+    item.set_panel_modality("scene")
+    assert item.get_panel_modality() == "scene"
+    with pytest.raises(InvalidParamError):
+        item.set_panel_modality("test")
+    item.set_focus("active_window")
+    with pytest.raises(InvalidParamError):
+        item.set_focus("test")
+
+
 def test_gridlayout(qtbot):
     layout = widgets.GridLayout()
     layout2 = widgets.GridLayout()
