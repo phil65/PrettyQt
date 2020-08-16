@@ -1,3 +1,22 @@
+## v0.117.0 (2020-08-16)
+
+### Feat
+
+- **MimeData**: add dict-like interface
+- **Timer**: add get/set_type methods
+- **File**: add __repr__ and __str__ methods
+- **Dir**: add __repr__ and __truediv__ methods
+- **Frame**: set/get_frame_shape, set/get_frame_shadow
+- **Splitter**: add __setitem__ method, and some more typing
+- **Polygon/PolygonF**: pythonize
+- **core**: add Abstract/Variant/PropertyAnimation and AnimationGroup
+- **core**: add EasingCurve
+- **StyleOptionSlider**: add get_orientation method
+
+### Refactor
+
+- **SpanSlider**: clean up code
+
 ## v0.116.0 (2020-08-13)
 
 ### Feat
