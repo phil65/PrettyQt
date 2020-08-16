@@ -950,13 +950,23 @@
 <nav aria-label="Frame" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.get_frame_style">
-    get_frame_style()
+<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.get_frame_shadow">
+    get_frame_shadow()
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.set_frame_style">
-    set_frame_style()
+<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.get_frame_shape">
+    get_frame_shape()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.set_frame_shadow">
+    set_frame_shadow()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.set_frame_shape">
+    set_frame_shape()
   </a>
 </li>
 </ul>
@@ -2792,13 +2802,23 @@
 <nav aria-label="Frame" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.get_frame_style">
-    get_frame_style()
+<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.get_frame_shadow">
+    get_frame_shadow()
   </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.set_frame_style">
-    set_frame_style()
+<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.get_frame_shape">
+    get_frame_shape()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.set_frame_shadow">
+    set_frame_shadow()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.widgets.frame.Frame.set_frame_shape">
+    set_frame_shape()
   </a>
 </li>
 </ul>
@@ -10213,12 +10233,12 @@ __len__<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <div class="doc doc-contents">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.widgets.frame.Frame.get_frame_style">
+<h4 class="doc doc-heading" id="prettyqt.widgets.frame.Frame.get_frame_shadow">
 <code class="highlight language-python">
-get_frame_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+get_frame_shadow<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>Return current frame style.</p>
+<p>Return current frame shadow.</p>
 <p>Possible values: "plain", "raised", "sunken"</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -10256,15 +10276,15 @@ get_frame_style<span class="p">(</span><span class="bp">self</span><span class="
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_frame_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""Return current frame style.</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_frame_shadow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current frame shadow.</span>
 
 <span class="sd">    Possible values: "plain", "raised", "sunken"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        frame style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SHADOWS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">frameStyle</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">SHADOWS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">frameShadow</span><span class="p">()]</span>
 </code></pre>
 </div>
 </td>
@@ -10274,12 +10294,73 @@ get_frame_style<span class="p">(</span><span class="bp">self</span><span class="
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.widgets.frame.Frame.set_frame_style">
+<h4 class="doc doc-heading" id="prettyqt.widgets.frame.Frame.get_frame_shape">
 <code class="highlight language-python">
-set_frame_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span> </code>
+get_frame_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
 </h4>
 <div class="doc doc-contents">
-<p>Set frame style.</p>
+<p>Return current frame shape.</p>
+<p>Possible values: "plain", "raised", "sunken"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>frame shape</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/frame.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>69
+70
+71
+72
+73
+74
+75
+76
+77</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_frame_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current frame shape.</span>
+
+<span class="sd">    Possible values: "plain", "raised", "sunken"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        frame shape</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">SHAPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">frameShape</span><span class="p">()]</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.frame.Frame.set_frame_shadow">
+<code class="highlight language-python">
+set_frame_shadow<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set frame shadow.</p>
 <p>Allowed values are "plain", "raised", "sunken"</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -10343,8 +10424,8 @@ set_frame_style<span class="p">(</span><span class="bp">self</span><span class="
 </td>
 <td class="code">
 <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_frame_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""Set frame style.</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_frame_shadow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set frame shadow.</span>
 
 <span class="sd">    Allowed values are "plain", "raised", "sunken"</span>
 
@@ -10356,7 +10437,99 @@ set_frame_style<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SHADOWS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">SHADOWS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFrameStyle</span><span class="p">(</span><span class="n">SHADOWS</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFrameShadow</span><span class="p">(</span><span class="n">SHADOWS</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.frame.Frame.set_frame_shape">
+<code class="highlight language-python">
+set_frame_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set frame shape.</p>
+<p>Allowed values are "plain", "raised", "sunken"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>shape</code></td>
+<td><code>str</code></td>
+<td>
+<p>frame shape to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>shape does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/widgets/frame.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_frame_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set frame shape.</span>
+
+<span class="sd">    Allowed values are "plain", "raised", "sunken"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        shape: frame shape to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: shape does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">shape</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SHAPES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">SHAPES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFrameShape</span><span class="p">(</span><span class="n">SHAPES</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
 </code></pre>
 </div>
 </td>
@@ -14770,15 +14943,15 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>108
-109
-110
-111
+<pre><span></span>111
 112
 113
 114
 115
-116</pre>
+116
+117
+118
+119</pre>
 </div>
 </td>
 <td class="code">
@@ -14852,10 +15025,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 93
- 94
- 95
- 96
+<pre><span></span> 96
  97
  98
  99
@@ -14865,7 +15035,10 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 103
 104
 105
-106</pre>
+106
+107
+108
+109</pre>
 </div>
 </td>
 <td class="code">
