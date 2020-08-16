@@ -13,8 +13,6 @@ from qtpy.QtGui import QShowEvent as ShowEvent
 from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
 from .keysequence import KeySequence
-from .gradient import Gradient
-from .lineargradient import LinearGradient
 from .icon import Icon
 from .guiapplication import GuiApplication
 from .validator import Validator
@@ -31,6 +29,10 @@ from .doublevalidator import DoubleValidator
 from .brush import Brush
 from .textblockuserdata import TextBlockUserData
 from .color import Color
+from .gradient import Gradient
+from .lineargradient import LinearGradient
+from .radialgradient import RadialGradient
+from .conicalgradient import ConicalGradient
 from .font import Font
 from .fontmetrics import FontMetrics
 from .fontdatabase import FontDatabase
@@ -65,6 +67,8 @@ __all__ = [
     "ContextMenuEvent",
     "Gradient",
     "LinearGradient",
+    "RadialGradient",
+    "ConicalGradient",
     "GuiApplication",
     "Validator",
     "RegExpValidator",

@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from typing import Tuple, List
+
 from qtpy import QtGui
 
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import gui
+from prettyqt.utils import bidict, InvalidParamError, prettyprinter
 
 
 COORDINATE_MODES = bidict(
@@ -27,9 +30,19 @@ TYPES = bidict(
 )
 
 
-class Gradient(QtGui.QGradient):
+class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
     def __setitem__(self, key: float, value):
         self.setColorAt(key, value)
+
+    def serialize_fields(self):
+        return dict(
+            coordinate_mode=self.get_coordinate_mode(),
+            spread=self.get_spread(),
+            stops=self.get_stops(),
+        )
+
+    def serialize(self):
+        return self.serialize_fields()
 
     def set_coordinate_mode(self, mode: str):
         """Set the coordinate mode.
@@ -90,3 +103,13 @@ class Gradient(QtGui.QGradient):
             gradient type
         """
         return TYPES.inv[self.type()]
+
+    def get_stops(self) -> List[Tuple[float, gui.Color]]:
+        return [(i, gui.Color(j)) for (i, j) in self.stops()]
+
+
+if __name__ == "__main__":
+    grad = Gradient()
+    grad.setStops([(0.0, gui.Color("red")), (1.0, gui.Color("green"))])
+    print(grad.get_stops())
+    print(repr(grad))
