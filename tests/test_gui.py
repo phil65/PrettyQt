@@ -165,6 +165,20 @@ def test_textcursor():
         pass
 
 
+def test_textdocument():
+    doc = gui.TextDocument("This is a test\nHello")
+    for i in doc:
+        repr(i)
+    assert doc[1] == "Hello"
+    assert len(doc) == 2
+    doc.set_text("test")
+    doc.clear_stacks("undo_and_redo")
+    # doc.add_resource("html")
+    assert doc.get_default_cursor_move_style() == "logical"
+    with pytest.raises(ValueError):
+        doc.get_default_cursor_move_style() == "test"
+
+
 def test_painter():
     painter = gui.Painter(gui.Image())
     painter.use_antialiasing()

@@ -24,6 +24,9 @@ except AttributeError:
     from .regularexpressionvalidator_pyside import (  # type: ignore
         RegularExpressionValidator,
     )
+from .textoption import TextOption
+from .textblock import TextBlock
+from .textdocument import TextDocument
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
 from .brush import Brush
@@ -72,6 +75,9 @@ __all__ = [
     "GuiApplication",
     "Validator",
     "RegExpValidator",
+    "TextOption",
+    "TextBlock",
+    "TextDocument",
     "RegularExpressionValidator",
     "IntValidator",
     "DoubleValidator",
