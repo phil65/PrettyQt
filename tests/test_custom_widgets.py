@@ -21,6 +21,17 @@ def test_booldicttoolbutton(qtbot):
     assert w.as_dict() == dict(a=True, b=False)
 
 
+def test_collapsibleframe(qtbot):
+    frame = custom_widgets.CollapsibleFrame()
+    widget = widgets.Widget()
+    frame.add_widget(widget)
+    frame.set_title("CollapsibleFrame")
+    frame.expand()
+    assert frame.is_expanded() is True
+    frame.collapse()
+    frame.remove_widget(widget)
+
+
 def test_colorchooserbutton(qtbot):
     btn = custom_widgets.ColorChooserButton()
     btn.set_color("green")

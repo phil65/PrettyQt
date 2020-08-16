@@ -5,6 +5,7 @@ from .image import Image
 from .listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
+from .collapsibleframe import CollapsibleFrame
 from .singlelinetextedit import SingleLineTextEdit
 from .regexinput import RegexInput
 from .mappedcheckbox import MappedCheckBox
@@ -39,6 +40,7 @@ __all__ = [
     "ListInput",
     "BoolDictToolButton",
     "OptionalWidget",
+    "CollapsibleFrame",
     "SingleLineTextEdit",
     "RegexInput",
     "MappedCheckBox",
