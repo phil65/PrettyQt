@@ -23,6 +23,12 @@ class Url(QtCore.QUrl):
     def __str__(self):
         return self.toString(self.PreferLocalFile)
 
+    def serialize_fields(self):
+        return dict(path=self.toString())
+
+    def serialize(self):
+        return self.serialize_fields()
+
     def to_path(self) -> pathlib.Path:
         """Get pathlib object from the URL.
 
