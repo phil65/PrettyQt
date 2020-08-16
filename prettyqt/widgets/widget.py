@@ -116,6 +116,7 @@ class Widget(QtWidgets.QWidget):
         return dict(
             layout=self.layout() if isinstance(self.layout(), widgets.Layout) else None,
             size_policy=self.get_size_policy(),
+            actions=self.actions(),
             accessible_name=self.accessibleName(),
             tool_tip=self.toolTip(),
             tooltip_duration=self.toolTipDuration(),
