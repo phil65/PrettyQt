@@ -81,6 +81,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
             shortcut_context=self.get_shortcut_context(),
             status_tip=self.statusTip(),
             whats_this=self.whatsThis(),
+            menu=self.menu(),
         )
 
     def __setstate__(self, state):
