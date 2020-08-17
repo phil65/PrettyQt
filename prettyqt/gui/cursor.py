@@ -4,6 +4,7 @@ from typing import Dict, Any
 
 from qtpy import QtCore, QtGui
 
+from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -17,6 +18,13 @@ SHAPES = bidict(
 
 
 class Cursor(QtGui.QCursor):
+    def __getstate__(self):
+        return core.DataStream.create_bytearray(self)
+
+    def __setstate__(self, ba):
+        super().__init__()
+        core.DataStream.write_bytearray(ba, self)
+
     def serialize_fields(self) -> Dict[str, Any]:
         return dict(shape=self.get_shape(),)
 
