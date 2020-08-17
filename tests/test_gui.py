@@ -174,9 +174,10 @@ def test_textdocument():
     doc.set_text("test")
     doc.clear_stacks("undo_and_redo")
     # doc.add_resource("html")
+    doc.set_default_cursor_move_style("logical")
     assert doc.get_default_cursor_move_style() == "logical"
-    with pytest.raises(ValueError):
-        doc.get_default_cursor_move_style() == "test"
+    with pytest.raises(InvalidParamError):
+        doc.set_default_cursor_move_style("test")
 
 
 def test_painter():
