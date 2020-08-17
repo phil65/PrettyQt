@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/gui.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.6" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.7" name="generator"/>
 <title>gui - PrettyQt</title>
-<link href="../assets/stylesheets/main.63b94e9e.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.b8ac9624.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -582,6 +582,39 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument">
+    textdocument
+  </a>
+<nav aria-label="textdocument" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument.TextDocument">
+    TextDocument
+  </a>
+<nav aria-label="TextDocument" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument.TextDocument.clear_stacks">
+    clear_stacks()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument.TextDocument.get_default_cursor_move_style">
+    get_default_cursor_move_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument.TextDocument.set_default_cursor_move_style">
+    set_default_cursor_move_style()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.gui.validator">
     validator
   </a>
@@ -1134,6 +1167,39 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument">
+    textdocument
+  </a>
+<nav aria-label="textdocument" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument.TextDocument">
+    TextDocument
+  </a>
+<nav aria-label="TextDocument" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument.TextDocument.clear_stacks">
+    clear_stacks()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument.TextDocument.get_default_cursor_move_style">
+    get_default_cursor_move_style()
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.gui.textdocument.TextDocument.set_default_cursor_move_style">
+    set_default_cursor_move_style()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.gui.validator">
     validator
   </a>
@@ -1320,15 +1386,15 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>38
-39
-40
-41
-42
-43
-44
-45
-46</pre>
+<pre><span></span>46
+47
+48
+49
+50
+51
+52
+53
+54</pre>
 </div>
 </td>
 <td class="code">
@@ -1402,20 +1468,20 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>23
-24
-25
-26
-27
-28
-29
-30
-31
+<pre><span></span>31
 32
 33
 34
 35
-36</pre>
+36
+37
+38
+39
+40
+41
+42
+43
+44</pre>
 </div>
 </td>
 <td class="code">
@@ -1513,10 +1579,7 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>70
-71
-72
-73
+<pre><span></span>73
 74
 75
 76
@@ -1527,7 +1590,10 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 81
 82
 83
-84</pre>
+84
+85
+86
+87</pre>
 </div>
 </td>
 <td class="code">
@@ -1608,10 +1674,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span> 86
- 87
- 88
- 89
+<pre><span></span> 89
  90
  91
  92
@@ -1622,7 +1685,10 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
  97
  98
  99
-100</pre>
+100
+101
+102
+103</pre>
 </div>
 </td>
 <td class="code">
@@ -1699,15 +1765,15 @@ get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>49
-50
-51
-52
-53
-54
-55
-56
-57</pre>
+<pre><span></span>62
+63
+64
+65
+66
+67
+68
+69
+70</pre>
 </div>
 </td>
 <td class="code">
@@ -1760,15 +1826,15 @@ get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>74
-75
-76
-77
-78
-79
-80
-81
-82</pre>
+<pre><span></span>87
+88
+89
+90
+91
+92
+93
+94
+95</pre>
 </div>
 </td>
 <td class="code">
@@ -1821,15 +1887,15 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>84
-85
-86
-87
-88
-89
-90
-91
-92</pre>
+<pre><span></span> 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105</pre>
 </div>
 </td>
 <td class="code">
@@ -1903,20 +1969,20 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47</pre>
+<pre><span></span>47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60</pre>
 </div>
 </td>
 <td class="code">
@@ -1995,20 +2061,20 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tr>
 <td class="linenos">
 <div class="linenodiv">
-<pre><span></span>59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72</pre>
+<pre><span></span>72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85</pre>
 </div>
 </td>
 <td class="code">
@@ -3961,6 +4027,269 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 <span class="sd">        mode: Move mode</span>
 <span class="sd">    """</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">MOVE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.gui.textdocument">
+<code>textdocument</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.gui.textdocument.TextDocument">
+<code>TextDocument</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.textdocument.TextDocument.clear_stacks">
+<code class="highlight language-python">
+clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stack</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Clear undo / redo stack.</p>
+<p>Allowed values are "undo", "redo", "undo_and_redo"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>stack</code></td>
+<td><code>str</code></td>
+<td>
+<p>stack to clear</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>stack type does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">clear_stacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stack</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Clear undo / redo stack.</span>
+
+<span class="sd">    Allowed values are "undo", "redo", "undo_and_redo"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        stack: stack to clear</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: stack type does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">stack</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STACKS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">stack</span><span class="p">,</span> <span class="n">STACKS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">clearUndoRedoStacks</span><span class="p">(</span><span class="n">STACKS</span><span class="p">[</span><span class="n">stack</span><span class="p">])</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.textdocument.TextDocument.get_default_cursor_move_style">
+<code class="highlight language-python">
+get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Return current cursor move style.</p>
+<p>Possible values: "logical", "visual"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>cursor move style</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span> 99
+100
+101
+102
+103
+104
+105
+106
+107</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current cursor move style.</span>
+
+<span class="sd">    Possible values: "logical", "visual"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        cursor move style</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">CURSOR_MOVE_STYLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">defaultCursorMoveStyle</span><span class="p">()]</span>
+</code></pre>
+</div>
+</td>
+</tr>
+</table>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.textdocument.TextDocument.set_default_cursor_move_style">
+<code class="highlight language-python">
+set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Set the cursor move style.</p>
+<p>Allowed values are "logical", "visual"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>style</code></td>
+<td><code>str</code></td>
+<td>
+<p>cursor move style</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>cursor move style does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
+<table class="highlighttable">
+<tr>
+<td class="linenos">
+<div class="linenodiv">
+<pre><span></span>84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97</pre>
+</div>
+</td>
+<td class="code">
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the cursor move style.</span>
+
+<span class="sd">    Allowed values are "logical", "visual"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        style: cursor move style</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: cursor move style does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CURSOR_MOVE_STYLES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">CURSOR_MOVE_STYLES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setDefaultCursorMoveStyle</span><span class="p">(</span><span class="n">CURSOR_MOVE_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </td>
