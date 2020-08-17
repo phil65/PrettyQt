@@ -1,3 +1,16 @@
+## v0.118.0 (2020-08-17)
+
+### Refactor
+
+- **MenuBar**: return subclassed types instead of qt classes
+
+### Feat
+
+- **gui**: add TextDocument / TextBlock / TextOption
+- **gui**: add ConicalGradient / RadialGradient
+- **custom_widgets**: add CollapsibleFrame
+- **GraphicsItem**: add some more methods
+
 ## v0.117.0 (2020-08-16)
 
 ### Feat
