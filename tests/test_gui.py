@@ -169,7 +169,7 @@ def test_textdocument():
     doc = gui.TextDocument("This is a test\nHello")
     for i in doc:
         repr(i)
-    assert doc[1] == "Hello"
+    assert doc[1].text() == "Hello"
     assert len(doc) == 2
     doc.set_text("test")
     doc.clear_stacks("undo_and_redo")
