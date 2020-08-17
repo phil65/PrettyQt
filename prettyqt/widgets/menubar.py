@@ -51,7 +51,7 @@ class MenuBar(QtWidgets.QMenuBar):
         for i in items:
             if isinstance(i, QtWidgets.QMenu):
                 action = widgets.Action(parent=self)
-                action.set_text(menu.title())
+                action.set_text(i.title())
                 action.setMenu(i)
                 self.addAction(action)
             else:
