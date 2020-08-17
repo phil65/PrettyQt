@@ -21,36 +21,53 @@ class MenuBar(QtWidgets.QMenuBar):
             default_up=self.isDefaultUp(), native_menu_bar=self.isNativeMenuBar(),
         )
 
-    def add_action(self, action: Union[QtWidgets.QAction, str]):
+    def add_action(self, action: Union[QtWidgets.QAction, str]) -> QtWidgets.QAction:
         if isinstance(action, str):
-            action = widgets.Action(text=action)
+            action = widgets.Action(parent=self, text=action)
             self.addAction(action)
             return action
         return self.addAction(action)
 
-    def add_menu(self, menu: Union[QtWidgets.QMenu, str]):
-        if isinstance(menu, str):
-            menu = widgets.Menu(menu)
-            self.addMenu(menu)
+    def add_menu(
+        self, menu_or_str: Union[QtWidgets.QMenu, str]
+    ) -> Union[widgets.Action, widgets.Menu]:
+        action = widgets.Action(parent=self)
+        if isinstance(menu_or_str, str):
+            menu = widgets.Menu(menu_or_str)
+            action.set_text(menu_or_str)
+            action.setMenu(menu)
+            self.addAction(action)
             return menu
-        return self.addMenu(menu)
+        else:
+            action.setMenu(menu_or_str)
+            action.set_text(menu_or_str.title())
+            self.addAction(action)
+            return action
 
     def add_separator(self):
         self.addSeparator()
 
-    def add(self, *item):
-        for i in item:
+    def add(self, *items: Union[QtWidgets.QMenu, QtWidgets.QAction]):
+        for i in items:
             if isinstance(i, QtWidgets.QMenu):
-                return self.add_menu(i)
+                action = widgets.Action(parent=self)
+                action.set_text(menu.title())
+                action.setMenu(i)
+                self.addAction(action)
             else:
-                return self.add_action(i)
+                self.add_action(i)
 
 
 if __name__ == "__main__":
     app = widgets.app()
     win = QtWidgets.QMainWindow()
     menu_bar = MenuBar()
-    act = menu_bar.add_menu("test")
+    menuaction = menu_bar.add_menu("test")
+    act = menu_bar.add_action("action")
+    sep = menu_bar.addSeparator()
+    act2 = menu_bar.add_action("action2")
+    menu = widgets.Menu("testaa")
+    menu_bar.add(menu)
     win.setMenuBar(menu_bar)
     win.show()
     app.exec_()
