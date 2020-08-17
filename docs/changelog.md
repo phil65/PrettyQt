@@ -1,3 +1,9 @@
+## v0.118.1 (2020-08-17)
+
+### Fix
+
+- **MenuBar**: fix add method
+
 ## v0.118.0 (2020-08-17)
 
 ### Refactor
