@@ -347,6 +347,12 @@ def test_frame(qtbot):
         frame.set_frame_shape("test")
 
 
+def test_graphicsblureffect():
+    effect = widgets.GraphicsBlurEffect()
+    effect.set_blur_hints("animation")
+    assert effect.get_blur_hints() == ["animation"]
+
+
 def test_graphicsitem(qtbot):
     item = widgets.GraphicsItem()
     item.set_panel_modality("scene")

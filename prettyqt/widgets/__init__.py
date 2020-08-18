@@ -21,6 +21,9 @@ from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
 from .graphicsobject import GraphicsObject
 from .graphicseffect import GraphicsEffect
+from .graphicsblureffect import GraphicsBlurEffect
+from .graphicscolorizeeffect import GraphicsColorizeEffect
+from .graphicsdropshadoweffect import GraphicsDropShadowEffect
 from .graphicsopacityeffect import GraphicsOpacityEffect
 from .styleoption import StyleOption
 from .stylepainter import StylePainter
@@ -138,6 +141,9 @@ __all__ = [
     "GraphicsItem",
     "GraphicsObject",
     "GraphicsEffect",
+    "GraphicsBlurEffect",
+    "GraphicsDropShadowEffect",
+    "GraphicsColorizeEffect",
     "GraphicsOpacityEffect",
     "Style",
     "StyleOption",

@@ -9,5 +9,5 @@ QtWidgets.QGraphicsEffect.__bases__ = (core.Object,)
 
 
 class GraphicsEffect(QtWidgets.QGraphicsEffect):
-
-    pass
+    def serialize_fields(self):
+        return dict(enabled=self.isEnabled())
