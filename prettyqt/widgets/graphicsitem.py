@@ -35,6 +35,12 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
     def __contains__(self, value: QtCore.QPointF) -> bool:
         return self.contains(value)
 
+    def __getitem__(self, key: int):
+        return self.data(key)
+
+    def __setitem__(self, key: int, value):
+        self.setData(key, value)
+
     def set_focus(self, reason: str = "other"):
         if reason not in FOCUS_REASONS:
             raise InvalidParamError(reason, FOCUS_REASONS)

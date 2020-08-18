@@ -362,6 +362,8 @@ def test_graphicsitem(qtbot):
     item.set_focus("active_window")
     with pytest.raises(InvalidParamError):
         item.set_focus("test")
+    item[0] = "test"
+    assert item[0] == "test"
 
 
 def test_gridlayout(qtbot):
