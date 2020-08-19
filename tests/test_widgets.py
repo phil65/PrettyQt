@@ -676,7 +676,7 @@ def test_pushbutton(qtbot):
     widget.set_enabled()
     assert widget.get_value() is False
     widget.set_icon("mdi.timer")
-    widget.set_style_icon("close")
+    widget.set_style_icon("titlebar_close_button")
     widget.is_on = False
     assert widget.is_on is False
     widget.set_value(True)

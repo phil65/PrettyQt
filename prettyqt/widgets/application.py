@@ -11,7 +11,7 @@ from prettyqt.utils import colors, InvalidParamError
 
 logger = logging.getLogger(__name__)
 
-STYLES = widgets.style.STYLES
+STANDARD_PIXMAPS = widgets.style.STANDARD_PIXMAPS
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
@@ -109,7 +109,7 @@ class Application(QtWidgets.QApplication):
     def get_icon(cls, icon: str):
         style = cls.style()
         # icon_size = style.pixelMetric(QtWidgets.QStyle.PM_MessageBoxIconSize)
-        if icon not in STYLES:
-            raise InvalidParamError(icon, STYLES)
-        icon = style.standardIcon(STYLES[icon])
+        if icon not in STANDARD_PIXMAPS:
+            raise InvalidParamError(icon, STANDARD_PIXMAPS)
+        icon = style.standardIcon(STANDARD_PIXMAPS[icon])
         return gui.Icon(icon)

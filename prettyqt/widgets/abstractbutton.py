@@ -5,7 +5,7 @@ from qtpy import QtWidgets
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
 
-STYLES = widgets.style.STYLES
+STANDARD_PIXMAPS = widgets.style.STANDARD_PIXMAPS
 
 QtWidgets.QAbstractButton.__bases__ = (widgets.Widget,)
 
@@ -40,9 +40,9 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.setIcon(icon)
 
     def set_style_icon(self, icon: str, size: int = 15):
-        if icon not in STYLES:
-            raise InvalidParamError(icon, STYLES)
-        qicon = self.style().standardIcon(STYLES[icon], None, self)
+        if icon not in STANDARD_PIXMAPS:
+            raise InvalidParamError(icon, STANDARD_PIXMAPS)
+        qicon = self.style().standardIcon(STANDARD_PIXMAPS[icon], None, self)
         self.set_icon(qicon)
         self.setIconSize(core.Size(size, size))
 
