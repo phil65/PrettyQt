@@ -366,6 +366,17 @@ def test_graphicsitem(qtbot):
     assert item[0] == "test"
 
 
+def test_graphicsscene(qtbot):
+    scene = widgets.GraphicsScene()
+    icon = gui.icon.get_icon("mdi.help-circle-outline")
+    pixmap = icon.pixmap(200, 200)
+    pixmap2 = icon.pixmap(20, 20)
+    # item = widgets.GraphicsItem()
+    g_1 = scene.add(pixmap)
+    g_2 = scene.add(pixmap2)
+    assert scene.colliding_items(g_1, mode="intersects_bounding_rect") == [g_2]
+
+
 def test_gridlayout(qtbot):
     layout = widgets.GridLayout()
     layout2 = widgets.GridLayout()

@@ -19,12 +19,14 @@ from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
+from .graphicspixmapitem import GraphicsPixmapItem
 from .graphicsobject import GraphicsObject
 from .graphicseffect import GraphicsEffect
 from .graphicsblureffect import GraphicsBlurEffect
 from .graphicscolorizeeffect import GraphicsColorizeEffect
 from .graphicsdropshadoweffect import GraphicsDropShadowEffect
 from .graphicsopacityeffect import GraphicsOpacityEffect
+from .graphicsscene import GraphicsScene
 from .styleoption import StyleOption
 from .stylepainter import StylePainter
 from .stylefactory import StyleFactory
@@ -139,12 +141,14 @@ __all__ = [
     "Widget",
     "DesktopWidget",
     "GraphicsItem",
+    "GraphicsPixmapItem",
     "GraphicsObject",
     "GraphicsEffect",
     "GraphicsBlurEffect",
     "GraphicsDropShadowEffect",
     "GraphicsColorizeEffect",
     "GraphicsOpacityEffect",
+    "GraphicsScene",
     "Style",
     "StyleOption",
     "SpacerItem",
