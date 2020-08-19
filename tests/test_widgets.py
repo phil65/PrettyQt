@@ -1124,6 +1124,7 @@ def test_widget(qtbot):
     widget.font_metrics()
     widget.set_id("test")
     widget.set_unique_id()
+    widget.get_palette()
     widget.set_attribute("native_window")
     with pytest.raises(InvalidParamError):
         widget.set_attribute("test")
