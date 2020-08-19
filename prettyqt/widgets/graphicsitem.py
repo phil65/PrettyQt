@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import List
+from typing import List, Union
 
 from qtpy import QtWidgets, QtCore, QtGui
 
@@ -46,12 +46,18 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
             raise InvalidParamError(reason, FOCUS_REASONS)
         self.setFocus(FOCUS_REASONS[reason])
 
-    def colliding_items(self, mode: str = "intersects") -> List[QtWidgets.QGraphicsItem]:
+    def colliding_items(
+        self, mode: str = "intersects_shape"
+    ) -> List[QtWidgets.QGraphicsItem]:
         if mode not in ITEM_SELECTION_MODES:
             raise InvalidParamError(mode, ITEM_SELECTION_MODES)
         return self.collidingItems(ITEM_SELECTION_MODES[mode])
 
-    def collides_with(self, item: QtGui.QPainterPath, mode: str = "intersects") -> bool:
+    def collides_with(
+        self,
+        item: Union[QtGui.QPainterPath, QtWidgets.QGraphicsItem],
+        mode: str = "intersects_shape",
+    ) -> bool:
         if mode not in ITEM_SELECTION_MODES:
             raise InvalidParamError(mode, ITEM_SELECTION_MODES)
         if isinstance(item, QtGui.QPainterPath):
