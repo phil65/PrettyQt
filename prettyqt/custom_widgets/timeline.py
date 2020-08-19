@@ -73,7 +73,10 @@ class Timeline(widgets.Widget):
             return self
 
     def add_sample(
-        self, duration: int, color: colors.ColorType, picture: Optional[QtGui.QPixmap]
+        self,
+        duration: int,
+        color: colors.ColorType = "yellow",
+        picture: Optional[QtGui.QPixmap] = None,
     ) -> VideoSample:
         sample = VideoSample(duration, color, picture)
         self.add(sample)

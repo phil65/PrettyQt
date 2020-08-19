@@ -117,9 +117,14 @@ def test_singlelinetextedit(qtbot):
 
 def test_timeline(qtbot):
     tl = custom_widgets.Timeline(60, 60)
+    tl.show()
     sample = custom_widgets.VideoSample(20)
     tl += sample
-    tl.show()
+    tl.add_sample(30)
+    sample_3 = custom_widgets.VideoSample(20)
+    tl[1] = sample_3
+    assert tl[1] == sample_3
+    assert len(tl) == 2
     tl.close()
 
 
