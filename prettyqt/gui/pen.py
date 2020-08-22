@@ -2,6 +2,7 @@
 
 from qtpy import QtGui, QtCore
 
+from prettyqt import core
 from prettyqt.utils import colors
 from prettyqt.utils import bidict, InvalidParamError
 
@@ -28,6 +29,13 @@ JOIN_STYLES = bidict(
 
 
 class Pen(QtGui.QPen):
+    def __getstate__(self):
+        return core.DataStream.create_bytearray(self)
+
+    def __setstate__(self, ba):
+        self.__init__()
+        core.DataStream.write_bytearray(ba, self)
+
     def set_color(self, color: colors.ColorType):
         color = colors.get_color(color)
         self.setColor(color)

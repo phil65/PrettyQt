@@ -1,6 +1,6 @@
 from qtpy import QtGui
 
-from prettyqt import gui
+from prettyqt import gui, core
 from prettyqt.utils import colors, bidict
 
 
@@ -26,6 +26,13 @@ GROUPS = bidict(
 
 
 class Palette(QtGui.QPalette):
+    def __getstate__(self):
+        return core.DataStream.create_bytearray(self)
+
+    def __setstate__(self, ba):
+        self.__init__()
+        core.DataStream.write_bytearray(ba, self)
+
     def __getitem__(self, index: str):
         return self.get_color(index)
 
