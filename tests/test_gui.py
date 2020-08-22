@@ -6,12 +6,27 @@
 import pickle
 import pytest
 import pathlib
+import inspect
 
 from qtpy import QtCore
 import qtpy
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
+
+clsmembers = inspect.getmembers(gui, inspect.isclass)
+clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
+
+# logger = logging.getLogger(__name__)
+
+
+@pytest.mark.parametrize("name, cls", clsmembers)
+def test_repr(name, cls):
+    try:
+        item = cls()
+    except Exception:
+        return None
+    repr(item)
 
 
 def test_brush():
@@ -26,7 +41,6 @@ def test_color():
     with open("data.pkl", "rb") as jar:
         color = pickle.load(jar)
     assert str(color) == "#808080"
-    repr(color)
     # color.as_qt()
 
 
@@ -51,12 +65,10 @@ def test_doublevalidator():
         val = pickle.load(jar)
     assert val.is_valid_value("4")
     assert not val.is_valid_value("10")
-    repr(val)
 
 
 def test_font():
     font = gui.Font("Consolas")
-    repr(font)
     font.metrics
     font = gui.Font.mono()
     with pytest.raises(InvalidParamError):
@@ -117,7 +129,6 @@ def test_intvalidator():
         val = pickle.load(jar)
     assert val.is_valid_value("4")
     assert not val.is_valid_value("10")
-    repr(val)
 
 
 def test_keysequence():
@@ -132,7 +143,6 @@ def test_standarditem():
         pickle.dump(s, jar)
     with open("data.pkl", "rb") as jar:
         s = pickle.load(jar)
-    repr(s)
     s.set_icon("mdi.timer")
     s.clone()
 
@@ -310,7 +320,6 @@ def test_regexpvalidator():
         val = pickle.load(jar)
     assert val.get_regex() == "[0-9]"
     assert val.is_valid_value("0")
-    repr(val)
 
 
 @pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
@@ -323,7 +332,6 @@ def test_regularexpressionvalidator():
         val = pickle.load(jar)
     assert val.get_regex() == "[0-9]"
     assert val.is_valid_value("0")
-    repr(val)
 
 
 def test_syntaxhighlighter():
