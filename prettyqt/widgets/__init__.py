@@ -19,8 +19,20 @@ from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
+from .abstractgraphicsshapeitem import AbstractGraphicsShapeItem
 from .graphicspixmapitem import GraphicsPixmapItem
 from .graphicsobject import GraphicsObject
+from .graphicstextitem import GraphicsTextItem
+from .graphicslayoutitem import GraphicsLayoutItem
+from .graphicslayout import GraphicsLayout
+from .graphicswidget import GraphicsWidget
+from .graphicsproxywidget import GraphicsProxyWidget
+from .graphicslineitem import GraphicsLineItem
+from .graphicsrectitem import GraphicsRectItem
+from .graphicssimpletextitem import GraphicsSimpleTextItem
+from .graphicspolygonitem import GraphicsPolygonItem
+from .graphicsellipseitem import GraphicsEllipseItem
+from .graphicspathitem import GraphicsPathItem
 from .graphicseffect import GraphicsEffect
 from .graphicsblureffect import GraphicsBlurEffect
 from .graphicscolorizeeffect import GraphicsColorizeEffect
@@ -28,6 +40,7 @@ from .graphicsdropshadoweffect import GraphicsDropShadowEffect
 from .graphicsopacityeffect import GraphicsOpacityEffect
 from .graphicsscene import GraphicsScene
 from .styleoption import StyleOption
+from .styleoptioncomplex import StyleOptionComplex
 from .stylepainter import StylePainter
 from .stylefactory import StyleFactory
 from .pushbutton import PushButton
@@ -123,6 +136,7 @@ from .undoview import UndoView
 def app():
     if Application.instance() is not None:
         return Application.instance()
+    Application.disable_window_help_button()
     return Application([])
 
 
@@ -141,8 +155,21 @@ __all__ = [
     "Widget",
     "DesktopWidget",
     "GraphicsItem",
+    "AbstractGraphicsShapeItem",
     "GraphicsPixmapItem",
     "GraphicsObject",
+    "GraphicsTextItem",
+    "GraphicsLayoutItem",
+    "GraphicsLayout",
+    "GraphicsWidget",
+    "GraphicsProxyWidget",
+    "GraphicsLineItem",
+    "GraphicsRectItem",
+    "GraphicsSimpleTextItem",
+    "GraphicsPolygonItem",
+    "GraphicsEllipseItem",
+    "GraphicsPathItem",
+    "GraphicsWidget",
     "GraphicsEffect",
     "GraphicsBlurEffect",
     "GraphicsDropShadowEffect",
@@ -151,6 +178,7 @@ __all__ = [
     "GraphicsScene",
     "Style",
     "StyleOption",
+    "StyleOptionComplex",
     "SpacerItem",
     "SizePolicy",
     "StylePainter",
