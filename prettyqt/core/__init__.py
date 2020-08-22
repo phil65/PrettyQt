@@ -15,6 +15,7 @@ from qtpy.QtCore import QSizeF as SizeF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
 from .line import Line
+from .linef import LineF
 from .easingcurve import EasingCurve
 from prettyqt import core
 from .object import Object
@@ -87,6 +88,7 @@ __all__ = [
     "Point",
     "PointF",
     "Line",
+    "LineF",
     "EasingCurve",
     "AbstractAnimation",
     "AnimationGroup",
