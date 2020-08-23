@@ -1,3 +1,22 @@
+## v0.119.0 (2020-08-24)
+
+### Feat
+
+- **GraphicsScene**: add some convenience methods
+- **widgets**: add graphicsitem classes
+- **StylePainter**: add draw_complex_control method
+- **gui**: allow pickling some more classes
+- **core**: add LineF class
+- **Widget**: add get_palette() method
+- **widgets**: add GraphicsPixmapItem / GraphicsScene
+- **GraphicsItem**: add __getitem__ and __setitem__ methods
+- **widgets**: add Blur/Colorize/DropShadowEffect
+
+### Fix
+
+- Graphicsitem collides methods fix
+- **KeySequence**: pickling
+
 ## v0.118.2 (2020-08-17)
 
 ### Fix
