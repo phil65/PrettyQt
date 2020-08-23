@@ -1,8 +1,8 @@
-from typing import List
+from typing import List, Optional, Union, Tuple
 
 from qtpy import QtWidgets, QtGui, QtCore
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, gui
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -25,10 +25,133 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
             self.addItem(item)
             return item
         elif isinstance(item, QtGui.QPixmap):
-            g_item = widgets.GraphicsPixmapItem()
-            g_item.setPixmap(item)
-            self.addItem(g_item)
-            return g_item
+            return self.add_pixmap(item)
+        elif isinstance(item, QtGui.PainterPath):
+            return self.add_path(item)
+        elif isinstance(item, QtGui.QPolygonF):
+            return self.add_polygon(item)
+        elif isinstance(item, QtCore.QRectF):
+            return self.add_rect(item)
+        elif isinstance(item, QtCore.QLine):
+            return self.add_line(item)
+        elif isinstance(item, str):
+            return self.add_text(item)
+        elif isinstance(item, QtWidgets.QWidget):
+            return self.add_widget(item)
+
+    def add_pixmap(self, pixmap: QtGui.QPixmap):
+        g_item = widgets.GraphicsPixmapItem()
+        g_item.setPixmap(pixmap)
+        self.addItem(g_item)
+        return g_item
+
+    def add_polygon(
+        self,
+        polygon: QtGui.QPolygonF,
+        pen: Optional[QtGui.QPen] = None,
+        brush: Optional[QtGui.QBrush] = None,
+    ):
+        if isinstance(polygon, QtGui.QPolygon):
+            polygon = gui.PolygonF(polygon)
+        g_item = widgets.GraphicsPolygonItem()
+        g_item.setPolygon(polygon)
+        if brush is not None:
+            g_item.setBrush(brush)
+        if pen is not None:
+            g_item.setPen(pen)
+        self.addItem(g_item)
+        return g_item
+
+    def add_path(
+        self,
+        path: QtGui.QPainterPath,
+        pen: Optional[QtGui.QPen] = None,
+        brush: Optional[QtGui.QBrush] = None,
+    ):
+        g_item = widgets.GraphicsPathItem()
+        g_item.setPath(path)
+        if brush is not None:
+            g_item.setBrush(brush)
+        if pen is not None:
+            g_item.setPen(pen)
+        self.addItem(g_item)
+        return g_item
+
+    def add_rect(
+        self,
+        rect: Union[QtCore.QRectF, QtCore.QRect, Tuple[float, float, float, float]],
+        pen: Optional[QtGui.QPen] = None,
+        brush: Optional[QtGui.QBrush] = None,
+    ):
+        if isinstance(rect, QtCore.QRect):
+            rect = core.RectF(rect)
+        elif isinstance(rect, tuple):
+            rect = core.RectF(*rect)
+        g_item = widgets.GraphicsRectItem()
+        g_item.setRect(rect)
+        if brush is not None:
+            g_item.setBrush(brush)
+        if pen is not None:
+            g_item.setPen(pen)
+        self.addItem(g_item)
+        return g_item
+
+    def add_line(
+        self,
+        line: Union[QtCore.QLineF, QtCore.QLine, Tuple[float, float, float, float]],
+        pen: Optional[QtGui.QPen] = None,
+    ):
+        if isinstance(line, QtCore.QLine):
+            line = core.LineF(line)
+        elif isinstance(line, tuple):
+            line = core.LineF(*line)
+        g_item = widgets.GraphicsLineItem()
+        g_item.setLine(line)
+        if pen is not None:
+            g_item.setPen(pen)
+        self.addItem(g_item)
+        return g_item
+
+    def add_ellipse(
+        self,
+        ellipse: Union[QtCore.QRectF, QtCore.QRect, Tuple[float, float, float, float]],
+        pen: Optional[QtGui.QPen] = None,
+        brush: Optional[QtGui.QBrush] = None,
+    ):
+        if isinstance(ellipse, QtCore.QRect):
+            ellipse = core.RectF(ellipse)
+        elif isinstance(ellipse, tuple):
+            ellipse = core.RectF(*ellipse)
+        g_item = widgets.GraphicsEllipseItem()
+        g_item.setRect(ellipse)
+        if brush is not None:
+            g_item.setBrush(brush)
+        if pen is not None:
+            g_item.setPen(pen)
+        self.addItem(g_item)
+        return g_item
+
+    def add_text(self, text: str, font: Optional[QtGui.QFont] = None):
+        g_item = widgets.GraphicsTextItem()
+        g_item.setPlainText(text)
+        if font is not None:
+            g_item.setFont(font)
+        self.addItem(g_item)
+        return g_item
+
+    def add_simple_text(self, text: str, font: Optional[QtGui.QFont] = None):
+        g_item = widgets.GraphicsSimpleTextItem()
+        g_item.setText(text)
+        if font is not None:
+            g_item.setFont(font)
+        self.addItem(g_item)
+        return g_item
+
+    def add_widget(self, widget: QtWidgets.QWidget):
+        g_item = widgets.GraphicsProxyWidget()
+        g_item.setWidget(widget)
+        self.addItem(g_item)
+        return g_item
 
     def colliding_items(
         self, item: QtWidgets.QGraphicsItem, mode: str = "intersects_shape"
@@ -36,3 +159,12 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
         if mode not in ITEM_SELECTION_MODES:
             raise InvalidParamError(mode, ITEM_SELECTION_MODES)
         return self.collidingItems(item, ITEM_SELECTION_MODES[mode])
+
+
+if __name__ == "__main__":
+    app = widgets.app()
+    scene = GraphicsScene()
+    scene.add_line(core.Line(0, 0, 10, 10))
+    scene.show()
+    app.exec_()
+    scene.show()
