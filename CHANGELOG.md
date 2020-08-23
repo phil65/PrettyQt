@@ -1,3 +1,9 @@
+## v0.119.1 (2020-08-24)
+
+### Fix
+
+- add missing StyleOptionComplex class
+
 ## v0.119.0 (2020-08-24)
 
 ### Feat
