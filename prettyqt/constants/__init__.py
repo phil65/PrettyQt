@@ -20,9 +20,15 @@ FONT_ROLE = QtCore.Qt.FontRole
 
 ALIGN_LEFT = QtCore.Qt.AlignLeft
 ALIGN_RIGHT = QtCore.Qt.AlignRight
-ALIGN_CENTER = QtCore.Qt.AlignCenter
+ALIGN_H_CENTER = QtCore.Qt.AlignHCenter
+ALIGN_JUSTIFY = QtCore.Qt.AlignJustify
+
+ALIGN_TOP = QtCore.Qt.AlignTop
 ALIGN_BOTTOM = QtCore.Qt.AlignBottom
 ALIGN_V_CENTER = QtCore.Qt.AlignVCenter
+ALIGN_BASELINE = QtCore.Qt.AlignBaseline
+
+ALIGN_CENTER = QtCore.Qt.AlignCenter
 
 HORIZONTAL = QtCore.Qt.Horizontal
 VERTICAL = QtCore.Qt.Vertical
