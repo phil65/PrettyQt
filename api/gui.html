@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/gui.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.7" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.8" name="generator"/>
 <title>gui - PrettyQt</title>
-<link href="../assets/stylesheets/main.b8ac9624.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.01afc2df.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -1261,23 +1261,11 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <p>Helper for pickle.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>13
-14</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()))</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1293,27 +1281,6 @@ from_text<span class="p">(</span><span class="n">text</span><span class="p">)</s
 <p>Create a QColor from specified string.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_text</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
@@ -1331,9 +1298,6 @@ from_text<span class="p">(</span><span class="n">text</span><span class="p">)</s
     <span class="k">return</span> <span class="n">color</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1382,22 +1346,6 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/cursor.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>46
-47
-48
-49
-50
-51
-52
-53
-54</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current cursor shape.</span>
@@ -1410,9 +1358,6 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
     <span class="k">return</span> <span class="n">SHAPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1464,27 +1409,6 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/cursor.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set cursor shape.</span>
@@ -1502,9 +1426,6 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
     <span class="bp">self</span><span class="o">.</span><span class="n">setShape</span><span class="p">(</span><span class="n">SHAPES</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1575,28 +1496,6 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the style hint.</span>
@@ -1615,9 +1514,6 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="bp">self</span><span class="o">.</span><span class="n">setStyleHint</span><span class="p">(</span><span class="n">STYLE_HINTS</span><span class="p">[</span><span class="n">hint</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1670,28 +1566,6 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span> 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102
-103</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the font weight.</span>
@@ -1710,9 +1584,6 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="bp">self</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1761,22 +1632,6 @@ get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>62
-63
-64
-65
-66
-67
-68
-69
-70</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current coordinate mode.</span>
@@ -1789,9 +1644,6 @@ get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
     <span class="k">return</span> <span class="n">COORDINATE_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">coordinateMode</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1822,22 +1674,6 @@ get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>87
-88
-89
-90
-91
-92
-93
-94
-95</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current spread method.</span>
@@ -1850,9 +1686,6 @@ get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)<
     <span class="k">return</span> <span class="n">SPREADS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">spread</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1883,22 +1716,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span> 97
- 98
- 99
-100
-101
-102
-103
-104
-105</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current gradient type.</span>
@@ -1911,9 +1728,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
     <span class="k">return</span> <span class="n">TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1965,27 +1779,6 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the coordinate mode.</span>
@@ -2003,9 +1796,6 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
     <span class="bp">self</span><span class="o">.</span><span class="n">setCoordinateMode</span><span class="p">(</span><span class="n">COORDINATE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2057,27 +1847,6 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the spread method.</span>
@@ -2095,9 +1864,6 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="bp">self</span><span class="o">.</span><span class="n">setSpread</span><span class="p">(</span><span class="n">SPREADS</span><span class="p">[</span><span class="n">method</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2124,35 +1890,6 @@ get_icon<span class="p">(</span><span class="n">icon</span><span class="p">,</sp
 we cache, too.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/icon.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">:</span> <span class="n">IconType</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">as_qicon</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
     <span class="sd">"""Get icon with given color.</span>
@@ -2178,9 +1915,6 @@ we cache, too.</p>
     <span class="k">return</span> <span class="n">icon</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2211,23 +1945,11 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <p>Helper for pickle.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/keysequence.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>32
-33</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toString</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toString</span><span class="p">(),))</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2278,24 +2000,6 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>143
-144
-145
-146
-147
-148
-149
-150
-151
-152
-153</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_composition_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current composition mode.</span>
@@ -2310,9 +2014,6 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
     <span class="k">return</span> <span class="n">COMP_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">compositionMode</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2342,20 +2043,6 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>105
-106
-107
-108
-109
-110
-111</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current pen.</span>
@@ -2366,9 +2053,6 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
     <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="p">())</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2401,26 +2085,6 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>129
-130
-131
-132
-133
-134
-135
-136
-137
-138
-139
-140
-141</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_composition_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the current composition mode.</span>
@@ -2437,9 +2101,6 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
     <span class="bp">self</span><span class="o">.</span><span class="n">setCompositionMode</span><span class="p">(</span><span class="n">COMP_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2505,37 +2166,6 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span> 80
- 81
- 82
- 83
- 84
- 85
- 86
- 87
- 88
- 89
- 90
- 91
- 92
- 93
- 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102
-103</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_pen</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -2563,9 +2193,6 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
     <span class="bp">self</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2614,22 +2241,6 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>50
-51
-52
-53
-54
-55
-56
-57
-58</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current cap style.</span>
@@ -2642,9 +2253,6 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="k">return</span> <span class="n">CAP_STYLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">capStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2675,22 +2283,6 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>75
-76
-77
-78
-79
-80
-81
-82
-83</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current join style.</span>
@@ -2703,9 +2295,6 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="k">return</span> <span class="n">JOIN_STYLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">joinStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2737,23 +2326,6 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>101
-102
-103
-104
-105
-106
-107
-108
-109
-110</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current pen style.</span>
@@ -2767,9 +2339,6 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
     <span class="k">return</span> <span class="n">PEN_STYLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2821,27 +2390,6 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set cap style to use.</span>
@@ -2859,9 +2407,6 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="bp">self</span><span class="o">.</span><span class="n">setCapStyle</span><span class="p">(</span><span class="n">CAP_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -2913,27 +2458,6 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set join style to use.</span>
@@ -2951,9 +2475,6 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="bp">self</span><span class="o">.</span><span class="n">setJoinStyle</span><span class="p">(</span><span class="n">JOIN_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3006,28 +2527,6 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98
-99</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set pen style to use.</span>
@@ -3046,9 +2545,6 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
     <span class="bp">self</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">PEN_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3082,23 +2578,11 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <p>Helper for pickle.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/polygon.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>43
-44</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3129,24 +2613,6 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <p>validate(self, str, int) -&gt; Tuple[QValidator.State, str, int]</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/regularexpressionvalidator_pyside.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -3161,9 +2627,6 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Invalid</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3194,18 +2657,6 @@ clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <p>clone(self) -&gt; QStandardItem</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>28
-29
-30
-31
-32</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
@@ -3214,9 +2665,6 @@ clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span
     <span class="k">return</span> <span class="n">item</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3250,21 +2698,6 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>34
-35
-36
-37
-38
-39
-40
-41</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the action.</span>
@@ -3276,9 +2709,6 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3309,20 +2739,6 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <p>Apply syntax highlighting to the given block of text.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/syntaxhighlighter.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>27
-28
-29
-30
-31
-32
-33</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Apply syntax highlighting to the given block of text."""</span>
@@ -3333,9 +2749,6 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
             <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">span</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">span</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fmt</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3403,22 +2816,6 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>68
-69
-70
-71
-72
-73
-74
-75
-76</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current font weight.</span>
@@ -3431,9 +2828,6 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
     <span class="k">return</span> <span class="n">WEIGHTS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fontWeight</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3465,23 +2859,6 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span> 94
- 95
- 96
- 97
- 98
- 99
-100
-101
-102
-103</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current underline style.</span>
@@ -3495,9 +2872,6 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
     <span class="k">return</span> <span class="n">UNDERLINE_STYLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">underlineStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3550,28 +2924,6 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>105
-106
-107
-108
-109
-110
-111
-112
-113
-114
-115
-116
-117
-118
-119</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_font_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the font style hint.</span>
@@ -3590,9 +2942,6 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
     <span class="bp">self</span><span class="o">.</span><span class="n">setFontStyleHint</span><span class="p">(</span><span class="n">STYLE_HINTS</span><span class="p">[</span><span class="n">hint</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3645,28 +2994,6 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the font weight.</span>
@@ -3685,9 +3012,6 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
     <span class="bp">self</span><span class="o">.</span><span class="n">setFontWeight</span><span class="p">(</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3740,28 +3064,6 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the underline style.</span>
@@ -3780,9 +3082,6 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
     <span class="bp">self</span><span class="o">.</span><span class="n">setUnderlineStyle</span><span class="p">(</span><span class="n">UNDERLINE_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3813,19 +3112,6 @@ edit_block<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <p>Context manager for edit blocks. Can be used for undo actions.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>103
-104
-105
-106
-107
-108</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">edit_block</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -3835,9 +3121,6 @@ edit_block<span class="p">(</span><span class="bp">self</span><span class="p">)<
     <span class="bp">self</span><span class="o">.</span><span class="n">endEditBlock</span><span class="p">()</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3850,17 +3133,6 @@ select<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <p>select(self, QTextCursor.SelectionType)</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>64
-65
-66
-67</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">SELECTION_TYPES</span><span class="p">:</span>
@@ -3868,9 +3140,6 @@ select<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -3913,31 +3182,6 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">select_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">end_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Select text from start position to end position.</span>
@@ -3959,9 +3203,6 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectedText</span><span class="p">()</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -4003,21 +3244,6 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>55
-56
-57
-58
-59
-60
-61
-62</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"move"</span><span class="p">):</span>
     <span class="sd">"""Set cursor to given position.</span>
@@ -4029,9 +3255,6 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
     <span class="bp">self</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">MOVE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -4101,27 +3324,6 @@ clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">clear_stacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stack</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Clear undo / redo stack.</span>
@@ -4139,9 +3341,6 @@ clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">
     <span class="bp">self</span><span class="o">.</span><span class="n">clearUndoRedoStacks</span><span class="p">(</span><span class="n">STACKS</span><span class="p">[</span><span class="n">stack</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -4172,22 +3371,6 @@ get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span> 99
-100
-101
-102
-103
-104
-105
-106
-107</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current cursor move style.</span>
@@ -4200,9 +3383,6 @@ get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
     <span class="k">return</span> <span class="n">CURSOR_MOVE_STYLES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">defaultCursorMoveStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -4254,27 +3434,6 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the cursor move style.</span>
@@ -4292,9 +3451,6 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
     <span class="bp">self</span><span class="o">.</span><span class="n">setDefaultCursorMoveStyle</span><span class="p">(</span><span class="n">CURSOR_MOVE_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -4328,25 +3484,12 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <p>Needed for sum().</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/gui/validator.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>21
-22
-23</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QValidator</span><span class="p">):</span>
     <span class="sd">"""Needed for sum()."""</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__add__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -4411,8 +3554,8 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
-<script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.df0def68.min.js"></script>
+<script src="../assets/javascripts/bundle.ba57d267.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",

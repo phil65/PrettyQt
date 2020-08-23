@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/webenginewidgets.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.7" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.8" name="generator"/>
 <title>webenginewidgets - PrettyQt</title>
-<link href="../assets/stylesheets/main.b8ac9624.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.01afc2df.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -470,54 +470,6 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/webenginewidgets/webenginepage.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96
-97
-98</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">find_text</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -562,9 +514,6 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">findText</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -601,29 +550,6 @@ to display the new URL.</p>
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/webenginewidgets/webenginepage.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""Load the URL.</span>
@@ -643,9 +569,6 @@ to display the new URL.</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -680,26 +603,6 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/webenginewidgets/webenginepage.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""Set the url of the WebEnginePage.</span>
@@ -716,9 +619,6 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
     <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -753,22 +653,6 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/webenginewidgets/webenginepage.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>48
-49
-50
-51
-52
-53
-54
-55
-56</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
     <span class="sd">"""Set the zoom factor for the Page.</span>
@@ -781,9 +665,6 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     <span class="bp">self</span><span class="o">.</span><span class="n">setZoomFactor</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -869,54 +750,6 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68
-69
-70
-71
-72
-73
-74
-75
-76
-77
-78
-79
-80
-81
-82
-83
-84
-85
-86
-87
-88
-89
-90
-91
-92
-93
-94
-95
-96</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">find_text</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -961,9 +794,6 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">findText</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1000,29 +830,6 @@ to display the new URL.</p>
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""Load the URL.</span>
@@ -1042,9 +849,6 @@ to display the new URL.</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1079,26 +883,6 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""Set the url of the WebEngineView.</span>
@@ -1115,9 +899,6 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
     <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1152,22 +933,6 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>46
-47
-48
-49
-50
-51
-52
-53
-54</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
     <span class="sd">"""Set the zoom factor for the view.</span>
@@ -1180,9 +945,6 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     <span class="bp">self</span><span class="o">.</span><span class="n">setZoomFactor</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1247,8 +1009,8 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
-<script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.df0def68.min.js"></script>
+<script src="../assets/javascripts/bundle.ba57d267.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",

@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/multimedia.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.7" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.8" name="generator"/>
 <title>multimedia - PrettyQt</title>
-<link href="../assets/stylesheets/main.b8ac9624.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.01afc2df.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -470,23 +470,6 @@ get_media_status<span class="p">(</span><span class="bp">self</span><span class=
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/multimedia/mediaplayer.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>50
-51
-52
-53
-54
-55
-56
-57
-58
-59</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_media_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current media status.</span>
@@ -500,9 +483,6 @@ get_media_status<span class="p">(</span><span class="bp">self</span><span class=
     <span class="k">return</span> <span class="n">MEDIA_STATUS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mediaStatus</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -533,22 +513,6 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/multimedia/mediaplayer.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>40
-41
-42
-43
-44
-45
-46
-47
-48</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current state.</span>
@@ -561,9 +525,6 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
     <span class="k">return</span> <span class="n">STATES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -612,22 +573,6 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/multimedia/mediaplaylist.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>68
-69
-70
-71
-72
-73
-74
-75
-76</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current playback mode.</span>
@@ -640,9 +585,6 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
     <span class="k">return</span> <span class="n">PLAYBACK_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">playbackMode</span><span class="p">()]</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -694,27 +636,6 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/multimedia/mediaplaylist.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set playback mode for given item view.</span>
@@ -732,9 +653,6 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
     <span class="bp">self</span><span class="o">.</span><span class="n">setPlaybackMode</span><span class="p">(</span><span class="n">PLAYBACK_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -821,8 +739,8 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
-<script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.df0def68.min.js"></script>
+<script src="../assets/javascripts/bundle.ba57d267.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",

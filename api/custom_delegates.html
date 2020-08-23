@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/custom_delegates.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.7" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.8" name="generator"/>
 <title>custom_delegates - PrettyQt</title>
-<link href="../assets/stylesheets/main.b8ac9624.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.01afc2df.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -571,22 +571,6 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 <p>createEditor(self, QWidget, QStyleOptionViewItem, QModelIndex) -&gt; QWidget</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>15
-16
-17
-18
-19
-20
-21
-22
-23</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">:</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
@@ -599,9 +583,6 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
     <span class="k">return</span> <span class="n">btn</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -614,23 +595,11 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 <p>setEditorData(self, QWidget, QModelIndex)</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>25
-26</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">pass</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -643,23 +612,11 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 <p>setModelData(self, QWidget, QAbstractItemModel, QModelIndex)</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>28
-29</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">pass</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -693,22 +650,6 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 also connect currentIndexChanged signal.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>19
-20
-21
-22
-23
-24
-25
-26
-27</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Override.</span>
@@ -721,9 +662,6 @@ also connect currentIndexChanged signal.</p>
     <span class="k">return</span> <span class="n">cb</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -737,21 +675,6 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 <p>set correct initial value for editor widget</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>29
-30
-31
-32
-33
-34
-35
-36</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Override.</span>
@@ -763,9 +686,6 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
         <span class="n">cb</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">current_selection</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -779,24 +699,6 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 <p>apply the newly selected dtype to the column if possible.</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combo</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Override, gets called on self.commitData (?).</span>
@@ -811,9 +713,6 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -882,73 +781,6 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </table>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/icondelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span> 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41
-42
-43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
-66
-67
-68</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -1012,9 +844,6 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
         <span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1045,22 +874,6 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/nofocusdelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>10
-11
-12
-13
-14
-15
-16
-17
-18</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -1073,9 +886,6 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1106,37 +916,6 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 <p>createEditor(self, QWidget, QStyleOptionViewItem, QModelIndex) -&gt; QWidget</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
-37
-38
-39
-40
-41</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">editor</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
@@ -1164,9 +943,6 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
     <span class="k">return</span> <span class="n">editor</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1179,34 +955,6 @@ eventFilter<span class="p">(</span><span class="bp">self</span><span class="p">,
 <p>eventFilter(self, QObject, QEvent) -&gt; bool</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>43
-44
-45
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">eventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">core</span><span class="o">.</span><span class="n">Event</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
@@ -1231,9 +979,6 @@ eventFilter<span class="p">(</span><span class="bp">self</span><span class="p">,
     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">eventFilter</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1246,17 +991,6 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 <p>setEditorData(self, QWidget, QModelIndex)</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>76
-77
-78
-79</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">)</span>
@@ -1264,9 +998,6 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
         <span class="n">editor</span><span class="o">.</span><span class="n">buttonGroup</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">value</span><span class="p">))</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1279,18 +1010,6 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 <p>setModelData(self, QWidget, QAbstractItemModel, QModelIndex)</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>81
-82
-83
-84
-85</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">button</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">buttonGroup</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span>
@@ -1299,9 +1018,6 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
         <span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="n">button</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1314,23 +1030,6 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
 <p>updateEditorGeometry(self, QWidget, QStyleOptionViewItem, QModelIndex)</p>
 <details class="quote">
 <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<table class="highlighttable">
-<tr>
-<td class="linenos">
-<div class="linenodiv">
-<pre><span></span>65
-66
-67
-68
-69
-70
-71
-72
-73
-74</pre>
-</div>
-</td>
-<td class="code">
 <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">updateEditorGeometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span>
@@ -1344,9 +1043,6 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
     <span class="n">editor</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
 </code></pre>
 </div>
-</td>
-</tr>
-</table>
 </details>
 </div>
 </div>
@@ -1411,8 +1107,8 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
 </div>
 </footer>
 </div>
-<script src="../assets/javascripts/vendor.d1f5a259.min.js"></script>
-<script src="../assets/javascripts/bundle.d5fec882.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script src="../assets/javascripts/vendor.df0def68.min.js"></script>
+<script src="../assets/javascripts/bundle.ba57d267.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
 <script>
         app = initialize({
           base: "..",
