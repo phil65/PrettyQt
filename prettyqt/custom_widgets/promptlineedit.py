@@ -15,17 +15,14 @@ class PromptLineEdit(widgets.LineEdit):
     clear_clicked = core.Signal()
 
     def __init__(
-        self,
-        parent: Optional[QtWidgets.QWidget] = None,
-        prompt_text: str = "Search",
-        button_icon: gui.icon.IconType = "mdi.delete-circle-outline",
+        self, parent: Optional[QtWidgets.QWidget] = None, prompt_text: str = "Search",
     ):
         super().__init__(parent=parent)
         self._margin = self.sizeHint().height() - 2
         self._spacing = 0
         self._prompt_text = prompt_text
         self.button = widgets.ToolButton(self)
-        self.button.set_icon(button_icon)
+        self.button.set_style_icon("lineedit_clear")
         with self.button.edit_stylesheet() as ss:
             ss.QToolButton.setValues(border=None, padding="0px")
         self.button.set_cursor("arrow")
@@ -48,29 +45,31 @@ class PromptLineEdit(widgets.LineEdit):
     def paintEvent(self, event):
         super().paintEvent(event)
 
-        if self._prompt_text and not self.text() and self.isEnabled():
-            option = widgets.StyleOptionFrame()
-            self.initStyleOption(option)
+        if not (self._prompt_text and not self.text() and self.isEnabled()):
+            return None
+        option = widgets.StyleOptionFrame()
+        self.initStyleOption(option)
 
-            left, top, right, bottom = self.getTextMargins()
+        left, top, right, bottom = self.getTextMargins()
 
-            va = self.style().visualAlignment(self.layoutDirection(), self.alignment())
-            rect = (
-                self.style()
-                .subElementRect(widgets.Style.SE_LineEditContents, option, self)
-                .adjusted(2, 0, 0, 0)
-                .adjusted(left, top, -right, -bottom)
-            )
-            fm = gui.FontMetrics(self.font())
-            text = fm.elided_text(self._prompt_text, mode="right", width=rect.width())
-            painter = gui.Painter(self)
-            painter.setPen(self.palette().color(gui.Palette.Disabled, gui.Palette.Text))
+        va = self.style().visualAlignment(self.layoutDirection(), self.alignment())
+        rect = (
+            self.style()
+            .subElementRect(widgets.Style.SE_LineEditContents, option, self)
+            .adjusted(2, 0, 0, 0)
+            .adjusted(left, top, -right, -bottom)
+        )
+        fm = self.font_metrics()
+        text = fm.elided_text(self._prompt_text, mode="right", width=rect.width())
+        with gui.Painter(self) as painter:
+            color = self.get_palette().get_color("text", "disabled")
+            painter.setPen(color)
             painter.drawText(rect, va, text)
 
     def resizeEvent(self, event):
         # Adjusts Clear button position
         super().resizeEvent(event)
-        self.button.resize(core.Size(self._margin, self.height() - 2))
+        self.button.resize(self._margin, self.height() - 2)
         self.button.move(self.width() - self._margin - 3, 1)
 
     def set_button_visible(self, visible: bool):
