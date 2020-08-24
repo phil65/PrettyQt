@@ -1,5 +1,6 @@
+repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v3.1.0 # Use the ref you want to point at
+  rev: v3.2.0 # Use the ref you want to point at
   hooks:
     # - id: trailing-whitespace
     - id: check-ast
@@ -14,7 +15,7 @@
     - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v1.23.0
+  rev: v2.1.0
   hooks:
     - id: commitizen
       stages: [commit-msg]
@@ -35,6 +36,6 @@
     - id: flake8
 
 - repo: https://github.com/pycqa/pydocstyle
-  rev: 5.0.2  # pick a git hash / tag to point to
+  rev: 5.1.0  # pick a git hash / tag to point to
   hooks:
   - id: pydocstyle
