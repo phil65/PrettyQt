@@ -29,6 +29,10 @@ ALIGN_V_CENTER = QtCore.Qt.AlignVCenter
 ALIGN_BASELINE = QtCore.Qt.AlignBaseline
 
 ALIGN_CENTER = QtCore.Qt.AlignCenter
+ALIGN_TOP_LEFT = QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft
+ALIGN_TOP_RIGHT = QtCore.Qt.AlignTop | QtCore.Qt.AlignRight
+ALIGN_BOTTOM_LEFT = QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeft
+ALIGN_BOTTOM_RIGHT = QtCore.Qt.AlignBottom | QtCore.Qt.AlignRight
 
 HORIZONTAL = QtCore.Qt.Horizontal
 VERTICAL = QtCore.Qt.Vertical
