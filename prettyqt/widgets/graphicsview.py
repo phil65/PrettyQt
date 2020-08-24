@@ -56,9 +56,9 @@ ITEM_SELECTION_MODES = bidict(
     intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
 )
 
-SCENE_LAYERS = widgets.graphicsscene.SCENE_LAYERS
+SCENE_LAYERS = widgets.graphicsscene.SCENE_LAYERS  # type: ignore
 
-RENDER_HINTS = gui.painter.RENDER_HINTS
+RENDER_HINTS = gui.painter.RENDER_HINTS  # type: ignore
 
 QtWidgets.QGraphicsView.__bases__ = (widgets.AbstractScrollArea,)
 
