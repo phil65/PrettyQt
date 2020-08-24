@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pathlib
-from typing import Optional
+from typing import Optional, Union
 import logging
 
 from qtpy import QtCore, QtWidgets
@@ -32,9 +32,12 @@ class Application(QtWidgets.QApplication):
         icon = gui.icon.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
-    def load_language_file(self, path: pathlib.Path):
+    def load_language_file(self, file: Union[pathlib.Path, str]):
         translator = core.Translator(self)
-        translator.load(str(path))
+        if file in ["de", "fr"]:
+            path = pathlib.Path(__file__).parent.parent
+            file = path / "localization" / f"qtbase_{file}.ts"
+        translator.load(str(file))
         self.installTranslator(translator)
 
     def set_metadata(
@@ -113,3 +116,8 @@ class Application(QtWidgets.QApplication):
             raise InvalidParamError(icon, STANDARD_PIXMAPS)
         icon = style.standardIcon(STANDARD_PIXMAPS[icon])
         return gui.Icon(icon)
+
+
+if __name__ == "__main__":
+    app = Application([])
+    app.load_language_file("de")
