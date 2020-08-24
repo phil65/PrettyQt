@@ -7,4 +7,5 @@ QtWidgets.QGraphicsSimpleTextItem.__bases__ = (widgets.AbstractGraphicsShapeItem
 
 
 class GraphicsSimpleTextItem(QtWidgets.QGraphicsSimpleTextItem):
-    pass
+    def __repr__(self):
+        return f"{self.__class__.__name__}({repr(self.text())})"
