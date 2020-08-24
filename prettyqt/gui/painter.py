@@ -43,6 +43,16 @@ CLIP_OPERATIONS = bidict(
     intersect=QtCore.Qt.IntersectClip,
 )
 
+RENDER_HINTS = bidict(
+    antialiasing=QtGui.QPainter.Antialiasing,
+    text_antialiasing=QtGui.QPainter.TextAntialiasing,
+    smooth_pixmap_transform=QtGui.QPainter.SmoothPixmapTransform,
+    high_quality_antialiasing=QtGui.QPainter.HighQualityAntialiasing,
+    noncosmetic_default_pen=QtGui.QPainter.NonCosmeticDefaultPen,
+    qt4_compatible_painting=QtGui.QPainter.Qt4CompatiblePainting,
+    lossless_image_rendering=QtGui.QPainter.LosslessImageRendering,
+)
+
 
 class Painter(QtGui.QPainter):
     def __enter__(self):
@@ -120,10 +130,7 @@ class Painter(QtGui.QPainter):
         self.setBrush(brush)
 
     def set_transparent_background(self, transparent: bool = True):
-        if transparent:
-            mode = QtCore.Qt.TransparentMode
-        else:
-            mode = QtCore.Qt.OpaqueMode
+        mode = QtCore.Qt.TransparentMode if transparent else QtCore.Qt.OpaqueMode
         self.setBackgroundMode(mode)
 
     def set_composition_mode(self, mode: str):
