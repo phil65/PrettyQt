@@ -13,10 +13,22 @@ ITEM_SELECTION_MODES = bidict(
     intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
 )
 
+SCENE_LAYERS = bidict(
+    item=QtWidgets.QGraphicsScene.ItemLayer,
+    background=QtWidgets.QGraphicsScene.BackgroundLayer,
+    foreground=QtWidgets.QGraphicsScene.ForegroundLayer,
+    all=QtWidgets.QGraphicsScene.AllLayers,
+)
+
 QtWidgets.QGraphicsScene.__bases__ = (core.Object,)
 
 
 class GraphicsScene(QtWidgets.QGraphicsScene):
+    def serialize_fields(self):
+        return dict(
+            items=self.items(), background_brush=gui.Brush(self.backgroundBrush())
+        )
+
     def __getitem__(self, index: int):
         return self.items()[index]
 
