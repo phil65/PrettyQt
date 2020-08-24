@@ -69,6 +69,13 @@ class MediaRecorder(QtMultimedia.QMediaRecorder):
         return multimedia.AudioEncoderSettings(self.audioSettings())
 
     def get_availability(self) -> str:
+        """Return availability status.
+
+        Possible values: "available", "service_missing", "resource_error", "busy"
+
+        Returns:
+            availability status
+        """
         return AVAILABILITY_STATUS.inv[self.availability()]
 
     def set_output_location(self, path: Union[pathlib.Path, str]):
