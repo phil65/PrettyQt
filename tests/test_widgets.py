@@ -400,6 +400,34 @@ def test_graphicsscene(qtbot):
     scene.add_widget(widgets.Widget())
 
 
+def test_graphicsview(qtbot):
+    view = widgets.GraphicsView()
+    view.set_transformation_anchor("view_center")
+    assert view.get_transformation_anchor() == "view_center"
+    with pytest.raises(InvalidParamError):
+        view.set_transformation_anchor("test")
+    view.set_resize_anchor("view_center")
+    assert view.get_resize_anchor() == "view_center"
+    with pytest.raises(InvalidParamError):
+        view.set_resize_anchor("test")
+    view.set_viewport_update_mode("minimal")
+    assert view.get_viewport_update_mode() == "minimal"
+    with pytest.raises(InvalidParamError):
+        view.set_viewport_update_mode("test")
+    view.set_drag_mode("scroll_hand")
+    assert view.get_drag_mode() == "scroll_hand"
+    with pytest.raises(InvalidParamError):
+        view.set_drag_mode("test")
+    view.set_rubberband_selection_mode("intersects_shape")
+    assert view.get_rubberband_selection_mode() == "intersects_shape"
+    with pytest.raises(InvalidParamError):
+        view.set_rubberband_selection_mode("test")
+    view.set_cache_mode("background")
+    assert view.get_cache_mode() == "background"
+    with pytest.raises(InvalidParamError):
+        view.set_cache_mode("test")
+
+
 def test_gridlayout(qtbot):
     layout = widgets.GridLayout()
     layout2 = widgets.GridLayout()

@@ -39,6 +39,7 @@ from .graphicscolorizeeffect import GraphicsColorizeEffect
 from .graphicsdropshadoweffect import GraphicsDropShadowEffect
 from .graphicsopacityeffect import GraphicsOpacityEffect
 from .graphicsscene import GraphicsScene
+from .graphicsview import GraphicsView
 from .styleoption import StyleOption
 from .styleoptioncomplex import StyleOptionComplex
 from .stylepainter import StylePainter
@@ -176,6 +177,7 @@ __all__ = [
     "GraphicsColorizeEffect",
     "GraphicsOpacityEffect",
     "GraphicsScene",
+    "GraphicsView",
     "Style",
     "StyleOption",
     "StyleOptionComplex",
