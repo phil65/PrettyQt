@@ -26,6 +26,9 @@ from .graphicsobject import GraphicsObject
 from .graphicstextitem import GraphicsTextItem
 from .graphicslayoutitem import GraphicsLayoutItem
 from .graphicslayout import GraphicsLayout
+from .graphicsgridlayout import GraphicsGridLayout
+from .graphicslinearlayout import GraphicsLinearLayout
+from .graphicsanchorlayout import GraphicsAnchorLayout
 from .graphicswidget import GraphicsWidget
 from .graphicsproxywidget import GraphicsProxyWidget
 from .graphicslineitem import GraphicsLineItem
@@ -164,6 +167,9 @@ __all__ = [
     "GraphicsTextItem",
     "GraphicsLayoutItem",
     "GraphicsLayout",
+    "GraphicsGridLayout",
+    "GraphicsAnchorLayout",
+    "GraphicsLinearLayout",
     "GraphicsWidget",
     "GraphicsProxyWidget",
     "GraphicsLineItem",
