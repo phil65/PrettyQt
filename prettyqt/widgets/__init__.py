@@ -19,6 +19,7 @@ from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .desktopwidget import DesktopWidget
 from .graphicsitem import GraphicsItem
+from .graphicsitemgroup import GraphicsItemGroup
 from .abstractgraphicsshapeitem import AbstractGraphicsShapeItem
 from .graphicspixmapitem import GraphicsPixmapItem
 from .graphicsobject import GraphicsObject
@@ -156,6 +157,7 @@ __all__ = [
     "Widget",
     "DesktopWidget",
     "GraphicsItem",
+    "GraphicsItemGroup",
     "AbstractGraphicsShapeItem",
     "GraphicsPixmapItem",
     "GraphicsObject",
