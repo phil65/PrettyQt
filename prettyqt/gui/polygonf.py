@@ -8,6 +8,13 @@ from prettyqt import core, gui
 
 
 class PolygonF(QtGui.QPolygonF):
+    def __repr__(self):
+        points_str = ", ".join([repr(i) for i in self])
+        return f"PolygonF({points_str})"
+
+    def __iter__(self):
+        return iter(self[i] for i in range(self.size()))
+
     def __len__(self) -> int:
         return self.size()
 
@@ -83,4 +90,4 @@ if __name__ == "__main__":
     poly = PolygonF((core.Point(1, 1), core.Point(2, 2)))
     poly2 = PolygonF((core.Point(1, 1), core.Point(2, 2)))
     new = poly | poly2
-    print(type(new))
+    print(repr(new))

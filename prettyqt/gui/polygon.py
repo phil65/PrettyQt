@@ -8,6 +8,13 @@ from prettyqt import core
 
 
 class Polygon(QtGui.QPolygon):
+    def __repr__(self):
+        points_str = ", ".join([repr(i) for i in self])
+        return f"Polygon({points_str})"
+
+    def __iter__(self):
+        return iter(self[i] for i in range(self.size()))
+
     def __len__(self) -> int:
         return self.size()
 
