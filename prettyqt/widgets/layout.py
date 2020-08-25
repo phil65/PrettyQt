@@ -41,6 +41,10 @@ class Layout(QtWidgets.QLayout):
             widget = self.find_child(typ=QtCore.QObject, name=index)
         return widget
 
+    def __delitem__(self, index: int):
+        item = self.itemAt(index)
+        self.removeItem(item)
+
     def __len__(self) -> int:
         return self.count()
 
