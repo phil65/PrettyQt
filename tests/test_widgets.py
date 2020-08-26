@@ -398,6 +398,8 @@ def test_graphicsscene(qtbot):
     scene.add_text("test")
     scene.add_simple_text("test")
     scene.add_widget(widgets.Widget())
+    item = widgets.GraphicsRectItem(0, 0, 10, 10)
+    scene.add_item_group(item)
 
 
 def test_graphicsview(qtbot):

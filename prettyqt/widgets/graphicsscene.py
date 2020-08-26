@@ -176,6 +176,14 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
             raise InvalidParamError(mode, ITEM_SELECTION_MODES)
         return self.collidingItems(item, ITEM_SELECTION_MODES[mode])
 
+    def add_item_group(
+        self, *items: QtWidgets.QGraphicsItem
+    ) -> widgets.GraphicsItemGroup:
+        group = widgets.GraphicsItemGroup()
+        for item in items:
+            group.addToGroup(item)
+        return group
+
 
 if __name__ == "__main__":
     app = widgets.app()
