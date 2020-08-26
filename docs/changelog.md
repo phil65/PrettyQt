@@ -1,3 +1,24 @@
+## v0.120.0 (2020-08-27)
+
+### Feat
+
+- **GraphicsWidget**: add set_layout method
+- **GraphicsLayout**: add some magic methods
+- **GraphicsScene**: add add_item_group method
+- **widgets**: add GraphicsAnchorLayout / GraphicsGridLayout / GraphicsLinearLayout
+- **widgets**: add GraphicsItemGroup
+- **Layout**: add __delitem__ method
+- **Polygon/PolygonF**: add __repr__ and __iter__ methods
+- **PainterPath**: some additional methods
+- **GraphicsItems**: add repr methods
+- **Line/LineF**: add __repr__ and __iter__
+- **Application**: allow loading included language files via load_language_file
+- **widgets**: add GraphicsView class
+
+### Refactor
+
+- PromptLineEdit rework
+
 ## v0.119.1 (2020-08-24)
 
 ### Fix
