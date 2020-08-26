@@ -32,6 +32,9 @@ MODALITIES = bidict(
 
 
 class GraphicsItem(QtWidgets.QGraphicsItem):
+    def __repr__(self):
+        return f"{self.__class__.__name__}()"
+
     def __contains__(self, value: QtCore.QPointF) -> bool:
         return self.contains(value)
 
