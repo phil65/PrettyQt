@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/multimedia.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.8" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.9" name="generator"/>
 <title>multimedia - PrettyQt</title>
-<link href="../assets/stylesheets/main.01afc2df.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.36ee6aaa.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -225,6 +225,29 @@
 </nav>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.multimedia.mediarecorder">
+    mediarecorder
+  </a>
+<nav aria-label="mediarecorder" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.multimedia.mediarecorder.MediaRecorder">
+    MediaRecorder
+  </a>
+<nav aria-label="MediaRecorder" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.multimedia.mediarecorder.MediaRecorder.get_availability">
+    get_availability()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.multimedia.videoencodersettings">
     videoencodersettings
   </a>
@@ -372,6 +395,29 @@
 <li class="md-nav__item">
 <a class="md-nav__link" href="#prettyqt.multimedia.mediaplaylist.MediaPlaylist.set_playback_mode">
     set_playback_mode()
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.multimedia.mediarecorder">
+    mediarecorder
+  </a>
+<nav aria-label="mediarecorder" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.multimedia.mediarecorder.MediaRecorder">
+    MediaRecorder
+  </a>
+<nav aria-label="MediaRecorder" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prettyqt.multimedia.mediarecorder.MediaRecorder.get_availability">
+    get_availability()
   </a>
 </li>
 </ul>
@@ -663,6 +709,66 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 </div>
 </div>
 <div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.multimedia.mediarecorder">
+<code>mediarecorder</code>
+</h2>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.multimedia.mediarecorder.MediaRecorder">
+<code>MediaRecorder</code>
+</h3>
+<div class="doc doc-contents">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.multimedia.mediarecorder.MediaRecorder.get_availability">
+<code class="highlight language-python">
+get_availability<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
+</h4>
+<div class="doc doc-contents">
+<p>Return availability status.</p>
+<p>Possible values: "available", "service_missing", "resource_error", "busy"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>availability status</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+<summary>Source code in <code>prettyqt/multimedia/mediarecorder.py</code></summary>
+<div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return availability status.</span>
+
+<span class="sd">    Possible values: "available", "service_missing", "resource_error", "busy"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        availability status</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">AVAILABILITY_STATUS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">availability</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.multimedia.videoencodersettings">
 <code>videoencodersettings</code>
 </h2>
@@ -746,7 +852,7 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.fae956e7.min.js"
+            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>

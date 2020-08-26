@@ -7,9 +7,9 @@
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
 <link href="https://phil65.github.io/PrettyQt/api/custom_widgets.html" rel="canonical"/>
 <link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.8" name="generator"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.9" name="generator"/>
 <title>custom_widgets - PrettyQt</title>
-<link href="../assets/stylesheets/main.01afc2df.min.css" rel="stylesheet"/>
+<link href="../assets/stylesheets/main.36ee6aaa.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
 <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
@@ -1734,23 +1734,25 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_prompt_text</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEnabled</span><span class="p">():</span>
-        <span class="n">option</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionFrame</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">initStyleOption</span><span class="p">(</span><span class="n">option</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prompt_text</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEnabled</span><span class="p">()):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">option</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionFrame</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">initStyleOption</span><span class="p">(</span><span class="n">option</span><span class="p">)</span>
 
-        <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getTextMargins</span><span class="p">()</span>
+    <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getTextMargins</span><span class="p">()</span>
 
-        <span class="n">va</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">visualAlignment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">())</span>
-        <span class="n">rect</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span>
-            <span class="o">.</span><span class="n">subElementRect</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">SE_LineEditContents</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-            <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="o">-</span><span class="n">right</span><span class="p">,</span> <span class="o">-</span><span class="n">bottom</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="n">fm</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">FontMetrics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
-        <span class="n">text</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">elided_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prompt_text</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
-        <span class="n">painter</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Palette</span><span class="o">.</span><span class="n">Disabled</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">Palette</span><span class="o">.</span><span class="n">Text</span><span class="p">))</span>
+    <span class="n">va</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">visualAlignment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">())</span>
+    <span class="n">rect</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span>
+        <span class="o">.</span><span class="n">subElementRect</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">SE_LineEditContents</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="o">-</span><span class="n">right</span><span class="p">,</span> <span class="o">-</span><span class="n">bottom</span><span class="p">)</span>
+    <span class="p">)</span>
+    <span class="n">fm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">font_metrics</span><span class="p">()</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">elided_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prompt_text</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
+    <span class="k">with</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">as</span> <span class="n">painter</span><span class="p">:</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span> <span class="s2">"disabled"</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -1770,7 +1772,7 @@ resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,
 <pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="c1"># Adjusts Clear button position</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -2591,7 +2593,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.fae956e7.min.js"
+            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
