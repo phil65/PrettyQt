@@ -386,11 +386,28 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         self.setCursor(CURSOR_SHAPES[cursor])
 
     def set_focus_policy(self, policy: str) -> None:
+        """Set the way the widget accepts keyboard focus.
+
+        Accepted values: "tab", "click", "strong", "wheel", "none"
+
+        Args:
+            policy (str): Focus policy
+
+        Raises:
+            InvalidParamError: Description
+        """
         if policy not in FOCUS_POLICIES:
             raise InvalidParamError(policy, FOCUS_POLICIES)
         self.setFocusPolicy(FOCUS_POLICIES[policy])
 
     def get_focus_policy(self) -> str:
+        """Return waay the widget accepts keyboard focus.
+
+        Possible values:  "tab", "click", "strong", "wheel", "none"
+
+        Returns:
+            str: Focus policy
+        """
         return FOCUS_POLICIES.inv[self.focusPolicy()]
 
     def set_font_size(self, size: int) -> None:
