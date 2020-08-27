@@ -400,6 +400,10 @@ def test_graphicsscene(qtbot):
     scene.add_widget(widgets.Widget())
     item = widgets.GraphicsRectItem(0, 0, 10, 10)
     scene.add_item_group(item)
+    scene.set_item_index_method("none")
+    assert scene.get_item_index_method() == "none"
+    with pytest.raises(InvalidParamError):
+        scene.set_item_index_method("test")
 
 
 def test_graphicsview(qtbot):

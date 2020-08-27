@@ -20,13 +20,27 @@ SCENE_LAYERS = bidict(
     all=QtWidgets.QGraphicsScene.AllLayers,
 )
 
+ITEM_INDEX_METHODS = bidict(
+    bsp_tree=QtWidgets.QGraphicsScene.BspTreeIndex, none=QtWidgets.QGraphicsScene.NoIndex
+)
+
 QtWidgets.QGraphicsScene.__bases__ = (core.Object,)
 
 
 class GraphicsScene(QtWidgets.QGraphicsScene):
     def serialize_fields(self):
         return dict(
-            items=self.items(), background_brush=gui.Brush(self.backgroundBrush())
+            items=self.items(),
+            background_brush=gui.Brush(self.backgroundBrush()),
+            foreground_brush=gui.Brush(self.foregroundBrush()),
+            item_index_method=self.get_item_index_method(),
+            minimum_render_size=self.minimumRenderSize(),
+            palette=gui.Palette(self.palette()),
+            bsp_tree_depth=self.bspTreeDepth(),
+            focus_on_touch=self.focusOnTouch(),
+            sticky_focus=self.stickyFocus(),
+            scene_rect=core.Rect(self.sceneRect()),
+            font=gui.Font(self.font()),
         )
 
     def __getitem__(self, index: int):
@@ -183,6 +197,31 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
         for item in items:
             group.addToGroup(item)
         return group
+
+    def set_item_index_method(self, method: str):
+        """Set item index method.
+
+        possible values are "bsp_tree", "none"
+
+        Args:
+            method: item index method to use
+
+        Raises:
+            InvalidParamError: invalid item index method
+        """
+        if method not in ITEM_INDEX_METHODS:
+            raise InvalidParamError(method, ITEM_INDEX_METHODS)
+        self.setItemIndexMethod(ITEM_INDEX_METHODS[method])
+
+    def get_item_index_method(self) -> str:
+        """Return item index method.
+
+        possible values are "bsp_tree", "none"
+
+        Returns:
+            item index method
+        """
+        return ITEM_INDEX_METHODS.inv[self.itemIndexMethod()]
 
 
 if __name__ == "__main__":
