@@ -14,7 +14,7 @@ class GraphicsObject(QtWidgets.QGraphicsObject):
             enabled=self.isEnabled(),
             opacity=self.opacity(),
             pos=core.PointF(self.pos()),
-            z=self.z(),
+            # z=self.z(),
             rotation=self.rotation(),
             scale=self.scale(),
             transform_origin_point=core.PointF(self.transformOriginPoint()),

@@ -39,7 +39,7 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
             bsp_tree_depth=self.bspTreeDepth(),
             focus_on_touch=self.focusOnTouch(),
             sticky_focus=self.stickyFocus(),
-            scene_rect=core.Rect(self.sceneRect()),
+            scene_rect=core.RectF(self.sceneRect()),
             font=gui.Font(self.font()),
         )
 
