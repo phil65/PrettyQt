@@ -67,14 +67,20 @@ class Painter(QtGui.QPainter):
         yield self
         self.end()
 
-    def draw_image(self, point, frame_buffer):
+    def draw_image(
+        self,
+        target: Union[QtCore.QPoint, QtCore.QPointF, QtCore.QRect, QtCore.QRectF],
+        frame_buffer: QtGui.QImage,
+    ):
         self.set_composition_mode("source_atop")
-        self.drawImage(point, frame_buffer)
+        self.drawImage(target, frame_buffer)
 
     def use_antialiasing(self):
         self.setRenderHint(self.Antialiasing, True)
 
-    def fill_rect(self, rect, color, pattern="solid"):
+    def fill_rect(
+        self, rect: Union[QtCore.QRectF, QtCore.QRect], color, pattern: str = "solid"
+    ):
         if pattern not in PATTERNS:
             raise InvalidParamError(pattern, PATTERNS)
         if isinstance(rect, tuple):
@@ -158,9 +164,6 @@ class Painter(QtGui.QPainter):
             composition mode
         """
         return COMP_MODES.inv[self.compositionMode()]
-
-    def draw_text(self, x, y, text):
-        self.drawText(x, y, text)
 
     def set_clip_path(self, path: QtGui.QPainterPath, operation: str = "replace"):
         if operation not in CLIP_OPERATIONS:
