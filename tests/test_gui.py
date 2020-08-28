@@ -50,6 +50,10 @@ def test_cursor():
     with pytest.raises(InvalidParamError):
         cursor.set_shape("test")
     assert cursor.get_shape() == "arrow"
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(cursor, jar)
+    with open("data.pkl", "rb") as jar:
+        cursor = pickle.load(jar)
 
 
 def test_desktopservices():
@@ -84,12 +88,16 @@ def test_fontdatabase():
     p = pathlib.Path()
     db.add_fonts_from_folder(p)
     db.get_system_font("smallest_readable")
+    with pytest.raises(InvalidParamError):
+        db.get_system_font("test")
 
 
 def test_fontmetrics():
     font = gui.Font("Consolas")
     fontmetrics = gui.FontMetrics(font)
     val = fontmetrics.elided_text("This is a test", mode="right", width=40)
+    with pytest.raises(InvalidParamError):
+        val = fontmetrics.elided_text("This is a test", mode="test", width=40)
     assert len(val) < 5
 
 
@@ -104,6 +112,7 @@ def test_gradient():
     with pytest.raises(InvalidParamError):
         grad.set_spread("test")
     assert grad.get_type() == "none"
+    assert len(grad.get_stops()) == 2
 
 
 def test_guiapplication():
@@ -118,6 +127,14 @@ def test_icon():
         pickle.dump(icon, jar)
     with open("data.pkl", "rb") as jar:
         icon = pickle.load(jar)
+
+
+def test_image():
+    img = gui.Image()
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(img, jar)
+    with open("data.pkl", "rb") as jar:
+        img = pickle.load(jar)
 
 
 def test_intvalidator():
@@ -135,6 +152,10 @@ def test_keysequence():
     assert gui.KeySequence.to_shortcut_str(0x41, QtCore.Qt.ShiftModifier) == "Shift+A"
     seq = gui.KeySequence("Ctrl+C")
     assert seq.get_matches("Ctrl+C") == "exact"
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(seq, jar)
+    with open("data.pkl", "rb") as jar:
+        seq = pickle.load(jar)
 
 
 def test_standarditem():
@@ -183,6 +204,8 @@ def test_textdocument():
     assert len(doc) == 2
     doc.set_text("test")
     doc.clear_stacks("undo_and_redo")
+    with pytest.raises(InvalidParamError):
+        doc.clear_stacks("test")
     # doc.add_resource("html")
     doc.set_default_cursor_move_style("logical")
     assert doc.get_default_cursor_move_style() == "logical"
@@ -202,12 +225,18 @@ def test_painter():
     painter.set_brush(gui.Color("red"))
     painter.fill_rect((0, 1, 3, 5), "transparent")
     painter.fill_rect(core.Rect(), "transparent")
+    with pytest.raises(InvalidParamError):
+        painter.fill_rect(core.Rect(), "transparent", "test")
     with pytest.raises(ValueError):
         painter.fill_rect(core.Rect(), "testus")
     painter.set_color("black")
     painter.set_composition_mode("source_atop")
+    painter.get_composition_mode() == "source_atop"
     with pytest.raises(InvalidParamError):
         painter.set_composition_mode("test")
+    painter.set_clip_path(gui.PainterPath(), "replace")
+    with pytest.raises(InvalidParamError):
+        painter.set_clip_path(gui.PainterPath(), "test")
     with pytest.raises(InvalidParamError):
         painter.set_pen("test")
     # assert painter.get_composition_mode() == "source_atop"
@@ -309,6 +338,11 @@ def test_polygon():
     with open("data.pkl", "rb") as jar:
         poly = pickle.load(jar)
     poly.add_points((0, 1), core.Point(2, 2))
+    assert bool(poly) is True
+    assert core.Point(1.5, 0.5) in poly
+    p = core.Point(5, 5)
+    poly[5] = p
+    assert poly[5] == p
 
 
 def test_regexpvalidator():
@@ -349,6 +383,13 @@ def test_textcharformat():
     fmt = gui.TextCharFormat(bold=True)
     assert fmt.get_font_weight() == "bold"
     fmt.select_full_width()
+    fmt.set_underline_style("dash")
+    with pytest.raises(InvalidParamError):
+        fmt.set_underline_style("test")
+    assert fmt.get_underline_style() == "dash"
+    fmt.set_font_style_hint("serif")
+    with pytest.raises(InvalidParamError):
+        fmt.set_font_style_hint("test")
 
 
 def test_validator():
