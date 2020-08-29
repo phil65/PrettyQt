@@ -67,3 +67,8 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
             str: Focus policy
         """
         return FOCUS_POLICIES.inv[self.focusPolicy()]
+
+
+if __name__ == "__main__":
+    widget = GraphicsWidget()
+    widget.set_layout("vertical")
