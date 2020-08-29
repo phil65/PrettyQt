@@ -18,22 +18,22 @@ class LineF(QtCore.QLineF):
         yield self.get_p1()
         yield self.get_p2()
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int) -> core.PointF:
         if index == 0:
             return self.get_p1()
         elif index == 1:
             return self.get_p2()
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index: int, value: core.PointF):
         if index == 0:
             self.setP1(value)
         elif index == 1:
             self.setP2(value)
 
-    def get_p1(self):
+    def get_p1(self) -> core.PointF:
         return core.PointF(self.p1())
 
-    def get_p2(self):
+    def get_p2(self) -> core.PointF:
         return core.PointF(self.p2())
 
 

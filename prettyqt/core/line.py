@@ -21,22 +21,22 @@ class Line(QtCore.QLine):
         yield self.get_p1()
         yield self.get_p2()
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int) -> core.Point:
         if index == 0:
             return self.get_p1()
         elif index == 1:
             return self.get_p2()
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index: int, value: QtCore.QPoint):
         if index == 0:
             self.setP1(value)
         elif index == 1:
             self.setP2(value)
 
-    def get_p1(self):
+    def get_p1(self) -> core.Point:
         return core.Point(self.p1())
 
-    def get_p2(self):
+    def get_p2(self) -> core.Point:
         return core.Point(self.p2())
 
 
