@@ -140,21 +140,27 @@ def test_file():
 def test_line():
     line = core.Line()
     p1 = core.Point(0, 0)
-    p2 = core.Point(1, 1)
+    p2 = core.Point(1, 0)
     line[0] = p1
     line[1] = p2
     assert line[0] == p1
     assert line[1] == p2
+    line2 = core.Line(1, 0, 0, 0)
+    assert line2 == reversed(line)
+    assert abs(line) == 1
 
 
 def test_linef():
     line = core.LineF()
     p1 = core.PointF(0, 0)
-    p2 = core.PointF(1, 1)
+    p2 = core.PointF(1, 0)
     line[0] = p1
     line[1] = p2
     assert line[0] == p1
     assert line[1] == p2
+    line2 = core.Line(1, 0, 0, 0)
+    assert line2 == reversed(line)
+    assert abs(line) == 1
 
 
 def test_mimedata():

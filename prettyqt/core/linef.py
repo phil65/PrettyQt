@@ -7,6 +7,13 @@ class LineF(QtCore.QLineF):
     def __repr__(self):
         return f"LineF({repr(self.get_p1())}, {repr(self.get_p1())})"
 
+    def __reversed__(self):
+        self[0], self[1] = self[1], self[0]
+        return self
+
+    def __abs__(self) -> float:
+        return self.length()
+
     def __iter__(self):
         yield self.get_p1()
         yield self.get_p2()
