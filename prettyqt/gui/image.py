@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+from typing import Tuple
 
 from qtpy import QtGui
 
@@ -15,6 +15,12 @@ class Image(QtGui.QImage):
     def __setstate__(self, ba):
         self.__init__()
         core.DataStream.write_bytearray(ba, self)
+
+    def __setitem__(self, index: Tuple[int, int], value):
+        self.setPixel(index[0], index[1], value)
+
+    def __getitem__(self, index: Tuple[int, int]):
+        return self.pixel(index[0], index[1])
 
 
 if __name__ == "__main__":
