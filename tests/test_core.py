@@ -158,7 +158,7 @@ def test_linef():
     line[1] = p2
     assert line[0] == p1
     assert line[1] == p2
-    line2 = core.Line(1, 0, 0, 0)
+    line2 = core.LineF(1, 0, 0, 0)
     assert line2 == reversed(line)
     assert abs(line) == 1
 
