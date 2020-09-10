@@ -1,3 +1,15 @@
+## v0.121.0 (2020-09-10)
+
+### Feat
+
+- **Image**: add __setitem__ / __getitem__ methods
+- **Line/LineF**: add __reversed__ and __abs__ methods
+- **GraphicsScene**: add get/set_item_index_method method
+
+### Fix
+
+- serialization fixes
+
 ## v0.120.0 (2020-08-27)
 
 ### Feat
