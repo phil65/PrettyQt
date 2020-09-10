@@ -54,16 +54,20 @@ class Label(QtWidgets.QLabel):
         return f"Label({self.text()!r})"
 
     def serialize_fields(self):
+        pixmap = gui.Pixmap(self.pixmap())
         return dict(
             text=self.text(),
             scaled_contents=self.hasScaledContents(),
             indent=self.indent(),
             margin=self.margin(),
             text_format=self.get_text_format(),
-            # pixmap=self.pixmap(),
+            pixmap=pixmap if pixmap else None,
             open_external_links=self.openExternalLinks(),
+            has_selected_text=self.hasSelectedText(),
+            selected_text=self.selectedText(),
             alignment=int(self.alignment()),
             word_wrap=self.wordWrap(),
+            text_interaction_flags=self.get_text_interaction(),
         )
 
     def __setstate__(self, state):
