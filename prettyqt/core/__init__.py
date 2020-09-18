@@ -25,6 +25,7 @@ from .variantanimation import VariantAnimation
 from .propertyanimation import PropertyAnimation
 from .versionnumber import VersionNumber
 from .datastream import DataStream
+from .bytearray import ByteArray
 from .url import Url
 from .coreapplication import CoreApplication
 from .iodevice import IODevice
@@ -74,6 +75,7 @@ __all__ = [
     "Object",
     "DataStream",
     "VersionNumber",
+    "ByteArray",
     "Url",
     "CoreApplication",
     "IODevice",
