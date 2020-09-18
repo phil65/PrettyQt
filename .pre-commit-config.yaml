@@ -15,12 +15,12 @@ repos:
     - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v2.1.0
+  rev: v2.3.1
   hooks:
     - id: commitizen
       stages: [commit-msg]
 - repo: https://github.com/ambv/black
-  rev: stable
+  rev: 20.8b1
   hooks:
     - id: black
       language_version: python3.7
@@ -36,6 +36,6 @@ repos:
     - id: flake8
 
 - repo: https://github.com/pycqa/pydocstyle
-  rev: 5.1.0  # pick a git hash / tag to point to
+  rev: 5.1.1  # pick a git hash / tag to point to
   hooks:
   - id: pydocstyle
