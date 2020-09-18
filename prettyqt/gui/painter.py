@@ -53,6 +53,8 @@ RENDER_HINTS = bidict(
     lossless_image_rendering=QtGui.QPainter.LosslessImageRendering,
 )
 
+FILL_RULES = bidict(odd_even=QtCore.Qt.OddEvenFill, winding=QtCore.Qt.WindingFill)
+
 
 class Painter(QtGui.QPainter):
     def __enter__(self):
@@ -74,6 +76,11 @@ class Painter(QtGui.QPainter):
     ):
         self.set_composition_mode("source_atop")
         self.drawImage(target, frame_buffer)
+
+    def draw_polygon(self, *args, fill_rule: str = "odd_even"):
+        if fill_rule not in FILL_RULES:
+            raise InvalidParamError(fill_rule, FILL_RULES)
+        self.drawPolygon(*args, fillRule=FILL_RULES[fill_rule])
 
     def use_antialiasing(self):
         self.setRenderHint(self.Antialiasing, True)
