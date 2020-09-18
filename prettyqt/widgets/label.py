@@ -6,7 +6,7 @@ from typing import List, Optional, Union
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, colors, InvalidParamError, helpers
 
 
@@ -38,6 +38,9 @@ TEXT_INTERACTION = bidict(
 TEXT_FORMATS = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
 )
+
+if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+    TEXT_FORMATS["markdown"] = QtCore.Qt.MarkdownText
 
 WEIGHTS = gui.font.WEIGHTS  # type: ignore
 
@@ -93,6 +96,7 @@ class Label(QtWidgets.QLabel):
     def set_alignment(
         self, horizontal: Optional[str] = None, vertical: Optional[str] = None
     ):
+        """Set the alignment of the label's contents."""
         if horizontal is None and vertical is not None:
             flag = V_ALIGNMENTS.get(vertical)
         elif vertical is None and horizontal is not None:
@@ -105,13 +109,14 @@ class Label(QtWidgets.QLabel):
         return self
 
     def set_indent(self, indent: int) -> "Label":
+        """Set the label's text indent in pixels."""
         self.setIndent(indent)
         return self
 
     def set_text_format(self, text_format: str) -> "Label":
         """Set the text format.
 
-        Allowed values are "rich", "plain", "auto"
+        Allowed values are "rich", "plain", "auto", "markdown"
 
         Args:
             text_format: text format to use
@@ -127,7 +132,7 @@ class Label(QtWidgets.QLabel):
     def get_text_format(self) -> str:
         """Return current text format.
 
-        Possible values: "rich", "plain", "auto"
+        Possible values: "rich", "plain", "auto", "markdown"
 
         Returns:
             text format
@@ -163,6 +168,7 @@ class Label(QtWidgets.QLabel):
         return [k for k, v in TEXT_INTERACTION.items() if v & self.textInteractionFlags()]
 
     def set_text(self, text: str) -> "Label":
+        """Set the label's text."""
         self.setText(text)
         return self
 
