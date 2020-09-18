@@ -41,7 +41,7 @@ class ModelTest(QtCore.QObject):
 
         Whenever anything happens check everything.
         """
-        QtCore.QObject.__init__(self, parent)
+        super().__init__(parent)
         self._model = _model
         self.model = _model
         self.insert = []
