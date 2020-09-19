@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import sys
+
 from qtpy import QtCore
 import qtpy
 
@@ -50,6 +52,10 @@ class VersionNumber(QtCore.QVersionNumber):
     @classmethod
     def get_qt_version(cls) -> "VersionNumber":
         return cls(*[int(i) for i in qtpy.QT_VERSION.split(".")])
+
+    @classmethod
+    def get_python_version(cls) -> "VersionNumber":
+        return cls(*sys.version_info[:3])
 
     def major(self) -> int:
         """An integer representing the major version."""

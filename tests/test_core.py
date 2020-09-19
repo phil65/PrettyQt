@@ -415,3 +415,5 @@ def test_versionnumber():
     assert c > str(b)
     assert b >= str(a)
     assert repr(a) == "VersionNumber(1, 2, 3)"
+    assert core.VersionNumber.get_qt_version() > (5, 12, 0)
+    assert core.VersionNumber.get_python_version() > (3, 6, 0)
