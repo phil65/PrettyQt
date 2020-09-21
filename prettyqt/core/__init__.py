@@ -63,6 +63,7 @@ from .diriterator import DirIterator
 from .abstractitemmodel import AbstractItemModel
 from .abstractproxymodel import AbstractProxyModel
 from .abstractlistmodel import AbstractListModel
+from .stringlistmodel import StringListModel
 from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel
 from .standardpaths import StandardPaths
@@ -119,6 +120,7 @@ __all__ = [
     "AbstractItemModel",
     "AbstractProxyModel",
     "AbstractListModel",
+    "StringListModel",
     "SortFilterProxyModel",
     "ConcatenateTablesProxyModel",
     "TransposeProxyModel",
