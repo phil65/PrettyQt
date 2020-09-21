@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from deprecated import deprecated
 from qtpy import QtCore, QtWidgets, QtGui
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts, core, gui, widgets
-from prettyqt.utils import helpers
 
 ALIGNMENTS = dict(
     left=QtCore.Qt.AlignLeft,
@@ -89,7 +89,7 @@ class ChartView(QtCharts.QChartView):
 
         super().mouseMoveEvent(event)
 
-    @helpers.deprecated
+    @deprecated(reason="This method is deprecated, use save_as_image instead.")
     def save(self):
         self.save_as_image()
 

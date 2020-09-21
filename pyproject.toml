@@ -32,6 +32,7 @@ QScintilla = {version = "^2.11.5", optional=true}
 darkdetect = {version = "^0", markers = "sys_platform == 'darwin'"}
 pygments = "^2.6.1"
 qstylizer = "^0.1.9"
+deprecated = "^1.2.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.0.0"
