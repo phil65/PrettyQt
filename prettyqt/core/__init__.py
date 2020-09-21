@@ -21,6 +21,7 @@ from prettyqt import core
 from .object import Object
 from .abstractanimation import AbstractAnimation
 from .animationgroup import AnimationGroup
+from .parallelanimationgroup import ParallelAnimationGroup
 from .variantanimation import VariantAnimation
 from .propertyanimation import PropertyAnimation
 from .versionnumber import VersionNumber
@@ -95,6 +96,7 @@ __all__ = [
     "EasingCurve",
     "AbstractAnimation",
     "AnimationGroup",
+    "ParallelAnimationGroup",
     "VariantAnimation",
     "PropertyAnimation",
     "Timer",
