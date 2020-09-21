@@ -138,6 +138,7 @@ from .undogroup import UndoGroup
 from .undoview import UndoView
 
 from .datawidgetmapper import DataWidgetMapper
+from .sizegrip import SizeGrip
 
 
 def app():
@@ -276,4 +277,5 @@ __all__ = [
     "UndoGroup",
     "UndoView",
     "DataWidgetMapper",
+    "SizeGrip",
 ]
