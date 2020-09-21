@@ -137,6 +137,8 @@ from .undostack import UndoStack
 from .undogroup import UndoGroup
 from .undoview import UndoView
 
+from .datawidgetmapper import DataWidgetMapper
+
 
 def app():
     if Application.instance() is not None:
@@ -273,4 +275,5 @@ __all__ = [
     "UndoStack",
     "UndoGroup",
     "UndoView",
+    "DataWidgetMapper",
 ]
