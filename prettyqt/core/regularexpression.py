@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Callable, Iterator, Optional, Union
+from typing import Callable, Iterator, Optional, Union, Dict, Tuple
 
 from qtpy import QtCore
 
@@ -71,7 +71,7 @@ class RegularExpression(QtCore.QRegularExpression):
         offset: int = 0,
         match_type: str = "normal",
         anchored: bool = False,
-    ):
+    ) -> core.RegularExpressionMatch:
         if isinstance(match_type, str):
             match_type = MATCH_TYPES[match_type]
         if isinstance(anchored, bool):
@@ -81,7 +81,9 @@ class RegularExpression(QtCore.QRegularExpression):
         match = super().match(text, offset, match_type, options)
         return core.RegularExpressionMatch(match)
 
-    def fullmatch(self, string: str, pos: int = 0, endpos: Optional[int] = None):
+    def fullmatch(
+        self, string: str, pos: int = 0, endpos: Optional[int] = None
+    ) -> Optional[core.RegularExpressionMatch]:
         if endpos:
             string = string[:endpos]
         match = super().match(string, pos)
@@ -103,7 +105,9 @@ class RegularExpression(QtCore.QRegularExpression):
         matches = [m for m in self.globalMatch(string[:endpos], offset=pos)]
         return [m.groups() if len(m.groups()) > 1 else m.group(0) for m in matches]
 
-    def subn(self, repl: Union[str, Callable], string: str, count: int = 0):
+    def subn(
+        self, repl: Union[str, Callable], string: str, count: int = 0
+    ) -> Tuple[str, int]:
         result = string
         matches = self.global_match(string)
         matches = list(matches)
@@ -114,12 +118,12 @@ class RegularExpression(QtCore.QRegularExpression):
             to_replace = repl if isinstance(repl, str) else repl(m)
             for j in range(self.groups):
                 to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
-            for j in self.groupindex.keys():
-                to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
+            for k in self.groupindex.keys():
+                to_replace = to_replace.replace(fr"\g<{k}>", m.group(k))
             result = result[: m.start()] + to_replace + result[m.end() :]
         return (result, min(len(matches), count))
 
-    def sub(self, repl: Union[str, Callable], string: str, count: int = 0):
+    def sub(self, repl: Union[str, Callable], string: str, count: int = 0) -> str:
         res = self.subn(repl, string, count)
         return res[0]
 
@@ -161,11 +165,11 @@ class RegularExpression(QtCore.QRegularExpression):
         # return result
 
     @property
-    def groups(self):
+    def groups(self) -> int:
         return self.captureCount()
 
     @property
-    def groupindex(self):
+    def groupindex(self) -> Dict[str, int]:
         return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1)}
 
     @property
