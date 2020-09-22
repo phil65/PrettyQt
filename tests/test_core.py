@@ -233,6 +233,7 @@ def test_propertyanimation():
     animation.setDuration(100)
     assert len(animation) == 100
     animation.apply_to(button, "geometry")
+    assert animation.get_property_name() == "geometry"
     with pytest.raises(InvalidParamError):
         animation.start_animation("test")
     animation.start_animation("keep")
