@@ -283,6 +283,12 @@ def test_regularexpression():
     with open("data.pkl", "rb") as jar:
         regex = pickle.load(jar)
     repr(regex)
+    match = regex.match("123")
+    assert match.span() == (0, 1)
+    for match in regex.finditer("123"):
+        pass
+    matches = regex.findall("123")
+    assert len(matches) == 3
 
 
 def test_runnable():
