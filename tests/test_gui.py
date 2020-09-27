@@ -92,6 +92,12 @@ def test_fontdatabase():
         db.get_system_font("test")
 
 
+def test_fontinfo():
+    font = gui.Font("Consolas")
+    fontinfo = gui.FontInfo(font)
+    assert fontinfo.get_style_hint() == "any"
+
+
 def test_fontmetrics():
     font = gui.Font("Consolas")
     fontmetrics = gui.FontMetrics(font)

@@ -38,6 +38,7 @@ from .radialgradient import RadialGradient
 from .conicalgradient import ConicalGradient
 from .font import Font
 from .fontmetrics import FontMetrics
+from .fontinfo import FontInfo
 from .fontdatabase import FontDatabase
 from .region import Region
 from .paintdevice import PaintDevice
@@ -87,6 +88,7 @@ __all__ = [
     "Color",
     "Font",
     "FontMetrics",
+    "FontInfo",
     "FontDatabase",
     "Region",
     "PaintDevice",
