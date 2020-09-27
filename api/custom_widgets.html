@@ -1,1069 +1,1640 @@
 
-<!DOCTYPE html>
-
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://phil65.github.io/PrettyQt/api/custom_widgets.html" rel="canonical"/>
-<link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.12" name="generator"/>
-<title>custom_widgets - PrettyQt</title>
-<link href="../assets/stylesheets/main.4dd2dd8d.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-</head>
-<body dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#custom_widgets-module">
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/custom_widgets.html">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.0">
+    
+    
+      
+        <title>custom_widgets - PrettyQt</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1d877a71.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.17bd0b03.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#custom_widgets-module" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
-<header class="md-header" data-md-component="header">
-<nav aria-label="Header" class="md-header-nav md-grid">
-<a aria-label="PrettyQt" class="md-header-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
-<label class="md-header-nav__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
-</label>
-<div class="md-header-nav__title" data-md-component="header-title">
-<div class="md-header-nav__ellipsis">
-<span class="md-header-nav__topic md-ellipsis">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-header-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             PrettyQt
           </span>
-<span class="md-header-nav__topic md-ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             
               custom_widgets
             
           </span>
-</div>
-</div>
-<label class="md-header-nav__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-</label>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
-</label>
-<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
-</button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</nav>
+    
+    
+  </nav>
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="PrettyQt" class="md-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
     PrettyQt
   </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../index.html" title="Home">
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
       Home
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-2">
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
       API
       <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-label="API" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="nav-2">
-<span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
         API
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="core.html" title="core">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="core.html" title="core" class="md-nav__link">
       core
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="gui.html" title="gui">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="gui.html" title="gui" class="md-nav__link">
       gui
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="widgets.html" title="widgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="widgets.html" title="widgets" class="md-nav__link">
       widgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="charts.html" title="charts">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="charts.html" title="charts" class="md-nav__link">
       charts
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="multimedia.html" title="multimedia">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimedia.html" title="multimedia" class="md-nav__link">
       multimedia
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="multimediawidgets.html" title="multimediawidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimediawidgets.html" title="multimediawidgets" class="md-nav__link">
       multimediawidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="webenginewidgets.html" title="webenginewidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="webenginewidgets.html" title="webenginewidgets" class="md-nav__link">
       webenginewidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="syntaxhighlighters.html" title="syntaxhighlighters">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="syntaxhighlighters.html" title="syntaxhighlighters" class="md-nav__link">
       syntaxhighlighters
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_models.html" title="custom_models">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_models.html" title="custom_models" class="md-nav__link">
       custom_models
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
         custom_widgets
         <span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="custom_widgets.html" title="custom_widgets">
+      </label>
+    
+    <a href="custom_widgets.html" title="custom_widgets" class="md-nav__link md-nav__link--active">
       custom_widgets
     </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets" class="md-nav__link">
     prettyqt.custom_widgets
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor" class="md-nav__link">
     codeeditor
   </a>
-<nav aria-label="codeeditor" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.CodeEditor">
+  
+    <nav class="md-nav" aria-label="codeeditor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.CodeEditor" class="md-nav__link">
     CodeEditor
   </a>
-<nav aria-label="CodeEditor" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.CodeEditor.resizeEvent">
+  
+    <nav class="md-nav" aria-label="CodeEditor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.CodeEditor.resizeEvent" class="md-nav__link">
     resizeEvent()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.LineNumberArea">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.LineNumberArea" class="md-nav__link">
     LineNumberArea
   </a>
-<nav aria-label="LineNumberArea" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.LineNumberArea.paintEvent">
+  
+    <nav class="md-nav" aria-label="LineNumberArea">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.LineNumberArea.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.LineNumberArea.sizeHint">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.LineNumberArea.sizeHint" class="md-nav__link">
     sizeHint()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset" class="md-nav__link">
     dataset
   </a>
-<nav aria-label="dataset" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset.DataItem">
+  
+    <nav class="md-nav" aria-label="dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset.DataItem" class="md-nav__link">
     DataItem
   </a>
-<nav aria-label="DataItem" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset.DataItem.set_pos">
+  
+    <nav class="md-nav" aria-label="DataItem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset.DataItem.set_pos" class="md-nav__link">
     set_pos()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset.DataSetMeta">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset.DataSetMeta" class="md-nav__link">
     DataSetMeta
   </a>
-<nav aria-label="DataSetMeta" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset.DataSetMeta.__new__">
+  
+    <nav class="md-nav" aria-label="DataSetMeta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset.DataSetMeta.__new__" class="md-nav__link">
     __new__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.filechooserbutton">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.filechooserbutton" class="md-nav__link">
     filechooserbutton
   </a>
-<nav aria-label="filechooserbutton" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.filechooserbutton.FileChooserButton">
+  
+    <nav class="md-nav" aria-label="filechooserbutton">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.filechooserbutton.FileChooserButton" class="md-nav__link">
     FileChooserButton
   </a>
-<nav aria-label="FileChooserButton" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.filechooserbutton.FileChooserButton.__init__">
+  
+    <nav class="md-nav" aria-label="FileChooserButton">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.filechooserbutton.FileChooserButton.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout" class="md-nav__link">
     flowlayout
   </a>
-<nav aria-label="flowlayout" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout">
+  
+    <nav class="md-nav" aria-label="flowlayout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout" class="md-nav__link">
     FlowLayout
   </a>
-<nav aria-label="FlowLayout" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.addItem">
+  
+    <nav class="md-nav" aria-label="FlowLayout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.addItem" class="md-nav__link">
     addItem()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.count">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.count" class="md-nav__link">
     count()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.expandingDirections">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.expandingDirections" class="md-nav__link">
     expandingDirections()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.hasHeightForWidth">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.hasHeightForWidth" class="md-nav__link">
     hasHeightForWidth()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.heightForWidth">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.heightForWidth" class="md-nav__link">
     heightForWidth()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.itemAt">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.itemAt" class="md-nav__link">
     itemAt()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.minimumSize">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.minimumSize" class="md-nav__link">
     minimumSize()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.setGeometry">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.setGeometry" class="md-nav__link">
     setGeometry()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.sizeHint">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.sizeHint" class="md-nav__link">
     sizeHint()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.takeAt">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.takeAt" class="md-nav__link">
     takeAt()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.labeledslider">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.labeledslider" class="md-nav__link">
     labeledslider
   </a>
-<nav aria-label="labeledslider" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.labeledslider.LabeledSlider">
+  
+    <nav class="md-nav" aria-label="labeledslider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.labeledslider.LabeledSlider" class="md-nav__link">
     LabeledSlider
   </a>
-<nav aria-label="LabeledSlider" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.labeledslider.LabeledSlider.paintEvent">
+  
+    <nav class="md-nav" aria-label="LabeledSlider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.labeledslider.LabeledSlider.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.popupinfo">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.popupinfo" class="md-nav__link">
     popupinfo
   </a>
-<nav aria-label="popupinfo" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.popupinfo.PopupInfo">
+  
+    <nav class="md-nav" aria-label="popupinfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.popupinfo.PopupInfo" class="md-nav__link">
     PopupInfo
   </a>
-<nav aria-label="PopupInfo" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.popupinfo.PopupInfo.show">
+  
+    <nav class="md-nav" aria-label="PopupInfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.popupinfo.PopupInfo.show" class="md-nav__link">
     show()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit" class="md-nav__link">
     promptlineedit
   </a>
-<nav aria-label="promptlineedit" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit">
+  
+    <nav class="md-nav" aria-label="promptlineedit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit" class="md-nav__link">
     PromptLineEdit
   </a>
-<nav aria-label="PromptLineEdit" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.prompt_text">
+  
+    <nav class="md-nav" aria-label="PromptLineEdit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.prompt_text" class="md-nav__link">
     prompt_text
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.paintEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.resizeEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.resizeEvent" class="md-nav__link">
     resizeEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.set_button_visible">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.set_button_visible" class="md-nav__link">
     set_button_visible()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.regexeditor">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.regexeditor" class="md-nav__link">
     regexeditor
   </a>
-<nav aria-label="regexeditor" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.regexeditor.editor">
+  
+    <nav class="md-nav" aria-label="regexeditor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.regexeditor.editor" class="md-nav__link">
     editor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.regexeditor.quick_ref">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.regexeditor.quick_ref" class="md-nav__link">
     quick_ref
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider" class="md-nav__link">
     spanslider
   </a>
-<nav aria-label="spanslider" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider">
+  
+    <nav class="md-nav" aria-label="spanslider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider" class="md-nav__link">
     SpanSlider
   </a>
-<nav aria-label="SpanSlider" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.mouseMoveEvent">
+  
+    <nav class="md-nav" aria-label="SpanSlider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.mouseMoveEvent" class="md-nav__link">
     mouseMoveEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.mousePressEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.mousePressEvent" class="md-nav__link">
     mousePressEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.mouseReleaseEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.mouseReleaseEvent" class="md-nav__link">
     mouseReleaseEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.paintEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.set_movement_mode">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.set_movement_mode" class="md-nav__link">
     set_movement_mode()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.trigger_action">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.trigger_action" class="md-nav__link">
     trigger_action()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline" class="md-nav__link">
     timeline
   </a>
-<nav aria-label="timeline" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline">
+  
+    <nav class="md-nav" aria-label="timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline" class="md-nav__link">
     Timeline
   </a>
-<nav aria-label="Timeline" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.enterEvent">
+  
+    <nav class="md-nav" aria-label="Timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.enterEvent" class="md-nav__link">
     enterEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.leaveEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.leaveEvent" class="md-nav__link">
     leaveEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mouseMoveEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.mouseMoveEvent" class="md-nav__link">
     mouseMoveEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mousePressEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.mousePressEvent" class="md-nav__link">
     mousePressEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mouseReleaseEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.mouseReleaseEvent" class="md-nav__link">
     mouseReleaseEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.paintEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner" class="md-nav__link">
     waitingspinner
   </a>
-<nav aria-label="waitingspinner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner">
+  
+    <nav class="md-nav" aria-label="waitingspinner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner" class="md-nav__link">
     BaseWaitingSpinner
   </a>
-<nav aria-label="BaseWaitingSpinner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner.paintEvent">
+  
+    <nav class="md-nav" aria-label="BaseWaitingSpinner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner.WaitingSpinner">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner.WaitingSpinner" class="md-nav__link">
     WaitingSpinner
   </a>
-<nav aria-label="WaitingSpinner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner.WaitingSpinner.paintEvent">
+  
+    <nav class="md-nav" aria-label="WaitingSpinner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner.WaitingSpinner.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_validators.html" title="custom_validators">
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_validators.html" title="custom_validators" class="md-nav__link">
       custom_validators
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_delegates.html" title="custom_delegates">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_delegates.html" title="custom_delegates" class="md-nav__link">
       custom_delegates
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../contributing.html" title="Contributing">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contributing.html" title="Contributing" class="md-nav__link">
       Contributing
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../changelog.html" title="Changelog">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../changelog.html" title="Changelog" class="md-nav__link">
       Changelog
     </a>
-</li>
-</ul>
+  </li>
+
+    
+  </ul>
 </nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets" class="md-nav__link">
     prettyqt.custom_widgets
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor" class="md-nav__link">
     codeeditor
   </a>
-<nav aria-label="codeeditor" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.CodeEditor">
+  
+    <nav class="md-nav" aria-label="codeeditor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.CodeEditor" class="md-nav__link">
     CodeEditor
   </a>
-<nav aria-label="CodeEditor" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.CodeEditor.resizeEvent">
+  
+    <nav class="md-nav" aria-label="CodeEditor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.CodeEditor.resizeEvent" class="md-nav__link">
     resizeEvent()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.LineNumberArea">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.LineNumberArea" class="md-nav__link">
     LineNumberArea
   </a>
-<nav aria-label="LineNumberArea" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.LineNumberArea.paintEvent">
+  
+    <nav class="md-nav" aria-label="LineNumberArea">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.LineNumberArea.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.codeeditor.LineNumberArea.sizeHint">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.codeeditor.LineNumberArea.sizeHint" class="md-nav__link">
     sizeHint()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset" class="md-nav__link">
     dataset
   </a>
-<nav aria-label="dataset" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset.DataItem">
+  
+    <nav class="md-nav" aria-label="dataset">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset.DataItem" class="md-nav__link">
     DataItem
   </a>
-<nav aria-label="DataItem" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset.DataItem.set_pos">
+  
+    <nav class="md-nav" aria-label="DataItem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset.DataItem.set_pos" class="md-nav__link">
     set_pos()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset.DataSetMeta">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset.DataSetMeta" class="md-nav__link">
     DataSetMeta
   </a>
-<nav aria-label="DataSetMeta" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.dataset.DataSetMeta.__new__">
+  
+    <nav class="md-nav" aria-label="DataSetMeta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.dataset.DataSetMeta.__new__" class="md-nav__link">
     __new__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.filechooserbutton">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.filechooserbutton" class="md-nav__link">
     filechooserbutton
   </a>
-<nav aria-label="filechooserbutton" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.filechooserbutton.FileChooserButton">
+  
+    <nav class="md-nav" aria-label="filechooserbutton">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.filechooserbutton.FileChooserButton" class="md-nav__link">
     FileChooserButton
   </a>
-<nav aria-label="FileChooserButton" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.filechooserbutton.FileChooserButton.__init__">
+  
+    <nav class="md-nav" aria-label="FileChooserButton">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.filechooserbutton.FileChooserButton.__init__" class="md-nav__link">
     __init__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout" class="md-nav__link">
     flowlayout
   </a>
-<nav aria-label="flowlayout" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout">
+  
+    <nav class="md-nav" aria-label="flowlayout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout" class="md-nav__link">
     FlowLayout
   </a>
-<nav aria-label="FlowLayout" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.addItem">
+  
+    <nav class="md-nav" aria-label="FlowLayout">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.addItem" class="md-nav__link">
     addItem()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.count">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.count" class="md-nav__link">
     count()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.expandingDirections">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.expandingDirections" class="md-nav__link">
     expandingDirections()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.hasHeightForWidth">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.hasHeightForWidth" class="md-nav__link">
     hasHeightForWidth()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.heightForWidth">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.heightForWidth" class="md-nav__link">
     heightForWidth()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.itemAt">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.itemAt" class="md-nav__link">
     itemAt()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.minimumSize">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.minimumSize" class="md-nav__link">
     minimumSize()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.setGeometry">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.setGeometry" class="md-nav__link">
     setGeometry()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.sizeHint">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.sizeHint" class="md-nav__link">
     sizeHint()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.flowlayout.FlowLayout.takeAt">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.takeAt" class="md-nav__link">
     takeAt()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.labeledslider">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.labeledslider" class="md-nav__link">
     labeledslider
   </a>
-<nav aria-label="labeledslider" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.labeledslider.LabeledSlider">
+  
+    <nav class="md-nav" aria-label="labeledslider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.labeledslider.LabeledSlider" class="md-nav__link">
     LabeledSlider
   </a>
-<nav aria-label="LabeledSlider" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.labeledslider.LabeledSlider.paintEvent">
+  
+    <nav class="md-nav" aria-label="LabeledSlider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.labeledslider.LabeledSlider.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.popupinfo">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.popupinfo" class="md-nav__link">
     popupinfo
   </a>
-<nav aria-label="popupinfo" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.popupinfo.PopupInfo">
+  
+    <nav class="md-nav" aria-label="popupinfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.popupinfo.PopupInfo" class="md-nav__link">
     PopupInfo
   </a>
-<nav aria-label="PopupInfo" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.popupinfo.PopupInfo.show">
+  
+    <nav class="md-nav" aria-label="PopupInfo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.popupinfo.PopupInfo.show" class="md-nav__link">
     show()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit" class="md-nav__link">
     promptlineedit
   </a>
-<nav aria-label="promptlineedit" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit">
+  
+    <nav class="md-nav" aria-label="promptlineedit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit" class="md-nav__link">
     PromptLineEdit
   </a>
-<nav aria-label="PromptLineEdit" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.prompt_text">
+  
+    <nav class="md-nav" aria-label="PromptLineEdit">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.prompt_text" class="md-nav__link">
     prompt_text
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.paintEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.resizeEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.resizeEvent" class="md-nav__link">
     resizeEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.set_button_visible">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.set_button_visible" class="md-nav__link">
     set_button_visible()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.regexeditor">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.regexeditor" class="md-nav__link">
     regexeditor
   </a>
-<nav aria-label="regexeditor" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.regexeditor.editor">
+  
+    <nav class="md-nav" aria-label="regexeditor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.regexeditor.editor" class="md-nav__link">
     editor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.regexeditor.quick_ref">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.regexeditor.quick_ref" class="md-nav__link">
     quick_ref
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider" class="md-nav__link">
     spanslider
   </a>
-<nav aria-label="spanslider" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider">
+  
+    <nav class="md-nav" aria-label="spanslider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider" class="md-nav__link">
     SpanSlider
   </a>
-<nav aria-label="SpanSlider" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.mouseMoveEvent">
+  
+    <nav class="md-nav" aria-label="SpanSlider">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.mouseMoveEvent" class="md-nav__link">
     mouseMoveEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.mousePressEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.mousePressEvent" class="md-nav__link">
     mousePressEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.mouseReleaseEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.mouseReleaseEvent" class="md-nav__link">
     mouseReleaseEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.paintEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.set_movement_mode">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.set_movement_mode" class="md-nav__link">
     set_movement_mode()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.spanslider.SpanSlider.trigger_action">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.spanslider.SpanSlider.trigger_action" class="md-nav__link">
     trigger_action()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline" class="md-nav__link">
     timeline
   </a>
-<nav aria-label="timeline" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline">
+  
+    <nav class="md-nav" aria-label="timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline" class="md-nav__link">
     Timeline
   </a>
-<nav aria-label="Timeline" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.enterEvent">
+  
+    <nav class="md-nav" aria-label="Timeline">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.enterEvent" class="md-nav__link">
     enterEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.leaveEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.leaveEvent" class="md-nav__link">
     leaveEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mouseMoveEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.mouseMoveEvent" class="md-nav__link">
     mouseMoveEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mousePressEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.mousePressEvent" class="md-nav__link">
     mousePressEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.mouseReleaseEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.mouseReleaseEvent" class="md-nav__link">
     mouseReleaseEvent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.timeline.Timeline.paintEvent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.timeline.Timeline.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner" class="md-nav__link">
     waitingspinner
   </a>
-<nav aria-label="waitingspinner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner">
+  
+    <nav class="md-nav" aria-label="waitingspinner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner" class="md-nav__link">
     BaseWaitingSpinner
   </a>
-<nav aria-label="BaseWaitingSpinner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner.paintEvent">
+  
+    <nav class="md-nav" aria-label="BaseWaitingSpinner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner.WaitingSpinner">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner.WaitingSpinner" class="md-nav__link">
     WaitingSpinner
   </a>
-<nav aria-label="WaitingSpinner" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_widgets.waitingspinner.WaitingSpinner.paintEvent">
+  
+    <nav class="md-nav" aria-label="WaitingSpinner">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.waitingspinner.WaitingSpinner.paintEvent" class="md-nav__link">
     paintEvent()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset">
-<h1 id="custom_widgets-module">custom_widgets module</h1>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="custom_widgets-module">custom_widgets module</h1>
 <div class="doc doc-object doc-module">
 <h2 class="hidden-toc" href="#prettyqt.custom_widgets" id="prettyqt.custom_widgets" style="visibility: hidden; width: 0; height: 0;">
-</h2>
+        </h2>
 <div class="doc doc-contents first">
 <p>Module containing custom widget classes.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.codeeditor">
-<code>codeeditor</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>codeeditor</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.codeeditor.CodeEditor">
-<code>CodeEditor</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>CodeEditor</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.codeeditor.CodeEditor.resizeEvent">
-<code class="highlight language-python">
-resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>resizeEvent(self, QResizeEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/codeeditor.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/codeeditor.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
@@ -1080,20 +1651,26 @@ resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.codeeditor.LineNumberArea">
-<code>LineNumberArea</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>LineNumberArea</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.codeeditor.LineNumberArea.paintEvent">
-<code class="highlight language-python">
-paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/codeeditor.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/codeeditor.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">line_area_paintevent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </code></pre>
@@ -1103,14 +1680,17 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.codeeditor.LineNumberArea.sizeHint">
-<code class="highlight language-python">
-sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>sizeHint(self) -&gt; QSize</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/codeeditor.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/codeeditor.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">line_area_width</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
 </code></pre>
@@ -1126,26 +1706,35 @@ sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.dataset">
-<code>dataset</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>dataset</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.dataset.DataItem">
-<code>DataItem</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>DataItem</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.dataset.DataItem.set_pos">
-<code class="highlight language-python">
-set_pos<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colspan</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_pos<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colspan</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Set data item's position on a GUI layout.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/dataset.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/dataset.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colspan</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""Set data item's position on a GUI layout."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">label_col</span> <span class="o">=</span> <span class="n">col</span>
@@ -1161,24 +1750,30 @@ set_pos<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </div>
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.dataset.DataSetMeta">
-<code>DataSetMeta</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>DataSetMeta</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.dataset.DataSetMeta.__new__">
-<code class="highlight language-python">
-__new__<span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-<small class="doc doc-property doc-property-staticmethod"><code>staticmethod</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+__new__<span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+      <small class="doc doc-property doc-property-staticmethod"><code>staticmethod</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Create and return a new object.  See help(type) for accurate signature.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/dataset.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/dataset.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
     <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bases</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s2">"__metaclass__"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">DataSetMeta</span><span class="p">]</span>
     <span class="n">items</span> <span class="o">=</span> <span class="p">{</span><span class="n">item</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span> <span class="n">item</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">filtered</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">_items</span><span class="p">}</span>
@@ -1202,25 +1797,34 @@ __new__<span class="p">(</span><span class="n">mcs</span><span class="p">,</span
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.filechooserbutton">
-<code>filechooserbutton</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>filechooserbutton</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.filechooserbutton.FileChooserButton">
-<code>FileChooserButton</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>FileChooserButton</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.filechooserbutton.FileChooserButton.__init__">
-<code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'save'</span><span class="p">,</span> <span class="n">file_mode</span><span class="o">=</span><span class="s1">'existing_files'</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'save'</span><span class="p">,</span> <span class="n">file_mode</span><span class="o">=</span><span class="s1">'existing_files'</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Initialize FileChooserButton.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1278,8 +1882,8 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/filechooserbutton.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/filechooserbutton.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">extensions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1333,26 +1937,35 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout">
-<code>flowlayout</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>flowlayout</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout">
-<code>FlowLayout</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>FlowLayout</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.addItem">
-<code class="highlight language-python">
-addItem<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+addItem<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>addItem(self, QLayoutItem)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">addItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 </code></pre>
@@ -1362,14 +1975,17 @@ addItem<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.count">
-<code class="highlight language-python">
-count<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+count<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>count(self) -&gt; int</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
 </code></pre>
@@ -1379,14 +1995,17 @@ count<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.expandingDirections">
-<code class="highlight language-python">
-expandingDirections<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+expandingDirections<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>expandingDirections(self) -&gt; Qt.Orientations</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">expandingDirections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientations</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
 </code></pre>
@@ -1396,14 +2015,17 @@ expandingDirections<span class="p">(</span><span class="bp">self</span><span cla
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.hasHeightForWidth">
-<code class="highlight language-python">
-hasHeightForWidth<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+hasHeightForWidth<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>hasHeightForWidth(self) -&gt; bool</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">hasHeightForWidth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">return</span> <span class="kc">True</span>
 </code></pre>
@@ -1413,14 +2035,17 @@ hasHeightForWidth<span class="p">(</span><span class="bp">self</span><span class
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.heightForWidth">
-<code class="highlight language-python">
-heightForWidth<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+heightForWidth<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>heightForWidth(self, int) -&gt; int</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">heightForWidth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_layout</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
 </code></pre>
@@ -1430,14 +2055,17 @@ heightForWidth<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.itemAt">
-<code class="highlight language-python">
-itemAt<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+itemAt<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>itemAt(self, int) -&gt; QLayoutItem</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">itemAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span><span class="p">]:</span>
     <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
@@ -1450,14 +2078,17 @@ itemAt<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.minimumSize">
-<code class="highlight language-python">
-minimumSize<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+minimumSize<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>minimumSize(self) -&gt; QSize</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">minimumSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">()</span>
 
@@ -1474,14 +2105,17 @@ minimumSize<span class="p">(</span><span class="bp">self</span><span class="p">)
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.setGeometry">
-<code class="highlight language-python">
-setGeometry<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+setGeometry<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>setGeometry(self, QRect)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setGeometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">do_layout</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
@@ -1492,14 +2126,17 @@ setGeometry<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.sizeHint">
-<code class="highlight language-python">
-sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>sizeHint(self) -&gt; QSize</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimumSize</span><span class="p">()</span>
 </code></pre>
@@ -1509,14 +2146,17 @@ sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.takeAt">
-<code class="highlight language-python">
-takeAt<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+takeAt<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>takeAt(self, int) -&gt; QLayoutItem</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">takeAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span><span class="p">]:</span>
     <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
@@ -1535,26 +2175,35 @@ takeAt<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.labeledslider">
-<code>labeledslider</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>labeledslider</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.labeledslider.LabeledSlider">
-<code>LabeledSlider</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>LabeledSlider</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.labeledslider.LabeledSlider.paintEvent">
-<code class="highlight language-python">
-paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/labeledslider.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/labeledslider.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
 
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
@@ -1643,27 +2292,36 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.popupinfo">
-<code>popupinfo</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>popupinfo</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.popupinfo.PopupInfo">
-<code>PopupInfo</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>PopupInfo</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Dialog overlay to show some info to user.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.popupinfo.PopupInfo.show">
-<code class="highlight language-python">
-show<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+show<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>show(self)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/popupinfo.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/popupinfo.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
     <span class="n">screen_geo</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">GuiApplication</span><span class="o">.</span><span class="n">primaryScreen</span><span class="p">()</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span>
@@ -1686,41 +2344,53 @@ show<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit">
-<code>promptlineedit</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>promptlineedit</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <p>Credits to PyQode Authors.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit">
-<code>PromptLineEdit</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>PromptLineEdit</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Extends QLineEdit to show a prompt text and a clear icon.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-attribute">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit.prompt_text">
-<code class="highlight">
-prompt_text: <span class="nb">str</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-property"><code>property</code></small>
-<small class="doc doc-property doc-property-writable"><code>writable</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight">
+prompt_text: <span class="nb">str</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-property"><code>property</code></small>
+      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Gets/Sets the prompt text.</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit.paintEvent">
-<code class="highlight language-python">
-paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
@@ -1751,14 +2421,17 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit.resizeEvent">
-<code class="highlight language-python">
-resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>resizeEvent(self, QResizeEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="c1"># Adjusts Clear button position</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -1771,10 +2444,13 @@ resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit.set_button_visible">
-<code class="highlight language-python">
-set_button_visible<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visible</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_button_visible<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visible</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Sets the clear button as <code>visible</code>.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1798,8 +2474,8 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_button_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visible</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
     <span class="sd">"""Sets the clear button as ``visible``.</span>
 
@@ -1826,32 +2502,63 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.regexeditor">
-<code>regexeditor</code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h2>
-<div class="doc doc-contents">
+
+        <code>regexeditor</code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h2>
+<div class="doc doc-contents ">
 <p>Module containing classes related to the RegEx editor.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.regexeditor.editor">
-<code>editor</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>editor</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>This module contains the editor widget implementation.</p>
 <div class="doc doc-children">
-</div>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
 </div>
 </div>
 <div class="doc doc-object doc-module">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.regexeditor.quick_ref">
-<code>quick_ref</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>quick_ref</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Contains the quick reference widget.</p>
 <div class="doc doc-children">
-</div>
+
+
+
+
+
+
+
+
+
+
+
+  </div>
 </div>
 </div>
 </div>
@@ -1859,26 +2566,35 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider">
-<code>spanslider</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>spanslider</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider.SpanSlider">
-<code>SpanSlider</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>SpanSlider</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider.SpanSlider.mouseMoveEvent">
-<code class="highlight language-python">
-mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>mouseMoveEvent(self, QMouseEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
         <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
@@ -1932,14 +2648,17 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider.SpanSlider.mousePressEvent">
-<code class="highlight language-python">
-mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>mousePressEvent(self, QMouseEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span><span class="p">()</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">buttons</span><span class="p">()</span> <span class="o">^</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">():</span>
         <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
@@ -1962,14 +2681,17 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider.SpanSlider.mouseReleaseEvent">
-<code class="highlight language-python">
-mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>mouseReleaseEvent(self, QMouseEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setSliderDown</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -1982,14 +2704,17 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider.SpanSlider.paintEvent">
-<code class="highlight language-python">
-paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="n">painter</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StylePainter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -2036,10 +2761,13 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider.SpanSlider.set_movement_mode">
-<code class="highlight language-python">
-set_movement_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_movement_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Set movement mode.</p>
 <p>Valid values: "no_crossing", "no_overlap", "free"</p>
 <p><strong>Parameters:</strong></p>
@@ -2081,8 +2809,8 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_movement_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set movement mode.</span>
 
@@ -2104,16 +2832,19 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider.SpanSlider.trigger_action">
-<code class="highlight language-python">
-trigger_action<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">main</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+trigger_action<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">main</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Trigger slider action.</p>
 <p>Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
 "page_step_sub", "to_minimum", "to_maximum", "move"</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">main</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
     <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">no</span> <span class="o">=</span> <span class="kc">False</span>
@@ -2182,26 +2913,35 @@ trigger_action<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.timeline">
-<code>timeline</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>timeline</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline">
-<code>Timeline</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>Timeline</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.enterEvent">
-<code class="highlight language-python">
-enterEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+enterEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>enterEvent(self, QEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">enterEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span> <span class="o">=</span> <span class="kc">True</span>
 </code></pre>
@@ -2211,14 +2951,17 @@ enterEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.leaveEvent">
-<code class="highlight language-python">
-leaveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+leaveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>leaveEvent(self, QEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">leaveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
@@ -2229,14 +2972,17 @@ leaveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.mouseMoveEvent">
-<code class="highlight language-python">
-mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>mouseMoveEvent(self, QMouseEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
 
@@ -2256,14 +3002,17 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.mousePressEvent">
-<code class="highlight language-python">
-mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>mousePressEvent(self, QMouseEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
@@ -2282,14 +3031,17 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.mouseReleaseEvent">
-<code class="highlight language-python">
-mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>mouseReleaseEvent(self, QMouseEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clicking</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Set clicking check to false</span>
@@ -2300,14 +3052,17 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.timeline.Timeline.paintEvent">
-<code class="highlight language-python">
-paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="n">qp</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">()</span>
     <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2406,9 +3161,12 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.waitingspinner">
-<code>waitingspinner</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>waitingspinner</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <p>The MIT License (MIT).</p>
 <p>Copyright (c) 2012-2014 Alexander Turkin
 Copyright (c) 2014 William Hallatt
@@ -2433,20 +3191,26 @@ SOFTWARE.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner">
-<code>BaseWaitingSpinner</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>BaseWaitingSpinner</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner.paintEvent">
-<code class="highlight language-python">
-paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/waitingspinner.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/waitingspinner.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="n">painter</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="n">painter</span><span class="o">.</span><span class="n">fill_rect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="s2">"transparent"</span><span class="p">)</span>
@@ -2493,20 +3257,26 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_widgets.waitingspinner.WaitingSpinner">
-<code>WaitingSpinner</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>WaitingSpinner</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_widgets.waitingspinner.WaitingSpinner.paintEvent">
-<code class="highlight language-python">
-paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_widgets/waitingspinner.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_widgets/waitingspinner.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_update_position</span><span class="p">()</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -2524,11 +3294,19 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 </div>
 </div>
-</article>
-</div>
-</div>
-</main>
-<!--
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <!--
   Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -2550,42 +3328,59 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
   IN THE SOFTWARE.
 --><!-- Application footer -->
 <footer class="md-footer">
-<!-- Link to previous and/or next page --><div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<!-- Link to previous page --><a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="custom_models.html" rel="prev" title="custom_models">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">Previous</span>custom_models</span>
-</div>
-</a><!-- Link to next page --><a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="custom_validators.html" rel="next" title="custom_validators">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">Next</span>custom_validators</span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-</div>
-</a></nav>
-</div><!-- Further information -->
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<!-- Social links --></div>
-</div>
+
+  <!-- Link to previous and/or next page --><div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+
+        <!-- Link to previous page --><a href="custom_models.html"
+              title="custom_models"
+              class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+              rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back
+                    md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Previous</span>custom_models</span>
+            </div>
+          </a><!-- Link to next page --><a href="custom_validators.html"
+              title="custom_validators"
+              class="md-flex md-footer-nav__link md-footer-nav__link--next"
+              rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Next</span>custom_validators</span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward
+                    md-footer-nav__button"></i>
+            </div>
+          </a></nav>
+    </div><!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!-- Social links --></div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/vendor.3636a4ec.min.js"></script>
-<script src="../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
-<script>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.c6483021.min.js"></script>
+      <script src="../assets/javascripts/bundle.e2f7d7a4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
+            worker: "../assets/javascripts/worker/search.cbc634e2.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
-</body>
+      
+    
+  </body>
 </html>

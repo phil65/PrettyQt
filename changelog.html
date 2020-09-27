@@ -1,2550 +1,3845 @@
 
-<!DOCTYPE html>
-
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://phil65.github.io/PrettyQt/changelog.html" rel="canonical"/>
-<link href="assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.12" name="generator"/>
-<title>Changelog - PrettyQt</title>
-<link href="assets/stylesheets/main.4dd2dd8d.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-</head>
-<body dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#v01210-2020-09-10">
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://phil65.github.io/PrettyQt/changelog.html">
+      
+      
+      <link rel="shortcut icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.0">
+    
+    
+      
+        <title>Changelog - PrettyQt</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.1d877a71.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.17bd0b03.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#v01221-2020-09-27" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
-<header class="md-header" data-md-component="header">
-<nav aria-label="Header" class="md-header-nav md-grid">
-<a aria-label="PrettyQt" class="md-header-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
-<label class="md-header-nav__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
-</label>
-<div class="md-header-nav__title" data-md-component="header-title">
-<div class="md-header-nav__ellipsis">
-<span class="md-header-nav__topic md-ellipsis">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-header-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             PrettyQt
           </span>
-<span class="md-header-nav__topic md-ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             
               Changelog
             
           </span>
-</div>
-</div>
-<label class="md-header-nav__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-</label>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
-</label>
-<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
-</button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</nav>
+    
+    
+  </nav>
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="PrettyQt" class="md-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
     PrettyQt
   </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="index.html" title="Home">
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="index.html" title="Home" class="md-nav__link">
       Home
     </a>
-</li>
-<li class="md-nav__item md-nav__item--nested">
-<input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-2">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
       API
       <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-label="API" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="nav-2">
-<span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
         API
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/core.html" title="core">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/core.html" title="core" class="md-nav__link">
       core
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/gui.html" title="gui">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/gui.html" title="gui" class="md-nav__link">
       gui
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/widgets.html" title="widgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/widgets.html" title="widgets" class="md-nav__link">
       widgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/charts.html" title="charts">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/charts.html" title="charts" class="md-nav__link">
       charts
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/multimedia.html" title="multimedia">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/multimedia.html" title="multimedia" class="md-nav__link">
       multimedia
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/multimediawidgets.html" title="multimediawidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/multimediawidgets.html" title="multimediawidgets" class="md-nav__link">
       multimediawidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/webenginewidgets.html" title="webenginewidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/webenginewidgets.html" title="webenginewidgets" class="md-nav__link">
       webenginewidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/syntaxhighlighters.html" title="syntaxhighlighters">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/syntaxhighlighters.html" title="syntaxhighlighters" class="md-nav__link">
       syntaxhighlighters
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/custom_models.html" title="custom_models">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/custom_models.html" title="custom_models" class="md-nav__link">
       custom_models
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/custom_widgets.html" title="custom_widgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/custom_widgets.html" title="custom_widgets" class="md-nav__link">
       custom_widgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/custom_validators.html" title="custom_validators">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/custom_validators.html" title="custom_validators" class="md-nav__link">
       custom_validators
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="api/custom_delegates.html" title="custom_delegates">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="api/custom_delegates.html" title="custom_delegates" class="md-nav__link">
       custom_delegates
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="contributing.html" title="Contributing">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="contributing.html" title="Contributing" class="md-nav__link">
       Contributing
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
         Changelog
         <span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="changelog.html" title="Changelog">
+      </label>
+    
+    <a href="changelog.html" title="Changelog" class="md-nav__link md-nav__link--active">
       Changelog
     </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01210-2020-09-10">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v01221-2020-09-27" class="md-nav__link">
+    v0.122.1 (2020-09-27)
+  </a>
+  
+    <nav class="md-nav" aria-label="v0.122.1 (2020-09-27)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix" class="md-nav__link">
+    Fix
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v01220-2020-09-27" class="md-nav__link">
+    v0.122.0 (2020-09-27)
+  </a>
+  
+    <nav class="md-nav" aria-label="v0.122.0 (2020-09-27)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat" class="md-nav__link">
+    Feat
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v01210-2020-09-10" class="md-nav__link">
     v0.121.0 (2020-09-10)
   </a>
-<nav aria-label="v0.121.0 (2020-09-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat">
+  
+    <nav class="md-nav" aria-label="v0.121.0 (2020-09-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_1" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix">
+        
+          <li class="md-nav__item">
+  <a href="#fix_1" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01200-2020-08-27">
+      
+        <li class="md-nav__item">
+  <a href="#v01200-2020-08-27" class="md-nav__link">
     v0.120.0 (2020-08-27)
   </a>
-<nav aria-label="v0.120.0 (2020-08-27)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_1">
+  
+    <nav class="md-nav" aria-label="v0.120.0 (2020-08-27)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_2" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor">
+        
+          <li class="md-nav__item">
+  <a href="#refactor" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01191-2020-08-24">
+      
+        <li class="md-nav__item">
+  <a href="#v01191-2020-08-24" class="md-nav__link">
     v0.119.1 (2020-08-24)
   </a>
-<nav aria-label="v0.119.1 (2020-08-24)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_1">
+  
+    <nav class="md-nav" aria-label="v0.119.1 (2020-08-24)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_2" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01190-2020-08-24">
+      
+        <li class="md-nav__item">
+  <a href="#v01190-2020-08-24" class="md-nav__link">
     v0.119.0 (2020-08-24)
   </a>
-<nav aria-label="v0.119.0 (2020-08-24)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_2">
+  
+    <nav class="md-nav" aria-label="v0.119.0 (2020-08-24)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_3" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_2">
+        
+          <li class="md-nav__item">
+  <a href="#fix_3" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01182-2020-08-17">
+      
+        <li class="md-nav__item">
+  <a href="#v01182-2020-08-17" class="md-nav__link">
     v0.118.2 (2020-08-17)
   </a>
-<nav aria-label="v0.118.2 (2020-08-17)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_3">
+  
+    <nav class="md-nav" aria-label="v0.118.2 (2020-08-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_4" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01181-2020-08-17">
+      
+        <li class="md-nav__item">
+  <a href="#v01181-2020-08-17" class="md-nav__link">
     v0.118.1 (2020-08-17)
   </a>
-<nav aria-label="v0.118.1 (2020-08-17)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_4">
+  
+    <nav class="md-nav" aria-label="v0.118.1 (2020-08-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_5" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01180-2020-08-17">
+      
+        <li class="md-nav__item">
+  <a href="#v01180-2020-08-17" class="md-nav__link">
     v0.118.0 (2020-08-17)
   </a>
-<nav aria-label="v0.118.0 (2020-08-17)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_1">
+  
+    <nav class="md-nav" aria-label="v0.118.0 (2020-08-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_1" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_3">
+        
+          <li class="md-nav__item">
+  <a href="#feat_4" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01170-2020-08-16">
+      
+        <li class="md-nav__item">
+  <a href="#v01170-2020-08-16" class="md-nav__link">
     v0.117.0 (2020-08-16)
   </a>
-<nav aria-label="v0.117.0 (2020-08-16)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_4">
+  
+    <nav class="md-nav" aria-label="v0.117.0 (2020-08-16)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_5" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_2">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_2" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01160-2020-08-13">
+      
+        <li class="md-nav__item">
+  <a href="#v01160-2020-08-13" class="md-nav__link">
     v0.116.0 (2020-08-13)
   </a>
-<nav aria-label="v0.116.0 (2020-08-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_5">
+  
+    <nav class="md-nav" aria-label="v0.116.0 (2020-08-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_6" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_3">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_3" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01150-2020-08-12">
+      
+        <li class="md-nav__item">
+  <a href="#v01150-2020-08-12" class="md-nav__link">
     v0.115.0 (2020-08-12)
   </a>
-<nav aria-label="v0.115.0 (2020-08-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_6">
+  
+    <nav class="md-nav" aria-label="v0.115.0 (2020-08-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_7" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_5">
+        
+          <li class="md-nav__item">
+  <a href="#fix_6" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01141-2020-08-12">
+      
+        <li class="md-nav__item">
+  <a href="#v01141-2020-08-12" class="md-nav__link">
     v0.114.1 (2020-08-12)
   </a>
-<nav aria-label="v0.114.1 (2020-08-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_6">
+  
+    <nav class="md-nav" aria-label="v0.114.1 (2020-08-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_7" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01140-2020-08-12">
+      
+        <li class="md-nav__item">
+  <a href="#v01140-2020-08-12" class="md-nav__link">
     v0.114.0 (2020-08-12)
   </a>
-<nav aria-label="v0.114.0 (2020-08-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_4">
+  
+    <nav class="md-nav" aria-label="v0.114.0 (2020-08-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_4" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_7">
+        
+          <li class="md-nav__item">
+  <a href="#feat_8" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01130-2020-08-10">
+      
+        <li class="md-nav__item">
+  <a href="#v01130-2020-08-10" class="md-nav__link">
     v0.113.0 (2020-08-10)
   </a>
-<nav aria-label="v0.113.0 (2020-08-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_8">
+  
+    <nav class="md-nav" aria-label="v0.113.0 (2020-08-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_9" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_5">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_5" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01120-2020-08-04">
+      
+        <li class="md-nav__item">
+  <a href="#v01120-2020-08-04" class="md-nav__link">
     v0.112.0 (2020-08-04)
   </a>
-<nav aria-label="v0.112.0 (2020-08-04)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_9">
+  
+    <nav class="md-nav" aria-label="v0.112.0 (2020-08-04)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_10" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_6">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_6" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_7">
+        
+          <li class="md-nav__item">
+  <a href="#fix_8" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01111-2020-08-03">
+      
+        <li class="md-nav__item">
+  <a href="#v01111-2020-08-03" class="md-nav__link">
     v0.111.1 (2020-08-03)
   </a>
-<nav aria-label="v0.111.1 (2020-08-03)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_8">
+  
+    <nav class="md-nav" aria-label="v0.111.1 (2020-08-03)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_9" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01110-2020-08-03">
+      
+        <li class="md-nav__item">
+  <a href="#v01110-2020-08-03" class="md-nav__link">
     v0.111.0 (2020-08-03)
   </a>
-<nav aria-label="v0.111.0 (2020-08-03)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_10">
+  
+    <nav class="md-nav" aria-label="v0.111.0 (2020-08-03)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_11" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_7">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_7" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_9">
+        
+          <li class="md-nav__item">
+  <a href="#fix_10" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01102-2020-08-03">
+      
+        <li class="md-nav__item">
+  <a href="#v01102-2020-08-03" class="md-nav__link">
     v0.110.2 (2020-08-03)
   </a>
-<nav aria-label="v0.110.2 (2020-08-03)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_10">
+  
+    <nav class="md-nav" aria-label="v0.110.2 (2020-08-03)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_11" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01101-2020-08-03">
+      
+        <li class="md-nav__item">
+  <a href="#v01101-2020-08-03" class="md-nav__link">
     v0.110.1 (2020-08-03)
   </a>
-<nav aria-label="v0.110.1 (2020-08-03)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_11">
+  
+    <nav class="md-nav" aria-label="v0.110.1 (2020-08-03)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_12" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01100-2020-08-02">
+      
+        <li class="md-nav__item">
+  <a href="#v01100-2020-08-02" class="md-nav__link">
     v0.110.0 (2020-08-02)
   </a>
-<nav aria-label="v0.110.0 (2020-08-02)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_8">
+  
+    <nav class="md-nav" aria-label="v0.110.0 (2020-08-02)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_8" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_11">
+        
+          <li class="md-nav__item">
+  <a href="#feat_12" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01090-2020-08-02">
+      
+        <li class="md-nav__item">
+  <a href="#v01090-2020-08-02" class="md-nav__link">
     v0.109.0 (2020-08-02)
   </a>
-<nav aria-label="v0.109.0 (2020-08-02)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_12">
+  
+    <nav class="md-nav" aria-label="v0.109.0 (2020-08-02)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_13" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_9">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_9" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01080-2020-07-31">
+      
+        <li class="md-nav__item">
+  <a href="#v01080-2020-07-31" class="md-nav__link">
     v0.108.0 (2020-07-31)
   </a>
-<nav aria-label="v0.108.0 (2020-07-31)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_13">
+  
+    <nav class="md-nav" aria-label="v0.108.0 (2020-07-31)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_14" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_10">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_10" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01070-2020-07-29">
+      
+        <li class="md-nav__item">
+  <a href="#v01070-2020-07-29" class="md-nav__link">
     v0.107.0 (2020-07-29)
   </a>
-<nav aria-label="v0.107.0 (2020-07-29)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_14">
+  
+    <nav class="md-nav" aria-label="v0.107.0 (2020-07-29)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_15" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01061-2020-07-29">
+      
+        <li class="md-nav__item">
+  <a href="#v01061-2020-07-29" class="md-nav__link">
     v0.106.1 (2020-07-29)
   </a>
-<nav aria-label="v0.106.1 (2020-07-29)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_12">
+  
+    <nav class="md-nav" aria-label="v0.106.1 (2020-07-29)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_13" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01060-2020-07-26">
+      
+        <li class="md-nav__item">
+  <a href="#v01060-2020-07-26" class="md-nav__link">
     v0.106.0 (2020-07-26)
   </a>
-<nav aria-label="v0.106.0 (2020-07-26)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_15">
+  
+    <nav class="md-nav" aria-label="v0.106.0 (2020-07-26)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_16" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01050-2020-07-24">
+      
+        <li class="md-nav__item">
+  <a href="#v01050-2020-07-24" class="md-nav__link">
     v0.105.0 (2020-07-24)
   </a>
-<nav aria-label="v0.105.0 (2020-07-24)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_16">
+  
+    <nav class="md-nav" aria-label="v0.105.0 (2020-07-24)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_17" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_11">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_11" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_13">
+        
+          <li class="md-nav__item">
+  <a href="#fix_14" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01040-2020-07-23">
+      
+        <li class="md-nav__item">
+  <a href="#v01040-2020-07-23" class="md-nav__link">
     v0.104.0 (2020-07-23)
   </a>
-<nav aria-label="v0.104.0 (2020-07-23)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_17">
+  
+    <nav class="md-nav" aria-label="v0.104.0 (2020-07-23)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_18" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_12">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_12" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01030-2020-07-22">
+      
+        <li class="md-nav__item">
+  <a href="#v01030-2020-07-22" class="md-nav__link">
     v0.103.0 (2020-07-22)
   </a>
-<nav aria-label="v0.103.0 (2020-07-22)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_18">
+  
+    <nav class="md-nav" aria-label="v0.103.0 (2020-07-22)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_19" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01020-2020-07-21">
+      
+        <li class="md-nav__item">
+  <a href="#v01020-2020-07-21" class="md-nav__link">
     v0.102.0 (2020-07-21)
   </a>
-<nav aria-label="v0.102.0 (2020-07-21)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_13">
+  
+    <nav class="md-nav" aria-label="v0.102.0 (2020-07-21)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_13" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_19">
+        
+          <li class="md-nav__item">
+  <a href="#feat_20" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01011-2020-07-20">
+      
+        <li class="md-nav__item">
+  <a href="#v01011-2020-07-20" class="md-nav__link">
     v0.101.1 (2020-07-20)
   </a>
-<nav aria-label="v0.101.1 (2020-07-20)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_14">
+  
+    <nav class="md-nav" aria-label="v0.101.1 (2020-07-20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_15" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01010-2020-07-20">
+      
+        <li class="md-nav__item">
+  <a href="#v01010-2020-07-20" class="md-nav__link">
     v0.101.0 (2020-07-20)
   </a>
-<nav aria-label="v0.101.0 (2020-07-20)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_20">
+  
+    <nav class="md-nav" aria-label="v0.101.0 (2020-07-20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_21" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_15">
+        
+          <li class="md-nav__item">
+  <a href="#fix_16" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01000-2020-07-20">
+      
+        <li class="md-nav__item">
+  <a href="#v01000-2020-07-20" class="md-nav__link">
     v0.100.0 (2020-07-20)
   </a>
-<nav aria-label="v0.100.0 (2020-07-20)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_21">
+  
+    <nav class="md-nav" aria-label="v0.100.0 (2020-07-20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_22" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0990-2020-07-18">
+      
+        <li class="md-nav__item">
+  <a href="#v0990-2020-07-18" class="md-nav__link">
     v0.99.0 (2020-07-18)
   </a>
-<nav aria-label="v0.99.0 (2020-07-18)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_14">
+  
+    <nav class="md-nav" aria-label="v0.99.0 (2020-07-18)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_14" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_22">
+        
+          <li class="md-nav__item">
+  <a href="#feat_23" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0985-2020-07-17">
+      
+        <li class="md-nav__item">
+  <a href="#v0985-2020-07-17" class="md-nav__link">
     v0.98.5 (2020-07-17)
   </a>
-<nav aria-label="v0.98.5 (2020-07-17)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#perf">
+  
+    <nav class="md-nav" aria-label="v0.98.5 (2020-07-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#perf" class="md-nav__link">
     Perf
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_15">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_15" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0984-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0984-2020-07-15" class="md-nav__link">
     v0.98.4 (2020-07-15)
   </a>
-<nav aria-label="v0.98.4 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_16">
+  
+    <nav class="md-nav" aria-label="v0.98.4 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_17" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0983-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0983-2020-07-15" class="md-nav__link">
     v0.98.3 (2020-07-15)
   </a>
-<nav aria-label="v0.98.3 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_16">
+  
+    <nav class="md-nav" aria-label="v0.98.3 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_16" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0982-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0982-2020-07-15" class="md-nav__link">
     v0.98.2 (2020-07-15)
   </a>
-<nav aria-label="v0.98.2 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_17">
+  
+    <nav class="md-nav" aria-label="v0.98.2 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_18" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0981-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0981-2020-07-15" class="md-nav__link">
     v0.98.1 (2020-07-15)
   </a>
-<nav aria-label="v0.98.1 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_18">
+  
+    <nav class="md-nav" aria-label="v0.98.1 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_19" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_17">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_17" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0980-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0980-2020-07-15" class="md-nav__link">
     v0.98.0 (2020-07-15)
   </a>
-<nav aria-label="v0.98.0 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_23">
+  
+    <nav class="md-nav" aria-label="v0.98.0 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_24" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_18">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_18" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0970-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0970-2020-07-15" class="md-nav__link">
     v0.97.0 (2020-07-15)
   </a>
-<nav aria-label="v0.97.0 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_24">
+  
+    <nav class="md-nav" aria-label="v0.97.0 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_25" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0960-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0960-2020-07-14" class="md-nav__link">
     v0.96.0 (2020-07-14)
   </a>
-<nav aria-label="v0.96.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_25">
+  
+    <nav class="md-nav" aria-label="v0.96.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_26" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0950-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0950-2020-07-14" class="md-nav__link">
     v0.95.0 (2020-07-14)
   </a>
-<nav aria-label="v0.95.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_26">
+  
+    <nav class="md-nav" aria-label="v0.95.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_27" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0940-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0940-2020-07-14" class="md-nav__link">
     v0.94.0 (2020-07-14)
   </a>
-<nav aria-label="v0.94.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_27">
+  
+    <nav class="md-nav" aria-label="v0.94.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_28" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_19">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_19" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0931-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0931-2020-07-14" class="md-nav__link">
     v0.93.1 (2020-07-14)
   </a>
-<nav aria-label="v0.93.1 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_20">
+  
+    <nav class="md-nav" aria-label="v0.93.1 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_20" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0930-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0930-2020-07-14" class="md-nav__link">
     v0.93.0 (2020-07-14)
   </a>
-<nav aria-label="v0.93.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_28">
+  
+    <nav class="md-nav" aria-label="v0.93.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_29" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_21">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_21" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0921-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0921-2020-07-14" class="md-nav__link">
     v0.92.1 (2020-07-14)
   </a>
-<nav aria-label="v0.92.1 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_19">
+  
+    <nav class="md-nav" aria-label="v0.92.1 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_20" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0920-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0920-2020-07-14" class="md-nav__link">
     v0.92.0 (2020-07-14)
   </a>
-<nav aria-label="v0.92.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_29">
+  
+    <nav class="md-nav" aria-label="v0.92.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_30" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0910-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0910-2020-07-13" class="md-nav__link">
     v0.91.0 (2020-07-13)
   </a>
-<nav aria-label="v0.91.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_30">
+  
+    <nav class="md-nav" aria-label="v0.91.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_31" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0900-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0900-2020-07-13" class="md-nav__link">
     v0.90.0 (2020-07-13)
   </a>
-<nav aria-label="v0.90.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_31">
+  
+    <nav class="md-nav" aria-label="v0.90.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_32" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0891-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0891-2020-07-13" class="md-nav__link">
     v0.89.1 (2020-07-13)
   </a>
-<nav aria-label="v0.89.1 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_22">
+  
+    <nav class="md-nav" aria-label="v0.89.1 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_22" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0890-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0890-2020-07-13" class="md-nav__link">
     v0.89.0 (2020-07-13)
   </a>
-<nav aria-label="v0.89.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_32">
+  
+    <nav class="md-nav" aria-label="v0.89.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_33" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0881-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0881-2020-07-13" class="md-nav__link">
     v0.88.1 (2020-07-13)
   </a>
-<nav aria-label="v0.88.1 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_23">
+  
+    <nav class="md-nav" aria-label="v0.88.1 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_23" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_20">
+        
+          <li class="md-nav__item">
+  <a href="#fix_21" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0880-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0880-2020-07-13" class="md-nav__link">
     v0.88.0 (2020-07-13)
   </a>
-<nav aria-label="v0.88.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_33">
+  
+    <nav class="md-nav" aria-label="v0.88.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_34" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0870-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0870-2020-07-13" class="md-nav__link">
     v0.87.0 (2020-07-13)
   </a>
-<nav aria-label="v0.87.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_34">
+  
+    <nav class="md-nav" aria-label="v0.87.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_35" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0863-2020-07-12">
+      
+        <li class="md-nav__item">
+  <a href="#v0863-2020-07-12" class="md-nav__link">
     v0.86.3 (2020-07-12)
   </a>
-<nav aria-label="v0.86.3 (2020-07-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_24">
+  
+    <nav class="md-nav" aria-label="v0.86.3 (2020-07-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_24" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0862-2020-07-12">
+      
+        <li class="md-nav__item">
+  <a href="#v0862-2020-07-12" class="md-nav__link">
     v0.86.2 (2020-07-12)
   </a>
-<nav aria-label="v0.86.2 (2020-07-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_21">
+  
+    <nav class="md-nav" aria-label="v0.86.2 (2020-07-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_22" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0861-2020-07-12">
+      
+        <li class="md-nav__item">
+  <a href="#v0861-2020-07-12" class="md-nav__link">
     v0.86.1 (2020-07-12)
   </a>
-<nav aria-label="v0.86.1 (2020-07-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_22">
+  
+    <nav class="md-nav" aria-label="v0.86.1 (2020-07-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_23" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0860-2020-07-12">
+      
+        <li class="md-nav__item">
+  <a href="#v0860-2020-07-12" class="md-nav__link">
     v0.86.0 (2020-07-12)
   </a>
-<nav aria-label="v0.86.0 (2020-07-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_35">
+  
+    <nav class="md-nav" aria-label="v0.86.0 (2020-07-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_36" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0851-2020-07-10">
+      
+        <li class="md-nav__item">
+  <a href="#v0851-2020-07-10" class="md-nav__link">
     v0.85.1 (2020-07-10)
   </a>
-<nav aria-label="v0.85.1 (2020-07-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_23">
+  
+    <nav class="md-nav" aria-label="v0.85.1 (2020-07-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_24" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0850-2020-07-10">
+      
+        <li class="md-nav__item">
+  <a href="#v0850-2020-07-10" class="md-nav__link">
     v0.85.0 (2020-07-10)
   </a>
-<nav aria-label="v0.85.0 (2020-07-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_36">
+  
+    <nav class="md-nav" aria-label="v0.85.0 (2020-07-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_37" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_25">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_25" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0840-2020-07-10">
+      
+        <li class="md-nav__item">
+  <a href="#v0840-2020-07-10" class="md-nav__link">
     v0.84.0 (2020-07-10)
   </a>
-<nav aria-label="v0.84.0 (2020-07-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_37">
+  
+    <nav class="md-nav" aria-label="v0.84.0 (2020-07-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_38" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0831-2020-07-09">
+      
+        <li class="md-nav__item">
+  <a href="#v0831-2020-07-09" class="md-nav__link">
     v0.83.1 (2020-07-09)
   </a>
-<nav aria-label="v0.83.1 (2020-07-09)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_26">
+  
+    <nav class="md-nav" aria-label="v0.83.1 (2020-07-09)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_26" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0830-2020-07-09">
+      
+        <li class="md-nav__item">
+  <a href="#v0830-2020-07-09" class="md-nav__link">
     v0.83.0 (2020-07-09)
   </a>
-<nav aria-label="v0.83.0 (2020-07-09)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_38">
+  
+    <nav class="md-nav" aria-label="v0.83.0 (2020-07-09)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_39" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0820-2020-07-09">
+      
+        <li class="md-nav__item">
+  <a href="#v0820-2020-07-09" class="md-nav__link">
     v0.82.0 (2020-07-09)
   </a>
-<nav aria-label="v0.82.0 (2020-07-09)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_39">
+  
+    <nav class="md-nav" aria-label="v0.82.0 (2020-07-09)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_40" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0810-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0810-2020-07-08" class="md-nav__link">
     v0.81.0 (2020-07-08)
   </a>
-<nav aria-label="v0.81.0 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_40">
+  
+    <nav class="md-nav" aria-label="v0.81.0 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_41" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0801-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0801-2020-07-08" class="md-nav__link">
     v0.80.1 (2020-07-08)
   </a>
-<nav aria-label="v0.80.1 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_24">
+  
+    <nav class="md-nav" aria-label="v0.80.1 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_25" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0800-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0800-2020-07-08" class="md-nav__link">
     v0.80.0 (2020-07-08)
   </a>
-<nav aria-label="v0.80.0 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_41">
+  
+    <nav class="md-nav" aria-label="v0.80.0 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_42" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0791-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0791-2020-07-08" class="md-nav__link">
     v0.79.1 (2020-07-08)
   </a>
-<nav aria-label="v0.79.1 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_25">
+  
+    <nav class="md-nav" aria-label="v0.79.1 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_26" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0790-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0790-2020-07-08" class="md-nav__link">
     v0.79.0 (2020-07-08)
   </a>
-<nav aria-label="v0.79.0 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_42">
+  
+    <nav class="md-nav" aria-label="v0.79.0 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_43" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0780-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0780-2020-07-08" class="md-nav__link">
     v0.78.0 (2020-07-08)
   </a>
-<nav aria-label="v0.78.0 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_43">
+  
+    <nav class="md-nav" aria-label="v0.78.0 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_44" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_26">
+        
+          <li class="md-nav__item">
+  <a href="#fix_27" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0771-2020-07-07">
+      
+        <li class="md-nav__item">
+  <a href="#v0771-2020-07-07" class="md-nav__link">
     v0.77.1 (2020-07-07)
   </a>
-<nav aria-label="v0.77.1 (2020-07-07)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_27">
+  
+    <nav class="md-nav" aria-label="v0.77.1 (2020-07-07)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_27" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_27">
+        
+          <li class="md-nav__item">
+  <a href="#fix_28" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#0770-2020-07-06">
+      
+        <li class="md-nav__item">
+  <a href="#0770-2020-07-06" class="md-nav__link">
     0.77.0 (2020-07-06)
   </a>
-<nav aria-label="0.77.0 (2020-07-06)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_44">
+  
+    <nav class="md-nav" aria-label="0.77.0 (2020-07-06)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_45" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_28">
+        
+          <li class="md-nav__item">
+  <a href="#fix_29" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_28">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_28" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
+    
+  </li>
+
+    
+  </ul>
 </nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01210-2020-09-10">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#v01221-2020-09-27" class="md-nav__link">
+    v0.122.1 (2020-09-27)
+  </a>
+  
+    <nav class="md-nav" aria-label="v0.122.1 (2020-09-27)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix" class="md-nav__link">
+    Fix
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v01220-2020-09-27" class="md-nav__link">
+    v0.122.0 (2020-09-27)
+  </a>
+  
+    <nav class="md-nav" aria-label="v0.122.0 (2020-09-27)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat" class="md-nav__link">
+    Feat
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#v01210-2020-09-10" class="md-nav__link">
     v0.121.0 (2020-09-10)
   </a>
-<nav aria-label="v0.121.0 (2020-09-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat">
+  
+    <nav class="md-nav" aria-label="v0.121.0 (2020-09-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_1" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix">
+        
+          <li class="md-nav__item">
+  <a href="#fix_1" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01200-2020-08-27">
+      
+        <li class="md-nav__item">
+  <a href="#v01200-2020-08-27" class="md-nav__link">
     v0.120.0 (2020-08-27)
   </a>
-<nav aria-label="v0.120.0 (2020-08-27)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_1">
+  
+    <nav class="md-nav" aria-label="v0.120.0 (2020-08-27)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_2" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor">
+        
+          <li class="md-nav__item">
+  <a href="#refactor" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01191-2020-08-24">
+      
+        <li class="md-nav__item">
+  <a href="#v01191-2020-08-24" class="md-nav__link">
     v0.119.1 (2020-08-24)
   </a>
-<nav aria-label="v0.119.1 (2020-08-24)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_1">
+  
+    <nav class="md-nav" aria-label="v0.119.1 (2020-08-24)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_2" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01190-2020-08-24">
+      
+        <li class="md-nav__item">
+  <a href="#v01190-2020-08-24" class="md-nav__link">
     v0.119.0 (2020-08-24)
   </a>
-<nav aria-label="v0.119.0 (2020-08-24)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_2">
+  
+    <nav class="md-nav" aria-label="v0.119.0 (2020-08-24)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_3" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_2">
+        
+          <li class="md-nav__item">
+  <a href="#fix_3" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01182-2020-08-17">
+      
+        <li class="md-nav__item">
+  <a href="#v01182-2020-08-17" class="md-nav__link">
     v0.118.2 (2020-08-17)
   </a>
-<nav aria-label="v0.118.2 (2020-08-17)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_3">
+  
+    <nav class="md-nav" aria-label="v0.118.2 (2020-08-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_4" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01181-2020-08-17">
+      
+        <li class="md-nav__item">
+  <a href="#v01181-2020-08-17" class="md-nav__link">
     v0.118.1 (2020-08-17)
   </a>
-<nav aria-label="v0.118.1 (2020-08-17)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_4">
+  
+    <nav class="md-nav" aria-label="v0.118.1 (2020-08-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_5" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01180-2020-08-17">
+      
+        <li class="md-nav__item">
+  <a href="#v01180-2020-08-17" class="md-nav__link">
     v0.118.0 (2020-08-17)
   </a>
-<nav aria-label="v0.118.0 (2020-08-17)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_1">
+  
+    <nav class="md-nav" aria-label="v0.118.0 (2020-08-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_1" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_3">
+        
+          <li class="md-nav__item">
+  <a href="#feat_4" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01170-2020-08-16">
+      
+        <li class="md-nav__item">
+  <a href="#v01170-2020-08-16" class="md-nav__link">
     v0.117.0 (2020-08-16)
   </a>
-<nav aria-label="v0.117.0 (2020-08-16)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_4">
+  
+    <nav class="md-nav" aria-label="v0.117.0 (2020-08-16)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_5" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_2">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_2" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01160-2020-08-13">
+      
+        <li class="md-nav__item">
+  <a href="#v01160-2020-08-13" class="md-nav__link">
     v0.116.0 (2020-08-13)
   </a>
-<nav aria-label="v0.116.0 (2020-08-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_5">
+  
+    <nav class="md-nav" aria-label="v0.116.0 (2020-08-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_6" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_3">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_3" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01150-2020-08-12">
+      
+        <li class="md-nav__item">
+  <a href="#v01150-2020-08-12" class="md-nav__link">
     v0.115.0 (2020-08-12)
   </a>
-<nav aria-label="v0.115.0 (2020-08-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_6">
+  
+    <nav class="md-nav" aria-label="v0.115.0 (2020-08-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_7" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_5">
+        
+          <li class="md-nav__item">
+  <a href="#fix_6" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01141-2020-08-12">
+      
+        <li class="md-nav__item">
+  <a href="#v01141-2020-08-12" class="md-nav__link">
     v0.114.1 (2020-08-12)
   </a>
-<nav aria-label="v0.114.1 (2020-08-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_6">
+  
+    <nav class="md-nav" aria-label="v0.114.1 (2020-08-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_7" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01140-2020-08-12">
+      
+        <li class="md-nav__item">
+  <a href="#v01140-2020-08-12" class="md-nav__link">
     v0.114.0 (2020-08-12)
   </a>
-<nav aria-label="v0.114.0 (2020-08-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_4">
+  
+    <nav class="md-nav" aria-label="v0.114.0 (2020-08-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_4" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_7">
+        
+          <li class="md-nav__item">
+  <a href="#feat_8" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01130-2020-08-10">
+      
+        <li class="md-nav__item">
+  <a href="#v01130-2020-08-10" class="md-nav__link">
     v0.113.0 (2020-08-10)
   </a>
-<nav aria-label="v0.113.0 (2020-08-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_8">
+  
+    <nav class="md-nav" aria-label="v0.113.0 (2020-08-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_9" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_5">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_5" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01120-2020-08-04">
+      
+        <li class="md-nav__item">
+  <a href="#v01120-2020-08-04" class="md-nav__link">
     v0.112.0 (2020-08-04)
   </a>
-<nav aria-label="v0.112.0 (2020-08-04)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_9">
+  
+    <nav class="md-nav" aria-label="v0.112.0 (2020-08-04)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_10" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_6">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_6" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_7">
+        
+          <li class="md-nav__item">
+  <a href="#fix_8" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01111-2020-08-03">
+      
+        <li class="md-nav__item">
+  <a href="#v01111-2020-08-03" class="md-nav__link">
     v0.111.1 (2020-08-03)
   </a>
-<nav aria-label="v0.111.1 (2020-08-03)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_8">
+  
+    <nav class="md-nav" aria-label="v0.111.1 (2020-08-03)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_9" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01110-2020-08-03">
+      
+        <li class="md-nav__item">
+  <a href="#v01110-2020-08-03" class="md-nav__link">
     v0.111.0 (2020-08-03)
   </a>
-<nav aria-label="v0.111.0 (2020-08-03)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_10">
+  
+    <nav class="md-nav" aria-label="v0.111.0 (2020-08-03)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_11" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_7">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_7" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_9">
+        
+          <li class="md-nav__item">
+  <a href="#fix_10" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01102-2020-08-03">
+      
+        <li class="md-nav__item">
+  <a href="#v01102-2020-08-03" class="md-nav__link">
     v0.110.2 (2020-08-03)
   </a>
-<nav aria-label="v0.110.2 (2020-08-03)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_10">
+  
+    <nav class="md-nav" aria-label="v0.110.2 (2020-08-03)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_11" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01101-2020-08-03">
+      
+        <li class="md-nav__item">
+  <a href="#v01101-2020-08-03" class="md-nav__link">
     v0.110.1 (2020-08-03)
   </a>
-<nav aria-label="v0.110.1 (2020-08-03)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_11">
+  
+    <nav class="md-nav" aria-label="v0.110.1 (2020-08-03)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_12" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01100-2020-08-02">
+      
+        <li class="md-nav__item">
+  <a href="#v01100-2020-08-02" class="md-nav__link">
     v0.110.0 (2020-08-02)
   </a>
-<nav aria-label="v0.110.0 (2020-08-02)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_8">
+  
+    <nav class="md-nav" aria-label="v0.110.0 (2020-08-02)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_8" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_11">
+        
+          <li class="md-nav__item">
+  <a href="#feat_12" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01090-2020-08-02">
+      
+        <li class="md-nav__item">
+  <a href="#v01090-2020-08-02" class="md-nav__link">
     v0.109.0 (2020-08-02)
   </a>
-<nav aria-label="v0.109.0 (2020-08-02)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_12">
+  
+    <nav class="md-nav" aria-label="v0.109.0 (2020-08-02)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_13" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_9">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_9" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01080-2020-07-31">
+      
+        <li class="md-nav__item">
+  <a href="#v01080-2020-07-31" class="md-nav__link">
     v0.108.0 (2020-07-31)
   </a>
-<nav aria-label="v0.108.0 (2020-07-31)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_13">
+  
+    <nav class="md-nav" aria-label="v0.108.0 (2020-07-31)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_14" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_10">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_10" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01070-2020-07-29">
+      
+        <li class="md-nav__item">
+  <a href="#v01070-2020-07-29" class="md-nav__link">
     v0.107.0 (2020-07-29)
   </a>
-<nav aria-label="v0.107.0 (2020-07-29)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_14">
+  
+    <nav class="md-nav" aria-label="v0.107.0 (2020-07-29)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_15" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01061-2020-07-29">
+      
+        <li class="md-nav__item">
+  <a href="#v01061-2020-07-29" class="md-nav__link">
     v0.106.1 (2020-07-29)
   </a>
-<nav aria-label="v0.106.1 (2020-07-29)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_12">
+  
+    <nav class="md-nav" aria-label="v0.106.1 (2020-07-29)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_13" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01060-2020-07-26">
+      
+        <li class="md-nav__item">
+  <a href="#v01060-2020-07-26" class="md-nav__link">
     v0.106.0 (2020-07-26)
   </a>
-<nav aria-label="v0.106.0 (2020-07-26)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_15">
+  
+    <nav class="md-nav" aria-label="v0.106.0 (2020-07-26)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_16" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01050-2020-07-24">
+      
+        <li class="md-nav__item">
+  <a href="#v01050-2020-07-24" class="md-nav__link">
     v0.105.0 (2020-07-24)
   </a>
-<nav aria-label="v0.105.0 (2020-07-24)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_16">
+  
+    <nav class="md-nav" aria-label="v0.105.0 (2020-07-24)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_17" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_11">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_11" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_13">
+        
+          <li class="md-nav__item">
+  <a href="#fix_14" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01040-2020-07-23">
+      
+        <li class="md-nav__item">
+  <a href="#v01040-2020-07-23" class="md-nav__link">
     v0.104.0 (2020-07-23)
   </a>
-<nav aria-label="v0.104.0 (2020-07-23)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_17">
+  
+    <nav class="md-nav" aria-label="v0.104.0 (2020-07-23)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_18" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_12">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_12" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01030-2020-07-22">
+      
+        <li class="md-nav__item">
+  <a href="#v01030-2020-07-22" class="md-nav__link">
     v0.103.0 (2020-07-22)
   </a>
-<nav aria-label="v0.103.0 (2020-07-22)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_18">
+  
+    <nav class="md-nav" aria-label="v0.103.0 (2020-07-22)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_19" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01020-2020-07-21">
+      
+        <li class="md-nav__item">
+  <a href="#v01020-2020-07-21" class="md-nav__link">
     v0.102.0 (2020-07-21)
   </a>
-<nav aria-label="v0.102.0 (2020-07-21)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_13">
+  
+    <nav class="md-nav" aria-label="v0.102.0 (2020-07-21)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_13" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_19">
+        
+          <li class="md-nav__item">
+  <a href="#feat_20" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01011-2020-07-20">
+      
+        <li class="md-nav__item">
+  <a href="#v01011-2020-07-20" class="md-nav__link">
     v0.101.1 (2020-07-20)
   </a>
-<nav aria-label="v0.101.1 (2020-07-20)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_14">
+  
+    <nav class="md-nav" aria-label="v0.101.1 (2020-07-20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_15" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01010-2020-07-20">
+      
+        <li class="md-nav__item">
+  <a href="#v01010-2020-07-20" class="md-nav__link">
     v0.101.0 (2020-07-20)
   </a>
-<nav aria-label="v0.101.0 (2020-07-20)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_20">
+  
+    <nav class="md-nav" aria-label="v0.101.0 (2020-07-20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_21" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_15">
+        
+          <li class="md-nav__item">
+  <a href="#fix_16" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v01000-2020-07-20">
+      
+        <li class="md-nav__item">
+  <a href="#v01000-2020-07-20" class="md-nav__link">
     v0.100.0 (2020-07-20)
   </a>
-<nav aria-label="v0.100.0 (2020-07-20)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_21">
+  
+    <nav class="md-nav" aria-label="v0.100.0 (2020-07-20)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_22" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0990-2020-07-18">
+      
+        <li class="md-nav__item">
+  <a href="#v0990-2020-07-18" class="md-nav__link">
     v0.99.0 (2020-07-18)
   </a>
-<nav aria-label="v0.99.0 (2020-07-18)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_14">
+  
+    <nav class="md-nav" aria-label="v0.99.0 (2020-07-18)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_14" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_22">
+        
+          <li class="md-nav__item">
+  <a href="#feat_23" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0985-2020-07-17">
+      
+        <li class="md-nav__item">
+  <a href="#v0985-2020-07-17" class="md-nav__link">
     v0.98.5 (2020-07-17)
   </a>
-<nav aria-label="v0.98.5 (2020-07-17)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#perf">
+  
+    <nav class="md-nav" aria-label="v0.98.5 (2020-07-17)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#perf" class="md-nav__link">
     Perf
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_15">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_15" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0984-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0984-2020-07-15" class="md-nav__link">
     v0.98.4 (2020-07-15)
   </a>
-<nav aria-label="v0.98.4 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_16">
+  
+    <nav class="md-nav" aria-label="v0.98.4 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_17" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0983-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0983-2020-07-15" class="md-nav__link">
     v0.98.3 (2020-07-15)
   </a>
-<nav aria-label="v0.98.3 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_16">
+  
+    <nav class="md-nav" aria-label="v0.98.3 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_16" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0982-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0982-2020-07-15" class="md-nav__link">
     v0.98.2 (2020-07-15)
   </a>
-<nav aria-label="v0.98.2 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_17">
+  
+    <nav class="md-nav" aria-label="v0.98.2 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_18" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0981-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0981-2020-07-15" class="md-nav__link">
     v0.98.1 (2020-07-15)
   </a>
-<nav aria-label="v0.98.1 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_18">
+  
+    <nav class="md-nav" aria-label="v0.98.1 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_19" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_17">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_17" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0980-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0980-2020-07-15" class="md-nav__link">
     v0.98.0 (2020-07-15)
   </a>
-<nav aria-label="v0.98.0 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_23">
+  
+    <nav class="md-nav" aria-label="v0.98.0 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_24" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_18">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_18" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0970-2020-07-15">
+      
+        <li class="md-nav__item">
+  <a href="#v0970-2020-07-15" class="md-nav__link">
     v0.97.0 (2020-07-15)
   </a>
-<nav aria-label="v0.97.0 (2020-07-15)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_24">
+  
+    <nav class="md-nav" aria-label="v0.97.0 (2020-07-15)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_25" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0960-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0960-2020-07-14" class="md-nav__link">
     v0.96.0 (2020-07-14)
   </a>
-<nav aria-label="v0.96.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_25">
+  
+    <nav class="md-nav" aria-label="v0.96.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_26" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0950-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0950-2020-07-14" class="md-nav__link">
     v0.95.0 (2020-07-14)
   </a>
-<nav aria-label="v0.95.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_26">
+  
+    <nav class="md-nav" aria-label="v0.95.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_27" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0940-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0940-2020-07-14" class="md-nav__link">
     v0.94.0 (2020-07-14)
   </a>
-<nav aria-label="v0.94.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_27">
+  
+    <nav class="md-nav" aria-label="v0.94.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_28" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_19">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_19" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0931-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0931-2020-07-14" class="md-nav__link">
     v0.93.1 (2020-07-14)
   </a>
-<nav aria-label="v0.93.1 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_20">
+  
+    <nav class="md-nav" aria-label="v0.93.1 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_20" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0930-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0930-2020-07-14" class="md-nav__link">
     v0.93.0 (2020-07-14)
   </a>
-<nav aria-label="v0.93.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_28">
+  
+    <nav class="md-nav" aria-label="v0.93.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_29" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_21">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_21" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0921-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0921-2020-07-14" class="md-nav__link">
     v0.92.1 (2020-07-14)
   </a>
-<nav aria-label="v0.92.1 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_19">
+  
+    <nav class="md-nav" aria-label="v0.92.1 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_20" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0920-2020-07-14">
+      
+        <li class="md-nav__item">
+  <a href="#v0920-2020-07-14" class="md-nav__link">
     v0.92.0 (2020-07-14)
   </a>
-<nav aria-label="v0.92.0 (2020-07-14)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_29">
+  
+    <nav class="md-nav" aria-label="v0.92.0 (2020-07-14)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_30" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0910-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0910-2020-07-13" class="md-nav__link">
     v0.91.0 (2020-07-13)
   </a>
-<nav aria-label="v0.91.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_30">
+  
+    <nav class="md-nav" aria-label="v0.91.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_31" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0900-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0900-2020-07-13" class="md-nav__link">
     v0.90.0 (2020-07-13)
   </a>
-<nav aria-label="v0.90.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_31">
+  
+    <nav class="md-nav" aria-label="v0.90.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_32" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0891-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0891-2020-07-13" class="md-nav__link">
     v0.89.1 (2020-07-13)
   </a>
-<nav aria-label="v0.89.1 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_22">
+  
+    <nav class="md-nav" aria-label="v0.89.1 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_22" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0890-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0890-2020-07-13" class="md-nav__link">
     v0.89.0 (2020-07-13)
   </a>
-<nav aria-label="v0.89.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_32">
+  
+    <nav class="md-nav" aria-label="v0.89.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_33" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0881-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0881-2020-07-13" class="md-nav__link">
     v0.88.1 (2020-07-13)
   </a>
-<nav aria-label="v0.88.1 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_23">
+  
+    <nav class="md-nav" aria-label="v0.88.1 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_23" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_20">
+        
+          <li class="md-nav__item">
+  <a href="#fix_21" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0880-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0880-2020-07-13" class="md-nav__link">
     v0.88.0 (2020-07-13)
   </a>
-<nav aria-label="v0.88.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_33">
+  
+    <nav class="md-nav" aria-label="v0.88.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_34" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0870-2020-07-13">
+      
+        <li class="md-nav__item">
+  <a href="#v0870-2020-07-13" class="md-nav__link">
     v0.87.0 (2020-07-13)
   </a>
-<nav aria-label="v0.87.0 (2020-07-13)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_34">
+  
+    <nav class="md-nav" aria-label="v0.87.0 (2020-07-13)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_35" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0863-2020-07-12">
+      
+        <li class="md-nav__item">
+  <a href="#v0863-2020-07-12" class="md-nav__link">
     v0.86.3 (2020-07-12)
   </a>
-<nav aria-label="v0.86.3 (2020-07-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_24">
+  
+    <nav class="md-nav" aria-label="v0.86.3 (2020-07-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_24" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0862-2020-07-12">
+      
+        <li class="md-nav__item">
+  <a href="#v0862-2020-07-12" class="md-nav__link">
     v0.86.2 (2020-07-12)
   </a>
-<nav aria-label="v0.86.2 (2020-07-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_21">
+  
+    <nav class="md-nav" aria-label="v0.86.2 (2020-07-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_22" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0861-2020-07-12">
+      
+        <li class="md-nav__item">
+  <a href="#v0861-2020-07-12" class="md-nav__link">
     v0.86.1 (2020-07-12)
   </a>
-<nav aria-label="v0.86.1 (2020-07-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_22">
+  
+    <nav class="md-nav" aria-label="v0.86.1 (2020-07-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_23" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0860-2020-07-12">
+      
+        <li class="md-nav__item">
+  <a href="#v0860-2020-07-12" class="md-nav__link">
     v0.86.0 (2020-07-12)
   </a>
-<nav aria-label="v0.86.0 (2020-07-12)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_35">
+  
+    <nav class="md-nav" aria-label="v0.86.0 (2020-07-12)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_36" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0851-2020-07-10">
+      
+        <li class="md-nav__item">
+  <a href="#v0851-2020-07-10" class="md-nav__link">
     v0.85.1 (2020-07-10)
   </a>
-<nav aria-label="v0.85.1 (2020-07-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_23">
+  
+    <nav class="md-nav" aria-label="v0.85.1 (2020-07-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_24" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0850-2020-07-10">
+      
+        <li class="md-nav__item">
+  <a href="#v0850-2020-07-10" class="md-nav__link">
     v0.85.0 (2020-07-10)
   </a>
-<nav aria-label="v0.85.0 (2020-07-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_36">
+  
+    <nav class="md-nav" aria-label="v0.85.0 (2020-07-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_37" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_25">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_25" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0840-2020-07-10">
+      
+        <li class="md-nav__item">
+  <a href="#v0840-2020-07-10" class="md-nav__link">
     v0.84.0 (2020-07-10)
   </a>
-<nav aria-label="v0.84.0 (2020-07-10)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_37">
+  
+    <nav class="md-nav" aria-label="v0.84.0 (2020-07-10)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_38" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0831-2020-07-09">
+      
+        <li class="md-nav__item">
+  <a href="#v0831-2020-07-09" class="md-nav__link">
     v0.83.1 (2020-07-09)
   </a>
-<nav aria-label="v0.83.1 (2020-07-09)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_26">
+  
+    <nav class="md-nav" aria-label="v0.83.1 (2020-07-09)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_26" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0830-2020-07-09">
+      
+        <li class="md-nav__item">
+  <a href="#v0830-2020-07-09" class="md-nav__link">
     v0.83.0 (2020-07-09)
   </a>
-<nav aria-label="v0.83.0 (2020-07-09)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_38">
+  
+    <nav class="md-nav" aria-label="v0.83.0 (2020-07-09)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_39" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0820-2020-07-09">
+      
+        <li class="md-nav__item">
+  <a href="#v0820-2020-07-09" class="md-nav__link">
     v0.82.0 (2020-07-09)
   </a>
-<nav aria-label="v0.82.0 (2020-07-09)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_39">
+  
+    <nav class="md-nav" aria-label="v0.82.0 (2020-07-09)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_40" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0810-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0810-2020-07-08" class="md-nav__link">
     v0.81.0 (2020-07-08)
   </a>
-<nav aria-label="v0.81.0 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_40">
+  
+    <nav class="md-nav" aria-label="v0.81.0 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_41" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0801-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0801-2020-07-08" class="md-nav__link">
     v0.80.1 (2020-07-08)
   </a>
-<nav aria-label="v0.80.1 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_24">
+  
+    <nav class="md-nav" aria-label="v0.80.1 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_25" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0800-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0800-2020-07-08" class="md-nav__link">
     v0.80.0 (2020-07-08)
   </a>
-<nav aria-label="v0.80.0 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_41">
+  
+    <nav class="md-nav" aria-label="v0.80.0 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_42" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0791-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0791-2020-07-08" class="md-nav__link">
     v0.79.1 (2020-07-08)
   </a>
-<nav aria-label="v0.79.1 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_25">
+  
+    <nav class="md-nav" aria-label="v0.79.1 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fix_26" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0790-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0790-2020-07-08" class="md-nav__link">
     v0.79.0 (2020-07-08)
   </a>
-<nav aria-label="v0.79.0 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_42">
+  
+    <nav class="md-nav" aria-label="v0.79.0 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_43" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0780-2020-07-08">
+      
+        <li class="md-nav__item">
+  <a href="#v0780-2020-07-08" class="md-nav__link">
     v0.78.0 (2020-07-08)
   </a>
-<nav aria-label="v0.78.0 (2020-07-08)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_43">
+  
+    <nav class="md-nav" aria-label="v0.78.0 (2020-07-08)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_44" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_26">
+        
+          <li class="md-nav__item">
+  <a href="#fix_27" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#v0771-2020-07-07">
+      
+        <li class="md-nav__item">
+  <a href="#v0771-2020-07-07" class="md-nav__link">
     v0.77.1 (2020-07-07)
   </a>
-<nav aria-label="v0.77.1 (2020-07-07)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_27">
+  
+    <nav class="md-nav" aria-label="v0.77.1 (2020-07-07)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_27" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_27">
+        
+          <li class="md-nav__item">
+  <a href="#fix_28" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#0770-2020-07-06">
+      
+        <li class="md-nav__item">
+  <a href="#0770-2020-07-06" class="md-nav__link">
     0.77.0 (2020-07-06)
   </a>
-<nav aria-label="0.77.0 (2020-07-06)" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#feat_44">
+  
+    <nav class="md-nav" aria-label="0.77.0 (2020-07-06)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#feat_45" class="md-nav__link">
     Feat
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#fix_28">
+        
+          <li class="md-nav__item">
+  <a href="#fix_29" class="md-nav__link">
     Fix
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#refactor_28">
+        
+          <li class="md-nav__item">
+  <a href="#refactor_28" class="md-nav__link">
     Refactor
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset">
-<h1>Changelog</h1>
-<h2 id="v01210-2020-09-10">v0.121.0 (2020-09-10)</h2>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Changelog</h1>
+                
+                <h2 id="v01221-2020-09-27">v0.122.1 (2020-09-27)</h2>
+<h3 id="fix">Fix</h3>
+<ul>
+<li>use correct icon names</li>
+</ul>
+<h2 id="v01220-2020-09-27">v0.122.0 (2020-09-27)</h2>
 <h3 id="feat">Feat</h3>
+<ul>
+<li><strong>gui</strong>: add PageLayout</li>
+<li><strong>gui</strong>: add Movie class</li>
+<li><strong>gui</strong>: add PageSize class</li>
+<li><strong>gui</strong>: add FontInfo class</li>
+<li><strong>core</strong>: add UrlQuery class</li>
+<li>add network module</li>
+<li><strong>PropertyAnimation</strong>: add get/set_property_name methods</li>
+<li><strong>core</strong>: add ParallelAnimationGroup</li>
+<li><strong>widgets</strong>: add SizeGrip class</li>
+<li><strong>widgets</strong>: add DataWidgetMapper class</li>
+<li><strong>core</strong>: add StringListModel</li>
+<li><strong>VersionNumber</strong>: add get_python_version</li>
+<li><strong>gui</strong>: add Transform class</li>
+<li><strong>Painter</strong>: add draw_polygon method</li>
+<li>add core.ByteArray</li>
+</ul>
+<h2 id="v01210-2020-09-10">v0.121.0 (2020-09-10)</h2>
+<h3 id="feat_1">Feat</h3>
 <ul>
 <li><strong>Image</strong>: add <strong>setitem</strong> / <strong>getitem</strong> methods</li>
 <li><strong>Line/LineF</strong>: add <strong>reversed</strong> and <strong>abs</strong> methods</li>
 <li><strong>GraphicsScene</strong>: add get/set_item_index_method method</li>
 </ul>
-<h3 id="fix">Fix</h3>
+<h3 id="fix_1">Fix</h3>
 <ul>
 <li>serialization fixes</li>
 </ul>
 <h2 id="v01200-2020-08-27">v0.120.0 (2020-08-27)</h2>
-<h3 id="feat_1">Feat</h3>
+<h3 id="feat_2">Feat</h3>
 <ul>
 <li><strong>GraphicsWidget</strong>: add set_layout method</li>
 <li><strong>GraphicsLayout</strong>: add some magic methods</li>
@@ -2564,12 +3859,12 @@
 <li>PromptLineEdit rework</li>
 </ul>
 <h2 id="v01191-2020-08-24">v0.119.1 (2020-08-24)</h2>
-<h3 id="fix_1">Fix</h3>
+<h3 id="fix_2">Fix</h3>
 <ul>
 <li>add missing StyleOptionComplex class</li>
 </ul>
 <h2 id="v01190-2020-08-24">v0.119.0 (2020-08-24)</h2>
-<h3 id="feat_2">Feat</h3>
+<h3 id="feat_3">Feat</h3>
 <ul>
 <li><strong>GraphicsScene</strong>: add some convenience methods</li>
 <li><strong>widgets</strong>: add graphicsitem classes</li>
@@ -2581,18 +3876,18 @@
 <li><strong>GraphicsItem</strong>: add <strong>getitem</strong> and <strong>setitem</strong> methods</li>
 <li><strong>widgets</strong>: add Blur/Colorize/DropShadowEffect</li>
 </ul>
-<h3 id="fix_2">Fix</h3>
+<h3 id="fix_3">Fix</h3>
 <ul>
 <li>Graphicsitem collides methods fix</li>
 <li><strong>KeySequence</strong>: pickling</li>
 </ul>
 <h2 id="v01182-2020-08-17">v0.118.2 (2020-08-17)</h2>
-<h3 id="fix_3">Fix</h3>
+<h3 id="fix_4">Fix</h3>
 <ul>
 <li>Fix tests</li>
 </ul>
 <h2 id="v01181-2020-08-17">v0.118.1 (2020-08-17)</h2>
-<h3 id="fix_4">Fix</h3>
+<h3 id="fix_5">Fix</h3>
 <ul>
 <li><strong>MenuBar</strong>: fix add method</li>
 </ul>
@@ -2601,7 +3896,7 @@
 <ul>
 <li><strong>MenuBar</strong>: return subclassed types instead of qt classes</li>
 </ul>
-<h3 id="feat_3">Feat</h3>
+<h3 id="feat_4">Feat</h3>
 <ul>
 <li><strong>gui</strong>: add TextDocument / TextBlock / TextOption</li>
 <li><strong>gui</strong>: add ConicalGradient / RadialGradient</li>
@@ -2609,7 +3904,7 @@
 <li><strong>GraphicsItem</strong>: add some more methods</li>
 </ul>
 <h2 id="v01170-2020-08-16">v0.117.0 (2020-08-16)</h2>
-<h3 id="feat_4">Feat</h3>
+<h3 id="feat_5">Feat</h3>
 <ul>
 <li><strong>MimeData</strong>: add dict-like interface</li>
 <li><strong>Timer</strong>: add get/set_type methods</li>
@@ -2627,7 +3922,7 @@
 <li><strong>SpanSlider</strong>: clean up code</li>
 </ul>
 <h2 id="v01160-2020-08-13">v0.116.0 (2020-08-13)</h2>
-<h3 id="feat_5">Feat</h3>
+<h3 id="feat_6">Feat</h3>
 <ul>
 <li><strong>gui</strong>: add LinearGradient</li>
 <li><strong>AbstractSlider</strong>: add get/set_repeat_action and trigger_action methods</li>
@@ -2644,7 +3939,7 @@
 <li><strong>Painter</strong>: rework set_pen / get_pen</li>
 </ul>
 <h2 id="v01150-2020-08-12">v0.115.0 (2020-08-12)</h2>
-<h3 id="feat_6">Feat</h3>
+<h3 id="feat_7">Feat</h3>
 <ul>
 <li><strong>Polygon</strong>: add add_points method</li>
 <li><strong>Object</strong>: add store_widget_states / restore_widget_states</li>
@@ -2652,12 +3947,12 @@
 <li><strong>PainterPath</strong>: add add_rect method</li>
 <li><strong>Application</strong>: add <strong>class_getitem</strong></li>
 </ul>
-<h3 id="fix_5">Fix</h3>
+<h3 id="fix_6">Fix</h3>
 <ul>
 <li><strong>RegexEditor</strong>: correctly initialize dialog</li>
 </ul>
 <h2 id="v01141-2020-08-12">v0.114.1 (2020-08-12)</h2>
-<h3 id="fix_6">Fix</h3>
+<h3 id="fix_7">Fix</h3>
 <ul>
 <li><strong>HeaderView</strong>: fix saving state</li>
 </ul>
@@ -2666,13 +3961,13 @@
 <ul>
 <li>use AutoSlot decorator</li>
 </ul>
-<h3 id="feat_7">Feat</h3>
+<h3 id="feat_8">Feat</h3>
 <ul>
 <li>add autoslot decorator</li>
 <li>add prettyqt.debug</li>
 </ul>
 <h2 id="v01130-2020-08-10">v0.113.0 (2020-08-10)</h2>
-<h3 id="feat_8">Feat</h3>
+<h3 id="feat_9">Feat</h3>
 <ul>
 <li><strong>gui</strong>: add PainterPath class</li>
 <li><strong>gui</strong>: add Polygon class</li>
@@ -2695,7 +3990,7 @@
 <li>improve some repr methods</li>
 </ul>
 <h2 id="v01120-2020-08-04">v0.112.0 (2020-08-04)</h2>
-<h3 id="feat_9">Feat</h3>
+<h3 id="feat_10">Feat</h3>
 <ul>
 <li><strong>utils</strong>: add install_exceptionhook method</li>
 <li><strong>FileSystemModel</strong>: add some more shortcuts for set_root_path</li>
@@ -2707,17 +4002,17 @@
 <ul>
 <li>improve compat with older Qt Versions</li>
 </ul>
-<h3 id="fix_7">Fix</h3>
+<h3 id="fix_8">Fix</h3>
 <ul>
 <li>another test fix</li>
 </ul>
 <h2 id="v01111-2020-08-03">v0.111.1 (2020-08-03)</h2>
-<h3 id="fix_8">Fix</h3>
+<h3 id="fix_9">Fix</h3>
 <ul>
 <li>fix tests for Linux</li>
 </ul>
 <h2 id="v01110-2020-08-03">v0.111.0 (2020-08-03)</h2>
-<h3 id="feat_10">Feat</h3>
+<h3 id="feat_11">Feat</h3>
 <ul>
 <li><strong>widgets</strong>: add FontComboBox</li>
 <li><strong>StandardPaths</strong>: add <strong>class_getitem</strong> method</li>
@@ -2728,17 +4023,17 @@
 <ul>
 <li>custom Exception for wrong params</li>
 </ul>
-<h3 id="fix_9">Fix</h3>
+<h3 id="fix_10">Fix</h3>
 <ul>
 <li><strong>Menu</strong>: disable separator widgetAction</li>
 </ul>
 <h2 id="v01102-2020-08-03">v0.110.2 (2020-08-03)</h2>
-<h3 id="fix_10">Fix</h3>
+<h3 id="fix_11">Fix</h3>
 <ul>
 <li>fix broken LogTextEdit</li>
 </ul>
 <h2 id="v01101-2020-08-03">v0.110.1 (2020-08-03)</h2>
-<h3 id="fix_11">Fix</h3>
+<h3 id="fix_12">Fix</h3>
 <ul>
 <li><strong>LogTextEdit</strong>: improve exception handling</li>
 <li><strong>SidebarWidget</strong>: some fixes related to set_marker</li>
@@ -2749,14 +4044,14 @@
 <li>improve serialization for listitems</li>
 <li>Validator pickle work</li>
 </ul>
-<h3 id="feat_11">Feat</h3>
+<h3 id="feat_12">Feat</h3>
 <ul>
 <li><strong>Image</strong>: allow pickling</li>
 <li><strong>DataStream</strong>: add create_bytearray / write_bytearray / copy_data methods</li>
 <li><strong>core</strong>: add DataStream class</li>
 </ul>
 <h2 id="v01090-2020-08-02">v0.109.0 (2020-08-02)</h2>
-<h3 id="feat_12">Feat</h3>
+<h3 id="feat_13">Feat</h3>
 <ul>
 <li><strong>widget</strong>: add <strong>pretty</strong> method for devtools</li>
 <li><strong>GridLayout</strong>: allow adding tuples/lists</li>
@@ -2768,7 +4063,7 @@
 <li>pickle stuff for undocommand</li>
 </ul>
 <h2 id="v01080-2020-07-31">v0.108.0 (2020-07-31)</h2>
-<h3 id="feat_13">Feat</h3>
+<h3 id="feat_14">Feat</h3>
 <ul>
 <li><strong>custom_delegates</strong>: add IconDelegate and NoFocusDelegate</li>
 <li><strong>TableWidet</strong>: add <strong>getitem</strong> and <strong>setitem</strong> methods</li>
@@ -2781,19 +4076,19 @@
 <li>move delegates to separate module</li>
 </ul>
 <h2 id="v01070-2020-07-29">v0.107.0 (2020-07-29)</h2>
-<h3 id="feat_14">Feat</h3>
+<h3 id="feat_15">Feat</h3>
 <ul>
 <li><strong>GridLayout</strong>: also allow adding LayoutItems via add method</li>
 </ul>
 <h2 id="v01061-2020-07-29">v0.106.1 (2020-07-29)</h2>
-<h3 id="fix_12">Fix</h3>
+<h3 id="fix_13">Fix</h3>
 <ul>
 <li><strong>TabWidget</strong>: correctly close detached tabs on app close</li>
 <li>pickle fixes for toolbar and dockwidget</li>
 <li><strong>PygmentsHighlighter</strong>: catch pygments KeyError</li>
 </ul>
 <h2 id="v01060-2020-07-26">v0.106.0 (2020-07-26)</h2>
-<h3 id="feat_15">Feat</h3>
+<h3 id="feat_16">Feat</h3>
 <ul>
 <li><strong>gui</strong>: add DesktopServices class</li>
 <li><strong>multimedia</strong>: add AudioRecorder class</li>
@@ -2801,7 +4096,7 @@
 <li><strong>widgets</strong>: add Undo classes</li>
 </ul>
 <h2 id="v01050-2020-07-24">v0.105.0 (2020-07-24)</h2>
-<h3 id="feat_16">Feat</h3>
+<h3 id="feat_17">Feat</h3>
 <ul>
 <li><strong>MediaRecorder</strong>: some new methods</li>
 <li>sort_by_column for tableview and treeview</li>
@@ -2811,12 +4106,12 @@
 <ul>
 <li>improve Url-Pathlib interoperability</li>
 </ul>
-<h3 id="fix_13">Fix</h3>
+<h3 id="fix_14">Fix</h3>
 <ul>
 <li><strong>PopupInfo</strong>: use PrimaryScreen geometry instead of screens[0] for positioning</li>
 </ul>
 <h2 id="v01040-2020-07-23">v0.104.0 (2020-07-23)</h2>
-<h3 id="feat_17">Feat</h3>
+<h3 id="feat_18">Feat</h3>
 <ul>
 <li><strong>multimedia</strong>: add MediaRecorder</li>
 <li><strong>AbstractItemModel</strong>: add <strong>getitem</strong> method</li>
@@ -2827,7 +4122,7 @@
 <li>use subclassed core.Size</li>
 </ul>
 <h2 id="v01030-2020-07-22">v0.103.0 (2020-07-22)</h2>
-<h3 id="feat_18">Feat</h3>
+<h3 id="feat_19">Feat</h3>
 <ul>
 <li><strong>ActionGroup</strong>: add <strong>getitem</strong> method</li>
 <li><strong>MediaContent</strong>: add get_url method</li>
@@ -2844,27 +4139,27 @@
 <li><strong>Widget</strong>: default state to True for set_attribute</li>
 <li><strong>MainWindow</strong>: add return value for load_window_state</li>
 </ul>
-<h3 id="feat_19">Feat</h3>
+<h3 id="feat_20">Feat</h3>
 <ul>
 <li><strong>Object</strong>: add find_parent method</li>
 <li><strong>PlainTextEdit</strong>: add style kwarg to set_syntaxhighlighter</li>
 </ul>
 <h2 id="v01011-2020-07-20">v0.101.1 (2020-07-20)</h2>
-<h3 id="fix_14">Fix</h3>
+<h3 id="fix_15">Fix</h3>
 <ul>
 <li><strong>LogTextEdit</strong>: better integrate with custom qstylesheets</li>
 </ul>
 <h2 id="v01010-2020-07-20">v0.101.0 (2020-07-20)</h2>
-<h3 id="feat_20">Feat</h3>
+<h3 id="feat_21">Feat</h3>
 <ul>
 <li><strong>MessageBox</strong>: add detail_text keyword argument to message method</li>
 </ul>
-<h3 id="fix_15">Fix</h3>
+<h3 id="fix_16">Fix</h3>
 <ul>
 <li>correct return type for gui.icon.get_icon</li>
 </ul>
 <h2 id="v01000-2020-07-20">v0.100.0 (2020-07-20)</h2>
-<h3 id="feat_21">Feat</h3>
+<h3 id="feat_22">Feat</h3>
 <ul>
 <li><strong>ToolTip</strong>: add show_text method</li>
 <li><strong>GuiApplication</strong>: add set_override_cursor / restore_override_cursor methods</li>
@@ -2877,7 +4172,7 @@
 <li><strong>Dataset</strong>: typing and fixes</li>
 <li><strong>SidebarWidget</strong>: use button map instead of attaching button to widget</li>
 </ul>
-<h3 id="feat_22">Feat</h3>
+<h3 id="feat_23">Feat</h3>
 <ul>
 <li><strong>AbstractItemView</strong>: add scroll_to method</li>
 </ul>
@@ -2891,7 +4186,7 @@
 <li>use core.Settings for windows dark mode detection</li>
 </ul>
 <h2 id="v0984-2020-07-15">v0.98.4 (2020-07-15)</h2>
-<h3 id="fix_16">Fix</h3>
+<h3 id="fix_17">Fix</h3>
 <ul>
 <li>use qta default icon color instead of black for default</li>
 </ul>
@@ -2903,12 +4198,12 @@
 <li>move current_font context manager to Widget class</li>
 </ul>
 <h2 id="v0982-2020-07-15">v0.98.2 (2020-07-15)</h2>
-<h3 id="fix_17">Fix</h3>
+<h3 id="fix_18">Fix</h3>
 <ul>
 <li>package name</li>
 </ul>
 <h2 id="v0981-2020-07-15">v0.98.1 (2020-07-15)</h2>
-<h3 id="fix_18">Fix</h3>
+<h3 id="fix_19">Fix</h3>
 <ul>
 <li>correctly reset stylesheet for widget validation background</li>
 </ul>
@@ -2917,7 +4212,7 @@
 <li>use qstylizer for stylesheet editing</li>
 </ul>
 <h2 id="v0980-2020-07-15">v0.98.0 (2020-07-15)</h2>
-<h3 id="feat_23">Feat</h3>
+<h3 id="feat_24">Feat</h3>
 <ul>
 <li><strong>widgets</strong>: add StyleFactory</li>
 </ul>
@@ -2926,26 +4221,26 @@
 <li><strong>FontDatabase</strong>: make add_fonts_from_folder a classmethod</li>
 </ul>
 <h2 id="v0970-2020-07-15">v0.97.0 (2020-07-15)</h2>
-<h3 id="feat_24">Feat</h3>
+<h3 id="feat_25">Feat</h3>
 <ul>
 <li><strong>gui</strong>: add FontDatabase</li>
 <li><strong>widgets</strong>: add Completer</li>
 <li><strong>widgets</strong>: add ActionGroup</li>
 </ul>
 <h2 id="v0960-2020-07-14">v0.96.0 (2020-07-14)</h2>
-<h3 id="feat_25">Feat</h3>
+<h3 id="feat_26">Feat</h3>
 <ul>
 <li><strong>SelectionWidget</strong>: default keyword argument for add_custom</li>
 </ul>
 <h2 id="v0950-2020-07-14">v0.95.0 (2020-07-14)</h2>
-<h3 id="feat_26">Feat</h3>
+<h3 id="feat_27">Feat</h3>
 <ul>
 <li><strong>SelectionWidget</strong>: different options for custom type</li>
 <li>add PagedPaintDevice</li>
 <li><strong>Widget</strong>: add set_margin method</li>
 </ul>
 <h2 id="v0940-2020-07-14">v0.94.0 (2020-07-14)</h2>
-<h3 id="feat_27">Feat</h3>
+<h3 id="feat_28">Feat</h3>
 <ul>
 <li><strong>Widget</strong>: add Widget.font_metrics()</li>
 <li><strong>SpacerItem</strong>: allow strings for size policy in ctor</li>
@@ -2961,7 +4256,7 @@
 <li>typecheck for Mapping instead of dict for combobox / selectionwidget add_items method</li>
 </ul>
 <h2 id="v0930-2020-07-14">v0.93.0 (2020-07-14)</h2>
-<h3 id="feat_28">Feat</h3>
+<h3 id="feat_29">Feat</h3>
 <ul>
 <li>add register_extensions function to settings module</li>
 </ul>
@@ -2970,25 +4265,25 @@
 <li><strong>Settings</strong>: do not override value method</li>
 </ul>
 <h2 id="v0921-2020-07-14">v0.92.1 (2020-07-14)</h2>
-<h3 id="fix_19">Fix</h3>
+<h3 id="fix_20">Fix</h3>
 <ul>
 <li>winextras test fix</li>
 </ul>
 <h2 id="v0920-2020-07-14">v0.92.0 (2020-07-14)</h2>
-<h3 id="feat_29">Feat</h3>
+<h3 id="feat_30">Feat</h3>
 <ul>
 <li>add widgets.SystemTrayIcon</li>
 <li>add winextras module</li>
 <li><strong>Label</strong>: set_indent method</li>
 </ul>
 <h2 id="v0910-2020-07-13">v0.91.0 (2020-07-13)</h2>
-<h3 id="feat_30">Feat</h3>
+<h3 id="feat_31">Feat</h3>
 <ul>
 <li><strong>SidebarWidget</strong>: allow choosing layout</li>
 <li><strong>MainWindow</strong>: add show_blocking method</li>
 </ul>
 <h2 id="v0900-2020-07-13">v0.90.0 (2020-07-13)</h2>
-<h3 id="feat_31">Feat</h3>
+<h3 id="feat_32">Feat</h3>
 <ul>
 <li><strong>Toolbar</strong>: allow combinations of allowed areas for set_allowed_areas</li>
 <li><strong>SidebarWidget</strong>: add optional settings menu</li>
@@ -2999,7 +4294,7 @@
 <li><strong>SelectionWidget</strong>: switch to {data: label} dicts for add_items to be in line with RadioButton</li>
 </ul>
 <h2 id="v0890-2020-07-13">v0.89.0 (2020-07-13)</h2>
-<h3 id="feat_32">Feat</h3>
+<h3 id="feat_33">Feat</h3>
 <ul>
 <li><strong>SidebarWidget</strong>: make button width configurable</li>
 </ul>
@@ -3008,17 +4303,17 @@
 <ul>
 <li><strong>ComboBox</strong>: use set_data for set_value</li>
 </ul>
-<h3 id="fix_20">Fix</h3>
+<h3 id="fix_21">Fix</h3>
 <ul>
 <li><strong>ComboBox</strong>: fix add_items method</li>
 </ul>
 <h2 id="v0880-2020-07-13">v0.88.0 (2020-07-13)</h2>
-<h3 id="feat_33">Feat</h3>
+<h3 id="feat_34">Feat</h3>
 <ul>
 <li><strong>ComboBox</strong>: set_data method</li>
 </ul>
 <h2 id="v0870-2020-07-13">v0.87.0 (2020-07-13)</h2>
-<h3 id="feat_34">Feat</h3>
+<h3 id="feat_35">Feat</h3>
 <ul>
 <li><strong>ComboBox</strong>: allow dict for add_items</li>
 </ul>
@@ -3028,28 +4323,28 @@
 <li><strong>RegexEditor</strong>: code cleanup</li>
 </ul>
 <h2 id="v0862-2020-07-12">v0.86.2 (2020-07-12)</h2>
-<h3 id="fix_21">Fix</h3>
+<h3 id="fix_22">Fix</h3>
 <ul>
 <li>another deployment fix</li>
 </ul>
 <h2 id="v0861-2020-07-12">v0.86.1 (2020-07-12)</h2>
-<h3 id="fix_22">Fix</h3>
+<h3 id="fix_23">Fix</h3>
 <ul>
 <li>deployment fix</li>
 </ul>
 <h2 id="v0860-2020-07-12">v0.86.0 (2020-07-12)</h2>
-<h3 id="feat_35">Feat</h3>
+<h3 id="feat_36">Feat</h3>
 <ul>
 <li>add Scintilla CodeEditor</li>
 <li><strong>PlainTextEdit</strong>: add color argument for highlight_current_line</li>
 </ul>
 <h2 id="v0851-2020-07-10">v0.85.1 (2020-07-10)</h2>
-<h3 id="fix_23">Fix</h3>
+<h3 id="fix_24">Fix</h3>
 <ul>
 <li>add missing pygments requirement</li>
 </ul>
 <h2 id="v0850-2020-07-10">v0.85.0 (2020-07-10)</h2>
-<h3 id="feat_36">Feat</h3>
+<h3 id="feat_37">Feat</h3>
 <ul>
 <li><strong>dataset</strong>: add RegexPattern DataItem</li>
 <li><strong>RegexEditor</strong>: use syntaxhighlighter for pattern</li>
@@ -3062,7 +4357,7 @@
 <li><strong>CodeEditor</strong>: use pygments for syntax highlighting</li>
 </ul>
 <h2 id="v0840-2020-07-10">v0.84.0 (2020-07-10)</h2>
-<h3 id="feat_37">Feat</h3>
+<h3 id="feat_38">Feat</h3>
 <ul>
 <li><strong>sidebarwidget</strong>: allow setting tab by object id</li>
 <li><strong>Object</strong>: name kwarg for Object.find_children, add Object.find_child</li>
@@ -3073,51 +4368,51 @@
 <li>move set_icon from window classes to widget class</li>
 </ul>
 <h2 id="v0830-2020-07-09">v0.83.0 (2020-07-09)</h2>
-<h3 id="feat_38">Feat</h3>
+<h3 id="feat_39">Feat</h3>
 <ul>
 <li>add Label.set_point_size</li>
 <li>add self for label methods to allow chaining</li>
 <li>Font.current_font context manager</li>
 </ul>
 <h2 id="v0820-2020-07-09">v0.82.0 (2020-07-09)</h2>
-<h3 id="feat_39">Feat</h3>
+<h3 id="feat_40">Feat</h3>
 <ul>
 <li>add Label.set_bold / set_italic / set_weight</li>
 <li>added Font.set_weight</li>
 </ul>
 <h2 id="v0810-2020-07-08">v0.81.0 (2020-07-08)</h2>
-<h3 id="feat_40">Feat</h3>
+<h3 id="feat_41">Feat</h3>
 <ul>
 <li>allow setting window icon color</li>
 <li>os dark mode detection</li>
 </ul>
 <h2 id="v0801-2020-07-08">v0.80.1 (2020-07-08)</h2>
-<h3 id="fix_24">Fix</h3>
+<h3 id="fix_25">Fix</h3>
 <ul>
 <li>Settings.value() returned wrong type</li>
 </ul>
 <h2 id="v0800-2020-07-08">v0.80.0 (2020-07-08)</h2>
-<h3 id="feat_41">Feat</h3>
+<h3 id="feat_42">Feat</h3>
 <ul>
 <li>add Widget.set_attribute</li>
 <li>add margin keyword argument to Widget.set_layout</li>
 </ul>
 <h2 id="v0791-2020-07-08">v0.79.1 (2020-07-08)</h2>
-<h3 id="fix_25">Fix</h3>
+<h3 id="fix_26">Fix</h3>
 <ul>
 <li>remove Qt logger on Application exit</li>
 </ul>
 <h2 id="v0790-2020-07-08">v0.79.0 (2020-07-08)</h2>
-<h3 id="feat_42">Feat</h3>
+<h3 id="feat_43">Feat</h3>
 <ul>
 <li>add widgets.Application.get_widget</li>
 </ul>
 <h2 id="v0780-2020-07-08">v0.78.0 (2020-07-08)</h2>
-<h3 id="feat_43">Feat</h3>
+<h3 id="feat_44">Feat</h3>
 <ul>
 <li>allow to save/load window state recursively. Saving needs to be done explicitely now.</li>
 </ul>
-<h3 id="fix_26">Fix</h3>
+<h3 id="fix_27">Fix</h3>
 <ul>
 <li>some fixes for core.Settings dict interface</li>
 <li>properly preserve types in core.Settings</li>
@@ -3127,13 +4422,13 @@
 <ul>
 <li>also allow qt flag for Splitter ctor</li>
 </ul>
-<h3 id="fix_27">Fix</h3>
+<h3 id="fix_28">Fix</h3>
 <ul>
 <li>return correct types for re.groupdict / re.groups</li>
 <li>Fixed an issue which prevented saving an image from chartview</li>
 </ul>
 <h2 id="0770-2020-07-06">0.77.0 (2020-07-06)</h2>
-<h3 id="feat_44">Feat</h3>
+<h3 id="feat_45">Feat</h3>
 <ul>
 <li>allow custom icons for Messagebox</li>
 <li>add Icon.get_pixmap</li>
@@ -3143,7 +4438,7 @@
 <li>add regexinput</li>
 <li>add pre-commit-hook for commit messages</li>
 </ul>
-<h3 id="fix_28">Fix</h3>
+<h3 id="fix_29">Fix</h3>
 <ul>
 <li>fix Messagebox.message call</li>
 </ul>
@@ -3155,11 +4450,19 @@
 <li>radiodelegate stuff</li>
 <li>no props for abstractscrollarea scrollbars</li>
 </ul>
-</article>
-</div>
-</div>
-</main>
-<!--
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <!--
   Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -3181,34 +4484,46 @@
   IN THE SOFTWARE.
 --><!-- Application footer -->
 <footer class="md-footer">
-<!-- Link to previous and/or next page --><div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<!-- Link to previous page --><a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="contributing.html" rel="prev" title="Contributing">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">Previous</span>Contributing</span>
-</div>
-</a><!-- Link to next page --></nav>
-</div><!-- Further information -->
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<!-- Social links --></div>
-</div>
+
+  <!-- Link to previous and/or next page --><div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+
+        <!-- Link to previous page --><a href="contributing.html"
+              title="Contributing"
+              class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+              rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back
+                    md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Previous</span>Contributing</span>
+            </div>
+          </a><!-- Link to next page --></nav>
+    </div><!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!-- Social links --></div>
+  </div>
 </footer>
-</div>
-<script src="assets/javascripts/vendor.3636a4ec.min.js"></script>
-<script src="assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
-<script>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.c6483021.min.js"></script>
+      <script src="assets/javascripts/bundle.e2f7d7a4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
         app = initialize({
           base: ".",
           features: [],
           search: Object.assign({
-            worker: "assets/javascripts/worker/search.5eca75d3.min.js"
+            worker: "assets/javascripts/worker/search.cbc634e2.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
-</body>
+      
+    
+  </body>
 </html>

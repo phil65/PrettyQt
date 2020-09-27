@@ -1,537 +1,880 @@
 
-<!DOCTYPE html>
-
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://phil65.github.io/PrettyQt/api/custom_models.html" rel="canonical"/>
-<link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.12" name="generator"/>
-<title>custom_models - PrettyQt</title>
-<link href="../assets/stylesheets/main.4dd2dd8d.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-</head>
-<body dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#custom_models-module">
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/custom_models.html">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.0">
+    
+    
+      
+        <title>custom_models - PrettyQt</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1d877a71.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.17bd0b03.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#custom_models-module" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
-<header class="md-header" data-md-component="header">
-<nav aria-label="Header" class="md-header-nav md-grid">
-<a aria-label="PrettyQt" class="md-header-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
-<label class="md-header-nav__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
-</label>
-<div class="md-header-nav__title" data-md-component="header-title">
-<div class="md-header-nav__ellipsis">
-<span class="md-header-nav__topic md-ellipsis">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-header-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             PrettyQt
           </span>
-<span class="md-header-nav__topic md-ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             
               custom_models
             
           </span>
-</div>
-</div>
-<label class="md-header-nav__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-</label>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
-</label>
-<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
-</button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</nav>
+    
+    
+  </nav>
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="PrettyQt" class="md-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
     PrettyQt
   </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../index.html" title="Home">
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
       Home
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-2">
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
       API
       <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-label="API" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="nav-2">
-<span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
         API
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="core.html" title="core">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="core.html" title="core" class="md-nav__link">
       core
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="gui.html" title="gui">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="gui.html" title="gui" class="md-nav__link">
       gui
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="widgets.html" title="widgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="widgets.html" title="widgets" class="md-nav__link">
       widgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="charts.html" title="charts">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="charts.html" title="charts" class="md-nav__link">
       charts
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="multimedia.html" title="multimedia">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimedia.html" title="multimedia" class="md-nav__link">
       multimedia
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="multimediawidgets.html" title="multimediawidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimediawidgets.html" title="multimediawidgets" class="md-nav__link">
       multimediawidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="webenginewidgets.html" title="webenginewidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="webenginewidgets.html" title="webenginewidgets" class="md-nav__link">
       webenginewidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="syntaxhighlighters.html" title="syntaxhighlighters">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="syntaxhighlighters.html" title="syntaxhighlighters" class="md-nav__link">
       syntaxhighlighters
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
         custom_models
         <span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="custom_models.html" title="custom_models">
+      </label>
+    
+    <a href="custom_models.html" title="custom_models" class="md-nav__link md-nav__link--active">
       custom_models
     </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_models" class="md-nav__link">
     prettyqt.custom_models
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel" class="md-nav__link">
     columnitemmodel
   </a>
-<nav aria-label="columnitemmodel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel">
+  
+    <nav class="md-nav" aria-label="columnitemmodel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel" class="md-nav__link">
     ColumnItemModel
   </a>
-<nav aria-label="ColumnItemModel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.columnCount">
+  
+    <nav class="md-nav" aria-label="ColumnItemModel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.columnCount" class="md-nav__link">
     columnCount()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.data">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.data" class="md-nav__link">
     data()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.flags">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.flags" class="md-nav__link">
     flags()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.headerData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.headerData" class="md-nav__link">
     headerData()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel" class="md-nav__link">
     regexmatchesmodel
   </a>
-<nav aria-label="regexmatchesmodel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel">
+  
+    <nav class="md-nav" aria-label="regexmatchesmodel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel" class="md-nav__link">
     RegexMatchesModel
   </a>
-<nav aria-label="RegexMatchesModel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.columnCount">
+  
+    <nav class="md-nav" aria-label="RegexMatchesModel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.columnCount" class="md-nav__link">
     columnCount()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.data">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.data" class="md-nav__link">
     data()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.headerData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.headerData" class="md-nav__link">
     headerData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.rowCount">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.rowCount" class="md-nav__link">
     rowCount()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel" class="md-nav__link">
     transposeproxymodel
   </a>
-<nav aria-label="transposeproxymodel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel">
+  
+    <nav class="md-nav" aria-label="transposeproxymodel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel" class="md-nav__link">
     TransposeProxyModel
   </a>
-<nav aria-label="TransposeProxyModel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.columnCount">
+  
+    <nav class="md-nav" aria-label="TransposeProxyModel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.columnCount" class="md-nav__link">
     columnCount()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.data">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.data" class="md-nav__link">
     data()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.headerData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.headerData" class="md-nav__link">
     headerData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.index">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.index" class="md-nav__link">
     index()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapFromSource">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapFromSource" class="md-nav__link">
     mapFromSource()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapToSource">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapToSource" class="md-nav__link">
     mapToSource()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.parent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.parent" class="md-nav__link">
     parent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.rowCount">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.rowCount" class="md-nav__link">
     rowCount()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.setSourceModel">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.setSourceModel" class="md-nav__link">
     setSourceModel()
   </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_widgets.html" title="custom_widgets">
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_widgets.html" title="custom_widgets" class="md-nav__link">
       custom_widgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_validators.html" title="custom_validators">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_validators.html" title="custom_validators" class="md-nav__link">
       custom_validators
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_delegates.html" title="custom_delegates">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_delegates.html" title="custom_delegates" class="md-nav__link">
       custom_delegates
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../contributing.html" title="Contributing">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contributing.html" title="Contributing" class="md-nav__link">
       Contributing
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../changelog.html" title="Changelog">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../changelog.html" title="Changelog" class="md-nav__link">
       Changelog
     </a>
-</li>
-</ul>
+  </li>
+
+    
+  </ul>
 </nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_models" class="md-nav__link">
     prettyqt.custom_models
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel" class="md-nav__link">
     columnitemmodel
   </a>
-<nav aria-label="columnitemmodel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel">
+  
+    <nav class="md-nav" aria-label="columnitemmodel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel" class="md-nav__link">
     ColumnItemModel
   </a>
-<nav aria-label="ColumnItemModel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.columnCount">
+  
+    <nav class="md-nav" aria-label="ColumnItemModel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.columnCount" class="md-nav__link">
     columnCount()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.data">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.data" class="md-nav__link">
     data()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.flags">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.flags" class="md-nav__link">
     flags()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.headerData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.columnitemmodel.ColumnItemModel.headerData" class="md-nav__link">
     headerData()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel" class="md-nav__link">
     regexmatchesmodel
   </a>
-<nav aria-label="regexmatchesmodel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel">
+  
+    <nav class="md-nav" aria-label="regexmatchesmodel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel" class="md-nav__link">
     RegexMatchesModel
   </a>
-<nav aria-label="RegexMatchesModel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.columnCount">
+  
+    <nav class="md-nav" aria-label="RegexMatchesModel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.columnCount" class="md-nav__link">
     columnCount()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.data">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.data" class="md-nav__link">
     data()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.headerData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.headerData" class="md-nav__link">
     headerData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.rowCount">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.rowCount" class="md-nav__link">
     rowCount()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel" class="md-nav__link">
     transposeproxymodel
   </a>
-<nav aria-label="transposeproxymodel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel">
+  
+    <nav class="md-nav" aria-label="transposeproxymodel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel" class="md-nav__link">
     TransposeProxyModel
   </a>
-<nav aria-label="TransposeProxyModel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.columnCount">
+  
+    <nav class="md-nav" aria-label="TransposeProxyModel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.columnCount" class="md-nav__link">
     columnCount()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.data">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.data" class="md-nav__link">
     data()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.headerData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.headerData" class="md-nav__link">
     headerData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.index">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.index" class="md-nav__link">
     index()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapFromSource">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapFromSource" class="md-nav__link">
     mapFromSource()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapToSource">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapToSource" class="md-nav__link">
     mapToSource()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.parent">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.parent" class="md-nav__link">
     parent()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.rowCount">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.rowCount" class="md-nav__link">
     rowCount()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.setSourceModel">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.setSourceModel" class="md-nav__link">
     setSourceModel()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset">
-<h1 id="custom_models-module">custom_models module</h1>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="custom_models-module">custom_models module</h1>
 <div class="doc doc-object doc-module">
 <h2 class="hidden-toc" href="#prettyqt.custom_models" id="prettyqt.custom_models" style="visibility: hidden; width: 0; height: 0;">
-</h2>
+        </h2>
 <div class="doc doc-contents first">
 <p>Custom_models module.</p>
 <p>Contains custom models</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_models.columnitemmodel">
-<code>columnitemmodel</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>columnitemmodel</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_models.columnitemmodel.ColumnItemModel">
-<code>ColumnItemModel</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>ColumnItemModel</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Model that provides an interface to an objectree that is build of TreeItems.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.columnitemmodel.ColumnItemModel.columnCount">
-<code class="highlight language-python">
-columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Return the number of columns in the tree.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""Return the number of columns in the tree."""</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">)</span>
@@ -542,14 +885,17 @@ columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.columnitemmodel.ColumnItemModel.data">
-<code class="highlight language-python">
-data<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+data<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Return the tree item at the given index and role.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
     <span class="sd">"""Return the tree item at the given index and role."""</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
@@ -585,14 +931,17 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.columnitemmodel.ColumnItemModel.flags">
-<code class="highlight language-python">
-flags<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+flags<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>flags(self, QModelIndex) -&gt; Qt.ItemFlags</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_CHILDREN</span>
@@ -604,14 +953,17 @@ flags<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.columnitemmodel.ColumnItemModel.headerData">
-<code class="highlight language-python">
-headerData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+headerData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>headerData(self, int, Qt.Orientation, role: int = Qt.ItemDataRole.DisplayRole) -&gt; Any</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">HORIZONTAL</span> <span class="ow">and</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">section</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
@@ -630,26 +982,35 @@ headerData<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_models.regexmatchesmodel">
-<code>regexmatchesmodel</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>regexmatchesmodel</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel">
-<code>RegexMatchesModel</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>RegexMatchesModel</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.columnCount">
-<code class="highlight language-python">
-columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>columnCount(self, parent: QModelIndex = QModelIndex()) -&gt; int</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)</span>
 </code></pre>
@@ -659,14 +1020,17 @@ columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.data">
-<code class="highlight language-python">
-data<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+data<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>data(self, QModelIndex, role: int = Qt.ItemDataRole.DisplayRole) -&gt; Any</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -689,14 +1053,17 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.headerData">
-<code class="highlight language-python">
-headerData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+headerData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>headerData(self, int, Qt.Orientation, role: int = Qt.ItemDataRole.DisplayRole) -&gt; Any</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
@@ -708,14 +1075,17 @@ headerData<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.regexmatchesmodel.RegexMatchesModel.rowCount">
-<code class="highlight language-python">
-rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Required override for AbstractitemModels.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""Required override for AbstractitemModels."""</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matches</span><span class="p">)</span>
@@ -732,26 +1102,35 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel">
-<code>transposeproxymodel</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>transposeproxymodel</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel">
-<code>TransposeProxyModel</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>TransposeProxyModel</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.columnCount">
-<code class="highlight language-python">
-columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fdd08908ed0</span><span class="o">&gt;</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f6e915c3b50</span><span class="o">&gt;</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>columnCount(self, parent: QModelIndex = QModelIndex()) -&gt; int</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">())</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
 </code></pre>
@@ -761,14 +1140,17 @@ columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.data">
-<code class="highlight language-python">
-data<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+data<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>data(self, QModelIndex, role: int = Qt.DisplayRole) -&gt; Any</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -780,14 +1162,17 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.headerData">
-<code class="highlight language-python">
-headerData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+headerData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>headerData(self, int, Qt.Orientation, role: int = Qt.DisplayRole) -&gt; Any</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">headerData</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
 </code></pre>
@@ -797,14 +1182,17 @@ headerData<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.index">
-<code class="highlight language-python">
-index<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+index<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>index(self, int, int, parent: QModelIndex = QModelIndex()) -&gt; QModelIndex</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
 </code></pre>
@@ -814,14 +1202,17 @@ index<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapFromSource">
-<code class="highlight language-python">
-mapFromSource<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+mapFromSource<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>mapFromSource(self, QModelIndex) -&gt; QModelIndex</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mapFromSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">source_index</span><span class="o">.</span><span class="n">column</span><span class="p">(),</span> <span class="n">source_index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
 </code></pre>
@@ -831,14 +1222,17 @@ mapFromSource<span class="p">(</span><span class="bp">self</span><span class="p"
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.mapToSource">
-<code class="highlight language-python">
-mapToSource<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+mapToSource<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>mapToSource(self, QModelIndex) -&gt; QModelIndex</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mapToSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">proxy_index</span><span class="o">.</span><span class="n">column</span><span class="p">(),</span> <span class="n">proxy_index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
 </code></pre>
@@ -848,15 +1242,18 @@ mapToSource<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.parent">
-<code class="highlight language-python">
-parent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+parent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>parent(self, QModelIndex) -&gt; QModelIndex
 parent(self) -&gt; QObject</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">):</span>
     <span class="k">return</span> <span class="kc">None</span>
 </code></pre>
@@ -866,14 +1263,17 @@ parent(self) -&gt; QObject</p>
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.rowCount">
-<code class="highlight language-python">
-rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fdd08908e50</span><span class="o">&gt;</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f6e915c3ad0</span><span class="o">&gt;</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>rowCount(self, parent: QModelIndex = QModelIndex()) -&gt; int</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">())</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">columnCount</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
 </code></pre>
@@ -883,14 +1283,17 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.setSourceModel">
-<code class="highlight language-python">
-setSourceModel<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+setSourceModel<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>setSourceModel(self, QAbstractItemModel)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span> <span class="o">=</span> <span class="n">source_model</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">source_model</span><span class="p">)</span>
@@ -908,11 +1311,19 @@ setSourceModel<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 </div>
 </div>
-</article>
-</div>
-</div>
-</main>
-<!--
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <!--
   Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -934,42 +1345,59 @@ setSourceModel<span class="p">(</span><span class="bp">self</span><span class="p
   IN THE SOFTWARE.
 --><!-- Application footer -->
 <footer class="md-footer">
-<!-- Link to previous and/or next page --><div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<!-- Link to previous page --><a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="syntaxhighlighters.html" rel="prev" title="syntaxhighlighters">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">Previous</span>syntaxhighlighters</span>
-</div>
-</a><!-- Link to next page --><a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="custom_widgets.html" rel="next" title="custom_widgets">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">Next</span>custom_widgets</span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-</div>
-</a></nav>
-</div><!-- Further information -->
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<!-- Social links --></div>
-</div>
+
+  <!-- Link to previous and/or next page --><div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+
+        <!-- Link to previous page --><a href="syntaxhighlighters.html"
+              title="syntaxhighlighters"
+              class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+              rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back
+                    md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Previous</span>syntaxhighlighters</span>
+            </div>
+          </a><!-- Link to next page --><a href="custom_widgets.html"
+              title="custom_widgets"
+              class="md-flex md-footer-nav__link md-footer-nav__link--next"
+              rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Next</span>custom_widgets</span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward
+                    md-footer-nav__button"></i>
+            </div>
+          </a></nav>
+    </div><!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!-- Social links --></div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/vendor.3636a4ec.min.js"></script>
-<script src="../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
-<script>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.c6483021.min.js"></script>
+      <script src="../assets/javascripts/bundle.e2f7d7a4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
+            worker: "../assets/javascripts/worker/search.cbc634e2.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
-</body>
+      
+    
+  </body>
 </html>

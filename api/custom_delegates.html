@@ -1,567 +1,926 @@
 
-<!DOCTYPE html>
-
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://phil65.github.io/PrettyQt/api/custom_delegates.html" rel="canonical"/>
-<link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.12" name="generator"/>
-<title>custom_delegates - PrettyQt</title>
-<link href="../assets/stylesheets/main.4dd2dd8d.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-</head>
-<body dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#custom_delegates-module">
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/custom_delegates.html">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.0">
+    
+    
+      
+        <title>custom_delegates - PrettyQt</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1d877a71.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.17bd0b03.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#custom_delegates-module" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
-<header class="md-header" data-md-component="header">
-<nav aria-label="Header" class="md-header-nav md-grid">
-<a aria-label="PrettyQt" class="md-header-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
-<label class="md-header-nav__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
-</label>
-<div class="md-header-nav__title" data-md-component="header-title">
-<div class="md-header-nav__ellipsis">
-<span class="md-header-nav__topic md-ellipsis">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-header-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             PrettyQt
           </span>
-<span class="md-header-nav__topic md-ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             
               custom_delegates
             
           </span>
-</div>
-</div>
-<label class="md-header-nav__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-</label>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
-</label>
-<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
-</button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</nav>
+    
+    
+  </nav>
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="PrettyQt" class="md-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
     PrettyQt
   </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../index.html" title="Home">
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
       Home
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-2">
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
       API
       <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-label="API" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="nav-2">
-<span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
         API
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="core.html" title="core">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="core.html" title="core" class="md-nav__link">
       core
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="gui.html" title="gui">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="gui.html" title="gui" class="md-nav__link">
       gui
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="widgets.html" title="widgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="widgets.html" title="widgets" class="md-nav__link">
       widgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="charts.html" title="charts">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="charts.html" title="charts" class="md-nav__link">
       charts
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="multimedia.html" title="multimedia">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimedia.html" title="multimedia" class="md-nav__link">
       multimedia
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="multimediawidgets.html" title="multimediawidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimediawidgets.html" title="multimediawidgets" class="md-nav__link">
       multimediawidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="webenginewidgets.html" title="webenginewidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="webenginewidgets.html" title="webenginewidgets" class="md-nav__link">
       webenginewidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="syntaxhighlighters.html" title="syntaxhighlighters">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="syntaxhighlighters.html" title="syntaxhighlighters" class="md-nav__link">
       syntaxhighlighters
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_models.html" title="custom_models">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_models.html" title="custom_models" class="md-nav__link">
       custom_models
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_widgets.html" title="custom_widgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_widgets.html" title="custom_widgets" class="md-nav__link">
       custom_widgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_validators.html" title="custom_validators">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_validators.html" title="custom_validators" class="md-nav__link">
       custom_validators
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
         custom_delegates
         <span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="custom_delegates.html" title="custom_delegates">
+      </label>
+    
+    <a href="custom_delegates.html" title="custom_delegates" class="md-nav__link md-nav__link--active">
       custom_delegates
     </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates" class="md-nav__link">
     prettyqt.custom_delegates
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate" class="md-nav__link">
     buttondelegate
   </a>
-<nav aria-label="buttondelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate">
+  
+    <nav class="md-nav" aria-label="buttondelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate" class="md-nav__link">
     ButtonDelegate
   </a>
-<nav aria-label="ButtonDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.createEditor">
+  
+    <nav class="md-nav" aria-label="ButtonDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.createEditor" class="md-nav__link">
     createEditor()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setEditorData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setEditorData" class="md-nav__link">
     setEditorData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setModelData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setModelData" class="md-nav__link">
     setModelData()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate" class="md-nav__link">
     checkboxdelegate
   </a>
-<nav aria-label="checkboxdelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate">
+  
+    <nav class="md-nav" aria-label="checkboxdelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate" class="md-nav__link">
     CheckBoxDelegate
   </a>
-<nav aria-label="CheckBoxDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.createEditor">
+  
+    <nav class="md-nav" aria-label="CheckBoxDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.createEditor" class="md-nav__link">
     createEditor()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setEditorData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setEditorData" class="md-nav__link">
     setEditorData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setModelData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setModelData" class="md-nav__link">
     setModelData()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.icondelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.icondelegate" class="md-nav__link">
     icondelegate
   </a>
-<nav aria-label="icondelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.icondelegate.IconDelegate">
+  
+    <nav class="md-nav" aria-label="icondelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.icondelegate.IconDelegate" class="md-nav__link">
     IconDelegate
   </a>
-<nav aria-label="IconDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.icondelegate.IconDelegate.paint">
+  
+    <nav class="md-nav" aria-label="IconDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.icondelegate.IconDelegate.paint" class="md-nav__link">
     paint()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.nofocusdelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.nofocusdelegate" class="md-nav__link">
     nofocusdelegate
   </a>
-<nav aria-label="nofocusdelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate">
+  
+    <nav class="md-nav" aria-label="nofocusdelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate" class="md-nav__link">
     NoFocusDelegate
   </a>
-<nav aria-label="NoFocusDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate.paint">
+  
+    <nav class="md-nav" aria-label="NoFocusDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate.paint" class="md-nav__link">
     paint()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate" class="md-nav__link">
     radiodelegate
   </a>
-<nav aria-label="radiodelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate">
+  
+    <nav class="md-nav" aria-label="radiodelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate" class="md-nav__link">
     RadioDelegate
   </a>
-<nav aria-label="RadioDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.createEditor">
+  
+    <nav class="md-nav" aria-label="RadioDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.createEditor" class="md-nav__link">
     createEditor()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.eventFilter">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.eventFilter" class="md-nav__link">
     eventFilter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.setEditorData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.setEditorData" class="md-nav__link">
     setEditorData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.setModelData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.setModelData" class="md-nav__link">
     setModelData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.updateEditorGeometry">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.updateEditorGeometry" class="md-nav__link">
     updateEditorGeometry()
   </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../contributing.html" title="Contributing">
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contributing.html" title="Contributing" class="md-nav__link">
       Contributing
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../changelog.html" title="Changelog">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../changelog.html" title="Changelog" class="md-nav__link">
       Changelog
     </a>
-</li>
-</ul>
+  </li>
+
+    
+  </ul>
 </nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates" class="md-nav__link">
     prettyqt.custom_delegates
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate" class="md-nav__link">
     buttondelegate
   </a>
-<nav aria-label="buttondelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate">
+  
+    <nav class="md-nav" aria-label="buttondelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate" class="md-nav__link">
     ButtonDelegate
   </a>
-<nav aria-label="ButtonDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.createEditor">
+  
+    <nav class="md-nav" aria-label="ButtonDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.createEditor" class="md-nav__link">
     createEditor()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setEditorData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setEditorData" class="md-nav__link">
     setEditorData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setModelData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setModelData" class="md-nav__link">
     setModelData()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate" class="md-nav__link">
     checkboxdelegate
   </a>
-<nav aria-label="checkboxdelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate">
+  
+    <nav class="md-nav" aria-label="checkboxdelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate" class="md-nav__link">
     CheckBoxDelegate
   </a>
-<nav aria-label="CheckBoxDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.createEditor">
+  
+    <nav class="md-nav" aria-label="CheckBoxDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.createEditor" class="md-nav__link">
     createEditor()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setEditorData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setEditorData" class="md-nav__link">
     setEditorData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setModelData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setModelData" class="md-nav__link">
     setModelData()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.icondelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.icondelegate" class="md-nav__link">
     icondelegate
   </a>
-<nav aria-label="icondelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.icondelegate.IconDelegate">
+  
+    <nav class="md-nav" aria-label="icondelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.icondelegate.IconDelegate" class="md-nav__link">
     IconDelegate
   </a>
-<nav aria-label="IconDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.icondelegate.IconDelegate.paint">
+  
+    <nav class="md-nav" aria-label="IconDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.icondelegate.IconDelegate.paint" class="md-nav__link">
     paint()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.nofocusdelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.nofocusdelegate" class="md-nav__link">
     nofocusdelegate
   </a>
-<nav aria-label="nofocusdelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate">
+  
+    <nav class="md-nav" aria-label="nofocusdelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate" class="md-nav__link">
     NoFocusDelegate
   </a>
-<nav aria-label="NoFocusDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate.paint">
+  
+    <nav class="md-nav" aria-label="NoFocusDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate.paint" class="md-nav__link">
     paint()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate" class="md-nav__link">
     radiodelegate
   </a>
-<nav aria-label="radiodelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate">
+  
+    <nav class="md-nav" aria-label="radiodelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate" class="md-nav__link">
     RadioDelegate
   </a>
-<nav aria-label="RadioDelegate" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.createEditor">
+  
+    <nav class="md-nav" aria-label="RadioDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.createEditor" class="md-nav__link">
     createEditor()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.eventFilter">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.eventFilter" class="md-nav__link">
     eventFilter()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.setEditorData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.setEditorData" class="md-nav__link">
     setEditorData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.setModelData">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.setModelData" class="md-nav__link">
     setModelData()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.updateEditorGeometry">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.updateEditorGeometry" class="md-nav__link">
     updateEditorGeometry()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset">
-<h1 id="custom_delegates-module">custom_delegates module</h1>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="custom_delegates-module">custom_delegates module</h1>
 <div class="doc doc-object doc-module">
 <h2 class="hidden-toc" href="#prettyqt.custom_delegates" id="prettyqt.custom_delegates" style="visibility: hidden; width: 0; height: 0;">
-</h2>
+        </h2>
 <div class="doc doc-contents first">
 <p>Module containing custom delegate classes.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_delegates.buttondelegate">
-<code>buttondelegate</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>buttondelegate</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_delegates.buttondelegate.ButtonDelegate">
-<code>ButtonDelegate</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>ButtonDelegate</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.buttondelegate.ButtonDelegate.createEditor">
-<code class="highlight language-python">
-createEditor<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+createEditor<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>createEditor(self, QWidget, QStyleOptionViewItem, QModelIndex) -&gt; QWidget</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">:</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
     <span class="n">btn_callback</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn_role</span><span class="p">)</span>
@@ -578,14 +937,17 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setEditorData">
-<code class="highlight language-python">
-setEditorData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+setEditorData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>setEditorData(self, QWidget, QModelIndex)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">pass</span>
 </code></pre>
@@ -595,14 +957,17 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setModelData">
-<code class="highlight language-python">
-setModelData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+setModelData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>setModelData(self, QWidget, QAbstractItemModel, QModelIndex)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">pass</span>
 </code></pre>
@@ -618,29 +983,38 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_delegates.checkboxdelegate">
-<code>checkboxdelegate</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>checkboxdelegate</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate">
-<code>CheckBoxDelegate</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>CheckBoxDelegate</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <p>Delegate that places a CheckBox in every cell.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.createEditor">
-<code class="highlight language-python">
-createEditor<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+createEditor<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Override.</p>
 <p>instanciate the editor widget and initialize it
 also connect currentIndexChanged signal.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Override.</span>
 
@@ -657,15 +1031,18 @@ also connect currentIndexChanged signal.</p>
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setEditorData">
-<code class="highlight language-python">
-setEditorData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+setEditorData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Override.</p>
 <p>set correct initial value for editor widget</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Override.</span>
 
@@ -681,15 +1058,18 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setModelData">
-<code class="highlight language-python">
-setModelData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combo</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+setModelData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combo</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Override, gets called on self.commitData (?).</p>
 <p>apply the newly selected dtype to the column if possible.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combo</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Override, gets called on self.commitData (?).</span>
 
@@ -714,22 +1094,31 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_delegates.icondelegate">
-<code>icondelegate</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>icondelegate</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_delegates.icondelegate.IconDelegate">
-<code>IconDelegate</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>IconDelegate</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.icondelegate.IconDelegate.paint">
-<code class="highlight language-python">
-paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Override to paint an icon based on given Pixmap / Color / Icon.</p>
 <p>Pixmap / Color / Icon must be set to 'QtCore.Qt.UserRole + 1000'</p>
 <p><strong>Parameters:</strong></p>
@@ -770,8 +1159,8 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/icondelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/icondelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">painter</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">,</span>
@@ -845,26 +1234,35 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_delegates.nofocusdelegate">
-<code>nofocusdelegate</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>nofocusdelegate</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate">
-<code>NoFocusDelegate</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>NoFocusDelegate</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.nofocusdelegate.NoFocusDelegate.paint">
-<code class="highlight language-python">
-paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/nofocusdelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/nofocusdelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">painter</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">,</span>
@@ -887,26 +1285,35 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_delegates.radiodelegate">
-<code>radiodelegate</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>radiodelegate</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.custom_delegates.radiodelegate.RadioDelegate">
-<code>RadioDelegate</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>RadioDelegate</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.radiodelegate.RadioDelegate.createEditor">
-<code class="highlight language-python">
-createEditor<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+createEditor<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>createEditor(self, QWidget, QStyleOptionViewItem, QModelIndex) -&gt; QWidget</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">editor</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
     <span class="n">editor</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
@@ -938,14 +1345,17 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.radiodelegate.RadioDelegate.eventFilter">
-<code class="highlight language-python">
-eventFilter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+eventFilter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>eventFilter(self, QObject, QEvent) -&gt; bool</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">eventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">core</span><span class="o">.</span><span class="n">Event</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QRadioButton</span><span class="p">):</span>
@@ -974,14 +1384,17 @@ eventFilter<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.radiodelegate.RadioDelegate.setEditorData">
-<code class="highlight language-python">
-setEditorData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+setEditorData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>setEditorData(self, QWidget, QModelIndex)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
@@ -993,14 +1406,17 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.radiodelegate.RadioDelegate.setModelData">
-<code class="highlight language-python">
-setModelData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+setModelData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>setModelData(self, QWidget, QAbstractItemModel, QModelIndex)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">button</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">buttonGroup</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">button</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
@@ -1013,14 +1429,17 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.custom_delegates.radiodelegate.RadioDelegate.updateEditorGeometry">
-<code class="highlight language-python">
-updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>updateEditorGeometry(self, QWidget, QStyleOptionViewItem, QModelIndex)</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">updateEditorGeometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span>
     <span class="n">minWidth</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">minimumSizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
@@ -1045,11 +1464,19 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
 </div>
 </div>
 </div>
-</article>
-</div>
-</div>
-</main>
-<!--
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <!--
   Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1071,42 +1498,59 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
   IN THE SOFTWARE.
 --><!-- Application footer -->
 <footer class="md-footer">
-<!-- Link to previous and/or next page --><div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<!-- Link to previous page --><a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="custom_validators.html" rel="prev" title="custom_validators">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">Previous</span>custom_validators</span>
-</div>
-</a><!-- Link to next page --><a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="../contributing.html" rel="next" title="Contributing">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">Next</span>Contributing</span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-</div>
-</a></nav>
-</div><!-- Further information -->
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<!-- Social links --></div>
-</div>
+
+  <!-- Link to previous and/or next page --><div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+
+        <!-- Link to previous page --><a href="custom_validators.html"
+              title="custom_validators"
+              class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+              rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back
+                    md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Previous</span>custom_validators</span>
+            </div>
+          </a><!-- Link to next page --><a href="../contributing.html"
+              title="Contributing"
+              class="md-flex md-footer-nav__link md-footer-nav__link--next"
+              rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Next</span>Contributing</span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward
+                    md-footer-nav__button"></i>
+            </div>
+          </a></nav>
+    </div><!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!-- Social links --></div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/vendor.3636a4ec.min.js"></script>
-<script src="../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
-<script>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.c6483021.min.js"></script>
+      <script src="../assets/javascripts/bundle.e2f7d7a4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
+            worker: "../assets/javascripts/worker/search.cbc634e2.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
-</body>
+      
+    
+  </body>
 </html>

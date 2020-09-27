@@ -1,996 +1,1605 @@
 
-<!DOCTYPE html>
-
-<html class="no-js" lang="en">
-<head>
-<meta charset="utf-8"/>
-<meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://phil65.github.io/PrettyQt/api/core.html" rel="canonical"/>
-<link href="../assets/images/favicon.png" rel="shortcut icon"/>
-<meta content="mkdocs-1.1.2, mkdocs-material-5.5.12" name="generator"/>
-<title>core - PrettyQt</title>
-<link href="../assets/stylesheets/main.4dd2dd8d.min.css" rel="stylesheet"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
-<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-</head>
-<body dir="ltr">
-<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
-<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
-<label class="md-overlay" for="__drawer"></label>
-<div data-md-component="skip">
-<a class="md-skip" href="#core-module">
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+        <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/core.html">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.0">
+    
+    
+      
+        <title>core - PrettyQt</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1d877a71.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.17bd0b03.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#core-module" class="md-skip">
           Skip to content
         </a>
-</div>
-<div data-md-component="announce">
-</div>
-<header class="md-header" data-md-component="header">
-<nav aria-label="Header" class="md-header-nav md-grid">
-<a aria-label="PrettyQt" class="md-header-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
-<label class="md-header-nav__button md-icon" for="__drawer">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
-</label>
-<div class="md-header-nav__title" data-md-component="header-title">
-<div class="md-header-nav__ellipsis">
-<span class="md-header-nav__topic md-ellipsis">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-header-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             PrettyQt
           </span>
-<span class="md-header-nav__topic md-ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
             
               core
             
           </span>
-</div>
-</div>
-<label class="md-header-nav__button md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-</label>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
 <div class="md-search" data-md-component="search" role="dialog">
-<label class="md-search__overlay" for="__search"></label>
-<div class="md-search__inner" role="search">
-<form class="md-search__form" name="search">
-<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" spellcheck="false" type="text"/>
-<label class="md-search__icon md-icon" for="__search">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
-</label>
-<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
-</button>
-</form>
-<div class="md-search__output">
-<div class="md-search__scrollwrap" data-md-scrollfix="">
-<div class="md-search-result" data-md-component="search-result">
-<div class="md-search-result__meta">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
             Initializing search
           </div>
-<ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</nav>
+    
+    
+  </nav>
 </header>
-<div class="md-container" data-md-component="container">
-<main class="md-main" data-md-component="main">
-<div class="md-main__inner md-grid">
-<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
-<label class="md-nav__title" for="__drawer">
-<a aria-label="PrettyQt" class="md-nav__button md-logo" href="https://phil65.github.io/PrettyQt/" title="PrettyQt">
-<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
-</a>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
     PrettyQt
   </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="../index.html" title="Home">
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
       Home
     </a>
-</li>
-<li class="md-nav__item md-nav__item--active md-nav__item--nested">
-<input checked="" class="md-nav__toggle md-toggle" data-md-toggle="nav-2" id="nav-2" type="checkbox"/>
-<label class="md-nav__link" for="nav-2">
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
       API
       <span class="md-nav__icon md-icon"></span>
-</label>
-<nav aria-label="API" class="md-nav" data-md-level="1">
-<label class="md-nav__title" for="nav-2">
-<span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
         API
       </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
-<label class="md-nav__link md-nav__link--active" for="__toc">
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
         core
         <span class="md-nav__icon md-icon"></span>
-</label>
-<a class="md-nav__link md-nav__link--active" href="core.html" title="core">
+      </label>
+    
+    <a href="core.html" title="core" class="md-nav__link md-nav__link--active">
       core
     </a>
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core" class="md-nav__link">
     prettyqt.core
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation" class="md-nav__link">
     abstractanimation
   </a>
-<nav aria-label="abstractanimation" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation">
+  
+    <nav class="md-nav" aria-label="abstractanimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation" class="md-nav__link">
     AbstractAnimation
   </a>
-<nav aria-label="AbstractAnimation" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation.get_direction">
+  
+    <nav class="md-nav" aria-label="AbstractAnimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.get_direction" class="md-nav__link">
     get_direction()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation.get_state">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.get_state" class="md-nav__link">
     get_state()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation.set_direction">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.set_direction" class="md-nav__link">
     set_direction()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation.start_animation">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.start_animation" class="md-nav__link">
     start_animation()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel" class="md-nav__link">
     abstractitemmodel
   </a>
-<nav aria-label="abstractitemmodel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel.AbstractItemModel">
+  
+    <nav class="md-nav" aria-label="abstractitemmodel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel.AbstractItemModel" class="md-nav__link">
     AbstractItemModel
   </a>
-<nav aria-label="AbstractItemModel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel.AbstractItemModel.__len__">
+  
+    <nav class="md-nav" aria-label="AbstractItemModel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel.AbstractItemModel.__len__" class="md-nav__link">
     __len__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel.AbstractItemModel.change_layout">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel.AbstractItemModel.change_layout" class="md-nav__link">
     change_layout()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel.AbstractItemModel.reset_model">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel.AbstractItemModel.reset_model" class="md-nav__link">
     reset_model()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.bytearray" class="md-nav__link">
+    bytearray
+  </a>
+  
+    <nav class="md-nav" aria-label="bytearray">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.bytearray.ByteArray" class="md-nav__link">
+    ByteArray
+  </a>
+  
+    <nav class="md-nav" aria-label="ByteArray">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.bytearray.ByteArray.__reduce__" class="md-nav__link">
+    __reduce__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream" class="md-nav__link">
     datastream
   </a>
-<nav aria-label="datastream" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream">
+  
+    <nav class="md-nav" aria-label="datastream">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream" class="md-nav__link">
     DataStream
   </a>
-<nav aria-label="DataStream" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream.get_byte_order">
+  
+    <nav class="md-nav" aria-label="DataStream">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.get_byte_order" class="md-nav__link">
     get_byte_order()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream.get_float_precision">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.get_float_precision" class="md-nav__link">
     get_float_precision()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream.set_byte_order">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.set_byte_order" class="md-nav__link">
     set_byte_order()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream.set_float_precision">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.set_float_precision" class="md-nav__link">
     set_float_precision()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.date">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.date" class="md-nav__link">
     date
   </a>
-<nav aria-label="date" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.date.Date">
+  
+    <nav class="md-nav" aria-label="date">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.date.Date" class="md-nav__link">
     Date
   </a>
-<nav aria-label="Date" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.date.Date.__reduce__">
+  
+    <nav class="md-nav" aria-label="Date">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.date.Date.__reduce__" class="md-nav__link">
     __reduce__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datetime">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.datetime" class="md-nav__link">
     datetime
   </a>
-<nav aria-label="datetime" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datetime.DateTime">
+  
+    <nav class="md-nav" aria-label="datetime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datetime.DateTime" class="md-nav__link">
     DateTime
   </a>
-<nav aria-label="DateTime" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datetime.DateTime.__reduce__">
+  
+    <nav class="md-nav" aria-label="DateTime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datetime.DateTime.__reduce__" class="md-nav__link">
     __reduce__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.easingcurve">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.easingcurve" class="md-nav__link">
     easingcurve
   </a>
-<nav aria-label="easingcurve" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.easingcurve.EasingCurve">
+  
+    <nav class="md-nav" aria-label="easingcurve">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.easingcurve.EasingCurve" class="md-nav__link">
     EasingCurve
   </a>
-<nav aria-label="EasingCurve" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.easingcurve.EasingCurve.get_type">
+  
+    <nav class="md-nav" aria-label="EasingCurve">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.easingcurve.EasingCurve.get_type" class="md-nav__link">
     get_type()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.easingcurve.EasingCurve.set_type">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.easingcurve.EasingCurve.set_type" class="md-nav__link">
     set_type()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.regularexpression">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.regularexpression" class="md-nav__link">
     regularexpression
   </a>
-<nav aria-label="regularexpression" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.regularexpression.RegularExpression">
+  
+    <nav class="md-nav" aria-label="regularexpression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.regularexpression.RegularExpression" class="md-nav__link">
     RegularExpression
   </a>
-<nav aria-label="RegularExpression" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.regularexpression.RegularExpression.globalMatch">
+  
+    <nav class="md-nav" aria-label="RegularExpression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.regularexpression.RegularExpression.globalMatch" class="md-nav__link">
     globalMatch()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.regularexpression.RegularExpression.match">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.regularexpression.RegularExpression.match" class="md-nav__link">
     match()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.settings" class="md-nav__link">
     settings
   </a>
-<nav aria-label="settings" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings">
+  
+    <nav class="md-nav" aria-label="settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings" class="md-nav__link">
     Settings
   </a>
-<nav aria-label="Settings" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.get_default_format">
+  
+    <nav class="md-nav" aria-label="Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.get_default_format" class="md-nav__link">
     get_default_format()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.get_scope">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.get_scope" class="md-nav__link">
     get_scope()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.group">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.group" class="md-nav__link">
     group()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.read_array">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.read_array" class="md-nav__link">
     read_array()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.set_default_format">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.set_default_format" class="md-nav__link">
     set_default_format()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.set_path">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.set_path" class="md-nav__link">
     set_path()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.write_array">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.write_array" class="md-nav__link">
     write_array()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.size">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.size" class="md-nav__link">
     size
   </a>
-<nav aria-label="size" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.size.Size">
+  
+    <nav class="md-nav" aria-label="size">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.size.Size" class="md-nav__link">
     Size
   </a>
-<nav aria-label="Size" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.size.Size.__reduce__">
+  
+    <nav class="md-nav" aria-label="Size">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.size.Size.__reduce__" class="md-nav__link">
     __reduce__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.timer">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.timer" class="md-nav__link">
     timer
   </a>
-<nav aria-label="timer" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.timer.Timer">
+  
+    <nav class="md-nav" aria-label="timer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.timer.Timer" class="md-nav__link">
     Timer
   </a>
-<nav aria-label="Timer" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.timer.Timer.get_type">
+  
+    <nav class="md-nav" aria-label="Timer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.timer.Timer.get_type" class="md-nav__link">
     get_type()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.timer.Timer.set_type">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.timer.Timer.set_type" class="md-nav__link">
     set_type()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.url">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.url" class="md-nav__link">
     url
   </a>
-<nav aria-label="url" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.url.Url">
+  
+    <nav class="md-nav" aria-label="url">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.url.Url" class="md-nav__link">
     Url
   </a>
-<nav aria-label="Url" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.url.Url.to_path">
+  
+    <nav class="md-nav" aria-label="Url">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.url.Url.to_path" class="md-nav__link">
     to_path()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber" class="md-nav__link">
     versionnumber
   </a>
-<nav aria-label="versionnumber" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber.VersionNumber">
+  
+    <nav class="md-nav" aria-label="versionnumber">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber.VersionNumber" class="md-nav__link">
     VersionNumber
   </a>
-<nav aria-label="VersionNumber" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber.VersionNumber.major">
+  
+    <nav class="md-nav" aria-label="VersionNumber">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber.VersionNumber.major" class="md-nav__link">
     major()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber.VersionNumber.micro">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber.VersionNumber.micro" class="md-nav__link">
     micro()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber.VersionNumber.minor">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber.VersionNumber.minor" class="md-nav__link">
     minor()
   </a>
+  
 </li>
-</ul>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="gui.html" title="gui">
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="gui.html" title="gui" class="md-nav__link">
       gui
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="widgets.html" title="widgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="widgets.html" title="widgets" class="md-nav__link">
       widgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="charts.html" title="charts">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="charts.html" title="charts" class="md-nav__link">
       charts
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="multimedia.html" title="multimedia">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimedia.html" title="multimedia" class="md-nav__link">
       multimedia
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="multimediawidgets.html" title="multimediawidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimediawidgets.html" title="multimediawidgets" class="md-nav__link">
       multimediawidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="webenginewidgets.html" title="webenginewidgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="webenginewidgets.html" title="webenginewidgets" class="md-nav__link">
       webenginewidgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="syntaxhighlighters.html" title="syntaxhighlighters">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="syntaxhighlighters.html" title="syntaxhighlighters" class="md-nav__link">
       syntaxhighlighters
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_models.html" title="custom_models">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_models.html" title="custom_models" class="md-nav__link">
       custom_models
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_widgets.html" title="custom_widgets">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_widgets.html" title="custom_widgets" class="md-nav__link">
       custom_widgets
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_validators.html" title="custom_validators">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_validators.html" title="custom_validators" class="md-nav__link">
       custom_validators
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="custom_delegates.html" title="custom_delegates">
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_delegates.html" title="custom_delegates" class="md-nav__link">
       custom_delegates
     </a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../contributing.html" title="Contributing">
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contributing.html" title="Contributing" class="md-nav__link">
       Contributing
     </a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../changelog.html" title="Changelog">
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../changelog.html" title="Changelog" class="md-nav__link">
       Changelog
     </a>
-</li>
-</ul>
+  </li>
+
+    
+  </ul>
 </nav>
-</div>
-</div>
-</div>
-<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-<div class="md-sidebar__scrollwrap">
-<div class="md-sidebar__inner">
-<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
       Table of contents
     </label>
-<ul class="md-nav__list" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core">
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core" class="md-nav__link">
     prettyqt.core
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation" class="md-nav__link">
     abstractanimation
   </a>
-<nav aria-label="abstractanimation" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation">
+  
+    <nav class="md-nav" aria-label="abstractanimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation" class="md-nav__link">
     AbstractAnimation
   </a>
-<nav aria-label="AbstractAnimation" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation.get_direction">
+  
+    <nav class="md-nav" aria-label="AbstractAnimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.get_direction" class="md-nav__link">
     get_direction()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation.get_state">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.get_state" class="md-nav__link">
     get_state()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation.set_direction">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.set_direction" class="md-nav__link">
     set_direction()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractanimation.AbstractAnimation.start_animation">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.start_animation" class="md-nav__link">
     start_animation()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel" class="md-nav__link">
     abstractitemmodel
   </a>
-<nav aria-label="abstractitemmodel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel.AbstractItemModel">
+  
+    <nav class="md-nav" aria-label="abstractitemmodel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel.AbstractItemModel" class="md-nav__link">
     AbstractItemModel
   </a>
-<nav aria-label="AbstractItemModel" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel.AbstractItemModel.__len__">
+  
+    <nav class="md-nav" aria-label="AbstractItemModel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel.AbstractItemModel.__len__" class="md-nav__link">
     __len__()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel.AbstractItemModel.change_layout">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel.AbstractItemModel.change_layout" class="md-nav__link">
     change_layout()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.abstractitemmodel.AbstractItemModel.reset_model">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractitemmodel.AbstractItemModel.reset_model" class="md-nav__link">
     reset_model()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.bytearray" class="md-nav__link">
+    bytearray
+  </a>
+  
+    <nav class="md-nav" aria-label="bytearray">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.bytearray.ByteArray" class="md-nav__link">
+    ByteArray
+  </a>
+  
+    <nav class="md-nav" aria-label="ByteArray">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.bytearray.ByteArray.__reduce__" class="md-nav__link">
+    __reduce__()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream" class="md-nav__link">
     datastream
   </a>
-<nav aria-label="datastream" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream">
+  
+    <nav class="md-nav" aria-label="datastream">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream" class="md-nav__link">
     DataStream
   </a>
-<nav aria-label="DataStream" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream.get_byte_order">
+  
+    <nav class="md-nav" aria-label="DataStream">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.get_byte_order" class="md-nav__link">
     get_byte_order()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream.get_float_precision">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.get_float_precision" class="md-nav__link">
     get_float_precision()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream.set_byte_order">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.set_byte_order" class="md-nav__link">
     set_byte_order()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datastream.DataStream.set_float_precision">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.set_float_precision" class="md-nav__link">
     set_float_precision()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.date">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.date" class="md-nav__link">
     date
   </a>
-<nav aria-label="date" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.date.Date">
+  
+    <nav class="md-nav" aria-label="date">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.date.Date" class="md-nav__link">
     Date
   </a>
-<nav aria-label="Date" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.date.Date.__reduce__">
+  
+    <nav class="md-nav" aria-label="Date">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.date.Date.__reduce__" class="md-nav__link">
     __reduce__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datetime">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.datetime" class="md-nav__link">
     datetime
   </a>
-<nav aria-label="datetime" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datetime.DateTime">
+  
+    <nav class="md-nav" aria-label="datetime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datetime.DateTime" class="md-nav__link">
     DateTime
   </a>
-<nav aria-label="DateTime" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.datetime.DateTime.__reduce__">
+  
+    <nav class="md-nav" aria-label="DateTime">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datetime.DateTime.__reduce__" class="md-nav__link">
     __reduce__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.easingcurve">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.easingcurve" class="md-nav__link">
     easingcurve
   </a>
-<nav aria-label="easingcurve" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.easingcurve.EasingCurve">
+  
+    <nav class="md-nav" aria-label="easingcurve">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.easingcurve.EasingCurve" class="md-nav__link">
     EasingCurve
   </a>
-<nav aria-label="EasingCurve" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.easingcurve.EasingCurve.get_type">
+  
+    <nav class="md-nav" aria-label="EasingCurve">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.easingcurve.EasingCurve.get_type" class="md-nav__link">
     get_type()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.easingcurve.EasingCurve.set_type">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.easingcurve.EasingCurve.set_type" class="md-nav__link">
     set_type()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.regularexpression">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.regularexpression" class="md-nav__link">
     regularexpression
   </a>
-<nav aria-label="regularexpression" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.regularexpression.RegularExpression">
+  
+    <nav class="md-nav" aria-label="regularexpression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.regularexpression.RegularExpression" class="md-nav__link">
     RegularExpression
   </a>
-<nav aria-label="RegularExpression" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.regularexpression.RegularExpression.globalMatch">
+  
+    <nav class="md-nav" aria-label="RegularExpression">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.regularexpression.RegularExpression.globalMatch" class="md-nav__link">
     globalMatch()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.regularexpression.RegularExpression.match">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.regularexpression.RegularExpression.match" class="md-nav__link">
     match()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.settings" class="md-nav__link">
     settings
   </a>
-<nav aria-label="settings" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings">
+  
+    <nav class="md-nav" aria-label="settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings" class="md-nav__link">
     Settings
   </a>
-<nav aria-label="Settings" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.get_default_format">
+  
+    <nav class="md-nav" aria-label="Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.get_default_format" class="md-nav__link">
     get_default_format()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.get_scope">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.get_scope" class="md-nav__link">
     get_scope()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.group">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.group" class="md-nav__link">
     group()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.read_array">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.read_array" class="md-nav__link">
     read_array()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.set_default_format">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.set_default_format" class="md-nav__link">
     set_default_format()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.set_path">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.set_path" class="md-nav__link">
     set_path()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.settings.Settings.write_array">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.write_array" class="md-nav__link">
     write_array()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.size">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.size" class="md-nav__link">
     size
   </a>
-<nav aria-label="size" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.size.Size">
+  
+    <nav class="md-nav" aria-label="size">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.size.Size" class="md-nav__link">
     Size
   </a>
-<nav aria-label="Size" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.size.Size.__reduce__">
+  
+    <nav class="md-nav" aria-label="Size">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.size.Size.__reduce__" class="md-nav__link">
     __reduce__()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.timer">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.timer" class="md-nav__link">
     timer
   </a>
-<nav aria-label="timer" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.timer.Timer">
+  
+    <nav class="md-nav" aria-label="timer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.timer.Timer" class="md-nav__link">
     Timer
   </a>
-<nav aria-label="Timer" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.timer.Timer.get_type">
+  
+    <nav class="md-nav" aria-label="Timer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.timer.Timer.get_type" class="md-nav__link">
     get_type()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.timer.Timer.set_type">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.timer.Timer.set_type" class="md-nav__link">
     set_type()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.url">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.url" class="md-nav__link">
     url
   </a>
-<nav aria-label="url" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.url.Url">
+  
+    <nav class="md-nav" aria-label="url">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.url.Url" class="md-nav__link">
     Url
   </a>
-<nav aria-label="Url" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.url.Url.to_path">
+  
+    <nav class="md-nav" aria-label="Url">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.url.Url.to_path" class="md-nav__link">
     to_path()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber">
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber" class="md-nav__link">
     versionnumber
   </a>
-<nav aria-label="versionnumber" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber.VersionNumber">
+  
+    <nav class="md-nav" aria-label="versionnumber">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber.VersionNumber" class="md-nav__link">
     VersionNumber
   </a>
-<nav aria-label="VersionNumber" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber.VersionNumber.major">
+  
+    <nav class="md-nav" aria-label="VersionNumber">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber.VersionNumber.major" class="md-nav__link">
     major()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber.VersionNumber.micro">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber.VersionNumber.micro" class="md-nav__link">
     micro()
   </a>
+  
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#prettyqt.core.versionnumber.VersionNumber.minor">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.versionnumber.VersionNumber.minor" class="md-nav__link">
     minor()
   </a>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
-</nav>
+        
+      </ul>
+    </nav>
+  
 </li>
-</ul>
+      
+    </ul>
+  
 </nav>
-</div>
-</div>
-</div>
-<div class="md-content">
-<article class="md-content__inner md-typeset">
-<h1 id="core-module">core module</h1>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="core-module">core module</h1>
 <div class="doc doc-object doc-module">
 <h2 class="hidden-toc" href="#prettyqt.core" id="prettyqt.core" style="visibility: hidden; width: 0; height: 0;">
-</h2>
+        </h2>
 <div class="doc doc-contents first">
 <p>Core module.</p>
 <p>Contains QtCore-based classes</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.abstractanimation">
-<code>abstractanimation</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>abstractanimation</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.abstractanimation.AbstractAnimation">
-<code>AbstractAnimation</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>AbstractAnimation</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.abstractanimation.AbstractAnimation.get_direction">
-<code class="highlight language-python">
-get_direction<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+get_direction<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Get the current animation direction.</p>
 <p>Possible values: "forward", "backward"</p>
 <p><strong>Returns:</strong></p>
@@ -1011,8 +1620,8 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current animation direction.</span>
 
@@ -1029,10 +1638,13 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.abstractanimation.AbstractAnimation.get_state">
-<code class="highlight language-python">
-get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Get the current animation state.</p>
 <p>Possible values: "stopped", "paused", "running"</p>
 <p><strong>Returns:</strong></p>
@@ -1053,8 +1665,8 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current animation state.</span>
 
@@ -1071,12 +1683,15 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.abstractanimation.AbstractAnimation.set_direction">
-<code class="highlight language-python">
-set_direction<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_direction<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Set animation direction.</p>
-<p>Valid values for modality: "forward", "backward"</p>
+<p>Valid values: "forward", "backward"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1116,12 +1731,12 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set animation direction.</span>
 
-<span class="sd">    Valid values for modality: "forward", "backward"</span>
+<span class="sd">    Valid values: "forward", "backward"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        direction: animation direction</span>
@@ -1139,10 +1754,13 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.abstractanimation.AbstractAnimation.start_animation">
-<code class="highlight language-python">
-start_animation<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+start_animation<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Start the animation.</p>
 <p>Valid values for policy: "keep", "delete"</p>
 <p><strong>Parameters:</strong></p>
@@ -1184,8 +1802,8 @@ start_animation<span class="p">(</span><span class="bp">self</span><span class="
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">start_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Start the animation.</span>
 
@@ -1213,29 +1831,38 @@ start_animation<span class="p">(</span><span class="bp">self</span><span class="
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.abstractitemmodel">
-<code>abstractitemmodel</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>abstractitemmodel</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.abstractitemmodel.AbstractItemModel">
-<code>AbstractItemModel</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>AbstractItemModel</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.abstractitemmodel.AbstractItemModel.__len__">
-<code class="highlight language-python">
-__len__<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+__len__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Return amount of rows.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">"""Return amount of rows."""</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
@@ -1246,17 +1873,20 @@ __len__<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.abstractitemmodel.AbstractItemModel.change_layout">
-<code class="highlight language-python">
-change_layout<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+change_layout<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Context manager to change the layout.</p>
 <p>wraps calls with correct signals
 emitted at beginning: layoutAboutToBeChanged
 emitted at end: layoutChanged</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">change_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Context manager to change the layout.</span>
@@ -1276,17 +1906,20 @@ emitted at end: layoutChanged</p>
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.abstractitemmodel.AbstractItemModel.reset_model">
-<code class="highlight language-python">
-reset_model<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+reset_model<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Context manager to reset the model.</p>
 <p>wraps calls with correct signals
 emitted at beginning: beginResetModel
 emitted at end: endResetModel</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">reset_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Context manager to reset the model.</span>
@@ -1311,23 +1944,79 @@ emitted at end: endResetModel</p>
 </div>
 </div>
 <div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.core.bytearray">
+
+        <code>bytearray</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.core.bytearray.ByteArray">
+
+        <code>ByteArray</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.core.bytearray.ByteArray.__reduce__">
+
+        <code class="highlight language-python">
+__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Helper for pickle.</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/core/bytearray.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">),))</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.datastream">
-<code>datastream</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>datastream</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.datastream.DataStream">
-<code>DataStream</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>DataStream</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.get_byte_order">
-<code class="highlight language-python">
-get_byte_order<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+get_byte_order<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Return byte order.</p>
 <p>possible values are "big_endian", "little_endian"</p>
 <p><strong>Returns:</strong></p>
@@ -1348,8 +2037,8 @@ get_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Return byte order.</span>
 
@@ -1366,10 +2055,13 @@ get_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.get_float_precision">
-<code class="highlight language-python">
-get_float_precision<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+get_float_precision<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Return floating point precision.</p>
 <p>possible values are "single", "double"</p>
 <p><strong>Returns:</strong></p>
@@ -1390,8 +2082,8 @@ get_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Return floating point precision.</span>
 
@@ -1408,10 +2100,13 @@ get_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.set_byte_order">
-<code class="highlight language-python">
-set_byte_order<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_byte_order<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Set byte order.</p>
 <p>valid values are: "big_endian", "little endian"</p>
 <p><strong>Parameters:</strong></p>
@@ -1453,8 +2148,8 @@ set_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set byte order.</span>
 
@@ -1476,10 +2171,13 @@ set_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.set_float_precision">
-<code class="highlight language-python">
-set_float_precision<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_float_precision<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Set floating point precision.</p>
 <p>valid values are: "single", "double"</p>
 <p><strong>Parameters:</strong></p>
@@ -1521,8 +2219,8 @@ set_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set floating point precision.</span>
 
@@ -1550,29 +2248,38 @@ set_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.date">
-<code>date</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>date</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.date.Date">
-<code>Date</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>Date</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.date.Date.__reduce__">
-<code class="highlight language-python">
-__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Helper for pickle.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/date.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/date.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">()))</span>
 </code></pre>
@@ -1588,29 +2295,38 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.datetime">
-<code>datetime</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>datetime</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.datetime.DateTime">
-<code>DateTime</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>DateTime</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.datetime.DateTime.__reduce__">
-<code class="highlight language-python">
-__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Helper for pickle.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/datetime.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/datetime.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
 </code></pre>
@@ -1626,22 +2342,31 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.easingcurve">
-<code>easingcurve</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>easingcurve</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.easingcurve.EasingCurve">
-<code>EasingCurve</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>EasingCurve</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.easingcurve.EasingCurve.get_type">
-<code class="highlight language-python">
-get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Get the current easing curve type.</p>
 <p>Possible values: "linear", "in_quad", "out_quad", "in_out_quad",
 "out_in_quad", "in_cubic", "out_cubic", "in_out_cubic", "out_in_cubic",
@@ -1671,8 +2396,8 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/easingcurve.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/easingcurve.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current easing curve type.</span>
 
@@ -1698,10 +2423,13 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.easingcurve.EasingCurve.set_type">
-<code class="highlight language-python">
-set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Set easing curve type.</p>
 <p>Valid values for modality: "linear", "in_quad", "out_quad", "in_out_quad",
 "out_in_quad", "in_cubic", "out_cubic", "in_out_cubic", "out_in_cubic",
@@ -1752,8 +2480,8 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/easingcurve.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/easingcurve.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set easing curve type.</span>
 
@@ -1790,26 +2518,35 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.regularexpression">
-<code>regularexpression</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>regularexpression</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.regularexpression.RegularExpression">
-<code>RegularExpression</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>RegularExpression</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.regularexpression.RegularExpression.globalMatch">
-<code class="highlight language-python">
-globalMatch<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+globalMatch<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>globalMatch(self, str, offset: int = 0, matchType: QRegularExpression.MatchType = QRegularExpression.NormalMatch, matchOptions: Union[QRegularExpression.MatchOptions, QRegularExpression.MatchOption] = QRegularExpression.NoMatchOption) -&gt; QRegularExpressionMatchIterator</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/regularexpression.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/regularexpression.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">globalMatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpressionMatchIterator</span><span class="p">:</span>
     <span class="n">it</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">globalMatch</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpressionMatchIterator</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
@@ -1820,21 +2557,24 @@ globalMatch<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.regularexpression.RegularExpression.match">
-<code class="highlight language-python">
-match<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">match_type</span><span class="o">=</span><span class="s1">'normal'</span><span class="p">,</span> <span class="n">anchored</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+match<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">match_type</span><span class="o">=</span><span class="s1">'normal'</span><span class="p">,</span> <span class="n">anchored</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>match(self, str, offset: int = 0, matchType: QRegularExpression.MatchType = QRegularExpression.NormalMatch, matchOptions: Union[QRegularExpression.MatchOptions, QRegularExpression.MatchOption] = QRegularExpression.NoMatchOption) -&gt; QRegularExpressionMatch</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/regularexpression.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/regularexpression.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">match</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">match_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"normal"</span><span class="p">,</span>
     <span class="n">anchored</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpressionMatch</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">match_type</span> <span class="o">=</span> <span class="n">MATCH_TYPES</span><span class="p">[</span><span class="n">match_type</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">anchored</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -1856,25 +2596,34 @@ match<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.settings">
-<code>settings</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>settings</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.settings.Settings">
-<code>Settings</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>Settings</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.get_default_format">
-<code class="highlight language-python">
-get_default_format<span class="p">()</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+get_default_format<span class="p">()</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Return default settings format.</p>
 <p>possible values are "native", "ini"</p>
 <p><strong>Returns:</strong></p>
@@ -1895,8 +2644,8 @@ get_default_format<span class="p">()</span> </code>
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/settings.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">get_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return default settings format.</span>
@@ -1914,10 +2663,13 @@ get_default_format<span class="p">()</span> </code>
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.get_scope">
-<code class="highlight language-python">
-get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Return scope.</p>
 <p>possible values are "user", "system"</p>
 <p><strong>Returns:</strong></p>
@@ -1938,8 +2690,8 @@ get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/settings.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return scope.</span>
 
@@ -1956,10 +2708,13 @@ get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.group">
-<code class="highlight language-python">
-group<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+group<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Context manager for setting groups.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1983,8 +2738,8 @@ group<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/settings.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Context manager for setting groups.</span>
@@ -2002,10 +2757,13 @@ group<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.read_array">
-<code class="highlight language-python">
-read_array<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+read_array<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Context manager for reading arrays.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -2029,8 +2787,8 @@ read_array<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/settings.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">read_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Context manager for reading arrays.</span>
@@ -2048,13 +2806,16 @@ read_array<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.set_default_format">
-<code class="highlight language-python">
-set_default_format<span class="p">(</span><span class="n">fmt</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_default_format<span class="p">(</span><span class="n">fmt</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Set the default format.</p>
 <p>possible values are "native", "ini"</p>
 <p><strong>Parameters:</strong></p>
@@ -2096,8 +2857,8 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/settings.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">set_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the default format.</span>
@@ -2120,13 +2881,16 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.set_path">
-<code class="highlight language-python">
-set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">scope</span><span class="p">,</span> <span class="n">path</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Set the path to the settings file.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -2175,8 +2939,8 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/settings.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""Set the path to the settings file.</span>
@@ -2200,10 +2964,13 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.write_array">
-<code class="highlight language-python">
-write_array<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+write_array<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">,</span> <span class="n">size</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Context manager for writing arrays.</p>
 <p><strong>Parameters:</strong></p>
 <table>
@@ -2235,8 +3002,8 @@ write_array<span class="p">(</span><span class="bp">self</span><span class="p">,
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/settings.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">write_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">"""Context manager for writing arrays.</span>
@@ -2261,29 +3028,38 @@ write_array<span class="p">(</span><span class="bp">self</span><span class="p">,
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.size">
-<code>size</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>size</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.size.Size">
-<code>Size</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>Size</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.size.Size.__reduce__">
-<code class="highlight language-python">
-__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-<span class="doc doc-properties">
-<small class="doc doc-property doc-property-special"><code>special</code></small>
-</span>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Helper for pickle.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/size.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/size.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()))</span>
 </code></pre>
@@ -2299,22 +3075,31 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.timer">
-<code>timer</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>timer</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.timer.Timer">
-<code>Timer</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>Timer</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.timer.Timer.get_type">
-<code class="highlight language-python">
-get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Return current timer type.</p>
 <p>Possible values: "horizontal", "vertical"</p>
 <p><strong>Returns:</strong></p>
@@ -2335,8 +3120,8 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/timer.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/timer.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current timer type.</span>
 
@@ -2353,10 +3138,13 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.timer.Timer.set_type">
-<code class="highlight language-python">
-set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Set the timer type.</p>
 <p>Allowed values are "horizontal", "vertical"</p>
 <p><strong>Parameters:</strong></p>
@@ -2398,8 +3186,8 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/timer.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/timer.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the timer type.</span>
 
@@ -2427,22 +3215,31 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.url">
-<code>url</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>url</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.url.Url">
-<code>Url</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>Url</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.url.Url.to_path">
-<code class="highlight language-python">
-to_path<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+to_path<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>Get pathlib object from the URL.</p>
 <p><strong>Returns:</strong></p>
 <table>
@@ -2462,8 +3259,8 @@ to_path<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </tbody>
 </table>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/url.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/url.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">to_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
     <span class="sd">"""Get pathlib object from the URL.</span>
 
@@ -2484,26 +3281,35 @@ to_path<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </div>
 <div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.core.versionnumber">
-<code>versionnumber</code>
-</h2>
-<div class="doc doc-contents">
+
+        <code>versionnumber</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-class">
 <h3 class="doc doc-heading" id="prettyqt.core.versionnumber.VersionNumber">
-<code>VersionNumber</code>
-</h3>
-<div class="doc doc-contents">
+
+        <code>VersionNumber</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.versionnumber.VersionNumber.major">
-<code class="highlight language-python">
-major<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+major<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>An integer representing the major version.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/versionnumber.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/versionnumber.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">major</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">"""An integer representing the major version."""</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">majorVersion</span><span class="p">()</span>
@@ -2514,14 +3320,17 @@ major<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.versionnumber.VersionNumber.micro">
-<code class="highlight language-python">
-micro<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+micro<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>An integer representing the micro version.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/versionnumber.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/versionnumber.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">micro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">"""An integer representing the micro version."""</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">microVersion</span><span class="p">()</span>
@@ -2532,14 +3341,17 @@ micro<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 </div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.versionnumber.VersionNumber.minor">
-<code class="highlight language-python">
-minor<span class="p">(</span><span class="bp">self</span><span class="p">)</span> </code>
-</h4>
-<div class="doc doc-contents">
+
+        <code class="highlight language-python">
+minor<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
 <p>An integer representing the minor version.</p>
 <details class="quote">
-<summary>Source code in <code>prettyqt/core/versionnumber.py</code></summary>
-<div class="highlight">
+          <summary>Source code in <code>prettyqt/core/versionnumber.py</code></summary>
+          <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">minor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">"""An integer representing the minor version."""</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">minorVersion</span><span class="p">()</span>
@@ -2557,11 +3369,19 @@ minor<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 </div>
 </div>
 </div>
-</article>
-</div>
-</div>
-</main>
-<!--
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <!--
   Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -2583,42 +3403,59 @@ minor<span class="p">(</span><span class="bp">self</span><span class="p">)</span
   IN THE SOFTWARE.
 --><!-- Application footer -->
 <footer class="md-footer">
-<!-- Link to previous and/or next page --><div class="md-footer-nav">
-<nav class="md-footer-nav__inner md-grid">
-<!-- Link to previous page --><a class="md-flex md-footer-nav__link md-footer-nav__link--prev" href="../index.html" rel="prev" title="Home">
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-</div>
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">Previous</span>Home</span>
-</div>
-</a><!-- Link to next page --><a class="md-flex md-footer-nav__link md-footer-nav__link--next" href="gui.html" rel="next" title="gui">
-<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-<span class="md-flex__ellipsis">
-<span class="md-footer-nav__direction">Next</span>gui</span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-</div>
-</a></nav>
-</div><!-- Further information -->
-<div class="md-footer-meta md-typeset">
-<div class="md-footer-meta__inner md-grid">
-<!-- Social links --></div>
-</div>
+
+  <!-- Link to previous and/or next page --><div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+
+        <!-- Link to previous page --><a href="../index.html"
+              title="Home"
+              class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+              rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back
+                    md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Previous</span>Home</span>
+            </div>
+          </a><!-- Link to next page --><a href="gui.html"
+              title="gui"
+              class="md-flex md-footer-nav__link md-footer-nav__link--next"
+              rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Next</span>gui</span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward
+                    md-footer-nav__button"></i>
+            </div>
+          </a></nav>
+    </div><!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!-- Social links --></div>
+  </div>
 </footer>
-</div>
-<script src="../assets/javascripts/vendor.3636a4ec.min.js"></script>
-<script src="../assets/javascripts/bundle.e9fe3281.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
-<script>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.c6483021.min.js"></script>
+      <script src="../assets/javascripts/bundle.e2f7d7a4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.5eca75d3.min.js"
+            worker: "../assets/javascripts/worker/search.cbc634e2.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
-</body>
+      
+    
+  </body>
 </html>
