@@ -98,11 +98,11 @@ class Label(QtWidgets.QLabel):
     ):
         """Set the alignment of the label's contents."""
         if horizontal is None and vertical is not None:
-            flag = V_ALIGNMENTS.get(vertical)
+            flag = V_ALIGNMENTS[vertical]
         elif vertical is None and horizontal is not None:
-            flag = H_ALIGNMENTS.get(horizontal)
+            flag = H_ALIGNMENTS[horizontal]
         elif vertical is not None and horizontal is not None:
-            flag = V_ALIGNMENTS.get(vertical) | H_ALIGNMENTS.get(horizontal)
+            flag = V_ALIGNMENTS[vertical] | H_ALIGNMENTS[horizontal]
         else:
             return
         self.setAlignment(flag)
