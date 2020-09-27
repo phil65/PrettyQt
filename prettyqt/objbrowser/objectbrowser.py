@@ -39,7 +39,7 @@ class ObjectBrowser(widgets.MainWindow):
         super().__init__()
 
         self._instance_nr = self._add_instance()
-        self.set_icon("mdi.language-python-text")
+        self.set_icon("mdi.language-python")
         # Model
         self._attr_cols = DEFAULT_ATTR_COLS
         self._attr_details = DEFAULT_ATTR_DETAILS

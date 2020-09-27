@@ -44,7 +44,7 @@ class SidebarWidget(widgets.MainWindow):
         self.sidebar.set_icon_size(60)
         if show_settings:
             self.settings_btn = self.sidebar.add_menu_button(
-                "", icon="mdi.settings", menu=self.settings_menu
+                "", icon="mdi.wrench", menu=self.settings_menu
             )
             self.settings_btn.setFixedWidth(self.BUTTON_WIDTH)
             self.settings_btn.setFixedHeight(self.SETTINGS_BUTTON_HEIGHT)
