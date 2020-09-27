@@ -148,6 +148,9 @@ def test_line():
     line2 = core.Line(1, 0, 0, 0)
     assert line2 == reversed(line)
     assert abs(line) == 1
+    repr(line)
+    for p in line:
+        pass
 
 
 def test_linef():
@@ -161,11 +164,15 @@ def test_linef():
     line2 = core.LineF(1, 0, 0, 0)
     assert line2 == reversed(line)
     assert abs(line) == 1
+    repr(line)
+    for p in line:
+        pass
 
 
 def test_mimedata():
     mime_data = core.MimeData()
     mime_data.set_data("type a", "data")
+    assert "type a" in mime_data
     assert mime_data.get_data("type a") == "data"
     dct = dict(a=2, b="test")
     mime_data.set_json_data("type a", dct)
@@ -237,6 +244,14 @@ def test_propertyanimation():
     with pytest.raises(InvalidParamError):
         animation.start_animation("test")
     animation.start_animation("keep")
+    animation[0] = 1
+    assert animation[0] == 1
+
+    def test(val):
+        return val
+
+    animation.set_easing(test)
+    assert animation.get_easing() == test
 
 
 def test_rect():
