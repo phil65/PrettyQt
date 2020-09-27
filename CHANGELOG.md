@@ -1,3 +1,23 @@
+## v0.122.0 (2020-09-27)
+
+### Feat
+
+- **gui**: add PageLayout
+- **gui**: add Movie class
+- **gui**: add PageSize class
+- **gui**: add FontInfo class
+- **core**: add UrlQuery class
+- add network module
+- **PropertyAnimation**: add get/set_property_name methods
+- **core**: add ParallelAnimationGroup
+- **widgets**: add SizeGrip class
+- **widgets**: add DataWidgetMapper class
+- **core**: add StringListModel
+- **VersionNumber**: add get_python_version
+- **gui**: add Transform class
+- **Painter**: add draw_polygon method
+- add core.ByteArray
+
 ## v0.121.0 (2020-09-10)
 
 ### Feat
