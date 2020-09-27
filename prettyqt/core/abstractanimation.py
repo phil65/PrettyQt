@@ -27,7 +27,7 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
     def set_direction(self, direction: str):
         """Set animation direction.
 
-        Valid values for modality: "forward", "backward"
+        Valid values: "forward", "backward"
 
         Args:
             direction: animation direction
