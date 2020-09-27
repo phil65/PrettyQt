@@ -408,6 +408,14 @@ def test_url():
     repr(url)
 
 
+def test_urlquery():
+    query = core.UrlQuery()
+    query += dict(a="test", b="test2")
+    assert str(query) == "a=test&b=test2"
+    assert repr(query) == "UrlQuery('a=test&b=test2')"
+    assert "a" in query
+
+
 def test_versionnumber():
     a = core.VersionNumber(1, 2, 3)
     b = core.VersionNumber("1.2.4")

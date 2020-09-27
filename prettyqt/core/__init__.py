@@ -28,6 +28,7 @@ from .versionnumber import VersionNumber
 from .datastream import DataStream
 from .bytearray import ByteArray
 from .url import Url
+from .urlquery import UrlQuery
 from .coreapplication import CoreApplication
 from .iodevice import IODevice
 from .filedevice import FileDevice
@@ -79,6 +80,7 @@ __all__ = [
     "VersionNumber",
     "ByteArray",
     "Url",
+    "UrlQuery",
     "CoreApplication",
     "IODevice",
     "FileDevice",
