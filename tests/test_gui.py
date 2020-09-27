@@ -164,6 +164,19 @@ def test_keysequence():
         seq = pickle.load(jar)
 
 
+def test_movie():
+    movie = gui.Movie()
+    with pytest.raises(InvalidParamError):
+        movie.set_cache_mode("test")
+    movie.set_cache_mode("all")
+    assert movie.get_cache_mode() == "all"
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(movie, jar)
+    with open("data.pkl", "rb") as jar:
+        movie = pickle.load(jar)
+    repr(movie)
+
+
 def test_standarditem():
     s = gui.StandardItem()
     with open("data.pkl", "wb") as jar:

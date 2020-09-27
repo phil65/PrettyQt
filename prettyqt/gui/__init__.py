@@ -42,6 +42,7 @@ from .fontmetrics import FontMetrics
 from .fontinfo import FontInfo
 from .fontdatabase import FontDatabase
 from .region import Region
+from .movie import Movie
 from .paintdevice import PaintDevice
 from .transform import Transform
 from .pagedpaintdevice import PagedPaintDevice
@@ -93,6 +94,7 @@ __all__ = [
     "FontInfo",
     "FontDatabase",
     "Region",
+    "Movie",
     "PaintDevice",
     "Transform",
     "PagedPaintDevice",
