@@ -261,6 +261,23 @@ def test_painter():
     # assert painter.get_composition_mode() == "source_atop"
 
 
+def test_pagelayout():
+    layout = gui.PageLayout()
+    with pytest.raises(InvalidParamError):
+        layout.set_orientation("test")
+    layout.set_orientation("landscape")
+    assert layout.get_orientation() == "landscape"
+    with pytest.raises(InvalidParamError):
+        layout.set_mode("test")
+    layout.set_mode("full_page")
+    assert layout.get_mode() == "full_page"
+    with pytest.raises(InvalidParamError):
+        layout.set_units("test")
+    layout.set_units("pica")
+    assert layout.get_units() == "pica"
+    layout.get_page_size()
+
+
 def test_pagesize():
     size = gui.PageSize()
     assert size.get_id() == "custom"
