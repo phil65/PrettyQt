@@ -248,6 +248,19 @@ def test_painter():
     # assert painter.get_composition_mode() == "source_atop"
 
 
+def test_pagesize():
+    size = gui.PageSize()
+    assert size.get_id() == "custom"
+    with pytest.raises(ValueError):
+        size.get_definition_units()
+    size = gui.PageSize(gui.PageSize.A3)
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(size, jar)
+    with open("data.pkl", "rb") as jar:
+        size = pickle.load(jar)
+    assert size.get_definition_units() == "millimeter"
+
+
 def test_painterpath():
     path = gui.PainterPath()
     rect = core.RectF(0, 0, 1, 1)

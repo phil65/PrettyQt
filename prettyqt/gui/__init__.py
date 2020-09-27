@@ -36,6 +36,7 @@ from .gradient import Gradient
 from .lineargradient import LinearGradient
 from .radialgradient import RadialGradient
 from .conicalgradient import ConicalGradient
+from .pagesize import PageSize
 from .font import Font
 from .fontmetrics import FontMetrics
 from .fontinfo import FontInfo
@@ -74,6 +75,7 @@ __all__ = [
     "LinearGradient",
     "RadialGradient",
     "ConicalGradient",
+    "PageSize",
     "GuiApplication",
     "Validator",
     "RegExpValidator",
