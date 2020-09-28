@@ -391,6 +391,15 @@ def test_sortfilterproxymodel():
     core.SortFilterProxyModel()
 
 
+def test_textboundaryfinder():
+    finder = core.TextBoundaryFinder("This is a test", boundary_type="word")
+    for boundary in finder:
+        pass
+    repr(finder)
+    assert finder.get_boundary_type() == "word"
+    assert finder.get_boundary_reasons() == ["break_opportunity", "start_of_item"]
+
+
 def test_thread():
     core.ThreadPool()
 

@@ -44,6 +44,7 @@ from .fileinfo import FileInfo
 # from .sizef import SizeF
 # from .point import Point
 # from .pointf import PointF
+from .textboundaryfinder import TextBoundaryFinder
 from .timer import Timer
 from .translator import Translator
 from .thread import Thread
@@ -103,6 +104,7 @@ __all__ = [
     "ParallelAnimationGroup",
     "VariantAnimation",
     "PropertyAnimation",
+    "TextBoundaryFinder",
     "Timer",
     "Translator",
     "Thread",
