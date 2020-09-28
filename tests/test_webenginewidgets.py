@@ -26,11 +26,11 @@ def test_webenginepage(qapp):
 
 
 def test_webengineprofile(qapp):
-    profile = webenginewidgets.WebEngineProfile()
-    profile.set_persistent_cookie_policy("allow")
+    profile = webenginewidgets.WebEngineProfile("MyProfile")
+    profile.set_persistent_cookie_policy("force")
     with pytest.raises(InvalidParamError):
         profile.set_persistent_cookie_policy("test")
-    assert profile.get_persistent_cookie_policy() == "allow"
+    assert profile.get_persistent_cookie_policy() == "force"
     profile.set_http_cache_type("disk")
     with pytest.raises(InvalidParamError):
         profile.set_http_cache_type("test")

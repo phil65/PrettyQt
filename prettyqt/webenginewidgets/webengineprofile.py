@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from qtpy import QtWebEngineWidgets
+# from qtpy import QtWebEngineWidgets
+
+try:
+    from PyQt5 import QtWebEngineWidgets  # type: ignore
+except ImportError:
+    from PySide2 import QtWebEngineWidgets
 
 from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
@@ -9,7 +14,7 @@ from prettyqt.utils import bidict, InvalidParamError
 HTTP_CACHE_TYPES = bidict(
     none=QtWebEngineWidgets.QWebEngineProfile.NoCache,
     disk=QtWebEngineWidgets.QWebEngineProfile.DiskHttpCache,
-    memory=QtWebEngineWidgets.QWebEngineProfile.DownloadCompleted,
+    memory=QtWebEngineWidgets.QWebEngineProfile.MemoryHttpCache,
 )
 
 PERSISTENT_COOKIE_POLICIES = bidict(
