@@ -18,11 +18,19 @@ def test_webengineview(qapp):
 
 
 def test_webenginepage(qapp):
-    widget = webenginewidgets.WebEnginePage()
-    widget.set_zoom(1.5)
-    widget.set_url("http://www.google.de")
-    widget.load_url("http://www.google.de")
-    widget.find_text("test", backward=True, case_sensitive=True, callback=None)
+    page = webenginewidgets.WebEnginePage()
+    page.set_zoom(1.5)
+    page.set_url("http://www.google.de")
+    page.load_url("http://www.google.de")
+    page.find_text("test", backward=True, case_sensitive=True, callback=None)
+    page.set_lifecycle_state("discarded")
+    with pytest.raises(InvalidParamError):
+        page.set_lifecycle_state("test")
+    assert page.get_lifecycle_state() == "discarded"
+    page.trigger_action("select_all")
+    page.set_feature_permission(
+        "http://www.google.de", "media_audio_capture", "granted_by_user"
+    )
 
 
 def test_webengineprofile(qapp):
