@@ -101,5 +101,5 @@ if __name__ == "__main__":
     widget.setItemDelegateForColumn(0, delegate)
     widget.openPersistentEditor(item)
     widget.show()
-    app.exec_()
+    app.main_loop()
     print(delegate.choices)

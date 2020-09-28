@@ -55,4 +55,4 @@ if __name__ == "__main__":
     status_bar.setup_default_bar()
     dlg.setStatusBar(status_bar)
     dlg.show()
-    app.exec_()
+    app.main_loop()

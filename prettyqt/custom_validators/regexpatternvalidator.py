@@ -45,4 +45,4 @@ if __name__ == "__main__":
     val = RegexPatternValidator()
     w.set_validator(val)
     w.show()
-    app.exec_()
+    app.main_loop()

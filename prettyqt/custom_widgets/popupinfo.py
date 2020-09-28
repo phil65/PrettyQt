@@ -49,4 +49,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = PopupInfo()
     widget.show_popup("test")
-    app.exec_()
+    app.main_loop()

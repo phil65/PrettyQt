@@ -67,4 +67,4 @@ if __name__ == "__main__":
     btn.set_font("Consolas")
     btn.show()
     btn.value_changed.connect(print)
-    app.exec_()
+    app.main_loop()

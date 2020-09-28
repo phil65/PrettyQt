@@ -305,4 +305,4 @@ if __name__ == "__main__":
     widget_2 = widgets.Widget()
     tab_widget.add_tab(widget_2, "Test 2")
     tab_widget.show()
-    app.exec_()
+    app.main_loop()

@@ -16,4 +16,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = MdiSubWindow()
     widget.show()
-    app.exec_()
+    app.main_loop()

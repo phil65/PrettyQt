@@ -271,4 +271,4 @@ if __name__ == "__main__":
     )
     w.box.add(widget)
     w.show()
-    app.exec_()
+    app.main_loop()

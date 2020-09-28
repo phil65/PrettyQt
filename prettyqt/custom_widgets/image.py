@@ -61,4 +61,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = Image("https://act-crm-addon.de/wp-content/uploads/2018/12/test.png")
     widget.show()
-    app.exec_()
+    app.main_loop()

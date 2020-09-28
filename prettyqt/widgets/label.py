@@ -243,4 +243,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = Label("http://www.test.de")
     widget.show()
-    app.exec_()
+    app.main_loop()

@@ -230,4 +230,4 @@ if __name__ == "__main__":
     editor = widgets.PlainTextEdit()
     highlighter = PygmentsHighlighter(editor.document(), lexer="regex")
     editor.show()
-    app.exec_()
+    app.main_loop()

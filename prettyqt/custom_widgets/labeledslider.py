@@ -136,4 +136,4 @@ if __name__ == "__main__":
 
     ha.addWidget(w)
     frame.show()
-    app.exec_()
+    app.main_loop()

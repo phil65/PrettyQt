@@ -148,4 +148,4 @@ if __name__ == "__main__":
     widget.set_regex_validator("[0-9]+")
     widget.setFont(gui.Font("Consolas"))
     widget.show()
-    app.exec_()
+    app.main_loop()

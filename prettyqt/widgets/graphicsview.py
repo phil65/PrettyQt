@@ -257,4 +257,4 @@ if __name__ == "__main__":
     scene.add_line(core.Line(0, 0, 200, 100))
     view.setScene(scene)
     view.show()
-    app.exec_()
+    app.main_loop()

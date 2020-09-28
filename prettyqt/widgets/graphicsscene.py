@@ -229,5 +229,5 @@ if __name__ == "__main__":
     scene = GraphicsScene()
     scene.add_line(core.Line(0, 0, 10, 10))
     scene.show()
-    app.exec_()
+    app.main_loop()
     scene.show()

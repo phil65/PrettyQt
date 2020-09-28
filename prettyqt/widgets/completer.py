@@ -117,4 +117,4 @@ if __name__ == "__main__":
 
     app = widgets.app()
     completer = Completer()
-    app.exec_()
+    app.main_loop()

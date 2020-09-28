@@ -245,4 +245,4 @@ if __name__ == "__main__":
     widget = FileDialog()
     widget.show()
     print(widget.__getstate__())
-    app.exec_()
+    app.main_loop()

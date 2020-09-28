@@ -18,7 +18,8 @@ class MenuBar(QtWidgets.QMenuBar):
 
     def serialize_fields(self):
         return dict(
-            default_up=self.isDefaultUp(), native_menu_bar=self.isNativeMenuBar(),
+            default_up=self.isDefaultUp(),
+            native_menu_bar=self.isNativeMenuBar(),
         )
 
     def add_action(self, action: Union[QtWidgets.QAction, str]) -> QtWidgets.QAction:
@@ -70,4 +71,4 @@ if __name__ == "__main__":
     menu_bar.add(menu)
     win.setMenuBar(menu_bar)
     win.show()
-    app.exec_()
+    app.main_loop()

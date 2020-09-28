@@ -67,4 +67,4 @@ if __name__ == "__main__":
     act = widgets.Action()
     action.addAction(act)
     print(act in action)
-    app.exec_()
+    app.main_loop()

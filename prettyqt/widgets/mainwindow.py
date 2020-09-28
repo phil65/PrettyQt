@@ -200,4 +200,4 @@ if __name__ == "__main__":
     app = widgets.app()
     form = MainWindow()
     form.show()
-    app.exec_()
+    app.main_loop()

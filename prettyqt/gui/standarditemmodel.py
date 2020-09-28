@@ -76,4 +76,4 @@ if __name__ == "__main__":
         model = pickle.load(jar)
     model += gui.StandardItem("Item2")
     w.show()
-    app.exec_()
+    app.main_loop()

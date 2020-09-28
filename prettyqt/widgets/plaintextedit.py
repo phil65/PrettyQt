@@ -47,7 +47,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def serialize_fields(self):
         return dict(
-            text=self.text(), read_only=self.isReadOnly(), font=gui.Font(self.font()),
+            text=self.text(),
+            read_only=self.isReadOnly(),
+            font=gui.Font(self.font()),
         )
 
     def __setstate__(self, state):
@@ -207,4 +209,4 @@ if __name__ == "__main__":
     with widget.current_cursor() as c:
         c.select_text(2, 4)
     widget.show()
-    app.exec_()
+    app.main_loop()

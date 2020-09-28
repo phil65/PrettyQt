@@ -18,4 +18,4 @@ if __name__ == "__main__":
     widget = widgets.LineEdit("This is a test")
     widget.setValidator(val)
     widget.show()
-    app.exec_()
+    app.main_loop()

@@ -80,4 +80,4 @@ if __name__ == "__main__":
     widget = CollapsibleFrame()
     widget.add_widget(widgets.Label("test"))
     widget.show()
-    app.exec_()
+    app.main_loop()

@@ -63,4 +63,4 @@ if __name__ == "__main__":
     btn.slider.set_tick_position("below")
     btn.set_value(4)
     btn.show()
-    app.exec_()
+    app.main_loop()

@@ -176,4 +176,4 @@ if __name__ == "__main__":
     widget.add_default_buttons(buttons)
     widget.button_clicked.connect(print)
     widget.show()
-    app.exec_()
+    app.main_loop()

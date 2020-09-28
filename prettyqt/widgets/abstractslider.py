@@ -136,4 +136,4 @@ if __name__ == "__main__":
     slider.setRange(0, 100)
     slider.value_changed.connect(print)
     slider.show()
-    app.exec_()
+    app.main_loop()

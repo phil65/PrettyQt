@@ -71,4 +71,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     reader = TextBrowser()
     reader.show()
-    app.exec_()
+    app.main_loop()

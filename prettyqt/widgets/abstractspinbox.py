@@ -133,4 +133,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = AbstractSpinBox()
     widget.show()
-    app.exec_()
+    app.main_loop()

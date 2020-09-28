@@ -69,4 +69,4 @@ if __name__ == "__main__":
     reader = MarkdownWindow()
     # reader.web_view.load(QtCore.QUrl("blank"))
     reader.show()
-    app.exec_()
+    app.main_loop()

@@ -189,4 +189,4 @@ if __name__ == "__main__":
     ex.add_tab(page_3, "Help", "mdi.help-circle-outline")
     ex.set_marker(page_3)
     ex.show()
-    app.exec_()
+    app.main_loop()

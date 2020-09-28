@@ -67,4 +67,4 @@ if __name__ == "__main__":
     app = widgets.app()
     result = InputDialog.get_text("a", "b", icon="mdi.timer")
     print(result)
-    app.exec_()
+    app.main_loop()

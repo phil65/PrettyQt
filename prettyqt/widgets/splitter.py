@@ -123,4 +123,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     widget = Splitter()
     widget.show()
-    app.exec_()
+    app.main_loop()

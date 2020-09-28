@@ -32,4 +32,4 @@ if __name__ == "__main__":
 
     app = widgets.app()
     pass
-    app.exec_()
+    app.main_loop()

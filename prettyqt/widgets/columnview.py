@@ -17,4 +17,4 @@ if __name__ == "__main__":
     dlg = QtWidgets.QMainWindow()
     status_bar = ColumnView()
     dlg.show()
-    app.exec_()
+    app.main_loop()

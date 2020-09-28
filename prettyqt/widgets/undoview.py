@@ -37,4 +37,4 @@ if __name__ == "__main__":
     stack.add_command("test", redo=lambda: print("redo"), undo=lambda: print("undo"))
     view.setStack(stack)
     view.show()
-    app.exec_()
+    app.main_loop()

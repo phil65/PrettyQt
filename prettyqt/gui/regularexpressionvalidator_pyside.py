@@ -55,4 +55,4 @@ if __name__ == "__main__":
     val.set_regex(r"\w\d\d")
     w.set_validator(val)
     w.show()
-    app.exec_()
+    app.main_loop()

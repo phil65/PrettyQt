@@ -43,4 +43,4 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     dlg = ListView()
     dlg.show()
-    app.exec_()
+    app.main_loop()

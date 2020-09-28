@@ -96,4 +96,4 @@ if __name__ == "__main__":
     btn = FileChooserButton()
     btn.show()
     btn.value_changed.connect(print)
-    app.exec_()
+    app.main_loop()

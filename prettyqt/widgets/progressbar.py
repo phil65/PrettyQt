@@ -90,7 +90,7 @@ class ProgressBar(QtWidgets.QProgressBar):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     widget = ProgressBar()
     widget.show()
-    app.exec_()
+    app.main_loop()

@@ -49,4 +49,4 @@ if __name__ == "__main__":
     dct = dict(a="test", b="test2")
     w = BoolDictToolButton("Title", None, dct)
     w.show()
-    app.exec_()
+    app.main_loop()

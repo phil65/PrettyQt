@@ -45,4 +45,4 @@ class ColorDialog(QtWidgets.QColorDialog):
 if __name__ == "__main__":
     app = widgets.app()
     ColorDialog.get_color()
-    app.exec_()
+    app.main_loop()

@@ -75,4 +75,4 @@ if __name__ == "__main__":
     app = widgets.app()
     w = CalendarWidget()
     w.show()
-    app.exec_()
+    app.main_loop()

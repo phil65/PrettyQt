@@ -66,4 +66,4 @@ if __name__ == "__main__":
     view.resize(500, 300)
     print(view.model())
     print(view.model().rowCount())
-    app.exec_()
+    app.main_loop()

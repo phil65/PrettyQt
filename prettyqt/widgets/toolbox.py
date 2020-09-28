@@ -65,4 +65,4 @@ if __name__ == "__main__":
     tb.add_widget(w2)
     print(len(tb))
     tb.show()
-    app.exec_()
+    app.main_loop()

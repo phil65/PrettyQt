@@ -85,4 +85,4 @@ if __name__ == "__main__":
     app = widgets.app()
     dlg = CodeEditor()
     dlg.show()
-    app.exec_()
+    app.main_loop()

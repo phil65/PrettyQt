@@ -97,4 +97,4 @@ if __name__ == "__main__":
     editor = widgets.PlainTextEdit()
     highlighter = YamlHighlighter(editor.document())
     editor.show()
-    app.exec_()
+    app.main_loop()

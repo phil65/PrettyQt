@@ -27,4 +27,4 @@ class ImageViewer(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.app()
     ex = ImageViewer()
-    app.exec_()
+    app.main_loop()

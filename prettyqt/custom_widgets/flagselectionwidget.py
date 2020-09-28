@@ -71,5 +71,5 @@ if __name__ == "__main__":
     items = {re.MULTILINE: "MultiLine", re.IGNORECASE: "Ignore case"}
     widget.add_items(items)
     widget.show()
-    app.exec_()
+    app.main_loop()
     print(widget.get_value())

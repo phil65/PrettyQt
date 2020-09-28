@@ -60,4 +60,4 @@ if __name__ == "__main__":
     widget = TableView()
     widget.set_model(widgets.FileSystemModel())
     widget.show()
-    app.exec_()
+    app.main_loop()

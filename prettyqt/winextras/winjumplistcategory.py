@@ -58,4 +58,4 @@ if __name__ == "__main__":
     app = widgets.app()
     cat = WinJumpListCategory()
     len(cat)
-    app.exec_()
+    app.main_loop()

@@ -37,7 +37,8 @@ class Slider(QtWidgets.QSlider):
 
     def serialize_fields(self):
         return dict(
-            tick_position=self.get_tick_position(), tick_interval=self.tickInterval(),
+            tick_position=self.get_tick_position(),
+            tick_interval=self.tickInterval(),
         )
 
     def __setstate__(self, state):
@@ -96,4 +97,4 @@ if __name__ == "__main__":
     slider.setRange(0, 100)
     slider.value_changed.connect(print)
     slider.show()
-    app.exec_()
+    app.main_loop()

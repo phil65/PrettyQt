@@ -85,4 +85,4 @@ if __name__ == "__main__":
     widget.value_changed.connect(print)
     widget.set_value(gui.Font("Script"))
     widget.show()
-    app.exec_()
+    app.main_loop()

@@ -103,4 +103,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = RegexInput(show_flags=False, show_error=False)
     widget.show()
-    app.exec_()
+    app.main_loop()

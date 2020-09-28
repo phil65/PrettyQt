@@ -15,7 +15,9 @@ class PromptLineEdit(widgets.LineEdit):
     clear_clicked = core.Signal()
 
     def __init__(
-        self, parent: Optional[QtWidgets.QWidget] = None, prompt_text: str = "Search",
+        self,
+        parent: Optional[QtWidgets.QWidget] = None,
+        prompt_text: str = "Search",
     ):
         super().__init__(parent=parent)
         self._margin = self.sizeHint().height() - 2
@@ -95,4 +97,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = PromptLineEdit()
     widget.show()
-    app.exec_()
+    app.main_loop()

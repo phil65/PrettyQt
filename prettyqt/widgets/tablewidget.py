@@ -29,4 +29,4 @@ if __name__ == "__main__":
     widget.insertRow(0)
     widget[0, 0] = widgets.TableWidgetItem("test")
     widget.show()
-    app.exec_()
+    app.main_loop()

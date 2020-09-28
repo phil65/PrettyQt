@@ -166,4 +166,4 @@ if __name__ == "__main__":
     ret.set_icon("mdi.folder")
     ret.show()
     print(ret)
-    app.exec_()
+    app.main_loop()

@@ -37,5 +37,5 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = ListInput()
     widget.show()
-    app.exec_()
+    app.main_loop()
     print(widget.get_value())

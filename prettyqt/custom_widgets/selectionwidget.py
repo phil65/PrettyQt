@@ -122,5 +122,5 @@ if __name__ == "__main__":
     widget.add_items(items)
     widget.add_custom(label="custom", typ="float")
     widget.show()
-    app.exec_()
+    app.main_loop()
     print(widget.get_value())

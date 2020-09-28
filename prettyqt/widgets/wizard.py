@@ -20,4 +20,4 @@ if __name__ == "__main__":
     dlg = Wizard()
     dlg.add_widget_as_page(widgets.RadioButton("test"))
     dlg.show()
-    app.exec_()
+    app.main_loop()

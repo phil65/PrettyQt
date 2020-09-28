@@ -213,4 +213,4 @@ if __name__ == "__main__":
     widget.set_syntaxhighlighter("python")
     widget.set_wrap_mode("anywhere")
     widget.show()
-    app.exec_()
+    app.main_loop()
