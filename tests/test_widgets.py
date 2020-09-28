@@ -781,7 +781,12 @@ def test_slider(qtbot):
     assert widget.is_vertical()
     with pytest.raises(InvalidParamError):
         widget.set_tick_position("test")
-    widget.set_tick_position("right")
+    widget.set_tick_position("below")
+    assert widget.get_tick_position() == "below"
+    widget.set_orientation("horizontal")
+    with pytest.raises(InvalidParamError):
+        widget.set_orientation("test")
+    assert widget.get_orientation() == "horizontal"
 
 
 def test_statusbar(qtbot):
