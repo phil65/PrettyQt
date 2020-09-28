@@ -39,6 +39,7 @@ from .date import Date
 from .datetime import DateTime
 
 from .size import Size
+from .fileinfo import FileInfo
 
 # from .sizef import SizeF
 # from .point import Point
@@ -91,6 +92,7 @@ __all__ = [
     "DateTime",
     "Size",
     "SizeF",
+    "FileInfo",
     "Point",
     "PointF",
     "Line",
