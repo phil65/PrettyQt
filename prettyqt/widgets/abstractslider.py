@@ -16,6 +16,8 @@ SLIDER_ACTIONS = bidict(
     move=QtWidgets.QAbstractSlider.SliderMove,
 )
 
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
+
 QtWidgets.QAbstractSlider.__bases__ = (widgets.Widget,)
 
 
@@ -70,6 +72,31 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
     def set_vertical(self):
         """Set slider orientation to vertical."""
         self.setOrientation(QtCore.Qt.Vertical)
+
+    def set_orientation(self, orientation: str):
+        """Set the orientation of the slider.
+
+        Allowed values are "horizontal", "vertical"
+
+        Args:
+            orientation: orientation for the slider
+
+        Raises:
+            InvalidParamError: orientation does not exist
+        """
+        if orientation not in ORIENTATIONS:
+            raise InvalidParamError(orientation, ORIENTATIONS)
+        self.setOrientation(ORIENTATIONS[orientation])
+
+    def get_orientation(self) -> str:
+        """Return current orientation.
+
+        Possible values: "horizontal", "vertical"
+
+        Returns:
+            orientation
+        """
+        return ORIENTATIONS.inv[self.orientation()]
 
     def scroll_to_min(self):
         """Scroll to the minimum value of the slider."""
