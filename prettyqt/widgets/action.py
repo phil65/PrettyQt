@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional
+from typing import Optional, Callable
 
 from qtpy import QtCore, QtWidgets
 
@@ -46,6 +46,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         checked: bool = False,
         statustip: str = "",
         enabled: bool = True,
+        callback: Optional[Callable] = None,
     ):
         super().__init__(parent)
         self.set_text(text)
@@ -56,6 +57,8 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         self.set_checked(checked)
         self.set_statustip(statustip)
         self.set_enabled(enabled)
+        if callback is not None:
+            self.triggered.connect(callback)
 
     def __repr__(self) -> str:
         cls_name = self.__class__.__name__
