@@ -19,6 +19,8 @@ ALIGNMENTS = bidict(
     bottom=QtCore.Qt.AlignBottom,
 )
 
+ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
+
 
 QtWidgets.QProgressBar.__bases__ = (widgets.Widget,)
 
@@ -34,6 +36,20 @@ class ProgressBar(QtWidgets.QProgressBar):
     ):
         super().__init__(parent=parent)
         self.setTextVisible(text_visible)
+
+    def serialize_fields(self):
+        return dict(
+            alignment=self.get_alignment(),
+            format=self.format(),
+            # inverted_appearance=self.invertedAppearance(),
+            minimum=self.minimum(),
+            maximum=self.maximum(),
+            orientation=self.get_orientation(),
+            text=self.text(),
+            # text_direction=self.get_text_direction(),
+            text_visible=self.isTextVisible(),
+            value=self.value(),
+        )
 
     def set_alignment(self, alignment: str):
         """Set the alignment of the layout.
@@ -84,6 +100,31 @@ class ProgressBar(QtWidgets.QProgressBar):
             Text direction
         """
         return TEXT_DIRECTIONS.inv[self.textDirection()]
+
+    def set_orientation(self, orientation: str):
+        """Set the orientation of the progress bar.
+
+        Allowed values are "horizontal", "vertical"
+
+        Args:
+            orientation: orientation for the progress bar
+
+        Raises:
+            InvalidParamError: orientation does not exist
+        """
+        if orientation not in ORIENTATIONS:
+            raise InvalidParamError(orientation, ORIENTATIONS)
+        self.setOrientation(ORIENTATIONS[orientation])
+
+    def get_orientation(self) -> str:
+        """Return current orientation.
+
+        Possible values: "horizontal", "vertical"
+
+        Returns:
+            orientation
+        """
+        return ORIENTATIONS.inv[self.orientation()]
 
     def set_range(self, start: int, end: int):
         self.setRange(start, end)
