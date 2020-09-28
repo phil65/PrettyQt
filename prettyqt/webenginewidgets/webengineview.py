@@ -5,13 +5,17 @@ from typing import Callable, Union
 
 from qtpy import QtWebEngineWidgets
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, webenginewidgets
 
 
 QtWebEngineWidgets.QWebEngineView.__bases__ = (widgets.Widget,)
 
 
 class WebEngineView(QtWebEngineWidgets.QWebEngineView):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setPage(webenginewidgets.WebEnginePage(self))
+
     def set_url(self, url: Union[str, pathlib.Path]):
         """Set the url of the WebEngineView.
 
@@ -100,7 +104,7 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    path = path = "E:\\dev\\datacook\\processanalyzer\\docs\\index.html"
+    path = "https://www.google.com"
     widget = WebEngineView()
     widget.set_url(path)
     widget.find_text("test", backward=True, case_sensitive=True, callback=None)
