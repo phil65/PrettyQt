@@ -11,7 +11,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.0">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.1">
     
     
       
@@ -19,10 +19,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1d877a71.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.17bd0b03.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f72e892.min.css">
         
       
     
@@ -559,6 +559,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractslider.AbstractSlider.get_orientation" class="md-nav__link">
+    get_orientation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractslider.AbstractSlider.get_repeat_action" class="md-nav__link">
     get_repeat_action()
   </a>
@@ -596,6 +603,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractslider.AbstractSlider.set_horizontal" class="md-nav__link">
     set_horizontal()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractslider.AbstractSlider.set_orientation" class="md-nav__link">
+    set_orientation()
   </a>
   
 </li>
@@ -2348,6 +2362,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.progressbar.ProgressBar.get_orientation" class="md-nav__link">
+    get_orientation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.progressbar.ProgressBar.get_text_direction" class="md-nav__link">
     get_text_direction()
   </a>
@@ -2357,6 +2378,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.progressbar.ProgressBar.set_alignment" class="md-nav__link">
     set_alignment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.progressbar.ProgressBar.set_orientation" class="md-nav__link">
+    set_orientation()
   </a>
   
 </li>
@@ -3552,6 +3580,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractslider.AbstractSlider.get_orientation" class="md-nav__link">
+    get_orientation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractslider.AbstractSlider.get_repeat_action" class="md-nav__link">
     get_repeat_action()
   </a>
@@ -3589,6 +3624,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractslider.AbstractSlider.set_horizontal" class="md-nav__link">
     set_horizontal()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractslider.AbstractSlider.set_orientation" class="md-nav__link">
+    set_orientation()
   </a>
   
 </li>
@@ -5341,6 +5383,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.progressbar.ProgressBar.get_orientation" class="md-nav__link">
+    get_orientation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.progressbar.ProgressBar.get_text_direction" class="md-nav__link">
     get_text_direction()
   </a>
@@ -5350,6 +5399,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.progressbar.ProgressBar.set_alignment" class="md-nav__link">
     set_alignment()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.progressbar.ProgressBar.set_orientation" class="md-nav__link">
+    set_orientation()
   </a>
   
 </li>
@@ -6081,7 +6137,7 @@
                 
                 <h1 id="widgets-module">widgets module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.widgets" id="prettyqt.widgets" style="visibility: hidden; width: 0; height: 0;">
+<h2 class="hidden-toc" href="#prettyqt.widgets" id="prettyqt.widgets" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>widgets module.</p>
@@ -7515,6 +7571,51 @@ set_vertical_scrollbar_width<span class="p">(</span><span class="bp">self</span>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.abstractslider.AbstractSlider.get_orientation">
+
+        <code class="highlight language-python">
+get_orientation<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current orientation.</p>
+<p>Possible values: "horizontal", "vertical"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>orientation</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current orientation.</span>
+
+<span class="sd">    Possible values: "horizontal", "vertical"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        orientation</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.abstractslider.AbstractSlider.get_repeat_action">
 
         <code class="highlight language-python">
@@ -7703,6 +7804,77 @@ set_horizontal<span class="p">(</span><span class="bp">self</span><span class="p
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Set slider orientation to horizontal."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Horizontal</span><span class="p">)</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.abstractslider.AbstractSlider.set_orientation">
+
+        <code class="highlight language-python">
+set_orientation<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the orientation of the slider.</p>
+<p>Allowed values are "horizontal", "vertical"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orientation</code></td>
+<td><code>str</code></td>
+<td>
+<p>orientation for the slider</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>orientation does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the orientation of the slider.</span>
+
+<span class="sd">    Allowed values are "horizontal", "vertical"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        orientation: orientation for the slider</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: orientation does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ORIENTATIONS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">ORIENTATIONS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">ORIENTATIONS</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -15550,6 +15722,51 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.progressbar.ProgressBar.get_orientation">
+
+        <code class="highlight language-python">
+get_orientation<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current orientation.</p>
+<p>Possible values: "horizontal", "vertical"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>orientation</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/progressbar.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current orientation.</span>
+
+<span class="sd">    Possible values: "horizontal", "vertical"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        orientation</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.progressbar.ProgressBar.get_text_direction">
 
         <code class="highlight language-python">
@@ -15660,6 +15877,77 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="k">if</span> <span class="n">alignment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALIGNMENTS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">ALIGNMENTS</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.progressbar.ProgressBar.set_orientation">
+
+        <code class="highlight language-python">
+set_orientation<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the orientation of the progress bar.</p>
+<p>Allowed values are "horizontal", "vertical"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orientation</code></td>
+<td><code>str</code></td>
+<td>
+<p>orientation for the progress bar</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>orientation does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/progressbar.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the orientation of the progress bar.</span>
+
+<span class="sd">    Allowed values are "horizontal", "vertical"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        orientation: orientation for the progress bar</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: orientation does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ORIENTATIONS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">ORIENTATIONS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">ORIENTATIONS</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -18785,15 +19073,15 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
       
     </div>
     
-      <script src="../assets/javascripts/vendor.c6483021.min.js"></script>
-      <script src="../assets/javascripts/bundle.e2f7d7a4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="../assets/javascripts/bundle.aa3f9871.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
           base: "..",
           features: [],
           search: Object.assign({
-            worker: "../assets/javascripts/worker/search.cbc634e2.min.js"
+            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
           }, typeof search !== "undefined" && search)
         })
       </script>
