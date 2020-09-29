@@ -1,3 +1,9 @@
+## v0.123.1 (2020-09-29)
+
+### Fix
+
+- add missing State import in core module
+
 ## v0.123.0 (2020-09-29)
 
 ### Feat
