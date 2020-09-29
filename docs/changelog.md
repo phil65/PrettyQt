@@ -1,3 +1,17 @@
+## v0.123.0 (2020-09-29)
+
+### Feat
+
+- **core**: add State classes
+- **core**: add TextBoundaryFinder class
+- **ProgressBar**: add get/set_orientation methods + serialize work
+- **Action**: allow setting callback with ctor
+- **WebEngineView**: set subclassed WebEnginePage by default
+- **WebEnginePage**: add some more methods and constants
+- **AbstractSlider**: add get/set_orientation methods
+- **core**: add FileInfo class
+- **webenginewidgets**: add WebEngineProfile class
+
 ## v0.122.1 (2020-09-27)
 
 ### Fix
