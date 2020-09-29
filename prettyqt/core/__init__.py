@@ -71,6 +71,9 @@ from .stringlistmodel import StringListModel
 from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel
 from .standardpaths import StandardPaths
+from .abstractstate import AbstractState
+from .finalstate import FinalState
+from .historystate import HistoryState
 
 if core.VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
@@ -134,4 +137,7 @@ __all__ = [
     "TransposeProxyModel",
     "AbstractTableModel",
     "StandardPaths",
+    "AbstractState",
+    "FinalState",
+    "HistoryState",
 ]

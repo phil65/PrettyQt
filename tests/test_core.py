@@ -137,6 +137,14 @@ def test_file():
     repr(buf)
 
 
+def test_historystate():
+    state = core.HistoryState()
+    state.set_history_type("deep")
+    assert state.get_history_type() == "deep"
+    with pytest.raises(InvalidParamError):
+        state.set_history_type("test")
+
+
 def test_line():
     line = core.Line()
     p1 = core.Point(0, 0)
@@ -385,6 +393,14 @@ def test_standardpaths():
         assert path != []
     name = core.StandardPaths.get_display_name("cache")
     assert name == "Cache"
+
+
+def test_state():
+    state = core.State()
+    state.set_child_mode("parallel")
+    assert state.get_child_mode() == "parallel"
+    with pytest.raises(InvalidParamError):
+        state.set_child_mode("test")
 
 
 def test_sortfilterproxymodel():
