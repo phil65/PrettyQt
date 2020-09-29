@@ -74,6 +74,7 @@ from .standardpaths import StandardPaths
 from .abstractstate import AbstractState
 from .finalstate import FinalState
 from .historystate import HistoryState
+from .state import State
 
 if core.VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
@@ -140,4 +141,5 @@ __all__ = [
     "AbstractState",
     "FinalState",
     "HistoryState",
+    "State",
 ]
