@@ -30,6 +30,9 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
             url = core.Url(url)
         self.setUrl(url)
 
+    def get_url(self) -> core.Url:
+        return core.Url(self.url())
+
     def load_url(self, url: Union[str, pathlib.Path]):
         """Load the URL.
 
