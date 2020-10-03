@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Union
+
 from qtpy import QtCore, QtGui
 
 from prettyqt.utils import bidict
@@ -117,7 +119,7 @@ class KeySequence(QtGui.QKeySequence):
     def __reduce__(self):
         return (self.__class__, (self.toString(),))
 
-    def get_matches(self, seq):
+    def get_matches(self, seq: Union[QtGui.QKeySequence, str]):
         if isinstance(seq, str):
             seq = KeySequence(seq)
         return SEQUENCE_MATCHES.inv[self.matches(seq)]
