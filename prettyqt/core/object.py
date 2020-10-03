@@ -13,8 +13,8 @@ counter_dict: DefaultDict = defaultdict(itertools.count)
 
 
 class Object(QtCore.QObject):
-    def serialize_fields(self):
-        return dict(object_name=self.objectName())
+    def __repr__(self):
+        return f"{self.__class__.__name__}()"
 
     def __setstate__(self, state):
         self.__init__()
@@ -22,6 +22,9 @@ class Object(QtCore.QObject):
 
     def __getstate__(self):
         return self.serialize()
+
+    def serialize_fields(self):
+        return dict(object_name=self.objectName())
 
     def serialize(self):
         classes = type(self).mro()
