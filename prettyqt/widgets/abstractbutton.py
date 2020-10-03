@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from qtpy import QtWidgets
+from typing import Union
+
+from qtpy import QtWidgets, QtGui
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
@@ -46,9 +48,13 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.set_icon(qicon)
         self.setIconSize(core.Size(size, size))
 
-    def set_shortcut(self, shortcut):
-        if shortcut:
-            self.setShortcut(shortcut)
+    def set_shortcut(self, shortcut: Union[None, QtGui.QKeySequence, str]):
+        if shortcut is None:
+            shortcut = ""
+        self.setShortcut(shortcut)
+
+    def get_shortcut(self) -> gui.KeySequence:
+        return gui.KeySequence(self.shortcut())
 
     def set_text(self, text: str):
         self.setText(text)
