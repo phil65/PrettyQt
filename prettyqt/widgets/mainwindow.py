@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import List
+from typing import List, Optional
 import logging
 
 from qtpy import QtCore, QtWidgets
@@ -68,8 +68,11 @@ class MainWindow(QtWidgets.QMainWindow):
         self.resize(*state["size"])
         self.box = self.layout()
 
-    def set_widget(self, widget: QtWidgets.QWidget):
-        self.setCentralWidget(widget)
+    def set_widget(self, widget: Optional[QtWidgets.QWidget]):
+        if widget is None:
+            self.takeCentralWidget()
+        else:
+            self.setCentralWidget(widget)
 
     def createPopupMenu(self) -> widgets.Menu:
         # qactions = self.createPopupMenu()
