@@ -38,6 +38,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.setMenuBar(widgets.MenuBar())
         self.setDockOptions(
             self.AllowTabbedDocks
             | self.AllowNestedDocks
