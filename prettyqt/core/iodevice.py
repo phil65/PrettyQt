@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import contextlib
+
 from qtpy import QtCore
 
 from prettyqt import core
@@ -23,4 +25,10 @@ QtCore.QIODevice.__bases__ = (core.Object,)
 
 
 class IODevice(QtCore.QIODevice):
-    pass
+    @contextlib.contextmanager
+    def open_file(self, mode: str):
+        if mode in OPEN_MODES:
+            mode = OPEN_MODES[mode]
+        self.open(mode)
+        yield self
+        self.close()
