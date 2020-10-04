@@ -33,6 +33,7 @@ from .coreapplication import CoreApplication
 from .iodevice import IODevice
 from .filedevice import FileDevice
 from .file import File
+from .temporaryfile import TemporaryFile
 from .buffer import Buffer
 from .settings import Settings
 from .date import Date
@@ -91,6 +92,7 @@ __all__ = [
     "IODevice",
     "FileDevice",
     "File",
+    "TemporaryFile",
     "Buffer",
     "Settings",
     "Date",
