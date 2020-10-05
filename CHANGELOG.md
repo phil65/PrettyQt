@@ -1,3 +1,18 @@
+## v0.124.0 (2020-10-05)
+
+### Feat
+
+- **IODevice**: add get_open_mode method
+- Improve repr and add str method for Date and DateTime
+- **core**: add TemporaryFile class
+- **FileDevice**: add set/get_file_time methods
+- **MainWindow**: allow setting central widget to None
+- **AbstractButton**: add get_shortcut method
+- **Url**: add from_user_input method
+- **WebEngineView**: add get_url method
+- **FileInfo**: support pathlib + add proper repr
+- **KeySequence**: allow initializing with standard keys
+
 ## v0.123.1 (2020-09-29)
 
 ### Fix
