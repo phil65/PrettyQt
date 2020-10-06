@@ -2,7 +2,7 @@
 
 from typing import Callable, Optional, Union, Dict
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import gui, widgets
 
@@ -13,9 +13,9 @@ def create_dot_pixmap(color="red", size=16):
     px.fill(QtCore.Qt.transparent)
     px_size = px.rect().adjusted(1, 1, -1, -1)
     with gui.Painter(px) as painter:
-        painter.setRenderHint(QtGui.QPainter.Antialiasing)
+        painter.use_antialiasing()
         painter.setBrush(col)
-        painter.setPen(gui.Pen(gui.Color(15, 15, 15), 1.25))
+        painter.set_pen(color=gui.Color(15, 15, 15), width=1.25)
         painter.drawEllipse(px_size)
     return px
 
@@ -90,14 +90,20 @@ class SidebarWidget(widgets.MainWindow):
         # self.sidebar.add_separator()
         if area == "top":
             act = widgets.Action(
-                text=title, icon=icon, shortcut=shortcut, parent=self.sidebar
+                text=title,
+                icon=icon,
+                shortcut=shortcut,
+                parent=self.sidebar,
+                checkable=True,
+                callback=lambda: self.set_tab(item),
             )
-            act.setCheckable(True)
-            act.triggered.connect(lambda: self.set_tab(item))
             self.sidebar.insertAction(self.spacer_action, act)
         else:
             act = self.sidebar.add_action(
-                title, icon, lambda: self.set_tab(item), checkable=True
+                label=title,
+                icon=icon,
+                callback=lambda: self.set_tab(item),
+                checkable=True,
             )
         button = self.sidebar.widgetForAction(act)
         button.setFixedWidth(self.BUTTON_WIDTH)
@@ -116,7 +122,7 @@ class SidebarWidget(widgets.MainWindow):
         px = template.pixmap(100, 100)
         painter = gui.Painter(px)
         dot = create_dot_pixmap(color)
-        painter.drawPixmap(QtCore.QPoint(0, 0), dot)
+        painter.drawPixmap(0, 0, dot)
         painter.end()
         icon = gui.Icon()
         icon.addPixmap(px)
@@ -165,10 +171,13 @@ class SidebarWidget(widgets.MainWindow):
         #                                      icon=icon,
         #                                      callback=callback,
         #                                      checkable=checkable)
-        act = widgets.Action(text=title, icon=icon, shortcut=shortcut)
-        act.setCheckable(checkable)
-        if callback:
-            act.triggered.connect(callback)
+        act = widgets.Action(
+            text=title,
+            icon=icon,
+            shortcut=shortcut,
+            checkable=checkable,
+            callback=callback,
+        )
         if area == "top":
             self.sidebar.insertAction(self.spacer_action, act)
         if area == "bottom":
