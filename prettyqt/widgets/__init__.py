@@ -140,6 +140,9 @@ from .undoview import UndoView
 from .datawidgetmapper import DataWidgetMapper
 from .sizegrip import SizeGrip
 
+from .keyeventtransition import KeyEventTransition
+from .mouseeventtransition import MouseEventTransition
+
 
 def app():
     if Application.instance() is not None:
@@ -278,4 +281,6 @@ __all__ = [
     "UndoView",
     "DataWidgetMapper",
     "SizeGrip",
+    "KeyEventTransition",
+    "MouseEventTransition",
 ]
