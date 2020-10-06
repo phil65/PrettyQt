@@ -373,6 +373,14 @@ def test_settings(qapp):
     repr(s)
 
 
+def test_signaltransition():
+    trans = core.SignalTransition()
+    trans.set_transition_type("parallel")
+    assert trans.get_transition_type() == "parallel"
+    with pytest.raises(InvalidParamError):
+        trans.set_transition_type("test")
+
+
 def test_size():
     size = core.Size()
     repr(size)
