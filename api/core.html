@@ -332,6 +332,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.core.abstracttransition" class="md-nav__link">
+    abstracttransition
+  </a>
+  
+    <nav class="md-nav" aria-label="abstracttransition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstracttransition.AbstractTransition" class="md-nav__link">
+    AbstractTransition
+  </a>
+  
+    <nav class="md-nav" aria-label="AbstractTransition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstracttransition.AbstractTransition.get_transition_type" class="md-nav__link">
+    get_transition_type()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstracttransition.AbstractTransition.set_transition_type" class="md-nav__link">
+    set_transition_type()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.core.bytearray" class="md-nav__link">
     bytearray
   </a>
@@ -1197,6 +1237,46 @@
           <li class="md-nav__item">
   <a href="#prettyqt.core.abstractitemmodel.AbstractItemModel.reset_model" class="md-nav__link">
     reset_model()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.core.abstracttransition" class="md-nav__link">
+    abstracttransition
+  </a>
+  
+    <nav class="md-nav" aria-label="abstracttransition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstracttransition.AbstractTransition" class="md-nav__link">
+    AbstractTransition
+  </a>
+  
+    <nav class="md-nav" aria-label="AbstractTransition">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstracttransition.AbstractTransition.get_transition_type" class="md-nav__link">
+    get_transition_type()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.abstracttransition.AbstractTransition.set_transition_type" class="md-nav__link">
+    set_transition_type()
   </a>
   
 </li>
@@ -2172,6 +2252,146 @@ emitted at end: endResetModel</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">beginResetModel</span><span class="p">()</span>
     <span class="k">yield</span> <span class="kc">None</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">endResetModel</span><span class="p">()</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.core.abstracttransition">
+
+        <code>abstracttransition</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.core.abstracttransition.AbstractTransition">
+
+        <code>AbstractTransition</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.core.abstracttransition.AbstractTransition.get_transition_type">
+
+        <code class="highlight language-python">
+get_transition_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current transition type.</p>
+<p>Possible values: "exclusive", "parallel"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>transition type</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/core/abstracttransition.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_transition_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current transition type.</span>
+
+<span class="sd">    Possible values: "exclusive", "parallel"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        transition type</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">TRANSITION_TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transitionType</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.core.abstracttransition.AbstractTransition.set_transition_type">
+
+        <code class="highlight language-python">
+set_transition_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set transition type.</p>
+<p>Allowed values are "exclusive", "parallel"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>typ</code></td>
+<td><code>str</code></td>
+<td>
+<p>transition type to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>transition type does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/core/abstracttransition.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_transition_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set transition type.</span>
+
+<span class="sd">    Allowed values are "exclusive", "parallel"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        typ: transition type to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: transition type does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TRANSITION_TYPES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TRANSITION_TYPES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTransitionType</span><span class="p">(</span><span class="n">TRANSITION_TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
