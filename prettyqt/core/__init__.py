@@ -75,8 +75,6 @@ from .standardpaths import StandardPaths
 from .abstracttransition import AbstractTransition
 from .signaltransition import SignalTransition
 from .eventtransition import EventTransition
-from .keyeventtransition import KeyEventTransition
-from .mouseeventtransition import MouseEventTransition
 from .abstractstate import AbstractState
 from .finalstate import FinalState
 from .historystate import HistoryState
@@ -152,6 +150,4 @@ __all__ = [
     "AbstractTransition",
     "SignalTransition",
     "EventTransition",
-    "KeyEventTransition",
-    "MouseEventTransition",
 ]
