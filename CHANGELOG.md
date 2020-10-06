@@ -1,3 +1,14 @@
+## v0.125.0 (2020-10-07)
+
+### Feat
+
+- **widgets**: add Transition classes
+- **core**: add Transition classes
+
+### Fix
+
+- fix Action.get_shortcut for NoneValue
+
 ## v0.124.0 (2020-10-05)
 
 ### Feat
