@@ -46,8 +46,7 @@ class SidebarWidget(widgets.MainWindow):
             self.settings_btn = self.sidebar.add_menu_button(
                 "", icon="mdi.wrench", menu=self.settings_menu
             )
-            self.settings_btn.setFixedWidth(self.BUTTON_WIDTH)
-            self.settings_btn.setFixedHeight(self.SETTINGS_BUTTON_HEIGHT)
+            self.settings_btn.setFixedSize(self.BUTTON_WIDTH, self.SETTINGS_BUTTON_HEIGHT)
             self.settings_btn.set_style("icon")
             self.sidebar.orientationChanged.connect(self._on_orientation_change)
             self.sidebar.add_separator()
@@ -64,11 +63,9 @@ class SidebarWidget(widgets.MainWindow):
 
     def _on_orientation_change(self, orientation: QtCore.Qt.Orientation):
         if orientation == QtCore.Qt.Horizontal:
-            self.settings_btn.setFixedWidth(34)
-            self.settings_btn.setFixedHeight(34)
+            self.settings_btn.setFixedSize(34, 34)
         else:
-            self.settings_btn.setFixedWidth(self.BUTTON_WIDTH)
-            self.settings_btn.setFixedHeight(self.SETTINGS_BUTTON_HEIGHT)
+            self.settings_btn.setFixedSize(self.BUTTON_WIDTH, self.SETTINGS_BUTTON_HEIGHT)
 
     def add_tab(
         self,
