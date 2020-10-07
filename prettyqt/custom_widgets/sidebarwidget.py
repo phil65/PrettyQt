@@ -104,12 +104,10 @@ class SidebarWidget(widgets.MainWindow):
             return None
         template = self.icon_map[widget]
         px = template.pixmap(100, 100)
-        painter = gui.Painter(px)
-        dot = gui.Pixmap.create_dot(color)
-        painter.drawPixmap(0, 0, dot)
-        painter.end()
-        icon = gui.Icon()
-        icon.addPixmap(px)
+        with gui.Painter(px) as painter:
+            dot = gui.Pixmap.create_dot(color)
+            painter.drawPixmap(0, 0, dot)
+        icon = gui.Icon(px)
         self.button_map[widget].set_icon(icon)
 
     def _get_widget(self, item: Union[str, int, widgets.Widget]):
