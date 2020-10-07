@@ -7,19 +7,6 @@ from qtpy import QtWidgets, QtCore
 from prettyqt import gui, widgets
 
 
-def create_dot_pixmap(color="red", size=16):
-    col = gui.Color(color)
-    px = gui.Pixmap(size, size)
-    px.fill(QtCore.Qt.transparent)
-    px_size = px.rect().adjusted(1, 1, -1, -1)
-    with gui.Painter(px) as painter:
-        painter.use_antialiasing()
-        painter.setBrush(col)
-        painter.set_pen(color=gui.Color(15, 15, 15), width=1.25)
-        painter.drawEllipse(px_size)
-    return px
-
-
 class SidebarWidget(widgets.MainWindow):
     BUTTON_WIDTH = 100
     SETTINGS_BUTTON_HEIGHT = 28
@@ -118,7 +105,7 @@ class SidebarWidget(widgets.MainWindow):
         template = self.icon_map[widget]
         px = template.pixmap(100, 100)
         painter = gui.Painter(px)
-        dot = create_dot_pixmap(color)
+        dot = gui.Pixmap.create_dot(color)
         painter.drawPixmap(0, 0, dot)
         painter.end()
         icon = gui.Icon()
