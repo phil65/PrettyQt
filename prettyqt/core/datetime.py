@@ -1,10 +1,19 @@
 # -*- coding: utf-8 -*-
 
+from typing import Union
 import datetime
 
 from qtpy import QtCore
 
 from prettyqt import core
+from prettyqt.utils import bidict
+
+DATE_FORMATS = bidict(
+    text=QtCore.Qt.TextDate,
+    iso=QtCore.Qt.ISODate,
+    iso_with_ms=QtCore.Qt.ISODateWithMs,
+    rfc_2822=QtCore.Qt.RFC2822Date,
+)
 
 
 class DateTime(QtCore.QDateTime):
@@ -24,7 +33,20 @@ class DateTime(QtCore.QDateTime):
         except TypeError:
             return self.toPyDateTime()
 
+    def get_timezone(self):
+        return core.TimeZone(self.timeZone())
+
+    def set_timezone(self, zone: Union[str, QtCore.QTimeZone]):
+        if isinstance(zone, str):
+            self.setTimeZone(core.TimeZone(zone))
+        else:
+            self.setTimeZone(zone)
+
+    def to_format(self, fmt: str):
+        return self.toString(DATE_FORMATS[fmt])
+
 
 if __name__ == "__main__":
-    date = core.Date(2000, 11, 11)
+    date = DateTime(2000, 11, 11, 1, 1)
     dt = DateTime(date)
+    pdt = dt.get_value()

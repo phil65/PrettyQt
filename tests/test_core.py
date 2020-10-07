@@ -97,6 +97,11 @@ def test_datetime():
     with open("data.pkl", "rb") as jar:
         new = pickle.load(jar)
     assert dt == new
+    dt.set_timezone("Europe/Berlin")
+    tz = core.TimeZone("Europe/Berlin")
+    dt.set_timezone(tz)
+    assert dt.get_timezone() == tz
+    assert dt.to_format("iso") == "2000-11-11T00:00:00+01:00"
     repr(dt)
 
 
