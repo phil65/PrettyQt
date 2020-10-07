@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union
+from typing import Union, Optional
 import datetime
 
 from qtpy import QtCore
@@ -36,7 +36,7 @@ class FileDevice(QtCore.QFileDevice):
             raise InvalidParamError(typ, FILE_TIMES)
         return self.setFileTime(file_time, FILE_TIMES[typ])
 
-    def get_file_time(self, typ: str) -> datetime.datetime:
+    def get_file_time(self, typ: str) -> Optional[datetime.datetime]:
         """Return current file time.
 
         Possible values: "access", "birth", "metadata_change", "modification"
@@ -47,6 +47,8 @@ class FileDevice(QtCore.QFileDevice):
         if typ not in FILE_TIMES:
             raise InvalidParamError(typ, FILE_TIMES)
         date = self.fileTime(FILE_TIMES[typ])
+        if not date:
+            return None
         try:
             return date.toPython()
         except TypeError:
