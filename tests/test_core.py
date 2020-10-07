@@ -444,6 +444,17 @@ def test_timer():
     assert timer.get_type() == "coarse"
 
 
+def test_timezone():
+    tz = core.TimeZone("UTC-12:00")
+    assert tz.get_id() == "UTC-12:00"
+    assert str(tz) == "UTC-12:00"
+    assert repr(tz) == "TimeZone('UTC-12:00')"
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(tz, jar)
+    with open("data.pkl", "rb") as jar:
+        tz = pickle.load(jar)
+
+
 def test_translator():
     core.Translator()
 

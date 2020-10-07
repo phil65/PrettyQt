@@ -36,6 +36,7 @@ from .file import File
 from .temporaryfile import TemporaryFile
 from .buffer import Buffer
 from .settings import Settings
+from .timezone import TimeZone
 from .date import Date
 from .datetime import DateTime
 
@@ -98,6 +99,7 @@ __all__ = [
     "TemporaryFile",
     "Buffer",
     "Settings",
+    "TimeZone",
     "Date",
     "DateTime",
     "Size",
