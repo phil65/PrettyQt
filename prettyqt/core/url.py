@@ -8,11 +8,13 @@ from qtpy import QtCore
 
 
 class Url(QtCore.QUrl):
-    def __init__(self, path: Union[QtCore.QUrl, str, pathlib.Path]):
-
-        super().__init__(str(path) if not isinstance(path, QtCore.QUrl) else path)
-        if isinstance(path, pathlib.Path):
-            self.setScheme("file")
+    def __init__(self, path: Union[QtCore.QUrl, str, pathlib.Path] = None):
+        if path is None:
+            super().__init__()
+        else:
+            super().__init__(str(path) if not isinstance(path, QtCore.QUrl) else path)
+            if isinstance(path, pathlib.Path):
+                self.setScheme("file")
 
     # def __str__(self):
     #     return self.absolutePath()
