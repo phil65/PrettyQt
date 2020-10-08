@@ -124,7 +124,7 @@ class ComboBox(QtWidgets.QComboBox):
         """
         if policy not in INSERT_POLICIES:
             raise InvalidParamError(policy, INSERT_POLICIES)
-        policy = INSERT_POLICIES.get(policy)
+        policy = INSERT_POLICIES[policy]
         self.setInsertPolicy(policy)
 
     def get_insert_policy(self) -> str:
@@ -151,7 +151,7 @@ class ComboBox(QtWidgets.QComboBox):
         """
         if policy not in SIZE_POLICIES:
             raise InvalidParamError(policy, SIZE_POLICIES)
-        policy = SIZE_POLICIES.get(policy)
+        policy = SIZE_POLICIES[policy]
         self.setSizeAdjustPolicy(policy)
 
     def get_size_adjust_policy(self) -> str:

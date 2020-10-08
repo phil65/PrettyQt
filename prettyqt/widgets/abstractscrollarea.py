@@ -62,7 +62,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         """
         if policy not in SIZE_POLICIES:
             raise InvalidParamError(policy, SIZE_POLICIES)
-        policy = SIZE_POLICIES.get(policy)
+        policy = SIZE_POLICIES[policy]
         self.setSizeAdjustPolicy(policy)
 
     def get_size_adjust_policy(self) -> str:
