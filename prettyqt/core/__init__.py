@@ -38,6 +38,7 @@ from .buffer import Buffer
 from .settings import Settings
 from .timezone import TimeZone
 from .date import Date
+from .time import Time
 from .datetime import DateTime
 
 from .size import Size
@@ -101,6 +102,7 @@ __all__ = [
     "Settings",
     "TimeZone",
     "Date",
+    "Time",
     "DateTime",
     "Size",
     "SizeF",
