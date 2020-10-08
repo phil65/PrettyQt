@@ -246,6 +246,26 @@ def test_pointf():
     repr(p)
 
 
+def test_process():
+    process = core.Process()
+    process.set_read_channel("error")
+    with pytest.raises(InvalidParamError):
+        process.set_read_channel("test")
+    assert process.get_read_channel() == "error"
+    process.set_input_channel_mode("forwarded")
+    with pytest.raises(InvalidParamError):
+        process.set_input_channel_mode("test")
+    assert process.get_input_channel_mode() == "forwarded"
+    process.set_process_channel_mode("forwarded_error")
+    with pytest.raises(InvalidParamError):
+        process.set_process_channel_mode("test")
+    assert process.get_process_channel_mode() == "forwarded_error"
+    process.set_state("starting")
+    with pytest.raises(InvalidParamError):
+        process.set_state("test")
+    assert process.get_state() == "starting"
+
+
 def test_propertyanimation():
     animation = core.PropertyAnimation()
     button = widgets.PushButton()

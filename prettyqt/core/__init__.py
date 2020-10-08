@@ -51,6 +51,7 @@ from .textboundaryfinder import TextBoundaryFinder
 from .timer import Timer
 from .translator import Translator
 from .thread import Thread
+from .process import Process
 
 # from .rect import Rect
 # from .rectf import RectF
@@ -121,6 +122,7 @@ __all__ = [
     "Timer",
     "Translator",
     "Thread",
+    "Process",
     "Rect",
     "RectF",
     "MimeData",
