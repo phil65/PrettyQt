@@ -5,6 +5,7 @@ import datetime
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
+from prettyqt.utils import to_datetime, to_date, to_time
 
 
 SECTIONS = dict(
@@ -66,58 +67,31 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.setDateTime(value)
 
     def get_datetime(self) -> datetime.datetime:
-        try:
-            return self.dateTime().toPython()
-        except TypeError:
-            return self.dateTime().toPyDateTime()
+        return to_datetime(self.dateTime())
 
     def min_datetime(self) -> datetime.datetime:
-        try:
-            return self.minimumDateTime().toPython()
-        except (TypeError, AttributeError):
-            return self.minimumDateTime().toPyDateTime()
+        return to_datetime(self.minimumDateTime())
 
     def max_datetime(self) -> datetime.datetime:
-        try:
-            return self.maximumDateTime().toPython()
-        except (TypeError, AttributeError):
-            return self.maximumDateTime().toPyDateTime()
+        return to_datetime(self.maximumDateTime())
 
     def min_date(self) -> datetime.date:
-        try:
-            return self.minimumDate().toPython()
-        except (TypeError, AttributeError):
-            return self.minimumDate().toPyDate()
+        return to_date(self.minimumDate())
 
     def max_date(self) -> datetime.date:
-        try:
-            return self.maximumDate().toPython()
-        except (TypeError, AttributeError):
-            return self.maximumDate().toPyDate()
+        return to_date(self.maximumDate())
 
     def get_date(self) -> datetime.date:
-        try:
-            return self.date().toPython()
-        except (TypeError, AttributeError):
-            return self.date().toPyDate()
+        return to_date(self.date())
 
     def min_time(self) -> datetime.time:
-        try:
-            return self.minimumTime().toPython()
-        except (TypeError, AttributeError):
-            return self.minimumTime().toPyTime()
+        return to_time(self.minimumTime())
 
     def max_time(self) -> datetime.time:
-        try:
-            return self.maximumTime().toPython()
-        except (TypeError, AttributeError):
-            return self.maximumTime().toPyTime()
+        return to_time(self.maximumTime())
 
     def get_time(self) -> datetime.time:
-        try:
-            return self.time().toPython()
-        except (TypeError, AttributeError):
-            return self.time().toPyTime()
+        return to_time(self.time())
 
 
 if __name__ == "__main__":

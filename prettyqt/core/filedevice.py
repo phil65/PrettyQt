@@ -6,7 +6,7 @@ import datetime
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, to_datetime
 
 FILE_TIMES = bidict(
     access=QtCore.QFileDevice.FileAccessTime,
@@ -49,7 +49,4 @@ class FileDevice(QtCore.QFileDevice):
         date = self.fileTime(FILE_TIMES[typ])
         if not date:
             return None
-        try:
-            return date.toPython()
-        except TypeError:
-            return date.toPyDateTime()
+        return to_datetime(date)

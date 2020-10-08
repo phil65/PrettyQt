@@ -5,10 +5,33 @@ import sys
 from typing import Mapping, Union, Iterable
 import traceback
 import logging
+import datetime
 
+from qtpy import QtCore
 import bidict as bdct
 
 logger = logging.getLogger(__name__)
+
+
+def to_datetime(date: QtCore.QDateTime) -> datetime.datetime:
+    try:
+        return date.toPython()  # pyqt5
+    except (AttributeError, TypeError):
+        return date.toPyDateTime()
+
+
+def to_date(date: QtCore.QDate) -> datetime.date:
+    try:
+        return date.toPython()  # pyqt5
+    except (AttributeError, TypeError):
+        return date.toPyDate()
+
+
+def to_time(time: QtCore.QTime) -> datetime.time:
+    try:
+        return time.toPython()  # pyqt5
+    except (AttributeError, TypeError):
+        return time.toPyTime()
 
 
 class bidict(bdct.bidict):

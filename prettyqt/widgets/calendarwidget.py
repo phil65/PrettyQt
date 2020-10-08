@@ -6,7 +6,7 @@ from typing import Optional
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, to_date
 
 
 SELECTION_MODES = bidict(
@@ -32,10 +32,7 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
         self.setSelectedDate(state["date"])
 
     def get_date(self) -> datetime.date:
-        try:
-            return self.selectedDate().toPyDate()  # pyqt5
-        except (TypeError, AttributeError):
-            return self.selectedDate().toPython()
+        return to_date(self.selectedDate())
 
     def get_value(self) -> datetime.date:
         return self.get_date()

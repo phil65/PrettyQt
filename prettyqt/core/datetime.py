@@ -6,7 +6,7 @@ import datetime
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, to_datetime
 
 DATE_FORMATS = bidict(
     text=QtCore.Qt.TextDate,
@@ -28,10 +28,7 @@ class DateTime(QtCore.QDateTime):
         return (self.__class__, (self.date(), self.time()))
 
     def get_value(self) -> datetime.datetime:
-        try:
-            return self.toPython()
-        except TypeError:
-            return self.toPyDateTime()
+        return to_datetime(self)
 
     def get_timezone(self):
         return core.TimeZone(self.timeZone())
