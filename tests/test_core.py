@@ -103,6 +103,12 @@ def test_datetime():
     assert dt.get_timezone() == tz
     assert dt.to_format("iso") == "2000-11-11T00:00:00+01:00"
     repr(dt)
+    dt.get_date()
+    dt.get_time()
+    dt.set_time_spec("utc")
+    with pytest.raises(InvalidParamError):
+        dt.set_time_spec("test")
+    assert dt.get_time_spec() == "utc"
 
 
 def test_dir():
