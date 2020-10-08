@@ -1,3 +1,14 @@
+## v0.126.0 (2020-10-08)
+
+### Feat
+
+- **core**: add Process class
+- **DateTime**: add get/set_time_spec and get_date/time methods
+- **core**: add Time class
+- **DateTime**: add timezone methods
+- **core**: add TimeZone class
+- **Pixmap**: add create_dot classmethod
+
 ## v0.125.1 (2020-10-07)
 
 ### Fix
