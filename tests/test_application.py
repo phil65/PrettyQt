@@ -35,3 +35,7 @@ def test_application(qapp):
     with pytest.raises(InvalidParamError):
         qapp.set_effect_enabled("test")
     assert qapp.is_effect_enabled("animate_toolbox")
+    qapp.set_navigation_mode("keypad_directional")
+    with pytest.raises(InvalidParamError):
+        qapp.set_navigation_mode("test")
+    assert qapp.get_navigation_mode("keypad_directional")

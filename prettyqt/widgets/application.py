@@ -24,6 +24,14 @@ UI_EFFECTS = bidict(
     animate_toolbox=QtCore.Qt.UI_AnimateToolBox,
 )
 
+NAVIGATION_MODES = bidict(
+    none=QtCore.Qt.NavigationModeNone,
+    keypad_tab_order=QtCore.Qt.NavigationModeKeypadTabOrder,
+    keypad_directional=QtCore.Qt.NavigationModeKeypadDirectional,
+    cursor_auto=QtCore.Qt.NavigationModeCursorAuto,
+    cursor_force_visible=QtCore.Qt.NavigationModeCursorForceVisible,
+)
+
 
 class Application(QtWidgets.QApplication):
     def __class_getitem__(cls, name: str) -> QtWidgets.QWidget:
@@ -153,6 +161,33 @@ class Application(QtWidgets.QApplication):
             desktop effect state
         """
         return self.isEffectEnabled(UI_EFFECTS[effect])
+
+    def set_navigation_mode(self, mode: str):
+        """Set the navigation_mode.
+
+        valid values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",
+        "cursor_force_visible"
+
+        Args:
+            mode: navigation_mode to use
+
+        Raises:
+            InvalidParamError: invalid navigation_mode
+        """
+        if mode not in NAVIGATION_MODES:
+            raise InvalidParamError(mode, NAVIGATION_MODES)
+        self.setNavigationMode(NAVIGATION_MODES[mode])
+
+    def get_navigation_mode(self) -> str:
+        """Return navigation_mode.
+
+        possible values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",
+        "cursor_force_visible"
+
+        Returns:
+            navigation_mode
+        """
+        return NAVIGATION_MODES.inv[self.navigationMode()]
 
 
 if __name__ == "__main__":
