@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pathlib
-from typing import Optional, Union
+from typing import Optional, Union, Iterator
 import logging
 
 from qtpy import QtCore, QtWidgets
@@ -39,6 +39,9 @@ class Application(QtWidgets.QApplication):
         if widget is None:
             raise ValueError(f"Widget {name!r} does not exist.")
         return widget
+
+    def __iter__(self) -> Iterator[QtWidgets.QWidget]:
+        return iter(self.topLevelWidgets())
 
     def set_icon(self, icon: gui.icon.IconType):
         """Set the default window icon.
