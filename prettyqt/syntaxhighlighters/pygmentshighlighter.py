@@ -215,7 +215,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
                     result.set_font_style_hint("typewriter")
         return result
 
-    def _get_brush(self, color: str):
+    def _get_brush(self, color: str) -> gui.Brush:
         """Return a brush for the color."""
         result = self._brushes.get(color)
         if result is None:

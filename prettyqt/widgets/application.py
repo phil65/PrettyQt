@@ -56,7 +56,7 @@ class Application(QtWidgets.QApplication):
         if org_domain:
             self.setOrganizationDomain(org_domain)
 
-    def about_popup(self, title="About"):
+    def about_popup(self, title: str = "About"):
         text = (
             f"{self.applicationName()}\n\n"
             f"{self.organizationName()}\n"
@@ -69,7 +69,7 @@ class Application(QtWidgets.QApplication):
         popup.set_icon("mdi.information-outline")
         popup.exec_()
 
-    def main_loop(self):
+    def main_loop(self) -> int:
         return self.exec_()
 
     @classmethod
@@ -109,7 +109,7 @@ class Application(QtWidgets.QApplication):
         # return None
 
     @classmethod
-    def get_icon(cls, icon: str):
+    def get_icon(cls, icon: str) -> gui.Icon:
         style = cls.style()
         # icon_size = style.pixelMetric(QtWidgets.QStyle.PM_MessageBoxIconSize)
         if icon not in STANDARD_PIXMAPS:

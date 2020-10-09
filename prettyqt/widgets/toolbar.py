@@ -100,7 +100,7 @@ class ToolBar(QtWidgets.QToolBar):
         icon: gui.icon.IconType = None,
         callback: Optional[Callable] = None,
         checkable: bool = False,
-    ):
+    ) -> QtWidgets.QAction:
         icon = gui.icon.get_icon(icon)
         action = self.addAction(icon, label)
         if callback is not None:
@@ -109,7 +109,7 @@ class ToolBar(QtWidgets.QToolBar):
             action.setCheckable(True)
         return action
 
-    def add_spacer(self):
+    def add_spacer(self) -> QtWidgets.QAction:
         spacer = widgets.Widget()
         spacer.set_size_policy("expanding", "expanding")
         return self.addWidget(spacer)
@@ -121,7 +121,7 @@ class ToolBar(QtWidgets.QToolBar):
         with self.current_font() as font:
             font.set_size(size)
 
-    def is_area_allowed(self, area: str):
+    def is_area_allowed(self, area: str) -> bool:
         """Check if toolbar is allowed at specified area.
 
         Valid values for area: "left", "right", "top", "bottom", "all"
