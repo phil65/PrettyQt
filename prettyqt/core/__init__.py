@@ -25,6 +25,7 @@ from .parallelanimationgroup import ParallelAnimationGroup
 from .variantanimation import VariantAnimation
 from .propertyanimation import PropertyAnimation
 from .versionnumber import VersionNumber
+from .libraryinfo import LibraryInfo
 from .datastream import DataStream
 from .bytearray import ByteArray
 from .url import Url
@@ -91,6 +92,7 @@ __all__ = [
     "Object",
     "DataStream",
     "VersionNumber",
+    "LibraryInfo",
     "ByteArray",
     "Url",
     "UrlQuery",

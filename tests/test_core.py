@@ -156,6 +156,13 @@ def test_historystate():
         state.set_history_type("test")
 
 
+def test_libraryinfo():
+    core.LibraryInfo.get_location("prefix")
+    with pytest.raises(InvalidParamError):
+        core.LibraryInfo.get_location("test")
+    core.LibraryInfo.get_version()
+
+
 def test_line():
     line = core.Line()
     p1 = core.Point(0, 0)
