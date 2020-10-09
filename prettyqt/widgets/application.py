@@ -7,13 +7,22 @@ import logging
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import colors, InvalidParamError
+from prettyqt.utils import bidict, colors, InvalidParamError
 
 logger = logging.getLogger(__name__)
 
 STANDARD_PIXMAPS = widgets.style.STANDARD_PIXMAPS
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
+
+UI_EFFECTS = bidict(
+    animate_menu=QtCore.Qt.UI_AnimateMenu,
+    fade_menu=QtCore.Qt.UI_FadeMenu,
+    animate_combo=QtCore.Qt.UI_AnimateCombo,
+    animate_tooltip=QtCore.Qt.UI_AnimateTooltip,
+    fade_tooltip=QtCore.Qt.UI_FadeTooltip,
+    animate_toolbox=QtCore.Qt.UI_AnimateToolBox,
+)
 
 
 class Application(QtWidgets.QApplication):
@@ -116,6 +125,34 @@ class Application(QtWidgets.QApplication):
             raise InvalidParamError(icon, STANDARD_PIXMAPS)
         icon = style.standardIcon(STANDARD_PIXMAPS[icon])
         return gui.Icon(icon)
+
+    def set_effect_enabled(self, effect: str, enabled: bool = True):
+        """Set the enabled state of a desktop effect.
+
+        valid values are: "animate_menu", "fade_menu", "animate_combo",
+        "animate_tooltip", "fade_tooltip", "animate_toolbox"
+
+        Args:
+            effect: desktop effect to set
+            enabled: new state
+
+        Raises:
+            InvalidParamError: invalid desktop effect
+        """
+        if effect not in UI_EFFECTS:
+            raise InvalidParamError(effect, UI_EFFECTS)
+        self.setEffectEnabled(UI_EFFECTS[effect])
+
+    def is_effect_enabled(self, effect: str) -> str:
+        """Return desktop effect state.
+
+        possible values are "animate_menu", "fade_menu", "animate_combo",
+        "animate_tooltip", "fade_tooltip", "animate_toolbox"
+
+        Returns:
+            desktop effect state
+        """
+        return self.isEffectEnabled(UI_EFFECTS[effect])
 
 
 if __name__ == "__main__":

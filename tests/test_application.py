@@ -31,3 +31,7 @@ def test_application(qapp):
         qapp.get_icon("testus")
     icon = qapp.get_icon("warning")
     assert isinstance(icon, QtGui.QIcon)
+    qapp.set_effect_enabled("animate_toolbox")
+    with pytest.raises(InvalidParamError):
+        qapp.set_effect_enabled("test")
+    assert qapp.is_effect_enabled("animate_toolbox")
