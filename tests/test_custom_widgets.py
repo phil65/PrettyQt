@@ -247,7 +247,7 @@ def test_markdownwidget(qtbot):
 def test_player(qtbot):
     player = custom_widgets.Player()
     player.previous_clicked()
-    player._update_buttons()
+    player._update_buttons(0)
 
 
 def test_popupinfo(qtbot):
