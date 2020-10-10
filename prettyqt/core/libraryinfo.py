@@ -5,7 +5,7 @@ import pathlib
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 LOCATIONS = bidict(
     prefix=QtCore.QLibraryInfo.PrefixPath,
@@ -32,6 +32,8 @@ class LibraryInfo(QtCore.QLibraryInfo):
 
     @classmethod
     def get_location(cls, location: str) -> pathlib.Path:
+        if location not in LOCATIONS:
+            raise InvalidParamError(location, LOCATIONS)
         return pathlib.Path(cls.location(LOCATIONS[location]))
 
     @classmethod

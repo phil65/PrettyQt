@@ -56,8 +56,8 @@ def test_cursor():
         cursor = pickle.load(jar)
 
 
-def test_desktopservices():
-    gui.DesktopServices.open_url("test")
+# def test_desktopservices():
+#     gui.DesktopServices.open_url("test")
 
 
 def test_doublevalidator():
