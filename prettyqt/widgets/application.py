@@ -166,29 +166,29 @@ class Application(QtWidgets.QApplication):
         return self.isEffectEnabled(UI_EFFECTS[effect])
 
     def set_navigation_mode(self, mode: str):
-        """Set the navigation_mode.
+        """Set the navigation mode.
 
         valid values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",
         "cursor_force_visible"
 
         Args:
-            mode: navigation_mode to use
+            mode: navigation mode to use
 
         Raises:
-            InvalidParamError: invalid navigation_mode
+            InvalidParamError: invalid navigation mode
         """
         if mode not in NAVIGATION_MODES:
             raise InvalidParamError(mode, NAVIGATION_MODES)
         self.setNavigationMode(NAVIGATION_MODES[mode])
 
     def get_navigation_mode(self) -> str:
-        """Return navigation_mode.
+        """Return navigation mode.
 
         possible values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",
         "cursor_force_visible"
 
         Returns:
-            navigation_mode
+            navigation mode
         """
         return NAVIGATION_MODES.inv[self.navigationMode()]
 
