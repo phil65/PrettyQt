@@ -31,7 +31,7 @@ STANDARD_LOCATIONS = bidict(
 
 
 class StandardPaths(QtCore.QStandardPaths):
-    def __class_getitem__(cls, name: str):
+    def __class_getitem__(cls, name: str) -> List[pathlib.Path]:
         return cls.get_standard_locations(name)
 
     @classmethod
