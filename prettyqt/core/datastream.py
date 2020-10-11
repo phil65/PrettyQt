@@ -7,7 +7,8 @@ from prettyqt.utils import bidict, InvalidParamError
 
 
 FLOAT_PRECISION = bidict(
-    single=QtCore.QDataStream.SinglePrecision, double=QtCore.QDataStream.DoublePrecision,
+    single=QtCore.QDataStream.SinglePrecision,
+    double=QtCore.QDataStream.DoublePrecision,
 )
 
 BYTE_ORDER = bidict(
@@ -20,7 +21,7 @@ class DataStream(QtCore.QDataStream):
     def set_byte_order(self, order: str):
         """Set byte order.
 
-        valid values are: "big_endian", "little endian"
+        valid values are: "big_endian", "little_endian"
 
         Args:
             order: byte order to use
