@@ -10,6 +10,9 @@ nav:
         - charts: api/charts.md
         - multimedia: api/multimedia.md
         - multimediawidgets: api/multimediawidgets.md
+        - network: api/network.md
+        - positioning: api/positioning.md
+        - qml: api/qml.md
         - webenginewidgets: api/webenginewidgets.md
         - syntaxhighlighters: api/syntaxhighlighters.md
         - custom_models: api/custom_models.md
