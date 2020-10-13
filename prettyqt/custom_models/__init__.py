@@ -7,6 +7,7 @@ Contains custom models
 
 
 from .selectionmixin import SelectionMixin
+from .playlistmodel import PlaylistModel
 from .transposeproxymodel import TransposeProxyModel
 from .regexmatchesmodel import RegexMatchesModel
 from .columnitemmodel import ColumnItemModel
@@ -14,6 +15,7 @@ from .columnitemmodel import ColumnItemModel
 __all__ = [
     "SelectionMixin",
     "TransposeProxyModel",
+    "PlaylistModel",
     "RegexMatchesModel",
     "ColumnItemModel",
 ]

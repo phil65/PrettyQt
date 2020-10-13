@@ -23,3 +23,8 @@ def test_regexmatchesmodel(qtmodeltester):
     matches = []  # list(comp.finditer(text))
     model = custom_models.RegexMatchesModel(matches)
     qtmodeltester.check(model, force_py=True)
+
+
+def test_playlistmodel(qtmodeltester):
+    model = custom_models.PlaylistModel()
+    qtmodeltester.check(model, force_py=True)
