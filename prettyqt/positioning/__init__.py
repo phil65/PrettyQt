@@ -14,6 +14,11 @@ from .geopath import GeoPath
 from .geopolygon import GeoPolygon
 from .geolocation import GeoLocation
 from .geosatelliteinfo import GeoSatelliteInfo
+from .geopositioninfosource import GeoPositionInfoSource
+from .geosatelliteinfosource import GeoSatelliteInfoSource
+from .nmeapositioninginfosource import NmeaPositionInfoSource
+from .geoareamonitorinfo import GeoAreaMonitorInfo
+from .geoareamonitorsource import GeoAreaMonitorSource
 
 __all__ = [
     "GeoAddress",
@@ -25,4 +30,9 @@ __all__ = [
     "GeoSatelliteInfo",
     "GeoPath",
     "GeoPolygon",
+    "GeoPositionInfoSource",
+    "GeoSatelliteInfoSource",
+    "NmeaPositionInfoSource",
+    "GeoAreaMonitorSource",
+    "GeoAreaMonitorInfo",
 ]

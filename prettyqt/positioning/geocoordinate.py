@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
-try:
-    from PySide2 import QtPositioning
-except ImportError:
+from qtpy import PYQT5, PYSIDE2
+
+if PYQT5:
     from PyQt5 import QtPositioning
+elif PYSIDE2:
+    from PySide2 import QtPositioning
+
 
 from prettyqt.utils import bidict
 
