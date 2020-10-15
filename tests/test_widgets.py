@@ -1183,7 +1183,7 @@ def test_widget(qtbot):
     widget.set_max_height(200)
     widget.set_max_height(None)
     widget.set_font_size(20)
-    widget.font_metrics()
+    widget.get_font_metrics()
     widget.set_id("test")
     widget.set_unique_id()
     widget.get_palette()

@@ -61,7 +61,7 @@ class PromptLineEdit(widgets.LineEdit):
             .adjusted(2, 0, 0, 0)
             .adjusted(left, top, -right, -bottom)
         )
-        fm = self.font_metrics()
+        fm = self.get_font_metrics()
         text = fm.elided_text(self._prompt_text, mode="right", width=rect.width())
         with gui.Painter(self) as painter:
             color = self.get_palette().get_color("text", "disabled")

@@ -4,14 +4,14 @@ from typing import Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import widgets
 
 
 class SingleLineTextEdit(widgets.PlainTextEdit):
     def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent=parent)
         self.textChanged.connect(self._on_text_changed)
-        font_metrics = gui.FontMetrics(self.font())
+        font_metrics = self.get_font_metrics()
         self.row_height = font_metrics.lineSpacing()
         self.setFixedHeight(self.row_height * 1.5)
         self.set_size_policy(vertical="fixed")

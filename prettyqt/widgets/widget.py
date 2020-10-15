@@ -7,6 +7,7 @@ from typing import Dict, Iterator, Callable, Optional, Union, Any
 from qtpy import QtCore, QtGui, QtWidgets
 import qstylizer.parser
 import qstylizer.style
+from deprecated import deprecated
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, colors, InvalidParamError, helpers, prettyprinter
@@ -415,8 +416,15 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         font.setPointSize(size)
         self.setFont(font)
 
+    @deprecated(reason="This method is deprecated, use get_font_metrics instead.")
     def font_metrics(self) -> gui.FontMetrics:
+        return self.get_font_metrics()
+
+    def get_font_metrics(self) -> gui.FontMetrics:
         return gui.FontMetrics(self.fontMetrics())
+
+    def get_font_info(self) -> gui.FontInfo:
+        return gui.FontInfo(self.fontInfo())
 
     def set_margin(self, margin: int) -> None:
         self.setContentsMargins(margin, margin, margin, margin)
