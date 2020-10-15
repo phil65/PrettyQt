@@ -17,7 +17,6 @@ from qtpy.QtCore import QRectF as RectF
 from .line import Line
 from .linef import LineF
 from .easingcurve import EasingCurve
-from prettyqt import core
 from .object import Object
 from .abstractanimation import AbstractAnimation
 from .animationgroup import AnimationGroup
@@ -84,7 +83,7 @@ from .finalstate import FinalState
 from .historystate import HistoryState
 from .state import State
 
-if core.VersionNumber.get_qt_version() >= (5, 13, 0):
+if VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
     from .transposeproxymodel import TransposeProxyModel
 
