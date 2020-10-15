@@ -5,7 +5,9 @@
 
 import pytest
 
-from prettyqt import positioning
+from qtpy import QtCore
+
+from prettyqt import core, positioning
 from prettyqt.utils import InvalidParamError
 
 
@@ -84,3 +86,30 @@ def test_geosatelliteinfo():
         info.set_satellite_system("test")
     assert info.get_satellite_system() == "gps"
     del info["elevation"]
+
+
+def test_geoareamonitorsource():
+    obj = core.Object()
+    source = positioning.GeoAreaMonitorSource(obj)
+    str(source)
+    # assert source.get_error() == "none"
+
+
+def test_geoareamonitorinfo():
+    info = positioning.GeoAreaMonitorInfo()
+    str(info)
+    info.get_expiration()
+    info.get_area()
+
+
+def test_nmeapositioninfosource():
+    obj = QtCore.QObject()
+    source = positioning.NmeaPositionInfoSource("real_time", obj)
+    print(repr(source))
+    assert source.get_update_mode() == "real_time"
+    assert source.get_error() == "unknown_source"
+    source.set_preferred_positioning_methods("satellite")
+    assert source.get_preferred_positioning_methods() == ["satellite", "all"]
+    with pytest.raises(InvalidParamError):
+        source.set_preferred_positioning_methods("test")
+    source.get_supported_positioning_methods()
