@@ -27,6 +27,8 @@ class GeoAreaMonitorInfo(QtPositioning.QGeoAreaMonitorInfo):
             return positioning.GeoPath(area)
         elif isinstance(area, QtPositioning.QGeoPolygon):
             return positioning.GeoPolygon(area)
+        elif isinstance(area, QtPositioning.QGeoShape):
+            return positioning.GeoShape(area)
         else:
             raise RuntimeError()
 
