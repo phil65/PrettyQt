@@ -50,6 +50,10 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
         else:
             return self.insertMedia(pos, mediacontent)
 
+    def get_media_url(self, index: int) -> core.Url:
+        url = self.media(index).request().url()
+        return core.Url(url)
+
     def set_playback_mode(self, mode: str):
         """Set playback mode for given item view.
 
