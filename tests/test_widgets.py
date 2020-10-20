@@ -364,7 +364,7 @@ def test_graphicsitem(qtbot):
         item.set_focus("test")
     item[0] = "test"
     assert item[0] == "test"
-    item.get_shape()
+    # item.get_shape()
 
 
 def test_graphicsscene(qtbot):
