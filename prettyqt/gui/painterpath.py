@@ -5,7 +5,7 @@ from typing import Tuple, Union
 from qtpy import QtGui, QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 ELEMENT_TYPES = bidict(
@@ -45,7 +45,29 @@ class PainterPath(QtGui.QPainterPath):
             rect = QtCore.QRectF(rect)
         self.addRect(rect)
 
-    def get_fill_rule(self):
+    def set_fill_rule(self, rule: str):
+        """Set fill rule.
+
+        Allowed values are "odd_even", "winding"
+
+        Args:
+            rule: fill rule to use
+
+        Raises:
+            InvalidParamError: fill rule does not exist
+        """
+        if rule not in FILL_RULES:
+            raise InvalidParamError(rule, FILL_RULES)
+        self.setFillRule(FILL_RULES[rule])
+
+    def get_fill_rule(self) -> str:
+        """Return current fill rule.
+
+        Possible values: "odd_even", "winding"
+
+        Returns:
+            fill rule
+        """
         return FILL_RULES.inv[self.fillRule()]
 
     def get_bounding_rect(self) -> core.RectF:
