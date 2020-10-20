@@ -4,6 +4,7 @@ from typing import List, Union
 
 from qtpy import QtWidgets, QtCore, QtGui
 
+from prettyqt import gui
 from prettyqt.utils import bidict, InvalidParamError
 
 ITEM_SELECTION_MODES = bidict(
@@ -93,3 +94,6 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
             str
         """
         return MODALITIES.inv[self.panelModality()]
+
+    def get_shape(self) -> gui.PainterPath:
+        return gui.PainterPath(self.shape())
