@@ -1,3 +1,29 @@
+## v0.127.0 (2020-10-20)
+
+### Fix
+
+- always import correct bindings for winextras module
+- **Url**: allow initializing without arg
+
+### Feat
+
+- **PainterPath**: add set_fill_rule method
+- **PainterPath**: add get_bounding_rect method
+- **GraphicsItem**: add get_shape method
+- **MediaPlaylist**: add get_media_url method
+- start with webenginecore module
+- **core**: add EventLoop class
+- **Widget**: add get_font_info method
+- **custom_models**: add PlaylistModel
+- **Translator**: add get_file_path method
+- add positioning module
+- add some first QtQml classes
+- **core**: add LibraryInfo class
+- **Application**: add __iter__ method
+- **Application**: add get/set_navigation_mode methods
+- **Application**: add get/is_effect_enabled methods
+- **custom_widgets**: add Player class
+
 ## v0.126.0 (2020-10-08)
 
 ### Feat
