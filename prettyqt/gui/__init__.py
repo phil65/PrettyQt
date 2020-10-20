@@ -10,6 +10,8 @@ from qtpy.QtGui import QMouseEvent as MouseEvent
 from qtpy.QtGui import QWheelEvent as WheelEvent
 from qtpy.QtGui import QActionEvent as ActionEvent
 from qtpy.QtGui import QShowEvent as ShowEvent
+from qtpy.QtGui import QDropEvent as DropEvent
+from qtpy.QtGui import QDragEnterEvent as DragEnterEvent
 from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
 from .keysequence import KeySequence
@@ -73,6 +75,8 @@ __all__ = [
     "ActionEvent",
     "ShowEvent",
     "ContextMenuEvent",
+    "DropEvent",
+    "DragEnterEvent",
     "Gradient",
     "LinearGradient",
     "RadialGradient",
