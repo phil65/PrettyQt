@@ -216,8 +216,11 @@ class LogTextEdit(widgets.PlainTextEdit):
         self.formatter = formatter
         rules = [klass(self.formatter) for klass in Highlighter.__subclasses__()]
         self.rules = [r for r in rules if r.is_included]
-        logger.info("Setting LogTextEdit formatter template to %s", self.formatter._fmt)
-        self.handler.setFormatter(self.formatter)
+        if isinstance(formatter._fmt, str):
+            self.handler.setFormatter(formatter)
+            logger.debug(
+                "LogTextEdit formatter set to %s", formatter._fmt.replace("%", "%%")
+            )
 
     def append_record(self, record: logging.LogRecord):
         start_of_line = len(self.text())
