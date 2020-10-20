@@ -494,7 +494,8 @@ def test_timezone():
 
 
 def test_translator():
-    core.Translator()
+    translator = core.Translator()
+    assert translator.get_file_path() is None
 
 
 def test_url():
