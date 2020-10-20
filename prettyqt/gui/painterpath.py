@@ -4,6 +4,7 @@ from typing import Tuple, Union
 
 from qtpy import QtGui, QtCore
 
+from prettyqt import core
 from prettyqt.utils import bidict
 
 
@@ -46,6 +47,9 @@ class PainterPath(QtGui.QPainterPath):
 
     def get_fill_rule(self):
         return FILL_RULES.inv[self.fillRule()]
+
+    def get_bounding_rect(self) -> core.RectF:
+        return core.RectF(self.boundingRect())
 
 
 if __name__ == "__main__":
