@@ -11,6 +11,7 @@ from qtpy.QtGui import QWheelEvent as WheelEvent
 from qtpy.QtGui import QActionEvent as ActionEvent
 from qtpy.QtGui import QShowEvent as ShowEvent
 from qtpy.QtGui import QDropEvent as DropEvent
+from qtpy.QtGui import QFocusEvent as FocusEvent
 from qtpy.QtGui import QDragEnterEvent as DragEnterEvent
 from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
@@ -77,6 +78,7 @@ __all__ = [
     "ContextMenuEvent",
     "DropEvent",
     "DragEnterEvent",
+    "FocusEvent",
     "Gradient",
     "LinearGradient",
     "RadialGradient",
