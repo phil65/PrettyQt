@@ -3,9 +3,11 @@
 from typing import Union, Optional
 import pathlib
 
-try:
+from qtpy import PYQT5, PYSIDE2
+
+if PYQT5:
     from PyQt5 import QtWinExtras  # type: ignore
-except ImportError:
+elif PYSIDE2:
     from PySide2 import QtWinExtras
 
 from prettyqt import gui
