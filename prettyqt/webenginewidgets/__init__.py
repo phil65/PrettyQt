@@ -2,7 +2,7 @@
 
 """Webenginewidgets module.
 
-contains QWebEngineView-based classes
+contains QtWebEngineWidgets-based classes
 """
 
 import logging
@@ -10,10 +10,22 @@ import logging
 logger = logging.getLogger(__name__)
 
 try:
+    from .webenginehistoryitem import WebEngineHistoryItem
+    from .webenginehistory import WebEngineHistory
     from .webengineview import WebEngineView
     from .webenginepage import WebEnginePage
     from .webengineprofile import WebEngineProfile
+    from .webenginedownloaditem import WebEngineDownloadItem
+    from .webenginescript import WebEngineScript
 
-    __all__ = ["WebEngineView", "WebEnginePage", "WebEngineProfile"]
+    __all__ = [
+        "WebEngineHistoryItem",
+        "WebEngineHistory",
+        "WebEngineView",
+        "WebEnginePage",
+        "WebEngineProfile",
+        "WebEngineDownloadItem",
+        "WebEngineScript",
+    ]
 except ModuleNotFoundError:
-    logger.warning("Tried to import WebEngineView but not installed.")
+    logger.warning("Tried to import WebEngine module but not installed.")
