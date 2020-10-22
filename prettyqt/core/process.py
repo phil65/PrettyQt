@@ -6,10 +6,7 @@ from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 
-EXIT_STATUS = bidict(
-    normal=QtCore.QProcess.NormalExit,
-    crash=QtCore.QProcess.CrashExit,
-)
+EXIT_STATUS = bidict(normal=QtCore.QProcess.NormalExit, crash=QtCore.QProcess.CrashExit)
 
 INPUT_CHANNEL_MODES = bidict(
     managed=QtCore.QProcess.ManagedInputChannel,
@@ -17,8 +14,7 @@ INPUT_CHANNEL_MODES = bidict(
 )
 
 PROCESS_CHANNELS = bidict(
-    standard=QtCore.QProcess.StandardOutput,
-    error=QtCore.QProcess.StandardError,
+    standard=QtCore.QProcess.StandardOutput, error=QtCore.QProcess.StandardError
 )
 
 PROCESS_CHANNEL_MODES = bidict(

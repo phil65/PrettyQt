@@ -7,8 +7,7 @@ from prettyqt.utils import bidict, InvalidParamError
 
 
 CHILD_MODES = bidict(
-    exclusive=QtCore.QState.ExclusiveStates,
-    parallel=QtCore.QState.ParallelStates,
+    exclusive=QtCore.QState.ExclusiveStates, parallel=QtCore.QState.ParallelStates
 )
 
 RESTORE_POLICIES = bidict(
