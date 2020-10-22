@@ -5,8 +5,16 @@ from qtpy import QtCore, QtWidgets, QtGui
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts, core, gui, widgets
+from prettyqt.utils import bidict, InvalidParamError
 
-ALIGNMENTS = dict(
+RUBBER_BANDS = bidict(
+    none=QtCharts.QChartView.NoRubberBand,
+    vertical=QtCharts.QChartView.VerticalRubberBand,
+    horizontal=QtCharts.QChartView.HorizontalRubberBand,
+    rectangle=QtCharts.QChartView.RectangleRubberBand,
+)
+
+ALIGNMENTS = bidict(
     left=QtCore.Qt.AlignLeft,
     right=QtCore.Qt.AlignRight,
     top=QtCore.Qt.AlignTop,
@@ -24,7 +32,7 @@ class ChartView(QtCharts.QChartView):
         chart = charts.Chart()
         self.setChart(chart)
         self.setRenderHint(gui.Painter.Antialiasing)
-        self.setRubberBand(self.RectangleRubberBand)
+        self.set_rubber_band("rectangle")
         # self.setDragMode(self.RubberBandDrag)
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
@@ -116,6 +124,31 @@ class ChartView(QtCharts.QChartView):
                 painter.set_composition_mode("source_atop")
                 painter.drawImage(d, gl_widget.grabFramebuffer())
         return image
+
+    def set_rubber_band(self, typ: str):
+        """Set the rubber band type.
+
+        Allowed values are "none", "horizontal", "vertical", "rectangle"
+
+        Args:
+            typ: rubber band type
+
+        Raises:
+            InvalidParamError: rubber band type does not exist
+        """
+        if typ not in RUBBER_BANDS:
+            raise InvalidParamError(typ, RUBBER_BANDS)
+        self.setRubberBand(RUBBER_BANDS[typ])
+
+    def get_rubber_band(self) -> str:
+        """Return current rubber band type.
+
+        Possible values are "none", "horizontal", "vertical", "rectangle"
+
+        Returns:
+            Rubber band type
+        """
+        return RUBBER_BANDS.inv[self.rubberBand()]
 
     # def hide_legend(self):
     #     self.chart().hide_legend()
