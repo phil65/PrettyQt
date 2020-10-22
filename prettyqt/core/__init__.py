@@ -18,6 +18,7 @@ from .line import Line
 from .linef import LineF
 from .easingcurve import EasingCurve
 from .object import Object
+from .margins import Margins
 from .eventloop import EventLoop
 from .abstractanimation import AbstractAnimation
 from .animationgroup import AnimationGroup
@@ -90,6 +91,7 @@ if VersionNumber.get_qt_version() >= (5, 13, 0):
 
 __all__ = [
     "Object",
+    "Margins",
     "EventLoop",
     "DataStream",
     "VersionNumber",
