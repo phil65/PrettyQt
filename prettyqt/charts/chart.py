@@ -1,21 +1,39 @@
 # -*- coding: utf-8 -*-
 
+from typing import List
+
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
 
-from prettyqt.utils import InvalidParamError
+from prettyqt import core
+from prettyqt.utils import bidict, InvalidParamError
 
 
-THEMES = {
-    "Light": QtCharts.QChart.ChartThemeLight,
-    "Blue Cerulean": QtCharts.QChart.ChartThemeBlueCerulean,
-    "Dark": QtCharts.QChart.ChartThemeDark,
-    "Brown Sand": QtCharts.QChart.ChartThemeBrownSand,
-    "Blue NCS": QtCharts.QChart.ChartThemeBlueNcs,
-    "High Contrast": QtCharts.QChart.ChartThemeHighContrast,
-    "Blue Icy": QtCharts.QChart.ChartThemeBlueIcy,
-    "Qt": QtCharts.QChart.ChartThemeQt,
-}
+THEMES = bidict(
+    {
+        "Light": QtCharts.QChart.ChartThemeLight,
+        "Blue Cerulean": QtCharts.QChart.ChartThemeBlueCerulean,
+        "Dark": QtCharts.QChart.ChartThemeDark,
+        "Brown Sand": QtCharts.QChart.ChartThemeBrownSand,
+        "Blue NCS": QtCharts.QChart.ChartThemeBlueNcs,
+        "High Contrast": QtCharts.QChart.ChartThemeHighContrast,
+        "Blue Icy": QtCharts.QChart.ChartThemeBlueIcy,
+        "Qt": QtCharts.QChart.ChartThemeQt,
+    }
+)
+
+ANIMATION_OPTIONS = bidict(
+    none=QtCharts.QChart.NoAnimation,
+    grid_axis=QtCharts.QChart.GridAxisAnimations,
+    series=QtCharts.QChart.SeriesAnimations,
+    all=QtCharts.QChart.AllAnimations,
+)
+
+CHART_TYPES = bidict(
+    undefined=QtCharts.QChart.ChartTypeUndefined,
+    cartesian=QtCharts.QChart.ChartTypeCartesian,
+    polar=QtCharts.QChart.ChartTypePolar,
+)
 
 ALIGNMENTS = dict(
     left=QtCore.Qt.AlignLeft,
@@ -23,8 +41,6 @@ ALIGNMENTS = dict(
     top=QtCore.Qt.AlignTop,
     bottom=QtCore.Qt.AlignBottom,
 )
-
-ANIMATION_OPTS = dict(series=QtCharts.QChart.SeriesAnimations)
 
 
 class Chart(QtCharts.QChart):
@@ -34,6 +50,24 @@ class Chart(QtCharts.QChart):
         self.max_y = 0
         self.min_x = 0
         self.min_y = 0
+
+    def serialize_fields(self):
+        return dict(
+            animation_duration=self.animationDuration(),
+            animation_easing_curve=self.get_animation_easing_curve(),
+            animation_options=self.get_animation_options(),
+            background_roundness=self.backgroundRoundness(),
+            background_visible=self.backgroundVisible(),
+            chart_type=self.get_chart_type(),
+            drop_shadow_enabled=self.dropShadowEnabled(),
+            locale=self.get_locale(),
+            localize_numbers=self.localizeNumbers(),
+            margins=self.get_margins(),
+            plot_area=self.get_plot_area(),
+            plot_area_background_visible=self.plotAreaBackgroundVisible(),
+            theme=self.get_theme(),
+            title=self.title(),
+        )
 
     def update_boundaries(self):
         """Set new min/max values based on axis."""
@@ -57,7 +91,7 @@ class Chart(QtCharts.QChart):
         self.setTheme(THEMES[theme_name])
 
     def set_animation_options(self, option: str):
-        self.setAnimationOptions(ANIMATION_OPTS[option])
+        self.setAnimationOptions(ANIMATION_OPTIONS[option])
 
     def apply_nice_numbers(self):
         """Adjust both axis to display nice round numbers."""
@@ -80,3 +114,24 @@ class Chart(QtCharts.QChart):
         # always bottom-align when zooming for now. should perhaps become optional.
         # if self.axisY().min() < self.min_y:
         self.axisY().setMin(max(0, self.min_y))
+
+    def get_chart_type(self) -> str:
+        return CHART_TYPES.inv[self.chartType()]
+
+    def get_margins(self) -> core.Margins:
+        return core.Margins(self.margins())
+
+    def get_plot_area(self) -> core.RectF:
+        return core.RectF(self.plotArea())
+
+    def get_locale(self) -> core.Locale:
+        return core.Locale(self.locale())
+
+    def get_theme(self) -> str:
+        return THEMES.inv[self.theme()]
+
+    def get_animation_options(self) -> List[str]:
+        return [k for k, v in ANIMATION_OPTIONS.items() if v & self.animationOptions()]
+
+    def get_animation_easing_curve(self) -> core.EasingCurve:
+        return core.EasingCurve(self.animationEasingCurve())
