@@ -5,7 +5,7 @@ from typing import List
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
 
-from prettyqt import core
+from prettyqt import core, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -41,6 +41,9 @@ ALIGNMENTS = dict(
     top=QtCore.Qt.AlignTop,
     bottom=QtCore.Qt.AlignBottom,
 )
+
+
+QtCharts.QChart.__bases__ = (widgets.GraphicsWidget,)
 
 
 class Chart(QtCharts.QChart):
