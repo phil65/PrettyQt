@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Union
+
 from qtpy import QtCore
 
 from prettyqt import core
@@ -8,8 +10,14 @@ QtCore.QAnimationGroup.__bases__ = (core.AbstractAnimation,)
 
 
 class AnimationGroup(QtCore.QAnimationGroup):
-    def __getitem__(self, index: int):
-        return self.animationAt(index)
+    def __getitem__(self, index: Union[int, slice]):
+        if isinstance(index, int):
+            if index < 0:
+                index = len(self) + index
+            return self.animationAt(index)
+        else:
+            anims = [self.animationAt(i) for i in range(len(self))]
+            return anims[index]
 
     def __setitem__(self, index: int, value: QtCore.QAbstractAnimation):
         old = self.animationAt(index)
