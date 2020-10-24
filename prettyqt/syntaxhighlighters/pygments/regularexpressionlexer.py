@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+from typing import List
+
 from pygments.lexer import RegexLexer, bygroups
 from pygments.token import Comment, Keyword, Name, Number, Operator, Text, Token
 
@@ -6,7 +9,7 @@ from pygments.token import Comment, Keyword, Name, Number, Operator, Text, Token
 class CustomLexer(RegexLexer):
     name = "regex"
     aliases = ["regex"]
-    filenames = []
+    filenames: List[str] = []
 
     tokens = {
         "root": [
