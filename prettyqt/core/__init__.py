@@ -26,6 +26,7 @@ from .variantanimation import VariantAnimation
 from .propertyanimation import PropertyAnimation
 from .animationgroup import AnimationGroup
 from .parallelanimationgroup import ParallelAnimationGroup
+from .sequentialanimationgroup import SequentialAnimationGroup
 from .versionnumber import VersionNumber
 from .libraryinfo import LibraryInfo
 from .datastream import DataStream
@@ -123,6 +124,7 @@ __all__ = [
     "AbstractAnimation",
     "AnimationGroup",
     "ParallelAnimationGroup",
+    "SequentialAnimationGroup",
     "VariantAnimation",
     "PropertyAnimation",
     "TextBoundaryFinder",
