@@ -26,3 +26,10 @@ class AnimationGroup(QtCore.QAnimationGroup):
     def __add__(self, other: QtCore.QAbstractAnimation):
         self.addAnimation(other)
         return self
+
+    def add_property_animation(
+        self, obj: QtCore.QObject, attribute: str
+    ) -> core.PropertyAnimation:
+        anim = core.PropertyAnimation(obj, attribute.encode())
+        self.addAnimation(anim)
+        return anim

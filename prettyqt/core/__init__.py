@@ -22,10 +22,10 @@ from .margins import Margins
 from .locale import Locale
 from .eventloop import EventLoop
 from .abstractanimation import AbstractAnimation
-from .animationgroup import AnimationGroup
-from .parallelanimationgroup import ParallelAnimationGroup
 from .variantanimation import VariantAnimation
 from .propertyanimation import PropertyAnimation
+from .animationgroup import AnimationGroup
+from .parallelanimationgroup import ParallelAnimationGroup
 from .versionnumber import VersionNumber
 from .libraryinfo import LibraryInfo
 from .datastream import DataStream
