@@ -6,13 +6,11 @@ from prettyqt import gui
 from prettyqt.utils import bidict, InvalidParamError
 
 MODES = bidict(
-    standard=QtGui.QPageLayout.StandardMode,
-    full_page=QtGui.QPageLayout.FullPageMode,
+    standard=QtGui.QPageLayout.StandardMode, full_page=QtGui.QPageLayout.FullPageMode
 )
 
 ORIENTATIONS = bidict(
-    portrait=QtGui.QPageLayout.Portrait,
-    landscape=QtGui.QPageLayout.Landscape,
+    portrait=QtGui.QPageLayout.Portrait, landscape=QtGui.QPageLayout.Landscape
 )
 
 UNITS = bidict(

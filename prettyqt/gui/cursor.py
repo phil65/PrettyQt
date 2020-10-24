@@ -26,7 +26,7 @@ class Cursor(QtGui.QCursor):
         core.DataStream.write_bytearray(ba, self)
 
     def serialize_fields(self) -> Dict[str, Any]:
-        return dict(shape=self.get_shape(),)
+        return dict(shape=self.get_shape())
 
     def set_shape(self, shape: str):
         """Set cursor shape.

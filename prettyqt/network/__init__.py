@@ -10,9 +10,4 @@ from .networkcookiejar import NetworkCookieJar
 from .networkrequest import NetworkRequest
 from .networkaccessmanager import NetworkAccessManager
 
-__all__ = [
-    "NetworkCookie",
-    "NetworkCookieJar",
-    "NetworkRequest",
-    "NetworkAccessManager",
-]
+__all__ = ["NetworkCookie", "NetworkCookieJar", "NetworkRequest", "NetworkAccessManager"]

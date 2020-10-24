@@ -41,10 +41,7 @@ AVAILABILITY_STATUS = bidict(
 )
 
 
-QtMultimedia.QMediaRecorder.__bases__ = (
-    core.Object,
-    multimedia.MediaBindableInterface,
-)
+QtMultimedia.QMediaRecorder.__bases__ = (core.Object, multimedia.MediaBindableInterface)
 
 
 class MediaRecorder(QtMultimedia.QMediaRecorder):

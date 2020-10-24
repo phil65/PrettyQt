@@ -14,8 +14,7 @@ SEQUENCE_MATCHES = bidict(
 )
 
 SEQUENCE_FORMATS = bidict(
-    native=QtGui.QKeySequence.NativeText,
-    portable=QtGui.QKeySequence.PortableText,
+    native=QtGui.QKeySequence.NativeText, portable=QtGui.QKeySequence.PortableText
 )
 
 MODS = {
