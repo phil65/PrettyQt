@@ -1,3 +1,23 @@
+## v0.128.0 (2020-10-25)
+
+### Feat
+
+- **custom_widgets**: add ExpandableLine class
+- **ParallelAnimationGroup**: add set_duration method
+- **charts**: add Abstract/ValueAxis and PolarChart classes
+- **core**: add SequentialAnimationGroup class
+- **AnimationGroup**: allow slicing for indexing
+- **AnimationGroup**: add add_property_animation method
+- **ChartView**: add get/set_rubber_band methods
+- **Chart**: add some more methods
+- **core**: add Locale class
+- **core**: add Margins class
+- **webenginewidgets**: add some more modules
+
+### Fix
+
+- **Chart**: properly inherit from GraphicsWidget
+
 ## v0.127.1 (2020-10-20)
 
 ### Fix
