@@ -29,7 +29,8 @@ from .imageviewer import ImageViewer
 from .popupinfo import PopupInfo
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
-from .stareditor import StarEditor, StarRating
+
+# from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
 from .player import Player
 from .regexeditor.editor import RegexEditorWidget
@@ -71,8 +72,8 @@ __all__ = [
     "CodeEditor",
     "Player",
     "Timeline",
-    "StarEditor",
-    "StarRating",
+    # "StarEditor",
+    # "StarRating",
     "VideoSample",
     "RegexEditorWidget",
 ]
