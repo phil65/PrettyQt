@@ -8,4 +8,7 @@ QtCore.QParallelAnimationGroup.__bases__ = (core.AnimationGroup,)
 
 
 class ParallelAnimationGroup(QtCore.QParallelAnimationGroup):
-    pass
+    def set_duration(self, duration: int):
+        anims = [self.animationAt(i) for i in range(len(self))]
+        for anim in anims:
+            anim.setDuration(duration)
