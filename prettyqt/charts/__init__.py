@@ -3,6 +3,8 @@
 """Charts module."""
 
 from .barset import BarSet
+from .boxset import BoxSet
+from .candlestickset import CandlestickSet
 from .abstractaxis import AbstractAxis
 from .valueaxis import ValueAxis
 from .datetimeaxis import DateTimeAxis
@@ -26,6 +28,8 @@ from .chartview import ChartView
 
 __all__ = [
     "BarSet",
+    "BoxSet",
+    "CandlestickSet",
     "AbstractSeries",
     "AbstractBarSeries",
     "BarSeries",

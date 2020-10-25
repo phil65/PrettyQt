@@ -35,6 +35,22 @@ def test_barcategoryaxis(qtbot):
     del axis["b"]
 
 
+def test_boxset(qtbot):
+    boxset = charts.BoxSet()
+    repr(boxset)
+    boxset.get_pen()
+    boxset.get_brush()
+    boxset["median"] = 1.0
+    assert boxset["median"] == 1.0
+
+
+def test_candlestickset(qtbot):
+    candlestickset = charts.CandlestickSet()
+    repr(candlestickset)
+    candlestickset.get_pen()
+    candlestickset.get_brush()
+
+
 def test_categoryaxis(qtbot):
     axis = charts.CategoryAxis()
     axis += ("a", 2)
