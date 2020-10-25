@@ -12,6 +12,18 @@ from prettyqt import charts
 from prettyqt.utils import InvalidParamError
 
 
+def test_barseries(qtbot):
+    series = charts.BarSeries()
+    barset = charts.BarSet("Test")
+    series.append(barset)
+    assert series[0] == barset
+    del series[0]
+    series.set_labels_position("inside_base")
+    with pytest.raises(InvalidParamError):
+        series.set_labels_position("test")
+    assert series.get_labels_position() == "inside_base"
+
+
 def test_chart(qtbot):
     chart = charts.Chart()
     chart.hide_legend()
