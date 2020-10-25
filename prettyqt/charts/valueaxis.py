@@ -18,7 +18,7 @@ class ValueAxis(QtCharts.QValueAxis):
     def set_tick_type(self, tick_type: str):
         """Set the tick type of the legend.
 
-        Allowed values are "left", "right", "top", "bottom"
+        Allowed values are "dynamic", "fixed"
 
         Args:
             tick_type: tick type for the legend
@@ -33,7 +33,7 @@ class ValueAxis(QtCharts.QValueAxis):
     def get_tick_type(self) -> str:
         """Return current tick type.
 
-        Possible values: "left", "right", "top", "bottom"
+        Possible values: "dynamic", "fixed"
 
         Returns:
             tick_type

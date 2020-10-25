@@ -5,6 +5,10 @@
 from .barset import BarSet
 from .abstractaxis import AbstractAxis
 from .valueaxis import ValueAxis
+from .datetimeaxis import DateTimeAxis
+from .categoryaxis import CategoryAxis
+from .logvalueaxis import LogValueAxis
+from .barcategoryaxis import BarCategoryAxis
 from .abstractseries import AbstractSeries
 from .abstractbarseries import AbstractBarSeries
 from .barseries import BarSeries
@@ -33,6 +37,10 @@ __all__ = [
     "XYSeries",
     "AbstractAxis",
     "ValueAxis",
+    "DateTimeAxis",
+    "CategoryAxis",
+    "LogValueAxis",
+    "BarCategoryAxis",
     "ChartView",
     "Chart",
     "PolarChart",

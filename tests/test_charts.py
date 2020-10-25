@@ -24,6 +24,32 @@ def test_barseries(qtbot):
     assert series.get_labels_position() == "inside_base"
 
 
+def test_barcategoryaxis(qtbot):
+    obj = QtCore.QObject()
+    axis = charts.BarCategoryAxis(obj)
+    axis += "a"
+    axis += "b"
+    assert axis[0] == "a"
+    axis["a"] = "c"
+    assert list(axis) == ["c", "b"]
+    del axis["b"]
+
+
+def test_categoryaxis(qtbot):
+    axis = charts.CategoryAxis()
+    axis += ("a", 2)
+    axis += ("b", 4)
+    assert len(axis) == 2
+    assert axis[0] == "a"
+    axis["a"] = "c"
+    assert list(axis) == ["c", "b"]
+    del axis["c"]
+    axis.set_labels_position("on_value")
+    with pytest.raises(InvalidParamError):
+        axis.set_labels_position("test")
+    assert axis.get_labels_position() == "on_value"
+
+
 def test_chart(qtbot):
     chart = charts.Chart()
     chart.hide_legend()
@@ -55,6 +81,12 @@ def test_lineseries(qtbot):
         pickle.dump(line, jar)
     with open("data.pkl", "rb") as jar:
         line = pickle.load(jar)
+
+
+def test_datetimeaxis(qtbot):
+    axis = charts.DateTimeAxis()
+    axis.get_min()
+    axis.get_max()
 
 
 def test_scatterseries(qtbot):
