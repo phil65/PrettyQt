@@ -6,6 +6,7 @@ from .listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .collapsibleframe import CollapsibleFrame
+from .expandableline import ExpandableLine
 from .singlelinetextedit import SingleLineTextEdit
 from .regexinput import RegexInput
 from .mappedcheckbox import MappedCheckBox
@@ -28,6 +29,7 @@ from .imageviewer import ImageViewer
 from .popupinfo import PopupInfo
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
+from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
 from .player import Player
 from .regexeditor.editor import RegexEditorWidget
@@ -42,6 +44,7 @@ __all__ = [
     "BoolDictToolButton",
     "OptionalWidget",
     "CollapsibleFrame",
+    "ExpandableLine",
     "SingleLineTextEdit",
     "RegexInput",
     "MappedCheckBox",
@@ -68,6 +71,8 @@ __all__ = [
     "CodeEditor",
     "Player",
     "Timeline",
+    "StarEditor",
+    "StarRating",
     "VideoSample",
     "RegexEditorWidget",
 ]

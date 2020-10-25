@@ -32,6 +32,14 @@ def test_collapsibleframe(qtbot):
     frame.remove_widget(widget)
 
 
+def test_expandableline(qtbot):
+    layout = widgets.BoxLayout("vertical")
+    layout.addWidget(widgets.TextBrowser())
+    widget = custom_widgets.ExpandableLine("Test")
+    widget.set_layout(layout)
+    widget.show()
+
+
 def test_colorchooserbutton(qtbot):
     btn = custom_widgets.ColorChooserButton()
     btn.set_color("green")
