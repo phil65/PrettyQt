@@ -109,6 +109,22 @@ def test_scatterseries(qtbot):
     charts.ScatterSeries()
 
 
+def test_pieslice(qtbot):
+    pieslice = charts.PieSlice()
+    repr(pieslice)
+    pieslice.set_label_position("inside_tangential")
+    with pytest.raises(InvalidParamError):
+        pieslice.set_label_position("test")
+    assert pieslice.get_label_position() == "inside_tangential"
+    pieslice.get_label_font()
+    pieslice.get_label_brush()
+    pieslice.get_label_color()
+    pieslice.get_pen()
+    pieslice.get_brush()
+    pieslice.get_color()
+    pieslice.get_border_color()
+
+
 def test_polarchart(qtbot):
     chart = charts.PolarChart()
     chart.add_axis(charts.ValueAxis(), "radial")

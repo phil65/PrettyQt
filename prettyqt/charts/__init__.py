@@ -5,6 +5,7 @@
 from .barset import BarSet
 from .boxset import BoxSet
 from .candlestickset import CandlestickSet
+from .pieslice import PieSlice
 from .abstractaxis import AbstractAxis
 from .valueaxis import ValueAxis
 from .datetimeaxis import DateTimeAxis
@@ -30,6 +31,7 @@ __all__ = [
     "BarSet",
     "BoxSet",
     "CandlestickSet",
+    "PieSlice",
     "AbstractSeries",
     "AbstractBarSeries",
     "BarSeries",
