@@ -5,9 +5,11 @@
 
 import pickle
 
+import pytest
 from qtpy import QtCore
 
 from prettyqt import charts
+from prettyqt.utils import InvalidParamError
 
 
 def test_chart(qtbot):
@@ -45,3 +47,34 @@ def test_lineseries(qtbot):
 
 def test_scatterseries(qtbot):
     charts.ScatterSeries()
+
+
+def test_polarchart(qtbot):
+    chart = charts.PolarChart()
+    chart.add_axis(charts.ValueAxis(), "radial")
+
+
+def test_valueaxis(qtbot):
+    axis = charts.ValueAxis()
+    axis.set_tick_type("fixed")
+    with pytest.raises(InvalidParamError):
+        axis.set_tick_type("test")
+    assert axis.get_tick_type() == "fixed"
+    assert axis.get_alignment() is None
+    assert axis.get_orientation() is None
+    # assert axis.get_orientation() == "horizontal"
+    axis.get_grid_line_color()
+    axis.get_grid_line_pen()
+    axis.get_line_pen()
+    axis.get_line_pen_color()
+    axis.get_labels_color()
+    axis.get_labels_brush()
+    axis.get_labels_font()
+    axis.get_title_font()
+    axis.get_title_brush()
+    axis.get_shades_color()
+    axis.get_shades_brush()
+    axis.get_shades_pen()
+    axis.get_shades_border_color()
+    axis.get_minor_grid_line_pen()
+    axis.get_minor_grid_line_color()
