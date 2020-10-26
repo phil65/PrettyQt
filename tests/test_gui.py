@@ -33,6 +33,19 @@ def test_brush():
     gui.Brush()
 
 
+def test_clipboard(qapp):
+    cb = qapp.get_clipboard()
+    mimedata = QtCore.QMimeData()
+    image = gui.Image()
+    pixmap = gui.Pixmap()
+    cb.set_mimedata(mimedata)
+    cb.set_image(image)
+    cb.set_pixmap(pixmap)
+    assert cb.get_mimedata()
+    assert cb.get_image() == image
+    assert cb.get_pixmap().size() == pixmap.size()
+
+
 def test_color():
     color = gui.Color()
     color.set_color("gray")

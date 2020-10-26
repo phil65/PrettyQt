@@ -53,3 +53,7 @@ class GuiApplication(QtGui.QGuiApplication):
     @classmethod
     def restore_override_cursor(cls):
         cls.restoreOverrideCursor()
+
+    @classmethod
+    def get_clipboard(cls) -> gui.Clipboard:
+        return gui.Clipboard(cls.clipboard())

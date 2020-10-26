@@ -17,6 +17,10 @@ from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
 from .keysequence import KeySequence
 from .icon import Icon
+from .paintdevice import PaintDevice
+from .pixmap import Pixmap
+from .image import Image
+from .clipboard import Clipboard
 from .guiapplication import GuiApplication
 from .validator import Validator
 from .regexpvalidator import RegExpValidator
@@ -47,13 +51,10 @@ from .fontinfo import FontInfo
 from .fontdatabase import FontDatabase
 from .region import Region
 from .movie import Movie
-from .paintdevice import PaintDevice
 from .transform import Transform
 from .pagedpaintdevice import PagedPaintDevice
-from .image import Image
 from .pen import Pen
 from .picture import Picture
-from .pixmap import Pixmap
 from .painter import Painter
 from .painterpath import PainterPath
 from .palette import Palette
@@ -85,6 +86,7 @@ __all__ = [
     "ConicalGradient",
     "PageSize",
     "PageLayout",
+    "Clipboard",
     "GuiApplication",
     "Validator",
     "RegExpValidator",
