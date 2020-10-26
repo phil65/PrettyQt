@@ -13,6 +13,16 @@ from prettyqt.utils import InvalidParamError
 URL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 
 
+def test_audioformat():
+    fmt = multimedia.AudioFormat()
+    dct = fmt.to_dict()
+    new_fmt = multimedia.AudioFormat.from_dict(dct)
+    for key in fmt:
+        fmt[key] = fmt[key]
+    assert len(fmt) == 6
+    assert new_fmt.to_dict() == dct
+
+
 def test_mediaplaylist():
     playlist = multimedia.MediaPlaylist()
     assert len(playlist) == 0
