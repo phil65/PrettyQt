@@ -71,3 +71,12 @@ def test_mediarecorder():
 def test_mediacontent():
     cont = multimedia.MediaContent()
     assert cont.get_url() == core.Url("")
+
+
+def test_soundeffect():
+    effect = multimedia.SoundEffect()
+    assert effect.get_status() == "null"
+    effect.set_loop_count("inf")
+    url = "https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav"
+    effect.set_source(url)
+    assert str(effect.get_source()) == url

@@ -12,6 +12,7 @@ from .mediaplaylist import MediaPlaylist
 from .mediaplayer import MediaPlayer
 from .mediarecorder import MediaRecorder
 from .audiorecorder import AudioRecorder
+from .soundeffect import SoundEffect
 
 __all__ = [
     "MediaBindableInterface",
@@ -24,4 +25,5 @@ __all__ = [
     "MediaPlayer",
     "MediaRecorder",
     "AudioRecorder",
+    "SoundEffect",
 ]
