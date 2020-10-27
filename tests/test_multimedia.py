@@ -30,6 +30,18 @@ def test_camerainfo():
     info.get_camera()
 
 
+def test_camera():
+    cam = multimedia.Camera()
+    assert cam.get_state() == "unloaded"
+    assert cam.get_status() == "unloaded"
+    assert cam.get_lock_status() == "unlocked"
+    assert cam.get_error() == "none"
+    cam.set_capture_mode("still_image")
+    with pytest.raises(InvalidParamError):
+        cam.set_capture_mode("test")
+    assert cam.get_capture_mode() == "still_image"
+
+
 def test_mediaplaylist():
     playlist = multimedia.MediaPlaylist()
     assert len(playlist) == 0
