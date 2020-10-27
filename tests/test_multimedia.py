@@ -48,6 +48,16 @@ def test_camera():
     assert cam.get_capture_mode() == "still_image"
 
 
+def test_cameraviewfindersettings():
+    settings = multimedia.CameraViewfinderSettings()
+    dct = settings.to_dict()
+    new_settings = multimedia.CameraViewfinderSettings.from_dict(dct)
+    for key in settings:
+        settings[key] = settings[key]
+    assert len(settings) == 5
+    assert new_settings.to_dict() == dct
+
+
 def test_mediaplaylist():
     playlist = multimedia.MediaPlaylist()
     assert len(playlist) == 0

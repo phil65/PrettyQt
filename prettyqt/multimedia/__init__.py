@@ -13,6 +13,7 @@ from .videoencodersettings import VideoEncoderSettings
 from .audioencodersettings import AudioEncoderSettings
 from .mediaobject import MediaObject
 from .camera import Camera
+from .cameraviewfindersettings import CameraViewfinderSettings
 from .mediacontent import MediaContent
 from .mediacontrol import MediaControl
 from .mediaplaylist import MediaPlaylist
@@ -27,6 +28,7 @@ __all__ = [
     # "AbstractPlanarVideoBuffer",
     "VideoFrame",
     "CameraInfo",
+    "CameraViewfinderSettings",
     "Camera",
     "MediaBindableInterface",
     "VideoEncoderSettings",
