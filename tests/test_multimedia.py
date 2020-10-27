@@ -23,6 +23,12 @@ def test_audioformat():
     assert new_fmt.to_dict() == dct
 
 
+def test_abstractvideobuffer():
+    buf = multimedia.AbstractVideoBuffer("gl_texture")
+    assert buf.get_handle_type() == "gl_texture"
+    # assert buf.get_map_mode() == "not_mapped"
+
+
 def test_camerainfo():
     info = multimedia.CameraInfo()
     repr(info)

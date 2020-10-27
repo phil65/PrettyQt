@@ -2,6 +2,7 @@
 
 """Multimedia module."""
 
+from .abstractvideobuffer import AbstractVideoBuffer
 from .audioformat import AudioFormat
 from .camerainfo import CameraInfo
 from .mediabindableinterface import MediaBindableInterface
@@ -19,6 +20,7 @@ from .soundeffect import SoundEffect
 
 __all__ = [
     "AudioFormat",
+    "AbstractVideoBuffer",
     "CameraInfo",
     "Camera",
     "MediaBindableInterface",
