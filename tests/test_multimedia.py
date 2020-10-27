@@ -83,6 +83,20 @@ def test_videoencodersettings():
     assert new_settings.to_dict() == dct
 
 
+def test_videoframe():
+    size = core.Size(64, 64)
+    frame = multimedia.VideoFrame(1000, size, 8, 1)
+    assert frame.get_handle_type() == "none"
+    assert frame.get_map_mode() == "not_mapped"
+    assert frame.get_size() == size
+    frame.get_image()
+    assert frame.get_pixel_format() == "argb32"
+    frame.set_field_type("top_field")
+    with pytest.raises(InvalidParamError):
+        frame.set_field_type("test")
+    assert frame.get_field_type() == "top_field"
+
+
 def test_mediaplayer():
     player = multimedia.MediaPlayer()
     assert player.get_state() == "stopped"

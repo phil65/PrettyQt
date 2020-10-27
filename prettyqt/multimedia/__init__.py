@@ -5,6 +5,7 @@
 from .abstractvideobuffer import AbstractVideoBuffer
 
 # from .abstractplanarvideobuffer import AbstractPlanarVideoBuffer
+from .videoframe import VideoFrame
 from .audioformat import AudioFormat
 from .camerainfo import CameraInfo
 from .mediabindableinterface import MediaBindableInterface
@@ -24,6 +25,7 @@ __all__ = [
     "AudioFormat",
     "AbstractVideoBuffer",
     # "AbstractPlanarVideoBuffer",
+    "VideoFrame",
     "CameraInfo",
     "Camera",
     "MediaBindableInterface",
