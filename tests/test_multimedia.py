@@ -23,6 +23,13 @@ def test_audioformat():
     assert new_fmt.to_dict() == dct
 
 
+def test_camerainfo():
+    info = multimedia.CameraInfo()
+    repr(info)
+    info.get_cameras()
+    info.get_camera()
+
+
 def test_mediaplaylist():
     playlist = multimedia.MediaPlaylist()
     assert len(playlist) == 0

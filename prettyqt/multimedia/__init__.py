@@ -3,6 +3,7 @@
 """Multimedia module."""
 
 from .audioformat import AudioFormat
+from .camerainfo import CameraInfo
 from .mediabindableinterface import MediaBindableInterface
 from .videoencodersettings import VideoEncoderSettings
 from .audioencodersettings import AudioEncoderSettings
@@ -17,6 +18,7 @@ from .soundeffect import SoundEffect
 
 __all__ = [
     "AudioFormat",
+    "CameraInfo",
     "MediaBindableInterface",
     "VideoEncoderSettings",
     "AudioEncoderSettings",
