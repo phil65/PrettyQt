@@ -43,3 +43,11 @@ def test_webengineprofile(qapp):
     with pytest.raises(InvalidParamError):
         profile.set_http_cache_type("test")
     assert profile.get_http_cache_type() == "disk"
+
+
+def test_webenginescript():
+    script = webenginewidgets.WebEngineScript()
+    script.set_injection_point("document_ready")
+    with pytest.raises(InvalidParamError):
+        script.set_injection_point("test")
+    assert script.get_injection_point() == "document_ready"
