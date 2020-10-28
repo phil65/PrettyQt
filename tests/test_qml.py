@@ -47,3 +47,24 @@ def test_qmlcomponent():
     assert comp.get_status() == "null"
     # comp.load_url("", mode="asynchronous")
     comp.get_url()
+
+
+def test_jsvalue():
+    val = qml.JSValue(1)
+    assert val.get_error_type() is None
+    assert val.get_value() == 1
+    repr(val)
+    engine = qml.JSEngine()
+    val = engine.new_array(2)
+    val["test1"] = 1
+    val["test2"] = 2
+    assert val["test1"] == 1
+    assert "test2" in val
+    assert len(val) == 2
+    del val["test2"]
+    for n, v in val:
+        pass
+    val = qml.JSValue.from_object(None, engine)
+    val = qml.JSValue.from_object(1, engine)
+    val = qml.JSValue.from_object(["test"], engine)
+    val = qml.JSValue.from_object(dict(a="b"), engine)
