@@ -1,13 +1,13 @@
 import sys
-from prettyqt import gui, core, multimedia, widgets, multimediawidgets
+from prettyqt import constants, gui, core, multimedia, widgets, multimediawidgets
 
 
 class Player(widgets.MainWindow):
-    def __init__(self):
-        super().__init__()
-
-        self.playlist = multimedia.MediaPlaylist()
-        self.player = multimedia.MediaPlayer()
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.playback_rate = 1.0
+        self.playlist = multimedia.MediaPlaylist(self)
+        self.player = multimedia.MediaPlayer(self)
 
         toolbar = widgets.ToolBar()
         self.addToolBar(toolbar)
@@ -64,25 +64,70 @@ class Player(widgets.MainWindow):
         play_menu.addAction(self.next_action)
         play_menu.addAction(self.stop_action)
 
+        self.clock = widgets.Label(self)
+        self.clock.setText("00:00/00:00")
+        # self.clock.setGeometry(550, 660, 80, 30)
+
         self.vol_slider = widgets.Slider()
         self.vol_slider.set_orientation("horizontal")
-        self.vol_slider.setMinimum(0)
-        self.vol_slider.setMaximum(100)
+        self.vol_slider.set_range(0, 100)
         self.vol_slider.setFixedWidth(120)
         self.vol_slider.setValue(self.player.volume())
         self.vol_slider.setTickInterval(10)
         self.vol_slider.set_tick_position("below")
         self.vol_slider.setToolTip("Volume")
         self.vol_slider.valueChanged.connect(self.player.setVolume)
+
+        self.slider = widgets.Slider(constants.HORIZONTAL, self)
+        # self.slider.setGeometry(10, 640, 800 - 20, 20)
+        self.slider.setRange(0, 100)
+        self.slider.valueChanged.connect(self.on_slider_change)
+
+        toolbar.add_separator()
         toolbar.addWidget(self.vol_slider)
+        toolbar.add_separator()
+        toolbar.addWidget(self.clock)
+        toolbar.add_separator()
+        toolbar.addWidget(self.slider)
 
         self.video_widget = multimediawidgets.VideoWidget()
         self.setCentralWidget(self.video_widget)
         self.player.setPlaylist(self.playlist)
         self.player.stateChanged.connect(self._update_buttons)
         self.player.setVideoOutput(self.video_widget)
+        self.player.positionChanged.connect(self.on_player_change)
+        self.player.durationChanged.connect(self.set_media_time)
 
         self._update_buttons(self.player.state())
+
+    def handle_backward(self):
+        if self.playback_rate > 0.5:
+            self.playback_rate = self.playback_rate - 0.5
+            self.player.setPlaybackRate(self.playback_rate)
+
+    def handle_forward(self):
+        if self.playback_rate < 1.5:
+            self.playback_rate = self.playback_rate + 0.5
+            self.player.setPlaybackRate(self.playback_rate)
+
+    def set_media_time(self, time):
+        self.slider.setValue(0)
+        self.time = self.player.duration() / 1000
+        self.slider.setRange(0, int(self.time))
+
+    def on_player_change(self, val):
+        with self.slider.block_signals():
+            self.slider.setValue(int(val / 1000))
+        tmp = self.player.position()
+        duration = self.player.duration() / 1000
+        # print(tmp, val)
+        secs = tmp / 1000
+        self.clock.setText(
+            "%02d:%02d / %02d:%02d" % (secs / 60, secs % 60, duration / 60, duration % 60)
+        )
+
+    def on_slider_change(self, val):
+        self.player.setPosition(self.slider.value() * 1000)
 
     def open(self):
         file_dialog = widgets.FileDialog(parent=self)
