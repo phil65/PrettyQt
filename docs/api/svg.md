@@ -1,0 +1,4 @@
+svg module
+==========
+
+::: prettyqt.svg

@@ -4,21 +4,27 @@ nav:
     - Home: index.md
     # - API: mkapi/api/prettyqt
     - API:
-        - core: api/core.md
-        - gui: api/gui.md
-        - widgets: api/widgets.md
         - charts: api/charts.md
+        - constants: api/constants.md
+        - core: api/core.md
+        - custom_delegates: api/custom_delegates.md
+        - custom_models: api/custom_models.md
+        - custom_validators: api/custom_validators.md
+        - custom_widgets: api/custom_widgets.md
+        - gui: api/gui.md
         - multimedia: api/multimedia.md
         - multimediawidgets: api/multimediawidgets.md
         - network: api/network.md
+        - objbrowser: api/objbrowser.md
         - positioning: api/positioning.md
         - qml: api/qml.md
-        - webenginewidgets: api/webenginewidgets.md
+        - scintilla: api/scintilla.md
+        - svg: api/svg.md
         - syntaxhighlighters: api/syntaxhighlighters.md
-        - custom_models: api/custom_models.md
-        - custom_widgets: api/custom_widgets.md
-        - custom_validators: api/custom_validators.md
-        - custom_delegates: api/custom_delegates.md
+        - webenginecore: api/webenginecore.md
+        - webenginewidgets: api/webenginewidgets.md
+        - widgets: api/widgets.md
+        - winextras: api/winextras.md
         # - utils: api/utils.md
         # - constants: api/constants.md
     - Contributing: contributing.md
