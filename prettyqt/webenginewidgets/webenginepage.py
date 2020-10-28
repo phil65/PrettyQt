@@ -5,7 +5,7 @@ from typing import Callable, Union
 
 from qtpy import QtWebEngineWidgets, QtCore
 
-from prettyqt import core
+from prettyqt import core, webenginewidgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -257,6 +257,10 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         url = core.Url(url)
         self.setFeaturePermission(url, FEATURES[feature], PERMISSION_POLICIES[policy])
 
+    def get_history(self) -> webenginewidgets.WebEngineHistory:
+        hist = self.history()
+        return webenginewidgets.WebEngineHistory(hist)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
@@ -266,5 +270,4 @@ if __name__ == "__main__":
     widget = WebEnginePage()
     widget.set_url(path)
     widget.find_text("test", backward=True, case_sensitive=True, callback=None)
-    widget.show()
     app.main_loop()
