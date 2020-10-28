@@ -3,6 +3,7 @@
 from typing import Optional
 
 from qtpy import QtCore, QtGui, QtWidgets
+from deprecated import deprecated
 
 from prettyqt import core, widgets
 from prettyqt.utils import bidict, InvalidParamError
@@ -46,7 +47,7 @@ class TabBar(QtWidgets.QTabBar):
 
         self.setAcceptDrops(True)
         self.set_elide_mode("right")
-        self.set_remove_behaviour("left_tab")
+        self.set_selection_behavior_on_remove("left_tab")
         self.mouse_cursor = QtGui.QCursor()
 
     def __getitem__(self, index):
@@ -94,7 +95,13 @@ class TabBar(QtWidgets.QTabBar):
     ) -> None:
         self.setTabButton(index, POSITIONS[position], widget)
 
+    @deprecated(
+        reason="This method is deprecated, use set_selection_behavior_on_remove instead."
+    )
     def set_remove_behaviour(self, mode: str) -> None:
+        self.set_selection_behavior_on_remove(mode)
+
+    def set_selection_behavior_on_remove(self, mode: str) -> None:
         """Set the remove hehaviour.
 
         What tab should be set as current when removeTab is called

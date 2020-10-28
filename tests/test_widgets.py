@@ -1002,7 +1002,7 @@ def test_tabbar(qtbot):
     widget = widgets.TabBar()
     widget.set_icon_size(20)
     with pytest.raises(InvalidParamError):
-        widget.set_remove_behaviour("test")
+        widget.set_selection_behavior_on_remove("test")
     assert widget.get_remove_behaviour() == "left_tab"
     with pytest.raises(InvalidParamError):
         widget.set_elide_mode("test")
