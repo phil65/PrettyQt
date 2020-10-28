@@ -1,3 +1,25 @@
+## v0.129.0 (2020-10-28)
+
+### Feat
+
+- **charts**: add Legend class
+- **WebEnginePage**: add get_history method
+- **qml**: add JSValue(Iterator) class
+- **VideoWidget**: option for fullscreen toggling via double click
+- **multimedia**: add CameraViewFinderSettings
+- **multimedia**: add VideoFrame class
+- **multimedia**: add AbstractPlanarVideoBuffer class
+- **multimedia**: add AbstractVideoBuffer class
+- **multimedia**: add Camera class
+- **multimedia**: add CameraInfo class
+- **gui**: add Clipboard class
+- **multimedia**: add AudioFormat class
+- **multimedia**: add SoundEffect class
+- **charts**: add PieSlice class
+- **charts**: add BoxSet and CandlestickSet classes
+- **charts**: add Axis-related classes
+- **charts**: add BarSeries-related classes
+
 ## v0.128.1 (2020-10-25)
 
 ### Fix
