@@ -91,6 +91,23 @@ def test_chartview(qtbot):
     qtbot.mouseMove(widget, delay=100)
 
 
+def test_legend(qtbot):
+    chart = charts.Chart()
+    legend = chart.get_legend()
+    legend.set_alignment("bottom")
+    with pytest.raises(InvalidParamError):
+        legend.set_alignment("test")
+    assert legend.get_alignment() == "bottom"
+    legend.set_marker_shape("circle")
+    with pytest.raises(InvalidParamError):
+        legend.set_marker_shape("test")
+    assert legend.get_marker_shape() == "circle"
+    legend.get_border_color()
+    legend.get_color()
+    legend.get_label_color()
+    legend.get_font()
+
+
 def test_lineseries(qtbot):
     line = charts.LineSeries()
     with open("data.pkl", "wb") as jar:

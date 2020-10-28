@@ -5,7 +5,7 @@ from typing import List
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, charts
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -85,6 +85,9 @@ class Chart(QtCharts.QChart):
     def show_legend(self):
         self.legend().show()
 
+    def get_legend(self):
+        return charts.Legend(self.legend())
+
     def set_legend_alignment(self, alignment: str):
         if alignment not in ALIGNMENTS:
             raise InvalidParamError(alignment, ALIGNMENTS)
@@ -138,3 +141,9 @@ class Chart(QtCharts.QChart):
 
     def get_animation_easing_curve(self) -> core.EasingCurve:
         return core.EasingCurve(self.animationEasingCurve())
+
+
+if __name__ == "__main__":
+    chart = Chart()
+    legend = chart.get_legend()
+    legend.set_alignment("bottom4")

@@ -26,12 +26,14 @@ from .lineseries import LineSeries
 from .chart import Chart
 from .polarchart import PolarChart
 from .chartview import ChartView
+from .legend import Legend
 
 __all__ = [
     "BarSet",
     "BoxSet",
     "CandlestickSet",
     "PieSlice",
+    "Legend",
     "AbstractSeries",
     "AbstractBarSeries",
     "BarSeries",
