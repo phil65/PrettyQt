@@ -79,7 +79,7 @@ class EasingCurve(QtCore.QEasingCurve):
         "tcb_spline", "custom"
 
         Args:
-            type: easing curve type
+            typ: easing curve type
 
         Raises:
             InvalidParamError: easing curve type does not exist

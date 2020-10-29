@@ -54,7 +54,7 @@ class DataWidgetMapper(QtWidgets.QDataWidgetMapper):
         Allowed values are "auto", "manual"
 
         Args:
-            submit_policy: submit_policy for the splitter
+            policy: submit_policy for the splitter
 
         Raises:
             InvalidParamError: submit_policy does not exist

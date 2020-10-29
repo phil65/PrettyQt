@@ -58,7 +58,7 @@ class DateTime(QtCore.QDateTime):
         Allowed values are "local_time", "utc", "offset_from_utc", "timezone"
 
         Args:
-            mode: time specification to use
+            spec: time specification to use
 
         Raises:
             InvalidParamError: time specification does not exist
