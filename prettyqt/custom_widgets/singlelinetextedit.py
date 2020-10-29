@@ -13,7 +13,7 @@ class SingleLineTextEdit(widgets.PlainTextEdit):
         self.textChanged.connect(self._on_text_changed)
         font_metrics = self.get_font_metrics()
         self.row_height = font_metrics.lineSpacing()
-        self.setFixedHeight(self.row_height * 1.5)
+        self.setFixedHeight(int(self.row_height * 1.5))
         self.set_size_policy(vertical="fixed")
         self.set_line_wrap_mode("none")
         self.set_scrollbar_policy("always_off")

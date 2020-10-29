@@ -91,7 +91,7 @@ class BaseWaitingSpinner(widgets.Widget):
                 self._color,
             )
             painter.setBrush(color)
-            rect = core.Rect(
+            rect = core.RectF(
                 0, -self._line_width / 2, self._line_length, self._line_width
             )
             painter.drawRoundedRect(
@@ -187,7 +187,7 @@ class BaseWaitingSpinner(widgets.Widget):
         self.setFixedSize(size, size)
 
     def _update_timer(self):
-        self._timer.setInterval(1000 / (self._line_num * self._revolutions_per_second))
+        self._timer.setInterval(1000 // (self._line_num * self._revolutions_per_second))
 
     def linecount_distance_from_primary(
         self, current: int, primary: int, total_lines: int
@@ -257,6 +257,6 @@ class WaitingSpinner(BaseWaitingSpinner):
     def _update_position(self):
         if self.parentWidget() and self._center_on_parent:
             self.move(
-                self.parentWidget().width() / 2 - self.width() / 2,
-                self.parentWidget().height() / 2 - self.height() / 2,
+                self.parentWidget().width() // 2 - self.width() // 2,
+                self.parentWidget().height() // 2 - self.height() // 2,
             )

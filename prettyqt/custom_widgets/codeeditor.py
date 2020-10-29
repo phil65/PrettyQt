@@ -74,7 +74,7 @@ class CodeEditor(widgets.PlainTextEdit):
         while block.isValid() and (top <= event.rect().bottom()):
             if block.isVisible() and (bottom >= event.rect().top()):
                 number = str(block_number + 1)
-                painter.drawText(0, top, width, height, QtCore.Qt.AlignRight, number)
+                painter.drawText(0, int(top), width, height, QtCore.Qt.AlignRight, number)
             block = block.next()
             top = bottom
             bottom = top + self.blockBoundingRect(block).height()
