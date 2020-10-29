@@ -136,6 +136,6 @@ def test_soundeffect():
     effect = multimedia.SoundEffect()
     assert effect.get_status() == "null"
     effect.set_loop_count("inf")
-    url = "https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav"
+    url = ""  # "https://www2.cs.uic.edu/~i101/SoundFiles/CantinaBand3.wav"
     effect.set_source(url)
     assert str(effect.get_source()) == url
