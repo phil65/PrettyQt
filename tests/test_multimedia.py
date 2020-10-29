@@ -6,6 +6,7 @@
 import pathlib
 
 import pytest
+import pickle
 
 from prettyqt import multimedia, core
 from prettyqt.utils import InvalidParamError
@@ -56,6 +57,28 @@ def test_cameraviewfindersettings():
         settings[key] = settings[key]
     assert len(settings) == 5
     assert new_settings.to_dict() == dct
+
+
+def test_mediatimerange():
+    time_range = multimedia.MediaTimeRange(0, 1000)
+    assert 500 in time_range
+    del time_range[200:700]
+    assert len(time_range) == 2
+    assert time_range[0] == multimedia.MediaTimeInterval(0, 199)
+    assert list(time_range) == [
+        multimedia.MediaTimeInterval(0, 199),
+        multimedia.MediaTimeInterval(701, 1000),
+    ]
+
+
+def test_mediatimeinterval():
+    interval = multimedia.MediaTimeInterval(0, 1000)
+    repr(interval)
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(interval, jar)
+    with open("data.pkl", "rb") as jar:
+        interval = pickle.load(jar)
+    assert 500 in interval
 
 
 def test_mediaplaylist():

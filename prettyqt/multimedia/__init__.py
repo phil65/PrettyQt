@@ -2,6 +2,8 @@
 
 """Multimedia module."""
 
+from .mediatimeinterval import MediaTimeInterval
+from .mediatimerange import MediaTimeRange
 from .abstractvideobuffer import AbstractVideoBuffer
 
 # from .abstractplanarvideobuffer import AbstractPlanarVideoBuffer
@@ -39,6 +41,8 @@ __all__ = [
     "MediaPlaylist",
     "MediaPlayer",
     "MediaRecorder",
+    "MediaTimeInterval",
+    "MediaTimeRange",
     "AudioRecorder",
     "SoundEffect",
 ]
