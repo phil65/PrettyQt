@@ -11,6 +11,7 @@ from .videoframe import VideoFrame
 from .audioformat import AudioFormat
 from .camerainfo import CameraInfo
 from .mediabindableinterface import MediaBindableInterface
+from .imageencodersettings import ImageEncoderSettings
 from .videoencodersettings import VideoEncoderSettings
 from .audioencodersettings import AudioEncoderSettings
 from .mediaobject import MediaObject
@@ -27,6 +28,7 @@ from .soundeffect import SoundEffect
 __all__ = [
     "AudioFormat",
     "AbstractVideoBuffer",
+    "ImageEncoderSettings",
     # "AbstractPlanarVideoBuffer",
     "VideoFrame",
     "CameraInfo",

@@ -59,6 +59,16 @@ def test_cameraviewfindersettings():
     assert new_settings.to_dict() == dct
 
 
+def test_imageencodersettings():
+    settings = multimedia.ImageEncoderSettings()
+    dct = settings.to_dict()
+    new_settings = multimedia.ImageEncoderSettings.from_dict(dct)
+    for key in settings:
+        settings[key] = settings[key]
+    assert len(settings) == 4
+    assert new_settings.to_dict() == dct
+
+
 def test_mediatimerange():
     time_range = multimedia.MediaTimeRange(0, 1000)
     assert 500 in time_range
