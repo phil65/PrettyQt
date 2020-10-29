@@ -41,7 +41,7 @@ def test_camera():
     assert cam.get_state() == "unloaded"
     assert cam.get_status() in ["unloaded", "unavailable"]
     assert cam.get_lock_status() == "unlocked"
-    assert cam.get_error() == "none"
+    assert cam.get_error() in ["none", "service_missing"]
     cam.set_capture_mode("still_image")
     with pytest.raises(InvalidParamError):
         cam.set_capture_mode("test")
