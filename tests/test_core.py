@@ -453,6 +453,20 @@ def test_sortfilterproxymodel():
     core.SortFilterProxyModel()
 
 
+def test_temporaryfile():
+    file = core.TemporaryFile()
+    with file.open_file("read_only"):
+        assert file.get_open_mode() == "read_only"
+    date = core.DateTime(2000, 1, 1, 1, 1)
+    date.set_timezone("Europe/Berlin")
+    # tzinfo=datetime.timezone.utc
+    # print(str(date.get_timezone()))
+    file.set_file_time(date, "birth")
+    # assert file.get_file_time("birth") == date.get_value()
+    with pytest.raises(InvalidParamError):
+        file.set_file_time(date, "test")
+
+
 def test_textboundaryfinder():
     finder = core.TextBoundaryFinder("This is a test", boundary_type="word")
     for boundary in finder:

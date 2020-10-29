@@ -1,5 +1,7 @@
 ## v0.129.0 (2020-10-29)
 
+## v0.129.0 (2020-10-29)
+
 ### Fix
 
 - fix multimedia tests for Travis
