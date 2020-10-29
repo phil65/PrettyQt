@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from qtpy import QtMultimedia
-from prettyqt import multimedia
+# from qtpy import QtMultimedia
+# from prettyqt import multimedia
 
-QtMultimedia.QAbstractPlanarVideoBuffer.__bases__ = (multimedia.AbstractVideoBuffer,)
+# QtMultimedia.QAbstractPlanarVideoBuffer.__bases__ = (multimedia.AbstractVideoBuffer,)
 
 
-class AbstractPlanarVideoBuffer(QtMultimedia.QAbstractPlanarVideoBuffer):
-    pass
+# class AbstractPlanarVideoBuffer(QtMultimedia.QAbstractPlanarVideoBuffer):
+#     pass
