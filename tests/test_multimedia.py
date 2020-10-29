@@ -39,7 +39,7 @@ def test_camerainfo():
 def test_camera():
     cam = multimedia.Camera()
     assert cam.get_state() == "unloaded"
-    assert cam.get_status() == "unloaded"
+    assert cam.get_status() in ["unloaded", "unavailable"]
     assert cam.get_lock_status() == "unlocked"
     assert cam.get_error() == "none"
     cam.set_capture_mode("still_image")
