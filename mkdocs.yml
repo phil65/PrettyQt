@@ -21,12 +21,11 @@ nav:
         - scintilla: api/scintilla.md
         - svg: api/svg.md
         - syntaxhighlighters: api/syntaxhighlighters.md
+        # - utils: api/utils.md
         - webenginecore: api/webenginecore.md
         - webenginewidgets: api/webenginewidgets.md
         - widgets: api/widgets.md
-        - winextras: api/winextras.md
-        # - utils: api/utils.md
-        # - constants: api/constants.md
+        # - winextras: api/winextras.md
     - Contributing: contributing.md
     - Changelog: changelog.md
 
