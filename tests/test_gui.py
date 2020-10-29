@@ -401,7 +401,7 @@ def test_polygon():
         poly = pickle.load(jar)
     poly.add_points((0, 1), core.Point(2, 2))
     assert bool(poly) is True
-    assert core.Point(1.5, 0.5) in poly
+    assert core.Point(1, 0) in poly
     p = core.Point(5, 5)
     poly[5] = p
     assert poly[5] == p

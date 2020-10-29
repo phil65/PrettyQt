@@ -58,7 +58,7 @@ class WebEngineProfile(QtWebEngineWidgets.QWebEngineProfile):
         Allowed values are "none", "disk", "memory"
 
         Args:
-            type: http cache type
+            typ: http cache type
 
         Raises:
             InvalidParamError: Cache type does not exist

@@ -1,4 +1,0 @@
-winextras module
-==========
-
-::: prettyqt.winextras

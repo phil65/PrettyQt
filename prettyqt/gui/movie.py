@@ -34,7 +34,7 @@ class Movie(QtGui.QMovie):
         Valid values for cache_mode: "none", "all"
 
         Args:
-            cache_mode: cache mode
+            mode: cache mode
 
         Raises:
             InvalidParamError: cache mode does not exist

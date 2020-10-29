@@ -92,7 +92,7 @@ class VideoFrame(QtMultimedia.QVideoFrame):
         Possible values: "progressive_frame", "top_field", "bottom_field",
                          "interlaced_frame"
         Args:
-            position: capture mode
+            typ: capture mode
 
         Raises:
             InvalidParamError: capture mode does not exist

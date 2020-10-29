@@ -43,7 +43,7 @@ class PageLayout(QtGui.QPageLayout):
         Valid values for units: "millimeter", "point", "inch", "pica", "didot", "cicero"
 
         Args:
-            units: unit
+            unit: unit
 
         Raises:
             InvalidParamError: unit does not exist
