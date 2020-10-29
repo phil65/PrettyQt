@@ -197,8 +197,80 @@
 
 
   <li class="md-nav__item">
+    <a href="charts.html" class="md-nav__link">
+      charts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="constants.html" class="md-nav__link">
+      constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="core.html" class="md-nav__link">
       core
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_delegates.html" class="md-nav__link">
+      custom_delegates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_models.html" class="md-nav__link">
+      custom_models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_validators.html" class="md-nav__link">
+      custom_validators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_widgets.html" class="md-nav__link">
+      custom_widgets
     </a>
   </li>
 
@@ -1157,30 +1229,6 @@
 
 
   <li class="md-nav__item">
-    <a href="widgets.html" class="md-nav__link">
-      widgets
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="charts.html" class="md-nav__link">
-      charts
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
     <a href="multimedia.html" class="md-nav__link">
       multimedia
     </a>
@@ -1217,6 +1265,18 @@
 
 
   <li class="md-nav__item">
+    <a href="objbrowser.html" class="md-nav__link">
+      objbrowser
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="positioning.html" class="md-nav__link">
       positioning
     </a>
@@ -1241,8 +1301,20 @@
 
 
   <li class="md-nav__item">
-    <a href="webenginewidgets.html" class="md-nav__link">
-      webenginewidgets
+    <a href="scintilla.html" class="md-nav__link">
+      scintilla
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="svg.html" class="md-nav__link">
+      svg
     </a>
   </li>
 
@@ -1265,8 +1337,8 @@
 
 
   <li class="md-nav__item">
-    <a href="custom_models.html" class="md-nav__link">
-      custom_models
+    <a href="webenginecore.html" class="md-nav__link">
+      webenginecore
     </a>
   </li>
 
@@ -1277,8 +1349,8 @@
 
 
   <li class="md-nav__item">
-    <a href="custom_widgets.html" class="md-nav__link">
-      custom_widgets
+    <a href="webenginewidgets.html" class="md-nav__link">
+      webenginewidgets
     </a>
   </li>
 
@@ -1289,20 +1361,8 @@
 
 
   <li class="md-nav__item">
-    <a href="custom_validators.html" class="md-nav__link">
-      custom_validators
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="custom_delegates.html" class="md-nav__link">
-      custom_delegates
+    <a href="widgets.html" class="md-nav__link">
+      widgets
     </a>
   </li>
 
@@ -3165,8 +3225,8 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>cache_mode</code></td>
-<td><code></code></td>
+<td><code>mode</code></td>
+<td><code>str</code></td>
 <td>
 <p>cache mode</p>
 </td>
@@ -3200,7 +3260,7 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Valid values for cache_mode: "none", "all"</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        cache_mode: cache mode</span>
+<span class="sd">        mode: cache mode</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: cache mode does not exist</span>
@@ -3537,8 +3597,8 @@ set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </thead>
 <tbody>
 <tr>
-<td><code>units</code></td>
-<td><code></code></td>
+<td><code>unit</code></td>
+<td><code>str</code></td>
 <td>
 <p>unit</p>
 </td>
@@ -3572,7 +3632,7 @@ set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <span class="sd">    Valid values for units: "millimeter", "point", "inch", "pica", "didot", "cicero"</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        units: unit</span>
+<span class="sd">        unit: unit</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: unit does not exist</span>
@@ -5587,8 +5647,8 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
   <!-- Link to previous and/or next page --><div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
 
-        <!-- Link to previous page --><a href="core.html"
-              title="core"
+        <!-- Link to previous page --><a href="custom_widgets.html"
+              title="custom_widgets"
               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
               rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -5598,16 +5658,16 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
             <div class="md-flex__cell md-flex__cell--stretch
                   md-footer-nav__title">
               <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">Previous</span>core</span>
+                <span class="md-footer-nav__direction">Previous</span>custom_widgets</span>
             </div>
-          </a><!-- Link to next page --><a href="widgets.html"
-              title="widgets"
+          </a><!-- Link to next page --><a href="multimedia.html"
+              title="multimedia"
               class="md-flex md-footer-nav__link md-footer-nav__link--next"
               rel="next">
             <div class="md-flex__cell md-flex__cell--stretch
                   md-footer-nav__title">
               <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">Next</span>widgets</span>
+                <span class="md-footer-nav__direction">Next</span>multimedia</span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-forward
