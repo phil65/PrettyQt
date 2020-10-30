@@ -454,5 +454,15 @@ def test_textcharformat():
         fmt.set_font_style_hint("test")
 
 
+def test_window():
+    wnd = gui.Window()
+    assert wnd.get_surface_class() == "window"
+    assert wnd.get_surface_type() == "raster"
+    wnd.set_visibility("maximized")
+    with pytest.raises(InvalidParamError):
+        wnd.set_visibility("test")
+    assert wnd.get_visibility() == "maximized"
+
+
 def test_validator():
     gui.Validator()

@@ -16,6 +16,8 @@ from qtpy.QtGui import QDragEnterEvent as DragEnterEvent
 from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
 from .keysequence import KeySequence
+from .surface import Surface
+from .window import Window
 from .icon import Icon
 from .paintdevice import PaintDevice
 from .pixmap import Pixmap
@@ -126,5 +128,7 @@ __all__ = [
     "SyntaxHighlighter",
     "PdfWriter",
     "KeySequence",
+    "Surface",
+    "Window",
     "DesktopServices",
 ]
