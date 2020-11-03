@@ -14,6 +14,7 @@ from qtpy.QtCore import QPointF as PointF
 from qtpy.QtCore import QSizeF as SizeF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
+from .uuid import Uuid
 from .line import Line
 from .linef import LineF
 from .easingcurve import EasingCurve
@@ -93,6 +94,7 @@ if VersionNumber.get_qt_version() >= (5, 13, 0):
 
 __all__ = [
     "Object",
+    "Uuid",
     "Margins",
     "Locale",
     "EventLoop",

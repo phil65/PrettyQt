@@ -528,6 +528,14 @@ def test_urlquery():
     assert "a" in query
 
 
+def test_uuid():
+    uuid = core.Uuid.create_uuid()
+    assert uuid.get_variant() == "dce"
+    assert uuid.get_version() == "random"
+    assert uuid
+    repr(uuid)
+
+
 def test_versionnumber():
     a = core.VersionNumber(1, 2, 3)
     b = core.VersionNumber("1.2.4")
