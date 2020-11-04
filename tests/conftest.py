@@ -68,6 +68,7 @@ class QtTester:
     def test_model(model, force_py):
         tester = modeltest.ModelTester()
         tester.check(model, force_py=force_py)
+        tester._cleanup()
 
 
 @pytest.fixture
