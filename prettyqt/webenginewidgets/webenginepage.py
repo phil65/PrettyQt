@@ -271,6 +271,9 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
     def get_setting(self, setting_name: str) -> bool:
         return self.get_settings()[setting_name]
 
+    def get_scripts(self) -> webenginewidgets.WebEngineScriptCollection:
+        return webenginewidgets.WebEngineScriptCollection(self.scripts())
+
 
 if __name__ == "__main__":
     from prettyqt import widgets

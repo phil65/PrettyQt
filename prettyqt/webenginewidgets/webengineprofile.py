@@ -7,7 +7,7 @@ try:
 except ImportError:
     from PySide2 import QtWebEngineWidgets
 
-from prettyqt import core
+from prettyqt import core, webenginewidgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -76,6 +76,9 @@ class WebEngineProfile(QtWebEngineWidgets.QWebEngineProfile):
             Http cache type
         """
         return HTTP_CACHE_TYPES.inv[self.httpCacheType()]
+
+    def get_scripts(self) -> webenginewidgets.WebEngineScriptCollection:
+        return webenginewidgets.WebEngineScriptCollection(self.scripts())
 
 
 if __name__ == "__main__":

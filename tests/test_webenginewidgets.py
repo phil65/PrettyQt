@@ -46,6 +46,7 @@ def test_webengineprofile(qapp):
     with pytest.raises(InvalidParamError):
         profile.set_http_cache_type("test")
     assert profile.get_http_cache_type() == "disk"
+    profile.get_scripts()
 
 
 def test_webenginescript():
@@ -54,6 +55,21 @@ def test_webenginescript():
     with pytest.raises(InvalidParamError):
         script.set_injection_point("test")
     assert script.get_injection_point() == "document_ready"
+
+
+def test_webenginescriptcollection():
+    page = webenginewidgets.WebEnginePage()
+    script = webenginewidgets.WebEngineScript()
+    script.setName("test")
+    item = page.get_scripts()
+    assert bool(item) is False
+    item += script
+    assert script in item
+    assert len(item) == 1
+    assert bool(item) is True
+    for scr in item:
+        pass
+    assert item["test"] == script
 
 
 def test_webenginesettings(qapp):
