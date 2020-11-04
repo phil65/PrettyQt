@@ -48,7 +48,7 @@ class WebEngineProfile(QtWebEngineWidgets.QWebEngineProfile):
         Possible values are "none", "allow", "force"
 
         Returns:
-            Save page format
+            Persistent cookie policy
         """
         return PERSISTENT_COOKIE_POLICIES.inv[self.persistentCookiesPolicy()]
 
