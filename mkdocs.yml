@@ -4,6 +4,7 @@ nav:
     - Home: index.md
     # - API: mkapi/api/prettyqt
     - API:
+        - bluetooth: api/bluetooth.md
         - charts: api/charts.md
         - constants: api/constants.md
         - core: api/core.md
@@ -18,6 +19,7 @@ nav:
         - objbrowser: api/objbrowser.md
         - positioning: api/positioning.md
         - qml: api/qml.md
+        - quick: api/quick.md
         - scintilla: api/scintilla.md
         - svg: api/svg.md
         - syntaxhighlighters: api/syntaxhighlighters.md

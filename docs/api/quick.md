@@ -1,0 +1,4 @@
+quick module
+=================
+
+::: prettyqt.quick
