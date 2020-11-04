@@ -7,7 +7,7 @@ if PYQT5:
 elif PYSIDE2:
     from PySide2 import QtWebEngineWidgets
 
-from prettyqt import core
+# from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 Item = QtWebEngineWidgets.QWebEngineDownloadItem
@@ -54,15 +54,21 @@ SAVE_PAGE_FORMATS = bidict(
     mime_html=QtWebEngineWidgets.QWebEngineDownloadItem.MimeHtmlSaveFormat,
 )
 
-QtWebEngineWidgets.QWebEngineDownloadItem.__bases__ = (core.Object,)
+# QtWebEngineWidgets.QWebEngineDownloadItem.__bases__ = (core.Object,)
 
 
-class WebEngineDownloadItem(QtWebEngineWidgets.QWebEngineDownloadItem):
+class WebEngineDownloadItem(object):
+    def __init__(self, item: QtWebEngineWidgets.QWebEngineDownloadItem):
+        self.item = item
+
+    def __getattr__(self, val):
+        return getattr(self.item, val)
+
     def get_interrupt_reason(self) -> str:
-        return DOWNLOAD_INTERRUPT_REASONS.inv[self.interruptReason()]
+        return DOWNLOAD_INTERRUPT_REASONS.inv[self.item.interruptReason()]
 
     def get_state(self) -> str:
-        return DOWNLOAD_STATES.inv[self.state()]
+        return DOWNLOAD_STATES.inv[self.item.state()]
 
     def set_save_page_format(self, fmt: str):
         """Set the save page format.
@@ -77,7 +83,7 @@ class WebEngineDownloadItem(QtWebEngineWidgets.QWebEngineDownloadItem):
         """
         if fmt not in SAVE_PAGE_FORMATS:
             raise InvalidParamError(fmt, SAVE_PAGE_FORMATS)
-        self.setSavePageFormat(SAVE_PAGE_FORMATS[fmt])
+        self.item.setSavePageFormat(SAVE_PAGE_FORMATS[fmt])
 
     def get_save_page_format(self) -> str:
         """Return current save page format.
@@ -87,12 +93,12 @@ class WebEngineDownloadItem(QtWebEngineWidgets.QWebEngineDownloadItem):
         Returns:
             Save page format
         """
-        return SAVE_PAGE_FORMATS.inv[self.savePageFormat()]
+        return SAVE_PAGE_FORMATS.inv[self.item.savePageFormat()]
 
 
-if __name__ == "__main__":
-    from prettyqt import widgets
+# if __name__ == "__main__":
+#     from prettyqt import widgets
 
-    app = widgets.app()
-    item = WebEngineDownloadItem()
-    app.main_loop()
+# app = widgets.app()
+# item = WebEngineDownloadItem()
+# app.main_loop()
