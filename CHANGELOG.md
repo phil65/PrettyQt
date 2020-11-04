@@ -1,3 +1,16 @@
+## v0.130.0 (2020-11-04)
+
+### Feat
+
+- **WebEnginePage**: add some settings methods
+- **webenginewidgets**: add WebEngineSettings class
+- add bluetooth module
+- **core**: add Uuid class
+- add quick module
+- **gui**: add Surface and Window class
+- **multimedia**: add ImageEncoderSettings
+- **multimedia**: add MediaTimeRange and MediaTimeInterval classes
+
 ## v0.129.1 (2020-10-29)
 
 ### Fix
