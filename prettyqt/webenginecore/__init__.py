@@ -11,7 +11,8 @@ logger = logging.getLogger(__name__)
 
 try:
     from .webengineurlscheme import WebEngineUrlScheme
+    from .webengineurlschemehandler import WebEngineUrlSchemeHandler
 
-    __all__ = ["WebEngineUrlScheme"]
+    __all__ = ["WebEngineUrlScheme", "WebEngineUrlSchemeHandler"]
 except ModuleNotFoundError:
     logger.warning("Tried to import WebEngine module but not installed.")
