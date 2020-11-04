@@ -13,6 +13,7 @@ try:
     from .webenginehistoryitem import WebEngineHistoryItem
     from .webenginehistory import WebEngineHistory
     from .webenginesettings import WebEngineSettings
+    from .webenginecontextmenudata import WebEngineContextMenuData
     from .webenginescript import WebEngineScript
     from .webenginescriptcollection import WebEngineScriptCollection
     from .webengineview import WebEngineView
@@ -23,6 +24,7 @@ try:
     __all__ = [
         "WebEngineHistoryItem",
         "WebEngineSettings",
+        "WebEngineContextMenuData",
         "WebEngineHistory",
         "WebEngineView",
         "WebEnginePage",

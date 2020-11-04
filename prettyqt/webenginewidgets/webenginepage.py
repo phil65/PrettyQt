@@ -274,6 +274,9 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
     def get_scripts(self) -> webenginewidgets.WebEngineScriptCollection:
         return webenginewidgets.WebEngineScriptCollection(self.scripts())
 
+    def get_context_menu_data(self) -> webenginewidgets.WebEngineContextMenuData:
+        return webenginewidgets.WebEngineContextMenuData(self.contextMenuData())
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
