@@ -1,302 +1,490 @@
-#############################################################################
-##
-# Copyright (C) 2007 Trolltech ASA. All rights reserved.
-##
-# This file is part of the Qt Concurrent project on Trolltech Labs.
-##
-# This file may be used under the terms of the GNU General Public
-# License version 2.0 as published by the Free Software Foundation
-# and appearing in the file LICENSE.GPL included in the packaging of
-# this file.  Please review the following information to ensure GNU
-# General Public Licensing requirements will be met:
-# http://www.trolltech.com/products/qt/opensource.html
-##
-# If you are unsure which license is appropriate for your use, please
-# review the following information:
-# http://www.trolltech.com/products/qt/licensing.html or contact the
-# sales department at sales@trolltech.com.
-##
-# This file is provided AS IS with NO WARRANTY OF ANY KIND, INCLUDING THE
-# WARRANTY OF DESIGN, MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
-##
-#############################################################################
-
-from PyQt5 import QtCore, QtGui
-
-
-# This was originally a Trolltech file.  The QBzr folks did some work to
-# bring it up to date, and I've done some work on top of theirs to fix a few
-# minor bugs.
+# encoding: UTF-8
+# This file is based on the original C++ qabstractitemmodeltester.cpp from:
+# http://code.qt.io/cgit/qt/qtbase.git/tree/src/testlib/qabstractitemmodeltester.cpp
+# Commit 4af292fe5158c2d19e8ab1351c71c3940c7f1032
 #
-# To test a model, instantiate this class with a reference to the model and
-# its parent
-#        from modeltest import ModelTest
-#        model = MyFancyModel(self)
-#        self.modeltest = ModelTest(model, self)
+# Licensed under the following terms:
+#
+# Copyright (C) 2016 The Qt Company Ltd.
+# Copyright (C) 2017 Klarälvdalens Datakonsult AB, a KDAB Group company,
+# info@kdab.com, author Giuseppe D'Angelo <giuseppe.dangelo@kdab.com>
+# Contact: https://www.qt.io/licensing/
+#
+# This file is part of the QtTest module of the Qt Toolkit.
+#
+# $QT_BEGIN_LICENSE:LGPL$
+# Commercial License Usage
+# Licensees holding valid commercial Qt licenses may use this file in
+# accordance with the commercial license agreement provided with the
+# Software or, alternatively, in accordance with the terms contained in
+# a written agreement between you and The Qt Company. For licensing terms
+# and conditions see https://www.qt.io/terms-conditions. For further
+# information use the contact form at https://www.qt.io/contact-us.
+#
+# GNU Lesser General Public License Usage
+# Alternatively, this file may be used under the terms of the GNU Lesser
+# General Public License version 3 as published by the Free Software
+# Foundation and appearing in the file LICENSE.LGPL3 included in the
+# packaging of this file. Please review the following information to
+# ensure the GNU Lesser General Public License version 3 requirements
+# will be met: https://www.gnu.org/licenses/lgpl-3.0.html.
+#
+# GNU General Public License Usage
+# Alternatively, this file may be used under the terms of the GNU
+# General Public License version 2.0 or (at your option) the GNU General
+# Public license version 3 or any later version approved by the KDE Free
+# Qt Foundation. The licenses are as published by the Free Software
+# Foundation and appearing in the file LICENSE.GPL2 and LICENSE.GPL3
+# included in the packaging of this file. Please review the following
+# information to ensure the GNU General Public License requirements will
+# be met: https://www.gnu.org/licenses/gpl-2.0.html and
+# https://www.gnu.org/licenses/gpl-3.0.html.
+#
+# $QT_END_LICENSE$
+
+import collections
+import sys
+
+from qtpy import QtTest, QtCore, QtGui
+
+_Changing = collections.namedtuple("_Changing", "parent, old_size, last, next")
 
 
-class ModelTest(QtCore.QObject):
-    def __init__(self, _model, verbose=True, parent=None):
-        """Connect to all of the models signals.
+HAS_QT_TESTER = hasattr(QtTest, "QAbstractItemModelTester")
 
-        Whenever anything happens check everything.
+
+class ModelTester:
+    """A tester for Qt's QAbstractItemModels."""
+
+    def __init__(self):
+        self._model = None
+        self._fetching_more = None
+        self._insert = None
+        self._remove = None
+        self._changing = []
+        self._qt_tester = None
+
+    def _debug(self, text):
+        print("modeltest: " + text)
+
+    def _modelindex_debug(self, index):
+        """Get a string for debug output for a QModelIndex."""
+        if index is None:
+            return "<None>"
+        elif not index.isValid():
+            return "<invalid> (0x{:x})".format(id(index))
+        else:
+            data = self._model.data(index, QtCore.Qt.DisplayRole)
+            return "{}/{} {!r} (0x{:x})".format(
+                index.row(), index.column(), data, id(index)
+            )
+
+    def check(self, model, force_py=False):
+        """Run a series of checks in the given model.
+
+        Connect to all of the models signals.
+
+        Whenever anything happens recheck everything.
+
+        :param model: The ``QAbstractItemModel`` to test.
+        :param force_py:
+          Force using the Python implementation, even if the C++ implementation
+          is available.
         """
-        super().__init__(parent)
-        self._model = _model
-        self.model = _model
-        self.insert = []
-        self.remove = []
-        self.fetchingMore = False
-        self._verbose = verbose
-        assert self.model
+        assert model is not None
 
-        self.model.columnsAboutToBeInserted.connect(self.runAllTests)
-        self.model.columnsAboutToBeRemoved.connect(self.runAllTests)
-        self.model.columnsInserted.connect(self.runAllTests)
-        self.model.columnsRemoved.connect(self.runAllTests)
-        self.model.dataChanged.connect(self.runAllTests)
-        self.model.headerDataChanged.connect(self.runAllTests)
-        self.model.layoutAboutToBeChanged.connect(self.runAllTests)
-        self.model.layoutChanged.connect(self.runAllTests)
-        self.model.modelReset.connect(self.runAllTests)
-        self.model.rowsAboutToBeInserted.connect(self.runAllTests)
-        self.model.rowsAboutToBeRemoved.connect(self.runAllTests)
-        self.model.rowsInserted.connect(self.runAllTests)
-        self.model.rowsRemoved.connect(self.runAllTests)
+        if HAS_QT_TESTER and not force_py:
+            reporting_mode = QtTest.QAbstractItemModelTester.FailureReportingMode.Warning
+            self._qt_tester = QtTest.QAbstractItemModelTester(model, reporting_mode)
+            self._debug("Using Qt C++ tester")
+            return
 
-        # Special checks for inserting/removing
-        self.model.rowsAboutToBeInserted.connect(self.rowsAboutToBeInserted)
-        self.model.rowsAboutToBeRemoved.connect(self.rowsAboutToBeRemoved)
-        self.model.rowsInserted.connect(self.rowsInserted)
-        self.model.rowsRemoved.connect(self.rowsRemoved)
-        self.runAllTests()
+        self._debug("Using Python tester")
 
-    def nonDestructiveBasicTest(self):
-        assert self.model.buddy(QtCore.QModelIndex()) == QtCore.QModelIndex()
-        self.model.canFetchMore(QtCore.QModelIndex())
-        assert self.model.columnCount(QtCore.QModelIndex()) >= 0
-        assert (
-            self.model.data(QtCore.QModelIndex(), QtCore.Qt.DisplayRole)
-            == QtCore.QVariant()
-        )
-        self.fetchingMore = True
-        self.model.fetchMore(QtCore.QModelIndex())
-        self.fetchingMore = False
-        flags = self.model.flags(QtCore.QModelIndex())
-        assert (
-            int(flags & QtCore.Qt.ItemIsEnabled) == QtCore.Qt.ItemIsEnabled
-            or int(flags & QtCore.Qt.ItemIsEnabled) == 0
-        )
-        self.model.hasChildren(QtCore.QModelIndex())
-        self.model.hasIndex(0, 0)
-        self.model.headerData(0, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
-        self.model.index(0, 0, QtCore.QModelIndex())
-        self.model.itemData(QtCore.QModelIndex())
-        cache = QtCore.QVariant()
-        self.model.match(QtCore.QModelIndex(), -1, cache)
-        self.model.mimeTypes()
-        assert self.model.parent(QtCore.QModelIndex()) == QtCore.QModelIndex()
-        assert self.model.rowCount(QtCore.QModelIndex()) >= 0
-        variant = QtCore.QVariant()
-        self.model.setData(QtCore.QModelIndex(), variant, -1)
-        self.model.setHeaderData(-1, QtCore.Qt.Horizontal, QtCore.QVariant())
-        self.model.setHeaderData(0, QtCore.Qt.Horizontal, QtCore.QVariant())
-        self.model.setHeaderData(999999, QtCore.Qt.Horizontal, QtCore.QVariant())
-        self.model.sibling(0, 0, QtCore.QModelIndex())
-        self.model.span(QtCore.QModelIndex())
-        self.model.supportedDropActions()
+        self._model = model
+        self._fetching_more = False
+        self._insert = []
+        self._remove = []
+        self._changing = []
 
-    def rowCount(self):
-        """Test implementation of rowCount hasChildren method.
+        self._model.columnsAboutToBeInserted.connect(self._run)
+        self._model.columnsAboutToBeRemoved.connect(self._run)
+        self._model.columnsInserted.connect(self._run)
+        self._model.columnsRemoved.connect(self._run)
+        self._model.dataChanged.connect(self._run)
+        self._model.headerDataChanged.connect(self._run)
+        self._model.layoutAboutToBeChanged.connect(self._run)
+        self._model.layoutChanged.connect(self._run)
+        self._model.modelReset.connect(self._run)
+        self._model.rowsAboutToBeInserted.connect(self._run)
+        self._model.rowsAboutToBeRemoved.connect(self._run)
+        self._model.rowsInserted.connect(self._run)
+        self._model.rowsRemoved.connect(self._run)
 
-        self.models that are dynamically populated are not as fully tested here.
+        # Special checks for changes
+        self._model.layoutAboutToBeChanged.connect(self._on_layout_about_to_be_changed)
+        self._model.layoutChanged.connect(self._on_layout_changed)
+        self._model.rowsAboutToBeInserted.connect(self._on_rows_about_to_be_inserted)
+        self._model.rowsAboutToBeRemoved.connect(self._on_rows_about_to_be_removed)
+        self._model.rowsInserted.connect(self._on_rows_inserted)
+        self._model.rowsRemoved.connect(self._on_rows_removed)
+        self._model.dataChanged.connect(self._on_data_changed)
+        self._model.headerDataChanged.connect(self._on_header_data_changed)
+
+        self._run()
+
+    def _cleanup(self):
+        """Not API intended for users, but called from the fixture function."""
+        if self._model is None:
+            return
+
+        self._model.columnsAboutToBeInserted.disconnect(self._run)
+        self._model.columnsAboutToBeRemoved.disconnect(self._run)
+        self._model.columnsInserted.disconnect(self._run)
+        self._model.columnsRemoved.disconnect(self._run)
+        self._model.dataChanged.disconnect(self._run)
+        self._model.headerDataChanged.disconnect(self._run)
+        self._model.layoutAboutToBeChanged.disconnect(self._run)
+        self._model.layoutChanged.disconnect(self._run)
+        self._model.modelReset.disconnect(self._run)
+        self._model.rowsAboutToBeInserted.disconnect(self._run)
+        self._model.rowsAboutToBeRemoved.disconnect(self._run)
+        self._model.rowsInserted.disconnect(self._run)
+        self._model.rowsRemoved.disconnect(self._run)
+
+        self._model.layoutAboutToBeChanged.disconnect(self._on_layout_about_to_be_changed)
+        self._model.layoutChanged.disconnect(self._on_layout_changed)
+        self._model.rowsAboutToBeInserted.disconnect(self._on_rows_about_to_be_inserted)
+        self._model.rowsAboutToBeRemoved.disconnect(self._on_rows_about_to_be_removed)
+        self._model.rowsInserted.disconnect(self._on_rows_inserted)
+        self._model.rowsRemoved.disconnect(self._on_rows_removed)
+        self._model.dataChanged.disconnect(self._on_data_changed)
+        self._model.headerDataChanged.disconnect(self._on_header_data_changed)
+
+        self._model = None
+
+    def _run(self):
+        assert self._model is not None
+        assert self._fetching_more is not None
+        if self._fetching_more:
+            return
+        self._test_basic()
+        self._test_row_count_and_column_count()
+        self._test_has_index()
+        self._test_index()
+        self._test_parent()
+        self._test_data()
+
+    def _test_basic(self):
+        """Try to call a number of the basic functions (not all).
+
+        Make sure the model doesn't outright segfault, testing the functions
+        which make sense.
+        """
+        assert not self._model.buddy(QtCore.QModelIndex()).isValid()
+
+        self._model.canFetchMore(QtCore.QModelIndex())
+        assert self._column_count(QtCore.QModelIndex()) >= 0
+        self._fetch_more(QtCore.QModelIndex())
+        flags = self._model.flags(QtCore.QModelIndex())
+        assert flags == QtCore.Qt.ItemIsDropEnabled or not flags
+        self._has_children(QtCore.QModelIndex())
+
+        has_row = self._model.hasIndex(0, 0)
+        if has_row:
+            cache = None
+            self._model.match(self._model.index(0, 0), -1, cache)
+
+        self._model.mimeTypes()
+        assert not self._parent(QtCore.QModelIndex()).isValid()
+        assert self._model.rowCount() >= 0
+        self._model.span(QtCore.QModelIndex())
+
+        self._model.supportedDropActions()
+        self._model.roleNames()
+
+    def _test_row_count_and_column_count(self):
+        """Test model's implementation of row/columnCount() and hasChildren().
+
+        Models that are dynamically populated are not as fully tested here.
+
+        The models rowCount() is tested more extensively in _check_children(),
+        but this catches the big mistakes.
         """
         # check top row
-        topindex = self.model.index(0, 0, QtCore.QModelIndex())
-        rows = self.model.rowCount(topindex)
+        top_index = self._model.index(0, 0, QtCore.QModelIndex())
+
+        rows = self._model.rowCount(top_index)
         assert rows >= 0
-        if rows > 0:
-            hasChildren = self.model.hasChildren(topindex)
-            assert hasChildren is True
 
-        secondlvl = self.model.index(0, 0, topindex)
-        if secondlvl.isValid():
-            # check a row count where parent is valid
-            rows = self.model.rowCount(secondlvl)
-            assert rows >= 0
-            if rows > 0:
-                assert self.model.hasChildren(secondlvl) is True
+        columns = self._column_count(top_index)
+        assert columns >= 0
 
-        # The self.models rowCount() is tested more extensively in checkChildren,
-        # but this catches the big mistakes
+        if rows == 0 or columns == 0:
+            return
 
-    def columnCount(self):
-        """Test implementation of columnCount and hasChildren method."""
-        # check top row
-        topidx = self.model.index(0, 0, QtCore.QModelIndex())
-        assert self.model.columnCount(topidx) >= 0
+        assert self._has_children(top_index)
 
-        # check a column count where parent is valid
-        childidx = self.model.index(0, 0, topidx)
-        if childidx.isValid():
-            assert self.model.columnCount(childidx) >= 0
+        second_level_index = self._model.index(0, 0, top_index)
+        assert second_level_index.isValid()
 
-        # columnCount() is tested more extensively in checkChildren,
-        # but this catches the big mistakes
+        rows = self._model.rowCount(second_level_index)
+        assert rows >= 0
 
-    def hasIndex(self):
-        """Test implementation of hasIndex method."""
-        # Make sure that invalid values returns an invalid index
-        assert self.model.hasIndex(-2, -2) is False
-        assert self.model.hasIndex(-2, 0) is False
-        assert self.model.hasIndex(0, -2) is False
+        columns = self._column_count(second_level_index)
+        assert columns >= 0
 
-        rows = self.model.rowCount(QtCore.QModelIndex())
-        cols = self.model.columnCount(QtCore.QModelIndex())
+        if rows == 0 or columns == 0:
+            return
+
+        assert self._has_children(second_level_index)
+
+    def _test_has_index(self):
+        """Test model's implementation of hasIndex().
+
+        hasIndex() is tested more extensively in _check_children(),
+        but this catches the big mistakes.
+        """
+        # Make sure that invalid values return an invalid index
+        assert not self._model.hasIndex(-2, -2)
+        assert not self._model.hasIndex(-2, 0)
+        assert not self._model.hasIndex(0, -2)
+
+        rows = self._model.rowCount()
+        columns = self._column_count()
 
         # check out of bounds
-        assert self.model.hasIndex(rows, cols) is False
-        assert self.model.hasIndex(rows + 1, cols + 1) is False
+        assert not self._model.hasIndex(rows, columns)
+        assert not self._model.hasIndex(rows + 1, columns + 1)
 
-        if rows > 0:
-            assert self.model.hasIndex(0, 0) is True
+        if rows > 0 and columns > 0:
+            assert self._model.hasIndex(0, 0)
 
-        # hasIndex() is tested more extensively in checkChildren()
-        # but this catches the big mistakes
+    def _test_index(self):
+        """Test model's implementation of index().
 
-    def index(self):
-        """Test implementation of index method."""
-        # Make sure that invalid values returns an invalid index
-        assert self.model.index(-2, -2, QtCore.QModelIndex()) == QtCore.QModelIndex()
-        assert self.model.index(-2, 0, QtCore.QModelIndex()) == QtCore.QModelIndex()
-        assert self.model.index(0, -2, QtCore.QModelIndex()) == QtCore.QModelIndex()
+        index() is tested more extensively in _check_children(),
+        but this catches the big mistakes.
+        """
+        rows = self._model.rowCount()
+        columns = self._column_count()
 
-        rows = self.model.rowCount(QtCore.QModelIndex())
-        cols = self.model.columnCount(QtCore.QModelIndex())
+        for row in range(rows):
+            for column in range(columns):
+                # Make sure that the same index is *always* returned
+                a = self._model.index(row, column)
+                b = self._model.index(row, column)
+                assert a.isValid()
+                assert b.isValid()
+                assert a == b
 
-        if rows == 0:
+    def _test_parent(self):
+        """Test model's implementation of QAbstractItemModel::parent()."""
+        # Make sure the model won't crash and will return an invalid
+        # QModelIndex when asked for the parent of an invalid index.
+        assert not self._parent(QtCore.QModelIndex()).isValid()
+
+        if not self._has_children():
             return
 
-        # Catch off by one errors
-        assert self.model.index(rows, cols, QtCore.QModelIndex()) == QtCore.QModelIndex()
-        assert self.model.index(0, 0, QtCore.QModelIndex()).isValid() is True
-
-        # Make sure that the same index is *always* returned
-        a = self.model.index(0, 0, QtCore.QModelIndex())
-        b = self.model.index(0, 0, QtCore.QModelIndex())
-        assert a == b
-
-        # index() is tested more extensively in checkChildren()
-        # but this catches the big mistakes
-
-    def parent(self):
-        """Test implementation of parent method."""
-        # Make sure the self.model wont crash and will return an invalid QModelIndex
-        # when asked for the parent of an invalid index
-        assert self.model.parent(QtCore.QModelIndex()) == QtCore.QModelIndex()
-
-        if self.model.rowCount(QtCore.QModelIndex()) == 0:
-            return
-
-        # Column 0              | Column 1  |
-        # QtCore.Qself.modelIndex()         |           |
-        #    \- topidx          | topidx1   |
-        #         \- childix    | childidx1 |
+        # Column 0                | Column 1      |
+        # QModelIndex()           |               |
+        #    \- top_index         | top_index_1   |
+        #         \- child_index  | child_index_1 |
 
         # Common error test #1, make sure that a top level index has a parent
-        # that is an invalid QtCore.Qself.modelIndex
-        topidx = self.model.index(0, 0, QtCore.QModelIndex())
-        assert self.model.parent(topidx) == QtCore.QModelIndex()
+        # that is a invalid QModelIndex.
+        top_index = self._model.index(0, 0, QtCore.QModelIndex())
+        assert not self._parent(top_index).isValid()
 
-        # Common error test #2, make sure that a second level index has a parent
-        # that is the first level index
-        if self.model.rowCount(topidx) > 0:
-            childidx = self.model.index(0, 0, topidx)
-            assert self.model.parent(childidx) == topidx
+        # Common error test #2, make sure that a second level index has a
+        # parent that is the first level index.
+        if self._has_children(top_index):
+            child_index = self._model.index(0, 0, top_index)
+            assert self._parent(child_index) == top_index
 
-        # Common error test #3, the second column should NOT have the same children
-        # as the first column in a row
-        # Usually the second column shouldn't have children
-        topidx1 = self.model.index(0, 1, QtCore.QModelIndex())
-        if self.model.rowCount(topidx1) > 0:
-            childidx = self.model.index(0, 0, topidx)
-            childidx1 = self.model.index(0, 0, topidx1)
-            assert childidx != childidx1
+        # Common error test #3, the second column should NOT have the same
+        # children as the first column in a row.
+        # Usually the second column shouldn't have children.
+        if self._model.hasIndex(0, 1):
+            top_index_1 = self._model.index(0, 1, QtCore.QModelIndex())
+            if self._has_children(top_index) and self._has_children(top_index_1):
+                child_index = self._model.index(0, 0, top_index)
+                assert child_index.isValid()
+                child_index_1 = self._model.index(0, 0, top_index_1)
+                assert child_index_1.isValid()
+                assert child_index != child_index_1
 
-        # Full test, walk n levels deep through the self.model making sure that all
-        # parent's children correctly specify their parent
-        self.checkChildren(QtCore.QModelIndex())
+        # Full test, walk n levels deep through the model making sure that all
+        # parent's children correctly specify their parent.
+        self._check_children(QtCore.QModelIndex())
 
-    def data(self):
-        """Test implementation of data method."""
-        # Invalid index should return an invalid qvariant
-        qvar = self.model.data(QtCore.QModelIndex(), QtCore.Qt.DisplayRole)
-        assert qvar is None
+    def _check_children(self, parent, current_depth=0):
+        """Check parent/children relationships.
 
-        if self.model.rowCount(QtCore.QModelIndex()) == 0:
+        Called from the parent() test.
+
+        A model that returns an index of parent X should also return X when
+        asking for the parent of the index.
+
+        This recursive function does pretty extensive testing on the whole
+        model in an effort to catch edge cases.
+
+        This function assumes that rowCount(), columnCount() and index()
+        already work.  If they have a bug it will point it out, but the above
+        tests should have already found the basic bugs because it is easier to
+        figure out the problem in those tests then this one.
+        """
+        # First just try walking back up the tree.
+        p = parent
+        while p.isValid():
+            p = p.parent()
+
+        # For models that are dynamically populated
+        if self._model.canFetchMore(parent):
+            self._fetch_more(parent)
+
+        rows = self._model.rowCount(parent)
+        columns = self._column_count(parent)
+
+        if rows > 0:
+            assert self._has_children(parent)
+
+        # Some further testing against rows(), columns(), and hasChildren()
+        assert rows >= 0
+        assert columns >= 0
+        if rows > 0 and columns > 0:
+            assert self._has_children(parent)
+        self._debug(
+            "Checking children of {} with depth {} "
+            "({} rows, {} columns)".format(
+                self._modelindex_debug(parent), current_depth, rows, columns
+            )
+        )
+
+        top_left_child = self._model.index(0, 0, parent)
+        assert not self._model.hasIndex(rows, 0, parent)
+        assert not self._model.hasIndex(rows + 1, 0, parent)
+
+        for r in range(rows):
+            assert not self._model.hasIndex(r, columns, parent)
+            assert not self._model.hasIndex(r, columns + 1, parent)
+
+            for c in range(columns):
+                assert self._model.hasIndex(r, c, parent)
+                index = self._model.index(r, c, parent)
+                # rowCount() and columnCount() said that it existed...
+                if not index.isValid():
+                    self._debug(
+                        "Got invalid index at row={} col={} parent={}".format(
+                            r, c, self._modelindex_debug(parent)
+                        )
+                    )
+                assert index.isValid()
+
+                # index() should always return the same index when called twice
+                # in a row
+                modified_index = self._model.index(r, c, parent)
+                assert index == modified_index
+
+                sibling = self._model.sibling(r, c, top_left_child)
+                assert index == sibling
+
+                sibling2 = top_left_child.sibling(r, c)
+                assert index == sibling2
+
+                # Some basic checking on the index that is returned
+                assert index.model() == self._model
+                assert index.row() == r
+                assert index.column() == c
+
+                # If the next test fails here is some somewhat useful debug you
+                # play with.
+                if self._parent(index) != parent:
+                    self._debug(
+                        "Inconsistent parent() implementation detected\n"
+                        "  index={} exp. parent={} act. parent={}\n"
+                        "  row={} col={} depth={}\n"
+                        "  data for child: {}\n"
+                        "  data for parent: {}\n".format(
+                            self._modelindex_debug(index),
+                            self._modelindex_debug(parent),
+                            self._modelindex_debug(self._parent(index)),
+                            r,
+                            c,
+                            current_depth,
+                            self._model.data(index),
+                            self._model.data(parent),
+                        )
+                    )
+
+                # Check that we can get back our real parent.
+                assert self._parent(index) == parent
+
+                # recursively go down the children
+                if self._has_children(index) and current_depth < 10:
+                    self._debug(
+                        "{} has {} children".format(
+                            self._modelindex_debug(index), self._model.rowCount(index)
+                        )
+                    )
+                    self._check_children(index, current_depth + 1)
+
+                # make sure that after testing the children that the index
+                # doesn't change.
+                newer_index = self._model.index(r, c, parent)
+                assert index == newer_index
+        self._debug("Children check for {} done".format(self._modelindex_debug(parent)))
+
+    def _test_data(self):
+        """Test model's implementation of data()."""
+        if not self._has_children():
             return
 
-        # A valid index should have a valid QtCore.QVariant data
-        assert self.model.index(0, 0, QtCore.QModelIndex()).isValid()
+        # A valid index should have a valid QVariant data
+        assert self._model.index(0, 0).isValid()
 
-        # shouldn't be able to set data on an invalid index
-        assert (
-            self.model.setData(
-                QtCore.QModelIndex(), QtCore.QVariant("foo"), QtCore.Qt.DisplayRole
-            )
-            is False
-        )
+        string_types = [str]
+        if sys.version_info.major == 2:
+            string_types.append(unicode)  # noqa
 
-        # General Purpose roles that should return a QString
-        data = self.model.data(
-            self.model.index(0, 0, QtCore.QModelIndex()), QtCore.Qt.ToolTipRole
-        )
-        assert data is None or isinstance(data, str)
-        data = self.model.data(
-            self.model.index(0, 0, QtCore.QModelIndex()), QtCore.Qt.StatusTipRole
-        )
-        assert data is None or isinstance(data, str)
-        data = self.model.data(
-            self.model.index(0, 0, QtCore.QModelIndex()), QtCore.Qt.WhatsThisRole
-        )
-        assert data is None or isinstance(data, str)
+        string_types = tuple(string_types)
 
-        # General Purpose roles that should return a QSize
-        data = self.model.data(
-            self.model.index(0, 0, QtCore.QModelIndex()), QtCore.Qt.SizeHintRole
-        )
-        assert data is None or isinstance(data, QtCore.QSize)
+        types = [
+            (QtCore.Qt.DisplayRole, string_types),
+            (QtCore.Qt.ToolTipRole, string_types),
+            (QtCore.Qt.StatusTipRole, string_types),
+            (QtCore.Qt.WhatsThisRole, string_types),
+            (QtCore.Qt.SizeHintRole, QtCore.QSize),
+            (QtCore.Qt.FontRole, QtGui.QFont),
+            (QtCore.Qt.BackgroundColorRole, (QtGui.QColor, QtGui.QBrush)),
+            (QtCore.Qt.TextColorRole, (QtGui.QColor, QtGui.QBrush)),
+            (
+                QtCore.Qt.DecorationRole,
+                (QtGui.QPixmap, QtGui.QImage, QtGui.QIcon, QtGui.QColor, QtGui.QBrush),
+            ),
+        ]
 
-        # General Purpose roles that should return a QFont
-        data = self.model.data(
-            self.model.index(0, 0, QtCore.QModelIndex()), QtCore.Qt.FontRole
-        )
-        assert data is None or isinstance(data, QtGui.QFont)
+        # General purpose roles with a fixed expected type
+        for role, typ in types:
+            data = self._model.data(self._model.index(0, 0), role)
+            if data is not None:
+                data = data
+            assert data == None or isinstance(data, typ), role  # noqa
 
         # Check that the alignment is one we know about
-        alignment = self.model.data(
-            self.model.index(0, 0, QtCore.QModelIndex()), QtCore.Qt.TextAlignmentRole
-        )
+        alignment = self._model.data(self._model.index(0, 0), QtCore.Qt.TextAlignmentRole)
+        alignment = alignment
         if alignment is not None:
-            assert alignment == (
-                alignment
-                & int(QtCore.Qt.AlignHorizontal_Mask | QtCore.Qt.AlignVertical_Mask)
-            )
-
-        # General Purpose roles that should return a QColor
-        data = self.model.data(
-            self.model.index(0, 0, QtCore.QModelIndex()), QtCore.Qt.BackgroundColorRole
-        )
-        assert data is None or isinstance(data, QtGui.QColor)
-        data = self.model.data(
-            self.model.index(0, 0, QtCore.QModelIndex()), QtCore.Qt.TextColorRole
-        )
-        assert data is None or isinstance(data, QtGui.QColor)
+            try:
+                alignment = int(alignment)
+            except (TypeError, ValueError):
+                assert 0, "%r should be a TextAlignmentRole enum" % alignment
+            mask = int(QtCore.Qt.AlignHorizontal_Mask | QtCore.Qt.AlignVertical_Mask)
+            assert alignment == alignment & mask
 
         # Check that the "check state" is one we know about.
-        state = self.model.data(
-            self.model.index(0, 0, QtCore.QModelIndex()), QtCore.Qt.CheckStateRole
-        )
+        state = self._model.data(self._model.index(0, 0), QtCore.Qt.CheckStateRole)
         assert state in [
             None,
             QtCore.Qt.Unchecked,
@@ -304,170 +492,238 @@ class ModelTest(QtCore.QObject):
             QtCore.Qt.Checked,
         ]
 
-    def runAllTests(self):
-        if self.fetchingMore:
-            return
+    def _on_rows_about_to_be_inserted(self, parent, start, end):
+        """Store what is about to be inserted.
 
-        self.nonDestructiveBasicTest()
-        print("passed nonDestructiveBasicTest") if self._verbose else None
-
-        self.rowCount()
-        print("passed rowCount") if self._verbose else None
-
-        self.columnCount()
-        print("passed columnCount") if self._verbose else None
-
-        self.hasIndex()
-        print("passed hasIndex") if self._verbose else None
-
-        self.index()
-        print("passed index") if self._verbose else None
-
-        self.parent()
-        print("passed parent") if self._verbose else None
-
-        self.data()
-        print("passed data") if self._verbose else None
-        print("------------------------------") if self._verbose else None
-
-    def rowsAboutToBeInserted(self, parent, start, end):
-        """Store what is about to be inserted to make sure it actually happens."""
-        c = {}
-        c["parent"] = parent
-        c["oldSize"] = self.model.rowCount(parent)
-        c["last"] = self.model.data(self.model.index(start - 1, 0, parent))
-        c["next"] = self.model.data(self.model.index(start, 0, parent))
-        self.insert.append(c)
-
-    def rowsInserted(self, parent, start, end):
-        """Confirm that what was said was going to happen actually did."""
-        c = self.insert.pop()
-        assert c["parent"] == parent
-        assert c["oldSize"] + (end - start + 1) == self.model.rowCount(parent)
-        assert c["last"] == self.model.data(self.model.index(start - 1, 0, c["parent"]))
-
-        # if c['next'] != self.model.data(model.index(end+1, 0, c['parent'])):
-        #   qDebug << start << end
-        #   for i in range(0, self.model.rowCount(QtCore.QModelIndex())):
-        #       qDebug << self.model.index(i, 0).data().toString()
-        #   qDebug() << c['next'] << self.model.data(model.index(end+1, 0, c['parent']))
-
-        assert c["next"] == self.model.data(self.model.index(end + 1, 0, c["parent"]))
-
-    def rowsAboutToBeRemoved(self, parent, start, end):
-        """Store what is about to be inserted to make sure it actually happens."""
-        c = {}
-        c["parent"] = parent
-        c["oldSize"] = self.model.rowCount(parent)
-        c["last"] = self.model.data(self.model.index(start - 1, 0, parent))
-        c["next"] = self.model.data(self.model.index(end + 1, 0, parent))
-        self.remove.append(c)
-
-    def rowsRemoved(self, parent, start, end):
-        """Confirm that what was said was going to happen actually did."""
-        c = self.remove.pop()
-        assert c["parent"] == parent
-        assert c["oldSize"] - (end - start + 1) == self.model.rowCount(parent)
-        assert c["last"] == self.model.data(self.model.index(start - 1, 0, c["parent"]))
-        assert c["next"] == self.model.data(self.model.index(start, 0, c["parent"]))
-
-    def checkChildren(self, parent, depth=0):
-        """Called from parent() test.
-
-        A self.model that returns an index of parent X should also return X when asking
-        for the parent of the index
-
-        This recursive function does pretty extensive testing on the whole model in an
-        effort to catch edge cases.
-
-        This function assumes that rowCount(QtCore.QModelIndex()), columnCount
-        (QtCore.QModelIndex()) and index() already work.
-        If they have a bug it will point it out, but the above tests should have already
-        found the basic bugs because it is easier to figure out the problem in
-        those tests then this one
+        This gets stored to make sure it actually happens in rowsInserted.
         """
-        # First just try walking back up the tree.
-        p = parent
-        while p.isValid():
-            p = p.parent()
+        last_index = self._model.index(start - 1, 0, parent)
+        next_index = self._model.index(start, 0, parent)
+        parent_rowcount = self._model.rowCount(parent)
 
-        # For self.models that are dynamically populated
-        if self.model.canFetchMore(parent):
-            self.fetchingMore = True
-            self.model.fetchMore(parent)
-            self.fetchingMore = False
+        self._debug(
+            "rows about to be inserted: start {}, end {}, parent {}, "
+            "parent row count {}, last item {}, next item {}".format(
+                start,
+                end,
+                self._modelindex_debug(parent),
+                parent_rowcount,
+                self._modelindex_debug(last_index),
+                self._modelindex_debug(next_index),
+            )
+        )
 
-        rows = self.model.rowCount(parent)
-        cols = self.model.columnCount(parent)
+        last_data = self._model.data(last_index) if start > 0 else None
+        next_data = self._model.data(next_index) if start < parent_rowcount else None
+        c = _Changing(
+            parent=parent, old_size=parent_rowcount, last=last_data, next=next_data
+        )
+        self._insert.append(c)
 
-        if rows > 0:
-            assert self.model.hasChildren(parent)
+    def _on_rows_inserted(self, parent, start, end):
+        """Confirm that what was said was going to happen actually did."""
+        c = self._insert.pop()
+        last_data = (
+            self._model.data(self._model.index(start - 1, 0, parent))
+            if start - 1 >= 0
+            else None
+        )
+        next_data = (
+            self._model.data(self._model.index(end + 1, 0, c.parent))
+            if end + 1 < self._model.rowCount(c.parent)
+            else None
+        )
+        expected_size = c.old_size + (end - start + 1)
+        current_size = self._model.rowCount(parent)
 
-        # Some further testing against rows(), columns, and hasChildren()
-        assert rows >= 0
-        assert cols >= 0
+        self._debug("rows inserted: start {}, end {}".format(start, end))
+        self._debug(
+            "  from rowsAboutToBeInserted: parent {}, "
+            "size {} (-> {} expected), "
+            "next data {!r}, last data {!r}".format(
+                self._modelindex_debug(c.parent),
+                c.old_size,
+                expected_size,
+                c.next,
+                c.last,
+            )
+        )
 
-        if rows > 0:
-            assert self.model.hasChildren(parent) is True
+        self._debug(
+            "  now in rowsInserted:        parent {}, size {}, "
+            "next data {!r}, last data {!r}".format(
+                self._modelindex_debug(parent), current_size, next_data, last_data
+            )
+        )
 
-        # qDebug() << "parent:" << self.model.data(parent).toString() << "rows:" << rows
-        #          << "columns:" << cols << "parent column:" << parent.column()
+        if not QtCore.qVersion().startswith("4."):
+            # Skipping this on Qt4 as the parent changes for some reason:
+            # modeltest: rows about to be inserted: [...]
+            #            parent <invalid> (0x7f8f540eacf8), [...]
+            # [...]
+            # modeltest: from rowsAboutToBeInserted:
+            #            parent 0/0 None (0x7f8f540eacf8), [...]
+            # modeltest: now in rowsInserted:
+            #            parent <invalid> (0x7f8f60a96cf8) [...]
+            assert c.parent == parent
 
-        assert self.model.hasIndex(rows + 1, 0, parent) is False
-        for r in range(0, rows):
-            if self.model.canFetchMore(parent):
-                self.fetchingMore = True
-                self.model.fetchMore(parent)
-                self.fetchingMore = False
-            assert self.model.hasIndex(r, cols + 1, parent) is False
-            for c in range(0, cols):
-                assert self.model.hasIndex(r, c, parent)
-                index = self.model.index(r, c, parent)
-                # rowCount(index) and columnCount(index) said that it existed...
-                assert index.isValid() is True
+        for ii in range(start, end + 1):
+            idx = self._model.index(ii, 0, parent)
+            self._debug(" item {} inserted: {}".format(ii, self._modelindex_debug(idx)))
+        self._debug("")
 
-                # index() should always return the same index when called twice in a row
-                modIdx = self.model.index(r, c, parent)
-                assert index == modIdx
+        assert current_size == expected_size
+        if last_data is not None:
+            assert c.last == last_data
+        if next_data is not None:
+            assert c.next == next_data
 
-                # Make sure we get the same index if we request it twice in a row
-                a = self.model.index(r, c, parent)
-                b = self.model.index(r, c, parent)
-                assert a == b
+    def _on_layout_about_to_be_changed(self):
+        for i in range(max(self._model.rowCount(), 100)):
+            idx = QtCore.QPersistentModelIndex(self._model.index(i, 0))
+            self._changing.append(idx)
 
-                # Some basic checking on the index that is returned
-                assert index.model() == self._model
-                assert index.row() == r
-                assert index.column() == c
-                # While you can technically return a QVariant usually this is a sign
-                # if an bug in data() Disable if this really is ok in your self.model
-                assert self.model.data(index, QtCore.Qt.DisplayRole) is not None
+    def _on_layout_changed(self):
+        for p in self._changing:
+            assert p == self._model.index(p.row(), p.column(), p.parent())
+        self._changing = []
 
-                # if the next test fails here is some somehwat useful debug you play with
-                # if self.model.parent(index) != parent:
-                #   qDebug() << r << c << depth << self.model.data(index).toString()
-                #        << self.model.data(parent).toString()
-                #   qDebug() << index << parent << self.model.parent(index)
-                #   # And a view that you can even use to show the self.model
-                #   # view = QtGui.QTreeView()
-                #   # view.setself.model(model)
-                #   # view.show()
-                #
+    def _on_rows_about_to_be_removed(self, parent, start, end):
+        """Store what is about to be removed to make sure it actually happens.
 
-                # Check that we can get back our real parent
-                p = self.model.parent(index)
-                assert p.internalId() == parent.internalId()
-                assert p.row() == parent.row()
+        This gets stored to make sure it actually happens in rowsRemoved.
+        """
+        parent_rowcount = self._model.rowCount(parent)
+        last_index = self._model.index(start - 1, 0, parent) if start > 0 else None
+        next_index = (
+            self._model.index(end + 1, 0, parent) if end < parent_rowcount - 1 else None
+        )
 
-                # recursively go down the children
-                if self.model.hasChildren(index) and depth < 10:
-                    # qDebug() << r << c << "hasChildren" << self.model.rowCount(index)
-                    depth += 1
-                    self.checkChildren(index, depth)
-                # else:
-                #   if depth >= 10:
-                #       qDebug() << "checked 10 deep"
+        self._debug(
+            "rows about to be removed: start {}, end {}, parent {}, "
+            "parent row count {}, last item {}, next item {}".format(
+                start,
+                end,
+                self._modelindex_debug(parent),
+                parent_rowcount,
+                self._modelindex_debug(last_index),
+                self._modelindex_debug(next_index),
+            )
+        )
 
-                # Make sure that after testing the children that the index doesn't change
-                newIdx = self.model.index(r, c, parent)
-                assert index == newIdx
+        if last_index is not None:
+            assert last_index.isValid()
+        if next_index is not None:
+            assert next_index.isValid()
+
+        last_data = None if last_index is None else self._model.data(last_index)
+        next_data = None if next_index is None else self._model.data(next_index)
+        c = _Changing(
+            parent=parent, old_size=parent_rowcount, last=last_data, next=next_data
+        )
+        self._remove.append(c)
+
+    def _on_rows_removed(self, parent, start, end):
+        """Confirm that what was said was going to happen actually did."""
+        c = self._remove.pop()
+        last_data = (
+            self._model.data(self._model.index(start - 1, 0, c.parent))
+            if start > 0
+            else None
+        )
+        next_data = (
+            self._model.data(self._model.index(start, 0, c.parent))
+            if end < c.old_size - 1
+            else None
+        )
+        current_size = self._model.rowCount(parent)
+        expected_size = c.old_size - (end - start + 1)
+
+        self._debug("rows removed: start {}, end {}".format(start, end))
+        self._debug(
+            "  from rowsAboutToBeRemoved: parent {}, "
+            "size {} (-> {} expected), "
+            "next data {!r}, last data {!r}".format(
+                self._modelindex_debug(c.parent),
+                c.old_size,
+                expected_size,
+                c.next,
+                c.last,
+            )
+        )
+
+        self._debug(
+            "  now in rowsRemoved:        parent {}, size {}, "
+            "next data {!r}, last data {!r}".format(
+                self._modelindex_debug(parent), current_size, next_data, last_data
+            )
+        )
+
+        if not QtCore.qVersion().startswith("4."):
+            # Skipping this on Qt4 as the parent changes for some reason
+            # see _on_rows_inserted for details
+            assert c.parent == parent
+
+        assert current_size == expected_size
+        if last_data is not None:
+            assert c.last == last_data
+        if next_data is not None:
+            assert c.next == next_data
+
+    def _on_data_changed(self, top_left, bottom_right):
+        assert top_left.isValid()
+        assert bottom_right.isValid()
+        common_parent = bottom_right.parent()
+        assert top_left.parent() == common_parent
+        assert top_left.row() <= bottom_right.row()
+        assert top_left.column() <= bottom_right.column()
+        row_count = self._model.rowCount(common_parent)
+        column_count = self._column_count(common_parent)
+        assert bottom_right.row() < row_count
+        assert bottom_right.column() < column_count
+
+    def _on_header_data_changed(self, orientation, start, end):
+        assert orientation in [QtCore.Qt.Horizontal, QtCore.Qt.Vertical]
+        assert start >= 0
+        assert end >= 0
+        assert start <= end
+        if orientation == QtCore.Qt.Vertical:
+            item_count = self._model.rowCount()
+        else:
+            item_count = self._column_count()
+        assert start < item_count
+        assert end < item_count
+
+    def _column_count(self, parent=QtCore.QModelIndex()):
+        """Test columnCount.
+
+        Workaround for the fact that ``columnCount`` is a private method in
+        QAbstractListModel/QAbstractTableModel subclasses.
+        """
+        if isinstance(self._model, QtCore.QAbstractListModel):
+            return 1 if parent == QtCore.QModelIndex() else 0
+        else:
+            return self._model.columnCount(parent)
+
+    def _parent(self, index):
+        """Test parent."""
+        model_types = (QtCore.QAbstractListModel, QtCore.QAbstractTableModel)
+        if isinstance(self._model, model_types):
+            return QtCore.QModelIndex()
+        else:
+            return self._model.parent(index)
+
+    def _has_children(self, parent=QtCore.QModelIndex()):
+        """Test hasChildren."""
+        model_types = (QtCore.QAbstractListModel, QtCore.QAbstractTableModel)
+        if isinstance(self._model, model_types):
+            print(parent == QtCore.QModelIndex(), self._model.rowCount())
+            return parent == QtCore.QModelIndex() and self._model.rowCount() > 0
+        else:
+            return self._model.hasChildren(parent)
+
+    def _fetch_more(self, parent):
+        """Call ``fetchMore`` on the model and set ``self._fetching_more``."""
+        self._fetching_more = True
+        self._model.fetchMore(parent)
+        self._fetching_more = False
