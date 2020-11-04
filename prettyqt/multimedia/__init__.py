@@ -12,6 +12,8 @@ from .audioformat import AudioFormat
 from .camerainfo import CameraInfo
 from .camerafocuszone import CameraFocusZone
 from .camerafocus import CameraFocus
+from .cameraexposure import CameraExposure
+from .cameraimageprocessing import CameraImageProcessing
 from .mediabindableinterface import MediaBindableInterface
 from .imageencodersettings import ImageEncoderSettings
 from .videoencodersettings import VideoEncoderSettings
@@ -36,6 +38,8 @@ __all__ = [
     "CameraInfo",
     "CameraFocusZone",
     "CameraFocus",
+    "CameraExposure",
+    "CameraImageProcessing",
     "CameraViewfinderSettings",
     "Camera",
     "MediaBindableInterface",

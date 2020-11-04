@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import List
+
 from qtpy import QtMultimedia
 
 from prettyqt import multimedia
@@ -135,3 +137,18 @@ class Camera(QtMultimedia.QCamera):
             capture mode
         """
         return CAPTURE_MODES.inv[self.captureMode()]
+
+    def get_supported_locks(self) -> List[str]:
+        return [k for k, v in LOCK_TYPES.items() if v & self.supportedLocks()]
+
+    def get_requested_locks(self) -> List[str]:
+        return [k for k, v in LOCK_TYPES.items() if v & self.requestedLocks()]
+
+    def get_focus(self) -> multimedia.CameraFocus:
+        return multimedia.CameraFocus(self.focus())
+
+    def get_exposure(self) -> multimedia.CameraExposure:
+        return multimedia.CameraExposure(self.exposure())
+
+    def get_image_processing(self) -> multimedia.CameraImageProcessing:
+        return multimedia.CameraImageProcessing(self.imageProcessing())

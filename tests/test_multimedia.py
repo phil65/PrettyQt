@@ -47,6 +47,8 @@ def test_camera():
     with pytest.raises(InvalidParamError):
         cam.set_capture_mode("test")
     assert cam.get_capture_mode() == "still_image"
+    cam.get_supported_locks()
+    cam.get_requested_locks()
 
 
 def test_camerafocus():
@@ -64,6 +66,42 @@ def test_camerafocus():
     assert focus.is_focus_mode_supported("manual") is False
     assert focus.is_focus_point_mode_supported("center") is False
     assert len(focus.get_focus_zones()) == 0
+
+
+def test_cameraexposure():
+    cam = multimedia.Camera()
+    exposure = cam.get_exposure()
+    exposure.set_exposure_mode("auto")
+    with pytest.raises(InvalidParamError):
+        exposure.set_exposure_mode("test")
+    assert exposure.get_exposure_mode() == "auto"
+    exposure.set_flash_mode("flash_off")
+    with pytest.raises(InvalidParamError):
+        exposure.set_flash_mode("test")
+    assert exposure.get_flash_mode() == "flash_off"
+    exposure.set_metering_mode("matrix")
+    with pytest.raises(InvalidParamError):
+        exposure.set_metering_mode("test")
+    assert exposure.get_metering_mode() == "matrix"
+    assert exposure.get_spot_metering_point() == core.PointF()
+    assert exposure.is_exposure_mode_supported("manual") is False
+    assert exposure.is_flash_mode_supported("manual") is False
+    assert exposure.is_metering_mode_supported("average") is False
+
+
+def test_cameraimageprocessing():
+    cam = multimedia.Camera()
+    processing = cam.get_image_processing()
+    processing.set_color_filter("none")
+    with pytest.raises(InvalidParamError):
+        processing.set_color_filter("test")
+    assert processing.get_color_filter() == "none"
+    processing.set_white_balance_mode("auto")
+    with pytest.raises(InvalidParamError):
+        processing.set_white_balance_mode("test")
+    assert processing.get_white_balance_mode() == "auto"
+    assert processing.is_color_filter_supported("blackboard") is False
+    assert processing.is_white_balance_mode_supported("flash") is False
 
 
 # def test_camerafocuszone():
