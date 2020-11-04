@@ -6,8 +6,9 @@
 # import pytest
 
 import pytest
-
-from prettyqt import widgets
+from qtpy import QtCore
+from prettyqt import widgets, gui
+from prettyqt.utils import modeltest
 
 
 @pytest.fixture(scope="session")
@@ -29,3 +30,46 @@ def tablewidget():
     widget.setItem(0, 0, item)
     return widget
     widget.setItem(1, 1, widgets.TableWidgetItem("test"))
+
+
+class QtTester:
+    @staticmethod
+    def send_keypress(widget, key):
+        event = gui.KeyEvent(QtCore.QEvent.KeyPress, key, QtCore.Qt.KeyboardModifiers(0))
+        widgets.Application.sendEvent(widget, event)
+
+    @staticmethod
+    def send_mousepress(widget, key):
+        event = gui.MouseEvent(
+            QtCore.QEvent.MouseButtonRelease,
+            QtCore.QPointF(0, 0),
+            QtCore.QPointF(0, 0),
+            key,
+            QtCore.Qt.NoButton,
+            QtCore.Qt.KeyboardModifiers(0),
+        )
+        widgets.Application.sendEvent(widget, event)
+
+    @staticmethod
+    def send_mousemove(widget, target=None, delay=0):
+        if target is None:
+            target = QtCore.QPointF(0, 0)
+        event = gui.MouseEvent(
+            QtCore.QEvent.MouseButtonRelease,
+            target,
+            QtCore.QPointF(0, 0),
+            QtCore.Qt.NoButton,
+            QtCore.Qt.NoButton,
+            QtCore.Qt.KeyboardModifiers(0),
+        )
+        widgets.Application.sendEvent(widget, event)
+
+    @staticmethod
+    def test_model(model, force_py):
+        tester = modeltest.ModelTester()
+        tester.check(model, force_py=force_py)
+
+
+@pytest.fixture
+def qttester():
+    return QtTester

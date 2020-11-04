@@ -17,14 +17,14 @@ def test_transposeproxymodel():
     model.rowCount()
 
 
-def test_regexmatchesmodel(qtmodeltester):
+def test_regexmatchesmodel(qttester):
     # comp = re.compile("[0-9]")
     # text = "aa356aa356"
     matches = []  # list(comp.finditer(text))
     model = custom_models.RegexMatchesModel(matches)
-    qtmodeltester.check(model, force_py=True)
+    qttester.test_model(model, force_py=False)
 
 
-def test_playlistmodel(qtmodeltester):
+def test_playlistmodel(qttester):
     model = custom_models.PlaylistModel()
-    qtmodeltester.check(model, force_py=True)
+    qttester.test_model(model, force_py=False)

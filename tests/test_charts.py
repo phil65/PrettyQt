@@ -75,20 +75,20 @@ def test_chart(qtbot):
     chart.set_animation_options("series")
 
 
-def test_chartview(qtbot):
+def test_chartview(qtbot, qttester):
     widget = charts.ChartView()
     widget.show()
     widget.get_image()
     qtbot.addWidget(widget)
-    qtbot.keyPress(widget, QtCore.Qt.Key_F11)
-    # qtbot.keyPress(widget, QtCore.Qt.Key_Minus)
-    # qtbot.keyPress(widget, QtCore.Qt.Key_Plus)
-    qtbot.keyPress(widget, QtCore.Qt.Key_Left)
-    qtbot.keyPress(widget, QtCore.Qt.Key_Right)
-    qtbot.keyPress(widget, QtCore.Qt.Key_Up)
-    qtbot.keyPress(widget, QtCore.Qt.Key_Down)
-    qtbot.mousePress(widget, QtCore.Qt.RightButton)
-    qtbot.mouseMove(widget, delay=100)
+    qttester.send_keypress(widget, QtCore.Qt.Key_F11)
+    # qttester.send_keypress(widget, QtCore.Qt.Key_Minus)
+    # qttester.send_keypress(widget, QtCore.Qt.Key_Plus)
+    qttester.send_keypress(widget, QtCore.Qt.Key_Left)
+    qttester.send_keypress(widget, QtCore.Qt.Key_Right)
+    qttester.send_keypress(widget, QtCore.Qt.Key_Up)
+    qttester.send_keypress(widget, QtCore.Qt.Key_Down)
+    qttester.send_mousepress(widget, QtCore.Qt.RightButton)
+    qttester.send_mousemove(widget, delay=100)
 
 
 def test_legend(qtbot):

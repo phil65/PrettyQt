@@ -221,11 +221,11 @@ def test_desktopwidget(qtbot):
     widgets.DesktopWidget()
 
 
-def test_dialog(qtbot):
+def test_dialog(qtbot, qttester):
     dlg = widgets.Dialog(layout="horizontal")
     qtbot.addWidget(dlg)
     dlg.show()
-    qtbot.keyPress(dlg, QtCore.Qt.Key_F11)
+    qttester.send_keypress(dlg, QtCore.Qt.Key_F11)
     dlg.delete_on_close()
     dlg.add_widget(widgets.RadioButton("test"))
     dlg.set_icon("mdi.timer")

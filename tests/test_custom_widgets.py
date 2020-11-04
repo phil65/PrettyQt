@@ -218,13 +218,13 @@ def test_flowlayout(qtbot):
         layout = pickle.load(jar)
 
 
-def test_labeledslider(qtbot):
+def test_labeledslider(qtbot, qttester):
     slider = custom_widgets.LabeledSlider(["test1", "test2"], "vertical")
     slider = custom_widgets.LabeledSlider(["test1", "test2"])
     slider.show()
     qtbot.addWidget(slider)
-    qtbot.mouseClick(slider.sl, QtCore.Qt.LeftButton)
-    qtbot.mouseMove(slider.sl, core.Point(20, 20))
+    qttester.send_mousepress(slider.sl, QtCore.Qt.LeftButton)
+    qttester.send_mousemove(slider.sl, core.Point(20, 20))
     slider.paintEvent(None)
     slider.hide()
 
@@ -299,7 +299,7 @@ def test_selectionwidget(qtbot):
     widget.update_choice(True)
 
 
-def test_spanslider(qtbot):
+def test_spanslider(qtbot, qttester):
     slider = custom_widgets.SpanSlider()
     qtbot.addWidget(slider)
     slider.show()
@@ -325,9 +325,9 @@ def test_spanslider(qtbot):
     slider._pixel_pos_to_value(100)
     slider._draw_span(gui.Painter(), core.Rect())
     slider._move_pressed_handle()
-    qtbot.mouseClick(slider, QtCore.Qt.LeftButton)
-    qtbot.mouseMove(slider, core.Point(20, 20))
-    qtbot.mouseMove(slider, core.Point(0, 0), delay=10)
+    qttester.send_mousepress(slider, QtCore.Qt.LeftButton)
+    qttester.send_mousemove(slider, core.Point(20, 20))
+    qttester.send_mousemove(slider, core.Point(0, 0), delay=10)
     assert slider.get_movement_mode() == "free"
     slider.set_movement_mode("no_overlap")
     slider.close()
