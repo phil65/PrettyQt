@@ -1278,7 +1278,7 @@ get_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Returns:</span>
 <span class="sd">        Save page format</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SAVE_PAGE_FORMATS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">savePageFormat</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">SAVE_PAGE_FORMATS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">savePageFormat</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1349,7 +1349,7 @@ set_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SAVE_PAGE_FORMATS</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">SAVE_PAGE_FORMATS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setSavePageFormat</span><span class="p">(</span><span class="n">SAVE_PAGE_FORMATS</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setSavePageFormat</span><span class="p">(</span><span class="n">SAVE_PAGE_FORMATS</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -1862,7 +1862,7 @@ get_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 <tr>
 <td><code>str</code></td>
 <td>
-<p>Save page format</p>
+<p>Persistent cookie policy</p>
 </td>
 </tr>
 </tbody>
@@ -1876,7 +1876,7 @@ get_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 <span class="sd">    Possible values are "none", "allow", "force"</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Save page format</span>
+<span class="sd">        Persistent cookie policy</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">PERSISTENT_COOKIE_POLICIES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">persistentCookiesPolicy</span><span class="p">()]</span>
 </code></pre>
