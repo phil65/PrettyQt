@@ -51,3 +51,22 @@ def test_webenginescript():
     with pytest.raises(InvalidParamError):
         script.set_injection_point("test")
     assert script.get_injection_point() == "document_ready"
+
+
+def test_webenginesettings(qapp):
+    page = webenginewidgets.WebEnginePage()
+    settings = page.get_settings()
+    settings["auto_load_images"] = False
+    assert settings["auto_load_images"] is False
+    settings.set_unknown_url_scheme_policy("allow_all")
+    with pytest.raises(InvalidParamError):
+        settings.set_unknown_url_scheme_policy("test")
+    assert settings.get_unknown_url_scheme_policy() == "allow_all"
+    settings.set_font_family("sans_serif", "verdana")
+    with pytest.raises(InvalidParamError):
+        settings.set_font_family("test", "test")
+    assert settings.get_font_family("sans_serif") == "verdana"
+    settings.set_font_size("default_fixed", 14)
+    with pytest.raises(InvalidParamError):
+        settings.set_font_size("test", "test")
+    assert settings.get_font_size("default_fixed") == 14

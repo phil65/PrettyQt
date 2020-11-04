@@ -12,6 +12,7 @@ logger = logging.getLogger(__name__)
 try:
     from .webenginehistoryitem import WebEngineHistoryItem
     from .webenginehistory import WebEngineHistory
+    from .webenginesettings import WebEngineSettings
     from .webengineview import WebEngineView
     from .webenginepage import WebEnginePage
     from .webengineprofile import WebEngineProfile
@@ -20,6 +21,7 @@ try:
 
     __all__ = [
         "WebEngineHistoryItem",
+        "WebEngineSettings",
         "WebEngineHistory",
         "WebEngineView",
         "WebEnginePage",
