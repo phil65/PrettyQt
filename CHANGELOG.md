@@ -1,3 +1,14 @@
+## v0.131.0 (2020-11-04)
+
+### Feat
+
+- **webenginecore**: add WebEngineHttpRequest class
+- **webenginewidgets**: add WebEngineContextMenuData class
+- **webenginewidgets**: add WebEngineScriptCollection class
+- **multimedia**: add CameraExposure/CameraImageProcessing classes
+- **multimedia**: add CameraFocus(Zone) classes
+- **webenginecore**: add WebEngineUrlSchemeHandler
+
 ## v0.130.0 (2020-11-04)
 
 ### Feat
