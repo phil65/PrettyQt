@@ -10,6 +10,8 @@ from .abstractvideobuffer import AbstractVideoBuffer
 from .videoframe import VideoFrame
 from .audioformat import AudioFormat
 from .camerainfo import CameraInfo
+from .camerafocuszone import CameraFocusZone
+from .camerafocus import CameraFocus
 from .mediabindableinterface import MediaBindableInterface
 from .imageencodersettings import ImageEncoderSettings
 from .videoencodersettings import VideoEncoderSettings
@@ -32,6 +34,8 @@ __all__ = [
     # "AbstractPlanarVideoBuffer",
     "VideoFrame",
     "CameraInfo",
+    "CameraFocusZone",
+    "CameraFocus",
     "CameraViewfinderSettings",
     "Camera",
     "MediaBindableInterface",

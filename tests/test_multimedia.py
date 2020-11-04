@@ -49,6 +49,32 @@ def test_camera():
     assert cam.get_capture_mode() == "still_image"
 
 
+def test_camerafocus():
+    cam = multimedia.Camera()
+    focus = cam.get_focus()
+    focus.set_focus_mode("auto")
+    with pytest.raises(InvalidParamError):
+        focus.set_focus_mode("test")
+    assert focus.get_focus_mode() == "auto"
+    focus.set_focus_point_mode("auto")
+    with pytest.raises(InvalidParamError):
+        focus.set_focus_point_mode("test")
+    assert focus.get_focus_point_mode() == "auto"
+    assert focus.get_custom_focus_point() == core.PointF(0.5, 0.5)
+    assert focus.is_focus_mode_supported("manual") is False
+    assert focus.is_focus_point_mode_supported("center") is False
+    assert len(focus.get_focus_zones()) == 0
+
+
+# def test_camerafocuszone():
+#     cam = multimedia.Camera()
+#     focus = cam.get_focus()
+#     zones = focus.get_focus_zones()
+#     zone = zones[0]
+#     assert zone.get_focus_mode() == "invalid"
+#     assert zone.get_area() == core.RectF(0, 0)
+
+
 def test_cameraviewfindersettings():
     settings = multimedia.CameraViewfinderSettings()
     dct = settings.to_dict()
