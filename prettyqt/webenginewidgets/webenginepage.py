@@ -261,6 +261,16 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         hist = self.history()
         return webenginewidgets.WebEngineHistory(hist)
 
+    def get_settings(self) -> webenginewidgets.WebEngineSettings:
+        settings = self.settings()
+        return webenginewidgets.WebEngineSettings(settings)
+
+    def set_setting(self, setting_name: str, value: bool):
+        self.get_settings()[setting_name] = value
+
+    def get_setting(self, setting_name: str) -> bool:
+        return self.get_settings()[setting_name]
+
 
 if __name__ == "__main__":
     from prettyqt import widgets

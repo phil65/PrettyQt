@@ -31,6 +31,9 @@ def test_webenginepage(qapp):
     page.set_feature_permission(
         "http://www.google.de", "media_audio_capture", "granted_by_user"
     )
+    page.get_settings()
+    page.set_setting("auto_load_images", False)
+    assert page.get_setting("auto_load_images") is False
 
 
 def test_webengineprofile(qapp):
