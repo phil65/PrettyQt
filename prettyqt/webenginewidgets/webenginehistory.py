@@ -4,9 +4,11 @@
 
 from typing import Iterator, List
 
-try:
+from qtpy import PYQT5, PYSIDE2
+
+if PYQT5:
     from PyQt5 import QtWebEngineWidgets  # type: ignore
-except ImportError:
+elif PYSIDE2:
     from PySide2 import QtWebEngineWidgets
 
 from prettyqt import core, webenginewidgets
