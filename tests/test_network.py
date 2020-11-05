@@ -15,6 +15,15 @@ def test_httppart():
     part.set_header("location", "c")
 
 
+def test_httpmultipart():
+    part = network.HttpMultiPart()
+    part.set_content_type("related")
+    with pytest.raises(InvalidParamError):
+        part.set_content_type("test")
+    part.set_boundary("test")
+    assert part.get_boundary() == "test"
+
+
 def test_networkrequest():
     req = network.NetworkRequest()
     headers = {"a": "b"}

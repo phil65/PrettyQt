@@ -9,10 +9,12 @@ from .networkcookie import NetworkCookie
 from .networkcookiejar import NetworkCookieJar
 from .networkrequest import NetworkRequest
 from .httppart import HttpPart
+from .httpmultipart import HttpMultiPart
 from .networkaccessmanager import NetworkAccessManager
 
 __all__ = [
     "HttpPart",
+    "HttpMultiPart",
     "NetworkCookie",
     "NetworkCookieJar",
     "NetworkRequest",
