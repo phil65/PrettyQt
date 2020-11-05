@@ -24,6 +24,25 @@ def test_httpmultipart():
     assert part.get_boundary() == "test"
 
 
+def test_networkproxy():
+    proxy = network.NetworkProxy()
+    proxy.set_capabilities("listening")
+    assert proxy.get_capabilities() == ["listening"]
+    proxy.set_type("http_caching")
+    with pytest.raises(InvalidParamError):
+        proxy.set_type("test")
+    assert proxy.get_type() == "http_caching"
+    headers = {"a": "b"}
+    proxy.set_headers(headers)
+    assert proxy.get_headers() == headers
+    with pytest.raises(InvalidParamError):
+        proxy.set_header("test", "test")
+    proxy.set_header("location", "test")
+    with pytest.raises(InvalidParamError):
+        proxy.get_header("test")
+    assert proxy.get_header("location") == "test"
+
+
 def test_networkrequest():
     req = network.NetworkRequest()
     headers = {"a": "b"}
