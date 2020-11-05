@@ -8,6 +8,13 @@ from prettyqt import network, core
 from prettyqt.utils import InvalidParamError
 
 
+def test_httppart():
+    part = network.HttpPart()
+    part.set_body("test")
+    part.set_headers(dict(a="b"))
+    part.set_header("location", "c")
+
+
 def test_networkrequest():
     req = network.NetworkRequest()
     headers = {"a": "b"}
