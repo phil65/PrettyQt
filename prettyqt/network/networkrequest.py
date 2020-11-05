@@ -56,6 +56,16 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
     def __repr__(self):
         return f"NetworkRequest({self.get_url()})"
 
+    def set_header(self, name: str, value: str):
+        if name not in KNOWN_HEADERS:
+            raise InvalidParamError(name, KNOWN_HEADERS)
+        self.setHeader(KNOWN_HEADERS[name], value)
+
+    def get_header(self, name: str) -> str:
+        if name not in KNOWN_HEADERS:
+            raise InvalidParamError(name, KNOWN_HEADERS)
+        return self.header(KNOWN_HEADERS[name])
+
     def set_headers(self, headers: Dict[str, str]):
         for k, v in headers.items():
             self.setRawHeader(str.encode(k), str.encode(v))

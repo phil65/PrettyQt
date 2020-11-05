@@ -2,8 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """Tests for `prettyqt` package."""
+import pytest
 
 from prettyqt import network, core
+from prettyqt.utils import InvalidParamError
 
 
 def test_networkrequest():
@@ -15,11 +17,19 @@ def test_networkrequest():
     assert req.get_priority() == "low"
     req.set_url("http://www.google.de")
     assert req.get_url() == core.Url("http://www.google.de")
+    with pytest.raises(InvalidParamError):
+        req.set_header("test", "test")
+    req.set_header("location", "test")
+    with pytest.raises(InvalidParamError):
+        req.get_header("test")
+    assert req.get_header("location") == "test"
 
 
 def test_networkaccessmanager():
     manager = network.NetworkAccessManager()
     manager.set_redirect_policy("no_less_safe")
+    with pytest.raises(InvalidParamError):
+        manager.set_redirect_policy("test")
     assert manager.get_redirect_policy() == "no_less_safe"
 
 
