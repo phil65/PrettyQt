@@ -32,6 +32,14 @@ def test_httpmultipart():
     assert part.get_boundary() == "test"
 
 
+def test_networkdatagram():
+    datagram = network.NetworkDatagram()
+    datagram.get_destination_address()
+    datagram.get_sender_address()
+    datagram.set_data("test")
+    assert datagram.get_data() == "test"
+
+
 def test_networkproxy():
     proxy = network.NetworkProxy()
     proxy.set_capabilities("listening")

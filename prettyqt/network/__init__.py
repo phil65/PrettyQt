@@ -10,6 +10,7 @@ from .networkcookiejar import NetworkCookieJar
 from .networkrequest import NetworkRequest
 from .networkproxy import NetworkProxy
 from .hostaddress import HostAddress
+from .networkdatagram import NetworkDatagram
 from .abstractsocket import AbstractSocket
 from .tcpsocket import TcpSocket
 from .httppart import HttpPart
@@ -20,6 +21,7 @@ __all__ = [
     "NetworkProxy",
     "AbstractSocket",
     "HostAddress",
+    "NetworkDatagram",
     "TcpSocket",
     "HttpPart",
     "HttpMultiPart",
