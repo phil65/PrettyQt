@@ -10,6 +10,8 @@ from .networkcookiejar import NetworkCookieJar
 from .networkrequest import NetworkRequest
 from .networkproxy import NetworkProxy
 from .hostaddress import HostAddress
+from .networkaddressentry import NetworkAddressEntry
+from .networkinterface import NetworkInterface
 from .networkdatagram import NetworkDatagram
 from .abstractsocket import AbstractSocket
 from .tcpsocket import TcpSocket
@@ -22,6 +24,8 @@ __all__ = [
     "AbstractSocket",
     "HostAddress",
     "NetworkDatagram",
+    "NetworkAddressEntry",
+    "NetworkInterface",
     "TcpSocket",
     "HttpPart",
     "HttpMultiPart",

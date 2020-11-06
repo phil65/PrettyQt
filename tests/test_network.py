@@ -32,12 +32,35 @@ def test_httpmultipart():
     assert part.get_boundary() == "test"
 
 
+def test_networkaddressentry():
+    entry = network.NetworkAddressEntry()
+    entry.set_dns_eligibility("eligible")
+    with pytest.raises(InvalidParamError):
+        entry.set_dns_eligibility("test")
+    assert entry.get_dns_eligibility() == "eligible"
+    entry.set_ip("123.123.123.123")
+    assert entry.get_ip() == network.HostAddress("123.123.123.123")
+    entry.set_netmask("255.255.255.255")
+    assert entry.get_netmask() == network.HostAddress("255.255.255.255")
+    entry.get_preferred_lifetime()
+    entry.get_validity_lifetime()
+
+
 def test_networkdatagram():
     datagram = network.NetworkDatagram()
     datagram.get_destination_address()
     datagram.get_sender_address()
     datagram.set_data("test")
     assert datagram.get_data() == "test"
+
+
+def test_networkinterface():
+    interface = network.NetworkInterface()
+    interface.get_address_entries()
+    network.NetworkInterface.get_all_addresses()
+    network.NetworkInterface.get_all_interfaces()
+    network.NetworkInterface.get_interface_from_name("test")
+    assert interface.get_type() == "unknown"
 
 
 def test_networkproxy():
