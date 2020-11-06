@@ -8,6 +8,14 @@ from prettyqt import network, core
 from prettyqt.utils import InvalidParamError
 
 
+def test_hostaddress():
+    address = network.HostAddress()
+    address.set_address("localhost")
+    repr(address)
+    assert str(address) == "0.0.0.2"
+    assert address.get_protocol() == "ipv4"
+
+
 def test_httppart():
     part = network.HttpPart()
     part.set_body("test")
@@ -83,3 +91,20 @@ def test_networkcookiejar():
     for i in jar:
         pass
     repr(jar)
+
+
+def test_tcpsocket():
+    socket = network.TcpSocket()
+    socket.set_pause_mode("on_ssl_errors")
+    with pytest.raises(InvalidParamError):
+        socket.set_pause_mode("test")
+    assert socket.get_pause_mode() == "on_ssl_errors"
+    assert socket.get_error() == "unknown_socket"
+    socket.get_proxy()
+    # socket.set_socket_option("low_delay", 1)
+    # assert socket.get_socket_option("low_delay") == 1
+    # socket.set_type_of_service("priority")
+    # assert socket.get_type_of_service() == "priority"
+    assert socket.get_socket_type() == "tcp"
+    assert socket.get_state() == "unconnected"
+    assert not socket.get_local_address()
