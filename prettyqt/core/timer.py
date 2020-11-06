@@ -26,7 +26,7 @@ class Timer(QtCore.QTimer):
     def set_type(self, typ: str):
         """Set the timer type.
 
-        Allowed values are "horizontal", "vertical"
+        Allowed values are "precise", "coarse", "very_coarse"
 
         Args:
             typ: timer type
@@ -41,7 +41,7 @@ class Timer(QtCore.QTimer):
     def get_type(self) -> str:
         """Return current timer type.
 
-        Possible values: "horizontal", "vertical"
+        Possible values: "precise", "coarse", "very_coarse"
 
         Returns:
             timer type

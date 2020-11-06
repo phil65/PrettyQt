@@ -133,15 +133,15 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
         return SOCKET_ERROR.inv[self.error()]
 
     def set_pause_mode(self, mode: str):
-        """Set content mode.
+        """Set pause mode.
 
         Valid values: "never", "on_ssl_errors"
 
         Args:
-            mode: content mode
+            mode: pause mode
 
         Raises:
-            InvalidParamError: content mode does not exist
+            InvalidParamError: pause mode does not exist
         """
         if mode not in PAUSE_MODE:
             raise InvalidParamError(mode, PAUSE_MODE)
