@@ -18,6 +18,7 @@ from .uuid import Uuid
 from .line import Line
 from .linef import LineF
 from .easingcurve import EasingCurve
+from .deadlinetimer import DeadlineTimer
 from .object import Object
 from .margins import Margins
 from .locale import Locale
@@ -95,6 +96,7 @@ if VersionNumber.get_qt_version() >= (5, 13, 0):
 __all__ = [
     "Object",
     "Uuid",
+    "DeadlineTimer",
     "Margins",
     "Locale",
     "EventLoop",

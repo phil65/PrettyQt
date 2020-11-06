@@ -111,6 +111,14 @@ def test_datetime():
     assert dt.get_time_spec() == "utc"
 
 
+def test_deadlinetimer():
+    timer = core.DeadlineTimer()
+    timer.set_type("coarse")
+    with pytest.raises(InvalidParamError):
+        timer.set_type("test")
+    assert timer.get_type() == "coarse"
+
+
 def test_dir():
     directory = core.Dir()
     assert pathlib.Path(str(directory)) == directory.to_path()
