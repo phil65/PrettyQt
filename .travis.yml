@@ -29,7 +29,18 @@ addons:
       - libxvidcore4
       - python3-pyqt5
       - python3-pyqt5.qtwebengine
-services: xvfb
+      # - libspeechd-dev
+      # - libspeechd2
+      # - flite
+      # - libflite1
+      # - libqt5texttospeech5
+      # - qtspeech5-flite-plugin
+      # - speech-dispatcher
+      # - speech-dispatcher-flite
+
+services:
+  - xvfb
+  # - speech-dispatcher
 env:
   global:
     - QT_DEBUG_PLUGINS=1
