@@ -1,3 +1,19 @@
+## v0.132.0 (2020-11-07)
+
+### Feat
+
+- **NetworkAccessManager**: allow str for request
+- **network**: add UdpSocket
+- **network**: add NetworkAddressEntry / NetworkInterface classes
+- add texttospeech module
+- **network**: add NetworkDatagram class
+- **core**: add DeadlineTimer class
+- **network**: add HostAddress/AbstractSocket/TcpSocket classes
+- **network**: add NetworkProxy class
+- **network**: add HttpMultiPart class
+- **network**: add HttpPart class
+- **NetworkRequest**: add set/get_header methods
+
 ## v0.131.0 (2020-11-04)
 
 ### Feat
