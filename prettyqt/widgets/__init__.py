@@ -5,14 +5,14 @@
 contains QtWidgets-based classes
 """
 
-from QtWidgets import QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent
-from QtWidgets import QGraphicsSceneMouseEvent as GraphicsSceneMouseEvent
-from QtWidgets import QGraphicsSceneWheelEvent as GraphicsSceneWheelEvent
-from QtWidgets import QGraphicsSceneContextMenuEvent as GraphicsSceneContextMenuEvent
-from QtWidgets import QGraphicsSceneDragDropEvent as GraphicsSceneDragDropEvent
-from QtWidgets import QGraphicsSceneHelpEvent as GraphicsSceneHelpEvent
-from QtWidgets import QGraphicsSceneMoveEvent as GraphicsSceneMoveEvent
-from QtWidgets import QGraphicsSceneResizeEvent as GraphicsSceneResizeEvent
+from qtpy.QtWidgets import QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent
+from qtpy.QtWidgets import QGraphicsSceneMouseEvent as GraphicsSceneMouseEvent
+from qtpy.QtWidgets import QGraphicsSceneWheelEvent as GraphicsSceneWheelEvent
+from qtpy.QtWidgets import QGraphicsSceneContextMenuEvent as GraphicsSceneContextMenuEvent
+from qtpy.QtWidgets import QGraphicsSceneDragDropEvent as GraphicsSceneDragDropEvent
+from qtpy.QtWidgets import QGraphicsSceneHelpEvent as GraphicsSceneHelpEvent
+from qtpy.QtWidgets import QGraphicsSceneMoveEvent as GraphicsSceneMoveEvent
+from qtpy.QtWidgets import QGraphicsSceneResizeEvent as GraphicsSceneResizeEvent
 from .style import Style
 from .application import Application
 from .sizepolicy import SizePolicy
