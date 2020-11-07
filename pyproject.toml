@@ -14,7 +14,7 @@ packages = [
 regexeditor = "prettyqt.custom_widgets.regexeditor.editor:run"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.7"
 bidict = "^0"
 qtpy = "^1.9.0"
 qtawesome = "^1"

@@ -11,8 +11,6 @@ HISTORY = pathlib.Path("CHANGELOG.md").read_text()
 
 REQUIREMENTS = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex", "pygments"]
 version = ".".join(map(str, sys.version_info))
-if version == "3.6":
-    REQUIREMENTS.append("dataclasses")
 if sys.platform == "darwin":
     REQUIREMENTS.append("darkdetect")
 
