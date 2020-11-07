@@ -187,7 +187,8 @@ class BaseWaitingSpinner(widgets.Widget):
         self.setFixedSize(size, size)
 
     def _update_timer(self):
-        self._timer.setInterval(1000 // (self._line_num * self._revolutions_per_second))
+        divider = int(self._line_num * self._revolutions_per_second)
+        self._timer.setInterval(1000 // divider)
 
     def linecount_distance_from_primary(
         self, current: int, primary: int, total_lines: int

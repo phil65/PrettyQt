@@ -42,7 +42,7 @@ class Pixmap(QtGui.QPixmap):
         with gui.Painter(px) as painter:
             painter.use_antialiasing()
             painter.setBrush(col)
-            painter.set_pen(color=gui.Color(15, 15, 15), width=1.25)
+            painter.set_pen(color=gui.Color(15, 15, 15), width=1)
             painter.drawEllipse(px_size)
         return px
 
