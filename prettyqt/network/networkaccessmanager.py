@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+from typing import Union
 
-from qtpy import QtNetwork
+from qtpy import QtNetwork, QtCore
 
 from prettyqt import core, network
 from prettyqt.utils import bidict, InvalidParamError
@@ -35,8 +36,11 @@ class NetworkAccessManager(QtNetwork.QNetworkAccessManager):
     #     if allow_redirects:
     #         pass
 
-    # def get(self, url, params=None):
-    #     pass
+    def get(self, request: Union[str, QtCore.QUrl, QtNetwork.QNetworkRequest]):
+        if isinstance(request, str):
+            request = core.Url(request)
+        request = network.NetworkRequest(request)
+        return super().get(request)
 
     # def post(self, url, data=None, json=None):
     #     pass
