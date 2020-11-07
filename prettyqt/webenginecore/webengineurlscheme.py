@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from qtpy import QtCore
 
 from qtpy import PYQT5, PYSIDE2
@@ -36,9 +38,10 @@ class WebEngineUrlScheme(QtWebEngineCore.QWebEngineUrlScheme):
     def get_name(self) -> str:
         return bytes(self.name()).decode()
 
-    def get_scheme_by_name(self, name: str) -> "WebEngineUrlScheme":
-        scheme = self.schemeByName(QtCore.QByteArray(name.encode()))
-        return WebEngineUrlScheme(scheme)
+    @classmethod
+    def get_scheme_by_name(cls, name: str) -> WebEngineUrlScheme:
+        scheme = cls.schemeByName(QtCore.QByteArray(name.encode()))
+        return cls(scheme)
 
     def set_name(self, name: str):
         self.setName(QtCore.QByteArray(name.encode()))

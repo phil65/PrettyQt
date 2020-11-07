@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 import contextlib
+from typing import Iterator
 
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import colors
-from typing import Iterator
 
 
 QtWidgets.QTextEdit.__bases__ = (widgets.AbstractScrollArea,)
@@ -29,7 +31,7 @@ class TextEdit(QtWidgets.QTextEdit):
         self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])
 
-    def __add__(self, other: str) -> "TextEdit":
+    def __add__(self, other: str) -> TextEdit:
         if isinstance(other, str):
             self.append_text(other)
             return self

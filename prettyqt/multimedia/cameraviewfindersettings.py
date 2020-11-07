@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
+
 from dataclasses import dataclass, asdict
 from typing import Tuple, Dict, Any
 
@@ -64,7 +66,7 @@ class CameraViewfinderSettings(QtMultimedia.QCameraViewfinderSettings):
         return asdict(self.to_dataclass())
 
     @classmethod
-    def from_dataclass(cls, data: Settings) -> "CameraViewfinderSettings":
+    def from_dataclass(cls, data: Settings) -> CameraViewfinderSettings:
         instance = cls()
         instance.setMaximumFrameRate(data.maximum_framerate)
         instance.setMinimumFrameRate(data.minimum_framerate)
@@ -74,6 +76,6 @@ class CameraViewfinderSettings(QtMultimedia.QCameraViewfinderSettings):
         return instance
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "CameraViewfinderSettings":
+    def from_dict(cls, data: Dict[str, Any]) -> CameraViewfinderSettings:
         settings = Settings(**data)
         return cls.from_dataclass(settings)

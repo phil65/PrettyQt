@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
+
 from dataclasses import dataclass, asdict
 from typing import Tuple, Dict, Any
 
@@ -64,7 +66,7 @@ class ImageEncoderSettings(QtMultimedia.QImageEncoderSettings):
         return asdict(self.to_dataclass())
 
     @classmethod
-    def from_dataclass(cls, data: Settings) -> "ImageEncoderSettings":
+    def from_dataclass(cls, data: Settings) -> ImageEncoderSettings:
         instance = cls()
         instance.setCodec(data.codec)
         instance.setEncodingOptions(data.encoding_options)
@@ -73,6 +75,6 @@ class ImageEncoderSettings(QtMultimedia.QImageEncoderSettings):
         return instance
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "ImageEncoderSettings":
+    def from_dict(cls, data: Dict[str, Any]) -> ImageEncoderSettings:
         settings = Settings(**data)
         return cls.from_dataclass(settings)

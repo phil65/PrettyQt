@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
 
 from typing import Union, Optional
 import logging
@@ -54,7 +55,7 @@ class JSValue(QtQml.QJSValue):
         return ERROR_TYPES.inv[error_type]
 
     @classmethod
-    def from_object(cls, obj, jsengine) -> "JSValue":
+    def from_object(cls, obj, jsengine) -> JSValue:
         """Convert any python object into a QJSValue (must happen in GUI thread)."""
         if obj is None:
             return cls()

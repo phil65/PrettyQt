@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from typing import Union, Tuple, List
 
 from qtpy import QtGui, QtCore
@@ -33,18 +35,18 @@ class Polygon(QtGui.QPolygon):
         else:
             self.setPoint(index, value)
 
-    def __sub__(self, other: QtGui.QPolygon) -> "Polygon":
+    def __sub__(self, other: QtGui.QPolygon) -> Polygon:
         return Polygon(self.subtracted(other))
 
-    def __and__(self, other: QtGui.QPolygon) -> "Polygon":  # &
+    def __and__(self, other: QtGui.QPolygon) -> Polygon:  # &
         return Polygon(self.intersected(other))
 
-    def __xor__(self, other: QtGui.QPolygon) -> "Polygon":  # ^
+    def __xor__(self, other: QtGui.QPolygon) -> Polygon:  # ^
         union = self | other
         intersect = self & other
         return union - intersect
 
-    def __or__(self, other: QtGui.QPolygon) -> "Polygon":  # |
+    def __or__(self, other: QtGui.QPolygon) -> Polygon:  # |
         return Polygon(self.united(other))
 
     def __reduce__(self):

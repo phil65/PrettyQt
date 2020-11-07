@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
 
 from typing import Union
 from qtpy import QtWidgets
@@ -14,7 +15,7 @@ class StatusBar(QtWidgets.QStatusBar):
         super().__init__(*args, **kwargs)
         self.progress_bar = widgets.ProgressBar()
 
-    def __add__(self, other: Union[QtWidgets.QAction, QtWidgets.QWidget]) -> "StatusBar":
+    def __add__(self, other: Union[QtWidgets.QAction, QtWidgets.QWidget]) -> StatusBar:
         if isinstance(other, QtWidgets.QAction):
             self.add_action(other)
             return self

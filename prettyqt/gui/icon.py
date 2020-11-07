@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 import pathlib
 from typing import Union, Optional, Dict, Tuple
 
@@ -61,7 +63,7 @@ class Icon(QtGui.QIcon):
         super().__init__(px)
 
     @classmethod
-    def for_color(cls, color_str: str) -> "Icon":
+    def for_color(cls, color_str: str) -> Icon:
         color = gui.Color.from_text(color_str)
         if color.isValid():
             bitmap = gui.Pixmap(16, 16)

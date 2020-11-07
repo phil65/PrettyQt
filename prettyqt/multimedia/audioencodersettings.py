@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from typing import Dict, Any
 from dataclasses import dataclass, asdict
 
@@ -90,7 +92,7 @@ class AudioEncoderSettings(QtMultimedia.QAudioEncoderSettings):
         return asdict(self.to_dataclass())
 
     @classmethod
-    def from_dataclass(cls, data: Settings) -> "AudioEncoderSettings":
+    def from_dataclass(cls, data: Settings) -> AudioEncoderSettings:
         instance = cls()
         instance.setBitRate(data.bitrate)
         instance.setChannelCount(data.channel_count)
@@ -102,6 +104,6 @@ class AudioEncoderSettings(QtMultimedia.QAudioEncoderSettings):
         return instance
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "AudioEncoderSettings":
+    def from_dict(cls, data: Dict[str, Any]) -> AudioEncoderSettings:
         settings = Settings(**data)
         return cls.from_dataclass(settings)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import annotations
 
 import pathlib
 
@@ -86,7 +87,7 @@ class Label(QtWidgets.QLabel):
         self.setScaledContents(state["scaled_contents"])
         self.setWordWrap(state["word_wrap"])
 
-    def allow_links(self) -> "Label":
+    def allow_links(self) -> Label:
         # self.setText("<a href=\"http://example.com/\">Click Here!</a>")
         self.setTextFormat(QtCore.Qt.RichText)
         self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
@@ -108,12 +109,12 @@ class Label(QtWidgets.QLabel):
         self.setAlignment(flag)
         return self
 
-    def set_indent(self, indent: int) -> "Label":
+    def set_indent(self, indent: int) -> Label:
         """Set the label's text indent in pixels."""
         self.setIndent(indent)
         return self
 
-    def set_text_format(self, text_format: str) -> "Label":
+    def set_text_format(self, text_format: str) -> Label:
         """Set the text format.
 
         Allowed values are "rich", "plain", "auto", "markdown"
@@ -139,7 +140,7 @@ class Label(QtWidgets.QLabel):
         """
         return TEXT_FORMATS.inv[self.textFormat()]
 
-    def set_text_interaction(self, *types: str) -> "Label":
+    def set_text_interaction(self, *types: str) -> Label:
         """Set the text interaction mode.
 
         Allowed values are "none", "by_mouse", "by_keyboard", "text_editable"
@@ -167,30 +168,30 @@ class Label(QtWidgets.QLabel):
         """
         return [k for k, v in TEXT_INTERACTION.items() if v & self.textInteractionFlags()]
 
-    def set_text(self, text: str) -> "Label":
+    def set_text(self, text: str) -> Label:
         """Set the label's text."""
         self.setText(text)
         return self
 
-    def set_bold(self, bold: bool = True) -> "Label":
+    def set_bold(self, bold: bool = True) -> Label:
         font = self.font()
         font.setBold(bold)
         self.setFont(font)
         return self
 
-    def set_italic(self, italic: bool = True) -> "Label":
+    def set_italic(self, italic: bool = True) -> Label:
         font = self.font()
         font.setItalic(italic)
         self.setFont(font)
         return self
 
-    def set_point_size(self, size: int) -> "Label":
+    def set_point_size(self, size: int) -> Label:
         font = self.font()
         font.setPointSize(size)
         self.setFont(font)
         return self
 
-    def set_weight(self, weight: str) -> "Label":
+    def set_weight(self, weight: str) -> Label:
         """Set the font weight.
 
         Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
@@ -209,7 +210,7 @@ class Label(QtWidgets.QLabel):
         self.setFont(font)
         return self
 
-    def set_color(self, color: colors.ColorType) -> "Label":
+    def set_color(self, color: colors.ColorType) -> Label:
         with self.edit_stylesheet() as ss:
             if color is None:
                 ss.color.setValue("")
@@ -218,7 +219,7 @@ class Label(QtWidgets.QLabel):
                 ss.color.setValue(color.name())
         return self
 
-    def set_image(self, path: Union[pathlib.Path, str], width: int = 300) -> "Label":
+    def set_image(self, path: Union[pathlib.Path, str], width: int = 300) -> Label:
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText(
@@ -231,7 +232,7 @@ class Label(QtWidgets.QLabel):
     @classmethod
     def image_from_path(
         cls, path: Union[pathlib.Path, str], parent: Optional[QtWidgets.QWidget] = None
-    ) -> "Label":
+    ) -> Label:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)
         label.setPixmap(pixmap)

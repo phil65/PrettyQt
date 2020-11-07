@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+
+from __future__ import annotations
+
 from dataclasses import dataclass, asdict
 from typing import Tuple, Dict, Any
 
@@ -91,7 +94,7 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
         return asdict(self.to_dataclass())
 
     @classmethod
-    def from_dataclass(cls, data: Settings) -> "VideoEncoderSettings":
+    def from_dataclass(cls, data: Settings) -> VideoEncoderSettings:
         instance = cls()
         instance.setBitRate(data.bitrate)
         instance.setCodec(data.codec)
@@ -103,6 +106,6 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
         return instance
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> "VideoEncoderSettings":
+    def from_dict(cls, data: Dict[str, Any]) -> VideoEncoderSettings:
         settings = Settings(**data)
         return cls.from_dataclass(settings)
