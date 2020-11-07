@@ -15,6 +15,7 @@ from .networkinterface import NetworkInterface
 from .networkdatagram import NetworkDatagram
 from .abstractsocket import AbstractSocket
 from .tcpsocket import TcpSocket
+from .udpsocket import UdpSocket
 from .httppart import HttpPart
 from .httpmultipart import HttpMultiPart
 from .networkaccessmanager import NetworkAccessManager
@@ -27,6 +28,7 @@ __all__ = [
     "NetworkAddressEntry",
     "NetworkInterface",
     "TcpSocket",
+    "UdpSocket",
     "HttpPart",
     "HttpMultiPart",
     "NetworkCookie",

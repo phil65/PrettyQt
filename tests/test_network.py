@@ -124,6 +124,13 @@ def test_networkcookiejar():
     repr(jar)
 
 
+def test_udpsocket():
+    socket = network.UdpSocket()
+    socket.bind("localhost")
+    socket.get_multicast_interface()
+    socket.receive_datagram()
+
+
 def test_tcpsocket():
     socket = network.TcpSocket()
     socket.set_pause_mode("on_ssl_errors")
