@@ -32,7 +32,7 @@ class JSValue(QtQml.QJSValue):
     def __getitem__(self, index: Union[int, str]):
         return self.property(index).toVariant()
 
-    def __delitem__(self, index: Union[int, str]):
+    def __delitem__(self, index: str):
         self.deleteProperty(index)
 
     def __setitem__(self, index: Union[int, str], value):

@@ -140,7 +140,7 @@ class WebEngineSettings:
         """
         return self.item.fontFamily(FONT_FAMILIES[family])
 
-    def set_font_size(self, typ: str, size: str):
+    def set_font_size(self, typ: str, size: int):
         """Set the font size for type to size in pixels.
 
         Args:
@@ -154,7 +154,7 @@ class WebEngineSettings:
             raise InvalidParamError(typ, FONT_SIZES)
         self.item.setFontSize(FONT_SIZES[typ], size)
 
-    def get_font_size(self, typ: str) -> str:
+    def get_font_size(self, typ: str) -> int:
         """Return the default font size for type in pixels.
 
         Possible values are "minimum", "minimum_logical", "default", "default_fixed"

@@ -16,7 +16,3 @@ class WebEngineHistoryItem(QtWebEngineWidgets.QWebEngineHistoryItem):
 
     def get_last_visited(self) -> core.DateTime:
         return core.DateTime(self.lastVisited())
-
-
-if __name__ == "__main__":
-    item = WebEngineHistoryItem()

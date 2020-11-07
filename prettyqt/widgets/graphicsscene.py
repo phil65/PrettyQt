@@ -52,7 +52,7 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
             return item
         elif isinstance(item, QtGui.QPixmap):
             return self.add_pixmap(item)
-        elif isinstance(item, QtGui.PainterPath):
+        elif isinstance(item, QtGui.QPainterPath):
             return self.add_path(item)
         elif isinstance(item, QtGui.QPolygonF):
             return self.add_polygon(item)

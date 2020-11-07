@@ -67,13 +67,13 @@ class Application(QtWidgets.QApplication):
         org_name: Optional[str] = None,
         org_domain: Optional[str] = None,
     ):
-        if app_name:
+        if app_name is not None:
             self.setApplicationName(app_name)
-        if app_version:
+        if app_version is not None:
             self.setApplicationVersion(app_name)
-        if org_name:
+        if org_name is not None:
             self.setOrganizationName(org_name)
-        if org_domain:
+        if org_domain is not None:
             self.setOrganizationDomain(org_domain)
 
     def about_popup(self, title: str = "About"):

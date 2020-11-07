@@ -124,8 +124,7 @@ class ComboBox(QtWidgets.QComboBox):
         """
         if policy not in INSERT_POLICIES:
             raise InvalidParamError(policy, INSERT_POLICIES)
-        policy = INSERT_POLICIES[policy]
-        self.setInsertPolicy(policy)
+        self.setInsertPolicy(INSERT_POLICIES[policy])
 
     def get_insert_policy(self) -> str:
         """Return insert policy.

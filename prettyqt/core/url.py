@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from typing import Union, Optional
 
 import pathlib
@@ -80,7 +82,7 @@ class Url(QtCore.QUrl):
         return self.isLocalFile()
 
     @classmethod
-    def from_user_input(cls, url: str, working_dir: Optional[str] = None):
+    def from_user_input(cls, url: str, working_dir: Optional[str] = None) -> Url:
         if working_dir is None:
             working_dir = ""
         return cls(cls.fromUserInput(url, working_dir))

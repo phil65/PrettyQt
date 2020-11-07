@@ -19,7 +19,7 @@ QtWidgets.QActionGroup.__bases__ = (core.Object,)
 
 
 class ActionGroup(QtWidgets.QActionGroup):
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent=None):  # QtCore.QObject
         super().__init__(parent)
 
     def __len__(self) -> int:
