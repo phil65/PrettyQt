@@ -31,12 +31,12 @@ addons:
       - python3-pyqt5.qtwebengine
       # - libspeechd-dev
       # - libspeechd2
-      # - flite
-      # - libflite1
-      # - libqt5texttospeech5
-      # - qtspeech5-flite-plugin
-      # - speech-dispatcher
-      # - speech-dispatcher-flite
+      - flite
+      - libflite1
+      - libqt5texttospeech5
+      - qtspeech5-flite-plugin
+      - speech-dispatcher
+      - speech-dispatcher-flite
 
 services:
   - xvfb
