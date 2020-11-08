@@ -110,10 +110,16 @@ def test_legend(qtbot):
 
 def test_lineseries(qtbot):
     line = charts.LineSeries()
+    line += QtCore.QPointF(1, 1)
+    line += QtCore.QPointF(2, 2)
+    line[1] = QtCore.QPointF(0, 0)
+    line.get_brush()
+    line.get_pen()
     with open("data.pkl", "wb") as jar:
         pickle.dump(line, jar)
     with open("data.pkl", "rb") as jar:
         line = pickle.load(jar)
+    del line[1]
 
 
 def test_datetimeaxis(qtbot):

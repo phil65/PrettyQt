@@ -6,13 +6,6 @@ from qtpy.QtCharts import QtCharts
 from prettyqt import charts, core
 
 
-STYLES = {
-    QtCore.Qt.SolidLine: "Solid",
-    QtCore.Qt.DotLine: "Dot",
-    QtCore.Qt.DashDotLine: "Dash-dot",
-}
-
-
 QtCharts.QLineSeries.__bases__ = (charts.XYSeries,)
 
 
@@ -34,4 +27,4 @@ class LineSeries(QtCharts.QLineSeries):
 
 if __name__ == "__main__":
     line = LineSeries()
-    line.append(0, 1)
+    line += QtCore.QPointF(1, 1)
