@@ -23,6 +23,13 @@ def test_httppart():
     part.set_header("location", "c")
 
 
+def test_localserver():
+    server = network.LocalServer()
+    assert server.get_server_error() == "unknown_socket"
+    server.set_socket_options("user")
+    assert server.get_socket_options() == ["user", "world"]
+
+
 def test_httpmultipart():
     part = network.HttpMultiPart()
     part.set_content_type("related")
@@ -129,6 +136,13 @@ def test_udpsocket():
     socket.bind("localhost")
     socket.get_multicast_interface()
     socket.receive_datagram()
+
+
+def test_tcpserver():
+    server = network.TcpServer()
+    server.get_server_address()
+    server.get_proxy()
+    assert server.get_server_error() == "unknown_socket"
 
 
 def test_tcpsocket():

@@ -14,6 +14,8 @@ from .networkaddressentry import NetworkAddressEntry
 from .networkinterface import NetworkInterface
 from .networkdatagram import NetworkDatagram
 from .abstractsocket import AbstractSocket
+from .localserver import LocalServer
+from .tcpserver import TcpServer
 from .tcpsocket import TcpSocket
 from .udpsocket import UdpSocket
 from .httppart import HttpPart
@@ -24,6 +26,8 @@ __all__ = [
     "NetworkProxy",
     "AbstractSocket",
     "HostAddress",
+    "LocalServer",
+    "TcpServer",
     "NetworkDatagram",
     "NetworkAddressEntry",
     "NetworkInterface",
