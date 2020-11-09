@@ -43,6 +43,19 @@ class Application(QtWidgets.QApplication):
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.topLevelWidgets())
 
+    def serialize_fields(self):
+        return dict(
+            auto_sip_enabled=self.autoSipEnabled(),
+            cursor_flash_time=self.cursorFlashTime(),
+            double_click_interval=self.doubleClickInterval(),
+            keyboard_input_interval=self.keyboardInputInterval(),
+            start_drag_distance=self.startDragDistance(),
+            start_drag_time=self.startDragTime(),
+            style_sheet=self.styleSheet(),
+            wheel_scroll_lines=self.wheelScrollLines(),
+            icon=gui.Icon(self.windowIcon()),
+        )
+
     def set_icon(self, icon: gui.icon.IconType):
         """Set the default window icon.
 
