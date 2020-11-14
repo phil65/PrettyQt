@@ -122,6 +122,17 @@ def test_fontmetrics():
     fontmetrics.get_tight_bounding_rect("test")
 
 
+def test_fontmetricsf():
+    font = gui.Font("Consolas")
+    fontmetrics = gui.FontMetricsF(font)
+    val = fontmetrics.elided_text("This is a test", mode="right", width=40)
+    with pytest.raises(InvalidParamError):
+        val = fontmetrics.elided_text("This is a test", mode="test", width=40)
+    assert len(val) < 5
+    fontmetrics.get_bounding_rect("test")
+    fontmetrics.get_tight_bounding_rect("test")
+
+
 def test_gradient():
     grad = gui.Gradient()
     grad.set_coordinate_mode("object")

@@ -49,6 +49,7 @@ from .pagesize import PageSize
 from .pagelayout import PageLayout
 from .font import Font
 from .fontmetrics import FontMetrics
+from .fontmetricsf import FontMetricsF
 from .fontinfo import FontInfo
 from .fontdatabase import FontDatabase
 from .region import Region
@@ -103,6 +104,7 @@ __all__ = [
     "Color",
     "Font",
     "FontMetrics",
+    "FontMetricsF",
     "FontInfo",
     "FontDatabase",
     "Region",
