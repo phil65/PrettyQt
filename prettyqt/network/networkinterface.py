@@ -37,7 +37,7 @@ INTERFACE_TYPES = bidict(
 
 class NetworkInterface(QtNetwork.QNetworkInterface):
     # def __bool__(self):
-    #     return not self.isValid()
+    #     return self.isValid()
 
     def get_type(self) -> str:
         """Get the interface type.
