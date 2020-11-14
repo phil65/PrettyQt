@@ -118,6 +118,8 @@ def test_fontmetrics():
     with pytest.raises(InvalidParamError):
         val = fontmetrics.elided_text("This is a test", mode="test", width=40)
     assert len(val) < 5
+    fontmetrics.get_bounding_rect("test")
+    fontmetrics.get_tight_bounding_rect("test")
 
 
 def test_gradient():

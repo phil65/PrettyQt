@@ -2,6 +2,7 @@
 
 from qtpy import QtCore, QtGui
 
+from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -18,3 +19,9 @@ class FontMetrics(QtGui.QFontMetrics):
         if mode not in ELIDE_MODES:
             raise InvalidParamError(mode, ELIDE_MODES)
         return self.elidedText(text, ELIDE_MODES[mode], width, flags)
+
+    def get_bounding_rect(self, text: str) -> core.Rect:
+        return core.Rect(self.boundingRect(text))
+
+    def get_tight_bounding_rect(self, text: str) -> core.Rect:
+        return core.Rect(self.tightBoundingRect(text))
