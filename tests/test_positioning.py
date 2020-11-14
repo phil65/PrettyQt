@@ -29,6 +29,7 @@ def test_geocoordinate():
     print(str(coord))
     assert repr(coord) == "GeoCoordinate(11.0, 11.0)"
     assert coord.get_type() == "two_d"
+    assert bool(coord) is True
 
 
 def test_geocircle():

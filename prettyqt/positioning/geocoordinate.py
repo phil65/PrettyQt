@@ -35,6 +35,9 @@ class GeoCoordinate(QtPositioning.QGeoCoordinate):
     def __repr__(self):
         return f"GeoCoordinate({self.latitude()}, {self.longitude()})"
 
+    def __bool__(self):
+        return self.isValid()
+
     def get_type(self) -> str:
         return COORDINATE_TYPES.inv[self.type()]
 
