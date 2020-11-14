@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Dict
+from typing import Dict, List
 
 from qtpy import QtNetwork
 
@@ -32,7 +32,7 @@ PROXY_TYPES = bidict(
 
 
 class NetworkProxy(QtNetwork.QNetworkProxy):
-    def get_capabilities(self):
+    def get_capabilities(self) -> List[str]:
         return [k for k, v in CAPABILITIES.items() if v & self.capabilities()]
 
     def set_capabilities(self, *capability: str):
