@@ -22,7 +22,10 @@ from .georoutesegment import GeoRouteSegment
 from .georoute import GeoRoute
 from .georouteleg import GeoRouteLeg
 from .geoserviceprovider import GeoServiceProvider
+from .placesearchrequest import PlaceSearchRequest
+from .placecontentrequest import PlaceContentRequest
 from .place import Place
+from .placematchrequest import PlaceMatchRequest
 
 __all__ = [
     "PlaceAttribute",
@@ -45,5 +48,8 @@ __all__ = [
     "GeoRouteLeg",
     "GeoRouteRequest",
     "GeoRouteSegment",
+    "PlaceSearchRequest",
+    "PlaceContentRequest",
+    "PlaceMatchRequest",
     "GeoServiceProvider",
 ]

@@ -1,14 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from typing import List
+
 from qtpy import QtLocation
 
-from prettyqt import core
+from prettyqt import location
 
 
-class PlaceIcon(QtLocation.QPlaceIcon):
-    def __bool__(self):
-        return not self.isEmpty()
-
+class PlaceMatchRequest(QtLocation.QPlaceMatchRequest):
     def __setitem__(self, index: str, val):
         attrs = self.parameters()
         attrs[index] = val
@@ -20,13 +19,9 @@ class PlaceIcon(QtLocation.QPlaceIcon):
             raise KeyError(f"Key {index!r} does not exist.")
         return attr[index]
 
-    # def get_manager(self) -> location.PlaceManager:
-    #     return location.PlaceManager(self.manager())
-
-    def get_url(self) -> core.Url:
-        return core.Url(self.url())
+    def get_places(self) -> List[location.Place]:
+        return [location.Place(i) for i in self.places()]
 
 
 if __name__ == "__main__":
-    icon = PlaceIcon()
-    print(bool(icon))
+    request = PlaceMatchRequest()

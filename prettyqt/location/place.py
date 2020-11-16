@@ -7,7 +7,7 @@ from qtpy import QtLocation
 from prettyqt import location, positioning, core
 from prettyqt.utils import bidict, InvalidParamError
 
-TYPE = location.placecontent.TYPE
+TYPE = location.placecontent.TYPE  # type: ignore
 
 VISIBILITY = bidict(
     unspecified=QtLocation.QLocation.UnspecifiedVisibility,

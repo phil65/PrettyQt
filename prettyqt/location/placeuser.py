@@ -9,4 +9,4 @@ class PlaceUser(QtLocation.QPlaceUser):
 
 
 if __name__ == "__main__":
-    segment = PlaceUser()
+    user = PlaceUser()

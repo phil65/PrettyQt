@@ -23,5 +23,5 @@ class PlaceSupplier(QtLocation.QPlaceSupplier):
 
 
 if __name__ == "__main__":
-    segment = PlaceSupplier()
-    print(bool(segment))
+    supplier = PlaceSupplier()
+    print(bool(supplier))

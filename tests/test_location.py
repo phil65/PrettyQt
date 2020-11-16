@@ -189,3 +189,29 @@ def test_place():
     place.get_ratings()
     place.get_supplier()
     assert place.get_visibility() == "unspecified"
+
+
+def test_placesearchrequest():
+    request = location.PlaceSearchRequest()
+    request.get_visibility_scope()
+    request.get_categories()
+    request.get_search_area()
+    request.set_relevance_hint("distance")
+    with pytest.raises(InvalidParamError):
+        request.set_relevance_hint("test")
+    assert request.get_relevance_hint() == "distance"
+
+
+def test_placecontentrequest():
+    request = location.PlaceContentRequest()
+    request.set_content_type("image")
+    with pytest.raises(InvalidParamError):
+        request.set_content_type("test")
+    assert request.get_content_type() == "image"
+
+
+def test_placematchrequest():
+    request = location.PlaceMatchRequest()
+    request["test"] = "abc"
+    assert request["test"] == "abc"
+    request.get_places()

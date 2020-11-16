@@ -135,4 +135,4 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
 
 
 if __name__ == "__main__":
-    segment = GeoRouteRequest()
+    request = GeoRouteRequest()
