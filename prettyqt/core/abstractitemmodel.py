@@ -121,3 +121,11 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         self.beginInsertColumns(parent, first, last)
         yield None
         self.endInsertColumns()
+
+    def force_reset(self):
+        self.beginResetModel()
+        self.endResetModel()
+
+    def force_layoutchange(self):
+        self.layoutAboutToBeChanged.emit()
+        self.layoutChanged.emit()

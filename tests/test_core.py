@@ -52,6 +52,8 @@ def test_abstracttablemodel():
         pass
     with model.insert_columns():
         pass
+    model.force_reset()
+    model.force_layoutchange()
     # qtmodeltester.check(model, force_py=True)
 
 
