@@ -39,7 +39,7 @@ def test_camerainfo():
 
 def test_camera():
     cam = multimedia.Camera()
-    assert cam.get_availability() == "available"
+    assert cam.get_availability() in ["available", "service_missing"]
     assert cam.get_state() == "unloaded"
     assert cam.get_status() in ["unloaded", "unavailable"]
     assert cam.get_lock_status() == "unlocked"
