@@ -27,6 +27,15 @@ from prettyqt.utils import InvalidParamError
 #     assert data.can_edit_richly() is True
 
 
+def test_webenginehistory():
+    page = webenginewidgets.WebEnginePage()
+    history = page.get_history()
+    assert len(history) == 0
+    for item in history:
+        pass
+    history.get_items()
+
+
 def test_webengineview(qapp):
     widget = webenginewidgets.WebEngineView()
     widget.set_zoom(1.5)
