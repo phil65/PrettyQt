@@ -87,7 +87,7 @@ class ComboBox(QtWidgets.QComboBox):
         data = self.itemData(index)
         self.value_changed.emit(data)
 
-    def add_items(self, items: Union[Iterable, Mapping]):
+    def add_items(self, items: Union[Iterable, Mapping], default=NoData):
         if isinstance(items, Mapping):
             for k, v in items.items():
                 self.addItem(v, userData=k)
@@ -97,6 +97,8 @@ class ComboBox(QtWidgets.QComboBox):
                     self.add(*i)
                 else:
                     self.addItem(i, i)
+        if default is not NoData:
+            self.set_value(default)
 
     def add(self, label: str, data=NoData, icon: gui.icon.IconType = None):
         if data is NoData:
