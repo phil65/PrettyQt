@@ -1,3 +1,19 @@
+## v0.133.0 (2020-11-16)
+
+### Feat
+
+- **ComboBox**: default param for add_items
+- **AbstractItemModel**: add force_reset/force_layoutchange methods
+- add location module
+- **gui**: add FontMetricsF class
+- **GeoCoordinate**: add __bool__ method
+- **FontMetrics**: add get_(tight_)bounding_rect methods
+- **Url**: add to_string method
+- **network**: add LocalServer / TcpServer classes
+- **multimediawidgets**: add GraphicsVideoItem class
+- **mediaobject**: add get_availability method
+- add qt module
+
 ## v0.132.1 (2020-11-07)
 
 ### Fix
