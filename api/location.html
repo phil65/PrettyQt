@@ -1,0 +1,2200 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/location.html">
+      
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.5">
+    
+    
+      
+        <title>location - PrettyQt</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.21aed14c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#location-module" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-header-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      
+        <div class="md-header-nav__ellipsis">
+          <span class="md-header-nav__topic md-ellipsis">
+            PrettyQt
+          </span>
+          <span class="md-header-nav__topic md-ellipsis">
+            
+              location
+            
+          </span>
+        </div>
+      
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://phil65.github.io/PrettyQt/" title="PrettyQt" class="md-nav__button md-logo" aria-label="PrettyQt">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    PrettyQt
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    <label class="md-nav__link" for="nav-2">
+      API
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="API" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        <span class="md-nav__icon md-icon"></span>
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="bluetooth.html" class="md-nav__link">
+      bluetooth
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="charts.html" class="md-nav__link">
+      charts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="constants.html" class="md-nav__link">
+      constants
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="core.html" class="md-nav__link">
+      core
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_delegates.html" class="md-nav__link">
+      custom_delegates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_models.html" class="md-nav__link">
+      custom_models
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_validators.html" class="md-nav__link">
+      custom_validators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="custom_widgets.html" class="md-nav__link">
+      custom_widgets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="gui.html" class="md-nav__link">
+      gui
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        location
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="location.html" class="md-nav__link md-nav__link--active">
+      location
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location" class="md-nav__link">
+    prettyqt.location
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.geomaneuver" class="md-nav__link">
+    geomaneuver
+  </a>
+  
+    <nav class="md-nav" aria-label="geomaneuver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.geomaneuver.GeoManeuver" class="md-nav__link">
+    GeoManeuver
+  </a>
+  
+    <nav class="md-nav" aria-label="GeoManeuver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.geomaneuver.GeoManeuver.get_direction" class="md-nav__link">
+    get_direction()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.geomaneuver.GeoManeuver.set_direction" class="md-nav__link">
+    set_direction()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest" class="md-nav__link">
+    georouterequest
+  </a>
+  
+    <nav class="md-nav" aria-label="georouterequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest" class="md-nav__link">
+    GeoRouteRequest
+  </a>
+  
+    <nav class="md-nav" aria-label="GeoRouteRequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest.get_feature_weight" class="md-nav__link">
+    get_feature_weight()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest.get_route_optimization" class="md-nav__link">
+    get_route_optimization()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest.set_feature_weight" class="md-nav__link">
+    set_feature_weight()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest.set_route_optimization" class="md-nav__link">
+    set_route_optimization()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.place" class="md-nav__link">
+    place
+  </a>
+  
+    <nav class="md-nav" aria-label="place">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.place.Place" class="md-nav__link">
+    Place
+  </a>
+  
+    <nav class="md-nav" aria-label="Place">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.place.Place.get_visibility" class="md-nav__link">
+    get_visibility()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.placecategory" class="md-nav__link">
+    placecategory
+  </a>
+  
+    <nav class="md-nav" aria-label="placecategory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecategory.PlaceCategory" class="md-nav__link">
+    PlaceCategory
+  </a>
+  
+    <nav class="md-nav" aria-label="PlaceCategory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecategory.PlaceCategory.get_visibility" class="md-nav__link">
+    get_visibility()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontent" class="md-nav__link">
+    placecontent
+  </a>
+  
+    <nav class="md-nav" aria-label="placecontent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontent.PlaceContent" class="md-nav__link">
+    PlaceContent
+  </a>
+  
+    <nav class="md-nav" aria-label="PlaceContent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontent.PlaceContent.get_type" class="md-nav__link">
+    get_type()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontentrequest" class="md-nav__link">
+    placecontentrequest
+  </a>
+  
+    <nav class="md-nav" aria-label="placecontentrequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontentrequest.PlaceContentRequest" class="md-nav__link">
+    PlaceContentRequest
+  </a>
+  
+    <nav class="md-nav" aria-label="PlaceContentRequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontentrequest.PlaceContentRequest.get_content_type" class="md-nav__link">
+    get_content_type()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontentrequest.PlaceContentRequest.set_content_type" class="md-nav__link">
+    set_content_type()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest" class="md-nav__link">
+    placesearchrequest
+  </a>
+  
+    <nav class="md-nav" aria-label="placesearchrequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest.PlaceSearchRequest" class="md-nav__link">
+    PlaceSearchRequest
+  </a>
+  
+    <nav class="md-nav" aria-label="PlaceSearchRequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest.PlaceSearchRequest.get_relevance_hint" class="md-nav__link">
+    get_relevance_hint()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest.PlaceSearchRequest.get_visibility_scope" class="md-nav__link">
+    get_visibility_scope()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest.PlaceSearchRequest.set_relevance_hint" class="md-nav__link">
+    set_relevance_hint()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimedia.html" class="md-nav__link">
+      multimedia
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="multimediawidgets.html" class="md-nav__link">
+      multimediawidgets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="network.html" class="md-nav__link">
+      network
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="objbrowser.html" class="md-nav__link">
+      objbrowser
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="positioning.html" class="md-nav__link">
+      positioning
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="qml.html" class="md-nav__link">
+      qml
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="quick.html" class="md-nav__link">
+      quick
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="scintilla.html" class="md-nav__link">
+      scintilla
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="svg.html" class="md-nav__link">
+      svg
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="syntaxhighlighters.html" class="md-nav__link">
+      syntaxhighlighters
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="texttospeech.html" class="md-nav__link">
+      texttospeech
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="webenginecore.html" class="md-nav__link">
+      webenginecore
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="webenginewidgets.html" class="md-nav__link">
+      webenginewidgets
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="widgets.html" class="md-nav__link">
+      widgets
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../contributing.html" class="md-nav__link">
+      Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../changelog.html" class="md-nav__link">
+      Changelog
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location" class="md-nav__link">
+    prettyqt.location
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.geomaneuver" class="md-nav__link">
+    geomaneuver
+  </a>
+  
+    <nav class="md-nav" aria-label="geomaneuver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.geomaneuver.GeoManeuver" class="md-nav__link">
+    GeoManeuver
+  </a>
+  
+    <nav class="md-nav" aria-label="GeoManeuver">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.geomaneuver.GeoManeuver.get_direction" class="md-nav__link">
+    get_direction()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.geomaneuver.GeoManeuver.set_direction" class="md-nav__link">
+    set_direction()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest" class="md-nav__link">
+    georouterequest
+  </a>
+  
+    <nav class="md-nav" aria-label="georouterequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest" class="md-nav__link">
+    GeoRouteRequest
+  </a>
+  
+    <nav class="md-nav" aria-label="GeoRouteRequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest.get_feature_weight" class="md-nav__link">
+    get_feature_weight()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest.get_route_optimization" class="md-nav__link">
+    get_route_optimization()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest.set_feature_weight" class="md-nav__link">
+    set_feature_weight()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.georouterequest.GeoRouteRequest.set_route_optimization" class="md-nav__link">
+    set_route_optimization()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.place" class="md-nav__link">
+    place
+  </a>
+  
+    <nav class="md-nav" aria-label="place">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.place.Place" class="md-nav__link">
+    Place
+  </a>
+  
+    <nav class="md-nav" aria-label="Place">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.place.Place.get_visibility" class="md-nav__link">
+    get_visibility()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.placecategory" class="md-nav__link">
+    placecategory
+  </a>
+  
+    <nav class="md-nav" aria-label="placecategory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecategory.PlaceCategory" class="md-nav__link">
+    PlaceCategory
+  </a>
+  
+    <nav class="md-nav" aria-label="PlaceCategory">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecategory.PlaceCategory.get_visibility" class="md-nav__link">
+    get_visibility()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontent" class="md-nav__link">
+    placecontent
+  </a>
+  
+    <nav class="md-nav" aria-label="placecontent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontent.PlaceContent" class="md-nav__link">
+    PlaceContent
+  </a>
+  
+    <nav class="md-nav" aria-label="PlaceContent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontent.PlaceContent.get_type" class="md-nav__link">
+    get_type()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontentrequest" class="md-nav__link">
+    placecontentrequest
+  </a>
+  
+    <nav class="md-nav" aria-label="placecontentrequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontentrequest.PlaceContentRequest" class="md-nav__link">
+    PlaceContentRequest
+  </a>
+  
+    <nav class="md-nav" aria-label="PlaceContentRequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontentrequest.PlaceContentRequest.get_content_type" class="md-nav__link">
+    get_content_type()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placecontentrequest.PlaceContentRequest.set_content_type" class="md-nav__link">
+    set_content_type()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest" class="md-nav__link">
+    placesearchrequest
+  </a>
+  
+    <nav class="md-nav" aria-label="placesearchrequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest.PlaceSearchRequest" class="md-nav__link">
+    PlaceSearchRequest
+  </a>
+  
+    <nav class="md-nav" aria-label="PlaceSearchRequest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest.PlaceSearchRequest.get_relevance_hint" class="md-nav__link">
+    get_relevance_hint()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest.PlaceSearchRequest.get_visibility_scope" class="md-nav__link">
+    get_visibility_scope()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.location.placesearchrequest.PlaceSearchRequest.set_relevance_hint" class="md-nav__link">
+    set_relevance_hint()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="location-module">location module</h1>
+<div class="doc doc-object doc-module">
+<h2 class="hidden-toc" href="#prettyqt.location" id="prettyqt.location" style="visibility: hidden; position: absolute;">
+        </h2>
+<div class="doc doc-contents first">
+<p>Location module.</p>
+<div class="doc doc-children">
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.location.geomaneuver">
+
+        <code>geomaneuver</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.location.geomaneuver.GeoManeuver">
+
+        <code>GeoManeuver</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.geomaneuver.GeoManeuver.get_direction">
+
+        <code class="highlight language-python">
+get_direction<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current direction.</p>
+<p>Possible values: "none", "forward", "bear_right", "light_right", "right",
+                 "hard_right", "u_turn_right", "bear_left", "light_left", "left",
+                 "hard_left", "u_turn_left"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Direction</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/geomaneuver.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current direction.</span>
+
+<span class="sd">    Possible values: "none", "forward", "bear_right", "light_right", "right",</span>
+<span class="sd">                     "hard_right", "u_turn_right", "bear_left", "light_left", "left",</span>
+<span class="sd">                     "hard_left", "u_turn_left"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Direction</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">INSTRUCTION_DIRECTION</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.geomaneuver.GeoManeuver.set_direction">
+
+        <code class="highlight language-python">
+set_direction<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the direction.</p>
+<p>Allowed values are "none", "forward", "bear_right", "light_right", "right",
+                   "hard_right", "u_turn_right", "bear_left", "light_left",
+                   "left", "hard_left", "u_turn_left"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>direction</code></td>
+<td><code>str</code></td>
+<td>
+<p>Direction</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>direction does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/geomaneuver.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the direction.</span>
+
+<span class="sd">    Allowed values are "none", "forward", "bear_right", "light_right", "right",</span>
+<span class="sd">                       "hard_right", "u_turn_right", "bear_left", "light_left",</span>
+<span class="sd">                       "left", "hard_left", "u_turn_left"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        direction: Direction</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: direction does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">INSTRUCTION_DIRECTION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">INSTRUCTION_DIRECTION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setDirection</span><span class="p">(</span><span class="n">INSTRUCTION_DIRECTION</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.location.georouterequest">
+
+        <code>georouterequest</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.location.georouterequest.GeoRouteRequest">
+
+        <code>GeoRouteRequest</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.georouterequest.GeoRouteRequest.get_feature_weight">
+
+        <code class="highlight language-python">
+get_feature_weight<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current feature weight.</p>
+<p>Possible values for weight: "neutral", "prefer", "require", "avoid", "disallow"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Feature weight</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/georouterequest.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current feature weight.</span>
+
+<span class="sd">    Possible values for weight: "neutral", "prefer", "require", "avoid", "disallow"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Feature weight</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">feature</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FEATURE_TYPES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">FEATURE_TYPES</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">FEATURE_WEIGHTS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">featureWeight</span><span class="p">(</span><span class="n">FEATURE_TYPES</span><span class="p">[</span><span class="n">feature</span><span class="p">])]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.georouterequest.GeoRouteRequest.get_route_optimization">
+
+        <code class="highlight language-python">
+get_route_optimization<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current route optimization.</p>
+<p>Possible values: "shortest", "fastest", "most_economic", "most_scenic"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Route optimization</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/georouterequest.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current route optimization.</span>
+
+<span class="sd">    Possible values: "shortest", "fastest", "most_economic", "most_scenic"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Route optimization</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">ROUTE_OPTIMIZATION</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">routeOptimization</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.georouterequest.GeoRouteRequest.set_feature_weight">
+
+        <code class="highlight language-python">
+set_feature_weight<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the feature weight.</p>
+<p>Allowed values for weight: "neutral", "prefer", "require", "avoid", "disallow"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>feature</code></td>
+<td><code>str</code></td>
+<td>
+<p>Feature type</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>weight</code></td>
+<td><code>str</code></td>
+<td>
+<p>Feature weight</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>feature weight / type does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/georouterequest.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the feature weight.</span>
+
+<span class="sd">    Allowed values for weight: "neutral", "prefer", "require", "avoid", "disallow"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        feature: Feature type</span>
+<span class="sd">        weight: Feature weight</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: feature weight / type does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FEATURE_WEIGHTS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">FEATURE_WEIGHTS</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">feature</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FEATURE_TYPES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">FEATURE_TYPES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFeatureWeight</span><span class="p">(</span><span class="n">FEATURE_TYPES</span><span class="p">[</span><span class="n">feature</span><span class="p">],</span> <span class="n">FEATURE_WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.georouterequest.GeoRouteRequest.set_route_optimization">
+
+        <code class="highlight language-python">
+set_route_optimization<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimization</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the route optimization.</p>
+<p>Allowed values are "shortest", "fastest", "most_economic", "most_scenic"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>optimization</code></td>
+<td><code>str</code></td>
+<td>
+<p>Route optimization</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>route optimization does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/georouterequest.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimization</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the route optimization.</span>
+
+<span class="sd">    Allowed values are "shortest", "fastest", "most_economic", "most_scenic"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        optimization: Route optimization</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: route optimization does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">optimization</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ROUTE_OPTIMIZATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">optimization</span><span class="p">,</span> <span class="n">ROUTE_OPTIMIZATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setRouteOptimization</span><span class="p">(</span><span class="n">ROUTE_OPTIMIZATION</span><span class="p">[</span><span class="n">optimization</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.location.place">
+
+        <code>place</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.location.place.Place">
+
+        <code>Place</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.place.Place.get_visibility">
+
+        <code class="highlight language-python">
+get_visibility<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return visibility.</p>
+<p>Possible values are "unspecified", "device", "private", "public"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Visibility</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/place.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return visibility.</span>
+
+<span class="sd">    Possible values are "unspecified", "device", "private", "public"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Visibility</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.location.placecategory">
+
+        <code>placecategory</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.location.placecategory.PlaceCategory">
+
+        <code>PlaceCategory</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.placecategory.PlaceCategory.get_visibility">
+
+        <code class="highlight language-python">
+get_visibility<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return the visibility of the place.</p>
+<p>Possible values are "unspecified", "device", "private", "public"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Visibility</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/placecategory.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return the visibility of the place.</span>
+
+<span class="sd">    Possible values are "unspecified", "device", "private", "public"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Visibility</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.location.placecontent">
+
+        <code>placecontent</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.location.placecontent.PlaceContent">
+
+        <code>PlaceContent</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.placecontent.PlaceContent.get_type">
+
+        <code class="highlight language-python">
+get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return the visibility of the place.</p>
+<p>Possible values are "none", "image", "review", "editorial", "custom"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Place type</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/placecontent.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return the visibility of the place.</span>
+
+<span class="sd">    Possible values are "none", "image", "review", "editorial", "custom"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Place type</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.location.placecontentrequest">
+
+        <code>placecontentrequest</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.location.placecontentrequest.PlaceContentRequest">
+
+        <code>PlaceContentRequest</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.placecontentrequest.PlaceContentRequest.get_content_type">
+
+        <code class="highlight language-python">
+get_content_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current content type.</p>
+<p>Possible values: "none", "image", "review", "editorial", "custom"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Relevance type</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/placecontentrequest.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current content type.</span>
+
+<span class="sd">    Possible values: "none", "image", "review", "editorial", "custom"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Relevance type</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contentType</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.placecontentrequest.PlaceContentRequest.set_content_type">
+
+        <code class="highlight language-python">
+set_content_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the content type.</p>
+<p>Allowed values are "none", "image", "review", "editorial", "custom"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>typ</code></td>
+<td><code>str</code></td>
+<td>
+<p>Relevance type</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>content type does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/placecontentrequest.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the content type.</span>
+
+<span class="sd">    Allowed values are "none", "image", "review", "editorial", "custom"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        typ: Relevance type</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: content type does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setContentType</span><span class="p">(</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.location.placesearchrequest">
+
+        <code>placesearchrequest</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.location.placesearchrequest.PlaceSearchRequest">
+
+        <code>PlaceSearchRequest</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.placesearchrequest.PlaceSearchRequest.get_relevance_hint">
+
+        <code class="highlight language-python">
+get_relevance_hint<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current relevance hint.</p>
+<p>Possible values: "unspecified", "distance", "lexical_place_name"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Relevance hint</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/placesearchrequest.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return current relevance hint.</span>
+
+<span class="sd">    Possible values: "unspecified", "distance", "lexical_place_name"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Relevance hint</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">RELEVANCE_HINT</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">relevanceHint</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.placesearchrequest.PlaceSearchRequest.get_visibility_scope">
+
+        <code class="highlight language-python">
+get_visibility_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return the scope of the visibility.</p>
+<p>Possible values are "unspecified", "device", "private", "public"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Visibility scope</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/placesearchrequest.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return the scope of the visibility.</span>
+
+<span class="sd">    Possible values are "unspecified", "device", "private", "public"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Visibility scope</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibilityScope</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.location.placesearchrequest.PlaceSearchRequest.set_relevance_hint">
+
+        <code class="highlight language-python">
+set_relevance_hint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the relevance hint.</p>
+<p>Allowed values are "unspecified", "distance", "lexical_place_name"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hint</code></td>
+<td><code>str</code></td>
+<td>
+<p>Relevance hint</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>relevance hint does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/location/placesearchrequest.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the relevance hint.</span>
+
+<span class="sd">    Allowed values are "unspecified", "distance", "lexical_place_name"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        hint: Relevance hint</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: relevance hint does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">hint</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">RELEVANCE_HINT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="n">RELEVANCE_HINT</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setRelevanceHint</span><span class="p">(</span><span class="n">RELEVANCE_HINT</span><span class="p">[</span><span class="n">hint</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        <!--
+  Copyright (c) 2016-2019 Martin Donath <martin.donath@squidfunk.com>
+
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to
+  deal in the Software without restriction, including without limitation the
+  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+  sell copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
+
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+--><!-- Application footer -->
+<footer class="md-footer">
+
+  <!-- Link to previous and/or next page --><div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+
+        <!-- Link to previous page --><a href="gui.html"
+              title="gui"
+              class="md-flex md-footer-nav__link md-footer-nav__link--prev"
+              rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back
+                    md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Previous</span>gui</span>
+            </div>
+          </a><!-- Link to next page --><a href="multimedia.html"
+              title="multimedia"
+              class="md-flex md-footer-nav__link md-footer-nav__link--next"
+              rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch
+                  md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">Next</span>multimedia</span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward
+                    md-footer-nav__button"></i>
+            </div>
+          </a></nav>
+    </div><!-- Further information -->
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <!-- Social links --></div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/vendor.7e0ee788.min.js"></script>
+      <script src="../assets/javascripts/bundle.b3a72adc.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+    
+  </body>
+</html>
