@@ -284,6 +284,8 @@ def test_painter():
         painter.set_clip_path(gui.PainterPath(), "test")
     with pytest.raises(InvalidParamError):
         painter.set_pen("test")
+    with painter.backup_state():
+        pass
     # assert painter.get_composition_mode() == "source_atop"
 
 
