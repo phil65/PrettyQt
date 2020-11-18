@@ -206,6 +206,7 @@ class BaseWaitingSpinner(widgets.Widget):
         min_opacity: float,
         color: gui.Color,
     ) -> gui.Color:
+        color = gui.Color(color)
         if count_distance == 0:
             return color
         min_alpha_f = min_opacity / 100.0
