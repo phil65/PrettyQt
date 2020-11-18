@@ -69,6 +69,12 @@ class Painter(QtGui.QPainter):
         yield self
         self.end()
 
+    @contextlib.contextmanager
+    def backup_state(self):
+        self.save()
+        yield self
+        self.restore()
+
     def draw_image(
         self,
         target: Union[QtCore.QPoint, QtCore.QPointF, QtCore.QRect, QtCore.QRectF],
