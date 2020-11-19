@@ -481,3 +481,11 @@ def test_window():
 
 def test_validator():
     gui.Validator()
+
+
+def test_vector4d():
+    vector = gui.Vector4D(0, 0, 0, 1)
+    assert abs(vector) == 1.0
+    assert bool(vector) is True
+    vector.to_point()
+    vector.to_pointf()

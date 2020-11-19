@@ -71,7 +71,8 @@ from .textcursor import TextCursor
 from .syntaxhighlighter import SyntaxHighlighter
 from .pdfwriter import PdfWriter
 from .desktopservices import DesktopServices
-
+from .matrix4x4 import Matrix4x4
+from .vector4d import Vector4D
 
 __all__ = [
     "KeyEvent",
@@ -133,4 +134,6 @@ __all__ = [
     "Surface",
     "Window",
     "DesktopServices",
+    "Matrix4x4",
+    "Vector4D",
 ]
