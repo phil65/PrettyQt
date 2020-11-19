@@ -53,7 +53,31 @@ from .graphicsopacityeffect import GraphicsOpacityEffect
 from .graphicsscene import GraphicsScene
 from .graphicsview import GraphicsView
 from .styleoption import StyleOption
+from .styleoptionbutton import StyleOptionButton
 from .styleoptioncomplex import StyleOptionComplex
+from .styleoptiondockwidget import StyleOptionDockWidget
+from .styleoptionfocusrect import StyleOptionFocusRect
+from .styleoptionframe import StyleOptionFrame
+from .styleoptiongraphicsitem import StyleOptionGraphicsItem
+from .styleoptionheader import StyleOptionHeader
+from .styleoptionmenuitem import StyleOptionMenuItem
+from .styleoptionprogressbar import StyleOptionProgressBar
+from .styleoptionrubberband import StyleOptionRubberBand
+from .styleoptiontab import StyleOptionTab
+from .styleoptiontabbarbase import StyleOptionTabBarBase
+from .styleoptiontabwidgetframe import StyleOptionTabWidgetFrame
+from .styleoptiontoolbar import StyleOptionToolBar
+from .styleoptiontoolbox import StyleOptionToolBox
+from .styleoptionviewitem import StyleOptionViewItem
+
+from .styleoptioncombobox import StyleOptionComboBox
+from .styleoptiongroupbox import StyleOptionGroupBox
+from .styleoptionsizegrip import StyleOptionSizeGrip
+from .styleoptionslider import StyleOptionSlider
+from .styleoptionspinbox import StyleOptionSpinBox
+from .styleoptiontitlebar import StyleOptionTitleBar
+from .styleoptiontoolbutton import StyleOptionToolButton
+
 from .stylepainter import StylePainter
 from .stylefactory import StyleFactory
 from .pushbutton import PushButton
@@ -65,8 +89,6 @@ from .errormessage import ErrorMessage
 from .filesystemmodel import FileSystemModel
 
 from .slider import Slider
-from .styleoptionslider import StyleOptionSlider
-from .styleoptionframe import StyleOptionFrame
 
 from .dockwidget import DockWidget
 from .action import Action
@@ -220,7 +242,27 @@ __all__ = [
     "GridLayout",
     "ToolBox",
     "Slider",
+    "StyleOptionButton",
+    "StyleOptionDockWidget",
+    "StyleOptionFocusRect",
+    "StyleOptionGraphicsItem",
+    "StyleOptionHeader",
+    "StyleOptionMenuItem",
+    "StyleOptionProgressBar",
+    "StyleOptionRubberBand",
+    "StyleOptionTab",
+    "StyleOptionTabBarBase",
+    "StyleOptionTabWidgetFrame",
+    "StyleOptionToolBar",
+    "StyleOptionToolBox",
+    "StyleOptionViewItem",
+    "StyleOptionComboBox",
+    "StyleOptionGroupBox",
+    "StyleOptionSizeGrip",
     "StyleOptionSlider",
+    "StyleOptionSpinBox",
+    "StyleOptionTitleBar",
+    "StyleOptionToolButton",
     "StyleOptionFrame",
     "Frame",
     "ListWidgetItem",

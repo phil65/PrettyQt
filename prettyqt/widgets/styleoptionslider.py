@@ -1,5 +1,10 @@
 from qtpy import QtCore, QtWidgets
 
+from prettyqt import widgets
+
+
+QtWidgets.QStyleOptionSlider.__bases__ = (widgets.StyleOptionComplex,)
+
 
 class StyleOptionSlider(QtWidgets.QStyleOptionSlider):
     def is_horizontal(self) -> bool:
