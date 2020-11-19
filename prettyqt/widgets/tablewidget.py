@@ -17,7 +17,6 @@ class TableWidget(QtWidgets.QTableWidget):
         return self.item(*index)
 
     def __setitem__(self, index, value):
-        print(index, value)
         self.setItem(index[0], index[1], value)
 
 
