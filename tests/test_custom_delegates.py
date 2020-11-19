@@ -35,3 +35,17 @@ def test_nofocusdelegate(qtbot, tablewidget):
     tablewidget.show()
     tablewidget.setItemDelegateForColumn(0, delegate)
     tablewidget.hide()
+
+
+def test_stardelegate(qtbot, tablewidget):
+    delegate = custom_delegates.StarDelegate()
+    tablewidget.show()
+    tablewidget.setItemDelegateForColumn(0, delegate)
+    tablewidget.hide()
+
+
+def test_progressbardelegate(qtbot, tablewidget):
+    delegate = custom_delegates.ProgressBarDelegate()
+    tablewidget.show()
+    tablewidget.setItemDelegateForColumn(0, delegate)
+    tablewidget.hide()
