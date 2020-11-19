@@ -15,7 +15,7 @@ import os
 import pytest
 from qtpy import QtCore
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, gui, widgets, constants
 from prettyqt.utils import InvalidParamError
 
 clsmembers = inspect.getmembers(widgets, inspect.isclass)
@@ -574,11 +574,17 @@ def test_listwidget(qtbot):
 
 def test_listwidgetitem(qtbot):
     item = widgets.ListWidgetItem()
+    item[constants.USER_ROLE] = "test"
+    assert item[constants.USER_ROLE] == "test"
     item.set_icon("mdi.timer")
     item.set_checkstate("unchecked")
     with pytest.raises(InvalidParamError):
         item.set_checkstate("test")
     assert item.get_checkstate() == "unchecked"
+    item.get_background()
+    item.get_foreground()
+    item.get_font()
+    item.get_icon()
 
 
 def test_mainwindow(qtbot):
@@ -1063,6 +1069,21 @@ def test_tablewidget(qtbot, tablewidget):
     assert tablewidget[0, 0] == item
 
 
+def test_tablewidgetitem(qtbot):
+    item = widgets.TableWidgetItem()
+    item[constants.USER_ROLE] = "test"
+    assert item[constants.USER_ROLE] == "test"
+    item.set_icon("mdi.timer")
+    item.set_checkstate("unchecked")
+    with pytest.raises(InvalidParamError):
+        item.set_checkstate("test")
+    assert item.get_checkstate() == "unchecked"
+    item.get_background()
+    item.get_foreground()
+    item.get_font()
+    item.get_icon()
+
+
 def test_toolbox(qtbot):
     w = widgets.RadioButton("test1")
     w2 = widgets.RadioButton("test2")
@@ -1136,6 +1157,14 @@ def test_treewidgetitem(qtbot):
     with pytest.raises(InvalidParamError):
         item.set_checkstate("test")
     assert item.get_checkstate() == "unchecked"
+    item.get_background()
+    item.get_foreground()
+    item.get_font()
+    item.get_icon()
+    item.set_child_indicator_policy("dont_show")
+    with pytest.raises(InvalidParamError):
+        item.set_child_indicator_policy("test")
+    assert item.get_child_indicator_policy() == "dont_show"
 
 
 def test_undocommand():

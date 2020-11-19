@@ -17,6 +17,12 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
     def __repr__(self):
         return f"ListWidgetItem({self.icon()}, {self.text()!r})"
 
+    def __setitem__(self, index: int, value):
+        self.setData(index, value)
+
+    def __getitem__(self, index: int):
+        return self.data(index)
+
     def serialize_fields(self):
         return dict(
             text=self.text(),
@@ -67,6 +73,18 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
             checkstate
         """
         return STATES.inv[self.checkState()]
+
+    def get_background(self) -> gui.Brush:
+        return gui.Brush(self.background())
+
+    def get_foreground(self) -> gui.Brush:
+        return gui.Brush(self.foreground())
+
+    def get_font(self) -> gui.Font:
+        return gui.Font(self.font())
+
+    def get_icon(self) -> gui.Icon:
+        return gui.Icon(self.icon())
 
 
 if __name__ == "__main__":
