@@ -232,6 +232,12 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             raise InvalidParamError(attribute, ATTRIBUTES)
         self.setAttribute(ATTRIBUTES[attribute], state)
 
+    def set_attributes(self, **kwargs: Dict[str, bool]) -> None:
+        for attribute, state in kwargs.items():
+            if attribute not in ATTRIBUTES:
+                raise InvalidParamError(attribute, ATTRIBUTES)
+            self.setAttribute(ATTRIBUTES[attribute], state)
+
     def set_modality(self, modality: str = "window") -> None:
         """Set modality for the dialog.
 
