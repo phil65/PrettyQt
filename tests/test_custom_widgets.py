@@ -225,7 +225,7 @@ def test_labeledslider(qtbot, qttester):
     qtbot.addWidget(slider)
     qttester.send_mousepress(slider.sl, QtCore.Qt.LeftButton)
     qttester.send_mousemove(slider.sl, core.Point(20, 20))
-    slider.paintEvent(None)
+    slider.repaint()
     slider.hide()
 
 
@@ -321,7 +321,7 @@ def test_spanslider(qtbot, qttester):
     slider._swap_controls()
     slider.trigger_action(slider.SliderNoAction, True)
     slider.trigger_action(slider.SliderSingleStepAdd, True)
-    slider.paintEvent(None)
+    slider.repaint()
     slider._pixel_pos_to_value(100)
     slider._draw_span(gui.Painter(), core.Rect())
     slider._move_pressed_handle()
@@ -336,7 +336,7 @@ def test_spanslider(qtbot, qttester):
 def test_waitingspinner(qtbot):
     test_widget = widgets.Widget()
     spinner = custom_widgets.WaitingSpinner(parent=test_widget)
-    spinner.paintEvent(None)
+    spinner.repaint()
     spinner.set_line_num(2)
     assert spinner.line_num() == 2
     spinner.set_line_length(2)
