@@ -229,8 +229,8 @@ def test_dialog(qtbot, qttester):
     dlg.delete_on_close()
     dlg.add_widget(widgets.RadioButton("test"))
     dlg.set_icon("mdi.timer")
-    dlg.resize(0, 400)
-    dlg.resize((0, 400))
+    dlg.resize(200, 400)
+    dlg.resize((150, 400))
     dlg.add_buttonbox()
 
 
@@ -590,7 +590,9 @@ def test_listwidgetitem(qtbot):
 def test_mainwindow(qtbot):
     window = widgets.MainWindow()
     window.set_icon("mdi.timer")
+    window.set_id("mainwindow")
     dockwidget = widgets.DockWidget()
+    dockwidget.set_id("dockwidget")
     window.add_dockwidget(dockwidget, "left")
     widget = widgets.MainWindow()
     widget.set_id("test")
@@ -846,7 +848,8 @@ def test_spinbox(qtbot):
 
 
 def test_splashscreen(qtbot):
-    scr = widgets.SplashScreen(path="", width=100)
+    pixmap = gui.Pixmap.create_dot()
+    scr = widgets.SplashScreen(path=pixmap, width=100)
     with scr:
         pass
     scr.set_text("test")
@@ -1247,9 +1250,13 @@ def test_widget(qtbot):
         widget.set_modality("test")
     assert widget.get_modality() == "window"
     widget.center()
+    widget = widgets.Widget()
     widget.set_layout("horizontal", margin=2)
+    widget = widgets.Widget()
     widget.set_layout("form")
+    widget = widgets.Widget()
     widget.set_layout("stacked")
+    widget = widgets.Widget()
     widget.set_layout("flow")
     widget.set_margin(2)
 
