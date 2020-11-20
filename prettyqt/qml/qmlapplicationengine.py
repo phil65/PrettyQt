@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union, Iterator
+from typing import Union, Iterator, Optional
 
 from qtpy import QtQml, QtCore
 
@@ -15,7 +15,9 @@ class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
         return iter(self.rootObjects())
 
     def load_data(
-        self, data: Union[QtCore.QByteArray, bytes, str], url: Union[QtCore.QUrl, str]
+        self,
+        data: Union[QtCore.QByteArray, bytes, str],
+        url: Optional[Union[QtCore.QUrl, str]] = None,
     ):
         if isinstance(data, str):
             data = data.encode()
@@ -23,4 +25,6 @@ class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
             data = QtCore.QByteArray(data)
         if isinstance(url, str):
             url = core.Url.from_user_input(url)
+        elif url is None:
+            url = core.Url()
         self.loadData(data, url)

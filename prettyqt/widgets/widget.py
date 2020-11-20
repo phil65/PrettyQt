@@ -87,7 +87,8 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def __setstate__(self, state: Dict[str, Any]) -> None:
         super().__init__()
-        self.set_layout(state["layout"])
+        if self.layout() is None:
+            self.set_layout(state["layout"])
         self.setSizePolicy(state["size_policy"])
         self.setAccessibleName(state["accessible_name"])
         self.setToolTip(state.get("tool_tip", ""))

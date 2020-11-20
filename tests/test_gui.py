@@ -264,33 +264,38 @@ def test_textdocument():
 
 
 def test_painter():
-    painter = gui.Painter(gui.Image())
-    painter.use_antialiasing()
-    painter.set_pen("none")
-    painter.set_transparent_background(False)
-    painter.set_transparent_background(True)
-    painter.set_brush(gui.Brush())
-    with painter.paint_on(widgets.Widget()):
-        pass
-    painter.set_brush(gui.Color("red"))
-    painter.fill_rect((0, 1, 3, 5), "transparent")
-    painter.fill_rect(core.Rect(), "transparent")
-    with pytest.raises(InvalidParamError):
-        painter.fill_rect(core.Rect(), "transparent", "test")
-    with pytest.raises(ValueError):
-        painter.fill_rect(core.Rect(), "testus")
-    painter.set_color("black")
-    painter.set_composition_mode("source_atop")
-    painter.get_composition_mode() == "source_atop"
-    with pytest.raises(InvalidParamError):
-        painter.set_composition_mode("test")
-    painter.set_clip_path(gui.PainterPath(), "replace")
-    with pytest.raises(InvalidParamError):
-        painter.set_clip_path(gui.PainterPath(), "test")
-    with pytest.raises(InvalidParamError):
-        painter.set_pen("test")
-    with painter.backup_state():
-        pass
+    class Test(widgets.Widget):
+        def paintEvent(self, event):
+            painter = gui.Painter(self)
+            painter.use_antialiasing()
+            painter.set_pen("none")
+            painter.set_transparent_background(False)
+            painter.set_transparent_background(True)
+            painter.set_brush(gui.Brush())
+            with painter.paint_on(widgets.Widget()):
+                pass
+            painter.set_brush(gui.Color("red"))
+            painter.fill_rect((0, 1, 3, 5), "transparent")
+            painter.fill_rect(core.Rect(), "transparent")
+            with pytest.raises(InvalidParamError):
+                painter.fill_rect(core.Rect(), "transparent", "test")
+            with pytest.raises(ValueError):
+                painter.fill_rect(core.Rect(), "testus")
+            painter.set_color("black")
+            painter.set_composition_mode("source_atop")
+            painter.get_composition_mode() == "source_atop"
+            with pytest.raises(InvalidParamError):
+                painter.set_composition_mode("test")
+            painter.set_clip_path(gui.PainterPath(), "replace")
+            with pytest.raises(InvalidParamError):
+                painter.set_clip_path(gui.PainterPath(), "test")
+            with pytest.raises(InvalidParamError):
+                painter.set_pen("test")
+            with painter.backup_state():
+                pass
+
+    w = Test()
+    w.repaint()
     # assert painter.get_composition_mode() == "source_atop"
 
 

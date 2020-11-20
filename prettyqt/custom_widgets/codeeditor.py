@@ -61,24 +61,26 @@ class CodeEditor(widgets.PlainTextEdit):
             self.update_line_area_width(0)
 
     def line_area_paintevent(self, event):
-        painter = gui.Painter(self.line_area)
-        painter.fill_rect(event.rect(), "lightgray")
+        with gui.Painter(self.line_area) as painter:
+            painter.fill_rect(event.rect(), "lightgray")
 
-        block = self.firstVisibleBlock()
-        block_number = block.blockNumber()
-        top = self.blockBoundingGeometry(block).translated(self.contentOffset()).top()
-        bottom = top + self.blockBoundingRect(block).height()
-        width = self.line_area.width()
-        height = self.fontMetrics().height()
-        painter.set_color("black")
-        while block.isValid() and (top <= event.rect().bottom()):
-            if block.isVisible() and (bottom >= event.rect().top()):
-                number = str(block_number + 1)
-                painter.drawText(0, int(top), width, height, QtCore.Qt.AlignRight, number)
-            block = block.next()
-            top = bottom
+            block = self.firstVisibleBlock()
+            block_number = block.blockNumber()
+            top = self.blockBoundingGeometry(block).translated(self.contentOffset()).top()
             bottom = top + self.blockBoundingRect(block).height()
-            block_number += 1
+            width = self.line_area.width()
+            height = self.fontMetrics().height()
+            painter.set_color("black")
+            while block.isValid() and (top <= event.rect().bottom()):
+                if block.isVisible() and (bottom >= event.rect().top()):
+                    number = str(block_number + 1)
+                    painter.drawText(
+                        0, int(top), width, height, QtCore.Qt.AlignRight, number
+                    )
+                block = block.next()
+                top = bottom
+                bottom = top + self.blockBoundingRect(block).height()
+                block_number += 1
 
 
 if __name__ == "__main__":

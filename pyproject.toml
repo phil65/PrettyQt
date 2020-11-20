@@ -64,7 +64,7 @@ testpaths = [
 ]
 junit_family = "xunit2"
 qt_api = "pyqt5"
-qt_log_level_fail = "CRITICAL"
+qt_log_level_fail = "INFO"
 log_cli = true
 log_format = "%(asctime)s %(levelname)s %(message)s"
 log_date_format = "%Y-%m-%d %H:%M:%S"

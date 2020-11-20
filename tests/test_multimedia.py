@@ -52,14 +52,16 @@ def test_camera():
     cam.get_requested_locks()
 
 
-def test_camerafocus():
+def test_camerafocus(qtlog):
     cam = multimedia.Camera()
     focus = cam.get_focus()
-    focus.set_focus_mode("auto")
+    with qtlog.disabled():
+        focus.set_focus_mode("auto")
     with pytest.raises(InvalidParamError):
         focus.set_focus_mode("test")
     assert focus.get_focus_mode() == "auto"
-    focus.set_focus_point_mode("auto")
+    with qtlog.disabled():
+        focus.set_focus_point_mode("auto")
     with pytest.raises(InvalidParamError):
         focus.set_focus_point_mode("test")
     assert focus.get_focus_point_mode() == "auto"

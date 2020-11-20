@@ -187,8 +187,7 @@ def test_codeeditor(qtbot):
     editor.set_syntaxhighlighter("python")
     event = QtGui.QResizeEvent(core.Size(10, 10), core.Size(20, 20))
     editor.resizeEvent(event)
-    event = QtGui.QPaintEvent(core.Rect(0, 0, 20, 20))
-    editor.line_area_paintevent(event)
+    editor.repaint()
 
 
 def test_imageviewer(qtbot):
@@ -323,7 +322,6 @@ def test_spanslider(qtbot, qttester):
     slider.trigger_action(slider.SliderSingleStepAdd, True)
     slider.repaint()
     slider._pixel_pos_to_value(100)
-    slider._draw_span(gui.Painter(), core.Rect())
     slider._move_pressed_handle()
     qttester.send_mousepress(slider, QtCore.Qt.LeftButton)
     qttester.send_mousemove(slider, core.Point(20, 20))

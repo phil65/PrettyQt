@@ -6,6 +6,7 @@
 import sys
 import pathlib
 import pickle
+import tempfile
 
 import pytest
 
@@ -20,11 +21,11 @@ def test_animationgroup():
     anim2 = core.PropertyAnimation()
     group += anim
     group += anim2
+    group[1] = core.PropertyAnimation()
     assert group[0] == anim
     assert len(group) == 2
     del group[0]
     assert len(group) == 1
-    group[1] = core.PropertyAnimation()
 
 
 def test_abstracttablemodel():
@@ -151,7 +152,8 @@ def test_easingcurve():
 
 
 def test_file():
-    buf = core.File()
+    tf = tempfile.NamedTemporaryFile()
+    buf = core.File(tf.name)
     with buf.open_file("read_only"):
         pass
     str(buf)
@@ -264,7 +266,8 @@ def test_pointf():
 
 
 def test_process():
-    process = core.Process()
+    obj = core.Object()
+    process = core.Process(obj)
     process.set_read_channel("error")
     with pytest.raises(InvalidParamError):
         process.set_read_channel("test")
@@ -277,10 +280,10 @@ def test_process():
     with pytest.raises(InvalidParamError):
         process.set_process_channel_mode("test")
     assert process.get_process_channel_mode() == "forwarded_error"
-    process.set_state("starting")
+    process.set_state("not_running")
     with pytest.raises(InvalidParamError):
         process.set_state("test")
-    assert process.get_state() == "starting"
+    assert process.get_state() == "not_running"
 
 
 def test_propertyanimation():
@@ -299,6 +302,7 @@ def test_propertyanimation():
     assert animation.get_property_name() == "geometry"
     with pytest.raises(InvalidParamError):
         animation.start_animation("test")
+    animation.setEndValue(core.Rect(20, 50, 70, 89))
     animation.start_animation("keep")
     animation[0] = 1
     assert animation[0] == 1
