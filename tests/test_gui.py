@@ -159,6 +159,11 @@ def test_icon():
         pickle.dump(icon, jar)
     with open("data.pkl", "rb") as jar:
         icon = pickle.load(jar)
+    with pytest.raises(InvalidParamError):
+        icon.get_available_sizes(mode="test")
+    with pytest.raises(InvalidParamError):
+        icon.get_available_sizes(state="test")
+    icon.get_available_sizes()
 
 
 def test_image():

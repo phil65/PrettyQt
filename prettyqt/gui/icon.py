@@ -3,14 +3,23 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Union, Optional, Dict, Tuple
+from typing import Union, Optional, Dict, Tuple, List
 
 
 import qtawesome as qta
 from qtpy import QtGui
 
 from prettyqt import core, gui
+from prettyqt.utils import bidict, InvalidParamError
 
+MODES = bidict(
+    normal=QtGui.QIcon.Normal,
+    disabled=QtGui.QIcon.Disabled,
+    active=QtGui.QIcon.Active,
+    selected=QtGui.QIcon.Selected,
+)
+
+STATES = bidict(off=QtGui.QIcon.Off, on=QtGui.QIcon.On)
 
 IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
 
@@ -78,6 +87,15 @@ class Icon(QtGui.QIcon):
     @classmethod
     def from_image(cls, image: QtGui.QImage):
         return cls(gui.Pixmap.fromImage(image))
+
+    def get_available_sizes(
+        self, mode: str = "normal", state: str = "off"
+    ) -> List[core.Size]:
+        if mode not in MODES:
+            raise InvalidParamError(mode, MODES)
+        if state not in STATES:
+            raise InvalidParamError(state, STATES)
+        return [core.Size(i) for i in self.availableSizes(MODES[mode], STATES[state])]
 
     def get_pixmap(self, size: int) -> QtGui.QPixmap:
         size = core.Size(size, size)
