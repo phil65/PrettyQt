@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from qtpy import QtCore, QtWidgets
+from typing import Union, Optional
+import pathlib
+
+from qtpy import QtCore, QtWidgets, QtGui
 
 from prettyqt import gui, widgets
 from prettyqt.utils import bidict
@@ -25,8 +28,10 @@ QtWidgets.QSplashScreen.__bases__ = (widgets.Widget,)
 
 
 class SplashScreen(QtWidgets.QSplashScreen):
-    def __init__(self, path, width=None):
-        pix = gui.Pixmap(str(path))
+    def __init__(
+        self, path: Union[pathlib.Path, str, QtGui.QPixmap], width: Optional[int] = None
+    ):
+        pix = gui.Pixmap(str(path)) if not isinstance(path, QtGui.QPixmap) else path
         if width:
             pix = pix.scaledToWidth(width)
         super().__init__(pix)
