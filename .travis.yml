@@ -38,6 +38,7 @@ addons:
       - libflite1
       - libqt5texttospeech5
       - libqt5bluetooth5
+      - pulseaudio
       - qtspeech5-flite-plugin
       - speech-dispatcher
       - speech-dispatcher-flite
