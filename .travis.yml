@@ -37,6 +37,7 @@ addons:
       - flite
       - libflite1
       - libqt5texttospeech5
+      - libqt5bluetooth5
       - qtspeech5-flite-plugin
       - speech-dispatcher
       - speech-dispatcher-flite
