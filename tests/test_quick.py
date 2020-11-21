@@ -26,6 +26,7 @@ def test_quickview():
     view = quick.QuickView()
     location = core.StandardPaths.get_writable_location("cache")
     path = location / "test.qml"
+    path.touch(exist_ok=True)
     path.write_text(QML_CONTENT)
     view.set_source(path)
     assert view.get_source() == path

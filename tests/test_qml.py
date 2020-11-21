@@ -48,8 +48,9 @@ def test_qmlengine():
     engine.get_import_paths()
 
 
-def test_qmlapplicationengine():
-    engine = qml.QmlApplicationEngine()
+def test_qmlapplicationengine(qtlog):
+    with qtlog.disabled():
+        engine = qml.QmlApplicationEngine()
     for item in engine:
         pass
     engine.load_data(QML_CONTENT)

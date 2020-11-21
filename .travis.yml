@@ -29,15 +29,18 @@ addons:
       - gstreamer1.0-alsa
       - gstreamer1.0-libav
       - libxvidcore4
+      - qt5-image-formats-plugins
       - bluez
       - python3-pyqt5
       - python3-pyqt5.qtwebengine
       # - libspeechd-dev
       # - libspeechd2
+      - speech-dispatcher-espeak-ng
       - flite
       - libflite1
       - libqt5texttospeech5
       - libqt5bluetooth5
+      - libqt5svg5
       - pulseaudio
       - qtspeech5-flite-plugin
       - speech-dispatcher
@@ -49,6 +52,12 @@ services:
 env:
   global:
     - QT_DEBUG_PLUGINS=1
+
+before_install:
+  - systemctl --user start pulseaudio.service
+  # - systemctl --user enable bluetooth.service
+  # - systemctl --user start bluetooth.service
+  - speech-dispatcher -d
 # Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
 install:
   - pip install --upgrade pip
