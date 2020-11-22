@@ -6,6 +6,8 @@ contains QtQuick-based classes
 """
 
 from .quickview import QuickView
+from .quickitem import QuickItem
+from .quickwindow import QuickWindow
 
 
-__all__ = ["QuickView"]
+__all__ = ["QuickView", "QuickItem", "QuickWindow"]
