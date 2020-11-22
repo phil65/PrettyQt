@@ -3,24 +3,11 @@
 
 """Tests for `prettyqt` package."""
 
-import pytest
+import pathlib
 
+import pytest
 from prettyqt import qml, core
 from prettyqt.utils import InvalidParamError
-
-QML_CONTENT = """import QtQuick 2.3
-
-Rectangle {
-    width: 200
-    height: 100
-    color: "red"
-
-    Text {
-        anchors.centerIn: parent
-        text: "Hello, World!"
-    }
-}"""
-
 
 # def test_jsvalue():
 #     val = qml.JSValue(2)
@@ -53,7 +40,8 @@ def test_qmlapplicationengine(qtlog):
         engine = qml.QmlApplicationEngine()
         for item in engine:
             pass
-        engine.load_data(QML_CONTENT)
+        path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
+        engine.load_data(path.read_text())
 
 
 def test_qmlcomponent():
