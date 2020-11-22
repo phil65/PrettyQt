@@ -20,8 +20,11 @@ from .surface import Surface
 from .window import Window
 from .icon import Icon
 from .paintdevice import PaintDevice
+from .paintdevicewindow import PaintDeviceWindow
 from .pixmap import Pixmap
 from .image import Image
+from .openglwindow import OpenGLWindow
+from .rasterwindow import RasterWindow
 from .clipboard import Clipboard
 from .guiapplication import GuiApplication
 from .validator import Validator
@@ -136,4 +139,7 @@ __all__ = [
     "DesktopServices",
     "Matrix4x4",
     "Vector4D",
+    "PaintDeviceWindow",
+    "OpenGLWindow",
+    "RasterWindow",
 ]

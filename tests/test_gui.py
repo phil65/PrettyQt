@@ -299,6 +299,15 @@ def test_painter():
     # assert painter.get_composition_mode() == "source_atop"
 
 
+def test_openglwindow(qapp):
+    wnd = gui.OpenGLWindow()
+    print(bool(wnd))
+    wnd.show()
+    print(bool(wnd))
+    assert wnd.get_update_behaviour() == "no_partial"
+    wnd.grab_framebuffer()
+
+
 def test_pagelayout():
     layout = gui.PageLayout()
     with pytest.raises(InvalidParamError):
