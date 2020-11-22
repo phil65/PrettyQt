@@ -14,6 +14,7 @@ from qtpy.QtCore import QPointF as PointF
 from qtpy.QtCore import QSizeF as SizeF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
+from qtpy.QtCore import qInstallMessageHandler as install_message_handler
 from .uuid import Uuid
 from .line import Line
 from .linef import LineF
@@ -169,4 +170,5 @@ __all__ = [
     "AbstractTransition",
     "SignalTransition",
     "EventTransition",
+    "install_message_handler",
 ]
