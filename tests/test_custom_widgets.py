@@ -251,8 +251,9 @@ def test_markdownwidget(qtbot):
     custom_widgets.MarkdownWindow()
 
 
-def test_player(qtbot):
-    player = custom_widgets.Player()
+def test_player(qtbot, qtlog):
+    with qtlog.disabled():
+        player = custom_widgets.Player()
     player.previous_clicked()
     player._update_buttons(0)
 

@@ -9,9 +9,10 @@ from prettyqt import location, core
 from prettyqt.utils import InvalidParamError
 
 
-def test_geocodingmanager():
-    provider = location.GeoServiceProvider("osm")
-    manager = provider.get_geocoding_manager()
+def test_geocodingmanager(qtlog):
+    with qtlog.disabled():
+        provider = location.GeoServiceProvider("osm")
+        manager = provider.get_geocoding_manager()
     manager.get_locale()
 
 
