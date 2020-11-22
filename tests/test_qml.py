@@ -51,9 +51,9 @@ def test_qmlengine():
 def test_qmlapplicationengine(qtlog):
     with qtlog.disabled():
         engine = qml.QmlApplicationEngine()
-    for item in engine:
-        pass
-    engine.load_data(QML_CONTENT)
+        for item in engine:
+            pass
+        engine.load_data(QML_CONTENT)
 
 
 def test_qmlcomponent():
