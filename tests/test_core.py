@@ -168,6 +168,14 @@ def test_historystate():
         state.set_history_type("test")
 
 
+def test_itemselection():
+    selection = core.ItemSelection()
+    index = core.ModelIndex()
+    assert index not in selection
+    for idx in selection:
+        pass
+
+
 def test_library():
     lib = core.Library()
     assert bool(lib) is False

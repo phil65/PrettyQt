@@ -77,6 +77,7 @@ from .threadpool import ThreadPool
 from .dir import Dir
 from .event import Event
 from .itemselectionmodel import ItemSelectionModel
+from .itemselection import ItemSelection
 from .diriterator import DirIterator
 from .abstractitemmodel import AbstractItemModel
 from .abstractproxymodel import AbstractProxyModel
@@ -150,6 +151,7 @@ __all__ = [
     "Event",
     "DirIterator",
     "ItemSelectionModel",
+    "ItemSelection",
     "Slot",
     "Property",
     "RegularExpressionMatch",
