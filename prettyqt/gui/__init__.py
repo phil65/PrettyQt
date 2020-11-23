@@ -63,6 +63,7 @@ from .pen import Pen
 from .picture import Picture
 from .painter import Painter
 from .painterpath import PainterPath
+from .painterpathstroker import PainterPathStroker
 from .palette import Palette
 from .cursor import Cursor
 from .polygon import Polygon
@@ -126,6 +127,7 @@ __all__ = [
     "Pixmap",
     "Painter",
     "PainterPath",
+    "PainterPathStroker",
     "Palette",
     "Cursor",
     "Polygon",

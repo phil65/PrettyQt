@@ -391,6 +391,18 @@ def test_painterpath():
     path.add_rect(QtCore.QRect(0, 0, 1, 1))
 
 
+def test_painterpathstroker():
+    stroke = gui.PainterPathStroker()
+    stroke.set_cap_style("round")
+    with pytest.raises(InvalidParamError):
+        stroke.set_cap_style("test")
+    assert stroke.get_cap_style() == "round"
+    stroke.set_join_style("bevel")
+    with pytest.raises(InvalidParamError):
+        stroke.set_join_style("test")
+    assert stroke.get_join_style() == "bevel"
+
+
 def test_palette():
     pal = gui.Palette()
     assert len(pal.get_colors()) == 11
