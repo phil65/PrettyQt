@@ -95,8 +95,6 @@ TYPE_OF_SERVICE = bidict(
     routine=0,
 )
 
-OPEN_MODES = core.iodevice.OPEN_MODES  # type: ignore
-
 QtNetwork.QAbstractSocket.__bases__ = (core.IODevice,)
 
 
@@ -123,8 +121,8 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
         open_mode: Union[int, str] = "read_write",
         protocol: Union[int, str] = "any_ip",
     ):
-        if open_mode in OPEN_MODES:
-            open_mode = OPEN_MODES[open_mode]
+        if open_mode in core.iodevice.OPEN_MODES:
+            open_mode = core.iodevice.OPEN_MODES[open_mode]
         if protocol in NETWORK_LAYER_PROTOCOL:
             protocol = NETWORK_LAYER_PROTOCOL[protocol]
         super().connectToHost(hostname, port, open_mode, protocol)
