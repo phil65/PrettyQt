@@ -263,6 +263,12 @@ def test_object(qapp):
     layout.restore_widget_states()
 
 
+def test_pluginloader():
+    lib = core.PluginLoader()
+    lib.set_load_hints(deep_bind=True)
+    assert lib.get_load_hints() == ["deep_bind"]
+
+
 def test_point():
     p = core.Point()
     repr(p)

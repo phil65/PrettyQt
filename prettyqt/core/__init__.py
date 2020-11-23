@@ -23,6 +23,7 @@ from .deadlinetimer import DeadlineTimer
 from .object import Object
 from .margins import Margins
 from .library import Library
+from .pluginloader import PluginLoader
 from .locale import Locale
 from .eventloop import EventLoop
 from .abstractanimation import AbstractAnimation
@@ -108,6 +109,7 @@ __all__ = [
     "ByteArray",
     "Url",
     "Library",
+    "PluginLoader",
     "UrlQuery",
     "CoreApplication",
     "IODevice",
