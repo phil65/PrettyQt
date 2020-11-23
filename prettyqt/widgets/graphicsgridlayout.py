@@ -5,7 +5,7 @@ from typing import Tuple, Optional, Union
 from qtpy import QtWidgets
 
 from prettyqt import widgets, constants
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 ALIGNMENTS = bidict(
@@ -77,33 +77,35 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
         rowspan: int = 1,
         colspan: int = 1,
     ):
-        if isinstance(item, QtWidgets.QWidget):
-            self.addWidget(item, rowstart, colstart, rowspan, colspan)
-        elif isinstance(item, QtWidgets.QLayout):
-            self.addLayout(item, rowstart, colstart, rowspan, colspan)
-        else:
-            self.addItem(item, rowstart, colstart, rowspan, colspan)
+        self.addItem(item, rowstart, colstart, rowspan, colspan)
 
     def append(self, item: QtWidgets.QGraphicsLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
     def set_column_alignment(self, column: int, alignment: str):
+        if alignment not in ALIGNMENTS:
+            raise InvalidParamError(alignment, ALIGNMENTS)
         self.setColumnAlignment(column, ALIGNMENTS[alignment])
 
     def set_row_alignment(self, row: int, alignment: str):
+        if alignment not in ALIGNMENTS:
+            raise InvalidParamError(alignment, ALIGNMENTS)
         self.setRowAlignment(row, ALIGNMENTS[alignment])
 
 
 if __name__ == "__main__":
     app = widgets.app()
     layout = GraphicsGridLayout()
-    layout[1, 5:6] = widgets.RadioButton("1 2 3 jk jkjl j kföldsjfköj")
-    layout[3:5, 7:8] = widgets.RadioButton("2")
-    layout[3:5, 1:4] = widgets.RadioButton("3")
-    layout += widgets.RadioButton("3")
-    layout += widgets.RadioButton("4")
-    widget = widgets.Widget()
+    item = widgets.GraphicsProxyWidget()
+    item.setWidget(widgets.RadioButton("Test"))
+    item2 = widgets.GraphicsProxyWidget()
+    item2.setWidget(widgets.RadioButton("Test"))
+    layout[1, 5:6] = item
+    layout += item2
+    widget = widgets.GraphicsWidget()
     widget.set_layout(layout)
-    print(layout)
-    widget.show()
+    scene = widgets.GraphicsScene()
+    scene.add(widget)
+    view = widgets.GraphicsView(scene)
+    view.show()
     app.main_loop()

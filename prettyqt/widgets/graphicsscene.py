@@ -228,6 +228,6 @@ if __name__ == "__main__":
     app = widgets.app()
     scene = GraphicsScene()
     scene.add_line(core.Line(0, 0, 10, 10))
-    scene.show()
+    view = widgets.GraphicsView(scene)
+    view.show()
     app.main_loop()
-    scene.show()
