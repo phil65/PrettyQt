@@ -168,6 +168,14 @@ def test_historystate():
         state.set_history_type("test")
 
 
+def test_library():
+    lib = core.Library()
+    assert bool(lib) is False
+    repr(lib)
+    lib.set_load_hints(deep_bind=True)
+    assert lib.get_load_hints() == ["deep_bind"]
+
+
 def test_libraryinfo():
     core.LibraryInfo.get_location("prefix")
     with pytest.raises(InvalidParamError):

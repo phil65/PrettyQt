@@ -22,6 +22,7 @@ from .easingcurve import EasingCurve
 from .deadlinetimer import DeadlineTimer
 from .object import Object
 from .margins import Margins
+from .library import Library
 from .locale import Locale
 from .eventloop import EventLoop
 from .abstractanimation import AbstractAnimation
@@ -106,6 +107,7 @@ __all__ = [
     "LibraryInfo",
     "ByteArray",
     "Url",
+    "Library",
     "UrlQuery",
     "CoreApplication",
     "IODevice",
