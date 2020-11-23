@@ -1,0 +1,22 @@
+# -*- coding: utf-8 -*-
+
+from qtpy import QtGui
+
+from prettyqt import gui
+
+QtGui.QTextFrame.__bases__ = (gui.TextObject,)
+
+
+class TextFrame(QtGui.QTextFrame):
+    def __repr__(self):
+        return "TextFrame()"
+
+    def get_first_cursor_position(self) -> gui.TextCursor:
+        return gui.TextCursor(self.firstCursorPosition())
+
+    def get_last_cursor_position(self) -> gui.TextCursor:
+        return gui.TextCursor(self.lastCursorPosition())
+
+
+if __name__ == "__main__":
+    doc = TextFrame()

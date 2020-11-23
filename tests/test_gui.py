@@ -542,6 +542,45 @@ def test_textcharformat():
         fmt.set_font_style_hint("test")
 
 
+def test_textobject():
+    doc = gui.TextDocument()
+    obj = gui.TextObject(doc)
+    repr(obj)
+    obj.get_format()
+
+
+def test_textlength():
+    length = gui.TextLength()
+    assert length.get_type() == "variable"
+    repr(length)
+
+
+def test_textformat():
+    fmt = gui.TextFormat()
+    fmt[1] = "test"
+    assert fmt[1] == "test"
+    assert 1 in fmt
+    assert bool(fmt) is False
+    repr(fmt)
+    fmt.get_background()
+    fmt.get_foreground()
+    fmt.get_brush_property(1)
+    fmt.get_pen_property(1)
+    fmt.get_color_property(1)
+    fmt.set_layout_direction("right_to_left")
+    with pytest.raises(InvalidParamError):
+        fmt.set_layout_direction("test")
+    assert fmt.get_layout_direction() == "right_to_left"
+
+
+def test_textframe():
+    doc = gui.TextDocument()
+    frame = gui.TextFrame(doc)
+    repr(frame)
+    frame.get_first_cursor_position()
+    frame.get_last_cursor_position()
+
+
 def test_window():
     wnd = gui.Window()
     assert wnd.get_surface_class() == "window"

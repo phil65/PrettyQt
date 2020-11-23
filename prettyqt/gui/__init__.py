@@ -80,6 +80,10 @@ from .vector4d import Vector4D
 from .imageiohandler import ImageIOHandler
 from .imagereader import ImageReader
 from .imagewriter import ImageWriter
+from .textformat import TextFormat
+from .textobject import TextObject
+from .textlength import TextLength
+from .textframe import TextFrame
 
 __all__ = [
     "KeyEvent",
@@ -150,4 +154,8 @@ __all__ = [
     "ImageIOHandler",
     "ImageReader",
     "ImageWriter",
+    "TextObject",
+    "TextLength",
+    "TextFormat",
+    "TextFrame",
 ]
