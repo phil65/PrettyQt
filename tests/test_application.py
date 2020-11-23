@@ -18,6 +18,7 @@ def test_application(qapp):
     qapp.set_metadata(
         app_name="test", app_version="1.0.0", org_name="test", org_domain="test"
     )
+    qapp.load_language_file("de")
     assert qapp.get_mainwindow() is None
     wnd = widgets.MainWindow()
     mw_widget = widgets.Widget()
@@ -25,6 +26,8 @@ def test_application(qapp):
     wnd.setCentralWidget(mw_widget)
     assert qapp.get_mainwindow() == wnd
     widget = qapp.get_widget(name="test")
+    assert widget == mw_widget
+    widget = widgets.Application["test"]
     assert widget == mw_widget
     qapp.copy_to_clipboard("test")
     with pytest.raises(InvalidParamError):

@@ -270,11 +270,17 @@ def test_doublespinbox(qtbot):
 
 
 def test_filedialog(qtbot):
-    dlg = widgets.FileDialog()
+    dlg = widgets.FileDialog(path_id="test", extension_filter=dict(test=["*.test"]))
     dlg.set_label_text("accept", "test_filedialog")
     dlg.set_accept_mode("open")
     with pytest.raises(InvalidParamError):
         dlg.set_accept_mode("bla")
+    dlg.set_view_mode("detail")
+    with pytest.raises(InvalidParamError):
+        dlg.set_view_mode("bla")
+    dlg.set_label_text("filetype", "test")
+    with pytest.raises(InvalidParamError):
+        dlg.set_label_text("bla", "test")
     dlg.set_accept_mode("save")
     dlg.set_extension_filter(dict(a=[".csv"]))
     dlg.set_filter("all_dirs")
@@ -282,6 +288,8 @@ def test_filedialog(qtbot):
         dlg.set_filter("test")
     dlg.selected_file()
     dlg.selected_files()
+    path = dlg.get_directory()
+    dlg.set_directory(path)
 
 
 def test_filesystemmodel(qtmodeltester):
@@ -367,6 +375,24 @@ def test_graphicsitem(qtbot):
     # item.get_shape()
 
 
+def test_graphicsgridlayout():
+    layout = widgets.GraphicsGridLayout()
+    item = widgets.GraphicsProxyWidget()
+    item.setWidget(widgets.RadioButton("Test"))
+    item2 = widgets.GraphicsProxyWidget()
+    item2.setWidget(widgets.RadioButton("Test"))
+    layout[1, 5:6] = item
+    layout += item2
+    layout.set_column_alignment(0, "left")
+    with pytest.raises(InvalidParamError):
+        layout.set_column_alignment(0, "test")
+    layout.set_row_alignment(0, "left")
+    with pytest.raises(InvalidParamError):
+        layout.set_row_alignment(0, "test")
+    assert len(layout) == 2
+    layout.set_margin(0)
+
+
 def test_graphicsscene(qtbot):
     scene = widgets.GraphicsScene()
     icon = gui.icon.get_icon("mdi.help-circle-outline")
@@ -374,20 +400,23 @@ def test_graphicsscene(qtbot):
     pixmap2 = icon.pixmap(20, 20)
     # item = widgets.GraphicsItem()
     g_1 = scene.add(pixmap)
+    assert scene[0] == g_1
     g_2 = scene.add(pixmap2)
     assert scene.colliding_items(g_1, mode="intersects_bounding_rect") == [g_2]
+    with pytest.raises(InvalidParamError):
+        scene.colliding_items(g_1, mode="test")
     scene.add_line(core.LineF(0, 0, 1, 1))
     scene.add_line(core.Line(0, 0, 1, 1))
     scene.add_line((0, 0, 1, 1))
     scene.add_rect(core.Rect(0, 0, 1, 1))
     scene.add_rect(core.RectF(0, 0, 1, 1))
-    scene.add_rect((0, 0, 1, 1))
+    scene.add_rect((0, 0, 1, 1), brush=gui.Brush(), pen=gui.Pen())
     scene.add_ellipse(core.Rect(0, 0, 1, 1))
     scene.add_ellipse(core.RectF(0, 0, 1, 1))
-    scene.add_ellipse((0, 0, 1, 1))
-    poly = gui.PolygonF()
+    scene.add_ellipse((0, 0, 1, 1), brush=gui.Brush(), pen=gui.Pen())
+    poly = gui.Polygon()
     poly.add_points((0, 0), (2, 0), (2, 1), (0, 1))
-    scene.add_polygon(poly)
+    scene.add_polygon(poly, brush=gui.Brush(), pen=gui.Pen())
     # poly = gui.Polygon()
     # poly.add_points((0, 0), (2, 0), (2, 1), (0, 1))
     # scene.add_polygon(poly)
@@ -395,8 +424,8 @@ def test_graphicsscene(qtbot):
     path = gui.PainterPath()
     rect = core.RectF(0, 0, 1, 1)
     path.addRect(rect)
-    scene.add_path(path)
-    scene.add_text("test")
+    scene.add_path(path, brush=gui.Brush(), pen=gui.Pen())
+    scene.add_text("test", font=gui.Font())
     scene.add_simple_text("test")
     scene.add_widget(widgets.Widget())
     item = widgets.GraphicsRectItem(0, 0, 10, 10)
@@ -1043,6 +1072,7 @@ def test_tableview(qtbot):
     widget.setup_dragdrop_move()
     widget.num_selected()
     widget.jump_to_column(0)
+    # widget.select_last_row()
     widget.set_scroll_mode("item")
     widget.set_vertical_scroll_mode("item")
     widget.set_horizontal_scroll_mode("item")
@@ -1217,10 +1247,12 @@ def test_widget(qtbot):
     widget.set_max_height(None)
     widget.set_font_size(20)
     widget.get_font_metrics()
+    widget.get_font_info()
     widget.set_id("test")
     widget.set_unique_id()
     widget.get_palette()
     widget.set_attribute("native_window")
+    widget.set_attributes(native_window=False)
     with pytest.raises(InvalidParamError):
         widget.set_attribute("test")
     with pytest.raises(InvalidParamError):
