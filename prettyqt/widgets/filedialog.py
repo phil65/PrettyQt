@@ -223,7 +223,7 @@ class FileDialog(QtWidgets.QFileDialog):
         filter_str = ";;".join(items)
         self.setNameFilter(filter_str)
 
-    def directory(self) -> pathlib.Path:
+    def get_directory(self) -> pathlib.Path:
         """Return current directory.
 
         returns current directory level as a Pathlib object
@@ -231,7 +231,7 @@ class FileDialog(QtWidgets.QFileDialog):
         Returns:
             Pathlib object
         """
-        return pathlib.Path(super().directory())
+        return pathlib.Path(self.directory().absolutePath())
 
     def set_directory(self, path: Union[None, str, pathlib.Path]):
         """Set start directory."""
