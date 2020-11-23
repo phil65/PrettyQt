@@ -44,3 +44,7 @@ def test_application(qapp):
     # assert qapp.get_navigation_mode("keypad_directional")
     for widget in qapp:
         pass
+    qapp.set_layout_direction("right_to_left")
+    with pytest.raises(InvalidParamError):
+        qapp.set_layout_direction("test")
+    assert qapp.get_layout_direction() == "right_to_left"

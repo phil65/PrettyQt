@@ -5,7 +5,7 @@ import contextlib
 from qtpy import QtGui, QtCore
 
 from prettyqt import core, gui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 CURSOR_SHAPES = bidict(
     arrow=QtCore.Qt.ArrowCursor,
@@ -33,6 +33,11 @@ CURSOR_SHAPES = bidict(
     bitmap=QtCore.Qt.BitmapCursor,
 )
 
+LAYOUT_DIRECTIONS = bidict(
+    left_to_right=QtCore.Qt.LeftToRight,
+    right_to_left=QtCore.Qt.RightToLeft,
+    auto=QtCore.Qt.LayoutDirectionAuto,
+)
 
 QtGui.QGuiApplication.__bases__ = (core.CoreApplication,)
 
@@ -57,3 +62,28 @@ class GuiApplication(QtGui.QGuiApplication):
     @classmethod
     def get_clipboard(cls) -> gui.Clipboard:
         return gui.Clipboard(cls.clipboard())
+
+    def set_layout_direction(self, direction: str):
+        """Set layout direction.
+
+        Valid values: "left_to_right", "right_to_left", "auto"
+
+        Args:
+            direction: layout direction
+
+        Raises:
+            InvalidParamError: layout direction does not exist
+        """
+        if direction not in LAYOUT_DIRECTIONS:
+            raise InvalidParamError(direction, LAYOUT_DIRECTIONS)
+        self.setLayoutDirection(LAYOUT_DIRECTIONS[direction])
+
+    def get_layout_direction(self) -> str:
+        """Get the current layout direction.
+
+        Possible values: "left_to_right", "right_to_left", "auto"
+
+        Returns:
+            layout direction
+        """
+        return LAYOUT_DIRECTIONS.inv[self.layoutDirection()]
