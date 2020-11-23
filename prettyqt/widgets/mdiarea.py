@@ -26,8 +26,6 @@ TAB_POSITIONS = bidict(
     east=QtWidgets.QTabWidget.East,
 )
 
-PATTERNS = gui.painter.PATTERNS  # type: ignore
-
 QtWidgets.QMdiArea.__bases__ = (widgets.AbstractScrollArea,)
 
 
@@ -129,7 +127,7 @@ class MdiArea(QtWidgets.QMdiArea):
         if isinstance(brush_or_color, QtGui.QBrush):
             self.setBackground(brush_or_color)
         else:
-            pattern = PATTERNS[pattern]
+            pattern = gui.painter.PATTERNS[pattern]
             color = colors.get_color(brush_or_color)
             brush = gui.Brush(color, pattern)
             self.setBackground(brush)

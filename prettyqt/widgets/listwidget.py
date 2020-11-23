@@ -7,7 +7,6 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
 
-SCROLL_HINTS = widgets.abstractitemview.SCROLL_HINTS  # type: ignore
 
 QtWidgets.QListWidget.__bases__ = (widgets.ListView,)
 
@@ -100,9 +99,9 @@ class ListWidget(QtWidgets.QListWidget):
                 break
 
     def scroll_to_item(self, item, mode: str = "ensure_visible"):
-        if mode not in SCROLL_HINTS:
-            raise InvalidParamError(mode, SCROLL_HINTS)
-        self.scrollToItem(item, SCROLL_HINTS[mode])
+        if mode not in widgets.abstractitemview.SCROLL_HINTS:
+            raise InvalidParamError(mode, widgets.abstractitemview.SCROLL_HINTS)
+        self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINTS[mode])
 
 
 if __name__ == "__main__":

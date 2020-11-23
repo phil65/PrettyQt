@@ -56,9 +56,6 @@ ITEM_SELECTION_MODES = bidict(
     intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
 )
 
-SCENE_LAYERS = widgets.graphicsscene.SCENE_LAYERS  # type: ignore
-
-RENDER_HINTS = gui.painter.RENDER_HINTS  # type: ignore
 
 QtWidgets.QGraphicsView.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -83,9 +80,9 @@ class GraphicsView(QtWidgets.QGraphicsView):
         return self.items()[index]
 
     def invalidate_scene(self, rect: QtCore.QRectF, layer: str = "all"):
-        if layer not in SCENE_LAYERS:
-            raise InvalidParamError(layer, SCENE_LAYERS)
-        self.invalidateScene(rect, SCENE_LAYERS[layer])
+        if layer not in widgets.graphicsscene.SCENE_LAYERS:
+            raise InvalidParamError(layer, widgets.graphicsscene.SCENE_LAYERS)
+        self.invalidateScene(rect, widgets.graphicsscene.SCENE_LAYERS[layer])
 
     def set_transformation_anchor(self, mode: str):
         """Set how the view should position the scene during transformations.
