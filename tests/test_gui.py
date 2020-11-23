@@ -276,6 +276,12 @@ def test_standarditemmodel():
         model.find_items("test", mode="wrong_mode")
 
 
+def test_textblock():
+    block = gui.TextBlock()
+    repr(block)
+    assert 1 not in block
+
+
 def test_textcursor():
     cursor = gui.TextCursor()
     cursor.set_position(1, "move")
