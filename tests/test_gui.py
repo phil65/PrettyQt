@@ -174,6 +174,48 @@ def test_image():
         img = pickle.load(jar)
 
 
+def test_imageiohandler():
+    handler = gui.ImageIOHandler()
+    handler.get_format()
+    handler.set_option("gamma", 0.5)
+    assert handler.get_option("gamma") is None
+    handler["quality"] = 0.6
+    assert handler["quality"] is None
+    assert handler.supports_option("animation") is False
+
+
+def test_imagereader():
+    reader = gui.ImageReader()
+    assert reader.get_error() == "unknown"
+    reader.get_background_color()
+    reader.get_clip_rect()
+    reader.get_current_image_rect()
+    reader.get_scaled_clip_rect()
+    reader.get_size()
+    reader.get_scaled_size()
+    reader.get_subtype()
+    reader.get_supported_subtypes()
+    reader.set_format("xsn")
+    assert reader.get_format() == "xsn"
+    assert reader.get_transformation() == "none"
+    reader.read_image()
+    assert reader.supports_option("gamma") is False
+
+
+def test_imagewriter():
+    writer = gui.ImageWriter()
+    writer["test"] = "Test"
+    assert writer.get_error() == "unknown"
+    writer.set_subtype("xsn")
+    assert writer.get_subtype() == "xsn"
+    writer.get_supported_image_formats()
+    writer.get_supported_subtypes()
+    writer.set_format("abc")
+    assert writer.get_format() == "abc"
+    writer.set_transformation("rotate_270")
+    assert writer.get_transformation() == "rotate_270"
+
+
 def test_intvalidator():
     val = gui.IntValidator()
     val.setRange(0, 9)

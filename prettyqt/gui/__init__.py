@@ -76,6 +76,9 @@ from .pdfwriter import PdfWriter
 from .desktopservices import DesktopServices
 from .matrix4x4 import Matrix4x4
 from .vector4d import Vector4D
+from .imageiohandler import ImageIOHandler
+from .imagereader import ImageReader
+from .imagewriter import ImageWriter
 
 __all__ = [
     "KeyEvent",
@@ -142,4 +145,7 @@ __all__ = [
     "PaintDeviceWindow",
     "OpenGLWindow",
     "RasterWindow",
+    "ImageIOHandler",
+    "ImageReader",
+    "ImageWriter",
 ]
