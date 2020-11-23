@@ -76,12 +76,12 @@ class Player(widgets.MainWindow):
         self.vol_slider.setTickInterval(10)
         self.vol_slider.set_tick_position("below")
         self.vol_slider.setToolTip("Volume")
-        self.vol_slider.valueChanged.connect(self.player.setVolume)
+        self.vol_slider.value_changed.connect(self.player.setVolume)
 
         self.slider = widgets.Slider(constants.HORIZONTAL, self)
         # self.slider.setGeometry(10, 640, 800 - 20, 20)
         self.slider.setRange(0, 100)
-        self.slider.valueChanged.connect(self.on_slider_change)
+        self.slider.value_changed.connect(self.on_slider_change)
 
         toolbar.add_separator()
         toolbar.addWidget(self.vol_slider)
