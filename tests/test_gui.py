@@ -305,6 +305,13 @@ def test_textdocument():
         doc.set_default_cursor_move_style("test")
 
 
+def test_paintdevice():
+    device = gui.PaintDevice()
+    device.get_metric("depth")
+    with pytest.raises(InvalidParamError):
+        device.get_metric("test")
+
+
 def test_painter():
     class Test(widgets.Widget):
         def paintEvent(self, event):
