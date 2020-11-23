@@ -11,7 +11,7 @@ import tempfile
 import pytest
 
 from qtpy import QtCore
-from prettyqt import core, widgets
+from prettyqt import core, widgets, constants
 from prettyqt.utils import InvalidParamError
 
 
@@ -261,6 +261,12 @@ def test_object(qapp):
     layout.add(w)
     layout.store_widget_states()
     layout.restore_widget_states()
+
+
+def test_persistentmodelindex():
+    index = core.PersistentModelIndex()
+    assert bool(index) is False
+    assert index[constants.USER_ROLE] is None
 
 
 def test_pluginloader():

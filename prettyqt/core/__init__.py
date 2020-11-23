@@ -15,6 +15,7 @@ from qtpy.QtCore import QSizeF as SizeF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
 from qtpy.QtCore import qInstallMessageHandler as install_message_handler
+from .persistentmodelindex import PersistentModelIndex
 from .uuid import Uuid
 from .line import Line
 from .linef import LineF
@@ -106,6 +107,7 @@ __all__ = [
     "DataStream",
     "VersionNumber",
     "LibraryInfo",
+    "PersistentModelIndex",
     "ByteArray",
     "Url",
     "Library",
