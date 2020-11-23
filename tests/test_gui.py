@@ -553,6 +553,11 @@ def test_textcharformat():
     fmt.set_font_style_hint("serif")
     with pytest.raises(InvalidParamError):
         fmt.set_font_style_hint("test")
+    fmt.set_vertical_alignment("baseline")
+    with pytest.raises(InvalidParamError):
+        fmt.set_vertical_alignment("test")
+    assert fmt.get_vertical_alignment() == "baseline"
+    fmt.get_font()
 
 
 def test_textobject():
