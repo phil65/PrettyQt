@@ -73,7 +73,7 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
 
     def add_polygon(
         self,
-        polygon: QtGui.QPolygonF,
+        polygon: Union[QtGui.QPolygonF, QtGui.QPolygon],
         pen: Optional[QtGui.QPen] = None,
         brush: Optional[QtGui.QBrush] = None,
     ) -> widgets.GraphicsPolygonItem:

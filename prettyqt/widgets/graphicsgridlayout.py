@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Tuple, Optional
+from typing import Tuple, Optional, Union
 
 from qtpy import QtWidgets
 
@@ -29,7 +29,11 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
     ) -> Optional[QtWidgets.QGraphicsLayoutItem]:
         return self.itemAt(*idx)
 
-    def __setitem__(self, idx, value):
+    def __setitem__(
+        self,
+        idx: Tuple[Union[int, slice], Union[int, slice]],
+        value: QtWidgets.QGraphicsLayoutItem,
+    ):
         row, col = idx
         rowspan = row.stop - row.start + 1 if isinstance(row, slice) else 1
         colspan = col.stop - col.start + 1 if isinstance(col, slice) else 1
@@ -65,7 +69,14 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
             self[self.rowCount(), 0 : self.columnCount() - 1] = other
         return self
 
-    def add(self, item, rowstart, colstart, rowspan=1, colspan=1):
+    def add(
+        self,
+        item: QtWidgets.QGraphicsLayoutItem,
+        rowstart: int,
+        colstart: int,
+        rowspan: int = 1,
+        colspan: int = 1,
+    ):
         if isinstance(item, QtWidgets.QWidget):
             self.addWidget(item, rowstart, colstart, rowspan, colspan)
         elif isinstance(item, QtWidgets.QLayout):
@@ -73,7 +84,7 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
         else:
             self.addItem(item, rowstart, colstart, rowspan, colspan)
 
-    def append(self, item):
+    def append(self, item: QtWidgets.QGraphicsLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
     def set_column_alignment(self, column: int, alignment: str):

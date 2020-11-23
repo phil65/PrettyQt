@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union, Optional
+from typing import Tuple, Union, Optional
 
 from qtpy import QtWidgets, QtCore
 from prettyqt import widgets
@@ -24,7 +24,7 @@ class GridLayout(QtWidgets.QGridLayout):
             widget = item.layout()
         return widget
 
-    def __setitem__(self, idx, value):
+    def __setitem__(self, idx: Tuple[Union[int, slice], Union[int, slice]], value):
         row, col = idx
         rowspan = row.stop - row.start + 1 if isinstance(row, slice) else 1
         colspan = col.stop - col.start + 1 if isinstance(col, slice) else 1
@@ -57,7 +57,7 @@ class GridLayout(QtWidgets.QGridLayout):
             self[self.rowCount(), 0 : self.columnCount() - 1] = other
         return self
 
-    def add(self, item, rowstart, colstart, rowspan=1, colspan=1):
+    def add(self, item, rowstart: int, colstart: int, rowspan: int = 1, colspan: int = 1):
         if isinstance(item, QtWidgets.QWidget):
             self.addWidget(item, rowstart, colstart, rowspan, colspan)
         elif isinstance(item, QtWidgets.QLayout):
