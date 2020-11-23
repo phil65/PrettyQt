@@ -38,6 +38,7 @@ except AttributeError:
     )
 from .textoption import TextOption
 from .textblock import TextBlock
+from .textblockgroup import TextBlockGroup
 from .textdocument import TextDocument
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
@@ -70,7 +71,6 @@ from .polygon import Polygon
 from .polygonf import PolygonF
 from .standarditem import StandardItem
 from .standarditemmodel import StandardItemModel
-from .textcharformat import TextCharFormat
 from .textcursor import TextCursor
 from .syntaxhighlighter import SyntaxHighlighter
 from .pdfwriter import PdfWriter
@@ -81,6 +81,7 @@ from .imageiohandler import ImageIOHandler
 from .imagereader import ImageReader
 from .imagewriter import ImageWriter
 from .textformat import TextFormat
+from .textcharformat import TextCharFormat
 from .textobject import TextObject
 from .textlength import TextLength
 from .textframe import TextFrame
@@ -107,6 +108,7 @@ __all__ = [
     "RegExpValidator",
     "TextOption",
     "TextBlock",
+    "TextBlockGroup",
     "TextDocument",
     "RegularExpressionValidator",
     "IntValidator",

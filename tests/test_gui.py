@@ -282,6 +282,14 @@ def test_textblock():
     assert 1 not in block
 
 
+def test_textblockgroup():
+    doc = gui.TextDocument()
+    group = gui.TextBlockGroup(doc)
+    repr(group)
+    for textblock in group:
+        pass
+
+
 def test_textcursor():
     cursor = gui.TextCursor()
     cursor.set_position(1, "move")
