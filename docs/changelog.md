@@ -1,3 +1,31 @@
+## v0.134.0 (2020-11-23)
+
+### Feat
+
+- **core**: add PersistentModelIndex class
+- **core**: add PluginLoader class
+- **core**: add Library class
+- **gui**: add PainterPathStroker class
+- **gui**: add ImageWriter / ImageReader / ImageIOHandler classes
+- **quick**: add QuickItem / QuickWindow classes
+- **core**: add install_message_handler method
+- **gui**: add RasterWindow / PaintDeviceWindow / OpenGLWindow classes
+- **svg**: add SvgGenerator class
+- **SplashScreen**: allow pixmap for ctor
+- **icon**: add get_available_sizes method
+- **widget**: add set_attributes method
+- **gui**: add Vector4D / Matrix4x4 classes
+- **custom_widgets**: add StarDelegate class
+- **custom_delegates**: add ProgressBarDelegate class
+- **widgets**: add missing StyleOption classes
+- **WidgetItems**: some more methods
+- **Painter**: add backup_state contextmanager
+
+### Fix
+
+- **KeySequenceEdit**: correct repr
+- correct coloring for WaitingSpinner
+
 ## v0.133.1 (2020-11-16)
 
 ### Fix
