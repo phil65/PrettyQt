@@ -26,6 +26,9 @@ class GraphicsLayout(QtWidgets.QGraphicsLayout):
     def get_children(self) -> list:
         return list(self)
 
+    def set_margin(self, margin: int):
+        self.setContentsMargins(margin, margin, margin, margin)
+
 
 if __name__ == "__main__":
     layout = GraphicsLayout()
