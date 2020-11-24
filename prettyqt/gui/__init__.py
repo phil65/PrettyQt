@@ -87,7 +87,15 @@ from .textblockgroup import TextBlockGroup
 from .textlength import TextLength
 from .textframe import TextFrame
 
+
+def app():
+    if GuiApplication.instance() is not None:
+        return GuiApplication.instance()
+    return GuiApplication([])
+
+
 __all__ = [
+    "app",
     "KeyEvent",
     "MouseEvent",
     "WheelEvent",

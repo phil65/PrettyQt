@@ -35,8 +35,8 @@ class FontDatabase(QtGui.QFontDatabase):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import gui
 
-    app = widgets.app()
+    app = gui.app()
     db = FontDatabase()
     print(db.families())

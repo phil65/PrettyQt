@@ -48,8 +48,8 @@ class Pixmap(QtGui.QPixmap):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import gui
 
-    app = widgets.app()
+    app = gui.app()
     p = Pixmap()
     print(bool(p))
