@@ -37,8 +37,6 @@ except AttributeError:
         RegularExpressionValidator,
     )
 from .textoption import TextOption
-from .textblock import TextBlock
-from .textblockgroup import TextBlockGroup
 from .textdocument import TextDocument
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
@@ -83,6 +81,8 @@ from .imagewriter import ImageWriter
 from .textformat import TextFormat
 from .textcharformat import TextCharFormat
 from .textobject import TextObject
+from .textblock import TextBlock
+from .textblockgroup import TextBlockGroup
 from .textlength import TextLength
 from .textframe import TextFrame
 
