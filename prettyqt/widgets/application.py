@@ -88,6 +88,9 @@ class Application(QtWidgets.QApplication):
             self.setOrganizationName(org_name)
         if org_domain is not None:
             self.setOrganizationDomain(org_domain)
+        # import ctypes
+        # myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
+        # ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     def about_popup(self, title: str = "About"):
         text = (
@@ -104,6 +107,10 @@ class Application(QtWidgets.QApplication):
 
     def main_loop(self) -> int:
         return self.exec_()
+
+    @classmethod
+    def get_font(cls) -> gui.Font:
+        return gui.Font(cls.font())
 
     @classmethod
     def use_hdpi_bitmaps(cls, state: bool = True):

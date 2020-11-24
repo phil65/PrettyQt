@@ -48,3 +48,4 @@ def test_application(qapp):
     with pytest.raises(InvalidParamError):
         qapp.set_layout_direction("test")
     assert qapp.get_layout_direction() == "right_to_left"
+    qapp.get_font()
