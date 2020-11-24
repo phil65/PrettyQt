@@ -6,6 +6,59 @@ from prettyqt import gui
 from prettyqt.utils import bidict, InvalidParamError, prettyprinter
 
 
+CAPITALIZATION = bidict(
+    mixed_case=QtGui.QFont.MixedCase,
+    all_uppercase=QtGui.QFont.AllUppercase,
+    all_lowercase=QtGui.QFont.AllLowercase,
+    small_caps=QtGui.QFont.SmallCaps,
+    capitalize=QtGui.QFont.Capitalize,
+)
+
+HINTING_PREFERENCE = bidict(
+    default=QtGui.QFont.PreferDefaultHinting,
+    none=QtGui.QFont.PreferNoHinting,
+    vertical=QtGui.QFont.PreferVerticalHinting,
+    full=QtGui.QFont.PreferFullHinting,
+)
+
+SPACING_TYPE = bidict(
+    percentage=QtGui.QFont.PercentageSpacing,
+    absolute=QtGui.QFont.AbsoluteSpacing,
+)
+
+STRETCH = bidict(
+    any=QtGui.QFont.AnyStretch,
+    ultra_condensed=QtGui.QFont.UltraCondensed,
+    extra_condensed=QtGui.QFont.ExtraCondensed,
+    condensed=QtGui.QFont.Condensed,
+    semi_condensed=QtGui.QFont.SemiCondensed,
+    unstretched=QtGui.QFont.Unstretched,
+    semi_expanded=QtGui.QFont.SemiExpanded,
+    expanded=QtGui.QFont.Expanded,
+    extra_expanded=QtGui.QFont.ExtraExpanded,
+    ultra_expanded=QtGui.QFont.UltraExpanded,
+)
+
+STYLE = bidict(
+    normal=QtGui.QFont.StyleNormal,
+    italic=QtGui.QFont.StyleItalic,
+    oblique=QtGui.QFont.StyleOblique,
+)
+
+STYLE_STRATEGY = bidict(
+    prefer_default=QtGui.QFont.PreferDefault,
+    prefer_bitmap=QtGui.QFont.PreferBitmap,
+    prefer_device=QtGui.QFont.PreferDevice,
+    prefer_outline=QtGui.QFont.PreferOutline,
+    force_outline=QtGui.QFont.ForceOutline,
+    no_antialias=QtGui.QFont.NoAntialias,
+    so_subpixel_antialias=QtGui.QFont.NoSubpixelAntialias,
+    prefer_antialias=QtGui.QFont.PreferAntialias,
+    open_gl_compatible=QtGui.QFont.OpenGLCompatible,
+    no_font_merging=QtGui.QFont.NoFontMerging,
+    prefer_no_shaping=QtGui.QFont.PreferNoShaping,
+)  # ORed with PreferMatch, PreferQuality, ForceIntegerMetrics
+
 STYLE_HINTS = bidict(
     any=QtGui.QFont.AnyStyle,
     sans_serif=QtGui.QFont.SansSerif,
@@ -101,6 +154,44 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         if weight not in WEIGHTS:
             raise InvalidParamError(weight, WEIGHTS)
         self.setWeight(WEIGHTS[weight])
+
+    def get_weight(self) -> str:
+        """Get current font weight.
+
+        Possible values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
+                            "extra_bold", normal", "black"
+
+        Returns:
+            current font weight
+        """
+        return WEIGHTS.inv[self.weight()]
+
+    def set_capitalization(self, capitalization: str):
+        """Set the font capitalization.
+
+        Valid values are "mixed_case", "all_uppercase", all_lowercase", "small_caps",
+                         "capitalize"
+
+        Args:
+            capitalization: font capitalization
+
+        Raises:
+            InvalidParamError: invalid font capitalization
+        """
+        if capitalization not in CAPITALIZATION:
+            raise InvalidParamError(capitalization, CAPITALIZATION)
+        self.setCapitalization(CAPITALIZATION[capitalization])
+
+    def get_capitalization(self) -> str:
+        """Get current font capitalization.
+
+        Possible values are "mixed_case", "all_uppercase", all_lowercase", "small_caps",
+                            "capitalize"
+
+        Returns:
+            current font capitalization
+        """
+        return CAPITALIZATION.inv[self.capitalization()]
 
 
 if __name__ == "__main__":

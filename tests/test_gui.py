@@ -94,6 +94,11 @@ def test_font():
     font.set_weight("thin")
     with pytest.raises(InvalidParamError):
         font.set_weight("test")
+    assert font.get_weight() == "thin"
+    font.set_capitalization("small_caps")
+    with pytest.raises(InvalidParamError):
+        font.set_capitalization("test")
+    assert font.get_capitalization() == "small_caps"
 
 
 def test_fontdatabase():
