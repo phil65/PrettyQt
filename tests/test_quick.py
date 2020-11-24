@@ -23,6 +23,16 @@ def test_quickitem():
     assert item.get_transform_origin() == "bottom"
 
 
+def test_quickpainteditem():
+    item = quick.QuickPaintedItem()
+    item.get_fillcolor()
+    item.get_texture_size()
+    item.set_render_target("framebuffer_object")
+    with pytest.raises(InvalidParamError):
+        item.set_render_target("test")
+    assert item.get_render_target() == "framebuffer_object"
+
+
 def test_quickview():
     view = quick.QuickView()
     path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
