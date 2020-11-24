@@ -20,6 +20,7 @@ nav:
         - objbrowser: api/objbrowser.md
         - positioning: api/positioning.md
         - qml: api/qml.md
+        - qthelp: api/qthelp.md
         - quick: api/quick.md
         - scintilla: api/scintilla.md
         - svg: api/svg.md

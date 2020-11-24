@@ -1,0 +1,4 @@
+qthelp module
+==========
+
+::: prettyqt.qthelp
