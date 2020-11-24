@@ -573,6 +573,39 @@ def test_textcharformat():
     fmt.get_font()
 
 
+def test_texttablecellformat():
+    fmt = gui.TextTableCellFormat()
+    fmt.set_bottom_border_style("dashed")
+    with pytest.raises(InvalidParamError):
+        fmt.set_bottom_border_style("test")
+    assert fmt.get_bottom_border_style() == "dashed"
+
+    fmt.set_left_border_style("dotted")
+    with pytest.raises(InvalidParamError):
+        fmt.set_left_border_style("test")
+    assert fmt.get_left_border_style() == "dotted"
+
+    fmt.set_right_border_style("solid")
+    with pytest.raises(InvalidParamError):
+        fmt.set_right_border_style("test")
+    assert fmt.get_right_border_style() == "solid"
+
+    fmt.set_top_border_style("double")
+    with pytest.raises(InvalidParamError):
+        fmt.set_top_border_style("test")
+    assert fmt.get_top_border_style() == "double"
+
+    fmt.set_border_style("groove")
+    with pytest.raises(InvalidParamError):
+        fmt.set_border_style("test")
+    assert fmt.get_top_border_style() == "groove"
+
+    fmt.get_bottom_border_brush()
+    fmt.get_left_border_brush()
+    fmt.get_right_border_brush()
+    fmt.get_top_border_brush()
+
+
 def test_textobject():
     doc = gui.TextDocument()
     obj = gui.TextObject(doc)

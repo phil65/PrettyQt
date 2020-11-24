@@ -79,12 +79,13 @@ from .imageiohandler import ImageIOHandler
 from .imagereader import ImageReader
 from .imagewriter import ImageWriter
 from .textformat import TextFormat
+from .textlength import TextLength
 from .textframeformat import TextFrameFormat
 from .textcharformat import TextCharFormat
+from .texttablecellformat import TextTableCellFormat
 from .textobject import TextObject
 from .textblock import TextBlock
 from .textblockgroup import TextBlockGroup
-from .textlength import TextLength
 from .textframe import TextFrame
 
 
@@ -150,6 +151,7 @@ __all__ = [
     "StandardItem",
     "StandardItemModel",
     "TextCharFormat",
+    "TextTableCellFormat",
     "TextCursor",
     "SyntaxHighlighter",
     "PdfWriter",
