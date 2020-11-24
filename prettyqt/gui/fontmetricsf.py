@@ -20,8 +20,8 @@ class FontMetricsF(QtGui.QFontMetricsF):
             raise InvalidParamError(mode, ELIDE_MODES)
         return self.elidedText(text, ELIDE_MODES[mode], width, flags)
 
-    def get_bounding_rect(self, text: str) -> core.RectF:
-        return core.RectF(self.boundingRect(text))
+    def get_bounding_rect(self, *args, **kwargs) -> core.RectF:
+        return core.RectF(self.boundingRect(*args, **kwargs))
 
     def get_tight_bounding_rect(self, text: str) -> core.RectF:
         return core.RectF(self.tightBoundingRect(text))
