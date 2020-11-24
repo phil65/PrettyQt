@@ -79,6 +79,7 @@ from .imageiohandler import ImageIOHandler
 from .imagereader import ImageReader
 from .imagewriter import ImageWriter
 from .textformat import TextFormat
+from .textframeformat import TextFrameFormat
 from .textcharformat import TextCharFormat
 from .textobject import TextObject
 from .textblock import TextBlock
@@ -159,5 +160,6 @@ __all__ = [
     "TextObject",
     "TextLength",
     "TextFormat",
+    "TextFrameFormat",
     "TextFrame",
 ]

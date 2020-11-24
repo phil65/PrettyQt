@@ -586,6 +586,25 @@ def test_textlength():
     repr(length)
 
 
+def test_textframeformat():
+    fmt = gui.TextFrameFormat()
+    fmt.get_height()
+    fmt.get_width()
+    fmt.get_border_brush()
+    fmt.set_border_style("dashed")
+    with pytest.raises(InvalidParamError):
+        fmt.set_border_style("test")
+    assert fmt.get_border_style() == "dashed"
+    fmt.set_page_break_policy("always_after")
+    with pytest.raises(InvalidParamError):
+        fmt.set_page_break_policy("test")
+    assert fmt.get_page_break_policy() == "always_after"
+    fmt.set_position("flow_left")
+    with pytest.raises(InvalidParamError):
+        fmt.set_position("test")
+    assert fmt.get_position() == "flow_left"
+
+
 def test_textformat():
     fmt = gui.TextFormat()
     fmt[1] = "test"
