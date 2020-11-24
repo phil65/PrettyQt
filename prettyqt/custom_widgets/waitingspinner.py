@@ -50,8 +50,6 @@ class BaseWaitingSpinner(widgets.Widget):
         self._line_width = 2
         self._inner_radius = 10
         self._current_counter = 0
-        self._is_spinning = False
-
         self._timer = core.Timer(self)
         self._timer.timeout.connect(self._rotate)
         self._update_size()
@@ -71,43 +69,37 @@ class BaseWaitingSpinner(widgets.Widget):
             self._current_counter = 0
 
         painter.set_pen(style="none")
-        for i in range(0, self._line_num):
-            painter.save()
-            painter.translate(
-                self._inner_radius + self._line_length,
-                self._inner_radius + self._line_length,
-            )
-            rotate_angle = float(360 * i) / float(self._line_num)
-            painter.rotate(rotate_angle)
-            painter.translate(self._inner_radius, 0)
-            distance = self.linecount_distance_from_primary(
-                i, self._current_counter, self._line_num
-            )
-            color = self.current_line_color(
-                distance,
-                self._line_num,
-                self._trail_fade_percentage,
-                self._minimum_trail_opacity,
-                self._color,
-            )
-            painter.setBrush(color)
-            rect = core.RectF(
-                0, -self._line_width / 2, self._line_length, self._line_width
-            )
-            painter.drawRoundedRect(
-                rect, self._roundness, self._roundness, QtCore.Qt.RelativeSize
-            )
-            painter.restore()
+        painter.translate(
+            self._inner_radius + self._line_length, self._inner_radius + self._line_length
+        )
+        rect = core.RectF(0, -self._line_width / 2, self._line_length, self._line_width)
+        for i in range(self._line_num):
+            with painter.backup_state():
+                rotate_angle = 360 * i / self._line_num
+                painter.rotate(rotate_angle)
+                painter.translate(self._inner_radius, 0)
+                distance = self.linecount_distance_from_primary(
+                    i, self._current_counter, self._line_num
+                )
+                color = self.current_line_color(
+                    distance,
+                    self._line_num,
+                    self._trail_fade_percentage,
+                    self._minimum_trail_opacity,
+                    self._color,
+                )
+                painter.setBrush(color)
+                painter.drawRoundedRect(
+                    rect, self._roundness, self._roundness, QtCore.Qt.RelativeSize
+                )
 
     def start(self):
-        self._is_spinning = True
         self.show()
         if not self._timer.isActive():
             self._timer.start()
             self._current_counter = 0
 
     def stop(self):
-        self._is_spinning = False
         self.hide()
         if self._timer.isActive():
             self._timer.stop()
@@ -124,7 +116,6 @@ class BaseWaitingSpinner(widgets.Widget):
 
     def set_line_width(self, width: int):
         self._line_width = width
-        self._update_size()
 
     def set_inner_radius(self, radius: int):
         self._inner_radius = radius
@@ -158,7 +149,7 @@ class BaseWaitingSpinner(widgets.Widget):
         return self._inner_radius
 
     def is_spinning(self) -> bool:
-        return self._is_spinning
+        return self._timer.isActive()
 
     def set_roundness(self, roundness: float):
         self._roundness = max(0.0, min(100.0, roundness))
@@ -209,14 +200,15 @@ class BaseWaitingSpinner(widgets.Widget):
         color = gui.Color(color)
         if count_distance == 0:
             return color
-        min_alpha_f = min_opacity / 100.0
-        dist_threshold = int(math.ceil((total_lines - 1) * fade_perc / 100.0))
+        min_alpha_f = min_opacity / 100
+        dist_threshold = int(math.ceil((total_lines - 1) * fade_perc / 100))
         if count_distance > dist_threshold:
             color.setAlphaF(min_alpha_f)
         else:
-            alpha_diff = color.alphaF() - min_alpha_f
-            gradient = alpha_diff / float(dist_threshold + 1)
-            result_alpha = color.alphaF() - gradient * count_distance
+            alpha = color.alphaF()
+            alpha_diff = alpha - min_alpha_f
+            gradient = alpha_diff / (dist_threshold + 1)
+            result_alpha = alpha - gradient * count_distance
             # If alpha is out of bounds, clip it.
             result_alpha = min(1.0, max(0.0, result_alpha))
             color.setAlphaF(result_alpha)
@@ -257,8 +249,18 @@ class WaitingSpinner(BaseWaitingSpinner):
                 item.setEnabled(True)
 
     def _update_position(self):
-        if self.parentWidget() and self._center_on_parent:
+        parent = self.parentWidget()
+        if parent and self._center_on_parent:
             self.move(
-                self.parentWidget().width() // 2 - self.width() // 2,
-                self.parentWidget().height() // 2 - self.height() // 2,
+                parent.width() // 2 - self.width() // 2,
+                parent.height() // 2 - self.height() // 2,
             )
+
+
+if __name__ == "__main__":
+    app = widgets.app()
+    mainwindow = widgets.MainWindow()
+    spinner = WaitingSpinner(mainwindow)
+    mainwindow.show()
+    spinner.start()
+    app.exec_()
