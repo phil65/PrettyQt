@@ -25,7 +25,7 @@ OBJECT_TYPE = bidict(
 
 PAGE_BREAK_FLAG = bidict(
     auto=QtGui.QTextFormat.PageBreak_Auto,
-    always_befor=QtGui.QTextFormat.PageBreak_AlwaysBefore,
+    always_before=QtGui.QTextFormat.PageBreak_AlwaysBefore,
     always_after=QtGui.QTextFormat.PageBreak_AlwaysAfter,
 )
 
