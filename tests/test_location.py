@@ -188,6 +188,22 @@ def test_placedetailsreply():
     reply.get_place()
 
 
+def test_placeidreply():
+    reply = location.PlaceIdReply(0)
+    assert reply.get_operation_type() == "save_place"
+
+
+def test_placematchreply():
+    reply = location.PlaceMatchReply()
+    for result in reply:
+        pass
+    assert len(reply) == 0
+    assert len(reply.get_places()) == 0
+    with pytest.raises(IndexError):
+        reply[0]
+    reply.get_request()
+
+
 def test_placesearchresult():
     result = location.PlaceSearchResult()
     result.get_icon()

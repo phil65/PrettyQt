@@ -31,6 +31,8 @@ from .placereply import PlaceReply
 from .placesearchreply import PlaceSearchReply
 from .placecontentreply import PlaceContentReply
 from .placedetailsreply import PlaceDetailsReply
+from .placematchreply import PlaceMatchReply
+from .placeidreply import PlaceIdReply
 
 
 __all__ = [
@@ -62,5 +64,7 @@ __all__ = [
     "PlaceSearchReply",
     "PlaceContentReply",
     "PlaceDetailsReply",
+    "PlaceMatchReply",
+    "PlaceIdReply",
     "PlaceSearchResult",
 ]
