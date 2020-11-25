@@ -156,6 +156,38 @@ def test_placereview():
     str(review)
 
 
+def test_placereply():
+    reply = location.PlaceReply()
+    assert reply.get_error() == "none"
+    assert reply.get_type() == "generic"
+
+
+def test_placesearchreply():
+    reply = location.PlaceSearchReply()
+    for result in reply:
+        pass
+    assert len(reply) == 0
+    assert len(reply.get_results()) == 0
+    with pytest.raises(IndexError):
+        reply[0]
+
+
+def test_placecontentreply():
+    reply = location.PlaceContentReply()
+    assert len(reply) == 0
+
+
+def test_placedetailsreply():
+    reply = location.PlaceDetailsReply()
+    reply.get_place()
+
+
+def test_placesearchresult():
+    result = location.PlaceSearchResult()
+    result.get_icon()
+    assert result.get_type() == "unknown"
+
+
 def test_placeeditorial():
     editorial = location.PlaceEditorial()
     str(editorial)

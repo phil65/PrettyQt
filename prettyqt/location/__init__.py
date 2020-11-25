@@ -26,6 +26,12 @@ from .placesearchrequest import PlaceSearchRequest
 from .placecontentrequest import PlaceContentRequest
 from .place import Place
 from .placematchrequest import PlaceMatchRequest
+from .placesearchresult import PlaceSearchResult
+from .placereply import PlaceReply
+from .placesearchreply import PlaceSearchReply
+from .placecontentreply import PlaceContentReply
+from .placedetailsreply import PlaceDetailsReply
+
 
 __all__ = [
     "PlaceAttribute",
@@ -52,4 +58,9 @@ __all__ = [
     "PlaceContentRequest",
     "PlaceMatchRequest",
     "GeoServiceProvider",
+    "PlaceReply",
+    "PlaceSearchReply",
+    "PlaceContentReply",
+    "PlaceDetailsReply",
+    "PlaceSearchResult",
 ]
