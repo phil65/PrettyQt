@@ -170,11 +170,17 @@ def test_placesearchreply():
     assert len(reply.get_results()) == 0
     with pytest.raises(IndexError):
         reply[0]
+    reply.get_previous_page_request()
+    reply.get_next_page_request()
+    reply.get_request()
 
 
 def test_placecontentreply():
     reply = location.PlaceContentReply()
     assert len(reply) == 0
+    reply.get_previous_page_request()
+    reply.get_next_page_request()
+    reply.get_request()
 
 
 def test_placedetailsreply():

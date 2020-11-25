@@ -23,6 +23,15 @@ class PlaceSearchReply(QtLocation.QPlaceSearchReply):
     def get_results(self) -> List[location.PlaceSearchResult]:
         return [location.PlaceSearchResult(i) for i in self.results()]
 
+    def get_next_page_request(self) -> location.PlaceSearchRequest:
+        return location.PlaceSearchRequest(self.nextPageRequest())
+
+    def get_previous_page_request(self) -> location.PlaceSearchRequest:
+        return location.PlaceSearchRequest(self.previousPageRequest())
+
+    def get_request(self) -> location.PlaceSearchRequest:
+        return location.PlaceSearchRequest(self.request())
+
 
 if __name__ == "__main__":
     reply = PlaceSearchReply()
