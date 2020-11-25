@@ -573,6 +573,11 @@ def test_textcharformat():
     fmt.get_font()
 
 
+def test_textimageformat():
+    fmt = gui.TextImageFormat()
+    assert bool(fmt) is True
+
+
 def test_texttablecellformat():
     fmt = gui.TextTableCellFormat()
     fmt.set_bottom_border_style("dashed")
