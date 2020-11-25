@@ -213,9 +213,7 @@ class TreeModel(ColumnItemModel):
         # Object attributes
         for attr_name, attr_value in sorted(inspect.getmembers(obj)):
             obj_children.append((attr_name, attr_value))
-            path_strings.append(
-                "{}.{}".format(obj_path, attr_name) if obj_path else attr_name
-            )
+            path_strings.append(f"{obj_path}.{attr_name}" if obj_path else attr_name)
             is_attr_list.append(True)
 
         tree_items = []
@@ -365,9 +363,7 @@ class TreeModel(ColumnItemModel):
         top_left = self.index(0, 0)
         bottom_right = self.index(n_rows - 1, n_cols - 1)
 
-        logger.debug(
-            "bottom_right: ({}, {})".format(bottom_right.row(), bottom_right.column())
-        )
+        logger.debug(f"bottom_right: ({bottom_right.row()}, {bottom_right.column()})")
         self.dataChanged.emit(top_left, bottom_right)
 
 
