@@ -83,6 +83,7 @@ from .textlength import TextLength
 from .textframeformat import TextFrameFormat
 from .textcharformat import TextCharFormat
 from .textimageformat import TextImageFormat
+from .textlistformat import TextListFormat
 from .texttablecellformat import TextTableCellFormat
 from .textobject import TextObject
 from .textblock import TextBlock
@@ -153,6 +154,7 @@ __all__ = [
     "StandardItemModel",
     "TextCharFormat",
     "TextImageFormat",
+    "TextListFormat",
     "TextTableCellFormat",
     "TextCursor",
     "SyntaxHighlighter",

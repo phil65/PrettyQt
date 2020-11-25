@@ -578,6 +578,14 @@ def test_textimageformat():
     assert bool(fmt) is True
 
 
+def test_textlistformat():
+    fmt = gui.TextListFormat()
+    fmt.set_style("upper_roman")
+    with pytest.raises(InvalidParamError):
+        fmt.set_style("test")
+    assert fmt.get_style() == "upper_roman"
+
+
 def test_texttablecellformat():
     fmt = gui.TextTableCellFormat()
     fmt.set_bottom_border_style("dashed")
