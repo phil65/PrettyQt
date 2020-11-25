@@ -1005,6 +1005,18 @@
 
 
   <li class="md-nav__item">
+    <a href="qthelp.html" class="md-nav__link">
+      qthelp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="quick.html" class="md-nav__link">
       quick
     </a>
@@ -3368,33 +3380,29 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_counter</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">"none"</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">):</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">rotate_angle</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">360</span> <span class="o">*</span> <span class="n">i</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotate_angle</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linecount_distance_from_primary</span><span class="p">(</span>
-            <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_counter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span>
-        <span class="p">)</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_line_color</span><span class="p">(</span>
-            <span class="n">distance</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_trail_fade_percentage</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_minimum_trail_opacity</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_color</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
-        <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span>
-            <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span>
-        <span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span>
-            <span class="n">rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RelativeSize</span>
-        <span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span>
+    <span class="p">)</span>
+    <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">):</span>
+        <span class="k">with</span> <span class="n">painter</span><span class="o">.</span><span class="n">backup_state</span><span class="p">():</span>
+            <span class="n">rotate_angle</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotate_angle</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linecount_distance_from_primary</span><span class="p">(</span>
+                <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_counter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span>
+            <span class="p">)</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_line_color</span><span class="p">(</span>
+                <span class="n">distance</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_trail_fade_percentage</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_minimum_trail_opacity</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_color</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span>
+                <span class="n">rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RelativeSize</span>
+            <span class="p">)</span>
 </code></pre>
 </div>
 </details>

@@ -387,6 +387,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="qthelp.html" class="md-nav__link">
+      qthelp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -452,6 +464,46 @@
           <li class="md-nav__item">
   <a href="#prettyqt.quick.quickitem.QuickItem.set_transform_origin" class="md-nav__link">
     set_transform_origin()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.quick.quickpainteditem" class="md-nav__link">
+    quickpainteditem
+  </a>
+  
+    <nav class="md-nav" aria-label="quickpainteditem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.quick.quickpainteditem.QuickPaintedItem" class="md-nav__link">
+    QuickPaintedItem
+  </a>
+  
+    <nav class="md-nav" aria-label="QuickPaintedItem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.quick.quickpainteditem.QuickPaintedItem.get_render_target" class="md-nav__link">
+    get_render_target()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.quick.quickpainteditem.QuickPaintedItem.set_render_target" class="md-nav__link">
+    set_render_target()
   </a>
   
 </li>
@@ -697,6 +749,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.quick.quickpainteditem" class="md-nav__link">
+    quickpainteditem
+  </a>
+  
+    <nav class="md-nav" aria-label="quickpainteditem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.quick.quickpainteditem.QuickPaintedItem" class="md-nav__link">
+    QuickPaintedItem
+  </a>
+  
+    <nav class="md-nav" aria-label="QuickPaintedItem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.quick.quickpainteditem.QuickPaintedItem.get_render_target" class="md-nav__link">
+    get_render_target()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.quick.quickpainteditem.QuickPaintedItem.set_render_target" class="md-nav__link">
+    set_render_target()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.quick.quickwindow" class="md-nav__link">
     quickwindow
   </a>
@@ -905,6 +997,146 @@ set_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 </div>
 </div>
 <div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.quick.quickpainteditem">
+
+        <code>quickpainteditem</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.quick.quickpainteditem.QuickPaintedItem">
+
+        <code>QuickPaintedItem</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.quick.quickpainteditem.QuickPaintedItem.get_render_target">
+
+        <code class="highlight language-python">
+get_render_target<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return the render target.</p>
+<p>Possible values: "image", "framebuffer_object", "inverted_y_framebuffer_object"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>render target</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/quick/quickpainteditem.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Return the render target.</span>
+
+<span class="sd">    Possible values: "image", "framebuffer_object", "inverted_y_framebuffer_object"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        render target</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">RENDER_TARGET</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">renderTarget</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.quick.quickpainteditem.QuickPaintedItem.set_render_target">
+
+        <code class="highlight language-python">
+set_render_target<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the render target.</p>
+<p>Allowed values are "image", "framebuffer_object", "inverted_y_framebuffer_object"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>target</code></td>
+<td><code>str</code></td>
+<td>
+<p>render target to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>render target does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/quick/quickpainteditem.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the render target.</span>
+
+<span class="sd">    Allowed values are "image", "framebuffer_object", "inverted_y_framebuffer_object"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        target: render target to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: render target does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">target</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">RENDER_TARGET</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">target</span><span class="p">,</span> <span class="n">RENDER_TARGET</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setRenderTarget</span><span class="p">(</span><span class="n">RENDER_TARGET</span><span class="p">[</span><span class="n">target</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.quick.quickwindow">
 
         <code>quickwindow</code>
@@ -1098,8 +1330,8 @@ the render type of existing elements will not be modified.</p>
   <!-- Link to previous and/or next page --><div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
 
-        <!-- Link to previous page --><a href="qml.html"
-              title="qml"
+        <!-- Link to previous page --><a href="qthelp.html"
+              title="qthelp"
               class="md-flex md-footer-nav__link md-footer-nav__link--prev"
               rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -1109,7 +1341,7 @@ the render type of existing elements will not be modified.</p>
             <div class="md-flex__cell md-flex__cell--stretch
                   md-footer-nav__title">
               <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">Previous</span>qml</span>
+                <span class="md-footer-nav__direction">Previous</span>qthelp</span>
             </div>
           </a><!-- Link to next page --><a href="scintilla.html"
               title="scintilla"

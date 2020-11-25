@@ -389,6 +389,18 @@
 
 
   <li class="md-nav__item">
+    <a href="qthelp.html" class="md-nav__link">
+      qthelp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="quick.html" class="md-nav__link">
       quick
     </a>
@@ -1539,15 +1551,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.widgets.filedialog.FileDialog.directory" class="md-nav__link">
-    directory()
+  <a href="#prettyqt.widgets.filedialog.FileDialog.get_accept_mode" class="md-nav__link">
+    get_accept_mode()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.widgets.filedialog.FileDialog.get_accept_mode" class="md-nav__link">
-    get_accept_mode()
+  <a href="#prettyqt.widgets.filedialog.FileDialog.get_directory" class="md-nav__link">
+    get_directory()
   </a>
   
 </li>
@@ -4541,15 +4553,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.widgets.filedialog.FileDialog.directory" class="md-nav__link">
-    directory()
+  <a href="#prettyqt.widgets.filedialog.FileDialog.get_accept_mode" class="md-nav__link">
+    get_accept_mode()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.widgets.filedialog.FileDialog.get_accept_mode" class="md-nav__link">
-    get_accept_mode()
+  <a href="#prettyqt.widgets.filedialog.FileDialog.get_directory" class="md-nav__link">
+    get_directory()
   </a>
   
 </li>
@@ -11292,51 +11304,6 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <p>Simple dialog used to display some widget.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.widgets.filedialog.FileDialog.directory">
-
-        <code class="highlight language-python">
-directory<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>Return current directory.</p>
-<p>returns current directory level as a Pathlib object</p>
-<p><strong>Returns:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Path</code></td>
-<td>
-<p>Pathlib object</p>
-</td>
-</tr>
-</tbody>
-</table>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/widgets/filedialog.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">directory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
-    <span class="sd">"""Return current directory.</span>
-
-<span class="sd">    returns current directory level as a Pathlib object</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        Pathlib object</span>
-<span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">directory</span><span class="p">())</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.filedialog.FileDialog.get_accept_mode">
 
         <code class="highlight language-python">
@@ -11376,6 +11343,51 @@ get_accept_mode<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">        accept mode</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">ACCEPT_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">acceptMode</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.filedialog.FileDialog.get_directory">
+
+        <code class="highlight language-python">
+get_directory<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current directory.</p>
+<p>returns current directory level as a Pathlib object</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Path</code></td>
+<td>
+<p>Pathlib object</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/filedialog.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
+    <span class="sd">"""Return current directory.</span>
+
+<span class="sd">    returns current directory level as a Pathlib object</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Pathlib object</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">()</span><span class="o">.</span><span class="n">absolutePath</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>

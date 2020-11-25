@@ -769,6 +769,18 @@
 
 
   <li class="md-nav__item">
+    <a href="qthelp.html" class="md-nav__link">
+      qthelp
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="quick.html" class="md-nav__link">
       quick
     </a>
@@ -2245,9 +2257,7 @@ refresh_tree<span class="p">(</span><span class="bp">self</span><span class="p">
     <span class="n">top_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">bottom_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">n_rows</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n_cols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-        <span class="s2">"bottom_right: (</span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bottom_right</span><span class="o">.</span><span class="n">row</span><span class="p">(),</span> <span class="n">bottom_right</span><span class="o">.</span><span class="n">column</span><span class="p">())</span>
-    <span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">"bottom_right: (</span><span class="si">{</span><span class="n">bottom_right</span><span class="o">.</span><span class="n">row</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">bottom_right</span><span class="o">.</span><span class="n">column</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">dataChanged</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">top_left</span><span class="p">,</span> <span class="n">bottom_right</span><span class="p">)</span>
 </code></pre>
 </div>
