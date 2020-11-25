@@ -1,3 +1,32 @@
+## v0.135.0 (2020-11-26)
+
+### Feat
+
+- **WebEngineHistoryItem**: add get_icon_url method
+- **location**: add PlaceMatchReply / PlaceIdReply classes
+- **PlaceContentReply/PlaceSearchReply**: add request methods
+- **gui**: add TextListFormat class
+- **gui**: add TextImageFormat class
+- **location**: add some reply/result classes
+- **gui**: add TextTableCellFormat class
+- **gui**: add app method
+- **gui**: add TextFrameFormat class
+- **Application**: add get_font method
+- add qthelp module
+- **quick**: add QuickPaintedItem class
+- **gui**: add TextBlockGroup class
+- **TextCharFormat**: add get/set_vertical_alignment methods
+- **TextBlock**: add __contains__ method
+- **PaintDevice**: add get_metric method
+- **GuiApplication**: add get/set_layout_direction methods
+- **gui**: add TextObject / TextLength / TextFrame / TextFormat classes
+- **core**: add ItemSelection class
+- **GraphicsLayout**: add set_margin method
+
+### Fix
+
+- correctly add items for GraphicsGridLayout
+
 ## v0.134.0 (2020-11-23)
 
 ### Feat
