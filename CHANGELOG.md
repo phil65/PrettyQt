@@ -1,3 +1,17 @@
+## v0.136.0 (2020-11-26)
+
+### Feat
+
+- **location**: add PlaceResult class
+- **location**: add PlaceProposedSearchResult class
+- **location**: add clone_from method to reply classes
+- **Object**: add has_id method
+
+### Fix
+
+- emit inputandslider signal correctly on value change
+- correct flag for constants.NO_CHILDREN
+
 ## v0.135.0 (2020-11-26)
 
 ### Feat
