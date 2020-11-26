@@ -59,6 +59,9 @@ class Object(QtCore.QObject):
     def get_id(self) -> str:
         return self.objectName()
 
+    def has_id(self) -> bool:
+        return self.objectName() != ""
+
     @property
     def id(self) -> str:
         return self.objectName()
