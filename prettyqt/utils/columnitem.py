@@ -3,14 +3,25 @@
 from typing import Callable, Optional, Union
 from dataclasses import dataclass
 
-from qtpy import QtCore, QtGui
+from prettyqt import constants
+from prettyqt.utils import bidict
+
+from qtpy import QtGui
 
 SMALL_COL_WIDTH = 120
 MEDIUM_COL_WIDTH = 200
 
-ALIGN_LEFT = int(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignLeft)
-ALIGN_RIGHT = int(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignRight)
-ALIGN_CENTER = int(QtCore.Qt.AlignVCenter | QtCore.Qt.AlignCenter)
+ALIGNMENTS = bidict(
+    left=constants.ALIGN_LEFT,
+    right=constants.ALIGN_RIGHT,
+    top=constants.ALIGN_TOP,
+    bottom=constants.ALIGN_BOTTOM,
+    top_left=constants.ALIGN_TOP_LEFT,
+    top_right=constants.ALIGN_TOP_RIGHT,
+    bottom_left=constants.ALIGN_BOTTOM_LEFT,
+    bottom_right=constants.ALIGN_BOTTOM_RIGHT,
+    center=constants.ALIGN_CENTER,
+)
 
 
 @dataclass(frozen=True)
@@ -29,9 +40,28 @@ class ColumnItem:
     background_color: Optional[Union[Callable, str]] = None
     decoration: Optional[Union[Callable, QtGui.QIcon]] = None
     font: Optional[Union[Callable, QtGui.QFont]] = None
+    selectable: bool = True
+    enabled: bool = True
+    editable: bool = False
+    checkable: bool = False
+    tristate: bool = False
 
     def get_name(self):
         return self.name
+
+    def get_flag(self):
+        flag = constants.NO_FLAGS
+        if self.selectable:
+            flag |= constants.IS_SELECTABLE
+        if self.enabled:
+            flag |= constants.IS_ENABLED
+        if self.editable:
+            flag |= constants.IS_EDITABLE
+        if self.checkable:
+            flag |= constants.IS_CHECKABLE
+        if self.tristate:
+            flag |= constants.IS_USER_TRISTATE
+        return flag
 
     def get_label(self, tree_item):
         if self.label is None:
@@ -75,9 +105,11 @@ class ColumnItem:
             return self.decoration(tree_item)
         return self.decoration
 
-    def get_alignment(self, tree_item):
+    def get_alignment(self, tree_item) -> int:
         if self.alignment is None:
-            return ALIGN_LEFT
+            return constants.ALIGN_LEFT
         elif callable(self.alignment):
             return self.alignment(tree_item)
+        elif isinstance(self.alignment, str):
+            return ALIGNMENTS[self.alignment]
         return self.alignment

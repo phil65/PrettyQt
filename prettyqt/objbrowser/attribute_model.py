@@ -7,7 +7,7 @@ from typing import Callable
 
 from qtpy import QtGui
 from prettyqt.utils import columnitem
-from prettyqt import gui
+from prettyqt import gui, constants
 from prettyqt.objbrowser import treeitem
 
 
@@ -196,7 +196,7 @@ ATTR_MODEL_LENGTH = columnitem.ColumnItem(
     # data_fn     = tio_length,
     label=safe_data_fn(len),
     col_visible=False,
-    alignment=columnitem.ALIGN_RIGHT,
+    alignment=constants.ALIGN_RIGHT,
     width=columnitem.SMALL_COL_WIDTH,
 )
 
@@ -205,7 +205,7 @@ ATTR_MODEL_ID = columnitem.ColumnItem(
     doc="The identifier of the object with calculated using the id() function",
     label=lambda tree_item: f"0x{id(tree_item.obj):X}",
     col_visible=False,
-    alignment=columnitem.ALIGN_RIGHT,
+    alignment=constants.ALIGN_RIGHT,
     width=columnitem.SMALL_COL_WIDTH,
 )
 
