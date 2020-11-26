@@ -7,7 +7,7 @@ from typing import Union, Optional, Dict, Tuple, List
 
 
 import qtawesome as qta
-from qtpy import QtGui
+from qtpy import QtGui, QtCore
 
 from prettyqt import core, gui
 from prettyqt.utils import bidict, InvalidParamError
@@ -96,6 +96,16 @@ class Icon(QtGui.QIcon):
         if state not in STATES:
             raise InvalidParamError(state, STATES)
         return [core.Size(i) for i in self.availableSizes(MODES[mode], STATES[state])]
+
+    def add_pixmap(self, data: Union[QtCore.QByteArray, QtGui.QPixmap, bytes]):
+        if isinstance(data, bytes):
+            data = QtCore.QByteArray(data)
+        if isinstance(data, QtCore.QByteArray):
+            pixmap = QtGui.QPixmap()
+            pixmap.loadFromData(data)
+        else:
+            pixmap = data
+        self.addPixmap(pixmap)
 
     def get_pixmap(self, size: int) -> QtGui.QPixmap:
         size = core.Size(size, size)

@@ -181,6 +181,7 @@ def test_icon():
     with pytest.raises(InvalidParamError):
         icon.get_available_sizes(state="test")
     icon.get_available_sizes()
+    icon.add_pixmap(b"a")
 
 
 def test_image():
