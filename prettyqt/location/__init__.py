@@ -27,6 +27,7 @@ from .placecontentrequest import PlaceContentRequest
 from .place import Place
 from .placematchrequest import PlaceMatchRequest
 from .placesearchresult import PlaceSearchResult
+from .placeproposedsearchresult import PlaceProposedSearchResult
 from .placereply import PlaceReply
 from .placesearchreply import PlaceSearchReply
 from .placecontentreply import PlaceContentReply
@@ -67,4 +68,5 @@ __all__ = [
     "PlaceMatchReply",
     "PlaceIdReply",
     "PlaceSearchResult",
+    "PlaceProposedSearchResult",
 ]
