@@ -47,7 +47,7 @@ IS_SELECTABLE = QtCore.Qt.ItemIsSelectable
 IS_EDITABLE = QtCore.Qt.ItemIsEditable
 IS_CHECKABLE = QtCore.Qt.ItemIsUserCheckable
 NO_FLAGS = QtCore.Qt.NoItemFlags
-NO_CHILDREN = QtCore.Qt.NoItemFlags
+NO_CHILDREN = QtCore.Qt.ItemNeverHasChildren
 
 MOVE_ACTION = QtCore.Qt.MoveAction
 COPY_ACTION = QtCore.Qt.CopyAction
