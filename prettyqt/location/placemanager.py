@@ -6,13 +6,6 @@ from qtpy import QtLocation
 
 from prettyqt import core, location
 
-FEATURE_TYPES = location.georouterequest.FEATURE_TYPES
-FEATURE_WEIGHTS = location.georouterequest.FEATURE_WEIGHTS
-MANEUVER_DETAIL = location.georouterequest.MANEUVER_DETAIL
-ROUTE_OPTIMIZATION = location.georouterequest.ROUTE_OPTIMIZATION
-SEGMENT_DETAIL = location.georouterequest.SEGMENT_DETAIL
-TRAVEL_MODE = location.georouterequest.TRAVEL_MODE
-
 
 QtLocation.QPlaceManager.__bases__ = (core.Object,)
 
