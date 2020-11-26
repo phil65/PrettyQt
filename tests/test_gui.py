@@ -294,6 +294,13 @@ def test_standarditemmodel():
         model.find_items("test", mode="wrong_mode")
 
 
+def test_transform():
+    transform = gui.Transform()
+    for i in range(3):
+        for j in range(3):
+            assert transform[i, j] in [0, 1]
+
+
 def test_textblock():
     block = gui.TextBlock()
     repr(block)
