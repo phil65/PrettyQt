@@ -44,7 +44,8 @@ class SelectionWidget(widgets.GroupBox):
                 rb.setChecked(True)
                 break
 
-    def add(self, title: str, data=None):
+    def add(self, title: str, data=None, icon: gui.icon.IconType = None):
+        # TODO: make use of icon kwarg
         rb = widgets.RadioButton(title)
         rb.toggled.connect(self.update_choice)
         self.buttons[rb] = data
