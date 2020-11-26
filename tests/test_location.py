@@ -5,6 +5,8 @@
 
 import pytest
 
+from qtpy import QtLocation
+
 from prettyqt import location, core
 from prettyqt.utils import InvalidParamError
 
@@ -173,6 +175,8 @@ def test_placesearchreply():
     reply.get_previous_page_request()
     reply.get_next_page_request()
     reply.get_request()
+    obj = QtLocation.QPlaceSearchReply()
+    location.PlaceSearchReply.clone_from(obj)
 
 
 def test_placecontentreply():
@@ -181,16 +185,22 @@ def test_placecontentreply():
     reply.get_previous_page_request()
     reply.get_next_page_request()
     reply.get_request()
+    obj = QtLocation.QPlaceContentReply()
+    location.PlaceContentReply.clone_from(obj)
 
 
 def test_placedetailsreply():
     reply = location.PlaceDetailsReply()
     reply.get_place()
+    obj = QtLocation.QPlaceDetailsReply()
+    location.PlaceDetailsReply.clone_from(obj)
 
 
 def test_placeidreply():
     reply = location.PlaceIdReply(0)
     assert reply.get_operation_type() == "save_place"
+    obj = QtLocation.QPlaceIdReply(0)
+    location.PlaceIdReply.clone_from(obj)
 
 
 def test_placematchreply():
@@ -202,6 +212,8 @@ def test_placematchreply():
     with pytest.raises(IndexError):
         reply[0]
     reply.get_request()
+    obj = QtLocation.QPlaceMatchReply()
+    location.PlaceMatchReply.clone_from(obj)
 
 
 def test_placesearchresult():

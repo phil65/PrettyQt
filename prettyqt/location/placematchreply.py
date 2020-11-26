@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from typing import List
 
 from qtpy import QtLocation
@@ -19,6 +21,14 @@ class PlaceMatchReply(QtLocation.QPlaceMatchReply):
 
     def __len__(self):
         return len(self.get_places())
+
+    @classmethod
+    def clone_from(cls, obj: QtLocation.QPlaceMatchReply) -> PlaceMatchReply:
+        reply = cls(obj.parent())
+        reply.setPlaces([location.Place(i) for i in obj.places()])
+        request = location.PlaceMatchRequest(obj.request())
+        reply.setRequest(request)
+        return reply
 
     def get_places(self) -> List[location.Place]:
         return [location.Place(i) for i in self.places()]

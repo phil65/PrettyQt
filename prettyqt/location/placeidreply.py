@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from qtpy import QtLocation
 
 from prettyqt import location
@@ -19,6 +21,12 @@ QtLocation.QPlaceIdReply.__bases__ = (location.PlaceReply,)
 class PlaceIdReply(QtLocation.QPlaceIdReply):
     def __repr__(self):
         return f"PlaceIdReply({self.operationType()})"
+
+    @classmethod
+    def clone_from(cls, obj: QtLocation.QPlaceIdReply) -> PlaceIdReply:
+        reply = cls(obj.operationType(), obj.parent())
+        reply.setId(obj.id())
+        return reply
 
     def get_operation_type(self) -> str:
         """Get current operation_type.

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from typing import List
 
 from qtpy import QtLocation
@@ -19,6 +21,18 @@ class PlaceSearchReply(QtLocation.QPlaceSearchReply):
 
     def __len__(self):
         return len(self.get_results())
+
+    @classmethod
+    def clone_from(cls, obj: QtLocation.QPlaceSearchReply) -> PlaceSearchReply:
+        reply = cls(obj.parent())
+        reply.setResults([location.PlaceSearchResult(i) for i in obj.results()])
+        request = location.PlaceSearchRequest(obj.nextPageRequest())
+        reply.setNextPageRequest(request)
+        request = location.PlaceSearchRequest(obj.previousPageRequest())
+        reply.setPreviousPageRequest(request)
+        request = location.PlaceSearchRequest(obj.request())
+        reply.setRequest(request)
+        return reply
 
     def get_results(self) -> List[location.PlaceSearchResult]:
         return [location.PlaceSearchResult(i) for i in self.results()]
