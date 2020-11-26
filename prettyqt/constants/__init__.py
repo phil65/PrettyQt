@@ -29,10 +29,14 @@ ALIGN_V_CENTER = QtCore.Qt.AlignVCenter
 ALIGN_BASELINE = QtCore.Qt.AlignBaseline
 
 ALIGN_CENTER = QtCore.Qt.AlignCenter
+ALIGN_CENTER_LEFT = QtCore.Qt.AlignVCenter | QtCore.Qt.AlignLeft
+ALIGN_CENTER_RIGHT = QtCore.Qt.AlignVCenter | QtCore.Qt.AlignRight
 ALIGN_TOP_LEFT = QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft
 ALIGN_TOP_RIGHT = QtCore.Qt.AlignTop | QtCore.Qt.AlignRight
+ALIGN_TOP_CENTER = QtCore.Qt.AlignTop | QtCore.Qt.AlignHCenter
 ALIGN_BOTTOM_LEFT = QtCore.Qt.AlignBottom | QtCore.Qt.AlignLeft
 ALIGN_BOTTOM_RIGHT = QtCore.Qt.AlignBottom | QtCore.Qt.AlignRight
+ALIGN_BOTTOM_CENTER = QtCore.Qt.AlignBottom | QtCore.Qt.AlignHCenter
 
 HORIZONTAL = QtCore.Qt.Horizontal
 VERTICAL = QtCore.Qt.Vertical
@@ -46,6 +50,8 @@ IS_ENABLED = QtCore.Qt.ItemIsEnabled
 IS_SELECTABLE = QtCore.Qt.ItemIsSelectable
 IS_EDITABLE = QtCore.Qt.ItemIsEditable
 IS_CHECKABLE = QtCore.Qt.ItemIsUserCheckable
+IS_AUTO_TREESTATE = QtCore.Qt.ItemIsAutoTristate
+IS_USER_TREESTATE = QtCore.Qt.ItemIsUserTristate
 NO_FLAGS = QtCore.Qt.NoItemFlags
 NO_CHILDREN = QtCore.Qt.ItemNeverHasChildren
 
