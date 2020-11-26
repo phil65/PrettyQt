@@ -9,7 +9,6 @@ from .placecontactdetail import PlaceContactDetail
 from .placeicon import PlaceIcon
 from .placesupplier import PlaceSupplier
 from .placecategory import PlaceCategory
-from .placemanager import PlaceManager
 from .placeuser import PlaceUser
 from .placecontent import PlaceContent
 from .placeimage import PlaceImage
@@ -21,7 +20,6 @@ from .geomaneuver import GeoManeuver
 from .georoutesegment import GeoRouteSegment
 from .georoute import GeoRoute
 from .georouteleg import GeoRouteLeg
-from .geoserviceprovider import GeoServiceProvider
 from .placesearchrequest import PlaceSearchRequest
 from .placecontentrequest import PlaceContentRequest
 from .place import Place
@@ -35,6 +33,8 @@ from .placecontentreply import PlaceContentReply
 from .placedetailsreply import PlaceDetailsReply
 from .placematchreply import PlaceMatchReply
 from .placeidreply import PlaceIdReply
+from .placemanager import PlaceManager
+from .geoserviceprovider import GeoServiceProvider
 
 
 __all__ = [
