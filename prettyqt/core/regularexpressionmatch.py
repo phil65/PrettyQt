@@ -18,7 +18,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     def __getitem__(self, item):
         return self.group(item)
 
-    def group(self, *groups) -> Union[tuple, str]:
+    def group(self, *groups: Union[int, str]) -> Union[tuple, str]:
         if len(groups) > 1:
             return tuple(self.captured(i) for i in groups)
         if len(groups) == 0:
@@ -64,11 +64,11 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         return self.re.namedCaptureGroups()[self.lastCapturedIndex()]
 
     @property
-    def re(self):
+    def re(self) -> QtCore.QRegularExpression:
         return self.regularExpression()
 
     @property
-    def partial(self):
+    def partial(self) -> bool:
         return self.hasPartialMatch()
 
 

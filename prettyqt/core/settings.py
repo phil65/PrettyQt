@@ -2,7 +2,7 @@
 
 import contextlib
 import pathlib
-from typing import List, Mapping, Optional, Union, Dict, Any
+from typing import List, Mapping, Optional, Union, Dict, Any, Iterator
 import logging
 
 from qtpy import QtCore
@@ -51,7 +51,7 @@ class Settings(QtCore.QSettings):
             raise KeyError(key)
         return self.remove(key)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         return iter(self.allKeys())
 
     def __len__(self) -> int:
@@ -64,7 +64,7 @@ class Settings(QtCore.QSettings):
             settings.set_value(k, v)
         return settings
 
-    def as_dict(self):
+    def as_dict(self) -> Dict[str, Any]:
         return {k: v for k, v in self.items()}
 
     def set_value(self, key: str, value):
@@ -208,7 +208,11 @@ class Settings(QtCore.QSettings):
             self.set_value(k, v)
 
 
-def register_extensions(*exts, app_name=None, app_path=None):
+def register_extensions(
+    *exts: List[str],
+    app_name: Optional[str] = None,
+    app_path: Union[None, str, pathlib.Path] = None,
+):
     logger.debug(f"assigning extensions {exts} to {app_name}")
     s = Settings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.NativeFormat)
     if app_path is None:
@@ -218,7 +222,7 @@ def register_extensions(*exts, app_name=None, app_path=None):
     for ext in exts:
         s.setValue(f"{ext}/DefaultIcon/.", app_path)  # perhaps ,0 after app_path
         s.setValue(f"{ext}/.", app_name)
-    s.setValue(f"{app_name}/shell/open/command/.", app_path + " %1")
+    s.setValue(f"{app_name}/shell/open/command/.", f"{app_path} %1")
 
 
 if __name__ == "__main__":

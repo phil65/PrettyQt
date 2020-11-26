@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Union, DefaultDict, List
+from typing import Optional, Union, DefaultDict, List, Mapping, MutableMapping
 from collections import defaultdict
 from contextlib import contextmanager
 import itertools
@@ -94,7 +94,9 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindDirectChildrenOnly
         return self.findChild(typ, name, options=flag)
 
-    def store_widget_states(self, settings=None, key: str = "states"):
+    def store_widget_states(
+        self, settings: Optional[MutableMapping] = None, key: str = "states"
+    ):
         splitters = self.find_children(QtWidgets.QSplitter)
         splitter_dct = {
             sp.objectName(): sp.saveState() for sp in splitters if sp.objectName()
@@ -112,7 +114,9 @@ class Object(QtCore.QObject):
             splitters=splitter_dct, mainwindows=mw_dct, headerviews=headerview_dct
         )
 
-    def restore_widget_states(self, settings=None, key: str = "states"):
+    def restore_widget_states(
+        self, settings: Optional[Mapping] = None, key: str = "states"
+    ):
         settings = core.Settings() if settings is None else settings
         splitters = settings[key].get("splitters")
         mainwindows = settings[key].get("splitters")

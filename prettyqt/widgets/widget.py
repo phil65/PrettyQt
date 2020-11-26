@@ -201,10 +201,10 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         for flag in flags:
             if flag not in WINDOW_FLAGS:
                 raise InvalidParamError(flag, WINDOW_FLAGS)
-        flags = helpers.merge_flags(flags, WINDOW_FLAGS)
+        result = helpers.merge_flags(flags, WINDOW_FLAGS)
         if append:
-            flags = flags | self.windowFlags()
-        self.setWindowFlags(flags)
+            result = result | self.windowFlags()
+        self.setWindowFlags(result)
 
     def set_flags(
         self,
