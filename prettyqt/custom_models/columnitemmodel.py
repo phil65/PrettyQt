@@ -56,7 +56,8 @@ class ColumnItemModel(core.AbstractItemModel):
     def flags(self, index):
         if not index.isValid():
             return constants.NO_CHILDREN
-        return constants.IS_ENABLED | constants.IS_SELECTABLE
+        col = index.column()
+        return self._attr_cols[col].get_flag()
 
     def headerData(self, section, orientation, role):
         if orientation == constants.HORIZONTAL and role == constants.DISPLAY_ROLE:
