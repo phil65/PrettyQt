@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from typing import Optional
-import pathlib
 
 from qtpy import QtWidgets
 
@@ -10,7 +9,7 @@ from prettyqt import core, widgets
 
 class InputAndSlider(widgets.Widget):
 
-    value_changed = core.Signal(pathlib.Path)
+    value_changed = core.Signal(int)
 
     def __init__(
         self, bounds: Optional[tuple] = None, parent: Optional[QtWidgets.QWidget] = None
@@ -27,6 +26,7 @@ class InputAndSlider(widgets.Widget):
             self.set_range(*bounds)
         self.spinbox.valueChanged.connect(self.slider.set_value)
         self.slider.valueChanged.connect(self.spinbox.set_value)
+        self.spinbox.valueChanged.connect(self.value_changed)
 
     def serialize_fields(self):
         return dict(path=self.path)
@@ -63,4 +63,5 @@ if __name__ == "__main__":
     btn.slider.set_tick_position("below")
     btn.set_value(4)
     btn.show()
+    btn.value_changed.connect(print)
     app.main_loop()
