@@ -222,6 +222,11 @@ def test_placesearchresult():
     assert result.get_type() == "unknown"
 
 
+def test_placeresult():
+    result = location.PlaceResult()
+    result.get_place()
+
+
 def test_placeeditorial():
     editorial = location.PlaceEditorial()
     str(editorial)
