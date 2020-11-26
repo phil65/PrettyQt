@@ -481,6 +481,14 @@ def test_pixmap():
     gui.Pixmap()
 
 
+def test_pixmapcache():
+    cache = gui.PixmapCache()
+    pix = gui.Pixmap()
+    cache["test"] = pix
+    cached = cache["test"]
+    assert pix.size() == cached.size()
+
+
 def test_polygonf():
     poly = gui.PolygonF()
     poly.add_points((0, 0), (2, 0), (2, 1), (0, 1))

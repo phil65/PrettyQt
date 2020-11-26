@@ -22,6 +22,7 @@ from .icon import Icon
 from .paintdevice import PaintDevice
 from .paintdevicewindow import PaintDeviceWindow
 from .pixmap import Pixmap
+from .pixmapcache import PixmapCache
 from .image import Image
 from .openglwindow import OpenGLWindow
 from .rasterwindow import RasterWindow
@@ -143,6 +144,7 @@ __all__ = [
     "Pen",
     "Picture",
     "Pixmap",
+    "PixmapCache",
     "Painter",
     "PainterPath",
     "PainterPathStroker",
