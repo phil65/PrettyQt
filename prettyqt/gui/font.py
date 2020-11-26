@@ -193,6 +193,82 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         """
         return CAPITALIZATION.inv[self.capitalization()]
 
+    def set_hinting_preference(self, preference: str):
+        """Set the hinting preference.
+
+        Valid values are "default", "none", "vertical", "full"
+
+        Args:
+            preference: hinting preference
+
+        Raises:
+            InvalidParamError: invalid hinting preference
+        """
+        if preference not in HINTING_PREFERENCE:
+            raise InvalidParamError(preference, HINTING_PREFERENCE)
+        self.setHintingPreference(HINTING_PREFERENCE[preference])
+
+    def get_hinting_preference(self) -> str:
+        """Get current hinting preference.
+
+        Possible values are "default", "none", "vertical", "full"
+
+        Returns:
+            current hinting preference
+        """
+        return HINTING_PREFERENCE.inv[self.hintingPreference()]
+
+    def set_letter_spacing(self, typ: str, spacing: float):
+        """Set the letter spacing.
+
+        Valid values are "percentage", "absolute"
+
+        Args:
+            typ: letter spacing type
+            spacing: spacing
+
+        Raises:
+            InvalidParamError: invalid letter spacing type
+        """
+        if typ not in SPACING_TYPE:
+            raise InvalidParamError(typ, SPACING_TYPE)
+        self.setLetterSpacing(SPACING_TYPE[typ], spacing)
+
+    def get_letter_spacing_type(self) -> str:
+        """Get current letter spacing type.
+
+        Possible values are "percentage", "absolute"
+
+        Returns:
+            current letter spacing type
+        """
+        return SPACING_TYPE.inv[self.letterSpacingType()]
+
+    def set_style(self, style: str):
+        """Set the font style.
+
+        Valid values are "normal", "italic", "oblique"
+
+        Args:
+            style: font style
+
+        Raises:
+            InvalidParamError: invalid font style
+        """
+        if style not in STYLE:
+            raise InvalidParamError(style, STYLE)
+        self.setStyle(STYLE[style])
+
+    def get_style(self) -> str:
+        """Get current font style.
+
+        Possible values are "normal", "italic", "oblique"
+
+        Returns:
+            current font style
+        """
+        return STYLE.inv[self.style()]
+
 
 if __name__ == "__main__":
     font = Font("Consolas")

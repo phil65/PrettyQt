@@ -99,6 +99,18 @@ def test_font():
     with pytest.raises(InvalidParamError):
         font.set_capitalization("test")
     assert font.get_capitalization() == "small_caps"
+    font.set_style("oblique")
+    with pytest.raises(InvalidParamError):
+        font.set_style("test")
+    assert font.get_style() == "oblique"
+    font.set_hinting_preference("vertical")
+    with pytest.raises(InvalidParamError):
+        font.set_hinting_preference("test")
+    assert font.get_hinting_preference() == "vertical"
+    font.set_letter_spacing("absolute", 20)
+    with pytest.raises(InvalidParamError):
+        font.set_letter_spacing("test", 20)
+    assert font.get_letter_spacing_type() == "absolute"
 
 
 def test_fontdatabase():
