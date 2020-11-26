@@ -25,6 +25,10 @@ class StandardItem(QtGui.QStandardItem):
         self.__init__()
         core.DataStream.write_bytearray(ba, self)
 
+    def __bytes__(self):
+        ba = core.DataStream.create_bytearray(self)
+        return bytes(ba)
+
     def clone(self):
         item = self.__class__()
         core.DataStream.copy_data(self, item)

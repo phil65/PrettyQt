@@ -22,6 +22,11 @@ class Image(QtGui.QImage):
     def __getitem__(self, index: Tuple[int, int]):
         return self.pixel(index[0], index[1])
 
+    def __bytes__(self):
+        ba = core.DataStream.create_bytearray(self)
+        return bytes(ba)
+
 
 if __name__ == "__main__":
     image = Image()
+    bytes(image)

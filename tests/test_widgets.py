@@ -614,6 +614,7 @@ def test_listwidgetitem(qtbot):
     item.get_foreground()
     item.get_font()
     item.get_icon()
+    bytes(item)
 
 
 def test_mainwindow(qtbot):
@@ -1198,6 +1199,7 @@ def test_treewidgetitem(qtbot):
     with pytest.raises(InvalidParamError):
         item.set_child_indicator_policy("test")
     assert item.get_child_indicator_policy() == "dont_show"
+    bytes(item)
 
 
 def test_undocommand():

@@ -39,6 +39,10 @@ class Palette(QtGui.QPalette):
     def __setitem__(self, index, value):
         self.set_color(index, value)
 
+    def __bytes__(self):
+        ba = core.DataStream.create_bytearray(self)
+        return bytes(ba)
+
     def highlight_inactive(self):
         color = self.color(self.Active, self.Highlight)
         self.setColor(self.Inactive, self.Highlight, color)

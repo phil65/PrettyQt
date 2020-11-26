@@ -36,6 +36,10 @@ class Pen(QtGui.QPen):
         self.__init__()
         core.DataStream.write_bytearray(ba, self)
 
+    def __bytes__(self):
+        ba = core.DataStream.create_bytearray(self)
+        return bytes(ba)
+
     def set_color(self, color: colors.ColorType):
         color = colors.get_color(color)
         self.setColor(color)

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Tuple
+
 from qtpy import QtGui
 
 from prettyqt import core
@@ -13,7 +15,7 @@ class Transform(QtGui.QTransform):
         self.__init__()
         core.DataStream.write_bytearray(ba, self)
 
-    def __getitem__(self, value) -> float:
+    def __getitem__(self, value: Tuple[int, int]) -> float:
         if value[0] == 0:
             if value[1] == 0:
                 return self.m11()
@@ -37,6 +39,11 @@ class Transform(QtGui.QTransform):
                 return self.m33()
         raise ValueError(f"Wrong value {value}")
 
+    def __bytes__(self):
+        ba = core.DataStream.create_bytearray(self)
+        return bytes(ba)
+
 
 if __name__ == "__main__":
     transform = Transform()
+    print(transform[0, 0])

@@ -30,7 +30,8 @@ def test_repr(name, cls):
 
 
 def test_brush():
-    gui.Brush()
+    brush = gui.Brush()
+    bytes(brush)
 
 
 def test_clipboard(qapp):
@@ -67,6 +68,7 @@ def test_cursor():
         pickle.dump(cursor, jar)
     with open("data.pkl", "rb") as jar:
         cursor = pickle.load(jar)
+    bytes(cursor)
 
 
 # def test_desktopservices():
@@ -190,6 +192,7 @@ def test_image():
         pickle.dump(img, jar)
     with open("data.pkl", "rb") as jar:
         img = pickle.load(jar)
+    bytes(img)
 
 
 def test_imageiohandler():
@@ -276,6 +279,7 @@ def test_standarditem():
         s = pickle.load(jar)
     s.set_icon("mdi.timer")
     s.clone()
+    bytes(s)
 
 
 def test_standarditemmodel():
@@ -299,6 +303,7 @@ def test_transform():
     for i in range(3):
         for j in range(3):
             assert transform[i, j] in [0, 1]
+    bytes(transform)
 
 
 def test_textblock():
@@ -457,6 +462,7 @@ def test_palette():
     color = gui.Color("red")
     pal["button"] = color
     assert pal["button"] == color
+    bytes(pal)
 
 
 def test_pdfwriter():
@@ -479,14 +485,18 @@ def test_pen():
     with pytest.raises(InvalidParamError):
         pen.set_style("test")
     assert pen.get_style() == "dash_dot"
+    bytes(pen)
 
 
 def test_picture():
-    gui.Picture()
+    picture = gui.Picture()
+    bytes(picture)
 
 
 def test_pixmap():
-    gui.Pixmap()
+    pix = gui.Pixmap()
+    bytes(pix)
+    pix.create_dot()
 
 
 def test_pixmapcache():
@@ -514,6 +524,7 @@ def test_polygonf():
     polygon = poly.to_polygon()
     assert type(polygon) == gui.Polygon
     poly.add_points((0, 1), core.Point(2, 2))
+    bytes(poly)
 
 
 def test_polygon():
@@ -547,6 +558,12 @@ def test_polygon():
     p = core.Point(5, 5)
     poly[5] = p
     assert poly[5] == p
+    bytes(poly)
+
+
+def test_region():
+    region = gui.Region()
+    bytes(region)
 
 
 def test_regexpvalidator():

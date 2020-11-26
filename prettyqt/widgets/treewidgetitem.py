@@ -41,6 +41,10 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         self.__init__()
         core.DataStream.write_bytearray(ba, self)
 
+    def __bytes__(self):
+        ba = core.DataStream.create_bytearray(self)
+        return bytes(ba)
+
     def set_icon(self, icon: gui.icon.IconType, column: int = 0):
         """Set the icon for the action.
 

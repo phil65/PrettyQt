@@ -58,6 +58,10 @@ class Polygon(QtGui.QPolygon):
     def __setstate__(self, ba):
         core.DataStream.write_bytearray(ba, self)
 
+    def __bytes__(self):
+        ba = core.DataStream.create_bytearray(self)
+        return bytes(ba)
+
     def get_point(self, index: int) -> core.Point:
         return core.Point(self.point(index))
 

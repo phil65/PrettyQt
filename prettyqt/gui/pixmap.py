@@ -22,6 +22,10 @@ class Pixmap(QtGui.QPixmap):
         self.__init__()
         core.DataStream.write_bytearray(ba, self)
 
+    def __bytes__(self):
+        ba = core.DataStream.create_bytearray(self)
+        return bytes(ba)
+
     @classmethod
     def from_file(cls, path: Union[pathlib.Path, str]):
         if isinstance(path, str):
@@ -52,4 +56,4 @@ if __name__ == "__main__":
 
     app = gui.app()
     p = Pixmap()
-    print(bool(p))
+    print(bytes(p))
