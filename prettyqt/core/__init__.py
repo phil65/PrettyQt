@@ -37,6 +37,7 @@ from .versionnumber import VersionNumber
 from .libraryinfo import LibraryInfo
 from .datastream import DataStream
 from .bytearray import ByteArray
+from .bytearraymatcher import ByteArrayMatcher
 from .url import Url
 from .urlquery import UrlQuery
 from .coreapplication import CoreApplication
@@ -118,6 +119,7 @@ __all__ = [
     "LibraryInfo",
     "PersistentModelIndex",
     "ByteArray",
+    "ByteArrayMatcher",
     "Url",
     "Library",
     "PluginLoader",

@@ -70,6 +70,11 @@ def test_buffer():
         pass
 
 
+def test_bytearraymatcher():
+    matcher = core.ByteArrayMatcher()
+    repr(matcher)
+
+
 def test_coreapplication(qapp):
     def test():
         pass
