@@ -113,7 +113,5 @@ class Icon(QtGui.QIcon):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-
-    app = widgets.app()
+    app = gui.app()
     icon = Icon.for_color("green")

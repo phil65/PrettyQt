@@ -45,9 +45,7 @@ class TextToSpeech(QtTextToSpeech.QTextToSpeech):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-
-    app = widgets.app()
+    app = core.app()
     print(TextToSpeech.availableEngines())
     val = TextToSpeech("sapi")
     print(val.get_available_voices())
