@@ -302,8 +302,6 @@ def test_object(qapp):
     assert w2.find_parent(widgets.Splitter) == w
     layout = widgets.BoxLayout("vertical")
     layout.add(w)
-    layout.store_widget_states()
-    layout.restore_widget_states()
 
 
 def test_persistentmodelindex():

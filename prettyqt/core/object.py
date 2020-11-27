@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Union, DefaultDict, List, Mapping, MutableMapping, Type
+from typing import Optional, Union, DefaultDict, List, Type
 from collections import defaultdict
 from contextlib import contextmanager
 import itertools
 
-from qtpy import QtCore, QtWidgets
-
-from prettyqt import core
+from qtpy import QtCore
 
 counter_dict: DefaultDict = defaultdict(itertools.count)
 
@@ -94,49 +92,6 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindDirectChildrenOnly
         return self.findChild(typ, name, options=flag)
 
-    def store_widget_states(
-        self, settings: Optional[MutableMapping] = None, key: str = "states"
-    ):
-        splitters = self.find_children(QtWidgets.QSplitter)
-        splitter_dct = {
-            sp.objectName(): sp.saveState() for sp in splitters if sp.objectName()
-        }
-        mainwindows = self.find_children(QtWidgets.QMainWindow)
-        mw_dct = {
-            mw.objectName(): mw.saveState() for mw in mainwindows if mw.objectName()
-        }
-        headerviews = self.find_children(QtWidgets.QHeaderView)
-        headerview_dct = {
-            h.objectName(): h.saveState() for h in headerviews if h.objectName()
-        }
-        settings = core.Settings() if settings is None else settings
-        settings[key] = dict(
-            splitters=splitter_dct, mainwindows=mw_dct, headerviews=headerview_dct
-        )
-
-    def restore_widget_states(
-        self, settings: Optional[Mapping] = None, key: str = "states"
-    ):
-        settings = core.Settings() if settings is None else settings
-        splitters = settings[key].get("splitters")
-        mainwindows = settings[key].get("splitters")
-        headerviews = settings[key].get("headerviews")
-        if splitters is not None:
-            for k, v in splitters.items():
-                w = self.find_child(QtWidgets.QSplitter, name=k)
-                if w is not None:
-                    w.restoreState(v)
-        if mainwindows is not None:
-            for k, v in mainwindows.items():
-                w = self.find_child(QtWidgets.QMainWindow, name=k)
-                if w is not None:
-                    w.restoreState(v)
-        if headerviews is not None:
-            for k, v in headerviews.items():
-                w = self.find_child(QtWidgets.QHeaderView, name=k)
-                if w is not None:
-                    w.restoreState(v)
-
     def find_parent(
         self, typ: QtCore.QObject, name: Optional[str] = None
     ) -> Optional[QtCore.QObject]:
@@ -147,11 +102,3 @@ class Object(QtCore.QObject):
                 if name is None or node.objectName() == name:
                     return node
         return None
-
-    def raise_dock(self) -> bool:
-        w = self.find_parent(QtWidgets.QDockWidget)
-        if w is None:
-            return False
-        w.setVisible(True)
-        w.raise_()
-        return True

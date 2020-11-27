@@ -436,6 +436,14 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def set_margin(self, margin: int) -> None:
         self.setContentsMargins(margin, margin, margin, margin)
 
+    def raise_dock(self) -> bool:
+        w = self.find_parent(QtWidgets.QDockWidget)
+        if w is None:
+            return False
+        w.setVisible(True)
+        w.raise_()
+        return True
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])

@@ -49,3 +49,5 @@ def test_application(qapp):
         qapp.set_layout_direction("test")
     assert qapp.get_layout_direction() == "right_to_left"
     qapp.get_font()
+    qapp.store_widget_states()
+    qapp.restore_widget_states()
