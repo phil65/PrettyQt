@@ -242,6 +242,14 @@ def test_linef():
         pass
 
 
+def test_marginsf():
+    margin = core.MarginsF(0, 0, 0, 0)
+    assert repr(margin) == "MarginsF(0.0, 0.0, 0.0, 0.0)"
+    assert bool(margin) is False
+    for length in margin:
+        pass
+
+
 def test_mimedata():
     mime_data = core.MimeData()
     mime_data.set_data("type a", "data")

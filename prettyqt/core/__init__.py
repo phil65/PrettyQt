@@ -25,6 +25,7 @@ from .easingcurve import EasingCurve
 from .deadlinetimer import DeadlineTimer
 from .object import Object
 from .margins import Margins
+from .marginsf import MarginsF
 from .library import Library
 from .pluginloader import PluginLoader
 from .locale import Locale
@@ -116,6 +117,7 @@ __all__ = [
     # "Debug",
     "DeadlineTimer",
     "Margins",
+    "MarginsF",
     "Locale",
     "TextStream",
     "EventLoop",
