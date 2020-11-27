@@ -98,7 +98,15 @@ if VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
     from .transposeproxymodel import TransposeProxyModel
 
+
+def app():
+    if CoreApplication.instance() is not None:
+        return CoreApplication.instance()
+    return CoreApplication([])
+
+
 __all__ = [
+    "app",
     "Object",
     "Uuid",
     "DeadlineTimer",
