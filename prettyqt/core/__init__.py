@@ -38,6 +38,7 @@ from .animationgroup import AnimationGroup
 from .parallelanimationgroup import ParallelAnimationGroup
 from .sequentialanimationgroup import SequentialAnimationGroup
 from .versionnumber import VersionNumber
+from .operatingsystemversion import OperatingSystemVersion
 from .libraryinfo import LibraryInfo
 from .datastream import DataStream
 from .bytearray import ByteArray
@@ -123,6 +124,7 @@ __all__ = [
     "EventLoop",
     "DataStream",
     "VersionNumber",
+    "OperatingSystemVersion",
     "LibraryInfo",
     "PersistentModelIndex",
     "ByteArray",

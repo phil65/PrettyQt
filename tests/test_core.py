@@ -304,6 +304,12 @@ def test_object(qapp):
     layout.add(w)
 
 
+def test_operatingsystemversion():
+    version = core.OperatingSystemVersion("android", 11, 0, 0)
+    assert version.get_versionnumber() == core.VersionNumber(11, 0, 0)
+    assert version.get_type() == "android"
+
+
 def test_persistentmodelindex():
     index = core.PersistentModelIndex()
     assert bool(index) is False
