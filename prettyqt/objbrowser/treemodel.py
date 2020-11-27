@@ -14,7 +14,7 @@ import inspect
 from difflib import SequenceMatcher
 from collections import OrderedDict
 
-from qtpy import QtWidgets
+from qtpy import QtCore
 
 from prettyqt import core, constants
 from prettyqt.objbrowser.treeitem import TreeItem
@@ -32,7 +32,7 @@ class TreeModel(ColumnItemModel):
         obj: Any,
         obj_name: str = "",
         attr_cols: Optional[List[columnitem.ColumnItem]] = None,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: Optional[QtCore.QObject] = None,
     ):
         """Constructor.
 

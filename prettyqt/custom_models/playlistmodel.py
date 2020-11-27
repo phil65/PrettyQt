@@ -1,4 +1,6 @@
-from qtpy import QtMultimedia
+from typing import Optional
+
+from qtpy import QtMultimedia, QtCore
 
 from prettyqt import constants, core
 
@@ -7,7 +9,7 @@ class PlaylistModel(core.AbstractItemModel):
 
     HEADER = ["Name"]
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QtCore.QObject] = None):
         super().__init__(parent)
         self._playlist = None
 
