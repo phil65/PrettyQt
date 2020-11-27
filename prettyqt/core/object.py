@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Union, DefaultDict, List, Mapping, MutableMapping
+from typing import Optional, Union, DefaultDict, List, Mapping, MutableMapping, Type
 from collections import defaultdict
 from contextlib import contextmanager
 import itertools
@@ -72,7 +72,7 @@ class Object(QtCore.QObject):
 
     def find_children(
         self,
-        typ=QtCore.QObject,
+        typ: Type[QtCore.QObject] = QtCore.QObject,
         name: Optional[Union[str, QtCore.QRegularExpression]] = None,
         recursive: bool = True,
     ) -> List[QtCore.QObject]:
@@ -84,7 +84,7 @@ class Object(QtCore.QObject):
 
     def find_child(
         self,
-        typ=QtCore.QObject,
+        typ: Type[QtCore.QObject] = QtCore.QObject,
         name: Optional[Union[str, QtCore.QRegularExpression]] = None,
         recursive: bool = True,
     ):
