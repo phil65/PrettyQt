@@ -55,6 +55,12 @@ def test_abstracttablemodel():
         pass
     model.force_reset()
     model.force_layoutchange()
+    model.check_index(
+        QtCore.QModelIndex(),
+        index_is_valid=True,
+        do_not_use_parent=True,
+        parent_is_invalid=True,
+    )
     # qtmodeltester.check(model, force_py=True)
 
 

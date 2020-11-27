@@ -6,6 +6,20 @@ from typing import Optional, Tuple
 from qtpy import QtCore
 
 from prettyqt import core
+from prettyqt.utils import bidict
+
+CHECK_INDEX_OPTIONS = bidict(
+    none=QtCore.QAbstractItemModel.CheckIndexOption.NoOption,
+    index_is_valid=QtCore.QAbstractItemModel.CheckIndexOption.IndexIsValid,
+    do_not_use_parent=QtCore.QAbstractItemModel.CheckIndexOption.DoNotUseParent,
+    parent_is_invalid=QtCore.QAbstractItemModel.CheckIndexOption.ParentIsInvalid,
+)
+
+LAYOUT_CHANGE_HINT = bidict(
+    none=QtCore.QAbstractItemModel.NoLayoutChangeHint,
+    vertical_sort=QtCore.QAbstractItemModel.VerticalSortHint,
+    horizontal_sort=QtCore.QAbstractItemModel.HorizontalSortHint,
+)
 
 
 QtCore.QAbstractItemModel.__bases__ = (core.Object,)
@@ -27,6 +41,22 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
 
     def columns(self) -> int:
         return self.columnCount()
+
+    def check_index(
+        self,
+        index: QtCore.QModelIndex,
+        index_is_valid: bool = False,
+        do_not_use_parent: bool = False,
+        parent_is_invalid: bool = False,
+    ) -> bool:
+        flag = QtCore.QAbstractItemModel.CheckIndexOptions(0)
+        if index_is_valid:
+            flag |= QtCore.QAbstractItemModel.CheckIndexOption.IndexIsValid
+        if do_not_use_parent:
+            flag |= QtCore.QAbstractItemModel.CheckIndexOption.DoNotUseParent
+        if parent_is_invalid:
+            flag |= QtCore.QAbstractItemModel.CheckIndexOption.ParentIsInvalid
+        return self.checkIndex(index, flag)
 
     @contextlib.contextmanager
     def change_layout(self):
