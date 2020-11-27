@@ -468,6 +468,7 @@ def test_palette():
 def test_pdfwriter():
     writer = gui.PdfWriter("test")
     writer.setup(core.RectF())
+    writer.set_page_margins((0, 0, 0, 0), unit="pica")
 
 
 def test_pen():
