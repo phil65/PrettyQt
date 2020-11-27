@@ -434,6 +434,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.get_hinting_preference" class="md-nav__link">
+    get_hinting_preference()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.get_letter_spacing_type" class="md-nav__link">
+    get_letter_spacing_type()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.get_style" class="md-nav__link">
+    get_style()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.font.Font.get_weight" class="md-nav__link">
     get_weight()
   </a>
@@ -443,6 +464,27 @@
           <li class="md-nav__item">
   <a href="#prettyqt.gui.font.Font.set_capitalization" class="md-nav__link">
     set_capitalization()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.set_hinting_preference" class="md-nav__link">
+    set_hinting_preference()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.set_letter_spacing" class="md-nav__link">
+    set_letter_spacing()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.set_style" class="md-nav__link">
+    set_style()
   </a>
   
 </li>
@@ -2276,6 +2318,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.get_hinting_preference" class="md-nav__link">
+    get_hinting_preference()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.get_letter_spacing_type" class="md-nav__link">
+    get_letter_spacing_type()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.get_style" class="md-nav__link">
+    get_style()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.font.Font.get_weight" class="md-nav__link">
     get_weight()
   </a>
@@ -2285,6 +2348,27 @@
           <li class="md-nav__item">
   <a href="#prettyqt.gui.font.Font.set_capitalization" class="md-nav__link">
     set_capitalization()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.set_hinting_preference" class="md-nav__link">
+    set_hinting_preference()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.set_letter_spacing" class="md-nav__link">
+    set_letter_spacing()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.font.Font.set_style" class="md-nav__link">
+    set_style()
   </a>
   
 </li>
@@ -4065,6 +4149,141 @@ get_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.font.Font.get_hinting_preference">
+
+        <code class="highlight language-python">
+get_hinting_preference<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Get current hinting preference.</p>
+<p>Possible values are "default", "none", "vertical", "full"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>current hinting preference</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Get current hinting preference.</span>
+
+<span class="sd">    Possible values are "default", "none", "vertical", "full"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        current hinting preference</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">HINTING_PREFERENCE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">hintingPreference</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.font.Font.get_letter_spacing_type">
+
+        <code class="highlight language-python">
+get_letter_spacing_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Get current letter spacing type.</p>
+<p>Possible values are "percentage", "absolute"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>current letter spacing type</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_letter_spacing_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Get current letter spacing type.</span>
+
+<span class="sd">    Possible values are "percentage", "absolute"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        current letter spacing type</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">SPACING_TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">letterSpacingType</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.font.Font.get_style">
+
+        <code class="highlight language-python">
+get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Get current font style.</p>
+<p>Possible values are "normal", "italic", "oblique"</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>current font style</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Get current font style.</span>
+
+<span class="sd">    Possible values are "normal", "italic", "oblique"</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        current font style</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">STYLE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.get_weight">
 
         <code class="highlight language-python">
@@ -4179,6 +4398,228 @@ set_capitalization<span class="p">(</span><span class="bp">self</span><span clas
     <span class="k">if</span> <span class="n">capitalization</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CAPITALIZATION</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">capitalization</span><span class="p">,</span> <span class="n">CAPITALIZATION</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCapitalization</span><span class="p">(</span><span class="n">CAPITALIZATION</span><span class="p">[</span><span class="n">capitalization</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_hinting_preference">
+
+        <code class="highlight language-python">
+set_hinting_preference<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preference</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the hinting preference.</p>
+<p>Valid values are "default", "none", "vertical", "full"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>preference</code></td>
+<td><code>str</code></td>
+<td>
+<p>hinting preference</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid hinting preference</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preference</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the hinting preference.</span>
+
+<span class="sd">    Valid values are "default", "none", "vertical", "full"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        preference: hinting preference</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid hinting preference</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">preference</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">HINTING_PREFERENCE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">preference</span><span class="p">,</span> <span class="n">HINTING_PREFERENCE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setHintingPreference</span><span class="p">(</span><span class="n">HINTING_PREFERENCE</span><span class="p">[</span><span class="n">preference</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_letter_spacing">
+
+        <code class="highlight language-python">
+set_letter_spacing<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">spacing</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the letter spacing.</p>
+<p>Valid values are "percentage", "absolute"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>typ</code></td>
+<td><code>str</code></td>
+<td>
+<p>letter spacing type</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>spacing</code></td>
+<td><code>float</code></td>
+<td>
+<p>spacing</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid letter spacing type</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_letter_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="sd">"""Set the letter spacing.</span>
+
+<span class="sd">    Valid values are "percentage", "absolute"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        typ: letter spacing type</span>
+<span class="sd">        spacing: spacing</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid letter spacing type</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPACING_TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">SPACING_TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setLetterSpacing</span><span class="p">(</span><span class="n">SPACING_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">],</span> <span class="n">spacing</span><span class="p">)</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_style">
+
+        <code class="highlight language-python">
+set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the font style.</p>
+<p>Valid values are "normal", "italic", "oblique"</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>style</code></td>
+<td><code>str</code></td>
+<td>
+<p>font style</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid font style</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Set the font style.</span>
+
+<span class="sd">    Valid values are "normal", "italic", "oblique"</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        style: font style</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid font style</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STYLE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">STYLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
