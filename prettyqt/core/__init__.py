@@ -28,6 +28,7 @@ from .margins import Margins
 from .library import Library
 from .pluginloader import PluginLoader
 from .locale import Locale
+from .textstream import TextStream
 from .eventloop import EventLoop
 from .abstractanimation import AbstractAnimation
 from .variantanimation import VariantAnimation
@@ -116,6 +117,7 @@ __all__ = [
     "DeadlineTimer",
     "Margins",
     "Locale",
+    "TextStream",
     "EventLoop",
     "DataStream",
     "VersionNumber",

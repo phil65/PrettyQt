@@ -537,6 +537,22 @@ def test_textboundaryfinder():
     assert finder.get_boundary_reasons() == ["break_opportunity", "start_of_item"]
 
 
+def test_textstream():
+    textstream = core.TextStream()
+    textstream.set_field_alignment("accounting_style")
+    assert textstream.get_field_alignment() == "accounting_style"
+    with pytest.raises(InvalidParamError):
+        textstream.set_field_alignment("test")
+    textstream.set_status("read_past_end")
+    assert textstream.get_status() == "read_past_end"
+    with pytest.raises(InvalidParamError):
+        textstream.set_status("test")
+    textstream.set_real_number_notation("fixed")
+    assert textstream.get_real_number_notation() == "fixed"
+    with pytest.raises(InvalidParamError):
+        textstream.set_real_number_notation("test")
+
+
 def test_thread():
     core.ThreadPool()
 
