@@ -125,6 +125,14 @@ def test_datetime():
     assert dt.get_time_spec() == "utc"
 
 
+# def test_debug():
+#     debug = core.Debug()
+#     debug.set_verbosity("maximum")
+#     with pytest.raises(InvalidParamError):
+#         debug.set_verbosity("test")
+#     assert debug.get_verbosity() == "maximum"
+
+
 def test_deadlinetimer():
     timer = core.DeadlineTimer()
     timer.set_type("coarse")

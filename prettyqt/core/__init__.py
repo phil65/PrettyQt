@@ -17,6 +17,8 @@ from qtpy.QtCore import QRectF as RectF
 from qtpy.QtCore import qInstallMessageHandler as install_message_handler
 from .persistentmodelindex import PersistentModelIndex
 from .uuid import Uuid
+
+# from .debug import Debug
 from .line import Line
 from .linef import LineF
 from .easingcurve import EasingCurve
@@ -110,6 +112,7 @@ __all__ = [
     "app",
     "Object",
     "Uuid",
+    # "Debug",
     "DeadlineTimer",
     "Margins",
     "Locale",
