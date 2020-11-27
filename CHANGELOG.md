@@ -1,3 +1,21 @@
+## v0.137.0 (2020-11-27)
+
+### Feat
+
+- **core**: add OperatingSystemVersion class
+- **PdfWriter**: add set_page_margins method
+- **core**: add MarginsF class
+- **core**: Add TextStream class
+- **core**: add ByteArrayMatcher
+- **AbstractItemModel**: add check_index method
+- **PlaceManager**: add search_place method
+- **core**: add app method
+- add __bytes__ method to some classes
+- **utils**: add Singleton metaclass
+- **icon**: add add_pixmap method
+- **gui**: Add PixmapCache
+- **Font**: add some more methods
+
 ## v0.136.0 (2020-11-26)
 
 ### Feat
