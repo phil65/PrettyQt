@@ -137,6 +137,7 @@ def test_placemanager():
     manager.get_locales()
     manager.get_category("test")
     manager.get_child_categories("test")
+    manager.search_place("Shop", coord=(51, 7))
 
 
 def test_placeuser():
