@@ -159,6 +159,11 @@ def test_diriterator():
         pass
 
 
+def test_elapsedtimer():
+    timer = core.ElapsedTimer()
+    timer.get_clock_type()
+
+
 def test_easingcurve():
     c = core.EasingCurve()
     c.set_type("in_cubic")
