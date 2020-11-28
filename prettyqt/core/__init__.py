@@ -59,6 +59,7 @@ from .date import Date
 from .time import Time
 from .datetime import DateTime
 
+from .resource import Resource
 from .size import Size
 from .fileinfo import FileInfo
 from .storageinfo import StorageInfo
@@ -125,6 +126,7 @@ __all__ = [
     "Margins",
     "MarginsF",
     "Locale",
+    "Resource",
     "TextStream",
     "EventLoop",
     "DataStream",

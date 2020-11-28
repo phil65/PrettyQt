@@ -445,6 +445,19 @@ def test_regularexpression():
     assert len(matches) == 3
 
 
+def test_resource():
+    resource = core.Resource()
+    repr(resource)
+    bytes(resource)
+    assert bool(resource) is True
+    for file in resource:
+        pass
+    assert resource.get_compression_algorithm() == "none"
+    resource.get_absolute_file_path()
+    resource.get_locale()
+    resource.get_last_modified()
+
+
 def test_runnable():
     core.Runnable()
 
