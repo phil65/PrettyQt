@@ -82,6 +82,12 @@ def test_coreapplication(qapp):
     core.CoreApplication.call_on_exit(test)
 
 
+def test_cryptographichash():
+    cryptohash = core.CryptographicHash("sha_1")
+    assert core.CryptographicHash.get_hash_length("sha_256") == 32
+    assert bytes(cryptohash) == cryptohash.get_result()
+
+
 def test_datastream():
     stream = core.DataStream()
     stream.set_float_precision("double")
