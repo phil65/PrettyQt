@@ -15,6 +15,9 @@ TYPES = bidict(
 
 
 class ElapsedTimer(QtCore.QElapsedTimer):
+    def __bool__(self):
+        return self.isValid()
+
     def get_clock_type(self) -> str:
         """Return current clock type.
 

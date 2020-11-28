@@ -162,6 +162,7 @@ def test_diriterator():
 def test_elapsedtimer():
     timer = core.ElapsedTimer()
     timer.get_clock_type()
+    assert bool(timer) is False
 
 
 def test_easingcurve():
