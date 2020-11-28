@@ -25,6 +25,7 @@ from .linef import LineF
 from .easingcurve import EasingCurve
 from .deadlinetimer import DeadlineTimer
 from .elapsedtimer import ElapsedTimer
+from .basictimer import BasicTimer
 from .object import Object
 from .margins import Margins
 from .marginsf import MarginsF
@@ -123,6 +124,7 @@ __all__ = [
     # "Debug",
     "DeadlineTimer",
     "ElapsedTimer",
+    "BasicTimer",
     "Margins",
     "MarginsF",
     "Locale",

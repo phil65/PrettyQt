@@ -64,6 +64,15 @@ def test_abstracttablemodel():
     # qtmodeltester.check(model, force_py=True)
 
 
+def test_basictimer():
+    obj = core.Object()
+    timer = core.BasicTimer()
+    timer.start_timer(200, obj, "coarse")
+    with pytest.raises(InvalidParamError):
+        timer.start_timer(200, obj, "test")
+    timer.stop()
+
+
 def test_buffer():
     buf = core.Buffer()
     with buf.open_file("read_only"):
