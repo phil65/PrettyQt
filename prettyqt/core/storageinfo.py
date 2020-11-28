@@ -1,0 +1,36 @@
+# -*- coding: utf-8 -*-
+
+from __future__ import annotations
+
+from typing import List
+import pathlib
+
+from qtpy import QtCore
+
+
+class StorageInfo(QtCore.QStorageInfo):
+    def __bool__(self):
+        return self.isValid()
+
+    def __repr__(self):
+        return f"StorageInfo({self.rootPath()!r})"
+
+    def get_device(self) -> str:
+        return bytes(self.device()).decode()
+
+    def get_file_system_type(self) -> str:
+        return bytes(self.fileSystemType()).decode()
+
+    def get_subvolume(self) -> str:
+        return bytes(self.subvolume()).decode()
+
+    def get_root_path(self) -> pathlib.Path:
+        return pathlib.Path(self.rootPath())
+
+    @classmethod
+    def get_root(cls) -> StorageInfo:
+        return cls(cls.root())
+
+    @classmethod
+    def get_mounted_volumes(cls) -> List[StorageInfo]:
+        return [cls(i) for i in cls.mountedVolumes()]

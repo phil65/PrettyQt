@@ -546,6 +546,18 @@ def test_sortfilterproxymodel():
     core.SortFilterProxyModel()
 
 
+def storageinfo():
+    info = core.StorageInfo()
+    assert bool(info) is True
+    repr(info)
+    info.get_device()
+    info.get_file_system_type()
+    info.get_subvolume()
+    info.get_root_path()
+    core.StorageInfo.get_root()
+    core.StorageInfo.get_mounted_devices()
+
+
 def test_temporaryfile():
     file = core.TemporaryFile()
     with file.open_file("read_only"):
