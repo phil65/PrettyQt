@@ -90,6 +90,7 @@ from .textobject import TextObject
 from .textblock import TextBlock
 from .textblockgroup import TextBlockGroup
 from .textframe import TextFrame
+from .abstracttextdocumentlayout import AbstractTextDocumentLayout
 
 
 def app():
@@ -178,4 +179,5 @@ __all__ = [
     "TextFormat",
     "TextFrameFormat",
     "TextFrame",
+    "AbstractTextDocumentLayout",
 ]

@@ -173,6 +173,8 @@ from .sizegrip import SizeGrip
 from .keyeventtransition import KeyEventTransition
 from .mouseeventtransition import MouseEventTransition
 
+from .plaintextdocumentlayout import PlainTextDocumentLayout
+
 
 def app():
     if Application.instance() is not None:
@@ -341,4 +343,5 @@ __all__ = [
     "GraphicsSceneHelpEvent",
     "GraphicsSceneMoveEvent",
     "GraphicsSceneResizeEvent",
+    "PlainTextDocumentLayout",
 ]

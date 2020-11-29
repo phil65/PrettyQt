@@ -725,6 +725,15 @@ def test_messagebox(qtbot):
     widget.get_standard_buttons()
 
 
+def test_plaintextdocumentlayout():
+    doc = gui.TextDocument()
+    layout = widgets.PlainTextDocumentLayout(doc)
+    repr(layout)
+    assert len(layout) == 1
+    layout.get_block_bounding_rect(gui.TextBlock())
+    layout.get_frame_bounding_rect(gui.TextFrame(doc))
+
+
 def test_plaintextedit(qtbot):
     widget = widgets.PlainTextEdit("This is a test")
     with widget.create_cursor() as c:
