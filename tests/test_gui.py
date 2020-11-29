@@ -304,6 +304,9 @@ def test_transform():
         for j in range(3):
             assert transform[i, j] in [0, 1]
     bytes(transform)
+    repr(transform)
+    assert transform.get_type() == "none"
+    transform = gui.Transform.clone_from(transform)
 
 
 def test_textblock():
