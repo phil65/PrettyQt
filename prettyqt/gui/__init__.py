@@ -15,6 +15,7 @@ from qtpy.QtGui import QFocusEvent as FocusEvent
 from qtpy.QtGui import QDragEnterEvent as DragEnterEvent
 from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
 
+from .screen import Screen
 from .keysequence import KeySequence
 from .surface import Surface
 from .window import Window
@@ -110,6 +111,7 @@ __all__ = [
     "DropEvent",
     "DragEnterEvent",
     "FocusEvent",
+    "Screen",
     "Gradient",
     "LinearGradient",
     "RadialGradient",

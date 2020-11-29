@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from typing import List
 import contextlib
 
 from qtpy import QtGui, QtCore
@@ -87,3 +88,12 @@ class GuiApplication(QtGui.QGuiApplication):
             layout direction
         """
         return LAYOUT_DIRECTIONS.inv[self.layoutDirection()]
+
+    def get_primary_screen(self) -> gui.Screen:
+        return gui.Screen(self.primaryScreen())
+
+    def get_screen_at(self, point: QtCore.QPoint) -> gui.Screen:
+        return gui.Screen(self.screenAt(point))
+
+    def get_screens(self) -> List[gui.Screen]:
+        return [gui.Screen(i) for i in self.screens()]

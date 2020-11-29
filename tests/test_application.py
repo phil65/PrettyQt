@@ -6,7 +6,7 @@
 import pytest
 from qtpy import QtGui
 
-from prettyqt import widgets
+from prettyqt import core, widgets
 from prettyqt.utils import InvalidParamError
 
 
@@ -51,3 +51,6 @@ def test_application(qapp):
     qapp.get_font()
     qapp.store_widget_states()
     qapp.restore_widget_states()
+    qapp.get_primary_screen()
+    qapp.get_screens()
+    qapp.get_screen_at(core.Point(1, 1))

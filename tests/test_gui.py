@@ -271,6 +271,26 @@ def test_movie():
     repr(movie)
 
 
+def test_screen(qapp):
+    screen = qapp.get_primary_screen()
+    screen.get_geometry()
+    screen.get_size()
+    screen.get_available_geometry()
+    screen.get_available_size()
+    screen.get_available_virtual_geometry()
+    screen.get_available_virtual_size()
+    screen.get_virtual_geometry()
+    screen.get_virtual_size()
+    screen.get_native_orientation()
+    screen.get_orientation()
+    screen.get_primary_orientation()
+    screen.get_physical_size()
+    screen.get_angle_between("primary", "landscape")
+    w = widgets.Widget()
+    screen.grab_window(w.winId())
+    screen.get_virtual_siblings()
+
+
 def test_standarditem():
     s = gui.StandardItem()
     with open("data.pkl", "wb") as jar:
