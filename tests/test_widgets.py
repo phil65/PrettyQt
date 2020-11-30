@@ -234,6 +234,10 @@ def test_dialog(qtbot, qttester):
     dlg.add_buttonbox()
 
 
+def test_dial(qtbot):
+    widgets.Dial()
+
+
 def test_dialogbuttonbox(qtbot):
     box = widgets.DialogButtonBox()
     box.set_horizontal()

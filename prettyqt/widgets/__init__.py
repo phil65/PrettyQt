@@ -93,6 +93,7 @@ from .errormessage import ErrorMessage
 from .filesystemmodel import FileSystemModel
 
 from .slider import Slider
+from .dial import Dial
 
 from .dockwidget import DockWidget
 from .action import Action
@@ -255,6 +256,7 @@ __all__ = [
     "GridLayout",
     "ToolBox",
     "Slider",
+    "Dial",
     "StyleOptionButton",
     "StyleOptionDockWidget",
     "StyleOptionFocusRect",
