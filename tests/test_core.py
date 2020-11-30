@@ -213,6 +213,7 @@ def test_file():
         pass
     str(buf)
     repr(buf)
+    assert buf.get_error() == "open"
 
 
 def test_historystate():
