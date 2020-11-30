@@ -23,6 +23,9 @@ from .uuid import Uuid
 from .line import Line
 from .linef import LineF
 from .easingcurve import EasingCurve
+from .randomgenerator import RandomGenerator
+
+# from .randomgenerator64 import RandomGenerator64
 from .deadlinetimer import DeadlineTimer
 from .elapsedtimer import ElapsedTimer
 from .basictimer import BasicTimer
@@ -164,6 +167,8 @@ __all__ = [
     "Line",
     "LineF",
     "EasingCurve",
+    "RandomGenerator",
+    # "RandomGenerator64",
     "AbstractAnimation",
     "AnimationGroup",
     "ParallelAnimationGroup",
