@@ -14,6 +14,32 @@ from qtpy.QtGui import QDropEvent as DropEvent
 from qtpy.QtGui import QFocusEvent as FocusEvent
 from qtpy.QtGui import QDragEnterEvent as DragEnterEvent
 from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
+from qtpy.QtGui import QResizeEvent as ResizeEvent
+from qtpy.QtGui import QNativeGestureEvent as NativeGestureEvent
+from qtpy.QtGui import QMoveEvent as MoveEvent
+from qtpy.QtGui import QInputMethodEvent as InputMethodEvent
+from qtpy.QtGui import QInputMethodQueryEvent as InputMethodQueryEvent
+from qtpy.QtGui import QCloseEvent as CloseEvent
+from qtpy.QtGui import QDragLeaveEvent as DragLeaveEvent
+from qtpy.QtGui import QHelpEvent as HelpEvent
+from qtpy.QtGui import QHideEvent as HideEvent
+from qtpy.QtGui import QHoverEvent as HoverEvent
+from qtpy.QtGui import QDragMoveEvent as DragMoveEvent
+from qtpy.QtGui import QEnterEvent as EnterEvent
+from qtpy.QtGui import QExposeEvent as ExposeEvent
+from qtpy.QtGui import QFileOpenEvent as FileOpenEvent
+from qtpy.QtGui import QIconDragEvent as IconDragEvent
+from qtpy.QtGui import QInputEvent as InputEvent
+from qtpy.QtGui import QPaintEvent as PaintEvent
+from qtpy.QtGui import QShortcutEvent as ShortcutEvent
+from qtpy.QtGui import QStatusTipEvent as StatusTipEvent
+from qtpy.QtGui import QTouchEvent as TouchEvent
+from qtpy.QtGui import QTabletEvent as TabletEvent
+from qtpy.QtGui import QWindowStateChangeEvent as WindowStateChangeEvent
+from qtpy.QtGui import QWhatsThisClickedEvent as WhatsThisClickedEvent
+from qtpy.QtGui import QScrollEvent as ScrollEvent
+from qtpy.QtGui import QScrollPrepareEvent as ScrollPrepareEvent
+from qtpy.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
 
 from .screen import Screen
 from .keysequence import KeySequence
@@ -108,6 +134,32 @@ __all__ = [
     "ActionEvent",
     "ShowEvent",
     "ContextMenuEvent",
+    "ResizeEvent",
+    "NativeGestureEvent",
+    "InputMethodQueryEvent",
+    "InputMethodEvent",
+    "CloseEvent",
+    "DragLeaveEvent",
+    "MoveEvent",
+    "HelpEvent",
+    "HideEvent",
+    "HoverEvent",
+    "DragMoveEvent",
+    "TouchEvent",
+    "TabletEvent",
+    "WindowStateChangeEvent",
+    "FileOpenEvent",
+    "IconDragEvent",
+    "InputEvent",
+    "PaintEvent",
+    "ShortcutEvent",
+    "StatusTipEvent",
+    "EnterEvent",
+    "ExposeEvent",
+    "WhatsThisClickedEvent",
+    "ScrollEvent",
+    "ScrollPrepareEvent",
+    "PlatformSurfaceEvent",
     "DropEvent",
     "DragEnterEvent",
     "FocusEvent",
