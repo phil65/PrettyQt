@@ -521,6 +521,9 @@ def test_pixmap():
     pix = gui.Pixmap()
     bytes(pix)
     pix.create_dot()
+    pix.get_size()
+    pix.get_rect()
+    pix.to_image()
 
 
 def test_pixmapcache():

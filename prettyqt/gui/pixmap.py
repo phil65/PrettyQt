@@ -37,6 +37,15 @@ class Pixmap(QtGui.QPixmap):
         pixmap.loadFromData(data)
         return pixmap
 
+    def get_size(self) -> core.Size:
+        return core.Size(self.size())
+
+    def get_rect(self) -> core.Rect:
+        return core.Rect(self.rect())
+
+    def to_image(self):  # -> gui.Image:
+        return gui.Image(self.toImage())
+
     @classmethod
     def create_dot(cls, color="black", size=16):
         col = gui.Color(color)
