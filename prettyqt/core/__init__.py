@@ -57,6 +57,7 @@ from .coreapplication import CoreApplication
 from .iodevice import IODevice
 from .filedevice import FileDevice
 from .file import File
+from .savefile import SaveFile
 from .temporaryfile import TemporaryFile
 from .buffer import Buffer
 from .settings import Settings
@@ -154,6 +155,7 @@ __all__ = [
     "IODevice",
     "FileDevice",
     "File",
+    "SaveFile",
     "TemporaryFile",
     "Buffer",
     "Settings",
