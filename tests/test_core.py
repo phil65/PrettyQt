@@ -84,6 +84,21 @@ def test_bytearraymatcher():
     repr(matcher)
 
 
+# def test_commandlineoption():
+#     option = core.CommandLineOption()
+
+
+def test_commandlineparser():
+    parser = core.CommandLineParser()
+    parser.add_option("test")
+    parser.set_options_after_positional_arguments_mode("options")
+    with pytest.raises(InvalidParamError):
+        parser.set_options_after_positional_arguments_mode("test")
+    parser.set_single_dash_word_option_mode("long")
+    with pytest.raises(InvalidParamError):
+        parser.set_single_dash_word_option_mode("test")
+
+
 def test_coreapplication(qapp):
     def test():
         pass
