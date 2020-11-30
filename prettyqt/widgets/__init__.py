@@ -26,6 +26,7 @@ from .abstractitemview import AbstractItemView
 from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .desktopwidget import DesktopWidget
+from .rubberband import RubberBand
 from .graphicstransform import GraphicsTransform
 from .graphicsrotation import GraphicsRotation
 from .graphicsscale import GraphicsScale
@@ -203,6 +204,7 @@ __all__ = [
     "ScrollArea",
     "Widget",
     "DesktopWidget",
+    "RubberBand",
     "GraphicsTransform",
     "GraphicsRotation",
     "GraphicsScale",

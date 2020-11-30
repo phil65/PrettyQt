@@ -831,6 +831,11 @@ def test_radiobutton(qtbot):
     # assert widget.is_on is False
 
 
+def test_rubberband():
+    band = widgets.RubberBand("line")
+    assert band.get_shape() == "line"
+
+
 def test_scrollarea(qtbot):
     widget = widgets.ScrollArea()
     widget.set_widget(widgets.Widget())
