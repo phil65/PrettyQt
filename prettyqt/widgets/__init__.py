@@ -27,6 +27,8 @@ from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .desktopwidget import DesktopWidget
 from .graphicstransform import GraphicsTransform
+from .graphicsrotation import GraphicsRotation
+from .graphicsscale import GraphicsScale
 from .graphicsitem import GraphicsItem
 from .graphicsitemgroup import GraphicsItemGroup
 from .abstractgraphicsshapeitem import AbstractGraphicsShapeItem
@@ -202,6 +204,8 @@ __all__ = [
     "Widget",
     "DesktopWidget",
     "GraphicsTransform",
+    "GraphicsRotation",
+    "GraphicsScale",
     "GraphicsItem",
     "GraphicsItemGroup",
     "AbstractGraphicsShapeItem",

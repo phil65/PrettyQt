@@ -436,6 +436,13 @@ def test_graphicsscene(qtbot):
         scene.set_item_index_method("test")
 
 
+def test_graphicsrotation():
+    rotation = widgets.GraphicsRotation()
+    rotation.set_axis("z")
+    with pytest.raises(InvalidParamError):
+        rotation.set_axis("test")
+
+
 def test_graphicsview(qtbot):
     view = widgets.GraphicsView()
     view.set_transformation_anchor("view_center")
