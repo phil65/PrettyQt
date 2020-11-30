@@ -54,7 +54,7 @@ class ImageIOHandler(QtGui.QImageIOHandler):
         """Set option to given value.
 
         Allowed values are "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                           "description", "compression_ratio", "gamma", "quallity",
+                           "description", "compression_ratio", "gamma", "quality",
                            "name", "subtype", "incremental_reading", "endianness",
                            "animation", "background_color", "image_format",
                            "supported_sub_types", "optimized_write",
@@ -76,7 +76,7 @@ class ImageIOHandler(QtGui.QImageIOHandler):
         """Return the value assigned to option.
 
         Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                         "description", "compression_ratio", "gamma", "quallity",
+                         "description", "compression_ratio", "gamma", "quality",
                          "name", "subtype", "incremental_reading", "endianness",
                          "animation", "background_color", "image_format",
                          "supported_sub_types", "optimized_write",
@@ -97,7 +97,7 @@ class ImageIOHandler(QtGui.QImageIOHandler):
         """Return whether the image handler supports given option.
 
         Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                         "description", "compression_ratio", "gamma", "quallity",
+                         "description", "compression_ratio", "gamma", "quality",
                          "name", "subtype", "incremental_reading", "endianness",
                          "animation", "background_color", "image_format",
                          "supported_sub_types", "optimized_write",
