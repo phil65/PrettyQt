@@ -1363,7 +1363,54 @@ def test_widgetaction(qtbot):
 def test_wizard(qtbot):
     w = widgets.Wizard()
     w.add_widget_as_page(widgets.Widget())
+    pix = gui.Pixmap()
+    w.set_pixmap("background", pix)
+    with pytest.raises(InvalidParamError):
+        w.set_pixmap("test", pix)
+    assert bytes(w.get_pixmap("background")) == bytes(pix)
+    with pytest.raises(InvalidParamError):
+        w.get_pixmap("test")
+    w.set_wizard_style("mac")
+    with pytest.raises(InvalidParamError):
+        w.set_wizard_style("test")
+    assert w.get_wizard_style() == "mac"
+    w.set_button_text("back", "test")
+    with pytest.raises(InvalidParamError):
+        w.set_button_text("test", "test")
+    assert w.get_button_text("back") == "test"
+    with pytest.raises(InvalidParamError):
+        w.get_button_text("test")
+    w.get_button("back")
+    with pytest.raises(InvalidParamError):
+        w.get_button("test")
+    w.set_title_format("auto")
+    with pytest.raises(InvalidParamError):
+        w.set_title_format("test")
+    assert w.get_title_format() == "auto"
+    w.set_subtitle_format("auto")
+    with pytest.raises(InvalidParamError):
+        w.set_subtitle_format("test")
+    assert w.get_subtitle_format() == "auto"
+    w.set_option("help_button_on_right", True)
+    with pytest.raises(InvalidParamError):
+        w.set_option("test", True)
+    assert w.get_option("help_button_on_right") is True
+    with pytest.raises(InvalidParamError):
+        w.get_option("test")
 
 
 def test_wizardpage(qtbot):
-    widgets.WizardPage()
+    page = widgets.WizardPage()
+    pix = gui.Pixmap()
+    page.set_pixmap("background", pix)
+    with pytest.raises(InvalidParamError):
+        page.set_pixmap("test", pix)
+    assert bytes(page.get_pixmap("background")) == bytes(pix)
+    with pytest.raises(InvalidParamError):
+        page.get_pixmap("test")
+    page.set_button_text("back", "test")
+    with pytest.raises(InvalidParamError):
+        page.set_button_text("test", "test")
+    assert page.get_button_text("back") == "test"
+    with pytest.raises(InvalidParamError):
+        page.get_button_text("test")
