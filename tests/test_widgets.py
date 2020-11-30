@@ -552,6 +552,20 @@ def test_label(qtbot):
     # assert label.get_text_interaction() == "by_mouse"
 
 
+def test_lcdnumber(qtbot):
+    lcd = widgets.LCDNumber()
+    lcd.set_value(500)
+    assert lcd.get_value() == 500
+    lcd.set_segment_style("filled")
+    with pytest.raises(InvalidParamError):
+        lcd.set_segment_style("test")
+    assert lcd.get_segment_style() == "filled"
+    lcd.set_mode("octal")
+    with pytest.raises(InvalidParamError):
+        lcd.set_mode("test")
+    assert lcd.get_mode() == "octal"
+
+
 def test_lineedit(qtbot):
     widget = widgets.LineEdit("test_lineedit")
     widget.set_regex_validator("[0-9]")

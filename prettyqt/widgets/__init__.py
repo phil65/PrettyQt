@@ -128,6 +128,7 @@ from .plaintextedit import PlainTextEdit
 from .textbrowser import TextBrowser
 from .completer import Completer
 from .progressbar import ProgressBar
+from .lcdnumber import LCDNumber
 from .columnview import ColumnView
 from .listview import ListView
 from .listwidget import ListWidget
@@ -304,6 +305,7 @@ __all__ = [
     "TextBrowser",
     "Completer",
     "ProgressBar",
+    "LCDNumber",
     "ColumnView",
     "ListView",
     "ListWidget",
