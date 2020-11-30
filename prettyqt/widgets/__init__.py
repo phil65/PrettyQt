@@ -136,6 +136,8 @@ from .treewidget import TreeWidget
 from .tableview import TableView
 from .tablewidgetitem import TableWidgetItem
 from .tablewidget import TableWidget
+from .scrollerproperties import ScrollerProperties
+from .scroller import Scroller
 from .abstractitemdelegate import AbstractItemDelegate
 from .itemdelegate import ItemDelegate
 from .styleditemdelegate import StyledItemDelegate
@@ -307,6 +309,8 @@ __all__ = [
     "ListWidget",
     "TreeView",
     "TreeWidget",
+    "ScrollerProperties",
+    "Scroller",
     "TableView",
     "TableWidgetItem",
     "TableWidget",

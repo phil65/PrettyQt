@@ -815,6 +815,30 @@ def test_scrollarea(qtbot):
     widget.set_widget(widgets.Widget())
 
 
+def test_scrollerproperties():
+    properties = widgets.ScrollerProperties()
+    properties["snap_time"] = 100
+    with pytest.raises(InvalidParamError):
+        properties.set_scroll_metric("test", 100)
+    assert properties["snap_time"] == 100
+    with pytest.raises(InvalidParamError):
+        properties.get_scroll_metric("test")
+
+
+def test_scroller():
+    w = widgets.PlainTextEdit()
+    scroller = widgets.Scroller.get_scroller(w)
+    assert scroller.get_state() == "inactive"
+    scroller.get_velocity()
+    scroller.get_pixel_per_meter()
+    scroller.get_final_position()
+    scroller.handle_input("move", core.PointF())
+    with pytest.raises(InvalidParamError):
+        scroller.handle_input("test", core.PointF())
+    scroller.get_scroller_properties()
+    assert widgets.Scroller.grab_gesture(w) == "tap"
+
+
 def test_sizepolicy(qtbot):
     pol = widgets.SizePolicy()
     pol.set_control_type("toolbutton")
