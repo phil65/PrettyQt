@@ -50,6 +50,7 @@ from .paintdevice import PaintDevice
 from .paintdevicewindow import PaintDeviceWindow
 from .pixmap import Pixmap
 from .pixmapcache import PixmapCache
+from .bitmap import Bitmap
 from .image import Image
 from .openglwindow import OpenGLWindow
 from .rasterwindow import RasterWindow
@@ -200,6 +201,7 @@ __all__ = [
     "Picture",
     "Pixmap",
     "PixmapCache",
+    "Bitmap",
     "Painter",
     "PainterPath",
     "PainterPathStroker",
