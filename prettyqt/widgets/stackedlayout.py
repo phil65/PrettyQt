@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Union
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets
@@ -17,10 +19,9 @@ class StackedLayout(QtWidgets.QStackedLayout):
         for item in state["items"]:
             self.add(item)
 
-    def __add__(self, other):
-        if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
-            self.add(other)
-            return self
+    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
+        self.add(other)
+        return self
 
     def set_current_widget(self, widget):
         self.setCurrentWidget(widget)

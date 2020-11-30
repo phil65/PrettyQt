@@ -54,7 +54,7 @@ class Layout(QtWidgets.QLayout):
     def __iter__(self):
         return iter(self[i] for i in range(self.count()))
 
-    def __contains__(self, item):
+    def __contains__(self, item: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
         return item in self.get_children()
 
     def serialize_fields(self):
@@ -98,7 +98,11 @@ class Layout(QtWidgets.QLayout):
         """
         return MODES.inv[self.sizeConstraint()]
 
-    def set_alignment(self, alignment: str, item=None):
+    def set_alignment(
+        self,
+        alignment: str,
+        item: Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout]] = None,
+    ):
         """Set the alignment for widget / layout to alignment.
 
         Returns true if w is found in this layout (not including child layouts).
@@ -119,7 +123,7 @@ class Layout(QtWidgets.QLayout):
         else:
             return self.setAlignment(ALIGNMENTS[alignment])
 
-    def add(self, *item):
+    def add(self, *item: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
         for i in item:
             if isinstance(i, QtWidgets.QWidget):
                 self.addWidget(i)

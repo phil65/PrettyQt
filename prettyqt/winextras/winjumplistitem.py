@@ -22,7 +22,7 @@ TYPES = bidict(
 
 
 class WinJumpListItem(QtWinExtras.QWinJumpListItem):
-    def __init__(self, typ: str) -> None:
+    def __init__(self, typ: Union[int, str]) -> None:
         if typ in TYPES:
             typ = TYPES[typ]
         super().__init__(typ)
