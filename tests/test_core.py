@@ -643,6 +643,15 @@ def test_threadpool():
     core.ThreadPool()
 
 
+def test_timeline():
+    timeline = core.TimeLine()
+    timeline.set_direction("backward")
+    with pytest.raises(InvalidParamError):
+        timeline.set_direction("test")
+    assert timeline.get_direction() == "backward"
+    assert timeline.get_state() == "not_running"
+
+
 def test_timer():
     def test():
         pass

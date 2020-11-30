@@ -30,6 +30,7 @@ from .deadlinetimer import DeadlineTimer
 from .elapsedtimer import ElapsedTimer
 from .basictimer import BasicTimer
 from .object import Object
+from .timeline import TimeLine
 from .margins import Margins
 from .marginsf import MarginsF
 from .library import Library
@@ -167,6 +168,7 @@ __all__ = [
     "Line",
     "LineF",
     "EasingCurve",
+    "TimeLine",
     "RandomGenerator",
     # "RandomGenerator64",
     "AbstractAnimation",
