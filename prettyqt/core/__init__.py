@@ -37,6 +37,7 @@ from .marginsf import MarginsF
 from .library import Library
 from .pluginloader import PluginLoader
 from .locale import Locale
+from .abstracteventdispatcher import AbstractEventDispatcher
 from .textstream import TextStream
 from .eventloop import EventLoop
 from .abstractanimation import AbstractAnimation
@@ -139,6 +140,7 @@ __all__ = [
     "Margins",
     "MarginsF",
     "Locale",
+    "AbstractEventDispatcher",
     "Resource",
     "TextStream",
     "EventLoop",
