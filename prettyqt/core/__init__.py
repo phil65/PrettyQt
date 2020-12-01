@@ -45,6 +45,7 @@ from .eventloop import EventLoop
 from .abstractanimation import AbstractAnimation
 from .variantanimation import VariantAnimation
 from .propertyanimation import PropertyAnimation
+from .pauseanimation import PauseAnimation
 from .animationgroup import AnimationGroup
 from .parallelanimationgroup import ParallelAnimationGroup
 from .sequentialanimationgroup import SequentialAnimationGroup
@@ -190,6 +191,7 @@ __all__ = [
     "SequentialAnimationGroup",
     "VariantAnimation",
     "PropertyAnimation",
+    "PauseAnimation",
     "TextBoundaryFinder",
     "Timer",
     "Translator",

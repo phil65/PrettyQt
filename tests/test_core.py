@@ -373,6 +373,11 @@ def test_operatingsystemversion():
     assert version.get_type() == "android"
 
 
+def test_pauseanimation():
+    animation = core.PauseAnimation()
+    repr(animation)
+
+
 def test_persistentmodelindex():
     index = core.PersistentModelIndex()
     assert bool(index) is False
