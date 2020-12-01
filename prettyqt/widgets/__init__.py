@@ -13,6 +13,9 @@ from qtpy.QtWidgets import QGraphicsSceneDragDropEvent as GraphicsSceneDragDropE
 from qtpy.QtWidgets import QGraphicsSceneHelpEvent as GraphicsSceneHelpEvent
 from qtpy.QtWidgets import QGraphicsSceneMoveEvent as GraphicsSceneMoveEvent
 from qtpy.QtWidgets import QGraphicsSceneResizeEvent as GraphicsSceneResizeEvent
+from qtpy.QtWidgets import QGraphicsSceneEvent as GraphicsSceneEvent
+from qtpy.QtWidgets import QGestureEvent as GestureEvent
+
 from .style import Style
 from .application import Application
 from .sizepolicy import SizePolicy
@@ -359,5 +362,7 @@ __all__ = [
     "GraphicsSceneHelpEvent",
     "GraphicsSceneMoveEvent",
     "GraphicsSceneResizeEvent",
+    "GraphicsSceneEvent",
+    "GestureEvent",
     "PlainTextDocumentLayout",
 ]
