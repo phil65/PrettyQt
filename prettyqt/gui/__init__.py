@@ -69,6 +69,7 @@ except AttributeError:
     )
 from .textoption import TextOption
 from .textdocument import TextDocument
+from .statictext import StaticText
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
 from .brush import Brush
@@ -183,6 +184,7 @@ __all__ = [
     "TextBlock",
     "TextBlockGroup",
     "TextDocument",
+    "StaticText",
     "RegularExpressionValidator",
     "IntValidator",
     "DoubleValidator",

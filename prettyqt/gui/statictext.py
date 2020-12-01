@@ -1,0 +1,83 @@
+# -*- coding: utf-8 -*-
+
+from qtpy import QtGui, QtCore
+
+from prettyqt import core
+from prettyqt.utils import bidict, InvalidParamError
+
+PERFORMANCE_HINT = bidict(
+    moderate=QtGui.QStaticText.ModerateCaching,
+    aggressive=QtGui.QStaticText.AggressiveCaching,
+)
+
+TEXT_FORMAT = bidict(
+    rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
+)
+
+if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+    TEXT_FORMAT["markdown"] = QtCore.Qt.MarkdownText
+
+
+class StaticText(QtGui.QStaticText):
+    def __repr__(self):
+        return f"StaticText({self.text()!r})"
+
+    def __str__(self):
+        return self.text()
+
+    def get_size(self) -> core.Size:
+        return core.Size(self.size())
+
+    def set_text_format(self, text_format: str):
+        """Set the text format.
+
+        Allowed values are "rich", "plain", "auto", "markdown"
+
+        Args:
+            text_format: text format to use
+
+        Raises:
+            InvalidParamError: text format does not exist
+        """
+        if text_format not in TEXT_FORMAT:
+            raise InvalidParamError(text_format, TEXT_FORMAT)
+        self.setTextFormat(TEXT_FORMAT[text_format])
+
+    def get_text_format(self) -> str:
+        """Return current text format.
+
+        Possible values: "rich", "plain", "auto", "markdown"
+
+        Returns:
+            text format
+        """
+        return TEXT_FORMAT.inv[self.textFormat()]
+
+    def set_performance_hint(self, hint: str):
+        """Set the performance hint.
+
+        Allowed values are "moderate", "aggressive"
+
+        Args:
+            hint: performance hint to use
+
+        Raises:
+            InvalidParamError: performance hint does not exist
+        """
+        if hint not in PERFORMANCE_HINT:
+            raise InvalidParamError(hint, PERFORMANCE_HINT)
+        self.setPerformanceHint(PERFORMANCE_HINT[hint])
+
+    def get_performance_hint(self) -> str:
+        """Return current performance hint.
+
+        Possible values: "moderate", "aggressive"
+
+        Returns:
+            performance hint
+        """
+        return PERFORMANCE_HINT.inv[self.performanceHint()]
+
+
+if __name__ == "__main__":
+    text = StaticText()

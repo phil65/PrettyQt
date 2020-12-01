@@ -337,6 +337,20 @@ def test_standarditemmodel():
         model.find_items("test", mode="wrong_mode")
 
 
+def test_statictext():
+    text = gui.StaticText("test")
+    repr(text)
+    assert str(text) == "test"
+    text.set_text_format("rich")
+    with pytest.raises(InvalidParamError):
+        text.set_text_format("test")
+    assert text.get_text_format() == "rich"
+    text.set_performance_hint("aggressive")
+    with pytest.raises(InvalidParamError):
+        text.set_performance_hint("test")
+    assert text.get_performance_hint() == "aggressive"
+
+
 def test_transform():
     transform = gui.Transform()
     for i in range(3):
