@@ -101,6 +101,7 @@ from .itemselection import ItemSelection
 from .diriterator import DirIterator
 from .abstractitemmodel import AbstractItemModel
 from .abstractproxymodel import AbstractProxyModel
+from .identityproxymodel import IdentityProxyModel
 from .abstractlistmodel import AbstractListModel
 from .stringlistmodel import StringListModel
 from .sortfilterproxymodel import SortFilterProxyModel
@@ -212,6 +213,7 @@ __all__ = [
     "Signal",
     "AbstractItemModel",
     "AbstractProxyModel",
+    "IdentityProxyModel",
     "AbstractListModel",
     "StringListModel",
     "SortFilterProxyModel",
