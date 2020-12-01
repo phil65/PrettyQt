@@ -55,6 +55,7 @@ from .image import Image
 from .openglwindow import OpenGLWindow
 from .rasterwindow import RasterWindow
 from .clipboard import Clipboard
+from .inputmethod import InputMethod
 from .guiapplication import GuiApplication
 from .validator import Validator
 from .regexpvalidator import RegExpValidator
@@ -238,4 +239,5 @@ __all__ = [
     "TextFrameFormat",
     "TextFrame",
     "AbstractTextDocumentLayout",
+    "InputMethod",
 ]

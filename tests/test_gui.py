@@ -237,6 +237,17 @@ def test_imagewriter():
     assert writer.get_transformation() == "rotate_270"
 
 
+def test_inputmethod(qapp):
+    input_method = qapp.get_input_method()
+    input_method.get_anchor_rectangle()
+    input_method.get_cursor_rectangle()
+    input_method.get_input_item_clip_rectangle()
+    input_method.get_input_item_rectangle()
+    input_method.get_keyboard_rectangle()
+    input_method.get_locale()
+    assert input_method.get_input_direction() == "left_to_right"
+
+
 def test_intvalidator():
     val = gui.IntValidator()
     val.setRange(0, 9)

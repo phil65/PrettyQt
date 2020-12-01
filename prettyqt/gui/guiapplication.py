@@ -97,3 +97,6 @@ class GuiApplication(QtGui.QGuiApplication):
 
     def get_screens(self) -> List[gui.Screen]:
         return [gui.Screen(i) for i in self.screens()]
+
+    def get_input_method(self) -> gui.InputMethod:
+        return gui.InputMethod(self.inputMethod())
