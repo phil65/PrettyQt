@@ -11,8 +11,11 @@ QtWidgets.QDialog.__bases__ = (widgets.Widget,)
 
 
 class BaseDialog(QtWidgets.QDialog):
-    def __getitem__(self, index):
-        return self.findChild(QtWidgets.QWidget, index)
+    def __getitem__(self, index: str) -> QtWidgets.QWidget:
+        result = self.findChild(QtWidgets.QWidget, index)
+        if result is None:
+            raise KeyError("Widget not found")
+        return result
 
     def serialize_fields(self):
         return dict(

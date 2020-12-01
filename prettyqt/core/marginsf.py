@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from typing import Iterator
 from qtpy import QtCore
 
 
@@ -10,7 +11,7 @@ class MarginsF(QtCore.QMarginsF):
     def __bool__(self):
         return not self.isNull()
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[float]:
         yield self.left()
         yield self.top()
         yield self.right()

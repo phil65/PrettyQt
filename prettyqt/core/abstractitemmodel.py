@@ -33,7 +33,7 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         """Return amount of rows."""
         return self.rowCount()
 
-    def __getitem__(self, index: Tuple[int, int]):
+    def __getitem__(self, index: Tuple[int, int]) -> QtCore.QModelIndex:
         return self.index(*index)
 
     def rows(self) -> int:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import List
+from typing import List, Iterator
 
 from qtpy import QtCore, QtGui
 
@@ -20,10 +20,10 @@ MATCH_FLAGS = dict(
 
 
 class StandardItemModel(QtGui.QStandardItemModel):
-    def __getitem__(self, row: int):
+    def __getitem__(self, row: int) -> QtGui.QStandardItem:
         return self.item(row)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtGui.QStandardItem]:
         return iter(self.get_children())
 
     def __getstate__(self):
@@ -40,7 +40,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
             return self
         raise TypeError("wrong type for addition")
 
-    def get_children(self) -> list:
+    def get_children(self) -> List[QtGui.QStandardItem]:
         return [self.item(index) for index in range(self.rowCount())]
 
     def add(self, *item):

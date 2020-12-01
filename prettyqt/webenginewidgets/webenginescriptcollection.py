@@ -17,7 +17,7 @@ class WebEngineScriptCollection:
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def __getitem__(self, index: str):
+    def __getitem__(self, index: str) -> QtWebEngineWidgets.QWebEngineScript:
         return self.item.findScript(index)
 
     def __len__(self):

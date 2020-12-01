@@ -61,7 +61,7 @@ class Timeline(widgets.Widget):
     def __len__(self):
         return len(self.video_samples)
 
-    def __getitem__(self, index: int):
+    def __getitem__(self, index: int) -> VideoSample:
         return self.video_samples[index]
 
     def __setitem__(self, index: int, value: VideoSample):

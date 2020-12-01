@@ -15,7 +15,7 @@ class UndoStack(QtWidgets.QUndoStack):
     def __len__(self) -> int:
         return self.count()
 
-    def __getitem__(self, index) -> QtWidgets.QUndoCommand:
+    def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
         return self.command(index)
 
     @contextlib.contextmanager

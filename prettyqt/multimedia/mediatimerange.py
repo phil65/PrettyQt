@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Iterator
+
 from qtpy import QtMultimedia
 
 from prettyqt import multimedia
@@ -21,7 +23,7 @@ class MediaTimeRange(QtMultimedia.QMediaTimeRange):
     def __len__(self):
         return len(self.intervals())
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[multimedia.MediaTimeInterval]:
         intervals = self.intervals()
         return iter(multimedia.MediaTimeInterval(i) for i in intervals)
 

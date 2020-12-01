@@ -7,7 +7,7 @@ class UndoCommand(QtWidgets.QUndoCommand):
     def __len__(self) -> int:
         return self.childCount()
 
-    def __getitem__(self, index) -> QtWidgets.QUndoCommand:
+    def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
         return self.child(index)
 
     def serialize_fields(self):

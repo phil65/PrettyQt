@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union, Iterable, Mapping, List, Any, Optional
+from typing import Union, Iterable, Mapping, List, Any, Optional, Iterator
 
 from qtpy import QtCore, QtWidgets
 
@@ -29,15 +29,14 @@ class ListWidget(QtWidgets.QListWidget):
     def __repr__(self):
         return f"ListWidget: {self.count()} items"
 
-    def __getitem__(self, row: int):
+    def __getitem__(self, row: int) -> QtWidgets.QListWidgetItem:
         return self.item(row)
 
-    def __add__(self, other):
-        if isinstance(other, QtWidgets.QListWidgetItem):
-            self.addItem(other)
-            return self
+    def __add__(self, other: QtWidgets.QListWidgetItem):
+        self.addItem(other)
+        return self
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtWidgets.QListWidgetItem]:
         return iter(self.get_children())
 
     def __len__(self) -> int:
@@ -67,7 +66,7 @@ class ListWidget(QtWidgets.QListWidget):
         data = self.get_value()
         self.value_changed.emit(data)
 
-    def get_children(self) -> list:
+    def get_children(self) -> List[QtWidgets.QListWidgetItem]:
         return [self.item(row) for row in range(self.count())]
 
     def add_items(self, items: Union[Iterable, Mapping]):
@@ -98,7 +97,9 @@ class ListWidget(QtWidgets.QListWidget):
                 self.setCurrentItem(i)
                 break
 
-    def scroll_to_item(self, item, mode: str = "ensure_visible"):
+    def scroll_to_item(
+        self, item: QtWidgets.QListWidgetItem, mode: str = "ensure_visible"
+    ):
         if mode not in widgets.abstractitemview.SCROLL_HINTS:
             raise InvalidParamError(mode, widgets.abstractitemview.SCROLL_HINTS)
         self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINTS[mode])

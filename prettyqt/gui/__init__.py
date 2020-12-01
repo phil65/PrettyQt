@@ -68,6 +68,7 @@ except AttributeError:
         RegularExpressionValidator,
     )
 from .textoption import TextOption
+from .textblock import TextBlock
 from .textdocument import TextDocument
 from .statictext import StaticText
 from .intvalidator import IntValidator
@@ -119,7 +120,6 @@ from .textimageformat import TextImageFormat
 from .textlistformat import TextListFormat
 from .texttablecellformat import TextTableCellFormat
 from .textobject import TextObject
-from .textblock import TextBlock
 from .textblockgroup import TextBlockGroup
 from .textframe import TextFrame
 from .abstracttextdocumentlayout import AbstractTextDocumentLayout

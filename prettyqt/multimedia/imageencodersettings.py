@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, Iterator
 
 from qtpy import QtMultimedia
 
@@ -39,7 +39,7 @@ class ImageEncoderSettings(QtMultimedia.QImageEncoderSettings):
         elif index == "quality":
             self.set_quality(value)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         return iter(self.to_dict().keys())
 
     def __len__(self):

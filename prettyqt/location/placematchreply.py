@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Iterator
 
 from qtpy import QtLocation
 
@@ -13,10 +13,10 @@ QtLocation.QPlaceMatchReply.__bases__ = (location.PlaceReply,)
 
 
 class PlaceMatchReply(QtLocation.QPlaceMatchReply):
-    def __iter__(self):
+    def __iter__(self) -> Iterator[location.Place]:
         return iter(self.get_places())
 
-    def __getitem__(self, index: int):
+    def __getitem__(self, index: int) -> location.Place:
         return self.get_places()[index]
 
     def __len__(self):

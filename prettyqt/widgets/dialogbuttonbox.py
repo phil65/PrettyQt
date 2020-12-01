@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Callable, List, Optional, Union
+from typing import Callable, List, Optional, Union, Iterator
 
 from qtpy import QtCore, QtWidgets
 
@@ -59,10 +59,10 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def __len__(self) -> int:
         return len(self.buttons())
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: str) -> QtWidgets.QPushButton:
         return self.button(BUTTONS[index])
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtWidgets.QAbstractButton]:
         return iter(self.buttons())
 
     def __contains__(self, item):

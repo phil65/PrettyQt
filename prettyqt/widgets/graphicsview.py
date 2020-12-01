@@ -76,7 +76,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
             is_interactive=self.isInteractive(),
         )
 
-    def __getitem__(self, index: int):
+    def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
 
     def invalidate_scene(self, rect: QtCore.QRectF, layer: str = "all"):

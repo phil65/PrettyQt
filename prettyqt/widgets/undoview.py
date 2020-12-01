@@ -11,8 +11,8 @@ QtWidgets.QUndoView.__bases__ = (widgets.ListView,)
 
 
 class UndoView(QtWidgets.QUndoView):
-    def __getitem__(self, index: int):
-        return self.stack()[index]
+    def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
+        return self.stack().command(index)
 
     def set_clean_icon(self, icon: gui.icon.IconType):
         """Set the icon for the clean button.

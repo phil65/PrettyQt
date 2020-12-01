@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Union, Tuple
+from typing import Union, Tuple, Iterator
 
 from qtpy import QtGui, QtCore
 
@@ -14,7 +14,7 @@ class PolygonF(QtGui.QPolygonF):
         points_str = ", ".join([repr(i) for i in self])
         return f"PolygonF({points_str})"
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[core.PointF]:
         return iter(self[i] for i in range(self.size()))
 
     def __len__(self) -> int:

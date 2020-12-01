@@ -1,3 +1,5 @@
+from typing import Iterator
+
 from qtpy import QtCore
 
 from prettyqt import core
@@ -14,7 +16,7 @@ class LineF(QtCore.QLineF):
     def __abs__(self) -> float:
         return self.length()
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[core.PointF]:
         yield self.get_p1()
         yield self.get_p2()
 

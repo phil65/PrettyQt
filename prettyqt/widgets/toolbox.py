@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional
+from typing import Optional, Union, List, Iterator
 
 from qtpy import QtWidgets
 
@@ -11,11 +11,14 @@ QtWidgets.QToolBox.__bases__ = (widgets.Frame,)
 
 
 class ToolBox(QtWidgets.QToolBox):
-    def __getitem__(self, index):
+    def __getitem__(self, index: Union[int, str]) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
         else:
-            return self.findChild(QtWidgets.QWidget, index)
+            result = self.findChild(QtWidgets.QWidget, index)
+            if result is None:
+                raise KeyError("Widget not found")
+            return result
 
     def serialize_fields(self):
         children = list()
@@ -38,17 +41,20 @@ class ToolBox(QtWidgets.QToolBox):
             self.setItemToolTip(i, item["tool_tip"])
         self.setCurrentIndex(state["current_index"])
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.get_children())
 
-    def get_children(self) -> list:
+    def get_children(self) -> List[QtWidgets.QWidget]:
         return [self[i] for i in range(self.count())]
 
     def add_widget(
-        self, widget, title: Optional[str] = None, icon: gui.icon.IconType = None
+        self,
+        widget: QtWidgets.QWidget,
+        title: Optional[str] = None,
+        icon: gui.icon.IconType = None,
     ):
         if title is None:
-            title = widget.id
+            title = widget.objectName()
         if icon:
             icon = gui.icon.get_icon(icon)
             self.addItem(widget, icon, title)

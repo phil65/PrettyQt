@@ -15,9 +15,6 @@ class GraphicsLinearLayout(QtWidgets.QGraphicsLinearLayout):
             x, y = pos
             self[x, y] = item
 
-    def __iter__(self):
-        return iter(self[i] for i in range(self.count()))
-
     def __add__(self, other):
         self[self.count()] = other
         return self

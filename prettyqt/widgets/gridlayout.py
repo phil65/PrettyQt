@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Tuple, Union, Optional
+from typing import Tuple, Union, Optional, Iterator
 
 from qtpy import QtWidgets, QtCore
 from prettyqt import widgets
@@ -46,7 +46,7 @@ class GridLayout(QtWidgets.QGridLayout):
             x, y, w, h = pos
             self[x : x + w - 1, y : y + h - 1] = item
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
     def __add__(self, other):

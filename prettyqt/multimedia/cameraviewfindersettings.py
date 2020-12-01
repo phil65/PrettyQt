@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
-from typing import Tuple, Dict, Any
+from typing import Tuple, Dict, Any, Iterator
 
 from qtpy import QtMultimedia
 
@@ -37,7 +37,7 @@ class CameraViewfinderSettings(QtMultimedia.QCameraViewfinderSettings):
         elif index == "resolution":
             self.setResolution(*value)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         return iter(self.to_dict().keys())
 
     def __len__(self):

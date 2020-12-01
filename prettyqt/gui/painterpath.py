@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Tuple, Union
+from typing import Tuple, Union, Iterator
 
 from qtpy import QtGui, QtCore
 
@@ -25,10 +25,10 @@ class PainterPath(QtGui.QPainterPath):
     def __len__(self):
         return self.elementCount()
 
-    def __getitem__(self, index: int):
+    def __getitem__(self, index: int) -> QtGui.QPainterPath.Element:
         return self.elementAt(index)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtGui.QPainterPath.Element]:
         return iter(self.elementAt(i) for i in range(self.elementCount()))
 
     def __setitem__(self, index: int, value: Tuple[int, int]):
@@ -76,4 +76,4 @@ class PainterPath(QtGui.QPainterPath):
 
 if __name__ == "__main__":
     p = PainterPath(QtCore.QPoint(1, 1))
-    print(list(p))
+    print(type(p[0]))

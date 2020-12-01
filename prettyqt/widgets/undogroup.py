@@ -12,5 +12,5 @@ class UndoGroup(QtWidgets.QUndoGroup):
     def __len__(self) -> int:
         return len(self.stacks())
 
-    def __getitem__(self, index) -> QtWidgets.QUndoStack:
+    def __getitem__(self, index: int) -> QtWidgets.QUndoStack:
         return self.stacks()[index]

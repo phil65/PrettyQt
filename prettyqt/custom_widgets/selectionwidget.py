@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Mapping, Iterable, Union, Dict, Any
+from typing import Optional, Mapping, Iterable, Union, Dict, Any, Iterator, Tuple
 
 from qtpy import QtWidgets
 
@@ -24,7 +24,7 @@ class SelectionWidget(widgets.GroupBox):
         self.buttons: Dict[widgets.RadioButton, Any] = dict()
         self.set_layout(self.box)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Tuple[widgets.RadioButton, Any]]:
         return iter(self.buttons.items())
 
     def add_items(self, items: Union[Iterable, Mapping]):

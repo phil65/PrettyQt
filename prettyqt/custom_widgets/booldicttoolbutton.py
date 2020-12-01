@@ -23,11 +23,11 @@ class BoolDictToolButton(widgets.ToolButton):
         if dct:
             self.set_dict(dct)
 
-    def __getitem__(self, key):
+    def __getitem__(self, key: str) -> bool:
         menu = self.menu()
         return menu[key].isChecked()
 
-    def __setitem__(self, key, value):
+    def __setitem__(self, key: str, value: bool):
         menu = self.menu()
         menu[key].setChecked(value)
 

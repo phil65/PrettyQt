@@ -46,8 +46,11 @@ class MainWindow(QtWidgets.QMainWindow):
             | self.AnimatedDocks
         )
 
-    def __getitem__(self, index):
-        return self.findChild(QtWidgets.QWidget, index)
+    def __getitem__(self, index: str) -> QtWidgets.QWidget:
+        result = self.findChild(QtWidgets.QWidget, index)
+        if result is None:
+            raise KeyError("Widget not found")
+        return result
 
     def serialize_fields(self):
         return dict(
@@ -125,7 +128,7 @@ class MainWindow(QtWidgets.QMainWindow):
             raise InvalidParamError(position, TOOLBAR_AREAS)
         self.addToolBarBreak(TOOLBAR_AREAS[position])
 
-    def load_window_state(self, recursive=False) -> bool:
+    def load_window_state(self, recursive: bool = False) -> bool:
         settings = core.Settings()
         name = self.get_id()
         geom = settings.get(f"{name}.geometry")
@@ -145,7 +148,7 @@ class MainWindow(QtWidgets.QMainWindow):
                     window.load_window_state()
         return restored
 
-    def save_window_state(self, recursive=False):
+    def save_window_state(self, recursive: bool = False):
         """Save current window state as QSetting.
 
         Args:
@@ -174,7 +177,7 @@ class MainWindow(QtWidgets.QMainWindow):
         dock_widget.box = layout
         return dock_widget
 
-    def add_dockwidget(self, dockwidget, position: str = "left"):
+    def add_dockwidget(self, dockwidget: QtWidgets.QDockWidget, position: str = "left"):
         position = DOCK_POSITIONS[position]
         self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dockwidget)
 

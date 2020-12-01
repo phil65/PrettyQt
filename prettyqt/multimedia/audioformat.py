@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Any
+from typing import Dict, Any, Iterator
 from dataclasses import dataclass, asdict
 
 from qtpy import QtMultimedia
@@ -49,7 +49,7 @@ class AudioFormat(QtMultimedia.QAudioFormat):
         elif index == "codec":
             self.setCodec(value)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         return iter(self.to_dict().keys())
 
     def __len__(self):

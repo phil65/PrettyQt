@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Mapping, Union, Iterable, Dict, Optional
+from typing import Mapping, Union, Iterable, Dict, Optional, Iterator, Tuple
 
 from qtpy import QtWidgets
 
@@ -22,7 +22,7 @@ class FlagSelectionWidget(widgets.GroupBox):
         self.buttons: Dict[widgets.CheckBox, int] = dict()
         self.set_layout(self.box)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Tuple[widgets.CheckBox, int]]:
         return iter(self.buttons.items())
 
     def add_items(self, items: Union[Iterable, Mapping]):

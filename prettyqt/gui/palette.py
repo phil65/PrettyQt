@@ -1,3 +1,5 @@
+from typing import Dict
+
 from qtpy import QtGui
 
 from prettyqt import gui, core
@@ -33,10 +35,10 @@ class Palette(QtGui.QPalette):
         self.__init__()
         core.DataStream.write_bytearray(ba, self)
 
-    def __getitem__(self, index: str):
+    def __getitem__(self, index: str) -> gui.Color:
         return self.get_color(index)
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index: str, value: colors.ColorType):
         self.set_color(index, value)
 
     def __bytes__(self):
@@ -51,10 +53,10 @@ class Palette(QtGui.QPalette):
         color = colors.get_color(color)
         self.setColor(GROUPS[group], ROLES[role], color)
 
-    def get_colors(self, group: str = "active"):
+    def get_colors(self, group: str = "active") -> Dict[str, gui.Color]:
         return {k: self.get_color(k, group) for k in ROLES.keys()}
 
-    def get_color(self, role: str, group: str = "active"):
+    def get_color(self, role: str, group: str = "active") -> gui.Color:
         return gui.Color(self.color(GROUPS[group], ROLES[role]))
 
 

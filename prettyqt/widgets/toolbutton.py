@@ -31,7 +31,7 @@ QtWidgets.QToolButton.__bases__ = (widgets.AbstractButton,)
 
 
 class ToolButton(QtWidgets.QToolButton):
-    def __getitem__(self, item):
+    def __getitem__(self, item: str) -> QtWidgets.QAction:
         menu = self.menu()
         return menu[item]
 

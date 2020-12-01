@@ -25,7 +25,7 @@ class ActionGroup(QtWidgets.QActionGroup):
     def __len__(self) -> int:
         return len(self.actions())
 
-    def __getitem__(self, item: int):
+    def __getitem__(self, item: int) -> QtWidgets.QAction:
         return self.actions()[item]
 
     def serialize_fields(self):

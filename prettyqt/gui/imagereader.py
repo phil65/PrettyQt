@@ -19,8 +19,8 @@ IMAGE_OPTION = gui.imageiohandler.IMAGE_OPTION
 
 
 class ImageReader(QtGui.QImageReader):
-    def __getitem__(self, key: str):
-        self.text(key)
+    def __getitem__(self, key: str) -> str:
+        return self.text(key)
 
     def get_error(self) -> str:
         """Return error type.

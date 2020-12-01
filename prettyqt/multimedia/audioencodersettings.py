@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Dict, Any
+from typing import Dict, Any, Iterator
 from dataclasses import dataclass, asdict
 
 from qtpy import QtMultimedia
@@ -55,7 +55,7 @@ class AudioEncoderSettings(QtMultimedia.QAudioEncoderSettings):
         elif index == "sample_rate":
             self.setSampleRate(value)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[str]:
         return iter(self.to_dict().keys())
 
     def __len__(self):

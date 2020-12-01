@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pathlib
-from typing import Union, Optional
+from typing import Union, Optional, Iterator
 
 from qtpy import QtMultimedia
 
@@ -26,13 +26,13 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
     def __len__(self) -> int:
         return self.mediaCount()
 
-    def __getitem__(self, item):
+    def __getitem__(self, item: int) -> multimedia.MediaContent:
         return multimedia.MediaContent(self.media(item))
 
-    def __delitem__(self, item):
+    def __delitem__(self, item: int):
         self.removeMedia(item)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[multimedia.MediaContent]:
         return iter(self[i] for i in range(self.mediaCount()))
 
     # def serialize(self):

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional
+from typing import Optional, Tuple
 
 from qtpy import QtCore, QtGui, QtWidgets
 from deprecated import deprecated
@@ -50,10 +50,10 @@ class TabBar(QtWidgets.QTabBar):
         self.set_selection_behavior_on_remove("left_tab")
         self.mouse_cursor = QtGui.QCursor()
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: Tuple[int, str]):
         return self.tabButton(index[0], POSITIONS[index[1]])
 
-    def __setitem__(self, index, value):
+    def __setitem__(self, index: Tuple[int, str], value: Optional[QtWidgets.QWidget]):
         self.set_tab(index[0], index[1], value)
 
     def serialize_fields(self):

@@ -43,7 +43,7 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
             font=gui.Font(self.font()),
         )
 
-    def __getitem__(self, index: int):
+    def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
 
     def add(self, item) -> QtWidgets.QGraphicsItem:

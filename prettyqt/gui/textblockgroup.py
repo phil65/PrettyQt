@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import List
+from typing import List, Iterator
 
 from qtpy import QtGui
 
@@ -13,7 +13,7 @@ class TextBlockGroup(QtGui.QTextBlockGroup):
     def __repr__(self):
         return "TextBlockGroup()"
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[gui.TextBlock]:
         return iter(gui.TextBlock(i) for i in self.blockList())
 
     def get_blocklist(self) -> List[gui.TextBlock]:

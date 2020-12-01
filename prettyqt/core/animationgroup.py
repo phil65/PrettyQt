@@ -10,7 +10,7 @@ QtCore.QAnimationGroup.__bases__ = (core.AbstractAnimation,)
 
 
 class AnimationGroup(QtCore.QAnimationGroup):
-    def __getitem__(self, index: Union[int, slice]):
+    def __getitem__(self, index: Union[int, slice]) -> QtCore.QAbstractAnimation:
         if isinstance(index, int):
             if index < 0:
                 index = len(self) + index

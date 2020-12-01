@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pathlib
-from typing import Union
+from typing import Union, List
 
 from qtpy import QtCore, QtWidgets
 
@@ -54,7 +54,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             return pathlib.Path(path)
         return super().data(index, role)
 
-    def yield_child_indexes(self, index):
+    def yield_child_indexes(self, index: QtCore.QModelIndex):
         if not self.hasChildren(index):
             return None
         path = self.filePath(index)
@@ -83,7 +83,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             path = core.Dir.currentPath()
         self.setRootPath(path)
 
-    def set_name_filters(self, filters, hide=False):
+    def set_name_filters(self, filters, hide: bool = False):
         self.setNameFilters(filters)
         self.setNameFilterDisables(not hide)
 
@@ -92,7 +92,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             raise InvalidParamError(filter_mode, FILTERS)
         self.setFilter(FILTERS[filter_mode])
 
-    def get_paths(self, indexes):
+    def get_paths(self, indexes: List[QtCore.QModelIndex]) -> List[pathlib.Path]:
         paths = [i.data(self.DATA_ROLE) for i in indexes]
         if not paths:
             return []

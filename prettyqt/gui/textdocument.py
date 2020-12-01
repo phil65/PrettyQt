@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union
+from typing import Union, Iterator
 import pathlib
 
 from qtpy import QtGui, QtCore
@@ -38,13 +38,13 @@ QtGui.QTextDocument.__bases__ = (core.Object,)
 
 
 class TextDocument(QtGui.QTextDocument):
-    def __getitem__(self, index: int):
+    def __getitem__(self, index: int) -> gui.TextBlock:
         return gui.TextBlock(self.findBlockByNumber(index))
 
     def __len__(self) -> int:
         return self.blockCount()
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[gui.TextBlock]:
         return iter(self[i] for i in range(self.blockCount()))
 
     def set_text(self, text: str):

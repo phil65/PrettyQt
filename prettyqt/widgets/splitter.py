@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union, Optional, List
+from typing import Union, Optional, List, Iterator
 
 from qtpy import QtCore, QtWidgets
 
@@ -24,11 +24,14 @@ class Splitter(QtWidgets.QSplitter):
             orientation = ORIENTATIONS[orientation]
         super().__init__(orientation, parent)
 
-    def __getitem__(self, index: Union[int, str]):
+    def __getitem__(self, index: Union[int, str]) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
         else:
-            return self.findChild(QtWidgets.QWidget, index)
+            result = self.findChild(QtWidgets.QWidget, index)
+            if result is None:
+                raise KeyError("Widget not found")
+            return result
 
     def __setitem__(self, index: int, value: QtWidgets.QWidget):
         self.replaceWidget(index, value)
@@ -50,7 +53,7 @@ class Splitter(QtWidgets.QSplitter):
         self.setChildrenCollapsible(state["children_collapsible"])
         self.setOpaqueResize(state["opaque_resize"])
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.get_children())
 
     def __len__(self) -> int:

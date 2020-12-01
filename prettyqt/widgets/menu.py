@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Any, Callable, Optional, Union, List
+from typing import Any, Callable, Optional, Union, List, Iterator
 
 from qtpy import QtWidgets
 
@@ -21,7 +21,7 @@ class Menu(QtWidgets.QMenu):
         self.set_icon(icon)
         self.setToolTipsVisible(True)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtWidgets.QAction]:
         return iter(self.actions())
 
     def __len__(self) -> int:
@@ -33,7 +33,7 @@ class Menu(QtWidgets.QMenu):
             return self
         raise TypeError("Invalid Type")
 
-    def __getitem__(self, item: str):
+    def __getitem__(self, item: str) -> QtWidgets.QAction:
         for action in self.actions():
             if action.objectName() == item:
                 return action

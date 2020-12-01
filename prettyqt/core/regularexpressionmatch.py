@@ -15,7 +15,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     def __repr__(self):
         return "RegularExpressionMatch()"
 
-    def __getitem__(self, item):
+    def __getitem__(self, item: Union[int, str]) -> Union[tuple, str]:
         return self.group(item)
 
     def group(self, *groups: Union[int, str]) -> Union[tuple, str]:
