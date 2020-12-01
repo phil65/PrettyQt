@@ -302,6 +302,14 @@ def test_screen(qapp):
     screen.get_virtual_siblings()
 
 
+# def test_sessionmanager():
+#     manager = gui.SessionManager()
+#     with pytest.raises(InvalidParamError):
+#         manager.set_restart_hint("test")
+#     manager.set_restart_hint("immediately")
+#     assert manager.get_restart_hint() == "immediately"
+
+
 def test_standarditem():
     s = gui.StandardItem()
     with open("data.pkl", "wb") as jar:
