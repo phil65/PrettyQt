@@ -2,13 +2,24 @@
 
 from __future__ import annotations
 
-from typing import List
+from typing import List, Optional, Union
 import pathlib
 
 from qtpy import QtCore
 
 
 class StorageInfo(QtCore.QStorageInfo):
+    def __init__(
+        self,
+        path: Optional[Union[QtCore.QStorageInfo, QtCore.QDir, str, pathlib.Path]] = None,
+    ):
+        if path is not None:
+            super().__init__(path)
+        else:
+            if isinstance(path, pathlib.Path):
+                path = str(path)
+            super().__init__()
+
     def __bool__(self):
         return self.isValid()
 
