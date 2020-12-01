@@ -346,6 +346,14 @@ def test_formlayout(qtbot):
     layout = widgets.FormLayout.build_from_dict({"from": "dict"})
     assert len(layout) == 2
     del layout[0]
+    layout.set_row_wrap_policy("wrap_long")
+    assert layout.get_row_wrap_policy() == "wrap_long"
+    with pytest.raises(InvalidParamError):
+        layout.set_row_wrap_policy("test")
+    layout.set_field_growth_policy("expanding_fields_grow")
+    assert layout.get_field_growth_policy() == "expanding_fields_grow"
+    with pytest.raises(InvalidParamError):
+        layout.set_field_growth_policy("test")
 
 
 def test_frame(qtbot):

@@ -5,7 +5,7 @@ from typing import Optional, Dict, Union, Tuple
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
 ROLES = bidict(
@@ -14,6 +14,17 @@ ROLES = bidict(
     both=QtWidgets.QFormLayout.SpanningRole,
 )
 
+ROW_WRAP_POLICY = bidict(
+    dont_wrap=QtWidgets.QFormLayout.DontWrapRows,
+    wrap_long=QtWidgets.QFormLayout.WrapLongRows,
+    wrap_all=QtWidgets.QFormLayout.WrapAllRows,
+)
+
+FIELD_GROWTH_POLICY = bidict(
+    fields_stay_at_size=QtWidgets.QFormLayout.FieldsStayAtSizeHint,
+    expanding_fields_grow=QtWidgets.QFormLayout.ExpandingFieldsGrow,
+    all_non_fixed_fields_grow=QtWidgets.QFormLayout.AllNonFixedFieldsGrow,
+)
 
 QtWidgets.QFormLayout.__bases__ = (widgets.Layout,)
 
@@ -102,6 +113,58 @@ class FormLayout(QtWidgets.QFormLayout):
                 self.addRow(i)
             if isinstance(i, tuple):
                 self.addRow(*i)
+
+    def set_row_wrap_policy(self, policy: str):
+        """Set row wrap policy to use.
+
+        Allowed values are "dont_wrap", "wrap_long", "wrap_all"
+
+        Args:
+            policy: row wrap policy to use
+
+        Raises:
+            InvalidParamError: row wrap policy does not exist
+        """
+        if policy not in ROW_WRAP_POLICY:
+            raise InvalidParamError(policy, ROW_WRAP_POLICY)
+        self.setRowWrapPolicy(ROW_WRAP_POLICY[policy])
+
+    def get_row_wrap_policy(self) -> str:
+        """Return current row wrap policy.
+
+        Possible values: "dont_wrap", "wrap_long", "wrap_all"
+
+        Returns:
+            row wrap policy
+        """
+        return ROW_WRAP_POLICY.inv[self.rowWrapPolicy()]
+
+    def set_field_growth_policy(self, policy: str):
+        """Set field growth policy to use.
+
+        Allowed values: "fields_stay_at_size", "expanding_fields_grow",
+                        "all_non_fixed_fields_grow"
+
+        Args:
+            policy: field growth policy to use
+
+        Raises:
+            InvalidParamError: field growth policy does not exist
+        """
+        if policy not in FIELD_GROWTH_POLICY:
+            raise InvalidParamError(policy, FIELD_GROWTH_POLICY)
+        self.setFieldGrowthPolicy(FIELD_GROWTH_POLICY[policy])
+
+    def get_field_growth_policy(self) -> str:
+        """Return current field growth policy.
+
+        Possible values: "fields_stay_at_size", "expanding_fields_grow",
+                         "all_non_fixed_fields_grow"
+
+        Returns:
+            field growth policy
+        """
+        return FIELD_GROWTH_POLICY.inv[self.fieldGrowthPolicy()]
 
 
 if __name__ == "__main__":
