@@ -103,6 +103,7 @@ from .syntaxhighlighter import SyntaxHighlighter
 from .pdfwriter import PdfWriter
 from .desktopservices import DesktopServices
 from .matrix4x4 import Matrix4x4
+from .vector3d import Vector3D
 from .vector4d import Vector4D
 from .imageiohandler import ImageIOHandler
 from .imagereader import ImageReader
@@ -223,6 +224,7 @@ __all__ = [
     "Window",
     "DesktopServices",
     "Matrix4x4",
+    "Vector3D",
     "Vector4D",
     "PaintDeviceWindow",
     "OpenGLWindow",

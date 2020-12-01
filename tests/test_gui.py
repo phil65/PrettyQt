@@ -763,6 +763,14 @@ def test_validator():
     gui.Validator()
 
 
+def test_vector3d():
+    vector = gui.Vector3D(0, 0, 1)
+    assert abs(vector) == 1.0
+    assert bool(vector) is True
+    vector.to_point()
+    vector.to_pointf()
+
+
 def test_vector4d():
     vector = gui.Vector4D(0, 0, 0, 1)
     assert abs(vector) == 1.0
