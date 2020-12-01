@@ -1,3 +1,41 @@
+## v0.138.0 (2020-12-01)
+
+### Feat
+
+- **core**: add ChildEvent / TimerEvent classes
+- **core**: add IdentityProxyModel class
+- **gui**: add SessionManager class
+- **gui**: add InputMethod class
+- **core**: add AbstractEventDispatcher class
+- **widgets**: add StackedWidget class
+- **widgets**: add some events
+- **FileInfo**: add some additional methods
+- **gui**: add Vector3D class
+- **core**: add MimeType / MimeDatabase classes
+- **core**: add SaveFile class
+- **core**: add SignalBlocker class
+- **core**: add TimeLine class
+- **gui**: add Bitmap class
+- **core**: add RandomGenerator class
+- **FileDevice**: add get_error method
+- **widgets**: add Dial class
+- **widgets**: add RubberBand class
+- **Wizard/WizardPage**: add some more methods
+- **widgets**: add GraphicsRotation / GraphicsScale classes
+- **widgets**: add GraphicsTransform class
+- **widgets**: add LCDNumber class
+- **widgets**: add Scroller(Properties) classes
+- **core**: add CommandLineParser/Option classes
+- **Pixmap**: add some more methods
+- **gui**: add Screen class
+- **Transform**: add some more methods
+- add Abstract/PlainTextTextDocumentLayout classes
+- **core**: add BasicTimer class
+- **core**: add Resource class
+- **core**: add StorageInfo class
+- **core**: add ElapsedTimer class
+- **core**: add CryptographicHash class
+
 ## v0.137.1 (2020-11-27)
 
 ### Fix
