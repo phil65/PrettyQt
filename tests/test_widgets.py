@@ -919,6 +919,18 @@ def test_stackedlayout(qtbot):
         pass
 
 
+def test_stackedwidget(qtbot):
+    widget = widgets.StackedWidget()
+    w = widgets.RadioButton("test_stackedwidget")
+    widget += w
+    assert widget[0] == w
+    assert w in widget
+    widget.set_current_widget(w)
+    assert len(widget) == 1
+    for item in widget:
+        pass
+
+
 def test_spaceritem(qtbot):
     item = widgets.SpacerItem(0, 0, "expanding", "expanding")
     item.change_size(0, 0)

@@ -172,6 +172,7 @@ from .groupbox import GroupBox
 from .splitter import Splitter
 from .wizard import Wizard
 from .wizardpage import WizardPage
+from .stackedwidget import StackedWidget
 
 from .undocommand import UndoCommand
 from .undostack import UndoStack
@@ -341,6 +342,7 @@ __all__ = [
     "Splitter",
     "Wizard",
     "WizardPage",
+    "StackedWidget",
     "MainWindow",
     "AbstractItemDelegate",
     "ItemDelegate",
