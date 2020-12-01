@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import List, Iterator
+from typing import List, Iterator, Union, Tuple
 
 from qtpy import QtCore, QtGui
 
@@ -20,8 +20,21 @@ MATCH_FLAGS = dict(
 
 
 class StandardItemModel(QtGui.QStandardItemModel):
-    def __getitem__(self, row: int) -> QtGui.QStandardItem:
-        return self.item(row)
+    def __getitem__(
+        self, index: Union[int, Tuple[int, int], QtCore.QModelIndex]
+    ) -> QtGui.QStandardItem:
+        if isinstance(index, int):
+            return self.item(index)
+        elif isinstance(index, tuple):
+            return self.item(*index)
+        else:
+            return self.itemFromIndex(index)
+
+    def __delitem__(self, index: Union[int, Tuple[int, int]]):
+        if isinstance(index, int):
+            self.takeRow(index)
+        elif isinstance(index, tuple):
+            self.takeItem(*index)
 
     def __iter__(self) -> Iterator[QtGui.QStandardItem]:
         return iter(self.get_children())

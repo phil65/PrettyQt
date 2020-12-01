@@ -331,20 +331,21 @@ def test_fontdialog(qtbot):
 
 
 def test_formlayout(qtbot):
-    widget = widgets.FormLayout()
-    widget.set_size_mode("maximum")
+    layout = widgets.FormLayout()
+    layout.set_size_mode("maximum")
     with pytest.raises(InvalidParamError):
-        widget.set_size_mode("bla")
-    widget[0, "left"] = "0, left"
-    widget[1, "left"] = widgets.RadioButton("1, left")
-    widget[0, "right"] = "label 1 right"
-    widget[1, "right"] = widgets.RadioButton("1, right")
-    widget[2] = "by str"
-    widget[3] = widgets.RadioButton("widget[3]")
-    widget += widgets.RadioButton("added with +=")
-    widget += ("added with +=", widgets.RadioButton("tuple"))
-    widget = widgets.FormLayout.build_from_dict({"from": "dict"})
-    assert len(widget) == 2
+        layout.set_size_mode("bla")
+    layout[0, "left"] = "0, left"
+    layout[1, "left"] = widgets.RadioButton("1, left")
+    layout[0, "right"] = "label 1 right"
+    layout[1, "right"] = widgets.RadioButton("1, right")
+    layout[2] = "by str"
+    layout[3] = widgets.RadioButton("widget[3]")
+    layout += widgets.RadioButton("added with +=")
+    layout += ("added with +=", widgets.RadioButton("tuple"))
+    layout = widgets.FormLayout.build_from_dict({"from": "dict"})
+    assert len(layout) == 2
+    del layout[0]
 
 
 def test_frame(qtbot):
@@ -624,6 +625,7 @@ def test_listwidget(qtbot):
         pass
     item = widgets.ListWidgetItem()
     widget += item
+    del widget[0]
 
 
 def test_listwidgetitem(qtbot):
@@ -744,9 +746,9 @@ def test_messagebox(qtbot):
     widget.set_text_format("rich")
     with pytest.raises(InvalidParamError):
         widget.set_text_format("test")
+    assert widget.get_text_format() == "rich"
     with pytest.raises(InvalidParamError):
         widget.add_button("test")
-    assert widget.get_text_format() == "rich"
     widget.get_standard_buttons()
 
 
@@ -1176,6 +1178,7 @@ def test_tablewidget(qtbot, tablewidget):
     item = widgets.TableWidgetItem("test")
     tablewidget[0, 0] = item
     assert tablewidget[0, 0] == item
+    del tablewidget[0, 0]
 
 
 def test_tablewidgetitem(qtbot):
@@ -1204,6 +1207,7 @@ def test_toolbox(qtbot):
     for w in widget:
         pass
     assert widget[1] == w2
+    del widget[1]
 
 
 def test_treeview(qtbot):

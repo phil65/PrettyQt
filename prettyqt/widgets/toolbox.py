@@ -20,6 +20,9 @@ class ToolBox(QtWidgets.QToolBox):
                 raise KeyError("Widget not found")
             return result
 
+    def __delitem__(self, index: int):
+        self.removeItem(index)
+
     def serialize_fields(self):
         children = list()
         for i, widget in enumerate(self.get_children()):

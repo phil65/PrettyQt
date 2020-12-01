@@ -21,6 +21,9 @@ class TableWidget(QtWidgets.QTableWidget):
     def __setitem__(self, index: Tuple[int, int], value: QtWidgets.QTableWidgetItem):
         self.setItem(index[0], index[1], value)
 
+    def __delitem__(self, index: Tuple[int, int]):
+        self.takeItem(*index)
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])

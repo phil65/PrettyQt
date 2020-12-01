@@ -32,6 +32,9 @@ class ListWidget(QtWidgets.QListWidget):
     def __getitem__(self, row: int) -> QtWidgets.QListWidgetItem:
         return self.item(row)
 
+    def __delitem__(self, row: int):
+        self.takeItem(row)
+
     def __add__(self, other: QtWidgets.QListWidgetItem):
         self.addItem(other)
         return self

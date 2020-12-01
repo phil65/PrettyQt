@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Dict
+from typing import Optional, Dict, Union, Tuple
 
 from qtpy import QtWidgets
 
@@ -24,7 +24,9 @@ class FormLayout(QtWidgets.QFormLayout):
         self.set_size_mode("maximum")
         self.setVerticalSpacing(8)
 
-    def __setitem__(self, index, value):
+    def __setitem__(
+        self, index: Union[int, Tuple[int, str]], value: Union[str, QtWidgets.QWidget]
+    ):
         if isinstance(index, tuple):
             row = index[0]
             role = index[1]
@@ -32,6 +34,9 @@ class FormLayout(QtWidgets.QFormLayout):
             row = index
             role = "both"
         self.set_widget(value, row, role)
+
+    def __delitem__(self, index: int):
+        self.removeRow(index)
 
     def __iter__(self):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
@@ -59,13 +64,12 @@ class FormLayout(QtWidgets.QFormLayout):
         for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
             self.set_widget(item, pos[0], pos[1])
 
-    def set_widget(self, widget, row, role: str = "both"):
+    def set_widget(
+        self, widget: Union[str, QtWidgets.QWidget], row: int, role: str = "both"
+    ):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
-        if isinstance(widget, QtWidgets.QLayout):
-            self.set_layout(row, ROLES[role], widget)
-        else:
-            self.setWidget(row, ROLES[role], widget)
+        self.setWidget(row, ROLES[role], widget)
 
     def get_widget(self, row: int, role: str = "both"):
         item = self.itemAt(row, ROLES[role])

@@ -335,6 +335,7 @@ def test_standarditemmodel():
     assert len(model.find_items("test")) == 1
     with pytest.raises(InvalidParamError):
         model.find_items("test", mode="wrong_mode")
+    del model[0]
 
 
 def test_statictext():
