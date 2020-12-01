@@ -102,6 +102,7 @@ from .dir import Dir
 from .event import Event
 from .itemselectionmodel import ItemSelectionModel
 from .itemselection import ItemSelection
+from .itemselectionrange import ItemSelectionRange
 from .diriterator import DirIterator
 from .abstractitemmodel import AbstractItemModel
 from .abstractproxymodel import AbstractProxyModel
@@ -209,6 +210,7 @@ __all__ = [
     "DirIterator",
     "ItemSelectionModel",
     "ItemSelection",
+    "ItemSelectionRange",
     "Slot",
     "Property",
     "RegularExpressionMatch",

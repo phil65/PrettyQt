@@ -247,6 +247,17 @@ def test_itemselection():
         pass
 
 
+def test_itemselectionrange():
+    selection_range = core.ItemSelectionRange()
+    # selection_range_2 = core.ItemSelectionRange()
+    # selection_range_3 = selection_range & selection_range_2
+    assert core.ModelIndex() in selection_range
+    assert bool(selection_range) is False
+    assert len(selection_range) == 0
+    for i in selection_range:
+        pass
+
+
 def test_library():
     lib = core.Library()
     assert bool(lib) is False
