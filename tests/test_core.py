@@ -310,6 +310,17 @@ def test_mimedata():
     assert mime_data.keys() == ["type a"]
 
 
+def test_mimedatabase():
+    db = core.MimeDatabase()
+    db.get_mime_type_for_file("")
+
+
+def test_mimetype():
+    mime_type = core.MimeType()
+    assert bool(mime_type) is False
+    assert str(mime_type) == ""
+
+
 def test_modelindex():
     core.ModelIndex()
 

@@ -86,7 +86,9 @@ from .regularexpressionmatch import RegularExpressionMatch
 from .regularexpressionmatchiterator import RegularExpressionMatchIterator
 from .regexp import RegExp
 from .regularexpression import RegularExpression
+from .mimetype import MimeType
 from .mimedata import MimeData
+from .mimedatabase import MimeDatabase
 from .runnable import Runnable
 
 # from .modelindex import ModelIndex
@@ -188,7 +190,9 @@ __all__ = [
     "Process",
     "Rect",
     "RectF",
+    "MimeType",
     "MimeData",
+    "MimeDatabase",
     "Dir",
     "Event",
     "DirIterator",
