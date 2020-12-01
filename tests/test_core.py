@@ -216,6 +216,21 @@ def test_file():
     assert buf.get_error() == "open"
 
 
+def test_fileinfo():
+    info = core.FileInfo()
+    repr(info)
+    str(info)
+    info.get_dir()
+    info.get_absolute_file_path()
+    info.get_birth_time()
+    info.get_metadata_change_time()
+    info.get_last_modified()
+    info.get_last_read()
+    info.get_file_time("birth")
+    with pytest.raises(InvalidParamError):
+        info.get_file_time("test")
+
+
 def test_historystate():
     state = core.HistoryState()
     state.set_history_type("deep")

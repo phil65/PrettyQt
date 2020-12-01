@@ -4,6 +4,9 @@ import pathlib
 
 from qtpy import QtCore
 
+from prettyqt import core
+from prettyqt.utils import InvalidParamError
+
 
 class FileInfo(QtCore.QFileInfo):
     def __init__(self, *args, **kwargs):
@@ -14,6 +17,32 @@ class FileInfo(QtCore.QFileInfo):
 
     def __repr__(self):
         return f"FileInfo({self.absoluteFilePath()!r})"
+
+    def __str__(self):
+        return self.absoluteFilePath()
+
+    def get_dir(self) -> pathlib.Path:
+        return pathlib.Path(self.dir().absolutePath())
+
+    def get_absolute_file_path(self) -> pathlib.Path:
+        return pathlib.Path(self.absoluteFilePath())
+
+    def get_birth_time(self) -> core.DateTime:
+        return core.DateTime(self.birthTime())
+
+    def get_metadata_change_time(self) -> core.DateTime:
+        return core.DateTime(self.metadataChangeTime())
+
+    def get_last_modified(self) -> core.DateTime:
+        return core.DateTime(self.lastModified())
+
+    def get_last_read(self) -> core.DateTime:
+        return core.DateTime(self.lastRead())
+
+    def get_file_time(self, typ: str) -> core.DateTime:
+        if typ not in core.filedevice.FILE_TIME:
+            raise InvalidParamError(typ, core.filedevice.FILE_TIME)
+        return core.DateTime(self.fileTime(core.filedevice.FILE_TIME[typ]))
 
 
 if __name__ == "__main__":
