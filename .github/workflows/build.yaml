@@ -21,6 +21,11 @@ jobs:
       run: |
           sudo apt-get update
           sudo apt-get install x11-utils libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xfixes0 libpulse-mainloop-glib0 libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-alsa gstreamer1.0-libav libxvidcore4 qt5-image-formats-plugins bluez bluetooth blueman python3-pyqt5 python3-pyqt5.qtwebengine qtwayland5 speech-dispatcher-espeak-ng flite libflite1 libqt5texttospeech5 libqt5bluetooth5 libqt5svg5 pulseaudio qtspeech5-flite-plugin speech-dispatcher speech-dispatcher-flite pyqt5-dev-tools
+    - name: Run services
+      if: runner.os == 'Linux'
+      run: |
+        systemctl --user start pulseaudio.service
+        speech-dispatcher -d
     - name: Install dependencies
       run: |
         pip install --upgrade pip
@@ -29,12 +34,19 @@ jobs:
     - name: Test with pytest
       run: |
         poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
-    - name: Create documentation
-      run: |
-        make docs
+    # - name: Create documentation
+    #   run: |
+    #     make docs
     - name: Publish package
-      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags') && runner.os == 'Linux'
       uses: pypa/gh-action-pypi-publish@master
       with:
         user: __token__
         password: ${{ secrets.PYPI_SECRET }}
+    - name: Deploy docs
+      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags') && runner.os == 'Linux'
+      uses: mhausenblas/mkdocs-deploy-gh-pages@master
+      # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # CUSTOM_DOMAIN: optionaldomain.com
