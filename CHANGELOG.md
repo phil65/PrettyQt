@@ -1,3 +1,9 @@
+## v0.140.2 (2020-12-02)
+
+### Fix
+
+- deploy check for github actions
+
 ## v0.140.1 (2020-12-02)
 
 ### Fix
