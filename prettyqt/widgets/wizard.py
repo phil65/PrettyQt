@@ -215,7 +215,7 @@ class Wizard(QtWidgets.QWizard):
                         "custom_button_1", "custom_button_2", "custom_button_3",
                         "no_cancel_button_on_last_page"
         Args:
-            origin: option to use
+            option: option to use
             value: value to set
 
         Raises:
@@ -238,7 +238,7 @@ class Wizard(QtWidgets.QWizard):
                          "no_cancel_button_on_last_page"
 
         Args:
-            origin: option to get
+            option: option to get
 
         Returns:
             option

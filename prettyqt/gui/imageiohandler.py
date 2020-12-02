@@ -62,7 +62,7 @@ class ImageIOHandler(QtGui.QImageIOHandler):
                            "transformation_by_default"
 
         Args:
-            origin: option to use
+            option: option to use
             value: value to set
 
         Raises:
@@ -84,7 +84,7 @@ class ImageIOHandler(QtGui.QImageIOHandler):
                          "transformation_by_default"
 
         Args:
-            origin: option to get
+            option: option to get
 
         Returns:
             option
@@ -105,7 +105,7 @@ class ImageIOHandler(QtGui.QImageIOHandler):
                          "transformation_by_default"
 
         Args:
-            origin: option to check
+            option: option to check
 
         Returns:
             option

@@ -91,7 +91,7 @@ class ImageReader(QtGui.QImageReader):
                          "transformation_by_default"
 
         Args:
-            origin: option to check
+            option: option to check
 
         Returns:
             option

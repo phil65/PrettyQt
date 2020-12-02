@@ -75,8 +75,6 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
         Raises:
             InvalidParamError: metric does not exist
 
-        Returns:
-            state
         """
         if metric not in SCROLL_METRIC:
             raise InvalidParamError(metric, SCROLL_METRIC)
