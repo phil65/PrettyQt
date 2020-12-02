@@ -1,3 +1,9 @@
+## v0.140.1 (2020-12-02)
+
+### Fix
+
+- github actions: conditional deploy step
+
 ## v0.140.0 (2020-12-02)
 
 ### Feat
