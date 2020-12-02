@@ -1322,6 +1322,11 @@ def test_undoview(qtbot):
     assert view[0] == cmd
 
 
+def test_whatsthis(qtbot):
+    with widgets.WhatsThis.enter_mode():
+        pass
+
+
 def test_widget(qtbot):
     widget = widgets.Widget()
     widget.set_tooltip("test")

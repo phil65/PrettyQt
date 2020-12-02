@@ -104,7 +104,7 @@ from .actiongroup import ActionGroup
 from .widgetaction import WidgetAction
 from .menu import Menu
 from .mainwindow import MainWindow
-
+from .whatsthis import WhatsThis
 from .listwidgetitem import ListWidgetItem
 from .treewidgetitem import TreeWidgetItem
 from .toolbutton import ToolButton
@@ -344,6 +344,7 @@ __all__ = [
     "WizardPage",
     "StackedWidget",
     "MainWindow",
+    "WhatsThis",
     "AbstractItemDelegate",
     "ItemDelegate",
     "StyledItemDelegate",
