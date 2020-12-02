@@ -58,6 +58,24 @@ def test_color():
     # color.as_qt()
 
 
+def test_colorspace():
+    space = gui.ColorSpace()
+    bytes(space)
+    assert bool(space) is False
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(space, jar)
+    with open("data.pkl", "rb") as jar:
+        space = pickle.load(jar)
+    space.set_primaries("dci_p3_d65")
+    with pytest.raises(InvalidParamError):
+        space.set_primaries("test")
+    assert space.get_primaries() == "dci_p3_d65"
+    space.set_transfer_function("pro_photo_rgb")
+    with pytest.raises(InvalidParamError):
+        space.set_transfer_function("test")
+    assert space.get_transfer_function() == "pro_photo_rgb"
+
+
 def test_cursor():
     cursor = gui.Cursor()
     cursor.set_shape("arrow")

@@ -124,6 +124,11 @@ from .textblockgroup import TextBlockGroup
 from .textframe import TextFrame
 from .abstracttextdocumentlayout import AbstractTextDocumentLayout
 
+from prettyqt import core
+
+if core.VersionNumber.get_qt_version() >= (5, 13, 0):
+    from .colorspace import ColorSpace
+
 
 def app():
     if GuiApplication.instance() is not None:
@@ -244,4 +249,5 @@ __all__ = [
     "TextFrame",
     "AbstractTextDocumentLayout",
     "InputMethod",
+    "ColorSpace",
 ]
