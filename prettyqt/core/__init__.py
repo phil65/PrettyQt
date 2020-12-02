@@ -26,6 +26,7 @@ from .signalblocker import SignalBlocker
 from .line import Line
 from .linef import LineF
 from .easingcurve import EasingCurve
+from .processenvironment import ProcessEnvironment
 from .randomgenerator import RandomGenerator
 
 # from .randomgenerator64 import RandomGenerator64
@@ -182,6 +183,7 @@ __all__ = [
     "Line",
     "LineF",
     "EasingCurve",
+    "ProcessEnvironment",
     "TimeLine",
     "RandomGenerator",
     # "RandomGenerator64",

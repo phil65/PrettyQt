@@ -421,6 +421,20 @@ def test_process():
     assert process.get_state() == "not_running"
 
 
+def test_processenvironment():
+    env = core.ProcessEnvironment.get_system_environment()
+    assert bool(env) is True
+    env["key"] = "value"
+    assert "key" in env
+    assert env["key"] == "value"
+    with pytest.raises(KeyError):
+        env["test"]
+    del env["key"]
+    dct = dict(env_name="value")
+    env = core.ProcessEnvironment.from_dict(dct)
+    assert dict(env) == dct
+
+
 def test_propertyanimation():
     animation = core.PropertyAnimation()
     button = widgets.PushButton()
