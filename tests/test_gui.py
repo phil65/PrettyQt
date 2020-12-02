@@ -136,7 +136,7 @@ def test_fontmetrics():
     val = fontmetrics.elided_text("This is a test", mode="right", width=40)
     with pytest.raises(InvalidParamError):
         val = fontmetrics.elided_text("This is a test", mode="test", width=40)
-    assert len(val) < 5
+    assert len(val) < 10
     fontmetrics.get_bounding_rect("test")
     fontmetrics.get_tight_bounding_rect("test")
 
@@ -147,7 +147,7 @@ def test_fontmetricsf():
     val = fontmetrics.elided_text("This is a test", mode="right", width=40)
     with pytest.raises(InvalidParamError):
         val = fontmetrics.elided_text("This is a test", mode="test", width=40)
-    assert len(val) < 5
+    assert len(val) < 10
     fontmetrics.get_bounding_rect("test")
     fontmetrics.get_tight_bounding_rect("test")
 
