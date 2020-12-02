@@ -63,7 +63,6 @@ from .iodevice import IODevice
 from .filedevice import FileDevice
 from .file import File
 from .savefile import SaveFile
-from .temporaryfile import TemporaryFile
 from .buffer import Buffer
 from .settings import Settings
 from .timezone import TimeZone
@@ -99,6 +98,8 @@ from .runnable import Runnable
 # from .modelindex import ModelIndex
 from .threadpool import ThreadPool
 from .dir import Dir
+from .temporaryfile import TemporaryFile
+from .temporarydir import TemporaryDir
 from .event import Event
 from .itemselectionmodel import ItemSelectionModel
 from .itemselection import ItemSelection
@@ -206,6 +207,7 @@ __all__ = [
     "MimeData",
     "MimeDatabase",
     "Dir",
+    "TemporaryDir",
     "Event",
     "DirIterator",
     "ItemSelectionModel",

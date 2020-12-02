@@ -652,6 +652,13 @@ def storageinfo():
     core.StorageInfo.get_mounted_devices()
 
 
+def test_temporarydir():
+    folder = core.TemporaryDir()
+    str(folder)
+    assert bool(folder) is True
+    assert folder.to_path() / "test" == folder / "test"
+
+
 def test_temporaryfile():
     file = core.TemporaryFile()
     with file.open_file("read_only"):
