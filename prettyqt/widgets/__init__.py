@@ -187,6 +187,13 @@ from .mouseeventtransition import MouseEventTransition
 
 from .plaintextdocumentlayout import PlainTextDocumentLayout
 
+from .gesture import Gesture
+from .tapgesture import TapGesture
+from .tapandholdgesture import TapAndHoldGesture
+from .pangesture import PanGesture
+from .pinchgesture import PinchGesture
+from .swipegesture import SwipeGesture
+
 
 def app():
     if Application.instance() is not None:
@@ -368,4 +375,10 @@ __all__ = [
     "GraphicsSceneEvent",
     "GestureEvent",
     "PlainTextDocumentLayout",
+    "Gesture",
+    "TapGesture",
+    "TapAndHoldGesture",
+    "PanGesture",
+    "PinchGesture",
+    "SwipeGesture",
 ]

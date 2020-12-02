@@ -368,6 +368,17 @@ def test_frame(qtbot):
         frame.set_frame_shape("test")
 
 
+def test_gesture():
+    gesture = widgets.Gesture()
+    assert gesture.get_state() == "none"
+    assert gesture.get_gesture_type() == "custom"
+    gesture.get_hot_spot()
+    gesture.set_gesture_cancel_policy("all_in_context")
+    with pytest.raises(InvalidParamError):
+        gesture.set_gesture_cancel_policy("test")
+    assert gesture.get_gesture_cancel_policy() == "all_in_context"
+
+
 def test_graphicsblureffect():
     effect = widgets.GraphicsBlurEffect()
     effect.set_blur_hints("animation")
@@ -760,6 +771,13 @@ def test_messagebox(qtbot):
     widget.get_standard_buttons()
 
 
+def test_pangesture():
+    gesture = widgets.PanGesture()
+    gesture.get_delta()
+    gesture.get_last_offset()
+    gesture.get_offset()
+
+
 def test_plaintextdocumentlayout():
     doc = gui.TextDocument()
     layout = widgets.PlainTextDocumentLayout(doc)
@@ -798,6 +816,17 @@ def test_plaintextedit(qtbot):
     assert widget.get_value() == "test"
     widget += "append"
     widget.set_regex_validator("[0-9]")
+
+
+def test_pinchgesture():
+    gesture = widgets.PinchGesture()
+    gesture.get_start_center_point()
+    gesture.get_center_point()
+    gesture.get_last_center_point()
+    gesture.set_change_flags(center_point=True)
+    assert gesture.get_change_flags() == ["center_point"]
+    gesture.set_total_change_flags(center_point=True)
+    assert gesture.get_total_change_flags() == ["center_point"]
 
 
 def test_progressbar(qtbot):
@@ -997,6 +1026,12 @@ def test_styleoptionslider(qtbot):
     slider.set_vertical()
 
 
+def test_swipegesture():
+    gesture = widgets.SwipeGesture()
+    assert gesture.get_horizontal_direction() == "right"
+    assert gesture.get_vertical_direction() == "none"
+
+
 def test_systemtrayicon(qtbot):
     icon = widgets.SystemTrayIcon()
     icon.set_icon("mdi.folder")
@@ -1023,6 +1058,16 @@ def test_tabwidget(qtbot):
     widget.add_tab(widgets.BoxLayout("horizontal"), "mdi.timer")
     widget.close_detached_tabs()
     # widget.close_detached_tabs()
+
+
+def test_tapgesture():
+    gesture = widgets.TapGesture()
+    gesture.get_position()
+
+
+def test_tapandholdgesture():
+    gesture = widgets.TapAndHoldGesture()
+    gesture.get_position()
 
 
 def test_textbrowser(qtbot):
