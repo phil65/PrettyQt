@@ -6,6 +6,9 @@ from qtpy import QtCore
 
 
 class Dir(QtCore.QDir):
+    def __getattr__(self, attr: str):
+        return getattr(self.to_path(), attr)
+
     def __repr__(self):
         return f"Dir({self.absolutePath()!r})"
 
