@@ -61,10 +61,16 @@ jobs:
       with:
         pypi_username: __token__
         pypi_password: ${{ secrets.PYPI_SECRET }}
-    - name: Deploy docs
-      if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags') && runner.os == 'Linux'
-      uses: mhausenblas/mkdocs-deploy-gh-pages@master
-      # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        # CUSTOM_DOMAIN: optionaldomain.com
+    # - name: Deploy docs
+    #   # if: github.event_name == 'push'
+    #   uses: mhausenblas/mkdocs-deploy-gh-pages@master
+    #   # Or use mhausenblas/mkdocs-deploy-gh-pages@nomaterial to build without the mkdocs-material theme
+    #   env:
+    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #     # CUSTOM_DOMAIN: optionaldomain.com
+    - name: Install packages
+      # if: runner.os == 'Linux'
+      run: |
+        pip install mkdocs mkdocs-material mkdocstrings pymdown-extensions
+        mkdocs build
+        mkdocs gh-deploy --force
