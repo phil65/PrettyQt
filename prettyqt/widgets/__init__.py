@@ -17,6 +17,8 @@ from qtpy.QtWidgets import QGraphicsSceneEvent as GraphicsSceneEvent
 from qtpy.QtWidgets import QGestureEvent as GestureEvent
 
 from .style import Style
+from .commonstyle import CommonStyle
+from .proxystyle import ProxyStyle
 from .application import Application
 from .sizepolicy import SizePolicy
 from .widget import Widget
@@ -248,6 +250,8 @@ __all__ = [
     "GraphicsScene",
     "GraphicsView",
     "Style",
+    "CommonStyle",
+    "ProxyStyle",
     "StyleOption",
     "StyleOptionComplex",
     "SpacerItem",
