@@ -71,6 +71,11 @@ jobs:
     - name: Install packages
       # if: runner.os == 'Linux'
       run: |
-        pip install mkdocs mkdocs-material mkdocstrings pymdown-extensions
-        mkdocs build
-        mkdocs gh-deploy --force
+        pip install poetry
+        poetry install -E pyqt5
+        poetry run mkdocs build
+    - name: Deploy docs
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
