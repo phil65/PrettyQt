@@ -548,6 +548,7 @@ def test_settings(qapp):
     settings.clear()
     settings.set_value("test", "value")
     assert settings.get("empty") is None
+    print(settings.allKeys())
     assert len(settings) == 1
     assert "test" in settings
     assert settings.get("test") == "value"
@@ -625,7 +626,7 @@ def test_standardpaths():
         path = core.StandardPaths["cache"]
         assert path != []
     name = core.StandardPaths.get_display_name("cache")
-    assert name == "Cache"
+    assert name in ["Cache", "Caches"]
 
 
 def test_state():

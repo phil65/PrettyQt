@@ -24,6 +24,7 @@ jobs:
     - name: Run services
       if: runner.os == 'Linux'
       run: |
+        sudo service dbus start
         systemctl --user start pulseaudio.service
         speech-dispatcher -d
     - name: Install dependencies
