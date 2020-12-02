@@ -1,3 +1,18 @@
+## v0.139.0 (2020-12-02)
+
+### Feat
+
+- **FileInfo/Dir**: fallback to pathlib.Path methods
+- **widgets**: add Proxy/CommonStyle classes
+- **widgets**: add Gesture classes
+- **core**: add TemporaryDir class
+- **widgets**: add WhatsThis class
+- **core**: add ItemSelectionRange class
+- **FormLayout**: add some more methods
+- **core**: add ProcessEnvironment class
+- **gui**: add StaticText class
+- **core**: add PauseAnimation class
+
 ## v0.138.0 (2020-12-01)
 
 ### Feat
