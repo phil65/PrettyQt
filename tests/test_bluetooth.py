@@ -23,7 +23,8 @@ def test_bluetoothservicediscoveryagent(qtlog):
     assert agent.get_discovered_services() == []
 
 
-def test_bluetoothdevicediscoveryagent():
-    agent = bluetooth.BluetoothDeviceDiscoveryAgent()
+def test_bluetoothdevicediscoveryagent(qtlog):
+    with qtlog.disabled():
+        agent = bluetooth.BluetoothDeviceDiscoveryAgent()
     assert agent.get_error() == "none"
     agent.get_supported_discovery_methods()

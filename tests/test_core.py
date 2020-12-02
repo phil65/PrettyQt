@@ -548,8 +548,7 @@ def test_settings(qapp):
     settings.clear()
     settings.set_value("test", "value")
     assert settings.get("empty") is None
-    print(settings.allKeys())
-    assert len(settings) == 1
+    assert len(settings) > 0
     assert "test" in settings
     assert settings.get("test") == "value"
     with core.Settings(settings_id="test") as s:
