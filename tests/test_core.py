@@ -213,7 +213,7 @@ def test_file():
         pass
     str(buf)
     repr(buf)
-    assert buf.get_error() == "open"
+    assert buf.get_error() in ["none", "open"]
 
 
 def test_fileinfo():
