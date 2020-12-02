@@ -1793,7 +1793,7 @@ resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,
 <div class="doc doc-contents ">
 <p>resizeEvent(self, QResizeEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/codeeditor.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\codeeditor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -1829,7 +1829,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/codeeditor.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\codeeditor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">line_area_paintevent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -1849,7 +1849,7 @@ sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <div class="doc doc-contents ">
 <p>sizeHint(self) -&gt; QSize</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/codeeditor.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\codeeditor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">line_area_width</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
@@ -1893,7 +1893,7 @@ set_pos<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <div class="doc doc-contents ">
 <p>Set data item's position on a GUI layout.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/dataset.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\dataset.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colspan</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""Set data item's position on a GUI layout."""</span>
@@ -1932,7 +1932,7 @@ __new__<span class="p">(</span><span class="n">mcs</span><span class="p">,</span
 <div class="doc doc-contents ">
 <p>Create and return a new object.  See help(type) for accurate signature.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/dataset.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\dataset.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
     <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bases</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s2">"__metaclass__"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">DataSetMeta</span><span class="p">]</span>
@@ -2042,7 +2042,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/filechooserbutton.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\filechooserbutton.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -2124,7 +2124,7 @@ addItem<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <div class="doc doc-contents ">
 <p>addItem(self, QLayoutItem)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">addItem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
@@ -2144,7 +2144,7 @@ count<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <div class="doc doc-contents ">
 <p>count(self) -&gt; int</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
@@ -2164,7 +2164,7 @@ expandingDirections<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-contents ">
 <p>expandingDirections(self) -&gt; Qt.Orientations</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">expandingDirections</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientations</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
@@ -2184,7 +2184,7 @@ hasHeightForWidth<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-contents ">
 <p>hasHeightForWidth(self) -&gt; bool</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">hasHeightForWidth</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">return</span> <span class="kc">True</span>
@@ -2204,7 +2204,7 @@ heightForWidth<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-contents ">
 <p>heightForWidth(self, int) -&gt; int</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">heightForWidth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_layout</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
@@ -2224,7 +2224,7 @@ itemAt<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <div class="doc doc-contents ">
 <p>itemAt(self, int) -&gt; QLayoutItem</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">itemAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span><span class="p">]:</span>
     <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
@@ -2247,7 +2247,7 @@ minimumSize<span class="p">(</span><span class="bp">self</span><span class="p">)
 <div class="doc doc-contents ">
 <p>minimumSize(self) -&gt; QSize</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">minimumSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">()</span>
@@ -2274,7 +2274,7 @@ setGeometry<span class="p">(</span><span class="bp">self</span><span class="p">,
 <div class="doc doc-contents ">
 <p>setGeometry(self, QRect)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setGeometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
@@ -2295,7 +2295,7 @@ sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <div class="doc doc-contents ">
 <p>sizeHint(self) -&gt; QSize</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimumSize</span><span class="p">()</span>
@@ -2315,7 +2315,7 @@ takeAt<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <div class="doc doc-contents ">
 <p>takeAt(self, int) -&gt; QLayoutItem</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">takeAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span><span class="p">]:</span>
     <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
@@ -2362,7 +2362,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/labeledslider.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\labeledslider.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
 
@@ -2480,7 +2480,7 @@ show<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <div class="doc doc-contents ">
 <p>show(self)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/popupinfo.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\popupinfo.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
@@ -2549,7 +2549,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\promptlineedit.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -2590,7 +2590,7 @@ resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,
 <div class="doc doc-contents ">
 <p>resizeEvent(self, QResizeEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\promptlineedit.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="c1"># Adjusts Clear button position</span>
@@ -2634,7 +2634,7 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\promptlineedit.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_button_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visible</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
     <span class="sd">"""Sets the clear button as ``visible``.</span>
@@ -2753,7 +2753,7 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-contents ">
 <p>mouseMoveEvent(self, QMouseEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\spanslider.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
@@ -2817,7 +2817,7 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-contents ">
 <p>mousePressEvent(self, QMouseEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\spanslider.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span><span class="p">()</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span><span class="p">()</span> <span class="ow">or</span> <span class="n">event</span><span class="o">.</span><span class="n">buttons</span><span class="p">()</span> <span class="o">^</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">():</span>
@@ -2850,7 +2850,7 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-contents ">
 <p>mouseReleaseEvent(self, QMouseEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\spanslider.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -2873,7 +2873,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\spanslider.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="n">painter</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StylePainter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -2969,7 +2969,7 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\spanslider.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_movement_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set movement mode.</span>
@@ -3003,7 +3003,7 @@ trigger_action<span class="p">(</span><span class="bp">self</span><span class="p
 <p>Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
 "page_step_sub", "to_minimum", "to_maximum", "move"</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\spanslider.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">main</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
     <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
@@ -3100,7 +3100,7 @@ enterEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>enterEvent(self, QEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">enterEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span> <span class="o">=</span> <span class="kc">True</span>
@@ -3120,7 +3120,7 @@ leaveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>leaveEvent(self, QEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">leaveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span> <span class="o">=</span> <span class="kc">False</span>
@@ -3141,7 +3141,7 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-contents ">
 <p>mouseMoveEvent(self, QMouseEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
@@ -3171,7 +3171,7 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-contents ">
 <p>mousePressEvent(self, QMouseEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
@@ -3200,7 +3200,7 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-contents ">
 <p>mouseReleaseEvent(self, QMouseEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
@@ -3221,7 +3221,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="n">qp</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">()</span>
@@ -3369,7 +3369,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/waitingspinner.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\waitingspinner.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="n">painter</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -3431,7 +3431,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>paintEvent(self, QPaintEvent)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/waitingspinner.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_widgets\waitingspinner.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_update_position</span><span class="p">()</span>

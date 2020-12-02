@@ -1431,7 +1431,7 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-contents ">
 <p>createEditor(self, QWidget, QStyleOptionViewItem, QModelIndex) -&gt; QWidget</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\buttondelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">:</span>
     <span class="n">label</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
@@ -1458,7 +1458,7 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-contents ">
 <p>setEditorData(self, QWidget, QModelIndex)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\buttondelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">pass</span>
@@ -1478,7 +1478,7 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-contents ">
 <p>setModelData(self, QWidget, QAbstractItemModel, QModelIndex)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\buttondelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">pass</span>
@@ -1525,7 +1525,7 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 <p>instanciate the editor widget and initialize it
 also connect currentIndexChanged signal.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\checkboxdelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Override.</span>
@@ -1553,7 +1553,7 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 <p>Override.</p>
 <p>set correct initial value for editor widget</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\checkboxdelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Override.</span>
@@ -1580,7 +1580,7 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 <p>Override, gets called on self.commitData (?).</p>
 <p>apply the newly selected dtype to the column if possible.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\checkboxdelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combo</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Override, gets called on self.commitData (?).</span>
@@ -1671,7 +1671,7 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/icondelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\icondelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -1773,7 +1773,7 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <div class="doc doc-contents ">
 <p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/nofocusdelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\nofocusdelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -1824,7 +1824,7 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <div class="doc doc-contents ">
 <p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/progressbardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\progressbardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">progress</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
@@ -1878,7 +1878,7 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-contents ">
 <p>createEditor(self, QWidget, QStyleOptionViewItem, QModelIndex) -&gt; QWidget</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\radiodelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">editor</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
@@ -1920,7 +1920,7 @@ eventFilter<span class="p">(</span><span class="bp">self</span><span class="p">,
 <div class="doc doc-contents ">
 <p>eventFilter(self, QObject, QEvent) -&gt; bool</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\radiodelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">eventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">core</span><span class="o">.</span><span class="n">Event</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
@@ -1959,7 +1959,7 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-contents ">
 <p>setEditorData(self, QWidget, QModelIndex)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\radiodelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">value</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">)</span>
@@ -1981,7 +1981,7 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-contents ">
 <p>setModelData(self, QWidget, QAbstractItemModel, QModelIndex)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\radiodelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">button</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">buttonGroup</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span>
@@ -2004,7 +2004,7 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-contents ">
 <p>updateEditorGeometry(self, QWidget, QStyleOptionViewItem, QModelIndex)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\radiodelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">updateEditorGeometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span>
@@ -2057,7 +2057,7 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-contents ">
 <p>Create and return the StarEditor object we'll use to edit the StarRating.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Create and return the StarEditor object we'll use to edit the StarRating."""</span>
@@ -2080,7 +2080,7 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <div class="doc doc-contents ">
 <p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">star_rating</span> <span class="o">=</span> <span class="n">StarRating</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
@@ -2119,7 +2119,7 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-contents ">
 <p>Set the data to be displayed and edited by our custom editor.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Set the data to be displayed and edited by our custom editor."""</span>
@@ -2140,7 +2140,7 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-contents ">
 <p>Get the data from our custom editor and stuffs it into the model.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Get the data from our custom editor and stuffs it into the model."""</span>
@@ -2164,7 +2164,7 @@ sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-contents ">
 <p>Return the size needed to display the item in a QSize object.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="sd">"""Return the size needed to display the item in a QSize object."""</span>
@@ -2202,7 +2202,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-contents ">
 <p>Initialize the editor object, making sure we can watch mouse events.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""Initialize the editor object, making sure we can watch mouse events."""</span>
@@ -2227,7 +2227,7 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-contents ">
 <p>Update stars on mouse move.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="sd">"""Update stars on mouse move."""</span>
@@ -2252,7 +2252,7 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-contents ">
 <p>Once star rating was clicked, tell the delegate we're done editing.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="sd">"""Once star rating was clicked, tell the delegate we're done editing."""</span>
@@ -2273,7 +2273,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <p>Paint the editor, offloading the work to the StarRating class.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="sd">"""Paint the editor, offloading the work to the StarRating class."""</span>
@@ -2295,7 +2295,7 @@ sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <div class="doc doc-contents ">
 <p>Tell the caller how big we are.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Tell the caller how big we are."""</span>
@@ -2316,7 +2316,7 @@ star_at_position<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-contents ">
 <p>Calculate which star the user's mouse cursor is currently hovering over.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">star_at_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">"""Calculate which star the user's mouse cursor is currently hovering over."""</span>
@@ -2353,7 +2353,7 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <div class="doc doc-contents ">
 <p>Paint the stars (and/or diamonds if we're in editing mode).</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -2393,7 +2393,7 @@ sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <div class="doc doc-contents ">
 <p>Tell the caller how big we are.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_delegates\stardelegate.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Tell the caller how big we are."""</span>

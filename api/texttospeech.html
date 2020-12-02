@@ -787,7 +787,7 @@ from_object<span class="p">(</span><span class="n">obj</span><span class="p">,</
 <div class="doc doc-contents ">
 <p>Convert any python object into a QJSValue (must happen in GUI thread).</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/qml/jsvalue.py</code></summary>
+          <summary>Source code in <code>prettyqt\qml\jsvalue.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
@@ -869,7 +869,7 @@ get_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/qml/qmlengine.py</code></summary>
+          <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return object ownership.</span>
@@ -935,7 +935,7 @@ set_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt/qml/qmlengine.py</code></summary>
+          <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the object ownership.</span>
