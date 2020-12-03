@@ -26,6 +26,9 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
     ],
+    entry_points={
+        "pyinstaller40": ["hook-dirs=maestral_qt.__pyinstaller:get_hook_dirs"],
+    },
     description="Pythonic layer on top of PyQt5 / PySide2",
     install_requires=REQUIREMENTS,
     license="MIT license",

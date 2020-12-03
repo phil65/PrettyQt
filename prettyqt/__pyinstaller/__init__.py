@@ -1,5 +1,6 @@
-import pathlib
+import os
 
 
 def get_hook_dirs():
-    return [str(pathlib.Path(__file__).parent)]
+    return [os.path.dirname(__file__)]
+    # return [str(pathlib.Path(__file__).parent)]
