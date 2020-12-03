@@ -34,6 +34,7 @@ from .deadlinetimer import DeadlineTimer
 from .elapsedtimer import ElapsedTimer
 from .basictimer import BasicTimer
 from .object import Object
+from .socketnotifier import SocketNotifier
 from .timeline import TimeLine
 from .margins import Margins
 from .marginsf import MarginsF
@@ -144,6 +145,7 @@ __all__ = [
     "CryptographicHash",
     "Uuid",
     "SignalBlocker",
+    "SocketNotifier",
     # "Debug",
     "DeadlineTimer",
     "ElapsedTimer",
