@@ -37,15 +37,20 @@ jobs:
       run: |
         poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
     - name: Create documentation
+      if: matrix.python-version != '3.9'
       run: |
         poetry run mkdocs build
-    # - name: Publish package
-    #   if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags') && runner.os == 'Linux'
-    #   uses: pypa/gh-action-pypi-publish@master
-    #   with:
-    #     user: __token__
-    #     password: ${{ secrets.PYPI_SECRET }}
-
+    - name: Build and publish
+      if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.7' && runner.os == 'Linux'
+      run: |
+        poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
+        poetry publish --build
+    - name: Deploy docs
+      if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.7' && runner.os == 'Linux'
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./site
 
   deploy:
     runs-on: ubuntu-latest
