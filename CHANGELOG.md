@@ -1,3 +1,13 @@
+## v0.141.0 (2020-12-03)
+
+### Feat
+
+- **core**: add Collator(SortKey) classes
+
+### Fix
+
+- github actions fix
+
 ## v0.140.4 (2020-12-02)
 
 ### Fix
