@@ -122,6 +122,8 @@ from .historystate import HistoryState
 from .state import State
 from .commandlineoption import CommandLineOption
 from .commandlineparser import CommandLineParser
+from .collatorsortkey import CollatorSortKey
+from .collator import Collator
 
 if VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
@@ -243,4 +245,6 @@ __all__ = [
     "CommandLineOption",
     "CommandLineParser",
     "install_message_handler",
+    "CollatorSortKey",
+    "Collator",
 ]

@@ -99,6 +99,14 @@ def test_commandlineparser():
         parser.set_single_dash_word_option_mode("test")
 
 
+def test_collator():
+    collator = core.Collator()
+    collator.set_case_sensitive(True)
+    assert collator.is_case_sensitive()
+    collator.get_locale()
+    collator.get_sort_key("test")
+
+
 def test_coreapplication(qapp):
     def test():
         pass
