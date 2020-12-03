@@ -13,6 +13,9 @@ packages = [
 [tool.poetry.scripts]
 regexeditor = "prettyqt.custom_widgets.regexeditor.editor:run"
 
+[tool.poetry.plugins."pyinstaller40"]
+hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
+
 [tool.poetry.dependencies]
 python = "^3.7"
 bidict = "^0"
