@@ -628,6 +628,13 @@ def test_settings(qapp):
     repr(s)
 
 
+def test_signalmapper():
+    mapper = core.SignalMapper()
+    obj = core.Object()
+    mapper[obj] = 10
+    assert mapper[10] == obj
+
+
 def test_signaltransition():
     trans = core.SignalTransition()
     trans.set_transition_type("parallel")
