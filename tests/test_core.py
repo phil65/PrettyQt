@@ -328,6 +328,13 @@ def test_linef():
         pass
 
 
+def test_lockfile():
+    lockfile = core.LockFile("C:/test/file.ext")
+    with lockfile.lock_file():
+        pass
+    assert lockfile.get_error() == "unknown"
+
+
 def test_margins():
     margin = core.Margins(0, 0, 0, 0)
     assert repr(margin) == "Margins(0, 0, 0, 0)"

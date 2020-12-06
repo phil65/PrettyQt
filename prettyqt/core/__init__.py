@@ -64,6 +64,7 @@ from .iodevice import IODevice
 from .filedevice import FileDevice
 from .file import File
 from .savefile import SaveFile
+from .lockfile import LockFile
 from .buffer import Buffer
 from .settings import Settings
 from .timezone import TimeZone
@@ -176,6 +177,7 @@ __all__ = [
     "FileDevice",
     "File",
     "SaveFile",
+    "LockFile",
     "TemporaryFile",
     "Buffer",
     "Settings",
