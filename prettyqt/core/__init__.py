@@ -126,6 +126,9 @@ from .commandlineparser import CommandLineParser
 from .collatorsortkey import CollatorSortKey
 from .collator import Collator
 
+from .jsonvalue import JsonValue
+from .jsondocument import JsonDocument
+
 if VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
     from .transposeproxymodel import TransposeProxyModel
@@ -249,4 +252,6 @@ __all__ = [
     "install_message_handler",
     "CollatorSortKey",
     "Collator",
+    "JsonValue",
+    "JsonDocument",
 ]

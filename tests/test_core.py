@@ -266,6 +266,21 @@ def test_itemselectionrange():
         pass
 
 
+def test_jsondocument():
+    doc = core.JsonDocument.from_variant(dict(a="b"))
+    assert str(doc) == "{'a': 'b'}"
+    doc["k"] = "v"
+    assert doc["k"] == "v"
+    doc.to_string()
+    repr(doc)
+
+
+def test_jsonvalue():
+    val = core.JsonValue("b")
+    assert str(val) == "b"
+    repr(val)
+
+
 def test_library():
     lib = core.Library()
     assert bool(lib) is False
