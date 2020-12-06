@@ -84,6 +84,12 @@ def test_bytearraymatcher():
     repr(matcher)
 
 
+def test_calendar():
+    calendar = core.Calendar("gregorian")
+    # assert bool(calendar) is True
+    calendar.get_date_from_parts(2000, 10, 28)
+
+
 # def test_commandlineoption():
 #     option = core.CommandLineOption()
 
