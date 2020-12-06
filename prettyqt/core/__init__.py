@@ -17,6 +17,7 @@ from qtpy.QtCore import QRectF as RectF
 from qtpy.QtCore import qInstallMessageHandler as install_message_handler
 from qtpy.QtCore import QChildEvent as ChildEvent
 from qtpy.QtCore import QTimerEvent as TimerEvent
+from qtpy.QtCore import QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent
 from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
 from .uuid import Uuid
@@ -147,6 +148,7 @@ __all__ = [
     "app",
     "ChildEvent",
     "TimerEvent",
+    "DynamicPropertyChangeEvent",
     "Object",
     "CryptographicHash",
     "Uuid",
