@@ -666,6 +666,21 @@ def test_state():
         state.set_child_mode("test")
 
 
+def test_statemachine():
+    machine = core.StateMachine()
+    state = core.State()
+    machine += state
+    assert machine.get_error() == "none"
+    machine.set_global_restore_policy("dont_restore")
+    assert machine.get_global_restore_policy() == "dont_restore"
+    with pytest.raises(InvalidParamError):
+        machine.set_global_restore_policy("test")
+    event = QtCore.QEvent(QtCore.QEvent.ActionAdded)
+    machine.post_event(event)
+    with pytest.raises(InvalidParamError):
+        machine.post_event(event, "test")
+
+
 def test_sortfilterproxymodel():
     core.SortFilterProxyModel()
 

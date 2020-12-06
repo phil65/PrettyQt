@@ -10,7 +10,7 @@ CHILD_MODES = bidict(
     exclusive=QtCore.QState.ExclusiveStates, parallel=QtCore.QState.ParallelStates
 )
 
-RESTORE_POLICIES = bidict(
+RESTORE_POLICY = bidict(
     dont_restore=QtCore.QState.DontRestoreProperties,
     restore=QtCore.QState.RestoreProperties,
 )

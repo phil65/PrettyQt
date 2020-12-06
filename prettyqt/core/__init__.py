@@ -122,6 +122,7 @@ from .abstractstate import AbstractState
 from .finalstate import FinalState
 from .historystate import HistoryState
 from .state import State
+from .statemachine import StateMachine
 from .commandlineoption import CommandLineOption
 from .commandlineparser import CommandLineParser
 from .collatorsortkey import CollatorSortKey
@@ -246,6 +247,7 @@ __all__ = [
     "FinalState",
     "HistoryState",
     "State",
+    "StateMachine",
     "AbstractTransition",
     "SignalTransition",
     "EventTransition",
