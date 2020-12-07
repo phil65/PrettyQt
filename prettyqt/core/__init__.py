@@ -11,7 +11,6 @@ from qtpy.QtCore import Slot, Signal, Property
 from qtpy.QtCore import QModelIndex as ModelIndex
 from qtpy.QtCore import QPoint as Point
 from qtpy.QtCore import QPointF as PointF
-from qtpy.QtCore import QSizeF as SizeF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
 from qtpy.QtCore import qInstallMessageHandler as install_message_handler
@@ -76,10 +75,10 @@ from .datetime import DateTime
 from .calendar import Calendar
 from .resource import Resource
 from .size import Size
+from .sizef import SizeF
 from .fileinfo import FileInfo
 from .storageinfo import StorageInfo
 
-# from .sizef import SizeF
 # from .point import Point
 # from .pointf import PointF
 from .textboundaryfinder import TextBoundaryFinder
