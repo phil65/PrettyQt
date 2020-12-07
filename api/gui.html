@@ -12,7 +12,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.19753c6b.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
@@ -4189,7 +4189,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-contents ">
 <p>Helper for pickle.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\color.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()))</span>
@@ -4212,7 +4212,7 @@ from_text<span class="p">(</span><span class="n">text</span><span class="p">)</s
 <div class="doc doc-contents ">
 <p>Create a QColor from specified string.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\color.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_text</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
@@ -4286,7 +4286,7 @@ get_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\colorspace.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/colorspace.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_primaries</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current primaries.</span>
@@ -4331,7 +4331,7 @@ get_transfer_function<span class="p">(</span><span class="bp">self</span><span c
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\colorspace.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/colorspace.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_transfer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current transfer function.</span>
@@ -4397,7 +4397,7 @@ set_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\colorspace.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/colorspace.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_primaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">primaries</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set primaries.</span>
@@ -4468,7 +4468,7 @@ set_transfer_function<span class="p">(</span><span class="bp">self</span><span c
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\colorspace.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/colorspace.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_transfer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
     <span class="sd">"""Set transfer function.</span>
@@ -4542,7 +4542,7 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\cursor.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/cursor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current cursor shape.</span>
@@ -4608,7 +4608,7 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\cursor.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/cursor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set cursor shape.</span>
@@ -4683,7 +4683,7 @@ get_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_capitalization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current font capitalization.</span>
@@ -4729,7 +4729,7 @@ get_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current hinting preference.</span>
@@ -4774,7 +4774,7 @@ get_letter_spacing_type<span class="p">(</span><span class="bp">self</span><span
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_letter_spacing_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current letter spacing type.</span>
@@ -4819,7 +4819,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current font style.</span>
@@ -4865,7 +4865,7 @@ get_weight<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current font weight.</span>
@@ -4933,7 +4933,7 @@ set_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_capitalization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capitalization</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the font capitalization.</span>
@@ -5005,7 +5005,7 @@ set_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preference</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the hinting preference.</span>
@@ -5084,7 +5084,7 @@ set_letter_spacing<span class="p">(</span><span class="bp">self</span><span clas
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_letter_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
     <span class="sd">"""Set the letter spacing.</span>
@@ -5156,7 +5156,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the font style.</span>
@@ -5228,7 +5228,7 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the style hint.</span>
@@ -5301,7 +5301,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the font weight.</span>
@@ -5376,7 +5376,7 @@ get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\gradient.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current coordinate mode.</span>
@@ -5421,7 +5421,7 @@ get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\gradient.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current spread method.</span>
@@ -5466,7 +5466,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\gradient.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current gradient type.</span>
@@ -5532,7 +5532,7 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\gradient.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the coordinate mode.</span>
@@ -5603,7 +5603,7 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\gradient.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the spread method.</span>
@@ -5677,7 +5677,7 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\guiapplication.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current layout direction.</span>
@@ -5743,7 +5743,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\guiapplication.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set layout direction.</span>
@@ -5792,7 +5792,7 @@ get_icon<span class="p">(</span><span class="n">icon</span><span class="p">,</sp
 <p>Qtawesome already caches icons, but since we construct our own subclassed icon,
 we cache, too.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\icon.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/icon.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span>
     <span class="n">icon</span><span class="p">:</span> <span class="n">IconType</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">as_qicon</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
@@ -5813,8 +5813,6 @@ we cache, too.</p>
             <span class="n">new</span> <span class="o">=</span> <span class="n">qta</span><span class="o">.</span><span class="n">icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">new</span> <span class="o">=</span> <span class="n">qta</span><span class="o">.</span><span class="n">icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">icon</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"http"</span><span class="p">):</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">new</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="n">icon</span> <span class="o">=</span> <span class="n">new</span> <span class="k">if</span> <span class="n">as_qicon</span> <span class="k">else</span> <span class="n">Icon</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
@@ -5902,7 +5900,7 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\imageiohandler.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="sd">"""Return the value assigned to option.</span>
@@ -5993,7 +5991,7 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\imageiohandler.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
     <span class="sd">"""Set option to given value.</span>
@@ -6077,7 +6075,7 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\imageiohandler.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">supports_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Return whether the image handler supports given option.</span>
@@ -6158,7 +6156,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\imagereader.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/imagereader.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return error type.</span>
@@ -6205,7 +6203,7 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\imagereader.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/imagereader.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return the transformation and orientation the image has been set to.</span>
@@ -6278,7 +6276,7 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\imagereader.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/imagereader.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">supports_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Return whether the image handler supports given option.</span>
@@ -6358,7 +6356,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\imagewriter.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/imagewriter.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return error type.</span>
@@ -6404,7 +6402,7 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\imagewriter.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/imagewriter.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return the transformation and orientation the image has been set to.</span>
@@ -6472,7 +6470,7 @@ set_transformation<span class="p">(</span><span class="bp">self</span><span clas
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\imagewriter.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/imagewriter.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the image transformations metadata including orientation.</span>
@@ -6532,7 +6530,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-contents ">
 <p>Helper for pickle.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\keysequence.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/keysequence.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toString</span><span class="p">(),))</span>
@@ -6594,7 +6592,7 @@ get_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\movie.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/movie.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_cache_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current cache mode.</span>
@@ -6660,7 +6658,7 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\movie.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/movie.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_cache_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set cache mode.</span>
@@ -6734,7 +6732,7 @@ get_update_behaviour<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\openglwindow.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/openglwindow.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_update_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the window update hehaviour.</span>
@@ -6803,7 +6801,7 @@ get_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pagelayout.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current mode.</span>
@@ -6848,7 +6846,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pagelayout.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current orientation.</span>
@@ -6893,7 +6891,7 @@ get_units<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pagelayout.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_units</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current unit.</span>
@@ -6959,7 +6957,7 @@ set_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pagelayout.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set mode.</span>
@@ -7030,7 +7028,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pagelayout.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set orientation.</span>
@@ -7101,7 +7099,7 @@ set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pagelayout.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_units</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set unit.</span>
@@ -7175,7 +7173,7 @@ get_definition_units<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pagesize.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pagesize.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_definition_units</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the definition unit.</span>
@@ -7222,7 +7220,7 @@ get_id<span class="p">(</span><span class="bp">self</span><span class="p">)</spa
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pagesize.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pagesize.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the standard page size id.</span>
@@ -7310,7 +7308,7 @@ get_metric<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\paintdevice.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/paintdevice.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">"""Return metric information.</span>
@@ -7385,7 +7383,7 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painter.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_composition_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current composition mode.</span>
@@ -7431,7 +7429,7 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painter.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current pen.</span>
@@ -7476,7 +7474,7 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painter.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_composition_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the current composition mode.</span>
@@ -7560,7 +7558,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painter.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_pen</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -7644,7 +7642,7 @@ get_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painterpath.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painterpath.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_fill_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current fill rule.</span>
@@ -7710,7 +7708,7 @@ set_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painterpath.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painterpath.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_fill_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set fill rule.</span>
@@ -7784,7 +7782,7 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painterpathstroker.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painterpathstroker.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current cap style.</span>
@@ -7829,7 +7827,7 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painterpathstroker.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painterpathstroker.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current join style.</span>
@@ -7895,7 +7893,7 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painterpathstroker.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painterpathstroker.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set cap style to use.</span>
@@ -7966,7 +7964,7 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\painterpathstroker.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/painterpathstroker.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set join style to use.</span>
@@ -8040,7 +8038,7 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pen.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current cap style.</span>
@@ -8085,7 +8083,7 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pen.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current join style.</span>
@@ -8131,7 +8129,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pen.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current pen style.</span>
@@ -8198,7 +8196,7 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pen.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set cap style to use.</span>
@@ -8269,7 +8267,7 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pen.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set join style to use.</span>
@@ -8341,7 +8339,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\pen.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set pen style to use.</span>
@@ -8401,7 +8399,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-contents ">
 <p>Helper for pickle.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\polygon.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/polygon.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
@@ -8445,7 +8443,7 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-contents ">
 <p>validate(self, str, int) -&gt; Tuple[QValidator.State, str, int]</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\regularexpressionvalidator_pyside.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/regularexpressionvalidator_pyside.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -8516,7 +8514,7 @@ get_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\sessionmanager.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/sessionmanager.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_restart_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current restart hint.</span>
@@ -8582,7 +8580,7 @@ set_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\sessionmanager.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/sessionmanager.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_restart_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the restart hint.</span>
@@ -8638,7 +8636,7 @@ clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <div class="doc doc-contents ">
 <p>clone(self) -&gt; QStandardItem</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\standarditem.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
@@ -8682,7 +8680,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\standarditem.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the action.</span>
@@ -8750,7 +8748,7 @@ get_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\statictext.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/statictext.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_performance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current performance hint.</span>
@@ -8795,7 +8793,7 @@ get_text_format<span class="p">(</span><span class="bp">self</span><span class="
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\statictext.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/statictext.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_text_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current text format.</span>
@@ -8861,7 +8859,7 @@ set_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\statictext.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/statictext.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_performance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the performance hint.</span>
@@ -8932,7 +8930,7 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\statictext.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/statictext.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_text_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the text format.</span>
@@ -9006,7 +9004,7 @@ get_surface_class<span class="p">(</span><span class="bp">self</span><span class
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\surface.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/surface.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_surface_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current surface class.</span>
@@ -9051,7 +9049,7 @@ get_surface_type<span class="p">(</span><span class="bp">self</span><span class=
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\surface.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/surface.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_surface_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current surface type.</span>
@@ -9102,7 +9100,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-contents ">
 <p>Apply syntax highlighting to the given block of text.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\syntaxhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/syntaxhighlighter.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Apply syntax highlighting to the given block of text."""</span>
@@ -9205,7 +9203,7 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcharformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current font weight.</span>
@@ -9251,7 +9249,7 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcharformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current underline style.</span>
@@ -9298,7 +9296,7 @@ get_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcharformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_vertical_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current vertical alignment.</span>
@@ -9366,7 +9364,7 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcharformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_font_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the font style hint.</span>
@@ -9439,7 +9437,7 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcharformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the font weight.</span>
@@ -9512,7 +9510,7 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcharformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the underline style.</span>
@@ -9585,7 +9583,7 @@ set_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcharformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the vertical alignment.</span>
@@ -9642,7 +9640,7 @@ edit_block<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-contents ">
 <p>Context manager for edit blocks. Can be used for undo actions.</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcursor.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">edit_block</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -9666,7 +9664,7 @@ select<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <div class="doc doc-contents ">
 <p>select(self, QTextCursor.SelectionType)</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcursor.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">SELECTION_TYPES</span><span class="p">:</span>
@@ -9718,7 +9716,7 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcursor.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">select_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">end_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Select text from start position to end position.</span>
@@ -9783,7 +9781,7 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textcursor.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"move"</span><span class="p">):</span>
     <span class="sd">"""Set cursor to given position.</span>
@@ -9872,7 +9870,7 @@ clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textdocument.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">clear_stacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stack</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Clear undo / redo stack.</span>
@@ -9922,7 +9920,7 @@ get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textdocument.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current cursor move style.</span>
@@ -9988,7 +9986,7 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textdocument.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the cursor move style.</span>
@@ -10062,7 +10060,7 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current layout direction.</span>
@@ -10128,7 +10126,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set layout direction.</span>
@@ -10203,7 +10201,7 @@ get_border_style<span class="p">(</span><span class="bp">self</span><span class=
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textframeformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current border style.</span>
@@ -10249,7 +10247,7 @@ get_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textframeformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_page_break_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current page break policy.</span>
@@ -10294,7 +10292,7 @@ get_position<span class="p">(</span><span class="bp">self</span><span class="p">
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textframeformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current position.</span>
@@ -10361,7 +10359,7 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textframeformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set border style.</span>
@@ -10433,7 +10431,7 @@ set_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textframeformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_page_break_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set page break policy.</span>
@@ -10504,7 +10502,7 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textframeformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set position.</span>
@@ -10578,7 +10576,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textlength.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textlength.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return type of this length object.</span>
@@ -10648,7 +10646,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textlistformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textlistformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get current style.</span>
@@ -10716,7 +10714,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\textlistformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/textlistformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the style.</span>
@@ -10792,7 +10790,7 @@ get_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\texttablecellformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_bottom_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current bottom border style.</span>
@@ -10839,7 +10837,7 @@ get_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\texttablecellformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_left_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current left border style.</span>
@@ -10886,7 +10884,7 @@ get_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\texttablecellformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_right_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current right border style.</span>
@@ -10933,7 +10931,7 @@ get_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\texttablecellformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_top_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current top border style.</span>
@@ -11001,7 +10999,7 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\texttablecellformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set border style.</span>
@@ -11074,7 +11072,7 @@ set_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\texttablecellformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_bottom_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set bottom border style.</span>
@@ -11147,7 +11145,7 @@ set_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\texttablecellformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_left_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set left border style.</span>
@@ -11220,7 +11218,7 @@ set_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\texttablecellformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_right_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set right border style.</span>
@@ -11293,7 +11291,7 @@ set_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\texttablecellformat.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_top_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set top border style.</span>
@@ -11353,7 +11351,7 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-contents ">
 <p>Needed for sum().</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\validator.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/validator.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QValidator</span><span class="p">):</span>
     <span class="sd">"""Needed for sum()."""</span>
@@ -11417,7 +11415,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\window.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/window.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current window visibility.</span>
@@ -11485,7 +11483,7 @@ set_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\gui\window.py</code></summary>
+          <summary>Source code in <code>prettyqt/gui/window.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visibility</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set window visibility.</span>
@@ -11590,8 +11588,8 @@ set_visibility<span class="p">(</span><span class="bp">self</span><span class="p
       
     </div>
     
-      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.0ac82a11.min.js"></script>
+      <script src="../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({

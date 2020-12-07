@@ -12,7 +12,7 @@
       
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.6">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.1.7">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6910b76c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.19753c6b.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.196e0c26.min.css">
@@ -1251,7 +1251,7 @@ bind<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <p>bind(self, Union[QHostAddress, QHostAddress.SpecialAddress], port: int = 0, mode: Union[QAbstractSocket.BindMode, QAbstractSocket.BindFlag] = QAbstractSocket.DefaultForPlatform) -&gt; bool
 bind(self, port: int = 0, mode: Union[QAbstractSocket.BindMode, QAbstractSocket.BindFlag] = QAbstractSocket.DefaultForPlatform) -&gt; bool</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\abstractsocket.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/abstractsocket.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">bind</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
@@ -1319,7 +1319,7 @@ set_pause_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\abstractsocket.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/abstractsocket.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_pause_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set pause mode.</span>
@@ -1414,7 +1414,7 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\httpmultipart.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/httpmultipart.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set content type.</span>
@@ -1470,7 +1470,7 @@ get<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <div class="doc doc-contents ">
 <p>get(self, QNetworkRequest) -&gt; QNetworkReply</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkaccessmanager.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">]):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -1511,7 +1511,7 @@ get_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkaccessmanager.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current redirect policy.</span>
@@ -1577,7 +1577,7 @@ set_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkaccessmanager.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set redirect policy.</span>
@@ -1651,7 +1651,7 @@ get_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkaddressentry.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkaddressentry.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return whether this address is eligible for publication in the DNS.</span>
@@ -1717,7 +1717,7 @@ set_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkaddressentry.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkaddressentry.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the DNS eligibility flag for this address to status.</span>
@@ -1793,7 +1793,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkinterface.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkinterface.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the interface type.</span>
@@ -1865,7 +1865,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkproxy.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkproxy.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the proxy type.</span>
@@ -1933,7 +1933,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkproxy.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkproxy.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set proxy type.</span>
@@ -2008,7 +2008,7 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkrequest.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Get the current priority.</span>
@@ -2074,7 +2074,7 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 </tbody>
 </table>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\networkrequest.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set priority.</span>
@@ -2130,7 +2130,7 @@ listen<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <div class="doc doc-contents ">
 <p>listen(self, address: Union[QHostAddress, QHostAddress.SpecialAddress] = QHostAddress.Any, port: int = 0) -&gt; bool</p>
 <details class="quote">
-          <summary>Source code in <code>prettyqt\network\tcpserver.py</code></summary>
+          <summary>Source code in <code>prettyqt/network/tcpserver.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">listen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">],</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -2224,8 +2224,8 @@ listen<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
       
     </div>
     
-      <script src="../assets/javascripts/vendor.fd16492e.min.js"></script>
-      <script src="../assets/javascripts/bundle.7836ba4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.0ac82a11.min.js"></script>
+      <script src="../assets/javascripts/bundle.f81dfb4d.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
