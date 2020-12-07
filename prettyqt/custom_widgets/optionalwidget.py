@@ -20,7 +20,7 @@ class OptionalWidget(widgets.GroupBox):
         self.widget = widget
         self.toggled.connect(self.widget.setEnabled)
 
-    def __getattr__(self, value):
+    def __getattr__(self, value: str):
         return self.widget.__getattribute__(value)
 
     @property

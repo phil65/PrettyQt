@@ -7,18 +7,6 @@ from qtpy import QtCore, QtWidgets
 from prettyqt import core, gui, widgets
 
 
-class LineNumberArea(widgets.Widget):
-    def __init__(self, editor):
-        super().__init__(editor)
-        self.editor = editor
-
-    def sizeHint(self):
-        return core.Size(self.editor.line_area_width(), 0)
-
-    def paintEvent(self, event):
-        self.editor.line_area_paintevent(event)
-
-
 class CodeEditor(widgets.PlainTextEdit):
     def __init__(
         self, language: str = "python", parent: Optional[QtWidgets.QWidget] = None
@@ -51,7 +39,7 @@ class CodeEditor(widgets.PlainTextEdit):
     def update_line_area_width(self, _):
         self.setViewportMargins(self.line_area_width(), 0, 0, 0)
 
-    def update_line_area(self, rect, dy):
+    def update_line_area(self, rect: QtCore.QRect, dy: int):
         if dy:
             self.line_area.scroll(0, dy)
         else:
@@ -81,6 +69,18 @@ class CodeEditor(widgets.PlainTextEdit):
                 top = bottom
                 bottom = top + self.blockBoundingRect(block).height()
                 block_number += 1
+
+
+class LineNumberArea(widgets.Widget):
+    def __init__(self, editor: CodeEditor):
+        super().__init__(editor)
+        self.editor = editor
+
+    def sizeHint(self) -> core.Size:
+        return core.Size(self.editor.line_area_width(), 0)
+
+    def paintEvent(self, event):
+        self.editor.line_area_paintevent(event)
 
 
 if __name__ == "__main__":

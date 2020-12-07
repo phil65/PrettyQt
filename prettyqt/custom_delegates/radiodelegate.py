@@ -16,23 +16,28 @@ class RadioDelegate(widgets.StyledItemDelegate):
         self.items = items
         self.choices = [None for i in self.items]
 
-    def createEditor(self, parent, option, index):
+    def createEditor(
+        self,
+        parent: QtWidgets.QWidget,
+        option: QtWidgets.QStyleOptionViewItem,
+        index: QtCore.QModelIndex,
+    ) -> widgets.Widget:
         editor = widgets.Widget(parent)
-        editor.setContentsMargins(0, 0, 0, 0)
+        editor.set_margin(0)
         editor.setAutoFillBackground(True)
         # create a button group to keep track of the checked radio
-        editor.buttonGroup = widgets.ButtonGroup()
+        editor.button_group = widgets.ButtonGroup()
         # adding the widget as an argument to the layout constructor automatically
         # applies it to the widget
         layout = widgets.BoxLayout("horizontal", parent=editor)
-        layout.setContentsMargins(0, 0, 0, 0)
+        layout.set_margin(0)
         for i, k in enumerate(self.items):
             rb = widgets.RadioButton(k)
             layout.addWidget(rb)
             # prevent the radio to get focus from keyboard or mouse
-            rb.setFocusPolicy(QtCore.Qt.NoFocus)
+            rb.set_focus_policy("none")
             rb.installEventFilter(self)
-            editor.buttonGroup.addButton(rb, i)
+            editor.button_group.addButton(rb, i)
         # add a stretch to always align contents to the left
         layout.addStretch(1)
 
@@ -41,7 +46,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         editor.installEventFilter(self)
         return editor
 
-    def eventFilter(self, source, event):
+    def eventFilter(self, source: QtWidgets.QWidget, event: QtCore.QEvent) -> bool:
         if event.type() == core.Event.MouseButtonPress:
             if isinstance(source, QtWidgets.QRadioButton):
                 if not source.parent().hasFocus():
@@ -63,41 +68,51 @@ class RadioDelegate(widgets.StyledItemDelegate):
             source.parent().update()
         return super().eventFilter(source, event)
 
-    def updateEditorGeometry(self, editor, option, index):
+    def updateEditorGeometry(
+        self,
+        editor: QtWidgets.QWidget,
+        option: QtWidgets.QStyleOptionViewItem,
+        index: QtCore.QModelIndex,
+    ):
         rect = core.Rect(option.rect)
-        minWidth = editor.minimumSizeHint().width()
-        if rect.width() < minWidth:
-            rect.setWidth(minWidth)
+        min_width = editor.minimumSizeHint().width()
+        if rect.width() < min_width:
+            rect.setWidth(min_width)
         editor.setGeometry(rect)
         # create a new mask based on the option rectangle, then apply it
         mask = gui.Region(0, 0, option.rect.width(), option.rect.height())
         editor.setProperty("offMask", mask)
         editor.setMask(mask)
 
-    def setEditorData(self, editor, index):
+    def setEditorData(self, editor: QtWidgets.QWidget, index: QtCore.QModelIndex):
         value = index.data(QtCore.Qt.DisplayRole)
         if value in self.items:
-            editor.buttonGroup.button(self.items.index(value)).setChecked(True)
+            editor.button_group.button(self.items.index(value)).setChecked(True)
 
-    def setModelData(self, editor, model, index):
-        button = editor.buttonGroup.checkedId()
+    def setModelData(
+        self,
+        editor: QtWidgets.QWidget,
+        model: QtCore.QAbstractItemModel,
+        index: QtCore.QModelIndex,
+    ):
+        button = editor.button_group.checkedId()
         if button >= 0:
             model.setData(index, self.items[button], QtCore.Qt.DisplayRole)
             self.choices[button] = index.row()
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     widget = widgets.TableWidget()
     widget.setColumnCount(3)
     widget.insertRow(0)
     widget.insertRow(0)
     widget.setHorizontalHeaderLabels(["LIB", "CELL", "area"])
     item = widgets.TableWidgetItem("test")
-    widget.setItem(0, 0, item)
-    widget.setItem(1, 1, widgets.TableWidgetItem("test"))
-    widget.setItem(1, 2, widgets.TableWidgetItem("test"))
-    widget.setItem(2, 1, widgets.TableWidgetItem("test"))
+    widget[0, 0] = item
+    widget[1, 1] = widgets.TableWidgetItem("test")
+    widget[1, 2] = widgets.TableWidgetItem("test")
+    widget[2, 1] = widgets.TableWidgetItem("test")
     delegate = RadioDelegate(widget, ["a", "b"])
     widget.setItemDelegateForColumn(0, delegate)
     widget.openPersistentEditor(item)

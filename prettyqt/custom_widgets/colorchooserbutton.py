@@ -58,10 +58,10 @@ class ColorChooserButton(widgets.Widget):
     def is_valid(self) -> bool:
         return self.lineedit.is_valid()
 
-    def get_value(self):
+    def get_value(self) -> gui.Color:
         return self.current_color
 
-    def set_value(self, value):
+    def set_value(self, value: colors.ColorType):
         self.set_color(value)
 
 

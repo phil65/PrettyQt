@@ -59,7 +59,7 @@ class FlagSelectionWidget(widgets.GroupBox):
         for btn, flag in self.buttons.items():
             btn.setChecked(bool(value & flag))
 
-    def get_value(self):
+    def get_value(self) -> int:
         return self.current_choice()
 
 

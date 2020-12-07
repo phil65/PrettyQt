@@ -53,8 +53,7 @@ class MarkdownWindow(widgets.MainWindow):
 
     def open_new_file(self):
         try:
-            dlg = widgets.FileDialog
-            fname = dlg.getOpenFileName(
+            fname = widgets.FileDialog.getOpenFileName(
                 self, "open file", "", "All Text Files (*.md *.markdown *.txt *.*)", None
             )
             self.web_view.set_markdown_file(fname[0])

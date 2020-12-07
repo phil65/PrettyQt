@@ -32,7 +32,7 @@ class IconLabel(widgets.Widget):
         self.box.setSpacing(0)
         self.box.addStretch()
 
-    def __getattr__(self, value):
+    def __getattr__(self, value: str):
         return self.label.__getattribute__(value)
 
     def __repr__(self):

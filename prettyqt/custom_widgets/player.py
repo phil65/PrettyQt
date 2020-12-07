@@ -1,9 +1,13 @@
 import sys
+from typing import Optional
+
+from qtpy import QtWidgets
+
 from prettyqt import constants, gui, core, multimedia, widgets, multimediawidgets
 
 
 class Player(widgets.MainWindow):
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
         self.playback_rate = 1.0
         self.playlist = multimedia.MediaPlaylist(self)
@@ -72,7 +76,7 @@ class Player(widgets.MainWindow):
         self.vol_slider.set_orientation("horizontal")
         self.vol_slider.set_range(0, 100)
         self.vol_slider.setFixedWidth(120)
-        self.vol_slider.setValue(self.player.volume())
+        self.vol_slider.set_value(self.player.volume())
         self.vol_slider.setTickInterval(10)
         self.vol_slider.set_tick_position("below")
         self.vol_slider.setToolTip("Volume")
@@ -111,13 +115,13 @@ class Player(widgets.MainWindow):
             self.player.setPlaybackRate(self.playback_rate)
 
     def set_media_time(self, time):
-        self.slider.setValue(0)
+        self.slider.set_value(0)
         self.time = self.player.duration() / 1000
         self.slider.setRange(0, int(self.time))
 
-    def on_player_change(self, val):
+    def on_player_change(self, val: int):
         with self.slider.block_signals():
-            self.slider.setValue(int(val / 1000))
+            self.slider.set_value(int(val / 1000))
         tmp = self.player.position()
         duration = self.player.duration() / 1000
         # print(tmp, val)
@@ -127,7 +131,7 @@ class Player(widgets.MainWindow):
         )
 
     def on_slider_change(self, val):
-        self.player.setPosition(self.slider.value() * 1000)
+        self.player.setPosition(self.slider.get_value() * 1000)
 
     def open(self):
         file_dialog = widgets.FileDialog(parent=self)
