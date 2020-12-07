@@ -9,7 +9,6 @@ import pathlib
 import inspect
 
 from qtpy import QtCore
-import qtpy
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
@@ -656,7 +655,6 @@ def test_regexpvalidator():
     assert val.is_valid_value("0")
 
 
-@pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
 def test_regularexpressionvalidator():
     val = gui.RegularExpressionValidator()
     val.set_regex("[0-9]")
