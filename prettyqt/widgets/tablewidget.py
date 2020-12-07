@@ -11,10 +11,6 @@ QtWidgets.QTableWidget.__bases__ = (widgets.TableView,)
 
 
 class TableWidget(QtWidgets.QTableWidget):
-    def sort(self, column: int = 0, reverse: bool = False):
-        order = QtCore.Qt.DescendingOrder if reverse else QtCore.Qt.AscendingOrder
-        self.sortItems(column, order)
-
     def __getitem__(self, index: Tuple[int, int]) -> QtWidgets.QTableWidgetItem:
         return self.item(*index)
 
@@ -23,6 +19,10 @@ class TableWidget(QtWidgets.QTableWidget):
 
     def __delitem__(self, index: Tuple[int, int]):
         self.takeItem(*index)
+
+    def sort(self, column: int = 0, reverse: bool = False):
+        order = QtCore.Qt.DescendingOrder if reverse else QtCore.Qt.AscendingOrder
+        self.sortItems(column, order)
 
 
 if __name__ == "__main__":
