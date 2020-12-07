@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
+from typing import Iterator
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, core
@@ -44,6 +48,26 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
+
+    def __iter__(self) -> Iterator[QtWidgets.QTreeWidgetItem]:
+        return iter(self.child(i) for i in range(self.childCount()))
+
+    def __len__(self):
+        return self.childCount()
+
+    def __getitem__(self, index: int) -> QtWidgets.QTreeWidgetItem:
+        return self.child(index)
+
+    def __delitem__(self, index: int):
+        self.takeChild(index)
+
+    def __add__(self, other: QtWidgets.QTreeWidgetItem) -> TreeWidgetItem:
+        self.addChild(other)
+        return self
+
+    def sort_children(self, column: int, descending: bool = False):
+        order = QtCore.Qt.DescendingOrder if descending else QtCore.Qt.AscendingOrder
+        self.sortChildren(column, order)
 
     def set_icon(self, icon: gui.icon.IconType, column: int = 0):
         """Set the icon for the action.
@@ -124,4 +148,5 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
 
 if __name__ == "__main__":
     item = TreeWidgetItem()
+    item[0]
     item.setData(0, 1000, "test")

@@ -1355,6 +1355,14 @@ def test_treewidgetitem(qtbot):
         item.set_child_indicator_policy("test")
     assert item.get_child_indicator_policy() == "dont_show"
     bytes(item)
+    child = widgets.TreeWidgetItem()
+    item += child
+    for child in item:
+        pass
+    assert len(item) == 1
+    assert item[0] == child
+    item.sort_children(0)
+    del item[0]
 
 
 def test_undocommand():
