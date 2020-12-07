@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from typing import Optional
 
 from qtpy import QtCore
@@ -22,6 +24,11 @@ class BaseRegexValidator(gui.Validator):
 
     def __reduce__(self):
         return (self.__class__, (self.get_regex(),))
+
+    def __eq__(self, other: object):
+        if not isinstance(other, type(self)):
+            return False
+        return self.regex == other.regex
 
     def set_regex(self, regex: str):
         self.regex = re.compile(regex)
@@ -46,7 +53,9 @@ class BaseRegexValidator(gui.Validator):
 
 
 class IntListValidator(BaseRegexValidator):
-    def __init__(self, allow_single: bool = True, parent=None):
+    def __init__(
+        self, allow_single: bool = True, parent: Optional[QtCore.QObject] = None
+    ):
         super().__init__(parent=parent)
         self.allow_single = allow_single
         if allow_single:
@@ -58,11 +67,13 @@ class IntListValidator(BaseRegexValidator):
         return (self.__class__, (self.allow_single,))
 
     def __repr__(self):
-        return f"IntListValidator(allow_single={self.allow_single})"
+        return f"{type(self).__name__}(allow_single={self.allow_single})"
 
 
 class FloatListValidator(BaseRegexValidator):
-    def __init__(self, allow_single: bool = True, parent=None):
+    def __init__(
+        self, allow_single: bool = True, parent: Optional[QtCore.QObject] = None
+    ):
         super().__init__(parent=parent)
         self.allow_single = allow_single
         if allow_single:
@@ -76,7 +87,7 @@ class FloatListValidator(BaseRegexValidator):
         return (self.__class__, (self.allow_single,))
 
     def __repr__(self):
-        return f"FloatListValidator(allow_single={self.allow_single})"
+        return f"{type(self).__name__}(allow_single={self.allow_single})"
 
 
 if __name__ == "__main__":

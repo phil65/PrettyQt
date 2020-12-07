@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from qtpy import QtGui
 
 from prettyqt import gui
@@ -17,6 +19,11 @@ class IntValidator(QtGui.QIntValidator):
 
     def __setstate__(self, state):
         self.__init__(state["bottom"], state["top"])
+
+    def __eq__(self, other: object):
+        if not isinstance(other, self.__class__):
+            return False
+        return self.bottom() == other.bottom() and self.top() == other.top()
 
 
 if __name__ == "__main__":

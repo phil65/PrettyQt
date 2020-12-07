@@ -9,6 +9,9 @@ class NotZeroValidator(gui.Validator):
             return (self.Intermediate, text, pos)
         return (self.Acceptable, text, pos)
 
+    def __eq__(self, other: object):
+        return isinstance(other, NotZeroValidator)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets

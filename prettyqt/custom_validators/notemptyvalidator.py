@@ -4,6 +4,9 @@ from prettyqt import gui
 
 
 class NotEmptyValidator(gui.Validator):
+    def __eq__(self, other: object):
+        return isinstance(other, NotEmptyValidator)
+
     def validate(self, text: str, pos: int = 0) -> tuple:
         if text == "":
             return (self.Intermediate, text, pos)

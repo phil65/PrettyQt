@@ -32,6 +32,8 @@ def test_pathvalidator():
     assert val.is_valid_value(str(pathlib.Path.cwd()))
     assert not val.is_valid_value("abs")
     repr(val)
+    assert val == custom_validators.PathValidator()
+    assert val != custom_validators.NotZeroValidator()
 
 
 def test_notzerovalidator():
@@ -39,6 +41,8 @@ def test_notzerovalidator():
     assert val.is_valid_value("1")
     assert not val.is_valid_value("0")
     repr(val)
+    assert val != custom_validators.PathValidator()
+    assert val == custom_validators.NotZeroValidator()
 
 
 def test_notemptyvalidator():
@@ -46,12 +50,16 @@ def test_notemptyvalidator():
     assert val.is_valid_value("1")
     assert not val.is_valid_value("")
     repr(val)
+    assert val != custom_validators.PathValidator()
+    assert val == custom_validators.NotEmptyValidator()
 
 
 def test_compositevalidator():
     val1 = custom_validators.NotEmptyValidator()
     val2 = custom_validators.NotZeroValidator()
     val = custom_validators.CompositeValidator([val1, val2])
+    assert val != custom_validators.PathValidator()
+    assert val == custom_validators.CompositeValidator([val1, val2])
     with open("data.pkl", "wb") as jar:
         pickle.dump(val, jar)
     with open("data.pkl", "rb") as jar:
@@ -71,6 +79,8 @@ def test_intlistvalidator():
     assert not val.is_valid_value("1")
     assert val.is_valid_value("1,2")
     repr(val)
+    assert val != custom_validators.PathValidator()
+    assert val == custom_validators.IntListValidator(allow_single=False)
 
 
 def test_floatlistvalidator():
@@ -81,6 +91,8 @@ def test_floatlistvalidator():
     assert not val.is_valid_value("1.0")
     assert val.is_valid_value("1.0,2")
     repr(val)
+    assert val != custom_validators.PathValidator()
+    assert val == custom_validators.FloatListValidator(allow_single=False)
 
 
 def test_regexpatternvalidator():
@@ -88,3 +100,5 @@ def test_regexpatternvalidator():
     assert val.is_valid_value("[") is False
     assert val.is_valid_value("[0-9]") is True
     repr(val)
+    assert val != custom_validators.PathValidator()
+    assert val == custom_validators.RegexPatternValidator()

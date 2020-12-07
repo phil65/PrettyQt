@@ -1,11 +1,16 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 import pathlib
 
 from prettyqt import gui
 
 
 class PathValidator(gui.Validator):
+    def __eq__(self, other: object):
+        return isinstance(other, PathValidator)
+
     def validate(self, text: str, pos: int = 0):
         if pathlib.Path(text).exists():
             return (self.Acceptable, text, pos)

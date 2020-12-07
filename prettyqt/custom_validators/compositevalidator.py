@@ -25,6 +25,11 @@ class CompositeValidator(gui.Validator):
         self.__init__()
         self.validators = state.get("validators", [])
 
+    def __eq__(self, other: object):
+        if not isinstance(other, type(self)):
+            return False
+        return self.validators == other.validators
+
     def validate(self, text: str, pos: int = 0) -> tuple:
         vals = [v.validate(text, pos)[0] for v in self.validators]
         return (min(vals), text, pos)

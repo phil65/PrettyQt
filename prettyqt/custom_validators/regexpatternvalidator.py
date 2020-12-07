@@ -18,6 +18,9 @@ class RegexPatternValidator(gui.Validator):
     def __repr__(self):
         return "RegexPatternValidator()"
 
+    def __eq__(self, other: object):
+        return isinstance(other, type(self))
+
     def validate(self, text: str, pos: int = 0) -> tuple:
         # if text == "":
         #     self.compiled = None
