@@ -18,6 +18,15 @@ class DoubleValidator(QtGui.QDoubleValidator):
     def __setstate__(self, state):
         self.__init__(state["bottom"], state["top"], state["decimals"])
 
+    def __eq__(self, other: object):
+        if not isinstance(other, self.__class__):
+            return False
+        return (
+            self.bottom() == other.bottom()
+            and self.top() == other.top()
+            and self.decimals() == other.decimals()
+        )
+
 
 if __name__ == "__main__":
     val = DoubleValidator()

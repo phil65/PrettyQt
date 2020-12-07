@@ -19,6 +19,11 @@ class RegularExpressionValidator(gui.Validator):
         self.__init__()
         self.regex = state["regexp"]
 
+    def __eq__(self, other: object):
+        if not isinstance(other, self.__class__):
+            return False
+        return self.regex == other.regex
+
     def setRegularExpression(self, re):
         self.regex = re
 

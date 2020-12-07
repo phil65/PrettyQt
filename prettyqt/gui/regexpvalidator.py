@@ -19,6 +19,11 @@ class RegExpValidator(QtGui.QRegExpValidator):
         self.__init__()
         self.setRegExp(state["regexp"])
 
+    def __eq__(self, other: object):
+        if not isinstance(other, self.__class__):
+            return False
+        return self.regExp() == other.regExp()
+
     def set_regex(self, regex: str):
         re = core.RegExp(regex)
         self.setRegExp(re)
