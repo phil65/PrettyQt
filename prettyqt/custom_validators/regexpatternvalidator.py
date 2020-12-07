@@ -1,22 +1,18 @@
 # -*- coding: utf-8 -*-
 
 import sre_constants
-from typing import Optional
 
-from qtpy import QtCore
 import regex as re
 
-from prettyqt import gui
+from prettyqt import gui, core
 
 
 class RegexPatternValidator(gui.Validator):
-    def __init__(self, parent: Optional[QtCore.QObject] = None):
-        super().__init__(parent)
-        self.error_message = ""
-        self.compiled = None
+    error_occured = core.Signal(str)
+    pattern_updated = core.Signal(object)
 
     def __repr__(self):
-        return "RegexPatternValidator()"
+        return f"{type(self).__name__}()"
 
     def __eq__(self, other: object):
         return isinstance(other, type(self))
@@ -26,17 +22,18 @@ class RegexPatternValidator(gui.Validator):
         #     self.compiled = None
         #     return (self.Intermediate, text, pos)
         try:
-            self.compiled = re.compile(text)
+            compiled = re.compile(text)
         except sre_constants.error as e:
-            self.error_message = str(e)
-            self.compiled = None
+            self.error_occured.emit(str(e))
+            self.pattern_updated.emit(None)
             return (self.Intermediate, text, pos)
         except re._regex_core.error as e:
-            self.error_message = str(e)
-            self.compiled = None
+            self.error_occured.emit(str(e))
+            self.pattern_updated.emit(None)
             return (self.Intermediate, text, pos)
         else:
-            self.error_message = ""
+            self.error_occured.emit("")
+            self.pattern_updated.emit(compiled)
             return (self.Acceptable, text, pos)
 
 

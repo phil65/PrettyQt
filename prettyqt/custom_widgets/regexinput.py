@@ -32,9 +32,8 @@ class RegexInput(widgets.Widget):
             self.box[0, 2] = self.tb_flags
         if show_error:
             self.box[1, 0:2] = self.label_error
-        self.tb_flags.triggered.connect(self._on_value_change)
-        self.lineedit.textChanged.connect(self._on_value_change)
         val = custom_validators.RegexPatternValidator()
+        val.error_occured.connect(self.label_error.set_text)
         self.lineedit.set_validator(val)
         dct = {
             "multiline": "MultiLine",
@@ -51,14 +50,6 @@ class RegexInput(widgets.Widget):
             "verbose": re.VERBOSE,
         }
         self.tb_flags.set_dict(dct)
-
-    def _on_value_change(self) -> None:
-        self.value_changed.emit()
-        if self.lineedit.is_valid():
-            self.label_error.set_text("")
-        elif self.lineedit.validator is not None:
-            message = self.lineedit.validator.error_message
-            self.label_error.set_text(message)
 
     @property
     def pattern(self) -> str:
@@ -101,6 +92,6 @@ class RegexInput(widgets.Widget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = RegexInput(show_flags=False, show_error=False)
+    widget = RegexInput(show_flags=True, show_error=True)
     widget.show()
     app.main_loop()
