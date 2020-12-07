@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import List, Optional
+from typing import List, Optional, Sequence
 import logging
 
 from qtpy import QtCore, QtWidgets
@@ -181,7 +181,7 @@ class MainWindow(QtWidgets.QMainWindow):
         position = DOCK_POSITIONS[position]
         self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dockwidget)
 
-    def remove_dockwidgets(self, dockwidgets: List[QtWidgets.QDockWidget]):
+    def remove_dockwidgets(self, dockwidgets: Sequence[QtWidgets.QDockWidget]):
         for i in dockwidgets:
             self.removeDockWidget(i)
 

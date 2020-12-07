@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pathlib
-from typing import Union, List
+from typing import Union, List, Sequence
 
 from qtpy import QtCore, QtWidgets
 
@@ -92,7 +92,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             raise InvalidParamError(filter_mode, FILTERS)
         self.setFilter(FILTERS[filter_mode])
 
-    def get_paths(self, indexes: List[QtCore.QModelIndex]) -> List[pathlib.Path]:
+    def get_paths(self, indexes: Sequence[QtCore.QModelIndex]) -> List[pathlib.Path]:
         paths = [i.data(self.DATA_ROLE) for i in indexes]
         if not paths:
             return []

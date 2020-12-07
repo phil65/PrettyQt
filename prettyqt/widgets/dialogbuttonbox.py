@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Callable, List, Optional, Union, Iterator
+from typing import Callable, Sequence, Optional, Union, Iterator
 
 from qtpy import QtCore, QtWidgets
 
@@ -109,7 +109,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         """
         return ORIENTATIONS.inv[self.orientation()]
 
-    def add_default_buttons(self, buttons: List[str]):
+    def add_default_buttons(self, buttons: Sequence[str]):
         return [self.add_default_button(btn) for btn in buttons]
 
     def add_default_button(
