@@ -1,3 +1,26 @@
+## v0.142.0 (2020-12-07)
+
+### Feat
+
+- **SizeF**: add some methods to be on par with Size
+- **Size**: add expanded_to method
+- **CompositeValidator**: add some additional methods
+- **custom_validators**: add __eq__ method to validator classes
+- **TreeWidgetItem**: add some more methods
+- **widgets**: add TableWidgetSelectionRange class
+- **core**: add Calendar class
+- **core**: add SignalMapper class
+- **core**: add StateMachine class
+- **core**: add LockFile class
+- **core**: add JsonDocument/JsonValue classes
+- **GeoCircle**: allow tuple in ctor
+- **core**: add SocketNotifier class
+- **widgets**: add Shortcut class
+
+### Fix
+
+- Correctly inherit StyleItemDelegate
+
 ## v0.141.0 (2020-12-03)
 
 ### Feat
