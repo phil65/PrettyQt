@@ -57,18 +57,25 @@ def test_notemptyvalidator():
 def test_compositevalidator():
     val1 = custom_validators.NotEmptyValidator()
     val2 = custom_validators.NotZeroValidator()
-    val = custom_validators.CompositeValidator([val1, val2])
-    assert val != custom_validators.PathValidator()
-    assert val == custom_validators.CompositeValidator([val1, val2])
+    composite = custom_validators.CompositeValidator([val1, val2])
+    assert composite != custom_validators.PathValidator()
+    assert composite == custom_validators.CompositeValidator([val1, val2])
     with open("data.pkl", "wb") as jar:
-        pickle.dump(val, jar)
+        pickle.dump(composite, jar)
     with open("data.pkl", "rb") as jar:
-        val = pickle.load(jar)
-    assert val.is_valid_value("1")
-    assert not val.is_valid_value("")
-    assert not val.is_valid_value("0")
+        composite = pickle.load(jar)
+    assert composite.is_valid_value("1")
+    assert not composite.is_valid_value("")
+    assert not composite.is_valid_value("0")
     val1 + val2
-    repr(val)
+    for child in composite:
+        pass
+    assert val1 in composite
+    assert val1 == composite[0]
+    composite[1] = custom_validators.NotZeroValidator()
+    assert len(composite) == 2
+    del composite[1]
+    repr(composite)
 
 
 def test_intlistvalidator():

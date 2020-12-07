@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import List, Optional
+from typing import List, Optional, Iterator
 
 from qtpy import QtCore
 from prettyqt import gui
@@ -18,12 +18,30 @@ class CompositeValidator(gui.Validator):
     def __repr__(self):
         return f"CompositeValidator({self.validators})"
 
+    def __getitem__(self, index: int) -> gui.Validator:
+        return self.validators[index]
+
+    def __setitem__(self, index: int, value: gui.Validator):
+        self.validators[index] = value
+
+    def __delitem__(self, index: int):
+        del self.validators[index]
+
+    def __contains__(self, index: int):
+        return index in self.validators
+
+    def __iter__(self) -> Iterator[gui.Validator]:
+        return iter(self.validators)
+
     def __getstate__(self):
         return dict(validators=self.validators)
 
     def __setstate__(self, state):
         self.__init__()
         self.validators = state.get("validators", [])
+
+    def __len__(self):
+        return len(self.validators)
 
     def __eq__(self, other: object):
         if not isinstance(other, type(self)):
