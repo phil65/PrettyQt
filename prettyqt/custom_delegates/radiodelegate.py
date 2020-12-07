@@ -3,6 +3,7 @@
 # based on https://stackoverflow.com/questions/58891116/delegate-with-radio-buttons
 # credits to musicamante
 
+from typing import List
 
 from qtpy import QtCore, QtWidgets
 
@@ -10,9 +11,9 @@ from prettyqt import core, gui, widgets
 
 
 class RadioDelegate(widgets.StyledItemDelegate):
-    def __init__(self, owner, chs):
-        super().__init__(owner)
-        self.items = chs
+    def __init__(self, parent: QtWidgets.QWidget, items: List[str]):
+        super().__init__(parent)
+        self.items = items
         self.choices = [None for i in self.items]
 
     def createEditor(self, parent, option, index):
