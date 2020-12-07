@@ -60,13 +60,7 @@ from .sessionmanager import SessionManager
 from .guiapplication import GuiApplication
 from .validator import Validator
 from .regexpvalidator import RegExpValidator
-
-try:
-    from .regularexpressionvalidator import RegularExpressionValidator
-except AttributeError:
-    from .regularexpressionvalidator_pyside import (  # type: ignore
-        RegularExpressionValidator,
-    )
+from .regularexpressionvalidator import RegularExpressionValidator
 from .textoption import TextOption
 from .textblock import TextBlock
 from .textdocument import TextDocument
