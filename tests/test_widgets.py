@@ -1262,6 +1262,16 @@ def test_tablewidgetitem(qtbot):
     item.get_icon()
 
 
+def test_tablewidgetselectionrange():
+    range_1 = widgets.TableWidgetSelectionRange(5, 5, 15, 15)
+    range_2 = widgets.TableWidgetSelectionRange(0, 0, 20, 20)
+    result = widgets.TableWidgetSelectionRange(0, 0, 20, 20)
+    assert result == range_1 | range_2
+    result = widgets.TableWidgetSelectionRange(5, 5, 15, 15)
+    assert result == range_1 & range_2
+    assert repr(result) == "TableWidgetSelectionRange(5, 5, 15, 15)"
+
+
 def test_toolbox(qtbot):
     w = widgets.RadioButton("test1")
     w2 = widgets.RadioButton("test2")

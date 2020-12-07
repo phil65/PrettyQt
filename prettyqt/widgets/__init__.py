@@ -144,6 +144,7 @@ from .columnview import ColumnView
 from .listview import ListView
 from .listwidget import ListWidget
 from .treeview import TreeView
+from .tablewidgetselectionrange import TableWidgetSelectionRange
 from .treewidget import TreeWidget
 from .tableview import TableView
 from .tablewidgetitem import TableWidgetItem
@@ -337,6 +338,7 @@ __all__ = [
     "ListWidget",
     "TreeView",
     "TreeWidget",
+    "TableWidgetSelectionRange",
     "ScrollerProperties",
     "Scroller",
     "TableView",
