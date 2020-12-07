@@ -7,10 +7,18 @@ import regex as re
 
 from prettyqt import core, custom_validators, custom_widgets, widgets
 
+MAP = dict(
+    multiline=re.MULTILINE,
+    ignorecase=re.IGNORECASE,
+    ascii=re.ASCII,
+    dotall=re.DOTALL,
+    verbose=re.VERBOSE,
+)
+
 
 class RegexInput(widgets.Widget):
 
-    value_changed = core.Signal()
+    value_changed = core.Signal(object)
 
     def __init__(
         self,
@@ -34,22 +42,21 @@ class RegexInput(widgets.Widget):
             self.box[1, 0:2] = self.label_error
         val = custom_validators.RegexPatternValidator()
         val.error_occured.connect(self.label_error.set_text)
+        val.pattern_updated.connect(self.value_changed)
+        self.tb_flags.value_changed.connect(self._on_value_change)
         self.lineedit.set_validator(val)
-        dct = {
-            "multiline": "MultiLine",
-            "ignorecase": "Ignore case",
-            "ascii": "ASCII-only matching",
-            "dotall": "Dot matches newline",
-            "verbose": "Ignore whitespace",
-        }
-        self._mapping = {
-            "ignorecase": re.IGNORECASE,
-            "multiline": re.MULTILINE,
-            "ascii": re.ASCII,
-            "dotall": re.DOTALL,
-            "verbose": re.VERBOSE,
-        }
+        dct = dict(
+            multiline="MultiLine",
+            ignorecase="Ignore case",
+            ascii="ASCII-only matching",
+            dotall="Dot matches newline",
+            verbose="Ignore whitespace",
+        )
         self.tb_flags.set_dict(dct)
+
+    def _on_value_change(self):
+        val = self.get_value()
+        self.value_changed.emit(val)
 
     @property
     def pattern(self) -> str:
@@ -62,14 +69,14 @@ class RegexInput(widgets.Widget):
     @property
     def compile_flags(self) -> int:
         ret_val = 0
-        for identifier, flag in self._mapping.items():
+        for identifier, flag in MAP.items():
             if self.tb_flags[identifier]:
                 ret_val |= flag
         return ret_val
 
     @compile_flags.setter
     def compile_flags(self, value: int):
-        for identifier, flag in self._mapping.items():
+        for identifier, flag in MAP.items():
             self.tb_flags[identifier] = bool(value & flag)
 
     def set_value(self, value: Optional[Union[str, Pattern]]):
@@ -94,4 +101,5 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = RegexInput(show_flags=True, show_error=True)
     widget.show()
+    widget.value_changed.connect(print)
     app.main_loop()
