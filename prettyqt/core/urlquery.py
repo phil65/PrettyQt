@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from qtpy import QtCore
 
 
 class UrlQuery(QtCore.QUrlQuery):
     def __repr__(self):
-        return f"UrlQuery('{self.toString()}')"
+        return f"UrlQuery({self.toString()!r})"
 
     def __str__(self):
         return self.toString()
@@ -13,7 +15,7 @@ class UrlQuery(QtCore.QUrlQuery):
     def __contains__(self, key: str):
         return self.hasQueryItem(key)
 
-    def __add__(self, other: dict):
+    def __add__(self, other: dict) -> UrlQuery:
         for k, v in other.items():
             self.addQueryItem(k, str(v))
         return self

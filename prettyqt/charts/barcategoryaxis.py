@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts
@@ -17,6 +19,6 @@ class BarCategoryAxis(QtCharts.QBarCategoryAxis):
     def __setitem__(self, index: str, value: str):
         self.replace(index, value)
 
-    def __add__(self, other: str):
+    def __add__(self, other: str) -> BarCategoryAxis:
         self.append(other)
         return self

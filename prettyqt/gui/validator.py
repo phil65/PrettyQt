@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from qtpy import QtGui
 
 from prettyqt import core
@@ -12,7 +14,7 @@ class Validator(QtGui.QValidator):
     def __repr__(self):
         return f"{self.__class__.__name__}()"
 
-    def __add__(self, other):
+    def __add__(self, other: Validator):
         if isinstance(other, Validator):
             from prettyqt import custom_validators
 

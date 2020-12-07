@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, List
+from __future__ import annotations
+
+from typing import Optional, List, Union
 
 from qtpy import QtCore, QtWidgets
 
@@ -23,10 +25,11 @@ class FlowLayout(widgets.Layout):
     def serialize_fields(self):
         return dict(items=self.get_children())
 
-    def __add__(self, other):
-        if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
-            self.add(other)
-            return self
+    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]) -> FlowLayout:
+        if not isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
+            raise TypeError()
+        self.add(other)
+        return self
 
     def __setstate__(self, state):
         self.__init__()

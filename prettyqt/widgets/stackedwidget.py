@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from typing import Iterator
 
 from qtpy import QtWidgets
@@ -16,7 +18,7 @@ class StackedWidget(QtWidgets.QStackedWidget):
         for item in state["items"]:
             self.add(item)
 
-    def __add__(self, other: QtWidgets.QWidget):
+    def __add__(self, other: QtWidgets.QWidget) -> StackedWidget:
         if not isinstance(other, QtWidgets.QWidget):
             raise TypeError(f"Wrong type {other} for StackedWidget")
         self.addWidget(other)

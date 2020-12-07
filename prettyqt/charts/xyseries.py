@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
 
@@ -27,7 +29,7 @@ class XYSeries(QtCharts.QXYSeries):
         self.__init__()
         super().append(state["points"])
 
-    def __add__(self, other: QtCore.QPointF):
+    def __add__(self, other: QtCore.QPointF) -> XYSeries:
         self.append(other)
         return self
 

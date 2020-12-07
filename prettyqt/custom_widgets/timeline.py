@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import List, Optional
 
 from qtpy import QtCore, QtGui
@@ -67,7 +69,7 @@ class Timeline(widgets.Widget):
     def __setitem__(self, index: int, value: VideoSample):
         self.video_samples[index] = value
 
-    def __add__(self, other: VideoSample):
+    def __add__(self, other: VideoSample) -> Timeline:
         if isinstance(other, (VideoSample)):
             self.add(other)
             return self

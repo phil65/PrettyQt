@@ -97,12 +97,12 @@ class Match(core.RegularExpressionMatch):
 
 
 class Pattern(core.RegularExpression):
-    def __init__(self, pattern="", flags=0):
+    def __init__(self, pattern: str = "", flags: int = 0):
         flag = QtCore.QRegularExpression.NoPatternOption
         for k, v in MAP.items():
             if k & flags:
                 flag |= v
-        super().__init__(pattern, flags)
+        super().__init__(pattern, flag)
 
     def __repr__(self):
         return f"RegularExpression({self.pattern()!r})"

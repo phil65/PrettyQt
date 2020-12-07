@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional
+from typing import Optional, Pattern, Union
 
 from qtpy import QtWidgets
 import regex as re
@@ -81,18 +81,18 @@ class RegexInput(widgets.Widget):
         for identifier, flag in self._mapping.items():
             self.tb_flags[identifier] = bool(value & flag)
 
-    def set_value(self, value):
+    def set_value(self, value: Optional[Union[str, Pattern]]):
         if value is None:
             self.pattern = ""
             self.flags = 0
-        if isinstance(value, str):
+        elif isinstance(value, str):
             self.pattern = value
             self.flags = 0
         else:
             self.pattern = value.pattern
             self.compile_flags = value.flags
 
-    def get_value(self):
+    def get_value(self) -> Pattern:
         return re.compile(self.pattern, self.compile_flags)
 
     def is_valid(self) -> bool:

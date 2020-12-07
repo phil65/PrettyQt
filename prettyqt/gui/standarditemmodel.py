@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from __future__ import annotations
+
 from typing import List, Iterator, Union, Tuple
 
 from qtpy import QtCore, QtGui
@@ -47,7 +49,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
         for item in state["items"]:
             self.appendRow(item)
 
-    def __add__(self, other):
+    def __add__(self, other: Union[str, QtGui.QStandardItem]) -> StandardItemModel:
         if isinstance(other, (QtGui.QStandardItem, str)):
             self.add(other)
             return self
@@ -56,7 +58,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
     def get_children(self) -> List[QtGui.QStandardItem]:
         return [self.item(index) for index in range(self.rowCount())]
 
-    def add(self, *item):
+    def add(self, *item: Union[str, QtGui.QStandardItem]):
         for i in item:
             if isinstance(i, str):
                 i = gui.StandardItem(i)
