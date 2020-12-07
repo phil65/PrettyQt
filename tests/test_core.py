@@ -652,15 +652,15 @@ def test_signaltransition():
 def test_size():
     size = core.Size(2, 2)
     repr(size)
-    # assert tuple(size) == (2, 2)
-    # size = size.expanded_to(core.Size(4, 4))
+    assert tuple(size) == (2, 2)
+    size = size.expanded_to(core.Size(4, 4))
 
 
 def test_sizef():
     size = core.SizeF(2.5, 2.5)
     repr(size)
-    # assert tuple(size) == (2.5, 2.5)
-    # size = size.expanded_to(core.SizeF(4, 4))
+    assert tuple(size) == (2.5, 2.5)
+    size = size.expanded_to(core.SizeF(4, 4))
 
 
 def test_standardpaths():
