@@ -1326,39 +1326,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.gui.regularexpressionvalidator_pyside" class="md-nav__link">
-    regularexpressionvalidator_pyside
-  </a>
-  
-    <nav class="md-nav" aria-label="regularexpressionvalidator_pyside">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.gui.regularexpressionvalidator_pyside.RegularExpressionValidator" class="md-nav__link">
-    RegularExpressionValidator
-  </a>
-  
-    <nav class="md-nav" aria-label="RegularExpressionValidator">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.gui.regularexpressionvalidator_pyside.RegularExpressionValidator.validate" class="md-nav__link">
-    validate()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#prettyqt.gui.sessionmanager" class="md-nav__link">
     sessionmanager
   </a>
@@ -3343,39 +3310,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.gui.polygon.Polygon.__reduce__" class="md-nav__link">
     __reduce__()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prettyqt.gui.regularexpressionvalidator_pyside" class="md-nav__link">
-    regularexpressionvalidator_pyside
-  </a>
-  
-    <nav class="md-nav" aria-label="regularexpressionvalidator_pyside">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.gui.regularexpressionvalidator_pyside.RegularExpressionValidator" class="md-nav__link">
-    RegularExpressionValidator
-  </a>
-  
-    <nav class="md-nav" aria-label="RegularExpressionValidator">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.gui.regularexpressionvalidator_pyside.RegularExpressionValidator.validate" class="md-nav__link">
-    validate()
   </a>
   
 </li>
@@ -8403,59 +8337,6 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-module">
-<h2 class="doc doc-heading" id="prettyqt.gui.regularexpressionvalidator_pyside">
-
-        <code>regularexpressionvalidator_pyside</code>
-
-
-      </h2>
-<div class="doc doc-contents ">
-<div class="doc doc-children">
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="prettyqt.gui.regularexpressionvalidator_pyside.RegularExpressionValidator">
-
-        <code>RegularExpressionValidator</code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<div class="doc doc-children">
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.gui.regularexpressionvalidator_pyside.RegularExpressionValidator.validate">
-
-        <code class="highlight language-python">
-validate<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>validate(self, str, int) -&gt; Tuple[QValidator.State, str, int]</p>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/gui/regularexpressionvalidator_pyside.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
-    <span class="n">match</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">match_type</span><span class="o">=</span><span class="s2">"prefer_first"</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">hasPartialMatch</span><span class="p">():</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">():</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Invalid</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
