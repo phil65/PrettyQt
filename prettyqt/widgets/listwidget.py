@@ -2,7 +2,7 @@
 
 from typing import Union, Iterable, Mapping, List, Any, Optional, Iterator
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtCore, QtWidgets, QtGui
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
@@ -82,6 +82,55 @@ class ListWidget(QtWidgets.QListWidget):
                     self.add(*i)
                 else:
                     self.add(i)
+
+    def add_item(
+        self,
+        name: str = "",
+        icon: gui.icon.IconType = None,
+        data: Optional[dict] = None,
+        foreground: Optional[QtGui.QBrush] = None,
+        background: Optional[QtGui.QBrush] = None,
+        font: Optional[QtGui.QFont] = None,
+        selected: bool = None,
+        status_tip: Optional[str] = None,
+        tool_tip: Optional[str] = None,
+        whats_this: Optional[str] = None,
+        # text_alignment: Optional[str] = None,
+        checkstate: Optional[str] = None,
+        flags: Optional[int] = None,
+        size_hint: Optional[QtCore.QSize] = None,
+        is_user_type: bool = False,
+    ):
+        typ = 1 if is_user_type else 0
+        item = widgets.ListWidgetItem(name, self, typ)
+        if icon is not None:
+            icon = gui.icon.get_icon(icon)
+            item.setIcon(icon)
+        if data is not None:
+            for k, v in data.items():
+                item.setData(k, v)
+        if foreground is not None:
+            item.setForeground(foreground)
+        if background is not None:
+            item.setBackground(background)
+        if font is not None:
+            item.setFont(font)
+        if flags is not None:
+            item.setFlags(flags)
+        if selected:
+            item.setSelected(selected)
+        if status_tip:
+            item.setStatusTip(status_tip)
+        if tool_tip:
+            item.setToolTip(tool_tip)
+        if whats_this:
+            item.setWhatsThis(whats_this)
+        if size_hint is not None:
+            item.setSizeHint(size_hint)
+        if checkstate is not None:
+            item.set_checkstate(checkstate)
+        self.addItem(item)
+        return item
 
     def add(self, label: str, data=NoData, icon: gui.icon.IconType = None):
         if data is NoData:

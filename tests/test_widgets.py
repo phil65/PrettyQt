@@ -645,6 +645,21 @@ def test_listwidget(qtbot):
     item = widgets.ListWidgetItem()
     widget += item
     del widget[0]
+    widget.add_item(
+        "Test",
+        icon="mdi.timer",
+        data={1: "Test"},
+        foreground=gui.Brush(),
+        background=gui.Brush(),
+        font=gui.Font(),
+        selected=True,
+        status_tip="test",
+        tool_tip="test",
+        whats_this="test",
+        checkstate="unchecked",
+        size_hint=core.Size(10, 10),
+        is_user_type=True,
+    )
 
 
 def test_listwidgetitem(qtbot):
