@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union
+from typing import Union, overload
 
 from qtpy import QtWidgets
 
@@ -29,9 +29,15 @@ class MenuBar(QtWidgets.QMenuBar):
             return action
         return self.addAction(action)
 
-    def add_menu(
-        self, menu_or_str: Union[QtWidgets.QMenu, str]
-    ) -> Union[widgets.Action, widgets.Menu]:
+    @overload
+    def add_menu(self, menu_or_str: str) -> widgets.Menu:
+        ...
+
+    @overload
+    def add_menu(self, menu_or_str: QtWidgets.QMenu) -> widgets.Action:
+        ...
+
+    def add_menu(self, menu_or_str):
         action = widgets.Action(parent=self)
         if isinstance(menu_or_str, str):
             menu = widgets.Menu(menu_or_str)
