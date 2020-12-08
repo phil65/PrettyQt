@@ -1,3 +1,13 @@
+## v0.143.0 (2020-12-08)
+
+### Fix
+
+- ObjectBrowser fix
+
+### Feat
+
+- implement __eq__ method for some more validator classes
+
 ## v0.142.1 (2020-12-07)
 
 ### Fix
