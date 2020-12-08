@@ -1,3 +1,9 @@
+## v0.143.1 (2020-12-08)
+
+### Fix
+
+- **ColumnItemModel**: correct get_width signature
+
 ## v0.143.0 (2020-12-08)
 
 ### Fix
