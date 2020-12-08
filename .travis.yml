@@ -35,8 +35,7 @@ addons:
       - blueman
       - python3-pyqt5
       - python3-pyqt5.qtwebengine
-      # - libspeechd-dev
-      # - libspeechd2
+      - qtwayland5
       - speech-dispatcher-espeak-ng
       - flite
       - libflite1
@@ -47,7 +46,9 @@ addons:
       - qtspeech5-flite-plugin
       - speech-dispatcher
       - speech-dispatcher-flite
-
+      - pyqt5-dev-tools
+      # - libspeechd-dev
+      # - libspeechd2
 services:
   - xvfb
   # - speech-dispatcher
