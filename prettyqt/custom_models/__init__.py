@@ -10,7 +10,7 @@ from .selectionmixin import SelectionMixin
 from .playlistmodel import PlaylistModel
 from .transposeproxymodel import TransposeProxyModel
 from .regexmatchesmodel import RegexMatchesModel
-from .columnitemmodel import ColumnItemModel
+from .columnitemmodel import ColumnItemModel, ColumnItem
 
 __all__ = [
     "SelectionMixin",
@@ -18,4 +18,5 @@ __all__ = [
     "PlaylistModel",
     "RegexMatchesModel",
     "ColumnItemModel",
+    "ColumnItem",
 ]

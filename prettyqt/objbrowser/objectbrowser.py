@@ -7,8 +7,8 @@ import hashlib
 import sys
 
 from prettyqt import core, gui, widgets, constants
+from prettyqt.objbrowser import objectbrowsertreemodel
 
-from prettyqt.objbrowser.treemodel import TreeProxyModel, TreeModel
 from prettyqt.objbrowser.attribute_model import DEFAULT_ATTR_COLS, DEFAULT_ATTR_DETAILS
 from prettyqt.utils import autoslot
 
@@ -58,9 +58,11 @@ class ObjectBrowser(widgets.MainWindow):
             show_special_attributes = settings.get("show_special_attributes", True)
             logger.debug("read show_special_attributes: %r", show_special_attributes)
 
-        self._tree_model = TreeModel(obj, name, attr_cols=self._attr_cols)
+        self._tree_model = objectbrowsertreemodel.ObjectBrowserTreeModel(
+            obj, name, attr_cols=self._attr_cols
+        )
 
-        self._proxy_tree_model = TreeProxyModel(
+        self._proxy_tree_model = objectbrowsertreemodel.ObjectBrowserTreeProxyModel(
             show_callable_attributes=show_callable_attributes,
             show_special_attributes=show_special_attributes,
         )
@@ -72,8 +74,8 @@ class ObjectBrowser(widgets.MainWindow):
 
         # Views
         self._setup_actions()
-        self._setup_menu()
         self._setup_views()
+        self._setup_menu()
         self.set_title("Object browser")
 
         self._read_view_settings()
@@ -83,7 +85,7 @@ class ObjectBrowser(widgets.MainWindow):
         )
         self._refresh_timer = core.Timer(self)
         self._refresh_timer.setInterval(self._refresh_rate * 1000)
-        self._refresh_timer.timeout.connect(self.refresh)
+        self._refresh_timer.timeout.connect(self._tree_model.refresh_tree)
 
         # Update views with model
         self.toggle_special_attribute_action.setChecked(show_special_attributes)
@@ -91,15 +93,10 @@ class ObjectBrowser(widgets.MainWindow):
         self.toggle_auto_refresh_action.setChecked(self._auto_refresh)
 
         # Select first row so that a hidden root node will not be selected.
-        first_row_index = self._proxy_tree_model.firstItemIndex()
+        first_row_index = self._proxy_tree_model.first_item_index()
         self.obj_tree.setCurrentIndex(first_row_index)
         if self._tree_model.inspected_node_is_visible:
             self.obj_tree.expand(first_row_index)
-
-    def refresh(self):
-        """Refreshes object browser contents."""
-        logger.debug("Refreshing")
-        self._tree_model.refresh_tree()
 
     def _add_instance(self):
         """Adds the browser window to the list of browser references.
@@ -119,15 +116,6 @@ class ObjectBrowser(widgets.MainWindow):
             self._browsers[idx] = self
 
         return idx
-
-    def _remove_instance(self):
-        """Set the reference in the browser list to None."""
-        idx = self._browsers.index(self)
-        self._browsers[idx] = None
-
-    def _make_show_column_function(self, column_idx):
-        """Create a function that shows or hides a column."""
-        return lambda checked: self.obj_tree.setColumnHidden(column_idx, not checked)
 
     def _setup_actions(self):
         """Create the main window actions."""
@@ -168,27 +156,30 @@ class ObjectBrowser(widgets.MainWindow):
         # a visible widget for it to receive events. It is added to the main windows to
         # prevent it from being displayed again in the menu
         self.refresh_action_f5 = widgets.Action(self, text="&Refresh2", shortcut="F5")
-        self.refresh_action_f5.triggered.connect(self.refresh)
+        self.refresh_action_f5.triggered.connect(self._tree_model.refresh_tree)
         self.addAction(self.refresh_action_f5)
 
     def _setup_menu(self):
         """Set up the main menu."""
-        file_menu = self.menuBar().addMenu("&File")
+        menubar = self.menuBar()
+        file_menu = menubar.add_menu("&File")
         file_menu.addAction("C&lose", self.close, "Ctrl+W")
         file_menu.addAction("E&xit", lambda: widgets.app().closeAllWindows(), "Ctrl+Q")
 
-        view_menu = self.menuBar().addMenu("&View")
-        view_menu.addAction("&Refresh", self.refresh, "Ctrl+R")
+        view_menu = menubar.add_menu("&View")
+        view_menu.addAction("&Refresh", self._tree_model.refresh_tree, "Ctrl+R")
         view_menu.addAction(self.toggle_auto_refresh_action)
 
         view_menu.addSeparator()
-        self.show_cols_submenu = view_menu.addMenu("Table columns")
+        self.show_cols_submenu = widgets.Menu("Table columns")
+        view_menu.add_menu(self.show_cols_submenu)
+        actions = self.obj_tree.h_header.get_header_actions()
+        print(actions)
+        self.show_cols_submenu.add_actions(actions)
         view_menu.addSeparator()
         view_menu.addAction(self.toggle_callable_action)
         view_menu.addAction(self.toggle_special_attribute_action)
-
-        self.menuBar().addSeparator()
-        # help_menu = self.menuBar().addMenu("&Help")
+        # help_menu = menubar.addMenu("&Help")
         # help_menu.addAction("&About", self.about)
 
     def _setup_views(self):
@@ -200,6 +191,7 @@ class ObjectBrowser(widgets.MainWindow):
 
         # Tree widget
         self.obj_tree = widgets.TreeView()
+        self.obj_tree.setRootIsDecorated(True)
         self.obj_tree.setAlternatingRowColors(True)
         self.obj_tree.set_model(self._proxy_tree_model)
         self.obj_tree.set_selection_behaviour("rows")
@@ -208,9 +200,9 @@ class ObjectBrowser(widgets.MainWindow):
 
         # Stretch last column?
         # It doesn't play nice when columns are hidden and then shown again.
-        obj_tree_header = self.obj_tree.header()
-        obj_tree_header.setSectionsMovable(True)
-        obj_tree_header.setStretchLastSection(False)
+        self.obj_tree.h_header.set_id("table_header")
+        self.obj_tree.h_header.setSectionsMovable(True)
+        self.obj_tree.h_header.setStretchLastSection(False)
         self.central_splitter.addWidget(self.obj_tree)
 
         # Bottom pane
@@ -240,8 +232,7 @@ class ObjectBrowser(widgets.MainWindow):
         group_box.box.addWidget(radio_widget)
 
         # Editor widget
-        font = gui.Font()
-        font.setFamily("Courier")
+        font = gui.Font("Courier")
         font.setFixedPitch(True)
         # font.setPointSize(14)
 
@@ -330,14 +321,14 @@ class ObjectBrowser(widgets.MainWindow):
         self, current_index: core.ModelIndex, _previous_index: core.ModelIndex
     ):
         """Show the object details in the editor given an index."""
-        tree_item = self._proxy_tree_model.treeItem(current_index)
+        tree_item = self._proxy_tree_model.tree_item(current_index)
         self._update_details_for_item(tree_item)
 
     def _change_details_field(self, _button_id=None):
         """Change the field that is displayed in the details pane."""
         # logger.debug("_change_details_field: {}".format(_button_id))
         current_index = self.obj_tree.selectionModel().currentIndex()
-        tree_item = self._proxy_tree_model.treeItem(current_index)
+        tree_item = self._proxy_tree_model.tree_item(current_index)
         self._update_details_for_item(tree_item)
 
     def _update_details_for_item(self, tree_item):
@@ -376,7 +367,7 @@ class ObjectBrowser(widgets.MainWindow):
         Disconnects all signals for this window.
         """
         self._refresh_timer.stop()
-        self._refresh_timer.timeout.disconnect(self.refresh)
+        self._refresh_timer.timeout.disconnect(self._tree_model.refresh_tree)
         self.toggle_callable_action.toggled.disconnect(
             self._proxy_tree_model.set_show_callables
         )
@@ -384,7 +375,7 @@ class ObjectBrowser(widgets.MainWindow):
             self._proxy_tree_model.set_show_special_attributes
         )
         self.toggle_auto_refresh_action.toggled.disconnect(self.toggle_auto_refresh)
-        self.refresh_action_f5.triggered.disconnect(self.refresh)
+        self.refresh_action_f5.triggered.disconnect(self._tree_model.refresh_tree)
         self.button_group.buttonClicked[int].disconnect(self._change_details_field)
         selection_model = self.obj_tree.selectionModel()
         selection_model.currentChanged.disconnect(self._update_details)
@@ -397,33 +388,10 @@ class ObjectBrowser(widgets.MainWindow):
         self._finalize()
         self.close()
         event.accept()
-        self._remove_instance()
+        """Set the reference in the browser list to None."""
+        idx = self._browsers.index(self)
+        self._browsers[idx] = None
         logger.debug("Closed window %s", self._instance_nr)
-
-    @classmethod
-    def create_browser(cls, *args, **kwargs):
-        """Create and shows and ObjectBrowser window.
-
-        Creates the Qt Application object if it doesn't yet exist.
-
-        The *args and **kwargs will be passed to the ObjectBrowser constructor.
-
-        A (class attribute) reference to the browser window is kept to prevent it
-        from being garbage-collected.
-        """
-        cls.app = widgets.app()  # keeping reference to prevent garbage collection.
-        cls.app.setOrganizationName("phil65")
-        cls.app.setApplicationName("PrettyQt")
-        object_browser = cls(*args, **kwargs)
-        object_browser.show()
-        object_browser.raise_()
-        return object_browser
-
-    @classmethod
-    def execute(cls):
-        """Start the Qt event loop."""
-        assert cls.app is not None, "QApplication object doesn't exist yet."
-        return cls.app.exec_()
 
     @classmethod
     def browse(cls, *args, **kwargs):
@@ -436,12 +404,22 @@ class ObjectBrowser(widgets.MainWindow):
 
         The *args and **kwargs will be passed to the ObjectBrowser constructor.
         """
-        cls.create_browser(*args, **kwargs)
-        exit_code = cls.execute()
-        return exit_code
+        cls.app = widgets.app()  # keeping reference to prevent garbage collection.
+        cls.app.setOrganizationName("phil65")
+        cls.app.setApplicationName("PrettyQt")
+        object_browser = cls(*args, **kwargs)
+        object_browser.show()
+        object_browser.raise_()
+        assert cls.app is not None, "QApplication object doesn't exist yet."
+        return cls.app.main_loop()
 
 
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     struct = dict(a=set([1, 2, frozenset([1, 2])]))
-    ObjectBrowser.browse(struct)
+    app = widgets.app()  # keeping reference to prevent garbage collection.
+    app.setOrganizationName("phil65")
+    app.setApplicationName("PrettyQt")
+    object_browser = ObjectBrowser(struct)
+    object_browser.show()
+    app.main_loop()
