@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Union
+from typing import Optional, Union, Dict, Any
 
 from qtpy import QtCore
 
@@ -15,8 +15,8 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     def __repr__(self):
         return "RegularExpressionMatch()"
 
-    def __getitem__(self, item: Union[int, str]) -> Union[tuple, str]:
-        return self.group(item)
+    def __getitem__(self, item: Union[int, str]) -> str:
+        return self.captured(item)
 
     def group(self, *groups: Union[int, str]) -> Union[tuple, str]:
         if len(groups) > 1:
@@ -33,7 +33,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
             for i in range(self.re.captureCount())
         )
 
-    def groupdict(self, default=None) -> dict:
+    def groupdict(self, default=None) -> Dict[str, Any]:
         if self.lastindex is None:
             return dict()
         groups = [

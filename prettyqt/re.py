@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
-from typing import Callable, Dict, Iterator, List, Optional, Tuple, Union
+from typing import Callable, Dict, Iterator, List, Optional, Tuple, Union, Any
 
 from qtpy import QtCore
 
@@ -57,7 +57,7 @@ class Match(core.RegularExpressionMatch):
             for i in range(self.re.captureCount())
         )
 
-    def groupdict(self, default=None) -> dict:
+    def groupdict(self, default=None) -> Dict[str, Any]:
         if self.lastindex is None:
             return dict()
         groups = [
