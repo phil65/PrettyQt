@@ -116,7 +116,7 @@ class ColumnItem:
             return ALIGNMENTS[self.alignment]
         return self.alignment
 
-    def get_width(self, tree_item) -> int:
+    def get_width(self) -> int:
         if self.width == "small":
             return SMALL_COL_WIDTH
         elif self.width == "medium":
