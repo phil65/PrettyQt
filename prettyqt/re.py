@@ -14,6 +14,8 @@ from prettyqt.utils import bidict
 # DOTALL = QtCore.QRegularExpression.DotMatchesEverythingOption
 # VERBOSE = QtCore.QRegularExpression.ExtendedPatternSyntaxOption
 
+DONT_ESCAPE = {"!", '"', "%", "'", ",", "/", ":", ";", "<", "=", ">", "@", "`"}
+
 IGNORECASE = re.IGNORECASE
 MULTILINE = re.MULTILINE
 DOTALL = re.DOTALL
@@ -248,9 +250,8 @@ def subn(
 
 
 def escape(pattern: str):
-    dont_escape = ["!", '"', "%", "'", ",", "/", ":", ";", "<", "=", ">", "@", "`"]
     result = core.RegularExpression.escape(pattern)
-    for i in dont_escape:
+    for i in DONT_ESCAPE:
         result.replace(i, r"\i")
     return result
 
