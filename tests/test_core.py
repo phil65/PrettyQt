@@ -21,8 +21,9 @@ def test_animationgroup():
     anim2 = core.PropertyAnimation()
     group += anim
     group += anim2
-    group[1] = core.PropertyAnimation()
     assert group[0] == anim
+    assert group[0:2] == [anim, anim2]
+    group[1] = core.PropertyAnimation()
     assert len(group) == 2
     del group[0]
     assert len(group) == 1
