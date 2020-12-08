@@ -116,6 +116,15 @@ class ColumnItem:
             return ALIGNMENTS[self.alignment]
         return self.alignment
 
+    def get_width(self, tree_item) -> int:
+        if self.width == "small":
+            return SMALL_COL_WIDTH
+        elif self.width == "medium":
+            return MEDIUM_COL_WIDTH
+        elif isinstance(self.width, int):
+            return self.width
+        raise ValueError(self.width)
+
 
 class ColumnItemModel(core.AbstractItemModel):
     """Model that provides an interface to an objectree that is build of TreeItems."""

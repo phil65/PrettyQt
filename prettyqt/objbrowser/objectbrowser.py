@@ -294,7 +294,7 @@ class ObjectBrowser(widgets.MainWindow):
             if splitter_state:
                 self.central_splitter.restoreState(splitter_state)
             if not self.obj_tree.h_header.load_state(settings, "table/header_state"):
-                column_sizes = [col.width for col in self._attr_cols]
+                column_sizes = [col.get_width() for col in self._attr_cols]
                 header.set_sizes(column_sizes)
         self.resize(window_size)
         self.move(pos)
