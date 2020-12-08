@@ -97,7 +97,6 @@ from .polygonf import PolygonF
 from .standarditem import StandardItem
 from .standarditemmodel import StandardItemModel
 from .textcursor import TextCursor
-from .syntaxhighlighter import SyntaxHighlighter
 from .pdfwriter import PdfWriter
 from .desktopservices import DesktopServices
 from .matrix4x4 import Matrix4x4
@@ -117,6 +116,7 @@ from .textobject import TextObject
 from .textblockgroup import TextBlockGroup
 from .textframe import TextFrame
 from .abstracttextdocumentlayout import AbstractTextDocumentLayout
+from .syntaxhighlighter import SyntaxHighlighter
 
 from prettyqt import core
 

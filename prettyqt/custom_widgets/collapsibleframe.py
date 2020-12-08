@@ -1,3 +1,5 @@
+from typing import Optional
+
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
@@ -8,7 +10,7 @@ class CollapsibleFrame(widgets.Frame):
     expanded = core.Signal()
     collapsed = core.Signal()
 
-    def __init__(self, parent: QtWidgets.QWidget = None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
         self.set_frame_shape("styled_panel")
         self.set_frame_shadow("plain")

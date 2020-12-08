@@ -1,11 +1,15 @@
 """Contains the quick reference widget."""
+from typing import Optional
+
 import pathlib
+
+from qtpy import QtWidgets
 
 from prettyqt import widgets
 
 
 class QuickRefWidget(widgets.Widget):
-    def __init__(self, parent=None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
 
         self.resize(608, 353)

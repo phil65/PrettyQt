@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Dict
+from typing import Dict, Callable
 
 from prettyqt import constants
 from qtpy import QtCore
@@ -8,7 +8,7 @@ from qtpy import QtCore
 
 class SelectionMixin(object):
 
-    CHECKSTATE: Dict = {}  # column: identifier
+    CHECKSTATE: Dict[int, Callable] = {}  # column: identifier
     dataChanged: QtCore.Signal
     DATA_ROLE: int
 

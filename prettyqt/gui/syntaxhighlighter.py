@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from qtpy import QtGui
+from typing import Optional, Union, Iterator, Tuple, Pattern
 
-from prettyqt import core
+from qtpy import QtGui, QtCore
+
+from prettyqt import core, gui
 
 
 QtGui.QSyntaxHighlighter.__bases__ = (core.Object,)
@@ -12,11 +14,13 @@ class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
 
     RULES: list = []
 
-    def __init__(self, parent=None):
+    def __init__(
+        self, parent: Optional[Union[QtCore.QObject, QtGui.QTextDocument]] = None
+    ):
         super().__init__(parent)
 
     @classmethod
-    def yield_rules(cls):
+    def yield_rules(cls) -> Iterator[Tuple[Pattern, int, gui.TextCharFormat]]:
         for Rule in cls.RULES:
             if isinstance(Rule.compiled, list):
                 for i in Rule.compiled:

@@ -51,7 +51,9 @@ class Image(widgets.Label):
         )
 
     @classmethod
-    def from_path(cls, path: Union[pathlib.Path, str], parent=None) -> Image:
+    def from_path(
+        cls, path: Union[pathlib.Path, str], parent: Optional[QtWidgets.QWidget] = None
+    ) -> Image:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)
         label.setPixmap(pixmap)

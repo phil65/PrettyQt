@@ -20,7 +20,7 @@ class HighlightRule(object):
     font_size: Optional[float] = None
     nth: int = 0
     compiled = None
-    fmt = None
+    fmt: gui.TextCharFormat = gui.TextCharFormat()
 
     def __init_subclass__(cls):
         super().__init_subclass__()
@@ -32,7 +32,7 @@ class HighlightRule(object):
         cls.fmt = cls.get_format()
 
     @classmethod
-    def get_format(cls):
+    def get_format(cls) -> gui.TextCharFormat:
         fmt = gui.TextCharFormat()
         fmt.setFontItalic(cls.italic)
         fmt.set_foreground_color(cls.color)
