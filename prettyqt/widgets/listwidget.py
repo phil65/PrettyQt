@@ -100,7 +100,7 @@ class ListWidget(QtWidgets.QListWidget):
         flags: Optional[int] = None,
         size_hint: Optional[QtCore.QSize] = None,
         is_user_type: bool = False,
-    ):
+    ) -> widgets.ListWidgetItem:
         typ = 1 if is_user_type else 0
         item = widgets.ListWidgetItem(name, self, typ)
         if icon is not None:

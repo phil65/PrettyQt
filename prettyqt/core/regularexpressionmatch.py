@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Union, Dict, Any
+from typing import Optional, Union, Dict, Any, Tuple
 
 from qtpy import QtCore
 
@@ -49,7 +49,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     def end(self, group: int = 0) -> int:
         return self.capturedEnd(group)
 
-    def span(self, group: int = 0) -> tuple:
+    def span(self, group: int = 0) -> Tuple[int, int]:
         return (self.capturedStart(group), self.capturedEnd(group))
 
     @property

@@ -15,7 +15,7 @@ class PlaylistModel(core.AbstractItemModel):
 
     def rowCount(self, parent=core.ModelIndex()):
         return (
-            self._playlist.mediaCount()
+            len(self._playlist)
             if self._playlist is not None and not parent.isValid()
             else 0
         )
@@ -23,30 +23,31 @@ class PlaylistModel(core.AbstractItemModel):
     def columnCount(self, parent=core.ModelIndex()):
         return len(self.HEADER) if not parent.isValid() else 0
 
-    def index(self, row, column, parent=core.ModelIndex()):
+    def index(self, row: int, column: int, parent=core.ModelIndex()):
         return (
             self.createIndex(row, column)
             if self._playlist is not None
             and not parent.isValid()
-            and 0 <= row < self._playlist.mediaCount()
+            and 0 <= row < len(self._playlist)
             and 0 <= column < len(self.HEADER)
             else core.ModelIndex()
         )
 
-    def parent(self, child):
+    def parent(self, child: core.ModelIndex) -> core.ModelIndex:
         return core.ModelIndex()
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
-        if index.isValid() and role == constants.DISPLAY_ROLE:
+    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+        if not index.isValid():
+            return None
+        if self._playlist is None:
+            return None
+        if role == constants.DISPLAY_ROLE:
             if index.column() == 0:
                 location = self._playlist.media(index.row()).canonicalUrl()
                 return core.FileInfo(location.path()).fileName()
-
-            return self.m_data[index]
-
         return None
 
-    def playlist(self) -> QtMultimedia.QMediaPlaylist:
+    def get_playlist(self) -> QtMultimedia.QMediaPlaylist:
         return self._playlist
 
     def set_playlist(self, playlist: QtMultimedia.QMediaPlaylist):

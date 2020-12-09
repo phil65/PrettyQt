@@ -37,7 +37,7 @@ QtWidgets.QAction.__bases__ = (core.Object,)
 class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
     def __init__(
         self,
-        parent=None,
+        parent: Optional[QtCore.QObject] = None,
         text: str = "",
         icon: gui.icon.IconType = None,
         shortcut: Optional[str] = None,

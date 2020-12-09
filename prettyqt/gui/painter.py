@@ -125,7 +125,7 @@ class Painter(QtGui.QPainter):
         pen.set_color(color)
         self.setPen(pen)
 
-    def get_pen(self) -> str:
+    def get_pen(self) -> gui.Pen:
         """Return current pen.
 
         Returns:

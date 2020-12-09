@@ -136,7 +136,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             logger.warn("no child_item")
             return core.ModelIndex()
 
-    def parent(self, index):
+    def parent(self, index: core.ModelIndex) -> QtCore.QModelindex:
         if not index.isValid():
             return core.ModelIndex()
 
@@ -148,7 +148,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
 
         return self.createIndex(parent_item.row(), 0, parent_item)
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: Optional[core.ModelIndex] = None):
         parent = core.ModelIndex() if parent is None else parent
 
         if parent.column() > 0:
@@ -157,14 +157,14 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         else:
             return self.tree_item(parent).child_count()
 
-    def hasChildren(self, parent=None):
+    def hasChildren(self, parent: Optional[core.ModelIndex] = None):
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return 0
         else:
             return self.tree_item(parent).has_children
 
-    def canFetchMore(self, parent=None):
+    def canFetchMore(self, parent: Optional[core.ModelIndex] = None):
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return 0
@@ -173,7 +173,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             # logger.debug("canFetchMore: {} = {}".format(parent, result))
             return result
 
-    def fetchMore(self, parent=None):
+    def fetchMore(self, parent: Optional[core.ModelIndex] = None):
         """Fetches the children given the model index of a parent node.
 
         Adds the children to the parent.

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from qtpy import QtWidgets
+from typing import Optional
+
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
 
@@ -9,7 +11,7 @@ QtWidgets.QWidgetAction.__bases__ = (widgets.Action,)
 
 
 class WidgetAction(QtWidgets.QWidgetAction):
-    def __init__(self, parent=None):  # QtCore.QObject
+    def __init__(self, parent: Optional[QtCore.QObject] = None):
         super().__init__(parent)
 
     #     self.set_text(text)

@@ -71,10 +71,11 @@ class Splitter(QtWidgets.QSplitter):
     def add_widget(self, widget: QtWidgets.QWidget):
         self.addWidget(widget)
 
-    def add_layout(self, layout: QtWidgets.QLayout):
+    def add_layout(self, layout: QtWidgets.QLayout) -> widgets.Widget:
         widget = widgets.Widget()
         widget.set_layout(layout)
         self.addWidget(widget)
+        return widget
 
     def add(self, *item: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
         for i in item:

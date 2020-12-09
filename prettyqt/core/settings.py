@@ -2,7 +2,7 @@
 
 import contextlib
 import pathlib
-from typing import List, Mapping, Optional, Union, Dict, Any, Iterator
+from typing import List, Mapping, Optional, Union, Dict, Any, Iterator, Tuple
 import logging
 
 from qtpy import QtCore
@@ -176,10 +176,10 @@ class Settings(QtCore.QSettings):
 
     # Dictionary interface
 
-    def get(self, key: str, default=None):
+    def get(self, key: str, default: Any = None) -> Any:
         return self.get_value(key, default)
 
-    def setdefault(self, key: str, default=None):
+    def setdefault(self, key: str, default: Any = None) -> Any:
         if not self.contains(key):
             self.set_value(key, default)
             return default
@@ -188,7 +188,7 @@ class Settings(QtCore.QSettings):
     def keys(self) -> List[str]:
         return self.allKeys()
 
-    def values(self):
+    def values(self) -> Iterator[Any]:
         return (self.get_value(key) for key in self.allKeys())
 
     def items(self):
@@ -199,7 +199,7 @@ class Settings(QtCore.QSettings):
             return self.get_value(key)
         raise KeyError(key)
 
-    def popitem(self) -> tuple:
+    def popitem(self) -> Tuple[str, Any]:
         key = self.keys()[0]
         return (key, self.get_value(key))
 

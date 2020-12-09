@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union
+from typing import Union, List, Iterator, Any, Dict
 
 import orjson as json
 from qtpy import QtCore
 
 from prettyqt import core
+
+JSONType = Union[str, int, float, bool, None, Dict[str, Any], List[Any]]
 
 
 QtCore.QMimeData.__bases__ = (core.Object,)
@@ -35,18 +37,18 @@ class MimeData(QtCore.QMimeData):
     def set_data(self, mime_type: str, data: str):
         self.setData(mime_type, QtCore.QByteArray(data.encode()))
 
-    def set_json_data(self, mime_type: str, data):
+    def set_json_data(self, mime_type: str, data: JSONType):
         self.setData(mime_type, QtCore.QByteArray(json.dumps(data, option=OPTS)))
 
     def get_data(self, mime_type: str) -> str:
         return bytes(self.data(mime_type)).decode()
 
-    def get_json_data(self, mime_type: str):
+    def get_json_data(self, mime_type: str) -> JSONType:
         data = self.data(mime_type)
         return json.loads(bytes(data))
 
-    def keys(self):
+    def keys(self) -> List[str]:
         return self.formats()
 
-    def values(self):
+    def values(self) -> Iterator[Any]:
         return (self.data(key) for key in self.formats())

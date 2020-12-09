@@ -2,7 +2,7 @@
 
 from typing import Optional
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
@@ -19,7 +19,7 @@ QtWidgets.QActionGroup.__bases__ = (core.Object,)
 
 
 class ActionGroup(QtWidgets.QActionGroup):
-    def __init__(self, parent=None):  # QtCore.QObject
+    def __init__(self, parent: Optional[QtCore.QObject] = None):
         super().__init__(parent)
 
     def __len__(self) -> int:

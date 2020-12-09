@@ -41,8 +41,8 @@ class Match(core.RegularExpressionMatch):
     def __repr__(self):
         return f"<re.Match object; span={self.span()}, match={self.groups()}>"
 
-    def __getitem__(self, item):
-        return self.group(item)
+    def __getitem__(self, item: Union[str, int]) -> str:
+        return self.captured(item)
 
     def group(self, *groups: Union[str, int]) -> Union[tuple, str]:
         if len(groups) > 1:
@@ -75,7 +75,7 @@ class Match(core.RegularExpressionMatch):
     def end(self, group: int = 0) -> int:
         return self.capturedEnd(group)
 
-    def span(self, group: int = 0) -> tuple:
+    def span(self, group: int = 0) -> Tuple[int, int]:
         return (self.capturedStart(group), self.capturedEnd(group))
 
     @property
@@ -90,11 +90,11 @@ class Match(core.RegularExpressionMatch):
         return self.re.namedCaptureGroups()[self.lastCapturedIndex()]
 
     @property
-    def re(self):
+    def re(self) -> QtCore.QRegularExpression:
         return self.regularExpression()
 
     @property
-    def partial(self):
+    def partial(self) -> bool:
         return self.hasPartialMatch()
 
 
