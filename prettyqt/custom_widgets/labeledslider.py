@@ -2,7 +2,7 @@
 
 # credits to https://stackoverflow.com/a/54819051
 
-from typing import Optional, List
+from typing import Optional, Sequence
 
 from qtpy import QtWidgets
 
@@ -15,13 +15,13 @@ class LabeledSlider(widgets.Widget):
 
     def __init__(
         self,
-        labels: List[str],
+        labels: Sequence[str],
         orientation: str = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent=parent)
 
-        if not isinstance(labels, (tuple, list)):
+        if not isinstance(labels, Sequence):
             raise ValueError("<labels> must be a list or tuple.")
         self.levels = list(enumerate(labels))
         self.layout = widgets.BoxLayout(orientation, self)
@@ -35,7 +35,7 @@ class LabeledSlider(widgets.Widget):
 
         self.sl = widgets.Slider(orientation)
         self.sl.value_changed.connect(self.value_changed)
-        self.sl.set_range(0, len(labels) - 1)
+        self.sl.set_range(0, len(self.levels) - 1)
         self.sl.set_value(0)
         if orientation == "horizontal":
             self.sl.set_tick_position("below")
