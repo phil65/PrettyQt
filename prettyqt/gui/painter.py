@@ -177,6 +177,9 @@ class Painter(QtGui.QPainter):
             raise InvalidParamError(operation, CLIP_OPERATIONS)
         self.setClipPath(path, CLIP_OPERATIONS[operation])
 
+    def get_text_rect(self, text: str) -> core.Rect:
+        return self.drawText(core.Rect(), QtCore.Qt.TextDontPrint, text)
+
     @contextlib.contextmanager
     def clip_path(self, operation: str = "replace"):
         path = gui.PainterPath()

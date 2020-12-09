@@ -460,6 +460,7 @@ def test_painter():
                 painter.set_pen("test")
             with painter.backup_state():
                 pass
+            painter.get_text_rect("test")
 
     w = Test()
     w.repaint()
