@@ -1,7 +1,18 @@
-## v0.143.1 (2020-12-08)
+## v0.143.1 (2020-12-09)
+
+### Feat
+
+- **qml**: add QmlImageProviderbase class
+- **widgets**: add TreeWidgetItemIterator class
+- **quick**: add some more classes
+- **qml**: add QmlParserStatus class
+- **Widget**: add get_title method
+- **Painter**: add get_text_rect method
+- **ListWidget**: add add_item method
 
 ### Fix
 
+- correct inheritance for QuickItem
 - **ColumnItemModel**: correct get_width signature
 
 ## v0.143.0 (2020-12-08)
