@@ -60,6 +60,7 @@ from .bytearray import ByteArray
 from .bytearraymatcher import ByteArrayMatcher
 from .url import Url
 from .urlquery import UrlQuery
+from .translator import Translator
 from .coreapplication import CoreApplication
 from .iodevice import IODevice
 from .filedevice import FileDevice
@@ -83,7 +84,6 @@ from .storageinfo import StorageInfo
 # from .pointf import PointF
 from .textboundaryfinder import TextBoundaryFinder
 from .timer import Timer
-from .translator import Translator
 from .thread import Thread
 from .process import Process
 

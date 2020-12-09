@@ -57,7 +57,6 @@ from .rasterwindow import RasterWindow
 from .clipboard import Clipboard
 from .inputmethod import InputMethod
 from .sessionmanager import SessionManager
-from .guiapplication import GuiApplication
 from .validator import Validator
 from .regexpvalidator import RegExpValidator
 from .regularexpressionvalidator import RegularExpressionValidator
@@ -91,6 +90,7 @@ from .painter import Painter
 from .painterpath import PainterPath
 from .painterpathstroker import PainterPathStroker
 from .palette import Palette
+from .guiapplication import GuiApplication
 from .cursor import Cursor
 from .polygon import Polygon
 from .polygonf import PolygonF

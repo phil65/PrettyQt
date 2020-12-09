@@ -54,3 +54,7 @@ def test_application(qapp):
     qapp.get_primary_screen()
     qapp.get_screens()
     qapp.get_screen_at(core.Point(1, 1))
+    qapp.get_application_file_path()
+    qapp.get_application_dir_path()
+    qapp.add_library_path("")
+    qapp.get_library_paths()

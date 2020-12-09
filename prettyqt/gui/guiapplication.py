@@ -6,7 +6,7 @@ import contextlib
 from qtpy import QtGui, QtCore
 
 from prettyqt import core, gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, colors
 
 CURSOR_SHAPES = bidict(
     arrow=QtCore.Qt.ArrowCursor,
@@ -100,3 +100,23 @@ class GuiApplication(QtGui.QGuiApplication):
 
     def get_input_method(self) -> gui.InputMethod:
         return gui.InputMethod(self.inputMethod())
+
+    @classmethod
+    def copy_to_clipboard(cls, text: str):
+        """Sets clipboard to supplied text."""
+        cb = cls.clipboard()
+        cb.clear(mode=cb.Clipboard)
+        cb.setText(text, mode=cb.Clipboard)
+
+    @classmethod
+    def get_font(cls) -> gui.Font:
+        return gui.Font(cls.font())
+
+    def set_icon(self, icon: gui.icon.IconType):
+        """Set the default window icon.
+
+        Args:
+            icon: icon to use
+        """
+        icon = gui.icon.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
+        self.setWindowIcon(icon)

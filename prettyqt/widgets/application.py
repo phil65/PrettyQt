@@ -1,19 +1,15 @@
 # -*- coding: utf-8 -*-
 
-import pathlib
-from typing import Optional, Union, Iterator, MutableMapping, Mapping
+from typing import Optional, Iterator, MutableMapping, Mapping
 import logging
 
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, colors, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError
 
 logger = logging.getLogger(__name__)
 
-STANDARD_PIXMAPS = widgets.style.STANDARD_PIXMAPS
-
-QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
 UI_EFFECTS = bidict(
     animate_menu=QtCore.Qt.UI_AnimateMenu,
@@ -31,6 +27,14 @@ NAVIGATION_MODES = bidict(
     cursor_auto=QtCore.Qt.NavigationModeCursorAuto,
     cursor_force_visible=QtCore.Qt.NavigationModeCursorForceVisible,
 )
+
+SAVE_STATES = dict(
+    splitters=QtWidgets.QSplitter,
+    mainwindows=QtWidgets.QMainWindow,
+    headerviews=QtWidgets.QHeaderView,
+)
+
+QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
 
 class Application(QtWidgets.QApplication):
@@ -59,81 +63,28 @@ class Application(QtWidgets.QApplication):
     def store_widget_states(
         self, settings: Optional[MutableMapping] = None, key: str = "states"
     ):
-        splitters = self.find_children(QtWidgets.QSplitter)
-        splitter_dct = {
-            sp.objectName(): sp.saveState() for sp in splitters if sp.objectName()
-        }
-        mainwindows = self.find_children(QtWidgets.QMainWindow)
-        mw_dct = {
-            mw.objectName(): mw.saveState() for mw in mainwindows if mw.objectName()
-        }
-        headerviews = self.find_children(QtWidgets.QHeaderView)
-        headerview_dct = {
-            h.objectName(): h.saveState() for h in headerviews if h.objectName()
-        }
         settings = core.Settings() if settings is None else settings
-        settings[key] = dict(
-            splitters=splitter_dct, mainwindows=mw_dct, headerviews=headerview_dct
-        )
+        result = dict()
+        for k, v in SAVE_STATES.items():
+            result[k] = {
+                i.objectName(): i.saveState()
+                for i in self.find_children(v)
+                if i.objectName()
+            }
+        settings[key] = result
 
     def restore_widget_states(
         self, settings: Optional[Mapping] = None, key: str = "states"
     ):
         settings = core.Settings() if settings is None else settings
-        splitters = settings[key].get("splitters")
-        mainwindows = settings[key].get("splitters")
-        headerviews = settings[key].get("headerviews")
-        if splitters is not None:
-            for k, v in splitters.items():
-                w = self.find_child(QtWidgets.QSplitter, name=k)
+        for category, v in SAVE_STATES.items():
+            items = settings[key].get(category)
+            if items is None:
+                continue
+            for name, state in items.items():
+                w = self.find_child(v, name=name)
                 if w is not None:
-                    w.restoreState(v)
-        if mainwindows is not None:
-            for k, v in mainwindows.items():
-                w = self.find_child(QtWidgets.QMainWindow, name=k)
-                if w is not None:
-                    w.restoreState(v)
-        if headerviews is not None:
-            for k, v in headerviews.items():
-                w = self.find_child(QtWidgets.QHeaderView, name=k)
-                if w is not None:
-                    w.restoreState(v)
-
-    def set_icon(self, icon: gui.icon.IconType):
-        """Set the default window icon.
-
-        Args:
-            icon: icon to use
-        """
-        icon = gui.icon.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
-        self.setWindowIcon(icon)
-
-    def load_language_file(self, file: Union[pathlib.Path, str]):
-        translator = core.Translator(self)
-        if file in ["de", "fr"]:
-            path = pathlib.Path(__file__).parent.parent
-            file = path / "localization" / f"qtbase_{file}.ts"
-        translator.load(str(file))
-        self.installTranslator(translator)
-
-    def set_metadata(
-        self,
-        app_name: Optional[str] = None,
-        app_version: Optional[str] = None,
-        org_name: Optional[str] = None,
-        org_domain: Optional[str] = None,
-    ):
-        if app_name is not None:
-            self.setApplicationName(app_name)
-        if app_version is not None:
-            self.setApplicationVersion(app_name)
-        if org_name is not None:
-            self.setOrganizationName(org_name)
-        if org_domain is not None:
-            self.setOrganizationDomain(org_domain)
-        # import ctypes
-        # myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
-        # ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+                    w.restoreState(state)
 
     def about_popup(self, title: str = "About"):
         text = (
@@ -147,28 +98,6 @@ class Application(QtWidgets.QApplication):
         )
         popup.set_icon("mdi.information-outline")
         popup.exec_()
-
-    def main_loop(self) -> int:
-        return self.exec_()
-
-    @classmethod
-    def get_font(cls) -> gui.Font:
-        return gui.Font(cls.font())
-
-    @classmethod
-    def use_hdpi_bitmaps(cls, state: bool = True):
-        cls.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, state)
-
-    @classmethod
-    def disable_window_help_button(cls, state: bool = True):
-        cls.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton, state)
-
-    @classmethod
-    def copy_to_clipboard(cls, text: str):
-        """Sets clipboard to supplied text."""
-        cb = cls.clipboard()
-        cb.clear(mode=cb.Clipboard)
-        cb.setText(text, mode=cb.Clipboard)
 
     @classmethod
     def get_mainwindow(cls) -> Optional[QtWidgets.QMainWindow]:
@@ -195,9 +124,9 @@ class Application(QtWidgets.QApplication):
     def get_icon(cls, icon: str) -> gui.Icon:
         style = cls.style()
         # icon_size = style.pixelMetric(QtWidgets.QStyle.PM_MessageBoxIconSize)
-        if icon not in STANDARD_PIXMAPS:
-            raise InvalidParamError(icon, STANDARD_PIXMAPS)
-        icon = style.standardIcon(STANDARD_PIXMAPS[icon])
+        if icon not in widgets.style.STANDARD_PIXMAPS:
+            raise InvalidParamError(icon, widgets.style.STANDARD_PIXMAPS)
+        icon = style.standardIcon(widgets.style.STANDARD_PIXMAPS[icon])
         return gui.Icon(icon)
 
     def set_effect_enabled(self, effect: str, enabled: bool = True):
