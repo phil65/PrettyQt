@@ -5,6 +5,7 @@
 Contains QtQml-based classes
 """
 
+from .qmlparserstatus import QmlParserStatus
 from .jsvalue import JSValue
 from .jsvalueiterator import JSValueIterator
 from .jsengine import JSEngine
@@ -13,6 +14,7 @@ from .qmlapplicationengine import QmlApplicationEngine
 from .qmlcomponent import QmlComponent
 
 __all__ = [
+    "QmlParserStatus",
     "JSValue",
     "JSValueIterator",
     "QmlEngine",
