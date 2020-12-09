@@ -146,6 +146,7 @@ from .listwidget import ListWidget
 from .treeview import TreeView
 from .tablewidgetselectionrange import TableWidgetSelectionRange
 from .treewidget import TreeWidget
+from .treewidgetitemiterator import TreeWidgetItemIterator
 from .tableview import TableView
 from .tablewidgetitem import TableWidgetItem
 from .tablewidget import TableWidget
@@ -299,6 +300,7 @@ __all__ = [
     "Frame",
     "ListWidgetItem",
     "TreeWidgetItem",
+    "TreeWidgetItemIterator",
     "Action",
     "ActionGroup",
     "WidgetAction",

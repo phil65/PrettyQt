@@ -1380,6 +1380,24 @@ def test_treewidgetitem(qtbot):
     del item[0]
 
 
+def test_treewidgetitemiterator(qtbot):
+    item = widgets.TreeWidget()
+    widgets.TreeWidgetItemIterator(
+        item,
+        flags=True,
+        hidden=True,
+        selected=True,
+        selectable=True,
+        draggable=True,
+        droppable=True,
+        has_children=True,
+        checked=True,
+        enabled=True,
+        editable=True,
+        user_flag=True,
+    )
+
+
 def test_undocommand():
     cmd = widgets.UndoCommand()
     cmd2 = widgets.UndoCommand(cmd)
