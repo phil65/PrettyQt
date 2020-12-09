@@ -40,6 +40,6 @@ setup(
     packages=find_packages(),
     test_suite="tests",
     url="https://github.com/phil65/prettyqt",
-    version="0.143.1",
+    version="0.144.0",
     zip_safe=False,
 )

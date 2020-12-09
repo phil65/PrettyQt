@@ -1,4 +1,10 @@
-## v0.143.1 (2020-12-09)
+## v0.144.0 (2020-12-09)
+
+### Fix
+
+- **Settings**: iter through key-value pairs
+- correct inheritance for QuickItem
+- **ColumnItemModel**: correct get_width signature
 
 ### Feat
 
@@ -9,11 +15,6 @@
 - **Widget**: add get_title method
 - **Painter**: add get_text_rect method
 - **ListWidget**: add add_item method
-
-### Fix
-
-- correct inheritance for QuickItem
-- **ColumnItemModel**: correct get_width signature
 
 ## v0.143.0 (2020-12-08)
 
