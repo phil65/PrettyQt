@@ -5,7 +5,7 @@
 
 # import regex as re
 
-from prettyqt import custom_models, widgets
+from prettyqt import custom_models, widgets, multimedia
 
 
 def test_transposeproxymodel():
@@ -28,3 +28,6 @@ def test_regexmatchesmodel(qttester):
 def test_playlistmodel(qttester):
     model = custom_models.PlaylistModel()
     qttester.test_model(model, force_py=False)
+    playlist = multimedia.MediaPlaylist()
+    model.set_playlist(playlist)
+    assert model.get_playlist() is playlist
