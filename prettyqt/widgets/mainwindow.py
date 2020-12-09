@@ -136,7 +136,7 @@ class MainWindow(QtWidgets.QMainWindow):
         restored = False
         if geom is not None and state is not None:
             try:
-                logger.debug(f"Loading window state for {name}...")
+                logger.debug(f"Loading window state for {self.windowTitle()!r}...")
                 self.restoreGeometry(geom)
                 self.restoreState(state)
                 restored = True
@@ -156,7 +156,7 @@ class MainWindow(QtWidgets.QMainWindow):
         """
         settings = core.Settings()
         name = self.get_id()
-        logger.debug(f"Saving window state for {name}...")
+        logger.debug(f"Saving window state for {self.windowTitle()!r}...")
         settings[f"{name}.geometry"] = self.saveGeometry()
         settings[f"{name}.state"] = self.saveState()
         if recursive:
