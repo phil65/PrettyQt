@@ -4,7 +4,6 @@ os: linux
 dist: focal
 language: python
 python:
-  - "3.7"
   - "3.8"
   - "3.9"
 addons:
@@ -93,7 +92,7 @@ deploy:
     on:
       tags: true
       repo: phil65/PrettyQt
-      python: 3.7
+      python: 3.8
   - provider: script
     edge: true
     script: poetry publish --build
@@ -101,4 +100,4 @@ deploy:
     on:
       tags: true
       repo: phil65/PrettyQt
-      python: 3.7
+      python: 3.8

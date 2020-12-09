@@ -17,7 +17,7 @@ regexeditor = "prettyqt.custom_widgets.regexeditor.editor:run"
 hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 bidict = "^0"
 qtpy = "^1.9.0"
 qtawesome = "^1"
