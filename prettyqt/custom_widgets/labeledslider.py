@@ -4,7 +4,7 @@
 
 from typing import Optional, List
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
 
@@ -23,8 +23,7 @@ class LabeledSlider(widgets.Widget):
 
         if not isinstance(labels, (tuple, list)):
             raise ValueError("<labels> must be a list or tuple.")
-        levels = range(len(labels))
-        self.levels = list(zip(levels, labels))
+        self.levels = list(enumerate(labels))
         self.layout = widgets.BoxLayout(orientation, self)
 
         # gives some space to print labels
@@ -54,7 +53,6 @@ class LabeledSlider(widgets.Widget):
         super().paintEvent(e)
 
         style = self.sl.style()
-        painter = gui.Painter(self)
         st_slider = widgets.StyleOptionSlider()
         st_slider.initFrom(self.sl)
         st_slider.orientation = self.sl.orientation()
@@ -64,10 +62,11 @@ class LabeledSlider(widgets.Widget):
             widgets.Style.PM_SliderSpaceAvailable, st_slider, self.sl
         )
 
+        painter = gui.Painter(self)
         for v, v_str in self.levels:
 
             # get the size of the label
-            rect = painter.drawText(core.Rect(), QtCore.Qt.TextDontPrint, v_str)
+            rect = painter.get_text_rect(v_str)
 
             if self.sl.is_horizontal():
                 x_loc = widgets.Style.sliderPositionFromValue(
@@ -80,30 +79,15 @@ class LabeledSlider(widgets.Widget):
                 # left bound of the text = center - half of text width + L_margin
                 left = x_loc - rect.width() // 2 + self.left_margin
                 bottom = self.rect().bottom()
-
                 # enlarge margins if clipping
                 if v == self.sl.minimum():
                     if left <= 0:
                         self.left_margin = rect.width() // 2 - x_loc
-                    if self.bottom_margin <= rect.height():
-                        self.bottom_margin = rect.height()
-
-                    self.layout.setContentsMargins(
-                        self.left_margin,
-                        self.top_margin,
-                        self.right_margin,
-                        self.bottom_margin,
-                    )
-
+                    self.bottom_margin = max(self.bottom_margin, rect.height())
+                    self.layout.adjust_margins()
                 if v == self.sl.maximum() and rect.width() // 2 >= self.right_margin:
                     self.right_margin = rect.width() // 2
-                    self.layout.setContentsMargins(
-                        self.left_margin,
-                        self.top_margin,
-                        self.right_margin,
-                        self.bottom_margin,
-                    )
-
+                    self.layout.adjust_margins()
             else:
                 y_loc = widgets.Style.sliderPositionFromValue(
                     self.sl.minimum(), self.sl.maximum(), v, available, upsideDown=True
@@ -115,15 +99,16 @@ class LabeledSlider(widgets.Widget):
                 left = self.left_margin - rect.width()
                 if left <= 0:
                     self.left_margin = rect.width() + 2
-                    self.layout.setContentsMargins(
-                        self.left_margin,
-                        self.top_margin,
-                        self.right_margin,
-                        self.bottom_margin,
-                    )
+                    self.layout.adjust_margins()
             painter.drawText(left, bottom, v_str)
 
-        return
+    def adjust_margins(self):
+        self.layout.setContentsMargins(
+            self.left_margin,
+            self.top_margin,
+            self.right_margin,
+            self.bottom_margin,
+        )
 
 
 if __name__ == "__main__":
