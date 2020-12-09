@@ -52,7 +52,7 @@ class Settings(QtCore.QSettings):
         return self.remove(key)
 
     def __iter__(self) -> Iterator[str]:
-        return iter(self.allKeys())
+        return iter(self.items())
 
     def __len__(self) -> int:
         return len(self.allKeys())
