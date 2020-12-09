@@ -209,7 +209,7 @@ class Settings(QtCore.QSettings):
 
 
 def register_extensions(
-    *exts: List[str],
+    *exts: str,
     app_name: Optional[str] = None,
     app_path: Union[None, str, pathlib.Path] = None,
 ):
