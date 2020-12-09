@@ -1326,7 +1326,7 @@ headerData<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <h4 class="doc doc-heading" id="prettyqt.custom_models.playlistmodel.PlaylistModel.columnCount">
 
         <code class="highlight language-python">
-columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fcc4bc03350</span><span class="o">&gt;</span><span class="p">)</span>        </code>
+columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7feff9412430</span><span class="o">&gt;</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -1355,14 +1355,15 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/playlistmodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span> <span class="ow">and</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">location</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span><span class="o">.</span><span class="n">media</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span><span class="o">.</span><span class="n">canonicalUrl</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">FileInfo</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">path</span><span class="p">())</span><span class="o">.</span><span class="n">fileName</span><span class="p">()</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">m_data</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-
     <span class="k">return</span> <span class="kc">None</span>
 </code></pre>
 </div>
@@ -1373,7 +1374,7 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <h4 class="doc doc-heading" id="prettyqt.custom_models.playlistmodel.PlaylistModel.index">
 
         <code class="highlight language-python">
-index<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fcc4bc033d0</span><span class="o">&gt;</span><span class="p">)</span>        </code>
+index<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7feff94124a0</span><span class="o">&gt;</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -1382,12 +1383,12 @@ index<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/playlistmodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()):</span>
     <span class="k">return</span> <span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
         <span class="ow">and</span> <span class="ow">not</span> <span class="n">parent</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span>
-        <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span><span class="o">.</span><span class="n">mediaCount</span><span class="p">()</span>
+        <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span><span class="p">)</span>
         <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">column</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)</span>
         <span class="k">else</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
     <span class="p">)</span>
@@ -1410,7 +1411,7 @@ parent(self) -&gt; QObject</p>
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/playlistmodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">child</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
 </code></pre>
 </div>
@@ -1421,7 +1422,7 @@ parent(self) -&gt; QObject</p>
 <h4 class="doc doc-heading" id="prettyqt.custom_models.playlistmodel.PlaylistModel.rowCount">
 
         <code class="highlight language-python">
-rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fcc4bc032d0</span><span class="o">&gt;</span><span class="p">)</span>        </code>
+rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7feff94123c0</span><span class="o">&gt;</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -1432,7 +1433,7 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()):</span>
     <span class="k">return</span> <span class="p">(</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span><span class="o">.</span><span class="n">mediaCount</span><span class="p">()</span>
+        <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">parent</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span>
         <span class="k">else</span> <span class="mi">0</span>
     <span class="p">)</span>
@@ -1589,7 +1590,7 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.columnCount">
 
         <code class="highlight language-python">
-columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fcc4bc03550</span><span class="o">&gt;</span><span class="p">)</span>        </code>
+columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -1598,7 +1599,9 @@ columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">())</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -1618,7 +1621,7 @@ data<span class="p">(</span><span class="bp">self</span><span class="p">,</span>
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapFromSource</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="n">role</span><span class="p">)</span>
@@ -1660,7 +1663,9 @@ index<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">index</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -1680,7 +1685,7 @@ mapFromSource<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">mapFromSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">mapFromSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">source_index</span><span class="o">.</span><span class="n">column</span><span class="p">(),</span> <span class="n">source_index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
 </code></pre>
 </div>
@@ -1700,7 +1705,7 @@ mapToSource<span class="p">(</span><span class="bp">self</span><span class="p">,
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">mapToSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">mapToSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">proxy_index</span><span class="o">.</span><span class="n">column</span><span class="p">(),</span> <span class="n">proxy_index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
 </code></pre>
 </div>
@@ -1721,7 +1726,7 @@ parent(self) -&gt; QObject</p>
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
     <span class="k">return</span> <span class="kc">None</span>
 </code></pre>
 </div>
@@ -1732,7 +1737,7 @@ parent(self) -&gt; QObject</p>
 <h4 class="doc doc-heading" id="prettyqt.custom_models.transposeproxymodel.TransposeProxyModel.rowCount">
 
         <code class="highlight language-python">
-rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7fcc4bc034d0</span><span class="o">&gt;</span><span class="p">)</span>        </code>
+rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -1741,7 +1746,9 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">())</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">columnCount</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
 </code></pre>
 </div>

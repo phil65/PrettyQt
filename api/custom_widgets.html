@@ -2369,7 +2369,6 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
     <span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">style</span><span class="p">()</span>
-    <span class="n">painter</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="n">st_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionSlider</span><span class="p">()</span>
     <span class="n">st_slider</span><span class="o">.</span><span class="n">initFrom</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="p">)</span>
     <span class="n">st_slider</span><span class="o">.</span><span class="n">orientation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">orientation</span><span class="p">()</span>
@@ -2379,10 +2378,11 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PM_SliderSpaceAvailable</span><span class="p">,</span> <span class="n">st_slider</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span>
     <span class="p">)</span>
 
+    <span class="n">painter</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">v_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">:</span>
 
         <span class="c1"># get the size of the label</span>
-        <span class="n">rect</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(),</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">TextDontPrint</span><span class="p">,</span> <span class="n">v_str</span><span class="p">)</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">get_text_rect</span><span class="p">(</span><span class="n">v_str</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">is_horizontal</span><span class="p">():</span>
             <span class="n">x_loc</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">sliderPositionFromValue</span><span class="p">(</span>
@@ -2395,30 +2395,15 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
             <span class="c1"># left bound of the text = center - half of text width + L_margin</span>
             <span class="n">left</span> <span class="o">=</span> <span class="n">x_loc</span> <span class="o">-</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span>
             <span class="n">bottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">()</span><span class="o">.</span><span class="n">bottom</span><span class="p">()</span>
-
             <span class="c1"># enlarge margins if clipping</span>
             <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">minimum</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">x_loc</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span> <span class="o">&lt;=</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">():</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
-
-                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span>
-                <span class="p">)</span>
-
+                <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">adjust_margins</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">maximum</span><span class="p">()</span> <span class="ow">and</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span>
-                <span class="p">)</span>
-
+                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">adjust_margins</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">y_loc</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">sliderPositionFromValue</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">minimum</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">maximum</span><span class="p">(),</span> <span class="n">v</span><span class="p">,</span> <span class="n">available</span><span class="p">,</span> <span class="n">upsideDown</span><span class="o">=</span><span class="kc">True</span>
@@ -2430,15 +2415,8 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
             <span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">-</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">top_margin</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">,</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span>
-                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">adjust_margins</span><span class="p">()</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">v_str</span><span class="p">)</span>
-
-    <span class="k">return</span>
 </code></pre>
 </div>
 </details>

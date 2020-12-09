@@ -645,8 +645,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.copy_to_clipboard" class="md-nav__link">
+    copy_to_clipboard()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.guiapplication.GuiApplication.get_layout_direction" class="md-nav__link">
     get_layout_direction()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.set_icon" class="md-nav__link">
+    set_icon()
   </a>
   
 </li>
@@ -2644,8 +2658,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.copy_to_clipboard" class="md-nav__link">
+    copy_to_clipboard()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.guiapplication.GuiApplication.get_layout_direction" class="md-nav__link">
     get_layout_direction()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.set_icon" class="md-nav__link">
+    set_icon()
   </a>
   
 </li>
@@ -5583,6 +5611,33 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.copy_to_clipboard">
+
+        <code class="highlight language-python">
+copy_to_clipboard<span class="p">(</span><span class="n">text</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Sets clipboard to supplied text.</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">copy_to_clipboard</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Sets clipboard to supplied text."""</span>
+    <span class="n">cb</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">clipboard</span><span class="p">()</span>
+    <span class="n">cb</span><span class="o">.</span><span class="n">clear</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">cb</span><span class="o">.</span><span class="n">Clipboard</span><span class="p">)</span>
+    <span class="n">cb</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="n">cb</span><span class="o">.</span><span class="n">Clipboard</span><span class="p">)</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.get_layout_direction">
 
         <code class="highlight language-python">
@@ -5592,7 +5647,6 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current layout direction.</p>
-<p>Possible values: "left_to_right", "right_to_left", "auto"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -5603,7 +5657,7 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['left_to_right', 'right_to_left', 'auto']</code></td>
 <td>
 <p>layout direction</p>
 </td>
@@ -5613,15 +5667,60 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LAYOUT_DIRECTION_STR</span><span class="p">:</span>
     <span class="sd">"""Get the current layout direction.</span>
-
-<span class="sd">    Possible values: "left_to_right", "right_to_left", "auto"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        layout direction</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">LAYOUT_DIRECTIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">LAYOUT_DIRECTION</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.set_icon">
+
+        <code class="highlight language-python">
+set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the default window icon.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>icon</code></td>
+<td><code>Union[PyQt5.QtGui.QIcon, str, pathlib.Path]</code></td>
+<td>
+<p>icon to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="sd">"""Set the default window icon.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        icon: icon to use</span>
+<span class="sd">    """</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -5637,7 +5736,6 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set layout direction.</p>
-<p>Valid values: "left_to_right", "right_to_left", "auto"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5651,7 +5749,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>direction</code></td>
-<td><code>str</code></td>
+<td><code>Literal['left_to_right', 'right_to_left', 'auto']</code></td>
 <td>
 <p>layout direction</p>
 </td>
@@ -5679,10 +5777,8 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">LAYOUT_DIRECTION_STR</span><span class="p">):</span>
     <span class="sd">"""Set layout direction.</span>
-
-<span class="sd">    Valid values: "left_to_right", "right_to_left", "auto"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        direction: layout direction</span>
@@ -5690,9 +5786,9 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: layout direction does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LAYOUT_DIRECTIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">LAYOUT_DIRECTIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setLayoutDirection</span><span class="p">(</span><span class="n">LAYOUT_DIRECTIONS</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LAYOUT_DIRECTION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">LAYOUT_DIRECTION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setLayoutDirection</span><span class="p">(</span><span class="n">LAYOUT_DIRECTION</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -7355,7 +7451,7 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Pen</code></td>
 <td>
 <p>current pen</p>
 </td>
@@ -7365,7 +7461,7 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/painter.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span><span class="p">:</span>
     <span class="sd">"""Return current pen.</span>
 
 <span class="sd">    Returns:</span>
