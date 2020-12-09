@@ -8,9 +8,6 @@ from prettyqt import network
 from prettyqt.utils import bidict, helpers, InvalidParamError
 
 
-KNOWN_HEADERS = network.networkrequest.KNOWN_HEADERS  # type: ignore
-
-
 CAPABILITIES = bidict(
     tunneling=QtNetwork.QNetworkProxy.TunnelingCapability,
     listening=QtNetwork.QNetworkProxy.ListeningCapability,
@@ -43,14 +40,14 @@ class NetworkProxy(QtNetwork.QNetworkProxy):
         self.setCapabilities(flags)
 
     def get_header(self, name: str) -> str:
-        if name not in KNOWN_HEADERS:
-            raise InvalidParamError(name, KNOWN_HEADERS)
-        return self.header(KNOWN_HEADERS[name])
+        if name not in network.networkrequest.KNOWN_HEADERS:
+            raise InvalidParamError(name, network.networkrequest.KNOWN_HEADERS)
+        return self.header(network.networkrequest.KNOWN_HEADERS[name])
 
     def set_header(self, name: str, value: str):
-        if name not in KNOWN_HEADERS:
-            raise InvalidParamError(name, KNOWN_HEADERS)
-        self.setHeader(KNOWN_HEADERS[name], value)
+        if name not in network.networkrequest.KNOWN_HEADERS:
+            raise InvalidParamError(name, network.networkrequest.KNOWN_HEADERS)
+        self.setHeader(network.networkrequest.KNOWN_HEADERS[name], value)
 
     def get_headers(self) -> Dict[str, str]:
         return {

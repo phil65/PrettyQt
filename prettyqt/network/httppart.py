@@ -7,9 +7,6 @@ from qtpy import QtNetwork, QtCore
 from prettyqt import network
 
 
-KNOWN_HEADERS = network.networkrequest.KNOWN_HEADERS  # type: ignore
-
-
 class HttpPart(QtNetwork.QHttpPart):
     def set_body(self, body: Union[str, bytes, QtCore.QByteArray]):
         if isinstance(body, str):
@@ -23,7 +20,7 @@ class HttpPart(QtNetwork.QHttpPart):
             self.setRawHeader(str.encode(k), str.encode(v))
 
     def set_header(self, name: str, value: str):
-        self.setHeader(KNOWN_HEADERS[name], value)
+        self.setHeader(network.networkrequest.KNOWN_HEADERS[name], value)
 
 
 if __name__ == "__main__":

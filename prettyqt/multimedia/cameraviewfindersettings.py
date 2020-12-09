@@ -9,8 +9,6 @@ from qtpy import QtMultimedia
 from prettyqt import multimedia
 from prettyqt.utils import InvalidParamError
 
-PIXEL_FORMAT = multimedia.videoframe.PIXEL_FORMAT  # type: ignore
-
 
 @dataclass
 class Settings(object):
@@ -44,12 +42,12 @@ class CameraViewfinderSettings(QtMultimedia.QCameraViewfinderSettings):
         return len(self.to_dict())
 
     def set_pixel_format(self, fmt: str):
-        if fmt not in PIXEL_FORMAT:
-            raise InvalidParamError(fmt, PIXEL_FORMAT)
-        self.setPixelFormat(PIXEL_FORMAT[fmt])
+        if fmt not in multimedia.videoframe.PIXEL_FORMAT:
+            raise InvalidParamError(fmt, multimedia.videoframe.PIXEL_FORMAT)
+        self.setPixelFormat(multimedia.videoframe.PIXEL_FORMAT[fmt])
 
     def get_pixel_format(self) -> str:
-        return PIXEL_FORMAT.inv[self.pixelFormat()]
+        return multimedia.videoframe.PIXEL_FORMAT.inv[self.pixelFormat()]
 
     def to_dataclass(self) -> Settings:
         size = self.resolution()

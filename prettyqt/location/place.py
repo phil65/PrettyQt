@@ -7,8 +7,6 @@ from qtpy import QtLocation
 from prettyqt import location, positioning, core
 from prettyqt.utils import bidict, InvalidParamError
 
-TYPE = location.placecontent.TYPE  # type: ignore
-
 VISIBILITY = bidict(
     unspecified=QtLocation.QLocation.UnspecifiedVisibility,
     device=QtLocation.QLocation.DeviceVisibility,
@@ -37,14 +35,14 @@ class Place(QtLocation.QPlace):
         return [location.PlaceContactDetail(i) for i in self.contactDetails(contact_type)]
 
     def set_content(self, typ: str, value: str):
-        if typ not in TYPE:
-            raise InvalidParamError(typ, TYPE)
-        self.setContent(TYPE[typ], value)
+        if typ not in location.placecontent.TYPE:
+            raise InvalidParamError(typ, location.placecontent.TYPE)
+        self.setContent(location.placecontent.TYPE[typ], value)
 
     def get_content(self, typ: str) -> str:
-        if typ not in TYPE:
-            raise InvalidParamError(typ, TYPE)
-        return self.content(TYPE[typ])
+        if typ not in location.placecontent.TYPE:
+            raise InvalidParamError(typ, location.placecontent.TYPE)
+        return self.content(location.placecontent.TYPE[typ])
 
     def get_icon(self) -> location.PlaceIcon:
         return location.PlaceIcon(self.icon())

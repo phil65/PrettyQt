@@ -43,8 +43,6 @@ TEXT_FORMATS = bidict(
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
     TEXT_FORMATS["markdown"] = QtCore.Qt.MarkdownText
 
-WEIGHTS = gui.font.WEIGHTS  # type: ignore
-
 
 QtWidgets.QLabel.__bases__ = (widgets.Frame,)
 
@@ -203,10 +201,10 @@ class Label(QtWidgets.QLabel):
         Raises:
             InvalidParamError: invalid font weight
         """
-        if weight not in WEIGHTS:
-            raise InvalidParamError(weight, WEIGHTS)
+        if weight not in gui.font.WEIGHTS:
+            raise InvalidParamError(weight, gui.font.WEIGHTS)
         font = self.font()
-        font.setWeight(WEIGHTS[weight])
+        font.setWeight(gui.font.WEIGHTS[weight])
         self.setFont(font)
         return self
 
