@@ -181,6 +181,9 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def set_title(self, title: str) -> None:
         self.setWindowTitle(title)
 
+    def get_title(self) -> str:
+        return self.windowTitle()
+
     def set_tooltip(self, text: str) -> None:
         self.setToolTip(text)
 
