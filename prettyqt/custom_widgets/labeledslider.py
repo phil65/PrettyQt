@@ -22,7 +22,7 @@ class LabeledSlider(widgets.Widget):
         super().__init__(parent=parent)
 
         if not isinstance(labels, Sequence):
-            raise ValueError("<labels> must be a list or tuple.")
+            raise ValueError("<labels> must be a sequence.")
         self.levels = list(enumerate(labels))
         self.layout = widgets.BoxLayout(orientation, self)
 
