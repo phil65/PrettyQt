@@ -1,6 +1,6 @@
 from qtpy import QtQuick
 
-from prettyqt import gui, core
+from prettyqt import gui, core, qml
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -39,7 +39,7 @@ TRANSFORM_ORIGIN = bidict(
 )
 
 
-QtQuick.QQuickItem.__bases__ = (gui.Window,)
+QtQuick.QQuickItem.__bases__ = (core.Object, qml.QmlParserStatus)
 
 
 class QuickItem(QtQuick.QQuickItem):
@@ -80,3 +80,7 @@ class QuickItem(QtQuick.QQuickItem):
             transform origin
         """
         return TRANSFORM_ORIGIN.inv[self.transformOrigin()]
+
+
+if __name__ == "__main__":
+    item = QuickItem()
