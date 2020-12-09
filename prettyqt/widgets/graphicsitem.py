@@ -1,18 +1,25 @@
 # -*- coding: utf-8 -*-
 
-from typing import List, Union
+from typing import List, Union, Literal
 
 from qtpy import QtWidgets, QtCore, QtGui
 
 from prettyqt import gui
 from prettyqt.utils import bidict, InvalidParamError
 
-ITEM_SELECTION_MODES = bidict(
+ITEM_SELECTION_MODE = bidict(
     contains_shape=QtCore.Qt.ContainsItemShape,
     intersects_shape=QtCore.Qt.IntersectsItemShape,
     contains_bounding_rect=QtCore.Qt.ContainsItemBoundingRect,
     intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
 )
+
+ITEM_SELECTION_MODE_STR = Literal[
+    "contains_shape",
+    "intersects_shape",
+    "contains_bounding_rect",
+    "intersects_bounding_rect",
+]
 
 FOCUS_REASONS = bidict(
     mouse=QtCore.Qt.MouseFocusReason,
@@ -25,11 +32,13 @@ FOCUS_REASONS = bidict(
     other=QtCore.Qt.OtherFocusReason,
 )
 
-MODALITIES = bidict(
+MODALITY = bidict(
     none=QtWidgets.QGraphicsItem.NonModal,
     panel=QtWidgets.QGraphicsItem.PanelModal,
     scene=QtWidgets.QGraphicsItem.SceneModal,
 )
+
+MODALITY_STR = Literal["none", "panel", "scene"]
 
 
 class GraphicsItem(QtWidgets.QGraphicsItem):
@@ -51,28 +60,26 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
         self.setFocus(FOCUS_REASONS[reason])
 
     def colliding_items(
-        self, mode: str = "intersects_shape"
+        self, mode: ITEM_SELECTION_MODE_STR = "intersects_shape"
     ) -> List[QtWidgets.QGraphicsItem]:
-        if mode not in ITEM_SELECTION_MODES:
-            raise InvalidParamError(mode, ITEM_SELECTION_MODES)
-        return self.collidingItems(ITEM_SELECTION_MODES[mode])
+        if mode not in ITEM_SELECTION_MODE:
+            raise InvalidParamError(mode, ITEM_SELECTION_MODE)
+        return self.collidingItems(ITEM_SELECTION_MODE[mode])
 
     def collides_with(
         self,
         item: Union[QtGui.QPainterPath, QtWidgets.QGraphicsItem],
-        mode: str = "intersects_shape",
+        mode: ITEM_SELECTION_MODE_STR = "intersects_shape",
     ) -> bool:
-        if mode not in ITEM_SELECTION_MODES:
-            raise InvalidParamError(mode, ITEM_SELECTION_MODES)
+        if mode not in ITEM_SELECTION_MODE:
+            raise InvalidParamError(mode, ITEM_SELECTION_MODE)
         if isinstance(item, QtGui.QPainterPath):
-            return self.collidesWithPath(item, ITEM_SELECTION_MODES[mode])
+            return self.collidesWithPath(item, ITEM_SELECTION_MODE[mode])
         else:
-            return self.collidesWithItem(item, ITEM_SELECTION_MODES[mode])
+            return self.collidesWithItem(item, ITEM_SELECTION_MODE[mode])
 
-    def set_panel_modality(self, modality: str = "window") -> None:
+    def set_panel_modality(self, modality: MODALITY_STR) -> None:
         """Set panel modality.
-
-        Valid values for modality: "none", "panel", "scene"
 
         Args:
             modality: panel modality
@@ -80,20 +87,21 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
         Raises:
             InvalidParamError: panel modality does not exist
         """
-        if modality not in MODALITIES:
-            raise InvalidParamError(modality, MODALITIES)
-        self.setPanelModality(MODALITIES[modality])
+        if modality not in MODALITY:
+            raise InvalidParamError(modality, MODALITY)
+        self.setPanelModality(MODALITY[modality])
 
-    def get_panel_modality(self) -> str:
+    def get_panel_modality(self) -> MODALITY_STR:
         """Get the current modality modes as a string.
-
-        Possible values: "none", "panel", "scene"
 
         Returns:
             panel modality
-            str
         """
-        return MODALITIES.inv[self.panelModality()]
+        return MODALITY.inv[self.panelModality()]
 
     def get_shape(self) -> gui.PainterPath:
         return gui.PainterPath(self.shape())
+
+
+if __name__ == "__main__":
+    item = GraphicsItem()

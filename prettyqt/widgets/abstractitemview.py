@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from typing import Any, Generator, List, Optional
+from typing import Any, Generator, List, Optional, Literal
 
 from qtpy import QtCore, QtWidgets
 
@@ -16,30 +16,40 @@ TRIGGERS = bidict(
     edit_key=QtWidgets.QAbstractItemView.EditKeyPressed,
 )
 
-SELECTION_BEHAVIOURS = bidict(
+SELECTION_BEHAVIOUR = bidict(
     rows=QtWidgets.QAbstractItemView.SelectRows,
     columns=QtWidgets.QAbstractItemView.SelectColumns,
     items=QtWidgets.QAbstractItemView.SelectItems,
 )
 
-SELECTION_MODES = bidict(
+SELECTION_BEHAVIOUR_STR = Literal["rows", "columns", "items"]
+
+SELECTION_MODE = bidict(
     single=QtWidgets.QAbstractItemView.SingleSelection,
     extended=QtWidgets.QAbstractItemView.ExtendedSelection,
     multi=QtWidgets.QAbstractItemView.MultiSelection,
     none=QtWidgets.QAbstractItemView.NoSelection,
 )
 
-SCROLL_MODES = bidict(
+SELECTION_MODE_STR = Literal["single", "extended", "multi", "none"]
+
+SCROLL_MODE = bidict(
     item=QtWidgets.QAbstractItemView.ScrollPerItem,
     pixel=QtWidgets.QAbstractItemView.ScrollPerPixel,
 )
 
-SCROLL_HINTS = bidict(
+SCROLL_MODE_STR = Literal["item", "pixel"]
+
+SCROLL_HINT = bidict(
     ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
     position_at_top=QtWidgets.QAbstractItemView.PositionAtTop,
     position_at_bottom=QtWidgets.QAbstractItemView.PositionAtBottom,
     position_at_center=QtWidgets.QAbstractItemView.PositionAtCenter,
 )
+
+SCROLL_HINT_STR = Literal[
+    "ensure_visible", "position_at_top", "position_at_bottom", "position_at_center"
+]
 
 QtWidgets.QAbstractItemView.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -163,10 +173,8 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
     def get_edit_triggers(self) -> List[str]:
         return [k for k, v in TRIGGERS.items() if v & self.editTriggers()]
 
-    def set_selection_behaviour(self, behaviour: str):
+    def set_selection_behaviour(self, behaviour: SELECTION_BEHAVIOUR_STR):
         """Set selection behaviour for given item view.
-
-        Allowed values are "rows", "columns", "items"
 
         Args:
             behaviour: selection behaviour to use
@@ -174,24 +182,20 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         Raises:
             InvalidParamError: behaviour does not exist
         """
-        if behaviour not in SELECTION_BEHAVIOURS:
-            raise InvalidParamError(behaviour, SELECTION_BEHAVIOURS)
-        self.setSelectionBehavior(SELECTION_BEHAVIOURS[behaviour])
+        if behaviour not in SELECTION_BEHAVIOUR:
+            raise InvalidParamError(behaviour, SELECTION_BEHAVIOUR)
+        self.setSelectionBehavior(SELECTION_BEHAVIOUR[behaviour])
 
-    def get_selection_behaviour(self) -> str:
+    def get_selection_behaviour(self) -> SELECTION_BEHAVIOUR_STR:
         """Return current selection behaviour.
-
-        Possible values: "rows", "columns", "items"
 
         Returns:
             selection behaviour
         """
-        return SELECTION_BEHAVIOURS.inv[self.selectionBehavior()]
+        return SELECTION_BEHAVIOUR.inv[self.selectionBehavior()]
 
-    def set_selection_mode(self, mode: Optional[str]):
+    def set_selection_mode(self, mode: Optional[SELECTION_MODE_STR]):
         """Set selection mode for given item view.
-
-        Allowed values are "single", "extended", "multi" or "none"
 
         Args:
             mode: selection mode to use
@@ -201,65 +205,57 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         if mode is None:
             mode = "none"
-        if mode not in SELECTION_MODES:
-            raise InvalidParamError(mode, SELECTION_MODES)
-        self.setSelectionMode(SELECTION_MODES[mode])
+        if mode not in SELECTION_MODE:
+            raise InvalidParamError(mode, SELECTION_MODE)
+        self.setSelectionMode(SELECTION_MODE[mode])
 
-    def get_selection_mode(self) -> str:
+    def get_selection_mode(self) -> SELECTION_MODE_STR:
         """Return current selection mode.
-
-        Possible values: "single", "extended", "multi" or "none"
 
         Returns:
             selection mode
         """
-        return SELECTION_MODES.inv[self.selectionMode()]
+        return SELECTION_MODE.inv[self.selectionMode()]
 
-    def set_scroll_mode(self, mode: str):
+    def set_scroll_mode(self, mode: SCROLL_MODE_STR):
         """Set the scroll mode for both directions.
 
-        possible values are "item", "pixel"
-
         Args:
             mode: mode to set
 
         Raises:
             InvalidParamError: invalid scroll mode
         """
-        if mode not in SCROLL_MODES:
-            raise InvalidParamError(mode, SCROLL_MODES)
-        self.setHorizontalScrollMode(SCROLL_MODES[mode])
-        self.setVerticalScrollMode(SCROLL_MODES[mode])
+        if mode not in SCROLL_MODE:
+            raise InvalidParamError(mode, SCROLL_MODE)
+        self.setHorizontalScrollMode(SCROLL_MODE[mode])
+        self.setVerticalScrollMode(SCROLL_MODE[mode])
 
-    def set_horizontal_scroll_mode(self, mode: str):
+    def set_horizontal_scroll_mode(self, mode: SCROLL_MODE_STR):
         """Set the horizontal scroll mode.
 
-        possible values are "item", "pixel"
-
         Args:
             mode: mode to set
 
         Raises:
             InvalidParamError: invalid scroll mode
         """
-        if mode not in SCROLL_MODES:
-            raise InvalidParamError(mode, SCROLL_MODES)
-        self.setHorizontalScrollMode(SCROLL_MODES[mode])
+        if mode not in SCROLL_MODE:
+            raise InvalidParamError(mode, SCROLL_MODE)
+        self.setHorizontalScrollMode(SCROLL_MODE[mode])
 
-    def set_vertical_scroll_mode(self, mode: str):
+    def set_vertical_scroll_mode(self, mode: SCROLL_MODE_STR):
         """Set the vertical scroll mode.
 
-        possible values are "item", "pixel"
-
         Args:
             mode: mode to set
 
         Raises:
             InvalidParamError: invalid scroll mode
         """
-        if mode not in SCROLL_MODES:
-            raise InvalidParamError(mode, SCROLL_MODES)
-        self.setVerticalScrollMode(SCROLL_MODES[mode])
+        if mode not in SCROLL_MODE:
+            raise InvalidParamError(mode, SCROLL_MODE)
+        self.setVerticalScrollMode(SCROLL_MODE[mode])
 
     def num_selected(self) -> int:
         """Return amount of selected rows.
@@ -296,10 +292,10 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         idx = self.model().createIndex(self.model().rowCount() - 1, 0)
         self.setCurrentIndex(idx)
 
-    def scroll_to(self, index, mode: str = "ensure_visible"):
-        if mode not in SCROLL_HINTS:
-            raise InvalidParamError(mode, SCROLL_HINTS)
-        self.scrollTo(index, SCROLL_HINTS[mode])
+    def scroll_to(self, index, mode: SCROLL_HINT_STR = "ensure_visible"):
+        if mode not in SCROLL_HINT:
+            raise InvalidParamError(mode, SCROLL_HINT)
+        self.scrollTo(index, SCROLL_HINT[mode])
 
     def highlight_when_inactive(self):
         """Highlight items when widget does not have focus."""

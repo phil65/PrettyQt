@@ -36,7 +36,11 @@ from prettyqt.utils import colors
 
 
 class BaseWaitingSpinner(widgets.Widget):
-    def __init__(self, parent: Optional[QtWidgets.QWidget], modality: str = "none"):
+    def __init__(
+        self,
+        parent: Optional[QtWidgets.QWidget],
+        modality: widgets.widget.MODALITY_STR = "none",
+    ):
         super().__init__(parent=parent)
 
         # WAS IN initialize()
@@ -221,7 +225,7 @@ class WaitingSpinner(BaseWaitingSpinner):
         parent: Optional[QtWidgets.QWidget],
         center_on_parent: bool = True,
         disable_parent: bool = True,
-        modality: str = "none",
+        modality: widgets.widget.MODALITY_STR = "none",
         additional_disabled=None,
     ):
         super().__init__(parent=parent, modality=modality)

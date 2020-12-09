@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional
+from typing import Optional, Literal
 
 from qtpy import QtCore, QtWidgets
 
@@ -8,12 +8,13 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-STATES = bidict(
+STATE = bidict(
     unchecked=QtCore.Qt.Unchecked,
     partial=QtCore.Qt.PartiallyChecked,
     checked=QtCore.Qt.Checked,
 )
 
+STATE_STR = Literal["unchecked", "partial", "checked"]
 
 QtWidgets.QCheckBox.__bases__ = (widgets.AbstractButton,)
 
@@ -62,10 +63,8 @@ class CheckBox(QtWidgets.QCheckBox):
     def is_on(self, state: bool):
         self.setChecked(state)
 
-    def set_checkstate(self, state: str):
+    def set_checkstate(self, state: STATE_STR):
         """Set checkstate of the checkbox.
-
-        valid values are: unchecked, partial, checked
 
         Args:
             state: checkstate to use
@@ -73,19 +72,17 @@ class CheckBox(QtWidgets.QCheckBox):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in STATES:
-            raise InvalidParamError(state, STATES)
-        self.setCheckState(STATES[state])
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
+        self.setCheckState(STATE[state])
 
-    def get_checkstate(self) -> bool:
+    def get_checkstate(self) -> STATE_STR:
         """Return checkstate.
-
-        possible values are "unchecked", "partial", "checked"
 
         Returns:
             checkstate
         """
-        return STATES.inv[self.checkState()]
+        return STATE.inv[self.checkState()]
 
     def get_value(self) -> bool:
         return self.isChecked()

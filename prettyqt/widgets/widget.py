@@ -2,7 +2,7 @@
 
 from contextlib import contextmanager
 
-from typing import Dict, Iterator, Callable, Optional, Union, Any
+from typing import Dict, Iterator, Callable, Optional, Union, Any, Literal
 
 from qtpy import QtCore, QtGui, QtWidgets
 import qstylizer.parser
@@ -13,7 +13,7 @@ from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, colors, InvalidParamError, helpers, prettyprinter
 
 
-CONTEXT_POLICIES = bidict(
+CONTEXT_POLICY = bidict(
     none=QtCore.Qt.NoContextMenu,
     prevent=QtCore.Qt.PreventContextMenu,
     default=QtCore.Qt.DefaultContextMenu,
@@ -22,11 +22,15 @@ CONTEXT_POLICIES = bidict(
     # showhide_menu="showhide_menu",
 )
 
-MODALITIES = bidict(
+CONTEXT_POLICY_STR = Literal["none", "prevent", "default", "actions", "custom"]
+
+MODALITY = bidict(
     window=QtCore.Qt.WindowModal,
     application=QtCore.Qt.ApplicationModal,
     none=QtCore.Qt.NonModal,
 )
+
+MODALITY_STR = Literal["none", "prevent", "default", "actions", "custom"]
 
 CURSOR_SHAPES = bidict(
     arrow=QtCore.Qt.ArrowCursor,
@@ -242,10 +246,8 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
                 raise InvalidParamError(attribute, ATTRIBUTES)
             self.setAttribute(ATTRIBUTES[attribute], state)
 
-    def set_modality(self, modality: str = "window") -> None:
+    def set_modality(self, modality: MODALITY_STR) -> None:
         """Set modality for the dialog.
-
-        Valid values for modality: "none", "window", "application"
 
         Args:
             modality: modality for the main window
@@ -253,20 +255,17 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Raises:
             InvalidParamError: modality type does not exist
         """
-        if modality not in MODALITIES:
-            raise InvalidParamError(modality, MODALITIES)
-        self.setWindowModality(MODALITIES[modality])
+        if modality not in MODALITY:
+            raise InvalidParamError(modality, MODALITY)
+        self.setWindowModality(MODALITY[modality])
 
-    def get_modality(self) -> str:
+    def get_modality(self) -> MODALITY_STR:
         """Get the current modality modes as a string.
-
-        Possible values: "none", "window", "application"
 
         Returns:
             modality mode
-            str
         """
-        return MODALITIES.inv[self.windowModality()]
+        return MODALITY.inv[self.windowModality()]
 
     def set_size_policy(
         self, horizontal: Optional[str] = None, vertical: Optional[str] = None
@@ -326,10 +325,8 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         yield font
         self.setFont(font)
 
-    def set_contextmenu_policy(self, policy: str) -> None:
+    def set_contextmenu_policy(self, policy: CONTEXT_POLICY_STR) -> None:
         """Set contextmenu policy for given item view.
-
-        Allowed values are "none", "prevent", "default", "actions", "custom"
 
         Args:
             policy: contextmenu policy to use
@@ -337,19 +334,17 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Raises:
             InvalidParamError: policy does not exist
         """
-        if policy not in CONTEXT_POLICIES:
-            raise InvalidParamError(policy, CONTEXT_POLICIES)
-        self.setContextMenuPolicy(CONTEXT_POLICIES[policy])
+        if policy not in CONTEXT_POLICY:
+            raise InvalidParamError(policy, CONTEXT_POLICY)
+        self.setContextMenuPolicy(CONTEXT_POLICY[policy])
 
-    def get_contextmenu_policy(self) -> str:
+    def get_contextmenu_policy(self) -> CONTEXT_POLICY_STR:
         """Return current contextmenu policy.
-
-        Possible values: "none", "prevent", "default", "actions", "custom"
 
         Returns:
             contextmenu policy
         """
-        return CONTEXT_POLICIES.inv[self.contextMenuPolicy()]
+        return CONTEXT_POLICY.inv[self.contextMenuPolicy()]
 
     def set_custom_menu(self, method: Callable) -> None:
         self.set_contextmenu_policy("custom")
