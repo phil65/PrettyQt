@@ -12,6 +12,7 @@ from .jsengine import JSEngine
 from .qmlengine import QmlEngine
 from .qmlapplicationengine import QmlApplicationEngine
 from .qmlcomponent import QmlComponent
+from .qmlimageproviderbase import QmlImageProviderBase
 
 __all__ = [
     "QmlParserStatus",
@@ -21,4 +22,5 @@ __all__ = [
     "JSEngine",
     "QmlApplicationEngine",
     "QmlComponent",
+    "QmlImageProviderBase",
 ]
