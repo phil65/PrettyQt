@@ -320,10 +320,16 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         self.setStyleSheet(ss.toString())
 
     @contextmanager
-    def current_font(self) -> Iterator[gui.Font]:
+    def edit_font(self) -> Iterator[gui.Font]:
         font = gui.Font(self.font())
         yield font
         self.setFont(font)
+
+    @deprecated(reason="This context manager is deprecated, use edit_font instead.")
+    @contextmanager
+    def current_font(self) -> Iterator[gui.Font]:
+        with self.edit_font() as font:
+            yield font
 
     def set_contextmenu_policy(self, policy: CONTEXT_POLICY_STR) -> None:
         """Set contextmenu policy for given item view.

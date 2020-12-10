@@ -118,7 +118,7 @@ class ToolBar(QtWidgets.QToolBar):
         self.setIconSize(core.Size(size, size))
 
     def set_font_size(self, size: int):
-        with self.current_font() as font:
+        with self.edit_font() as font:
             font.set_size(size)
 
     def is_area_allowed(self, area: str) -> bool:
