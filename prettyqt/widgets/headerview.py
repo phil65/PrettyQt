@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import functools
+import hashlib
 from typing import Iterable, Optional, Union, List
 
 from deprecated import deprecated
@@ -37,18 +38,24 @@ class HeaderView(QtWidgets.QHeaderView):
         self.setSectionsClickable(True)
         self._widget_name = parent.id if parent is not None else ""
 
+    def generate_header_id(self):
+        # return f"{self._widget_name}.state"
+        column_names = ",".join(self.get_section_labels())
+        columns_hash = hashlib.md5(column_names.encode("utf-8")).hexdigest()
+        return f"{type(self).__name__}_{columns_hash}.state"
+
     def save_state(
         self, settings: Optional[core.Settings] = None, key: Optional[str] = None
     ):
         settings = core.Settings() if settings is None else settings
-        key = f"{self._widget_name}.state" if key is None else key
+        key = self.generate_header_id() if key is None else key
         settings.set_value(key, self.saveState())
 
     def load_state(
         self, settings: Optional[core.Settings] = None, key: Optional[str] = None
     ) -> bool:
         settings = core.Settings() if settings is None else settings
-        key = f"{self._widget_name}.state" if key is None else key
+        key = self.generate_header_id() if key is None else key
         state = settings.get(key, None)
         if state is not None:
             self.restoreState(state)
