@@ -18,8 +18,8 @@ class MimeData(QtCore.QMimeData):
     def __len__(self):
         return len(self.formats())
 
-    def __getitem__(self, index: str):
-        return self.data(index)
+    def __getitem__(self, index: str) -> str:
+        return self.get_data(index)
 
     def __setitem__(self, index: str, value: Union[QtCore.QByteArray, bytes, str]):
         if isinstance(value, str):
@@ -51,4 +51,4 @@ class MimeData(QtCore.QMimeData):
         return self.formats()
 
     def values(self) -> Iterator[Any]:
-        return (self.data(key) for key in self.formats())
+        return (self.get_data(key) for key in self.formats())
