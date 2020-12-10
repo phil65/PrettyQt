@@ -120,6 +120,7 @@ def test_buttongroup(qtbot):
 def test_calendarwiget(qtbot):
     widget = widgets.CalendarWidget()
     assert widget.get_date() == widget.get_value()
+    widget.set_range(datetime.date(2000, 1, 1), datetime.date(2020, 1, 1))
     widget.set_value(datetime.date(2000, 10, 10))
     widget.set_selection_mode(None)
     widget.set_selection_mode("single")

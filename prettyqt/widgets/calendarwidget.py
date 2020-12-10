@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-from typing import Optional, Literal
+from typing import Optional, Literal, Union
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
 from prettyqt.utils import bidict, InvalidParamError, to_date
@@ -52,6 +52,14 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
 
     def set_value(self, value):
         self.setSelectedDate(value)
+
+    def set_range(
+        self,
+        min_val: Union[QtCore.QDate, datetime.date],
+        max_val: Union[QtCore.QDate, datetime.date],
+    ):
+        self.setMinimumDate(min_val)
+        self.setMaximumDate(max_val)
 
     def set_selection_mode(self, mode: Optional[SelectionModeStr]):
         """Set selection mode for given calendar widget.
