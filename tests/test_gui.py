@@ -531,8 +531,8 @@ def test_painterpathstroker():
 
 def test_palette():
     pal = gui.Palette()
-    assert len(pal.get_colors()) == 11
-    assert len(pal.get_brushes()) == 11
+    assert len(pal.get_colors()) == 21
+    assert len(pal.get_brushes()) == 21
     color = gui.Color("red")
     pal.set_brush("background", "red")
     assert pal.get_brush("background") == color

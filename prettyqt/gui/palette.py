@@ -18,6 +18,16 @@ ROLE = bidict(
     button=QtGui.QPalette.Button,
     button_text=QtGui.QPalette.ButtonText,
     bright_text=QtGui.QPalette.BrightText,
+    light=QtGui.QPalette.Light,
+    midlight=QtGui.QPalette.Midlight,
+    dark=QtGui.QPalette.Dark,
+    mid=QtGui.QPalette.Mid,
+    shadow=QtGui.QPalette.Shadow,
+    highlight=QtGui.QPalette.Highlight,
+    highlighted_text=QtGui.QPalette.HighlightedText,
+    link=QtGui.QPalette.Link,
+    link_visited=QtGui.QPalette.LinkVisited,
+    none=QtGui.QPalette.NoRole,
 )
 
 RoleStr = Literal[
