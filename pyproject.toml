@@ -51,7 +51,6 @@ mkdocs = "^1.1.2"
 mkdocs-material = "^6.0.0"
 mkdocstrings = "^0"
 pymdown-extensions = "^8.0"
-twine = "^3.2.0"
 black = "^20.8b1"
 devtools = "^0"
 
