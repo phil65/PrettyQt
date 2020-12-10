@@ -16,7 +16,7 @@ class Player(widgets.MainWindow):
         toolbar = widgets.ToolBar()
         self.addToolBar(toolbar)
 
-        file_menu = self.menuBar().addMenu("&File")
+        file_menu = self.menuBar().add_menu("&File")
         open_action = widgets.Action(
             icon=gui.Icon.fromTheme("document-open"),
             text="&Open...",
@@ -32,7 +32,7 @@ class Player(widgets.MainWindow):
             callback=self.close,
         )
 
-        play_menu = self.menuBar().addMenu("&Play")
+        play_menu = self.menuBar().add_menu("&Play")
         self.play_action = toolbar.add_action(
             icon=widgets.Application.get_icon("media_play"),
             label="Play",
@@ -59,14 +59,14 @@ class Player(widgets.MainWindow):
             label="Stop",
             callback=self.player.stop,
         )
-        file_menu.addAction(open_action)
-        file_menu.addAction(exit_action)
+        file_menu.add(open_action)
+        file_menu.add(exit_action)
 
-        play_menu.addAction(self.play_action)
-        play_menu.addAction(self.previous_action)
-        play_menu.addAction(self.pause_action)
-        play_menu.addAction(self.next_action)
-        play_menu.addAction(self.stop_action)
+        play_menu.add(self.play_action)
+        play_menu.add(self.previous_action)
+        play_menu.add(self.pause_action)
+        play_menu.add(self.next_action)
+        play_menu.add(self.stop_action)
 
         self.clock = widgets.Label(self)
         self.clock.setText("00:00/00:00")
