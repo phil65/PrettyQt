@@ -2,32 +2,34 @@
 """Module containing helper functions."""
 
 import sys
-from typing import Mapping, Union, Iterable
+from typing import Mapping, Union, Iterable, TYPE_CHECKING
 import traceback
 import logging
-import datetime
 
-from qtpy import QtCore
 import bidict as bdct
+
+if TYPE_CHECKING:
+    from qtpy import QtCore
+    import datetime
 
 logger = logging.getLogger(__name__)
 
 
-def to_datetime(date: QtCore.QDateTime) -> datetime.datetime:
+def to_datetime(date: "QtCore.QDateTime") -> "datetime.datetime":
     try:
         return date.toPython()  # pyqt5
     except (AttributeError, TypeError):
         return date.toPyDateTime()
 
 
-def to_date(date: QtCore.QDate) -> datetime.date:
+def to_date(date: "QtCore.QDate") -> "datetime.date":
     try:
         return date.toPython()  # pyqt5
     except (AttributeError, TypeError):
         return date.toPyDate()
 
 
-def to_time(time: QtCore.QTime) -> datetime.time:
+def to_time(time: "QtCore.QTime") -> "datetime.time":
     try:
         return time.toPython()  # pyqt5
     except (AttributeError, TypeError):
