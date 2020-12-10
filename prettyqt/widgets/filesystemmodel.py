@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pathlib
-from typing import Union, List, Sequence
+from typing import Union, List, Sequence, Iterator
 
 from qtpy import QtCore, QtWidgets
 
@@ -54,7 +54,9 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             return pathlib.Path(path)
         return super().data(index, role)
 
-    def yield_child_indexes(self, index: QtCore.QModelIndex):
+    def yield_child_indexes(
+        self, index: QtCore.QModelIndex
+    ) -> Iterator[QtCore.QModelIndex]:
         if not self.hasChildren(index):
             return None
         path = self.filePath(index)
