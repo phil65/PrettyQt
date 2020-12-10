@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union
+from typing import Literal, List, Union
 
 import datetime
 
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import core, widgets
-from prettyqt.utils import to_datetime, to_date, to_time, bidict
+from prettyqt.utils import to_datetime, to_date, to_time, bidict, InvalidParamError
 
 
 SECTIONS = bidict(
@@ -21,6 +21,19 @@ SECTIONS = bidict(
     month=QtWidgets.QDateTimeEdit.MonthSection,
     year=QtWidgets.QDateTimeEdit.YearSection,
 )
+
+SectionsStr = Literal[
+    "none",
+    "am_pm",
+    "msec",
+    "second",
+    "minute",
+    "hour",
+    "day",
+    "month",
+    "year",
+]
+
 
 QtWidgets.QDateTimeEdit.__bases__ = (widgets.AbstractSpinBox,)
 
@@ -54,6 +67,22 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.setDisplayFormat(state["display_format"])
         self.setToolTip(state.get("tool_tip", ""))
         self.setStatusTip(state.get("status_tip", ""))
+
+    def get_section_text(self, section: SectionsStr) -> str:
+        if section not in SECTIONS:
+            raise InvalidParamError(section, SECTIONS)
+        return self.sectionText(SECTIONS[section])
+
+    def get_current_section(self) -> SectionsStr:
+        return SECTIONS.inv[self.currentSection()]
+
+    def set_current_section(self, section: SectionsStr):
+        if section not in SECTIONS:
+            raise InvalidParamError(section, SECTIONS)
+        self.setCurrentSection(SECTIONS[section])
+
+    def get_displayed_sections(self) -> List[SectionsStr]:
+        return [k for k, v in SECTIONS.items() if v & self.displayedSections()]
 
     def set_range(
         self,

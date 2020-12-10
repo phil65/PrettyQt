@@ -217,6 +217,14 @@ def test_datetimeedit(qtbot):
     widget.set_value(dt)
     widget.set_format("dd.MM.yyyy")
     # assert widget.get_value() == dt
+    assert widget.get_section_text("day") == "11"
+    with pytest.raises(InvalidParamError):
+        widget.get_section_text("test")
+    widget.set_current_section("day")
+    with pytest.raises(InvalidParamError):
+        widget.set_current_section("test")
+    assert widget.get_current_section() == "day"
+    widget.get_displayed_sections()
 
 
 def test_desktopwidget(qtbot):
