@@ -216,7 +216,7 @@ def register_extensions(
     logger.debug(f"assigning extensions {exts} to {app_name}")
     s = Settings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.NativeFormat)
     if app_path is None:
-        app_path = core.Dir.toNativeSeparators(core.CoreApplication.applicationFilePath())
+        app_path = str(core.CoreApplication.get_application_file_path())
     if app_name is None:
         app_name = core.CoreApplication.applicationName()
     for ext in exts:
