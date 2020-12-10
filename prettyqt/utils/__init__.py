@@ -83,7 +83,7 @@ def install_exceptionhook(debug=False):
                 icon="warning",
                 text=f"Bug: uncaught {exc_type.__name__}",
                 informative_text=str(exc_value),
-                detail_text="".join(lst),
+                details="".join(lst),
             )
             msgBox.exec_()
             sys.exit(1)
