@@ -5,7 +5,7 @@ from qtpy import QtMultimedia, QtCore
 from prettyqt import constants, core
 
 
-class PlaylistModel(core.AbstractItemModel):
+class PlaylistModel(core.AbstractTableModel):
 
     HEADER = ["Name"]
 
@@ -13,28 +13,11 @@ class PlaylistModel(core.AbstractItemModel):
         super().__init__(parent)
         self._playlist = None
 
-    def rowCount(self, parent=core.ModelIndex()):
-        return (
-            len(self._playlist)
-            if self._playlist is not None and not parent.isValid()
-            else 0
-        )
+    def rowCount(self, parent=None):
+        return len(self._playlist) if self._playlist is not None else 0
 
-    def columnCount(self, parent=core.ModelIndex()):
-        return len(self.HEADER) if not parent.isValid() else 0
-
-    def index(self, row: int, column: int, parent=core.ModelIndex()):
-        return (
-            self.createIndex(row, column)
-            if self._playlist is not None
-            and not parent.isValid()
-            and 0 <= row < len(self._playlist)
-            and 0 <= column < len(self.HEADER)
-            else core.ModelIndex()
-        )
-
-    def parent(self, child: core.ModelIndex) -> core.ModelIndex:
-        return core.ModelIndex()
+    def columnCount(self, parent=None):
+        return len(self.HEADER)
 
     def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
         if not index.isValid():
@@ -47,10 +30,10 @@ class PlaylistModel(core.AbstractItemModel):
                 return core.FileInfo(location.path()).fileName()
         return None
 
-    def get_playlist(self) -> QtMultimedia.QMediaPlaylist:
+    def get_playlist(self) -> Optional[QtMultimedia.QMediaPlaylist]:
         return self._playlist
 
-    def set_playlist(self, playlist: QtMultimedia.QMediaPlaylist):
+    def set_playlist(self, playlist: Optional[QtMultimedia.QMediaPlaylist]):
         if self._playlist is not None:
             self._playlist.mediaAboutToBeInserted.disconnect(self.beginInsertItems)
             self._playlist.mediaInserted.disconnect(self.endInsertRows)
@@ -74,3 +57,24 @@ class PlaylistModel(core.AbstractItemModel):
 
     def change_items(self, start: int, end: int):
         self.dataChanged.emit(self.index(start, 0), self.index(end, len(self.HEADER)))
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets, multimedia
+
+    URL = (
+        "http://commondatastorage.googleapis.com/"
+        "gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    )
+
+    app = widgets.app()
+    tableview = widgets.TableView()
+    model = PlaylistModel()
+    playlist = multimedia.MediaPlaylist()
+    playlist.add_media(URL)
+    model.set_playlist(playlist)
+    tableview.set_model(model)
+    print(model.rowCount(), model.columnCount())
+    print(model._playlist)
+    tableview.show()
+    app.main_loop()
