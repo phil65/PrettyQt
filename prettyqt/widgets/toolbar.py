@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Callable, Optional, Dict, Any, Union, Tuple
+from typing import Callable, Optional, Dict, Any, Union, Tuple, Literal
 
 from qtpy import QtCore, QtWidgets
 
@@ -15,6 +15,8 @@ STYLE = bidict(
     text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon,
 )
 
+StyleStr = Literal["icon", "text", "text_beside_icon", "text_below_icon"]
+
 TOOLBAR_AREAS = bidict(
     left=QtCore.Qt.LeftToolBarArea,
     right=QtCore.Qt.RightToolBarArea,
@@ -23,6 +25,8 @@ TOOLBAR_AREAS = bidict(
     all=QtCore.Qt.AllToolBarAreas,
     none=QtCore.Qt.NoToolBarArea,
 )
+
+ToolbarAreaStr = Literal["left", "right", "top", "bottom", "all", "none"]
 
 
 QtWidgets.QToolBar.__bases__ = (widgets.Widget,)
@@ -77,15 +81,13 @@ class ToolBar(QtWidgets.QToolBar):
             else:
                 return self.addWidget(label)
 
-    def set_style(self, style: str):
+    def set_style(self, style: StyleStr):
         self.setToolButtonStyle(STYLE[style])
         for btn in self.menu_buttons:
             btn.set_style(style)
 
-    def get_style(self) -> str:
+    def get_style(self) -> StyleStr:
         """Return current style.
-
-        Possible values: "icon", "text", "text_below_icon", "text_beside_icon"
 
         Returns:
             style
@@ -127,7 +129,7 @@ class ToolBar(QtWidgets.QToolBar):
         with self.edit_font() as font:
             font.set_size(size)
 
-    def is_area_allowed(self, area: str) -> bool:
+    def is_area_allowed(self, area: ToolbarAreaStr) -> bool:
         """Check if toolbar is allowed at specified area.
 
         Valid values for area: "left", "right", "top", "bottom", "all"
@@ -142,7 +144,7 @@ class ToolBar(QtWidgets.QToolBar):
             raise InvalidParamError(area, TOOLBAR_AREAS)
         return self.isAreaAllowed(TOOLBAR_AREAS[area])
 
-    def set_allowed_areas(self, *areas: str):
+    def set_allowed_areas(self, *areas: ToolbarAreaStr):
         for area in areas:
             if area not in TOOLBAR_AREAS:
                 raise InvalidParamError(area, TOOLBAR_AREAS)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional
+from typing import Optional, Literal
 
 from qtpy import QtWidgets
 
@@ -14,6 +14,8 @@ ECHO_MODES = bidict(
     password=QtWidgets.QLineEdit.Password,
     echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit,
 )
+
+EchoModeStr = Literal["normal", "no_echo", "password", "echo_on_edit"]
 
 
 QtWidgets.QLineEdit.__bases__ = (widgets.Widget,)
@@ -107,10 +109,8 @@ class LineEdit(QtWidgets.QLineEdit):
         color = "orange" if not self.is_valid() else None
         self.set_background_color(color)
 
-    def set_echo_mode(self, mode: str):
+    def set_echo_mode(self, mode: EchoModeStr):
         """Set echo mode.
-
-        Valid values are "normal", "no_echo", "password", "echo_on_edit"
 
         Args:
             mode: echo mode to use
@@ -122,10 +122,8 @@ class LineEdit(QtWidgets.QLineEdit):
             raise InvalidParamError(mode, ECHO_MODES)
         self.setEchoMode(ECHO_MODES[mode])
 
-    def get_echo_mode(self) -> str:
+    def get_echo_mode(self) -> EchoModeStr:
         """Return echo mode.
-
-        possible values are "normal", "no_echo", "password", "echo_on_edit"
 
         Returns:
             echo mode

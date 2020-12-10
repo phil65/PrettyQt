@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import List, Optional, Sequence
+from typing import List, Optional, Sequence, Literal
 import logging
 
 from qtpy import QtCore, QtWidgets
@@ -9,12 +9,14 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-DOCK_POSITIONS = bidict(
+DOCK_POSITION = bidict(
     top=QtCore.Qt.TopDockWidgetArea,
     bottom=QtCore.Qt.BottomDockWidgetArea,
     left=QtCore.Qt.LeftDockWidgetArea,
     right=QtCore.Qt.RightDockWidgetArea,
 )
+
+DockPositionStr = Literal["top", "bottom", "left", "right"]
 
 TOOLBAR_AREAS = bidict(
     left=QtCore.Qt.LeftToolBarArea,
@@ -24,6 +26,8 @@ TOOLBAR_AREAS = bidict(
     all=QtCore.Qt.AllToolBarAreas,
     none=QtCore.Qt.NoToolBarArea,
 )
+
+ToolbarAreaStr = Literal["top", "bottom", "left", "right", "all", "none"]
 
 logger = logging.getLogger(__name__)
 
@@ -87,20 +91,18 @@ class MainWindow(QtWidgets.QMainWindow):
             action.set_shortcut(f"Ctrl+Shift+{i}")
             action.set_shortcut_context("application")
             action.toggled.connect(item.setVisible)
-            menu.add_action(action)
+            menu.add(action)
         menu.add_separator()
         for tb in self.get_toolbars():
             action = widgets.Action(text=tb.windowTitle(), parent=self)
             action.set_checkable(True)
             action.toggled.connect(tb.setVisible)
             action.set_checked(tb.isVisible())
-            menu.add_action(action)
+            menu.add(action)
         return menu
 
-    def add_toolbar(self, toolbar: QtWidgets.QToolBar, position: str = "top"):
+    def add_toolbar(self, toolbar: QtWidgets.QToolBar, position: ToolbarAreaStr = "top"):
         """Adds a toolbar to the mainmenu at specified area.
-
-        Valid values for position: "left", "right", "top", "bottom"
 
         Args:
             toolbar: toolbar to use
@@ -113,10 +115,8 @@ class MainWindow(QtWidgets.QMainWindow):
             raise InvalidParamError(position, TOOLBAR_AREAS)
         self.addToolBar(TOOLBAR_AREAS[position], toolbar)
 
-    def add_toolbar_break(self, position: str = "top"):
+    def add_toolbar_break(self, position: ToolbarAreaStr = "top"):
         """Adds a toolbar break to the given area behind the last item.
-
-        Valid values for position: "left", "right", "top", "bottom"
 
         Args:
             position: position of the toolbar
@@ -165,7 +165,11 @@ class MainWindow(QtWidgets.QMainWindow):
                     window.save_window_state()
 
     def add_widget_as_dock(
-        self, name: str, title: str, vertical: bool = True, position: str = "left"
+        self,
+        name: str,
+        title: str,
+        vertical: bool = True,
+        position: DockPositionStr = "left",
     ) -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, name=name, title=title)
         widget = widgets.Widget()
@@ -177,8 +181,10 @@ class MainWindow(QtWidgets.QMainWindow):
         dock_widget.box = layout
         return dock_widget
 
-    def add_dockwidget(self, dockwidget: QtWidgets.QDockWidget, position: str = "left"):
-        position = DOCK_POSITIONS[position]
+    def add_dockwidget(
+        self, dockwidget: QtWidgets.QDockWidget, position: DockPositionStr = "left"
+    ):
+        position = DOCK_POSITION[position]
         self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dockwidget)
 
     def remove_dockwidgets(self, dockwidgets: Sequence[QtWidgets.QDockWidget]):

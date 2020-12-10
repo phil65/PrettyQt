@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import core, widgets
@@ -15,6 +17,8 @@ GESTURE_TYPE = bidict(
     custom=QtCore.Qt.CustomGesture,
 )
 
+GestureTypeStr = Literal["tap", "tap_and_hold", "pan", "pinch", "swipe", "custom"]
+
 GESTURE_STATE = bidict(
     none=0,  # QtCore.Qt.NoGesture,
     started=QtCore.Qt.GestureStarted,
@@ -23,29 +27,29 @@ GESTURE_STATE = bidict(
     canceled=QtCore.Qt.GestureCanceled,
 )
 
+GestureStateStr = Literal["none", "started", "updated", "finished", "canceled"]
+
 GESTURE_CANCEL_POLICY = bidict(
     none=QtWidgets.QGesture.CancelNone,
     all_in_context=QtWidgets.QGesture.CancelAllInContext,
 )
 
+GestureCancelPolicyStr = Literal["none", "all_in_context"]
+
 QtWidgets.QGesture.__bases__ = (core.Object,)
 
 
 class Gesture(QtWidgets.QGesture):
-    def get_state(self) -> str:
+    def get_state(self) -> GestureStateStr:
         """Return current state.
-
-        Possible values: "none", "started", "updated", "finished", "canceled"
 
         Returns:
             state
         """
         return GESTURE_STATE.inv[self.state()]
 
-    def get_gesture_type(self) -> str:
+    def get_gesture_type(self) -> GestureTypeStr:
         """Return current gesture type.
-
-        Possible values: "tap", "tap_and_hold", "pan", "pinch", "swipe"
 
         Returns:
             gesture type
@@ -55,10 +59,8 @@ class Gesture(QtWidgets.QGesture):
     def get_hot_spot(self) -> core.PointF:
         return core.PointF(self.hotSpot())
 
-    def set_gesture_cancel_policy(self, policy: str):
+    def set_gesture_cancel_policy(self, policy: GestureCancelPolicyStr):
         """Set gesture cancel policy.
-
-        Allowed values are "none", "all_in_context"
 
         Args:
             policy: gesture cancel policy to use
@@ -70,10 +72,8 @@ class Gesture(QtWidgets.QGesture):
             raise InvalidParamError(policy, GESTURE_CANCEL_POLICY)
         self.setGestureCancelPolicy(GESTURE_CANCEL_POLICY[policy])
 
-    def get_gesture_cancel_policy(self) -> str:
+    def get_gesture_cancel_policy(self) -> GestureCancelPolicyStr:
         """Return current gesture cancel policy.
-
-        Possible values: "none", "all_in_context"
 
         Returns:
             gesture cancel policy

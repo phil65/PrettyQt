@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union
+from typing import Union, Literal
 
 from qtpy import QtWidgets
 
@@ -14,20 +14,22 @@ MODE = bidict(
     binary=QtWidgets.QLCDNumber.Bin,
 )
 
+ModeStr = Literal["hex", "decimal", "octal", "binary"]
+
 SEGMENT_STYLE = bidict(
     outline=QtWidgets.QLCDNumber.Outline,
     filled=QtWidgets.QLCDNumber.Filled,
     flat=QtWidgets.QLCDNumber.Flat,
 )
 
+SegmentStyleStr = Literal["outline", "filled", "flat"]
+
 QtWidgets.QLCDNumber.__bases__ = (widgets.Widget,)
 
 
 class LCDNumber(QtWidgets.QLCDNumber):
-    def set_mode(self, mode: str):
+    def set_mode(self, mode: ModeStr):
         """Set the lcd mode.
-
-        Allowed values are "hex", "decimal", "octal", "binary"
 
         Args:
             mode: lcd mode to use
@@ -39,20 +41,16 @@ class LCDNumber(QtWidgets.QLCDNumber):
             raise InvalidParamError(mode, MODE)
         self.setMode(MODE[mode])
 
-    def get_mode(self) -> str:
+    def get_mode(self) -> ModeStr:
         """Return current lcd mode.
-
-        Possible values: "hex", "decimal", "octal", "binary"
 
         Returns:
             lcd mode
         """
         return MODE.inv[self.mode()]
 
-    def set_segment_style(self, mode: str):
+    def set_segment_style(self, mode: SegmentStyleStr):
         """Set the segment style.
-
-        Allowed values are "outline", "filled", "flat"
 
         Args:
             mode: segment style to use
@@ -64,10 +62,8 @@ class LCDNumber(QtWidgets.QLCDNumber):
             raise InvalidParamError(mode, SEGMENT_STYLE)
         self.setSegmentStyle(SEGMENT_STYLE[mode])
 
-    def get_segment_style(self) -> str:
+    def get_segment_style(self) -> SegmentStyleStr:
         """Return current segment style.
-
-        Possible values: "outline", "filled", "flat"
 
         Returns:
             segment style

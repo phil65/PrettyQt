@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union
+from typing import Union, Literal
 
 from qtpy import QtGui, QtWidgets
 
@@ -8,23 +8,28 @@ from prettyqt import gui, widgets
 from prettyqt.utils import bidict, colors, InvalidParamError
 
 
-VIEW_MODES = bidict(
+VIEW_MODE = bidict(
     default=QtWidgets.QMdiArea.SubWindowView, tabbed=QtWidgets.QMdiArea.TabbedView
 )
 
+ViewModeStr = Literal["default", "tabbed"]
 
-WINDOW_ORDERS = bidict(
+WINDOW_ORDER = bidict(
     creation=QtWidgets.QMdiArea.CreationOrder,
     stacking=QtWidgets.QMdiArea.StackingOrder,
     activation_history=QtWidgets.QMdiArea.ActivationHistoryOrder,
 )
 
-TAB_POSITIONS = bidict(
+WindowOrderStr = Literal["creation", "stacking", "activation_history"]
+
+TAB_POSITION = bidict(
     north=QtWidgets.QTabWidget.North,
     south=QtWidgets.QTabWidget.South,
     west=QtWidgets.QTabWidget.West,
     east=QtWidgets.QTabWidget.East,
 )
+
+TabPositionStr = Literal["north", "south", "west", "east"]
 
 QtWidgets.QMdiArea.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -44,10 +49,8 @@ class MdiArea(QtWidgets.QMdiArea):
             document_mode=self.documentMode(),
         )
 
-    def set_view_mode(self, mode: str):
+    def set_view_mode(self, mode: ViewModeStr):
         """Set view mode for the MDI area.
-
-        Valid values are "default", "tabbed"
 
         Args:
             mode: view mode to use
@@ -55,24 +58,20 @@ class MdiArea(QtWidgets.QMdiArea):
         Raises:
             InvalidParamError: view mode does not exist
         """
-        if mode not in VIEW_MODES:
-            raise InvalidParamError(mode, VIEW_MODES)
-        self.setViewMode(VIEW_MODES[mode])
+        if mode not in VIEW_MODE:
+            raise InvalidParamError(mode, VIEW_MODE)
+        self.setViewMode(VIEW_MODE[mode])
 
-    def get_view_mode(self) -> str:
+    def get_view_mode(self) -> ViewModeStr:
         """Return current view mode.
-
-        Possible values: "default", "tabbed"
 
         Returns:
             view mode
         """
-        return VIEW_MODES.inv[self.viewMode()]
+        return VIEW_MODE.inv[self.viewMode()]
 
-    def set_window_order(self, mode: str):
+    def set_window_order(self, mode: WindowOrderStr):
         """Set the window order behaviour for the MDI area.
-
-        Valid values are "creation", "stacking", "activation_history"
 
         Args:
             mode: window order behaviour to use
@@ -80,24 +79,20 @@ class MdiArea(QtWidgets.QMdiArea):
         Raises:
             InvalidParamError: window order mode not existing.
         """
-        if mode not in WINDOW_ORDERS:
-            raise InvalidParamError(mode, WINDOW_ORDERS)
-        self.setActivationOrder(WINDOW_ORDERS[mode])
+        if mode not in WINDOW_ORDER:
+            raise InvalidParamError(mode, WINDOW_ORDER)
+        self.setActivationOrder(WINDOW_ORDER[mode])
 
-    def get_window_order(self) -> str:
+    def get_window_order(self) -> WindowOrderStr:
         """Return current window order.
-
-        Possible values: "creation", "stacking", "activation_history"
 
         Returns:
             view mode
         """
-        return WINDOW_ORDERS.inv[self.activationOrder()]
+        return WINDOW_ORDER.inv[self.activationOrder()]
 
-    def set_tab_position(self, position: str):
+    def set_tab_position(self, position: TabPositionStr):
         """Set tab position for the MDI area.
-
-        Valid values are "north", "south", "west", "east"
 
         Args:
             position: tabs position to use
@@ -105,19 +100,17 @@ class MdiArea(QtWidgets.QMdiArea):
         Raises:
             InvalidParamError: tab position does not exist
         """
-        if position not in TAB_POSITIONS:
-            raise InvalidParamError(position, TAB_POSITIONS)
-        self.setTabPosition(TAB_POSITIONS[position])
+        if position not in TAB_POSITION:
+            raise InvalidParamError(position, TAB_POSITION)
+        self.setTabPosition(TAB_POSITION[position])
 
-    def get_tab_position(self) -> str:
+    def get_tab_position(self) -> TabPositionStr:
         """Return current tab position.
-
-        Possible values: "north", "south", "west", "east"
 
         Returns:
             tab position
         """
-        return TAB_POSITIONS.inv[self.tabPosition()]
+        return TAB_POSITION.inv[self.tabPosition()]
 
     def set_background(
         self,

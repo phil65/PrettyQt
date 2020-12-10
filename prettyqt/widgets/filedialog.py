@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pathlib
-from typing import List, Optional, Union, Dict
+from typing import List, Optional, Union, Dict, Literal
 
 from qtpy import QtWidgets
 
@@ -9,14 +9,16 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-MODES = bidict(
+FILE_MODE = bidict(
     existing_file=QtWidgets.QFileDialog.ExistingFile,
     existing_files=QtWidgets.QFileDialog.ExistingFiles,
     any_file=QtWidgets.QFileDialog.AnyFile,
     directory=QtWidgets.QFileDialog.Directory,
 )
 
-LABELS = bidict(
+FileModeStr = Literal["existing_file", "existing_files", "any_file", "directory"]
+
+LABEL = bidict(
     look_in=QtWidgets.QFileDialog.LookIn,
     filename=QtWidgets.QFileDialog.FileName,
     filetype=QtWidgets.QFileDialog.FileType,
@@ -24,13 +26,17 @@ LABELS = bidict(
     reject=QtWidgets.QFileDialog.Reject,
 )
 
-ACCEPT_MODES = bidict(
+LabelStr = Literal["look_in", "filename", "filetype", "accept"]
+
+ACCEPT_MODE = bidict(
     save=QtWidgets.QFileDialog.AcceptSave, open=QtWidgets.QFileDialog.AcceptOpen
 )
 
-VIEW_MODES = bidict(detail=QtWidgets.QFileDialog.Detail, list=QtWidgets.QFileDialog.List)
+AcceptModeStr = Literal["save", "open"]
 
-FILTERS = bidict(dirs=core.Dir.Dirs, all_dirs=core.Dir.AllDirs, files=core.Dir.Files)
+VIEW_MODE = bidict(detail=QtWidgets.QFileDialog.Detail, list=QtWidgets.QFileDialog.List)
+
+ViewModeStr = Literal["detail", "list"]
 
 
 QtWidgets.QFileDialog.__bases__ = (widgets.BaseDialog,)
@@ -42,11 +48,11 @@ class FileDialog(QtWidgets.QFileDialog):
     def __init__(
         self,
         path: Union[None, str, pathlib.Path] = None,
-        mode: str = "open",
+        mode: AcceptModeStr = "open",
         caption: Optional[str] = None,
         path_id: Optional[str] = None,
         extension_filter: Optional[dict] = None,
-        file_mode: str = "existing_files",
+        file_mode: FileModeStr = "existing_files",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent=parent)
@@ -84,10 +90,8 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setDefaultSuffix(state["default_suffix"])
         self.setSupportedSchemes(state["supported_schemes"])
 
-    def set_accept_mode(self, mode: str):
+    def set_accept_mode(self, mode: AcceptModeStr):
         """Set accept mode.
-
-        possible values are "save", "open"
 
         Args:
             mode: accept mode to use
@@ -95,24 +99,20 @@ class FileDialog(QtWidgets.QFileDialog):
         Raises:
             InvalidParamError: invalid accept mode
         """
-        if mode not in ACCEPT_MODES:
-            raise InvalidParamError(mode, ACCEPT_MODES)
-        self.setAcceptMode(ACCEPT_MODES[mode])
+        if mode not in ACCEPT_MODE:
+            raise InvalidParamError(mode, ACCEPT_MODE)
+        self.setAcceptMode(ACCEPT_MODE[mode])
 
-    def get_accept_mode(self) -> str:
+    def get_accept_mode(self) -> AcceptModeStr:
         """Return accept mode.
-
-        possible values are "save", "open"
 
         Returns:
             accept mode
         """
-        return ACCEPT_MODES.inv[self.acceptMode()]
+        return ACCEPT_MODE.inv[self.acceptMode()]
 
-    def set_view_mode(self, mode: str):
+    def set_view_mode(self, mode: ViewModeStr):
         """Set view mode.
-
-        possible values are "detail", "list"
 
         Args:
             mode: view mode to use
@@ -120,68 +120,57 @@ class FileDialog(QtWidgets.QFileDialog):
         Raises:
             InvalidParamError: invalid view mode
         """
-        if mode not in VIEW_MODES:
-            raise InvalidParamError(mode, VIEW_MODES)
-        self.setViewMode(VIEW_MODES[mode])
+        if mode not in VIEW_MODE:
+            raise InvalidParamError(mode, VIEW_MODE)
+        self.setViewMode(VIEW_MODE[mode])
 
-    def get_view_mode(self) -> str:
+    def get_view_mode(self) -> ViewModeStr:
         """Return view mode.
-
-        possible values are "detail", "list"
 
         Returns:
             view mode
         """
-        return VIEW_MODES.inv[self.viewMode()]
+        return VIEW_MODE.inv[self.viewMode()]
 
-    def set_label_text(self, label: str, text: str):
+    def set_label_text(self, label: LabelStr, text: str):
         """Set the label text for button label.
-
-        possible values for label are "look_in", "filename", "filetype",
-        "accept", "reject"
 
         Args:
             label: button to set text for
             text: text to use
         """
-        if label not in LABELS:
-            raise InvalidParamError(label, LABELS)
-        self.setLabelText(LABELS[label], text)
+        if label not in LABEL:
+            raise InvalidParamError(label, LABEL)
+        self.setLabelText(LABEL[label], text)
 
-    def get_label_text(self, label) -> str:
+    def get_label_text(self, label: LabelStr) -> str:
         """Return label text.
-
-        possible values are "look_in", "filename", "filetype", "accept", "reject"
 
         Returns:
             label text
         """
-        return self.labelText(LABELS.inv[label])
+        return self.labelText(LABEL[label])
 
-    def get_file_mode(self) -> str:
+    def get_file_mode(self) -> FileModeStr:
         """Return file mode.
-
-        possible values are "existing_file", "existing_files", "any_file", "directory"
 
         Returns:
             file mode
         """
-        return MODES.inv[self.fileMode()]
+        return FILE_MODE.inv[self.fileMode()]
 
-    def set_file_mode(self, mode: str):
+    def set_file_mode(self, mode: FileModeStr):
         """Set the file mode of the dialog.
-
-        allowed values are "existing_file", "existing_files", "any_file" "directory"
 
         Args:
             mode: mode to use
         """
-        self.setFileMode(MODES[mode])
+        self.setFileMode(FILE_MODE[mode])
 
     def set_filter(self, to_filter: str):
-        if to_filter not in FILTERS:
-            raise InvalidParamError(to_filter, FILTERS)
-        self.setFilter(FILTERS[to_filter])
+        if to_filter not in core.dir.FILTERS:
+            raise InvalidParamError(to_filter, core.dir.FILTERS)
+        self.setFilter(core.dir.FILTERS[to_filter])
 
     def selected_files(self) -> List[pathlib.Path]:
         return [pathlib.Path(p) for p in self.selectedFiles()]

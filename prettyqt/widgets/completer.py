@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional
+from typing import Optional, Literal
 
 from qtpy import QtWidgets, QtCore
 
@@ -8,23 +8,29 @@ from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 
-COMPLETION_MODES = bidict(
+COMPLETION_MODE = bidict(
     popup=QtWidgets.QCompleter.PopupCompletion,
     inline=QtWidgets.QCompleter.InlineCompletion,
     unfiltered_popup=QtWidgets.QCompleter.UnfilteredPopupCompletion,
 )
 
-SORT_MODES = bidict(
+CompletionModeStr = Literal["popup", "inline", "unfiltered_popup"]
+
+SORT_MODE = bidict(
     unsorted=QtWidgets.QCompleter.UnsortedModel,
     case_sensitive=QtWidgets.QCompleter.CaseSensitivelySortedModel,
     case_insensitive=QtWidgets.QCompleter.CaseInsensitivelySortedModel,
 )
 
-FILTER_MODES = bidict(
+SortModeStr = Literal["unsorted", "case_sensitive", "case_insensitive"]
+
+FILTER_MODE = bidict(
     starts_with=QtCore.Qt.MatchStartsWith,
     contains=QtCore.Qt.MatchContains,
     ends_with=QtCore.Qt.MatchEndsWith,
 )
+
+FilterModeStr = Literal["starts_with", "contains", "ends_with"]
 
 
 QtWidgets.QCompleter.__bases__ = (core.Object,)
@@ -34,10 +40,8 @@ class Completer(QtWidgets.QCompleter):
     def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
 
-    def set_sort_mode(self, mode: Optional[str]):
+    def set_sort_mode(self, mode: Optional[SortModeStr]):
         """Set sort mode to use.
-
-        Allowed values are "unsorted", "case_sensitive", "case_insensitive"
 
         Args:
             mode: sort mode to use
@@ -47,24 +51,20 @@ class Completer(QtWidgets.QCompleter):
         """
         if mode is None:
             mode = "unsorted"
-        if mode not in SORT_MODES:
-            raise InvalidParamError(mode, SORT_MODES)
-        self.setModelSorting(SORT_MODES[mode])
+        if mode not in SORT_MODE:
+            raise InvalidParamError(mode, SORT_MODE)
+        self.setModelSorting(SORT_MODE[mode])
 
-    def get_sort_mode(self) -> str:
+    def get_sort_mode(self) -> SortModeStr:
         """Return current sort mode.
-
-        Possible values: "unsorted", "case_sensitive", "case_insensitive"
 
         Returns:
             sort mode
         """
-        return SORT_MODES.inv[self.modelSorting()]
+        return SORT_MODE.inv[self.modelSorting()]
 
-    def set_completion_mode(self, mode: str):
+    def set_completion_mode(self, mode: CompletionModeStr):
         """Set completion mode to use.
-
-        Allowed values are "popup", "inline", "unfiltered_popup"
 
         Args:
             mode: completion mode to use
@@ -72,24 +72,20 @@ class Completer(QtWidgets.QCompleter):
         Raises:
             InvalidParamError: completion mode does not exist
         """
-        if mode not in COMPLETION_MODES:
-            raise InvalidParamError(mode, COMPLETION_MODES)
-        self.setCompletionMode(COMPLETION_MODES[mode])
+        if mode not in COMPLETION_MODE:
+            raise InvalidParamError(mode, COMPLETION_MODE)
+        self.setCompletionMode(COMPLETION_MODE[mode])
 
-    def get_completion_mode(self) -> str:
+    def get_completion_mode(self) -> CompletionModeStr:
         """Return current completion mode.
-
-        Possible values: "popup", "inline", "unfiltered_popup"
 
         Returns:
             completion mode
         """
-        return COMPLETION_MODES.inv[self.completionMode()]
+        return COMPLETION_MODE.inv[self.completionMode()]
 
-    def set_filter_mode(self, mode: str):
+    def set_filter_mode(self, mode: FilterModeStr):
         """Set filter mode to use.
-
-        Allowed values are "starts_with", "contains", "ends_with"
 
         Args:
             mode: filter mode to use
@@ -97,19 +93,17 @@ class Completer(QtWidgets.QCompleter):
         Raises:
             InvalidParamError: filter mode does not exist
         """
-        if mode not in FILTER_MODES:
-            raise InvalidParamError(mode, FILTER_MODES)
-        self.setFilterMode(FILTER_MODES[mode])
+        if mode not in FILTER_MODE:
+            raise InvalidParamError(mode, FILTER_MODE)
+        self.setFilterMode(FILTER_MODE[mode])
 
-    def get_filter_mode(self) -> str:
+    def get_filter_mode(self) -> FilterModeStr:
         """Return current filter mode.
-
-        Possible values: "starts_with", "contains", "ends_with"
 
         Returns:
             filter mode
         """
-        return FILTER_MODES.inv[self.filterMode()]
+        return FILTER_MODE.inv[self.filterMode()]
 
 
 if __name__ == "__main__":

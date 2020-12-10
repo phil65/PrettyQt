@@ -1,9 +1,11 @@
+from typing import Literal
+
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
-ANCHORS = bidict(
+EDGE = bidict(
     left=QtCore.Qt.AnchorLeft,
     horizontal_center=QtCore.Qt.AnchorHorizontalCenter,
     right=QtCore.Qt.AnchorRight,
@@ -12,12 +14,18 @@ ANCHORS = bidict(
     bottom=QtCore.Qt.AnchorBottom,
 )
 
-CORNERS = bidict(
+EdgeStr = Literal[
+    "left", "horizontal_center", "right", "top", "vertical_center", "bottom"
+]
+
+CORNER = bidict(
     top_left=QtCore.Qt.TopLeftCorner,
     top_right=QtCore.Qt.TopRightCorner,
     bottom_left=QtCore.Qt.BottomLeftCorner,
     bottom_right=QtCore.Qt.BottomRightCorner,
 )
+
+CornerStr = Literal["top_left", "top_right", "bottom_left", "bottom_right"]
 
 QtWidgets.QGraphicsAnchorLayout.__bases__ = (widgets.GraphicsLayout,)
 
@@ -26,28 +34,28 @@ class GraphicsAnchorLayout(QtWidgets.QGraphicsAnchorLayout):
     def add_anchor(
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,
-        first_edge: str,
+        first_edge: EdgeStr,
         second_item: QtWidgets.QGraphicsLayoutItem,
-        second_edge: str,
-    ):
-        self.addAnchor(first_item, ANCHORS[first_edge], second_item, ANCHORS[second_edge])
+        second_edge: EdgeStr,
+    ) -> QtWidgets.QGraphicsAnchor:
+        return self.addAnchor(
+            first_item, EDGE[first_edge], second_item, EDGE[second_edge]
+        )
 
     def get_anchor(
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,
-        first_edge: str,
+        first_edge: EdgeStr,
         second_item: QtWidgets.QGraphicsLayoutItem,
-        second_edge: str,
-    ):
-        return self.anchor(
-            first_item, ANCHORS[first_edge], second_item, ANCHORS[second_edge]
-        )
+        second_edge: EdgeStr,
+    ) -> QtWidgets.QGraphicsAnchor:
+        return self.anchor(first_item, EDGE[first_edge], second_item, EDGE[second_edge])
 
     def add_anchors(
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,
         second_item: QtWidgets.QGraphicsLayoutItem,
-        orientation: str,
+        orientation: Literal["horizontal", "vertical"],
     ):
         if orientation == "horizontal":
             orientation = QtCore.Qt.Horizontal
@@ -60,12 +68,12 @@ class GraphicsAnchorLayout(QtWidgets.QGraphicsAnchorLayout):
     def add_corner_anchors(
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,
-        first_corner: str,
+        first_corner: CornerStr,
         second_item: QtWidgets.QGraphicsLayoutItem,
-        second_corner: str,
+        second_corner: CornerStr,
     ):
         self.addCornerAnchors(
-            first_item, CORNERS[first_corner], second_item, CORNERS[second_corner]
+            first_item, CORNER[first_corner], second_item, CORNER[second_corner]
         )
 
 

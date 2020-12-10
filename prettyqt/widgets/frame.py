@@ -1,18 +1,22 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-SHADOWS = bidict(
+SHADOW = bidict(
     plain=QtWidgets.QFrame.Plain,
     raised=QtWidgets.QFrame.Raised,
     sunken=QtWidgets.QFrame.Sunken,
 )
 
-SHAPES = bidict(
+ShadowStr = Literal["plain", "raised", "sunken"]
+
+FRAME_SHAPE = bidict(
     no_frame=QtWidgets.QFrame.NoFrame,
     box=QtWidgets.QFrame.Box,
     panel=QtWidgets.QFrame.Panel,
@@ -22,14 +26,17 @@ SHAPES = bidict(
     win_panel=QtWidgets.QFrame.WinPanel,
 )
 
+FrameShapeStr = Literal[
+    "no_frame", "box", "panel", "styled_panel", "h_line", "v_line", "win_panel"
+]
+
+
 QtWidgets.QFrame.__bases__ = (widgets.Widget,)
 
 
 class Frame(QtWidgets.QFrame):
-    def set_frame_shadow(self, style: str):
+    def set_frame_shadow(self, style: ShadowStr):
         """Set frame shadow.
-
-        Allowed values are "plain", "raised", "sunken"
 
         Args:
             style: frame style to use
@@ -37,24 +44,20 @@ class Frame(QtWidgets.QFrame):
         Raises:
             InvalidParamError: style does not exist
         """
-        if style not in SHADOWS:
-            raise InvalidParamError(style, SHADOWS)
-        self.setFrameShadow(SHADOWS[style])
+        if style not in SHADOW:
+            raise InvalidParamError(style, SHADOW)
+        self.setFrameShadow(SHADOW[style])
 
-    def get_frame_shadow(self) -> str:
+    def get_frame_shadow(self) -> ShadowStr:
         """Return current frame shadow.
-
-        Possible values: "plain", "raised", "sunken"
 
         Returns:
             frame style
         """
-        return SHADOWS.inv[self.frameShadow()]
+        return SHADOW.inv[self.frameShadow()]
 
-    def set_frame_shape(self, shape: str):
+    def set_frame_shape(self, shape: FrameShapeStr):
         """Set frame shape.
-
-        Allowed values are "plain", "raised", "sunken"
 
         Args:
             shape: frame shape to use
@@ -62,16 +65,14 @@ class Frame(QtWidgets.QFrame):
         Raises:
             InvalidParamError: shape does not exist
         """
-        if shape not in SHAPES:
-            raise InvalidParamError(shape, SHAPES)
-        self.setFrameShape(SHAPES[shape])
+        if shape not in FRAME_SHAPE:
+            raise InvalidParamError(shape, FRAME_SHAPE)
+        self.setFrameShape(FRAME_SHAPE[shape])
 
-    def get_frame_shape(self) -> str:
+    def get_frame_shape(self) -> FrameShapeStr:
         """Return current frame shape.
-
-        Possible values: "plain", "raised", "sunken"
 
         Returns:
             frame shape
         """
-        return SHAPES.inv[self.frameShape()]
+        return FRAME_SHAPE.inv[self.frameShape()]

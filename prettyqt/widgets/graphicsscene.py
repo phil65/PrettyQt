@@ -1,4 +1,4 @@
-from typing import List, Optional, Union, Tuple
+from typing import List, Optional, Union, Tuple, Literal
 
 from qtpy import QtWidgets, QtGui, QtCore
 
@@ -6,12 +6,19 @@ from prettyqt import core, widgets, gui
 from prettyqt.utils import InvalidParamError, bidict
 
 
-ITEM_SELECTION_MODES = bidict(
+ITEM_SELECTION_MODE = bidict(
     contains_shape=QtCore.Qt.ContainsItemShape,
     intersects_shape=QtCore.Qt.IntersectsItemShape,
     contains_bounding_rect=QtCore.Qt.ContainsItemBoundingRect,
     intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
 )
+
+ItemSelectionModeStr = Literal[
+    "contains_shape",
+    "intersects_shape",
+    "contains_bounding_rect",
+    "intersects_bounding_rect",
+]
 
 SCENE_LAYERS = bidict(
     item=QtWidgets.QGraphicsScene.ItemLayer,
@@ -20,9 +27,18 @@ SCENE_LAYERS = bidict(
     all=QtWidgets.QGraphicsScene.AllLayers,
 )
 
-ITEM_INDEX_METHODS = bidict(
+SceneLayerStr = Literal[
+    "contains_shape",
+    "intersects_shape",
+    "contains_bounding_rect",
+    "intersects_bounding_rect",
+]
+
+ITEM_INDEX_METHOD = bidict(
     bsp_tree=QtWidgets.QGraphicsScene.BspTreeIndex, none=QtWidgets.QGraphicsScene.NoIndex
 )
+
+ItemIndexMethodStr = Literal["bsp_tree", "none"]
 
 QtWidgets.QGraphicsScene.__bases__ = (core.Object,)
 
@@ -184,11 +200,13 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
         return g_item
 
     def colliding_items(
-        self, item: QtWidgets.QGraphicsItem, mode: str = "intersects_shape"
+        self,
+        item: QtWidgets.QGraphicsItem,
+        mode: ItemSelectionModeStr = "intersects_shape",
     ) -> List[QtWidgets.QGraphicsItem]:
-        if mode not in ITEM_SELECTION_MODES:
-            raise InvalidParamError(mode, ITEM_SELECTION_MODES)
-        return self.collidingItems(item, ITEM_SELECTION_MODES[mode])
+        if mode not in ITEM_SELECTION_MODE:
+            raise InvalidParamError(mode, ITEM_SELECTION_MODE)
+        return self.collidingItems(item, ITEM_SELECTION_MODE[mode])
 
     def add_item_group(
         self, *items: QtWidgets.QGraphicsItem
@@ -198,10 +216,8 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
             group.addToGroup(item)
         return group
 
-    def set_item_index_method(self, method: str):
+    def set_item_index_method(self, method: ItemIndexMethodStr):
         """Set item index method.
-
-        possible values are "bsp_tree", "none"
 
         Args:
             method: item index method to use
@@ -209,19 +225,17 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
         Raises:
             InvalidParamError: invalid item index method
         """
-        if method not in ITEM_INDEX_METHODS:
-            raise InvalidParamError(method, ITEM_INDEX_METHODS)
-        self.setItemIndexMethod(ITEM_INDEX_METHODS[method])
+        if method not in ITEM_INDEX_METHOD:
+            raise InvalidParamError(method, ITEM_INDEX_METHOD)
+        self.setItemIndexMethod(ITEM_INDEX_METHOD[method])
 
-    def get_item_index_method(self) -> str:
+    def get_item_index_method(self) -> ItemIndexMethodStr:
         """Return item index method.
-
-        possible values are "bsp_tree", "none"
 
         Returns:
             item index method
         """
-        return ITEM_INDEX_METHODS.inv[self.itemIndexMethod()]
+        return ITEM_INDEX_METHOD.inv[self.itemIndexMethod()]
 
 
 if __name__ == "__main__":

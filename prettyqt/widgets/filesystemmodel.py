@@ -16,25 +16,6 @@ if core.VersionNumber.get_qt_version() >= (5, 14, 0):
         no_custom_icons=QtWidgets.QFileSystemModel.DontUseCustomDirectoryIcons,
     )
 
-FILTERS = bidict(
-    dirs=core.Dir.Dirs,
-    all_dirs=core.Dir.AllDirs,
-    files=core.Dir.Files,
-    drives=core.Dir.Drives,
-    no_sym_links=core.Dir.NoSymLinks,
-    no_dot_and_dotdot=core.Dir.NoDotAndDotDot,
-    no_dot=core.Dir.NoDot,
-    no_dotdot=core.Dir.NoDotDot,
-    all_entries=core.Dir.AllEntries,
-    readable=core.Dir.Readable,
-    writable=core.Dir.Writable,
-    executable=core.Dir.Executable,
-    modified=core.Dir.Modified,
-    hidden=core.Dir.Hidden,
-    system=core.Dir.System,
-    case_sensitive=core.Dir.CaseSensitive,
-)
-
 QtWidgets.QFileSystemModel.__bases__ = (core.AbstractItemModel,)
 
 
@@ -89,10 +70,10 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
         self.setNameFilters(filters)
         self.setNameFilterDisables(not hide)
 
-    def set_filter(self, filter_mode: str):
-        if filter_mode not in FILTERS:
-            raise InvalidParamError(filter_mode, FILTERS)
-        self.setFilter(FILTERS[filter_mode])
+    def set_filter(self, filter_mode: core.dir.FilterStr):
+        if filter_mode not in core.dir.FILTERS:
+            raise InvalidParamError(filter_mode, core.dir.FILTERS)
+        self.setFilter(core.dir.FILTERS[filter_mode])
 
     def get_paths(self, indexes: Sequence[QtCore.QModelIndex]) -> List[pathlib.Path]:
         paths = [i.data(self.DATA_ROLE) for i in indexes]

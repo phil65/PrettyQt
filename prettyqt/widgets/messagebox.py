@@ -40,11 +40,11 @@ BUTTONS = bidict(
     ignore=QtWidgets.QMessageBox.Ignore,
 )
 
-TEXT_FORMATS = bidict(
+TEXT_FORMAT = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
 )
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    TEXT_FORMATS["markdown"] = QtCore.Qt.MarkdownText
+    TEXT_FORMAT["markdown"] = QtCore.Qt.MarkdownText
 
 QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 
@@ -145,9 +145,9 @@ class MessageBox(QtWidgets.QMessageBox):
         Raises:
             InvalidParamError: text format does not exist
         """
-        if text_format not in TEXT_FORMATS:
-            raise InvalidParamError(text_format, TEXT_FORMATS)
-        self.setTextFormat(TEXT_FORMATS[text_format])
+        if text_format not in TEXT_FORMAT:
+            raise InvalidParamError(text_format, TEXT_FORMAT)
+        self.setTextFormat(TEXT_FORMAT[text_format])
 
     def get_text_format(self) -> str:
         """Return current text format.
@@ -157,7 +157,7 @@ class MessageBox(QtWidgets.QMessageBox):
         Returns:
             text format
         """
-        return TEXT_FORMATS.inv[self.textFormat()]
+        return TEXT_FORMAT.inv[self.textFormat()]
 
 
 if __name__ == "__main__":

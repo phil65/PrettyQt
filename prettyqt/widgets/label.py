@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pathlib
 
-from typing import List, Optional, Union
+from typing import List, Optional, Union, Literal
 
 from qtpy import QtCore, QtWidgets
 
@@ -36,12 +36,14 @@ TEXT_INTERACTION = bidict(
     like_text_browser=QtCore.Qt.TextBrowserInteraction,
 )
 
-TEXT_FORMATS = bidict(
+TEXT_FORMAT = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
 )
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    TEXT_FORMATS["markdown"] = QtCore.Qt.MarkdownText
+    TEXT_FORMAT["markdown"] = QtCore.Qt.MarkdownText
+
+TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 
 QtWidgets.QLabel.__bases__ = (widgets.Frame,)
@@ -112,10 +114,8 @@ class Label(QtWidgets.QLabel):
         self.setIndent(indent)
         return self
 
-    def set_text_format(self, text_format: str) -> Label:
+    def set_text_format(self, text_format: TextFormatStr) -> Label:
         """Set the text format.
-
-        Allowed values are "rich", "plain", "auto", "markdown"
 
         Args:
             text_format: text format to use
@@ -123,20 +123,18 @@ class Label(QtWidgets.QLabel):
         Raises:
             InvalidParamError: text format does not exist
         """
-        if text_format not in TEXT_FORMATS:
-            raise InvalidParamError(text_format, TEXT_FORMATS)
-        self.setTextFormat(TEXT_FORMATS[text_format])
+        if text_format not in TEXT_FORMAT:
+            raise InvalidParamError(text_format, TEXT_FORMAT)
+        self.setTextFormat(TEXT_FORMAT[text_format])
         return self
 
-    def get_text_format(self) -> str:
+    def get_text_format(self) -> TextFormatStr:
         """Return current text format.
-
-        Possible values: "rich", "plain", "auto", "markdown"
 
         Returns:
             text format
         """
-        return TEXT_FORMATS.inv[self.textFormat()]
+        return TEXT_FORMAT.inv[self.textFormat()]
 
     def set_text_interaction(self, *types: str) -> Label:
         """Set the text interaction mode.

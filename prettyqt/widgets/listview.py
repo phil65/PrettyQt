@@ -6,7 +6,7 @@ from prettyqt import widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-VIEW_MODES = bidict(list=QtWidgets.QListView.ListMode, icon=QtWidgets.QListView.IconMode)
+VIEW_MODE = bidict(list=QtWidgets.QListView.ListMode, icon=QtWidgets.QListView.IconMode)
 
 
 QtWidgets.QListView.__bases__ = (widgets.AbstractItemView,)
@@ -24,9 +24,9 @@ class ListView(QtWidgets.QListView):
         Raises:
             InvalidParamError: invalid view mode
         """
-        if mode not in VIEW_MODES:
-            raise InvalidParamError(mode, VIEW_MODES)
-        self.setViewMode(VIEW_MODES[mode])
+        if mode not in VIEW_MODE:
+            raise InvalidParamError(mode, VIEW_MODE)
+        self.setViewMode(VIEW_MODE[mode])
 
     def get_view_mode(self) -> str:
         """Return view mode.
@@ -36,7 +36,7 @@ class ListView(QtWidgets.QListView):
         Returns:
             view mode
         """
-        return VIEW_MODES.inv[self.viewMode()]
+        return VIEW_MODE.inv[self.viewMode()]
 
 
 if __name__ == "__main__":

@@ -1,8 +1,50 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 import pathlib
 
 from qtpy import QtCore
+
+from prettyqt.utils import bidict
+
+FILTERS = bidict(
+    dirs=QtCore.QDir.Dirs,
+    all_dirs=QtCore.QDir.AllDirs,
+    files=QtCore.QDir.Files,
+    drives=QtCore.QDir.Drives,
+    no_sym_links=QtCore.QDir.NoSymLinks,
+    no_dot_and_dotdot=QtCore.QDir.NoDotAndDotDot,
+    no_dot=QtCore.QDir.NoDot,
+    no_dotdot=QtCore.QDir.NoDotDot,
+    all_entries=QtCore.QDir.AllEntries,
+    readable=QtCore.QDir.Readable,
+    writable=QtCore.QDir.Writable,
+    executable=QtCore.QDir.Executable,
+    modified=QtCore.QDir.Modified,
+    hidden=QtCore.QDir.Hidden,
+    system=QtCore.QDir.System,
+    case_sensitive=QtCore.QDir.CaseSensitive,
+)
+
+FilterStr = Literal[
+    "dirs",
+    "all_dirs",
+    "files",
+    "drives",
+    "no_sym_links",
+    "no_dot_and_dotdot",
+    "no_dot",
+    "no_dotdot",
+    "all_entries",
+    "readable",
+    "writable",
+    "executable",
+    "modified",
+    "hidden",
+    "system",
+    "case_sensitive",
+]
 
 
 class Dir(QtCore.QDir):

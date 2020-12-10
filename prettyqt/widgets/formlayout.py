@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Dict, Union, Tuple
+from __future__ import annotations
+
+from typing import Optional, Dict, Union, Tuple, Literal
 
 from qtpy import QtWidgets
 
@@ -8,11 +10,13 @@ from prettyqt import widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-ROLES = bidict(
+ROLE = bidict(
     left=QtWidgets.QFormLayout.LabelRole,
     right=QtWidgets.QFormLayout.FieldRole,
     both=QtWidgets.QFormLayout.SpanningRole,
 )
+
+RoleStr = Literal["left", "right", "both"]
 
 ROW_WRAP_POLICY = bidict(
     dont_wrap=QtWidgets.QFormLayout.DontWrapRows,
@@ -20,11 +24,17 @@ ROW_WRAP_POLICY = bidict(
     wrap_all=QtWidgets.QFormLayout.WrapAllRows,
 )
 
+RowWrapPolicyStr = Literal["dont_wrap", "wrap_long", "wrap_all"]
+
 FIELD_GROWTH_POLICY = bidict(
     fields_stay_at_size=QtWidgets.QFormLayout.FieldsStayAtSizeHint,
     expanding_fields_grow=QtWidgets.QFormLayout.ExpandingFieldsGrow,
     all_non_fixed_fields_grow=QtWidgets.QFormLayout.AllNonFixedFieldsGrow,
 )
+
+FieldGrowthPolicyStr = Literal[
+    "fields_stay_at_size", "expanding_fields_grow", "all_non_fixed_fields_grow"
+]
 
 QtWidgets.QFormLayout.__bases__ = (widgets.Layout,)
 
@@ -36,7 +46,7 @@ class FormLayout(QtWidgets.QFormLayout):
         self.setVerticalSpacing(8)
 
     def __setitem__(
-        self, index: Union[int, Tuple[int, str]], value: Union[str, QtWidgets.QWidget]
+        self, index: Union[int, Tuple[int, RoleStr]], value: Union[str, QtWidgets.QWidget]
     ):
         if isinstance(index, tuple):
             row = index[0]
@@ -67,7 +77,7 @@ class FormLayout(QtWidgets.QFormLayout):
         positions = []
         for i, item in enumerate(list(self)):
             widget_list.append(item)
-            positions.append(self.get_item_pos(i))
+            positions.append(self.get_item_position(i))
         return dict(widgets=widget_list, positions=positions)
 
     def __setstate__(self, state):
@@ -76,29 +86,33 @@ class FormLayout(QtWidgets.QFormLayout):
             self.set_widget(item, pos[0], pos[1])
 
     def set_widget(
-        self, widget: Union[str, QtWidgets.QWidget], row: int, role: str = "both"
+        self, widget: Union[str, QtWidgets.QWidget], row: int, role: RoleStr = "both"
     ):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
-        self.setWidget(row, ROLES[role], widget)
+        self.setWidget(row, ROLE[role], widget)
 
-    def get_widget(self, row: int, role: str = "both"):
-        item = self.itemAt(row, ROLES[role])
+    def get_widget(
+        self, row: int, role: RoleStr = "both"
+    ) -> Union[QtWidgets.QLayout, QtWidgets.QWidget]:
+        item = self.itemAt(row, ROLE[role])
         widget = item.widget()
         if widget is None:
             widget = item.layout()
         return widget
 
-    def get_item_pos(self, index):
+    def get_item_position(self, index: int) -> Optional[Tuple[int, RoleStr]]:
         pos = self.getItemPosition(index)
-        return pos[0], ROLES.inv[pos[1]]
+        if pos[0] == -1:
+            return None
+        return pos[0], ROLE.inv[pos[1]]
 
     @classmethod
     def build_from_dict(
         cls,
         dct: Dict[QtWidgets.QWidget, QtWidgets.QWidget],
         parent: Optional[QtWidgets.QWidget] = None,
-    ):
+    ) -> FormLayout:
         formlayout = cls(parent)
         for i, (k, v) in enumerate(dct.items(), start=1):
             if k is not None:
@@ -114,10 +128,8 @@ class FormLayout(QtWidgets.QFormLayout):
             if isinstance(i, tuple):
                 self.addRow(*i)
 
-    def set_row_wrap_policy(self, policy: str):
+    def set_row_wrap_policy(self, policy: RowWrapPolicyStr):
         """Set row wrap policy to use.
-
-        Allowed values are "dont_wrap", "wrap_long", "wrap_all"
 
         Args:
             policy: row wrap policy to use
@@ -129,21 +141,16 @@ class FormLayout(QtWidgets.QFormLayout):
             raise InvalidParamError(policy, ROW_WRAP_POLICY)
         self.setRowWrapPolicy(ROW_WRAP_POLICY[policy])
 
-    def get_row_wrap_policy(self) -> str:
+    def get_row_wrap_policy(self) -> RowWrapPolicyStr:
         """Return current row wrap policy.
-
-        Possible values: "dont_wrap", "wrap_long", "wrap_all"
 
         Returns:
             row wrap policy
         """
         return ROW_WRAP_POLICY.inv[self.rowWrapPolicy()]
 
-    def set_field_growth_policy(self, policy: str):
+    def set_field_growth_policy(self, policy: FieldGrowthPolicyStr):
         """Set field growth policy to use.
-
-        Allowed values: "fields_stay_at_size", "expanding_fields_grow",
-                        "all_non_fixed_fields_grow"
 
         Args:
             policy: field growth policy to use
@@ -155,11 +162,8 @@ class FormLayout(QtWidgets.QFormLayout):
             raise InvalidParamError(policy, FIELD_GROWTH_POLICY)
         self.setFieldGrowthPolicy(FIELD_GROWTH_POLICY[policy])
 
-    def get_field_growth_policy(self) -> str:
+    def get_field_growth_policy(self) -> FieldGrowthPolicyStr:
         """Return current field growth policy.
-
-        Possible values: "fields_stay_at_size", "expanding_fields_grow",
-                         "all_non_fixed_fields_grow"
 
         Returns:
             field growth policy

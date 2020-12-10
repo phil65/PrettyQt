@@ -6,7 +6,7 @@ from prettyqt import gui, core
 from prettyqt.utils import bidict, InvalidParamError
 
 
-STATES = bidict(
+STATE = bidict(
     unchecked=QtCore.Qt.Unchecked,
     partial=QtCore.Qt.PartiallyChecked,
     checked=QtCore.Qt.Checked,
@@ -64,9 +64,9 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in STATES:
-            raise InvalidParamError(state, STATES)
-        self.setCheckState(STATES[state])
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
+        self.setCheckState(STATE[state])
 
     def get_checkstate(self) -> str:
         """Return checkstate.
@@ -76,7 +76,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         Returns:
             checkstate
         """
-        return STATES.inv[self.checkState()]
+        return STATE.inv[self.checkState()]
 
     def get_background(self) -> gui.Brush:
         return gui.Brush(self.background())

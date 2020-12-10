@@ -14,7 +14,7 @@ ITEM_SELECTION_MODE = bidict(
     intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
 )
 
-ITEM_SELECTION_MODE_STR = Literal[
+ItemSelectionModeStr = Literal[
     "contains_shape",
     "intersects_shape",
     "contains_bounding_rect",
@@ -38,7 +38,7 @@ MODALITY = bidict(
     scene=QtWidgets.QGraphicsItem.SceneModal,
 )
 
-MODALITY_STR = Literal["none", "panel", "scene"]
+PanelModalityStr = Literal["none", "panel", "scene"]
 
 
 class GraphicsItem(QtWidgets.QGraphicsItem):
@@ -60,7 +60,7 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
         self.setFocus(FOCUS_REASONS[reason])
 
     def colliding_items(
-        self, mode: ITEM_SELECTION_MODE_STR = "intersects_shape"
+        self, mode: ItemSelectionModeStr = "intersects_shape"
     ) -> List[QtWidgets.QGraphicsItem]:
         if mode not in ITEM_SELECTION_MODE:
             raise InvalidParamError(mode, ITEM_SELECTION_MODE)
@@ -69,7 +69,7 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
     def collides_with(
         self,
         item: Union[QtGui.QPainterPath, QtWidgets.QGraphicsItem],
-        mode: ITEM_SELECTION_MODE_STR = "intersects_shape",
+        mode: ItemSelectionModeStr = "intersects_shape",
     ) -> bool:
         if mode not in ITEM_SELECTION_MODE:
             raise InvalidParamError(mode, ITEM_SELECTION_MODE)
@@ -78,7 +78,7 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
         else:
             return self.collidesWithItem(item, ITEM_SELECTION_MODE[mode])
 
-    def set_panel_modality(self, modality: MODALITY_STR) -> None:
+    def set_panel_modality(self, modality: PanelModalityStr) -> None:
         """Set panel modality.
 
         Args:
@@ -91,7 +91,7 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
             raise InvalidParamError(modality, MODALITY)
         self.setPanelModality(MODALITY[modality])
 
-    def get_panel_modality(self) -> MODALITY_STR:
+    def get_panel_modality(self) -> PanelModalityStr:
         """Get the current modality modes as a string.
 
         Returns:

@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import core, gui
@@ -11,6 +13,8 @@ CONTEXT = bidict(
     window=QtCore.Qt.WindowShortcut,
     application=QtCore.Qt.ApplicationShortcut,
 )
+
+ContextStr = Literal["widget", "widget_with_children", "window", "application"]
 
 
 QtWidgets.QShortcut.__bases__ = (core.Object,)
@@ -32,10 +36,8 @@ class Shortcut(QtWidgets.QShortcut):
             whats_this=self.whatsThis(),
         )
 
-    def set_context(self, context: str):
+    def set_context(self, context: ContextStr):
         """Set shortcut context.
-
-        Allowed values are "widget", "widget_with_children", "window", "application"
 
         Args:
             context: shortcut context
@@ -47,10 +49,8 @@ class Shortcut(QtWidgets.QShortcut):
             raise InvalidParamError(context, CONTEXT)
         self.setContext(CONTEXT[context])
 
-    def get_context(self) -> str:
+    def get_context(self) -> ContextStr:
         """Return shortcut context.
-
-        Possible values: "widget", "widget_with_children", "window", "application"
 
         Returns:
             shortcut context
