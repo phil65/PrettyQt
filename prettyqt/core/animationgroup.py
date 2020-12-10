@@ -28,16 +28,14 @@ class AnimationGroup(QtCore.QAnimationGroup):
             return anims[index]
 
     def __setitem__(self, index: int, value: QtCore.QAbstractAnimation):
-        old = self.animationAt(index)
-        self.removeAnimation(old)
+        self.takeAnimation(index)
         self.insertAnimation(index, value)
 
     def __len__(self):
         return self.animationCount()
 
     def __delitem__(self, index: int):
-        animation = self[index]
-        self.removeAnimation(animation)
+        self.takeAnimation(index)
 
     def __add__(self, other: QtCore.QAbstractAnimation):
         self.addAnimation(other)
