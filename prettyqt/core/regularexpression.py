@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Callable, Iterator, Optional, Union, Dict, Tuple
+from typing import Callable, Iterator, Optional, Union, Dict, Tuple, Literal
 
 from qtpy import QtCore
 
@@ -19,12 +19,14 @@ FLAGS = bidict(
     unicode=QtCore.QRegularExpression.UseUnicodePropertiesOption,
 )
 
-MATCH_TYPES = bidict(
+MATCH_TYPE = bidict(
     normal=QtCore.QRegularExpression.NormalMatch,
     prefer_complete=QtCore.QRegularExpression.PartialPreferCompleteMatch,
     prefer_first=QtCore.QRegularExpression.PartialPreferFirstMatch,
     no_match=QtCore.QRegularExpression.NoMatch,
 )
+
+MatchTypeStr = Literal["normal", "prefer_complete", "prefer_first", "no_match"]
 
 MATCH_OPTIONS = bidict(
     none=QtCore.QRegularExpression.NoMatchOption,
@@ -59,21 +61,21 @@ class RegularExpression(QtCore.QRegularExpression):
         self,
         text: str,
         offset: int = 0,
-        match_type: str = "normal",
+        match_type: MatchTypeStr = "normal",
         anchored: bool = False,
     ):
         options = MATCH_OPTIONS["anchored"] if anchored else MATCH_OPTIONS["none"]
-        return self.globalMatch(text, offset, MATCH_TYPES[match_type], options)
+        return self.globalMatch(text, offset, MATCH_TYPE[match_type], options)
 
     def match(
         self,
         text: str,
         offset: int = 0,
-        match_type: str = "normal",
+        match_type: MatchTypeStr = "normal",
         anchored: bool = False,
     ) -> core.RegularExpressionMatch:
         if isinstance(match_type, str):
-            match_type = MATCH_TYPES[match_type]
+            match_type = MATCH_TYPE[match_type]
         if isinstance(anchored, bool):
             options = MATCH_OPTIONS["anchored"] if anchored else MATCH_OPTIONS["none"]
         else:

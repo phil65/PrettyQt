@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from deprecated import deprecated
 from qtpy import QtCore, QtWidgets, QtGui
 from qtpy.QtCharts import QtCharts
@@ -7,12 +9,14 @@ from qtpy.QtCharts import QtCharts
 from prettyqt import charts, core, gui, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
-RUBBER_BANDS = bidict(
+RUBBER_BAND = bidict(
     none=QtCharts.QChartView.NoRubberBand,
     vertical=QtCharts.QChartView.VerticalRubberBand,
     horizontal=QtCharts.QChartView.HorizontalRubberBand,
     rectangle=QtCharts.QChartView.RectangleRubberBand,
 )
+
+RubberBandStr = Literal["none", "vertical", "horizontal", "rectangle"]
 
 ALIGNMENTS = bidict(
     left=QtCore.Qt.AlignLeft,
@@ -125,10 +129,8 @@ class ChartView(QtCharts.QChartView):
                 painter.drawImage(d, gl_widget.grabFramebuffer())
         return image
 
-    def set_rubber_band(self, typ: str):
+    def set_rubber_band(self, typ: RubberBandStr):
         """Set the rubber band type.
-
-        Allowed values are "none", "horizontal", "vertical", "rectangle"
 
         Args:
             typ: rubber band type
@@ -136,19 +138,17 @@ class ChartView(QtCharts.QChartView):
         Raises:
             InvalidParamError: rubber band type does not exist
         """
-        if typ not in RUBBER_BANDS:
-            raise InvalidParamError(typ, RUBBER_BANDS)
-        self.setRubberBand(RUBBER_BANDS[typ])
+        if typ not in RUBBER_BAND:
+            raise InvalidParamError(typ, RUBBER_BAND)
+        self.setRubberBand(RUBBER_BAND[typ])
 
-    def get_rubber_band(self) -> str:
+    def get_rubber_band(self) -> RubberBandStr:
         """Return current rubber band type.
-
-        Possible values are "none", "horizontal", "vertical", "rectangle"
 
         Returns:
             Rubber band type
         """
-        return RUBBER_BANDS.inv[self.rubberBand()]
+        return RUBBER_BAND.inv[self.rubberBand()]
 
     # def hide_legend(self):
     #     self.chart().hide_legend()

@@ -1,28 +1,33 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy import QtCore
 
 from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 
-CHILD_MODES = bidict(
+CHILD_MODE = bidict(
     exclusive=QtCore.QState.ExclusiveStates, parallel=QtCore.QState.ParallelStates
 )
+
+ChildModeStr = Literal["exclusive", "parallel"]
 
 RESTORE_POLICY = bidict(
     dont_restore=QtCore.QState.DontRestoreProperties,
     restore=QtCore.QState.RestoreProperties,
 )
 
+RestorePolicyStr = Literal["dont_restore", "restore"]
+
+
 QtCore.QState.__bases__ = (core.AbstractState,)
 
 
 class State(QtCore.QState):
-    def set_child_mode(self, mode: str):
+    def set_child_mode(self, mode: ChildModeStr):
         """Set child mode to use.
-
-        Allowed values are "exclusive", "parallel"
 
         Args:
             mode: child mode to use
@@ -30,19 +35,17 @@ class State(QtCore.QState):
         Raises:
             InvalidParamError: child mode does not exist
         """
-        if mode not in CHILD_MODES:
-            raise InvalidParamError(mode, CHILD_MODES)
-        self.setChildMode(CHILD_MODES[mode])
+        if mode not in CHILD_MODE:
+            raise InvalidParamError(mode, CHILD_MODE)
+        self.setChildMode(CHILD_MODE[mode])
 
-    def get_child_mode(self) -> str:
+    def get_child_mode(self) -> ChildModeStr:
         """Return current child mode.
-
-        Possible values: "exclusive", "parallel"
 
         Returns:
             child mode
         """
-        return CHILD_MODES.inv[self.childMode()]
+        return CHILD_MODE.inv[self.childMode()]
 
 
 if __name__ == "__main__":

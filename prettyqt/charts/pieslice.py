@@ -1,18 +1,23 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import core, gui
 from prettyqt.utils import bidict, InvalidParamError
 
 
-LABEL_POSITIONS = bidict(
+LABEL_POSITION = bidict(
     outside=QtCharts.QPieSlice.LabelOutside,
     inside_horizontal=QtCharts.QPieSlice.LabelInsideHorizontal,
     inside_tangential=QtCharts.QPieSlice.LabelInsideTangential,
     inside_normal=QtCharts.QPieSlice.LabelInsideNormal,
 )
 
+LabelPositionStr = Literal[
+    "outside", "inside_horizontal", "inside_tangential", "inside_normal"
+]
 
 QtCharts.QPieSlice.__bases__ = (core.Object,)
 
@@ -21,11 +26,8 @@ class PieSlice(QtCharts.QPieSlice):
     def __repr__(self):
         return f"PieSlice({self.label()!r}, {self.value()})"
 
-    def set_label_position(self, position: str):
+    def set_label_position(self, position: LabelPositionStr):
         """Set the label position.
-
-        Allowed values are "outside", "inside_horizontal", "inside_tangential",
-        "inside_normal"
 
         Args:
             position: label position
@@ -33,20 +35,17 @@ class PieSlice(QtCharts.QPieSlice):
         Raises:
             InvalidParamError: label position does not exist
         """
-        if position not in LABEL_POSITIONS:
-            raise InvalidParamError(position, LABEL_POSITIONS)
-        self.setLabelPosition(LABEL_POSITIONS[position])
+        if position not in LABEL_POSITION:
+            raise InvalidParamError(position, LABEL_POSITION)
+        self.setLabelPosition(LABEL_POSITION[position])
 
-    def get_label_position(self) -> str:
+    def get_label_position(self) -> LabelPositionStr:
         """Return current label position.
-
-        Possible values: "outside", "inside_horizontal", "inside_tangential",
-        "inside_normal"
 
         Returns:
             label position
         """
-        return LABEL_POSITIONS.inv[self.labelPosition()]
+        return LABEL_POSITION.inv[self.labelPosition()]
 
     def get_label_font(self) -> gui.Font:
         return gui.Font(self.labelFont())

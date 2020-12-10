@@ -1,11 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy import QtCore
 
 from prettyqt.utils import bidict
 
 
-TYPES = bidict(
+CLOCK_TYPE = bidict(
     system_time=QtCore.QElapsedTimer.SystemTime,
     monotonic_clock=QtCore.QElapsedTimer.MonotonicClock,
     tick_counter=QtCore.QElapsedTimer.TickCounter,
@@ -13,12 +15,20 @@ TYPES = bidict(
     performance_counter=QtCore.QElapsedTimer.PerformanceCounter,
 )
 
+ClockTypeStr = Literal[
+    "system_time",
+    "monotonic_clock",
+    "tick_counter",
+    "mach_absolute_time",
+    "performance_counter",
+]
+
 
 class ElapsedTimer(QtCore.QElapsedTimer):
     def __bool__(self):
         return self.isValid()
 
-    def get_clock_type(self) -> str:
+    def get_clock_type(self) -> ClockTypeStr:
         """Return current clock type.
 
         Possible values: "system_time", "monotonic_clock", "tick_counter",
@@ -27,4 +37,4 @@ class ElapsedTimer(QtCore.QElapsedTimer):
         Returns:
             clock type
         """
-        return TYPES.inv[self.clockType()]
+        return CLOCK_TYPE.inv[self.clockType()]

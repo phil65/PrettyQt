@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy import QtCore
 
 from prettyqt import core
@@ -12,6 +14,7 @@ TYPE = bidict(
     exception=QtCore.QSocketNotifier.Exception,
 )
 
+TypeStr = Literal["read", "write", "exception"]
 
 QtCore.QSocketNotifier.__bases__ = (core.Object,)
 
@@ -20,7 +23,7 @@ class SocketNotifier(QtCore.QSocketNotifier):
     # def __repr__(self):
     #     return f"{type(self).__name__}({self.socket()}, {self.type()})"
 
-    def get_type(self) -> str:
+    def get_type(self) -> TypeStr:
         """Return socket event type.
 
         Possible values: "read", "write", "exception"

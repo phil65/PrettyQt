@@ -1,25 +1,26 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy import QtCore
 
 from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 
-TRANSITION_TYPES = bidict(
+TRANSITION_TYPE = bidict(
     exclusive=QtCore.QAbstractTransition.ExternalTransition,
     parallel=QtCore.QAbstractTransition.InternalTransition,
 )
 
+TransitionTypeStr = Literal["exclusive", "parallel"]
 
 QtCore.QAbstractTransition.__bases__ = (core.Object,)
 
 
 class AbstractTransition(QtCore.QAbstractTransition):
-    def set_transition_type(self, typ: str):
+    def set_transition_type(self, typ: TransitionTypeStr):
         """Set transition type.
-
-        Allowed values are "exclusive", "parallel"
 
         Args:
             typ: transition type to use
@@ -27,16 +28,14 @@ class AbstractTransition(QtCore.QAbstractTransition):
         Raises:
             InvalidParamError: transition type does not exist
         """
-        if typ not in TRANSITION_TYPES:
-            raise InvalidParamError(typ, TRANSITION_TYPES)
-        self.setTransitionType(TRANSITION_TYPES[typ])
+        if typ not in TRANSITION_TYPE:
+            raise InvalidParamError(typ, TRANSITION_TYPE)
+        self.setTransitionType(TRANSITION_TYPE[typ])
 
-    def get_transition_type(self) -> str:
+    def get_transition_type(self) -> TransitionTypeStr:
         """Return current transition type.
-
-        Possible values: "exclusive", "parallel"
 
         Returns:
             transition type
         """
-        return TRANSITION_TYPES.inv[self.transitionType()]
+        return TRANSITION_TYPE.inv[self.transitionType()]

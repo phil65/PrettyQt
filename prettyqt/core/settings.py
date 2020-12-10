@@ -2,7 +2,7 @@
 
 import contextlib
 import pathlib
-from typing import List, Mapping, Optional, Union, Dict, Any, Iterator, Tuple
+from typing import List, Mapping, Optional, Union, Dict, Any, Iterator, Tuple, Literal
 import logging
 
 from qtpy import QtCore
@@ -12,10 +12,13 @@ from prettyqt.utils import bidict, InvalidParamError
 
 logger = logging.getLogger(__name__)
 
-FORMATS = bidict(native=QtCore.QSettings.NativeFormat, ini=QtCore.QSettings.IniFormat)
+FORMAT = bidict(native=QtCore.QSettings.NativeFormat, ini=QtCore.QSettings.IniFormat)
 
-SCOPES = bidict(user=QtCore.QSettings.UserScope, system=QtCore.QSettings.SystemScope)
+FormatStr = Literal["user", "system"]
 
+SCOPE = bidict(user=QtCore.QSettings.UserScope, system=QtCore.QSettings.SystemScope)
+
+ScopeStr = Literal["user", "system"]
 
 QtCore.QSettings.__bases__ = (core.Object,)
 
@@ -87,10 +90,8 @@ class Settings(QtCore.QSettings):
         return val["value"]
 
     @classmethod
-    def set_default_format(cls, fmt: str):
+    def set_default_format(cls, fmt: FormatStr):
         """Set the default format.
-
-        possible values are "native", "ini"
 
         Args:
             fmt: the default format to use
@@ -98,33 +99,29 @@ class Settings(QtCore.QSettings):
         Raises:
             InvalidParamError: invalid format
         """
-        if fmt not in FORMATS:
-            raise InvalidParamError(fmt, FORMATS)
-        cls.setDefaultFormat(FORMATS[fmt])
+        if fmt not in FORMAT:
+            raise InvalidParamError(fmt, FORMAT)
+        cls.setDefaultFormat(FORMAT[fmt])
 
     @classmethod
-    def get_default_format(cls) -> str:
+    def get_default_format(cls) -> FormatStr:
         """Return default settings format.
-
-        possible values are "native", "ini"
 
         Returns:
             default settings format
         """
-        return FORMATS.inv[cls.defaultFormat()]
+        return FORMAT.inv[cls.defaultFormat()]
 
-    def get_scope(self) -> str:
+    def get_scope(self) -> ScopeStr:
         """Return scope.
-
-        possible values are "user", "system"
 
         Returns:
             scope
         """
-        return SCOPES.inv[self.scope()]
+        return SCOPE.inv[self.scope()]
 
     @classmethod
-    def set_path(cls, fmt: str, scope: str, path: Union[str, pathlib.Path]):
+    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: Union[str, pathlib.Path]):
         """Set the path to the settings file.
 
         Args:
@@ -134,11 +131,11 @@ class Settings(QtCore.QSettings):
         Raises:
             InvalidParamError: invalid format or scope
         """
-        if fmt not in FORMATS:
-            raise InvalidParamError(fmt, FORMATS)
-        if scope not in SCOPES:
-            raise InvalidParamError(scope, SCOPES)
-        cls.setPath(FORMATS[fmt], SCOPES[scope], str(path))
+        if fmt not in FORMAT:
+            raise InvalidParamError(fmt, FORMAT)
+        if scope not in SCOPE:
+            raise InvalidParamError(scope, SCOPE)
+        cls.setPath(FORMAT[fmt], SCOPE[scope], str(path))
 
     @contextlib.contextmanager
     def group(self, prefix: str):

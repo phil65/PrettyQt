@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Iterator
+from typing import Iterator, Literal
 
 import pathlib
 
@@ -16,6 +16,8 @@ COMPRESSION = bidict(
     zstd=QtCore.QResource.ZstdCompression,
 )
 
+CompressionStr = Literal["none", "zlib", "zstd"]
+
 
 class Resource(QtCore.QResource):
     def __repr__(self):
@@ -30,7 +32,7 @@ class Resource(QtCore.QResource):
     def __iter__(self) -> Iterator[str]:
         return iter(self.children())
 
-    def get_compression_algorithm(self) -> str:
+    def get_compression_algorithm(self) -> CompressionStr:
         return COMPRESSION.inv[self.compressionAlgorithm()]
 
     def get_absolute_file_path(self) -> pathlib.Path:

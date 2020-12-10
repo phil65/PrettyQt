@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Union
+from typing import Optional, Union, Literal
 
 from qtpy import QtCore, QtWidgets
 
@@ -8,14 +8,17 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-TICK_POSITIONS = bidict(
+TICK_POSITION = bidict(
     none=QtWidgets.QSlider.NoTicks,
     both_sides=QtWidgets.QSlider.TicksBothSides,
     above=QtWidgets.QSlider.TicksAbove,
     below=QtWidgets.QSlider.TicksBelow,
 )
 
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
+TickPositionAllStr = Literal["none", "both_sides", "above", "below", "left", "right"]
+TickPositionStr = Literal["none", "both_sides", "above", "below"]
+
+ORIENTATION = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
 
 
 QtWidgets.QSlider.__bases__ = (widgets.AbstractSlider,)
@@ -30,8 +33,8 @@ class Slider(QtWidgets.QSlider):
         orientation: Union[str, int] = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        if orientation in ORIENTATIONS:
-            orientation = ORIENTATIONS[orientation]
+        if orientation in ORIENTATION:
+            orientation = ORIENTATION[orientation]
         super().__init__(orientation, parent)
         self.valueChanged.connect(self.on_value_change)
 
@@ -56,12 +59,10 @@ class Slider(QtWidgets.QSlider):
         self.set_tick_position(state["tick_position"])
         self.setTickInterval(state["tick_interval"])
 
-    def set_tick_position(self, position: str):
+    def set_tick_position(self, position: TickPositionAllStr):
         """Set the tick position for the slider.
 
-        allowed values are "none", "both_sides", "above", "below", "left", "right"
-        for vertical orientation of the slider,
-        "above" equals to "left" and "below" to "right"
+        For vertical orientation, "above" equals to "left" and "below" to "right".
 
         Args:
             position: position for the ticks
@@ -70,19 +71,17 @@ class Slider(QtWidgets.QSlider):
             position = "above"
         elif position == "right":
             position = "below"
-        elif position not in TICK_POSITIONS:
-            raise InvalidParamError(position, TICK_POSITIONS)
-        self.setTickPosition(TICK_POSITIONS[position])
+        elif position not in TICK_POSITION:
+            raise InvalidParamError(position, TICK_POSITION)
+        self.setTickPosition(TICK_POSITION[position])
 
-    def get_tick_position(self) -> str:
+    def get_tick_position(self) -> TickPositionStr:
         """Return tick position.
-
-        possible values are "none", "both_sides", "above", "below"
 
         Returns:
             tick position
         """
-        val = TICK_POSITIONS.inv[self.tickPosition()]
+        val = TICK_POSITION.inv[self.tickPosition()]
         # if self.is_vertical():
         #     if val == "above":
         #         return "left"

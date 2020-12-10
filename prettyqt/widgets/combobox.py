@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Iterable, Union, Mapping, Any
+from typing import Iterable, Union, Mapping, Any, Literal
 
 from qtpy import QtCore, QtWidgets
 
@@ -8,7 +8,7 @@ from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-INSERT_POLICIES = bidict(
+INSERT_POLICY = bidict(
     no_insert=QtWidgets.QComboBox.NoInsert,
     top=QtWidgets.QComboBox.InsertAtTop,
     current=QtWidgets.QComboBox.InsertAtCurrent,
@@ -18,12 +18,26 @@ INSERT_POLICIES = bidict(
     alphabetically=QtWidgets.QComboBox.InsertAlphabetically,
 )
 
-SIZE_POLICIES = bidict(
+InsertPolicyStr = Literal[
+    "no_insert",
+    "top",
+    "current",
+    "bottom",
+    "after_current",
+    "before_current",
+    "alphabetically",
+]
+
+SIZE_ADJUST_POLICY = bidict(
     content=QtWidgets.QComboBox.AdjustToContents,
     first_show=QtWidgets.QComboBox.AdjustToContentsOnFirstShow,
     min_length=QtWidgets.QComboBox.AdjustToMinimumContentsLength,
     min_length_with_icon=QtWidgets.QComboBox.AdjustToMinimumContentsLengthWithIcon,
 )
+
+SizeAdjustPolicyStr = Literal[
+    "content", "first_show", "min_length", "min_length_with_icon"
+]
 
 
 class NoData(object):
@@ -112,11 +126,8 @@ class ComboBox(QtWidgets.QComboBox):
     def item_icon(self, index: int) -> gui.Icon:
         return gui.Icon(self.itemIcon(index))
 
-    def set_insert_policy(self, policy: str):
+    def set_insert_policy(self, policy: InsertPolicyStr):
         """Set insert policy.
-
-        valid values are "no_insert", "top", "current", "bottom", "after_current",
-        "before_current", "alphabetically"
 
         Args:
             policy: insert policy to use
@@ -124,25 +135,20 @@ class ComboBox(QtWidgets.QComboBox):
         Raises:
             InvalidParamError: invalid insert policy
         """
-        if policy not in INSERT_POLICIES:
-            raise InvalidParamError(policy, INSERT_POLICIES)
-        self.setInsertPolicy(INSERT_POLICIES[policy])
+        if policy not in INSERT_POLICY:
+            raise InvalidParamError(policy, INSERT_POLICY)
+        self.setInsertPolicy(INSERT_POLICY[policy])
 
-    def get_insert_policy(self) -> str:
+    def get_insert_policy(self) -> InsertPolicyStr:
         """Return insert policy.
-
-        possible values are "no_insert", "top", "current", "bottom", "after_current",
-        "before_current", "alphabetically"
 
         Returns:
             insert policy
         """
-        return INSERT_POLICIES.inv[self.insertPolicy()]
+        return INSERT_POLICY.inv[self.insertPolicy()]
 
-    def set_size_adjust_policy(self, policy: str):
+    def set_size_adjust_policy(self, policy: SizeAdjustPolicyStr):
         """Set size adjust policy.
-
-        possible values are "content", "first_show", "min_length", "min_length_with_icon"
 
         Args:
             policy: size adjust policy to use
@@ -150,20 +156,18 @@ class ComboBox(QtWidgets.QComboBox):
         Raises:
             InvalidParamError: invalid size adjust policy
         """
-        if policy not in SIZE_POLICIES:
-            raise InvalidParamError(policy, SIZE_POLICIES)
-        policy = SIZE_POLICIES[policy]
+        if policy not in SIZE_ADJUST_POLICY:
+            raise InvalidParamError(policy, SIZE_ADJUST_POLICY)
+        policy = SIZE_ADJUST_POLICY[policy]
         self.setSizeAdjustPolicy(policy)
 
-    def get_size_adjust_policy(self) -> str:
+    def get_size_adjust_policy(self) -> SizeAdjustPolicyStr:
         """Return size adjust policy.
-
-        possible values are "content", "first_show", "min_length", "min_length_with_icon"
 
         Returns:
             size adjust policy
         """
-        return SIZE_POLICIES.inv[self.sizeAdjustPolicy()]
+        return SIZE_ADJUST_POLICY.inv[self.sizeAdjustPolicy()]
 
     def set_icon_size(self, size: int):
         self.setIconSize(QtCore.QSize(size, size))

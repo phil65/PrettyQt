@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union, Optional
+from typing import Union, Optional, Literal
 import datetime
 
 from qtpy import QtCore
@@ -26,12 +26,32 @@ FILE_ERROR = bidict(
     copy=QtCore.QFileDevice.CopyError,
 )
 
+FileErrorStr = Literal[
+    "none",
+    "read",
+    "write",
+    "fatal",
+    "resource",
+    "open",
+    "abort",
+    "time_out",
+    "unspecified",
+    "remove",
+    "rename",
+    "position",
+    "resize",
+    "permissions",
+    "copy",
+]
+
 FILE_TIME = bidict(
     access=QtCore.QFileDevice.FileAccessTime,
     birth=QtCore.QFileDevice.FileBirthTime,
     metadata_change=QtCore.QFileDevice.FileMetadataChangeTime,
     modification=QtCore.QFileDevice.FileModificationTime,
 )
+
+FileTimeStr = Literal["access", "birth", "metadata_change", "modification"]
 
 PERMISSIONS = bidict(
     read_owner=QtCore.QFileDevice.ReadOwner,
@@ -59,11 +79,9 @@ class FileDevice(QtCore.QFileDevice):
         return self.fileName()
 
     def set_file_time(
-        self, file_time: Union[QtCore.QDateTime, datetime.datetime], typ: str
+        self, file_time: Union[QtCore.QDateTime, datetime.datetime], typ: FileTimeStr
     ) -> bool:
         """Set file time.
-
-        Allowed values are "access", "birth", "metadata_change", "modification"
 
         Args:
             typ: file time to use
@@ -75,10 +93,8 @@ class FileDevice(QtCore.QFileDevice):
             raise InvalidParamError(typ, FILE_TIME)
         return self.setFileTime(file_time, FILE_TIME[typ])
 
-    def get_file_time(self, typ: str) -> Optional[datetime.datetime]:
+    def get_file_time(self, typ: FileTimeStr) -> Optional[datetime.datetime]:
         """Return current file time.
-
-        Possible values: "access", "birth", "metadata_change", "modification"
 
         Returns:
             file time
@@ -90,12 +106,8 @@ class FileDevice(QtCore.QFileDevice):
             return None
         return to_datetime(date)
 
-    def get_error(self) -> str:
+    def get_error(self) -> FileErrorStr:
         """Return file error status.
-
-        Possible values: "none", "read", "write", "fatal", "resource", "open", "abort",
-                         "time_out", "unspecified", "remove", "rename", "position",
-                         "resize", "permissions", "copy"
 
         Returns:
             file error status

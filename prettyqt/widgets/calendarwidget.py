@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-from typing import Optional
+from typing import Optional, Literal
 
 from qtpy import QtWidgets
 
@@ -9,15 +9,28 @@ from prettyqt import widgets
 from prettyqt.utils import bidict, InvalidParamError, to_date
 
 
-SELECTION_MODES = bidict(
+SELECTION_MODE = bidict(
     none=QtWidgets.QCalendarWidget.NoSelection,
     single=QtWidgets.QCalendarWidget.SingleSelection,
 )
 
-HEADER_FORMATS = bidict(
+SelectionModeStr = Literal["none", "single"]
+
+VERTICAL_HEADER_FORMAT = bidict(
     none=QtWidgets.QCalendarWidget.NoVerticalHeader,
     week_numbers=QtWidgets.QCalendarWidget.ISOWeekNumbers,
 )
+
+VerticalHeaderFormatStr = Literal["none", "week_numbers"]
+
+HORIZONTAL_HEADER_FORMAT = bidict(
+    single_letter=QtWidgets.QCalendarWidget.SingleLetterDayNames,
+    short=QtWidgets.QCalendarWidget.ShortDayNames,
+    long=QtWidgets.QCalendarWidget.LongDayNames,
+    none=QtWidgets.QCalendarWidget.NoHorizontalHeader,
+)
+
+HorizontalHeaderFormatStr = Literal["single_letter", "short", "long", "none"]
 
 
 QtWidgets.QCalendarWidget.__bases__ = (widgets.Widget,)
@@ -40,10 +53,8 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
     def set_value(self, value):
         self.setSelectedDate(value)
 
-    def set_selection_mode(self, mode: Optional[str]):
+    def set_selection_mode(self, mode: Optional[SelectionModeStr]):
         """Set selection mode for given calendar widget.
-
-        Allowed values are "single" or "none"
 
         Args:
             mode: selection mode to use
@@ -53,19 +64,17 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
         """
         if mode is None:
             mode = "none"
-        if mode not in SELECTION_MODES:
-            raise InvalidParamError(mode, SELECTION_MODES)
-        self.setSelectionMode(SELECTION_MODES[mode])
+        if mode not in SELECTION_MODE:
+            raise InvalidParamError(mode, SELECTION_MODE)
+        self.setSelectionMode(SELECTION_MODE[mode])
 
-    def get_selection_mode(self) -> str:
+    def get_selection_mode(self) -> SelectionModeStr:
         """Return current selection mode.
-
-        Possible values: "single" or "none"
 
         Returns:
             selection mode
         """
-        return SELECTION_MODES.inv[self.selectionMode()]
+        return SELECTION_MODE.inv[self.selectionMode()]
 
 
 if __name__ == "__main__":

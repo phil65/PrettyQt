@@ -1,24 +1,26 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy import QtCore
 
 from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 
-HISTORY_TYPES = bidict(
+HISTORY_TYPE = bidict(
     shallow=QtCore.QHistoryState.ShallowHistory,
     deep=QtCore.QHistoryState.DeepHistory,
 )
+
+HistoryTypeStr = Literal["shallow", "deep"]
 
 QtCore.QHistoryState.__bases__ = (core.AbstractState,)
 
 
 class HistoryState(QtCore.QHistoryState):
-    def set_history_type(self, typ: str):
+    def set_history_type(self, typ: HistoryTypeStr):
         """Set history type to use.
-
-        Allowed values are "shallow", "deep"
 
         Args:
             typ: history type to use
@@ -26,19 +28,17 @@ class HistoryState(QtCore.QHistoryState):
         Raises:
             InvalidParamError: history type does not exist
         """
-        if typ not in HISTORY_TYPES:
-            raise InvalidParamError(typ, HISTORY_TYPES)
-        self.setHistoryType(HISTORY_TYPES[typ])
+        if typ not in HISTORY_TYPE:
+            raise InvalidParamError(typ, HISTORY_TYPE)
+        self.setHistoryType(HISTORY_TYPE[typ])
 
-    def get_history_type(self) -> str:
+    def get_history_type(self) -> HistoryTypeStr:
         """Return current history type.
-
-        Possible values: "shallow", "deep"
 
         Returns:
             history type
         """
-        return HISTORY_TYPES.inv[self.historyType()]
+        return HISTORY_TYPE.inv[self.historyType()]
 
 
 if __name__ == "__main__":

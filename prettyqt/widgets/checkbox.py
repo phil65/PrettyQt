@@ -14,7 +14,7 @@ STATE = bidict(
     checked=QtCore.Qt.Checked,
 )
 
-STATE_STR = Literal["unchecked", "partial", "checked"]
+StateStr = Literal["unchecked", "partial", "checked"]
 
 QtWidgets.QCheckBox.__bases__ = (widgets.AbstractButton,)
 
@@ -63,7 +63,7 @@ class CheckBox(QtWidgets.QCheckBox):
     def is_on(self, state: bool):
         self.setChecked(state)
 
-    def set_checkstate(self, state: STATE_STR):
+    def set_checkstate(self, state: StateStr):
         """Set checkstate of the checkbox.
 
         Args:
@@ -76,7 +76,7 @@ class CheckBox(QtWidgets.QCheckBox):
             raise InvalidParamError(state, STATE)
         self.setCheckState(STATE[state])
 
-    def get_checkstate(self) -> STATE_STR:
+    def get_checkstate(self) -> StateStr:
         """Return checkstate.
 
         Returns:

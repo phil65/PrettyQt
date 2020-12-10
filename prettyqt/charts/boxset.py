@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union
+from typing import Union, Literal
 
 from qtpy.QtCharts import QtCharts
 
@@ -8,7 +8,7 @@ from prettyqt import core, gui
 from prettyqt.utils import bidict
 
 
-VALUE_POSITIONS = bidict(
+VALUE_POSITION = bidict(
     lower_extreme=QtCharts.QBoxSet.LowerExtreme,
     lower_quartile=QtCharts.QBoxSet.LowerQuartile,
     median=QtCharts.QBoxSet.Median,
@@ -16,6 +16,9 @@ VALUE_POSITIONS = bidict(
     upper_extreme=QtCharts.QBoxSet.UpperExtreme,
 )
 
+ValuePositionStr = Literal[
+    "lower_extreme", "lower_quartile", "median", "upper_quartile", "upper_extreme"
+]
 
 QtCharts.QBoxSet.__bases__ = (core.Object,)
 
@@ -27,14 +30,14 @@ class BoxSet(QtCharts.QBoxSet):
             f" {self['upper_quartile']}, {self['upper_extreme']}, {self.label()!r})"
         )
 
-    def __getitem__(self, index: Union[int, str]) -> float:
-        if index in VALUE_POSITIONS:
-            index = VALUE_POSITIONS[index]
+    def __getitem__(self, index: Union[int, ValuePositionStr]) -> float:
+        if index in VALUE_POSITION:
+            index = VALUE_POSITION[index]
         return self.at(index)
 
-    def __setitem__(self, index: Union[int, str], value: int):
-        if index in VALUE_POSITIONS:
-            index = VALUE_POSITIONS[index]
+    def __setitem__(self, index: Union[int, ValuePositionStr], value: int):
+        if index in VALUE_POSITION:
+            index = VALUE_POSITION[index]
         self.setValue(index, value)
 
     def get_pen(self) -> gui.Pen:
