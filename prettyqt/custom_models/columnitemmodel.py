@@ -135,7 +135,7 @@ class ColumnItemModel(core.AbstractItemModel):
         parent: Optional[QtCore.QObject] = None,
     ):
         super().__init__(parent)
-        self._attr_cols = attr_cols
+        self._attr_cols = attr_cols if attr_cols is not None else []
 
     def columnCount(self, _parent=None):
         """Return the number of columns in the tree."""
