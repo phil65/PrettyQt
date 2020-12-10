@@ -162,6 +162,7 @@ def test_combobox(qtbot):
         box.set_size_adjust_policy("bla")
     assert box.get_size_adjust_policy() == "first_show"
     box.set_icon_size(10)
+    assert box.get_icon_size() == core.Size(10, 10)
     box.set_min_char_length(10)
     box.add("test2", data="data", icon="mdi.timer")
     box.set_text("test2")
@@ -873,6 +874,8 @@ def test_pushbutton(qtbot):
     assert widget.get_value() is False
     widget.set_icon("mdi.timer")
     widget.set_style_icon("titlebar_close_button")
+    widget.set_icon_size(10)
+    assert widget.get_icon_size() == core.Size(10, 10)
     widget.is_on = False
     assert widget.is_on is False
     widget.set_value(True)
@@ -1148,7 +1151,6 @@ def test_toolbar(qtbot):
     widget = widgets.ToolBar()
     widget.add_menu_button("test,", "mdi.timer", menu=widgets.Menu())
     widget.set_style("icon")
-    widget.set_style(None)
     widget.add_separator("Test")
     widget.add_separator()
     widget.add_spacer()
@@ -1156,6 +1158,8 @@ def test_toolbar(qtbot):
     widget.set_font_size(10)
     widget.set_enabled()
     widget.set_disabled()
+    widget.set_icon_size(10)
+    assert widget.get_icon_size() == core.Size(10, 10)
     assert widget.is_area_allowed("top")
     with pytest.raises(InvalidParamError):
         widget.is_area_allowed("test")
@@ -1198,7 +1202,8 @@ def test_tooltip(qtbot):
 
 def test_tabbar(qtbot):
     widget = widgets.TabBar()
-    widget.set_icon_size(20)
+    widget.set_icon_size(10)
+    assert widget.get_icon_size() == core.Size(10, 10)
     with pytest.raises(InvalidParamError):
         widget.set_selection_behavior_on_remove("test")
     assert widget.get_remove_behaviour() == "left_tab"

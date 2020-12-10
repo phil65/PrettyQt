@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Union
 
 from qtpy import QtCore, QtGui, QtWidgets
 from deprecated import deprecated
@@ -82,13 +82,16 @@ class TabBar(QtWidgets.QTabBar):
         event.accept()
         self.on_detach.emit(self.tabAt(event.pos()), self.mouse_cursor.pos())
 
-    def set_icon_size(self, size: int) -> None:
-        """Set the icon size for the tabs.
+    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+        """Set size of the icons."""
+        if isinstance(size, int):
+            size = core.Size(size, size)
+        elif isinstance(size, tuple):
+            size = core.Size(*size)
+        self.setIconSize(size)
 
-        Args:
-            size: height/width of the icons
-        """
-        self.setIconSize(QtCore.QSize(size, size))
+    def get_icon_size(self) -> core.Size:
+        return core.Size(self.iconSize())
 
     def set_tab(
         self, index: int, position: str, widget: Optional[QtWidgets.QWidget]

@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from typing import Union
+from typing import Union, Tuple
 
-from qtpy import QtWidgets, QtGui
+from qtpy import QtWidgets, QtGui, QtCore
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
@@ -59,8 +59,16 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def set_text(self, text: str):
         self.setText(text)
 
-    def set_icon_size(self, size: int):
-        self.setIconSize(core.Size(size, size))
+    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+        """Set size of the icon."""
+        if isinstance(size, int):
+            size = core.Size(size, size)
+        elif isinstance(size, tuple):
+            size = core.Size(*size)
+        self.setIconSize(size)
+
+    def get_icon_size(self) -> core.Size:
+        return core.Size(self.iconSize())
 
 
 if __name__ == "__main__":

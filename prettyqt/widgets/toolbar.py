@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Callable, Optional, Dict, Any
+from typing import Callable, Optional, Dict, Any, Union, Tuple
 
 from qtpy import QtCore, QtWidgets
 
@@ -8,7 +8,7 @@ from prettyqt import core, gui, widgets
 from prettyqt.utils import bidict, InvalidParamError, helpers
 
 
-STYLES = bidict(
+STYLE = bidict(
     icon=QtCore.Qt.ToolButtonIconOnly,
     text=QtCore.Qt.ToolButtonTextOnly,
     text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
@@ -78,9 +78,7 @@ class ToolBar(QtWidgets.QToolBar):
                 return self.addWidget(label)
 
     def set_style(self, style: str):
-        if style is None:
-            return None
-        self.setToolButtonStyle(STYLES[style])
+        self.setToolButtonStyle(STYLE[style])
         for btn in self.menu_buttons:
             btn.set_style(style)
 
@@ -92,7 +90,7 @@ class ToolBar(QtWidgets.QToolBar):
         Returns:
             style
         """
-        return STYLES.inv[self.toolButtonStyle()]
+        return STYLE.inv[self.toolButtonStyle()]
 
     def add_action(
         self,
@@ -114,8 +112,16 @@ class ToolBar(QtWidgets.QToolBar):
         spacer.set_size_policy("expanding", "expanding")
         return self.addWidget(spacer)
 
-    def set_icon_size(self, size: int):
-        self.setIconSize(core.Size(size, size))
+    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+        """Set size of the icons."""
+        if isinstance(size, int):
+            size = core.Size(size, size)
+        elif isinstance(size, tuple):
+            size = core.Size(*size)
+        self.setIconSize(size)
+
+    def get_icon_size(self) -> core.Size:
+        return core.Size(self.iconSize())
 
     def set_font_size(self, size: int):
         with self.edit_font() as font:

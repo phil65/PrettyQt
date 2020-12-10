@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Iterable, Union, Mapping, Any, Literal
+from typing import Iterable, Union, Mapping, Any, Literal, Tuple
 
 from qtpy import QtCore, QtWidgets
 
@@ -169,8 +169,16 @@ class ComboBox(QtWidgets.QComboBox):
         """
         return SIZE_ADJUST_POLICY.inv[self.sizeAdjustPolicy()]
 
-    def set_icon_size(self, size: int):
-        self.setIconSize(QtCore.QSize(size, size))
+    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+        """Set size of the icons."""
+        if isinstance(size, int):
+            size = core.Size(size, size)
+        elif isinstance(size, tuple):
+            size = core.Size(*size)
+        self.setIconSize(size)
+
+    def get_icon_size(self) -> core.Size:
+        return core.Size(self.iconSize())
 
     def set_min_char_length(self, chars: int):
         self.setMinimumContentsLength(chars)
