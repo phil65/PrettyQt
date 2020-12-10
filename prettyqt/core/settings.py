@@ -54,7 +54,7 @@ class Settings(QtCore.QSettings):
             raise KeyError(key)
         return self.remove(key)
 
-    def __iter__(self) -> Iterator[str]:
+    def __iter__(self) -> Iterator[Tuple[str, Any]]:
         return iter(self.items())
 
     def __len__(self) -> int:

@@ -15,7 +15,7 @@ QtWidgets.QGraphicsPolygonItem.__bases__ = (widgets.AbstractGraphicsShapeItem,)
 
 
 class GraphicsPolygonItem(QtWidgets.QGraphicsPolygonItem):
-    def get_polygon(self):
+    def get_polygon(self) -> gui.PolygonF:
         return gui.PolygonF(self.polygon())
 
     def serialize_fields(self):
