@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 
+from typing import Union
+
 import datetime
 
-from qtpy import QtWidgets
+from qtpy import QtWidgets, QtCore
 
 from prettyqt import core, widgets
 from prettyqt.utils import to_datetime, to_date, to_time
@@ -53,7 +55,11 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.setToolTip(state.get("tool_tip", ""))
         self.setStatusTip(state.get("status_tip", ""))
 
-    def set_range(self, lower: datetime.datetime, upper: datetime.datetime):
+    def set_range(
+        self,
+        lower: Union[QtCore.QDateTime, datetime.datetime],
+        upper: Union[QtCore.QDateTime, datetime.datetime],
+    ):
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setDateTimeRange(lower, upper)
 
