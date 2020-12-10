@@ -31,3 +31,10 @@ def test_playlistmodel(qttester):
     playlist = multimedia.MediaPlaylist()
     model.set_playlist(playlist)
     assert model.get_playlist() is playlist
+
+
+def test_importlibdistributionmodel(qttester):
+    model = custom_models.ImportlibDistributionModel([])
+    qttester.test_model(model, force_py=False)
+    custom_models.ImportlibDistributionModel.from_package("prettyqt")
+    custom_models.ImportlibDistributionModel.from_system()
