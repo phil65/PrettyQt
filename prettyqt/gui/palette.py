@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, Literal
 
 from qtpy import QtGui
 
@@ -6,7 +6,7 @@ from prettyqt import gui, core
 from prettyqt.utils import colors, bidict
 
 
-ROLES = bidict(
+ROLE = bidict(
     background=QtGui.QPalette.Background,  # same as Window
     foreground=QtGui.QPalette.Foreground,  # same as WindowText
     base=QtGui.QPalette.Base,
@@ -20,11 +20,27 @@ ROLES = bidict(
     bright_text=QtGui.QPalette.BrightText,
 )
 
-GROUPS = bidict(
+RoleStr = Literal[
+    "background",
+    "foreground",
+    "base",
+    "alternate_base",
+    "tool_tip_base",
+    "tool_tip_text",
+    "placeholder_text",
+    "text",
+    "button",
+    "button_text",
+    "bright_text",
+]
+
+GROUP = bidict(
     disabled=QtGui.QPalette.Disabled,
     active=QtGui.QPalette.Active,
     inactive=QtGui.QPalette.Inactive,
 )
+
+GroupStr = Literal["disabled", "active", "inactive"]
 
 
 class Palette(QtGui.QPalette):
@@ -35,10 +51,10 @@ class Palette(QtGui.QPalette):
         self.__init__()
         core.DataStream.write_bytearray(ba, self)
 
-    def __getitem__(self, index: str) -> gui.Color:
+    def __getitem__(self, index: RoleStr) -> gui.Color:
         return self.get_color(index)
 
-    def __setitem__(self, index: str, value: colors.ColorType):
+    def __setitem__(self, index: RoleStr, value: colors.ColorType):
         self.set_color(index, value)
 
     def __bytes__(self):
@@ -49,15 +65,17 @@ class Palette(QtGui.QPalette):
         color = self.color(self.Active, self.Highlight)
         self.setColor(self.Inactive, self.Highlight, color)
 
-    def set_color(self, role: str, color: colors.ColorType, group: str = "active"):
+    def set_color(
+        self, role: RoleStr, color: colors.ColorType, group: GroupStr = "active"
+    ):
         color = colors.get_color(color)
-        self.setColor(GROUPS[group], ROLES[role], color)
+        self.setColor(GROUP[group], ROLE[role], color)
 
-    def get_colors(self, group: str = "active") -> Dict[str, gui.Color]:
-        return {k: self.get_color(k, group) for k in ROLES.keys()}
+    def get_colors(self, group: GroupStr = "active") -> Dict[str, gui.Color]:
+        return {k: self.get_color(k, group) for k in ROLE.keys()}
 
-    def get_color(self, role: str, group: str = "active") -> gui.Color:
-        return gui.Color(self.color(GROUPS[group], ROLES[role]))
+    def get_color(self, role: RoleStr, group: GroupStr = "active") -> gui.Color:
+        return gui.Color(self.color(GROUP[group], ROLE[role]))
 
 
 if __name__ == "__main__":
