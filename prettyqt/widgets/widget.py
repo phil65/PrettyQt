@@ -204,6 +204,9 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         self.setFont(font)
         return font
 
+    def get_font(self) -> gui.Font:
+        return gui.Font(self.font())
+
     def set_window_flags(self, *flags: str, append: bool = False):
         for flag in flags:
             if flag not in WINDOW_FLAGS:
@@ -318,6 +321,12 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         ss = qstylizer.parser.parse(self.styleSheet())
         yield ss
         self.setStyleSheet(ss.toString())
+
+    @contextmanager
+    def edit_palette(self) -> Iterator[gui.Palette]:
+        palette = gui.Palette(self.palette())
+        yield palette
+        self.setPalette(palette)
 
     @contextmanager
     def edit_font(self) -> Iterator[gui.Font]:

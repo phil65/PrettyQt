@@ -1470,6 +1470,13 @@ def test_widget(qtbot):
         widget.set_layout("test")
     with widget.block_signals():
         pass
+    with widget.edit_font():
+        pass
+    with widget.edit_stylesheet():
+        pass
+    with widget.edit_palette():
+        pass
+    widget.get_font()
     widget.set_enabled()
     widget.set_disabled()
     widget.set_min_size(1, 1)
