@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Tuple, Union, Iterator
+from typing import Tuple, Union, Iterator, Literal
 
 from qtpy import QtGui, QtCore
 
@@ -15,7 +15,9 @@ ELEMENT_TYPES = bidict(
     curve_to_data_element=QtGui.QPainterPath.CurveToDataElement,
 )
 
-FILL_RULES = bidict(odd_even=QtCore.Qt.OddEvenFill, winding=QtCore.Qt.WindingFill)
+FILL_RULE = bidict(odd_even=QtCore.Qt.OddEvenFill, winding=QtCore.Qt.WindingFill)
+
+FillRuleStr = Literal["odd_even", "winding"]
 
 
 class PainterPath(QtGui.QPainterPath):
@@ -45,7 +47,7 @@ class PainterPath(QtGui.QPainterPath):
             rect = QtCore.QRectF(rect)
         self.addRect(rect)
 
-    def set_fill_rule(self, rule: str):
+    def set_fill_rule(self, rule: FillRuleStr):
         """Set fill rule.
 
         Allowed values are "odd_even", "winding"
@@ -56,11 +58,11 @@ class PainterPath(QtGui.QPainterPath):
         Raises:
             InvalidParamError: fill rule does not exist
         """
-        if rule not in FILL_RULES:
-            raise InvalidParamError(rule, FILL_RULES)
-        self.setFillRule(FILL_RULES[rule])
+        if rule not in FILL_RULE:
+            raise InvalidParamError(rule, FILL_RULE)
+        self.setFillRule(FILL_RULE[rule])
 
-    def get_fill_rule(self) -> str:
+    def get_fill_rule(self) -> FillRuleStr:
         """Return current fill rule.
 
         Possible values: "odd_even", "winding"
@@ -68,7 +70,7 @@ class PainterPath(QtGui.QPainterPath):
         Returns:
             fill rule
         """
-        return FILL_RULES.inv[self.fillRule()]
+        return FILL_RULE.inv[self.fillRule()]
 
     def get_bounding_rect(self) -> core.RectF:
         return core.RectF(self.boundingRect())

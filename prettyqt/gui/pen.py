@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from typing import Literal
+
 from qtpy import QtGui, QtCore
 
 from prettyqt import core
 from prettyqt.utils import colors
 from prettyqt.utils import bidict, InvalidParamError
 
-PEN_STYLES = bidict(
+PEN_STYLE = bidict(
     none=QtCore.Qt.NoPen,
     solid=QtCore.Qt.SolidLine,
     dash=QtCore.Qt.DashLine,
@@ -16,16 +18,24 @@ PEN_STYLES = bidict(
     custom_dash=QtCore.Qt.CustomDashLine,
 )
 
-CAP_STYLES = bidict(
+PenStyleStr = Literal[
+    "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot", "custom_dash"
+]
+
+CAP_STYLE = bidict(
     flat=QtCore.Qt.FlatCap, square=QtCore.Qt.SquareCap, round=QtCore.Qt.RoundCap
 )
 
-JOIN_STYLES = bidict(
+CapStyleStr = Literal["flat", "square", "round"]
+
+JOIN_STYLE = bidict(
     miter=QtCore.Qt.MiterJoin,
     bevel=QtCore.Qt.BevelJoin,
     round=QtCore.Qt.RoundJoin,
     svg_miter=QtCore.Qt.SvgMiterJoin,
 )
+
+JoinStyleStr = Literal["miter", "bevel", "round" "svg_miter"]
 
 
 class Pen(QtGui.QPen):
@@ -44,7 +54,7 @@ class Pen(QtGui.QPen):
         color = colors.get_color(color)
         self.setColor(color)
 
-    def set_cap_style(self, style: str):
+    def set_cap_style(self, style: CapStyleStr):
         """Set cap style to use.
 
         Allowed values are "flat", "square", "round"
@@ -55,11 +65,11 @@ class Pen(QtGui.QPen):
         Raises:
             InvalidParamError: cap style does not exist
         """
-        if style not in CAP_STYLES:
-            raise InvalidParamError(style, CAP_STYLES)
-        self.setCapStyle(CAP_STYLES[style])
+        if style not in CAP_STYLE:
+            raise InvalidParamError(style, CAP_STYLE)
+        self.setCapStyle(CAP_STYLE[style])
 
-    def get_cap_style(self) -> str:
+    def get_cap_style(self) -> CapStyleStr:
         """Return current cap style.
 
         Possible values: "flat", "square", "round"
@@ -67,9 +77,9 @@ class Pen(QtGui.QPen):
         Returns:
             cap style
         """
-        return CAP_STYLES.inv[self.capStyle()]
+        return CAP_STYLE.inv[self.capStyle()]
 
-    def set_join_style(self, style: str):
+    def set_join_style(self, style: JoinStyleStr):
         """Set join style to use.
 
         Allowed values are "miter", "bevel", "round", "svg_miter"
@@ -80,11 +90,11 @@ class Pen(QtGui.QPen):
         Raises:
             InvalidParamError: join style does not exist
         """
-        if style not in JOIN_STYLES:
-            raise InvalidParamError(style, JOIN_STYLES)
-        self.setJoinStyle(JOIN_STYLES[style])
+        if style not in JOIN_STYLE:
+            raise InvalidParamError(style, JOIN_STYLE)
+        self.setJoinStyle(JOIN_STYLE[style])
 
-    def get_join_style(self) -> str:
+    def get_join_style(self) -> JoinStyleStr:
         """Return current join style.
 
         Possible values: "miter", "bevel", "round", "svg_miter"
@@ -92,7 +102,7 @@ class Pen(QtGui.QPen):
         Returns:
             join style
         """
-        return JOIN_STYLES.inv[self.joinStyle()]
+        return JOIN_STYLE.inv[self.joinStyle()]
 
     def set_style(self, style: str):
         """Set pen style to use.
@@ -106,9 +116,9 @@ class Pen(QtGui.QPen):
         Raises:
             InvalidParamError: pen style does not exist
         """
-        if style not in PEN_STYLES:
-            raise InvalidParamError(style, PEN_STYLES)
-        self.setStyle(PEN_STYLES[style])
+        if style not in PEN_STYLE:
+            raise InvalidParamError(style, PEN_STYLE)
+        self.setStyle(PEN_STYLE[style])
 
     def get_style(self) -> str:
         """Return current pen style.
@@ -119,4 +129,4 @@ class Pen(QtGui.QPen):
         Returns:
             pen style
         """
-        return PEN_STYLES.inv[self.style()]
+        return PEN_STYLE.inv[self.style()]

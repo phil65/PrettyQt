@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from typing import Optional
+from typing import Optional, Literal
 
 from qtpy import QtCore
 
@@ -12,17 +12,19 @@ OPTIONS_AFTER_POS_ARG = bidict(
     positional_arguments=QtCore.QCommandLineParser.ParseAsPositionalArguments,
 )
 
+OptionsAfterPosArgStr = Literal["options", "positional_arguments"]
+
 SINGLE_DASH_WORD = bidict(
     compacted_short=QtCore.QCommandLineParser.ParseAsCompactedShortOptions,
     long=QtCore.QCommandLineParser.ParseAsLongOptions,
 )
 
+SingleDashWordStr = Literal["compacted_short", "long"]
+
 
 class CommandLineParser(QtCore.QCommandLineParser):
-    def set_single_dash_word_option_mode(self, mode: str):
+    def set_single_dash_word_option_mode(self, mode: SingleDashWordStr):
         """Set the single dash word option mode.
-
-        Allowed values are "compacted_short", "long"
 
         Args:
             mode: single dash word option mode
@@ -34,10 +36,8 @@ class CommandLineParser(QtCore.QCommandLineParser):
             raise InvalidParamError(mode, SINGLE_DASH_WORD)
         self.setSingleDashWordOptionMode(SINGLE_DASH_WORD[mode])
 
-    def set_options_after_positional_arguments_mode(self, mode: str):
+    def set_options_after_positional_arguments_mode(self, mode: SingleDashWordStr):
         """Set the options after positional arguments mode.
-
-        Allowed values are "options", "positional_arguments"
 
         Args:
             mode: options after positional arguments mode
