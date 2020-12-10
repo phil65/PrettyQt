@@ -7,10 +7,10 @@ import datetime
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import core, widgets
-from prettyqt.utils import to_datetime, to_date, to_time
+from prettyqt.utils import to_datetime, to_date, to_time, bidict
 
 
-SECTIONS = dict(
+SECTIONS = bidict(
     none=QtWidgets.QDateTimeEdit.NoSection,
     am_pm=QtWidgets.QDateTimeEdit.AmPmSection,
     msec=QtWidgets.QDateTimeEdit.MSecSection,
