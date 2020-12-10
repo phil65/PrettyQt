@@ -457,7 +457,7 @@ def test_painter():
             with pytest.raises(InvalidParamError):
                 painter.set_clip_path(gui.PainterPath(), "test")
             with pytest.raises(InvalidParamError):
-                painter.set_pen("test")
+                painter.set_pen(style="test")
             with painter.backup_state():
                 pass
             painter.get_text_rect("test")

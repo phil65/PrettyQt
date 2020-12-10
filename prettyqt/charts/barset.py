@@ -29,5 +29,5 @@ class BarSet(QtCharts.QBarSet):
 
 
 if __name__ == "__main__":
-    candlestickset = BarSet(1, 3, 0, 2)
-    print(repr(candlestickset))
+    barset = BarSet("test")
+    print(repr(barset))
