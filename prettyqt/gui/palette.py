@@ -77,6 +77,19 @@ class Palette(QtGui.QPalette):
     def get_color(self, role: RoleStr, group: GroupStr = "active") -> gui.Color:
         return gui.Color(self.color(GROUP[group], ROLE[role]))
 
+    def set_brush(
+        self, role: RoleStr, brush: colors.ColorAndBrushType, group: GroupStr = "active"
+    ):
+        if not isinstance(brush, QtGui.QBrush):
+            brush = gui.Brush(colors.get_color(brush))
+        self.setBrush(GROUP[group], ROLE[role], brush)
+
+    def get_brushes(self, group: GroupStr = "active") -> Dict[str, gui.Brush]:
+        return {k: self.get_brush(k, group) for k in ROLE.keys()}
+
+    def get_brush(self, role: RoleStr, group: GroupStr = "active") -> gui.Brush:
+        return gui.Brush(self.brush(GROUP[group], ROLE[role]))
+
 
 if __name__ == "__main__":
     pal = Palette()

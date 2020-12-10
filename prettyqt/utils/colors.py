@@ -10,6 +10,7 @@ from prettyqt import gui
 ColorType = Union[
     str, int, QtGui.QRgba64, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None
 ]
+ColorAndBrushType = Union[ColorType, QtGui.QBrush]
 
 WINDOW_ICON_COLOR = "darkcyan"
 
