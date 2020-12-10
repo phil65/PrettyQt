@@ -34,6 +34,8 @@ SLIDER_STYLE = widgets.Style.CC_Slider
 HANDLE_STYLE = widgets.Style.SC_SliderHandle
 GROOVE_STYLE = widgets.Style.SC_SliderGroove
 
+MOVEMENT_MODE = ["no_crossing", "no_overlap", "free"]
+
 
 def clamp(v: float, lower: float, upper: float):
     return min(upper, max(lower, v))
@@ -213,7 +215,7 @@ class SpanSlider(widgets.Slider):
         Raises:
             ValueError: modality type does not exist
         """
-        if mode not in ["no_crossing", "no_overlap", "free"]:
+        if mode not in MOVEMENT_MODE:
             raise ValueError("Invalid movement mode")
         self.movement = mode
 

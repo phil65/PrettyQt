@@ -738,7 +738,7 @@ def test_menu(qtbot):
     menu = widgets.Menu("1", icon="mdi.timer")
     menu.add(widgets.Action(text="TestAction"))
     act = widgets.Action(text="TestAction")
-    act.id = "test"
+    act.set_id("test")
     menu += act
     assert menu["test"] == act
     with pytest.raises(KeyError):
@@ -1190,7 +1190,7 @@ def test_toolbutton(qtbot):
     assert widget.get_arrow_type() == "left"
     menu = widgets.Menu()
     act = widgets.Action()
-    act.id = "test"
+    act.set_id("test")
     menu.add(act)
     widget.setMenu(menu)
     assert widget["test"] == act

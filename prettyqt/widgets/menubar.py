@@ -62,12 +62,12 @@ class MenuBar(QtWidgets.QMenuBar):
                 action.setMenu(i)
                 self.addAction(action)
             else:
-                self.add_action(i)
+                self.addAction(i)
 
 
 if __name__ == "__main__":
     app = widgets.app()
-    win = QtWidgets.QMainWindow()
+    win = widgets.MainWindow()
     menu_bar = MenuBar()
     menuaction = menu_bar.add_menu("test")
     act = menu_bar.add_action("action")

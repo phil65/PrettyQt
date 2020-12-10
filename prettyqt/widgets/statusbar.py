@@ -17,7 +17,7 @@ class StatusBar(QtWidgets.QStatusBar):
 
     def __add__(self, other: Union[QtWidgets.QAction, QtWidgets.QWidget]) -> StatusBar:
         if isinstance(other, QtWidgets.QAction):
-            self.add_action(other)
+            self.addAction(other)
             return self
         elif isinstance(other, QtWidgets.QWidget):
             self.addWidget(other)

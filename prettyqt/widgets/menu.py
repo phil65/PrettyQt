@@ -39,9 +39,10 @@ class Menu(QtWidgets.QMenu):
                 return action
         raise KeyError(f"Action {item} not in menu")
 
-    def add(self, *item):
+    def add(self, *item: QtWidgets.QAction):
         for i in item:
-            self.add_action(i)
+            i.setParent(self)
+            self.addAction(i)
 
     def set_icon(self, icon: gui.icon.IconType):
         """Set the icon for the menu.
