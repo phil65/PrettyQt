@@ -17,7 +17,7 @@ repos:
     - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v2.10.0
+  rev: v2.11.0
   hooks:
     - id: commitizen
       stages: [commit-msg]
