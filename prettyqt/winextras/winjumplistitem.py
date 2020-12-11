@@ -48,7 +48,7 @@ class WinJumpListItem(QtWinExtras.QWinJumpListItem):
         self.setType(TYPES[typ])
 
     def get_type(self) -> str:
-        return TYPES.inv[self.type()]
+        return TYPES.inverse[self.type()]
 
 
 if __name__ == "__main__":

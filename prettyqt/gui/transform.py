@@ -74,7 +74,7 @@ class Transform(QtGui.QTransform):
         )
 
     def get_type(self) -> str:
-        return TRANSFORMATION_TYPE.inv[self.type()]
+        return TRANSFORMATION_TYPE.inverse[self.type()]
 
 
 if __name__ == "__main__":

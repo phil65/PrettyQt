@@ -17,7 +17,7 @@ QtNetwork.QLocalServer.__bases__ = (core.Object,)
 
 class LocalServer(QtNetwork.QLocalServer):
     def get_server_error(self) -> str:
-        return network.abstractsocket.SOCKET_ERROR.inv[self.serverError()]
+        return network.abstractsocket.SOCKET_ERROR.inverse[self.serverError()]
 
     def set_socket_options(self, *name: str):
         for item in name:

@@ -19,7 +19,7 @@ QtMultimedia.QSoundEffect.__bases__ = (core.Object,)
 
 class SoundEffect(QtMultimedia.QSoundEffect):
     def get_status(self) -> str:
-        return STATUS.inv[self.status()]
+        return STATUS.inverse[self.status()]
 
     def set_source(self, source: Union[str, pathlib.Path, QtCore.QUrl]):
         if not isinstance(source, QtCore.QUrl):

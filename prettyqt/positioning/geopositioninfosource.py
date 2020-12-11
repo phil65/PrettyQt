@@ -51,7 +51,7 @@ class GeoPositionInfoSource(QtPositioning.QGeoPositionInfoSource):
         Returns:
             error type
         """
-        return ERRORS.inv[self.error()]
+        return ERRORS.inverse[self.error()]
 
     def set_preferred_positioning_methods(self, *methods: str):
         """Set preferred positioning methods.

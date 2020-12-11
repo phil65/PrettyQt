@@ -108,7 +108,7 @@ class TabWidget(QtWidgets.QTabWidget):
         Returns:
             tab shape
         """
-        return TAB_SHAPES.inv[self.tabShape()]
+        return TAB_SHAPES.inverse[self.tabShape()]
 
     def set_tab_position(self, position: str) -> None:
         """Set tab position for the tabwidget.
@@ -133,7 +133,7 @@ class TabWidget(QtWidgets.QTabWidget):
         Returns:
             tab position
         """
-        return TAB_POSITIONS.inv[self.tabPosition()]
+        return TAB_POSITIONS.inverse[self.tabPosition()]
 
     def get_children(self) -> list:
         return [

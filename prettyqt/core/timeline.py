@@ -50,7 +50,7 @@ class TimeLine(QtCore.QTimeLine):
         Returns:
             direction
         """
-        return DIRECTION.inv[self.direction()]
+        return DIRECTION.inverse[self.direction()]
 
     def get_state(self) -> str:
         """Return current state.
@@ -60,7 +60,7 @@ class TimeLine(QtCore.QTimeLine):
         Returns:
             state
         """
-        return STATE.inv[self.state()]
+        return STATE.inverse[self.state()]
 
     def set_easing(
         self, easing_type: Union[str, Callable[[float], float]]

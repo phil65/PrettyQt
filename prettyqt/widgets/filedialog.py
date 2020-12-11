@@ -107,7 +107,7 @@ class FileDialog(QtWidgets.QFileDialog):
         Returns:
             accept mode
         """
-        return ACCEPT_MODE.inv[self.acceptMode()]
+        return ACCEPT_MODE.inverse[self.acceptMode()]
 
     def set_view_mode(self, mode: ViewModeStr):
         """Set view mode.
@@ -128,7 +128,7 @@ class FileDialog(QtWidgets.QFileDialog):
         Returns:
             view mode
         """
-        return VIEW_MODE.inv[self.viewMode()]
+        return VIEW_MODE.inverse[self.viewMode()]
 
     def set_label_text(self, label: LabelStr, text: str):
         """Set the label text for button label.
@@ -155,7 +155,7 @@ class FileDialog(QtWidgets.QFileDialog):
         Returns:
             file mode
         """
-        return FILE_MODE.inv[self.fileMode()]
+        return FILE_MODE.inverse[self.fileMode()]
 
     def set_file_mode(self, mode: FileModeStr):
         """Set the file mode of the dialog.

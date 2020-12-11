@@ -31,7 +31,7 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
         return not self.isEmpty()
 
     def get_type(self) -> str:
-        return TYPES.inv[self.type()]
+        return TYPES.inverse[self.type()]
 
     def add_destination(self, destination: Union[str, pathlib.Path]) -> None:
         self.addDestination(str(destination))

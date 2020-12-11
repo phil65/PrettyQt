@@ -133,7 +133,7 @@ class Label(QtWidgets.QLabel):
         Returns:
             text format
         """
-        return TEXT_FORMAT.inv[self.textFormat()]
+        return TEXT_FORMAT.inverse[self.textFormat()]
 
     def set_text_interaction(self, *types: str) -> Label:
         """Set the text interaction mode.

@@ -51,7 +51,7 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
         Returns:
             bottom border style
         """
-        return gui.textframeformat.BORDER_STYLES.inv[self.bottomBorderStyle()]
+        return gui.textframeformat.BORDER_STYLES.inverse[self.bottomBorderStyle()]
 
     def get_left_border_brush(self) -> gui.Brush:
         return gui.Brush(self.leftBorderBrush())
@@ -81,7 +81,7 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
         Returns:
             left border style
         """
-        return gui.textframeformat.BORDER_STYLES.inv[self.leftBorderStyle()]
+        return gui.textframeformat.BORDER_STYLES.inverse[self.leftBorderStyle()]
 
     def get_right_border_brush(self) -> gui.Brush:
         return gui.Brush(self.rightBorderBrush())
@@ -111,7 +111,7 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
         Returns:
             right border style
         """
-        return gui.textframeformat.BORDER_STYLES.inv[self.rightBorderStyle()]
+        return gui.textframeformat.BORDER_STYLES.inverse[self.rightBorderStyle()]
 
     def get_top_border_brush(self) -> gui.Brush:
         return gui.Brush(self.topBorderBrush())
@@ -141,7 +141,7 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
         Returns:
             top border style
         """
-        return gui.textframeformat.BORDER_STYLES.inv[self.topBorderStyle()]
+        return gui.textframeformat.BORDER_STYLES.inverse[self.topBorderStyle()]
 
 
 if __name__ == "__main__":

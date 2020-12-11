@@ -76,7 +76,7 @@ class GeoManeuver(QtLocation.QGeoManeuver):
         Returns:
             Direction
         """
-        return INSTRUCTION_DIRECTION.inv[self.direction()]
+        return INSTRUCTION_DIRECTION.inverse[self.direction()]
 
 
 if __name__ == "__main__":

@@ -57,7 +57,7 @@ class WebEngineContextMenuData(QtWebEngineWidgets.QWebEngineContextMenuData):
         return core.Url(self.linkUrl())
 
     def get_media_type(self) -> str:
-        return MEDIA_TYPES.inv[self.mediaType()]
+        return MEDIA_TYPES.inverse[self.mediaType()]
 
     def get_media_flags(self) -> List[str]:
         return [k for k, v in MEDIA_FLAGS.items() if v & self.mediaFlags()]

@@ -35,10 +35,10 @@ class Uuid(QtCore.QUuid):
         return not self.isNull()
 
     def get_variant(self) -> str:
-        return VARIANTS.inv[self.variant()]
+        return VARIANTS.inverse[self.variant()]
 
     def get_version(self) -> str:
-        return VERSION.inv[self.version()]
+        return VERSION.inverse[self.version()]
 
     @classmethod
     def create_uuid(cls):

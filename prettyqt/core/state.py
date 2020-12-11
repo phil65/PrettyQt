@@ -43,7 +43,7 @@ class State(QtCore.QState):
         Returns:
             child mode
         """
-        return CHILD_MODE.inv[self.childMode()]
+        return CHILD_MODE.inverse[self.childMode()]
 
 
 if __name__ == "__main__":

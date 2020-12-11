@@ -59,7 +59,7 @@ class AudioFormat(QtMultimedia.QAudioFormat):
         self.setSampleType(SAMPLE_TYPES[mode])
 
     def get_sample_type(self) -> str:
-        return SAMPLE_TYPES.inv[self.sampleType()]
+        return SAMPLE_TYPES.inverse[self.sampleType()]
 
     def set_byte_order(self, order: str):
         if order not in ENDIAN:
@@ -67,7 +67,7 @@ class AudioFormat(QtMultimedia.QAudioFormat):
         self.setByteOrder(ENDIAN[order])
 
     def get_byte_order(self) -> str:
-        return ENDIAN.inv[self.byteOrder()]
+        return ENDIAN.inverse[self.byteOrder()]
 
     def to_dataclass(self) -> Settings:
         return Settings(

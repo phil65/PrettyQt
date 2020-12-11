@@ -126,7 +126,7 @@ class LineEdit(QtWidgets.QLineEdit):
         Returns:
             echo mode
         """
-        return ECHO_MODES.inv[self.echoMode()]
+        return ECHO_MODES.inverse[self.echoMode()]
 
     def set_value(self, value: str):
         self.setText(value)

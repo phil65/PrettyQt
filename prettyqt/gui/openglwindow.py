@@ -25,7 +25,7 @@ class OpenGLWindow(QtGui.QOpenGLWindow):
         Returns:
             update behaviour
         """
-        return UPDATE_BEHAVIOUR.inv[self.updateBehavior()]
+        return UPDATE_BEHAVIOUR.inverse[self.updateBehavior()]
 
     def grab_framebuffer(self) -> gui.Image:
         return gui.Image(self.grabFramebuffer())

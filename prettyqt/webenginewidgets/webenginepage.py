@@ -244,7 +244,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         Returns:
             lifecycle state
         """
-        return LIFECYCLE_STATES.inv[self.lifecycleState()]
+        return LIFECYCLE_STATES.inverse[self.lifecycleState()]
 
     def trigger_action(self, action: str, checked: bool = False):
         self.triggerAction(WEB_ACTIONS[action], checked)

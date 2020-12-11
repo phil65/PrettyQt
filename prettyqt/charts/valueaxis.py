@@ -36,4 +36,4 @@ class ValueAxis(QtCharts.QValueAxis):
         Returns:
             tick_type
         """
-        return TICK_TYPES.inv[self.tickType()]
+        return TICK_TYPES.inverse[self.tickType()]

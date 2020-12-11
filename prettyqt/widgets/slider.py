@@ -79,7 +79,7 @@ class Slider(QtWidgets.QSlider):
         Returns:
             tick position
         """
-        val = TICK_POSITION.inv[self.tickPosition()]
+        val = TICK_POSITION.inverse[self.tickPosition()]
         # if self.is_vertical():
         #     if val == "above":
         #         return "left"

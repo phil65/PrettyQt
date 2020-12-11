@@ -38,7 +38,7 @@ class QmlEngine(QtQml.QQmlEngine):
         Returns:
             object ownership
         """
-        return OBJECT_OWNERSHIPS.inv[self.objectOwnership(obj)]
+        return OBJECT_OWNERSHIPS.inverse[self.objectOwnership(obj)]
 
     def add_import_path(self, path: Union[str, pathlib.Path]):
         self.addImportPath(str(path))

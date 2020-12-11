@@ -35,4 +35,4 @@ class QuickView(QtQuick.QQuickView):
         return pathlib.Path(self.source().toLocalFile())
 
     def get_status(self) -> str:
-        return STATUS.inv[self.status()]
+        return STATUS.inverse[self.status()]

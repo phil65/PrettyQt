@@ -104,4 +104,4 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
         Returns:
             priority
         """
-        return PRIORITIES.inv[self.priority()]
+        return PRIORITIES.inverse[self.priority()]

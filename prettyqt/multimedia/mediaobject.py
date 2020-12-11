@@ -27,4 +27,4 @@ class MediaObject(QtMultimedia.QMediaObject):
         Returns:
             availability status
         """
-        return AVAILABILITY_STATUS.inv[self.availability()]
+        return AVAILABILITY_STATUS.inverse[self.availability()]

@@ -65,7 +65,7 @@ class TextFrameFormat(QtGui.QTextFrameFormat):
         Returns:
             border style
         """
-        return BORDER_STYLES.inv[self.borderStyle()]
+        return BORDER_STYLES.inverse[self.borderStyle()]
 
     def set_page_break_policy(self, policy: str):
         """Set page break policy.
@@ -90,7 +90,7 @@ class TextFrameFormat(QtGui.QTextFrameFormat):
         Returns:
             page break policy
         """
-        return gui.textformat.PAGE_BREAK_FLAG.inv[self.pageBreakPolicy()]
+        return gui.textformat.PAGE_BREAK_FLAG.inverse[self.pageBreakPolicy()]
 
     def set_position(self, position: str):
         """Set position.
@@ -115,4 +115,4 @@ class TextFrameFormat(QtGui.QTextFrameFormat):
         Returns:
             position
         """
-        return POSITIONS.inv[self.position()]
+        return POSITIONS.inverse[self.position()]

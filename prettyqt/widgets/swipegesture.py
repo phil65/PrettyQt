@@ -24,7 +24,7 @@ class SwipeGesture(QtWidgets.QSwipeGesture):
         Returns:
             horizontal direction
         """
-        return SWIPE_DIRECTION.inv[self.horizontalDirection()]
+        return SWIPE_DIRECTION.inverse[self.horizontalDirection()]
 
     def get_vertical_direction(self) -> str:
         """Return vertical direction of the gesture.
@@ -34,7 +34,7 @@ class SwipeGesture(QtWidgets.QSwipeGesture):
         Returns:
             vertical direction
         """
-        return SWIPE_DIRECTION.inv[self.verticalDirection()]
+        return SWIPE_DIRECTION.inverse[self.verticalDirection()]
 
 
 if __name__ == "__main__":

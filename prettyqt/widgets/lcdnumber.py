@@ -45,7 +45,7 @@ class LCDNumber(QtWidgets.QLCDNumber):
         Returns:
             lcd mode
         """
-        return MODE.inv[self.mode()]
+        return MODE.inverse[self.mode()]
 
     def set_segment_style(self, mode: SegmentStyleStr):
         """Set the segment style.
@@ -66,7 +66,7 @@ class LCDNumber(QtWidgets.QLCDNumber):
         Returns:
             segment style
         """
-        return SEGMENT_STYLE.inv[self.segmentStyle()]
+        return SEGMENT_STYLE.inverse[self.segmentStyle()]
 
     def set_value(self, value: Union[float, str]):
         self.display(value)

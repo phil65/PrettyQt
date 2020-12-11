@@ -89,7 +89,7 @@ class CameraExposure(core.Object):
         Returns:
             exposure mode
         """
-        return EXPOSURE_MODES.inv[self.item.exposureMode()]
+        return EXPOSURE_MODES.inverse[self.item.exposureMode()]
 
     def set_flash_mode(self, mode: str):
         """Set the flash mode.
@@ -118,7 +118,7 @@ class CameraExposure(core.Object):
         Returns:
             flash mode
         """
-        return FLASH_MODES.inv[self.item.flashMode()]
+        return FLASH_MODES.inverse[self.item.flashMode()]
 
     def set_metering_mode(self, mode: str):
         """Set the metering mode.
@@ -143,7 +143,7 @@ class CameraExposure(core.Object):
         Returns:
             metering mode
         """
-        return METERING_MODES.inv[self.item.meteringMode()]
+        return METERING_MODES.inverse[self.item.meteringMode()]
 
     def get_spot_metering_point(self) -> core.PointF:
         return core.PointF(self.item.spotMeteringPoint())

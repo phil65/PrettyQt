@@ -266,7 +266,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Returns:
             modality mode
         """
-        return MODALITY.inv[self.windowModality()]
+        return MODALITY.inverse[self.windowModality()]
 
     def set_size_policy(
         self, horizontal: Optional[str] = None, vertical: Optional[str] = None
@@ -357,7 +357,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Returns:
             contextmenu policy
         """
-        return CONTEXT_POLICY.inv[self.contextMenuPolicy()]
+        return CONTEXT_POLICY.inverse[self.contextMenuPolicy()]
 
     def set_custom_menu(self, method: Callable) -> None:
         self.set_contextmenu_policy("custom")
@@ -427,7 +427,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Returns:
             str: Focus policy
         """
-        return FOCUS_POLICIES.inv[self.focusPolicy()]
+        return FOCUS_POLICIES.inverse[self.focusPolicy()]
 
     def set_font_size(self, size: int) -> None:
         font = self.font()

@@ -35,4 +35,4 @@ class ElapsedTimer(QtCore.QElapsedTimer):
         Returns:
             clock type
         """
-        return CLOCK_TYPE.inv[self.clockType()]
+        return CLOCK_TYPE.inverse[self.clockType()]

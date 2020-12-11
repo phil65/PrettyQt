@@ -80,7 +80,7 @@ class CheckBox(QtWidgets.QCheckBox):
         Returns:
             checkstate
         """
-        return STATE.inv[self.checkState()]
+        return STATE.inverse[self.checkState()]
 
     def get_value(self) -> bool:
         return self.isChecked()

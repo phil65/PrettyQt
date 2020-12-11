@@ -73,22 +73,22 @@ QtLocation.QGeoServiceProvider.__bases__ = (core.Object,)
 
 class GeoServiceProvider(QtLocation.QGeoServiceProvider):
     def get_error(self) -> str:
-        return ERROR.inv[self.error()]
+        return ERROR.inverse[self.error()]
 
     def get_geocoding_error(self) -> str:
-        return ERROR.inv[self.geocodingError()]
+        return ERROR.inverse[self.geocodingError()]
 
     def get_geocoding_features(self) -> List[str]:
         return [k for k, v in GEOCODING_FEATURES.items() if v & self.geocodingFeatures()]
 
     def get_mapping_error(self) -> str:
-        return ERROR.inv[self.mappingError()]
+        return ERROR.inverse[self.mappingError()]
 
     def get_mapping_features(self) -> List[str]:
         return [k for k, v in MAPPING_FEATURES.items() if v & self.mappingFeatures()]
 
     def get_navigation_error(self) -> str:
-        return ERROR.inv[self.navigationError()]
+        return ERROR.inverse[self.navigationError()]
 
     def get_navigation_features(self) -> List[str]:
         return [
@@ -96,13 +96,13 @@ class GeoServiceProvider(QtLocation.QGeoServiceProvider):
         ]
 
     def get_places_error(self) -> str:
-        return ERROR.inv[self.placesError()]
+        return ERROR.inverse[self.placesError()]
 
     def get_places_features(self) -> List[str]:
         return [k for k, v in PLACES_FEATURES.items() if v & self.placesFeatures()]
 
     def get_routing_error(self) -> str:
-        return ERROR.inv[self.routingError()]
+        return ERROR.inverse[self.routingError()]
 
     def get_routing_features(self) -> List[str]:
         return [k for k, v in ROUTING_FEATURES.items() if v & self.routingFeatures()]

@@ -46,7 +46,7 @@ class CameraViewfinderSettings(QtMultimedia.QCameraViewfinderSettings):
         self.setPixelFormat(multimedia.videoframe.PIXEL_FORMAT[fmt])
 
     def get_pixel_format(self) -> str:
-        return multimedia.videoframe.PIXEL_FORMAT.inv[self.pixelFormat()]
+        return multimedia.videoframe.PIXEL_FORMAT.inverse[self.pixelFormat()]
 
     def to_dataclass(self) -> Settings:
         size = self.resolution()

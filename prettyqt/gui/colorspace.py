@@ -67,7 +67,7 @@ class ColorSpace(QtGui.QColorSpace):
         Returns:
             primaries
         """
-        return PRIMARIES.inv[self.primaries()]
+        return PRIMARIES.inverse[self.primaries()]
 
     def set_transfer_function(self, fn: str, gamma: float = 0.0):
         """Set transfer function.
@@ -92,7 +92,7 @@ class ColorSpace(QtGui.QColorSpace):
         Returns:
             transfer function
         """
-        return TRANSFER_FUNCTION.inv[self.transferFunction()]
+        return TRANSFER_FUNCTION.inverse[self.transferFunction()]
 
 
 if __name__ == "__main__":

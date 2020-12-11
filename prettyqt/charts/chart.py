@@ -120,7 +120,7 @@ class Chart(QtCharts.QChart):
         self.axisY().setMin(max(0, self.min_y))
 
     def get_chart_type(self) -> str:
-        return CHART_TYPES.inv[self.chartType()]
+        return CHART_TYPES.inverse[self.chartType()]
 
     def get_margins(self) -> core.Margins:
         return core.Margins(self.margins())
@@ -132,7 +132,7 @@ class Chart(QtCharts.QChart):
         return core.Locale(self.locale())
 
     def get_theme(self) -> str:
-        return THEMES.inv[self.theme()]
+        return THEMES.inverse[self.theme()]
 
     def get_animation_options(self) -> List[str]:
         return [k for k, v in ANIMATION_OPTIONS.items() if v & self.animationOptions()]

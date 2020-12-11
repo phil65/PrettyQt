@@ -162,7 +162,7 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         Returns:
             current font weight
         """
-        return WEIGHTS.inv[self.weight()]
+        return WEIGHTS.inverse[self.weight()]
 
     def set_capitalization(self, capitalization: str):
         """Set the font capitalization.
@@ -189,7 +189,7 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         Returns:
             current font capitalization
         """
-        return CAPITALIZATION.inv[self.capitalization()]
+        return CAPITALIZATION.inverse[self.capitalization()]
 
     def set_hinting_preference(self, preference: str):
         """Set the hinting preference.
@@ -214,7 +214,7 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         Returns:
             current hinting preference
         """
-        return HINTING_PREFERENCE.inv[self.hintingPreference()]
+        return HINTING_PREFERENCE.inverse[self.hintingPreference()]
 
     def set_letter_spacing(self, typ: str, spacing: float):
         """Set the letter spacing.
@@ -240,7 +240,7 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         Returns:
             current letter spacing type
         """
-        return SPACING_TYPE.inv[self.letterSpacingType()]
+        return SPACING_TYPE.inverse[self.letterSpacingType()]
 
     def set_style(self, style: str):
         """Set the font style.
@@ -265,7 +265,7 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         Returns:
             current font style
         """
-        return STYLE.inv[self.style()]
+        return STYLE.inverse[self.style()]
 
 
 if __name__ == "__main__":

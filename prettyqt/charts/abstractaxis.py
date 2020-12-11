@@ -32,7 +32,7 @@ class AbstractAxis(QtCharts.QAbstractAxis):
         alignment = self.alignment()
         if int(alignment) == 0:
             return None
-        return ALIGNMENTS.inv[alignment]
+        return ALIGNMENTS.inverse[alignment]
 
     def get_orientation(self) -> Optional[str]:
         """Return current orientation.
@@ -45,7 +45,7 @@ class AbstractAxis(QtCharts.QAbstractAxis):
         orientation = self.orientation()
         if int(orientation) == 0:
             return None
-        return ORIENTATIONS.inv[orientation]
+        return ORIENTATIONS.inverse[orientation]
 
     def get_grid_line_color(self) -> gui.Color:
         return gui.Color(self.gridLineColor())

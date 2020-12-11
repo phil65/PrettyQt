@@ -72,7 +72,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         Returns:
             alignment
         """
-        return ALIGNMENTS.inv[self.alignment()]
+        return ALIGNMENTS.inverse[self.alignment()]
 
     def set_text_direction(self, text_direction: str):
         """Set the text direction of the layout.
@@ -97,7 +97,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         Returns:
             Text direction
         """
-        return TEXT_DIRECTIONS.inv[self.textDirection()]
+        return TEXT_DIRECTIONS.inverse[self.textDirection()]
 
     def set_orientation(self, orientation: str):
         """Set the orientation of the progress bar.
@@ -122,7 +122,7 @@ class ProgressBar(QtWidgets.QProgressBar):
         Returns:
             orientation
         """
-        return ORIENTATIONS.inv[self.orientation()]
+        return ORIENTATIONS.inverse[self.orientation()]
 
     def set_range(self, start: int, end: int):
         self.setRange(start, end)

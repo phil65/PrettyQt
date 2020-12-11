@@ -22,7 +22,7 @@ QtQml.QQmlComponent.__bases__ = (core.Object,)
 
 class QmlComponent(QtQml.QQmlComponent):
     def get_status(self) -> str:
-        return STATUS.inv[self.status()]
+        return STATUS.inverse[self.status()]
 
     def get_url(self) -> core.Url:
         return core.Url(self.url())

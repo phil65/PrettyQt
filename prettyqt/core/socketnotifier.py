@@ -29,7 +29,7 @@ class SocketNotifier(QtCore.QSocketNotifier):
         Returns:
             socket event type
         """
-        return TYPE.inv[self.type()]
+        return TYPE.inverse[self.type()]
 
 
 if __name__ == "__main__":

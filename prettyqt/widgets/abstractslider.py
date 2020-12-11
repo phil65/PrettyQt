@@ -94,7 +94,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         Returns:
             orientation
         """
-        return ORIENTATIONS.inv[self.orientation()]
+        return ORIENTATIONS.inverse[self.orientation()]
 
     def scroll_to_min(self):
         """Scroll to the minimum value of the slider."""
@@ -135,7 +135,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         Returns:
             current repeat action
         """
-        return SLIDER_ACTIONS.inv[self.repeatAction()]
+        return SLIDER_ACTIONS.inverse[self.repeatAction()]
 
     def trigger_action(self, action: str):
         """Trigger slider action.

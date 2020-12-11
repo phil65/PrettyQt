@@ -49,7 +49,7 @@ class Movie(QtGui.QMovie):
         Returns:
             cache mode
         """
-        return CACHE_MODES.inv[self.cacheMode()]
+        return CACHE_MODES.inverse[self.cacheMode()]
 
 
 if __name__ == "__main__":

@@ -63,10 +63,10 @@ class WebEngineDownloadItem:
         return getattr(self.item, val)
 
     def get_interrupt_reason(self) -> str:
-        return DOWNLOAD_INTERRUPT_REASONS.inv[self.item.interruptReason()]
+        return DOWNLOAD_INTERRUPT_REASONS.inverse[self.item.interruptReason()]
 
     def get_state(self) -> str:
-        return DOWNLOAD_STATES.inv[self.item.state()]
+        return DOWNLOAD_STATES.inverse[self.item.state()]
 
     def set_save_page_format(self, fmt: str):
         """Set the save page format.
@@ -91,7 +91,7 @@ class WebEngineDownloadItem:
         Returns:
             Save page format
         """
-        return SAVE_PAGE_FORMATS.inv[self.item.savePageFormat()]
+        return SAVE_PAGE_FORMATS.inverse[self.item.savePageFormat()]
 
 
 # if __name__ == "__main__":

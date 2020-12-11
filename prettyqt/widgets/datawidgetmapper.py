@@ -44,7 +44,7 @@ class DataWidgetMapper(QtWidgets.QDataWidgetMapper):
         Returns:
             orientation
         """
-        return ORIENTATIONS.inv[self.orientation()]
+        return ORIENTATIONS.inverse[self.orientation()]
 
     def set_submit_policy(self, policy: str):
         """Set the submit policy of the mapper.
@@ -69,4 +69,4 @@ class DataWidgetMapper(QtWidgets.QDataWidgetMapper):
         Returns:
             submit policy
         """
-        return SUBMIT_POLICIES.inv[self.submitPolicy()]
+        return SUBMIT_POLICIES.inverse[self.submitPolicy()]

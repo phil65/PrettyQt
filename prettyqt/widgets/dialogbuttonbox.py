@@ -105,7 +105,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         Returns:
             orientation
         """
-        return ORIENTATIONS.inv[self.orientation()]
+        return ORIENTATIONS.inverse[self.orientation()]
 
     def add_default_buttons(self, buttons: Sequence[str]):
         return [self.add_default_button(btn) for btn in buttons]

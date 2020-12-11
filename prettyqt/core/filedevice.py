@@ -110,4 +110,4 @@ class FileDevice(QtCore.QFileDevice):
         Returns:
             file error status
         """
-        return FILE_ERROR.inv[self.error()]
+        return FILE_ERROR.inverse[self.error()]

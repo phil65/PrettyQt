@@ -107,7 +107,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Returns:
             viewport anchor
         """
-        return VIEWPORT_ANCHORS.inv[self.transformationAnchor()]
+        return VIEWPORT_ANCHORS.inverse[self.transformationAnchor()]
 
     def set_resize_anchor(self, mode: str):
         """Set how the view should position the scene during resizes.
@@ -132,7 +132,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Returns:
             resize anchor
         """
-        return VIEWPORT_ANCHORS.inv[self.resizeAnchor()]
+        return VIEWPORT_ANCHORS.inverse[self.resizeAnchor()]
 
     def set_viewport_update_mode(self, mode: str):
         """Set how the viewport should update its contents.
@@ -157,7 +157,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Returns:
             viewport update mode
         """
-        return VIEWPORT_UPDATE_MODES.inv[self.viewportUpdateMode()]
+        return VIEWPORT_UPDATE_MODES.inverse[self.viewportUpdateMode()]
 
     def set_drag_mode(self, mode: str):
         """Set the behavior for dragging the mouse while the left mouse button is pressed.
@@ -182,7 +182,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Returns:
             drag mode
         """
-        return DRAG_MODES.inv[self.dragMode()]
+        return DRAG_MODES.inverse[self.dragMode()]
 
     def set_rubberband_selection_mode(self, mode: str):
         """Set the behavior for selecting items with a rubber band selection rectangle.
@@ -209,7 +209,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Returns:
             rubberband selection mode
         """
-        return ITEM_SELECTION_MODES.inv[self.rubberBandSelectionMode()]
+        return ITEM_SELECTION_MODES.inverse[self.rubberBandSelectionMode()]
 
     def set_cache_mode(self, mode: str):
         """Set the cache mode.
@@ -234,7 +234,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Returns:
             cache mode
         """
-        return CACHE_MODES.inv[self.cacheMode()]
+        return CACHE_MODES.inverse[self.cacheMode()]
 
     def set_optimization_flags(self, *items: str):
         for item in items:

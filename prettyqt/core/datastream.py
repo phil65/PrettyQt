@@ -39,7 +39,7 @@ class DataStream(QtCore.QDataStream):
         Returns:
             byte order
         """
-        return BYTE_ORDER.inv[self.byteOrder()]
+        return BYTE_ORDER.inverse[self.byteOrder()]
 
     def set_float_precision(self, precision: str):
         """Set floating point precision.
@@ -64,7 +64,7 @@ class DataStream(QtCore.QDataStream):
         Returns:
             floating point precision
         """
-        return FLOAT_PRECISION.inv[self.floatingPointPrecision()]
+        return FLOAT_PRECISION.inverse[self.floatingPointPrecision()]
 
     @classmethod
     def create_bytearray(cls, data) -> QtCore.QByteArray:

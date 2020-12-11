@@ -61,10 +61,10 @@ class VideoFrame(QtMultimedia.QVideoFrame):
         )
 
     def get_handle_type(self) -> str:
-        return HANDLE_TYPES.inv[self.handleType()]
+        return HANDLE_TYPES.inverse[self.handleType()]
 
     def get_map_mode(self) -> str:
-        return MAP_MODE.inv[self.mapMode()]
+        return MAP_MODE.inverse[self.mapMode()]
 
     def get_size(self) -> core.Size:
         return core.Size(self.size())
@@ -73,7 +73,7 @@ class VideoFrame(QtMultimedia.QVideoFrame):
         return gui.Image(self.image())
 
     def get_pixel_format(self) -> str:
-        return PIXEL_FORMAT.inv[self.pixelFormat()]
+        return PIXEL_FORMAT.inverse[self.pixelFormat()]
 
     def get_field_type(self) -> str:
         """Set field type.
@@ -82,7 +82,7 @@ class VideoFrame(QtMultimedia.QVideoFrame):
                       "interlaced_frame"
 
         """
-        return FIELD_TYPES.inv[self.fieldType()]
+        return FIELD_TYPES.inverse[self.fieldType()]
 
     def set_field_type(self, typ: str):
         """Return current field type.

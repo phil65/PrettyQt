@@ -31,7 +31,7 @@ class ImageReader(QtGui.QImageReader):
         Returns:
             error type
         """
-        return IMAGE_READER_ERROR.inv[self.error()]
+        return IMAGE_READER_ERROR.inverse[self.error()]
 
     def get_background_color(self) -> gui.Color:
         return gui.Color(self.backgroundColor())
@@ -74,7 +74,7 @@ class ImageReader(QtGui.QImageReader):
         Returns:
             transformation
         """
-        return TRANSFORMATIONS.inv[self.transformation()]
+        return TRANSFORMATIONS.inverse[self.transformation()]
 
     def read_image(self) -> gui.Image:
         return gui.Image(self.read())

@@ -45,4 +45,4 @@ class TextListFormat(QtGui.QTextListFormat):
         Returns:
             current style
         """
-        return STYLES.inv[self.style()]
+        return STYLES.inverse[self.style()]

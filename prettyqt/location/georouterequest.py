@@ -91,7 +91,7 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
         """
         if feature not in FEATURE_TYPES:
             raise InvalidParamError(feature, FEATURE_TYPES)
-        return FEATURE_WEIGHTS.inv[self.featureWeight(FEATURE_TYPES[feature])]
+        return FEATURE_WEIGHTS.inverse[self.featureWeight(FEATURE_TYPES[feature])]
 
     def set_route_optimization(self, optimization: str):
         """Set the route optimization.
@@ -116,7 +116,7 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
         Returns:
             Route optimization
         """
-        return ROUTE_OPTIMIZATION.inv[self.routeOptimization()]
+        return ROUTE_OPTIMIZATION.inverse[self.routeOptimization()]
 
     def get_travel_modes(self) -> List[str]:
         return [k for k, v in TRAVEL_MODE.items() if v & self.travelModes()]

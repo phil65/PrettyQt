@@ -50,7 +50,7 @@ class WebEngineProfile(QtWebEngineWidgets.QWebEngineProfile):
         Returns:
             Persistent cookie policy
         """
-        return PERSISTENT_COOKIE_POLICIES.inv[self.persistentCookiesPolicy()]
+        return PERSISTENT_COOKIE_POLICIES.inverse[self.persistentCookiesPolicy()]
 
     def set_http_cache_type(self, typ: str):
         """Set the http cache type.
@@ -75,7 +75,7 @@ class WebEngineProfile(QtWebEngineWidgets.QWebEngineProfile):
         Returns:
             Http cache type
         """
-        return HTTP_CACHE_TYPES.inv[self.httpCacheType()]
+        return HTTP_CACHE_TYPES.inverse[self.httpCacheType()]
 
     def get_scripts(self) -> webenginewidgets.WebEngineScriptCollection:
         return webenginewidgets.WebEngineScriptCollection(self.scripts())

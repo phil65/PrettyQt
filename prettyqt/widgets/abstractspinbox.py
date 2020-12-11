@@ -50,7 +50,7 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         Returns:
             button symbol type
         """
-        return SYMBOLS.inv[self.buttonSymbols()]
+        return SYMBOLS.inverse[self.buttonSymbols()]
 
     def set_button_symbols(self, mode: str):
         """Set button symbol type.
@@ -90,7 +90,7 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         Returns:
             correction mode
         """
-        return CORRECTION_MODES.inv[self.correctionMode()]
+        return CORRECTION_MODES.inverse[self.correctionMode()]
 
     def set_step_type(self, mode: str):
         """Set step type.
@@ -115,7 +115,7 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
         Returns:
             step type
         """
-        return STEP_TYPES.inv[self.stepType()]
+        return STEP_TYPES.inverse[self.stepType()]
 
     def set_special_value(self, value: str):
         self.setSpecialValueText(value)

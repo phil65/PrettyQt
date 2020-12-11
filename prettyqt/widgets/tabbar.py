@@ -123,7 +123,7 @@ class TabBar(QtWidgets.QTabBar):
         Returns:
             remove behaviour
         """
-        return REMOVE_BEHAVIOURS.inv[self.selectionBehaviorOnRemove()]
+        return REMOVE_BEHAVIOURS.inverse[self.selectionBehaviorOnRemove()]
 
     def set_elide_mode(self, mode: str) -> None:
         """Set elide mode.
@@ -148,4 +148,4 @@ class TabBar(QtWidgets.QTabBar):
         Returns:
             elide mode
         """
-        return ELIDE_MODES.inv[self.elideMode()]
+        return ELIDE_MODES.inverse[self.elideMode()]

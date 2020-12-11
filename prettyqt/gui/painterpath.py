@@ -68,7 +68,7 @@ class PainterPath(QtGui.QPainterPath):
         Returns:
             fill rule
         """
-        return FILL_RULE.inv[self.fillRule()]
+        return FILL_RULE.inverse[self.fillRule()]
 
     def get_bounding_rect(self) -> core.RectF:
         return core.RectF(self.boundingRect())

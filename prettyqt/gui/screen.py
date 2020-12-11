@@ -48,13 +48,13 @@ class Screen:
         return core.Size(self.virtualSize())
 
     def get_native_orientation(self) -> str:
-        return ORIENTATIONS.inv[self.nativeOrientation()]
+        return ORIENTATIONS.inverse[self.nativeOrientation()]
 
     def get_orientation(self) -> str:
-        return ORIENTATIONS.inv[self.orientation()]
+        return ORIENTATIONS.inverse[self.orientation()]
 
     def get_primary_orientation(self) -> str:
-        return ORIENTATIONS.inv[self.primaryOrientation()]
+        return ORIENTATIONS.inverse[self.primaryOrientation()]
 
     def get_physical_size(self) -> core.SizeF:
         return core.SizeF(self.physicalSize())

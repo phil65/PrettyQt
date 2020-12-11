@@ -46,4 +46,4 @@ class Timer(QtCore.QTimer):
         Returns:
             timer type
         """
-        return TYPE.inv[self.timerType()]
+        return TYPE.inverse[self.timerType()]

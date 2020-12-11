@@ -22,7 +22,7 @@ class LockFile(QtCore.QLockFile):
         super().__init__(str(path))
 
     def get_error(self) -> str:
-        return LOCK_ERROR.inv[self.error()]
+        return LOCK_ERROR.inverse[self.error()]
 
     @contextlib.contextmanager
     def lock_file(self):

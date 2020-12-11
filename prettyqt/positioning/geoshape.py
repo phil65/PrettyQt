@@ -26,4 +26,4 @@ class GeoShape(QtPositioning.QGeoShape):
         return self.toString()[1:]
 
     def get_type(self) -> str:
-        return SHAPE_TYPES.inv[self.type()]
+        return SHAPE_TYPES.inverse[self.type()]

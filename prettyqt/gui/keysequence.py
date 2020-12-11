@@ -119,7 +119,7 @@ class KeySequence(QtGui.QKeySequence):
     def get_matches(self, seq: Union[QtGui.QKeySequence, str]):
         if isinstance(seq, str):
             seq = KeySequence(seq)
-        return SEQUENCE_MATCHES.inv[self.matches(seq)]
+        return SEQUENCE_MATCHES.inverse[self.matches(seq)]
 
     @classmethod
     def to_shortcut_str(cls, key, mod=0):

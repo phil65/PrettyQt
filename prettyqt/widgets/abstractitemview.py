@@ -190,7 +190,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         Returns:
             selection behaviour
         """
-        return SELECTION_BEHAVIOUR.inv[self.selectionBehavior()]
+        return SELECTION_BEHAVIOUR.inverse[self.selectionBehavior()]
 
     def set_selection_mode(self, mode: Optional[SELECTION_MODE_STR]):
         """Set selection mode for given item view.
@@ -213,7 +213,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         Returns:
             selection mode
         """
-        return SELECTION_MODE.inv[self.selectionMode()]
+        return SELECTION_MODE.inverse[self.selectionMode()]
 
     def set_scroll_mode(self, mode: SCROLL_MODE_STR):
         """Set the scroll mode for both directions.

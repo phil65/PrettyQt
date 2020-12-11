@@ -40,7 +40,7 @@ class PainterPathStroker(QtGui.QPainterPathStroker):
         Returns:
             cap style
         """
-        return CAP_STYLES.inv[self.capStyle()]
+        return CAP_STYLES.inverse[self.capStyle()]
 
     def set_join_style(self, style: str):
         """Set join style to use.
@@ -65,7 +65,7 @@ class PainterPathStroker(QtGui.QPainterPathStroker):
         Returns:
             join style
         """
-        return JOIN_STYLES.inv[self.joinStyle()]
+        return JOIN_STYLES.inverse[self.joinStyle()]
 
     def create_stroke(self, path: QtGui.QPainterPath) -> gui.PainterPath:
         return gui.PainterPath(self.createStroke(path))

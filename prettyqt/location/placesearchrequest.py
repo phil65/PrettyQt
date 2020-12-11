@@ -34,7 +34,7 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
         Returns:
             Visibility scope
         """
-        return VISIBILITY.inv[self.visibilityScope()]
+        return VISIBILITY.inverse[self.visibilityScope()]
 
     def get_categories(self) -> List[location.PlaceCategory]:
         return [location.PlaceCategory(i) for i in self.categories()]
@@ -75,7 +75,7 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
         Returns:
             Relevance hint
         """
-        return RELEVANCE_HINT.inv[self.relevanceHint()]
+        return RELEVANCE_HINT.inverse[self.relevanceHint()]
 
 
 if __name__ == "__main__":

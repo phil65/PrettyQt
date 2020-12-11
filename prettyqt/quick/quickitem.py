@@ -79,7 +79,7 @@ class QuickItem(QtQuick.QQuickItem):
         Returns:
             transform origin
         """
-        return TRANSFORM_ORIGIN.inv[self.transformOrigin()]
+        return TRANSFORM_ORIGIN.inverse[self.transformOrigin()]
 
 
 if __name__ == "__main__":

@@ -65,7 +65,7 @@ class CameraImageProcessing(core.Object):
         Returns:
             color filter
         """
-        return COLOR_FILTERS.inv[self.item.colorFilter()]
+        return COLOR_FILTERS.inverse[self.item.colorFilter()]
 
     def set_white_balance_mode(self, mode: str):
         """Set the white balance mode.
@@ -92,7 +92,7 @@ class CameraImageProcessing(core.Object):
         Returns:
             white balance mode
         """
-        return WHITE_BALANCE_MODE.inv[self.item.whiteBalanceMode()]
+        return WHITE_BALANCE_MODE.inverse[self.item.whiteBalanceMode()]
 
     def is_color_filter_supported(self, filter_: str) -> bool:
         if filter_ not in COLOR_FILTERS:

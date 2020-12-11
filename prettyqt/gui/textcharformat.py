@@ -84,7 +84,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         Returns:
             current font weight
         """
-        return gui.font.WEIGHTS.inv[self.fontWeight()]
+        return gui.font.WEIGHTS.inverse[self.fontWeight()]
 
     def set_underline_style(self, style: str):
         """Set the underline style.
@@ -111,7 +111,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         Returns:
             current underline style
         """
-        return UNDERLINE_STYLES.inv[self.underlineStyle()]
+        return UNDERLINE_STYLES.inverse[self.underlineStyle()]
 
     def set_vertical_alignment(self, alignment: str):
         """Set the vertical alignment.
@@ -138,7 +138,7 @@ class TextCharFormat(QtGui.QTextCharFormat):
         Returns:
             current vertical alignment
         """
-        return VERTICAL_ALIGNMENT.inv[self.verticalAlignment()]
+        return VERTICAL_ALIGNMENT.inverse[self.verticalAlignment()]
 
     def set_font_style_hint(self, hint: str):
         """Set the font style hint.

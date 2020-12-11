@@ -39,7 +39,7 @@ class GeoAreaMonitorSource(QtPositioning.QGeoAreaMonitorSource):
         Returns:
             error type
         """
-        return ERRORS.inv[self.error()]
+        return ERRORS.inverse[self.error()]
 
 
 if __name__ == "__main__":

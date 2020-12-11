@@ -126,7 +126,7 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
         super().connectToHost(hostname, port, open_mode, protocol)
 
     def get_error(self) -> str:
-        return SOCKET_ERROR.inv[self.error()]
+        return SOCKET_ERROR.inverse[self.error()]
 
     def set_pause_mode(self, mode: str):
         """Set pause mode.
@@ -144,7 +144,7 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
         self.setPauseMode(PAUSE_MODE[mode])
 
     def get_pause_mode(self) -> str:
-        return PAUSE_MODE.inv[self.pauseMode()]
+        return PAUSE_MODE.inverse[self.pauseMode()]
 
     def get_proxy(self) -> network.NetworkProxy:
         return network.NetworkProxy(self.proxy())
@@ -164,13 +164,13 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
 
     # def get_type_of_service(self):
     #     opt = self.get_socket_option("type_of_service")
-    #     return TYPE_OF_SERVICE.inv[opt]
+    #     return TYPE_OF_SERVICE.inverse[opt]
 
     def get_socket_type(self) -> str:
-        return SOCKET_TYPE.inv[self.socketType()]
+        return SOCKET_TYPE.inverse[self.socketType()]
 
     def get_state(self) -> str:
-        return SOCKET_STATE.inv[self.state()]
+        return SOCKET_STATE.inverse[self.state()]
 
     def get_local_address(self) -> network.HostAddress:
         return network.HostAddress(self.localAddress())

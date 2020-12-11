@@ -66,7 +66,7 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
         Returns:
             str: Focus policy
         """
-        return FOCUS_POLICIES.inv[self.focusPolicy()]
+        return FOCUS_POLICIES.inverse[self.focusPolicy()]
 
 
 if __name__ == "__main__":

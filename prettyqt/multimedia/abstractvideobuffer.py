@@ -40,7 +40,7 @@ class AbstractVideoBuffer(QtMultimedia.QAbstractVideoBuffer):
         Returns:
             handle type
         """
-        return HANDLE_TYPES.inv[self.handleType()]
+        return HANDLE_TYPES.inverse[self.handleType()]
 
     def get_map_mode(self) -> str:
         """Return current map mode.
@@ -50,7 +50,7 @@ class AbstractVideoBuffer(QtMultimedia.QAbstractVideoBuffer):
         Returns:
             map mode
         """
-        return MAP_MODE.inv[self.mapMode()]
+        return MAP_MODE.inverse[self.mapMode()]
 
     def map_planes(
         self,

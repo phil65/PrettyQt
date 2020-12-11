@@ -49,7 +49,7 @@ class StaticText(QtGui.QStaticText):
         Returns:
             text format
         """
-        return TEXT_FORMAT.inv[self.textFormat()]
+        return TEXT_FORMAT.inverse[self.textFormat()]
 
     def set_performance_hint(self, hint: str):
         """Set the performance hint.
@@ -74,7 +74,7 @@ class StaticText(QtGui.QStaticText):
         Returns:
             performance hint
         """
-        return PERFORMANCE_HINT.inv[self.performanceHint()]
+        return PERFORMANCE_HINT.inverse[self.performanceHint()]
 
 
 if __name__ == "__main__":

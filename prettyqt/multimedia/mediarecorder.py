@@ -71,7 +71,7 @@ class MediaRecorder(QtMultimedia.QMediaRecorder):
         Returns:
             availability status
         """
-        return AVAILABILITY_STATUS.inv[self.availability()]
+        return AVAILABILITY_STATUS.inverse[self.availability()]
 
     def set_output_location(self, path: Union[pathlib.Path, str]):
         self.setOutputLocation(core.Url(path))

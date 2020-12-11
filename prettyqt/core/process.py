@@ -59,7 +59,7 @@ class Process(QtCore.QProcess):
         self.setReadChannel(PROCESS_CHANNELS[channel])
 
     def get_read_channel(self) -> str:
-        return PROCESS_CHANNELS.inv[self.readChannel()]
+        return PROCESS_CHANNELS.inverse[self.readChannel()]
 
     def close_read_channel(self, channel: str):
         self.closeReadChannel(PROCESS_CHANNELS[channel])
@@ -80,7 +80,7 @@ class Process(QtCore.QProcess):
         self.setInputChannelMode(INPUT_CHANNEL_MODES[mode])
 
     def get_input_channel_mode(self) -> str:
-        return INPUT_CHANNEL_MODES.inv[self.inputChannelMode()]
+        return INPUT_CHANNEL_MODES.inverse[self.inputChannelMode()]
 
     def set_process_channel_mode(self, mode: str):
         """Set the process channel mode.
@@ -99,7 +99,7 @@ class Process(QtCore.QProcess):
         self.setProcessChannelMode(PROCESS_CHANNEL_MODES[mode])
 
     def get_process_channel_mode(self) -> str:
-        return PROCESS_CHANNEL_MODES.inv[self.processChannelMode()]
+        return PROCESS_CHANNEL_MODES.inverse[self.processChannelMode()]
 
     def set_state(self, state: str):
         """Set the process state.
@@ -117,10 +117,10 @@ class Process(QtCore.QProcess):
         self.setProcessState(PROCESS_STATES[state])
 
     def get_state(self) -> str:
-        return PROCESS_STATES.inv[self.state()]
+        return PROCESS_STATES.inverse[self.state()]
 
     def get_error(self) -> str:
-        return PROCESS_ERRORS.inv[self.error()]
+        return PROCESS_ERRORS.inverse[self.error()]
 
     def get_exit_status(self) -> str:
-        return EXIT_STATUS.inv[self.exitStatus()]
+        return EXIT_STATUS.inverse[self.exitStatus()]

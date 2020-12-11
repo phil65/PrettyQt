@@ -66,7 +66,7 @@ class MdiArea(QtWidgets.QMdiArea):
         Returns:
             view mode
         """
-        return VIEW_MODE.inv[self.viewMode()]
+        return VIEW_MODE.inverse[self.viewMode()]
 
     def set_window_order(self, mode: WindowOrderStr):
         """Set the window order behaviour for the MDI area.
@@ -87,7 +87,7 @@ class MdiArea(QtWidgets.QMdiArea):
         Returns:
             view mode
         """
-        return WINDOW_ORDER.inv[self.activationOrder()]
+        return WINDOW_ORDER.inverse[self.activationOrder()]
 
     def set_tab_position(self, position: TabPositionStr):
         """Set tab position for the MDI area.
@@ -108,7 +108,7 @@ class MdiArea(QtWidgets.QMdiArea):
         Returns:
             tab position
         """
-        return TAB_POSITION.inv[self.tabPosition()]
+        return TAB_POSITION.inverse[self.tabPosition()]
 
     def set_background(
         self,

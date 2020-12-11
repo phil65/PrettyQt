@@ -54,7 +54,7 @@ class ActionGroup(QtWidgets.QActionGroup):
         Returns:
             exclusion policy
         """
-        return POLICIES.inv[self.exclusionPolicy()]
+        return POLICIES.inverse[self.exclusionPolicy()]
 
 
 if __name__ == "__main__":

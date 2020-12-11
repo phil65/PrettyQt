@@ -34,7 +34,7 @@ class PlaceIdReply(QtLocation.QPlaceIdReply):
         Returns:
             current operation_type
         """
-        return OPERATION_TYPES.inv[self.operationType()]
+        return OPERATION_TYPES.inverse[self.operationType()]
 
 
 if __name__ == "__main__":

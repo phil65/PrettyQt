@@ -36,7 +36,7 @@ class HistoryState(QtCore.QHistoryState):
         Returns:
             history type
         """
-        return HISTORY_TYPE.inv[self.historyType()]
+        return HISTORY_TYPE.inverse[self.historyType()]
 
 
 if __name__ == "__main__":

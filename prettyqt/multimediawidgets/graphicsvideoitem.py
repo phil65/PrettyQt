@@ -49,4 +49,4 @@ class GraphicsVideoItem(QtMultimediaWidgets.QGraphicsVideoItem):
         Returns:
             aspect ratio mode
         """
-        return ASPECT_RATIO_MODES.inv[self.aspectRatioMode()]
+        return ASPECT_RATIO_MODES.inverse[self.aspectRatioMode()]

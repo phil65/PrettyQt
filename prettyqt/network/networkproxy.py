@@ -82,4 +82,4 @@ class NetworkProxy(QtNetwork.QNetworkProxy):
         Returns:
             type
         """
-        return PROXY_TYPES.inv[self.type()]
+        return PROXY_TYPES.inverse[self.type()]

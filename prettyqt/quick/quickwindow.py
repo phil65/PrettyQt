@@ -78,7 +78,7 @@ class QuickWindow(QtQuick.QQuickWindow):
         Returns:
             text render type
         """
-        return TEXT_RENDER_TYPE.inv[QuickWindow.textRenderType()]
+        return TEXT_RENDER_TYPE.inverse[QuickWindow.textRenderType()]
 
     @contextlib.contextmanager
     def external_commands(self):

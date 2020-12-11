@@ -29,10 +29,10 @@ GENDER = bidict(
 
 class Voice(QtTextToSpeech.QVoice):
     def get_age(self) -> str:
-        return AGE.inv[self.age()]
+        return AGE.inverse[self.age()]
 
     def get_gender(self) -> str:
-        return GENDER.inv[self.gender()]
+        return GENDER.inverse[self.gender()]
 
 
 if __name__ == "__main__":

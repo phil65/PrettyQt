@@ -75,7 +75,7 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
         Returns:
             playback mode
         """
-        return PLAYBACK_MODES.inv[self.playbackMode()]
+        return PLAYBACK_MODES.inverse[self.playbackMode()]
 
     # def on_playback_mode_changed(self, mode: int):
-    #     self.playback_mode_changed.emit(PLAYBACK_MODES.inv[mode])
+    #     self.playback_mode_changed.emit(PLAYBACK_MODES.inverse[mode])

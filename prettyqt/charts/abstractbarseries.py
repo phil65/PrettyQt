@@ -47,4 +47,4 @@ class AbstractBarSeries(QtCharts.QAbstractBarSeries):
         Returns:
             labels position
         """
-        return LABELS_POSITIONS.inv[self.labelsPosition()]
+        return LABELS_POSITIONS.inverse[self.labelsPosition()]

@@ -183,7 +183,7 @@ class Painter(QtGui.QPainter):
         Returns:
             composition mode
         """
-        return COMPOSITION_MODE.inv[self.compositionMode()]
+        return COMPOSITION_MODE.inverse[self.compositionMode()]
 
     def set_clip_path(
         self, path: QtGui.QPainterPath, operation: ClipOperationStr = "replace"

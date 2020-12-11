@@ -40,4 +40,4 @@ class GeoSatelliteInfoSource(QtPositioning.QGeoSatelliteInfoSource):
         Returns:
             error type
         """
-        return ERRORS.inv[self.error()]
+        return ERRORS.inverse[self.error()]

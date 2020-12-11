@@ -44,7 +44,7 @@ class Gesture(QtWidgets.QGesture):
         Returns:
             state
         """
-        return GESTURE_STATE.inv[self.state()]
+        return GESTURE_STATE.inverse[self.state()]
 
     def get_gesture_type(self) -> GestureTypeStr:
         """Return current gesture type.
@@ -52,7 +52,7 @@ class Gesture(QtWidgets.QGesture):
         Returns:
             gesture type
         """
-        return GESTURE_TYPE.inv[self.gestureType()]
+        return GESTURE_TYPE.inverse[self.gestureType()]
 
     def get_hot_spot(self) -> core.PointF:
         return core.PointF(self.hotSpot())
@@ -76,7 +76,7 @@ class Gesture(QtWidgets.QGesture):
         Returns:
             gesture cancel policy
         """
-        return GESTURE_CANCEL_POLICY.inv[self.gestureCancelPolicy()]
+        return GESTURE_CANCEL_POLICY.inverse[self.gestureCancelPolicy()]
 
 
 if __name__ == "__main__":

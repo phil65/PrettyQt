@@ -31,7 +31,7 @@ class Resource(QtCore.QResource):
         return iter(self.children())
 
     def get_compression_algorithm(self) -> CompressionStr:
-        return COMPRESSION.inv[self.compressionAlgorithm()]
+        return COMPRESSION.inverse[self.compressionAlgorithm()]
 
     def get_absolute_file_path(self) -> pathlib.Path:
         return pathlib.Path(self.absoluteFilePath())

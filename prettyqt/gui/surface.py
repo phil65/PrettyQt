@@ -26,7 +26,7 @@ class Surface(QtGui.QSurface):
         Returns:
             surface class
         """
-        return SURFACE_CLASS.inv[self.surfaceClass()]
+        return SURFACE_CLASS.inverse[self.surfaceClass()]
 
     def get_surface_type(self) -> str:
         """Get the current surface type.
@@ -36,7 +36,7 @@ class Surface(QtGui.QSurface):
         Returns:
             surface type
         """
-        return SURFACE_TYPES.inv[self.surfaceType()]
+        return SURFACE_TYPES.inverse[self.surfaceType()]
 
 
 if __name__ == "__main__":

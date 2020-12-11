@@ -27,7 +27,7 @@ QtTextToSpeech.QTextToSpeech.__bases__ = (core.Object,)
 
 class TextToSpeech(QtTextToSpeech.QTextToSpeech):
     def get_state(self) -> str:
-        return STATE.inv[self.state()]
+        return STATE.inverse[self.state()]
 
     def get_locale(self) -> core.Locale:
         return core.Locale(self.locale())

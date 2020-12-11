@@ -146,7 +146,7 @@ class ChartView(QtCharts.QChartView):
         Returns:
             Rubber band type
         """
-        return RUBBER_BAND.inv[self.rubberBand()]
+        return RUBBER_BAND.inverse[self.rubberBand()]
 
     # def hide_legend(self):
     #     self.chart().hide_legend()

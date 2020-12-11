@@ -22,4 +22,4 @@ class PlaceSearchResult(QtLocation.QPlaceSearchResult):
         Returns:
             Result type
         """
-        return TYPE.inv[self.type()]
+        return TYPE.inverse[self.type()]

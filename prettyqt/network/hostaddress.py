@@ -36,7 +36,7 @@ class HostAddress(QtNetwork.QHostAddress):
         return not self.isNull()
 
     def get_protocol(self) -> str:
-        return network.abstractsocket.NETWORK_LAYER_PROTOCOL.inv[self.protocol()]
+        return network.abstractsocket.NETWORK_LAYER_PROTOCOL.inverse[self.protocol()]
 
     def set_address(self, address: Union[int, str]):
         if address in SPECIAL_ADDRESS:

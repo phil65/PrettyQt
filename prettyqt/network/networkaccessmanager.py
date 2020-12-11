@@ -76,4 +76,4 @@ class NetworkAccessManager(QtNetwork.QNetworkAccessManager):
         Returns:
             redirect policy
         """
-        return REDIRECT_POLICIES.inv[self.redirectPolicy()]
+        return REDIRECT_POLICIES.inverse[self.redirectPolicy()]

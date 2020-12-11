@@ -50,7 +50,7 @@ class Scroller:
         Returns:
             state
         """
-        return STATE.inv[self.state()]
+        return STATE.inverse[self.state()]
 
     def get_velocity(self) -> core.PointF:
         return core.PointF(self.velocity())
@@ -84,7 +84,7 @@ class Scroller:
         )
         if gesture >= 256:
             gesture -= 256
-        return GESTURE_TYPE.inv[gesture]
+        return GESTURE_TYPE.inverse[gesture]
 
 
 if __name__ == "__main__":

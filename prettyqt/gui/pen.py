@@ -75,7 +75,7 @@ class Pen(QtGui.QPen):
         Returns:
             cap style
         """
-        return CAP_STYLE.inv[self.capStyle()]
+        return CAP_STYLE.inverse[self.capStyle()]
 
     def set_join_style(self, style: JoinStyleStr):
         """Set join style to use.
@@ -100,7 +100,7 @@ class Pen(QtGui.QPen):
         Returns:
             join style
         """
-        return JOIN_STYLE.inv[self.joinStyle()]
+        return JOIN_STYLE.inverse[self.joinStyle()]
 
     def set_style(self, style: str):
         """Set pen style to use.
@@ -127,4 +127,4 @@ class Pen(QtGui.QPen):
         Returns:
             pen style
         """
-        return PEN_STYLE.inv[self.style()]
+        return PEN_STYLE.inverse[self.style()]

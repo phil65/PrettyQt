@@ -118,7 +118,7 @@ class Splitter(QtWidgets.QSplitter):
         Returns:
             orientation
         """
-        return ORIENTATIONS.inv[self.orientation()]
+        return ORIENTATIONS.inverse[self.orientation()]
 
 
 if __name__ == "__main__":

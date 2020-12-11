@@ -59,7 +59,7 @@ class GeoSatelliteInfo(QtPositioning.QGeoSatelliteInfo):
         Returns:
             satellite system
         """
-        return SATELLITE_SYSTEMS.inv[self.satelliteSystem()]
+        return SATELLITE_SYSTEMS.inverse[self.satelliteSystem()]
 
 
 if __name__ == "__main__":

@@ -32,4 +32,4 @@ class IODevice(QtCore.QIODevice):
         self.close()
 
     def get_open_mode(self) -> str:
-        return OPEN_MODES.inv[self.openMode()]
+        return OPEN_MODES.inverse[self.openMode()]

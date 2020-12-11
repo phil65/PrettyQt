@@ -72,7 +72,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         return self.sectionText(SECTIONS[section])
 
     def get_current_section(self) -> SectionsStr:
-        return SECTIONS.inv[self.currentSection()]
+        return SECTIONS.inverse[self.currentSection()]
 
     def set_current_section(self, section: SectionsStr):
         if section not in SECTIONS:

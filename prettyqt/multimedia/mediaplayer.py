@@ -43,7 +43,7 @@ class MediaPlayer(QtMultimedia.QMediaPlayer):
         Returns:
             state
         """
-        return STATES.inv[self.state()]
+        return STATES.inverse[self.state()]
 
     def get_media_status(self) -> str:
         """Return current media status.
@@ -54,4 +54,4 @@ class MediaPlayer(QtMultimedia.QMediaPlayer):
         Returns:
             media status
         """
-        return MEDIA_STATUS.inv[self.mediaStatus()]
+        return MEDIA_STATUS.inverse[self.mediaStatus()]

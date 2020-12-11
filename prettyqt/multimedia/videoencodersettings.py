@@ -66,7 +66,7 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
         self.setEncodingMode(ENCODING_MODES[mode])
 
     def get_encoding_mode(self) -> str:
-        return ENCODING_MODES.inv[self.encodingMode()]
+        return ENCODING_MODES.inverse[self.encodingMode()]
 
     def set_quality(self, quality: str):
         if quality not in QUALITIES:
@@ -74,7 +74,7 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
         self.setQuality(QUALITIES[quality])
 
     def get_quality(self) -> str:
-        return QUALITIES.inv[self.quality()]
+        return QUALITIES.inverse[self.quality()]
 
     def to_dataclass(self) -> Settings:
         size = self.resolution()

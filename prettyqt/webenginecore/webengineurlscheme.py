@@ -67,7 +67,7 @@ class WebEngineUrlScheme(QtWebEngineCore.QWebEngineUrlScheme):
         Returns:
             syntax
         """
-        return SYNTAX.inv[self.syntax()]
+        return SYNTAX.inverse[self.syntax()]
 
 
 if __name__ == "__main__":

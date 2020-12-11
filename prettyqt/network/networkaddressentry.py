@@ -21,7 +21,7 @@ class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
         Returns:
             DNS eligibility
         """
-        return DNS_ELIGIBILITY_STATUS.inv[self.dnsEligibility()]
+        return DNS_ELIGIBILITY_STATUS.inverse[self.dnsEligibility()]
 
     def set_dns_eligibility(self, status: str):
         """Set the DNS eligibility flag for this address to status.

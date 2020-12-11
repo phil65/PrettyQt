@@ -100,7 +100,7 @@ class MessageBox(QtWidgets.QMessageBox):
         self.setIconPixmap(icon.get_pixmap(size=64))
 
     def show_blocking(self) -> str:
-        return BUTTONS.inv[self.exec_()]
+        return BUTTONS.inverse[self.exec_()]
 
     def get_standard_buttons(self) -> List[str]:
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
@@ -155,7 +155,7 @@ class MessageBox(QtWidgets.QMessageBox):
         Returns:
             text format
         """
-        return TEXT_FORMAT.inv[self.textFormat()]
+        return TEXT_FORMAT.inverse[self.textFormat()]
 
 
 if __name__ == "__main__":

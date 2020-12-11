@@ -53,4 +53,4 @@ class Cursor(QtGui.QCursor):
         Returns:
             cursor shape
         """
-        return SHAPES.inv[self.shape()]
+        return SHAPES.inverse[self.shape()]

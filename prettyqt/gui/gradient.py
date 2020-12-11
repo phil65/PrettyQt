@@ -65,7 +65,7 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
         Returns:
             coordinate mode
         """
-        return COORDINATE_MODES.inv[self.coordinateMode()]
+        return COORDINATE_MODES.inverse[self.coordinateMode()]
 
     def set_spread(self, method: str):
         """Set the spread method.
@@ -90,7 +90,7 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
         Returns:
             spread method
         """
-        return SPREADS.inv[self.spread()]
+        return SPREADS.inverse[self.spread()]
 
     def get_type(self) -> str:
         """Return current gradient type.
@@ -100,7 +100,7 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
         Returns:
             gradient type
         """
-        return TYPES.inv[self.type()]
+        return TYPES.inverse[self.type()]
 
     def get_stops(self) -> List[Tuple[float, gui.Color]]:
         return [(i, gui.Color(j)) for (i, j) in self.stops()]

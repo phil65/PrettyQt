@@ -88,7 +88,7 @@ class TextFormat(QtGui.QTextFormat):
         Returns:
             layout direction
         """
-        return LAYOUT_DIRECTIONS.inv[self.layoutDirection()]
+        return LAYOUT_DIRECTIONS.inverse[self.layoutDirection()]
 
 
 if __name__ == "__main__":

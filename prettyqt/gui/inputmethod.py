@@ -42,7 +42,7 @@ class InputMethod:
         return core.Locale(self.locale())
 
     def get_input_direction(self) -> str:
-        return LAYOUT_DIRECTION.inv[self.inputDirection()]
+        return LAYOUT_DIRECTION.inverse[self.inputDirection()]
 
 
 if __name__ == "__main__":

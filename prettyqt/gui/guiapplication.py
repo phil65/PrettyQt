@@ -109,7 +109,7 @@ class GuiApplication(QtGui.QGuiApplication):
         Returns:
             layout direction
         """
-        return LAYOUT_DIRECTION.inv[self.layoutDirection()]
+        return LAYOUT_DIRECTION.inverse[self.layoutDirection()]
 
     def get_primary_screen(self) -> gui.Screen:
         return gui.Screen(self.primaryScreen())

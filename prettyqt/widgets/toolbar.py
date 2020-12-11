@@ -90,7 +90,7 @@ class ToolBar(QtWidgets.QToolBar):
         Returns:
             style
         """
-        return STYLE.inv[self.toolButtonStyle()]
+        return STYLE.inverse[self.toolButtonStyle()]
 
     def add_action(
         self,

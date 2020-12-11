@@ -180,7 +180,7 @@ class Application(QtWidgets.QApplication):
         Returns:
             navigation mode
         """
-        return NAVIGATION_MODES.inv[self.navigationMode()]
+        return NAVIGATION_MODES.inverse[self.navigationMode()]
 
 
 if __name__ == "__main__":

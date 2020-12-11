@@ -39,7 +39,7 @@ class BluetoothServiceDiscoveryAgent(QtBluetooth.QBluetoothServiceDiscoveryAgent
         self.start(flag)
 
     def get_error(self) -> str:
-        return ERRORS.inv[self.error()]
+        return ERRORS.inverse[self.error()]
 
     def set_remote_address(
         self, address: Union[str, int, QtBluetooth.QBluetoothAddress]

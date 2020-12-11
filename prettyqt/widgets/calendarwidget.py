@@ -80,7 +80,7 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
         Returns:
             selection mode
         """
-        return SELECTION_MODE.inv[self.selectionMode()]
+        return SELECTION_MODE.inverse[self.selectionMode()]
 
 
 if __name__ == "__main__":

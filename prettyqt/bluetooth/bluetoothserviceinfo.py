@@ -39,19 +39,19 @@ PROTOCOLS = bidict(
 
 class BluetoothServiceInfo(QtBluetooth.QBluetoothServiceInfo):
     def __getitem__(self, value: str):
-        attr = ATTRIBUTE_IDS.inv[value]
+        attr = ATTRIBUTE_IDS.inverse[value]
         return self.attribute(attr)
 
     def __delitem__(self, value: str):
-        attr = ATTRIBUTE_IDS.inv[value]
+        attr = ATTRIBUTE_IDS.inverse[value]
         return self.removeAttribute(attr)
 
     def __setitem__(self, index: str, value):
-        attr = ATTRIBUTE_IDS.inv[index]
+        attr = ATTRIBUTE_IDS.inverse[index]
         return self.setAttribute(attr, value)
 
     def __contains__(self, value: int) -> str:
-        attr = ATTRIBUTE_IDS.inv[value]
+        attr = ATTRIBUTE_IDS.inverse[value]
         return self.contains(attr)
 
     def __iter__(self):

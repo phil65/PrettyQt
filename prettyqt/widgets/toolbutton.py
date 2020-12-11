@@ -67,7 +67,7 @@ class ToolButton(QtWidgets.QToolButton):
         Returns:
             popup mode
         """
-        return POPUP_MODES.inv[self.popupMode()]
+        return POPUP_MODES.inverse[self.popupMode()]
 
     def set_arrow_type(self, mode: str):
         """Set the arrow type of the toolbutton.
@@ -92,7 +92,7 @@ class ToolButton(QtWidgets.QToolButton):
         Returns:
             arrow type
         """
-        return ARROW_TYPES.inv[self.arrowType()]
+        return ARROW_TYPES.inverse[self.arrowType()]
 
     def set_style(self, style: str):
         if style not in STYLES:

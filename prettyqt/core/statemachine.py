@@ -30,7 +30,7 @@ class StateMachine(QtCore.QStateMachine):
         return self
 
     def get_error(self) -> str:
-        return ERROR.inv[self.error()]
+        return ERROR.inverse[self.error()]
 
     def post_event(self, event: QtCore.QEvent, priority: str = "normal"):
         if priority not in PRIORITY:
@@ -60,4 +60,4 @@ class StateMachine(QtCore.QStateMachine):
         Returns:
             restore policy
         """
-        return core.state.RESTORE_POLICY.inv[self.globalRestorePolicy()]
+        return core.state.RESTORE_POLICY.inverse[self.globalRestorePolicy()]

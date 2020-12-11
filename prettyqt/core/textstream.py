@@ -55,7 +55,7 @@ class TextStream(QtCore.QTextStream):
         Returns:
             current field alignment
         """
-        return FIELD_ALIGNMENT.inv[self.fieldAlignment()]
+        return FIELD_ALIGNMENT.inverse[self.fieldAlignment()]
 
     def set_status(self, status: str):
         """Set the status.
@@ -80,7 +80,7 @@ class TextStream(QtCore.QTextStream):
         Returns:
             current status
         """
-        return STATUS.inv[self.status()]
+        return STATUS.inverse[self.status()]
 
     def set_real_number_notation(self, notation: str):
         """Set the real number notation.
@@ -105,7 +105,7 @@ class TextStream(QtCore.QTextStream):
         Returns:
             current real number notation
         """
-        return REAL_NUMBER_NOTATION.inv[self.realNumberNotation()]
+        return REAL_NUMBER_NOTATION.inverse[self.realNumberNotation()]
 
 
 if __name__ == "__main__":

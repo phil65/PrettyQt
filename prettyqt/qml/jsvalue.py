@@ -51,7 +51,7 @@ class JSValue(QtQml.QJSValue):
         error_type = self.errorType()
         if int(error_type) == 0:
             return None
-        return ERROR_TYPES.inv[error_type]
+        return ERROR_TYPES.inverse[error_type]
 
     @classmethod
     def from_object(cls, obj, jsengine) -> JSValue:

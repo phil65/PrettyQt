@@ -109,7 +109,7 @@ class Wizard(QtWidgets.QWizard):
         Returns:
             title format
         """
-        return TEXT_FORMATS.inv[self.titleFormat()]
+        return TEXT_FORMATS.inverse[self.titleFormat()]
 
     def set_subtitle_format(self, fmt: str):
         """Set the subtitle format.
@@ -134,7 +134,7 @@ class Wizard(QtWidgets.QWizard):
         Returns:
             subtitle format
         """
-        return TEXT_FORMATS.inv[self.subTitleFormat()]
+        return TEXT_FORMATS.inverse[self.subTitleFormat()]
 
     def get_button(self, button_type: str) -> QtWidgets.QAbstractButton:
         if button_type not in WIZARD_BUTTON:
@@ -199,7 +199,7 @@ class Wizard(QtWidgets.QWizard):
         Returns:
             Wizard style
         """
-        return WIZARD_STYLE.inv[self.wizardStyle()]
+        return WIZARD_STYLE.inverse[self.wizardStyle()]
 
     def set_option(self, option: str, value: bool):
         """Set option to given value.

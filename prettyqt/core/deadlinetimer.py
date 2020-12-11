@@ -38,4 +38,4 @@ class DeadlineTimer(QtCore.QDeadlineTimer):
         Returns:
             timer type
         """
-        return TYPE.inv[self.timerType()]
+        return TYPE.inverse[self.timerType()]

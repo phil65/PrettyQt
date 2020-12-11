@@ -59,7 +59,7 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         Returns:
             checkstate
         """
-        return STATES.inv[self.checkState()]
+        return STATES.inverse[self.checkState()]
 
     def get_background(self) -> gui.Brush:
         return gui.Brush(self.background())

@@ -45,7 +45,7 @@ class WebEngineScript(QtWebEngineWidgets.QWebEngineScript):
         Returns:
             injection point
         """
-        return INJECTION_POINTS.inv[self.injectionPoint()]
+        return INJECTION_POINTS.inverse[self.injectionPoint()]
 
 
 if __name__ == "__main__":

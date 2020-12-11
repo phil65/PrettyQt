@@ -65,7 +65,7 @@ class Legend:
         Returns:
             alignment
         """
-        return ALIGNMENTS.inv[self.alignment()]
+        return ALIGNMENTS.inverse[self.alignment()]
 
     def set_marker_shape(self, shape: str):
         """Set the marker shape.
@@ -90,7 +90,7 @@ class Legend:
         Returns:
             Marker shape
         """
-        return MARKER_SHAPES.inv[self.markerShape()]
+        return MARKER_SHAPES.inverse[self.markerShape()]
 
     def get_border_color(self) -> gui.Color:
         return gui.Color(self.borderColor())

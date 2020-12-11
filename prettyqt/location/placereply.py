@@ -40,7 +40,7 @@ class PlaceReply(QtLocation.QPlaceReply):
         Returns:
             Error type
         """
-        return ERROR.inv[self.error()]
+        return ERROR.inverse[self.error()]
 
     def get_type(self) -> str:
         """Return type.
@@ -51,7 +51,7 @@ class PlaceReply(QtLocation.QPlaceReply):
         Returns:
             Type
         """
-        return TYPE.inv[self.type()]
+        return TYPE.inverse[self.type()]
 
 
 if __name__ == "__main__":

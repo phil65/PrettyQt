@@ -43,7 +43,7 @@ class PieSlice(QtCharts.QPieSlice):
         Returns:
             label position
         """
-        return LABEL_POSITION.inv[self.labelPosition()]
+        return LABEL_POSITION.inverse[self.labelPosition()]
 
     def get_label_font(self) -> gui.Font:
         return gui.Font(self.labelFont())

@@ -103,7 +103,7 @@ class FormLayout(QtWidgets.QFormLayout):
         pos = self.getItemPosition(index)
         if pos[0] == -1:
             return None
-        return pos[0], ROLE.inv[pos[1]]
+        return pos[0], ROLE.inverse[pos[1]]
 
     @classmethod
     def build_from_dict(
@@ -145,7 +145,7 @@ class FormLayout(QtWidgets.QFormLayout):
         Returns:
             row wrap policy
         """
-        return ROW_WRAP_POLICY.inv[self.rowWrapPolicy()]
+        return ROW_WRAP_POLICY.inverse[self.rowWrapPolicy()]
 
     def set_field_growth_policy(self, policy: FieldGrowthPolicyStr):
         """Set field growth policy to use.
@@ -166,7 +166,7 @@ class FormLayout(QtWidgets.QFormLayout):
         Returns:
             field growth policy
         """
-        return FIELD_GROWTH_POLICY.inv[self.fieldGrowthPolicy()]
+        return FIELD_GROWTH_POLICY.inverse[self.fieldGrowthPolicy()]
 
 
 if __name__ == "__main__":

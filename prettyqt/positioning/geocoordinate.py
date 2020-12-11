@@ -37,7 +37,7 @@ class GeoCoordinate(QtPositioning.QGeoCoordinate):
         return self.isValid()
 
     def get_type(self) -> str:
-        return COORDINATE_TYPES.inv[self.type()]
+        return COORDINATE_TYPES.inverse[self.type()]
 
 
 if __name__ == "__main__":

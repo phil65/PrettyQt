@@ -74,7 +74,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         Returns:
             checkstate
         """
-        return STATE.inv[self.checkState()]
+        return STATE.inverse[self.checkState()]
 
     def get_background(self) -> gui.Brush:
         return gui.Brush(self.background())

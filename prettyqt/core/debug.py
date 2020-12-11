@@ -33,7 +33,7 @@
 #         Returns:
 #             current debug verbosity
 #         """
-#         return VERBOSITY_LEVEL.inv[self.verbosity()]
+#         return VERBOSITY_LEVEL.inverse[self.verbosity()]
 
 
 # if __name__ == "__main__":

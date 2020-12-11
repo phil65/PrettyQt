@@ -116,7 +116,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         Returns:
             checkstate
         """
-        return STATES.inv[self.checkState(column)]
+        return STATES.inverse[self.checkState(column)]
 
     def set_child_indicator_policy(self, policy: str):
         """Set the child indicator policy.
@@ -141,7 +141,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         Returns:
             child indicator policy
         """
-        return CHILD_INDICATOR_POLICY.inv[self.childIndicatorPolicy()]
+        return CHILD_INDICATOR_POLICY.inverse[self.childIndicatorPolicy()]
 
 
 if __name__ == "__main__":

@@ -36,4 +36,4 @@ class AbstractTransition(QtCore.QAbstractTransition):
         Returns:
             transition type
         """
-        return TRANSITION_TYPE.inv[self.transitionType()]
+        return TRANSITION_TYPE.inverse[self.transitionType()]

@@ -44,4 +44,4 @@ class SessionManager:
         Returns:
             restart hint
         """
-        return RESTART_HINT.inv[self.restartHint()]
+        return RESTART_HINT.inverse[self.restartHint()]

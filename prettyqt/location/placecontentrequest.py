@@ -29,7 +29,7 @@ class PlaceContentRequest(QtLocation.QPlaceContentRequest):
         Returns:
             Relevance type
         """
-        return location.placecontent.TYPE.inv[self.contentType()]
+        return location.placecontent.TYPE.inverse[self.contentType()]
 
 
 if __name__ == "__main__":

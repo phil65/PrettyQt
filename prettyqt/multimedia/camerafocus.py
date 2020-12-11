@@ -56,7 +56,7 @@ class CameraFocus(core.Object):
         Returns:
             focus mode
         """
-        return FOCUS_MODES.inv[self.item.focusMode()]
+        return FOCUS_MODES.inverse[self.item.focusMode()]
 
     def set_focus_point_mode(self, mode: str):
         """Set the focus mode.
@@ -81,7 +81,7 @@ class CameraFocus(core.Object):
         Returns:
             focus point mode
         """
-        return FOCUS_POINT_MODES.inv[self.item.focusPointMode()]
+        return FOCUS_POINT_MODES.inverse[self.item.focusPointMode()]
 
     def get_custom_focus_point(self) -> core.PointF:
         return core.PointF(self.item.customFocusPoint())

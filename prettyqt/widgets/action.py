@@ -163,7 +163,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         Returns:
             priority
         """
-        return PRIORITIES.inv[self.priority()]
+        return PRIORITIES.inverse[self.priority()]
 
     def set_shortcut_context(self, context: str):
         """Set shortcut context.
@@ -188,7 +188,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         Returns:
             shortcut context
         """
-        return CONTEXTS.inv[self.shortcutContext()]
+        return CONTEXTS.inverse[self.shortcutContext()]
 
     def set_menu_role(self, role: str):
         """Set menu role.
@@ -215,7 +215,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         Returns:
             menu role
         """
-        return ROLES.inv[self.menuRole()]
+        return ROLES.inverse[self.menuRole()]
 
     def show_shortcut_in_contextmenu(self, state: bool = True):
         self.setShortcutVisibleInContextMenu(state)

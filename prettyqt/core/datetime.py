@@ -73,7 +73,7 @@ class DateTime(QtCore.QDateTime):
         Returns:
             time specification
         """
-        return TIME_SPECS.inv[self.timeSpec()]
+        return TIME_SPECS.inverse[self.timeSpec()]
 
     def to_format(self, fmt: str):
         return self.toString(DATE_FORMATS[fmt])

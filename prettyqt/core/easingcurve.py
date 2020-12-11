@@ -103,7 +103,7 @@ class EasingCurve(QtCore.QEasingCurve):
         Returns:
             easing curve type
         """
-        return TYPES.inv[self.type()]
+        return TYPES.inverse[self.type()]
 
 
 if __name__ == "__main__":

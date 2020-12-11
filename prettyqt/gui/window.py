@@ -57,7 +57,7 @@ class Window(QtGui.QWindow):
         Returns:
             window visibility
         """
-        return VISIBILITIES.inv[self.visibility()]
+        return VISIBILITIES.inverse[self.visibility()]
 
 
 if __name__ == "__main__":

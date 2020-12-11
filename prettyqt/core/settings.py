@@ -108,7 +108,7 @@ class Settings(QtCore.QSettings):
         Returns:
             default settings format
         """
-        return FORMAT.inv[cls.defaultFormat()]
+        return FORMAT.inverse[cls.defaultFormat()]
 
     def get_scope(self) -> ScopeStr:
         """Return scope.
@@ -116,7 +116,7 @@ class Settings(QtCore.QSettings):
         Returns:
             scope
         """
-        return SCOPE.inv[self.scope()]
+        return SCOPE.inverse[self.scope()]
 
     @classmethod
     def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: Union[str, pathlib.Path]):

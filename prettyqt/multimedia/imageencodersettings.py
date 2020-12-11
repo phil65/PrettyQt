@@ -50,7 +50,7 @@ class ImageEncoderSettings(QtMultimedia.QImageEncoderSettings):
         self.setQuality(QUALITIES[quality])
 
     def get_quality(self) -> str:
-        return QUALITIES.inv[self.quality()]
+        return QUALITIES.inverse[self.quality()]
 
     def to_dataclass(self) -> Settings:
         size = self.resolution()

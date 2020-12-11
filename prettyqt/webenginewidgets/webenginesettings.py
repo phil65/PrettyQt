@@ -108,7 +108,7 @@ class WebEngineSettings:
         Returns:
             Unknown url scheme policy
         """
-        return UNKNOWN_URL_SCHEME_POLICY.inv[self.item.unknownUrlSchemePolicy()]
+        return UNKNOWN_URL_SCHEME_POLICY.inverse[self.item.unknownUrlSchemePolicy()]
 
     def set_font_family(self, which: str, family: str):
         """Set the actual font family to family for the specified generic family, which.

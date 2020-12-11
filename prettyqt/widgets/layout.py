@@ -94,7 +94,7 @@ class Layout(QtWidgets.QLayout):
         Returns:
             size mode
         """
-        return MODES.inv[self.sizeConstraint()]
+        return MODES.inverse[self.sizeConstraint()]
 
     def set_alignment(
         self,

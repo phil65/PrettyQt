@@ -61,7 +61,7 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
         Returns:
             method
         """
-        return METHODS.inv[self.method()]
+        return METHODS.inverse[self.method()]
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ class MappedCheckBox(widgets.CheckBox):
         return self.map[self.isChecked()]
 
     def set_value(self, value):
-        val = self.map.inv[value]
+        val = self.map.inverse[value]
         super().set_value(val)
 
 

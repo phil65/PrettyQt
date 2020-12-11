@@ -34,7 +34,7 @@ class ListView(QtWidgets.QListView):
         Returns:
             view mode
         """
-        return VIEW_MODE.inv[self.viewMode()]
+        return VIEW_MODE.inverse[self.viewMode()]
 
 
 if __name__ == "__main__":

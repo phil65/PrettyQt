@@ -143,7 +143,7 @@ class ComboBox(QtWidgets.QComboBox):
         Returns:
             insert policy
         """
-        return INSERT_POLICY.inv[self.insertPolicy()]
+        return INSERT_POLICY.inverse[self.insertPolicy()]
 
     def set_size_adjust_policy(self, policy: SizeAdjustPolicyStr):
         """Set size adjust policy.
@@ -165,7 +165,7 @@ class ComboBox(QtWidgets.QComboBox):
         Returns:
             size adjust policy
         """
-        return SIZE_ADJUST_POLICY.inv[self.sizeAdjustPolicy()]
+        return SIZE_ADJUST_POLICY.inverse[self.sizeAdjustPolicy()]
 
     def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
         """Set size of the icons."""

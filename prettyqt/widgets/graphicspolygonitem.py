@@ -27,4 +27,4 @@ class GraphicsPolygonItem(QtWidgets.QGraphicsPolygonItem):
         self.setFillRule(FILL_RULE[rule])
 
     def get_fill_rule(self) -> FillRuleStr:
-        return FILL_RULE.inv[self.fillRule()]
+        return FILL_RULE.inverse[self.fillRule()]

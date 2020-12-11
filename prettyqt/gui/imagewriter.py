@@ -28,7 +28,7 @@ class ImageWriter(QtGui.QImageWriter):
         Returns:
             error type
         """
-        return IMAGE_WRITER_ERROR.inv[self.error()]
+        return IMAGE_WRITER_ERROR.inverse[self.error()]
 
     def get_format(self) -> str:
         return bytes(self.format()).decode()
@@ -77,7 +77,7 @@ class ImageWriter(QtGui.QImageWriter):
         Returns:
             transformation
         """
-        return TRANSFORMATIONS.inv[self.transformation()]
+        return TRANSFORMATIONS.inverse[self.transformation()]
 
 
 if __name__ == "__main__":

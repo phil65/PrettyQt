@@ -72,7 +72,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
         Returns:
             horizontal size policy
         """
-        return SIZE_POLICIES.inv[self.horizontalPolicy()]
+        return SIZE_POLICIES.inverse[self.horizontalPolicy()]
 
     def set_horizontal_policy(self, mode: str) -> None:
         """Set the horizontal policy.
@@ -94,7 +94,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
         Returns:
             vertical size policy
         """
-        return SIZE_POLICIES.inv[self.verticalPolicy()]
+        return SIZE_POLICIES.inverse[self.verticalPolicy()]
 
     def set_vertical_policy(self, mode: str) -> None:
         """Set the horizontal policy.
@@ -117,7 +117,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
         Returns:
             control type
         """
-        return CONTROL_TYPES.inv[self.controlType()]
+        return CONTROL_TYPES.inverse[self.controlType()]
 
     def set_control_type(self, mode: str) -> None:
         """Set the control type.

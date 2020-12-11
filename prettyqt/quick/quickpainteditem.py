@@ -48,4 +48,4 @@ class QuickPaintedItem(QtQuick.QQuickPaintedItem):
         Returns:
             render target
         """
-        return RENDER_TARGET.inv[self.renderTarget()]
+        return RENDER_TARGET.inverse[self.renderTarget()]

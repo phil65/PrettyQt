@@ -41,7 +41,7 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
         Returns:
             current os type
         """
-        return OS_TYPE.inv[self.type()]
+        return OS_TYPE.inverse[self.type()]
 
     def get_versionnumber(self) -> core.VersionNumber:
         return core.VersionNumber(

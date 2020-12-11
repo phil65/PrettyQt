@@ -95,7 +95,7 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
         Returns:
             panel modality
         """
-        return MODALITY.inv[self.panelModality()]
+        return MODALITY.inverse[self.panelModality()]
 
     def get_shape(self) -> gui.PainterPath:
         return gui.PainterPath(self.shape())

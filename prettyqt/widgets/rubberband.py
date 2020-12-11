@@ -20,4 +20,4 @@ class RubberBand(QtWidgets.QRubberBand):
         super().__init__(shape, parent)
 
     def get_shape(self) -> str:
-        return SHAPE.inv[self.shape()]
+        return SHAPE.inverse[self.shape()]

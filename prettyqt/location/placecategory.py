@@ -29,7 +29,7 @@ class PlaceCategory(QtLocation.QPlaceCategory):
         Returns:
             Visibility
         """
-        return VISIBILITY.inv[self.visibility()]
+        return VISIBILITY.inverse[self.visibility()]
 
 
 if __name__ == "__main__":

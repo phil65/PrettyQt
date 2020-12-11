@@ -59,7 +59,7 @@ class Completer(QtWidgets.QCompleter):
         Returns:
             sort mode
         """
-        return SORT_MODE.inv[self.modelSorting()]
+        return SORT_MODE.inverse[self.modelSorting()]
 
     def set_completion_mode(self, mode: CompletionModeStr):
         """Set completion mode to use.
@@ -80,7 +80,7 @@ class Completer(QtWidgets.QCompleter):
         Returns:
             completion mode
         """
-        return COMPLETION_MODE.inv[self.completionMode()]
+        return COMPLETION_MODE.inverse[self.completionMode()]
 
     def set_filter_mode(self, mode: FilterModeStr):
         """Set filter mode to use.
@@ -101,7 +101,7 @@ class Completer(QtWidgets.QCompleter):
         Returns:
             filter mode
         """
-        return FILTER_MODE.inv[self.filterMode()]
+        return FILTER_MODE.inverse[self.filterMode()]
 
 
 if __name__ == "__main__":

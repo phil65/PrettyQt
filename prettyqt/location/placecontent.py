@@ -21,7 +21,7 @@ class PlaceContent(QtLocation.QPlaceContent):
         Returns:
             Place type
         """
-        return TYPE.inv[self.type()]
+        return TYPE.inverse[self.type()]
 
     def get_user(self) -> location.PlaceUser:
         return location.PlaceUser(self.user())

@@ -77,7 +77,7 @@ class Camera(QtMultimedia.QCamera):
         Returns:
             state
         """
-        return STATES.inv[self.state()]
+        return STATES.inverse[self.state()]
 
     def get_status(self) -> str:
         """Return current status.
@@ -88,7 +88,7 @@ class Camera(QtMultimedia.QCamera):
         Returns:
             status
         """
-        return STATUS.inv[self.status()]
+        return STATUS.inverse[self.status()]
 
     def get_lock_status(self) -> str:
         """Return current lock status.
@@ -98,7 +98,7 @@ class Camera(QtMultimedia.QCamera):
         Returns:
             lock status
         """
-        return LOCK_STATUS.inv[self.lockStatus()]
+        return LOCK_STATUS.inverse[self.lockStatus()]
 
     def get_error(self) -> str:
         """Return current error state.
@@ -109,7 +109,7 @@ class Camera(QtMultimedia.QCamera):
         Returns:
             error state
         """
-        return ERRORS.inv[self.error()]
+        return ERRORS.inverse[self.error()]
 
     def set_capture_mode(self, position: str):
         """Set the capture mode.
@@ -134,7 +134,7 @@ class Camera(QtMultimedia.QCamera):
         Returns:
             capture mode
         """
-        return CAPTURE_MODES.inv[self.captureMode()]
+        return CAPTURE_MODES.inverse[self.captureMode()]
 
     def get_supported_locks(self) -> List[str]:
         return [k for k, v in LOCK_TYPES.items() if v & self.supportedLocks()]

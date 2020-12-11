@@ -235,7 +235,7 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
         Returns:
             item index method
         """
-        return ITEM_INDEX_METHOD.inv[self.itemIndexMethod()]
+        return ITEM_INDEX_METHOD.inverse[self.itemIndexMethod()]
 
 
 if __name__ == "__main__":

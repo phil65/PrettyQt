@@ -58,7 +58,7 @@ class PageLayout(QtGui.QPageLayout):
         Returns:
             unit
         """
-        return UNITS.inv[self.units()]
+        return UNITS.inverse[self.units()]
 
     def set_mode(self, mode: str):
         """Set mode.
@@ -83,7 +83,7 @@ class PageLayout(QtGui.QPageLayout):
         Returns:
             mode
         """
-        return MODES.inv[self.mode()]
+        return MODES.inverse[self.mode()]
 
     def set_orientation(self, orientation: str):
         """Set orientation.
@@ -108,7 +108,7 @@ class PageLayout(QtGui.QPageLayout):
         Returns:
             orientation
         """
-        return ORIENTATIONS.inv[self.orientation()]
+        return ORIENTATIONS.inverse[self.orientation()]
 
     def get_page_size(self) -> gui.PageSize:
         return gui.PageSize(self.pageSize())

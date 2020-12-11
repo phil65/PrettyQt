@@ -48,7 +48,7 @@ class NetworkInterface(QtNetwork.QNetworkInterface):
         Returns:
             interface type
         """
-        return INTERFACE_TYPES.inv[self.type()]
+        return INTERFACE_TYPES.inverse[self.type()]
 
     def get_address_entries(self) -> List[network.NetworkAddressEntry]:
         return [network.NetworkAddressEntry(i) for i in self.addressEntries()]

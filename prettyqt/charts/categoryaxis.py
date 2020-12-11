@@ -55,7 +55,7 @@ class CategoryAxis(QtCharts.QCategoryAxis):
         Returns:
             labels position
         """
-        return LABELS_POSITIONS.inv[self.labelsPosition()]
+        return LABELS_POSITIONS.inverse[self.labelsPosition()]
 
 
 if __name__ == "__main__":

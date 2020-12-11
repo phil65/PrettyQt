@@ -54,7 +54,7 @@ class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
         self.setPosition(pos)
 
     def get_boundary_type(self) -> str:
-        return BOUNDARY_TYPES.inv[self.type()]
+        return BOUNDARY_TYPES.inverse[self.type()]
 
     def get_boundary_reasons(self) -> List[str]:
         return [k for k, v in BOUNDARY_REASONS.items() if v & self.boundaryReasons()]

@@ -53,7 +53,7 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
         Returns:
             animation direction
         """
-        return DIRECTION.inv[self.direction()]
+        return DIRECTION.inverse[self.direction()]
 
     def get_state(self) -> StateStr:
         """Get the current animation state.
@@ -63,7 +63,7 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
         Returns:
             animation state
         """
-        return STATE.inv[self.state()]
+        return STATE.inverse[self.state()]
 
     def start_animation(self, policy: DeletionPolicyStr):
         """Start the animation.

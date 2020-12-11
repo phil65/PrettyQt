@@ -71,7 +71,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         Returns:
             size adjust policy
         """
-        return SIZE_POLICIES.inv[self.sizeAdjustPolicy()]
+        return SIZE_POLICIES.inverse[self.sizeAdjustPolicy()]
 
     def set_scrollbar_policy(self, mode: str):
         """Set the policy for both scrollbars.

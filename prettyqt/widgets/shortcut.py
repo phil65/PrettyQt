@@ -53,7 +53,7 @@ class Shortcut(QtWidgets.QShortcut):
         Returns:
             shortcut context
         """
-        return CONTEXT.inv[self.context()]
+        return CONTEXT.inverse[self.context()]
 
     def get_key(self) -> gui.KeySequence:
         """Return the shortcut's key sequence.

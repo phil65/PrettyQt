@@ -102,7 +102,7 @@ class TextDocument(QtGui.QTextDocument):
         Returns:
             cursor move style
         """
-        return CURSOR_MOVE_STYLES.inv[self.defaultCursorMoveStyle()]
+        return CURSOR_MOVE_STYLES.inverse[self.defaultCursorMoveStyle()]
 
     def add_resource(self, resource_type: str, name: Union[str, pathlib.Path], resource):
         if resource_type not in RESOURCE_TYPES:

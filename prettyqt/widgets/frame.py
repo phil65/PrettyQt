@@ -52,7 +52,7 @@ class Frame(QtWidgets.QFrame):
         Returns:
             frame style
         """
-        return SHADOW.inv[self.frameShadow()]
+        return SHADOW.inverse[self.frameShadow()]
 
     def set_frame_shape(self, shape: FrameShapeStr):
         """Set frame shape.
@@ -73,4 +73,4 @@ class Frame(QtWidgets.QFrame):
         Returns:
             frame shape
         """
-        return FRAME_SHAPE.inv[self.frameShape()]
+        return FRAME_SHAPE.inverse[self.frameShape()]

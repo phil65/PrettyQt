@@ -21,7 +21,7 @@ class CameraFocusZone(QtMultimedia.QCameraFocusZone):
         Returns:
             focus mode
         """
-        return FOCUS_ZONE_STATUS.inv[self.status()]
+        return FOCUS_ZONE_STATUS.inverse[self.status()]
 
     def get_area(self) -> core.RectF:
         return core.RectF(self.area())
