@@ -518,6 +518,10 @@ def test_gridlayout(qtbot):
     layout.set_alignment("left")
     assert len(layout) == len(list(layout)) == 2
     layout += widgets.RadioButton()
+    layout.set_origin_corner("bottom_right")
+    assert layout.get_origin_corner() == "bottom_right"
+    with pytest.raises(InvalidParamError):
+        layout.set_origin_corner("test")
 
 
 def test_groupbox(qtbot):

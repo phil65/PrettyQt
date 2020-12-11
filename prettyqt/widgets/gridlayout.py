@@ -1,7 +1,18 @@
-from typing import Tuple, Union, Optional, Iterator
+from typing import Tuple, Union, Optional, Iterator, Literal
 
 from qtpy import QtWidgets, QtCore
+
 from prettyqt import widgets
+from prettyqt.utils import bidict, InvalidParamError
+
+CORNER = bidict(
+    top_left=QtCore.Qt.TopLeftCorner,
+    top_right=QtCore.Qt.TopRightCorner,
+    bottom_left=QtCore.Qt.BottomLeftCorner,
+    bottom_right=QtCore.Qt.BottomRightCorner,
+)
+
+CornerStr = Literal["top_left", "top_right", "bottom_left", "bottom_right"]
 
 
 QtWidgets.QGridLayout.__bases__ = (widgets.Layout,)
@@ -65,6 +76,27 @@ class GridLayout(QtWidgets.QGridLayout):
 
     def append(self, item):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
+
+    def set_origin_corner(self, corner: CornerStr):
+        """Set the origin corner.
+
+        Args:
+            corner: origin corner
+
+        Raises:
+            InvalidParamError: corner does not exist
+        """
+        if corner not in CORNER:
+            raise InvalidParamError(corner, CORNER)
+        self.setOriginCorner(CORNER[corner])
+
+    def get_origin_corner(self) -> CornerStr:
+        """Return current origin corner.
+
+        Returns:
+            origin corner
+        """
+        return CORNER.inverse[self.originCorner()]
 
 
 if __name__ == "__main__":
