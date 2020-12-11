@@ -243,7 +243,7 @@ class RoundProgressBar(widgets.Widget):
             return text_to_draw.replace(r"%m", str(val))
 
     def _value_format_changed(self):
-        for k, v in VALUE_MAP:
+        for k, v in VALUE_MAP.items():
             if k in self.number_format:
                 self.update_flags = v
         self.update()
