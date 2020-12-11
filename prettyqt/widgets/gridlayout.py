@@ -9,7 +9,7 @@ QtWidgets.QGridLayout.__bases__ = (widgets.Layout,)
 
 class GridLayout(QtWidgets.QGridLayout):
     def __getitem__(
-        self, idx: Union[tuple, int, str]
+        self, idx: Union[Tuple[int, int], int, str]
     ) -> Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
         if isinstance(idx, tuple):
             item = self.itemAtPosition(*idx)
