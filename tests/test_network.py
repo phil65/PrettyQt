@@ -127,6 +127,8 @@ def test_networkcookiejar():
     for i in jar:
         pass
     repr(jar)
+    jar += network.NetworkCookie()
+    jar.set_cookies_from_url([], "http://www.google.de")
 
 
 def test_udpsocket():
