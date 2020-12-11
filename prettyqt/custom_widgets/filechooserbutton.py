@@ -13,8 +13,8 @@ class FileChooserButton(widgets.Widget):
     def __init__(
         self,
         extensions: Optional[Dict[str, List[str]]] = None,
-        mode: str = "save",
-        file_mode: str = "existing_files",
+        mode: widgets.filedialog.AcceptModeStr = "save",
+        file_mode: widgets.filedialog.FileModeStr = "existing_files",
         root: Union[None, str, pathlib.Path] = None,
         parent: Optional[QtWidgets.QWidget] = None,
     ):
@@ -32,8 +32,8 @@ class FileChooserButton(widgets.Widget):
         super().__init__(parent)
         self.path: Optional[pathlib.Path] = None
         self.extensions = extensions
-        self.mode = mode
-        self.file_mode = file_mode
+        self.mode: widgets.filedialog.AcceptModeStr = mode
+        self.file_mode: widgets.filedialog.FileModeStr = file_mode
         self.root = root
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)

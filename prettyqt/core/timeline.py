@@ -1,4 +1,4 @@
-from typing import Union, Callable
+from typing import Union, Callable, Literal
 
 from qtpy import QtCore
 
@@ -7,11 +7,15 @@ from prettyqt.utils import bidict, InvalidParamError
 
 DIRECTION = bidict(forward=QtCore.QTimeLine.Forward, backward=QtCore.QTimeLine.Backward)
 
+DirectionStr = Literal["forward", "backward"]
+
 STATE = bidict(
     not_running=QtCore.QTimeLine.NotRunning,
     paused=QtCore.QTimeLine.Paused,
     running=QtCore.QTimeLine.Running,
 )
+
+StateStr = Literal["not_running", "paused", "running"]
 
 QtCore.QTimeLine.__bases__ = (core.Object,)
 
@@ -27,10 +31,8 @@ class TimeLine(QtCore.QTimeLine):
             update_interval=self.updateInterval(),
         )
 
-    def set_direction(self, direction: str):
+    def set_direction(self, direction: DirectionStr):
         """Set the direction.
-
-        Allowed values are "forward", "backward"
 
         Args:
             direction: direction
@@ -42,20 +44,16 @@ class TimeLine(QtCore.QTimeLine):
             raise InvalidParamError(direction, DIRECTION)
         self.setDirection(DIRECTION[direction])
 
-    def get_direction(self) -> str:
+    def get_direction(self) -> DirectionStr:
         """Return current direction.
-
-        Possible values: "forward", "backward"
 
         Returns:
             direction
         """
         return DIRECTION.inverse[self.direction()]
 
-    def get_state(self) -> str:
+    def get_state(self) -> StateStr:
         """Return current state.
-
-        Possible values: "not_running", "paused", "running"
 
         Returns:
             state
