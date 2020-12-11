@@ -41,3 +41,9 @@ repos:
   rev: 5.1.1  # pick a git hash / tag to point to
   hooks:
   - id: pydocstyle
+
+- repo: https://github.com/asottile/pyupgrade
+  rev: v2.7.4
+  hooks:
+  - id: pyupgrade
+    args: [--py38-plus]
