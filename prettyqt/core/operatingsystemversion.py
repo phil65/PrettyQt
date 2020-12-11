@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Union, Optional, Literal
 
 from qtpy import QtCore
 
@@ -14,6 +14,8 @@ OS_TYPE = bidict(
     windows=QtCore.QOperatingSystemVersion.Windows,
     unknown=QtCore.QOperatingSystemVersion.Unknown,
 )
+
+OsTypeStr = Literal["android", "ios", "mac_os", "tv_os", "watch_os", "windows", "unknown"]
 
 
 class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
@@ -32,11 +34,8 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
             micro = -1
         super().__init__(typ, major, minor, micro)
 
-    def get_type(self) -> str:
+    def get_type(self) -> OsTypeStr:
         """Get current os type.
-
-        Possible values: "android", "ios", "mac_os", "tv_os", "watch_os", "windows",
-                         "unknown"
 
         Returns:
             current os type

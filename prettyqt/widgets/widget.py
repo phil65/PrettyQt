@@ -20,7 +20,7 @@ CONTEXT_POLICY = bidict(
     # showhide_menu="showhide_menu",
 )
 
-CONTEXT_POLICY_STR = Literal["none", "prevent", "default", "actions", "custom"]
+ContextPolicyStr = Literal["none", "prevent", "default", "actions", "custom"]
 
 MODALITY = bidict(
     window=QtCore.Qt.WindowModal,
@@ -28,7 +28,7 @@ MODALITY = bidict(
     none=QtCore.Qt.NonModal,
 )
 
-MODALITY_STR = Literal["none", "prevent", "default", "actions", "custom"]
+ModalityStr = Literal["none", "prevent", "default", "actions", "custom"]
 
 CURSOR_SHAPES = bidict(
     arrow=QtCore.Qt.ArrowCursor,
@@ -247,7 +247,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
                 raise InvalidParamError(attribute, ATTRIBUTES)
             self.setAttribute(ATTRIBUTES[attribute], state)
 
-    def set_modality(self, modality: MODALITY_STR) -> None:
+    def set_modality(self, modality: ModalityStr) -> None:
         """Set modality for the dialog.
 
         Args:
@@ -260,7 +260,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             raise InvalidParamError(modality, MODALITY)
         self.setWindowModality(MODALITY[modality])
 
-    def get_modality(self) -> MODALITY_STR:
+    def get_modality(self) -> ModalityStr:
         """Get the current modality modes as a string.
 
         Returns:
@@ -338,7 +338,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         with self.edit_font() as font:
             yield font
 
-    def set_contextmenu_policy(self, policy: CONTEXT_POLICY_STR) -> None:
+    def set_contextmenu_policy(self, policy: ContextPolicyStr) -> None:
         """Set contextmenu policy for given item view.
 
         Args:
@@ -351,7 +351,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             raise InvalidParamError(policy, CONTEXT_POLICY)
         self.setContextMenuPolicy(CONTEXT_POLICY[policy])
 
-    def get_contextmenu_policy(self) -> CONTEXT_POLICY_STR:
+    def get_contextmenu_policy(self) -> ContextPolicyStr:
         """Return current contextmenu policy.
 
         Returns:

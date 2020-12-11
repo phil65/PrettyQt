@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Union, Literal
 import pathlib
 import contextlib
 
@@ -16,12 +16,14 @@ LOCK_ERROR = bidict(
     unknown=QtCore.QLockFile.UnknownError,
 )
 
+LockErrorStr = Literal["none", "lock_failed", "permission", "unknown"]
+
 
 class LockFile(QtCore.QLockFile):
     def __init__(self, path: Union[str, pathlib.Path]):
         super().__init__(str(path))
 
-    def get_error(self) -> str:
+    def get_error(self) -> LockErrorStr:
         return LOCK_ERROR.inverse[self.error()]
 
     @contextlib.contextmanager

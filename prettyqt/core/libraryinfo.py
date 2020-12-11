@@ -1,3 +1,4 @@
+from typing import Literal
 import pathlib
 
 from qtpy import QtCore
@@ -5,7 +6,7 @@ from qtpy import QtCore
 from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
-LOCATIONS = bidict(
+LOCATION = bidict(
     prefix=QtCore.QLibraryInfo.PrefixPath,
     documentation=QtCore.QLibraryInfo.DocumentationPath,
     headers=QtCore.QLibraryInfo.HeadersPath,
@@ -23,16 +24,34 @@ LOCATIONS = bidict(
     settings=QtCore.QLibraryInfo.SettingsPath,
 )
 
+LocationStr = Literal[
+    "prefix",
+    "documentation",
+    "headers",
+    "libraries",
+    "library_executables",
+    "binaries",
+    "plugins",
+    "imports",
+    "qml2_imports",
+    "arch_data",
+    "data",
+    "translations",
+    "examples",
+    "tests",
+    "settings",
+]
+
 
 class LibraryInfo(QtCore.QLibraryInfo):
-    def __class_getitem__(cls, name: str) -> pathlib.Path:
+    def __class_getitem__(cls, name: LocationStr) -> pathlib.Path:
         return cls.get_location(name)
 
     @classmethod
-    def get_location(cls, location: str) -> pathlib.Path:
-        if location not in LOCATIONS:
-            raise InvalidParamError(location, LOCATIONS)
-        return pathlib.Path(cls.location(LOCATIONS[location]))
+    def get_location(cls, location: LocationStr) -> pathlib.Path:
+        if location not in LOCATION:
+            raise InvalidParamError(location, LOCATION)
+        return pathlib.Path(cls.location(LOCATION[location]))
 
     @classmethod
     def get_version(cls) -> core.VersionNumber:

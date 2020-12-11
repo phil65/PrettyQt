@@ -133,8 +133,6 @@ class ToolBar(QtWidgets.QToolBar):
     def is_area_allowed(self, area: ToolbarAreaStr) -> bool:
         """Check if toolbar is allowed at specified area.
 
-        Valid values for area: "left", "right", "top", "bottom", "all"
-
         Args:
             area: area of the toolbar
 

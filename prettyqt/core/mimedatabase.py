@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Literal
 import pathlib
 
 from qtpy import QtCore
@@ -12,12 +12,14 @@ MATCH_MODE = bidict(
     content=QtCore.QMimeDatabase.MatchContent,
 )
 
+MatchModeStr = Literal["default", "extension", "content"]
+
 
 class MimeDatabase(QtCore.QMimeDatabase):
     def get_mime_type_for_file(
         self,
         path: Union[str, pathlib.Path, QtCore.QFileInfo],
-        match_mode: str = "default",
+        match_mode: MatchModeStr = "default",
     ) -> core.MimeType:
         if match_mode not in MATCH_MODE:
             raise InvalidParamError(match_mode, MATCH_MODE)
