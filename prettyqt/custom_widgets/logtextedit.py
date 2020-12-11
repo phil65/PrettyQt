@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Optional
 import logging
 import re
@@ -25,7 +23,7 @@ logger = logging.getLogger(__name__)
 # )
 
 
-class Highlighter(object):
+class Highlighter:
     placeholder: str
     color: Optional[str] = None
     italic: bool = False

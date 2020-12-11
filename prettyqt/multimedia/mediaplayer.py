@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from qtpy import QtMultimedia
 
 from prettyqt import multimedia

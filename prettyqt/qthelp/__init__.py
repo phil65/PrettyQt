@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """qthelp module.
 
 contains QtHelp-based classes

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Network module.
 
 Contains QtNetWork-based classes

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Credits to PyQode Authors."""
 
 from typing import Optional

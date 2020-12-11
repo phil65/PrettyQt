@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Custom_models module.
 
 Contains custom models

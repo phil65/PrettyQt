@@ -416,7 +416,7 @@ class ObjectBrowser(widgets.MainWindow):
 
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-    struct = dict(a=set([1, 2, frozenset([1, 2])]))
+    struct = dict(a={1, 2, frozenset([1, 2])})
     app = widgets.app()  # keeping reference to prevent garbage collection.
     app.setOrganizationName("phil65")
     app.setApplicationName("PrettyQt")

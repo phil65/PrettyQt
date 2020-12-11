@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Constants module."""
 
 from qtpy import QtCore

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import widgets

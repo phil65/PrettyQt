@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 """Tests for `prettyqt` package."""
 
@@ -292,7 +291,7 @@ def test_roundprogressbar(qtbot):
 def test_selectionwidget(qtbot):
     widget = custom_widgets.SelectionWidget()
 
-    class Test(object):
+    class Test:
         pass
 
     test = Test()

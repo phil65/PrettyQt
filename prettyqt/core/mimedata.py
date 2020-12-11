@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Union, List, Iterator, Any, Dict
 
 import orjson as json

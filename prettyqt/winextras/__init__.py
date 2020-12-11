@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """winextras module.
 
 contains QtWinExtras-based classes

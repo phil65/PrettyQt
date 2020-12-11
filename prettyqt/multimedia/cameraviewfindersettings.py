@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
@@ -11,7 +10,7 @@ from prettyqt.utils import InvalidParamError
 
 
 @dataclass
-class Settings(object):
+class Settings:
     maximum_framerate: int
     minimum_framerate: int
     pixel_aspect_ratio: Tuple[int, int]

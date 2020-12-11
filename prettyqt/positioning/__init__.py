@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Positioning module.
 
 Contains QtPositioning-based classes

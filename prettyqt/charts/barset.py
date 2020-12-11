@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import core, gui

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """quick module.
 
 contains QtQuick-based classes

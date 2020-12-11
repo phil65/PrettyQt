@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import datetime
 
 from qtpy.QtCharts import QtCharts

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Multimediawidgets module."""
 
 from prettyqt import core

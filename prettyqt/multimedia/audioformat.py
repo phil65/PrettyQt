@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from __future__ import annotations
 
 from typing import Dict, Any, Iterator
@@ -22,7 +20,7 @@ SAMPLE_TYPES = bidict(
 
 
 @dataclass
-class Settings(object):
+class Settings:
     sample_rate: int
     channel_count: int
     sample_size: int

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Optional
 
 from PyQt5 import Qsci  # type: ignore

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Union, Literal
 
 from qtpy.QtCharts import QtCharts

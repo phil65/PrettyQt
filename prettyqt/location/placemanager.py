@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import List, Optional, Union, Tuple
 
 from qtpy import QtLocation

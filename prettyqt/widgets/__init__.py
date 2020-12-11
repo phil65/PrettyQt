@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """widgets module.
 
 contains QtWidgets-based classes

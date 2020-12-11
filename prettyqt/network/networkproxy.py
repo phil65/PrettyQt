@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Dict, List
 
 from qtpy import QtNetwork

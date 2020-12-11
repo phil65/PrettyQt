@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """TextToSpeech module.
 
 Contains QtTextToSpeech-based classes

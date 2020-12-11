@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import functools
 import hashlib
 from typing import Iterable, Optional, Union, List

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from qtpy.QtCharts import QtCharts
 from qtpy import QtCore
 
@@ -24,7 +22,7 @@ ALIGNMENTS = bidict(
 QtCharts.QLegend.__bases__ = (widgets.GraphicsWidget,)
 
 
-class Legend(object):
+class Legend:
     def __init__(self, item: QtCharts.QLegend):
         self.item = item
 

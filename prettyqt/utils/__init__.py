@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Module containing helper functions."""
 
 import sys
@@ -70,7 +69,7 @@ def install_exceptionhook(debug=False):
         Shows an error dialog before quitting when not in debugging mode.
         """
         logger.critical(
-            "Bug: uncaught {}".format(exc_type.__name__),
+            f"Bug: uncaught {exc_type.__name__}",
             exc_info=(exc_type, exc_value, exc_traceback),
         )
         if debug:

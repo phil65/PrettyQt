@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
@@ -26,7 +24,7 @@ ENCODING_MODES = bidict(
 
 
 @dataclass
-class Settings(object):
+class Settings:
     bitrate: int
     codec: str
     encoding_mode: str

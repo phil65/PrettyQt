@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Union, Optional, Dict
 
 from qtpy import QtCore, QtGui, QtWidgets

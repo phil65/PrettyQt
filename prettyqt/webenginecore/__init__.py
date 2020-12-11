@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Webenginewidgets module.
 
 contains QtWebEngineCore-based classes

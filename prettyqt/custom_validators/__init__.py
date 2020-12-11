@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Custom_validators module.
 
 Contains custom validators

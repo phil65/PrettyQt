@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Optional, Mapping, Iterable, Union, Dict, Any, Iterator, Tuple
 
 from qtpy import QtWidgets

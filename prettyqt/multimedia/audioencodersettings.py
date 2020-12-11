@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from __future__ import annotations
 
 from typing import Dict, Any, Iterator
@@ -25,7 +23,7 @@ ENCODING_MODES = bidict(
 
 
 @dataclass
-class Settings(object):
+class Settings:
     bitrate: int
     channel_count: int
     codec: str

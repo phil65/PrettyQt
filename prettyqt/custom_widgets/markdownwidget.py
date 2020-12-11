@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from prettyqt import gui, widgets
 
 
@@ -59,7 +57,7 @@ class MarkdownWindow(widgets.MainWindow):
             self.web_view.set_markdown_file(fname[0])
         except UnicodeDecodeError:
             self.statusBar().showMessage("Please select only text files")
-        except IOError:
+        except OSError:
             self.statusBar().showMessage("File open canceled!")
 
 

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Optional, Union
 
 from qtpy import QtWidgets

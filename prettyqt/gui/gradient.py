@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Tuple, List
 
 from qtpy import QtGui

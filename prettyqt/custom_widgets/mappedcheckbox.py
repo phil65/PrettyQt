@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from prettyqt import widgets
 from prettyqt.utils import bidict
 

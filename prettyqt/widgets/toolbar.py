@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Callable, Optional, Dict, Any, Union, Tuple, Literal
 
 from qtpy import QtCore, QtWidgets

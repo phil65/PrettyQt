@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # credits to https://stackoverflow.com/a/54819051
 
 from typing import Optional, Sequence

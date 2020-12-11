@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import regex as re
 
 from prettyqt import gui

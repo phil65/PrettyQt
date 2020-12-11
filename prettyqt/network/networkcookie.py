@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from qtpy import QtNetwork
 
 from prettyqt.utils import bidict

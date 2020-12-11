@@ -14,7 +14,7 @@ DIAMOND_POINTS = [
 ]
 
 
-class StarRating(object):
+class StarRating:
     """Handle the actual painting of the stars themselves."""
 
     def __init__(self, star_count=1, max_stars=5):

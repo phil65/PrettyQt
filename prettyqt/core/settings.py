@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import contextlib
 import pathlib
 from typing import List, Mapping, Optional, Union, Dict, Any, Iterator, Tuple, Literal

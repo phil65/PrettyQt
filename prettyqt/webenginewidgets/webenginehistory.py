@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # from qtpy import QtWebEngineWidgets
 
 from typing import Iterator, List
@@ -14,7 +12,7 @@ elif PYSIDE2:
 from prettyqt import core, webenginewidgets
 
 
-class WebEngineHistory(object):
+class WebEngineHistory:
     def __init__(self, history: QtWebEngineWidgets.QWebEngineHistory):
         self.history = history
 

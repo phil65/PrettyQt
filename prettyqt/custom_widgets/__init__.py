@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Module containing custom widget classes."""
 
 from .image import Image

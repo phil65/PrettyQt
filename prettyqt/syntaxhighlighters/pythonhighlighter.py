@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Syntax highlighter for the programming language Python."""
 
 from prettyqt import core, gui, syntaxhighlighters

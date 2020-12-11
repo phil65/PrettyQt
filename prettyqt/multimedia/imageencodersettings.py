@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict
@@ -18,7 +17,7 @@ QUALITIES = bidict(
 
 
 @dataclass
-class Settings(object):
+class Settings:
     codec: str
     encoding_options: Dict[str, Any]
     quality: str

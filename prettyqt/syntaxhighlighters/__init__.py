@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """syntaxhighlighters module.
 
 contains some custom syntax highlighers

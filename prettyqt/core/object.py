@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Optional, Union, DefaultDict, List, Type
 from collections import defaultdict
 from contextlib import contextmanager

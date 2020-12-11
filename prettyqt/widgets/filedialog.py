@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import pathlib
 from typing import List, Optional, Union, Dict, Literal
 

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from qtpy import QtMultimediaWidgets, QtCore
 
 from prettyqt import core, multimedia, widgets

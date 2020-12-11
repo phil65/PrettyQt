@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Union, Iterator, Optional
 
 from qtpy import QtQml, QtCore

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """bluetooth module.
 
 contains QtBluetooth-based classes

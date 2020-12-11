@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Optional, Union, Iterator, Tuple, Pattern
 
 from qtpy import QtGui, QtCore

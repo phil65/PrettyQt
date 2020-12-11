@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from qtpy import QtNetwork, QtCore
 
 from prettyqt import network

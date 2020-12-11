@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Charts module."""
 
 from .barset import BarSet

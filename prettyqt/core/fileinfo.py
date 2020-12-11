@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import pathlib
 
 from qtpy import QtCore

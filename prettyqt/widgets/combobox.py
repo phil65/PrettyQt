@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Iterable, Union, Mapping, Any, Literal, Tuple
 
 from qtpy import QtCore, QtWidgets
@@ -40,7 +38,7 @@ SizeAdjustPolicyStr = Literal[
 ]
 
 
-class NoData(object):
+class NoData:
     pass
 
 

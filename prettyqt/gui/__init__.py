@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Gui module.
 
 Contains QtGui-based classes

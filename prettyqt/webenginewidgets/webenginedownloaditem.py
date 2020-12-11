@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from qtpy import PYQT5, PYSIDE2
 
 if PYQT5:
@@ -57,7 +55,7 @@ SAVE_PAGE_FORMATS = bidict(
 # QtWebEngineWidgets.QWebEngineDownloadItem.__bases__ = (core.Object,)
 
 
-class WebEngineDownloadItem(object):
+class WebEngineDownloadItem:
     def __init__(self, item: QtWebEngineWidgets.QWebEngineDownloadItem):
         self.item = item
 

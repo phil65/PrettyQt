@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # see https://github.com/ITVRoC/SeekurJr/blob/master/seekur_12.04/packages/
 # multimaster_fkie/node_manager_fkie/src/node_manager_fkie/yaml_highlighter.py
 
@@ -11,7 +10,7 @@ from prettyqt import gui
 
 
 @dataclass
-class HighlightRule(object):
+class HighlightRule:
     regex: Union[str, List[str]] = ""
     color: str = "black"
     italic: bool = False

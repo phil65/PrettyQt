@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from contextlib import contextmanager
 
 from typing import Dict, Iterator, Callable, Optional, Union, Any, Literal

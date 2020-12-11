@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Union, Iterable, Mapping, List, Any, Optional, Iterator
 
 from qtpy import QtCore, QtWidgets, QtGui
@@ -11,7 +9,7 @@ from prettyqt.utils import InvalidParamError
 QtWidgets.QListWidget.__bases__ = (widgets.ListView,)
 
 
-class NoData(object):
+class NoData:
     pass
 
 

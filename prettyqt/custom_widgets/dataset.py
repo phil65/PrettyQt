@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import functools
 import pathlib
 from typing import Optional, Mapping, Iterable, Union, Callable, Any, Dict
@@ -7,7 +5,7 @@ from typing import Optional, Mapping, Iterable, Union, Callable, Any, Dict
 from prettyqt import custom_validators, custom_widgets, gui, widgets
 
 
-class DataItem(object):
+class DataItem:
     def __init__(
         self,
         label: str,
@@ -438,7 +436,7 @@ class DataSetMeta(type):
         return type.__new__(mcs, name, bases, dct)
 
 
-class DataSet(object, metaclass=DataSetMeta):
+class DataSet(metaclass=DataSetMeta):
     _items: Dict[str, DataItem]
 
     def __init__(self, title: str = "", comment: Optional[str] = None, icon=""):

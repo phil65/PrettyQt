@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """Based on http://www.yasinuludag.com/blog/?p=49 ."""
 
 from prettyqt import core, gui, syntaxhighlighters

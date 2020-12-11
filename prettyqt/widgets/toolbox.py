@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Optional, Union, List, Iterator
 
 from qtpy import QtWidgets

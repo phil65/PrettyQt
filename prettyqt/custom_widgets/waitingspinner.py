@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """The MIT License (MIT).
 
 Copyright (c) 2012-2014 Alexander Turkin

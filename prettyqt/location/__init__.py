@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Location module."""
 
 from .georouterequest import GeoRouteRequest

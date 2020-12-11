@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import List
 
 from qtpy import PYQT5, PYSIDE2

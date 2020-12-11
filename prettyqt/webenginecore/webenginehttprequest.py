@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import Dict, Union
 
 from qtpy import PYQT5, PYSIDE2, QtCore

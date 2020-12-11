@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Qml module.
 
 Contains QtQml-based classes

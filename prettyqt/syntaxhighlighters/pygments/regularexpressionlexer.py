@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import List
 
 from pygments.lexer import RegexLexer, bygroups

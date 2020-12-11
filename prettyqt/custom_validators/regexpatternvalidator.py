@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 import sre_constants
 
 import regex as re

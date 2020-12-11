@@ -1,12 +1,10 @@
-# -*- coding: utf-8 -*-
-
 from typing import Dict, Callable
 
 from prettyqt import constants
 from qtpy import QtCore
 
 
-class SelectionMixin(object):
+class SelectionMixin:
 
     CHECKSTATE: Dict[int, Callable] = {}  # column: identifier
     dataChanged: QtCore.Signal

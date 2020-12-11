@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 """Multimedia module."""
 
 from .mediatimeinterval import MediaTimeInterval

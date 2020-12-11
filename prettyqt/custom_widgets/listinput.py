@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from typing import List, Union, Optional, Type
 from qtpy import QtWidgets
 from prettyqt import custom_validators, widgets
