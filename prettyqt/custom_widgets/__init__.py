@@ -29,6 +29,7 @@ from .imageviewer import ImageViewer
 from .popupinfo import PopupInfo
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
+from .roundprogressbar import RoundProgressBar
 
 # from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
@@ -63,6 +64,7 @@ __all__ = [
     "SpanSlider",
     "LabeledSlider",
     "WaitingSpinner",
+    "RoundProgressBar",
     "PopupInfo",
     "ButtonDelegate",
     "RadioDelegate",

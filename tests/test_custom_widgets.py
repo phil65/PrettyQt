@@ -272,6 +272,23 @@ def test_promptlineedit(qtbot):
     widget.set_text("test")
 
 
+def test_roundprogressbar(qtbot):
+    bar = custom_widgets.RoundProgressBar()
+    bar.show()
+    assert bar.minimum() == 0
+    assert bar.maximum() == 100
+    bar.set_value(50)
+    assert bar.get_value() == 50
+    bar.set_null_position(40)
+    bar.hide()
+    bar.set_bar_style("donut")
+    bar.set_outline_pen_width(3)
+    bar.set_data_pen_width(5)
+    bar.set_format(r"%p")
+    bar.set_decimals(3)
+    bar.set_range(20, 80)
+
+
 def test_selectionwidget(qtbot):
     widget = custom_widgets.SelectionWidget()
 
