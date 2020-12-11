@@ -91,7 +91,7 @@ class Object(QtCore.QObject):
         return self.findChild(typ, name, options=flag)
 
     def find_parent(
-        self, typ: QtCore.QObject, name: Optional[str] = None
+        self, typ: Type[QtCore.QObject], name: Optional[str] = None
     ) -> Optional[QtCore.QObject]:
         node = self
         while node:

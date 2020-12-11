@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, List, Literal
+from typing import Optional, Tuple, List, Literal, Dict
 
 from qtpy import QtCore, QtWidgets, QtGui
 
@@ -11,7 +11,7 @@ BarStyleStr = Literal["donut", "pie", "line", "expand"]
 VALUE_TYPE = ["value", "percent", "max"]
 ValueTypeStr = Literal["value", "percent", "max"]
 
-VALUE_MAP = {
+VALUE_MAP: Dict[str, ValueTypeStr] = {
     r"%v": "value",
     r"%p": "percent",
     r"%m": "max",

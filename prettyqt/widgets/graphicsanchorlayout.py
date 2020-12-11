@@ -58,12 +58,12 @@ class GraphicsAnchorLayout(QtWidgets.QGraphicsAnchorLayout):
         orientation: Literal["horizontal", "vertical"],
     ):
         if orientation == "horizontal":
-            orientation = QtCore.Qt.Horizontal
+            flag = QtCore.Qt.Horizontal
         elif orientation == "vertical":
-            orientation = QtCore.Qt.Vertical
+            flag = QtCore.Qt.Vertical
         else:
             raise ValueError()
-        self.addAnchors(first_item, second_item, orientation)
+        self.addAnchors(first_item, second_item, flag)
 
     def add_corner_anchors(
         self,

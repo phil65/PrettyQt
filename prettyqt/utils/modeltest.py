@@ -42,7 +42,6 @@
 # $QT_END_LICENSE$
 
 import collections
-import sys
 
 from qtpy import QtTest, QtCore, QtGui
 
@@ -443,11 +442,7 @@ class ModelTester:
         # A valid index should have a valid QVariant data
         assert self._model.index(0, 0).isValid()
 
-        string_types = [str]
-        if sys.version_info.major == 2:
-            string_types.append(unicode)  # noqa
-
-        string_types = tuple(string_types)
+        string_types = (str,)
 
         types = [
             (QtCore.Qt.DisplayRole, string_types),

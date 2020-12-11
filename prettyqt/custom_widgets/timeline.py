@@ -17,7 +17,7 @@ FONT = gui.Font("Decorative", 10)
 class VideoSample:
     def __init__(
         self,
-        duration: int,
+        duration: float,
         color: colors.ColorType = "yellow",
         picture: Optional[QtGui.QPixmap] = None,
     ):
@@ -25,7 +25,7 @@ class VideoSample:
         self.color = colors.get_color(color)  # Floating color
         self.def_color = colors.get_color(color)  # DefaultColor
         self.picture = None if picture is None else picture.scaledToHeight(45)
-        self.start_pos = 0  # Initial position
+        self.start_pos = 0.0  # Initial position
         self.end_pos = self.duration  # End position
 
 
@@ -46,7 +46,7 @@ class Timeline(widgets.Widget):
         self.set_text_font(FONT)
         self.pos = None
         self.pointer_pos = None
-        self.pointer_time_pos = None
+        self.pointer_time_pos = 0.0
         self.selected_sample = None
         self.clicking = False  # Check if mouse left button is being pressed
         self.is_in = False  # check if user is in the widget
@@ -220,13 +220,13 @@ class Timeline(widgets.Widget):
             else:
                 sample.color = sample.def_color
 
-    def get_time_string(self, seconds: int) -> str:
-        m, s = divmod(seconds, 60)
+    def get_time_string(self, seconds: float) -> str:
+        m, s = divmod(int(seconds), 60)
         h, m = divmod(m, 60)
         return "%02d:%02d:%02d" % (h, m, s)
 
     def get_scale(self) -> float:
-        return float(self.duration) / float(self.width())
+        return self.duration / self.width()
 
     def set_background_color(self, color: colors.ColorType):
         color = colors.get_color(color)

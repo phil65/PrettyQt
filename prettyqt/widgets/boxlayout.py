@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union
 
 from qtpy import QtWidgets
 
@@ -30,10 +30,9 @@ class BoxLayout(QtWidgets.QBoxLayout):
         for item in state["items"]:
             self.add(item)
 
-    def __add__(self, other):
-        if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
-            self.add(other)
-            return self
+    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
+        self.add(other)
+        return self
 
     def add(self, *item):
         for i in item:
