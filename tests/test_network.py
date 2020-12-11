@@ -118,6 +118,7 @@ def test_networkcookie():
     cookie.set_value("testus")
     assert cookie.get_value() == "testus"
     assert cookie.to_raw_form(full=False) is None
+    cookie.set_expiration_date(None)
 
 
 def test_networkcookiejar():
