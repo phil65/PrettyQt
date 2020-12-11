@@ -40,6 +40,9 @@ class ToolBar(QtWidgets.QToolBar):
         super().__init__()
         self.addActions(state["actions"])
 
+    def __repr__(self):
+        return f"ToolBar({self.windowTitle()!r})"
+
     def add_menu_button(
         self, label: str, icon: gui.icon.IconType, menu: QtWidgets.QMenu
     ) -> widgets.ToolButton:
@@ -152,6 +155,6 @@ class ToolBar(QtWidgets.QToolBar):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = ToolBar()
+    widget = ToolBar("test")
     widget.show()
     app.main_loop()
