@@ -1,7 +1,7 @@
 """Module containing helper functions."""
 
 import sys
-from typing import Mapping, Union, Iterable, TYPE_CHECKING
+from typing import Iterable, TYPE_CHECKING
 import traceback
 import logging
 
@@ -51,12 +51,8 @@ class InvalidParamError(ValueError):
         valid_options: allowed options
     """
 
-    def __init__(self, value, valid_options: Union[Iterable, Mapping, bidict]):
+    def __init__(self, value, valid_options: Iterable):
         self.value = value
-        if isinstance(valid_options, Mapping):
-            self.valid_options = valid_options.keys()
-        else:
-            self.valid_options = valid_options
         opts = " / ".join(repr(opt) for opt in valid_options)
         self.message = f"Invalid value: {value!r}. Allowed options are {opts}."
         super().__init__(self.message)
