@@ -48,8 +48,8 @@ class Timeline(widgets.Widget):
         self.pointer_pos = None
         self.pointer_time_pos = 0.0
         self.selected_sample = None
-        self.clicking = False  # Check if mouse left button is being pressed
-        self.is_in = False  # check if user is in the widget
+        self._clicking = False  # Check if mouse left button is being pressed
+        self._is_in = False  # check if user is in the widget
         self.video_samples: List[VideoSample] = []  # List of video samples
         self.setMouseTracking(True)  # Mouse events
         self.setAutoFillBackground(True)  # background
@@ -113,7 +113,7 @@ class Timeline(widgets.Widget):
                 qp.drawLine(3 * point, 40, 3 * point, y2)
                 point += 10
 
-            if self.pos is not None and self.is_in:
+            if self.pos is not None and self._is_in:
                 qp.drawLine(self.pos.x(), 0, self.pos.x(), 40)
 
             poly = gui.Polygon()
@@ -177,7 +177,7 @@ class Timeline(widgets.Widget):
         self.pos = e.pos()
 
         # if mouse is being pressed, update pointer
-        if self.clicking:
+        if self._clicking:
             x = self.pos.x()
             self.pointer_pos = x
             self.position_changed.emit(x)
@@ -196,17 +196,17 @@ class Timeline(widgets.Widget):
             self._check_selection(x)
 
             self.update()
-            self.clicking = True  # Set clicking check to true
+            self._clicking = True  # Set clicking check to true
 
     def mouseReleaseEvent(self, e):
         if e.button() == QtCore.Qt.LeftButton:
-            self.clicking = False  # Set clicking check to false
+            self._clicking = False  # Set clicking check to false
 
     def enterEvent(self, e):
-        self.is_in = True
+        self._is_in = True
 
     def leaveEvent(self, e):
-        self.is_in = False
+        self._is_in = False
         self.update()
 
     def _check_selection(self, x: int):

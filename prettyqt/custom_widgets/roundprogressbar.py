@@ -38,7 +38,7 @@ class RoundProgressBar(widgets.Widget):
         self._rebuild_brush = False
         self.number_format = "%p%"
         self.decimals = 1
-        self.update_flags: ValueTypeStr = "percent"
+        self._update_flags: ValueTypeStr = "percent"
         self.gradient_data: List[QtGui.QColor] = list()
 
     def minimum(self):
@@ -231,21 +231,21 @@ class RoundProgressBar(widgets.Widget):
 
     def _value_to_text(self, value: float) -> str:
         text_to_draw = self.number_format
-        if self.update_flags == "value":
+        if self._update_flags == "value":
             val = round(value, self.decimals)
             return text_to_draw.replace(r"%v", str(val))
-        elif self.update_flags == "percent":
+        elif self._update_flags == "percent":
             procent = (value - self.min_value) / (self.max_value - self.min_value) * 100
             val = round(procent, self.decimals)
             return text_to_draw.replace(r"%p", str(val))
-        elif self.update_flags == "max":
+        elif self._update_flags == "max":
             val = round(self.max_value - self.min_value + 1, self.decimals)
             return text_to_draw.replace(r"%m", str(val))
 
     def _value_format_changed(self):
         for k, v in VALUE_MAP.items():
             if k in self.number_format:
-                self.update_flags = v
+                self._update_flags = v
         self.update()
 
     def _rebuild_data_brush_if_needed(self):
