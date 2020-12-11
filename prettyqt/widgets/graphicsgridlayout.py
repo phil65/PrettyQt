@@ -48,7 +48,7 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
                 if item is not None:
                     items.append(item)
                     positions.append((row, col))
-        return dict(widgets=widgets, positions=positions)
+        return dict(widgets=items, positions=positions)
 
     def __setstate__(self, state):
         self.__init__()
