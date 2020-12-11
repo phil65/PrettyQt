@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Tests for `datacook` package."""
 
 # import pytest

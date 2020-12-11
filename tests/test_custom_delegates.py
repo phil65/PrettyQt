@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """Tests for `prettyqt` package."""
 
 from qtpy import QtCore
