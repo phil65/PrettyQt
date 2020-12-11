@@ -1441,7 +1441,7 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Returns:</span>
 <span class="sd">        Direction</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">INSTRUCTION_DIRECTION</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">INSTRUCTION_DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1587,7 +1587,7 @@ get_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">feature</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FEATURE_TYPES</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">FEATURE_TYPES</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">FEATURE_WEIGHTS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">featureWeight</span><span class="p">(</span><span class="n">FEATURE_TYPES</span><span class="p">[</span><span class="n">feature</span><span class="p">])]</span>
+    <span class="k">return</span> <span class="n">FEATURE_WEIGHTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">featureWeight</span><span class="p">(</span><span class="n">FEATURE_TYPES</span><span class="p">[</span><span class="n">feature</span><span class="p">])]</span>
 </code></pre>
 </div>
 </details>
@@ -1632,7 +1632,7 @@ get_route_optimization<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">    Returns:</span>
 <span class="sd">        Route optimization</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ROUTE_OPTIMIZATION</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">routeOptimization</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ROUTE_OPTIMIZATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">routeOptimization</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1854,7 +1854,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Returns:</span>
 <span class="sd">        Visibility</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1923,7 +1923,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Returns:</span>
 <span class="sd">        Visibility</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1992,7 +1992,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <span class="sd">    Returns:</span>
 <span class="sd">        Place type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2061,7 +2061,7 @@ get_content_type<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Returns:</span>
 <span class="sd">        Relevance type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contentType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contentType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2201,7 +2201,7 @@ get_operation_type<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">    Returns:</span>
 <span class="sd">        current operation_type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">OPERATION_TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">operationType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">OPERATION_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">operationType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2274,7 +2274,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <span class="sd">    Returns:</span>
 <span class="sd">        Error type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ERROR</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2321,7 +2321,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <span class="sd">    Returns:</span>
 <span class="sd">        Type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2390,7 +2390,7 @@ get_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">    Returns:</span>
 <span class="sd">        Relevance hint</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">RELEVANCE_HINT</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">relevanceHint</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">RELEVANCE_HINT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">relevanceHint</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2435,7 +2435,7 @@ get_visibility_scope<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Returns:</span>
 <span class="sd">        Visibility scope</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibilityScope</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibilityScope</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2575,7 +2575,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <span class="sd">    Returns:</span>
 <span class="sd">        Result type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>

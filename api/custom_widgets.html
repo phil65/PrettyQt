@@ -708,6 +708,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.roundprogressbar" class="md-nav__link">
+    roundprogressbar
+  </a>
+  
+    <nav class="md-nav" aria-label="roundprogressbar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.roundprogressbar.RoundProgressBar" class="md-nav__link">
+    RoundProgressBar
+  </a>
+  
+    <nav class="md-nav" aria-label="RoundProgressBar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.roundprogressbar.RoundProgressBar.paintEvent" class="md-nav__link">
+    paintEvent()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.spanslider" class="md-nav__link">
     spanslider
   </a>
@@ -1556,6 +1589,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.roundprogressbar" class="md-nav__link">
+    roundprogressbar
+  </a>
+  
+    <nav class="md-nav" aria-label="roundprogressbar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.roundprogressbar.RoundProgressBar" class="md-nav__link">
+    RoundProgressBar
+  </a>
+  
+    <nav class="md-nav" aria-label="RoundProgressBar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.roundprogressbar.RoundProgressBar.paintEvent" class="md-nav__link">
+    paintEvent()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.spanslider" class="md-nav__link">
     spanslider
   </a>
@@ -2008,7 +2074,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </tr>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['save', 'open']</code></td>
 <td>
 <p>Accept mode ("save" or "load")</p>
 </td>
@@ -2016,7 +2082,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 </tr>
 <tr>
 <td><code>file_mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['existing_file', 'existing_files', 'any_file', 'directory']</code></td>
 <td>
 <p>File mode ("existing_files", "existing_file", "any_file",
                   or "directory")</p>
@@ -2047,8 +2113,8 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">extensions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"save"</span><span class="p">,</span>
-    <span class="n">file_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"existing_files"</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">filedialog</span><span class="o">.</span><span class="n">AcceptModeStr</span> <span class="o">=</span> <span class="s2">"save"</span><span class="p">,</span>
+    <span class="n">file_mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">filedialog</span><span class="o">.</span><span class="n">FileModeStr</span> <span class="o">=</span> <span class="s2">"existing_files"</span><span class="p">,</span>
     <span class="n">root</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
@@ -2066,8 +2132,8 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="n">extensions</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="n">mode</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">file_mode</span> <span class="o">=</span> <span class="n">file_mode</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">filedialog</span><span class="o">.</span><span class="n">AcceptModeStr</span> <span class="o">=</span> <span class="n">mode</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">file_mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">filedialog</span><span class="o">.</span><span class="n">FileModeStr</span> <span class="o">=</span> <span class="n">file_mode</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
     <span class="n">layout</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">BoxLayout</span><span class="p">(</span><span class="s2">"horizontal"</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
     <span class="n">layout</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -2703,6 +2769,62 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
 </div>
 </div>
 <div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.custom_widgets.roundprogressbar">
+
+        <code>roundprogressbar</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.custom_widgets.roundprogressbar.RoundProgressBar">
+
+        <code>RoundProgressBar</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_widgets.roundprogressbar.RoundProgressBar.paintEvent">
+
+        <code class="highlight language-python">
+paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>paintEvent(self, QPaintEvent)</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/custom_widgets/roundprogressbar.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">PaintEvent</span><span class="p">):</span>
+    <span class="n">outer_radius</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+    <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">outer_radius</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">outer_radius</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">as</span> <span class="n">painter</span><span class="p">:</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">use_antialiasing</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">!=</span> <span class="s2">"line"</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_rebuild_data_brush_if_needed</span><span class="p">()</span>
+        <span class="n">bg_rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">outer_radius</span><span class="p">,</span> <span class="n">outer_radius</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">bg_rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">window</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_base</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_value</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_value</span><span class="p">)</span>
+        <span class="n">inner_rect</span><span class="p">,</span> <span class="n">inner_radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_inner_rect</span><span class="p">(</span><span class="n">outer_radius</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_inner_background</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">inner_rect</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_text</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">inner_rect</span><span class="p">,</span> <span class="n">inner_radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_value</span><span class="p">)</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.custom_widgets.spanslider">
 
         <code>spanslider</code>
@@ -2960,7 +3082,7 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Raises:</span>
 <span class="sd">        ValueError: modality type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"no_crossing"</span><span class="p">,</span> <span class="s2">"no_overlap"</span><span class="p">,</span> <span class="s2">"free"</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MOVEMENT_MODE</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid movement mode"</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">=</span> <span class="n">mode</span>
 </code></pre>
@@ -3081,7 +3203,7 @@ enterEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
           <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">enterEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_is_in</span> <span class="o">=</span> <span class="kc">True</span>
 </code></pre>
 </div>
 </details>
@@ -3101,7 +3223,7 @@ leaveEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
           <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">leaveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_is_in</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 </code></pre>
 </div>
@@ -3125,7 +3247,7 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
 
     <span class="c1"># if mouse is being pressed, update pointer</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">clicking</span><span class="p">:</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clicking</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="o">=</span> <span class="n">x</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">position_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
@@ -3161,7 +3283,7 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_selection</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">clicking</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Set clicking check to true</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clicking</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># Set clicking check to true</span>
 </code></pre>
 </div>
 </details>
@@ -3182,7 +3304,7 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">clicking</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Set clicking check to false</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clicking</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># Set clicking check to false</span>
 </code></pre>
 </div>
 </details>
@@ -3227,7 +3349,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
             <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">point</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">point</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
             <span class="n">point</span> <span class="o">+=</span> <span class="mi">10</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_in</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_in</span><span class="p">:</span>
             <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="mi">40</span><span class="p">)</span>
 
         <span class="n">poly</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Polygon</span><span class="p">()</span>

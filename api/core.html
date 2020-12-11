@@ -3122,7 +3122,7 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['forward', 'backward']</code></td>
 <td>
 <p>animation direction</p>
 </td>
@@ -3132,7 +3132,7 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DirectionStr</span><span class="p">:</span>
     <span class="sd">"""Get the current animation direction.</span>
 
 <span class="sd">    Possible values: "forward", "backward"</span>
@@ -3140,7 +3140,7 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Returns:</span>
 <span class="sd">        animation direction</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">DIRECTIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3167,7 +3167,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['stopped', 'paused', 'running']</code></td>
 <td>
 <p>animation state</p>
 </td>
@@ -3177,7 +3177,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Get the current animation state.</span>
 
 <span class="sd">    Possible values: "stopped", "paused", "running"</span>
@@ -3185,7 +3185,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <span class="sd">    Returns:</span>
 <span class="sd">        animation state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3215,7 +3215,7 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>direction</code></td>
-<td><code>str</code></td>
+<td><code>Literal['forward', 'backward']</code></td>
 <td>
 <p>animation direction</p>
 </td>
@@ -3243,7 +3243,7 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">DirectionStr</span><span class="p">):</span>
     <span class="sd">"""Set animation direction.</span>
 
 <span class="sd">    Valid values: "forward", "backward"</span>
@@ -3254,9 +3254,9 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: animation direction does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DIRECTIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">DIRECTIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setDirection</span><span class="p">(</span><span class="n">DIRECTIONS</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DIRECTION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">DIRECTION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setDirection</span><span class="p">(</span><span class="n">DIRECTION</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -3286,7 +3286,7 @@ start_animation<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>Literal['keep', 'delete']</code></td>
 <td>
 <p>animation policy</p>
 </td>
@@ -3314,7 +3314,7 @@ start_animation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">start_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">start_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">DeletionPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Start the animation.</span>
 
 <span class="sd">    Valid values for policy: "keep", "delete"</span>
@@ -3325,9 +3325,9 @@ start_animation<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: animation policy does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DELETION_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">DELETION_POLICIES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">DELETION_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DELETION_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">DELETION_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">DELETION_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -3481,7 +3481,6 @@ get_transition_type<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return current transition type.</p>
-<p>Possible values: "exclusive", "parallel"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3492,7 +3491,7 @@ get_transition_type<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['exclusive', 'parallel']</code></td>
 <td>
 <p>transition type</p>
 </td>
@@ -3502,15 +3501,13 @@ get_transition_type<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstracttransition.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_transition_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_transition_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TransitionTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current transition type.</span>
-
-<span class="sd">    Possible values: "exclusive", "parallel"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        transition type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TRANSITION_TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transitionType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TRANSITION_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transitionType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3526,7 +3523,6 @@ set_transition_type<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set transition type.</p>
-<p>Allowed values are "exclusive", "parallel"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3540,7 +3536,7 @@ set_transition_type<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['exclusive', 'parallel']</code></td>
 <td>
 <p>transition type to use</p>
 </td>
@@ -3568,10 +3564,8 @@ set_transition_type<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstracttransition.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_transition_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_transition_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">TransitionTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set transition type.</span>
-
-<span class="sd">    Allowed values are "exclusive", "parallel"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: transition type to use</span>
@@ -3579,9 +3573,9 @@ set_transition_type<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: transition type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TRANSITION_TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TRANSITION_TYPES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTransitionType</span><span class="p">(</span><span class="n">TRANSITION_TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TRANSITION_TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TRANSITION_TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTransitionType</span><span class="p">(</span><span class="n">TRANSITION_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -3782,7 +3776,6 @@ set_options_after_positional_arguments_mode<span class="p">(</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Set the options after positional arguments mode.</p>
-<p>Allowed values are "options", "positional_arguments"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3796,7 +3789,7 @@ set_options_after_positional_arguments_mode<span class="p">(</span><span class="
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['compacted_short', 'long']</code></td>
 <td>
 <p>options after positional arguments mode</p>
 </td>
@@ -3824,10 +3817,8 @@ set_options_after_positional_arguments_mode<span class="p">(</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/commandlineparser.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_options_after_positional_arguments_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_options_after_positional_arguments_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SingleDashWordStr</span><span class="p">):</span>
     <span class="sd">"""Set the options after positional arguments mode.</span>
-
-<span class="sd">    Allowed values are "options", "positional_arguments"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: options after positional arguments mode</span>
@@ -3853,7 +3844,6 @@ set_single_dash_word_option_mode<span class="p">(</span><span class="bp">self</s
       </h4>
 <div class="doc doc-contents ">
 <p>Set the single dash word option mode.</p>
-<p>Allowed values are "compacted_short", "long"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3867,7 +3857,7 @@ set_single_dash_word_option_mode<span class="p">(</span><span class="bp">self</s
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['compacted_short', 'long']</code></td>
 <td>
 <p>single dash word option mode</p>
 </td>
@@ -3895,10 +3885,8 @@ set_single_dash_word_option_mode<span class="p">(</span><span class="bp">self</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/commandlineparser.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_single_dash_word_option_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_single_dash_word_option_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SingleDashWordStr</span><span class="p">):</span>
     <span class="sd">"""Set the single dash word option mode.</span>
-
-<span class="sd">    Allowed values are "compacted_short", "long"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: single dash word option mode</span>
@@ -3977,7 +3965,7 @@ get_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Returns:</span>
 <span class="sd">        byte order</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">BYTE_ORDER</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">byteOrder</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">BYTE_ORDER</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">byteOrder</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4022,7 +4010,7 @@ get_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Returns:</span>
 <span class="sd">        floating point precision</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FLOAT_PRECISION</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">floatingPointPrecision</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FLOAT_PRECISION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">floatingPointPrecision</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4303,7 +4291,7 @@ get_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Returns:</span>
 <span class="sd">        time specification</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TIME_SPECS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timeSpec</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TIME_SPECS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timeSpec</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4425,7 +4413,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['precise', 'coarse', 'very_coarse']</code></td>
 <td>
 <p>timer type</p>
 </td>
@@ -4435,7 +4423,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/deadlinetimer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current timer type.</span>
 
 <span class="sd">    Possible values: "precise", "coarse", "very_coarse"</span>
@@ -4443,7 +4431,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <span class="sd">    Returns:</span>
 <span class="sd">        timer type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timerType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timerType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4473,7 +4461,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['precise', 'coarse', 'very_coarse']</code></td>
 <td>
 <p>timer type</p>
 </td>
@@ -4501,7 +4489,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/deadlinetimer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">TypeStr</span><span class="p">):</span>
     <span class="sd">"""Set the timer type.</span>
 
 <span class="sd">    Allowed values are "precise", "coarse", "very_coarse"</span>
@@ -4512,9 +4500,9 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: timer type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TYPES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -4601,7 +4589,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <span class="sd">    Returns:</span>
 <span class="sd">        easing curve type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4742,7 +4730,7 @@ get_clock_type<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['system_time', 'monotonic_clock', 'tick_counter', 'mach_absolute_time', 'performance_counter']</code></td>
 <td>
 <p>clock type</p>
 </td>
@@ -4752,7 +4740,7 @@ get_clock_type<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/elapsedtimer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_clock_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_clock_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClockTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current clock type.</span>
 
 <span class="sd">    Possible values: "system_time", "monotonic_clock", "tick_counter",</span>
@@ -4761,7 +4749,7 @@ get_clock_type<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Returns:</span>
 <span class="sd">        clock type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">clockType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">CLOCK_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">clockType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4801,9 +4789,6 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return file error status.</p>
-<p>Possible values: "none", "read", "write", "fatal", "resource", "open", "abort",
-                 "time_out", "unspecified", "remove", "rename", "position",
-                 "resize", "permissions", "copy"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4814,7 +4799,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'read', 'write', 'fatal', 'resource', 'open', 'abort', 'time_out', 'unspecified', 'remove', 'rename', 'position', 'resize', 'permissions', 'copy']</code></td>
 <td>
 <p>file error status</p>
 </td>
@@ -4824,17 +4809,13 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/filedevice.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FileErrorStr</span><span class="p">:</span>
     <span class="sd">"""Return file error status.</span>
-
-<span class="sd">    Possible values: "none", "read", "write", "fatal", "resource", "open", "abort",</span>
-<span class="sd">                     "time_out", "unspecified", "remove", "rename", "position",</span>
-<span class="sd">                     "resize", "permissions", "copy"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        file error status</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FILE_ERROR</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FILE_ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4850,7 +4831,6 @@ get_file_time<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current file time.</p>
-<p>Possible values: "access", "birth", "metadata_change", "modification"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4871,10 +4851,8 @@ get_file_time<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/filedevice.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">]:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">]:</span>
     <span class="sd">"""Return current file time.</span>
-
-<span class="sd">    Possible values: "access", "birth", "metadata_change", "modification"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        file time</span>
@@ -4900,7 +4878,6 @@ set_file_time<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set file time.</p>
-<p>Allowed values are "access", "birth", "metadata_change", "modification"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -4914,7 +4891,7 @@ set_file_time<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['access', 'birth', 'metadata_change', 'modification']</code></td>
 <td>
 <p>file time to use</p>
 </td>
@@ -4943,11 +4920,9 @@ set_file_time<span class="p">(</span><span class="bp">self</span><span class="p"
           <summary>Source code in <code>prettyqt/core/filedevice.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_file_time</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QDateTime</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">],</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QDateTime</span><span class="p">,</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">],</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Set file time.</span>
-
-<span class="sd">    Allowed values are "access", "birth", "metadata_change", "modification"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: file time to use</span>
@@ -4997,7 +4972,6 @@ get_history_type<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return current history type.</p>
-<p>Possible values: "shallow", "deep"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -5008,7 +4982,7 @@ get_history_type<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['shallow', 'deep']</code></td>
 <td>
 <p>history type</p>
 </td>
@@ -5018,15 +4992,13 @@ get_history_type<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/historystate.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_history_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_history_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HistoryTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current history type.</span>
-
-<span class="sd">    Possible values: "shallow", "deep"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        history type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">HISTORY_TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">historyType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">HISTORY_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">historyType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -5042,7 +5014,6 @@ set_history_type<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set history type to use.</p>
-<p>Allowed values are "shallow", "deep"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5056,7 +5027,7 @@ set_history_type<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['shallow', 'deep']</code></td>
 <td>
 <p>history type to use</p>
 </td>
@@ -5084,10 +5055,8 @@ set_history_type<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/historystate.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_history_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_history_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">HistoryTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set history type to use.</span>
-
-<span class="sd">    Allowed values are "shallow", "deep"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: history type to use</span>
@@ -5095,9 +5064,9 @@ set_history_type<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: history type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">HISTORY_TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">HISTORY_TYPES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setHistoryType</span><span class="p">(</span><span class="n">HISTORY_TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">HISTORY_TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">HISTORY_TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setHistoryType</span><span class="p">(</span><span class="n">HISTORY_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -5137,8 +5106,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Get current os type.</p>
-<p>Possible values: "android", "ios", "mac_os", "tv_os", "watch_os", "windows",
-                 "unknown"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -5149,7 +5116,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['android', 'ios', 'mac_os', 'tv_os', 'watch_os', 'windows', 'unknown']</code></td>
 <td>
 <p>current os type</p>
 </td>
@@ -5159,16 +5126,13 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/operatingsystemversion.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OsTypeStr</span><span class="p">:</span>
     <span class="sd">"""Get current os type.</span>
-
-<span class="sd">    Possible values: "android", "ios", "mac_os", "tv_os", "watch_os", "windows",</span>
-<span class="sd">                     "unknown"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current os type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">OS_TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">OS_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -5546,11 +5510,11 @@ match<span class="p">(</span><span class="bp">self</span><span class="p">,</span
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">match_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"normal"</span><span class="p">,</span>
+    <span class="n">match_type</span><span class="p">:</span> <span class="n">MatchTypeStr</span> <span class="o">=</span> <span class="s2">"normal"</span><span class="p">,</span>
     <span class="n">anchored</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpressionMatch</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">match_type</span> <span class="o">=</span> <span class="n">MATCH_TYPES</span><span class="p">[</span><span class="n">match_type</span><span class="p">]</span>
+        <span class="n">match_type</span> <span class="o">=</span> <span class="n">MATCH_TYPE</span><span class="p">[</span><span class="n">match_type</span><span class="p">]</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">anchored</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="n">options</span> <span class="o">=</span> <span class="n">MATCH_OPTIONS</span><span class="p">[</span><span class="s2">"anchored"</span><span class="p">]</span> <span class="k">if</span> <span class="n">anchored</span> <span class="k">else</span> <span class="n">MATCH_OPTIONS</span><span class="p">[</span><span class="s2">"none"</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
@@ -5599,7 +5563,6 @@ get_default_format<span class="p">()</span>        </code>
       </h4>
 <div class="doc doc-contents ">
 <p>Return default settings format.</p>
-<p>possible values are "native", "ini"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -5610,7 +5573,7 @@ get_default_format<span class="p">()</span>        </code>
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['user', 'system']</code></td>
 <td>
 <p>default settings format</p>
 </td>
@@ -5621,15 +5584,13 @@ get_default_format<span class="p">()</span>        </code>
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">get_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">get_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FormatStr</span><span class="p">:</span>
     <span class="sd">"""Return default settings format.</span>
-
-<span class="sd">    possible values are "native", "ini"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        default settings format</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FORMATS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">defaultFormat</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FORMAT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">defaultFormat</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -5645,7 +5606,6 @@ get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return scope.</p>
-<p>possible values are "user", "system"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -5656,7 +5616,7 @@ get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['user', 'system']</code></td>
 <td>
 <p>scope</p>
 </td>
@@ -5666,15 +5626,13 @@ get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ScopeStr</span><span class="p">:</span>
     <span class="sd">"""Return scope.</span>
-
-<span class="sd">    possible values are "user", "system"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        scope</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SCOPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">SCOPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -5791,7 +5749,6 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set the default format.</p>
-<p>possible values are "native", "ini"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5805,7 +5762,7 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
 <tbody>
 <tr>
 <td><code>fmt</code></td>
-<td><code>str</code></td>
+<td><code>Literal['user', 'system']</code></td>
 <td>
 <p>the default format to use</p>
 </td>
@@ -5834,10 +5791,8 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">set_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">set_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">):</span>
     <span class="sd">"""Set the default format.</span>
-
-<span class="sd">    possible values are "native", "ini"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        fmt: the default format to use</span>
@@ -5845,9 +5800,9 @@ set_default_format<span class="p">(</span><span class="n">fmt</span><span class=
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid format</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FORMATS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">FORMATS</span><span class="p">)</span>
-    <span class="bp">cls</span><span class="o">.</span><span class="n">setDefaultFormat</span><span class="p">(</span><span class="n">FORMATS</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FORMAT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">FORMAT</span><span class="p">)</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">setDefaultFormat</span><span class="p">(</span><span class="n">FORMAT</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -5879,7 +5834,7 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 <tbody>
 <tr>
 <td><code>fmt</code></td>
-<td><code>str</code></td>
+<td><code>Literal['user', 'system']</code></td>
 <td>
 <p>the default format to use</p>
 </td>
@@ -5887,7 +5842,7 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 </tr>
 <tr>
 <td><code>scope</code></td>
-<td><code>str</code></td>
+<td><code>Literal['user', 'system']</code></td>
 <td>
 <p>the scope to use</p>
 </td>
@@ -5916,7 +5871,7 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
+<span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""Set the path to the settings file.</span>
 
 <span class="sd">    Args:</span>
@@ -5926,11 +5881,11 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid format or scope</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FORMATS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">FORMATS</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">scope</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCOPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">SCOPES</span><span class="p">)</span>
-    <span class="bp">cls</span><span class="o">.</span><span class="n">setPath</span><span class="p">(</span><span class="n">FORMATS</span><span class="p">[</span><span class="n">fmt</span><span class="p">],</span> <span class="n">SCOPES</span><span class="p">[</span><span class="n">scope</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FORMAT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">FORMAT</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">scope</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCOPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">SCOPE</span><span class="p">)</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">setPath</span><span class="p">(</span><span class="n">FORMAT</span><span class="p">[</span><span class="n">fmt</span><span class="p">],</span> <span class="n">SCOPE</span><span class="p">[</span><span class="n">scope</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 </code></pre>
 </div>
 </details>
@@ -6133,7 +6088,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['read', 'write', 'exception']</code></td>
 <td>
 <p>socket event type</p>
 </td>
@@ -6143,7 +6098,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/socketnotifier.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return socket event type.</span>
 
 <span class="sd">    Possible values: "read", "write", "exception"</span>
@@ -6151,7 +6106,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <span class="sd">    Returns:</span>
 <span class="sd">        socket event type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6191,7 +6146,6 @@ get_child_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return current child mode.</p>
-<p>Possible values: "exclusive", "parallel"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6202,7 +6156,7 @@ get_child_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['exclusive', 'parallel']</code></td>
 <td>
 <p>child mode</p>
 </td>
@@ -6212,15 +6166,13 @@ get_child_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/state.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_child_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_child_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ChildModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current child mode.</span>
-
-<span class="sd">    Possible values: "exclusive", "parallel"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        child mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CHILD_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">childMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">CHILD_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">childMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6236,7 +6188,6 @@ set_child_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set child mode to use.</p>
-<p>Allowed values are "exclusive", "parallel"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6250,7 +6201,7 @@ set_child_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['exclusive', 'parallel']</code></td>
 <td>
 <p>child mode to use</p>
 </td>
@@ -6278,10 +6229,8 @@ set_child_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/state.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_child_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_child_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ChildModeStr</span><span class="p">):</span>
     <span class="sd">"""Set child mode to use.</span>
-
-<span class="sd">    Allowed values are "exclusive", "parallel"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: child mode to use</span>
@@ -6289,9 +6238,9 @@ set_child_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: child mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CHILD_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">CHILD_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setChildMode</span><span class="p">(</span><span class="n">CHILD_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CHILD_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">CHILD_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setChildMode</span><span class="p">(</span><span class="n">CHILD_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -6360,7 +6309,7 @@ get_global_restore_policy<span class="p">(</span><span class="bp">self</span><sp
 <span class="sd">    Returns:</span>
 <span class="sd">        restore policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">RESTORE_POLICY</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">globalRestorePolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">RESTORE_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">globalRestorePolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6500,7 +6449,7 @@ get_field_alignment<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Returns:</span>
 <span class="sd">        current field alignment</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FIELD_ALIGNMENT</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldAlignment</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FIELD_ALIGNMENT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldAlignment</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6545,7 +6494,7 @@ get_real_number_notation<span class="p">(</span><span class="bp">self</span><spa
 <span class="sd">    Returns:</span>
 <span class="sd">        current real number notation</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">REAL_NUMBER_NOTATION</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">realNumberNotation</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">REAL_NUMBER_NOTATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">realNumberNotation</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6590,7 +6539,7 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <span class="sd">    Returns:</span>
 <span class="sd">        current status</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATUS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6890,7 +6839,6 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current direction.</p>
-<p>Possible values: "forward", "backward"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6901,7 +6849,7 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['forward', 'backward']</code></td>
 <td>
 <p>direction</p>
 </td>
@@ -6911,15 +6859,13 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/timeline.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DirectionStr</span><span class="p">:</span>
     <span class="sd">"""Return current direction.</span>
-
-<span class="sd">    Possible values: "forward", "backward"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        direction</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">DIRECTION</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6935,7 +6881,6 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return current state.</p>
-<p>Possible values: "not_running", "paused", "running"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6946,7 +6891,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['not_running', 'paused', 'running']</code></td>
 <td>
 <p>state</p>
 </td>
@@ -6956,15 +6901,13 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/timeline.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Return current state.</span>
-
-<span class="sd">    Possible values: "not_running", "paused", "running"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6980,7 +6923,6 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set the direction.</p>
-<p>Allowed values are "forward", "backward"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6994,7 +6936,7 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>direction</code></td>
-<td><code>str</code></td>
+<td><code>Literal['forward', 'backward']</code></td>
 <td>
 <p>direction</p>
 </td>
@@ -7022,10 +6964,8 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/timeline.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">DirectionStr</span><span class="p">):</span>
     <span class="sd">"""Set the direction.</span>
-
-<span class="sd">    Allowed values are "forward", "backward"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        direction: direction</span>
@@ -7075,7 +7015,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Return current timer type.</p>
-<p>Possible values: "precise", "coarse", "very_coarse"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -7086,7 +7025,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>TypeStr</code></td>
 <td>
 <p>timer type</p>
 </td>
@@ -7096,15 +7035,13 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/timer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current timer type.</span>
-
-<span class="sd">    Possible values: "precise", "coarse", "very_coarse"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        timer type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timerType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timerType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -7120,7 +7057,6 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
       </h4>
 <div class="doc doc-contents ">
 <p>Set the timer type.</p>
-<p>Allowed values are "precise", "coarse", "very_coarse"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -7134,7 +7070,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>TypeStr</code></td>
 <td>
 <p>timer type</p>
 </td>
@@ -7162,10 +7098,8 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/timer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">TypeStr</span><span class="p">):</span>
     <span class="sd">"""Set the timer type.</span>
-
-<span class="sd">    Allowed values are "precise", "coarse", "very_coarse"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: timer type</span>
@@ -7173,9 +7107,9 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: timer type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TYPES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

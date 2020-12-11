@@ -908,7 +908,7 @@ get_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Returns:</span>
 <span class="sd">        transform origin</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TRANSFORM_ORIGIN</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transformOrigin</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TRANSFORM_ORIGIN</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transformOrigin</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1053,7 +1053,7 @@ get_render_target<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Returns:</span>
 <span class="sd">        render target</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">RENDER_TARGET</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">renderTarget</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">RENDER_TARGET</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">renderTarget</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1197,7 +1197,7 @@ get_text_render_type<span class="p">()</span>        </code>
 <span class="sd">    Returns:</span>
 <span class="sd">        text render type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TEXT_RENDER_TYPE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="n">QuickWindow</span><span class="o">.</span><span class="n">textRenderType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TEXT_RENDER_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">QuickWindow</span><span class="o">.</span><span class="n">textRenderType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>

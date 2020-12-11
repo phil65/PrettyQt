@@ -1554,7 +1554,7 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="n">alignment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">alignment</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">ALIGNMENTS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="n">alignment</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ALIGNMENTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">alignment</span><span class="p">]</span>
 </code></pre>
 </div>
 </details>
@@ -1602,7 +1602,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
     <span class="n">orientation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="n">orientation</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">orientation</span><span class="p">]</span>
 </code></pre>
 </div>
 </details>
@@ -1671,7 +1671,7 @@ get_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Returns:</span>
 <span class="sd">        labels position</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">LABELS_POSITIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">labelsPosition</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">LABELS_POSITIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">labelsPosition</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1847,7 +1847,7 @@ get_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Returns:</span>
 <span class="sd">        labels position</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">LABELS_POSITIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">labelsPosition</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">LABELS_POSITIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">labelsPosition</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2063,7 +2063,6 @@ get_rubber_band<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current rubber band type.</p>
-<p>Possible values are "none", "horizontal", "vertical", "rectangle"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2074,7 +2073,7 @@ get_rubber_band<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'vertical', 'horizontal', 'rectangle']</code></td>
 <td>
 <p>Rubber band type</p>
 </td>
@@ -2084,15 +2083,13 @@ get_rubber_band<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_rubber_band</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_rubber_band</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RubberBandStr</span><span class="p">:</span>
     <span class="sd">"""Return current rubber band type.</span>
-
-<span class="sd">    Possible values are "none", "horizontal", "vertical", "rectangle"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Rubber band type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">RUBBER_BANDS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">RUBBER_BAND</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rubberBand</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2264,7 +2261,6 @@ set_rubber_band<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Set the rubber band type.</p>
-<p>Allowed values are "none", "horizontal", "vertical", "rectangle"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2278,7 +2274,7 @@ set_rubber_band<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'vertical', 'horizontal', 'rectangle']</code></td>
 <td>
 <p>rubber band type</p>
 </td>
@@ -2306,10 +2302,8 @@ set_rubber_band<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_rubber_band</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_rubber_band</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">RubberBandStr</span><span class="p">):</span>
     <span class="sd">"""Set the rubber band type.</span>
-
-<span class="sd">    Allowed values are "none", "horizontal", "vertical", "rectangle"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: rubber band type</span>
@@ -2317,9 +2311,9 @@ set_rubber_band<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: rubber band type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">RUBBER_BANDS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">RUBBER_BANDS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setRubberBand</span><span class="p">(</span><span class="n">RUBBER_BANDS</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">RUBBER_BAND</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">RUBBER_BAND</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setRubberBand</span><span class="p">(</span><span class="n">RUBBER_BAND</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -2410,7 +2404,7 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Returns:</span>
 <span class="sd">        alignment</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ALIGNMENTS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ALIGNMENTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2455,7 +2449,7 @@ get_marker_shape<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Returns:</span>
 <span class="sd">        Marker shape</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">MARKER_SHAPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">markerShape</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">MARKER_SHAPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">markerShape</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2673,8 +2667,6 @@ get_label_position<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Return current label position.</p>
-<p>Possible values: "outside", "inside_horizontal", "inside_tangential",
-"inside_normal"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2685,7 +2677,7 @@ get_label_position<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['outside', 'inside_horizontal', 'inside_tangential', 'inside_normal']</code></td>
 <td>
 <p>label position</p>
 </td>
@@ -2695,16 +2687,13 @@ get_label_position<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/pieslice.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_label_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_label_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LabelPositionStr</span><span class="p">:</span>
     <span class="sd">"""Return current label position.</span>
-
-<span class="sd">    Possible values: "outside", "inside_horizontal", "inside_tangential",</span>
-<span class="sd">    "inside_normal"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        label position</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">LABEL_POSITIONS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">labelPosition</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">LABEL_POSITION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">labelPosition</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2720,8 +2709,6 @@ set_label_position<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set the label position.</p>
-<p>Allowed values are "outside", "inside_horizontal", "inside_tangential",
-"inside_normal"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2735,7 +2722,7 @@ set_label_position<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>position</code></td>
-<td><code>str</code></td>
+<td><code>Literal['outside', 'inside_horizontal', 'inside_tangential', 'inside_normal']</code></td>
 <td>
 <p>label position</p>
 </td>
@@ -2763,11 +2750,8 @@ set_label_position<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/pieslice.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_label_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_label_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">LabelPositionStr</span><span class="p">):</span>
     <span class="sd">"""Set the label position.</span>
-
-<span class="sd">    Allowed values are "outside", "inside_horizontal", "inside_tangential",</span>
-<span class="sd">    "inside_normal"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        position: label position</span>
@@ -2775,9 +2759,9 @@ set_label_position<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: label position does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LABEL_POSITIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">LABEL_POSITIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setLabelPosition</span><span class="p">(</span><span class="n">LABEL_POSITIONS</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LABEL_POSITION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">LABEL_POSITION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setLabelPosition</span><span class="p">(</span><span class="n">LABEL_POSITION</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -2846,7 +2830,7 @@ get_tick_type<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Returns:</span>
 <span class="sd">        tick_type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TICK_TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tickType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TICK_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tickType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>

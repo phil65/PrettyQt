@@ -1887,7 +1887,7 @@ get_handle_type<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Returns:</span>
 <span class="sd">        handle type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">HANDLE_TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">handleType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">HANDLE_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">handleType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1932,7 +1932,7 @@ get_map_mode<span class="p">(</span><span class="bp">self</span><span class="p">
 <span class="sd">    Returns:</span>
 <span class="sd">        map mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">MAP_MODE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">MAP_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mapMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2106,7 +2106,7 @@ get_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Returns:</span>
 <span class="sd">        capture mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CAPTURE_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">captureMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">CAPTURE_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">captureMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2153,7 +2153,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <span class="sd">    Returns:</span>
 <span class="sd">        error state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ERRORS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ERRORS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2198,7 +2198,7 @@ get_lock_status<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Returns:</span>
 <span class="sd">        lock status</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">LOCK_STATUS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lockStatus</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">LOCK_STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lockStatus</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2243,7 +2243,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <span class="sd">    Returns:</span>
 <span class="sd">        state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">STATES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2290,7 +2290,7 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <span class="sd">    Returns:</span>
 <span class="sd">        status</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATUS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2438,7 +2438,7 @@ get_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Returns:</span>
 <span class="sd">        exposure mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">EXPOSURE_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">exposureMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">EXPOSURE_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">exposureMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2487,7 +2487,7 @@ get_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Returns:</span>
 <span class="sd">        flash mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FLASH_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">flashMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FLASH_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">flashMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2532,7 +2532,7 @@ get_metering_mode<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Returns:</span>
 <span class="sd">        metering mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">METERING_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">meteringMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">METERING_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">meteringMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2828,7 +2828,7 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Returns:</span>
 <span class="sd">        focus mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FOCUS_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">focusMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FOCUS_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">focusMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2873,7 +2873,7 @@ get_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Returns:</span>
 <span class="sd">        focus point mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FOCUS_POINT_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">focusPointMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FOCUS_POINT_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">focusPointMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3086,7 +3086,7 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Returns:</span>
 <span class="sd">        focus mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FOCUS_ZONE_STATUS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FOCUS_ZONE_STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3157,7 +3157,7 @@ get_color_filter<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Returns:</span>
 <span class="sd">        color filter</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">COLOR_FILTERS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">colorFilter</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">COLOR_FILTERS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">colorFilter</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3204,7 +3204,7 @@ get_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">    Returns:</span>
 <span class="sd">        white balance mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">WHITE_BALANCE_MODE</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">whiteBalanceMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">WHITE_BALANCE_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">whiteBalanceMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3497,7 +3497,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Returns:</span>
 <span class="sd">        availability status</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">AVAILABILITY_STATUS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">availability</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">AVAILABILITY_STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">availability</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3568,7 +3568,7 @@ get_media_status<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Returns:</span>
 <span class="sd">        media status</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">MEDIA_STATUS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mediaStatus</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">MEDIA_STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mediaStatus</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3613,7 +3613,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <span class="sd">    Returns:</span>
 <span class="sd">        state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">STATES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3682,7 +3682,7 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Returns:</span>
 <span class="sd">        playback mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">PLAYBACK_MODES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">playbackMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">PLAYBACK_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">playbackMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3822,7 +3822,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Returns:</span>
 <span class="sd">        availability status</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">AVAILABILITY_STATUS</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">availability</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">AVAILABILITY_STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">availability</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3913,7 +3913,7 @@ get_field_type<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">                  "interlaced_frame"</span>
 
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FIELD_TYPES</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FIELD_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
