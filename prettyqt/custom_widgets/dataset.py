@@ -105,12 +105,14 @@ class Int(DataItem):
         self.slider = slider
 
     def _create_widget(self) -> Union[custom_widgets.InputAndSlider, widgets.SpinBox]:
-        if self.range[0] is not None and self.range[1] is not None:
+        min_val = self.range[0]
+        max_val = self.range[1]
+        if min_val is not None and max_val is not None:
             widget = custom_widgets.InputAndSlider()
-            widget.set_range(self.range[0], self.range[1])
+            widget.set_range(min_val, max_val)
         else:
             widget = widgets.SpinBox()
-            widget.set_range(self.range[0], self.range[1])
+            widget.set_range(min_val, max_val)
             widget.setSuffix(self.unit)
         widget.set_step_size(self.step)
         if self.value is not None:
@@ -356,10 +358,10 @@ class File(DataItem):
     def __init__(
         self,
         label: str,
-        formats="*",
+        formats: str = "*",
         value: Union[None, str, pathlib.Path] = None,
         save: bool = True,
-        root=None,
+        root: Union[None, str, pathlib.Path] = None,
         **kwargs,
     ):
         super().__init__(label, value=value, **kwargs)
@@ -368,10 +370,10 @@ class File(DataItem):
         self.save = save
 
     def _create_widget(self) -> custom_widgets.FileChooserButton:
-        file_mode = "any_file" if self.save else "existing_file"
-        mode = "save" if self.save else "open"
         widget = custom_widgets.FileChooserButton(
-            file_mode=file_mode, mode=mode, root=self.root
+            file_mode="any_file" if self.save else "existing_file",
+            mode="save" if self.save else "open",
+            root=self.root,
         )
         if self.value is not None:
             widget.set_value(self.value)
@@ -383,8 +385,8 @@ class Folder(DataItem):
         self,
         label: str,
         value: Union[None, str, pathlib.Path] = None,
-        root=None,
-        mode="open",
+        root: Union[None, str, pathlib.Path] = None,
+        mode: widgets.filedialog.AcceptModeStr = "open",
         **kwargs,
     ):
         super().__init__(label, value=value, **kwargs)
