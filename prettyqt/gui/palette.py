@@ -42,6 +42,16 @@ RoleStr = Literal[
     "button",
     "button_text",
     "bright_text",
+    "light",
+    "midlight",
+    "dark",
+    "mid",
+    "shadow",
+    "highlight",
+    "highlighted_text",
+    "link",
+    "link_visited",
+    "none",
 ]
 
 GROUP = bidict(
