@@ -1,3 +1,28 @@
+## v0.145.0 (2020-12-11)
+
+### Fix
+
+- **GraphicsGridLayout**: serialize correctly
+- **MediaRecorder**: use correct module in set_video/audio_settings
+- correct constant naming
+- install_exceptionhook fix
+
+### Feat
+
+- **GridLayout**: add get/set_origin_corner methods
+- **BoxLayout**: add get/set_direction methods
+- **NetworkCookieJar**: add __add__ and set_cookies_from_url methods
+- **NetworkCookie**: add set_expiration_date method
+- **Translator**: add __bool__ method
+- **custom_widgets**: add RoundProgressBar class
+- **DateTimeEdit**: add some more methods related to sections
+- get/set_icon_size work for some widgets
+- **CalendarWidget**: add set_range method
+- **HeaderView**: add generate_header_id method
+- **Widget**: add edit_palette contextmanager and get_font method
+- **Palette**: add brush methods
+- **custom_models**: add ImportlibDistributionModel class
+
 ## v0.144.0 (2020-12-09)
 
 ### Fix
