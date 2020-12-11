@@ -45,9 +45,9 @@ QtMultimedia.QMediaRecorder.__bases__ = (core.Object, multimedia.MediaBindableIn
 class MediaRecorder(QtMultimedia.QMediaRecorder):
     def set_video_settings(self, settings):
         if isinstance(settings, multimedia.videoencodersettings.Settings):
-            settings = settings.VideoEncoderSettings.from_dataclass(settings)
+            settings = multimedia.VideoEncoderSettings.from_dataclass(settings)
         elif isinstance(settings, dict):
-            settings = settings.VideoEncoderSettings.from_dict(settings)
+            settings = multimedia.VideoEncoderSettings.from_dict(settings)
         self.setVideoSettings(settings)
 
     def get_video_settings(self) -> multimedia.VideoEncoderSettings:
@@ -55,9 +55,9 @@ class MediaRecorder(QtMultimedia.QMediaRecorder):
 
     def set_audio_settings(self, settings):
         if isinstance(settings, multimedia.audioencodersettings.Settings):
-            settings = settings.AudioEncoderSettings.from_dataclass(settings)
+            settings = multimedia.AudioEncoderSettings.from_dataclass(settings)
         elif isinstance(settings, dict):
-            settings = settings.AudioEncoderSettings.from_dict(settings)
+            settings = multimedia.AudioEncoderSettings.from_dict(settings)
         self.setAudioSettings(settings)
 
     def get_audio_settings(self) -> multimedia.AudioEncoderSettings:
