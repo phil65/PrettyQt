@@ -1,8 +1,18 @@
-from typing import Optional, Union
+from typing import Optional, Union, Literal
 
 from qtpy import QtWidgets
 
 from prettyqt import widgets
+from prettyqt.utils import bidict, InvalidParamError
+
+DIRECTION = bidict(
+    left_to_right=QtWidgets.QBoxLayout.LeftToRight,
+    right_to_left=QtWidgets.QBoxLayout.RightToLeft,
+    top_to_bottom=QtWidgets.QBoxLayout.TopToBottom,
+    bottom_to_top=QtWidgets.QBoxLayout.BottomToTop,
+)
+
+DirectionStr = Literal["left_to_right", "right_to_left", "top_to_bottom", "bottom_to_top"]
 
 
 QtWidgets.QBoxLayout.__bases__ = (widgets.Layout,)
@@ -21,12 +31,11 @@ class BoxLayout(QtWidgets.QBoxLayout):
             self.set_margin(margin)
 
     def serialize_fields(self):
-        return dict(items=self.get_children(), direction=int(self.direction()))
+        return dict(items=self.get_children(), direction=self.get_direction())
 
     def __setstate__(self, state):
         self.__init__()
-        direction = self.Direction(state["direction"])
-        self.setDirection(direction)
+        self.set_direction(state["direction"])
         for item in state["items"]:
             self.add(item)
 
@@ -46,6 +55,27 @@ class BoxLayout(QtWidgets.QBoxLayout):
 
     def add_spacing(self, size: int):
         self.addSpacing(size)
+
+    def set_direction(self, direction: DirectionStr):
+        """Set the direction.
+
+        Args:
+            direction: direction
+
+        Raises:
+            InvalidParamError: direction does not exist
+        """
+        if direction not in DIRECTION:
+            raise InvalidParamError(direction, DIRECTION)
+        self.setDirection(DIRECTION[direction])
+
+    def get_direction(self) -> DirectionStr:
+        """Return current direction.
+
+        Returns:
+            direction
+        """
+        return DIRECTION.inverse[self.direction()]
 
 
 if __name__ == "__main__":

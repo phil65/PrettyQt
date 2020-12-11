@@ -105,6 +105,10 @@ def test_boxlayout(qtbot):
     assert len(layout) == 2
     layout.add_stretch(1)
     layout.add_spacing(1)
+    layout.set_direction("bottom_to_top")
+    with pytest.raises(InvalidParamError):
+        layout.set_direction("test")
+    assert layout.get_direction() == "bottom_to_top"
 
 
 def test_buttongroup(qtbot):
