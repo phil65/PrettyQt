@@ -48,8 +48,8 @@ IS_ENABLED = QtCore.Qt.ItemIsEnabled
 IS_SELECTABLE = QtCore.Qt.ItemIsSelectable
 IS_EDITABLE = QtCore.Qt.ItemIsEditable
 IS_CHECKABLE = QtCore.Qt.ItemIsUserCheckable
-IS_AUTO_TREESTATE = QtCore.Qt.ItemIsAutoTristate
-IS_USER_TREESTATE = QtCore.Qt.ItemIsUserTristate
+IS_AUTO_TRISTATE = QtCore.Qt.ItemIsAutoTristate
+IS_USER_TRISTATE = QtCore.Qt.ItemIsUserTristate
 NO_FLAGS = QtCore.Qt.NoItemFlags
 NO_CHILDREN = QtCore.Qt.ItemNeverHasChildren
 
