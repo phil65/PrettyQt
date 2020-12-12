@@ -41,13 +41,16 @@
 #
 # $QT_END_LICENSE$
 
-from typing import List, NamedTuple
-
-import collections
+from typing import List, NamedTuple, Any
 
 from qtpy import QtTest, QtCore, QtGui
 
-_Changing = collections.namedtuple("_Changing", "parent, old_size, last, next")
+
+class _Changing(NamedTuple):
+    parent: QtCore.QModelIndex
+    old_size: int
+    last: Any
+    next: Any
 
 
 HAS_QT_TESTER = hasattr(QtTest, "QAbstractItemModelTester")
@@ -74,8 +77,8 @@ class ModelTester:
     def __init__(self, model: QtCore.QAbstractItemModel):
         self._model = model
         self._fetching_more = False
-        self._insert: List[NamedTuple] = []
-        self._remove: List[NamedTuple] = []
+        self._insert: List[_Changing] = []
+        self._remove: List[_Changing] = []
         self._changing: List[QtCore.QPersistentModelIndex] = []
         self._qt_tester = None
 
