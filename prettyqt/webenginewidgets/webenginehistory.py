@@ -9,7 +9,7 @@ if PYQT5:
 elif PYSIDE2:
     from PySide2 import QtWebEngineWidgets
 
-from prettyqt import core, webenginewidgets
+from prettyqt import webenginewidgets
 
 
 class WebEngineHistory:
@@ -29,17 +29,6 @@ class WebEngineHistory:
     def __iter__(self) -> Iterator[webenginewidgets.WebEngineHistoryItem]:
         items = [webenginewidgets.WebEngineHistoryItem(i) for i in self.history.items()]
         return iter(items)
-
-    def __getstate__(self):
-        return core.DataStream.create_bytearray(self.history)
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __setstate__(self, ba):
-        history = None
-        core.DataStream.write_bytearray(ba, history)
-        self.__init__(history)
 
     def get_items(self) -> List[webenginewidgets.WebEngineHistoryItem]:
         return [webenginewidgets.WebEngineHistoryItem(i) for i in self.history.items()]

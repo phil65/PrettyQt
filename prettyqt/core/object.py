@@ -2,6 +2,7 @@ from typing import Optional, Union, DefaultDict, List, Type
 from collections import defaultdict
 from contextlib import contextmanager
 import itertools
+import inspect
 
 from qtpy import QtCore
 
@@ -23,11 +24,10 @@ class Object(QtCore.QObject):
         return dict(object_name=self.objectName())
 
     def serialize(self):
-        classes = type(self).mro()
         dct = dict()
-        for klass in reversed(classes):
+        for klass in reversed(inspect.getmro(type(self))):
             if "serialize_fields" in klass.__dict__:
-                data = klass.serialize_fields(self)
+                data = klass.serialize_fields(self)  # type: ignore
                 dct.update(data)
         return dct
 

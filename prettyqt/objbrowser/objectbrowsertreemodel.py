@@ -232,7 +232,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         path_strings = []
 
         if isinstance(obj, (list, tuple, set, frozenset)):
-            obj_children = sorted(enumerate(obj))
+            obj_children = [(str(i), j) for i, j in sorted(enumerate(obj))]
             path_strings = [
                 f"{obj_path}[{i[0]}]" if obj_path else i[0] for i in obj_children
             ]

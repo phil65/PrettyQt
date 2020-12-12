@@ -135,6 +135,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
             # scroll_position=self.scrollPosition(),
             url=core.Url(self.url()),
             visible=self.isVisible(),
+            history=core.DataStream.create_bytearray(self.history()),
             zoom_factor=self.zoomFactor(),
         )
 

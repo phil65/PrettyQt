@@ -14,7 +14,9 @@ class PlaylistModel(core.AbstractTableModel):
         self._playlist = None
 
     def rowCount(self, parent=None):
-        return len(self._playlist) if self._playlist is not None else 0
+        if self._playlist is None:
+            return 0
+        return len(self._playlist)
 
     def columnCount(self, parent=None):
         return len(self.HEADER)

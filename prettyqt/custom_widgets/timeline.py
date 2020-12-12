@@ -126,7 +126,7 @@ class Timeline(widgets.Widget):
                 poly.add_points((-10, 20), (10, 20), (0, 40))
 
             # Draw samples
-            t = 0
+            t = 0.0
             for sample in self.video_samples:
                 scaled_dur = sample.duration / scale
                 scaled_t = t / scale
