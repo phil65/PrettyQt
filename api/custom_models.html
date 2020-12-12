@@ -1406,7 +1406,7 @@ headerData<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <h4 class="doc doc-heading" id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.columnCount">
 
         <code class="highlight language-python">
-columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f010934d0b0</span><span class="o">&gt;</span><span class="p">)</span>        </code>
+columnCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f882301ff90</span><span class="o">&gt;</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -1491,7 +1491,7 @@ headerData<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <h4 class="doc doc-heading" id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.rowCount">
 
         <code class="highlight language-python">
-rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f0109134f20</span><span class="o">&gt;</span><span class="p">)</span>        </code>
+rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f882301fe40</span><span class="o">&gt;</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -1593,7 +1593,9 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
           <summary>Source code in <code>prettyqt/custom_models/playlistmodel.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_playlist</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>

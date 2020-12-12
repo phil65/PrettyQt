@@ -652,6 +652,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.get_application_state" class="md-nav__link">
+    get_application_state()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.guiapplication.GuiApplication.get_layout_direction" class="md-nav__link">
     get_layout_direction()
   </a>
@@ -1998,6 +2005,39 @@
           <li class="md-nav__item">
   <a href="#prettyqt.gui.texttablecellformat.TextTableCellFormat.set_top_border_style" class="md-nav__link">
     set_top_border_style()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.gui.transform" class="md-nav__link">
+    transform
+  </a>
+  
+    <nav class="md-nav" aria-label="transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.transform.Transform" class="md-nav__link">
+    Transform
+  </a>
+  
+    <nav class="md-nav" aria-label="Transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.transform.Transform.__reduce__" class="md-nav__link">
+    __reduce__()
   </a>
   
 </li>
@@ -2665,6 +2705,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.get_application_state" class="md-nav__link">
+    get_application_state()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.guiapplication.GuiApplication.get_layout_direction" class="md-nav__link">
     get_layout_direction()
   </a>
@@ -4011,6 +4058,39 @@
           <li class="md-nav__item">
   <a href="#prettyqt.gui.texttablecellformat.TextTableCellFormat.set_top_border_style" class="md-nav__link">
     set_top_border_style()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.gui.transform" class="md-nav__link">
+    transform
+  </a>
+  
+    <nav class="md-nav" aria-label="transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.transform.Transform" class="md-nav__link">
+    Transform
+  </a>
+  
+    <nav class="md-nav" aria-label="Transform">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.transform.Transform.__reduce__" class="md-nav__link">
+    __reduce__()
   </a>
   
 </li>
@@ -5638,6 +5718,52 @@ copy_to_clipboard<span class="p">(</span><span class="n">text</span><span class=
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.get_application_state">
+
+        <code class="highlight language-python">
+get_application_state<span class="p">()</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Get the current application state.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>List[Literal['suspended', 'hidden', 'inactive', 'active']]</code></td>
+<td>
+<p>application state</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">get_application_state</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ApplicationStateStr</span><span class="p">]:</span>
+    <span class="sd">"""Get the current application state.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        application state</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">APPLICATION_STATES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">cls</span><span class="o">.</span><span class="n">applicationState</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.get_layout_direction">
 
         <code class="highlight language-python">
@@ -5667,7 +5793,7 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LAYOUT_DIRECTION_STR</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LayoutDirectionStr</span><span class="p">:</span>
     <span class="sd">"""Get the current layout direction.</span>
 
 <span class="sd">    Returns:</span>
@@ -5777,7 +5903,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">LAYOUT_DIRECTION_STR</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">LayoutDirectionStr</span><span class="p">):</span>
     <span class="sd">"""Set layout direction.</span>
 
 <span class="sd">    Args:</span>
@@ -11271,6 +11397,53 @@ set_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
     <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BORDER_STYLES</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BORDER_STYLES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTopBorderStyle</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BORDER_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.gui.transform">
+
+        <code>transform</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.gui.transform.Transform">
+
+        <code>Transform</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.transform.Transform.__reduce__">
+
+        <code class="highlight language-python">
+__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Helper for pickle.</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/transform.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
 </code></pre>
 </div>
 </details>

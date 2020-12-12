@@ -2813,6 +2813,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.get_line_wrap_mode" class="md-nav__link">
+    get_line_wrap_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.get_wrap_mode" class="md-nav__link">
+    get_wrap_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.set_line_wrap_mode" class="md-nav__link">
     set_line_wrap_mode()
   </a>
@@ -6334,6 +6348,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.get_line_wrap_mode" class="md-nav__link">
+    get_line_wrap_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.get_wrap_mode" class="md-nav__link">
+    get_wrap_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.set_line_wrap_mode" class="md-nav__link">
     set_line_wrap_mode()
   </a>
@@ -8433,7 +8461,7 @@ get_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['content', 'first_show', 'ignored']</code></td>
 <td>
 <p>size adjust policy</p>
 </td>
@@ -8443,7 +8471,7 @@ get_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractscrollarea.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_size_adjust_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_size_adjust_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SizePolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return size adjust policy.</span>
 
 <span class="sd">    possible values are "content", "first_show", "ignored"</span>
@@ -8451,7 +8479,7 @@ get_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">    Returns:</span>
 <span class="sd">        size adjust policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SIZE_POLICIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">sizeAdjustPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">SIZE_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">sizeAdjustPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -8523,7 +8551,7 @@ set_horizontal_scrollbar_policy<span class="p">(</span><span class="bp">self</sp
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['always_on', 'always_off', 'as_needed']</code></td>
 <td>
 <p>visibilty to set</p>
 </td>
@@ -8551,7 +8579,7 @@ set_horizontal_scrollbar_policy<span class="p">(</span><span class="bp">self</sp
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractscrollarea.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollBarPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set the horizontal scrollbar visibility.</span>
 
 <span class="sd">    possible values are "always_on", "always_off", "as_needed"</span>
@@ -8641,7 +8669,7 @@ set_scrollbar_policy<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['always_on', 'always_off', 'as_needed']</code></td>
 <td>
 <p>visibilty to set</p>
 </td>
@@ -8669,7 +8697,7 @@ set_scrollbar_policy<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractscrollarea.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollBarPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set the policy for both scrollbars.</span>
 
 <span class="sd">    possible values are "always_on", "always_off", "as_needed"</span>
@@ -8760,7 +8788,7 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>Literal['content', 'first_show', 'ignored']</code></td>
 <td>
 <p>size adjust policy to use</p>
 </td>
@@ -8788,7 +8816,7 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractscrollarea.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_size_adjust_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_size_adjust_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">SizePolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set size adjust policy.</span>
 
 <span class="sd">    Valid values are "content", "first_show", "ignored"</span>
@@ -8799,10 +8827,9 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid size adjust policy</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SIZE_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">SIZE_POLICIES</span><span class="p">)</span>
-    <span class="n">policy</span> <span class="o">=</span> <span class="n">SIZE_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setSizeAdjustPolicy</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SIZE_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">SIZE_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setSizeAdjustPolicy</span><span class="p">(</span><span class="n">SIZE_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -8832,7 +8859,7 @@ set_vertical_scrollbar_policy<span class="p">(</span><span class="bp">self</span
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['always_on', 'always_off', 'as_needed']</code></td>
 <td>
 <p>visibilty to set</p>
 </td>
@@ -8860,7 +8887,7 @@ set_vertical_scrollbar_policy<span class="p">(</span><span class="bp">self</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractscrollarea.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollBarPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set the vertical scrollbar visibility.</span>
 
 <span class="sd">    possible values are "always_on", "always_off", "as_needed"</span>
@@ -17836,6 +17863,90 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.plaintextedit.PlainTextEdit.get_line_wrap_mode">
+
+        <code class="highlight language-python">
+get_line_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Get the current wrap mode.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['none', 'widget_width']</code></td>
+<td>
+<p>Wrap mode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/plaintextedit.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_line_wrap_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LineWrapModeStr</span><span class="p">:</span>
+    <span class="sd">"""Get the current wrap mode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Wrap mode</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">LINE_WRAP_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lineWrapMode</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.plaintextedit.PlainTextEdit.get_wrap_mode">
+
+        <code class="highlight language-python">
+get_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Get the current word wrap mode.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td>
+<p>Word wrap mode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/plaintextedit.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_wrap_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Get the current word wrap mode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Word wrap mode</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">WRAP_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">wordWrapMode</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.plaintextedit.PlainTextEdit.set_line_wrap_mode">
 
         <code class="highlight language-python">
@@ -17845,7 +17956,6 @@ set_line_wrap_mode<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set line wrap mode.</p>
-<p>Allowed values are "none" and "widget width"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -17859,7 +17969,7 @@ set_line_wrap_mode<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'widget_width']</code></td>
 <td>
 <p>line wrap mode to use</p>
 </td>
@@ -17887,10 +17997,8 @@ set_line_wrap_mode<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/plaintextedit.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_line_wrap_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_line_wrap_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">LineWrapModeStr</span><span class="p">):</span>
     <span class="sd">"""Set line wrap mode.</span>
-
-<span class="sd">    Allowed values are "none" and "widget width"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: line wrap mode to use</span>
@@ -17898,9 +18006,9 @@ set_line_wrap_mode<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: line wrap mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LINE_WRAP_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">LINE_WRAP_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setLineWrapMode</span><span class="p">(</span><span class="n">LINE_WRAP_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LINE_WRAP_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">LINE_WRAP_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setLineWrapMode</span><span class="p">(</span><span class="n">LINE_WRAP_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -17962,7 +18070,6 @@ set_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set word wrap mode.</p>
-<p>Allowed values are "none", "word", "anywhere", "boundary_or_anywhere"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -17976,7 +18083,7 @@ set_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'word', 'anywhere', 'boundary_or_anywhere']</code></td>
 <td>
 <p>word wrap mode to use</p>
 </td>
@@ -18004,10 +18111,8 @@ set_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/plaintextedit.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_wrap_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_wrap_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">WrapModeStr</span><span class="p">):</span>
     <span class="sd">"""Set word wrap mode.</span>
-
-<span class="sd">    Allowed values are "none", "word", "anywhere", "boundary_or_anywhere"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: word wrap mode to use</span>
@@ -18015,9 +18120,9 @@ set_wrap_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: wrap mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WRAP_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">WRAP_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setWordWrapMode</span><span class="p">(</span><span class="n">WRAP_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WRAP_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">WRAP_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWordWrapMode</span><span class="p">(</span><span class="n">WRAP_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

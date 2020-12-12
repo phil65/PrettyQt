@@ -717,7 +717,6 @@ get_inquiry_type<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current inquiry type.</p>
-<p>Possible values: "unlimited", "limited"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -728,7 +727,7 @@ get_inquiry_type<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['unlimited', 'limited']</code></td>
 <td>
 <p>inquiry type</p>
 </td>
@@ -738,10 +737,8 @@ get_inquiry_type<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/bluetooth/bluetoothdevicediscoveryagent.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_inquiry_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_inquiry_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InquiryTypeStr</span><span class="p">:</span>
     <span class="sd">"""Get the current inquiry type.</span>
-
-<span class="sd">    Possible values: "unlimited", "limited"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        inquiry type</span>
@@ -762,7 +759,6 @@ set_inquiry_type<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set inquiry type.</p>
-<p>Valid values: "unlimited", "limited"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -776,7 +772,7 @@ set_inquiry_type<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['unlimited', 'limited']</code></td>
 <td>
 <p>inquiry type</p>
 </td>
@@ -804,10 +800,8 @@ set_inquiry_type<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/bluetooth/bluetoothdevicediscoveryagent.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_inquiry_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_inquiry_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">InquiryTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set inquiry type.</span>
-
-<span class="sd">    Valid values: "unlimited", "limited"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: inquiry type</span>
