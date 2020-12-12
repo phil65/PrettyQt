@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import PYQT5, PYSIDE2
 
@@ -17,9 +17,11 @@ DISCOVERY_METHODS = bidict(
     low_energy=2,  # QtBluetooth.QBluetoothDeviceDiscoveryAgent.LowEnergyMethod,
 )
 
+DiscoveryMethodStr = Literal["none", "classic", "low_energy"]
+
 module = QtBluetooth.QBluetoothDeviceDiscoveryAgent
 
-ERRORS = bidict(
+ERROR = bidict(
     none=module.NoError,
     powered_off=module.PoweredOffError,
     input_output=module.InputOutputError,
@@ -29,20 +31,29 @@ ERRORS = bidict(
     unknown=module.UnknownError,
 )
 
+ErrorStr = Literal[
+    "none",
+    "powered_off",
+    "input_output",
+    "invalid_bluetooth_adapter",
+    "unsupported_platform",
+    "unsupported_discovery",
+    "unknown",
+]
+
 INQUIRY_TYPES = bidict(
     unlimited=QtBluetooth.QBluetoothDeviceDiscoveryAgent.GeneralUnlimitedInquiry,
     limited=QtBluetooth.QBluetoothDeviceDiscoveryAgent.LimitedInquiry,
 )
 
+InquiryTypeStr = Literal["unlimited", "limited"]
 
 QtBluetooth.QBluetoothDeviceDiscoveryAgent.__bases__ = (core.Object,)
 
 
 class BluetoothDeviceDiscoveryAgent(QtBluetooth.QBluetoothDeviceDiscoveryAgent):
-    def set_inquiry_type(self, typ: str):
+    def set_inquiry_type(self, typ: InquiryTypeStr):
         """Set inquiry type.
-
-        Valid values: "unlimited", "limited"
 
         Args:
             typ: inquiry type
@@ -54,10 +65,8 @@ class BluetoothDeviceDiscoveryAgent(QtBluetooth.QBluetoothDeviceDiscoveryAgent):
             raise InvalidParamError(typ, INQUIRY_TYPES)
         self.setInquiryType(INQUIRY_TYPES[typ])
 
-    def get_inquiry_type(self) -> str:
+    def get_inquiry_type(self) -> InquiryTypeStr:
         """Get the current inquiry type.
-
-        Possible values: "unlimited", "limited"
 
         Returns:
             inquiry type
@@ -72,10 +81,10 @@ class BluetoothDeviceDiscoveryAgent(QtBluetooth.QBluetoothDeviceDiscoveryAgent):
             flag &= 2
         self.start(flag)
 
-    def get_error(self) -> str:
-        return ERRORS.inverse[self.error()]
+    def get_error(self) -> ErrorStr:
+        return ERROR.inverse[self.error()]
 
-    def get_supported_discovery_methods(self) -> List[str]:
+    def get_supported_discovery_methods(self) -> List[DiscoveryMethodStr]:
         return [
             k
             for k, v in DISCOVERY_METHODS.items()

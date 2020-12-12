@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
@@ -6,18 +8,21 @@ from prettyqt.utils import bidict, InvalidParamError
 
 area = QtWidgets.QAbstractScrollArea
 
-SIZE_POLICIES = bidict(
+SIZE_POLICY = bidict(
     content=area.AdjustToContents,
     first_show=area.AdjustToContentsOnFirstShow,
     ignored=area.AdjustIgnored,
 )
 
+SizePolicyStr = Literal["content", "first_show", "ignored"]
 
 SCROLLBAR_POLICY = bidict(
     always_on=QtCore.Qt.ScrollBarAlwaysOn,
     always_off=QtCore.Qt.ScrollBarAlwaysOff,
     as_needed=QtCore.Qt.ScrollBarAsNeeded,
 )
+
+ScrollBarPolicyStr = Literal["always_on", "always_off", "as_needed"]
 
 
 QtWidgets.QAbstractScrollArea.__bases__ = (widgets.Frame,)
@@ -47,7 +52,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
     # def v_scrollbar(self, scrollbar):
     #     self.setVerticalScrollBar(scrollbar)
 
-    def set_size_adjust_policy(self, policy: str):
+    def set_size_adjust_policy(self, policy: SizePolicyStr):
         """Set size adjust policy.
 
         Valid values are "content", "first_show", "ignored"
@@ -58,12 +63,11 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         Raises:
             InvalidParamError: invalid size adjust policy
         """
-        if policy not in SIZE_POLICIES:
-            raise InvalidParamError(policy, SIZE_POLICIES)
-        policy = SIZE_POLICIES[policy]
-        self.setSizeAdjustPolicy(policy)
+        if policy not in SIZE_POLICY:
+            raise InvalidParamError(policy, SIZE_POLICY)
+        self.setSizeAdjustPolicy(SIZE_POLICY[policy])
 
-    def get_size_adjust_policy(self) -> str:
+    def get_size_adjust_policy(self) -> SizePolicyStr:
         """Return size adjust policy.
 
         possible values are "content", "first_show", "ignored"
@@ -71,9 +75,9 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         Returns:
             size adjust policy
         """
-        return SIZE_POLICIES.inverse[self.sizeAdjustPolicy()]
+        return SIZE_POLICY.inverse[self.sizeAdjustPolicy()]
 
-    def set_scrollbar_policy(self, mode: str):
+    def set_scrollbar_policy(self, mode: ScrollBarPolicyStr):
         """Set the policy for both scrollbars.
 
         possible values are "always_on", "always_off", "as_needed"
@@ -89,7 +93,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
         self.setVerticalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
-    def set_horizontal_scrollbar_policy(self, mode: str):
+    def set_horizontal_scrollbar_policy(self, mode: ScrollBarPolicyStr):
         """Set the horizontal scrollbar visibility.
 
         possible values are "always_on", "always_off", "as_needed"
@@ -104,7 +108,7 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             raise InvalidParamError(mode, SCROLLBAR_POLICY)
         self.setHorizontalScrollBarPolicy(SCROLLBAR_POLICY[mode])
 
-    def set_vertical_scrollbar_policy(self, mode: str):
+    def set_vertical_scrollbar_policy(self, mode: ScrollBarPolicyStr):
         """Set the vertical scrollbar visibility.
 
         possible values are "always_on", "always_off", "as_needed"

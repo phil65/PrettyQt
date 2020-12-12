@@ -32,7 +32,7 @@ CURSOR_SHAPE = bidict(
     bitmap=QtCore.Qt.BitmapCursor,
 )
 
-CURSOR_SHAPE_STR = Literal[
+CursorShapeStr = Literal[
     "arrow",
     "uparrow",
     "cross",
@@ -64,7 +64,7 @@ LAYOUT_DIRECTION = bidict(
     auto=QtCore.Qt.LayoutDirectionAuto,
 )
 
-LAYOUT_DIRECTION_STR = Literal["left_to_right", "right_to_left", "auto"]
+LayoutDirectionStr = Literal["left_to_right", "right_to_left", "auto"]
 
 QtGui.QGuiApplication.__bases__ = (core.CoreApplication,)
 
@@ -72,13 +72,13 @@ QtGui.QGuiApplication.__bases__ = (core.CoreApplication,)
 class GuiApplication(QtGui.QGuiApplication):
     @classmethod
     @contextlib.contextmanager
-    def override_cursor(cls, cursor: CURSOR_SHAPE_STR):
+    def override_cursor(cls, cursor: CursorShapeStr):
         cls.set_override_cursor(cursor)
         yield cursor
         cls.restore_override_cursor()
 
     @classmethod
-    def set_override_cursor(cls, cursor: CURSOR_SHAPE_STR):
+    def set_override_cursor(cls, cursor: CursorShapeStr):
         cursor = gui.Cursor(CURSOR_SHAPE[cursor])
         cls.setOverrideCursor(cursor)
 
@@ -90,7 +90,7 @@ class GuiApplication(QtGui.QGuiApplication):
     def get_clipboard(cls) -> gui.Clipboard:
         return gui.Clipboard(cls.clipboard())
 
-    def set_layout_direction(self, direction: LAYOUT_DIRECTION_STR):
+    def set_layout_direction(self, direction: LayoutDirectionStr):
         """Set layout direction.
 
         Args:
@@ -103,7 +103,7 @@ class GuiApplication(QtGui.QGuiApplication):
             raise InvalidParamError(direction, LAYOUT_DIRECTION)
         self.setLayoutDirection(LAYOUT_DIRECTION[direction])
 
-    def get_layout_direction(self) -> LAYOUT_DIRECTION_STR:
+    def get_layout_direction(self) -> LayoutDirectionStr:
         """Get the current layout direction.
 
         Returns:
