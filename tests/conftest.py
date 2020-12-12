@@ -63,8 +63,8 @@ class QtTester:
 
     @staticmethod
     def test_model(model, force_py):
-        tester = modeltest.ModelTester()
-        tester.check(model, force_py=force_py)
+        tester = modeltest.ModelTester(model)
+        tester.check(force_py=force_py)
         tester._cleanup()
 
 

@@ -41,6 +41,8 @@
 #
 # $QT_END_LICENSE$
 
+from typing import List, NamedTuple
+
 import collections
 
 from qtpy import QtTest, QtCore, QtGui
@@ -69,12 +71,12 @@ TYPES = [
 class ModelTester:
     """A tester for Qt's QAbstractItemModels."""
 
-    def __init__(self):
-        self._model = None
-        self._fetching_more = None
-        self._insert = None
-        self._remove = None
-        self._changing = []
+    def __init__(self, model: QtCore.QAbstractItemModel):
+        self._model = model
+        self._fetching_more = False
+        self._insert: List[NamedTuple] = []
+        self._remove: List[NamedTuple] = []
+        self._changing: List[QtCore.QPersistentModelIndex] = []
         self._qt_tester = None
 
     def _debug(self, text):
@@ -92,7 +94,7 @@ class ModelTester:
                 index.row(), index.column(), data, id(index)
             )
 
-    def check(self, model, force_py=False):
+    def check(self, force_py: bool = False):
         """Run a series of checks in the given model.
 
         Connect to all of the models signals.
@@ -104,17 +106,16 @@ class ModelTester:
           Force using the Python implementation, even if the C++ implementation
           is available.
         """
-        assert model is not None
+        assert self._model is not None
 
         if HAS_QT_TESTER and not force_py:
             reporting_mode = QtTest.QAbstractItemModelTester.FailureReportingMode.Warning
-            self._qt_tester = QtTest.QAbstractItemModelTester(model, reporting_mode)
+            self._qt_tester = QtTest.QAbstractItemModelTester(self._model, reporting_mode)
             self._debug("Using Qt C++ tester")
             return
 
         self._debug("Using Python tester")
 
-        self._model = model
         self._fetching_more = False
         self._insert = []
         self._remove = []
@@ -646,7 +647,9 @@ class ModelTester:
         if next_data is not None:
             assert c.next == next_data
 
-    def _on_data_changed(self, top_left, bottom_right):
+    def _on_data_changed(
+        self, top_left: QtCore.QModelIndex, bottom_right: QtCore.QModelIndex
+    ):
         assert top_left.isValid()
         assert bottom_right.isValid()
         common_parent = bottom_right.parent()
@@ -656,7 +659,7 @@ class ModelTester:
         assert bottom_right.row() < self._model.rowCount(common_parent)
         assert bottom_right.column() < self._column_count(common_parent)
 
-    def _on_header_data_changed(self, orientation, start, end):
+    def _on_header_data_changed(self, orientation, start: int, end: int):
         assert orientation in [QtCore.Qt.Horizontal, QtCore.Qt.Vertical]
         is_vertical = orientation == QtCore.Qt.Vertical
         count = self._model.rowCount() if is_vertical else self._column_count()
