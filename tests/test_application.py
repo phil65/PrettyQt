@@ -28,8 +28,8 @@ def test_application(qapp):
     assert widget == mw_widget
     qapp.copy_to_clipboard("test")
     with pytest.raises(InvalidParamError):
-        qapp.get_icon("testus")
-    icon = qapp.get_icon("warning")
+        qapp.get_style_icon("testus")
+    icon = qapp.get_style_icon("warning")
     assert isinstance(icon, QtGui.QIcon)
     qapp.set_effect_enabled("animate_toolbox")
     with pytest.raises(InvalidParamError):
@@ -58,3 +58,4 @@ def test_application(qapp):
     qapp.add_library_path("")
     qapp.get_library_paths()
     assert qapp.get_application_state() == ["inactive"]
+    qapp.get_icon()

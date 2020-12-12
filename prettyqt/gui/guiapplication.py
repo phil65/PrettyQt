@@ -161,3 +161,6 @@ class GuiApplication(QtGui.QGuiApplication):
         """
         icon = gui.icon.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
+
+    def get_icon(self) -> gui.Icon:
+        return gui.Icon(self.windowIcon())

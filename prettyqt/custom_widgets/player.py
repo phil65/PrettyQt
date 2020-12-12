@@ -34,28 +34,28 @@ class Player(widgets.MainWindow):
 
         play_menu = self.menuBar().add_menu("&Play")
         self.play_action = toolbar.add_action(
-            icon=widgets.Application.get_icon("media_play"),
+            icon=widgets.Application.get_style_icon("media_play"),
             label="Play",
             callback=self.player.play,
         )
         self.previous_action = toolbar.add_action(
-            icon=widgets.Application.get_icon("media_skip_backward"),
+            icon=widgets.Application.get_style_icon("media_skip_backward"),
             label="Previous",
             callback=self.previous_clicked,
         )
         self.pause_action = toolbar.add_action(
-            icon=widgets.Application.get_icon("media_pause"),
+            icon=widgets.Application.get_style_icon("media_pause"),
             label="Pause",
             callback=self.player.pause,
         )
         self.next_action = toolbar.add_action(
-            icon=widgets.Application.get_icon("media_skip_backward"),
+            icon=widgets.Application.get_style_icon("media_skip_backward"),
             label="Next",
             callback=self.playlist.next,
         )
 
         self.stop_action = toolbar.add_action(
-            icon=widgets.Application.get_icon("media_stop"),
+            icon=widgets.Application.get_style_icon("media_stop"),
             label="Stop",
             callback=self.player.stop,
         )

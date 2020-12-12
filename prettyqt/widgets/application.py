@@ -119,7 +119,7 @@ class Application(QtWidgets.QApplication):
         # return None
 
     @classmethod
-    def get_icon(cls, icon: str) -> gui.Icon:
+    def get_style_icon(cls, icon: str) -> gui.Icon:
         style = cls.style()
         # icon_size = style.pixelMetric(QtWidgets.QStyle.PM_MessageBoxIconSize)
         if icon not in widgets.style.STANDARD_PIXMAPS:
