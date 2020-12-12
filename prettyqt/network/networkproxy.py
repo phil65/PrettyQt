@@ -55,7 +55,7 @@ class NetworkProxy(QtNetwork.QNetworkProxy):
 
     def set_headers(self, headers: Dict[str, str]):
         for k, v in headers.items():
-            self.setRawHeader(str.encode(k), str.encode(v))
+            self.setRawHeader(k.encode(), v.encode())
 
     def set_type(self, typ: str):
         """Set proxy type.

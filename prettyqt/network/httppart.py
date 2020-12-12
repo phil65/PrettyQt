@@ -15,7 +15,7 @@ class HttpPart(QtNetwork.QHttpPart):
 
     def set_headers(self, headers: Dict[str, str]):
         for k, v in headers.items():
-            self.setRawHeader(str.encode(k), str.encode(v))
+            self.setRawHeader(k.encode(), v.encode())
 
     def set_header(self, name: str, value: str):
         self.setHeader(network.networkrequest.KNOWN_HEADERS[name], value)

@@ -23,7 +23,7 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
 
     def set_headers(self, headers: Dict[str, str]):
         for k, v in headers.items():
-            self.setHeader(str.encode(k), str.encode(v))
+            self.setHeader(k.encode(), v.encode())
 
     def get_headers(self) -> Dict[str, str]:
         return {bytes(h).decode(): bytes(self.header(h)).decode() for h in self.headers()}

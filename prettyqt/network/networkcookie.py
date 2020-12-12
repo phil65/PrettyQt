@@ -20,13 +20,13 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         self.toRawForm(form)
 
     def set_name(self, name: str):
-        self.setName(str.encode(name))
+        self.setName(name.encode())
 
     def get_name(self) -> str:
         return bytes(self.name()).decode()
 
     def set_value(self, value: str):
-        self.setValue(str.encode(value))
+        self.setValue(value.encode())
 
     def get_value(self) -> str:
         return bytes(self.value()).decode()

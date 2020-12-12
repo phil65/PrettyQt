@@ -11,7 +11,7 @@ class PropertyAnimation(QtCore.QPropertyAnimation):
         self.set_property_name(attribute)
 
     def set_property_name(self, name: str):
-        self.setPropertyName(str.encode(name))
+        self.setPropertyName(name.encode())
 
     def get_property_name(self) -> str:
         return bytes(self.propertyName()).decode()
