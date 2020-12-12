@@ -1,3 +1,15 @@
+## v0.146.0 (2020-12-13)
+
+### Fix
+
+- correctly serialize AbstractGraphicsShapeItem
+
+### Feat
+
+- **GuiApplication**: add get_icon method
+- **PlainTextEdit**: add get(_line)_wrap_mode methods
+- **GuiApplication**: add get_application_state method
+
 ## v0.145.0 (2020-12-11)
 
 ### Fix
