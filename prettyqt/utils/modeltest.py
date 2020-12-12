@@ -50,6 +50,21 @@ _Changing = collections.namedtuple("_Changing", "parent, old_size, last, next")
 
 HAS_QT_TESTER = hasattr(QtTest, "QAbstractItemModelTester")
 
+TYPES = [
+    (QtCore.Qt.DisplayRole, (str,)),
+    (QtCore.Qt.ToolTipRole, (str,)),
+    (QtCore.Qt.StatusTipRole, (str,)),
+    (QtCore.Qt.WhatsThisRole, (str,)),
+    (QtCore.Qt.SizeHintRole, QtCore.QSize),
+    (QtCore.Qt.FontRole, QtGui.QFont),
+    (QtCore.Qt.BackgroundColorRole, (QtGui.QColor, QtGui.QBrush)),
+    (QtCore.Qt.TextColorRole, (QtGui.QColor, QtGui.QBrush)),
+    (
+        QtCore.Qt.DecorationRole,
+        (QtGui.QPixmap, QtGui.QImage, QtGui.QIcon, QtGui.QColor, QtGui.QBrush),
+    ),
+]
+
 
 class ModelTester:
     """A tester for Qt's QAbstractItemModels."""
@@ -441,26 +456,8 @@ class ModelTester:
 
         # A valid index should have a valid QVariant data
         assert self._model.index(0, 0).isValid()
-
-        string_types = (str,)
-
-        types = [
-            (QtCore.Qt.DisplayRole, string_types),
-            (QtCore.Qt.ToolTipRole, string_types),
-            (QtCore.Qt.StatusTipRole, string_types),
-            (QtCore.Qt.WhatsThisRole, string_types),
-            (QtCore.Qt.SizeHintRole, QtCore.QSize),
-            (QtCore.Qt.FontRole, QtGui.QFont),
-            (QtCore.Qt.BackgroundColorRole, (QtGui.QColor, QtGui.QBrush)),
-            (QtCore.Qt.TextColorRole, (QtGui.QColor, QtGui.QBrush)),
-            (
-                QtCore.Qt.DecorationRole,
-                (QtGui.QPixmap, QtGui.QImage, QtGui.QIcon, QtGui.QColor, QtGui.QBrush),
-            ),
-        ]
-
         # General purpose roles with a fixed expected type
-        for role, typ in types:
+        for role, typ in TYPES:
             data = self._model.data(self._model.index(0, 0), role)
             if data is not None:
                 data = data
@@ -468,7 +465,6 @@ class ModelTester:
 
         # Check that the alignment is one we know about
         alignment = self._model.data(self._model.index(0, 0), QtCore.Qt.TextAlignmentRole)
-        alignment = alignment
         if alignment is not None:
             try:
                 alignment = int(alignment)
@@ -519,7 +515,7 @@ class ModelTester:
         c = self._insert.pop()
         last_data = (
             self._model.data(self._model.index(start - 1, 0, parent))
-            if start - 1 >= 0
+            if start >= 1
             else None
         )
         next_data = (
@@ -549,17 +545,7 @@ class ModelTester:
                 self._modelindex_debug(parent), current_size, next_data, last_data
             )
         )
-
-        if not QtCore.qVersion().startswith("4."):
-            # Skipping this on Qt4 as the parent changes for some reason:
-            # modeltest: rows about to be inserted: [...]
-            #            parent <invalid> (0x7f8f540eacf8), [...]
-            # [...]
-            # modeltest: from rowsAboutToBeInserted:
-            #            parent 0/0 None (0x7f8f540eacf8), [...]
-            # modeltest: now in rowsInserted:
-            #            parent <invalid> (0x7f8f60a96cf8) [...]
-            assert c.parent == parent
+        assert c.parent == parent
 
         for ii in range(start, end + 1):
             idx = self._model.index(ii, 0, parent)
@@ -653,11 +639,7 @@ class ModelTester:
             )
         )
 
-        if not QtCore.qVersion().startswith("4."):
-            # Skipping this on Qt4 as the parent changes for some reason
-            # see _on_rows_inserted for details
-            assert c.parent == parent
-
+        assert c.parent == parent
         assert current_size == expected_size
         if last_data is not None:
             assert c.last == last_data
@@ -671,22 +653,14 @@ class ModelTester:
         assert top_left.parent() == common_parent
         assert top_left.row() <= bottom_right.row()
         assert top_left.column() <= bottom_right.column()
-        row_count = self._model.rowCount(common_parent)
-        column_count = self._column_count(common_parent)
-        assert bottom_right.row() < row_count
-        assert bottom_right.column() < column_count
+        assert bottom_right.row() < self._model.rowCount(common_parent)
+        assert bottom_right.column() < self._column_count(common_parent)
 
     def _on_header_data_changed(self, orientation, start, end):
         assert orientation in [QtCore.Qt.Horizontal, QtCore.Qt.Vertical]
-        assert start >= 0
-        assert end >= 0
-        assert start <= end
-        if orientation == QtCore.Qt.Vertical:
-            item_count = self._model.rowCount()
-        else:
-            item_count = self._column_count()
-        assert start < item_count
-        assert end < item_count
+        is_vertical = orientation == QtCore.Qt.Vertical
+        count = self._model.rowCount() if is_vertical else self._column_count()
+        assert 0 <= start <= end < count
 
     def _column_count(self, parent=QtCore.QModelIndex()):
         """Test columnCount.
