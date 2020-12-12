@@ -66,6 +66,16 @@ LAYOUT_DIRECTION = bidict(
 
 LayoutDirectionStr = Literal["left_to_right", "right_to_left", "auto"]
 
+APPLICATION_STATES = bidict(
+    suspended=QtCore.Qt.ApplicationSuspended,
+    hidden=QtCore.Qt.ApplicationHidden,
+    inactive=QtCore.Qt.ApplicationInactive,
+    active=QtCore.Qt.ApplicationActive,
+)
+
+ApplicationStateStr = Literal["suspended", "hidden", "inactive", "active"]
+
+
 QtGui.QGuiApplication.__bases__ = (core.CoreApplication,)
 
 
@@ -110,6 +120,15 @@ class GuiApplication(QtGui.QGuiApplication):
             layout direction
         """
         return LAYOUT_DIRECTION.inverse[self.layoutDirection()]
+
+    @classmethod
+    def get_application_state(cls) -> List[ApplicationStateStr]:
+        """Get the current application state.
+
+        Returns:
+            application state
+        """
+        return [k for k, v in APPLICATION_STATES.items() if v & cls.applicationState()]
 
     def get_primary_screen(self) -> gui.Screen:
         return gui.Screen(self.primaryScreen())

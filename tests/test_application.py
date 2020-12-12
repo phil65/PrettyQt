@@ -57,3 +57,4 @@ def test_application(qapp):
     qapp.get_application_dir_path()
     qapp.add_library_path("")
     qapp.get_library_paths()
+    assert qapp.get_application_state() == ["inactive"]
