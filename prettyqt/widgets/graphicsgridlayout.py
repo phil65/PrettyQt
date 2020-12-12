@@ -23,7 +23,7 @@ QtWidgets.QGraphicsGridLayout.__bases__ = (widgets.GraphicsLayout,)
 
 class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
     def __getitem__(
-        self, idx: Tuple[int, int]
+        self, idx: Union[Tuple[int, int], int]
     ) -> Optional[QtWidgets.QGraphicsLayoutItem]:
         return self.itemAt(*idx)
 

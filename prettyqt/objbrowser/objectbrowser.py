@@ -1,6 +1,6 @@
 """Object browser GUI in Qt."""
 
-from typing import List
+from typing import List, Optional
 import logging
 import traceback
 import hashlib
@@ -28,7 +28,7 @@ class ObjectBrowser(widgets.MainWindow):
     """Object browser main application window."""
 
     _app = None  # Reference to the global application.
-    _browsers: List["ObjectBrowser"] = []  # Keep lists of browser windows.
+    _browsers: List[Optional["ObjectBrowser"]] = []  # Keep lists of browser windows.
 
     def __init__(self, obj, name: str = ""):
         """Constructor.

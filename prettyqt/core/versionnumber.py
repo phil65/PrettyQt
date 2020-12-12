@@ -10,10 +10,10 @@ class VersionNumber(QtCore.QVersionNumber):
     def __init__(self, *args, **kwargs):
         if len(args) == 1:
             if isinstance(args[0], str):
-                args = [int(i) for i in args[0].split(".")]
+                args = tuple(int(i) for i in args[0].split("."))
             elif isinstance(args[0], tuple):
                 args = args[0]
-        return super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def __repr__(self):
         return f"{type(self).__name__}({self.major()}, {self.minor()}, {self.micro()})"

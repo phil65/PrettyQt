@@ -10,6 +10,9 @@ def debug():
     import inspect
 
     frame = inspect.currentframe()
+    if frame is None or frame.f_back is None:
+        del frame
+        raise RuntimeError()
     try:
         from prettyqt.objbrowser import objectbrowser
 
