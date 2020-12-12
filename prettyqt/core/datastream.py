@@ -1,3 +1,5 @@
+from typing import Union
+
 from qtpy import QtCore
 
 from prettyqt import core
@@ -74,7 +76,9 @@ class DataStream(QtCore.QDataStream):
         return ba
 
     @classmethod
-    def write_bytearray(cls, ba: QtCore.QByteArray, write_to):
+    def write_bytearray(cls, ba: Union[QtCore.QByteArray, bytes], write_to):
+        if not isinstance(ba, QtCore.QByteArray):
+            ba = QtCore.QByteArray(ba)
         stream = cls(ba, core.IODevice.ReadOnly)
         stream >> write_to
 

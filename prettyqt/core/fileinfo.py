@@ -14,13 +14,16 @@ class FileInfo(QtCore.QFileInfo):
             super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return f"FileInfo({self.absoluteFilePath()!r})"
+        return f"{type(self).__name__}({self.absoluteFilePath()!r})"
 
     def __str__(self):
         return self.absoluteFilePath()
 
     def __getattr__(self, attr: str):
         return getattr(self.get_absolute_file_path(), attr)
+
+    def __reduce__(self):
+        return (self.__class__, (self.absoluteFilePath(),))
 
     def get_dir(self) -> pathlib.Path:
         return pathlib.Path(self.dir().absolutePath())

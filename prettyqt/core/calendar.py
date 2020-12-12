@@ -23,6 +23,12 @@ class Calendar(QtCore.QCalendar):
             system = SYSTEM[system]
         super().__init__(system)
 
+    def __repr__(self):
+        return f"{type(self).__name__}({self.name()!r})"
+
+    def __reduce__(self):
+        return (self.__class__, (self.name(),))
+
     # def __bool__(self):
     #     return self.isValid()
 
@@ -32,4 +38,4 @@ class Calendar(QtCore.QCalendar):
 
 if __name__ == "__main__":
     cal = Calendar("gregorian")
-    print(dir(cal))
+    print(repr(cal))

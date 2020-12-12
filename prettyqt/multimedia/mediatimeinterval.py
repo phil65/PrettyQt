@@ -3,7 +3,7 @@ from qtpy import QtMultimedia
 
 class MediaTimeInterval(QtMultimedia.QMediaTimeInterval):
     def __repr__(self):
-        return f"MediaTimeInterval({self.start()}, {self.end()})"
+        return f"{type(self).__name__}({self.start()}, {self.end()})"
 
     def __contains__(self, val: int):
         return self.contains(val)

@@ -7,7 +7,10 @@ from prettyqt import core
 
 class LineF(QtCore.QLineF):
     def __repr__(self):
-        return f"LineF({repr(self.get_p1())}, {repr(self.get_p1())})"
+        return f"{type(self).__name__}({repr(self.get_p1())}, {repr(self.get_p1())})"
+
+    def __reduce__(self):
+        return (self.__class__, (self.get_p1(), self.get_p1()))
 
     def __reversed__(self):
         self[0], self[1] = self[1], self[0]

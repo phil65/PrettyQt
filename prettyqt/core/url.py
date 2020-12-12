@@ -57,7 +57,7 @@ class Url(QtCore.QUrl):
     #     return self.absolutePath()
 
     def __repr__(self):
-        return f"core.Url('{self.toString(self.PreferLocalFile)}')"
+        return f"{type(self).__name__}({self.toString(self.PreferLocalFile)!r})"
 
     def __str__(self):
         return self.toString(self.PreferLocalFile)

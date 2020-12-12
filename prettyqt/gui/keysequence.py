@@ -108,7 +108,7 @@ class KeySequence(QtGui.QKeySequence):
         return self.toString()
 
     def __repr__(self):
-        return f"KeySequence({self.toString()!r})"
+        return f"{type(self).__name__}({self.toString()!r})"
 
     def __bool__(self):
         return not self.isEmpty()

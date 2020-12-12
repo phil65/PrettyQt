@@ -34,7 +34,7 @@ class IconLabel(widgets.Widget):
         return self.label.__getattribute__(value)
 
     def __repr__(self):
-        return f"IconLabel({self.text()!r})"
+        return f"{type(self).__name__}({self.text()!r})"
 
 
 if __name__ == "__main__":

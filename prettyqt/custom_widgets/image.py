@@ -19,7 +19,7 @@ class Image(widgets.Label):
             self.set_image(path)
 
     def __repr__(self):
-        return f"Image({self.text()!r})"
+        return f"{type(self).__name__}({self.text()!r})"
 
     def __bool__(self):
         return not self.isNull()

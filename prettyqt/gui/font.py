@@ -85,7 +85,7 @@ WEIGHTS = bidict(
 class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
     def __repr__(self):
         return (
-            f"Font('{self.family()}', {self.pointSize()}, "
+            f"{type(self).__name__}({self.family()!r}, {self.pointSize()}, "
             f"{self.weight()}, {self.italic()})"
         )
 

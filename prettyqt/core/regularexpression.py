@@ -46,7 +46,7 @@ class RegularExpression(QtCore.QRegularExpression):
             super().__init__(pattern, flags)
 
     def __repr__(self):
-        return f"RegularExpression({self.pattern()!r})"
+        return f"{type(self).__name__}({self.pattern()!r})"
 
     def __reduce__(self):
         return (self.__class__, (self.pattern(), int(self.flags)))

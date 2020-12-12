@@ -36,7 +36,7 @@ class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
             super().__init__(boundary_type, string_or_other)
 
     def __repr__(self):
-        return f"TextBoundaryFinder({self.string()!r})"
+        return f"{type(self).__name__}({self.string()!r})"
 
     def __reduce__(self):
         return (self.__class__, (self.string(), int(self.type)))

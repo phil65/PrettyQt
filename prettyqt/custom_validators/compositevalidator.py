@@ -14,7 +14,7 @@ class CompositeValidator(gui.Validator):
         self.validators = validators if validators is not None else []
 
     def __repr__(self):
-        return f"CompositeValidator({self.validators})"
+        return f"{type(self).__name__}({self.validators})"
 
     def __getitem__(self, index: int) -> gui.Validator:
         return self.validators[index]
@@ -31,12 +31,8 @@ class CompositeValidator(gui.Validator):
     def __iter__(self) -> Iterator[gui.Validator]:
         return iter(self.validators)
 
-    def __getstate__(self):
-        return dict(validators=self.validators)
-
-    def __setstate__(self, state):
-        self.__init__()
-        self.validators = state.get("validators", [])
+    def __reduce__(self):
+        return (self.__class__, (self.validators,))
 
     def __len__(self):
         return len(self.validators)

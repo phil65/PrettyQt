@@ -24,8 +24,9 @@ QtCharts.QBoxSet.__bases__ = (core.Object,)
 class BoxSet(QtCharts.QBoxSet):
     def __repr__(self):
         return (
-            f"BoxSet({self['lower_extreme']}, {self['lower_quartile']}, {self['median']},"
-            f" {self['upper_quartile']}, {self['upper_extreme']}, {self.label()!r})"
+            f"{type(self).__name__}({self['lower_extreme']}, {self['lower_quartile']},"
+            f" {self['median']}, {self['upper_quartile']}, {self['upper_extreme']}, "
+            f"{self.label()!r})"
         )
 
     def __getitem__(self, index: Union[int, ValuePositionStr]) -> float:

@@ -26,7 +26,7 @@ class TimeZone(QtCore.QTimeZone):
             super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return f"TimeZone({self.get_id()!r})"
+        return f"{type(self).__name__}({self.get_id()!r})"
 
     def __str__(self):
         return self.get_id()

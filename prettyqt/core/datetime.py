@@ -24,7 +24,7 @@ TIME_SPECS = bidict(
 class DateTime(QtCore.QDateTime):
     def __repr__(self):
         template = super().__repr__().split("(")[1]
-        return f"DateTime({template}"
+        return f"{type(self).__name__}({template}"
 
     def __str__(self):
         return self.toString("yyyy-MM-dd hh:mm:ss.zzzzzz")

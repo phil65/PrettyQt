@@ -8,7 +8,7 @@ QtGui.QDoubleValidator.__bases__ = (gui.Validator,)
 
 class DoubleValidator(QtGui.QDoubleValidator):
     def __repr__(self):
-        return f"DoubleValidator({self.bottom()}, {self.top()}, {self.decimals()})"
+        return f"{type(self).__name__}({self.bottom()}, {self.top()}, {self.decimals()})"
 
     def __getstate__(self):
         return dict(bottom=self.bottom(), top=self.top(), decimals=self.decimals())

@@ -11,7 +11,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         self.endpos = None
 
     def __repr__(self):
-        return "RegularExpressionMatch()"
+        return f"{type(self).__name__}()"
 
     def __getitem__(self, item: Union[int, str]) -> str:
         return self.captured(item)

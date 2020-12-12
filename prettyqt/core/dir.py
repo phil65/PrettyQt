@@ -50,7 +50,7 @@ class Dir(QtCore.QDir):
         return getattr(self.to_path(), attr)
 
     def __repr__(self):
-        return f"Dir({self.absolutePath()!r})"
+        return f"{type(self).__name__}({self.absolutePath()!r})"
 
     def __str__(self):
         return self.absolutePath()

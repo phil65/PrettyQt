@@ -17,7 +17,7 @@ SHAPES = bidict(
 
 class Cursor(QtGui.QCursor):
     def __getstate__(self):
-        return core.DataStream.create_bytearray(self)
+        return bytes(self)
 
     def __setstate__(self, ba):
         super().__init__()

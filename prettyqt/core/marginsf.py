@@ -4,7 +4,13 @@ from qtpy import QtCore
 
 class MarginsF(QtCore.QMarginsF):
     def __repr__(self):
-        return f"MarginsF({self.left()}, {self.top()}, {self.right()}, {self.bottom()})"
+        return (
+            f"{type(self).__name__}({self.left()}, {self.top()}, {self.right()}, "
+            f"{self.bottom()})"
+        )
+
+    def __reduce__(self):
+        return (self.__class__, (self.left(), self.top(), self.right(), self.bottom()))
 
     def __bool__(self):
         return not self.isNull()

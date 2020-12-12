@@ -27,7 +27,7 @@ class Settings(QtCore.QSettings):
         self.settings_id = settings_id
 
     def __repr__(self):
-        return f"Settings: {self.as_dict()}"
+        return f"{type(self).__name__}: {self.as_dict()}"
 
     def __contains__(self, key: str) -> bool:
         return self.contains(key)

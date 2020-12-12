@@ -19,7 +19,13 @@ CompressionStr = Literal["none", "zlib", "zstd"]
 
 class Resource(QtCore.QResource):
     def __repr__(self):
-        return f"Resource({self.absoluteFilePath()!r}, {self.get_locale()!r})"
+        return (
+            f"{type(self).__name__}({self.absoluteFilePath()!r}, "
+            f"{self.get_locale()!r})"
+        )
+
+    def __reduce__(self):
+        return (self.__class__, (self.absoluteFilePath(), self.get_locale()))
 
     def __bytes__(self):
         return bytes(self.uncompressedData())

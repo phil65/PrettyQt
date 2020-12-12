@@ -7,7 +7,10 @@ from prettyqt import core
 
 class Line(QtCore.QLine):
     def __repr__(self):
-        return f"Line({repr(self.get_p1())}, {repr(self.get_p2())})"
+        return f"{type(self).__name__}({repr(self.get_p1())}, {repr(self.get_p2())})"
+
+    def __reduce__(self):
+        return (self.__class__, (self.get_p1(), self.get_p1()))
 
     def __abs__(self) -> float:
         p = self.get_p2() - self.get_p1()

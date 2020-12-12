@@ -5,7 +5,7 @@ from qtpy import QtCore
 
 class UrlQuery(QtCore.QUrlQuery):
     def __repr__(self):
-        return f"UrlQuery({self.toString()!r})"
+        return f"{type(self).__name__}({self.toString()!r})"
 
     def __str__(self):
         return self.toString()

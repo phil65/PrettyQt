@@ -10,7 +10,7 @@ from prettyqt import core
 class Polygon(QtGui.QPolygon):
     def __repr__(self):
         points_str = ", ".join([repr(i) for i in self])
-        return f"Polygon({points_str})"
+        return f"{type(self).__name__}({points_str})"
 
     def __iter__(self) -> Iterator[core.Point]:
         return iter(self[i] for i in range(self.size()))
@@ -51,7 +51,7 @@ class Polygon(QtGui.QPolygon):
         return type(self), (), self.__getstate__()
 
     def __getstate__(self):
-        return core.DataStream.create_bytearray(self)
+        return bytes(self)
 
     def __setstate__(self, ba):
         core.DataStream.write_bytearray(ba, self)

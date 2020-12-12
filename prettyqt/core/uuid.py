@@ -34,6 +34,9 @@ class Uuid(QtCore.QUuid):
     def __bool__(self):
         return not self.isNull()
 
+    def __reduce__(self):
+        return (self.__class__, (self.toString(),))
+
     def get_variant(self) -> str:
         return VARIANTS.inverse[self.variant()]
 

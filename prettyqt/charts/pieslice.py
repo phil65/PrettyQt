@@ -22,7 +22,7 @@ QtCharts.QPieSlice.__bases__ = (core.Object,)
 
 class PieSlice(QtCharts.QPieSlice):
     def __repr__(self):
-        return f"PieSlice({self.label()!r}, {self.value()})"
+        return f"{type(self).__name__}({self.label()!r}, {self.value()})"
 
     def set_label_position(self, position: LabelPositionStr):
         """Set the label position.

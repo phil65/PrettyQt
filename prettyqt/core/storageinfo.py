@@ -22,7 +22,7 @@ class StorageInfo(QtCore.QStorageInfo):
         return self.isValid()
 
     def __repr__(self):
-        return f"StorageInfo({self.rootPath()!r})"
+        return f"{type(self).__name__}({self.rootPath()!r})"
 
     def get_device(self) -> str:
         return bytes(self.device()).decode()

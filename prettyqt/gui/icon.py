@@ -64,7 +64,7 @@ class Icon(QtGui.QIcon):
 
     def __getstate__(self):
         pixmap = self.pixmap(256, 256)
-        return core.DataStream.create_bytearray(pixmap)
+        return bytes(core.DataStream.create_bytearray(pixmap))
 
     def __setstate__(self, ba):
         px = QtGui.QPixmap()

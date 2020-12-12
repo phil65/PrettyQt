@@ -5,7 +5,7 @@ from qtpy import QtCore
 
 class SizeF(QtCore.QSizeF):
     def __repr__(self):
-        return f"SizeF({self.width()}, {self.height()})"
+        return f"{type(self).__name__}({self.width()}, {self.height()})"
 
     def __getitem__(self, index) -> float:
         return (self.width(), self.height())[index]

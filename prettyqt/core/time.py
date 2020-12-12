@@ -4,7 +4,7 @@ from qtpy import QtCore
 class Time(QtCore.QTime):
     def __repr__(self):
         template = super().__repr__().split("(")[1]
-        return f"Time({template}"
+        return f"{type(self).__name__}({template}"
 
     def __str__(self):
         return self.toString()

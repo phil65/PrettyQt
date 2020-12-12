@@ -19,7 +19,7 @@ TRANSFORMATION_TYPE = bidict(
 
 class Transform(QtGui.QTransform):
     def __getstate__(self):
-        return core.DataStream.create_bytearray(self)
+        return bytes(self)
 
     def __repr__(self):
         return (

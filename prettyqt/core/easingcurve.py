@@ -56,6 +56,9 @@ class EasingCurve(QtCore.QEasingCurve):
     def __getitem__(self, value: float) -> float:
         return self.valueForProgress(value)
 
+    def __repr__(self):
+        return f"{type(self).__name__}({self.get_type()!r})"
+
     def set_custom_type(self, method: Callable[[float], float]):
         self.setCustomType(method)
 

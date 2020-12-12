@@ -10,7 +10,7 @@ QtGui.QIntValidator.__bases__ = (gui.Validator,)
 
 class IntValidator(QtGui.QIntValidator):
     def __repr__(self):
-        return f"IntValidator({self.bottom()}, {self.top()})"
+        return f"{type(self).__name__}({self.bottom()}, {self.top()})"
 
     def __getstate__(self):
         return dict(bottom=self.bottom(), top=self.top())

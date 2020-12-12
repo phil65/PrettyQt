@@ -24,7 +24,7 @@ class FontChooserButton(widgets.Widget):
         layout += self.button
 
     def __repr__(self):
-        return f"FontChooserButton({self._current_font})"
+        return f"{type(self).__name__}({self._current_font})"
 
     def serialize_fields(self):
         return dict(font=self._current_font)

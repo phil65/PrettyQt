@@ -8,7 +8,7 @@ elif PYSIDE2:
 
 class BluetoothAddress(QtBluetooth.QBluetoothAddress):
     def __repr__(self):
-        return f"BluetoothAddress({self.toString()!r})"
+        return f"{type(self).__name__}({self.toString()!r})"
 
     def __bool__(self):
         return not self.isNull()

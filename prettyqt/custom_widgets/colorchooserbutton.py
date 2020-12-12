@@ -28,7 +28,7 @@ class ColorChooserButton(widgets.Widget):
             self.set_color(color)
 
     def __repr__(self):
-        return f"ColorChooserButton({self.current_color})"
+        return f"{type(self).__name__}({self.current_color})"
 
     def serialize_fields(self):
         return dict(color=self.current_color, enabled=self.isEnabled())

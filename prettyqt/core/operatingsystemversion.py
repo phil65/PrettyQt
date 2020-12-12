@@ -34,6 +34,23 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
             micro = -1
         super().__init__(typ, major, minor, micro)
 
+    def __repr__(self):
+        return (
+            f"{type(self).__name__}({self.get_type()!r}, {self.majorVersion()}, "
+            f"{self.minorVersion()}, {self.microVersion()})"
+        )
+
+    def __reduce__(self):
+        return (
+            self.__class__,
+            (
+                self.get_type(),
+                self.majorVersion(),
+                self.minorVersion(),
+                self.microVersion(),
+            ),
+        )
+
     def get_type(self) -> OsTypeStr:
         """Get current os type.
 
@@ -49,5 +66,5 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
 
 
 if __name__ == "__main__":
-    matcher = OperatingSystemVersion("android", 11)
-    print(repr(matcher))
+    version = OperatingSystemVersion("android", 11)
+    print(repr(version))

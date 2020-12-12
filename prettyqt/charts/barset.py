@@ -17,7 +17,7 @@ class BarSet(QtCharts.QBarSet):
         self.replace(index, value)
 
     def __repr__(self):
-        return f"BarSet({self.label()!r})"
+        return f"{type(self).__name__}({self.label()!r})"
 
     def get_pen(self) -> gui.Pen:
         return gui.Pen(self.pen())
