@@ -1,5 +1,5 @@
 import contextlib
-from typing import Optional
+from typing import Optional, Literal
 
 from qtpy import QtGui, QtWidgets
 
@@ -8,17 +8,21 @@ from prettyqt.gui import textcursor
 from prettyqt.utils import bidict, InvalidParamError
 
 
-WRAP_MODES = bidict(
+WRAP_MODE = bidict(
     none=QtGui.QTextOption.NoWrap,
     word=QtGui.QTextOption.WordWrap,
     anywhere=QtGui.QTextOption.WrapAnywhere,
     boundary_or_anywhere=QtGui.QTextOption.WrapAtWordBoundaryOrAnywhere,
 )
 
-LINE_WRAP_MODES = bidict(
+WrapModeStr = Literal["none", "word", "anywhere", "boundary_or_anywhere"]
+
+LINE_WRAP_MODE = bidict(
     none=QtWidgets.QPlainTextEdit.NoWrap,
     widget_width=QtWidgets.QPlainTextEdit.WidgetWidth,
 )
+
+LineWrapModeStr = Literal["none", "widget_width"]
 
 MOVE_OPERATIONS = textcursor.MOVE_OPERATIONS
 MOVE_MODES = textcursor.MOVE_MODES
@@ -136,10 +140,8 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
         self.setExtraSelections(extra_selections)
 
-    def set_wrap_mode(self, mode: str):
+    def set_wrap_mode(self, mode: WrapModeStr):
         """Set word wrap mode.
-
-        Allowed values are "none", "word", "anywhere", "boundary_or_anywhere"
 
         Args:
             mode: word wrap mode to use
@@ -147,14 +149,20 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         Raises:
             InvalidParamError: wrap mode does not exist
         """
-        if mode not in WRAP_MODES:
-            raise InvalidParamError(mode, WRAP_MODES)
-        self.setWordWrapMode(WRAP_MODES[mode])
+        if mode not in WRAP_MODE:
+            raise InvalidParamError(mode, WRAP_MODE)
+        self.setWordWrapMode(WRAP_MODE[mode])
 
-    def set_line_wrap_mode(self, mode: str):
+    def get_wrap_mode(self) -> str:
+        """Get the current word wrap mode.
+
+        Returns:
+            Word wrap mode
+        """
+        return WRAP_MODE.inverse[self.wordWrapMode()]
+
+    def set_line_wrap_mode(self, mode: LineWrapModeStr):
         """Set line wrap mode.
-
-        Allowed values are "none" and "widget width"
 
         Args:
             mode: line wrap mode to use
@@ -162,9 +170,17 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         Raises:
             InvalidParamError: line wrap mode does not exist
         """
-        if mode not in LINE_WRAP_MODES:
-            raise InvalidParamError(mode, LINE_WRAP_MODES)
-        self.setLineWrapMode(LINE_WRAP_MODES[mode])
+        if mode not in LINE_WRAP_MODE:
+            raise InvalidParamError(mode, LINE_WRAP_MODE)
+        self.setLineWrapMode(LINE_WRAP_MODE[mode])
+
+    def get_line_wrap_mode(self) -> LineWrapModeStr:
+        """Get the current wrap mode.
+
+        Returns:
+            Wrap mode
+        """
+        return LINE_WRAP_MODE.inverse[self.lineWrapMode()]
 
     def _on_value_change(self):
         self.value_changed.emit()

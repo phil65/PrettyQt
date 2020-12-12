@@ -840,9 +840,11 @@ def test_plaintextedit(qtbot):
     widget.set_wrap_mode("anywhere")
     with pytest.raises(InvalidParamError):
         widget.set_wrap_mode("test")
+    assert widget.get_wrap_mode() == "anywhere"
     widget.set_line_wrap_mode("widget_width")
     with pytest.raises(InvalidParamError):
         widget.set_line_wrap_mode("test")
+    assert widget.get_line_wrap_mode() == "widget_width"
     assert widget.get_value() == "test"
     widget += "append"
     widget.set_regex_validator("[0-9]")
