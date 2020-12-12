@@ -68,7 +68,7 @@ python -m pip install -e .
 ## Documentation
 The official documentation is hosted on Github Pages: https://phil65.github.io/PrettyQt/
 
-## Contributing to pandas [![Open Source Helpers](https://www.codetriage.com/phil65/prettyqt/badges/users.svg)](https://www.codetriage.com/phil65/prettyqt)
+## Contributing to prettyqt [![Open Source Helpers](https://www.codetriage.com/phil65/prettyqt/badges/users.svg)](https://www.codetriage.com/phil65/prettyqt)
 
 All contributions, bug reports, bug fixes, documentation improvements, enhancements, and ideas are welcome.
 
