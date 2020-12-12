@@ -13,9 +13,11 @@ class StackedLayout(QtWidgets.QStackedLayout):
         return dict(items=self.get_children())
 
     def __setstate__(self, state):
-        self.__init__()
         for item in state["items"]:
             self.add(item)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
         self.add(other)

@@ -34,10 +34,12 @@ class BoxLayout(QtWidgets.QBoxLayout):
         return dict(items=self.get_children(), direction=self.get_direction())
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_direction(state["direction"])
         for item in state["items"]:
             self.add(item)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
         self.add(other)

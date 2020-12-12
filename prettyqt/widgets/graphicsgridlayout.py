@@ -50,8 +50,10 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
                     positions.append((row, col))
         return dict(widgets=items, positions=positions)
 
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
     def __setstate__(self, state):
-        self.__init__()
         for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
             x, y, w, h = pos
             self[x : x + w - 1, y : y + h - 1] = item

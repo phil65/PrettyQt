@@ -25,7 +25,6 @@ class Dial(QtWidgets.QDial):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_range(*state["range"])
         self.set_value(state["value"])
         self.setToolTip(state.get("tool_tip", ""))
@@ -39,6 +38,9 @@ class Dial(QtWidgets.QDial):
         self.setNotchTarget(state["notch_target"])
         self.setNotchesVisible(state["notches_visible"])
         self.setWrapping(state["wrapping"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
 
 if __name__ == "__main__":

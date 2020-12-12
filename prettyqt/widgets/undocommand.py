@@ -12,6 +12,8 @@ class UndoCommand(QtWidgets.QUndoCommand):
         return dict(children=[self.child(i) for i in range(self.childCount())])
 
     def __setstate__(self, state):
-        self.__init__()
         for c in state["children"]:
             c.setParent(self)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()

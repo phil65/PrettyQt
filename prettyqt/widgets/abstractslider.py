@@ -38,7 +38,6 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_range(*state["range"])
         self.set_value(state["value"])
         self.setSingleStep(state["single_step"])
@@ -46,6 +45,9 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         self.setTracking(state["has_tracking"])
         self.setInvertedControls(state["inverted_controls"])
         self.setInvertedAppearance(state["inverted_appearance"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def is_horizontal(self) -> bool:
         """Check if silder is horizontal.

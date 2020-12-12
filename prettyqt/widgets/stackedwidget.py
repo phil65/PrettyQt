@@ -12,9 +12,11 @@ QtWidgets.QStackedWidget.__bases__ = (widgets.Frame,)
 
 class StackedWidget(QtWidgets.QStackedWidget):
     def __setstate__(self, state):
-        self.__init__()
         for item in state["items"]:
             self.add(item)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __add__(self, other: QtWidgets.QWidget) -> StackedWidget:
         if not isinstance(other, QtWidgets.QWidget):

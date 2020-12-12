@@ -97,16 +97,18 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
             italic=self.italic(),
         )
 
-    def serialize(self):
-        return self.__getstate__()
-
     def __setstate__(self, state):
-        self.__init__()
         self.setFamily(state["family"])
         if state["pointsize"] > -1:
             self.setPointSize(state["pointsize"])
         self.setWeight(state["weight"])
         self.setItalic(state["italic"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
+    def serialize(self):
+        return self.__getstate__()
 
     @property
     def metrics(self):

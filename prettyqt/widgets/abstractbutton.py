@@ -20,7 +20,6 @@ class AbstractButton(QtWidgets.QAbstractButton):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.setText(state["text"])
         self.set_id(state.get("object_name", ""))
         self.set_icon(state["icon"])
@@ -29,6 +28,9 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.setCheckable(state["checkable"])
         self.setToolTip(state.get("tool_tip", ""))
         self.setStatusTip(state.get("status_tip", ""))
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def set_icon(self, icon: gui.icon.IconType):
         """Set the icon for the button.

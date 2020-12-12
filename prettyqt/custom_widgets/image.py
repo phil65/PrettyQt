@@ -3,7 +3,7 @@ from __future__ import annotations
 import pathlib
 from typing import Union, Optional
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
 from prettyqt import gui, widgets
 
@@ -19,25 +19,7 @@ class Image(widgets.Label):
             self.set_image(path)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.text()!r})"
-
-    def __bool__(self):
-        return not self.isNull()
-
-    def serialize_fields(self):
-        return dict(
-            text=self.text(),
-            scaled_contents=self.hasScaledContents(),
-            margin=self.margin(),
-            alignment=int(self.alignment()),
-        )
-
-    def __setstate__(self, state):
-        self.__init__()
-        self.setText(state.get("text", ""))
-        self.setMargin(state.get("margin", 0))
-        self.setAlignment(QtCore.Qt.Alignment(state.get("alignment")))
-        self.setScaledContents(state["scaled_contents"])
+        return f"{type(self).__name__}()"
 
     def set_image(self, path: Union[pathlib.Path, str], width: int = 300):
         self.setScaledContents(True)
@@ -63,4 +45,5 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = Image("https://act-crm-addon.de/wp-content/uploads/2018/12/test.png")
     widget.show()
+    bool(widget)
     app.main_loop()

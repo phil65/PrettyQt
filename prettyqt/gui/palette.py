@@ -68,8 +68,10 @@ class Palette(QtGui.QPalette):
         return bytes(self)
 
     def __setstate__(self, ba):
-        self.__init__()
         core.DataStream.write_bytearray(ba, self)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __getitem__(self, index: RoleStr) -> gui.Color:
         return self.get_color(index)

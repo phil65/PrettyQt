@@ -24,7 +24,6 @@ class BaseDialog(QtWidgets.QDialog):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_title(state["window_title"])
         self.set_icon(state["icon"])
         if state["layout"]:
@@ -35,6 +34,9 @@ class BaseDialog(QtWidgets.QDialog):
             self.showMaximized()
         self.resize(*state["size"])
         self.box = self.layout()
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def keyPressEvent(self, e):
         if e.key() == QtCore.Qt.Key_Escape:

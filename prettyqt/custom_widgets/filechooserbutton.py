@@ -55,9 +55,11 @@ class FileChooserButton(widgets.Widget):
         return dict(path=self.path, extensions=self.extensions, enabled=self.isEnabled())
 
     def __setstate__(self, state):
-        self.__init__(state["extensions"])
         self.set_path(state["path"])
         self.set_enabled(state.get("enabled", True))
+
+    def __reduce__(self):
+        return type(self), (self.extensions,), self.__getstate__()
 
     @core.Slot()
     def open_file(self):

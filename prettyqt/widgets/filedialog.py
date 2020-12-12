@@ -78,7 +78,6 @@ class FileDialog(QtWidgets.QFileDialog):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_file_mode(state["file_mode"])
         self.set_accept_mode(state["accept_mode"])
         self.set_view_mode(state["view_mode"])
@@ -87,6 +86,9 @@ class FileDialog(QtWidgets.QFileDialog):
         self.setNameFilter(state["name_filter"])
         self.setDefaultSuffix(state["default_suffix"])
         self.setSupportedSchemes(state["supported_schemes"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def set_accept_mode(self, mode: AcceptModeStr):
         """Set accept mode.

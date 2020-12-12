@@ -62,7 +62,6 @@ class MainWindow(QtWidgets.QMainWindow):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_title(state["window_title"])
         self.set_icon(state["icon"])
         if state["central_widget"]:
@@ -72,6 +71,9 @@ class MainWindow(QtWidgets.QMainWindow):
             self.showMaximized()
         self.resize(*state["size"])
         self.box = self.layout()
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def set_widget(self, widget: Optional[QtWidgets.QWidget]):
         if widget is None:

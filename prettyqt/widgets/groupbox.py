@@ -44,13 +44,16 @@ class GroupBox(QtWidgets.QGroupBox):
         )
 
     def __setstate__(self, state):
-        self.__init__(state["title"])
+        self.setTitle(state["title"])
         self.set_layout(state["layout"])
         self.setCheckable(state["checkable"])
         self.setChecked(state.get("checked", False))
         self.setFlat(state["flat"])
         self.setToolTip(state.get("tool_tip", ""))
         # self.setAlignment(state["alignment"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def set_title(self, title: str):
         self.setTitle(title)

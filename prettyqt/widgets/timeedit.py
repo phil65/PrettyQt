@@ -23,12 +23,15 @@ class TimeEdit(QtWidgets.QTimeEdit):
         )
 
     def __setstate__(self, state):
-        self.__init__(state["time"])
+        self.setTime(state["time"])
         self.setEnabled(state.get("enabled", True))
         self.setDisplayFormat(state["display_format"])
         self.set_range(*state["range"])
         self.setToolTip(state.get("tool_tip", ""))
         self.setStatusTip(state.get("status_tip", ""))
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def set_range(
         self,

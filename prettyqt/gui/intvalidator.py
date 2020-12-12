@@ -15,8 +15,8 @@ class IntValidator(QtGui.QIntValidator):
     def __getstate__(self):
         return dict(bottom=self.bottom(), top=self.top())
 
-    def __setstate__(self, state):
-        self.__init__(state["bottom"], state["top"])
+    def __reduce__(self):
+        return type(self), (self.bottom(), self.top()), None
 
     def __eq__(self, other: object):
         if not isinstance(other, self.__class__):

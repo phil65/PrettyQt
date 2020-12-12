@@ -8,8 +8,10 @@ class Brush(QtGui.QBrush):
         return bytes(self)
 
     def __setstate__(self, ba):
-        self.__init__()
         core.DataStream.write_bytearray(ba, self)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)

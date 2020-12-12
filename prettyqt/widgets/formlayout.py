@@ -78,8 +78,10 @@ class FormLayout(QtWidgets.QFormLayout):
             positions.append(self.get_item_position(i))
         return dict(widgets=widget_list, positions=positions)
 
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
     def __setstate__(self, state):
-        self.__init__()
         for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
             self.set_widget(item, pos[0], pos[1])
 

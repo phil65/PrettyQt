@@ -33,9 +33,11 @@ class FontComboBox(QtWidgets.QFontComboBox):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_font_filters(*state.get("font_filters", []))
         self.setCurrentFont(state["current_font"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def set_font_filters(self, *filters: str):
         """Set font filters.

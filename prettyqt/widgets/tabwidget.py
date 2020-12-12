@@ -70,7 +70,6 @@ class TabWidget(QtWidgets.QTabWidget):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.setTabBar(state["tabbar"])
         self.setDocumentMode(state.get("document_mode", False))
         self.setMovable(state.get("movable", False))
@@ -81,6 +80,9 @@ class TabWidget(QtWidgets.QTabWidget):
             self.setTabToolTip(i, tooltip)
             self.setTabWhatsThis(i, whatsthis)
         self.setCurrentIndex(state.get("index", 0))
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def set_document_mode(self, state: bool = True) -> None:
         self.setDocumentMode(state)

@@ -23,7 +23,7 @@ CHILD_INDICATOR_POLICY = bidict(
 
 class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
     def __repr__(self):
-        return "TreeWidgetItem()"
+        return f"{type(self).__name__}()"
 
     def serialize_fields(self):
         icon = self.icon(0)
@@ -40,8 +40,10 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         return bytes(self)
 
     def __setstate__(self, ba):
-        self.__init__()
         core.DataStream.write_bytearray(ba, self)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)

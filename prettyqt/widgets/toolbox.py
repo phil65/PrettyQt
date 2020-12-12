@@ -35,12 +35,14 @@ class ToolBox(QtWidgets.QToolBox):
         return dict(items=children, current_index=self.currentIndex())
 
     def __setstate__(self, state):
-        self.__init__()
         for i, item in enumerate(state["items"]):
             self.addItem(item["widget"], item["icon"], item["text"])
             self.setItemEnabled(i, item["enabled"])
             self.setItemToolTip(i, item["tool_tip"])
         self.setCurrentIndex(state["current_index"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.get_children())

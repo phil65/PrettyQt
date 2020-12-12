@@ -13,11 +13,13 @@ class Image(QtGui.QImage):
         return bytes(self)
 
     def __setstate__(self, ba):
-        self.__init__()
         core.DataStream.write_bytearray(ba, self)
 
     def __setitem__(self, index: Tuple[int, int], value):
         self.setPixel(index[0], index[1], value)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __getitem__(self, index: Tuple[int, int]):
         return self.pixel(index[0], index[1])

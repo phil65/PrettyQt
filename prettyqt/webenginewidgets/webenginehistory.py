@@ -33,6 +33,9 @@ class WebEngineHistory:
     def __getstate__(self):
         return core.DataStream.create_bytearray(self.history)
 
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
     def __setstate__(self, ba):
         history = None
         core.DataStream.write_bytearray(ba, history)

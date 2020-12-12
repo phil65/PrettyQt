@@ -44,12 +44,14 @@ class Splitter(QtWidgets.QSplitter):
         )
 
     def __setstate__(self, state):
-        self.__init__(state["orientation"])
         for item in state["items"]:
             self.addWidget(item)
         self.setHandleWidth(state["handle_width"])
         self.setChildrenCollapsible(state["children_collapsible"])
         self.setOpaqueResize(state["opaque_resize"])
+
+    def __reduce__(self):
+        return type(self), (self.orientation(),), self.__getstate__()
 
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.get_children())

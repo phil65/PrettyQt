@@ -10,11 +10,8 @@ class DoubleValidator(QtGui.QDoubleValidator):
     def __repr__(self):
         return f"{type(self).__name__}({self.bottom()}, {self.top()}, {self.decimals()})"
 
-    def __getstate__(self):
-        return dict(bottom=self.bottom(), top=self.top(), decimals=self.decimals())
-
-    def __setstate__(self, state):
-        self.__init__(state["bottom"], state["top"], state["decimals"])
+    def __reduce__(self):
+        return type(self), (self.bottom(), self.top(), self.decimals()), None
 
     def __eq__(self, other: object):
         if not isinstance(other, self.__class__):
@@ -24,6 +21,9 @@ class DoubleValidator(QtGui.QDoubleValidator):
             and self.top() == other.top()
             and self.decimals() == other.decimals()
         )
+
+    def serialize_fields(self):
+        return dict(bottom=self.bottom(), top=self.top(), decimals=self.decimals())
 
 
 if __name__ == "__main__":

@@ -14,8 +14,10 @@ class RegExpValidator(QtGui.QRegExpValidator):
         return dict(regexp=core.RegExp(self.regExp()))
 
     def __setstate__(self, state):
-        self.__init__()
         self.setRegExp(state["regexp"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __eq__(self, other: object):
         if not isinstance(other, self.__class__):

@@ -86,7 +86,6 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_text(state.get("text", ""))
         self.set_enabled(state.get("enabled", True))
         self.set_shortcut(state["shortcut"])
@@ -96,6 +95,9 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         self.set_priority(state["priority"])
         self.set_shortcut_context(state["shortcut_context"])
         self.set_checkable(state["checkable"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def set_text(self, text: str):
         self.setText(text)

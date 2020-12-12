@@ -21,9 +21,11 @@ class ColorDialog(QtWidgets.QColorDialog):
         return dict(color=self.current_color())
 
     def __setstate__(self, state):
-        self.__init__()
         if state["color"]:
             self.setCurrentColor(state["color"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     @classmethod
     def get_color(

@@ -34,10 +34,12 @@ class ColorChooserButton(widgets.Widget):
         return dict(color=self.current_color, enabled=self.isEnabled())
 
     def __setstate__(self, state):
-        self.__init__()
         if state["color"]:
             self.set_color(state["color"])
         self.setEnabled(state.get("enabled", True))
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     @core.Slot()
     def choose_color(self):

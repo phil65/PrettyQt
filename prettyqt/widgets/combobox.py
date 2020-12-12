@@ -77,7 +77,6 @@ class ComboBox(QtWidgets.QComboBox):
         return dct
 
     def __setstate__(self, state):
-        self.__init__()
         for label, data, icon in state["items"]:
             self.add(label, data, icon=icon)
         self.set_id(state.get("object_name", ""))
@@ -91,6 +90,9 @@ class ComboBox(QtWidgets.QComboBox):
         self.setMinimumContentsLength(state["min_contents_length"])
         self.setDuplicatesEnabled(state["duplicates_enabled"])
         self.setFrame(state["has_frame"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __len__(self) -> int:
         return self.count()

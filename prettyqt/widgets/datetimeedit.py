@@ -45,6 +45,17 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.setCalendarPopup(True)
         self.dateTimeChanged.connect(self.datetime_changed)
 
+    def __setstate__(self, state):
+        self.setDateTime(state["datetime"])
+        self.setEnabled(state.get("enabled", True))
+        self.set_range(*state["range"])
+        self.setDisplayFormat(state["display_format"])
+        self.setToolTip(state.get("tool_tip", ""))
+        self.setStatusTip(state.get("status_tip", ""))
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
     def datetime_changed(self, date):
         dt = self.get_datetime()
         self.value_changed.emit(dt)
@@ -56,15 +67,6 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
             range=(self.min_datetime(), self.max_datetime()),
             display_format=self.displayFormat(),
         )
-
-    def __setstate__(self, state):
-        self.__init__(state["datetime"])
-        self.setDateTime(state["datetime"])
-        self.setEnabled(state.get("enabled", True))
-        self.set_range(*state["range"])
-        self.setDisplayFormat(state["display_format"])
-        self.setToolTip(state.get("tool_tip", ""))
-        self.setStatusTip(state.get("status_tip", ""))
 
     def get_section_text(self, section: SectionsStr) -> str:
         if section not in SECTIONS:

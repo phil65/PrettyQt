@@ -24,10 +24,12 @@ class TextEdit(QtWidgets.QTextEdit):
         return dict(text=self.text(), font=gui.Font(self.font()))
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_text(state["text"])
         self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __add__(self, other: str) -> TextEdit:
         if isinstance(other, str):

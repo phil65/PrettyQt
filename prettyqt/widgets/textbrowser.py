@@ -23,10 +23,12 @@ class TextBrowser(QtWidgets.QTextBrowser):
         return dict(text=self.text(), font=gui.Font(self.font()))
 
     def __setstate__(self, state):
-        self.__init__()
         self.setPlainText(state["text"])
         self.setEnabled(state.get("enabled", True))
         self.setFont(state["font"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     # def dragEnterEvent(self, event):
     #     u = event.mimeData().urls()

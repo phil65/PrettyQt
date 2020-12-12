@@ -43,9 +43,11 @@ class StandardItemModel(QtGui.QStandardItemModel):
         return dict(items=self.get_children())
 
     def __setstate__(self, state):
-        self.__init__()
         for item in state["items"]:
             self.appendRow(item)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __add__(self, other: Union[str, QtGui.QStandardItem]) -> StandardItemModel:
         if isinstance(other, (QtGui.QStandardItem, str)):

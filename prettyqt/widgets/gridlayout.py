@@ -50,10 +50,12 @@ class GridLayout(QtWidgets.QGridLayout):
         return dict(widgets=widgets, positions=positions)
 
     def __setstate__(self, state):
-        self.__init__()
         for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
             x, y, w, h = pos
             self[x : x + w - 1, y : y + h - 1] = item
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __iter__(self) -> Iterator[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
         return iter(self[i] for i in range(self.count()) if self[i] is not None)

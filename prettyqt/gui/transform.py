@@ -23,12 +23,15 @@ class Transform(QtGui.QTransform):
 
     def __repr__(self):
         return (
-            f"Transform({self.m11()}, {self.m12()}, {self.m13()}, {self.m21()}, "
-            f"{self.m22()}, {self.m23()}, {self.m31()}, {self.m32()}, {self.m33()})"
+            f"{type(self).__name__}({self.m11()}, {self.m12()}, {self.m13()}, "
+            f"{self.m21()}, {self.m22()}, {self.m23()}, {self.m31()}, {self.m32()}, "
+            f"{self.m33()})"
         )
 
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
     def __setstate__(self, ba):
-        self.__init__()
         core.DataStream.write_bytearray(ba, self)
 
     def __getitem__(self, value: Tuple[int, int]) -> float:

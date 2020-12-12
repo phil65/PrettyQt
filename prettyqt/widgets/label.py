@@ -74,7 +74,6 @@ class Label(QtWidgets.QLabel):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.setText(state.get("text", ""))
         self.setIndent(state.get("indent", -1))
         self.setMargin(state.get("margin", 0))
@@ -85,6 +84,9 @@ class Label(QtWidgets.QLabel):
         self.setAlignment(QtCore.Qt.Alignment(state.get("alignment")))
         self.setScaledContents(state["scaled_contents"])
         self.setWordWrap(state["word_wrap"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def allow_links(self) -> Label:
         # self.setText("<a href=\"http://example.com/\">Click Here!</a>")

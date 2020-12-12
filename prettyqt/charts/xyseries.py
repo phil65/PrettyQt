@@ -24,8 +24,10 @@ class XYSeries(QtCharts.QXYSeries):
         self.remove(index)
 
     def __setstate__(self, state):
-        self.__init__()
-        super().append(state["points"])
+        self.append(state["points"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def __add__(self, other: QtCore.QPointF) -> XYSeries:
         self.append(other)

@@ -43,7 +43,6 @@ class Slider(QtWidgets.QSlider):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.set_range(*state["range"])
         self.set_value(state["value"])
         self.setToolTip(state.get("tool_tip", ""))
@@ -56,6 +55,9 @@ class Slider(QtWidgets.QSlider):
         self.setInvertedAppearance(state["inverted_appearance"])
         self.set_tick_position(state["tick_position"])
         self.setTickInterval(state["tick_interval"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def set_tick_position(self, position: TickPositionAllStr):
         """Set the tick position for the slider.

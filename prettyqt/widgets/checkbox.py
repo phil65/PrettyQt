@@ -31,16 +31,7 @@ class CheckBox(QtWidgets.QCheckBox):
         self.stateChanged.connect(self.value_changed)
         self.setChecked(checked)
 
-    def serialize_fields(self):
-        return dict(
-            checkable=self.isCheckable(),
-            checkstate=self.get_checkstate(),
-            is_tristate=self.isTristate(),
-            text=self.text(),
-        )
-
     def __setstate__(self, state):
-        self.__init__()
         self.set_id(state.get("object_name", ""))
         self.setCheckable(state["checkable"])
         self.setTristate(state.get("is_tristate", False))
@@ -50,8 +41,19 @@ class CheckBox(QtWidgets.QCheckBox):
         self.setToolTip(state.get("tool_tip", ""))
         self.setStatusTip(state.get("status_tip", ""))
 
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
     def __bool__(self):
         return self.isChecked()
+
+    def serialize_fields(self):
+        return dict(
+            checkable=self.isCheckable(),
+            checkstate=self.get_checkstate(),
+            is_tristate=self.isTristate(),
+            text=self.text(),
+        )
 
     @property
     def is_on(self) -> bool:

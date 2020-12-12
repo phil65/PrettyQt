@@ -66,7 +66,6 @@ class TabBar(QtWidgets.QTabBar):
         )
 
     def __setstate__(self, state):
-        self.__init__()
         self.setDocumentMode(state.get("document_mode", False))
         self.setMovable(state.get("movable", False))
         # self.setShape(state.get("shape", "rounded"))
@@ -74,6 +73,9 @@ class TabBar(QtWidgets.QTabBar):
         self.setDrawBase(state.get("draw_base"))
         self.set_elide_mode(state.get("elide_mode"))
         self.setCurrentIndex(state.get("index", 0))
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     #  Send the on_detach when a tab is double clicked
     def mouseDoubleClickEvent(self, event):

@@ -43,6 +43,16 @@ class ListWidget(QtWidgets.QListWidget):
     def __len__(self) -> int:
         return self.count()
 
+    def __setstate__(self, state):
+        self.set_selection_mode(state["selection_mode"])
+        self.setSortingEnabled(state["sorting_enabled"])
+        self.setCurrentRow(state["current_row"])
+        for item in state["items"]:
+            self.addItem(item)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
     def serialize_fields(self):
         return dict(
             items=self.get_children(),
@@ -50,14 +60,6 @@ class ListWidget(QtWidgets.QListWidget):
             sorting_enabled=self.isSortingEnabled(),
             current_row=self.currentRow(),
         )
-
-    def __setstate__(self, state):
-        self.__init__()
-        self.set_selection_mode(state["selection_mode"])
-        self.setSortingEnabled(state["sorting_enabled"])
-        self.setCurrentRow(state["current_row"])
-        for item in state["items"]:
-            self.addItem(item)
 
     def sort(self, reverse: bool = False):
         order = QtCore.Qt.DescendingOrder if reverse else QtCore.Qt.AscendingOrder
