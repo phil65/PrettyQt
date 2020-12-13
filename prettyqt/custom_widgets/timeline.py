@@ -56,9 +56,8 @@ class Timeline(widgets.Widget):
         self.setGeometry(300, 300, self.length, 200)
 
         # Set Background
-        pal = gui.Palette()
-        pal.set_color("background", self.background_color)
-        self.setPalette(pal)
+        with self.edit_palette() as pal:
+            pal.set_color("background", self.background_color)
 
     def __len__(self):
         return len(self.video_samples)
@@ -70,9 +69,8 @@ class Timeline(widgets.Widget):
         self.video_samples[index] = value
 
     def __add__(self, other: VideoSample) -> Timeline:
-        if isinstance(other, (VideoSample)):
-            self.add(other)
-            return self
+        self.add(other)
+        return self
 
     def add_sample(
         self,
