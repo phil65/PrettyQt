@@ -4018,7 +4018,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/bytearray.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">),))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">),)</span>
 </code></pre>
 </div>
 </details>
@@ -4332,7 +4332,6 @@ get_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return byte order.</p>
-<p>possible values are "big_endian", "little_endian"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4343,7 +4342,7 @@ get_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>bool</code></td>
+<td><code>Literal['big_endian', 'little_endian']</code></td>
 <td>
 <p>byte order</p>
 </td>
@@ -4353,10 +4352,8 @@ get_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ByteOrderStr</span><span class="p">:</span>
     <span class="sd">"""Return byte order.</span>
-
-<span class="sd">    possible values are "big_endian", "little_endian"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        byte order</span>
@@ -4377,7 +4374,6 @@ get_float_precision<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return floating point precision.</p>
-<p>possible values are "single", "double"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4388,7 +4384,7 @@ get_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>bool</code></td>
+<td><code>Literal['single', 'double']</code></td>
 <td>
 <p>floating point precision</p>
 </td>
@@ -4398,10 +4394,8 @@ get_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatPrecisionStr</span><span class="p">:</span>
     <span class="sd">"""Return floating point precision.</span>
-
-<span class="sd">    possible values are "single", "double"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        floating point precision</span>
@@ -4422,7 +4416,6 @@ set_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set byte order.</p>
-<p>valid values are: "big_endian", "little_endian"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -4436,7 +4429,7 @@ set_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>order</code></td>
-<td><code>str</code></td>
+<td><code>Literal['big_endian', 'little_endian']</code></td>
 <td>
 <p>byte order to use</p>
 </td>
@@ -4464,10 +4457,8 @@ set_byte_order<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="n">ByteOrderStr</span><span class="p">):</span>
     <span class="sd">"""Set byte order.</span>
-
-<span class="sd">    valid values are: "big_endian", "little_endian"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        order: byte order to use</span>
@@ -4493,7 +4484,6 @@ set_float_precision<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set floating point precision.</p>
-<p>valid values are: "single", "double"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -4507,7 +4497,7 @@ set_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>precision</code></td>
-<td><code>str</code></td>
+<td><code>Literal['single', 'double']</code></td>
 <td>
 <p>floating point precision</p>
 </td>
@@ -4535,10 +4525,8 @@ set_float_precision<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">FloatPrecisionStr</span><span class="p">):</span>
     <span class="sd">"""Set floating point precision.</span>
-
-<span class="sd">    valid values are: "single", "double"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        precision: floating point precision</span>
@@ -4595,7 +4583,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/date.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -4642,7 +4630,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/datetime.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -4658,7 +4646,6 @@ get_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current time specification.</p>
-<p>Possible values: "local_time", "utc", "offset_from_utc", "timezone"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4669,7 +4656,7 @@ get_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['local_time', 'utc', 'offset_from_utc', 'timezone']</code></td>
 <td>
 <p>time specification</p>
 </td>
@@ -4679,15 +4666,13 @@ get_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datetime.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_time_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_time_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TimeSpecStr</span><span class="p">:</span>
     <span class="sd">"""Return current time specification.</span>
-
-<span class="sd">    Possible values: "local_time", "utc", "offset_from_utc", "timezone"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        time specification</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TIME_SPECS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timeSpec</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TIME_SPEC</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timeSpec</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4703,7 +4688,6 @@ set_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set the time specification.</p>
-<p>Allowed values are "local_time", "utc", "offset_from_utc", "timezone"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -4717,7 +4701,7 @@ set_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>spec</code></td>
-<td><code>str</code></td>
+<td><code>Literal['local_time', 'utc', 'offset_from_utc', 'timezone']</code></td>
 <td>
 <p>time specification to use</p>
 </td>
@@ -4745,10 +4729,8 @@ set_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datetime.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_time_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_time_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="n">TimeSpecStr</span><span class="p">):</span>
     <span class="sd">"""Set the time specification.</span>
-
-<span class="sd">    Allowed values are "local_time", "utc", "offset_from_utc", "timezone"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        spec: time specification to use</span>
@@ -4756,9 +4738,9 @@ set_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: time specification does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">spec</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TIME_SPECS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">TIME_SPECS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTimeSpec</span><span class="p">(</span><span class="n">TIME_SPECS</span><span class="p">[</span><span class="n">spec</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">spec</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TIME_SPEC</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">TIME_SPEC</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTimeSpec</span><span class="p">(</span><span class="n">TIME_SPEC</span><span class="p">[</span><span class="n">spec</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -4938,16 +4920,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current easing curve type.</p>
-<p>Possible values: "linear", "in_quad", "out_quad", "in_out_quad",
-"out_in_quad", "in_cubic", "out_cubic", "in_out_cubic", "out_in_cubic",
-"in_quart", "out_quart", "in_out_quart", "out_in_quart", "in_quint",
-"out_quint", "in_out_quint", "out_in_quint", "in_sine", "out_sine",
-"in_out_sine", "out_in_sine", "in_expo", "out_expo", "in_out_expo",
-"out_in_expo", "in_circ", "out_circ", "in_out_circ", "out_in_circ",
-"in_elastic", "out_elastic", "in_out_elastic", "out_in_elastic",
-"in_back", "out_back", "in_out_back", "out_in_back", "in_bounce",
-"out_bounce", "in_out_bounce", "out_in_bounce", "bezier_spline",
-"tcb_spline", "custom"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4958,7 +4930,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['linear', 'in_quad', 'out_quad', 'in_out_quad', 'out_in_quad', 'in_cubic', 'out_cubic', 'in_out_cubic', 'out_in_cubic', 'in_quart', 'out_quart', 'in_out_quart', 'out_in_quart', 'in_quint', 'out_quint', 'in_out_quint', 'out_in_quint', 'in_sine', 'out_sine', 'in_out_sine', 'out_in_sine', 'in_expo', 'out_expo', 'in_out_expo', 'out_in_expo', 'in_circ', 'out_circ', 'in_out_circ', 'out_in_circ', 'in_elastic', 'out_elastic', 'in_out_elastic', 'out_in_elastic', 'in_back', 'out_back', 'in_out_back', 'out_in_back', 'in_bounce', 'out_bounce', 'in_out_bounce', 'out_in_bounce', 'bezier_spline', 'tcb_spline', 'custom']</code></td>
 <td>
 <p>easing curve type</p>
 </td>
@@ -4968,24 +4940,13 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/easingcurve.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Get the current easing curve type.</span>
-
-<span class="sd">    Possible values: "linear", "in_quad", "out_quad", "in_out_quad",</span>
-<span class="sd">    "out_in_quad", "in_cubic", "out_cubic", "in_out_cubic", "out_in_cubic",</span>
-<span class="sd">    "in_quart", "out_quart", "in_out_quart", "out_in_quart", "in_quint",</span>
-<span class="sd">    "out_quint", "in_out_quint", "out_in_quint", "in_sine", "out_sine",</span>
-<span class="sd">    "in_out_sine", "out_in_sine", "in_expo", "out_expo", "in_out_expo",</span>
-<span class="sd">    "out_in_expo", "in_circ", "out_circ", "in_out_circ", "out_in_circ",</span>
-<span class="sd">    "in_elastic", "out_elastic", "in_out_elastic", "out_in_elastic",</span>
-<span class="sd">    "in_back", "out_back", "in_out_back", "out_in_back", "in_bounce",</span>
-<span class="sd">    "out_bounce", "in_out_bounce", "out_in_bounce", "bezier_spline",</span>
-<span class="sd">    "tcb_spline", "custom"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        easing curve type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -5001,16 +4962,6 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
       </h4>
 <div class="doc doc-contents ">
 <p>Set easing curve type.</p>
-<p>Valid values for modality: "linear", "in_quad", "out_quad", "in_out_quad",
-"out_in_quad", "in_cubic", "out_cubic", "in_out_cubic", "out_in_cubic",
-"in_quart", "out_quart", "in_out_quart", "out_in_quart", "in_quint",
-"out_quint", "in_out_quint", "out_in_quint", "in_sine", "out_sine",
-"in_out_sine", "out_in_sine", "in_expo", "out_expo", "in_out_expo",
-"out_in_expo", "in_circ", "out_circ", "in_out_circ", "out_in_circ",
-"in_elastic", "out_elastic", "in_out_elastic", "out_in_elastic",
-"in_back", "out_back", "in_out_back", "out_in_back", "in_bounce",
-"out_bounce", "in_out_bounce", "out_in_bounce", "bezier_spline",
-"tcb_spline", "custom"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5024,7 +4975,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['linear', 'in_quad', 'out_quad', 'in_out_quad', 'out_in_quad', 'in_cubic', 'out_cubic', 'in_out_cubic', 'out_in_cubic', 'in_quart', 'out_quart', 'in_out_quart', 'out_in_quart', 'in_quint', 'out_quint', 'in_out_quint', 'out_in_quint', 'in_sine', 'out_sine', 'in_out_sine', 'out_in_sine', 'in_expo', 'out_expo', 'in_out_expo', 'out_in_expo', 'in_circ', 'out_circ', 'in_out_circ', 'out_in_circ', 'in_elastic', 'out_elastic', 'in_out_elastic', 'out_in_elastic', 'in_back', 'out_back', 'in_out_back', 'out_in_back', 'in_bounce', 'out_bounce', 'in_out_bounce', 'out_in_bounce', 'bezier_spline', 'tcb_spline', 'custom']</code></td>
 <td>
 <p>easing curve type</p>
 </td>
@@ -5052,19 +5003,8 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/easingcurve.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">TypeStr</span><span class="p">):</span>
     <span class="sd">"""Set easing curve type.</span>
-
-<span class="sd">    Valid values for modality: "linear", "in_quad", "out_quad", "in_out_quad",</span>
-<span class="sd">    "out_in_quad", "in_cubic", "out_cubic", "in_out_cubic", "out_in_cubic",</span>
-<span class="sd">    "in_quart", "out_quart", "in_out_quart", "out_in_quart", "in_quint",</span>
-<span class="sd">    "out_quint", "in_out_quint", "out_in_quint", "in_sine", "out_sine",</span>
-<span class="sd">    "in_out_sine", "out_in_sine", "in_expo", "out_expo", "in_out_expo",</span>
-<span class="sd">    "out_in_expo", "in_circ", "out_circ", "in_out_circ", "out_in_circ",</span>
-<span class="sd">    "in_elastic", "out_elastic", "in_out_elastic", "out_in_elastic",</span>
-<span class="sd">    "in_back", "out_back", "in_out_back", "out_in_back", "in_bounce",</span>
-<span class="sd">    "out_bounce", "in_out_bounce", "out_in_bounce", "bezier_spline",</span>
-<span class="sd">    "tcb_spline", "custom"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: easing curve type</span>
@@ -5072,9 +5012,9 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: easing curve type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TYPES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -5509,7 +5449,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/line.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -5556,7 +5496,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/linef.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -5669,7 +5609,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/point.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -5716,7 +5656,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/pointf.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6073,7 +6013,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/rect.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6120,7 +6060,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/rectf.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6668,7 +6608,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/size.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6715,7 +6655,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/sizef.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -7477,7 +7417,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/time.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">msec</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">msec</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>

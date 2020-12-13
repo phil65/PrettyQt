@@ -1473,7 +1473,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
 </tr>
 <tr>
 <td><code>callback</code></td>
-<td><code>Callable</code></td>
+<td><code>Callable[[bool], NoneType]</code></td>
 <td>
 <p>result callback</p>
 </td>
@@ -1489,7 +1489,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
     <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""Find text in the current page.</span>
 
@@ -1540,7 +1540,6 @@ get_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current lifecycle state.</p>
-<p>Possible values: "active", "frozen", "discarded"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1551,7 +1550,7 @@ get_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['active', 'frozen', 'discarded']</code></td>
 <td>
 <p>lifecycle state</p>
 </td>
@@ -1561,15 +1560,13 @@ get_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginepage.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifecycleStateStr</span><span class="p">:</span>
     <span class="sd">"""Get the current lifecycle state.</span>
-
-<span class="sd">    Possible values: "active", "frozen", "discarded"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        lifecycle state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">LIFECYCLE_STATES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lifecycleState</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">LIFECYCLE_STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lifecycleState</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1643,7 +1640,6 @@ set_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set lifecycle state.</p>
-<p>Valid values: "active", "frozen", "discarded"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1657,7 +1653,7 @@ set_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>state</code></td>
-<td><code>str</code></td>
+<td><code>Literal['active', 'frozen', 'discarded']</code></td>
 <td>
 <p>lifecycle state</p>
 </td>
@@ -1685,10 +1681,8 @@ set_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginepage.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">LifecycleStateStr</span><span class="p">):</span>
     <span class="sd">"""Set lifecycle state.</span>
-
-<span class="sd">    Valid values: "active", "frozen", "discarded"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        state: lifecycle state</span>
@@ -1696,9 +1690,9 @@ set_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: lifecycle state does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LIFECYCLE_STATES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">LIFECYCLE_STATES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setLifecycleState</span><span class="p">(</span><span class="n">LIFECYCLE_STATES</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LIFECYCLE_STATE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">LIFECYCLE_STATE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setLifecycleState</span><span class="p">(</span><span class="n">LIFECYCLE_STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -1840,7 +1834,6 @@ get_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return current http cache type.</p>
-<p>Possible values are "none", "disk", "memory"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1851,7 +1844,7 @@ get_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'disk', 'memory']</code></td>
 <td>
 <p>Http cache type</p>
 </td>
@@ -1861,15 +1854,13 @@ get_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webengineprofile.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HttpCacheTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current http cache type.</span>
-
-<span class="sd">    Possible values are "none", "disk", "memory"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Http cache type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">HTTP_CACHE_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">httpCacheType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">HTTP_CACHE_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">httpCacheType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1885,7 +1876,6 @@ get_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
       </h4>
 <div class="doc doc-contents ">
 <p>Return current persistent cookie policy.</p>
-<p>Possible values are "none", "allow", "force"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1896,7 +1886,7 @@ get_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'allow', 'force']</code></td>
 <td>
 <p>Persistent cookie policy</p>
 </td>
@@ -1906,15 +1896,13 @@ get_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webengineprofile.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return current persistent cookie policy.</span>
-
-<span class="sd">    Possible values are "none", "allow", "force"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Persistent cookie policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">PERSISTENT_COOKIE_POLICIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">persistentCookiesPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">PERSISTENT_COOKIE_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">persistentCookiesPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1930,7 +1918,6 @@ set_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set the http cache type.</p>
-<p>Allowed values are "none", "disk", "memory"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1944,7 +1931,7 @@ set_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'disk', 'memory']</code></td>
 <td>
 <p>http cache type</p>
 </td>
@@ -1972,10 +1959,8 @@ set_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webengineprofile.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">HttpCacheTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set the http cache type.</span>
-
-<span class="sd">    Allowed values are "none", "disk", "memory"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: http cache type</span>
@@ -1983,9 +1968,9 @@ set_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: Cache type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">HTTP_CACHE_TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">HTTP_CACHE_TYPES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setHttpCacheType</span><span class="p">(</span><span class="n">HTTP_CACHE_TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">HTTP_CACHE_TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">HTTP_CACHE_TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setHttpCacheType</span><span class="p">(</span><span class="n">HTTP_CACHE_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -2001,7 +1986,6 @@ set_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
       </h4>
 <div class="doc doc-contents ">
 <p>Set the persistent cookie policy.</p>
-<p>Allowed values are "none", "allow", "force"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2015,7 +1999,7 @@ set_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'allow', 'force']</code></td>
 <td>
 <p>persistent cookie policy</p>
 </td>
@@ -2043,10 +2027,8 @@ set_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webengineprofile.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set the persistent cookie policy.</span>
-
-<span class="sd">    Allowed values are "none", "allow", "force"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: persistent cookie policy</span>
@@ -2054,9 +2036,9 @@ set_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: Policy does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PERSISTENT_COOKIE_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">PERSISTENT_COOKIE_POLICIES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setPersistentCookiesPolicy</span><span class="p">(</span><span class="n">PERSISTENT_COOKIE_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PERSISTENT_COOKIE_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">PERSISTENT_COOKIE_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPersistentCookiesPolicy</span><span class="p">(</span><span class="n">PERSISTENT_COOKIE_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -2096,7 +2078,6 @@ get_injection_point<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return injection point.</p>
-<p>Possible values: "document_creation", "document_ready", "deferred"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2107,7 +2088,7 @@ get_injection_point<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['document_creation', 'document_ready', 'deferred']</code></td>
 <td>
 <p>injection point</p>
 </td>
@@ -2117,15 +2098,13 @@ get_injection_point<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginescript.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InjectionPointStr</span><span class="p">:</span>
     <span class="sd">"""Return injection point.</span>
-
-<span class="sd">    Possible values: "document_creation", "document_ready", "deferred"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        injection point</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">INJECTION_POINTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">injectionPoint</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">INJECTION_POINT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">injectionPoint</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2141,7 +2120,6 @@ set_injection_point<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set injection point.</p>
-<p>Allowed values are "document_creation", "document_ready", "deferred"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2155,7 +2133,7 @@ set_injection_point<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>point</code></td>
-<td><code>str</code></td>
+<td><code>Literal['document_creation', 'document_ready', 'deferred']</code></td>
 <td>
 <p>injection point to use</p>
 </td>
@@ -2183,10 +2161,8 @@ set_injection_point<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginescript.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">InjectionPointStr</span><span class="p">):</span>
     <span class="sd">"""Set injection point.</span>
-
-<span class="sd">    Allowed values are "document_creation", "document_ready", "deferred"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        point: injection point to use</span>
@@ -2194,9 +2170,9 @@ set_injection_point<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: injection point does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">point</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">INJECTION_POINTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">INJECTION_POINTS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setInjectionPoint</span><span class="p">(</span><span class="n">INJECTION_POINTS</span><span class="p">[</span><span class="n">point</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">point</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">INJECTION_POINT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">INJECTION_POINT</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setInjectionPoint</span><span class="p">(</span><span class="n">INJECTION_POINT</span><span class="p">[</span><span class="n">point</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -2236,8 +2212,6 @@ get_font_family<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return the actual font family for the specified generic font family.</p>
-<p>Possible values are "standard", "fixed", "serif", "sans_serif", "cursive",
-                    "fantasy", "pictograph"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2251,7 +2225,7 @@ get_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>family</code></td>
-<td><code>str</code></td>
+<td><code>Literal['standard', 'fixed', 'serif', 'sans_serif', 'cursive', 'fantasy', 'pictograph']</code></td>
 <td>
 <p>generic font family</p>
 </td>
@@ -2279,11 +2253,8 @@ get_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginesettings.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return the actual font family for the specified generic font family.</span>
-
-<span class="sd">    Possible values are "standard", "fixed", "serif", "sans_serif", "cursive",</span>
-<span class="sd">                        "fantasy", "pictograph"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        family: generic font family</span>
@@ -2291,7 +2262,7 @@ get_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Returns:</span>
 <span class="sd">        Font family</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">fontFamily</span><span class="p">(</span><span class="n">FONT_FAMILIES</span><span class="p">[</span><span class="n">family</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">fontFamily</span><span class="p">(</span><span class="n">FONT_FAMILY</span><span class="p">[</span><span class="n">family</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -2307,7 +2278,6 @@ get_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return the default font size for type in pixels.</p>
-<p>Possible values are "minimum", "minimum_logical", "default", "default_fixed"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2321,7 +2291,7 @@ get_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['minimum', 'minimum_logical', 'default', 'default_fixed']</code></td>
 <td>
 <p>font size type</p>
 </td>
@@ -2349,10 +2319,8 @@ get_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginesettings.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">"""Return the default font size for type in pixels.</span>
-
-<span class="sd">    Possible values are "minimum", "minimum_logical", "default", "default_fixed"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: font size type</span>
@@ -2360,7 +2328,7 @@ get_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Returns:</span>
 <span class="sd">        Font size</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">fontSize</span><span class="p">(</span><span class="n">FONT_SIZES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">fontSize</span><span class="p">(</span><span class="n">FONT_SIZE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -2376,7 +2344,6 @@ get_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
       </h4>
 <div class="doc doc-contents ">
 <p>Return current unknown url scheme policy.</p>
-<p>Possible values are "disallow", "allow_from_user_interaction", "allow_all"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2387,7 +2354,7 @@ get_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['disallow', 'allow_from_user_interaction', 'allow_all']</code></td>
 <td>
 <p>Unknown url scheme policy</p>
 </td>
@@ -2397,10 +2364,8 @@ get_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginesettings.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return current unknown url scheme policy.</span>
-
-<span class="sd">    Possible values are "disallow", "allow_from_user_interaction", "allow_all"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Unknown url scheme policy</span>
@@ -2434,7 +2399,7 @@ set_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>which</code></td>
-<td><code>str</code></td>
+<td><code>Literal['standard', 'fixed', 'serif', 'sans_serif', 'cursive', 'fantasy', 'pictograph']</code></td>
 <td>
 <p>family to set</p>
 </td>
@@ -2470,7 +2435,7 @@ set_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginesettings.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set the actual font family to family for the specified generic family, which.</span>
 
 <span class="sd">    Args:</span>
@@ -2480,9 +2445,9 @@ set_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: Font family does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">which</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FONT_FAMILIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">which</span><span class="p">,</span> <span class="n">FONT_FAMILIES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFontFamily</span><span class="p">(</span><span class="n">FONT_FAMILIES</span><span class="p">[</span><span class="n">which</span><span class="p">],</span> <span class="n">family</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">which</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FONT_FAMILY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">which</span><span class="p">,</span> <span class="n">FONT_FAMILY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFontFamily</span><span class="p">(</span><span class="n">FONT_FAMILY</span><span class="p">[</span><span class="n">which</span><span class="p">],</span> <span class="n">family</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2511,7 +2476,7 @@ set_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['minimum', 'minimum_logical', 'default', 'default_fixed']</code></td>
 <td>
 <p>font size type</p>
 </td>
@@ -2547,7 +2512,7 @@ set_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginesettings.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="sd">"""Set the font size for type to size in pixels.</span>
 
 <span class="sd">    Args:</span>
@@ -2557,9 +2522,9 @@ set_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: Font size does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FONT_SIZES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">FONT_SIZES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFontSize</span><span class="p">(</span><span class="n">FONT_SIZES</span><span class="p">[</span><span class="n">typ</span><span class="p">],</span> <span class="n">size</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FONT_SIZE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">FONT_SIZE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFontSize</span><span class="p">(</span><span class="n">FONT_SIZE</span><span class="p">[</span><span class="n">typ</span><span class="p">],</span> <span class="n">size</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2575,7 +2540,6 @@ set_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
       </h4>
 <div class="doc doc-contents ">
 <p>Set the unknown url scheme policy.</p>
-<p>Allowed values are "disallow", "allow_from_user_interaction", "allow_all"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2589,7 +2553,7 @@ set_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>Literal['disallow', 'allow_from_user_interaction', 'allow_all']</code></td>
 <td>
 <p>unknown url scheme policy</p>
 </td>
@@ -2617,10 +2581,8 @@ set_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginesettings.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set the unknown url scheme policy.</span>
-
-<span class="sd">    Allowed values are "disallow", "allow_from_user_interaction", "allow_all"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: unknown url scheme policy</span>
@@ -2717,7 +2679,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
 </tr>
 <tr>
 <td><code>callback</code></td>
-<td><code>Callable</code></td>
+<td><code>Callable[[bool], NoneType]</code></td>
 <td>
 <p>result callback</p>
 </td>
@@ -2733,7 +2695,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
     <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""Find text in the current page.</span>
 

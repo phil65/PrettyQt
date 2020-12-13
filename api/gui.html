@@ -4234,7 +4234,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6689,7 +6689,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/gui/keysequence.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toString</span><span class="p">(),))</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toString</span><span class="p">(),)</span>
 </code></pre>
 </div>
 </details>
@@ -7310,7 +7310,6 @@ get_definition_units<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Get the definition unit.</p>
-<p>Possible values: "millimeter", "point", "inch", "pica", "didot", "cicero"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -7321,7 +7320,7 @@ get_definition_units<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['millimeter', 'point', 'inch', 'pica', 'didot', 'cicero']</code></td>
 <td>
 <p>unit</p>
 </td>
@@ -7331,10 +7330,8 @@ get_definition_units<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pagesize.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_definition_units</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_definition_units</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnitStr</span><span class="p">:</span>
     <span class="sd">"""Get the definition unit.</span>
-
-<span class="sd">    Possible values: "millimeter", "point", "inch", "pica", "didot", "cicero"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        unit</span>
@@ -7384,7 +7381,7 @@ get_id<span class="p">(</span><span class="bp">self</span><span class="p">)</spa
 <span class="sd">    Returns:</span>
 <span class="sd">        page size id</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">PAGE_SIZE_IDS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">PAGE_SIZE_ID</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -7776,7 +7773,7 @@ get_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['odd_even', 'winding']</code></td>
+<td><code>FillRuleStr</code></td>
 <td>
 <p>fill rule</p>
 </td>
@@ -7824,7 +7821,7 @@ set_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>rule</code></td>
-<td><code>Literal['odd_even', 'winding']</code></td>
+<td><code>FillRuleStr</code></td>
 <td>
 <p>fill rule to use</p>
 </td>

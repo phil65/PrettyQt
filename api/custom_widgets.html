@@ -3042,10 +3042,10 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>modality</code></td>
-<td><code></code></td>
+<td><code>mode</code></td>
+<td><code>str</code></td>
 <td>
-<p>modality for the main window</p>
+<p>movement mode for the main window</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -3063,7 +3063,7 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
 <tr>
 <td><code>ValueError</code></td>
 <td>
-<p>modality type does not exist</p>
+<p>movement mode type does not exist</p>
 </td>
 </tr>
 </tbody>
@@ -3077,10 +3077,10 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Valid values: "no_crossing", "no_overlap", "free"</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        modality: modality for the main window</span>
+<span class="sd">        mode: movement mode for the main window</span>
 
 <span class="sd">    Raises:</span>
-<span class="sd">        ValueError: modality type does not exist</span>
+<span class="sd">        ValueError: movement mode type does not exist</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MOVEMENT_MODE</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid movement mode"</span><span class="p">)</span>
@@ -3244,15 +3244,14 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
           <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_position</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
 
     <span class="c1"># if mouse is being pressed, update pointer</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clicking</span><span class="p">:</span>
-        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_position</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">position_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_selection</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_time_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_time_pos</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 </code></pre>
@@ -3276,9 +3275,8 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
 <pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">e</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="o">=</span> <span class="n">x</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">position_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_time_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointer_time_pos</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_selection</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 
@@ -3349,11 +3347,11 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
             <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="mi">3</span> <span class="o">*</span> <span class="n">point</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">point</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
             <span class="n">point</span> <span class="o">+=</span> <span class="mi">10</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_in</span><span class="p">:</span>
-            <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="mi">40</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_position</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_in</span><span class="p">:</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_position</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_position</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="mi">40</span><span class="p">)</span>
 
         <span class="n">poly</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Polygon</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_pos</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_position</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointer_time_pos</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Line</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
             <span class="n">poly</span><span class="o">.</span><span class="n">add_points</span><span class="p">((</span><span class="n">val</span> <span class="o">-</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">),</span> <span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="mi">40</span><span class="p">))</span>
