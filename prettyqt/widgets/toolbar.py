@@ -1,4 +1,4 @@
-from typing import Callable, Optional, Dict, Any, Union, Tuple, Literal
+from typing import Callable, Optional, Dict, Any, Union, Tuple, Literal, List
 
 from qtpy import QtCore, QtWidgets
 
@@ -154,6 +154,9 @@ class ToolBar(QtWidgets.QToolBar):
                 raise InvalidParamError(area, TOOLBAR_AREAS)
         flag = helpers.merge_flags(areas, TOOLBAR_AREAS)
         self.setAllowedAreas(flag)
+
+    def get_allowed_areas(self) -> List[ToolbarAreaStr]:
+        return [k for k, v in TOOLBAR_AREAS.items() if v & self.allowedAreas()]
 
 
 if __name__ == "__main__":

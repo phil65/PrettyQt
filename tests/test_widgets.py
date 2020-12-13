@@ -1178,6 +1178,7 @@ def test_toolbar(qtbot):
     assert widget.is_area_allowed("top")
     with pytest.raises(InvalidParamError):
         widget.is_area_allowed("test")
+    assert widget.get_allowed_areas() == ["left", "right", "top", "bottom", "all"]
 
     def test():
         pass
