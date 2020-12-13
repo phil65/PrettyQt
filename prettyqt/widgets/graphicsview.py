@@ -45,7 +45,7 @@ VIEWPORT_ANCHOR = bidict(
     under_mouse=QtWidgets.QGraphicsView.AnchorUnderMouse,
 )
 
-ViewportAnchorStr = Literal["none", "scroll_hand", "rubber_band"]
+ViewportAnchorStr = Literal["none", "view_center", "under_mouse"]
 
 VIEWPORT_UPDATE_MODE = bidict(
     full=QtWidgets.QGraphicsView.FullViewportUpdate,
