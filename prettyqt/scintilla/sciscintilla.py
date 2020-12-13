@@ -1,19 +1,21 @@
-from typing import Optional
+from typing import Optional, Literal
 
-from PyQt5 import Qsci  # type: ignore
+from PyQt5 import Qsci, QtGui  # type: ignore
 
 from prettyqt import gui, widgets
 from prettyqt.utils import colors, bidict, InvalidParamError
 
 ARROW_MARKER_NUM = 8
 
-MATCH_TYPES = bidict(
+MATCH_TYPE = bidict(
     none=Qsci.QsciScintilla.NoBraceMatch,
     strict=Qsci.QsciScintilla.StrictBraceMatch,
     sloppy=Qsci.QsciScintilla.SloppyBraceMatch,
 )
 
-LEXERS = bidict(
+MatchTypeStr = Literal["none", "strict", "sloppy"]
+
+LEXER = bidict(
     bash=Qsci.QsciLexerBash,
     batch=Qsci.QsciLexerBatch,
     cmake=Qsci.QsciLexerCMake,
@@ -53,7 +55,47 @@ LEXERS = bidict(
     idl=Qsci.QsciLexerIDL,
 )
 
-MARKERS = bidict(
+LexerStr = Literal[
+    "bash",
+    "batch",
+    "cmake",
+    "cpp",
+    "css",
+    "csharp",
+    "coffeescript",
+    "d",
+    "diff",
+    "fortran",
+    "fortran77",
+    "html",
+    "java",
+    "javascript",
+    "lua",
+    "makefile",
+    "matlab",
+    "octave",
+    "po",
+    "pov",
+    "pascal",
+    "perl",
+    "postscript",
+    "properties",
+    "ruby",
+    "spice",
+    "tcl",
+    "tex",
+    "vhdl",
+    "verilog",
+    "xml",
+    "python",
+    "yaml",
+    "json",
+    "sql",
+    "markdown",
+    "idl",
+]
+
+MARKER = bidict(
     circle=Qsci.QsciScintilla.Circle,
     rectangle=Qsci.QsciScintilla.Rectangle,
     right_triangle=Qsci.QsciScintilla.RightTriangle,
@@ -85,18 +127,52 @@ MARKERS = bidict(
     bookmark=Qsci.QsciScintilla.Bookmark,
 )
 
-WRAP_MODES = bidict(
+MarkerStr = Literal[
+    "circle",
+    "rectangle",
+    "right_triangle",
+    "small_rectangle",
+    "right_arrow",
+    "invisible",
+    "down_triangle",
+    "minus",
+    "plus",
+    "vertical_line",
+    "bottom_left_corner",
+    "left_side_splitter",
+    "boxed_plus",
+    "boxed_plus_connected",
+    "boxed_minus",
+    "boxed_minus_connected",
+    "rounded_bottom_left_corner",
+    "left_side_rounded_splitter",
+    "circled_plus",
+    "circled_plus_connected",
+    "circled_minus",
+    "circled_minus_connected",
+    "background",
+    "three_dots",
+    "three_right_arrows",
+    "full_rectangle",
+    "left_rectangle",
+    "underline",
+    "bookmark",
+]
+
+WRAP_MODE = bidict(
     none=Qsci.QsciScintilla.WrapNone,
     word=Qsci.QsciScintilla.WrapWord,
     anywhere=Qsci.QsciScintilla.WrapCharacter,
     whitespace=Qsci.QsciScintilla.WrapWhitespace,
 )
 
+WrapModeStr = Literal["none", "word", "anywhere", "whitespace"]
+
 Qsci.QsciScintilla.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 
 
 class SciScintilla(Qsci.QsciScintilla):
-    supported_langs = LEXERS.keys()
+    supported_langs = LEXER.keys()
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -137,25 +213,25 @@ class SciScintilla(Qsci.QsciScintilla):
         self.setCaretLineVisible(color is not None)
         self.setCaretLineBackgroundColor(colors.get_color(color))
 
-    def set_brace_matching(self, match_type: Optional[str]):
+    def set_brace_matching(self, match_type: Optional[MatchTypeStr]):
         if match_type is None:
             match_type = "none"
-        if match_type not in MATCH_TYPES:
-            raise InvalidParamError(match_type, MATCH_TYPES)
-        self.setBraceMatching(MATCH_TYPES[match_type])
+        if match_type not in MATCH_TYPE:
+            raise InvalidParamError(match_type, MATCH_TYPE)
+        self.setBraceMatching(MATCH_TYPE[match_type])
 
-    def define_marker(self, marker: str, num: int):
-        if marker not in MARKERS:
-            raise InvalidParamError(marker, MARKERS)
-        self.markerDefine(MARKERS[marker], num)
+    def define_marker(self, marker: MarkerStr, num: int):
+        if marker not in MARKER:
+            raise InvalidParamError(marker, MARKER)
+        self.markerDefine(MARKER[marker], num)
 
     def set_text(self, text: str):
         self.setText(text)
 
-    def set_syntaxhighlighter(self, language: str):
+    def set_syntaxhighlighter(self, language: LexerStr):
         self.language = language
         font = gui.Font.mono()
-        self._lexer = LEXERS[language]()
+        self._lexer = LEXER[language]()
         self._lexer.setDefaultFont(font)
         self._lexer.setFont(font)
         self.setLexer(self._lexer)
@@ -164,12 +240,9 @@ class SciScintilla(Qsci.QsciScintilla):
         self.ensureLineVisible(self.lines())
 
     def append_text(self, text: str, newline: bool = True):
-        if newline:
-            self.append("\n" + text)
-        else:
-            self.append(text)
+        self.append(f"\n{text}" if newline else text)
 
-    def set_font(self, font):
+    def set_font(self, font: QtGui.QFont):
         self.setFont(font)
         self.setMarginsFont(font)
         lexer = self._lexer
@@ -191,12 +264,12 @@ class SciScintilla(Qsci.QsciScintilla):
         else:
             self.markerAdd(nline, marker_num)
 
-    def set_wrap_mode(self, mode: Optional[str]):
+    def set_wrap_mode(self, mode: Optional[WrapModeStr]):
         if mode is None:
             mode = "none"
-        if mode not in WRAP_MODES:
-            raise InvalidParamError(mode, WRAP_MODES)
-        self.setWrapMode(WRAP_MODES[mode])
+        if mode not in WRAP_MODE:
+            raise InvalidParamError(mode, WRAP_MODE)
+        self.setWrapMode(WRAP_MODE[mode])
 
     def get_value(self) -> str:
         return self.text()

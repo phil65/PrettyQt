@@ -70,7 +70,7 @@ NAVIGATION_TYPES = bidict(
     other=QtWebEngineWidgets.QWebEnginePage.NavigationTypeOther,
 )
 
-PERMISSION_POLICIES = bidict(
+PERMISSION_POLICY = bidict(
     unknown=QtWebEngineWidgets.QWebEnginePage.PermissionUnknown,
     granted_by_user=QtWebEngineWidgets.QWebEnginePage.PermissionGrantedByUser,
     denied_by_user=QtWebEngineWidgets.QWebEnginePage.PermissionDeniedByUser,
@@ -85,7 +85,7 @@ RENDER_PROCESS_TERMINATION_STATUS = bidict(
     killed=QtWebEngineWidgets.QWebEnginePage.KilledTerminationStatus,
 )
 
-WEB_ACTIONS = bidict(
+WEB_ACTION = bidict(
     none=QtWebEngineWidgets.QWebEnginePage.NoWebAction,
     back=QtWebEngineWidgets.QWebEnginePage.Back,
     forward=QtWebEngineWidgets.QWebEnginePage.Forward,
@@ -133,6 +133,55 @@ WEB_ACTIONS = bidict(
     insert_ordered_list=QtWebEngineWidgets.QWebEnginePage.InsertOrderedList,
     insert_unordered_list=QtWebEngineWidgets.QWebEnginePage.InsertUnorderedList,
 )
+
+WebActionStr = Literal[
+    "none",
+    "back",
+    "forward",
+    "stop",
+    "reload",
+    "reload_and_bypass_cache",
+    "cut",
+    "copy",
+    "paste",
+    "undo",
+    "redo",
+    "select_all",
+    "paste_and_match_style",
+    "open_link_in_this_window",
+    "open_link_in_new_window",
+    "open_link_in_new_tab",
+    "open_link_in_new_bg_tab",
+    "copy_link_to_clipboard",
+    "copy_image_to_clipboard",
+    "copy_image_url_to_clipboard",
+    "copy_media_url_to_clipboard",
+    "toggle_media_controls",
+    "toggle_media_loop",
+    "toggle_media_play_pause",
+    "toggle_media_mute",
+    "download_link_to_disk",
+    "download_image_to_disk",
+    "download_media_to_disk",
+    "inspect_element",
+    "exit_fullscreen",
+    "request_close",
+    "unselect",
+    "save_page",
+    "view_source",
+    "toggle_bold",
+    "toggle_italic",
+    "toggle_underline",
+    "toggle_strikethrough",
+    "align_left",
+    "align_center",
+    "align_right",
+    "align_justified",
+    "indent",
+    "outdent",
+    "insert_ordered_list",
+    "insert_unordered_list",
+]
 
 WEB_WINDOW_TYPES = bidict(
     browser_window=QtWebEngineWidgets.QWebEnginePage.WebBrowserWindow,
@@ -262,14 +311,17 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         """
         return LIFECYCLE_STATE.inverse[self.lifecycleState()]
 
-    def trigger_action(self, action: str, checked: bool = False):
-        self.triggerAction(WEB_ACTIONS[action], checked)
+    def trigger_action(self, action: WebActionStr, checked: bool = False):
+        self.triggerAction(WEB_ACTION[action], checked)
 
     def set_feature_permission(
-        self, url: Union[QtCore.QUrl, str], feature: FeatureStr, policy: str
+        self,
+        url: Union[QtCore.QUrl, str],
+        feature: FeatureStr,
+        policy: PermissionPolicyStr,
     ):
         url = core.Url(url)
-        self.setFeaturePermission(url, FEATURE[feature], PERMISSION_POLICIES[policy])
+        self.setFeaturePermission(url, FEATURE[feature], PERMISSION_POLICY[policy])
 
     def get_history(self) -> webenginewidgets.WebEngineHistory:
         hist = self.history()
@@ -279,10 +331,16 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         settings = self.settings()
         return webenginewidgets.WebEngineSettings(settings)
 
-    def set_setting(self, setting_name: str, value: bool):
+    def set_setting(
+        self,
+        setting_name: webenginewidgets.webenginesettings.WebAttributeStr,
+        value: bool,
+    ):
         self.get_settings()[setting_name] = value
 
-    def get_setting(self, setting_name: str) -> bool:
+    def get_setting(
+        self, setting_name: webenginewidgets.webenginesettings.WebAttributeStr
+    ) -> bool:
         return self.get_settings()[setting_name]
 
     def get_scripts(self) -> webenginewidgets.WebEngineScriptCollection:

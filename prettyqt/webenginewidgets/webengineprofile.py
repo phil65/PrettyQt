@@ -1,5 +1,7 @@
 # from qtpy import QtWebEngineWidgets
 
+from typing import Literal
+
 from qtpy import PYQT5, PYSIDE2
 
 if PYQT5:
@@ -11,26 +13,28 @@ from prettyqt import core, webenginewidgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-HTTP_CACHE_TYPES = bidict(
+HTTP_CACHE_TYPE = bidict(
     none=QtWebEngineWidgets.QWebEngineProfile.NoCache,
     disk=QtWebEngineWidgets.QWebEngineProfile.DiskHttpCache,
     memory=QtWebEngineWidgets.QWebEngineProfile.MemoryHttpCache,
 )
 
-PERSISTENT_COOKIE_POLICIES = bidict(
+HttpCacheTypeStr = Literal["none", "disk", "memory"]
+
+PERSISTENT_COOKIE_POLICY = bidict(
     none=QtWebEngineWidgets.QWebEngineProfile.NoPersistentCookies,
     allow=QtWebEngineWidgets.QWebEngineProfile.AllowPersistentCookies,
     force=QtWebEngineWidgets.QWebEngineProfile.ForcePersistentCookies,
 )
 
+PersistentCookiePolicyStr = Literal["none", "allow", "force"]
+
 QtWebEngineWidgets.QWebEngineProfile.__bases__ = (core.Object,)
 
 
 class WebEngineProfile(QtWebEngineWidgets.QWebEngineProfile):
-    def set_persistent_cookie_policy(self, policy: str):
+    def set_persistent_cookie_policy(self, policy: PersistentCookiePolicyStr):
         """Set the persistent cookie policy.
-
-        Allowed values are "none", "allow", "force"
 
         Args:
             policy: persistent cookie policy
@@ -38,24 +42,20 @@ class WebEngineProfile(QtWebEngineWidgets.QWebEngineProfile):
         Raises:
             InvalidParamError: Policy does not exist
         """
-        if policy not in PERSISTENT_COOKIE_POLICIES:
-            raise InvalidParamError(policy, PERSISTENT_COOKIE_POLICIES)
-        self.setPersistentCookiesPolicy(PERSISTENT_COOKIE_POLICIES[policy])
+        if policy not in PERSISTENT_COOKIE_POLICY:
+            raise InvalidParamError(policy, PERSISTENT_COOKIE_POLICY)
+        self.setPersistentCookiesPolicy(PERSISTENT_COOKIE_POLICY[policy])
 
-    def get_persistent_cookie_policy(self) -> str:
+    def get_persistent_cookie_policy(self) -> PersistentCookiePolicyStr:
         """Return current persistent cookie policy.
-
-        Possible values are "none", "allow", "force"
 
         Returns:
             Persistent cookie policy
         """
-        return PERSISTENT_COOKIE_POLICIES.inverse[self.persistentCookiesPolicy()]
+        return PERSISTENT_COOKIE_POLICY.inverse[self.persistentCookiesPolicy()]
 
-    def set_http_cache_type(self, typ: str):
+    def set_http_cache_type(self, typ: HttpCacheTypeStr):
         """Set the http cache type.
-
-        Allowed values are "none", "disk", "memory"
 
         Args:
             typ: http cache type
@@ -63,19 +63,17 @@ class WebEngineProfile(QtWebEngineWidgets.QWebEngineProfile):
         Raises:
             InvalidParamError: Cache type does not exist
         """
-        if typ not in HTTP_CACHE_TYPES:
-            raise InvalidParamError(typ, HTTP_CACHE_TYPES)
-        self.setHttpCacheType(HTTP_CACHE_TYPES[typ])
+        if typ not in HTTP_CACHE_TYPE:
+            raise InvalidParamError(typ, HTTP_CACHE_TYPE)
+        self.setHttpCacheType(HTTP_CACHE_TYPE[typ])
 
-    def get_http_cache_type(self) -> str:
+    def get_http_cache_type(self) -> HttpCacheTypeStr:
         """Return current http cache type.
-
-        Possible values are "none", "disk", "memory"
 
         Returns:
             Http cache type
         """
-        return HTTP_CACHE_TYPES.inverse[self.httpCacheType()]
+        return HTTP_CACHE_TYPE.inverse[self.httpCacheType()]
 
     def get_scripts(self) -> webenginewidgets.WebEngineScriptCollection:
         return webenginewidgets.WebEngineScriptCollection(self.scripts())

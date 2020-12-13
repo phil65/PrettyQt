@@ -1,13 +1,17 @@
+from typing import Literal
+
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import gui
 from prettyqt.utils import bidict, InvalidParamError
 
-STATES = bidict(
+STATE = bidict(
     unchecked=QtCore.Qt.Unchecked,
     partial=QtCore.Qt.PartiallyChecked,
     checked=QtCore.Qt.Checked,
 )
+
+StateStr = Literal["unchecked", "partial", "checked"]
 
 
 class TableWidgetItem(QtWidgets.QTableWidgetItem):
@@ -36,10 +40,8 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         icon = gui.icon.get_icon(icon)
         self.setIcon(icon)
 
-    def set_checkstate(self, state: str):
+    def set_checkstate(self, state: StateStr):
         """Set checkstate of the checkbox.
-
-        valid values are: unchecked, partial, checked
 
         Args:
             state: checkstate to use
@@ -47,19 +49,17 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in STATES:
-            raise InvalidParamError(state, STATES)
-        self.setCheckState(STATES[state])
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
+        self.setCheckState(STATE[state])
 
-    def get_checkstate(self) -> str:
+    def get_checkstate(self) -> StateStr:
         """Return checkstate.
-
-        possible values are "unchecked", "partial", "checked"
 
         Returns:
             checkstate
         """
-        return STATES.inverse[self.checkState()]
+        return STATE.inverse[self.checkState()]
 
     def get_background(self) -> gui.Brush:
         return gui.Brush(self.background())

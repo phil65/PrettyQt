@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import PYQT5, PYSIDE2
 
 if PYQT5:
@@ -8,11 +10,13 @@ elif PYSIDE2:
 from prettyqt.utils import bidict, InvalidParamError
 
 
-INJECTION_POINTS = bidict(
+INJECTION_POINT = bidict(
     document_creation=QtWebEngineWidgets.QWebEngineScript.DocumentCreation,
     document_ready=QtWebEngineWidgets.QWebEngineScript.DocumentReady,
     deferred=QtWebEngineWidgets.QWebEngineScript.Deferred,
 )
+
+InjectionPointStr = Literal["document_creation", "document_ready", "deferred"]
 
 SCRIPT_WORLD_IDS = bidict(
     main_world=QtWebEngineWidgets.QWebEngineScript.MainWorld,
@@ -20,12 +24,12 @@ SCRIPT_WORLD_IDS = bidict(
     user_world=QtWebEngineWidgets.QWebEngineScript.UserWorld,
 )
 
+ScriptWorldIdStr = Literal["main_world", "application_world", "user_world"]
+
 
 class WebEngineScript(QtWebEngineWidgets.QWebEngineScript):
-    def set_injection_point(self, point: str):
+    def set_injection_point(self, point: InjectionPointStr):
         """Set injection point.
-
-        Allowed values are "document_creation", "document_ready", "deferred"
 
         Args:
             point: injection point to use
@@ -33,19 +37,17 @@ class WebEngineScript(QtWebEngineWidgets.QWebEngineScript):
         Raises:
             InvalidParamError: injection point does not exist
         """
-        if point not in INJECTION_POINTS:
-            raise InvalidParamError(point, INJECTION_POINTS)
-        self.setInjectionPoint(INJECTION_POINTS[point])
+        if point not in INJECTION_POINT:
+            raise InvalidParamError(point, INJECTION_POINT)
+        self.setInjectionPoint(INJECTION_POINT[point])
 
-    def get_injection_point(self) -> str:
+    def get_injection_point(self) -> InjectionPointStr:
         """Return injection point.
-
-        Possible values: "document_creation", "document_ready", "deferred"
 
         Returns:
             injection point
         """
-        return INJECTION_POINTS.inverse[self.injectionPoint()]
+        return INJECTION_POINT.inverse[self.injectionPoint()]
 
 
 if __name__ == "__main__":

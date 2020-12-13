@@ -1,4 +1,5 @@
 # from qtpy import QtWebEngineWidgets
+from typing import Literal
 
 from qtpy import PYQT5, PYSIDE2
 
@@ -11,7 +12,7 @@ from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
 
-FONT_FAMILIES = bidict(
+FONT_FAMILY = bidict(
     standard=QtWebEngineWidgets.QWebEngineSettings.StandardFont,
     fixed=QtWebEngineWidgets.QWebEngineSettings.FixedFont,
     serif=QtWebEngineWidgets.QWebEngineSettings.SerifFont,
@@ -21,12 +22,18 @@ FONT_FAMILIES = bidict(
     pictograph=QtWebEngineWidgets.QWebEngineSettings.PictographFont,
 )
 
-FONT_SIZES = bidict(
+FontFamilyStr = Literal[
+    "standard", "fixed", "serif", "sans_serif", "cursive", "fantasy", "pictograph"
+]
+
+FONT_SIZE = bidict(
     minimum=QtWebEngineWidgets.QWebEngineSettings.MinimumFontSize,
     minimum_logical=QtWebEngineWidgets.QWebEngineSettings.MinimumLogicalFontSize,
     default=QtWebEngineWidgets.QWebEngineSettings.DefaultFontSize,
     default_fixed=QtWebEngineWidgets.QWebEngineSettings.DefaultFixedFontSize,
 )
+
+FontSizeStr = Literal["minimum", "minimum_logical", "default", "default_fixed"]
 
 mod = QtWebEngineWidgets.QWebEngineSettings
 
@@ -35,6 +42,10 @@ UNKNOWN_URL_SCHEME_POLICY = bidict(
     allow_from_user_interaction=mod.AllowUnknownUrlSchemesFromUserInteraction,
     allow_all=mod.AllowAllUnknownUrlSchemes,
 )
+
+UnknownUrlSchemePolicyStr = Literal[
+    "disallow", "allow_from_user_interaction", "allow_all"
+]
 
 WEB_ATTRIBUTES = bidict(
     auto_load_images=mod.AutoLoadImages,
@@ -71,6 +82,39 @@ WEB_ATTRIBUTES = bidict(
 if core.VersionNumber.get_qt_version() >= (5, 13, 0):
     WEB_ATTRIBUTES["pdf_viewer_enabled"] = mod.PdfViewerEnabled
 
+WebAttributeStr = Literal[
+    "auto_load_images",
+    "javascript_enabled",
+    "javascript_can_open_windows",
+    "javascript_can_access_clipboard",
+    "links_included_in_focus_chain",
+    "local_storage_enabled",
+    "local_content_can_access_remote_urls",
+    "spatial_navigation_enabled",
+    "local_content_can_access_file_urls",
+    "hyperlink_auditing_enabled",
+    "scroll_animator_enabled",
+    "error_page_enabled",
+    "plugins_enabled",
+    "full_screen_support_enabled",
+    "screen_capture_enabled",
+    "web_gl_enabled",
+    "accelerated_2d_canvas_enabled",
+    "auto_load_icons_for_page",
+    "touch_icons_enabled",
+    "focus_on_navigation_enabled",
+    "print_element_backgrounds",
+    "allow_running_insecure_content",
+    "allow_geolocation_on_insecure_origins",
+    "allow_window_activation_from_javascript",
+    "show_scrollbars",
+    "playback_requires_user_gesture",
+    "javascript_can_paste",
+    "web_rtc_public_interfaces_only",
+    "dns_prefetch_enabled",
+    "pdf_viewer_enabled",
+]
+
 
 class WebEngineSettings:
     def __init__(self, item: QtWebEngineWidgets.QWebEngineSettings):
@@ -79,16 +123,14 @@ class WebEngineSettings:
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def __setitem__(self, index: str, value: bool):
+    def __setitem__(self, index: WebAttributeStr, value: bool):
         self.item.setAttribute(WEB_ATTRIBUTES[index], value)
 
-    def __getitem__(self, index: str) -> bool:
+    def __getitem__(self, index: WebAttributeStr) -> bool:
         return self.item.testAttribute(WEB_ATTRIBUTES[index])
 
-    def set_unknown_url_scheme_policy(self, policy: str):
+    def set_unknown_url_scheme_policy(self, policy: UnknownUrlSchemePolicyStr):
         """Set the unknown url scheme policy.
-
-        Allowed values are "disallow", "allow_from_user_interaction", "allow_all"
 
         Args:
             policy: unknown url scheme policy
@@ -100,17 +142,15 @@ class WebEngineSettings:
             raise InvalidParamError(policy, UNKNOWN_URL_SCHEME_POLICY)
         self.item.setUnknownUrlSchemePolicy(UNKNOWN_URL_SCHEME_POLICY[policy])
 
-    def get_unknown_url_scheme_policy(self) -> str:
+    def get_unknown_url_scheme_policy(self) -> UnknownUrlSchemePolicyStr:
         """Return current unknown url scheme policy.
-
-        Possible values are "disallow", "allow_from_user_interaction", "allow_all"
 
         Returns:
             Unknown url scheme policy
         """
         return UNKNOWN_URL_SCHEME_POLICY.inverse[self.item.unknownUrlSchemePolicy()]
 
-    def set_font_family(self, which: str, family: str):
+    def set_font_family(self, which: FontFamilyStr, family: str):
         """Set the actual font family to family for the specified generic family, which.
 
         Args:
@@ -120,15 +160,12 @@ class WebEngineSettings:
         Raises:
             InvalidParamError: Font family does not exist
         """
-        if which not in FONT_FAMILIES:
-            raise InvalidParamError(which, FONT_FAMILIES)
-        self.item.setFontFamily(FONT_FAMILIES[which], family)
+        if which not in FONT_FAMILY:
+            raise InvalidParamError(which, FONT_FAMILY)
+        self.item.setFontFamily(FONT_FAMILY[which], family)
 
-    def get_font_family(self, family: str) -> str:
+    def get_font_family(self, family: FontFamilyStr) -> str:
         """Return the actual font family for the specified generic font family.
-
-        Possible values are "standard", "fixed", "serif", "sans_serif", "cursive",
-                            "fantasy", "pictograph"
 
         Args:
             family: generic font family
@@ -136,9 +173,9 @@ class WebEngineSettings:
         Returns:
             Font family
         """
-        return self.item.fontFamily(FONT_FAMILIES[family])
+        return self.item.fontFamily(FONT_FAMILY[family])
 
-    def set_font_size(self, typ: str, size: int):
+    def set_font_size(self, typ: FontSizeStr, size: int):
         """Set the font size for type to size in pixels.
 
         Args:
@@ -148,14 +185,12 @@ class WebEngineSettings:
         Raises:
             InvalidParamError: Font size does not exist
         """
-        if typ not in FONT_SIZES:
-            raise InvalidParamError(typ, FONT_SIZES)
-        self.item.setFontSize(FONT_SIZES[typ], size)
+        if typ not in FONT_SIZE:
+            raise InvalidParamError(typ, FONT_SIZE)
+        self.item.setFontSize(FONT_SIZE[typ], size)
 
-    def get_font_size(self, typ: str) -> int:
+    def get_font_size(self, typ: FontSizeStr) -> int:
         """Return the default font size for type in pixels.
-
-        Possible values are "minimum", "minimum_logical", "default", "default_fixed"
 
         Args:
             typ: font size type
@@ -163,7 +198,7 @@ class WebEngineSettings:
         Returns:
             Font size
         """
-        return self.item.fontSize(FONT_SIZES[typ])
+        return self.item.fontSize(FONT_SIZE[typ])
 
 
 if __name__ == "__main__":

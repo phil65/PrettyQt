@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from qtpy import QtCore
 
 from qtpy import PYQT5, PYSIDE2
@@ -19,6 +21,8 @@ SYNTAX = bidict(
     host=QWebEngineUrlScheme.Syntax.Host,
     path=QWebEngineUrlScheme.Syntax.Path,
 )
+
+SyntaxStr = Literal["host_port_user_info", "host_port", "host", "path"]
 
 FLAGS = bidict(
     secure_scheme=QWebEngineUrlScheme.SecureScheme,
@@ -44,10 +48,8 @@ class WebEngineUrlScheme(QtWebEngineCore.QWebEngineUrlScheme):
     def set_name(self, name: str):
         self.setName(QtCore.QByteArray(name.encode()))
 
-    def set_syntax(self, syntax: str):
+    def set_syntax(self, syntax: SyntaxStr):
         """Set syntax.
-
-        Allowed values are "host_port_user_info", "host_port", "host", "path"
 
         Args:
             syntax: syntax to use
@@ -59,10 +61,8 @@ class WebEngineUrlScheme(QtWebEngineCore.QWebEngineUrlScheme):
             raise InvalidParamError(syntax, SYNTAX)
         self.setSyntax(SYNTAX[syntax])
 
-    def get_syntax(self) -> str:
+    def get_syntax(self) -> SyntaxStr:
         """Return syntax.
-
-        Possible values: "host_port_user_info", "host_port", "host", "path"
 
         Returns:
             syntax
