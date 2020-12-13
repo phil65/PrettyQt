@@ -208,10 +208,10 @@ class SpanSlider(widgets.Slider):
         Valid values: "no_crossing", "no_overlap", "free"
 
         Args:
-            modality: modality for the main window
+            mode: movement mode for the main window
 
         Raises:
-            ValueError: modality type does not exist
+            ValueError: movement mode type does not exist
         """
         if mode not in MOVEMENT_MODE:
             raise ValueError("Invalid movement mode")
