@@ -20,19 +20,14 @@ ItemSelectionModeStr = Literal[
     "intersects_bounding_rect",
 ]
 
-SCENE_LAYERS = bidict(
+SCENE_LAYER = bidict(
     item=QtWidgets.QGraphicsScene.ItemLayer,
     background=QtWidgets.QGraphicsScene.BackgroundLayer,
     foreground=QtWidgets.QGraphicsScene.ForegroundLayer,
     all=QtWidgets.QGraphicsScene.AllLayers,
 )
 
-SceneLayerStr = Literal[
-    "contains_shape",
-    "intersects_shape",
-    "contains_bounding_rect",
-    "intersects_bounding_rect",
-]
+SceneLayerStr = Literal["item", "background", "foreground", "all"]
 
 ITEM_INDEX_METHOD = bidict(
     bsp_tree=QtWidgets.QGraphicsScene.BspTreeIndex, none=QtWidgets.QGraphicsScene.NoIndex

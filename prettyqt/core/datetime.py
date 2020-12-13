@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Literal
 import datetime
 
 from qtpy import QtCore
@@ -6,19 +6,23 @@ from qtpy import QtCore
 from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError, to_datetime
 
-DATE_FORMATS = bidict(
+DATE_FORMAT = bidict(
     text=QtCore.Qt.TextDate,
     iso=QtCore.Qt.ISODate,
     iso_with_ms=QtCore.Qt.ISODateWithMs,
     rfc_2822=QtCore.Qt.RFC2822Date,
 )
 
-TIME_SPECS = bidict(
+DateFormatStr = Literal["text", "iso", "iso_with_ms", "rfc_2822"]
+
+TIME_SPEC = bidict(
     local_time=QtCore.Qt.LocalTime,
     utc=QtCore.Qt.UTC,
     offset_from_utc=QtCore.Qt.OffsetFromUTC,
     timezone=QtCore.Qt.TimeZone,
 )
+
+TimeSpecStr = Literal["local_time", "utc", "offset_from_utc", "timezone"]
 
 
 class DateTime(QtCore.QDateTime):
@@ -30,7 +34,7 @@ class DateTime(QtCore.QDateTime):
         return self.toString("yyyy-MM-dd hh:mm:ss.zzzzzz")
 
     def __reduce__(self):
-        return (self.__class__, (self.date(), self.time()))
+        return self.__class__, (self.date(), self.time())
 
     def get_value(self) -> datetime.datetime:
         return to_datetime(self)
@@ -50,10 +54,8 @@ class DateTime(QtCore.QDateTime):
         else:
             self.setTimeZone(zone)
 
-    def set_time_spec(self, spec: str):
+    def set_time_spec(self, spec: TimeSpecStr):
         """Set the time specification.
-
-        Allowed values are "local_time", "utc", "offset_from_utc", "timezone"
 
         Args:
             spec: time specification to use
@@ -61,22 +63,20 @@ class DateTime(QtCore.QDateTime):
         Raises:
             InvalidParamError: time specification does not exist
         """
-        if spec not in TIME_SPECS:
-            raise InvalidParamError(spec, TIME_SPECS)
-        self.setTimeSpec(TIME_SPECS[spec])
+        if spec not in TIME_SPEC:
+            raise InvalidParamError(spec, TIME_SPEC)
+        self.setTimeSpec(TIME_SPEC[spec])
 
-    def get_time_spec(self) -> str:
+    def get_time_spec(self) -> TimeSpecStr:
         """Return current time specification.
-
-        Possible values: "local_time", "utc", "offset_from_utc", "timezone"
 
         Returns:
             time specification
         """
-        return TIME_SPECS.inverse[self.timeSpec()]
+        return TIME_SPEC.inverse[self.timeSpec()]
 
-    def to_format(self, fmt: str):
-        return self.toString(DATE_FORMATS[fmt])
+    def to_format(self, fmt: DateFormatStr):
+        return self.toString(DATE_FORMAT[fmt])
 
 
 if __name__ == "__main__":

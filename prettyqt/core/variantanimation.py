@@ -17,7 +17,9 @@ class VariantAnimation(QtCore.QVariantAnimation):
     def __setitem__(self, key: float, value):
         self.setKeyValueAt(key, value)
 
-    def set_easing(self, easing_type: Union[str, Callable[[float], float]]):
+    def set_easing(
+        self, easing_type: Union[core.easingcurve.TypeStr, Callable[[float], float]]
+    ):
         curve = core.EasingCurve()
         if isinstance(easing_type, str):
             curve.set_type(easing_type)
@@ -25,7 +27,7 @@ class VariantAnimation(QtCore.QVariantAnimation):
             curve.set_custom_type(easing_type)
         self.setEasingCurve(curve)
 
-    def get_easing(self) -> Union[str, Callable[[float], float]]:
+    def get_easing(self) -> Union[core.easingcurve.TypeStr, Callable[[float], float]]:
         curve = core.EasingCurve(self.easingCurve())
         typ = curve.get_type()
         if typ == "custom":

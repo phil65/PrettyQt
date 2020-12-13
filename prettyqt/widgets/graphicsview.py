@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtWidgets, QtCore
 
@@ -18,16 +18,20 @@ ALIGNMENTS = bidict(
     center=constants.ALIGN_CENTER,
 )
 
-DRAG_MODES = bidict(
+DRAG_MODE = bidict(
     none=QtWidgets.QGraphicsView.NoDrag,
     scroll_hand=QtWidgets.QGraphicsView.ScrollHandDrag,
     rubber_band=QtWidgets.QGraphicsView.RubberBandDrag,
 )
 
+DragModeStr = Literal["none", "scroll_hand", "rubber_band"]
+
 CACHE_MODES = bidict(
     none=QtWidgets.QGraphicsView.CacheNone,
     background=QtWidgets.QGraphicsView.CacheBackground,
 )
+
+CacheModeStr = Literal["none", "background"]
 
 OPTIMIZATION_FLAGS = bidict(
     dont_clip_painter=QtWidgets.QGraphicsView.DontClipPainter,
@@ -35,13 +39,15 @@ OPTIMIZATION_FLAGS = bidict(
     dont_adjust_for_antialiasing=QtWidgets.QGraphicsView.DontAdjustForAntialiasing,
 )
 
-VIEWPORT_ANCHORS = bidict(
+VIEWPORT_ANCHOR = bidict(
     none=QtWidgets.QGraphicsView.NoAnchor,
     view_center=QtWidgets.QGraphicsView.AnchorViewCenter,
     under_mouse=QtWidgets.QGraphicsView.AnchorUnderMouse,
 )
 
-VIEWPORT_UPDATE_MODES = bidict(
+ViewportAnchorStr = Literal["none", "scroll_hand", "rubber_band"]
+
+VIEWPORT_UPDATE_MODE = bidict(
     full=QtWidgets.QGraphicsView.FullViewportUpdate,
     minimal=QtWidgets.QGraphicsView.MinimalViewportUpdate,
     smart=QtWidgets.QGraphicsView.SmartViewportUpdate,
@@ -49,13 +55,21 @@ VIEWPORT_UPDATE_MODES = bidict(
     none=QtWidgets.QGraphicsView.NoViewportUpdate,
 )
 
-ITEM_SELECTION_MODES = bidict(
+ViewportUpdateModeStr = Literal["full", "minimal", "smart", "bounding_rect", "none"]
+
+ITEM_SELECTION_MODE = bidict(
     contains_shape=QtCore.Qt.ContainsItemShape,
     intersects_shape=QtCore.Qt.IntersectsItemShape,
     contains_bounding_rect=QtCore.Qt.ContainsItemBoundingRect,
     intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
 )
 
+ItemSelectionModeStr = Literal[
+    "contains_shape",
+    "intersects_shape",
+    "contains_bounding_rect",
+    "intersects_bounding_rect",
+]
 
 QtWidgets.QGraphicsView.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -79,15 +93,15 @@ class GraphicsView(QtWidgets.QGraphicsView):
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
 
-    def invalidate_scene(self, rect: QtCore.QRectF, layer: str = "all"):
-        if layer not in widgets.graphicsscene.SCENE_LAYERS:
-            raise InvalidParamError(layer, widgets.graphicsscene.SCENE_LAYERS)
-        self.invalidateScene(rect, widgets.graphicsscene.SCENE_LAYERS[layer])
+    def invalidate_scene(
+        self, rect: QtCore.QRectF, layer: widgets.graphicsscene.SceneLayerStr = "all"
+    ):
+        if layer not in widgets.graphicsscene.SCENE_LAYER:
+            raise InvalidParamError(layer, widgets.graphicsscene.SCENE_LAYER)
+        self.invalidateScene(rect, widgets.graphicsscene.SCENE_LAYER[layer])
 
-    def set_transformation_anchor(self, mode: str):
+    def set_transformation_anchor(self, mode: ViewportAnchorStr):
         """Set how the view should position the scene during transformations.
-
-        Allowed values are "none", "view_center", "under_mouse"
 
         Args:
             mode: transformation anchor to use
@@ -95,24 +109,20 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Raises:
             InvalidParamError: mode does not exist
         """
-        if mode not in VIEWPORT_ANCHORS:
-            raise InvalidParamError(mode, VIEWPORT_ANCHORS)
-        self.setTransformationAnchor(VIEWPORT_ANCHORS[mode])
+        if mode not in VIEWPORT_ANCHOR:
+            raise InvalidParamError(mode, VIEWPORT_ANCHOR)
+        self.setTransformationAnchor(VIEWPORT_ANCHOR[mode])
 
-    def get_transformation_anchor(self) -> str:
+    def get_transformation_anchor(self) -> ViewportAnchorStr:
         """Return current transformation anchor.
-
-        Possible values: "none", "view_center", "under_mouse"
 
         Returns:
             viewport anchor
         """
-        return VIEWPORT_ANCHORS.inverse[self.transformationAnchor()]
+        return VIEWPORT_ANCHOR.inverse[self.transformationAnchor()]
 
-    def set_resize_anchor(self, mode: str):
+    def set_resize_anchor(self, mode: ViewportAnchorStr):
         """Set how the view should position the scene during resizes.
-
-        Allowed values are "none", "view_center", "under_mouse"
 
         Args:
             mode: resize anchor to use
@@ -120,24 +130,20 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Raises:
             InvalidParamError: mode does not exist
         """
-        if mode not in VIEWPORT_ANCHORS:
-            raise InvalidParamError(mode, VIEWPORT_ANCHORS)
-        self.setResizeAnchor(VIEWPORT_ANCHORS[mode])
+        if mode not in VIEWPORT_ANCHOR:
+            raise InvalidParamError(mode, VIEWPORT_ANCHOR)
+        self.setResizeAnchor(VIEWPORT_ANCHOR[mode])
 
-    def get_resize_anchor(self) -> str:
+    def get_resize_anchor(self) -> ViewportAnchorStr:
         """Return current resize anchor.
-
-        Possible values: "none", "view_center", "under_mouse"
 
         Returns:
             resize anchor
         """
-        return VIEWPORT_ANCHORS.inverse[self.resizeAnchor()]
+        return VIEWPORT_ANCHOR.inverse[self.resizeAnchor()]
 
-    def set_viewport_update_mode(self, mode: str):
+    def set_viewport_update_mode(self, mode: ViewportUpdateModeStr):
         """Set how the viewport should update its contents.
-
-        Allowed values are "full", "minimal", "smart", "bounding_rect", "none"
 
         Args:
             mode: viewport update mode to use
@@ -145,24 +151,20 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Raises:
             InvalidParamError: mode does not exist
         """
-        if mode not in VIEWPORT_UPDATE_MODES:
-            raise InvalidParamError(mode, VIEWPORT_UPDATE_MODES)
-        self.setViewportUpdateMode(VIEWPORT_UPDATE_MODES[mode])
+        if mode not in VIEWPORT_UPDATE_MODE:
+            raise InvalidParamError(mode, VIEWPORT_UPDATE_MODE)
+        self.setViewportUpdateMode(VIEWPORT_UPDATE_MODE[mode])
 
-    def get_viewport_update_mode(self) -> str:
+    def get_viewport_update_mode(self) -> ViewportUpdateModeStr:
         """Return current viewport update mode.
-
-        Possible values: "full", "minimal", "smart", "bounding_rect", "none"
 
         Returns:
             viewport update mode
         """
-        return VIEWPORT_UPDATE_MODES.inverse[self.viewportUpdateMode()]
+        return VIEWPORT_UPDATE_MODE.inverse[self.viewportUpdateMode()]
 
-    def set_drag_mode(self, mode: str):
+    def set_drag_mode(self, mode: DragModeStr):
         """Set the behavior for dragging the mouse while the left mouse button is pressed.
-
-        Allowed values are "none", "scroll_hand", "rubber_band"
 
         Args:
             mode: drag mode to use
@@ -170,25 +172,20 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Raises:
             InvalidParamError: mode does not exist
         """
-        if mode not in DRAG_MODES:
-            raise InvalidParamError(mode, DRAG_MODES)
-        self.setDragMode(DRAG_MODES[mode])
+        if mode not in DRAG_MODE:
+            raise InvalidParamError(mode, DRAG_MODE)
+        self.setDragMode(DRAG_MODE[mode])
 
-    def get_drag_mode(self) -> str:
+    def get_drag_mode(self) -> DragModeStr:
         """Return current drag mode.
-
-        Possible values: "none", "scroll_hand", "rubber_band"
 
         Returns:
             drag mode
         """
-        return DRAG_MODES.inverse[self.dragMode()]
+        return DRAG_MODE.inverse[self.dragMode()]
 
-    def set_rubberband_selection_mode(self, mode: str):
+    def set_rubberband_selection_mode(self, mode: ItemSelectionModeStr):
         """Set the behavior for selecting items with a rubber band selection rectangle.
-
-        Allowed values are "contains_shape", "intersects_shape", "contains_bounding_rect",
-        "intersects_bounding_rect"
 
         Args:
             mode: rubberband selection mode to use
@@ -196,25 +193,20 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Raises:
             InvalidParamError: mode does not exist
         """
-        if mode not in ITEM_SELECTION_MODES:
-            raise InvalidParamError(mode, ITEM_SELECTION_MODES)
-        self.setRubberBandSelectionMode(ITEM_SELECTION_MODES[mode])
+        if mode not in ITEM_SELECTION_MODE:
+            raise InvalidParamError(mode, ITEM_SELECTION_MODE)
+        self.setRubberBandSelectionMode(ITEM_SELECTION_MODE[mode])
 
-    def get_rubberband_selection_mode(self) -> str:
+    def get_rubberband_selection_mode(self) -> ItemSelectionModeStr:
         """Return current rubberband selection mode.
-
-        Possible values: "contains_shape", "intersects_shape", "contains_bounding_rect",
-        "intersects_bounding_rect"
 
         Returns:
             rubberband selection mode
         """
-        return ITEM_SELECTION_MODES.inverse[self.rubberBandSelectionMode()]
+        return ITEM_SELECTION_MODE.inverse[self.rubberBandSelectionMode()]
 
-    def set_cache_mode(self, mode: str):
+    def set_cache_mode(self, mode: CacheModeStr):
         """Set the cache mode.
-
-        Allowed values are "none", "background"
 
         Args:
             mode: cache mode to use
@@ -226,10 +218,8 @@ class GraphicsView(QtWidgets.QGraphicsView):
             raise InvalidParamError(mode, CACHE_MODES)
         self.setCacheMode(CACHE_MODES[mode])
 
-    def get_cache_mode(self) -> str:
+    def get_cache_mode(self) -> CacheModeStr:
         """Return current cache mode.
-
-        Possible values: "none", "background"
 
         Returns:
             cache mode

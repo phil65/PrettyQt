@@ -1,8 +1,10 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt.utils import bidict
 
-PAGE_SIZE_IDS = bidict(
+PAGE_SIZE_ID = bidict(
     a0=QtGui.QPageSize.A0,
     a1=QtGui.QPageSize.A1,
     a2=QtGui.QPageSize.A2,
@@ -145,6 +147,8 @@ UNITS = bidict(
     cicero=QtGui.QPageSize.Cicero,
 )
 
+UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]
+
 
 class PageSize(QtGui.QPageSize):
     def __repr__(self):
@@ -153,10 +157,8 @@ class PageSize(QtGui.QPageSize):
     def __reduce__(self):
         return (self.__class__, (self.id(),))
 
-    def get_definition_units(self) -> str:
+    def get_definition_units(self) -> UnitStr:
         """Get the definition unit.
-
-        Possible values: "millimeter", "point", "inch", "pica", "didot", "cicero"
 
         Returns:
             unit
@@ -172,7 +174,7 @@ class PageSize(QtGui.QPageSize):
         Returns:
             page size id
         """
-        return PAGE_SIZE_IDS.inverse[self.id()]
+        return PAGE_SIZE_ID.inverse[self.id()]
 
 
 if __name__ == "__main__":
