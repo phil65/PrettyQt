@@ -1,4 +1,6 @@
-from typing import Iterator, Literal
+from __future__ import annotations
+
+from typing import Iterator, Literal, Union, Tuple
 
 from qtpy import QtCore
 
@@ -30,19 +32,43 @@ class LineF(QtCore.QLineF):
         else:
             raise KeyError(index)
 
-    def __setitem__(self, index: Literal[0, 1], value: core.PointF):
+    def __setitem__(
+        self, index: Literal[0, 1], value: Union[QtCore.QPointF, Tuple[float, float]]
+    ):
         if index == 0:
-            self.setP1(value)
+            self.set_p1(value)
         elif index == 1:
-            self.setP2(value)
+            self.set_p2(value)
         else:
             raise KeyError(index)
+
+    def set_p1(self, point: Union[QtCore.QPointF, Tuple[float, float]]):
+        if isinstance(point, tuple):
+            point = core.PointF(*point)
+        self.setP1(point)
 
     def get_p1(self) -> core.PointF:
         return core.PointF(self.p1())
 
+    def set_p2(self, point: Union[QtCore.QPointF, Tuple[float, float]]):
+        if isinstance(point, tuple):
+            point = core.PointF(*point)
+        self.setP2(point)
+
     def get_p2(self) -> core.PointF:
         return core.PointF(self.p2())
+
+    def get_center(self) -> core.PointF:
+        return core.PointF(self.center())
+
+    def get_normal_vector(self) -> LineF:
+        return LineF(self.normalVector())
+
+    def get_unit_vector(self) -> LineF:
+        return LineF(self.unitVector())
+
+    def to_line(self) -> core.Line:
+        return core.Line(self.toLine())
 
 
 if __name__ == "__main__":

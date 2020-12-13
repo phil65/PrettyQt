@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Iterator
+from typing import Literal, Iterator, Union, Tuple
 
 import math
 
@@ -35,21 +35,37 @@ class Line(QtCore.QLine):
         else:
             raise KeyError(index)
 
-    def __setitem__(self, index: Literal[0, 1], value: QtCore.Point):
+    def __setitem__(
+        self, index: Literal[0, 1], value: Union[QtCore.Point, Tuple[int, int]]
+    ):
         if index == 0:
-            self.setP1(value)
+            self.set_p1(value)
         elif index == 1:
-            self.setP2(value)
+            self.set_p2(value)
         else:
             raise KeyError(index)
 
     def get_p1(self) -> core.Point:
         return core.Point(self.p1())
 
+    def set_p1(self, point: Union[QtCore.QPoint, Tuple[int, int]]):
+        if isinstance(point, tuple):
+            point = core.PointF(*point)
+        self.setP1(point)
+
     def get_p2(self) -> core.Point:
         return core.Point(self.p2())
 
+    def set_p2(self, point: Union[QtCore.QPoint, Tuple[int, int]]):
+        if isinstance(point, tuple):
+            point = core.PointF(*point)
+        self.setP2(point)
+
+    def get_center(self) -> core.Point:
+        return core.Point(self.center())
+
 
 if __name__ == "__main__":
-    line = Line(core.Point(0, 0), core.Point(2, 2))
+    line = Line(core.Point(0, 0), core.Point(0, 0))
+    print(bool(line))
     print(reversed(line))

@@ -324,6 +324,10 @@ def test_linef():
     line[1] = p2
     assert line[0] == p1
     assert line[1] == p2
+    assert line.get_center() == core.PointF(0.5, 0)
+    line.get_normal_vector()
+    line.get_unit_vector()
+    line.to_line()
     line2 = core.LineF(1, 0, 0, 0)
     assert line2 == reversed(line)
     assert abs(line) == 1
