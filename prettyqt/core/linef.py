@@ -10,7 +10,7 @@ class LineF(QtCore.QLineF):
         return f"{type(self).__name__}({repr(self.get_p1())}, {repr(self.get_p1())})"
 
     def __reduce__(self):
-        return (self.__class__, (self.get_p1(), self.get_p1()))
+        return self.__class__, (self.get_p1(), self.get_p1())
 
     def __reversed__(self):
         return LineF(self.get_p2(), self.get_p1())

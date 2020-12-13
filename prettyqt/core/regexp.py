@@ -6,7 +6,7 @@ class RegExp(QtCore.QRegExp):
         return f"{type(self).__name__}({self.pattern()!r})"
 
     def __reduce__(self):
-        return (self.__class__, (self.pattern(),))
+        return self.__class__, (self.pattern(),)
 
 
 if __name__ == "__main__":

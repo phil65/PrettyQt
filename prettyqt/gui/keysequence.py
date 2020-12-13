@@ -114,7 +114,7 @@ class KeySequence(QtGui.QKeySequence):
         return not self.isEmpty()
 
     def __reduce__(self):
-        return (self.__class__, (self.toString(),))
+        return self.__class__, (self.toString(),)
 
     def get_matches(self, seq: Union[QtGui.QKeySequence, str]):
         if isinstance(seq, str):

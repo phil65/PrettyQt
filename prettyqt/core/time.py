@@ -10,7 +10,7 @@ class Time(QtCore.QTime):
         return self.toString()
 
     def __reduce__(self):
-        return (self.__class__, (self.hour(), self.minute(), self.second(), self.msec()))
+        return self.__class__, (self.hour(), self.minute(), self.second(), self.msec())
 
 
 if __name__ == "__main__":

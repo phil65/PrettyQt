@@ -27,7 +27,7 @@ class Calendar(QtCore.QCalendar):
         return f"{type(self).__name__}({self.name()!r})"
 
     def __reduce__(self):
-        return (self.__class__, (self.name(),))
+        return self.__class__, (self.name(),)
 
     # def __bool__(self):
     #     return self.isValid()

@@ -49,7 +49,7 @@ class RegularExpression(QtCore.QRegularExpression):
         return f"{type(self).__name__}({self.pattern()!r})"
 
     def __reduce__(self):
-        return (self.__class__, (self.pattern(), int(self.flags)))
+        return self.__class__, (self.pattern(), int(self.flags))
 
     def globalMatch(self, *args, **kwargs) -> core.RegularExpressionMatchIterator:
         it = super().globalMatch(*args, **kwargs)

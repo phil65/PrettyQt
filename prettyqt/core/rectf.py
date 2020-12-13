@@ -9,7 +9,7 @@ class RectF(QtCore.QRectF):
         )
 
     def __reduce__(self):
-        return (self.__class__, (self.x(), self.y(), self.width(), self.height()))
+        return self.__class__, (self.x(), self.y(), self.width(), self.height())
 
 
 if __name__ == "__main__":

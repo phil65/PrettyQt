@@ -11,7 +11,7 @@ class SizeF(QtCore.QSizeF):
         return (self.width(), self.height())[index]
 
     def __reduce__(self):
-        return (self.__class__, (self.width(), self.height()))
+        return self.__class__, (self.width(), self.height())
 
     def expanded_to(self, size: QtCore.QSizeF) -> SizeF:
         return SizeF(self.expandedTo(size))

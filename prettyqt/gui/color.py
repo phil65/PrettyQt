@@ -12,7 +12,7 @@ class Color(QtGui.QColor):
         return self.name()
 
     def __reduce__(self):
-        return (self.__class__, (self.red(), self.green(), self.blue(), self.alpha()))
+        return self.__class__, (self.red(), self.green(), self.blue(), self.alpha())
 
     def serialize_fields(self):
         return dict(color=self.toString())

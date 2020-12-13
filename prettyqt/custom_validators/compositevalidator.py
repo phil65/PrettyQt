@@ -32,7 +32,7 @@ class CompositeValidator(gui.Validator):
         return iter(self.validators)
 
     def __reduce__(self):
-        return (self.__class__, (self.validators,))
+        return self.__class__, (self.validators,)
 
     def __len__(self):
         return len(self.validators)

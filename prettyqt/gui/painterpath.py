@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Tuple, Union, Iterator, Literal
 
 from qtpy import QtGui, QtCore
@@ -37,7 +39,7 @@ class PainterPath(QtGui.QPainterPath):
     def __bool__(self):
         return not self.isEmpty()
 
-    def __contains__(self, item: Union[QtCore.QPointF, QtCore.QRectF, "PainterPath"]):
+    def __contains__(self, item: Union[QtCore.QPointF, QtCore.QRectF, PainterPath]):
         return self.contains(item)
 
     def add_rect(self, rect: Union[QtCore.QRectF, QtCore.QRect]):

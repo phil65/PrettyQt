@@ -10,7 +10,7 @@ class Margins(QtCore.QMargins):
         )
 
     def __reduce__(self):
-        return (self.__class__, (self.left(), self.top(), self.right(), self.bottom()))
+        return self.__class__, (self.left(), self.top(), self.right(), self.bottom())
 
     def __bool__(self):
         return not self.isNull()

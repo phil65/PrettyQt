@@ -155,7 +155,7 @@ class PageSize(QtGui.QPageSize):
         return f"{self.__class__.__name__}()"
 
     def __reduce__(self):
-        return (self.__class__, (self.id(),))
+        return self.__class__, (self.id(),)
 
     def get_definition_units(self) -> UnitStr:
         """Get the definition unit.
