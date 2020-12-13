@@ -2,7 +2,7 @@
 
 import pytest
 
-from prettyqt import webenginewidgets
+from prettyqt import webenginewidgets, core
 from prettyqt.utils import InvalidParamError
 
 
@@ -45,6 +45,7 @@ def test_webenginepage(qapp):
     page = webenginewidgets.WebEnginePage()
     page.set_zoom(1.5)
     page.set_url("http://www.google.de")
+    assert page.get_url() == core.Url("http://www.google.de")
     page.load_url("http://www.google.de")
     page.find_text("test", backward=True, case_sensitive=True, callback=None)
     page.set_lifecycle_state("discarded")
@@ -58,6 +59,11 @@ def test_webenginepage(qapp):
     page.get_settings()
     page.set_setting("auto_load_images", False)
     assert page.get_setting("auto_load_images") is False
+    page.get_icon_url()
+    page.get_requested_url()
+    page.get_scroll_position()
+    page.get_contents_size()
+    # page.choose_files("open", [], [])
 
 
 def test_webengineprofile(qapp):

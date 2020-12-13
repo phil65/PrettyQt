@@ -3,7 +3,7 @@ from typing import Callable, Union, Literal
 
 from qtpy import QtWebEngineWidgets, QtCore
 
-from prettyqt import core, webenginewidgets
+from prettyqt import core, webenginewidgets, gui
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -207,6 +207,9 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
             zoom_factor=self.zoomFactor(),
         )
 
+    def get_icon(self) -> gui.Icon:
+        return gui.Icon(self.icon())
+
     def set_url(self, url: Union[str, pathlib.Path]):
         """Set the url of the WebEnginePage.
 
@@ -220,6 +223,21 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         elif isinstance(url, str):
             url = core.Url(url)
         self.setUrl(url)
+
+    def get_url(self) -> core.Url:
+        return core.Url(self.url())
+
+    def get_icon_url(self) -> core.Url:
+        return core.Url(self.iconUrl())
+
+    def get_requested_url(self) -> core.Url:
+        return core.Url(self.requestedUrl())
+
+    def get_scroll_position(self) -> core.PointF:
+        return core.PointF(self.scrollPosition())
+
+    def get_contents_size(self) -> core.SizeF:
+        return core.SizeF(self.contentsSize())
 
     def load_url(self, url: Union[str, pathlib.Path]):
         """Load the URL.
@@ -348,6 +366,16 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
 
     def get_context_menu_data(self) -> webenginewidgets.WebEngineContextMenuData:
         return webenginewidgets.WebEngineContextMenuData(self.contextMenuData())
+
+    # def choose_files(
+    #     self,
+    #     mode: FileSelectionModeStr,
+    #     old_files: List[str],
+    #     mimetypes: List[str],
+    # ) -> List[str]:
+    #     if mode not in FILE_SELECTION_MODE:
+    #         raise InvalidParamError(mode, FILE_SELECTION_MODE)
+    #     return self.chooseFiles(FILE_SELECTION_MODE[mode], old_files, mimetypes)
 
 
 if __name__ == "__main__":
