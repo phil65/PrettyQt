@@ -14,11 +14,13 @@ class Object(QtCore.QObject):
         return f"{self.__class__.__name__}()"
 
     def __setstate__(self, state):
-        self.__init__()  # type: ignore
         self.set_id(state["object_name"])
 
     def __getstate__(self):
         return self.serialize()
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def serialize_fields(self):
         return dict(object_name=self.objectName())

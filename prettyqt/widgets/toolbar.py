@@ -37,8 +37,13 @@ class ToolBar(QtWidgets.QToolBar):
         self.menu_buttons = list()
 
     def __setstate__(self, state: Dict[str, Any]) -> None:
-        super().__init__()
         self.addActions(state["actions"])
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
+    def serialize_fields(self):
+        return dict(actions=self.actions(), allowed_areas=self.get_allowed_areas())
 
     def __repr__(self):
         return f"ToolBar({self.windowTitle()!r})"

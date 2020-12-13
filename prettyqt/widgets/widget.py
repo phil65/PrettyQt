@@ -114,13 +114,15 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         return f"{cls_name}({params})"
 
     def __setstate__(self, state: Dict[str, Any]) -> None:
-        super().__init__()
         if self.layout() is None:
             self.set_layout(state["layout"])
         self.setSizePolicy(state["size_policy"])
         self.setAccessibleName(state["accessible_name"])
         self.setToolTip(state.get("tool_tip", ""))
         self.setStatusTip(state.get("status_tip", ""))
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
 
     def serialize_fields(self) -> Dict[str, Any]:
         icon = gui.Icon(self.windowIcon())
