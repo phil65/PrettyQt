@@ -19,7 +19,7 @@ METHODS = bidict(
 
 class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
     def __repr__(self):
-        return f"WebEngineHttpRequest({self.get_url()})"
+        return f"{type(self).__name__}({self.get_url()})"
 
     def set_headers(self, headers: Dict[str, str]):
         for k, v in headers.items():

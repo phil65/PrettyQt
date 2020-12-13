@@ -16,11 +16,6 @@ class ExpandableLine(widgets.Widget):
 
         self._animation_duration = animation_duration
 
-        base_layout = widgets.GridLayout()
-        base_layout.setVerticalSpacing(0)
-        base_layout.set_margin(0)
-        self.setLayout(base_layout)
-
         self.expand_btn = widgets.ToolButton()
         self.expand_btn.set_text(title)
         with self.expand_btn.edit_stylesheet() as ss:
@@ -46,9 +41,13 @@ class ExpandableLine(widgets.Widget):
         self.toggle_anim.add_property_animation(self, "minimumHeight")
         self.toggle_anim.add_property_animation(self, "maximumHeight")
         self.toggle_anim.add_property_animation(self.content_area, "maximumHeight")
+        base_layout = widgets.GridLayout()
+        base_layout.setVerticalSpacing(0)
+        base_layout.set_margin(0)
         base_layout.addWidget(self.expand_btn, 0, 0, 1, 1, QtCore.Qt.AlignLeft)
         base_layout[0, 2] = header_line
         base_layout[1, 0:2] = self.content_area
+        self.setLayout(base_layout)
         # self.toggle_anim.setStartValue(0)
         # self.toggle_anim.setEndValue(300)
 

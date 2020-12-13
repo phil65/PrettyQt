@@ -100,7 +100,7 @@ if __name__ == "__main__":
     app = widgets.app()
     modules = list_system_modules()
     tableview = widgets.TableView()
-    model = ImportlibDistributionModel.from_package("pandas")
+    model = ImportlibDistributionModel.from_package("prettyqt")
     tableview.set_model(model)
     tableview.show()
     app.main_loop()

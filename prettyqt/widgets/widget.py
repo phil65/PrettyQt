@@ -414,7 +414,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             raise ValueError("Invalid Layout")
         self.setLayout(self.box)
         if margin is not None:
-            self.box.setContentsMargins(margin, margin, margin, margin)
+            self.box.set_margin(margin)
         if spacing is not None:
             self.box.setSpacing(spacing)
 
