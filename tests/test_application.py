@@ -57,7 +57,7 @@ def test_application(qapp):
     qapp.get_application_dir_path()
     qapp.add_library_path("")
     qapp.get_library_paths()
-    assert qapp.get_application_state() in ["inactive", "active"]
+    assert qapp.get_application_state() in [["inactive"], ["active"]]
     qapp.get_icon()
     event = QtGui.QKeyEvent(
         QtCore.QEvent.KeyPress, QtCore.Qt.Key_Down, QtCore.Qt.KeyboardModifiers(0)
