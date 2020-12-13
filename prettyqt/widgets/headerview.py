@@ -34,7 +34,7 @@ class HeaderView(QtWidgets.QHeaderView):
         super().__init__(orientation, parent=parent)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
-        self._widget_name = parent.id if parent is not None else ""
+        self._widget_name = parent.get_id() if parent is not None else ""
 
     def generate_header_id(self):
         # return f"{self._widget_name}.state"

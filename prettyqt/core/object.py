@@ -14,7 +14,7 @@ class Object(QtCore.QObject):
         return f"{self.__class__.__name__}()"
 
     def __setstate__(self, state):
-        self.__init__()
+        self.__init__()  # type: ignore
         self.set_id(state["object_name"])
 
     def __getstate__(self):
@@ -58,13 +58,13 @@ class Object(QtCore.QObject):
     def has_id(self) -> bool:
         return self.objectName() != ""
 
-    @property
-    def id(self) -> str:
-        return self.objectName()
+    # @property
+    # def id(self) -> str:
+    #     return self.objectName()
 
-    @id.setter
-    def id(self, name: str):
-        self.setObjectName(name)
+    # @id.setter
+    # def id(self, name: str):
+    #     self.setObjectName(name)
 
     def find_children(
         self,

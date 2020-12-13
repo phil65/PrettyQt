@@ -1311,7 +1311,7 @@ def test_tablewidgetselectionrange():
 def test_toolbox(qtbot):
     w = widgets.RadioButton("test1")
     w2 = widgets.RadioButton("test2")
-    w2.id = "test_name"
+    w2.set_id("test_name")
     widget = widgets.ToolBox()
     widget.add_widget(w, "title", "mdi.timer")
     widget.add_widget(w2)

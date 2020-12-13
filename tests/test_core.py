@@ -392,7 +392,7 @@ def test_object(qapp):
         pickle.dump(obj, jar)
     with open("data.pkl", "rb") as jar:
         obj = pickle.load(jar)
-    assert obj.id == "test"
+    assert obj.get_id() == "test"
     w = widgets.Splitter("horizontal")
     w1 = widgets.PushButton()
     w1.set_id("w1")

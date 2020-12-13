@@ -297,7 +297,7 @@ class DetachedTab(widgets.MainWindow):
     #  If the window is closed, emit the on_close and give the
     #  content widget back to the DetachableTabWidget
     def closeEvent(self, event):
-        self.on_close.emit(self.widget, self.id, self.windowIcon())
+        self.on_close.emit(self.widget, self.get_id(), self.windowIcon())
 
 
 if __name__ == "__main__":
