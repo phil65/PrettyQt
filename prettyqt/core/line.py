@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import Literal, Iterator
+
 import math
 
 from qtpy import QtCore
@@ -16,25 +20,28 @@ class Line(QtCore.QLine):
         p = self.get_p2() - self.get_p1()
         return math.sqrt((p.x() * p.x()) + (p.y() * p.y()))
 
-    def __reversed__(self):
-        self[0], self[1] = self[1], self[0]
-        return self
+    def __reversed__(self) -> Line:
+        return Line(self.get_p2(), self.get_p1())
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[core.Point]:
         yield self.get_p1()
         yield self.get_p2()
 
-    def __getitem__(self, index: int) -> core.Point:
+    def __getitem__(self, index: Literal[0, 1]) -> core.Point:
         if index == 0:
             return self.get_p1()
         elif index == 1:
             return self.get_p2()
+        else:
+            raise KeyError(index)
 
-    def __setitem__(self, index: int, value: QtCore.QPoint):
+    def __setitem__(self, index: Literal[0, 1], value: QtCore.Point):
         if index == 0:
             self.setP1(value)
         elif index == 1:
             self.setP2(value)
+        else:
+            raise KeyError(index)
 
     def get_p1(self) -> core.Point:
         return core.Point(self.p1())
