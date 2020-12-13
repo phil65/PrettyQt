@@ -1,4 +1,4 @@
-from typing import Optional, Iterator, MutableMapping, Mapping
+from typing import Optional, Iterator, MutableMapping, Mapping, Union
 import logging
 
 from qtpy import QtCore, QtWidgets
@@ -117,6 +117,23 @@ class Application(QtWidgets.QApplication):
         #     if isinstance(widget, QtWidgets.QWidget) and widget.objectName() == name:
         #         return widget
         # return None
+
+    def send_event(self, obj_or_str: Union[str, QtCore.QObject], event: QtCore.QEvent):
+        obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
+        if obj is None:
+            raise ValueError(obj)
+        return self.sendEvent(obj, event)
+
+    def post_event(
+        self,
+        obj_or_str: Union[str, QtCore.QObject],
+        event: QtCore.QEvent,
+        priority: Union[int, core.coreapplication.EventPriorityStr] = "normal",
+    ):
+        obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
+        if obj is None:
+            raise ValueError(obj)
+        super().post_event(obj, event, priority)
 
     @classmethod
     def get_style_icon(cls, icon: str) -> gui.Icon:

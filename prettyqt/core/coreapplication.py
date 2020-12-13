@@ -1,10 +1,19 @@
-from typing import Callable, Union, List, Optional
+from typing import Callable, Union, List, Optional, Literal
 import pathlib
 
 from qtpy import QtCore
 
 from prettyqt import core
+from prettyqt.utils import bidict, InvalidParamError
 
+
+EVENT_PRIORITY = bidict(
+    high=QtCore.Qt.HighEventPriority,
+    normal=QtCore.Qt.NormalEventPriority,
+    low=QtCore.Qt.LowEventPriority,
+)
+
+EventPriorityStr = Literal["high", "normal", "low"]
 
 QtCore.QCoreApplication.__bases__ = (core.Object,)
 
@@ -65,6 +74,18 @@ class CoreApplication(QtCore.QCoreApplication):
         translator.load(str(file))
         self.installTranslator(translator)
         return translator
+
+    def post_event(
+        self,
+        obj: QtCore.QObject,
+        event: QtCore.QEvent,
+        priority: Union[int, EventPriorityStr] = "normal",
+    ):
+        if isinstance(priority, str):
+            if priority not in EVENT_PRIORITY:
+                raise InvalidParamError(priority, EVENT_PRIORITY)
+            priority = EVENT_PRIORITY[priority]
+        return self.postEvent(obj, event, priority)
 
     def main_loop(self) -> int:
         return self.exec_()

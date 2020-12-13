@@ -1,7 +1,7 @@
 """Tests for `prettyqt` package."""
 
 import pytest
-from qtpy import QtGui
+from qtpy import QtGui, QtCore
 
 from prettyqt import core, widgets
 from prettyqt.utils import InvalidParamError
@@ -59,3 +59,8 @@ def test_application(qapp):
     qapp.get_library_paths()
     assert qapp.get_application_state() == ["inactive"]
     qapp.get_icon()
+    event = QtGui.QKeyEvent(
+        QtCore.QEvent.KeyPress, QtCore.Qt.Key_Down, QtCore.Qt.KeyboardModifiers(0)
+    )
+    assert qapp.send_event("test", event) is True
+    qapp.post_event("test", event)
