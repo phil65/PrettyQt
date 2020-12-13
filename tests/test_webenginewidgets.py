@@ -101,6 +101,7 @@ def test_webenginesettings(qapp):
     settings = page.get_settings()
     settings["auto_load_images"] = False
     assert settings["auto_load_images"] is False
+    del settings["auto_load_images"]
     settings.set_unknown_url_scheme_policy("allow_all")
     with pytest.raises(InvalidParamError):
         settings.set_unknown_url_scheme_policy("test")
