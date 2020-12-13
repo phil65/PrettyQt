@@ -44,8 +44,7 @@ class Timeline(widgets.Widget):
         self.set_background_color(BACKGROUND_COLOR)
         self.set_text_color(TEXT_COLOR)
         self.set_text_font(FONT)
-        self.pos = None
-        self.pointer_pos = None
+        self._position = None
         self.pointer_time_pos = 0.0
         self.selected_sample = None
         self._clicking = False  # Check if mouse left button is being pressed
@@ -111,11 +110,11 @@ class Timeline(widgets.Widget):
                 qp.drawLine(3 * point, 40, 3 * point, y2)
                 point += 10
 
-            if self.pos is not None and self._is_in:
-                qp.drawLine(self.pos.x(), 0, self.pos.x(), 40)
+            if self._position is not None and self._is_in:
+                qp.drawLine(self._position.x(), 0, self._position.x(), 40)
 
             poly = gui.Polygon()
-            if self.pointer_pos is not None:
+            if self._position is not None:
                 val = self.pointer_time_pos / self.get_scale()
                 line = core.Line(val, 40, val, self.height())
                 poly.add_points((val - 10, 20), (val + 10, 20), (val, 40))
@@ -172,24 +171,22 @@ class Timeline(widgets.Widget):
             qp.drawLine(line)
 
     def mouseMoveEvent(self, e):
-        self.pos = e.pos()
+        self._position = e.pos()
 
         # if mouse is being pressed, update pointer
         if self._clicking:
-            x = self.pos.x()
-            self.pointer_pos = x
+            x = self._position.x()
             self.position_changed.emit(x)
             self._check_selection(x)
-            self.pointer_time_pos = self.pointer_pos * self.get_scale()
+            self.pointer_time_pos = x * self.get_scale()
 
         self.update()
 
     def mousePressEvent(self, e):
         if e.button() == QtCore.Qt.LeftButton:
             x = e.pos().x()
-            self.pointer_pos = x
             self.position_changed.emit(x)
-            self.pointer_time_pos = self.pointer_pos * self.get_scale()
+            self.pointer_time_pos = x * self.get_scale()
 
             self._check_selection(x)
 
