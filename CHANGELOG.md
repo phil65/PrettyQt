@@ -1,3 +1,12 @@
+## v0.147.0 (2020-12-13)
+
+### Feat
+
+- **ToolBar**: add get_allowed_areas method
+- **WebEnginePage**: add some additional methods
+- **WebEngineSettings**: add __delitem__ method
+- **Application**: add send/post_event methods
+
 ## v0.146.0 (2020-12-13)
 
 ### Fix
