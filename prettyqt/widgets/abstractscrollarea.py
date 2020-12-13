@@ -55,8 +55,6 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
     def set_size_adjust_policy(self, policy: SizePolicyStr):
         """Set size adjust policy.
 
-        Valid values are "content", "first_show", "ignored"
-
         Args:
             policy: size adjust policy to use
 
@@ -70,8 +68,6 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
     def get_size_adjust_policy(self) -> SizePolicyStr:
         """Return size adjust policy.
 
-        possible values are "content", "first_show", "ignored"
-
         Returns:
             size adjust policy
         """
@@ -79,8 +75,6 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
 
     def set_scrollbar_policy(self, mode: ScrollBarPolicyStr):
         """Set the policy for both scrollbars.
-
-        possible values are "always_on", "always_off", "as_needed"
 
         Args:
             mode: visibilty to set
@@ -96,8 +90,6 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
     def set_horizontal_scrollbar_policy(self, mode: ScrollBarPolicyStr):
         """Set the horizontal scrollbar visibility.
 
-        possible values are "always_on", "always_off", "as_needed"
-
         Args:
             mode: visibilty to set
 
@@ -110,8 +102,6 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
 
     def set_vertical_scrollbar_policy(self, mode: ScrollBarPolicyStr):
         """Set the vertical scrollbar visibility.
-
-        possible values are "always_on", "always_off", "as_needed"
 
         Args:
             mode: visibilty to set

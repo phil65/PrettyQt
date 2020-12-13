@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Union, Optional, Literal
 
 from qtpy import QtCore, QtWidgets
 
@@ -6,7 +6,7 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-MODES = bidict(
+SIZE_CONSTRAINT = bidict(
     default=QtWidgets.QLayout.SetDefaultConstraint,
     fixed=QtWidgets.QLayout.SetFixedSize,
     minimum=QtWidgets.QLayout.SetMinimumSize,
@@ -15,6 +15,10 @@ MODES = bidict(
     none=QtWidgets.QLayout.SetNoConstraint,
 )
 
+SizeConstraintStr = Literal[
+    "default", "fixed", "minimum", "maximum", "min_and_max", "none"
+]
+
 ALIGNMENTS = bidict(
     left=QtCore.Qt.AlignLeft,
     right=QtCore.Qt.AlignRight,
@@ -22,6 +26,7 @@ ALIGNMENTS = bidict(
     bottom=QtCore.Qt.AlignBottom,
 )
 
+AlignmentStr = Literal["left", "right", "top", "bottom"]
 
 QtWidgets.QLayout.__bases__ = (core.Object, widgets.LayoutItem)
 
@@ -71,10 +76,8 @@ class Layout(QtWidgets.QLayout):
     def set_spacing(self, pixels: int):
         self.setSpacing(pixels)
 
-    def set_size_mode(self, mode: str):
+    def set_size_mode(self, mode: SizeConstraintStr):
         """Set the size mode of the layout.
-
-        Allowed values are "default", "fixed", "minimum", "maximum", "min_and_max", "none"
 
         Args:
             mode: size mode for the layout
@@ -82,30 +85,26 @@ class Layout(QtWidgets.QLayout):
         Raises:
             InvalidParamError: size mode does not exist
         """
-        if mode not in MODES:
-            raise InvalidParamError(mode, MODES)
-        self.setSizeConstraint(MODES[mode])
+        if mode not in SIZE_CONSTRAINT:
+            raise InvalidParamError(mode, SIZE_CONSTRAINT)
+        self.setSizeConstraint(SIZE_CONSTRAINT[mode])
 
-    def get_size_mode(self) -> str:
+    def get_size_mode(self) -> SizeConstraintStr:
         """Return current size mode.
-
-        Possible values: "default", "fixed", "minimum", "maximum", "min_and_max", "none"
 
         Returns:
             size mode
         """
-        return MODES.inverse[self.sizeConstraint()]
+        return SIZE_CONSTRAINT.inverse[self.sizeConstraint()]
 
     def set_alignment(
         self,
-        alignment: str,
+        alignment: AlignmentStr,
         item: Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout]] = None,
     ):
         """Set the alignment for widget / layout to alignment.
 
         Returns true if w is found in this layout (not including child layouts).
-
-        Allowed values for alignment:  "left", "right", "top", "bottom"
 
         Args:
             alignment: alignment for the layout

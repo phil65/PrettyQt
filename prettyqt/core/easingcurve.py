@@ -1,10 +1,10 @@
-from typing import Callable
+from typing import Callable, Union
 
 from qtpy import QtCore
 
 from prettyqt.utils import bidict, InvalidParamError
 
-TYPES = bidict(
+TYPE = bidict(
     linear=QtCore.QEasingCurve.Linear,
     in_quad=QtCore.QEasingCurve.InQuad,
     out_quad=QtCore.QEasingCurve.OutQuad,
@@ -51,18 +51,25 @@ TYPES = bidict(
     custom=QtCore.QEasingCurve.Custom,
 )
 
+CurveMethod = Callable[[float], float]
+
 
 class EasingCurve(QtCore.QEasingCurve):
+    def __init__(self, other_or_type: Union[str, int, QtCore.QEasingCurve] = "linear"):
+        if isinstance(other_or_type, str) and other_or_type in TYPE:
+            other_or_type = TYPE[other_or_type]
+        super().__init__(other_or_type)
+
     def __getitem__(self, value: float) -> float:
         return self.valueForProgress(value)
 
     def __repr__(self):
         return f"{type(self).__name__}({self.get_type()!r})"
 
-    def set_custom_type(self, method: Callable[[float], float]):
+    def set_custom_type(self, method: CurveMethod):
         self.setCustomType(method)
 
-    def get_custom_type(self) -> Callable[[float], float]:
+    def get_custom_type(self) -> CurveMethod:
         return self.customType()
 
     def set_type(self, typ: str):
@@ -85,9 +92,9 @@ class EasingCurve(QtCore.QEasingCurve):
         Raises:
             InvalidParamError: easing curve type does not exist
         """
-        if typ not in TYPES:
-            raise InvalidParamError(typ, TYPES)
-        self.setType(TYPES[typ])
+        if typ not in TYPE:
+            raise InvalidParamError(typ, TYPE)
+        self.setType(TYPE[typ])
 
     def get_type(self) -> str:
         """Get the current easing curve type.
@@ -106,8 +113,9 @@ class EasingCurve(QtCore.QEasingCurve):
         Returns:
             easing curve type
         """
-        return TYPES.inverse[self.type()]
+        return TYPE.inverse[self.type()]
 
 
 if __name__ == "__main__":
     c = EasingCurve()
+    print(repr(c))

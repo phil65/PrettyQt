@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Literal
 
 from qtpy import QtCore
 
@@ -11,17 +11,19 @@ FLOAT_PRECISION = bidict(
     double=QtCore.QDataStream.DoublePrecision,
 )
 
+FloatPrecisionStr = Literal["single", "double"]
+
 BYTE_ORDER = bidict(
     big_endian=QtCore.QDataStream.BigEndian,
     little_endian=QtCore.QDataStream.LittleEndian,
 )
 
+ByteOrderStr = Literal["big_endian", "little_endian"]
+
 
 class DataStream(QtCore.QDataStream):
-    def set_byte_order(self, order: str):
+    def set_byte_order(self, order: ByteOrderStr):
         """Set byte order.
-
-        valid values are: "big_endian", "little_endian"
 
         Args:
             order: byte order to use
@@ -33,20 +35,16 @@ class DataStream(QtCore.QDataStream):
             raise InvalidParamError(order, BYTE_ORDER)
         self.setByteOrder(BYTE_ORDER[order])
 
-    def get_byte_order(self) -> bool:
+    def get_byte_order(self) -> ByteOrderStr:
         """Return byte order.
-
-        possible values are "big_endian", "little_endian"
 
         Returns:
             byte order
         """
         return BYTE_ORDER.inverse[self.byteOrder()]
 
-    def set_float_precision(self, precision: str):
+    def set_float_precision(self, precision: FloatPrecisionStr):
         """Set floating point precision.
-
-        valid values are: "single", "double"
 
         Args:
             precision: floating point precision
@@ -58,10 +56,8 @@ class DataStream(QtCore.QDataStream):
             raise InvalidParamError(precision, FLOAT_PRECISION)
         self.setFloatingPointPrecision(FLOAT_PRECISION[precision])
 
-    def get_float_precision(self) -> bool:
+    def get_float_precision(self) -> FloatPrecisionStr:
         """Return floating point precision.
-
-        possible values are "single", "double"
 
         Returns:
             floating point precision

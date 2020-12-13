@@ -1,5 +1,5 @@
 import pathlib
-from typing import Callable, Union
+from typing import Callable, Union, Literal
 
 from qtpy import QtWebEngineWidgets, QtCore
 
@@ -10,7 +10,7 @@ from prettyqt.utils import bidict, InvalidParamError
 QtWebEngineWidgets.QWebEnginePage.__bases__ = (core.Object,)
 
 
-FEATURES = bidict(
+FEATURE = bidict(
     notifications=QtWebEngineWidgets.QWebEnginePage.Notifications,
     geolocation=QtWebEngineWidgets.QWebEnginePage.Geolocation,
     media_audio_capture=QtWebEngineWidgets.QWebEnginePage.MediaAudioCapture,
@@ -21,15 +21,30 @@ FEATURES = bidict(
     desktop_audiovideo_capture=QtWebEngineWidgets.QWebEnginePage.DesktopAudioVideoCapture,
 )
 
-FILE_SELECTION_MODES = bidict(
+FeatureStr = Literal[
+    "notifications",
+    "geolocation",
+    "media_audio_capture",
+    "media_video_capture",
+    "media_audiovideo_capture",
+    "mouse_lock",
+    "desktop_video_capture",
+    "desktop_audiovideo_capture",
+]
+
+FILE_SELECTION_MODE = bidict(
     open=QtWebEngineWidgets.QWebEnginePage.FileSelectOpen,
     open_multiple=QtWebEngineWidgets.QWebEnginePage.FileSelectOpenMultiple,
 )
+
+FileSelectionModeStr = Literal["open", "open_multiple"]
 
 FIND_FLAGS = bidict(
     backward=QtWebEngineWidgets.QWebEnginePage.FindBackward,
     case_sensitive=QtWebEngineWidgets.QWebEnginePage.FindCaseSensitively,
 )
+
+FindFlagStr = Literal["backward", "case_sensitive"]
 
 JS_CONSOLE_MESSAGE_LEVEL = bidict(
     info=QtWebEngineWidgets.QWebEnginePage.InfoMessageLevel,
@@ -37,11 +52,13 @@ JS_CONSOLE_MESSAGE_LEVEL = bidict(
     error=QtWebEngineWidgets.QWebEnginePage.ErrorMessageLevel,
 )
 
-LIFECYCLE_STATES = bidict(
+LIFECYCLE_STATE = bidict(
     active=QtWebEngineWidgets.QWebEnginePage.LifecycleState.Active,
     frozen=QtWebEngineWidgets.QWebEnginePage.LifecycleState.Frozen,
     discarded=QtWebEngineWidgets.QWebEnginePage.LifecycleState.Discarded,
 )
+
+LifecycleStateStr = Literal["active", "frozen", "discarded"]
 
 NAVIGATION_TYPES = bidict(
     link_clicked=QtWebEngineWidgets.QWebEnginePage.NavigationTypeLinkClicked,
@@ -58,6 +75,8 @@ PERMISSION_POLICIES = bidict(
     granted_by_user=QtWebEngineWidgets.QWebEnginePage.PermissionGrantedByUser,
     denied_by_user=QtWebEngineWidgets.QWebEnginePage.PermissionDeniedByUser,
 )
+
+PermissionPolicyStr = Literal["unknown", "granted_by_user", "denied_by_user"]
 
 RENDER_PROCESS_TERMINATION_STATUS = bidict(
     normal=QtWebEngineWidgets.QWebEnginePage.NormalTerminationStatus,
@@ -185,7 +204,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         string: str,
         backward: bool = False,
         case_sensitive: bool = False,
-        callback: Callable = None,
+        callback: Callable[[bool], None] = None,
     ):
         """Find text in the current page.
 
@@ -222,10 +241,8 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
             flag |= self.FindBackward
         self.findText(string, flag, callback)
 
-    def set_lifecycle_state(self, state: str):
+    def set_lifecycle_state(self, state: LifecycleStateStr):
         """Set lifecycle state.
-
-        Valid values: "active", "frozen", "discarded"
 
         Args:
             state: lifecycle state
@@ -233,28 +250,26 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         Raises:
             InvalidParamError: lifecycle state does not exist
         """
-        if state not in LIFECYCLE_STATES:
-            raise InvalidParamError(state, LIFECYCLE_STATES)
-        self.setLifecycleState(LIFECYCLE_STATES[state])
+        if state not in LIFECYCLE_STATE:
+            raise InvalidParamError(state, LIFECYCLE_STATE)
+        self.setLifecycleState(LIFECYCLE_STATE[state])
 
-    def get_lifecycle_state(self) -> str:
+    def get_lifecycle_state(self) -> LifecycleStateStr:
         """Get the current lifecycle state.
-
-        Possible values: "active", "frozen", "discarded"
 
         Returns:
             lifecycle state
         """
-        return LIFECYCLE_STATES.inverse[self.lifecycleState()]
+        return LIFECYCLE_STATE.inverse[self.lifecycleState()]
 
     def trigger_action(self, action: str, checked: bool = False):
         self.triggerAction(WEB_ACTIONS[action], checked)
 
     def set_feature_permission(
-        self, url: Union[QtCore.QUrl, str], feature: str, policy: str
+        self, url: Union[QtCore.QUrl, str], feature: FeatureStr, policy: str
     ):
         url = core.Url(url)
-        self.setFeaturePermission(url, FEATURES[feature], PERMISSION_POLICIES[policy])
+        self.setFeaturePermission(url, FEATURE[feature], PERMISSION_POLICIES[policy])
 
     def get_history(self) -> webenginewidgets.WebEngineHistory:
         hist = self.history()

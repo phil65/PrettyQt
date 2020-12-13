@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator
+from typing import Iterator, Literal
 
 from qtpy import QtCore, QtWidgets
 
@@ -8,17 +8,21 @@ from prettyqt import gui, core
 from prettyqt.utils import bidict, InvalidParamError
 
 
-STATES = bidict(
+STATE = bidict(
     unchecked=QtCore.Qt.Unchecked,
     partial=QtCore.Qt.PartiallyChecked,
     checked=QtCore.Qt.Checked,
 )
+
+StateStr = Literal["unchecked", "partial", "checked"]
 
 CHILD_INDICATOR_POLICY = bidict(
     show=QtWidgets.QTreeWidgetItem.ShowIndicator,
     dont_show=QtWidgets.QTreeWidgetItem.DontShowIndicator,
     dont_show_when_childless=QtWidgets.QTreeWidgetItem.DontShowIndicatorWhenChildless,
 )
+
+ChildIndicatorPolicyStr = Literal["show", "dont_show", "dont_show_when_childless"]
 
 
 class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
@@ -91,10 +95,8 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
     def get_icon(self, column: int = 0) -> gui.Icon:
         return gui.Icon(self.icon(column))
 
-    def set_checkstate(self, state: str, column: int = 0):
+    def set_checkstate(self, state: StateStr, column: int = 0):
         """Set checkstate of the checkbox.
-
-        valid values are: unchecked, partial, checked
 
         Args:
             state: checkstate to use
@@ -103,14 +105,12 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in STATES:
-            raise InvalidParamError(state, STATES)
-        self.setCheckState(column, STATES[state])
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
+        self.setCheckState(column, STATE[state])
 
-    def get_checkstate(self, column: int = 0) -> str:
+    def get_checkstate(self, column: int = 0) -> StateStr:
         """Return checkstate.
-
-        possible values are "unchecked", "partial", "checked"
 
         Args:
             column: column
@@ -118,12 +118,10 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         Returns:
             checkstate
         """
-        return STATES.inverse[self.checkState(column)]
+        return STATE.inverse[self.checkState(column)]
 
-    def set_child_indicator_policy(self, policy: str):
+    def set_child_indicator_policy(self, policy: ChildIndicatorPolicyStr):
         """Set the child indicator policy.
-
-        Allowed values are "show", "dont_show", "dont_show_when_childless"
 
         Args:
             policy: child indicator policy
@@ -135,10 +133,8 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
             raise InvalidParamError(policy, CHILD_INDICATOR_POLICY)
         self.setChildIndicatorPolicy(CHILD_INDICATOR_POLICY[policy])
 
-    def get_child_indicator_policy(self) -> str:
+    def get_child_indicator_policy(self) -> ChildIndicatorPolicyStr:
         """Return current child indicator policy.
-
-        Possible values: "show", "dont_show", "dont_show_when_childless"
 
         Returns:
             child indicator policy

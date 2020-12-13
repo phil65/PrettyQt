@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union
 
 from qtpy import QtCore, QtWidgets
 
@@ -37,7 +37,6 @@ class ExpandableLine(widgets.Widget):
 
         self.content_area = widgets.ScrollArea()
         with self.expand_btn.edit_stylesheet() as ss:
-            print(dir(ss))
             ss.QAbstractScrollArea.border.setValue(None)
         self.content_area.set_size_policy("expanding", "fixed")
         self.content_area.setMaximumHeight(1)
@@ -53,11 +52,9 @@ class ExpandableLine(widgets.Widget):
         # self.toggle_anim.setStartValue(0)
         # self.toggle_anim.setEndValue(300)
 
-        def expand_view(checked):
-            arrow_type = "down" if checked else "right"
-            direction = "forward" if checked else "backward"
-            self.expand_btn.set_arrow_type(arrow_type)
-            self.toggle_anim.set_direction(direction)
+        def expand_view(checked: bool):
+            self.expand_btn.set_arrow_type("down" if checked else "right")
+            self.toggle_anim.set_direction("forward" if checked else "backward")
             self.toggle_anim.start()
 
         # === SIGNALS === #
@@ -65,11 +62,16 @@ class ExpandableLine(widgets.Widget):
         self.toggle_anim.set_duration(0)
         self.toggle_anim.set_duration(self._animation_duration)
 
-    def set_layout(self, content_layout):
+    def set_layout(
+        self,
+        layout: Union[str, QtWidgets.QLayout, None],
+        margin: Optional[int] = None,
+        spacing: Optional[int] = None,
+    ) -> None:
         self.content_area.destroy()
-        self.content_area.setLayout(content_layout)
+        self.content_area.set_layout(layout, margin=margin, spacing=spacing)
         collapsed_height = self.sizeHint().height() - self.content_area.maximumHeight()
-        content_height = content_layout.sizeHint().height() + 300
+        content_height = self.content_area.box.sizeHint().height() + 300
         for expand_anim in self.toggle_anim[:-1]:
             # expand_anim.setDuration(self._animation_duration)
             expand_anim.setStartValue(collapsed_height)

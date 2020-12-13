@@ -1,10 +1,10 @@
-from typing import Any, Dict
+from typing import Any, Dict, Literal
 from qtpy import QtWidgets
 
-from prettyqt.utils import bidict, helpers, prettyprinter
+from prettyqt.utils import bidict, helpers, prettyprinter, InvalidParamError
 
 
-SIZE_POLICIES = bidict(
+SIZE_POLICY = bidict(
     fixed=QtWidgets.QSizePolicy.Fixed,
     minimum=QtWidgets.QSizePolicy.Minimum,
     maximum=QtWidgets.QSizePolicy.Maximum,
@@ -14,7 +14,17 @@ SIZE_POLICIES = bidict(
     ignored=QtWidgets.QSizePolicy.Ignored,
 )
 
-CONTROL_TYPES = bidict(
+SizePolicyStr = Literal[
+    "fixed",
+    "minimum",
+    "maximum",
+    "preferred",
+    "expanding",
+    "minimum_expanding",
+    "ignored",
+]
+
+CONTROL_TYPE = bidict(
     default=QtWidgets.QSizePolicy.DefaultType,
     buttonbox=QtWidgets.QSizePolicy.ButtonBox,
     checkbox=QtWidgets.QSizePolicy.CheckBox,
@@ -31,6 +41,24 @@ CONTROL_TYPES = bidict(
     tabwidget=QtWidgets.QSizePolicy.TabWidget,
     toolbutton=QtWidgets.QSizePolicy.ToolButton,
 )
+
+ControlTypeStr = Literal[
+    "default",
+    "buttonbox",
+    "checkbox",
+    "combobox",
+    "frame",
+    "groupbox",
+    "label",
+    "line",
+    "lineedit",
+    "pushbutton",
+    "radiobutton",
+    "slider",
+    "spinbox",
+    "tabwidget",
+    "toolbutton",
+]
 
 
 class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
@@ -51,7 +79,6 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
         )
 
     def __setstate__(self, state: Dict[str, Any]) -> None:
-        super().__init__()
         self.setHeightForWidth(state["has_height_for_width"])
         self.setWidthForHeight(state["has_width_for_height"])
         self.setHorizontalStretch(state["horizontal_stretch"])
@@ -60,73 +87,68 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
         self.set_vertical_policy(state["vertical_policy"])
         self.setRetainSizeWhenHidden(state["retain_size_when_hidden"])
 
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
     def serialize(self):
         return self.__getstate__()
 
-    def get_horizontal_policy(self) -> str:
+    def get_horizontal_policy(self) -> SizePolicyStr:
         """Return size policy.
-
-        possible values are "fixed", "minimum", "maximum", "preferred",
-        "expanding", "minimum_expanding" and "ignored"
 
         Returns:
             horizontal size policy
         """
-        return SIZE_POLICIES.inverse[self.horizontalPolicy()]
+        return SIZE_POLICY.inverse[self.horizontalPolicy()]
 
-    def set_horizontal_policy(self, mode: str) -> None:
+    def set_horizontal_policy(self, policy: SizePolicyStr) -> None:
         """Set the horizontal policy.
 
-        possible values are "fixed", "minimum", "maximum", "preferred",
-        "expanding", "minimum_expanding" and "ignored"
-
         Args:
-            mode: policy to set
+            policy: policy to set
+
+        Raises:
+            InvalidParamError: policy does not exist
         """
-        self.setHorizontalPolicy(SIZE_POLICIES[mode])
+        self.setHorizontalPolicy(SIZE_POLICY[policy])
 
-    def get_vertical_policy(self) -> str:
+    def get_vertical_policy(self) -> SizePolicyStr:
         """Return size policy.
-
-        possible values are "fixed", "minimum", "maximum", "preferred",
-        "expanding", "minimum_expanding" and "ignored"
 
         Returns:
             vertical size policy
-        """
-        return SIZE_POLICIES.inverse[self.verticalPolicy()]
 
-    def set_vertical_policy(self, mode: str) -> None:
+        """
+        return SIZE_POLICY.inverse[self.verticalPolicy()]
+
+    def set_vertical_policy(self, policy: SizePolicyStr) -> None:
         """Set the horizontal policy.
 
-        possible values are "fixed", "minimum", "maximum", "preferred",
-        "expanding", "minimum_expanding" and "ignored"
-
         Args:
-            mode: policy to set
+            policy: policy to set
+
+        Raises:
+            InvalidParamError: policy does not exist
         """
-        self.setVerticalPolicy(SIZE_POLICIES[mode])
+        self.setVerticalPolicy(SIZE_POLICY[policy])
 
-    def get_control_type(self) -> str:
+    def get_control_type(self) -> ControlTypeStr:
         """Return control type.
-
-        possible values are "default", "buttonbox", "checkbox", "combobox", "frame",
-        "groupbox", "label", "line", "lineedit", "pushbutton", "radiobutton", "slider",
-        "spinbox", "tabwidget", "toolbutton"
 
         Returns:
             control type
         """
-        return CONTROL_TYPES.inverse[self.controlType()]
+        return CONTROL_TYPE.inverse[self.controlType()]
 
-    def set_control_type(self, mode: str) -> None:
+    def set_control_type(self, typ: ControlTypeStr) -> None:
         """Set the control type.
 
-        possible values are "default", "buttonbox", "checkbox", "combobox", "frame",
-        "groupbox", "label", "line", "lineedit", "pushbutton", "radiobutton", "slider",
-        "spinbox", "tabwidget", "toolbutton"
-
         Args:
-            mode: control type to set
+            typ: control type to set
+
+        Raises:
+            InvalidParamError: control type does not exist
         """
-        self.setControlType(CONTROL_TYPES[mode])
+        if typ not in CONTROL_TYPE:
+            raise InvalidParamError(typ, CONTROL_TYPE)
+        self.setControlType(CONTROL_TYPE[typ])

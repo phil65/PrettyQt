@@ -96,7 +96,7 @@ class ListWidget(QtWidgets.QListWidget):
         tool_tip: Optional[str] = None,
         whats_this: Optional[str] = None,
         # text_alignment: Optional[str] = None,
-        checkstate: Optional[str] = None,
+        checkstate: Optional[widgets.listwidgetitem.StateStr] = None,
         flags: Optional[int] = None,
         size_hint: Optional[QtCore.QSize] = None,
         is_user_type: bool = False,

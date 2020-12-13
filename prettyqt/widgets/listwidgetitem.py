@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, core
@@ -9,6 +11,8 @@ STATE = bidict(
     partial=QtCore.Qt.PartiallyChecked,
     checked=QtCore.Qt.Checked,
 )
+
+StateStr = Literal["unchecked", "partial", "checked"]
 
 
 class ListWidgetItem(QtWidgets.QListWidgetItem):
@@ -53,10 +57,8 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         icon = gui.icon.get_icon(icon)
         self.setIcon(icon)
 
-    def set_checkstate(self, state: str):
+    def set_checkstate(self, state: StateStr):
         """Set checkstate of the checkbox.
-
-        valid values are: unchecked, partial, checked
 
         Args:
             state: checkstate to use
@@ -68,10 +70,8 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
             raise InvalidParamError(state, STATE)
         self.setCheckState(STATE[state])
 
-    def get_checkstate(self) -> str:
+    def get_checkstate(self) -> StateStr:
         """Return checkstate.
-
-        possible values are "unchecked", "partial", "checked"
 
         Returns:
             checkstate

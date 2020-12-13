@@ -30,7 +30,7 @@ MODALITY = bidict(
 
 ModalityStr = Literal["none", "prevent", "default", "actions", "custom"]
 
-CURSOR_SHAPES = bidict(
+CURSOR_SHAPE = bidict(
     arrow=QtCore.Qt.ArrowCursor,
     uparrow=QtCore.Qt.UpArrowCursor,
     cross=QtCore.Qt.CrossCursor,
@@ -55,6 +55,32 @@ CURSOR_SHAPES = bidict(
     drag_link=QtCore.Qt.DragLinkCursor,
     bitmap=QtCore.Qt.BitmapCursor,
 )
+
+CursorShapeStr = Literal[
+    "arrow",
+    "uparrow",
+    "cross",
+    "wait",
+    "caret",
+    "size_vertical",
+    "size_horizonal",
+    "size_topright",
+    "size_topleft",
+    "size_all",
+    "blank",
+    "split_vertical",
+    "split_horizontal",
+    "pointing_hand",
+    "forbidden",
+    "open_hand",
+    "closed_hand",
+    "whats_this",
+    "busy",
+    "drag_move",
+    "drag_copy",
+    "drag_link",
+    "bitmap",
+]
 
 FOCUS_POLICIES = bidict(
     tab=QtCore.Qt.TabFocus,
@@ -269,12 +295,11 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         return MODALITY.inverse[self.windowModality()]
 
     def set_size_policy(
-        self, horizontal: Optional[str] = None, vertical: Optional[str] = None
+        self,
+        horizontal: Optional[widgets.sizepolicy.SizePolicyStr] = None,
+        vertical: Optional[widgets.sizepolicy.SizePolicyStr] = None,
     ) -> None:
         """Set the sizes policy.
-
-        possible values for both parameters are "fixed", "minimum", "maximum",
-        "preferred", "expanding", "minimum_expanding" and "ignored"
 
         Args:
             horizontal: horizontal size policy
@@ -399,10 +424,10 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def set_cursor(self, cursor: str) -> None:
-        if cursor not in CURSOR_SHAPES:
-            raise InvalidParamError(cursor, CURSOR_SHAPES)
-        self.setCursor(CURSOR_SHAPES[cursor])
+    def set_cursor(self, cursor: CursorShapeStr) -> None:
+        if cursor not in CURSOR_SHAPE:
+            raise InvalidParamError(cursor, CURSOR_SHAPE)
+        self.setCursor(CURSOR_SHAPE[cursor])
 
     def set_focus_policy(self, policy: str) -> None:
         """Set the way the widget accepts keyboard focus.
