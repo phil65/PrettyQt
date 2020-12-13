@@ -63,7 +63,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
         string: str,
         backward: bool = False,
         case_sensitive: bool = False,
-        callback: Callable = None,
+        callback: Callable[[bool], None] = None,
     ):
         """Find text in the current page.
 
