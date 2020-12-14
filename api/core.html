@@ -6898,7 +6898,6 @@ get_global_restore_policy<span class="p">(</span><span class="bp">self</span><sp
       </h4>
 <div class="doc doc-contents ">
 <p>Return current restore policy.</p>
-<p>Possible values: "restore", "dont_restore"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6909,7 +6908,7 @@ get_global_restore_policy<span class="p">(</span><span class="bp">self</span><sp
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>core.state.RestorePolicyStr</code></td>
 <td>
 <p>restore policy</p>
 </td>
@@ -6919,10 +6918,8 @@ get_global_restore_policy<span class="p">(</span><span class="bp">self</span><sp
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/statemachine.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_global_restore_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_global_restore_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">RestorePolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return current restore policy.</span>
-
-<span class="sd">    Possible values: "restore", "dont_restore"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        restore policy</span>
@@ -6943,7 +6940,6 @@ set_global_restore_policy<span class="p">(</span><span class="bp">self</span><sp
       </h4>
 <div class="doc doc-contents ">
 <p>Set restore policy to use.</p>
-<p>Allowed values are "restore", "dont_restore"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6957,7 +6953,7 @@ set_global_restore_policy<span class="p">(</span><span class="bp">self</span><sp
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>core.state.RestorePolicyStr</code></td>
 <td>
 <p>restore policy to use</p>
 </td>
@@ -6985,10 +6981,8 @@ set_global_restore_policy<span class="p">(</span><span class="bp">self</span><sp
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/statemachine.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_global_restore_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_global_restore_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">RestorePolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set restore policy to use.</span>
-
-<span class="sd">    Allowed values are "restore", "dont_restore"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: restore policy to use</span>

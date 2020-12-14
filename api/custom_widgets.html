@@ -2870,13 +2870,13 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
             <span class="n">new_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span>
 
     <span class="c1"># pick the preferred handle on the first movement</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">first_movement</span><span class="p">:</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_first_movement</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">new_pos</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_value</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">first_movement</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_first_movement</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">first_movement</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_first_movement</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">==</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"no_crossing"</span><span class="p">:</span>
@@ -2887,7 +2887,7 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"free"</span> <span class="ow">and</span> <span class="n">new_pos</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># movement "none"</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
     <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">==</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"no_crossing"</span><span class="p">:</span>
@@ -2898,7 +2898,7 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">"free"</span> <span class="ow">and</span> <span class="n">new_pos</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># movement "none"</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
     <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 </code></pre>
@@ -2924,15 +2924,15 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
         <span class="n">event</span><span class="o">.</span><span class="n">ignore</span><span class="p">()</span>
         <span class="k">return</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_mouse_press</span><span class="p">(</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_mouse_press</span><span class="p">(</span>
         <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span><span class="p">,</span> <span class="s2">"upper"</span>
     <span class="p">)</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_mouse_press</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_mouse_press</span><span class="p">(</span>
             <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="s2">"lower"</span>
         <span class="p">)</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">first_movement</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_first_movement</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 </code></pre>
 </div>
@@ -2982,13 +2982,13 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="n">opt</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionSlider</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">initStyleOption</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
     <span class="n">opt</span><span class="o">.</span><span class="n">subControls</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">SC_SliderTickmarks</span>
-    <span class="n">painter</span><span class="o">.</span><span class="n">drawComplexControl</span><span class="p">(</span><span class="n">SLIDER_STYLE</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">draw_complex_control</span><span class="p">(</span><span class="s2">"slider"</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
 
     <span class="c1"># groove</span>
     <span class="n">opt</span><span class="o">.</span><span class="n">sliderPosition</span> <span class="o">=</span> <span class="mi">20</span>
     <span class="n">opt</span><span class="o">.</span><span class="n">sliderValue</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">opt</span><span class="o">.</span><span class="n">subControls</span> <span class="o">=</span> <span class="n">GROOVE_STYLE</span>
-    <span class="n">painter</span><span class="o">.</span><span class="n">drawComplexControl</span><span class="p">(</span><span class="n">SLIDER_STYLE</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">draw_complex_control</span><span class="p">(</span><span class="s2">"slider"</span><span class="p">,</span> <span class="n">opt</span><span class="p">)</span>
 
     <span class="c1"># handle rects</span>
     <span class="n">opt</span><span class="o">.</span><span class="n">sliderPosition</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pos</span>
@@ -3002,9 +3002,10 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="n">minv</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">lrv</span><span class="p">,</span> <span class="n">urv</span><span class="p">)</span>
     <span class="n">maxv</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">lrv</span><span class="p">,</span> <span class="n">urv</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">subControlRect</span><span class="p">(</span><span class="n">SLIDER_STYLE</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">GROOVE_STYLE</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
-    <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">minv</span><span class="p">),</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxv</span><span class="p">))</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_horizontal</span><span class="p">():</span>
         <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">minv</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">),</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">maxv</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">minv</span><span class="p">),</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">maxv</span><span class="p">))</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_draw_span</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>
 
     <span class="c1"># handles</span>
@@ -3029,7 +3030,6 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Set movement mode.</p>
-<p>Valid values: "no_crossing", "no_overlap", "free"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3043,7 +3043,7 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['no_crossing', 'no_overlap', 'free']</code></td>
 <td>
 <p>movement mode for the main window</p>
 </td>
@@ -3071,10 +3071,8 @@ set_movement_mode<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_movement_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_movement_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">MovementModeStr</span><span class="p">):</span>
     <span class="sd">"""Set movement mode.</span>
-
-<span class="sd">    Valid values: "no_crossing", "no_overlap", "free"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: movement mode for the main window</span>
@@ -3106,14 +3104,14 @@ trigger_action<span class="p">(</span><span class="bp">self</span><span class="p
           <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">main</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">no</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">up</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">my_min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">minimum</span><span class="p">()</span>
     <span class="n">my_max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximum</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">block_tracking</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">main_control</span> <span class="o">=</span> <span class="n">main</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_control</span> <span class="o">==</span> <span class="s2">"upper"</span>
-    <span class="n">alt_control</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">main</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">main_control</span> <span class="o">==</span> <span class="s2">"lower"</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_block_tracking</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">main_control</span> <span class="o">=</span> <span class="n">main</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_control</span> <span class="o">==</span> <span class="s2">"upper"</span>
+    <span class="n">alt_control</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">main</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_control</span> <span class="o">==</span> <span class="s2">"lower"</span>
     <span class="n">is_upper_handle</span> <span class="o">=</span> <span class="n">main_control</span> <span class="ow">or</span> <span class="n">alt_control</span>
     <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper</span> <span class="k">if</span> <span class="n">is_upper_handle</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span>
     <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"single_step_add"</span><span class="p">:</span>
@@ -3123,11 +3121,11 @@ trigger_action<span class="p">(</span><span class="bp">self</span><span class="p
         <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
     <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"to_minimum"</span><span class="p">:</span>
+        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">my_min</span>
-        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
     <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"to_maximum"</span><span class="p">:</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">my_max</span>
         <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">my_max</span>
     <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">"move"</span><span class="p">:</span>
         <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
         <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
@@ -3157,7 +3155,7 @@ trigger_action<span class="p">(</span><span class="bp">self</span><span class="p
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">block_tracking</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_block_tracking</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lower_pos</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">upper_pos</span><span class="p">)</span>
 </code></pre>

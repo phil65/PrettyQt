@@ -659,8 +659,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.get_high_dpi_scale_factor_rounding_policy" class="md-nav__link">
+    get_high_dpi_scale_factor_rounding_policy()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.guiapplication.GuiApplication.get_layout_direction" class="md-nav__link">
     get_layout_direction()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.set_high_dpi_scale_factor_rounding_policy" class="md-nav__link">
+    set_high_dpi_scale_factor_rounding_policy()
   </a>
   
 </li>
@@ -1410,6 +1424,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.standarditem.StandardItem.get_checkstate" class="md-nav__link">
+    get_checkstate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.standarditem.StandardItem.set_checkstate" class="md-nav__link">
+    set_checkstate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.standarditem.StandardItem.set_icon" class="md-nav__link">
     set_icon()
   </a>
@@ -2111,6 +2139,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.gui.window.Window.set_visibility" class="md-nav__link">
     set_visibility()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.window.Window.start_system_resize" class="md-nav__link">
+    start_system_resize()
   </a>
   
 </li>
@@ -2712,8 +2747,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.get_high_dpi_scale_factor_rounding_policy" class="md-nav__link">
+    get_high_dpi_scale_factor_rounding_policy()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.guiapplication.GuiApplication.get_layout_direction" class="md-nav__link">
     get_layout_direction()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.guiapplication.GuiApplication.set_high_dpi_scale_factor_rounding_policy" class="md-nav__link">
+    set_high_dpi_scale_factor_rounding_policy()
   </a>
   
 </li>
@@ -3463,6 +3512,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.standarditem.StandardItem.get_checkstate" class="md-nav__link">
+    get_checkstate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.standarditem.StandardItem.set_checkstate" class="md-nav__link">
+    set_checkstate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.standarditem.StandardItem.set_icon" class="md-nav__link">
     set_icon()
   </a>
@@ -4168,6 +4231,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.window.Window.start_system_resize" class="md-nav__link">
+    start_system_resize()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4705,8 +4775,6 @@ get_capitalization<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Get current font capitalization.</p>
-<p>Possible values are "mixed_case", "all_uppercase", all_lowercase", "small_caps",
-                    "capitalize"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4717,7 +4785,7 @@ get_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['mixed_case', 'all_uppercase', 'all_lowercase', 'small_caps', 'capitalize']</code></td>
 <td>
 <p>current font capitalization</p>
 </td>
@@ -4727,11 +4795,8 @@ get_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_capitalization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_capitalization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CapitalizationStr</span><span class="p">:</span>
     <span class="sd">"""Get current font capitalization.</span>
-
-<span class="sd">    Possible values are "mixed_case", "all_uppercase", all_lowercase", "small_caps",</span>
-<span class="sd">                        "capitalize"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current font capitalization</span>
@@ -4752,7 +4817,6 @@ get_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Get current hinting preference.</p>
-<p>Possible values are "default", "none", "vertical", "full"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4763,7 +4827,7 @@ get_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['default', 'none', 'vertical', 'full']</code></td>
 <td>
 <p>current hinting preference</p>
 </td>
@@ -4773,10 +4837,8 @@ get_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HintingPreferenceStr</span><span class="p">:</span>
     <span class="sd">"""Get current hinting preference.</span>
-
-<span class="sd">    Possible values are "default", "none", "vertical", "full"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current hinting preference</span>
@@ -4797,7 +4859,6 @@ get_letter_spacing_type<span class="p">(</span><span class="bp">self</span><span
       </h4>
 <div class="doc doc-contents ">
 <p>Get current letter spacing type.</p>
-<p>Possible values are "percentage", "absolute"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4808,7 +4869,7 @@ get_letter_spacing_type<span class="p">(</span><span class="bp">self</span><span
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['percentage', 'absolute']</code></td>
 <td>
 <p>current letter spacing type</p>
 </td>
@@ -4818,10 +4879,8 @@ get_letter_spacing_type<span class="p">(</span><span class="bp">self</span><span
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_letter_spacing_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_letter_spacing_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SpacingTypeStr</span><span class="p">:</span>
     <span class="sd">"""Get current letter spacing type.</span>
-
-<span class="sd">    Possible values are "percentage", "absolute"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current letter spacing type</span>
@@ -4842,7 +4901,6 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Get current font style.</p>
-<p>Possible values are "normal", "italic", "oblique"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4853,7 +4911,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['normal', 'italic', 'oblique']</code></td>
 <td>
 <p>current font style</p>
 </td>
@@ -4863,10 +4921,8 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StyleStr</span><span class="p">:</span>
     <span class="sd">"""Get current font style.</span>
-
-<span class="sd">    Possible values are "normal", "italic", "oblique"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current font style</span>
@@ -4887,8 +4943,6 @@ get_weight<span class="p">(</span><span class="bp">self</span><span class="p">)<
       </h4>
 <div class="doc doc-contents ">
 <p>Get current font weight.</p>
-<p>Possible values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                    "extra_bold", normal", "black"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4899,7 +4953,7 @@ get_weight<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['thin', 'extra_light', 'light', 'normal', 'medium', 'demi_bold', 'bold', 'extra_bold', 'black']</code></td>
 <td>
 <p>current font weight</p>
 </td>
@@ -4909,16 +4963,13 @@ get_weight<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WeightStr</span><span class="p">:</span>
     <span class="sd">"""Get current font weight.</span>
-
-<span class="sd">    Possible values are "thin", "extra_light", light", "medium", "demi_bold", "bold",</span>
-<span class="sd">                        "extra_bold", normal", "black"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current font weight</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">WEIGHTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">WEIGHT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4934,8 +4985,6 @@ set_capitalization<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set the font capitalization.</p>
-<p>Valid values are "mixed_case", "all_uppercase", all_lowercase", "small_caps",
-                 "capitalize"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -4949,7 +4998,7 @@ set_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>capitalization</code></td>
-<td><code>str</code></td>
+<td><code>Literal['mixed_case', 'all_uppercase', 'all_lowercase', 'small_caps', 'capitalize']</code></td>
 <td>
 <p>font capitalization</p>
 </td>
@@ -4977,11 +5026,8 @@ set_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_capitalization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capitalization</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_capitalization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capitalization</span><span class="p">:</span> <span class="n">CapitalizationStr</span><span class="p">):</span>
     <span class="sd">"""Set the font capitalization.</span>
-
-<span class="sd">    Valid values are "mixed_case", "all_uppercase", all_lowercase", "small_caps",</span>
-<span class="sd">                     "capitalize"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        capitalization: font capitalization</span>
@@ -5007,7 +5053,6 @@ set_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Set the hinting preference.</p>
-<p>Valid values are "default", "none", "vertical", "full"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5021,7 +5066,7 @@ set_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>preference</code></td>
-<td><code>str</code></td>
+<td><code>Literal['default', 'none', 'vertical', 'full']</code></td>
 <td>
 <p>hinting preference</p>
 </td>
@@ -5049,10 +5094,8 @@ set_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preference</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preference</span><span class="p">:</span> <span class="n">HintingPreferenceStr</span><span class="p">):</span>
     <span class="sd">"""Set the hinting preference.</span>
-
-<span class="sd">    Valid values are "default", "none", "vertical", "full"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        preference: hinting preference</span>
@@ -5078,7 +5121,6 @@ set_letter_spacing<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set the letter spacing.</p>
-<p>Valid values are "percentage", "absolute"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5092,7 +5134,7 @@ set_letter_spacing<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['percentage', 'absolute']</code></td>
 <td>
 <p>letter spacing type</p>
 </td>
@@ -5128,10 +5170,8 @@ set_letter_spacing<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_letter_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_letter_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">SpacingTypeStr</span><span class="p">,</span> <span class="n">spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
     <span class="sd">"""Set the letter spacing.</span>
-
-<span class="sd">    Valid values are "percentage", "absolute"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: letter spacing type</span>
@@ -5158,7 +5198,6 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
       </h4>
 <div class="doc doc-contents ">
 <p>Set the font style.</p>
-<p>Valid values are "normal", "italic", "oblique"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5172,7 +5211,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['normal', 'italic', 'oblique']</code></td>
 <td>
 <p>font style</p>
 </td>
@@ -5200,10 +5239,8 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">StyleStr</span><span class="p">):</span>
     <span class="sd">"""Set the font style.</span>
-
-<span class="sd">    Valid values are "normal", "italic", "oblique"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: font style</span>
@@ -5229,8 +5266,6 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set the style hint.</p>
-<p>Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",
-"monospace", "fantasy", "cursive", "system"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5244,7 +5279,7 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>hint</code></td>
-<td><code>str</code></td>
+<td><code>Literal['any', 'sans_serif', 'serif', 'typewriter', 'decorative', 'monospace', 'fantasy', 'cursive', 'system']</code></td>
 <td>
 <p>style hint</p>
 </td>
@@ -5272,11 +5307,8 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">StyleHintStr</span><span class="p">):</span>
     <span class="sd">"""Set the style hint.</span>
-
-<span class="sd">    Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",</span>
-<span class="sd">    "monospace", "fantasy", "cursive", "system"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        hint: style hint</span>
@@ -5302,8 +5334,6 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Set the font weight.</p>
-<p>Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                 "extra_bold", normal", "black"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5317,7 +5347,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>weight</code></td>
-<td><code>str</code></td>
+<td><code>Literal['thin', 'extra_light', 'light', 'normal', 'medium', 'demi_bold', 'bold', 'extra_bold', 'black']</code></td>
 <td>
 <p>font weight</p>
 </td>
@@ -5345,11 +5375,8 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/font.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">WeightStr</span><span class="p">):</span>
     <span class="sd">"""Set the font weight.</span>
-
-<span class="sd">    Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",</span>
-<span class="sd">                     "extra_bold", normal", "black"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        weight: font weight</span>
@@ -5357,9 +5384,9 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid font weight</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WEIGHTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">WEIGHTS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WEIGHT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">WEIGHT</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">WEIGHT</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -5764,6 +5791,56 @@ get_application_state<span class="p">()</span>        </code>
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.get_high_dpi_scale_factor_rounding_policy">
+
+        <code class="highlight language-python">
+get_high_dpi_scale_factor_rounding_policy<span class="p">()</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Get the current high dpi scale factor rounding policy.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['round', 'ceil', 'floor', 'round_prefer_floor', 'pass_through']</code></td>
+<td>
+<p>rounding policy</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">get_high_dpi_scale_factor_rounding_policy</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HighDpiScaleFactorRoundingPolicyStr</span><span class="p">:</span>
+    <span class="sd">"""Get the current high dpi scale factor rounding policy.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        rounding policy</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">highDpiScaleFactorRoundingPolicy</span><span class="p">()</span>
+    <span class="p">]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.get_layout_direction">
 
         <code class="highlight language-python">
@@ -5800,6 +5877,82 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">        layout direction</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">LAYOUT_DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.set_high_dpi_scale_factor_rounding_policy">
+
+        <code class="highlight language-python">
+set_high_dpi_scale_factor_rounding_policy<span class="p">(</span><span class="n">policy</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set high dpi scale factor rounding policy.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>direction</code></td>
+<td><code></code></td>
+<td>
+<p>rounding policy</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>rounding policy does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">set_high_dpi_scale_factor_rounding_policy</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">HighDpiScaleFactorRoundingPolicyStr</span>
+<span class="p">):</span>
+    <span class="sd">"""Set high dpi scale factor rounding policy.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        direction: rounding policy</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: rounding policy does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="p">)</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">setHighDpiScaleFactorRoundingPolicy</span><span class="p">(</span>
+        <span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">]</span>
+    <span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -8735,6 +8888,116 @@ clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.standarditem.StandardItem.get_checkstate">
+
+        <code class="highlight language-python">
+get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return checkstate.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>StateStr</code></td>
+<td>
+<p>checkstate</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
+    <span class="sd">"""Return checkstate.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        checkstate</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.standarditem.StandardItem.set_checkstate">
+
+        <code class="highlight language-python">
+set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set checkstate of the checkbox.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>state</code></td>
+<td><code>StateStr</code></td>
+<td>
+<p>checkstate to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid checkstate</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">StateStr</span><span class="p">):</span>
+    <span class="sd">"""Set checkstate of the checkbox.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state: checkstate to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid checkstate</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">STATE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.standarditem.StandardItem.set_icon">
 
         <code class="highlight language-python">
@@ -8757,7 +9020,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>icon</code></td>
-<td><code>Union[PyQt5.QtGui.QIcon, str, pathlib.Path]</code></td>
+<td><code>gui.icon.IconType</code></td>
 <td>
 <p>icon to use</p>
 </td>
@@ -9270,7 +9533,6 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Get current font weight.</p>
-<p>Possible values are "thin", "light", "medium" or "bold"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9281,7 +9543,7 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['thin', 'extra_light', 'light', 'normal', 'medium', 'demi_bold', 'bold', 'extra_bold', 'black']</code></td>
 <td>
 <p>current font weight</p>
 </td>
@@ -9291,15 +9553,13 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WeightStr</span><span class="p">:</span>
     <span class="sd">"""Get current font weight.</span>
-
-<span class="sd">    Possible values are "thin", "light", "medium" or "bold"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current font weight</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fontWeight</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fontWeight</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -9315,8 +9575,6 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Get current underline style.</p>
-<p>Possible values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
-"wave", "spellcheck"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9327,7 +9585,7 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'single', 'dash', 'dot', 'dashdot', 'dashdotline', 'wave', 'spellcheck']</code></td>
 <td>
 <p>current underline style</p>
 </td>
@@ -9337,16 +9595,13 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnderlineStyleStr</span><span class="p">:</span>
     <span class="sd">"""Get current underline style.</span>
-
-<span class="sd">    Possible values are "none", "single", "dash", "dot", "dashdot", "dashdotline",</span>
-<span class="sd">    "wave", "spellcheck"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current underline style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">UNDERLINE_STYLES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">underlineStyle</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">UNDERLINE_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">underlineStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -9362,8 +9617,6 @@ get_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Get current vertical alignment.</p>
-<p>Possible values: "normal", "super_script", "sub_script", "middle", "bottom",
-"top", "baseline"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9374,7 +9627,7 @@ get_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['normal', 'super_script', 'sub_script', 'middle', 'bottom', 'top', 'baseline']</code></td>
 <td>
 <p>current vertical alignment</p>
 </td>
@@ -9384,11 +9637,8 @@ get_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_vertical_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_vertical_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VerticalAlignmentStr</span><span class="p">:</span>
     <span class="sd">"""Get current vertical alignment.</span>
-
-<span class="sd">    Possible values: "normal", "super_script", "sub_script", "middle", "bottom",</span>
-<span class="sd">    "top", "baseline"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current vertical alignment</span>
@@ -9409,8 +9659,6 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set the font style hint.</p>
-<p>Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",
-"monospace", "fantasy", "cursive", "system"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9424,7 +9672,7 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>hint</code></td>
-<td><code>str</code></td>
+<td><code>Literal['any', 'sans_serif', 'serif', 'typewriter', 'decorative', 'monospace', 'fantasy', 'cursive', 'system']</code></td>
 <td>
 <p>font style hint</p>
 </td>
@@ -9452,11 +9700,8 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">StyleHintStr</span><span class="p">):</span>
     <span class="sd">"""Set the font style hint.</span>
-
-<span class="sd">    Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",</span>
-<span class="sd">    "monospace", "fantasy", "cursive", "system"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        hint: font style hint</span>
@@ -9482,8 +9727,6 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Set the font weight.</p>
-<p>Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                 "extra_bold", normal", "black"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9497,7 +9740,7 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>weight</code></td>
-<td><code>str</code></td>
+<td><code>Literal['thin', 'extra_light', 'light', 'normal', 'medium', 'demi_bold', 'bold', 'extra_bold', 'black']</code></td>
 <td>
 <p>font weight</p>
 </td>
@@ -9525,11 +9768,8 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WeightStr</span><span class="p">):</span>
     <span class="sd">"""Set the font weight.</span>
-
-<span class="sd">    Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",</span>
-<span class="sd">                     "extra_bold", normal", "black"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        weight: font weight</span>
@@ -9537,9 +9777,9 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid font weight</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFontWeight</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHT</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFontWeight</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHT</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -9555,8 +9795,6 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set the underline style.</p>
-<p>Valid values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
-"wave", "spellcheck"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9570,7 +9808,7 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'single', 'dash', 'dot', 'dashdot', 'dashdotline', 'wave', 'spellcheck']</code></td>
 <td>
 <p>underline style</p>
 </td>
@@ -9598,11 +9836,8 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">UnderlineStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set the underline style.</span>
-
-<span class="sd">    Valid values are "none", "single", "dash", "dot", "dashdot", "dashdotline",</span>
-<span class="sd">    "wave", "spellcheck"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: underline style</span>
@@ -9610,9 +9845,9 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid underline style</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">UNDERLINE_STYLES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">UNDERLINE_STYLES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setUnderlineStyle</span><span class="p">(</span><span class="n">UNDERLINE_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">UNDERLINE_STYLE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">UNDERLINE_STYLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setUnderlineStyle</span><span class="p">(</span><span class="n">UNDERLINE_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -9628,8 +9863,6 @@ set_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Set the vertical alignment.</p>
-<p>Valid values: "normal", "super_script", "sub_script", "middle", "bottom", "top",
-"baseline"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9643,7 +9876,7 @@ set_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>alignment</code></td>
-<td><code>str</code></td>
+<td><code>Literal['normal', 'super_script', 'sub_script', 'middle', 'bottom', 'top', 'baseline']</code></td>
 <td>
 <p>vertical alignment</p>
 </td>
@@ -9671,11 +9904,8 @@ set_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcharformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">VerticalAlignmentStr</span><span class="p">):</span>
     <span class="sd">"""Set the vertical alignment.</span>
-
-<span class="sd">    Valid values: "normal", "super_script", "sub_script", "middle", "bottom", "top",</span>
-<span class="sd">    "baseline"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        alignment: vertical alignment</span>
@@ -11528,8 +11758,6 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current window visibility.</p>
-<p>Possible values: "windowed", "maximized", "minimized", "fullscreen", "automatic",
-                 "hidden"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -11540,7 +11768,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['windowed', 'minimized', 'maximized', 'fullscreen', 'automatic', 'hidden']</code></td>
 <td>
 <p>window visibility</p>
 </td>
@@ -11550,16 +11778,13 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/window.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VisibilityStr</span><span class="p">:</span>
     <span class="sd">"""Get the current window visibility.</span>
-
-<span class="sd">    Possible values: "windowed", "maximized", "minimized", "fullscreen", "automatic",</span>
-<span class="sd">                     "hidden"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        window visibility</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">VISIBILITIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -11575,8 +11800,6 @@ set_visibility<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set window visibility.</p>
-<p>Valid values: "windowed", "maximized", "minimized", "fullscreen", "automatic",
-              "hidden"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -11590,7 +11813,7 @@ set_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>visibility</code></td>
-<td><code>str</code></td>
+<td><code>Literal['windowed', 'minimized', 'maximized', 'fullscreen', 'automatic', 'hidden']</code></td>
 <td>
 <p>window visibility</p>
 </td>
@@ -11618,11 +11841,8 @@ set_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/window.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visibility</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visibility</span><span class="p">:</span> <span class="n">VisibilityStr</span><span class="p">):</span>
     <span class="sd">"""Set window visibility.</span>
-
-<span class="sd">    Valid values: "windowed", "maximized", "minimized", "fullscreen", "automatic",</span>
-<span class="sd">                  "hidden"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        visibility: window visibility</span>
@@ -11630,9 +11850,77 @@ set_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: window visibility does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">visibility</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VISIBILITIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">visibility</span><span class="p">,</span> <span class="n">VISIBILITIES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setVisibility</span><span class="p">(</span><span class="n">VISIBILITIES</span><span class="p">[</span><span class="n">visibility</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">visibility</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">VISIBILITY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">visibility</span><span class="p">,</span> <span class="n">VISIBILITY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setVisibility</span><span class="p">(</span><span class="n">VISIBILITY</span><span class="p">[</span><span class="n">visibility</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.window.Window.start_system_resize">
+
+        <code class="highlight language-python">
+start_system_resize<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Start system resize.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>edge</code></td>
+<td><code>Literal['top', 'left', 'right', 'bottom', 'top_left', 'top_right', 'bottom_left', 'bottom_right']</code></td>
+<td>
+<p>edge to resize</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>edge does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/window.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">start_system_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">:</span> <span class="n">EdgeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">"""Start system resize.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        edge: edge to resize</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: edge does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">edge</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">EDGES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">EDGES</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">startSystemResize</span><span class="p">(</span><span class="n">EDGES</span><span class="p">[</span><span class="n">edge</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

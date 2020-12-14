@@ -552,6 +552,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractbutton.AbstractButton.set_style_icon" class="md-nav__link">
+    set_style_icon()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3818,6 +3825,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.widget.Widget.get_window_state" class="md-nav__link">
+    get_window_state()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.widget.Widget.resize" class="md-nav__link">
     resize()
   </a>
@@ -3855,6 +3869,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.widget.Widget.set_size_policy" class="md-nav__link">
     set_size_policy()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.widget.Widget.set_window_state" class="md-nav__link">
+    set_window_state()
   </a>
   
 </li>
@@ -4101,6 +4122,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractbutton.AbstractButton.set_style_icon" class="md-nav__link">
+    set_style_icon()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7367,6 +7395,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.widget.Widget.get_window_state" class="md-nav__link">
+    get_window_state()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.widget.Widget.resize" class="md-nav__link">
     resize()
   </a>
@@ -7404,6 +7439,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.widget.Widget.set_size_policy" class="md-nav__link">
     set_size_policy()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.widget.Widget.set_window_state" class="md-nav__link">
+    set_window_state()
   </a>
   
 </li>
@@ -7660,6 +7702,65 @@ set_icon_size<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="o">*</span><span class="n">size</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIconSize</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.abstractbutton.AbstractButton.set_style_icon">
+
+        <code class="highlight language-python">
+set_style_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set theme icon for the button.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>icon</code></td>
+<td><code>Literal['titlebar_min_button=', 'titlebar_menu_button', 'titlebar_max_button', 'titlebar_close_button', 'titlebar_normal_button', 'titlebar_shade_button', 'titlebar_unshade_button', 'titlebar_context_help_button', 'information', 'warning', 'critical', 'question', 'desktop', 'trash', 'computer', 'drive_fd', 'drive_hd', 'drive_cd', 'drive_dvd', 'drive_net', 'dir_home', 'dir_open', 'dir_closed', 'dir', 'dir_link', 'dir_link_open', 'file', 'file_link', 'file_dialog_start', 'file_dialog_end', 'file_dialog_to_parent', 'file_dialog_new_folder', 'file_dialog_detailed_view', 'file_dialog_info_view', 'file_dialog_contents_view', 'file_dialog_list_view', 'file_dialog_back', 'dockwidget_close_button', 'toolbar_horizontal_extension', 'toolbar_vertical_extension', 'dialog_ok', 'dialog_cancel', 'dialog_help', 'dialog_open', 'dialog_save', 'dialog_close', 'dialog_apply', 'dialor_reset', 'dialog_discard', 'dialog_yes', 'dialog_no', 'arrow_up', 'arrow_down', 'arrow_left', 'arrow_right', 'arrow_back', 'arrow_forward', 'command_link', 'vista_shield', 'browser_reload', 'browser_stop', 'media_play', 'media_stop', 'media_pause', 'media_skip_forward', 'media_skip_backward', 'media_seek_forward', 'media_seek_backward', 'media_volume', 'media_volume_muted', 'lineedit_clear', 'custom_base']</code></td>
+<td>
+<p>icon to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td><code>int</code></td>
+<td>
+<p>icon size</p>
+</td>
+<td><code>15</code></td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/abstractbutton.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_style_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StandardPixmapStr</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">):</span>
+    <span class="sd">"""Set theme icon for the button.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        icon: icon to use</span>
+<span class="sd">        size: icon size</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">icon</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">widgets</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">STANDARD_PIXMAP</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">widgets</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">STANDARD_PIXMAP</span><span class="p">)</span>
+    <span class="n">qicon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">standardIcon</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">STANDARD_PIXMAP</span><span class="p">[</span><span class="n">icon</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="n">qicon</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setIconSize</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">))</span>
 </code></pre>
 </div>
 </details>
@@ -14272,7 +14373,7 @@ get_resize_anchor<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'scroll_hand', 'rubber_band']</code></td>
+<td><code>Literal['none', 'view_center', 'under_mouse']</code></td>
 <td>
 <p>resize anchor</p>
 </td>
@@ -14356,7 +14457,7 @@ get_transformation_anchor<span class="p">(</span><span class="bp">self</span><sp
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'scroll_hand', 'rubber_band']</code></td>
+<td><code>Literal['none', 'view_center', 'under_mouse']</code></td>
 <td>
 <p>viewport anchor</p>
 </td>
@@ -14579,7 +14680,7 @@ set_resize_anchor<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['none', 'scroll_hand', 'rubber_band']</code></td>
+<td><code>Literal['none', 'view_center', 'under_mouse']</code></td>
 <td>
 <p>resize anchor to use</p>
 </td>
@@ -14715,7 +14816,7 @@ set_transformation_anchor<span class="p">(</span><span class="bp">self</span><sp
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['none', 'scroll_hand', 'rubber_band']</code></td>
+<td><code>Literal['none', 'view_center', 'under_mouse']</code></td>
 <td>
 <p>transformation anchor to use</p>
 </td>
@@ -14861,8 +14962,7 @@ get_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 
       </h4>
 <div class="doc doc-contents ">
-<p>Return waay the widget accepts keyboard focus.</p>
-<p>Possible values:  "tab", "click", "strong", "wheel", "none"</p>
+<p>Return way the widget accepts keyboard focus.</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -14873,7 +14973,7 @@ get_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['tab', 'click', 'strong', 'wheel', 'none']</code></td>
 <td>
 <p>str: Focus policy</p>
 </td>
@@ -14883,15 +14983,13 @@ get_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/graphicswidget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""Return waay the widget accepts keyboard focus.</span>
-
-<span class="sd">    Possible values:  "tab", "click", "strong", "wheel", "none"</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusPolicyStr</span><span class="p">:</span>
+    <span class="sd">"""Return way the widget accepts keyboard focus.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: Focus policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FOCUS_POLICIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">focusPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FOCUS_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">focusPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -14907,7 +15005,6 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set the way the widget accepts keyboard focus.</p>
-<p>Accepted values: "tab", "click", "strong", "wheel", "none"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -14921,7 +15018,7 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>Literal['tab', 'click', 'strong', 'wheel', 'none']</code></td>
 <td>
 <p>Focus policy</p>
 </td>
@@ -14949,20 +15046,18 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/graphicswidget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">FocusPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set the way the widget accepts keyboard focus.</span>
 
-<span class="sd">    Accepted values: "tab", "click", "strong", "wheel", "none"</span>
-
 <span class="sd">    Args:</span>
-<span class="sd">        policy (str): Focus policy</span>
+<span class="sd">        policy: Focus policy</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: Description</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FOCUS_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">FOCUS_POLICIES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">FOCUS_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FOCUS_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">FOCUS_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">FOCUS_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -15276,7 +15371,7 @@ get_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>List[str]</code></td>
+<td><code>List[TextInteractionStr]</code></td>
 <td>
 <p>list of text interaction modes</p>
 </td>
@@ -15286,7 +15381,7 @@ get_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/label.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_text_interaction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_text_interaction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">TextInteractionStr</span><span class="p">]:</span>
     <span class="sd">"""Return current text interaction mode.</span>
 
 <span class="sd">    Possible values: "none", "by_mouse", "by_keyboard", "text_editable"</span>
@@ -15314,7 +15409,9 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
           <summary>Source code in <code>prettyqt/widgets/label.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">horizontal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">vertical</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">horizontal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HorizontalAlignmentStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">vertical</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">VerticalAlignmentStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""Set the alignment of the label's contents."""</span>
     <span class="k">if</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -15469,7 +15566,7 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>types</code></td>
-<td><code>str</code></td>
+<td><code>TextInteractionStr</code></td>
 <td>
 <p>text interaction mode to use</p>
 </td>
@@ -15497,7 +15594,7 @@ set_text_interaction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/label.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_text_interaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">types</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Label</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_text_interaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">types</span><span class="p">:</span> <span class="n">TextInteractionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Label</span><span class="p">:</span>
     <span class="sd">"""Set the text interaction mode.</span>
 
 <span class="sd">    Allowed values are "none", "by_mouse", "by_keyboard", "text_editable"</span>
@@ -15529,8 +15626,6 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Set the font weight.</p>
-<p>Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                 "extra_bold", normal", "black"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -15544,7 +15639,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>weight</code></td>
-<td><code>str</code></td>
+<td><code>gui.font.WeightStr</code></td>
 <td>
 <p>font weight</p>
 </td>
@@ -15572,11 +15667,8 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/label.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Label</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WeightStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Label</span><span class="p">:</span>
     <span class="sd">"""Set the font weight.</span>
-
-<span class="sd">    Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",</span>
-<span class="sd">                     "extra_bold", normal", "black"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        weight: font weight</span>
@@ -15584,10 +15676,10 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid font weight</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHT</span><span class="p">)</span>
     <span class="n">font</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">()</span>
-    <span class="n">font</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
+    <span class="n">font</span><span class="o">.</span><span class="n">setWeight</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WEIGHT</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre>
@@ -22056,7 +22148,6 @@ get_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return waay the widget accepts keyboard focus.</p>
-<p>Possible values:  "tab", "click", "strong", "wheel", "none"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -22067,7 +22158,7 @@ get_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['tab', 'click', 'strong', 'wheel', 'none']</code></td>
 <td>
 <p>str: Focus policy</p>
 </td>
@@ -22077,15 +22168,13 @@ get_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusPolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return waay the widget accepts keyboard focus.</span>
-
-<span class="sd">    Possible values:  "tab", "click", "strong", "wheel", "none"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: Focus policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FOCUS_POLICIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">focusPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FOCUS_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">focusPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -22111,7 +22200,7 @@ get_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'prevent', 'default', 'actions', 'custom']</code></td>
+<td><code>Literal['window', 'application', 'none']</code></td>
 <td>
 <p>modality mode</p>
 </td>
@@ -22128,6 +22217,48 @@ get_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <span class="sd">        modality mode</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">MODALITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">windowModality</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.widget.Widget.get_window_state">
+
+        <code class="highlight language-python">
+get_window_state<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current window state.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['none', 'minimized', 'maximized', 'fullscreen', 'active']</code></td>
+<td>
+<p>window state</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_window_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WindowStateStr</span><span class="p">:</span>
+    <span class="sd">"""Return current window state.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        window state</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">WINDOW_STATES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">windowState</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -22235,7 +22366,6 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set the way the widget accepts keyboard focus.</p>
-<p>Accepted values: "tab", "click", "strong", "wheel", "none"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -22249,7 +22379,7 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>Literal['tab', 'click', 'strong', 'wheel', 'none']</code></td>
 <td>
 <p>Focus policy</p>
 </td>
@@ -22277,10 +22407,8 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">FocusPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set the way the widget accepts keyboard focus.</span>
-
-<span class="sd">    Accepted values: "tab", "click", "strong", "wheel", "none"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy (str): Focus policy</span>
@@ -22288,9 +22416,9 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: Description</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FOCUS_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">FOCUS_POLICIES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">FOCUS_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FOCUS_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">FOCUS_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">FOCUS_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -22366,7 +22494,7 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <tbody>
 <tr>
 <td><code>modality</code></td>
-<td><code>Literal['none', 'prevent', 'default', 'actions', 'custom']</code></td>
+<td><code>Literal['window', 'application', 'none']</code></td>
 <td>
 <p>modality for the main window</p>
 </td>
@@ -22470,6 +22598,74 @@ set_size_policy<span class="p">(</span><span class="bp">self</span><span class="
     <span class="k">if</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">sp</span><span class="o">.</span><span class="n">set_vertical_policy</span><span class="p">(</span><span class="n">vertical</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setSizePolicy</span><span class="p">(</span><span class="n">sp</span><span class="p">)</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.widget.Widget.set_window_state">
+
+        <code class="highlight language-python">
+set_window_state<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set window state for given item view.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>policy</code></td>
+<td><code>Literal['none', 'minimized', 'maximized', 'fullscreen', 'active']</code></td>
+<td>
+<p>window state to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>policy does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_window_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">WindowStateStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">"""Set window state for given item view.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        policy: window state to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: policy does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WINDOW_STATES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">WINDOW_STATES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowState</span><span class="p">(</span><span class="n">WINDOW_STATES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
