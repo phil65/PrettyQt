@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Literal
 
 from qtpy import QtGui
 
@@ -11,7 +11,7 @@ FONT_PROPERTY_INHERITANCE_BEHAVIOUR = bidict(
     single=QtGui.QTextCharFormat.FontPropertiesAll,
 )
 
-UNDERLINE_STYLES = bidict(
+UNDERLINE_STYLE = bidict(
     none=QtGui.QTextCharFormat.NoUnderline,
     single=QtGui.QTextCharFormat.SingleUnderline,
     dash=QtGui.QTextCharFormat.DashUnderline,
@@ -21,6 +21,17 @@ UNDERLINE_STYLES = bidict(
     wave=QtGui.QTextCharFormat.WaveUnderline,
     spellcheck=QtGui.QTextCharFormat.SpellCheckUnderline,
 )
+
+UnderlineStyleStr = Literal[
+    "none",
+    "single",
+    "dash",
+    "dot",
+    "dashdot",
+    "dashdotline",
+    "wave",
+    "spellcheck",
+]
 
 VERTICAL_ALIGNMENT = bidict(
     normal=QtGui.QTextCharFormat.AlignNormal,
@@ -32,6 +43,15 @@ VERTICAL_ALIGNMENT = bidict(
     baseline=QtGui.QTextCharFormat.AlignBaseline,
 )
 
+VerticalAlignmentStr = Literal[
+    "normal",
+    "super_script",
+    "sub_script",
+    "middle",
+    "bottom",
+    "top",
+    "baseline",
+]
 
 QtGui.QTextCharFormat.__bases__ = (gui.TextFormat,)
 
@@ -60,11 +80,8 @@ class TextCharFormat(QtGui.QTextCharFormat):
             color = colors.get_color(color)
         self.setBackground(color)
 
-    def set_font_weight(self, weight: str):
+    def set_font_weight(self, weight: gui.font.WeightStr):
         """Set the font weight.
-
-        Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                         "extra_bold", normal", "black"
 
         Args:
             weight: font weight
@@ -72,25 +89,20 @@ class TextCharFormat(QtGui.QTextCharFormat):
         Raises:
             InvalidParamError: invalid font weight
         """
-        if weight not in gui.font.WEIGHTS:
-            raise InvalidParamError(weight, gui.font.WEIGHTS)
-        self.setFontWeight(gui.font.WEIGHTS[weight])
+        if weight not in gui.font.WEIGHT:
+            raise InvalidParamError(weight, gui.font.WEIGHT)
+        self.setFontWeight(gui.font.WEIGHT[weight])
 
-    def get_font_weight(self) -> str:
+    def get_font_weight(self) -> gui.font.WeightStr:
         """Get current font weight.
-
-        Possible values are "thin", "light", "medium" or "bold"
 
         Returns:
             current font weight
         """
-        return gui.font.WEIGHTS.inverse[self.fontWeight()]
+        return gui.font.WEIGHT.inverse[self.fontWeight()]
 
-    def set_underline_style(self, style: str):
+    def set_underline_style(self, style: UnderlineStyleStr):
         """Set the underline style.
-
-        Valid values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
-        "wave", "spellcheck"
 
         Args:
             style: underline style
@@ -98,26 +110,20 @@ class TextCharFormat(QtGui.QTextCharFormat):
         Raises:
             InvalidParamError: invalid underline style
         """
-        if style not in UNDERLINE_STYLES:
-            raise InvalidParamError(style, UNDERLINE_STYLES)
-        self.setUnderlineStyle(UNDERLINE_STYLES[style])
+        if style not in UNDERLINE_STYLE:
+            raise InvalidParamError(style, UNDERLINE_STYLE)
+        self.setUnderlineStyle(UNDERLINE_STYLE[style])
 
-    def get_underline_style(self) -> str:
+    def get_underline_style(self) -> UnderlineStyleStr:
         """Get current underline style.
-
-        Possible values are "none", "single", "dash", "dot", "dashdot", "dashdotline",
-        "wave", "spellcheck"
 
         Returns:
             current underline style
         """
-        return UNDERLINE_STYLES.inverse[self.underlineStyle()]
+        return UNDERLINE_STYLE.inverse[self.underlineStyle()]
 
-    def set_vertical_alignment(self, alignment: str):
+    def set_vertical_alignment(self, alignment: VerticalAlignmentStr):
         """Set the vertical alignment.
-
-        Valid values: "normal", "super_script", "sub_script", "middle", "bottom", "top",
-        "baseline"
 
         Args:
             alignment: vertical alignment
@@ -129,22 +135,16 @@ class TextCharFormat(QtGui.QTextCharFormat):
             raise InvalidParamError(alignment, VERTICAL_ALIGNMENT)
         self.setVerticalAlignment(VERTICAL_ALIGNMENT[alignment])
 
-    def get_vertical_alignment(self) -> str:
+    def get_vertical_alignment(self) -> VerticalAlignmentStr:
         """Get current vertical alignment.
-
-        Possible values: "normal", "super_script", "sub_script", "middle", "bottom",
-        "top", "baseline"
 
         Returns:
             current vertical alignment
         """
         return VERTICAL_ALIGNMENT.inverse[self.verticalAlignment()]
 
-    def set_font_style_hint(self, hint: str):
+    def set_font_style_hint(self, hint: gui.font.StyleHintStr):
         """Set the font style hint.
-
-        Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",
-        "monospace", "fantasy", "cursive", "system"
 
         Args:
             hint: font style hint

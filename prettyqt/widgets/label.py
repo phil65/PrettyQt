@@ -17,12 +17,26 @@ H_ALIGNMENTS = bidict(
     justify=QtCore.Qt.AlignJustify,
 )
 
+HorizontalAlignmentStr = Literal[
+    "left",
+    "right",
+    "center",
+    "justify",
+]
+
 V_ALIGNMENTS = bidict(
     top=QtCore.Qt.AlignTop,
     bottom=QtCore.Qt.AlignBottom,
     center=QtCore.Qt.AlignVCenter,
     baseline=QtCore.Qt.AlignBaseline,
 )
+
+VerticalAlignmentStr = Literal[
+    "top",
+    "bottom",
+    "center",
+    "baseline",
+]
 
 TEXT_INTERACTION = bidict(
     none=QtCore.Qt.NoTextInteraction,
@@ -34,6 +48,17 @@ TEXT_INTERACTION = bidict(
     like_text_editor=QtCore.Qt.TextEditorInteraction,
     like_text_browser=QtCore.Qt.TextBrowserInteraction,
 )
+
+TextInteractionStr = Literal[
+    "none",
+    "by_mouse",
+    "by_keyboard",
+    "accessible_by_mouse",
+    "accessible_by_keyboard",
+    "text_editable",
+    "like_text_editor",
+    "like_text_browser",
+]
 
 TEXT_FORMAT = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
@@ -96,7 +121,9 @@ class Label(QtWidgets.QLabel):
         return self
 
     def set_alignment(
-        self, horizontal: Optional[str] = None, vertical: Optional[str] = None
+        self,
+        horizontal: Optional[HorizontalAlignmentStr] = None,
+        vertical: Optional[VerticalAlignmentStr] = None,
     ):
         """Set the alignment of the label's contents."""
         if horizontal is None and vertical is not None:
@@ -137,7 +164,7 @@ class Label(QtWidgets.QLabel):
         """
         return TEXT_FORMAT.inverse[self.textFormat()]
 
-    def set_text_interaction(self, *types: str) -> Label:
+    def set_text_interaction(self, *types: TextInteractionStr) -> Label:
         """Set the text interaction mode.
 
         Allowed values are "none", "by_mouse", "by_keyboard", "text_editable"
@@ -155,7 +182,7 @@ class Label(QtWidgets.QLabel):
         self.setTextInteractionFlags(flags)
         return self
 
-    def get_text_interaction(self) -> List[str]:
+    def get_text_interaction(self) -> List[TextInteractionStr]:
         """Return current text interaction mode.
 
         Possible values: "none", "by_mouse", "by_keyboard", "text_editable"
@@ -188,11 +215,8 @@ class Label(QtWidgets.QLabel):
         self.setFont(font)
         return self
 
-    def set_weight(self, weight: str) -> Label:
+    def set_weight(self, weight: gui.font.WeightStr) -> Label:
         """Set the font weight.
-
-        Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                         "extra_bold", normal", "black"
 
         Args:
             weight: font weight
@@ -200,10 +224,10 @@ class Label(QtWidgets.QLabel):
         Raises:
             InvalidParamError: invalid font weight
         """
-        if weight not in gui.font.WEIGHTS:
-            raise InvalidParamError(weight, gui.font.WEIGHTS)
+        if weight not in gui.font.WEIGHT:
+            raise InvalidParamError(weight, gui.font.WEIGHT)
         font = self.font()
-        font.setWeight(gui.font.WEIGHTS[weight])
+        font.setWeight(gui.font.WEIGHT[weight])
         self.setFont(font)
         return self
 

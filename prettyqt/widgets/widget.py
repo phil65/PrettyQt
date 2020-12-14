@@ -28,7 +28,7 @@ MODALITY = bidict(
     none=QtCore.Qt.NonModal,
 )
 
-ModalityStr = Literal["none", "prevent", "default", "actions", "custom"]
+ModalityStr = Literal["window", "application", "none"]
 
 CURSOR_SHAPE = bidict(
     arrow=QtCore.Qt.ArrowCursor,
@@ -82,13 +82,15 @@ CursorShapeStr = Literal[
     "bitmap",
 ]
 
-FOCUS_POLICIES = bidict(
+FOCUS_POLICY = bidict(
     tab=QtCore.Qt.TabFocus,
     click=QtCore.Qt.ClickFocus,
     strong=QtCore.Qt.StrongFocus,
     wheel=QtCore.Qt.WheelFocus,
     none=QtCore.Qt.NoFocus,
 )
+
+FocusPolicyStr = Literal["tab", "click", "strong", "wheel", "none"]
 
 WINDOW_FLAGS = bidict(
     frameless=QtCore.Qt.FramelessWindowHint,
@@ -431,10 +433,8 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             raise InvalidParamError(cursor, CURSOR_SHAPE)
         self.setCursor(CURSOR_SHAPE[cursor])
 
-    def set_focus_policy(self, policy: str) -> None:
+    def set_focus_policy(self, policy: FocusPolicyStr) -> None:
         """Set the way the widget accepts keyboard focus.
-
-        Accepted values: "tab", "click", "strong", "wheel", "none"
 
         Args:
             policy (str): Focus policy
@@ -442,19 +442,17 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Raises:
             InvalidParamError: Description
         """
-        if policy not in FOCUS_POLICIES:
-            raise InvalidParamError(policy, FOCUS_POLICIES)
-        self.setFocusPolicy(FOCUS_POLICIES[policy])
+        if policy not in FOCUS_POLICY:
+            raise InvalidParamError(policy, FOCUS_POLICY)
+        self.setFocusPolicy(FOCUS_POLICY[policy])
 
-    def get_focus_policy(self) -> str:
+    def get_focus_policy(self) -> FocusPolicyStr:
         """Return waay the widget accepts keyboard focus.
-
-        Possible values:  "tab", "click", "strong", "wheel", "none"
 
         Returns:
             str: Focus policy
         """
-        return FOCUS_POLICIES.inverse[self.focusPolicy()]
+        return FOCUS_POLICY.inverse[self.focusPolicy()]
 
     def set_font_size(self, size: int) -> None:
         font = self.font()

@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt import gui
@@ -12,6 +14,10 @@ CAPITALIZATION = bidict(
     capitalize=QtGui.QFont.Capitalize,
 )
 
+CapitalizationStr = Literal[
+    "mixed_case", "all_uppercase", "all_lowercase", "small_caps", "capitalize"
+]
+
 HINTING_PREFERENCE = bidict(
     default=QtGui.QFont.PreferDefaultHinting,
     none=QtGui.QFont.PreferNoHinting,
@@ -19,10 +25,14 @@ HINTING_PREFERENCE = bidict(
     full=QtGui.QFont.PreferFullHinting,
 )
 
+HintingPreferenceStr = Literal["default", "none", "vertical", "full"]
+
 SPACING_TYPE = bidict(
     percentage=QtGui.QFont.PercentageSpacing,
     absolute=QtGui.QFont.AbsoluteSpacing,
 )
+
+SpacingTypeStr = Literal["percentage", "absolute"]
 
 STRETCH = bidict(
     any=QtGui.QFont.AnyStretch,
@@ -37,11 +47,26 @@ STRETCH = bidict(
     ultra_expanded=QtGui.QFont.UltraExpanded,
 )
 
+StretchStr = Literal[
+    "any",
+    "ultra_condensed",
+    "extra_condensed",
+    "condensed",
+    "semi_condensed",
+    "unstretched",
+    "semi_expanded",
+    "expanded",
+    "extra_expanded",
+    "ultra_expanded",
+]
+
 STYLE = bidict(
     normal=QtGui.QFont.StyleNormal,
     italic=QtGui.QFont.StyleItalic,
     oblique=QtGui.QFont.StyleOblique,
 )
+
+StyleStr = Literal["normal", "italic", "oblique"]
 
 STYLE_STRATEGY = bidict(
     prefer_default=QtGui.QFont.PreferDefault,
@@ -57,6 +82,20 @@ STYLE_STRATEGY = bidict(
     prefer_no_shaping=QtGui.QFont.PreferNoShaping,
 )  # ORed with PreferMatch, PreferQuality, ForceIntegerMetrics
 
+StyleStrategyStr = Literal[
+    "prefer_default",
+    "prefer_bitmap",
+    "prefer_device",
+    "prefer_outline",
+    "force_outline",
+    "no_antialias",
+    "so_subpixel_antialias",
+    "prefer_antialias",
+    "open_gl_compatible",
+    "no_font_merging",
+    "prefer_no_shaping",
+]
+
 STYLE_HINTS = bidict(
     any=QtGui.QFont.AnyStyle,
     sans_serif=QtGui.QFont.SansSerif,
@@ -69,7 +108,19 @@ STYLE_HINTS = bidict(
     system=QtGui.QFont.System,
 )
 
-WEIGHTS = bidict(
+StyleHintStr = Literal[
+    "any",
+    "sans_serif",
+    "serif",
+    "typewriter",
+    "decorative",
+    "monospace",
+    "fantasy",
+    "cursive",
+    "system",
+]
+
+WEIGHT = bidict(
     thin=QtGui.QFont.Thin,
     extra_light=QtGui.QFont.ExtraLight,
     light=QtGui.QFont.Light,
@@ -80,6 +131,18 @@ WEIGHTS = bidict(
     extra_bold=QtGui.QFont.ExtraBold,
     black=QtGui.QFont.Black,
 )
+
+WeightStr = Literal[
+    "thin",
+    "extra_light",
+    "light",
+    "normal",
+    "medium",
+    "demi_bold",
+    "bold",
+    "extra_bold",
+    "black",
+]
 
 
 class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
@@ -123,11 +186,8 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         # font.setStyleHint()
         return font
 
-    def set_style_hint(self, hint: str):
+    def set_style_hint(self, hint: StyleHintStr):
         """Set the style hint.
-
-        Valid values are "any", "sans_serif", "serif", "typewriter", "decorative",
-        "monospace", "fantasy", "cursive", "system"
 
         Args:
             hint: style hint
@@ -139,11 +199,8 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
             raise InvalidParamError(hint, STYLE_HINTS)
         self.setStyleHint(STYLE_HINTS[hint])
 
-    def set_weight(self, weight: str):
+    def set_weight(self, weight: WeightStr):
         """Set the font weight.
-
-        Valid values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                         "extra_bold", normal", "black"
 
         Args:
             weight: font weight
@@ -151,26 +208,20 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         Raises:
             InvalidParamError: invalid font weight
         """
-        if weight not in WEIGHTS:
-            raise InvalidParamError(weight, WEIGHTS)
-        self.setWeight(WEIGHTS[weight])
+        if weight not in WEIGHT:
+            raise InvalidParamError(weight, WEIGHT)
+        self.setWeight(WEIGHT[weight])
 
-    def get_weight(self) -> str:
+    def get_weight(self) -> WeightStr:
         """Get current font weight.
-
-        Possible values are "thin", "extra_light", light", "medium", "demi_bold", "bold",
-                            "extra_bold", normal", "black"
 
         Returns:
             current font weight
         """
-        return WEIGHTS.inverse[self.weight()]
+        return WEIGHT.inverse[self.weight()]
 
-    def set_capitalization(self, capitalization: str):
+    def set_capitalization(self, capitalization: CapitalizationStr):
         """Set the font capitalization.
-
-        Valid values are "mixed_case", "all_uppercase", all_lowercase", "small_caps",
-                         "capitalize"
 
         Args:
             capitalization: font capitalization
@@ -182,21 +233,16 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
             raise InvalidParamError(capitalization, CAPITALIZATION)
         self.setCapitalization(CAPITALIZATION[capitalization])
 
-    def get_capitalization(self) -> str:
+    def get_capitalization(self) -> CapitalizationStr:
         """Get current font capitalization.
-
-        Possible values are "mixed_case", "all_uppercase", all_lowercase", "small_caps",
-                            "capitalize"
 
         Returns:
             current font capitalization
         """
         return CAPITALIZATION.inverse[self.capitalization()]
 
-    def set_hinting_preference(self, preference: str):
+    def set_hinting_preference(self, preference: HintingPreferenceStr):
         """Set the hinting preference.
-
-        Valid values are "default", "none", "vertical", "full"
 
         Args:
             preference: hinting preference
@@ -208,20 +254,16 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
             raise InvalidParamError(preference, HINTING_PREFERENCE)
         self.setHintingPreference(HINTING_PREFERENCE[preference])
 
-    def get_hinting_preference(self) -> str:
+    def get_hinting_preference(self) -> HintingPreferenceStr:
         """Get current hinting preference.
-
-        Possible values are "default", "none", "vertical", "full"
 
         Returns:
             current hinting preference
         """
         return HINTING_PREFERENCE.inverse[self.hintingPreference()]
 
-    def set_letter_spacing(self, typ: str, spacing: float):
+    def set_letter_spacing(self, typ: SpacingTypeStr, spacing: float):
         """Set the letter spacing.
-
-        Valid values are "percentage", "absolute"
 
         Args:
             typ: letter spacing type
@@ -234,20 +276,16 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
             raise InvalidParamError(typ, SPACING_TYPE)
         self.setLetterSpacing(SPACING_TYPE[typ], spacing)
 
-    def get_letter_spacing_type(self) -> str:
+    def get_letter_spacing_type(self) -> SpacingTypeStr:
         """Get current letter spacing type.
-
-        Possible values are "percentage", "absolute"
 
         Returns:
             current letter spacing type
         """
         return SPACING_TYPE.inverse[self.letterSpacingType()]
 
-    def set_style(self, style: str):
+    def set_style(self, style: StyleStr):
         """Set the font style.
-
-        Valid values are "normal", "italic", "oblique"
 
         Args:
             style: font style
@@ -259,10 +297,8 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
             raise InvalidParamError(style, STYLE)
         self.setStyle(STYLE[style])
 
-    def get_style(self) -> str:
+    def get_style(self) -> StyleStr:
         """Get current font style.
-
-        Possible values are "normal", "italic", "oblique"
 
         Returns:
             current font style
