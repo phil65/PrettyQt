@@ -325,18 +325,40 @@ def test_screen(qapp):
 
 
 def test_standarditem():
-    s = gui.StandardItem()
+    item = gui.StandardItem()
     with open("data.pkl", "wb") as jar:
-        pickle.dump(s, jar)
+        pickle.dump(item, jar)
     with open("data.pkl", "rb") as jar:
-        s = pickle.load(jar)
-    s.set_icon("mdi.timer")
-    s.set_checkstate("unchecked")
+        item = pickle.load(jar)
+
+    # item[constants.USER_ROLE] = "test"
+    # assert item[constants.USER_ROLE] == "test"
+    item.set_icon("mdi.timer")
+    item.set_checkstate("unchecked")
     with pytest.raises(InvalidParamError):
-        s.set_checkstate("test")
-    assert s.get_checkstate() == "unchecked"
-    s.clone()
-    bytes(s)
+        item.set_checkstate("test")
+    assert item.get_checkstate() == "unchecked"
+    item.get_background()
+    item.get_foreground()
+    item.get_font()
+    item.get_icon()
+    bytes(item)
+    item.clone()
+    item.add_item(
+        "Test",
+        icon="mdi.timer",
+        data={1: "Test"},
+        foreground=gui.Brush(),
+        background=gui.Brush(),
+        font=gui.Font(),
+        selectable=True,
+        status_tip="test",
+        tool_tip="test",
+        whats_this="test",
+        checkstate="unchecked",
+        size_hint=core.Size(10, 10),
+        is_user_type=True,
+    )
 
 
 def test_standarditemmodel():

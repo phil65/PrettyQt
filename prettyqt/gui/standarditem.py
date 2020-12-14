@@ -1,4 +1,6 @@
-from typing import Literal
+from __future__ import annotations
+
+from typing import Literal, Optional
 
 from qtpy import QtGui, QtCore
 
@@ -76,6 +78,66 @@ class StandardItem(QtGui.QStandardItem):
             checkstate
         """
         return STATE.inverse[self.checkState()]
+
+    def get_background(self) -> gui.Brush:
+        return gui.Brush(self.background())
+
+    def get_foreground(self) -> gui.Brush:
+        return gui.Brush(self.foreground())
+
+    def get_font(self) -> gui.Font:
+        return gui.Font(self.font())
+
+    def get_icon(self) -> gui.Icon:
+        return gui.Icon(self.icon())
+
+    def add_item(
+        self,
+        name: str = "",
+        icon: gui.icon.IconType = None,
+        data: Optional[dict] = None,
+        foreground: Optional[QtGui.QBrush] = None,
+        background: Optional[QtGui.QBrush] = None,
+        font: Optional[QtGui.QFont] = None,
+        selectable: bool = None,
+        status_tip: Optional[str] = None,
+        tool_tip: Optional[str] = None,
+        whats_this: Optional[str] = None,
+        # text_alignment: Optional[str] = None,
+        checkstate: Optional[StateStr] = None,
+        flags: Optional[int] = None,
+        size_hint: Optional[QtCore.QSize] = None,
+        is_user_type: bool = False,
+    ) -> StandardItem:
+        item = StandardItem(name)
+        if icon is not None:
+            icon = gui.icon.get_icon(icon)
+            item.setIcon(icon)
+        if data is not None:
+            for k, v in data.items():
+                item.setData(v, k)
+        if foreground is not None:
+            item.setForeground(foreground)
+        if background is not None:
+            item.setBackground(background)
+        if font is not None:
+            item.setFont(font)
+        if flags is not None:
+            item.setFlags(flags)
+        if selectable:
+            item.setSelectable(selectable)
+        if status_tip:
+            item.setStatusTip(status_tip)
+        if tool_tip:
+            item.setToolTip(tool_tip)
+        if whats_this:
+            item.setWhatsThis(whats_this)
+        if size_hint is not None:
+            item.setSizeHint(size_hint)
+        if checkstate is not None:
+            item.set_checkstate(checkstate)
+        self.appendRow(item)
+        return item
 
 
 if __name__ == "__main__":
