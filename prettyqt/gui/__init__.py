@@ -64,9 +64,9 @@ from .textdocument import TextDocument
 from .statictext import StaticText
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
+from .color import Color
 from .brush import Brush
 from .textblockuserdata import TextBlockUserData
-from .color import Color
 from .gradient import Gradient
 from .lineargradient import LinearGradient
 from .radialgradient import RadialGradient
