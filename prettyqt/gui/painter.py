@@ -36,14 +36,48 @@ CompositionModeStr = Literal[
 ]
 
 PATTERN = bidict(
-    solid=QtCore.Qt.SolidPattern,
     none=QtCore.Qt.NoBrush,
+    solid=QtCore.Qt.SolidPattern,
+    dense_1=QtCore.Qt.Dense1Pattern,
+    dense_2=QtCore.Qt.Dense2Pattern,
+    dense_3=QtCore.Qt.Dense3Pattern,
+    dense_4=QtCore.Qt.Dense4Pattern,
+    dense_5=QtCore.Qt.Dense5Pattern,
+    dense_6=QtCore.Qt.Dense6Pattern,
+    dense_7=QtCore.Qt.Dense7Pattern,
+    horizontal=QtCore.Qt.HorPattern,
+    vertical=QtCore.Qt.VerPattern,
     cross=QtCore.Qt.CrossPattern,
+    backward_diagonal=QtCore.Qt.BDiagPattern,
+    forward_diagonal=QtCore.Qt.FDiagPattern,
+    crossing_diagonal=QtCore.Qt.DiagCrossPattern,
     linear_gradient=QtCore.Qt.LinearGradientPattern,
+    conical_gradient=QtCore.Qt.ConicalGradientPattern,
     radial_gradient=QtCore.Qt.RadialGradientPattern,
+    texture=QtCore.Qt.TexturePattern,
 )
 
-PatternStr = Literal["solid", "none", "cross", "linear_gradient", "radial_gradient"]
+PatternStr = Literal[
+    "none",
+    "solid",
+    "dense_1",
+    "dense_2",
+    "dense_3",
+    "dense_4",
+    "dense_5",
+    "dense_6",
+    "dense_7",
+    "horizontal",
+    "vertical",
+    "cross",
+    "backward_diagonal",
+    "forward_diagonal",
+    "crossing_diagonal",
+    "linear_gradient",
+    "conical_gradient",
+    "radial_gradient",
+    "texture",
+]
 
 CLIP_OPERATION = bidict(
     none=QtCore.Qt.NoClip,
