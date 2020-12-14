@@ -13,7 +13,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def serialize_fields(self):
         return dict(
             text=self.text(),
-            icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
+            icon=self.get_icon() if not self.icon().isNull() else None,
             checkable=self.isCheckable(),
             checked=self.isChecked(),
         )
@@ -39,6 +39,9 @@ class AbstractButton(QtWidgets.QAbstractButton):
         """
         icon = gui.icon.get_icon(icon)
         self.setIcon(icon)
+
+    def get_icon(self) -> gui.Icon:
+        return gui.Icon(self.icon())
 
     def set_style_icon(self, icon: widgets.style.StandardPixmapStr, size: int = 15):
         """Set theme icon for the button.

@@ -888,6 +888,7 @@ def test_pushbutton(qtbot):
     widget.set_enabled()
     assert widget.get_value() is False
     widget.set_icon("mdi.timer")
+    widget.get_icon()
     widget.set_style_icon("titlebar_close_button")
     widget.set_icon_size(10)
     assert widget.get_icon_size() == core.Size(10, 10)
