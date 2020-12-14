@@ -4,6 +4,9 @@ from prettyqt import core
 
 
 class Collator(QtCore.QCollator):
+    def __repr__(self):
+        return f"{type(self).__name__}({self.get_locale()!r})"
+
     def get_locale(self) -> core.Locale:
         return core.Locale(self.locale())
 

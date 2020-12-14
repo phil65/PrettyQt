@@ -9,6 +9,9 @@ class TemporaryDir(QtCore.QTemporaryDir):
     def __getattr__(self, attr: str):
         return getattr(self.to_path(), attr)
 
+    def __repr__(self):
+        return f"{type(self).__name__}({self.path()!r})"
+
     def __str__(self):
         return self.path()
 

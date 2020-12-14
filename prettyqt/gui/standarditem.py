@@ -19,7 +19,7 @@ StateStr = Literal["unchecked", "partial", "checked"]
 
 class StandardItem(QtGui.QStandardItem):
     def __repr__(self):
-        return f"StandardItem({self.icon()}, {self.text()!r})"
+        return f"{type(self).__name__}({self.get_icon()}, {self.text()!r})"
 
     def serialize_fields(self):
         return dict(
