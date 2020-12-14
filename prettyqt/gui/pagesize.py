@@ -132,7 +132,7 @@ PAGE_SIZE_ID = bidict(
     # last_page_size=QtGui.QPageSize.LastPageSize, envelope_you_4
 )
 
-SIZE_MATCH_POLICIES = bidict(
+SIZE_MATCH_POLICY = bidict(
     fuzzy=QtGui.QPageSize.FuzzyMatch,
     fuzzy_orientation=QtGui.QPageSize.FuzzyOrientationMatch,
     exact=QtGui.QPageSize.ExactMatch,
@@ -179,4 +179,4 @@ class PageSize(QtGui.QPageSize):
 
 if __name__ == "__main__":
     size = PageSize()
-    print(size.get_id())
+    print(repr(size))

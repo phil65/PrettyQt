@@ -2,7 +2,7 @@ from typing import Literal
 
 from qtpy import QtGui, QtCore
 
-from prettyqt import core
+from prettyqt import core, gui
 from prettyqt.utils import colors
 from prettyqt.utils import bidict, InvalidParamError
 
@@ -50,9 +50,18 @@ class Pen(QtGui.QPen):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
+    def __repr__(self):
+        return f"{type(self).__name__}({self.get_color()})"
+
     def set_color(self, color: colors.ColorType):
         color = colors.get_color(color)
         self.setColor(color)
+
+    def get_color(self) -> gui.Color:
+        return gui.Color(self.color())
+
+    def get_brush(self) -> gui.Brush:
+        return gui.Brush(self.brush())
 
     def set_cap_style(self, style: CapStyleStr):
         """Set cap style to use.

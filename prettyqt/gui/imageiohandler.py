@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from qtpy import QtGui
 
@@ -28,7 +28,7 @@ IMAGE_OPTION = bidict(
     transformation_by_default=QtGui.QImageIOHandler.TransformedByDefault,
 )
 
-TRANSFORMATIONS = bidict(
+TRANSFORMATION = bidict(
     none=QtGui.QImageIOHandler.TransformationNone,
     mirror=QtGui.QImageIOHandler.TransformationMirror,
     flip=QtGui.QImageIOHandler.TransformationFlip,
@@ -38,6 +38,17 @@ TRANSFORMATIONS = bidict(
     flip_and_rotate_90=QtGui.QImageIOHandler.TransformationFlipAndRotate90,
     rotate_270=QtGui.QImageIOHandler.TransformationRotate270,
 )
+
+TransformationStr = Literal[
+    "none",
+    "mirror",
+    "flip",
+    "rotate_180",
+    "roate_90",
+    "mirror_and_rotate_90",
+    "flip_and_rotate_90",
+    "rotate_270",
+]
 
 
 class ImageIOHandler(QtGui.QImageIOHandler):

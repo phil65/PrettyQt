@@ -1,15 +1,22 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt import core
 from prettyqt.utils import bidict, InvalidParamError
 
-CACHE_MODES = bidict(none=QtGui.QMovie.CacheNone, all=QtGui.QMovie.CacheAll)
+CACHE_MODE = bidict(none=QtGui.QMovie.CacheNone, all=QtGui.QMovie.CacheAll)
 
-MOVIE_STATES = bidict(
+CacheModeStr = Literal["none", "all"]
+
+MOVIE_STATE = bidict(
     not_running=QtGui.QMovie.NotRunning,
     paused=QtGui.QMovie.Paused,
     running=QtGui.QMovie.Running,
 )
+
+MovieStateStr = Literal["not_running", "paused", "running"]
+
 
 QtGui.QMovie.__bases__ = (core.Object,)
 
@@ -26,10 +33,8 @@ class Movie(QtGui.QMovie):
             background_color=self.backgroundColor(),
         )
 
-    def set_cache_mode(self, mode: str):
+    def set_cache_mode(self, mode: CacheModeStr):
         """Set cache mode.
-
-        Valid values for cache_mode: "none", "all"
 
         Args:
             mode: cache mode
@@ -37,20 +42,25 @@ class Movie(QtGui.QMovie):
         Raises:
             InvalidParamError: cache mode does not exist
         """
-        if mode not in CACHE_MODES:
-            raise InvalidParamError(mode, CACHE_MODES)
-        self.setCacheMode(CACHE_MODES[mode])
+        if mode not in CACHE_MODE:
+            raise InvalidParamError(mode, CACHE_MODE)
+        self.setCacheMode(CACHE_MODE[mode])
 
-    def get_cache_mode(self) -> str:
+    def get_cache_mode(self) -> CacheModeStr:
         """Get the current cache mode.
-
-        Possible values: "none", "all"
 
         Returns:
             cache mode
         """
-        return CACHE_MODES.inverse[self.cacheMode()]
+        return CACHE_MODE.inverse[self.cacheMode()]
+
+    def get_format(self) -> bytes:
+        return bytes(self.format())
 
 
 if __name__ == "__main__":
+    from prettyqt import gui
+
+    app = gui.app()
     movie = Movie()
+    print(repr(movie))

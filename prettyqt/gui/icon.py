@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Union, Optional, Dict, Tuple, List
+from typing import Union, Optional, Dict, Tuple, List, Literal
 
 
 import qtawesome as qta
@@ -10,14 +10,18 @@ from qtpy import QtGui, QtCore
 from prettyqt import core, gui
 from prettyqt.utils import bidict, InvalidParamError
 
-MODES = bidict(
+MODE = bidict(
     normal=QtGui.QIcon.Normal,
     disabled=QtGui.QIcon.Disabled,
     active=QtGui.QIcon.Active,
     selected=QtGui.QIcon.Selected,
 )
 
-STATES = bidict(off=QtGui.QIcon.Off, on=QtGui.QIcon.On)
+ModeStr = Literal["normal", "disabled", "active", "selected"]
+
+STATE = bidict(off=QtGui.QIcon.Off, on=QtGui.QIcon.On)
+
+StateStr = Literal["off", "on"]
 
 IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
 
@@ -87,13 +91,13 @@ class Icon(QtGui.QIcon):
         return cls(gui.Pixmap.fromImage(image))
 
     def get_available_sizes(
-        self, mode: str = "normal", state: str = "off"
+        self, mode: ModeStr = "normal", state: StateStr = "off"
     ) -> List[core.Size]:
-        if mode not in MODES:
-            raise InvalidParamError(mode, MODES)
-        if state not in STATES:
-            raise InvalidParamError(state, STATES)
-        return [core.Size(i) for i in self.availableSizes(MODES[mode], STATES[state])]
+        if mode not in MODE:
+            raise InvalidParamError(mode, MODE)
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
+        return [core.Size(i) for i in self.availableSizes(MODE[mode], STATE[state])]
 
     def add_pixmap(self, data: Union[QtCore.QByteArray, QtGui.QPixmap, bytes]):
         if isinstance(data, bytes):

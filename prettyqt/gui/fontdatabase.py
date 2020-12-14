@@ -1,5 +1,5 @@
 import logging
-from typing import Union
+from typing import Union, Literal
 import pathlib
 
 from qtpy import QtGui
@@ -8,12 +8,14 @@ from prettyqt.utils import bidict, InvalidParamError
 
 logger = logging.getLogger(__name__)
 
-SYSTEM_FONTS = bidict(
+SYSTEM_FONT = bidict(
     general=QtGui.QFontDatabase.GeneralFont,
     fixed=QtGui.QFontDatabase.FixedFont,
     title=QtGui.QFontDatabase.TitleFont,
     smallest_readable=QtGui.QFontDatabase.SmallestReadableFont,
 )
+
+SystemFontStr = Literal["general", "fixed", "title", "smallest_readable"]
 
 
 class FontDatabase(QtGui.QFontDatabase):
@@ -26,10 +28,10 @@ class FontDatabase(QtGui.QFontDatabase):
                 logger.debug(f"adding font {p} to database.")
                 cls.addApplicationFont(str(p))
 
-    def get_system_font(self, font_type: str):
-        if font_type not in SYSTEM_FONTS:
-            raise InvalidParamError(font_type, SYSTEM_FONTS)
-        return self.systemFont(SYSTEM_FONTS[font_type])
+    def get_system_font(self, font_type: SystemFontStr):
+        if font_type not in SYSTEM_FONT:
+            raise InvalidParamError(font_type, SYSTEM_FONT)
+        return self.systemFont(SYSTEM_FONT[font_type])
 
 
 if __name__ == "__main__":

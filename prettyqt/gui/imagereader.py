@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Literal
 
 from qtpy import QtGui, QtCore
 
@@ -14,19 +14,17 @@ IMAGE_READER_ERROR = bidict(
     unknown=QtGui.QImageReader.UnknownError,
 )
 
-TRANSFORMATIONS = gui.imageiohandler.TRANSFORMATIONS
-IMAGE_OPTION = gui.imageiohandler.IMAGE_OPTION
+ImageReaderErrorStr = Literal[
+    "file_not_found", "device", "unsupported_format", "invalid_data", "unknown"
+]
 
 
 class ImageReader(QtGui.QImageReader):
     def __getitem__(self, key: str) -> str:
         return self.text(key)
 
-    def get_error(self) -> str:
+    def get_error(self) -> ImageReaderErrorStr:
         """Return error type.
-
-        possible values are "file_not_found", "device", "unsupported_format",
-                            "invalid_image", "unknown"
 
         Returns:
             error type
@@ -65,16 +63,13 @@ class ImageReader(QtGui.QImageReader):
             fmt = fmt.encode()
         self.setFormat(fmt)
 
-    def get_transformation(self) -> str:
+    def get_transformation(self) -> gui.imageiohandler.TransformationStr:
         """Return the transformation and orientation the image has been set to.
-
-        Possible values: "none", "mirror", "flip", "rotate_180", "roate_90",
-                         "mirror_and_rotate_90", "flip_and_rotate_90", "rotate_270"
 
         Returns:
             transformation
         """
-        return TRANSFORMATIONS.inverse[self.transformation()]
+        return gui.imageiohandler.TRANSFORMATION.inverse[self.transformation()]
 
     def read_image(self) -> gui.Image:
         return gui.Image(self.read())
@@ -96,9 +91,9 @@ class ImageReader(QtGui.QImageReader):
         Returns:
             option
         """
-        if option not in IMAGE_OPTION:
-            raise InvalidParamError(option, IMAGE_OPTION)
-        return self.supportsOption(IMAGE_OPTION[option])
+        if option not in gui.imageiohandler.IMAGE_OPTION:
+            raise InvalidParamError(option, gui.imageiohandler.IMAGE_OPTION)
+        return self.supportsOption(gui.imageiohandler.IMAGE_OPTION[option])
 
     @staticmethod
     def get_image_format(obj: Union[str, QtCore.QIODevice]) -> str:

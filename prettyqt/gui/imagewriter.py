@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Literal
 
 from qtpy import QtGui, QtCore
 
@@ -13,17 +13,15 @@ IMAGE_WRITER_ERROR = bidict(
     unknown=QtGui.QImageWriter.UnknownError,
 )
 
-TRANSFORMATIONS = gui.imageiohandler.TRANSFORMATIONS
+ImageWriterErrorStr = Literal["device", "unsupported_format", "invalid_image", "unknown"]
 
 
 class ImageWriter(QtGui.QImageWriter):
     def __setitem__(self, key: str, val: str):
         self.setText(key, val)
 
-    def get_error(self) -> str:
+    def get_error(self) -> ImageWriterErrorStr:
         """Return error type.
-
-        possible values are "device", "unsupported_format", "invalid_image", "unknown"
 
         Returns:
             error type
@@ -52,11 +50,8 @@ class ImageWriter(QtGui.QImageWriter):
             fmt = fmt.encode()
         self.setFormat(fmt)
 
-    def set_transformation(self, origin: str):
+    def set_transformation(self, origin: gui.imageiohandler.TransformationStr):
         """Set the image transformations metadata including orientation.
-
-        Allowed values are "none", "mirror", "flip", "rotate_180", "roate_90",
-                           "mirror_and_rotate_90", "flip_and_rotate_90", "rotate_270"
 
         Args:
             origin: transformation to use
@@ -64,20 +59,17 @@ class ImageWriter(QtGui.QImageWriter):
         Raises:
             InvalidParamError: transformation does not exist
         """
-        if origin not in TRANSFORMATIONS:
-            raise InvalidParamError(origin, TRANSFORMATIONS)
-        self.setTransformation(TRANSFORMATIONS[origin])
+        if origin not in gui.imageiohandler.TRANSFORMATION:
+            raise InvalidParamError(origin, gui.imageiohandler.TRANSFORMATION)
+        self.setTransformation(gui.imageiohandler.TRANSFORMATION[origin])
 
-    def get_transformation(self) -> str:
+    def get_transformation(self) -> gui.imageiohandler.TransformationStr:
         """Return the transformation and orientation the image has been set to.
-
-        Possible values: "none", "mirror", "flip", "rotate_180", "roate_90",
-                         "mirror_and_rotate_90", "flip_and_rotate_90", "rotate_270"
 
         Returns:
             transformation
         """
-        return TRANSFORMATIONS.inverse[self.transformation()]
+        return gui.imageiohandler.TRANSFORMATION.inverse[self.transformation()]
 
 
 if __name__ == "__main__":
