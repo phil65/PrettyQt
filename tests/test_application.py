@@ -8,14 +8,6 @@ from prettyqt.utils import InvalidParamError
 
 
 def test_application(qapp):
-    qapp.set_icon("mdi.timer")
-    qapp.set_icon(None)
-    qapp.use_hdpi_bitmaps()
-    qapp.disable_window_help_button()
-    qapp.set_metadata(
-        app_name="test", app_version="1.0.0", org_name="test", org_domain="test"
-    )
-    qapp.load_language_file("de")
     assert qapp.get_mainwindow() is None
     wnd = widgets.MainWindow()
     mw_widget = widgets.Widget()
@@ -26,7 +18,6 @@ def test_application(qapp):
     assert widget == mw_widget
     widget = widgets.Application["test"]
     assert widget == mw_widget
-    qapp.copy_to_clipboard("test")
     with pytest.raises(InvalidParamError):
         qapp.get_style_icon("testus")
     icon = qapp.get_style_icon("warning")
@@ -41,26 +32,41 @@ def test_application(qapp):
     # assert qapp.get_navigation_mode("keypad_directional")
     for widget in qapp:
         pass
+    qapp.store_widget_states()
+    qapp.restore_widget_states()
+    event = QtGui.QKeyEvent(
+        QtCore.QEvent.KeyPress, QtCore.Qt.Key_Down, QtCore.Qt.KeyboardModifiers(0)
+    )
+    assert qapp.send_event("test", event) is True
+    qapp.post_event("test", event)
+
+
+def test_guiapplication(qapp):
     qapp.set_layout_direction("right_to_left")
     with pytest.raises(InvalidParamError):
         qapp.set_layout_direction("test")
     assert qapp.get_layout_direction() == "right_to_left"
     qapp.get_font()
-    qapp.store_widget_states()
-    qapp.restore_widget_states()
+    qapp.get_icon()
     qapp.get_primary_screen()
     qapp.get_screens()
     qapp.get_screen_at(core.Point(1, 1))
+    assert qapp.get_application_state() in [["inactive"], ["active"]]
+    qapp.copy_to_clipboard("test")
+    qapp.set_icon("mdi.timer")
+    qapp.set_icon(None)
+
+
+def test_coreapplication(qapp):
     qapp.get_application_file_path()
     expected = core.Dir.toNativeSeparators(qapp.applicationFilePath())
     assert str(qapp.get_application_file_path()) == expected
     qapp.get_application_dir_path()
     qapp.add_library_path("")
     qapp.get_library_paths()
-    assert qapp.get_application_state() in [["inactive"], ["active"]]
-    qapp.get_icon()
-    event = QtGui.QKeyEvent(
-        QtCore.QEvent.KeyPress, QtCore.Qt.Key_Down, QtCore.Qt.KeyboardModifiers(0)
+    qapp.use_hdpi_bitmaps()
+    qapp.disable_window_help_button()
+    qapp.set_metadata(
+        app_name="test", app_version="1.0.0", org_name="test", org_domain="test"
     )
-    assert qapp.send_event("test", event) is True
-    qapp.post_event("test", event)
+    qapp.load_language_file("de")
