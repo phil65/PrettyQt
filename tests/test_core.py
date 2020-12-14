@@ -4,12 +4,27 @@ import sys
 import pathlib
 import pickle
 import tempfile
+import inspect
 
 import pytest
 
 from qtpy import QtCore
 from prettyqt import core, widgets, constants
 from prettyqt.utils import InvalidParamError
+
+
+clsmembers = inspect.getmembers(core, inspect.isclass)
+clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
+
+
+@pytest.mark.parametrize("name, cls", clsmembers)
+def test_repr(name, cls):
+    try:
+        item = cls()
+    except Exception:
+        return None
+    repr(item)
+    str(item)
 
 
 def test_animationgroup():
@@ -75,11 +90,6 @@ def test_buffer():
     buf = core.Buffer()
     with buf.open_file("read_only"):
         pass
-
-
-def test_bytearraymatcher():
-    matcher = core.ByteArrayMatcher()
-    repr(matcher)
 
 
 def test_calendar():
@@ -158,7 +168,6 @@ def test_datetime():
     dt.set_timezone(tz)
     assert dt.get_timezone() == tz
     assert dt.to_format("iso") == "2000-11-11T00:00:00+01:00"
-    repr(dt)
     dt.get_date()
     dt.get_time()
     dt.set_time_spec("utc")
@@ -187,7 +196,6 @@ def test_dir():
     directory = core.Dir()
     assert pathlib.Path(str(directory)) == directory.to_path()
     assert directory.to_path() / "test" == (directory / "test")
-    repr(directory)
 
 
 def test_diriterator():
@@ -223,15 +231,11 @@ def test_file():
     buf = core.File(tf.name)
     with buf.open_file("read_only"):
         pass
-    str(buf)
-    repr(buf)
     assert buf.get_error() in ["none", "open"]
 
 
 def test_fileinfo():
     info = core.FileInfo()
-    repr(info)
-    str(info)
     info.get_dir()
     info.get_absolute_file_path()
     info.get_birth_time()
@@ -276,19 +280,16 @@ def test_jsondocument():
     doc["k"] = "v"
     assert doc["k"] == "v"
     doc.to_string()
-    repr(doc)
 
 
 def test_jsonvalue():
     val = core.JsonValue("b")
     assert str(val) == "b"
-    repr(val)
 
 
 def test_library():
     lib = core.Library()
     assert bool(lib) is False
-    repr(lib)
     lib.set_load_hints(deep_bind=True)
     assert lib.get_load_hints() == ["deep_bind"]
 
@@ -311,7 +312,6 @@ def test_line():
     line2 = core.Line(1, 0, 0, 0)
     assert line2 == reversed(line)
     assert abs(line) == 1
-    repr(line)
     for p in line:
         pass
 
@@ -331,7 +331,6 @@ def test_linef():
     line2 = core.LineF(1, 0, 0, 0)
     assert line2 == reversed(line)
     assert abs(line) == 1
-    repr(line)
     for p in line:
         pass
 
@@ -422,11 +421,6 @@ def test_operatingsystemversion():
     assert version.get_type() == "android"
 
 
-def test_pauseanimation():
-    animation = core.PauseAnimation()
-    repr(animation)
-
-
 def test_persistentmodelindex():
     index = core.PersistentModelIndex()
     assert bool(index) is False
@@ -437,16 +431,6 @@ def test_pluginloader():
     lib = core.PluginLoader()
     lib.set_load_hints(deep_bind=True)
     assert lib.get_load_hints() == ["deep_bind"]
-
-
-def test_point():
-    p = core.Point()
-    repr(p)
-
-
-def test_pointf():
-    p = core.PointF()
-    repr(p)
 
 
 def test_process():
@@ -512,23 +496,12 @@ def test_propertyanimation():
     assert animation.get_easing() == test
 
 
-def test_rect():
-    rect = core.Rect()
-    repr(rect)
-
-
-def test_rectf():
-    rect = core.RectF()
-    repr(rect)
-
-
 def test_regexp():
     regex = core.RegExp("[0-9]")
     with open("data.pkl", "wb") as jar:
         pickle.dump(regex, jar)
     with open("data.pkl", "rb") as jar:
         regex = pickle.load(jar)
-    repr(regex)
 
 
 def test_regularexpressionmatch():
@@ -555,7 +528,6 @@ def test_regularexpression():
         pickle.dump(regex, jar)
     with open("data.pkl", "rb") as jar:
         regex = pickle.load(jar)
-    repr(regex)
     match = regex.match("123")
     assert match.span() == (0, 1)
     for match in regex.finditer("123"):
@@ -566,7 +538,6 @@ def test_regularexpression():
 
 def test_resource():
     resource = core.Resource()
-    repr(resource)
     bytes(resource)
     assert bool(resource) is True
     for file in resource:
@@ -633,7 +604,6 @@ def test_settings(qapp):
     with pytest.raises(InvalidParamError):
         settings.set_path("native", "error", path)
     s = core.Settings.build_from_dict(dict(a="b"))
-    repr(s)
 
 
 def test_signalmapper():
@@ -653,14 +623,12 @@ def test_signaltransition():
 
 def test_size():
     size = core.Size(2, 2)
-    repr(size)
     assert tuple(size) == (2, 2)
     size = size.expanded_to(core.Size(4, 4))
 
 
 def test_sizef():
     size = core.SizeF(2.5, 2.5)
-    repr(size)
     assert tuple(size) == (2.5, 2.5)
     size = size.expanded_to(core.SizeF(4, 4))
 
@@ -707,7 +675,6 @@ def test_sortfilterproxymodel():
 def storageinfo():
     info = core.StorageInfo()
     assert bool(info) is True
-    repr(info)
     info.get_device()
     info.get_file_system_type()
     info.get_subvolume()
@@ -718,7 +685,6 @@ def storageinfo():
 
 def test_temporarydir():
     folder = core.TemporaryDir()
-    str(folder)
     assert bool(folder) is True
     assert folder.to_path() / "test" == folder / "test"
 
@@ -741,7 +707,6 @@ def test_textboundaryfinder():
     finder = core.TextBoundaryFinder("This is a test", boundary_type="word")
     for boundary in finder:
         pass
-    repr(finder)
     assert finder.get_boundary_type() == "word"
     assert finder.get_boundary_reasons() == ["break_opportunity", "start_of_item"]
 
@@ -815,7 +780,6 @@ def test_url():
     assert str(url) == str(url.to_path())
     assert url.is_local_file()
     url.to_string(prefer_local=True)
-    repr(url)
 
 
 def test_urlquery():
@@ -831,7 +795,6 @@ def test_uuid():
     assert uuid.get_variant() == "dce"
     assert uuid.get_version() == "random"
     assert uuid
-    repr(uuid)
 
 
 def test_versionnumber():
