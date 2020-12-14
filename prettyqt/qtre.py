@@ -104,9 +104,6 @@ class Pattern(core.RegularExpression):
                 flag |= v
         super().__init__(pattern, flag)
 
-    def __repr__(self):
-        return f"RegularExpression({self.pattern()!r})"
-
     def match(  # type: ignore[override]
         self, string: str, pos: int = 0, endpos: Optional[int] = None
     ) -> Optional[Match]:
@@ -172,7 +169,6 @@ class Pattern(core.RegularExpression):
         else:
             result.append(string[0 : matches[0].start()])
         for m in matches[:num_split]:
-            print(m.span())
             if prev_match is not None:
                 result.append(string[prev_match.end() : m.start()])
             for g in m.groups():
