@@ -1,6 +1,18 @@
-from qtpy import QtGui
+from typing import Literal
+
+from qtpy import QtGui, QtCore
 
 from prettyqt import core, gui
+from prettyqt.utils import bidict, InvalidParamError
+
+
+STATE = bidict(
+    unchecked=QtCore.Qt.Unchecked,
+    partial=QtCore.Qt.PartiallyChecked,
+    checked=QtCore.Qt.Checked,
+)
+
+StateStr = Literal["unchecked", "partial", "checked"]
 
 
 class StandardItem(QtGui.QStandardItem):
@@ -43,6 +55,27 @@ class StandardItem(QtGui.QStandardItem):
         """
         icon = gui.icon.get_icon(icon)
         self.setIcon(icon)
+
+    def set_checkstate(self, state: StateStr):
+        """Set checkstate of the checkbox.
+
+        Args:
+            state: checkstate to use
+
+        Raises:
+            InvalidParamError: invalid checkstate
+        """
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
+        self.setCheckState(STATE[state])
+
+    def get_checkstate(self) -> StateStr:
+        """Return checkstate.
+
+        Returns:
+            checkstate
+        """
+        return STATE.inverse[self.checkState()]
 
 
 if __name__ == "__main__":

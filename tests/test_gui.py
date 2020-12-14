@@ -331,6 +331,10 @@ def test_standarditem():
     with open("data.pkl", "rb") as jar:
         s = pickle.load(jar)
     s.set_icon("mdi.timer")
+    s.set_checkstate("unchecked")
+    with pytest.raises(InvalidParamError):
+        s.set_checkstate("test")
+    assert s.get_checkstate() == "unchecked"
     s.clone()
     bytes(s)
 
