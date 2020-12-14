@@ -24,17 +24,23 @@ class StandardItemModel(QtGui.QStandardItemModel):
         self, index: Union[int, Tuple[int, int], QtCore.QModelIndex]
     ) -> QtGui.QStandardItem:
         if isinstance(index, int):
-            return self.item(index)
+            item = self.item(index)
         elif isinstance(index, tuple):
-            return self.item(*index)
+            item = self.item(*index)
         else:
-            return self.itemFromIndex(index)
+            item = self.itemFromIndex(index)
+        if item is None:
+            raise KeyError(index)
+        return item
 
     def __delitem__(self, index: Union[int, Tuple[int, int]]):
         if isinstance(index, int):
-            self.takeRow(index)
+            item = self.takeRow(index)
         elif isinstance(index, tuple):
-            self.takeItem(*index)
+            item = self.takeItem(*index)
+        if item is None:
+            raise KeyError(index)
+        return item
 
     def __iter__(self) -> Iterator[QtGui.QStandardItem]:
         return iter(self.get_children())
