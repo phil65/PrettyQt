@@ -808,6 +808,9 @@ def test_window():
     with pytest.raises(InvalidParamError):
         wnd.set_visibility("test")
     assert wnd.get_visibility() == "maximized"
+    wnd.start_system_resize("right")
+    with pytest.raises(InvalidParamError):
+        wnd.start_system_resize("test")
 
 
 def test_validator():
