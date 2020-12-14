@@ -1,3 +1,5 @@
+from typing import Literal
+
 import contextlib
 
 from qtpy import QtCore
@@ -19,17 +21,30 @@ OPEN_MODES = bidict(
     existing_only=QtCore.QIODevice.ExistingOnly,
 )
 
+OpenModeStr = Literal[
+    "not_open",
+    "read_only",
+    "write_only",
+    "read_write",
+    "append",
+    "truncate",
+    "text",
+    "unbuffered",
+    "new_only",
+    "existing_only",
+]
+
 QtCore.QIODevice.__bases__ = (core.Object,)
 
 
 class IODevice(QtCore.QIODevice):
     @contextlib.contextmanager
-    def open_file(self, mode: str):
+    def open_file(self, mode: OpenModeStr):
         if mode in OPEN_MODES:
             mode = OPEN_MODES[mode]
         self.open(mode)
         yield self
         self.close()
 
-    def get_open_mode(self) -> str:
+    def get_open_mode(self) -> OpenModeStr:
         return OPEN_MODES.inverse[self.openMode()]

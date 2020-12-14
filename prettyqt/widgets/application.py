@@ -1,4 +1,4 @@
-from typing import Optional, Iterator, MutableMapping, Mapping, Union
+from typing import Optional, Iterator, MutableMapping, Mapping, Union, Literal
 import logging
 
 from qtpy import QtCore, QtWidgets
@@ -18,6 +18,15 @@ UI_EFFECTS = bidict(
     animate_toolbox=QtCore.Qt.UI_AnimateToolBox,
 )
 
+UiEffectStr = Literal[
+    "animate_menu",
+    "fade_menu",
+    "animate_combo",
+    "animate_tooltip",
+    "fade_tooltip",
+    "animate_toolbox",
+]
+
 NAVIGATION_MODES = bidict(
     none=QtCore.Qt.NavigationModeNone,
     keypad_tab_order=QtCore.Qt.NavigationModeKeypadTabOrder,
@@ -25,6 +34,14 @@ NAVIGATION_MODES = bidict(
     cursor_auto=QtCore.Qt.NavigationModeCursorAuto,
     cursor_force_visible=QtCore.Qt.NavigationModeCursorForceVisible,
 )
+
+NavigationModeStr = Literal[
+    "none",
+    "keypad_tab_order",
+    "keypad_directional",
+    "cursor_auto",
+    "cursor_force_visible",
+]
 
 SAVE_STATES = dict(
     splitters=QtWidgets.QSplitter,
@@ -144,11 +161,8 @@ class Application(QtWidgets.QApplication):
         icon = style.standardIcon(widgets.style.STANDARD_PIXMAP[icon])
         return gui.Icon(icon)
 
-    def set_effect_enabled(self, effect: str, enabled: bool = True):
+    def set_effect_enabled(self, effect: UiEffectStr, enabled: bool = True):
         """Set the enabled state of a desktop effect.
-
-        valid values are: "animate_menu", "fade_menu", "animate_combo",
-        "animate_tooltip", "fade_tooltip", "animate_toolbox"
 
         Args:
             effect: desktop effect to set
@@ -161,22 +175,16 @@ class Application(QtWidgets.QApplication):
             raise InvalidParamError(effect, UI_EFFECTS)
         self.setEffectEnabled(UI_EFFECTS[effect])
 
-    def is_effect_enabled(self, effect: str) -> str:
+    def is_effect_enabled(self, effect: UiEffectStr) -> str:
         """Return desktop effect state.
-
-        possible values are "animate_menu", "fade_menu", "animate_combo",
-        "animate_tooltip", "fade_tooltip", "animate_toolbox"
 
         Returns:
             desktop effect state
         """
         return self.isEffectEnabled(UI_EFFECTS[effect])
 
-    def set_navigation_mode(self, mode: str):
+    def set_navigation_mode(self, mode: NavigationModeStr):
         """Set the navigation mode.
-
-        valid values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",
-        "cursor_force_visible"
 
         Args:
             mode: navigation mode to use
@@ -188,11 +196,8 @@ class Application(QtWidgets.QApplication):
             raise InvalidParamError(mode, NAVIGATION_MODES)
         self.setNavigationMode(NAVIGATION_MODES[mode])
 
-    def get_navigation_mode(self) -> str:
+    def get_navigation_mode(self) -> NavigationModeStr:
         """Return navigation mode.
-
-        possible values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",
-        "cursor_force_visible"
 
         Returns:
             navigation mode

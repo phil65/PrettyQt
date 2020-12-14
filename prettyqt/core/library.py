@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtCore
 
@@ -13,6 +13,14 @@ LOAD_HINTS = bidict(
     deep_bind=QtCore.QLibrary.DeepBindHint,
 )
 
+LoadHintStr = Literal[
+    "resolve_all_symbols",
+    "export_external_symbols",
+    "load_archive_member",
+    "prevent_unload",
+    "deep_bind",
+]
+
 QtCore.QLibrary.__bases__ = (core.Object,)
 
 
@@ -23,7 +31,7 @@ class Library(QtCore.QLibrary):
     def __repr__(self):
         return f"{type(self).__name__}({self.fileName()!r})"
 
-    def get_load_hints(self) -> List[str]:
+    def get_load_hints(self) -> List[LoadHintStr]:
         return [k for k, v in LOAD_HINTS.items() if v & self.loadHints()]
 
     def set_load_hints(self, **kwargs):

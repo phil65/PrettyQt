@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtGui, QtWidgets
 
@@ -13,6 +13,8 @@ FONT_FILTERS = bidict(
     monospaced=QtWidgets.QFontComboBox.MonospacedFonts,
     proportional=QtWidgets.QFontComboBox.ProportionalFonts,
 )
+
+FontFilterStr = Literal["all", "scalable", "non_scalable", "monospaced", "proportional"]
 
 
 QtWidgets.QFontComboBox.__bases__ = (widgets.ComboBox,)
@@ -39,10 +41,8 @@ class FontComboBox(QtWidgets.QFontComboBox):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def set_font_filters(self, *filters: str):
+    def set_font_filters(self, *filters: FontFilterStr):
         """Set font filters.
-
-        valid values are "all", "scalable", "non_scalable", "monospaced", "proportional"
 
         Args:
             filters: font filters to use
@@ -58,11 +58,8 @@ class FontComboBox(QtWidgets.QFontComboBox):
         flags = helpers.merge_flags(filters, FONT_FILTERS)
         self.setFontFilters(flags)
 
-    def get_font_filters(self) -> List[str]:
+    def get_font_filters(self) -> List[FontFilterStr]:
         """Return list of font filters.
-
-        possible included values are "all", "scalable", "non_scalable", "monospaced",
-        "proportional"
 
         Returns:
             font filter list

@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Union, Literal
 
 from qtpy import QtCore
 
@@ -23,9 +23,27 @@ ALGORITHM = bidict(
     keccak_512=QtCore.QCryptographicHash.Keccak_512,
 )
 
+AlgorithmStr = Literal[
+    "md_4",
+    "md_5",
+    "sha_1",
+    "sha_224",
+    "sha_256",
+    "sha_384",
+    "sha_512",
+    "sha3_224",
+    "sha3_256",
+    "sha3_384",
+    "sha3_512",
+    "keccak_224",
+    "keccak_256",
+    "keccak_384",
+    "keccak_512",
+]
+
 
 class CryptographicHash(QtCore.QCryptographicHash):
-    def __init__(self, method: Union[int, str]):
+    def __init__(self, method: Union[int, AlgorithmStr]):
         if method in ALGORITHM:
             method = ALGORITHM[method]
         super().__init__(method)
@@ -40,7 +58,7 @@ class CryptographicHash(QtCore.QCryptographicHash):
         return bytes(self.result())
 
     @staticmethod
-    def get_hash_length(method: str) -> int:
+    def get_hash_length(method: AlgorithmStr) -> int:
         if method not in ALGORITHM:
             raise InvalidParamError(method, ALGORITHM)
         return CryptographicHash.hashLength(ALGORITHM[method])
