@@ -1,10 +1,12 @@
+from typing import Literal
+
 from qtpy import QtWidgets
 
 from prettyqt import core
 from prettyqt.utils import bidict
 
 
-STANDARD_PIXMAPS = dict(
+STANDARD_PIXMAP = dict(
     titlebar_min_button=QtWidgets.QStyle.SP_TitleBarMinButton,
     titlebar_menu_button=QtWidgets.QStyle.SP_TitleBarMenuButton,
     titlebar_max_button=QtWidgets.QStyle.SP_TitleBarMaxButton,
@@ -79,16 +81,91 @@ STANDARD_PIXMAPS = dict(
     custom_base=QtWidgets.QStyle.SP_CustomBase,
 )
 
-if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    STANDARD_PIXMAPS["dialog_yes_to_all"] = QtWidgets.QStyle.SP_DialogYesToAllButton
-    STANDARD_PIXMAPS["dialog_no_to_all"] = QtWidgets.QStyle.SP_DialogNoToAllButton
-    STANDARD_PIXMAPS["dialog_save_all"] = QtWidgets.QStyle.SP_DialogSaveAllButton
-    STANDARD_PIXMAPS["dialog_abort"] = QtWidgets.QStyle.SP_DialogAbortButton
-    STANDARD_PIXMAPS["dialog_retry"] = QtWidgets.QStyle.SP_DialogRetryButton
-    STANDARD_PIXMAPS["dialog_ignore"] = QtWidgets.QStyle.SP_DialogIgnoreButton
-    STANDARD_PIXMAPS["restore_defaults"] = QtWidgets.QStyle.SP_RestoreDefaultsButton
+StandardPixmapStr = Literal[
+    "titlebar_min_button=",
+    "titlebar_menu_button",
+    "titlebar_max_button",
+    "titlebar_close_button",
+    "titlebar_normal_button",
+    "titlebar_shade_button",
+    "titlebar_unshade_button",
+    "titlebar_context_help_button",
+    "information",
+    "warning",
+    "critical",
+    "question",
+    "desktop",
+    "trash",
+    "computer",
+    "drive_fd",
+    "drive_hd",
+    "drive_cd",
+    "drive_dvd",
+    "drive_net",
+    "dir_home",
+    "dir_open",
+    "dir_closed",
+    "dir",
+    "dir_link",
+    "dir_link_open",
+    "file",
+    "file_link",
+    "file_dialog_start",
+    "file_dialog_end",
+    "file_dialog_to_parent",
+    "file_dialog_new_folder",
+    "file_dialog_detailed_view",
+    "file_dialog_info_view",
+    "file_dialog_contents_view",
+    "file_dialog_list_view",
+    "file_dialog_back",
+    "dockwidget_close_button",
+    "toolbar_horizontal_extension",
+    "toolbar_vertical_extension",
+    "dialog_ok",
+    "dialog_cancel",
+    "dialog_help",
+    "dialog_open",
+    "dialog_save",
+    "dialog_close",
+    "dialog_apply",
+    "dialor_reset",
+    "dialog_discard",
+    "dialog_yes",
+    "dialog_no",
+    "arrow_up",
+    "arrow_down",
+    "arrow_left",
+    "arrow_right",
+    "arrow_back",
+    "arrow_forward",
+    "command_link",
+    "vista_shield",
+    "browser_reload",
+    "browser_stop",
+    "media_play",
+    "media_stop",
+    "media_pause",
+    "media_skip_forward",
+    "media_skip_backward",
+    "media_seek_forward",
+    "media_seek_backward",
+    "media_volume",
+    "media_volume_muted",
+    "lineedit_clear",
+    "custom_base",
+]
 
-COMPLEX_CONTROLS = bidict(
+if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+    STANDARD_PIXMAP["dialog_yes_to_all"] = QtWidgets.QStyle.SP_DialogYesToAllButton
+    STANDARD_PIXMAP["dialog_no_to_all"] = QtWidgets.QStyle.SP_DialogNoToAllButton
+    STANDARD_PIXMAP["dialog_save_all"] = QtWidgets.QStyle.SP_DialogSaveAllButton
+    STANDARD_PIXMAP["dialog_abort"] = QtWidgets.QStyle.SP_DialogAbortButton
+    STANDARD_PIXMAP["dialog_retry"] = QtWidgets.QStyle.SP_DialogRetryButton
+    STANDARD_PIXMAP["dialog_ignore"] = QtWidgets.QStyle.SP_DialogIgnoreButton
+    STANDARD_PIXMAP["restore_defaults"] = QtWidgets.QStyle.SP_RestoreDefaultsButton
+
+COMPLEX_CONTROL = bidict(
     spinbox=QtWidgets.QStyle.CC_SpinBox,
     combobox=QtWidgets.QStyle.CC_ComboBox,
     scrollbar=QtWidgets.QStyle.CC_ScrollBar,
@@ -100,6 +177,19 @@ COMPLEX_CONTROLS = bidict(
     mdi_controls=QtWidgets.QStyle.CC_MdiControls,
     custom_base=QtWidgets.QStyle.CC_CustomBase,
 )
+
+ComplexControlStr = Literal[
+    "spinbox",
+    "combobox",
+    "scrollbar",
+    "slider",
+    "toolbutton",
+    "titlebar",
+    "groupbox",
+    "dial",
+    "mdi_controls",
+    "custom_base",
+]
 
 SIMPLE_CONTROLS = dict(
     none=QtWidgets.QStyle.SC_None,

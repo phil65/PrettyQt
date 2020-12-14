@@ -139,9 +139,9 @@ class Application(QtWidgets.QApplication):
     def get_style_icon(cls, icon: str) -> gui.Icon:
         style = cls.style()
         # icon_size = style.pixelMetric(QtWidgets.QStyle.PM_MessageBoxIconSize)
-        if icon not in widgets.style.STANDARD_PIXMAPS:
-            raise InvalidParamError(icon, widgets.style.STANDARD_PIXMAPS)
-        icon = style.standardIcon(widgets.style.STANDARD_PIXMAPS[icon])
+        if icon not in widgets.style.STANDARD_PIXMAP:
+            raise InvalidParamError(icon, widgets.style.STANDARD_PIXMAP)
+        icon = style.standardIcon(widgets.style.STANDARD_PIXMAP[icon])
         return gui.Icon(icon)
 
     def set_effect_enabled(self, effect: str, enabled: bool = True):
