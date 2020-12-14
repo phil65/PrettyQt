@@ -354,6 +354,21 @@ def test_standarditemmodel():
     with pytest.raises(InvalidParamError):
         model.find_items("test", mode="wrong_mode")
     del model[0]
+    model.add_item(
+        "Test",
+        icon="mdi.timer",
+        data={1: "Test"},
+        foreground=gui.Brush(),
+        background=gui.Brush(),
+        font=gui.Font(),
+        selectable=True,
+        status_tip="test",
+        tool_tip="test",
+        whats_this="test",
+        checkstate="unchecked",
+        size_hint=core.Size(10, 10),
+        is_user_type=True,
+    )
 
 
 def test_statictext():

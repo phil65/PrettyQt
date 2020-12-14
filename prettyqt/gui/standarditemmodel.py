@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Iterator, Union, Tuple
+from typing import List, Iterator, Union, Tuple, Optional
 
 from qtpy import QtCore, QtGui
 
@@ -70,6 +70,54 @@ class StandardItemModel(QtGui.QStandardItemModel):
         if mode not in MATCH_FLAGS:
             raise InvalidParamError(mode, MATCH_FLAGS)
         return self.findItems(text, MATCH_FLAGS[mode], column)
+
+    def add_item(
+        self,
+        name: str = "",
+        icon: gui.icon.IconType = None,
+        data: Optional[dict] = None,
+        foreground: Optional[QtGui.QBrush] = None,
+        background: Optional[QtGui.QBrush] = None,
+        font: Optional[QtGui.QFont] = None,
+        selectable: bool = None,
+        status_tip: Optional[str] = None,
+        tool_tip: Optional[str] = None,
+        whats_this: Optional[str] = None,
+        # text_alignment: Optional[str] = None,
+        checkstate: Optional[widgets.listwidgetitem.StateStr] = None,
+        flags: Optional[int] = None,
+        size_hint: Optional[QtCore.QSize] = None,
+        is_user_type: bool = False,
+    ) -> gui.StandardItem:
+        item = gui.StandardItem(name)
+        if icon is not None:
+            icon = gui.icon.get_icon(icon)
+            item.setIcon(icon)
+        if data is not None:
+            for k, v in data.items():
+                item.setData(v, k)
+        if foreground is not None:
+            item.setForeground(foreground)
+        if background is not None:
+            item.setBackground(background)
+        if font is not None:
+            item.setFont(font)
+        if flags is not None:
+            item.setFlags(flags)
+        if selectable:
+            item.setSelectable(selectable)
+        if status_tip:
+            item.setStatusTip(status_tip)
+        if tool_tip:
+            item.setToolTip(tool_tip)
+        if whats_this:
+            item.setWhatsThis(whats_this)
+        if size_hint is not None:
+            item.setSizeHint(size_hint)
+        if checkstate is not None:
+            item.set_checkstate(checkstate)
+        self.appendRow(item)
+        return item
 
 
 if __name__ == "__main__":
