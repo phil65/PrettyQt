@@ -106,6 +106,16 @@ ATTRIBUTES = bidict(
     no_native_ancestors=QtCore.Qt.WA_DontCreateNativeAncestors,
 )
 
+WINDOW_STATES = bidict(
+    none=QtCore.Qt.WindowNoState,
+    minimized=QtCore.Qt.WindowMinimized,
+    maximized=QtCore.Qt.WindowMaximized,
+    fullscreen=QtCore.Qt.WindowFullScreen,
+    active=QtCore.Qt.WindowActive,
+)
+
+WindowStateStr = Literal["none", "minimized", "maximized", "fullscreen", "active"]
+
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
 
@@ -387,6 +397,27 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             contextmenu policy
         """
         return CONTEXT_POLICY.inverse[self.contextMenuPolicy()]
+
+    def set_window_state(self, policy: WindowStateStr) -> None:
+        """Set window state for given item view.
+
+        Args:
+            policy: window state to use
+
+        Raises:
+            InvalidParamError: policy does not exist
+        """
+        if policy not in WINDOW_STATES:
+            raise InvalidParamError(policy, WINDOW_STATES)
+        self.setWindowState(WINDOW_STATES[policy])
+
+    def get_window_state(self) -> WindowStateStr:
+        """Return current window state.
+
+        Returns:
+            window state
+        """
+        return WINDOW_STATES.inverse[self.windowState()]
 
     def set_custom_menu(self, method: Callable) -> None:
         self.set_contextmenu_policy("custom")

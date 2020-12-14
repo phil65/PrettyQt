@@ -1524,6 +1524,10 @@ def test_widget(qtbot):
     widget = widgets.Widget()
     widget.set_layout("flow")
     widget.set_margin(2)
+    widget.set_window_state("fullscreen")
+    with pytest.raises(InvalidParamError):
+        widget.set_window_state("test")
+    assert widget.get_window_state() == "fullscreen"
 
 
 def test_widgetaction(qtbot):
