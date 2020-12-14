@@ -3,7 +3,7 @@ from typing import Dict, Literal
 from qtpy import QtGui
 
 from prettyqt import gui, core
-from prettyqt.utils import colors, bidict
+from prettyqt.utils import colors, bidict, InvalidParamError
 
 
 ROLE = bidict(
@@ -111,6 +111,27 @@ class Palette(QtGui.QPalette):
 
     def get_brush(self, role: RoleStr, group: GroupStr = "active") -> gui.Brush:
         return gui.Brush(self.brush(GROUP[group], ROLE[role]))
+
+    def set_color_group(self, group: GroupStr):
+        """Set the color group.
+
+        Args:
+            group: color group to use
+
+        Raises:
+            InvalidParamError: invalid color group
+        """
+        if group not in GROUP:
+            raise InvalidParamError(group, GROUP)
+        self.setColorGroup(GROUP[group])
+
+    def get_color_group(self) -> GroupStr:
+        """Return color group.
+
+        Returns:
+            color group
+        """
+        return GROUP.inverse[self.colorGroup()]
 
 
 if __name__ == "__main__":
