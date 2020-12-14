@@ -1,4 +1,4 @@
-from typing import Tuple, List
+from typing import Tuple, List, Literal
 
 from qtpy import QtGui
 
@@ -6,26 +6,31 @@ from prettyqt import gui
 from prettyqt.utils import bidict, InvalidParamError, prettyprinter
 
 
-COORDINATE_MODES = bidict(
+COORDINATE_MODE = bidict(
     logical=QtGui.QGradient.LogicalMode,
     object=QtGui.QGradient.ObjectMode,
     stretch_to_device=QtGui.QGradient.StretchToDeviceMode,
     object_bounding=QtGui.QGradient.ObjectBoundingMode,
 )
 
-SPREADS = bidict(
+CoordinateModeStr = Literal["logical", "object", "stretch_to_device", "object_bounding"]
+
+SPREAD = bidict(
     pad=QtGui.QGradient.PadSpread,
     repeat=QtGui.QGradient.RepeatSpread,
     reflect=QtGui.QGradient.ReflectSpread,
 )
 
+SpreadStr = Literal["pad", "repeat", "reflect"]
 
-TYPES = bidict(
+TYPE = bidict(
     linear=QtGui.QGradient.LinearGradient,
     radial=QtGui.QGradient.RadialGradient,
     conical=QtGui.QGradient.ConicalGradient,
     none=QtGui.QGradient.NoGradient,
 )
+
+TypeStr = Literal["linear", "radial", "conical", "none"]
 
 
 class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
@@ -42,10 +47,8 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
     def serialize(self):
         return self.serialize_fields()
 
-    def set_coordinate_mode(self, mode: str):
+    def set_coordinate_mode(self, mode: CoordinateModeStr):
         """Set the coordinate mode.
-
-        Allowed values are "logical", "object", "stretch_to_device", "object_bounding"
 
         Args:
             mode: coordinate mode
@@ -53,24 +56,20 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
         Raises:
             InvalidParamError: mode does not exist
         """
-        if mode not in COORDINATE_MODES:
-            raise InvalidParamError(mode, COORDINATE_MODES)
-        self.setCoordinateMode(COORDINATE_MODES[mode])
+        if mode not in COORDINATE_MODE:
+            raise InvalidParamError(mode, COORDINATE_MODE)
+        self.setCoordinateMode(COORDINATE_MODE[mode])
 
-    def get_coordinate_mode(self) -> str:
+    def get_coordinate_mode(self) -> CoordinateModeStr:
         """Return current coordinate mode.
-
-        Possible values: "logical", "object", "stretch_to_device", "object_bounding"
 
         Returns:
             coordinate mode
         """
-        return COORDINATE_MODES.inverse[self.coordinateMode()]
+        return COORDINATE_MODE.inverse[self.coordinateMode()]
 
-    def set_spread(self, method: str):
+    def set_spread(self, method: SpreadStr):
         """Set the spread method.
-
-        Allowed values are "pad", "repeat", "reflect"
 
         Args:
             method: spread method
@@ -78,29 +77,25 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
         Raises:
             InvalidParamError: method does not exist
         """
-        if method not in SPREADS:
-            raise InvalidParamError(method, SPREADS)
-        self.setSpread(SPREADS[method])
+        if method not in SPREAD:
+            raise InvalidParamError(method, SPREAD)
+        self.setSpread(SPREAD[method])
 
-    def get_spread(self) -> str:
+    def get_spread(self) -> SpreadStr:
         """Return current spread method.
-
-        Possible values: "pad", "repeat", "reflect"
 
         Returns:
             spread method
         """
-        return SPREADS.inverse[self.spread()]
+        return SPREAD.inverse[self.spread()]
 
-    def get_type(self) -> str:
+    def get_type(self) -> TypeStr:
         """Return current gradient type.
-
-        Possible values: "linear", "radial", "conical", "none"
 
         Returns:
             gradient type
         """
-        return TYPES.inverse[self.type()]
+        return TYPE.inverse[self.type()]
 
     def get_stops(self) -> List[Tuple[float, gui.Color]]:
         return [(i, gui.Color(j)) for (i, j) in self.stops()]
