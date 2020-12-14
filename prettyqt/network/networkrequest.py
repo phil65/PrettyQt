@@ -52,7 +52,7 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
                 self.set_url(obj)
 
     def __repr__(self):
-        return f"NetworkRequest({self.get_url()})"
+        return f"{type(self).__name__}({self.get_url()})"
 
     def set_header(self, name: str, value: str):
         if name not in KNOWN_HEADERS:

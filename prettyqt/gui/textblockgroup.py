@@ -9,7 +9,7 @@ QtGui.QTextBlockGroup.__bases__ = (gui.TextObject,)
 
 class TextBlockGroup(QtGui.QTextBlockGroup):
     def __repr__(self):
-        return "TextBlockGroup()"
+        return f"{type(self).__name__}()"
 
     def __iter__(self) -> Iterator[gui.TextBlock]:
         return iter(gui.TextBlock(i) for i in self.blockList())

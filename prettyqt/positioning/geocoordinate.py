@@ -31,7 +31,7 @@ class GeoCoordinate(QtPositioning.QGeoCoordinate):
         return self.toString()
 
     def __repr__(self):
-        return f"GeoCoordinate({self.latitude()}, {self.longitude()})"
+        return f"{type(self).__name__}({self.latitude()}, {self.longitude()})"
 
     def __bool__(self):
         return self.isValid()

@@ -27,7 +27,7 @@ SPECIAL_ADDRESS = bidict(
 
 class HostAddress(QtNetwork.QHostAddress):
     def __repr__(self):
-        return f"HostAddress({self.toString()!r})"
+        return f"{type(self).__name__}({self.toString()!r})"
 
     def __str__(self):
         return self.toString()

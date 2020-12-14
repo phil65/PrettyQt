@@ -7,7 +7,7 @@ QtGui.QTextObject.__bases__ = (core.Object,)
 
 class TextObject(QtGui.QTextObject):
     def __repr__(self):
-        return "TextObject()"
+        return f"{type(self).__name__}()"
 
     def get_format(self) -> gui.TextFormat:
         return gui.TextFormat(self.format())

@@ -18,7 +18,7 @@ class BaseRegexValidator(gui.Validator):
             self.set_regex(regex)
 
     def __repr__(self):
-        return f"BaseRegexValidator({self.get_regex()!r})"
+        return f"{type(self).__name__}({self.get_regex()!r})"
 
     def __reduce__(self):
         return self.__class__, (self.get_regex(),)

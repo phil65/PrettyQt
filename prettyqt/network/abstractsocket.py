@@ -98,7 +98,7 @@ QtNetwork.QAbstractSocket.__bases__ = (core.IODevice,)
 
 class AbstractSocket(QtNetwork.QAbstractSocket):
     def __repr__(self):
-        return "AbstractSocket()"
+        return f"{type(self).__name__}()"
 
     def bind(
         self,

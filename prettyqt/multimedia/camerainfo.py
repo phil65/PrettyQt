@@ -5,7 +5,7 @@ from qtpy import QtMultimedia
 
 class CameraInfo(QtMultimedia.QCameraInfo):
     def __repr__(self):
-        return f"CameraInfo({self.deviceName()!r})"
+        return f"{type(self).__name__}({self.deviceName()!r})"
 
     @classmethod
     def get_cameras(cls):

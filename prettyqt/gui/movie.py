@@ -16,7 +16,7 @@ QtGui.QMovie.__bases__ = (core.Object,)
 
 class Movie(QtGui.QMovie):
     def __repr__(self):
-        return f"{self.__class__.__name__}()"
+        return f"{self.__class__.__name__}({self.fileName()!r}, {self.get_format()!r})"
 
     def serialize_fields(self):
         return dict(

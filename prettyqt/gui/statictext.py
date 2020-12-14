@@ -18,7 +18,7 @@ if core.VersionNumber.get_qt_version() >= (5, 14, 0):
 
 class StaticText(QtGui.QStaticText):
     def __repr__(self):
-        return f"StaticText({self.text()!r})"
+        return f"{type(self).__name__}({self.text()!r})"
 
     def __str__(self):
         return self.text()

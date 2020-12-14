@@ -7,7 +7,7 @@ QtGui.QTextFrame.__bases__ = (gui.TextObject,)
 
 class TextFrame(QtGui.QTextFrame):
     def __repr__(self):
-        return "TextFrame()"
+        return f"{type(self).__name__}()"
 
     def get_first_cursor_position(self) -> gui.TextCursor:
         return gui.TextCursor(self.firstCursorPosition())

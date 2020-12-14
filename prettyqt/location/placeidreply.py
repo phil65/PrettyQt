@@ -18,7 +18,7 @@ QtLocation.QPlaceIdReply.__bases__ = (location.PlaceReply,)
 
 class PlaceIdReply(QtLocation.QPlaceIdReply):
     def __repr__(self):
-        return f"PlaceIdReply({self.operationType()})"
+        return f"{type(self).__name__}({self.operationType()})"
 
     @classmethod
     def clone_from(cls, obj: QtLocation.QPlaceIdReply) -> PlaceIdReply:

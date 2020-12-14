@@ -18,7 +18,7 @@ class NetworkCookieJar(QtNetwork.QNetworkCookieJar):
         return self.cookiesForUrl(url)
 
     def __repr__(self):
-        return "NetworkCookieJar()"
+        return f"{type(self).__name__}()"
 
     def __iter__(self) -> Iterator[QtNetwork.QNetworkCookie]:
         return iter(self.allCookies())

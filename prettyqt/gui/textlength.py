@@ -11,7 +11,7 @@ TYPES = bidict(
 
 class TextLength(QtGui.QTextLength):
     def __repr__(self):
-        return f"TextLength({self.type()}, {self.rawValue()})"
+        return f"{type(self).__name__}({self.type()}, {self.rawValue()})"
 
     def get_type(self) -> str:
         """Return type of this length object.

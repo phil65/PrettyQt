@@ -33,7 +33,7 @@ class GeoCircle(QtPositioning.QGeoCircle):
             super().__init__(center_or_other, radius)
 
     def __repr__(self):
-        return f"GeoCircle({self.get_center()!r}, {self.radius()})"
+        return f"{type(self).__name__}({self.get_center()!r}, {self.radius()})"
 
     def get_center(self) -> positioning.GeoCoordinate:
         return positioning.GeoCoordinate(self.center())

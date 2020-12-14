@@ -56,7 +56,7 @@ MAP_MODE = multimedia.abstractvideobuffer.MAP_MODE
 class VideoFrame(QtMultimedia.QVideoFrame):
     def __repr__(self):
         return (
-            f"VideoFrame({self.mappedBytes()}, {self.get_size()},"
+            f"{type(self).__name__}({self.mappedBytes()}, {self.get_size()},"
             f"{self.bytesPerLine()}, {self.pixelFormat()})"
         )
 

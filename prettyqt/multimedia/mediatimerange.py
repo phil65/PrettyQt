@@ -7,7 +7,7 @@ from prettyqt import multimedia
 
 class MediaTimeRange(QtMultimedia.QMediaTimeRange):
     # def __repr__(self):
-    #     return f"MediaTimeRange()"
+    #     return f"{type(self).__name__}()"
 
     def __contains__(self, val: int):
         return self.contains(val)

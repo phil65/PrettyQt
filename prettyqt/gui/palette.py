@@ -83,6 +83,9 @@ class Palette(QtGui.QPalette):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
+    def __repr__(self):
+        return f"{type(self).__name__}({self['button']}, {self['window']})"
+
     def highlight_inactive(self):
         color = self.color(self.Active, self.Highlight)
         self.setColor(self.Inactive, self.Highlight, color)

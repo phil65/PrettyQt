@@ -8,7 +8,7 @@ QtGui.QRegularExpressionValidator.__bases__ = (gui.Validator,)
 
 class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
     def __repr__(self):
-        return f"RegularExpressionValidator(RegularExpression({self.get_regex()!r}))"
+        return f"{type(self).__name__}(RegularExpression({self.get_regex()!r}))"
 
     def __getstate__(self):
         return dict(pattern=core.RegularExpression(self.regularExpression()))
