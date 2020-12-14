@@ -800,6 +800,7 @@ def test_timezone():
         pickle.dump(tz, jar)
     with open("data.pkl", "rb") as jar:
         tz = pickle.load(jar)
+    assert tz.get_display_name("standard") == "UTC-12:00"
 
 
 def test_translator():

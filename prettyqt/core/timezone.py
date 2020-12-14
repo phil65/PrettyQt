@@ -1,21 +1,27 @@
+from typing import Union, Optional, Literal
+
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, InvalidParamError
 
 
-NAME_TYPES = bidict(
+NAME_TYPE = bidict(
     default=QtCore.QTimeZone.DefaultName,
     long=QtCore.QTimeZone.LongName,
     short=QtCore.QTimeZone.ShortName,
     offset=QtCore.QTimeZone.OffsetName,
 )
 
-TIME_TYPES = bidict(
+NameTypeStr = Literal["default", "long", "short", "offset"]
+
+TIME_TYPE = bidict(
     standard=QtCore.QTimeZone.StandardTime,
     daylight=QtCore.QTimeZone.DaylightTime,
     generic=QtCore.QTimeZone.GenericTime,
 )
+
+TimeTypeStr = Literal["standard", "daylight", "generic"]
 
 
 class TimeZone(QtCore.QTimeZone):
@@ -32,10 +38,26 @@ class TimeZone(QtCore.QTimeZone):
         return self.get_id()
 
     def __reduce__(self):
-        return (self.__class__, (self.get_id(),))
+        return self.__class__, (self.get_id(),)
 
     def get_id(self) -> str:
         return bytes(self.id()).decode()
+
+    def get_display_name(
+        self,
+        datetime: Union[QtCore.QDateTime, TimeTypeStr],
+        name_type: NameTypeStr = "default",
+        locale: Optional[core.Locale] = None,
+    ) -> str:
+        if isinstance(datetime, str):
+            if datetime not in TIME_TYPE:
+                raise InvalidParamError(datetime, TIME_TYPE)
+            datetime = TIME_TYPE[datetime]
+        if name_type not in NAME_TYPE:
+            raise InvalidParamError(name_type, NAME_TYPE)
+        if locale is None:
+            locale = core.Locale()
+        return self.displayName(datetime, NAME_TYPE[name_type], locale)
 
     # def get_value(self) -> datetime.datetime:
     #     try:
