@@ -5,6 +5,7 @@ from .radiodelegate import RadioDelegate
 from .progressbardelegate import ProgressBarDelegate
 from .icondelegate import IconDelegate
 from .stardelegate import StarDelegate
+from .renderlinkdelegate import RenderLinkDelegate
 from .nofocusdelegate import NoFocusDelegate
 
 __all__ = [
@@ -13,5 +14,6 @@ __all__ = [
     "ProgressBarDelegate",
     "IconDelegate",
     "StarDelegate",
+    "RenderLinkDelegate",
     "NoFocusDelegate",
 ]
