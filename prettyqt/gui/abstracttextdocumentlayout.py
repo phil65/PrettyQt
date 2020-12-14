@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Union, Tuple
 
 from qtpy import QtGui, QtCore
 
@@ -20,7 +20,11 @@ class AbstractTextDocumentLayout(QtGui.QAbstractTextDocumentLayout):
     def get_frame_bounding_rect(self, frame: QtGui.QTextBlock) -> core.RectF:
         return core.RectF(self.frameBoundingRect(frame))
 
-    def hit_test(self, point: core.PointF, fuzzy: bool = False) -> Optional[int]:
+    def hit_test(
+        self, point: Union[core.PointF, Tuple[float, float]], fuzzy: bool = False
+    ) -> Optional[int]:
+        if isinstance(point, tuple):
+            point = core.PointF(*point)
         accuracy = QtCore.Qt.FuzzyHit if fuzzy else QtCore.Qt.ExactHit
         result = self.hitTest(point, accuracy)
         if result == -1:
