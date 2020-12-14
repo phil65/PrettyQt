@@ -167,4 +167,4 @@ if __name__ == "__main__":
     mainWin = Player()
     mainWin.resize(800, 600)
     mainWin.show()
-    sys.exit(app.exec_())
+    sys.exit(app.main_loop())
