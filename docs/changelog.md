@@ -1,3 +1,17 @@
+## v0.148.0 (2020-12-14)
+
+### Feat
+
+- **Widget**: add get/set_window_state methods
+- **AbstractTextDocumentLayout**: add tuple support for hit_test point arg
+- **TimeZone**: add get_display_name method
+- **GuiApplication**: add get/set_high_dpi_scale_factor_rounding_policy methods
+- **StandardItem**: add some new methods
+- **AbstractButton**: add get_icon method
+- **StandardItemModel**: add add_item method
+- **StandardItem**: add get/set_checkstate methods
+- **Window**: add start_system_resize method
+
 ## v0.147.2 (2020-12-14)
 
 ### Fix
