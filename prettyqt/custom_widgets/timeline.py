@@ -56,7 +56,7 @@ class Timeline(widgets.Widget):
 
         # Set Background
         with self.edit_palette() as pal:
-            pal.set_color("background", self.background_color)
+            pal.set_color("window", self.background_color)
 
     def __len__(self):
         return len(self.video_samples)

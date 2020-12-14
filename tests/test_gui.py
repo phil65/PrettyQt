@@ -572,10 +572,10 @@ def test_palette():
     assert len(pal.get_colors()) == 21
     assert len(pal.get_brushes()) == 21
     color = gui.Color("red")
-    pal.set_brush("background", "red")
-    assert pal.get_brush("background") == color
+    pal.set_brush("window", "red")
+    assert pal.get_brush("window") == color
     pal.highlight_inactive()
-    pal.set_color("background", "red")
+    pal.set_color("window", "red")
     pal["button"] = color
     assert pal["button"] == color
     bytes(pal)

@@ -7,8 +7,8 @@ from prettyqt.utils import colors, bidict
 
 
 ROLE = bidict(
-    background=QtGui.QPalette.Background,  # same as Window
-    foreground=QtGui.QPalette.Foreground,  # same as WindowText
+    window=QtGui.QPalette.Window,  # same as Background
+    window_text=QtGui.QPalette.WindowText,  # same as Foreground
     base=QtGui.QPalette.Base,
     alternate_base=QtGui.QPalette.AlternateBase,
     tool_tip_base=QtGui.QPalette.ToolTipBase,
@@ -31,8 +31,8 @@ ROLE = bidict(
 )
 
 RoleStr = Literal[
-    "background",
-    "foreground",
+    "window",
+    "window_text",
     "base",
     "alternate_base",
     "tool_tip_base",
