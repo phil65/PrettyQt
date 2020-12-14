@@ -341,7 +341,7 @@ def test_spanslider(qtbot, qttester):
     qttester.send_mousepress(slider, QtCore.Qt.LeftButton)
     qttester.send_mousemove(slider, core.Point(20, 20))
     qttester.send_mousemove(slider, core.Point(0, 0), delay=10)
-    assert slider.get_movement_mode() == "free"
+    assert slider.get_movement_mode() == "no_crossing"
     slider.set_movement_mode("no_overlap")
     slider.close()
 
