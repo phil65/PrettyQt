@@ -76,6 +76,18 @@ APPLICATION_STATES = bidict(
 ApplicationStateStr = Literal["suspended", "hidden", "inactive", "active"]
 
 
+HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY = bidict(
+    round=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.Round,
+    ceil=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.Ceil,
+    floor=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.Floor,
+    round_prefer_floor=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.RoundPreferFloor,
+    pass_through=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.PassThrough,
+)
+
+HighDpiScaleFactorRoundingPolicyStr = Literal[
+    "round", "ceil", "floor", "round_prefer_floor", "pass_through"
+]
+
 QtGui.QGuiApplication.__bases__ = (core.CoreApplication,)
 
 
@@ -122,6 +134,37 @@ class GuiApplication(QtGui.QGuiApplication):
         return LAYOUT_DIRECTION.inverse[self.layoutDirection()]
 
     @classmethod
+    def set_high_dpi_scale_factor_rounding_policy(
+        cls, policy: HighDpiScaleFactorRoundingPolicyStr
+    ):
+        """Set high dpi scale factor rounding policy.
+
+        Args:
+            direction: rounding policy
+
+        Raises:
+            InvalidParamError: rounding policy does not exist
+        """
+        if policy not in HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY:
+            raise InvalidParamError(policy, HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY)
+        cls.setHighDpiScaleFactorRoundingPolicy(
+            HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY[policy]
+        )
+
+    @classmethod
+    def get_high_dpi_scale_factor_rounding_policy(
+        cls,
+    ) -> HighDpiScaleFactorRoundingPolicyStr:
+        """Get the current high dpi scale factor rounding policy.
+
+        Returns:
+            rounding policy
+        """
+        return HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY.inverse[
+            cls.highDpiScaleFactorRoundingPolicy()
+        ]
+
+    @classmethod
     def get_application_state(cls) -> List[ApplicationStateStr]:
         """Get the current application state.
 
@@ -139,8 +182,9 @@ class GuiApplication(QtGui.QGuiApplication):
     def get_screens(self) -> List[gui.Screen]:
         return [gui.Screen(i) for i in self.screens()]
 
-    def get_input_method(self) -> gui.InputMethod:
-        return gui.InputMethod(self.inputMethod())
+    @classmethod
+    def get_input_method(cls) -> gui.InputMethod:
+        return gui.InputMethod(cls.inputMethod())
 
     @classmethod
     def copy_to_clipboard(cls, text: str):
@@ -164,3 +208,7 @@ class GuiApplication(QtGui.QGuiApplication):
 
     def get_icon(self) -> gui.Icon:
         return gui.Icon(self.windowIcon())
+
+    @classmethod
+    def get_palette(cls) -> gui.Palette:
+        return gui.Palette(cls.palette())

@@ -55,6 +55,10 @@ def test_guiapplication(qapp):
     qapp.copy_to_clipboard("test")
     qapp.set_icon("mdi.timer")
     qapp.set_icon(None)
+    qapp.set_high_dpi_scale_factor_rounding_policy("round_prefer_floor")
+    with pytest.raises(InvalidParamError):
+        qapp.set_high_dpi_scale_factor_rounding_policy("testus")
+    assert qapp.get_high_dpi_scale_factor_rounding_policy() == "round_prefer_floor"
 
 
 def test_coreapplication(qapp):
