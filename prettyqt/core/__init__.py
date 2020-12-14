@@ -60,6 +60,7 @@ from .url import Url
 from .urlquery import UrlQuery
 from .translator import Translator
 from .coreapplication import CoreApplication
+from .filesystemwatcher import FileSystemWatcher
 from .iodevice import IODevice
 from .filedevice import FileDevice
 from .file import File
@@ -175,6 +176,7 @@ __all__ = [
     "PluginLoader",
     "UrlQuery",
     "CoreApplication",
+    "FileSystemWatcher",
     "IODevice",
     "FileDevice",
     "File",
