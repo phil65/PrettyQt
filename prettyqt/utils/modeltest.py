@@ -486,7 +486,9 @@ class ModelTester:
             QtCore.Qt.Checked,
         ]
 
-    def _on_rows_about_to_be_inserted(self, parent, start, end):
+    def _on_rows_about_to_be_inserted(
+        self, parent: QtCore.QModelIndex, start: int, end: int
+    ):
         """Store what is about to be inserted.
 
         This gets stored to make sure it actually happens in rowsInserted.
@@ -514,7 +516,7 @@ class ModelTester:
         )
         self._insert.append(c)
 
-    def _on_rows_inserted(self, parent, start, end):
+    def _on_rows_inserted(self, parent: QtCore.QModelIndex, start: int, end: int):
         """Confirm that what was said was going to happen actually did."""
         c = self._insert.pop()
         last_data = (
@@ -572,7 +574,9 @@ class ModelTester:
             assert p == self._model.index(p.row(), p.column(), p.parent())
         self._changing = []
 
-    def _on_rows_about_to_be_removed(self, parent, start, end):
+    def _on_rows_about_to_be_removed(
+        self, parent: QtCore.QModelIndex, start: int, end: int
+    ):
         """Store what is about to be removed to make sure it actually happens.
 
         This gets stored to make sure it actually happens in rowsRemoved.
@@ -607,7 +611,7 @@ class ModelTester:
         )
         self._remove.append(c)
 
-    def _on_rows_removed(self, parent, start, end):
+    def _on_rows_removed(self, parent: QtCore.QModelIndex, start: int, end: int):
         """Confirm that what was said was going to happen actually did."""
         c = self._remove.pop()
         last_data = (
@@ -668,7 +672,7 @@ class ModelTester:
         count = self._model.rowCount() if is_vertical else self._column_count()
         assert 0 <= start <= end < count
 
-    def _column_count(self, parent=QtCore.QModelIndex()):
+    def _column_count(self, parent: QtCore.QModelIndex = QtCore.QModelIndex()):
         """Test columnCount.
 
         Workaround for the fact that ``columnCount`` is a private method in
@@ -679,7 +683,7 @@ class ModelTester:
         else:
             return self._model.columnCount(parent)
 
-    def _parent(self, index):
+    def _parent(self, index: QtCore.QModelIndex):
         """Test parent."""
         model_types = (QtCore.QAbstractListModel, QtCore.QAbstractTableModel)
         if isinstance(self._model, model_types):
@@ -687,7 +691,7 @@ class ModelTester:
         else:
             return self._model.parent(index)
 
-    def _has_children(self, parent=QtCore.QModelIndex()):
+    def _has_children(self, parent: QtCore.QModelIndex = QtCore.QModelIndex()):
         """Test hasChildren."""
         model_types = (QtCore.QAbstractListModel, QtCore.QAbstractTableModel)
         if isinstance(self._model, model_types):
@@ -696,7 +700,7 @@ class ModelTester:
         else:
             return self._model.hasChildren(parent)
 
-    def _fetch_more(self, parent):
+    def _fetch_more(self, parent: QtCore.QModelIndex):
         """Call ``fetchMore`` on the model and set ``self._fetching_more``."""
         self._fetching_more = True
         self._model.fetchMore(parent)
