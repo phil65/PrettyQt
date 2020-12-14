@@ -34,12 +34,6 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
     def __getitem__(self, index: Tuple[int, int]) -> QtCore.QModelIndex:
         return self.index(*index)
 
-    def rows(self) -> int:
-        return self.rowCount()
-
-    def columns(self) -> int:
-        return self.columnCount()
-
     def check_index(
         self,
         index: QtCore.QModelIndex,
