@@ -3,14 +3,7 @@ from typing import List, Optional
 from qtpy import QtLocation
 
 from prettyqt import location, positioning, core
-from prettyqt.utils import bidict, InvalidParamError
-
-VISIBILITY = bidict(
-    unspecified=QtLocation.QLocation.UnspecifiedVisibility,
-    device=QtLocation.QLocation.DeviceVisibility,
-    private=QtLocation.QLocation.PrivateVisibility,
-    public=QtLocation.QLocation.PublicVisibility,
-)
+from prettyqt.utils import InvalidParamError
 
 
 class Place(QtLocation.QPlace):
@@ -57,18 +50,17 @@ class Place(QtLocation.QPlace):
     def get_supplier(self) -> location.PlaceSupplier:
         return location.PlaceSupplier(self.supplier())
 
-    def get_visibility(self) -> str:
+    def get_visibility(self) -> location.VisibilityStr:
         """Return visibility.
-
-        Possible values are "unspecified", "device", "private", "public"
 
         Returns:
             Visibility
         """
-        return VISIBILITY.inverse[self.visibility()]
+        return location.VISIBILITY.inverse[self.visibility()]
 
 
 if __name__ == "__main__":
     place = Place()
-    place["test"] = location.PlaceAttribute()
-    assert place["test"] == "a"
+    attr = location.PlaceAttribute()
+    place["test"] = attr
+    assert place["test"] == attr

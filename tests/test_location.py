@@ -2,6 +2,7 @@
 
 import pytest
 
+import qtpy
 from qtpy import QtLocation
 
 from prettyqt import location, core
@@ -49,6 +50,7 @@ def test_georoute():
     route.get_path()
 
 
+@pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
 def test_georouteleg():
     location.GeoRouteLeg()
 

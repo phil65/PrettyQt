@@ -44,7 +44,7 @@ class PlaceManager(core.Object):
         coord: Union[Tuple[float, float], QtPositioning.QGeoCoordinate],
         radius: Optional[float] = None,
         limit: Optional[int] = None,
-        relevance: Optional[str] = None,
+        relevance: Optional[location.placesearchrequest.RelevanceHintStr] = None,
         categories: Optional[List[str]] = None,
     ):
         request = location.PlaceSearchRequest()

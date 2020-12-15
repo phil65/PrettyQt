@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtLocation, PYQT5, PYSIDE2
 
@@ -17,24 +17,17 @@ RELEVANCE_HINT = bidict(
     lexical_place_name=QtLocation.QPlaceSearchRequest.LexicalPlaceNameHint,
 )
 
-VISIBILITY = bidict(
-    unspecified=QtLocation.QLocation.UnspecifiedVisibility,
-    device=QtLocation.QLocation.DeviceVisibility,
-    private=QtLocation.QLocation.PrivateVisibility,
-    public=QtLocation.QLocation.PublicVisibility,
-)
+RelevanceHintStr = Literal["unspecified", "distance", "lexical_place_name"]
 
 
 class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
-    def get_visibility_scope(self) -> str:
+    def get_visibility_scope(self) -> location.VisibilityStr:
         """Return the scope of the visibility.
-
-        Possible values are "unspecified", "device", "private", "public"
 
         Returns:
             Visibility scope
         """
-        return VISIBILITY.inverse[self.visibilityScope()]
+        return location.VISIBILITY.inverse[self.visibilityScope()]
 
     def get_categories(self) -> List[location.PlaceCategory]:
         return [location.PlaceCategory(i) for i in self.categories()]
@@ -52,10 +45,8 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
         else:
             return positioning.GeoShape(area)
 
-    def set_relevance_hint(self, hint: str):
+    def set_relevance_hint(self, hint: RelevanceHintStr):
         """Set the relevance hint.
-
-        Allowed values are "unspecified", "distance", "lexical_place_name"
 
         Args:
             hint: Relevance hint
@@ -67,10 +58,8 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
             raise InvalidParamError(hint, RELEVANCE_HINT)
         self.setRelevanceHint(RELEVANCE_HINT[hint])
 
-    def get_relevance_hint(self) -> str:
+    def get_relevance_hint(self) -> RelevanceHintStr:
         """Return current relevance hint.
-
-        Possible values: "unspecified", "distance", "lexical_place_name"
 
         Returns:
             Relevance hint
@@ -80,4 +69,5 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
 
 if __name__ == "__main__":
     request = PlaceSearchRequest()
-    print(bool(request))
+    request.setVisibilityScope("tse")
+    print(dir(request))

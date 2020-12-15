@@ -1,14 +1,6 @@
 from qtpy import QtLocation
 
 from prettyqt import location
-from prettyqt.utils import bidict
-
-VISIBILITY = bidict(
-    unspecified=QtLocation.QLocation.UnspecifiedVisibility,
-    device=QtLocation.QLocation.DeviceVisibility,
-    private=QtLocation.QLocation.PrivateVisibility,
-    public=QtLocation.QLocation.PublicVisibility,
-)
 
 
 class PlaceCategory(QtLocation.QPlaceCategory):
@@ -21,15 +13,13 @@ class PlaceCategory(QtLocation.QPlaceCategory):
     def get_icon(self) -> location.PlaceIcon:
         return location.PlaceIcon(self.icon())
 
-    def get_visibility(self) -> str:
+    def get_visibility(self) -> location.VisibilityStr:
         """Return the visibility of the place.
-
-        Possible values are "unspecified", "device", "private", "public"
 
         Returns:
             Visibility
         """
-        return VISIBILITY.inverse[self.visibility()]
+        return location.VISIBILITY.inverse[self.visibility()]
 
 
 if __name__ == "__main__":

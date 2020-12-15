@@ -1,5 +1,8 @@
 """Location module."""
 
+import qtpy
+
+from .qlocation import VISIBILITY, VisibilityStr
 from .georouterequest import GeoRouteRequest
 from .placeattribute import PlaceAttribute
 from .placeratings import PlaceRatings
@@ -17,7 +20,6 @@ from .georoutingmanager import GeoRoutingManager
 from .geomaneuver import GeoManeuver
 from .georoutesegment import GeoRouteSegment
 from .georoute import GeoRoute
-from .georouteleg import GeoRouteLeg
 from .placesearchrequest import PlaceSearchRequest
 from .placecontentrequest import PlaceContentRequest
 from .place import Place
@@ -34,8 +36,14 @@ from .placeidreply import PlaceIdReply
 from .placemanager import PlaceManager
 from .geoserviceprovider import GeoServiceProvider
 
+# not available in PySide2
+if qtpy.API == "pyqt5":
+    from .georouteleg import GeoRouteLeg
+
 
 __all__ = [
+    "VISIBILITY",
+    "VisibilityStr",
     "PlaceAttribute",
     "PlaceContactDetail",
     "PlaceCategory",
