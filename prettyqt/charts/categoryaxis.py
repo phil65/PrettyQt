@@ -32,6 +32,10 @@ class CategoryAxis(QtCharts.QCategoryAxis):
         self.append(*other)
         return self
 
+    def __len__(self):
+        # needed for PySide2
+        return self.count()
+
     def set_labels_position(self, position: str):
         """Set the labels position.
 
