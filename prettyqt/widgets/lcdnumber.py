@@ -22,7 +22,7 @@ SEGMENT_STYLE = bidict(
 
 SegmentStyleStr = Literal["outline", "filled", "flat"]
 
-QtWidgets.QLCDNumber.__bases__ = (widgets.Widget,)
+QtWidgets.QLCDNumber.__bases__ = (widgets.Frame,)
 
 
 class LCDNumber(QtWidgets.QLCDNumber):
