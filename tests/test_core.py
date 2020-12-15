@@ -243,9 +243,6 @@ def test_fileinfo():
     info.get_metadata_change_time()
     info.get_last_modified()
     info.get_last_read()
-    info.get_file_time("birth")
-    with pytest.raises(InvalidParamError):
-        info.get_file_time("test")
 
 
 def test_historystate():

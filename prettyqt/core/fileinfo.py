@@ -3,7 +3,6 @@ import pathlib
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import InvalidParamError
 
 
 class FileInfo(QtCore.QFileInfo):
@@ -42,11 +41,6 @@ class FileInfo(QtCore.QFileInfo):
 
     def get_last_read(self) -> core.DateTime:
         return core.DateTime(self.lastRead())
-
-    def get_file_time(self, typ: str) -> core.DateTime:
-        if typ not in core.filedevice.FILE_TIME:
-            raise InvalidParamError(typ, core.filedevice.FILE_TIME)
-        return core.DateTime(self.fileTime(core.filedevice.FILE_TIME[typ]))
 
 
 if __name__ == "__main__":
