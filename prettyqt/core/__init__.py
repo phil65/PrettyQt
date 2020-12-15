@@ -12,6 +12,7 @@ from qtpy.QtCore import QPointF as PointF
 from qtpy.QtCore import QRect as Rect
 from qtpy.QtCore import QRectF as RectF
 from qtpy.QtCore import qInstallMessageHandler as install_message_handler
+from qtpy.QtCore import QEvent as Event
 from qtpy.QtCore import QChildEvent as ChildEvent
 from qtpy.QtCore import QTimerEvent as TimerEvent
 from qtpy.QtCore import QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent
@@ -102,7 +103,8 @@ from .threadpool import ThreadPool
 from .dir import Dir
 from .temporaryfile import TemporaryFile
 from .temporarydir import TemporaryDir
-from .event import Event
+
+# from .event import Event
 from .itemselectionmodel import ItemSelectionModel
 from .itemselection import ItemSelection
 from .itemselectionrange import ItemSelectionRange
@@ -144,6 +146,7 @@ def app():
 
 __all__ = [
     "app",
+    "Event",
     "ChildEvent",
     "TimerEvent",
     "DynamicPropertyChangeEvent",
@@ -222,7 +225,6 @@ __all__ = [
     "MimeDatabase",
     "Dir",
     "TemporaryDir",
-    "Event",
     "DirIterator",
     "ItemSelectionModel",
     "ItemSelection",
