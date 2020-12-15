@@ -2,6 +2,13 @@ from qtpy import QtGui
 
 
 class Color(QtGui.QColor):
+    def __init__(self, *args, **kwargs):
+        # PySide2 workaround
+        if len(args) == 1 and isinstance(args[0], Color):
+            super().__init__(str(args[0]))
+        else:
+            super().__init__(*args, **kwargs)
+
     def __repr__(self):
         return (
             f"{type(self).__name__}({self.red()}, {self.green()}, "
