@@ -511,6 +511,16 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         w.raise_()
         return True
 
+    def set_mask(
+        self,
+        x: int,
+        y: int,
+        width: int,
+        height: int,
+        typ: gui.region.RegionTypeStr = "rectangle",
+    ):
+        self.setMask(gui.Region(x, y, width, height, gui.region.REGION_TYPE[typ]))
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
