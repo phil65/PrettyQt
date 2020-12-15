@@ -30,6 +30,10 @@ class StackedWidget(QtWidgets.QStackedWidget):
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.widget(i) for i in range(self.count()))
 
+    def __len__(self):
+        # needed for PySide2
+        return self.count()
+
     def serialize_fields(self):
         return dict(items=list(self))
 
