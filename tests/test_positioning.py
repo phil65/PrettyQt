@@ -72,6 +72,17 @@ def test_geopolygon():
     str(path)
 
 
+def test_geopositioninfo():
+    info = positioning.GeoPositionInfo()
+    info["direction"] = 10.0
+    assert "direction" in info
+    assert info["direction"] == 10.0
+    del info["direction"]
+    assert bool(info) is False
+    info.get_coordinate()
+    info.get_timestamp()
+
+
 def test_geosatelliteinfo():
     info = positioning.GeoSatelliteInfo()
     info["elevation"] = 1.0

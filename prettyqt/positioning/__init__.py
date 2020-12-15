@@ -5,6 +5,7 @@ Contains QtPositioning-based classes
 
 from .geoaddress import GeoAddress
 from .geocoordinate import GeoCoordinate
+from .geopositioninfo import GeoPositionInfo
 from .geoshape import GeoShape
 from .georectangle import GeoRectangle
 from .geocircle import GeoCircle
@@ -24,6 +25,7 @@ __all__ = [
     "GeoShape",
     "GeoCircle",
     "GeoCoordinate",
+    "GeoPositionInfo",
     "GeoLocation",
     "GeoSatelliteInfo",
     "GeoPath",
