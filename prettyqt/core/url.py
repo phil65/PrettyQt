@@ -57,10 +57,10 @@ class Url(QtCore.QUrl):
     #     return self.absolutePath()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.toString(self.PreferLocalFile)!r})"
+        return f"{type(self).__name__}({self.toString()!r})"
 
     def __str__(self):
-        return self.toString(self.PreferLocalFile)
+        return self.toString()
 
     def serialize_fields(self):
         return dict(path=self.toString())
@@ -68,11 +68,8 @@ class Url(QtCore.QUrl):
     def serialize(self):
         return self.serialize_fields()
 
-    def to_string(self, prefer_local: bool = False) -> str:
-        flags = 0
-        if prefer_local:
-            flags |= self.PreferLocalFile
-        return self.toString(flags)
+    def to_string(self) -> str:
+        return self.toString()
 
     def to_path(self) -> pathlib.Path:
         """Get pathlib object from the URL.
@@ -90,3 +87,8 @@ class Url(QtCore.QUrl):
         if working_dir is None:
             working_dir = ""
         return cls(cls.fromUserInput(url, working_dir))
+
+
+if __name__ == "__main__":
+    url = Url()
+    str(url)

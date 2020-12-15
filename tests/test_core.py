@@ -778,7 +778,6 @@ def test_url():
     url = core.Url(path)
     assert str(url) == str(url.to_path())
     assert url.is_local_file()
-    url.to_string(prefer_local=True)
 
 
 def test_urlquery():
