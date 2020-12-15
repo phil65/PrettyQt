@@ -1,4 +1,4 @@
-from typing import Union, Optional, Dict
+from typing import Union, Optional, Dict, Literal
 
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -10,12 +10,16 @@ TAB_SHAPES = bidict(
     rounded=QtWidgets.QTabWidget.Rounded, triangular=QtWidgets.QTabWidget.Triangular
 )
 
-TAB_POSITIONS = bidict(
+TabShapeStr = Literal["rounded", "triangular"]
+
+TAB_POSITION = bidict(
     north=QtWidgets.QTabWidget.North,
     south=QtWidgets.QTabWidget.South,
     west=QtWidgets.QTabWidget.West,
     east=QtWidgets.QTabWidget.East,
 )
+
+TabPositionStr = Literal["north", "south", "west", "east"]
 
 QtWidgets.QTabWidget.__bases__ = (widgets.Widget,)
 
@@ -87,10 +91,8 @@ class TabWidget(QtWidgets.QTabWidget):
     def set_document_mode(self, state: bool = True) -> None:
         self.setDocumentMode(state)
 
-    def set_tab_shape(self, shape: str) -> None:
+    def set_tab_shape(self, shape: TabShapeStr) -> None:
         """Set tab shape for the tabwidget.
-
-        Valid values are "rounded" and "triangular"
 
         Args:
             shape: tab shape to use
@@ -102,20 +104,16 @@ class TabWidget(QtWidgets.QTabWidget):
             raise InvalidParamError(shape, TAB_SHAPES)
         self.setTabShape(TAB_SHAPES[shape])
 
-    def get_tab_shape(self) -> str:
+    def get_tab_shape(self) -> TabShapeStr:
         """Return tab shape.
-
-        possible values are "rounded", "triangular"
 
         Returns:
             tab shape
         """
         return TAB_SHAPES.inverse[self.tabShape()]
 
-    def set_tab_position(self, position: str) -> None:
+    def set_tab_position(self, position: TabPositionStr) -> None:
         """Set tab position for the tabwidget.
-
-        Valid values are "north", "south", "east", "west"
 
         Args:
             position: tab position to use
@@ -123,19 +121,17 @@ class TabWidget(QtWidgets.QTabWidget):
         Raises:
             InvalidParamError: tab position does not exist
         """
-        if position not in TAB_POSITIONS:
-            raise InvalidParamError(position, TAB_POSITIONS)
-        self.setTabPosition(TAB_POSITIONS[position])
+        if position not in TAB_POSITION:
+            raise InvalidParamError(position, TAB_POSITION)
+        self.setTabPosition(TAB_POSITION[position])
 
-    def get_tab_position(self) -> str:
+    def get_tab_position(self) -> TabPositionStr:
         """Return tab position.
-
-        possible values are "north", "south", "east", "west"
 
         Returns:
             tab position
         """
-        return TAB_POSITIONS.inverse[self.tabPosition()]
+        return TAB_POSITION.inverse[self.tabPosition()]
 
     def get_children(self) -> list:
         return [

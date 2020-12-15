@@ -64,8 +64,6 @@ class Process(QtCore.QProcess):
     def set_read_channel(self, channel: ProcessChannelStr):
         """Set the input channel channel.
 
-        possible values are "managed", "forwarded"
-
         Args:
             channel: channel to set
 
@@ -85,8 +83,6 @@ class Process(QtCore.QProcess):
     def set_input_channel_mode(self, mode: InputChannelModeStr):
         """Set the input channel mode.
 
-        possible values are "managed", "forward"
-
         Args:
             mode: mode to set
 
@@ -103,9 +99,6 @@ class Process(QtCore.QProcess):
     def set_process_channel_mode(self, mode: ProcessChannelModeStr):
         """Set the process channel mode.
 
-        possible values are "separate", "merged", "forwarded", "forwarded_error",
-        "forwarded_output"
-
         Args:
             mode: mode to set
 
@@ -121,8 +114,6 @@ class Process(QtCore.QProcess):
 
     def set_state(self, state: ProcessStateStr):
         """Set the process state.
-
-        possible values are "not_running", "starting", "running"
 
         Args:
             state: state to set

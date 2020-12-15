@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import PYQT5, PYSIDE2
 
 if PYQT5:
@@ -14,32 +16,34 @@ SATELLITE_SYSTEMS = bidict(
     glonass=QtPositioning.QGeoSatelliteInfo.GLONASS,
 )
 
-ATTRIBUTES = bidict(
+SatelliteSystemStr = Literal["undefined", "gps", "glonass"]
+
+ATTRIBUTE = bidict(
     elevation=QtPositioning.QGeoSatelliteInfo.Elevation,
     azimuth=QtPositioning.QGeoSatelliteInfo.Azimuth,
 )
 
+AttributeStr = Literal["elevation", "azimuth"]
+
 
 class GeoSatelliteInfo(QtPositioning.QGeoSatelliteInfo):
-    def __getitem__(self, index: str):
-        return self.attribute(ATTRIBUTES[index])
+    def __getitem__(self, index: AttributeStr):
+        return self.attribute(ATTRIBUTE[index])
 
-    def __setitem__(self, index: str, value: float):
-        self.setAttribute(ATTRIBUTES[index], value)
+    def __setitem__(self, index: AttributeStr, value: float):
+        self.setAttribute(ATTRIBUTE[index], value)
 
-    def __delitem__(self, index: str):
-        self.removeAttribute(ATTRIBUTES[index])
+    def __delitem__(self, index: AttributeStr):
+        self.removeAttribute(ATTRIBUTE[index])
 
-    def __contains__(self, value: str):
-        return self.hasAttribute(ATTRIBUTES[value])
+    def __contains__(self, value: AttributeStr):
+        return self.hasAttribute(ATTRIBUTE[value])
 
     def __int__(self):
         return self.satelliteIdentifier()
 
-    def set_satellite_system(self, system: str):
+    def set_satellite_system(self, system: SatelliteSystemStr):
         """Set satellite system.
-
-        valid values are: "undefined", "gps", "glonass"
 
         Args:
             system: satellite system to use
@@ -51,10 +55,8 @@ class GeoSatelliteInfo(QtPositioning.QGeoSatelliteInfo):
             raise InvalidParamError(system, SATELLITE_SYSTEMS)
         self.setSatelliteSystem(SATELLITE_SYSTEMS[system])
 
-    def get_satellite_system(self) -> bool:
+    def get_satellite_system(self) -> SatelliteSystemStr:
         """Return satellite system.
-
-        possible values are "undefined", "gps", "glonass"
 
         Returns:
             satellite system

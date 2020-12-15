@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, Union
+from typing import Optional, Tuple, Union, Literal
 
 from qtpy import QtCore, QtGui, QtWidgets
 from deprecated import deprecated
@@ -7,20 +7,24 @@ from prettyqt import core, widgets
 from prettyqt.utils import bidict, InvalidParamError
 
 
-ELIDE_MODES = bidict(
+ELIDE_MODE = bidict(
     left=QtCore.Qt.ElideLeft,
     right=QtCore.Qt.ElideRight,
     middle=QtCore.Qt.ElideMiddle,
     none=QtCore.Qt.ElideNone,
 )
 
-REMOVE_BEHAVIOURS = bidict(
+ElideModeStr = Literal["left", "right", "middle", "none"]
+
+REMOVE_BEHAVIOUR = bidict(
     left_tab=QtWidgets.QTabBar.SelectLeftTab,
     right_tab=QtWidgets.QTabBar.SelectRightTab,
     previous_tab=QtWidgets.QTabBar.SelectPreviousTab,
 )
 
-SHAPES = bidict(
+RemoveBehaviourStr = Literal["left_tab", "right_tab", "previous_tab"]
+
+SHAPE = bidict(
     rounded_north=QtWidgets.QTabBar.RoundedNorth,
     rounded_south=QtWidgets.QTabBar.RoundedSouth,
     rounded_west=QtWidgets.QTabBar.RoundedWest,
@@ -31,8 +35,20 @@ SHAPES = bidict(
     triangular_east=QtWidgets.QTabBar.TriangularEast,
 )
 
+ShapeStr = Literal[
+    "rounded_north",
+    "rounded_south",
+    "rounded_west",
+    "rounded_east",
+    "triangular_north",
+    "triangular_south",
+    "triangular_west",
+    "triangular_east",
+]
+
 POSITIONS = bidict(left=QtWidgets.QTabBar.LeftSide, right=QtWidgets.QTabBar.RightSide)
 
+PositionStr = Literal["left", "right"]
 
 QtWidgets.QTabBar.__bases__ = (widgets.Widget,)
 
@@ -101,36 +117,32 @@ class TabBar(QtWidgets.QTabBar):
     @deprecated(
         reason="This method is deprecated, use set_selection_behavior_on_remove instead."
     )
-    def set_remove_behaviour(self, mode: str) -> None:
+    def set_remove_behaviour(self, mode: RemoveBehaviourStr) -> None:
         self.set_selection_behavior_on_remove(mode)
 
-    def set_selection_behavior_on_remove(self, mode: str) -> None:
+    def set_selection_behavior_on_remove(self, mode: RemoveBehaviourStr) -> None:
         """Set the remove hehaviour.
 
         What tab should be set as current when removeTab is called
         if the removed tab is also the current tab.
-        Possible values: left, right, previous
+
         Args:
             mode: new remove behaviour
         """
-        if mode not in REMOVE_BEHAVIOURS:
-            raise InvalidParamError(mode, REMOVE_BEHAVIOURS)
-        self.setSelectionBehaviorOnRemove(REMOVE_BEHAVIOURS[mode])
+        if mode not in REMOVE_BEHAVIOUR:
+            raise InvalidParamError(mode, REMOVE_BEHAVIOUR)
+        self.setSelectionBehaviorOnRemove(REMOVE_BEHAVIOUR[mode])
 
-    def get_remove_behaviour(self) -> str:
+    def get_remove_behaviour(self) -> RemoveBehaviourStr:
         """Return remove behaviour.
-
-        possible values are "left_tab", "right_tab", "previous_tab"
 
         Returns:
             remove behaviour
         """
-        return REMOVE_BEHAVIOURS.inverse[self.selectionBehaviorOnRemove()]
+        return REMOVE_BEHAVIOUR.inverse[self.selectionBehaviorOnRemove()]
 
-    def set_elide_mode(self, mode: str) -> None:
+    def set_elide_mode(self, mode: ElideModeStr) -> None:
         """Set elide mode.
-
-        Valid values are "left", "right", "middle", "none"
 
         Args:
             mode: elide mode to use
@@ -138,16 +150,14 @@ class TabBar(QtWidgets.QTabBar):
         Raises:
             InvalidParamError: invalid elide mode
         """
-        if mode not in ELIDE_MODES:
-            raise InvalidParamError(mode, ELIDE_MODES)
-        self.setElideMode(ELIDE_MODES[mode])
+        if mode not in ELIDE_MODE:
+            raise InvalidParamError(mode, ELIDE_MODE)
+        self.setElideMode(ELIDE_MODE[mode])
 
-    def get_elide_mode(self) -> str:
+    def get_elide_mode(self) -> ElideModeStr:
         """Return elide mode.
-
-        possible values are "left", "right", "middle", "none"
 
         Returns:
             elide mode
         """
-        return ELIDE_MODES.inverse[self.elideMode()]
+        return ELIDE_MODE.inverse[self.elideMode()]
