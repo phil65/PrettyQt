@@ -192,7 +192,7 @@ def test_videoencodersettings():
 
 def test_videoframe():
     size = core.Size(64, 64)
-    frame = multimedia.VideoFrame(1000, size, 8, 1)
+    frame = multimedia.VideoFrame(1000, size, 8, multimedia.VideoFrame.PixelFormat(1))
     assert frame.get_handle_type() == "none"
     assert frame.get_map_mode() == "not_mapped"
     assert frame.get_size() == size
