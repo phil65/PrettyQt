@@ -1,9 +1,8 @@
 from typing import List
 
-from qtpy import QtCore
 from qtpy.QtCharts import QtCharts
 
-from prettyqt import core, widgets, charts
+from prettyqt import core, widgets, charts, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -31,13 +30,6 @@ CHART_TYPES = bidict(
     undefined=QtCharts.QChart.ChartTypeUndefined,
     cartesian=QtCharts.QChart.ChartTypeCartesian,
     polar=QtCharts.QChart.ChartTypePolar,
-)
-
-ALIGNMENTS = dict(
-    left=QtCore.Qt.AlignLeft,
-    right=QtCore.Qt.AlignRight,
-    top=QtCore.Qt.AlignTop,
-    bottom=QtCore.Qt.AlignBottom,
 )
 
 
@@ -86,10 +78,10 @@ class Chart(QtCharts.QChart):
     def get_legend(self):
         return charts.Legend(self.legend())
 
-    def set_legend_alignment(self, alignment: str):
-        if alignment not in ALIGNMENTS:
-            raise InvalidParamError(alignment, ALIGNMENTS)
-        self.legend().setAlignment(ALIGNMENTS[alignment])
+    def set_legend_alignment(self, alignment: constants.SideStr):
+        if alignment not in constants.SIDES:
+            raise InvalidParamError(alignment, constants.SIDES)
+        self.legend().setAlignment(constants.SIDES[alignment])
 
     def set_theme(self, theme_name: str):
         self.setTheme(THEMES[theme_name])

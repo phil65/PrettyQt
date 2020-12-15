@@ -3,20 +3,8 @@ from typing import Tuple, Optional, Union
 from qtpy import QtWidgets
 
 from prettyqt import widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError
 
-
-ALIGNMENTS = bidict(
-    left=constants.ALIGN_LEFT,
-    right=constants.ALIGN_RIGHT,
-    top=constants.ALIGN_TOP,
-    bottom=constants.ALIGN_BOTTOM,
-    top_left=constants.ALIGN_TOP_LEFT,
-    top_right=constants.ALIGN_TOP_RIGHT,
-    bottom_left=constants.ALIGN_BOTTOM_LEFT,
-    bottom_right=constants.ALIGN_BOTTOM_RIGHT,
-    center=constants.ALIGN_CENTER,
-)
 
 QtWidgets.QGraphicsGridLayout.__bases__ = (widgets.GraphicsLayout,)
 
@@ -83,14 +71,14 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
     def set_column_alignment(self, column: int, alignment: str):
-        if alignment not in ALIGNMENTS:
-            raise InvalidParamError(alignment, ALIGNMENTS)
-        self.setColumnAlignment(column, ALIGNMENTS[alignment])
+        if alignment not in constants.ALIGNMENTS:
+            raise InvalidParamError(alignment, constants.ALIGNMENTS)
+        self.setColumnAlignment(column, constants.ALIGNMENTS[alignment])
 
     def set_row_alignment(self, row: int, alignment: str):
-        if alignment not in ALIGNMENTS:
-            raise InvalidParamError(alignment, ALIGNMENTS)
-        self.setRowAlignment(row, ALIGNMENTS[alignment])
+        if alignment not in constants.ALIGNMENTS:
+            raise InvalidParamError(alignment, constants.ALIGNMENTS)
+        self.setRowAlignment(row, constants.ALIGNMENTS[alignment])
 
 
 if __name__ == "__main__":

@@ -2,21 +2,9 @@ from typing import List, Literal
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import core, widgets, gui, constants
+from prettyqt import core, widgets, gui
 from prettyqt.utils import InvalidParamError, bidict, helpers
 
-
-ALIGNMENTS = bidict(
-    left=constants.ALIGN_LEFT,
-    right=constants.ALIGN_RIGHT,
-    top=constants.ALIGN_TOP,
-    bottom=constants.ALIGN_BOTTOM,
-    top_left=constants.ALIGN_TOP_LEFT,
-    top_right=constants.ALIGN_TOP_RIGHT,
-    bottom_left=constants.ALIGN_BOTTOM_LEFT,
-    bottom_right=constants.ALIGN_BOTTOM_RIGHT,
-    center=constants.ALIGN_CENTER,
-)
 
 DRAG_MODE = bidict(
     none=QtWidgets.QGraphicsView.NoDrag,

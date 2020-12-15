@@ -1,18 +1,10 @@
-from typing import Optional, Literal
+from typing import Optional
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
-from prettyqt import core, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, widgets, constants
+from prettyqt.utils import InvalidParamError
 
-
-STATE = bidict(
-    unchecked=QtCore.Qt.Unchecked,
-    partial=QtCore.Qt.PartiallyChecked,
-    checked=QtCore.Qt.Checked,
-)
-
-StateStr = Literal["unchecked", "partial", "checked"]
 
 QtWidgets.QCheckBox.__bases__ = (widgets.AbstractButton,)
 
@@ -63,7 +55,7 @@ class CheckBox(QtWidgets.QCheckBox):
     def is_on(self, state: bool):
         self.setChecked(state)
 
-    def set_checkstate(self, state: StateStr):
+    def set_checkstate(self, state: constants.StateStr):
         """Set checkstate of the checkbox.
 
         Args:
@@ -72,17 +64,17 @@ class CheckBox(QtWidgets.QCheckBox):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in STATE:
-            raise InvalidParamError(state, STATE)
-        self.setCheckState(STATE[state])
+        if state not in constants.STATE:
+            raise InvalidParamError(state, constants.STATE)
+        self.setCheckState(constants.STATE[state])
 
-    def get_checkstate(self) -> StateStr:
+    def get_checkstate(self) -> constants.StateStr:
         """Return checkstate.
 
         Returns:
             checkstate
         """
-        return STATE.inverse[self.checkState()]
+        return constants.STATE.inverse[self.checkState()]
 
     def get_value(self) -> bool:
         return self.isChecked()

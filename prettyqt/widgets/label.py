@@ -6,37 +6,9 @@ from typing import List, Optional, Union, Literal
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, gui, widgets, constants
 from prettyqt.utils import bidict, colors, InvalidParamError, helpers
 
-
-H_ALIGNMENTS = bidict(
-    left=QtCore.Qt.AlignLeft,
-    right=QtCore.Qt.AlignRight,
-    center=QtCore.Qt.AlignHCenter,
-    justify=QtCore.Qt.AlignJustify,
-)
-
-HorizontalAlignmentStr = Literal[
-    "left",
-    "right",
-    "center",
-    "justify",
-]
-
-V_ALIGNMENTS = bidict(
-    top=QtCore.Qt.AlignTop,
-    bottom=QtCore.Qt.AlignBottom,
-    center=QtCore.Qt.AlignVCenter,
-    baseline=QtCore.Qt.AlignBaseline,
-)
-
-VerticalAlignmentStr = Literal[
-    "top",
-    "bottom",
-    "center",
-    "baseline",
-]
 
 TEXT_INTERACTION = bidict(
     none=QtCore.Qt.NoTextInteraction,
@@ -122,16 +94,16 @@ class Label(QtWidgets.QLabel):
 
     def set_alignment(
         self,
-        horizontal: Optional[HorizontalAlignmentStr] = None,
-        vertical: Optional[VerticalAlignmentStr] = None,
+        horizontal: Optional[constants.HorizontalAlignmentStr] = None,
+        vertical: Optional[constants.VerticalAlignmentStr] = None,
     ):
         """Set the alignment of the label's contents."""
         if horizontal is None and vertical is not None:
-            flag = V_ALIGNMENTS[vertical]
+            flag = constants.V_ALIGNMENT[vertical]
         elif vertical is None and horizontal is not None:
-            flag = H_ALIGNMENTS[horizontal]
+            flag = constants.H_ALIGNMENT[horizontal]
         elif vertical is not None and horizontal is not None:
-            flag = V_ALIGNMENTS[vertical] | H_ALIGNMENTS[horizontal]
+            flag = constants.V_ALIGNMENT[vertical] | constants.H_ALIGNMENT[horizontal]
         else:
             return
         self.setAlignment(flag)

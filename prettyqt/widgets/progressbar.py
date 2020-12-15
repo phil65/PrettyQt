@@ -1,7 +1,7 @@
 from typing import Optional
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
-from prettyqt import widgets
+from prettyqt import widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -9,15 +9,6 @@ TEXT_DIRECTIONS = bidict(
     top_to_bottom=QtWidgets.QProgressBar.TopToBottom,
     bottom_to_top=QtWidgets.QProgressBar.BottomToTop,
 )
-
-ALIGNMENTS = bidict(
-    left=QtCore.Qt.AlignLeft,
-    right=QtCore.Qt.AlignRight,
-    top=QtCore.Qt.AlignTop,
-    bottom=QtCore.Qt.AlignBottom,
-)
-
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
 
 
 QtWidgets.QProgressBar.__bases__ = (widgets.Widget,)
@@ -49,10 +40,8 @@ class ProgressBar(QtWidgets.QProgressBar):
             value=self.value(),
         )
 
-    def set_alignment(self, alignment: str):
+    def set_alignment(self, alignment: constants.AlignmentStr):
         """Set the alignment of the layout.
-
-        Allowed values are "left", "right", "top", "bottom"
 
         Args:
             alignment: alignment for the layout
@@ -60,19 +49,17 @@ class ProgressBar(QtWidgets.QProgressBar):
         Raises:
             InvalidParamError: alignment does not exist
         """
-        if alignment not in ALIGNMENTS:
-            raise InvalidParamError(alignment, ALIGNMENTS)
-        self.setAlignment(ALIGNMENTS[alignment])
+        if alignment not in constants.ALIGNMENTS:
+            raise InvalidParamError(alignment, constants.ALIGNMENTS)
+        self.setAlignment(constants.ALIGNMENTS[alignment])
 
     def get_alignment(self) -> str:
         """Return current alignment.
 
-        Possible values: "left", "right", "top", "bottom"
-
         Returns:
             alignment
         """
-        return ALIGNMENTS.inverse[self.alignment()]
+        return constants.ALIGNMENTS.inverse[self.alignment()]
 
     def set_text_direction(self, text_direction: str):
         """Set the text direction of the layout.
@@ -99,10 +86,8 @@ class ProgressBar(QtWidgets.QProgressBar):
         """
         return TEXT_DIRECTIONS.inverse[self.textDirection()]
 
-    def set_orientation(self, orientation: str):
+    def set_orientation(self, orientation: constants.OrientationStr):
         """Set the orientation of the progress bar.
-
-        Allowed values are "horizontal", "vertical"
 
         Args:
             orientation: orientation for the progress bar
@@ -110,19 +95,17 @@ class ProgressBar(QtWidgets.QProgressBar):
         Raises:
             InvalidParamError: orientation does not exist
         """
-        if orientation not in ORIENTATIONS:
-            raise InvalidParamError(orientation, ORIENTATIONS)
-        self.setOrientation(ORIENTATIONS[orientation])
+        if orientation not in constants.ORIENTATION:
+            raise InvalidParamError(orientation, constants.ORIENTATION)
+        self.setOrientation(constants.ORIENTATION[orientation])
 
-    def get_orientation(self) -> str:
+    def get_orientation(self) -> constants.OrientationStr:
         """Return current orientation.
-
-        Possible values: "horizontal", "vertical"
 
         Returns:
             orientation
         """
-        return ORIENTATIONS.inverse[self.orientation()]
+        return constants.ORIENTATION.inverse[self.orientation()]
 
     def set_range(self, start: int, end: int):
         self.setRange(start, end)

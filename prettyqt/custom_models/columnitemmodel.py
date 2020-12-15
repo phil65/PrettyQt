@@ -5,25 +5,12 @@ import logging
 from qtpy import QtGui, QtCore
 
 from prettyqt import core, constants
-from prettyqt.utils import bidict
 
 
 logger = logging.getLogger(__name__)
 
 SMALL_COL_WIDTH = 120
 MEDIUM_COL_WIDTH = 200
-
-ALIGNMENTS = bidict(
-    left=constants.ALIGN_LEFT,
-    right=constants.ALIGN_RIGHT,
-    top=constants.ALIGN_TOP,
-    bottom=constants.ALIGN_BOTTOM,
-    top_left=constants.ALIGN_TOP_LEFT,
-    top_right=constants.ALIGN_TOP_RIGHT,
-    bottom_left=constants.ALIGN_BOTTOM_LEFT,
-    bottom_right=constants.ALIGN_BOTTOM_RIGHT,
-    center=constants.ALIGN_CENTER,
-)
 
 
 @dataclass(frozen=True)
@@ -113,7 +100,7 @@ class ColumnItem:
         elif callable(self.alignment):
             return self.alignment(tree_item)
         elif isinstance(self.alignment, str):
-            return ALIGNMENTS[self.alignment]
+            return constants.ALIGNMENTS[self.alignment]
         return self.alignment
 
     def get_width(self) -> int:

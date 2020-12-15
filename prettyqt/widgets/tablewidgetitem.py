@@ -1,45 +1,9 @@
-from typing import Literal, Optional
+from typing import Optional
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import gui
-from prettyqt.utils import bidict, InvalidParamError
-
-STATE = bidict(
-    unchecked=QtCore.Qt.Unchecked,
-    partial=QtCore.Qt.PartiallyChecked,
-    checked=QtCore.Qt.Checked,
-)
-
-StateStr = Literal["unchecked", "partial", "checked"]
-
-H_ALIGNMENTS = bidict(
-    left=QtCore.Qt.AlignLeft,
-    right=QtCore.Qt.AlignRight,
-    center=QtCore.Qt.AlignHCenter,
-    justify=QtCore.Qt.AlignJustify,
-)
-
-HorizontalAlignmentStr = Literal[
-    "left",
-    "right",
-    "center",
-    "justify",
-]
-
-V_ALIGNMENTS = bidict(
-    top=QtCore.Qt.AlignTop,
-    bottom=QtCore.Qt.AlignBottom,
-    center=QtCore.Qt.AlignVCenter,
-    baseline=QtCore.Qt.AlignBaseline,
-)
-
-VerticalAlignmentStr = Literal[
-    "top",
-    "bottom",
-    "center",
-    "baseline",
-]
+from prettyqt import gui, constants
+from prettyqt.utils import InvalidParamError
 
 
 class TableWidgetItem(QtWidgets.QTableWidgetItem):
@@ -68,7 +32,7 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         icon = gui.icon.get_icon(icon)
         self.setIcon(icon)
 
-    def set_checkstate(self, state: StateStr):
+    def set_checkstate(self, state: constants.StateStr):
         """Set checkstate of the checkbox.
 
         Args:
@@ -77,22 +41,22 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in STATE:
-            raise InvalidParamError(state, STATE)
-        self.setCheckState(STATE[state])
+        if state not in constants.STATE:
+            raise InvalidParamError(state, constants.STATE)
+        self.setCheckState(constants.STATE[state])
 
-    def get_checkstate(self) -> StateStr:
+    def get_checkstate(self) -> constants.StateStr:
         """Return checkstate.
 
         Returns:
             checkstate
         """
-        return STATE.inverse[self.checkState()]
+        return constants.STATE.inverse[self.checkState()]
 
     def set_text_alignment(
         self,
-        horizontal: Optional[HorizontalAlignmentStr] = None,
-        vertical: Optional[VerticalAlignmentStr] = None,
+        horizontal: Optional[constants.HorizontalAlignmentStr] = None,
+        vertical: Optional[constants.VerticalAlignmentStr] = None,
     ):
         """Set text alignment of the checkbox.
 
@@ -103,11 +67,11 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
             InvalidParamError: invalid text alignment
         """
         if horizontal is None and vertical is not None:
-            flag = V_ALIGNMENTS[vertical]
+            flag = constants.V_ALIGNMENT[vertical]
         elif vertical is None and horizontal is not None:
-            flag = H_ALIGNMENTS[horizontal]
+            flag = constants.H_ALIGNMENT[horizontal]
         elif vertical is not None and horizontal is not None:
-            flag = V_ALIGNMENTS[vertical] | H_ALIGNMENTS[horizontal]
+            flag = constants.V_ALIGNMENT[vertical] | constants.H_ALIGNMENT[horizontal]
         else:
             return
         self.setTextAlignment(flag)

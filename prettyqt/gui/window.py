@@ -1,8 +1,8 @@
 from typing import Literal
 
-from qtpy import QtGui, QtCore
+from qtpy import QtGui
 
-from prettyqt import core, gui
+from prettyqt import core, gui, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 ANCESTER_MODES = bidict(
@@ -23,27 +23,6 @@ VisibilityStr = Literal[
     "windowed", "minimized", "maximized", "fullscreen", "automatic", "hidden"
 ]
 
-EDGES = bidict(
-    top=QtCore.Qt.TopEdge,
-    left=QtCore.Qt.LeftEdge,
-    right=QtCore.Qt.RightEdge,
-    bottom=QtCore.Qt.BottomEdge,
-    top_left=QtCore.Qt.TopEdge | QtCore.Qt.LeftEdge,
-    top_right=QtCore.Qt.TopEdge | QtCore.Qt.RightEdge,
-    bottom_left=QtCore.Qt.BottomEdge | QtCore.Qt.LeftEdge,
-    bottom_right=QtCore.Qt.BottomEdge | QtCore.Qt.RightEdge,
-)
-
-EdgeStr = Literal[
-    "top",
-    "left",
-    "right",
-    "bottom",
-    "top_left",
-    "top_right",
-    "bottom_left",
-    "bottom_right",
-]
 
 QtGui.QWindow.__bases__ = (core.Object, gui.Surface)
 
@@ -81,7 +60,7 @@ class Window(QtGui.QWindow):
         """
         return VISIBILITY.inverse[self.visibility()]
 
-    def start_system_resize(self, edge: EdgeStr) -> bool:
+    def start_system_resize(self, edge: constants.EdgeStr) -> bool:
         """Start system resize.
 
         Args:
@@ -90,9 +69,9 @@ class Window(QtGui.QWindow):
         Raises:
             InvalidParamError: edge does not exist
         """
-        if edge not in EDGES:
-            raise InvalidParamError(edge, EDGES)
-        return self.startSystemResize(EDGES[edge])
+        if edge not in constants.EDGES:
+            raise InvalidParamError(edge, constants.EDGES)
+        return self.startSystemResize(constants.EDGES[edge])
 
 
 if __name__ == "__main__":

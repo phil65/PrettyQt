@@ -16,12 +16,6 @@ RUBBER_BAND = bidict(
 
 RubberBandStr = Literal["none", "vertical", "horizontal", "rectangle"]
 
-ALIGNMENTS = bidict(
-    left=QtCore.Qt.AlignLeft,
-    right=QtCore.Qt.AlignRight,
-    top=QtCore.Qt.AlignTop,
-    bottom=QtCore.Qt.AlignBottom,
-)
 
 ZOOM_IN_FACTOR = 1.1
 ZOOM_OUT_FACTOR = 1.0 / ZOOM_IN_FACTOR
@@ -155,6 +149,6 @@ class ChartView(QtCharts.QChartView):
     #     self.chart().show_legend()
 
     # def set_legend_alignment(self, alignment: str):
-    #     if alignment not in ALIGNMENTS:
+    #     if alignment not in constants.SIDES:
     #         raise ValueError(f"{alignment!r} not a valid alignment.")
-    #     self.chart().legend().setAlignment(ALIGNMENTS[alignment])
+    #     self.chart().legend().setAlignment(constants.SIDES[alignment])

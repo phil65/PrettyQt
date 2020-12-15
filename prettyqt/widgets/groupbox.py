@@ -1,13 +1,8 @@
 from typing import Optional
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
-from prettyqt import widgets
-
-
-H_ALIGNMENTS = dict(
-    left=QtCore.Qt.AlignLeft, right=QtCore.Qt.AlignRight, center=QtCore.Qt.AlignHCenter
-)
+from prettyqt import widgets, constants
 
 
 QtWidgets.QGroupBox.__bases__ = (widgets.Widget,)
@@ -59,7 +54,7 @@ class GroupBox(QtWidgets.QGroupBox):
         self.setTitle(title)
 
     def set_alignment(self, alignment):
-        self.setAlignment(H_ALIGNMENTS[alignment])
+        self.setAlignment(constants.H_ALIGNMENT[alignment])
 
     def set_enabled(self, state):
         for widget in self.layout():

@@ -4,19 +4,11 @@ from typing import List, Iterator, Union, Tuple, Optional
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import core, gui
+from prettyqt import core, gui, constants
+
 from prettyqt.utils import InvalidParamError
 
 QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
-
-MATCH_FLAGS = dict(
-    exact=QtCore.Qt.MatchExactly,
-    contains=QtCore.Qt.MatchContains,
-    starts_with=QtCore.Qt.MatchStartsWith,
-    ends_with=QtCore.Qt.MatchEndsWith,
-    wildcard=QtCore.Qt.MatchWildcard,
-    regex=QtCore.Qt.MatchRegExp,
-)
 
 
 class StandardItemModel(QtGui.QStandardItemModel):
@@ -71,11 +63,11 @@ class StandardItemModel(QtGui.QStandardItemModel):
             self.appendRow(i)
 
     def find_items(
-        self, text: str, column: int = 0, mode: str = "exact"
+        self, text: str, column: int = 0, mode: constants.MatchFlagStr = "exact"
     ) -> List[QtGui.QStandardItem]:
-        if mode not in MATCH_FLAGS:
-            raise InvalidParamError(mode, MATCH_FLAGS)
-        return self.findItems(text, MATCH_FLAGS[mode], column)
+        if mode not in constants.MATCH_FLAGS:
+            raise InvalidParamError(mode, constants.MATCH_FLAGS)
+        return self.findItems(text, constants.MATCH_FLAGS[mode], column)
 
     def add_item(
         self,
@@ -90,7 +82,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
         tool_tip: Optional[str] = None,
         whats_this: Optional[str] = None,
         # text_alignment: Optional[str] = None,
-        checkstate: Optional[widgets.listwidgetitem.StateStr] = None,
+        checkstate: Optional[constants.StateStr] = None,
         flags: Optional[int] = None,
         size_hint: Optional[QtCore.QSize] = None,
         is_user_type: bool = False,

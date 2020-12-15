@@ -1,30 +1,16 @@
 from typing import Optional
 
 from qtpy.QtCharts import QtCharts
-from qtpy import QtCore
 
-from prettyqt import core, gui
-from prettyqt.utils import bidict
-
-
-ALIGNMENTS = bidict(
-    left=QtCore.Qt.AlignLeft,
-    right=QtCore.Qt.AlignRight,
-    top=QtCore.Qt.AlignTop,
-    bottom=QtCore.Qt.AlignBottom,
-)
-
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
+from prettyqt import core, gui, constants
 
 
 QtCharts.QAbstractAxis.__bases__ = (core.Object,)
 
 
 class AbstractAxis(QtCharts.QAbstractAxis):
-    def get_alignment(self) -> Optional[str]:
+    def get_alignment(self) -> Optional[constants.SideStr]:
         """Return current alignment.
-
-        Possible values: "left", "right", "top", "bottom"
 
         Returns:
             alignment
@@ -32,12 +18,10 @@ class AbstractAxis(QtCharts.QAbstractAxis):
         alignment = self.alignment()
         if int(alignment) == 0:
             return None
-        return ALIGNMENTS.inverse[alignment]
+        return constants.SIDES.inverse[alignment]
 
-    def get_orientation(self) -> Optional[str]:
+    def get_orientation(self) -> Optional[constants.OrientationStr]:
         """Return current orientation.
-
-        Possible values: "horizontal", "vertical"
 
         Returns:
             orientation
@@ -45,7 +29,7 @@ class AbstractAxis(QtCharts.QAbstractAxis):
         orientation = self.orientation()
         if int(orientation) == 0:
             return None
-        return ORIENTATIONS.inverse[orientation]
+        return constants.ORIENTATION.inverse[orientation]
 
     def get_grid_line_color(self) -> gui.Color:
         return gui.Color(self.gridLineColor())

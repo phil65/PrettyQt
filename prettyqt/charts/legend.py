@@ -1,7 +1,6 @@
 from qtpy.QtCharts import QtCharts
-from qtpy import QtCore
 
-from prettyqt import widgets, gui
+from prettyqt import widgets, gui, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -10,13 +9,6 @@ MARKER_SHAPES = bidict(
     rectangle=QtCharts.QLegend.MarkerShapeRectangle,
     circle=QtCharts.QLegend.MarkerShapeCircle,
     from_series=QtCharts.QLegend.MarkerShapeFromSeries,
-)
-
-ALIGNMENTS = bidict(
-    left=QtCore.Qt.AlignLeft,
-    right=QtCore.Qt.AlignRight,
-    top=QtCore.Qt.AlignTop,
-    bottom=QtCore.Qt.AlignBottom,
 )
 
 QtCharts.QLegend.__bases__ = (widgets.GraphicsWidget,)
@@ -42,7 +34,7 @@ class Legend:
             show_tooltips=self.showToolTips(),
         )
 
-    def set_alignment(self, alignment: str):
+    def set_alignment(self, alignment: constants.SideStr):
         """Set the alignment of the legend.
 
         Allowed values are "left", "right", "top", "bottom"
@@ -53,9 +45,9 @@ class Legend:
         Raises:
             InvalidParamError: alignment does not exist
         """
-        if alignment not in ALIGNMENTS:
-            raise InvalidParamError(alignment, ALIGNMENTS)
-        self.setAlignment(ALIGNMENTS[alignment])
+        if alignment not in constants.SIDES:
+            raise InvalidParamError(alignment, constants.SIDES)
+        self.setAlignment(constants.SIDES[alignment])
 
     def get_alignment(self) -> str:
         """Return current alignment.
@@ -65,7 +57,7 @@ class Legend:
         Returns:
             alignment
         """
-        return ALIGNMENTS.inverse[self.alignment()]
+        return constants.SIDES.inverse[self.alignment()]
 
     def set_marker_shape(self, shape: str):
         """Set the marker shape.

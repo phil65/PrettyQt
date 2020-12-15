@@ -1,6 +1,8 @@
 """Constants module."""
+from typing import Literal
 
 from qtpy import QtCore
+from bidict import bidict
 
 DISPLAY_ROLE = QtCore.Qt.DisplayRole
 USER_ROLE = QtCore.Qt.UserRole
@@ -62,3 +64,121 @@ CTRL_MOD = QtCore.Qt.ControlModifier
 
 KEY_F11 = QtCore.Qt.Key_F11
 KEY_DELETE = QtCore.Qt.Key_Delete
+
+
+try:
+    ALIGNMENTS = bidict(
+        left=ALIGN_LEFT,
+        right=ALIGN_RIGHT,
+        top=ALIGN_TOP,
+        bottom=ALIGN_BOTTOM,
+        top_left=ALIGN_TOP_LEFT,
+        top_right=ALIGN_TOP_RIGHT,
+        bottom_left=ALIGN_BOTTOM_LEFT,
+        bottom_right=ALIGN_BOTTOM_RIGHT,
+        center=ALIGN_CENTER,
+    )
+
+    SIDES = bidict(
+        left=QtCore.Qt.AlignLeft,
+        right=QtCore.Qt.AlignRight,
+        top=QtCore.Qt.AlignTop,
+        bottom=QtCore.Qt.AlignBottom,
+    )
+    EDGES = bidict(
+        top=QtCore.Qt.TopEdge,
+        left=QtCore.Qt.LeftEdge,
+        right=QtCore.Qt.RightEdge,
+        bottom=QtCore.Qt.BottomEdge,
+        top_left=QtCore.Qt.TopEdge | QtCore.Qt.LeftEdge,
+        top_right=QtCore.Qt.TopEdge | QtCore.Qt.RightEdge,
+        bottom_left=QtCore.Qt.BottomEdge | QtCore.Qt.LeftEdge,
+        bottom_right=QtCore.Qt.BottomEdge | QtCore.Qt.RightEdge,
+    )
+
+    H_ALIGNMENT = bidict(
+        left=QtCore.Qt.AlignLeft,
+        right=QtCore.Qt.AlignRight,
+        center=QtCore.Qt.AlignHCenter,
+        justify=QtCore.Qt.AlignJustify,
+    )
+
+    V_ALIGNMENT = bidict(
+        top=QtCore.Qt.AlignTop,
+        bottom=QtCore.Qt.AlignBottom,
+        center=QtCore.Qt.AlignVCenter,
+        baseline=QtCore.Qt.AlignBaseline,
+    )
+
+except TypeError:
+    ALIGNMENTS = SIDES = EDGES = H_ALIGNMENT = V_ALIGNMENT = bidict()
+
+EdgeStr = Literal[
+    "top",
+    "left",
+    "right",
+    "bottom",
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right",
+]
+
+AlignmentStr = Literal[
+    "top",
+    "left",
+    "right",
+    "bottom",
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right",
+]
+
+SideStr = Literal["left", "right", "top", "bottom"]
+
+HorizontalAlignmentStr = Literal[
+    "left",
+    "right",
+    "center",
+    "justify",
+]
+VerticalAlignmentStr = Literal[
+    "top",
+    "bottom",
+    "center",
+    "baseline",
+]
+
+ORIENTATION = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
+
+OrientationStr = Literal["horizontal", "vertical"]
+
+STATE = bidict(
+    unchecked=QtCore.Qt.Unchecked,
+    partial=QtCore.Qt.PartiallyChecked,
+    checked=QtCore.Qt.Checked,
+)
+
+StateStr = Literal["unchecked", "partial", "checked"]
+
+MATCH_FLAGS = dict(
+    exact=QtCore.Qt.MatchExactly,
+    contains=QtCore.Qt.MatchContains,
+    starts_with=QtCore.Qt.MatchStartsWith,
+    ends_with=QtCore.Qt.MatchEndsWith,
+    wildcard=QtCore.Qt.MatchWildcard,
+    regex=QtCore.Qt.MatchRegExp,
+)
+
+MatchFlagStr = Literal[
+    "exact", "containts", "starts_with", "ends_with", "wildcard", "regex"
+]
+
+FILTER_MODE = bidict(
+    starts_with=QtCore.Qt.MatchStartsWith,
+    contains=QtCore.Qt.MatchContains,
+    ends_with=QtCore.Qt.MatchEndsWith,
+)
+
+FilterModeStr = Literal["starts_with", "contains", "ends_with"]

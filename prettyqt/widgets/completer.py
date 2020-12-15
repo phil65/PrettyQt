@@ -1,8 +1,8 @@
 from typing import Optional, Literal
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets
 
-from prettyqt import core
+from prettyqt import core, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -21,14 +21,6 @@ SORT_MODE = bidict(
 )
 
 SortModeStr = Literal["unsorted", "case_sensitive", "case_insensitive"]
-
-FILTER_MODE = bidict(
-    starts_with=QtCore.Qt.MatchStartsWith,
-    contains=QtCore.Qt.MatchContains,
-    ends_with=QtCore.Qt.MatchEndsWith,
-)
-
-FilterModeStr = Literal["starts_with", "contains", "ends_with"]
 
 
 QtWidgets.QCompleter.__bases__ = (core.Object,)
@@ -82,7 +74,7 @@ class Completer(QtWidgets.QCompleter):
         """
         return COMPLETION_MODE.inverse[self.completionMode()]
 
-    def set_filter_mode(self, mode: FilterModeStr):
+    def set_filter_mode(self, mode: constants.FilterModeStr):
         """Set filter mode to use.
 
         Args:
@@ -91,17 +83,17 @@ class Completer(QtWidgets.QCompleter):
         Raises:
             InvalidParamError: filter mode does not exist
         """
-        if mode not in FILTER_MODE:
-            raise InvalidParamError(mode, FILTER_MODE)
-        self.setFilterMode(FILTER_MODE[mode])
+        if mode not in constants.FILTER_MODE:
+            raise InvalidParamError(mode, constants.FILTER_MODE)
+        self.setFilterMode(constants.FILTER_MODE[mode])
 
-    def get_filter_mode(self) -> FilterModeStr:
+    def get_filter_mode(self) -> constants.FilterModeStr:
         """Return current filter mode.
 
         Returns:
             filter mode
         """
-        return FILTER_MODE.inverse[self.filterMode()]
+        return constants.FILTER_MODE.inverse[self.filterMode()]
 
 
 if __name__ == "__main__":

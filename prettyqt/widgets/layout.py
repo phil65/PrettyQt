@@ -2,7 +2,7 @@ from typing import Union, Optional, Literal
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -19,14 +19,6 @@ SizeConstraintStr = Literal[
     "default", "fixed", "minimum", "maximum", "min_and_max", "none"
 ]
 
-ALIGNMENTS = bidict(
-    left=QtCore.Qt.AlignLeft,
-    right=QtCore.Qt.AlignRight,
-    top=QtCore.Qt.AlignTop,
-    bottom=QtCore.Qt.AlignBottom,
-)
-
-AlignmentStr = Literal["left", "right", "top", "bottom"]
 
 QtWidgets.QLayout.__bases__ = (core.Object, widgets.LayoutItem)
 
@@ -99,7 +91,7 @@ class Layout(QtWidgets.QLayout):
 
     def set_alignment(
         self,
-        alignment: AlignmentStr,
+        alignment: constants.AlignmentStr,
         item: Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout]] = None,
     ):
         """Set the alignment for widget / layout to alignment.
@@ -113,12 +105,12 @@ class Layout(QtWidgets.QLayout):
         Raises:
             InvalidParamError: alignment does not exist
         """
-        if alignment not in ALIGNMENTS:
-            raise InvalidParamError(alignment, ALIGNMENTS)
+        if alignment not in constants.ALIGNMENTS:
+            raise InvalidParamError(alignment, constants.ALIGNMENTS)
         if item is not None:
-            return self.setAlignment(item, ALIGNMENTS[alignment])
+            return self.setAlignment(item, constants.ALIGNMENTS[alignment])
         else:
-            return self.setAlignment(ALIGNMENTS[alignment])
+            return self.setAlignment(constants.ALIGNMENTS[alignment])
 
     def add(self, *item: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
         for i in item:

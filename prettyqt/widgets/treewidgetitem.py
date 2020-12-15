@@ -4,17 +4,9 @@ from typing import Iterator, Literal
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, core
+from prettyqt import gui, core, constants
 from prettyqt.utils import bidict, InvalidParamError
 
-
-STATE = bidict(
-    unchecked=QtCore.Qt.Unchecked,
-    partial=QtCore.Qt.PartiallyChecked,
-    checked=QtCore.Qt.Checked,
-)
-
-StateStr = Literal["unchecked", "partial", "checked"]
 
 CHILD_INDICATOR_POLICY = bidict(
     show=QtWidgets.QTreeWidgetItem.ShowIndicator,
@@ -95,7 +87,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
     def get_icon(self, column: int = 0) -> gui.Icon:
         return gui.Icon(self.icon(column))
 
-    def set_checkstate(self, state: StateStr, column: int = 0):
+    def set_checkstate(self, state: constants.StateStr, column: int = 0):
         """Set checkstate of the checkbox.
 
         Args:
@@ -105,11 +97,11 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in STATE:
-            raise InvalidParamError(state, STATE)
-        self.setCheckState(column, STATE[state])
+        if state not in constants.STATE:
+            raise InvalidParamError(state, constants.STATE)
+        self.setCheckState(column, constants.STATE[state])
 
-    def get_checkstate(self, column: int = 0) -> StateStr:
+    def get_checkstate(self, column: int = 0) -> constants.StateStr:
         """Return checkstate.
 
         Args:
@@ -118,7 +110,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         Returns:
             checkstate
         """
-        return STATE.inverse[self.checkState(column)]
+        return constants.STATE.inverse[self.checkState(column)]
 
     def set_child_indicator_policy(self, policy: ChildIndicatorPolicyStr):
         """Set the child indicator policy.
