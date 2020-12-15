@@ -54,6 +54,14 @@ class Movie(QtGui.QMovie):
         """
         return CACHE_MODE.inverse[self.cacheMode()]
 
+    def get_state(self) -> MovieStateStr:
+        """Get the current state.
+
+        Returns:
+            state
+        """
+        return MOVIE_STATE.inverse[self.state()]
+
     def get_format(self) -> bytes:
         return bytes(self.format())
 
