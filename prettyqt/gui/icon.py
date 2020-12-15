@@ -99,7 +99,16 @@ class Icon(QtGui.QIcon):
             raise InvalidParamError(state, STATE)
         return [core.Size(i) for i in self.availableSizes(MODE[mode], STATE[state])]
 
-    def add_pixmap(self, data: Union[QtCore.QByteArray, QtGui.QPixmap, bytes]):
+    def add_pixmap(
+        self,
+        data: Union[QtCore.QByteArray, QtGui.QPixmap, bytes],
+        mode: ModeStr = "normal",
+        state: StateStr = "off",
+    ):
+        if mode not in MODE:
+            raise InvalidParamError(mode, MODE)
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
         if isinstance(data, bytes):
             data = QtCore.QByteArray(data)
         if isinstance(data, QtCore.QByteArray):
@@ -107,11 +116,17 @@ class Icon(QtGui.QIcon):
             pixmap.loadFromData(data)
         else:
             pixmap = data
-        self.addPixmap(pixmap)
+        self.addPixmap(pixmap, MODE[mode], STATE[state])
 
-    def get_pixmap(self, size: int) -> QtGui.QPixmap:
+    def get_pixmap(
+        self, size: int, mode: ModeStr = "normal", state: StateStr = "off"
+    ) -> QtGui.QPixmap:
+        if mode not in MODE:
+            raise InvalidParamError(mode, MODE)
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
         size = core.Size(size, size)
-        return self.pixmap(size)
+        return self.pixmap(size, MODE[mode], STATE[state])
 
 
 if __name__ == "__main__":
