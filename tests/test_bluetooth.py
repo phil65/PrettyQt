@@ -1,8 +1,8 @@
 """Tests for `prettyqt` package."""
 
-# import pytest
+import pytest
 
-from prettyqt import bluetooth
+bluetooth = pytest.importorskip("prettyqt.bluetooth")
 
 # from prettyqt.utils import InvalidParamError
 
