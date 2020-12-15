@@ -25,13 +25,14 @@ class Polygon(QtGui.QPolygon):
         return self.containsPoint(point, QtCore.Qt.OddEvenFill)
 
     def __getitem__(self, index: int) -> core.Point:
-        return core.Point(self.point(index))
+        return self.get_point(index)
 
     def __setitem__(self, index: int, value: Union[QtCore.QPoint, Tuple[int, int]]):
         if isinstance(value, tuple):
-            self.setPoint(index, *value)
-        else:
-            self.setPoint(index, value)
+            value = core.Point(*value)
+        # PySide2 workaround: setPoint does not exist
+        self.remove(index)
+        self.insert(index, value)
 
     def __sub__(self, other: QtGui.QPolygon) -> Polygon:
         return Polygon(self.subtracted(other))
@@ -61,7 +62,8 @@ class Polygon(QtGui.QPolygon):
         return bytes(ba)
 
     def get_point(self, index: int) -> core.Point:
-        return core.Point(self.point(index))
+        # PySide2 doesnt have self.point method
+        return core.Point(self.value(index))
 
     def get_points(self) -> List[core.Point]:
         return [self.get_point(i) for i in range(len(self))]
@@ -70,7 +72,7 @@ class Polygon(QtGui.QPolygon):
         for p in points:
             if isinstance(p, tuple):
                 p = core.Point(*p)
-            self << p
+            self.append(p)
 
     @classmethod
     def from_xy(cls, xdata, ydata):

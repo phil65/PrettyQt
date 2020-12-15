@@ -70,7 +70,7 @@ class PolygonF(QtGui.QPolygonF):
         for p in points:
             if isinstance(p, tuple):
                 p = core.Point(*p)
-            self << p
+            self.append(p)
 
     def to_polygon(self):
         return gui.Polygon(self.toPolygon())
