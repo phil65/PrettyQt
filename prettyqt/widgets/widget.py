@@ -185,7 +185,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_max_width(self, width: Optional[int]) -> None:
         if width is None:
-            width = QtWidgets.QWIDGETSIZE_MAX
+            width = 16777215  # QtWidgets.QWIDGETSIZE_MAX
         self.setMaximumWidth(width)
 
     def set_min_height(self, height: Optional[int]) -> None:
@@ -195,7 +195,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_max_height(self, height: Optional[int]) -> None:
         if height is None:
-            height = QtWidgets.QWIDGETSIZE_MAX
+            height = 16777215  # QtWidgets.QWIDGETSIZE_MAX
         self.setMaximumHeight(height)
 
     @property
