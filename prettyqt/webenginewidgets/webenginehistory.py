@@ -20,7 +20,8 @@ class WebEngineHistory:
         return getattr(self.history, val)
 
     def __len__(self):
-        return len(self.history)
+        # pyside2 does not support len(self.history)
+        return self.history.count()
 
     def __getitem__(self, index: int) -> webenginewidgets.WebEngineHistoryItem:
         item = self.history.itemAt(index)
