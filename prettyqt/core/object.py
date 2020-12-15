@@ -4,6 +4,7 @@ from contextlib import contextmanager
 import itertools
 import inspect
 
+import qtpy
 from qtpy import QtCore
 
 counter_dict: DefaultDict = defaultdict(itertools.count)
@@ -78,7 +79,11 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindDirectChildrenOnly
-        return self.findChildren(typ, name=name, options=flag)
+        if qtpy.API == "pyqt5":
+            return self.findChildren(typ, name=name, options=flag)
+        else:
+            # TODO: custom way for non-recursive-search for PySide2
+            return self.findChildren(typ, name=name)
 
     def find_child(
         self,
@@ -90,7 +95,11 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindDirectChildrenOnly
-        return self.findChild(typ, name, options=flag)
+        if qtpy.API == "pyqt5":
+            return self.findChild(typ, name=name, options=flag)
+        else:
+            # TODO: custom way for non-recursive-search for PySide2
+            return self.findChild(typ, name=name)
 
     def find_parent(
         self, typ: Type[QtCore.QObject], name: Optional[str] = None
