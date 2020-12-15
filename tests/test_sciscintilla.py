@@ -3,17 +3,13 @@
 import pytest
 import qtpy
 
-try:
-    # pyside workaround
-    from prettyqt import scintilla, gui
-except TypeError:
-    pass
-
 from prettyqt.utils import InvalidParamError
 
 
 @pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
 def test_sciscintilla(qtbot):
+    from prettyqt import scintilla, gui
+
     widget = scintilla.SciScintilla()
     widget.define_marker("circle", 0)
     with pytest.raises(InvalidParamError):
