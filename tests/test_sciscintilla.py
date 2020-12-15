@@ -3,7 +3,12 @@
 import pytest
 import qtpy
 
-from prettyqt import scintilla, gui
+try:
+    # pyside workaround
+    from prettyqt import scintilla, gui
+except TypeError:
+    pass
+
 from prettyqt.utils import InvalidParamError
 
 
