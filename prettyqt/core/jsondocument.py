@@ -13,8 +13,8 @@ class JsonDocument(QtCore.QJsonDocument):
         return f"{type(self).__name__}({self.toVariant()!r})"
 
     def __getitem__(self, index: Union[int, str]):
-        val = super().__getitem__(index)
-        return core.JsonValue(val)
+        val = self.array() if self.isArray() else self.object()
+        return core.JsonValue(val[index])
 
     def __setitem__(self, index: Union[int, str], value):
         if self.isArray():
