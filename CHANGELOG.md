@@ -1,3 +1,26 @@
+## v0.149.0 (2020-12-15)
+
+### Feat
+
+- add HoverIconEventFilter class
+- **positioning**: add GeoPositionInfo class
+- **Icon**: add mode and state kwarg for add/get_pixmap
+- **widget**: add set_mask method
+- **core**: add FileSystemWatcher class
+- **Palette**: add get/set_color_group methods
+- **Brush**: add some addtional methods
+- **Region**: add some additional methods
+- **custom_delegates**: add RenderLinkDelegate class
+- **TableWidgetItem**: add set_text_alignment method
+- **Gradients**: add repr and some helper methods to gradient classes
+
+### Fix
+
+- PySide2 workaround for missing recursive param in findChild(ren)
+- WebEngineHistory len fix for PySide2
+- CategoryAxis len fix for PySide2
+- correctly inherit LCDNumber
+
 ## v0.148.0 (2020-12-14)
 
 ### Feat
