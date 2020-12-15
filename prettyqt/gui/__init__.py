@@ -37,7 +37,9 @@ from qtpy.QtGui import QWindowStateChangeEvent as WindowStateChangeEvent
 from qtpy.QtGui import QWhatsThisClickedEvent as WhatsThisClickedEvent
 from qtpy.QtGui import QScrollEvent as ScrollEvent
 from qtpy.QtGui import QScrollPrepareEvent as ScrollPrepareEvent
-from qtpy.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
+
+# not available in PySide2
+# from qtpy.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
 
 from .screen import Screen
 from .keysequence import KeySequence
