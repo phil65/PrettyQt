@@ -7,6 +7,7 @@ import tempfile
 import inspect
 
 import pytest
+import qtpy
 
 from qtpy import QtCore
 from prettyqt import core, widgets, constants
@@ -287,6 +288,7 @@ def test_jsonvalue():
     assert str(val) == "b"
 
 
+@pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
 def test_library():
     lib = core.Library()
     assert bool(lib) is False

@@ -5,6 +5,8 @@ Contains QtCore-based classes
 
 # from qtpy.QtCore import Signal
 
+import qtpy
+
 from qtpy.QtCore import Slot, Signal, Property
 from qtpy.QtCore import QModelIndex as ModelIndex
 from qtpy.QtCore import QPoint as Point
@@ -38,7 +40,6 @@ from .signalmapper import SignalMapper
 from .timeline import TimeLine
 from .margins import Margins
 from .marginsf import MarginsF
-from .library import Library
 from .pluginloader import PluginLoader
 from .locale import Locale
 from .abstracteventdispatcher import AbstractEventDispatcher
@@ -132,6 +133,10 @@ from .collator import Collator
 
 from .jsonvalue import JsonValue
 from .jsondocument import JsonDocument
+
+# not available in PySide2
+if qtpy.API == "pyqt5":
+    from .library import Library
 
 if VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
