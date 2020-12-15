@@ -37,8 +37,11 @@ clean: ## remove all build, test, coverage and Python artifacts
 lint: ## check style with flake8
 	flake8 prettyqt
 
-test: ## run tests
-	poetry run pytest # --mypy
+test: ## run tests with PyQt5
+	export QT_API=pyqt5; export USE_QT_API=pyqt5; export PYTEST_QT_API=pyqt5; poetry run pytest # --mypy
+
+test_pyside: ## run tests with pyside
+	export QT_API=pyside2; export USE_QT_API=pyside2; export PYTEST_QT_API=pyside2; poetry run pytest # --mypy
 
 mypy: ## run mypy type checking
 	poetry run mypy prettyqt
