@@ -45,7 +45,8 @@ class Uuid(QtCore.QUuid):
 
     @classmethod
     def create_uuid(cls):
-        return cls(cls.createUuid())
+        # workaround for PySide2, not able to clone in ctor
+        return cls(cls.createUuid().toString())
 
 
 if __name__ == "__main__":

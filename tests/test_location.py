@@ -197,9 +197,10 @@ def test_placedetailsreply():
 
 
 def test_placeidreply():
-    reply = location.PlaceIdReply(0)
+    typ = location.PlaceIdReply.OperationType(0)
+    reply = location.PlaceIdReply(typ)
     assert reply.get_operation_type() == "save_place"
-    obj = QtLocation.QPlaceIdReply(0)
+    obj = QtLocation.QPlaceIdReply(typ)
     location.PlaceIdReply.clone_from(obj)
 
 
