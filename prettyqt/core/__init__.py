@@ -40,7 +40,6 @@ from .signalmapper import SignalMapper
 from .timeline import TimeLine
 from .margins import Margins
 from .marginsf import MarginsF
-from .pluginloader import PluginLoader
 from .locale import Locale
 from .abstracteventdispatcher import AbstractEventDispatcher
 from .textstream import TextStream
@@ -137,6 +136,7 @@ from .jsondocument import JsonDocument
 # not available in PySide2
 if qtpy.API == "pyqt5":
     from .library import Library
+    from .pluginloader import PluginLoader
 
 if VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
