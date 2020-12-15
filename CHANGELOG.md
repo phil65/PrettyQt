@@ -1,3 +1,9 @@
+## v0.150.0 (2020-12-15)
+
+### Feat
+
+- **Movie**: add get_state method
+
 ## v0.149.0 (2020-12-15)
 
 ### Feat
