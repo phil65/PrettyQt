@@ -1825,7 +1825,6 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return visibility.</p>
-<p>Possible values are "unspecified", "device", "private", "public"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1836,7 +1835,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['unspecified', 'device', 'private', 'public']</code></td>
 <td>
 <p>Visibility</p>
 </td>
@@ -1846,15 +1845,13 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/place.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">VisibilityStr</span><span class="p">:</span>
     <span class="sd">"""Return visibility.</span>
-
-<span class="sd">    Possible values are "unspecified", "device", "private", "public"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Visibility</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1894,7 +1891,6 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return the visibility of the place.</p>
-<p>Possible values are "unspecified", "device", "private", "public"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1905,7 +1901,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['unspecified', 'device', 'private', 'public']</code></td>
 <td>
 <p>Visibility</p>
 </td>
@@ -1915,15 +1911,13 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placecategory.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">VisibilityStr</span><span class="p">:</span>
     <span class="sd">"""Return the visibility of the place.</span>
-
-<span class="sd">    Possible values are "unspecified", "device", "private", "public"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Visibility</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2361,7 +2355,6 @@ get_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Return current relevance hint.</p>
-<p>Possible values: "unspecified", "distance", "lexical_place_name"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2372,7 +2365,7 @@ get_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['unspecified', 'distance', 'lexical_place_name']</code></td>
 <td>
 <p>Relevance hint</p>
 </td>
@@ -2382,10 +2375,8 @@ get_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placesearchrequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RelevanceHintStr</span><span class="p">:</span>
     <span class="sd">"""Return current relevance hint.</span>
-
-<span class="sd">    Possible values: "unspecified", "distance", "lexical_place_name"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Relevance hint</span>
@@ -2406,7 +2397,6 @@ get_visibility_scope<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return the scope of the visibility.</p>
-<p>Possible values are "unspecified", "device", "private", "public"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2417,7 +2407,7 @@ get_visibility_scope<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['unspecified', 'device', 'private', 'public']</code></td>
 <td>
 <p>Visibility scope</p>
 </td>
@@ -2427,15 +2417,13 @@ get_visibility_scope<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placesearchrequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_visibility_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">VisibilityStr</span><span class="p">:</span>
     <span class="sd">"""Return the scope of the visibility.</span>
-
-<span class="sd">    Possible values are "unspecified", "device", "private", "public"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Visibility scope</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibilityScope</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibilityScope</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2451,7 +2439,6 @@ set_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set the relevance hint.</p>
-<p>Allowed values are "unspecified", "distance", "lexical_place_name"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2465,7 +2452,7 @@ set_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>hint</code></td>
-<td><code>str</code></td>
+<td><code>Literal['unspecified', 'distance', 'lexical_place_name']</code></td>
 <td>
 <p>Relevance hint</p>
 </td>
@@ -2493,10 +2480,8 @@ set_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placesearchrequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">RelevanceHintStr</span><span class="p">):</span>
     <span class="sd">"""Set the relevance hint.</span>
-
-<span class="sd">    Allowed values are "unspecified", "distance", "lexical_place_name"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        hint: Relevance hint</span>

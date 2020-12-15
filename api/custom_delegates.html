@@ -537,6 +537,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.renderlinkdelegate" class="md-nav__link">
+    renderlinkdelegate
+  </a>
+  
+    <nav class="md-nav" aria-label="renderlinkdelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.renderlinkdelegate.RenderLinkDelegate" class="md-nav__link">
+    RenderLinkDelegate
+  </a>
+  
+    <nav class="md-nav" aria-label="RenderLinkDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.renderlinkdelegate.RenderLinkDelegate.editorEvent" class="md-nav__link">
+    editorEvent()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.renderlinkdelegate.RenderLinkDelegate.paint" class="md-nav__link">
+    paint()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.custom_delegates.stardelegate" class="md-nav__link">
     stardelegate
   </a>
@@ -1225,6 +1265,46 @@
           <li class="md-nav__item">
   <a href="#prettyqt.custom_delegates.radiodelegate.RadioDelegate.updateEditorGeometry" class="md-nav__link">
     updateEditorGeometry()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.renderlinkdelegate" class="md-nav__link">
+    renderlinkdelegate
+  </a>
+  
+    <nav class="md-nav" aria-label="renderlinkdelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.renderlinkdelegate.RenderLinkDelegate" class="md-nav__link">
+    RenderLinkDelegate
+  </a>
+  
+    <nav class="md-nav" aria-label="RenderLinkDelegate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.renderlinkdelegate.RenderLinkDelegate.editorEvent" class="md-nav__link">
+    editorEvent()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.renderlinkdelegate.RenderLinkDelegate.paint" class="md-nav__link">
+    paint()
   </a>
   
 </li>
@@ -2031,6 +2111,103 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
     <span class="n">mask</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
     <span class="n">editor</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">"offMask"</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
     <span class="n">editor</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.custom_delegates.renderlinkdelegate">
+
+        <code>renderlinkdelegate</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.custom_delegates.renderlinkdelegate.RenderLinkDelegate">
+
+        <code>RenderLinkDelegate</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_delegates.renderlinkdelegate.RenderLinkDelegate.editorEvent">
+
+        <code class="highlight language-python">
+editorEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>editorEvent(self, QEvent, QAbstractItemModel, QStyleOptionViewItem, QModelIndex) -&gt; bool</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/renderlinkdelegate.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">editorEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+    <span class="n">font</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">FONT_ROLE</span><span class="p">)</span>
+    <span class="c1"># alignment = index.data(constants.ALIGNMENT_ROLE)</span>
+    <span class="k">if</span> <span class="n">font</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">get_font</span><span class="p">()</span>
+    <span class="n">fm</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">FontMetricsF</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+    <span class="n">rect</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">get_bounding_rect</span><span class="p">(</span>
+        <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">),</span>
+        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignLeft</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignVCenter</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">MouseButtonPress</span>
+        <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span>
+        <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">localPos</span><span class="p">()</span> <span class="ow">in</span> <span class="n">rect</span>
+    <span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="n">gui</span><span class="o">.</span><span class="n">DesktopServices</span><span class="o">.</span><span class="n">open_url</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.custom_delegates.renderlinkdelegate.RenderLinkDelegate.paint">
+
+        <code class="highlight language-python">
+paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/renderlinkdelegate.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+    <span class="c1"># I only wanted it for mouse over, but you'll probably want to remove</span>
+    <span class="c1"># this condition</span>
+    <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">State_MouseOver</span><span class="p">:</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">font</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setUnderline</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">link</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">())</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignLeft</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignVCenter</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
 </code></pre>
 </div>
 </details>

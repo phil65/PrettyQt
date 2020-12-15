@@ -3459,6 +3459,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.tablewidgetitem.TableWidgetItem.set_text_alignment" class="md-nav__link">
+    set_text_alignment()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7029,6 +7036,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.tablewidgetitem.TableWidgetItem.set_text_alignment" class="md-nav__link">
+    set_text_alignment()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -10496,8 +10510,6 @@ get_navigation_mode<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return navigation mode.</p>
-<p>possible values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",
-"cursor_force_visible"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10508,7 +10520,7 @@ get_navigation_mode<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'keypad_tab_order', 'keypad_directional', 'cursor_auto', 'cursor_force_visible']</code></td>
 <td>
 <p>navigation mode</p>
 </td>
@@ -10518,11 +10530,8 @@ get_navigation_mode<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_navigation_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_navigation_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NavigationModeStr</span><span class="p">:</span>
     <span class="sd">"""Return navigation mode.</span>
-
-<span class="sd">    possible values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",</span>
-<span class="sd">    "cursor_force_visible"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        navigation mode</span>
@@ -10543,8 +10552,6 @@ is_effect_enabled<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Return desktop effect state.</p>
-<p>possible values are "animate_menu", "fade_menu", "animate_combo",
-"animate_tooltip", "fade_tooltip", "animate_toolbox"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10565,11 +10572,8 @@ is_effect_enabled<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">is_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">is_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">UiEffectStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return desktop effect state.</span>
-
-<span class="sd">    possible values are "animate_menu", "fade_menu", "animate_combo",</span>
-<span class="sd">    "animate_tooltip", "fade_tooltip", "animate_toolbox"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        desktop effect state</span>
@@ -10590,8 +10594,6 @@ set_effect_enabled<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set the enabled state of a desktop effect.</p>
-<p>valid values are: "animate_menu", "fade_menu", "animate_combo",
-"animate_tooltip", "fade_tooltip", "animate_toolbox"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10605,7 +10607,7 @@ set_effect_enabled<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>effect</code></td>
-<td><code>str</code></td>
+<td><code>Literal['animate_menu', 'fade_menu', 'animate_combo', 'animate_tooltip', 'fade_tooltip', 'animate_toolbox']</code></td>
 <td>
 <p>desktop effect to set</p>
 </td>
@@ -10641,11 +10643,8 @@ set_effect_enabled<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">UiEffectStr</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="sd">"""Set the enabled state of a desktop effect.</span>
-
-<span class="sd">    valid values are: "animate_menu", "fade_menu", "animate_combo",</span>
-<span class="sd">    "animate_tooltip", "fade_tooltip", "animate_toolbox"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        effect: desktop effect to set</span>
@@ -10672,8 +10671,6 @@ set_navigation_mode<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set the navigation mode.</p>
-<p>valid values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",
-"cursor_force_visible"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10687,7 +10684,7 @@ set_navigation_mode<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'keypad_tab_order', 'keypad_directional', 'cursor_auto', 'cursor_force_visible']</code></td>
 <td>
 <p>navigation mode to use</p>
 </td>
@@ -10715,11 +10712,8 @@ set_navigation_mode<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_navigation_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_navigation_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">NavigationModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the navigation mode.</span>
-
-<span class="sd">    valid values: "none", "keypad_tab_order", "keypad_directional", "cursor_auto",</span>
-<span class="sd">    "cursor_force_visible"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: navigation mode to use</span>
@@ -11059,13 +11053,13 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/checkbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Return checkstate.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -11122,7 +11116,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/checkbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">StateStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">):</span>
     <span class="sd">"""Set checkstate of the checkbox.</span>
 
 <span class="sd">    Args:</span>
@@ -11131,9 +11125,9 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">STATE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -11505,13 +11499,13 @@ get_filter_mode<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/completer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_filter_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FilterModeStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_filter_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">FilterModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current filter mode.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        filter mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FILTER_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">filterMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">filterMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -11678,7 +11672,7 @@ set_filter_mode<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/completer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_filter_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">FilterModeStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_filter_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">FilterModeStr</span><span class="p">):</span>
     <span class="sd">"""Set filter mode to use.</span>
 
 <span class="sd">    Args:</span>
@@ -11687,9 +11681,9 @@ set_filter_mode<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: filter mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FILTER_MODE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">FILTER_MODE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFilterMode</span><span class="p">(</span><span class="n">FILTER_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFilterMode</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -13135,8 +13129,6 @@ get_font_filters<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return list of font filters.</p>
-<p>possible included values are "all", "scalable", "non_scalable", "monospaced",
-"proportional"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -13147,7 +13139,7 @@ get_font_filters<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>List[str]</code></td>
+<td><code>List[Literal['all', 'scalable', 'non_scalable', 'monospaced', 'proportional']]</code></td>
 <td>
 <p>font filter list</p>
 </td>
@@ -13157,11 +13149,8 @@ get_font_filters<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/fontcombobox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_font_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_font_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">FontFilterStr</span><span class="p">]:</span>
     <span class="sd">"""Return list of font filters.</span>
-
-<span class="sd">    possible included values are "all", "scalable", "non_scalable", "monospaced",</span>
-<span class="sd">    "proportional"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        font filter list</span>
@@ -13182,7 +13171,6 @@ set_font_filters<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set font filters.</p>
-<p>valid values are "all", "scalable", "non_scalable", "monospaced", "proportional"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -13196,7 +13184,7 @@ set_font_filters<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>filters</code></td>
-<td><code>str</code></td>
+<td><code>Literal['all', 'scalable', 'non_scalable', 'monospaced', 'proportional']</code></td>
 <td>
 <p>font filters to use</p>
 </td>
@@ -13224,10 +13212,8 @@ set_font_filters<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/fontcombobox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">filters</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_font_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">filters</span><span class="p">:</span> <span class="n">FontFilterStr</span><span class="p">):</span>
     <span class="sd">"""Set font filters.</span>
-
-<span class="sd">    valid values are "all", "scalable", "non_scalable", "monospaced", "proportional"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        filters: font filters to use</span>
@@ -15410,16 +15396,16 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">horizontal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">HorizontalAlignmentStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">vertical</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">VerticalAlignmentStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">horizontal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">HorizontalAlignmentStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">vertical</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">VerticalAlignmentStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""Set the alignment of the label's contents."""</span>
     <span class="k">if</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">V_ALIGNMENTS</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
     <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">H_ALIGNMENTS</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
     <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">V_ALIGNMENTS</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">H_ALIGNMENTS</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
@@ -15777,7 +15763,7 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>alignment</code></td>
-<td><code>Literal['left', 'right', 'top', 'bottom']</code></td>
+<td><code>Literal['top', 'left', 'right', 'bottom', 'top_left', 'top_right', 'bottom_left', 'bottom_right']</code></td>
 <td>
 <p>alignment for the layout</p>
 </td>
@@ -15815,7 +15801,7 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">alignment</span><span class="p">:</span> <span class="n">AlignmentStr</span><span class="p">,</span>
+    <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AlignmentStr</span><span class="p">,</span>
     <span class="n">item</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""Set the alignment for widget / layout to alignment.</span>
@@ -15829,12 +15815,12 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: alignment does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">alignment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALIGNMENTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">ALIGNMENTS</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">alignment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -16546,13 +16532,13 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/listwidgetitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Return checkstate.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -16609,7 +16595,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/listwidgetitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">StateStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">):</span>
     <span class="sd">"""Set checkstate of the checkbox.</span>
 
 <span class="sd">    Args:</span>
@@ -16618,9 +16604,9 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">STATE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -18240,7 +18226,6 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current alignment.</p>
-<p>Possible values: "left", "right", "top", "bottom"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -18264,12 +18249,10 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return current alignment.</span>
 
-<span class="sd">    Possible values: "left", "right", "top", "bottom"</span>
-
 <span class="sd">    Returns:</span>
 <span class="sd">        alignment</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ALIGNMENTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -18285,7 +18268,6 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current orientation.</p>
-<p>Possible values: "horizontal", "vertical"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -18296,7 +18278,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -18306,15 +18288,13 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/progressbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">:</span>
     <span class="sd">"""Return current orientation.</span>
-
-<span class="sd">    Possible values: "horizontal", "vertical"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        orientation</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -18375,7 +18355,6 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set the alignment of the layout.</p>
-<p>Allowed values are "left", "right", "top", "bottom"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -18389,7 +18368,7 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>alignment</code></td>
-<td><code>str</code></td>
+<td><code>Literal['top', 'left', 'right', 'bottom', 'top_left', 'top_right', 'bottom_left', 'bottom_right']</code></td>
 <td>
 <p>alignment for the layout</p>
 </td>
@@ -18417,10 +18396,8 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/progressbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AlignmentStr</span><span class="p">):</span>
     <span class="sd">"""Set the alignment of the layout.</span>
-
-<span class="sd">    Allowed values are "left", "right", "top", "bottom"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        alignment: alignment for the layout</span>
@@ -18428,9 +18405,9 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: alignment does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">alignment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALIGNMENTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">ALIGNMENTS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">alignment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -18446,7 +18423,6 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Set the orientation of the progress bar.</p>
-<p>Allowed values are "horizontal", "vertical"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -18460,7 +18436,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>orientation</code></td>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
 <p>orientation for the progress bar</p>
 </td>
@@ -18488,10 +18464,8 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/progressbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">):</span>
     <span class="sd">"""Set the orientation of the progress bar.</span>
-
-<span class="sd">    Allowed values are "horizontal", "vertical"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        orientation: orientation for the progress bar</span>
@@ -18499,9 +18473,9 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: orientation does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ORIENTATIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">ORIENTATIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">ORIENTATIONS</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -20388,13 +20362,13 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tablewidgetitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Return checkstate.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -20451,7 +20425,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tablewidgetitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">StateStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">):</span>
     <span class="sd">"""Set checkstate of the checkbox.</span>
 
 <span class="sd">    Args:</span>
@@ -20460,9 +20434,9 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">STATE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -20510,6 +20484,84 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    """</span>
     <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.tablewidgetitem.TableWidgetItem.set_text_alignment">
+
+        <code class="highlight language-python">
+set_text_alignment<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">horizontal</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">vertical</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set text alignment of the checkbox.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alignment</code></td>
+<td><code></code></td>
+<td>
+<p>text alignment to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid text alignment</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/tablewidgetitem.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_text_alignment</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">horizontal</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">HorizontalAlignmentStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">vertical</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">VerticalAlignmentStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">"""Set text alignment of the checkbox.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        alignment: text alignment to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid text alignment</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -21733,7 +21785,7 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>StateStr</code></td>
+<td><code>constants.StateStr</code></td>
 <td>
 <p>checkstate</p>
 </td>
@@ -21743,7 +21795,7 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/treewidgetitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Return checkstate.</span>
 
 <span class="sd">    Args:</span>
@@ -21752,7 +21804,7 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Returns:</span>
 <span class="sd">        checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">(</span><span class="n">column</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">(</span><span class="n">column</span><span class="p">)]</span>
 </code></pre>
 </div>
 </details>
@@ -21823,7 +21875,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>state</code></td>
-<td><code>StateStr</code></td>
+<td><code>constants.StateStr</code></td>
 <td>
 <p>checkstate to use</p>
 </td>
@@ -21859,7 +21911,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/treewidgetitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">StateStr</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
     <span class="sd">"""Set checkstate of the checkbox.</span>
 
 <span class="sd">    Args:</span>
@@ -21869,9 +21921,9 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">STATE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

@@ -1260,6 +1260,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.gui.palette" class="md-nav__link">
+    palette
+  </a>
+  
+    <nav class="md-nav" aria-label="palette">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.palette.Palette" class="md-nav__link">
+    Palette
+  </a>
+  
+    <nav class="md-nav" aria-label="Palette">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.palette.Palette.get_color_group" class="md-nav__link">
+    get_color_group()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.palette.Palette.set_color_group" class="md-nav__link">
+    set_color_group()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.gui.pen" class="md-nav__link">
     pen
   </a>
@@ -3348,6 +3388,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.gui.palette" class="md-nav__link">
+    palette
+  </a>
+  
+    <nav class="md-nav" aria-label="palette">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.palette.Palette" class="md-nav__link">
+    Palette
+  </a>
+  
+    <nav class="md-nav" aria-label="Palette">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.palette.Palette.get_color_group" class="md-nav__link">
+    get_color_group()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.palette.Palette.set_color_group" class="md-nav__link">
+    set_color_group()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.gui.pen" class="md-nav__link">
     pen
   </a>
@@ -4635,7 +4715,6 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return current cursor shape.</p>
-<p>Possible values: "arrow", "uparrow", "cross", "wait", "caret"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4646,7 +4725,7 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['arrow', 'up_arrow', 'cross', 'wait', 'caret']</code></td>
 <td>
 <p>cursor shape</p>
 </td>
@@ -4656,15 +4735,13 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/cursor.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ShapeStr</span><span class="p">:</span>
     <span class="sd">"""Return current cursor shape.</span>
-
-<span class="sd">    Possible values: "arrow", "uparrow", "cross", "wait", "caret"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        cursor shape</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SHAPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">SHAPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4680,7 +4757,6 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
       </h4>
 <div class="doc doc-contents ">
 <p>Set cursor shape.</p>
-<p>Allowed values are "arrow", "uparrow", "cross", "wait", "caret"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -4694,7 +4770,7 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>shape</code></td>
-<td><code>str</code></td>
+<td><code>Literal['arrow', 'up_arrow', 'cross', 'wait', 'caret']</code></td>
 <td>
 <p>shape to use</p>
 </td>
@@ -4722,10 +4798,8 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/cursor.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">ShapeStr</span><span class="p">):</span>
     <span class="sd">"""Set cursor shape.</span>
-
-<span class="sd">    Allowed values are "arrow", "uparrow", "cross", "wait", "caret"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        shape: shape to use</span>
@@ -4733,9 +4807,9 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: shape does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">shape</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SHAPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">SHAPES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setShape</span><span class="p">(</span><span class="n">SHAPES</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">shape</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SHAPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">SHAPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setShape</span><span class="p">(</span><span class="n">SHAPE</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -5426,7 +5500,6 @@ get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return current coordinate mode.</p>
-<p>Possible values: "logical", "object", "stretch_to_device", "object_bounding"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -5437,7 +5510,7 @@ get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['logical', 'object', 'stretch_to_device', 'object_bounding']</code></td>
 <td>
 <p>coordinate mode</p>
 </td>
@@ -5447,15 +5520,13 @@ get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CoordinateModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current coordinate mode.</span>
-
-<span class="sd">    Possible values: "logical", "object", "stretch_to_device", "object_bounding"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        coordinate mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">COORDINATE_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">coordinateMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">COORDINATE_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">coordinateMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -5471,7 +5542,6 @@ get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)<
       </h4>
 <div class="doc doc-contents ">
 <p>Return current spread method.</p>
-<p>Possible values: "pad", "repeat", "reflect"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -5482,7 +5552,7 @@ get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['pad', 'repeat', 'reflect']</code></td>
 <td>
 <p>spread method</p>
 </td>
@@ -5492,15 +5562,13 @@ get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SpreadStr</span><span class="p">:</span>
     <span class="sd">"""Return current spread method.</span>
-
-<span class="sd">    Possible values: "pad", "repeat", "reflect"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        spread method</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SPREADS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">spread</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">SPREAD</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">spread</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -5516,7 +5584,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Return current gradient type.</p>
-<p>Possible values: "linear", "radial", "conical", "none"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -5527,7 +5594,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['linear', 'radial', 'conical', 'none']</code></td>
 <td>
 <p>gradient type</p>
 </td>
@@ -5537,15 +5604,13 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current gradient type.</span>
-
-<span class="sd">    Possible values: "linear", "radial", "conical", "none"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        gradient type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -5561,7 +5626,6 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set the coordinate mode.</p>
-<p>Allowed values are "logical", "object", "stretch_to_device", "object_bounding"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5575,7 +5639,7 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['logical', 'object', 'stretch_to_device', 'object_bounding']</code></td>
 <td>
 <p>coordinate mode</p>
 </td>
@@ -5603,10 +5667,8 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CoordinateModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the coordinate mode.</span>
-
-<span class="sd">    Allowed values are "logical", "object", "stretch_to_device", "object_bounding"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: coordinate mode</span>
@@ -5614,9 +5676,9 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">COORDINATE_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">COORDINATE_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCoordinateMode</span><span class="p">(</span><span class="n">COORDINATE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">COORDINATE_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">COORDINATE_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCoordinateMode</span><span class="p">(</span><span class="n">COORDINATE_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -5632,7 +5694,6 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Set the spread method.</p>
-<p>Allowed values are "pad", "repeat", "reflect"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -5646,7 +5707,7 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>method</code></td>
-<td><code>str</code></td>
+<td><code>Literal['pad', 'repeat', 'reflect']</code></td>
 <td>
 <p>spread method</p>
 </td>
@@ -5674,10 +5735,8 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/gradient.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">SpreadStr</span><span class="p">):</span>
     <span class="sd">"""Set the spread method.</span>
-
-<span class="sd">    Allowed values are "pad", "repeat", "reflect"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        method: spread method</span>
@@ -5685,9 +5744,9 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: method does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPREADS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">SPREADS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setSpread</span><span class="p">(</span><span class="n">SPREADS</span><span class="p">[</span><span class="n">method</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPREAD</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">SPREAD</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setSpread</span><span class="p">(</span><span class="n">SPREAD</span><span class="p">[</span><span class="n">method</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -6445,8 +6504,6 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return error type.</p>
-<p>possible values are "file_not_found", "device", "unsupported_format",
-                    "invalid_image", "unknown"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6457,7 +6514,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['file_not_found', 'device', 'unsupported_format', 'invalid_data', 'unknown']</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -6467,11 +6524,8 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imagereader.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ImageReaderErrorStr</span><span class="p">:</span>
     <span class="sd">"""Return error type.</span>
-
-<span class="sd">    possible values are "file_not_found", "device", "unsupported_format",</span>
-<span class="sd">                        "invalid_image", "unknown"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        error type</span>
@@ -6492,8 +6546,6 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Return the transformation and orientation the image has been set to.</p>
-<p>Possible values: "none", "mirror", "flip", "rotate_180", "roate_90",
-                 "mirror_and_rotate_90", "flip_and_rotate_90", "rotate_270"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6504,7 +6556,7 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'mirror', 'flip', 'rotate_180', 'roate_90', 'mirror_and_rotate_90', 'flip_and_rotate_90', 'rotate_270']</code></td>
 <td>
 <p>transformation</p>
 </td>
@@ -6514,16 +6566,13 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imagereader.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TransformationStr</span><span class="p">:</span>
     <span class="sd">"""Return the transformation and orientation the image has been set to.</span>
-
-<span class="sd">    Possible values: "none", "mirror", "flip", "rotate_180", "roate_90",</span>
-<span class="sd">                     "mirror_and_rotate_90", "flip_and_rotate_90", "rotate_270"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        transformation</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TRANSFORMATIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transformation</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TRANSFORMATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transformation</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6604,9 +6653,9 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Returns:</span>
 <span class="sd">        option</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">option</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">IMAGE_OPTION</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">IMAGE_OPTION</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">supportsOption</span><span class="p">(</span><span class="n">IMAGE_OPTION</span><span class="p">[</span><span class="n">option</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">option</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">IMAGE_OPTION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">IMAGE_OPTION</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">supportsOption</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">IMAGE_OPTION</span><span class="p">[</span><span class="n">option</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -6646,7 +6695,6 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return error type.</p>
-<p>possible values are "device", "unsupported_format", "invalid_image", "unknown"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6657,7 +6705,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['device', 'unsupported_format', 'invalid_image', 'unknown']</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -6667,10 +6715,8 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imagewriter.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ImageWriterErrorStr</span><span class="p">:</span>
     <span class="sd">"""Return error type.</span>
-
-<span class="sd">    possible values are "device", "unsupported_format", "invalid_image", "unknown"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        error type</span>
@@ -6691,8 +6737,6 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Return the transformation and orientation the image has been set to.</p>
-<p>Possible values: "none", "mirror", "flip", "rotate_180", "roate_90",
-                 "mirror_and_rotate_90", "flip_and_rotate_90", "rotate_270"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6703,7 +6747,7 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'mirror', 'flip', 'rotate_180', 'roate_90', 'mirror_and_rotate_90', 'flip_and_rotate_90', 'rotate_270']</code></td>
 <td>
 <p>transformation</p>
 </td>
@@ -6713,16 +6757,13 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imagewriter.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TransformationStr</span><span class="p">:</span>
     <span class="sd">"""Return the transformation and orientation the image has been set to.</span>
-
-<span class="sd">    Possible values: "none", "mirror", "flip", "rotate_180", "roate_90",</span>
-<span class="sd">                     "mirror_and_rotate_90", "flip_and_rotate_90", "rotate_270"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        transformation</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TRANSFORMATIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transformation</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TRANSFORMATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transformation</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6738,8 +6779,6 @@ set_transformation<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set the image transformations metadata including orientation.</p>
-<p>Allowed values are "none", "mirror", "flip", "rotate_180", "roate_90",
-                   "mirror_and_rotate_90", "flip_and_rotate_90", "rotate_270"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6753,7 +6792,7 @@ set_transformation<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>origin</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'mirror', 'flip', 'rotate_180', 'roate_90', 'mirror_and_rotate_90', 'flip_and_rotate_90', 'rotate_270']</code></td>
 <td>
 <p>transformation to use</p>
 </td>
@@ -6781,11 +6820,8 @@ set_transformation<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imagewriter.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TransformationStr</span><span class="p">):</span>
     <span class="sd">"""Set the image transformations metadata including orientation.</span>
-
-<span class="sd">    Allowed values are "none", "mirror", "flip", "rotate_180", "roate_90",</span>
-<span class="sd">                       "mirror_and_rotate_90", "flip_and_rotate_90", "rotate_270"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        origin: transformation to use</span>
@@ -6793,9 +6829,9 @@ set_transformation<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: transformation does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">origin</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TRANSFORMATIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">TRANSFORMATIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTransformation</span><span class="p">(</span><span class="n">TRANSFORMATIONS</span><span class="p">[</span><span class="n">origin</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">origin</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TRANSFORMATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">origin</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TRANSFORMATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTransformation</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TRANSFORMATION</span><span class="p">[</span><span class="n">origin</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -6882,7 +6918,6 @@ get_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current cache mode.</p>
-<p>Possible values: "none", "all"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6893,7 +6928,7 @@ get_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'all']</code></td>
 <td>
 <p>cache mode</p>
 </td>
@@ -6903,15 +6938,13 @@ get_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/movie.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_cache_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_cache_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CacheModeStr</span><span class="p">:</span>
     <span class="sd">"""Get the current cache mode.</span>
-
-<span class="sd">    Possible values: "none", "all"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        cache mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CACHE_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cacheMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">CACHE_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cacheMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6927,7 +6960,6 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set cache mode.</p>
-<p>Valid values for cache_mode: "none", "all"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6941,7 +6973,7 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'all']</code></td>
 <td>
 <p>cache mode</p>
 </td>
@@ -6969,10 +7001,8 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/movie.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_cache_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_cache_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CacheModeStr</span><span class="p">):</span>
     <span class="sd">"""Set cache mode.</span>
-
-<span class="sd">    Valid values for cache_mode: "none", "all"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: cache mode</span>
@@ -6980,9 +7010,9 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: cache mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CACHE_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">CACHE_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCacheMode</span><span class="p">(</span><span class="n">CACHE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CACHE_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">CACHE_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCacheMode</span><span class="p">(</span><span class="n">CACHE_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -7809,7 +7839,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['solid', 'none', 'cross', 'linear_gradient', 'radial_gradient']</code></td>
+<td><code>Literal['none', 'solid', 'dense_1', 'dense_2', 'dense_3', 'dense_4', 'dense_5', 'dense_6', 'dense_7', 'horizontal', 'vertical', 'cross', 'backward_diagonal', 'forward_diagonal', 'crossing_diagonal', 'linear_gradient', 'conical_gradient', 'radial_gradient', 'texture']</code></td>
 <td>
 <p>pen style to use</p>
 </td>
@@ -7825,7 +7855,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </tr>
 <tr>
 <td><code>color</code></td>
-<td><code>Union[str, int, PyQt5.QtGui.QRgba64, PyQt5.QtCore.Qt.GlobalColor, PyQt5.QtGui.QColor, tuple]</code></td>
+<td><code>Union[str, int, PyQt5.QtCore.Qt.GlobalColor, PyQt5.QtGui.QColor, tuple]</code></td>
 <td>
 <p>pen color</p>
 </td>
@@ -8272,6 +8302,140 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">JOIN_STYLES</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">JOIN_STYLES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setJoinStyle</span><span class="p">(</span><span class="n">JOIN_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.gui.palette">
+
+        <code>palette</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.gui.palette.Palette">
+
+        <code>Palette</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.palette.Palette.get_color_group">
+
+        <code class="highlight language-python">
+get_color_group<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return color group.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['disabled', 'active', 'inactive']</code></td>
+<td>
+<p>color group</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/palette.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GroupStr</span><span class="p">:</span>
+    <span class="sd">"""Return color group.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        color group</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">GROUP</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">colorGroup</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.palette.Palette.set_color_group">
+
+        <code class="highlight language-python">
+set_color_group<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the color group.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>group</code></td>
+<td><code>Literal['disabled', 'active', 'inactive']</code></td>
+<td>
+<p>color group to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid color group</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/palette.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">):</span>
+    <span class="sd">"""Set the color group.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        group: color group to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid color group</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">group</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">GROUP</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">GROUP</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setColorGroup</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -11909,7 +12073,7 @@ start_system_resize<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/window.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">start_system_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">:</span> <span class="n">EdgeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">start_system_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">EdgeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Start system resize.</span>
 
 <span class="sd">    Args:</span>
@@ -11918,9 +12082,9 @@ start_system_resize<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: edge does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">edge</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">EDGES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">EDGES</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">startSystemResize</span><span class="p">(</span><span class="n">EDGES</span><span class="p">[</span><span class="n">edge</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">edge</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDGES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">edge</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDGES</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">startSystemResize</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">EDGES</span><span class="p">[</span><span class="n">edge</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

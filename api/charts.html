@@ -1522,7 +1522,6 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current alignment.</p>
-<p>Possible values: "left", "right", "top", "bottom"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1533,7 +1532,7 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>Optional[str]</code></td>
+<td><code>Optional[Literal['left', 'right', 'top', 'bottom']]</code></td>
 <td>
 <p>alignment</p>
 </td>
@@ -1543,10 +1542,8 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/abstractaxis.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span><span class="p">]:</span>
     <span class="sd">"""Return current alignment.</span>
-
-<span class="sd">    Possible values: "left", "right", "top", "bottom"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        alignment</span>
@@ -1554,7 +1551,7 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="n">alignment</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">alignment</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">ALIGNMENTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">alignment</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">SIDES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">alignment</span><span class="p">]</span>
 </code></pre>
 </div>
 </details>
@@ -1570,7 +1567,6 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current orientation.</p>
-<p>Possible values: "horizontal", "vertical"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1581,7 +1577,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>Optional[str]</code></td>
+<td><code>Optional[Literal['horizontal', 'vertical']]</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -1591,10 +1587,8 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/abstractaxis.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">]:</span>
     <span class="sd">"""Return current orientation.</span>
-
-<span class="sd">    Possible values: "horizontal", "vertical"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        orientation</span>
@@ -1602,7 +1596,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
     <span class="n">orientation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">orientation</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">orientation</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">orientation</span><span class="p">]</span>
 </code></pre>
 </div>
 </details>
@@ -2404,7 +2398,7 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Returns:</span>
 <span class="sd">        alignment</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ALIGNMENTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">SIDES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2479,7 +2473,7 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>alignment</code></td>
-<td><code>str</code></td>
+<td><code>Literal['left', 'right', 'top', 'bottom']</code></td>
 <td>
 <p>alignment for the legend</p>
 </td>
@@ -2507,7 +2501,7 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/legend.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span><span class="p">):</span>
     <span class="sd">"""Set the alignment of the legend.</span>
 
 <span class="sd">    Allowed values are "left", "right", "top", "bottom"</span>
@@ -2518,9 +2512,9 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: alignment does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">alignment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ALIGNMENTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">ALIGNMENTS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">alignment</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">SIDES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">alignment</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">SIDES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">SIDES</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

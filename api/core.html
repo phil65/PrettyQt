@@ -5710,7 +5710,7 @@ set_input_channel_mode<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['managed', 'forwarded']</code></td>
 <td>
 <p>mode to set</p>
 </td>
@@ -5738,7 +5738,7 @@ set_input_channel_mode<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/process.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_input_channel_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_input_channel_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">InputChannelModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the input channel mode.</span>
 
 <span class="sd">    possible values are "managed", "forward"</span>
@@ -5782,7 +5782,7 @@ set_process_channel_mode<span class="p">(</span><span class="bp">self</span><spa
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['separate', 'merged', 'forwarded', 'forwarded_error', 'forwarded_output']</code></td>
 <td>
 <p>mode to set</p>
 </td>
@@ -5810,7 +5810,7 @@ set_process_channel_mode<span class="p">(</span><span class="bp">self</span><spa
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/process.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_process_channel_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_process_channel_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ProcessChannelModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the process channel mode.</span>
 
 <span class="sd">    possible values are "separate", "merged", "forwarded", "forwarded_error",</span>
@@ -5854,7 +5854,7 @@ set_read_channel<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>channel</code></td>
-<td><code>str</code></td>
+<td><code>Literal['standard', 'error']</code></td>
 <td>
 <p>channel to set</p>
 </td>
@@ -5882,7 +5882,7 @@ set_read_channel<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/process.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_read_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_read_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">ProcessChannelStr</span><span class="p">):</span>
     <span class="sd">"""Set the input channel channel.</span>
 
 <span class="sd">    possible values are "managed", "forwarded"</span>
@@ -5925,7 +5925,7 @@ set_state<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>state</code></td>
-<td><code>str</code></td>
+<td><code>Literal['not_running', 'starting', 'running']</code></td>
 <td>
 <p>state to set</p>
 </td>
@@ -5953,7 +5953,7 @@ set_state<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/process.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">ProcessStateStr</span><span class="p">):</span>
     <span class="sd">"""Set the process state.</span>
 
 <span class="sd">    possible values are "not_running", "starting", "running"</span>
