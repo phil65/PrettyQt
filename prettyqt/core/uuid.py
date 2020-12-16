@@ -31,6 +31,9 @@ class Uuid(QtCore.QUuid):
     def __repr__(self):
         return f"{self.__class__.__name__}({self.toString()!r})"
 
+    def __str__(self):
+        return self.toString()
+
     def __bool__(self):
         return not self.isNull()
 
