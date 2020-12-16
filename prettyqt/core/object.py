@@ -83,8 +83,9 @@ class Object(QtCore.QObject):
         if qtpy.API == "pyqt5":
             return self.findChildren(typ, name=name, options=flag)
         else:
-            # TODO: custom way for non-recursive-search for PySide2
-            return self.findChildren(typ, name)
+            return [
+                i for i in self.findChildren(typ, name) if recursive or i.parent() == self
+            ]
 
     def find_child(
         self,
@@ -99,8 +100,8 @@ class Object(QtCore.QObject):
         if qtpy.API == "pyqt5":
             return self.findChild(typ, name=name, options=flag)
         else:
-            # TODO: custom way for non-recursive-search for PySide2
-            return self.findChild(typ, name)
+            item = self.findChild(typ, name)
+            return item if recursive or item.parent() == self else None
 
     def find_parent(
         self, typ: Type[QtCore.QObject], name: Optional[str] = None
