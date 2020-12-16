@@ -198,6 +198,7 @@ def test_icon():
         icon.get_available_sizes(state="test")
     icon.get_available_sizes()
     icon.add_pixmap(b"a")
+    icon.get_actual_size((256, 256))
 
 
 def test_image():

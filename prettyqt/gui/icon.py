@@ -128,6 +128,20 @@ class Icon(QtGui.QIcon):
         size = core.Size(size, size)
         return self.pixmap(size, MODE[mode], STATE[state])
 
+    def get_actual_size(
+        self,
+        size: Union[QtCore.QSize, Tuple[int, int]],
+        mode: ModeStr = "normal",
+        state: StateStr = "off",
+    ) -> core.Size:
+        if mode not in MODE:
+            raise InvalidParamError(mode, MODE)
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
+        if isinstance(size, tuple):
+            size = core.Size(*size)
+        return core.Size(self.actualSize(size, MODE[mode], STATE[state]))
+
 
 if __name__ == "__main__":
     app = gui.app()
