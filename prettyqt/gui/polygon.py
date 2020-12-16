@@ -13,7 +13,7 @@ class Polygon(QtGui.QPolygon):
         return f"{type(self).__name__}({points_str})"
 
     def __iter__(self) -> Iterator[core.Point]:
-        return iter(self[i] for i in range(self.size()))
+        return iter(self.get_point(i) for i in range(self.size()))
 
     def __len__(self) -> int:
         return self.size()
@@ -66,7 +66,7 @@ class Polygon(QtGui.QPolygon):
         return core.Point(self.value(index))
 
     def get_points(self) -> List[core.Point]:
-        return [self.get_point(i) for i in range(len(self))]
+        return [self.get_point(i) for i in range(self.size())]
 
     def add_points(self, *points: Union[Tuple[float, float], core.Point]):
         for p in points:

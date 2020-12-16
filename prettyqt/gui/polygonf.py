@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Union, Tuple, Iterator
+from typing import Union, Tuple, Iterator, List
 
 from qtpy import QtGui, QtCore
 
@@ -13,7 +13,7 @@ class PolygonF(QtGui.QPolygonF):
         return f"{type(self).__name__}({points_str})"
 
     def __iter__(self) -> Iterator[core.PointF]:
-        return iter(self[i] for i in range(self.size()))
+        return iter(self.get_point(i) for i in range(self.size()))
 
     def __len__(self) -> int:
         return self.size()
@@ -25,7 +25,7 @@ class PolygonF(QtGui.QPolygonF):
         return self.containsPoint(point, QtCore.Qt.OddEvenFill)
 
     def __getitem__(self, index: int) -> core.Point:
-        return self.at(index)
+        return self.get_point(index)
 
     # def __setitem__(self, index: int, value: Union[QtCore.QPoint, Tuple[int, int]]):
     #     if isinstance(value, tuple):
@@ -60,11 +60,11 @@ class PolygonF(QtGui.QPolygonF):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
-    # def get_point(self, index: int) -> core.Point:
-    #     return core.Point(self.point(index))
+    def get_point(self, index: int) -> core.PointF:
+        return core.PointF(self.at(index))
 
-    # def get_points(self) -> List[core.Point]:
-    #     return [self.get_point(i) for i in range(len(self))]
+    def get_points(self) -> List[core.PointF]:
+        return [self.get_point(i) for i in range(self.size())]
 
     def add_points(self, *points: Union[Tuple[float, float], core.Point]):
         for p in points:
