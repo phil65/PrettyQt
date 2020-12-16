@@ -83,7 +83,7 @@ class Object(QtCore.QObject):
             return self.findChildren(typ, name=name, options=flag)
         else:
             # TODO: custom way for non-recursive-search for PySide2
-            return self.findChildren(typ, name=name)
+            return self.findChildren(typ, name)
 
     def find_child(
         self,
@@ -99,7 +99,7 @@ class Object(QtCore.QObject):
             return self.findChild(typ, name=name, options=flag)
         else:
             # TODO: custom way for non-recursive-search for PySide2
-            return self.findChild(typ, name=name)
+            return self.findChild(typ, name)
 
     def find_parent(
         self, typ: Type[QtCore.QObject], name: Optional[str] = None
