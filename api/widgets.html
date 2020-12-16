@@ -586,6 +586,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractitemview.AbstractItemView.get_drag_drop_mode" class="md-nav__link">
+    get_drag_drop_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractitemview.AbstractItemView.get_selection_behaviour" class="md-nav__link">
     get_selection_behaviour()
   </a>
@@ -665,6 +672,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractitemview.AbstractItemView.selected_rows" class="md-nav__link">
     selected_rows()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractitemview.AbstractItemView.set_drag_drop_mode" class="md-nav__link">
+    set_drag_drop_mode()
   </a>
   
 </li>
@@ -4163,6 +4177,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractitemview.AbstractItemView.get_drag_drop_mode" class="md-nav__link">
+    get_drag_drop_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractitemview.AbstractItemView.get_selection_behaviour" class="md-nav__link">
     get_selection_behaviour()
   </a>
@@ -4242,6 +4263,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractitemview.AbstractItemView.selected_rows" class="md-nav__link">
     selected_rows()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractitemview.AbstractItemView.set_drag_drop_mode" class="md-nav__link">
+    set_drag_drop_mode()
   </a>
   
 </li>
@@ -7805,6 +7833,48 @@ set_style_icon<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.abstractitemview.AbstractItemView.get_drag_drop_mode">
+
+        <code class="highlight language-python">
+get_drag_drop_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current drag-drop mode.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['none', 'drag', 'drop', 'drag_drop', 'internal']</code></td>
+<td>
+<p>drag-drop mode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_drag_drop_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DragDropModeStr</span><span class="p">:</span>
+    <span class="sd">"""Return current drag-drop mode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        drag-drop mode</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">DRAG_DROP_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dragDropMode</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.abstractitemview.AbstractItemView.get_selection_behaviour">
 
         <code class="highlight language-python">
@@ -7834,7 +7904,7 @@ get_selection_behaviour<span class="p">(</span><span class="bp">self</span><span
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_selection_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SELECTION_BEHAVIOUR_STR</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_selection_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SelectionBehaviourStr</span><span class="p">:</span>
     <span class="sd">"""Return current selection behaviour.</span>
 
 <span class="sd">    Returns:</span>
@@ -7876,7 +7946,7 @@ get_selection_mode<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_selection_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SELECTION_MODE_STR</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_selection_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SelectionModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current selection mode.</span>
 
 <span class="sd">    Returns:</span>
@@ -8161,6 +8231,74 @@ selected_rows<span class="p">(</span><span class="bp">self</span><span class="p"
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.abstractitemview.AbstractItemView.set_drag_drop_mode">
+
+        <code class="highlight language-python">
+set_drag_drop_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set drag-drop mode for given item view.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td><code>Literal['none', 'drag', 'drop', 'drag_drop', 'internal']</code></td>
+<td>
+<p>drag-drop mode to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>mode does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_drag_drop_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">DragDropModeStr</span><span class="p">):</span>
+    <span class="sd">"""Set drag-drop mode for given item view.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mode: drag-drop mode to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: mode does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DRAG_DROP_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">DRAG_DROP_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setDragDropMode</span><span class="p">(</span><span class="n">DRAG_DROP_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.abstractitemview.AbstractItemView.set_horizontal_scroll_mode">
 
         <code class="highlight language-python">
@@ -8211,7 +8349,7 @@ set_horizontal_scroll_mode<span class="p">(</span><span class="bp">self</span><s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SCROLL_MODE_STR</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the horizontal scroll mode.</span>
 
 <span class="sd">    Args:</span>
@@ -8309,7 +8447,7 @@ set_scroll_mode<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SCROLL_MODE_STR</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the scroll mode for both directions.</span>
 
 <span class="sd">    Args:</span>
@@ -8378,7 +8516,7 @@ set_selection_behaviour<span class="p">(</span><span class="bp">self</span><span
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_selection_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">behaviour</span><span class="p">:</span> <span class="n">SELECTION_BEHAVIOUR_STR</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_selection_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">behaviour</span><span class="p">:</span> <span class="n">SelectionBehaviourStr</span><span class="p">):</span>
     <span class="sd">"""Set selection behaviour for given item view.</span>
 
 <span class="sd">    Args:</span>
@@ -8446,7 +8584,7 @@ set_selection_mode<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_selection_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SELECTION_MODE_STR</span><span class="p">]):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_selection_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SelectionModeStr</span><span class="p">]):</span>
     <span class="sd">"""Set selection mode for given item view.</span>
 
 <span class="sd">    Args:</span>
@@ -8516,7 +8654,7 @@ set_vertical_scroll_mode<span class="p">(</span><span class="bp">self</span><spa
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SCROLL_MODE_STR</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the vertical scroll mode.</span>
 
 <span class="sd">    Args:</span>
@@ -8718,7 +8856,7 @@ set_horizontal_scrollbar_policy<span class="p">(</span><span class="bp">self</sp
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractscrollarea.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollBarPolicyStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_horizontal_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ScrollBarPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set the horizontal scrollbar visibility.</span>
 
 <span class="sd">    Args:</span>
@@ -8727,9 +8865,9 @@ set_horizontal_scrollbar_policy<span class="p">(</span><span class="bp">self</sp
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid scrollbar policy</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalScrollBarPolicy</span><span class="p">(</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalScrollBarPolicy</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -8833,7 +8971,7 @@ set_scrollbar_policy<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractscrollarea.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollBarPolicyStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ScrollBarPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set the policy for both scrollbars.</span>
 
 <span class="sd">    Args:</span>
@@ -8842,10 +8980,10 @@ set_scrollbar_policy<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid scrollbar policy</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalScrollBarPolicy</span><span class="p">(</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setVerticalScrollBarPolicy</span><span class="p">(</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalScrollBarPolicy</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setVerticalScrollBarPolicy</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -9017,7 +9155,7 @@ set_vertical_scrollbar_policy<span class="p">(</span><span class="bp">self</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractscrollarea.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollBarPolicyStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_vertical_scrollbar_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ScrollBarPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set the vertical scrollbar visibility.</span>
 
 <span class="sd">    Args:</span>
@@ -9026,9 +9164,9 @@ set_vertical_scrollbar_policy<span class="p">(</span><span class="bp">self</span
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid scrollbar policy</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLLBAR_POLICY</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setVerticalScrollBarPolicy</span><span class="p">(</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setVerticalScrollBarPolicy</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">SCROLLBAR_POLICY</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -9115,7 +9253,6 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current orientation.</p>
-<p>Possible values: "horizontal", "vertical"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9126,7 +9263,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -9136,15 +9273,13 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">:</span>
     <span class="sd">"""Return current orientation.</span>
-
-<span class="sd">    Possible values: "horizontal", "vertical"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        orientation</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -9160,8 +9295,6 @@ get_repeat_action<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Get current repeat action.</p>
-<p>Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
-"page_step_sub", "to_minimum", "to_maximum", "move"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9172,7 +9305,7 @@ get_repeat_action<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'single_step_add', 'single_step_sub', 'page_step_add', 'page_step_sub', 'to_minimum', 'to_maximum', 'move']</code></td>
 <td>
 <p>current repeat action</p>
 </td>
@@ -9182,16 +9315,13 @@ get_repeat_action<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_repeat_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_repeat_action</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SliderActionStr</span><span class="p">:</span>
     <span class="sd">"""Get current repeat action.</span>
-
-<span class="sd">    Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",</span>
-<span class="sd">    "page_step_sub", "to_minimum", "to_maximum", "move"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current repeat action</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SLIDER_ACTIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">repeatAction</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">SLIDER_ACTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">repeatAction</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -9354,7 +9484,6 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Set the orientation of the slider.</p>
-<p>Allowed values are "horizontal", "vertical"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9368,7 +9497,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>orientation</code></td>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
 <p>orientation for the slider</p>
 </td>
@@ -9396,10 +9525,8 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">):</span>
     <span class="sd">"""Set the orientation of the slider.</span>
-
-<span class="sd">    Allowed values are "horizontal", "vertical"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        orientation: orientation for the slider</span>
@@ -9407,9 +9534,9 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: orientation does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ORIENTATIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">ORIENTATIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">ORIENTATIONS</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -9425,8 +9552,6 @@ set_repeat_action<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Set the repeat action.</p>
-<p>Valid values are "none", "single_step_add", "single_step_sub", "page_step_add",
-"page_step_sub", "to_minimum", "to_maximum", "move"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9440,7 +9565,7 @@ set_repeat_action<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>action</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'single_step_add', 'single_step_sub', 'page_step_add', 'page_step_sub', 'to_minimum', 'to_maximum', 'move']</code></td>
 <td>
 <p>repeat action</p>
 </td>
@@ -9468,11 +9593,10 @@ set_repeat_action<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_repeat_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">repeat_time</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_repeat_action</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">SliderActionStr</span><span class="p">,</span> <span class="n">threshold</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span> <span class="n">repeat_time</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="p">):</span>
     <span class="sd">"""Set the repeat action.</span>
-
-<span class="sd">    Valid values are "none", "single_step_add", "single_step_sub", "page_step_add",</span>
-<span class="sd">    "page_step_sub", "to_minimum", "to_maximum", "move"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        action: repeat action</span>
@@ -9480,9 +9604,9 @@ set_repeat_action<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid repeat action</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">action</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SLIDER_ACTIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">SLIDER_ACTIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setRepeatAction</span><span class="p">(</span><span class="n">SLIDER_ACTIONS</span><span class="p">[</span><span class="n">action</span><span class="p">],</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">repeat_time</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">action</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SLIDER_ACTION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">SLIDER_ACTION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setRepeatAction</span><span class="p">(</span><span class="n">SLIDER_ACTION</span><span class="p">[</span><span class="n">action</span><span class="p">],</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">repeat_time</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -9519,21 +9643,14 @@ trigger_action<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Trigger slider action.</p>
-<p>Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
-"page_step_sub", "to_minimum", "to_maximum", "move"</p>
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""Trigger slider action.</span>
-
-<span class="sd">    Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",</span>
-<span class="sd">    "page_step_sub", "to_minimum", "to_maximum", "move"</span>
-
-<span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">action</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SLIDER_ACTIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">SLIDER_ACTIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">triggerAction</span><span class="p">(</span><span class="n">SLIDER_ACTIONS</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">SliderActionStr</span><span class="p">):</span>
+    <span class="sd">"""Trigger slider action."""</span>
+    <span class="k">if</span> <span class="n">action</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SLIDER_ACTION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">SLIDER_ACTION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">triggerAction</span><span class="p">(</span><span class="n">SLIDER_ACTION</span><span class="p">[</span><span class="n">action</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -9927,8 +10044,6 @@ get_menu_role<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return menu role.</p>
-<p>Possible values: "none", "text_heuristic", "application_specific", "about_qt",
-"about", "preferences", "quit"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9939,7 +10054,7 @@ get_menu_role<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'text_heuristic', 'application_specific', 'about_qt', 'about', 'preferences', 'quit']</code></td>
 <td>
 <p>menu role</p>
 </td>
@@ -9949,11 +10064,8 @@ get_menu_role<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_menu_role</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_menu_role</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RoleStr</span><span class="p">:</span>
     <span class="sd">"""Return menu role.</span>
-
-<span class="sd">    Possible values: "none", "text_heuristic", "application_specific", "about_qt",</span>
-<span class="sd">    "about", "preferences", "quit"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        menu role</span>
@@ -9974,7 +10086,6 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
       </h4>
 <div class="doc doc-contents ">
 <p>Return current priority.</p>
-<p>Possible values: "low", "normal", "high"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9985,7 +10096,7 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['low', 'normal', 'high']</code></td>
 <td>
 <p>priority</p>
 </td>
@@ -9995,10 +10106,8 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PriorityStr</span><span class="p">:</span>
     <span class="sd">"""Return current priority.</span>
-
-<span class="sd">    Possible values: "low", "normal", "high"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        priority</span>
@@ -10019,7 +10128,6 @@ get_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return shortcut context.</p>
-<p>Possible values: "widget", "widget_with_children", "window", "application"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10030,7 +10138,7 @@ get_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['widget', 'widget_with_children', 'window', 'application']</code></td>
 <td>
 <p>shortcut context</p>
 </td>
@@ -10040,15 +10148,13 @@ get_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_shortcut_context</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_shortcut_context</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextStr</span><span class="p">:</span>
     <span class="sd">"""Return shortcut context.</span>
-
-<span class="sd">    Possible values: "widget", "widget_with_children", "window", "application"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        shortcut context</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CONTEXTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">shortcutContext</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">shortcutContext</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -10111,8 +10217,6 @@ set_menu_role<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set menu role.</p>
-<p>Allowed values are "none", "text_heuristic", "application_specific", "about_qt",
-"about", "preferences", "quit"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10126,7 +10230,7 @@ set_menu_role<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>role</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'text_heuristic', 'application_specific', 'about_qt', 'about', 'preferences', 'quit']</code></td>
 <td>
 <p>menu role</p>
 </td>
@@ -10154,11 +10258,8 @@ set_menu_role<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_menu_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_menu_role</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">):</span>
     <span class="sd">"""Set menu role.</span>
-
-<span class="sd">    Allowed values are "none", "text_heuristic", "application_specific", "about_qt",</span>
-<span class="sd">    "about", "preferences", "quit"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        role: menu role</span>
@@ -10184,7 +10285,6 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
       </h4>
 <div class="doc doc-contents ">
 <p>Set priority of the action.</p>
-<p>Allowed values are "low", "normal", "high"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10198,7 +10298,7 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <tbody>
 <tr>
 <td><code>priority</code></td>
-<td><code>str</code></td>
+<td><code>Literal['low', 'normal', 'high']</code></td>
 <td>
 <p>priority for the action</p>
 </td>
@@ -10226,10 +10326,8 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="n">PriorityStr</span><span class="p">):</span>
     <span class="sd">"""Set priority of the action.</span>
-
-<span class="sd">    Allowed values are "low", "normal", "high"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        priority: priority for the action</span>
@@ -10255,7 +10353,6 @@ set_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set shortcut context.</p>
-<p>Allowed values are "widget", "widget_with_children", "window", "application"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10269,7 +10366,7 @@ set_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>context</code></td>
-<td><code>str</code></td>
+<td><code>Literal['widget', 'widget_with_children', 'window', 'application']</code></td>
 <td>
 <p>shortcut context</p>
 </td>
@@ -10297,10 +10394,8 @@ set_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_shortcut_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_shortcut_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextStr</span><span class="p">):</span>
     <span class="sd">"""Set shortcut context.</span>
-
-<span class="sd">    Allowed values are "widget", "widget_with_children", "window", "application"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        context: shortcut context</span>
@@ -10308,9 +10403,9 @@ set_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: shortcut context does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">context</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONTEXTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">CONTEXTS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setShortcutContext</span><span class="p">(</span><span class="n">CONTEXTS</span><span class="p">[</span><span class="n">context</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">context</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setShortcutContext</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT</span><span class="p">[</span><span class="n">context</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -10512,13 +10607,13 @@ get_navigation_mode<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_navigation_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NavigationModeStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_navigation_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">NavigationModeStr</span><span class="p">:</span>
     <span class="sd">"""Return navigation mode.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        navigation mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">NAVIGATION_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">navigationMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">NAVIGATION_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">navigationMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -10554,13 +10649,13 @@ is_effect_enabled<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">is_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">UiEffectStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">is_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">UiEffectStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return desktop effect state.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        desktop effect state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEffectEnabled</span><span class="p">(</span><span class="n">UI_EFFECTS</span><span class="p">[</span><span class="n">effect</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEffectEnabled</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">UI_EFFECTS</span><span class="p">[</span><span class="n">effect</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -10625,7 +10720,7 @@ set_effect_enabled<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">UiEffectStr</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">UiEffectStr</span><span class="p">,</span> <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="sd">"""Set the enabled state of a desktop effect.</span>
 
 <span class="sd">    Args:</span>
@@ -10635,9 +10730,9 @@ set_effect_enabled<span class="p">(</span><span class="bp">self</span><span clas
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid desktop effect</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">effect</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">UI_EFFECTS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">effect</span><span class="p">,</span> <span class="n">UI_EFFECTS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setEffectEnabled</span><span class="p">(</span><span class="n">UI_EFFECTS</span><span class="p">[</span><span class="n">effect</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">effect</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">UI_EFFECTS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">effect</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">UI_EFFECTS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setEffectEnabled</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">UI_EFFECTS</span><span class="p">[</span><span class="n">effect</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -10694,7 +10789,7 @@ set_navigation_mode<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_navigation_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">NavigationModeStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_navigation_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">NavigationModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the navigation mode.</span>
 
 <span class="sd">    Args:</span>
@@ -10703,9 +10798,9 @@ set_navigation_mode<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid navigation mode</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">NAVIGATION_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">NAVIGATION_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setNavigationMode</span><span class="p">(</span><span class="n">NAVIGATION_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">NAVIGATION_MODES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">NAVIGATION_MODES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setNavigationMode</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">NAVIGATION_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -11775,7 +11870,6 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current orientation.</p>
-<p>Possible values: "horizontal", "vertical"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -11786,7 +11880,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -11796,15 +11890,13 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/datawidgetmapper.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">:</span>
     <span class="sd">"""Return current orientation.</span>
-
-<span class="sd">    Possible values: "horizontal", "vertical"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        orientation</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -11820,7 +11912,6 @@ get_submit_policy<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Return current submit policy.</p>
-<p>Possible values: "auto", "manual"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -11831,7 +11922,7 @@ get_submit_policy<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'manual']</code></td>
 <td>
 <p>submit policy</p>
 </td>
@@ -11841,15 +11932,13 @@ get_submit_policy<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/datawidgetmapper.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_submit_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_submit_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SubmitPolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return current submit policy.</span>
-
-<span class="sd">    Possible values: "auto", "manual"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        submit policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SUBMIT_POLICIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">submitPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">SUBMIT_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">submitPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -11864,8 +11953,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 
       </h4>
 <div class="doc doc-contents ">
-<p>Set the orientation of the splitter.</p>
-<p>Allowed values are "horizontal", "vertical"</p>
+<p>Set the orientation of the data widget mapper.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -11879,9 +11967,9 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>orientation</code></td>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
-<p>orientation for the splitter</p>
+<p>orientation for the data widget mapper</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -11907,20 +11995,18 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/datawidgetmapper.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""Set the orientation of the splitter.</span>
-
-<span class="sd">    Allowed values are "horizontal", "vertical"</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">):</span>
+    <span class="sd">"""Set the orientation of the data widget mapper.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        orientation: orientation for the splitter</span>
+<span class="sd">        orientation: orientation for the data widget mapper</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: orientation does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ORIENTATIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">ORIENTATIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">ORIENTATIONS</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -11936,7 +12022,6 @@ set_submit_policy<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Set the submit policy of the mapper.</p>
-<p>Allowed values are "auto", "manual"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -11950,9 +12035,9 @@ set_submit_policy<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'manual']</code></td>
 <td>
-<p>submit_policy for the splitter</p>
+<p>submit_policy for the data widget mapper</p>
 </td>
 <td><em>required</em></td>
 </tr>
@@ -11978,20 +12063,18 @@ set_submit_policy<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/datawidgetmapper.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_submit_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_submit_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">SubmitPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set the submit policy of the mapper.</span>
 
-<span class="sd">    Allowed values are "auto", "manual"</span>
-
 <span class="sd">    Args:</span>
-<span class="sd">        policy: submit_policy for the splitter</span>
+<span class="sd">        policy: submit_policy for the data widget mapper</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: submit_policy does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SUBMIT_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">SUBMIT_POLICIES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setSubmitPolicy</span><span class="p">(</span><span class="n">SUBMIT_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SUBMIT_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">SUBMIT_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setSubmitPolicy</span><span class="p">(</span><span class="n">SUBMIT_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -12093,7 +12176,7 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>button</code></td>
-<td><code>Union[PyQt5.QtWidgets.QPushButton, str]</code></td>
+<td><code>Union[PyQt5.QtWidgets.QPushButton, Literal['cancel', 'ok', 'save', 'open', 'close', 'discard', 'apply', 'reset', 'restore_defaults', 'help', 'save_all', 'yes', 'yes_to_all', 'no', 'no_to_all', 'abort', 'retry', 'ignore']]</code></td>
 <td>
 <p>button to add</p>
 </td>
@@ -12101,7 +12184,7 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </tr>
 <tr>
 <td><code>role</code></td>
-<td><code>str</code></td>
+<td><code>Literal['invalid', 'accept', 'reject', 'destructive', 'action', 'help', 'yes', 'no', 'apply', 'reset']</code></td>
 <td>
 <p>role of the button</p>
 </td>
@@ -12156,8 +12239,8 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">add_button</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">button</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
-    <span class="n">role</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"accept"</span><span class="p">,</span>
+    <span class="n">button</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">,</span> <span class="n">ButtonStr</span><span class="p">],</span>
+    <span class="n">role</span><span class="p">:</span> <span class="n">RoleStr</span> <span class="o">=</span> <span class="s2">"accept"</span><span class="p">,</span>
     <span class="n">callback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">:</span>
     <span class="sd">"""Add a button.</span>
@@ -12194,10 +12277,6 @@ add_default_button<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Add a default button.</p>
-<p>Valid arguments: "cancel", "ok", "save", "open", "close",
-                 "discard", "apply", "reset", "restore_defaults",
-                 "help", "save_all", "yes", "yes_to_all", "no",
-                 "no_to_all", "abort", "retry", "ignore"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -12211,7 +12290,7 @@ add_default_button<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>button</code></td>
-<td><code>str</code></td>
+<td><code>Literal['cancel', 'ok', 'save', 'open', 'close', 'discard', 'apply', 'reset', 'restore_defaults', 'help', 'save_all', 'yes', 'yes_to_all', 'no', 'no_to_all', 'abort', 'retry', 'ignore']</code></td>
 <td>
 <p>button to add</p>
 </td>
@@ -12265,14 +12344,9 @@ add_default_button<span class="p">(</span><span class="bp">self</span><span clas
           <summary>Source code in <code>prettyqt/widgets/dialogbuttonbox.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">add_default_button</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">button</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">button</span><span class="p">:</span> <span class="n">ButtonStr</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">:</span>
     <span class="sd">"""Add a default button.</span>
-
-<span class="sd">    Valid arguments: "cancel", "ok", "save", "open", "close",</span>
-<span class="sd">                     "discard", "apply", "reset", "restore_defaults",</span>
-<span class="sd">                     "help", "save_all", "yes", "yes_to_all", "no",</span>
-<span class="sd">                     "no_to_all", "abort", "retry", "ignore"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        button: button to add</span>
@@ -12316,7 +12390,7 @@ create<span class="p">(</span><span class="o">**</span><span class="n">kwargs</s
 <span class="k">def</span> <span class="nf">create</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">box</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">box</span><span class="o">.</span><span class="n">add_default_button</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+        <span class="n">box</span><span class="o">.</span><span class="n">add_default_button</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
     <span class="k">return</span> <span class="n">box</span>
 </code></pre>
 </div>
@@ -12333,7 +12407,6 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current orientation.</p>
-<p>Possible values: "horizontal", "vertical"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -12344,7 +12417,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -12354,15 +12427,13 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/dialogbuttonbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">:</span>
     <span class="sd">"""Return current orientation.</span>
-
-<span class="sd">    Possible values: "horizontal", "vertical"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        orientation</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -12378,7 +12449,6 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Set the orientation of the button box.</p>
-<p>Allowed values are "horizontal", "vertical"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -12392,7 +12462,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>orientation</code></td>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
 <p>orientation for the button box</p>
 </td>
@@ -12420,10 +12490,8 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/dialogbuttonbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">):</span>
     <span class="sd">"""Set the orientation of the button box.</span>
-
-<span class="sd">    Allowed values are "horizontal", "vertical"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        orientation: orientation for the button box</span>
@@ -12431,9 +12499,9 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: orientation does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ORIENTATIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">ORIENTATIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">ORIENTATIONS</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -13823,13 +13891,13 @@ get_gesture_type<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/gesture.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_gesture_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GestureTypeStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_gesture_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">GestureTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current gesture type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        gesture type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">GESTURE_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">gestureType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">GESTURE_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">gestureType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -13865,13 +13933,13 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/gesture.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GestureStateStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">GestureStateStr</span><span class="p">:</span>
     <span class="sd">"""Return current state.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">GESTURE_STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">GESTURE_STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -14393,13 +14461,13 @@ get_rubberband_selection_mode<span class="p">(</span><span class="bp">self</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/graphicsview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_rubberband_selection_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ItemSelectionModeStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_rubberband_selection_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ItemSelectionModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current rubberband selection mode.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        rubberband selection mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ITEM_SELECTION_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rubberBandSelectionMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ITEM_SELECTION_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rubberBandSelectionMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -14744,7 +14812,7 @@ set_rubberband_selection_mode<span class="p">(</span><span class="bp">self</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/graphicsview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_rubberband_selection_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ItemSelectionModeStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_rubberband_selection_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ItemSelectionModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the behavior for selecting items with a rubber band selection rectangle.</span>
 
 <span class="sd">    Args:</span>
@@ -14753,9 +14821,9 @@ set_rubberband_selection_mode<span class="p">(</span><span class="bp">self</span
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ITEM_SELECTION_MODE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ITEM_SELECTION_MODE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setRubberBandSelectionMode</span><span class="p">(</span><span class="n">ITEM_SELECTION_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ITEM_SELECTION_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ITEM_SELECTION_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setRubberBandSelectionMode</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ITEM_SELECTION_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -14951,13 +15019,13 @@ get_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/graphicswidget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusPolicyStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">FocusPolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return way the widget accepts keyboard focus.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: Focus policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FOCUS_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">focusPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOCUS_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">focusPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -15014,7 +15082,7 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/graphicswidget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">FocusPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">FocusPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set the way the widget accepts keyboard focus.</span>
 
 <span class="sd">    Args:</span>
@@ -15023,9 +15091,9 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: Description</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FOCUS_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">FOCUS_POLICY</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">FOCUS_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOCUS_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOCUS_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">FOCUS_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -15085,13 +15153,13 @@ get_origin_corner<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/gridlayout.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_origin_corner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CornerStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_origin_corner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CornerStr</span><span class="p">:</span>
     <span class="sd">"""Return current origin corner.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        origin corner</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CORNER</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">originCorner</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CORNER</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">originCorner</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -15148,7 +15216,7 @@ set_origin_corner<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/gridlayout.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_origin_corner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corner</span><span class="p">:</span> <span class="n">CornerStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_origin_corner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corner</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CornerStr</span><span class="p">):</span>
     <span class="sd">"""Set the origin corner.</span>
 
 <span class="sd">    Args:</span>
@@ -15157,9 +15225,9 @@ set_origin_corner<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: corner does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">corner</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CORNER</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">corner</span><span class="p">,</span> <span class="n">CORNER</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setOriginCorner</span><span class="p">(</span><span class="n">CORNER</span><span class="p">[</span><span class="n">corner</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">corner</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">CORNER</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">corner</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">CORNER</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setOriginCorner</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">CORNER</span><span class="p">[</span><span class="n">corner</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -16720,7 +16788,9 @@ add_toolbar<span class="p">(</span><span class="bp">self</span><span class="p">,
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/mainwindow.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">add_toolbar</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">toolbar</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolBar</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">ToolbarAreaStr</span> <span class="o">=</span> <span class="s2">"top"</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">add_toolbar</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">toolbar</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QToolBar</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ToolbarAreaStr</span> <span class="o">=</span> <span class="s2">"top"</span>
+<span class="p">):</span>
     <span class="sd">"""Adds a toolbar to the mainmenu at specified area.</span>
 
 <span class="sd">    Args:</span>
@@ -16730,9 +16800,9 @@ add_toolbar<span class="p">(</span><span class="bp">self</span><span class="p">,
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: position does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TOOLBAR_AREAS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">TOOLBAR_AREAS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">addToolBar</span><span class="p">(</span><span class="n">TOOLBAR_AREAS</span><span class="p">[</span><span class="n">position</span><span class="p">],</span> <span class="n">toolbar</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBAR_AREA</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBAR_AREA</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">addToolBar</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">TOOLBAR_AREA</span><span class="p">[</span><span class="n">position</span><span class="p">],</span> <span class="n">toolbar</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -16789,7 +16859,7 @@ add_toolbar_break<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/mainwindow.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">add_toolbar_break</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">ToolbarAreaStr</span> <span class="o">=</span> <span class="s2">"top"</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">add_toolbar_break</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ToolbarAreaStr</span> <span class="o">=</span> <span class="s2">"top"</span><span class="p">):</span>
     <span class="sd">"""Adds a toolbar break to the given area behind the last item.</span>
 
 <span class="sd">    Args:</span>
@@ -16798,9 +16868,9 @@ add_toolbar_break<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: position does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TOOLBAR_AREAS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">TOOLBAR_AREAS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">addToolBarBreak</span><span class="p">(</span><span class="n">TOOLBAR_AREAS</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBAR_AREA</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBAR_AREA</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">addToolBarBreak</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">TOOLBAR_AREA</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -18599,7 +18669,6 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return current state.</p>
-<p>Possible values: "inactive", "pressed", "dragging", "scrolling"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -18610,7 +18679,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['inactive', 'pressed', 'dragging', 'scrolling']</code></td>
 <td>
 <p>state</p>
 </td>
@@ -18620,10 +18689,8 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/scroller.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Return current state.</span>
-
-<span class="sd">    Possible values: "inactive", "pressed", "dragging", "scrolling"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        state</span>
@@ -18924,13 +18991,13 @@ get_context<span class="p">(</span><span class="bp">self</span><span class="p">)
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/shortcut.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ContextStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_context</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextStr</span><span class="p">:</span>
     <span class="sd">"""Return shortcut context.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        shortcut context</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CONTEXT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">context</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -19029,7 +19096,7 @@ set_context<span class="p">(</span><span class="bp">self</span><span class="p">,
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/shortcut.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">ContextStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_context</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextStr</span><span class="p">):</span>
     <span class="sd">"""Set shortcut context.</span>
 
 <span class="sd">    Args:</span>
@@ -19038,9 +19105,9 @@ set_context<span class="p">(</span><span class="bp">self</span><span class="p">,
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: shortcut context does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">context</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONTEXT</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">CONTEXT</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setContext</span><span class="p">(</span><span class="n">CONTEXT</span><span class="p">[</span><span class="n">context</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">context</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setContext</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT</span><span class="p">[</span><span class="n">context</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -19558,7 +19625,6 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current orientation.</p>
-<p>Possible values: "horizontal", "vertical"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -19569,7 +19635,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -19579,15 +19645,13 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/splitter.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">:</span>
     <span class="sd">"""Return current orientation.</span>
-
-<span class="sd">    Possible values: "horizontal", "vertical"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        orientation</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ORIENTATIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -19603,7 +19667,6 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Set the orientation of the splitter.</p>
-<p>Allowed values are "horizontal", "vertical"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -19617,7 +19680,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>orientation</code></td>
-<td><code>str</code></td>
+<td><code>Literal['horizontal', 'vertical']</code></td>
 <td>
 <p>orientation for the splitter</p>
 </td>
@@ -19645,10 +19708,8 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/splitter.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">):</span>
     <span class="sd">"""Set the orientation of the splitter.</span>
-
-<span class="sd">    Allowed values are "horizontal", "vertical"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        orientation: orientation for the splitter</span>
@@ -19656,9 +19717,9 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: orientation does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ORIENTATIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">ORIENTATIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">ORIENTATIONS</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -20053,13 +20114,13 @@ get_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ElideModeStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ElideModeStr</span><span class="p">:</span>
     <span class="sd">"""Return elide mode.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        elide mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ELIDE_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">elideMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ELIDE_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">elideMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -20179,7 +20240,7 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ElideModeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ElideModeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set elide mode.</span>
 
 <span class="sd">    Args:</span>
@@ -20188,9 +20249,9 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid elide mode</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ELIDE_MODE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ELIDE_MODE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setElideMode</span><span class="p">(</span><span class="n">ELIDE_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ELIDE_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ELIDE_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setElideMode</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ELIDE_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -21215,13 +21276,13 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/toolbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StyleStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ToolButtonStyleStr</span><span class="p">:</span>
     <span class="sd">"""Return current style.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">toolButtonStyle</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBUTTON_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">toolButtonStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -21250,7 +21311,7 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>area</code></td>
-<td><code>Literal['left', 'right', 'top', 'bottom', 'all', 'none']</code></td>
+<td><code>Literal['top', 'bottom', 'left', 'right', 'all', 'none']</code></td>
 <td>
 <p>area of the toolbar</p>
 </td>
@@ -21278,7 +21339,7 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/toolbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">is_area_allowed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">ToolbarAreaStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">is_area_allowed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">area</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ToolbarAreaStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Check if toolbar is allowed at specified area.</span>
 
 <span class="sd">    Args:</span>
@@ -21287,9 +21348,9 @@ is_area_allowed<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: area does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">area</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TOOLBAR_AREAS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">TOOLBAR_AREAS</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isAreaAllowed</span><span class="p">(</span><span class="n">TOOLBAR_AREAS</span><span class="p">[</span><span class="n">area</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">area</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBAR_AREA</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBAR_AREA</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isAreaAllowed</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">TOOLBAR_AREA</span><span class="p">[</span><span class="n">area</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -21374,13 +21435,13 @@ get_arrow_type<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/toolbutton.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_arrow_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArrowTypeStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_arrow_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ArrowTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return arrow type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        arrow type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ARROW_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">arrowType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ARROW_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">arrowType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -21458,13 +21519,13 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/toolbutton.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StyleStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ToolButtonStyleStr</span><span class="p">:</span>
     <span class="sd">"""Return toolbutton style.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        toolbutton style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">toolButtonStyle</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBUTTON_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">toolButtonStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -21521,7 +21582,7 @@ set_arrow_type<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/toolbutton.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_arrow_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ArrowTypeStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_arrow_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ArrowTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set the arrow type of the toolbutton.</span>
 
 <span class="sd">    Args:</span>
@@ -21530,9 +21591,9 @@ set_arrow_type<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid arrow type</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ARROW_TYPE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ARROW_TYPE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setArrowType</span><span class="p">(</span><span class="n">ARROW_TYPE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ARROW_TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ARROW_TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setArrowType</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ARROW_TYPE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -21657,7 +21718,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/toolbutton.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">StyleStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ToolButtonStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set the toolbutton style.</span>
 
 <span class="sd">    Args:</span>
@@ -21666,9 +21727,9 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid style</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STYLE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">STYLE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setToolButtonStyle</span><span class="p">(</span><span class="n">STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBUTTON_STYLE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLBUTTON_STYLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setToolButtonStyle</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">TOOLBUTTON_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -22132,13 +22193,13 @@ get_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ContextPolicyStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return current contextmenu policy.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        contextmenu policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CONTEXT_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contextMenuPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contextMenuPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -22174,13 +22235,13 @@ get_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusPolicyStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">FocusPolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return waay the widget accepts keyboard focus.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        str: Focus policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FOCUS_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">focusPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOCUS_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">focusPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -22216,13 +22277,13 @@ get_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_modality</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModalityStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_modality</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ModalityStr</span><span class="p">:</span>
     <span class="sd">"""Get the current modality modes as a string.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        modality mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">MODALITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">windowModality</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">MODALITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">windowModality</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -22258,13 +22319,13 @@ get_window_state<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_window_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WindowStateStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_window_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">WindowStateStr</span><span class="p">:</span>
     <span class="sd">"""Return current window state.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        window state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">WINDOW_STATES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">windowState</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">WINDOW_STATES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">windowState</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -22345,7 +22406,7 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">ContextPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set contextmenu policy for given item view.</span>
 
 <span class="sd">    Args:</span>
@@ -22354,9 +22415,9 @@ set_contextmenu_policy<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: policy does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONTEXT_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">CONTEXT_POLICY</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setContextMenuPolicy</span><span class="p">(</span><span class="n">CONTEXT_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setContextMenuPolicy</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -22413,7 +22474,7 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">FocusPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">FocusPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set the way the widget accepts keyboard focus.</span>
 
 <span class="sd">    Args:</span>
@@ -22422,9 +22483,9 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: Description</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FOCUS_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">FOCUS_POLICY</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">FOCUS_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOCUS_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOCUS_POLICY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFocusPolicy</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">FOCUS_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -22528,7 +22589,7 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_modality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modality</span><span class="p">:</span> <span class="n">ModalityStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_modality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">modality</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ModalityStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set modality for the dialog.</span>
 
 <span class="sd">    Args:</span>
@@ -22537,9 +22598,9 @@ set_modality<span class="p">(</span><span class="bp">self</span><span class="p">
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: modality type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">modality</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MODALITY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">modality</span><span class="p">,</span> <span class="n">MODALITY</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowModality</span><span class="p">(</span><span class="n">MODALITY</span><span class="p">[</span><span class="n">modality</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">modality</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">MODALITY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">modality</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">MODALITY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowModality</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">MODALITY</span><span class="p">[</span><span class="n">modality</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -22660,7 +22721,7 @@ set_window_state<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_window_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">WindowStateStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_window_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">WindowStateStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set window state for given item view.</span>
 
 <span class="sd">    Args:</span>
@@ -22669,9 +22730,9 @@ set_window_state<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: policy does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WINDOW_STATES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">WINDOW_STATES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowState</span><span class="p">(</span><span class="n">WINDOW_STATES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">WINDOW_STATES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">WINDOW_STATES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setWindowState</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">WINDOW_STATES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

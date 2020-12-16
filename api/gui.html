@@ -4473,7 +4473,6 @@ get_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current primaries.</p>
-<p>Possible values: "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4484,7 +4483,7 @@ get_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['custom', 'srgb', 'adobe_rgb', 'dci_p3_d65', 'pro_photo_rgb']</code></td>
 <td>
 <p>primaries</p>
 </td>
@@ -4494,10 +4493,8 @@ get_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/colorspace.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_primaries</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_primaries</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PrimariesStr</span><span class="p">:</span>
     <span class="sd">"""Return current primaries.</span>
-
-<span class="sd">    Possible values: "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        primaries</span>
@@ -4518,7 +4515,6 @@ get_transfer_function<span class="p">(</span><span class="bp">self</span><span c
       </h4>
 <div class="doc doc-contents ">
 <p>Return current transfer function.</p>
-<p>Possible values: "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4529,7 +4525,7 @@ get_transfer_function<span class="p">(</span><span class="bp">self</span><span c
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['custom', 'linear', 'gamma', 'srgb', 'pro_photo_rgb']</code></td>
 <td>
 <p>transfer function</p>
 </td>
@@ -4539,10 +4535,8 @@ get_transfer_function<span class="p">(</span><span class="bp">self</span><span c
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/colorspace.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_transfer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_transfer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TransformFunctionStr</span><span class="p">:</span>
     <span class="sd">"""Return current transfer function.</span>
-
-<span class="sd">    Possible values: "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        transfer function</span>
@@ -4563,7 +4557,6 @@ set_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set primaries.</p>
-<p>Allowed values are "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -4577,7 +4570,7 @@ set_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>primaries</code></td>
-<td><code>str</code></td>
+<td><code>Literal['custom', 'srgb', 'adobe_rgb', 'dci_p3_d65', 'pro_photo_rgb']</code></td>
 <td>
 <p>primaries to use</p>
 </td>
@@ -4605,10 +4598,8 @@ set_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/colorspace.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_primaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">primaries</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_primaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">primaries</span><span class="p">:</span> <span class="n">PrimariesStr</span><span class="p">):</span>
     <span class="sd">"""Set primaries.</span>
-
-<span class="sd">    Allowed values are "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        primaries: primaries to use</span>
@@ -4634,7 +4625,6 @@ set_transfer_function<span class="p">(</span><span class="bp">self</span><span c
       </h4>
 <div class="doc doc-contents ">
 <p>Set transfer function.</p>
-<p>Allowed values are "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -4648,7 +4638,7 @@ set_transfer_function<span class="p">(</span><span class="bp">self</span><span c
 <tbody>
 <tr>
 <td><code>fn</code></td>
-<td><code>str</code></td>
+<td><code>Literal['custom', 'linear', 'gamma', 'srgb', 'pro_photo_rgb']</code></td>
 <td>
 <p>transfer function to use</p>
 </td>
@@ -4676,10 +4666,8 @@ set_transfer_function<span class="p">(</span><span class="bp">self</span><span c
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/colorspace.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_transfer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_transfer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">:</span> <span class="n">TransformFunctionStr</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">):</span>
     <span class="sd">"""Set transfer function.</span>
-
-<span class="sd">    Allowed values are "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        fn: transfer function to use</span>
@@ -4739,7 +4727,7 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['arrow', 'up_arrow', 'cross', 'wait', 'caret']</code></td>
+<td><code>Literal['arrow', 'uparrow', 'cross', 'wait', 'caret', 'size_vertical', 'size_horizonal', 'size_topright', 'size_topleft', 'size_all', 'blank', 'split_vertical', 'split_horizontal', 'pointing_hand', 'forbidden', 'open_hand', 'closed_hand', 'whats_this', 'busy', 'drag_move', 'drag_copy', 'drag_link', 'bitmap']</code></td>
 <td>
 <p>cursor shape</p>
 </td>
@@ -4749,13 +4737,13 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/cursor.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ShapeStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorShapeStr</span><span class="p">:</span>
     <span class="sd">"""Return current cursor shape.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        cursor shape</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SHAPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_SHAPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">shape</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4784,7 +4772,7 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>shape</code></td>
-<td><code>Literal['arrow', 'up_arrow', 'cross', 'wait', 'caret']</code></td>
+<td><code>Literal['arrow', 'uparrow', 'cross', 'wait', 'caret', 'size_vertical', 'size_horizonal', 'size_topright', 'size_topleft', 'size_all', 'blank', 'split_vertical', 'split_horizontal', 'pointing_hand', 'forbidden', 'open_hand', 'closed_hand', 'whats_this', 'busy', 'drag_move', 'drag_copy', 'drag_link', 'bitmap']</code></td>
 <td>
 <p>shape to use</p>
 </td>
@@ -4812,7 +4800,7 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/cursor.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">ShapeStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorShapeStr</span><span class="p">):</span>
     <span class="sd">"""Set cursor shape.</span>
 
 <span class="sd">    Args:</span>
@@ -4821,9 +4809,9 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: shape does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">shape</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SHAPE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">SHAPE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setShape</span><span class="p">(</span><span class="n">SHAPE</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">shape</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_SHAPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_SHAPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setShape</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_SHAPE</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -5851,13 +5839,17 @@ get_application_state<span class="p">()</span>        </code>
           <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">get_application_state</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">ApplicationStateStr</span><span class="p">]:</span>
+<span class="k">def</span> <span class="nf">get_application_state</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">ApplicationStateStr</span><span class="p">]:</span>
     <span class="sd">"""Get the current application state.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        application state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">APPLICATION_STATES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">cls</span><span class="o">.</span><span class="n">applicationState</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="n">k</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">APPLICATION_STATES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">cls</span><span class="o">.</span><span class="n">applicationState</span><span class="p">()</span>
+    <span class="p">]</span>
 </code></pre>
 </div>
 </details>
@@ -5899,13 +5891,13 @@ get_high_dpi_scale_factor_rounding_policy<span class="p">()</span>        </code
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">get_high_dpi_scale_factor_rounding_policy</span><span class="p">(</span>
     <span class="bp">cls</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HighDpiScaleFactorRoundingPolicyStr</span><span class="p">:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">HighDpiScaleFactorRoundingPolicyStr</span><span class="p">:</span>
     <span class="sd">"""Get the current high dpi scale factor rounding policy.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        rounding policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span>
         <span class="bp">cls</span><span class="o">.</span><span class="n">highDpiScaleFactorRoundingPolicy</span><span class="p">()</span>
     <span class="p">]</span>
 </code></pre>
@@ -5943,13 +5935,13 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LayoutDirectionStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">LayoutDirectionStr</span><span class="p">:</span>
     <span class="sd">"""Get the current layout direction.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        layout direction</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">LAYOUT_DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -6011,7 +6003,7 @@ set_high_dpi_scale_factor_rounding_policy<span class="p">(</span><span class="n"
           <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">set_high_dpi_scale_factor_rounding_policy</span><span class="p">(</span>
-    <span class="bp">cls</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">HighDpiScaleFactorRoundingPolicyStr</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">HighDpiScaleFactorRoundingPolicyStr</span>
 <span class="p">):</span>
     <span class="sd">"""Set high dpi scale factor rounding policy.</span>
 
@@ -6021,10 +6013,12 @@ set_high_dpi_scale_factor_rounding_policy<span class="p">(</span><span class="n"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: rounding policy does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span>
+            <span class="n">policy</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span>
+        <span class="p">)</span>
     <span class="bp">cls</span><span class="o">.</span><span class="n">setHighDpiScaleFactorRoundingPolicy</span><span class="p">(</span>
-        <span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">]</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">]</span>
     <span class="p">)</span>
 </code></pre>
 </div>
@@ -6129,7 +6123,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">LayoutDirectionStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">LayoutDirectionStr</span><span class="p">):</span>
     <span class="sd">"""Set layout direction.</span>
 
 <span class="sd">    Args:</span>
@@ -6138,9 +6132,9 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: layout direction does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LAYOUT_DIRECTION</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">LAYOUT_DIRECTION</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setLayoutDirection</span><span class="p">(</span><span class="n">LAYOUT_DIRECTION</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setLayoutDirection</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -7177,7 +7171,6 @@ get_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current mode.</p>
-<p>Possible values: "standard", "full_page"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -7188,7 +7181,7 @@ get_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['standard', 'full_page']</code></td>
 <td>
 <p>mode</p>
 </td>
@@ -7198,10 +7191,8 @@ get_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeStr</span><span class="p">:</span>
     <span class="sd">"""Get the current mode.</span>
-
-<span class="sd">    Possible values: "standard", "full_page"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        mode</span>
@@ -7222,7 +7213,6 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current orientation.</p>
-<p>Possible values: "portrait", "landscape"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -7233,7 +7223,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['portrait', 'landscape']</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -7243,10 +7233,8 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OrientationStr</span><span class="p">:</span>
     <span class="sd">"""Get the current orientation.</span>
-
-<span class="sd">    Possible values: "portrait", "landscape"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        orientation</span>
@@ -7267,7 +7255,6 @@ get_units<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current unit.</p>
-<p>Possible values: "millimeter", "point", "inch", "pica", "didot", "cicero"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -7278,7 +7265,7 @@ get_units<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['millimeter', 'point', 'inch', 'pica', 'didot', 'cicero']</code></td>
 <td>
 <p>unit</p>
 </td>
@@ -7288,10 +7275,8 @@ get_units<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_units</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_units</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnitStr</span><span class="p">:</span>
     <span class="sd">"""Get the current unit.</span>
-
-<span class="sd">    Possible values: "millimeter", "point", "inch", "pica", "didot", "cicero"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        unit</span>
@@ -7312,7 +7297,6 @@ set_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</s
       </h4>
 <div class="doc doc-contents ">
 <p>Set mode.</p>
-<p>Valid values for mode: "standard", "full_page"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -7326,7 +7310,7 @@ set_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['standard', 'full_page']</code></td>
 <td>
 <p>mode</p>
 </td>
@@ -7354,10 +7338,8 @@ set_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ModeStr</span><span class="p">):</span>
     <span class="sd">"""Set mode.</span>
-
-<span class="sd">    Valid values for mode: "standard", "full_page"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: mode</span>
@@ -7383,7 +7365,6 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Set orientation.</p>
-<p>Valid values for orientation: "portrait", "landscape"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -7397,7 +7378,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>orientation</code></td>
-<td><code>str</code></td>
+<td><code>Literal['portrait', 'landscape']</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -7425,10 +7406,8 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">OrientationStr</span><span class="p">):</span>
     <span class="sd">"""Set orientation.</span>
-
-<span class="sd">    Valid values for orientation: "portrait", "landscape"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        orientation: orientation</span>
@@ -7454,7 +7433,6 @@ set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</
       </h4>
 <div class="doc doc-contents ">
 <p>Set unit.</p>
-<p>Valid values for units: "millimeter", "point", "inch", "pica", "didot", "cicero"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -7468,7 +7446,7 @@ set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>unit</code></td>
-<td><code>str</code></td>
+<td><code>Literal['millimeter', 'point', 'inch', 'pica', 'didot', 'cicero']</code></td>
 <td>
 <p>unit</p>
 </td>
@@ -7496,10 +7474,8 @@ set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pagelayout.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_units</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_units</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="n">UnitStr</span><span class="p">):</span>
     <span class="sd">"""Set unit.</span>
-
-<span class="sd">    Valid values for units: "millimeter", "point", "inch", "pica", "didot", "cicero"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        unit: unit</span>
@@ -7895,7 +7871,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'solid', 'dense_1', 'dense_2', 'dense_3', 'dense_4', 'dense_5', 'dense_6', 'dense_7', 'horizontal', 'vertical', 'cross', 'backward_diagonal', 'forward_diagonal', 'crossing_diagonal', 'linear_gradient', 'conical_gradient', 'radial_gradient', 'texture']</code></td>
+<td><code>Literal['none', 'solid', 'dash', 'dot', 'dash_dot', 'dash_dot_dot', 'custom_dash']</code></td>
 <td>
 <p>pen style to use</p>
 </td>
@@ -7940,11 +7916,11 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_pen</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">style</span><span class="p">:</span> <span class="n">PatternStr</span> <span class="o">=</span> <span class="s2">"solid"</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span> <span class="o">=</span> <span class="s2">"solid"</span><span class="p">,</span>
     <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
     <span class="n">color</span><span class="p">:</span> <span class="n">colors</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">"black"</span><span class="p">,</span>
-    <span class="n">join_style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">pen</span><span class="o">.</span><span class="n">JoinStyleStr</span> <span class="o">=</span> <span class="s2">"bevel"</span><span class="p">,</span>
-    <span class="n">cap_style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">pen</span><span class="o">.</span><span class="n">CapStyleStr</span> <span class="o">=</span> <span class="s2">"square"</span><span class="p">,</span>
+    <span class="n">join_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span> <span class="o">=</span> <span class="s2">"bevel"</span><span class="p">,</span>
+    <span class="n">cap_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span> <span class="o">=</span> <span class="s2">"square"</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""Set pen to use.</span>
 
@@ -8001,7 +7977,6 @@ get_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current fill rule.</p>
-<p>Possible values: "odd_even", "winding"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -8012,7 +7987,7 @@ get_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>FillRuleStr</code></td>
+<td><code>constants.FillRuleStr</code></td>
 <td>
 <p>fill rule</p>
 </td>
@@ -8022,15 +7997,13 @@ get_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/painterpath.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_fill_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FillRuleStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_fill_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">FillRuleStr</span><span class="p">:</span>
     <span class="sd">"""Return current fill rule.</span>
-
-<span class="sd">    Possible values: "odd_even", "winding"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        fill rule</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FILL_RULE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fillRule</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILL_RULE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fillRule</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -8046,7 +8019,6 @@ set_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set fill rule.</p>
-<p>Allowed values are "odd_even", "winding"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -8060,7 +8032,7 @@ set_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>rule</code></td>
-<td><code>FillRuleStr</code></td>
+<td><code>constants.FillRuleStr</code></td>
 <td>
 <p>fill rule to use</p>
 </td>
@@ -8088,10 +8060,8 @@ set_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/painterpath.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_fill_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">:</span> <span class="n">FillRuleStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_fill_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">FillRuleStr</span><span class="p">):</span>
     <span class="sd">"""Set fill rule.</span>
-
-<span class="sd">    Allowed values are "odd_even", "winding"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        rule: fill rule to use</span>
@@ -8099,9 +8069,9 @@ set_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: fill rule does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">rule</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FILL_RULE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">FILL_RULE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFillRule</span><span class="p">(</span><span class="n">FILL_RULE</span><span class="p">[</span><span class="n">rule</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">rule</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILL_RULE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">rule</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILL_RULE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFillRule</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">FILL_RULE</span><span class="p">[</span><span class="n">rule</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -8141,7 +8111,6 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current cap style.</p>
-<p>Possible values: "flat", "square", "round"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -8152,7 +8121,7 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['flat', 'square', 'round']</code></td>
 <td>
 <p>cap style</p>
 </td>
@@ -8162,15 +8131,13 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/painterpathstroker.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span><span class="p">:</span>
     <span class="sd">"""Return current cap style.</span>
-
-<span class="sd">    Possible values: "flat", "square", "round"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        cap style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CAP_STYLES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">capStyle</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CAP_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">capStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -8186,7 +8153,6 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return current join style.</p>
-<p>Possible values: "miter", "bevel", "round", "svg_miter"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -8197,7 +8163,7 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['miter', 'bevel', 'roundsvg_miter']</code></td>
 <td>
 <p>join style</p>
 </td>
@@ -8207,15 +8173,13 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/painterpathstroker.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span><span class="p">:</span>
     <span class="sd">"""Return current join style.</span>
-
-<span class="sd">    Possible values: "miter", "bevel", "round", "svg_miter"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        join style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">JOIN_STYLES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">joinStyle</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">JOIN_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">joinStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -8231,7 +8195,6 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set cap style to use.</p>
-<p>Allowed values are "flat", "square", "round"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -8245,7 +8208,7 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['flat', 'square', 'round']</code></td>
 <td>
 <p>cap style to use</p>
 </td>
@@ -8273,10 +8236,8 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/painterpathstroker.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set cap style to use.</span>
-
-<span class="sd">    Allowed values are "flat", "square", "round"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: cap style to use</span>
@@ -8284,9 +8245,9 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: cap style does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CAP_STYLES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">CAP_STYLES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCapStyle</span><span class="p">(</span><span class="n">CAP_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">CAP_STYLE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">CAP_STYLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCapStyle</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">CAP_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -8302,7 +8263,6 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set join style to use.</p>
-<p>Allowed values are "miter", "bevel", "round", "svg_miter"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -8316,7 +8276,7 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['miter', 'bevel', 'roundsvg_miter']</code></td>
 <td>
 <p>join style to use</p>
 </td>
@@ -8344,10 +8304,8 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/painterpathstroker.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set join style to use.</span>
-
-<span class="sd">    Allowed values are "miter", "bevel", "round", "svg_miter"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: join style to use</span>
@@ -8355,9 +8313,9 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: join style does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">JOIN_STYLES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">JOIN_STYLES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setJoinStyle</span><span class="p">(</span><span class="n">JOIN_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">JOIN_STYLE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">JOIN_STYLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setJoinStyle</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">JOIN_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -8531,7 +8489,6 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current cap style.</p>
-<p>Possible values: "flat", "square", "round"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -8552,15 +8509,13 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CapStyleStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span><span class="p">:</span>
     <span class="sd">"""Return current cap style.</span>
-
-<span class="sd">    Possible values: "flat", "square", "round"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        cap style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CAP_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">capStyle</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CAP_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">capStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -8576,7 +8531,6 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return current join style.</p>
-<p>Possible values: "miter", "bevel", "round", "svg_miter"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -8597,15 +8551,13 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JoinStyleStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span><span class="p">:</span>
     <span class="sd">"""Return current join style.</span>
-
-<span class="sd">    Possible values: "miter", "bevel", "round", "svg_miter"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        join style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">JOIN_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">joinStyle</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">JOIN_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">joinStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -8621,8 +8573,6 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return current pen style.</p>
-<p>Possible values: "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",
-"custom_dash"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -8633,7 +8583,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'solid', 'dash', 'dot', 'dash_dot', 'dash_dot_dot', 'custom_dash']</code></td>
 <td>
 <p>pen style</p>
 </td>
@@ -8643,16 +8593,13 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span><span class="p">:</span>
     <span class="sd">"""Return current pen style.</span>
-
-<span class="sd">    Possible values: "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",</span>
-<span class="sd">    "custom_dash"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        pen style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">PEN_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">PEN_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -8668,7 +8615,6 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set cap style to use.</p>
-<p>Allowed values are "flat", "square", "round"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -8710,10 +8656,8 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">CapStyleStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set cap style to use.</span>
-
-<span class="sd">    Allowed values are "flat", "square", "round"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: cap style to use</span>
@@ -8721,9 +8665,9 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: cap style does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CAP_STYLE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">CAP_STYLE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCapStyle</span><span class="p">(</span><span class="n">CAP_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">CAP_STYLE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">CAP_STYLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCapStyle</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">CAP_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -8739,7 +8683,6 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set join style to use.</p>
-<p>Allowed values are "miter", "bevel", "round", "svg_miter"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -8781,10 +8724,8 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">JoinStyleStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set join style to use.</span>
-
-<span class="sd">    Allowed values are "miter", "bevel", "round", "svg_miter"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: join style to use</span>
@@ -8792,9 +8733,9 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: join style does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">JOIN_STYLE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">JOIN_STYLE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setJoinStyle</span><span class="p">(</span><span class="n">JOIN_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">JOIN_STYLE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">JOIN_STYLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setJoinStyle</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">JOIN_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -8810,8 +8751,6 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
       </h4>
 <div class="doc doc-contents ">
 <p>Set pen style to use.</p>
-<p>Allowed values are "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",
-"custom_dash"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -8825,7 +8764,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'solid', 'dash', 'dot', 'dash_dot', 'dash_dot_dot', 'custom_dash']</code></td>
 <td>
 <p>pen style to use</p>
 </td>
@@ -8853,11 +8792,8 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pen.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set pen style to use.</span>
-
-<span class="sd">    Allowed values are "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",</span>
-<span class="sd">    "custom_dash"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: pen style to use</span>
@@ -8865,9 +8801,9 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: pen style does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PEN_STYLE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">PEN_STYLE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">PEN_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">PEN_STYLE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">PEN_STYLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">PEN_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -9127,7 +9063,7 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>StateStr</code></td>
+<td><code>constants.StateStr</code></td>
 <td>
 <p>checkstate</p>
 </td>
@@ -9137,13 +9073,13 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Return checkstate.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">checkState</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -9172,7 +9108,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>state</code></td>
-<td><code>StateStr</code></td>
+<td><code>constants.StateStr</code></td>
 <td>
 <p>checkstate to use</p>
 </td>
@@ -9200,7 +9136,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">StateStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">):</span>
     <span class="sd">"""Set checkstate of the checkbox.</span>
 
 <span class="sd">    Args:</span>
@@ -9209,9 +9145,9 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid checkstate</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">STATE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckState</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -10366,7 +10302,6 @@ clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">
       </h4>
 <div class="doc doc-contents ">
 <p>Clear undo / redo stack.</p>
-<p>Allowed values are "undo", "redo", "undo_and_redo"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10380,7 +10315,7 @@ clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">
 <tbody>
 <tr>
 <td><code>stack</code></td>
-<td><code>str</code></td>
+<td><code>Literal['undo', 'redo', 'undo_and_redo']</code></td>
 <td>
 <p>stack to clear</p>
 </td>
@@ -10408,10 +10343,8 @@ clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">clear_stacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stack</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">clear_stacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stack</span><span class="p">:</span> <span class="n">StackStr</span><span class="p">):</span>
     <span class="sd">"""Clear undo / redo stack.</span>
-
-<span class="sd">    Allowed values are "undo", "redo", "undo_and_redo"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        stack: stack to clear</span>
@@ -10437,7 +10370,6 @@ get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
       </h4>
 <div class="doc doc-contents ">
 <p>Return current cursor move style.</p>
-<p>Possible values: "logical", "visual"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10448,7 +10380,7 @@ get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['logical', 'visual']</code></td>
 <td>
 <p>cursor move style</p>
 </td>
@@ -10458,15 +10390,13 @@ get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorMoveStyleStr</span><span class="p">:</span>
     <span class="sd">"""Return current cursor move style.</span>
-
-<span class="sd">    Possible values: "logical", "visual"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        cursor move style</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">CURSOR_MOVE_STYLES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">defaultCursorMoveStyle</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_MOVE_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">defaultCursorMoveStyle</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -10482,7 +10412,6 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
       </h4>
 <div class="doc doc-contents ">
 <p>Set the cursor move style.</p>
-<p>Allowed values are "logical", "visual"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10496,7 +10425,7 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['logical', 'visual']</code></td>
 <td>
 <p>cursor move style</p>
 </td>
@@ -10524,10 +10453,8 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorMoveStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set the cursor move style.</span>
-
-<span class="sd">    Allowed values are "logical", "visual"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: cursor move style</span>
@@ -10535,9 +10462,9 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: cursor move style does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CURSOR_MOVE_STYLES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">CURSOR_MOVE_STYLES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setDefaultCursorMoveStyle</span><span class="p">(</span><span class="n">CURSOR_MOVE_STYLES</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">style</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_MOVE_STYLE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_MOVE_STYLE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setDefaultCursorMoveStyle</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_MOVE_STYLE</span><span class="p">[</span><span class="n">style</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

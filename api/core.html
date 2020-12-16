@@ -3507,7 +3507,6 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current animation direction.</p>
-<p>Possible values: "forward", "backward"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3531,8 +3530,6 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DirectionStr</span><span class="p">:</span>
     <span class="sd">"""Get the current animation direction.</span>
 
-<span class="sd">    Possible values: "forward", "backward"</span>
-
 <span class="sd">    Returns:</span>
 <span class="sd">        animation direction</span>
 <span class="sd">    """</span>
@@ -3552,7 +3549,6 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current animation state.</p>
-<p>Possible values: "stopped", "paused", "running"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3576,8 +3572,6 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Get the current animation state.</span>
 
-<span class="sd">    Possible values: "stopped", "paused", "running"</span>
-
 <span class="sd">    Returns:</span>
 <span class="sd">        animation state</span>
 <span class="sd">    """</span>
@@ -3597,7 +3591,6 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set animation direction.</p>
-<p>Valid values: "forward", "backward"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3642,8 +3635,6 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">DirectionStr</span><span class="p">):</span>
     <span class="sd">"""Set animation direction.</span>
 
-<span class="sd">    Valid values: "forward", "backward"</span>
-
 <span class="sd">    Args:</span>
 <span class="sd">        direction: animation direction</span>
 
@@ -3668,7 +3659,6 @@ start_animation<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Start the animation.</p>
-<p>Valid values for policy: "keep", "delete"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3712,8 +3702,6 @@ start_animation<span class="p">(</span><span class="bp">self</span><span class="
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">start_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">DeletionPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Start the animation.</span>
-
-<span class="sd">    Valid values for policy: "keep", "delete"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: animation policy</span>
@@ -4780,7 +4768,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Return current timer type.</p>
-<p>Possible values: "precise", "coarse", "very_coarse"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -4801,15 +4788,13 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/deadlinetimer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current timer type.</span>
-
-<span class="sd">    Possible values: "precise", "coarse", "very_coarse"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        timer type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timerType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timerType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4825,7 +4810,6 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
       </h4>
 <div class="doc doc-contents ">
 <p>Set the timer type.</p>
-<p>Allowed values are "precise", "coarse", "very_coarse"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -4867,10 +4851,8 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/deadlinetimer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">TypeStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set the timer type.</span>
-
-<span class="sd">    Allowed values are "precise", "coarse", "very_coarse"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: timer type</span>
@@ -4878,9 +4860,9 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: timer type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TYPE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -7018,7 +7000,6 @@ get_field_alignment<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Get current field alignment.</p>
-<p>Possible values are "left", "right", "center", "accounting_style"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -7029,7 +7010,7 @@ get_field_alignment<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['left', 'right', 'center', 'accounting_style']</code></td>
 <td>
 <p>current field alignment</p>
 </td>
@@ -7039,10 +7020,8 @@ get_field_alignment<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_field_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_field_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FieldAlignmentStr</span><span class="p">:</span>
     <span class="sd">"""Get current field alignment.</span>
-
-<span class="sd">    Possible values are "left", "right", "center", "accounting_style"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current field alignment</span>
@@ -7063,7 +7042,6 @@ get_real_number_notation<span class="p">(</span><span class="bp">self</span><spa
       </h4>
 <div class="doc doc-contents ">
 <p>Get current real number notation.</p>
-<p>Possible values are "scientific", "fixed", "smart"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -7074,7 +7052,7 @@ get_real_number_notation<span class="p">(</span><span class="bp">self</span><spa
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['scientific', 'fixed', 'smart']</code></td>
 <td>
 <p>current real number notation</p>
 </td>
@@ -7084,10 +7062,8 @@ get_real_number_notation<span class="p">(</span><span class="bp">self</span><spa
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_real_number_notation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_real_number_notation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealNumberNotationStr</span><span class="p">:</span>
     <span class="sd">"""Get current real number notation.</span>
-
-<span class="sd">    Possible values are "scientific", "fixed", "smart"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current real number notation</span>
@@ -7108,7 +7084,6 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
       </h4>
 <div class="doc doc-contents ">
 <p>Get current status.</p>
-<p>Possible values are "ok", "read_past_end", "read_corrupt_data", "write_failed"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -7119,7 +7094,7 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['ok', 'read_past_end', 'read_corrupt_data', 'write_failed']</code></td>
 <td>
 <p>current status</p>
 </td>
@@ -7129,10 +7104,8 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span><span class="p">:</span>
     <span class="sd">"""Get current status.</span>
-
-<span class="sd">    Possible values are "ok", "read_past_end", "read_corrupt_data", "write_failed"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current status</span>
@@ -7153,7 +7126,6 @@ set_field_alignment<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set the field alignment.</p>
-<p>Valid values are "left", "right", "center", "accounting_style"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -7167,7 +7139,7 @@ set_field_alignment<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>alignment</code></td>
-<td><code>str</code></td>
+<td><code>Literal['left', 'right', 'center', 'accounting_style']</code></td>
 <td>
 <p>field alignment</p>
 </td>
@@ -7195,10 +7167,8 @@ set_field_alignment<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_field_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_field_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">FieldAlignmentStr</span><span class="p">):</span>
     <span class="sd">"""Set the field alignment.</span>
-
-<span class="sd">    Valid values are "left", "right", "center", "accounting_style"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        alignment: field alignment</span>
@@ -7224,7 +7194,6 @@ set_real_number_notation<span class="p">(</span><span class="bp">self</span><spa
       </h4>
 <div class="doc doc-contents ">
 <p>Set the real number notation.</p>
-<p>Valid values are "scientific", "fixed", "smart"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -7238,7 +7207,7 @@ set_real_number_notation<span class="p">(</span><span class="bp">self</span><spa
 <tbody>
 <tr>
 <td><code>notation</code></td>
-<td><code>str</code></td>
+<td><code>Literal['scientific', 'fixed', 'smart']</code></td>
 <td>
 <p>real number notation</p>
 </td>
@@ -7266,10 +7235,8 @@ set_real_number_notation<span class="p">(</span><span class="bp">self</span><spa
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_real_number_notation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notation</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_real_number_notation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notation</span><span class="p">:</span> <span class="n">RealNumberNotationStr</span><span class="p">):</span>
     <span class="sd">"""Set the real number notation.</span>
-
-<span class="sd">    Valid values are "scientific", "fixed", "smart"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        notation: real number notation</span>
@@ -7295,7 +7262,6 @@ set_status<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Set the status.</p>
-<p>Valid values are "ok", "read_past_end", "read_corrupt_data", "write_failed"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -7309,7 +7275,7 @@ set_status<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>status</code></td>
-<td><code>str</code></td>
+<td><code>Literal['ok', 'read_past_end', 'read_corrupt_data', 'write_failed']</code></td>
 <td>
 <p>status</p>
 </td>
@@ -7337,10 +7303,8 @@ set_status<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">StatusStr</span><span class="p">):</span>
     <span class="sd">"""Set the status.</span>
-
-<span class="sd">    Valid values are "ok", "read_past_end", "read_corrupt_data", "write_failed"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        status: status</span>
@@ -7623,7 +7587,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>TypeStr</code></td>
+<td><code>constants.TimerTypeStr</code></td>
 <td>
 <p>timer type</p>
 </td>
@@ -7633,13 +7597,13 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/timer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current timer type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        timer type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timerType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timerType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -7668,7 +7632,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>TypeStr</code></td>
+<td><code>constants.TimerTypeStr</code></td>
 <td>
 <p>timer type</p>
 </td>
@@ -7696,7 +7660,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/timer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">TypeStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set the timer type.</span>
 
 <span class="sd">    Args:</span>
@@ -7705,9 +7669,9 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: timer type does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TYPE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">TYPE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

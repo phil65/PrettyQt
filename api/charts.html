@@ -1812,7 +1812,6 @@ get_labels_position<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return current labels position.</p>
-<p>Possible values: "center", "on_value"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1823,7 +1822,7 @@ get_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>LabelsPositionStr</code></td>
 <td>
 <p>labels position</p>
 </td>
@@ -1833,10 +1832,8 @@ get_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/categoryaxis.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LabelsPositionStr</span><span class="p">:</span>
     <span class="sd">"""Return current labels position.</span>
-
-<span class="sd">    Possible values: "center", "on_value"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        labels position</span>
@@ -1857,7 +1854,6 @@ set_labels_position<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set the labels position.</p>
-<p>Allowed values are "center", "on_value"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1871,7 +1867,7 @@ set_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>position</code></td>
-<td><code>str</code></td>
+<td><code>LabelsPositionStr</code></td>
 <td>
 <p>labels position</p>
 </td>
@@ -1899,10 +1895,8 @@ set_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/categoryaxis.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">LabelsPositionStr</span><span class="p">):</span>
     <span class="sd">"""Set the labels position.</span>
-
-<span class="sd">    Allowed values are "center", "on_value"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        position: labels position</span>
@@ -2369,7 +2363,6 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current alignment.</p>
-<p>Possible values: "left", "right", "top", "bottom"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2380,7 +2373,7 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['left', 'right', 'top', 'bottom']</code></td>
 <td>
 <p>alignment</p>
 </td>
@@ -2390,10 +2383,8 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/legend.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span><span class="p">:</span>
     <span class="sd">"""Return current alignment.</span>
-
-<span class="sd">    Possible values: "left", "right", "top", "bottom"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        alignment</span>
@@ -2414,7 +2405,6 @@ get_marker_shape<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return current marker shape.</p>
-<p>Possible values are "default", "rectangle", "circle", "from_series"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2425,7 +2415,7 @@ get_marker_shape<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['default', 'rectangle', 'circle', 'from_series']</code></td>
 <td>
 <p>Marker shape</p>
 </td>
@@ -2435,10 +2425,8 @@ get_marker_shape<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/legend.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_marker_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_marker_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MarkerShapeStr</span><span class="p">:</span>
     <span class="sd">"""Return current marker shape.</span>
-
-<span class="sd">    Possible values are "default", "rectangle", "circle", "from_series"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Marker shape</span>
@@ -2459,7 +2447,6 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set the alignment of the legend.</p>
-<p>Allowed values are "left", "right", "top", "bottom"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2504,8 +2491,6 @@ set_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span><span class="p">):</span>
     <span class="sd">"""Set the alignment of the legend.</span>
 
-<span class="sd">    Allowed values are "left", "right", "top", "bottom"</span>
-
 <span class="sd">    Args:</span>
 <span class="sd">        alignment: alignment for the legend</span>
 
@@ -2530,7 +2515,6 @@ set_marker_shape<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set the marker shape.</p>
-<p>Allowed values are "default", "rectangle", "circle", "from_series"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2544,7 +2528,7 @@ set_marker_shape<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>shape</code></td>
-<td><code>str</code></td>
+<td><code>Literal['default', 'rectangle', 'circle', 'from_series']</code></td>
 <td>
 <p>marker shape</p>
 </td>
@@ -2572,10 +2556,8 @@ set_marker_shape<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/legend.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_marker_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_marker_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">MarkerShapeStr</span><span class="p">):</span>
     <span class="sd">"""Set the marker shape.</span>
-
-<span class="sd">    Allowed values are "default", "rectangle", "circle", "from_series"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        shape: marker shape</span>
