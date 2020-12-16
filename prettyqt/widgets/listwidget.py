@@ -152,7 +152,7 @@ class ListWidget(QtWidgets.QListWidget):
     def scroll_to_item(
         self,
         item: QtWidgets.QListWidgetItem,
-        mode: widgets.abstractitemview.SCROLL_HINT_STR = "ensure_visible",
+        mode: widgets.abstractitemview.ScrollHintStr = "ensure_visible",
     ):
         if mode not in widgets.abstractitemview.SCROLL_HINT:
             raise InvalidParamError(mode, widgets.abstractitemview.SCROLL_HINT)

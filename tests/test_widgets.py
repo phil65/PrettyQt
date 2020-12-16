@@ -1349,6 +1349,7 @@ def test_treeview(qtbot):
     widget.scroll_to_top()
     widget.current_index()
     widget.set_selection_mode("extended")
+    widget.set_drag_drop_mode("drop")
     widget.set_selection_behaviour("rows")
     widget.set_horizontal_scrollbar_policy("always_on")
     widget.set_vertical_scrollbar_policy("always_on")

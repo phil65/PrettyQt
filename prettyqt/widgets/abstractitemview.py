@@ -14,13 +14,15 @@ TRIGGERS = bidict(
     edit_key=QtWidgets.QAbstractItemView.EditKeyPressed,
 )
 
+TriggerStr = Literal["none", "double_click", "edit_key"]
+
 SELECTION_BEHAVIOUR = bidict(
     rows=QtWidgets.QAbstractItemView.SelectRows,
     columns=QtWidgets.QAbstractItemView.SelectColumns,
     items=QtWidgets.QAbstractItemView.SelectItems,
 )
 
-SELECTION_BEHAVIOUR_STR = Literal["rows", "columns", "items"]
+SelectionBehaviourStr = Literal["rows", "columns", "items"]
 
 SELECTION_MODE = bidict(
     single=QtWidgets.QAbstractItemView.SingleSelection,
@@ -29,14 +31,14 @@ SELECTION_MODE = bidict(
     none=QtWidgets.QAbstractItemView.NoSelection,
 )
 
-SELECTION_MODE_STR = Literal["single", "extended", "multi", "none"]
+SelectionModeStr = Literal["single", "extended", "multi", "none"]
 
 SCROLL_MODE = bidict(
     item=QtWidgets.QAbstractItemView.ScrollPerItem,
     pixel=QtWidgets.QAbstractItemView.ScrollPerPixel,
 )
 
-SCROLL_MODE_STR = Literal["item", "pixel"]
+ScrollModeStr = Literal["item", "pixel"]
 
 SCROLL_HINT = bidict(
     ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
@@ -45,9 +47,19 @@ SCROLL_HINT = bidict(
     position_at_center=QtWidgets.QAbstractItemView.PositionAtCenter,
 )
 
-SCROLL_HINT_STR = Literal[
+ScrollHintStr = Literal[
     "ensure_visible", "position_at_top", "position_at_bottom", "position_at_center"
 ]
+
+DRAG_DROP_MODE = bidict(
+    none=QtWidgets.QAbstractItemView.NoDragDrop,
+    drag=QtWidgets.QAbstractItemView.DragOnly,
+    drop=QtWidgets.QAbstractItemView.DropOnly,
+    drag_drop=QtWidgets.QAbstractItemView.DragDrop,
+    internal_move=QtWidgets.QAbstractItemView.InternalMove,
+)
+
+DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal"]
 
 QtWidgets.QAbstractItemView.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -171,7 +183,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
     def get_edit_triggers(self) -> List[str]:
         return [k for k, v in TRIGGERS.items() if v & self.editTriggers()]
 
-    def set_selection_behaviour(self, behaviour: SELECTION_BEHAVIOUR_STR):
+    def set_selection_behaviour(self, behaviour: SelectionBehaviourStr):
         """Set selection behaviour for given item view.
 
         Args:
@@ -184,7 +196,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             raise InvalidParamError(behaviour, SELECTION_BEHAVIOUR)
         self.setSelectionBehavior(SELECTION_BEHAVIOUR[behaviour])
 
-    def get_selection_behaviour(self) -> SELECTION_BEHAVIOUR_STR:
+    def get_selection_behaviour(self) -> SelectionBehaviourStr:
         """Return current selection behaviour.
 
         Returns:
@@ -192,7 +204,28 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         return SELECTION_BEHAVIOUR.inverse[self.selectionBehavior()]
 
-    def set_selection_mode(self, mode: Optional[SELECTION_MODE_STR]):
+    def set_drag_drop_mode(self, mode: DragDropModeStr):
+        """Set drag-drop mode for given item view.
+
+        Args:
+            mode: drag-drop mode to use
+
+        Raises:
+            InvalidParamError: mode does not exist
+        """
+        if mode not in DRAG_DROP_MODE:
+            raise InvalidParamError(mode, DRAG_DROP_MODE)
+        self.setDragDropMode(DRAG_DROP_MODE[mode])
+
+    def get_drag_drop_mode(self) -> DragDropModeStr:
+        """Return current drag-drop mode.
+
+        Returns:
+            drag-drop mode
+        """
+        return DRAG_DROP_MODE.inverse[self.dragDropMode()]
+
+    def set_selection_mode(self, mode: Optional[SelectionModeStr]):
         """Set selection mode for given item view.
 
         Args:
@@ -207,7 +240,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             raise InvalidParamError(mode, SELECTION_MODE)
         self.setSelectionMode(SELECTION_MODE[mode])
 
-    def get_selection_mode(self) -> SELECTION_MODE_STR:
+    def get_selection_mode(self) -> SelectionModeStr:
         """Return current selection mode.
 
         Returns:
@@ -215,7 +248,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         return SELECTION_MODE.inverse[self.selectionMode()]
 
-    def set_scroll_mode(self, mode: SCROLL_MODE_STR):
+    def set_scroll_mode(self, mode: ScrollModeStr):
         """Set the scroll mode for both directions.
 
         Args:
@@ -229,7 +262,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setHorizontalScrollMode(SCROLL_MODE[mode])
         self.setVerticalScrollMode(SCROLL_MODE[mode])
 
-    def set_horizontal_scroll_mode(self, mode: SCROLL_MODE_STR):
+    def set_horizontal_scroll_mode(self, mode: ScrollModeStr):
         """Set the horizontal scroll mode.
 
         Args:
@@ -242,7 +275,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             raise InvalidParamError(mode, SCROLL_MODE)
         self.setHorizontalScrollMode(SCROLL_MODE[mode])
 
-    def set_vertical_scroll_mode(self, mode: SCROLL_MODE_STR):
+    def set_vertical_scroll_mode(self, mode: ScrollModeStr):
         """Set the vertical scroll mode.
 
         Args:
@@ -290,7 +323,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         idx = self.model().createIndex(self.model().rowCount() - 1, 0)
         self.setCurrentIndex(idx)
 
-    def scroll_to(self, index, mode: SCROLL_HINT_STR = "ensure_visible"):
+    def scroll_to(self, index, mode: ScrollHintStr = "ensure_visible"):
         if mode not in SCROLL_HINT:
             raise InvalidParamError(mode, SCROLL_HINT)
         self.scrollTo(index, SCROLL_HINT[mode])
