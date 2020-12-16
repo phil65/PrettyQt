@@ -45,7 +45,7 @@ class CompositeValidator(gui.Validator):
 
     def validate(self, text: str, pos: int = 0) -> tuple:
         vals = [v.validate(text, pos)[0] for v in self.validators]
-        return (min(vals), text, pos)
+        return min(vals), text, pos
 
 
 if __name__ == "__main__":

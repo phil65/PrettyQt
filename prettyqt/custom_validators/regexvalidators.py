@@ -40,14 +40,14 @@ class BaseRegexValidator(gui.Validator):
         if self.regex is None:
             raise TypeError("Validator not initialized")
         if text == "":
-            return (self.Intermediate, text, pos)
+            return self.Intermediate, text, pos
         match = self.regex.match(text, partial=True)
         if match is None:
-            return (self.Invalid, text, pos)
+            return self.Invalid, text, pos
         if match.partial:
-            return (self.Intermediate, text, pos)
+            return self.Intermediate, text, pos
         else:
-            return (self.Acceptable, text, pos)
+            return self.Acceptable, text, pos
 
 
 class IntListValidator(BaseRegexValidator):

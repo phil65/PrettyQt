@@ -4,8 +4,8 @@ from prettyqt import gui
 class NotZeroValidator(gui.Validator):
     def validate(self, text: str, pos: int = 0) -> tuple:
         if text == "0":
-            return (self.Intermediate, text, pos)
-        return (self.Acceptable, text, pos)
+            return self.Intermediate, text, pos
+        return self.Acceptable, text, pos
 
     def __eq__(self, other: object):
         return isinstance(other, NotZeroValidator)

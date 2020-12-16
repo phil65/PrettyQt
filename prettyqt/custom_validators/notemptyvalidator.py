@@ -8,7 +8,7 @@ class NotEmptyValidator(gui.Validator):
     def validate(self, text: str, pos: int = 0) -> tuple:
         if text == "":
             return (self.Intermediate, text, pos)
-        return (self.Acceptable, text, pos)
+        return self.Acceptable, text, pos
 
 
 if __name__ == "__main__":
