@@ -1,14 +1,18 @@
-from typing import Optional
+from typing import Optional, Dict
 
 from qtpy import QtGui
 
 
 class PixmapCache(QtGui.QPixmapCache):
+    MAP: Dict[str, QtGui.QPixmapCache.Key] = dict()
+
     def __setitem__(self, key: str, value: QtGui.QPixmap):
-        self.insert(key, value)
+        cache_key = self.insert(value)
+        self.MAP[key] = cache_key
 
     def __getitem__(self, key: str) -> Optional[QtGui.QPixmap]:
-        return self.find(key)
+        cache_key = self.MAP[key]
+        return self.find(cache_key)
 
     def __delitem__(self, key: str):
         self.remove(key)

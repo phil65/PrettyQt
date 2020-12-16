@@ -157,8 +157,7 @@ def test_date():
 
 
 def test_datetime():
-    date = core.Date(2000, 11, 11)
-    dt = core.DateTime(date)
+    dt = core.DateTime(2000, 11, 11, 0, 0, 0)
     with open("data.pkl", "wb") as jar:
         pickle.dump(dt, jar)
     with open("data.pkl", "rb") as jar:
