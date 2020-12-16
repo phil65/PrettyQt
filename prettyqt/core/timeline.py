@@ -71,7 +71,7 @@ class TimeLine(QtCore.QTimeLine):
         self.setEasingCurve(curve)
         return curve
 
-    def get_easing(self) -> Union[str, Callable[[float], float]]:
+    def get_easing(self) -> Union[core.easingcurve.TypeStr, Callable[[float], float]]:
         curve = core.EasingCurve(self.easingCurve())
         typ = curve.get_type()
         if typ == "custom":
