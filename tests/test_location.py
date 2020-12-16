@@ -109,9 +109,10 @@ def test_placeattribute():
 def test_placecategory():
     cat = location.PlaceCategory()
     cat.get_icon()
-    assert cat.get_visibility() == "unspecified"
     assert bool(cat) is False
     assert str(cat) == ""
+    if qtpy.API == "pyqt5":
+        assert cat.get_visibility() == "unspecified"
 
 
 def test_placecontactdetail():
@@ -261,12 +262,14 @@ def test_place():
     place.get_primary_website()
     place.get_ratings()
     place.get_supplier()
-    assert place.get_visibility() == "unspecified"
+    if qtpy.API == "pyqt5":
+        assert place.get_visibility() == "unspecified"
 
 
 def test_placesearchrequest():
     request = location.PlaceSearchRequest()
-    request.get_visibility_scope()
+    if qtpy.API == "pyqt5":
+        request.get_visibility_scope()
     request.get_categories()
     request.get_search_area()
     request.set_relevance_hint("distance")
