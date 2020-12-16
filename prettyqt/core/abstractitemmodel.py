@@ -1,5 +1,5 @@
 import contextlib
-from typing import Optional, Tuple
+from typing import Optional
 
 from qtpy import QtCore
 
@@ -31,8 +31,9 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         """Return amount of rows."""
         return self.rowCount()
 
-    def __getitem__(self, index: Tuple[int, int]) -> QtCore.QModelIndex:
-        return self.index(*index)
+    # causes issues with PySide2
+    # def __getitem__(self, index: Tuple[int, int]) -> QtCore.QModelIndex:
+    #     return self.index(*index)
 
     def check_index(
         self,
