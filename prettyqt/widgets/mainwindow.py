@@ -1,31 +1,11 @@
-from typing import List, Optional, Sequence, Literal
+from typing import List, Optional, Sequence
 import logging
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, widgets, constants
+from prettyqt.utils import InvalidParamError
 
-
-DOCK_POSITION = bidict(
-    top=QtCore.Qt.TopDockWidgetArea,
-    bottom=QtCore.Qt.BottomDockWidgetArea,
-    left=QtCore.Qt.LeftDockWidgetArea,
-    right=QtCore.Qt.RightDockWidgetArea,
-)
-
-DockPositionStr = Literal["top", "bottom", "left", "right"]
-
-TOOLBAR_AREAS = bidict(
-    left=QtCore.Qt.LeftToolBarArea,
-    right=QtCore.Qt.RightToolBarArea,
-    top=QtCore.Qt.TopToolBarArea,
-    bottom=QtCore.Qt.BottomToolBarArea,
-    all=QtCore.Qt.AllToolBarAreas,
-    none=QtCore.Qt.NoToolBarArea,
-)
-
-ToolbarAreaStr = Literal["top", "bottom", "left", "right", "all", "none"]
 
 logger = logging.getLogger(__name__)
 
@@ -101,7 +81,9 @@ class MainWindow(QtWidgets.QMainWindow):
             menu.add(action)
         return menu
 
-    def add_toolbar(self, toolbar: QtWidgets.QToolBar, position: ToolbarAreaStr = "top"):
+    def add_toolbar(
+        self, toolbar: QtWidgets.QToolBar, position: constants.ToolbarAreaStr = "top"
+    ):
         """Adds a toolbar to the mainmenu at specified area.
 
         Args:
@@ -111,11 +93,11 @@ class MainWindow(QtWidgets.QMainWindow):
         Raises:
             InvalidParamError: position does not exist
         """
-        if position not in TOOLBAR_AREAS:
-            raise InvalidParamError(position, TOOLBAR_AREAS)
-        self.addToolBar(TOOLBAR_AREAS[position], toolbar)
+        if position not in constants.TOOLBAR_AREA:
+            raise InvalidParamError(position, constants.TOOLBAR_AREA)
+        self.addToolBar(constants.TOOLBAR_AREA[position], toolbar)
 
-    def add_toolbar_break(self, position: ToolbarAreaStr = "top"):
+    def add_toolbar_break(self, position: constants.ToolbarAreaStr = "top"):
         """Adds a toolbar break to the given area behind the last item.
 
         Args:
@@ -124,9 +106,9 @@ class MainWindow(QtWidgets.QMainWindow):
         Raises:
             InvalidParamError: position does not exist
         """
-        if position not in TOOLBAR_AREAS:
-            raise InvalidParamError(position, TOOLBAR_AREAS)
-        self.addToolBarBreak(TOOLBAR_AREAS[position])
+        if position not in constants.TOOLBAR_AREA:
+            raise InvalidParamError(position, constants.TOOLBAR_AREA)
+        self.addToolBarBreak(constants.TOOLBAR_AREA[position])
 
     def load_window_state(self, recursive: bool = False) -> bool:
         settings = core.Settings()
@@ -169,7 +151,7 @@ class MainWindow(QtWidgets.QMainWindow):
         name: str,
         title: str,
         vertical: bool = True,
-        position: DockPositionStr = "left",
+        position: constants.DockPositionStr = "left",
     ) -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, name=name, title=title)
         widget = widgets.Widget()
@@ -182,9 +164,11 @@ class MainWindow(QtWidgets.QMainWindow):
         return dock_widget
 
     def add_dockwidget(
-        self, dockwidget: QtWidgets.QDockWidget, position: DockPositionStr = "left"
+        self,
+        dockwidget: QtWidgets.QDockWidget,
+        position: constants.DockPositionStr = "left",
     ):
-        position = DOCK_POSITION[position]
+        position = constants.DOCK_POSITION[position]
         self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dockwidget)
 
     def remove_dockwidgets(self, dockwidgets: Sequence[QtWidgets.QDockWidget]):

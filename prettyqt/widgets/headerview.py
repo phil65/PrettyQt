@@ -1,15 +1,13 @@
 import functools
 import hashlib
-from typing import Iterable, Optional, Union, List
+from typing import Iterable, Optional, Union, List, Literal
 
 from deprecated import deprecated
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
-
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
 
 MODES = bidict(
     interactive=QtWidgets.QHeaderView.Interactive,
@@ -18,6 +16,7 @@ MODES = bidict(
     resize_to_contents=QtWidgets.QHeaderView.ResizeToContents,
 )
 
+ModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]
 
 QtWidgets.QHeaderView.__bases__ = (widgets.AbstractItemView,)
 
@@ -27,10 +26,12 @@ class HeaderView(QtWidgets.QHeaderView):
     section_vis_changed = QtCore.Signal(int, bool)
 
     def __init__(
-        self, orientation: Union[str, int], parent: Optional[QtWidgets.QWidget] = None
+        self,
+        orientation: Union[constants.OrientationStr, int],
+        parent: Optional[QtWidgets.QWidget] = None,
     ):
-        if orientation in ORIENTATIONS:
-            orientation = ORIENTATIONS[orientation]
+        if orientation in constants.ORIENTATION:
+            orientation = constants.ORIENTATION[orientation]
         super().__init__(orientation, parent=parent)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
@@ -60,14 +61,14 @@ class HeaderView(QtWidgets.QHeaderView):
             return True
         return False
 
-    def resize_sections(self, mode: str):
+    def resize_sections(self, mode: ModeStr):
         self.resizeSections(MODES[mode])
 
     @deprecated(reason="This method is deprecated, use set_resize_mode instead.")
-    def resize_mode(self, mode: str, col: Optional[int] = None):
+    def resize_mode(self, mode: ModeStr, col: Optional[int] = None):
         self.set_resize_mode(mode, col)
 
-    def set_resize_mode(self, mode: str, col: Optional[int] = None):
+    def set_resize_mode(self, mode: ModeStr, col: Optional[int] = None):
         if mode not in MODES:
             raise InvalidParamError(mode, MODES)
         if col is None:

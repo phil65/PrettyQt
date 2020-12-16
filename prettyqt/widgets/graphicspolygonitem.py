@@ -1,14 +1,7 @@
-from typing import Literal
+from qtpy import QtWidgets
 
-from qtpy import QtWidgets, QtCore
-
-from prettyqt import widgets, gui
-from prettyqt.utils import bidict, InvalidParamError
-
-
-FILL_RULE = bidict(odd_even=QtCore.Qt.OddEvenFill, winding=QtCore.Qt.WindingFill)
-
-FillRuleStr = Literal["odd_even", "winding"]
+from prettyqt import widgets, gui, constants
+from prettyqt.utils import InvalidParamError
 
 
 QtWidgets.QGraphicsPolygonItem.__bases__ = (widgets.AbstractGraphicsShapeItem,)
@@ -21,10 +14,10 @@ class GraphicsPolygonItem(QtWidgets.QGraphicsPolygonItem):
     def serialize_fields(self):
         return dict(polygon=self.get_polygon(), fill_rule=self.get_fill_rule())
 
-    def set_fill_rule(self, rule: FillRuleStr):
-        if rule not in FILL_RULE:
-            raise InvalidParamError(rule, FILL_RULE)
-        self.setFillRule(FILL_RULE[rule])
+    def set_fill_rule(self, rule: constants.FillRuleStr):
+        if rule not in constants.FILL_RULE:
+            raise InvalidParamError(rule, constants.FILL_RULE)
+        self.setFillRule(constants.FILL_RULE[rule])
 
-    def get_fill_rule(self) -> FillRuleStr:
-        return FILL_RULE.inverse[self.fillRule()]
+    def get_fill_rule(self) -> constants.FillRuleStr:
+        return constants.FILL_RULE.inverse[self.fillRule()]

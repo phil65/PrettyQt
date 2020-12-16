@@ -1,8 +1,8 @@
-from typing import Optional, Callable
+from typing import Optional, Callable, Literal
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui
+from prettyqt import core, gui, constants
 from prettyqt.utils import bidict, InvalidParamError, helpers, prettyprinter
 
 
@@ -12,12 +12,7 @@ PRIORITIES = bidict(
     high=QtWidgets.QAction.HighPriority,
 )
 
-CONTEXTS = bidict(
-    widget=QtCore.Qt.WidgetShortcut,
-    widget_with_children=QtCore.Qt.WidgetWithChildrenShortcut,
-    window=QtCore.Qt.WindowShortcut,
-    application=QtCore.Qt.ApplicationShortcut,
-)
+PriorityStr = Literal["low", "normal", "high"]
 
 ROLES = bidict(
     none=QtWidgets.QAction.NoRole,
@@ -28,6 +23,16 @@ ROLES = bidict(
     preferences=QtWidgets.QAction.PreferencesRole,
     quit=QtWidgets.QAction.QuitRole,
 )
+
+RoleStr = Literal[
+    "none",
+    "text_heuristic",
+    "application_specific",
+    "about_qt",
+    "about",
+    "preferences",
+    "quit",
+]
 
 QtWidgets.QAction.__bases__ = (core.Object,)
 
@@ -142,10 +147,8 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
     def set_menu(self, menu):
         self.setMenu(menu)
 
-    def set_priority(self, priority: str):
+    def set_priority(self, priority: PriorityStr):
         """Set priority of the action.
-
-        Allowed values are "low", "normal", "high"
 
         Args:
             priority: priority for the action
@@ -157,20 +160,16 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
             raise InvalidParamError(priority, PRIORITIES)
         self.setPriority(PRIORITIES[priority])
 
-    def get_priority(self) -> str:
+    def get_priority(self) -> PriorityStr:
         """Return current priority.
-
-        Possible values: "low", "normal", "high"
 
         Returns:
             priority
         """
         return PRIORITIES.inverse[self.priority()]
 
-    def set_shortcut_context(self, context: str):
+    def set_shortcut_context(self, context: constants.ContextStr):
         """Set shortcut context.
-
-        Allowed values are "widget", "widget_with_children", "window", "application"
 
         Args:
             context: shortcut context
@@ -178,25 +177,20 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         Raises:
             InvalidParamError: shortcut context does not exist
         """
-        if context not in CONTEXTS:
-            raise InvalidParamError(context, CONTEXTS)
-        self.setShortcutContext(CONTEXTS[context])
+        if context not in constants.CONTEXT:
+            raise InvalidParamError(context, constants.CONTEXT)
+        self.setShortcutContext(constants.CONTEXT[context])
 
-    def get_shortcut_context(self) -> str:
+    def get_shortcut_context(self) -> constants.ContextStr:
         """Return shortcut context.
-
-        Possible values: "widget", "widget_with_children", "window", "application"
 
         Returns:
             shortcut context
         """
-        return CONTEXTS.inverse[self.shortcutContext()]
+        return constants.CONTEXT.inverse[self.shortcutContext()]
 
-    def set_menu_role(self, role: str):
+    def set_menu_role(self, role: RoleStr):
         """Set menu role.
-
-        Allowed values are "none", "text_heuristic", "application_specific", "about_qt",
-        "about", "preferences", "quit"
 
         Args:
             role: menu role
@@ -208,11 +202,8 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
             raise InvalidParamError(role, ROLES)
         self.setMenuRole(ROLES[role])
 
-    def get_menu_role(self) -> str:
+    def get_menu_role(self) -> RoleStr:
         """Return menu role.
-
-        Possible values: "none", "text_heuristic", "application_specific", "about_qt",
-        "about", "preferences", "quit"
 
         Returns:
             menu role

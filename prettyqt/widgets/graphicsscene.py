@@ -2,23 +2,9 @@ from typing import List, Optional, Union, Tuple, Literal
 
 from qtpy import QtWidgets, QtGui, QtCore
 
-from prettyqt import core, widgets, gui
+from prettyqt import core, widgets, gui, constants
 from prettyqt.utils import InvalidParamError, bidict
 
-
-ITEM_SELECTION_MODE = bidict(
-    contains_shape=QtCore.Qt.ContainsItemShape,
-    intersects_shape=QtCore.Qt.IntersectsItemShape,
-    contains_bounding_rect=QtCore.Qt.ContainsItemBoundingRect,
-    intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
-)
-
-ItemSelectionModeStr = Literal[
-    "contains_shape",
-    "intersects_shape",
-    "contains_bounding_rect",
-    "intersects_bounding_rect",
-]
 
 SCENE_LAYER = bidict(
     item=QtWidgets.QGraphicsScene.ItemLayer,
@@ -197,11 +183,11 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
     def colliding_items(
         self,
         item: QtWidgets.QGraphicsItem,
-        mode: ItemSelectionModeStr = "intersects_shape",
+        mode: constants.ItemSelectionModeStr = "intersects_shape",
     ) -> List[QtWidgets.QGraphicsItem]:
-        if mode not in ITEM_SELECTION_MODE:
-            raise InvalidParamError(mode, ITEM_SELECTION_MODE)
-        return self.collidingItems(item, ITEM_SELECTION_MODE[mode])
+        if mode not in constants.ITEM_SELECTION_MODE:
+            raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
+        return self.collidingItems(item, constants.ITEM_SELECTION_MODE[mode])
 
     def add_item_group(
         self, *items: QtWidgets.QGraphicsItem

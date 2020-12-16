@@ -1,39 +1,8 @@
-from typing import Literal
+from qtpy import QtGui
 
-from qtpy import QtGui, QtCore
-
-from prettyqt import core, gui
+from prettyqt import core, gui, constants
 from prettyqt.utils import colors
-from prettyqt.utils import bidict, InvalidParamError
-
-PEN_STYLE = bidict(
-    none=QtCore.Qt.NoPen,
-    solid=QtCore.Qt.SolidLine,
-    dash=QtCore.Qt.DashLine,
-    dot=QtCore.Qt.DotLine,
-    dash_dot=QtCore.Qt.DashDotLine,
-    dash_dot_dot=QtCore.Qt.DashDotDotLine,
-    custom_dash=QtCore.Qt.CustomDashLine,
-)
-
-PenStyleStr = Literal[
-    "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot", "custom_dash"
-]
-
-CAP_STYLE = bidict(
-    flat=QtCore.Qt.FlatCap, square=QtCore.Qt.SquareCap, round=QtCore.Qt.RoundCap
-)
-
-CapStyleStr = Literal["flat", "square", "round"]
-
-JOIN_STYLE = bidict(
-    miter=QtCore.Qt.MiterJoin,
-    bevel=QtCore.Qt.BevelJoin,
-    round=QtCore.Qt.RoundJoin,
-    svg_miter=QtCore.Qt.SvgMiterJoin,
-)
-
-JoinStyleStr = Literal["miter", "bevel", "round" "svg_miter"]
+from prettyqt.utils import InvalidParamError
 
 
 class Pen(QtGui.QPen):
@@ -63,10 +32,8 @@ class Pen(QtGui.QPen):
     def get_brush(self) -> gui.Brush:
         return gui.Brush(self.brush())
 
-    def set_cap_style(self, style: CapStyleStr):
+    def set_cap_style(self, style: constants.CapStyleStr):
         """Set cap style to use.
-
-        Allowed values are "flat", "square", "round"
 
         Args:
             style: cap style to use
@@ -74,24 +41,20 @@ class Pen(QtGui.QPen):
         Raises:
             InvalidParamError: cap style does not exist
         """
-        if style not in CAP_STYLE:
-            raise InvalidParamError(style, CAP_STYLE)
-        self.setCapStyle(CAP_STYLE[style])
+        if style not in constants.CAP_STYLE:
+            raise InvalidParamError(style, constants.CAP_STYLE)
+        self.setCapStyle(constants.CAP_STYLE[style])
 
-    def get_cap_style(self) -> CapStyleStr:
+    def get_cap_style(self) -> constants.CapStyleStr:
         """Return current cap style.
-
-        Possible values: "flat", "square", "round"
 
         Returns:
             cap style
         """
-        return CAP_STYLE.inverse[self.capStyle()]
+        return constants.CAP_STYLE.inverse[self.capStyle()]
 
-    def set_join_style(self, style: JoinStyleStr):
+    def set_join_style(self, style: constants.JoinStyleStr):
         """Set join style to use.
-
-        Allowed values are "miter", "bevel", "round", "svg_miter"
 
         Args:
             style: join style to use
@@ -99,25 +62,20 @@ class Pen(QtGui.QPen):
         Raises:
             InvalidParamError: join style does not exist
         """
-        if style not in JOIN_STYLE:
-            raise InvalidParamError(style, JOIN_STYLE)
-        self.setJoinStyle(JOIN_STYLE[style])
+        if style not in constants.JOIN_STYLE:
+            raise InvalidParamError(style, constants.JOIN_STYLE)
+        self.setJoinStyle(constants.JOIN_STYLE[style])
 
-    def get_join_style(self) -> JoinStyleStr:
+    def get_join_style(self) -> constants.JoinStyleStr:
         """Return current join style.
-
-        Possible values: "miter", "bevel", "round", "svg_miter"
 
         Returns:
             join style
         """
-        return JOIN_STYLE.inverse[self.joinStyle()]
+        return constants.JOIN_STYLE.inverse[self.joinStyle()]
 
-    def set_style(self, style: str):
+    def set_style(self, style: constants.PenStyleStr):
         """Set pen style to use.
-
-        Allowed values are "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",
-        "custom_dash"
 
         Args:
             style: pen style to use
@@ -125,17 +83,14 @@ class Pen(QtGui.QPen):
         Raises:
             InvalidParamError: pen style does not exist
         """
-        if style not in PEN_STYLE:
-            raise InvalidParamError(style, PEN_STYLE)
-        self.setStyle(PEN_STYLE[style])
+        if style not in constants.PEN_STYLE:
+            raise InvalidParamError(style, constants.PEN_STYLE)
+        self.setStyle(constants.PEN_STYLE[style])
 
-    def get_style(self) -> str:
+    def get_style(self) -> constants.PenStyleStr:
         """Return current pen style.
-
-        Possible values: "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot",
-        "custom_dash"
 
         Returns:
             pen style
         """
-        return PEN_STYLE.inverse[self.style()]
+        return constants.PEN_STYLE.inverse[self.style()]

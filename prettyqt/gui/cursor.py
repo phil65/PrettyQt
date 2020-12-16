@@ -1,20 +1,9 @@
-from typing import Dict, Any, Literal
+from typing import Dict, Any
 
-from qtpy import QtCore, QtGui
+from qtpy import QtGui
 
-from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
-
-
-SHAPE = bidict(
-    arrow=QtCore.Qt.ArrowCursor,
-    up_arrow=QtCore.Qt.UpArrowCursor,
-    cross=QtCore.Qt.CrossCursor,
-    wait=QtCore.Qt.WaitCursor,
-    caret=QtCore.Qt.IBeamCursor,
-)
-
-ShapeStr = Literal["arrow", "up_arrow", "cross", "wait", "caret"]
+from prettyqt import core, constants
+from prettyqt.utils import InvalidParamError
 
 
 class Cursor(QtGui.QCursor):
@@ -32,7 +21,7 @@ class Cursor(QtGui.QCursor):
     def serialize_fields(self) -> Dict[str, Any]:
         return dict(shape=self.get_shape())
 
-    def set_shape(self, shape: ShapeStr):
+    def set_shape(self, shape: constants.CursorShapeStr):
         """Set cursor shape.
 
         Args:
@@ -41,14 +30,14 @@ class Cursor(QtGui.QCursor):
         Raises:
             InvalidParamError: shape does not exist
         """
-        if shape not in SHAPE:
-            raise InvalidParamError(shape, SHAPE)
-        self.setShape(SHAPE[shape])
+        if shape not in constants.CURSOR_SHAPE:
+            raise InvalidParamError(shape, constants.CURSOR_SHAPE)
+        self.setShape(constants.CURSOR_SHAPE[shape])
 
-    def get_shape(self) -> ShapeStr:
+    def get_shape(self) -> constants.CursorShapeStr:
         """Return current cursor shape.
 
         Returns:
             cursor shape
         """
-        return SHAPE.inverse[self.shape()]
+        return constants.CURSOR_SHAPE.inverse[self.shape()]

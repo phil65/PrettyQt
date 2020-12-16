@@ -1,30 +1,9 @@
-from typing import Callable, Optional, Dict, Any, Union, Tuple, Literal, List
+from typing import Callable, Optional, Dict, Any, Union, Tuple, List
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError, helpers
-
-
-STYLE = bidict(
-    icon=QtCore.Qt.ToolButtonIconOnly,
-    text=QtCore.Qt.ToolButtonTextOnly,
-    text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
-    text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon,
-)
-
-StyleStr = Literal["icon", "text", "text_beside_icon", "text_below_icon"]
-
-TOOLBAR_AREAS = bidict(
-    left=QtCore.Qt.LeftToolBarArea,
-    right=QtCore.Qt.RightToolBarArea,
-    top=QtCore.Qt.TopToolBarArea,
-    bottom=QtCore.Qt.BottomToolBarArea,
-    all=QtCore.Qt.AllToolBarAreas,
-    none=QtCore.Qt.NoToolBarArea,
-)
-
-ToolbarAreaStr = Literal["left", "right", "top", "bottom", "all", "none"]
+from prettyqt import core, gui, widgets, constants
+from prettyqt.utils import InvalidParamError, helpers
 
 
 QtWidgets.QToolBar.__bases__ = (widgets.Widget,)
@@ -93,18 +72,18 @@ class ToolBar(QtWidgets.QToolBar):
             else:
                 return self.addWidget(label)
 
-    def set_style(self, style: StyleStr):
-        self.setToolButtonStyle(STYLE[style])
+    def set_style(self, style: constants.ToolButtonStyleStr):
+        self.setToolButtonStyle(constants.TOOLBUTTON_STYLE[style])
         for btn in self.menu_buttons:
             btn.set_style(style)
 
-    def get_style(self) -> StyleStr:
+    def get_style(self) -> constants.ToolButtonStyleStr:
         """Return current style.
 
         Returns:
             style
         """
-        return STYLE.inverse[self.toolButtonStyle()]
+        return constants.TOOLBUTTON_STYLE.inverse[self.toolButtonStyle()]
 
     def add_action(
         self,
@@ -141,7 +120,7 @@ class ToolBar(QtWidgets.QToolBar):
         with self.edit_font() as font:
             font.set_size(size)
 
-    def is_area_allowed(self, area: ToolbarAreaStr) -> bool:
+    def is_area_allowed(self, area: constants.ToolbarAreaStr) -> bool:
         """Check if toolbar is allowed at specified area.
 
         Args:
@@ -150,19 +129,19 @@ class ToolBar(QtWidgets.QToolBar):
         Raises:
             InvalidParamError: area does not exist
         """
-        if area not in TOOLBAR_AREAS:
-            raise InvalidParamError(area, TOOLBAR_AREAS)
-        return self.isAreaAllowed(TOOLBAR_AREAS[area])
+        if area not in constants.TOOLBAR_AREA:
+            raise InvalidParamError(area, constants.TOOLBAR_AREA)
+        return self.isAreaAllowed(constants.TOOLBAR_AREA[area])
 
-    def set_allowed_areas(self, *areas: ToolbarAreaStr):
+    def set_allowed_areas(self, *areas: constants.ToolbarAreaStr):
         for area in areas:
-            if area not in TOOLBAR_AREAS:
-                raise InvalidParamError(area, TOOLBAR_AREAS)
-        flag = helpers.merge_flags(areas, TOOLBAR_AREAS)
+            if area not in constants.TOOLBAR_AREA:
+                raise InvalidParamError(area, constants.TOOLBAR_AREA)
+        flag = helpers.merge_flags(areas, constants.TOOLBAR_AREA)
         self.setAllowedAreas(flag)
 
-    def get_allowed_areas(self) -> List[ToolbarAreaStr]:
-        return [k for k, v in TOOLBAR_AREAS.items() if v & self.allowedAreas()]
+    def get_allowed_areas(self) -> List[constants.ToolbarAreaStr]:
+        return [k for k, v in constants.TOOLBAR_AREA.items() if v & self.allowedAreas()]
 
 
 if __name__ == "__main__":

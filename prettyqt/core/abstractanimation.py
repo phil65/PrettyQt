@@ -33,8 +33,6 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
     def set_direction(self, direction: DirectionStr):
         """Set animation direction.
 
-        Valid values: "forward", "backward"
-
         Args:
             direction: animation direction
 
@@ -48,8 +46,6 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
     def get_direction(self) -> DirectionStr:
         """Get the current animation direction.
 
-        Possible values: "forward", "backward"
-
         Returns:
             animation direction
         """
@@ -58,8 +54,6 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
     def get_state(self) -> StateStr:
         """Get the current animation state.
 
-        Possible values: "stopped", "paused", "running"
-
         Returns:
             animation state
         """
@@ -67,8 +61,6 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
 
     def start_animation(self, policy: DeletionPolicyStr):
         """Start the animation.
-
-        Valid values for policy: "keep", "delete"
 
         Args:
             policy: animation policy

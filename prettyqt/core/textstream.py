@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtCore
 
 from prettyqt.utils import bidict, InvalidParamError
@@ -9,6 +11,8 @@ FIELD_ALIGNMENT = bidict(
     accounting_style=QtCore.QTextStream.AlignAccountingStyle,
 )
 
+FieldAlignmentStr = Literal["left", "right", "center", "accounting_style"]
+
 NUMBER_FLAGS = bidict(
     show_base=QtCore.QTextStream.ShowBase,
     force_point=QtCore.QTextStream.ForcePoint,
@@ -17,11 +21,17 @@ NUMBER_FLAGS = bidict(
     uppercase_digits=QtCore.QTextStream.UppercaseDigits,
 )
 
+NumberFlagStr = Literal[
+    "show_base", "force_point", "force_sign", "uppercase_base", "uppercase_digits"
+]
+
 REAL_NUMBER_NOTATION = bidict(
     scientific=QtCore.QTextStream.ScientificNotation,
     fixed=QtCore.QTextStream.FixedNotation,
     smart=QtCore.QTextStream.SmartNotation,
 )
+
+RealNumberNotationStr = Literal["scientific", "fixed", "smart"]
 
 STATUS = bidict(
     ok=QtCore.QTextStream.Ok,
@@ -30,12 +40,12 @@ STATUS = bidict(
     write_failed=QtCore.QTextStream.WriteFailed,
 )
 
+StatusStr = Literal["ok", "read_past_end", "read_corrupt_data", "write_failed"]
+
 
 class TextStream(QtCore.QTextStream):
-    def set_field_alignment(self, alignment: str):
+    def set_field_alignment(self, alignment: FieldAlignmentStr):
         """Set the field alignment.
-
-        Valid values are "left", "right", "center", "accounting_style"
 
         Args:
             alignment: field alignment
@@ -47,20 +57,16 @@ class TextStream(QtCore.QTextStream):
             raise InvalidParamError(alignment, FIELD_ALIGNMENT)
         self.setFieldAlignment(FIELD_ALIGNMENT[alignment])
 
-    def get_field_alignment(self) -> str:
+    def get_field_alignment(self) -> FieldAlignmentStr:
         """Get current field alignment.
-
-        Possible values are "left", "right", "center", "accounting_style"
 
         Returns:
             current field alignment
         """
         return FIELD_ALIGNMENT.inverse[self.fieldAlignment()]
 
-    def set_status(self, status: str):
+    def set_status(self, status: StatusStr):
         """Set the status.
-
-        Valid values are "ok", "read_past_end", "read_corrupt_data", "write_failed"
 
         Args:
             status: status
@@ -72,20 +78,16 @@ class TextStream(QtCore.QTextStream):
             raise InvalidParamError(status, STATUS)
         self.setStatus(STATUS[status])
 
-    def get_status(self) -> str:
+    def get_status(self) -> StatusStr:
         """Get current status.
-
-        Possible values are "ok", "read_past_end", "read_corrupt_data", "write_failed"
 
         Returns:
             current status
         """
         return STATUS.inverse[self.status()]
 
-    def set_real_number_notation(self, notation: str):
+    def set_real_number_notation(self, notation: RealNumberNotationStr):
         """Set the real number notation.
-
-        Valid values are "scientific", "fixed", "smart"
 
         Args:
             notation: real number notation
@@ -97,10 +99,8 @@ class TextStream(QtCore.QTextStream):
             raise InvalidParamError(notation, REAL_NUMBER_NOTATION)
         self.setRealNumberNotation(REAL_NUMBER_NOTATION[notation])
 
-    def get_real_number_notation(self) -> str:
+    def get_real_number_notation(self) -> RealNumberNotationStr:
         """Get current real number notation.
-
-        Possible values are "scientific", "fixed", "smart"
 
         Returns:
             current real number notation

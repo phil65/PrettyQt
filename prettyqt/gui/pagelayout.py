@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt import gui
@@ -7,9 +9,13 @@ MODES = bidict(
     standard=QtGui.QPageLayout.StandardMode, full_page=QtGui.QPageLayout.FullPageMode
 )
 
+ModeStr = Literal["standard", "full_page"]
+
 ORIENTATIONS = bidict(
     portrait=QtGui.QPageLayout.Portrait, landscape=QtGui.QPageLayout.Landscape
 )
+
+OrientationStr = Literal["portrait", "landscape"]
 
 UNITS = bidict(
     millimeter=QtGui.QPageLayout.Millimeter,
@@ -19,6 +25,8 @@ UNITS = bidict(
     didot=QtGui.QPageLayout.Didot,
     cicero=QtGui.QPageLayout.Cicero,
 )
+
+UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]
 
 
 class PageLayout(QtGui.QPageLayout):
@@ -35,10 +43,8 @@ class PageLayout(QtGui.QPageLayout):
             units=self.get_units(),
         )
 
-    def set_units(self, unit: str):
+    def set_units(self, unit: UnitStr):
         """Set unit.
-
-        Valid values for units: "millimeter", "point", "inch", "pica", "didot", "cicero"
 
         Args:
             unit: unit
@@ -50,20 +56,16 @@ class PageLayout(QtGui.QPageLayout):
             raise InvalidParamError(unit, UNITS)
         self.setUnits(UNITS[unit])
 
-    def get_units(self) -> str:
+    def get_units(self) -> UnitStr:
         """Get the current unit.
-
-        Possible values: "millimeter", "point", "inch", "pica", "didot", "cicero"
 
         Returns:
             unit
         """
         return UNITS.inverse[self.units()]
 
-    def set_mode(self, mode: str):
+    def set_mode(self, mode: ModeStr):
         """Set mode.
-
-        Valid values for mode: "standard", "full_page"
 
         Args:
             mode: mode
@@ -75,20 +77,16 @@ class PageLayout(QtGui.QPageLayout):
             raise InvalidParamError(mode, MODES)
         self.setMode(MODES[mode])
 
-    def get_mode(self) -> str:
+    def get_mode(self) -> ModeStr:
         """Get the current mode.
-
-        Possible values: "standard", "full_page"
 
         Returns:
             mode
         """
         return MODES.inverse[self.mode()]
 
-    def set_orientation(self, orientation: str):
+    def set_orientation(self, orientation: OrientationStr):
         """Set orientation.
-
-        Valid values for orientation: "portrait", "landscape"
 
         Args:
             orientation: orientation
@@ -100,10 +98,8 @@ class PageLayout(QtGui.QPageLayout):
             raise InvalidParamError(orientation, ORIENTATIONS)
         self.setOrientation(ORIENTATIONS[orientation])
 
-    def get_orientation(self) -> str:
+    def get_orientation(self) -> OrientationStr:
         """Get the current orientation.
-
-        Possible values: "portrait", "landscape"
 
         Returns:
             orientation

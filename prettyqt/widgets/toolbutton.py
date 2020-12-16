@@ -1,8 +1,8 @@
 from typing import Literal
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import gui, widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -13,25 +13,6 @@ POPUP_MODE = bidict(
 )
 
 PopupModeStr = Literal["delayed", "menu_button", "instant"]
-
-ARROW_TYPE = bidict(
-    none=QtCore.Qt.NoArrow,
-    up=QtCore.Qt.UpArrow,
-    down=QtCore.Qt.DownArrow,
-    left=QtCore.Qt.LeftArrow,
-    right=QtCore.Qt.RightArrow,
-)
-
-ArrowTypeStr = Literal["none", "up", "down", "left", "right"]
-
-STYLE = bidict(
-    icon=QtCore.Qt.ToolButtonIconOnly,
-    text=QtCore.Qt.ToolButtonTextOnly,
-    text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
-    text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon,
-)
-
-StyleStr = Literal["icon", "text", "text_beside_icon", "text_below_icon"]
 
 
 QtWidgets.QToolButton.__bases__ = (widgets.AbstractButton,)
@@ -79,7 +60,7 @@ class ToolButton(QtWidgets.QToolButton):
         """
         return POPUP_MODE.inverse[self.popupMode()]
 
-    def set_arrow_type(self, mode: ArrowTypeStr):
+    def set_arrow_type(self, mode: constants.ArrowTypeStr):
         """Set the arrow type of the toolbutton.
 
         Args:
@@ -88,19 +69,19 @@ class ToolButton(QtWidgets.QToolButton):
         Raises:
             InvalidParamError: invalid arrow type
         """
-        if mode not in ARROW_TYPE:
-            raise InvalidParamError(mode, ARROW_TYPE)
-        self.setArrowType(ARROW_TYPE[mode])
+        if mode not in constants.ARROW_TYPE:
+            raise InvalidParamError(mode, constants.ARROW_TYPE)
+        self.setArrowType(constants.ARROW_TYPE[mode])
 
-    def get_arrow_type(self) -> ArrowTypeStr:
+    def get_arrow_type(self) -> constants.ArrowTypeStr:
         """Return arrow type.
 
         Returns:
             arrow type
         """
-        return ARROW_TYPE.inverse[self.arrowType()]
+        return constants.ARROW_TYPE.inverse[self.arrowType()]
 
-    def set_style(self, style: StyleStr):
+    def set_style(self, style: constants.ToolButtonStyleStr):
         """Set the toolbutton style.
 
         Args:
@@ -109,19 +90,25 @@ class ToolButton(QtWidgets.QToolButton):
         Raises:
             InvalidParamError: invalid style
         """
-        if style not in STYLE:
-            raise InvalidParamError(style, STYLE)
-        self.setToolButtonStyle(STYLE[style])
+        if style not in constants.TOOLBUTTON_STYLE:
+            raise InvalidParamError(style, constants.TOOLBUTTON_STYLE)
+        self.setToolButtonStyle(constants.TOOLBUTTON_STYLE[style])
 
-    def get_style(self) -> StyleStr:
+    def get_style(self) -> constants.ToolButtonStyleStr:
         """Return toolbutton style.
 
         Returns:
             toolbutton style
         """
-        return STYLE.inverse[self.toolButtonStyle()]
+        return constants.TOOLBUTTON_STYLE.inverse[self.toolButtonStyle()]
 
 
 if __name__ == "__main__":
     app = widgets.app()
     w = ToolButton()
+    # icon = gui.Icon()
+    # icon.add_pixmap("mdi.timer")
+    # icon.add_pixmap("mdi.folder", state="on")
+    w.set_icon("mdi.timer", "mdi.folder")
+    w.show()
+    app.main_loop()

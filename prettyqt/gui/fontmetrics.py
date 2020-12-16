@@ -1,26 +1,16 @@
-from typing import Literal
+from qtpy import QtGui
 
-from qtpy import QtCore, QtGui
-
-from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
-
-
-ELIDE_MODE = bidict(
-    left=QtCore.Qt.ElideLeft,
-    right=QtCore.Qt.ElideRight,
-    middle=QtCore.Qt.ElideMiddle,
-    none=QtCore.Qt.ElideNone,
-)
-
-ElideModeStr = Literal["left", "right", "middle", "none"]
+from prettyqt import core, constants
+from prettyqt.utils import InvalidParamError
 
 
 class FontMetrics(QtGui.QFontMetrics):
-    def elided_text(self, text: str, mode: ElideModeStr, width: int, flags=0) -> str:
-        if mode not in ELIDE_MODE:
-            raise InvalidParamError(mode, ELIDE_MODE)
-        return self.elidedText(text, ELIDE_MODE[mode], width, flags)
+    def elided_text(
+        self, text: str, mode: constants.ElideModeStr, width: int, flags=0
+    ) -> str:
+        if mode not in constants.ELIDE_MODE:
+            raise InvalidParamError(mode, constants.ELIDE_MODE)
+        return self.elidedText(text, constants.ELIDE_MODE[mode], width, flags)
 
     def get_bounding_rect(self, *args, **kwargs) -> core.Rect:
         return core.Rect(self.boundingRect(*args, **kwargs))

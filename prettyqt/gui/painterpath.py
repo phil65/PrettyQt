@@ -4,7 +4,7 @@ from typing import Tuple, Union, Iterator, Literal
 
 from qtpy import QtGui, QtCore
 
-from prettyqt import core
+from prettyqt import core, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -15,9 +15,9 @@ ELEMENT_TYPES = bidict(
     curve_to_data_element=QtGui.QPainterPath.CurveToDataElement,
 )
 
-FILL_RULE = bidict(odd_even=QtCore.Qt.OddEvenFill, winding=QtCore.Qt.WindingFill)
-
-FillRuleStr = Literal["odd_even", "winding"]
+ElementTypeStr = Literal[
+    "move_to_element", "line_to_element", "curve_to_element", "curve_to_data_element"
+]
 
 
 class PainterPath(QtGui.QPainterPath):
@@ -47,10 +47,8 @@ class PainterPath(QtGui.QPainterPath):
             rect = QtCore.QRectF(rect)
         self.addRect(rect)
 
-    def set_fill_rule(self, rule: FillRuleStr):
+    def set_fill_rule(self, rule: constants.FillRuleStr):
         """Set fill rule.
-
-        Allowed values are "odd_even", "winding"
 
         Args:
             rule: fill rule to use
@@ -58,19 +56,17 @@ class PainterPath(QtGui.QPainterPath):
         Raises:
             InvalidParamError: fill rule does not exist
         """
-        if rule not in FILL_RULE:
-            raise InvalidParamError(rule, FILL_RULE)
-        self.setFillRule(FILL_RULE[rule])
+        if rule not in constants.FILL_RULE:
+            raise InvalidParamError(rule, constants.FILL_RULE)
+        self.setFillRule(constants.FILL_RULE[rule])
 
-    def get_fill_rule(self) -> FillRuleStr:
+    def get_fill_rule(self) -> constants.FillRuleStr:
         """Return current fill rule.
-
-        Possible values: "odd_even", "winding"
 
         Returns:
             fill rule
         """
-        return FILL_RULE.inverse[self.fillRule()]
+        return constants.FILL_RULE.inverse[self.fillRule()]
 
     def get_bounding_rect(self) -> core.RectF:
         return core.RectF(self.boundingRect())

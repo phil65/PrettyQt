@@ -3,18 +3,9 @@ from typing import Optional, Tuple, Union, Literal
 from qtpy import QtCore, QtGui, QtWidgets
 from deprecated import deprecated
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
-
-ELIDE_MODE = bidict(
-    left=QtCore.Qt.ElideLeft,
-    right=QtCore.Qt.ElideRight,
-    middle=QtCore.Qt.ElideMiddle,
-    none=QtCore.Qt.ElideNone,
-)
-
-ElideModeStr = Literal["left", "right", "middle", "none"]
 
 REMOVE_BEHAVIOUR = bidict(
     left_tab=QtWidgets.QTabBar.SelectLeftTab,
@@ -141,7 +132,7 @@ class TabBar(QtWidgets.QTabBar):
         """
         return REMOVE_BEHAVIOUR.inverse[self.selectionBehaviorOnRemove()]
 
-    def set_elide_mode(self, mode: ElideModeStr) -> None:
+    def set_elide_mode(self, mode: constants.ElideModeStr) -> None:
         """Set elide mode.
 
         Args:
@@ -150,14 +141,14 @@ class TabBar(QtWidgets.QTabBar):
         Raises:
             InvalidParamError: invalid elide mode
         """
-        if mode not in ELIDE_MODE:
-            raise InvalidParamError(mode, ELIDE_MODE)
-        self.setElideMode(ELIDE_MODE[mode])
+        if mode not in constants.ELIDE_MODE:
+            raise InvalidParamError(mode, constants.ELIDE_MODE)
+        self.setElideMode(constants.ELIDE_MODE[mode])
 
-    def get_elide_mode(self) -> ElideModeStr:
+    def get_elide_mode(self) -> constants.ElideModeStr:
         """Return elide mode.
 
         Returns:
             elide mode
         """
-        return ELIDE_MODE.inverse[self.elideMode()]
+        return constants.ELIDE_MODE.inverse[self.elideMode()]

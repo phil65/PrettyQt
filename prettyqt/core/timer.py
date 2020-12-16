@@ -1,22 +1,14 @@
 from __future__ import annotations
 
-from typing import Literal, Callable
+from typing import Callable
 
 from qtpy import QtCore
 
-from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, constants
+from prettyqt.utils import InvalidParamError
 
 
 QtCore.QTimer.__bases__ = (core.Object,)
-
-TYPE = bidict(
-    precise=QtCore.Qt.PreciseTimer,
-    coarse=QtCore.Qt.CoarseTimer,
-    very_coarse=QtCore.Qt.VeryCoarseTimer,
-)
-
-TypeStr = Literal["precise", "coarse", "very_coarse"]
 
 
 class Timer(QtCore.QTimer):
@@ -27,7 +19,7 @@ class Timer(QtCore.QTimer):
         timer.setSingleShot(True)
         return timer
 
-    def set_type(self, typ: TypeStr):
+    def set_type(self, typ: constants.TimerTypeStr):
         """Set the timer type.
 
         Args:
@@ -36,14 +28,14 @@ class Timer(QtCore.QTimer):
         Raises:
             InvalidParamError: timer type does not exist
         """
-        if typ not in TYPE:
-            raise InvalidParamError(typ, TYPE)
-        self.setTimerType(TYPE[typ])
+        if typ not in constants.TIMER_TYPE:
+            raise InvalidParamError(typ, constants.TIMER_TYPE)
+        self.setTimerType(constants.TIMER_TYPE[typ])
 
-    def get_type(self) -> TypeStr:
+    def get_type(self) -> constants.TimerTypeStr:
         """Return current timer type.
 
         Returns:
             timer type
         """
-        return TYPE.inverse[self.timerType()]
+        return constants.TIMER_TYPE.inverse[self.timerType()]

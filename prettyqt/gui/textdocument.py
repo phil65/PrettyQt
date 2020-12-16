@@ -1,9 +1,9 @@
-from typing import Union, Iterator
+from typing import Union, Iterator, Literal
 import pathlib
 
-from qtpy import QtGui, QtCore
+from qtpy import QtGui
 
-from prettyqt import core, gui
+from prettyqt import core, gui, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
@@ -12,6 +12,8 @@ if core.VersionNumber.get_qt_version() >= (5, 14, 0):
         commonmark=QtGui.QTextDocument.MarkdownDialectCommonMark,
         github=QtGui.QTextDocument.MarkdownDialectGitHub,
     )
+
+MarkdownFeatureStr = Literal["no_html", "commonmark", "github"]
 
 RESOURCE_TYPES = bidict(
     unknown=QtGui.QTextDocument.UnknownResource,
@@ -22,15 +24,15 @@ RESOURCE_TYPES = bidict(
     user=QtGui.QTextDocument.UserResource,
 )
 
+ResourceTypeStr = Literal["unknown", "html", "image", "stylesheet", "markdown", "user"]
+
 STACKS = bidict(
     undo=QtGui.QTextDocument.UndoStack,
     redo=QtGui.QTextDocument.RedoStack,
     undo_and_redo=QtGui.QTextDocument.UndoAndRedoStacks,
 )
 
-CURSOR_MOVE_STYLES = bidict(
-    logical=QtCore.Qt.LogicalMoveStyle, visual=QtCore.Qt.VisualMoveStyle
-)
+StackStr = Literal["undo", "redo", "undo_and_redo"]
 
 QtGui.QTextDocument.__bases__ = (core.Object,)
 
@@ -64,10 +66,8 @@ class TextDocument(QtGui.QTextDocument):
             use_design_metrics=self.useDesignMetrics(),
         )
 
-    def clear_stacks(self, stack: str):
+    def clear_stacks(self, stack: StackStr):
         """Clear undo / redo stack.
-
-        Allowed values are "undo", "redo", "undo_and_redo"
 
         Args:
             stack: stack to clear
@@ -79,10 +79,8 @@ class TextDocument(QtGui.QTextDocument):
             raise InvalidParamError(stack, STACKS)
         self.clearUndoRedoStacks(STACKS[stack])
 
-    def set_default_cursor_move_style(self, style: str):
+    def set_default_cursor_move_style(self, style: constants.CursorMoveStyleStr):
         """Set the cursor move style.
-
-        Allowed values are "logical", "visual"
 
         Args:
             style: cursor move style
@@ -90,21 +88,21 @@ class TextDocument(QtGui.QTextDocument):
         Raises:
             InvalidParamError: cursor move style does not exist
         """
-        if style not in CURSOR_MOVE_STYLES:
-            raise InvalidParamError(style, CURSOR_MOVE_STYLES)
-        self.setDefaultCursorMoveStyle(CURSOR_MOVE_STYLES[style])
+        if style not in constants.CURSOR_MOVE_STYLE:
+            raise InvalidParamError(style, constants.CURSOR_MOVE_STYLE)
+        self.setDefaultCursorMoveStyle(constants.CURSOR_MOVE_STYLE[style])
 
-    def get_default_cursor_move_style(self) -> str:
+    def get_default_cursor_move_style(self) -> constants.CursorMoveStyleStr:
         """Return current cursor move style.
-
-        Possible values: "logical", "visual"
 
         Returns:
             cursor move style
         """
-        return CURSOR_MOVE_STYLES.inverse[self.defaultCursorMoveStyle()]
+        return constants.CURSOR_MOVE_STYLE.inverse[self.defaultCursorMoveStyle()]
 
-    def add_resource(self, resource_type: str, name: Union[str, pathlib.Path], resource):
+    def add_resource(
+        self, resource_type: ResourceTypeStr, name: Union[str, pathlib.Path], resource
+    ):
         if resource_type not in RESOURCE_TYPES:
             raise InvalidParamError(resource_type, RESOURCE_TYPES)
         url = core.Url(name)

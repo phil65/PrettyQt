@@ -1,9 +1,11 @@
+from typing import Literal
+
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
-SLIDER_ACTIONS = bidict(
+SLIDER_ACTION = bidict(
     none=QtWidgets.QAbstractSlider.SliderNoAction,
     single_step_add=QtWidgets.QAbstractSlider.SliderSingleStepAdd,
     single_step_sub=QtWidgets.QAbstractSlider.SliderSingleStepSub,
@@ -14,7 +16,16 @@ SLIDER_ACTIONS = bidict(
     move=QtWidgets.QAbstractSlider.SliderMove,
 )
 
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
+SliderActionStr = Literal[
+    "none",
+    "single_step_add",
+    "single_step_sub",
+    "page_step_add",
+    "page_step_sub",
+    "to_minimum",
+    "to_maximum",
+    "move",
+]
 
 QtWidgets.QAbstractSlider.__bases__ = (widgets.Widget,)
 
@@ -73,10 +84,8 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         """Set slider orientation to vertical."""
         self.setOrientation(QtCore.Qt.Vertical)
 
-    def set_orientation(self, orientation: str):
+    def set_orientation(self, orientation: constants.OrientationStr):
         """Set the orientation of the slider.
-
-        Allowed values are "horizontal", "vertical"
 
         Args:
             orientation: orientation for the slider
@@ -84,19 +93,17 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         Raises:
             InvalidParamError: orientation does not exist
         """
-        if orientation not in ORIENTATIONS:
-            raise InvalidParamError(orientation, ORIENTATIONS)
-        self.setOrientation(ORIENTATIONS[orientation])
+        if orientation not in constants.ORIENTATION:
+            raise InvalidParamError(orientation, constants.ORIENTATION)
+        self.setOrientation(constants.ORIENTATION[orientation])
 
-    def get_orientation(self) -> str:
+    def get_orientation(self) -> constants.OrientationStr:
         """Return current orientation.
-
-        Possible values: "horizontal", "vertical"
 
         Returns:
             orientation
         """
-        return ORIENTATIONS.inverse[self.orientation()]
+        return constants.ORIENTATION.inverse[self.orientation()]
 
     def scroll_to_min(self):
         """Scroll to the minimum value of the slider."""
@@ -112,11 +119,10 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
     def set_step_size(self, step_size: int):
         self.setSingleStep(step_size)
 
-    def set_repeat_action(self, action: str, threshold: int = 500, repeat_time: int = 50):
+    def set_repeat_action(
+        self, action: SliderActionStr, threshold: int = 500, repeat_time: int = 50
+    ):
         """Set the repeat action.
-
-        Valid values are "none", "single_step_add", "single_step_sub", "page_step_add",
-        "page_step_sub", "to_minimum", "to_maximum", "move"
 
         Args:
             action: repeat action
@@ -124,31 +130,23 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         Raises:
             InvalidParamError: invalid repeat action
         """
-        if action not in SLIDER_ACTIONS:
-            raise InvalidParamError(action, SLIDER_ACTIONS)
-        self.setRepeatAction(SLIDER_ACTIONS[action], threshold, repeat_time)
+        if action not in SLIDER_ACTION:
+            raise InvalidParamError(action, SLIDER_ACTION)
+        self.setRepeatAction(SLIDER_ACTION[action], threshold, repeat_time)
 
-    def get_repeat_action(self) -> str:
+    def get_repeat_action(self) -> SliderActionStr:
         """Get current repeat action.
-
-        Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
-        "page_step_sub", "to_minimum", "to_maximum", "move"
 
         Returns:
             current repeat action
         """
-        return SLIDER_ACTIONS.inverse[self.repeatAction()]
+        return SLIDER_ACTION.inverse[self.repeatAction()]
 
-    def trigger_action(self, action: str):
-        """Trigger slider action.
-
-        Possible values are "none", "single_step_add", "single_step_sub", "page_step_add",
-        "page_step_sub", "to_minimum", "to_maximum", "move"
-
-        """
-        if action not in SLIDER_ACTIONS:
-            raise InvalidParamError(action, SLIDER_ACTIONS)
-        self.triggerAction(SLIDER_ACTIONS[action])
+    def trigger_action(self, action: SliderActionStr):
+        """Trigger slider action."""
+        if action not in SLIDER_ACTION:
+            raise InvalidParamError(action, SLIDER_ACTION)
+        self.triggerAction(SLIDER_ACTION[action])
 
     def get_value(self):
         return self.value()

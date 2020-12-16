@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Tuple, Iterator
+from typing import Tuple, Iterator, Literal
 
 from qtpy.QtCharts import QtCharts
 
@@ -11,6 +11,8 @@ LABELS_POSITIONS = bidict(
     center=QtCharts.QCategoryAxis.AxisLabelsPositionCenter,
     on_value=QtCharts.QCategoryAxis.AxisLabelsPositionOnValue,
 )
+
+LabelsPositionStr = Literal["center", "on_value"]
 
 QtCharts.QCategoryAxis.__bases__ = (charts.ValueAxis,)
 
@@ -36,10 +38,8 @@ class CategoryAxis(QtCharts.QCategoryAxis):
         # needed for PySide2
         return self.count()
 
-    def set_labels_position(self, position: str):
+    def set_labels_position(self, position: LabelsPositionStr):
         """Set the labels position.
-
-        Allowed values are "center", "on_value"
 
         Args:
             position: labels position
@@ -51,10 +51,8 @@ class CategoryAxis(QtCharts.QCategoryAxis):
             raise InvalidParamError(position, LABELS_POSITIONS)
         self.setLabelsPosition(LABELS_POSITIONS[position])
 
-    def get_labels_position(self) -> str:
+    def get_labels_position(self) -> LabelsPositionStr:
         """Return current labels position.
-
-        Possible values: "center", "on_value"
 
         Returns:
             labels position

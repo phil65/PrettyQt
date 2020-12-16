@@ -2,7 +2,7 @@ from typing import List, Literal
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import core, widgets, gui
+from prettyqt import core, widgets, gui, constants
 from prettyqt.utils import InvalidParamError, bidict, helpers, mappers
 
 
@@ -46,19 +46,6 @@ VIEWPORT_UPDATE_MODE = bidict(
 
 ViewportUpdateModeStr = Literal["full", "minimal", "smart", "bounding_rect", "none"]
 
-ITEM_SELECTION_MODE = bidict(
-    contains_shape=QtCore.Qt.ContainsItemShape,
-    intersects_shape=QtCore.Qt.IntersectsItemShape,
-    contains_bounding_rect=QtCore.Qt.ContainsItemBoundingRect,
-    intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
-)
-
-ItemSelectionModeStr = Literal[
-    "contains_shape",
-    "intersects_shape",
-    "contains_bounding_rect",
-    "intersects_bounding_rect",
-]
 
 QtWidgets.QGraphicsView.__bases__ = (widgets.AbstractScrollArea,)
 
@@ -173,7 +160,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
         """
         return DRAG_MODE.inverse[self.dragMode()]
 
-    def set_rubberband_selection_mode(self, mode: ItemSelectionModeStr):
+    def set_rubberband_selection_mode(self, mode: constants.ItemSelectionModeStr):
         """Set the behavior for selecting items with a rubber band selection rectangle.
 
         Args:
@@ -182,17 +169,17 @@ class GraphicsView(QtWidgets.QGraphicsView):
         Raises:
             InvalidParamError: mode does not exist
         """
-        if mode not in ITEM_SELECTION_MODE:
-            raise InvalidParamError(mode, ITEM_SELECTION_MODE)
-        self.setRubberBandSelectionMode(ITEM_SELECTION_MODE[mode])
+        if mode not in constants.ITEM_SELECTION_MODE:
+            raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
+        self.setRubberBandSelectionMode(constants.ITEM_SELECTION_MODE[mode])
 
-    def get_rubberband_selection_mode(self) -> ItemSelectionModeStr:
+    def get_rubberband_selection_mode(self) -> constants.ItemSelectionModeStr:
         """Return current rubberband selection mode.
 
         Returns:
             rubberband selection mode
         """
-        return ITEM_SELECTION_MODE.inverse[self.rubberBandSelectionMode()]
+        return constants.ITEM_SELECTION_MODE.inverse[self.rubberBandSelectionMode()]
 
     def set_cache_mode(self, mode: CacheModeStr):
         """Set the cache mode.

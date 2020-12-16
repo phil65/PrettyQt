@@ -2,7 +2,7 @@ from typing import Union, Literal
 
 from qtpy import QtGui, QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import gui, widgets, constants
 from prettyqt.utils import bidict, colors, InvalidParamError
 
 
@@ -118,7 +118,7 @@ class MdiArea(QtWidgets.QMdiArea):
         if isinstance(brush_or_color, QtGui.QBrush):
             brush = brush_or_color
         else:
-            pattern = gui.painter.PATTERN[pattern]
+            pattern = constants.PATTERN[pattern]
             color = colors.get_color(brush_or_color)
             brush = gui.Brush(color, pattern)
         self.setBackground(brush)

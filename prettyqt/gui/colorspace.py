@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt import core
@@ -12,6 +14,10 @@ NAMED_COLOR_SPACE = bidict(
     pro_photo_rgb=QtGui.QColorSpace.ProPhotoRgb,
 )
 
+NamedColorSpaceStr = Literal[
+    "srgb", "srgb_linear", "adobe_rgb", "display_p3", "pro_photo_rgb"
+]
+
 PRIMARIES = bidict(
     custom=QtGui.QColorSpace.Primaries.Custom,
     srgb=QtGui.QColorSpace.Primaries.SRgb,
@@ -20,6 +26,8 @@ PRIMARIES = bidict(
     pro_photo_rgb=QtGui.QColorSpace.Primaries.ProPhotoRgb,
 )
 
+PrimariesStr = Literal["custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"]
+
 TRANSFER_FUNCTION = bidict(
     custom=QtGui.QColorSpace.TransferFunction.Custom,
     linear=QtGui.QColorSpace.TransferFunction.Linear,
@@ -27,6 +35,8 @@ TRANSFER_FUNCTION = bidict(
     srgb=QtGui.QColorSpace.TransferFunction.SRgb,
     pro_photo_rgb=QtGui.QColorSpace.TransferFunction.ProPhotoRgb,
 )
+
+TransformFunctionStr = Literal["custom", "linear", "gamma", "srgb", "pro_photo_rgb"]
 
 
 class ColorSpace(QtGui.QColorSpace):
@@ -44,10 +54,8 @@ class ColorSpace(QtGui.QColorSpace):
     def __bool__(self):
         return self.isValid()
 
-    def set_primaries(self, primaries: str):
+    def set_primaries(self, primaries: PrimariesStr):
         """Set primaries.
-
-        Allowed values are "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"
 
         Args:
             primaries: primaries to use
@@ -59,20 +67,16 @@ class ColorSpace(QtGui.QColorSpace):
             raise InvalidParamError(primaries, PRIMARIES)
         self.setPrimaries(PRIMARIES[primaries])
 
-    def get_primaries(self) -> str:
+    def get_primaries(self) -> PrimariesStr:
         """Return current primaries.
-
-        Possible values: "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"
 
         Returns:
             primaries
         """
         return PRIMARIES.inverse[self.primaries()]
 
-    def set_transfer_function(self, fn: str, gamma: float = 0.0):
+    def set_transfer_function(self, fn: TransformFunctionStr, gamma: float = 0.0):
         """Set transfer function.
-
-        Allowed values are "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"
 
         Args:
             fn: transfer function to use
@@ -84,10 +88,8 @@ class ColorSpace(QtGui.QColorSpace):
             raise InvalidParamError(fn, TRANSFER_FUNCTION)
         self.setTransferFunction(TRANSFER_FUNCTION[fn], gamma)
 
-    def get_transfer_function(self) -> str:
+    def get_transfer_function(self) -> TransformFunctionStr:
         """Return current transfer function.
-
-        Possible values: "custom", "srgb", "adobe_rgb", "dci_p3_d65", "pro_photo_rgb"
 
         Returns:
             transfer function

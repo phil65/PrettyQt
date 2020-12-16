@@ -1,6 +1,8 @@
+from typing import Literal
+
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 INPUT = bidict(
@@ -9,6 +11,8 @@ INPUT = bidict(
     release=QtWidgets.QScroller.InputRelease,
 )
 
+InputStr = Literal["press", "move", "release"]
+
 SCROLLER_GESTURE_TYPE = bidict(
     touch=QtWidgets.QScroller.TouchGesture,
     left_mouse_button=QtWidgets.QScroller.LeftMouseButtonGesture,
@@ -16,14 +20,9 @@ SCROLLER_GESTURE_TYPE = bidict(
     right_mouse_button=QtWidgets.QScroller.RightMouseButtonGesture,
 )
 
-GESTURE_TYPE = bidict(
-    tap=QtCore.Qt.TapGesture,
-    tap_and_hold=QtCore.Qt.TapAndHoldGesture,
-    pan=QtCore.Qt.PanGesture,
-    pinch=QtCore.Qt.PinchGesture,
-    swipe=QtCore.Qt.SwipeGesture,
-    custom=QtCore.Qt.CustomGesture,
-)
+ScrollGestureTypeStr = Literal[
+    "touch", "left_mouse_button", "middle_mouse_button", "right_mouse_button"
+]
 
 STATE = bidict(
     inactive=QtWidgets.QScroller.Inactive,
@@ -31,6 +30,8 @@ STATE = bidict(
     dragging=QtWidgets.QScroller.Dragging,
     scrolling=QtWidgets.QScroller.Scrolling,
 )
+
+StateStr = Literal["inactive", "pressed", "dragging", "scrolling"]
 
 QtWidgets.QScroller.__bases__ = (core.Object,)
 
@@ -42,10 +43,8 @@ class Scroller:
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def get_state(self) -> str:
+    def get_state(self) -> StateStr:
         """Return current state.
-
-        Possible values: "inactive", "pressed", "dragging", "scrolling"
 
         Returns:
             state
@@ -62,7 +61,7 @@ class Scroller:
         return core.PointF(self.finalPosition())
 
     def handle_input(
-        self, input_type: str, position: QtCore.QPointF, timestamp: int = 0
+        self, input_type: InputStr, position: QtCore.QPointF, timestamp: int = 0
     ) -> bool:
         if input_type not in INPUT:
             raise InvalidParamError(input_type, INPUT)
@@ -76,7 +75,9 @@ class Scroller:
         return cls(QtWidgets.QScroller.scroller(obj))
 
     @staticmethod
-    def grab_gesture(target: QtCore.QObject, gesture_type: str = "touch") -> str:
+    def grab_gesture(
+        target: QtCore.QObject, gesture_type: ScrollGestureTypeStr = "touch"
+    ) -> str:
         if gesture_type not in SCROLLER_GESTURE_TYPE:
             raise InvalidParamError(gesture_type, SCROLLER_GESTURE_TYPE)
         gesture = QtWidgets.QScroller.grabGesture(
@@ -84,7 +85,7 @@ class Scroller:
         )
         if gesture >= 256:
             gesture -= 256
-        return GESTURE_TYPE.inverse[gesture]
+        return constants.GESTURE_TYPE.inverse[gesture]
 
 
 if __name__ == "__main__":

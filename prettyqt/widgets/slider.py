@@ -1,8 +1,8 @@
 from typing import Optional, Union, Literal
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -16,8 +16,6 @@ TICK_POSITION = bidict(
 TickPositionAllStr = Literal["none", "both_sides", "above", "below", "left", "right"]
 TickPositionStr = Literal["none", "both_sides", "above", "below"]
 
-ORIENTATION = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
-
 
 QtWidgets.QSlider.__bases__ = (widgets.AbstractSlider,)
 
@@ -28,11 +26,11 @@ class Slider(QtWidgets.QSlider):
 
     def __init__(
         self,
-        orientation: Union[str, int] = "horizontal",
+        orientation: Union[constants.OrientationStr, int] = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        if orientation in ORIENTATION:
-            orientation = ORIENTATION[orientation]
+        if orientation in constants.ORIENTATION:
+            orientation = constants.ORIENTATION[orientation]
         super().__init__(orientation, parent)
         self.valueChanged.connect(self.on_value_change)
 

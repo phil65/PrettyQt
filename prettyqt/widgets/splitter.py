@@ -1,12 +1,9 @@
 from typing import Union, Optional, List, Iterator
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
-from prettyqt import widgets
-from prettyqt.utils import bidict, InvalidParamError
-
-
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
+from prettyqt import widgets, constants
+from prettyqt.utils import InvalidParamError
 
 
 QtWidgets.QSplitter.__bases__ = (widgets.Frame,)
@@ -15,11 +12,11 @@ QtWidgets.QSplitter.__bases__ = (widgets.Frame,)
 class Splitter(QtWidgets.QSplitter):
     def __init__(
         self,
-        orientation: Union[str, int] = "horizontal",
+        orientation: Union[constants.OrientationStr, int] = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        if orientation in ORIENTATIONS:
-            orientation = ORIENTATIONS[orientation]
+        if orientation in constants.ORIENTATION:
+            orientation = constants.ORIENTATION[orientation]
         super().__init__(orientation, parent)
 
     def __getitem__(self, index: Union[int, str]) -> QtWidgets.QWidget:
@@ -91,16 +88,13 @@ class Splitter(QtWidgets.QSplitter):
         horizontal: bool = False,
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        orientation = "horizontal" if horizontal else "vertical"
-        splitter = cls(orientation, parent=parent)
+        splitter = cls("horizontal" if horizontal else "vertical", parent=parent)
         for widget in widgets:
             splitter += widget
         return splitter
 
-    def set_orientation(self, orientation: str):
+    def set_orientation(self, orientation: constants.OrientationStr):
         """Set the orientation of the splitter.
-
-        Allowed values are "horizontal", "vertical"
 
         Args:
             orientation: orientation for the splitter
@@ -108,19 +102,17 @@ class Splitter(QtWidgets.QSplitter):
         Raises:
             InvalidParamError: orientation does not exist
         """
-        if orientation not in ORIENTATIONS:
-            raise InvalidParamError(orientation, ORIENTATIONS)
-        self.setOrientation(ORIENTATIONS[orientation])
+        if orientation not in constants.ORIENTATION:
+            raise InvalidParamError(orientation, constants.ORIENTATION)
+        self.setOrientation(constants.ORIENTATION[orientation])
 
-    def get_orientation(self) -> str:
+    def get_orientation(self) -> constants.OrientationStr:
         """Return current orientation.
-
-        Possible values: "horizontal", "vertical"
 
         Returns:
             orientation
         """
-        return ORIENTATIONS.inverse[self.orientation()]
+        return constants.ORIENTATION.inverse[self.orientation()]
 
 
 if __name__ == "__main__":

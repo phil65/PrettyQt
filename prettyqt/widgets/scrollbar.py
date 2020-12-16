@@ -1,12 +1,8 @@
 from typing import Union, Optional
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
-from prettyqt import core, widgets
-from prettyqt.utils import bidict
-
-
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
+from prettyqt import core, widgets, constants
 
 
 QtWidgets.QScrollBar.__bases__ = (widgets.AbstractSlider,)
@@ -18,10 +14,10 @@ class ScrollBar(QtWidgets.QScrollBar):
 
     def __init__(
         self,
-        orientation: Union[int, str] = "horizontal",
+        orientation: Union[int, constants.OrientationStr] = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        if orientation in ORIENTATIONS:
-            orientation = ORIENTATIONS[orientation]
+        if orientation in constants.ORIENTATION:
+            orientation = constants.ORIENTATION[orientation]
         super().__init__(orientation, parent)
         self.valueChanged.connect(self.on_value_change)

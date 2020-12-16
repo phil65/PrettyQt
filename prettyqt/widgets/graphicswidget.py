@@ -1,19 +1,10 @@
-from typing import Union, Literal
+from typing import Union
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets
 
-from prettyqt import widgets, gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import widgets, gui, constants
+from prettyqt.utils import InvalidParamError
 
-FOCUS_POLICY = bidict(
-    tab=QtCore.Qt.TabFocus,
-    click=QtCore.Qt.ClickFocus,
-    strong=QtCore.Qt.StrongFocus,
-    wheel=QtCore.Qt.WheelFocus,
-    none=QtCore.Qt.NoFocus,
-)
-
-FocusPolicyStr = Literal["tab", "click", "strong", "wheel", "none"]
 
 QtWidgets.QGraphicsWidget.__bases__ = (widgets.GraphicsObject, widgets.GraphicsLayoutItem)
 
@@ -45,7 +36,7 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
             raise ValueError("Invalid Layout")
         self.setLayout(self.box)
 
-    def set_focus_policy(self, policy: FocusPolicyStr) -> None:
+    def set_focus_policy(self, policy: constants.FocusPolicyStr) -> None:
         """Set the way the widget accepts keyboard focus.
 
         Args:
@@ -54,17 +45,17 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
         Raises:
             InvalidParamError: Description
         """
-        if policy not in FOCUS_POLICY:
-            raise InvalidParamError(policy, FOCUS_POLICY)
-        self.setFocusPolicy(FOCUS_POLICY[policy])
+        if policy not in constants.FOCUS_POLICY:
+            raise InvalidParamError(policy, constants.FOCUS_POLICY)
+        self.setFocusPolicy(constants.FOCUS_POLICY[policy])
 
-    def get_focus_policy(self) -> FocusPolicyStr:
+    def get_focus_policy(self) -> constants.FocusPolicyStr:
         """Return way the widget accepts keyboard focus.
 
         Returns:
             str: Focus policy
         """
-        return FOCUS_POLICY.inverse[self.focusPolicy()]
+        return constants.FOCUS_POLICY.inverse[self.focusPolicy()]
 
 
 if __name__ == "__main__":

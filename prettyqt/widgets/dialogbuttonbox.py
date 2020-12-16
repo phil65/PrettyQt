@@ -1,8 +1,8 @@
-from typing import Callable, Sequence, Optional, Union, Iterator
+from typing import Callable, Sequence, Optional, Union, Iterator, Literal
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
 
@@ -27,6 +27,27 @@ BUTTONS = bidict(
     ignore=QtWidgets.QDialogButtonBox.Ignore,
 )
 
+ButtonStr = Literal[
+    "cancel",
+    "ok",
+    "save",
+    "open",
+    "close",
+    "discard",
+    "apply",
+    "reset",
+    "restore_defaults",
+    "help",
+    "save_all",
+    "yes",
+    "yes_to_all",
+    "no",
+    "no_to_all",
+    "abort",
+    "retry",
+    "ignore",
+]
+
 ROLES = bidict(
     invalid=QtWidgets.QDialogButtonBox.InvalidRole,
     accept=QtWidgets.QDialogButtonBox.AcceptRole,
@@ -40,8 +61,18 @@ ROLES = bidict(
     reset=QtWidgets.QDialogButtonBox.ResetRole,
 )
 
-ORIENTATIONS = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
-
+RoleStr = Literal[
+    "invalid",
+    "accept",
+    "reject",
+    "destructive",
+    "action",
+    "help",
+    "yes",
+    "no",
+    "apply",
+    "reset",
+]
 
 QtWidgets.QDialogButtonBox.__bases__ = (widgets.Widget,)
 
@@ -57,20 +88,20 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def __len__(self) -> int:
         return len(self.buttons())
 
-    def __getitem__(self, index: str) -> QtWidgets.QPushButton:
+    def __getitem__(self, index: ButtonStr) -> QtWidgets.QPushButton:
         return self.button(BUTTONS[index])
 
     def __iter__(self) -> Iterator[QtWidgets.QAbstractButton]:
         return iter(self.buttons())
 
-    def __contains__(self, item):
+    def __contains__(self, item: ButtonStr):
         return self[item] is not None
 
     @classmethod
     def create(cls, **kwargs):
         box = cls()
         for k, v in kwargs.items():
-            box.add_default_button(k, callback=v)
+            box.add_default_button(k, callback=v)  # type: ignore
         return box
 
     def on_click(self, button):
@@ -82,10 +113,8 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def set_vertical(self):
         self.setOrientation(QtCore.Qt.Vertical)
 
-    def set_orientation(self, orientation: str):
+    def set_orientation(self, orientation: constants.OrientationStr):
         """Set the orientation of the button box.
-
-        Allowed values are "horizontal", "vertical"
 
         Args:
             orientation: orientation for the button box
@@ -93,32 +122,25 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         Raises:
             InvalidParamError: orientation does not exist
         """
-        if orientation not in ORIENTATIONS:
-            raise InvalidParamError(orientation, ORIENTATIONS)
-        self.setOrientation(ORIENTATIONS[orientation])
+        if orientation not in constants.ORIENTATION:
+            raise InvalidParamError(orientation, constants.ORIENTATION)
+        self.setOrientation(constants.ORIENTATION[orientation])
 
-    def get_orientation(self) -> str:
+    def get_orientation(self) -> constants.OrientationStr:
         """Return current orientation.
-
-        Possible values: "horizontal", "vertical"
 
         Returns:
             orientation
         """
-        return ORIENTATIONS.inverse[self.orientation()]
+        return constants.ORIENTATION.inverse[self.orientation()]
 
-    def add_default_buttons(self, buttons: Sequence[str]):
+    def add_default_buttons(self, buttons: Sequence[ButtonStr]):
         return [self.add_default_button(btn) for btn in buttons]
 
     def add_default_button(
-        self, button: str, callback: Optional[Callable] = None
+        self, button: ButtonStr, callback: Optional[Callable] = None
     ) -> QtWidgets.QPushButton:
         """Add a default button.
-
-        Valid arguments: "cancel", "ok", "save", "open", "close",
-                         "discard", "apply", "reset", "restore_defaults",
-                         "help", "save_all", "yes", "yes_to_all", "no",
-                         "no_to_all", "abort", "retry", "ignore"
 
         Args:
             button: button to add
@@ -140,8 +162,8 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
     def add_button(
         self,
-        button: Union[QtWidgets.QPushButton, str],
-        role: str = "accept",
+        button: Union[QtWidgets.QPushButton, ButtonStr],
+        role: RoleStr = "accept",
         callback: Optional[Callable] = None,
     ) -> widgets.PushButton:
         """Add a button.

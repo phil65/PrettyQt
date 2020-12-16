@@ -3,7 +3,7 @@ import contextlib
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import core, gui
+from prettyqt import core, gui, constants
 from prettyqt.utils import bidict, colors, InvalidParamError
 
 
@@ -35,58 +35,6 @@ CompositionModeStr = Literal[
     "destination_atop",
 ]
 
-PATTERN = bidict(
-    none=QtCore.Qt.NoBrush,
-    solid=QtCore.Qt.SolidPattern,
-    dense_1=QtCore.Qt.Dense1Pattern,
-    dense_2=QtCore.Qt.Dense2Pattern,
-    dense_3=QtCore.Qt.Dense3Pattern,
-    dense_4=QtCore.Qt.Dense4Pattern,
-    dense_5=QtCore.Qt.Dense5Pattern,
-    dense_6=QtCore.Qt.Dense6Pattern,
-    dense_7=QtCore.Qt.Dense7Pattern,
-    horizontal=QtCore.Qt.HorPattern,
-    vertical=QtCore.Qt.VerPattern,
-    cross=QtCore.Qt.CrossPattern,
-    backward_diagonal=QtCore.Qt.BDiagPattern,
-    forward_diagonal=QtCore.Qt.FDiagPattern,
-    crossing_diagonal=QtCore.Qt.DiagCrossPattern,
-    linear_gradient=QtCore.Qt.LinearGradientPattern,
-    conical_gradient=QtCore.Qt.ConicalGradientPattern,
-    radial_gradient=QtCore.Qt.RadialGradientPattern,
-    texture=QtCore.Qt.TexturePattern,
-)
-
-PatternStr = Literal[
-    "none",
-    "solid",
-    "dense_1",
-    "dense_2",
-    "dense_3",
-    "dense_4",
-    "dense_5",
-    "dense_6",
-    "dense_7",
-    "horizontal",
-    "vertical",
-    "cross",
-    "backward_diagonal",
-    "forward_diagonal",
-    "crossing_diagonal",
-    "linear_gradient",
-    "conical_gradient",
-    "radial_gradient",
-    "texture",
-]
-
-CLIP_OPERATION = bidict(
-    none=QtCore.Qt.NoClip,
-    replace=QtCore.Qt.ReplaceClip,
-    intersect=QtCore.Qt.IntersectClip,
-)
-
-ClipOperationStr = Literal["none", "replace", "intersect"]
-
 RENDER_HINTS = bidict(
     antialiasing=QtGui.QPainter.Antialiasing,
     text_antialiasing=QtGui.QPainter.TextAntialiasing,
@@ -96,10 +44,6 @@ RENDER_HINTS = bidict(
     qt4_compatible_painting=QtGui.QPainter.Qt4CompatiblePainting,
     lossless_image_rendering=QtGui.QPainter.LosslessImageRendering,
 )
-
-FILL_RULE = bidict(odd_even=QtCore.Qt.OddEvenFill, winding=QtCore.Qt.WindingFill)
-
-FillRuleStr = Literal["odd_even", "winding"]
 
 
 class Painter(QtGui.QPainter):
@@ -129,10 +73,10 @@ class Painter(QtGui.QPainter):
         self.set_composition_mode("source_atop")
         self.drawImage(target, frame_buffer)
 
-    def draw_polygon(self, *args, fill_rule: FillRuleStr = "odd_even"):
-        if fill_rule not in FILL_RULE:
-            raise InvalidParamError(fill_rule, FILL_RULE)
-        self.drawPolygon(*args, fillRule=FILL_RULE[fill_rule])
+    def draw_polygon(self, *args, fill_rule: constants.FillRuleStr = "odd_even"):
+        if fill_rule not in constants.FILL_RULE:
+            raise InvalidParamError(fill_rule, constants.FILL_RULE)
+        self.drawPolygon(*args, fillRule=constants.FILL_RULE[fill_rule])
 
     def use_antialiasing(self):
         self.setRenderHint(self.Antialiasing, True)
@@ -141,10 +85,10 @@ class Painter(QtGui.QPainter):
         self,
         rect: Union[QtCore.QRectF, QtCore.QRect],
         color,
-        pattern: PatternStr = "solid",
+        pattern: constants.PatternStr = "solid",
     ):
-        if pattern not in PATTERN:
-            raise InvalidParamError(pattern, PATTERN)
+        if pattern not in constants.PATTERN:
+            raise InvalidParamError(pattern, constants.PATTERN)
         if isinstance(rect, tuple):
             rect = core.Rect(*rect)
         if isinstance(color, str):
@@ -152,16 +96,16 @@ class Painter(QtGui.QPainter):
                 raise ValueError("Invalid value for color.")
             color = gui.Color(color)
         if pattern != "solid":
-            color = gui.Brush(color, PATTERN[pattern])
+            color = gui.Brush(color, constants.PATTERN[pattern])
         self.fillRect(rect, color)
 
     def set_pen(
         self,
-        style: PatternStr = "solid",
+        style: constants.PenStyleStr = "solid",
         width: float = 1.0,
         color: colors.ColorType = "black",
-        join_style: gui.pen.JoinStyleStr = "bevel",
-        cap_style: gui.pen.CapStyleStr = "square",
+        join_style: constants.JoinStyleStr = "bevel",
+        cap_style: constants.CapStyleStr = "square",
     ):
         """Set pen to use.
 
@@ -220,17 +164,17 @@ class Painter(QtGui.QPainter):
         return COMPOSITION_MODE.inverse[self.compositionMode()]
 
     def set_clip_path(
-        self, path: QtGui.QPainterPath, operation: ClipOperationStr = "replace"
+        self, path: QtGui.QPainterPath, operation: constants.ClipOperationStr = "replace"
     ):
-        if operation not in CLIP_OPERATION:
-            raise InvalidParamError(operation, CLIP_OPERATION)
-        self.setClipPath(path, CLIP_OPERATION[operation])
+        if operation not in constants.CLIP_OPERATION:
+            raise InvalidParamError(operation, constants.CLIP_OPERATION)
+        self.setClipPath(path, constants.CLIP_OPERATION[operation])
 
     def get_text_rect(self, text: str) -> core.Rect:
         return self.drawText(core.Rect(), QtCore.Qt.TextDontPrint, text)
 
     @contextlib.contextmanager
-    def clip_path(self, operation: ClipOperationStr = "replace"):
+    def clip_path(self, operation: constants.ClipOperationStr = "replace"):
         path = gui.PainterPath()
         yield path
         self.set_clip_path(path, operation)

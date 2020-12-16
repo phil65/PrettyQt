@@ -1,26 +1,12 @@
 from qtpy import QtGui, QtCore
 
-from prettyqt import gui
-from prettyqt.utils import bidict, InvalidParamError
-
-
-CAP_STYLES = bidict(
-    flat=QtCore.Qt.FlatCap, square=QtCore.Qt.SquareCap, round=QtCore.Qt.RoundCap
-)
-
-JOIN_STYLES = bidict(
-    miter=QtCore.Qt.MiterJoin,
-    bevel=QtCore.Qt.BevelJoin,
-    round=QtCore.Qt.RoundJoin,
-    svg_miter=QtCore.Qt.SvgMiterJoin,
-)
+from prettyqt import gui, constants
+from prettyqt.utils import InvalidParamError
 
 
 class PainterPathStroker(QtGui.QPainterPathStroker):
-    def set_cap_style(self, style: str):
+    def set_cap_style(self, style: constants.CapStyleStr):
         """Set cap style to use.
-
-        Allowed values are "flat", "square", "round"
 
         Args:
             style: cap style to use
@@ -28,24 +14,20 @@ class PainterPathStroker(QtGui.QPainterPathStroker):
         Raises:
             InvalidParamError: cap style does not exist
         """
-        if style not in CAP_STYLES:
-            raise InvalidParamError(style, CAP_STYLES)
-        self.setCapStyle(CAP_STYLES[style])
+        if style not in constants.CAP_STYLE:
+            raise InvalidParamError(style, constants.CAP_STYLE)
+        self.setCapStyle(constants.CAP_STYLE[style])
 
-    def get_cap_style(self) -> str:
+    def get_cap_style(self) -> constants.CapStyleStr:
         """Return current cap style.
-
-        Possible values: "flat", "square", "round"
 
         Returns:
             cap style
         """
-        return CAP_STYLES.inverse[self.capStyle()]
+        return constants.CAP_STYLE.inverse[self.capStyle()]
 
-    def set_join_style(self, style: str):
+    def set_join_style(self, style: constants.JoinStyleStr):
         """Set join style to use.
-
-        Allowed values are "miter", "bevel", "round", "svg_miter"
 
         Args:
             style: join style to use
@@ -53,19 +35,17 @@ class PainterPathStroker(QtGui.QPainterPathStroker):
         Raises:
             InvalidParamError: join style does not exist
         """
-        if style not in JOIN_STYLES:
-            raise InvalidParamError(style, JOIN_STYLES)
-        self.setJoinStyle(JOIN_STYLES[style])
+        if style not in constants.JOIN_STYLE:
+            raise InvalidParamError(style, constants.JOIN_STYLE)
+        self.setJoinStyle(constants.JOIN_STYLE[style])
 
-    def get_join_style(self) -> str:
+    def get_join_style(self) -> constants.JoinStyleStr:
         """Return current join style.
-
-        Possible values: "miter", "bevel", "round", "svg_miter"
 
         Returns:
             join style
         """
-        return JOIN_STYLES.inverse[self.joinStyle()]
+        return constants.JOIN_STYLE.inverse[self.joinStyle()]
 
     def create_stroke(self, path: QtGui.QPainterPath) -> gui.PainterPath:
         return gui.PainterPath(self.createStroke(path))

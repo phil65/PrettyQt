@@ -2,8 +2,8 @@ from typing import Literal
 
 from qtpy import QtWidgets, QtCore
 
-from prettyqt import widgets
-from prettyqt.utils import bidict
+from prettyqt import widgets, constants
+from prettyqt.utils import bidict, InvalidParamError
 
 EDGE = bidict(
     left=QtCore.Qt.AnchorLeft,
@@ -17,15 +17,6 @@ EDGE = bidict(
 EdgeStr = Literal[
     "left", "horizontal_center", "right", "top", "vertical_center", "bottom"
 ]
-
-CORNER = bidict(
-    top_left=QtCore.Qt.TopLeftCorner,
-    top_right=QtCore.Qt.TopRightCorner,
-    bottom_left=QtCore.Qt.BottomLeftCorner,
-    bottom_right=QtCore.Qt.BottomRightCorner,
-)
-
-CornerStr = Literal["top_left", "top_right", "bottom_left", "bottom_right"]
 
 QtWidgets.QGraphicsAnchorLayout.__bases__ = (widgets.GraphicsLayout,)
 
@@ -55,25 +46,24 @@ class GraphicsAnchorLayout(QtWidgets.QGraphicsAnchorLayout):
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,
         second_item: QtWidgets.QGraphicsLayoutItem,
-        orientation: Literal["horizontal", "vertical"],
+        orientation: constants.OrientationStr,
     ):
-        if orientation == "horizontal":
-            flag = QtCore.Qt.Horizontal
-        elif orientation == "vertical":
-            flag = QtCore.Qt.Vertical
-        else:
-            raise ValueError()
-        self.addAnchors(first_item, second_item, flag)
+        if orientation not in constants.ORIENTATION:
+            raise InvalidParamError(orientation, constants.ORIENTATION)
+        self.addAnchors(first_item, second_item, constants.ORIENTATION[orientation])
 
     def add_corner_anchors(
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,
-        first_corner: CornerStr,
+        first_corner: constants.CornerStr,
         second_item: QtWidgets.QGraphicsLayoutItem,
-        second_corner: CornerStr,
+        second_corner: constants.CornerStr,
     ):
         self.addCornerAnchors(
-            first_item, CORNER[first_corner], second_item, CORNER[second_corner]
+            first_item,
+            constants.CORNER[first_corner],
+            second_item,
+            constants.CORNER[second_corner],
         )
 
 

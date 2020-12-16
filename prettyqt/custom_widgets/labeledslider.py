@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 
 from qtpy import QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, gui, widgets, constants
 
 
 class LabeledSlider(widgets.Widget):
@@ -14,7 +14,7 @@ class LabeledSlider(widgets.Widget):
     def __init__(
         self,
         labels: Sequence[str],
-        orientation: str = "horizontal",
+        orientation: constants.OrientationStr = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent=parent)

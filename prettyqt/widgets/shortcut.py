@@ -1,18 +1,7 @@
-from typing import Literal
+from qtpy import QtWidgets
 
-from qtpy import QtWidgets, QtCore
-
-from prettyqt import core, gui
-from prettyqt.utils import bidict, InvalidParamError
-
-CONTEXT = bidict(
-    widget=QtCore.Qt.WidgetShortcut,
-    widget_with_children=QtCore.Qt.WidgetWithChildrenShortcut,
-    window=QtCore.Qt.WindowShortcut,
-    application=QtCore.Qt.ApplicationShortcut,
-)
-
-ContextStr = Literal["widget", "widget_with_children", "window", "application"]
+from prettyqt import core, gui, constants
+from prettyqt.utils import InvalidParamError
 
 
 QtWidgets.QShortcut.__bases__ = (core.Object,)
@@ -34,7 +23,7 @@ class Shortcut(QtWidgets.QShortcut):
             whats_this=self.whatsThis(),
         )
 
-    def set_context(self, context: ContextStr):
+    def set_context(self, context: constants.ContextStr):
         """Set shortcut context.
 
         Args:
@@ -43,17 +32,17 @@ class Shortcut(QtWidgets.QShortcut):
         Raises:
             InvalidParamError: shortcut context does not exist
         """
-        if context not in CONTEXT:
-            raise InvalidParamError(context, CONTEXT)
-        self.setContext(CONTEXT[context])
+        if context not in constants.CONTEXT:
+            raise InvalidParamError(context, constants.CONTEXT)
+        self.setContext(constants.CONTEXT[context])
 
-    def get_context(self) -> ContextStr:
+    def get_context(self) -> constants.ContextStr:
         """Return shortcut context.
 
         Returns:
             shortcut context
         """
-        return CONTEXT.inverse[self.context()]
+        return constants.CONTEXT.inverse[self.context()]
 
     def get_key(self) -> gui.KeySequence:
         """Return the shortcut's key sequence.

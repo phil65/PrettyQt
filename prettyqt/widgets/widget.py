@@ -1,128 +1,15 @@
 from contextlib import contextmanager
 
-from typing import Dict, Iterator, Callable, Optional, Union, Any, Literal
+from typing import Dict, Iterator, Callable, Optional, Union, Any
 
 from qtpy import QtCore, QtGui, QtWidgets
 import qstylizer.parser
 import qstylizer.style
 from deprecated import deprecated
 
-from prettyqt import core, gui, widgets
-from prettyqt.utils import (
-    bidict,
-    colors,
-    InvalidParamError,
-    helpers,
-    prettyprinter,
-    mappers,
-)
+from prettyqt import core, gui, widgets, constants
+from prettyqt.utils import colors, InvalidParamError, helpers, prettyprinter
 
-
-CONTEXT_POLICY = bidict(
-    none=QtCore.Qt.NoContextMenu,
-    prevent=QtCore.Qt.PreventContextMenu,
-    default=QtCore.Qt.DefaultContextMenu,
-    actions=QtCore.Qt.ActionsContextMenu,
-    custom=QtCore.Qt.CustomContextMenu,
-    # showhide_menu="showhide_menu",
-)
-
-ContextPolicyStr = Literal["none", "prevent", "default", "actions", "custom"]
-
-MODALITY = bidict(
-    window=QtCore.Qt.WindowModal,
-    application=QtCore.Qt.ApplicationModal,
-    none=QtCore.Qt.NonModal,
-)
-
-ModalityStr = Literal["window", "application", "none"]
-
-CURSOR_SHAPE = bidict(
-    arrow=QtCore.Qt.ArrowCursor,
-    uparrow=QtCore.Qt.UpArrowCursor,
-    cross=QtCore.Qt.CrossCursor,
-    wait=QtCore.Qt.WaitCursor,
-    caret=QtCore.Qt.IBeamCursor,
-    size_vertical=QtCore.Qt.SizeVerCursor,
-    size_horizonal=QtCore.Qt.SizeHorCursor,
-    size_topright=QtCore.Qt.SizeBDiagCursor,
-    size_topleft=QtCore.Qt.SizeFDiagCursor,
-    size_all=QtCore.Qt.SizeAllCursor,
-    blank=QtCore.Qt.BlankCursor,
-    split_vertical=QtCore.Qt.SplitVCursor,
-    split_horizontal=QtCore.Qt.SplitHCursor,
-    pointing_hand=QtCore.Qt.PointingHandCursor,
-    forbidden=QtCore.Qt.ForbiddenCursor,
-    open_hand=QtCore.Qt.OpenHandCursor,
-    closed_hand=QtCore.Qt.ClosedHandCursor,
-    whats_this=QtCore.Qt.WhatsThisCursor,
-    busy=QtCore.Qt.BusyCursor,
-    drag_move=QtCore.Qt.DragMoveCursor,
-    drag_copy=QtCore.Qt.DragCopyCursor,
-    drag_link=QtCore.Qt.DragLinkCursor,
-    bitmap=QtCore.Qt.BitmapCursor,
-)
-
-CursorShapeStr = Literal[
-    "arrow",
-    "uparrow",
-    "cross",
-    "wait",
-    "caret",
-    "size_vertical",
-    "size_horizonal",
-    "size_topright",
-    "size_topleft",
-    "size_all",
-    "blank",
-    "split_vertical",
-    "split_horizontal",
-    "pointing_hand",
-    "forbidden",
-    "open_hand",
-    "closed_hand",
-    "whats_this",
-    "busy",
-    "drag_move",
-    "drag_copy",
-    "drag_link",
-    "bitmap",
-]
-
-FOCUS_POLICY = bidict(
-    tab=QtCore.Qt.TabFocus,
-    click=QtCore.Qt.ClickFocus,
-    strong=QtCore.Qt.StrongFocus,
-    wheel=QtCore.Qt.WheelFocus,
-    none=QtCore.Qt.NoFocus,
-)
-
-FocusPolicyStr = Literal["tab", "click", "strong", "wheel", "none"]
-
-WINDOW_FLAGS = bidict(
-    frameless=QtCore.Qt.FramelessWindowHint,
-    popup=QtCore.Qt.Popup,
-    stay_on_top=QtCore.Qt.WindowStaysOnTopHint,
-    tool=QtCore.Qt.Tool,
-    window_title=QtCore.Qt.WindowTitleHint,
-    customize_window=QtCore.Qt.CustomizeWindowHint,
-)
-
-ATTRIBUTES = bidict(
-    native_window=QtCore.Qt.WA_NativeWindow,
-    no_native_ancestors=QtCore.Qt.WA_DontCreateNativeAncestors,
-)
-
-WINDOW_STATES = mappers.FlagMap(
-    QtCore.Qt.WindowStates,
-    none=QtCore.Qt.WindowNoState,
-    minimized=QtCore.Qt.WindowMinimized,
-    maximized=QtCore.Qt.WindowMaximized,
-    fullscreen=QtCore.Qt.WindowFullScreen,
-    active=QtCore.Qt.WindowActive,
-)
-
-WindowStateStr = Literal["none", "minimized", "maximized", "fullscreen", "active"]
 
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
 
@@ -255,9 +142,9 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_window_flags(self, *flags: str, append: bool = False):
         for flag in flags:
-            if flag not in WINDOW_FLAGS:
-                raise InvalidParamError(flag, WINDOW_FLAGS)
-        result = helpers.merge_flags(flags, WINDOW_FLAGS)
+            if flag not in constants.WINDOW_FLAGS:
+                raise InvalidParamError(flag, constants.WINDOW_FLAGS)
+        result = helpers.merge_flags(flags, constants.WINDOW_FLAGS)
         if append:
             result = result | self.windowFlags()
         self.setWindowFlags(result)
@@ -285,17 +172,17 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             self.setWindowFlag(QtCore.Qt.Window, window)
 
     def set_attribute(self, attribute: str, state: bool = True) -> None:
-        if attribute not in ATTRIBUTES:
-            raise InvalidParamError(attribute, ATTRIBUTES)
-        self.setAttribute(ATTRIBUTES[attribute], state)
+        if attribute not in constants.WINDOW_ATTRIBUTES:
+            raise InvalidParamError(attribute, constants.WINDOW_ATTRIBUTES)
+        self.setAttribute(constants.WINDOW_ATTRIBUTES[attribute], state)
 
     def set_attributes(self, **kwargs: Dict[str, bool]) -> None:
         for attribute, state in kwargs.items():
-            if attribute not in ATTRIBUTES:
-                raise InvalidParamError(attribute, ATTRIBUTES)
-            self.setAttribute(ATTRIBUTES[attribute], state)
+            if attribute not in constants.WINDOW_ATTRIBUTES:
+                raise InvalidParamError(attribute, constants.WINDOW_ATTRIBUTES)
+            self.setAttribute(constants.WINDOW_ATTRIBUTES[attribute], state)
 
-    def set_modality(self, modality: ModalityStr) -> None:
+    def set_modality(self, modality: constants.ModalityStr) -> None:
         """Set modality for the dialog.
 
         Args:
@@ -304,17 +191,17 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Raises:
             InvalidParamError: modality type does not exist
         """
-        if modality not in MODALITY:
-            raise InvalidParamError(modality, MODALITY)
-        self.setWindowModality(MODALITY[modality])
+        if modality not in constants.MODALITY:
+            raise InvalidParamError(modality, constants.MODALITY)
+        self.setWindowModality(constants.MODALITY[modality])
 
-    def get_modality(self) -> ModalityStr:
+    def get_modality(self) -> constants.ModalityStr:
         """Get the current modality modes as a string.
 
         Returns:
             modality mode
         """
-        return MODALITY.inverse[self.windowModality()]
+        return constants.MODALITY.inverse[self.windowModality()]
 
     def set_size_policy(
         self,
@@ -385,7 +272,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         with self.edit_font() as font:
             yield font
 
-    def set_contextmenu_policy(self, policy: ContextPolicyStr) -> None:
+    def set_contextmenu_policy(self, policy: constants.ContextPolicyStr) -> None:
         """Set contextmenu policy for given item view.
 
         Args:
@@ -394,19 +281,19 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Raises:
             InvalidParamError: policy does not exist
         """
-        if policy not in CONTEXT_POLICY:
-            raise InvalidParamError(policy, CONTEXT_POLICY)
-        self.setContextMenuPolicy(CONTEXT_POLICY[policy])
+        if policy not in constants.CONTEXT_POLICY:
+            raise InvalidParamError(policy, constants.CONTEXT_POLICY)
+        self.setContextMenuPolicy(constants.CONTEXT_POLICY[policy])
 
-    def get_contextmenu_policy(self) -> ContextPolicyStr:
+    def get_contextmenu_policy(self) -> constants.ContextPolicyStr:
         """Return current contextmenu policy.
 
         Returns:
             contextmenu policy
         """
-        return CONTEXT_POLICY.inverse[self.contextMenuPolicy()]
+        return constants.CONTEXT_POLICY.inverse[self.contextMenuPolicy()]
 
-    def set_window_state(self, policy: WindowStateStr) -> None:
+    def set_window_state(self, policy: constants.WindowStateStr) -> None:
         """Set window state for given item view.
 
         Args:
@@ -415,17 +302,17 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Raises:
             InvalidParamError: policy does not exist
         """
-        if policy not in WINDOW_STATES:
-            raise InvalidParamError(policy, WINDOW_STATES)
-        self.setWindowState(WINDOW_STATES[policy])
+        if policy not in constants.WINDOW_STATES:
+            raise InvalidParamError(policy, constants.WINDOW_STATES)
+        self.setWindowState(constants.WINDOW_STATES[policy])
 
-    def get_window_state(self) -> WindowStateStr:
+    def get_window_state(self) -> constants.WindowStateStr:
         """Return current window state.
 
         Returns:
             window state
         """
-        return WINDOW_STATES.inverse[self.windowState()]
+        return constants.WINDOW_STATES.inverse[self.windowState()]
 
     def set_custom_menu(self, method: Callable) -> None:
         self.set_contextmenu_policy("custom")
@@ -467,12 +354,12 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def set_cursor(self, cursor: CursorShapeStr) -> None:
-        if cursor not in CURSOR_SHAPE:
-            raise InvalidParamError(cursor, CURSOR_SHAPE)
-        self.setCursor(CURSOR_SHAPE[cursor])
+    def set_cursor(self, cursor: constants.CursorShapeStr) -> None:
+        if cursor not in constants.CURSOR_SHAPE:
+            raise InvalidParamError(cursor, constants.CURSOR_SHAPE)
+        self.setCursor(constants.CURSOR_SHAPE[cursor])
 
-    def set_focus_policy(self, policy: FocusPolicyStr) -> None:
+    def set_focus_policy(self, policy: constants.FocusPolicyStr) -> None:
         """Set the way the widget accepts keyboard focus.
 
         Args:
@@ -481,17 +368,17 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         Raises:
             InvalidParamError: Description
         """
-        if policy not in FOCUS_POLICY:
-            raise InvalidParamError(policy, FOCUS_POLICY)
-        self.setFocusPolicy(FOCUS_POLICY[policy])
+        if policy not in constants.FOCUS_POLICY:
+            raise InvalidParamError(policy, constants.FOCUS_POLICY)
+        self.setFocusPolicy(constants.FOCUS_POLICY[policy])
 
-    def get_focus_policy(self) -> FocusPolicyStr:
+    def get_focus_policy(self) -> constants.FocusPolicyStr:
         """Return waay the widget accepts keyboard focus.
 
         Returns:
             str: Focus policy
         """
-        return FOCUS_POLICY.inverse[self.focusPolicy()]
+        return constants.FOCUS_POLICY.inverse[self.focusPolicy()]
 
     def set_font_size(self, size: int) -> None:
         font = self.font()

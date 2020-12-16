@@ -1,31 +1,10 @@
 from typing import Literal
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets
 
-from prettyqt import core, widgets
+from prettyqt import core, widgets, constants
 from prettyqt.utils import bidict, InvalidParamError
 
-
-GESTURE_TYPE = bidict(
-    tap=QtCore.Qt.TapGesture,
-    tap_and_hold=QtCore.Qt.TapAndHoldGesture,
-    pan=QtCore.Qt.PanGesture,
-    pinch=QtCore.Qt.PinchGesture,
-    swipe=QtCore.Qt.SwipeGesture,
-    custom=QtCore.Qt.CustomGesture,
-)
-
-GestureTypeStr = Literal["tap", "tap_and_hold", "pan", "pinch", "swipe", "custom"]
-
-GESTURE_STATE = bidict(
-    none=0,  # QtCore.Qt.NoGesture,
-    started=QtCore.Qt.GestureStarted,
-    updated=QtCore.Qt.GestureUpdated,
-    finished=QtCore.Qt.GestureFinished,
-    canceled=QtCore.Qt.GestureCanceled,
-)
-
-GestureStateStr = Literal["none", "started", "updated", "finished", "canceled"]
 
 GESTURE_CANCEL_POLICY = bidict(
     none=QtWidgets.QGesture.CancelNone,
@@ -38,21 +17,21 @@ QtWidgets.QGesture.__bases__ = (core.Object,)
 
 
 class Gesture(QtWidgets.QGesture):
-    def get_state(self) -> GestureStateStr:
+    def get_state(self) -> constants.GestureStateStr:
         """Return current state.
 
         Returns:
             state
         """
-        return GESTURE_STATE.inverse[self.state()]
+        return constants.GESTURE_STATE.inverse[self.state()]
 
-    def get_gesture_type(self) -> GestureTypeStr:
+    def get_gesture_type(self) -> constants.GestureTypeStr:
         """Return current gesture type.
 
         Returns:
             gesture type
         """
-        return GESTURE_TYPE.inverse[self.gestureType()]
+        return constants.GESTURE_TYPE.inverse[self.gestureType()]
 
     def get_hot_spot(self) -> core.PointF:
         return core.PointF(self.hotSpot())

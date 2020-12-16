@@ -1,18 +1,8 @@
 from typing import Dict, Any
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
-from prettyqt import widgets
-from prettyqt.utils import bidict
-
-
-ALLOWED_AREAS = bidict(
-    all=QtCore.Qt.AllDockWidgetAreas,
-    left=QtCore.Qt.LeftDockWidgetArea,
-    right=QtCore.Qt.RightDockWidgetArea,
-    top=QtCore.Qt.TopDockWidgetArea,
-    bottom=QtCore.Qt.BottomDockWidgetArea,
-)
+from prettyqt import widgets, constants
 
 
 QtWidgets.QDockWidget.__bases__ = (widgets.Widget,)
@@ -46,8 +36,8 @@ class DockWidget(QtWidgets.QDockWidget):
     def set_widget(self, widget):
         self.setWidget(widget)
 
-    def set_allowed_areas(self, area):
-        self.setAllowedAreas(ALLOWED_AREAS[area])
+    def set_allowed_areas(self, area: constants.DockPositionsStr):
+        self.setAllowedAreas(constants.DOCK_POSITIONS[area])
 
     def setup_title_bar(self):
         title_bar = widgets.Widget()

@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import widgets, gui, constants
@@ -10,6 +12,8 @@ MARKER_SHAPES = bidict(
     circle=QtCharts.QLegend.MarkerShapeCircle,
     from_series=QtCharts.QLegend.MarkerShapeFromSeries,
 )
+
+MarkerShapeStr = Literal["default", "rectangle", "circle", "from_series"]
 
 QtCharts.QLegend.__bases__ = (widgets.GraphicsWidget,)
 
@@ -37,8 +41,6 @@ class Legend:
     def set_alignment(self, alignment: constants.SideStr):
         """Set the alignment of the legend.
 
-        Allowed values are "left", "right", "top", "bottom"
-
         Args:
             alignment: alignment for the legend
 
@@ -49,20 +51,16 @@ class Legend:
             raise InvalidParamError(alignment, constants.SIDES)
         self.setAlignment(constants.SIDES[alignment])
 
-    def get_alignment(self) -> str:
+    def get_alignment(self) -> constants.SideStr:
         """Return current alignment.
-
-        Possible values: "left", "right", "top", "bottom"
 
         Returns:
             alignment
         """
         return constants.SIDES.inverse[self.alignment()]
 
-    def set_marker_shape(self, shape: str):
+    def set_marker_shape(self, shape: MarkerShapeStr):
         """Set the marker shape.
-
-        Allowed values are "default", "rectangle", "circle", "from_series"
 
         Args:
             shape: marker shape
@@ -74,10 +72,8 @@ class Legend:
             raise InvalidParamError(shape, MARKER_SHAPES)
         self.setMarkerShape(MARKER_SHAPES[shape])
 
-    def get_marker_shape(self) -> str:
+    def get_marker_shape(self) -> MarkerShapeStr:
         """Return current marker shape.
-
-        Possible values are "default", "rectangle", "circle", "from_series"
 
         Returns:
             Marker shape

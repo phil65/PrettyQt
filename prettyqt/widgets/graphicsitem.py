@@ -2,33 +2,9 @@ from typing import List, Union, Literal
 
 from qtpy import QtWidgets, QtCore, QtGui
 
-from prettyqt import gui
+from prettyqt import gui, constants
 from prettyqt.utils import bidict, InvalidParamError
 
-ITEM_SELECTION_MODE = bidict(
-    contains_shape=QtCore.Qt.ContainsItemShape,
-    intersects_shape=QtCore.Qt.IntersectsItemShape,
-    contains_bounding_rect=QtCore.Qt.ContainsItemBoundingRect,
-    intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
-)
-
-ItemSelectionModeStr = Literal[
-    "contains_shape",
-    "intersects_shape",
-    "contains_bounding_rect",
-    "intersects_bounding_rect",
-]
-
-FOCUS_REASONS = bidict(
-    mouse=QtCore.Qt.MouseFocusReason,
-    tab=QtCore.Qt.TabFocusReason,
-    backtab=QtCore.Qt.BacktabFocusReason,
-    active_window=QtCore.Qt.ActiveWindowFocusReason,
-    popup=QtCore.Qt.PopupFocusReason,
-    shortcut=QtCore.Qt.ShortcutFocusReason,
-    menu_bar=QtCore.Qt.MenuBarFocusReason,
-    other=QtCore.Qt.OtherFocusReason,
-)
 
 MODALITY = bidict(
     none=QtWidgets.QGraphicsItem.NonModal,
@@ -52,29 +28,29 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
     def __setitem__(self, key: int, value):
         self.setData(key, value)
 
-    def set_focus(self, reason: str = "other"):
-        if reason not in FOCUS_REASONS:
-            raise InvalidParamError(reason, FOCUS_REASONS)
-        self.setFocus(FOCUS_REASONS[reason])
+    def set_focus(self, reason: constants.FocusReasonStr = "other"):
+        if reason not in constants.FOCUS_REASONS:
+            raise InvalidParamError(reason, constants.FOCUS_REASONS)
+        self.setFocus(constants.FOCUS_REASONS[reason])
 
     def colliding_items(
-        self, mode: ItemSelectionModeStr = "intersects_shape"
+        self, mode: constants.ItemSelectionModeStr = "intersects_shape"
     ) -> List[QtWidgets.QGraphicsItem]:
-        if mode not in ITEM_SELECTION_MODE:
-            raise InvalidParamError(mode, ITEM_SELECTION_MODE)
-        return self.collidingItems(ITEM_SELECTION_MODE[mode])
+        if mode not in constants.ITEM_SELECTION_MODE:
+            raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
+        return self.collidingItems(constants.ITEM_SELECTION_MODE[mode])
 
     def collides_with(
         self,
         item: Union[QtGui.QPainterPath, QtWidgets.QGraphicsItem],
-        mode: ItemSelectionModeStr = "intersects_shape",
+        mode: constants.ItemSelectionModeStr = "intersects_shape",
     ) -> bool:
-        if mode not in ITEM_SELECTION_MODE:
-            raise InvalidParamError(mode, ITEM_SELECTION_MODE)
+        if mode not in constants.ITEM_SELECTION_MODE:
+            raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
         if isinstance(item, QtGui.QPainterPath):
-            return self.collidesWithPath(item, ITEM_SELECTION_MODE[mode])
+            return self.collidesWithPath(item, constants.ITEM_SELECTION_MODE[mode])
         else:
-            return self.collidesWithItem(item, ITEM_SELECTION_MODE[mode])
+            return self.collidesWithItem(item, constants.ITEM_SELECTION_MODE[mode])
 
     def set_panel_modality(self, modality: PanelModalityStr) -> None:
         """Set panel modality.

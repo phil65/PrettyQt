@@ -1,47 +1,13 @@
-from typing import Optional, Iterator, MutableMapping, Mapping, Union, Literal
+from typing import Optional, Iterator, MutableMapping, Mapping, Union
 import logging
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, gui, widgets, constants
+from prettyqt.utils import InvalidParamError
 
 logger = logging.getLogger(__name__)
 
-
-UI_EFFECTS = bidict(
-    animate_menu=QtCore.Qt.UI_AnimateMenu,
-    fade_menu=QtCore.Qt.UI_FadeMenu,
-    animate_combo=QtCore.Qt.UI_AnimateCombo,
-    animate_tooltip=QtCore.Qt.UI_AnimateTooltip,
-    fade_tooltip=QtCore.Qt.UI_FadeTooltip,
-    animate_toolbox=QtCore.Qt.UI_AnimateToolBox,
-)
-
-UiEffectStr = Literal[
-    "animate_menu",
-    "fade_menu",
-    "animate_combo",
-    "animate_tooltip",
-    "fade_tooltip",
-    "animate_toolbox",
-]
-
-NAVIGATION_MODES = bidict(
-    none=QtCore.Qt.NavigationModeNone,
-    keypad_tab_order=QtCore.Qt.NavigationModeKeypadTabOrder,
-    keypad_directional=QtCore.Qt.NavigationModeKeypadDirectional,
-    cursor_auto=QtCore.Qt.NavigationModeCursorAuto,
-    cursor_force_visible=QtCore.Qt.NavigationModeCursorForceVisible,
-)
-
-NavigationModeStr = Literal[
-    "none",
-    "keypad_tab_order",
-    "keypad_directional",
-    "cursor_auto",
-    "cursor_force_visible",
-]
 
 SAVE_STATES = dict(
     splitters=QtWidgets.QSplitter,
@@ -145,7 +111,7 @@ class Application(QtWidgets.QApplication):
         self,
         obj_or_str: Union[str, QtCore.QObject],
         event: QtCore.QEvent,
-        priority: Union[int, core.coreapplication.EventPriorityStr] = "normal",
+        priority: Union[int, constants.EventPriorityStr] = "normal",
     ):
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
         if obj is None:
@@ -161,7 +127,7 @@ class Application(QtWidgets.QApplication):
         icon = style.standardIcon(widgets.style.STANDARD_PIXMAP[icon])
         return gui.Icon(icon)
 
-    def set_effect_enabled(self, effect: UiEffectStr, enabled: bool = True):
+    def set_effect_enabled(self, effect: constants.UiEffectStr, enabled: bool = True):
         """Set the enabled state of a desktop effect.
 
         Args:
@@ -171,19 +137,19 @@ class Application(QtWidgets.QApplication):
         Raises:
             InvalidParamError: invalid desktop effect
         """
-        if effect not in UI_EFFECTS:
-            raise InvalidParamError(effect, UI_EFFECTS)
-        self.setEffectEnabled(UI_EFFECTS[effect])
+        if effect not in constants.UI_EFFECTS:
+            raise InvalidParamError(effect, constants.UI_EFFECTS)
+        self.setEffectEnabled(constants.UI_EFFECTS[effect])
 
-    def is_effect_enabled(self, effect: UiEffectStr) -> str:
+    def is_effect_enabled(self, effect: constants.UiEffectStr) -> str:
         """Return desktop effect state.
 
         Returns:
             desktop effect state
         """
-        return self.isEffectEnabled(UI_EFFECTS[effect])
+        return self.isEffectEnabled(constants.UI_EFFECTS[effect])
 
-    def set_navigation_mode(self, mode: NavigationModeStr):
+    def set_navigation_mode(self, mode: constants.NavigationModeStr):
         """Set the navigation mode.
 
         Args:
@@ -192,17 +158,17 @@ class Application(QtWidgets.QApplication):
         Raises:
             InvalidParamError: invalid navigation mode
         """
-        if mode not in NAVIGATION_MODES:
-            raise InvalidParamError(mode, NAVIGATION_MODES)
-        self.setNavigationMode(NAVIGATION_MODES[mode])
+        if mode not in constants.NAVIGATION_MODES:
+            raise InvalidParamError(mode, constants.NAVIGATION_MODES)
+        self.setNavigationMode(constants.NAVIGATION_MODES[mode])
 
-    def get_navigation_mode(self) -> NavigationModeStr:
+    def get_navigation_mode(self) -> constants.NavigationModeStr:
         """Return navigation mode.
 
         Returns:
             navigation mode
         """
-        return NAVIGATION_MODES.inverse[self.navigationMode()]
+        return constants.NAVIGATION_MODES.inverse[self.navigationMode()]
 
 
 if __name__ == "__main__":
