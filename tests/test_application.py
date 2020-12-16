@@ -1,7 +1,7 @@
 """Tests for `prettyqt` package."""
 
 import pytest
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt import core, widgets
 from prettyqt.utils import InvalidParamError

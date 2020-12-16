@@ -1,6 +1,7 @@
 import os
-import toml
 import subprocess
+
+import toml
 
 
 if __name__ == "__main__":

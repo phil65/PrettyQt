@@ -8,7 +8,7 @@ from prettyqt.utils import InvalidParamError
 
 @pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
 def test_sciscintilla(qtbot):
-    from prettyqt import scintilla, gui
+    from prettyqt import gui, scintilla
 
     widget = scintilla.SciScintilla()
     widget.define_marker("circle", 0)

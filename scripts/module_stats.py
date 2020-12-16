@@ -1,5 +1,7 @@
-from prettyqt import gui, widgets, core
-from qtpy import QtGui, QtWidgets, QtCore
+from qtpy import QtCore, QtGui, QtWidgets
+
+from prettyqt import core, gui, widgets
+
 
 OBSELETE = ["QPictureIO", "QDesktopWidget", "QDirModel"]
 

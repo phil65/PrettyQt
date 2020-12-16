@@ -1,6 +1,7 @@
 import pathlib
-import sys
 import re
+import sys
+
 
 script_path = pathlib.Path(__file__).parent
 

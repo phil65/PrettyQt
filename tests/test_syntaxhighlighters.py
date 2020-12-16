@@ -1,7 +1,8 @@
 """Tests for `prettyqt` package."""
 
-from prettyqt import syntaxhighlighters
 import re
+
+from prettyqt import syntaxhighlighters
 
 
 def test_jsonhighlighter():

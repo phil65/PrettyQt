@@ -3,8 +3,10 @@
 import pathlib
 
 import pytest
-from prettyqt import qml, core
+
+from prettyqt import core, qml
 from prettyqt.utils import InvalidParamError
+
 
 # def test_jsvalue():
 #     val = qml.JSValue(2)

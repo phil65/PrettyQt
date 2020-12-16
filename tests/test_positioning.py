@@ -1,7 +1,6 @@
 """Tests for `prettyqt` package."""
 
 import pytest
-
 from qtpy import QtCore
 
 from prettyqt import core, positioning

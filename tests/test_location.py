@@ -1,11 +1,10 @@
 """Tests for `prettyqt` package."""
 
 import pytest
-
 import qtpy
 from qtpy import QtLocation
 
-from prettyqt import location, core
+from prettyqt import core, location
 from prettyqt.utils import InvalidParamError
 
 

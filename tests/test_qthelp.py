@@ -2,7 +2,8 @@
 
 # import pytest
 
-from prettyqt import qthelp, core
+from prettyqt import core, qthelp
+
 
 # from prettyqt.utils import InvalidParamError
 

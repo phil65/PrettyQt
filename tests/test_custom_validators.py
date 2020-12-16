@@ -1,12 +1,13 @@
 """Tests for `prettyqt` package."""
 
-import pickle
-import pathlib
 import inspect
+import pathlib
+import pickle
 
 import pytest
 
 from prettyqt import custom_validators
+
 
 clsmembers = inspect.getmembers(custom_validators, inspect.isclass)
 

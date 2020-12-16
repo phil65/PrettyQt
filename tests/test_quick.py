@@ -5,7 +5,7 @@ import pathlib
 
 import pytest
 
-from prettyqt import quick, gui, core
+from prettyqt import core, gui, quick
 from prettyqt.utils import InvalidParamError
 
 

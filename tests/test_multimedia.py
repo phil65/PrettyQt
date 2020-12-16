@@ -1,12 +1,13 @@
 """Tests for `prettyqt` package."""
 
 import pathlib
-
-import pytest
 import pickle
 
-from prettyqt import multimedia, core
+import pytest
+
+from prettyqt import core, multimedia
 from prettyqt.utils import InvalidParamError
+
 
 URL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
 

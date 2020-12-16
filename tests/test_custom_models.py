@@ -2,7 +2,7 @@
 
 # import regex as re
 
-from prettyqt import custom_models, widgets, multimedia
+from prettyqt import custom_models, multimedia, widgets
 
 
 def test_transposeproxymodel():

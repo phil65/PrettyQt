@@ -1,14 +1,15 @@
 """Tests for `prettyqt` package."""
 
-import pickle
-import pytest
-import pathlib
 import inspect
+import pathlib
+import pickle
 
+import pytest
 from qtpy import QtCore
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError
+
 
 clsmembers = inspect.getmembers(gui, inspect.isclass)
 clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]

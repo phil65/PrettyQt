@@ -1,13 +1,13 @@
 """Tests for `prettyqt` package."""
 
+import logging
 import pickle
 import re
-import logging
 
 from qtpy import QtCore, QtGui
 
-import prettyqt.custom_widgets.dataset as fo
 from prettyqt import core, custom_widgets, gui, widgets
+import prettyqt.custom_widgets.dataset as fo
 
 
 def test_booldicttoolbutton(qtbot):

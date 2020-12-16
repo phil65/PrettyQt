@@ -2,7 +2,7 @@
 
 import pytest
 
-from prettyqt import webenginecore, core
+from prettyqt import core, webenginecore
 from prettyqt.utils import InvalidParamError
 
 

@@ -1,7 +1,7 @@
 """Tests for `prettyqt` package."""
 import pytest
 
-from prettyqt import network, core
+from prettyqt import core, network
 from prettyqt.utils import InvalidParamError
 
 

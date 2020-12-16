@@ -1,5 +1,6 @@
-import sys
 import pathlib
+import sys
+
 from typed_ast import ast3
 
 
