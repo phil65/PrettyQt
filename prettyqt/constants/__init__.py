@@ -66,52 +66,76 @@ KEY_F11 = QtCore.Qt.Key_F11
 KEY_DELETE = QtCore.Qt.Key_Delete
 
 
-try:
-    ALIGNMENTS = bidict(
-        left=ALIGN_LEFT,
-        right=ALIGN_RIGHT,
-        top=ALIGN_TOP,
-        bottom=ALIGN_BOTTOM,
-        top_left=ALIGN_TOP_LEFT,
-        top_right=ALIGN_TOP_RIGHT,
-        bottom_left=ALIGN_BOTTOM_LEFT,
-        bottom_right=ALIGN_BOTTOM_RIGHT,
-        center=ALIGN_CENTER,
-    )
+class Bidict:
+    def __init__(self, initializer, **kwargs):
+        self.initializer = initializer
+        kwargs = {k: int(v) for k, v in kwargs.items()}
+        self.bidict = bidict(**kwargs)
 
-    SIDES = bidict(
-        left=QtCore.Qt.AlignLeft,
-        right=QtCore.Qt.AlignRight,
-        top=QtCore.Qt.AlignTop,
-        bottom=QtCore.Qt.AlignBottom,
-    )
-    EDGES = bidict(
-        top=QtCore.Qt.TopEdge,
-        left=QtCore.Qt.LeftEdge,
-        right=QtCore.Qt.RightEdge,
-        bottom=QtCore.Qt.BottomEdge,
-        top_left=QtCore.Qt.TopEdge | QtCore.Qt.LeftEdge,
-        top_right=QtCore.Qt.TopEdge | QtCore.Qt.RightEdge,
-        bottom_left=QtCore.Qt.BottomEdge | QtCore.Qt.LeftEdge,
-        bottom_right=QtCore.Qt.BottomEdge | QtCore.Qt.RightEdge,
-    )
+        class Inverter:
+            def __getitem__(self2, value):
+                return self.bidict.inverse[int(value)]
 
-    H_ALIGNMENT = bidict(
-        left=QtCore.Qt.AlignLeft,
-        right=QtCore.Qt.AlignRight,
-        center=QtCore.Qt.AlignHCenter,
-        justify=QtCore.Qt.AlignJustify,
-    )
+        self.inverse = Inverter()
 
-    V_ALIGNMENT = bidict(
-        top=QtCore.Qt.AlignTop,
-        bottom=QtCore.Qt.AlignBottom,
-        center=QtCore.Qt.AlignVCenter,
-        baseline=QtCore.Qt.AlignBaseline,
-    )
+    def __getitem__(self, index):
+        return self.initializer(self.bidict[index])
 
-except TypeError:
-    ALIGNMENTS = SIDES = EDGES = H_ALIGNMENT = V_ALIGNMENT = bidict()
+    def __contains__(self, other):
+        return other in self.bidict
+
+    def __iter__(self):
+        return iter(self.bidict.keys())
+
+
+ALIGNMENTS = Bidict(
+    QtCore.Qt.Alignment,
+    # none=int(QtCore.Qt.Alignment(0)),
+    left=ALIGN_LEFT,
+    right=ALIGN_RIGHT,
+    top=ALIGN_TOP,
+    bottom=ALIGN_BOTTOM,
+    top_left=ALIGN_TOP_LEFT,
+    top_right=ALIGN_TOP_RIGHT,
+    bottom_left=ALIGN_BOTTOM_LEFT,
+    bottom_right=ALIGN_BOTTOM_RIGHT,
+    center=ALIGN_CENTER,
+)
+
+SIDES = Bidict(
+    QtCore.Qt.Alignment,
+    left=QtCore.Qt.AlignLeft,
+    right=QtCore.Qt.AlignRight,
+    top=QtCore.Qt.AlignTop,
+    bottom=QtCore.Qt.AlignBottom,
+)
+EDGES = Bidict(
+    QtCore.Qt.Edges,
+    top=QtCore.Qt.TopEdge,
+    left=QtCore.Qt.LeftEdge,
+    right=QtCore.Qt.RightEdge,
+    bottom=QtCore.Qt.BottomEdge,
+    top_left=QtCore.Qt.TopEdge | QtCore.Qt.LeftEdge,
+    top_right=QtCore.Qt.TopEdge | QtCore.Qt.RightEdge,
+    bottom_left=QtCore.Qt.BottomEdge | QtCore.Qt.LeftEdge,
+    bottom_right=QtCore.Qt.BottomEdge | QtCore.Qt.RightEdge,
+)
+
+H_ALIGNMENT = Bidict(
+    QtCore.Qt.Alignment,
+    left=QtCore.Qt.AlignLeft,
+    right=QtCore.Qt.AlignRight,
+    center=QtCore.Qt.AlignHCenter,
+    justify=QtCore.Qt.AlignJustify,
+)
+
+V_ALIGNMENT = Bidict(
+    QtCore.Qt.Alignment,
+    top=QtCore.Qt.AlignTop,
+    bottom=QtCore.Qt.AlignBottom,
+    center=QtCore.Qt.AlignVCenter,
+    baseline=QtCore.Qt.AlignBaseline,
+)
 
 EdgeStr = Literal[
     "top",
