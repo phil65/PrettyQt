@@ -25,6 +25,10 @@ class GraphicsLayout(QtWidgets.QGraphicsLayout):
     def __contains__(self, item):
         return item in self.get_children()
 
+    def __len__(self):
+        # for PySide2
+        return self.count()
+
     def get_children(self) -> List[QtWidgets.QGraphicsItem]:
         return list(self)
 
