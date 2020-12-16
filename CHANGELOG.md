@@ -1,3 +1,10 @@
+## v0.152.0 (2020-12-16)
+
+### Feat
+
+- **Standarditem/StandardItemModel**: add enabled and editable kwarg to add_item methods
+- **AbstractItemView**: add get/set_drag_drop_mode methods
+
 ## v0.151.0 (2020-12-16)
 
 ### Feat
