@@ -2,8 +2,7 @@ from typing import Any, Literal
 
 from qtpy import QtGui
 
-from prettyqt.utils import bidict, InvalidParamError
-
+from prettyqt.utils import bidict, InvalidParamError, mappers
 
 IMAGE_OPTION = bidict(
     size=QtGui.QImageIOHandler.Size,
@@ -28,7 +27,8 @@ IMAGE_OPTION = bidict(
     transformation_by_default=QtGui.QImageIOHandler.TransformedByDefault,
 )
 
-TRANSFORMATION = bidict(
+TRANSFORMATION = mappers.FlagMap(
+    QtGui.QImageIOHandler.Transformations,
     none=QtGui.QImageIOHandler.TransformationNone,
     mirror=QtGui.QImageIOHandler.TransformationMirror,
     flip=QtGui.QImageIOHandler.TransformationFlip,

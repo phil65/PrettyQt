@@ -1,7 +1,7 @@
 from qtpy import QtMultimedia
 
 from prettyqt import core, multimedia
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, mappers
 
 
 EXPOSURE_MODES = bidict(
@@ -29,7 +29,8 @@ EXPOSURE_MODES = bidict(
     mode_vendor=QtMultimedia.QCameraExposure.ExposureModeVendor,
 )
 
-FLASH_MODES = bidict(
+FLASH_MODES = mappers.FlagMap(
+    QtMultimedia.QCameraExposure.FlashModes,
     auto=QtMultimedia.QCameraExposure.FlashAuto,
     flash_off=QtMultimedia.QCameraExposure.FlashOff,
     flash_on=QtMultimedia.QCameraExposure.FlashOn,

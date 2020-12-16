@@ -2,10 +2,11 @@ from typing import List
 from qtpy import QtMultimedia
 
 from prettyqt import core, multimedia
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, mappers
 
 
-FOCUS_MODES = bidict(
+FOCUS_MODES = mappers.FlagMap(
+    QtMultimedia.QCameraFocus.FocusModes,
     manual=QtMultimedia.QCameraFocus.ManualFocus,
     hyperfocal=QtMultimedia.QCameraFocus.HyperfocalFocus,
     infinity=QtMultimedia.QCameraFocus.InfinityFocus,

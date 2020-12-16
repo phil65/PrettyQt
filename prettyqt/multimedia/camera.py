@@ -3,10 +3,11 @@ from typing import List
 from qtpy import QtMultimedia
 
 from prettyqt import multimedia
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, mappers
 
 
-CAPTURE_MODES = bidict(
+CAPTURE_MODES = mappers.FlagMap(
+    QtMultimedia.QCamera.CaptureModes,
     viewfinder=QtMultimedia.QCamera.CaptureViewfinder,
     still_image=QtMultimedia.QCamera.CaptureStillImage,
     video=QtMultimedia.QCamera.CaptureVideo,

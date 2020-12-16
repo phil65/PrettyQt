@@ -83,9 +83,9 @@ class Completer(QtWidgets.QCompleter):
         Raises:
             InvalidParamError: filter mode does not exist
         """
-        if mode not in constants.FILTER_MODE:
-            raise InvalidParamError(mode, constants.FILTER_MODE)
-        self.setFilterMode(constants.FILTER_MODE[mode])
+        if mode not in constants.FILTER_MODES:
+            raise InvalidParamError(mode, constants.FILTER_MODES)
+        self.setFilterMode(constants.FILTER_MODES[mode])
 
     def get_filter_mode(self) -> constants.FilterModeStr:
         """Return current filter mode.
@@ -93,7 +93,7 @@ class Completer(QtWidgets.QCompleter):
         Returns:
             filter mode
         """
-        return constants.FILTER_MODE.inverse[self.filterMode()]
+        return constants.FILTER_MODES.inverse[self.filterMode()]
 
 
 if __name__ == "__main__":

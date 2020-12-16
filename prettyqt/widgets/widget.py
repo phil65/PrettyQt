@@ -8,7 +8,14 @@ import qstylizer.style
 from deprecated import deprecated
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, colors, InvalidParamError, helpers, prettyprinter
+from prettyqt.utils import (
+    bidict,
+    colors,
+    InvalidParamError,
+    helpers,
+    prettyprinter,
+    mappers,
+)
 
 
 CONTEXT_POLICY = bidict(
@@ -106,7 +113,8 @@ ATTRIBUTES = bidict(
     no_native_ancestors=QtCore.Qt.WA_DontCreateNativeAncestors,
 )
 
-WINDOW_STATES = bidict(
+WINDOW_STATES = mappers.FlagMap(
+    QtCore.Qt.WindowStates,
     none=QtCore.Qt.WindowNoState,
     minimized=QtCore.Qt.WindowMinimized,
     maximized=QtCore.Qt.WindowMaximized,

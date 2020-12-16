@@ -40,11 +40,9 @@ class GeoRoutingManager:
         ]
 
     def get_supported_route_optimizations(self) -> List[str]:
-        return [
-            k
-            for k, v in location.georouterequest.ROUTE_OPTIMIZATION.items()
-            if v & self.item.supportedRouteOptimizations()
-        ]
+        return location.georouterequest.ROUTE_OPTIMIZATION.get_list(
+            self.item.supportedRouteOptimizations()
+        )
 
     def get_supported_segment_details(self) -> List[str]:
         return [

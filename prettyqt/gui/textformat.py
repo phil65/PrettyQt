@@ -2,7 +2,7 @@ from qtpy import QtGui, QtCore
 
 from prettyqt import gui
 
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, mappers
 
 FORMAT_TYPE = bidict(
     invalid=QtGui.QTextFormat.InvalidFormat,
@@ -21,7 +21,8 @@ OBJECT_TYPE = bidict(
     user=QtGui.QTextFormat.UserObject,
 )
 
-PAGE_BREAK_FLAG = bidict(
+PAGE_BREAK_FLAG = mappers.FlagMap(
+    QtGui.QTextFormat.PageBreakFlags,
     auto=QtGui.QTextFormat.PageBreak_Auto,
     always_before=QtGui.QTextFormat.PageBreak_AlwaysBefore,
     always_after=QtGui.QTextFormat.PageBreak_AlwaysAfter,

@@ -5,10 +5,11 @@ import contextlib
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict
+from prettyqt.utils import mappers
 
 
-OPEN_MODES = bidict(
+OPEN_MODES = mappers.FlagMap(
+    QtCore.QIODevice.OpenModeFlag,
     not_open=QtCore.QIODevice.NotOpen,
     read_only=QtCore.QIODevice.ReadOnly,
     write_only=QtCore.QIODevice.WriteOnly,

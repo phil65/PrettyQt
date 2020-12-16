@@ -3,7 +3,7 @@ from typing import List, Literal
 from qtpy import QtWidgets, QtCore
 
 from prettyqt import core, widgets, gui
-from prettyqt.utils import InvalidParamError, bidict, helpers
+from prettyqt.utils import InvalidParamError, bidict, helpers, mappers
 
 
 DRAG_MODE = bidict(
@@ -14,7 +14,8 @@ DRAG_MODE = bidict(
 
 DragModeStr = Literal["none", "scroll_hand", "rubber_band"]
 
-CACHE_MODES = bidict(
+CACHE_MODES = mappers.FlagMap(
+    QtWidgets.QGraphicsView.CacheMode,
     none=QtWidgets.QGraphicsView.CacheNone,
     background=QtWidgets.QGraphicsView.CacheBackground,
 )

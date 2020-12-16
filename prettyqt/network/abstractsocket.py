@@ -3,7 +3,7 @@ from typing import Union
 from qtpy import QtNetwork
 
 from prettyqt import core, network
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError, mappers
 
 
 BIND_MODE = bidict(
@@ -20,10 +20,12 @@ NETWORK_LAYER_PROTOCOL = bidict(
     unknown=QtNetwork.QAbstractSocket.UnknownNetworkLayerProtocol,
 )
 
-PAUSE_MODE = bidict(
+PAUSE_MODES = mappers.FlagMap(
+    QtNetwork.QAbstractSocket.PauseModes,
     never=QtNetwork.QAbstractSocket.PauseNever,
     on_ssl_errors=QtNetwork.QAbstractSocket.PauseOnSslErrors,
 )
+
 QAbstractSocket = QtNetwork.QAbstractSocket
 
 SOCKET_ERROR = bidict(
@@ -139,12 +141,12 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
         Raises:
             InvalidParamError: pause mode does not exist
         """
-        if mode not in PAUSE_MODE:
-            raise InvalidParamError(mode, PAUSE_MODE)
-        self.setPauseMode(PAUSE_MODE[mode])
+        if mode not in PAUSE_MODES:
+            raise InvalidParamError(mode, PAUSE_MODES)
+        self.setPauseMode(PAUSE_MODES[mode])
 
     def get_pause_mode(self) -> str:
-        return PAUSE_MODE.inverse[self.pauseMode()]
+        return PAUSE_MODES.inverse[self.pauseMode()]
 
     def get_proxy(self) -> network.NetworkProxy:
         return network.NetworkProxy(self.proxy())

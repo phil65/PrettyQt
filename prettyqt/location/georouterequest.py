@@ -3,7 +3,7 @@ from typing import List
 from qtpy import QtLocation
 
 from prettyqt import positioning, core
-from prettyqt.utils import bidict, InvalidParamError, helpers
+from prettyqt.utils import bidict, InvalidParamError, helpers, mappers
 
 
 FEATURE_TYPES = bidict(
@@ -32,7 +32,8 @@ MANEUVER_DETAIL = bidict(
     basic=QtLocation.QGeoRouteRequest.BasicManeuvers,
 )
 
-ROUTE_OPTIMIZATION = bidict(
+ROUTE_OPTIMIZATION = mappers.FlagMap(
+    QtLocation.QGeoRouteRequest.RouteOptimizations,
     shortest=QtLocation.QGeoRouteRequest.ShortestRoute,
     fastest=QtLocation.QGeoRouteRequest.FastestRoute,
     most_economic=QtLocation.QGeoRouteRequest.MostEconomicRoute,

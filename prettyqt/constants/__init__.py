@@ -4,6 +4,8 @@ from typing import Literal
 from qtpy import QtCore
 from bidict import bidict
 
+from prettyqt.utils import mappers
+
 DISPLAY_ROLE = QtCore.Qt.DisplayRole
 USER_ROLE = QtCore.Qt.UserRole
 SORT_ROLE = QtCore.Qt.UserRole + 1
@@ -66,29 +68,7 @@ KEY_F11 = QtCore.Qt.Key_F11
 KEY_DELETE = QtCore.Qt.Key_Delete
 
 
-class Bidict:
-    def __init__(self, initializer, **kwargs):
-        self.initializer = initializer
-        kwargs = {k: int(v) for k, v in kwargs.items()}
-        self.bidict = bidict(**kwargs)
-
-        class Inverter:
-            def __getitem__(self2, value):
-                return self.bidict.inverse[int(value)]
-
-        self.inverse = Inverter()
-
-    def __getitem__(self, index):
-        return self.initializer(self.bidict[index])
-
-    def __contains__(self, other):
-        return other in self.bidict
-
-    def __iter__(self):
-        return iter(self.bidict.keys())
-
-
-ALIGNMENTS = Bidict(
+ALIGNMENTS = mappers.FlagMap(
     QtCore.Qt.Alignment,
     # none=int(QtCore.Qt.Alignment(0)),
     left=ALIGN_LEFT,
@@ -102,14 +82,14 @@ ALIGNMENTS = Bidict(
     center=ALIGN_CENTER,
 )
 
-SIDES = Bidict(
+SIDES = mappers.FlagMap(
     QtCore.Qt.Alignment,
     left=QtCore.Qt.AlignLeft,
     right=QtCore.Qt.AlignRight,
     top=QtCore.Qt.AlignTop,
     bottom=QtCore.Qt.AlignBottom,
 )
-EDGES = Bidict(
+EDGES = mappers.FlagMap(
     QtCore.Qt.Edges,
     top=QtCore.Qt.TopEdge,
     left=QtCore.Qt.LeftEdge,
@@ -121,7 +101,7 @@ EDGES = Bidict(
     bottom_right=QtCore.Qt.BottomEdge | QtCore.Qt.RightEdge,
 )
 
-H_ALIGNMENT = Bidict(
+H_ALIGNMENT = mappers.FlagMap(
     QtCore.Qt.Alignment,
     left=QtCore.Qt.AlignLeft,
     right=QtCore.Qt.AlignRight,
@@ -129,7 +109,7 @@ H_ALIGNMENT = Bidict(
     justify=QtCore.Qt.AlignJustify,
 )
 
-V_ALIGNMENT = Bidict(
+V_ALIGNMENT = mappers.FlagMap(
     QtCore.Qt.Alignment,
     top=QtCore.Qt.AlignTop,
     bottom=QtCore.Qt.AlignBottom,
@@ -199,7 +179,8 @@ MatchFlagStr = Literal[
     "exact", "containts", "starts_with", "ends_with", "wildcard", "regex"
 ]
 
-FILTER_MODE = bidict(
+FILTER_MODES = mappers.FlagMap(
+    QtCore.Qt.MatchFlags,
     starts_with=QtCore.Qt.MatchStartsWith,
     contains=QtCore.Qt.MatchContains,
     ends_with=QtCore.Qt.MatchEndsWith,
