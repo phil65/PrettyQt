@@ -14,7 +14,9 @@ QtPositioning.QGeoRectangle.__bases__ = (positioning.GeoShape,)
 
 class GeoRectangle(QtPositioning.QGeoRectangle):
     def __repr__(self):
-        return f"GeoRectangle({self.get_top_left()!r}, {self.get_bottom_right()!r})"
+        return (
+            f"{type(self).__name__}({self.get_top_left()!r}, {self.get_bottom_right()!r})"
+        )
 
     def get_top_left(self) -> positioning.GeoCoordinate:
         return positioning.GeoCoordinate(self.topLeft())

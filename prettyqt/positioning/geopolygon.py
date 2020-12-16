@@ -19,8 +19,8 @@ class GeoPolygon(QtPositioning.QGeoPolygon):
         return self.size()
 
     def __repr__(self):
-        p = ", ".join([f"{p!r}" for p in self.get_path()])
-        return f"GeoPolygon({p})"
+        # p = ", ".join([f"{p!r}" for p in self.get_path()])
+        return f"{type(self).__name__}(<{len(self)} points>)"
 
     def __getitem__(self, index: int) -> positioning.GeoCoordinate:
         return positioning.GeoCoordinate(self.coordinateAt(index))

@@ -31,7 +31,7 @@ class GeoSatelliteInfoSource(QtPositioning.QGeoSatelliteInfoSource):
         return self.sourceName()
 
     def __repr__(self):
-        return "GeoSatelliteInfoSource()"
+        return f"{type(self).__name__}()"
 
     def get_error(self) -> str:
         """Return error type.
