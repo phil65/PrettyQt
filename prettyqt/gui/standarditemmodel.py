@@ -77,7 +77,9 @@ class StandardItemModel(QtGui.QStandardItemModel):
         foreground: Optional[QtGui.QBrush] = None,
         background: Optional[QtGui.QBrush] = None,
         font: Optional[QtGui.QFont] = None,
-        selectable: bool = None,
+        selectable: bool = True,
+        enabled: bool = True,
+        editable: bool = False,
         status_tip: Optional[str] = None,
         tool_tip: Optional[str] = None,
         whats_this: Optional[str] = None,
@@ -102,6 +104,10 @@ class StandardItemModel(QtGui.QStandardItemModel):
             item.setFont(font)
         if flags is not None:
             item.setFlags(flags)
+        if enabled:
+            item.setEnabled(enabled)
+        if editable:
+            item.setEditable(editable)
         if selectable:
             item.setSelectable(selectable)
         if status_tip:
