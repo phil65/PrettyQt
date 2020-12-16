@@ -1,10 +1,11 @@
-from typing import Union, Iterator, Literal
 import pathlib
+from typing import Iterator, Literal, Union
 
 from qtpy import QtGui
 
-from prettyqt import core, gui, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core, gui
+from prettyqt.utils import InvalidParamError, bidict
+
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
     MARKDOWN_FEATURES = bidict(

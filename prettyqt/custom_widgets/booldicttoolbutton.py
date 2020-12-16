@@ -2,7 +2,7 @@ from typing import Dict, Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets, gui, core
+from prettyqt import core, gui, widgets
 
 
 class BoolDictToolButton(widgets.ToolButton):

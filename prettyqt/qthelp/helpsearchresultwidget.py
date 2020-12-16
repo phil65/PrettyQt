@@ -1,6 +1,6 @@
-from qtpy import QtHelp, QtCore
+from qtpy import QtCore, QtHelp
 
-from prettyqt import widgets, core
+from prettyqt import core, widgets
 
 
 QtHelp.QHelpSearchResultWidget.__bases__ = (widgets.Widget,)

@@ -1,6 +1,6 @@
 from typing import Optional
 
-from qtpy import QtMultimedia, QtCore
+from qtpy import QtCore, QtMultimedia
 
 from prettyqt import constants, core
 
@@ -62,7 +62,7 @@ class PlaylistModel(core.AbstractTableModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets, multimedia
+    from prettyqt import multimedia, widgets
 
     URL = (
         "http://commondatastorage.googleapis.com/"

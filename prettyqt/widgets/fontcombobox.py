@@ -3,7 +3,7 @@ from typing import List, Literal
 from qtpy import QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError, helpers
+from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 FONT_FILTERS = bidict(

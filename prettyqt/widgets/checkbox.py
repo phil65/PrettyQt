@@ -2,7 +2,7 @@ from typing import Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import core, widgets, constants
+from prettyqt import constants, core, widgets
 from prettyqt.utils import InvalidParamError
 
 

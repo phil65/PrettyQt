@@ -2,6 +2,7 @@ from qtpy import QtCore
 
 from prettyqt import core
 
+
 QtCore.QPauseAnimation.__bases__ = (core.AbstractAnimation,)
 
 

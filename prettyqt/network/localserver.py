@@ -1,7 +1,7 @@
 from qtpy import QtNetwork
 
 from prettyqt import core, network
-from prettyqt.utils import bidict, InvalidParamError, helpers
+from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 SOCKET_OPTION = bidict(

@@ -5,6 +5,7 @@ from qtpy import QtNetwork
 from prettyqt import network
 from prettyqt.utils import bidict
 
+
 CONVERSION_MODE = bidict(
     strict=QtNetwork.QHostAddress.StrictConversion,
     v4_mapped_to_ipv4=QtNetwork.QHostAddress.ConvertV4MappedToIPv4,

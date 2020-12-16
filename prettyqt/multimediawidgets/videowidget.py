@@ -1,4 +1,4 @@
-from qtpy import QtMultimediaWidgets, QtCore
+from qtpy import QtCore, QtMultimediaWidgets
 
 from prettyqt import multimedia, widgets
 

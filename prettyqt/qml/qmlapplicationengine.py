@@ -1,6 +1,6 @@
-from typing import Union, Iterator, Optional
+from typing import Iterator, Optional, Union
 
-from qtpy import QtQml, QtCore
+from qtpy import QtCore, QtQml
 
 from prettyqt import core
 

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import Union, Tuple, List, Iterator
+from typing import Iterator, List, Tuple, Union
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt import core
 

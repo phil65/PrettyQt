@@ -1,6 +1,6 @@
-from typing import Union, Dict
+from typing import Dict, Union
 
-from qtpy import QtNetwork, QtCore
+from qtpy import QtCore, QtNetwork
 
 from prettyqt import network
 

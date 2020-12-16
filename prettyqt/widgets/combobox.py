@@ -1,9 +1,9 @@
-from typing import Iterable, Union, Mapping, Any, Literal, Tuple
+from typing import Any, Iterable, Literal, Mapping, Tuple, Union
 
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 INSERT_POLICY = bidict(

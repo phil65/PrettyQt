@@ -1,8 +1,8 @@
-from typing import Optional
 import logging
 import re
 import sys
 import traceback
+from typing import Optional
 
 from prettyqt import gui, widgets
 from prettyqt.utils import signallogger

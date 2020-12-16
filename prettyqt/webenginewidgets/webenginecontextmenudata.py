@@ -2,6 +2,7 @@ from typing import List
 
 from qtpy import PYQT5, PYSIDE2
 
+
 if PYQT5:
     from PyQt5 import QtWebEngineWidgets  # type: ignore
 elif PYSIDE2:
@@ -9,6 +10,7 @@ elif PYSIDE2:
 
 from prettyqt import core
 from prettyqt.utils import bidict
+
 
 mod = QtWebEngineWidgets.QWebEngineContextMenuData
 
@@ -94,7 +96,7 @@ class WebEngineContextMenuData(QtWebEngineWidgets.QWebEngineContextMenuData):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets, webenginewidgets
+    from prettyqt import webenginewidgets, widgets
 
     app = widgets.app()
     page = webenginewidgets.WebEnginePage()

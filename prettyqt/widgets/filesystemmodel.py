@@ -1,10 +1,10 @@
 import pathlib
-from typing import Union, List, Sequence, Iterator
+from typing import Iterator, List, Sequence, Union
 
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):

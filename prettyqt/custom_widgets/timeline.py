@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import gui, core, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.utils import colors
 
 

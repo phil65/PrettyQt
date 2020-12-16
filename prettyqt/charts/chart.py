@@ -2,8 +2,8 @@ from typing import List
 
 from qtpy.QtCharts import QtCharts
 
-from prettyqt import core, widgets, charts, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import charts, constants, core, widgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 THEMES = bidict(

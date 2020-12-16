@@ -1,6 +1,6 @@
 from qtpy import QtMultimediaWidgets
 
-from prettyqt import core, multimedia, widgets, constants
+from prettyqt import constants, core, multimedia, widgets
 from prettyqt.utils import InvalidParamError
 
 

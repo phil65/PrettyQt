@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from dataclasses import dataclass, asdict
-from typing import Tuple, Dict, Any, Iterator
+from dataclasses import asdict, dataclass
+from typing import Any, Dict, Iterator, Tuple
 
 from qtpy import QtMultimedia
 
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 QUALITIES = bidict(
     very_low=QtMultimedia.QMultimedia.VeryLowQuality,

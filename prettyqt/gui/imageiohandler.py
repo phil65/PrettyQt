@@ -2,7 +2,8 @@ from typing import Any, Literal
 
 from qtpy import QtGui
 
-from prettyqt.utils import bidict, InvalidParamError, mappers
+from prettyqt.utils import InvalidParamError, bidict, mappers
+
 
 IMAGE_OPTION = bidict(
     size=QtGui.QImageIOHandler.Size,

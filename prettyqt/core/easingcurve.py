@@ -1,8 +1,9 @@
-from typing import Callable, Union, Literal
+from typing import Callable, Literal, Union
 
 from qtpy import QtCore
 
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 TYPE = bidict(
     linear=QtCore.QEasingCurve.Linear,

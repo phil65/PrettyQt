@@ -1,9 +1,10 @@
-from typing import Union, Literal
+from typing import Literal, Union
 
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 MODE = bidict(
     hex=QtWidgets.QLCDNumber.Hex,

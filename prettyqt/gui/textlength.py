@@ -2,6 +2,7 @@ from qtpy import QtGui
 
 from prettyqt.utils import bidict
 
+
 TYPES = bidict(
     variable=QtGui.QTextLength.VariableLength,
     fixed=QtGui.QTextLength.FixedLength,

@@ -3,7 +3,7 @@ from typing import Union
 from qtpy import QtNetwork
 
 from prettyqt import core, network
-from prettyqt.utils import bidict, InvalidParamError, mappers
+from prettyqt.utils import InvalidParamError, bidict, mappers
 
 
 BIND_MODE = bidict(

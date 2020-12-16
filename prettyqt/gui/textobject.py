@@ -2,6 +2,7 @@ from qtpy import QtGui
 
 from prettyqt import core, gui
 
+
 QtGui.QTextObject.__bases__ = (core.Object,)
 
 

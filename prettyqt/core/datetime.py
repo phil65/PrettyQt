@@ -1,9 +1,9 @@
-from typing import Union
 import datetime
+from typing import Union
 
 from qtpy import QtCore
 
-from prettyqt import core, constants
+from prettyqt import constants, core
 from prettyqt.utils import InvalidParamError, to_datetime
 
 

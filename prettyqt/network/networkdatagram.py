@@ -1,4 +1,4 @@
-from qtpy import QtNetwork, QtCore
+from qtpy import QtCore, QtNetwork
 
 from prettyqt import network
 

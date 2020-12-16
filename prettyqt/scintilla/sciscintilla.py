@@ -1,9 +1,10 @@
-from typing import Optional, Literal
+from typing import Literal, Optional
 
 from PyQt5 import Qsci, QtGui  # type: ignore
 
 from prettyqt import gui, widgets
-from prettyqt.utils import colors, bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict, colors
+
 
 ARROW_MARKER_NUM = 8
 

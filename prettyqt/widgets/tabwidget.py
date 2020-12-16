@@ -1,9 +1,9 @@
-from typing import Union, Optional, Dict, Literal
+from typing import Dict, Literal, Optional, Union
 
 from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError, autoslot
+from prettyqt.utils import InvalidParamError, autoslot, bidict
 
 
 TAB_SHAPES = bidict(

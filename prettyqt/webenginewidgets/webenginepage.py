@@ -1,10 +1,10 @@
 import pathlib
-from typing import Callable, Union, Literal
+from typing import Callable, Literal, Union
 
-from qtpy import QtWebEngineWidgets, QtCore
+from qtpy import QtCore, QtWebEngineWidgets
 
-from prettyqt import core, webenginewidgets, gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, gui, webenginewidgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 QtWebEngineWidgets.QWebEnginePage.__bases__ = (core.Object,)

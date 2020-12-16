@@ -1,10 +1,10 @@
 import pathlib
-from typing import List, Optional, Union, Dict, Literal
+from typing import Dict, List, Literal, Optional, Union
 
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 FILE_MODE = bidict(

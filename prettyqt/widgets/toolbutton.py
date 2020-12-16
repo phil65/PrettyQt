@@ -2,8 +2,8 @@ from typing import Literal
 
 from qtpy import QtWidgets
 
-from prettyqt import gui, widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, gui, widgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 POPUP_MODE = bidict(

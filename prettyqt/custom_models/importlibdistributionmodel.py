@@ -1,11 +1,10 @@
 from __future__ import annotations
 
+from importlib import metadata
+import pkgutil
 from typing import List, Optional, Sequence
 
 from qtpy import QtCore
-from importlib import metadata
-import pkgutil
-
 
 from prettyqt import constants, core
 

@@ -4,6 +4,7 @@ from qtpy import QtMultimedia
 
 from prettyqt.utils import bidict
 
+
 HANDLE_TYPES = bidict(
     none=QtMultimedia.QAbstractVideoBuffer.NoHandle,
     gl_texture=QtMultimedia.QAbstractVideoBuffer.GLTextureHandle,

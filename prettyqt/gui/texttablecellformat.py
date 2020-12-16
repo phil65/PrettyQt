@@ -3,6 +3,7 @@ from qtpy import QtGui
 from prettyqt import gui
 from prettyqt.utils import InvalidParamError
 
+
 QtGui.QTextTableCellFormat.__bases__ = (gui.TextCharFormat,)
 
 

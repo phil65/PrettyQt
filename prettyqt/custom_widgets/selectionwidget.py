@@ -1,4 +1,4 @@
-from typing import Optional, Mapping, Iterable, Union, Dict, Any, Iterator, Tuple
+from typing import Any, Dict, Iterable, Iterator, Mapping, Optional, Tuple, Union
 
 from qtpy import QtWidgets
 

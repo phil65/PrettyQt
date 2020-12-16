@@ -1,9 +1,9 @@
-from typing import Union, Optional, Literal
+from typing import Literal, Optional, Union
 
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 NAME_TYPE = bidict(

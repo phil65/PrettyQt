@@ -1,7 +1,6 @@
 import pathlib
 from typing import Union
 
-
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets

@@ -2,6 +2,7 @@ from qtpy import QtWidgets
 
 from prettyqt import core
 
+
 QtWidgets.QGraphicsTransform.__bases__ = (core.Object,)
 
 

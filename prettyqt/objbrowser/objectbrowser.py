@@ -1,16 +1,16 @@
 """Object browser GUI in Qt."""
 
-from typing import List, Optional
-import logging
-import traceback
 import hashlib
+import logging
 import sys
+import traceback
+from typing import List, Optional
 
-from prettyqt import core, gui, widgets, constants
+from prettyqt import constants, core, gui, widgets
 from prettyqt.objbrowser import objectbrowsertreemodel
-
 from prettyqt.objbrowser.attribute_model import DEFAULT_ATTR_COLS, DEFAULT_ATTR_DETAILS
 from prettyqt.utils import autoslot
+
 
 logger = logging.getLogger(__name__)
 

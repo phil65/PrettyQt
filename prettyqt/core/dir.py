@@ -1,10 +1,10 @@
-from typing import Literal
-
 import pathlib
+from typing import Literal
 
 from qtpy import QtCore
 
 from prettyqt.utils import bidict
+
 
 FILTERS = bidict(
     dirs=QtCore.QDir.Dirs,

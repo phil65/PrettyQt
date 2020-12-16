@@ -4,7 +4,7 @@ from typing import Optional, Sequence
 
 from qtpy import QtWidgets
 
-from prettyqt import core, gui, widgets, constants
+from prettyqt import constants, core, gui, widgets
 
 
 class LabeledSlider(widgets.Widget):

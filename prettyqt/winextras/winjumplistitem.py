@@ -1,7 +1,8 @@
-from typing import Union
 import pathlib
+from typing import Union
 
 from qtpy import PYQT5, PYSIDE2
+
 
 if PYQT5:
     from PyQt5 import QtWinExtras  # type: ignore

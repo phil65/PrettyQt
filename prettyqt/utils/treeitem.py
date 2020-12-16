@@ -3,11 +3,11 @@
 
 from __future__ import annotations
 
-from typing import Optional, Sequence, TypeVar, Generic, List
-
 import logging
+from typing import Generic, List, Optional, Sequence, TypeVar
 
 from prettyqt.utils import helpers
+
 
 logger = logging.getLogger(__name__)
 

@@ -1,9 +1,10 @@
-from typing import List, Optional, Literal
 import pathlib
+from typing import List, Literal, Optional
 
 from qtpy import QtCore
 
 from prettyqt.utils import bidict
+
 
 STANDARD_LOCATION = bidict(
     desktop=QtCore.QStandardPaths.DesktopLocation,

@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from typing import List, Iterator, Union, Tuple, Optional
+from typing import Iterator, List, Optional, Tuple, Union
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import core, gui, constants
-
+from prettyqt import constants, core, gui
 from prettyqt.utils import InvalidParamError
+
 
 QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
 

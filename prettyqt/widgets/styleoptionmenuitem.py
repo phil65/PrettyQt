@@ -3,6 +3,7 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
+
 CHECK_TYPE = bidict(
     not_checkable=QtWidgets.QStyleOptionMenuItem.NotCheckable,
     exclusive=QtWidgets.QStyleOptionMenuItem.Exclusive,

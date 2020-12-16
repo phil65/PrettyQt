@@ -2,7 +2,7 @@ import sre_constants
 
 import regex as re
 
-from prettyqt import gui, core
+from prettyqt import core, gui
 
 
 class RegexPatternValidator(gui.Validator):

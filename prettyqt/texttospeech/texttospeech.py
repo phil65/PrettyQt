@@ -1,16 +1,17 @@
-from typing import List
 import logging
+from typing import List
 
 from qtpy import PYQT5, PYSIDE2
+
 
 if PYQT5:
     from PyQt5 import QtTextToSpeech  # type: ignore
 elif PYSIDE2:
     from PySide2 import QtTextToSpeech
 
-
 from prettyqt import core, texttospeech
 from prettyqt.utils import bidict
+
 
 logger = logging.getLogger()
 

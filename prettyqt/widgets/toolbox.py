@@ -1,4 +1,4 @@
-from typing import Optional, Union, List, Iterator
+from typing import Iterator, List, Optional, Union
 
 from qtpy import QtWidgets
 

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from typing import Tuple, Union, Iterator, Literal
+from typing import Iterator, Literal, Tuple, Union
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
-from prettyqt import core, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core
+from prettyqt.utils import InvalidParamError, bidict
 
 
 ELEMENT_TYPES = bidict(

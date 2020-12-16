@@ -5,6 +5,7 @@ from qtpy import QtGui
 from prettyqt import core
 from prettyqt.utils import bidict
 
+
 REGION_TYPE = bidict(
     rectangle=QtGui.QRegion.Rectangle,
     ellipse=QtGui.QRegion.Ellipse,

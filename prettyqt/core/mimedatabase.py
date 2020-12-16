@@ -1,10 +1,11 @@
-from typing import Union, Literal
 import pathlib
+from typing import Literal, Union
 
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 MATCH_MODE = bidict(
     default=QtCore.QMimeDatabase.MatchDefault,

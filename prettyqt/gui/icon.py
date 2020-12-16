@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Union, Optional, Dict, Tuple, List, Literal
-
+from typing import Dict, List, Literal, Optional, Tuple, Union
 
 import qtawesome as qta
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 MODE = bidict(
     normal=QtGui.QIcon.Normal,

@@ -2,6 +2,7 @@ from qtpy import QtCore
 
 from prettyqt.utils import bidict
 
+
 Loc = QtCore.QLocale
 
 COUNTRY = bidict(

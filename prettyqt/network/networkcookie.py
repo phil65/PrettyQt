@@ -1,9 +1,10 @@
-from typing import Union
 import datetime
+from typing import Union
 
-from qtpy import QtNetwork, QtCore
+from qtpy import QtCore, QtNetwork
 
 from prettyqt.utils import bidict
+
 
 RAW_FORMS = bidict(
     name_and_value_only=QtNetwork.QNetworkCookie.NameAndValueOnly,

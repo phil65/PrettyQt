@@ -2,8 +2,9 @@ from typing import Literal
 
 from qtpy import QtWidgets
 
-from prettyqt import core, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core
+from prettyqt.utils import InvalidParamError, bidict
+
 
 SUBMIT_POLICY = bidict(
     auto=QtWidgets.QDataWidgetMapper.AutoSubmit,

@@ -4,6 +4,7 @@ from qtpy import QtCore
 
 from prettyqt import core
 
+
 QtCore.QAnimationGroup.__bases__ = (core.AbstractAnimation,)
 
 

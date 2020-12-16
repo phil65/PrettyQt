@@ -1,7 +1,8 @@
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 PERFORMANCE_HINT = bidict(
     moderate=QtGui.QStaticText.ModerateCaching,

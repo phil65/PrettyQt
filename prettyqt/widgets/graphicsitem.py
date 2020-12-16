@@ -1,9 +1,9 @@
-from typing import List, Union, Literal
+from typing import List, Literal, Union
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import gui, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, gui
+from prettyqt.utils import InvalidParamError, bidict
 
 
 MODALITY = bidict(

@@ -1,7 +1,7 @@
-from typing import Union
 import pathlib
+from typing import Union
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt import core
 

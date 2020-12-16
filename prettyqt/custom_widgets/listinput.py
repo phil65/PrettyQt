@@ -1,5 +1,7 @@
-from typing import List, Union, Optional, Type
+from typing import List, Optional, Type, Union
+
 from qtpy import QtWidgets
+
 from prettyqt import custom_validators, widgets
 from prettyqt.utils import helpers
 

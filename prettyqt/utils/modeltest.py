@@ -41,9 +41,9 @@
 #
 # $QT_END_LICENSE$
 
-from typing import List, NamedTuple, Any
+from typing import Any, List, NamedTuple
 
-from qtpy import QtTest, QtCore, QtGui
+from qtpy import QtCore, QtGui, QtTest
 
 
 class _Changing(NamedTuple):

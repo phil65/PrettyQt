@@ -1,8 +1,7 @@
+import datetime
 from typing import Union
 
-import datetime
-
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
 

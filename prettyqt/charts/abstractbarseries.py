@@ -1,7 +1,7 @@
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 LABELS_POSITIONS = bidict(

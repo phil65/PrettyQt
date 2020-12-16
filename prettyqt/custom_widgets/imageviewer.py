@@ -1,5 +1,5 @@
-from typing import Optional, Union
 import pathlib
+from typing import Optional, Union
 
 from qtpy import QtWidgets
 

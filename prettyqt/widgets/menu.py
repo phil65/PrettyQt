@@ -1,4 +1,4 @@
-from typing import Any, Callable, Optional, Union, List, Iterator
+from typing import Any, Callable, Iterator, List, Optional, Union
 
 from qtpy import QtWidgets
 

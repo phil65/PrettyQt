@@ -1,8 +1,8 @@
 from qtpy import QtGui
 
-from prettyqt import gui, constants
+from prettyqt import constants, gui
+from prettyqt.utils import InvalidParamError, bidict, mappers
 
-from prettyqt.utils import bidict, InvalidParamError, mappers
 
 FORMAT_TYPE = bidict(
     invalid=QtGui.QTextFormat.InvalidFormat,

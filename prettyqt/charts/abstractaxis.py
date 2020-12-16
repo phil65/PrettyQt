@@ -2,7 +2,7 @@ from typing import Optional
 
 from qtpy.QtCharts import QtCharts
 
-from prettyqt import core, gui, constants
+from prettyqt import constants, core, gui
 
 
 QtCharts.QAbstractAxis.__bases__ = (core.Object,)

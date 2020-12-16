@@ -2,7 +2,7 @@ from typing import Tuple
 
 from qtpy import QtGui
 
-from prettyqt import gui, core
+from prettyqt import core, gui
 
 
 QtGui.QImage.__bases__ = (gui.PaintDevice,)

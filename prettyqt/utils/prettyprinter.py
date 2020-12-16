@@ -1,4 +1,4 @@
-from typing import Callable, Any, Generator
+from typing import Any, Callable, Generator
 
 
 class PrettyPrinter:

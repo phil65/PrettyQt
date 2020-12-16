@@ -2,6 +2,7 @@ from qtpy import QtGui
 
 from prettyqt.utils import bidict
 
+
 SURFACE_CLASS = bidict(window=QtGui.QSurface.Window, offscreen=QtGui.QSurface.Offscreen)
 
 SURFACE_TYPES = bidict(

@@ -1,7 +1,8 @@
 from qtpy import QtGui
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 RESTART_HINT = bidict(
     if_running=QtGui.QSessionManager.RestartIfRunning,

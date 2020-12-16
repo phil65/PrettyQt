@@ -1,9 +1,9 @@
-from typing import Tuple, List, Literal
+from typing import List, Literal, Tuple
 
 from qtpy import QtGui
 
 from prettyqt import gui
-from prettyqt.utils import bidict, InvalidParamError, prettyprinter
+from prettyqt.utils import InvalidParamError, bidict, prettyprinter
 
 
 COORDINATE_MODE = bidict(

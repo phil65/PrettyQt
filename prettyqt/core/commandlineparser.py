@@ -1,9 +1,10 @@
-from typing import Optional, Literal
+from typing import Literal, Optional
 
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 OPTIONS_AFTER_POS_ARG = bidict(
     options=QtCore.QCommandLineParser.ParseAsOptions,

@@ -1,6 +1,6 @@
-from prettyqt import widgets
+from qtpy import QtCore, QtGui, QtWidgets
 
-from qtpy import QtGui, QtWidgets, QtCore
+from prettyqt import widgets
 
 
 # Remove dotted border on cell focus.  https://stackoverflow.com/a/55252650/3620725

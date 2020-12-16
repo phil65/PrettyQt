@@ -1,5 +1,5 @@
-from typing import Optional
 import pathlib
+from typing import Optional
 
 from qtpy import QtCore
 

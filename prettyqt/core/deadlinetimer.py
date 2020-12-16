@@ -1,7 +1,6 @@
 from qtpy import QtCore
 
 from prettyqt import constants
-
 from prettyqt.utils import InvalidParamError
 
 

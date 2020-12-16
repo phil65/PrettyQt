@@ -1,7 +1,7 @@
 from qtpy import QtGui
 
 from prettyqt import gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 POSITIONS = bidict(

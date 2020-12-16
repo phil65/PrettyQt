@@ -3,6 +3,7 @@ from qtpy import QtWidgets
 from prettyqt import gui
 from prettyqt.utils import bidict
 
+
 ACTIVATION_REASONS = bidict(
     unknown=QtWidgets.QSystemTrayIcon.Unknown,
     context=QtWidgets.QSystemTrayIcon.Context,

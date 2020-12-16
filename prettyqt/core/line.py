@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from typing import Literal, Iterator, Union, Tuple
-
 import math
+from typing import Iterator, Literal, Tuple, Union
 
 from qtpy import QtCore
 

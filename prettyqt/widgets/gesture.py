@@ -2,8 +2,8 @@ from typing import Literal
 
 from qtpy import QtWidgets
 
-from prettyqt import core, widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core, widgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 GESTURE_CANCEL_POLICY = bidict(

@@ -7,6 +7,7 @@ from qtpy import QtGui
 from prettyqt import core
 from prettyqt.utils import bidict
 
+
 TRANSFORMATION_TYPE = bidict(
     none=QtGui.QTransform.TxNone,
     translate=QtGui.QTransform.TxTranslate,

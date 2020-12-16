@@ -3,7 +3,7 @@ from typing import Dict, List
 from qtpy import QtNetwork
 
 from prettyqt import network
-from prettyqt.utils import bidict, helpers, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 CAPABILITIES = bidict(

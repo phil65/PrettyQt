@@ -1,8 +1,8 @@
-from typing import Dict, Any
+from typing import Any, Dict
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets, constants
+from prettyqt import constants, widgets
 
 
 QtWidgets.QDockWidget.__bases__ = (widgets.Widget,)

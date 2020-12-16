@@ -1,9 +1,9 @@
-from typing import Union, Optional, Literal
+from typing import Literal, Optional, Union
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core, widgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 SIZE_CONSTRAINT = bidict(

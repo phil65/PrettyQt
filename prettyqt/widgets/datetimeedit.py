@@ -1,11 +1,10 @@
-from typing import Literal, List, Union
-
 import datetime
+from typing import List, Literal, Union
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import to_datetime, to_date, to_time, bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict, to_date, to_datetime, to_time
 
 
 SECTIONS = bidict(

@@ -1,10 +1,11 @@
-from typing import Union, Optional, Literal
 import datetime
+from typing import Literal, Optional, Union
 
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError, to_datetime
+from prettyqt.utils import InvalidParamError, bidict, to_datetime
+
 
 FILE_ERROR = bidict(
     none=QtCore.QFileDevice.NoError,

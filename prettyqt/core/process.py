@@ -3,7 +3,7 @@ from typing import Literal
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 EXIT_STATUS = bidict(normal=QtCore.QProcess.NormalExit, crash=QtCore.QProcess.CrashExit)

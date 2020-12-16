@@ -4,7 +4,7 @@ from typing import List
 
 from qtpy import QtGui
 
-from prettyqt import core, gui, constants
+from prettyqt import constants, core, gui
 from prettyqt.utils import InvalidParamError
 
 

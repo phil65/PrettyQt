@@ -1,6 +1,6 @@
-from typing import Optional, Union, Iterator, Tuple, Pattern
+from typing import Iterator, Optional, Pattern, Tuple, Union
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
 

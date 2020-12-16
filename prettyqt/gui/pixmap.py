@@ -1,9 +1,9 @@
 import pathlib
 from typing import Union
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
-from prettyqt import gui, core
+from prettyqt import core, gui
 
 
 QtGui.QPixmap.__bases__ = (gui.PaintDevice,)

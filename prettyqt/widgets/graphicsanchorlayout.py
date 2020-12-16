@@ -1,9 +1,10 @@
 from typing import Literal
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
-from prettyqt import widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, widgets
+from prettyqt.utils import InvalidParamError, bidict
+
 
 EDGE = bidict(
     left=QtCore.Qt.AnchorLeft,

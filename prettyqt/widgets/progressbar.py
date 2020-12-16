@@ -1,8 +1,9 @@
 from typing import Optional
+
 from qtpy import QtWidgets
 
-from prettyqt import widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, widgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 TEXT_DIRECTIONS = bidict(

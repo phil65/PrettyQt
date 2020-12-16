@@ -1,6 +1,6 @@
 from qtpy import QtGui
 
-from prettyqt import gui, core
+from prettyqt import core, gui
 
 
 QtGui.QPicture.__bases__ = (gui.PaintDevice,)

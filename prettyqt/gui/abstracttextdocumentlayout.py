@@ -1,8 +1,9 @@
-from typing import Optional, Union, Tuple
+from typing import Optional, Tuple, Union
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt import core
+
 
 QtGui.QAbstractTextDocumentLayout.__bases__ = (core.Object,)
 

@@ -1,9 +1,9 @@
-from typing import List, Union, Literal
+from typing import List, Literal, Union
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
-from prettyqt import gui, core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, gui
+from prettyqt.utils import InvalidParamError, bidict
 
 
 IMAGE_READER_ERROR = bidict(

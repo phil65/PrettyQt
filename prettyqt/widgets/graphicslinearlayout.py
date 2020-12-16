@@ -1,4 +1,5 @@
 from qtpy import QtWidgets
+
 from prettyqt import widgets
 
 

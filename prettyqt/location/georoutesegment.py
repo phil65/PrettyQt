@@ -2,7 +2,7 @@ from typing import List
 
 from qtpy import QtLocation
 
-from prettyqt import positioning, location
+from prettyqt import location, positioning
 
 
 class GeoRouteSegment(QtLocation.QGeoRouteSegment):

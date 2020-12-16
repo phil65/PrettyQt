@@ -2,7 +2,8 @@ from typing import Any
 
 from qtpy import QtWidgets
 
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 QScrollerProperties = QtWidgets.QScrollerProperties
 

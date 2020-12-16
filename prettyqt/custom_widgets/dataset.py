@@ -1,6 +1,6 @@
 import functools
 import pathlib
-from typing import Optional, Mapping, Iterable, Union, Callable, Any, Dict
+from typing import Any, Callable, Dict, Iterable, Mapping, Optional, Union
 
 from prettyqt import custom_validators, custom_widgets, gui, widgets
 

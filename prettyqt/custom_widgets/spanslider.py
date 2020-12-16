@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from typing import Tuple, Optional, Literal
+from typing import Literal, Optional, Tuple
 
 from qtpy import QtCore, QtWidgets
 

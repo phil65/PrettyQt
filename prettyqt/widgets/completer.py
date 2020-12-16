@@ -1,9 +1,9 @@
-from typing import Optional, Literal
+from typing import Literal, Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import core, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core
+from prettyqt.utils import InvalidParamError, bidict
 
 
 COMPLETION_MODE = bidict(

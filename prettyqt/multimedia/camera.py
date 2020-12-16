@@ -3,7 +3,7 @@ from typing import List
 from qtpy import QtMultimedia
 
 from prettyqt import multimedia
-from prettyqt.utils import bidict, InvalidParamError, mappers
+from prettyqt.utils import InvalidParamError, bidict, mappers
 
 
 CAPTURE_MODES = mappers.FlagMap(

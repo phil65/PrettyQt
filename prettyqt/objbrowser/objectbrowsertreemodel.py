@@ -10,16 +10,17 @@ See: https://github.com/PySide/Examples/blob/master/examples/itemviews/simpletre
 
 from __future__ import annotations
 
-from typing import Any, List, Optional
-import logging
-import inspect
-from difflib import SequenceMatcher
 from collections import OrderedDict
+from difflib import SequenceMatcher
+import inspect
+import logging
+from typing import Any, List, Optional
 
 from qtpy import QtCore
 
-from prettyqt import core, constants, custom_models
+from prettyqt import constants, core, custom_models
 from prettyqt.utils import helpers, treeitem
+
 
 logger = logging.getLogger(__name__)
 

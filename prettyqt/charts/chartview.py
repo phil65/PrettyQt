@@ -1,11 +1,12 @@
 from typing import Literal
 
 from deprecated import deprecated
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts, core, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 RUBBER_BAND = bidict(
     none=QtCharts.QChartView.NoRubberBand,

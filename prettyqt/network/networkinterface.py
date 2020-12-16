@@ -7,6 +7,7 @@ from qtpy import QtNetwork
 from prettyqt import network
 from prettyqt.utils import bidict
 
+
 INTERFACE_FLAGS = bidict(
     is_up=QtNetwork.QNetworkInterface.IsUp,
     is_running=QtNetwork.QNetworkInterface.IsRunning,

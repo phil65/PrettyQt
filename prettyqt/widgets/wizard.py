@@ -2,10 +2,11 @@ from __future__ import annotations
 
 from typing import Iterator
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import core, widgets, gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, gui, widgets
+from prettyqt.utils import InvalidParamError, bidict
+
 
 WIZARD_BUTTON = bidict(
     back=QtWidgets.QWizard.BackButton,

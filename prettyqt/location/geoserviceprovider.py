@@ -5,6 +5,7 @@ from qtpy import QtLocation
 from prettyqt import core, location
 from prettyqt.utils import bidict
 
+
 QGeoServiceProvider = QtLocation.QGeoServiceProvider
 
 ERROR = bidict(

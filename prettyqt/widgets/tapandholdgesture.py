@@ -2,6 +2,7 @@ from qtpy import QtWidgets
 
 from prettyqt import core, widgets
 
+
 QtWidgets.QTapAndHoldGesture.__bases__ = (widgets.Gesture,)
 
 

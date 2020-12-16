@@ -1,7 +1,7 @@
 from qtpy import QtMultimedia
 
 from prettyqt import core, multimedia
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 COLOR_FILTERS = bidict(

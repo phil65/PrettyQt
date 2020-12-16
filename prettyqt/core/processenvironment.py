@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, Tuple, Dict
+from typing import Dict, Iterator, Tuple
 
 from qtpy import QtCore
 

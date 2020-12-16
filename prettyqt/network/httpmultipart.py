@@ -1,9 +1,10 @@
 from typing import Union
 
-from qtpy import QtNetwork, QtCore
+from qtpy import QtCore, QtNetwork
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 CONTENT_TYPES = bidict(
     mixed=QtNetwork.QHttpMultiPart.MixedType,

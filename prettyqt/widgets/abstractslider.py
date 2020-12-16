@@ -2,8 +2,9 @@ from typing import Literal
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core, widgets
+from prettyqt.utils import InvalidParamError, bidict
+
 
 SLIDER_ACTION = bidict(
     none=QtWidgets.QAbstractSlider.SliderNoAction,

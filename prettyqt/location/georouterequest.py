@@ -2,8 +2,8 @@ from typing import List
 
 from qtpy import QtLocation
 
-from prettyqt import positioning, core
-from prettyqt.utils import bidict, InvalidParamError, helpers, mappers
+from prettyqt import core, positioning
+from prettyqt.utils import InvalidParamError, bidict, helpers, mappers
 
 
 FEATURE_TYPES = bidict(

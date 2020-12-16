@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import sys
 
-from qtpy import QtCore
 import qtpy
+from qtpy import QtCore
 
 
 class VersionNumber(QtCore.QVersionNumber):

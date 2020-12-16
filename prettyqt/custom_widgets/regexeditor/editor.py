@@ -1,10 +1,10 @@
 """This module contains the editor widget implementation."""
 
 import sre_constants
-from typing import Optional, Pattern, Match, List
+from typing import List, Match, Optional, Pattern
 
-import regex as re
 from qtpy import QtWidgets
+import regex as re
 
 from prettyqt import constants, core, custom_models, custom_widgets, widgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter

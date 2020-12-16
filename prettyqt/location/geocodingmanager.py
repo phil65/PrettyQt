@@ -2,6 +2,7 @@ from qtpy import QtLocation
 
 from prettyqt import core
 
+
 QtLocation.QGeoCodingManager.__bases__ = (core.Object,)
 
 

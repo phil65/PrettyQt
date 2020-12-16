@@ -1,9 +1,10 @@
-from typing import Union, Optional, Literal
+from typing import Literal, Optional, Union
 
 from qtpy import QtCore
 
 from prettyqt import core
 from prettyqt.utils import bidict
+
 
 OS_TYPE = bidict(
     android=QtCore.QOperatingSystemVersion.Android,

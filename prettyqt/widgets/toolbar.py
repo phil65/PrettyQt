@@ -1,8 +1,8 @@
-from typing import Callable, Optional, Dict, Any, Union, Tuple, List
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui, widgets, constants
+from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import InvalidParamError, helpers
 
 

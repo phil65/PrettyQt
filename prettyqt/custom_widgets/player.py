@@ -3,7 +3,7 @@ from typing import Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import constants, gui, core, multimedia, widgets, multimediawidgets
+from prettyqt import constants, core, gui, multimedia, multimediawidgets, widgets
 
 
 class Player(widgets.MainWindow):

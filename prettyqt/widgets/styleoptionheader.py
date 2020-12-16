@@ -3,6 +3,7 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
+
 QStyleOptionHeader = QtWidgets.QStyleOptionHeader
 
 SECTION_POSITION = bidict(

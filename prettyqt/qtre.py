@@ -1,5 +1,5 @@
 import re
-from typing import Callable, Dict, Iterator, List, Optional, Tuple, Union, Any
+from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple, Union
 
 from qtpy import QtCore
 

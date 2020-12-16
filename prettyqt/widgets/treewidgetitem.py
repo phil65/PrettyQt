@@ -4,8 +4,8 @@ from typing import Iterator, Literal
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, core, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core, gui
+from prettyqt.utils import InvalidParamError, bidict
 
 
 CHILD_INDICATOR_POLICY = bidict(

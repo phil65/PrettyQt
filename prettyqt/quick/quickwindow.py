@@ -1,9 +1,9 @@
 import contextlib
 
-from qtpy import QtQuick, QtGui, QtCore
+from qtpy import QtCore, QtGui, QtQuick
 
-from prettyqt import gui, core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, gui
+from prettyqt.utils import InvalidParamError, bidict
 
 
 CREATE_TEXTURE_OPTION = bidict(

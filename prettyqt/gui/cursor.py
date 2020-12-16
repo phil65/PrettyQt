@@ -1,8 +1,8 @@
-from typing import Dict, Any
+from typing import Any, Dict
 
 from qtpy import QtGui
 
-from prettyqt import core, constants
+from prettyqt import constants, core
 from prettyqt.utils import InvalidParamError
 
 

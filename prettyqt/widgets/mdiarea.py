@@ -1,9 +1,9 @@
-from typing import Union, Literal
+from typing import Literal, Union
 
 from qtpy import QtGui, QtWidgets
 
-from prettyqt import gui, widgets, constants
-from prettyqt.utils import bidict, colors, InvalidParamError
+from prettyqt import constants, gui, widgets
+from prettyqt.utils import InvalidParamError, bidict, colors
 
 
 VIEW_MODE = bidict(

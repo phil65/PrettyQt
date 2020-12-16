@@ -1,9 +1,10 @@
 from typing import Optional
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
     POLICIES = bidict(

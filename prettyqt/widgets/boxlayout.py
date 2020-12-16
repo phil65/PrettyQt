@@ -1,9 +1,10 @@
-from typing import Optional, Union, Literal
+from typing import Literal, Optional, Union
 
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 DIRECTION = bidict(
     left_to_right=QtWidgets.QBoxLayout.LeftToRight,

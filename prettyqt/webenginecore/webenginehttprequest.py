@@ -2,13 +2,14 @@ from typing import Dict, Union
 
 from qtpy import PYQT5, PYSIDE2, QtCore
 
+
 if PYQT5:
     from PyQt5 import QtWebEngineCore  # type: ignore
 elif PYSIDE2:
     from PySide2 import QtWebEngineCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 METHODS = bidict(

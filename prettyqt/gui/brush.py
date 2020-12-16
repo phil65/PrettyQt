@@ -1,6 +1,6 @@
 from qtpy import QtGui
 
-from prettyqt import core, gui, constants
+from prettyqt import constants, core, gui
 
 
 class Brush(QtGui.QBrush):

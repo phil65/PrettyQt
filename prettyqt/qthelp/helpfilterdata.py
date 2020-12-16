@@ -1,6 +1,6 @@
-from typing import List, Union, Sequence
+from typing import List, Sequence, Union
 
-from qtpy import QtHelp, QtCore
+from qtpy import QtCore, QtHelp
 
 from prettyqt import core
 

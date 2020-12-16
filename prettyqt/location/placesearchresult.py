@@ -3,6 +3,7 @@ from qtpy import QtLocation
 from prettyqt import location
 from prettyqt.utils import bidict
 
+
 TYPE = bidict(
     unknown=QtLocation.QPlaceSearchResult.UnknownSearchResult,
     place=QtLocation.QPlaceSearchResult.PlaceResult,

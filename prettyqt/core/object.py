@@ -1,11 +1,12 @@
-from typing import Optional, Union, DefaultDict, List, Type
 from collections import defaultdict
 from contextlib import contextmanager
-import itertools
 import inspect
+import itertools
+from typing import DefaultDict, List, Optional, Type, Union
 
 import qtpy
 from qtpy import QtCore
+
 
 counter_dict: DefaultDict = defaultdict(itertools.count)
 

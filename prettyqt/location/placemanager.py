@@ -1,7 +1,7 @@
-from typing import List, Optional, Union, Tuple
+from typing import List, Optional, Tuple, Union
 
-from qtpy import QtLocation
-from qtpy import PYQT5, PYSIDE2
+from qtpy import PYQT5, PYSIDE2, QtLocation
+
 
 if PYQT5:
     from PyQt5 import QtPositioning

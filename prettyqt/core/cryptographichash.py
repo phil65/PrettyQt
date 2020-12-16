@@ -1,8 +1,8 @@
-from typing import Union, Literal
+from typing import Literal, Union
 
 from qtpy import QtCore
 
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 ALGORITHM = bidict(

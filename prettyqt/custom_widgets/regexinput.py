@@ -5,6 +5,7 @@ import regex as re
 
 from prettyqt import core, custom_validators, custom_widgets, widgets
 
+
 MAP = dict(
     multiline=re.MULTILINE,
     ignorecase=re.IGNORECASE,

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, List, Union
+from typing import List, Optional, Union
 
 from qtpy import QtCore, QtWidgets
 

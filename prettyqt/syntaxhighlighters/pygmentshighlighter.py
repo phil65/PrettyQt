@@ -1,15 +1,16 @@
-from typing import Union
-import pathlib
 import logging
+import pathlib
+from typing import Union
 
-from qtpy import QtGui
 from pygments.formatters.html import HtmlFormatter
 from pygments.lexer import Error, RegexLexer, Text, _TokenType
 from pygments.lexers import get_lexer_by_name, load_lexer_from_file
-from pygments.styles import get_style_by_name
 from pygments.style import Style
+from pygments.styles import get_style_by_name
+from qtpy import QtGui
 
 from prettyqt import gui
+
 
 logger = logging.getLogger(__name__)
 

@@ -1,6 +1,5 @@
-from typing import Iterator, Literal
-
 import pathlib
+from typing import Iterator, Literal
 
 from qtpy import QtCore
 

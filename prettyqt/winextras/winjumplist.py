@@ -1,5 +1,6 @@
 from qtpy import PYQT5, PYSIDE2
 
+
 if PYQT5:
     from PyQt5 import QtWinExtras  # type: ignore
 elif PYSIDE2:

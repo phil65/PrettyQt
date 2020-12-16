@@ -4,6 +4,7 @@ from qtpy import QtGui
 
 from prettyqt.utils import bidict
 
+
 PAGE_SIZE_ID = bidict(
     a0=QtGui.QPageSize.A0,
     a1=QtGui.QPageSize.A1,

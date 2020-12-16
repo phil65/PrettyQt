@@ -1,9 +1,9 @@
-from typing import Optional, Literal
+from typing import Literal, Optional
 
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 ECHO_MODES = bidict(

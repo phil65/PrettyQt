@@ -1,9 +1,10 @@
-from typing import Union, Dict
+from typing import Dict, Union
 
-from qtpy import QtNetwork, QtCore
+from qtpy import QtCore, QtNetwork
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 KNOWN_HEADERS = bidict(
     content_disposition=QtNetwork.QNetworkRequest.ContentDispositionHeader,

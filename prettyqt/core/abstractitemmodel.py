@@ -6,6 +6,7 @@ from qtpy import QtCore
 from prettyqt import core
 from prettyqt.utils import bidict
 
+
 CHECK_INDEX_OPTIONS = bidict(
     none=QtCore.QAbstractItemModel.CheckIndexOption.NoOption,
     index_is_valid=QtCore.QAbstractItemModel.CheckIndexOption.IndexIsValid,

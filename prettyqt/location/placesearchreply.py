@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Iterator
+from typing import Iterator, List
 
 from qtpy import QtLocation
 

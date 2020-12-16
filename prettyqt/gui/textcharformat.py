@@ -1,9 +1,9 @@
-from typing import Union, Literal
+from typing import Literal, Union
 
 from qtpy import QtGui
 
 from prettyqt import gui
-from prettyqt.utils import bidict, colors, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict, colors
 
 
 FONT_PROPERTY_INHERITANCE_BEHAVIOUR = bidict(

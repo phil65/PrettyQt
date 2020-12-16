@@ -4,6 +4,7 @@ from qtpy import QtLocation
 
 from prettyqt.utils import bidict
 
+
 try:  # PySide2 5.15 doesnt include these
     VISIBILITY = bidict(
         unspecified=QtLocation.QLocation.UnspecifiedVisibility,

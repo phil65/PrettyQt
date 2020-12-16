@@ -1,12 +1,12 @@
 import functools
 import hashlib
-from typing import Iterable, Optional, Union, List, Literal
+from typing import Iterable, List, Literal, Optional, Union
 
 from deprecated import deprecated
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core, widgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 MODES = bidict(

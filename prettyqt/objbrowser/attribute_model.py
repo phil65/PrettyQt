@@ -1,14 +1,13 @@
 """Module that defines AttributeModel."""
 
-import logging
 import inspect
+import logging
 import pprint
 from typing import Callable, Dict
 
 from qtpy import QtGui
 
-from prettyqt import gui, constants, custom_models
-
+from prettyqt import constants, custom_models, gui
 from prettyqt.utils import treeitem
 
 

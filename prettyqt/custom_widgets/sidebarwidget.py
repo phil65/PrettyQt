@@ -1,6 +1,6 @@
-from typing import Callable, Optional, Union, Dict
+from typing import Callable, Dict, Optional, Union
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import gui, widgets
 

@@ -3,7 +3,7 @@ from typing import Callable, Union
 
 from qtpy import QtWebEngineWidgets
 
-from prettyqt import core, widgets, webenginewidgets
+from prettyqt import core, webenginewidgets, widgets
 
 
 QtWebEngineWidgets.QWebEngineView.__bases__ = (widgets.Widget,)

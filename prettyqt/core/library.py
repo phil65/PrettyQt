@@ -5,6 +5,7 @@ from qtpy import QtCore
 from prettyqt import core
 from prettyqt.utils import bidict
 
+
 LOAD_HINTS = bidict(
     resolve_all_symbols=QtCore.QLibrary.ResolveAllSymbolsHint,
     export_external_symbols=QtCore.QLibrary.ExportExternalSymbolsHint,

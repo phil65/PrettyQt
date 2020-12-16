@@ -1,9 +1,9 @@
-from typing import Callable, Union, List, Optional
 import pathlib
+from typing import Callable, List, Optional, Union
 
 from qtpy import QtCore
 
-from prettyqt import core, constants
+from prettyqt import constants, core
 from prettyqt.utils import InvalidParamError
 
 

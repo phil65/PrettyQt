@@ -5,6 +5,7 @@ from qtpy import QtQml
 from prettyqt import core, qml
 from prettyqt.utils import bidict
 
+
 EXTENSIONS = bidict(
     translation=QtQml.QJSEngine.TranslationExtension,
     console=QtQml.QJSEngine.ConsoleExtension,

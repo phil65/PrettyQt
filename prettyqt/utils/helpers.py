@@ -1,7 +1,7 @@
-from typing import Dict, Any, List
 import functools
-import sys
 import operator
+import sys
+from typing import Any, Dict, List
 
 
 def string_to_num_array(array: str) -> List[float]:

@@ -1,6 +1,7 @@
-from typing import List, Optional, Iterator
+from typing import Iterator, List, Optional
 
 from qtpy import QtCore
+
 from prettyqt import gui
 
 

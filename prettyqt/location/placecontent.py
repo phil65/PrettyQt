@@ -3,6 +3,7 @@ from qtpy import QtLocation
 from prettyqt import location
 from prettyqt.utils import bidict
 
+
 TYPE = bidict(
     none=QtLocation.QPlaceContent.NoType,
     image=QtLocation.QPlaceContent.ImageType,

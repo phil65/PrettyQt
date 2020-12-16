@@ -2,7 +2,7 @@ from typing import Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import widgets, constants
+from prettyqt import constants, widgets
 
 
 QtWidgets.QGroupBox.__bases__ = (widgets.Widget,)

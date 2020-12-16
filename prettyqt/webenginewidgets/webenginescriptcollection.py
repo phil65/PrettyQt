@@ -2,6 +2,7 @@ from typing import List, Union
 
 from qtpy import PYQT5, PYSIDE2
 
+
 if PYQT5:
     from PyQt5 import QtWebEngineWidgets  # type: ignore
 elif PYSIDE2:
@@ -38,7 +39,7 @@ class WebEngineScriptCollection:
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets, webenginewidgets
+    from prettyqt import webenginewidgets, widgets
 
     app = widgets.app()
     page = webenginewidgets.WebEnginePage()

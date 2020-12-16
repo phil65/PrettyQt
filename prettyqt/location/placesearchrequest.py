@@ -1,15 +1,16 @@
 from typing import List, Literal
 
-from qtpy import QtLocation, PYQT5, PYSIDE2
+from qtpy import PYQT5, PYSIDE2, QtLocation
+
 
 if PYQT5:
     from PyQt5 import QtPositioning
 elif PYSIDE2:
     from PySide2 import QtPositioning
 
-
 from prettyqt import location, positioning
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 RELEVANCE_HINT = bidict(
     unspecified=QtLocation.QPlaceSearchRequest.UnspecifiedHint,

@@ -1,9 +1,9 @@
-from typing import Callable, Sequence, Optional, Union, Iterator, Literal
+from typing import Callable, Iterator, Literal, Optional, Sequence, Union
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core, widgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 BUTTONS = bidict(

@@ -1,6 +1,5 @@
-from typing import Literal
-
 import contextlib
+from typing import Literal
 
 from qtpy import QtCore
 

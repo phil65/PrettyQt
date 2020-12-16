@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 import pathlib
-
-from typing import List, Optional, Union, Literal
+from typing import List, Literal, Optional, Union
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui, widgets, constants
-from prettyqt.utils import bidict, colors, InvalidParamError, helpers
+from prettyqt import constants, core, gui, widgets
+from prettyqt.utils import InvalidParamError, bidict, colors, helpers
 
 
 TEXT_INTERACTION = bidict(

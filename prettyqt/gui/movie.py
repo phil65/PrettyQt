@@ -3,7 +3,8 @@ from typing import Literal
 from qtpy import QtGui
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 CACHE_MODE = bidict(none=QtGui.QMovie.CacheNone, all=QtGui.QMovie.CacheAll)
 

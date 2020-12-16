@@ -2,6 +2,7 @@ from qtpy import QtCore
 
 from prettyqt.utils import bidict
 
+
 STRING_FORMATS = bidict(
     with_braces=QtCore.QUuid.WithBraces,
     without_braces=QtCore.QUuid.WithoutBraces,

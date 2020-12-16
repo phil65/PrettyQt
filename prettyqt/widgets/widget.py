@@ -1,14 +1,13 @@
 from contextlib import contextmanager
+from typing import Any, Callable, Dict, Iterator, Optional, Union
 
-from typing import Dict, Iterator, Callable, Optional, Union, Any
-
-from qtpy import QtCore, QtGui, QtWidgets
+from deprecated import deprecated
 import qstylizer.parser
 import qstylizer.style
-from deprecated import deprecated
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import core, gui, widgets, constants
-from prettyqt.utils import colors, InvalidParamError, helpers, prettyprinter
+from prettyqt import constants, core, gui, widgets
+from prettyqt.utils import InvalidParamError, colors, helpers, prettyprinter
 
 
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)

@@ -3,7 +3,7 @@ from typing import Literal
 from qtpy import QtGui
 
 from prettyqt import gui
-from prettyqt.utils import bidict, InvalidParamError, prettyprinter
+from prettyqt.utils import InvalidParamError, bidict, prettyprinter
 
 
 CAPITALIZATION = bidict(

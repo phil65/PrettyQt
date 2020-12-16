@@ -1,10 +1,11 @@
-from typing import Union, List
 import pathlib
+from typing import List, Union
 
-from qtpy import QtQml, QtCore
+from qtpy import QtCore, QtQml
 
 from prettyqt import qml
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 OBJECT_OWNERSHIPS = bidict(
     cpp=QtQml.QQmlEngine.CppOwnership,

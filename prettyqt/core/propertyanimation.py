@@ -2,6 +2,7 @@ from qtpy import QtCore
 
 from prettyqt import core
 
+
 QtCore.QPropertyAnimation.__bases__ = (core.VariantAnimation,)
 
 

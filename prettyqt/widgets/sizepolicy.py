@@ -1,7 +1,8 @@
 from typing import Any, Dict, Literal
+
 from qtpy import QtWidgets
 
-from prettyqt.utils import bidict, helpers, prettyprinter, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict, helpers, prettyprinter
 
 
 SIZE_POLICY = bidict(

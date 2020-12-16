@@ -1,7 +1,7 @@
 from qtpy import QtQuick
 
-from prettyqt import gui, core, quick
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, gui, quick
+from prettyqt.utils import InvalidParamError, bidict
 
 
 PERFORMANCE_HINT = bidict(

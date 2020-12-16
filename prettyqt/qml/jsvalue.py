@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from typing import Union, Optional
 import logging
+from typing import Optional, Union
 
 from qtpy import QtQml
 
 from prettyqt import qml
-
 from prettyqt.utils import bidict
+
 
 logger = logging.getLogger()
 

@@ -1,8 +1,7 @@
 from qtpy import QtGui
 
-from prettyqt import core, gui, constants
-from prettyqt.utils import colors
-from prettyqt.utils import InvalidParamError
+from prettyqt import constants, core, gui
+from prettyqt.utils import InvalidParamError, colors
 
 
 class Pen(QtGui.QPen):

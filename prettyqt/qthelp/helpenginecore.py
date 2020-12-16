@@ -1,6 +1,6 @@
 from typing import List, Optional
 
-from qtpy import QtHelp, QtCore
+from qtpy import QtCore, QtHelp
 
 from prettyqt import core
 

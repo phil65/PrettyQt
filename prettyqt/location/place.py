@@ -2,7 +2,7 @@ from typing import List, Optional
 
 from qtpy import QtLocation
 
-from prettyqt import location, positioning, core
+from prettyqt import core, location, positioning
 from prettyqt.utils import InvalidParamError
 
 

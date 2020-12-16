@@ -2,6 +2,7 @@ from qtpy import QtWidgets
 
 from prettyqt import core, widgets
 
+
 QtWidgets.QPanGesture.__bases__ = (widgets.Gesture,)
 
 

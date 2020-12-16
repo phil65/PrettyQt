@@ -1,6 +1,6 @@
-from typing import List, Iterator, Union
+from typing import Iterator, List, Union
 
-from qtpy import QtNetwork, QtCore
+from qtpy import QtCore, QtNetwork
 
 from prettyqt import core
 

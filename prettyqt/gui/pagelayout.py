@@ -3,7 +3,8 @@ from typing import Literal
 from qtpy import QtGui
 
 from prettyqt import gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 MODES = bidict(
     standard=QtGui.QPageLayout.StandardMode, full_page=QtGui.QPageLayout.FullPageMode

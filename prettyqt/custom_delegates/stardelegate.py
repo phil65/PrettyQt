@@ -1,7 +1,8 @@
-from prettyqt import core, gui, widgets
 import math
 
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
+
+from prettyqt import core, gui, widgets
 
 
 PAINTING_SCALE_FACTOR = 20

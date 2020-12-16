@@ -3,6 +3,7 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
+
 CORNER_WIDGETS = bidict(
     none=QtWidgets.QStyleOptionTab.NoCornerWidgets,
     left=QtWidgets.QStyleOptionTab.LeftCornerWidget,

@@ -3,7 +3,7 @@ from typing import List
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict, helpers, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 BLUR_HINTS = bidict(

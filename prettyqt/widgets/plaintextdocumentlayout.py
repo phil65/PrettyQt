@@ -2,6 +2,7 @@ from qtpy import QtWidgets
 
 from prettyqt import gui
 
+
 QtWidgets.QPlainTextDocumentLayout.__bases__ = (gui.AbstractTextDocumentLayout,)
 
 

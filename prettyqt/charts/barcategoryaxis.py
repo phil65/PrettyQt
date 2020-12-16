@@ -4,6 +4,7 @@ from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts
 
+
 QtCharts.QBarCategoryAxis.__bases__ = (charts.AbstractAxis,)
 
 

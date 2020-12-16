@@ -1,10 +1,10 @@
-from typing import Union, Literal
 import contextlib
+from typing import Literal, Union
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import core, gui, constants
-from prettyqt.utils import bidict, colors, InvalidParamError
+from prettyqt import constants, core, gui
+from prettyqt.utils import InvalidParamError, bidict, colors
 
 
 COMPOSITION_MODE = bidict(

@@ -1,7 +1,8 @@
 from qtpy import QtMultimedia
 
-from prettyqt import core, multimedia, gui
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, gui, multimedia
+from prettyqt.utils import InvalidParamError, bidict
+
 
 FIELD_TYPES = bidict(
     progressive_frame=QtMultimedia.QVideoFrame.ProgressiveFrame,

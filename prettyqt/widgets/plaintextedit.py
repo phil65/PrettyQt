@@ -1,11 +1,11 @@
 import contextlib
-from typing import Optional, Literal
+from typing import Literal, Optional
 
 from qtpy import QtGui, QtWidgets
 
-from prettyqt import core, gui, widgets, syntaxhighlighters, constants
+from prettyqt import constants, core, gui, syntaxhighlighters, widgets
 from prettyqt.gui import textcursor
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 WRAP_MODE = bidict(

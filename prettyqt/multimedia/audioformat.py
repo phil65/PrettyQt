@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from typing import Dict, Any, Iterator
-from dataclasses import dataclass, asdict
+from dataclasses import asdict, dataclass
+from typing import Any, Dict, Iterator
 
 from qtpy import QtMultimedia
-from prettyqt.utils import bidict, InvalidParamError
+
+from prettyqt.utils import InvalidParamError, bidict
+
 
 ENDIAN = bidict(
     big_endian=QtMultimedia.QAudioFormat.BigEndian,

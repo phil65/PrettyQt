@@ -2,6 +2,7 @@ from qtpy import QtWidgets
 
 from prettyqt import widgets
 
+
 QtWidgets.QSizeGrip.__bases__ = (widgets.Widget,)
 
 

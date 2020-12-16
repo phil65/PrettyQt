@@ -3,6 +3,7 @@ from qtpy import QtWidgets
 from prettyqt import widgets
 from prettyqt.utils import bidict
 
+
 SELECTED_POSITION = bidict(
     not_adjacent=QtWidgets.QStyleOptionToolBox.NotAdjacent,
     next_is_selected=QtWidgets.QStyleOptionToolBox.NextIsSelected,

@@ -2,8 +2,9 @@ from typing import Union
 
 from qtpy import QtNetwork
 
-from prettyqt import network, core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, network
+from prettyqt.utils import InvalidParamError, bidict
+
 
 DNS_ELIGIBILITY_STATUS = bidict(
     unknown=QtNetwork.QNetworkAddressEntry.DnsEligibilityUnknown,

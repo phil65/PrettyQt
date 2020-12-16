@@ -1,5 +1,5 @@
-from typing import List, Union
 import pathlib
+from typing import List, Union
 
 from qtpy import QtCore
 

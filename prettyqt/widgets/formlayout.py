@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from typing import Optional, Dict, Union, Tuple, Literal
+from typing import Dict, Literal, Optional, Tuple, Union
 
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 ROLE = bidict(

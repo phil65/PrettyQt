@@ -2,8 +2,9 @@ from typing import Literal
 
 from qtpy import QtGui
 
-from prettyqt import core, gui, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core, gui
+from prettyqt.utils import InvalidParamError, bidict
+
 
 ANCESTER_MODES = bidict(
     exclude_transients=QtGui.QWindow.ExcludeTransients,

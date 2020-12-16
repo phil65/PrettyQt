@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import Union, Literal
-import pathlib
 import contextlib
+import pathlib
+from typing import Literal, Union
 
 from qtpy import QtCore
 

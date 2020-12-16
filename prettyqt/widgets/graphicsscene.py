@@ -1,8 +1,8 @@
-from typing import List, Optional, Union, Tuple, Literal
+from typing import List, Literal, Optional, Tuple, Union
 
-from qtpy import QtWidgets, QtGui, QtCore
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import core, widgets, gui, constants
+from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

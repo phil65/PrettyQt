@@ -1,8 +1,9 @@
-from typing import List, Iterator
+from typing import Iterator, List
 
 from qtpy import QtGui
 
 from prettyqt import gui
+
 
 QtGui.QTextBlockGroup.__bases__ = (gui.TextObject,)
 

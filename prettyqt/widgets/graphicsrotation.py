@@ -1,6 +1,6 @@
 from qtpy import QtWidgets
 
-from prettyqt import widgets, constants
+from prettyqt import constants, widgets
 from prettyqt.utils import InvalidParamError
 
 

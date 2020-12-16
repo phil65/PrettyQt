@@ -1,10 +1,11 @@
 import logging
-from typing import Union, Literal
 import pathlib
+from typing import Literal, Union
 
 from qtpy import QtGui
 
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 logger = logging.getLogger(__name__)
 

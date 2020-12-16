@@ -1,7 +1,7 @@
 from qtpy import QtQuick
 
-from prettyqt import gui, core, qml
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, gui, qml
+from prettyqt.utils import InvalidParamError, bidict
 
 
 FLAGS = bidict(

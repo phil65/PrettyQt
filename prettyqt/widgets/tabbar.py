@@ -1,10 +1,10 @@
-from typing import Optional, Tuple, Union, Literal
+from typing import Literal, Optional, Tuple, Union
 
-from qtpy import QtCore, QtGui, QtWidgets
 from deprecated import deprecated
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import core, widgets, constants
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import constants, core, widgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 REMOVE_BEHAVIOUR = bidict(

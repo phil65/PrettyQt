@@ -1,9 +1,10 @@
 from typing import Union
 
-from qtpy import QtQml, QtCore
+from qtpy import QtCore, QtQml
 
 from prettyqt import core
 from prettyqt.utils import bidict
+
 
 COMPILATION_MODES = bidict(
     prefer_synchronous=QtQml.QQmlComponent.PreferSynchronous,

@@ -1,10 +1,11 @@
-from typing import Union, Optional
 import pathlib
+from typing import Optional, Union
 
-from qtpy import QtCore, QtWidgets, QtGui
+from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import gui, widgets, constants
+from prettyqt import constants, gui, widgets
 from prettyqt.utils import colors
+
 
 QtWidgets.QSplashScreen.__bases__ = (widgets.Widget,)
 

@@ -1,4 +1,4 @@
-from typing import Callable, Iterator, Optional, Union, Dict, Tuple, Literal
+from typing import Callable, Dict, Iterator, Literal, Optional, Tuple, Union
 
 from qtpy import QtCore
 

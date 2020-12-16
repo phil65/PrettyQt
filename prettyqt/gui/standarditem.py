@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import Union, Tuple, Iterator, List, Optional
+from typing import Iterator, List, Optional, Tuple, Union
 
-from qtpy import QtGui, QtCore
+from qtpy import QtCore, QtGui
 
-from prettyqt import core, gui, constants
+from prettyqt import constants, core, gui
 from prettyqt.utils import InvalidParamError
 
 

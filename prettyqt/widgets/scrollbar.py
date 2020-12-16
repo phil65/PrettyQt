@@ -1,8 +1,8 @@
-from typing import Union, Optional
+from typing import Optional, Union
 
 from qtpy import QtWidgets
 
-from prettyqt import core, widgets, constants
+from prettyqt import constants, core, widgets
 
 
 QtWidgets.QScrollBar.__bases__ = (widgets.AbstractSlider,)

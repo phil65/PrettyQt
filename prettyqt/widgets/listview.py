@@ -3,7 +3,7 @@ from typing import Literal
 from qtpy import QtWidgets
 
 from prettyqt import widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 VIEW_MODE = bidict(list=QtWidgets.QListView.ListMode, icon=QtWidgets.QListView.IconMode)

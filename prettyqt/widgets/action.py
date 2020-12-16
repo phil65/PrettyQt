@@ -1,9 +1,9 @@
-from typing import Optional, Callable, Literal
+from typing import Callable, Literal, Optional
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui, constants
-from prettyqt.utils import bidict, InvalidParamError, helpers, prettyprinter
+from prettyqt import constants, core, gui
+from prettyqt.utils import InvalidParamError, bidict, helpers, prettyprinter
 
 
 PRIORITIES = bidict(

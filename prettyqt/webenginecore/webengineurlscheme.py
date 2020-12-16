@@ -2,16 +2,16 @@ from __future__ import annotations
 
 from typing import Literal
 
-from qtpy import QtCore
+from qtpy import PYQT5, PYSIDE2, QtCore
 
-from qtpy import PYQT5, PYSIDE2
 
 if PYQT5:
     from PyQt5 import QtWebEngineCore  # type: ignore
 elif PYSIDE2:
     from PySide2 import QtWebEngineCore
 
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 QWebEngineUrlScheme = QtWebEngineCore.QWebEngineUrlScheme
 

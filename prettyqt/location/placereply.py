@@ -3,6 +3,7 @@ from qtpy import QtLocation
 from prettyqt import core
 from prettyqt.utils import bidict
 
+
 ERROR = bidict(
     none=QtLocation.QPlaceReply.NoError,
     place_does_not_exist=QtLocation.QPlaceReply.PlaceDoesNotExistError,

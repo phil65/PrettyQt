@@ -5,6 +5,7 @@ from qtpy.QtCharts import QtCharts
 from prettyqt import charts
 from prettyqt.utils import to_datetime
 
+
 QtCharts.QDateTimeAxis.__bases__ = (charts.AbstractAxis,)
 
 

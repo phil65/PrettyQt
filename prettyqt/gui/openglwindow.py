@@ -3,6 +3,7 @@ from qtpy import QtGui
 from prettyqt import gui
 from prettyqt.utils import bidict
 
+
 UPDATE_BEHAVIOUR = bidict(
     no_partial=QtGui.QOpenGLWindow.NoPartialUpdate,
     partial_blit=QtGui.QOpenGLWindow.PartialUpdateBlit,

@@ -1,6 +1,6 @@
-from typing import Union, Tuple
+from typing import Tuple, Union
 
-from qtpy import QtWidgets, QtGui, QtCore
+from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError

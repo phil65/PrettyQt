@@ -1,12 +1,13 @@
 import contextlib
-import pathlib
-from typing import List, Mapping, Optional, Union, Dict, Any, Iterator, Tuple, Literal
 import logging
+import pathlib
+from typing import Any, Dict, Iterator, List, Literal, Mapping, Optional, Tuple, Union
 
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 logger = logging.getLogger(__name__)
 

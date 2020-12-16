@@ -3,7 +3,8 @@ from typing import Literal
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 DELETION_POLICY = bidict(
     keep=QtCore.QAbstractAnimation.KeepWhenStopped,

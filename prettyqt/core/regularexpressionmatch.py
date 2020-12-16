@@ -1,4 +1,4 @@
-from typing import Optional, Union, Dict, Any, Tuple
+from typing import Any, Dict, Optional, Tuple, Union
 
 from qtpy import QtCore
 

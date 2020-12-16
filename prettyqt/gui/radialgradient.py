@@ -1,6 +1,6 @@
 from qtpy import QtGui
 
-from prettyqt import gui, core
+from prettyqt import core, gui
 
 
 QtGui.QRadialGradient.__bases__ = (gui.Gradient,)

@@ -5,6 +5,7 @@
 #
 from PyInstaller.utils.hooks import collect_data_files
 
+
 # For more information see
 # `hook global variables
 # <https://pyinstaller.readthedocs.io/en/stable/hooks.html#hook-global-variables>`_

@@ -1,11 +1,11 @@
 import sys
 import traceback
-from typing import Optional, List
+from typing import List, Optional
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import gui, widgets, core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, gui, widgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 ICONS = bidict(

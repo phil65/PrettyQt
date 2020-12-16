@@ -1,10 +1,10 @@
 import pathlib
-from typing import Union, Optional, Iterator
+from typing import Iterator, Optional, Union
 
 from qtpy import QtMultimedia
 
 from prettyqt import core, multimedia
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
 
 
 PLAYBACK_MODES = bidict(

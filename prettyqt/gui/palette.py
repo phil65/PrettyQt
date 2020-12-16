@@ -2,8 +2,8 @@ from typing import Dict, Literal
 
 from qtpy import QtGui
 
-from prettyqt import gui, core
-from prettyqt.utils import colors, bidict, InvalidParamError
+from prettyqt import core, gui
+from prettyqt.utils import InvalidParamError, bidict, colors
 
 
 ROLE = bidict(

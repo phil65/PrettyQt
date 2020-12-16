@@ -2,6 +2,7 @@ from qtpy import QtWidgets
 
 from prettyqt import widgets
 
+
 QtWidgets.QGraphicsScale.__bases__ = (widgets.GraphicsTransform,)
 
 

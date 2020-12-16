@@ -1,9 +1,10 @@
-from typing import Union, Callable, Literal
+from typing import Callable, Literal, Union
 
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict
+
 
 DIRECTION = bidict(forward=QtCore.QTimeLine.Forward, backward=QtCore.QTimeLine.Backward)
 

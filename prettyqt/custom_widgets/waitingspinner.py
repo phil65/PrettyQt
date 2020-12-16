@@ -30,7 +30,7 @@ from typing import Optional
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import core, gui, widgets, constants
+from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import colors
 
 
