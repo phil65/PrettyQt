@@ -64,7 +64,7 @@ class Icon(QtGui.QIcon):
         return f"{self.__class__.__name__}()"
 
     def __bool__(self):
-        return not bool(self.isNull())
+        return not self.isNull()
 
     def __getstate__(self):
         pixmap = self.pixmap(256, 256)
