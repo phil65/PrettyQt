@@ -1,3 +1,17 @@
+## v0.151.0 (2020-12-16)
+
+### Feat
+
+- **ToolBar**: add add method
+- **Icon**: add get_actual_size method
+- **winextras**: add WinThumbnailToolButton class
+- **ToolButton**: add set_menu method
+- **Uuid**: add str method
+
+### Fix
+
+- PySide2 find_child(ren) fix
+
 ## v0.150.0 (2020-12-15)
 
 ### Feat
