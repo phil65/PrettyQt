@@ -19,7 +19,7 @@ class BoolDictToolButton(widgets.ToolButton):
         self.set_text(title)
         self.set_icon(icon)
         menu = widgets.Menu()
-        self.setMenu(menu)
+        self.set_menu(menu)
         self.set_popup_mode("instant")
         if dct:
             self.set_dict(dct)
