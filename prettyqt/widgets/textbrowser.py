@@ -2,7 +2,6 @@ import pathlib
 from typing import Union
 
 
-import docutils.core
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
@@ -63,6 +62,8 @@ class TextBrowser(QtWidgets.QTextBrowser):
         self.set_rst(file_content)
 
     def set_rst(self, source: str):
+        import docutils.core
+
         html = docutils.core.publish_string(source, writer_name="html")
         self.setHtml(str(html))
 

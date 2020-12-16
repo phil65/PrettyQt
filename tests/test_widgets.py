@@ -1129,8 +1129,8 @@ def test_textbrowser(qtbot):
     if core.VersionNumber.get_qt_version() >= (5, 14, 0):
         widget.set_markdown("test")
         widget.set_markdown_file(str(path))
-    widget.set_rst("test")
-    widget.set_rst_file(str(path))
+    # widget.set_rst("test")
+    # widget.set_rst_file(str(path))
     os.unlink(str(path))
 
 
