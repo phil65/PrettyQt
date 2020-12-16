@@ -921,6 +921,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.movie.Movie.get_state" class="md-nav__link">
+    get_state()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.movie.Movie.set_cache_mode" class="md-nav__link">
     set_cache_mode()
   </a>
@@ -3044,6 +3051,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.gui.movie.Movie.get_cache_mode" class="md-nav__link">
     get_cache_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.movie.Movie.get_state" class="md-nav__link">
+    get_state()
   </a>
   
 </li>
@@ -6945,6 +6959,48 @@ get_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        cache mode</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">CACHE_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">cacheMode</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.movie.Movie.get_state">
+
+        <code class="highlight language-python">
+get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Get the current state.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['not_running', 'paused', 'running']</code></td>
+<td>
+<p>state</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/movie.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MovieStateStr</span><span class="p">:</span>
+    <span class="sd">"""Get the current state.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        state</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">MOVIE_STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>

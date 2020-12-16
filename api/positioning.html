@@ -1266,7 +1266,6 @@ get_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return satellite system.</p>
-<p>possible values are "undefined", "gps", "glonass"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1277,7 +1276,7 @@ get_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>bool</code></td>
+<td><code>Literal['undefined', 'gps', 'glonass']</code></td>
 <td>
 <p>satellite system</p>
 </td>
@@ -1287,10 +1286,8 @@ get_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/positioning/geosatelliteinfo.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SatelliteSystemStr</span><span class="p">:</span>
     <span class="sd">"""Return satellite system.</span>
-
-<span class="sd">    possible values are "undefined", "gps", "glonass"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        satellite system</span>
@@ -1311,7 +1308,6 @@ set_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set satellite system.</p>
-<p>valid values are: "undefined", "gps", "glonass"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1325,7 +1321,7 @@ set_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>system</code></td>
-<td><code>str</code></td>
+<td><code>Literal['undefined', 'gps', 'glonass']</code></td>
 <td>
 <p>satellite system to use</p>
 </td>
@@ -1353,10 +1349,8 @@ set_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/positioning/geosatelliteinfo.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="n">SatelliteSystemStr</span><span class="p">):</span>
     <span class="sd">"""Set satellite system.</span>
-
-<span class="sd">    valid values are: "undefined", "gps", "glonass"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        system: satellite system to use</span>

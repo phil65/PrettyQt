@@ -9573,7 +9573,6 @@ get_button_symbols<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Return button symbol type.</p>
-<p>possible values are "none", "up_down", "plus_minus"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9584,7 +9583,7 @@ get_button_symbols<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['up_down', 'plus_minus', 'none']</code></td>
 <td>
 <p>button symbol type</p>
 </td>
@@ -9594,10 +9593,8 @@ get_button_symbols<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractspinbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_button_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_button_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SymbolStr</span><span class="p">:</span>
     <span class="sd">"""Return button symbol type.</span>
-
-<span class="sd">    possible values are "none", "up_down", "plus_minus"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        button symbol type</span>
@@ -9618,7 +9615,6 @@ get_correction_mode<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return correction mode.</p>
-<p>possible values are "to_previous", "to_nearest"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9629,7 +9625,7 @@ get_correction_mode<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['to_previous', 'to_nearest']</code></td>
 <td>
 <p>correction mode</p>
 </td>
@@ -9639,10 +9635,8 @@ get_correction_mode<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractspinbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_correction_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_correction_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CorrectionModeStr</span><span class="p">:</span>
     <span class="sd">"""Return correction mode.</span>
-
-<span class="sd">    possible values are "to_previous", "to_nearest"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        correction mode</span>
@@ -9663,7 +9657,6 @@ get_step_type<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return step type.</p>
-<p>possible values are "default", "adaptive"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9674,7 +9667,7 @@ get_step_type<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['default', 'adaptive']</code></td>
 <td>
 <p>step type</p>
 </td>
@@ -9684,10 +9677,8 @@ get_step_type<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractspinbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_step_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_step_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StepTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return step type.</span>
-
-<span class="sd">    possible values are "default", "adaptive"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        step type</span>
@@ -9708,7 +9699,6 @@ set_button_symbols<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set button symbol type.</p>
-<p>possible values are "none", "up_down", "plus_minus"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9722,7 +9712,7 @@ set_button_symbols<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['up_down', 'plus_minus', 'none']</code></td>
 <td>
 <p>button symbol type to use</p>
 </td>
@@ -9750,10 +9740,8 @@ set_button_symbols<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractspinbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_symbols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SymbolStr</span><span class="p">):</span>
     <span class="sd">"""Set button symbol type.</span>
-
-<span class="sd">    possible values are "none", "up_down", "plus_minus"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: button symbol type to use</span>
@@ -9779,7 +9767,6 @@ set_correction_mode<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set correction mode.</p>
-<p>possible values are "to_previous", "to_nearest"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9793,7 +9780,7 @@ set_correction_mode<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['to_previous', 'to_nearest']</code></td>
 <td>
 <p>correction mode to use</p>
 </td>
@@ -9821,10 +9808,8 @@ set_correction_mode<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractspinbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_correction_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_correction_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CorrectionModeStr</span><span class="p">):</span>
     <span class="sd">"""Set correction mode.</span>
-
-<span class="sd">    possible values are "to_previous", "to_nearest"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: correction mode to use</span>
@@ -9850,7 +9835,6 @@ set_step_type<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set step type.</p>
-<p>possible values are "default", "adaptive"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9864,7 +9848,7 @@ set_step_type<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['default', 'adaptive']</code></td>
 <td>
 <p>step type to use</p>
 </td>
@@ -9892,10 +9876,8 @@ set_step_type<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractspinbox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_step_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_step_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">StepTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set step type.</span>
-
-<span class="sd">    possible values are "default", "adaptive"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: step type to use</span>
@@ -11505,7 +11487,7 @@ get_filter_mode<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Returns:</span>
 <span class="sd">        filter mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">filterMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">filterMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -11681,9 +11663,9 @@ set_filter_mode<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: filter mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFilterMode</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFilterMode</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">FILTER_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -16372,7 +16354,6 @@ get_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return view mode.</p>
-<p>possible values are "list", "icon"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -16383,7 +16364,7 @@ get_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['list', 'icon']</code></td>
 <td>
 <p>view mode</p>
 </td>
@@ -16393,10 +16374,8 @@ get_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/listview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_view_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_view_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ViewModeStr</span><span class="p">:</span>
     <span class="sd">"""Return view mode.</span>
-
-<span class="sd">    possible values are "list", "icon"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        view mode</span>
@@ -16417,7 +16396,6 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set view mode.</p>
-<p>possible values are "list", "icon"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -16431,7 +16409,7 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['list', 'icon']</code></td>
 <td>
 <p>view mode to use</p>
 </td>
@@ -16459,10 +16437,8 @@ set_view_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/listview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_view_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_view_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ViewModeStr</span><span class="p">):</span>
     <span class="sd">"""Set view mode.</span>
-
-<span class="sd">    possible values are "list", "icon"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: view mode to use</span>
@@ -20057,7 +20033,6 @@ get_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return elide mode.</p>
-<p>possible values are "left", "right", "middle", "none"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -20068,7 +20043,7 @@ get_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['left', 'right', 'middle', 'none']</code></td>
 <td>
 <p>elide mode</p>
 </td>
@@ -20078,15 +20053,13 @@ get_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ElideModeStr</span><span class="p">:</span>
     <span class="sd">"""Return elide mode.</span>
-
-<span class="sd">    possible values are "left", "right", "middle", "none"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        elide mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ELIDE_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">elideMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ELIDE_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">elideMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -20102,7 +20075,6 @@ get_remove_behaviour<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return remove behaviour.</p>
-<p>possible values are "left_tab", "right_tab", "previous_tab"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -20113,7 +20085,7 @@ get_remove_behaviour<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['left_tab', 'right_tab', 'previous_tab']</code></td>
 <td>
 <p>remove behaviour</p>
 </td>
@@ -20123,15 +20095,13 @@ get_remove_behaviour<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_remove_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_remove_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RemoveBehaviourStr</span><span class="p">:</span>
     <span class="sd">"""Return remove behaviour.</span>
-
-<span class="sd">    possible values are "left_tab", "right_tab", "previous_tab"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        remove behaviour</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">REMOVE_BEHAVIOURS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">selectionBehaviorOnRemove</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">REMOVE_BEHAVIOUR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">selectionBehaviorOnRemove</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -20168,7 +20138,6 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set elide mode.</p>
-<p>Valid values are "left", "right", "middle", "none"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -20182,7 +20151,7 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['left', 'right', 'middle', 'none']</code></td>
 <td>
 <p>elide mode to use</p>
 </td>
@@ -20210,10 +20179,8 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_elide_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ElideModeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set elide mode.</span>
-
-<span class="sd">    Valid values are "left", "right", "middle", "none"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: elide mode to use</span>
@@ -20221,9 +20188,9 @@ set_elide_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid elide mode</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ELIDE_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ELIDE_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setElideMode</span><span class="p">(</span><span class="n">ELIDE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ELIDE_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ELIDE_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setElideMode</span><span class="p">(</span><span class="n">ELIDE_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -20265,8 +20232,7 @@ set_selection_behavior_on_remove<span class="p">(</span><span class="bp">self</s
 <div class="doc doc-contents ">
 <p>Set the remove hehaviour.</p>
 <p>What tab should be set as current when removeTab is called
-if the removed tab is also the current tab.
-Possible values: left, right, previous</p>
+if the removed tab is also the current tab.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -20280,7 +20246,7 @@ Possible values: left, right, previous</p>
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['left_tab', 'right_tab', 'previous_tab']</code></td>
 <td>
 <p>new remove behaviour</p>
 </td>
@@ -20291,18 +20257,18 @@ Possible values: left, right, previous</p>
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_selection_behavior_on_remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_selection_behavior_on_remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">RemoveBehaviourStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set the remove hehaviour.</span>
 
 <span class="sd">    What tab should be set as current when removeTab is called</span>
 <span class="sd">    if the removed tab is also the current tab.</span>
-<span class="sd">    Possible values: left, right, previous</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        mode: new remove behaviour</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">REMOVE_BEHAVIOURS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">REMOVE_BEHAVIOURS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setSelectionBehaviorOnRemove</span><span class="p">(</span><span class="n">REMOVE_BEHAVIOURS</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">REMOVE_BEHAVIOUR</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">REMOVE_BEHAVIOUR</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setSelectionBehaviorOnRemove</span><span class="p">(</span><span class="n">REMOVE_BEHAVIOUR</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -20872,7 +20838,6 @@ get_tab_position<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return tab position.</p>
-<p>possible values are "north", "south", "east", "west"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -20883,7 +20848,7 @@ get_tab_position<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['north', 'south', 'west', 'east']</code></td>
 <td>
 <p>tab position</p>
 </td>
@@ -20893,15 +20858,13 @@ get_tab_position<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabwidget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_tab_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_tab_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TabPositionStr</span><span class="p">:</span>
     <span class="sd">"""Return tab position.</span>
-
-<span class="sd">    possible values are "north", "south", "east", "west"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tab position</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TAB_POSITIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tabPosition</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">TAB_POSITION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tabPosition</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -20917,7 +20880,6 @@ get_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return tab shape.</p>
-<p>possible values are "rounded", "triangular"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -20928,7 +20890,7 @@ get_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['rounded', 'triangular']</code></td>
 <td>
 <p>tab shape</p>
 </td>
@@ -20938,10 +20900,8 @@ get_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabwidget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_tab_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_tab_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TabShapeStr</span><span class="p">:</span>
     <span class="sd">"""Return tab shape.</span>
-
-<span class="sd">    possible values are "rounded", "triangular"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tab shape</span>
@@ -20984,7 +20944,6 @@ set_tab_position<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set tab position for the tabwidget.</p>
-<p>Valid values are "north", "south", "east", "west"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -20998,7 +20957,7 @@ set_tab_position<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>position</code></td>
-<td><code>str</code></td>
+<td><code>Literal['north', 'south', 'west', 'east']</code></td>
 <td>
 <p>tab position to use</p>
 </td>
@@ -21026,10 +20985,8 @@ set_tab_position<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabwidget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_tab_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_tab_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">TabPositionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set tab position for the tabwidget.</span>
-
-<span class="sd">    Valid values are "north", "south", "east", "west"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        position: tab position to use</span>
@@ -21037,9 +20994,9 @@ set_tab_position<span class="p">(</span><span class="bp">self</span><span class=
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: tab position does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TAB_POSITIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">TAB_POSITIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTabPosition</span><span class="p">(</span><span class="n">TAB_POSITIONS</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">position</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TAB_POSITION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">TAB_POSITION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTabPosition</span><span class="p">(</span><span class="n">TAB_POSITION</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -21055,7 +21012,6 @@ set_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set tab shape for the tabwidget.</p>
-<p>Valid values are "rounded" and "triangular"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -21069,7 +21025,7 @@ set_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>shape</code></td>
-<td><code>str</code></td>
+<td><code>Literal['rounded', 'triangular']</code></td>
 <td>
 <p>tab shape to use</p>
 </td>
@@ -21097,10 +21053,8 @@ set_tab_shape<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabwidget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_tab_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_tab_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">TabShapeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set tab shape for the tabwidget.</span>
-
-<span class="sd">    Valid values are "rounded" and "triangular"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        shape: tab shape to use</span>

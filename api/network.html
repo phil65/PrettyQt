@@ -1332,9 +1332,9 @@ set_pause_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: pause mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAUSE_MODE</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">PAUSE_MODE</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setPauseMode</span><span class="p">(</span><span class="n">PAUSE_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAUSE_MODES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">PAUSE_MODES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPauseMode</span><span class="p">(</span><span class="n">PAUSE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
