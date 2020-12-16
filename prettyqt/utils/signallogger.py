@@ -15,12 +15,14 @@ class LineSignalLogger(logging.Handler, core.Object):
         self.log_line.emit(msg)
 
 
-class RecordSignalLogger(logging.Handler, core.Object):
+class Signals(core.Object):
     log_record = core.Signal(logging.LogRecord)
 
+
+class RecordSignalLogger(logging.Handler):
     def __init__(self):
         super().__init__()
-        core.Object.__init__(self)
+        self.signals = Signals()
 
     def emit(self, record):
-        self.log_record.emit(record)
+        self.signals.log_record.emit(record)
