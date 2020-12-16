@@ -494,7 +494,12 @@ def test_propertyanimation():
         return val
 
     animation.set_easing(test)
-    assert animation.get_easing() == test
+    # PySide2 looses custom fn here
+    if qtpy.API == "pyqt5":
+        assert animation.get_easing() == test
+    else:
+        with pytest.raises(AttributeError):
+            animation.get_easing()
 
 
 def test_regexp():
