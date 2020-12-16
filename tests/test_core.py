@@ -699,7 +699,7 @@ def test_temporaryfile():
     file = core.TemporaryFile()
     with file.open_file("read_only"):
         assert file.get_open_mode() == "read_only"
-    date = core.DateTime(2000, 1, 1, 1, 1)
+    date = core.DateTime(2000, 1, 1, 1, 1, 1)
     date.set_timezone("Europe/Berlin")
     # tzinfo=datetime.timezone.utc
     # print(str(date.get_timezone()))
