@@ -48,6 +48,12 @@ class ToolBar(QtWidgets.QToolBar):
     def __repr__(self):
         return f"ToolBar({self.windowTitle()!r})"
 
+    def add(self, item: Union[QtWidgets.QAction, QtWidgets.QWidget]):
+        if isinstance(item, QtWidgets.QAction):
+            self.addAction(item)
+        else:
+            self.addWidget(item)
+
     def add_menu_button(
         self, label: str, icon: gui.icon.IconType, menu: QtWidgets.QMenu
     ) -> widgets.ToolButton:
