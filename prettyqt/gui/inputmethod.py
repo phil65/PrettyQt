@@ -1,16 +1,10 @@
-from qtpy import QtGui, QtCore
+from qtpy import QtGui
 
-from prettyqt import core
+from prettyqt import core, constants
 from prettyqt.utils import bidict
 
 ACTION = bidict(
     click=QtGui.QInputMethod.Click, context_menu=QtGui.QInputMethod.ContextMenu
-)
-
-LAYOUT_DIRECTION = bidict(
-    left_to_right=QtCore.Qt.LeftToRight,
-    right_to_left=QtCore.Qt.RightToLeft,
-    auto=QtCore.Qt.LayoutDirectionAuto,
 )
 
 QtGui.QInputMethod.__bases__ = (core.Object,)
@@ -41,8 +35,8 @@ class InputMethod:
     def get_locale(self) -> core.Locale:
         return core.Locale(self.locale())
 
-    def get_input_direction(self) -> str:
-        return LAYOUT_DIRECTION.inverse[self.inputDirection()]
+    def get_input_direction(self) -> constants.LayoutDirectionStr:
+        return constants.LAYOUT_DIRECTION.inverse[self.inputDirection()]
 
 
 if __name__ == "__main__":

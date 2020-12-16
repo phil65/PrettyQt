@@ -82,6 +82,17 @@ ALIGNMENTS = mappers.FlagMap(
     center=ALIGN_CENTER,
 )
 
+AlignmentStr = Literal[
+    "top",
+    "left",
+    "right",
+    "bottom",
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right",
+]
+
 SIDES = mappers.FlagMap(
     QtCore.Qt.Alignment,
     left=QtCore.Qt.AlignLeft,
@@ -89,6 +100,9 @@ SIDES = mappers.FlagMap(
     top=QtCore.Qt.AlignTop,
     bottom=QtCore.Qt.AlignBottom,
 )
+
+SideStr = Literal["left", "right", "top", "bottom"]
+
 EDGES = mappers.FlagMap(
     QtCore.Qt.Edges,
     top=QtCore.Qt.TopEdge,
@@ -99,22 +113,6 @@ EDGES = mappers.FlagMap(
     top_right=QtCore.Qt.TopEdge | QtCore.Qt.RightEdge,
     bottom_left=QtCore.Qt.BottomEdge | QtCore.Qt.LeftEdge,
     bottom_right=QtCore.Qt.BottomEdge | QtCore.Qt.RightEdge,
-)
-
-H_ALIGNMENT = mappers.FlagMap(
-    QtCore.Qt.Alignment,
-    left=QtCore.Qt.AlignLeft,
-    right=QtCore.Qt.AlignRight,
-    center=QtCore.Qt.AlignHCenter,
-    justify=QtCore.Qt.AlignJustify,
-)
-
-V_ALIGNMENT = mappers.FlagMap(
-    QtCore.Qt.Alignment,
-    top=QtCore.Qt.AlignTop,
-    bottom=QtCore.Qt.AlignBottom,
-    center=QtCore.Qt.AlignVCenter,
-    baseline=QtCore.Qt.AlignBaseline,
 )
 
 EdgeStr = Literal[
@@ -128,18 +126,13 @@ EdgeStr = Literal[
     "bottom_right",
 ]
 
-AlignmentStr = Literal[
-    "top",
-    "left",
-    "right",
-    "bottom",
-    "top_left",
-    "top_right",
-    "bottom_left",
-    "bottom_right",
-]
-
-SideStr = Literal["left", "right", "top", "bottom"]
+H_ALIGNMENT = mappers.FlagMap(
+    QtCore.Qt.Alignment,
+    left=QtCore.Qt.AlignLeft,
+    right=QtCore.Qt.AlignRight,
+    center=QtCore.Qt.AlignHCenter,
+    justify=QtCore.Qt.AlignJustify,
+)
 
 HorizontalAlignmentStr = Literal[
     "left",
@@ -147,6 +140,15 @@ HorizontalAlignmentStr = Literal[
     "center",
     "justify",
 ]
+
+V_ALIGNMENT = mappers.FlagMap(
+    QtCore.Qt.Alignment,
+    top=QtCore.Qt.AlignTop,
+    bottom=QtCore.Qt.AlignBottom,
+    center=QtCore.Qt.AlignVCenter,
+    baseline=QtCore.Qt.AlignBaseline,
+)
+
 VerticalAlignmentStr = Literal[
     "top",
     "bottom",
@@ -611,3 +613,45 @@ CORNER = bidict(
 )
 
 CornerStr = Literal["top_left", "top_right", "bottom_left", "bottom_right"]
+
+SCREEN_ORIENTATION = bidict(
+    primary=QtCore.Qt.PrimaryOrientation,
+    landscape=QtCore.Qt.LandscapeOrientation,
+    portrait=QtCore.Qt.PortraitOrientation,
+    inverted_landscape=QtCore.Qt.InvertedLandscapeOrientation,
+    inverted_portrait=QtCore.Qt.InvertedPortraitOrientation,
+)
+
+ScreenOrientationStr = Literal[
+    "primary", "landscape", "portrait", "inverted_landscape", "inverted_portrait"
+]
+
+ASPECT_RATIO_MODE = bidict(
+    ignore=QtCore.Qt.IgnoreAspectRatio,
+    keep=QtCore.Qt.KeepAspectRatio,
+    keep_by_expanding=QtCore.Qt.KeepAspectRatioByExpanding,
+)
+
+AspectRatioModeStr = Literal["ignore", "keep", "keep_by_expanding"]
+
+DATE_FORMAT = bidict(
+    text=QtCore.Qt.TextDate,
+    iso=QtCore.Qt.ISODate,
+    iso_with_ms=QtCore.Qt.ISODateWithMs,
+    rfc_2822=QtCore.Qt.RFC2822Date,
+)
+
+DateFormatStr = Literal["text", "iso", "iso_with_ms", "rfc_2822"]
+
+TIME_SPEC = bidict(
+    local_time=QtCore.Qt.LocalTime,
+    utc=QtCore.Qt.UTC,
+    offset_from_utc=QtCore.Qt.OffsetFromUTC,
+    timezone=QtCore.Qt.TimeZone,
+)
+
+TimeSpecStr = Literal["local_time", "utc", "offset_from_utc", "timezone"]
+
+AXIS = bidict(x=QtCore.Qt.XAxis, y=QtCore.Qt.YAxis, z=QtCore.Qt.ZAxis)
+
+AxisStr = Literal["x", "y", "z"]

@@ -1,19 +1,17 @@
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets
 
-from prettyqt import widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import widgets, constants
+from prettyqt.utils import InvalidParamError
 
-
-AXIS = bidict(x=QtCore.Qt.XAxis, y=QtCore.Qt.YAxis, z=QtCore.Qt.ZAxis)
 
 QtWidgets.QGraphicsRotation.__bases__ = (widgets.GraphicsTransform,)
 
 
 class GraphicsRotation(QtWidgets.QGraphicsRotation):
-    def set_axis(self, axis: str):
-        if axis not in AXIS:
-            raise InvalidParamError(axis, AXIS)
-        self.setAxis(AXIS[axis])
+    def set_axis(self, axis: constants.AxisStr):
+        if axis not in constants.AXIS:
+            raise InvalidParamError(axis, constants.AXIS)
+        self.setAxis(constants.AXIS[axis])
 
 
 if __name__ == "__main__":

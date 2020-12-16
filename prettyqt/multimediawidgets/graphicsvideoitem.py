@@ -1,14 +1,8 @@
-from qtpy import QtMultimediaWidgets, QtCore
+from qtpy import QtMultimediaWidgets
 
-from prettyqt import core, multimedia, widgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt import core, multimedia, widgets, constants
+from prettyqt.utils import InvalidParamError
 
-
-ASPECT_RATIO_MODES = bidict(
-    ignore=QtCore.Qt.IgnoreAspectRatio,
-    keep=QtCore.Qt.KeepAspectRatio,
-    keep_by_expanding=QtCore.Qt.KeepAspectRatioByExpanding,
-)
 
 QtMultimediaWidgets.QGraphicsVideoItem.__bases__ = (
     widgets.GraphicsObject,
@@ -26,10 +20,8 @@ class GraphicsVideoItem(QtMultimediaWidgets.QGraphicsVideoItem):
     def get_size(self) -> core.SizeF:
         return core.SizeF(self.size())
 
-    def set_aspect_ratio_mode(self, mode: str):
+    def set_aspect_ratio_mode(self, mode: constants.AspectRatioModeStr):
         """Set the aspect ratio mode.
-
-        Allowed values are "ignore", "keep", "keep_by_expanding"
 
         Args:
             mode: aspect ratio mode
@@ -37,16 +29,14 @@ class GraphicsVideoItem(QtMultimediaWidgets.QGraphicsVideoItem):
         Raises:
             InvalidParamError: aspect ratio mode does not exist
         """
-        if mode not in ASPECT_RATIO_MODES:
-            raise InvalidParamError(mode, ASPECT_RATIO_MODES)
-        self.setAspectRatioMode(ASPECT_RATIO_MODES[mode])
+        if mode not in constants.ASPECT_RATIO_MODE:
+            raise InvalidParamError(mode, constants.ASPECT_RATIO_MODE)
+        self.setAspectRatioMode(constants.ASPECT_RATIO_MODE[mode])
 
-    def get_aspect_ratio_mode(self) -> str:
+    def get_aspect_ratio_mode(self) -> constants.AspectRatioModeStr:
         """Return current aspect ratio mode.
-
-        Possible values: "ignore", "keep", "keep_by_expanding"
 
         Returns:
             aspect ratio mode
         """
-        return ASPECT_RATIO_MODES.inverse[self.aspectRatioMode()]
+        return constants.ASPECT_RATIO_MODE.inverse[self.aspectRatioMode()]

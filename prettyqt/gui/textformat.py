@@ -1,6 +1,6 @@
-from qtpy import QtGui, QtCore
+from qtpy import QtGui
 
-from prettyqt import gui
+from prettyqt import gui, constants
 
 from prettyqt.utils import bidict, InvalidParamError, mappers
 
@@ -26,12 +26,6 @@ PAGE_BREAK_FLAG = mappers.FlagMap(
     auto=QtGui.QTextFormat.PageBreak_Auto,
     always_before=QtGui.QTextFormat.PageBreak_AlwaysBefore,
     always_after=QtGui.QTextFormat.PageBreak_AlwaysAfter,
-)
-
-LAYOUT_DIRECTIONS = bidict(
-    left_to_right=QtCore.Qt.LeftToRight,
-    right_to_left=QtCore.Qt.RightToLeft,
-    auto=QtCore.Qt.LayoutDirectionAuto,
 )
 
 
@@ -66,10 +60,8 @@ class TextFormat(QtGui.QTextFormat):
     def get_pen_property(self, property_id: int) -> gui.Pen:
         return gui.Pen(self.penProperty(property_id))
 
-    def set_layout_direction(self, direction: str):
+    def set_layout_direction(self, direction: constants.LayoutDirectionStr):
         """Set layout direction.
-
-        Valid values: "left_to_right", "right_to_left", "auto"
 
         Args:
             direction: layout direction
@@ -77,19 +69,17 @@ class TextFormat(QtGui.QTextFormat):
         Raises:
             InvalidParamError: layout direction does not exist
         """
-        if direction not in LAYOUT_DIRECTIONS:
-            raise InvalidParamError(direction, LAYOUT_DIRECTIONS)
-        self.setLayoutDirection(LAYOUT_DIRECTIONS[direction])
+        if direction not in constants.LAYOUT_DIRECTION:
+            raise InvalidParamError(direction, constants.LAYOUT_DIRECTION)
+        self.setLayoutDirection(constants.LAYOUT_DIRECTION[direction])
 
-    def get_layout_direction(self) -> str:
+    def get_layout_direction(self) -> constants.LayoutDirectionStr:
         """Get the current layout direction.
-
-        Possible values: "left_to_right", "right_to_left", "auto"
 
         Returns:
             layout direction
         """
-        return LAYOUT_DIRECTIONS.inverse[self.layoutDirection()]
+        return constants.LAYOUT_DIRECTION.inverse[self.layoutDirection()]
 
 
 if __name__ == "__main__":

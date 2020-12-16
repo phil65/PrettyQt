@@ -1,28 +1,10 @@
-from typing import Union, Literal
+from typing import Union
 import datetime
 
 from qtpy import QtCore
 
-from prettyqt import core
-from prettyqt.utils import bidict, InvalidParamError, to_datetime
-
-DATE_FORMAT = bidict(
-    text=QtCore.Qt.TextDate,
-    iso=QtCore.Qt.ISODate,
-    iso_with_ms=QtCore.Qt.ISODateWithMs,
-    rfc_2822=QtCore.Qt.RFC2822Date,
-)
-
-DateFormatStr = Literal["text", "iso", "iso_with_ms", "rfc_2822"]
-
-TIME_SPEC = bidict(
-    local_time=QtCore.Qt.LocalTime,
-    utc=QtCore.Qt.UTC,
-    offset_from_utc=QtCore.Qt.OffsetFromUTC,
-    timezone=QtCore.Qt.TimeZone,
-)
-
-TimeSpecStr = Literal["local_time", "utc", "offset_from_utc", "timezone"]
+from prettyqt import core, constants
+from prettyqt.utils import InvalidParamError, to_datetime
 
 
 class DateTime(QtCore.QDateTime):
@@ -54,7 +36,7 @@ class DateTime(QtCore.QDateTime):
         else:
             self.setTimeZone(zone)
 
-    def set_time_spec(self, spec: TimeSpecStr):
+    def set_time_spec(self, spec: constants.TimeSpecStr):
         """Set the time specification.
 
         Args:
@@ -63,20 +45,20 @@ class DateTime(QtCore.QDateTime):
         Raises:
             InvalidParamError: time specification does not exist
         """
-        if spec not in TIME_SPEC:
-            raise InvalidParamError(spec, TIME_SPEC)
-        self.setTimeSpec(TIME_SPEC[spec])
+        if spec not in constants.TIME_SPEC:
+            raise InvalidParamError(spec, constants.TIME_SPEC)
+        self.setTimeSpec(constants.TIME_SPEC[spec])
 
-    def get_time_spec(self) -> TimeSpecStr:
+    def get_time_spec(self) -> constants.TimeSpecStr:
         """Return current time specification.
 
         Returns:
             time specification
         """
-        return TIME_SPEC.inverse[self.timeSpec()]
+        return constants.TIME_SPEC.inverse[self.timeSpec()]
 
-    def to_format(self, fmt: DateFormatStr):
-        return self.toString(DATE_FORMAT[fmt])
+    def to_format(self, fmt: constants.DateFormatStr):
+        return self.toString(constants.DATE_FORMAT[fmt])
 
 
 if __name__ == "__main__":

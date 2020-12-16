@@ -2,18 +2,10 @@ from __future__ import annotations
 
 from typing import List
 
-from qtpy import QtGui, QtCore
+from qtpy import QtGui
 
-from prettyqt import core, gui
-from prettyqt.utils import bidict, InvalidParamError
-
-ORIENTATIONS = bidict(
-    primary=QtCore.Qt.PrimaryOrientation,
-    landscape=QtCore.Qt.LandscapeOrientation,
-    portrait=QtCore.Qt.PortraitOrientation,
-    inverted_landscape=QtCore.Qt.InvertedLandscapeOrientation,
-    inverted_portrait=QtCore.Qt.InvertedPortraitOrientation,
-)
+from prettyqt import core, gui, constants
+from prettyqt.utils import InvalidParamError
 
 
 class Screen:
@@ -47,24 +39,31 @@ class Screen:
     def get_virtual_size(self) -> core.Size:
         return core.Size(self.virtualSize())
 
-    def get_native_orientation(self) -> str:
-        return ORIENTATIONS.inverse[self.nativeOrientation()]
+    def get_native_orientation(self) -> constants.ScreenOrientationStr:
+        return constants.SCREEN_ORIENTATION.inverse[self.nativeOrientation()]
 
-    def get_orientation(self) -> str:
-        return ORIENTATIONS.inverse[self.orientation()]
+    def get_orientation(self) -> constants.ScreenOrientationStr:
+        return constants.SCREEN_ORIENTATION.inverse[self.orientation()]
 
-    def get_primary_orientation(self) -> str:
-        return ORIENTATIONS.inverse[self.primaryOrientation()]
+    def get_primary_orientation(self) -> constants.ScreenOrientationStr:
+        return constants.SCREEN_ORIENTATION.inverse[self.primaryOrientation()]
 
     def get_physical_size(self) -> core.SizeF:
         return core.SizeF(self.physicalSize())
 
-    def get_angle_between(self, orientation_1: str, orientation_2: str):
-        if orientation_1 not in ORIENTATIONS:
-            raise InvalidParamError(orientation_1, ORIENTATIONS)
-        if orientation_2 not in ORIENTATIONS:
-            raise InvalidParamError(orientation_2, ORIENTATIONS)
-        self.angleBetween(ORIENTATIONS[orientation_1], ORIENTATIONS[orientation_2])
+    def get_angle_between(
+        self,
+        orientation_1: constants.ScreenOrientationStr,
+        orientation_2: constants.ScreenOrientationStr,
+    ):
+        if orientation_1 not in constants.SCREEN_ORIENTATION:
+            raise InvalidParamError(orientation_1, constants.SCREEN_ORIENTATION)
+        if orientation_2 not in constants.SCREEN_ORIENTATION:
+            raise InvalidParamError(orientation_2, constants.SCREEN_ORIENTATION)
+        self.angleBetween(
+            constants.SCREEN_ORIENTATION[orientation_1],
+            constants.SCREEN_ORIENTATION[orientation_2],
+        )
 
     def grab_window(self, *args, **kwargs) -> gui.Pixmap:
         return gui.Pixmap(self.grabWindow(*args, **kwargs))
