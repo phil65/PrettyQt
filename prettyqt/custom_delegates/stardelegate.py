@@ -1,4 +1,5 @@
 import math
+from typing import Optional
 
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -68,7 +69,7 @@ class StarEditor(widgets.Widget):
     # A signal to tell the delegate when we've finished editing.
     editing_finished = core.Signal()
 
-    def __init__(self, parent: QtWidgets.QWidget = None):
+    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         """Initialize the editor object, making sure we can watch mouse events."""
         super().__init__(parent)
 

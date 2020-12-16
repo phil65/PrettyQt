@@ -92,7 +92,7 @@ class Object(QtCore.QObject):
         typ: Type[QtCore.QObject] = QtCore.QObject,
         name: Optional[Union[str, QtCore.QRegularExpression]] = None,
         recursive: bool = True,
-    ):
+    ) -> Optional[QtCore.QObject]:
         if recursive:
             flag = QtCore.Qt.FindChildrenRecursively
         else:

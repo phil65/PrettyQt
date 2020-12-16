@@ -8,7 +8,7 @@ from prettyqt import gui
 class CompositeValidator(gui.Validator):
     def __init__(
         self,
-        validators: List[gui.Validator] = None,
+        validators: Optional[List[gui.Validator]] = None,
         parent: Optional[QtCore.QObject] = None,
     ):
         super().__init__(parent)

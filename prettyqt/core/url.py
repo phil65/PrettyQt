@@ -44,7 +44,7 @@ FORMATTING_OPTIONS = bidict(
 
 
 class Url(QtCore.QUrl):
-    def __init__(self, path: Union[QtCore.QUrl, str, pathlib.Path] = None):
+    def __init__(self, path: Optional[Union[QtCore.QUrl, str, pathlib.Path]] = None):
         if path is None:
             super().__init__()
         else:

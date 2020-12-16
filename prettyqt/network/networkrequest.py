@@ -1,4 +1,4 @@
-from typing import Dict, Union
+from typing import Dict, Optional, Union
 
 from qtpy import QtCore, QtNetwork
 
@@ -44,7 +44,9 @@ CACHE_LOAD_CONTROL = bidict(
 
 
 class NetworkRequest(QtNetwork.QNetworkRequest):
-    def __init__(self, obj: Union[QtCore.QUrl, str, QtNetwork.QNetworkRequest] = None):
+    def __init__(
+        self, obj: Optional[Union[QtCore.QUrl, str, QtNetwork.QNetworkRequest]] = None
+    ):
         if isinstance(obj, QtNetwork.QNetworkRequest):
             super().__init__(obj)
         else:
