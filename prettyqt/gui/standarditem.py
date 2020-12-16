@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Union, Tuple, Iterator, List, Optional, Literal
 
 from qtpy import QtGui, QtCore
 
@@ -42,6 +42,46 @@ class StandardItem(QtGui.QStandardItem):
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
+
+    def __getitem__(
+        self, index: Union[int, Tuple[int, int], QtCore.QModelIndex]
+    ) -> QtGui.QStandardItem:
+        if isinstance(index, int):
+            item = self.child(index)
+        elif isinstance(index, tuple):
+            item = self.child(*index)
+        else:
+            item = None
+        if item is None:
+            raise KeyError(index)
+        return item
+
+    def __delitem__(self, index: Union[int, Tuple[int, int]]):
+        if isinstance(index, int):
+            item = self.takeRow(index)
+        else:
+            item = self.takeChild(*index)
+        if item is None:
+            raise KeyError(index)
+        return item
+
+    def __iter__(self) -> Iterator[QtGui.QStandardItem]:
+        return iter(self.get_children())
+
+    def __add__(self, other: Union[str, QtGui.QStandardItem]) -> StandardItem:
+        if isinstance(other, (QtGui.QStandardItem, str)):
+            self.add(other)
+            return self
+        raise TypeError("wrong type for addition")
+
+    def get_children(self) -> List[QtGui.QStandardItem]:
+        return [self.child(index) for index in range(self.rowCount())]
+
+    def add(self, *item: Union[str, QtGui.QStandardItem]):
+        for i in item:
+            if isinstance(i, str):
+                i = gui.StandardItem(i)
+            self.appendRow([i])
 
     def clone(self):
         item = self.__class__()
@@ -136,10 +176,13 @@ class StandardItem(QtGui.QStandardItem):
             item.setSizeHint(size_hint)
         if checkstate is not None:
             item.set_checkstate(checkstate)
-        self.appendRow(item)
+        self.appendRow([item])
         return item
 
 
 if __name__ == "__main__":
     item = StandardItem()
     item.setData("test", 1000)
+    item2 = StandardItem()
+    item.add(item2)
+    print(item.child(0))

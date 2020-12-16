@@ -42,7 +42,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
 
     def __setstate__(self, state):
         for item in state["items"]:
-            self.appendRow(item)
+            self.appendRow([item])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -60,7 +60,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
         for i in item:
             if isinstance(i, str):
                 i = gui.StandardItem(i)
-            self.appendRow(i)
+            self.appendRow([i])
 
     def find_items(
         self, text: str, column: int = 0, mode: constants.MatchFlagStr = "exact"
@@ -114,7 +114,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
             item.setSizeHint(size_hint)
         if checkstate is not None:
             item.set_checkstate(checkstate)
-        self.appendRow(item)
+        self.appendRow([item])
         return item
 
 
