@@ -137,11 +137,8 @@ class ColumnItemModel(core.AbstractItemModel):
         tree_item = index.internalPointer()
 
         if role in [constants.DISPLAY_ROLE, constants.EDIT_ROLE]:
-            func = self._attr_cols[col].label
-            if func is None:
-                return ""
-            attr = func(tree_item)
-            return attr.replace("\n", " ")
+            val = self._attr_cols[col].get_label(tree_item)
+            return val.replace("\n", " ")
         elif role == constants.DECORATION_ROLE:
             return self._attr_cols[col].get_decoration(tree_item)
         elif role == constants.CHECKSTATE_ROLE:
