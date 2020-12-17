@@ -1,10 +1,11 @@
 """Constants module."""
 from typing import Literal
 
-from qtpy import QtCore
 from bidict import bidict
+from qtpy import QtCore
 
 from prettyqt.utils import mappers
+
 
 DISPLAY_ROLE = QtCore.Qt.DisplayRole
 USER_ROLE = QtCore.Qt.UserRole
@@ -568,6 +569,10 @@ WINDOW_FLAGS = bidict(
     window_title=QtCore.Qt.WindowTitleHint,
     customize_window=QtCore.Qt.CustomizeWindowHint,
 )
+
+WindowFlagStr = Literal[
+    "frameless", "popup", "stay_on_top", "tool", "window_title", "customize_window"
+]
 
 WINDOW_ATTRIBUTES = bidict(
     native_window=QtCore.Qt.WA_NativeWindow,

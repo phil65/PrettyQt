@@ -1,5 +1,5 @@
 from contextlib import contextmanager
-from typing import Any, Callable, Dict, Iterator, Optional, Union
+from typing import Any, Callable, Dict, Iterator, Literal, Optional, Union
 
 from deprecated import deprecated
 import qstylizer.parser
@@ -11,6 +11,9 @@ from prettyqt.utils import InvalidParamError, colors, helpers, prettyprinter
 
 
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
+
+
+LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
 
 
 class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
@@ -139,7 +142,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())
 
-    def set_window_flags(self, *flags: str, append: bool = False):
+    def set_window_flags(self, *flags: constants.WindowFlagStr, append: bool = False):
         for flag in flags:
             if flag not in constants.WINDOW_FLAGS:
                 raise InvalidParamError(flag, constants.WINDOW_FLAGS)
@@ -170,12 +173,14 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
 
-    def set_attribute(self, attribute: str, state: bool = True) -> None:
+    def set_attribute(
+        self, attribute: constants.WindowAttributeStr, state: bool = True
+    ) -> None:
         if attribute not in constants.WINDOW_ATTRIBUTES:
             raise InvalidParamError(attribute, constants.WINDOW_ATTRIBUTES)
         self.setAttribute(constants.WINDOW_ATTRIBUTES[attribute], state)
 
-    def set_attributes(self, **kwargs: Dict[str, bool]) -> None:
+    def set_attributes(self, **kwargs: Dict[constants.WindowAttributeStr, bool]) -> None:
         for attribute, state in kwargs.items():
             if attribute not in constants.WINDOW_ATTRIBUTES:
                 raise InvalidParamError(attribute, constants.WINDOW_ATTRIBUTES)
@@ -319,7 +324,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_layout(
         self,
-        layout: Union[str, QtWidgets.QLayout, None],
+        layout: Union[LayoutStr, QtWidgets.QLayout, None],
         margin: Optional[int] = None,
         spacing: Optional[int] = None,
     ) -> None:

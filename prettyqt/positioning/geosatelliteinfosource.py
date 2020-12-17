@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import PYQT5, PYSIDE2
 
 
@@ -10,12 +12,14 @@ from prettyqt import core
 from prettyqt.utils import bidict
 
 
-ERRORS = bidict(
+ERROR = bidict(
     access_error=QtPositioning.QGeoSatelliteInfoSource.AccessError,
     closed_error=QtPositioning.QGeoSatelliteInfoSource.ClosedError,
     none=QtPositioning.QGeoSatelliteInfoSource.NoError,
     unknown_source=QtPositioning.QGeoSatelliteInfoSource.UnknownSourceError,
 )
+
+ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]
 
 QtPositioning.QGeoSatelliteInfoSource.__bases__ = (core.Object,)
 
@@ -33,12 +37,10 @@ class GeoSatelliteInfoSource(QtPositioning.QGeoSatelliteInfoSource):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
-    def get_error(self) -> str:
+    def get_error(self) -> ErrorStr:
         """Return error type.
-
-        possible values are "access_error" "closed_error", "none", "unkown_source"
 
         Returns:
             error type
         """
-        return ERRORS.inverse[self.error()]
+        return ERROR.inverse[self.error()]

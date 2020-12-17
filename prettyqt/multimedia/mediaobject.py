@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtMultimedia
 
 from prettyqt import core
@@ -11,6 +13,7 @@ AVAILABILITY_STATUS = bidict(
     busy=QtMultimedia.QMultimedia.Busy,
 )
 
+AvailabilityStatusStr = Literal["available", "service_missing", "resource_error", "busy"]
 
 QtMultimedia.QMediaObject.__bases__ = (core.Object,)
 
@@ -19,10 +22,8 @@ class MediaObject(QtMultimedia.QMediaObject):
     def __getitem__(self, value: str):
         return self.metaData(value)
 
-    def get_availability(self) -> str:
+    def get_availability(self) -> AvailabilityStatusStr:
         """Return availability status.
-
-        Possible values: "available", "service_missing", "resource_error", "busy"
 
         Returns:
             availability status

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Literal
 
 from qtpy import QtWidgets
 
@@ -14,11 +14,15 @@ FRAME_RATES = bidict(
     standard=QScrollerProperties.Standard,
 )
 
+FrameRateStr = Literal["fps_60", "fps_30", "fps_20", "standard"]
+
 OVERSHOOT_POLICY = bidict(
     when_scrollable=QScrollerProperties.OvershootWhenScrollable,
     always_off=QScrollerProperties.OvershootAlwaysOff,
     always_on=QScrollerProperties.OvershootAlwaysOn,
 )
+
+OvershootPolicyStr = Literal["when_scrollable", "always_off", "always_on"]
 
 SCROLL_METRIC = bidict(
     mouse_press_event_delay=QScrollerProperties.MousePressEventDelay,
@@ -44,28 +48,40 @@ SCROLL_METRIC = bidict(
     scroll_metric_count=QScrollerProperties.ScrollMetricCount,
 )
 
+ScrollmetricStr = Literal[
+    "mouse_press_event_delay",
+    "drag_start_distance",
+    "drag_velocity_smoothing_factor",
+    "axis_lock_threshold",
+    "scrolling_curve",
+    "deceleration_factor",
+    "minimum_velocity",
+    "maximum_velocity",
+    "maximum_click_through_velocity",
+    "accelerating_flick_maximum_time",
+    "accelerating_flick_speedup_factor",
+    "snap_position_ratio",
+    "snap_time",
+    "overshoot_drag_resistance_factor",
+    "overshoot_drag_distance_factor",
+    "overshoot_scroll_distance_factor",
+    "overshoot_scroll_time",
+    "horizontal_overshoot_policy",
+    "vertical_overshoot_policy",
+    "frame_rate",
+    "scroll_metric_count",
+]
+
 
 class ScrollerProperties(QtWidgets.QScrollerProperties):
-    def __getitem__(self, metric: str):
+    def __getitem__(self, metric: ScrollmetricStr):
         return self.get_scroll_metric(metric)
 
-    def __setitem__(self, metric: str, value: Any):
+    def __setitem__(self, metric: ScrollmetricStr, value: Any):
         self.set_scroll_metric(metric, value)
 
-    def set_scroll_metric(self, metric: str, value: Any):
+    def set_scroll_metric(self, metric: ScrollmetricStr, value: Any):
         """Set scroll metric.
-
-        Possible values: "mouse_press_event_delay", "drag_start_distance",
-                         "drag_velocity_smoothing_factor", "axis_lock_threshold",
-                         "scrolling_curve", "deceleration_factor", "minimum_velocity",
-                         "maximum_velocity", "maximum_click_through_velocity",
-                         "accelerating_flick_maximum_time",
-                         "accelerating_flick_speedup_factor", "snap_position_ratio",
-                         "snap_time", "overshoot_drag_resistance_factor",
-                         "overshoot_drag_distance_factor",
-                         "overshoot_scroll_distance_factor", "overshoot_scroll_time",
-                         "horizontal_overshoot_policy", "vertical_overshoot_policy",
-                         "frame_rate", "scroll_metric_count"
 
         Args:
             metric: Scroll metric to set
@@ -79,20 +95,8 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
             raise InvalidParamError(metric, SCROLL_METRIC)
         self.setScrollMetric(SCROLL_METRIC[metric], value)
 
-    def get_scroll_metric(self, metric: str) -> Any:
+    def get_scroll_metric(self, metric: ScrollmetricStr) -> Any:
         """Return scroll metric.
-
-        Possible values: "mouse_press_event_delay", "drag_start_distance",
-                         "drag_velocity_smoothing_factor", "axis_lock_threshold",
-                         "scrolling_curve", "deceleration_factor", "minimum_velocity",
-                         "maximum_velocity", "maximum_click_through_velocity",
-                         "accelerating_flick_maximum_time",
-                         "accelerating_flick_speedup_factor", "snap_position_ratio",
-                         "snap_time", "overshoot_drag_resistance_factor",
-                         "overshoot_drag_distance_factor",
-                         "overshoot_scroll_distance_factor", "overshoot_scroll_time",
-                         "horizontal_overshoot_policy", "vertical_overshoot_policy",
-                         "frame_rate", "scroll_metric_count"
 
         Args:
             metric: Scroll metric to get

@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtLocation
 
 from prettyqt import location
@@ -10,15 +12,15 @@ TYPE = bidict(
     proposed_search=QtLocation.QPlaceSearchResult.ProposedSearchResult,
 )
 
+TypeStr = Literal["unknown", "place", "proposed_search"]
+
 
 class PlaceSearchResult(QtLocation.QPlaceSearchResult):
     def get_icon(self) -> location.PlaceIcon:
         return location.PlaceIcon(self.icon())
 
-    def get_type(self) -> str:
+    def get_type(self) -> TypeStr:
         """Return result type.
-
-        possible values: "unknown" "place", "proposed_search",
 
         Returns:
             Result type

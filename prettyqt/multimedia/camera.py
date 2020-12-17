@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtMultimedia
 
@@ -13,13 +13,19 @@ CAPTURE_MODES = mappers.FlagMap(
     video=QtMultimedia.QCamera.CaptureVideo,
 )
 
-ERRORS = bidict(
+CaptureModeStr = Literal["viewfinder", "still_image", "video"]
+
+ERROR = bidict(
     none=QtMultimedia.QCamera.NoError,
     camera=QtMultimedia.QCamera.CameraError,
     invalid_request=QtMultimedia.QCamera.InvalidRequestError,
     service_missing=QtMultimedia.QCamera.ServiceMissingError,
     not_supported_feature=QtMultimedia.QCamera.NotSupportedFeatureError,
 )
+
+ErrorStr = Literal[
+    "none", "camera", "invalid_request", "service_missing", "not_supported_feature"
+]
 
 LOCK_CHANGE_REASONS = bidict(
     user_request=QtMultimedia.QCamera.UserRequest,
@@ -29,11 +35,21 @@ LOCK_CHANGE_REASONS = bidict(
     lock_temporary_lost=QtMultimedia.QCamera.LockTemporaryLost,
 )
 
+LockChangeReasonStr = Literal[
+    "user_request",
+    "lock_acquired",
+    "lock_failed",
+    "lock_lost",
+    "lock_temporary_lost",
+]
+
 LOCK_STATUS = bidict(
     unlocked=QtMultimedia.QCamera.Unlocked,
     searching=QtMultimedia.QCamera.Searching,
     locked=QtMultimedia.QCamera.Locked,
 )
+
+LockStatusStr = Literal["unlocked", "searching", "locked"]
 
 LOCK_TYPES = bidict(
     none=QtMultimedia.QCamera.NoLock,
@@ -42,17 +58,23 @@ LOCK_TYPES = bidict(
     focus=QtMultimedia.QCamera.LockFocus,
 )
 
+LockTypeStr = Literal["none", "exposure", "white_balance", "focus"]
+
 POSITIONS = bidict(
     unspecified=QtMultimedia.QCamera.UnspecifiedPosition,
     back_face=QtMultimedia.QCamera.BackFace,
     front_face=QtMultimedia.QCamera.FrontFace,
 )
 
+PositionStr = Literal["unspecified", "back_face", "front_face"]
+
 STATES = bidict(
     unloaded=QtMultimedia.QCamera.UnloadedState,
     loaded=QtMultimedia.QCamera.LoadedState,
     active=QtMultimedia.QCamera.ActiveState,
 )
+
+StateStr = Literal["unloaded", "loaded", "active"]
 
 STATUS = bidict(
     active=QtMultimedia.QCamera.ActiveStatus,
@@ -66,56 +88,56 @@ STATUS = bidict(
     unavailable=QtMultimedia.QCamera.UnavailableStatus,
 )
 
+StatusStr = Literal[
+    "active",
+    "starting",
+    "stopping",
+    "standby",
+    "loaded",
+    "loading",
+    "unloading",
+    "unloaded",
+    "unavailable",
+]
+
 QtMultimedia.QCamera.__bases__ = (multimedia.MediaObject,)
 
 
 class Camera(QtMultimedia.QCamera):
-    def get_state(self) -> str:
+    def get_state(self) -> StateStr:
         """Return current state.
-
-        Possible values: "unloaded", "loaded", "active"
 
         Returns:
             state
         """
         return STATES.inverse[self.state()]
 
-    def get_status(self) -> str:
+    def get_status(self) -> StatusStr:
         """Return current status.
-
-        Possible values: "active", "starting", "stopping", "standby", "loaded",
-                         "loading", "unloading", "unloaded", "unavailable"
 
         Returns:
             status
         """
         return STATUS.inverse[self.status()]
 
-    def get_lock_status(self) -> str:
+    def get_lock_status(self) -> LockStatusStr:
         """Return current lock status.
-
-        Possible values: "unlocked", "searching", "locked"
 
         Returns:
             lock status
         """
         return LOCK_STATUS.inverse[self.lockStatus()]
 
-    def get_error(self) -> str:
+    def get_error(self) -> ErrorStr:
         """Return current error state.
-
-        Possible values: "none", "camera", "invalid_request", "service_missing",
-                         "not_supported_feature"
 
         Returns:
             error state
         """
-        return ERRORS.inverse[self.error()]
+        return ERROR.inverse[self.error()]
 
-    def set_capture_mode(self, position: str):
+    def set_capture_mode(self, position: CaptureModeStr):
         """Set the capture mode.
-
-        Allowed values are "viewfinder", "still_image", "video"
 
         Args:
             position: capture mode
@@ -127,20 +149,18 @@ class Camera(QtMultimedia.QCamera):
             raise InvalidParamError(position, CAPTURE_MODES)
         self.setCaptureMode(CAPTURE_MODES[position])
 
-    def get_capture_mode(self) -> str:
+    def get_capture_mode(self) -> CaptureModeStr:
         """Return current capture mode.
-
-        Possible values: "viewfinder", "still_image", "video"
 
         Returns:
             capture mode
         """
         return CAPTURE_MODES.inverse[self.captureMode()]
 
-    def get_supported_locks(self) -> List[str]:
+    def get_supported_locks(self) -> List[LockTypeStr]:
         return [k for k, v in LOCK_TYPES.items() if v & self.supportedLocks()]
 
-    def get_requested_locks(self) -> List[str]:
+    def get_requested_locks(self) -> List[LockTypeStr]:
         return [k for k, v in LOCK_TYPES.items() if v & self.requestedLocks()]
 
     def get_focus(self) -> multimedia.CameraFocus:

@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtMultimedia
 
 from prettyqt import multimedia
@@ -10,14 +12,20 @@ STATES = bidict(
     paused=QtMultimedia.QMediaPlayer.PausedState,
 )
 
+StateStr = Literal["stopped", "playing", "paused"]
+
 ERRORS = bidict(
     none=QtMultimedia.QMediaPlayer.NoError,
     resource=QtMultimedia.QMediaPlayer.ResourceError,
     format=QtMultimedia.QMediaPlayer.FormatError,
     network=QtMultimedia.QMediaPlayer.NetworkError,
-    access_denies=QtMultimedia.QMediaPlayer.AccessDeniedError,
+    access_denied=QtMultimedia.QMediaPlayer.AccessDeniedError,
     service_missing=QtMultimedia.QMediaPlayer.ServiceMissingError,
 )
+
+ErrorStr = Literal[
+    "none", "resource", "format", "network", "access_denied", "service_missing"
+]
 
 MEDIA_STATUS = bidict(
     unknown=QtMultimedia.QMediaPlayer.UnknownMediaStatus,
@@ -31,25 +39,32 @@ MEDIA_STATUS = bidict(
     invalid=QtMultimedia.QMediaPlayer.InvalidMedia,
 )
 
+MediaStatusStr = Literal[
+    "unknown",
+    "no_media",
+    "loading",
+    "loaded",
+    "stalled",
+    "buffering",
+    "buffered",
+    "end",
+    "invalid",
+]
+
 QtMultimedia.QMediaPlayer.__bases__ = (multimedia.MediaObject,)
 
 
 class MediaPlayer(QtMultimedia.QMediaPlayer):
-    def get_state(self) -> str:
+    def get_state(self) -> StateStr:
         """Return current state.
-
-        Possible values: "stopped", "playing", "paused"
 
         Returns:
             state
         """
         return STATES.inverse[self.state()]
 
-    def get_media_status(self) -> str:
+    def get_media_status(self) -> MediaStatusStr:
         """Return current media status.
-
-        Possible values: "unknown", "no_media", "loading", "loaded", "stalled",
-                         "buffering", "buffered", "end", "invalid"
 
         Returns:
             media status

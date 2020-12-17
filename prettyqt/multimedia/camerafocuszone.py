@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtMultimedia
 
 from prettyqt import core
@@ -11,12 +13,12 @@ FOCUS_ZONE_STATUS = bidict(
     focused=QtMultimedia.QCameraFocusZone.Focused,
 )
 
+FocusZoneStatusStr = Literal["invalid", "unused", "selected", "focused"]
+
 
 class CameraFocusZone(QtMultimedia.QCameraFocusZone):
-    def get_focus_mode(self) -> str:
+    def get_focus_mode(self) -> FocusZoneStatusStr:
         """Return current focus mode.
-
-        Possible values: "invalid", "unused", "selected", "focused"
 
         Returns:
             focus mode
