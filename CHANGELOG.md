@@ -1,3 +1,9 @@
+## v0.152.1 (2020-12-17)
+
+### Fix
+
+- PySide2 workaround for non-recursive Object.findChild(ren)
+
 ## v0.152.0 (2020-12-16)
 
 ### Feat
