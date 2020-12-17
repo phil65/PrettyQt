@@ -6,7 +6,7 @@ from prettyqt import core, gui, widgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-ECHO_MODES = bidict(
+ECHO_MODE = bidict(
     normal=QtWidgets.QLineEdit.Normal,
     no_echo=QtWidgets.QLineEdit.NoEcho,
     password=QtWidgets.QLineEdit.Password,
@@ -118,9 +118,9 @@ class LineEdit(QtWidgets.QLineEdit):
         Raises:
             InvalidParamError: invalid echo mode
         """
-        if mode not in ECHO_MODES:
-            raise InvalidParamError(mode, ECHO_MODES)
-        self.setEchoMode(ECHO_MODES[mode])
+        if mode not in ECHO_MODE:
+            raise InvalidParamError(mode, ECHO_MODE)
+        self.setEchoMode(ECHO_MODE[mode])
 
     def get_echo_mode(self) -> EchoModeStr:
         """Return echo mode.
@@ -128,7 +128,7 @@ class LineEdit(QtWidgets.QLineEdit):
         Returns:
             echo mode
         """
-        return ECHO_MODES.inverse[self.echoMode()]
+        return ECHO_MODE.inverse[self.echoMode()]
 
     def set_value(self, value: str):
         self.setText(value)

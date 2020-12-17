@@ -565,6 +565,18 @@ def test_headerview(qtbot):
     header.set_section_hidden(0, True)
 
 
+def test_inputdialog(qapp):
+    dlg = widgets.InputDialog()
+    dlg.set_input_mode("double")
+    with pytest.raises(InvalidParamError):
+        dlg.set_input_mode("test")
+    assert dlg.get_input_mode() == "double"
+    dlg.set_text_echo_mode("no_echo")
+    with pytest.raises(InvalidParamError):
+        dlg.set_text_echo_mode("test")
+    assert dlg.get_text_echo_mode() == "no_echo"
+
+
 def test_keysequenceedit(qtbot):
     seq = gui.KeySequence("Ctrl+A")
     edit = widgets.KeySequenceEdit(seq)
