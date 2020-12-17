@@ -12,8 +12,8 @@ class InputDialog(QtWidgets.QInputDialog):
     @classmethod
     def get_int(
         cls,
-        title: Optional[str] = None,
-        label: Optional[str] = None,
+        title: str = "",
+        label: str = "",
         icon: gui.icon.IconType = None,
     ) -> Optional[int]:
         par = widgets.Dialog()
@@ -24,8 +24,8 @@ class InputDialog(QtWidgets.QInputDialog):
     @classmethod
     def get_float(
         cls,
-        title: Optional[str] = None,
-        label: Optional[str] = None,
+        title: str = "",
+        label: str = "",
         icon: gui.icon.IconType = None,
     ) -> Optional[float]:
         par = widgets.Dialog()
@@ -36,8 +36,8 @@ class InputDialog(QtWidgets.QInputDialog):
     @classmethod
     def get_text(
         cls,
-        title: Optional[str] = None,
-        label: Optional[str] = None,
+        title: str = "",
+        label: str = "",
         icon: gui.icon.IconType = None,
         default_value: str = "",
     ) -> Optional[str]:
@@ -50,8 +50,8 @@ class InputDialog(QtWidgets.QInputDialog):
     def get_item(
         cls,
         items: List[str],
-        title: Optional[str] = None,
-        label: Optional[str] = None,
+        title: str = "",
+        label: str = "",
         icon: gui.icon.IconType = None,
         editable: bool = False,
     ) -> Optional[str]:

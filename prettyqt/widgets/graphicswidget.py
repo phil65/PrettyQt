@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Literal, Union
 
 from qtpy import QtWidgets
 
@@ -7,6 +7,8 @@ from prettyqt.utils import InvalidParamError
 
 
 QtWidgets.QGraphicsWidget.__bases__ = (widgets.GraphicsObject, widgets.GraphicsLayoutItem)
+
+LayoutStr = Literal["grid", "horizontal", "vertical", "anchor"]
 
 
 class GraphicsWidget(QtWidgets.QGraphicsWidget):
@@ -21,17 +23,17 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
             focus_policy=self.get_focus_policy(),
         )
 
-    def set_layout(self, layout: Union[str, QtWidgets.QGraphicsLayout, None]) -> None:
+    def set_layout(self, layout: Union[LayoutStr, QtWidgets.QGraphicsLayout, None]):
         if layout is None:
             return None
-        if layout == "grid":
+        if isinstance(layout, QtWidgets.QGraphicsLayout):
+            self.box = layout
+        elif layout == "grid":
             self.box = widgets.GraphicsGridLayout()
-        elif layout in ["horizontal", "vertical"]:
-            self.box = widgets.GraphicsLinearLayout(layout)
         elif layout == "anchor":
             self.box = widgets.GraphicsAnchorLayout()
-        elif isinstance(layout, QtWidgets.QGraphicsLayout):
-            self.box = layout
+        elif layout in ("horizontal", "vertical"):
+            self.box = widgets.GraphicsLinearLayout(layout)
         else:
             raise ValueError("Invalid Layout")
         self.setLayout(self.box)

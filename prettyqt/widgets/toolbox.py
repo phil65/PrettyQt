@@ -13,7 +13,7 @@ class ToolBox(QtWidgets.QToolBox):
         if isinstance(index, int):
             return self.widget(index)
         else:
-            result = self.findChild(QtWidgets.QWidget, index)
+            result = self.find_child(QtWidgets.QWidget, index)
             if result is None:
                 raise KeyError("Widget not found")
             return result

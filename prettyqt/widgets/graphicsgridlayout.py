@@ -34,7 +34,7 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
         items = []
         positions = []
         for row in range(self.rowCount()):
-            for col in self.columnCount():
+            for col in range(self.columnCount()):
                 item = self.itemAt(row, col)
                 if item is not None:
                     items.append(item)

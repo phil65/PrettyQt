@@ -2,11 +2,13 @@ from collections import defaultdict
 from contextlib import contextmanager
 import inspect
 import itertools
-from typing import DefaultDict, List, Optional, Type, Union
+from typing import DefaultDict, List, Optional, Type, TypeVar, Union
 
 import qtpy
 from qtpy import QtCore
 
+
+T = TypeVar("T")
 
 counter_dict: DefaultDict = defaultdict(itertools.count)
 
@@ -72,10 +74,10 @@ class Object(QtCore.QObject):
 
     def find_children(
         self,
-        typ: Type[QtCore.QObject] = QtCore.QObject,
+        typ: Type[T] = QtCore.QObject,
         name: Optional[Union[str, QtCore.QRegularExpression]] = None,
         recursive: bool = True,
-    ) -> List[QtCore.QObject]:
+    ) -> List[T]:
         if recursive:
             flag = QtCore.Qt.FindChildrenRecursively
         else:
@@ -89,10 +91,10 @@ class Object(QtCore.QObject):
 
     def find_child(
         self,
-        typ: Type[QtCore.QObject] = QtCore.QObject,
+        typ: Type[T] = QtCore.QObject,
         name: Optional[Union[str, QtCore.QRegularExpression]] = None,
         recursive: bool = True,
-    ) -> Optional[QtCore.QObject]:
+    ) -> Optional[T]:
         if recursive:
             flag = QtCore.Qt.FindChildrenRecursively
         else:
@@ -117,4 +119,4 @@ class Object(QtCore.QObject):
     def set_property(self, name: Union[str, bytes], value):
         if isinstance(name, str):
             name = name.encode()
-        self.setProperty(name)
+        self.setProperty(name, value)

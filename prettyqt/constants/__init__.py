@@ -201,7 +201,7 @@ DROP_ACTION: bidict[DropActionStr, int] = bidict(
 )
 
 DockPositionStr = Literal["top", "bottom", "left", "right"]
-DOCK_POSITION: bidict[DockPositionStr, int] = bidict(
+DOCK_POSITION: bidict[DockPositionStr, QtCore.Qt.DockWidgetArea] = bidict(
     top=QtCore.Qt.TopDockWidgetArea,
     bottom=QtCore.Qt.BottomDockWidgetArea,
     left=QtCore.Qt.LeftDockWidgetArea,
@@ -209,7 +209,7 @@ DOCK_POSITION: bidict[DockPositionStr, int] = bidict(
 )
 
 DockPositionsStr = Literal["top", "bottom", "left", "right", "all"]
-DOCK_POSITIONS: bidict[DockPositionsStr, QtCore.Qt.DockPosition] = bidict(
+DOCK_POSITIONS: bidict[DockPositionsStr, QtCore.Qt.DockWidgetArea] = bidict(
     top=QtCore.Qt.TopDockWidgetArea,
     bottom=QtCore.Qt.BottomDockWidgetArea,
     left=QtCore.Qt.LeftDockWidgetArea,
@@ -617,7 +617,7 @@ TIME_SPEC: bidict[TimeSpecStr, int] = bidict(
 )
 
 AxisStr = Literal["x", "y", "z"]
-AXIS: bidict[AxisStr, int] = bidict(
+AXIS: bidict[AxisStr, QtCore.Qt.Axis] = bidict(
     x=QtCore.Qt.XAxis, y=QtCore.Qt.YAxis, z=QtCore.Qt.ZAxis
 )
 
@@ -707,10 +707,10 @@ WidgetAttributeStr = Literal[
     "always_stack_on_top",
     "contents_margins_respects_safe_area",
 ]
-WIDGET_ATTRIBUTE: bidict[WidgetAttributeStr, QtCore.Qt.WidgetFlag] = bidict(
+WIDGET_ATTRIBUTE: bidict[WidgetAttributeStr, QtCore.Qt.WidgetAttribute] = bidict(
     accept_drops=QtCore.Qt.WA_AcceptDrops,
     always_show_tooltips=QtCore.Qt.WA_AlwaysShowToolTips,
-    contents_propagated=QtCore.Qt.WA_ContentsPropagated,
+    # contents_propagated=QtCore.Qt.WA_ContentsPropagated,
     custom_whats_this=QtCore.Qt.WA_CustomWhatsThis,
     delete_on_close=QtCore.Qt.WA_DeleteOnClose,
     disabled=QtCore.Qt.WA_Disabled,
@@ -737,7 +737,7 @@ WIDGET_ATTRIBUTE: bidict[WidgetAttributeStr, QtCore.Qt.WidgetFlag] = bidict(
     mouse_tracking=QtCore.Qt.WA_MouseTracking,
     moved=QtCore.Qt.WA_Moved,
     windows_use_direct_3d=QtCore.Qt.WA_MSWindowsUseDirect3D,
-    no_background=QtCore.Qt.WA_NoBackground,
+    # no_background=QtCore.Qt.WA_NoBackground,
     no_child_events_for_parent=QtCore.Qt.WA_NoChildEventsForParent,
     no_child_events_from_children=QtCore.Qt.WA_NoChildEventsFromChildren,
     no_mouse_replay=QtCore.Qt.WA_NoMouseReplay,
@@ -757,7 +757,7 @@ WIDGET_ATTRIBUTE: bidict[WidgetAttributeStr, QtCore.Qt.WidgetFlag] = bidict(
     set_font=QtCore.Qt.WA_SetFont,
     set_palette=QtCore.Qt.WA_SetPalette,
     set_style=QtCore.Qt.WA_SetStyle,
-    show_modal=QtCore.Qt.WA_ShowModal,
+    # show_modal=QtCore.Qt.WA_ShowModal,
     static_contents=QtCore.Qt.WA_StaticContents,
     style_sheet=QtCore.Qt.WA_StyleSheet,
     style_sheet_target=QtCore.Qt.WA_StyleSheetTarget,

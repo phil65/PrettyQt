@@ -1,6 +1,6 @@
 from typing import Literal, Optional, Union
 
-from qtpy import QtWidgets
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import InvalidParamError, bidict
@@ -26,12 +26,16 @@ class Slider(QtWidgets.QSlider):
 
     def __init__(
         self,
-        orientation: Union[constants.OrientationStr, int] = "horizontal",
+        orientation: Union[
+            constants.OrientationStr, QtCore.Qt.Orientation
+        ] = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         if isinstance(orientation, str) and orientation in constants.ORIENTATION:
-            orientation = constants.ORIENTATION[orientation]
-        super().__init__(orientation, parent)
+            ori = constants.ORIENTATION[orientation]
+        else:
+            ori = orientation
+        super().__init__(ori, parent)
         self.valueChanged.connect(self.on_value_change)
 
     def serialize_fields(self):

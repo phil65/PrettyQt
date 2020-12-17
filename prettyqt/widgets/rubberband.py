@@ -14,10 +14,11 @@ QtWidgets.QRubberBand.__bases__ = (widgets.Widget,)
 
 class RubberBand(QtWidgets.QRubberBand):
     def __init__(
-        self, shape: Union[str, int], parent: Optional[QtWidgets.QWidget] = None
+        self,
+        shape: Union[str, QtWidgets.QRubberBand.Shape],
+        parent: Optional[QtWidgets.QWidget] = None,
     ):
-        if isinstance(shape, str):
-            shape = SHAPE[shape]
+        shape = SHAPE[shape] if isinstance(shape, str) else shape
         super().__init__(shape, parent)
 
     def get_shape(self) -> str:

@@ -1,6 +1,6 @@
 from typing import Iterator, List, Optional, Union
 
-from qtpy import QtWidgets
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import constants, widgets
 from prettyqt.utils import InvalidParamError
@@ -12,18 +12,22 @@ QtWidgets.QSplitter.__bases__ = (widgets.Frame,)
 class Splitter(QtWidgets.QSplitter):
     def __init__(
         self,
-        orientation: Union[constants.OrientationStr, int] = "horizontal",
+        orientation: Union[
+            constants.OrientationStr, QtCore.Qt.Orientation
+        ] = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         if isinstance(orientation, str) and orientation in constants.ORIENTATION:
-            orientation = constants.ORIENTATION[orientation]
-        super().__init__(orientation, parent)
+            ori = constants.ORIENTATION[orientation]
+        else:
+            ori = orientation
+        super().__init__(ori, parent)
 
     def __getitem__(self, index: Union[int, str]) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
         else:
-            result = self.findChild(QtWidgets.QWidget, index)
+            result = self.find_child(QtWidgets.QWidget, index)
             if result is None:
                 raise KeyError("Widget not found")
             return result

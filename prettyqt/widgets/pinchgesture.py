@@ -29,7 +29,7 @@ class PinchGesture(QtWidgets.QPinchGesture):
         return [k for k, v in CHANGE_FLAGS.items() if v & self.changeFlags()]
 
     def set_change_flags(self, **kwargs):
-        flag = QtWidgets.QPinchGesture.ChangeFlags(0)
+        flag = QtWidgets.QPinchGesture.ChangeFlags(0)  # type: ignore
         for k, v in kwargs.items():
             if v is True:
                 flag |= CHANGE_FLAGS[k]
@@ -39,7 +39,7 @@ class PinchGesture(QtWidgets.QPinchGesture):
         return [k for k, v in CHANGE_FLAGS.items() if v & self.totalChangeFlags()]
 
     def set_total_change_flags(self, **kwargs):
-        flag = QtWidgets.QPinchGesture.ChangeFlags(0)
+        flag = QtWidgets.QPinchGesture.ChangeFlags(0)  # type: ignore
         for k, v in kwargs.items():
             if v is True:
                 flag |= CHANGE_FLAGS[k]

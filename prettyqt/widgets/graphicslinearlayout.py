@@ -1,12 +1,27 @@
-from qtpy import QtWidgets
+from typing import Optional, Union
 
-from prettyqt import widgets
+from qtpy import QtCore, QtWidgets
+
+from prettyqt import constants, widgets
 
 
 QtWidgets.QGraphicsLinearLayout.__bases__ = (widgets.GraphicsLayout,)
 
 
 class GraphicsLinearLayout(QtWidgets.QGraphicsLinearLayout):
+    def __init__(
+        self,
+        orientation: Union[
+            constants.OrientationStr, QtCore.Qt.Orientation
+        ] = "horizontal",
+        parent: Optional[QtWidgets.QGraphicsLayoutItem] = None,
+    ):
+        if isinstance(orientation, str) and orientation in constants.ORIENTATION:
+            ori = constants.ORIENTATION[orientation]
+        else:
+            ori = orientation
+        super().__init__(ori, parent)
+
     def serialize_fields(self):
         return dict(items=self.get_children())
 

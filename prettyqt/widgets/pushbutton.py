@@ -18,6 +18,8 @@ class PushButton(QtWidgets.QPushButton):
         parent: Optional[QtWidgets.QWidget] = None,
         callback: Optional[Callable] = None,
     ):
+        if label is None:
+            label = ""
         super().__init__(label, parent)
         if callback:
             self.clicked.connect(callback)

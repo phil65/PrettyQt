@@ -340,7 +340,7 @@ class ObjectBrowser(widgets.MainWindow):
             button_id = self.button_group.checkedId()
             assert button_id >= 0, "No radio button selected. Please report this bug."
             attr_details = self._attr_details[button_id]
-            data = attr_details.label(tree_item)
+            data = attr_details.get_label(tree_item)
             self.editor.set_text(data)
             self.editor.set_wrap_mode(attr_details.line_wrap)
 
