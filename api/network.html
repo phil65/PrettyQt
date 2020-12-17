@@ -1492,7 +1492,6 @@ get_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current redirect policy.</p>
-<p>Possible values: "manual", "no_less_safe", "same_origin", "user_verified"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1503,7 +1502,7 @@ get_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['manual', 'no_less_safe', 'same_origin', 'user_verified']</code></td>
 <td>
 <p>redirect policy</p>
 </td>
@@ -1513,15 +1512,13 @@ get_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">RedirectPolicyStr</span><span class="p">:</span>
     <span class="sd">"""Get the current redirect policy.</span>
-
-<span class="sd">    Possible values: "manual", "no_less_safe", "same_origin", "user_verified"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        redirect policy</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">REDIRECT_POLICIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">redirectPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">REDIRECT_POLICIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">redirectPolicy</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1537,7 +1534,6 @@ set_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set redirect policy.</p>
-<p>Valid values: "manual", "no_less_safe", "same_origin", "user_verified"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1551,7 +1547,7 @@ set_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>Literal['manual', 'no_less_safe', 'same_origin', 'user_verified']</code></td>
 <td>
 <p>redirect policy</p>
 </td>
@@ -1579,10 +1575,8 @@ set_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">RedirectPolicyStr</span><span class="p">):</span>
     <span class="sd">"""Set redirect policy.</span>
-
-<span class="sd">    Valid values: "manual", "no_less_safe", "same_origin", "user_verified"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: redirect policy</span>
@@ -1590,9 +1584,9 @@ set_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: redirect policy does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">REDIRECT_POLICIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">REDIRECT_POLICIES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setRedirectPolicy</span><span class="p">(</span><span class="n">REDIRECT_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">REDIRECT_POLICIES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">REDIRECT_POLICIES</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setRedirectPolicy</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">REDIRECT_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -1845,8 +1839,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Get the proxy type.</p>
-<p>Possible values: "none", "default", "socks5", "http", "http_caching",
-                 "ftp_caching"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1857,7 +1849,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'default', 'socks5', 'http', 'http_caching', 'ftp_caching']</code></td>
 <td>
 <p>type</p>
 </td>
@@ -1867,11 +1859,8 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkproxy.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProxyTypeStr</span><span class="p">:</span>
     <span class="sd">"""Get the proxy type.</span>
-
-<span class="sd">    Possible values: "none", "default", "socks5", "http", "http_caching",</span>
-<span class="sd">                     "ftp_caching"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        type</span>
@@ -1892,8 +1881,6 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
       </h4>
 <div class="doc doc-contents ">
 <p>Set proxy type.</p>
-<p>Valid values: "none", "default", "socks5", "http", "http_caching",
-              "ftp_caching"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1907,7 +1894,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'default', 'socks5', 'http', 'http_caching', 'ftp_caching']</code></td>
 <td>
 <p>proxy type</p>
 </td>
@@ -1935,11 +1922,8 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkproxy.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">ProxyTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set proxy type.</span>
-
-<span class="sd">    Valid values: "none", "default", "socks5", "http", "http_caching",</span>
-<span class="sd">                  "ftp_caching"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: proxy type</span>
@@ -1989,7 +1973,6 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current priority.</p>
-<p>Possible values: "high", "normal", "low"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2000,7 +1983,7 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['high', 'normal', 'low']</code></td>
 <td>
 <p>priority</p>
 </td>
@@ -2010,15 +1993,13 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PriorityStr</span><span class="p">:</span>
     <span class="sd">"""Get the current priority.</span>
-
-<span class="sd">    Possible values: "high", "normal", "low"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        priority</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">PRIORITIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">PRIORITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2034,7 +2015,6 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
       </h4>
 <div class="doc doc-contents ">
 <p>Set priority.</p>
-<p>Valid values for priority: "high", "normal", "low"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2048,7 +2028,7 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <tbody>
 <tr>
 <td><code>priority</code></td>
-<td><code>str</code></td>
+<td><code>Literal['high', 'normal', 'low']</code></td>
 <td>
 <p>priority</p>
 </td>
@@ -2076,10 +2056,8 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="n">PriorityStr</span><span class="p">):</span>
     <span class="sd">"""Set priority.</span>
-
-<span class="sd">    Valid values for priority: "high", "normal", "low"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        priority: priority</span>
@@ -2087,9 +2065,9 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: priority does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">priority</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PRIORITIES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">priority</span><span class="p">,</span> <span class="n">PRIORITIES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setPriority</span><span class="p">(</span><span class="n">PRIORITIES</span><span class="p">[</span><span class="n">priority</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">priority</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PRIORITY</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">priority</span><span class="p">,</span> <span class="n">PRIORITY</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPriority</span><span class="p">(</span><span class="n">PRIORITY</span><span class="p">[</span><span class="n">priority</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

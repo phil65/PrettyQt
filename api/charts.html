@@ -1636,7 +1636,6 @@ get_labels_position<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return current labels position.</p>
-<p>Possible values: "center", "inside_end", "inside_base", "outside_end"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1647,7 +1646,7 @@ get_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['center', 'inside_end', 'inside_base', 'outside_end']</code></td>
 <td>
 <p>labels position</p>
 </td>
@@ -1657,10 +1656,8 @@ get_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/abstractbarseries.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LabelsPositionStr</span><span class="p">:</span>
     <span class="sd">"""Return current labels position.</span>
-
-<span class="sd">    Possible values: "center", "inside_end", "inside_base", "outside_end"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        labels position</span>
@@ -1681,7 +1678,6 @@ set_labels_position<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set the labels position.</p>
-<p>Allowed values are "center", "inside_end", "inside_base", "outside_end"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1695,7 +1691,7 @@ set_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>position</code></td>
-<td><code>str</code></td>
+<td><code>Literal['center', 'inside_end', 'inside_base', 'outside_end']</code></td>
 <td>
 <p>labels position</p>
 </td>
@@ -1723,10 +1719,8 @@ set_labels_position<span class="p">(</span><span class="bp">self</span><span cla
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/abstractbarseries.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">LabelsPositionStr</span><span class="p">):</span>
     <span class="sd">"""Set the labels position.</span>
-
-<span class="sd">    Allowed values are "center", "inside_end", "inside_base", "outside_end"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        position: labels position</span>
@@ -2777,7 +2771,6 @@ get_tick_type<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current tick type.</p>
-<p>Possible values: "dynamic", "fixed"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2788,7 +2781,7 @@ get_tick_type<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['dynamic', 'fixed']</code></td>
 <td>
 <p>tick_type</p>
 </td>
@@ -2798,10 +2791,8 @@ get_tick_type<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/valueaxis.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_tick_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_tick_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TickTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current tick type.</span>
-
-<span class="sd">    Possible values: "dynamic", "fixed"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tick_type</span>
@@ -2822,7 +2813,6 @@ set_tick_type<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set the tick type of the legend.</p>
-<p>Allowed values are "dynamic", "fixed"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2836,7 +2826,7 @@ set_tick_type<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>tick_type</code></td>
-<td><code>str</code></td>
+<td><code>Literal['dynamic', 'fixed']</code></td>
 <td>
 <p>tick type for the legend</p>
 </td>
@@ -2864,10 +2854,8 @@ set_tick_type<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/charts/valueaxis.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_tick_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tick_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_tick_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tick_type</span><span class="p">:</span> <span class="n">TickTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set the tick type of the legend.</span>
-
-<span class="sd">    Allowed values are "dynamic", "fixed"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        tick_type: tick type for the legend</span>

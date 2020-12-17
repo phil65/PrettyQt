@@ -6230,13 +6230,6 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Return the value assigned to option.</p>
-<p>Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                 "description", "compression_ratio", "gamma", "quality",
-                 "name", "subtype", "incremental_reading", "endianness",
-                 "animation", "background_color", "image_format",
-                 "supported_sub_types", "optimized_write",
-                 "progressive_scan_write", "image_transformation",
-                 "transformation_by_default"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6250,7 +6243,7 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>str</code></td>
+<td><code>Literal['size', 'clip_rect', 'scaled_size', 'scaled_clip_rect', 'description', 'compression_ratio', 'gamma', 'quality', 'name', 'subtype', 'incremental_reading', 'endianness', 'animation', 'background_color', 'supported_sub_types', 'optimized_write', 'progressive_scan_write', 'image_transformation', 'transformation_by_default']</code></td>
 <td>
 <p>option to get</p>
 </td>
@@ -6278,16 +6271,8 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="sd">"""Return the value assigned to option.</span>
-
-<span class="sd">    Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",</span>
-<span class="sd">                     "description", "compression_ratio", "gamma", "quality",</span>
-<span class="sd">                     "name", "subtype", "incremental_reading", "endianness",</span>
-<span class="sd">                     "animation", "background_color", "image_format",</span>
-<span class="sd">                     "supported_sub_types", "optimized_write",</span>
-<span class="sd">                     "progressive_scan_write", "image_transformation",</span>
-<span class="sd">                     "transformation_by_default"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        option: option to get</span>
@@ -6313,13 +6298,6 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Set option to given value.</p>
-<p>Allowed values are "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                   "description", "compression_ratio", "gamma", "quality",
-                   "name", "subtype", "incremental_reading", "endianness",
-                   "animation", "background_color", "image_format",
-                   "supported_sub_types", "optimized_write",
-                   "progressive_scan_write", "image_transformation",
-                   "transformation_by_default"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6333,7 +6311,7 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>str</code></td>
+<td><code>Literal['size', 'clip_rect', 'scaled_size', 'scaled_clip_rect', 'description', 'compression_ratio', 'gamma', 'quality', 'name', 'subtype', 'incremental_reading', 'endianness', 'animation', 'background_color', 'supported_sub_types', 'optimized_write', 'progressive_scan_write', 'image_transformation', 'transformation_by_default']</code></td>
 <td>
 <p>option to use</p>
 </td>
@@ -6369,16 +6347,8 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
     <span class="sd">"""Set option to given value.</span>
-
-<span class="sd">    Allowed values are "size", "clip_rect", "scaled_size", "scaled_clip_rect",</span>
-<span class="sd">                       "description", "compression_ratio", "gamma", "quality",</span>
-<span class="sd">                       "name", "subtype", "incremental_reading", "endianness",</span>
-<span class="sd">                       "animation", "background_color", "image_format",</span>
-<span class="sd">                       "supported_sub_types", "optimized_write",</span>
-<span class="sd">                       "progressive_scan_write", "image_transformation",</span>
-<span class="sd">                       "transformation_by_default"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        option: option to use</span>
@@ -6405,13 +6375,6 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return whether the image handler supports given option.</p>
-<p>Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                 "description", "compression_ratio", "gamma", "quality",
-                 "name", "subtype", "incremental_reading", "endianness",
-                 "animation", "background_color", "image_format",
-                 "supported_sub_types", "optimized_write",
-                 "progressive_scan_write", "image_transformation",
-                 "transformation_by_default"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6425,7 +6388,7 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>str</code></td>
+<td><code>Literal['size', 'clip_rect', 'scaled_size', 'scaled_clip_rect', 'description', 'compression_ratio', 'gamma', 'quality', 'name', 'subtype', 'incremental_reading', 'endianness', 'animation', 'background_color', 'supported_sub_types', 'optimized_write', 'progressive_scan_write', 'image_transformation', 'transformation_by_default']</code></td>
 <td>
 <p>option to check</p>
 </td>
@@ -6453,16 +6416,8 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">supports_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">supports_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Return whether the image handler supports given option.</span>
-
-<span class="sd">    Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",</span>
-<span class="sd">                     "description", "compression_ratio", "gamma", "quality",</span>
-<span class="sd">                     "name", "subtype", "incremental_reading", "endianness",</span>
-<span class="sd">                     "animation", "background_color", "image_format",</span>
-<span class="sd">                     "supported_sub_types", "optimized_write",</span>
-<span class="sd">                     "progressive_scan_write", "image_transformation",</span>
-<span class="sd">                     "transformation_by_default"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        option: option to check</span>
@@ -6596,13 +6551,6 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return whether the image handler supports given option.</p>
-<p>Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                 "description", "compression_ratio", "gamma", "quallity",
-                 "name", "subtype", "incremental_reading", "endianness",
-                 "animation", "background_color", "image_format",
-                 "supported_sub_types", "optimized_write",
-                 "progressive_scan_write", "image_transformation",
-                 "transformation_by_default"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -6616,7 +6564,7 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>str</code></td>
+<td><code>Literal['size', 'clip_rect', 'scaled_size', 'scaled_clip_rect', 'description', 'compression_ratio', 'gamma', 'quality', 'name', 'subtype', 'incremental_reading', 'endianness', 'animation', 'background_color', 'supported_sub_types', 'optimized_write', 'progressive_scan_write', 'image_transformation', 'transformation_by_default']</code></td>
 <td>
 <p>option to check</p>
 </td>
@@ -6644,16 +6592,8 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imagereader.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">supports_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">supports_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Return whether the image handler supports given option.</span>
-
-<span class="sd">    Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",</span>
-<span class="sd">                     "description", "compression_ratio", "gamma", "quallity",</span>
-<span class="sd">                     "name", "subtype", "incremental_reading", "endianness",</span>
-<span class="sd">                     "animation", "background_color", "image_format",</span>
-<span class="sd">                     "supported_sub_types", "optimized_write",</span>
-<span class="sd">                     "progressive_scan_write", "image_transformation",</span>
-<span class="sd">                     "transformation_by_default"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        option: option to check</span>
@@ -7102,7 +7042,6 @@ get_update_behaviour<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Get the window update hehaviour.</p>
-<p>Possible values: "no_partial", "partial_blit", "partial_blend"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -7113,7 +7052,7 @@ get_update_behaviour<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['no_partial', 'partial_blit', 'partial_blend']</code></td>
 <td>
 <p>update behaviour</p>
 </td>
@@ -7123,10 +7062,8 @@ get_update_behaviour<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/openglwindow.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_update_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_update_behaviour</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UpdateBehaviourStr</span><span class="p">:</span>
     <span class="sd">"""Get the window update hehaviour.</span>
-
-<span class="sd">    Possible values: "no_partial", "partial_blit", "partial_blend"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        update behaviour</span>
@@ -7636,7 +7573,6 @@ get_metric<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Return metric information.</p>
-<p>Possible values: "center", "on_value"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -7650,7 +7586,7 @@ get_metric<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>metric</code></td>
-<td><code>str</code></td>
+<td><code>Literal['width', 'height', 'width_mm', 'height_mm', 'num_colors', 'depth', 'dpi_x', 'dpi_y', 'physical_dpi_x', 'physical_dpi_y', 'pixel_ratio', 'pixel_ratio_scaled']</code></td>
 <td>
 <p>metric information to get</p>
 </td>
@@ -7678,10 +7614,9 @@ get_metric<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/paintdevice.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="n">MetricStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">"""Return metric information.</span>
 
-<span class="sd">    Possible values: "center", "on_value"</span>
 <span class="sd">    Args:</span>
 <span class="sd">        metric: metric information to get</span>
 
@@ -8890,7 +8825,6 @@ get_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return current restart hint.</p>
-<p>Possible values: "if_running", "anyway", "immediatly", "never"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -8901,7 +8835,7 @@ get_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['if_running', 'anyway', 'immediately', 'never']</code></td>
 <td>
 <p>restart hint</p>
 </td>
@@ -8911,10 +8845,8 @@ get_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/sessionmanager.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_restart_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_restart_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RestartHintStr</span><span class="p">:</span>
     <span class="sd">"""Return current restart hint.</span>
-
-<span class="sd">    Possible values: "if_running", "anyway", "immediatly", "never"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        restart hint</span>
@@ -8935,7 +8867,6 @@ set_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set the restart hint.</p>
-<p>Allowed values are "if_running", "anyway", "immediatly", "never"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -8949,7 +8880,7 @@ set_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['if_running', 'anyway', 'immediately', 'never']</code></td>
 <td>
 <p>restart hint</p>
 </td>
@@ -8977,10 +8908,8 @@ set_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/sessionmanager.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_restart_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_restart_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">RestartHintStr</span><span class="p">):</span>
     <span class="sd">"""Set the restart hint.</span>
-
-<span class="sd">    Allowed values are "if_running", "anyway", "immediatly", "never"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: restart hint</span>
@@ -9490,7 +9419,6 @@ get_surface_class<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current surface class.</p>
-<p>Possible values: "window", "offscreen"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9501,7 +9429,7 @@ get_surface_class<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['window', 'offscreen']</code></td>
 <td>
 <p>surface class</p>
 </td>
@@ -9511,10 +9439,8 @@ get_surface_class<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/surface.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_surface_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_surface_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SurfaceClassStr</span><span class="p">:</span>
     <span class="sd">"""Get the current surface class.</span>
-
-<span class="sd">    Possible values: "window", "offscreen"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        surface class</span>
@@ -9535,7 +9461,6 @@ get_surface_type<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current surface type.</p>
-<p>Possible values: "raster", "open_gl", "raster_gl", "open_vg", "vulkan", "metal"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -9546,7 +9471,7 @@ get_surface_type<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['raster', 'open_gl', 'raster_gl', 'open_vg', 'vulkan', 'metal']</code></td>
 <td>
 <p>surface type</p>
 </td>
@@ -9556,10 +9481,8 @@ get_surface_type<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/surface.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_surface_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_surface_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SurfaceTypeStr</span><span class="p">:</span>
     <span class="sd">"""Get the current surface type.</span>
-
-<span class="sd">    Possible values: "raster", "open_gl", "raster_gl", "open_vg", "vulkan", "metal"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        surface type</span>
@@ -10138,9 +10061,9 @@ select<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">SELECTION_TYPES</span><span class="p">:</span>
-        <span class="n">selection</span> <span class="o">=</span> <span class="n">SELECTION_TYPES</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">:</span> <span class="n">SelectionTypeStr</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">SELECTION_TYPE</span><span class="p">:</span>
+        <span class="n">selection</span> <span class="o">=</span> <span class="n">SELECTION_TYPE</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -10171,7 +10094,7 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tbody>
 <tr>
 <td><code>start_pos</code></td>
-<td><code>Union[int, str]</code></td>
+<td><code>Union[int, Literal['no_move', 'start', 'start_of_line', 'start_of_block', 'start_of_word', 'previous_block', 'previous_char', 'previous_word', 'up', 'left', 'word_left', 'end', 'end_of_line', 'end_of_word', 'end_of_block', 'next_block', 'next_char', 'next_word', 'down', 'right', 'word_right', 'next_cell', 'previous_cell', 'next_row', 'previous_row']]</code></td>
 <td>
 <p>Start position</p>
 </td>
@@ -10179,7 +10102,7 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 </tr>
 <tr>
 <td><code>end_pos</code></td>
-<td><code>Union[int, str]</code></td>
+<td><code>Union[int, Literal['no_move', 'start', 'start_of_line', 'start_of_block', 'start_of_word', 'previous_block', 'previous_char', 'previous_word', 'up', 'left', 'word_left', 'end', 'end_of_line', 'end_of_word', 'end_of_block', 'next_block', 'next_char', 'next_word', 'down', 'right', 'word_right', 'next_cell', 'previous_cell', 'next_row', 'previous_row']]</code></td>
 <td>
 <p>End position</p>
 </td>
@@ -10190,7 +10113,11 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">select_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">end_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">select_text</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">start_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">MoveOperationStr</span><span class="p">],</span>
+    <span class="n">end_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">MoveOperationStr</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Select text from start position to end position.</span>
 
 <span class="sd">    Positions can be either an integer index or a move operation</span>
@@ -10244,7 +10171,7 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 </tr>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['move', 'keep']</code></td>
 <td>
 <p>Move mode</p>
 </td>
@@ -10255,14 +10182,14 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"move"</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">MoveModeStr</span> <span class="o">=</span> <span class="s2">"move"</span><span class="p">):</span>
     <span class="sd">"""Set cursor to given position.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        pos: Cursor position</span>
 <span class="sd">        mode: Move mode</span>
 <span class="sd">    """</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">MOVE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="n">pos</span><span class="p">,</span> <span class="n">MOVE_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -10504,7 +10431,6 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current layout direction.</p>
-<p>Possible values: "left_to_right", "right_to_left", "auto"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10515,7 +10441,7 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['left_to_right', 'right_to_left', 'auto']</code></td>
 <td>
 <p>layout direction</p>
 </td>
@@ -10525,15 +10451,13 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">LayoutDirectionStr</span><span class="p">:</span>
     <span class="sd">"""Get the current layout direction.</span>
-
-<span class="sd">    Possible values: "left_to_right", "right_to_left", "auto"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        layout direction</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">LAYOUT_DIRECTIONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -10549,7 +10473,6 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set layout direction.</p>
-<p>Valid values: "left_to_right", "right_to_left", "auto"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10563,7 +10486,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>direction</code></td>
-<td><code>str</code></td>
+<td><code>Literal['left_to_right', 'right_to_left', 'auto']</code></td>
 <td>
 <p>layout direction</p>
 </td>
@@ -10591,10 +10514,8 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">LayoutDirectionStr</span><span class="p">):</span>
     <span class="sd">"""Set layout direction.</span>
-
-<span class="sd">    Valid values: "left_to_right", "right_to_left", "auto"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        direction: layout direction</span>
@@ -10602,9 +10523,9 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: layout direction does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LAYOUT_DIRECTIONS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">LAYOUT_DIRECTIONS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setLayoutDirection</span><span class="p">(</span><span class="n">LAYOUT_DIRECTIONS</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setLayoutDirection</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -10644,8 +10565,6 @@ get_border_style<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current border style.</p>
-<p>Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                     "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10656,7 +10575,7 @@ get_border_style<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>border style</p>
 </td>
@@ -10666,11 +10585,8 @@ get_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BorderStyleStr</span><span class="p">:</span>
     <span class="sd">"""Get the current border style.</span>
-
-<span class="sd">    Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                         "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        border style</span>
@@ -10691,7 +10607,6 @@ get_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current page break policy.</p>
-<p>Possible values: "auto", "always_before", "always_after"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10702,7 +10617,7 @@ get_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'always_before', 'always_after']</code></td>
 <td>
 <p>page break policy</p>
 </td>
@@ -10712,10 +10627,8 @@ get_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_page_break_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_page_break_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textformat</span><span class="o">.</span><span class="n">PageBreakFlagStr</span><span class="p">:</span>
     <span class="sd">"""Get the current page break policy.</span>
-
-<span class="sd">    Possible values: "auto", "always_before", "always_after"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        page break policy</span>
@@ -10736,7 +10649,6 @@ get_position<span class="p">(</span><span class="bp">self</span><span class="p">
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current position.</p>
-<p>Possible values: "in_flow", "flow_left", "flow_right"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10747,7 +10659,7 @@ get_position<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['in_flow', 'flow_right', 'flow_left']</code></td>
 <td>
 <p>position</p>
 </td>
@@ -10757,10 +10669,8 @@ get_position<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PositionStr</span><span class="p">:</span>
     <span class="sd">"""Get the current position.</span>
-
-<span class="sd">    Possible values: "in_flow", "flow_left", "flow_right"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        position</span>
@@ -10781,8 +10691,6 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set border style.</p>
-<p>Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-              "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10796,7 +10704,7 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>border style</p>
 </td>
@@ -10824,11 +10732,8 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">BorderStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set border style.</span>
-
-<span class="sd">    Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                  "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: border style</span>
@@ -10854,7 +10759,6 @@ set_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
       </h4>
 <div class="doc doc-contents ">
 <p>Set page break policy.</p>
-<p>Valid values: "auto", "always_before", "always_after"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10868,7 +10772,7 @@ set_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'always_before', 'always_after']</code></td>
 <td>
 <p>page break policy</p>
 </td>
@@ -10896,10 +10800,8 @@ set_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_page_break_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_page_break_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textformat</span><span class="o">.</span><span class="n">PageBreakFlagStr</span><span class="p">):</span>
     <span class="sd">"""Set page break policy.</span>
-
-<span class="sd">    Valid values: "auto", "always_before", "always_after"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: page break policy</span>
@@ -10925,7 +10827,6 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
       </h4>
 <div class="doc doc-contents ">
 <p>Set position.</p>
-<p>Valid values: "in_flow", "flow_left", "flow_right"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10939,7 +10840,7 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 <tbody>
 <tr>
 <td><code>position</code></td>
-<td><code>str</code></td>
+<td><code>Literal['in_flow', 'flow_right', 'flow_left']</code></td>
 <td>
 <p>position</p>
 </td>
@@ -10967,10 +10868,8 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textframeformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">PositionStr</span><span class="p">):</span>
     <span class="sd">"""Set position.</span>
-
-<span class="sd">    Valid values: "in_flow", "flow_left", "flow_right"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        position: position</span>
@@ -11020,7 +10919,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Return type of this length object.</p>
-<p>Possible values: "variable", "fixed", "percentage"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -11031,7 +10929,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['variable', 'fixed', 'percentage']</code></td>
 <td>
 <p>timer type</p>
 </td>
@@ -11041,10 +10939,8 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textlength.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return type of this length object.</span>
-
-<span class="sd">    Possible values: "variable", "fixed", "percentage"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        timer type</span>
@@ -11233,8 +11129,6 @@ get_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current bottom border style.</p>
-<p>Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                 "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -11245,7 +11139,7 @@ get_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>bottom border style</p>
 </td>
@@ -11255,11 +11149,8 @@ get_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_bottom_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_bottom_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">:</span>
     <span class="sd">"""Get the current bottom border style.</span>
-
-<span class="sd">    Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                     "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        bottom border style</span>
@@ -11280,8 +11171,6 @@ get_left_border_style<span class="p">(</span><span class="bp">self</span><span c
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current left border style.</p>
-<p>Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                 "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -11292,7 +11181,7 @@ get_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>left border style</p>
 </td>
@@ -11302,11 +11191,8 @@ get_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_left_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_left_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">:</span>
     <span class="sd">"""Get the current left border style.</span>
-
-<span class="sd">    Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                     "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        left border style</span>
@@ -11327,8 +11213,6 @@ get_right_border_style<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current right border style.</p>
-<p>Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                 "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -11339,7 +11223,7 @@ get_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>right border style</p>
 </td>
@@ -11349,11 +11233,8 @@ get_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_right_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_right_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">:</span>
     <span class="sd">"""Get the current right border style.</span>
-
-<span class="sd">    Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                     "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        right border style</span>
@@ -11374,8 +11255,6 @@ get_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Get the current top border style.</p>
-<p>Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                 "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -11386,7 +11265,7 @@ get_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>top border style</p>
 </td>
@@ -11396,11 +11275,8 @@ get_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_top_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_top_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">:</span>
     <span class="sd">"""Get the current top border style.</span>
-
-<span class="sd">    Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                     "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        top border style</span>
@@ -11421,8 +11297,6 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set border style.</p>
-<p>Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-              "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -11436,7 +11310,7 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>border style</p>
 </td>
@@ -11464,11 +11338,8 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set border style.</span>
-
-<span class="sd">    Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                  "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: border style</span>
@@ -11494,8 +11365,6 @@ set_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
       </h4>
 <div class="doc doc-contents ">
 <p>Set bottom border style.</p>
-<p>Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-              "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -11509,7 +11378,7 @@ set_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>bottom border style</p>
 </td>
@@ -11537,11 +11406,8 @@ set_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_bottom_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_bottom_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set bottom border style.</span>
-
-<span class="sd">    Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                  "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: bottom border style</span>
@@ -11567,8 +11433,6 @@ set_left_border_style<span class="p">(</span><span class="bp">self</span><span c
       </h4>
 <div class="doc doc-contents ">
 <p>Set left border style.</p>
-<p>Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-              "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -11582,7 +11446,7 @@ set_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>left border style</p>
 </td>
@@ -11610,11 +11474,8 @@ set_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_left_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_left_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set left border style.</span>
-
-<span class="sd">    Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                  "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: left border style</span>
@@ -11640,8 +11501,6 @@ set_right_border_style<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Set right border style.</p>
-<p>Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-              "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -11655,7 +11514,7 @@ set_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>right border style</p>
 </td>
@@ -11683,11 +11542,8 @@ set_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_right_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_right_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set right border style.</span>
-
-<span class="sd">    Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                  "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: right border style</span>
@@ -11713,8 +11569,6 @@ set_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set top border style.</p>
-<p>Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-              "dot_dot_dash", "groove", "ridge", "inset", "outset"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -11728,7 +11582,7 @@ set_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
 <td>
 <p>top border style</p>
 </td>
@@ -11756,11 +11610,8 @@ set_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/texttablecellformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_top_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_top_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set top border style.</span>
-
-<span class="sd">    Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",</span>
-<span class="sd">                  "dot_dot_dash", "groove", "ridge", "inset", "outset"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: top border style</span>

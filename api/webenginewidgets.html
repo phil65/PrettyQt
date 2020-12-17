@@ -1285,7 +1285,6 @@ get_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return current save page format.</p>
-<p>Possible values are "unknown", "single_html", "complete_html", "mime_html"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1296,7 +1295,7 @@ get_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['unknown', 'single_html', 'complete_html', 'mime_html']</code></td>
 <td>
 <p>Save page format</p>
 </td>
@@ -1306,15 +1305,13 @@ get_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginedownloaditem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SavePageFormatStr</span><span class="p">:</span>
     <span class="sd">"""Return current save page format.</span>
-
-<span class="sd">    Possible values are "unknown", "single_html", "complete_html", "mime_html"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Save page format</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">SAVE_PAGE_FORMATS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">savePageFormat</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">SAVE_PAGE_FORMAT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">savePageFormat</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1330,7 +1327,6 @@ set_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set the save page format.</p>
-<p>Allowed values are "unknown", "single_html", "complete_html", "mime_html"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1344,7 +1340,7 @@ set_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>fmt</code></td>
-<td><code>str</code></td>
+<td><code>Literal['unknown', 'single_html', 'complete_html', 'mime_html']</code></td>
 <td>
 <p>save page format for the layout</p>
 </td>
@@ -1372,10 +1368,8 @@ set_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webenginedownloaditem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">SavePageFormatStr</span><span class="p">):</span>
     <span class="sd">"""Set the save page format.</span>
-
-<span class="sd">    Allowed values are "unknown", "single_html", "complete_html", "mime_html"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        fmt: save page format for the layout</span>
@@ -1383,9 +1377,9 @@ set_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: save page format does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SAVE_PAGE_FORMATS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">SAVE_PAGE_FORMATS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setSavePageFormat</span><span class="p">(</span><span class="n">SAVE_PAGE_FORMATS</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SAVE_PAGE_FORMAT</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">SAVE_PAGE_FORMAT</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setSavePageFormat</span><span class="p">(</span><span class="n">SAVE_PAGE_FORMAT</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

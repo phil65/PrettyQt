@@ -877,8 +877,6 @@ get_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return the render type of text-like elements in Qt Quick.</p>
-<p>Possible values: "top_left", "top", "top_right", "left", "center", "right",
-                 "bottom_left", "bottom", "bottom_right"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -889,7 +887,7 @@ get_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['top_left', 'top', 'top_right', 'left', 'center', 'right', 'bottom_left', 'bottom', 'bottom_right']</code></td>
 <td>
 <p>transform origin</p>
 </td>
@@ -899,11 +897,8 @@ get_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/quick/quickitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TransformOriginStr</span><span class="p">:</span>
     <span class="sd">"""Return the render type of text-like elements in Qt Quick.</span>
-
-<span class="sd">    Possible values: "top_left", "top", "top_right", "left", "center", "right",</span>
-<span class="sd">                     "bottom_left", "bottom", "bottom_right"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        transform origin</span>
@@ -925,8 +920,6 @@ set_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-contents ">
 <p>Set the origin point around which scale and rotation transform.</p>
 <p>The default is "center".</p>
-<p>Allowed values are "top_left", "top", "top_right", "left", "center", "right",
-                   "bottom_left", "bottom", "bottom_right"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -940,7 +933,7 @@ set_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>origin</code></td>
-<td><code>str</code></td>
+<td><code>Literal['top_left', 'top', 'top_right', 'left', 'center', 'right', 'bottom_left', 'bottom', 'bottom_right']</code></td>
 <td>
 <p>transform origin to use</p>
 </td>
@@ -968,13 +961,10 @@ set_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/quick/quickitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">TransformOriginStr</span><span class="p">):</span>
     <span class="sd">"""Set the origin point around which scale and rotation transform.</span>
 
 <span class="sd">    The default is "center".</span>
-
-<span class="sd">    Allowed values are "top_left", "top", "top_right", "left", "center", "right",</span>
-<span class="sd">                       "bottom_left", "bottom", "bottom_right"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        origin: transform origin to use</span>
@@ -1167,7 +1157,6 @@ get_text_render_type<span class="p">()</span>        </code>
       </h4>
 <div class="doc doc-contents ">
 <p>Return the render type of text-like elements in Qt Quick.</p>
-<p>Possible values: "qt_text", "native_text"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1178,7 +1167,7 @@ get_text_render_type<span class="p">()</span>        </code>
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['qt_text', 'native_text']</code></td>
 <td>
 <p>text render type</p>
 </td>
@@ -1189,10 +1178,8 @@ get_text_render_type<span class="p">()</span>        </code>
           <summary>Source code in <code>prettyqt/quick/quickwindow.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@staticmethod</span>
-<span class="k">def</span> <span class="nf">get_text_render_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">get_text_render_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TextRenderTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return the render type of text-like elements in Qt Quick.</span>
-
-<span class="sd">    Possible values: "qt_text", "native_text"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        text render type</span>
@@ -1218,7 +1205,6 @@ set_text_render_type<span class="p">(</span><span class="n">typ</span><span clas
 <p>Set the default render type of text-like elements in Qt Quick.</p>
 <p>Note: setting the render type will only affect elements created afterwards;
 the render type of existing elements will not be modified.</p>
-<p>Allowed values are "qt_text", "native_text"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1232,7 +1218,7 @@ the render type of existing elements will not be modified.</p>
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['qt_text', 'native_text']</code></td>
 <td>
 <p>text render type to use</p>
 </td>
@@ -1261,13 +1247,11 @@ the render type of existing elements will not be modified.</p>
           <summary>Source code in <code>prettyqt/quick/quickwindow.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@staticmethod</span>
-<span class="k">def</span> <span class="nf">set_text_render_type</span><span class="p">(</span><span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">set_text_render_type</span><span class="p">(</span><span class="n">typ</span><span class="p">:</span> <span class="n">TextRenderTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set the default render type of text-like elements in Qt Quick.</span>
 
 <span class="sd">    Note: setting the render type will only affect elements created afterwards;</span>
 <span class="sd">    the render type of existing elements will not be modified.</span>
-
-<span class="sd">    Allowed values are "qt_text", "native_text"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: text render type to use</span>

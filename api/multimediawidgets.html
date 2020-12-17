@@ -782,7 +782,6 @@ get_aspect_ratio_mode<span class="p">(</span><span class="bp">self</span><span c
       </h4>
 <div class="doc doc-contents ">
 <p>Return current aspect ratio mode.</p>
-<p>Possible values: "ignore", "keep", "keep_by_expanding"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -793,7 +792,7 @@ get_aspect_ratio_mode<span class="p">(</span><span class="bp">self</span><span c
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['ignore', 'keep', 'keep_by_expanding']</code></td>
 <td>
 <p>aspect ratio mode</p>
 </td>
@@ -803,15 +802,13 @@ get_aspect_ratio_mode<span class="p">(</span><span class="bp">self</span><span c
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimediawidgets/graphicsvideoitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_aspect_ratio_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_aspect_ratio_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">AspectRatioModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current aspect ratio mode.</span>
-
-<span class="sd">    Possible values: "ignore", "keep", "keep_by_expanding"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        aspect ratio mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ASPECT_RATIO_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">aspectRatioMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASPECT_RATIO_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">aspectRatioMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -827,7 +824,6 @@ set_aspect_ratio_mode<span class="p">(</span><span class="bp">self</span><span c
       </h4>
 <div class="doc doc-contents ">
 <p>Set the aspect ratio mode.</p>
-<p>Allowed values are "ignore", "keep", "keep_by_expanding"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -841,7 +837,7 @@ set_aspect_ratio_mode<span class="p">(</span><span class="bp">self</span><span c
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['ignore', 'keep', 'keep_by_expanding']</code></td>
 <td>
 <p>aspect ratio mode</p>
 </td>
@@ -869,10 +865,8 @@ set_aspect_ratio_mode<span class="p">(</span><span class="bp">self</span><span c
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimediawidgets/graphicsvideoitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_aspect_ratio_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_aspect_ratio_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AspectRatioModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the aspect ratio mode.</span>
-
-<span class="sd">    Allowed values are "ignore", "keep", "keep_by_expanding"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: aspect ratio mode</span>
@@ -880,9 +874,9 @@ set_aspect_ratio_mode<span class="p">(</span><span class="bp">self</span><span c
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: aspect ratio mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ASPECT_RATIO_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ASPECT_RATIO_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setAspectRatioMode</span><span class="p">(</span><span class="n">ASPECT_RATIO_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASPECT_RATIO_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASPECT_RATIO_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setAspectRatioMode</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ASPECT_RATIO_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

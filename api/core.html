@@ -4654,13 +4654,13 @@ get_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datetime.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_time_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TimeSpecStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_time_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimeSpecStr</span><span class="p">:</span>
     <span class="sd">"""Return current time specification.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        time specification</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">TIME_SPEC</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timeSpec</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">TIME_SPEC</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">timeSpec</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4717,7 +4717,7 @@ set_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datetime.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_time_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="n">TimeSpecStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_time_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimeSpecStr</span><span class="p">):</span>
     <span class="sd">"""Set the time specification.</span>
 
 <span class="sd">    Args:</span>
@@ -4726,9 +4726,9 @@ set_time_spec<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: time specification does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">spec</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TIME_SPEC</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">TIME_SPEC</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTimeSpec</span><span class="p">(</span><span class="n">TIME_SPEC</span><span class="p">[</span><span class="n">spec</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">spec</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">TIME_SPEC</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">spec</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">TIME_SPEC</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTimeSpec</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">TIME_SPEC</span><span class="p">[</span><span class="n">spec</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -5036,8 +5036,6 @@ get_clock_type<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return current clock type.</p>
-<p>Possible values: "system_time", "monotonic_clock", "tick_counter",
-                 "mach_absolute_time", "performance_counter"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -5060,9 +5058,6 @@ get_clock_type<span class="p">(</span><span class="bp">self</span><span class="p
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_clock_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClockTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current clock type.</span>
-
-<span class="sd">    Possible values: "system_time", "monotonic_clock", "tick_counter",</span>
-<span class="sd">                     "mach_absolute_time", "performance_counter"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        clock type</span>

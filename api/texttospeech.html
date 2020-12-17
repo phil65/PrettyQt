@@ -850,7 +850,6 @@ get_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return object ownership.</p>
-<p>possible values: "cpp", "javascript"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -861,7 +860,7 @@ get_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['cpp', 'javascript']</code></td>
 <td>
 <p>object ownership</p>
 </td>
@@ -871,15 +870,13 @@ get_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/qml/qmlengine.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectOwnershipStr</span><span class="p">:</span>
     <span class="sd">"""Return object ownership.</span>
-
-<span class="sd">    possible values: "cpp", "javascript"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        object ownership</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">OBJECT_OWNERSHIPS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">objectOwnership</span><span class="p">(</span><span class="n">obj</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">OBJECT_OWNERSHIP</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">objectOwnership</span><span class="p">(</span><span class="n">obj</span><span class="p">)]</span>
 </code></pre>
 </div>
 </details>
@@ -895,7 +892,6 @@ set_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set the object ownership.</p>
-<p>valid values: "cpp", "javascript"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -909,7 +905,7 @@ set_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['cpp', 'javascript']</code></td>
 <td>
 <p>object ownership to use</p>
 </td>
@@ -937,10 +933,8 @@ set_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/qml/qmlengine.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">):</span>
     <span class="sd">"""Set the object ownership.</span>
-
-<span class="sd">    valid values: "cpp", "javascript"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: object ownership to use</span>
@@ -948,9 +942,9 @@ set_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid object ownership</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">OBJECT_OWNERSHIPS</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">OBJECT_OWNERSHIPS</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setObjectOwnership</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">OBJECT_OWNERSHIPS</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">OBJECT_OWNERSHIP</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">OBJECT_OWNERSHIP</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setObjectOwnership</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">OBJECT_OWNERSHIP</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

@@ -808,6 +808,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.mediaplayer.MediaPlayer.get_error" class="md-nav__link">
+    get_error()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.multimedia.mediaplayer.MediaPlayer.get_media_status" class="md-nav__link">
     get_media_status()
   </a>
@@ -1652,6 +1659,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.mediaplayer.MediaPlayer.get_error" class="md-nav__link">
+    get_error()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.multimedia.mediaplayer.MediaPlayer.get_media_status" class="md-nav__link">
     get_media_status()
   </a>
@@ -1856,8 +1870,6 @@ get_handle_type<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current handle type.</p>
-<p>Possible values: "none", "gl_texture", "xv_shm_image", "core_image", "pixmap",
-                 "egl_image", "user"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1868,7 +1880,7 @@ get_handle_type<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'gl_texture', 'xv_shm_image', 'core_image', 'pixmap', 'egl_image', 'user']</code></td>
 <td>
 <p>handle type</p>
 </td>
@@ -1878,16 +1890,13 @@ get_handle_type<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/abstractvideobuffer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_handle_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_handle_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HandleTypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current handle type.</span>
-
-<span class="sd">    Possible values: "none", "gl_texture", "xv_shm_image", "core_image", "pixmap",</span>
-<span class="sd">                     "egl_image", "user"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        handle type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">HANDLE_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">handleType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">HANDLE_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">handleType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -1903,7 +1912,6 @@ get_map_mode<span class="p">(</span><span class="bp">self</span><span class="p">
       </h4>
 <div class="doc doc-contents ">
 <p>Return current map mode.</p>
-<p>Possible values: "not_mapped", "read_only", "write_only", "read_write"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1914,7 +1922,7 @@ get_map_mode<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['not_mapped', 'read_only', 'write_only', 'read_write']</code></td>
 <td>
 <p>map mode</p>
 </td>
@@ -1924,10 +1932,8 @@ get_map_mode<span class="p">(</span><span class="bp">self</span><span class="p">
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/abstractvideobuffer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_map_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_map_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MapModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current map mode.</span>
-
-<span class="sd">    Possible values: "not_mapped", "read_only", "write_only", "read_write"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        map mode</span>
@@ -2077,7 +2083,6 @@ get_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return current capture mode.</p>
-<p>Possible values: "viewfinder", "still_image", "video"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2088,7 +2093,7 @@ get_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['viewfinder', 'still_image', 'video']</code></td>
 <td>
 <p>capture mode</p>
 </td>
@@ -2098,10 +2103,8 @@ get_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camera.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_capture_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_capture_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CaptureModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current capture mode.</span>
-
-<span class="sd">    Possible values: "viewfinder", "still_image", "video"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        capture mode</span>
@@ -2122,8 +2125,6 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return current error state.</p>
-<p>Possible values: "none", "camera", "invalid_request", "service_missing",
-                 "not_supported_feature"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2134,7 +2135,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'camera', 'invalid_request', 'service_missing', 'not_supported_feature']</code></td>
 <td>
 <p>error state</p>
 </td>
@@ -2144,16 +2145,13 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camera.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
     <span class="sd">"""Return current error state.</span>
-
-<span class="sd">    Possible values: "none", "camera", "invalid_request", "service_missing",</span>
-<span class="sd">                     "not_supported_feature"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        error state</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ERRORS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2169,7 +2167,6 @@ get_lock_status<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current lock status.</p>
-<p>Possible values: "unlocked", "searching", "locked"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2180,7 +2177,7 @@ get_lock_status<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['unlocked', 'searching', 'locked']</code></td>
 <td>
 <p>lock status</p>
 </td>
@@ -2190,10 +2187,8 @@ get_lock_status<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camera.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_lock_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_lock_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LockStatusStr</span><span class="p">:</span>
     <span class="sd">"""Return current lock status.</span>
-
-<span class="sd">    Possible values: "unlocked", "searching", "locked"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        lock status</span>
@@ -2214,7 +2209,6 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return current state.</p>
-<p>Possible values: "unloaded", "loaded", "active"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2225,7 +2219,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['unloaded', 'loaded', 'active']</code></td>
 <td>
 <p>state</p>
 </td>
@@ -2235,10 +2229,8 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camera.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Return current state.</span>
-
-<span class="sd">    Possible values: "unloaded", "loaded", "active"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        state</span>
@@ -2259,8 +2251,6 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
       </h4>
 <div class="doc doc-contents ">
 <p>Return current status.</p>
-<p>Possible values: "active", "starting", "stopping", "standby", "loaded",
-                 "loading", "unloading", "unloaded", "unavailable"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2271,7 +2261,7 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['active', 'starting', 'stopping', 'standby', 'loaded', 'loading', 'unloading', 'unloaded', 'unavailable']</code></td>
 <td>
 <p>status</p>
 </td>
@@ -2281,11 +2271,8 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camera.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span><span class="p">:</span>
     <span class="sd">"""Return current status.</span>
-
-<span class="sd">    Possible values: "active", "starting", "stopping", "standby", "loaded",</span>
-<span class="sd">                     "loading", "unloading", "unloaded", "unavailable"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        status</span>
@@ -2306,7 +2293,6 @@ set_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set the capture mode.</p>
-<p>Allowed values are "viewfinder", "still_image", "video"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2320,7 +2306,7 @@ set_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>position</code></td>
-<td><code>str</code></td>
+<td><code>Literal['viewfinder', 'still_image', 'video']</code></td>
 <td>
 <p>capture mode</p>
 </td>
@@ -2348,10 +2334,8 @@ set_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camera.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_capture_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_capture_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">CaptureModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the capture mode.</span>
-
-<span class="sd">    Allowed values are "viewfinder", "still_image", "video"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        position: capture mode</span>
@@ -2401,11 +2385,6 @@ get_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Return current exposure mode.</p>
-<p>Possible values: "auto", "manual", "portrait", "night", "backlight",
-                 "spotlight", "sports", "snow", "beach", "large_aperture",
-                 "small_aperture", "action", "landscape", "night_portrait",
-                 "theatre", "sunset", "steady_photo", "fireworks", "party",
-                 "candlelight", "barcode", "mode_vendor"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2416,7 +2395,7 @@ get_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'manual', 'portrait', 'night', 'backlight', 'spotlight', 'sports', 'snow', 'beach', 'large_aperture', 'small_aperture', 'action', 'landscape', 'night_portrait', 'theatre', 'sunset', 'steady_photo', 'fireworks', 'party', 'candlelight', 'barcode', 'mode_vendor']</code></td>
 <td>
 <p>exposure mode</p>
 </td>
@@ -2426,14 +2405,8 @@ get_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraexposure.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_exposure_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_exposure_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExposureModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current exposure mode.</span>
-
-<span class="sd">    Possible values: "auto", "manual", "portrait", "night", "backlight",</span>
-<span class="sd">                     "spotlight", "sports", "snow", "beach", "large_aperture",</span>
-<span class="sd">                     "small_aperture", "action", "landscape", "night_portrait",</span>
-<span class="sd">                     "theatre", "sunset", "steady_photo", "fireworks", "party",</span>
-<span class="sd">                     "candlelight", "barcode", "mode_vendor"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        exposure mode</span>
@@ -2454,9 +2427,6 @@ get_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return current flash mode.</p>
-<p>Possible values: "auto", "flash_on", "flash_off", "red_eye_reduction",
-                 "fill", "torch", "video_light", "sync_front_curtain",
-                 "sync_rear_curtain", "manual"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2467,7 +2437,7 @@ get_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'flash_off', 'flash_on', 'red_eye_reduction', 'fill', 'torch', 'video_light', 'sync_front_curtain', 'sync_rear_curtain', 'manual']</code></td>
 <td>
 <p>flash mode</p>
 </td>
@@ -2477,12 +2447,8 @@ get_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraexposure.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_flash_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_flash_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FlashModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current flash mode.</span>
-
-<span class="sd">    Possible values: "auto", "flash_on", "flash_off", "red_eye_reduction",</span>
-<span class="sd">                     "fill", "torch", "video_light", "sync_front_curtain",</span>
-<span class="sd">                     "sync_rear_curtain", "manual"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        flash mode</span>
@@ -2503,7 +2469,6 @@ get_metering_mode<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Return current metering mode.</p>
-<p>Possible values: "matrix", "average", "spot"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2514,7 +2479,7 @@ get_metering_mode<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['matrix', 'average', 'spot']</code></td>
 <td>
 <p>metering mode</p>
 </td>
@@ -2524,10 +2489,8 @@ get_metering_mode<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraexposure.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_metering_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_metering_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MeteringModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current metering mode.</span>
-
-<span class="sd">    Possible values: "matrix", "average", "spot"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        metering mode</span>
@@ -2548,11 +2511,6 @@ set_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Set the exposure mode.</p>
-<p>Allowed values are "auto", "manual", "portrait", "night", "backlight",
-                   "spotlight", "sports", "snow", "beach", "large_aperture",
-                   "small_aperture", "action", "landscape", "night_portrait",
-                   "theatre", "sunset", "steady_photo", "fireworks", "party",
-                   "candlelight", "barcode", "mode_vendor"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2566,7 +2524,7 @@ set_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'manual', 'portrait', 'night', 'backlight', 'spotlight', 'sports', 'snow', 'beach', 'large_aperture', 'small_aperture', 'action', 'landscape', 'night_portrait', 'theatre', 'sunset', 'steady_photo', 'fireworks', 'party', 'candlelight', 'barcode', 'mode_vendor']</code></td>
 <td>
 <p>exposure mode</p>
 </td>
@@ -2594,14 +2552,8 @@ set_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraexposure.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_exposure_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_exposure_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ExposureModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the exposure mode.</span>
-
-<span class="sd">    Allowed values are "auto", "manual", "portrait", "night", "backlight",</span>
-<span class="sd">                       "spotlight", "sports", "snow", "beach", "large_aperture",</span>
-<span class="sd">                       "small_aperture", "action", "landscape", "night_portrait",</span>
-<span class="sd">                       "theatre", "sunset", "steady_photo", "fireworks", "party",</span>
-<span class="sd">                       "candlelight", "barcode", "mode_vendor"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: exposure mode</span>
@@ -2627,9 +2579,6 @@ set_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set the flash mode.</p>
-<p>Allowed values are "auto", "flash_on", "flash_off", "red_eye_reduction",
-                   "fill", "torch", "video_light", "sync_front_curtain",
-                   "sync_rear_curtain", "manual"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2643,7 +2592,7 @@ set_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'flash_off', 'flash_on', 'red_eye_reduction', 'fill', 'torch', 'video_light', 'sync_front_curtain', 'sync_rear_curtain', 'manual']</code></td>
 <td>
 <p>flash mode</p>
 </td>
@@ -2671,12 +2620,8 @@ set_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraexposure.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_flash_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_flash_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">FlashModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the flash mode.</span>
-
-<span class="sd">    Allowed values are "auto", "flash_on", "flash_off", "red_eye_reduction",</span>
-<span class="sd">                       "fill", "torch", "video_light", "sync_front_curtain",</span>
-<span class="sd">                       "sync_rear_curtain", "manual"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: flash mode</span>
@@ -2702,7 +2647,6 @@ set_metering_mode<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Set the metering mode.</p>
-<p>Allowed values are "matrix", "average", "spot"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2716,7 +2660,7 @@ set_metering_mode<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['matrix', 'average', 'spot']</code></td>
 <td>
 <p>metering mode</p>
 </td>
@@ -2744,10 +2688,8 @@ set_metering_mode<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraexposure.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_metering_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_metering_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">MeteringModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the metering mode.</span>
-
-<span class="sd">    Allowed values are "matrix", "average", "spot"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: metering mode</span>
@@ -2797,8 +2739,6 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return current focus mode.</p>
-<p>Possible values: "manual", "hyperfocal", "infinity", "auto", "continuous",
-                 "macro"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2809,7 +2749,7 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['manual', 'hyperfocal', 'infinity', 'auto', 'continuous', 'macro']</code></td>
 <td>
 <p>focus mode</p>
 </td>
@@ -2819,11 +2759,8 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camerafocus.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current focus mode.</span>
-
-<span class="sd">    Possible values: "manual", "hyperfocal", "infinity", "auto", "continuous",</span>
-<span class="sd">                     "macro"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        focus mode</span>
@@ -2844,7 +2781,6 @@ get_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return current focus point mode.</p>
-<p>Possible values: "auto", "center", "face_detection", "custom"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2855,7 +2791,7 @@ get_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'center', 'face_detection', 'custom']</code></td>
 <td>
 <p>focus point mode</p>
 </td>
@@ -2865,15 +2801,13 @@ get_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camerafocus.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_point_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_point_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusPointModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current focus point mode.</span>
-
-<span class="sd">    Possible values: "auto", "center", "face_detection", "custom"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        focus point mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FOCUS_POINT_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">focusPointMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FOCUS_POINT_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">focusPointMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -2889,8 +2823,6 @@ set_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set the focus mode.</p>
-<p>Allowed values are "manual", "hyperfocal", "infinity", "auto", "continuous",
-                   "macro"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2904,7 +2836,7 @@ set_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['manual', 'hyperfocal', 'infinity', 'auto', 'continuous', 'macro']</code></td>
 <td>
 <p>focus mode</p>
 </td>
@@ -2932,11 +2864,8 @@ set_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camerafocus.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">FocusModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the focus mode.</span>
-
-<span class="sd">    Allowed values are "manual", "hyperfocal", "infinity", "auto", "continuous",</span>
-<span class="sd">                       "macro"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: focus mode</span>
@@ -2962,7 +2891,6 @@ set_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set the focus mode.</p>
-<p>Allowed values are "auto", "center", "face_detection", "custom"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2976,7 +2904,7 @@ set_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'center', 'face_detection', 'custom']</code></td>
 <td>
 <p>focus point mode</p>
 </td>
@@ -3004,10 +2932,8 @@ set_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camerafocus.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_point_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_focus_point_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">FocusPointModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the focus mode.</span>
-
-<span class="sd">    Allowed values are "auto", "center", "face_detection", "custom"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: focus point mode</span>
@@ -3015,9 +2941,9 @@ set_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: focus point mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FOCUS_POINT_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">FOCUS_POINT_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFocusPointMode</span><span class="p">(</span><span class="n">FOCUS_POINT_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FOCUS_POINT_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">FOCUS_POINT_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFocusPointMode</span><span class="p">(</span><span class="n">FOCUS_POINT_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -3057,7 +2983,6 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Return current focus mode.</p>
-<p>Possible values: "invalid", "unused", "selected", "focused"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3068,7 +2993,7 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['invalid', 'unused', 'selected', 'focused']</code></td>
 <td>
 <p>focus mode</p>
 </td>
@@ -3078,10 +3003,8 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/camerafocuszone.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_focus_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusZoneStatusStr</span><span class="p">:</span>
     <span class="sd">"""Return current focus mode.</span>
-
-<span class="sd">    Possible values: "invalid", "unused", "selected", "focused"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        focus mode</span>
@@ -3126,8 +3049,6 @@ get_color_filter<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return current exposure mode.</p>
-<p>Possible values: "none", "grayscale", "negative", "solarize", "sepia",
-                 "posterize", "whiteboard", "blackboard", "aqua", "vendor"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3138,7 +3059,7 @@ get_color_filter<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'grayscale', 'negative', 'solarize', 'sepia', 'posterize', 'whiteboard', 'blackboard', 'aqua', 'vendor']</code></td>
 <td>
 <p>color filter</p>
 </td>
@@ -3148,11 +3069,8 @@ get_color_filter<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraimageprocessing.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_color_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_color_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorFilterStr</span><span class="p">:</span>
     <span class="sd">"""Return current exposure mode.</span>
-
-<span class="sd">    Possible values: "none", "grayscale", "negative", "solarize", "sepia",</span>
-<span class="sd">                     "posterize", "whiteboard", "blackboard", "aqua", "vendor"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        color filter</span>
@@ -3173,8 +3091,6 @@ get_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Return current white balance mode.</p>
-<p>Possible values: "auto", "manual", "sunlight", "cloudy", "shade", "tungsten",
-                 "fluorescent", "flash", "sunset", "vendor"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3185,7 +3101,7 @@ get_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'manual', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'flash', 'sunset', 'vendor']</code></td>
 <td>
 <p>white balance mode</p>
 </td>
@@ -3195,11 +3111,8 @@ get_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraimageprocessing.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_white_balance_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_white_balance_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WhiteBalanceModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current white balance mode.</span>
-
-<span class="sd">    Possible values: "auto", "manual", "sunlight", "cloudy", "shade", "tungsten",</span>
-<span class="sd">                     "fluorescent", "flash", "sunset", "vendor"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        white balance mode</span>
@@ -3220,8 +3133,6 @@ set_color_filter<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set the color filter.</p>
-<p>Allowed values are "none", "grayscale", "negative", "solarize", "sepia",
-                   "posterize", "whiteboard", "blackboard", "aqua", "vendor"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3235,7 +3146,7 @@ set_color_filter<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'grayscale', 'negative', 'solarize', 'sepia', 'posterize', 'whiteboard', 'blackboard', 'aqua', 'vendor']</code></td>
 <td>
 <p>color filter</p>
 </td>
@@ -3263,11 +3174,8 @@ set_color_filter<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraimageprocessing.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_color_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_color_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ColorFilterStr</span><span class="p">):</span>
     <span class="sd">"""Set the color filter.</span>
-
-<span class="sd">    Allowed values are "none", "grayscale", "negative", "solarize", "sepia",</span>
-<span class="sd">                       "posterize", "whiteboard", "blackboard", "aqua", "vendor"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: color filter</span>
@@ -3293,8 +3201,6 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Set the white balance mode.</p>
-<p>Allowed values are "auto", "manual", "sunlight", "cloudy", "shade", "tungsten",
-                   "fluorescent", "flash", "sunset", "vendor"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3308,7 +3214,7 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['auto', 'manual', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'flash', 'sunset', 'vendor']</code></td>
 <td>
 <p>white balance mode</p>
 </td>
@@ -3336,11 +3242,8 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/cameraimageprocessing.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_white_balance_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_white_balance_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">WhiteBalanceModeStr</span><span class="p">):</span>
     <span class="sd">"""Set the white balance mode.</span>
-
-<span class="sd">    Allowed values are "auto", "manual", "sunlight", "cloudy", "shade", "tungsten",</span>
-<span class="sd">                       "fluorescent", "flash", "sunset", "vendor"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: white balance mode</span>
@@ -3468,7 +3371,6 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return availability status.</p>
-<p>Possible values: "available", "service_missing", "resource_error", "busy"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3479,7 +3381,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['available', 'service_missing', 'resource_error', 'busy']</code></td>
 <td>
 <p>availability status</p>
 </td>
@@ -3489,10 +3391,8 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/mediaobject.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AvailabilityStatusStr</span><span class="p">:</span>
     <span class="sd">"""Return availability status.</span>
-
-<span class="sd">    Possible values: "available", "service_missing", "resource_error", "busy"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        availability status</span>
@@ -3528,17 +3428,15 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.multimedia.mediaplayer.MediaPlayer.get_media_status">
+<h4 class="doc doc-heading" id="prettyqt.multimedia.mediaplayer.MediaPlayer.get_error">
 
         <code class="highlight language-python">
-get_media_status<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
 
 
       </h4>
 <div class="doc doc-contents ">
-<p>Return current media status.</p>
-<p>Possible values: "unknown", "no_media", "loading", "loaded", "stalled",
-                 "buffering", "buffered", "end", "invalid"</p>
+<p>Return error type.</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3549,7 +3447,49 @@ get_media_status<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'resource', 'format', 'network', 'access_denied', 'service_missing']</code></td>
+<td>
+<p>error type</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/multimedia/mediaplayer.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
+    <span class="sd">"""Return error type.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        error type</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.multimedia.mediaplayer.MediaPlayer.get_media_status">
+
+        <code class="highlight language-python">
+get_media_status<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current media status.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['unknown', 'no_media', 'loading', 'loaded', 'stalled', 'buffering', 'buffered', 'end', 'invalid']</code></td>
 <td>
 <p>media status</p>
 </td>
@@ -3559,11 +3499,8 @@ get_media_status<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/mediaplayer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_media_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_media_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MediaStatusStr</span><span class="p">:</span>
     <span class="sd">"""Return current media status.</span>
-
-<span class="sd">    Possible values: "unknown", "no_media", "loading", "loaded", "stalled",</span>
-<span class="sd">                     "buffering", "buffered", "end", "invalid"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        media status</span>
@@ -3584,7 +3521,6 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return current state.</p>
-<p>Possible values: "stopped", "playing", "paused"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3595,7 +3531,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['stopped', 'playing', 'paused']</code></td>
 <td>
 <p>state</p>
 </td>
@@ -3605,10 +3541,8 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/mediaplayer.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
     <span class="sd">"""Return current state.</span>
-
-<span class="sd">    Possible values: "stopped", "playing", "paused"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        state</span>
@@ -3793,7 +3727,6 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return availability status.</p>
-<p>Possible values: "available", "service_missing", "resource_error", "busy"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3804,7 +3737,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['available', 'service_missing', 'resource_error', 'busy']</code></td>
 <td>
 <p>availability status</p>
 </td>
@@ -3814,10 +3747,8 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/mediarecorder.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AvailabilityStatusStr</span><span class="p">:</span>
     <span class="sd">"""Return availability status.</span>
-
-<span class="sd">    Possible values: "available", "service_missing", "resource_error", "busy"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        availability status</span>
@@ -3900,20 +3831,34 @@ get_field_type<span class="p">(</span><span class="bp">self</span><span class="p
 
       </h4>
 <div class="doc doc-contents ">
-<p>Set field type.</p>
-<p>Valid values: "progressive_frame", "top_field", "bottom_field",
-              "interlaced_frame"</p>
+<p>Get field type.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['progressive_frame', 'top_field', 'bottom_field', 'interlaced_frame']</code></td>
+<td>
+<p>Field type</p>
+</td>
+</tr>
+</tbody>
+</table>
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/videoframe.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_field_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">"""Set field type.</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_field_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FieldTypeStr</span><span class="p">:</span>
+    <span class="sd">"""Get field type.</span>
 
-<span class="sd">    Valid values: "progressive_frame", "top_field", "bottom_field",</span>
-<span class="sd">                  "interlaced_frame"</span>
-
+<span class="sd">    Returns:</span>
+<span class="sd">        Field type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FIELD_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldType</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FIELD_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldType</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3928,9 +3873,7 @@ set_field_type<span class="p">(</span><span class="bp">self</span><span class="p
 
       </h4>
 <div class="doc doc-contents ">
-<p>Return current field type.</p>
-<p>Possible values: "progressive_frame", "top_field", "bottom_field",
-                 "interlaced_frame"</p>
+<p>Set current field type.</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3944,7 +3887,7 @@ set_field_type<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['progressive_frame', 'top_field', 'bottom_field', 'interlaced_frame']</code></td>
 <td>
 <p>capture mode</p>
 </td>
@@ -3972,20 +3915,18 @@ set_field_type<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/videoframe.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_field_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""Return current field type.</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_field_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FieldTypeStr</span><span class="p">):</span>
+    <span class="sd">"""Set current field type.</span>
 
-<span class="sd">    Possible values: "progressive_frame", "top_field", "bottom_field",</span>
-<span class="sd">                     "interlaced_frame"</span>
 <span class="sd">    Args:</span>
 <span class="sd">        typ: capture mode</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: capture mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FIELD_TYPES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">FIELD_TYPES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFieldType</span><span class="p">(</span><span class="n">FIELD_TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FIELD_TYPE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">FIELD_TYPE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFieldType</span><span class="p">(</span><span class="n">FIELD_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>

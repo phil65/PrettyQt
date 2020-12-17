@@ -1038,7 +1038,7 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
     <span class="n">vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">validators</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">vals</span><span class="p">),</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">vals</span><span class="p">),</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
 </code></pre>
 </div>
 </details>
@@ -1084,7 +1084,7 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
 </code></pre>
 </div>
 </details>
@@ -1129,8 +1129,8 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">"0"</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
 </code></pre>
 </div>
 </details>
@@ -1175,8 +1175,8 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
 </code></pre>
 </div>
 </details>
@@ -1228,15 +1228,15 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     <span class="k">except</span> <span class="n">sre_constants</span><span class="o">.</span><span class="n">error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_occured</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pattern_updated</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
     <span class="k">except</span> <span class="n">re</span><span class="o">.</span><span class="n">_regex_core</span><span class="o">.</span><span class="n">error</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_occured</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pattern_updated</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_occured</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pattern_updated</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">compiled</span><span class="p">)</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
 </code></pre>
 </div>
 </details>
@@ -1283,14 +1283,14 @@ validate<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Validator not initialized"</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">text</span> <span class="o">==</span> <span class="s2">""</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
     <span class="n">match</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">regex</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">partial</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">match</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Invalid</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Invalid</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
     <span class="k">if</span> <span class="n">match</span><span class="o">.</span><span class="n">partial</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
 </code></pre>
 </div>
 </details>

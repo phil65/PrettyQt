@@ -10445,7 +10445,6 @@ get_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return current exclusion policy.</p>
-<p>Possible values: "none", "exclusive", "exclusive_optional"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10456,7 +10455,7 @@ get_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'exclusive', 'exclusive_optional']</code></td>
 <td>
 <p>exclusion policy</p>
 </td>
@@ -10466,10 +10465,8 @@ get_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/actiongroup.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_exclusion_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_exclusion_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExclusionPolicyStr</span><span class="p">:</span>
     <span class="sd">"""Return current exclusion policy.</span>
-
-<span class="sd">    Possible values: "none", "exclusive", "exclusive_optional"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        exclusion policy</span>
@@ -10490,7 +10487,6 @@ set_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set exclusion policy to use.</p>
-<p>Allowed values are "none", "exclusive", "exclusive_optional"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10504,7 +10500,7 @@ set_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>Optional[str]</code></td>
+<td><code>Optional[Literal['none', 'exclusive', 'exclusive_optional']]</code></td>
 <td>
 <p>exclusion policy to use</p>
 </td>
@@ -10532,10 +10528,8 @@ set_exclusion_policy<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/actiongroup.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_exclusion_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_exclusion_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ExclusionPolicyStr</span><span class="p">]):</span>
     <span class="sd">"""Set exclusion policy to use.</span>
-
-<span class="sd">    Allowed values are "none", "exclusive", "exclusive_optional"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: exclusion policy to use</span>
@@ -18282,7 +18276,7 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['top', 'left', 'right', 'bottom', 'top_left', 'top_right', 'bottom_left', 'bottom_right']</code></td>
 <td>
 <p>alignment</p>
 </td>
@@ -18292,7 +18286,7 @@ get_alignment<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/progressbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">AlignmentStr</span><span class="p">:</span>
     <span class="sd">"""Return current alignment.</span>
 
 <span class="sd">    Returns:</span>
@@ -18356,7 +18350,6 @@ get_text_direction<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Return current text direction.</p>
-<p>Possible values are "top_to_bottom", "bottom_to_top"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -18367,7 +18360,7 @@ get_text_direction<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['top_to_bottom', 'bottom_to_top']</code></td>
 <td>
 <p>Text direction</p>
 </td>
@@ -18377,10 +18370,8 @@ get_text_direction<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/progressbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_text_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_text_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextDirectionStr</span><span class="p">:</span>
     <span class="sd">"""Return current text direction.</span>
-
-<span class="sd">    Possible values are "top_to_bottom", "bottom_to_top"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Text direction</span>
@@ -18537,7 +18528,6 @@ set_text_direction<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set the text direction of the layout.</p>
-<p>Allowed values are "top_to_bottom", "bottom_to_top"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -18551,7 +18541,7 @@ set_text_direction<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>text_direction</code></td>
-<td><code>str</code></td>
+<td><code>Literal['top_to_bottom', 'bottom_to_top']</code></td>
 <td>
 <p>text direction for the layout</p>
 </td>
@@ -18579,10 +18569,8 @@ set_text_direction<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/progressbar.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_text_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_text_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_direction</span><span class="p">:</span> <span class="n">TextDirectionStr</span><span class="p">):</span>
     <span class="sd">"""Set the text direction of the layout.</span>
-
-<span class="sd">    Allowed values are "top_to_bottom", "bottom_to_top"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        text_direction: text direction for the layout</span>
@@ -18735,17 +18723,6 @@ get_scroll_metric<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Return scroll metric.</p>
-<p>Possible values: "mouse_press_event_delay", "drag_start_distance",
-                 "drag_velocity_smoothing_factor", "axis_lock_threshold",
-                 "scrolling_curve", "deceleration_factor", "minimum_velocity",
-                 "maximum_velocity", "maximum_click_through_velocity",
-                 "accelerating_flick_maximum_time",
-                 "accelerating_flick_speedup_factor", "snap_position_ratio",
-                 "snap_time", "overshoot_drag_resistance_factor",
-                 "overshoot_drag_distance_factor",
-                 "overshoot_scroll_distance_factor", "overshoot_scroll_time",
-                 "horizontal_overshoot_policy", "vertical_overshoot_policy",
-                 "frame_rate", "scroll_metric_count"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -18759,7 +18736,7 @@ get_scroll_metric<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>metric</code></td>
-<td><code>str</code></td>
+<td><code>Literal['mouse_press_event_delay', 'drag_start_distance', 'drag_velocity_smoothing_factor', 'axis_lock_threshold', 'scrolling_curve', 'deceleration_factor', 'minimum_velocity', 'maximum_velocity', 'maximum_click_through_velocity', 'accelerating_flick_maximum_time', 'accelerating_flick_speedup_factor', 'snap_position_ratio', 'snap_time', 'overshoot_drag_resistance_factor', 'overshoot_drag_distance_factor', 'overshoot_scroll_distance_factor', 'overshoot_scroll_time', 'horizontal_overshoot_policy', 'vertical_overshoot_policy', 'frame_rate', 'scroll_metric_count']</code></td>
 <td>
 <p>Scroll metric to get</p>
 </td>
@@ -18804,20 +18781,8 @@ get_scroll_metric<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/scrollerproperties.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_scroll_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_scroll_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="n">ScrollmetricStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
     <span class="sd">"""Return scroll metric.</span>
-
-<span class="sd">    Possible values: "mouse_press_event_delay", "drag_start_distance",</span>
-<span class="sd">                     "drag_velocity_smoothing_factor", "axis_lock_threshold",</span>
-<span class="sd">                     "scrolling_curve", "deceleration_factor", "minimum_velocity",</span>
-<span class="sd">                     "maximum_velocity", "maximum_click_through_velocity",</span>
-<span class="sd">                     "accelerating_flick_maximum_time",</span>
-<span class="sd">                     "accelerating_flick_speedup_factor", "snap_position_ratio",</span>
-<span class="sd">                     "snap_time", "overshoot_drag_resistance_factor",</span>
-<span class="sd">                     "overshoot_drag_distance_factor",</span>
-<span class="sd">                     "overshoot_scroll_distance_factor", "overshoot_scroll_time",</span>
-<span class="sd">                     "horizontal_overshoot_policy", "vertical_overshoot_policy",</span>
-<span class="sd">                     "frame_rate", "scroll_metric_count"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        metric: Scroll metric to get</span>
@@ -18846,17 +18811,6 @@ set_scroll_metric<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Set scroll metric.</p>
-<p>Possible values: "mouse_press_event_delay", "drag_start_distance",
-                 "drag_velocity_smoothing_factor", "axis_lock_threshold",
-                 "scrolling_curve", "deceleration_factor", "minimum_velocity",
-                 "maximum_velocity", "maximum_click_through_velocity",
-                 "accelerating_flick_maximum_time",
-                 "accelerating_flick_speedup_factor", "snap_position_ratio",
-                 "snap_time", "overshoot_drag_resistance_factor",
-                 "overshoot_drag_distance_factor",
-                 "overshoot_scroll_distance_factor", "overshoot_scroll_time",
-                 "horizontal_overshoot_policy", "vertical_overshoot_policy",
-                 "frame_rate", "scroll_metric_count"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -18870,7 +18824,7 @@ set_scroll_metric<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>metric</code></td>
-<td><code>str</code></td>
+<td><code>Literal['mouse_press_event_delay', 'drag_start_distance', 'drag_velocity_smoothing_factor', 'axis_lock_threshold', 'scrolling_curve', 'deceleration_factor', 'minimum_velocity', 'maximum_velocity', 'maximum_click_through_velocity', 'accelerating_flick_maximum_time', 'accelerating_flick_speedup_factor', 'snap_position_ratio', 'snap_time', 'overshoot_drag_resistance_factor', 'overshoot_drag_distance_factor', 'overshoot_scroll_distance_factor', 'overshoot_scroll_time', 'horizontal_overshoot_policy', 'vertical_overshoot_policy', 'frame_rate', 'scroll_metric_count']</code></td>
 <td>
 <p>Scroll metric to set</p>
 </td>
@@ -18906,20 +18860,8 @@ set_scroll_metric<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/scrollerproperties.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_scroll_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_scroll_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="n">ScrollmetricStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
     <span class="sd">"""Set scroll metric.</span>
-
-<span class="sd">    Possible values: "mouse_press_event_delay", "drag_start_distance",</span>
-<span class="sd">                     "drag_velocity_smoothing_factor", "axis_lock_threshold",</span>
-<span class="sd">                     "scrolling_curve", "deceleration_factor", "minimum_velocity",</span>
-<span class="sd">                     "maximum_velocity", "maximum_click_through_velocity",</span>
-<span class="sd">                     "accelerating_flick_maximum_time",</span>
-<span class="sd">                     "accelerating_flick_speedup_factor", "snap_position_ratio",</span>
-<span class="sd">                     "snap_time", "overshoot_drag_resistance_factor",</span>
-<span class="sd">                     "overshoot_drag_distance_factor",</span>
-<span class="sd">                     "overshoot_scroll_distance_factor", "overshoot_scroll_time",</span>
-<span class="sd">                     "horizontal_overshoot_policy", "vertical_overshoot_policy",</span>
-<span class="sd">                     "frame_rate", "scroll_metric_count"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        metric: Scroll metric to set</span>
@@ -19909,7 +19851,6 @@ get_horizontal_direction<span class="p">(</span><span class="bp">self</span><spa
       </h4>
 <div class="doc doc-contents ">
 <p>Return horizontal direction of the gesture.</p>
-<p>Possible values: "none", "left, "right"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -19920,7 +19861,7 @@ get_horizontal_direction<span class="p">(</span><span class="bp">self</span><spa
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'left', 'right']</code></td>
 <td>
 <p>horizontal direction</p>
 </td>
@@ -19930,10 +19871,8 @@ get_horizontal_direction<span class="p">(</span><span class="bp">self</span><spa
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/swipegesture.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_horizontal_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_horizontal_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HorizontalDirectionStr</span><span class="p">:</span>
     <span class="sd">"""Return horizontal direction of the gesture.</span>
-
-<span class="sd">    Possible values: "none", "left, "right"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        horizontal direction</span>
@@ -19954,7 +19893,6 @@ get_vertical_direction<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Return vertical direction of the gesture.</p>
-<p>Possible values: "none", "up, "down"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -19965,7 +19903,7 @@ get_vertical_direction<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'up', 'down']</code></td>
 <td>
 <p>vertical direction</p>
 </td>
@@ -19975,10 +19913,8 @@ get_vertical_direction<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/swipegesture.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_vertical_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_vertical_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VerticalDirectionStr</span><span class="p">:</span>
     <span class="sd">"""Return vertical direction of the gesture.</span>
-
-<span class="sd">    Possible values: "none", "up, "down"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        vertical direction</span>
@@ -22785,7 +22721,7 @@ get_button_text<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>button_type</code></td>
-<td><code>str</code></td>
+<td><code>WizardButtonStr</code></td>
 <td>
 <p>button to get text from</p>
 </td>
@@ -22813,7 +22749,7 @@ get_button_text<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_button_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_button_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="n">WizardButtonStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Return text for given button type.</span>
 
 <span class="sd">    Args:</span>
@@ -22840,14 +22776,6 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Return the value assigned to option.</p>
-<p>Possible values: "independent_pages", "ignore_subtitles",
-                 "extended_watermark_bitmap", "no_default_button",
-                 "no_back_button_on_start_page", "no_back_button_on_last_page",
-                 "disabled_back_button_on_last_page", "next_button_on_last_page",
-                 "finish_button_on_early_pages", "no_cancel_button",
-                 "cancel_button_on_left", "help_button", "help_button_on_right",
-                 "custom_button_1", "custom_button_2", "custom_button_3",
-                 "no_cancel_button_on_last_page"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -22861,7 +22789,7 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>str</code></td>
+<td><code>WizardOptionStr</code></td>
 <td>
 <p>option to get</p>
 </td>
@@ -22889,17 +22817,8 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">WizardOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Return the value assigned to option.</span>
-
-<span class="sd">    Possible values: "independent_pages", "ignore_subtitles",</span>
-<span class="sd">                     "extended_watermark_bitmap", "no_default_button",</span>
-<span class="sd">                     "no_back_button_on_start_page", "no_back_button_on_last_page",</span>
-<span class="sd">                     "disabled_back_button_on_last_page", "next_button_on_last_page",</span>
-<span class="sd">                     "finish_button_on_early_pages", "no_cancel_button",</span>
-<span class="sd">                     "cancel_button_on_left", "help_button", "help_button_on_right",</span>
-<span class="sd">                     "custom_button_1", "custom_button_2", "custom_button_3",</span>
-<span class="sd">                     "no_cancel_button_on_last_page"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        option: option to get</span>
@@ -23015,7 +22934,6 @@ get_wizard_style<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return current wizard style.</p>
-<p>Possible values are "classic", "modern", "mac", "aero"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -23026,7 +22944,7 @@ get_wizard_style<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>WizardStyleStr</code></td>
 <td>
 <p>Wizard style</p>
 </td>
@@ -23036,10 +22954,8 @@ get_wizard_style<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_wizard_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_wizard_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WizardStyleStr</span><span class="p">:</span>
     <span class="sd">"""Return current wizard style.</span>
-
-<span class="sd">    Possible values are "classic", "modern", "mac", "aero"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Wizard style</span>
@@ -23073,7 +22989,7 @@ set_button_text<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>button_type</code></td>
-<td><code>str</code></td>
+<td><code>WizardButtonStr</code></td>
 <td>
 <p>button to get text from</p>
 </td>
@@ -23092,7 +23008,7 @@ set_button_text<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="n">WizardButtonStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
     <span class="sd">"""Set text for given button type.</span>
 
 <span class="sd">    Args:</span>
@@ -23118,14 +23034,6 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Set option to given value.</p>
-<p>Allowed values: "independent_pages", "ignore_subtitles",
-                "extended_watermark_bitmap", "no_default_button",
-                "no_back_button_on_start_page", "no_back_button_on_last_page",
-                "disabled_back_button_on_last_page", "next_button_on_last_page",
-                "finish_button_on_early_pages", "no_cancel_button",
-                "cancel_button_on_left", "help_button", "help_button_on_right",
-                "custom_button_1", "custom_button_2", "custom_button_3",
-                "no_cancel_button_on_last_page"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -23139,7 +23047,7 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>str</code></td>
+<td><code>WizardOptionStr</code></td>
 <td>
 <p>option to use</p>
 </td>
@@ -23175,17 +23083,9 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">WizardOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
     <span class="sd">"""Set option to given value.</span>
 
-<span class="sd">    Allowed values: "independent_pages", "ignore_subtitles",</span>
-<span class="sd">                    "extended_watermark_bitmap", "no_default_button",</span>
-<span class="sd">                    "no_back_button_on_start_page", "no_back_button_on_last_page",</span>
-<span class="sd">                    "disabled_back_button_on_last_page", "next_button_on_last_page",</span>
-<span class="sd">                    "finish_button_on_early_pages", "no_cancel_button",</span>
-<span class="sd">                    "cancel_button_on_left", "help_button", "help_button_on_right",</span>
-<span class="sd">                    "custom_button_1", "custom_button_2", "custom_button_3",</span>
-<span class="sd">                    "no_cancel_button_on_last_page"</span>
 <span class="sd">    Args:</span>
 <span class="sd">        option: option to use</span>
 <span class="sd">        value: value to set</span>
@@ -23353,7 +23253,6 @@ set_wizard_style<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set the wizard style.</p>
-<p>Allowed values are "classic", "modern", "mac", "aero"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -23367,7 +23266,7 @@ set_wizard_style<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>WizardStyleStr</code></td>
 <td>
 <p>wizard style</p>
 </td>
@@ -23395,10 +23294,8 @@ set_wizard_style<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_wizard_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_wizard_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">WizardStyleStr</span><span class="p">):</span>
     <span class="sd">"""Set the wizard style.</span>
-
-<span class="sd">    Allowed values are "classic", "modern", "mac", "aero"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: wizard style</span>

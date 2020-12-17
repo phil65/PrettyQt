@@ -2531,7 +2531,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Return result type.</p>
-<p>possible values: "unknown" "place", "proposed_search",</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2542,7 +2541,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['unknown', 'place', 'proposed_search']</code></td>
 <td>
 <p>Result type</p>
 </td>
@@ -2552,10 +2551,8 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placesearchresult.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return result type.</span>
-
-<span class="sd">    possible values: "unknown" "place", "proposed_search",</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Result type</span>

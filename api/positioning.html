@@ -1026,7 +1026,6 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return error type.</p>
-<p>possible values are "access_error" "closed_error", "none", "unkown_source"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1037,7 +1036,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['access_error', 'closed_error', 'none', 'unknown_source']</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -1047,10 +1046,8 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
     <span class="sd">"""Return error type.</span>
-
-<span class="sd">    possible values are "access_error" "closed_error", "none", "unkown_source"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        error type</span>
@@ -1071,7 +1068,6 @@ get_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
       </h4>
 <div class="doc doc-contents ">
 <p>Return list of preferred positioning methods.</p>
-<p>possible included values are "none", "satellite", "non_satellite", "all"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1082,7 +1078,7 @@ get_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
 </thead>
 <tbody>
 <tr>
-<td><code>List[str]</code></td>
+<td><code>List[Literal['none', 'satellite', 'non_satellite', 'all']]</code></td>
 <td>
 <p>list of preferred positioning methods</p>
 </td>
@@ -1092,10 +1088,8 @@ get_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
 <details class="quote">
           <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">PositioningMethodStr</span><span class="p">]:</span>
     <span class="sd">"""Return list of preferred positioning methods.</span>
-
-<span class="sd">    possible included values are "none", "satellite", "non_satellite", "all"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list of preferred positioning methods</span>
@@ -1120,7 +1114,6 @@ get_supported_positioning_methods<span class="p">(</span><span class="bp">self</
       </h4>
 <div class="doc doc-contents ">
 <p>Return list of supported positioning methods.</p>
-<p>possible included values are "none", "satellite", "non_satellite", "all"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1131,7 +1124,7 @@ get_supported_positioning_methods<span class="p">(</span><span class="bp">self</
 </thead>
 <tbody>
 <tr>
-<td><code>List[str]</code></td>
+<td><code>List[Literal['none', 'satellite', 'non_satellite', 'all']]</code></td>
 <td>
 <p>list of supported positioning methods</p>
 </td>
@@ -1141,10 +1134,8 @@ get_supported_positioning_methods<span class="p">(</span><span class="bp">self</
 <details class="quote">
           <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_supported_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_supported_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">PositioningMethodStr</span><span class="p">]:</span>
     <span class="sd">"""Return list of supported positioning methods.</span>
-
-<span class="sd">    possible included values are "none", "satellite", "non_satellite", "all"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        list of supported positioning methods</span>
@@ -1169,7 +1160,6 @@ set_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
       </h4>
 <div class="doc doc-contents ">
 <p>Set preferred positioning methods.</p>
-<p>valid values are "none", "satellite", "non_satellite", "all"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1183,7 +1173,7 @@ set_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
 <tbody>
 <tr>
 <td><code>methods</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'satellite', 'non_satellite', 'all']</code></td>
 <td>
 <p>positioning methods to use</p>
 </td>
@@ -1211,10 +1201,8 @@ set_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
 <details class="quote">
           <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">methods</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">methods</span><span class="p">:</span> <span class="n">PositioningMethodStr</span><span class="p">):</span>
     <span class="sd">"""Set preferred positioning methods.</span>
-
-<span class="sd">    valid values are "none", "satellite", "non_satellite", "all"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        methods: positioning methods to use</span>
@@ -1400,7 +1388,6 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return error type.</p>
-<p>possible values are "access_error" "closed_error", "none", "unkown_source"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1411,7 +1398,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['access_error', 'closed_error', 'none', 'unknown_source']</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -1421,15 +1408,13 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/positioning/geosatelliteinfosource.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
     <span class="sd">"""Return error type.</span>
-
-<span class="sd">    possible values are "access_error" "closed_error", "none", "unkown_source"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        error type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ERRORS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
