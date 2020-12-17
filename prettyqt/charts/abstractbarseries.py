@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts
@@ -11,6 +13,7 @@ LABELS_POSITIONS = bidict(
     outside_end=QtCharts.QAbstractBarSeries.LabelsOutsideEnd,
 )
 
+LabelsPositionStr = Literal["center", "inside_end", "inside_base", "outside_end"]
 
 QtCharts.QAbstractBarSeries.__bases__ = (charts.AbstractSeries,)
 
@@ -24,10 +27,8 @@ class AbstractBarSeries(QtCharts.QAbstractBarSeries):
         barsets = self.barSets()
         return barsets[index]
 
-    def set_labels_position(self, position: str):
+    def set_labels_position(self, position: LabelsPositionStr):
         """Set the labels position.
-
-        Allowed values are "center", "inside_end", "inside_base", "outside_end"
 
         Args:
             position: labels position
@@ -39,10 +40,8 @@ class AbstractBarSeries(QtCharts.QAbstractBarSeries):
             raise InvalidParamError(position, LABELS_POSITIONS)
         self.setLabelsPosition(LABELS_POSITIONS[position])
 
-    def get_labels_position(self) -> str:
+    def get_labels_position(self) -> LabelsPositionStr:
         """Return current labels position.
-
-        Possible values: "center", "inside_end", "inside_base", "outside_end"
 
         Returns:
             labels position

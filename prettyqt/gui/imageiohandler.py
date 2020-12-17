@@ -28,6 +28,29 @@ IMAGE_OPTION = bidict(
     transformation_by_default=QtGui.QImageIOHandler.TransformedByDefault,
 )
 
+ImageOptionStr = Literal[
+    "size",
+    "clip_rect",
+    "scaled_size",
+    "scaled_clip_rect",
+    "description",
+    "compression_ratio",
+    "gamma",
+    "quality",
+    "name",
+    "subtype",
+    "incremental_reading",
+    "endianness",
+    "animation",
+    "background_color",
+    # "image_format",
+    "supported_sub_types",
+    "optimized_write",
+    "progressive_scan_write",
+    "image_transformation",
+    "transformation_by_default",
+]
+
 TRANSFORMATION = mappers.FlagMap(
     QtGui.QImageIOHandler.Transformations,
     none=QtGui.QImageIOHandler.TransformationNone,
@@ -53,25 +76,17 @@ TransformationStr = Literal[
 
 
 class ImageIOHandler(QtGui.QImageIOHandler):
-    def __getitem__(self, key: str):
+    def __getitem__(self, key: ImageOptionStr):
         return self.get_option(key)
 
-    def __setitem__(self, key: str, value):
+    def __setitem__(self, key: ImageOptionStr, value):
         self.set_option(key, value)
 
     def get_format(self) -> str:
         return bytes(self.format()).decode()
 
-    def set_option(self, option: str, value):
+    def set_option(self, option: ImageOptionStr, value):
         """Set option to given value.
-
-        Allowed values are "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                           "description", "compression_ratio", "gamma", "quality",
-                           "name", "subtype", "incremental_reading", "endianness",
-                           "animation", "background_color", "image_format",
-                           "supported_sub_types", "optimized_write",
-                           "progressive_scan_write", "image_transformation",
-                           "transformation_by_default"
 
         Args:
             option: option to use
@@ -84,16 +99,8 @@ class ImageIOHandler(QtGui.QImageIOHandler):
             raise InvalidParamError(option, IMAGE_OPTION)
         self.setOption(IMAGE_OPTION[option], value)
 
-    def get_option(self, option: str) -> Any:
+    def get_option(self, option: ImageOptionStr) -> Any:
         """Return the value assigned to option.
-
-        Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                         "description", "compression_ratio", "gamma", "quality",
-                         "name", "subtype", "incremental_reading", "endianness",
-                         "animation", "background_color", "image_format",
-                         "supported_sub_types", "optimized_write",
-                         "progressive_scan_write", "image_transformation",
-                         "transformation_by_default"
 
         Args:
             option: option to get
@@ -105,16 +112,8 @@ class ImageIOHandler(QtGui.QImageIOHandler):
             raise InvalidParamError(option, IMAGE_OPTION)
         return self.option(IMAGE_OPTION[option])
 
-    def supports_option(self, option: str) -> bool:
+    def supports_option(self, option: ImageOptionStr) -> bool:
         """Return whether the image handler supports given option.
-
-        Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                         "description", "compression_ratio", "gamma", "quality",
-                         "name", "subtype", "incremental_reading", "endianness",
-                         "animation", "background_color", "image_format",
-                         "supported_sub_types", "optimized_write",
-                         "progressive_scan_write", "image_transformation",
-                         "transformation_by_default"
 
         Args:
             option: option to check

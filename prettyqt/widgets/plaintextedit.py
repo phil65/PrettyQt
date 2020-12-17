@@ -4,7 +4,6 @@ from typing import Literal, Optional
 from qtpy import QtGui, QtWidgets
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
-from prettyqt.gui import textcursor
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -23,9 +22,6 @@ LINE_WRAP_MODE = bidict(
 )
 
 LineWrapModeStr = Literal["none", "widget_width"]
-
-MOVE_OPERATIONS = textcursor.MOVE_OPERATIONS
-MOVE_MODES = textcursor.MOVE_MODES
 
 
 QtWidgets.QPlainTextEdit.__bases__ = (widgets.AbstractScrollArea,)
@@ -92,9 +88,13 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         yield cursor
         self.setTextCursor(cursor)
 
-    def move_cursor(self, operation: str, mode: str = "move"):
-        op = MOVE_OPERATIONS[operation]
-        mode = MOVE_MODES[mode]
+    def move_cursor(
+        self,
+        operation: gui.textcursor.MoveOperationStr,
+        mode: gui.textcursor.MoveModeStr = "move",
+    ):
+        op = gui.textcursor.MOVE_OPERATION[operation]
+        mode = gui.textcursor.MOVE_MODE[mode]
         self.moveCursor(op, mode)
 
     def append_text(self, text: str, newline: bool = True):

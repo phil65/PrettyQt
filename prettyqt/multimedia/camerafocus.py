@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtMultimedia
 
@@ -16,12 +16,16 @@ FOCUS_MODES = mappers.FlagMap(
     macro=QtMultimedia.QCameraFocus.MacroFocus,
 )
 
-FOCUS_POINT_MODES = bidict(
+FocusModeStr = Literal["manual", "hyperfocal", "infinity", "auto", "continuous", "macro"]
+
+FOCUS_POINT_MODE = bidict(
     auto=QtMultimedia.QCameraFocus.FocusPointAuto,
     center=QtMultimedia.QCameraFocus.FocusPointCenter,
     face_detection=QtMultimedia.QCameraFocus.FocusPointFaceDetection,
     custom=QtMultimedia.QCameraFocus.FocusPointCustom,
 )
+
+FocusPointModeStr = Literal["auto", "center", "face_detection", "custom"]
 
 QtMultimedia.QCameraFocus.__bases__ = (core.Object,)
 
@@ -33,11 +37,8 @@ class CameraFocus(core.Object):
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def set_focus_mode(self, mode: str):
+    def set_focus_mode(self, mode: FocusModeStr):
         """Set the focus mode.
-
-        Allowed values are "manual", "hyperfocal", "infinity", "auto", "continuous",
-                           "macro"
 
         Args:
             mode: focus mode
@@ -49,21 +50,16 @@ class CameraFocus(core.Object):
             raise InvalidParamError(mode, FOCUS_MODES)
         self.item.setFocusMode(FOCUS_MODES[mode])
 
-    def get_focus_mode(self) -> str:
+    def get_focus_mode(self) -> FocusModeStr:
         """Return current focus mode.
-
-        Possible values: "manual", "hyperfocal", "infinity", "auto", "continuous",
-                         "macro"
 
         Returns:
             focus mode
         """
         return FOCUS_MODES.inverse[self.item.focusMode()]
 
-    def set_focus_point_mode(self, mode: str):
+    def set_focus_point_mode(self, mode: FocusPointModeStr):
         """Set the focus mode.
-
-        Allowed values are "auto", "center", "face_detection", "custom"
 
         Args:
             mode: focus point mode
@@ -71,32 +67,30 @@ class CameraFocus(core.Object):
         Raises:
             InvalidParamError: focus point mode does not exist
         """
-        if mode not in FOCUS_POINT_MODES:
-            raise InvalidParamError(mode, FOCUS_POINT_MODES)
-        self.item.setFocusPointMode(FOCUS_POINT_MODES[mode])
+        if mode not in FOCUS_POINT_MODE:
+            raise InvalidParamError(mode, FOCUS_POINT_MODE)
+        self.item.setFocusPointMode(FOCUS_POINT_MODE[mode])
 
-    def get_focus_point_mode(self) -> str:
+    def get_focus_point_mode(self) -> FocusPointModeStr:
         """Return current focus point mode.
-
-        Possible values: "auto", "center", "face_detection", "custom"
 
         Returns:
             focus point mode
         """
-        return FOCUS_POINT_MODES.inverse[self.item.focusPointMode()]
+        return FOCUS_POINT_MODE.inverse[self.item.focusPointMode()]
 
     def get_custom_focus_point(self) -> core.PointF:
         return core.PointF(self.item.customFocusPoint())
 
-    def is_focus_mode_supported(self, mode: str) -> bool:
+    def is_focus_mode_supported(self, mode: FocusModeStr) -> bool:
         if mode not in FOCUS_MODES:
             raise InvalidParamError(mode, FOCUS_MODES)
         return self.item.isFocusModeSupported(FOCUS_MODES[mode])
 
-    def is_focus_point_mode_supported(self, mode: str) -> bool:
-        if mode not in FOCUS_POINT_MODES:
-            raise InvalidParamError(mode, FOCUS_POINT_MODES)
-        return self.item.isFocusPointModeSupported(FOCUS_POINT_MODES[mode])
+    def is_focus_point_mode_supported(self, mode: FocusPointModeStr) -> bool:
+        if mode not in FOCUS_POINT_MODE:
+            raise InvalidParamError(mode, FOCUS_POINT_MODE)
+        return self.item.isFocusPointModeSupported(FOCUS_POINT_MODE[mode])
 
     def get_focus_zones(self) -> List[multimedia.CameraFocusZone]:
         return [multimedia.CameraFocusZone(i) for i in self.item.focusZones()]

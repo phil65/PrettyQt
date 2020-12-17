@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Literal
 
 from qtpy import QtNetwork
 
@@ -16,6 +16,16 @@ CAPABILITIES = bidict(
     sctp_listening=QtNetwork.QNetworkProxy.SctpListeningCapability,
 )
 
+CapabilityStr = Literal[
+    "tunneling",
+    "listening",
+    "udp_tunneling",
+    "caching",
+    "host_name_lookup",
+    "sctp_tunneling",
+    "sctp_listening",
+]
+
 PROXY_TYPES = bidict(
     none=QtNetwork.QNetworkProxy.NoProxy,
     default=QtNetwork.QNetworkProxy.DefaultProxy,
@@ -25,27 +35,36 @@ PROXY_TYPES = bidict(
     ftp_caching=QtNetwork.QNetworkProxy.FtpCachingProxy,
 )
 
+ProxyTypeStr = Literal[
+    "none",
+    "default",
+    "socks5",
+    "http",
+    "http_caching",
+    "ftp_caching",
+]
+
 
 class NetworkProxy(QtNetwork.QNetworkProxy):
-    def get_capabilities(self) -> List[str]:
+    def get_capabilities(self) -> List[CapabilityStr]:
         return [k for k, v in CAPABILITIES.items() if v & self.capabilities()]
 
-    def set_capabilities(self, *capability: str):
+    def set_capabilities(self, *capability: CapabilityStr):
         for item in capability:
             if item not in CAPABILITIES:
                 raise InvalidParamError(item, CAPABILITIES)
         flags = helpers.merge_flags(capability, CAPABILITIES)
         self.setCapabilities(flags)
 
-    def get_header(self, name: str) -> str:
-        if name not in network.networkrequest.KNOWN_HEADERS:
-            raise InvalidParamError(name, network.networkrequest.KNOWN_HEADERS)
-        return self.header(network.networkrequest.KNOWN_HEADERS[name])
+    def get_header(self, name: network.networkrequest.KnownHeaderStr) -> str:
+        if name not in network.networkrequest.KNOWN_HEADER:
+            raise InvalidParamError(name, network.networkrequest.KNOWN_HEADER)
+        return self.header(network.networkrequest.KNOWN_HEADER[name])
 
-    def set_header(self, name: str, value: str):
-        if name not in network.networkrequest.KNOWN_HEADERS:
-            raise InvalidParamError(name, network.networkrequest.KNOWN_HEADERS)
-        self.setHeader(network.networkrequest.KNOWN_HEADERS[name], value)
+    def set_header(self, name: network.networkrequest.KnownHeaderStr, value: str):
+        if name not in network.networkrequest.KNOWN_HEADER:
+            raise InvalidParamError(name, network.networkrequest.KNOWN_HEADER)
+        self.setHeader(network.networkrequest.KNOWN_HEADER[name], value)
 
     def get_headers(self) -> Dict[str, str]:
         return {
@@ -57,11 +76,8 @@ class NetworkProxy(QtNetwork.QNetworkProxy):
         for k, v in headers.items():
             self.setRawHeader(k.encode(), v.encode())
 
-    def set_type(self, typ: str):
+    def set_type(self, typ: ProxyTypeStr):
         """Set proxy type.
-
-        Valid values: "none", "default", "socks5", "http", "http_caching",
-                      "ftp_caching"
 
         Args:
             typ: proxy type
@@ -73,11 +89,8 @@ class NetworkProxy(QtNetwork.QNetworkProxy):
             raise InvalidParamError(typ, PROXY_TYPES)
         self.setType(PROXY_TYPES[typ])
 
-    def get_type(self) -> str:
+    def get_type(self) -> ProxyTypeStr:
         """Get the proxy type.
-
-        Possible values: "none", "default", "socks5", "http", "http_caching",
-                         "ftp_caching"
 
         Returns:
             type

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import PYQT5, PYSIDE2
 
@@ -21,12 +21,16 @@ POSITIONING_METHODS = bidict(
     all=QGeoPositionInfoSource.AllPositioningMethods,
 )
 
+PositioningMethodStr = Literal["none", "satellite", "non_satellite", "all"]
+
 ERRORS = bidict(
     access_error=QtPositioning.QGeoPositionInfoSource.AccessError,
     closed_error=QtPositioning.QGeoPositionInfoSource.ClosedError,
     none=QtPositioning.QGeoPositionInfoSource.NoError,
     unknown_source=QtPositioning.QGeoPositionInfoSource.UnknownSourceError,
 )
+
+ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]
 
 QtPositioning.QGeoPositionInfoSource.__bases__ = (core.Object,)
 
@@ -45,20 +49,16 @@ class GeoPositionInfoSource(QtPositioning.QGeoPositionInfoSource):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
-    def get_error(self) -> str:
+    def get_error(self) -> ErrorStr:
         """Return error type.
-
-        possible values are "access_error" "closed_error", "none", "unkown_source"
 
         Returns:
             error type
         """
         return ERRORS.inverse[self.error()]
 
-    def set_preferred_positioning_methods(self, *methods: str):
+    def set_preferred_positioning_methods(self, *methods: PositioningMethodStr):
         """Set preferred positioning methods.
-
-        valid values are "none", "satellite", "non_satellite", "all"
 
         Args:
             methods: positioning methods to use
@@ -72,10 +72,8 @@ class GeoPositionInfoSource(QtPositioning.QGeoPositionInfoSource):
         flags = helpers.merge_flags(methods, POSITIONING_METHODS)
         self.setPreferredPositioningMethods(flags)
 
-    def get_preferred_positioning_methods(self) -> List[str]:
+    def get_preferred_positioning_methods(self) -> List[PositioningMethodStr]:
         """Return list of preferred positioning methods.
-
-        possible included values are "none", "satellite", "non_satellite", "all"
 
         Returns:
             list of preferred positioning methods
@@ -86,10 +84,8 @@ class GeoPositionInfoSource(QtPositioning.QGeoPositionInfoSource):
             if v & self.preferredPositioningMethods()
         ]
 
-    def get_supported_positioning_methods(self) -> List[str]:
+    def get_supported_positioning_methods(self) -> List[PositioningMethodStr]:
         """Return list of supported positioning methods.
-
-        possible included values are "none", "satellite", "non_satellite", "all"
 
         Returns:
             list of supported positioning methods

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Literal, Optional
 
 from qtpy import QtWidgets
 
@@ -10,6 +10,8 @@ TEXT_DIRECTIONS = bidict(
     top_to_bottom=QtWidgets.QProgressBar.TopToBottom,
     bottom_to_top=QtWidgets.QProgressBar.BottomToTop,
 )
+
+TextDirectionStr = Literal["top_to_bottom", "bottom_to_top"]
 
 
 QtWidgets.QProgressBar.__bases__ = (widgets.Widget,)
@@ -54,7 +56,7 @@ class ProgressBar(QtWidgets.QProgressBar):
             raise InvalidParamError(alignment, constants.ALIGNMENTS)
         self.setAlignment(constants.ALIGNMENTS[alignment])
 
-    def get_alignment(self) -> str:
+    def get_alignment(self) -> constants.AlignmentStr:
         """Return current alignment.
 
         Returns:
@@ -62,10 +64,8 @@ class ProgressBar(QtWidgets.QProgressBar):
         """
         return constants.ALIGNMENTS.inverse[self.alignment()]
 
-    def set_text_direction(self, text_direction: str):
+    def set_text_direction(self, text_direction: TextDirectionStr):
         """Set the text direction of the layout.
-
-        Allowed values are "top_to_bottom", "bottom_to_top"
 
         Args:
             text_direction: text direction for the layout
@@ -77,10 +77,8 @@ class ProgressBar(QtWidgets.QProgressBar):
             raise InvalidParamError(text_direction, TEXT_DIRECTIONS)
         self.setTextDirection(TEXT_DIRECTIONS[text_direction])
 
-    def get_text_direction(self) -> str:
+    def get_text_direction(self) -> TextDirectionStr:
         """Return current text direction.
-
-        Possible values are "top_to_bottom", "bottom_to_top"
 
         Returns:
             Text direction

@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Literal, Union
 
 from qtpy import QtCore, QtNetwork
 
@@ -6,7 +6,7 @@ from prettyqt import core, network
 from prettyqt.utils import InvalidParamError, bidict
 
 
-OPERATIONS = bidict(
+OPERATION = bidict(
     head=QtNetwork.QNetworkAccessManager.HeadOperation,
     get=QtNetwork.QNetworkAccessManager.GetOperation,
     put=QtNetwork.QNetworkAccessManager.PutOperation,
@@ -15,7 +15,7 @@ OPERATIONS = bidict(
     custom=QtNetwork.QNetworkAccessManager.CustomOperation,
 )
 
-REDIRECT_POLICIES = network.networkrequest.REDIRECT_POLICIES
+OperationStr = Literal["head", "get", "put", "post", "delete", "custom"]
 
 QtNetwork.QNetworkAccessManager.__bases__ = (core.Object,)
 
@@ -54,10 +54,8 @@ class NetworkAccessManager(QtNetwork.QNetworkAccessManager):
     # def delete(self, url):
     #     pass
 
-    def set_redirect_policy(self, policy: str):
+    def set_redirect_policy(self, policy: network.networkrequest.RedirectPolicyStr):
         """Set redirect policy.
-
-        Valid values: "manual", "no_less_safe", "same_origin", "user_verified"
 
         Args:
             policy: redirect policy
@@ -65,16 +63,14 @@ class NetworkAccessManager(QtNetwork.QNetworkAccessManager):
         Raises:
             InvalidParamError: redirect policy does not exist
         """
-        if policy not in REDIRECT_POLICIES:
-            raise InvalidParamError(policy, REDIRECT_POLICIES)
-        self.setRedirectPolicy(REDIRECT_POLICIES[policy])
+        if policy not in network.networkrequest.REDIRECT_POLICIES:
+            raise InvalidParamError(policy, network.networkrequest.REDIRECT_POLICIES)
+        self.setRedirectPolicy(network.networkrequest.REDIRECT_POLICIES[policy])
 
-    def get_redirect_policy(self) -> str:
+    def get_redirect_policy(self) -> network.networkrequest.RedirectPolicyStr:
         """Get the current redirect policy.
-
-        Possible values: "manual", "no_less_safe", "same_origin", "user_verified"
 
         Returns:
             redirect policy
         """
-        return REDIRECT_POLICIES.inverse[self.redirectPolicy()]
+        return network.networkrequest.REDIRECT_POLICIES.inverse[self.redirectPolicy()]

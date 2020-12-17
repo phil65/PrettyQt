@@ -1,5 +1,5 @@
 import pathlib
-from typing import Union
+from typing import Literal, Union
 
 from qtpy import QtMultimedia
 
@@ -13,12 +13,16 @@ STATES = bidict(
     paused=QtMultimedia.QMediaRecorder.PausedState,
 )
 
+StateStr = Literal["stopped", "recording", "paused"]
+
 ERRORS = bidict(
     none=QtMultimedia.QMediaRecorder.NoError,
     resource=QtMultimedia.QMediaRecorder.ResourceError,
     format=QtMultimedia.QMediaRecorder.FormatError,
     out_of_space=QtMultimedia.QMediaRecorder.OutOfSpaceError,
 )
+
+ErrorStr = Literal["none", "resource", "format", "out_of_space"]
 
 MEDIA_STATUS = bidict(
     unavailable=QtMultimedia.QMediaRecorder.UnavailableStatus,
@@ -31,12 +35,25 @@ MEDIA_STATUS = bidict(
     finalizing=QtMultimedia.QMediaRecorder.FinalizingStatus,
 )
 
+MediaStatusStr = Literal[
+    "unavailable",
+    "unloaded",
+    "loading",
+    "loaded",
+    "starting",
+    "recording",
+    "paused",
+    "finalizing",
+]
+
 AVAILABILITY_STATUS = bidict(
     available=QtMultimedia.QMultimedia.Available,
     service_missing=QtMultimedia.QMultimedia.ServiceMissing,
     resource_error=QtMultimedia.QMultimedia.ResourceError,
     busy=QtMultimedia.QMultimedia.Busy,
 )
+
+AvailabilityStatusStr = Literal["available", "service_missing", "resource_error", "busy"]
 
 
 QtMultimedia.QMediaRecorder.__bases__ = (core.Object, multimedia.MediaBindableInterface)
@@ -63,10 +80,8 @@ class MediaRecorder(QtMultimedia.QMediaRecorder):
     def get_audio_settings(self) -> multimedia.AudioEncoderSettings:
         return multimedia.AudioEncoderSettings(self.audioSettings())
 
-    def get_availability(self) -> str:
+    def get_availability(self) -> AvailabilityStatusStr:
         """Return availability status.
-
-        Possible values: "available", "service_missing", "resource_error", "busy"
 
         Returns:
             availability status

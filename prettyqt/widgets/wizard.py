@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator
+from typing import Iterator, Literal
 
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -19,6 +19,18 @@ WIZARD_BUTTON = bidict(
     custom_2=QtWidgets.QWizard.CustomButton2,
     custom_3=QtWidgets.QWizard.CustomButton3,
 )
+
+WizardButtonStr = Literal[
+    "back",
+    "next",
+    "commit",
+    "finish",
+    "cancel",
+    "help",
+    "custom_1",
+    "custom_2",
+    "custom_3",
+]
 
 WIZARD_OPTIONS = bidict(
     independent_pages=QtWidgets.QWizard.IndependentPages,
@@ -40,6 +52,26 @@ WIZARD_OPTIONS = bidict(
     no_cancel_button_on_last_page=QtWidgets.QWizard.NoCancelButtonOnLastPage,
 )
 
+WizardOptionStr = Literal[
+    "independent_pages",
+    "ignore_subtitles",
+    "extended_watermark_bitmap",
+    "no_default_button",
+    "no_back_button_on_start_page",
+    "no_back_button_on_last_page",
+    "disabled_back_button_on_last_page",
+    "next_button_on_last_page",
+    "finish_button_on_early_pages",
+    "no_cancel_button",
+    "cancel_button_on_left",
+    "help_button",
+    "help_button_on_right",
+    "custom_button_1",
+    "custom_button_2",
+    "custom_button_3",
+    "no_cancel_button_on_last_page",
+]
+
 WIZARD_PIXMAP = bidict(
     watermark=QtWidgets.QWizard.WatermarkPixmap,
     logo=QtWidgets.QWizard.LogoPixmap,
@@ -47,12 +79,16 @@ WIZARD_PIXMAP = bidict(
     background=QtWidgets.QWizard.BackgroundPixmap,
 )
 
+WizardPixmapStr = Literal["watermark", "logo", "banner", "background"]
+
 WIZARD_STYLE = bidict(
     classic=QtWidgets.QWizard.ClassicStyle,
     modern=QtWidgets.QWizard.ModernStyle,
     mac=QtWidgets.QWizard.MacStyle,
     aero=QtWidgets.QWizard.AeroStyle,
 )
+
+WizardStyleStr = Literal["classic", "modern", "mac", "aero"]
 
 TEXT_FORMATS = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
@@ -142,7 +178,7 @@ class Wizard(QtWidgets.QWizard):
             raise InvalidParamError(button_type, WIZARD_BUTTON)
         return self.button(WIZARD_BUTTON[button_type])
 
-    def set_button_text(self, button_type: str, value: str) -> str:
+    def set_button_text(self, button_type: WizardButtonStr, value: str) -> str:
         """Set text for given button type.
 
         Args:
@@ -154,7 +190,7 @@ class Wizard(QtWidgets.QWizard):
             raise InvalidParamError(button_type, WIZARD_BUTTON)
         return self.setButtonText(WIZARD_BUTTON[button_type], value)
 
-    def get_button_text(self, button_type: str) -> str:
+    def get_button_text(self, button_type: WizardButtonStr) -> str:
         """Return text for given button type.
 
         Args:
@@ -167,20 +203,18 @@ class Wizard(QtWidgets.QWizard):
             raise InvalidParamError(button_type, WIZARD_BUTTON)
         return self.buttonText(WIZARD_BUTTON[button_type])
 
-    def set_pixmap(self, typ: str, pixmap: QtGui.QPixmap):
+    def set_pixmap(self, typ: WizardPixmapStr, pixmap: QtGui.QPixmap):
         if typ not in WIZARD_PIXMAP:
             raise InvalidParamError(typ, WIZARD_PIXMAP)
         self.setPixmap(WIZARD_PIXMAP[typ], pixmap)
 
-    def get_pixmap(self, typ: str) -> gui.Pixmap:
+    def get_pixmap(self, typ: WizardPixmapStr) -> gui.Pixmap:
         if typ not in WIZARD_PIXMAP:
             raise InvalidParamError(typ, WIZARD_PIXMAP)
         return gui.Pixmap(self.pixmap(WIZARD_PIXMAP[typ]))
 
-    def set_wizard_style(self, style: str):
+    def set_wizard_style(self, style: WizardStyleStr):
         """Set the wizard style.
-
-        Allowed values are "classic", "modern", "mac", "aero"
 
         Args:
             style: wizard style
@@ -192,27 +226,17 @@ class Wizard(QtWidgets.QWizard):
             raise InvalidParamError(style, WIZARD_STYLE)
         self.setWizardStyle(WIZARD_STYLE[style])
 
-    def get_wizard_style(self) -> str:
+    def get_wizard_style(self) -> WizardStyleStr:
         """Return current wizard style.
-
-        Possible values are "classic", "modern", "mac", "aero"
 
         Returns:
             Wizard style
         """
         return WIZARD_STYLE.inverse[self.wizardStyle()]
 
-    def set_option(self, option: str, value: bool):
+    def set_option(self, option: WizardOptionStr, value: bool):
         """Set option to given value.
 
-        Allowed values: "independent_pages", "ignore_subtitles",
-                        "extended_watermark_bitmap", "no_default_button",
-                        "no_back_button_on_start_page", "no_back_button_on_last_page",
-                        "disabled_back_button_on_last_page", "next_button_on_last_page",
-                        "finish_button_on_early_pages", "no_cancel_button",
-                        "cancel_button_on_left", "help_button", "help_button_on_right",
-                        "custom_button_1", "custom_button_2", "custom_button_3",
-                        "no_cancel_button_on_last_page"
         Args:
             option: option to use
             value: value to set
@@ -224,17 +248,8 @@ class Wizard(QtWidgets.QWizard):
             raise InvalidParamError(option, WIZARD_OPTIONS)
         self.setOption(WIZARD_OPTIONS[option], value)
 
-    def get_option(self, option: str) -> bool:
+    def get_option(self, option: WizardOptionStr) -> bool:
         """Return the value assigned to option.
-
-        Possible values: "independent_pages", "ignore_subtitles",
-                         "extended_watermark_bitmap", "no_default_button",
-                         "no_back_button_on_start_page", "no_back_button_on_last_page",
-                         "disabled_back_button_on_last_page", "next_button_on_last_page",
-                         "finish_button_on_early_pages", "no_cancel_button",
-                         "cancel_button_on_left", "help_button", "help_button_on_right",
-                         "custom_button_1", "custom_button_2", "custom_button_3",
-                         "no_cancel_button_on_last_page"
 
         Args:
             option: option to get

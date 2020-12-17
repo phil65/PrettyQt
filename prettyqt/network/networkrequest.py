@@ -1,4 +1,4 @@
-from typing import Dict, Optional, Union
+from typing import Dict, Literal, Optional, Union
 
 from qtpy import QtCore, QtNetwork
 
@@ -6,7 +6,7 @@ from prettyqt import core
 from prettyqt.utils import InvalidParamError, bidict
 
 
-KNOWN_HEADERS = bidict(
+KNOWN_HEADER = bidict(
     content_disposition=QtNetwork.QNetworkRequest.ContentDispositionHeader,
     content_type=QtNetwork.QNetworkRequest.ContentTypeHeader,
     content_length=QtNetwork.QNetworkRequest.ContentLengthHeader,
@@ -22,11 +22,29 @@ KNOWN_HEADERS = bidict(
     server=QtNetwork.QNetworkRequest.ServerHeader,
 )
 
-PRIORITIES = bidict(
+KnownHeaderStr = Literal[
+    "content_disposition",
+    "content_type",
+    "content_length",
+    "location",
+    "last_modified",
+    "if_modified_since",
+    "etag",
+    "if_match",
+    "if_none_match",
+    "cookie",
+    "set_cooke",
+    "user_agent",
+    "server",
+]
+
+PRIORITY = bidict(
     high=QtNetwork.QNetworkRequest.HighPriority,
     normal=QtNetwork.QNetworkRequest.NormalPriority,
     low=QtNetwork.QNetworkRequest.LowPriority,
 )
+
+PriorityStr = Literal["high", "normal", "low"]
 
 REDIRECT_POLICIES = bidict(
     manual=QtNetwork.QNetworkRequest.ManualRedirectPolicy,
@@ -35,12 +53,18 @@ REDIRECT_POLICIES = bidict(
     user_verified=QtNetwork.QNetworkRequest.UserVerifiedRedirectPolicy,
 )
 
+RedirectPolicyStr = Literal["manual", "no_less_safe", "same_origin", "user_verified"]
+
 CACHE_LOAD_CONTROL = bidict(
     always_network=QtNetwork.QNetworkRequest.AlwaysNetwork,
     prefer_network=QtNetwork.QNetworkRequest.PreferNetwork,
     prefer_cache=QtNetwork.QNetworkRequest.PreferCache,
     always_cache=QtNetwork.QNetworkRequest.AlwaysCache,
 )
+
+CacheLoadControlStr = Literal[
+    "always_network", "prefer_network", "prefer_cache", "always_cache"
+]
 
 
 class NetworkRequest(QtNetwork.QNetworkRequest):
@@ -57,15 +81,15 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
     def __repr__(self):
         return f"{type(self).__name__}({self.get_url()})"
 
-    def set_header(self, name: str, value: str):
-        if name not in KNOWN_HEADERS:
-            raise InvalidParamError(name, KNOWN_HEADERS)
-        self.setHeader(KNOWN_HEADERS[name], value)
+    def set_header(self, name: KnownHeaderStr, value: str):
+        if name not in KNOWN_HEADER:
+            raise InvalidParamError(name, KNOWN_HEADER)
+        self.setHeader(KNOWN_HEADER[name], value)
 
-    def get_header(self, name: str) -> str:
-        if name not in KNOWN_HEADERS:
-            raise InvalidParamError(name, KNOWN_HEADERS)
-        return self.header(KNOWN_HEADERS[name])
+    def get_header(self, name: KnownHeaderStr) -> str:
+        if name not in KNOWN_HEADER:
+            raise InvalidParamError(name, KNOWN_HEADER)
+        return self.header(KNOWN_HEADER[name])
 
     def set_headers(self, headers: Dict[str, str]):
         for k, v in headers.items():
@@ -84,10 +108,8 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
     def get_url(self) -> core.Url:
         return core.Url(self.url())
 
-    def set_priority(self, priority: str):
+    def set_priority(self, priority: PriorityStr):
         """Set priority.
-
-        Valid values for priority: "high", "normal", "low"
 
         Args:
             priority: priority
@@ -95,16 +117,14 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
         Raises:
             InvalidParamError: priority does not exist
         """
-        if priority not in PRIORITIES:
-            raise InvalidParamError(priority, PRIORITIES)
-        self.setPriority(PRIORITIES[priority])
+        if priority not in PRIORITY:
+            raise InvalidParamError(priority, PRIORITY)
+        self.setPriority(PRIORITY[priority])
 
-    def get_priority(self) -> str:
+    def get_priority(self) -> PriorityStr:
         """Get the current priority.
-
-        Possible values: "high", "normal", "low"
 
         Returns:
             priority
         """
-        return PRIORITIES.inverse[self.priority()]
+        return PRIORITY.inverse[self.priority()]

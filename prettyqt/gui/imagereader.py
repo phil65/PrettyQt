@@ -74,16 +74,8 @@ class ImageReader(QtGui.QImageReader):
     def read_image(self) -> gui.Image:
         return gui.Image(self.read())
 
-    def supports_option(self, option: str) -> bool:
+    def supports_option(self, option: gui.imageiohandler.ImageOptionStr) -> bool:
         """Return whether the image handler supports given option.
-
-        Possible values: "size", "clip_rect", "scaled_size", "scaled_clip_rect",
-                         "description", "compression_ratio", "gamma", "quallity",
-                         "name", "subtype", "incremental_reading", "endianness",
-                         "animation", "background_color", "image_format",
-                         "supported_sub_types", "optimized_write",
-                         "progressive_scan_write", "image_transformation",
-                         "transformation_by_default"
 
         Args:
             option: option to check

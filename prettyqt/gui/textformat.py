@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt import constants, gui
@@ -13,6 +15,8 @@ FORMAT_TYPE = bidict(
     user=QtGui.QTextFormat.UserFormat,
 )
 
+FormatTypeStr = Literal["invalid", "block", "char", "list", "frame", "user"]
+
 OBJECT_TYPE = bidict(
     none=QtGui.QTextFormat.NoObject,
     image=QtGui.QTextFormat.ImageObject,
@@ -21,12 +25,16 @@ OBJECT_TYPE = bidict(
     user=QtGui.QTextFormat.UserObject,
 )
 
+ObjectTypeStr = Literal["none", "image", "table", "table_cell", "user"]
+
 PAGE_BREAK_FLAG = mappers.FlagMap(
     QtGui.QTextFormat.PageBreakFlags,
     auto=QtGui.QTextFormat.PageBreak_Auto,
     always_before=QtGui.QTextFormat.PageBreak_AlwaysBefore,
     always_after=QtGui.QTextFormat.PageBreak_AlwaysAfter,
 )
+
+PageBreakFlagStr = Literal["auto", "always_before", "always_after"]
 
 
 class TextFormat(QtGui.QTextFormat):

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Literal, Optional
 
 from qtpy import QtCore, QtWidgets
 
@@ -12,6 +12,8 @@ if core.VersionNumber.get_qt_version() >= (5, 14, 0):
         exclusive=QtWidgets.QActionGroup.ExclusionPolicy.Exclusive,
         exclusive_optional=QtWidgets.QActionGroup.ExclusionPolicy.ExclusiveOptional,
     )
+
+ExclusionPolicyStr = Literal["none", "exclusive", "exclusive_optional"]
 
 
 QtWidgets.QActionGroup.__bases__ = (core.Object,)
@@ -30,10 +32,8 @@ class ActionGroup(QtWidgets.QActionGroup):
     def serialize_fields(self):
         return dict(exclusion_policy=self.get_exclusion_policy())
 
-    def set_exclusion_policy(self, policy: Optional[str]):
+    def set_exclusion_policy(self, policy: Optional[ExclusionPolicyStr]):
         """Set exclusion policy to use.
-
-        Allowed values are "none", "exclusive", "exclusive_optional"
 
         Args:
             policy: exclusion policy to use
@@ -47,10 +47,8 @@ class ActionGroup(QtWidgets.QActionGroup):
             raise InvalidParamError(policy, POLICIES)
         self.setExclusionPolicy(POLICIES[policy])
 
-    def get_exclusion_policy(self) -> str:
+    def get_exclusion_policy(self) -> ExclusionPolicyStr:
         """Return current exclusion policy.
-
-        Possible values: "none", "exclusive", "exclusive_optional"
 
         Returns:
             exclusion policy

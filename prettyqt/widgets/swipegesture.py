@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtWidgets
 
 from prettyqt import widgets
@@ -12,24 +14,23 @@ SWIPE_DIRECTION = bidict(
     down=QtWidgets.QSwipeGesture.Down,
 )
 
+HorizontalDirectionStr = Literal["none", "left", "right"]
+VerticalDirectionStr = Literal["none", "up", "down"]
+
 QtWidgets.QSwipeGesture.__bases__ = (widgets.Gesture,)
 
 
 class SwipeGesture(QtWidgets.QSwipeGesture):
-    def get_horizontal_direction(self) -> str:
+    def get_horizontal_direction(self) -> HorizontalDirectionStr:
         """Return horizontal direction of the gesture.
-
-        Possible values: "none", "left, "right"
 
         Returns:
             horizontal direction
         """
         return SWIPE_DIRECTION.inverse[self.horizontalDirection()]
 
-    def get_vertical_direction(self) -> str:
+    def get_vertical_direction(self) -> VerticalDirectionStr:
         """Return vertical direction of the gesture.
-
-        Possible values: "none", "up, "down"
 
         Returns:
             vertical direction

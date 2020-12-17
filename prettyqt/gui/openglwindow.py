@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt import gui
@@ -10,6 +12,8 @@ UPDATE_BEHAVIOUR = bidict(
     partial_blend=QtGui.QOpenGLWindow.PartialUpdateBlend,
 )
 
+UpdateBehaviourStr = Literal["no_partial", "partial_blit", "partial_blend"]
+
 
 QtGui.QOpenGLWindow.__bases__ = (gui.PaintDeviceWindow,)
 
@@ -18,10 +22,8 @@ class OpenGLWindow(QtGui.QOpenGLWindow):
     def __bool__(self):
         return self.isValid()
 
-    def get_update_behaviour(self) -> str:
+    def get_update_behaviour(self) -> UpdateBehaviourStr:
         """Get the window update hehaviour.
-
-        Possible values: "no_partial", "partial_blit", "partial_blend"
 
         Returns:
             update behaviour

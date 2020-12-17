@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt.utils import InvalidParamError, bidict
@@ -18,12 +20,26 @@ METRICS = bidict(
     pixel_ratio_scaled=QtGui.QPaintDevice.PdmDevicePixelRatioScaled,
 )
 
+MetricStr = Literal[
+    "width",
+    "height",
+    "width_mm",
+    "height_mm",
+    "num_colors",
+    "depth",
+    "dpi_x",
+    "dpi_y",
+    "physical_dpi_x",
+    "physical_dpi_y",
+    "pixel_ratio",
+    "pixel_ratio_scaled",
+]
+
 
 class PaintDevice(QtGui.QPaintDevice):
-    def get_metric(self, metric: str) -> int:
+    def get_metric(self, metric: MetricStr) -> int:
         """Return metric information.
 
-        Possible values: "center", "on_value"
         Args:
             metric: metric information to get
 

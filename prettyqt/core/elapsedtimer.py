@@ -29,9 +29,6 @@ class ElapsedTimer(QtCore.QElapsedTimer):
     def get_clock_type(self) -> ClockTypeStr:
         """Return current clock type.
 
-        Possible values: "system_time", "monotonic_clock", "tick_counter",
-                         "mach_absolute_time", "performance_counter"
-
         Returns:
             clock type
         """

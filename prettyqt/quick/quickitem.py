@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtQuick
 
 from prettyqt import core, gui, qml
@@ -11,6 +13,14 @@ FLAGS = bidict(
     has_contents=QtQuick.QQuickItem.ItemHasContents,
     accepts_drops=QtQuick.QQuickItem.ItemAcceptsDrops,
 )
+
+FlagStr = Literal[
+    "clips_children_to_shape",
+    "accepts_input_method",
+    "is_focus_scope",
+    "has_contents",
+    "accepts_drops",
+]
 
 ITEM_CHANGE = bidict(
     child_added_change=QtQuick.QQuickItem.ItemChildAddedChange,
@@ -26,6 +36,20 @@ ITEM_CHANGE = bidict(
     enabled_has_changed=QtQuick.QQuickItem.ItemEnabledHasChanged,
 )
 
+ItemChangeStr = Literal[
+    "child_added_change",
+    "child_removed_change",
+    "item_scene_change",
+    "visible_has_changed",
+    "parent_has_changed",
+    "opacity_has_changed",
+    "active_focus_has_changed",
+    "rotation_has_changed",
+    "pixel_ratio_has_changed",
+    "anti_aliasing_has_changed",
+    "enabled_has_changed",
+]
+
 TRANSFORM_ORIGIN = bidict(
     top_left=QtQuick.QQuickItem.TopLeft,
     top=QtQuick.QQuickItem.Top,
@@ -38,6 +62,17 @@ TRANSFORM_ORIGIN = bidict(
     bottom_right=QtQuick.QQuickItem.BottomRight,
 )
 
+TransformOriginStr = Literal[
+    "top_left",
+    "top",
+    "top_right",
+    "left",
+    "center",
+    "right",
+    "bottom_left",
+    "bottom",
+    "bottom_right",
+]
 
 QtQuick.QQuickItem.__bases__ = (core.Object, qml.QmlParserStatus)
 
@@ -52,13 +87,10 @@ class QuickItem(QtQuick.QQuickItem):
     def get_flags(self):
         pass
 
-    def set_transform_origin(self, origin: str):
+    def set_transform_origin(self, origin: TransformOriginStr):
         """Set the origin point around which scale and rotation transform.
 
         The default is "center".
-
-        Allowed values are "top_left", "top", "top_right", "left", "center", "right",
-                           "bottom_left", "bottom", "bottom_right"
 
         Args:
             origin: transform origin to use
@@ -70,11 +102,8 @@ class QuickItem(QtQuick.QQuickItem):
             raise InvalidParamError(origin, TRANSFORM_ORIGIN)
         self.setTransformOrigin(TRANSFORM_ORIGIN[origin])
 
-    def get_transform_origin(self) -> str:
+    def get_transform_origin(self) -> TransformOriginStr:
         """Return the render type of text-like elements in Qt Quick.
-
-        Possible values: "top_left", "top", "top_right", "left", "center", "right",
-                         "bottom_left", "bottom", "bottom_right"
 
         Returns:
             transform origin

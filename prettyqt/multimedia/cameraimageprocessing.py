@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtMultimedia
 
 from prettyqt import core, multimedia
@@ -17,6 +19,19 @@ COLOR_FILTERS = bidict(
     vendor=QtMultimedia.QCameraImageProcessing.ColorFilterVendor,
 )
 
+ColorFilterStr = Literal[
+    "none",
+    "grayscale",
+    "negative",
+    "solarize",
+    "sepia",
+    "posterize",
+    "whiteboard",
+    "blackboard",
+    "aqua",
+    "vendor",
+]
+
 WHITE_BALANCE_MODE = bidict(
     auto=QtMultimedia.QCameraImageProcessing.WhiteBalanceAuto,
     manual=QtMultimedia.QCameraImageProcessing.WhiteBalanceManual,
@@ -30,6 +45,19 @@ WHITE_BALANCE_MODE = bidict(
     vendor=QtMultimedia.QCameraImageProcessing.WhiteBalanceVendor,
 )
 
+WhiteBalanceModeStr = Literal[
+    "auto",
+    "manual",
+    "sunlight",
+    "cloudy",
+    "shade",
+    "tungsten",
+    "fluorescent",
+    "flash",
+    "sunset",
+    "vendor",
+]
+
 QtMultimedia.QCameraImageProcessing.__bases__ = (core.Object,)
 
 
@@ -40,11 +68,8 @@ class CameraImageProcessing(core.Object):
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def set_color_filter(self, mode: str):
+    def set_color_filter(self, mode: ColorFilterStr):
         """Set the color filter.
-
-        Allowed values are "none", "grayscale", "negative", "solarize", "sepia",
-                           "posterize", "whiteboard", "blackboard", "aqua", "vendor"
 
         Args:
             mode: color filter
@@ -56,22 +81,16 @@ class CameraImageProcessing(core.Object):
             raise InvalidParamError(mode, COLOR_FILTERS)
         self.item.setColorFilter(COLOR_FILTERS[mode])
 
-    def get_color_filter(self) -> str:
+    def get_color_filter(self) -> ColorFilterStr:
         """Return current exposure mode.
-
-        Possible values: "none", "grayscale", "negative", "solarize", "sepia",
-                         "posterize", "whiteboard", "blackboard", "aqua", "vendor"
 
         Returns:
             color filter
         """
         return COLOR_FILTERS.inverse[self.item.colorFilter()]
 
-    def set_white_balance_mode(self, mode: str):
+    def set_white_balance_mode(self, mode: WhiteBalanceModeStr):
         """Set the white balance mode.
-
-        Allowed values are "auto", "manual", "sunlight", "cloudy", "shade", "tungsten",
-                           "fluorescent", "flash", "sunset", "vendor"
 
         Args:
             mode: white balance mode
@@ -83,23 +102,20 @@ class CameraImageProcessing(core.Object):
             raise InvalidParamError(mode, WHITE_BALANCE_MODE)
         self.item.setWhiteBalanceMode(WHITE_BALANCE_MODE[mode])
 
-    def get_white_balance_mode(self) -> str:
+    def get_white_balance_mode(self) -> WhiteBalanceModeStr:
         """Return current white balance mode.
-
-        Possible values: "auto", "manual", "sunlight", "cloudy", "shade", "tungsten",
-                         "fluorescent", "flash", "sunset", "vendor"
 
         Returns:
             white balance mode
         """
         return WHITE_BALANCE_MODE.inverse[self.item.whiteBalanceMode()]
 
-    def is_color_filter_supported(self, filter_: str) -> bool:
+    def is_color_filter_supported(self, filter_: ColorFilterStr) -> bool:
         if filter_ not in COLOR_FILTERS:
             raise InvalidParamError(filter_, COLOR_FILTERS)
         return self.item.isColorFilterSupported(COLOR_FILTERS[filter_])
 
-    def is_white_balance_mode_supported(self, mode: str) -> bool:
+    def is_white_balance_mode_supported(self, mode: WhiteBalanceModeStr) -> bool:
         if mode not in WHITE_BALANCE_MODE:
             raise InvalidParamError(mode, WHITE_BALANCE_MODE)
         return self.item.isWhiteBalanceModeSupported(WHITE_BALANCE_MODE[mode])

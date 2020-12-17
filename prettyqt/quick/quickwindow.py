@@ -1,4 +1,5 @@
 import contextlib
+from typing import Literal
 
 from qtpy import QtCore, QtGui, QtQuick
 
@@ -14,6 +15,14 @@ CREATE_TEXTURE_OPTION = bidict(
     is_opaque=QtQuick.QQuickWindow.TextureIsOpaque,
 )
 
+CreateTextureOptionStr = Literal[
+    "has_alpha_channel",
+    "has_mipmaps",
+    "owns_gl_texture",
+    "can_use_atlas",
+    "is_opaque",
+]
+
 RENDER_STAGE = bidict(
     before_synchronizing=QtQuick.QQuickWindow.BeforeSynchronizingStage,
     after_synchronizing=QtQuick.QQuickWindow.AfterSynchronizingStage,
@@ -23,10 +32,21 @@ RENDER_STAGE = bidict(
     no_stage=QtQuick.QQuickWindow.NoStage,
 )
 
+RenderStageStr = Literal[
+    "before_synchronizing",
+    "after_synchronizing",
+    "before_rendering",
+    "after_rendering",
+    "after_swap",
+    "no_stage",
+]
+
 TEXT_RENDER_TYPE = bidict(
     qt_text=QtQuick.QQuickWindow.QtTextRendering,
     native_text=QtQuick.QQuickWindow.NativeTextRendering,
 )
+
+TextRenderTypeStr = Literal["qt_text", "native_text"]
 
 
 QtQuick.QQuickWindow.__bases__ = (gui.Window,)
@@ -51,13 +71,11 @@ class QuickWindow(QtQuick.QQuickWindow):
         return core.Size(self.renderTargetSize())
 
     @staticmethod
-    def set_text_render_type(typ: str):
+    def set_text_render_type(typ: TextRenderTypeStr):
         """Set the default render type of text-like elements in Qt Quick.
 
         Note: setting the render type will only affect elements created afterwards;
         the render type of existing elements will not be modified.
-
-        Allowed values are "qt_text", "native_text"
 
         Args:
             typ: text render type to use
@@ -70,10 +88,8 @@ class QuickWindow(QtQuick.QQuickWindow):
         QuickWindow.setTextRenderType(TEXT_RENDER_TYPE[typ])
 
     @staticmethod
-    def get_text_render_type() -> str:
+    def get_text_render_type() -> TextRenderTypeStr:
         """Return the render type of text-like elements in Qt Quick.
-
-        Possible values: "qt_text", "native_text"
 
         Returns:
             text render type
@@ -86,7 +102,7 @@ class QuickWindow(QtQuick.QQuickWindow):
         yield self
         self.endExternalCommands()
 
-    def schedule_render_job(self, job: QtCore.QRunnable, render_stage: str):
+    def schedule_render_job(self, job: QtCore.QRunnable, render_stage: RenderStageStr):
         if render_stage not in RENDER_STAGE:
             raise InvalidParamError(render_stage, RENDER_STAGE)
         self.scheduleRenderJob(job, RENDER_STAGE[render_stage])

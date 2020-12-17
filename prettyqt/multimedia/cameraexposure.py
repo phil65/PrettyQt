@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtMultimedia
 
 from prettyqt import core, multimedia
@@ -29,6 +31,31 @@ EXPOSURE_MODES = bidict(
     mode_vendor=QtMultimedia.QCameraExposure.ExposureModeVendor,
 )
 
+ExposureModeStr = Literal[
+    "auto",
+    "manual",
+    "portrait",
+    "night",
+    "backlight",
+    "spotlight",
+    "sports",
+    "snow",
+    "beach",
+    "large_aperture",
+    "small_aperture",
+    "action",
+    "landscape",
+    "night_portrait",
+    "theatre",
+    "sunset",
+    "steady_photo",
+    "fireworks",
+    "party",
+    "candlelight",
+    "barcode",
+    "mode_vendor",
+]
+
 FLASH_MODES = mappers.FlagMap(
     QtMultimedia.QCameraExposure.FlashModes,
     auto=QtMultimedia.QCameraExposure.FlashAuto,
@@ -43,11 +70,26 @@ FLASH_MODES = mappers.FlagMap(
     manual=QtMultimedia.QCameraExposure.FlashManual,
 )
 
+FlashModeStr = Literal[
+    "auto",
+    "flash_off",
+    "flash_on",
+    "red_eye_reduction",
+    "fill",
+    "torch",
+    "video_light",
+    "sync_front_curtain",
+    "sync_rear_curtain",
+    "manual",
+]
+
 METERING_MODES = bidict(
     matrix=QtMultimedia.QCameraExposure.MeteringMatrix,
     average=QtMultimedia.QCameraExposure.MeteringAverage,
     spot=QtMultimedia.QCameraExposure.MeteringSpot,
 )
+
+MeteringModeStr = Literal["matrix", "average", "spot"]
 
 QtMultimedia.QCameraExposure.__bases__ = (core.Object,)
 
@@ -59,14 +101,8 @@ class CameraExposure(core.Object):
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def set_exposure_mode(self, mode: str):
+    def set_exposure_mode(self, mode: ExposureModeStr):
         """Set the exposure mode.
-
-        Allowed values are "auto", "manual", "portrait", "night", "backlight",
-                           "spotlight", "sports", "snow", "beach", "large_aperture",
-                           "small_aperture", "action", "landscape", "night_portrait",
-                           "theatre", "sunset", "steady_photo", "fireworks", "party",
-                           "candlelight", "barcode", "mode_vendor"
 
         Args:
             mode: exposure mode
@@ -78,26 +114,16 @@ class CameraExposure(core.Object):
             raise InvalidParamError(mode, EXPOSURE_MODES)
         self.item.setExposureMode(EXPOSURE_MODES[mode])
 
-    def get_exposure_mode(self) -> str:
+    def get_exposure_mode(self) -> ExposureModeStr:
         """Return current exposure mode.
-
-        Possible values: "auto", "manual", "portrait", "night", "backlight",
-                         "spotlight", "sports", "snow", "beach", "large_aperture",
-                         "small_aperture", "action", "landscape", "night_portrait",
-                         "theatre", "sunset", "steady_photo", "fireworks", "party",
-                         "candlelight", "barcode", "mode_vendor"
 
         Returns:
             exposure mode
         """
         return EXPOSURE_MODES.inverse[self.item.exposureMode()]
 
-    def set_flash_mode(self, mode: str):
+    def set_flash_mode(self, mode: FlashModeStr):
         """Set the flash mode.
-
-        Allowed values are "auto", "flash_on", "flash_off", "red_eye_reduction",
-                           "fill", "torch", "video_light", "sync_front_curtain",
-                           "sync_rear_curtain", "manual"
 
         Args:
             mode: flash mode
@@ -109,22 +135,16 @@ class CameraExposure(core.Object):
             raise InvalidParamError(mode, FLASH_MODES)
         self.item.setFlashMode(FLASH_MODES[mode])
 
-    def get_flash_mode(self) -> str:
+    def get_flash_mode(self) -> FlashModeStr:
         """Return current flash mode.
-
-        Possible values: "auto", "flash_on", "flash_off", "red_eye_reduction",
-                         "fill", "torch", "video_light", "sync_front_curtain",
-                         "sync_rear_curtain", "manual"
 
         Returns:
             flash mode
         """
         return FLASH_MODES.inverse[self.item.flashMode()]
 
-    def set_metering_mode(self, mode: str):
+    def set_metering_mode(self, mode: MeteringModeStr):
         """Set the metering mode.
-
-        Allowed values are "matrix", "average", "spot"
 
         Args:
             mode: metering mode
@@ -136,10 +156,8 @@ class CameraExposure(core.Object):
             raise InvalidParamError(mode, METERING_MODES)
         self.item.setMeteringMode(METERING_MODES[mode])
 
-    def get_metering_mode(self) -> str:
+    def get_metering_mode(self) -> MeteringModeStr:
         """Return current metering mode.
-
-        Possible values: "matrix", "average", "spot"
 
         Returns:
             metering mode
@@ -149,17 +167,17 @@ class CameraExposure(core.Object):
     def get_spot_metering_point(self) -> core.PointF:
         return core.PointF(self.item.spotMeteringPoint())
 
-    def is_exposure_mode_supported(self, mode: str) -> bool:
+    def is_exposure_mode_supported(self, mode: ExposureModeStr) -> bool:
         if mode not in EXPOSURE_MODES:
             raise InvalidParamError(mode, EXPOSURE_MODES)
         return self.item.isExposureModeSupported(EXPOSURE_MODES[mode])
 
-    def is_flash_mode_supported(self, mode: str) -> bool:
+    def is_flash_mode_supported(self, mode: FlashModeStr) -> bool:
         if mode not in FLASH_MODES:
             raise InvalidParamError(mode, FLASH_MODES)
         return self.item.isFlashModeSupported(FLASH_MODES[mode])
 
-    def is_metering_mode_supported(self, mode: str) -> bool:
+    def is_metering_mode_supported(self, mode: MeteringModeStr) -> bool:
         if mode not in METERING_MODES:
             raise InvalidParamError(mode, METERING_MODES)
         return self.item.isMeteringModeSupported(METERING_MODES[mode])

@@ -1,4 +1,4 @@
-from typing import Dict, Union
+from typing import Dict, Literal, Union
 
 from qtpy import PYQT5, PYSIDE2, QtCore
 
@@ -16,6 +16,8 @@ METHODS = bidict(
     get=QtWebEngineCore.QWebEngineHttpRequest.Get,
     post=QtWebEngineCore.QWebEngineHttpRequest.Post,
 )
+
+MethodStr = Literal["get", "post"]
 
 
 class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
@@ -39,10 +41,8 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
     def get_post_data(self) -> str:
         return bytes(self.postData()).decode()
 
-    def set_method(self, method: str):
+    def set_method(self, method: MethodStr):
         """Set method this WebEngine request is using.
-
-        Valid values for method: "post", "get"
 
         Args:
             method: method
@@ -54,10 +54,8 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
             raise InvalidParamError(method, METHODS)
         self.setMethod(METHODS[method])
 
-    def get_method(self) -> str:
+    def get_method(self) -> MethodStr:
         """Get the method this WebEngine request is using.
-
-        Possible values: "post", "get"
 
         Returns:
             method

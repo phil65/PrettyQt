@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt import gui
@@ -9,6 +11,8 @@ POSITIONS = bidict(
     flow_left=QtGui.QTextFrameFormat.FloatLeft,
     flow_right=QtGui.QTextFrameFormat.FloatRight,
 )
+
+PositionStr = Literal["in_flow", "flow_right", "flow_left"]
 
 BORDER_STYLES = bidict(
     none=QtGui.QTextFrameFormat.BorderStyle_None,
@@ -23,6 +27,20 @@ BORDER_STYLES = bidict(
     inset=QtGui.QTextFrameFormat.BorderStyle_Inset,
     outset=QtGui.QTextFrameFormat.BorderStyle_Outset,
 )
+
+BorderStyleStr = Literal[
+    "none",
+    "dotted",
+    "dashed",
+    "solid",
+    "double",
+    "dot_dash",
+    "dot_dot_dash",
+    "groove",
+    "ridge",
+    "inset",
+    "outset",
+]
 
 
 QtGui.QTextFrameFormat.__bases__ = (gui.TextFormat,)
@@ -40,11 +58,8 @@ class TextFrameFormat(QtGui.QTextFrameFormat):
     def get_border_brush(self) -> gui.Brush:
         return gui.Brush(self.borderBrush())
 
-    def set_border_style(self, style: str):
+    def set_border_style(self, style: BorderStyleStr):
         """Set border style.
-
-        Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                      "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Args:
             style: border style
@@ -56,21 +71,16 @@ class TextFrameFormat(QtGui.QTextFrameFormat):
             raise InvalidParamError(style, BORDER_STYLES)
         self.setBorderStyle(BORDER_STYLES[style])
 
-    def get_border_style(self) -> str:
+    def get_border_style(self) -> BorderStyleStr:
         """Get the current border style.
-
-        Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                             "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Returns:
             border style
         """
         return BORDER_STYLES.inverse[self.borderStyle()]
 
-    def set_page_break_policy(self, policy: str):
+    def set_page_break_policy(self, policy: gui.textformat.PageBreakFlagStr):
         """Set page break policy.
-
-        Valid values: "auto", "always_before", "always_after"
 
         Args:
             policy: page break policy
@@ -82,20 +92,16 @@ class TextFrameFormat(QtGui.QTextFrameFormat):
             raise InvalidParamError(policy, gui.textformat.PAGE_BREAK_FLAG)
         self.setPageBreakPolicy(gui.textformat.PAGE_BREAK_FLAG[policy])
 
-    def get_page_break_policy(self) -> str:
+    def get_page_break_policy(self) -> gui.textformat.PageBreakFlagStr:
         """Get the current page break policy.
-
-        Possible values: "auto", "always_before", "always_after"
 
         Returns:
             page break policy
         """
         return gui.textformat.PAGE_BREAK_FLAG.inverse[self.pageBreakPolicy()]
 
-    def set_position(self, position: str):
+    def set_position(self, position: PositionStr):
         """Set position.
-
-        Valid values: "in_flow", "flow_left", "flow_right"
 
         Args:
             position: position
@@ -107,10 +113,8 @@ class TextFrameFormat(QtGui.QTextFrameFormat):
             raise InvalidParamError(position, POSITIONS)
         self.setPosition(POSITIONS[position])
 
-    def get_position(self) -> str:
+    def get_position(self) -> PositionStr:
         """Get the current position.
-
-        Possible values: "in_flow", "flow_left", "flow_right"
 
         Returns:
             position

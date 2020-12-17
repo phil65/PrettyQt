@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt import core
@@ -11,6 +13,8 @@ RESTART_HINT = bidict(
     never=QtGui.QSessionManager.RestartNever,
 )
 
+RestartHintStr = Literal["if_running", "anyway", "immediately", "never"]
+
 
 QtGui.QSessionManager.__bases__ = (core.Object,)
 
@@ -22,10 +26,8 @@ class SessionManager:
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def set_restart_hint(self, style: str):
+    def set_restart_hint(self, style: RestartHintStr):
         """Set the restart hint.
-
-        Allowed values are "if_running", "anyway", "immediatly", "never"
 
         Args:
             style: restart hint
@@ -37,10 +39,8 @@ class SessionManager:
             raise InvalidParamError(style, RESTART_HINT)
         self.setRestartHint(RESTART_HINT[style])
 
-    def get_restart_hint(self) -> str:
+    def get_restart_hint(self) -> RestartHintStr:
         """Return current restart hint.
-
-        Possible values: "if_running", "anyway", "immediatly", "never"
 
         Returns:
             restart hint

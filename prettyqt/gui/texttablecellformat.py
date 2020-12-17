@@ -11,11 +11,8 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
     def get_bottom_border_brush(self) -> gui.Brush:
         return gui.Brush(self.bottomBorderBrush())
 
-    def set_border_style(self, style: str):
+    def set_border_style(self, style: gui.textframeformat.BorderStyleStr):
         """Set border style.
-
-        Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                      "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Args:
             style: border style
@@ -27,11 +24,8 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
             raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
         self.setBorderStyle(gui.textframeformat.BORDER_STYLES[style])
 
-    def set_bottom_border_style(self, style: str):
+    def set_bottom_border_style(self, style: gui.textframeformat.BorderStyleStr):
         """Set bottom border style.
-
-        Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                      "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Args:
             style: bottom border style
@@ -43,11 +37,8 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
             raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
         self.setBottomBorderStyle(gui.textframeformat.BORDER_STYLES[style])
 
-    def get_bottom_border_style(self) -> str:
+    def get_bottom_border_style(self) -> gui.textframeformat.BorderStyleStr:
         """Get the current bottom border style.
-
-        Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                         "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Returns:
             bottom border style
@@ -57,11 +48,8 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
     def get_left_border_brush(self) -> gui.Brush:
         return gui.Brush(self.leftBorderBrush())
 
-    def set_left_border_style(self, style: str):
+    def set_left_border_style(self, style: gui.textframeformat.BorderStyleStr):
         """Set left border style.
-
-        Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                      "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Args:
             style: left border style
@@ -73,11 +61,8 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
             raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
         self.setLeftBorderStyle(gui.textframeformat.BORDER_STYLES[style])
 
-    def get_left_border_style(self) -> str:
+    def get_left_border_style(self) -> gui.textframeformat.BorderStyleStr:
         """Get the current left border style.
-
-        Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                         "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Returns:
             left border style
@@ -87,11 +72,8 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
     def get_right_border_brush(self) -> gui.Brush:
         return gui.Brush(self.rightBorderBrush())
 
-    def set_right_border_style(self, style: str):
+    def set_right_border_style(self, style: gui.textframeformat.BorderStyleStr):
         """Set right border style.
-
-        Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                      "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Args:
             style: right border style
@@ -103,11 +85,8 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
             raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
         self.setRightBorderStyle(gui.textframeformat.BORDER_STYLES[style])
 
-    def get_right_border_style(self) -> str:
+    def get_right_border_style(self) -> gui.textframeformat.BorderStyleStr:
         """Get the current right border style.
-
-        Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                         "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Returns:
             right border style
@@ -117,11 +96,8 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
     def get_top_border_brush(self) -> gui.Brush:
         return gui.Brush(self.topBorderBrush())
 
-    def set_top_border_style(self, style: str):
+    def set_top_border_style(self, style: gui.textframeformat.BorderStyleStr):
         """Set top border style.
-
-        Valid values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                      "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Args:
             style: top border style
@@ -133,11 +109,8 @@ class TextTableCellFormat(QtGui.QTextTableCellFormat):
             raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
         self.setTopBorderStyle(gui.textframeformat.BORDER_STYLES[style])
 
-    def get_top_border_style(self) -> str:
+    def get_top_border_style(self) -> gui.textframeformat.BorderStyleStr:
         """Get the current top border style.
-
-        Possible values: "none", "dotted", "dashed", "solid", "double", "dot_dash",
-                         "dot_dot_dash", "groove", "ridge", "inset", "outset"
 
         Returns:
             top border style
