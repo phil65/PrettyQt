@@ -30,7 +30,7 @@ class HeaderView(QtWidgets.QHeaderView):
         orientation: Union[constants.OrientationStr, int],
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        if orientation in constants.ORIENTATION:
+        if isinstance(orientation, str) and orientation in constants.ORIENTATION:
             orientation = constants.ORIENTATION[orientation]
         super().__init__(orientation, parent=parent)
         self.setSectionsMovable(True)

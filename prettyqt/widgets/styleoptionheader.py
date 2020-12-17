@@ -21,7 +21,7 @@ SELECTED_POSITION = bidict(
 )
 
 SORT_INDICATOR = bidict(
-    none=QtWidgets.QStyleOptionHeader.SortIndicator(0),
+    none=QtWidgets.QStyleOptionHeader.SortIndicator(0),  # type: ignore
     sort_up=QtWidgets.QStyleOptionHeader.SortUp,
     sort_down=QtWidgets.QStyleOptionHeader.SortDown,
 )

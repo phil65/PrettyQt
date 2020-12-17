@@ -40,7 +40,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         layout.addStretch(1)
 
         # set a property that will be used for the mask
-        editor.setProperty("offMask", gui.Region(editor.rect()))
+        editor.set_property("offMask", gui.Region(editor.rect()))
         editor.installEventFilter(self)
         return editor
 
@@ -79,7 +79,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         editor.setGeometry(rect)
         # create a new mask based on the option rectangle, then apply it
         mask = gui.Region(0, 0, option.rect.width(), option.rect.height())
-        editor.setProperty("offMask", mask)
+        editor.set_property("offMask", mask)
         editor.setMask(mask)
 
     def setEditorData(self, editor: QtWidgets.QWidget, index: QtCore.QModelIndex):

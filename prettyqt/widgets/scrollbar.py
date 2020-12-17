@@ -17,7 +17,7 @@ class ScrollBar(QtWidgets.QScrollBar):
         orientation: Union[int, constants.OrientationStr] = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        if orientation in constants.ORIENTATION:
+        if isinstance(orientation, str) and orientation in constants.ORIENTATION:
             orientation = constants.ORIENTATION[orientation]
         super().__init__(orientation, parent)
         self.valueChanged.connect(self.on_value_change)

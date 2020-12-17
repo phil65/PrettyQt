@@ -12,7 +12,7 @@ POSITION = bidict(
 )
 
 VIEW_ITEM_FEATURE = bidict(
-    none=QtWidgets.QStyleOptionViewItem.ViewItemFeature(0),
+    none=QtWidgets.QStyleOptionViewItem.ViewItemFeature(0),  # type: ignore
     wrap_text=QtWidgets.QStyleOptionViewItem.WrapText,
     alternate=QtWidgets.QStyleOptionViewItem.Alternate,
     has_check_indicator=QtWidgets.QStyleOptionViewItem.HasCheckIndicator,

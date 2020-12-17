@@ -22,14 +22,14 @@ class LabeledSlider(widgets.Widget):
         if not isinstance(labels, Sequence):
             raise ValueError("<labels> must be a sequence.")
         self.levels = list(enumerate(labels))
-        self.layout = widgets.BoxLayout(orientation, self)
+        self.set_layout(orientation)
 
         # gives some space to print labels
         self.left_margin = 10
         self.top_margin = 10
         self.right_margin = 10
         self.bottom_margin = 10
-        self.layout.set_margin(10)
+        self.box.set_margin(10)
 
         self.sl = widgets.Slider(orientation)
         self.sl.value_changed.connect(self.value_changed)
@@ -44,7 +44,7 @@ class LabeledSlider(widgets.Widget):
         self.sl.setTickInterval(1)
         self.sl.setSingleStep(1)
 
-        self.layout.add(self.sl)
+        self.box.add(self.sl)
 
     def paintEvent(self, e):
 
@@ -82,10 +82,10 @@ class LabeledSlider(widgets.Widget):
                     if left <= 0:
                         self.left_margin = rect.width() // 2 - x_loc
                     self.bottom_margin = max(self.bottom_margin, rect.height())
-                    self.layout.adjust_margins()
+                    self.box.adjust_margins()
                 if v == self.sl.maximum() and rect.width() // 2 >= self.right_margin:
                     self.right_margin = rect.width() // 2
-                    self.layout.adjust_margins()
+                    self.box.adjust_margins()
             else:
                 y_loc = widgets.Style.sliderPositionFromValue(
                     self.sl.minimum(), self.sl.maximum(), v, available, upsideDown=True
@@ -97,11 +97,11 @@ class LabeledSlider(widgets.Widget):
                 left = self.left_margin - rect.width()
                 if left <= 0:
                     self.left_margin = rect.width() + 2
-                    self.layout.adjust_margins()
+                    self.box.adjust_margins()
             painter.drawText(left, bottom, v_str)
 
     def adjust_margins(self):
-        self.layout.setContentsMargins(
+        self.box.setContentsMargins(
             self.left_margin,
             self.top_margin,
             self.right_margin,

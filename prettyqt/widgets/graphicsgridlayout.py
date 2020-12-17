@@ -1,4 +1,4 @@
-from typing import Optional, Tuple, Union
+from typing import Iterable, Optional, Tuple, Union
 
 from qtpy import QtWidgets
 
@@ -13,7 +13,10 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
     def __getitem__(
         self, idx: Union[Tuple[int, int], int]
     ) -> Optional[QtWidgets.QGraphicsLayoutItem]:
-        return self.itemAt(*idx)
+        if isinstance(idx, tuple):
+            return self.itemAt(*idx)
+        else:
+            return self.itemAt(idx)
 
     def __setitem__(
         self,
@@ -30,7 +33,7 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
     def serialize_fields(self):
         items = []
         positions = []
-        for row in self.rowCount():
+        for row in range(self.rowCount()):
             for col in self.columnCount():
                 item = self.itemAt(row, col)
                 if item is not None:
@@ -49,10 +52,15 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
     def __iter__(self):
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
-    def __add__(self, other):
-        if isinstance(other, (tuple, list)):
+    def __add__(
+        self,
+        other: Union[
+            Iterable[QtWidgets.QGraphicsLayoutItem], QtWidgets.QGraphicsLayoutItem
+        ],
+    ):
+        if isinstance(other, Iterable):
             for i, control in enumerate(other):
-                self[self.rowCount(), i] = other
+                self[self.rowCount(), i] = control
         else:
             self[self.rowCount(), 0 : self.columnCount() - 1] = other
         return self

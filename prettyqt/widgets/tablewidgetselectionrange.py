@@ -10,7 +10,9 @@ class TableWidgetSelectionRange(QtWidgets.QTableWidgetSelectionRange):
             f"{self.bottomRow()}, {self.rightColumn()})"
         )
 
-    def __eq__(self, other: QtWidgets.QTableWidgetSelectionRange):
+    def __eq__(self, other: object):
+        if not isinstance(other, TableWidgetSelectionRange):
+            return False
         return (
             self.topRow() == other.topRow()
             and self.bottomRow() == other.bottomRow()

@@ -113,3 +113,8 @@ class Object(QtCore.QObject):
                 if name is None or node.objectName() == name:
                     return node
         return None
+
+    def set_property(self, name: Union[str, bytes], value):
+        if isinstance(name, str):
+            name = name.encode()
+        self.setProperty(name)

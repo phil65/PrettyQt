@@ -174,17 +174,17 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             self.setWindowFlag(QtCore.Qt.Window, window)
 
     def set_attribute(
-        self, attribute: constants.WindowAttributeStr, state: bool = True
+        self, attribute: constants.WidgetAttributeStr, state: bool = True
     ) -> None:
-        if attribute not in constants.WINDOW_ATTRIBUTES:
-            raise InvalidParamError(attribute, constants.WINDOW_ATTRIBUTES)
-        self.setAttribute(constants.WINDOW_ATTRIBUTES[attribute], state)
+        if attribute not in constants.WIDGET_ATTRIBUTE:
+            raise InvalidParamError(attribute, constants.WIDGET_ATTRIBUTE)
+        self.setAttribute(constants.WIDGET_ATTRIBUTE[attribute], state)
 
-    def set_attributes(self, **kwargs: Dict[constants.WindowAttributeStr, bool]) -> None:
-        for attribute, state in kwargs.items():
-            if attribute not in constants.WINDOW_ATTRIBUTES:
-                raise InvalidParamError(attribute, constants.WINDOW_ATTRIBUTES)
-            self.setAttribute(constants.WINDOW_ATTRIBUTES[attribute], state)
+    def set_attributes(self, **kwargs: bool) -> None:
+        for attr, state in kwargs.items():
+            if attr not in constants.WIDGET_ATTRIBUTE:
+                raise InvalidParamError(attr, constants.WIDGET_ATTRIBUTE)
+            self.setAttribute(constants.WIDGET_ATTRIBUTE[attr], state)  # type: ignore
 
     def set_modality(self, modality: constants.ModalityStr) -> None:
         """Set modality for the dialog.

@@ -91,7 +91,7 @@ class Timeline(widgets.Widget):
         scale = self.get_scale()
         with qp.paint_on(self):
             qp.set_color(self.text_color)
-            qp.setFont(self.font)
+            qp.setFont(self.text_font)
             qp.use_antialiasing()
             while w <= self.width():
                 time_string = self.get_time_string(w * scale)
@@ -231,8 +231,8 @@ class Timeline(widgets.Widget):
         color = colors.get_color(color)
         self.text_color = color
 
-    def set_text_font(self, font: gui.Font):
-        self.font = font
+    def set_text_font(self, font: QtGui.QFont):
+        self.text_font = font
 
 
 if __name__ == "__main__":

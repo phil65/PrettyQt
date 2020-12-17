@@ -113,14 +113,13 @@ class MdiArea(QtWidgets.QMdiArea):
     def set_background(
         self,
         brush_or_color: Union[QtGui.QBrush, colors.ColorType],
-        pattern: str = "solid",
+        pattern: constants.PatternStr = "solid",
     ):
         if isinstance(brush_or_color, QtGui.QBrush):
             brush = brush_or_color
         else:
-            pattern = constants.PATTERN[pattern]
             color = colors.get_color(brush_or_color)
-            brush = gui.Brush(color, pattern)
+            brush = gui.Brush(color, constants.PATTERN[pattern])
         self.setBackground(brush)
 
     def get_background(self) -> gui.Brush:

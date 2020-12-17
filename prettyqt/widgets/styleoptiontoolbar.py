@@ -5,7 +5,7 @@ from prettyqt.utils import bidict
 
 
 TOOLBAR_FEATURE = bidict(
-    none=QtWidgets.QStyleOptionToolBar.ToolBarFeature(0),
+    none=QtWidgets.QStyleOptionToolBar.ToolBarFeature(0),  # type: ignore
     movable=QtWidgets.QStyleOptionToolBar.Movable,
 )
 

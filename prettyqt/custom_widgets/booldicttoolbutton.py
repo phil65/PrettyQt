@@ -24,7 +24,7 @@ class BoolDictToolButton(widgets.ToolButton):
         if dct:
             self.set_dict(dct)
 
-    def __getitem__(self, key: str) -> bool:
+    def __getitem__(self, key: str) -> bool:  # type: ignore
         menu = self.menu()
         return menu[key].isChecked()
 

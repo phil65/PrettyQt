@@ -168,8 +168,9 @@ class MainWindow(QtWidgets.QMainWindow):
         dockwidget: QtWidgets.QDockWidget,
         position: constants.DockPositionStr = "left",
     ):
-        position = constants.DOCK_POSITION[position]
-        self.addDockWidget(QtCore.Qt.DockWidgetArea(position), dockwidget)
+        self.addDockWidget(
+            QtCore.Qt.DockWidgetArea(constants.DOCK_POSITION[position]), dockwidget
+        )
 
     def remove_dockwidgets(self, dockwidgets: Sequence[QtWidgets.QDockWidget]):
         for i in dockwidgets:

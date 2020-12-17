@@ -157,17 +157,17 @@ VerticalAlignmentStr = Literal[
     "baseline",
 ]
 
-ORIENTATION = bidict(horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical)
-
 OrientationStr = Literal["horizontal", "vertical"]
+ORIENTATION: bidict[OrientationStr, QtCore.Qt.Orientation] = bidict(
+    horizontal=QtCore.Qt.Horizontal, vertical=QtCore.Qt.Vertical
+)
 
-STATE = bidict(
+StateStr = Literal["unchecked", "partial", "checked"]
+STATE: bidict[StateStr, QtCore.Qt.CheckState] = bidict(
     unchecked=QtCore.Qt.Unchecked,
     partial=QtCore.Qt.PartiallyChecked,
     checked=QtCore.Qt.Checked,
 )
-
-StateStr = Literal["unchecked", "partial", "checked"]
 
 MATCH_FLAGS = dict(
     exact=QtCore.Qt.MatchExactly,
@@ -182,6 +182,7 @@ MatchFlagStr = Literal[
     "exact", "containts", "starts_with", "ends_with", "wildcard", "regex"
 ]
 
+FilterModeStr = Literal["starts_with", "contains", "ends_with"]
 FILTER_MODES = mappers.FlagMap(
     QtCore.Qt.MatchFlags,
     starts_with=QtCore.Qt.MatchStartsWith,
@@ -189,9 +190,8 @@ FILTER_MODES = mappers.FlagMap(
     ends_with=QtCore.Qt.MatchEndsWith,
 )
 
-FilterModeStr = Literal["starts_with", "contains", "ends_with"]
-
-DROP_ACTION = bidict(
+DropActionStr = Literal["copy", "move", "link", "action_mask", "ignore", "target_move"]
+DROP_ACTION: bidict[DropActionStr, int] = bidict(
     copy=QtCore.Qt.CopyAction,
     move=QtCore.Qt.MoveAction,
     link=QtCore.Qt.LinkAction,
@@ -200,18 +200,16 @@ DROP_ACTION = bidict(
     target_move=QtCore.Qt.TargetMoveAction,
 )
 
-DropActionStr = Literal["copy", "move", "link", "action_mask", "ignore", "target_move"]
-
-DOCK_POSITION = bidict(
+DockPositionStr = Literal["top", "bottom", "left", "right"]
+DOCK_POSITION: bidict[DockPositionStr, int] = bidict(
     top=QtCore.Qt.TopDockWidgetArea,
     bottom=QtCore.Qt.BottomDockWidgetArea,
     left=QtCore.Qt.LeftDockWidgetArea,
     right=QtCore.Qt.RightDockWidgetArea,
 )
 
-DockPositionStr = Literal["top", "bottom", "left", "right"]
-
-DOCK_POSITIONS = bidict(
+DockPositionsStr = Literal["top", "bottom", "left", "right", "all"]
+DOCK_POSITIONS: bidict[DockPositionsStr, QtCore.Qt.DockPosition] = bidict(
     top=QtCore.Qt.TopDockWidgetArea,
     bottom=QtCore.Qt.BottomDockWidgetArea,
     left=QtCore.Qt.LeftDockWidgetArea,
@@ -219,9 +217,8 @@ DOCK_POSITIONS = bidict(
     all=QtCore.Qt.AllDockWidgetAreas,
 )
 
-DockPositionsStr = Literal["top", "bottom", "left", "right", "all"]
-
-TOOLBAR_AREA = bidict(
+ToolbarAreaStr = Literal["top", "bottom", "left", "right", "all", "none"]
+TOOLBAR_AREA: bidict[ToolbarAreaStr, int] = bidict(
     left=QtCore.Qt.LeftToolBarArea,
     right=QtCore.Qt.RightToolBarArea,
     top=QtCore.Qt.TopToolBarArea,
@@ -230,18 +227,16 @@ TOOLBAR_AREA = bidict(
     none=QtCore.Qt.NoToolBarArea,
 )
 
-ToolbarAreaStr = Literal["top", "bottom", "left", "right", "all", "none"]
-
-TOOLBUTTON_STYLE = bidict(
+ToolButtonStyleStr = Literal["icon", "text", "text_beside_icon", "text_below_icon"]
+TOOLBUTTON_STYLE: bidict[ToolButtonStyleStr, QtCore.Qt.ToolButtonStyle] = bidict(
     icon=QtCore.Qt.ToolButtonIconOnly,
     text=QtCore.Qt.ToolButtonTextOnly,
     text_beside_icon=QtCore.Qt.ToolButtonTextBesideIcon,
     text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon,
 )
 
-ToolButtonStyleStr = Literal["icon", "text", "text_beside_icon", "text_below_icon"]
-
-ARROW_TYPE = bidict(
+ArrowTypeStr = Literal["none", "up", "down", "left", "right"]
+ARROW_TYPE: bidict[ArrowTypeStr, QtCore.Qt.ArrowType] = bidict(
     none=QtCore.Qt.NoArrow,
     up=QtCore.Qt.UpArrow,
     down=QtCore.Qt.DownArrow,
@@ -249,40 +244,11 @@ ARROW_TYPE = bidict(
     right=QtCore.Qt.RightArrow,
 )
 
-ArrowTypeStr = Literal["none", "up", "down", "left", "right"]
-
-EVENT_PRIORITY = bidict(
+EventPriorityStr = Literal["high", "normal", "low"]
+EVENT_PRIORITY: bidict[EventPriorityStr, int] = bidict(
     high=QtCore.Qt.HighEventPriority,
     normal=QtCore.Qt.NormalEventPriority,
     low=QtCore.Qt.LowEventPriority,
-)
-
-EventPriorityStr = Literal["high", "normal", "low"]
-
-CURSOR_SHAPE = bidict(
-    arrow=QtCore.Qt.ArrowCursor,
-    uparrow=QtCore.Qt.UpArrowCursor,
-    cross=QtCore.Qt.CrossCursor,
-    wait=QtCore.Qt.WaitCursor,
-    caret=QtCore.Qt.IBeamCursor,
-    size_vertical=QtCore.Qt.SizeVerCursor,
-    size_horizonal=QtCore.Qt.SizeHorCursor,
-    size_topright=QtCore.Qt.SizeBDiagCursor,
-    size_topleft=QtCore.Qt.SizeFDiagCursor,
-    size_all=QtCore.Qt.SizeAllCursor,
-    blank=QtCore.Qt.BlankCursor,
-    split_vertical=QtCore.Qt.SplitVCursor,
-    split_horizontal=QtCore.Qt.SplitHCursor,
-    pointing_hand=QtCore.Qt.PointingHandCursor,
-    forbidden=QtCore.Qt.ForbiddenCursor,
-    open_hand=QtCore.Qt.OpenHandCursor,
-    closed_hand=QtCore.Qt.ClosedHandCursor,
-    whats_this=QtCore.Qt.WhatsThisCursor,
-    busy=QtCore.Qt.BusyCursor,
-    drag_move=QtCore.Qt.DragMoveCursor,
-    drag_copy=QtCore.Qt.DragCopyCursor,
-    drag_link=QtCore.Qt.DragLinkCursor,
-    bitmap=QtCore.Qt.BitmapCursor,
 )
 
 CursorShapeStr = Literal[
@@ -310,44 +276,58 @@ CursorShapeStr = Literal[
     "drag_link",
     "bitmap",
 ]
+CURSOR_SHAPE: bidict[CursorShapeStr, QtCore.Qt.CursorShape] = bidict(
+    arrow=QtCore.Qt.ArrowCursor,
+    uparrow=QtCore.Qt.UpArrowCursor,
+    cross=QtCore.Qt.CrossCursor,
+    wait=QtCore.Qt.WaitCursor,
+    caret=QtCore.Qt.IBeamCursor,
+    size_vertical=QtCore.Qt.SizeVerCursor,
+    size_horizonal=QtCore.Qt.SizeHorCursor,
+    size_topright=QtCore.Qt.SizeBDiagCursor,
+    size_topleft=QtCore.Qt.SizeFDiagCursor,
+    size_all=QtCore.Qt.SizeAllCursor,
+    blank=QtCore.Qt.BlankCursor,
+    split_vertical=QtCore.Qt.SplitVCursor,
+    split_horizontal=QtCore.Qt.SplitHCursor,
+    pointing_hand=QtCore.Qt.PointingHandCursor,
+    forbidden=QtCore.Qt.ForbiddenCursor,
+    open_hand=QtCore.Qt.OpenHandCursor,
+    closed_hand=QtCore.Qt.ClosedHandCursor,
+    whats_this=QtCore.Qt.WhatsThisCursor,
+    busy=QtCore.Qt.BusyCursor,
+    drag_move=QtCore.Qt.DragMoveCursor,
+    drag_copy=QtCore.Qt.DragCopyCursor,
+    drag_link=QtCore.Qt.DragLinkCursor,
+    bitmap=QtCore.Qt.BitmapCursor,
+)
 
-LAYOUT_DIRECTION = bidict(
+LayoutDirectionStr = Literal["left_to_right", "right_to_left", "auto"]
+LAYOUT_DIRECTION: bidict[LayoutDirectionStr, int] = bidict(
     left_to_right=QtCore.Qt.LeftToRight,
     right_to_left=QtCore.Qt.RightToLeft,
     auto=QtCore.Qt.LayoutDirectionAuto,
 )
 
-LayoutDirectionStr = Literal["left_to_right", "right_to_left", "auto"]
-
-APPLICATION_STATES = bidict(
+ApplicationStateStr = Literal["suspended", "hidden", "inactive", "active"]
+APPLICATION_STATES: bidict[ApplicationStateStr, int] = bidict(
     suspended=QtCore.Qt.ApplicationSuspended,
     hidden=QtCore.Qt.ApplicationHidden,
     inactive=QtCore.Qt.ApplicationInactive,
     active=QtCore.Qt.ApplicationActive,
 )
 
-ApplicationStateStr = Literal["suspended", "hidden", "inactive", "active"]
-
-
-HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY = bidict(
+HighDpiScaleFactorRoundingPolicyStr = Literal[
+    "round", "ceil", "floor", "round_prefer_floor", "pass_through"
+]
+HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY: bidict[
+    HighDpiScaleFactorRoundingPolicyStr, int
+] = bidict(
     round=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.Round,
     ceil=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.Ceil,
     floor=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.Floor,
     round_prefer_floor=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.RoundPreferFloor,
     pass_through=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.PassThrough,
-)
-
-HighDpiScaleFactorRoundingPolicyStr = Literal[
-    "round", "ceil", "floor", "round_prefer_floor", "pass_through"
-]
-
-UI_EFFECTS = bidict(
-    animate_menu=QtCore.Qt.UI_AnimateMenu,
-    fade_menu=QtCore.Qt.UI_FadeMenu,
-    animate_combo=QtCore.Qt.UI_AnimateCombo,
-    animate_tooltip=QtCore.Qt.UI_AnimateTooltip,
-    fade_tooltip=QtCore.Qt.UI_FadeTooltip,
-    animate_toolbox=QtCore.Qt.UI_AnimateToolBox,
 )
 
 UiEffectStr = Literal[
@@ -358,13 +338,13 @@ UiEffectStr = Literal[
     "fade_tooltip",
     "animate_toolbox",
 ]
-
-NAVIGATION_MODES = bidict(
-    none=QtCore.Qt.NavigationModeNone,
-    keypad_tab_order=QtCore.Qt.NavigationModeKeypadTabOrder,
-    keypad_directional=QtCore.Qt.NavigationModeKeypadDirectional,
-    cursor_auto=QtCore.Qt.NavigationModeCursorAuto,
-    cursor_force_visible=QtCore.Qt.NavigationModeCursorForceVisible,
+UI_EFFECTS: bidict[UiEffectStr, int] = bidict(
+    animate_menu=QtCore.Qt.UI_AnimateMenu,
+    fade_menu=QtCore.Qt.UI_FadeMenu,
+    animate_combo=QtCore.Qt.UI_AnimateCombo,
+    animate_tooltip=QtCore.Qt.UI_AnimateTooltip,
+    fade_tooltip=QtCore.Qt.UI_FadeTooltip,
+    animate_toolbox=QtCore.Qt.UI_AnimateToolBox,
 )
 
 NavigationModeStr = Literal[
@@ -374,12 +354,12 @@ NavigationModeStr = Literal[
     "cursor_auto",
     "cursor_force_visible",
 ]
-
-ITEM_SELECTION_MODE = bidict(
-    contains_shape=QtCore.Qt.ContainsItemShape,
-    intersects_shape=QtCore.Qt.IntersectsItemShape,
-    contains_bounding_rect=QtCore.Qt.ContainsItemBoundingRect,
-    intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
+NAVIGATION_MODES: bidict[NavigationModeStr, int] = bidict(
+    none=QtCore.Qt.NavigationModeNone,
+    keypad_tab_order=QtCore.Qt.NavigationModeKeypadTabOrder,
+    keypad_directional=QtCore.Qt.NavigationModeKeypadDirectional,
+    cursor_auto=QtCore.Qt.NavigationModeCursorAuto,
+    cursor_force_visible=QtCore.Qt.NavigationModeCursorForceVisible,
 )
 
 ItemSelectionModeStr = Literal[
@@ -388,8 +368,17 @@ ItemSelectionModeStr = Literal[
     "contains_bounding_rect",
     "intersects_bounding_rect",
 ]
+ITEM_SELECTION_MODE: bidict[ItemSelectionModeStr, int] = bidict(
+    contains_shape=QtCore.Qt.ContainsItemShape,
+    intersects_shape=QtCore.Qt.IntersectsItemShape,
+    contains_bounding_rect=QtCore.Qt.ContainsItemBoundingRect,
+    intersects_bounding_rect=QtCore.Qt.IntersectsItemBoundingRect,
+)
 
-FOCUS_REASONS = bidict(
+FocusReasonStr = Literal[
+    "mouse", "tab", "backtab", "active_window", "popup", "shortcut", "menu_bar", "other"
+]
+FOCUS_REASONS: bidict[FocusReasonStr, int] = bidict(
     mouse=QtCore.Qt.MouseFocusReason,
     tab=QtCore.Qt.TabFocusReason,
     backtab=QtCore.Qt.BacktabFocusReason,
@@ -400,20 +389,18 @@ FOCUS_REASONS = bidict(
     other=QtCore.Qt.OtherFocusReason,
 )
 
-FocusReasonStr = Literal[
-    "mouse", "tab", "backtab", "active_window", "popup", "shortcut", "menu_bar", "other"
-]
-
-ELIDE_MODE = bidict(
+ElideModeStr = Literal["left", "right", "middle", "none"]
+ELIDE_MODE: bidict[ElideModeStr, int] = bidict(
     left=QtCore.Qt.ElideLeft,
     right=QtCore.Qt.ElideRight,
     middle=QtCore.Qt.ElideMiddle,
     none=QtCore.Qt.ElideNone,
 )
 
-ElideModeStr = Literal["left", "right", "middle", "none"]
-
-PEN_STYLE = bidict(
+PenStyleStr = Literal[
+    "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot", "custom_dash"
+]
+PEN_STYLE: bidict[PenStyleStr, int] = bidict(
     none=QtCore.Qt.NoPen,
     solid=QtCore.Qt.SolidLine,
     dash=QtCore.Qt.DashLine,
@@ -423,45 +410,17 @@ PEN_STYLE = bidict(
     custom_dash=QtCore.Qt.CustomDashLine,
 )
 
-PenStyleStr = Literal[
-    "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot", "custom_dash"
-]
-
-CAP_STYLE = bidict(
+CapStyleStr = Literal["flat", "square", "round"]
+CAP_STYLE: bidict[CapStyleStr, int] = bidict(
     flat=QtCore.Qt.FlatCap, square=QtCore.Qt.SquareCap, round=QtCore.Qt.RoundCap
 )
 
-CapStyleStr = Literal["flat", "square", "round"]
-
-JOIN_STYLE = bidict(
+JoinStyleStr = Literal["miter", "bevel", "round" "svg_miter"]
+JOIN_STYLE: bidict[JoinStyleStr, int] = bidict(
     miter=QtCore.Qt.MiterJoin,
     bevel=QtCore.Qt.BevelJoin,
     round=QtCore.Qt.RoundJoin,
     svg_miter=QtCore.Qt.SvgMiterJoin,
-)
-
-JoinStyleStr = Literal["miter", "bevel", "round" "svg_miter"]
-
-PATTERN = bidict(
-    none=QtCore.Qt.NoBrush,
-    solid=QtCore.Qt.SolidPattern,
-    dense_1=QtCore.Qt.Dense1Pattern,
-    dense_2=QtCore.Qt.Dense2Pattern,
-    dense_3=QtCore.Qt.Dense3Pattern,
-    dense_4=QtCore.Qt.Dense4Pattern,
-    dense_5=QtCore.Qt.Dense5Pattern,
-    dense_6=QtCore.Qt.Dense6Pattern,
-    dense_7=QtCore.Qt.Dense7Pattern,
-    horizontal=QtCore.Qt.HorPattern,
-    vertical=QtCore.Qt.VerPattern,
-    cross=QtCore.Qt.CrossPattern,
-    backward_diagonal=QtCore.Qt.BDiagPattern,
-    forward_diagonal=QtCore.Qt.FDiagPattern,
-    crossing_diagonal=QtCore.Qt.DiagCrossPattern,
-    linear_gradient=QtCore.Qt.LinearGradientPattern,
-    conical_gradient=QtCore.Qt.ConicalGradientPattern,
-    radial_gradient=QtCore.Qt.RadialGradientPattern,
-    texture=QtCore.Qt.TexturePattern,
 )
 
 PatternStr = Literal[
@@ -486,24 +445,45 @@ PatternStr = Literal[
     "texture",
 ]
 
-CLIP_OPERATION = bidict(
+PATTERN: bidict[PatternStr, int] = bidict(
+    none=QtCore.Qt.NoBrush,
+    solid=QtCore.Qt.SolidPattern,
+    dense_1=QtCore.Qt.Dense1Pattern,
+    dense_2=QtCore.Qt.Dense2Pattern,
+    dense_3=QtCore.Qt.Dense3Pattern,
+    dense_4=QtCore.Qt.Dense4Pattern,
+    dense_5=QtCore.Qt.Dense5Pattern,
+    dense_6=QtCore.Qt.Dense6Pattern,
+    dense_7=QtCore.Qt.Dense7Pattern,
+    horizontal=QtCore.Qt.HorPattern,
+    vertical=QtCore.Qt.VerPattern,
+    cross=QtCore.Qt.CrossPattern,
+    backward_diagonal=QtCore.Qt.BDiagPattern,
+    forward_diagonal=QtCore.Qt.FDiagPattern,
+    crossing_diagonal=QtCore.Qt.DiagCrossPattern,
+    linear_gradient=QtCore.Qt.LinearGradientPattern,
+    conical_gradient=QtCore.Qt.ConicalGradientPattern,
+    radial_gradient=QtCore.Qt.RadialGradientPattern,
+    texture=QtCore.Qt.TexturePattern,
+)
+
+ClipOperationStr = Literal["none", "replace", "intersect"]
+CLIP_OPERATION: bidict[ClipOperationStr, QtCore.Qt.ClipOperation] = bidict(
     none=QtCore.Qt.NoClip,
     replace=QtCore.Qt.ReplaceClip,
     intersect=QtCore.Qt.IntersectClip,
 )
 
-ClipOperationStr = Literal["none", "replace", "intersect"]
-
-CONTEXT = bidict(
+ContextStr = Literal["widget", "widget_with_children", "window", "application"]
+CONTEXT: bidict[ContextStr, QtCore.Qt.ShortcutContext] = bidict(
     widget=QtCore.Qt.WidgetShortcut,
     widget_with_children=QtCore.Qt.WidgetWithChildrenShortcut,
     window=QtCore.Qt.WindowShortcut,
     application=QtCore.Qt.ApplicationShortcut,
 )
 
-ContextStr = Literal["widget", "widget_with_children", "window", "application"]
-
-GESTURE_TYPE = bidict(
+GestureTypeStr = Literal["tap", "tap_and_hold", "pan", "pinch", "swipe", "custom"]
+GESTURE_TYPE: bidict[GestureTypeStr, QtCore.Qt.GestureType] = bidict(
     tap=QtCore.Qt.TapGesture,
     tap_and_hold=QtCore.Qt.TapAndHoldGesture,
     pan=QtCore.Qt.PanGesture,
@@ -512,9 +492,8 @@ GESTURE_TYPE = bidict(
     custom=QtCore.Qt.CustomGesture,
 )
 
-GestureTypeStr = Literal["tap", "tap_and_hold", "pan", "pinch", "swipe", "custom"]
-
-GESTURE_STATE = bidict(
+GestureStateStr = Literal["none", "started", "updated", "finished", "canceled"]
+GESTURE_STATE: bidict[GestureStateStr, QtCore.Qt.GestureState] = bidict(
     none=0,  # QtCore.Qt.NoGesture,
     started=QtCore.Qt.GestureStarted,
     updated=QtCore.Qt.GestureUpdated,
@@ -522,17 +501,15 @@ GESTURE_STATE = bidict(
     canceled=QtCore.Qt.GestureCanceled,
 )
 
-GestureStateStr = Literal["none", "started", "updated", "finished", "canceled"]
-
-SCROLLBAR_POLICY = bidict(
+ScrollBarPolicyStr = Literal["always_on", "always_off", "as_needed"]
+SCROLLBAR_POLICY: bidict[ScrollBarPolicyStr, QtCore.Qt.ScrollBarPolicy] = bidict(
     always_on=QtCore.Qt.ScrollBarAlwaysOn,
     always_off=QtCore.Qt.ScrollBarAlwaysOff,
     as_needed=QtCore.Qt.ScrollBarAsNeeded,
 )
 
-ScrollBarPolicyStr = Literal["always_on", "always_off", "as_needed"]
-
-CONTEXT_POLICY = bidict(
+ContextPolicyStr = Literal["none", "prevent", "default", "actions", "custom"]
+CONTEXT_POLICY: bidict[ContextPolicyStr, QtCore.Qt.ContextMenuPolicy] = bidict(
     none=QtCore.Qt.NoContextMenu,
     prevent=QtCore.Qt.PreventContextMenu,
     default=QtCore.Qt.DefaultContextMenu,
@@ -541,17 +518,15 @@ CONTEXT_POLICY = bidict(
     # showhide_menu="showhide_menu",
 )
 
-ContextPolicyStr = Literal["none", "prevent", "default", "actions", "custom"]
-
-MODALITY = bidict(
+ModalityStr = Literal["window", "application", "none"]
+MODALITY: bidict[ModalityStr, QtCore.Qt.WindowModality] = bidict(
     window=QtCore.Qt.WindowModal,
     application=QtCore.Qt.ApplicationModal,
     none=QtCore.Qt.NonModal,
 )
 
-ModalityStr = Literal["window", "application", "none"]
-
-FOCUS_POLICY = bidict(
+FocusPolicyStr = Literal["tab", "click", "strong", "wheel", "none"]
+FOCUS_POLICY: bidict[FocusPolicyStr, QtCore.Qt.FocusPolicy] = bidict(
     tab=QtCore.Qt.TabFocus,
     click=QtCore.Qt.ClickFocus,
     strong=QtCore.Qt.StrongFocus,
@@ -559,9 +534,11 @@ FOCUS_POLICY = bidict(
     none=QtCore.Qt.NoFocus,
 )
 
-FocusPolicyStr = Literal["tab", "click", "strong", "wheel", "none"]
+WindowFlagStr = Literal[
+    "frameless", "popup", "stay_on_top", "tool", "window_title", "customize_window"
+]
 
-WINDOW_FLAGS = bidict(
+WINDOW_FLAGS: bidict[WindowFlagStr, int] = bidict(
     frameless=QtCore.Qt.FramelessWindowHint,
     popup=QtCore.Qt.Popup,
     stay_on_top=QtCore.Qt.WindowStaysOnTopHint,
@@ -570,17 +547,7 @@ WINDOW_FLAGS = bidict(
     customize_window=QtCore.Qt.CustomizeWindowHint,
 )
 
-WindowFlagStr = Literal[
-    "frameless", "popup", "stay_on_top", "tool", "window_title", "customize_window"
-]
-
-WINDOW_ATTRIBUTES = bidict(
-    native_window=QtCore.Qt.WA_NativeWindow,
-    no_native_ancestors=QtCore.Qt.WA_DontCreateNativeAncestors,
-)
-
-WindowAttributeStr = Literal["native_window", "no_native_ancestors"]
-
+WindowStateStr = Literal["none", "minimized", "maximized", "fullscreen", "active"]
 WINDOW_STATES = mappers.FlagMap(
     QtCore.Qt.WindowStates,
     none=QtCore.Qt.WindowNoState,
@@ -590,36 +557,35 @@ WINDOW_STATES = mappers.FlagMap(
     active=QtCore.Qt.WindowActive,
 )
 
-WindowStateStr = Literal["none", "minimized", "maximized", "fullscreen", "active"]
-
-FILL_RULE = bidict(odd_even=QtCore.Qt.OddEvenFill, winding=QtCore.Qt.WindingFill)
-
 FillRuleStr = Literal["odd_even", "winding"]
+FILL_RULE: bidict[FillRuleStr, QtCore.Qt.FillRule] = bidict(
+    odd_even=QtCore.Qt.OddEvenFill, winding=QtCore.Qt.WindingFill
+)
 
-TIMER_TYPE = bidict(
+TimerTypeStr = Literal["precise", "coarse", "very_coarse"]
+TIMER_TYPE: bidict[TimerTypeStr, int] = bidict(
     precise=QtCore.Qt.PreciseTimer,
     coarse=QtCore.Qt.CoarseTimer,
     very_coarse=QtCore.Qt.VeryCoarseTimer,
 )
 
-TimerTypeStr = Literal["precise", "coarse", "very_coarse"]
-
-CURSOR_MOVE_STYLE = bidict(
+CursorMoveStyleStr = Literal["logical", "visual"]
+CURSOR_MOVE_STYLE: bidict[CursorMoveStyleStr, int] = bidict(
     logical=QtCore.Qt.LogicalMoveStyle, visual=QtCore.Qt.VisualMoveStyle
 )
 
-CursorMoveStyleStr = Literal["logical", "visual"]
-
-CORNER = bidict(
+CornerStr = Literal["top_left", "top_right", "bottom_left", "bottom_right"]
+CORNER: bidict[CornerStr, int] = bidict(
     top_left=QtCore.Qt.TopLeftCorner,
     top_right=QtCore.Qt.TopRightCorner,
     bottom_left=QtCore.Qt.BottomLeftCorner,
     bottom_right=QtCore.Qt.BottomRightCorner,
 )
 
-CornerStr = Literal["top_left", "top_right", "bottom_left", "bottom_right"]
-
-SCREEN_ORIENTATION = bidict(
+ScreenOrientationStr = Literal[
+    "primary", "landscape", "portrait", "inverted_landscape", "inverted_portrait"
+]
+SCREEN_ORIENTATION: bidict[ScreenOrientationStr, int] = bidict(
     primary=QtCore.Qt.PrimaryOrientation,
     landscape=QtCore.Qt.LandscapeOrientation,
     portrait=QtCore.Qt.PortraitOrientation,
@@ -627,36 +593,203 @@ SCREEN_ORIENTATION = bidict(
     inverted_portrait=QtCore.Qt.InvertedPortraitOrientation,
 )
 
-ScreenOrientationStr = Literal[
-    "primary", "landscape", "portrait", "inverted_landscape", "inverted_portrait"
-]
-
-ASPECT_RATIO_MODE = bidict(
+AspectRatioModeStr = Literal["ignore", "keep", "keep_by_expanding"]
+ASPECT_RATIO_MODE: bidict[AspectRatioModeStr, int] = bidict(
     ignore=QtCore.Qt.IgnoreAspectRatio,
     keep=QtCore.Qt.KeepAspectRatio,
     keep_by_expanding=QtCore.Qt.KeepAspectRatioByExpanding,
 )
 
-AspectRatioModeStr = Literal["ignore", "keep", "keep_by_expanding"]
-
-DATE_FORMAT = bidict(
+DateFormatStr = Literal["text", "iso", "iso_with_ms", "rfc_2822"]
+DATE_FORMAT: bidict[DateFormatStr, int] = bidict(
     text=QtCore.Qt.TextDate,
     iso=QtCore.Qt.ISODate,
     iso_with_ms=QtCore.Qt.ISODateWithMs,
     rfc_2822=QtCore.Qt.RFC2822Date,
 )
 
-DateFormatStr = Literal["text", "iso", "iso_with_ms", "rfc_2822"]
-
-TIME_SPEC = bidict(
+TimeSpecStr = Literal["local_time", "utc", "offset_from_utc", "timezone"]
+TIME_SPEC: bidict[TimeSpecStr, int] = bidict(
     local_time=QtCore.Qt.LocalTime,
     utc=QtCore.Qt.UTC,
     offset_from_utc=QtCore.Qt.OffsetFromUTC,
     timezone=QtCore.Qt.TimeZone,
 )
 
-TimeSpecStr = Literal["local_time", "utc", "offset_from_utc", "timezone"]
-
-AXIS = bidict(x=QtCore.Qt.XAxis, y=QtCore.Qt.YAxis, z=QtCore.Qt.ZAxis)
-
 AxisStr = Literal["x", "y", "z"]
+AXIS: bidict[AxisStr, int] = bidict(
+    x=QtCore.Qt.XAxis, y=QtCore.Qt.YAxis, z=QtCore.Qt.ZAxis
+)
+
+WidgetAttributeStr = Literal[
+    "accept_drops",
+    "always_show_tooltips",
+    "contents_propagated",
+    "custom_whats_this",
+    "delete_on_close",
+    "disabled",
+    "dont_show_on_screen",
+    "force_disabled",
+    "force_updates_disabled",
+    "group_leader",
+    "hover",
+    "input_method_enabled",
+    "keyboard_focus_change",
+    "key_compression",
+    "layout_on_entire_rect",
+    "layout_uses_widget_rect",
+    "mac_no_click_through",
+    "mac_opaque_size_grip",
+    "mac_show_focus_rect",
+    "mac_normal_size",
+    "mac_small_size",
+    "mac_mini_size",
+    "mac_variable_size",
+    "mac_brushed_metal",
+    "mapped",
+    "mouse_no_mask",
+    "mouse_tracking",
+    "moved",
+    "windows_use_direct_3d",
+    "no_background",
+    "no_child_events_for_parent",
+    "no_child_events_from_children",
+    "no_mouse_replay",
+    "no_mouse_propagation",
+    "transparent_for_mouse_events",
+    "no_system_background",
+    "opaque_paint_event",
+    "outside_ws_range",
+    "paint_on_screen",
+    "paint_unclipped",
+    "pending_move_event",
+    "pending_resize_egent",
+    "quit_on_close",
+    "resized",
+    "right_to_left",
+    "set_cursor",
+    "set_font",
+    "set_palette",
+    "set_style",
+    "show_modal",
+    "static_contents",
+    "style_sheet",
+    "style_sheet_target",
+    "tablet_tracking",
+    "translucent_background",
+    "under_mouse",
+    "updates_disabled",
+    "window_modified",
+    "window_propagation",
+    "mac_always_show_tool_window",
+    "set_locale",
+    "styled_background",
+    "show_without_activating",
+    "native_window",
+    "dont_create_native_ancestors",
+    "x11_net_wm_window_type_desktop",
+    "x11_net_wm_window_type_dock",
+    "x11_net_wm_window_type_toolbar",
+    "x11_net_wm_window_type_menu",
+    "x11_net_wm_window_type_utility",
+    "x11_net_wm_window_type_splash",
+    "x11_net_wm_window_type_dialog",
+    "x11_net_wm_window_type_dropdown_menu",
+    "x11_net_wm_window_type_popup_menu",
+    "x11_net_wm_window_type_tooltip",
+    "x11_net_wm_window_type_notification",
+    "x11_net_wm_window_type_combo",
+    "x11_net_wm_window_type_dnd",
+    "mac_framework_scaled",
+    "accept_touch_events",
+    "touch_pad_single_touch_events",
+    "x11_do_not_accept_focus",
+    "always_stack_on_top",
+    "contents_margins_respects_safe_area",
+]
+WIDGET_ATTRIBUTE: bidict[WidgetAttributeStr, QtCore.Qt.WidgetFlag] = bidict(
+    accept_drops=QtCore.Qt.WA_AcceptDrops,
+    always_show_tooltips=QtCore.Qt.WA_AlwaysShowToolTips,
+    contents_propagated=QtCore.Qt.WA_ContentsPropagated,
+    custom_whats_this=QtCore.Qt.WA_CustomWhatsThis,
+    delete_on_close=QtCore.Qt.WA_DeleteOnClose,
+    disabled=QtCore.Qt.WA_Disabled,
+    dont_show_on_screen=QtCore.Qt.WA_DontShowOnScreen,
+    force_disabled=QtCore.Qt.WA_ForceDisabled,
+    force_updates_disabled=QtCore.Qt.WA_ForceUpdatesDisabled,
+    group_leader=QtCore.Qt.WA_GroupLeader,
+    hover=QtCore.Qt.WA_Hover,
+    input_method_enabled=QtCore.Qt.WA_InputMethodEnabled,
+    keyboard_focus_change=QtCore.Qt.WA_KeyboardFocusChange,
+    key_compression=QtCore.Qt.WA_KeyCompression,
+    layout_on_entire_rect=QtCore.Qt.WA_LayoutOnEntireRect,
+    layout_uses_widget_rect=QtCore.Qt.WA_LayoutUsesWidgetRect,
+    mac_no_click_through=QtCore.Qt.WA_MacNoClickThrough,
+    mac_opaque_size_grip=QtCore.Qt.WA_MacOpaqueSizeGrip,
+    mac_show_focus_rect=QtCore.Qt.WA_MacShowFocusRect,
+    mac_normal_size=QtCore.Qt.WA_MacNormalSize,
+    mac_small_size=QtCore.Qt.WA_MacSmallSize,
+    mac_mini_size=QtCore.Qt.WA_MacMiniSize,
+    mac_variable_size=QtCore.Qt.WA_MacVariableSize,
+    mac_brushed_metal=QtCore.Qt.WA_MacBrushedMetal,
+    mapped=QtCore.Qt.WA_Mapped,
+    mouse_no_mask=QtCore.Qt.WA_MouseNoMask,
+    mouse_tracking=QtCore.Qt.WA_MouseTracking,
+    moved=QtCore.Qt.WA_Moved,
+    windows_use_direct_3d=QtCore.Qt.WA_MSWindowsUseDirect3D,
+    no_background=QtCore.Qt.WA_NoBackground,
+    no_child_events_for_parent=QtCore.Qt.WA_NoChildEventsForParent,
+    no_child_events_from_children=QtCore.Qt.WA_NoChildEventsFromChildren,
+    no_mouse_replay=QtCore.Qt.WA_NoMouseReplay,
+    no_mouse_propagation=QtCore.Qt.WA_NoMousePropagation,
+    transparent_for_mouse_events=QtCore.Qt.WA_TransparentForMouseEvents,
+    no_system_background=QtCore.Qt.WA_NoSystemBackground,
+    opaque_paint_event=QtCore.Qt.WA_OpaquePaintEvent,
+    outside_ws_range=QtCore.Qt.WA_OutsideWSRange,
+    paint_on_screen=QtCore.Qt.WA_PaintOnScreen,
+    paint_unclipped=QtCore.Qt.WA_PaintUnclipped,
+    pending_move_event=QtCore.Qt.WA_PendingMoveEvent,
+    pending_resize_egent=QtCore.Qt.WA_PendingResizeEvent,
+    quit_on_close=QtCore.Qt.WA_QuitOnClose,
+    resized=QtCore.Qt.WA_Resized,
+    right_to_left=QtCore.Qt.WA_RightToLeft,
+    set_cursor=QtCore.Qt.WA_SetCursor,
+    set_font=QtCore.Qt.WA_SetFont,
+    set_palette=QtCore.Qt.WA_SetPalette,
+    set_style=QtCore.Qt.WA_SetStyle,
+    show_modal=QtCore.Qt.WA_ShowModal,
+    static_contents=QtCore.Qt.WA_StaticContents,
+    style_sheet=QtCore.Qt.WA_StyleSheet,
+    style_sheet_target=QtCore.Qt.WA_StyleSheetTarget,
+    tablet_tracking=QtCore.Qt.WA_TabletTracking,
+    translucent_background=QtCore.Qt.WA_TranslucentBackground,
+    under_mouse=QtCore.Qt.WA_UnderMouse,
+    updates_disabled=QtCore.Qt.WA_UpdatesDisabled,
+    window_modified=QtCore.Qt.WA_WindowModified,
+    window_propagation=QtCore.Qt.WA_WindowPropagation,
+    mac_always_show_tool_window=QtCore.Qt.WA_MacAlwaysShowToolWindow,
+    set_locale=QtCore.Qt.WA_SetLocale,
+    styled_background=QtCore.Qt.WA_StyledBackground,
+    show_without_activating=QtCore.Qt.WA_ShowWithoutActivating,
+    native_window=QtCore.Qt.WA_NativeWindow,
+    dont_create_native_ancestors=QtCore.Qt.WA_DontCreateNativeAncestors,
+    x11_net_wm_window_type_desktop=QtCore.Qt.WA_X11NetWmWindowTypeDesktop,
+    x11_net_wm_window_type_dock=QtCore.Qt.WA_X11NetWmWindowTypeDock,
+    x11_net_wm_window_type_toolbar=QtCore.Qt.WA_X11NetWmWindowTypeToolBar,
+    x11_net_wm_window_type_menu=QtCore.Qt.WA_X11NetWmWindowTypeMenu,
+    x11_net_wm_window_type_utility=QtCore.Qt.WA_X11NetWmWindowTypeUtility,
+    x11_net_wm_window_type_splash=QtCore.Qt.WA_X11NetWmWindowTypeSplash,
+    x11_net_wm_window_type_dialog=QtCore.Qt.WA_X11NetWmWindowTypeDialog,
+    x11_net_wm_window_type_dropdown_menu=QtCore.Qt.WA_X11NetWmWindowTypeDropDownMenu,
+    x11_net_wm_window_type_popup_menu=QtCore.Qt.WA_X11NetWmWindowTypePopupMenu,
+    x11_net_wm_window_type_tooltip=QtCore.Qt.WA_X11NetWmWindowTypeToolTip,
+    x11_net_wm_window_type_notification=QtCore.Qt.WA_X11NetWmWindowTypeNotification,
+    x11_net_wm_window_type_combo=QtCore.Qt.WA_X11NetWmWindowTypeCombo,
+    x11_net_wm_window_type_dnd=QtCore.Qt.WA_X11NetWmWindowTypeDND,
+    mac_framework_scaled=QtCore.Qt.WA_MacFrameworkScaled,
+    accept_touch_events=QtCore.Qt.WA_AcceptTouchEvents,
+    touch_pad_single_touch_events=QtCore.Qt.WA_TouchPadAcceptSingleTouchEvents,
+    x11_do_not_accept_focus=QtCore.Qt.WA_X11DoNotAcceptFocus,
+    always_stack_on_top=QtCore.Qt.WA_AlwaysStackOnTop,
+    contents_margins_respects_safe_area=QtCore.Qt.WA_ContentsMarginsRespectsSafeArea,
+)

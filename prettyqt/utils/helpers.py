@@ -9,7 +9,7 @@ def string_to_num_array(array: str) -> List[float]:
     return [int(i) if i.is_integer() else i for i in floats]
 
 
-def merge_flags(flags, mapping) -> int:
+def merge_flags(flags, mapping):
     return functools.reduce(operator.ior, [mapping[t] for t in flags])
 
 
