@@ -1,6 +1,6 @@
 from typing import Dict, List, Literal
 
-from qtpy import QtNetwork
+from qtpy import QtCore, QtNetwork
 
 from prettyqt import network
 from prettyqt.utils import InvalidParamError, bidict, helpers
@@ -74,7 +74,9 @@ class NetworkProxy(QtNetwork.QNetworkProxy):
 
     def set_headers(self, headers: Dict[str, str]):
         for k, v in headers.items():
-            self.setRawHeader(k.encode(), v.encode())
+            self.setRawHeader(
+                QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode())
+            )
 
     def set_type(self, typ: ProxyTypeStr):
         """Set proxy type.

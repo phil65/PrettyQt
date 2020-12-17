@@ -91,7 +91,7 @@ class PolygonF(QtGui.QPolygonF):
 
 
 if __name__ == "__main__":
-    poly = PolygonF((core.Point(1, 1), core.Point(2, 2)))
-    poly2 = PolygonF((core.Point(1, 1), core.Point(2, 2)))
+    poly = PolygonF([core.Point(1, 1), core.Point(2, 2)])
+    poly2 = PolygonF([core.Point(1, 1), core.Point(2, 2)])
     new = poly | poly2
     print(repr(new))

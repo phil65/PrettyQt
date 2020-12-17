@@ -103,7 +103,7 @@ class TabBar(QtWidgets.QTabBar):
     def set_tab(
         self, index: int, position: str, widget: Optional[QtWidgets.QWidget]
     ) -> None:
-        self.setTabButton(index, POSITIONS[position], widget)
+        self.setTabButton(index, POSITIONS[position], widget)  # type: ignore
 
     @deprecated(
         reason="This method is deprecated, use set_selection_behavior_on_remove instead."

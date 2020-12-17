@@ -34,7 +34,7 @@ class Pixmap(QtGui.QPixmap):
             data = f.read()
         # Create widget
         pixmap = cls()
-        pixmap.loadFromData(data)
+        pixmap.loadFromData(QtCore.QByteArray(data))
         return pixmap
 
     def get_size(self) -> core.Size:

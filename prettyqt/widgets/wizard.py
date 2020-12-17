@@ -178,7 +178,7 @@ class Wizard(QtWidgets.QWizard):
             raise InvalidParamError(button_type, WIZARD_BUTTON)
         return self.button(WIZARD_BUTTON[button_type])
 
-    def set_button_text(self, button_type: WizardButtonStr, value: str) -> str:
+    def set_button_text(self, button_type: WizardButtonStr, value: str):
         """Set text for given button type.
 
         Args:
@@ -188,7 +188,7 @@ class Wizard(QtWidgets.QWizard):
         """
         if button_type not in WIZARD_BUTTON:
             raise InvalidParamError(button_type, WIZARD_BUTTON)
-        return self.setButtonText(WIZARD_BUTTON[button_type], value)
+        self.setButtonText(WIZARD_BUTTON[button_type], value)
 
     def get_button_text(self, button_type: WizardButtonStr) -> str:
         """Return text for given button type.

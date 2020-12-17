@@ -1,5 +1,5 @@
 import pathlib
-from typing import Union
+from typing import Literal, Union
 
 from qtpy import QtCore, QtMultimedia
 
@@ -29,7 +29,7 @@ class SoundEffect(QtMultimedia.QSoundEffect):
     def get_source(self) -> core.Url:
         return core.Url(self.source())
 
-    def set_loop_count(self, count: Union[str, int]):
+    def set_loop_count(self, count: Union[Literal["inf"], int]):
         if count == "inf":
             count = QtMultimedia.QSoundEffect.Infinite
         self.setLoopCount(count)

@@ -20,14 +20,22 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         form = RAW_FORMS["full"] if full else RAW_FORMS["name_and_value_only"]
         self.toRawForm(form)
 
-    def set_name(self, name: str):
-        self.setName(name.encode())
+    def set_name(self, name: Union[str, bytes, QtCore.QByteArray]):
+        if isinstance(name, str):
+            name = name.encode()
+        if isinstance(name, bytes):
+            name = QtCore.QByteArray(name)
+        self.setName(name)
 
     def get_name(self) -> str:
         return bytes(self.name()).decode()
 
-    def set_value(self, value: str):
-        self.setValue(value.encode())
+    def set_value(self, value: Union[str, bytes, QtCore.QByteArray]):
+        if isinstance(value, str):
+            value = value.encode()
+        if isinstance(value, bytes):
+            value = QtCore.QByteArray(value)
+        self.setValue(value)
 
     def get_value(self) -> str:
         return bytes(self.value()).decode()
@@ -35,7 +43,7 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
     def set_expiration_date(self, date: Union[QtCore.QDateTime, datetime.datetime, None]):
         if date is None:
             date = QtCore.QDateTime()
-        self.setExpirationDate(date)
+        self.setExpirationDate(date)  # type: ignore
 
 
 if __name__ == "__main__":

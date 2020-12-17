@@ -41,7 +41,7 @@ class DateEdit(QtWidgets.QDateEdit):
         upper: Union[QtCore.QDate, datetime.date],
     ):
         self.setToolTip(f"{lower} <= x <= {upper}")
-        self.setDateRange(lower, upper)
+        self.setDateRange(lower, upper)  # type: ignore
 
     def get_value(self) -> datetime.date:
         return self.get_date()

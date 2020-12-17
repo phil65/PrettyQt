@@ -3,7 +3,7 @@ from qtpy import QtCore
 
 class Time(QtCore.QTime):
     def __repr__(self):
-        template = super().__repr__().split("(")[1]
+        template = super().__repr__().split("(")[1]  # type: ignore
         return f"{type(self).__name__}({template}"
 
     def __str__(self):

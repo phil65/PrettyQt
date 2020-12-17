@@ -38,13 +38,13 @@ class TimeEdit(QtWidgets.QTimeEdit):
         upper: Union[QtCore.QTime, datetime.time],
     ):
         self.setToolTip(f"{lower} <= x <= {upper}")
-        self.setTimeRange(lower, upper)
+        self.setTimeRange(lower, upper)  # type: ignore
 
     def get_value(self) -> datetime.time:
         return self.get_time()
 
-    def set_value(self, value: datetime.time):
-        return self.setTime(value)
+    def set_value(self, value: Union[datetime.time, QtCore.QTime]):
+        return self.setTime(value)  # type: ignore
 
 
 if __name__ == "__main__":

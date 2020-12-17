@@ -28,14 +28,14 @@ class PopupInfo(widgets.Dialog):
         layout += self.label
         # signals.signals.popup_info.connect(self.popup)
 
-    def show(self, *args, **kwargs):
+    def show(self):
         self.hide()
         screen_geo = gui.GuiApplication.primaryScreen().geometry()
         size = self.label.sizeHint()
         x = (screen_geo.width() - size.width()) // 2
         y = (screen_geo.height() - size.height()) // 2
         self.move(x, y - 200)
-        super().show(*args, **kwargs)
+        super().show()
         self.timer.start(2500)
 
     def show_popup(self, text: str):

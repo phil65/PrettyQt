@@ -90,6 +90,6 @@ class Polygon(QtGui.QPolygon):
 
 
 if __name__ == "__main__":
-    poly = Polygon((core.Point(1, 1), core.Point(2, 2)))
-    poly2 = Polygon((core.Point(1, 1), core.Point(2, 2)))
+    poly = Polygon([core.Point(1, 1), core.Point(2, 2)])
+    poly2 = Polygon([core.Point(1, 1), core.Point(2, 2)])
     poly & poly2

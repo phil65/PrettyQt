@@ -209,7 +209,7 @@ DOCK_POSITION: bidict[DockPositionStr, QtCore.Qt.DockWidgetArea] = bidict(
 )
 
 DockPositionsStr = Literal["top", "bottom", "left", "right", "all"]
-DOCK_POSITIONS: bidict[DockPositionsStr, QtCore.Qt.DockWidgetArea] = bidict(
+DOCK_POSITIONS: bidict[DockPositionsStr, QtCore.Qt.DockWidgetAreas] = bidict(
     top=QtCore.Qt.TopDockWidgetArea,
     bottom=QtCore.Qt.BottomDockWidgetArea,
     left=QtCore.Qt.LeftDockWidgetArea,

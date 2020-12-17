@@ -121,6 +121,7 @@ class SidebarWidget(widgets.MainWindow):
         for k, v in self.button_map.items():
             if v.isChecked():
                 return k
+        raise RuntimeError("no page activated.")
 
     def set_tab(self, item: Union[str, int, widgets.Widget]):
         widget = self._get_widget(item)

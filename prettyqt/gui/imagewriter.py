@@ -43,11 +43,15 @@ class ImageWriter(QtGui.QImageWriter):
     def set_subtype(self, subtype: Union[str, bytes, QtCore.QByteArray]):
         if isinstance(subtype, str):
             subtype = subtype.encode()
+        if isinstance(subtype, bytes):
+            subtype = QtCore.QByteArray(subtype)
         self.setSubType(subtype)
 
     def set_format(self, fmt: Union[str, bytes, QtCore.QByteArray]):
         if isinstance(fmt, str):
             fmt = fmt.encode()
+        if isinstance(fmt, bytes):
+            fmt = QtCore.QByteArray(fmt)
         self.setFormat(fmt)
 
     def set_transformation(self, origin: gui.imageiohandler.TransformationStr):

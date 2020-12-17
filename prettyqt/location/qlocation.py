@@ -7,10 +7,10 @@ from prettyqt.utils import bidict
 
 try:  # PySide2 5.15 doesnt include these
     VISIBILITY = bidict(
-        unspecified=QtLocation.QLocation.UnspecifiedVisibility,
-        device=QtLocation.QLocation.DeviceVisibility,
-        private=QtLocation.QLocation.PrivateVisibility,
-        public=QtLocation.QLocation.PublicVisibility,
+        unspecified=QtLocation.QLocation.UnspecifiedVisibility,  # type: ignore
+        device=QtLocation.QLocation.DeviceVisibility,  # type: ignore
+        private=QtLocation.QLocation.PrivateVisibility,  # type: ignore
+        public=QtLocation.QLocation.PublicVisibility,  # type: ignore
     )
 except AttributeError:
     VISIBILITY = bidict()

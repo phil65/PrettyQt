@@ -50,16 +50,16 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
     def get_value(self) -> datetime.date:
         return self.get_date()
 
-    def set_value(self, value):
-        self.setSelectedDate(value)
+    def set_value(self, value: Union[QtCore.QDate, datetime.date]):
+        self.setSelectedDate(value)  # type: ignore
 
     def set_range(
         self,
         min_val: Union[QtCore.QDate, datetime.date],
         max_val: Union[QtCore.QDate, datetime.date],
     ):
-        self.setMinimumDate(min_val)
-        self.setMaximumDate(max_val)
+        self.setMinimumDate(min_val)  # type: ignore
+        self.setMaximumDate(max_val)  # type: ignore
 
     def set_selection_mode(self, mode: Optional[SelectionModeStr]):
         """Set selection mode for given calendar widget.

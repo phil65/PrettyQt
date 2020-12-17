@@ -38,4 +38,4 @@ class PlaceIdReply(QtLocation.QPlaceIdReply):
 
 
 if __name__ == "__main__":
-    reply = PlaceIdReply(0)
+    reply = PlaceIdReply(QtLocation.QPlaceIdReply.SavePlace)

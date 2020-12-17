@@ -11,8 +11,8 @@ from prettyqt.utils import InvalidParamError
 
 @dataclass
 class Settings:
-    maximum_framerate: int
-    minimum_framerate: int
+    maximum_framerate: float
+    minimum_framerate: float
     pixel_aspect_ratio: Tuple[int, int]
     pixel_format: str
     resolution: Tuple[int, int]

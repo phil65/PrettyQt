@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Literal, Union
 
 from qtpy import QtNetwork
 
@@ -13,6 +13,13 @@ BIND_MODE = bidict(
     default_for_platform=QtNetwork.QAbstractSocket.DefaultForPlatform,
 )
 
+BindModeStr = Literal[
+    "share_address",
+    "dont_share_address",
+    "reuse_address_hint",
+    "default_for_platform",
+]
+
 NETWORK_LAYER_PROTOCOL = bidict(
     ipv4=QtNetwork.QAbstractSocket.IPv4Protocol,
     ipv6=QtNetwork.QAbstractSocket.IPv6Protocol,
@@ -20,11 +27,15 @@ NETWORK_LAYER_PROTOCOL = bidict(
     unknown=QtNetwork.QAbstractSocket.UnknownNetworkLayerProtocol,
 )
 
+NetworkLayerProtocolStr = Literal["ipv4", "ipv6", "any_ip", "unknown"]
+
 PAUSE_MODES = mappers.FlagMap(
     QtNetwork.QAbstractSocket.PauseModes,
     never=QtNetwork.QAbstractSocket.PauseNever,
     on_ssl_errors=QtNetwork.QAbstractSocket.PauseOnSslErrors,
 )
+
+PauseModeStr = Literal["never", "on_ssl_errors"]
 
 QAbstractSocket = QtNetwork.QAbstractSocket
 
@@ -55,6 +66,33 @@ SOCKET_ERROR = bidict(
     unknown_socket=QAbstractSocket.UnknownSocketError,
 )
 
+SocketErrorStr = Literal[
+    "connection_refused",
+    "remote_host_closed",
+    "host_not_found",
+    "socket_access",
+    "socket_resource",
+    "socket_timeout",
+    "diagram_too_large",
+    "network",
+    "address_in_use",
+    "socket_address_not_available",
+    "unsupported_socket_operation",
+    "proxy_authentication_required",
+    "ssl_handshake_failed",
+    "unfinished_socket_operation",
+    "proxy_connection_refused",
+    "proxy_connection_closed",
+    "proxy_connection_timeout",
+    "proxy_not_found",
+    "proxy_protocol",
+    "operation",
+    "ssl_internal",
+    "ssl_invalid_user_data",
+    "temporary",
+    "unknown_socket",
+]
+
 SOCKET_OPTION = bidict(
     low_delay=QtNetwork.QAbstractSocket.LowDelayOption,
     keep_alive=QtNetwork.QAbstractSocket.KeepAliveOption,
@@ -66,6 +104,16 @@ SOCKET_OPTION = bidict(
     path_mtu_socket=QtNetwork.QAbstractSocket.PathMtuSocketOption,
 )
 
+SocketOptionStr = Literal[
+    "low_delay",
+    "keep_alive",
+    "multicast_ttl",
+    "multicast_loopback",
+    "type_of_service",
+    "send_buffer_size_socket",
+    "receive_buffer_size",
+    "path_mtu_socket",
+]
 
 SOCKET_STATE = bidict(
     unconnected=QtNetwork.QAbstractSocket.UnconnectedState,
@@ -77,12 +125,24 @@ SOCKET_STATE = bidict(
     listening=QtNetwork.QAbstractSocket.ListeningState,
 )
 
+SocketStateStr = Literal[
+    "unconnected",
+    "host_lookup",
+    "connecting",
+    "connected",
+    "bound",
+    "closing",
+    "listening",
+]
+
 SOCKET_TYPE = bidict(
     tcp=QtNetwork.QAbstractSocket.TcpSocket,
     udp=QtNetwork.QAbstractSocket.UdpSocket,
     sctp=QtNetwork.QAbstractSocket.SctpSocket,
     unknown=QtNetwork.QAbstractSocket.UnknownSocketType,
 )
+
+SocketTypeStr = Literal["tcp", "udp", "sctp", "unknown"]
 
 TYPE_OF_SERVICE = bidict(
     network_control=224,
@@ -95,6 +155,17 @@ TYPE_OF_SERVICE = bidict(
     routine=0,
 )
 
+TypeOfServiceStr = Literal[
+    "network_control",
+    "internetwork_control",
+    "critic_ecp",
+    "flash_override",
+    "flash",
+    "immediate",
+    "priority",
+    "routine",
+]
+
 QtNetwork.QAbstractSocket.__bases__ = (core.IODevice,)
 
 
@@ -106,7 +177,9 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
         self,
         address: Union[str, QtNetwork.QHostAddress],
         port: int = 0,
-        bind_mode: Union[int, str] = "default_for_platform",
+        bind_mode: Union[
+            QtNetwork.QAbstractSocket.BindMode, BindModeStr
+        ] = "default_for_platform",
     ):
         if isinstance(address, str):
             address = QtNetwork.QHostAddress(address)
@@ -118,8 +191,10 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
         self,
         hostname: str,
         port: int,
-        open_mode: Union[int, str] = "read_write",
-        protocol: Union[int, str] = "any_ip",
+        open_mode: Union[int, core.iodevice.OpenModeStr] = "read_write",
+        protocol: Union[
+            QtNetwork.QAbstractSocket.NetworkLayerProtocol, NetworkLayerProtocolStr
+        ] = "any_ip",
     ):
         if open_mode in core.iodevice.OPEN_MODES:
             open_mode = core.iodevice.OPEN_MODES[open_mode]
@@ -127,13 +202,11 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
             protocol = NETWORK_LAYER_PROTOCOL[protocol]
         super().connectToHost(hostname, port, open_mode, protocol)
 
-    def get_error(self) -> str:
+    def get_error(self) -> SocketErrorStr:
         return SOCKET_ERROR.inverse[self.error()]
 
-    def set_pause_mode(self, mode: str):
+    def set_pause_mode(self, mode: PauseModeStr):
         """Set pause mode.
-
-        Valid values: "never", "on_ssl_errors"
 
         Args:
             mode: pause mode
@@ -145,7 +218,7 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
             raise InvalidParamError(mode, PAUSE_MODES)
         self.setPauseMode(PAUSE_MODES[mode])
 
-    def get_pause_mode(self) -> str:
+    def get_pause_mode(self) -> PauseModeStr:
         return PAUSE_MODES.inverse[self.pauseMode()]
 
     def get_proxy(self) -> network.NetworkProxy:
@@ -168,10 +241,10 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
     #     opt = self.get_socket_option("type_of_service")
     #     return TYPE_OF_SERVICE.inverse[opt]
 
-    def get_socket_type(self) -> str:
+    def get_socket_type(self) -> SocketTypeStr:
         return SOCKET_TYPE.inverse[self.socketType()]
 
-    def get_state(self) -> str:
+    def get_state(self) -> SocketStateStr:
         return SOCKET_STATE.inverse[self.state()]
 
     def get_local_address(self) -> network.HostAddress:

@@ -38,14 +38,11 @@ class StandardItem(QtGui.QStandardItem):
         self, index: Union[int, Tuple[int, int], QtCore.QModelIndex]
     ) -> QtGui.QStandardItem:
         if isinstance(index, int):
-            item = self.child(index)
+            return self.child(index)
         elif isinstance(index, tuple):
-            item = self.child(*index)
+            return self.child(*index)
         else:
-            item = None
-        if item is None:
             raise KeyError(index)
-        return item
 
     def __delitem__(self, index: Union[int, Tuple[int, int]]):
         if isinstance(index, int):
@@ -138,7 +135,7 @@ class StandardItem(QtGui.QStandardItem):
         whats_this: Optional[str] = None,
         # text_alignment: Optional[str] = None,
         checkstate: Optional[constants.StateStr] = None,
-        flags: Optional[int] = None,
+        flags: Optional[QtCore.Qt.ItemFlags] = None,
         size_hint: Optional[QtCore.QSize] = None,
         is_user_type: bool = False,
     ) -> StandardItem:

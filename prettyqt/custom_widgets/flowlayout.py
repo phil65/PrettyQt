@@ -47,16 +47,14 @@ class FlowLayout(widgets.Layout):
     def count(self) -> int:
         return len(self.items)
 
-    def itemAt(self, index: int) -> Optional[QtWidgets.QLayoutItem]:
+    def itemAt(self, index: int) -> Optional[QtWidgets.QLayoutItem]:  # type: ignore
         if 0 <= index < len(self.items):
             return self.items[index]
-
         return None
 
-    def takeAt(self, index: int) -> Optional[QtWidgets.QLayoutItem]:
+    def takeAt(self, index: int) -> Optional[QtWidgets.QLayoutItem]:  # type: ignore
         if 0 <= index < len(self.items):
             return self.items.pop(index)
-
         return None
 
     def expandingDirections(self) -> QtCore.Qt.Orientations:

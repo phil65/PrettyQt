@@ -25,12 +25,12 @@ class Place(QtLocation.QPlace):
     def get_contact_details(self, contact_type: str) -> List[location.PlaceContactDetail]:
         return [location.PlaceContactDetail(i) for i in self.contactDetails(contact_type)]
 
-    def set_content(self, typ: str, value: str):
+    def set_content(self, typ: str, value: dict):
         if typ not in location.placecontent.TYPE:
             raise InvalidParamError(typ, location.placecontent.TYPE)
         self.setContent(location.placecontent.TYPE[typ], value)
 
-    def get_content(self, typ: str) -> str:
+    def get_content(self, typ: str) -> dict:
         if typ not in location.placecontent.TYPE:
             raise InvalidParamError(typ, location.placecontent.TYPE)
         return self.content(location.placecontent.TYPE[typ])

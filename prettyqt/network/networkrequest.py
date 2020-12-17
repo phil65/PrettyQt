@@ -93,7 +93,9 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
 
     def set_headers(self, headers: Dict[str, str]):
         for k, v in headers.items():
-            self.setRawHeader(k.encode(), v.encode())
+            self.setRawHeader(
+                QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode())
+            )
 
     def get_headers(self) -> Dict[str, str]:
         return {

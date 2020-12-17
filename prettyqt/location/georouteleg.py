@@ -3,8 +3,10 @@ from qtpy import QtLocation
 from prettyqt import location
 
 
-QtLocation.QGeoRouteLeg.__bases__ = (location.GeoRoute,)
+# not available in PySide2
+
+QtLocation.QGeoRouteLeg.__bases__ = (location.GeoRoute,)  # type: ignore
 
 
-class GeoRouteLeg(QtLocation.QGeoRouteLeg):
+class GeoRouteLeg(QtLocation.QGeoRouteLeg):  # type: ignore
     pass

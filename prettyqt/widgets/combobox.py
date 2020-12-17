@@ -158,8 +158,7 @@ class ComboBox(QtWidgets.QComboBox):
         """
         if policy not in SIZE_ADJUST_POLICY:
             raise InvalidParamError(policy, SIZE_ADJUST_POLICY)
-        policy = SIZE_ADJUST_POLICY[policy]
-        self.setSizeAdjustPolicy(policy)
+        self.setSizeAdjustPolicy(SIZE_ADJUST_POLICY[policy])
 
     def get_size_adjust_policy(self) -> SizeAdjustPolicyStr:
         """Return size adjust policy.
