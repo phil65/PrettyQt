@@ -119,7 +119,9 @@ class Menu(QtWidgets.QMenu):
         self.addActions(actions)
 
     def add_menu(self, menu: QtWidgets.QMenu) -> QtWidgets.QAction:
-        return self.addAction(menu.menuAction())
+        action = menu.menuAction()
+        self.addAction(action)
+        return action
 
 
 if __name__ == "__main__":

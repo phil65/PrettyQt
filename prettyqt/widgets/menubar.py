@@ -23,9 +23,8 @@ class MenuBar(QtWidgets.QMenuBar):
     def add_action(self, action: Union[QtWidgets.QAction, str]) -> QtWidgets.QAction:
         if isinstance(action, str):
             action = widgets.Action(parent=self, text=action)
-            self.addAction(action)
-            return action
-        return self.addAction(action)
+        self.addAction(action)
+        return action
 
     @overload
     def add_menu(self, menu_or_str: str) -> widgets.Menu:

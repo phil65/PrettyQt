@@ -138,7 +138,8 @@ class Player(widgets.MainWindow):
         # supportedMimeTypes = ["video/mp4", "*.*"]
         # file_dialog.setMimeTypeFilters(supportedMimeTypes)
         movies_location = core.StandardPaths.get_writable_location("movies")
-        file_dialog.set_directory(movies_location)
+        if movies_location is not None:
+            file_dialog.set_directory(movies_location)
         if file_dialog.exec_() == widgets.Dialog.Accepted:
             self.playlist.add_media(file_dialog.selectedFiles()[0])
             self.player.play()

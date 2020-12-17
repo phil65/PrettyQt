@@ -61,7 +61,8 @@ class FileDialog(QtWidgets.QFileDialog):
         if path_id is not None and path is None:
             settings = core.Settings()
             path = settings.get(path_id, "")
-        self.set_directory(path)
+        if path is not None:
+            self.set_directory(path)
         self.set_file_mode(file_mode)
         self.set_accept_mode(mode)
 
@@ -222,7 +223,7 @@ class FileDialog(QtWidgets.QFileDialog):
         """
         return pathlib.Path(self.directory().absolutePath())
 
-    def set_directory(self, path: Union[None, str, pathlib.Path]):
+    def set_directory(self, path: Union[str, pathlib.Path]):
         """Set start directory."""
         if isinstance(path, pathlib.Path):
             path = str(path)
