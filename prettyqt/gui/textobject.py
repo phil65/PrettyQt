@@ -15,4 +15,5 @@ class TextObject(QtGui.QTextObject):
 
 
 if __name__ == "__main__":
-    doc = TextObject()
+    doc = gui.TextDocument()
+    obj = TextObject(doc)

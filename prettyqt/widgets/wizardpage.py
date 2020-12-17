@@ -18,7 +18,7 @@ class WizardPage(QtWidgets.QWizardPage):
             raise InvalidParamError(typ, widgets.wizard.WIZARD_PIXMAP)
         return gui.Pixmap(self.pixmap(widgets.wizard.WIZARD_PIXMAP[typ]))
 
-    def set_button_text(self, button_type: str, value: str) -> str:
+    def set_button_text(self, button_type: str, value: str):
         """Set text for given button type.
 
         Args:
@@ -28,7 +28,7 @@ class WizardPage(QtWidgets.QWizardPage):
         """
         if button_type not in widgets.wizard.WIZARD_BUTTON:
             raise InvalidParamError(button_type, widgets.wizard.WIZARD_BUTTON)
-        return self.setButtonText(widgets.wizard.WIZARD_BUTTON[button_type], value)
+        self.setButtonText(widgets.wizard.WIZARD_BUTTON[button_type], value)
 
     def get_button_text(self, button_type: str) -> str:
         """Return text for given button type.

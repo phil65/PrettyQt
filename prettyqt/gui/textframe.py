@@ -18,4 +18,5 @@ class TextFrame(QtGui.QTextFrame):
 
 
 if __name__ == "__main__":
-    doc = TextFrame()
+    doc = gui.TextDocument()
+    frame = TextFrame(doc)

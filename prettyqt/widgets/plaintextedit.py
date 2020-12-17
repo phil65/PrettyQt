@@ -93,9 +93,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         operation: gui.textcursor.MoveOperationStr,
         mode: gui.textcursor.MoveModeStr = "move",
     ):
-        op = gui.textcursor.MOVE_OPERATION[operation]
-        mode = gui.textcursor.MOVE_MODE[mode]
-        self.moveCursor(op, mode)
+        self.moveCursor(
+            gui.textcursor.MOVE_OPERATION[operation], gui.textcursor.MOVE_MODE[mode]
+        )
 
     def append_text(self, text: str, newline: bool = True):
         if newline:

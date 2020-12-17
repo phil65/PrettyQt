@@ -37,7 +37,7 @@ class TreeWidgetItemIterator(QtWidgets.QTreeWidgetItemIterator):
             QtWidgets.QTreeWidgetItem,
             QtWidgets.QTreeWidgetItemIterator,
         ],
-        flags: Optional[int] = None,
+        flags: Optional[QtWidgets.QTreeWidgetItemIterator.IteratorFlags] = None,
         hidden: Optional[bool] = None,
         selected: Optional[bool] = None,
         selectable: Optional[bool] = None,
@@ -92,7 +92,7 @@ class TreeWidgetItemIterator(QtWidgets.QTreeWidgetItemIterator):
                 flags |= QtWidgets.QTreeWidgetItemIterator.NotEditable
             if user_flag is True:
                 flags |= QtWidgets.QTreeWidgetItemIterator.UserFlag
-            super().__init__(other, flags)
+            super().__init__(other, flags)  # type: ignore
 
 
 if __name__ == "__main__":

@@ -40,7 +40,3 @@ class Surface(QtGui.QSurface):
             surface type
         """
         return SURFACE_TYPES.inverse[self.surfaceType()]
-
-
-if __name__ == "__main__":
-    surface = Surface()

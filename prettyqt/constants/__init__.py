@@ -191,7 +191,7 @@ FILTER_MODES = mappers.FlagMap(
 )
 
 DropActionStr = Literal["copy", "move", "link", "action_mask", "ignore", "target_move"]
-DROP_ACTION: bidict[DropActionStr, int] = bidict(
+DROP_ACTION: bidict[DropActionStr, QtCore.Qt.DropAction] = bidict(
     copy=QtCore.Qt.CopyAction,
     move=QtCore.Qt.MoveAction,
     link=QtCore.Qt.LinkAction,
@@ -218,7 +218,7 @@ DOCK_POSITIONS: bidict[DockPositionsStr, QtCore.Qt.DockWidgetArea] = bidict(
 )
 
 ToolbarAreaStr = Literal["top", "bottom", "left", "right", "all", "none"]
-TOOLBAR_AREA: bidict[ToolbarAreaStr, int] = bidict(
+TOOLBAR_AREA: bidict[ToolbarAreaStr, QtCore.Qt.ToolBarArea] = bidict(
     left=QtCore.Qt.LeftToolBarArea,
     right=QtCore.Qt.RightToolBarArea,
     top=QtCore.Qt.TopToolBarArea,
@@ -245,7 +245,7 @@ ARROW_TYPE: bidict[ArrowTypeStr, QtCore.Qt.ArrowType] = bidict(
 )
 
 EventPriorityStr = Literal["high", "normal", "low"]
-EVENT_PRIORITY: bidict[EventPriorityStr, int] = bidict(
+EVENT_PRIORITY: bidict[EventPriorityStr, QtCore.Qt.EventPriority] = bidict(
     high=QtCore.Qt.HighEventPriority,
     normal=QtCore.Qt.NormalEventPriority,
     low=QtCore.Qt.LowEventPriority,
@@ -303,14 +303,14 @@ CURSOR_SHAPE: bidict[CursorShapeStr, QtCore.Qt.CursorShape] = bidict(
 )
 
 LayoutDirectionStr = Literal["left_to_right", "right_to_left", "auto"]
-LAYOUT_DIRECTION: bidict[LayoutDirectionStr, int] = bidict(
+LAYOUT_DIRECTION: bidict[LayoutDirectionStr, QtCore.Qt.LayoutDirection] = bidict(
     left_to_right=QtCore.Qt.LeftToRight,
     right_to_left=QtCore.Qt.RightToLeft,
     auto=QtCore.Qt.LayoutDirectionAuto,
 )
 
 ApplicationStateStr = Literal["suspended", "hidden", "inactive", "active"]
-APPLICATION_STATES: bidict[ApplicationStateStr, int] = bidict(
+APPLICATION_STATES: bidict[ApplicationStateStr, QtCore.Qt.ApplicationState] = bidict(
     suspended=QtCore.Qt.ApplicationSuspended,
     hidden=QtCore.Qt.ApplicationHidden,
     inactive=QtCore.Qt.ApplicationInactive,
@@ -321,7 +321,7 @@ HighDpiScaleFactorRoundingPolicyStr = Literal[
     "round", "ceil", "floor", "round_prefer_floor", "pass_through"
 ]
 HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY: bidict[
-    HighDpiScaleFactorRoundingPolicyStr, int
+    HighDpiScaleFactorRoundingPolicyStr, QtCore.Qt.HighDpiScaleFactorRoundingPolicy
 ] = bidict(
     round=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.Round,
     ceil=QtCore.Qt.HighDpiScaleFactorRoundingPolicy.Ceil,
@@ -338,7 +338,7 @@ UiEffectStr = Literal[
     "fade_tooltip",
     "animate_toolbox",
 ]
-UI_EFFECTS: bidict[UiEffectStr, int] = bidict(
+UI_EFFECTS: bidict[UiEffectStr, QtCore.Qt.UIEffect] = bidict(
     animate_menu=QtCore.Qt.UI_AnimateMenu,
     fade_menu=QtCore.Qt.UI_FadeMenu,
     animate_combo=QtCore.Qt.UI_AnimateCombo,
@@ -354,7 +354,7 @@ NavigationModeStr = Literal[
     "cursor_auto",
     "cursor_force_visible",
 ]
-NAVIGATION_MODES: bidict[NavigationModeStr, int] = bidict(
+NAVIGATION_MODES: bidict[NavigationModeStr, QtCore.Qt.NavigationMode] = bidict(
     none=QtCore.Qt.NavigationModeNone,
     keypad_tab_order=QtCore.Qt.NavigationModeKeypadTabOrder,
     keypad_directional=QtCore.Qt.NavigationModeKeypadDirectional,
@@ -368,7 +368,7 @@ ItemSelectionModeStr = Literal[
     "contains_bounding_rect",
     "intersects_bounding_rect",
 ]
-ITEM_SELECTION_MODE: bidict[ItemSelectionModeStr, int] = bidict(
+ITEM_SELECTION_MODE: bidict[ItemSelectionModeStr, QtCore.Qt.ItemSelectionMode] = bidict(
     contains_shape=QtCore.Qt.ContainsItemShape,
     intersects_shape=QtCore.Qt.IntersectsItemShape,
     contains_bounding_rect=QtCore.Qt.ContainsItemBoundingRect,
@@ -378,7 +378,7 @@ ITEM_SELECTION_MODE: bidict[ItemSelectionModeStr, int] = bidict(
 FocusReasonStr = Literal[
     "mouse", "tab", "backtab", "active_window", "popup", "shortcut", "menu_bar", "other"
 ]
-FOCUS_REASONS: bidict[FocusReasonStr, int] = bidict(
+FOCUS_REASONS: bidict[FocusReasonStr, QtCore.Qt.FocusReason] = bidict(
     mouse=QtCore.Qt.MouseFocusReason,
     tab=QtCore.Qt.TabFocusReason,
     backtab=QtCore.Qt.BacktabFocusReason,
@@ -390,7 +390,7 @@ FOCUS_REASONS: bidict[FocusReasonStr, int] = bidict(
 )
 
 ElideModeStr = Literal["left", "right", "middle", "none"]
-ELIDE_MODE: bidict[ElideModeStr, int] = bidict(
+ELIDE_MODE: bidict[ElideModeStr, QtCore.Qt.TextElideMode] = bidict(
     left=QtCore.Qt.ElideLeft,
     right=QtCore.Qt.ElideRight,
     middle=QtCore.Qt.ElideMiddle,
@@ -400,7 +400,7 @@ ELIDE_MODE: bidict[ElideModeStr, int] = bidict(
 PenStyleStr = Literal[
     "none", "solid", "dash", "dot", "dash_dot", "dash_dot_dot", "custom_dash"
 ]
-PEN_STYLE: bidict[PenStyleStr, int] = bidict(
+PEN_STYLE: bidict[PenStyleStr, QtCore.Qt.PenStyle] = bidict(
     none=QtCore.Qt.NoPen,
     solid=QtCore.Qt.SolidLine,
     dash=QtCore.Qt.DashLine,
@@ -411,12 +411,12 @@ PEN_STYLE: bidict[PenStyleStr, int] = bidict(
 )
 
 CapStyleStr = Literal["flat", "square", "round"]
-CAP_STYLE: bidict[CapStyleStr, int] = bidict(
+CAP_STYLE: bidict[CapStyleStr, QtCore.Qt.PenCapStyle] = bidict(
     flat=QtCore.Qt.FlatCap, square=QtCore.Qt.SquareCap, round=QtCore.Qt.RoundCap
 )
 
 JoinStyleStr = Literal["miter", "bevel", "round" "svg_miter"]
-JOIN_STYLE: bidict[JoinStyleStr, int] = bidict(
+JOIN_STYLE: bidict[JoinStyleStr, QtCore.Qt.PenJoinStyle] = bidict(
     miter=QtCore.Qt.MiterJoin,
     bevel=QtCore.Qt.BevelJoin,
     round=QtCore.Qt.RoundJoin,
@@ -445,7 +445,7 @@ PatternStr = Literal[
     "texture",
 ]
 
-PATTERN: bidict[PatternStr, int] = bidict(
+PATTERN: bidict[PatternStr, QtCore.Qt.BrushStyle] = bidict(
     none=QtCore.Qt.NoBrush,
     solid=QtCore.Qt.SolidPattern,
     dense_1=QtCore.Qt.Dense1Pattern,
@@ -538,7 +538,7 @@ WindowFlagStr = Literal[
     "frameless", "popup", "stay_on_top", "tool", "window_title", "customize_window"
 ]
 
-WINDOW_FLAGS: bidict[WindowFlagStr, int] = bidict(
+WINDOW_FLAGS: bidict[WindowFlagStr, QtCore.Qt.WindowType] = bidict(
     frameless=QtCore.Qt.FramelessWindowHint,
     popup=QtCore.Qt.Popup,
     stay_on_top=QtCore.Qt.WindowStaysOnTopHint,
@@ -563,19 +563,19 @@ FILL_RULE: bidict[FillRuleStr, QtCore.Qt.FillRule] = bidict(
 )
 
 TimerTypeStr = Literal["precise", "coarse", "very_coarse"]
-TIMER_TYPE: bidict[TimerTypeStr, int] = bidict(
+TIMER_TYPE: bidict[TimerTypeStr, QtCore.Qt.TimerType] = bidict(
     precise=QtCore.Qt.PreciseTimer,
     coarse=QtCore.Qt.CoarseTimer,
     very_coarse=QtCore.Qt.VeryCoarseTimer,
 )
 
 CursorMoveStyleStr = Literal["logical", "visual"]
-CURSOR_MOVE_STYLE: bidict[CursorMoveStyleStr, int] = bidict(
+CURSOR_MOVE_STYLE: bidict[CursorMoveStyleStr, QtCore.Qt.CursorMoveStyle] = bidict(
     logical=QtCore.Qt.LogicalMoveStyle, visual=QtCore.Qt.VisualMoveStyle
 )
 
 CornerStr = Literal["top_left", "top_right", "bottom_left", "bottom_right"]
-CORNER: bidict[CornerStr, int] = bidict(
+CORNER: bidict[CornerStr, QtCore.Qt.Corner] = bidict(
     top_left=QtCore.Qt.TopLeftCorner,
     top_right=QtCore.Qt.TopRightCorner,
     bottom_left=QtCore.Qt.BottomLeftCorner,
@@ -585,7 +585,7 @@ CORNER: bidict[CornerStr, int] = bidict(
 ScreenOrientationStr = Literal[
     "primary", "landscape", "portrait", "inverted_landscape", "inverted_portrait"
 ]
-SCREEN_ORIENTATION: bidict[ScreenOrientationStr, int] = bidict(
+SCREEN_ORIENTATION: bidict[ScreenOrientationStr, QtCore.Qt.ScreenOrientation] = bidict(
     primary=QtCore.Qt.PrimaryOrientation,
     landscape=QtCore.Qt.LandscapeOrientation,
     portrait=QtCore.Qt.PortraitOrientation,
@@ -594,14 +594,14 @@ SCREEN_ORIENTATION: bidict[ScreenOrientationStr, int] = bidict(
 )
 
 AspectRatioModeStr = Literal["ignore", "keep", "keep_by_expanding"]
-ASPECT_RATIO_MODE: bidict[AspectRatioModeStr, int] = bidict(
+ASPECT_RATIO_MODE: bidict[AspectRatioModeStr, QtCore.Qt.AspectRatioMode] = bidict(
     ignore=QtCore.Qt.IgnoreAspectRatio,
     keep=QtCore.Qt.KeepAspectRatio,
     keep_by_expanding=QtCore.Qt.KeepAspectRatioByExpanding,
 )
 
 DateFormatStr = Literal["text", "iso", "iso_with_ms", "rfc_2822"]
-DATE_FORMAT: bidict[DateFormatStr, int] = bidict(
+DATE_FORMAT: bidict[DateFormatStr, QtCore.Qt.DateFormat] = bidict(
     text=QtCore.Qt.TextDate,
     iso=QtCore.Qt.ISODate,
     iso_with_ms=QtCore.Qt.ISODateWithMs,
@@ -609,7 +609,7 @@ DATE_FORMAT: bidict[DateFormatStr, int] = bidict(
 )
 
 TimeSpecStr = Literal["local_time", "utc", "offset_from_utc", "timezone"]
-TIME_SPEC: bidict[TimeSpecStr, int] = bidict(
+TIME_SPEC: bidict[TimeSpecStr, QtCore.Qt.TimeSpec] = bidict(
     local_time=QtCore.Qt.LocalTime,
     utc=QtCore.Qt.UTC,
     offset_from_utc=QtCore.Qt.OffsetFromUTC,
