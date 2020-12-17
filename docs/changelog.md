@@ -1,3 +1,9 @@
+## v0.153.0 (2020-12-17)
+
+### Feat
+
+- **MediaPlayer**: add get_error method
+
 ## v0.152.1 (2020-12-17)
 
 ### Fix
