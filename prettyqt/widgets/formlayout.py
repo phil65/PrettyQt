@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Literal, Optional, Tuple, Union
+from typing import Literal, Optional, Tuple, Union
 
 from qtpy import QtWidgets
 
@@ -106,20 +106,6 @@ class FormLayout(QtWidgets.QFormLayout):
         if pos[0] == -1:
             return None
         return pos[0], ROLE.inverse[pos[1]]
-
-    @classmethod
-    def build_from_dict(
-        cls,
-        dct: Dict[QtWidgets.QWidget, QtWidgets.QWidget],
-        parent: Optional[QtWidgets.QWidget] = None,
-    ) -> FormLayout:
-        formlayout = cls(parent)
-        for i, (k, v) in enumerate(dct.items(), start=1):
-            if k is not None:
-                formlayout.set_widget(k, i, "left")
-            if v is not None:
-                formlayout.set_widget(v, i, "right")
-        return formlayout
 
     def add(self, *items):
         for i in items:

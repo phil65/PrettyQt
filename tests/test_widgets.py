@@ -355,8 +355,7 @@ def test_formlayout(qtbot):
     layout[3] = widgets.RadioButton("widget[3]")
     layout += widgets.RadioButton("added with +=")
     layout += ("added with +=", widgets.RadioButton("tuple"))
-    layout = widgets.FormLayout.build_from_dict({"from": "dict"})
-    assert len(layout) == 2
+    assert len(layout) == 6
     del layout[0]
     layout.set_row_wrap_policy("wrap_long")
     assert layout.get_row_wrap_policy() == "wrap_long"
