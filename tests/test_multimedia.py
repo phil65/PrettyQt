@@ -209,6 +209,7 @@ def test_mediaplayer():
     player = multimedia.MediaPlayer()
     assert player.get_state() == "stopped"
     assert player.get_media_status() == "no_media"
+    assert player.get_error() == "none"
 
 
 def test_mediarecorder():

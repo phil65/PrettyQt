@@ -14,7 +14,7 @@ STATES = bidict(
 
 StateStr = Literal["stopped", "playing", "paused"]
 
-ERRORS = bidict(
+ERROR = bidict(
     none=QtMultimedia.QMediaPlayer.NoError,
     resource=QtMultimedia.QMediaPlayer.ResourceError,
     format=QtMultimedia.QMediaPlayer.FormatError,
@@ -70,3 +70,11 @@ class MediaPlayer(QtMultimedia.QMediaPlayer):
             media status
         """
         return MEDIA_STATUS.inverse[self.mediaStatus()]
+
+    def get_error(self) -> ErrorStr:
+        """Return error type.
+
+        Returns:
+            error type
+        """
+        return ERROR.inverse[self.error()]
