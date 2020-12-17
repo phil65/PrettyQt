@@ -158,7 +158,7 @@ class StarDelegate(widgets.StyledItemDelegate):
         if index.column() == 3:
             model.setData(index, editor.star_rating.star_count)
         else:
-            super().setModelData(self, editor, model, index)
+            super().setModelData(editor, model, index)
 
     def commitAndCloseEditor(self):
         editor = self.sender()
