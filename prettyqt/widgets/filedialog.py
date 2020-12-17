@@ -4,7 +4,7 @@ from typing import Dict, List, Literal, Optional, Union
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 FILE_MODE = bidict(
@@ -70,7 +70,7 @@ class FileDialog(QtWidgets.QFileDialog):
         return dict(
             file_mode=self.get_file_mode(),
             accept_mode=self.get_accept_mode(),
-            filter=int(self.filter()),
+            filter=self.get_filter(),
             view_mode=self.get_view_mode(),
             name_filter=self.selectedNameFilter(),
             default_suffix=self.defaultSuffix(),
@@ -82,7 +82,7 @@ class FileDialog(QtWidgets.QFileDialog):
         self.set_file_mode(state["file_mode"])
         self.set_accept_mode(state["accept_mode"])
         self.set_view_mode(state["view_mode"])
-        self.setFilter(core.Dir.Filters(state["filter"]))
+        self.set_filter(*state["filter"])
         self.setNameFilters(state["name_filters"])
         self.setNameFilter(state["name_filter"])
         self.setDefaultSuffix(state["default_suffix"])
@@ -168,11 +168,6 @@ class FileDialog(QtWidgets.QFileDialog):
         """
         self.setFileMode(FILE_MODE[mode])
 
-    def set_filter(self, to_filter: str):
-        if to_filter not in core.dir.FILTERS:
-            raise InvalidParamError(to_filter, core.dir.FILTERS)
-        self.setFilter(core.dir.FILTERS[to_filter])
-
     def selected_files(self) -> List[pathlib.Path]:
         return [pathlib.Path(p) for p in self.selectedFiles()]
 
@@ -228,6 +223,16 @@ class FileDialog(QtWidgets.QFileDialog):
         if isinstance(path, pathlib.Path):
             path = str(path)
         self.setDirectory(path)
+
+    def set_filter(self, *filters: core.dir.FilterStr):
+        for item in filters:
+            if item not in core.dir.FILTERS:
+                raise InvalidParamError(item, core.dir.FILTERS)
+        flags = helpers.merge_flags(filters, core.dir.FILTERS)
+        self.setFilter(flags)
+
+    def get_filter(self) -> List[core.dir.FilterStr]:
+        return [k for k, v in core.dir.FILTERS.items() if v & self.filter()]
 
 
 if __name__ == "__main__":

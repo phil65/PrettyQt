@@ -1,9 +1,9 @@
 import pathlib
-from typing import Literal
+from typing import List, Literal
 
 from qtpy import QtCore
 
-from prettyqt.utils import bidict
+from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 FILTERS = bidict(
@@ -64,3 +64,13 @@ class Dir(QtCore.QDir):
 
     def to_path(self) -> pathlib.Path:
         return pathlib.Path(self.absolutePath())
+
+    def set_filter(self, *filters: FilterStr):
+        for item in filters:
+            if item not in FILTERS:
+                raise InvalidParamError(item, FILTERS)
+        flags = helpers.merge_flags(filters, FILTERS)
+        self.setFilter(flags)
+
+    def get_filter(self) -> List[FilterStr]:
+        return [k for k, v in FILTERS.items() if v & self.filter()]
