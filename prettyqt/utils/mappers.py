@@ -5,7 +5,7 @@ class FlagMap:
     def __init__(self, initializer, **kwargs):
         self.initializer = initializer
         kwargs = {k: int(v) for k, v in kwargs.items()}
-        self.bidict = bidict(**kwargs)
+        self.bidict: bidict[str, int] = bidict(**kwargs)
 
         class Inverter:
             def __getitem__(self2, value):

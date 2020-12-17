@@ -102,10 +102,10 @@ class FormLayout(QtWidgets.QFormLayout):
         return widget
 
     def get_item_position(self, index: int) -> Optional[Tuple[int, RoleStr]]:
-        pos = self.getItemPosition(index)
-        if pos[0] == -1:
+        pos = self.getItemPosition(index)  # type: ignore
+        if pos[0] == -1:  # type: ignore
             return None
-        return pos[0], ROLE.inverse[pos[1]]
+        return pos[0], ROLE.inverse[pos[1]]  # type: ignore
 
     def add(self, *items):
         for i in items:
