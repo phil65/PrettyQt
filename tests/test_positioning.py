@@ -51,7 +51,7 @@ def test_geopath():
     path += coord2
     path[1] = coord2
     assert path[1] == coord2
-    assert repr(path) == "GeoPath(GeoCoordinate(1.0, 1.0), GeoCoordinate(5.0, 5.0))"
+    assert repr(path) == "GeoPath(<2 points>)"
     assert positioning.GeoCoordinate(1, 1) in path
     del path[1]
     assert len(path) == 1
@@ -65,7 +65,7 @@ def test_geopolygon():
     path += coord2
     path[1] = coord2
     assert path[1] == coord2
-    assert repr(path) == "GeoPolygon(GeoCoordinate(1.0, 1.0), GeoCoordinate(5.0, 5.0))"
+    assert repr(path) == "GeoPolygon(<2 points>)"
     del path[1]
     assert len(path) == 1
     str(path)

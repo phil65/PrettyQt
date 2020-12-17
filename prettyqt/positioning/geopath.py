@@ -32,8 +32,8 @@ class GeoPath(QtPositioning.QGeoPath):
         return self
 
     def __repr__(self):
-        p = ", ".join([f"{p!r}" for p in self.get_path()])
-        return f"{type(self).__name__}({p})"
+        # p = ", ".join([f"{p!r}" for p in self.get_path()])
+        return f"{type(self).__name__}(<{len(self)} points>)"
 
     def get_path(self) -> List[positioning.GeoCoordinate]:
         return [positioning.GeoCoordinate(p) for p in self.path()]
