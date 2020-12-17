@@ -357,6 +357,7 @@ def test_formlayout(qtbot):
     layout += ("added with +=", widgets.RadioButton("tuple"))
     assert len(layout) == 6
     del layout[0]
+    assert isinstance(layout.get_item_position(0), tuple)
     layout.set_row_wrap_policy("wrap_long")
     assert layout.get_row_wrap_policy() == "wrap_long"
     with pytest.raises(InvalidParamError):
