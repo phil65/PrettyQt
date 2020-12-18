@@ -6,7 +6,7 @@ from prettyqt.utils import InvalidParamError
 
 class ListWidgetItem(QtWidgets.QListWidgetItem):
     def __repr__(self):
-        return f"ListWidgetItem({self.icon()}, {self.text()!r})"
+        return f"{type(self).__name__}({self.icon()}, {self.text()!r})"
 
     def __setitem__(self, index: int, value):
         self.setData(index, value)

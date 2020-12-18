@@ -25,7 +25,7 @@ class ToolBar(QtWidgets.QToolBar):
         return dict(actions=self.actions(), allowed_areas=self.get_allowed_areas())
 
     def __repr__(self):
-        return f"ToolBar({self.windowTitle()!r})"
+        return f"{type(self).__name__}({self.windowTitle()!r})"
 
     def add(self, item: Union[QtWidgets.QAction, QtWidgets.QWidget]):
         if isinstance(item, QtWidgets.QAction):

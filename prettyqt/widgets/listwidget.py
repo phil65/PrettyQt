@@ -25,7 +25,7 @@ class ListWidget(QtWidgets.QListWidget):
         self.set_selection_mode(selection_mode)
 
     def __repr__(self):
-        return f"ListWidget: {self.count()} items"
+        return f"{type(self).__name__}: {self.count()} items"
 
     def __getitem__(self, row: int) -> QtWidgets.QListWidgetItem:
         return self.item(row)

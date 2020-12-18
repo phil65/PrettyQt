@@ -26,7 +26,7 @@ class GroupBox(QtWidgets.QGroupBox):
         self.setCheckable(checkable)
 
     def __repr__(self):
-        return f"GroupBox({self.title()!r})"
+        return f"{type(self).__name__}({self.title()!r})"
 
     def serialize_fields(self):
         return dict(

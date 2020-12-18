@@ -35,7 +35,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self.set_read_only(read_only)
 
     def __repr__(self):
-        return f"LineEdit: {self.serialize_fields()}"
+        return f"{type(self).__name__}: {self.serialize_fields()}"
 
     def __setstate__(self, state):
         self.set_text(state["text"])

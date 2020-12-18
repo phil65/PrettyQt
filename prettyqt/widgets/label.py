@@ -50,7 +50,7 @@ class Label(QtWidgets.QLabel):
         self.openExternalLinks()
 
     def __repr__(self):
-        return f"Label({self.text()!r})"
+        return f"{type(self).__name__}({self.text()!r})"
 
     def serialize_fields(self):
         pixmap = gui.Pixmap(self.pixmap())

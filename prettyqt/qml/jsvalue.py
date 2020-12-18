@@ -23,7 +23,7 @@ ERROR_TYPES = bidict(
 
 class JSValue(QtQml.QJSValue):
     def __repr__(self):
-        return f"JSValue({self.toVariant()})"
+        return f"{type(self).__name__}({self.toVariant()})"
 
     def __len__(self):
         return self.property("length").toVariant()

@@ -15,7 +15,7 @@ class KeySequenceEdit(QtWidgets.QKeySequenceEdit):
         self.keySequenceChanged.connect(self.value_changed)
 
     def __repr__(self):
-        return f"KeySequenceEdit({self.get_value()!r})"
+        return f"{type(self).__name__}({self.get_value()!r})"
 
     def set_value(self, value: str):
         seq = gui.KeySequence.fromString(value)
