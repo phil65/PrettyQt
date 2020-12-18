@@ -35,7 +35,7 @@ class Line(QtCore.QLine):
             raise KeyError(index)
 
     def __setitem__(
-        self, index: Literal[0, 1], value: Union[QtCore.Point, Tuple[int, int]]
+        self, index: Literal[0, 1], value: Union[QtCore.QPoint, Tuple[int, int]]
     ):
         if index == 0:
             self.set_p1(value)
@@ -49,16 +49,20 @@ class Line(QtCore.QLine):
 
     def set_p1(self, point: Union[QtCore.QPoint, Tuple[int, int]]):
         if isinstance(point, tuple):
-            point = core.PointF(*point)
-        self.setP1(point)
+            p = core.PointF(*point)
+        else:
+            p = point
+        self.setP1(p)
 
     def get_p2(self) -> core.Point:
         return core.Point(self.p2())
 
     def set_p2(self, point: Union[QtCore.QPoint, Tuple[int, int]]):
         if isinstance(point, tuple):
-            point = core.PointF(*point)
-        self.setP2(point)
+            p = core.PointF(*point)
+        else:
+            p = point
+        self.setP2(p)
 
     def get_center(self) -> core.Point:
         return core.Point(self.center())

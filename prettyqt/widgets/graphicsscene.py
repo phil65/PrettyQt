@@ -61,6 +61,8 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
             return self.add_text(item)
         elif isinstance(item, QtWidgets.QWidget):
             return self.add_widget(item)
+        else:
+            raise TypeError(item)
 
     def add_pixmap(self, pixmap: QtGui.QPixmap) -> widgets.GraphicsPixmapItem:
         g_item = widgets.GraphicsPixmapItem()

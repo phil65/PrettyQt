@@ -109,7 +109,7 @@ class ChartView(QtCharts.QChartView):
             return None
         self.chart().show_legend()
         image = self.get_image()
-        image.save(filename[0])
+        image.save(str(filename[0]))
         self.chart().hide_legend()
 
     def get_image(self) -> QtGui.QPixmap:

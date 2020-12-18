@@ -40,6 +40,4 @@ class HistoryState(QtCore.QHistoryState):
 
 
 if __name__ == "__main__":
-    reg = HistoryState("This is a test", boundary_type="word")
-    for p in reg:
-        print(p)
+    state = HistoryState()

@@ -8,7 +8,7 @@ from prettyqt.utils import InvalidParamError, bidict
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
     POLICIES = bidict(
-        none=QtWidgets.QActionGroup.ExclusionPolicy(0),
+        none=QtWidgets.QActionGroup.ExclusionPolicy(0),  # type: ignore
         exclusive=QtWidgets.QActionGroup.ExclusionPolicy.Exclusive,
         exclusive_optional=QtWidgets.QActionGroup.ExclusionPolicy.ExclusiveOptional,
     )
@@ -21,7 +21,7 @@ QtWidgets.QActionGroup.__bases__ = (core.Object,)
 
 class ActionGroup(QtWidgets.QActionGroup):
     def __init__(self, parent: Optional[QtCore.QObject] = None):
-        super().__init__(parent)
+        super().__init__(parent)  # type: ignore
 
     def __len__(self) -> int:
         return len(self.actions())

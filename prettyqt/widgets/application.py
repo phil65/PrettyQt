@@ -95,7 +95,7 @@ class Application(QtWidgets.QApplication):
         if mw is None:
             logger.warning("Trying to get widget from nonexistent mainwindow")
             return None
-        return mw.findChild(QtWidgets.QWidget, name)
+        return mw.findChild(QtWidgets.QWidget, name)  # type: ignore
         # widget_list = cls.instance().allWidgets()
         # for widget in widget_list:
         #     if isinstance(widget, QtWidgets.QWidget) and widget.objectName() == name:
@@ -142,7 +142,7 @@ class Application(QtWidgets.QApplication):
             raise InvalidParamError(effect, constants.UI_EFFECTS)
         self.setEffectEnabled(constants.UI_EFFECTS[effect])
 
-    def is_effect_enabled(self, effect: constants.UiEffectStr) -> str:
+    def is_effect_enabled(self, effect: constants.UiEffectStr) -> bool:
         """Return desktop effect state.
 
         Returns:

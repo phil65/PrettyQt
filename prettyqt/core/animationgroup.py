@@ -1,4 +1,4 @@
-from typing import List, overload
+from typing import List, Union, overload
 
 from qtpy import QtCore
 
@@ -41,9 +41,13 @@ class AnimationGroup(QtCore.QAnimationGroup):
         return self
 
     def add_property_animation(
-        self, obj: QtCore.QObject, attribute: str
+        self, obj: QtCore.QObject, attribute: Union[str, bytes, QtCore.QByteArray]
     ) -> core.PropertyAnimation:
-        anim = core.PropertyAnimation(obj, attribute.encode())
+        if isinstance(attribute, str):
+            attribute = attribute.encode()
+        if isinstance(attribute, bytes):
+            attribute = QtCore.QByteArray(attribute)
+        anim = core.PropertyAnimation(obj, attribute)
         self.addAnimation(anim)
         return anim
 

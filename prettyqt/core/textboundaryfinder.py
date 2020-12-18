@@ -42,7 +42,9 @@ class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
     def __init__(
         self,
         string_or_other: Union[str, QtCore.QTextBoundaryFinder] = "",
-        boundary_type: Union[int, BoundaryTypeStr] = BOUNDARY_TYPES["grapheme"],
+        boundary_type: Union[
+            QtCore.QTextBoundaryFinder.BoundaryType, BoundaryTypeStr
+        ] = BOUNDARY_TYPES["grapheme"],
     ):
         if isinstance(string_or_other, QtCore.QTextBoundaryFinder):
             super().__init__(string_or_other)
@@ -55,7 +57,7 @@ class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
         return f"{type(self).__name__}({self.string()!r})"
 
     def __reduce__(self):
-        return self.__class__, (self.string(), int(self.type))
+        return self.__class__, (self.string(), self.type())
 
     def __iter__(self):
         pos = self.position()

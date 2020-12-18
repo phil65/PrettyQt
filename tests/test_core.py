@@ -571,7 +571,7 @@ def test_settings(qapp):
         pass
     with settings.read_array("test"):
         pass
-    with settings.group("test"):
+    with settings.edit_group("test"):
         pass
     with pytest.raises(KeyError):
         del settings["some value"]

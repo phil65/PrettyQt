@@ -1,5 +1,5 @@
 import contextlib
-from typing import Literal, Union
+from typing import Literal, Tuple, Union
 
 from qtpy import QtGui
 
@@ -93,12 +93,12 @@ class TextCursor(QtGui.QTextCursor):
         """
         self.setPosition(pos, MOVE_MODE[mode])
 
-    def select(self, selection: SelectionTypeStr):
+    def select(self, selection: Union[SelectionTypeStr, QtGui.QTextCursor.SelectionType]):
         if selection in SELECTION_TYPE:
             selection = SELECTION_TYPE[selection]
         super().select(selection)
 
-    def span(self) -> tuple:
+    def span(self) -> Tuple[int, int]:
         return (self.anchor(), self.position())
 
     def select_text(

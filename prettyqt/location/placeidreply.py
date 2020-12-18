@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from qtpy import QtLocation
 
 from prettyqt import location
@@ -12,6 +14,10 @@ OPERATION_TYPES = bidict(
     save_category=QtLocation.QPlaceIdReply.SaveCategory,
     remove_category=QtLocation.QPlaceIdReply.RemoveCategory,
 )
+
+OperationTypeStr = Literal[
+    "save_place", "remove_place", "save_category", "remove_category"
+]
 
 QtLocation.QPlaceIdReply.__bases__ = (location.PlaceReply,)
 
@@ -26,10 +32,8 @@ class PlaceIdReply(QtLocation.QPlaceIdReply):
         reply.setId(obj.id())
         return reply
 
-    def get_operation_type(self) -> str:
+    def get_operation_type(self) -> OperationTypeStr:
         """Get current operation_type.
-
-        Possible values: "save_place", "remove_place", save_category", "remove_category"
 
         Returns:
             current operation_type

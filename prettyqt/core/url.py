@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Optional, Union
+from typing import Literal, Optional, Union
 
 from qtpy import QtCore
 
@@ -19,12 +19,25 @@ COMPONENT_FORMATTING_OPTIONS = bidict(
     fully_decoded=QtCore.QUrl.FullyDecoded,
 )
 
+ComponentFormattingStr = Literal[
+    "pretty_decoded",
+    "encode_spaces",
+    "encode_unicode",
+    "encode_delimiters",
+    "encode_reserved",
+    "decode_reserved",
+    "fully_encoded",
+    "fully_decoded",
+]
+
 
 PARSING_MODES = bidict(
     tolerant=QtCore.QUrl.TolerantMode,
     strict=QtCore.QUrl.StrictMode,
     decoded=QtCore.QUrl.DecodedMode,
 )
+
+ParsingModeStr = Literal["tolerant", "strict", "decoded"]
 
 FORMATTING_OPTIONS = bidict(
     none=0,  # QtCore.QUrl.None
@@ -41,6 +54,22 @@ FORMATTING_OPTIONS = bidict(
     strip_trailing_slash=QtCore.QUrl.StripTrailingSlash,
     normalize_path_segments=QtCore.QUrl.NormalizePathSegments,
 )
+
+FormattingOptionStr = Literal[
+    "none",
+    "remove_scheme",
+    "remove_password",
+    "remove_user_info",
+    "remove_port",
+    "remove_authority",
+    "remove_path",
+    "remove_query",
+    "remove_fragment",
+    "remove_filename",
+    "prefer_local_file",
+    "strip_trailing_slash",
+    "normalize_path_segments",
+]
 
 
 class Url(QtCore.QUrl):

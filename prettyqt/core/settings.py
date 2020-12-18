@@ -137,7 +137,7 @@ class Settings(QtCore.QSettings):
         cls.setPath(FORMAT[fmt], SCOPE[scope], str(path))
 
     @contextlib.contextmanager
-    def group(self, prefix: str):
+    def edit_group(self, prefix: str):
         """Context manager for setting groups.
 
         Args:

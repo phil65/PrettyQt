@@ -43,17 +43,13 @@ class LineF(QtCore.QLineF):
             raise KeyError(index)
 
     def set_p1(self, point: Union[QtCore.QPointF, Tuple[float, float]]):
-        if isinstance(point, tuple):
-            point = core.PointF(*point)
-        self.setP1(point)
+        self.setP1(core.PointF(*point) if isinstance(point, tuple) else point)
 
     def get_p1(self) -> core.PointF:
         return core.PointF(self.p1())
 
     def set_p2(self, point: Union[QtCore.QPointF, Tuple[float, float]]):
-        if isinstance(point, tuple):
-            point = core.PointF(*point)
-        self.setP2(point)
+        self.setP2(core.PointF(*point) if isinstance(point, tuple) else point)
 
     def get_p2(self) -> core.PointF:
         return core.PointF(self.p2())

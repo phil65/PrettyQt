@@ -16,10 +16,10 @@ class GraphicsLinearLayout(QtWidgets.QGraphicsLinearLayout):
         ] = "horizontal",
         parent: Optional[QtWidgets.QGraphicsLayoutItem] = None,
     ):
-        if isinstance(orientation, str) and orientation in constants.ORIENTATION:
-            ori = constants.ORIENTATION[orientation]
-        else:
+        if isinstance(orientation, QtCore.Qt.Orientation):
             ori = orientation
+        else:
+            ori = constants.ORIENTATION[orientation]
         super().__init__(ori, parent)
 
     def serialize_fields(self):

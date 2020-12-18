@@ -51,7 +51,7 @@ class MessageBox(QtWidgets.QMessageBox):
     def __init__(
         self,
         icon: gui.icon.IconType = None,
-        title: Optional[str] = None,
+        title: str = "",
         text: str = "",
         informative_text: str = "",
         details: str = "",
@@ -75,7 +75,7 @@ class MessageBox(QtWidgets.QMessageBox):
     def message(
         cls,
         text: str,
-        title: str = None,
+        title: str = "",
         icon: gui.icon.IconType = None,
         detail_text: Optional[str] = None,
     ) -> str:

@@ -152,11 +152,11 @@ class Timeline(widgets.Widget):
                     pic = sample.picture
                 else:
                     width = scaled_dur
-                    pic = sample.picture.copy(0, 0, scaled_dur, 45)
+                    pic = sample.picture.copy(0, 0, int(scaled_dur), 45)
                 with qp.clip_path() as path:
                     rect = core.RectF(scaled_t, 52.5, width, 45)
                     path.addRoundedRect(rect, 10, 10)
-                rect = core.Rect(scaled_t, 52.5, width, 45)
+                rect = core.RectF(scaled_t, 52.5, width, 45)
                 qp.drawPixmap(rect, pic)
 
             # Clear clip path

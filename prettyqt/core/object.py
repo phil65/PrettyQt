@@ -100,7 +100,7 @@ class Object(QtCore.QObject):
         else:
             flag = QtCore.Qt.FindDirectChildrenOnly
         if qtpy.API == "pyqt5":
-            return self.findChild(typ, name=name, options=flag)
+            return self.findChild(typ, name, flag)
         else:
             item = self.findChild(typ, name)
             return item if recursive or item.parent() == self else None

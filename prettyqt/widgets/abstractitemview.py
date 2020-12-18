@@ -85,7 +85,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         old_model = self.model()
         old_sel_model = self.selectionModel()
         if old_model is not None or model is not None:
-            self.setModel(model)
+            self.setModel(model)  # type: ignore
         # if old_model:
         #     old_model.deleteLater()
         #     del old_model
