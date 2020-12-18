@@ -135,8 +135,8 @@ from .jsondocument import JsonDocument
 
 # not available in PySide2
 if qtpy.API == "pyqt5":
-    from .library import Library
-    from .pluginloader import PluginLoader
+    from .library import Library  # type: ignore
+    from .pluginloader import PluginLoader  # type: ignore
 
 if VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel

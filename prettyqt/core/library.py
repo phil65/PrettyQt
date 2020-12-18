@@ -1,3 +1,6 @@
+# type: ignore
+# not available in PySide2
+
 from typing import List, Literal
 
 from qtpy import QtCore

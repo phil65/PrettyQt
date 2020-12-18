@@ -83,8 +83,8 @@ force_sort_within_sections = true
 combine_as_imports = true
 use_parentheses = true
 force_grid_wrap = 0
-# not_skip = "__init__.py"
-skip_glob = ["*/setup.py", "*/__init__.py"]
+# skip = "__init__.py"
+skip_glob = ["*/setup.py", "*/**/__init__.py"]
 # filter_files = true
 
 # known_first_party = "poetry"
