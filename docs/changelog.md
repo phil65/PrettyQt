@@ -1,3 +1,15 @@
+## v0.154.0 (2020-12-18)
+
+### Feat
+
+- add QtLocation and QtHelp to qt submodule
+- **Dir/FileDialog**: add get/set_filter methods
+- **InputDialog**: add get/set_input_mode and get/set_text_echo_mode methods
+
+### Fix
+
+- correct StarDelegate setModelData call
+
 ## v0.153.0 (2020-12-17)
 
 ### Feat
