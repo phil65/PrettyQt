@@ -2166,7 +2166,6 @@ get_operation_type<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Get current operation_type.</p>
-<p>Possible values: "save_place", "remove_place", save_category", "remove_category"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2177,7 +2176,7 @@ get_operation_type<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>OperationTypeStr</code></td>
 <td>
 <p>current operation_type</p>
 </td>
@@ -2187,10 +2186,8 @@ get_operation_type<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placeidreply.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_operation_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_operation_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OperationTypeStr</span><span class="p">:</span>
     <span class="sd">"""Get current operation_type.</span>
-
-<span class="sd">    Possible values: "save_place", "remove_place", save_category", "remove_category"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current operation_type</span>

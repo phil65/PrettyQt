@@ -1986,7 +1986,7 @@ createEditor<span class="p">(</span><span class="bp">self</span><span class="p">
     <span class="n">layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="c1"># set a property that will be used for the mask</span>
-    <span class="n">editor</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">"offMask"</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="n">editor</span><span class="o">.</span><span class="n">rect</span><span class="p">()))</span>
+    <span class="n">editor</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">"offMask"</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="n">editor</span><span class="o">.</span><span class="n">rect</span><span class="p">()))</span>
     <span class="n">editor</span><span class="o">.</span><span class="n">installEventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">editor</span>
 </code></pre>
@@ -2109,7 +2109,7 @@ updateEditorGeometry<span class="p">(</span><span class="bp">self</span><span cl
     <span class="n">editor</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
     <span class="c1"># create a new mask based on the option rectangle, then apply it</span>
     <span class="n">mask</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
-    <span class="n">editor</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">"offMask"</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+    <span class="n">editor</span><span class="o">.</span><span class="n">set_property</span><span class="p">(</span><span class="s2">"offMask"</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
     <span class="n">editor</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -2339,7 +2339,7 @@ setModelData<span class="p">(</span><span class="bp">self</span><span class="p">
     <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
         <span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">editor</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">star_count</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setModelData</span><span class="p">(</span><span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>

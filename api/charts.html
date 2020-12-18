@@ -2226,7 +2226,7 @@ save_as_image<span class="p">(</span><span class="bp">self</span><span class="p"
         <span class="k">return</span> <span class="kc">None</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">show_legend</span><span class="p">()</span>
     <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
-    <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">hide_legend</span><span class="p">()</span>
 </code></pre>
 </div>

@@ -1257,7 +1257,9 @@ bind(self, port: int = 0, mode: Union[QAbstractSocket.BindMode, QAbstractSocket.
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">address</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">],</span>
     <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">bind_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"default_for_platform"</span><span class="p">,</span>
+    <span class="n">bind_mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span>
+        <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QAbstractSocket</span><span class="o">.</span><span class="n">BindMode</span><span class="p">,</span> <span class="n">BindModeStr</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="s2">"default_for_platform"</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">address</span> <span class="o">=</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
@@ -1279,7 +1281,6 @@ set_pause_mode<span class="p">(</span><span class="bp">self</span><span class="p
       </h4>
 <div class="doc doc-contents ">
 <p>Set pause mode.</p>
-<p>Valid values: "never", "on_ssl_errors"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1293,7 +1294,7 @@ set_pause_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['never', 'on_ssl_errors']</code></td>
 <td>
 <p>pause mode</p>
 </td>
@@ -1321,10 +1322,8 @@ set_pause_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/network/abstractsocket.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_pause_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_pause_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PauseModeStr</span><span class="p">):</span>
     <span class="sd">"""Set pause mode.</span>
-
-<span class="sd">    Valid values: "never", "on_ssl_errors"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: pause mode</span>

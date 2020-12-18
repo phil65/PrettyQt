@@ -1200,6 +1200,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.edit_group" class="md-nav__link">
+    edit_group()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.core.settings.Settings.get_default_format" class="md-nav__link">
     get_default_format()
   </a>
@@ -1209,13 +1216,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.core.settings.Settings.get_scope" class="md-nav__link">
     get_scope()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.core.settings.Settings.group" class="md-nav__link">
-    group()
   </a>
   
 </li>
@@ -2953,6 +2953,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.core.settings.Settings.edit_group" class="md-nav__link">
+    edit_group()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.core.settings.Settings.get_default_format" class="md-nav__link">
     get_default_format()
   </a>
@@ -2962,13 +2969,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.core.settings.Settings.get_scope" class="md-nav__link">
     get_scope()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.core.settings.Settings.group" class="md-nav__link">
-    group()
   </a>
   
 </li>
@@ -6132,6 +6132,55 @@ match<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.edit_group">
+
+        <code class="highlight language-python">
+edit_group<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Context manager for setting groups.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>prefix</code></td>
+<td><code>str</code></td>
+<td>
+<p>setting prefix for group</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+<span class="k">def</span> <span class="nf">edit_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="sd">"""Context manager for setting groups.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        prefix: setting prefix for group</span>
+<span class="sd">    """</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">beginGroup</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+    <span class="k">yield</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">endGroup</span><span class="p">()</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.get_default_format">
 
         <code class="highlight language-python">
@@ -6214,55 +6263,6 @@ get_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <span class="sd">        scope</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">SCOPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">()]</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.core.settings.Settings.group">
-
-        <code class="highlight language-python">
-group<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">)</span>        </code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>Context manager for setting groups.</p>
-<p><strong>Parameters:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>prefix</code></td>
-<td><code>str</code></td>
-<td>
-<p>setting prefix for group</p>
-</td>
-<td><em>required</em></td>
-</tr>
-</tbody>
-</table>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
-<span class="k">def</span> <span class="nf">group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">"""Context manager for setting groups.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        prefix: setting prefix for group</span>
-<span class="sd">    """</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">beginGroup</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
-    <span class="k">yield</span> <span class="kc">None</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">endGroup</span><span class="p">()</span>
 </code></pre>
 </div>
 </details>

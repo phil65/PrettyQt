@@ -2264,6 +2264,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog" class="md-nav__link">
+    inputdialog
+  </a>
+  
+    <nav class="md-nav" aria-label="inputdialog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog" class="md-nav__link">
+    InputDialog
+  </a>
+  
+    <nav class="md-nav" aria-label="InputDialog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog.get_input_mode" class="md-nav__link">
+    get_input_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog.get_text_echo_mode" class="md-nav__link">
+    get_text_echo_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog.set_input_mode" class="md-nav__link">
+    set_input_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog.set_text_echo_mode" class="md-nav__link">
+    set_text_echo_mode()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.widgets.label" class="md-nav__link">
     label
   </a>
@@ -5855,6 +5909,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog" class="md-nav__link">
+    inputdialog
+  </a>
+  
+    <nav class="md-nav" aria-label="inputdialog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog" class="md-nav__link">
+    InputDialog
+  </a>
+  
+    <nav class="md-nav" aria-label="InputDialog">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog.get_input_mode" class="md-nav__link">
+    get_input_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog.get_text_echo_mode" class="md-nav__link">
+    get_text_echo_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog.set_input_mode" class="md-nav__link">
+    set_input_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.inputdialog.InputDialog.set_text_echo_mode" class="md-nav__link">
+    set_text_echo_mode()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.widgets.label" class="md-nav__link">
     label
   </a>
@@ -8384,7 +8492,7 @@ set_model<span class="p">(</span><span class="bp">self</span><span class="p">,</
     <span class="n">old_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span>
     <span class="n">old_sel_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">old_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
     <span class="c1"># if old_model:</span>
     <span class="c1">#     old_model.deleteLater()</span>
     <span class="c1">#     del old_model</span>
@@ -10633,7 +10741,7 @@ is_effect_enabled<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>bool</code></td>
 <td>
 <p>desktop effect state</p>
 </td>
@@ -10643,7 +10751,7 @@ is_effect_enabled<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">is_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">UiEffectStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">is_effect_enabled</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">UiEffectStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">"""Return desktop effect state.</span>
 
 <span class="sd">    Returns:</span>
@@ -11467,8 +11575,7 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SIZE_ADJUST_POLICY</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">SIZE_ADJUST_POLICY</span><span class="p">)</span>
-    <span class="n">policy</span> <span class="o">=</span> <span class="n">SIZE_ADJUST_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setSizeAdjustPolicy</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setSizeAdjustPolicy</span><span class="p">(</span><span class="n">SIZE_ADJUST_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -12857,7 +12964,7 @@ set_directory<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/filedialog.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""Set start directory."""</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
         <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -15321,6 +15428,250 @@ contextMenuEvent<span class="p">(</span><span class="bp">self</span><span class=
 </div>
 </div>
 <div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.widgets.inputdialog">
+
+        <code>inputdialog</code>
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.widgets.inputdialog.InputDialog">
+
+        <code>InputDialog</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.inputdialog.InputDialog.get_input_mode">
+
+        <code class="highlight language-python">
+get_input_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return input mode.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['text', 'int', 'double']</code></td>
+<td>
+<p>input mode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/inputdialog.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_input_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InputModeStr</span><span class="p">:</span>
+    <span class="sd">"""Return input mode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        input mode</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">INPUT_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inputMode</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.inputdialog.InputDialog.get_text_echo_mode">
+
+        <code class="highlight language-python">
+get_text_echo_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return text echo mode.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['normal', 'no_echo', 'password', 'echo_on_edit']</code></td>
+<td>
+<p>echo mode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/inputdialog.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_text_echo_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">EchoModeStr</span><span class="p">:</span>
+    <span class="sd">"""Return text echo mode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        echo mode</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">widgets</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">ECHO_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">textEchoMode</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.inputdialog.InputDialog.set_input_mode">
+
+        <code class="highlight language-python">
+set_input_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set input mode.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td><code>Literal['text', 'int', 'double']</code></td>
+<td>
+<p>input mode to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid input mode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/inputdialog.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_input_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">InputModeStr</span><span class="p">):</span>
+    <span class="sd">"""Set input mode.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mode: input mode to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid input mode</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">INPUT_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">INPUT_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setInputMode</span><span class="p">(</span><span class="n">INPUT_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.inputdialog.InputDialog.set_text_echo_mode">
+
+        <code class="highlight language-python">
+set_text_echo_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set text echo mode.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td><code>Literal['normal', 'no_echo', 'password', 'echo_on_edit']</code></td>
+<td>
+<p>echo mode to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid echo mode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/inputdialog.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_text_echo_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">EchoModeStr</span><span class="p">):</span>
+    <span class="sd">"""Set text echo mode.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mode: echo mode to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid echo mode</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">widgets</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">ECHO_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">widgets</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">ECHO_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTextEchoMode</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">ECHO_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.widgets.label">
 
         <code>label</code>
@@ -16262,7 +16613,7 @@ get_echo_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Returns:</span>
 <span class="sd">        echo mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">ECHO_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">echoMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">ECHO_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">echoMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -16328,9 +16679,9 @@ set_echo_mode<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid echo mode</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ECHO_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ECHO_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setEchoMode</span><span class="p">(</span><span class="n">ECHO_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ECHO_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ECHO_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setEchoMode</span><span class="p">(</span><span class="n">ECHO_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -23008,7 +23359,7 @@ set_button_text<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="n">WizardButtonStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="n">WizardButtonStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set text for given button type.</span>
 
 <span class="sd">    Args:</span>
@@ -23018,7 +23369,7 @@ set_button_text<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">button_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WIZARD_BUTTON</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">button_type</span><span class="p">,</span> <span class="n">WIZARD_BUTTON</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setButtonText</span><span class="p">(</span><span class="n">WIZARD_BUTTON</span><span class="p">[</span><span class="n">button_type</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setButtonText</span><span class="p">(</span><span class="n">WIZARD_BUTTON</span><span class="p">[</span><span class="n">button_type</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -23445,7 +23796,7 @@ set_button_text<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizardpage.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="sd">"""Set text for given button type.</span>
 
 <span class="sd">    Args:</span>
@@ -23455,7 +23806,7 @@ set_button_text<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">button_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">widgets</span><span class="o">.</span><span class="n">wizard</span><span class="o">.</span><span class="n">WIZARD_BUTTON</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">button_type</span><span class="p">,</span> <span class="n">widgets</span><span class="o">.</span><span class="n">wizard</span><span class="o">.</span><span class="n">WIZARD_BUTTON</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setButtonText</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">wizard</span><span class="o">.</span><span class="n">WIZARD_BUTTON</span><span class="p">[</span><span class="n">button_type</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setButtonText</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">wizard</span><span class="o">.</span><span class="n">WIZARD_BUTTON</span><span class="p">[</span><span class="n">button_type</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
