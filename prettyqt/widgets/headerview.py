@@ -27,12 +27,14 @@ class HeaderView(QtWidgets.QHeaderView):
 
     def __init__(
         self,
-        orientation: Union[constants.OrientationStr, int],
+        orientation: Union[constants.OrientationStr, QtCore.Qt.Orientation],
         parent: Optional[QtWidgets.QWidget] = None,
     ):
-        if isinstance(orientation, str) and orientation in constants.ORIENTATION:
-            orientation = constants.ORIENTATION[orientation]
-        super().__init__(orientation, parent=parent)
+        if isinstance(orientation, QtCore.Qt.Orientation):
+            ori = orientation
+        else:
+            ori = constants.ORIENTATION[orientation]
+        super().__init__(ori, parent=parent)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
         self._widget_name = parent.get_id() if parent is not None else ""

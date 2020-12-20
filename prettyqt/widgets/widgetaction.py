@@ -10,9 +10,13 @@ QtWidgets.QWidgetAction.__bases__ = (widgets.Action,)
 
 class WidgetAction(QtWidgets.QWidgetAction):
     def __init__(self, parent: Optional[QtCore.QObject] = None):
-        super().__init__(parent)
+        super().__init__(parent)  # type: ignore
 
     #     self.set_text(text)
     #     self.set_icon(icon)
     #     self.set_shortcut(shortcut)
     #     self.set_tooltip(tooltip)
+
+
+if __name__ == "__main__":
+    w = WidgetAction()

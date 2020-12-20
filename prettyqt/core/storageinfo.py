@@ -11,12 +11,12 @@ class StorageInfo(QtCore.QStorageInfo):
         self,
         path: Optional[Union[QtCore.QStorageInfo, QtCore.QDir, str, pathlib.Path]] = None,
     ):
-        if path is not None:
-            super().__init__(path)
+        if path is None:
+            super().__init__()
         else:
             if isinstance(path, pathlib.Path):
                 path = str(path)
-            super().__init__()
+            super().__init__(path)
 
     def __bool__(self):
         return self.isValid()

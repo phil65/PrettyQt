@@ -14,7 +14,7 @@ class JsonDocument(QtCore.QJsonDocument):
 
     def __getitem__(self, index: Union[int, str]):
         val = self.array() if self.isArray() else self.object()
-        return core.JsonValue(val[index])
+        return core.JsonValue(val[index])  # type: ignore
 
     def __setitem__(self, index: Union[int, str], value):
         if self.isArray():
@@ -23,12 +23,12 @@ class JsonDocument(QtCore.QJsonDocument):
             array = self.array()
             array[index] = value
             self.setArray(array)
-        if self.isObject():
+        elif self.isObject():
             if not isinstance(index, str):
                 raise TypeError()
-            array = self.object()
-            array[index] = value
-            self.setObject(array)
+            obj = self.object()
+            obj[index] = value
+            self.setObject(obj)
 
     def to_string(self, indented: bool = False) -> str:
         flag = QtCore.QJsonDocument.Indented if indented else QtCore.QJsonDocument.Compact

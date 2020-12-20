@@ -358,10 +358,14 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def set_cursor(self, cursor: constants.CursorShapeStr) -> None:
-        if cursor not in constants.CURSOR_SHAPE:
-            raise InvalidParamError(cursor, constants.CURSOR_SHAPE)
-        self.setCursor(constants.CURSOR_SHAPE[cursor])
+    def set_cursor(self, cursor: Union[constants.CursorShapeStr, QtGui.QCursor]) -> None:
+        if isinstance(cursor, QtGui.QCursor):
+            curs = cursor
+        else:
+            if cursor not in constants.CURSOR_SHAPE:
+                raise InvalidParamError(cursor, constants.CURSOR_SHAPE)
+            curs = gui.Cursor(constants.CURSOR_SHAPE[cursor])
+        self.setCursor(curs)
 
     def set_focus_policy(self, policy: constants.FocusPolicyStr) -> None:
         """Set the way the widget accepts keyboard focus.

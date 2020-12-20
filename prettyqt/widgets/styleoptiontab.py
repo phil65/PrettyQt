@@ -17,7 +17,7 @@ SELECTED_POSITION = bidict(
 )
 
 TAB_FEATURE = bidict(
-    none=QtWidgets.QStyleOptionTab.TabFeature(0),  # type: ignore
+    none=QtWidgets.QStyleOptionTab.TabFeature(),
     has_frame=QtWidgets.QStyleOptionTab.HasFrame,
 )
 

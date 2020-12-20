@@ -43,14 +43,15 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         do_not_use_parent: bool = False,
         parent_is_invalid: bool = False,
     ) -> bool:
-        flag = QtCore.QAbstractItemModel.CheckIndexOptions(0)  # type: ignore
+        flag = QtCore.QAbstractItemModel.CheckIndexOption.NoOption
         if index_is_valid:
             flag |= QtCore.QAbstractItemModel.CheckIndexOption.IndexIsValid
         if do_not_use_parent:
             flag |= QtCore.QAbstractItemModel.CheckIndexOption.DoNotUseParent
         if parent_is_invalid:
             flag |= QtCore.QAbstractItemModel.CheckIndexOption.ParentIsInvalid
-        return self.checkIndex(index, flag)
+        check_flag = QtCore.QAbstractItemModel.CheckIndexOptions(flag)  # type: ignore
+        return self.checkIndex(index, check_flag)
 
     @contextlib.contextmanager
     def change_layout(self):

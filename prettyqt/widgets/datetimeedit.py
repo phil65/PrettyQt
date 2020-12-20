@@ -89,7 +89,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         upper: Union[QtCore.QDateTime, datetime.datetime],
     ):
         self.setToolTip(f"{lower} <= x <= {upper}")
-        self.setDateTimeRange(lower, upper)
+        self.setDateTimeRange(lower, upper)  # type: ignore
 
     def set_format(self, fmt: str):
         self.setDisplayFormat(fmt)
@@ -98,7 +98,7 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         return self.get_datetime()
 
     def set_value(self, value: datetime.datetime):
-        self.setDateTime(value)
+        self.setDateTime(value)  # type: ignore
 
     def get_datetime(self) -> datetime.datetime:
         return to_datetime(self.dateTime())

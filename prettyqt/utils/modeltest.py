@@ -41,7 +41,7 @@
 #
 # $QT_END_LICENSE$
 
-from typing import Any, List, NamedTuple
+from typing import Any, List, NamedTuple, Tuple
 
 from qtpy import QtCore, QtGui, QtTest
 
@@ -55,13 +55,13 @@ class _Changing(NamedTuple):
 
 HAS_QT_TESTER = hasattr(QtTest, "QAbstractItemModelTester")
 
-TYPES = [
+TYPES: List[Tuple[QtCore.Qt.ItemDataRole, Tuple[type, ...]]] = [
     (QtCore.Qt.DisplayRole, (str,)),
     (QtCore.Qt.ToolTipRole, (str,)),
     (QtCore.Qt.StatusTipRole, (str,)),
     (QtCore.Qt.WhatsThisRole, (str,)),
-    (QtCore.Qt.SizeHintRole, QtCore.QSize),
-    (QtCore.Qt.FontRole, QtGui.QFont),
+    (QtCore.Qt.SizeHintRole, (QtCore.QSize,)),
+    (QtCore.Qt.FontRole, (QtGui.QFont,)),
     (QtCore.Qt.BackgroundColorRole, (QtGui.QColor, QtGui.QBrush)),
     (QtCore.Qt.TextColorRole, (QtGui.QColor, QtGui.QBrush)),
     (
@@ -112,8 +112,9 @@ class ModelTester:
         assert self._model is not None
 
         if HAS_QT_TESTER and not force_py:
-            reporting_mode = QtTest.QAbstractItemModelTester.FailureReportingMode.Warning
-            self._qt_tester = QtTest.QAbstractItemModelTester(self._model, reporting_mode)
+            tester = QtTest.QAbstractItemModelTester  # type: ignore
+            reporting_mode = tester.FailureReportingMode.Warning
+            self._qt_tester = tester(self._model, reporting_mode)
             self._debug("Using Qt C++ tester")
             return
 
@@ -151,10 +152,6 @@ class ModelTester:
         self._run()
 
     def _cleanup(self):
-        """Not API intended for users, but called from the fixture function."""
-        if self._model is None:
-            return
-
         self._model.columnsAboutToBeInserted.disconnect(self._run)
         self._model.columnsAboutToBeRemoved.disconnect(self._run)
         self._model.columnsInserted.disconnect(self._run)
@@ -177,8 +174,6 @@ class ModelTester:
         self._model.rowsRemoved.disconnect(self._on_rows_removed)
         self._model.dataChanged.disconnect(self._on_data_changed)
         self._model.headerDataChanged.disconnect(self._on_header_data_changed)
-
-        self._model = None
 
     def _run(self):
         assert self._model is not None
@@ -462,10 +457,8 @@ class ModelTester:
         assert self._model.index(0, 0).isValid()
         # General purpose roles with a fixed expected type
         for role, typ in TYPES:
-            data = self._model.data(self._model.index(0, 0), role)
-            if data is not None:
-                data = data
-            assert data == None or isinstance(data, typ), role  # noqa
+            data = self._model.data(self._model.index(0, 0), role)  # type: ignore
+            assert data is None or isinstance(data, typ)  # noqa
 
         # Check that the alignment is one we know about
         alignment = self._model.data(self._model.index(0, 0), QtCore.Qt.TextAlignmentRole)

@@ -1,3 +1,7 @@
+from typing import Tuple
+
+from qtpy import QtGui
+
 from prettyqt import gui
 
 
@@ -5,7 +9,9 @@ class NotEmptyValidator(gui.Validator):
     def __eq__(self, other: object):
         return isinstance(other, NotEmptyValidator)
 
-    def validate(self, text: str, pos: int = 0) -> tuple:
+    def validate(  # type: ignore
+        self, text: str, pos: int = 0
+    ) -> Tuple[QtGui.QValidator.State, str, int]:
         if text == "":
             return (self.Intermediate, text, pos)
         return self.Acceptable, text, pos

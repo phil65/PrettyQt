@@ -95,7 +95,8 @@ class Timeline(widgets.Widget):
             qp.use_antialiasing()
             while w <= self.width():
                 time_string = self.get_time_string(w * scale)
-                qp.drawText(w - 50, 0, 100, 100, QtCore.Qt.AlignHCenter, time_string)
+                rect = core.Rect(w - 50, 0, 100, 100)
+                qp.drawText(rect, QtCore.Qt.AlignHCenter, time_string)
                 w += 100
             # Draw down line
             qp.set_pen(color=PEN_COLOR, width=5)
@@ -148,7 +149,7 @@ class Timeline(widgets.Widget):
                     continue
                 pic_width = sample.picture.size().width()
                 if pic_width < scaled_dur:
-                    width = pic_width
+                    width = float(pic_width)
                     pic = sample.picture
                 else:
                     width = scaled_dur

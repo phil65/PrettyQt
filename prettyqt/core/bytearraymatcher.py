@@ -10,4 +10,4 @@ class ByteArrayMatcher(QtCore.QByteArrayMatcher):
 
 
 if __name__ == "__main__":
-    matcher = ByteArrayMatcher(b"Test")
+    matcher = ByteArrayMatcher(QtCore.QByteArray(b"Test"))

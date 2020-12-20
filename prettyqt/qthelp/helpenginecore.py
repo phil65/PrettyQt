@@ -18,6 +18,8 @@ class HelpEngineCore(QtHelp.QHelpEngineCore):
         filter_name: str,
         extension_filter: Optional[str] = None,
     ) -> List[core.Url]:
+        if extension_filter is None:
+            extension_filter = ""
         return [
             core.Url(i) for i in self.files(namespace_name, filter_name, extension_filter)
         ]

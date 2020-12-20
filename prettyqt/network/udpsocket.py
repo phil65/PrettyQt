@@ -20,6 +20,6 @@ class UdpSocket(QtNetwork.QUdpSocket):
 
 if __name__ == "__main__":
     socket = UdpSocket()
-    socket.bind("localhost")
+    socket.bind_to("localhost")
     socket.get_multicast_interface()
     socket.receive_datagram()

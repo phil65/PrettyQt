@@ -77,7 +77,11 @@ class Url(QtCore.QUrl):
         if path is None:
             super().__init__()
         else:
-            super().__init__(str(path) if not isinstance(path, QtCore.QUrl) else path)
+            if isinstance(path, (QtCore.QUrl, str)):
+                param = path
+            else:
+                param = str(path)
+            super().__init__(param)
             if isinstance(path, pathlib.Path):
                 self.setScheme("file")
 

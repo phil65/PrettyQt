@@ -22,18 +22,20 @@ OsTypeStr = Literal["android", "ios", "mac_os", "tv_os", "watch_os", "windows", 
 class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
     def __init__(
         self,
-        typ: Union[int, str],
+        typ: Union[QtCore.QOperatingSystemVersion.OSType, str],
         major: int,
         minor: Optional[int] = None,
         micro: Optional[int] = None,
     ):
         if isinstance(typ, str):
-            typ = OS_TYPE[typ]
+            os_type = OS_TYPE[typ]
+        else:
+            os_type = typ
         if minor is None:
             minor = -1
         if micro is None:
             micro = -1
-        super().__init__(typ, major, minor, micro)
+        super().__init__(os_type, major, minor, micro)
 
     def __repr__(self):
         return (

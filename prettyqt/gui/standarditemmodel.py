@@ -85,7 +85,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
         whats_this: Optional[str] = None,
         # text_alignment: Optional[str] = None,
         checkstate: Optional[constants.StateStr] = None,
-        flags: Optional[int] = None,
+        flags: Optional[QtCore.Qt.ItemFlags] = None,
         size_hint: Optional[QtCore.QSize] = None,
         is_user_type: bool = False,
     ) -> gui.StandardItem:

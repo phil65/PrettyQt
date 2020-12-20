@@ -1,6 +1,6 @@
 from typing import Literal, Union
 
-from qtpy import QtNetwork
+from qtpy import QtCore, QtNetwork
 
 from prettyqt import core, network
 from prettyqt.utils import InvalidParamError, bidict, mappers
@@ -173,34 +173,42 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
-    def bind(
+    def bind_to(
         self,
         address: Union[str, QtNetwork.QHostAddress],
         port: int = 0,
         bind_mode: Union[
             QtNetwork.QAbstractSocket.BindMode, BindModeStr
         ] = "default_for_platform",
-    ):
+    ) -> bool:
         if isinstance(address, str):
             address = QtNetwork.QHostAddress(address)
         if bind_mode in BIND_MODE:
-            bind_mode = BIND_MODE[bind_mode]
-        super().bind(address, port, bind_mode)
+            mode = BIND_MODE[bind_mode]
+        else:
+            mode = bind_mode
+        return self.bind(address, port, mode)
 
     def connect_to_host(
         self,
         hostname: str,
         port: int,
-        open_mode: Union[int, core.iodevice.OpenModeStr] = "read_write",
+        open_mode: Union[
+            QtCore.QIODevice.OpenMode, core.iodevice.OpenModeStr
+        ] = "read_write",
         protocol: Union[
             QtNetwork.QAbstractSocket.NetworkLayerProtocol, NetworkLayerProtocolStr
         ] = "any_ip",
     ):
-        if open_mode in core.iodevice.OPEN_MODES:
-            open_mode = core.iodevice.OPEN_MODES[open_mode]
-        if protocol in NETWORK_LAYER_PROTOCOL:
-            protocol = NETWORK_LAYER_PROTOCOL[protocol]
-        super().connectToHost(hostname, port, open_mode, protocol)
+        if isinstance(open_mode, QtCore.QIODevice.OpenMode):
+            mode = open_mode
+        else:
+            mode = core.iodevice.OPEN_MODES[open_mode]
+        if isinstance(protocol, QtNetwork.QAbstractSocket.NetworkLayerProtocol):
+            prot = protocol
+        else:
+            prot = NETWORK_LAYER_PROTOCOL[protocol]
+        self.connectToHost(hostname, port, mode, prot)
 
     def get_error(self) -> SocketErrorStr:
         return SOCKET_ERROR.inverse[self.error()]

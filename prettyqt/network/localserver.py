@@ -5,7 +5,7 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 SOCKET_OPTION = bidict(
-    none=QtNetwork.QLocalServer.SocketOption(0),  # NoOptions  # type: ignore
+    none=QtNetwork.QLocalServer.SocketOption(),  # NoOptions
     user=QtNetwork.QLocalServer.UserAccessOption,
     group=QtNetwork.QLocalServer.GroupAccessOption,
     other=QtNetwork.QLocalServer.OtherAccessOption,

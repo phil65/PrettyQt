@@ -11,7 +11,7 @@ class PlaylistModel(core.AbstractTableModel):
 
     def __init__(self, parent: Optional[QtCore.QObject] = None):
         super().__init__(parent)
-        self._playlist = None
+        self._playlist: Optional[QtMultimedia.QMediaPlaylist] = None
 
     def rowCount(self, parent=None):
         if self._playlist is None:

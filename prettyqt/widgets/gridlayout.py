@@ -49,7 +49,7 @@ class GridLayout(QtWidgets.QGridLayout):
         return type(self), (), self.__getstate__()
 
     def __iter__(self) -> Iterator[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
-        return iter(self[i] for i in range(self.count()) if self[i] is not None)
+        return iter(item for i in range(self.count()) if (item := self[i]) is not None)
 
     def __add__(self, other):
         if isinstance(other, (tuple, list)):

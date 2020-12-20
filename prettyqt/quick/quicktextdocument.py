@@ -11,4 +11,5 @@ class QuickTextDocument(QtQuick.QQuickTextDocument):
 
 
 if __name__ == "__main__":
-    item = QuickTextDocument()
+    item = QtQuick.QQuickItem()
+    doc = QuickTextDocument(item)

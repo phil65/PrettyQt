@@ -21,7 +21,7 @@ class EventLoop(QtCore.QEventLoop):
         socket_notifiers: bool = True,
         wait_for_more: bool = False,
     ) -> int:
-        flag = 0
+        flag = QtCore.QEventLoop.ProcessEventFlags(0)
         if not user_input:
             flag |= 1
         if not socket_notifiers:

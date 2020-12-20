@@ -95,7 +95,7 @@ class GuiApplication(QtGui.QGuiApplication):
         return [
             k
             for k, v in constants.APPLICATION_STATES.items()
-            if v & cls.applicationState()
+            if v & cls.applicationState()  # type: ignore
         ]
 
     def get_primary_screen(self) -> gui.Screen:

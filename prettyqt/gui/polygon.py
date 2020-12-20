@@ -29,10 +29,12 @@ class Polygon(QtGui.QPolygon):
 
     def __setitem__(self, index: int, value: Union[QtCore.QPoint, Tuple[int, int]]):
         if isinstance(value, tuple):
-            value = core.Point(*value)
+            p = core.Point(*value)
+        else:
+            p = value
         # PySide2 workaround: setPoint does not exist
         self.remove(index)
-        self.insert(index, value)
+        self.insert(index, p)
 
     def __sub__(self, other: QtGui.QPolygon) -> Polygon:
         return Polygon(self.subtracted(other))

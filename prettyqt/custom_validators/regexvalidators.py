@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import Optional, Tuple
 
-from qtpy import QtCore
+from qtpy import QtCore, QtGui
 import regex as re
 
 from prettyqt import gui
@@ -36,7 +36,9 @@ class BaseRegexValidator(gui.Validator):
             raise TypeError("Validator not initialized")
         return self.regex.pattern
 
-    def validate(self, text: str, pos: int = 0) -> tuple:
+    def validate(  # type: ignore
+        self, text: str, pos: int = 0
+    ) -> Tuple[QtGui.QValidator.State, str, int]:
         if self.regex is None:
             raise TypeError("Validator not initialized")
         if text == "":

@@ -25,11 +25,11 @@ class StarRating:
 
         # Create the star shape we'll be drawing.
         self.star_polygon = gui.PolygonF()
-        self.star_polygon += core.PointF(1.0, 0.5)
+        self.star_polygon.append(core.PointF(1.0, 0.5))
         for i in range(1, 5):
             val = 0.8 * i * math.pi
             point = core.PointF(0.5 + 0.5 * math.cos(val), 0.5 + 0.5 * math.sin(val))
-            self.star_polygon += point
+            self.star_polygon.append(point)
 
         # Create the diamond shape we'll show in the editor
         self.diamond_polygon = gui.PolygonF()
@@ -155,10 +155,7 @@ class StarDelegate(widgets.StyledItemDelegate):
 
     def setModelData(self, editor, model, index):
         """Get the data from our custom editor and stuffs it into the model."""
-        if index.column() == 3:
-            model.setData(index, editor.star_rating.star_count)
-        else:
-            super().setModelData(editor, model, index)
+        model.setData(index, editor.star_rating.star_count)
 
     def commitAndCloseEditor(self):
         editor = self.sender()
@@ -176,28 +173,20 @@ if __name__ == "__main__":
     app = widgets.app()
 
     # Create and populate the tableWidget
-    table_widget = widgets.TableWidget(4, 4)
-    table_widget.set_delegate(StarDelegate(), column=3)
+    table_widget = widgets.TableWidget(1, 2)
+    table_widget.set_delegate(StarDelegate(), column=1)
     table_widget.setEditTriggers(
         widgets.AbstractItemView.DoubleClicked | widgets.AbstractItemView.SelectedClicked
     )
     table_widget.set_selection_behaviour("rows")
-    table_widget.setHorizontalHeaderLabels(["Title", "Genre", "Artist", "Rating"])
+    table_widget.setHorizontalHeaderLabels(["Title", "Rating"])
 
-    data = [
-        ["Mass in B-Minor", "Baroque", "J.S. Bach", 5],
-        ["Three More Foxes", "Jazz", "Maynard Ferguson", 4],
-        ["Sex Bomb", "Pop", "Tom Jones", 3],
-        ["Barbie Girl", "Pop", "Aqua", 5],
-    ]
-
-    for i, r in enumerate(data):
-        table_widget[i, 0] = widgets.TableWidgetItem(r[0])
-        table_widget[i, 1] = widgets.TableWidgetItem(r[1])
-        table_widget[i, 2] = widgets.TableWidgetItem(r[2])
-        item = widgets.TableWidgetItem()
-        item.setData(0, StarRating(r[3]).star_count)
-        table_widget[i, 3] = item
+    item_1 = widgets.TableWidgetItem("Test1")
+    # item_1.setData(0, 3)
+    item_2 = widgets.TableWidgetItem()
+    item_2.setData(0, 3)
+    table_widget[0, 0] = item_1
+    table_widget[0, 1] = item_2
 
     table_widget.resizeColumnsToContents()
     table_widget.resize(500, 300)

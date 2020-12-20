@@ -121,7 +121,7 @@ class EasingCurve(QtCore.QEasingCurve):
         self.setCustomType(method)
 
     def get_custom_type(self) -> CurveMethod:
-        return self.customType()
+        return self.customType()  # type: ignore
 
     def set_type(self, typ: TypeStr):
         """Set easing curve type.

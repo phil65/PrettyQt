@@ -129,7 +129,7 @@ class Number(Rule):
 # FIXME: The triple-quotes in these two lines will mess up the
 # syntax highlighting from this point onward
 fmt = gui.TextCharFormat()
-fmt.set_foreground_color([30, 120, 110])
+fmt.set_foreground_color((30, 120, 110))
 TRI_SINGLE = (core.RegExp("'''"), 1, fmt)
 TRI_DOUBLE = (core.RegExp('"""'), 2, fmt)
 

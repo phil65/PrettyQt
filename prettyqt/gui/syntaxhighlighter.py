@@ -1,4 +1,4 @@
-from typing import Iterator, Optional, Pattern, Tuple, Union
+from typing import Iterator, Optional, Pattern, Tuple
 
 from qtpy import QtCore, QtGui
 
@@ -12,10 +12,8 @@ class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
 
     RULES: list = []
 
-    def __init__(
-        self, parent: Optional[Union[QtCore.QObject, QtGui.QTextDocument]] = None
-    ):
-        super().__init__(parent)
+    def __init__(self, parent: Optional[QtCore.QObject] = None):
+        super().__init__(parent)  # type: ignore
 
     @classmethod
     def yield_rules(cls) -> Iterator[Tuple[Pattern, int, gui.TextCharFormat]]:

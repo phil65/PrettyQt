@@ -1,5 +1,5 @@
 import pathlib
-from typing import Callable, Literal, Union
+from typing import Callable, Literal, Optional, Union
 
 from qtpy import QtCore, QtWebEngineWidgets
 
@@ -271,7 +271,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         string: str,
         backward: bool = False,
         case_sensitive: bool = False,
-        callback: Callable[[bool], None] = None,
+        callback: Optional[Callable[[bool], None]] = None,
     ):
         """Find text in the current page.
 
@@ -301,7 +301,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
                 pass
 
             callback = do_nothing
-        flag = self.FindFlag()
+        flag = QtWebEngineWidgets.QWebEnginePage.FindFlags()
         if case_sensitive:
             flag |= self.FindCaseSensitively
         if backward:

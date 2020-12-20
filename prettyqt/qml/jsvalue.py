@@ -49,9 +49,7 @@ class JSValue(QtQml.QJSValue):
 
     def get_error_type(self) -> Optional[str]:
         error_type = self.errorType()
-        if int(error_type) == 0:
-            return None
-        return ERROR_TYPES.inverse[error_type]
+        return ERROR_TYPES.inverse.get(error_type)
 
     @classmethod
     def from_object(cls, obj, jsengine) -> JSValue:

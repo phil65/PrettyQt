@@ -23,27 +23,18 @@ if __name__ == "__main__":
     app = widgets.app()
 
     # Create and populate the tableWidget
-    table_widget = widgets.TableWidget(4, 2)
+    table_widget = widgets.TableWidget(1, 2)
     table_widget.set_delegate(ProgressBarDelegate(), column=1)
     table_widget.setEditTriggers(
         widgets.AbstractItemView.DoubleClicked | widgets.AbstractItemView.SelectedClicked
     )
     table_widget.set_selection_behaviour("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Progress"])
-
-    data = [
-        ["Mass in B-Minor", 50],
-        ["Three More Foxes", 40],
-        ["Sex Bomb", 33],
-        ["Barbie Girl", 5],
-    ]
-
-    for i, r in enumerate(data):
-        table_widget[i, 0] = widgets.TableWidgetItem(r[0])
-        item = widgets.TableWidgetItem()
-        item.setData(0, r[1])
-        table_widget[i, 1] = item
-
+    item_1 = widgets.TableWidgetItem("Test1")
+    item_2 = widgets.TableWidgetItem()
+    item_2.setData(0, 50)
+    table_widget[0, 0] = item_1
+    table_widget[0, 1] = item_2
     table_widget.resizeColumnsToContents()
     table_widget.resize(500, 300)
     table_widget.show()

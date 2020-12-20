@@ -23,14 +23,14 @@ def to_datetime(date: "QtCore.QDateTime") -> "datetime.datetime":
 
 def to_date(date: "QtCore.QDate") -> "datetime.date":
     try:
-        return date.toPython()  # pyqt5
+        return date.toPython()  # type: ignore # pyqt5
     except (AttributeError, TypeError):
         return date.toPyDate()
 
 
 def to_time(time: "QtCore.QTime") -> "datetime.time":
     try:
-        return time.toPython()  # pyqt5
+        return time.toPython()  # type: ignore  # pyqt5
     except (AttributeError, TypeError):
         return time.toPyTime()
 

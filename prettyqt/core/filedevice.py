@@ -90,7 +90,7 @@ class FileDevice(QtCore.QFileDevice):
         """
         if typ not in FILE_TIME:
             raise InvalidParamError(typ, FILE_TIME)
-        return self.setFileTime(file_time, FILE_TIME[typ])
+        return self.setFileTime(file_time, FILE_TIME[typ])  # type: ignore
 
     def get_file_time(self, typ: FileTimeStr) -> Optional[datetime.datetime]:
         """Return current file time.

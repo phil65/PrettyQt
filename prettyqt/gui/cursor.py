@@ -41,3 +41,7 @@ class Cursor(QtGui.QCursor):
             cursor shape
         """
         return constants.CURSOR_SHAPE.inverse[self.shape()]
+
+    @staticmethod
+    def get_position() -> core.Point:
+        return core.Point(Cursor.pos())

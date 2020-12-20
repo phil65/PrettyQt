@@ -51,7 +51,9 @@ class GraphicsAnchorLayout(QtWidgets.QGraphicsAnchorLayout):
     ):
         if orientation not in constants.ORIENTATION:
             raise InvalidParamError(orientation, constants.ORIENTATION)
-        self.addAnchors(first_item, second_item, constants.ORIENTATION[orientation])
+        self.addAnchors(
+            first_item, second_item, constants.ORIENTATION[orientation]  # type: ignore
+        )
 
     def add_corner_anchors(
         self,

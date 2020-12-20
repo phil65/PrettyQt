@@ -12,8 +12,7 @@ class ToolTip(QtWidgets.QToolTip):
         linebreak_px: int = 400,
     ):
         if position is None:
-            cursor = QtGui.QCursor()
-            position = cursor.pos()
+            position = QtGui.QCursor.pos()
         cls.showText(position, f'<div style="max-width: {linebreak_px}px">{text}</div>')
 
 

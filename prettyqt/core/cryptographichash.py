@@ -43,10 +43,12 @@ AlgorithmStr = Literal[
 
 
 class CryptographicHash(QtCore.QCryptographicHash):
-    def __init__(self, method: Union[int, AlgorithmStr]):
-        if method in ALGORITHM:
-            method = ALGORITHM[method]
-        super().__init__(method)
+    def __init__(self, method: Union[QtCore.QCryptographicHash.Algorithm, AlgorithmStr]):
+        if isinstance(method, QtCore.QCryptographicHash.Algorithm):
+            arg = method
+        else:
+            arg = ALGORITHM[method]
+        super().__init__(arg)
 
     # def __str__(self):
     #     return bytes(self.result()).decode()

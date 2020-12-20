@@ -218,5 +218,5 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    action = Action("This is a test")
+    action = Action(text="This is a test")
     app.main_loop()

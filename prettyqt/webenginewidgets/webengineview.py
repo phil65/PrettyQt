@@ -93,7 +93,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
                 pass
 
             callback = do_nothing
-        flag = QtWebEngineWidgets.QWebEnginePage.FindFlag()
+        flag = QtWebEngineWidgets.QWebEnginePage.FindFlags()
         if case_sensitive:
             flag |= QtWebEngineWidgets.QWebEnginePage.FindCaseSensitively
         if backward:

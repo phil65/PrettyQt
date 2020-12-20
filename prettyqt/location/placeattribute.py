@@ -13,8 +13,8 @@ class PlaceAttribute(QtLocation.QPlaceAttribute):
             super().__init__(other_or_label)
         else:
             super().__init__()
-            self.setLabel(other_or_label)
-            self.setText(value)
+            self.setLabel(other_or_label if other_or_label else "")
+            self.setText(value if value else "")
 
     def __repr__(self):
         return f"{type(self).__name__}({self.label()!r}, {self.text()!r})"

@@ -53,7 +53,6 @@ class TabBar(QtWidgets.QTabBar):
         self.setAcceptDrops(True)
         self.set_elide_mode("right")
         self.set_selection_behavior_on_remove("left_tab")
-        self.mouse_cursor = QtGui.QCursor()
 
     def __getitem__(self, index: Tuple[int, str]):
         return self.tabButton(index[0], POSITIONS[index[1]])
@@ -87,7 +86,9 @@ class TabBar(QtWidgets.QTabBar):
     #  Send the on_detach when a tab is double clicked
     def mouseDoubleClickEvent(self, event):
         event.accept()
-        self.on_detach.emit(self.tabAt(event.pos()), self.mouse_cursor.pos())
+        tab = self.tabAt(event.pos())
+        pos = QtGui.QCursor.pos()
+        self.on_detach.emit(tab, pos)
 
     def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
         """Set size of the icons."""

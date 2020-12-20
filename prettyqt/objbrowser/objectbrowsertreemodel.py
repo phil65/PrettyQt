@@ -137,12 +137,12 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             logger.warn("no child_item")
             return core.ModelIndex()
 
-    def parent(self, index: core.ModelIndex) -> QtCore.QModelindex:
+    def parent(self, index: core.ModelIndex) -> QtCore.QModelIndex:  # type:ignore
         if not index.isValid():
             return core.ModelIndex()
 
         child_item = index.internalPointer()
-        parent_item = child_item.parent()
+        parent_item = child_item.parent()  # type: ignore
 
         if parent_item is None or parent_item == self.root_item:
             return core.ModelIndex()
@@ -222,7 +222,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         if not index.isValid():
             return self.root_item
         else:
-            return index.internalPointer()
+            return index.internalPointer()  # type: ignore
 
     def _fetch_object_children(self, obj, obj_path):  # -> List[ObjectBrowserTreeItem]:
         """Fetches the children of a Python object.

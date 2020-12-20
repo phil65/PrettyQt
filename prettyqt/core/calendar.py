@@ -18,10 +18,12 @@ SYSTEM = bidict(
 
 
 class Calendar(QtCore.QCalendar):
-    def __init__(self, system: Union[str, int] = "gregorian"):
-        if system in SYSTEM:
-            system = SYSTEM[system]
-        super().__init__(system)
+    def __init__(self, system: Union[str, QtCore.QCalendar.System] = "gregorian"):
+        if isinstance(system, QtCore.QCalendar.System):
+            typ = system
+        else:
+            typ = SYSTEM[system]
+        super().__init__(typ)
 
     def __repr__(self):
         return f"{type(self).__name__}({self.name()!r})"

@@ -1,3 +1,5 @@
+from typing import Union
+
 from qtpy import QtCore
 
 from prettyqt import core
@@ -11,8 +13,12 @@ class PropertyAnimation(QtCore.QPropertyAnimation):
         self.setTargetObject(obj)
         self.set_property_name(attribute)
 
-    def set_property_name(self, name: str):
-        self.setPropertyName(name.encode())
+    def set_property_name(self, name: Union[str, bytes, QtCore.QByteArray]):
+        if isinstance(name, str):
+            name = name.encode()
+        if isinstance(name, bytes):
+            name = QtCore.QByteArray(name)
+        self.setPropertyName(name)
 
     def get_property_name(self) -> str:
         return bytes(self.propertyName()).decode()

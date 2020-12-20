@@ -1,6 +1,6 @@
-from typing import Iterator, List, Optional
+from typing import Iterator, List, Optional, Tuple
 
-from qtpy import QtCore
+from qtpy import QtCore, QtGui
 
 from prettyqt import gui
 
@@ -43,8 +43,10 @@ class CompositeValidator(gui.Validator):
             return False
         return self.validators == other.validators
 
-    def validate(self, text: str, pos: int = 0) -> tuple:
-        vals = [v.validate(text, pos)[0] for v in self.validators]
+    def validate(  # type: ignore
+        self, text: str, pos: int = 0
+    ) -> Tuple[QtGui.QValidator.State, str, int]:
+        vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
         return min(vals), text, pos
 
 

@@ -49,7 +49,7 @@ class CoreApplication(QtCore.QCoreApplication):
         if app_name is not None:
             self.setApplicationName(app_name)
         if app_version is not None:
-            self.setApplicationVersion(app_name)
+            self.setApplicationVersion(app_name)  # type: ignore
         if org_name is not None:
             self.setOrganizationName(org_name)
         if org_domain is not None:
@@ -73,11 +73,13 @@ class CoreApplication(QtCore.QCoreApplication):
         event: QtCore.QEvent,
         priority: Union[int, constants.EventPriorityStr] = "normal",
     ):
-        if isinstance(priority, str):
+        if isinstance(priority, int):
+            prio = priority
+        else:
             if priority not in constants.EVENT_PRIORITY:
                 raise InvalidParamError(priority, constants.EVENT_PRIORITY)
-            priority = constants.EVENT_PRIORITY[priority]
-        return self.postEvent(obj, event, priority)
+            prio = constants.EVENT_PRIORITY[priority]
+        return self.postEvent(obj, event, prio)
 
     def main_loop(self) -> int:
         return self.exec_()

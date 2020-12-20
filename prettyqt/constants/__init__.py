@@ -261,10 +261,12 @@ ARROW_TYPE: bidict[ArrowTypeStr, QtCore.Qt.ArrowType] = bidict(
 )
 
 EventPriorityStr = Literal["high", "normal", "low"]
-EVENT_PRIORITY: bidict[EventPriorityStr, QtCore.Qt.EventPriority] = bidict(
-    high=QtCore.Qt.HighEventPriority,
-    normal=QtCore.Qt.NormalEventPriority,
-    low=QtCore.Qt.LowEventPriority,
+
+# using int instead of QtCore.Qt.EventPriority here
+EVENT_PRIORITY: bidict[EventPriorityStr, int] = bidict(
+    high=1,  # HighEventPriority
+    normal=0,  # NormalEventPriority
+    low=-1,  # LowEventPriority
 )
 
 CursorShapeStr = Literal[
@@ -510,7 +512,7 @@ GESTURE_TYPE: bidict[GestureTypeStr, QtCore.Qt.GestureType] = bidict(
 
 GestureStateStr = Literal["none", "started", "updated", "finished", "canceled"]
 GESTURE_STATE: bidict[GestureStateStr, QtCore.Qt.GestureState] = bidict(
-    none=0,  # QtCore.Qt.NoGesture,
+    none=QtCore.Qt.GestureState(0),  # type: ignore # QtCore.Qt.NoGesture,
     started=QtCore.Qt.GestureStarted,
     updated=QtCore.Qt.GestureUpdated,
     finished=QtCore.Qt.GestureFinished,

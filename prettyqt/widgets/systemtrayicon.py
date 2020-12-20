@@ -38,12 +38,12 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         timeout: int = 10,
     ):
         if icon is None:
-            icon = "none"
+            ico = gui.Icon()
         if icon in MESSAGE_ICONS:
-            icon = MESSAGE_ICONS[icon]
+            ico = MESSAGE_ICONS[icon]
         else:
-            icon = gui.icon.get_icon(icon)
-        self.showMessage(title, message, icon, timeout * 1000)
+            ico = gui.icon.get_icon(icon)
+        self.showMessage(title, message, ico, timeout * 1000)
 
 
 if __name__ == "__main__":

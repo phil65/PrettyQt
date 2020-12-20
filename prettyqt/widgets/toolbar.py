@@ -141,7 +141,11 @@ class ToolBar(QtWidgets.QToolBar):
         self.setAllowedAreas(flag)
 
     def get_allowed_areas(self) -> List[constants.ToolbarAreaStr]:
-        return [k for k, v in constants.TOOLBAR_AREA.items() if v & self.allowedAreas()]
+        return [
+            k
+            for k, v in constants.TOOLBAR_AREA.items()
+            if v & self.allowedAreas()  # type: ignore
+        ]
 
 
 if __name__ == "__main__":

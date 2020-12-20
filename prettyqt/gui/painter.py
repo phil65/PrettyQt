@@ -1,5 +1,5 @@
 import contextlib
-from typing import Literal, Union
+from typing import List, Literal, Union
 
 from qtpy import QtCore, QtGui
 
@@ -73,10 +73,16 @@ class Painter(QtGui.QPainter):
         self.set_composition_mode("source_atop")
         self.drawImage(target, frame_buffer)
 
-    def draw_polygon(self, *args, fill_rule: constants.FillRuleStr = "odd_even"):
+    def draw_polygon(
+        self,
+        points: Union[
+            QtGui.QPolygon, QtGui.QPolygonF, List[QtCore.QPoint], List[QtCore.QPointF]
+        ],
+        fill_rule: constants.FillRuleStr = "odd_even",
+    ):
         if fill_rule not in constants.FILL_RULE:
             raise InvalidParamError(fill_rule, constants.FILL_RULE)
-        self.drawPolygon(*args, fillRule=constants.FILL_RULE[fill_rule])
+        self.drawPolygon(points, fillRule=constants.FILL_RULE[fill_rule])  # type: ignore
 
     def use_antialiasing(self):
         self.setRenderHint(self.Antialiasing, True)
@@ -171,7 +177,7 @@ class Painter(QtGui.QPainter):
         self.setClipPath(path, constants.CLIP_OPERATION[operation])
 
     def get_text_rect(self, text: str) -> core.Rect:
-        return self.drawText(core.Rect(), QtCore.Qt.TextDontPrint, text)
+        return self.drawText(core.Rect(), QtCore.Qt.TextDontPrint, text)  # type: ignore
 
     @contextlib.contextmanager
     def clip_path(self, operation: constants.ClipOperationStr = "replace"):

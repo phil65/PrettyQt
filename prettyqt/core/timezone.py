@@ -27,7 +27,7 @@ TimeTypeStr = Literal["standard", "daylight", "generic"]
 class TimeZone(QtCore.QTimeZone):
     def __init__(self, *args, **kwargs):
         if len(args) == 1 and isinstance(args[0], str):
-            super().__init__(args[0].encode())
+            super().__init__(QtCore.QByteArray(args[0].encode()))
         else:
             super().__init__(*args, **kwargs)
 

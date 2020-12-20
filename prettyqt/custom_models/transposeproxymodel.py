@@ -26,7 +26,7 @@ class TransposeProxyModel(core.AbstractProxyModel):
     ) -> core.ModelIndex:
         return self.createIndex(row, column)
 
-    def parent(self, index: core.ModelIndex):
+    def parent(self, index: core.ModelIndex):  # type: ignore
         return None
 
     def rowCount(self, parent: Optional[core.ModelIndex] = None) -> int:
@@ -44,5 +44,5 @@ class TransposeProxyModel(core.AbstractProxyModel):
             return False
         return self._source_model.data(self.mapFromSource(index), role)
 
-    def headerData(self, section: int, orientation, role):
+    def headerData(self, section: int, orientation, role):  # type: ignore
         return self._source_model.headerData(section, orientation, role)

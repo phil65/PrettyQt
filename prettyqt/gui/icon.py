@@ -49,7 +49,7 @@ def get_icon(
         else:
             new = qta.icon(icon)
     else:
-        new = QtGui.QIcon(icon)
+        new = QtGui.QIcon(icon)  # type: ignore
     icon = new if as_qicon else Icon(new)
     icon_cache[(icon, color, as_qicon)] = icon
     return icon

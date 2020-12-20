@@ -1,7 +1,7 @@
 # based on https://stackoverflow.com/questions/58891116/delegate-with-radio-buttons
 # credits to musicamante
 
-from typing import List
+from typing import List, Optional
 
 from qtpy import QtCore, QtWidgets
 
@@ -12,7 +12,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
     def __init__(self, parent: QtWidgets.QWidget, items: List[str]):
         super().__init__(parent)
         self.items = items
-        self.choices = [None for i in self.items]
+        self.choices: List[Optional[int]] = [None for i in self.items]
 
     def createEditor(
         self,
@@ -40,7 +40,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         layout.addStretch(1)
 
         # set a property that will be used for the mask
-        editor.set_property("offMask", gui.Region(editor.rect()))
+        editor.setProperty("offMask", gui.Region(editor.rect()))  # type: ignore
         editor.installEventFilter(self)
         return editor
 
@@ -60,7 +60,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
             source.clearMask()
         elif event.type() == core.Event.FocusOut:
             # another widget has requested focus, set the mask
-            source.setMask(source.property("offMask"))
+            source.setMask(source.property(b"offMask"))
             # update the table viewport to get rid of possible
             # grid lines left after masking
             source.parent().update()
@@ -79,7 +79,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         editor.setGeometry(rect)
         # create a new mask based on the option rectangle, then apply it
         mask = gui.Region(0, 0, option.rect.width(), option.rect.height())
-        editor.set_property("offMask", mask)
+        editor.setProperty("offMask", mask)  # type: ignore
         editor.setMask(mask)
 
     def setEditorData(self, editor: QtWidgets.QWidget, index: QtCore.QModelIndex):

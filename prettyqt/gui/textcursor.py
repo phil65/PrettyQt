@@ -94,9 +94,11 @@ class TextCursor(QtGui.QTextCursor):
         self.setPosition(pos, MOVE_MODE[mode])
 
     def select(self, selection: Union[SelectionTypeStr, QtGui.QTextCursor.SelectionType]):
-        if selection in SELECTION_TYPE:
-            selection = SELECTION_TYPE[selection]
-        super().select(selection)
+        if isinstance(selection, QtGui.QTextCursor.SelectionType):
+            sel = selection
+        else:
+            sel = SELECTION_TYPE[selection]
+        super().select(sel)
 
     def span(self) -> Tuple[int, int]:
         return (self.anchor(), self.position())

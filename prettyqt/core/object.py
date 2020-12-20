@@ -8,7 +8,7 @@ import qtpy
 from qtpy import QtCore
 
 
-T = TypeVar("T")
+T = TypeVar("T", bound=QtCore.QObject)
 
 counter_dict: DefaultDict = defaultdict(itertools.count)
 
@@ -83,11 +83,13 @@ class Object(QtCore.QObject):
         else:
             flag = QtCore.Qt.FindDirectChildrenOnly
         if qtpy.API == "pyqt5":
-            return self.findChildren(typ, name=name, options=flag)
+            return self.findChildren(typ, name=name, options=flag)  # type: ignore
         else:
-            return [
-                i for i in self.findChildren(typ, name) if recursive or i.parent() == self
-            ]
+            if name is None:
+                items = self.findChildren(typ)
+            else:
+                items = self.findChildren(typ, name)
+            return [i for i in items if recursive or i.parent() == self]
 
     def find_child(
         self,
@@ -100,10 +102,13 @@ class Object(QtCore.QObject):
         else:
             flag = QtCore.Qt.FindDirectChildrenOnly
         if qtpy.API == "pyqt5":
-            return self.findChild(typ, name, flag)
+            return self.findChild(typ, name, flag)  # type: ignore
         else:
-            item = self.findChild(typ, name)
-            return item if recursive or item.parent() == self else None
+            if name is None:
+                item = self.findChild(typ)
+            else:
+                item = self.findChild(typ, name)
+            return item if recursive or item.parent() == self else None  # type: ignore
 
     def find_parent(
         self, typ: Type[QtCore.QObject], name: Optional[str] = None
@@ -115,8 +120,3 @@ class Object(QtCore.QObject):
                 if name is None or node.objectName() == name:
                     return node
         return None
-
-    def set_property(self, name: Union[str, bytes], value):
-        if isinstance(name, str):
-            name = name.encode()
-        self.setProperty(name, value)

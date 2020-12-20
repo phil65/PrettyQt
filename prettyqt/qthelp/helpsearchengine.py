@@ -14,5 +14,5 @@ class HelpSearchEngine(QtHelp.QHelpSearchEngine):
 
 
 if __name__ == "__main__":
-    engine = HelpSearchEngine("")
-    engine.get_files("a", "b")
+    core = qthelp.HelpEngine("test")
+    engine = HelpSearchEngine(core)

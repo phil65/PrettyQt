@@ -133,7 +133,7 @@ def test_networkcookiejar():
 
 def test_udpsocket():
     socket = network.UdpSocket()
-    socket.bind("localhost")
+    socket.bind_to("localhost")
     socket.get_multicast_interface()
     socket.receive_datagram()
 

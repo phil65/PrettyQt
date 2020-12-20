@@ -30,10 +30,14 @@ MapModeStr = Literal["not_mapped", "read_only", "write_only", "read_write"]
 
 
 class AbstractVideoBuffer(QtMultimedia.QAbstractVideoBuffer):
-    def __init__(self, handle_type: Union[int, str]):
-        if handle_type in HANDLE_TYPE:
-            handle_type = HANDLE_TYPE[handle_type]
-        super().__init__(handle_type)
+    def __init__(
+        self, handle_type: Union[QtMultimedia.QAbstractVideoBuffer.HandleType, str]
+    ):
+        if isinstance(handle_type, QtMultimedia.QAbstractVideoBuffer.HandleType):
+            typ = handle_type
+        else:
+            typ = HANDLE_TYPE[handle_type]
+        super().__init__(typ)
 
     def __repr__(self):
         return f"{type(self).__name__}({self.get_handle_type()!r})"

@@ -84,6 +84,7 @@ def test_cursor():
     with open("data.pkl", "rb") as jar:
         cursor = pickle.load(jar)
     bytes(cursor)
+    cursor.get_position()
 
 
 # def test_desktopservices():
@@ -500,7 +501,7 @@ def test_painter():
                 painter.set_pen(style="test")
             with painter.backup_state():
                 pass
-            painter.get_text_rect("test")
+            assert painter.get_text_rect("test") is not None
 
     w = Test()
     w.repaint()
@@ -621,12 +622,12 @@ def test_pixmap():
     pix.to_image()
 
 
-def test_pixmapcache():
-    cache = gui.PixmapCache()
-    pix = gui.Pixmap()
-    cache["test"] = pix
-    cached = cache["test"]
-    assert pix.size() == cached.size()
+# def test_pixmapcache():
+#     cache = gui.PixmapCache()
+#     pix = gui.Pixmap()
+#     cache["test"] = pix
+#     cached = cache["test"]
+#     assert pix.size() == cached.size()
 
 
 def test_polygonf():

@@ -9,7 +9,9 @@ QtNetwork.QTcpServer.__bases__ = (core.Object,)
 
 
 class TcpServer(QtNetwork.QTcpServer):
-    def listen(self, address: Union[str, QtNetwork.QHostAddress], port: int = 0) -> bool:
+    def listen(  # type: ignore
+        self, address: Union[str, QtNetwork.QHostAddress], port: int = 0
+    ) -> bool:
         if isinstance(address, str):
             address = network.HostAddress(address)
         return super().listen(address, port)

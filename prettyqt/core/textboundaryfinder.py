@@ -44,14 +44,16 @@ class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
         string_or_other: Union[str, QtCore.QTextBoundaryFinder] = "",
         boundary_type: Union[
             QtCore.QTextBoundaryFinder.BoundaryType, BoundaryTypeStr
-        ] = BOUNDARY_TYPES["grapheme"],
+        ] = "grapheme",
     ):
         if isinstance(string_or_other, QtCore.QTextBoundaryFinder):
             super().__init__(string_or_other)
         else:
             if isinstance(boundary_type, str):
-                boundary_type = BOUNDARY_TYPES[boundary_type]
-            super().__init__(boundary_type, string_or_other)
+                typ = BOUNDARY_TYPES[boundary_type]
+            else:
+                typ = boundary_type
+            super().__init__(typ, string_or_other)
 
     def __repr__(self):
         return f"{type(self).__name__}({self.string()!r})"

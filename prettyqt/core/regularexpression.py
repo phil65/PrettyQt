@@ -36,14 +36,14 @@ class RegularExpression(QtCore.QRegularExpression):
     def __init__(
         self,
         pattern: Union[str, QtCore.QRegularExpression] = "",
-        flags: int = FLAGS["none"],
+        flags: QtCore.QRegularExpression.PatternOption = FLAGS["none"],
     ):
         if isinstance(pattern, QtCore.QRegularExpression):
             super().__init__(pattern)
         else:
             if isinstance(flags, int):
-                flags = core.RegularExpression.PatternOptions(flags)
-            super().__init__(pattern, flags)
+                flags = core.RegularExpression.PatternOptions(flags)  # type: ignore
+            super().__init__(pattern, flags)  # type: ignore
 
     def __repr__(self):
         return f"{type(self).__name__}({self.pattern()!r})"
@@ -65,20 +65,22 @@ class RegularExpression(QtCore.QRegularExpression):
         options = MATCH_OPTIONS["anchored"] if anchored else MATCH_OPTIONS["none"]
         return self.globalMatch(text, offset, MATCH_TYPE[match_type], options)
 
-    def match(
+    def match(  # type: ignore
         self,
         text: str,
         offset: int = 0,
-        match_type: MatchTypeStr = "normal",
+        match_type: Union[MatchTypeStr, QtCore.QRegularExpression.MatchType] = "normal",
         anchored: bool = False,
     ) -> core.RegularExpressionMatch:
         if isinstance(match_type, str):
-            match_type = MATCH_TYPE[match_type]
+            typ = MATCH_TYPE[match_type]
+        else:
+            typ = match_type
         if isinstance(anchored, bool):
             options = MATCH_OPTIONS["anchored"] if anchored else MATCH_OPTIONS["none"]
         else:
             options = anchored
-        match = super().match(text, offset, match_type, options)
+        match = super().match(text, offset, typ, options)
         return core.RegularExpressionMatch(match)
 
     def fullmatch(

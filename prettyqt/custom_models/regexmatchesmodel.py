@@ -18,10 +18,12 @@ class RegexMatchesModel(core.AbstractTableModel):
     def columnCount(self, parent=None):
         return len(self.HEADER)
 
-    def headerData(self, offset: int, orientation, role):
+    def headerData(  # type: ignore
+        self, section: int, orientation: QtCore.Qt.Orientation, role: int
+    ) -> Optional[str]:
         if role == constants.DISPLAY_ROLE:
             if orientation == constants.HORIZONTAL:
-                return self.HEADER[offset]
+                return self.HEADER[section]
 
     def data(self, index, role):
         if not index.isValid():

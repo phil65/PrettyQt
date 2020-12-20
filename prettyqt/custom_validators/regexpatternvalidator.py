@@ -1,5 +1,7 @@
 import sre_constants
+from typing import Tuple
 
+from qtpy import QtGui
 import regex as re
 
 from prettyqt import core, gui
@@ -15,7 +17,9 @@ class RegexPatternValidator(gui.Validator):
     def __eq__(self, other: object):
         return isinstance(other, type(self))
 
-    def validate(self, text: str, pos: int = 0) -> tuple:
+    def validate(  # type: ignore
+        self, text: str, pos: int = 0
+    ) -> Tuple[QtGui.QValidator.State, str, int]:
         # if text == "":
         #     self.compiled = None
         #     return (self.Intermediate, text, pos)

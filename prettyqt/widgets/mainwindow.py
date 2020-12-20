@@ -1,7 +1,7 @@
 import logging
 from typing import List, Optional, Sequence
 
-from qtpy import QtCore, QtWidgets
+from qtpy import QtWidgets
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import InvalidParamError
@@ -29,7 +29,7 @@ class MainWindow(QtWidgets.QMainWindow):
         )
 
     def __getitem__(self, index: str) -> QtWidgets.QWidget:
-        result = self.findChild(QtWidgets.QWidget, index)
+        result = self.find_child(QtWidgets.QWidget, index)
         if result is None:
             raise KeyError("Widget not found")
         return result
@@ -168,9 +168,7 @@ class MainWindow(QtWidgets.QMainWindow):
         dockwidget: QtWidgets.QDockWidget,
         position: constants.DockPositionStr = "left",
     ):
-        self.addDockWidget(
-            QtCore.Qt.DockWidgetArea(constants.DOCK_POSITION[position]), dockwidget
-        )
+        self.addDockWidget(constants.DOCK_POSITION[position], dockwidget)
 
     def remove_dockwidgets(self, dockwidgets: Sequence[QtWidgets.QDockWidget]):
         for i in dockwidgets:

@@ -24,7 +24,7 @@ class Validator(QtGui.QValidator):
 
     def is_valid_value(self, value: str, pos: int = 0) -> bool:
         val = self.validate(value, pos)
-        return val[0] == self.Acceptable
+        return val[0] == self.Acceptable  # type: ignore
 
 
 if __name__ == "__main__":

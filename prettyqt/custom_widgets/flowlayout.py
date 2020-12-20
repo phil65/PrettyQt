@@ -14,7 +14,7 @@ class FlowLayout(widgets.Layout):
         margin: Optional[int] = None,
         spacing: int = -1,
     ):
-        super().__init__(parent)
+        super().__init__(parent)  # type: ignore
         if margin is not None:
             self.set_margin(margin)
         self.set_spacing(spacing)
@@ -57,8 +57,8 @@ class FlowLayout(widgets.Layout):
             return self.items.pop(index)
         return None
 
-    def expandingDirections(self) -> QtCore.Qt.Orientations:
-        return QtCore.Qt.Orientations(0)
+    # def expandingDirections(self) -> QtCore.Qt.Orientations:
+    #     return QtCore.Qt.Orientations(0)
 
     def hasHeightForWidth(self) -> bool:
         return True

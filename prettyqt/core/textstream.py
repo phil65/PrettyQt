@@ -110,5 +110,5 @@ class TextStream(QtCore.QTextStream):
 
 
 if __name__ == "__main__":
-    matcher = TextStream("Test")
-    print(repr(matcher))
+    stream = TextStream(QtCore.QByteArray(b"Test"))
+    print(repr(stream))

@@ -4,7 +4,7 @@ from typing import Literal
 from qtpy import QtCore
 
 from prettyqt import core
-from prettyqt.utils import mappers
+from prettyqt.utils import InvalidParamError, mappers
 
 
 OPEN_MODES = mappers.FlagMap(
@@ -40,9 +40,9 @@ QtCore.QIODevice.__bases__ = (core.Object,)
 class IODevice(QtCore.QIODevice):
     @contextlib.contextmanager
     def open_file(self, mode: OpenModeStr):
-        if mode in OPEN_MODES:
-            mode = OPEN_MODES[mode]
-        self.open(mode)
+        if mode not in OPEN_MODES:
+            raise InvalidParamError(mode, OPEN_MODES)
+        self.open(OPEN_MODES[mode])
         yield self
         self.close()
 
