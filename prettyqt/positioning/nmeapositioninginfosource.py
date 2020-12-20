@@ -25,10 +25,16 @@ QtPositioning.QNmeaPositionInfoSource.__bases__ = (positioning.GeoPositionInfoSo
 
 
 class NmeaPositionInfoSource(QtPositioning.QNmeaPositionInfoSource):
-    def __init__(self, update_mode: Union[int, str], parent: QtCore.QObject):
-        if update_mode in UPDATE_MODES:
-            update_mode = UPDATE_MODES[update_mode]
-        super().__init__(update_mode, parent)
+    def __init__(
+        self,
+        update_mode: Union[QtPositioning.QNmeaPositionInfoSource.UpdateMode, str],
+        parent: QtCore.QObject,
+    ):
+        if isinstance(update_mode, QtPositioning.QNmeaPositionInfoSource.UpdateMode):
+            mode = update_mode
+        else:
+            mode = UPDATE_MODES[update_mode]
+        super().__init__(mode, parent)
 
     def __repr__(self):
         return "NmeaPositionInfoSource()"

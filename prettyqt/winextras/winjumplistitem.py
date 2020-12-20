@@ -21,10 +21,12 @@ TYPES = bidict(
 
 
 class WinJumpListItem(QtWinExtras.QWinJumpListItem):
-    def __init__(self, typ: Union[int, str]) -> None:
-        if typ in TYPES:
+    def __init__(self, typ: Union[QtWinExtras.QWinJumpListItem.Type, str]) -> None:
+        if isinstance(typ, QtWinExtras.QWinJumpListItem.Type):
+            param = typ
+        else:
             typ = TYPES[typ]
-        super().__init__(typ)
+        super().__init__(param)
 
     def set_title(self, title: str) -> None:
         self.setTitle(title)
