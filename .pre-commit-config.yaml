@@ -37,7 +37,7 @@ repos:
     - id: flake8
       exclude: prettyqt/qt/
       additional_dependencies: [flake8-comprehensions>=3.1.0]
-      args : [--ignore=C408]
+      args : [--ignore=C408,E203,W503]
 
 - repo: https://github.com/pycqa/pydocstyle
   rev: 5.1.1
