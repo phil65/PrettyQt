@@ -1,6 +1,6 @@
 """Provides QtCore classes and functions."""
 
-from prettyqt.qt import PYQT5, PYSIDE2, PythonQtError
+from prettyqt.qt import PYQT5, PYSIDE2, PYSIDE6, PythonQtError
 
 
 if PYQT5:
@@ -28,3 +28,6 @@ if PYQT5:
 elif PYSIDE2:
     from PySide2.QtCore import *
     from PySide2.QtCore import __version__  # type: ignore
+elif PYSIDE6:
+    from PySide6.QtCore import *
+    from PySide6.QtCore import __version__  # type: ignore
