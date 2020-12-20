@@ -39,7 +39,7 @@ class JSValue(QtQml.QJSValue):
 
     def __iter__(self):
         iterator = qml.JSValueIterator(self)
-        return iter([val for val in iterator])
+        return iter(list(iterator))
 
     def __contains__(self, index: str):
         return self.hasProperty(index)

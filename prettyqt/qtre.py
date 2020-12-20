@@ -131,7 +131,7 @@ class Pattern(core.RegularExpression):
             yield match
 
     def findall(self, string: str, pos: int = 0, endpos: Optional[int] = None) -> list:
-        matches = [m for m in self.globalMatch(string[:endpos], offset=pos)]
+        matches = list(self.globalMatch(string[:endpos], offset=pos))
         return [m.groups() if len(m.groups()) > 1 else m.group(0) for m in matches]
 
     def subn(self, repl: Union[str, Callable], string: str, count: int = 0):
