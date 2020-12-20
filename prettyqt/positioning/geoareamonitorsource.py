@@ -45,6 +45,7 @@ class GeoAreaMonitorSource(QtPositioning.QGeoAreaMonitorSource):
 
 
 if __name__ == "__main__":
-    coord = GeoAreaMonitorSource()
+    obj = core.Object()
+    coord = GeoAreaMonitorSource(obj)
     print(str(coord))
     print(repr(coord))
