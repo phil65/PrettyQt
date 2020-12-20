@@ -77,7 +77,6 @@ STYLE_STRATEGY = bidict(
     no_antialias=QtGui.QFont.NoAntialias,
     so_subpixel_antialias=QtGui.QFont.NoSubpixelAntialias,
     prefer_antialias=QtGui.QFont.PreferAntialias,
-    open_gl_compatible=QtGui.QFont.OpenGLCompatible,
     no_font_merging=QtGui.QFont.NoFontMerging,
     prefer_no_shaping=QtGui.QFont.PreferNoShaping,
 )  # ORed with PreferMatch, PreferQuality, ForceIntegerMetrics
@@ -91,7 +90,6 @@ StyleStrategyStr = Literal[
     "no_antialias",
     "so_subpixel_antialias",
     "prefer_antialias",
-    "open_gl_compatible",
     "no_font_merging",
     "prefer_no_shaping",
 ]

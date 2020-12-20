@@ -25,7 +25,6 @@ IMAGE_OPTION = bidict(
     optimized_write=QtGui.QImageIOHandler.OptimizedWrite,
     progressive_scan_write=QtGui.QImageIOHandler.ProgressiveScanWrite,
     image_transformation=QtGui.QImageIOHandler.ImageTransformation,
-    transformation_by_default=QtGui.QImageIOHandler.TransformedByDefault,
 )
 
 ImageOptionStr = Literal[
@@ -48,7 +47,6 @@ ImageOptionStr = Literal[
     "optimized_write",
     "progressive_scan_write",
     "image_transformation",
-    "transformation_by_default",
 ]
 
 TRANSFORMATION = mappers.FlagMap(

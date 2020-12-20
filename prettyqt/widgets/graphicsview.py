@@ -23,7 +23,7 @@ CACHE_MODES = mappers.FlagMap(
 CacheModeStr = Literal["none", "background"]
 
 OPTIMIZATION_FLAGS = bidict(
-    dont_clip_painter=QtWidgets.QGraphicsView.DontClipPainter,
+    # dont_clip_painter=QtWidgets.QGraphicsView.DontClipPainter,
     dont_save_painter_state=QtWidgets.QGraphicsView.DontSavePainterState,
     dont_adjust_for_antialiasing=QtWidgets.QGraphicsView.DontAdjustForAntialiasing,
 )
