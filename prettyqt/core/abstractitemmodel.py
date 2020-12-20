@@ -45,11 +45,11 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
     ) -> bool:
         flag = QtCore.QAbstractItemModel.CheckIndexOption.NoOption
         if index_is_valid:
-            flag |= QtCore.QAbstractItemModel.CheckIndexOption.IndexIsValid
+            flag |= CHECK_INDEX_OPTIONS["index_is_valid"]  # type: ignore
         if do_not_use_parent:
-            flag |= QtCore.QAbstractItemModel.CheckIndexOption.DoNotUseParent
+            flag |= CHECK_INDEX_OPTIONS["do_not_use_parent"]  # type: ignore
         if parent_is_invalid:
-            flag |= QtCore.QAbstractItemModel.CheckIndexOption.ParentIsInvalid
+            flag |= CHECK_INDEX_OPTIONS["parent_is_invalid"]  # type: ignore
         check_flag = QtCore.QAbstractItemModel.CheckIndexOptions(flag)  # type: ignore
         return self.checkIndex(index, check_flag)
 
