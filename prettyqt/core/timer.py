@@ -39,3 +39,7 @@ class Timer(QtCore.QTimer):
             timer type
         """
         return constants.TIMER_TYPE.inverse[self.timerType()]
+
+    def restart(self):
+        self.stop()
+        self.start()

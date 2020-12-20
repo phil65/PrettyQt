@@ -759,6 +759,7 @@ def test_timer():
     with pytest.raises(InvalidParamError):
         timer.set_type("test")
     assert timer.get_type() == "coarse"
+    timer.restart()
 
 
 def test_timezone():
