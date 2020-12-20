@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Generator, List, Literal, Optional
+from typing import Any, Generator, List, Literal, Optional, Tuple, Union
 
 from qtpy import QtCore, QtWidgets
 
@@ -334,3 +334,8 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         p = gui.Palette()
         p.highlight_inactive()
         self.setPalette(p)
+
+    def set_icon_size(self, size: Union[QtCore.QSize, Tuple[int, int]]):
+        if isinstance(size, tuple):
+            size = QtCore.QSize(*size)
+        self.setIconSize(size)
