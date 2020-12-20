@@ -5848,7 +5848,7 @@ get_application_state<span class="p">()</span>        </code>
     <span class="k">return</span> <span class="p">[</span>
         <span class="n">k</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">APPLICATION_STATES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">cls</span><span class="o">.</span><span class="n">applicationState</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">cls</span><span class="o">.</span><span class="n">applicationState</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
     <span class="p">]</span>
 </code></pre>
 </div>
@@ -6190,7 +6190,7 @@ we cache, too.</p>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">new</span> <span class="o">=</span> <span class="n">qta</span><span class="o">.</span><span class="n">icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
     <span class="n">icon</span> <span class="o">=</span> <span class="n">new</span> <span class="k">if</span> <span class="n">as_qicon</span> <span class="k">else</span> <span class="n">Icon</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
     <span class="n">icon_cache</span><span class="p">[(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">as_qicon</span><span class="p">)]</span> <span class="o">=</span> <span class="n">icon</span>
     <span class="k">return</span> <span class="n">icon</span>
@@ -8326,7 +8326,7 @@ get_color_group<span class="p">(</span><span class="bp">self</span><span class="
 <h4 class="doc doc-heading" id="prettyqt.gui.palette.Palette.set_color_group">
 
         <code class="highlight language-python">
-set_color_group<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>        </code>
+set_color_group<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -8373,7 +8373,7 @@ set_color_group<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/palette.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">"""Set the color group.</span>
 
 <span class="sd">    Args:</span>
@@ -8384,7 +8384,7 @@ set_color_group<span class="p">(</span><span class="bp">self</span><span class="
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">group</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">GROUP</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">GROUP</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setColorGroup</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">])</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setColorGroup</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -10062,9 +10062,11 @@ select<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
           <summary>Source code in <code>prettyqt/gui/textcursor.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">SelectionTypeStr</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCursor</span><span class="o">.</span><span class="n">SelectionType</span><span class="p">]):</span>
-    <span class="k">if</span> <span class="n">selection</span> <span class="ow">in</span> <span class="n">SELECTION_TYPE</span><span class="p">:</span>
-        <span class="n">selection</span> <span class="o">=</span> <span class="n">SELECTION_TYPE</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">selection</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">selection</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCursor</span><span class="o">.</span><span class="n">SelectionType</span><span class="p">):</span>
+        <span class="n">sel</span> <span class="o">=</span> <span class="n">selection</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">sel</span> <span class="o">=</span> <span class="n">SELECTION_TYPE</span><span class="p">[</span><span class="n">selection</span><span class="p">]</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>

@@ -2160,6 +2160,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.graphicswidget.GraphicsWidget.window_frame_section_at" class="md-nav__link">
+    window_frame_section_at()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5801,6 +5808,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.graphicswidget.GraphicsWidget.set_focus_policy" class="md-nav__link">
     set_focus_policy()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.graphicswidget.GraphicsWidget.window_frame_section_at" class="md-nav__link">
+    window_frame_section_at()
   </a>
   
 </li>
@@ -15200,6 +15214,50 @@ set_focus_policy<span class="p">(</span><span class="bp">self</span><span class=
 </details>
 </div>
 </div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.graphicswidget.GraphicsWidget.window_frame_section_at">
+
+        <code class="highlight language-python">
+window_frame_section_at<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return the window frame section at given position.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Literal['none', 'text', 'text_beside_icon', 'text_below_icon']</code></td>
+<td>
+<p>str: Window frame section</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/graphicswidget.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">window_frame_section_at</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">WindowFrameSectionStr</span><span class="p">:</span>
+    <span class="sd">"""Return the window frame section at given position.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: Window frame section</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">WINDOW_FRAME_SECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">windowFrameSectionAt</span><span class="p">(</span><span class="n">point</span><span class="p">)]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -20470,7 +20528,9 @@ mouseDoubleClickEvent<span class="p">(</span><span class="bp">self</span><span c
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">mouseDoubleClickEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">on_detach</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tabAt</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()),</span> <span class="bp">self</span><span class="o">.</span><span class="n">mouse_cursor</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
+    <span class="n">tab</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabAt</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
+    <span class="n">pos</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCursor</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">on_detach</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>

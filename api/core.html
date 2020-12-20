@@ -5245,7 +5245,7 @@ set_file_time<span class="p">(</span><span class="bp">self</span><span class="p"
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FILE_TIME</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">FILE_TIME</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setFileTime</span><span class="p">(</span><span class="n">file_time</span><span class="p">,</span> <span class="n">FILE_TIME</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setFileTime</span><span class="p">(</span><span class="n">file_time</span><span class="p">,</span> <span class="n">FILE_TIME</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
 </code></pre>
 </div>
 </details>
@@ -6087,20 +6087,22 @@ match<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/regularexpression.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">match</span><span class="p">(</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">match</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">match_type</span><span class="p">:</span> <span class="n">MatchTypeStr</span> <span class="o">=</span> <span class="s2">"normal"</span><span class="p">,</span>
+    <span class="n">match_type</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MatchTypeStr</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegularExpression</span><span class="o">.</span><span class="n">MatchType</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"normal"</span><span class="p">,</span>
     <span class="n">anchored</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpressionMatch</span><span class="p">:</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">match_type</span> <span class="o">=</span> <span class="n">MATCH_TYPE</span><span class="p">[</span><span class="n">match_type</span><span class="p">]</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="n">MATCH_TYPE</span><span class="p">[</span><span class="n">match_type</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="n">match_type</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">anchored</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="n">options</span> <span class="o">=</span> <span class="n">MATCH_OPTIONS</span><span class="p">[</span><span class="s2">"anchored"</span><span class="p">]</span> <span class="k">if</span> <span class="n">anchored</span> <span class="k">else</span> <span class="n">MATCH_OPTIONS</span><span class="p">[</span><span class="s2">"none"</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">options</span> <span class="o">=</span> <span class="n">anchored</span>
-    <span class="n">match</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">match_type</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpressionMatch</span><span class="p">(</span><span class="n">match</span><span class="p">)</span>
 </code></pre>
 </div>

@@ -1467,7 +1467,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
 </tr>
 <tr>
 <td><code>callback</code></td>
-<td><code>Callable[[bool], NoneType]</code></td>
+<td><code>Optional[Callable[[bool], NoneType]]</code></td>
 <td>
 <p>result callback</p>
 </td>
@@ -1483,7 +1483,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
     <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">callback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""Find text in the current page.</span>
 
@@ -1513,7 +1513,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
             <span class="k">pass</span>
 
         <span class="n">callback</span> <span class="o">=</span> <span class="n">do_nothing</span>
-    <span class="n">flag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FindFlag</span><span class="p">()</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">QtWebEngineWidgets</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="o">.</span><span class="n">FindFlags</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">case_sensitive</span><span class="p">:</span>
         <span class="n">flag</span> <span class="o">|=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FindCaseSensitively</span>
     <span class="k">if</span> <span class="n">backward</span><span class="p">:</span>
@@ -2719,7 +2719,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
             <span class="k">pass</span>
 
         <span class="n">callback</span> <span class="o">=</span> <span class="n">do_nothing</span>
-    <span class="n">flag</span> <span class="o">=</span> <span class="n">QtWebEngineWidgets</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="o">.</span><span class="n">FindFlag</span><span class="p">()</span>
+    <span class="n">flag</span> <span class="o">=</span> <span class="n">QtWebEngineWidgets</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="o">.</span><span class="n">FindFlags</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">case_sensitive</span><span class="p">:</span>
         <span class="n">flag</span> <span class="o">|=</span> <span class="n">QtWebEngineWidgets</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="o">.</span><span class="n">FindCaseSensitively</span>
     <span class="k">if</span> <span class="n">backward</span><span class="p">:</span>

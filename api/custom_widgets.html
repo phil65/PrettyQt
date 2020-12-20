@@ -495,13 +495,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.expandingDirections" class="md-nav__link">
-    expandingDirections()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.hasHeightForWidth" class="md-nav__link">
     hasHeightForWidth()
   </a>
@@ -1376,13 +1369,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.expandingDirections" class="md-nav__link">
-    expandingDirections()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.flowlayout.FlowLayout.hasHeightForWidth" class="md-nav__link">
     hasHeightForWidth()
   </a>
@@ -2214,26 +2200,6 @@ count<span class="p">(</span><span class="bp">self</span><span class="p">)</span
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">count</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.custom_widgets.flowlayout.FlowLayout.expandingDirections">
-
-        <code class="highlight language-python">
-expandingDirections<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>expandingDirections(self) -&gt; Qt.Orientations</p>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">expandingDirections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientations</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientations</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -3326,7 +3292,8 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <span class="n">qp</span><span class="o">.</span><span class="n">use_antialiasing</span><span class="p">()</span>
         <span class="k">while</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">():</span>
             <span class="n">time_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_time_string</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span>
-            <span class="n">qp</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignHCenter</span><span class="p">,</span> <span class="n">time_string</span><span class="p">)</span>
+            <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignHCenter</span><span class="p">,</span> <span class="n">time_string</span><span class="p">)</span>
             <span class="n">w</span> <span class="o">+=</span> <span class="mi">100</span>
         <span class="c1"># Draw down line</span>
         <span class="n">qp</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">PEN_COLOR</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -3379,7 +3346,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
                 <span class="k">continue</span>
             <span class="n">pic_width</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">picture</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">pic_width</span> <span class="o">&lt;</span> <span class="n">scaled_dur</span><span class="p">:</span>
-                <span class="n">width</span> <span class="o">=</span> <span class="n">pic_width</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">pic_width</span><span class="p">)</span>
                 <span class="n">pic</span> <span class="o">=</span> <span class="n">sample</span><span class="o">.</span><span class="n">picture</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">width</span> <span class="o">=</span> <span class="n">scaled_dur</span>

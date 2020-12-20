@@ -1816,12 +1816,12 @@ parent(self) -&gt; QObject</p>
 <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelindex</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>  <span class="c1"># type:ignore</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
 
     <span class="n">child_item</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>
-    <span class="n">parent_item</span> <span class="o">=</span> <span class="n">child_item</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span>
+    <span class="n">parent_item</span> <span class="o">=</span> <span class="n">child_item</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">if</span> <span class="n">parent_item</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">parent_item</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
