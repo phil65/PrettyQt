@@ -30,6 +30,8 @@ repos:
   rev: v0.790
   hooks:
     - id: mypy
+      # args: [--ignore-missing-imports]
+      additional_dependencies: [pyside2]
 
 - repo: https://gitlab.com/pycqa/flake8
   rev: 3.8.4
