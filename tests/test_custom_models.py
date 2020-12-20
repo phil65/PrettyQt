@@ -19,12 +19,12 @@ def test_regexmatchesmodel(qttester):
     # text = "aa356aa356"
     matches = []  # list(comp.finditer(text))
     model = custom_models.RegexMatchesModel(matches)
-    qttester.test_model(model, force_py=False)
+    qttester.test_model(model, force_py=True)
 
 
 def test_playlistmodel(qttester):
     model = custom_models.PlaylistModel()
-    qttester.test_model(model, force_py=False)
+    qttester.test_model(model, force_py=True)
     playlist = multimedia.MediaPlaylist()
     model.set_playlist(playlist)
     assert model.get_playlist() is playlist
@@ -32,6 +32,6 @@ def test_playlistmodel(qttester):
 
 def test_importlibdistributionmodel(qttester):
     model = custom_models.ImportlibDistributionModel([])
-    qttester.test_model(model, force_py=False)
+    qttester.test_model(model, force_py=True)
     custom_models.ImportlibDistributionModel.from_package("prettyqt")
     custom_models.ImportlibDistributionModel.from_system()
