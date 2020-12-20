@@ -64,7 +64,7 @@ class Label(QtWidgets.QLabel):
             open_external_links=self.openExternalLinks(),
             has_selected_text=self.hasSelectedText(),
             selected_text=self.selectedText(),
-            alignment=int(self.alignment()),
+            alignment=(self.get_horizontal_alignment(), self.get_vertical_alignment()),
             word_wrap=self.wordWrap(),
             text_interaction_flags=self.get_text_interaction(),
         )
@@ -77,7 +77,7 @@ class Label(QtWidgets.QLabel):
         self.set_text_format(state.get("text_format", 0))
         # self.setPixmap(state.get("pixmap"))
         self.setOpenExternalLinks(state.get("open_external_links", False))
-        self.setAlignment(QtCore.Qt.Alignment(state.get("alignment")))
+        self.set_alignment(*state.get("alignment"))
         self.setScaledContents(state["scaled_contents"])
         self.setWordWrap(state["word_wrap"])
 
@@ -107,6 +107,28 @@ class Label(QtWidgets.QLabel):
             return
         self.setAlignment(flag)
         return self
+
+    def get_horizontal_alignment(self) -> constants.HorizontalAlignmentStr:
+        align = self.alignment()
+        if align & QtCore.Qt.AlignRight:
+            return "right"
+        elif align & QtCore.Qt.AlignHCenter:
+            return "center"
+        elif align & QtCore.Qt.AlignJustify:
+            return "justify"
+        else:
+            return "left"
+
+    def get_vertical_alignment(self) -> constants.VerticalAlignmentStr:
+        align = self.alignment()
+        if align & QtCore.Qt.AlignTop:
+            return "top"
+        elif align & QtCore.Qt.AlignBottom:
+            return "bottom"
+        elif align & QtCore.Qt.AlignBaseline:
+            return "baseline"
+        else:
+            return "center"
 
     def set_indent(self, indent: int) -> Label:
         """Set the label's text indent in pixels."""
