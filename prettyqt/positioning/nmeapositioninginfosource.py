@@ -37,7 +37,7 @@ class NmeaPositionInfoSource(QtPositioning.QNmeaPositionInfoSource):
         super().__init__(mode, parent)
 
     def __repr__(self):
-        return "NmeaPositionInfoSource()"
+        return f"{type(self).__name__}()"
 
     def get_update_mode(self) -> str:
         return UPDATE_MODES.inverse[self.updateMode()]
