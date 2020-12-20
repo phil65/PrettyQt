@@ -1,6 +1,6 @@
 from typing import Literal, Union
 
-from qtpy import QtWidgets
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import constants, gui, widgets
 from prettyqt.utils import InvalidParamError
@@ -58,6 +58,16 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
             str: Focus policy
         """
         return constants.FOCUS_POLICY.inverse[self.focusPolicy()]
+
+    def window_frame_section_at(
+        self, point: QtCore.QPoint
+    ) -> constants.WindowFrameSectionStr:
+        """Return the window frame section at given position.
+
+        Returns:
+            str: Window frame section
+        """
+        return constants.WINDOW_FRAME_SECTION.inverse[self.windowFrameSectionAt(point)]
 
 
 if __name__ == "__main__":

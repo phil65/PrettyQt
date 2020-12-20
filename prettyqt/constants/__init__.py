@@ -235,6 +235,22 @@ TOOLBUTTON_STYLE: bidict[ToolButtonStyleStr, QtCore.Qt.ToolButtonStyle] = bidict
     text_below_icon=QtCore.Qt.ToolButtonTextUnderIcon,
 )
 
+WindowFrameSectionStr = Literal["none", "text", "text_beside_icon", "text_below_icon"]
+WINDOW_FRAME_SECTION: bidict[
+    WindowFrameSectionStr, QtCore.Qt.WindowFrameSection
+] = bidict(
+    none=QtCore.Qt.NoSection,
+    left=QtCore.Qt.LeftSection,
+    top_left=QtCore.Qt.TopLeftSection,
+    top=QtCore.Qt.TopSection,
+    top_right=QtCore.Qt.TopRightSection,
+    right=QtCore.Qt.RightSection,
+    bottom_right=QtCore.Qt.BottomRightSection,
+    bottom=QtCore.Qt.BottomSection,
+    bottom_left=QtCore.Qt.BottomLeftSection,
+    title_bar=QtCore.Qt.TitleBarArea,
+)
+
 ArrowTypeStr = Literal["none", "up", "down", "left", "right"]
 ARROW_TYPE: bidict[ArrowTypeStr, QtCore.Qt.ArrowType] = bidict(
     none=QtCore.Qt.NoArrow,
