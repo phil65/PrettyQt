@@ -1,6 +1,6 @@
-from typing import Literal
+from typing import Literal, Tuple, Union
 
-from qtpy import QtWidgets
+from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
 from prettyqt.utils import InvalidParamError, bidict
@@ -34,6 +34,11 @@ class ListView(QtWidgets.QListView):
             view mode
         """
         return VIEW_MODE.inverse[self.viewMode()]
+
+    def set_grid_size(self, size: Union[QtCore.QSize, Tuple[int, int]]):
+        if isinstance(size, tuple):
+            size = QtCore.QSize(*size)
+        self.setGridSize(size)
 
 
 if __name__ == "__main__":
