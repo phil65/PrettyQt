@@ -171,15 +171,28 @@ STATE: bidict[StateStr, QtCore.Qt.CheckState] = bidict(
 
 MATCH_FLAGS = dict(
     exact=QtCore.Qt.MatchExactly,
+    fixed_string=QtCore.Qt.MatchFixedString,
     contains=QtCore.Qt.MatchContains,
     starts_with=QtCore.Qt.MatchStartsWith,
     ends_with=QtCore.Qt.MatchEndsWith,
+    case_sensitive=QtCore.Qt.MatchCaseSensitive,
+    regex=QtCore.Qt.MatchRegularExpression,
     wildcard=QtCore.Qt.MatchWildcard,
-    regex=QtCore.Qt.MatchRegExp,
+    wrap=QtCore.Qt.MatchWrap,
+    recursive=QtCore.Qt.MatchRecursive,
 )
 
 MatchFlagStr = Literal[
-    "exact", "containts", "starts_with", "ends_with", "wildcard", "regex"
+    "exact",
+    "fixed_string",
+    "contains",
+    "starts_with",
+    "ends_with",
+    "case_sensitive",
+    "regex",
+    "wildcard",
+    "wrap",
+    "recursive",
 ]
 
 FilterModeStr = Literal["starts_with", "contains", "ends_with"]
