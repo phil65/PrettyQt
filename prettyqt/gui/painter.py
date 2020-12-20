@@ -39,9 +39,6 @@ RENDER_HINTS = bidict(
     antialiasing=QtGui.QPainter.Antialiasing,
     text_antialiasing=QtGui.QPainter.TextAntialiasing,
     smooth_pixmap_transform=QtGui.QPainter.SmoothPixmapTransform,
-    high_quality_antialiasing=QtGui.QPainter.HighQualityAntialiasing,
-    noncosmetic_default_pen=QtGui.QPainter.NonCosmeticDefaultPen,
-    qt4_compatible_painting=QtGui.QPainter.Qt4CompatiblePainting,
     lossless_image_rendering=QtGui.QPainter.LosslessImageRendering,
 )
 
