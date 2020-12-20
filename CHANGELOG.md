@@ -1,3 +1,10 @@
+## v0.155.0 (2020-12-20)
+
+### Feat
+
+- **Label**: add get_horizontal/vertical_alignment methods
+- **GraphicsWidget**: add window_frame_section_at method
+
 ## v0.154.0 (2020-12-18)
 
 ### Feat
