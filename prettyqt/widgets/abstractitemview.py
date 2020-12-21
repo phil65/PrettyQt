@@ -335,7 +335,9 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         p.highlight_inactive()
         self.setPalette(p)
 
-    def set_icon_size(self, size: Union[QtCore.QSize, Tuple[int, int]]):
+    def set_icon_size(self, size: Union[int, QtCore.QSize, Tuple[int, int]]):
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
+        elif isinstance(size, int):
+            size = QtCore.QSize(size, size)
         self.setIconSize(size)
