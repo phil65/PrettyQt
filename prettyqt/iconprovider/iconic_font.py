@@ -250,8 +250,28 @@ class IconicFont(core.Object):
         directory: str or None, optional
             Directory for font and charmap files
         """
+        if directory is None:
+            directory = pathlib.Path(__file__).parent / "fonts"
 
-        def hook(obj: dict):
+        # Load font
+        if widgets.app() is None:
+            return
+        id_ = gui.FontDatabase.add_font(directory / ttf_filename)
+        loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)
+
+        if not loaded_font_families:
+            raise FontError(
+                f"Font at '{directory / ttf_filename}' appears to be empty. "
+                "If you are on Windows 10, please read "
+                "https://support.microsoft.com/"
+                "en-us/kb/3053676 "
+                "to know how to prevent Windows from blocking "
+                "the fonts that come with QtAwesome."
+            )
+        self.fontids[prefix] = id_
+        self.fontname[prefix] = loaded_font_families[0]
+
+        def hook(obj: dict) -> dict:
             result = {}
             for key in obj:
                 try:
@@ -265,28 +285,6 @@ class IconicFont(core.Object):
                         raise FontError("Failed to load character " f"{key}:{obj[key]}")
             return result
 
-        if directory is None:
-            directory = pathlib.Path(__file__).parent / "fonts"
-
-        # Load font
-        if widgets.app() is None:
-            return
-        id_ = gui.FontDatabase.add_font(directory / ttf_filename)
-        loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)
-
-        if loaded_font_families:
-            self.fontids[prefix] = id_
-            self.fontname[prefix] = loaded_font_families[0]
-        else:
-            raise FontError(
-                f"Font at '{directory / ttf_filename}' appears to be empty. "
-                "If you are on Windows 10, please read "
-                "https://support.microsoft.com/"
-                "en-us/kb/3053676 "
-                "to know how to prevent Windows from blocking "
-                "the fonts that come with QtAwesome."
-            )
-
         with (directory / charmap_filename).open("r") as codes:
             self.charmap[prefix] = json.load(codes, object_hook=hook)
 
@@ -294,13 +292,14 @@ class IconicFont(core.Object):
         if SYSTEM_FONTS:
             return
         ttf_hash = MD5_HASHES.get(ttf_filename, None)
-        if ttf_hash is not None:
-            hasher = hashlib.md5()
-            content = (directory / ttf_filename).read_bytes()
-            hasher.update(content)
-            ttf_calculated_hash_code = hasher.hexdigest()
-            if ttf_calculated_hash_code != ttf_hash:
-                raise FontError(f"Font is corrupt at: '{directory / ttf_filename}'")
+        if ttf_hash is None:
+            return
+        hasher = hashlib.md5()
+        content = (directory / ttf_filename).read_bytes()
+        hasher.update(content)
+        ttf_calculated_hash_code = hasher.hexdigest()
+        if ttf_calculated_hash_code != ttf_hash:
+            raise FontError(f"Font is corrupt at: '{directory / ttf_filename}'")
 
     def icon(self, *names, **kwargs) -> QtGui.QIcon:
         """Return a QtGui.QIcon object corresponding to the provided icon name."""
@@ -428,13 +427,13 @@ class IconicFont(core.Object):
         """
         self.painters[name] = painter
 
-    def _custom_icon(self, name, **kwargs) -> QtGui.QIcon:
+    def _custom_icon(self, name: str, **kwargs) -> QtGui.QIcon:
         """Return the custom icon corresponding to the given name."""
-        options = dict(_default_options, **kwargs)
         if name not in self.painters:
             return QtGui.QIcon()
-        painter = self.painters[name]
-        return self._icon_by_painter(painter, options)
+        return self._icon_by_painter(
+            self.painters[name], dict(_default_options, **kwargs)
+        )
 
     def _icon_by_painter(self, painter: CharIconPainter, options) -> QtGui.QIcon:
         """Return the icon corresponding to the given painter."""
