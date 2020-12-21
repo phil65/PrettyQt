@@ -158,7 +158,7 @@ class String(DataItem):
             val = custom_validators.NotEmptyValidator()
             widget.set_validator(val)
         if self.regex is not None:
-            val = gui.RegExpValidator()
+            val = gui.RegularExpressionValidator()
             val.set_regex(self.regex)
             widget.set_validator(val)
         if self.value is not None:

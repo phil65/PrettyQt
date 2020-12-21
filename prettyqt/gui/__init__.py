@@ -52,13 +52,13 @@ from .pixmap import Pixmap
 from .pixmapcache import PixmapCache
 from .bitmap import Bitmap
 from .image import Image
-from .openglwindow import OpenGLWindow
+
 from .rasterwindow import RasterWindow
 from .clipboard import Clipboard
 from .inputmethod import InputMethod
 from .sessionmanager import SessionManager
 from .validator import Validator
-from .regexpvalidator import RegExpValidator
+
 from .regularexpressionvalidator import RegularExpressionValidator
 from .textoption import TextOption
 from .textblock import TextBlock
@@ -178,7 +178,6 @@ __all__ = [
     "Clipboard",
     "GuiApplication",
     "Validator",
-    "RegExpValidator",
     "TextOption",
     "TextBlock",
     "TextBlockGroup",
@@ -231,7 +230,6 @@ __all__ = [
     "Vector3D",
     "Vector4D",
     "PaintDeviceWindow",
-    "OpenGLWindow",
     "RasterWindow",
     "ImageIOHandler",
     "ImageReader",

@@ -508,15 +508,6 @@ def test_painter():
     # assert painter.get_composition_mode() == "source_atop"
 
 
-def test_openglwindow(qapp):
-    wnd = gui.OpenGLWindow()
-    print(bool(wnd))
-    wnd.show()
-    print(bool(wnd))
-    assert wnd.get_update_behaviour() == "no_partial"
-    wnd.grab_framebuffer()
-
-
 def test_pagelayout():
     layout = gui.PageLayout()
     with pytest.raises(InvalidParamError):
@@ -689,17 +680,6 @@ def test_polygon():
 def test_region():
     region = gui.Region()
     bytes(region)
-
-
-def test_regexpvalidator():
-    val = gui.RegExpValidator()
-    val.set_regex("[0-9]")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(val, jar)
-    with open("data.pkl", "rb") as jar:
-        val = pickle.load(jar)
-    assert val.get_regex() == "[0-9]"
-    assert val.is_valid_value("0")
 
 
 def test_regularexpressionvalidator():
