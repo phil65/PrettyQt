@@ -1,4 +1,4 @@
-from typing import Dict, Literal, Optional, Union
+from typing import Dict, Literal, Optional, Tuple, Union
 
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -87,6 +87,14 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
+
+    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+        """Set size of the icons."""
+        if isinstance(size, int):
+            size = core.Size(size, size)
+        elif isinstance(size, tuple):
+            size = core.Size(*size)
+        self.setIconSize(size)
 
     def set_document_mode(self, state: bool = True) -> None:
         self.setDocumentMode(state)

@@ -1115,6 +1115,9 @@ def test_tabwidget(qtbot):
         widget.set_tab_shape("test")
     widget.remove_tab(1)
     widget.add_tab(widgets.BoxLayout("horizontal"), "mdi.timer")
+    widget.set_icon_size(10)
+    widget.set_icon_size((10, 10))
+    widget.set_icon_size(core.Size(10, 10))
     widget.close_detached_tabs()
     # widget.close_detached_tabs()
 
