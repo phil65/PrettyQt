@@ -28,6 +28,7 @@ regex = "^2020.6.8"
 
 PyQt5 = {version = "^5.15.0", optional=true}
 pyside2 = {version = "^5.15.0", python = "<3.10", optional=true}
+pyside6 = {version = "^6.0.0", python = "<3.10", optional=true}
 PyQtWebEngine = {version = "^5.15.0", optional=true}
 # PySide2 = {version = "^5.15.0", optional=true}
 PyQtChart = {version = "^5.15.0", optional=true}
@@ -59,6 +60,7 @@ devtools = "^0"
 [tool.poetry.extras]
 pyqt5 = ["PyQt5", "PyQtWebEngine", "PyQtChart", "QScintilla"]
 pyside2 = ["pyside2"]
+pyside6 = ["pyside6"]
 addons = ["docutils"]
 
 [tool.pytest.ini_options]
