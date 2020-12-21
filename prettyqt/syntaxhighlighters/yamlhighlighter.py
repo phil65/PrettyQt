@@ -5,8 +5,8 @@
 from prettyqt import core, gui, syntaxhighlighters
 
 
-COMMENT_START = core.RegExp("#")
-COMMENT_END = core.RegExp("\n|\r")  # Unused?
+COMMENT_START = core.RegularExpression("#")
+COMMENT_END = core.RegularExpression("\n|\r")  # Unused?
 COMMENT_FORMAT = gui.TextCharFormat()
 COMMENT_FORMAT.setFontItalic(True)
 COMMENT_FORMAT.set_foreground_color("darkgray")
@@ -83,7 +83,7 @@ class YamlHighlighter(gui.SyntaxHighlighter):
         self.setCurrentBlockState(0)
         start_index = 0
         if self.previousBlockState() != 1:
-            start_index = COMMENT_START.indexIn(text)
+            start_index = COMMENT_START.match(text).capturedStart()
             if start_index >= 0:
                 comment_len = len(text) - start_index
                 self.setFormat(start_index, comment_len, COMMENT_FORMAT)

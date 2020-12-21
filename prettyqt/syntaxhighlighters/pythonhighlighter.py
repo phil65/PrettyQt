@@ -130,8 +130,8 @@ class Number(Rule):
 # syntax highlighting from this point onward
 fmt = gui.TextCharFormat()
 fmt.set_foreground_color((30, 120, 110))
-TRI_SINGLE = (core.RegExp("'''"), 1, fmt)
-TRI_DOUBLE = (core.RegExp('"""'), 2, fmt)
+TRI_SINGLE = (core.RegularExpression("'''"), 1, fmt)
+TRI_DOUBLE = (core.RegularExpression('"""'), 2, fmt)
 
 
 class PythonHighlighter(gui.SyntaxHighlighter):
@@ -163,17 +163,20 @@ class PythonHighlighter(gui.SyntaxHighlighter):
             add = 0
         # Otherwise, look for the delimiter on this line
         else:
-            start = delimiter.indexIn(text)
-            # Move past this match
-            add = delimiter.matchedLength()
+            match = delimiter.match(text)
+            if not match.hasMatch():
+                return
+            start = match.capturedStart()
+            add = match.capturedLength()
 
         # As long as there's a delimiter match on this line...
         while start >= 0:
             # Look for the ending delimiter
-            end = delimiter.indexIn(text, start + add)
+            match = delimiter.match(text, start + add)
+            end = match.capturedStart()
             # Ending delimiter on this line?
             if end >= add:
-                length = end - start + add + delimiter.matchedLength()
+                length = end - start + add + match.capturedLength()
                 self.setCurrentBlockState(0)
             # No; multi-line string
             else:
@@ -182,7 +185,7 @@ class PythonHighlighter(gui.SyntaxHighlighter):
             # Apply formatting
             self.setFormat(start, length, style)
             # Look for the next match
-            start = delimiter.indexIn(text, start + length)
+            start = delimiter.match(text, start + length).capturedStart()
 
         # Return True if still inside a multi-line string, False otherwise
         return self.currentBlockState() == in_state

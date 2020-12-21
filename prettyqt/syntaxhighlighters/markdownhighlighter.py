@@ -79,7 +79,7 @@ class Code(Rule):
     color = "grey"
 
 
-TRI_SINGLE = (core.RegExp("```"), Code.get_format())
+TRI_SINGLE = (core.RegularExpression("```"), Code.get_format())
 
 
 class MarkdownHighlighter(gui.SyntaxHighlighter):
@@ -98,25 +98,28 @@ class MarkdownHighlighter(gui.SyntaxHighlighter):
             add = 0
         # Otherwise, look for the delimiter on this line
         else:
-            start = delimiter.indexIn(text)
-            # Move past this match
-            add = delimiter.matchedLength()
+            match = delimiter.match(text)
+            if not match.hasMatch():
+                return
+            start = match.capturedStart()
+            add = match.capturedLength()
 
         # As long as there's a delimiter match on this line...
         while start >= 0:
             # Look for the ending delimiter
-            end = delimiter.indexIn(text, start + add)
+            match = delimiter.match(text, start + add)
+            end = match.capturedStart()
             # Ending delimiter on this line?
             if end >= add:
-                length = end - start + add + delimiter.matchedLength()
+                length = end + match.capturedLength()
                 self.setCurrentBlockState(0)
             # No; multi-line string
             else:
                 self.setCurrentBlockState(1)
-                length = len(text) - start + add
-            self.setFormat(start, length, style)
+                length = len(text)
+            self.setFormat(start, length - start + add, style)
             # Look for the next match
-            start = delimiter.indexIn(text, start + length)
+            start = delimiter.match(text, start + length).capturedStart()
 
 
 if __name__ == "__main__":
