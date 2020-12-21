@@ -14,7 +14,7 @@ repos:
     - id: detect-private-key
     - id: forbid-new-submodules
     - id: check-json
-    - id: check-added-large-files
+    # - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
   rev: v2.11.0
