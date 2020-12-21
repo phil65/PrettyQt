@@ -62,6 +62,12 @@ class Painter(QtGui.QPainter):
         yield self
         self.restore()
 
+    @contextlib.contextmanager
+    def native_mode(self):
+        self.beginNativePainting()
+        yield self
+        self.endNativePainting()
+
     def draw_image(
         self,
         target: Union[QtCore.QPoint, QtCore.QPointF, QtCore.QRect, QtCore.QRectF],
