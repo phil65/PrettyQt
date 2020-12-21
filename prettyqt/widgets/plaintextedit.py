@@ -197,7 +197,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         self.validator = validator
         self._set_validation_color()
 
-    def set_regex_validator(self, regex: str, flags=0) -> gui.RegExpValidator:
+    def set_regex_validator(self, regex: str, flags=0) -> gui.RegularExpressionValidator:
         validator = gui.RegularExpressionValidator(self)
         validator.set_regex(regex, flags)
         self.set_validator(validator)
