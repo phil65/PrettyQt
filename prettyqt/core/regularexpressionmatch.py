@@ -16,7 +16,10 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
     def __getitem__(self, item: Union[int, str]) -> str:
         return self.captured(item)
 
-    def group(self, *groups: Union[int, str]) -> Union[tuple, str]:
+    def __bool__(self):
+        return self.isValid()
+
+    def group(self, *groups: Union[int, str]) -> Union[Tuple[str, ...], str]:
         if len(groups) > 1:
             return tuple(self.captured(i) for i in groups)
         if len(groups) == 0:
