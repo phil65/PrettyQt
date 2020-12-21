@@ -43,6 +43,9 @@ test: ## run tests with PyQt5
 test_pyside: ## run tests with pyside
 	export QT_API=pyside2; export USE_QT_API=pyside2; export PYTEST_QT_API=pyside2; poetry run pytest # --mypy
 
+test_pyside6: ## run tests with pyside
+	export QT_API=pyside6; export USE_QT_API=pyside6; export PYTEST_QT_API=pyside6; poetry run pytest # --mypy
+
 mypy: ## run mypy type checking
 	poetry run mypy prettyqt
 
