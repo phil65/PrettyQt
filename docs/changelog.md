@@ -1,3 +1,14 @@
+## v0.156.0 (2020-12-21)
+
+### Feat
+
+- **RegularExpressionMatch**: add __bool__ method
+- **custom_widgets**: add ObjectBrowser class
+- **Timer**: add restart method
+- **ListView**: add set_grid_size method
+- **SortFilterProxyModel**: add is/set_filter_case_sensitive methods
+- **AbstractItemView**: add set_icon_size method
+
 ## v0.155.0 (2020-12-20)
 
 ### Feat
