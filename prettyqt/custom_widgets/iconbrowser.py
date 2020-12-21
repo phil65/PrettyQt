@@ -1,8 +1,6 @@
 import sys
 
-import qtawesome
-
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, core, gui, iconprovider, widgets
 
 
 # TODO: Set icon colour and copy code with color kwarg
@@ -22,8 +20,8 @@ class IconBrowser(widgets.MainWindow):
         self.setMinimumSize(400, 300)
         self.set_title("Icon Browser")
 
-        qtawesome._instance()
-        font_maps = qtawesome._resource["iconic"].charmap
+        iconprovider._instance()
+        font_maps = iconprovider._instance().charmap
 
         icon_names = []
         for font_collection, font_data in font_maps.items():
@@ -83,9 +81,7 @@ class IconBrowser(widgets.MainWindow):
     def _update_filter(self):
         """Update filter string in the proxy model with current lineedit text."""
         re_string = ""
-
-        group = self._combobox.currentText()
-        if group != ALL_COLLECTIONS:
+        if (group := self._combobox.currentText()) != ALL_COLLECTIONS:
             re_string += fr"^{group}\."
         if search_term := self._lineedit.text():
             re_string += f".*{search_term}.*$"
@@ -99,10 +95,8 @@ class IconBrowser(widgets.MainWindow):
 
     def _copy_icon_text(self):
         """Copy the name of the currently selected icon to the clipboard."""
-        indexes = self._listview.selectedIndexes()
-        if not indexes:
-            return
-        widgets.Application.copy_to_clipboard(indexes[0].data())
+        if indexes := self._listview.selectedIndexes():
+            widgets.Application.copy_to_clipboard(indexes[0].data())
 
 
 class IconListView(widgets.ListView):
@@ -138,7 +132,7 @@ class IconModel(core.StringListModel):
     def data(self, index, role):
         if role == constants.DECORATION_ROLE:
             icon_string = self.data(index, role=constants.DISPLAY_ROLE)
-            return qtawesome.icon(icon_string, color=self._icon_color)
+            return iconprovider.icon(icon_string, color=self._icon_color)
         return super().data(index, role)
 
 
