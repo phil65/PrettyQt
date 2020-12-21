@@ -1682,17 +1682,20 @@ inside a multi-line string when this function is finished.</p>
         <span class="n">add</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c1"># Otherwise, look for the delimiter on this line</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="c1"># Move past this match</span>
-        <span class="n">add</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">matchedLength</span><span class="p">()</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">():</span>
+            <span class="k">return</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+        <span class="n">add</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedLength</span><span class="p">()</span>
 
     <span class="c1"># As long as there's a delimiter match on this line...</span>
     <span class="k">while</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="c1"># Look for the ending delimiter</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">add</span><span class="p">)</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">add</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
         <span class="c1"># Ending delimiter on this line?</span>
         <span class="k">if</span> <span class="n">end</span> <span class="o">&gt;=</span> <span class="n">add</span><span class="p">:</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="n">add</span> <span class="o">+</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">matchedLength</span><span class="p">()</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="n">add</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedLength</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="c1"># No; multi-line string</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1701,7 +1704,7 @@ inside a multi-line string when this function is finished.</p>
         <span class="c1"># Apply formatting</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>
         <span class="c1"># Look for the next match</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
 
     <span class="c1"># Return True if still inside a multi-line string, False otherwise</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentBlockState</span><span class="p">()</span> <span class="o">==</span> <span class="n">in_state</span>
@@ -1828,17 +1831,19 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">start_index</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">previousBlockState</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">start_index</span> <span class="o">=</span> <span class="n">VALUE_START_EXPRESSION</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="n">VALUE_START_EXPRESSION</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
     <span class="k">while</span> <span class="n">start_index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">end_index</span> <span class="o">=</span> <span class="n">VALUE_END_EXPRESSION</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start_index</span><span class="p">)</span>
+        <span class="n">match</span> <span class="o">=</span> <span class="n">VALUE_END_EXPRESSION</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start_index</span><span class="p">)</span>
+        <span class="n">end_index</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">end_index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
             <span class="n">comment_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="n">start_index</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">matched_len</span> <span class="o">=</span> <span class="n">VALUE_END_EXPRESSION</span><span class="o">.</span><span class="n">matchedLength</span><span class="p">()</span>
-            <span class="n">comment_len</span> <span class="o">=</span> <span class="n">end_index</span> <span class="o">-</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">matched_len</span>
+            <span class="n">comment_len</span> <span class="o">=</span> <span class="n">end_index</span> <span class="o">-</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedLength</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">start_index</span><span class="p">,</span> <span class="n">comment_len</span><span class="p">,</span> <span class="n">VALUE_FORMAT</span><span class="p">)</span>
-        <span class="n">start_index</span> <span class="o">=</span> <span class="n">VALUE_START_EXPRESSION</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">comment_len</span><span class="p">)</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="n">VALUE_START_EXPRESSION</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
+            <span class="n">text</span><span class="p">,</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">comment_len</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
 </code></pre>
 </div>
 </details>
@@ -1886,7 +1891,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">start_index</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">previousBlockState</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">start_index</span> <span class="o">=</span> <span class="n">COMMENT_START</span><span class="o">.</span><span class="n">indexIn</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="n">COMMENT_START</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">start_index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">comment_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="n">start_index</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">start_index</span><span class="p">,</span> <span class="n">comment_len</span><span class="p">,</span> <span class="n">COMMENT_FORMAT</span><span class="p">)</span>
