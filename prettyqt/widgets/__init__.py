@@ -28,7 +28,6 @@ from .abstractspinbox import AbstractSpinBox
 from .abstractitemview import AbstractItemView
 from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
-from .desktopwidget import DesktopWidget
 from .rubberband import RubberBand
 from .graphicstransform import GraphicsTransform
 from .graphicsrotation import GraphicsRotation
@@ -218,7 +217,6 @@ __all__ = [
     "ScrollBar",
     "ScrollArea",
     "Widget",
-    "DesktopWidget",
     "RubberBand",
     "GraphicsTransform",
     "GraphicsRotation",
