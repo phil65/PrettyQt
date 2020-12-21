@@ -25,7 +25,7 @@ class WinJumpListItem(QtWinExtras.QWinJumpListItem):
         if isinstance(typ, QtWinExtras.QWinJumpListItem.Type):
             param = typ
         else:
-            typ = TYPES[typ]
+            param = TYPES[typ]
         super().__init__(param)
 
     def set_title(self, title: str) -> None:

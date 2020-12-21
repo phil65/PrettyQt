@@ -229,10 +229,6 @@ def test_datetimeedit(qtbot):
     widget.get_displayed_sections()
 
 
-def test_desktopwidget(qtbot):
-    widgets.DesktopWidget()
-
-
 def test_dialog(qtbot, qttester):
     dlg = widgets.Dialog(layout="horizontal")
     qtbot.addWidget(dlg)
