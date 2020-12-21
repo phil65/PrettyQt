@@ -49,6 +49,7 @@ from .icon import Icon
 from .paintdevice import PaintDevice
 from .paintdevicewindow import PaintDeviceWindow
 from .pixmap import Pixmap
+from .iconengine import IconEngine
 from .pixmapcache import PixmapCache
 from .bitmap import Bitmap
 from .image import Image
@@ -204,6 +205,7 @@ __all__ = [
     "Pen",
     "Picture",
     "Pixmap",
+    "IconEngine",
     "PixmapCache",
     "Bitmap",
     "Painter",

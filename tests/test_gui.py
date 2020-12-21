@@ -203,6 +203,19 @@ def test_icon():
     icon.get_actual_size((256, 256))
 
 
+def test_iconengine():
+    engine = gui.IconEngine()
+    engine.get_available_sizes()
+    engine.get_actual_size((100, 100))
+    engine.get_actual_size(100)
+    with pytest.raises(InvalidParamError):
+        engine.get_actual_size(100, state="test")
+    with pytest.raises(InvalidParamError):
+        engine.get_actual_size(100, mode="test")
+    px = gui.Pixmap()
+    engine.add_pixmap(px, mode="normal", state="off")
+
+
 def test_image():
     img = gui.Image()
     with open("data.pkl", "wb") as jar:
