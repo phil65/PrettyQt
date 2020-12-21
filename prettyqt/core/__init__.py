@@ -91,7 +91,6 @@ from .process import Process
 # from .rectf import RectF
 from .regularexpressionmatch import RegularExpressionMatch
 from .regularexpressionmatchiterator import RegularExpressionMatchIterator
-from .regexp import RegExp
 from .regularexpression import RegularExpression
 from .mimetype import MimeType
 from .mimedata import MimeData
@@ -238,7 +237,6 @@ __all__ = [
     "Property",
     "RegularExpressionMatch",
     "RegularExpressionMatchIterator",
-    "RegExp",
     "RegularExpression",
     "Runnable",
     "ModelIndex",

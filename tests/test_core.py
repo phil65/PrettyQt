@@ -501,14 +501,6 @@ def test_propertyanimation():
             animation.get_easing()
 
 
-def test_regexp():
-    regex = core.RegExp("[0-9]")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(regex, jar)
-    with open("data.pkl", "rb") as jar:
-        regex = pickle.load(jar)
-
-
 def test_regularexpressionmatch():
     match = core.RegularExpressionMatch()
     match.group()
