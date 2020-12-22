@@ -1,3 +1,12 @@
+## v0.158.0 (2020-12-22)
+
+### Feat
+
+- **iconprovider**: add reset_cache method
+- **Widget**: add set/get_foreground/background_role methods
+- **Application/Widget**: add set/get_stylesheet methods
+- **Application**: add edit_stylesheet context manager
+
 ## v0.157.1 (2020-12-22)
 
 ### Fix
