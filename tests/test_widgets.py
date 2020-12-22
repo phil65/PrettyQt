@@ -633,6 +633,10 @@ def test_lineedit(qtbot):
     with pytest.raises(InvalidParamError):
         widget.set_echo_mode("test")
     assert widget.get_echo_mode() == "password"
+    widget.set_cursor_move_style("visual")
+    with pytest.raises(InvalidParamError):
+        widget.set_cursor_move_style("test")
+    assert widget.get_cursor_move_style() == "visual"
     widget.set_input_mask("X")
     widget.set_range(0, 10)
     widget.set_value("5")

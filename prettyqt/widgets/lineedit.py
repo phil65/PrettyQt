@@ -2,7 +2,7 @@ from typing import Literal, Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -128,6 +128,27 @@ class LineEdit(QtWidgets.QLineEdit):
             echo mode
         """
         return ECHO_MODE.inverse[self.echoMode()]
+
+    def set_cursor_move_style(self, style: constants.CursorMoveStyleStr):
+        """Set cursor move style.
+
+        Args:
+            style: cursor move style to use
+
+        Raises:
+            InvalidParamError: invalid cursor move style
+        """
+        if style not in constants.CURSOR_MOVE_STYLE:
+            raise InvalidParamError(style, constants.CURSOR_MOVE_STYLE)
+        self.setCursorMoveStyle(constants.CURSOR_MOVE_STYLE[style])
+
+    def get_cursor_move_style(self) -> constants.CursorMoveStyleStr:
+        """Return cursor move style.
+
+        Returns:
+            cursor move style
+        """
+        return constants.CURSOR_MOVE_STYLE.inverse[self.cursorMoveStyle()]
 
     def set_value(self, value: str):
         self.setText(value)
