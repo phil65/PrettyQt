@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Literal, Optional
 
 from qtpy import QtWidgets
 
@@ -12,6 +12,7 @@ OPTIONS = dict(
     no_native=QtWidgets.QColorDialog.DontUseNativeDialog,
 )
 
+OptionStr = Literal["show_alpha", "no_buttons", "no_native"]
 
 QtWidgets.QColorDialog.__bases__ = (widgets.BaseDialog,)
 
@@ -36,7 +37,8 @@ class ColorDialog(QtWidgets.QColorDialog):
     ) -> gui.Color:
         preset = colors.get_color(preset)
         kwargs = dict(options=cls.ShowAlphaChannel) if allow_alpha else dict()
-        return gui.Color(cls.getColor(preset, parent, **kwargs))
+        color = cls.getColor(preset, parent, **kwargs)
+        return gui.Color(color)
 
     def current_color(self) -> gui.Color:
         return gui.Color(self.currentColor())

@@ -122,13 +122,9 @@ class Player(widgets.MainWindow):
     def on_player_change(self, val: int):
         with self.slider.block_signals():
             self.slider.set_value(int(val / 1000))
-        tmp = self.player.position()
-        duration = self.player.duration() / 1000
-        # print(tmp, val)
-        secs = tmp / 1000
-        self.clock.setText(
-            "%02d:%02d / %02d:%02d" % (secs / 60, secs % 60, duration / 60, duration % 60)
-        )
+        mins, secs = divmod(self.player.position() / 1000, 60)
+        dur_mins, dur_secs = divmod(self.player.duration() / 1000, 60)
+        self.clock.setText("%02d:%02d / %02d:%02d" % (mins, secs, dur_mins, dur_secs))
 
     def on_slider_change(self, val):
         self.player.setPosition(self.slider.get_value() * 1000)

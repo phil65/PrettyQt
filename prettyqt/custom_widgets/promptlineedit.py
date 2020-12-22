@@ -79,10 +79,7 @@ class PromptLineEdit(widgets.LineEdit):
         """
         self.button.setVisible(visible)
         left, top, right, bottom = self.getTextMargins()
-        if visible:
-            right = self._margin + self._spacing
-        else:
-            right = 0
+        right = self._margin + self._spacing if visible else 0
         self.setTextMargins(left, top, right, bottom)
 
     def _on_text_changed(self, text: str):
