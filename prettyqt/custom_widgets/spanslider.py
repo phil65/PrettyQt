@@ -80,7 +80,7 @@ class SpanSlider(widgets.Slider):
         )
         if self.upper_pressed != HANDLE_STYLE:
             self.lower_pressed = self._handle_mouse_press(
-                event.pos(), self.lower_pressed, self.lower, "lower"
+                event.pos(), self.lower_pressed, self.lower_val, "lower"
             )
 
         self._first_movement = True
