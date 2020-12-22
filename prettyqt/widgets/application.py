@@ -107,9 +107,15 @@ class Application(QtWidgets.QApplication):
 
     @contextmanager
     def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
-        ss = qstylizer.parser.parse(self.styleSheet())
+        ss = self.get_stylesheet()
         yield ss
-        self.setStyleSheet(ss.toString())
+        self.set_stylesheet(ss)
+
+    def set_stylesheet(self, ss: Union[str, qstylizer.style.StyleSheet]):
+        self.setStyleSheet(str(ss))
+
+    def get_stylesheet(self) -> qstylizer.style.StyleSheet:
+        return qstylizer.parser.parse(self.styleSheet())
 
     def send_event(self, obj_or_str: Union[str, QtCore.QObject], event: QtCore.QEvent):
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str

@@ -254,9 +254,15 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     @contextmanager
     def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
-        ss = qstylizer.parser.parse(self.styleSheet())
+        ss = self.get_stylesheet()
         yield ss
-        self.setStyleSheet(ss.toString())
+        self.set_stylesheet(ss)
+
+    def set_stylesheet(self, ss: Union[str, qstylizer.style.StyleSheet]):
+        self.setStyleSheet(str(ss))
+
+    def get_stylesheet(self) -> qstylizer.style.StyleSheet:
+        return qstylizer.parser.parse(self.styleSheet())
 
     @contextmanager
     def edit_palette(self) -> Iterator[gui.Palette]:
