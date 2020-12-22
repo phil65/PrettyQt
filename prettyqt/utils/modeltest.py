@@ -62,8 +62,8 @@ TYPES: List[Tuple[QtCore.Qt.ItemDataRole, Tuple[type, ...]]] = [
     (QtCore.Qt.WhatsThisRole, (str,)),
     (QtCore.Qt.SizeHintRole, (QtCore.QSize,)),
     (QtCore.Qt.FontRole, (QtGui.QFont,)),
-    (QtCore.Qt.BackgroundColorRole, (QtGui.QColor, QtGui.QBrush)),
-    (QtCore.Qt.TextColorRole, (QtGui.QColor, QtGui.QBrush)),
+    (QtCore.Qt.BackgroundRole, (QtGui.QColor, QtGui.QBrush)),
+    (QtCore.Qt.ForegroundRole, (QtGui.QColor, QtGui.QBrush)),
     (
         QtCore.Qt.DecorationRole,
         (QtGui.QPixmap, QtGui.QImage, QtGui.QIcon, QtGui.QColor, QtGui.QBrush),
