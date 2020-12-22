@@ -1,5 +1,7 @@
 """Module containing custom widget classes."""
 
+from prettyqt import core
+
 from .image import Image
 from .listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
@@ -32,7 +34,9 @@ from .roundprogressbar import RoundProgressBar
 
 # from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
-from .player import Player
+
+if core.VersionNumber.get_qt_version() < (6, 0, 0):
+    from .player import Player
 
 # Deprecated: should be imported from custom_delegates instead
 from prettyqt.custom_delegates.buttondelegate import ButtonDelegate

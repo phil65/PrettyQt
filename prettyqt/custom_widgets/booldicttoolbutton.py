@@ -18,35 +18,32 @@ class BoolDictToolButton(widgets.ToolButton):
         super().__init__(parent=parent)
         self.set_text(title)
         self.set_icon(icon)
-        menu = widgets.Menu()
-        self.set_menu(menu)
+        self.button_menu = widgets.Menu()
+        self.setMenu(self.button_menu)
         self.set_popup_mode("instant")
         if dct:
             self.set_dict(dct)
 
     def __getitem__(self, key: str) -> bool:  # type: ignore
-        menu = self.menu()
-        return menu[key].isChecked()
+        return self.button_menu[key].isChecked()
 
     def __setitem__(self, key: str, value: bool):
-        menu = self.menu()
-        menu[key].setChecked(value)
+        self.button_menu[key].setChecked(value)
         self.value_changed.emit(self.as_dict())
 
     def set_dict(self, dct: Dict[str, str]):
-        menu = self.menu()
-        menu.clear()
+        self.button_menu.clear()
         for k, v in dct.items():
             action = widgets.Action()
             action.set_text(v)
             action.setCheckable(True)
             action.set_id(k)
             action.triggered.connect(lambda: self.value_changed.emit(self.as_dict()))
-            menu.add(action)
+            self.button_menu.add(action)
         self.value_changed.emit(self.as_dict())
 
     def as_dict(self) -> Dict[str, bool]:
-        return {act.get_id(): act.isChecked() for act in self.menu()}
+        return {act.get_id(): act.isChecked() for act in self.button_menu}
 
 
 if __name__ == "__main__":

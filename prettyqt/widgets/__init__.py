@@ -3,6 +3,7 @@
 contains QtWidgets-based classes
 """
 
+from prettyqt import core
 from qtpy.QtWidgets import (
     QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent,
     QGraphicsSceneMouseEvent as GraphicsSceneMouseEvent,
@@ -100,13 +101,20 @@ from .slider import Slider
 from .dial import Dial
 
 from .dockwidget import DockWidget
-from .action import Action
-from .actiongroup import ActionGroup
+
+if core.VersionNumber.get_qt_version() < (6, 0, 0):
+    from .action import Action
+    from .actiongroup import ActionGroup
+    from .shortcut import Shortcut
+    from .undocommand import UndoCommand
+    from .undostack import UndoStack
+    from .undogroup import UndoGroup
+    from .keyeventtransition import KeyEventTransition
+    from .mouseeventtransition import MouseEventTransition
 from .widgetaction import WidgetAction
 from .menu import Menu
 from .mainwindow import MainWindow
 from .whatsthis import WhatsThis
-from .shortcut import Shortcut
 from .listwidgetitem import ListWidgetItem
 from .treewidgetitem import TreeWidgetItem
 from .toolbutton import ToolButton
@@ -178,16 +186,10 @@ from .wizard import Wizard
 from .wizardpage import WizardPage
 from .stackedwidget import StackedWidget
 
-from .undocommand import UndoCommand
-from .undostack import UndoStack
-from .undogroup import UndoGroup
 from .undoview import UndoView
 
 from .datawidgetmapper import DataWidgetMapper
 from .sizegrip import SizeGrip
-
-from .keyeventtransition import KeyEventTransition
-from .mouseeventtransition import MouseEventTransition
 
 from .plaintextdocumentlayout import PlainTextDocumentLayout
 

@@ -24,11 +24,11 @@ class IconBrowser(widgets.MainWindow):
         iconprovider._instance()
         font_maps = iconprovider._instance().charmap
 
-        icon_names = []
-        for font_collection, font_data in font_maps.items():
-            for icon_name in font_data:
-                icon_names.append(f"{font_collection}.{icon_name}")
-
+        icon_names = [
+            f"{font_collection}.{icon_name}"
+            for font_collection, font_data in font_maps.items()
+            for icon_name in font_data
+        ]
         self._filter_timer = core.Timer(self)
         self._filter_timer.setSingleShot(True)
         self._filter_timer.setInterval(AUTO_SEARCH_TIMEOUT)
@@ -87,7 +87,7 @@ class IconBrowser(widgets.MainWindow):
         if search_term := self._lineedit.text():
             re_string += f".*{search_term}.*$"
 
-        self._proxy_model.setFilterRegExp(re_string)
+        self._proxy_model.setFilterRegularExpression(re_string)
 
     def _trigger_instant_update(self):
         """Stop timer used for committing search term and update proxy model instantly."""

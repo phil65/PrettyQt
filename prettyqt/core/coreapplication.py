@@ -37,7 +37,10 @@ class CoreApplication(QtCore.QCoreApplication):
 
     @classmethod
     def disable_window_help_button(cls, state: bool = True):
-        cls.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton, state)
+        try:
+            cls.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton, state)
+        except AttributeError:
+            pass
 
     def set_metadata(
         self,

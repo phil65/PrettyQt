@@ -4,8 +4,14 @@ from qtpy import QtGui
 class Color(QtGui.QColor):
     def __init__(self, *args, **kwargs):
         # PySide2 workaround
-        if len(args) == 1 and isinstance(args[0], Color):
-            super().__init__(str(args[0]))
+        if len(args) == 1:
+            if isinstance(args[0], QtGui.QColor):
+                super().__init__(args[0].name())
+            elif isinstance(args[0], str):
+                super().__init__()
+                self.set_color(args[0])
+            else:
+                super().__init__(*args, **kwargs)
         else:
             super().__init__(*args, **kwargs)
 

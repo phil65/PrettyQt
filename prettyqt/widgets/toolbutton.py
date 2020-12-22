@@ -23,9 +23,9 @@ class ToolButton(QtWidgets.QToolButton):
         menu = self.menu()
         return menu[item]
 
-    def set_menu(self, menu: QtWidgets.QMenu):
-        menu.setParent(self)
-        self.setMenu(menu)
+    # def set_menu(self, menu: QtWidgets.QMenu):
+    #     menu.setParent(self)
+    #     self.setMenu(menu)
 
     @classmethod
     def for_menu(cls, menu: QtWidgets.QMenu, icon: iconprovider.IconType = None):

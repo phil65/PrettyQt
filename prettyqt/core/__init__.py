@@ -120,14 +120,7 @@ from .stringlistmodel import StringListModel
 from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel
 from .standardpaths import StandardPaths
-from .abstracttransition import AbstractTransition
-from .signaltransition import SignalTransition
-from .eventtransition import EventTransition
-from .abstractstate import AbstractState
-from .finalstate import FinalState
-from .historystate import HistoryState
-from .state import State
-from .statemachine import StateMachine
+
 from .commandlineoption import CommandLineOption
 from .commandlineparser import CommandLineParser
 from .collatorsortkey import CollatorSortKey
@@ -144,6 +137,16 @@ if qtpy.API == "pyqt5":
 if VersionNumber.get_qt_version() >= (5, 13, 0):
     from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
     from .transposeproxymodel import TransposeProxyModel
+
+if VersionNumber.get_qt_version() < (6, 0, 0):
+    from .abstracttransition import AbstractTransition
+    from .signaltransition import SignalTransition
+    from .eventtransition import EventTransition
+    from .abstractstate import AbstractState
+    from .finalstate import FinalState
+    from .historystate import HistoryState
+    from .state import State
+    from .statemachine import StateMachine
 
 
 def app():
