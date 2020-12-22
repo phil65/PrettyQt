@@ -142,6 +142,22 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())
 
+    def get_foreground_role(self) -> gui.palette.RoleStr:
+        return gui.palette.ROLE.inverse[self.foregroundRole()]
+
+    def set_foreground_role(self, role: gui.palette.RoleStr):
+        if role not in gui.palette.ROLE:
+            raise InvalidParamError(role, gui.palette.ROLE)
+        self.setForegroundRole(gui.palette.ROLE[role])
+
+    def get_background_role(self) -> gui.palette.RoleStr:
+        return gui.palette.ROLE.inverse[self.backgroundRole()]
+
+    def set_background_role(self, role: gui.palette.RoleStr):
+        if role not in gui.palette.ROLE:
+            raise InvalidParamError(role, gui.palette.ROLE)
+        self.setBackgroundRole(gui.palette.ROLE[role])
+
     def set_window_flags(self, *flags: constants.WindowFlagStr, append: bool = False):
         for flag in flags:
             if flag not in constants.WINDOW_FLAGS:
