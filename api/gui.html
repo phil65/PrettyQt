@@ -704,26 +704,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.gui.icon" class="md-nav__link">
-    icon
-  </a>
-  
-    <nav class="md-nav" aria-label="icon">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.gui.icon.get_icon" class="md-nav__link">
-    get_icon()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#prettyqt.gui.imageiohandler" class="md-nav__link">
     imageiohandler
   </a>
@@ -2797,26 +2777,6 @@
         
       </ul>
     </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#prettyqt.gui.icon" class="md-nav__link">
-    icon
-  </a>
-  
-    <nav class="md-nav" aria-label="icon">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.gui.icon.get_icon" class="md-nav__link">
-    get_icon()
-  </a>
   
 </li>
         
@@ -5993,13 +5953,13 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the default window icon.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="o">.</span><span class="n">WINDOW_ICON_COLOR</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setWindowIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -6075,62 +6035,6 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-module">
-<h2 class="doc doc-heading" id="prettyqt.gui.icon">
-
-        <code>icon</code>
-
-
-      </h2>
-<div class="doc doc-contents ">
-<div class="doc doc-children">
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="prettyqt.gui.icon.get_icon">
-
-        <code class="highlight language-python">
-get_icon<span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">as_qicon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>        </code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Get icon with given color.</p>
-<p>Qtawesome already caches icons, but since we construct our own subclassed icon,
-we cache, too.</p>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/gui/icon.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span>
-    <span class="n">icon</span><span class="p">:</span> <span class="n">IconType</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">as_qicon</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">:</span>
-    <span class="sd">"""Get icon with given color.</span>
-
-<span class="sd">    Qtawesome already caches icons, but since we construct our own subclassed icon,</span>
-<span class="sd">    we cache, too.</span>
-<span class="sd">    """</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">icon</span> <span class="k">if</span> <span class="n">as_qicon</span> <span class="k">else</span> <span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">):</span>
-        <span class="n">icon</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">as_qicon</span><span class="p">)</span> <span class="ow">in</span> <span class="n">icon_cache</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">icon_cache</span><span class="p">[(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">as_qicon</span><span class="p">)]</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="n">icon</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"mdi."</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">new</span> <span class="o">=</span> <span class="n">qta</span><span class="o">.</span><span class="n">icon</span><span class="p">(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">new</span> <span class="o">=</span> <span class="n">qta</span><span class="o">.</span><span class="n">icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">new</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">new</span> <span class="k">if</span> <span class="n">as_qicon</span> <span class="k">else</span> <span class="n">Icon</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
-    <span class="n">icon_cache</span><span class="p">[(</span><span class="n">icon</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">as_qicon</span><span class="p">)]</span> <span class="o">=</span> <span class="n">icon</span>
-    <span class="k">return</span> <span class="n">icon</span>
-</code></pre>
-</div>
-</details>
 </div>
 </div>
 </div>
@@ -8973,7 +8877,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>icon</code></td>
-<td><code>gui.icon.IconType</code></td>
+<td><code>iconprovider.IconType</code></td>
 <td>
 <p>icon to use</p>
 </td>
@@ -8984,13 +8888,13 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        icon: icon to use</span>
 <span class="sd">    """</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 </code></pre>
 </div>
