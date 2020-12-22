@@ -25,11 +25,9 @@ class Menu(QtWidgets.QMenu):
     def __len__(self) -> int:
         return len(self.actions())
 
-    def __add__(self, other):
-        if isinstance(other, QtWidgets.QAction):
-            self.add(other)
-            return self
-        raise TypeError("Invalid Type")
+    def __add__(self, other: QtWidgets.QAction):
+        self.add(other)
+        return self
 
     def __getitem__(self, item: str) -> QtWidgets.QAction:
         for action in self.actions():

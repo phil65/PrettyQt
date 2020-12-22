@@ -19,8 +19,6 @@ class StackedWidget(QtWidgets.QStackedWidget):
         return type(self), (), self.__getstate__()
 
     def __add__(self, other: QtWidgets.QWidget) -> StackedWidget:
-        if not isinstance(other, QtWidgets.QWidget):
-            raise TypeError(f"Wrong type {other} for StackedWidget")
         self.addWidget(other)
         return self
 
