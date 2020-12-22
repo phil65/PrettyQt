@@ -1,29 +1,36 @@
+from typing import Dict, Tuple
+
+from qtpy import QtWidgets
+
 from prettyqt import core
 
 
 class Spin:
-    def __init__(self, parent_widget, interval=10, step=1):
+    def __init__(
+        self, parent_widget: QtWidgets.QWidget, interval: int = 10, step: int = 1
+    ):
         self.parent_widget = parent_widget
         self.interval, self.step = interval, step
-        self.info = {}
+        self.info: Dict[QtWidgets.QWidget, Tuple[core.Timer, int, int]] = {}
 
     def _update(self):
-        if self.parent_widget in self.info:
-            timer, angle, step = self.info[self.parent_widget]
+        if self.parent_widget not in self.info:
+            return
+        timer, angle, step = self.info[self.parent_widget]
 
-            if angle >= 360:
-                angle = 0
+        if angle >= 360:
+            angle = 0
 
-            angle += step
-            self.info[self.parent_widget] = timer, angle, step
-            self.parent_widget.update()
+        angle += step
+        self.info[self.parent_widget] = timer, angle, step
+        self.parent_widget.update()
 
     def setup(self, icon_painter, painter, rect):
 
         if self.parent_widget not in self.info:
-            timer = core.Timer()
+            timer = core.Timer(self.parent_widget)
             timer.timeout.connect(self._update)
-            self.info[self.parent_widget] = [timer, 0, self.step]
+            self.info[self.parent_widget] = timer, 0, self.step
             timer.start(self.interval)
         else:
             timer, angle, self.step = self.info[self.parent_widget]
