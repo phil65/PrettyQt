@@ -21,7 +21,6 @@ hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
 python = "^3.8"
 bidict = "^0"
 qtpy = "^1.9.0"
-qtawesome = "^1"
 docutils = {version = "^0", optional=true}
 orjson = "^3.2.0"
 regex = "^2020.6.8"

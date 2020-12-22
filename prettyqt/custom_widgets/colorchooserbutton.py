@@ -2,7 +2,7 @@ from typing import Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.utils import colors
 
 
@@ -54,7 +54,7 @@ class ColorChooserButton(widgets.Widget):
     def set_color(self, color: colors.ColorType):
         self.current_color = colors.get_color(color)
         self.lineedit.set_text(self.current_color.name().upper())
-        icon = gui.Icon.for_color(self.current_color)
+        icon = iconprovider.for_color(self.current_color)
         self.button.set_icon(icon)
 
     def is_valid(self) -> bool:

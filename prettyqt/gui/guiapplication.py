@@ -3,7 +3,7 @@ from typing import List
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import InvalidParamError, colors
 
 
@@ -122,13 +122,13 @@ class GuiApplication(QtGui.QGuiApplication):
     def get_font(cls) -> gui.Font:
         return gui.Font(cls.font())
 
-    def set_icon(self, icon: gui.icon.IconType):
+    def set_icon(self, icon: iconprovider.IconType):
         """Set the default window icon.
 
         Args:
             icon: icon to use
         """
-        icon = gui.icon.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
+        icon = iconprovider.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
     def get_icon(self) -> gui.Icon:

@@ -2,7 +2,7 @@ from typing import Any, Dict, Iterable, Iterator, Mapping, Optional, Tuple, Unio
 
 from qtpy import QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, iconprovider, widgets
 from prettyqt.utils import autoslot
 
 
@@ -42,7 +42,7 @@ class SelectionWidget(widgets.GroupBox):
                 rb.setChecked(True)
                 break
 
-    def add(self, title: str, data=None, icon: gui.icon.IconType = None):
+    def add(self, title: str, data=None, icon: iconprovider.IconType = None):
         # TODO: make use of icon kwarg
         rb = widgets.RadioButton(title)
         rb.toggled.connect(self.update_choice)
@@ -55,7 +55,7 @@ class SelectionWidget(widgets.GroupBox):
     def add_tooltip_icon(self, text: str):
         label = widgets.Label(text)
         label.setToolTip(text)
-        icon = gui.icon.get_icon("mdi.help-circle-outline")
+        icon = iconprovider.get_icon("mdi.help-circle-outline")
         pixmap = icon.pixmap(20, 20)
         label.setPixmap(pixmap)
         self.box += label

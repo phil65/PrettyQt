@@ -2,7 +2,7 @@ from typing import Union
 
 from qtpy import QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import iconprovider, widgets
 
 
 QtWidgets.QUndoView.__bases__ = (widgets.ListView,)
@@ -12,13 +12,13 @@ class UndoView(QtWidgets.QUndoView):
     def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
         return self.stack().command(index)
 
-    def set_clean_icon(self, icon: gui.icon.IconType):
+    def set_clean_icon(self, icon: iconprovider.IconType):
         """Set the icon for the clean button.
 
         Args:
             icon: icon to use
         """
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         self.setCleanIcon(icon)
 
     def set_value(self, value: Union[QtWidgets.QUndoGroup, QtWidgets.QUndoStack]):

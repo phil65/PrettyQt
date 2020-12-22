@@ -2,7 +2,7 @@ from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.utils import InvalidParamError, helpers
 
 
@@ -34,7 +34,7 @@ class ToolBar(QtWidgets.QToolBar):
             self.addWidget(item)
 
     def add_menu_button(
-        self, label: str, icon: gui.icon.IconType, menu: QtWidgets.QMenu
+        self, label: str, icon: iconprovider.IconType, menu: QtWidgets.QMenu
     ) -> widgets.ToolButton:
         btn = widgets.ToolButton.for_menu(menu)
         btn.setText(label)
@@ -88,11 +88,11 @@ class ToolBar(QtWidgets.QToolBar):
     def add_action(
         self,
         label: str,
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         callback: Optional[Callable] = None,
         checkable: bool = False,
     ) -> QtWidgets.QAction:
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         action = self.addAction(icon, label)
         if callback is not None:
             action.triggered.connect(callback)

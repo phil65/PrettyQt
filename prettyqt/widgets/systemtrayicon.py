@@ -1,6 +1,6 @@
 from qtpy import QtWidgets
 
-from prettyqt import gui
+from prettyqt import gui, iconprovider
 from prettyqt.utils import bidict
 
 
@@ -21,20 +21,20 @@ MESSAGE_ICONS = bidict(
 
 
 class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
-    def set_icon(self, icon: gui.icon.IconType):
+    def set_icon(self, icon: iconprovider.IconType):
         """Set the system tray icon.
 
         Args:
             icon: icon to use
         """
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
     def show_message(
         self,
         title: str,
         message: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         timeout: int = 10,
     ):
         if icon is None:
@@ -42,7 +42,7 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         if icon in MESSAGE_ICONS:
             ico = MESSAGE_ICONS[icon]
         else:
-            ico = gui.icon.get_icon(icon)
+            ico = iconprovider.get_icon(icon)
         self.showMessage(title, message, ico, timeout * 1000)
 
 

@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-import pathlib
-from typing import Dict, List, Literal, Optional, Tuple, Union
+from typing import List, Literal, Tuple, Union
 
-import qtawesome as qta
 from qtpy import QtCore, QtGui
 
 from prettyqt import core, gui
@@ -22,41 +20,6 @@ ModeStr = Literal["normal", "disabled", "active", "selected"]
 STATE = bidict(off=QtGui.QIcon.Off, on=QtGui.QIcon.On)
 
 StateStr = Literal["off", "on"]
-
-IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
-
-key_type = Tuple[Optional[str], Optional[str], bool]
-icon_cache: Dict[key_type, QtGui.QIcon] = dict()
-
-
-def get_icon(
-    icon: IconType, color: Optional[str] = None, as_qicon: bool = False
-) -> QtGui.QIcon:
-    """Get icon with given color.
-
-    Qtawesome already caches icons, but since we construct our own subclassed icon,
-    we cache, too.
-    """
-    if isinstance(icon, QtGui.QIcon):
-        return icon if as_qicon else Icon(icon)
-    if isinstance(icon, pathlib.Path):
-        icon = str(icon)
-    if (icon, color, as_qicon) in icon_cache:
-        return icon_cache[(icon, color, as_qicon)]
-    if isinstance(icon, str) and icon.startswith("mdi."):
-        if color is not None:
-            new = qta.icon(icon, color=color)
-        else:
-            new = qta.icon(icon)
-    else:
-        new = QtGui.QIcon(icon)  # type: ignore
-    icon = new if as_qicon else Icon(new)
-    icon_cache[(icon, color, as_qicon)] = icon
-    return icon
-
-
-def set_defaults(*args, **kwargs):
-    qta.set_defaults(*args, **kwargs)
 
 
 class Icon(QtGui.QIcon):
@@ -78,13 +41,11 @@ class Icon(QtGui.QIcon):
     @classmethod
     def for_color(cls, color_str: str) -> Icon:
         color = gui.Color.from_text(color_str)
-        if color.isValid():
-            bitmap = gui.Pixmap(16, 16)
-            bitmap.fill(color)
-            icon = cls(bitmap)
-        else:
-            icon = cls(qta.icon("mdi.card-outline"))
-        return icon
+        if not color.isValid():
+            raise TypeError()
+        bitmap = gui.Pixmap(16, 16)
+        bitmap.fill(color)
+        return cls(bitmap)
 
     @classmethod
     def from_image(cls, image: QtGui.QImage):

@@ -2,7 +2,7 @@ from typing import Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import iconprovider, widgets
 
 
 class IconLabel(widgets.Widget):
@@ -10,7 +10,7 @@ class IconLabel(widgets.Widget):
         self,
         text: Optional[str] = None,
         tooltip: str = "",
-        icon: gui.icon.IconType = "mdi.help-circle-outline",
+        icon: iconprovider.IconType = "mdi.help-circle-outline",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent=parent)
@@ -19,7 +19,7 @@ class IconLabel(widgets.Widget):
         self.label.setMargin(10)
         self.label.set_size_policy(horizontal="minimum")
         self.tooltip = tooltip
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         self.icon = widgets.Label()
         self.icon.setToolTip(tooltip)
         self.icon.set_size_policy(horizontal="minimum")

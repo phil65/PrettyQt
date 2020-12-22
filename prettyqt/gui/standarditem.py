@@ -4,7 +4,7 @@ from typing import Iterator, List, Optional, Tuple, Union
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import InvalidParamError
 
 
@@ -77,13 +77,13 @@ class StandardItem(QtGui.QStandardItem):
         assert type(item) == StandardItem
         return item
 
-    def set_icon(self, icon: gui.icon.IconType):
+    def set_icon(self, icon: iconprovider.IconType):
         """Set the icon for the action.
 
         Args:
             icon: icon to use
         """
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
     def set_checkstate(self, state: constants.StateStr):
@@ -122,7 +122,7 @@ class StandardItem(QtGui.QStandardItem):
     def add_item(
         self,
         name: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         data: Optional[dict] = None,
         foreground: Optional[QtGui.QBrush] = None,
         background: Optional[QtGui.QBrush] = None,
@@ -141,7 +141,7 @@ class StandardItem(QtGui.QStandardItem):
     ) -> StandardItem:
         item = StandardItem(name)
         if icon is not None:
-            icon = gui.icon.get_icon(icon)
+            icon = iconprovider.get_icon(icon)
             item.setIcon(icon)
         if data is not None:
             for k, v in data.items():

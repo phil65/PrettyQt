@@ -2,7 +2,7 @@ from typing import Any, Callable, Iterator, List, Optional, Union
 
 from qtpy import QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, iconprovider, widgets
 
 
 QtWidgets.QMenu.__bases__ = (widgets.Widget,)
@@ -12,7 +12,7 @@ class Menu(QtWidgets.QMenu):
     def __init__(
         self,
         title: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(title, parent=parent)
@@ -42,13 +42,13 @@ class Menu(QtWidgets.QMenu):
             i.setParent(self)
             self.addAction(i)
 
-    def set_icon(self, icon: gui.icon.IconType):
+    def set_icon(self, icon: iconprovider.IconType):
         """Set the icon for the menu.
 
         Args:
             icon: icon to use
         """
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
     def add_separator(self, text: Optional[str] = None) -> widgets.WidgetAction:

@@ -4,7 +4,7 @@ from typing import Iterator, List, Optional, Tuple, Union
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import InvalidParamError
 
 
@@ -72,7 +72,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
     def add_item(
         self,
         name: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         data: Optional[dict] = None,
         foreground: Optional[QtGui.QBrush] = None,
         background: Optional[QtGui.QBrush] = None,
@@ -91,7 +91,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
     ) -> gui.StandardItem:
         item = gui.StandardItem(name)
         if icon is not None:
-            icon = gui.icon.get_icon(icon)
+            icon = iconprovider.get_icon(icon)
             item.setIcon(icon)
         if data is not None:
             for k, v in data.items():

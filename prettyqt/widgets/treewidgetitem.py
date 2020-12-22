@@ -4,7 +4,7 @@ from typing import Iterator, Literal
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -65,14 +65,14 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         order = QtCore.Qt.DescendingOrder if descending else QtCore.Qt.AscendingOrder
         self.sortChildren(column, order)
 
-    def set_icon(self, icon: gui.icon.IconType, column: int = 0):
+    def set_icon(self, icon: iconprovider.IconType, column: int = 0):
         """Set the icon for the action.
 
         Args:
             icon: icon to use
             column: column
         """
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         self.setIcon(column, icon)
 
     def get_background(self, column: int = 0) -> gui.Brush:

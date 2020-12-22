@@ -2,7 +2,7 @@ from typing import Literal
 
 from qtpy import QtWidgets
 
-from prettyqt import constants, gui, widgets
+from prettyqt import constants, iconprovider, widgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -28,7 +28,7 @@ class ToolButton(QtWidgets.QToolButton):
         self.setMenu(menu)
 
     @classmethod
-    def for_menu(cls, menu: QtWidgets.QMenu, icon: gui.icon.IconType = None):
+    def for_menu(cls, menu: QtWidgets.QMenu, icon: iconprovider.IconType = None):
         btn = cls()
         btn.setMenu(menu)
         # btn.set_title(menu.title())

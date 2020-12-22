@@ -2,7 +2,7 @@ from typing import Callable, Literal, Optional
 
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import InvalidParamError, bidict, helpers, prettyprinter
 
 
@@ -42,7 +42,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         self,
         parent: Optional[QtCore.QObject] = None,
         text: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         shortcut: Optional[str] = None,
         tooltip: str = "",
         checkable: bool = False,
@@ -125,13 +125,13 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
     def set_checkable(self, value: bool):
         self.setCheckable(value)
 
-    def set_icon(self, icon: gui.icon.IconType):
+    def set_icon(self, icon: iconprovider.IconType):
         """Set the icon for the action.
 
         Args:
             icon: icon to use
         """
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
     def set_shortcut(self, shortcut):

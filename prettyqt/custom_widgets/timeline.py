@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.utils import colors
 
 
@@ -239,7 +239,7 @@ class Timeline(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.app()
     tl = Timeline(60, 60)
-    icon = gui.icon.get_icon("mdi.folder")
+    icon = iconprovider.get_icon("mdi.folder")
     px = icon.pixmap(256, 256)
     sample = VideoSample(20, picture=px)
     tl += sample

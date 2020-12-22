@@ -6,10 +6,10 @@ based on qtawesome
 import pathlib
 from typing import Dict, Optional, Tuple, Union
 
-from qtpy import QtCore, QtGui, QtWidgets
+from qtpy import QtGui
 
 # Third party imports
-from prettyqt import core, gui, widgets
+from prettyqt import gui
 from prettyqt.iconprovider.iconic_font import IconicFont, set_global_defaults
 
 # Constants
@@ -65,7 +65,7 @@ def _instance() -> IconicFont:
     return _resource["iconic"]
 
 
-def icon(*names, **kwargs) -> QtGui.QIcon:
+def _icon(*names, **kwargs) -> QtGui.QIcon:
     """Return a QIcon object corresponding to the provided icon name(s).
 
     This function is the main interface of qtawesome.
@@ -158,6 +158,17 @@ def icon(*names, **kwargs) -> QtGui.QIcon:
     return _instance().icon(*names, **kwargs)
 
 
+def for_color(color_str: str) -> gui.Icon:
+    color = gui.Color.from_text(color_str)
+    if color.isValid():
+        bitmap = gui.Pixmap(16, 16)
+        bitmap.fill(color)
+        icon = gui.Icon(bitmap)
+    else:
+        icon = gui.Icon(_icon("mdi.card-outline"))
+    return icon
+
+
 def load_font(
     prefix: str,
     ttf_filename: str,
@@ -237,43 +248,33 @@ def set_defaults(**kwargs):
     return set_global_defaults(**kwargs)
 
 
-class IconWidget(widgets.Label):
-    """IconWidget gives the ability to display an icon as a widget.
+IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
 
-    if supports the same arguments as icon()
-    for example
-    music_icon = qta.IconWidget('fa5s.music',
-                                color='blue',
-                                color_active='orange')
+key_type = Tuple[Optional[str], Optional[str], bool]
+icon_cache: Dict[key_type, QtGui.QIcon] = dict()
 
-    it also have setIcon() and setIconSize() functions
+
+def get_icon(
+    icon: IconType, color: Optional[str] = None, as_qicon: bool = False
+) -> QtGui.QIcon:
+    """Get icon with given color.
+
+    Qtawesome already caches icons, but since we construct our own subclassed icon,
+    we cache, too.
     """
-
-    def __init__(self, *names, parent: Optional[QtWidgets.QWidget] = None, **kwargs):
-        super().__init__(parent=parent)
-        self._icon = None
-        self._size = core.Size(16, 16)
-        self.set_icon(icon(*names, **kwargs))
-
-    def set_icon(self, _icon: QtGui.QIcon):
-        """Set a new icon().
-
-        Parameters
-        ----------
-        _icon: qtawesome.icon
-            icon to set
-        """
-        self._icon = _icon
-        self.setPixmap(_icon.pixmap(self._size))
-
-    def set_icon_size(self, size: Union[int, QtCore.QSize, Tuple[int, int]]):
-        if isinstance(size, tuple):
-            size = QtCore.QSize(*size)
-        elif isinstance(size, int):
-            size = QtCore.QSize(size, size)
-        self._size = size
-
-    def update(self, *args, **kwargs):
-        if self._icon:
-            self.setPixmap(self._icon.pixmap(self._size))
-        return super().update(*args, **kwargs)
+    if isinstance(icon, QtGui.QIcon):
+        return icon if as_qicon else gui.Icon(icon)
+    if isinstance(icon, pathlib.Path):
+        icon = str(icon)
+    if (icon, color, as_qicon) in icon_cache:
+        return icon_cache[(icon, color, as_qicon)]
+    if isinstance(icon, str) and icon.startswith("mdi."):
+        if color is not None:
+            new = _icon(icon, color=color)
+        else:
+            new = _icon(icon)
+    else:
+        new = QtGui.QIcon(icon)  # type: ignore
+    icon = new if as_qicon else gui.Icon(new)
+    icon_cache[(icon, color, as_qicon)] = icon
+    return icon

@@ -1,6 +1,6 @@
 from qtpy import QtCore, QtWidgets
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import InvalidParamError
 
 
@@ -37,13 +37,13 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
-    def set_icon(self, icon: gui.icon.IconType):
+    def set_icon(self, icon: iconprovider.IconType):
         """Set the icon for the action.
 
         Args:
             icon: icon to use
         """
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
     def set_checkstate(self, state: constants.StateStr):

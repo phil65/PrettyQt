@@ -2,7 +2,7 @@ from typing import Dict, Literal, Optional, Tuple, Union
 
 from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.utils import InvalidParamError, autoslot, bidict
 
 
@@ -203,7 +203,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self,
         item: Union[QtWidgets.QWidget, QtWidgets.QLayout],
         label: str,
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         position: Optional[int] = None,
         show: bool = False,
     ) -> int:
@@ -217,7 +217,7 @@ class TabWidget(QtWidgets.QTabWidget):
         if not icon:
             index = self.insertTab(position, widget, label)
         else:
-            icon = gui.icon.get_icon(icon)
+            icon = iconprovider.get_icon(icon)
             index = self.insertTab(position, widget, icon, label)
         if show:
             self.setCurrentIndex(index)
@@ -227,7 +227,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self,
         widget: Union[QtWidgets.QWidget, QtWidgets.QLayout],
         name: str,
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         insert_at: Optional[int] = None,
     ):
         """Re-attach tab.
@@ -239,7 +239,7 @@ class TabWidget(QtWidgets.QTabWidget):
             widget (Union[QtWidgets.QWidget, QtWidgets.QLayout]): the content widget
                 from the DetachedTab window
             name (str): the name of the detached tab
-            icon (gui.icon.IconType, optional): the window icon for the detached tab
+            icon (iconprovider.IconType, optional): the window icon for the detached tab
             insert_at (Optional[int], optional): insert the re-attached tab at the
                 given index
         """

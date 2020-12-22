@@ -12,7 +12,7 @@ import tempfile
 import pytest
 from qtpy import QtCore
 
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.utils import InvalidParamError
 
 
@@ -427,7 +427,7 @@ def test_graphicsgridlayout():
 
 def test_graphicsscene(qtbot):
     scene = widgets.GraphicsScene()
-    icon = gui.icon.get_icon("mdi.help-circle-outline")
+    icon = iconprovider.get_icon("mdi.help-circle-outline")
     pixmap = icon.pixmap(200, 200)
     pixmap2 = icon.pixmap(20, 20)
     # item = widgets.GraphicsItem()

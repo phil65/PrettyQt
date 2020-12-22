@@ -2,7 +2,7 @@ import functools
 import pathlib
 from typing import Any, Callable, Dict, Iterable, Mapping, Optional, Union
 
-from prettyqt import custom_validators, custom_widgets, gui, widgets
+from prettyqt import custom_validators, custom_widgets, gui, iconprovider, widgets
 
 
 class DataItem:
@@ -411,7 +411,9 @@ class StringOrNumber(DataItem):
 
 
 class Button(DataItem):
-    def __init__(self, label: str, callback: Callable, icon: gui.icon.IconType = None):
+    def __init__(
+        self, label: str, callback: Callable, icon: iconprovider.IconType = None
+    ):
         super().__init__("", value=None, include=False)
         self.button_label = label
         self.icon = icon

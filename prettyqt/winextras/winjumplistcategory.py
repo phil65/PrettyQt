@@ -9,7 +9,7 @@ if PYQT5:
 elif PYSIDE2:
     from PySide2 import QtWinExtras
 
-from prettyqt import gui
+from prettyqt import iconprovider
 from prettyqt.utils import bidict
 
 
@@ -45,9 +45,9 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
         title: str,
         exe_path: Union[str, pathlib.Path],
         arguments: Optional[list] = None,
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
     ) -> None:
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         if arguments is None:
             arguments = []
         self.addLink(icon, title, str(exe_path), arguments)

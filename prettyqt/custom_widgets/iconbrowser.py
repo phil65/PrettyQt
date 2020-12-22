@@ -19,6 +19,7 @@ class IconBrowser(widgets.MainWindow):
         super().__init__()
         self.setMinimumSize(400, 300)
         self.set_title("Icon Browser")
+        from prettyqt import iconprovider
 
         iconprovider._instance()
         font_maps = iconprovider._instance().charmap
@@ -132,7 +133,7 @@ class IconModel(core.StringListModel):
     def data(self, index, role):
         if role == constants.DECORATION_ROLE:
             icon_string = self.data(index, role=constants.DISPLAY_ROLE)
-            return iconprovider.icon(icon_string, color=self._icon_color)
+            return iconprovider._icon(icon_string, color=self._icon_color)
         return super().data(index, role)
 
 

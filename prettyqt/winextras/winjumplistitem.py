@@ -9,7 +9,7 @@ if PYQT5:
 elif PYSIDE2:
     from PySide2 import QtWinExtras
 
-from prettyqt import gui
+from prettyqt import iconprovider
 from prettyqt.utils import bidict
 
 
@@ -31,8 +31,8 @@ class WinJumpListItem(QtWinExtras.QWinJumpListItem):
     def set_title(self, title: str) -> None:
         self.setTitle(title)
 
-    def set_icon(self, icon: gui.icon.IconType) -> None:
-        icon = gui.icon.get_icon(icon)
+    def set_icon(self, icon: iconprovider.IconType) -> None:
+        icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
     def set_file_path(self, path: Union[str, pathlib.Path]) -> None:

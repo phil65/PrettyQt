@@ -2,7 +2,7 @@ from typing import Tuple, Union
 
 from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.utils import InvalidParamError
 
 
@@ -31,13 +31,13 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def set_icon(self, icon: gui.icon.IconType):
+    def set_icon(self, icon: iconprovider.IconType):
         """Set the icon for the button.
 
         Args:
             icon: icon to use
         """
-        icon = gui.icon.get_icon(icon)
+        icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
     def get_icon(self) -> gui.Icon:

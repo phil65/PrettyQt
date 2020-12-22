@@ -6,7 +6,7 @@ from setuptools import find_packages, setup
 README = pathlib.Path("docs/index.md").read_text()
 HISTORY = pathlib.Path("CHANGELOG.md").read_text()
 
-REQUIREMENTS = ["qtpy", "docutils", "qtawesome", "bidict", "orjson", "regex", "pygments"]
+REQUIREMENTS = ["qtpy", "docutils", "bidict", "orjson", "regex", "pygments"]
 version = ".".join(map(str, sys.version_info))
 if sys.platform == "darwin":
     REQUIREMENTS.append("darkdetect")

@@ -2,7 +2,7 @@ from typing import Any, Iterable, Iterator, List, Mapping, Optional, Union
 
 from qtpy import QtCore, QtGui, QtWidgets
 
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.utils import InvalidParamError
 
 
@@ -86,7 +86,7 @@ class ListWidget(QtWidgets.QListWidget):
     def add_item(
         self,
         name: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         data: Optional[dict] = None,
         foreground: Optional[QtGui.QBrush] = None,
         background: Optional[QtGui.QBrush] = None,
@@ -104,7 +104,7 @@ class ListWidget(QtWidgets.QListWidget):
         typ = 1 if is_user_type else 0
         item = widgets.ListWidgetItem(name, self, typ)
         if icon is not None:
-            icon = gui.icon.get_icon(icon)
+            icon = iconprovider.get_icon(icon)
             item.setIcon(icon)
         if data is not None:
             for k, v in data.items():
@@ -132,7 +132,7 @@ class ListWidget(QtWidgets.QListWidget):
         self.addItem(item)
         return item
 
-    def add(self, label: str, data=NoData, icon: gui.icon.IconType = None):
+    def add(self, label: str, data=NoData, icon: iconprovider.IconType = None):
         if data is NoData:
             data = label
         item = widgets.ListWidgetItem(label)

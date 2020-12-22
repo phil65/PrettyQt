@@ -2,7 +2,7 @@ from typing import List, Literal, Optional
 
 from qtpy import QtWidgets
 
-from prettyqt import gui, widgets
+from prettyqt import iconprovider, widgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -33,7 +33,7 @@ class InputDialog(QtWidgets.QInputDialog):
         cls,
         title: str = "",
         label: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
     ) -> Optional[int]:
         par = widgets.Dialog()
         par.set_icon(icon)
@@ -45,7 +45,7 @@ class InputDialog(QtWidgets.QInputDialog):
         cls,
         title: str = "",
         label: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
     ) -> Optional[float]:
         par = widgets.Dialog()
         par.set_icon(icon)
@@ -57,7 +57,7 @@ class InputDialog(QtWidgets.QInputDialog):
         cls,
         title: str = "",
         label: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         default_value: str = "",
         echo_mode: widgets.lineedit.EchoModeStr = "normal",
     ) -> Optional[str]:
@@ -76,7 +76,7 @@ class InputDialog(QtWidgets.QInputDialog):
         items: List[str],
         title: str = "",
         label: str = "",
-        icon: gui.icon.IconType = None,
+        icon: iconprovider.IconType = None,
         editable: bool = False,
     ) -> Optional[str]:
         par = widgets.Dialog()

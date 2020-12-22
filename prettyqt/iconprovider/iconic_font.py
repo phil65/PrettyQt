@@ -15,10 +15,12 @@ import pathlib
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 import warnings
 
-from prettyqt import constants, core, gui, widgets
+from qtpy import QtCore, QtGui
+
+from prettyqt import constants, core, gui
+
 
 # Third party imports
-from prettyqt.qt import QtCore, QtGui
 
 
 # Linux packagers, please set this to True if you want to make qtawesome
@@ -254,7 +256,7 @@ class IconicFont(core.Object):
             directory = pathlib.Path(__file__).parent / "fonts"
 
         # Load font
-        if widgets.app() is None:
+        if gui.app() is None:
             return
         id_ = gui.FontDatabase.add_font(directory / ttf_filename)
         loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)
@@ -309,7 +311,7 @@ class IconicFont(core.Object):
         options_list = kwargs.pop("options", [{}] * len(names))
         if len(options_list) != len(names):
             raise Exception(f'"options" must be a list of size {len(names)}')
-        if widgets.app() is None:
+        if gui.app() is None:
             warnings.warn("You need to have a running QGuiApplication.")
             return QtGui.QIcon()
         parsed_options = [
