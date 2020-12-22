@@ -37,6 +37,12 @@ MOVEMENT_MODE = ["no_crossing", "no_overlap", "free"]
 
 MovementModeStr = Literal["no_crossing", "no_overlap", "free"]
 
+HandleStr = Literal["upper", "lower"]
+
+ActionStr = Literal[
+    "single_step_add", "single_step_sub", "to_minimum", "to_maximum", "move", "none"
+]
+
 
 def clamp(v: float, lower: float, upper: float) -> float:
     return min(upper, max(lower, v))
@@ -58,7 +64,7 @@ class SpanSlider(widgets.Slider):
         self.lower_pos = 0.0
         self.upper_pos = 0.0
         self.offset = 0
-        self.position = 0
+        self.position = 0.0
         self.last_pressed: Optional[str] = None
         self.upper_pressed = widgets.Style.SC_None
         self.lower_pressed = widgets.Style.SC_None
@@ -94,7 +100,8 @@ class SpanSlider(widgets.Slider):
         opt = widgets.StyleOptionSlider()
         self.initStyleOption(opt)
         m = self.style().pixelMetric(widgets.Style.PM_MaximumDragDistance, opt, self)
-        new_pos = self._pixel_pos_to_value(self.pick(event.pos()) - self.offset)
+        pixel_pos = self.pick(event.pos()) - self.offset
+        new_pos = float(self._pixel_pos_to_value(pixel_pos))
         if m >= 0:
             r = self.rect().adjusted(-m, -m, m, m)
             if not r.contains(event.pos()):
@@ -188,7 +195,7 @@ class SpanSlider(widgets.Slider):
         self.set_span(lower, self.upper_val)
 
     @core.Property(float)
-    def upper_value(self):
+    def upper_value(self) -> float:
         return max(self.lower_val, self.upper_val)
 
     def set_upper_value(self, upper: float):
@@ -281,7 +288,7 @@ class SpanSlider(widgets.Slider):
     def pick(self, p: QtCore.QPoint) -> int:
         return p.x() if self.is_horizontal() else p.y()
 
-    def trigger_action(self, action: str, main: bool):
+    def trigger_action(self, action: ActionStr, main: bool):
         value = 0.0
         no = False
         up = False
@@ -368,17 +375,10 @@ class SpanSlider(widgets.Slider):
     def _draw_span(self, painter: widgets.StylePainter, rect: core.Rect):
         opt = widgets.StyleOptionSlider()
         self.initStyleOption(opt)
-
-        # area
+        painter.set_pen(color=self.gradient_left, width=0)
         groove = self.style().subControlRect(SLIDER_STYLE, opt, GROOVE_STYLE, self)
         if opt.is_horizontal():
             groove.adjust(0, 0, -1, 0)
-        else:
-            groove.adjust(0, 0, 0, -1)
-
-        # pen & brush
-        painter.set_pen(color=self.gradient_left, width=0)
-        if opt.is_horizontal():
             self._setup_painter(
                 painter,
                 opt.get_orientation(),
@@ -388,6 +388,7 @@ class SpanSlider(widgets.Slider):
                 groove.bottom(),
             )
         else:
+            groove.adjust(0, 0, 0, -1)
             self._setup_painter(
                 painter,
                 opt.get_orientation(),
@@ -404,7 +405,7 @@ class SpanSlider(widgets.Slider):
         gradient[1] = self.gradient_right
         painter.fillRect(intersected, gradient)
 
-    def draw_handle(self, painter: widgets.StylePainter, handle: str):
+    def draw_handle(self, painter: widgets.StylePainter, handle: HandleStr):
         opt = self.get_style_option(handle)
         opt.subControls = HANDLE_STYLE
         pressed = self.upper_pressed
@@ -416,7 +417,7 @@ class SpanSlider(widgets.Slider):
             opt.state |= widgets.Style.State_Sunken
         painter.draw_complex_control("slider", opt)
 
-    def get_style_option(self, handle: str) -> widgets.StyleOptionSlider:
+    def get_style_option(self, handle: HandleStr) -> widgets.StyleOptionSlider:
         option = widgets.StyleOptionSlider()
         self.initStyleOption(option)
         if handle == "lower":
@@ -427,7 +428,9 @@ class SpanSlider(widgets.Slider):
             option.sliderValue = self.upper_val
         return option
 
-    def _handle_mouse_press(self, pos: QtCore.QPoint, control, value, handle: str):
+    def _handle_mouse_press(
+        self, pos: QtCore.QPoint, control, value: float, handle: HandleStr
+    ):
         opt = self.get_style_option(handle)
         old_control = control
         control = self.style().hitTestComplexControl(SLIDER_STYLE, opt, pos, self)
@@ -442,7 +445,7 @@ class SpanSlider(widgets.Slider):
             self.update(sr)
         return control
 
-    def _pixel_pos_to_value(self, pos: int):
+    def _pixel_pos_to_value(self, pos: int) -> int:
         opt = widgets.StyleOptionSlider()
         self.initStyleOption(opt)
         gr = self.style().subControlRect(SLIDER_STYLE, opt, GROOVE_STYLE, self)
@@ -450,17 +453,17 @@ class SpanSlider(widgets.Slider):
         if self.is_horizontal():
             len_slider = sr.width()
             slider_min = gr.x()
-            slider_max = gr.right() - len_slider + 1
+            slider_end = gr.right()
         else:
             len_slider = sr.height()
             slider_min = gr.y()
-            slider_max = gr.bottom() - len_slider + 1
+            slider_end = gr.bottom()
 
         return widgets.Style.sliderValueFromPosition(
             self.minimum(),
             self.maximum(),
             pos - slider_min,
-            slider_max - slider_min,
+            slider_end - len_slider + 1 - slider_min,
             opt.upsideDown,
         )
 
