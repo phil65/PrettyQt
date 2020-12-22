@@ -1,4 +1,4 @@
-from typing import Literal, Union
+from typing import Literal, Tuple, Union
 
 from qtpy import QtCore, QtWidgets
 
@@ -60,13 +60,15 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
         return constants.FOCUS_POLICY.inverse[self.focusPolicy()]
 
     def window_frame_section_at(
-        self, point: QtCore.QPoint
+        self, point: Union[QtCore.QPoint, Tuple[int, int]]
     ) -> constants.WindowFrameSectionStr:
         """Return the window frame section at given position.
 
         Returns:
             str: Window frame section
         """
+        if isinstance(point, tuple):
+            point = QtCore.QPoint(*point)
         return constants.WINDOW_FRAME_SECTION.inverse[self.windowFrameSectionAt(point)]
 
 
