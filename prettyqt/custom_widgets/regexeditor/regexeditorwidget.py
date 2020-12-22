@@ -127,13 +127,6 @@ class RegexEditorWidget(widgets.Widget):
             self.textedit_sub.set_text("")
 
 
-def run():
-    app = widgets.app()
-    widget = RegexEditorWidget()
-    widget.show()
-    app.main_loop()
-
-
 if __name__ == "__main__":
     app = widgets.app()
     app.setApplicationName("Test")

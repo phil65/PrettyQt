@@ -33,7 +33,6 @@ from .roundprogressbar import RoundProgressBar
 # from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
 from .player import Player
-from .regexeditor.editor import RegexEditorWidget
 
 # Deprecated: should be imported from custom_delegates instead
 from prettyqt.custom_delegates.buttondelegate import ButtonDelegate

@@ -11,7 +11,7 @@ packages = [
 ]
 
 [tool.poetry.scripts]
-regexeditor = "prettyqt.custom_widgets.regexeditor.editor:run"
+regexeditor = "prettyqt.custom_widgets.regexeditor.__main__:run"
 iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
 
 [tool.poetry.plugins."pyinstaller40"]

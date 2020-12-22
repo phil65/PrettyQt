@@ -51,7 +51,7 @@ def test_colorchooserbutton(qtbot):
 
 
 def test_regexeditor(qtbot):
-    widget = custom_widgets.RegexEditorWidget()
+    widget = custom_widgets.regexeditor.RegexEditorWidget()
     widget.regex = "[0-9]"
     assert widget.regex == "[0-9]"
     widget.string = "test123"
