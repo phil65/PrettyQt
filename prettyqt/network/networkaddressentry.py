@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Literal, Union
 
 from qtpy import QtNetwork
 
@@ -12,9 +12,11 @@ DNS_ELIGIBILITY_STATUS = bidict(
     ineligible=QtNetwork.QNetworkAddressEntry.DnsIneligible,
 )
 
+DnsEligibilityStatusStr = Literal["unknown", "eligible", "ineligible"]
+
 
 class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
-    def get_dns_eligibility(self) -> str:
+    def get_dns_eligibility(self) -> DnsEligibilityStatusStr:
         """Return whether this address is eligible for publication in the DNS.
 
         Possible values: "unknown", "eligible", "ineligible"
@@ -24,7 +26,7 @@ class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
         """
         return DNS_ELIGIBILITY_STATUS.inverse[self.dnsEligibility()]
 
-    def set_dns_eligibility(self, status: str):
+    def set_dns_eligibility(self, status: DnsEligibilityStatusStr):
         """Set the DNS eligibility flag for this address to status.
 
         Valid values: "unknown", "eligible", "ineligible"

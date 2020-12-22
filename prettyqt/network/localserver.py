@@ -1,3 +1,5 @@
+from typing import List, Literal
+
 from qtpy import QtNetwork
 
 from prettyqt import core, network
@@ -12,21 +14,23 @@ SOCKET_OPTION = bidict(
     world=QtNetwork.QLocalServer.WorldAccessOption,
 )
 
+SocketOptionStr = Literal["none", "user", "group", "other", "world"]
+
 QtNetwork.QLocalServer.__bases__ = (core.Object,)
 
 
 class LocalServer(QtNetwork.QLocalServer):
-    def get_server_error(self) -> str:
+    def get_server_error(self) -> network.abstractsocket.SocketErrorStr:
         return network.abstractsocket.SOCKET_ERROR.inverse[self.serverError()]
 
-    def set_socket_options(self, *name: str):
+    def set_socket_options(self, *name: SocketOptionStr):
         for item in name:
             if item not in SOCKET_OPTION:
                 raise InvalidParamError(item, SOCKET_OPTION)
         flags = helpers.merge_flags(name, SOCKET_OPTION)
         self.setSocketOptions(flags)
 
-    def get_socket_options(self):
+    def get_socket_options(self) -> List[SocketOptionStr]:
         return [k for k, v in SOCKET_OPTION.items() if v & self.socketOptions()]
 
 

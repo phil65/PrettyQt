@@ -22,5 +22,5 @@ class TcpServer(QtNetwork.QTcpServer):
     def get_proxy(self) -> network.NetworkProxy:
         return network.NetworkProxy(self.proxy())
 
-    def get_server_error(self) -> str:
+    def get_server_error(self) -> network.abstractsocket.SocketErrorStr:
         return network.abstractsocket.SOCKET_ERROR.inverse[self.serverError()]

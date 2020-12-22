@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Literal, Union
 
 from qtpy import QtNetwork
 
@@ -25,6 +25,10 @@ SPECIAL_ADDRESS = bidict(
     any=int(QtNetwork.QHostAddress.Any),
 )
 
+SpecialAddressStr = Literal[
+    "null", "localhost", "localhost_ipv6", "broadcast", "any_ipv4", "any_ipv6", "any"
+]
+
 
 class HostAddress(QtNetwork.QHostAddress):
     def __repr__(self):
@@ -36,7 +40,7 @@ class HostAddress(QtNetwork.QHostAddress):
     def __bool__(self):
         return not self.isNull()
 
-    def get_protocol(self) -> str:
+    def get_protocol(self) -> network.abstractsocket.NetworkLayerProtocolStr:
         return network.abstractsocket.NETWORK_LAYER_PROTOCOL.inverse[self.protocol()]
 
     def set_address(self, address: Union[int, str]):
