@@ -15,7 +15,7 @@ counter_dict: DefaultDict = defaultdict(itertools.count)
 
 class Object(QtCore.QObject):
     def __repr__(self):
-        return f"{self.__class__.__name__}()"
+        return f"{type(self).__name__}()"
 
     def __setstate__(self, state):
         self.set_id(state["object_name"])

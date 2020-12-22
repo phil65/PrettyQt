@@ -24,7 +24,7 @@ StateStr = Literal["off", "on"]
 
 class Icon(QtGui.QIcon):
     def __repr__(self):
-        return f"{self.__class__.__name__}()"
+        return f"{type(self).__name__}()"
 
     def __bool__(self):
         return not self.isNull()

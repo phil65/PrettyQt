@@ -153,7 +153,7 @@ UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]
 
 class PageSize(QtGui.QPageSize):
     def __repr__(self):
-        return f"{self.__class__.__name__}({self.get_id()!r})"
+        return f"{type(self).__name__}({self.get_id()!r})"
 
     def __reduce__(self):
         return self.__class__, (self.id(),)

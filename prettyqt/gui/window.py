@@ -30,7 +30,7 @@ QtGui.QWindow.__bases__ = (core.Object, gui.Surface)
 
 class Window(QtGui.QWindow):
     def __repr__(self):
-        return f"{self.__class__.__name__}()"
+        return f"{type(self).__name__}()"
 
     # def serialize_fields(self):
     #     return dict(

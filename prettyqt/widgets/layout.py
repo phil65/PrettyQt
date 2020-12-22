@@ -44,7 +44,7 @@ class Layout(QtWidgets.QLayout):
         return self.count()
 
     def __repr__(self):
-        return f"{self.__class__.__name__}()"
+        return f"{type(self).__name__}()"
 
     def __iter__(self):
         return iter(self[i] for i in range(self.count()))

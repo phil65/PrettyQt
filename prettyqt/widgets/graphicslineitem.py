@@ -8,7 +8,7 @@ QtWidgets.QGraphicsLineItem.__bases__ = (widgets.GraphicsItem,)
 
 class GraphicsLineItem(QtWidgets.QGraphicsLineItem):
     def __repr__(self):
-        return f"{self.__class__.__name__}({repr(self.get_line())})"
+        return f"{type(self).__name__}({repr(self.get_line())})"
 
     def get_line(self):
         return core.LineF(self.line())

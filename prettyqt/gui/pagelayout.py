@@ -32,7 +32,7 @@ UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]
 
 class PageLayout(QtGui.QPageLayout):
     def __repr__(self):
-        return f"{self.__class__.__name__}()"
+        return f"{type(self).__name__}()"
 
     def serialize_fields(self):
         return dict(

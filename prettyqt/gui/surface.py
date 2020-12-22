@@ -23,7 +23,7 @@ SurfaceTypeStr = Literal["raster", "open_gl", "raster_gl", "open_vg", "vulkan", 
 
 class Surface(QtGui.QSurface):
     def __repr__(self):
-        return f"{self.__class__.__name__}()"
+        return f"{type(self).__name__}()"
 
     def get_surface_class(self) -> SurfaceClassStr:
         """Get the current surface class.

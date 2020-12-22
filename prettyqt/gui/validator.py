@@ -10,7 +10,7 @@ QtGui.QValidator.__bases__ = (core.Object,)
 
 class Validator(QtGui.QValidator):
     def __repr__(self):
-        return f"{self.__class__.__name__}()"
+        return f"{type(self).__name__}()"
 
     def __add__(self, other: Validator):
         from prettyqt import custom_validators

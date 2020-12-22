@@ -64,7 +64,7 @@ ControlTypeStr = Literal[
 
 class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
     def __repr__(self) -> str:
-        cls_name = self.__class__.__name__
+        cls_name = type(self).__name__
         params = helpers.format_kwargs(self.__getstate__())
         return f"{cls_name}({params})"
 

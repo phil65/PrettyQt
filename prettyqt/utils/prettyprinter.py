@@ -11,7 +11,7 @@ class PrettyPrinter:
 
         Used by devtools (https://python-devtools.helpmanual.io/).
         """
-        yield self.__class__.__name__ + "("
+        yield type(self).__name__ + "("
         yield 1
         for k, v in self.serialize().items():
             yield f"{k}="

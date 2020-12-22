@@ -12,4 +12,4 @@ class TextBlockUserData(QtGui.QTextBlockUserData):
     def __repr__(self):
         attrs = [i for i in dir(self) if not i.startswith("__")]
         kwds = ", ".join(f"{attr}={getattr(self, attr)!r}" for attr in attrs)
-        return f"{self.__class__.__name__}({kwds})"
+        return f"{type(self).__name__}({kwds})"

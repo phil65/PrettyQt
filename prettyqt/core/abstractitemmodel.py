@@ -26,7 +26,7 @@ QtCore.QAbstractItemModel.__bases__ = (core.Object,)
 
 class AbstractItemModel(QtCore.QAbstractItemModel):
     def __repr__(self):
-        return f"{self.__class__.__name__}: {self.rowCount()} rows"
+        return f"{type(self).__name__}: {self.rowCount()} rows"
 
     def __len__(self) -> int:
         """Return amount of rows."""

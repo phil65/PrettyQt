@@ -64,7 +64,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
             self.triggered.connect(callback)
 
     def __repr__(self) -> str:
-        cls_name = self.__class__.__name__
+        cls_name = type(self).__name__
         return f"{cls_name}({helpers.format_kwargs(self.serialize_fields())})"
 
     def serialize_fields(self):
