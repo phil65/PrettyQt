@@ -24,7 +24,7 @@ class Resource(QtCore.QResource):
         )
 
     def __reduce__(self):
-        return self.__class__, (self.absoluteFilePath(), self.get_locale())
+        return type(self), (self.absoluteFilePath(), self.get_locale())
 
     def __bytes__(self):
         return bytes(self.uncompressedData())

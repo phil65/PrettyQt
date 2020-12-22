@@ -19,7 +19,7 @@ class IntValidator(QtGui.QIntValidator):
         return type(self), (self.bottom(), self.top()), None
 
     def __eq__(self, other: object):
-        if not isinstance(other, self.__class__):
+        if not isinstance(other, type(self)):
             return False
         return self.bottom() == other.bottom() and self.top() == other.top()
 

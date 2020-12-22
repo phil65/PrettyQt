@@ -9,4 +9,4 @@ class Point(QtCore.QPoint):
         return (self.x(), self.y())[index]
 
     def __reduce__(self):
-        return self.__class__, (self.x(), self.y())
+        return type(self), (self.x(), self.y())

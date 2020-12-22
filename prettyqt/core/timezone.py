@@ -38,7 +38,7 @@ class TimeZone(QtCore.QTimeZone):
         return self.get_id()
 
     def __reduce__(self):
-        return self.__class__, (self.get_id(),)
+        return type(self), (self.get_id(),)
 
     def get_id(self) -> str:
         return bytes(self.id()).decode()

@@ -13,7 +13,7 @@ class Line(QtCore.QLine):
         return f"{type(self).__name__}({repr(self.get_p1())}, {repr(self.get_p2())})"
 
     def __reduce__(self):
-        return self.__class__, (self.get_p1(), self.get_p1())
+        return type(self), (self.get_p1(), self.get_p1())
 
     def __abs__(self) -> float:
         p = self.get_p2() - self.get_p1()

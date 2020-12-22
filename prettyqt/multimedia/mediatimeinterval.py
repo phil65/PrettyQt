@@ -9,7 +9,7 @@ class MediaTimeInterval(QtMultimedia.QMediaTimeInterval):
         return self.contains(val)
 
     def __reduce__(self):
-        return self.__class__, (self.start(), self.end())
+        return type(self), (self.start(), self.end())
 
 
 if __name__ == "__main__":

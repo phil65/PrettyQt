@@ -72,7 +72,7 @@ class StandardItem(QtGui.QStandardItem):
             self.appendRow([i])
 
     def clone(self):
-        item = self.__class__()
+        item = type(self)()
         core.DataStream.copy_data(self, item)
         assert type(item) == StandardItem
         return item

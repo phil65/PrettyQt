@@ -56,7 +56,7 @@ class Dir(QtCore.QDir):
         return self.absolutePath()
 
     def __reduce__(self):
-        return self.__class__, (self.absolutePath(),)
+        return type(self), (self.absolutePath(),)
 
     def __truediv__(self, other: str) -> pathlib.Path:
         return self.to_path() / other

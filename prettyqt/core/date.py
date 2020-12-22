@@ -10,7 +10,7 @@ class Date(QtCore.QDate):
         return self.toString("yyyy-MM-dd")
 
     def __reduce__(self):
-        return self.__class__, (self.year(), self.month(), self.day())
+        return type(self), (self.year(), self.month(), self.day())
 
 
 if __name__ == "__main__":

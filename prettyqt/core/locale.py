@@ -607,7 +607,7 @@ class Locale(QtCore.QLocale):
         return f"{type(self).__name__}({self.bcp47Name()!r})"
 
     def __reduce__(self):
-        return self.__class__, (self.bcp47Name(),)
+        return type(self), (self.bcp47Name(),)
 
 
 if __name__ == "__main__":

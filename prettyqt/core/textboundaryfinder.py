@@ -59,7 +59,7 @@ class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
         return f"{type(self).__name__}({self.string()!r})"
 
     def __reduce__(self):
-        return self.__class__, (self.string(), self.type())
+        return type(self), (self.string(), self.type())
 
     def __iter__(self):
         pos = self.position()

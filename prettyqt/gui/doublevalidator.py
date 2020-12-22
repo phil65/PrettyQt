@@ -14,7 +14,7 @@ class DoubleValidator(QtGui.QDoubleValidator):
         return type(self), (self.bottom(), self.top(), self.decimals()), None
 
     def __eq__(self, other: object):
-        if not isinstance(other, self.__class__):
+        if not isinstance(other, type(self)):
             return False
         return (
             self.bottom() == other.bottom()

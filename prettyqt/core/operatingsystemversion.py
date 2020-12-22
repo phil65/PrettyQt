@@ -45,7 +45,7 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
 
     def __reduce__(self):
         return (
-            self.__class__,
+            type(self),
             (
                 self.get_type(),
                 self.majorVersion(),

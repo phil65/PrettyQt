@@ -13,7 +13,7 @@ class Size(QtCore.QSize):
         return (self.width(), self.height())[index]
 
     def __reduce__(self):
-        return self.__class__, (self.width(), self.height())
+        return type(self), (self.width(), self.height())
 
     def expanded_to(self, size: Union[QtCore.QSize, Tuple[int, int]]) -> Size:
         if isinstance(size, tuple):
