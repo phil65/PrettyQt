@@ -99,7 +99,7 @@ class TabWidget(QtWidgets.QTabWidget):
     def set_document_mode(self, state: bool = True) -> None:
         self.setDocumentMode(state)
 
-    def set_tab_shape(self, shape: TabShapeStr) -> None:
+    def set_tab_shape(self, shape: TabShapeStr):
         """Set tab shape for the tabwidget.
 
         Args:
@@ -120,7 +120,7 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         return TAB_SHAPES.inverse[self.tabShape()]
 
-    def set_tab_position(self, position: TabPositionStr) -> None:
+    def set_tab_position(self, position: TabPositionStr):
         """Set tab position for the tabwidget.
 
         Args:
@@ -156,16 +156,16 @@ class TabWidget(QtWidgets.QTabWidget):
     def tab_icon(self, i: int) -> gui.Icon:
         return gui.Icon(self.tabIcon(i))
 
-    def set_detachable(self) -> None:
+    def set_detachable(self):
         self.tab_bar.on_detach.connect(self.detach_tab)
         widgets.Application.call_on_exit(self.close_detached_tabs)
         self.setMovable(True)
 
-    def set_closable(self, closable: bool = True) -> None:
+    def set_closable(self, closable: bool = True):
         self.setTabsClosable(closable)
 
     @autoslot.AutoSlot
-    def detach_tab(self, index: int, point: QtCore.QPoint) -> None:
+    def detach_tab(self, index: int, point: Union[QtCore.QPoint, Tuple[int, int]]):
         """Detach tab by removing its contents and placing them in a DetachedTab window.
 
         Args:
@@ -176,6 +176,8 @@ class TabWidget(QtWidgets.QTabWidget):
             None: Description
         """
         # Get the tab content
+        if isinstance(point, tuple):
+            point = QtCore.QPoint(*point)
         name = self.tabText(index)
         icon = self.tabIcon(index)
         if icon.isNull():
@@ -252,14 +254,14 @@ class TabWidget(QtWidgets.QTabWidget):
         # If they are, then do not add the icon to the tab
         self.add_tab(widget, name, icon=icon, position=insert_at, show=True)
 
-    def close_detached_tabs(self) -> None:
+    def close_detached_tabs(self):
         """Close all tabs that are currently detached."""
         tabs = list(self.detached_tabs.values())
         for tab in tabs:
             tab.close()
 
     @autoslot.AutoSlot
-    def remove_tab(self, index: int) -> None:
+    def remove_tab(self, index: int):
         widget = self.widget(index)
         self.removeTab(index)
         if widget is not None:
@@ -272,7 +274,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def set_tab(
         self, index: int, position: str, widget: Optional[QtWidgets.QWidget] = None
-    ) -> None:
+    ):
         self.tabBar().set_tab(index, position, widget)
 
 
@@ -288,7 +290,7 @@ class DetachedTab(widgets.MainWindow):
 
     on_close = core.Signal(QtWidgets.QWidget, str, QtGui.QIcon)
 
-    def __init__(self, name, widget):
+    def __init__(self, name: str, widget: QtWidgets.QWidget):
         super().__init__(None)
 
         self.set_id(name)

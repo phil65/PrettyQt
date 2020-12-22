@@ -1,5 +1,5 @@
 import contextlib
-from typing import List
+from typing import List, Tuple, Union
 
 from qtpy import QtCore, QtGui
 
@@ -101,7 +101,9 @@ class GuiApplication(QtGui.QGuiApplication):
     def get_primary_screen(self) -> gui.Screen:
         return gui.Screen(self.primaryScreen())
 
-    def get_screen_at(self, point: QtCore.QPoint) -> gui.Screen:
+    def get_screen_at(self, point: Union[Tuple[int, int], QtCore.QPoint]) -> gui.Screen:
+        if isinstance(point, tuple):
+            point = QtCore.QPoint(*point)
         return gui.Screen(self.screenAt(point))
 
     def get_screens(self) -> List[gui.Screen]:

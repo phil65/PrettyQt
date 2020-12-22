@@ -49,20 +49,16 @@ class Line(QtCore.QLine):
 
     def set_p1(self, point: Union[QtCore.QPoint, Tuple[int, int]]):
         if isinstance(point, tuple):
-            p = core.PointF(*point)
-        else:
-            p = point
-        self.setP1(p)
+            point = core.Point(*point)
+        self.setP1(point)
 
     def get_p2(self) -> core.Point:
         return core.Point(self.p2())
 
     def set_p2(self, point: Union[QtCore.QPoint, Tuple[int, int]]):
         if isinstance(point, tuple):
-            p = core.PointF(*point)
-        else:
-            p = point
-        self.setP2(p)
+            point = core.Point(*point)
+        self.setP2(point)
 
     def get_center(self) -> core.Point:
         return core.Point(self.center())
