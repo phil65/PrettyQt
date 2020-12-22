@@ -1,3 +1,13 @@
+## v0.157.0 (2020-12-22)
+
+### Feat
+
+- **Painter**: add native_mode context manager
+- **FontDatabase**: add add_font method
+- **gui**: add IconEngine class
+- **TabWidget**: add set_icon_size method
+- **Icon**: allow more types for size param
+
 ## v0.156.0 (2020-12-21)
 
 ### Feat
