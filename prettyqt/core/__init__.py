@@ -7,17 +7,21 @@ Contains QtCore-based classes
 
 import qtpy
 
-from qtpy.QtCore import Slot, Signal, Property
-from qtpy.QtCore import QModelIndex as ModelIndex
-from qtpy.QtCore import QPoint as Point
-from qtpy.QtCore import QPointF as PointF
-from qtpy.QtCore import QRect as Rect
-from qtpy.QtCore import QRectF as RectF
-from qtpy.QtCore import qInstallMessageHandler as install_message_handler
-from qtpy.QtCore import QEvent as Event
-from qtpy.QtCore import QChildEvent as ChildEvent
-from qtpy.QtCore import QTimerEvent as TimerEvent
-from qtpy.QtCore import QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent
+from qtpy.QtCore import (
+    Slot,
+    Signal,
+    Property,
+    QModelIndex as ModelIndex,
+    QPoint as Point,
+    QPointF as PointF,
+    QRect as Rect,
+    QRectF as RectF,
+    qInstallMessageHandler as install_message_handler,
+    QEvent as Event,
+    QChildEvent as ChildEvent,
+    QTimerEvent as TimerEvent,
+    QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent,
+)
 from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
 from .uuid import Uuid

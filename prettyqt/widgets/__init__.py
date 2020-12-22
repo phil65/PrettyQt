@@ -3,16 +3,18 @@
 contains QtWidgets-based classes
 """
 
-from qtpy.QtWidgets import QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent
-from qtpy.QtWidgets import QGraphicsSceneMouseEvent as GraphicsSceneMouseEvent
-from qtpy.QtWidgets import QGraphicsSceneWheelEvent as GraphicsSceneWheelEvent
-from qtpy.QtWidgets import QGraphicsSceneContextMenuEvent as GraphicsSceneContextMenuEvent
-from qtpy.QtWidgets import QGraphicsSceneDragDropEvent as GraphicsSceneDragDropEvent
-from qtpy.QtWidgets import QGraphicsSceneHelpEvent as GraphicsSceneHelpEvent
-from qtpy.QtWidgets import QGraphicsSceneMoveEvent as GraphicsSceneMoveEvent
-from qtpy.QtWidgets import QGraphicsSceneResizeEvent as GraphicsSceneResizeEvent
-from qtpy.QtWidgets import QGraphicsSceneEvent as GraphicsSceneEvent
-from qtpy.QtWidgets import QGestureEvent as GestureEvent
+from qtpy.QtWidgets import (
+    QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent,
+    QGraphicsSceneMouseEvent as GraphicsSceneMouseEvent,
+    QGraphicsSceneWheelEvent as GraphicsSceneWheelEvent,
+    QGraphicsSceneContextMenuEvent as GraphicsSceneContextMenuEvent,
+    QGraphicsSceneDragDropEvent as GraphicsSceneDragDropEvent,
+    QGraphicsSceneHelpEvent as GraphicsSceneHelpEvent,
+    QGraphicsSceneMoveEvent as GraphicsSceneMoveEvent,
+    QGraphicsSceneResizeEvent as GraphicsSceneResizeEvent,
+    QGraphicsSceneEvent as GraphicsSceneEvent,
+    QGestureEvent as GestureEvent,
+)
 
 from .style import Style
 from .commonstyle import CommonStyle

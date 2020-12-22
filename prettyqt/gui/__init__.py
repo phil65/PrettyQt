@@ -3,40 +3,42 @@
 Contains QtGui-based classes
 """
 
-from qtpy.QtGui import QKeyEvent as KeyEvent
-from qtpy.QtGui import QMouseEvent as MouseEvent
-from qtpy.QtGui import QWheelEvent as WheelEvent
-from qtpy.QtGui import QActionEvent as ActionEvent
-from qtpy.QtGui import QShowEvent as ShowEvent
-from qtpy.QtGui import QDropEvent as DropEvent
-from qtpy.QtGui import QFocusEvent as FocusEvent
-from qtpy.QtGui import QDragEnterEvent as DragEnterEvent
-from qtpy.QtGui import QContextMenuEvent as ContextMenuEvent
-from qtpy.QtGui import QResizeEvent as ResizeEvent
-from qtpy.QtGui import QNativeGestureEvent as NativeGestureEvent
-from qtpy.QtGui import QMoveEvent as MoveEvent
-from qtpy.QtGui import QInputMethodEvent as InputMethodEvent
-from qtpy.QtGui import QInputMethodQueryEvent as InputMethodQueryEvent
-from qtpy.QtGui import QCloseEvent as CloseEvent
-from qtpy.QtGui import QDragLeaveEvent as DragLeaveEvent
-from qtpy.QtGui import QHelpEvent as HelpEvent
-from qtpy.QtGui import QHideEvent as HideEvent
-from qtpy.QtGui import QHoverEvent as HoverEvent
-from qtpy.QtGui import QDragMoveEvent as DragMoveEvent
-from qtpy.QtGui import QEnterEvent as EnterEvent
-from qtpy.QtGui import QExposeEvent as ExposeEvent
-from qtpy.QtGui import QFileOpenEvent as FileOpenEvent
-from qtpy.QtGui import QIconDragEvent as IconDragEvent
-from qtpy.QtGui import QInputEvent as InputEvent
-from qtpy.QtGui import QPaintEvent as PaintEvent
-from qtpy.QtGui import QShortcutEvent as ShortcutEvent
-from qtpy.QtGui import QStatusTipEvent as StatusTipEvent
-from qtpy.QtGui import QTouchEvent as TouchEvent
-from qtpy.QtGui import QTabletEvent as TabletEvent
-from qtpy.QtGui import QWindowStateChangeEvent as WindowStateChangeEvent
-from qtpy.QtGui import QWhatsThisClickedEvent as WhatsThisClickedEvent
-from qtpy.QtGui import QScrollEvent as ScrollEvent
-from qtpy.QtGui import QScrollPrepareEvent as ScrollPrepareEvent
+from qtpy.QtGui import (
+    QKeyEvent as KeyEvent,
+    QMouseEvent as MouseEvent,
+    QWheelEvent as WheelEvent,
+    QActionEvent as ActionEvent,
+    QShowEvent as ShowEvent,
+    QDropEvent as DropEvent,
+    QFocusEvent as FocusEvent,
+    QDragEnterEvent as DragEnterEvent,
+    QContextMenuEvent as ContextMenuEvent,
+    QResizeEvent as ResizeEvent,
+    QNativeGestureEvent as NativeGestureEvent,
+    QMoveEvent as MoveEvent,
+    QInputMethodEvent as InputMethodEvent,
+    QInputMethodQueryEvent as InputMethodQueryEvent,
+    QCloseEvent as CloseEvent,
+    QDragLeaveEvent as DragLeaveEvent,
+    QHelpEvent as HelpEvent,
+    QHideEvent as HideEvent,
+    QHoverEvent as HoverEvent,
+    QDragMoveEvent as DragMoveEvent,
+    QEnterEvent as EnterEvent,
+    QExposeEvent as ExposeEvent,
+    QFileOpenEvent as FileOpenEvent,
+    QIconDragEvent as IconDragEvent,
+    QInputEvent as InputEvent,
+    QPaintEvent as PaintEvent,
+    QShortcutEvent as ShortcutEvent,
+    QStatusTipEvent as StatusTipEvent,
+    QTouchEvent as TouchEvent,
+    QTabletEvent as TabletEvent,
+    QWindowStateChangeEvent as WindowStateChangeEvent,
+    QWhatsThisClickedEvent as WhatsThisClickedEvent,
+    QScrollEvent as ScrollEvent,
+    QScrollPrepareEvent as ScrollPrepareEvent,
+)
 
 # not available in PySide2
 # from qtpy.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
