@@ -2110,7 +2110,8 @@ keyPressEvent<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key_0</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">apply_nice_numbers</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="k">return</span>
     <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 </code></pre>
 </div>
@@ -2135,7 +2136,7 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="c1"># pan the chart with a middle mouse drag</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">buttons</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_mouse_pos</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
+            <span class="k">return</span>
         <span class="n">pos_diff</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_mouse_pos</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">scroll</span><span class="p">(</span><span class="o">-</span><span class="n">pos_diff</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">pos_diff</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
 
@@ -2195,7 +2196,7 @@ mouseReleaseEvent<span class="p">(</span><span class="bp">self</span><span class
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
         <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">restoreOverrideCursor</span><span class="p">()</span>
         <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -2223,7 +2224,7 @@ save_as_image<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="n">dlg</span><span class="o">.</span><span class="n">set_extension_filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="n">dlg</span><span class="o">.</span><span class="n">open_file</span><span class="p">()</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">filename</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">show_legend</span><span class="p">()</span>
     <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
     <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>

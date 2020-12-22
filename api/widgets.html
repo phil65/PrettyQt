@@ -8161,7 +8161,7 @@ jump_to_column<span class="p">(</span><span class="bp">self</span><span class="p
 <span class="sd">        col_num: column to scroll to</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span>
     <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">col_num</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">scrollTo</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
 </code></pre>
@@ -8271,10 +8271,10 @@ selectAll<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <pre><span></span><code><span class="k">def</span> <span class="nf">selectAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Override, we dont want to selectAll for too many items bc of performance."""</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">columnCount</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1_000_000</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"Too many cells to select."</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">selectAll</span><span class="p">()</span>
 </code></pre>
 </div>
@@ -8823,7 +8823,7 @@ toggle_select_all<span class="p">(</span><span class="bp">self</span><span class
 <pre><span></span><code><span class="k">def</span> <span class="nf">toggle_select_all</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Select all items from list (deselect when all selected)."""</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span><span class="o">.</span><span class="n">hasSelection</span><span class="p">():</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clearSelection</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
@@ -18089,10 +18089,6 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
       </h4>
 <div class="doc doc-contents ">
 <p>Add a default button.</p>
-<p>Valid arguments: "none", "cancel", "ok", "save", "open", "close",
-                 "discard", "apply", "reset", "restore_defaults",
-                 "help", "save_all", "yes", "yes_to_all", "no",
-                 "no_to_all", "abort", "retry", "ignore"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -18106,7 +18102,7 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>button</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'cancel', 'ok', 'save', 'open', 'close', 'discard', 'apply', 'reset', 'restore_defaults', 'help', 'save_all', 'yes', 'yes_to_all', 'no', 'no_to_all', 'abort', 'retry', 'ignore']</code></td>
 <td>
 <p>button to add</p>
 </td>
@@ -18151,13 +18147,8 @@ add_button<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/messagebox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">add_button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">add_button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button</span><span class="p">:</span> <span class="n">ButtonStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QPushButton</span><span class="p">:</span>
     <span class="sd">"""Add a default button.</span>
-
-<span class="sd">    Valid arguments: "none", "cancel", "ok", "save", "open", "close",</span>
-<span class="sd">                     "discard", "apply", "reset", "restore_defaults",</span>
-<span class="sd">                     "help", "save_all", "yes", "yes_to_all", "no",</span>
-<span class="sd">                     "no_to_all", "abort", "retry", "ignore"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        button: button to add</span>
@@ -18186,7 +18177,6 @@ get_text_format<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Return current text format.</p>
-<p>Possible values: "rich", "plain", "auto"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -18197,7 +18187,7 @@ get_text_format<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['rich', 'plain', 'auto']</code></td>
 <td>
 <p>text format</p>
 </td>
@@ -18207,10 +18197,8 @@ get_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/messagebox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_text_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_text_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextFormatStr</span><span class="p">:</span>
     <span class="sd">"""Return current text format.</span>
-
-<span class="sd">    Possible values: "rich", "plain", "auto"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        text format</span>
@@ -18244,7 +18232,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>icon</code></td>
-<td><code>Union[PyQt5.QtGui.QIcon, str, pathlib.Path]</code></td>
+<td><code>Union[PyQt5.QtGui.QIcon, str, pathlib.Path, NoneType, Literal['none', 'information', 'warning', 'critical', 'question']]</code></td>
 <td>
 <p>icon to use</p>
 </td>
@@ -18255,12 +18243,12 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/messagebox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">IconStr</span><span class="p">]):</span>
     <span class="k">if</span> <span class="n">icon</span> <span class="ow">in</span> <span class="n">ICONS</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">ICONS</span><span class="p">[</span><span class="n">icon</span><span class="p">])</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setIconPixmap</span><span class="p">(</span><span class="n">icon</span><span class="o">.</span><span class="n">get_pixmap</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">64</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ico</span> <span class="o">=</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setIconPixmap</span><span class="p">(</span><span class="n">ico</span><span class="o">.</span><span class="n">get_pixmap</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">64</span><span class="p">))</span>
 </code></pre>
 </div>
 </details>
@@ -18276,7 +18264,6 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
       </h4>
 <div class="doc doc-contents ">
 <p>Set the text format.</p>
-<p>Allowed values are "rich", "plain", "auto"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -18290,7 +18277,7 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>text_format</code></td>
-<td><code>str</code></td>
+<td><code>Literal['rich', 'plain', 'auto']</code></td>
 <td>
 <p>text format to use</p>
 </td>
@@ -18318,10 +18305,8 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/messagebox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_text_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_text_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_format</span><span class="p">:</span> <span class="n">TextFormatStr</span><span class="p">):</span>
     <span class="sd">"""Set the text format.</span>
-
-<span class="sd">    Allowed values are "rich", "plain", "auto"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        text_format: text format to use</span>
@@ -19889,13 +19874,7 @@ get_tick_position<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Returns:</span>
 <span class="sd">        tick position</span>
 <span class="sd">    """</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="n">TICK_POSITION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tickPosition</span><span class="p">()]</span>
-    <span class="c1"># if self.is_vertical():</span>
-    <span class="c1">#     if val == "above":</span>
-    <span class="c1">#         return "left"</span>
-    <span class="c1">#     elif val == "below":</span>
-    <span class="c1">#         return "right"</span>
-    <span class="k">return</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">TICK_POSITION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tickPosition</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>

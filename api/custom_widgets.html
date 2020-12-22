@@ -789,8 +789,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.regexeditor.editor" class="md-nav__link">
-    editor
+  <a href="#prettyqt.custom_widgets.regexeditor.__main__" class="md-nav__link">
+    __main__
   </a>
   
 </li>
@@ -798,6 +798,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.regexeditor.quick_ref" class="md-nav__link">
     quick_ref
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.regexeditor.regexeditorwidget" class="md-nav__link">
+    regexeditorwidget
   </a>
   
 </li>
@@ -1770,8 +1777,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.regexeditor.editor" class="md-nav__link">
-    editor
+  <a href="#prettyqt.custom_widgets.regexeditor.__main__" class="md-nav__link">
+    __main__
   </a>
   
 </li>
@@ -1779,6 +1786,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.regexeditor.quick_ref" class="md-nav__link">
     quick_ref
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.regexeditor.regexeditorwidget" class="md-nav__link">
+    regexeditorwidget
   </a>
   
 </li>
@@ -3000,7 +3014,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prompt_text</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEnabled</span><span class="p">()):</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span>
     <span class="n">option</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionFrame</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">initStyleOption</span><span class="p">(</span><span class="n">option</span><span class="p">)</span>
 
@@ -3119,10 +3133,13 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
 <p>Module containing classes related to the RegEx editor.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-module">
-<h3 class="doc doc-heading" id="prettyqt.custom_widgets.regexeditor.editor">
+<h3 class="doc doc-heading" id="prettyqt.custom_widgets.regexeditor.__main__">
 
-        <code>editor</code>
+        <code>__main__</code>
 
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
 
       </h3>
 <div class="doc doc-contents ">
@@ -3151,6 +3168,30 @@ set_button_visible<span class="p">(</span><span class="bp">self</span><span clas
       </h3>
 <div class="doc doc-contents ">
 <p>Contains the quick reference widget.</p>
+<div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
+<h3 class="doc doc-heading" id="prettyqt.custom_widgets.regexeditor.regexeditorwidget">
+
+        <code>regexeditorwidget</code>
+
+
+      </h3>
+<div class="doc doc-contents ">
+<p>This module contains the editor widget implementation.</p>
 <div class="doc doc-children">
 
 
@@ -3264,7 +3305,8 @@ mouseMoveEvent<span class="p">(</span><span class="bp">self</span><span class="p
     <span class="n">opt</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionSlider</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">initStyleOption</span><span class="p">(</span><span class="n">opt</span><span class="p">)</span>
     <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">pixelMetric</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PM_MaximumDragDistance</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-    <span class="n">new_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_pixel_pos_to_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pick</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">)</span>
+    <span class="n">pixel_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pick</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span>
+    <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixel_pos_to_value</span><span class="p">(</span><span class="n">pixel_pos</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">()</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()):</span>
@@ -3330,7 +3372,7 @@ mousePressEvent<span class="p">(</span><span class="bp">self</span><span class="
     <span class="p">)</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">!=</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_mouse_press</span><span class="p">(</span>
-            <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower</span><span class="p">,</span> <span class="s2">"lower"</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">,</span> <span class="s2">"lower"</span>
         <span class="p">)</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">_first_movement</span> <span class="o">=</span> <span class="kc">True</span>
@@ -3502,7 +3544,7 @@ trigger_action<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">main</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">ActionStr</span><span class="p">,</span> <span class="n">main</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
     <span class="n">value</span> <span class="o">=</span> <span class="mf">0.0</span>
     <span class="n">no</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">up</span> <span class="o">=</span> <span class="kc">False</span>
