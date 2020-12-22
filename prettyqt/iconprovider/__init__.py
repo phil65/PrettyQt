@@ -65,6 +65,11 @@ def _instance() -> IconicFont:
     return _resource["iconic"]
 
 
+def reset_cache():
+    if _resource["iconic"] is not None:
+        _resource["iconic"].icon_cache = {}
+
+
 def _icon(*names, **kwargs) -> QtGui.QIcon:
     """Return a QIcon object corresponding to the provided icon name(s).
 
