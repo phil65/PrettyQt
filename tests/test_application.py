@@ -39,6 +39,8 @@ def test_application(qapp):
     )
     assert qapp.send_event("test", event) is True
     qapp.post_event("test", event)
+    with qapp.edit_stylesheet():
+        pass
 
 
 def test_guiapplication(qapp):

@@ -1,6 +1,9 @@
+from contextlib import contextmanager
 import logging
 from typing import Iterator, Mapping, MutableMapping, Optional, Union
 
+import qstylizer.parser
+import qstylizer.style
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import constants, core, gui, widgets
@@ -101,6 +104,12 @@ class Application(QtWidgets.QApplication):
         #     if isinstance(widget, QtWidgets.QWidget) and widget.objectName() == name:
         #         return widget
         # return None
+
+    @contextmanager
+    def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
+        ss = qstylizer.parser.parse(self.styleSheet())
+        yield ss
+        self.setStyleSheet(ss.toString())
 
     def send_event(self, obj_or_str: Union[str, QtCore.QObject], event: QtCore.QEvent):
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
