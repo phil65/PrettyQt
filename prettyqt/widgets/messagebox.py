@@ -1,6 +1,6 @@
 import sys
 import traceback
-from typing import List, Optional
+from typing import List, Literal, Optional, Union
 
 from qtpy import QtCore, QtWidgets
 
@@ -15,6 +15,8 @@ ICONS = bidict(
     critical=QtWidgets.QMessageBox.Critical,
     question=QtWidgets.QMessageBox.Question,
 )
+
+IconStr = Literal["none", "information", "warning", "critical", "question"]
 
 BUTTONS = bidict(
     none=QtWidgets.QMessageBox.NoButton,
@@ -38,11 +40,35 @@ BUTTONS = bidict(
     ignore=QtWidgets.QMessageBox.Ignore,
 )
 
+ButtonStr = Literal[
+    "none",
+    "cancel",
+    "ok",
+    "save",
+    "open",
+    "close",
+    "discard",
+    "apply",
+    "reset",
+    "restore_defaults",
+    "help",
+    "save_all",
+    "yes",
+    "yes_to_all",
+    "no",
+    "no_to_all",
+    "abort",
+    "retry",
+    "ignore",
+]
+
 TEXT_FORMAT = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
 )
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
     TEXT_FORMAT["markdown"] = QtCore.Qt.MarkdownText
+
+TextFormatStr = Literal["rich", "plain", "auto"]
 
 QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 
@@ -92,26 +118,21 @@ class MessageBox(QtWidgets.QMessageBox):
         dlg = cls(text=str(value), title=str(exctype), icon="critical", details=tb)
         dlg.show_blocking()
 
-    def set_icon(self, icon: iconprovider.IconType):
+    def set_icon(self, icon: Union[iconprovider.IconType, IconStr]):
         if icon in ICONS:
             self.setIcon(ICONS[icon])
-            return None
-        icon = iconprovider.get_icon(icon)
-        self.setIconPixmap(icon.get_pixmap(size=64))
+        else:
+            ico = iconprovider.get_icon(icon)
+            self.setIconPixmap(ico.get_pixmap(size=64))
 
-    def show_blocking(self) -> str:
+    def show_blocking(self) -> ButtonStr:
         return BUTTONS.inverse[self.exec_()]
 
-    def get_standard_buttons(self) -> List[str]:
+    def get_standard_buttons(self) -> List[ButtonStr]:
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
 
-    def add_button(self, button: str) -> QtWidgets.QPushButton:
+    def add_button(self, button: ButtonStr) -> QtWidgets.QPushButton:
         """Add a default button.
-
-        Valid arguments: "none", "cancel", "ok", "save", "open", "close",
-                         "discard", "apply", "reset", "restore_defaults",
-                         "help", "save_all", "yes", "yes_to_all", "no",
-                         "no_to_all", "abort", "retry", "ignore"
 
         Args:
             button: button to add
@@ -132,10 +153,8 @@ class MessageBox(QtWidgets.QMessageBox):
     #     error_text = str(exception[1])
     #     widgets.MessageBox.message(error_text, header, "mdi.exclamation")
 
-    def set_text_format(self, text_format: str):
+    def set_text_format(self, text_format: TextFormatStr):
         """Set the text format.
-
-        Allowed values are "rich", "plain", "auto"
 
         Args:
             text_format: text format to use
@@ -147,10 +166,8 @@ class MessageBox(QtWidgets.QMessageBox):
             raise InvalidParamError(text_format, TEXT_FORMAT)
         self.setTextFormat(TEXT_FORMAT[text_format])
 
-    def get_text_format(self) -> str:
+    def get_text_format(self) -> TextFormatStr:
         """Return current text format.
-
-        Possible values: "rich", "plain", "auto"
 
         Returns:
             text format

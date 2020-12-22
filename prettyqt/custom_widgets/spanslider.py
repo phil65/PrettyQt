@@ -238,7 +238,7 @@ class SpanSlider(widgets.Slider):
 
     def set_lower_pos(self, lower: float):
         if self.lower_pos == lower:
-            return None
+            return
         self.lower_pos = lower
         if not self.hasTracking():
             self.update()
@@ -250,7 +250,7 @@ class SpanSlider(widgets.Slider):
 
     def set_upper_pos(self, upper: float):
         if self.upper_pos == upper:
-            return None
+            return
         self.upper_pos = upper
         if not self.hasTracking():
             self.update()

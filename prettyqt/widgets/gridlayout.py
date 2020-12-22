@@ -21,10 +21,14 @@ class GridLayout(QtWidgets.QGridLayout):
             return self.find_child(QtCore.QObject, idx)
         widget = item.widget()
         if widget is None:
-            widget = item.layout()
+            return item.layout()
         return widget
 
-    def __setitem__(self, idx: Tuple[Union[int, slice], Union[int, slice]], value):
+    def __setitem__(
+        self,
+        idx: Tuple[Union[int, slice], Union[int, slice]],
+        value: Union[QtWidgets.QWidget, QtWidgets.QLayout, QtWidgets.QLayoutItem],
+    ):
         row, col = idx
         rowspan = row.stop - row.start + 1 if isinstance(row, slice) else 1
         colspan = col.stop - col.start + 1 if isinstance(col, slice) else 1
@@ -51,7 +55,12 @@ class GridLayout(QtWidgets.QGridLayout):
     def __iter__(self) -> Iterator[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
         return iter(item for i in range(self.count()) if (item := self[i]) is not None)
 
-    def __add__(self, other):
+    def __add__(
+        self,
+        other: Union[
+            tuple, list, QtWidgets.QWidget, QtWidgets.QLayout, QtWidgets.QLayoutItem
+        ],
+    ):
         if isinstance(other, (tuple, list)):
             for i, control in enumerate(other):
                 self[self.rowCount(), i] = other
@@ -59,7 +68,14 @@ class GridLayout(QtWidgets.QGridLayout):
             self[self.rowCount(), 0 : self.columnCount() - 1] = other
         return self
 
-    def add(self, item, rowstart: int, colstart: int, rowspan: int = 1, colspan: int = 1):
+    def add(
+        self,
+        item: Union[QtWidgets.QWidget, QtWidgets.QLayout, QtWidgets.QLayoutItem],
+        rowstart: int,
+        colstart: int,
+        rowspan: int = 1,
+        colspan: int = 1,
+    ):
         if isinstance(item, QtWidgets.QWidget):
             self.addWidget(item, rowstart, colstart, rowspan, colspan)
         elif isinstance(item, QtWidgets.QLayout):
@@ -67,7 +83,9 @@ class GridLayout(QtWidgets.QGridLayout):
         else:
             self.addItem(item, rowstart, colstart, rowspan, colspan)
 
-    def append(self, item):
+    def append(
+        self, item: Union[QtWidgets.QWidget, QtWidgets.QLayout, QtWidgets.QLayoutItem]
+    ):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
     def set_origin_corner(self, corner: constants.CornerStr):

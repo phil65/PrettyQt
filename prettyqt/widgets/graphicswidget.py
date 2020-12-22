@@ -25,7 +25,7 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
 
     def set_layout(self, layout: Union[LayoutStr, QtWidgets.QGraphicsLayout, None]):
         if layout is None:
-            return None
+            return
         if isinstance(layout, QtWidgets.QGraphicsLayout):
             self.box = layout
         elif layout == "grid":

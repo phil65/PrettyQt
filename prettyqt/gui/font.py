@@ -180,9 +180,8 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
 
     @classmethod
     def mono(cls, size=8):
-        font = cls("Consolas", size)
+        return cls("Consolas", size)
         # font.setStyleHint()
-        return font
 
     def set_style_hint(self, hint: StyleHintStr):
         """Set the style hint.

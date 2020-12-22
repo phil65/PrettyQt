@@ -31,8 +31,7 @@ class CodeEditor(widgets.PlainTextEdit):
 
     def line_area_width(self) -> int:
         digits = len(str(self.blockCount()))
-        space = 3 + self.fontMetrics().boundingRect("9").width() * digits
-        return space
+        return 3 + self.fontMetrics().boundingRect("9").width() * digits
 
     def update_line_area_width(self, _):
         self.setViewportMargins(self.line_area_width(), 0, 0, 0)

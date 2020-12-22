@@ -64,11 +64,9 @@ class FormLayout(QtWidgets.QFormLayout):
         """Needed for PySide2."""
         return self.rowCount()
 
-    def __add__(self, other):
-        if isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout, tuple)):
-            self.add(other)
-            return self
-        raise TypeError("Wrong type for addition")
+    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout, tuple]):
+        self.add(other)
+        return self
 
     def serialize_fields(self):
         widget_list = []

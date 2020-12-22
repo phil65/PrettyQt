@@ -168,7 +168,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self._brushes = {}
         self._formats = {}
 
-    def _get_format(self, token: str):
+    def _get_format(self, token: str) -> QtGui.QTextCharFormat:
         """Returns a QTextCharFormat for token or None."""
         if token in self._formats:
             return self._formats[token]
@@ -181,13 +181,15 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self._formats[token] = result
         return result
 
-    def _get_format_from_document(self, token: str, document: QtGui.QTextDocument):
+    def _get_format_from_document(
+        self, token: str, document: QtGui.QTextDocument
+    ) -> QtGui.QTextCharFormat:
         """Return a QTextCharFormat for token from document."""
         code, html = next(self._formatter._format_lines([(token, "dummy")]))
         self._document.setHtml(html)
         return gui.TextCursor(self._document).charFormat()
 
-    def _get_format_from_style(self, token: str, style: Style):
+    def _get_format_from_style(self, token: str, style: Style) -> gui.TextCharFormat:
         """Return a QTextCharFormat for token by reading a Pygments style."""
         result = gui.TextCharFormat()
         try:

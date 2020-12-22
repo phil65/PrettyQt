@@ -73,7 +73,7 @@ class FileChooserButton(widgets.Widget):
         if self.extensions:
             dialog.set_extension_filter(self.extensions)
         if not dialog.choose():
-            return None
+            return
         self.set_path(dialog.selected_file())
         self.value_changed.emit(self.path)
 

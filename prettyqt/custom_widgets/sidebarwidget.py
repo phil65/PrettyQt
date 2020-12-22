@@ -99,7 +99,7 @@ class SidebarWidget(widgets.MainWindow):
     def set_marker(self, item: Union[str, int, widgets.Widget], color="red"):
         widget = self._get_widget(item)
         if widget == self._get_current_widget():
-            return None
+            return
         template = self.icon_map[widget]
         px = template.pixmap(100, 100)
         with gui.Painter(px) as painter:

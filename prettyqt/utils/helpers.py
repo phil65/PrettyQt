@@ -26,7 +26,7 @@ def cut_off_str(obj, max_len: int):
     """
     s = repr(obj)
     if len(s) > max_len - 3:
-        s = s[: max_len - 3] + "..."
+        return s[: max_len - 3] + "..."
     return s
 
 

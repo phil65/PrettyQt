@@ -52,7 +52,8 @@ class ChartView(QtCharts.QChartView):
         elif key == QtCore.Qt.Key_0:
             self.chart().apply_nice_numbers()
         else:
-            return super().keyPressEvent(event)
+            super().keyPressEvent(event)
+            return
         event.accept()
 
     def wheelEvent(self, event: QtGui.QWheelEvent):
@@ -65,7 +66,7 @@ class ChartView(QtCharts.QChartView):
         if event.button() == QtCore.Qt.RightButton:
             widgets.Application.restoreOverrideCursor()
             event.accept()
-            return None
+            return
         super().mouseReleaseEvent(event)
 
     def mousePressEvent(self, event: QtGui.QMouseEvent):
@@ -83,7 +84,7 @@ class ChartView(QtCharts.QChartView):
         # pan the chart with a middle mouse drag
         if event.buttons() & QtCore.Qt.RightButton:
             if not self.last_mouse_pos:
-                return None
+                return
             pos_diff = event.pos() - self.last_mouse_pos
             self.chart().scroll(-pos_diff.x(), pos_diff.y())
 
@@ -106,7 +107,7 @@ class ChartView(QtCharts.QChartView):
         dlg.set_extension_filter(filters)
         filename = dlg.open_file()
         if not filename:
-            return None
+            return
         self.chart().show_legend()
         image = self.get_image()
         image.save(str(filename[0]))

@@ -163,10 +163,9 @@ def for_color(color_str: str) -> gui.Icon:
     if color.isValid():
         bitmap = gui.Pixmap(16, 16)
         bitmap.fill(color)
-        icon = gui.Icon(bitmap)
+        return gui.Icon(bitmap)
     else:
-        icon = gui.Icon(_icon("mdi.card-outline"))
-    return icon
+        return gui.Icon(_icon("mdi.card-outline"))
 
 
 def load_font(

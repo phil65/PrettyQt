@@ -61,8 +61,7 @@ class PlaceManager(core.Object):
             request.set_relevance_hint(relevance)
         if categories is not None:
             self.setCategories(categories)
-        reply = self.search(request)
-        return reply
+        return self.search(request)
 
 
 if __name__ == "__main__":

@@ -32,9 +32,8 @@ class TextEdit(QtWidgets.QTextEdit):
         return type(self), (), self.__getstate__()
 
     def __add__(self, other: str) -> TextEdit:
-        if isinstance(other, str):
-            self.append_text(other)
-            return self
+        self.append_text(other)
+        return self
 
     def on_value_change(self) -> None:
         self.value_changed.emit(self.text())

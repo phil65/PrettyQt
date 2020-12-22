@@ -74,10 +74,10 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
     def selectAll(self):
         """Override, we dont want to selectAll for too many items bc of performance."""
         if self.model() is None:
-            return None
+            return
         if self.model().rowCount() * self.model().columnCount() > 1_000_000:
             logger.warning("Too many cells to select.")
-            return None
+            return
         super().selectAll()
 
     def set_model(self, model: Optional[QtCore.QAbstractItemModel]):
@@ -118,7 +118,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
     def toggle_select_all(self):
         """Select all items from list (deselect when all selected)."""
         if self.selectionModel() is None:
-            return None
+            return
         if self.selectionModel().hasSelection():
             self.clearSelection()
         else:
@@ -308,7 +308,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             col_num: column to scroll to
         """
         if self.model() is None:
-            return None
+            return
         idx = self.model().index(0, col_num)
         self.scrollTo(idx)
 

@@ -44,4 +44,4 @@ class HostAddress(QtNetwork.QHostAddress):
             address = SPECIAL_ADDRESS[address]
         ret = self.setAddress(address)
         if ret is False:
-            return ValueError("invalid address")
+            raise ValueError("invalid address")

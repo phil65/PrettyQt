@@ -45,7 +45,7 @@ class PromptLineEdit(widgets.LineEdit):
         super().paintEvent(event)
 
         if not (self._prompt_text and not self.text() and self.isEnabled()):
-            return None
+            return
         option = widgets.StyleOptionFrame()
         self.initStyleOption(option)
 

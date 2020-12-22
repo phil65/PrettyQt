@@ -242,6 +242,8 @@ class RoundProgressBar(widgets.Widget):
         elif self._update_flags == "max":
             val = round(self.max_value - self.min_value + 1, self.decimals)
             return text_to_draw.replace(r"%m", str(val))
+        else:
+            return ValueError()
 
     def _value_format_changed(self):
         for k, v in VALUE_MAP.items():

@@ -33,7 +33,7 @@ class Layout(QtWidgets.QLayout):
             if widget is None:
                 widget = item.layout()
         elif isinstance(index, str):
-            widget = self.find_child(typ=QtCore.QObject, name=index)
+            return self.find_child(typ=QtCore.QObject, name=index)
         return widget
 
     def __delitem__(self, index: int):

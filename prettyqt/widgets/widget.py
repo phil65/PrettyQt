@@ -327,9 +327,9 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         layout: Union[LayoutStr, QtWidgets.QLayout, None],
         margin: Optional[int] = None,
         spacing: Optional[int] = None,
-    ) -> None:
+    ):
         if layout is None:
-            return None
+            return
         if layout in ["horizontal", "vertical"]:
             self.box = widgets.BoxLayout(layout)
         elif layout == "grid":

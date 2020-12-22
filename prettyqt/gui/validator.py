@@ -13,10 +13,9 @@ class Validator(QtGui.QValidator):
         return f"{self.__class__.__name__}()"
 
     def __add__(self, other: Validator):
-        if isinstance(other, Validator):
-            from prettyqt import custom_validators
+        from prettyqt import custom_validators
 
-            return custom_validators.CompositeValidator([self, other])
+        return custom_validators.CompositeValidator([self, other])
 
     def __radd__(self, other: QtGui.QValidator):
         """Needed for sum()."""

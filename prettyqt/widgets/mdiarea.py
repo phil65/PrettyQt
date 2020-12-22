@@ -33,10 +33,9 @@ QtWidgets.QMdiArea.__bases__ = (widgets.AbstractScrollArea,)
 
 
 class MdiArea(QtWidgets.QMdiArea):
-    def __add__(self, other):
-        if isinstance(other, QtWidgets.QWidget):
-            self.add(other)
-            return self
+    def __add__(self, other: QtWidgets.QWidget):
+        self.add(other)
+        return self
 
     def serialize_fields(self):
         return dict(

@@ -9,10 +9,9 @@ QtWidgets.QMenuBar.__bases__ = (widgets.Widget,)
 
 
 class MenuBar(QtWidgets.QMenuBar):
-    def __add__(self, other):
-        if isinstance(other, (QtWidgets.QAction, QtWidgets.QMenu)):
-            self.add(other)
-            return self
+    def __add__(self, other: Union[QtWidgets.QAction, QtWidgets.QMenu]):
+        self.add(other)
+        return self
 
     def serialize_fields(self):
         return dict(

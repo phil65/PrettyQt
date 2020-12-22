@@ -65,9 +65,7 @@ class Message(Highlighter):
             val = traceback.format_exc()
         else:
             val = record.msg % record.args
-        if "\n" in val:
-            val = f"\n{val}"
-        return val
+        return f"\n{val}" if "\n" in val else val
 
 
 class FileName(Highlighter):

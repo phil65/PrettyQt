@@ -1,5 +1,5 @@
 import contextlib
-from typing import Literal, Optional
+from typing import Iterator, Literal, Optional
 
 from qtpy import QtGui, QtWidgets
 
@@ -59,10 +59,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __add__(self, other):
-        if isinstance(other, str):
-            self.append_text(other)
-            return self
+    def __add__(self, other: str):
+        self.append_text(other)
+        return self
 
     def wheelEvent(self, event):
         """Handle wheel event for zooming."""
@@ -77,13 +76,13 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         self._allow_wheel_zoom = do_zoom
 
     @contextlib.contextmanager
-    def create_cursor(self):
+    def create_cursor(self) -> Iterator[gui.TextCursor]:
         cursor = gui.TextCursor(self.document())
         yield cursor
         self.setTextCursor(cursor)
 
     @contextlib.contextmanager
-    def current_cursor(self):
+    def current_cursor(self) -> Iterator[gui.TextCursor]:
         cursor = gui.TextCursor(self.textCursor())
         yield cursor
         self.setTextCursor(cursor)

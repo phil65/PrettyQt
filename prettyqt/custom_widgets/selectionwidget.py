@@ -1,9 +1,22 @@
-from typing import Any, Dict, Iterable, Iterator, Mapping, Optional, Tuple, Union
+from typing import (
+    Any,
+    Dict,
+    Iterable,
+    Iterator,
+    Literal,
+    Mapping,
+    Optional,
+    Tuple,
+    Union,
+)
 
 from qtpy import QtWidgets
 
-from prettyqt import core, iconprovider, widgets
+from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.utils import autoslot
+
+
+TypeStr = Literal["string", "int", "float"]
 
 
 class SelectionWidget(widgets.GroupBox):
@@ -12,7 +25,7 @@ class SelectionWidget(widgets.GroupBox):
     def __init__(
         self,
         label: str = "",
-        layout: str = "horizontal",
+        layout: constants.OrientationStr = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(title=label, parent=parent)
@@ -63,7 +76,7 @@ class SelectionWidget(widgets.GroupBox):
     def add_custom(
         self,
         label: str = "Other",
-        typ: str = "string",
+        typ: TypeStr = "string",
         default: Union[None, float, str] = None,
         regex: Optional[str] = None,
     ):
@@ -91,18 +104,18 @@ class SelectionWidget(widgets.GroupBox):
         layout += self.widget_custom
         self.box += layout
 
-    def current_choice(self):
+    def current_choice(self) -> Any:
         for k, v in self.buttons.items():
             if k.isChecked():
                 return v
         if self.rb_other.isChecked() and self.widget_custom is not None:
             return self.widget_custom.get_value()
-        return
+        return None
 
     @autoslot.AutoSlot
     def update_choice(self, checked: bool):
         if not checked:
-            return None
+            return
         choice = self.current_choice()
         if choice is not None:
             self.value_changed.emit(choice)

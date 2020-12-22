@@ -23,13 +23,12 @@ class TableWidgetSelectionRange(QtWidgets.QTableWidgetSelectionRange):
     def __or__(
         self, other: QtWidgets.QTableWidgetSelectionRange
     ) -> TableWidgetSelectionRange:
-        result = TableWidgetSelectionRange(
+        return TableWidgetSelectionRange(
             min(self.topRow(), other.topRow()),
             min(self.leftColumn(), other.leftColumn()),
             max(self.bottomRow(), other.bottomRow()),
             max(self.rightColumn(), other.rightColumn()),
         )
-        return result
 
     def __and__(
         self, other: QtWidgets.QTableWidgetSelectionRange
@@ -41,13 +40,12 @@ class TableWidgetSelectionRange(QtWidgets.QTableWidgetSelectionRange):
             or other.rightColumn() >= self.leftColumn()
         ):
             return TableWidgetSelectionRange()
-        result = TableWidgetSelectionRange(
+        return TableWidgetSelectionRange(
             max(self.topRow(), other.topRow()),
             max(self.leftColumn(), other.leftColumn()),
             min(self.bottomRow(), other.bottomRow()),
             min(self.rightColumn(), other.rightColumn()),
         )
-        return result
 
 
 if __name__ == "__main__":

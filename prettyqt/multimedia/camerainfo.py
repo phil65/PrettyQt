@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Optional
 
 from qtpy import QtMultimedia
@@ -12,12 +14,13 @@ class CameraInfo(QtMultimedia.QCameraInfo):
         return iter(cls(i) for i in cls.availableCameras())
 
     @classmethod
-    def get_camera(cls, name: Optional[str] = None):
+    def get_camera(cls, name: Optional[str] = None) -> Optional[CameraInfo]:
         if name is None:
             return cls(cls.defaultCamera())
         for cam in cls.get_cameras():
             if cam.deviceName() == name:
                 return cam
+        return None
 
 
 if __name__ == "__main__":

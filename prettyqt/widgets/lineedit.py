@@ -53,10 +53,9 @@ class LineEdit(QtWidgets.QLineEdit):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __add__(self, other):
-        if isinstance(other, str):
-            self.append_text(other)
-            return self
+    def __add__(self, other: str):
+        self.append_text(other)
+        return self
 
     def serialize_fields(self):
         return dict(
