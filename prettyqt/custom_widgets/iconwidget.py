@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Optional, Tuple, Union
 
-from qtpy import QtCore, QtGui, QtWidgets
-
 from prettyqt import core, iconprovider, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 class IconWidget(widgets.Label):
@@ -21,7 +20,7 @@ class IconWidget(widgets.Label):
 
     def __init__(self, *names, parent: Optional[QtWidgets.QWidget] = None, **kwargs):
         super().__init__(parent=parent)
-        self._icon = None
+        self._icon: Optional[QtGui.QIcon] = None
         self._size = core.Size(16, 16)
         self.set_icon(iconprovider._icon(*names, **kwargs))
 
