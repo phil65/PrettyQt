@@ -74,6 +74,7 @@ class TabWidget(QtWidgets.QTabWidget):
         )
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.setTabBar(state["tabbar"])
         self.setDocumentMode(state.get("document_mode", False))
         self.setMovable(state.get("movable", False))

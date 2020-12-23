@@ -47,13 +47,11 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         return dict(
             text=self.text(),
             read_only=self.isReadOnly(),
-            font=gui.Font(self.font()),
         )
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.set_text(state["text"])
-        self.setEnabled(state.get("enabled", True))
-        self.setFont(state["font"])
         self.setReadOnly(state["read_only"])
 
     def __reduce__(self):

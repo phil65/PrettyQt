@@ -50,6 +50,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         )
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.set_range(*state["range"])
         self.set_value(state["value"])
         self.setSingleStep(state["single_step"])

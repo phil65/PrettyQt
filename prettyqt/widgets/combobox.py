@@ -77,13 +77,10 @@ class ComboBox(QtWidgets.QComboBox):
         return dct
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         for label, data, icon in state["items"]:
             self.add(label, data, icon=icon)
-        self.set_id(state.get("object_name", ""))
         self.setCurrentIndex(state["index"])
-        self.setEnabled(state.get("enabled", True))
-        self.setToolTip(state.get("tool_tip", ""))
-        self.setStatusTip(state.get("status_tip", ""))
         self.setEditable(state["editable"])
         self.setMaxCount(state["max_count"])
         self.setMaxVisibleItems(state["max_visible_items"])

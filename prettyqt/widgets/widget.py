@@ -28,7 +28,18 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         self.setSizePolicy(state["size_policy"])
         self.setAccessibleName(state["accessible_name"])
         self.setToolTip(state.get("tool_tip", ""))
+        self.setToolTipDuration(state.get("tooltip_duration", ""))
+        self.setWindowTitle(state.get("window_title", ""))
+        self.setEnabled(state.get("enabled", ""))
+        self.setVisible(state.get("visible", ""))
+        self.set_icon(state.get("icon", ""))
+        self.set_modality(state.get("modality", ""))
+        self.setWhatsThis(state.get("whats_this", ""))
+        self.set_contextmenu_policy(state.get("contextmenu_policy", ""))
+        self.set_focus_policy(state.get("focus_policy", ""))
         self.setStatusTip(state.get("status_tip", ""))
+        self.setStyleSheet(state.get("stylesheet", ""))
+        self.setFont(state.get("font", ""))
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -52,6 +63,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             contextmenu_policy=self.get_contextmenu_policy(),
             focus_policy=self.get_focus_policy(),
             status_tip=self.statusTip(),
+            font=self.get_font(),
         )
 
     def resize(self, *size) -> None:

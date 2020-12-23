@@ -25,20 +25,6 @@ class PushButton(QtWidgets.QPushButton):
             self.clicked.connect(callback)
         self.toggled.connect(self.value_changed)
 
-    def get_value(self) -> bool:
-        return self.isChecked()
-
-    def set_value(self, value: bool):
-        self.setChecked(value)
-
-    @property
-    def is_on(self) -> bool:
-        return self.isChecked()
-
-    @is_on.setter
-    def is_on(self, state: bool):
-        self.setChecked(state)
-
 
 if __name__ == "__main__":
     app = widgets.app()

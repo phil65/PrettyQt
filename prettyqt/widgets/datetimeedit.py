@@ -45,12 +45,11 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.dateTimeChanged.connect(self.datetime_changed)
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.setDateTime(state["datetime"])
-        self.setEnabled(state.get("enabled", True))
         self.set_range(*state["range"])
+        self.setCalendarPopup(state["calendar_popup"])
         self.setDisplayFormat(state["display_format"])
-        self.setToolTip(state.get("tool_tip", ""))
-        self.setStatusTip(state.get("status_tip", ""))
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()

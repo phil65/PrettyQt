@@ -24,36 +24,18 @@ class CheckBox(QtWidgets.QCheckBox):
         self.setChecked(checked)
 
     def __setstate__(self, state):
-        self.set_id(state.get("object_name", ""))
-        self.setCheckable(state["checkable"])
+        super().__setstate__(state)
         self.setTristate(state.get("is_tristate", False))
         self.set_checkstate(state["checkstate"])
-        self.setText(state.get("text", ""))
-        self.setEnabled(state.get("enabled", True))
-        self.setToolTip(state.get("tool_tip", ""))
-        self.setStatusTip(state.get("status_tip", ""))
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __bool__(self):
-        return self.isChecked()
-
     def serialize_fields(self):
         return dict(
-            checkable=self.isCheckable(),
             checkstate=self.get_checkstate(),
             is_tristate=self.isTristate(),
-            text=self.text(),
         )
-
-    @property
-    def is_on(self) -> bool:
-        return self.isChecked()
-
-    @is_on.setter
-    def is_on(self, state: bool):
-        self.setChecked(state)
 
     def set_checkstate(self, state: constants.StateStr):
         """Set checkstate of the checkbox.
@@ -75,12 +57,6 @@ class CheckBox(QtWidgets.QCheckBox):
             checkstate
         """
         return constants.STATE.inverse[self.checkState()]
-
-    def get_value(self) -> bool:
-        return self.isChecked()
-
-    def set_value(self, value: bool):
-        self.setChecked(value)
 
 
 if __name__ == "__main__":

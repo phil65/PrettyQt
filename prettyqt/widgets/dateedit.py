@@ -14,21 +14,16 @@ class DateEdit(QtWidgets.QDateEdit):
     value_changed = core.Signal(datetime.datetime)
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.setDate(state["date"])
-        self.setEnabled(state.get("enabled", True))
-        self.setDisplayFormat(state["display_format"])
         self.set_range(*state["range"])
-        self.setToolTip(state.get("tool_tip", ""))
-        self.setStatusTip(state.get("status_tip", ""))
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
     def serialize_fields(self):
         return dict(
-            calendar_popup=self.calendarPopup(),
             date=self.get_date(),
-            display_format=self.displayFormat(),
             range=(self.min_date(), self.max_date()),
         )
 

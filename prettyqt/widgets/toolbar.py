@@ -16,6 +16,7 @@ class ToolBar(QtWidgets.QToolBar):
         self.menu_buttons = list()
 
     def __setstate__(self, state: Dict[str, Any]) -> None:
+        super().__setstate__(state)
         self.addActions(state["actions"])
 
     def __reduce__(self):

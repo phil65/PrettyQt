@@ -38,17 +38,14 @@ class LineEdit(QtWidgets.QLineEdit):
         return f"{type(self).__name__}: {self.serialize_fields()}"
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.set_text(state["text"])
-        self.setEnabled(state.get("enabled", True))
-        self.setFont(state["font"])
         self.setValidator(state["validator"])
         self.setInputMask(state["input_mask"])
         self.setMaxLength(state["max_length"])
         self.setPlaceholderText(state["placeholder_text"])
         self.setReadOnly(state["read_only"])
         self.setFrame(state["has_frame"])
-        self.setToolTip(state.get("tool_tip", ""))
-        self.setStatusTip(state.get("status_tip", ""))
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -60,7 +57,6 @@ class LineEdit(QtWidgets.QLineEdit):
     def serialize_fields(self):
         return dict(
             text=self.text(),
-            font=gui.Font(self.font()),
             validator=self.validator(),
             max_length=self.maxLength(),
             read_only=self.isReadOnly(),

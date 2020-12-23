@@ -16,20 +16,34 @@ class AbstractButton(QtWidgets.QAbstractButton):
             icon=self.get_icon() if not self.icon().isNull() else None,
             checkable=self.isCheckable(),
             checked=self.isChecked(),
+            auto_exclusive=self.autoExclusive(),
+            auto_repeat=self.autoRepeat(),
+            auto_repeat_delay=self.autoRepeatDelay(),
+            auto_repeat_interval=self.autoRepeatInterval(),
+            is_down=self.isDown(),
+            icon_size=self.get_icon_size(),
+            shortcut=self.get_shortcut(),
         )
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.setText(state["text"])
-        self.set_id(state.get("object_name", ""))
         self.set_icon(state["icon"])
-        self.setEnabled(state.get("enabled", True))
         self.setChecked(state.get("checked", False))
         self.setCheckable(state["checkable"])
-        self.setToolTip(state.get("tool_tip", ""))
-        self.setStatusTip(state.get("status_tip", ""))
+        self.setAutoExclusive(state["auto_exclusive"])
+        self.setAutoRepeat(state["auto_repeat"])
+        self.setAutoRepeatDelay(state["auto_repeat_delay"])
+        self.setAutoRepeatInterval(state["auto_repeat_interval"])
+        self.setDown(state["is_down"])
+        self.set_icon_size(state["icon_size"])
+        self.setShortcut(state["shortcut"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
+
+    def __bool__(self):
+        return self.isChecked()
 
     def set_icon(self, icon: iconprovider.IconType):
         """Set the icon for the button.
@@ -78,6 +92,20 @@ class AbstractButton(QtWidgets.QAbstractButton):
 
     def get_icon_size(self) -> core.Size:
         return core.Size(self.iconSize())
+
+    def get_value(self) -> bool:
+        return self.isChecked()
+
+    def set_value(self, value: bool):
+        self.setChecked(value)
+
+    @property
+    def is_on(self) -> bool:
+        return self.isChecked()
+
+    @is_on.setter
+    def is_on(self, state: bool):
+        self.setChecked(state)
 
 
 if __name__ == "__main__":

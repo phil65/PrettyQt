@@ -39,6 +39,7 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
         return dict(date=self.get_date())
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.setSelectedDate(state["date"])
 
     def __reduce__(self):

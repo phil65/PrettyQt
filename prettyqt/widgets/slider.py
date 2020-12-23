@@ -45,16 +45,7 @@ class Slider(QtWidgets.QSlider):
         )
 
     def __setstate__(self, state):
-        self.set_range(*state["range"])
-        self.set_value(state["value"])
-        self.setToolTip(state.get("tool_tip", ""))
-        self.setStatusTip(state.get("status_tip", ""))
-        self.setEnabled(state.get("enabled", True))
-        self.setSingleStep(state["single_step"])
-        self.setPageStep(state["page_step"])
-        self.setTracking(state["has_tracking"])
-        self.setInvertedControls(state["inverted_controls"])
-        self.setInvertedAppearance(state["inverted_appearance"])
+        super().__setstate__(state)
         self.set_tick_position(state["tick_position"])
         self.setTickInterval(state["tick_interval"])
 
