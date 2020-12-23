@@ -4,7 +4,7 @@ from typing import Callable, List, Optional, Union
 
 from qtpy import QtCore, QtGui
 
-from prettyqt import constants, core, widgets
+from prettyqt import constants, core, gui
 
 
 logger = logging.getLogger(__name__)
@@ -24,7 +24,7 @@ class ColumnItem:
     col_visible: bool = True
     width: Union[int, str] = SMALL_COL_WIDTH
     alignment: Optional[Union[Callable, int]] = None
-    line_wrap: widgets.plaintextedit.WrapModeStr = "none"
+    line_wrap: gui.textoption.WordWrapModeStr = "none"
     foreground_color: Optional[Union[Callable, str]] = None
     background_color: Optional[Union[Callable, str]] = None
     decoration: Optional[Union[Callable, QtGui.QIcon]] = None

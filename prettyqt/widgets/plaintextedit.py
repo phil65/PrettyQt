@@ -1,20 +1,12 @@
 import contextlib
 from typing import Iterator, Literal, Optional
 
+from deprecated import deprecated
 from qtpy import QtGui, QtWidgets
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
 from prettyqt.utils import InvalidParamError, bidict
 
-
-WRAP_MODE = bidict(
-    none=QtGui.QTextOption.NoWrap,
-    word=QtGui.QTextOption.WordWrap,
-    anywhere=QtGui.QTextOption.WrapAnywhere,
-    boundary_or_anywhere=QtGui.QTextOption.WrapAtWordBoundaryOrAnywhere,
-)
-
-WrapModeStr = Literal["none", "word", "anywhere", "boundary_or_anywhere"]
 
 LINE_WRAP_MODE = bidict(
     none=QtWidgets.QPlainTextEdit.NoWrap,
@@ -47,12 +39,16 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         return dict(
             text=self.text(),
             read_only=self.isReadOnly(),
+            line_wrap_mode=self.get_line_wrap_mode(),
+            word_wrap_mode=self.get_word_wrap_mode(),
         )
 
     def __setstate__(self, state):
         super().__setstate__(state)
         self.set_text(state["text"])
         self.setReadOnly(state["read_only"])
+        self.set_line_wrap_mode(state["line_wrap_mode"])
+        self.set_word_wrap_mode(state["word_wrap_mode"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -139,7 +135,11 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
         self.setExtraSelections(extra_selections)
 
-    def set_wrap_mode(self, mode: WrapModeStr):
+    @deprecated(reason="This method is deprecated, use set_word_wrap_mode instead.")
+    def set_wrap_mode(self, mode: gui.textoption.WordWrapModeStr):
+        self.set_word_wrap_mode(mode)
+
+    def set_word_wrap_mode(self, mode: gui.textoption.WordWrapModeStr):
         """Set word wrap mode.
 
         Args:
@@ -148,17 +148,21 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         Raises:
             InvalidParamError: wrap mode does not exist
         """
-        if mode not in WRAP_MODE:
-            raise InvalidParamError(mode, WRAP_MODE)
-        self.setWordWrapMode(WRAP_MODE[mode])
+        if mode not in gui.textoption.WORD_WRAP_MODE:
+            raise InvalidParamError(mode, gui.textoption.WORD_WRAP_MODE)
+        self.setWordWrapMode(gui.textoption.WORD_WRAP_MODE[mode])
 
-    def get_wrap_mode(self) -> str:
+    @deprecated(reason="This method is deprecated, use get_word_wrap_mode instead.")
+    def get_wrap_mode(self) -> gui.textoption.WordWrapModeStr:
+        return self.get_word_wrap_mode()
+
+    def get_word_wrap_mode(self) -> gui.textoption.WordWrapModeStr:
         """Get the current word wrap mode.
 
         Returns:
             Word wrap mode
         """
-        return WRAP_MODE.inverse[self.wordWrapMode()]
+        return gui.textoption.WORD_WRAP_MODE.inverse[self.wordWrapMode()]
 
     def set_line_wrap_mode(self, mode: LineWrapModeStr):
         """Set line wrap mode.

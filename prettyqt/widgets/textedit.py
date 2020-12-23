@@ -1,12 +1,32 @@
 from __future__ import annotations
 
 import contextlib
-from typing import Iterator
+from typing import Iterator, Literal
 
 from qtpy import QtWidgets
 
 from prettyqt import core, gui, widgets
-from prettyqt.utils import colors
+from prettyqt.utils import InvalidParamError, bidict, colors
+
+
+AUTO_FORMATTING = bidict(
+    none=QtWidgets.QTextEdit.AutoNone,
+    bullet_list=QtWidgets.QTextEdit.AutoBulletList,
+    all=QtWidgets.QTextEdit.AutoAll,
+)
+
+AutoFormattingStr = Literal["none", "bullet_list", "all"]
+
+LINE_WRAP_MODE = bidict(
+    none=QtWidgets.QTextEdit.NoWrap,
+    widget_width=QtWidgets.QTextEdit.WidgetWidth,
+    fixed_pixel_width=QtWidgets.QTextEdit.FixedPixelWidth,
+    fixed_column_width=QtWidgets.QTextEdit.FixedColumnWidth,
+)
+
+LineWrapModeStr = Literal[
+    "none", "widget_width", "fixed_pixel_width", "fixed_column_width"
+]
 
 
 QtWidgets.QTextEdit.__bases__ = (widgets.AbstractScrollArea,)
@@ -21,12 +41,39 @@ class TextEdit(QtWidgets.QTextEdit):
         self.textChanged.connect(self.on_value_change)
 
     def serialize_fields(self):
-        return dict(text=self.text(), font=gui.Font(self.font()))
+        return dict(
+            text=self.text(),
+            accept_rich_text=self.acceptRichText(),
+            auto_formatting=self.get_auto_formatting(),
+            cursor_width=self.cursorWidth(),
+            document_title=self.documentTitle(),
+            line_wrap_column_or_width=self.lineWrapColumnOrWidth(),
+            line_wrap_mode=self.get_line_wrap_mode(),
+            word_wrap_mode=self.get_word_wrap_mode(),
+            overwrite_mode=self.overwriteMode(),
+            placeholder_text=self.placeholderText(),
+            read_only=self.isReadOnly(),
+            tab_changes_focus=self.tabChangesFocus(),
+            tab_stop_distance=self.tabStopDistance(),
+            undo_redo_enabled=self.isUndoRedoEnabled(),
+        )
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.set_text(state["text"])
-        self.setEnabled(state.get("enabled", True))
-        self.setFont(state["font"])
+        self.setAcceptRichText(state["accept_rich_text"])
+        self.set_auto_formatting(state["auto_formatting"])
+        self.setCursorWidth(state["cursor_width"])
+        self.setDocumentTitle(state["document_title"])
+        self.setLineWrapColumnOrWidth(state["line_wrap_column_or_width"])
+        self.set_line_wrap_mode(state["line_wrap_mode"])
+        self.set_word_wrap_mode(state["word_wrap_mode"])
+        self.setOverwriteMode(state["overwrite_mode"])
+        self.setPlaceholderText(state["placeholder_text"])
+        self.setReadOnly(state["read_only"])
+        self.setTabChangesFocus(state["tab_changes_focus"])
+        self.setTabStopDistance(state["tab_stop_distance"])
+        self.setUndoRedoEnabled(state["undo_redo_enabled"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -63,6 +110,69 @@ class TextEdit(QtWidgets.QTextEdit):
     def set_text_color(self, color: colors.ColorType) -> None:
         color = colors.get_color(color)
         self.setTextColor(color)
+
+    def set_line_wrap_mode(self, mode: LineWrapModeStr):
+        """Set line wrap mode.
+
+        Args:
+            mode: line wrap mode to use
+
+        Raises:
+            InvalidParamError: line wrap mode does not exist
+        """
+        if mode not in LINE_WRAP_MODE:
+            raise InvalidParamError(mode, LINE_WRAP_MODE)
+        self.setLineWrapMode(LINE_WRAP_MODE[mode])
+
+    def get_line_wrap_mode(self) -> LineWrapModeStr:
+        """Get the current wrap mode.
+
+        Returns:
+            Wrap mode
+        """
+        return LINE_WRAP_MODE.inverse[self.lineWrapMode()]
+
+    def set_auto_formatting(self, mode: AutoFormattingStr):
+        """Set auto formatting mode.
+
+        Args:
+            mode: auto formatting mode to use
+
+        Raises:
+            InvalidParamError: auto formatting mode does not exist
+        """
+        if mode not in AUTO_FORMATTING:
+            raise InvalidParamError(mode, AUTO_FORMATTING)
+        self.setAutoFormatting(AUTO_FORMATTING[mode])
+
+    def get_auto_formatting(self) -> AutoFormattingStr:
+        """Get the current auto formatting mode.
+
+        Returns:
+            Auto formatting mode
+        """
+        return AUTO_FORMATTING.inverse[self.autoFormatting()]
+
+    def set_word_wrap_mode(self, mode: gui.textoption.WordWrapModeStr):
+        """Set word wrap mode.
+
+        Args:
+            mode: word wrap mode to use
+
+        Raises:
+            InvalidParamError: wrap mode does not exist
+        """
+        if mode not in gui.textoption.WORD_WRAP_MODE:
+            raise InvalidParamError(mode, gui.textoption.WORD_WRAP_MODE)
+        self.setWordWrapMode(gui.textoption.WORD_WRAP_MODE[mode])
+
+    def get_word_wrap_mode(self) -> gui.textoption.WordWrapModeStr:
+        """Get the current word wrap mode.
+
+        Returns:
+            Word wrap mode
+        """
+        return gui.textoption.WORD_WRAP_MODE.inverse[self.wordWrapMode()]
 
 
 if __name__ == "__main__":

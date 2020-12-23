@@ -3,7 +3,7 @@ from typing import Union
 
 from qtpy import QtWidgets
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, widgets
 
 
 QtWidgets.QTextBrowser.__bases__ = (widgets.TextEdit,)
@@ -17,13 +17,9 @@ class TextBrowser(QtWidgets.QTextBrowser):
         super().__init__(*args, **kwargs)
         self.setOpenExternalLinks(True)
 
-    def serialize_fields(self):
-        return dict(text=self.text(), font=gui.Font(self.font()))
-
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.setPlainText(state["text"])
-        self.setEnabled(state.get("enabled", True))
-        self.setFont(state["font"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
