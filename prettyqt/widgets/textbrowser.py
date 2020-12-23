@@ -1,5 +1,5 @@
 import pathlib
-from typing import Union
+from typing import List, Union
 
 from qtpy import QtWidgets
 
@@ -17,9 +17,18 @@ class TextBrowser(QtWidgets.QTextBrowser):
         super().__init__(*args, **kwargs)
         self.setOpenExternalLinks(True)
 
+    def serialize_fields(self):
+        return dict(
+            open_external_links=self.openExternalLinks(),
+            open_links=self.openLinks(),
+            search_paths=self.get_search_paths(),
+        )
+
     def __setstate__(self, state):
         super().__setstate__(state)
-        self.setPlainText(state["text"])
+        self.setOpenExternalLinks(state["open_external_links"])
+        self.setOpenLinks(state["open_links"])
+        self.set_search_paths(state["search_paths"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -61,6 +70,12 @@ class TextBrowser(QtWidgets.QTextBrowser):
 
         html = docutils.core.publish_string(source, writer_name="html")
         self.setHtml(str(html))
+
+    def get_search_paths(self) -> List[pathlib.Path]:
+        return [pathlib.Path(p) for p in self.searchPaths()]
+
+    def set_search_paths(self, paths: List[Union[str, pathlib.Path]]):
+        self.setSearchPaths([str(p) for p in paths])
 
 
 if __name__ == "__main__":

@@ -341,7 +341,7 @@ class ObjectBrowser(widgets.MainWindow):
             attr_details = self._attr_details[button_id]
             data = attr_details.get_label(tree_item)
             self.editor.set_text(data)
-            self.editor.set_wrap_mode(attr_details.line_wrap)
+            self.editor.set_word_wrap_mode(attr_details.line_wrap)
 
         except Exception as ex:
             with self.editor.edit_stylesheet() as ss:

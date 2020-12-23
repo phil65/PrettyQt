@@ -852,10 +852,10 @@ def test_plaintextedit(qtbot):
     widget.scroll_to_top()
     widget.scroll_to_bottom()
     widget.set_value("test")
-    widget.set_wrap_mode("anywhere")
+    widget.set_word_wrap_mode("anywhere")
     with pytest.raises(InvalidParamError):
-        widget.set_wrap_mode("test")
-    assert widget.get_wrap_mode() == "anywhere"
+        widget.set_word_wrap_mode("test")
+    assert widget.get_word_wrap_mode() == "anywhere"
     widget.set_line_wrap_mode("widget_width")
     with pytest.raises(InvalidParamError):
         widget.set_line_wrap_mode("test")
