@@ -22,7 +22,7 @@ def test_quickitem():
 
 def test_quickpainteditem():
     item = quick.QuickPaintedItem()
-    item.get_fillcolor()
+    item.get_fill_color()
     item.get_texture_size()
     item.set_render_target("framebuffer_object")
     with pytest.raises(InvalidParamError):

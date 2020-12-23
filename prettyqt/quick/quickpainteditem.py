@@ -24,7 +24,7 @@ QtQuick.QQuickPaintedItem.__bases__ = (quick.QuickItem,)
 
 
 class QuickPaintedItem(QtQuick.QQuickPaintedItem):
-    def get_fillcolor(self) -> gui.Color:
+    def get_fill_color(self) -> gui.Color:
         return gui.Color(self.fillColor())
 
     def get_texture_size(self) -> core.Size:
