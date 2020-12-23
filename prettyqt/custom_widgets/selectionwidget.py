@@ -13,7 +13,6 @@ from typing import (
 from qtpy import QtWidgets
 
 from prettyqt import constants, core, iconprovider, widgets
-from prettyqt.utils import autoslot
 
 
 TypeStr = Literal["string", "int", "float"]
@@ -112,7 +111,7 @@ class SelectionWidget(widgets.GroupBox):
             return self.widget_custom.get_value()
         return None
 
-    @autoslot.AutoSlot
+    @core.Slot(bool)
     def update_choice(self, checked: bool):
         if not checked:
             return

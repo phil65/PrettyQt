@@ -3,7 +3,6 @@ from typing import Dict, Iterable, Iterator, Mapping, Optional, Tuple, Union
 from qtpy import QtWidgets
 
 from prettyqt import core, widgets
-from prettyqt.utils import autoslot
 
 
 class FlagSelectionWidget(widgets.GroupBox):
@@ -47,7 +46,7 @@ class FlagSelectionWidget(widgets.GroupBox):
                 ret_val |= flag
         return int(ret_val)
 
-    @autoslot.AutoSlot
+    @core.Slot(bool)
     def update_choice(self, checked: bool):
         choice = self.current_choice()
         self.value_changed.emit(choice)
