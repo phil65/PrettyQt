@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Tuple
+from typing import Literal, Tuple
 
 from qtpy import QtGui
 
@@ -16,6 +16,10 @@ TRANSFORMATION_TYPE = bidict(
     shear=QtGui.QTransform.TxShear,
     project=QtGui.QTransform.TxProject,
 )
+
+TransformationTypeStr = Literal[
+    "none", "translate", "scale", "rotate", "shear", "project"
+]
 
 
 class Transform(QtGui.QTransform):
@@ -77,7 +81,7 @@ class Transform(QtGui.QTransform):
             transform.m33(),
         )
 
-    def get_type(self) -> str:
+    def get_type(self) -> TransformationTypeStr:
         return TRANSFORMATION_TYPE.inverse[self.type()]
 
 

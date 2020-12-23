@@ -29,6 +29,8 @@ SpecialAddressStr = Literal[
     "null", "localhost", "localhost_ipv6", "broadcast", "any_ipv4", "any_ipv6", "any"
 ]
 
+NetworkLayerProtocolStr = Literal["ipv4", "ipv6", "any_ip", "unknown"]
+
 
 class HostAddress(QtNetwork.QHostAddress):
     def __repr__(self):
@@ -40,7 +42,7 @@ class HostAddress(QtNetwork.QHostAddress):
     def __bool__(self):
         return not self.isNull()
 
-    def get_protocol(self) -> network.abstractsocket.NetworkLayerProtocolStr:
+    def get_protocol(self) -> NetworkLayerProtocolStr:
         return network.abstractsocket.NETWORK_LAYER_PROTOCOL.inverse[self.protocol()]
 
     def set_address(self, address: Union[int, str]):

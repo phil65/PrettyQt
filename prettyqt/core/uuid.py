@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import Literal
+
 from qtpy import QtCore
 
 from prettyqt.utils import bidict
@@ -9,6 +13,8 @@ STRING_FORMATS = bidict(
     id_128=QtCore.QUuid.Id128,
 )
 
+StringFormatStr = Literal["with_braces", "without_braces", "id_128"]
+
 VARIANTS = bidict(
     unknown=QtCore.QUuid.VarUnknown,
     ncs=QtCore.QUuid.NCS,
@@ -16,6 +22,8 @@ VARIANTS = bidict(
     microsoft=QtCore.QUuid.Microsoft,
     reserved=QtCore.QUuid.Reserved,
 )
+
+VariantStr = Literal["unknown", "ncs", "dce", "microsoft", "reserved"]
 
 VERSION = bidict(
     unknown=QtCore.QUuid.VerUnknown,
@@ -26,6 +34,8 @@ VERSION = bidict(
     random=QtCore.QUuid.Random,
     sha1=QtCore.QUuid.Sha1,
 )
+
+VersionStr = Literal["unknown", "time", "embedded_posix", "name", "random", "sha1"]
 
 
 class Uuid(QtCore.QUuid):
@@ -41,14 +51,14 @@ class Uuid(QtCore.QUuid):
     def __reduce__(self):
         return type(self), (self.toString(),)
 
-    def get_variant(self) -> str:
+    def get_variant(self) -> VariantStr:
         return VARIANTS.inverse[self.variant()]
 
-    def get_version(self) -> str:
+    def get_version(self) -> VersionStr:
         return VERSION.inverse[self.version()]
 
     @classmethod
-    def create_uuid(cls):
+    def create_uuid(cls) -> Uuid:
         # workaround for PySide2, not able to clone in ctor
         return cls(cls.createUuid().toString())
 

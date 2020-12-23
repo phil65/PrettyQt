@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtLocation
 
@@ -19,6 +19,19 @@ FEATURE_TYPES = bidict(
     traffic=QtLocation.QGeoRouteRequest.TrafficFeature,
 )
 
+FeatureTypeStr = Literal[
+    "none",
+    "toll",
+    "highway",
+    "public_transit",
+    "ferry",
+    "tunnel",
+    "dirt_road",
+    "parks",
+    "motor_pool_lane",
+    "traffic",
+]
+
 FEATURE_WEIGHTS = bidict(
     neutral=QtLocation.QGeoRouteRequest.NeutralFeatureWeight,
     prefer=QtLocation.QGeoRouteRequest.PreferFeatureWeight,
@@ -27,10 +40,14 @@ FEATURE_WEIGHTS = bidict(
     disallow=QtLocation.QGeoRouteRequest.DisallowFeatureWeight,
 )
 
+FeatureWeightStr = Literal["neutral", "prefer", "require", "avoid", "disallow"]
+
 MANEUVER_DETAIL = bidict(
     none=QtLocation.QGeoRouteRequest.NoManeuvers,
     basic=QtLocation.QGeoRouteRequest.BasicManeuvers,
 )
+
+ManeuverDetailStr = Literal["none", "basic"]
 
 ROUTE_OPTIMIZATION = mappers.FlagMap(
     QtLocation.QGeoRouteRequest.RouteOptimizations,
@@ -40,10 +57,14 @@ ROUTE_OPTIMIZATION = mappers.FlagMap(
     most_scenic=QtLocation.QGeoRouteRequest.MostScenicRoute,
 )
 
+RouteOptimizationStr = Literal["shortest", "fastest", "most_economic", "most_scenic"]
+
 SEGMENT_DETAIL = bidict(
     none=QtLocation.QGeoRouteRequest.NoSegmentData,
     basic=QtLocation.QGeoRouteRequest.BasicSegmentData,
 )
+
+SegmentDetailStr = Literal["none", "basic"]
 
 TRAVEL_MODE = bidict(
     car=QtLocation.QGeoRouteRequest.CarTravel,
@@ -52,6 +73,8 @@ TRAVEL_MODE = bidict(
     public_transit=QtLocation.QGeoRouteRequest.PublicTransitTravel,
     truck=QtLocation.QGeoRouteRequest.TruckTravel,
 )
+
+TravelModeStr = Literal["car", "pedestrian", "bicycle", "public_transit", "truck"]
 
 
 class GeoRouteRequest(QtLocation.QGeoRouteRequest):
@@ -64,10 +87,8 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
     def get_departure_time(self) -> core.DateTime:
         return core.DateTime(self.departureTime())
 
-    def set_feature_weight(self, feature: str, weight: str):
+    def set_feature_weight(self, feature: FeatureTypeStr, weight: FeatureWeightStr):
         """Set the feature weight.
-
-        Allowed values for weight: "neutral", "prefer", "require", "avoid", "disallow"
 
         Args:
             feature: Feature type
@@ -82,10 +103,8 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
             raise InvalidParamError(feature, FEATURE_TYPES)
         self.setFeatureWeight(FEATURE_TYPES[feature], FEATURE_WEIGHTS[weight])
 
-    def get_feature_weight(self, feature: str) -> str:
+    def get_feature_weight(self, feature: FeatureTypeStr) -> FeatureWeightStr:
         """Return current feature weight.
-
-        Possible values for weight: "neutral", "prefer", "require", "avoid", "disallow"
 
         Returns:
             Feature weight
@@ -94,10 +113,8 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
             raise InvalidParamError(feature, FEATURE_TYPES)
         return FEATURE_WEIGHTS.inverse[self.featureWeight(FEATURE_TYPES[feature])]
 
-    def set_route_optimization(self, optimization: str):
+    def set_route_optimization(self, optimization: RouteOptimizationStr):
         """Set the route optimization.
-
-        Allowed values are "shortest", "fastest", "most_economic", "most_scenic"
 
         Args:
             optimization: Route optimization
@@ -109,20 +126,18 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
             raise InvalidParamError(optimization, ROUTE_OPTIMIZATION)
         self.setRouteOptimization(ROUTE_OPTIMIZATION[optimization])
 
-    def get_route_optimization(self) -> str:
+    def get_route_optimization(self) -> RouteOptimizationStr:
         """Return current route optimization.
-
-        Possible values: "shortest", "fastest", "most_economic", "most_scenic"
 
         Returns:
             Route optimization
         """
         return ROUTE_OPTIMIZATION.inverse[self.routeOptimization()]
 
-    def get_travel_modes(self) -> List[str]:
+    def get_travel_modes(self) -> List[TravelModeStr]:
         return [k for k, v in TRAVEL_MODE.items() if v & self.travelModes()]
 
-    def set_travel_modes(self, *mode: str):
+    def set_travel_modes(self, *mode: TravelModeStr):
         for item in mode:
             if item not in TRAVEL_MODE:
                 raise InvalidParamError(item, TRAVEL_MODE)

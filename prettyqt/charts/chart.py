@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy.QtCharts import QtCharts
 
@@ -19,6 +19,17 @@ THEMES = bidict(
     }
 )
 
+ThemeStr = Literal[
+    "Light",
+    "Blue Cerulean",
+    "Dark",
+    "Brown Sand",
+    "Blue NCS",
+    "High Contrast",
+    "Blue Icy",
+    "Qt",
+]
+
 ANIMATION_OPTIONS = bidict(
     none=QtCharts.QChart.NoAnimation,
     grid_axis=QtCharts.QChart.GridAxisAnimations,
@@ -26,11 +37,15 @@ ANIMATION_OPTIONS = bidict(
     all=QtCharts.QChart.AllAnimations,
 )
 
+AnimationOptionStr = Literal["none", "grid_axis", "series", "all"]
+
 CHART_TYPES = bidict(
     undefined=QtCharts.QChart.ChartTypeUndefined,
     cartesian=QtCharts.QChart.ChartTypeCartesian,
     polar=QtCharts.QChart.ChartTypePolar,
 )
+
+ChartTypeStr = Literal["undefined", "cartesian", "polar"]
 
 
 QtCharts.QChart.__bases__ = (widgets.GraphicsWidget,)
@@ -83,10 +98,10 @@ class Chart(QtCharts.QChart):
             raise InvalidParamError(alignment, constants.SIDES)
         self.legend().setAlignment(constants.SIDES[alignment])
 
-    def set_theme(self, theme_name: str):
+    def set_theme(self, theme_name: ThemeStr):
         self.setTheme(THEMES[theme_name])
 
-    def set_animation_options(self, option: str):
+    def set_animation_options(self, option: AnimationOptionStr):
         self.setAnimationOptions(ANIMATION_OPTIONS[option])
 
     def apply_nice_numbers(self):
@@ -111,7 +126,7 @@ class Chart(QtCharts.QChart):
         # if self.axisY().min() < self.min_y:
         self.axisY().setMin(max(0, self.min_y))
 
-    def get_chart_type(self) -> str:
+    def get_chart_type(self) -> ChartTypeStr:
         return CHART_TYPES.inverse[self.chartType()]
 
     def get_margins(self) -> core.Margins:
@@ -123,10 +138,10 @@ class Chart(QtCharts.QChart):
     def get_locale(self) -> core.Locale:
         return core.Locale(self.locale())
 
-    def get_theme(self) -> str:
+    def get_theme(self) -> ThemeStr:
         return THEMES.inverse[self.theme()]
 
-    def get_animation_options(self) -> List[str]:
+    def get_animation_options(self) -> List[AnimationOptionStr]:
         return [k for k, v in ANIMATION_OPTIONS.items() if v & self.animationOptions()]
 
     def get_animation_easing_curve(self) -> core.EasingCurve:

@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Literal, Optional
 
 from qtpy import QtLocation
 
@@ -20,6 +20,21 @@ INSTRUCTION_DIRECTION = bidict(
     light_left=QtLocation.QGeoManeuver.DirectionLightLeft,
     bear_left=QtLocation.QGeoManeuver.DirectionBearLeft,
 )
+
+InstructionDirectionStr = Literal[
+    "none",
+    "forward",
+    "bear_right",
+    "light_right",
+    "right",
+    "hard_right",
+    "u_turn_right",
+    "u_turn_left",
+    "hard_left",
+    "left",
+    "light_left",
+    "bear_left",
+]
 
 
 class GeoManeuver(QtLocation.QGeoManeuver):
@@ -49,12 +64,8 @@ class GeoManeuver(QtLocation.QGeoManeuver):
             return None
         return positioning.GeoCoordinate(wp)
 
-    def set_direction(self, direction: str):
+    def set_direction(self, direction: InstructionDirectionStr):
         """Set the direction.
-
-        Allowed values are "none", "forward", "bear_right", "light_right", "right",
-                           "hard_right", "u_turn_right", "bear_left", "light_left",
-                           "left", "hard_left", "u_turn_left"
 
         Args:
             direction: Direction
@@ -66,12 +77,8 @@ class GeoManeuver(QtLocation.QGeoManeuver):
             raise InvalidParamError(direction, INSTRUCTION_DIRECTION)
         self.setDirection(INSTRUCTION_DIRECTION[direction])
 
-    def get_direction(self) -> str:
+    def get_direction(self) -> InstructionDirectionStr:
         """Return current direction.
-
-        Possible values: "none", "forward", "bear_right", "light_right", "right",
-                         "hard_right", "u_turn_right", "bear_left", "light_left", "left",
-                         "hard_left", "u_turn_left"
 
         Returns:
             Direction
