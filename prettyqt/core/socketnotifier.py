@@ -24,8 +24,6 @@ class SocketNotifier(QtCore.QSocketNotifier):
     def get_type(self) -> TypeStr:
         """Return socket event type.
 
-        Possible values: "read", "write", "exception"
-
         Returns:
             socket event type
         """

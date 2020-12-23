@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtGui
 
 from prettyqt import gui
@@ -15,16 +17,23 @@ STYLES = bidict(
     upper_roman=QtGui.QTextListFormat.ListUpperRoman,
 )
 
+StyleStr = Literal[
+    "disc",
+    "circle",
+    "square",
+    "decimal",
+    "lower_alpha",
+    "upper_alpha",
+    "lower_roman",
+    "upper_roman",
+]
 
 QtGui.QTextListFormat.__bases__ = (gui.TextFormat,)
 
 
 class TextListFormat(QtGui.QTextListFormat):
-    def set_style(self, style: str):
+    def set_style(self, style: StyleStr):
         """Set the style.
-
-        Valid values are "disc", "circle", square", "decimal", "lower_alpha",
-                         "upper_alpha", "lower_roman", upper_roman"
 
         Args:
             style: style
@@ -36,11 +45,8 @@ class TextListFormat(QtGui.QTextListFormat):
             raise InvalidParamError(style, STYLES)
         self.setStyle(STYLES[style])
 
-    def get_style(self) -> str:
+    def get_style(self) -> StyleStr:
         """Get current style.
-
-        Possible values are "disc", "circle", square", "decimal", "lower_alpha",
-                            "upper_alpha", "lower_roman", upper_roman"
 
         Returns:
             current style

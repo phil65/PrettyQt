@@ -97,7 +97,7 @@ class ObjectBrowser(widgets.MainWindow):
         if self._tree_model.inspected_node_is_visible:
             self.obj_tree.expand(first_row_index)
 
-    def _add_instance(self):
+    def _add_instance(self) -> int:
         """Adds the browser window to the list of browser references.
 
         If a None is present in the list it is inserted at that position, otherwise

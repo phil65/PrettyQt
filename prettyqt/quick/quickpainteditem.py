@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtQuick
 
 from prettyqt import core, gui, quick
@@ -8,12 +10,15 @@ PERFORMANCE_HINT = bidict(
     fast_fbo_resizing=QtQuick.QQuickPaintedItem.FastFBOResizing,
 )
 
+PerformanceHintStr = Literal["fast_fbo_resizing"]
+
 RENDER_TARGET = bidict(
     image=QtQuick.QQuickPaintedItem.Image,
     framebuffer_object=QtQuick.QQuickPaintedItem.FramebufferObject,
     inverted_y_framebuffer_object=QtQuick.QQuickPaintedItem.InvertedYFramebufferObject,
 )
 
+RenderTargetStr = Literal["image", "framebuffer_object" "inverted_y_framebuffer_object"]
 
 QtQuick.QQuickPaintedItem.__bases__ = (quick.QuickItem,)
 
@@ -25,10 +30,8 @@ class QuickPaintedItem(QtQuick.QQuickPaintedItem):
     def get_texture_size(self) -> core.Size:
         return core.Size(self.textureSize())
 
-    def set_render_target(self, target: str):
+    def set_render_target(self, target: RenderTargetStr):
         """Set the render target.
-
-        Allowed values are "image", "framebuffer_object", "inverted_y_framebuffer_object"
 
         Args:
             target: render target to use
@@ -40,10 +43,8 @@ class QuickPaintedItem(QtQuick.QQuickPaintedItem):
             raise InvalidParamError(target, RENDER_TARGET)
         self.setRenderTarget(RENDER_TARGET[target])
 
-    def get_render_target(self) -> str:
+    def get_render_target(self) -> RenderTargetStr:
         """Return the render target.
-
-        Possible values: "image", "framebuffer_object", "inverted_y_framebuffer_object"
 
         Returns:
             render target
