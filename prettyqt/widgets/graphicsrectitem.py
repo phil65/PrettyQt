@@ -15,3 +15,7 @@ class GraphicsRectItem(QtWidgets.QGraphicsRectItem):
 
     def serialize_fields(self):
         return dict(rect=self.get_rect())
+
+    def __setstate__(self, state):
+        super().__setstate__(state)
+        self.setRect(state["rect"])

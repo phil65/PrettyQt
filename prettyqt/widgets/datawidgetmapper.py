@@ -24,6 +24,12 @@ class DataWidgetMapper(QtWidgets.QDataWidgetMapper):
             submit_policy=self.get_submit_policy(),
         )
 
+    def __setstate__(self, state):
+        super().__setstate__(state)
+        self.set_orientation(state["orientation"])
+        self.set_submit_policy(state["submit_policy"])
+        self.setCurrentIndex(state["current_index"])
+
     def set_orientation(self, orientation: constants.OrientationStr):
         """Set the orientation of the data widget mapper.
 

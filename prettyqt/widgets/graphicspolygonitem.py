@@ -8,11 +8,11 @@ QtWidgets.QGraphicsPolygonItem.__bases__ = (widgets.AbstractGraphicsShapeItem,)
 
 
 class GraphicsPolygonItem(QtWidgets.QGraphicsPolygonItem):
-    def get_polygon(self) -> gui.PolygonF:
-        return gui.PolygonF(self.polygon())
-
     def serialize_fields(self):
         return dict(polygon=self.get_polygon(), fill_rule=self.get_fill_rule())
+
+    def get_polygon(self) -> gui.PolygonF:
+        return gui.PolygonF(self.polygon())
 
     def set_fill_rule(self, rule: constants.FillRuleStr):
         if rule not in constants.FILL_RULE:

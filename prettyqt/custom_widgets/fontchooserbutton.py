@@ -1,6 +1,6 @@
-from typing import Optional
+from typing import Optional, Union
 
-from qtpy import QtWidgets
+from qtpy import QtGui, QtWidgets
 
 from prettyqt import core, gui, widgets
 
@@ -9,7 +9,11 @@ class FontChooserButton(widgets.Widget):
 
     value_changed = core.Signal(gui.Font)
 
-    def __init__(self, font=None, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(
+        self,
+        font: Optional[QtGui.QFont] = None,
+        parent: Optional[QtWidgets.QWidget] = None,
+    ):
         super().__init__(parent)
         self._current_font = font
         layout = widgets.BoxLayout("horizontal", self)
@@ -27,11 +31,12 @@ class FontChooserButton(widgets.Widget):
         return f"{type(self).__name__}({self._current_font})"
 
     def serialize_fields(self):
-        return dict(font=self._current_font)
+        return dict(current_font=self._current_font)
 
     def __setstate__(self, state):
-        if state["font"]:
-            self.set_font(state["font"])
+        super().__setstate__(state)
+        if state["current_font"]:
+            self.set_value(state["current_font"])
         self.set_enabled(state.get("enabled", True))
 
     def __reduce__(self):
@@ -44,18 +49,18 @@ class FontChooserButton(widgets.Widget):
             dlg.setCurrentFont(self._current_font)
 
         if dlg.exec_():
-            self.set_font(dlg.current_font())
+            self.set_current_font(dlg.current_font())
             self.value_changed.emit(dlg.current_font())
 
-    def set_font(self, font):
+    def set_current_font(self, font: Union[str, QtGui.QFont]):
         if isinstance(font, str):
             self._current_font = gui.Font(font)
         else:
             self._current_font = font
         self.lineedit.setText(self._current_font.family())
 
-    def set_value(self, value):
-        self.set_font(value)
+    def set_value(self, value: Union[str, QtGui.QFont]):
+        self.set_current_font(value)
 
     def get_value(self):
         return self._current_font
@@ -64,7 +69,7 @@ class FontChooserButton(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.app()
     btn = FontChooserButton()
-    btn.set_font("Consolas")
+    btn.set_current_font("Consolas")
     btn.show()
     btn.value_changed.connect(print)
     app.main_loop()

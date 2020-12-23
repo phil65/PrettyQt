@@ -20,11 +20,19 @@ class GraphicsBlurEffect(QtWidgets.QGraphicsBlurEffect):
     def serialize_fields(self):
         return dict(blur_radius=self.blurRadius(), blur_hints=self.get_blur_hints())
 
+    def __setstate__(self, state):
+        super().__setstate__(state)
+        self.setBlurRadius(state["blur_radius"])
+        self.set_blur_hints(*state["blur_hints"])
+
     def set_blur_hints(self, *hints: str):
         for item in hints:
             if item not in BLUR_HINTS:
                 raise InvalidParamError(item, BLUR_HINTS)
-        flags = helpers.merge_flags(hints, BLUR_HINTS)
+        if hints:
+            flags = helpers.merge_flags(hints, BLUR_HINTS)
+        else:
+            flags = QtWidgets.QGraphicsBlurEffect.BlurHint()
         self.setBlurHints(flags)
 
     def get_blur_hints(self) -> List[str]:

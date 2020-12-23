@@ -35,6 +35,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
         return dict(items=self.get_children(), direction=self.get_direction())
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.set_direction(state["direction"])
         for item in state["items"]:
             self.add(item)

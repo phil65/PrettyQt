@@ -40,6 +40,19 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
             font=gui.Font(self.font()),
         )
 
+    def __setitem__(self, state):
+        # self.setItem
+        self.setBackgroundBrush(state["background_brush"])
+        self.setForegroundBrush(state["foreground_brush"])
+        self.set_item_index_method(state["item_index_method"])
+        self.setMinimumRenderSize(state["minimum_render_size"])
+        self.setPalette(state["palette"])
+        self.setBspTreeDepth(state["bsp_tree_depth"])
+        self.setFocusOnTouchRelease(state["focus_on_touch"])
+        self.setStickyFocus(state["focus_on_touch"])
+        self.setSceneRect(state["scene_rect"])
+        self.setFont(state["font"])
+
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
 

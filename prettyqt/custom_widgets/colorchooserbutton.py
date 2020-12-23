@@ -25,17 +25,17 @@ class ColorChooserButton(widgets.Widget):
         self.button.setDefaultAction(action)
         layout += self.button
         if color is not None:
-            self.set_color(color)
+            self.set_current_color(color)
 
     def __repr__(self):
         return f"{type(self).__name__}({self.current_color})"
 
     def serialize_fields(self):
-        return dict(color=self.current_color, enabled=self.isEnabled())
+        return dict(current_color=self.current_color, enabled=self.isEnabled())
 
     def __setstate__(self, state):
-        if state["color"]:
-            self.set_color(state["color"])
+        if state["current_color"]:
+            self.set_current_color(state["current_color"])
         self.setEnabled(state.get("enabled", True))
 
     def __reduce__(self):
@@ -48,10 +48,10 @@ class ColorChooserButton(widgets.Widget):
             dlg.setCurrentColor(self.current_color)
 
         if dlg.exec_():
-            self.set_color(dlg.current_color())
+            self.set_current_color(dlg.current_color())
             self.value_changed.emit(dlg.current_color())
 
-    def set_color(self, color: colors.ColorType):
+    def set_current_color(self, color: colors.ColorType):
         self.current_color = colors.get_color(color)
         self.lineedit.set_text(self.current_color.name().upper())
         icon = iconprovider.for_color(self.current_color)
@@ -64,7 +64,7 @@ class ColorChooserButton(widgets.Widget):
         return self.current_color
 
     def set_value(self, value: colors.ColorType):
-        self.set_color(value)
+        self.set_current_color(value)
 
 
 if __name__ == "__main__":

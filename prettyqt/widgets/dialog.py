@@ -19,20 +19,18 @@ class BaseDialog(QtWidgets.QDialog):
         return dict(
             layout=self.layout(),
             is_maximized=self.isMaximized(),
-            has_sizegrip=self.isSizeGripEnabled(),
+            size_grip_enabled=self.isSizeGripEnabled(),
             size=(self.size().width(), self.size().height()),
         )
 
     def __setstate__(self, state):
-        self.set_title(state["window_title"])
-        self.set_icon(state["icon"])
+        super().__setstate__(state)
         if state["layout"]:
             self.set_layout(state["layout"])
-        self.resize(state["size"])
-        self.setSizeGripEnabled(state["has_sizegrip"])
+        self.resize(*state["size"])
+        self.setSizeGripEnabled(state["size_grip_enabled"])
         if state["is_maximized"]:
             self.showMaximized()
-        self.resize(*state["size"])
         self.box = self.layout()
 
     def __reduce__(self):

@@ -66,6 +66,19 @@ class GraphicsView(QtWidgets.QGraphicsView):
             is_interactive=self.isInteractive(),
         )
 
+    def __setitem__(self, state):
+        self.setScene(state["scene"])
+        self.setBackgroundBrush(state["background_brush"])
+        self.setForegroundBrush(state["foreground_brush"])
+        self.set_transformation_anchor(state["transformation_anchor"])
+        self.set_resize_anchor(state["resicze_anchor"])
+        self.set_viewport_update_mode(state["viewport_update_mode"])
+        self.set_drag_mode(state["drag_mode"])
+        self.set_rubberband_selection_mode(state["rubberband_selection_mode"])
+        self.setSceneRect(state["scene_rect"])
+        self.set_cache_mode(state["cache_mode"])
+        self.setInteractive(state["is_interactive"])
+
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
 

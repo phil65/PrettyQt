@@ -16,3 +16,9 @@ class GraphicsTextItem(QtWidgets.QGraphicsTextItem):
             text_width=self.textWidth(),
             plain_text=self.toPlainText(),
         )
+
+    def __setstate__(self, state):
+        super().__setstate__(state)
+        self.setOpenExternalLinks(state["open_external_links"])
+        self.setTextWidth(state["text_width"])
+        self.setPlainText(state["plain_text"])

@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 
 from qtpy import QtWidgets
 
@@ -33,6 +33,19 @@ QtWidgets.QFrame.__bases__ = (widgets.Widget,)
 
 
 class Frame(QtWidgets.QFrame):
+    def serialize_fields(self):
+        return dict(
+            frame_shadow=self.get_frame_shadow(),
+            frame_shape=self.get_frame_shape(),
+            frame_rect=self.frameRect(),
+        )
+
+    def __setstate__(self, state):
+        super().__setstate__(state)
+        self.set_frame_shadow(state["frame_shadow"])
+        self.set_frame_shape(state["frame_shape"])
+        self.setFrameRect(state["frame_rect"])
+
     def set_frame_shadow(self, style: ShadowStr):
         """Set frame shadow.
 
@@ -42,17 +55,21 @@ class Frame(QtWidgets.QFrame):
         Raises:
             InvalidParamError: style does not exist
         """
+        if style is None:
+            return
         if style not in SHADOW:
             raise InvalidParamError(style, SHADOW)
         self.setFrameShadow(SHADOW[style])
 
-    def get_frame_shadow(self) -> ShadowStr:
+    def get_frame_shadow(self) -> Optional[ShadowStr]:
         """Return current frame shadow.
 
         Returns:
             frame style
         """
-        return SHADOW.inverse[self.frameShadow()]
+        if (frame_shadow := self.frameShadow()) == 0:
+            return None
+        return SHADOW.inverse[frame_shadow]
 
     def set_frame_shape(self, shape: FrameShapeStr):
         """Set frame shape.

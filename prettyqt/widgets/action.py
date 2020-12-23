@@ -91,6 +91,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         )
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.set_text(state.get("text", ""))
         self.set_enabled(state.get("enabled", True))
         self.set_shortcut(state["shortcut"])

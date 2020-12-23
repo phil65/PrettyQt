@@ -11,6 +11,7 @@ class ScrollArea(QtWidgets.QScrollArea):
         return dict(widget=self.widget(), resizable=self.widgetResizable())
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.set_widget(state["widget"])
         self.setWidgetResizable(state["resizable"])
 

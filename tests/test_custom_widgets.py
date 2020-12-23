@@ -39,7 +39,7 @@ def test_expandableline(qtbot):
 
 def test_colorchooserbutton(qtbot):
     btn = custom_widgets.ColorChooserButton()
-    btn.set_color("green")
+    btn.set_current_color("green")
     with open("data.pkl", "wb") as jar:
         pickle.dump(btn, jar)
     with open("data.pkl", "rb") as jar:
