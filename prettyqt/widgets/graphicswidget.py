@@ -15,11 +15,11 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
     def serialize_fields(self):
         return dict(
             autofill_background=self.autoFillBackground(),
-            font=gui.Font(self.font()),
+            font=self.get_font(),
             window_title=self.windowTitle(),
             preferred_size=self.preferredSize(),
             maximum_size=self.maximumSize(),
-            palette=gui.Palette(self.palette()),
+            palette=self.get_palette(),
             focus_policy=self.get_focus_policy(),
         )
 
@@ -70,6 +70,12 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
         if isinstance(point, tuple):
             point = QtCore.QPoint(*point)
         return constants.WINDOW_FRAME_SECTION.inverse[self.windowFrameSectionAt(point)]
+
+    def get_font(self) -> gui.Font:
+        return gui.Font(self.font())
+
+    def get_palette(self) -> gui.Palette:
+        return gui.Palette(self.palette())
 
 
 if __name__ == "__main__":

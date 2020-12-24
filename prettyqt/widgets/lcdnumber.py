@@ -27,6 +27,18 @@ QtWidgets.QLCDNumber.__bases__ = (widgets.Frame,)
 
 
 class LCDNumber(QtWidgets.QLCDNumber):
+    def serialize_fields(self):
+        return dict(
+            mode=self.get_mode(),
+            segment_style=self.get_segment_style(),
+            value=self.get_value(),
+        )
+
+    def __setstate__(self, state):
+        self.set_mode(state["mode"])
+        self.set_segment_style(state["segment_style"])
+        self.set_value(state["value"])
+
     def set_mode(self, mode: ModeStr):
         """Set the lcd mode.
 

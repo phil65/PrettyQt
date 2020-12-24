@@ -46,6 +46,14 @@ class MdiArea(QtWidgets.QMdiArea):
             document_mode=self.documentMode(),
         )
 
+    def __setstate__(self, state):
+        super().__setstate__(state)
+        self.set_view_mode(state["view_mode"])
+        self.set_window_order(state["window_order"])
+        self.set_tab_position(state["tab_position"])
+        self.set_background(state["background"])
+        self.setDocumentMode(state["document_mode"])
+
     def set_view_mode(self, mode: ViewModeStr):
         """Set view mode for the MDI area.
 

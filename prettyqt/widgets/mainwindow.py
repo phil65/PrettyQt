@@ -38,18 +38,13 @@ class MainWindow(QtWidgets.QMainWindow):
         return dict(
             central_widget=self.centralWidget(),
             is_maximized=self.isMaximized(),
-            size=(self.size().width(), self.size().height()),
         )
 
     def __setstate__(self, state):
-        self.set_title(state["window_title"])
-        self.set_icon(state["icon"])
         if state["central_widget"]:
             self.setCentralWidget(state["central_widget"])
-        self.resize(state["size"])
         if state["is_maximized"]:
             self.showMaximized()
-        self.resize(*state["size"])
         self.box = self.layout()
 
     def __reduce__(self):

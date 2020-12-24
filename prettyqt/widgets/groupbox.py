@@ -39,6 +39,7 @@ class GroupBox(QtWidgets.QGroupBox):
         )
 
     def __setstate__(self, state):
+        super().__setstate__(state)
         self.setTitle(state["title"])
         self.set_layout(state["layout"])
         self.setCheckable(state["checkable"])

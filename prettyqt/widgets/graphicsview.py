@@ -67,6 +67,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
         )
 
     def __setitem__(self, state):
+        super().__setstate__(state)
         self.setScene(state["scene"])
         self.setBackgroundBrush(state["background_brush"])
         self.setForegroundBrush(state["foreground_brush"])

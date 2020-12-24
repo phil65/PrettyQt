@@ -28,6 +28,19 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         self.setHorizontalScrollBar(self.h_scrollbar)
         self.setVerticalScrollBar(self.v_scrollbar)
 
+    def serialize_fields(self):
+        return dict(
+            size_adjust_policy=self.get_size_adjust_policy(),
+            horizontal_scrollbar_policy=self.get_horizontal_scrollbar_policy(),
+            vertical_scrollbar_policy=self.get_vertical_scrollbar_policy(),
+        )
+
+    def __setstate__(self, state):
+        super().__setstate__(state)
+        self.set_size_adjust_policy(state["size_adjust_policy"])
+        self.set_horizontal_scrollbar_policy(state["horizontal_scrollbar_policy"])
+        self.set_vertical_scrollbar_policy(state["vertical_scrollbar_policy"])
+
     # @property
     # def h_scrollbar(self):
     #     return self.horizontalScrollbar()
@@ -92,6 +105,9 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
             raise InvalidParamError(mode, constants.SCROLLBAR_POLICY)
         self.setHorizontalScrollBarPolicy(constants.SCROLLBAR_POLICY[mode])
 
+    def get_horizontal_scrollbar_policy(self):
+        return constants.SCROLLBAR_POLICY.inverse[self.horizontalScrollBarPolicy()]
+
     def set_vertical_scrollbar_policy(self, mode: constants.ScrollBarPolicyStr):
         """Set the vertical scrollbar visibility.
 
@@ -104,6 +120,9 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         if mode not in constants.SCROLLBAR_POLICY:
             raise InvalidParamError(mode, constants.SCROLLBAR_POLICY)
         self.setVerticalScrollBarPolicy(constants.SCROLLBAR_POLICY[mode])
+
+    def get_vertical_scrollbar_policy(self):
+        return constants.SCROLLBAR_POLICY.inverse[self.verticalScrollBarPolicy()]
 
     def set_scrollbar_width(self, width: int):
         """Set the width for both scrollbars.
