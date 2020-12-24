@@ -10,7 +10,7 @@ class GraphicsLineItem(QtWidgets.QGraphicsLineItem):
     def __repr__(self):
         return f"{type(self).__name__}({repr(self.get_line())})"
 
-    def get_line(self):
+    def get_line(self) -> core.Line:
         return core.LineF(self.line())
 
 
