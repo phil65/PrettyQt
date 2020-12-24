@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from typing import Optional, Tuple, Union
 
+from qtpy import QtCore, QtGui, QtWidgets
+
 from prettyqt import core, iconprovider, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 class IconWidget(widgets.Label):
