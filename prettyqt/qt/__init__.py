@@ -7,7 +7,7 @@ class PythonQtError(ImportError):
     pass
 
 
-os.environ.setdefault("QT_API", "pyside6")
+os.environ.setdefault("QT_API", "pyqt5")
 
 API = os.environ["QT_API"].lower()
 
