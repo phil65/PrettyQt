@@ -7,6 +7,9 @@ QtWidgets.QGraphicsEllipseItem.__bases__ = (widgets.AbstractGraphicsShapeItem,)
 
 
 class GraphicsEllipseItem(QtWidgets.QGraphicsEllipseItem):
+    def __repr__(self):
+        return f"{type(self).__name__}({repr(self.get_rect())})"
+
     def serialize_fields(self):
         return dict(
             rect=self.get_rect(),
