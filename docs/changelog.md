@@ -1,3 +1,9 @@
+## v0.159.0 (2020-12-24)
+
+### Feat
+
+- **LineEdit**: add set/get_cursor_move_style methods
+
 ## v0.158.0 (2020-12-22)
 
 ### Feat
