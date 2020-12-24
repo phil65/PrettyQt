@@ -26,6 +26,15 @@ class Pixmap(QtGui.QPixmap):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
+    def __eq__(self, other):
+        if not isinstance(other, Pixmap):
+            return False
+        # return bytes(self) == bytes(other)
+        return self.toImage() == other.toImage()
+
+    def __hash__(self):
+        return self.cacheKey()
+
     @classmethod
     def from_file(cls, path: Union[pathlib.Path, str]):
         if isinstance(path, str):
