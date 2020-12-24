@@ -4332,7 +4332,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6704,7 +6704,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/gui/keysequence.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toString</span><span class="p">(),)</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toString</span><span class="p">(),)</span>
 </code></pre>
 </div>
 </details>
@@ -8775,7 +8775,7 @@ clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span
           <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">()</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)()</span>
     <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">copy_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
     <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="n">StandardItem</span>
     <span class="k">return</span> <span class="n">item</span>
@@ -10799,8 +10799,6 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Get current style.</p>
-<p>Possible values are "disc", "circle", square", "decimal", "lower_alpha",
-                    "upper_alpha", "lower_roman", upper_roman"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -10811,7 +10809,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['disc', 'circle', 'square', 'decimal', 'lower_alpha', 'upper_alpha', 'lower_roman', 'upper_roman']</code></td>
 <td>
 <p>current style</p>
 </td>
@@ -10821,11 +10819,8 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textlistformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StyleStr</span><span class="p">:</span>
     <span class="sd">"""Get current style.</span>
-
-<span class="sd">    Possible values are "disc", "circle", square", "decimal", "lower_alpha",</span>
-<span class="sd">                        "upper_alpha", "lower_roman", upper_roman"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current style</span>
@@ -10846,8 +10841,6 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
       </h4>
 <div class="doc doc-contents ">
 <p>Set the style.</p>
-<p>Valid values are "disc", "circle", square", "decimal", "lower_alpha",
-                 "upper_alpha", "lower_roman", upper_roman"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -10861,7 +10854,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>str</code></td>
+<td><code>Literal['disc', 'circle', 'square', 'decimal', 'lower_alpha', 'upper_alpha', 'lower_roman', 'upper_roman']</code></td>
 <td>
 <p>style</p>
 </td>
@@ -10889,11 +10882,8 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/textlistformat.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">StyleStr</span><span class="p">):</span>
     <span class="sd">"""Set the style.</span>
-
-<span class="sd">    Valid values are "disc", "circle", square", "decimal", "lower_alpha",</span>
-<span class="sd">                     "upper_alpha", "lower_roman", upper_roman"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        style: style</span>

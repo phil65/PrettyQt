@@ -1054,7 +1054,6 @@ get_render_target<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Return the render target.</p>
-<p>Possible values: "image", "framebuffer_object", "inverted_y_framebuffer_object"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1065,7 +1064,7 @@ get_render_target<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['image', 'framebuffer_objectinverted_y_framebuffer_object']</code></td>
 <td>
 <p>render target</p>
 </td>
@@ -1075,10 +1074,8 @@ get_render_target<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/quick/quickpainteditem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RenderTargetStr</span><span class="p">:</span>
     <span class="sd">"""Return the render target.</span>
-
-<span class="sd">    Possible values: "image", "framebuffer_object", "inverted_y_framebuffer_object"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        render target</span>
@@ -1099,7 +1096,6 @@ set_render_target<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Set the render target.</p>
-<p>Allowed values are "image", "framebuffer_object", "inverted_y_framebuffer_object"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1113,7 +1109,7 @@ set_render_target<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>target</code></td>
-<td><code>str</code></td>
+<td><code>Literal['image', 'framebuffer_objectinverted_y_framebuffer_object']</code></td>
 <td>
 <p>render target to use</p>
 </td>
@@ -1141,10 +1137,8 @@ set_render_target<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/quick/quickpainteditem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">RenderTargetStr</span><span class="p">):</span>
     <span class="sd">"""Set the render target.</span>
-
-<span class="sd">    Allowed values are "image", "framebuffer_object", "inverted_y_framebuffer_object"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        target: render target to use</span>

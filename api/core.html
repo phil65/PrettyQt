@@ -4046,7 +4046,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/bytearray.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">),)</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">),)</span>
 </code></pre>
 </div>
 </details>
@@ -4611,7 +4611,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/date.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -4658,7 +4658,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/datetime.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">date</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -5466,7 +5466,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/line.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -5513,7 +5513,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/linef.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_p1</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -5626,7 +5626,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/point.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -5673,7 +5673,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/pointf.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6016,7 +6016,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/rect.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6063,7 +6063,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/rectf.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6613,7 +6613,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/size.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6660,7 +6660,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/sizef.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>
@@ -6700,7 +6700,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Return socket event type.</p>
-<p>Possible values: "read", "write", "exception"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -6723,8 +6722,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return socket event type.</span>
-
-<span class="sd">    Possible values: "read", "write", "exception"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        socket event type</span>
@@ -7398,7 +7395,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
           <summary>Source code in <code>prettyqt/core/time.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">msec</span><span class="p">())</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">msec</span><span class="p">())</span>
 </code></pre>
 </div>
 </details>

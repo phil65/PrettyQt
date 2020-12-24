@@ -1448,9 +1448,6 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Return current direction.</p>
-<p>Possible values: "none", "forward", "bear_right", "light_right", "right",
-                 "hard_right", "u_turn_right", "bear_left", "light_left", "left",
-                 "hard_left", "u_turn_left"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1461,7 +1458,7 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'forward', 'bear_right', 'light_right', 'right', 'hard_right', 'u_turn_right', 'u_turn_left', 'hard_left', 'left', 'light_left', 'bear_left']</code></td>
 <td>
 <p>Direction</p>
 </td>
@@ -1471,12 +1468,8 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/geomaneuver.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InstructionDirectionStr</span><span class="p">:</span>
     <span class="sd">"""Return current direction.</span>
-
-<span class="sd">    Possible values: "none", "forward", "bear_right", "light_right", "right",</span>
-<span class="sd">                     "hard_right", "u_turn_right", "bear_left", "light_left", "left",</span>
-<span class="sd">                     "hard_left", "u_turn_left"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Direction</span>
@@ -1497,9 +1490,6 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
       </h4>
 <div class="doc doc-contents ">
 <p>Set the direction.</p>
-<p>Allowed values are "none", "forward", "bear_right", "light_right", "right",
-                   "hard_right", "u_turn_right", "bear_left", "light_left",
-                   "left", "hard_left", "u_turn_left"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1513,7 +1503,7 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>direction</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'forward', 'bear_right', 'light_right', 'right', 'hard_right', 'u_turn_right', 'u_turn_left', 'hard_left', 'left', 'light_left', 'bear_left']</code></td>
 <td>
 <p>Direction</p>
 </td>
@@ -1541,12 +1531,8 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/geomaneuver.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">InstructionDirectionStr</span><span class="p">):</span>
     <span class="sd">"""Set the direction.</span>
-
-<span class="sd">    Allowed values are "none", "forward", "bear_right", "light_right", "right",</span>
-<span class="sd">                       "hard_right", "u_turn_right", "bear_left", "light_left",</span>
-<span class="sd">                       "left", "hard_left", "u_turn_left"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        direction: Direction</span>
@@ -1596,7 +1582,6 @@ get_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Return current feature weight.</p>
-<p>Possible values for weight: "neutral", "prefer", "require", "avoid", "disallow"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1607,7 +1592,7 @@ get_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['neutral', 'prefer', 'require', 'avoid', 'disallow']</code></td>
 <td>
 <p>Feature weight</p>
 </td>
@@ -1617,10 +1602,8 @@ get_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/georouterequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="n">FeatureTypeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FeatureWeightStr</span><span class="p">:</span>
     <span class="sd">"""Return current feature weight.</span>
-
-<span class="sd">    Possible values for weight: "neutral", "prefer", "require", "avoid", "disallow"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Feature weight</span>
@@ -1643,7 +1626,6 @@ get_route_optimization<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Return current route optimization.</p>
-<p>Possible values: "shortest", "fastest", "most_economic", "most_scenic"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1654,7 +1636,7 @@ get_route_optimization<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['shortest', 'fastest', 'most_economic', 'most_scenic']</code></td>
 <td>
 <p>Route optimization</p>
 </td>
@@ -1664,10 +1646,8 @@ get_route_optimization<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/georouterequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RouteOptimizationStr</span><span class="p">:</span>
     <span class="sd">"""Return current route optimization.</span>
-
-<span class="sd">    Possible values: "shortest", "fastest", "most_economic", "most_scenic"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Route optimization</span>
@@ -1688,7 +1668,6 @@ set_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
       </h4>
 <div class="doc doc-contents ">
 <p>Set the feature weight.</p>
-<p>Allowed values for weight: "neutral", "prefer", "require", "avoid", "disallow"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1702,7 +1681,7 @@ set_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>feature</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'toll', 'highway', 'public_transit', 'ferry', 'tunnel', 'dirt_road', 'parks', 'motor_pool_lane', 'traffic']</code></td>
 <td>
 <p>Feature type</p>
 </td>
@@ -1710,7 +1689,7 @@ set_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 </tr>
 <tr>
 <td><code>weight</code></td>
-<td><code>str</code></td>
+<td><code>Literal['neutral', 'prefer', 'require', 'avoid', 'disallow']</code></td>
 <td>
 <p>Feature weight</p>
 </td>
@@ -1738,10 +1717,8 @@ set_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/georouterequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="n">FeatureTypeStr</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">FeatureWeightStr</span><span class="p">):</span>
     <span class="sd">"""Set the feature weight.</span>
-
-<span class="sd">    Allowed values for weight: "neutral", "prefer", "require", "avoid", "disallow"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        feature: Feature type</span>
@@ -1770,7 +1747,6 @@ set_route_optimization<span class="p">(</span><span class="bp">self</span><span 
       </h4>
 <div class="doc doc-contents ">
 <p>Set the route optimization.</p>
-<p>Allowed values are "shortest", "fastest", "most_economic", "most_scenic"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1784,7 +1760,7 @@ set_route_optimization<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>optimization</code></td>
-<td><code>str</code></td>
+<td><code>Literal['shortest', 'fastest', 'most_economic', 'most_scenic']</code></td>
 <td>
 <p>Route optimization</p>
 </td>
@@ -1812,10 +1788,8 @@ set_route_optimization<span class="p">(</span><span class="bp">self</span><span 
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/georouterequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimization</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimization</span><span class="p">:</span> <span class="n">RouteOptimizationStr</span><span class="p">):</span>
     <span class="sd">"""Set the route optimization.</span>
-
-<span class="sd">    Allowed values are "shortest", "fastest", "most_economic", "most_scenic"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        optimization: Route optimization</span>
