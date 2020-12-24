@@ -145,10 +145,10 @@ version_files = [
 ]
 
 [build-system]
-requires = ["poetry>=0.12"]
-build-backend = "poetry.masonry.api"
+# requires = ["poetry>=0.12"]
+# build-backend = "poetry.masonry.api"
 # need to check this
-# requires = ["poetry_core>=1.0.0"]
-# build-backend = "poetry.core.masonry.api"
+requires = ["poetry_core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 # for pip install -e .
 # requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4", "pbr"]
