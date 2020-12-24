@@ -1,5 +1,6 @@
 from typing import Any, Dict
 
+from deprecated import deprecated
 from qtpy import QtWidgets
 
 from prettyqt import constants, widgets
@@ -11,7 +12,7 @@ QtWidgets.QDockWidget.__bases__ = (widgets.Widget,)
 class DockWidget(QtWidgets.QDockWidget):
     """Customized DockWidget class.
 
-    Contains a custom TitleBar with maximise button
+    Contains a custom TitleBar with maximize button
     """
 
     def __init__(self, *args, **kwargs):
@@ -33,7 +34,7 @@ class DockWidget(QtWidgets.QDockWidget):
     def serialize_fields(self) -> Dict[str, Any]:
         return dict(widget=self.widget())
 
-    def set_widget(self, widget):
+    def set_widget(self, widget: QtWidgets.QWidget):
         self.setWidget(widget)
 
     def set_allowed_areas(self, area: constants.DockPositionsStr):
@@ -45,17 +46,21 @@ class DockWidget(QtWidgets.QDockWidget):
         layout.set_margin(0)
         layout.set_alignment("right")
         title_bar.set_layout(layout)
-        maximise_button = widgets.PushButton()
-        layout += maximise_button
-        maximise_button.set_style_icon("titlebar_max_button")
-        maximise_button.clicked.connect(self.maximise)
+        maximize_button = widgets.PushButton()
+        layout += maximize_button
+        maximize_button.set_style_icon("titlebar_max_button")
+        maximize_button.clicked.connect(self.maximize)
         close_button = widgets.PushButton()
         close_button.set_style_icon("titlebar_close_button")
         layout += close_button
         close_button.clicked.connect(self.close)
         self.setTitleBarWidget(title_bar)
 
+    @deprecated(reason="This method is deprecated, use 'maximize' instead.")
     def maximise(self):
+        self.maximize()
+
+    def maximize(self):
         if not self.isFloating():
             self.setFloating(True)
         if not self.isMaximized():

@@ -269,7 +269,7 @@ def test_dialogbuttonbox(qtbot):
 def test_dockwidget(qtbot):
     widget = widgets.DockWidget()
     widget.setup_title_bar()
-    widget.maximise()
+    widget.maximize()
     w = widgets.Widget()
     widget.set_widget(w)
     w.raise_dock()
