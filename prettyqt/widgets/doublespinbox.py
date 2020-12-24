@@ -49,7 +49,7 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
             decimals=self.decimals(),
         )
 
-    def set_range(self, start, end):
+    def set_range(self, start: Optional[float], end: Optional[float]):
         if start is None:
             start = -float("inf")
         if end is None:

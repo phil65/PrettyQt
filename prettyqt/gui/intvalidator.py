@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Optional
+
 from qtpy import QtGui
 
 from prettyqt import gui
@@ -22,6 +24,13 @@ class IntValidator(QtGui.QIntValidator):
         if not isinstance(other, type(self)):
             return False
         return self.bottom() == other.bottom() and self.top() == other.top()
+
+    def set_range(self, lower: Optional[int], upper: Optional[int]):
+        if lower is None:
+            lower = 2147483647  # number from docs
+        if upper is None:
+            upper = 2147483647
+        self.setRange(lower, upper)
 
 
 if __name__ == "__main__":
