@@ -1,4 +1,4 @@
-from contextlib import contextmanager
+import contextlib
 import logging
 from typing import Iterator, Mapping, MutableMapping, Optional, Union
 
@@ -105,7 +105,7 @@ class Application(QtWidgets.QApplication):
         #         return widget
         # return None
 
-    @contextmanager
+    @contextlib.contextmanager
     def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
         ss = self.get_stylesheet()
         yield ss

@@ -1,5 +1,5 @@
 from collections import defaultdict
-from contextlib import contextmanager
+import contextlib
 import inspect
 import itertools
 from typing import DefaultDict, List, Optional, Type, TypeVar, Union
@@ -37,7 +37,7 @@ class Object(QtCore.QObject):
                 dct.update(data)
         return dct
 
-    @contextmanager
+    @contextlib.contextmanager
     def block_signals(self):
         self.blockSignals(True)
         yield None

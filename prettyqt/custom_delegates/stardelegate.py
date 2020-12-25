@@ -18,7 +18,6 @@ class StarRating:
         self.max_stars = max_stars
 
     def sizeHint(self):
-        """Tell the caller how big we are."""
         return PAINTING_SCALE_FACTOR * core.Size(self.max_stars, 1)
 
     def paint(
@@ -41,6 +40,8 @@ class StarRating:
                 painter.drawPolygon(STAR_POLYGON, QtCore.Qt.WindingFill)
             elif is_editable:
                 painter.drawPolygon(DIAMOND_POLYGON, QtCore.Qt.WindingFill)
+            else:
+                break
             painter.translate(1.0, 0.0)
         painter.restore()
 

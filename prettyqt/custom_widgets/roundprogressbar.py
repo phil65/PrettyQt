@@ -29,8 +29,8 @@ class RoundProgressBar(widgets.Widget):
 
     def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
         super().__init__(parent)
-        self.min_value = 0.0
-        self.max_value = 100.0
+        self._min_value = 0.0
+        self._max_value = 100.0
         self.current_value = 0.0
         self.null_pos = self.POSITION_TOP
         self.bar_style: BarStyleStr = "donut"
@@ -43,10 +43,10 @@ class RoundProgressBar(widgets.Widget):
         self.gradient_data: List[QtGui.QColor] = list()
 
     def minimum(self):
-        return self.min_value
+        return self._min_value
 
     def maximum(self):
-        return self.max_value
+        return self._max_value
 
     # SETTERS -------------------------------------------------------
 
@@ -94,24 +94,26 @@ class RoundProgressBar(widgets.Widget):
 
     @core.Slot(float, float)
     def set_range(self, minval: float, maxval: float):
-        self.min_value = min(minval, maxval)
-        self.max_value = max(minval, maxval)
-        self.current_value = min(self.max_value, max(self.min_value, self.current_value))
+        self._min_value = min(minval, maxval)
+        self._max_value = max(minval, maxval)
+        self.current_value = min(
+            self._max_value, max(self._min_value, self.current_value)
+        )
         self._rebuild_brush = True
         self.update()
 
     @core.Slot(float)
     def setMinimum(self, val: float):
-        self.set_range(val, self.max_value)
+        self.set_range(val, self._max_value)
 
     @core.Slot(float)
     def setMaximum(self, val: float):
-        self.set_range(self.min_value, val)
+        self.set_range(self._min_value, val)
 
     @core.Slot(float)
     def set_value(self, val: float):
         if self.current_value != val:
-            self.current_value = min(self.max_value, max(self.min_value, val))
+            self.current_value = min(self._max_value, max(self._min_value, val))
             self.update()
 
     def get_value(self) -> float:
@@ -136,48 +138,42 @@ class RoundProgressBar(widgets.Widget):
 
     def _draw_base(self, painter: gui.Painter, rect: core.RectF):
         if self.bar_style == "donut":
-            painter.setPen(
-                gui.Pen(self.palette().shadow().color(), self.outline_pen_width)
-            )
+            pen = gui.Pen(self.palette().shadow().color(), self.outline_pen_width)
+            painter.setPen(pen)
             painter.setBrush(self.palette().base())
             painter.drawEllipse(rect)
         elif self.bar_style == "line":
-            painter.setPen(gui.Pen(self.palette().base().color(), self.outline_pen_width))
+            pen = gui.Pen(self.palette().base().color())
+            painter.setPen(pen, self.outline_pen_width)
             painter.setBrush(QtCore.Qt.NoBrush)
-            painter.drawEllipse(
-                rect.adjusted(
-                    self.outline_pen_width / 2,
-                    self.outline_pen_width / 2,
-                    -self.outline_pen_width / 2,
-                    -self.outline_pen_width / 2,
-                )
-            )
+            width = self.outline_pen_width / 2
+            painter.drawEllipse(rect.adjusted(width, width, -width, -width))
         elif self.bar_style in ("pie", "expand"):
-            painter.setPen(gui.Pen(self.palette().base().color(), self.outline_pen_width))
+            pen = gui.Pen(self.palette().base().color())
+            painter.setPen(pen, self.outline_pen_width)
             painter.setBrush(self.palette().base())
             painter.drawEllipse(rect)
 
     def _draw_value(self, painter: gui.Painter, rect: core.RectF, value: float):
-        if value == self.min_value:
+        if value == self._min_value:
             return
-        diff = self.current_value - self.min_value
-        value_range = self.max_value - self.min_value
+        diff = self.current_value - self._min_value
+        value_range = self._max_value - self._min_value
         delta = max(value_range / diff, 0)
         if self.bar_style == "expand":
             painter.setBrush(self.palette().highlight())
-            painter.setPen(gui.Pen(self.palette().shadow().color(), self.data_pen_width))
+            pen = gui.Pen(self.palette().shadow().color(), self.data_pen_width)
+            painter.setPen(pen)
             radius = (rect.height() / 2) / delta
             painter.drawEllipse(rect.center(), radius, radius)
             return
         elif self.bar_style == "line":
-            painter.setPen(
-                gui.Pen(self.palette().highlight().color(), self.data_pen_width)
-            )
+            pen = gui.Pen(self.palette().highlight().color(), self.data_pen_width)
+            painter.setPen(pen)
             painter.setBrush(QtCore.Qt.NoBrush)
-            p1_width = self.outline_pen_width / 2
-            p2_width = -self.outline_pen_width / 2
-            adjusted = rect.adjusted(p1_width, p1_width, p2_width, p2_width)
-            if value == self.max_value:
+            pen_width = self.outline_pen_width / 2
+            adjusted = rect.adjusted(pen_width, pen_width, -pen_width, -pen_width)
+            if value == self._max_value:
                 painter.drawEllipse(adjusted)
             else:
                 arc_length = 360 / delta
@@ -185,7 +181,7 @@ class RoundProgressBar(widgets.Widget):
             return
         data_path = gui.PainterPath()
         data_path.set_fill_rule("winding")
-        if value == self.max_value:
+        if value == self._max_value:
             data_path.addEllipse(rect)
         else:
             arc_length = 360 / delta
@@ -193,7 +189,8 @@ class RoundProgressBar(widgets.Widget):
             data_path.arcTo(rect, self.null_pos, -arc_length)
             data_path.lineTo(rect.center())
         painter.setBrush(self.palette().highlight())
-        painter.setPen(gui.Pen(self.palette().shadow().color(), self.data_pen_width))
+        pen = gui.Pen(self.palette().shadow().color())
+        painter.setPen(pen, self.data_pen_width)
         painter.drawPath(data_path)
 
     def _calculate_inner_rect(self, outer_radius: float) -> Tuple[core.RectF, float]:
@@ -222,7 +219,7 @@ class RoundProgressBar(widgets.Widget):
         font = self.get_font()
         font.setPixelSize(10)
         metrics = gui.FontMetricsF(font)
-        max_width = metrics.width(self._value_to_text(self.max_value))
+        max_width = metrics.width(self._value_to_text(self._max_value))
         delta = inner_radius / max_width
         font_size = int(font.pixelSize() * delta * 0.75)
         font.setPixelSize(max(font_size, 1))
@@ -236,11 +233,11 @@ class RoundProgressBar(widgets.Widget):
             val = round(value, self.decimals)
             return text_to_draw.replace(r"%v", str(val))
         elif self._update_flags == "percent":
-            procent = (value - self.min_value) / (self.max_value - self.min_value) * 100
-            val = round(procent, self.decimals)
+            pct = (value - self._min_value) / (self._max_value - self._min_value) * 100
+            val = round(pct, self.decimals)
             return text_to_draw.replace(r"%p", str(val))
         elif self._update_flags == "max":
-            val = round(self.max_value - self.min_value + 1, self.decimals)
+            val = round(self._max_value - self._min_value + 1, self.decimals)
             return text_to_draw.replace(r"%m", str(val))
         else:
             return ValueError()
@@ -255,16 +252,16 @@ class RoundProgressBar(widgets.Widget):
         if not self._rebuild_brush or not self.gradient_data:
             return
         self._rebuild_brush = False
+        if self.bar_style == "expand":
+            data_brush = gui.RadialGradient(0.5, 0.5, 0.5, 0.5, 0.5)
+            for i in self.gradient_data:
+                data_brush[i[0]] = i[1]
+        else:
+            data_brush = gui.ConicalGradient(0.5, 0.5, self.null_pos)
+            for i in self.gradient_data:
+                data_brush[1 - i[0]] = i[1]
+        data_brush.set_coordinate_mode("stretch_to_device")
         with self.edit_palette() as palette:
-            if self.bar_style == "expand":
-                data_brush = gui.RadialGradient(0.5, 0.5, 0.5, 0.5, 0.5)
-                for i in self.gradient_data:
-                    data_brush[i[0]] = i[1]
-            else:
-                data_brush = gui.ConicalGradient(0.5, 0.5, self.null_pos)
-                for i in self.gradient_data:
-                    data_brush[1 - i[0]] = i[1]
-            data_brush.set_coordinate_mode("stretch_to_device")
             palette.set_brush("highlight", data_brush)
 
 

@@ -1,4 +1,4 @@
-from contextlib import contextmanager
+import contextlib
 from typing import Any, Callable, Dict, Iterator, Literal, Optional, Union
 
 from deprecated import deprecated
@@ -274,13 +274,13 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         with self.edit_stylesheet() as ss:
             ss.backgroundColor.setValue(col_str)
 
-    @contextmanager
+    @contextlib.contextmanager
     def updates_off(self) -> Iterator[None]:
         self.setUpdatesEnabled(False)
         yield None
         self.setUpdatesEnabled(True)
 
-    @contextmanager
+    @contextlib.contextmanager
     def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
         ss = self.get_stylesheet()
         yield ss
@@ -292,20 +292,20 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:
         return qstylizer.parser.parse(self.styleSheet())
 
-    @contextmanager
+    @contextlib.contextmanager
     def edit_palette(self) -> Iterator[gui.Palette]:
         palette = gui.Palette(self.palette())
         yield palette
         self.setPalette(palette)
 
-    @contextmanager
+    @contextlib.contextmanager
     def edit_font(self) -> Iterator[gui.Font]:
         font = gui.Font(self.font())
         yield font
         self.setFont(font)
 
     @deprecated(reason="This context manager is deprecated, use edit_font instead.")
-    @contextmanager
+    @contextlib.contextmanager
     def current_font(self) -> Iterator[gui.Font]:
         with self.edit_font() as font:
             yield font
