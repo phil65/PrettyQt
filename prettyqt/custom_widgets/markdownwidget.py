@@ -1,34 +1,38 @@
-from prettyqt import gui, widgets
+from prettyqt import widgets
 
 
 class MarkdownWindow(widgets.MainWindow):
     def __init__(self):
         super().__init__()
         self.resize(500, 500)
-        self.web_view = widgets.TextBrowser()
-        self.setCentralWidget(self.web_view)
-        # self.web_view.loadFinished.connect(self._load_finished)
+        self.text_browser = widgets.TextBrowser()
+        self.setCentralWidget(self.text_browser)
+        # self.text_browser.loadFinished.connect(self._load_finished)
         self.create_menu()
 
     # def _load_finished(self):
-    # frame = self.web_view.page()
-    # self.web_view.page().setViewportSize(frame.contentsSize())
+    # frame = self.text_browser.page()
+    # self.text_browser.page().setViewportSize(frame.contentsSize())
     # self.resize(frame.contentsSize())
     # html_data = frame.toHtml()
 
     def create_menu(self):
-        act_exit = widgets.Action(text="&Exit", icon=gui.Icon("exit.png"), parent=self)
-        act_exit.set_shortcut("Ctrl+Q")
-        act_exit.setStatusTip("Exit application")
-        act_exit.triggered.connect(self.close)
-
-        act_open = widgets.Action(text="&Open", icon=gui.Icon("open.png"), parent=self)
-        act_open.set_shortcut("Ctrl+O")
-        act_open.setStatusTip("Open Markdown file")
-        act_open.triggered.connect(self.open_new_file)
-
-        self.statusBar()
-
+        act_exit = widgets.Action(
+            text="&Exit",
+            icon="mdi.exit-to-app",
+            parent=self,
+            shortcut="Ctrl+Q",
+            statustip="Exit application",
+            callback=self.close,
+        )
+        act_open = widgets.Action(
+            text="&Open",
+            icon="mdi.open-in-app",
+            parent=self,
+            shortcut="Ctrl+O",
+            statustip="Open Markdown file",
+            callback=self.open_new_file,
+        )
         menubar = self.menuBar()
         menu_file = menubar.addMenu("&File")
         menu_file.addAction(act_open)
@@ -53,9 +57,8 @@ class MarkdownWindow(widgets.MainWindow):
         try:
             ext = {"All Text Files": [".md", ".markdown", ".txt"]}
             dlg = widgets.FileDialog(mode="open", extension_filter=ext)
-            fname = dlg.open_file()
-            if fname is not None:
-                self.web_view.set_markdown_file(fname[0])
+            if (fname := dlg.open_file()) is not None:
+                self.text_browser.set_markdown_file(fname[0])
         except UnicodeDecodeError:
             self.statusBar().showMessage("Please select only text files")
         except OSError:
@@ -65,6 +68,6 @@ class MarkdownWindow(widgets.MainWindow):
 if __name__ == "__main__":
     app = widgets.app()
     reader = MarkdownWindow()
-    # reader.web_view.load(QtCore.QUrl("blank"))
+    # reader.text_browser.load(QtCore.QUrl("blank"))
     reader.show()
     app.main_loop()
