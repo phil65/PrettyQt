@@ -16,26 +16,13 @@ from prettyqt.iconprovider.iconic_font import IconicFont, set_global_defaults
 _resource: Dict[str, Optional[IconicFont]] = {"iconic": None}
 
 
-def has_valid_font_ids(inst: IconicFont) -> bool:
-    """Validate instance's font ids are loaded to QFontDatabase.
-
-    It is possible that QFontDatabase was reset or QApplication was recreated
-    in both cases it is possible that font is not available.
-    """
-    # Check stored font ids are still available
-    return all(
-        gui.FontDatabase.applicationFontFamilies(font_id)
-        for font_id in inst.fontids.values()
-    )
-
-
 def _instance() -> IconicFont:
     """Return the singleton instance of IconicFont.
 
     Functions ``icon``, ``load_font``, ``charmap``, ``font`` and
     ``set_defaults`` all rebind to methods of the singleton instance of IconicFont.
     """
-    if _resource["iconic"] is None or not has_valid_font_ids(_resource["iconic"]):
+    if _resource["iconic"] is None or not _resource["iconic"].has_valid_font_ids():
         iconic = IconicFont(
             ("fa", "fontawesome4.7-webfont.ttf", "fontawesome4.7-webfont-charmap.json"),
             (
@@ -255,7 +242,7 @@ def set_defaults(**kwargs):
 IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
 
 key_type = Tuple[Optional[str], Optional[str], bool]
-icon_cache: Dict[key_type, QtGui.QIcon] = dict()
+icon_cache: Dict[key_type, QtGui.QIcon] = {}
 
 
 def get_icon(

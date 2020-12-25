@@ -43,7 +43,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
         # Used to keep a reference to detached tabs since their QMainWindow
         # does not have a parent
-        self.detached_tabs: Dict[str, DetachedTab] = dict()
+        self.detached_tabs: Dict[str, DetachedTab] = {}
         if detachable:
             self.set_detachable()
         self.set_closable(closable)

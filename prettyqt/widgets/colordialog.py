@@ -37,7 +37,7 @@ class ColorDialog(QtWidgets.QColorDialog):
         parent: Optional[QtWidgets.QWidget] = None,
     ) -> gui.Color:
         preset = colors.get_color(preset)
-        kwargs = dict(options=cls.ShowAlphaChannel) if allow_alpha else dict()
+        kwargs = dict(options=cls.ShowAlphaChannel) if allow_alpha else {}
         color = cls.getColor(preset, parent, **kwargs)
         return gui.Color(color)
 

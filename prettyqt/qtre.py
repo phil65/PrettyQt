@@ -59,7 +59,7 @@ class Match(core.RegularExpressionMatch):
 
     def groupdict(self, default=None) -> Dict[str, Any]:
         if self.lastindex is None:
-            return dict()
+            return {}
         groups = [
             self.group(i) if i <= self.lastindex else default
             for i in range(self.re.captureCount())

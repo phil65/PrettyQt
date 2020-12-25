@@ -13,7 +13,7 @@ class SelectionMixin:
 
     def __init__(self):
         super().__init__()
-        self.selected = dict()
+        self.selected = {}
 
     def setData(self, index: QtCore.QModelIndex, value, role):
         if not index.isValid():

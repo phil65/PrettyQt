@@ -31,7 +31,7 @@ class SelectionWidget(widgets.GroupBox):
         self.box = widgets.BoxLayout(layout)
         self.widget_custom: Optional[widgets.Widget] = None
         self.rb_other = widgets.RadioButton()
-        self.buttons: Dict[widgets.RadioButton, Any] = dict()
+        self.buttons: Dict[widgets.RadioButton, Any] = {}
         self.set_layout(self.box)
 
     def __iter__(self) -> Iterator[Tuple[widgets.RadioButton, Any]]:

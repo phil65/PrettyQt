@@ -49,7 +49,7 @@ class Application(QtWidgets.QApplication):
         self, settings: Optional[MutableMapping] = None, key: str = "states"
     ):
         settings = core.Settings() if settings is None else settings
-        result = dict()
+        result = {}
         for k, v in SAVE_STATES.items():
             result[k] = {
                 i.objectName(): i.saveState()

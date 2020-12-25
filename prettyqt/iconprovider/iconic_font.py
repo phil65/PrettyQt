@@ -46,6 +46,21 @@ _default_options = {
 
 ZERO_COORD = core.Point(0, 0)
 
+ICON_KW = [
+    "char",
+    "on",
+    "off",
+    "active",
+    "selected",
+    "disabled",
+    "on_active",
+    "on_selected",
+    "on_disabled",
+    "off_active",
+    "off_selected",
+    "off_disabled",
+]
+
 
 def set_global_defaults(**kwargs):
     """Set global defaults for the options passed to the icon painter."""
@@ -144,7 +159,6 @@ class CharIconPainter:
 
         painter.setFont(iconic.font(prefix, draw_size))
         if "offset" in options:
-            rect = core.Rect(rect)
             rect.translate(
                 round(options["offset"][0] * rect.width()),
                 round(options["offset"][1] * rect.height()),
@@ -154,18 +168,18 @@ class CharIconPainter:
             x_center = rect.width() * 0.5
             y_center = rect.height() * 0.5
             painter.translate(x_center, y_center)
-            transfrom = gui.Transform()
-            transfrom.scale(1, -1)
-            painter.setTransform(transfrom, True)
+            transform = gui.Transform()
+            transform.scale(1, -1)
+            painter.setTransform(transform, True)
             painter.translate(-x_center, -y_center)
 
         if "hflip" in options and options["hflip"] is True:
             x_center = rect.width() * 0.5
             y_center = rect.height() * 0.5
             painter.translate(x_center, y_center)
-            transfrom = gui.Transform()
-            transfrom.scale(-1, 1)
-            painter.setTransform(transfrom, True)
+            transform = gui.Transform()
+            transform.scale(-1, 1)
+            painter.setTransform(transform, True)
             painter.translate(-x_center, -y_center)
 
         if "rotated" in options:
@@ -229,6 +243,18 @@ class IconicFont(core.Object):
         self.icon_cache = {}
         for fargs in args:
             self.load_font(*fargs)
+
+    def has_valid_font_ids(self) -> bool:
+        """Validate instance's font ids are loaded to QFontDatabase.
+
+        It is possible that QFontDatabase was reset or QApplication was recreated
+        in both cases it is possible that font is not available.
+        """
+        # Check stored font ids are still available
+        return all(
+            gui.FontDatabase.applicationFontFamilies(font_id)
+            for font_id in self.fontids.values()
+        )
 
     def load_font(
         self,
@@ -330,20 +356,6 @@ class IconicFont(core.Object):
 
         # Handle icons for modes (Active, Disabled, Selected, Normal)
         # and states (On, Off)
-        icon_kw = [
-            "char",
-            "on",
-            "off",
-            "active",
-            "selected",
-            "disabled",
-            "on_active",
-            "on_selected",
-            "on_disabled",
-            "off_active",
-            "off_selected",
-            "off_disabled",
-        ]
         char = options.get("char", name)
         on = options.get("on", char)
         off = options.get("off", char)
@@ -371,9 +383,9 @@ class IconicFont(core.Object):
             "off_selected": off_selected,
             "off_disabled": off_disabled,
         }
-        names = [icon_dict.get(kw, name) for kw in icon_kw]
+        names = [icon_dict.get(kw, name) for kw in ICON_KW]
         prefix, chars = self._get_prefix_chars(names)
-        options.update(dict(zip(*(icon_kw, chars))))
+        options.update(dict(zip(*(ICON_KW, chars))))
         options.update({"prefix": prefix})
 
         # Handle colors for modes (Active, Disabled, Selected, Normal)

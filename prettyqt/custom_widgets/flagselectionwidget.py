@@ -16,7 +16,7 @@ class FlagSelectionWidget(widgets.GroupBox):
     ):
         super().__init__(title=label, parent=parent)
         self.box = widgets.BoxLayout(layout)
-        self.buttons: Dict[widgets.CheckBox, int] = dict()
+        self.buttons: Dict[widgets.CheckBox, int] = {}
         self.set_layout(self.box)
 
     def __iter__(self) -> Iterator[Tuple[widgets.CheckBox, int]]:

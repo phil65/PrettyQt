@@ -4,7 +4,7 @@ from qtpy import QtGui
 
 class PixmapCache(QtGui.QPixmapCache):
     pass
-    # MAP: Dict[str, QtGui.QPixmapCache.Key] = dict()
+    # MAP: Dict[str, QtGui.QPixmapCache.Key] = {}
 
     # def __setitem__(self, key: str, value: QtGui.QPixmap):
     #     cache_key = self.insert(value)

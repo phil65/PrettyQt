@@ -30,7 +30,7 @@ class Object(QtCore.QObject):
         return dict(object_name=self.objectName())
 
     def serialize(self):
-        dct = dict()
+        dct = {}
         for klass in reversed(inspect.getmro(type(self))):
             if "serialize_fields" in klass.__dict__:
                 data = klass.serialize_fields(self)  # type: ignore
