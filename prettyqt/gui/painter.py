@@ -1,5 +1,5 @@
 import contextlib
-from typing import List, Literal, Union
+from typing import Iterator, List, Literal, Union
 
 from qtpy import QtCore, QtGui
 
@@ -74,6 +74,12 @@ class Painter(QtGui.QPainter):
         self.beginNativePainting()
         yield self
         self.endNativePainting()
+
+    @contextlib.contextmanager
+    def edit_pen(self) -> Iterator[gui.Pen]:
+        pen = gui.Pen(self.pen())
+        yield pen
+        self.setPen(pen)
 
     def draw_image(
         self,
