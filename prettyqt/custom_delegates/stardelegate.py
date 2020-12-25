@@ -13,7 +13,7 @@ STAR_POLYGON = gui.PolygonF.create_star()
 class StarRating:
     """Handle the actual painting of the stars themselves."""
 
-    def __init__(self, star_count=1, max_stars=5):
+    def __init__(self, star_count: int = 1, max_stars: int = 5):
         self.star_count = star_count
         self.max_stars = max_stars
 

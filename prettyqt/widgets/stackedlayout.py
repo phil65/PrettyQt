@@ -23,7 +23,7 @@ class StackedLayout(QtWidgets.QStackedLayout):
         self.add(other)
         return self
 
-    def set_current_widget(self, widget):
+    def set_current_widget(self, widget: QtWidgets.QWidget):
         self.setCurrentWidget(widget)
 
 

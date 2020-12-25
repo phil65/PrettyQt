@@ -35,7 +35,7 @@ class StackedWidget(QtWidgets.QStackedWidget):
     def serialize_fields(self):
         return dict(items=list(self))
 
-    def set_current_widget(self, widget):
+    def set_current_widget(self, widget: QtWidgets.QWidget):
         self.setCurrentWidget(widget)
 
 

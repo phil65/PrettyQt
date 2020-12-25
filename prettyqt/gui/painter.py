@@ -42,6 +42,13 @@ RENDER_HINTS = bidict(
     lossless_image_rendering=QtGui.QPainter.LosslessImageRendering,
 )
 
+RenderHintStr = Literal[
+    "antialiasing",
+    "text_antialiasing",
+    "smooth_pixmap_transform",
+    "lossless_image_rendering",
+]
+
 
 class Painter(QtGui.QPainter):
     def __enter__(self):
