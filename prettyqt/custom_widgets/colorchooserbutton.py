@@ -28,10 +28,10 @@ class ColorChooserButton(widgets.Widget):
             self.set_current_color(color)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.current_color})"
+        return f"{type(self).__name__}({self._current_color})"
 
     def serialize_fields(self):
-        return dict(current_color=self.current_color, enabled=self.isEnabled())
+        return dict(current_color=self._current_color, enabled=self.isEnabled())
 
     def __setstate__(self, state):
         if state["current_color"]:
@@ -44,24 +44,25 @@ class ColorChooserButton(widgets.Widget):
     @core.Slot()
     def choose_color(self):
         dlg = widgets.ColorDialog()
-        if self.current_color:
-            dlg.setCurrentColor(self.current_color)
+        if self._current_color:
+            dlg.setCurrentColor(self._current_color)
 
         if dlg.exec_():
-            self.set_current_color(dlg.current_color())
-            self.value_changed.emit(dlg.current_color())
+            new_color = dlg.current_color()
+            self.set_current_color(new_color)
+            self.value_changed.emit(new_color)
 
     def set_current_color(self, color: colors.ColorType):
-        self.current_color = colors.get_color(color)
-        self.lineedit.set_text(self.current_color.name().upper())
-        icon = iconprovider.for_color(self.current_color)
+        self._current_color = colors.get_color(color)
+        self.lineedit.set_text(self._current_color.name().upper())
+        icon = iconprovider.for_color(self._current_color)
         self.button.set_icon(icon)
 
     def is_valid(self) -> bool:
         return self.lineedit.is_valid()
 
     def get_value(self) -> gui.Color:
-        return self.current_color
+        return self._current_color
 
     def set_value(self, value: colors.ColorType):
         self.set_current_color(value)

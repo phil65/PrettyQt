@@ -150,8 +150,9 @@ def _icon(*names, **kwargs) -> QtGui.QIcon:
     return _instance().icon(*names, **kwargs)
 
 
-def for_color(color_str: str) -> gui.Icon:
-    color = gui.Color.from_text(color_str)
+def for_color(color: Union[str, QtGui.QColor]) -> gui.Icon:
+    if isinstance(color, str):
+        color = gui.Color.from_text(color)
     if color.isValid():
         bitmap = gui.Pixmap(16, 16)
         bitmap.fill(color)
