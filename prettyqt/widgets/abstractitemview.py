@@ -9,13 +9,13 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 
 logger = logging.getLogger(__name__)
 
-TRIGGERS = bidict(
+EDIT_TRIGGERS = bidict(
     none=QtWidgets.QAbstractItemView.NoEditTriggers,
     double_click=QtWidgets.QAbstractItemView.DoubleClicked,
     edit_key=QtWidgets.QAbstractItemView.EditKeyPressed,
 )
 
-TriggerStr = Literal["none", "double_click", "edit_key"]
+EditTriggerStr = Literal["none", "double_click", "edit_key"]
 
 SELECTION_BEHAVIOUR = bidict(
     rows=QtWidgets.QAbstractItemView.SelectRows,
@@ -173,16 +173,16 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setDefaultDropAction(QtCore.Qt.MoveAction)
         self.setDropIndicatorShown(True)
 
-    def set_edit_triggers(self, *triggers: Optional[str]):
+    def set_edit_triggers(self, *triggers: Optional[EditTriggerStr]):
         items = ["none" if t is None else t for t in triggers]
         for item in items:
-            if item not in TRIGGERS:
-                raise InvalidParamError(item, TRIGGERS)
-        flags = helpers.merge_flags(items, TRIGGERS)
+            if item not in EDIT_TRIGGERS:
+                raise InvalidParamError(item, EDIT_TRIGGERS)
+        flags = helpers.merge_flags(items, EDIT_TRIGGERS)
         self.setEditTriggers(flags)
 
-    def get_edit_triggers(self) -> List[str]:
-        return [k for k, v in TRIGGERS.items() if v & self.editTriggers()]
+    def get_edit_triggers(self) -> List[EditTriggerStr]:
+        return [k for k, v in EDIT_TRIGGERS.items() if v & self.editTriggers()]
 
     def set_selection_behaviour(self, behaviour: SelectionBehaviourStr):
         """Set selection behaviour for given item view.

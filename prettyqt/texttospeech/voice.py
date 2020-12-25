@@ -1,4 +1,5 @@
 import logging
+from typing import Literal
 
 from qtpy import PYQT5, PYSIDE2
 
@@ -21,18 +22,22 @@ AGE = bidict(
     other=QtTextToSpeech.QVoice.Other,
 )
 
+AgeStr = Literal["child", "teenager", "adult", "senior", "other"]
+
 GENDER = bidict(
     male=QtTextToSpeech.QVoice.Male,
     female=QtTextToSpeech.QVoice.Female,
     unknown=QtTextToSpeech.QVoice.Unknown,
 )
 
+GenderStr = Literal["male", "female", "unknown"]
+
 
 class Voice(QtTextToSpeech.QVoice):
-    def get_age(self) -> str:
+    def get_age(self) -> AgeStr:
         return AGE.inverse[self.age()]
 
-    def get_gender(self) -> str:
+    def get_gender(self) -> GenderStr:
         return GENDER.inverse[self.gender()]
 
 

@@ -364,8 +364,10 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     ):
         if layout is None:
             return
-        if layout in ["horizontal", "vertical"]:
-            self.box = widgets.BoxLayout(layout)
+        if layout == "horizontal":
+            self.box = widgets.BoxLayout("horizontal")
+        elif layout == "vertical":
+            self.box = widgets.BoxLayout("vertical")
         elif layout == "grid":
             self.box = widgets.GridLayout()
         elif layout == "form":

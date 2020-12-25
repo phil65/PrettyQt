@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtNetwork
 
@@ -17,7 +17,16 @@ INTERFACE_FLAGS = bidict(
     can_multicast=QtNetwork.QNetworkInterface.CanMulticast,
 )
 
-INTERFACE_TYPES = bidict(
+InterfaceFlagStr = Literal[
+    "is_up",
+    "is_running",
+    "can_broadcast",
+    "is_loop_back",
+    "is_point_to_point",
+    "can_multicast",
+]
+
+INTERFACE_TYPE = bidict(
     unknown=QtNetwork.QNetworkInterface.Unknown,
     loopback=QtNetwork.QNetworkInterface.Loopback,
     virtual=QtNetwork.QNetworkInterface.Virtual,
@@ -34,22 +43,35 @@ INTERFACE_TYPES = bidict(
     ieee1394=QtNetwork.QNetworkInterface.Ieee1394,
 )
 
+InterfaceTypeStr = Literal[
+    "unknown",
+    "loopback",
+    "virtual",
+    "ethernet",
+    "wifi",
+    "can_bus",
+    "fddi",
+    "ppp",
+    "slip",
+    "phonet",
+    "ieee802154",
+    "sixlowpan",
+    "ieee80216",
+    "ieee1394",
+]
+
 
 class NetworkInterface(QtNetwork.QNetworkInterface):
     # def __bool__(self):
     #     return self.isValid()
 
-    def get_type(self) -> str:
+    def get_type(self) -> InterfaceTypeStr:
         """Get the interface type.
-
-        Possible values: "unknown", "loopback", "virtual", "ethernet", "wifi",
-                         "can_bus", "fddi", "ppp", "slip", "phonet"
-                         "ieee802154", "sixlowpan", "ieee80216", "ieee1394"
 
         Returns:
             interface type
         """
-        return INTERFACE_TYPES.inverse[self.type()]
+        return INTERFACE_TYPE.inverse[self.type()]
 
     def get_address_entries(self) -> List[network.NetworkAddressEntry]:
         return [network.NetworkAddressEntry(i) for i in self.addressEntries()]

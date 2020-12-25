@@ -14,7 +14,7 @@ class Settings:
     maximum_framerate: float
     minimum_framerate: float
     pixel_aspect_ratio: Tuple[int, int]
-    pixel_format: str
+    pixel_format: multimedia.videoframe.PixelFormatStr
     resolution: Tuple[int, int]
 
 
@@ -40,12 +40,12 @@ class CameraViewfinderSettings(QtMultimedia.QCameraViewfinderSettings):
     def __len__(self):
         return len(self.to_dict())
 
-    def set_pixel_format(self, fmt: str):
+    def set_pixel_format(self, fmt: multimedia.videoframe.PixelFormatStr):
         if fmt not in multimedia.videoframe.PIXEL_FORMAT:
             raise InvalidParamError(fmt, multimedia.videoframe.PIXEL_FORMAT)
         self.setPixelFormat(multimedia.videoframe.PIXEL_FORMAT[fmt])
 
-    def get_pixel_format(self) -> str:
+    def get_pixel_format(self) -> multimedia.videoframe.PixelFormatStr:
         return multimedia.videoframe.PIXEL_FORMAT.inverse[self.pixelFormat()]
 
     def to_dataclass(self) -> Settings:

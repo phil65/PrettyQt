@@ -57,7 +57,9 @@ class TabBar(QtWidgets.QTabBar):
     def __getitem__(self, index: Tuple[int, str]):
         return self.tabButton(index[0], POSITIONS[index[1]])
 
-    def __setitem__(self, index: Tuple[int, str], value: Optional[QtWidgets.QWidget]):
+    def __setitem__(
+        self, index: Tuple[int, PositionStr], value: Optional[QtWidgets.QWidget]
+    ):
         self.set_tab(index[0], index[1], value)
 
     def serialize_fields(self):
@@ -102,7 +104,7 @@ class TabBar(QtWidgets.QTabBar):
         return core.Size(self.iconSize())
 
     def set_tab(
-        self, index: int, position: str, widget: Optional[QtWidgets.QWidget]
+        self, index: int, position: PositionStr, widget: Optional[QtWidgets.QWidget]
     ) -> None:
         self.setTabButton(index, POSITIONS[position], widget)  # type: ignore
 

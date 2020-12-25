@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtLocation
 
 from prettyqt import core
@@ -17,6 +19,19 @@ ERROR = bidict(
     unknown=QtLocation.QPlaceReply.UnknownError,
 )
 
+ErrorStr = Literal[
+    "none",
+    "place_does_not_exist",
+    "category_does_not_exist",
+    "communication",
+    "parse",
+    "permissions",
+    "unsupported",
+    "bad_argument",
+    "cancel",
+    "unknown",
+]
+
 TYPE = bidict(
     generic=QtLocation.QPlaceReply.Reply,
     details=QtLocation.QPlaceReply.DetailsReply,
@@ -27,27 +42,30 @@ TYPE = bidict(
     match=QtLocation.QPlaceReply.MatchReply,
 )
 
+TypeStr = Literal[
+    "generic",
+    "details",
+    "search",
+    "search_suggestion",
+    "content",
+    "id",
+    "match",
+]
+
 QtLocation.QPlaceReply.__bases__ = (core.Object,)
 
 
 class PlaceReply(QtLocation.QPlaceReply):
-    def get_error(self) -> str:
+    def get_error(self) -> ErrorStr:
         """Return error type.
-
-        possible values: "none" "place_does_not_exist", "category_does_not_exist",
-                         "communication", "parse", "permissions", "unsupported",
-                         "bad_argument", "cancel", "unknown"
 
         Returns:
             Error type
         """
         return ERROR.inverse[self.error()]
 
-    def get_type(self) -> str:
+    def get_type(self) -> TypeStr:
         """Return type.
-
-        possible values: "generic" "details", "search",
-                         "search_suggestion", "content", "id", "match",
 
         Returns:
             Type

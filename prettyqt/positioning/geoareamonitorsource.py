@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import PYQT5, PYSIDE2
 
 
@@ -20,10 +22,14 @@ ERRORS = bidict(
     unknown_source=QtPositioning.QGeoAreaMonitorSource.UnknownSourceError,
 )
 
+ErrorStr = Literal["access_error", "insufficient_pos_info", "none", "unknown_source"]
+
 AREA_MONITOR_FEATURES = bidict(
     persistent_area=QtPositioning.QGeoAreaMonitorSource.PersistentAreaMonitorFeature,
     any_area=QtPositioning.QGeoAreaMonitorSource.AnyAreaMonitorFeature,
 )
+
+AreaMonitorFeatureStr = Literal["persistent_area", "any_area"]
 
 
 class GeoAreaMonitorSource(QtPositioning.QGeoAreaMonitorSource):
@@ -33,10 +39,8 @@ class GeoAreaMonitorSource(QtPositioning.QGeoAreaMonitorSource):
     def __repr__(self):
         return f"{type(self).__name__}({self.name()!r})"
 
-    def get_error(self) -> str:
+    def get_error(self) -> AreaMonitorFeatureStr:
         """Return error type.
-
-        possible values: "access_error" "insufficient_pos_info", "none", "unkown_source"
 
         Returns:
             error type

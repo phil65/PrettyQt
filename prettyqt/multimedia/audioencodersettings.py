@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Iterator
+from typing import Any, Dict, Iterator, Literal
 
 from qtpy import QtMultimedia
 
 from prettyqt.utils import InvalidParamError, bidict
 
 
-QUALITIES = bidict(
+QUALITY = bidict(
     very_low=QtMultimedia.QMultimedia.VeryLowQuality,
     low=QtMultimedia.QMultimedia.LowQuality,
     normal=QtMultimedia.QMultimedia.NormalQuality,
@@ -16,12 +16,18 @@ QUALITIES = bidict(
     very_high=QtMultimedia.QMultimedia.VeryHighQuality,
 )
 
-ENCODING_MODES = bidict(
+QualityStr = Literal["very_low", "low", "normal", "high", "very_high"]
+
+ENCODING_MODE = bidict(
     constant_quality=QtMultimedia.QMultimedia.ConstantQualityEncoding,
     constant_bit_rate=QtMultimedia.QMultimedia.ConstantBitRateEncoding,
     average_bit_rate=QtMultimedia.QMultimedia.AverageBitRateEncoding,
     two_pass_encoding=QtMultimedia.QMultimedia.TwoPassEncoding,
 )
+
+EncodingModeStr = Literal[
+    "constant_quality", "constant_bit_rate", "average_bit_rate", "two_pass_encoding"
+]
 
 
 @dataclass
@@ -29,9 +35,9 @@ class Settings:
     bitrate: int
     channel_count: int
     codec: str
-    encoding_mode: str
+    encoding_mode: EncodingModeStr
     encoding_options: Dict[str, Any]
-    quality: str
+    quality: QualityStr
     sample_rate: int
 
 
@@ -61,21 +67,21 @@ class AudioEncoderSettings(QtMultimedia.QAudioEncoderSettings):
     def __len__(self):
         return len(self.to_dict())
 
-    def set_encoding_mode(self, mode: str):
-        if mode not in ENCODING_MODES:
-            raise InvalidParamError(mode, ENCODING_MODES)
-        self.setEncodingMode(ENCODING_MODES[mode])
+    def set_encoding_mode(self, mode: EncodingModeStr):
+        if mode not in ENCODING_MODE:
+            raise InvalidParamError(mode, ENCODING_MODE)
+        self.setEncodingMode(ENCODING_MODE[mode])
 
-    def get_encoding_mode(self) -> str:
-        return ENCODING_MODES.inverse[self.encodingMode()]
+    def get_encoding_mode(self) -> EncodingModeStr:
+        return ENCODING_MODE.inverse[self.encodingMode()]
 
-    def set_quality(self, quality: str):
-        if quality not in QUALITIES:
-            raise InvalidParamError(quality, QUALITIES)
-        self.setQuality(QUALITIES[quality])
+    def set_quality(self, quality: QualityStr):
+        if quality not in QUALITY:
+            raise InvalidParamError(quality, QUALITY)
+        self.setQuality(QUALITY[quality])
 
-    def get_quality(self) -> str:
-        return QUALITIES.inverse[self.quality()]
+    def get_quality(self) -> QualityStr:
+        return QUALITY.inverse[self.quality()]
 
     def to_dataclass(self) -> Settings:
         return Settings(

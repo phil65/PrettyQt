@@ -1,5 +1,5 @@
 import pathlib
-from typing import Optional, Union
+from typing import Literal, Optional, Union
 
 from qtpy import PYQT5, PYSIDE2
 
@@ -20,6 +20,8 @@ TYPES = bidict(
     tasks=QtWinExtras.QWinJumpListCategory.Tasks,
 )
 
+TypeStr = Literal["custom", "recent", "frequent", "tasks"]
+
 
 class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
     def __contains__(self, item):
@@ -31,7 +33,7 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
     def __bool__(self):
         return not self.isEmpty()
 
-    def get_type(self) -> str:
+    def get_type(self) -> TypeStr:
         return TYPES.inverse[self.type()]
 
     def add_destination(self, destination: Union[str, pathlib.Path]) -> None:

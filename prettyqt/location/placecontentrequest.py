@@ -5,10 +5,8 @@ from prettyqt.utils import InvalidParamError
 
 
 class PlaceContentRequest(QtLocation.QPlaceContentRequest):
-    def set_content_type(self, typ: str):
+    def set_content_type(self, typ: location.placecontent.TypeStr):
         """Set the content type.
-
-        Allowed values are "none", "image", "review", "editorial", "custom"
 
         Args:
             typ: Relevance type
@@ -20,10 +18,8 @@ class PlaceContentRequest(QtLocation.QPlaceContentRequest):
             raise InvalidParamError(typ, location.placecontent.TYPE)
         self.setContentType(location.placecontent.TYPE[typ])
 
-    def get_content_type(self) -> str:
+    def get_content_type(self) -> location.placecontent.TypeStr:
         """Return current content type.
-
-        Possible values: "none", "image", "review", "editorial", "custom"
 
         Returns:
             Relevance type

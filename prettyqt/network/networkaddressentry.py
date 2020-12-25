@@ -19,8 +19,6 @@ class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
     def get_dns_eligibility(self) -> DnsEligibilityStatusStr:
         """Return whether this address is eligible for publication in the DNS.
 
-        Possible values: "unknown", "eligible", "ineligible"
-
         Returns:
             DNS eligibility
         """
@@ -28,8 +26,6 @@ class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
 
     def set_dns_eligibility(self, status: DnsEligibilityStatusStr):
         """Set the DNS eligibility flag for this address to status.
-
-        Valid values: "unknown", "eligible", "ineligible"
 
         Args:
             status: DNS eligibility status

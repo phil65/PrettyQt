@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtWidgets
 
@@ -11,6 +11,8 @@ BLUR_HINTS = bidict(
     quality=QtWidgets.QGraphicsBlurEffect.QualityHint,
     animation=QtWidgets.QGraphicsBlurEffect.AnimationHint,
 )
+
+BlurHintStr = Literal["performance", "quality", "animation"]
 
 
 QtWidgets.QGraphicsBlurEffect.__bases__ = (widgets.GraphicsEffect,)
@@ -25,7 +27,7 @@ class GraphicsBlurEffect(QtWidgets.QGraphicsBlurEffect):
         self.setBlurRadius(state["blur_radius"])
         self.set_blur_hints(*state["blur_hints"])
 
-    def set_blur_hints(self, *hints: str):
+    def set_blur_hints(self, *hints: BlurHintStr):
         for item in hints:
             if item not in BLUR_HINTS:
                 raise InvalidParamError(item, BLUR_HINTS)
@@ -35,5 +37,5 @@ class GraphicsBlurEffect(QtWidgets.QGraphicsBlurEffect):
             flags = QtWidgets.QGraphicsBlurEffect.BlurHint()
         self.setBlurHints(flags)
 
-    def get_blur_hints(self) -> List[str]:
+    def get_blur_hints(self) -> List[BlurHintStr]:
         return [k for k, v in BLUR_HINTS.items() if v & self.blurHints()]

@@ -144,7 +144,7 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
         flags = helpers.merge_flags(mode, TRAVEL_MODE)
         self.setTravelModes(flags)
 
-    def get_feature_types(self) -> List[str]:
+    def get_feature_types(self) -> List[FeatureTypeStr]:
         return [k for k, v in FEATURE_TYPES.items() for t in self.featureTypes() if v & t]
 
 

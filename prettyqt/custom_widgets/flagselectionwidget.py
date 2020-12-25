@@ -1,4 +1,4 @@
-from typing import Dict, Iterable, Iterator, Mapping, Optional, Tuple, Union
+from typing import Dict, Iterable, Iterator, Literal, Mapping, Optional, Tuple, Union
 
 from qtpy import QtWidgets
 
@@ -11,7 +11,7 @@ class FlagSelectionWidget(widgets.GroupBox):
     def __init__(
         self,
         label: str = "",
-        layout: str = "vertical",
+        layout: Literal["horizontal", "vertical"] = "vertical",
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(title=label, parent=parent)

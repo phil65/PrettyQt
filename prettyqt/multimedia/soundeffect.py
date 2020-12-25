@@ -14,11 +14,13 @@ STATUS = bidict(
     error=QtMultimedia.QSoundEffect.Error,
 )
 
+StatusStr = Literal["null", "loading", "ready", "error"]
+
 QtMultimedia.QSoundEffect.__bases__ = (core.Object,)
 
 
 class SoundEffect(QtMultimedia.QSoundEffect):
-    def get_status(self) -> str:
+    def get_status(self) -> StatusStr:
         return STATUS.inverse[self.status()]
 
     def set_source(self, source: Union[str, pathlib.Path, QtCore.QUrl]):

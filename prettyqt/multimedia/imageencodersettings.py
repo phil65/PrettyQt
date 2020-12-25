@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Iterator, Tuple
+from typing import Any, Dict, Iterator, Literal, Tuple
 
 from qtpy import QtMultimedia
 
 from prettyqt.utils import InvalidParamError, bidict
 
 
-QUALITIES = bidict(
+QUALITY = bidict(
     very_low=QtMultimedia.QMultimedia.VeryLowQuality,
     low=QtMultimedia.QMultimedia.LowQuality,
     normal=QtMultimedia.QMultimedia.NormalQuality,
@@ -16,12 +16,14 @@ QUALITIES = bidict(
     very_high=QtMultimedia.QMultimedia.VeryHighQuality,
 )
 
+QualityStr = Literal["very_low", "low", "normal", "high", "very_high"]
+
 
 @dataclass
 class Settings:
     codec: str
     encoding_options: Dict[str, Any]
-    quality: str
+    quality: QualityStr
     resolution: Tuple[int, int]
 
 
@@ -45,13 +47,13 @@ class ImageEncoderSettings(QtMultimedia.QImageEncoderSettings):
     def __len__(self):
         return len(self.to_dict())
 
-    def set_quality(self, quality: str):
-        if quality not in QUALITIES:
-            raise InvalidParamError(quality, QUALITIES)
-        self.setQuality(QUALITIES[quality])
+    def set_quality(self, quality: QualityStr):
+        if quality not in QUALITY:
+            raise InvalidParamError(quality, QUALITY)
+        self.setQuality(QUALITY[quality])
 
-    def get_quality(self) -> str:
-        return QUALITIES.inverse[self.quality()]
+    def get_quality(self) -> QualityStr:
+        return QUALITY.inverse[self.quality()]
 
     def to_dataclass(self) -> Settings:
         size = self.resolution()

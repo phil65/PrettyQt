@@ -1,5 +1,5 @@
 import logging
-from typing import List
+from typing import List, Literal
 
 from qtpy import PYQT5, PYSIDE2
 
@@ -22,12 +22,13 @@ STATE = bidict(
     backend_error=QtTextToSpeech.QTextToSpeech.BackendError,
 )
 
+StateStr = Literal["ready", "speaking", "paused", "backend_error"]
 
 QtTextToSpeech.QTextToSpeech.__bases__ = (core.Object,)
 
 
 class TextToSpeech(QtTextToSpeech.QTextToSpeech):
-    def get_state(self) -> str:
+    def get_state(self) -> StateStr:
         return STATE.inverse[self.state()]
 
     def get_locale(self) -> core.Locale:

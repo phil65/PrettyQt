@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtLocation
 
 from prettyqt import location
@@ -12,12 +14,12 @@ TYPE = bidict(
     custom=QtLocation.QPlaceContent.CustomType,
 )
 
+TypeStr = Literal["none", "image", "review", "editorial", "custom"]
+
 
 class PlaceContent(QtLocation.QPlaceContent):
-    def get_type(self) -> str:
+    def get_type(self) -> TypeStr:
         """Return the visibility of the place.
-
-        Possible values are "none", "image", "review", "editorial", "custom"
 
         Returns:
             Place type

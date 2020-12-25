@@ -28,6 +28,8 @@ OPTIMIZATION_FLAGS = bidict(
     dont_adjust_for_antialiasing=QtWidgets.QGraphicsView.DontAdjustForAntialiasing,
 )
 
+OptimizationFlagStr = Literal["dont_save_painter_state", "dont_adjust_for_antialiasing"]
+
 VIEWPORT_ANCHOR = bidict(
     none=QtWidgets.QGraphicsView.NoAnchor,
     view_center=QtWidgets.QGraphicsView.AnchorViewCenter,
@@ -216,14 +218,14 @@ class GraphicsView(QtWidgets.QGraphicsView):
         """
         return CACHE_MODES.inverse[self.cacheMode()]
 
-    def set_optimization_flags(self, *items: str):
+    def set_optimization_flags(self, *items: OptimizationFlagStr):
         for item in items:
             if item not in OPTIMIZATION_FLAGS:
                 raise InvalidParamError(item, OPTIMIZATION_FLAGS)
         flags = helpers.merge_flags(items, OPTIMIZATION_FLAGS)
         self.setOptimizationFlags(flags)
 
-    def get_optimization_flags(self) -> List[str]:
+    def get_optimization_flags(self) -> List[OptimizationFlagStr]:
         return [k for k, v in OPTIMIZATION_FLAGS.items() if v & self.optimizationFlags()]
 
 

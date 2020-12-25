@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Literal, Union
 
 from qtpy import QtCore, QtNetwork
 
@@ -13,6 +13,8 @@ CONTENT_TYPES = bidict(
     alternative=QtNetwork.QHttpMultiPart.AlternativeType,
 )
 
+ContentTypeStr = Literal["mixed", "related", "form", "alternative"]
+
 QtNetwork.QHttpMultiPart.__bases__ = (core.Object,)
 
 
@@ -21,10 +23,8 @@ class HttpMultiPart(QtNetwork.QHttpMultiPart):
         self.append(other)
         return self
 
-    def set_content_type(self, typ: str):
+    def set_content_type(self, typ: ContentTypeStr):
         """Set content type.
-
-        Valid values: "mixed", "related", "form", "alternative"
 
         Args:
             typ: content type

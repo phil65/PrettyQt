@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Iterator
+from typing import Any, Dict, Iterator, Literal
 
 from qtpy import QtMultimedia
 
@@ -13,6 +13,8 @@ ENDIAN = bidict(
     little_endian=QtMultimedia.QAudioFormat.LittleEndian,
 )
 
+EndianStr = Literal["big_endian", "little_endian"]
+
 SAMPLE_TYPES = bidict(
     unknown=QtMultimedia.QAudioFormat.Unknown,
     signed_int=QtMultimedia.QAudioFormat.SignedInt,
@@ -20,14 +22,16 @@ SAMPLE_TYPES = bidict(
     float=QtMultimedia.QAudioFormat.Float,
 )
 
+SampleTypeStr = Literal["unknown", "signed_int", "unsigned_int", "float"]
+
 
 @dataclass
 class Settings:
     sample_rate: int
     channel_count: int
     sample_size: int
-    byte_order: str
-    sample_type: str
+    byte_order: EndianStr
+    sample_type: SampleTypeStr
     codec: str
 
 
@@ -55,20 +59,20 @@ class AudioFormat(QtMultimedia.QAudioFormat):
     def __len__(self):
         return len(self.to_dict())
 
-    def set_sample_type(self, mode: str):
+    def set_sample_type(self, mode: SampleTypeStr):
         if mode not in SAMPLE_TYPES:
             raise InvalidParamError(mode, SAMPLE_TYPES)
         self.setSampleType(SAMPLE_TYPES[mode])
 
-    def get_sample_type(self) -> str:
+    def get_sample_type(self) -> SampleTypeStr:
         return SAMPLE_TYPES.inverse[self.sampleType()]
 
-    def set_byte_order(self, order: str):
+    def set_byte_order(self, order: EndianStr):
         if order not in ENDIAN:
             raise InvalidParamError(order, ENDIAN)
         self.setByteOrder(ENDIAN[order])
 
-    def get_byte_order(self) -> str:
+    def get_byte_order(self) -> EndianStr:
         return ENDIAN.inverse[self.byteOrder()]
 
     def to_dataclass(self) -> Settings:

@@ -1,5 +1,5 @@
 import pathlib
-from typing import Iterator, Optional, Union
+from typing import Iterator, Literal, Optional, Union
 
 from qtpy import QtMultimedia
 
@@ -7,13 +7,15 @@ from prettyqt import core, multimedia
 from prettyqt.utils import InvalidParamError, bidict
 
 
-PLAYBACK_MODES = bidict(
+PLAYBACK_MODE = bidict(
     item_once=QtMultimedia.QMediaPlaylist.CurrentItemOnce,
     item_in_loop=QtMultimedia.QMediaPlaylist.CurrentItemInLoop,
     sequential=QtMultimedia.QMediaPlaylist.Sequential,
     loop=QtMultimedia.QMediaPlaylist.Loop,
     random=QtMultimedia.QMediaPlaylist.Random,
 )
+
+PlaybackModeStr = Literal["item_once", "item_in_loop", "sequential", "loop", "random"]
 
 QtMultimedia.QMediaPlaylist.__bases__ = (core.Object, multimedia.MediaBindableInterface)
 
@@ -52,10 +54,8 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
         url = self.media(index).request().url()
         return core.Url(url)
 
-    def set_playback_mode(self, mode: str):
+    def set_playback_mode(self, mode: PlaybackModeStr):
         """Set playback mode for given item view.
-
-        Allowed values are "item_once", "item_in_loop", "sequential", "loop", "random"
 
         Args:
             mode: playback mode to use
@@ -63,19 +63,17 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
         Raises:
             InvalidParamError: mode does not exist
         """
-        if mode not in PLAYBACK_MODES:
-            raise InvalidParamError(mode, PLAYBACK_MODES)
-        self.setPlaybackMode(PLAYBACK_MODES[mode])
+        if mode not in PLAYBACK_MODE:
+            raise InvalidParamError(mode, PLAYBACK_MODE)
+        self.setPlaybackMode(PLAYBACK_MODE[mode])
 
-    def get_playback_mode(self) -> str:
+    def get_playback_mode(self) -> PlaybackModeStr:
         """Return current playback mode.
-
-        Possible values: "item_once", "item_in_loop", "sequential", "loop", "random"
 
         Returns:
             playback mode
         """
-        return PLAYBACK_MODES.inverse[self.playbackMode()]
+        return PLAYBACK_MODE.inverse[self.playbackMode()]
 
     # def on_playback_mode_changed(self, mode: int):
-    #     self.playback_mode_changed.emit(PLAYBACK_MODES.inverse[mode])
+    #     self.playback_mode_changed.emit(PLAYBACK_MODE.inverse[mode])

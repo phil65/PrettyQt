@@ -22,7 +22,7 @@ QtWidgets.QBoxLayout.__bases__ = (widgets.Layout,)
 class BoxLayout(QtWidgets.QBoxLayout):
     def __init__(
         self,
-        orientation="horizontal",
+        orientation: Literal["horizontal", "vertical"] = "horizontal",
         parent: Optional[QtWidgets.QWidget] = None,
         margin: Optional[int] = None,
     ):

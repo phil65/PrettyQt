@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtLocation
 
@@ -17,6 +17,15 @@ ERROR = bidict(
     failed_to_load=QGeoServiceProvider.LoaderError,
 )
 
+ErrorStr = Literal[
+    "none",
+    "not_supported",
+    "unknown_parameter",
+    "missing_required_parameter",
+    "connection",
+    "failed_to_load",
+]
+
 GEOCODING_FEATURES = bidict(
     none=QtLocation.QGeoServiceProvider.NoGeocodingFeatures,
     online=QtLocation.QGeoServiceProvider.OnlineGeocodingFeature,
@@ -26,6 +35,14 @@ GEOCODING_FEATURES = bidict(
     # any=QtLocation.QGeoServiceProvider.AnyGeocodingFeatures,
 )
 
+GeocodingFeatureStr = Literal[
+    "none",
+    "online",
+    "offline",
+    "reverse",
+    "localized",
+]
+
 MAPPING_FEATURES = bidict(
     none=QtLocation.QGeoServiceProvider.NoMappingFeatures,
     online=QtLocation.QGeoServiceProvider.OnlineMappingFeature,
@@ -34,12 +51,25 @@ MAPPING_FEATURES = bidict(
     # any=QtLocation.QGeoServiceProvider.AnyMappingFeatures,
 )
 
+MappingFeatureStr = Literal[
+    "none",
+    "online",
+    "offline",
+    "localized",
+]
+
 NAVIGATION_FEATURES = bidict(
     none=QtLocation.QGeoServiceProvider.NoNavigationFeatures,
     online=QtLocation.QGeoServiceProvider.OnlineNavigationFeature,
     offline=QtLocation.QGeoServiceProvider.OfflineNavigationFeature,
     # any=QtLocation.QGeoServiceProvider.AnyNavigationFeatures,
 )
+
+NavigationFeatureStr = Literal[
+    "none",
+    "online",
+    "offline",
+]
 
 PLACES_FEATURES = bidict(
     none=QtLocation.QGeoServiceProvider.NoPlacesFeatures,
@@ -57,6 +87,21 @@ PLACES_FEATURES = bidict(
     # any=QtLocation.QGeoServiceProvider.AnyPlacesFeatures,
 )
 
+PlaceFeatureStr = Literal[
+    "none",
+    "online_places",
+    "offline_places",
+    "save_place",
+    "remove_place",
+    "save_category",
+    "remove_category",
+    "place_recommendations",
+    "search_suggestions",
+    "localized_places",
+    "notifications",
+    "place_matching",
+]
+
 ROUTING_FEATURES = bidict(
     none=QtLocation.QGeoServiceProvider.NoRoutingFeatures,
     online=QtLocation.QGeoServiceProvider.OnlineRoutingFeature,
@@ -68,44 +113,53 @@ ROUTING_FEATURES = bidict(
     # any=QtLocation.QGeoServiceProvider.AnyRoutingFeatures,
 )
 
+RoutingFeatureStr = Literal[
+    "none",
+    "online",
+    "offline",
+    "localized",
+    "route_updates",
+    "alternative_routes",
+    "exclude_areas",
+]
 
 QtLocation.QGeoServiceProvider.__bases__ = (core.Object,)
 
 
 class GeoServiceProvider(QtLocation.QGeoServiceProvider):
-    def get_error(self) -> str:
+    def get_error(self) -> ErrorStr:
         return ERROR.inverse[self.error()]
 
-    def get_geocoding_error(self) -> str:
+    def get_geocoding_error(self) -> ErrorStr:
         return ERROR.inverse[self.geocodingError()]
 
-    def get_geocoding_features(self) -> List[str]:
+    def get_geocoding_features(self) -> List[GeocodingFeatureStr]:
         return [k for k, v in GEOCODING_FEATURES.items() if v & self.geocodingFeatures()]
 
-    def get_mapping_error(self) -> str:
+    def get_mapping_error(self) -> ErrorStr:
         return ERROR.inverse[self.mappingError()]
 
-    def get_mapping_features(self) -> List[str]:
+    def get_mapping_features(self) -> List[MappingFeatureStr]:
         return [k for k, v in MAPPING_FEATURES.items() if v & self.mappingFeatures()]
 
-    def get_navigation_error(self) -> str:
+    def get_navigation_error(self) -> ErrorStr:
         return ERROR.inverse[self.navigationError()]
 
-    def get_navigation_features(self) -> List[str]:
+    def get_navigation_features(self) -> List[NavigationFeatureStr]:
         return [
             k for k, v in NAVIGATION_FEATURES.items() if v & self.navigationFeatures()
         ]
 
-    def get_places_error(self) -> str:
+    def get_places_error(self) -> ErrorStr:
         return ERROR.inverse[self.placesError()]
 
-    def get_places_features(self) -> List[str]:
+    def get_places_features(self) -> List[PlaceFeatureStr]:
         return [k for k, v in PLACES_FEATURES.items() if v & self.placesFeatures()]
 
-    def get_routing_error(self) -> str:
+    def get_routing_error(self) -> ErrorStr:
         return ERROR.inverse[self.routingError()]
 
-    def get_routing_features(self) -> List[str]:
+    def get_routing_features(self) -> List[RoutingFeatureStr]:
         return [k for k, v in ROUTING_FEATURES.items() if v & self.routingFeatures()]
 
     def get_geocoding_manager(self) -> location.GeoCodingManager:

@@ -1,15 +1,24 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import QtCore
 
 from prettyqt import core
 
 
+LoadHintStr = Literal[
+    "resolve_all_symbols",
+    "export_external_symbols",
+    "load_archive_member",
+    "prevent_unload",
+    "deep_bind",
+]
+
+
 QtCore.QPluginLoader.__bases__ = (core.Object,)
 
 
 class PluginLoader(QtCore.QPluginLoader):
-    def get_load_hints(self) -> List[str]:
+    def get_load_hints(self) -> List[LoadHintStr]:
         return [
             k
             for k, v in core.library.LOAD_HINTS.items()  # type: ignore

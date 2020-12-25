@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtCore, QtGui
 
 from prettyqt import core
@@ -8,6 +10,8 @@ PERFORMANCE_HINT = bidict(
     moderate=QtGui.QStaticText.ModerateCaching,
     aggressive=QtGui.QStaticText.AggressiveCaching,
 )
+
+PerformanceHintStr = Literal["moderate", "aggressive"]
 
 TEXT_FORMAT = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
@@ -52,10 +56,8 @@ class StaticText(QtGui.QStaticText):
         """
         return TEXT_FORMAT.inverse[self.textFormat()]
 
-    def set_performance_hint(self, hint: str):
+    def set_performance_hint(self, hint: PerformanceHintStr):
         """Set the performance hint.
-
-        Allowed values are "moderate", "aggressive"
 
         Args:
             hint: performance hint to use
@@ -67,10 +69,8 @@ class StaticText(QtGui.QStaticText):
             raise InvalidParamError(hint, PERFORMANCE_HINT)
         self.setPerformanceHint(PERFORMANCE_HINT[hint])
 
-    def get_performance_hint(self) -> str:
+    def get_performance_hint(self) -> PerformanceHintStr:
         """Return current performance hint.
-
-        Possible values: "moderate", "aggressive"
 
         Returns:
             performance hint

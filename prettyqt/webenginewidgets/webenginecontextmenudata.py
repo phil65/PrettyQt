@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Literal
 
 from qtpy import PYQT5, PYSIDE2
 
@@ -26,6 +26,17 @@ EDIT_FLAGS = bidict(
     edit_richly=mod.CanEditRichly,
 )
 
+EditFlagStr = Literal[
+    "undo",
+    "redo",
+    "cut",
+    "copy",
+    "paste",
+    "delete",
+    "select_all",
+    "translate",
+    "edit_richly",
+]
 
 MEDIA_FLAGS = bidict(
     in_error=mod.MediaInError,
@@ -40,6 +51,19 @@ MEDIA_FLAGS = bidict(
     can_rotate=mod.MediaCanRotate,
 )
 
+MediaFlagStr = Literal[
+    "in_error",
+    "paused",
+    "muted",
+    "loop",
+    "can_save",
+    "has_audio",
+    "can_toggle_controls",
+    "controls",
+    "can_print",
+    "can_rotate",
+]
+
 MEDIA_TYPES = bidict(
     none=mod.MediaTypeNone,
     image=mod.MediaTypeImage,
@@ -50,6 +74,8 @@ MEDIA_TYPES = bidict(
     plugin=mod.MediaTypePlugin,
 )
 
+MediaTypeStr = Literal["none", "image", "video", "audio", "canvas", "file", "plugin"]
+
 
 class WebEngineContextMenuData(QtWebEngineWidgets.QWebEngineContextMenuData):
     def get_media_url(self) -> core.Url:
@@ -58,13 +84,13 @@ class WebEngineContextMenuData(QtWebEngineWidgets.QWebEngineContextMenuData):
     def get_link_url(self) -> core.Url:
         return core.Url(self.linkUrl())
 
-    def get_media_type(self) -> str:
+    def get_media_type(self) -> MediaTypeStr:
         return MEDIA_TYPES.inverse[self.mediaType()]
 
-    def get_media_flags(self) -> List[str]:
+    def get_media_flags(self) -> List[MediaFlagStr]:
         return [k for k, v in MEDIA_FLAGS.items() if v & self.mediaFlags()]
 
-    def get_edit_flags(self) -> List[str]:
+    def get_edit_flags(self) -> List[MediaFlagStr]:
         return [k for k, v in EDIT_FLAGS.items() if v & self.editFlags()]
 
     def can_undo(self) -> bool:

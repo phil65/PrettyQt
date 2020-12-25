@@ -160,8 +160,6 @@ class Label(QtWidgets.QLabel):
     def set_text_interaction(self, *types: TextInteractionStr) -> Label:
         """Set the text interaction mode.
 
-        Allowed values are "none", "by_mouse", "by_keyboard", "text_editable"
-
         Args:
             types: text interaction mode to use
 
@@ -177,8 +175,6 @@ class Label(QtWidgets.QLabel):
 
     def get_text_interaction(self) -> List[TextInteractionStr]:
         """Return current text interaction mode.
-
-        Possible values: "none", "by_mouse", "by_keyboard", "text_editable"
 
         Returns:
             list of text interaction modes
