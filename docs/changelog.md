@@ -1,3 +1,12 @@
+## v0.160.0 (2020-12-25)
+
+### Feat
+
+- **gui**: add TextLine module
+- **Doublevalidator**: add set_range method
+- **IntValidator**: add set_range method
+- **Pixmap**: add __eq__ method
+
 ## v0.159.0 (2020-12-24)
 
 ### Feat
