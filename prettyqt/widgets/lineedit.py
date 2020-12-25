@@ -46,6 +46,13 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setPlaceholderText(state["placeholder_text"])
         self.setReadOnly(state["read_only"])
         self.setFrame(state["has_frame"])
+        self.setClearButtonEnabled(state["clear_button_enabled"])
+        self.setAlignment(state["alignment"])
+        self.set_cursor_move_style(state["cursor_move_style"])
+        self.set_echo_mode(state["echo_mode"])
+        self.setCursorPosition(state["cursor_position"])
+        self.setDragEnabled(state["drag_enabled"])
+        self.setModified(state["is_modified"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -57,12 +64,19 @@ class LineEdit(QtWidgets.QLineEdit):
     def serialize_fields(self):
         return dict(
             text=self.text(),
+            # alignment=self.alignment(),
             validator=self.validator(),
             max_length=self.maxLength(),
             read_only=self.isReadOnly(),
             input_mask=self.inputMask(),
             has_frame=self.hasFrame(),
             placeholder_text=self.placeholderText(),
+            clear_button_enabled=self.isClearButtonEnabled(),
+            cursor_move_style=self.get_cursor_move_style(),
+            echo_mode=self.get_echo_mode(),
+            cursor_position=self.cursorPosition(),
+            drag_enabled=self.dragEnabled(),
+            is_modified=self.isModified(),
         )
 
     def font(self) -> gui.Font:
