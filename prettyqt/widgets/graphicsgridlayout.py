@@ -78,12 +78,12 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
     def append(self, item: QtWidgets.QGraphicsLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
-    def set_column_alignment(self, column: int, alignment: str):
+    def set_column_alignment(self, column: int, alignment: constants.AlignmentStr):
         if alignment not in constants.ALIGNMENTS:
             raise InvalidParamError(alignment, constants.ALIGNMENTS)
         self.setColumnAlignment(column, constants.ALIGNMENTS[alignment])
 
-    def set_row_alignment(self, row: int, alignment: str):
+    def set_row_alignment(self, row: int, alignment: constants.AlignmentStr):
         if alignment not in constants.ALIGNMENTS:
             raise InvalidParamError(alignment, constants.ALIGNMENTS)
         self.setRowAlignment(row, constants.ALIGNMENTS[alignment])

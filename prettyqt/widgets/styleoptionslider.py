@@ -1,3 +1,5 @@
+from typing import Literal
+
 from qtpy import QtCore, QtWidgets
 
 from prettyqt import widgets
@@ -31,5 +33,5 @@ class StyleOptionSlider(QtWidgets.QStyleOptionSlider):
         """Set slider orientation to vertical."""
         self.orientation = QtCore.Qt.Vertical
 
-    def get_orientation(self) -> str:
+    def get_orientation(self) -> Literal["horizontal", "vertical"]:
         return "horizontal" if self.is_horizontal() else "vertical"

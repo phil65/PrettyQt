@@ -18,5 +18,5 @@ class ScrollArea(QtWidgets.QScrollArea):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def set_widget(self, widget):
+    def set_widget(self, widget: QtWidgets.QWidget):
         self.setWidget(widget)

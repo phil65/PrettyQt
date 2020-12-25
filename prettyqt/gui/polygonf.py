@@ -72,7 +72,7 @@ class PolygonF(QtGui.QPolygonF):
                 p = core.Point(*p)
             self.append(p)
 
-    def to_polygon(self):
+    def to_polygon(self) -> gui.Polygon:
         return gui.Polygon(self.toPolygon())
 
     @classmethod

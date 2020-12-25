@@ -1,4 +1,4 @@
-from typing import Dict, Literal, Optional, Tuple, Union
+from typing import Dict, List, Literal, Optional, Tuple, Union
 
 from qtpy import QtCore, QtGui, QtWidgets
 
@@ -142,7 +142,7 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         return TAB_POSITION.inverse[self.tabPosition()]
 
-    def get_children(self) -> list:
+    def get_children(self) -> List[tuple]:
         return [
             (
                 self.widget(i),

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import pathlib
 from typing import Union
 
@@ -56,7 +58,7 @@ class Pixmap(QtGui.QPixmap):
         return gui.Image(self.toImage())
 
     @classmethod
-    def create_dot(cls, color="black", size=16):
+    def create_dot(cls, color="black", size: int = 16) -> Pixmap:
         col = gui.Color(color)
         px = cls(size, size)
         px.fill(QtCore.Qt.transparent)

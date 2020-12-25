@@ -104,7 +104,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
             box.add_default_button(k, callback=v)  # type: ignore
         return box
 
-    def on_click(self, button):
+    def on_click(self, button: QtCore.QObject):
         self.button_clicked.emit(button.objectName())
 
     def set_horizontal(self):

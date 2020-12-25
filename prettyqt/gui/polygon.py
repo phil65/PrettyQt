@@ -77,7 +77,7 @@ class Polygon(QtGui.QPolygon):
             self.append(p)
 
     @classmethod
-    def from_xy(cls, xdata, ydata):
+    def from_xy(cls, xdata, ydata) -> Polygon:
         import numpy as np
 
         size = len(xdata)

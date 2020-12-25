@@ -1,4 +1,4 @@
-from typing import Literal, Optional, Union
+from typing import List, Literal, Optional, Union
 
 from qtpy import QtCore, QtWidgets
 
@@ -59,7 +59,7 @@ class Layout(QtWidgets.QLayout):
             enabled=self.isEnabled(),
         )
 
-    def get_children(self) -> list:
+    def get_children(self) -> List[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
         return list(self)
 
     def set_margin(self, margin: int):

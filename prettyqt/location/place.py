@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 from qtpy import QtLocation
 
@@ -25,12 +25,12 @@ class Place(QtLocation.QPlace):
     def get_contact_details(self, contact_type: str) -> List[location.PlaceContactDetail]:
         return [location.PlaceContactDetail(i) for i in self.contactDetails(contact_type)]
 
-    def set_content(self, typ: str, value: dict):
+    def set_content(self, typ: str, value: Dict[int, QtLocation.QPlaceContent]):
         if typ not in location.placecontent.TYPE:
             raise InvalidParamError(typ, location.placecontent.TYPE)
         self.setContent(location.placecontent.TYPE[typ], value)
 
-    def get_content(self, typ: str) -> dict:
+    def get_content(self, typ: str) -> Dict[int, QtLocation.QPlaceContent]:
         if typ not in location.placecontent.TYPE:
             raise InvalidParamError(typ, location.placecontent.TYPE)
         return self.content(location.placecontent.TYPE[typ])

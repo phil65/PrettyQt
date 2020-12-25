@@ -27,7 +27,7 @@ class DateEdit(QtWidgets.QDateEdit):
             range=(self.min_date(), self.max_date()),
         )
 
-    def set_value(self, value):
+    def set_value(self, value: Union[QtCore.QDate, datetime.date]):
         return self.setDate(value)
 
     def set_range(

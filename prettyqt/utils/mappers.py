@@ -1,3 +1,5 @@
+from typing import List
+
 from bidict import bidict
 
 
@@ -25,6 +27,6 @@ class FlagMap:
     def __getattr__(self, attr):
         return getattr(self.bidict, attr)
 
-    def get_list(self, flag):
+    def get_list(self, flag) -> List[str]:
         flag = int(flag)
         return [k for k, v in self.bidict.items() if v & flag]

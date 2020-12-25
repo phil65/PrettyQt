@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import Union
+
 from qtpy import QtGui
 
 
@@ -33,17 +37,16 @@ class Color(QtGui.QColor):
     def serialize(self):
         return self.serialize_fields()
 
-    def set_color(self, color):
+    def set_color(self, color: Union[str, tuple]):
         if isinstance(color, str):
             self.setNamedColor(color)
         else:
             self.setRgb(*color)
 
     @classmethod
-    def from_text(cls, text):
+    def from_text(cls, text: str) -> Color:
         """Create a QColor from specified string."""
         color = cls()
-        text = str(text)
         if text.startswith("#") and len(text) == 7:
             correct = "#0123456789abcdef"
             for char in text:
@@ -55,7 +58,7 @@ class Color(QtGui.QColor):
         return color
 
     @classmethod
-    def from_cmyk(cls, *args, **kwargs):
+    def from_cmyk(cls, *args, **kwargs) -> Color:
         return cls(cls.fromCmykF(*args, **kwargs))
 
     def as_qt(self) -> QtGui.QColor:

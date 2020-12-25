@@ -90,7 +90,7 @@ class Chart(QtCharts.QChart):
     def show_legend(self):
         self.legend().show()
 
-    def get_legend(self):
+    def get_legend(self) -> charts.Legend:
         return charts.Legend(self.legend())
 
     def set_legend_alignment(self, alignment: constants.SideStr):
@@ -151,4 +151,4 @@ class Chart(QtCharts.QChart):
 if __name__ == "__main__":
     chart = Chart()
     legend = chart.get_legend()
-    legend.set_alignment("bottom4")
+    legend.set_alignment("bottom")
