@@ -1,3 +1,5 @@
+from typing import Optional
+
 from qtpy import QtGui
 
 from prettyqt import gui
@@ -24,6 +26,13 @@ class DoubleValidator(QtGui.QDoubleValidator):
 
     def serialize_fields(self):
         return dict(bottom=self.bottom(), top=self.top(), decimals=self.decimals())
+
+    def set_range(self, start: Optional[float], end: Optional[float], decimals: int = 0):
+        if start is None:
+            start = -float("inf")
+        if end is None:
+            end = float("inf")
+        self.setRange(start, end, decimals)
 
 
 if __name__ == "__main__":
