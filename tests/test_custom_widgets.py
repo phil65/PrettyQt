@@ -260,15 +260,6 @@ def test_popupinfo(qtbot):
     popup.show_popup("test")
 
 
-def test_promptlineedit(qtbot):
-    widget = custom_widgets.PromptLineEdit()
-    widget.prompt_text = "test"
-    assert widget.prompt_text == "test"
-    widget.set_button_visible(True)
-    widget.set_button_visible(False)
-    widget.set_text("test")
-
-
 def test_roundprogressbar(qtbot):
     bar = custom_widgets.RoundProgressBar()
     bar.show()

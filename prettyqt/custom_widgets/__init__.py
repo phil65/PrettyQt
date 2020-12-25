@@ -11,7 +11,6 @@ from .expandableline import ExpandableLine
 from .singlelinetextedit import SingleLineTextEdit
 from .regexinput import RegexInput
 from .mappedcheckbox import MappedCheckBox
-from .promptlineedit import PromptLineEdit
 from .logtextedit import LogTextEdit
 from .flagselectionwidget import FlagSelectionWidget
 from .stringornumberwidget import StringOrNumberWidget
@@ -52,7 +51,6 @@ __all__ = [
     "SingleLineTextEdit",
     "RegexInput",
     "MappedCheckBox",
-    "PromptLineEdit",
     "LogTextEdit",
     "FlagSelectionWidget",
     "StringOrNumberWidget",
