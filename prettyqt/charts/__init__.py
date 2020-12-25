@@ -21,10 +21,10 @@ from .horizontalstackedbarseries import HorizontalStackedBarSeries
 from .xyseries import XYSeries
 from .scatterseries import ScatterSeries
 from .lineseries import LineSeries
+from .legend import Legend
 from .chart import Chart
 from .polarchart import PolarChart
 from .chartview import ChartView
-from .legend import Legend
 
 __all__ = [
     "BarSet",
