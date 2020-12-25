@@ -63,6 +63,7 @@ from .sessionmanager import SessionManager
 from .validator import Validator
 
 from .regularexpressionvalidator import RegularExpressionValidator
+from .textline import TextLine
 from .textoption import TextOption
 from .textblock import TextBlock
 from .textdocument import TextDocument
@@ -181,6 +182,7 @@ __all__ = [
     "Clipboard",
     "GuiApplication",
     "Validator",
+    "TextLine",
     "TextOption",
     "TextBlock",
     "TextBlockGroup",
