@@ -12,7 +12,33 @@ from qtpy import QtGui
 from prettyqt import gui
 from prettyqt.iconprovider.iconic_font import IconicFont, set_global_defaults
 
+
 # Constants
+FONTS = [
+    ("fa", "fontawesome4.7-webfont.ttf", "fontawesome4.7-webfont-charmap.json"),
+    (
+        "fa5",
+        "fontawesome5-regular-webfont.ttf",
+        "fontawesome5-regular-webfont-charmap.json",
+    ),
+    (
+        "fa5s",
+        "fontawesome5-solid-webfont.ttf",
+        "fontawesome5-solid-webfont-charmap.json",
+    ),
+    (
+        "fa5b",
+        "fontawesome5-brands-webfont.ttf",
+        "fontawesome5-brands-webfont-charmap.json",
+    ),
+    ("ei", "elusiveicons-webfont.ttf", "elusiveicons-webfont-charmap.json"),
+    (
+        "mdi",
+        "materialdesignicons-webfont.ttf",
+        "materialdesignicons-webfont-charmap.json",
+    ),
+]
+
 _resource: Dict[str, Optional[IconicFont]] = {"iconic": None}
 
 
@@ -23,30 +49,7 @@ def _instance() -> IconicFont:
     ``set_defaults`` all rebind to methods of the singleton instance of IconicFont.
     """
     if _resource["iconic"] is None or not _resource["iconic"].has_valid_font_ids():
-        iconic = IconicFont(
-            ("fa", "fontawesome4.7-webfont.ttf", "fontawesome4.7-webfont-charmap.json"),
-            (
-                "fa5",
-                "fontawesome5-regular-webfont.ttf",
-                "fontawesome5-regular-webfont-charmap.json",
-            ),
-            (
-                "fa5s",
-                "fontawesome5-solid-webfont.ttf",
-                "fontawesome5-solid-webfont-charmap.json",
-            ),
-            (
-                "fa5b",
-                "fontawesome5-brands-webfont.ttf",
-                "fontawesome5-brands-webfont-charmap.json",
-            ),
-            ("ei", "elusiveicons-webfont.ttf", "elusiveicons-webfont-charmap.json"),
-            (
-                "mdi",
-                "materialdesignicons-webfont.ttf",
-                "materialdesignicons-webfont-charmap.json",
-            ),
-        )
+        iconic = IconicFont(FONTS)
         _resource["iconic"] = iconic
         return iconic
     return _resource["iconic"]
