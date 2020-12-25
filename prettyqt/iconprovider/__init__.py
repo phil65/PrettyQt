@@ -49,7 +49,7 @@ def _instance() -> IconicFont:
     ``set_defaults`` all rebind to methods of the singleton instance of IconicFont.
     """
     if _resource["iconic"] is None or not _resource["iconic"].has_valid_font_ids():
-        iconic = IconicFont(FONTS)
+        iconic = IconicFont(*FONTS)
         _resource["iconic"] = iconic
         return iconic
     return _resource["iconic"]
