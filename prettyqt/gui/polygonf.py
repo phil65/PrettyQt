@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import math
 from typing import Iterator, List, Tuple, Union
 
 from qtpy import QtCore, QtGui
@@ -74,6 +75,29 @@ class PolygonF(QtGui.QPolygonF):
 
     def to_polygon(self) -> gui.Polygon:
         return gui.Polygon(self.toPolygon())
+
+    @classmethod
+    def create_star(cls):
+        poly = cls()
+        poly.append(core.PointF(1.0, 0.5))
+        for i in range(1, 5):
+            val = 0.8 * i * math.pi
+            point = core.PointF(0.5 + 0.5 * math.cos(val), 0.5 + 0.5 * math.sin(val))
+            poly.append(point)
+        return poly
+
+    @classmethod
+    def create_diamond(cls):
+        points = [
+            core.PointF(0.4, 0.5),
+            core.PointF(0.5, 0.4),
+            core.PointF(0.6, 0.5),
+            core.PointF(0.5, 0.6),
+            core.PointF(0.4, 0.5),
+        ]
+        poly = gui.PolygonF()
+        poly.add_points(*points)
+        return poly
 
     @classmethod
     def from_xy(cls, xdata, ydata):

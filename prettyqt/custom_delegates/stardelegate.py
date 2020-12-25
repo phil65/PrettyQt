@@ -1,4 +1,3 @@
-import math
 from typing import Optional
 
 from qtpy import QtCore, QtGui, QtWidgets
@@ -7,13 +6,8 @@ from prettyqt import core, gui, widgets
 
 
 PAINTING_SCALE_FACTOR = 20
-DIAMOND_POINTS = [
-    core.PointF(0.4, 0.5),
-    core.PointF(0.5, 0.4),
-    core.PointF(0.6, 0.5),
-    core.PointF(0.5, 0.6),
-    core.PointF(0.4, 0.5),
-]
+DIAMOND_POLYGON = gui.PolygonF.create_diamond()
+STAR_POLYGON = gui.PolygonF.create_star()
 
 
 class StarRating:
@@ -22,18 +16,6 @@ class StarRating:
     def __init__(self, star_count=1, max_stars=5):
         self.star_count = star_count
         self.max_stars = max_stars
-
-        # Create the star shape we'll be drawing.
-        self.star_polygon = gui.PolygonF()
-        self.star_polygon.append(core.PointF(1.0, 0.5))
-        for i in range(1, 5):
-            val = 0.8 * i * math.pi
-            point = core.PointF(0.5 + 0.5 * math.cos(val), 0.5 + 0.5 * math.sin(val))
-            self.star_polygon.append(point)
-
-        # Create the diamond shape we'll show in the editor
-        self.diamond_polygon = gui.PolygonF()
-        self.diamond_polygon.add_points(*DIAMOND_POINTS)
 
     def sizeHint(self):
         """Tell the caller how big we are."""
@@ -56,9 +38,9 @@ class StarRating:
         painter.scale(PAINTING_SCALE_FACTOR, PAINTING_SCALE_FACTOR)
         for i in range(self.max_stars):
             if i < self.star_count:
-                painter.drawPolygon(self.star_polygon, QtCore.Qt.WindingFill)
+                painter.drawPolygon(STAR_POLYGON, QtCore.Qt.WindingFill)
             elif is_editable:
-                painter.drawPolygon(self.diamond_polygon, QtCore.Qt.WindingFill)
+                painter.drawPolygon(DIAMOND_POLYGON, QtCore.Qt.WindingFill)
             painter.translate(1.0, 0.0)
         painter.restore()
 
