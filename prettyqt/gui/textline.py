@@ -26,7 +26,7 @@ class TextLine(QtGui.QTextLine):
         return self.isValid()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.type()})"
+        return f"{type(self).__name__}()"
 
     def __len__(self):
         return self.textLength()
