@@ -4355,10 +4355,9 @@ from_text<span class="p">(</span><span class="n">text</span><span class="p">)</s
           <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">from_text</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">from_text</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
     <span class="sd">"""Create a QColor from specified string."""</span>
     <span class="n">color</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"#"</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span><span class="p">:</span>
         <span class="n">correct</span> <span class="o">=</span> <span class="s2">"#0123456789abcdef"</span>
         <span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
