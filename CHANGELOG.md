@@ -1,3 +1,9 @@
+## v0.160.1 (2020-12-25)
+
+### Fix
+
+- corret IconProvider init
+
 ## v0.160.0 (2020-12-25)
 
 ### Feat
