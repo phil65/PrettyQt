@@ -16,7 +16,7 @@ class DateTime(QtCore.QDateTime):
         return self.toString("yyyy-MM-dd hh:mm:ss.zzzzzz")
 
     def __reduce__(self):
-        return type(self), (self.date(), self.time())
+        return type(self), (self.date(), self.time(), self.get_timezone())
 
     def get_value(self) -> datetime.datetime:
         return to_datetime(self)
