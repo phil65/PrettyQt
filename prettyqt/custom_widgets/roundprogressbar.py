@@ -128,8 +128,7 @@ class RoundProgressBar(widgets.Widget):
             painter.use_antialiasing()
             if self.bar_style != "line":
                 self._rebuild_data_brush_if_needed()
-            bg_rect = core.RectF(0, 0, outer_radius, outer_radius)
-            painter.fillRect(bg_rect, self.palette().window())
+            painter.fillRect(0, 0, outer_radius, outer_radius, self.palette().window())
             self._draw_base(painter, rect)
             self._draw_value(painter, rect, self.current_value)
             inner_rect, inner_radius = self._calculate_inner_rect(outer_radius)
@@ -185,9 +184,10 @@ class RoundProgressBar(widgets.Widget):
             data_path.addEllipse(rect)
         else:
             arc_length = 360 / delta
-            data_path.moveTo(rect.center())
+            center_point = rect.center()
+            data_path.moveTo(center_point)
             data_path.arcTo(rect, self.null_pos, -arc_length)
-            data_path.lineTo(rect.center())
+            data_path.lineTo(center_point)
         painter.setBrush(self.palette().highlight())
         pen = gui.Pen(self.palette().shadow().color())
         painter.setPen(pen, self.data_pen_width)

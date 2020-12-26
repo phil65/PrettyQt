@@ -124,7 +124,7 @@ class Player(widgets.MainWindow):
             self.slider.set_value(int(val / 1000))
         mins, secs = divmod(self.player.position() / 1000, 60)
         dur_mins, dur_secs = divmod(self.player.duration() / 1000, 60)
-        self.clock.setText("%02d:%02d / %02d:%02d" % (mins, secs, dur_mins, dur_secs))
+        self.clock.setText(f"{mins:02}:{secs:02} / {dur_mins:02}:{dur_secs:02}")
 
     def on_slider_change(self, val):
         self.player.setPosition(self.slider.get_value() * 1000)
