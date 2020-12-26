@@ -200,3 +200,7 @@ class Painter(QtGui.QPainter):
         path = gui.PainterPath()
         yield path
         self.set_clip_path(path, operation)
+
+
+if __name__ == "__main__":
+    painter = Painter()

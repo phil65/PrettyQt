@@ -183,8 +183,12 @@ class LineEdit(QtWidgets.QLineEdit):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = LineEdit("This is a test")
-    widget.set_regex_validator("[0-9]+")
+    widget = LineEdit()
+    action = widgets.Action(text="hallo", icon="mdi.folder")
+    widget.add_action(action)
+    widget.setPlaceholderText("test")
+    widget.setClearButtonEnabled(True)
+    # widget.set_regex_validator("[0-9]+")
     widget.setFont(gui.Font("Consolas"))
     widget.show()
     app.main_loop()
