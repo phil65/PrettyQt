@@ -1,8 +1,16 @@
-## v0.160.1 (2020-12-25)
+## v0.161.0 (2020-12-26)
+
+### Feat
+
+- **LineEdit**: add add_action method
+- **ListView/TableView**: add some more setters / getters
+- **Painter**: add edit_pen context manager
+- **PolygonF**: alternative ctors for diamond / star creation
 
 ### Fix
 
-- corret IconProvider init
+- **LabeledSlider**: call adjust_margins on correct object
+- correct IconProvider init
 
 ## v0.160.0 (2020-12-25)
 
