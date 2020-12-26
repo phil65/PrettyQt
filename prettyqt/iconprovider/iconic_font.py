@@ -258,16 +258,6 @@ class IconicFont(core.Object):
             directory = pathlib.Path(__file__).parent / "fonts"
         id_ = gui.FontDatabase.add_font(directory / ttf_filename)
         loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)
-
-        if not loaded_font_families:
-            raise FontError(
-                f"Font at '{directory / ttf_filename}' appears to be empty. "
-                "If you are on Windows 10, please read "
-                "https://support.microsoft.com/"
-                "en-us/kb/3053676 "
-                "to know how to prevent Windows from blocking "
-                "the fonts that come with QtAwesome."
-            )
         self.font_ids[prefix] = id_
         self.font_name[prefix] = loaded_font_families[0]
 
@@ -289,8 +279,7 @@ class IconicFont(core.Object):
         if (ttf_hash := MD5_HASHES.get(ttf_filename)) is None:
             return
         content = (directory / ttf_filename).read_bytes()
-        ttf_calculated_hash_code = hashlib.md5(content).hexdigest()
-        if ttf_calculated_hash_code != ttf_hash:
+        if hashlib.md5(content).hexdigest() != ttf_hash:
             raise FontError(f"Font is corrupt at: '{directory / ttf_filename}'")
 
     def icon(self, *names, **kwargs) -> QtGui.QIcon:
