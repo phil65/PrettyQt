@@ -10,7 +10,8 @@ class Spin:
         self, parent_widget: QtWidgets.QWidget, interval: int = 10, step: int = 1
     ):
         self.parent_widget = parent_widget
-        self.interval, self.step = interval, step
+        self.interval = interval
+        self.step = step
         self.info: Dict[QtWidgets.QWidget, Tuple[core.Timer, int, int]] = {}
 
     def _update(self):
@@ -34,11 +35,8 @@ class Spin:
             timer.start(self.interval)
         else:
             timer, angle, self.step = self.info[self.parent_widget]
-            x_center = rect.width() * 0.5
-            y_center = rect.height() * 0.5
-            painter.translate(x_center, y_center)
-            painter.rotate(angle)
-            painter.translate(-x_center, -y_center)
+            with painter.offset_by(rect.width() * 0.5, rect.height() * 0.5):
+                painter.rotate(angle)
 
 
 class Pulse(Spin):

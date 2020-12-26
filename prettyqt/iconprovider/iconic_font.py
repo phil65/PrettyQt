@@ -144,33 +144,21 @@ class CharIconPainter:
                 round(options["offset"][0] * rect.width()),
                 round(options["offset"][1] * rect.height()),
             )
-
-        if "vflip" in options and options["vflip"] is True:
-            x_center = rect.width() * 0.5
-            y_center = rect.height() * 0.5
-            painter.translate(x_center, y_center)
-            transform = gui.Transform()
-            transform.scale(1, -1)
-            painter.setTransform(transform, True)
-            painter.translate(-x_center, -y_center)
-
-        if "hflip" in options and options["hflip"] is True:
-            x_center = rect.width() * 0.5
-            y_center = rect.height() * 0.5
-            painter.translate(x_center, y_center)
-            transform = gui.Transform()
-            transform.scale(-1, 1)
-            painter.setTransform(transform, True)
-            painter.translate(-x_center, -y_center)
+        x_center = rect.width() * 0.5
+        y_center = rect.height() * 0.5
+        if options.get("vflip") is True:
+            with painter.offset_by(x_center, y_center), painter.apply_transform() as tf:
+                tf.scale(1, -1)
+        if options.get("hflip") is True:
+            with painter.offset_by(x_center, y_center), painter.apply_transform() as tf:
+                tf.scale(-1, 1)
 
         if "rotated" in options:
-            x_center = rect.width() * 0.5
-            y_center = rect.height() * 0.5
-            painter.translate(x_center, y_center)
-            painter.rotate(options["rotated"])
-            painter.translate(-x_center, -y_center)
+            with painter.offset_by(x_center, y_center):
+                painter.rotate(options["rotated"])
 
-        painter.setOpacity(options.get("opacity", 1.0))
+        if (opacity := options.get("opacity")) is not None:
+            painter.setOpacity(opacity)
 
         painter.drawText(rect, int(constants.ALIGN_CENTER), options[char])
         painter.restore()
