@@ -12,7 +12,7 @@ methods returning instances of ``QIcon``.
 import hashlib
 import json
 import pathlib
-from typing import Any, Dict, Iterable, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 import warnings
 
 from qtpy import QtCore, QtGui
@@ -60,6 +60,21 @@ ICON_KW = [
     "off_selected",
     "off_disabled",
 ]
+
+COLOR_OPTIONS = {
+    QtGui.QIcon.On: {
+        QtGui.QIcon.Normal: ("color_on", "on"),
+        QtGui.QIcon.Disabled: ("color_on_disabled", "on_disabled"),
+        QtGui.QIcon.Active: ("color_on_active", "on_active"),
+        QtGui.QIcon.Selected: ("color_on_selected", "on_selected"),
+    },
+    QtGui.QIcon.Off: {
+        QtGui.QIcon.Normal: ("color_off", "off"),
+        QtGui.QIcon.Disabled: ("color_off_disabled", "off_disabled"),
+        QtGui.QIcon.Active: ("color_off_active", "off_active"),
+        QtGui.QIcon.Selected: ("color_off_selected", "off_selected"),
+    },
+}
 
 
 def set_global_defaults(**kwargs):
@@ -109,40 +124,9 @@ class CharIconPainter:
             self._paint_icon(iconic, painter, rect, mode, state, opt)
 
     def _paint_icon(self, iconic, painter, rect, mode, state, options: Dict[str, Any]):
-        color = options["color"]
-        char = options["char"]
-
-        color_options = {
-            QtGui.QIcon.On: {
-                QtGui.QIcon.Normal: (options["color_on"], options["on"]),
-                QtGui.QIcon.Disabled: (
-                    options["color_on_disabled"],
-                    options["on_disabled"],
-                ),
-                QtGui.QIcon.Active: (options["color_on_active"], options["on_active"]),
-                QtGui.QIcon.Selected: (
-                    options["color_on_selected"],
-                    options["on_selected"],
-                ),
-            },
-            QtGui.QIcon.Off: {
-                QtGui.QIcon.Normal: (options["color_off"], options["off"]),
-                QtGui.QIcon.Disabled: (
-                    options["color_off_disabled"],
-                    options["off_disabled"],
-                ),
-                QtGui.QIcon.Active: (options["color_off_active"], options["off_active"]),
-                QtGui.QIcon.Selected: (
-                    options["color_off_selected"],
-                    options["off_selected"],
-                ),
-            },
-        }
-
-        color, char = color_options[state][mode]
-
+        color, char = COLOR_OPTIONS[state][mode]
         painter.save()
-        painter.setPen(gui.Color(color))
+        painter.setPen(gui.Color(options[color]))
 
         # A 16 pixel-high icon yields a font size of 14, which is pixel perfect
         # for font-awesome. 16 * 0.875 = 14
@@ -150,14 +134,11 @@ class CharIconPainter:
         # account for font bearing.
 
         draw_size = round(0.875 * rect.height() * options["scale_factor"])
-        prefix = options["prefix"]
-
         # Animation setup hook
-        animation = options.get("animation")
-        if animation is not None:
+        if (animation := options.get("animation")) is not None:
             animation.setup(self, painter, rect)
-
-        painter.setFont(iconic.font(prefix, draw_size))
+        font = iconic.get_font(options["prefix"], draw_size)
+        painter.setFont(font)
         if "offset" in options:
             rect.translate(
                 round(options["offset"][0] * rect.width()),
@@ -191,7 +172,7 @@ class CharIconPainter:
 
         painter.setOpacity(options.get("opacity", 1.0))
 
-        painter.drawText(rect, int(constants.ALIGN_CENTER), char)
+        painter.drawText(rect, int(constants.ALIGN_CENTER), options[char])
         painter.restore()
 
 
@@ -214,7 +195,9 @@ class CharIconEngine(gui.IconEngine):
     def pixmap(self, size, mode, state) -> QtGui.QPixmap:
         pm = QtGui.QPixmap(size)
         pm.fill(QtCore.Qt.transparent)
-        self.paint(gui.Painter(pm), core.Rect(ZERO_COORD, size), mode, state)
+        rect = core.Rect(ZERO_COORD, size)
+        painter = gui.Painter(pm)
+        self.paint(painter, rect, mode, state)
         return pm
 
 
@@ -310,7 +293,7 @@ class IconicFont(core.Object):
                         # ValueError: chr() arg not in range(0x10000)
                         pass
                     else:
-                        raise FontError("Failed to load character " f"{key}:{obj[key]}")
+                        raise FontError(f"Failed to load character {key}:{obj[key]}")
             return result
 
         with (directory / charmap_filename).open("r") as codes:
@@ -384,7 +367,16 @@ class IconicFont(core.Object):
             "off_disabled": off_disabled,
         }
         names = [icon_dict.get(kw, name) for kw in ICON_KW]
-        prefix, chars = self._get_prefix_chars(names)
+        chars = []
+        for name in names:
+            if "." not in name:
+                raise Exception("Invalid icon name")
+            prefix, n = name.split(".")
+            if prefix not in self.charmap:
+                raise Exception(f"Invalid font prefix {prefix!r}")
+            if n not in self.charmap[prefix]:
+                raise Exception(f"Invalid icon name {n!r} in font {prefix!r}")
+            chars.append(self.charmap[prefix][n])
         options.update(dict(zip(*(ICON_KW, chars))))
         options.update({"prefix": prefix})
 
@@ -404,50 +396,13 @@ class IconicFont(core.Object):
 
         return options
 
-    def _get_prefix_chars(self, names: Iterable[str]) -> Tuple[str, List[str]]:
-        chars = []
-        for name in names:
-            if "." not in name:
-                raise Exception("Invalid icon name")
-            prefix, n = name.split(".")
-            if prefix not in self.charmap:
-                raise Exception(f"Invalid font prefix {prefix!r}")
-            if n not in self.charmap[prefix]:
-                raise Exception(f"Invalid icon name {n!r} in font {prefix!r}")
-            chars.append(self.charmap[prefix][n])
-        return prefix, chars
-
-    def font(self, prefix: str, size: float) -> gui.Font:
+    def get_font(self, prefix: str, size: float) -> gui.Font:
         """Return a gui.Font corresponding to the given prefix and size."""
         font = gui.Font(self.fontname[prefix])
         font.setPixelSize(round(size))
         if prefix[-1] == "s":  # solid style
             font.setStyleName("Solid")
         return font
-
-    def set_custom_icon(self, name: str, painter: CharIconPainter):
-        """Associate a user-provided CharIconPainter to an icon name.
-
-        The custom icon can later be addressed by calling
-        icon('custom.NAME') where NAME is the provided name for that icon.
-
-        Parameters
-        ----------
-        name: str
-            name of the custom icon
-        painter: CharIconPainter
-            The icon painter, implementing
-            ``paint(self, iconic, painter, rect, mode, state, options)``
-        """
-        self.painters[name] = painter
-
-    def _custom_icon(self, name: str, **kwargs) -> QtGui.QIcon:
-        """Return the custom icon corresponding to the given name."""
-        if name not in self.painters:
-            return QtGui.QIcon()
-        return self._icon_by_painter(
-            self.painters[name], dict(_default_options, **kwargs)
-        )
 
     def _icon_by_painter(self, painter: CharIconPainter, options) -> QtGui.QIcon:
         """Return the icon corresponding to the given painter."""
