@@ -747,60 +747,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit" class="md-nav__link">
-    promptlineedit
-  </a>
-  
-    <nav class="md-nav" aria-label="promptlineedit">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit" class="md-nav__link">
-    PromptLineEdit
-  </a>
-  
-    <nav class="md-nav" aria-label="PromptLineEdit">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.prompt_text" class="md-nav__link">
-    prompt_text
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.paintEvent" class="md-nav__link">
-    paintEvent()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.resizeEvent" class="md-nav__link">
-    resizeEvent()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.set_button_visible" class="md-nav__link">
-    set_button_visible()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.regexeditor" class="md-nav__link">
     regexeditor
   </a>
@@ -1755,60 +1701,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit" class="md-nav__link">
-    promptlineedit
-  </a>
-  
-    <nav class="md-nav" aria-label="promptlineedit">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit" class="md-nav__link">
-    PromptLineEdit
-  </a>
-  
-    <nav class="md-nav" aria-label="PromptLineEdit">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.prompt_text" class="md-nav__link">
-    prompt_text
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.paintEvent" class="md-nav__link">
-    paintEvent()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.resizeEvent" class="md-nav__link">
-    resizeEvent()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.promptlineedit.PromptLineEdit.set_button_visible" class="md-nav__link">
-    set_button_visible()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.regexeditor" class="md-nav__link">
     regexeditor
   </a>
@@ -2507,7 +2399,8 @@ heightForWidth<span class="p">(</span><span class="bp">self</span><span class="p
           <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">heightForWidth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_layout</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">rect</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_layout</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -2921,10 +2814,10 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
                 <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">x_loc</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bottom_margin</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">adjust_margins</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adjust_margins</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">v</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">maximum</span><span class="p">()</span> <span class="ow">and</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">right_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="mi">2</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">adjust_margins</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adjust_margins</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">y_loc</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">sliderPositionFromValue</span><span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">minimum</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">maximum</span><span class="p">(),</span> <span class="n">v</span><span class="p">,</span> <span class="n">available</span><span class="p">,</span> <span class="n">upsideDown</span><span class="o">=</span><span class="kc">True</span>
@@ -2936,7 +2829,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
             <span class="n">left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">-</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">left</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">left_margin</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">adjust_margins</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">adjust_margins</span><span class="p">()</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">bottom</span><span class="p">,</span> <span class="n">v_str</span><span class="p">)</span>
 </code></pre>
 </div>
@@ -2990,161 +2883,6 @@ show<span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">-</span> <span class="mi">200</span><span class="p">)</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">timer</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">2500</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-module">
-<h2 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit">
-
-        <code>promptlineedit</code>
-
-
-      </h2>
-<div class="doc doc-contents ">
-<p>Credits to PyQode Authors.</p>
-<div class="doc doc-children">
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit">
-
-        <code>PromptLineEdit</code>
-
-
-      </h3>
-<div class="doc doc-contents ">
-<p>Extends QLineEdit to show a prompt text and a clear icon.</p>
-<div class="doc doc-children">
-<div class="doc doc-object doc-attribute">
-<h4 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit.prompt_text">
-
-        <code class="highlight">
-prompt_text: <span class="nb">str</span>        </code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-property"><code>property</code></small>
-      <small class="doc doc-property doc-property-writable"><code>writable</code></small>
-  </span>
-
-      </h4>
-<div class="doc doc-contents ">
-<p>Gets/Sets the prompt text.</p>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit.paintEvent">
-
-        <code class="highlight language-python">
-paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>paintEvent(self, QPaintEvent)</p>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prompt_text</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEnabled</span><span class="p">()):</span>
-        <span class="k">return</span>
-    <span class="n">option</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionFrame</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">initStyleOption</span><span class="p">(</span><span class="n">option</span><span class="p">)</span>
-
-    <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getTextMargins</span><span class="p">()</span>
-
-    <span class="n">va</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">visualAlignment</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">())</span>
-    <span class="n">rect</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span>
-        <span class="o">.</span><span class="n">subElementRect</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">SE_LineEditContents</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="o">-</span><span class="n">right</span><span class="p">,</span> <span class="o">-</span><span class="n">bottom</span><span class="p">)</span>
-    <span class="p">)</span>
-    <span class="n">fm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_font_metrics</span><span class="p">()</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">elided_text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_prompt_text</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">"right"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
-    <span class="k">with</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">as</span> <span class="n">painter</span><span class="p">:</span>
-        <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">"text"</span><span class="p">,</span> <span class="s2">"disabled"</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">va</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit.resizeEvent">
-
-        <code class="highlight language-python">
-resizeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>resizeEvent(self, QResizeEvent)</p>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="c1"># Adjusts Clear button position</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">resize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_margin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.custom_widgets.promptlineedit.PromptLineEdit.set_button_visible">
-
-        <code class="highlight language-python">
-set_button_visible<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visible</span><span class="p">)</span>        </code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>Sets the clear button as <code>visible</code>.</p>
-<p><strong>Parameters:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>visible</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Visibility of button</p>
-</td>
-<td><em>required</em></td>
-</tr>
-</tbody>
-</table>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/promptlineedit.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_button_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visible</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-    <span class="sd">"""Sets the clear button as ``visible``.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        visible (bool): Visibility of button</span>
-<span class="sd">    """</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="n">visible</span><span class="p">)</span>
-    <span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getTextMargins</span><span class="p">()</span>
-    <span class="n">right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_margin</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spacing</span> <span class="k">if</span> <span class="n">visible</span> <span class="k">else</span> <span class="mi">0</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setTextMargins</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">top</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">bottom</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -3285,8 +3023,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <span class="n">painter</span><span class="o">.</span><span class="n">use_antialiasing</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">!=</span> <span class="s2">"line"</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_rebuild_data_brush_if_needed</span><span class="p">()</span>
-        <span class="n">bg_rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">outer_radius</span><span class="p">,</span> <span class="n">outer_radius</span><span class="p">)</span>
-        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">bg_rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">window</span><span class="p">())</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">outer_radius</span><span class="p">,</span> <span class="n">outer_radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">window</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_draw_base</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">rect</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_draw_value</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_value</span><span class="p">)</span>
         <span class="n">inner_rect</span><span class="p">,</span> <span class="n">inner_radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calculate_inner_rect</span><span class="p">(</span><span class="n">outer_radius</span><span class="p">)</span>
@@ -3798,19 +3535,17 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
           <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="n">qp</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">()</span>
-    <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="c1"># Draw time</span>
     <span class="n">scale</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scale</span><span class="p">()</span>
-    <span class="k">with</span> <span class="n">qp</span><span class="o">.</span><span class="n">paint_on</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">as</span> <span class="n">qp</span><span class="p">:</span>
         <span class="n">qp</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text_color</span><span class="p">)</span>
         <span class="n">qp</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text_font</span><span class="p">)</span>
         <span class="n">qp</span><span class="o">.</span><span class="n">use_antialiasing</span><span class="p">()</span>
-        <span class="k">while</span> <span class="n">w</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">():</span>
+        <span class="n">w</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">w</span> <span class="o">:=</span> <span class="n">w</span> <span class="o">+</span> <span class="mi">100</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">():</span>
             <span class="n">time_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_time_string</span><span class="p">(</span><span class="n">w</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span>
             <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">w</span> <span class="o">-</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
             <span class="n">qp</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignHCenter</span><span class="p">,</span> <span class="n">time_string</span><span class="p">)</span>
-            <span class="n">w</span> <span class="o">+=</span> <span class="mi">100</span>
         <span class="c1"># Draw down line</span>
         <span class="n">qp</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">PEN_COLOR</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
         <span class="n">qp</span><span class="o">.</span><span class="n">drawLine</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="mi">40</span><span class="p">)</span>
@@ -3870,8 +3605,7 @@ paintEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
             <span class="k">with</span> <span class="n">qp</span><span class="o">.</span><span class="n">clip_path</span><span class="p">()</span> <span class="k">as</span> <span class="n">path</span><span class="p">:</span>
                 <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="n">scaled_t</span><span class="p">,</span> <span class="mf">52.5</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
                 <span class="n">path</span><span class="o">.</span><span class="n">addRoundedRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-            <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="n">scaled_t</span><span class="p">,</span> <span class="mf">52.5</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span>
-            <span class="n">qp</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">pic</span><span class="p">)</span>
+            <span class="n">qp</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">scaled_t</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="mf">52.5</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">width</span><span class="p">),</span> <span class="mi">45</span><span class="p">,</span> <span class="n">pic</span><span class="p">)</span>
 
         <span class="c1"># Clear clip path</span>
         <span class="k">with</span> <span class="n">qp</span><span class="o">.</span><span class="n">clip_path</span><span class="p">()</span> <span class="k">as</span> <span class="n">path</span><span class="p">:</span>

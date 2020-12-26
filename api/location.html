@@ -1971,7 +1971,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Return the visibility of the place.</p>
-<p>Possible values are "none", "image", "review", "editorial", "custom"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1982,7 +1981,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'image', 'review', 'editorial', 'custom']</code></td>
 <td>
 <p>Place type</p>
 </td>
@@ -1992,10 +1991,8 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placecontent.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return the visibility of the place.</span>
-
-<span class="sd">    Possible values are "none", "image", "review", "editorial", "custom"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Place type</span>
@@ -2040,7 +2037,6 @@ get_content_type<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Return current content type.</p>
-<p>Possible values: "none", "image", "review", "editorial", "custom"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2051,7 +2047,7 @@ get_content_type<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'image', 'review', 'editorial', 'custom']</code></td>
 <td>
 <p>Relevance type</p>
 </td>
@@ -2061,10 +2057,8 @@ get_content_type<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placecontentrequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return current content type.</span>
-
-<span class="sd">    Possible values: "none", "image", "review", "editorial", "custom"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Relevance type</span>
@@ -2085,7 +2079,6 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set the content type.</p>
-<p>Allowed values are "none", "image", "review", "editorial", "custom"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -2099,7 +2092,7 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['none', 'image', 'review', 'editorial', 'custom']</code></td>
 <td>
 <p>Relevance type</p>
 </td>
@@ -2127,10 +2120,8 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placecontentrequest.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TypeStr</span><span class="p">):</span>
     <span class="sd">"""Set the content type.</span>
-
-<span class="sd">    Allowed values are "none", "image", "review", "editorial", "custom"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: Relevance type</span>
@@ -2246,9 +2237,6 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return error type.</p>
-<p>possible values: "none" "place_does_not_exist", "category_does_not_exist",
-                 "communication", "parse", "permissions", "unsupported",
-                 "bad_argument", "cancel", "unknown"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2259,7 +2247,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['none', 'place_does_not_exist', 'category_does_not_exist', 'communication', 'parse', 'permissions', 'unsupported', 'bad_argument', 'cancel', 'unknown']</code></td>
 <td>
 <p>Error type</p>
 </td>
@@ -2269,12 +2257,8 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placereply.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
     <span class="sd">"""Return error type.</span>
-
-<span class="sd">    possible values: "none" "place_does_not_exist", "category_does_not_exist",</span>
-<span class="sd">                     "communication", "parse", "permissions", "unsupported",</span>
-<span class="sd">                     "bad_argument", "cancel", "unknown"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Error type</span>
@@ -2295,8 +2279,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Return type.</p>
-<p>possible values: "generic" "details", "search",
-                 "search_suggestion", "content", "id", "match",</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -2307,7 +2289,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['generic', 'details', 'search', 'search_suggestion', 'content', 'id', 'match']</code></td>
 <td>
 <p>Type</p>
 </td>
@@ -2317,11 +2299,8 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/location/placereply.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
     <span class="sd">"""Return type.</span>
-
-<span class="sd">    possible values: "generic" "details", "search",</span>
-<span class="sd">                     "search_suggestion", "content", "id", "match",</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Type</span>

@@ -8974,7 +8974,6 @@ get_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Return current performance hint.</p>
-<p>Possible values: "moderate", "aggressive"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -8985,7 +8984,7 @@ get_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['moderate', 'aggressive']</code></td>
 <td>
 <p>performance hint</p>
 </td>
@@ -8995,10 +8994,8 @@ get_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/statictext.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_performance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_performance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PerformanceHintStr</span><span class="p">:</span>
     <span class="sd">"""Return current performance hint.</span>
-
-<span class="sd">    Possible values: "moderate", "aggressive"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        performance hint</span>
@@ -9064,7 +9061,6 @@ set_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
       </h4>
 <div class="doc doc-contents ">
 <p>Set the performance hint.</p>
-<p>Allowed values are "moderate", "aggressive"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -9078,7 +9074,7 @@ set_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>hint</code></td>
-<td><code>str</code></td>
+<td><code>Literal['moderate', 'aggressive']</code></td>
 <td>
 <p>performance hint to use</p>
 </td>
@@ -9106,10 +9102,8 @@ set_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/statictext.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_performance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_performance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">PerformanceHintStr</span><span class="p">):</span>
     <span class="sd">"""Set the performance hint.</span>
-
-<span class="sd">    Allowed values are "moderate", "aggressive"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        hint: performance hint to use</span>

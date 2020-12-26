@@ -719,13 +719,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_delegates.stardelegate.StarRating.sizeHint" class="md-nav__link">
-    sizeHint()
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1481,13 +1474,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.custom_delegates.stardelegate.StarRating.paint" class="md-nav__link">
     paint()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_delegates.stardelegate.StarRating.sizeHint" class="md-nav__link">
-    sizeHint()
   </a>
   
 </li>
@@ -2601,32 +2587,13 @@ paint<span class="p">(</span><span class="bp">self</span><span class="p">,</span
     <span class="n">painter</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">PAINTING_SCALE_FACTOR</span><span class="p">,</span> <span class="n">PAINTING_SCALE_FACTOR</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_stars</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">star_count</span><span class="p">:</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">star_polygon</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindingFill</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">STAR_POLYGON</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindingFill</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">is_editable</span><span class="p">:</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">diamond_polygon</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindingFill</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">DIAMOND_POLYGON</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindingFill</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">break</span>
         <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
     <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.custom_delegates.stardelegate.StarRating.sizeHint">
-
-        <code class="highlight language-python">
-sizeHint<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>Tell the caller how big we are.</p>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">"""Tell the caller how big we are."""</span>
-    <span class="k">return</span> <span class="n">PAINTING_SCALE_FACTOR</span> <span class="o">*</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_stars</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>

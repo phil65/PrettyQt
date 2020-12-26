@@ -997,7 +997,6 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
       </h4>
 <div class="doc doc-contents ">
 <p>Return error type.</p>
-<p>possible values: "access_error" "insufficient_pos_info", "none", "unkown_source"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1008,7 +1007,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['persistent_area', 'any_area']</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -1018,10 +1017,8 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <details class="quote">
           <summary>Source code in <code>prettyqt/positioning/geoareamonitorsource.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AreaMonitorFeatureStr</span><span class="p">:</span>
     <span class="sd">"""Return error type.</span>
-
-<span class="sd">    possible values: "access_error" "insufficient_pos_info", "none", "unkown_source"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        error type</span>

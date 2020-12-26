@@ -1367,7 +1367,6 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
       </h4>
 <div class="doc doc-contents ">
 <p>Set content type.</p>
-<p>Valid values: "mixed", "related", "form", "alternative"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1381,7 +1380,7 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>str</code></td>
+<td><code>Literal['mixed', 'related', 'form', 'alternative']</code></td>
 <td>
 <p>content type</p>
 </td>
@@ -1409,10 +1408,8 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
 <details class="quote">
           <summary>Source code in <code>prettyqt/network/httpmultipart.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">ContentTypeStr</span><span class="p">):</span>
     <span class="sd">"""Set content type.</span>
-
-<span class="sd">    Valid values: "mixed", "related", "form", "alternative"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: content type</span>
@@ -1619,7 +1616,6 @@ get_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Return whether this address is eligible for publication in the DNS.</p>
-<p>Possible values: "unknown", "eligible", "ineligible"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1643,8 +1639,6 @@ get_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
 <pre><span></span><code><span class="k">def</span> <span class="nf">get_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DnsEligibilityStatusStr</span><span class="p">:</span>
     <span class="sd">"""Return whether this address is eligible for publication in the DNS.</span>
 
-<span class="sd">    Possible values: "unknown", "eligible", "ineligible"</span>
-
 <span class="sd">    Returns:</span>
 <span class="sd">        DNS eligibility</span>
 <span class="sd">    """</span>
@@ -1664,7 +1658,6 @@ set_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
       </h4>
 <div class="doc doc-contents ">
 <p>Set the DNS eligibility flag for this address to status.</p>
-<p>Valid values: "unknown", "eligible", "ineligible"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -1708,8 +1701,6 @@ set_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">set_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">DnsEligibilityStatusStr</span><span class="p">):</span>
     <span class="sd">"""Set the DNS eligibility flag for this address to status.</span>
-
-<span class="sd">    Valid values: "unknown", "eligible", "ineligible"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        status: DNS eligibility status</span>
@@ -1759,9 +1750,6 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
       </h4>
 <div class="doc doc-contents ">
 <p>Get the interface type.</p>
-<p>Possible values: "unknown", "loopback", "virtual", "ethernet", "wifi",
-                 "can_bus", "fddi", "ppp", "slip", "phonet"
-                 "ieee802154", "sixlowpan", "ieee80216", "ieee1394"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -1772,7 +1760,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>InterfaceTypeStr</code></td>
 <td>
 <p>interface type</p>
 </td>
@@ -1782,17 +1770,13 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkinterface.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InterfaceTypeStr</span><span class="p">:</span>
     <span class="sd">"""Get the interface type.</span>
-
-<span class="sd">    Possible values: "unknown", "loopback", "virtual", "ethernet", "wifi",</span>
-<span class="sd">                     "can_bus", "fddi", "ppp", "slip", "phonet"</span>
-<span class="sd">                     "ieee802154", "sixlowpan", "ieee80216", "ieee1394"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        interface type</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">INTERFACE_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">INTERFACE_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>

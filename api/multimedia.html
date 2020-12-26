@@ -2037,7 +2037,7 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 
       </h3>
 <div class="doc doc-contents ">
-<p>Settings(bitrate: 'int', channel_count: 'int', codec: 'str', encoding_mode: 'str', encoding_options: 'Dict[str, Any]', quality: 'str', sample_rate: 'int')</p>
+<p>Settings(bitrate: 'int', channel_count: 'int', codec: 'str', encoding_mode: 'EncodingModeStr', encoding_options: 'Dict[str, Any]', quality: 'QualityStr', sample_rate: 'int')</p>
 <div class="doc doc-children">
 
 
@@ -2076,7 +2076,7 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 
       </h3>
 <div class="doc doc-contents ">
-<p>Settings(sample_rate: 'int', channel_count: 'int', sample_size: 'int', byte_order: 'str', sample_type: 'str', codec: 'str')</p>
+<p>Settings(sample_rate: 'int', channel_count: 'int', sample_size: 'int', byte_order: 'EndianStr', sample_type: 'SampleTypeStr', codec: 'str')</p>
 <div class="doc doc-children">
 
 
@@ -3325,7 +3325,7 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 
       </h3>
 <div class="doc doc-contents ">
-<p>Settings(maximum_framerate: 'float', minimum_framerate: 'float', pixel_aspect_ratio: 'Tuple[int, int]', pixel_format: 'str', resolution: 'Tuple[int, int]')</p>
+<p>Settings(maximum_framerate: 'float', minimum_framerate: 'float', pixel_aspect_ratio: 'Tuple[int, int]', pixel_format: 'multimedia.videoframe.PixelFormatStr', resolution: 'Tuple[int, int]')</p>
 <div class="doc doc-children">
 
 
@@ -3364,7 +3364,7 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 
       </h3>
 <div class="doc doc-contents ">
-<p>Settings(codec: 'str', encoding_options: 'Dict[str, Any]', quality: 'str', resolution: 'Tuple[int, int]')</p>
+<p>Settings(codec: 'str', encoding_options: 'Dict[str, Any]', quality: 'QualityStr', resolution: 'Tuple[int, int]')</p>
 <div class="doc doc-children">
 
 
@@ -3627,7 +3627,6 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Return current playback mode.</p>
-<p>Possible values: "item_once", "item_in_loop", "sequential", "loop", "random"</p>
 <p><strong>Returns:</strong></p>
 <table>
 <thead>
@@ -3638,7 +3637,7 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>str</code></td>
+<td><code>Literal['item_once', 'item_in_loop', 'sequential', 'loop', 'random']</code></td>
 <td>
 <p>playback mode</p>
 </td>
@@ -3648,15 +3647,13 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/mediaplaylist.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlaybackModeStr</span><span class="p">:</span>
     <span class="sd">"""Return current playback mode.</span>
-
-<span class="sd">    Possible values: "item_once", "item_in_loop", "sequential", "loop", "random"</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        playback mode</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">PLAYBACK_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">playbackMode</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">PLAYBACK_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">playbackMode</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -3672,7 +3669,6 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
       </h4>
 <div class="doc doc-contents ">
 <p>Set playback mode for given item view.</p>
-<p>Allowed values are "item_once", "item_in_loop", "sequential", "loop", "random"</p>
 <p><strong>Parameters:</strong></p>
 <table>
 <thead>
@@ -3686,7 +3682,7 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>str</code></td>
+<td><code>Literal['item_once', 'item_in_loop', 'sequential', 'loop', 'random']</code></td>
 <td>
 <p>playback mode to use</p>
 </td>
@@ -3714,10 +3710,8 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 <details class="quote">
           <summary>Source code in <code>prettyqt/multimedia/mediaplaylist.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PlaybackModeStr</span><span class="p">):</span>
     <span class="sd">"""Set playback mode for given item view.</span>
-
-<span class="sd">    Allowed values are "item_once", "item_in_loop", "sequential", "loop", "random"</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: playback mode to use</span>
@@ -3725,9 +3719,9 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: mode does not exist</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PLAYBACK_MODES</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">PLAYBACK_MODES</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setPlaybackMode</span><span class="p">(</span><span class="n">PLAYBACK_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PLAYBACK_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">PLAYBACK_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setPlaybackMode</span><span class="p">(</span><span class="n">PLAYBACK_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -3825,7 +3819,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 
       </h3>
 <div class="doc doc-contents ">
-<p>Settings(bitrate: 'int', codec: 'str', encoding_mode: 'str', encoding_options: 'Dict[str, Any]', quality: 'str', frame_rate: 'float', resolution: 'Tuple[int, int]')</p>
+<p>Settings(bitrate: 'int', codec: 'str', encoding_mode: 'EncodingModeStr', encoding_options: 'Dict[str, Any]', quality: 'QualityStr', frame_rate: 'float', resolution: 'Tuple[int, int]')</p>
 <div class="doc doc-children">
 
 
