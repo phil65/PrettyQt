@@ -201,6 +201,18 @@ class Painter(QtGui.QPainter):
         yield path
         self.set_clip_path(path, operation)
 
+    @contextlib.contextmanager
+    def apply_transform(self, combine: bool = True):
+        transform = gui.Transform()
+        yield transform
+        self.setTransform(transform, combine)
+
+    @contextlib.contextmanager
+    def offset_by(self, x: int = 0, y: int = 0):
+        self.translate(x, y)
+        yield self
+        self.translate(-x, -y)
+
 
 if __name__ == "__main__":
     painter = Painter()
