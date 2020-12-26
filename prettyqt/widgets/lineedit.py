@@ -15,6 +15,12 @@ ECHO_MODE = bidict(
 
 EchoModeStr = Literal["normal", "no_echo", "password", "echo_on_edit"]
 
+ACTION_POSITION = bidict(
+    leading=QtWidgets.QLineEdit.LeadingPosition,
+    trailing=QtWidgets.QLineEdit.TrailingPosition,
+)
+
+ActionPositionStr = Literal["leading", "trailing"]
 
 QtWidgets.QLineEdit.__bases__ = (widgets.Widget,)
 
@@ -47,7 +53,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self.setReadOnly(state["read_only"])
         self.setFrame(state["has_frame"])
         self.setClearButtonEnabled(state["clear_button_enabled"])
-        self.setAlignment(state["alignment"])
+        # self.setAlignment(state["alignment"])
         self.set_cursor_move_style(state["cursor_move_style"])
         self.set_echo_mode(state["echo_mode"])
         self.setCursorPosition(state["cursor_position"])
@@ -159,6 +165,11 @@ class LineEdit(QtWidgets.QLineEdit):
             cursor move style
         """
         return constants.CURSOR_MOVE_STYLE.inverse[self.cursorMoveStyle()]
+
+    def add_action(
+        self, action: QtWidgets.QAction, position: ActionPositionStr = "trailing"
+    ):
+        self.addAction(action, ACTION_POSITION[position])
 
     def set_value(self, value: str):
         self.setText(value)
