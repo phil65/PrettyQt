@@ -105,7 +105,17 @@ class FontDatabase(QtGui.QFontDatabase):
 
     @classmethod
     def add_font(cls, path: Union[str, pathlib.Path]) -> int:
-        return cls.addApplicationFont(str(path))
+        font_id = cls.addApplicationFont(str(path))
+        if not gui.FontDatabase.applicationFontFamilies(font_id):
+            raise RuntimeError(
+                f"Font '{path}' appears to be empty. "
+                "If you are on Windows 10, please read "
+                "https://support.microsoft.com/"
+                "en-us/kb/3053676 "
+                "to know how to prevent Windows from blocking "
+                "the fonts that come with QtAwesome."
+            )
+        return font_id
 
     def get_system_font(self, font_type: SystemFontStr):
         if font_type not in SYSTEM_FONT:
