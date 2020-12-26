@@ -85,19 +85,17 @@ class Timeline(widgets.Widget):
         self.video_samples.append(sample)
 
     def paintEvent(self, event):
-        qp = gui.Painter()
-        w = 0
         # Draw time
         scale = self.get_scale()
-        with qp.paint_on(self):
+        with gui.Painter(self) as qp:
             qp.set_color(self.text_color)
             qp.setFont(self.text_font)
             qp.use_antialiasing()
-            while w <= self.width():
+            w = 0
+            while (w := w + 100) <= self.width():
                 time_string = self.get_time_string(w * scale)
                 rect = core.Rect(w - 50, 0, 100, 100)
                 qp.drawText(rect, QtCore.Qt.AlignHCenter, time_string)
-                w += 100
             # Draw down line
             qp.set_pen(color=PEN_COLOR, width=5)
             qp.drawLine(0, 40, self.width(), 40)
@@ -157,8 +155,7 @@ class Timeline(widgets.Widget):
                 with qp.clip_path() as path:
                     rect = core.RectF(scaled_t, 52.5, width, 45)
                     path.addRoundedRect(rect, 10, 10)
-                rect = core.RectF(scaled_t, 52.5, width, 45)
-                qp.drawPixmap(rect, pic)
+                qp.drawPixmap(int(scaled_t), int(52.5), int(width), 45, pic)
 
             # Clear clip path
             with qp.clip_path() as path:
@@ -216,10 +213,11 @@ class Timeline(widgets.Widget):
             else:
                 sample.color = sample.def_color
 
-    def get_time_string(self, seconds: float) -> str:
+    @staticmethod
+    def get_time_string(seconds: float) -> str:
         m, s = divmod(int(seconds), 60)
         h, m = divmod(m, 60)
-        return "%02d:%02d:%02d" % (h, m, s)
+        return f"{h:02}:{h:02}:{h:02}"
 
     def get_scale(self) -> float:
         return self.duration / self.width()
