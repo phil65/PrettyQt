@@ -146,7 +146,8 @@ class RoundProgressBar(widgets.Widget):
             painter.setPen(pen, self.outline_pen_width)
             painter.setBrush(QtCore.Qt.NoBrush)
             width = self.outline_pen_width / 2
-            painter.drawEllipse(rect.adjusted(width, width, -width, -width))
+            adjusted = rect.adjusted(width, width, -width, -width)
+            painter.drawEllipse(adjusted)
         elif self.bar_style in ("pie", "expand"):
             pen = gui.Pen(self.palette().base().color())
             painter.setPen(pen, self.outline_pen_width)
@@ -161,13 +162,15 @@ class RoundProgressBar(widgets.Widget):
         delta = max(value_range / diff, 0)
         if self.bar_style == "expand":
             painter.setBrush(self.palette().highlight())
-            pen = gui.Pen(self.palette().shadow().color(), self.data_pen_width)
+            color = self.palette().shadow().color()
+            pen = gui.Pen(color, self.data_pen_width)
             painter.setPen(pen)
             radius = (rect.height() / 2) / delta
             painter.drawEllipse(rect.center(), radius, radius)
             return
         elif self.bar_style == "line":
-            pen = gui.Pen(self.palette().highlight().color(), self.data_pen_width)
+            color = self.palette().highlight().color()
+            pen = gui.Pen(color, self.data_pen_width)
             painter.setPen(pen)
             painter.setBrush(QtCore.Qt.NoBrush)
             pen_width = self.outline_pen_width / 2

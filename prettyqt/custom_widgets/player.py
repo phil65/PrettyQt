@@ -72,8 +72,7 @@ class Player(widgets.MainWindow):
         self.clock.setText("00:00/00:00")
         # self.clock.setGeometry(550, 660, 80, 30)
 
-        self.vol_slider = widgets.Slider()
-        self.vol_slider.set_orientation("horizontal")
+        self.vol_slider = widgets.Slider("horizontal")
         self.vol_slider.set_range(0, 100)
         self.vol_slider.setFixedWidth(120)
         self.vol_slider.set_value(self.player.volume())

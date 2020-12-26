@@ -79,9 +79,7 @@ class ObjectBrowser(widgets.MainWindow):
 
         self._read_view_settings()
 
-        assert self._refresh_rate > 0, "refresh_rate must be > 0. Got: {}".format(
-            self._refresh_rate
-        )
+        assert self._refresh_rate > 0
         self._refresh_timer = core.Timer(self)
         self._refresh_timer.setInterval(self._refresh_rate * 1000)
         self._refresh_timer.timeout.connect(self._tree_model.refresh_tree)
