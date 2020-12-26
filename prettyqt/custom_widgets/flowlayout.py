@@ -64,7 +64,8 @@ class FlowLayout(widgets.Layout):
         return True
 
     def heightForWidth(self, width: int) -> int:
-        return self.do_layout(QtCore.QRect(0, 0, width, 0), True)
+        rect = QtCore.QRect(0, 0, width, 0)
+        return self.do_layout(rect, True)
 
     def setGeometry(self, rect: QtCore.QRect):
         super().setGeometry(rect)
@@ -87,11 +88,10 @@ class FlowLayout(widgets.Layout):
         x = rect.x()
         y = rect.y()
         line_height = 0
-
+        space = self.spacing()
+        pb = widgets.SizePolicy.PushButton
         for item in self.items:
             wid = item.widget()
-            pb = widgets.SizePolicy.PushButton
-            space = self.spacing()
             space_x = space + wid.style().layoutSpacing(pb, pb, QtCore.Qt.Horizontal)
             next_x = x + item.sizeHint().width() + space_x
             if next_x - space_x > rect.right() and line_height > 0:
