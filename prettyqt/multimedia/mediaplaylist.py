@@ -35,7 +35,7 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
     def __iter__(self) -> Iterator[multimedia.MediaContent]:
         return iter(self[i] for i in range(self.mediaCount()))
 
-    # def serialize(self):
+    # def serialize(self) -> Dict[str, Any]:
     #     return dict(current_index=self.currentIndex(),
     #                 playback_mode=self.get_playback_mode(),
     #                 items=list(self))

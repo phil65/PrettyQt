@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any, Dict
+
 from qtpy import QtCore
 
 
@@ -21,7 +23,7 @@ class UrlQuery(QtCore.QUrlQuery):
     def serialize_fields(self):
         return dict(path=self.toString())
 
-    def serialize(self):
+    def serialize(self) -> Dict[str, Any]:
         return self.serialize_fields()
 
     # def add_query_items(self, **items: str):

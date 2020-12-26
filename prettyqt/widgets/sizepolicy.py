@@ -91,7 +91,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def serialize(self):
+    def serialize(self) -> Dict[str, Any]:
         return self.__getstate__()
 
     def get_horizontal_policy(self) -> SizePolicyStr:

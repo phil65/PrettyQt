@@ -2,7 +2,7 @@ from collections import defaultdict
 import contextlib
 import inspect
 import itertools
-from typing import DefaultDict, List, Optional, Type, TypeVar, Union
+from typing import Any, DefaultDict, Dict, List, Optional, Type, TypeVar, Union
 
 import qtpy
 from qtpy import QtCore
@@ -29,7 +29,7 @@ class Object(QtCore.QObject):
     def serialize_fields(self):
         return dict(object_name=self.objectName())
 
-    def serialize(self):
+    def serialize(self) -> Dict[str, Any]:
         dct = {}
         for klass in reversed(inspect.getmro(type(self))):
             if "serialize_fields" in klass.__dict__:

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Union
+from typing import Any, Dict, Union
 
 from qtpy import QtGui
 
@@ -34,7 +34,7 @@ class Color(QtGui.QColor):
     def serialize_fields(self):
         return dict(color=self.toString())
 
-    def serialize(self):
+    def serialize(self) -> Dict[str, Any]:
         return self.serialize_fields()
 
     def set_color(self, color: Union[str, tuple]):

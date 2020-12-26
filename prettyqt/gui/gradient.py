@@ -1,4 +1,4 @@
-from typing import List, Literal, Tuple
+from typing import Any, Dict, List, Literal, Tuple
 
 from qtpy import QtGui
 
@@ -44,7 +44,7 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
             stops=self.get_stops(),
         )
 
-    def serialize(self):
+    def serialize(self) -> Dict[str, Any]:
         return self.serialize_fields()
 
     def set_coordinate_mode(self, mode: CoordinateModeStr):

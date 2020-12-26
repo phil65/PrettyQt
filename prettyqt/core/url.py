@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Literal, Optional, Union
+from typing import Any, Dict, Literal, Optional, Union
 
 from qtpy import QtCore
 
@@ -97,7 +97,7 @@ class Url(QtCore.QUrl):
     def serialize_fields(self):
         return dict(path=self.toString())
 
-    def serialize(self):
+    def serialize(self) -> Dict[str, Any]:
         return self.serialize_fields()
 
     def to_string(self) -> str:
