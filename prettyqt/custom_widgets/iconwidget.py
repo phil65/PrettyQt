@@ -42,6 +42,7 @@ class IconWidget(widgets.Label):
         elif isinstance(size, int):
             size = QtCore.QSize(size, size)
         self._size = size
+        self.update()
 
     def update(self, *args, **kwargs):
         if self._icon:
