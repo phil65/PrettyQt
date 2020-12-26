@@ -89,7 +89,7 @@ if __name__ == "__main__":
     layout = BoxLayout("vertical")
     widget = widgets.Widget()
     widget2 = widgets.RadioButton("Test")
-    layout += widget2
+    layout.add(widget2)
     widget.set_layout(layout)
     widget.show()
     app.main_loop()

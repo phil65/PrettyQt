@@ -31,7 +31,6 @@ class BaseDialog(QtWidgets.QDialog):
         self.setSizeGripEnabled(state["size_grip_enabled"])
         if state["is_maximized"]:
             self.showMaximized()
-        self.box = self.layout()
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -47,13 +46,13 @@ class BaseDialog(QtWidgets.QDialog):
     def delete_on_close(self):
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
 
-    def add_widget(self, widget: QtWidgets.QWidget):
+    def add_widget(self, widget: QtWidgets.QWidget) -> QtWidgets.QWidget:
         self.box += widget
         return widget
 
     def add_buttonbox(self) -> widgets.DialogButtonBox:
         button_box = widgets.DialogButtonBox.create(ok=self.accept, cancel=self.reject)
-        self.box += button_box
+        self.box.add(button_box)
         return button_box
 
     def show_blocking(self) -> bool:

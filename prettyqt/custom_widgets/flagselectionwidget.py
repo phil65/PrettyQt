@@ -37,7 +37,7 @@ class FlagSelectionWidget(widgets.GroupBox):
         checkbox = widgets.CheckBox(title)
         checkbox.toggled.connect(self.update_choice)
         self.buttons[checkbox] = flag
-        self.box += checkbox
+        self.box.add(checkbox)
 
     def current_choice(self) -> int:
         ret_val = 0

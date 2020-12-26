@@ -47,12 +47,12 @@ class DockWidget(QtWidgets.QDockWidget):
         layout.set_alignment("right")
         title_bar.set_layout(layout)
         maximize_button = widgets.PushButton()
-        layout += maximize_button
+        layout.add(maximize_button)
         maximize_button.set_style_icon("titlebar_max_button")
         maximize_button.clicked.connect(self.maximize)
         close_button = widgets.PushButton()
         close_button.set_style_icon("titlebar_close_button")
-        layout += close_button
+        layout.add(close_button)
         close_button.clicked.connect(self.close)
         self.setTitleBarWidget(title_bar)
 

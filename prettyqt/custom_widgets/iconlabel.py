@@ -25,8 +25,8 @@ class IconLabel(widgets.Widget):
         self.icon.set_size_policy(horizontal="minimum")
         pixmap = icon.pixmap(20, 20)
         self.icon.setPixmap(pixmap)
-        self.box += self.label
-        self.box += self.icon
+        self.box.add(self.label)
+        self.box.add(self.icon)
         self.box.setSpacing(0)
         self.box.addStretch()
 

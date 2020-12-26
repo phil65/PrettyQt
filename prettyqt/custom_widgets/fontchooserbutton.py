@@ -20,12 +20,12 @@ class FontChooserButton(widgets.Widget):
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_read_only()
-        layout += self.lineedit
+        layout.add(self.lineedit)
         action = widgets.Action()
         action.triggered.connect(self.choose_font)
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
-        layout += self.button
+        layout.add(self.button)
 
     def __repr__(self):
         return f"{type(self).__name__}({self._current_font})"

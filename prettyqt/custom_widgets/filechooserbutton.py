@@ -39,7 +39,7 @@ class FileChooserButton(widgets.Widget):
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_read_only()
-        layout += self.lineedit
+        layout.add(self.lineedit)
         action = widgets.Action()
         if self.file_mode == "directory":
             action.set_icon("mdi.folder-outline")
@@ -49,7 +49,7 @@ class FileChooserButton(widgets.Widget):
 
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
-        layout += self.button
+        layout.add(self.button)
 
     def serialize_fields(self):
         return dict(path=self.path, extensions=self.extensions, enabled=self.isEnabled())

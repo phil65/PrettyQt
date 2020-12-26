@@ -42,7 +42,7 @@ class HeaderView(QtWidgets.QHeaderView):
     def generate_header_id(self):
         # return f"{self._widget_name}.state"
         column_names = ",".join(self.get_section_labels())
-        columns_hash = hashlib.md5(column_names.encode("utf-8")).hexdigest()
+        columns_hash = hashlib.md5(column_names.encode()).hexdigest()
         return f"{type(self).__name__}_{columns_hash}.state"
 
     def save_state(

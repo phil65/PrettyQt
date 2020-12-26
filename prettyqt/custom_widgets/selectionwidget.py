@@ -62,7 +62,7 @@ class SelectionWidget(widgets.GroupBox):
         if len(self.buttons) == 1:
             with rb.block_signals():
                 rb.set_value(True)
-        self.box += rb
+        self.box.add(rb)
 
     def add_tooltip_icon(self, text: str):
         label = widgets.Label(text)
@@ -70,7 +70,7 @@ class SelectionWidget(widgets.GroupBox):
         icon = iconprovider.get_icon("mdi.help-circle-outline")
         pixmap = icon.pixmap(20, 20)
         label.setPixmap(pixmap)
-        self.box += label
+        self.box.add(label)
 
     def add_custom(
         self,
@@ -99,9 +99,9 @@ class SelectionWidget(widgets.GroupBox):
         if regex and typ == "string":
             self.widget_custom.set_regex_validator(regex)  # type: ignore
         layout = widgets.BoxLayout("horizontal")
-        layout += self.rb_other
-        layout += self.widget_custom
-        self.box += layout
+        layout.add(self.rb_other)
+        layout.add(self.widget_custom)
+        self.box.add(layout)
 
     def current_choice(self) -> Any:
         for k, v in self.buttons.items():

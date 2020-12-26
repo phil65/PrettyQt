@@ -18,12 +18,12 @@ class ColorChooserButton(widgets.Widget):
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_regex_validator(r"^#(?:[0-9a-fA-F]{6})$")
-        layout += self.lineedit
+        layout.add(self.lineedit)
         action = widgets.Action(icon="mdi.format-color-fill")
         action.triggered.connect(self.choose_color)
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
-        layout += self.button
+        layout.add(self.button)
         if color is not None:
             self.set_current_color(color)
 
