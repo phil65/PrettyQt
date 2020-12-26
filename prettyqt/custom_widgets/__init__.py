@@ -15,6 +15,7 @@ from .logtextedit import LogTextEdit
 from .flagselectionwidget import FlagSelectionWidget
 from .stringornumberwidget import StringOrNumberWidget
 from .iconlabel import IconLabel
+from .iconwidget import IconWidget
 from .flowlayout import FlowLayout
 from .sidebarwidget import SidebarWidget
 from .colorchooserbutton import ColorChooserButton
@@ -55,6 +56,7 @@ __all__ = [
     "FlagSelectionWidget",
     "StringOrNumberWidget",
     "IconLabel",
+    "IconWidget",
     "FlowLayout",
     "SidebarWidget",
     "ColorChooserButton",

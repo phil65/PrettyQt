@@ -13,6 +13,54 @@ from prettyqt import gui
 from prettyqt.iconprovider.iconic_font import IconicFont, set_global_defaults
 
 
+class FontAwesome4:
+    prefix = "fa"
+    font_path = "fontawesome4.7-webfont.ttf"
+    charmap_path = "fontawesome4.7-webfont-charmap.json"
+    md5 = "b06871f281fee6b241d60582ae9369b9"
+    stylename = None
+
+
+class FontAwesome5:
+    prefix = "fa5"
+    font_path = "fontawesome5-regular-webfont.ttf"
+    charmap_path = "fontawesome5-regular-webfont-charmap.json"
+    md5 = "808833867034fb67a4a86dd2155e195d"
+    stylename = None
+
+
+class FontAwesome5Solid:
+    prefix = "fa5s"
+    font_path = "fontawesome5-solid-webfont.ttf"
+    charmap_path = "fontawesome5-solid-webfont-charmap.json"
+    md5 = "139654bb0acaba6b00ae30d5faf3d02f"
+    stylename = "Solid"
+
+
+class FontAwesome5Brands:
+    prefix = "fa5b"
+    font_path = "fontawesome5-brands-webfont.ttf"
+    charmap_path = "fontawesome5-brands-webfont-charmap.json"
+    md5 = "085b1dd8427dbeff10bd55410915a3f6"
+    stylename = None
+
+
+class ElusiveIcons:
+    prefix = "ei"
+    font_path = "elusiveicons-webfont.ttf"
+    charmap_path = "elusiveicons-webfont-charmap.json"
+    md5 = "207966b04c032d5b873fd595a211582e"
+    stylename = None
+
+
+class MaterialDesignIcons:
+    prefix = "mdi"
+    font_path = "materialdesignicons-webfont.ttf"
+    charmap_path = "materialdesignicons-webfont-charmap.json"
+    md5 = "b0fd91bb29dcb296a9a37f8bda0a2d85"
+    stylename = None
+
+
 # Constants
 FONTS = [
     ("fa", "fontawesome4.7-webfont.ttf", "fontawesome4.7-webfont-charmap.json"),
@@ -273,3 +321,18 @@ def get_icon(
     icon = new if as_qicon else gui.Icon(new)
     icon_cache[(icon, color, as_qicon)] = icon
     return icon
+
+
+if __name__ == "__main__":
+    from prettyqt import custom_widgets, widgets
+
+    app = widgets.app()
+    icon = _icon("mdi.folder", vflip=True)
+    # state = icon.__getstate__()
+    # icon_2 = gui.Icon()
+    # icon_2.__setstate__(state)
+    widget = custom_widgets.IconWidget()
+    widget.set_icon(icon)
+    widget.set_icon_size(100)
+    widget.show()
+    app.main_loop()
