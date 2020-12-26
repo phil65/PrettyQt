@@ -82,10 +82,10 @@ class LabeledSlider(widgets.Widget):
                     if left <= 0:
                         self.left_margin = rect.width() // 2 - x_loc
                     self.bottom_margin = max(self.bottom_margin, rect.height())
-                    self.box.adjust_margins()
+                    self.adjust_margins()
                 if v == self.sl.maximum() and rect.width() // 2 >= self.right_margin:
                     self.right_margin = rect.width() // 2
-                    self.box.adjust_margins()
+                    self.adjust_margins()
             else:
                 y_loc = widgets.Style.sliderPositionFromValue(
                     self.sl.minimum(), self.sl.maximum(), v, available, upsideDown=True
@@ -97,7 +97,7 @@ class LabeledSlider(widgets.Widget):
                 left = self.left_margin - rect.width()
                 if left <= 0:
                     self.left_margin = rect.width() + 2
-                    self.box.adjust_margins()
+                    self.adjust_margins()
             painter.drawText(left, bottom, v_str)
 
     def adjust_margins(self):
