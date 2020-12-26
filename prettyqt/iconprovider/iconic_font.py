@@ -8,12 +8,13 @@ methods returning instances of ``QIcon``.
 
 """
 
+from __future__ import annotations
+
 # Standard library imports
 import hashlib
 import json
 import pathlib
 from typing import Any, Dict, List, Optional
-import warnings
 
 from qtpy import QtCore, QtGui
 
@@ -61,6 +62,38 @@ ICON_KW = [
     "off_disabled",
 ]
 
+VALID_OPTIONS = [
+    "active",
+    "selected",
+    "disabled",
+    "on",
+    "off",
+    "on_active",
+    "on_selected",
+    "on_disabled",
+    "off_active",
+    "off_selected",
+    "off_disabled",
+    "color",
+    "color_on",
+    "color_off",
+    "color_active",
+    "color_selected",
+    "color_disabled",
+    "color_on_selected",
+    "color_on_active",
+    "color_on_disabled",
+    "color_off_selected",
+    "color_off_active",
+    "color_off_disabled",
+    "animation",
+    "offset",
+    "scale_factor",
+    "rotated",
+    "hflip",
+    "vflip",
+]
+
 COLOR_OPTIONS = {
     QtGui.QIcon.On: {
         QtGui.QIcon.Normal: ("color_on", "on"),
@@ -79,39 +112,8 @@ COLOR_OPTIONS = {
 
 def set_global_defaults(**kwargs):
     """Set global defaults for the options passed to the icon painter."""
-    valid_options = [
-        "active",
-        "selected",
-        "disabled",
-        "on",
-        "off",
-        "on_active",
-        "on_selected",
-        "on_disabled",
-        "off_active",
-        "off_selected",
-        "off_disabled",
-        "color",
-        "color_on",
-        "color_off",
-        "color_active",
-        "color_selected",
-        "color_disabled",
-        "color_on_selected",
-        "color_on_active",
-        "color_on_disabled",
-        "color_off_selected",
-        "color_off_active",
-        "color_off_disabled",
-        "animation",
-        "offset",
-        "scale_factor",
-        "rotated",
-        "hflip",
-        "vflip",
-    ]
     for kw in kwargs:
-        if kw not in valid_options:
+        if kw not in VALID_OPTIONS:
             raise KeyError(f"Invalid option {kw!r}")
         _default_options[kw] = kwargs[kw]
 
@@ -119,49 +121,52 @@ def set_global_defaults(**kwargs):
 class CharIconPainter:
     """Char icon painter."""
 
-    def paint(self, iconic, painter, rect, mode, state, options: List[Dict[str, Any]]):
+    def paint(
+        self,
+        iconic: IconicFont,
+        painter: gui.Painter,
+        rect,
+        mode,
+        state,
+        options: List[Dict[str, Any]],
+    ):
         for opt in options:
-            self._paint_icon(iconic, painter, rect, mode, state, opt)
+            color, char = COLOR_OPTIONS[state][mode]
+            painter.save()
+            color = gui.Color(opt[color])
+            painter.setPen(color)
 
-    def _paint_icon(self, iconic, painter, rect, mode, state, options: Dict[str, Any]):
-        color, char = COLOR_OPTIONS[state][mode]
-        painter.save()
-        painter.setPen(gui.Color(options[color]))
+            # A 16 pixel-high icon yields a font size of 14, which is pixel perfect
+            # for font-awesome. 16 * 0.875 = 14
+            # The reason why the glyph size is smaller than the icon size is to
+            # account for font bearing.
 
-        # A 16 pixel-high icon yields a font size of 14, which is pixel perfect
-        # for font-awesome. 16 * 0.875 = 14
-        # The reason why the glyph size is smaller than the icon size is to
-        # account for font bearing.
-
-        draw_size = round(0.875 * rect.height() * options["scale_factor"])
-        # Animation setup hook
-        if (animation := options.get("animation")) is not None:
-            animation.setup(self, painter, rect)
-        font = iconic.get_font(options["prefix"], draw_size)
-        painter.setFont(font)
-        if "offset" in options:
-            rect.translate(
-                round(options["offset"][0] * rect.width()),
-                round(options["offset"][1] * rect.height()),
-            )
-        x_center = rect.width() * 0.5
-        y_center = rect.height() * 0.5
-        if options.get("vflip") is True:
+            draw_size = round(0.875 * rect.height() * opt["scale_factor"])
+            # Animation setup hook
+            if (animation := opt.get("animation")) is not None:
+                animation.setup(self, painter, rect)
+            font = iconic.get_font(opt["prefix"], draw_size)
+            painter.setFont(font)
+            if "offset" in opt:
+                rect.translate(
+                    round(opt["offset"][0] * rect.width()),
+                    round(opt["offset"][1] * rect.height()),
+                )
+            x_center = rect.width() * 0.5
+            y_center = rect.height() * 0.5
             with painter.offset_by(x_center, y_center), painter.apply_transform() as tf:
-                tf.scale(1, -1)
-        if options.get("hflip") is True:
-            with painter.offset_by(x_center, y_center), painter.apply_transform() as tf:
-                tf.scale(-1, 1)
+                if opt.get("vflip") is True:
+                    tf.scale(1, -1)
+                if opt.get("hflip") is True:
+                    tf.scale(-1, 1)
+                if "rotated" in opt:
+                    painter.rotate(opt["rotated"])
 
-        if "rotated" in options:
-            with painter.offset_by(x_center, y_center):
-                painter.rotate(options["rotated"])
+            if (opacity := opt.get("opacity")) is not None:
+                painter.setOpacity(opacity)
 
-        if (opacity := options.get("opacity")) is not None:
-            painter.setOpacity(opacity)
-
-        painter.drawText(rect, int(constants.ALIGN_CENTER), options[char])
-        painter.restore()
+            painter.drawText(rect, int(constants.ALIGN_CENTER), opt[char])
+            painter.restore()
 
 
 class FontError(Exception):
@@ -208,8 +213,8 @@ class IconicFont(core.Object):
         super().__init__()
         self.painter = CharIconPainter()
         self.painters: Dict[str, CharIconPainter] = {}
-        self.fontname = {}
-        self.fontids = {}
+        self.font_name = {}
+        self.font_ids = {}
         self.charmap = {}
         self.icon_cache = {}
         for fargs in args:
@@ -224,7 +229,7 @@ class IconicFont(core.Object):
         # Check stored font ids are still available
         return all(
             gui.FontDatabase.applicationFontFamilies(font_id)
-            for font_id in self.fontids.values()
+            for font_id in self.font_ids.values()
         )
 
     def load_font(
@@ -251,10 +256,6 @@ class IconicFont(core.Object):
         """
         if directory is None:
             directory = pathlib.Path(__file__).parent / "fonts"
-
-        # Load font
-        if gui.app() is None:
-            return
         id_ = gui.FontDatabase.add_font(directory / ttf_filename)
         loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)
 
@@ -267,8 +268,8 @@ class IconicFont(core.Object):
                 "to know how to prevent Windows from blocking "
                 "the fonts that come with QtAwesome."
             )
-        self.fontids[prefix] = id_
-        self.fontname[prefix] = loaded_font_families[0]
+        self.font_ids[prefix] = id_
+        self.font_name[prefix] = loaded_font_families[0]
 
         def hook(obj: dict) -> dict:
             result = {}
@@ -276,12 +277,7 @@ class IconicFont(core.Object):
                 try:
                     result[key] = chr(int(obj[key], 16))
                 except ValueError:
-                    if int(obj[key], 16) > 0xFFFF:
-                        # ignoring unsupported code in Python 2.7 32bit Windows
-                        # ValueError: chr() arg not in range(0x10000)
-                        pass
-                    else:
-                        raise FontError(f"Failed to load character {key}:{obj[key]}")
+                    raise FontError(f"Failed to load character {key}:{obj[key]}")
             return result
 
         with (directory / charmap_filename).open("r") as codes:
@@ -290,13 +286,10 @@ class IconicFont(core.Object):
         # Verify that vendorized fonts are not corrupt
         if SYSTEM_FONTS:
             return
-        ttf_hash = MD5_HASHES.get(ttf_filename, None)
-        if ttf_hash is None:
+        if (ttf_hash := MD5_HASHES.get(ttf_filename)) is None:
             return
-        hasher = hashlib.md5()
         content = (directory / ttf_filename).read_bytes()
-        hasher.update(content)
-        ttf_calculated_hash_code = hasher.hexdigest()
+        ttf_calculated_hash_code = hashlib.md5(content).hexdigest()
         if ttf_calculated_hash_code != ttf_hash:
             raise FontError(f"Font is corrupt at: '{directory / ttf_filename}'")
 
@@ -305,16 +298,10 @@ class IconicFont(core.Object):
         cache_key = f"{names}{kwargs}"
         if cache_key in self.icon_cache:
             return self.icon_cache[cache_key]
-        options_list = kwargs.pop("options", [{}] * len(names))
-        if len(options_list) != len(names):
-            raise Exception(f'"options" must be a list of size {len(names)}')
-        if gui.app() is None:
-            warnings.warn("You need to have a running QGuiApplication.")
-            return QtGui.QIcon()
-        parsed_options = [
-            self._parse_options(opt, kwargs, name)
-            for opt, name in zip(options_list, names)
-        ]
+        opts = kwargs.pop("options", [{}] * len(names))
+        if len(opts) != len(names):
+            raise TypeError(f'"options" must be a list of size {len(names)}')
+        parsed_options = [self._parse_options(o, kwargs, n) for o, n in zip(opts, names)]
         icon = self._icon_by_painter(self.painter, parsed_options)
         self.icon_cache[cache_key] = icon
         return icon
@@ -386,7 +373,7 @@ class IconicFont(core.Object):
 
     def get_font(self, prefix: str, size: float) -> gui.Font:
         """Return a gui.Font corresponding to the given prefix and size."""
-        font = gui.Font(self.fontname[prefix])
+        font = gui.Font(self.font_name[prefix])
         font.setPixelSize(round(size))
         if prefix[-1] == "s":  # solid style
             font.setStyleName("Solid")
