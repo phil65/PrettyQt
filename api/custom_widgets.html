@@ -2285,7 +2285,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
     <span class="n">layout</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">lineedit</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">LineEdit</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">set_read_only</span><span class="p">()</span>
-    <span class="n">layout</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lineedit</span>
+    <span class="n">layout</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lineedit</span><span class="p">)</span>
     <span class="n">action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">()</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file_mode</span> <span class="o">==</span> <span class="s2">"directory"</span><span class="p">:</span>
         <span class="n">action</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="s2">"mdi.folder-outline"</span><span class="p">)</span>
@@ -2295,7 +2295,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 
     <span class="bp">self</span><span class="o">.</span><span class="n">button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">setDefaultAction</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
-    <span class="n">layout</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span>
+    <span class="n">layout</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>

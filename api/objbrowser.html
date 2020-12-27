@@ -1328,9 +1328,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 
     <span class="bp">self</span><span class="o">.</span><span class="n">_read_view_settings</span><span class="p">()</span>
 
-    <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"refresh_rate must be &gt; 0. Got: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span>
-    <span class="p">)</span>
+    <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span> <span class="o">&gt;</span> <span class="mi">0</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">setInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">)</span>
