@@ -6,6 +6,9 @@ from prettyqt import core, gui
 from prettyqt.utils import InvalidParamError
 
 
+QtGui.QPdfWriter.__bases__ = (core.Object, gui.PagedPaintDevice)
+
+
 class PdfWriter(QtGui.QPdfWriter):
     def setup(self, size: QtCore.QSize):
         primary = gui.app().primaryScreen()
