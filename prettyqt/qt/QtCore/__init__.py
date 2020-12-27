@@ -29,5 +29,5 @@ elif PYSIDE2:
     from PySide2.QtCore import *
     from PySide2.QtCore import __version__  # type: ignore
 elif PYSIDE6:
-    from PySide6.QtCore import *
+    from PySide6.QtCore import *  # type: ignore
     from PySide6.QtCore import __version__  # type: ignore

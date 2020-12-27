@@ -8,6 +8,6 @@ if PYQT5:
 elif PYSIDE2:
     from PySide2.QtGui import *
 elif PYSIDE6:
-    from PySide6.QtGui import *
+    from PySide6.QtGui import *  # type: ignore
 else:
     raise PythonQtError("No Qt bindings could be found")

@@ -63,7 +63,7 @@ class GridLayout(QtWidgets.QGridLayout):
     ):
         if isinstance(other, (tuple, list)):
             for i, control in enumerate(other):
-                self[self.rowCount(), i] = other
+                self[self.rowCount(), i] = other  # type: ignore
         else:
             self[self.rowCount(), 0 : self.columnCount() - 1] = other
         return self

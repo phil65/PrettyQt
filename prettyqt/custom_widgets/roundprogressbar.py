@@ -142,15 +142,15 @@ class RoundProgressBar(widgets.Widget):
             painter.setBrush(self.palette().base())
             painter.drawEllipse(rect)
         elif self.bar_style == "line":
-            pen = gui.Pen(self.palette().base().color())
-            painter.setPen(pen, self.outline_pen_width)
+            base_color = self.palette().base().color()
+            painter.set_pen(color=base_color, width=self.outline_pen_width)
             painter.setBrush(QtCore.Qt.NoBrush)
             width = self.outline_pen_width / 2
             adjusted = rect.adjusted(width, width, -width, -width)
             painter.drawEllipse(adjusted)
         elif self.bar_style in ("pie", "expand"):
-            pen = gui.Pen(self.palette().base().color())
-            painter.setPen(pen, self.outline_pen_width)
+            base_color = self.palette().base().color()
+            painter.set_pen(color=base_color, width=self.outline_pen_width)
             painter.setBrush(self.palette().base())
             painter.drawEllipse(rect)
 
@@ -191,8 +191,8 @@ class RoundProgressBar(widgets.Widget):
                 data_path.arcTo(rect, self.null_pos, -arc_length)
                 data_path.lineTo(center_point)
             painter.setBrush(self.palette().highlight())
-            pen = gui.Pen(self.palette().shadow().color())
-            painter.setPen(pen, self.data_pen_width)
+            shadow_color = self.palette().shadow().color()
+            painter.set_pen(color=shadow_color, width=self.data_pen_width)
             painter.drawPath(data_path)
 
     def _calculate_inner_rect(self, outer_radius: float) -> Tuple[core.RectF, float]:

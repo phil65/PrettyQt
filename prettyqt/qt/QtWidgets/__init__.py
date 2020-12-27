@@ -8,7 +8,7 @@ if PYQT5:
 elif PYSIDE2:
     from PySide2.QtWidgets import *
 elif PYSIDE6:
-    from PySide6.QtWidgets import *
+    from PySide6.QtWidgets import *  # type: ignore
     from PySide6.QtGui import (  # type: ignore
         QAction,
         QActionGroup,

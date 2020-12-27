@@ -28,7 +28,7 @@ class DateEdit(QtWidgets.QDateEdit):
         )
 
     def set_value(self, value: Union[QtCore.QDate, datetime.date]):
-        return self.setDate(value)
+        self.setDate(value)  # type: ignore
 
     def set_range(
         self,
