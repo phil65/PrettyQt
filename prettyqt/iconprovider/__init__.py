@@ -71,32 +71,6 @@ class MaterialDesignIcons(IconFont):
     md5 = "b0fd91bb29dcb296a9a37f8bda0a2d85"
 
 
-# Constants
-FONTS = [
-    ("fa", "fontawesome4.7-webfont.ttf", "fontawesome4.7-webfont-charmap.json"),
-    (
-        "fa5",
-        "fontawesome5-regular-webfont.ttf",
-        "fontawesome5-regular-webfont-charmap.json",
-    ),
-    (
-        "fa5s",
-        "fontawesome5-solid-webfont.ttf",
-        "fontawesome5-solid-webfont-charmap.json",
-    ),
-    (
-        "fa5b",
-        "fontawesome5-brands-webfont.ttf",
-        "fontawesome5-brands-webfont-charmap.json",
-    ),
-    ("ei", "elusiveicons-webfont.ttf", "elusiveicons-webfont-charmap.json"),
-    (
-        "mdi",
-        "materialdesignicons-webfont.ttf",
-        "materialdesignicons-webfont-charmap.json",
-    ),
-]
-
 _resource: Dict[str, Optional[IconicFont]] = {"iconic": None}
 
 
@@ -107,7 +81,14 @@ def _instance() -> IconicFont:
     ``set_defaults`` all rebind to methods of the singleton instance of IconicFont.
     """
     if _resource["iconic"] is None or not _resource["iconic"].has_valid_font_ids():
-        iconic = IconicFont(*FONTS)
+        iconic = IconicFont(
+            FontAwesome4,
+            FontAwesome5,
+            FontAwesome5Brands,
+            FontAwesome5Solid,
+            ElusiveIcons,
+            MaterialDesignIcons,
+        )
         _resource["iconic"] = iconic
         return iconic
     return _resource["iconic"]

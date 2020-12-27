@@ -27,16 +27,6 @@ from prettyqt import constants, core, gui
 # use system fonts
 SYSTEM_FONTS = False
 
-# MD5 Hashes for font files bundled with qtawesome:
-MD5_HASHES = {
-    "fontawesome4.7-webfont.ttf": "b06871f281fee6b241d60582ae9369b9",
-    "fontawesome5-regular-webfont.ttf": "808833867034fb67a4a86dd2155e195d",
-    "fontawesome5-solid-webfont.ttf": "139654bb0acaba6b00ae30d5faf3d02f",
-    "fontawesome5-brands-webfont.ttf": "085b1dd8427dbeff10bd55410915a3f6",
-    "elusiveicons-webfont.ttf": "207966b04c032d5b873fd595a211582e",
-    "materialdesignicons-webfont.ttf": "b0fd91bb29dcb296a9a37f8bda0a2d85",
-}
-
 _default_options = {
     "color": gui.Color(50, 50, 50),
     "color_disabled": gui.Color(150, 150, 150),
@@ -233,8 +223,14 @@ class IconicFont(core.Object):
         self.font_ids = {}
         self.charmap = {}
         self.icon_cache = {}
-        for fargs in args:
-            self.load_font(*fargs)
+        for font in args:
+            self.load_font(
+                prefix=font.prefix,
+                ttf_filename=font.font_path,
+                charmap_filename=font.charmap_path,
+                md5=font.md5,
+                directory=font.path,
+            )
 
     def has_valid_font_ids(self) -> bool:
         """Validate instance's font ids are loaded to QFontDatabase.
@@ -253,7 +249,8 @@ class IconicFont(core.Object):
         prefix: str,
         ttf_filename: str,
         charmap_filename: str,
-        directory: Optional[pathlib.Path] = None,
+        directory: pathlib.Path,
+        md5: Optional[str] = None,
     ):
         """Load a font file and the associated charmap.
 
@@ -267,13 +264,13 @@ class IconicFont(core.Object):
             Ttf font filename
         charmap_filename: str
             Charmap filename
-        directory: str or None, optional
+        directory: pathlib.Path
             Directory for font and charmap files
+        md5: str or None, optional
+            md5 hash for font file
         """
-        if directory is None:
-            directory = pathlib.Path(__file__).parent / "fonts"
-        md5 = None if SYSTEM_FONTS else MD5_HASHES.get(ttf_filename)
-        id_ = gui.FontDatabase.add_font(directory / ttf_filename, ttf_hash=md5)
+        hash_val = None if SYSTEM_FONTS else md5
+        id_ = gui.FontDatabase.add_font(directory / ttf_filename, ttf_hash=hash_val)
         loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)
         self.font_ids[prefix] = id_
         self.font_name[prefix] = loaded_font_families[0]
