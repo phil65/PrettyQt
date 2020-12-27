@@ -13,23 +13,30 @@ from prettyqt import gui
 from prettyqt.iconprovider.iconic_font import IconicFont, set_global_defaults
 
 
-class FontAwesome4:
+class IconFont:
+    path = pathlib.Path(__file__).parent / "fonts"
+    prefix: str
+    font_path: str
+    charmap_path: str
+    md5: str
+    stylename: Optional[str] = None
+
+
+class FontAwesome4(IconFont):
     prefix = "fa"
     font_path = "fontawesome4.7-webfont.ttf"
     charmap_path = "fontawesome4.7-webfont-charmap.json"
     md5 = "b06871f281fee6b241d60582ae9369b9"
-    stylename = None
 
 
-class FontAwesome5:
+class FontAwesome5(IconFont):
     prefix = "fa5"
     font_path = "fontawesome5-regular-webfont.ttf"
     charmap_path = "fontawesome5-regular-webfont-charmap.json"
     md5 = "808833867034fb67a4a86dd2155e195d"
-    stylename = None
 
 
-class FontAwesome5Solid:
+class FontAwesome5Solid(IconFont):
     prefix = "fa5s"
     font_path = "fontawesome5-solid-webfont.ttf"
     charmap_path = "fontawesome5-solid-webfont-charmap.json"
@@ -37,28 +44,25 @@ class FontAwesome5Solid:
     stylename = "Solid"
 
 
-class FontAwesome5Brands:
+class FontAwesome5Brands(IconFont):
     prefix = "fa5b"
     font_path = "fontawesome5-brands-webfont.ttf"
     charmap_path = "fontawesome5-brands-webfont-charmap.json"
     md5 = "085b1dd8427dbeff10bd55410915a3f6"
-    stylename = None
 
 
-class ElusiveIcons:
+class ElusiveIcons(IconFont):
     prefix = "ei"
     font_path = "elusiveicons-webfont.ttf"
     charmap_path = "elusiveicons-webfont-charmap.json"
     md5 = "207966b04c032d5b873fd595a211582e"
-    stylename = None
 
 
-class MaterialDesignIcons:
+class MaterialDesignIcons(IconFont):
     prefix = "mdi"
     font_path = "materialdesignicons-webfont.ttf"
     charmap_path = "materialdesignicons-webfont-charmap.json"
     md5 = "b0fd91bb29dcb296a9a37f8bda0a2d85"
-    stylename = None
 
 
 # Constants
