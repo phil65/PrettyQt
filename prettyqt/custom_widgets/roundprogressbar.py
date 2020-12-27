@@ -167,7 +167,6 @@ class RoundProgressBar(widgets.Widget):
             painter.setPen(pen)
             radius = (rect.height() / 2) / delta
             painter.drawEllipse(rect.center(), radius, radius)
-            return
         elif self.bar_style == "line":
             color = self.palette().highlight().color()
             pen = gui.Pen(color, self.data_pen_width)
@@ -180,21 +179,21 @@ class RoundProgressBar(widgets.Widget):
             else:
                 arc_length = 360 / delta
                 painter.drawArc(adjusted, int(self.null_pos * 16), int(-arc_length * 16))
-            return
-        data_path = gui.PainterPath()
-        data_path.set_fill_rule("winding")
-        if value == self._max_value:
-            data_path.addEllipse(rect)
-        else:
-            arc_length = 360 / delta
-            center_point = rect.center()
-            data_path.moveTo(center_point)
-            data_path.arcTo(rect, self.null_pos, -arc_length)
-            data_path.lineTo(center_point)
-        painter.setBrush(self.palette().highlight())
-        pen = gui.Pen(self.palette().shadow().color())
-        painter.setPen(pen, self.data_pen_width)
-        painter.drawPath(data_path)
+        elif self.bar_style in ["donut", "pie"]:
+            data_path = gui.PainterPath()
+            data_path.set_fill_rule("winding")
+            if value == self._max_value:
+                data_path.addEllipse(rect)
+            else:
+                arc_length = 360 / delta
+                center_point = rect.center()
+                data_path.moveTo(center_point)
+                data_path.arcTo(rect, self.null_pos, -arc_length)
+                data_path.lineTo(center_point)
+            painter.setBrush(self.palette().highlight())
+            pen = gui.Pen(self.palette().shadow().color())
+            painter.setPen(pen, self.data_pen_width)
+            painter.drawPath(data_path)
 
     def _calculate_inner_rect(self, outer_radius: float) -> Tuple[core.RectF, float]:
         if self.bar_style in ("line", "expand"):
