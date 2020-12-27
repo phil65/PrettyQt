@@ -1,3 +1,14 @@
+## v0.162.0 (2020-12-27)
+
+### Feat
+
+- **FontDatabase**: add additional check in add_font
+- **Painter**: add offset_by and apply_transform context managers
+
+### Fix
+
+- **IconWidget**: update when setting size
+
 ## v0.161.0 (2020-12-26)
 
 ### Feat
