@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from qtpy import QtWidgets
+from prettyqt.qt import QtWidgets
 
 
 class TableWidgetSelectionRange(QtWidgets.QTableWidgetSelectionRange):

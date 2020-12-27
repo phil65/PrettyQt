@@ -3,9 +3,8 @@ from __future__ import annotations
 import pathlib
 from typing import List, Literal, Optional, Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import constants, core, gui, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors, helpers
 
 

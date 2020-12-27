@@ -1,8 +1,7 @@
 from typing import Union
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 QtCore.QSignalMapper.__bases__ = (core.Object,)

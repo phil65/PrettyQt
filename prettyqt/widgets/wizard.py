@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Iterator, Literal
 
-from qtpy import QtCore, QtGui, QtWidgets
-
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

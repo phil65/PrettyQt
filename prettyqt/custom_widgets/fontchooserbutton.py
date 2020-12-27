@@ -1,8 +1,7 @@
 from typing import Optional, Union
 
-from qtpy import QtGui, QtWidgets
-
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtGui, QtWidgets
 
 
 class FontChooserButton(widgets.Widget):

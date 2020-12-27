@@ -3,10 +3,10 @@
 import sre_constants
 from typing import List, Match, Optional, Pattern
 
-from qtpy import QtWidgets
 import regex as re
 
 from prettyqt import constants, core, custom_models, custom_widgets, widgets
+from prettyqt.qt import QtWidgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
 
 

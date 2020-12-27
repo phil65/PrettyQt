@@ -1,8 +1,7 @@
 from typing import List
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 QtCore.QSortFilterProxyModel.__bases__ = (core.AbstractProxyModel,)

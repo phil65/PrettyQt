@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from qtpy import QtCore
+from prettyqt.qt import QtCore
 
 
 class SizeF(QtCore.QSizeF):

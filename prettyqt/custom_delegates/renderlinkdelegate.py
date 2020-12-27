@@ -1,6 +1,5 @@
-from qtpy import QtCore
-
 from prettyqt import constants, core, gui, widgets
+from prettyqt.qt import QtCore
 
 
 class RenderLinkDelegate(widgets.StyledItemDelegate):

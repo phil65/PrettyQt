@@ -1,8 +1,7 @@
 from typing import Dict, Literal
 
-from qtpy import QtGui
-
 from prettyqt import core, gui
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, colors
 
 

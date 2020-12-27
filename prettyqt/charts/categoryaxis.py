@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Iterator, Literal, Tuple
 
-from qtpy.QtCharts import QtCharts
-
 from prettyqt import charts
+from prettyqt.qt.QtCharts import QtCharts
 from prettyqt.utils import InvalidParamError, bidict
 
 

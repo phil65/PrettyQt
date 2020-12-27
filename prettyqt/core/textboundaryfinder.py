@@ -1,7 +1,6 @@
 from typing import List, Literal, Union
 
-from qtpy import QtCore
-
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 

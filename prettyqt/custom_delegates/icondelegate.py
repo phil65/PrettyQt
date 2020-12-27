@@ -1,6 +1,5 @@
-from qtpy import QtCore, QtGui, QtWidgets
-
 from prettyqt import constants, core, gui, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 DecorationRole2 = QtCore.Qt.UserRole + 1000

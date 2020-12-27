@@ -4,7 +4,7 @@ contains QtWidgets-based classes
 """
 
 from prettyqt import core
-from qtpy.QtWidgets import (
+from prettyqt.qt.QtWidgets import (
     QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent,
     QGraphicsSceneMouseEvent as GraphicsSceneMouseEvent,
     QGraphicsSceneWheelEvent as GraphicsSceneWheelEvent,

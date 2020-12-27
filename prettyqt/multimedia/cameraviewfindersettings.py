@@ -3,9 +3,8 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from typing import Any, Dict, Iterator, Tuple
 
-from qtpy import QtMultimedia
-
 from prettyqt import multimedia
+from prettyqt.qt import QtMultimedia
 from prettyqt.utils import InvalidParamError
 
 

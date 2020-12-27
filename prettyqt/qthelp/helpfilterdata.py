@@ -1,8 +1,7 @@
 from typing import List, Sequence, Union
 
-from qtpy import QtCore, QtHelp
-
 from prettyqt import core
+from prettyqt.qt import QtCore, QtHelp
 
 
 class HelpFilterData(QtHelp.QHelpFilterData):

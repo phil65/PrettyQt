@@ -1,6 +1,5 @@
-from qtpy import QtHelp
-
 from prettyqt import qthelp
+from prettyqt.qt import QtHelp
 
 
 QtHelp.QHelpEngine.__bases__ = (qthelp.HelpEngineCore,)

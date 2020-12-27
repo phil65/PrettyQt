@@ -1,6 +1,5 @@
-from qtpy import QtWidgets
-
 from prettyqt import gui, iconprovider
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 

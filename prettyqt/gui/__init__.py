@@ -3,7 +3,7 @@
 Contains QtGui-based classes
 """
 
-from qtpy.QtGui import (
+from prettyqt.qt.QtGui import (
     QKeyEvent as KeyEvent,
     QMouseEvent as MouseEvent,
     QWheelEvent as WheelEvent,
@@ -41,7 +41,7 @@ from qtpy.QtGui import (
 )
 
 # not available in PySide2
-# from qtpy.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
+# from prettyqt.qt.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
 
 from .screen import Screen
 from .keysequence import KeySequence

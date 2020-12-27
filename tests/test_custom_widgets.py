@@ -4,10 +4,9 @@ import logging
 import pickle
 import re
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import core, custom_widgets, gui, widgets
 import prettyqt.custom_widgets.dataset as fo
+from prettyqt.qt import QtCore, QtGui
 
 
 def test_booldicttoolbutton(qtbot):

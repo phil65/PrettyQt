@@ -1,5 +1,4 @@
-from qtpy import QtQml
-
+from prettyqt.qt import QtQml
 from prettyqt.utils import bidict
 
 

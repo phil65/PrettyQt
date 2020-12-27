@@ -1,6 +1,6 @@
 from typing import Any, Dict, Optional, Tuple, Union
 
-from qtpy import QtCore
+from prettyqt.qt import QtCore
 
 
 class RegularExpressionMatch(QtCore.QRegularExpressionMatch):

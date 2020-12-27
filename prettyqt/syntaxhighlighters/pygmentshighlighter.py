@@ -7,9 +7,9 @@ from pygments.lexer import Error, RegexLexer, Text, _TokenType
 from pygments.lexers import get_lexer_by_name, load_lexer_from_file
 from pygments.style import Style
 from pygments.styles import get_style_by_name
-from qtpy import QtGui
 
 from prettyqt import gui
+from prettyqt.qt import QtGui
 
 
 logger = logging.getLogger(__name__)

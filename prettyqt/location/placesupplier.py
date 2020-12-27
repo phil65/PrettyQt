@@ -1,8 +1,7 @@
 from typing import Union
 
-from qtpy import QtCore, QtLocation
-
 from prettyqt import core, location
+from prettyqt.qt import QtCore, QtLocation
 
 
 class PlaceSupplier(QtLocation.QPlaceSupplier):

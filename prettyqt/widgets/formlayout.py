@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Literal, Optional, Tuple, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

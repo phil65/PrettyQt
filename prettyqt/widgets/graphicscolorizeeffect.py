@@ -1,6 +1,5 @@
-from qtpy import QtWidgets
-
 from prettyqt import gui, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QGraphicsColorizeEffect.__bases__ = (widgets.GraphicsEffect,)

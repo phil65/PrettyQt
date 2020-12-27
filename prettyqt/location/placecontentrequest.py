@@ -1,6 +1,5 @@
-from qtpy import QtLocation
-
 from prettyqt import location
+from prettyqt.qt import QtLocation
 from prettyqt.utils import InvalidParamError
 
 

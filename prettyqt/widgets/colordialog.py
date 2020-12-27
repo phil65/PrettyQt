@@ -1,8 +1,7 @@
 from typing import Literal, Optional
 
-from qtpy import QtWidgets
-
 from prettyqt import gui, widgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import colors
 
 

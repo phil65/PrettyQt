@@ -1,6 +1,5 @@
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 QtCore.QSignalTransition.__bases__ = (core.AbstractTransition,)

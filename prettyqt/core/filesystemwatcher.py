@@ -1,9 +1,8 @@
 import pathlib
 from typing import List, Union
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 QtCore.QFileSystemWatcher.__bases__ = (core.Object,)

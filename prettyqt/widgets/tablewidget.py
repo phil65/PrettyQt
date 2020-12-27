@@ -1,8 +1,7 @@
 from typing import Tuple
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 QtWidgets.QTableWidget.__bases__ = (widgets.TableView,)

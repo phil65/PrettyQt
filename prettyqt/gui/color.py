@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, Union
 
-from qtpy import QtGui
+from prettyqt.qt import QtGui
 
 
 class Color(QtGui.QColor):

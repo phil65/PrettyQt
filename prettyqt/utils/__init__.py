@@ -8,7 +8,7 @@ import logging
 import bidict as bdct
 
 if TYPE_CHECKING:
-    from qtpy import QtCore
+    from prettyqt.qt import QtCore
     import datetime
 
 logger = logging.getLogger(__name__)

@@ -1,6 +1,6 @@
 from typing import Optional, Union
 
-from qtpy import QtLocation
+from prettyqt.qt import QtLocation
 
 
 class PlaceAttribute(QtLocation.QPlaceAttribute):

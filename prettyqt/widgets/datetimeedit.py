@@ -1,9 +1,8 @@
 import datetime
 from typing import List, Literal, Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, to_date, to_datetime, to_time
 
 

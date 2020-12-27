@@ -1,7 +1,6 @@
 from typing import Literal
 
-from qtpy import QtGui
-
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict
 
 

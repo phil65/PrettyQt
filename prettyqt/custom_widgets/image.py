@@ -3,9 +3,8 @@ from __future__ import annotations
 import pathlib
 from typing import Optional, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import gui, widgets
+from prettyqt.qt import QtWidgets
 
 
 class Image(widgets.Label):

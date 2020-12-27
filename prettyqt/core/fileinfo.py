@@ -1,9 +1,8 @@
 import pathlib
 from typing import Any
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 class FileInfo(QtCore.QFileInfo):

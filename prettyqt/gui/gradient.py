@@ -1,8 +1,7 @@
 from typing import Any, Dict, List, Literal, Tuple
 
-from qtpy import QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, prettyprinter
 
 

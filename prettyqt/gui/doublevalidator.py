@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtGui
 
 
 QtGui.QDoubleValidator.__bases__ = (gui.Validator,)

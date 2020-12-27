@@ -1,8 +1,7 @@
 from typing import Callable, Union
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 QtCore.QVariantAnimation.__bases__ = (core.AbstractAnimation,)

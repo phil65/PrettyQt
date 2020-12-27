@@ -1,4 +1,4 @@
-from qtpy import QtMultimedia
+from prettyqt.qt import QtMultimedia
 
 
 class MediaTimeInterval(QtMultimedia.QMediaTimeInterval):

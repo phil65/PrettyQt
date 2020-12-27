@@ -1,8 +1,7 @@
 from typing import List
 
-from qtpy import QtLocation
-
 from prettyqt import core, location
+from prettyqt.qt import QtLocation
 
 
 QtLocation.QGeoRoutingManager.__bases__ = (core.Object,)

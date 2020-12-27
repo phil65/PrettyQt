@@ -1,8 +1,7 @@
 from typing import Dict, Iterable, Iterator, Literal, Mapping, Optional, Tuple, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtWidgets
 
 
 class FlagSelectionWidget(widgets.GroupBox):

@@ -1,9 +1,8 @@
 import contextlib
 from typing import Iterator, List, Literal, Union
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import constants, core, gui
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, bidict, colors
 
 

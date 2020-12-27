@@ -1,8 +1,7 @@
 from typing import Literal, Optional
 
-from qtpy import QtLocation
-
 from prettyqt import positioning
+from prettyqt.qt import QtLocation
 from prettyqt.utils import InvalidParamError, bidict
 
 

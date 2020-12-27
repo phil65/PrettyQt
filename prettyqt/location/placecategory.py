@@ -1,6 +1,5 @@
-from qtpy import QtLocation
-
 from prettyqt import location
+from prettyqt.qt import QtLocation
 
 
 class PlaceCategory(QtLocation.QPlaceCategory):

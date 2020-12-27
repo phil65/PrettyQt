@@ -1,8 +1,7 @@
 from typing import Iterator
 
-from qtpy import QtMultimedia
-
 from prettyqt import multimedia
+from prettyqt.qt import QtMultimedia
 
 
 class MediaTimeRange(QtMultimedia.QMediaTimeRange):

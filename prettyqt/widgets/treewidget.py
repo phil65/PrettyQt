@@ -1,6 +1,5 @@
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 QtWidgets.QTreeWidget.__bases__ = (widgets.TreeView,)

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Optional
 
-from qtpy import QtMultimedia
+from prettyqt.qt import QtMultimedia
 
 
 class CameraInfo(QtMultimedia.QCameraInfo):

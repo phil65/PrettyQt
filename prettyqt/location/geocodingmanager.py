@@ -1,6 +1,5 @@
-from qtpy import QtLocation
-
 from prettyqt import core
+from prettyqt.qt import QtLocation
 
 
 QtLocation.QGeoCodingManager.__bases__ = (core.Object,)

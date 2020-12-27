@@ -1,7 +1,6 @@
 from typing import Literal
 
-from qtpy import QtLocation
-
+from prettyqt.qt import QtLocation
 from prettyqt.utils import bidict
 
 

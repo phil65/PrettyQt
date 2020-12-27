@@ -1,9 +1,8 @@
 import pathlib
 from typing import List, Literal, Union
 
-from qtpy import QtCore, QtQml
-
 from prettyqt import qml
+from prettyqt.qt import QtCore, QtQml
 from prettyqt.utils import InvalidParamError, bidict
 
 

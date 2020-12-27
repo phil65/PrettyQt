@@ -3,9 +3,8 @@
 
 from typing import List, Literal
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 

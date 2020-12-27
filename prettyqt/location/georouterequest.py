@@ -1,8 +1,7 @@
 from typing import List, Literal
 
-from qtpy import QtLocation
-
 from prettyqt import core, positioning
+from prettyqt.qt import QtLocation
 from prettyqt.utils import InvalidParamError, bidict, helpers, mappers
 
 

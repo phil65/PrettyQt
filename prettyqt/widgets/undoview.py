@@ -1,8 +1,7 @@
 from typing import Union
 
-from qtpy import QtWidgets
-
 from prettyqt import iconprovider, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QUndoView.__bases__ = (widgets.ListView,)

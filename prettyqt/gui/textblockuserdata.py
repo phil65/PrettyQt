@@ -1,4 +1,4 @@
-from qtpy import QtGui
+from prettyqt.qt import QtGui
 
 
 class TextBlockUserData(QtGui.QTextBlockUserData):

@@ -1,6 +1,5 @@
-from qtpy import QtGui
-
 from prettyqt import core, gui
+from prettyqt.qt import QtGui
 
 
 QtGui.QRegularExpressionValidator.__bases__ = (gui.Validator,)

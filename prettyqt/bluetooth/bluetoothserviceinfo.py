@@ -1,11 +1,4 @@
-from qtpy import PYQT5, PYSIDE2
-
-
-if PYQT5:
-    from PyQt5 import QtBluetooth
-elif PYSIDE2:
-    from PySide2 import QtBluetooth
-
+from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
 

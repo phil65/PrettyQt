@@ -1,8 +1,7 @@
 from typing import Iterator, Optional, Pattern, Tuple
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import core, gui
+from prettyqt.qt import QtCore, QtGui
 
 
 QtGui.QSyntaxHighlighter.__bases__ = (core.Object,)

@@ -1,6 +1,5 @@
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 QtCore.QParallelAnimationGroup.__bases__ = (core.AnimationGroup,)

@@ -1,8 +1,7 @@
 from typing import Callable, Optional
 
-from qtpy import QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QPushButton.__bases__ = (widgets.AbstractButton,)

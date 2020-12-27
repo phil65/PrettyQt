@@ -1,8 +1,7 @@
 from typing import Union
 
-from qtpy import QtNetwork
-
 from prettyqt import core, network
+from prettyqt.qt import QtNetwork
 
 
 QtNetwork.QTcpServer.__bases__ = (core.Object,)

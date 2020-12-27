@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from qtpy import QtCore
-
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 

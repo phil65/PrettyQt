@@ -1,6 +1,5 @@
-from qtpy import QtQuick
-
 from prettyqt import core, gui
+from prettyqt.qt import QtQuick
 
 
 QtQuick.QQuickItemGrabResult.__bases__ = (core.Object,)

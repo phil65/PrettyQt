@@ -1,7 +1,6 @@
 from typing import Optional, Union
 
-from qtpy import QtWidgets
-
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 

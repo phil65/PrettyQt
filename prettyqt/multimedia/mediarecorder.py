@@ -1,9 +1,8 @@
 import pathlib
 from typing import Literal, Union
 
-from qtpy import QtMultimedia
-
 from prettyqt import core, multimedia
+from prettyqt.qt import QtMultimedia
 from prettyqt.utils import bidict
 
 

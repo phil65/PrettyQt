@@ -3,10 +3,12 @@
 import pickle
 
 import pytest
-from qtpy import QtCore
 
-from prettyqt import charts
+from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
+
+
+charts = pytest.importorskip("prettyqt.charts")
 
 
 def test_barseries(qtbot):

@@ -1,6 +1,6 @@
 from typing import Iterator
 
-from qtpy import QtCore
+from prettyqt.qt import QtCore
 
 
 class Margins(QtCore.QMargins):

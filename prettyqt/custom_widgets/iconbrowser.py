@@ -1,9 +1,8 @@
 import sys
 from typing import Optional
 
-from qtpy import QtGui, QtWidgets
-
 from prettyqt import constants, core, gui, iconprovider, widgets
+from prettyqt.qt import QtGui, QtWidgets
 
 
 # TODO: Set icon colour and copy code with color kwarg

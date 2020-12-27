@@ -3,8 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from typing import Any, Dict, Iterator, Literal
 
-from qtpy import QtMultimedia
-
+from prettyqt.qt import QtMultimedia
 from prettyqt.utils import InvalidParamError, bidict
 
 

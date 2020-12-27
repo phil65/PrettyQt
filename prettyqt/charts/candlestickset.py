@@ -1,6 +1,5 @@
-from qtpy.QtCharts import QtCharts
-
 from prettyqt import core, gui
+from prettyqt.qt.QtCharts import QtCharts
 
 
 QtCharts.QCandlestickSet.__bases__ = (core.Object,)

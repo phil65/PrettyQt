@@ -4,8 +4,7 @@ import contextlib
 import pathlib
 from typing import Literal, Union
 
-from qtpy import QtCore
-
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 

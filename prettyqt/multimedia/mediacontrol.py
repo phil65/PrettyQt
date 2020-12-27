@@ -1,6 +1,5 @@
-from qtpy import QtMultimedia
-
 from prettyqt import core
+from prettyqt.qt import QtMultimedia
 
 
 QtMultimedia.QMediaControl.__bases__ = (core.Object,)

@@ -1,8 +1,7 @@
 from typing import Literal, Optional
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 

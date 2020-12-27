@@ -1,6 +1,5 @@
-from qtpy import QtWidgets
-
 from prettyqt import core
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QUndoGroup.__bases__ = (core.Object,)

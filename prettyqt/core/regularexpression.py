@@ -1,8 +1,7 @@
 from typing import Callable, Dict, Iterator, Literal, Optional, Tuple, Union
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 

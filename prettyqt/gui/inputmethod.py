@@ -1,6 +1,5 @@
-from qtpy import QtGui
-
 from prettyqt import constants, core
+from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 

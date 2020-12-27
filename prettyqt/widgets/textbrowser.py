@@ -1,9 +1,8 @@
 import pathlib
 from typing import List, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QTextBrowser.__bases__ = (widgets.TextEdit,)

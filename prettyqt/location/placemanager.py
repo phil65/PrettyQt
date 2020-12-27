@@ -1,14 +1,7 @@
 from typing import List, Optional, Tuple, Union
 
-from qtpy import PYQT5, PYSIDE2, QtLocation
-
-
-if PYQT5:
-    from PyQt5 import QtPositioning
-elif PYSIDE2:
-    from PySide2 import QtPositioning
-
 from prettyqt import core, location, positioning
+from prettyqt.qt import QtLocation, QtPositioning
 
 
 QtLocation.QPlaceManager.__bases__ = (core.Object,)

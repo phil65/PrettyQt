@@ -2,9 +2,8 @@ import sys
 import traceback
 from typing import List, Literal, Optional, Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import core, iconprovider, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

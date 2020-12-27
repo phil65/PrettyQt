@@ -1,8 +1,7 @@
 from typing import Iterator, List, Union
 
-from qtpy import QtCore, QtNetwork
-
 from prettyqt import core
+from prettyqt.qt import QtCore, QtNetwork
 
 
 QtNetwork.QNetworkCookieJar.__bases__ = (core.Object,)

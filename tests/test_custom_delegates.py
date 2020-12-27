@@ -1,8 +1,7 @@
 """Tests for `prettyqt` package."""
 
-from qtpy import QtCore
-
 from prettyqt import custom_delegates, widgets
+from prettyqt.qt import QtCore
 
 
 def test_buttondelegate(qtbot):

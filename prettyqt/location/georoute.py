@@ -1,8 +1,7 @@
 from typing import List
 
-from qtpy import QtLocation
-
 from prettyqt import location, positioning
+from prettyqt.qt import QtLocation
 
 
 class GeoRoute(QtLocation.QGeoRoute):

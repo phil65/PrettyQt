@@ -1,4 +1,4 @@
-from qtpy import QtLocation
+from prettyqt.qt import QtLocation
 
 
 class PlaceRatings(QtLocation.QPlaceRatings):

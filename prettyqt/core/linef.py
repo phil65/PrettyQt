@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Iterator, Literal, Tuple, Union
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 class LineF(QtCore.QLineF):

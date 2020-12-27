@@ -1,8 +1,7 @@
 from typing import Iterator, List, Optional, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import gui, iconprovider, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QToolBox.__bases__ = (widgets.Frame,)

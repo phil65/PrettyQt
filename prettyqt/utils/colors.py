@@ -1,8 +1,7 @@
 from typing import Union
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtCore, QtGui
 
 
 ColorType = Union[str, int, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None]

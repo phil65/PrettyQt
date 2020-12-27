@@ -1,8 +1,7 @@
 from typing import Union, overload
 
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QMenuBar.__bases__ = (widgets.Widget,)

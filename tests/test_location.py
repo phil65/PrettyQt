@@ -1,11 +1,14 @@
 """Tests for `prettyqt` package."""
 
 import pytest
-import qtpy
-from qtpy import QtLocation
 
-from prettyqt import core, location
+from prettyqt import core
+import prettyqt.qt
 from prettyqt.utils import InvalidParamError
+
+
+location = pytest.importorskip("prettyqt.location")
+QtLocation = pytest.importorskip("prettyqt.qt.QtLocation")
 
 
 def test_geocodingmanager(qtlog):
@@ -49,7 +52,7 @@ def test_georoute():
     route.get_path()
 
 
-@pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
+@pytest.mark.skipif(prettyqt.qt.API == "pyside2", reason="Only supported in PyQt5")
 def test_georouteleg():
     location.GeoRouteLeg()
 
@@ -110,7 +113,7 @@ def test_placecategory():
     cat.get_icon()
     assert bool(cat) is False
     assert str(cat) == ""
-    if qtpy.API == "pyqt5":
+    if prettyqt.qt.API == "pyqt5":
         assert cat.get_visibility() == "unspecified"
 
 
@@ -261,13 +264,13 @@ def test_place():
     place.get_primary_website()
     place.get_ratings()
     place.get_supplier()
-    if qtpy.API == "pyqt5":
+    if prettyqt.qt.API == "pyqt5":
         assert place.get_visibility() == "unspecified"
 
 
 def test_placesearchrequest():
     request = location.PlaceSearchRequest()
-    if qtpy.API == "pyqt5":
+    if prettyqt.qt.API == "pyqt5":
         request.get_visibility_scope()
     request.get_categories()
     request.get_search_area()

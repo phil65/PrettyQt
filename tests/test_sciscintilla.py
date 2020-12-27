@@ -1,12 +1,12 @@
 """Tests for `prettyqt` package."""
 
 import pytest
-import qtpy
 
+import prettyqt.qt
 from prettyqt.utils import InvalidParamError
 
 
-@pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
+@pytest.mark.skipif(prettyqt.qt.API.startswith("pyside"), reason="Only supported in PyQt")
 def test_sciscintilla(qtbot):
     from prettyqt import gui, scintilla
 

@@ -1,8 +1,7 @@
 from typing import Literal
 
-from qtpy import QtMultimedia
-
 from prettyqt import core, gui, multimedia
+from prettyqt.qt import QtMultimedia
 from prettyqt.utils import InvalidParamError, bidict
 
 

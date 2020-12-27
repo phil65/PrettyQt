@@ -1,6 +1,5 @@
-from qtpy.QtCharts import QtCharts
-
 from prettyqt import core
+from prettyqt.qt.QtCharts import QtCharts
 
 
 QtCharts.QAbstractSeries.__bases__ = (core.Object,)

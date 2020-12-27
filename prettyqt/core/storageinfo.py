@@ -3,7 +3,7 @@ from __future__ import annotations
 import pathlib
 from typing import List, Optional, Union
 
-from qtpy import QtCore
+from prettyqt.qt import QtCore
 
 
 class StorageInfo(QtCore.QStorageInfo):

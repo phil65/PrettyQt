@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Dict, Iterator, Tuple
 
-from qtpy import QtCore
+from prettyqt.qt import QtCore
 
 
 class ProcessEnvironment(QtCore.QProcessEnvironment):

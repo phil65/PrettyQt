@@ -1,8 +1,7 @@
 from typing import Literal, Union
 
-from qtpy import QtNetwork
-
 from prettyqt import core, network
+from prettyqt.qt import QtNetwork
 from prettyqt.utils import InvalidParamError, bidict
 
 

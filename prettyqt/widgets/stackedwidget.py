@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Iterator
 
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QStackedWidget.__bases__ = (widgets.Frame,)

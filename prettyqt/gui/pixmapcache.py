@@ -1,5 +1,5 @@
 # from typing import Dict, Optional
-from qtpy import QtGui
+from prettyqt.qt import QtGui
 
 
 class PixmapCache(QtGui.QPixmapCache):

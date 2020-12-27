@@ -1,9 +1,8 @@
 import contextlib
 from typing import Optional
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 

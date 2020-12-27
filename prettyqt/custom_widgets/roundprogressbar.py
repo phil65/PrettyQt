@@ -1,8 +1,7 @@
 from typing import Dict, List, Literal, Optional, Tuple
 
-from qtpy import QtCore, QtGui, QtWidgets
-
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError
 
 

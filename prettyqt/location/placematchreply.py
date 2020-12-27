@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Iterator, List
 
-from qtpy import QtLocation
-
 from prettyqt import location
+from prettyqt.qt import QtLocation
 
 
 QtLocation.QPlaceMatchReply.__bases__ = (location.PlaceReply,)

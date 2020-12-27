@@ -5,9 +5,8 @@ import logging
 import pprint
 from typing import Callable, Dict
 
-from qtpy import QtGui
-
 from prettyqt import constants, custom_models, gui
+from prettyqt.qt import QtGui
 from prettyqt.utils import treeitem
 
 

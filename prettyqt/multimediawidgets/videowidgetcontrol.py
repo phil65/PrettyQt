@@ -1,6 +1,5 @@
-from qtpy import QtMultimediaWidgets
-
 from prettyqt import multimedia
+from prettyqt.qt import QtMultimediaWidgets
 
 
 QtMultimediaWidgets.QVideoWidgetControl.__bases__ = (multimedia.MediaControl,)

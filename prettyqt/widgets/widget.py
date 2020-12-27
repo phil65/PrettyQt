@@ -4,9 +4,9 @@ from typing import Any, Callable, Dict, Iterator, Literal, Optional, Union
 from deprecated import deprecated
 import qstylizer.parser
 import qstylizer.style
-from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import constants, core, gui, iconprovider, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, colors, helpers, prettyprinter
 
 

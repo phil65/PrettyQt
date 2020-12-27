@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Optional
 
-from qtpy import QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtGui
 
 
 QtGui.QIntValidator.__bases__ = (gui.Validator,)

@@ -1,9 +1,8 @@
 import pathlib
 from typing import Dict, List, Optional, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtWidgets
 
 
 class FileChooserButton(widgets.Widget):

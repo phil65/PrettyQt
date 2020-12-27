@@ -3,9 +3,8 @@ from __future__ import annotations
 import pathlib
 from typing import Union
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import core, gui
+from prettyqt.qt import QtCore, QtGui
 
 
 QtGui.QPixmap.__bases__ = (gui.PaintDevice,)

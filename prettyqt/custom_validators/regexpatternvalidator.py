@@ -1,10 +1,10 @@
 import sre_constants
 from typing import Tuple
 
-from qtpy import QtGui
 import regex as re
 
 from prettyqt import core, gui
+from prettyqt.qt import QtGui
 
 
 class RegexPatternValidator(gui.Validator):

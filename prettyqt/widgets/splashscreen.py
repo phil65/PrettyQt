@@ -1,9 +1,8 @@
 import pathlib
 from typing import Optional, Union
 
-from qtpy import QtCore, QtGui, QtWidgets
-
 from prettyqt import constants, gui, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import colors
 
 

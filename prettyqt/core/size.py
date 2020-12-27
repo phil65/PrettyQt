@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Tuple, Union
 
-from qtpy import QtCore
+from prettyqt.qt import QtCore
 
 
 class Size(QtCore.QSize):

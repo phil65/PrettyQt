@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Callable
 
-from qtpy import QtCore
-
 from prettyqt import constants, core
+from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 

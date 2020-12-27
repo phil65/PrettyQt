@@ -1,9 +1,8 @@
 import pathlib
 from typing import Optional
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 QtCore.QTranslator.__bases__ = (core.Object,)

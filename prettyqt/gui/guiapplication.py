@@ -1,9 +1,8 @@
 import contextlib
 from typing import List, Tuple, Union
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import constants, core, gui, iconprovider
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, colors
 
 

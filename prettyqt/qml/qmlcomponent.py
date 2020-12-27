@@ -1,8 +1,7 @@
 from typing import Union
 
-from qtpy import QtCore, QtQml
-
 from prettyqt import core
+from prettyqt.qt import QtCore, QtQml
 from prettyqt.utils import bidict
 
 

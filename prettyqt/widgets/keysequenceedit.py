@@ -1,6 +1,5 @@
-from qtpy import QtGui, QtWidgets
-
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtGui, QtWidgets
 
 
 QtWidgets.QKeySequenceEdit.__bases__ = (widgets.Widget,)

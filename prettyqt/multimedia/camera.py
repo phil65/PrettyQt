@@ -1,8 +1,7 @@
 from typing import List, Literal
 
-from qtpy import QtMultimedia
-
 from prettyqt import multimedia
+from prettyqt.qt import QtMultimedia
 from prettyqt.utils import InvalidParamError, bidict, mappers
 
 

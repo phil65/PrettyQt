@@ -3,9 +3,8 @@ from __future__ import annotations
 import math
 from typing import Iterator, Literal, Tuple, Union
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 class Line(QtCore.QLine):

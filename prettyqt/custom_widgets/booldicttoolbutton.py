@@ -1,8 +1,7 @@
 from typing import Dict, Optional
 
-from qtpy import QtWidgets
-
 from prettyqt import core, iconprovider, widgets
+from prettyqt.qt import QtWidgets
 
 
 class BoolDictToolButton(widgets.ToolButton):

@@ -1,8 +1,7 @@
 from typing import Iterator, List, Optional, Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import constants, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
 
 

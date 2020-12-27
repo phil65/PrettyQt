@@ -1,6 +1,5 @@
-from qtpy import QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtGui
 
 
 QtGui.QRasterWindow.__bases__ = (gui.PaintDeviceWindow,)

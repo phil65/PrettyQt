@@ -3,9 +3,9 @@ import hashlib
 from typing import Iterable, List, Literal, Optional, Union
 
 from deprecated import deprecated
-from qtpy import QtCore, QtWidgets
 
 from prettyqt import constants, core, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

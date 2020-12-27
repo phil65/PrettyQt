@@ -1,6 +1,5 @@
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QMdiSubWindow.__bases__ = (widgets.Widget,)

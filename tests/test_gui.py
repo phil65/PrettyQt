@@ -5,9 +5,9 @@ import pathlib
 import pickle
 
 import pytest
-from qtpy import QtCore
 
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 

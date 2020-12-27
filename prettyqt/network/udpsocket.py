@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtNetwork
-
 from prettyqt import network
+from prettyqt.qt import QtNetwork
 
 
 QtNetwork.QUdpSocket.__bases__ = (network.AbstractSocket,)

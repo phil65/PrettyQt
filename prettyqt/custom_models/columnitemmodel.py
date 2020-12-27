@@ -2,9 +2,8 @@ from dataclasses import dataclass
 import logging
 from typing import Callable, List, Optional, Union
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import constants, core, gui
+from prettyqt.qt import QtCore, QtGui
 
 
 logger = logging.getLogger(__name__)

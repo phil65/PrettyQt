@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtCore, QtMultimedia
-
 from prettyqt import constants, core
+from prettyqt.qt import QtCore, QtMultimedia
 
 
 class PlaylistModel(core.AbstractTableModel):

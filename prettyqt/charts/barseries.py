@@ -1,6 +1,5 @@
-from qtpy.QtCharts import QtCharts
-
 from prettyqt import charts
+from prettyqt.qt.QtCharts import QtCharts
 
 
 QtCharts.QBarSeries.__bases__ = (charts.AbstractBarSeries,)

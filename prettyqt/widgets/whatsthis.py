@@ -1,6 +1,6 @@
 import contextlib
 
-from qtpy import QtWidgets
+from prettyqt.qt import QtWidgets
 
 
 class WhatsThis(QtWidgets.QWhatsThis):

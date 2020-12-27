@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Union
 
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QStatusBar.__bases__ = (widgets.Widget,)

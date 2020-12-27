@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Iterator, List, Optional, Tuple, Union
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import constants, core, gui, iconprovider
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError
 
 

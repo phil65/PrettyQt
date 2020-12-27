@@ -1,9 +1,8 @@
 import pathlib
 from typing import Callable, Union
 
-from qtpy import QtWebEngineWidgets
-
 from prettyqt import core, webenginewidgets, widgets
+from prettyqt.qt import QtWebEngineWidgets
 
 
 QtWebEngineWidgets.QWebEngineView.__bases__ = (widgets.Widget,)

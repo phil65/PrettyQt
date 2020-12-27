@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from typing import Optional, Tuple
 
-from qtpy import QtCore, QtGui
 import regex as re
 
 from prettyqt import gui
+from prettyqt.qt import QtCore, QtGui
 
 
 class BaseRegexValidator(gui.Validator):

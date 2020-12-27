@@ -3,9 +3,8 @@ from __future__ import annotations
 import contextlib
 from typing import Iterator, Literal
 
-from qtpy import QtWidgets
-
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors
 
 

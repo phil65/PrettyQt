@@ -4,9 +4,8 @@ from importlib import metadata
 import pkgutil
 from typing import List, Optional, Sequence
 
-from qtpy import QtCore
-
 from prettyqt import constants, core
+from prettyqt.qt import QtCore
 
 
 def load_dist_info(name: str) -> Optional[metadata.Distribution]:

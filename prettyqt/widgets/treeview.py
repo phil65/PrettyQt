@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtWidgets
-
 from prettyqt import constants, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QTreeView.__bases__ = (widgets.AbstractItemView,)

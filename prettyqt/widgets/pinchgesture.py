@@ -1,8 +1,7 @@
 from typing import List, Literal
 
-from qtpy import QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 

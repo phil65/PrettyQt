@@ -1,6 +1,5 @@
-from qtpy import QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QGraphicsRectItem.__bases__ = (widgets.AbstractGraphicsShapeItem,)

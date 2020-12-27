@@ -4,9 +4,9 @@ from typing import Iterator, Mapping, MutableMapping, Optional, Union
 
 import qstylizer.parser
 import qstylizer.style
-from qtpy import QtCore, QtWidgets
 
 from prettyqt import constants, core, gui, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
 
 

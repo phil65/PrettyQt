@@ -1,6 +1,5 @@
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QSizeGrip.__bases__ = (widgets.Widget,)

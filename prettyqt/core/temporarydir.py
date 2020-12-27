@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pathlib
 
-from qtpy import QtCore
+from prettyqt.qt import QtCore
 
 
 class TemporaryDir(QtCore.QTemporaryDir):

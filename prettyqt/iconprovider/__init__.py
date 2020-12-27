@@ -6,7 +6,7 @@ based on qtawesome
 import pathlib
 from typing import Dict, Optional, Tuple, Union
 
-from qtpy import QtGui
+from prettyqt.qt import QtGui
 
 # Third party imports
 from prettyqt import gui

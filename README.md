@@ -38,8 +38,6 @@ pip install prettyqt
 ```
 
 ## Dependencies
-- [qtpy](https://pypi.org/project/prettyqt)
-- [qtawesome](https://pypi.org/project/qtawesome)
 - [bidict](https://pypi.org/project/bidict)
 - [orjson](https://pypi.org/project/orjson)
 - [regex](https://pypi.org/project/regex)

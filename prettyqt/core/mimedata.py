@@ -1,9 +1,9 @@
 from typing import Any, Dict, Iterator, List, Union
 
 import orjson as json
-from qtpy import QtCore
 
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 JSONType = Union[str, int, float, bool, None, Dict[str, Any], List[Any]]

@@ -1,8 +1,7 @@
 from typing import Union
 
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QStackedLayout.__bases__ = (widgets.Layout,)

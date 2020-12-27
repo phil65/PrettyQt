@@ -22,9 +22,8 @@
 
 from typing import Literal, Optional, Tuple
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import colors
 
 

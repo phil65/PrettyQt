@@ -1,8 +1,7 @@
 from typing import Literal, Union
 
-from qtpy import QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, colors
 
 

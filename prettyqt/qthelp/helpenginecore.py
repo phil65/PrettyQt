@@ -1,8 +1,7 @@
 from typing import List, Optional
 
-from qtpy import QtCore, QtHelp
-
 from prettyqt import core
+from prettyqt.qt import QtCore, QtHelp
 
 
 QtHelp.QHelpEngineCore.__bases__ = (core.Object,)

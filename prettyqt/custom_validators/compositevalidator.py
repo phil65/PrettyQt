@@ -1,8 +1,7 @@
 from typing import Iterator, List, Optional, Tuple
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtCore, QtGui
 
 
 class CompositeValidator(gui.Validator):

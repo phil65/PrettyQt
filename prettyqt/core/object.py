@@ -4,8 +4,8 @@ import inspect
 import itertools
 from typing import Any, DefaultDict, Dict, List, Optional, Type, TypeVar, Union
 
-import qtpy
-from qtpy import QtCore
+import prettyqt.qt
+from prettyqt.qt import QtCore
 
 
 T = TypeVar("T", bound=QtCore.QObject)
@@ -82,7 +82,7 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindDirectChildrenOnly
-        if qtpy.API == "pyqt5":
+        if prettyqt.qt.API == "pyqt5":
             return self.findChildren(typ, name=name, options=flag)  # type: ignore
         else:
             if name is None:
@@ -101,7 +101,7 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindDirectChildrenOnly
-        if qtpy.API == "pyqt5":
+        if prettyqt.qt.API == "pyqt5":
             return self.findChild(typ, name, flag)  # type: ignore
         else:
             if name is None:

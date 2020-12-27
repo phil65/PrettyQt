@@ -1,8 +1,7 @@
 from typing import List, Literal
 
-from qtpy.QtCharts import QtCharts
-
 from prettyqt import charts, constants, core, widgets
+from prettyqt.qt.QtCharts import QtCharts
 from prettyqt.utils import InvalidParamError, bidict
 
 

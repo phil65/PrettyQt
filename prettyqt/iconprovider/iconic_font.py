@@ -15,9 +15,8 @@ import json
 import pathlib
 from typing import Any, Dict, List, Optional
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import constants, core, gui
+from prettyqt.qt import QtCore, QtGui
 
 
 # Third party imports

@@ -1,14 +1,7 @@
 from typing import List, Literal
 
-from qtpy import PYQT5, PYSIDE2
-
-
-if PYQT5:
-    from PyQt5 import QtBluetooth
-elif PYSIDE2:
-    from PySide2 import QtBluetooth
-
 from prettyqt import core
+from prettyqt.qt import QtBluetooth
 from prettyqt.utils import InvalidParamError, bidict
 
 

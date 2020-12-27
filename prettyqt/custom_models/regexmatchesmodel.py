@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtCore
-
 from prettyqt import constants, core, widgets
+from prettyqt.qt import QtCore
 
 
 class RegexMatchesModel(core.AbstractTableModel):

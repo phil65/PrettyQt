@@ -1,8 +1,7 @@
 from typing import Tuple
 
-from qtpy import QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtGui
 
 
 class NotZeroValidator(gui.Validator):

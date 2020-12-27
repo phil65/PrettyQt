@@ -1,6 +1,5 @@
-from qtpy import QtLocation
-
 from prettyqt import core, location
+from prettyqt.qt import QtLocation
 
 
 QtLocation.QPlaceReview.__bases__ = (location.PlaceContent,)

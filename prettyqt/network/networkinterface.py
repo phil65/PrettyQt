@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import List, Literal
 
-from qtpy import QtNetwork
-
 from prettyqt import network
+from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict
 
 

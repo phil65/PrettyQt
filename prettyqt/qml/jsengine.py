@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtQml
-
 from prettyqt import core, qml
+from prettyqt.qt import QtQml
 from prettyqt.utils import bidict
 
 

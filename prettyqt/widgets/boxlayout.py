@@ -1,8 +1,7 @@
 from typing import Literal, Optional, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

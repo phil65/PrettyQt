@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtCore, QtGui, QtWidgets
-
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 PAINTING_SCALE_FACTOR = 20

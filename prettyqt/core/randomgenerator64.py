@@ -1,4 +1,4 @@
-# from qtpy import QtCore
+# from prettyqt.qt import QtCore
 
 # from prettyqt import core
 

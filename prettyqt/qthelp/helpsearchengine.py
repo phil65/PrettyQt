@@ -1,8 +1,7 @@
 from typing import List
 
-from qtpy import QtHelp
-
 from prettyqt import core, qthelp
+from prettyqt.qt import QtHelp
 
 
 QtHelp.QHelpSearchEngine.__bases__ = (core.Object,)

@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from qtpy import QtCore
-from qtpy.QtCharts import QtCharts
-
 from prettyqt import charts, gui
+from prettyqt.qt import QtCore
+from prettyqt.qt.QtCharts import QtCharts
 
 
 QtCharts.QXYSeries.__bases__ = (charts.AbstractSeries,)

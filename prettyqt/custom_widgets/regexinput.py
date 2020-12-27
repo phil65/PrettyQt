@@ -1,9 +1,9 @@
 from typing import Optional, Pattern, Union
 
-from qtpy import QtWidgets
 import regex as re
 
 from prettyqt import core, custom_validators, custom_widgets, widgets
+from prettyqt.qt import QtWidgets
 
 
 MAP = dict(

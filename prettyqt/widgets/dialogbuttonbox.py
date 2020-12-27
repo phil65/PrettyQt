@@ -1,8 +1,7 @@
 from typing import Callable, Iterator, Literal, Optional, Sequence, Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import constants, core, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

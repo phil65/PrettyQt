@@ -1,8 +1,7 @@
 from typing import Dict, Union
 
-from qtpy import QtCore, QtNetwork
-
 from prettyqt import network
+from prettyqt.qt import QtCore, QtNetwork
 
 
 class HttpPart(QtNetwork.QHttpPart):

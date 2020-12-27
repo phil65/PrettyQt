@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import List, Optional, Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class FlowLayout(widgets.Layout):

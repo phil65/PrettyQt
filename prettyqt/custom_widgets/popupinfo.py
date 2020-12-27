@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class PopupInfo(widgets.Dialog):

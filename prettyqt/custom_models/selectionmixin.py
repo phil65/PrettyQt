@@ -1,8 +1,7 @@
 from typing import Callable, Dict
 
-from qtpy import QtCore
-
 from prettyqt import constants
+from prettyqt.qt import QtCore
 
 
 class SelectionMixin:

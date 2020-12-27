@@ -3,11 +3,11 @@
 Contains QtCore-based classes
 """
 
-# from qtpy.QtCore import Signal
+# from prettyqt.qt.QtCore import Signal
 
-import qtpy
+import prettyqt.qt
 
-from qtpy.QtCore import (
+from prettyqt.qt.QtCore import (
     Slot,
     Signal,
     Property,
@@ -130,7 +130,7 @@ from .jsonvalue import JsonValue
 from .jsondocument import JsonDocument
 
 # not available in PySide2
-if qtpy.API == "pyqt5":
+if prettyqt.qt.API == "pyqt5":
     from .library import Library  # type: ignore
     from .pluginloader import PluginLoader  # type: ignore
 

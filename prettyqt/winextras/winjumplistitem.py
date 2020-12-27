@@ -1,15 +1,8 @@
 import pathlib
 from typing import Literal, Union
 
-from qtpy import PYQT5, PYSIDE2
-
-
-if PYQT5:
-    from PyQt5 import QtWinExtras  # type: ignore
-elif PYSIDE2:
-    from PySide2 import QtWinExtras
-
 from prettyqt import iconprovider
+from prettyqt.qt import QtWinExtras
 from prettyqt.utils import bidict
 
 

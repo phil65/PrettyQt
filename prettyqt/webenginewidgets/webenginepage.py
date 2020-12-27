@@ -1,9 +1,8 @@
 import pathlib
 from typing import Callable, Literal, Optional, Union
 
-from qtpy import QtCore, QtWebEngineWidgets
-
 from prettyqt import core, gui, webenginewidgets
+from prettyqt.qt import QtCore, QtWebEngineWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

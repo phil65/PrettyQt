@@ -1,9 +1,8 @@
 import logging
 from typing import List, Optional, Sequence
 
-from qtpy import QtWidgets
-
 from prettyqt import constants, core, widgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
 

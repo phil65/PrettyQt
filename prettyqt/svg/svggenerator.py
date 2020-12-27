@@ -1,6 +1,5 @@
-from qtpy import QtSvg
-
 from prettyqt import core, gui
+from prettyqt.qt import QtSvg
 
 
 QtSvg.QSvgGenerator.__bases__ = (gui.PaintDevice,)

@@ -1,8 +1,7 @@
 import pathlib
 from typing import List, Literal, Optional
 
-from qtpy import QtCore
-
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 

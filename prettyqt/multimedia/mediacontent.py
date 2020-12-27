@@ -1,6 +1,5 @@
-from qtpy import QtMultimedia
-
 from prettyqt import core
+from prettyqt.qt import QtMultimedia
 
 
 class MediaContent(QtMultimedia.QMediaContent):

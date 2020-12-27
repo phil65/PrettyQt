@@ -1,6 +1,5 @@
-from qtpy import QtWidgets
-
 from prettyqt import gui
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QPlainTextDocumentLayout.__bases__ = (gui.AbstractTextDocumentLayout,)

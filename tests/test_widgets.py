@@ -10,9 +10,9 @@ import pickle
 import tempfile
 
 import pytest
-from qtpy import QtCore
 
 from prettyqt import constants, core, gui, iconprovider, widgets
+from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 

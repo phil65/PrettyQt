@@ -1,6 +1,5 @@
-from qtpy import QtSvg
-
 from prettyqt import widgets
+from prettyqt.qt import QtSvg
 
 
 QtSvg.QGraphicsSvgItem.__bases__ = (widgets.GraphicsObject,)

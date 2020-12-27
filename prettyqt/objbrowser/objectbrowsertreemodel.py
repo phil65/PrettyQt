@@ -16,9 +16,8 @@ import inspect
 import logging
 from typing import Any, List, Optional
 
-from qtpy import QtCore
-
 from prettyqt import constants, core, custom_models
+from prettyqt.qt import QtCore
 from prettyqt.utils import helpers, treeitem
 
 

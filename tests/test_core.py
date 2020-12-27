@@ -7,10 +7,10 @@ import sys
 import tempfile
 
 import pytest
-import qtpy
-from qtpy import QtCore
 
 from prettyqt import constants, core, widgets
+import prettyqt.qt
+from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 
@@ -284,7 +284,7 @@ def test_jsonvalue():
     assert str(val) == "b"
 
 
-@pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
+@pytest.mark.skipif(prettyqt.qt.API == "pyside2", reason="Only supported in PyQt5")
 def test_library():
     lib = core.Library()
     assert bool(lib) is False
@@ -425,7 +425,7 @@ def test_persistentmodelindex():
     assert index[constants.USER_ROLE] is None
 
 
-@pytest.mark.skipif(qtpy.API == "pyside2", reason="Only supported in PyQt5")
+@pytest.mark.skipif(prettyqt.qt.API.startswith("pyside"), reason="Only supported in PyQt")
 def test_pluginloader():
     lib = core.PluginLoader()
     lib.set_load_hints(deep_bind=True)
@@ -494,7 +494,7 @@ def test_propertyanimation():
 
     animation.set_easing(test)
     # PySide2 looses custom fn here
-    if qtpy.API == "pyqt5":
+    if prettyqt.qt.API == "pyqt5":
         assert animation.get_easing() == test
     else:
         with pytest.raises(AttributeError):
@@ -610,6 +610,7 @@ def test_signalmapper():
     assert mapper[10] == obj
 
 
+@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
 def test_signaltransition():
     trans = core.SignalTransition()
     trans.set_transition_type("parallel")

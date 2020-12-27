@@ -10,9 +10,8 @@ from typing import (
     Union,
 )
 
-from qtpy import QtWidgets
-
 from prettyqt import constants, core, iconprovider, widgets
+from prettyqt.qt import QtWidgets
 
 
 TypeStr = Literal["string", "int", "float"]

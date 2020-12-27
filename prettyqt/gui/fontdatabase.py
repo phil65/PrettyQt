@@ -3,8 +3,7 @@ import logging
 import pathlib
 from typing import Literal, Optional, Union
 
-from qtpy import QtGui
-
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict
 
 

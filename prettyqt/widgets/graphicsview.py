@@ -1,8 +1,7 @@
 from typing import List, Literal
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import constants, core, gui, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, helpers, mappers
 
 

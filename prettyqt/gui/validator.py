@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from qtpy import QtGui
-
 from prettyqt import core
+from prettyqt.qt import QtGui
 
 
 QtGui.QValidator.__bases__ = (core.Object,)

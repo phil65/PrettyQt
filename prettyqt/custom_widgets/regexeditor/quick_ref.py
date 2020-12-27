@@ -2,9 +2,8 @@
 import pathlib
 from typing import Optional
 
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 
 
 class QuickRefWidget(widgets.Widget):

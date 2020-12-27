@@ -1,9 +1,8 @@
 import datetime
 from typing import Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 QtWidgets.QTimeEdit.__bases__ = (widgets.DateTimeEdit,)

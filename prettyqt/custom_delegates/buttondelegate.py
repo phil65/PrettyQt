@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class ButtonDelegate(widgets.ItemDelegate):

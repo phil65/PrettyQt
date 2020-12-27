@@ -1,6 +1,5 @@
-from qtpy import QtGui
-
 from prettyqt import core
+from prettyqt.qt import QtGui
 
 
 class Vector3D(QtGui.QVector3D):

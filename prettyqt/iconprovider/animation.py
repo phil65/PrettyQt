@@ -1,8 +1,7 @@
 from typing import Dict, Tuple
 
-from qtpy import QtWidgets
-
 from prettyqt import core
+from prettyqt.qt import QtWidgets
 
 
 class Spin:

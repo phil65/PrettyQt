@@ -1,7 +1,6 @@
-from qtpy import QtCore
-from qtpy.QtCharts import QtCharts
-
 from prettyqt import charts, core
+from prettyqt.qt import QtCore
+from prettyqt.qt.QtCharts import QtCharts
 
 
 QtCharts.QLineSeries.__bases__ = (charts.XYSeries,)

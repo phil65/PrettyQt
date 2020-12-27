@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 QtWidgets.QWidgetAction.__bases__ = (widgets.Action,)

@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Iterator, List, Tuple, Union
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import core
+from prettyqt.qt import QtCore, QtGui
 
 
 class Polygon(QtGui.QPolygon):

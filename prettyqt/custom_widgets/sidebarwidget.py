@@ -1,8 +1,7 @@
 from typing import Callable, Dict, Optional, Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import gui, iconprovider, widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class SidebarWidget(widgets.MainWindow):

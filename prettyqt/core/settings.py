@@ -3,9 +3,8 @@ import logging
 import pathlib
 from typing import Any, Dict, Iterator, List, Literal, Mapping, Optional, Tuple, Union
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 

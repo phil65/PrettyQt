@@ -2,9 +2,9 @@ import contextlib
 from typing import Iterator, Literal, Optional
 
 from deprecated import deprecated
-from qtpy import QtGui, QtWidgets
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

@@ -1,8 +1,7 @@
 from typing import Literal
 
-from qtpy import QtWidgets
-
 from prettyqt import constants, iconprovider, widgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

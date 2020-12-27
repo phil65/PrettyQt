@@ -1,6 +1,6 @@
 from typing import Optional
 
-from qtpy import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 class ToolTip(QtWidgets.QToolTip):

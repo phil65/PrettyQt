@@ -1,8 +1,7 @@
 from typing import Any, Callable, Iterator, List, Optional, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import core, gui, iconprovider, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QMenu.__bases__ = (widgets.Widget,)

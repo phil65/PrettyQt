@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtWidgets
 
 
 class CollapsibleFrame(widgets.Frame):

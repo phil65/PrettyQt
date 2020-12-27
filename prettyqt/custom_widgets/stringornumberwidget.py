@@ -1,8 +1,7 @@
 from typing import Optional, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtWidgets
 
 
 class StringOrNumberWidget(widgets.GroupBox):

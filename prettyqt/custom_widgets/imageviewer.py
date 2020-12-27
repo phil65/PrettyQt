@@ -1,9 +1,8 @@
 import pathlib
 from typing import Optional, Union
 
-from qtpy import QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtWidgets
 
 
 class ImageViewer(widgets.Widget):

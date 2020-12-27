@@ -1,6 +1,5 @@
-from qtpy import QtHelp
-
 from prettyqt import widgets
+from prettyqt.qt import QtHelp
 
 
 QtHelp.QHelpIndexWidget.__bases__ = (widgets.ListView,)

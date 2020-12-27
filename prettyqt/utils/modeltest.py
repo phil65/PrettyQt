@@ -43,7 +43,7 @@
 
 from typing import Any, List, NamedTuple, Tuple
 
-from qtpy import QtCore, QtGui, QtTest
+from prettyqt.qt import QtCore, QtGui, QtTest
 
 
 class _Changing(NamedTuple):

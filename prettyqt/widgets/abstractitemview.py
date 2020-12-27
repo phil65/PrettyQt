@@ -1,9 +1,8 @@
 import logging
 from typing import Any, Generator, List, Literal, Optional, Tuple, Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import constants, gui, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, helpers
 
 

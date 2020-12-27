@@ -1,8 +1,7 @@
 import contextlib
 from typing import Literal, Tuple, Union
 
-from qtpy import QtGui
-
+from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 

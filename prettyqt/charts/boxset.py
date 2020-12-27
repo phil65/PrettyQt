@@ -1,8 +1,7 @@
 from typing import Literal, Union
 
-from qtpy.QtCharts import QtCharts
-
 from prettyqt import core, gui
+from prettyqt.qt.QtCharts import QtCharts
 from prettyqt.utils import bidict
 
 

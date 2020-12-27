@@ -1,9 +1,8 @@
 import pathlib
 from typing import Literal, Union
 
-from qtpy import QtCore, QtQuick
-
 from prettyqt import core, gui
+from prettyqt.qt import QtCore, QtQuick
 from prettyqt.utils import bidict
 
 

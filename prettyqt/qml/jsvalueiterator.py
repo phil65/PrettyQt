@@ -1,4 +1,4 @@
-from qtpy import QtQml
+from prettyqt.qt import QtQml
 
 
 class JSValueIterator(QtQml.QJSValueIterator):

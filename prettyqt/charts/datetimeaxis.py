@@ -1,8 +1,7 @@
 import datetime
 
-from qtpy.QtCharts import QtCharts
-
 from prettyqt import charts
+from prettyqt.qt.QtCharts import QtCharts
 from prettyqt.utils import to_datetime
 
 

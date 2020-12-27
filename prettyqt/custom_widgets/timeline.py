@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import List, Optional
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import core, gui, iconprovider, widgets
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors
 
 

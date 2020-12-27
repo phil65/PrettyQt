@@ -1,8 +1,7 @@
 from typing import Literal
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 QtWidgets.QStyleOptionSlider.__bases__ = (widgets.StyleOptionComplex,)

@@ -1,4 +1,4 @@
-from qtpy import QtGui
+from prettyqt.qt import QtGui
 
 
 class Matrix4x4(QtGui.QMatrix4x4):

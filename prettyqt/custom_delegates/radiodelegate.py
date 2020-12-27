@@ -3,9 +3,8 @@
 
 from typing import List, Optional
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import core, gui, widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class RadioDelegate(widgets.StyledItemDelegate):

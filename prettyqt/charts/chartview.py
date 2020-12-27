@@ -1,10 +1,10 @@
 from typing import Literal
 
 from deprecated import deprecated
-from qtpy import QtCore, QtGui, QtWidgets
-from qtpy.QtCharts import QtCharts
 
 from prettyqt import charts, core, gui, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt.QtCharts import QtCharts
 from prettyqt.utils import InvalidParamError, bidict
 
 

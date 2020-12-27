@@ -1,6 +1,5 @@
-from qtpy import QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtGui
 
 
 QtGui.QTextImageFormat.__bases__ = (gui.TextCharFormat,)

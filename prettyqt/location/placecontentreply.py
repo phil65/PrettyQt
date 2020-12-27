@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from qtpy import QtLocation
-
 from prettyqt import location
+from prettyqt.qt import QtLocation
 
 
 QtLocation.QPlaceContentReply.__bases__ = (location.PlaceReply,)

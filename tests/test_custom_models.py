@@ -2,7 +2,10 @@
 
 # import regex as re
 
-from prettyqt import custom_models, multimedia, widgets
+import pytest
+
+from prettyqt import custom_models, widgets
+import prettyqt.qt
 
 
 def test_transposeproxymodel():
@@ -22,7 +25,10 @@ def test_regexmatchesmodel(qttester):
     qttester.test_model(model, force_py=True)
 
 
+@pytest.mark.skipif(prettyqt.qt.API == "pyside6", reason="Only supported in Qt5")
 def test_playlistmodel(qttester):
+    from prettyqt import multimedia
+
     model = custom_models.PlaylistModel()
     qttester.test_model(model, force_py=True)
     playlist = multimedia.MediaPlaylist()

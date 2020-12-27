@@ -2,9 +2,8 @@
 
 from typing import Optional, Sequence
 
-from qtpy import QtWidgets
-
 from prettyqt import constants, core, gui, widgets
+from prettyqt.qt import QtWidgets
 
 
 class LabeledSlider(widgets.Widget):

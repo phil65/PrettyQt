@@ -3,9 +3,9 @@
 # import pytest
 
 import pytest
-from qtpy import QtCore
 
 from prettyqt import gui, widgets
+from prettyqt.qt import QtCore
 from prettyqt.utils import modeltest
 
 

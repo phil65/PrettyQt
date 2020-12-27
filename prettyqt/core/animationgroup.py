@@ -1,8 +1,7 @@
 from typing import List, Union, overload
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 QtCore.QAnimationGroup.__bases__ = (core.AbstractAnimation,)

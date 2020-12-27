@@ -1,9 +1,8 @@
 import pathlib
 from typing import Union
 
-from qtpy import QtCore, QtGui
-
 from prettyqt import core
+from prettyqt.qt import QtCore, QtGui
 
 
 class DesktopServices(QtGui.QDesktopServices):

@@ -1,8 +1,7 @@
 from typing import Dict, List, Literal
 
-from qtpy import QtCore, QtNetwork
-
 from prettyqt import network
+from prettyqt.qt import QtCore, QtNetwork
 from prettyqt.utils import InvalidParamError, bidict, helpers
 
 

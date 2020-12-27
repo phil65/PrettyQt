@@ -1,9 +1,8 @@
 import sys
 from typing import Optional
 
-from qtpy import QtWidgets
-
 from prettyqt import constants, core, gui, multimedia, multimediawidgets, widgets
+from prettyqt.qt import QtWidgets
 
 
 class Player(widgets.MainWindow):

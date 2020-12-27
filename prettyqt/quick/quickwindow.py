@@ -1,9 +1,8 @@
 import contextlib
 from typing import Literal
 
-from qtpy import QtCore, QtGui, QtQuick
-
 from prettyqt import gui
+from prettyqt.qt import QtCore, QtGui, QtQuick
 from prettyqt.utils import InvalidParamError, bidict
 
 

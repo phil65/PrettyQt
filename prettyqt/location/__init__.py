@@ -1,6 +1,6 @@
 """Location module."""
 
-import qtpy
+import prettyqt.qt
 
 from .qlocation import VISIBILITY, VisibilityStr
 from .georouterequest import GeoRouteRequest
@@ -37,7 +37,7 @@ from .placemanager import PlaceManager
 from .geoserviceprovider import GeoServiceProvider
 
 # not available in PySide2
-if qtpy.API == "pyqt5":
+if prettyqt.qt.API == "pyqt5":
     from .georouteleg import GeoRouteLeg
 
 

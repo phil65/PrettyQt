@@ -1,6 +1,5 @@
-from qtpy import QtGui
-
 from prettyqt import gui
+from prettyqt.qt import QtGui
 
 
 QtGui.QPaintDeviceWindow.__bases__ = (gui.Window, gui.PaintDevice)

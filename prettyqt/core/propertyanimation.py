@@ -1,8 +1,7 @@
 from typing import Union
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 QtCore.QPropertyAnimation.__bases__ = (core.VariantAnimation,)

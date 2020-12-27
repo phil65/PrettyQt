@@ -1,8 +1,7 @@
 from typing import Optional
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import constants, gui, iconprovider
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
 
 

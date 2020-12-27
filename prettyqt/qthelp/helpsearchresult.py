@@ -1,6 +1,5 @@
-from qtpy import QtHelp
-
 from prettyqt import core
+from prettyqt.qt import QtHelp
 
 
 class HelpSearchResult(QtHelp.QHelpSearchResult):

@@ -1,9 +1,9 @@
 from typing import Literal, Optional, Tuple, Union
 
 from deprecated import deprecated
-from qtpy import QtCore, QtGui, QtWidgets
 
 from prettyqt import constants, core, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 

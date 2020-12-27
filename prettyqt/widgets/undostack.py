@@ -1,9 +1,8 @@
 import contextlib
 from typing import Callable
 
-from qtpy import QtWidgets
-
 from prettyqt import core, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QUndoStack.__bases__ = (core.Object,)

@@ -1,9 +1,8 @@
 import re
 from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple, Union
 
-from qtpy import QtCore
-
 from prettyqt import core
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 

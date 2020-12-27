@@ -1,8 +1,7 @@
 from typing import Optional, Union
 
-from qtpy import QtCore, QtWidgets
-
 from prettyqt import widgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 QtWidgets.QDialog.__bases__ = (widgets.Widget,)

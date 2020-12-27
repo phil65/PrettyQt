@@ -1,9 +1,9 @@
 from typing import Any, Dict
 
 from deprecated import deprecated
-from qtpy import QtWidgets
 
 from prettyqt import constants, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QDockWidget.__bases__ = (widgets.Widget,)

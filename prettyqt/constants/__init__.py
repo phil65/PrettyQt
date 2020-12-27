@@ -2,7 +2,7 @@
 from typing import Literal
 
 from bidict import bidict
-from qtpy import QtCore
+from prettyqt.qt import QtCore
 
 from prettyqt.utils import mappers
 
