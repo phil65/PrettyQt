@@ -1,6 +1,7 @@
+import hashlib
 import logging
 import pathlib
-from typing import Literal, Union
+from typing import Literal, Optional, Union
 
 from qtpy import QtGui
 
@@ -104,7 +105,11 @@ class FontDatabase(QtGui.QFontDatabase):
                 cls.addApplicationFont(str(p))
 
     @classmethod
-    def add_font(cls, path: Union[str, pathlib.Path]) -> int:
+    def add_font(
+        cls, path: Union[str, pathlib.Path], ttf_hash: Optional[str] = None
+    ) -> int:
+        if isinstance(path, str):
+            path = pathlib.Path(path)
         font_id = cls.addApplicationFont(str(path))
         if not cls.applicationFontFamilies(font_id):
             raise RuntimeError(
@@ -115,6 +120,10 @@ class FontDatabase(QtGui.QFontDatabase):
                 "to know how to prevent Windows from blocking "
                 "the fonts that come with QtAwesome."
             )
+        if ttf_hash is not None:
+            content = path.read_bytes()
+            if hashlib.md5(content).hexdigest() != ttf_hash:
+                raise OSError(f"Font is corrupt at: '{path}'")
         return font_id
 
     def get_system_font(self, font_type: SystemFontStr):
