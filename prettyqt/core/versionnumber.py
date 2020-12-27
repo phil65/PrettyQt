@@ -36,6 +36,9 @@ class VersionNumber(QtCore.QVersionNumber):
             other = VersionNumber(other)
         return super().__eq__(other)
 
+    def __hash__(self):
+        return hash((self.major(), self.minor(), self.micro()))
+
     def __gt__(self, other):
         if isinstance(other, (str, tuple)):
             other = VersionNumber(other)
@@ -75,3 +78,7 @@ class VersionNumber(QtCore.QVersionNumber):
     def micro(self) -> int:
         """An integer representing the micro version."""
         return self.microVersion()
+
+
+if __name__ == "__main__":
+    version = VersionNumber(3, 0, 0)
