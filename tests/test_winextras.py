@@ -5,7 +5,8 @@ import sys
 
 import pytest
 
-from prettyqt import winextras
+
+winextras = pytest.importorskip("prettyqt.winextras")
 
 
 @pytest.mark.skipif(sys.platform != "win32", reason="Only supported on windows")

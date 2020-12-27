@@ -67,7 +67,7 @@ class DataStream(QtCore.QDataStream):
     @classmethod
     def create_bytearray(cls, data) -> QtCore.QByteArray:
         ba = QtCore.QByteArray()
-        stream = cls(ba, core.IODevice.WriteOnly)
+        stream = cls(ba, core.iodevice.OPEN_MODES["write_only"])
         stream << data
         return ba
 
@@ -75,7 +75,7 @@ class DataStream(QtCore.QDataStream):
     def write_bytearray(cls, ba: Union[QtCore.QByteArray, bytes], write_to):
         if not isinstance(ba, QtCore.QByteArray):
             ba = QtCore.QByteArray(ba)
-        stream = cls(ba, core.IODevice.ReadOnly)
+        stream = cls(ba, core.iodevice.OPEN_MODES["read_only"])
         stream >> write_to
 
     @classmethod

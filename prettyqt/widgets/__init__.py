@@ -103,14 +103,14 @@ from .dial import Dial
 from .dockwidget import DockWidget
 
 if core.VersionNumber.get_qt_version() < (6, 0, 0):
-    from .action import Action
-    from .actiongroup import ActionGroup
-    from .shortcut import Shortcut
-    from .undocommand import UndoCommand
-    from .undostack import UndoStack
-    from .undogroup import UndoGroup
     from .keyeventtransition import KeyEventTransition
     from .mouseeventtransition import MouseEventTransition
+from .action import Action
+from .actiongroup import ActionGroup
+from .shortcut import Shortcut
+from .undocommand import UndoCommand
+from .undostack import UndoStack
+from .undogroup import UndoGroup
 from .widgetaction import WidgetAction
 from .menu import Menu
 from .mainwindow import MainWindow

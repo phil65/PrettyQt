@@ -15,6 +15,7 @@ elif PYSIDE6:
         QUndoCommand,
         QUndoStack,
         QUndoGroup,
+        QShortcut,
     )
 else:
     raise PythonQtError("No Qt bindings could be found")

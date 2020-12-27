@@ -2,8 +2,10 @@
 
 import pytest
 
-from prettyqt import multimediawidgets
 from prettyqt.utils import InvalidParamError
+
+
+multimediawidgets = pytest.importorskip("prettyqt.multimediawidgets")
 
 
 def test_videowidget(qapp):

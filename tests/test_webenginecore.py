@@ -2,8 +2,11 @@
 
 import pytest
 
-from prettyqt import core, webenginecore
+from prettyqt import core
 from prettyqt.utils import InvalidParamError
+
+
+webenginecore = pytest.importorskip("prettyqt.webenginecore")
 
 
 def test_webengineurlscheme():

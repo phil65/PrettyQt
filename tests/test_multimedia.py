@@ -5,8 +5,11 @@ import pickle
 
 import pytest
 
-from prettyqt import core, multimedia
+from prettyqt import core
 from prettyqt.utils import InvalidParamError
+
+
+multimedia = pytest.importorskip("prettyqt.multimedia")
 
 
 URL = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"

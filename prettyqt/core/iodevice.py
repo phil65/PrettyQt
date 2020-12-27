@@ -7,18 +7,23 @@ from prettyqt import core
 from prettyqt.utils import InvalidParamError, mappers
 
 
+if core.VersionNumber.get_qt_version() >= (6, 0, 0):
+    mod = QtCore.QIODeviceBase  # type: ignore
+else:
+    mod = QtCore.QIODevice
+
 OPEN_MODES = mappers.FlagMap(
-    QtCore.QIODevice.OpenModeFlag,
-    not_open=QtCore.QIODevice.NotOpen,
-    read_only=QtCore.QIODevice.ReadOnly,
-    write_only=QtCore.QIODevice.WriteOnly,
-    read_write=QtCore.QIODevice.ReadWrite,
-    append=QtCore.QIODevice.Append,
-    truncate=QtCore.QIODevice.Truncate,
-    text=QtCore.QIODevice.Text,
-    unbuffered=QtCore.QIODevice.Unbuffered,
-    new_only=QtCore.QIODevice.NewOnly,
-    existing_only=QtCore.QIODevice.ExistingOnly,
+    mod.OpenModeFlag,
+    not_open=mod.NotOpen,
+    read_only=mod.ReadOnly,
+    write_only=mod.WriteOnly,
+    read_write=mod.ReadWrite,
+    append=mod.Append,
+    truncate=mod.Truncate,
+    text=mod.Text,
+    unbuffered=mod.Unbuffered,
+    new_only=mod.NewOnly,
+    existing_only=mod.ExistingOnly,
 )
 
 OpenModeStr = Literal[

@@ -2,7 +2,10 @@
 
 # import pytest
 
-from prettyqt import texttospeech
+import pytest
+
+
+texttospeech = pytest.importorskip("prettyqt.texttospeech")
 
 
 # from prettyqt.utils import InvalidParamError

@@ -2,8 +2,11 @@
 
 import pytest
 
-from prettyqt import core, webenginewidgets
+from prettyqt import core
 from prettyqt.utils import InvalidParamError
+
+
+webenginewidgets = pytest.importorskip("prettyqt.webenginewidgets")
 
 
 # def test_webenginecontextmenudata(qapp):

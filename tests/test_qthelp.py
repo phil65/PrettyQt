@@ -2,7 +2,12 @@
 
 # import pytest
 
-from prettyqt import core, qthelp
+import pytest
+
+from prettyqt import core
+
+
+qthelp = pytest.importorskip("prettyqt.qthelp")
 
 
 # from prettyqt.utils import InvalidParamError

@@ -1,6 +1,9 @@
 """Tests for `prettyqt` package."""
 
-from prettyqt import svg
+import pytest
+
+
+svg = pytest.importorskip("prettyqt.svg")
 
 
 def test_svggenerator():

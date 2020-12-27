@@ -29,12 +29,15 @@ InsertPolicyStr = Literal[
 SIZE_ADJUST_POLICY = bidict(
     content=QtWidgets.QComboBox.AdjustToContents,
     first_show=QtWidgets.QComboBox.AdjustToContentsOnFirstShow,
-    min_length=QtWidgets.QComboBox.AdjustToMinimumContentsLength,
+    # min_length=QtWidgets.QComboBox.AdjustToMinimumContentsLength,
     min_length_with_icon=QtWidgets.QComboBox.AdjustToMinimumContentsLengthWithIcon,
 )
 
 SizeAdjustPolicyStr = Literal[
-    "content", "first_show", "min_length", "min_length_with_icon"
+    "content",
+    "first_show",
+    # "min_length",
+    "min_length_with_icon",
 ]
 
 
