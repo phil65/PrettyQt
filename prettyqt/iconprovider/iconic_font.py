@@ -153,13 +153,31 @@ class CharIconPainter:
                 )
             x_center = rect.width() * 0.5
             y_center = rect.height() * 0.5
-            with painter.offset_by(x_center, y_center), painter.apply_transform() as tf:
-                if opt.get("vflip") is True:
-                    tf.scale(1, -1)
-                if opt.get("hflip") is True:
-                    tf.scale(-1, 1)
-                if "rotated" in opt:
-                    painter.rotate(opt["rotated"])
+
+            if "vflip" in opt and opt["vflip"] is True:
+                x_center = rect.width() * 0.5
+                y_center = rect.height() * 0.5
+                painter.translate(x_center, y_center)
+                transform = gui.Transform()
+                transform.scale(1, -1)
+                painter.setTransform(transform, True)
+                painter.translate(-x_center, -y_center)
+
+            if "hflip" in opt and opt["hflip"] is True:
+                x_center = rect.width() * 0.5
+                y_center = rect.height() * 0.5
+                painter.translate(x_center, y_center)
+                transform = gui.Transform()
+                transform.scale(-1, 1)
+                painter.setTransform(transform, True)
+                painter.translate(-x_center, -y_center)
+
+            if "rotated" in opt:
+                x_center = rect.width() * 0.5
+                y_center = rect.height() * 0.5
+                painter.translate(x_center, y_center)
+                painter.rotate(opt["rotated"])
+                painter.translate(-x_center, -y_center)
 
             if (opacity := opt.get("opacity")) is not None:
                 painter.setOpacity(opacity)
