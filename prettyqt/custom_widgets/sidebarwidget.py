@@ -110,11 +110,11 @@ class SidebarWidget(widgets.MainWindow):
 
     def _get_widget(self, item: Union[str, int, widgets.Widget]):
         if isinstance(item, int):
-            item = self.area.box[item]
-        elif isinstance(item, str):
+            return self.area.box[item]
+        if isinstance(item, str):
             item = self.area.find_child(QtWidgets.QWidget, name=item, recursive=False)
-        if item not in self.area.box:
-            raise ValueError("Layout does not contain the chosen widget")
+            if item not in self.area.box:
+                raise ValueError("Layout does not contain the chosen widget")
         return item
 
     def _get_current_widget(self) -> QtWidgets.QWidget:

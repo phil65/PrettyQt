@@ -17,6 +17,8 @@ LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
 
 
 class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
+    box: QtWidgets.QLayout
+
     def __repr__(self) -> str:
         cls_name = type(self).__name__
         params = helpers.format_kwargs(self.serialize_fields())

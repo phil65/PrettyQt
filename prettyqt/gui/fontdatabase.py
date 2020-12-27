@@ -106,7 +106,7 @@ class FontDatabase(QtGui.QFontDatabase):
     @classmethod
     def add_font(cls, path: Union[str, pathlib.Path]) -> int:
         font_id = cls.addApplicationFont(str(path))
-        if not gui.FontDatabase.applicationFontFamilies(font_id):
+        if not cls.applicationFontFamilies(font_id):
             raise RuntimeError(
                 f"Font '{path}' appears to be empty. "
                 "If you are on Windows 10, please read "
