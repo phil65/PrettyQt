@@ -13,6 +13,12 @@ from prettyqt import gui
 from prettyqt.iconprovider.iconic_font import IconicFont, set_global_defaults
 
 
+IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
+
+key_type = Tuple[Optional[str], Optional[str], bool]
+icon_cache: Dict[key_type, QtGui.QIcon] = {}
+
+
 class IconFont:
     path = pathlib.Path(__file__).parent / "fonts"
     prefix: str
@@ -109,7 +115,7 @@ def _instance() -> IconicFont:
 
 def reset_cache():
     if _resource["iconic"] is not None:
-        _resource["iconic"].icon_cache = {}
+        _resource["iconic"].icon_cache.clear()
 
 
 def _icon(*names, **kwargs) -> QtGui.QIcon:
@@ -216,73 +222,6 @@ def for_color(color: Union[str, QtGui.QColor]) -> gui.Icon:
         return gui.Icon(_icon("mdi.card-outline"))
 
 
-def load_font(
-    prefix: str,
-    ttf_filename: str,
-    charmap_filename: str,
-    directory: Optional[pathlib.Path] = None,
-) -> gui.Font:
-    """Load a font file and the associated charmap.
-
-    If ``directory`` is None, the files will be looked for in ``./fonts/``.
-
-    Parameters
-    ----------
-    prefix: str
-        Prefix string to be used when accessing a given font set
-    ttf_filename: str
-        Ttf font filename
-    charmap_filename: str
-        Character map filename
-    directory: str or None, optional
-        Directory for font and charmap files
-
-    Example
-    -------
-    The spyder ide uses qtawesome and uses a custom font for spyder-specific
-    icons::
-
-        qta.load_font('spyder', 'spyder.ttf', 'spyder-charmap.json')
-
-    """
-    return _instance().load_font(prefix, ttf_filename, charmap_filename, directory)
-
-
-def charmap(prefixed_name: str) -> Dict[str, str]:
-    """Return the character map used for a given font.
-
-    Returns
-    -------
-    return_value: dict
-        The dictionary mapping the icon names to the corresponding unicode character.
-
-    """
-    prefix, name = prefixed_name.split(".")
-    return _instance().charmap[prefix][name]
-
-
-def font(prefix: str, size: int):
-    """Return the font corresponding to the specified prefix.
-
-    This can be used to render text using the iconic font directly::
-
-        import qtawesome as qta
-        from qtpy import QtWidgets
-
-        label = QtWidgets.QLabel(unichr(0xf19c) + ' ' + 'Label')
-        label.setFont(qta.font('fa', 16))
-
-    Parameters
-    ----------
-    prefix: str
-        prefix string of the loaded font
-    size: int
-        size for the font
-
-    """
-    return _instance().font(prefix, size)
-
-
 def set_defaults(**kwargs):
     """Set default options for icons.
 
@@ -293,12 +232,6 @@ def set_defaults(**kwargs):
 
     """
     return set_global_defaults(**kwargs)
-
-
-IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
-
-key_type = Tuple[Optional[str], Optional[str], bool]
-icon_cache: Dict[key_type, QtGui.QIcon] = {}
 
 
 def get_icon(

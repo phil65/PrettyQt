@@ -11,7 +11,6 @@ methods returning instances of ``QIcon``.
 from __future__ import annotations
 
 # Standard library imports
-import hashlib
 import json
 import pathlib
 from typing import Any, Dict, List, Optional
@@ -212,7 +211,6 @@ class IconicFont(core.Object):
         """
         super().__init__()
         self.painter = CharIconPainter()
-        self.painters: Dict[str, CharIconPainter] = {}
         self.font_name = {}
         self.font_ids = {}
         self.charmap = {}
@@ -256,7 +254,8 @@ class IconicFont(core.Object):
         """
         if directory is None:
             directory = pathlib.Path(__file__).parent / "fonts"
-        id_ = gui.FontDatabase.add_font(directory / ttf_filename)
+        md5 = None if SYSTEM_FONTS else MD5_HASHES.get(ttf_filename)
+        id_ = gui.FontDatabase.add_font(directory / ttf_filename, ttf_hash=md5)
         loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)
         self.font_ids[prefix] = id_
         self.font_name[prefix] = loaded_font_families[0]
@@ -272,15 +271,6 @@ class IconicFont(core.Object):
 
         with (directory / charmap_filename).open("r") as codes:
             self.charmap[prefix] = json.load(codes, object_hook=hook)
-
-        # Verify that vendorized fonts are not corrupt
-        if SYSTEM_FONTS:
-            return
-        if (ttf_hash := MD5_HASHES.get(ttf_filename)) is None:
-            return
-        content = (directory / ttf_filename).read_bytes()
-        if hashlib.md5(content).hexdigest() != ttf_hash:
-            raise FontError(f"Font is corrupt at: '{directory / ttf_filename}'")
 
     def icon(self, *names, **kwargs) -> QtGui.QIcon:
         """Return a QtGui.QIcon object corresponding to the provided icon name."""
