@@ -10,12 +10,10 @@ QtGui.QPdfWriter.__bases__ = (core.Object, gui.PagedPaintDevice)
 
 
 class PdfWriter(QtGui.QPdfWriter):
-    def setup(self, size: QtCore.QSize):
+    def set_desktop_resolution(self):
         primary = gui.app().primaryScreen()
-        dpi = primary.logicalDotsPerInchX()
+        dpi = primary.logicalDotsPerInch()
         self.setResolution(int(dpi))
-        self.set_page_margins((0, 0, 0, 0))
-        self.setPageSizeMM(core.SizeF(size.width(), size.height()) / dpi * 25.4)
 
     def set_page_margins(
         self,
