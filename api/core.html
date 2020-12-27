@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/core.html">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.2">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.73f7c429.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.3b61ea93.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
@@ -955,6 +955,13 @@
   
     <nav class="md-nav" aria-label="OperatingSystemVersion">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.operatingsystemversion.OperatingSystemVersion.__hash__" class="md-nav__link">
+    __hash__()
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#prettyqt.core.operatingsystemversion.OperatingSystemVersion.get_type" class="md-nav__link">
@@ -2732,6 +2739,13 @@
   
     <nav class="md-nav" aria-label="OperatingSystemVersion">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.operatingsystemversion.OperatingSystemVersion.__hash__" class="md-nav__link">
+    __hash__()
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#prettyqt.core.operatingsystemversion.OperatingSystemVersion.get_type" class="md-nav__link">
@@ -5543,6 +5557,36 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.core.operatingsystemversion.OperatingSystemVersion.__hash__">
+
+        <code class="highlight language-python">
+__hash__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return hash(self).</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/core/operatingsystemversion.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">hash</span><span class="p">(</span>
+        <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_type</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">majorVersion</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">minorVersion</span><span class="p">(),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">microVersion</span><span class="p">(),</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.core.operatingsystemversion.OperatingSystemVersion.get_type">
 
