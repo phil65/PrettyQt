@@ -54,6 +54,24 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
             ),
         )
 
+    def __eq__(self, other):
+        if not isinstance(other, OperatingSystemVersion):
+            return False
+        return (
+            self.get_type() == other.get_type()
+            and self.get_versionnumber() == other.get_versionnumber()
+        )
+
+    def __hash__(self):
+        return hash(
+            (
+                self.get_type(),
+                self.majorVersion(),
+                self.minorVersion(),
+                self.microVersion(),
+            )
+        )
+
     def get_type(self) -> OsTypeStr:
         """Get current os type.
 
