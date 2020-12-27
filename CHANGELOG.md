@@ -1,3 +1,15 @@
+## v0.163.0 (2020-12-27)
+
+### Feat
+
+- **OperatingsystemVersion**: add __eq__ and __hash__ methods
+- **VersionNumber**: add __hash__ method
+- **FontDatabase**: add optional md5 check for add_font
+
+### Fix
+
+- revert CharIconPainter paint method for now
+
 ## v0.162.0 (2020-12-27)
 
 ### Feat
