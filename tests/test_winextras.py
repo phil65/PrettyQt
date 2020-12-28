@@ -8,6 +8,10 @@ import pytest
 
 winextras = pytest.importorskip("prettyqt.winextras")
 
+pytestmark = pytest.mark.skipif(
+    not hasattr(winextras, "WinJumpListCategory"), reason="Only supported in Qt6"
+)
+
 
 @pytest.mark.skipif(sys.platform != "win32", reason="Only supported on windows")
 def test_winjumplistcategory(qapp):

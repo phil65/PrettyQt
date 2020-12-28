@@ -244,6 +244,7 @@ def test_fileinfo():
     info.get_last_read()
 
 
+@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
 def test_historystate():
     state = core.HistoryState()
     state.set_history_type("deep")
@@ -284,7 +285,7 @@ def test_jsonvalue():
     assert str(val) == "b"
 
 
-@pytest.mark.skipif(prettyqt.qt.API == "pyside2", reason="Only supported in PyQt5")
+@pytest.mark.skipif(prettyqt.qt.API.startswith("pyside"), reason="Only supported in QtPy")
 def test_library():
     lib = core.Library()
     assert bool(lib) is False
@@ -643,6 +644,7 @@ def test_standardpaths():
     assert name in ["Cache", "Caches"]
 
 
+@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
 def test_state():
     state = core.State()
     state.set_child_mode("parallel")
@@ -651,6 +653,7 @@ def test_state():
         state.set_child_mode("test")
 
 
+@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
 def test_statemachine():
     machine = core.StateMachine()
     state = core.State()

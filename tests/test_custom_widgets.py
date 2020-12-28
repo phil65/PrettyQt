@@ -4,8 +4,11 @@ import logging
 import pickle
 import re
 
+import pytest
+
 from prettyqt import core, custom_widgets, gui, widgets
 import prettyqt.custom_widgets.dataset as fo
+import prettyqt.qt
 from prettyqt.qt import QtCore, QtGui
 
 
@@ -247,6 +250,7 @@ def test_markdownwidget(qtbot):
     custom_widgets.MarkdownWindow()
 
 
+@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
 def test_player(qtbot, qtlog):
     with qtlog.disabled():
         player = custom_widgets.Player()
