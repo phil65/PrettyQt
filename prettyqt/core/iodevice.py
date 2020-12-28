@@ -8,8 +8,10 @@ from prettyqt.utils import InvalidParamError, mappers
 
 if core.VersionNumber.get_qt_version() >= (6, 0, 0):
     mod = QtCore.QIODeviceBase  # type: ignore
+    base = (core.Object, QtCore.QIODeviceBase)  # type: ignore
 else:
     mod = QtCore.QIODevice  # type: ignore
+    base = (core.Object,)  # type: ignore
 
 OPEN_MODES = mappers.FlagMap(
     mod.OpenModeFlag,
@@ -38,7 +40,7 @@ OpenModeStr = Literal[
     "existing_only",
 ]
 
-QtCore.QIODevice.__bases__ = (core.Object,)
+QtCore.QIODevice.__bases__ = base
 
 
 class IODevice(QtCore.QIODevice):
