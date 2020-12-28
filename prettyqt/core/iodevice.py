@@ -9,7 +9,7 @@ from prettyqt.utils import InvalidParamError, mappers
 if core.VersionNumber.get_qt_version() >= (6, 0, 0):
     mod = QtCore.QIODeviceBase  # type: ignore
 else:
-    mod = QtCore.QIODevice
+    mod = QtCore.QIODevice  # type: ignore
 
 OPEN_MODES = mappers.FlagMap(
     mod.OpenModeFlag,
