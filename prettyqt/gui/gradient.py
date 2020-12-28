@@ -33,6 +33,54 @@ TYPE = bidict(
 TypeStr = Literal["linear", "radial", "conical", "none"]
 
 
+PRESET = bidict(
+    warm_flame=QtGui.QGradient.WarmFlame,
+    night_fade=QtGui.QGradient.NightFade,
+    spring_warmth=QtGui.QGradient.SpringWarmth,
+    juicy_peach=QtGui.QGradient.JuicyPeach,
+    young_passion=QtGui.QGradient.YoungPassion,
+    lady_lips=QtGui.QGradient.LadyLips,
+    sunny_morning=QtGui.QGradient.SunnyMorning,
+    rainy_ashville=QtGui.QGradient.RainyAshville,
+    frozen_dreams=QtGui.QGradient.FrozenDreams,
+    winter_neva=QtGui.QGradient.WinterNeva,
+    dusty_grass=QtGui.QGradient.DustyGrass,
+    tempting_azure=QtGui.QGradient.TemptingAzure,
+    heavy_rain=QtGui.QGradient.HeavyRain,
+    amy_crisp=QtGui.QGradient.AmyCrisp,
+    mean_fruit=QtGui.QGradient.MeanFruit,
+    deep_blue=QtGui.QGradient.DeepBlue,
+    ripe_malinka=QtGui.QGradient.RipeMalinka,
+    cloudy_knoxville=QtGui.QGradient.CloudyKnoxville,
+    malibu_beach=QtGui.QGradient.MalibuBeach,
+    new_life=QtGui.QGradient.NewLife,
+    true_sunset=QtGui.QGradient.TrueSunset,
+    morpheus_den=QtGui.QGradient.MorpheusDen,
+    rare_wind=QtGui.QGradient.RareWind,
+    near_moon=QtGui.QGradient.NearMoon,
+    wild_apple=QtGui.QGradient.WildApple,
+    saint_petersburg=QtGui.QGradient.SaintPetersburg,
+    plum_plate=QtGui.QGradient.PlumPlate,
+    everlasting_sky=QtGui.QGradient.EverlastingSky,
+    happy_fisher=QtGui.QGradient.HappyFisher,
+    blessing=QtGui.QGradient.Blessing,
+    sharpeye_eagle=QtGui.QGradient.SharpeyeEagle,
+    ladoga_bottom=QtGui.QGradient.LadogaBottom,
+    lemon_gate=QtGui.QGradient.LemonGate,
+    itmeo_branding=QtGui.QGradient.ItmeoBranding,
+    zeus_miracle=QtGui.QGradient.ZeusMiracle,
+    old_hat=QtGui.QGradient.OldHat,
+    star_wine=QtGui.QGradient.StarWine,
+    happy_acid=QtGui.QGradient.HappyAcid,
+    awesome_pine=QtGui.QGradient.AwesomePine,
+    new_york=QtGui.QGradient.NewYork,
+    shy_rainbow=QtGui.QGradient.ShyRainbow,
+    mixed_hopes=QtGui.QGradient.MixedHopes,
+    fly_high=QtGui.QGradient.FlyHigh,
+    # ...
+)
+
+
 class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
     def __setitem__(self, key: float, value):
         self.setColorAt(key, value)
