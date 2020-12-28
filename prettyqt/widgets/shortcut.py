@@ -8,7 +8,7 @@ QtWidgets.QShortcut.__bases__ = (core.Object,)
 
 class Shortcut(QtWidgets.QShortcut):
     def __str__(self):
-        return str(self.get_key())
+        return self.key().toString()
 
     def __int__(self):
         return self.id()
