@@ -2,6 +2,7 @@ from typing import Callable, Dict, Optional, Union
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.utils import types
 
 
 class SidebarWidget(widgets.MainWindow):
@@ -55,7 +56,7 @@ class SidebarWidget(widgets.MainWindow):
         self,
         item: QtWidgets.QWidget,
         title: str,
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
         show: bool = False,
         shortcut: Optional[str] = None,
         area: str = "top",
@@ -141,7 +142,7 @@ class SidebarWidget(widgets.MainWindow):
     def add_action(
         self,
         title: str,
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
         callback: Callable = None,
         checkable: bool = False,
         shortcut: Optional[str] = None,

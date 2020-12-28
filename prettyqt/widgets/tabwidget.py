@@ -2,7 +2,7 @@ from typing import Dict, List, Literal, Optional, Tuple, Union
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 TAB_SHAPES = bidict(
@@ -205,7 +205,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self,
         item: Union[QtWidgets.QWidget, QtWidgets.QLayout],
         label: str,
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
         position: Optional[int] = None,
         show: bool = False,
     ) -> int:
@@ -229,7 +229,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self,
         widget: Union[QtWidgets.QWidget, QtWidgets.QLayout],
         name: str,
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
         insert_at: Optional[int] = None,
     ):
         """Re-attach tab.
@@ -241,7 +241,7 @@ class TabWidget(QtWidgets.QTabWidget):
             widget (Union[QtWidgets.QWidget, QtWidgets.QLayout]): the content widget
                 from the DetachedTab window
             name (str): the name of the detached tab
-            icon (iconprovider.IconType, optional): the window icon for the detached tab
+            icon (types.IconType, optional): the window icon for the detached tab
             insert_at (Optional[int], optional): insert the re-attached tab at the
                 given index
         """

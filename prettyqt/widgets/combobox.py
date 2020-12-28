@@ -2,7 +2,7 @@ from typing import Any, Iterable, Literal, Mapping, Tuple, Union
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 INSERT_POLICY = bidict(
@@ -113,7 +113,7 @@ class ComboBox(QtWidgets.QComboBox):
         if default is not NoData:
             self.set_value(default)
 
-    def add(self, label: str, data=NoData, icon: iconprovider.IconType = None):
+    def add(self, label: str, data=NoData, icon: types.IconType = None):
         if data is NoData:
             data = label
         if icon is not None:

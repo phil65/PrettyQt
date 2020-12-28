@@ -2,6 +2,7 @@ from typing import Union
 
 from prettyqt import iconprovider, widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import types
 
 
 QtWidgets.QUndoView.__bases__ = (widgets.ListView,)
@@ -11,7 +12,7 @@ class UndoView(QtWidgets.QUndoView):
     def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
         return self.stack().command(index)
 
-    def set_clean_icon(self, icon: iconprovider.IconType):
+    def set_clean_icon(self, icon: types.IconType):
         """Set the icon for the clean button.
 
         Args:

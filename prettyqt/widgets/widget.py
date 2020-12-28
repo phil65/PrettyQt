@@ -7,7 +7,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, colors, helpers, prettyprinter
+from prettyqt.utils import InvalidParamError, colors, helpers, prettyprinter, types
 
 
 QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
@@ -74,7 +74,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         else:
             super().resize(*size)
 
-    def set_icon(self, icon: iconprovider.IconType) -> None:
+    def set_icon(self, icon: types.IconType) -> None:
         """Set the window icon.
 
         Args:

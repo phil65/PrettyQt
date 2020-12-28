@@ -1,8 +1,8 @@
 from typing import Literal
 
-from prettyqt import constants, iconprovider, widgets
+from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 POPUP_MODE = bidict(
@@ -27,7 +27,7 @@ class ToolButton(QtWidgets.QToolButton):
     #     self.setMenu(menu)
 
     @classmethod
-    def for_menu(cls, menu: QtWidgets.QMenu, icon: iconprovider.IconType = None):
+    def for_menu(cls, menu: QtWidgets.QMenu, icon: types.IconType = None):
         btn = cls()
         btn.setMenu(menu)
         # btn.set_title(menu.title())

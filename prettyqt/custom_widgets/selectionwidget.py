@@ -12,6 +12,7 @@ from typing import (
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import types
 
 
 TypeStr = Literal["string", "int", "float"]
@@ -53,7 +54,7 @@ class SelectionWidget(widgets.GroupBox):
                 rb.setChecked(True)
                 break
 
-    def add(self, title: str, data=None, icon: iconprovider.IconType = None):
+    def add(self, title: str, data=None, icon: types.IconType = None):
         # TODO: make use of icon kwarg
         rb = widgets.RadioButton(title)
         rb.toggled.connect(self.update_choice)

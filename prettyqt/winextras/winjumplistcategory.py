@@ -3,7 +3,7 @@ from typing import Literal, Optional, Union
 
 from prettyqt import iconprovider
 from prettyqt.qt import QtWinExtras
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, types
 
 
 TYPES = bidict(
@@ -40,7 +40,7 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
         title: str,
         exe_path: Union[str, pathlib.Path],
         arguments: Optional[list] = None,
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
     ) -> None:
         icon = iconprovider.get_icon(icon)
         if arguments is None:

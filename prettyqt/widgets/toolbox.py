@@ -2,6 +2,7 @@ from typing import Iterator, List, Optional, Union
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import types
 
 
 QtWidgets.QToolBox.__bases__ = (widgets.Frame,)
@@ -53,7 +54,7 @@ class ToolBox(QtWidgets.QToolBox):
         self,
         widget: QtWidgets.QWidget,
         title: Optional[str] = None,
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
     ):
         if title is None:
             title = widget.objectName()

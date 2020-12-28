@@ -3,7 +3,7 @@ from typing import List, Tuple, Union
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, colors
+from prettyqt.utils import InvalidParamError, colors, types
 
 
 QtGui.QGuiApplication.__bases__ = (core.CoreApplication,)
@@ -123,7 +123,7 @@ class GuiApplication(QtGui.QGuiApplication):
     def get_font(cls) -> gui.Font:
         return gui.Font(cls.font())
 
-    def set_icon(self, icon: iconprovider.IconType):
+    def set_icon(self, icon: types.IconType):
         """Set the default window icon.
 
         Args:

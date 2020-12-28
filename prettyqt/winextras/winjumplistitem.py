@@ -3,7 +3,7 @@ from typing import Literal, Union
 
 from prettyqt import iconprovider
 from prettyqt.qt import QtWinExtras
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, types
 
 
 TYPES = bidict(
@@ -26,7 +26,7 @@ class WinJumpListItem(QtWinExtras.QWinJumpListItem):
     def set_title(self, title: str) -> None:
         self.setTitle(title)
 
-    def set_icon(self, icon: iconprovider.IconType) -> None:
+    def set_icon(self, icon: types.IconType) -> None:
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 

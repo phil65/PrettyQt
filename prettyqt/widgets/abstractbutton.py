@@ -2,7 +2,7 @@ from typing import Tuple, Union
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, types
 
 
 QtWidgets.QAbstractButton.__bases__ = (widgets.Widget,)
@@ -44,7 +44,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def __bool__(self):
         return self.isChecked()
 
-    def set_icon(self, icon: iconprovider.IconType):
+    def set_icon(self, icon: types.IconType):
         """Set the icon for the button.
 
         Args:

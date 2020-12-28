@@ -1,7 +1,8 @@
 from typing import Dict, Optional
 
-from prettyqt import core, iconprovider, widgets
+from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import types
 
 
 class BoolDictToolButton(widgets.ToolButton):
@@ -10,7 +11,7 @@ class BoolDictToolButton(widgets.ToolButton):
     def __init__(
         self,
         title: str,
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
         dct: Dict[str, str] = None,
         parent: Optional[QtWidgets.QWidget] = None,
     ):

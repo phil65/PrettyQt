@@ -2,7 +2,7 @@ from typing import Optional
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, types
 
 
 class TableWidgetItem(QtWidgets.QTableWidgetItem):
@@ -22,7 +22,7 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
             data=self.data(QtCore.Qt.UserRole),
         )
 
-    def set_icon(self, icon: iconprovider.IconType):
+    def set_icon(self, icon: types.IconType):
         """Set the icon for the action.
 
         Args:

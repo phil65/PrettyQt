@@ -4,7 +4,7 @@ from typing import List, Literal, Optional, Union
 
 from prettyqt import core, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 ICONS = bidict(
@@ -75,7 +75,7 @@ QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 class MessageBox(QtWidgets.QMessageBox):
     def __init__(
         self,
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
         title: str = "",
         text: str = "",
         informative_text: str = "",
@@ -101,7 +101,7 @@ class MessageBox(QtWidgets.QMessageBox):
         cls,
         text: str,
         title: str = "",
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
         detail_text: Optional[str] = None,
     ) -> str:
         m = cls("none", title, text)
@@ -117,7 +117,7 @@ class MessageBox(QtWidgets.QMessageBox):
         dlg = cls(text=str(value), title=str(exctype), icon="critical", details=tb)
         dlg.show_blocking()
 
-    def set_icon(self, icon: Union[iconprovider.IconType, IconStr]):
+    def set_icon(self, icon: Union[types.IconType, IconStr]):
         if icon in ICONS:
             self.setIcon(ICONS[icon])
         else:

@@ -4,7 +4,7 @@ from typing import Iterator, List, Optional, Tuple, Union
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, types
 
 
 class StandardItem(QtGui.QStandardItem):
@@ -76,7 +76,7 @@ class StandardItem(QtGui.QStandardItem):
         assert type(item) == StandardItem
         return item
 
-    def set_icon(self, icon: iconprovider.IconType):
+    def set_icon(self, icon: types.IconType):
         """Set the icon for the action.
 
         Args:
@@ -121,7 +121,7 @@ class StandardItem(QtGui.QStandardItem):
     def add_item(
         self,
         name: str = "",
-        icon: iconprovider.IconType = None,
+        icon: types.IconType = None,
         data: Optional[dict] = None,
         foreground: Optional[QtGui.QBrush] = None,
         background: Optional[QtGui.QBrush] = None,

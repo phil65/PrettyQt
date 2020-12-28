@@ -4,7 +4,7 @@ from typing import Iterator, Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 CHILD_INDICATOR_POLICY = bidict(
@@ -64,7 +64,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         order = QtCore.Qt.DescendingOrder if descending else QtCore.Qt.AscendingOrder
         self.sortChildren(column, order)
 
-    def set_icon(self, icon: iconprovider.IconType, column: int = 0):
+    def set_icon(self, icon: types.IconType, column: int = 0):
         """Set the icon for the action.
 
         Args:
