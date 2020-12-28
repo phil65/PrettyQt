@@ -2,7 +2,7 @@ from typing import Any, Callable, Iterator, List, Optional, Union
 
 from qtpy import QtWidgets
 
-from prettyqt import core, iconprovider, widgets
+from prettyqt import core, gui, iconprovider, widgets
 
 
 QtWidgets.QMenu.__bases__ = (widgets.Widget,)
@@ -35,6 +35,15 @@ class Menu(QtWidgets.QMenu):
                 return action
         raise KeyError(f"Action {item} not in menu")
 
+    def serialize_fields(self):
+        return dict(
+            separators_collapsible=self.separatorsCollapsible(),
+            tearoff_enabled=self.isTearOffEnabled(),
+            title=self.title(),
+            tool_tips_visible=self.toolTipsVisible(),
+            icon=self.get_icon(),
+        )
+
     def add(self, *item: QtWidgets.QAction):
         for i in item:
             i.setParent(self)
@@ -48,6 +57,9 @@ class Menu(QtWidgets.QMenu):
         """
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
+
+    def get_icon(self) -> gui.Icon:
+        return gui.Icon(self.icon())
 
     def add_separator(self, text: Optional[str] = None) -> widgets.WidgetAction:
         """Adds a separator showing an optional label.
