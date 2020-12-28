@@ -221,7 +221,7 @@ class ObjectBrowser(widgets.MainWindow):
             radio_widget.box.addWidget(radio_button)
             self.button_group.addButton(radio_button, button_id)
 
-        self.button_group.buttonClicked[int].connect(self._change_details_field)
+        self.button_group.buttonClicked.connect(self._change_details_field)
         self.button_group.button(0).setChecked(True)
 
         radio_widget.box.addStretch(1)
@@ -372,7 +372,7 @@ class ObjectBrowser(widgets.MainWindow):
         )
         self.toggle_auto_refresh_action.toggled.disconnect(self.toggle_auto_refresh)
         self.refresh_action_f5.triggered.disconnect(self._tree_model.refresh_tree)
-        self.button_group.buttonClicked[int].disconnect(self._change_details_field)
+        self.button_group.buttonClicked.disconnect(self._change_details_field)
         selection_model = self.obj_tree.selectionModel()
         selection_model.currentChanged.disconnect(self._update_details)
 
