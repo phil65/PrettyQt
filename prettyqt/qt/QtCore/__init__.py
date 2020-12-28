@@ -1,5 +1,7 @@
 """Provides QtCore classes and functions."""
 
+import datetime
+
 from prettyqt.qt import PYQT5, PYSIDE2, PYSIDE6, PythonQtError
 
 
@@ -23,9 +25,20 @@ if PYQT5:
     # For issue #153
     from PyQt5.QtCore import *
 
-    QDateTime.toPython = QDateTime.toPyDateTime
-    QDate.toPython = QDate.toPyDate
-    QTime.toPython = QTime.toPyTime
+    def to_datetime(self) -> datetime.datetime:
+        return self.toPyDateTime()
+
+    QDateTime.toPython = to_datetime
+
+    def to_date(self) -> datetime.date:
+        return self.toPyDate()
+
+    QDate.toPython = to_date
+
+    def to_time(self) -> datetime.time:
+        return self.toPyTime()
+
+    QTime.toPython = to_time
 
     # Those are imported from `import *`
     del pyqtSignal, pyqtBoundSignal, pyqtSlot, pyqtProperty, QT_VERSION_STR
@@ -35,3 +48,6 @@ elif PYSIDE2:
 elif PYSIDE6:
     from PySide6.QtCore import *  # type: ignore
     from PySide6.QtCore import __version__  # type: ignore
+
+dt = QDateTime(2000, 1, 1, 1, 1, 1)
+dt.toPython()

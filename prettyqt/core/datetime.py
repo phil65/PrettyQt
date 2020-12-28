@@ -3,7 +3,7 @@ from typing import Union
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, to_datetime
+from prettyqt.utils import InvalidParamError
 
 
 class DateTime(QtCore.QDateTime):
@@ -18,7 +18,7 @@ class DateTime(QtCore.QDateTime):
         return type(self), (self.date(), self.time(), self.get_timezone())
 
     def get_value(self) -> datetime.datetime:
-        return to_datetime(self)
+        return self.toPython()
 
     def get_date(self) -> core.Date:
         return core.Date(self.date())

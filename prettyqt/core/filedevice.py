@@ -3,7 +3,7 @@ from typing import Literal, Optional, Union
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, to_datetime
+from prettyqt.utils import InvalidParamError, bidict
 
 
 FILE_ERROR = bidict(
@@ -102,7 +102,7 @@ class FileDevice(QtCore.QFileDevice):
         date = self.fileTime(FILE_TIME[typ])
         if not date:
             return None
-        return to_datetime(date)
+        return date.toPython()  # type: ignore
 
     def get_error(self) -> FileErrorStr:
         """Return file error status.

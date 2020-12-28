@@ -3,7 +3,7 @@ from typing import List, Literal, Union
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, to_date, to_datetime, to_time
+from prettyqt.utils import InvalidParamError, bidict
 
 
 SECTIONS = bidict(
@@ -99,31 +99,31 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         self.setDateTime(value)  # type: ignore
 
     def get_datetime(self) -> datetime.datetime:
-        return to_datetime(self.dateTime())
+        return self.dateTime().toPython()  # type: ignore
 
     def min_datetime(self) -> datetime.datetime:
-        return to_datetime(self.minimumDateTime())
+        return self.minimumDateTime().toPython()  # type: ignore
 
     def max_datetime(self) -> datetime.datetime:
-        return to_datetime(self.maximumDateTime())
+        return self.maximumDateTime().toPython()  # type: ignore
 
     def min_date(self) -> datetime.date:
-        return to_date(self.minimumDate())
+        return self.minimumDate().toPython()  # type: ignore
 
     def max_date(self) -> datetime.date:
-        return to_date(self.maximumDate())
+        return self.maximumDate().toPython()  # type: ignore
 
     def get_date(self) -> datetime.date:
-        return to_date(self.date())
+        return self.date().toPython()  # type: ignore
 
     def min_time(self) -> datetime.time:
-        return to_time(self.minimumTime())
+        return self.minimumTime().toPython()  # type: ignore
 
     def max_time(self) -> datetime.time:
-        return to_time(self.maximumTime())
+        return self.maximumTime().toPython()  # type: ignore
 
     def get_time(self) -> datetime.time:
-        return to_time(self.time())
+        return self.time().toPython()  # type: ignore
 
 
 if __name__ == "__main__":
