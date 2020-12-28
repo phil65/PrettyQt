@@ -51,6 +51,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         callback: Optional[Callable] = None,
     ):
         super().__init__(parent)
+        self._menu = None
         self.set_text(text)
         self.set_icon(icon)
         self.set_shortcut(shortcut)
@@ -161,7 +162,14 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         return gui.KeySequence(shortcut.toString(), gui.KeySequence.PortableText)
 
     def set_menu(self, menu):
-        self.setMenu(menu)
+        try:
+            self.setMenu(menu)
+        except AttributeError:
+            self.triggered.connect(menu.exec_)
+            self._menu = menu
+
+    def menu(self):
+        return self._menu
 
     def set_priority(self, priority: PriorityStr):
         """Set priority of the action.

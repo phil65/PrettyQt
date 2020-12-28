@@ -10,6 +10,7 @@ QtWidgets.QWidgetAction.__bases__ = (widgets.Action,)
 class WidgetAction(QtWidgets.QWidgetAction):
     def __init__(self, parent: Optional[QtCore.QObject] = None):
         super().__init__(parent)  # type: ignore
+        self._menu = None  # bc of PySide inheritance also defined here
 
     #     self.set_text(text)
     #     self.set_icon(icon)

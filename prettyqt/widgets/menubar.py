@@ -37,11 +37,11 @@ class MenuBar(QtWidgets.QMenuBar):
         if isinstance(menu_or_str, str):
             menu = widgets.Menu(menu_or_str)
             action.set_text(menu_or_str)
-            action.setMenu(menu)
+            action.set_menu(menu)
             self.addAction(action)
             return menu
         else:
-            action.setMenu(menu_or_str)
+            action.set_menu(menu_or_str)
             action.set_text(menu_or_str.title())
             self.addAction(action)
             return action
@@ -54,7 +54,7 @@ class MenuBar(QtWidgets.QMenuBar):
             if isinstance(i, QtWidgets.QMenu):
                 action = widgets.Action(parent=self)
                 action.set_text(i.title())
-                action.setMenu(i)
+                action.set_menu(i)
                 self.addAction(action)
             else:
                 self.addAction(i)
