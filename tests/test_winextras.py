@@ -9,7 +9,7 @@ import pytest
 winextras = pytest.importorskip("prettyqt.winextras")
 
 pytestmark = pytest.mark.skipif(
-    not hasattr(winextras, "WinJumpListCategory"), reason="Only supported in Qt6"
+    not hasattr(winextras, "WinJumpListCategory"), reason="Only supported in Qt5"
 )
 
 
