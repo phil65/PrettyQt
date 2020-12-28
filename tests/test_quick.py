@@ -43,7 +43,6 @@ def test_quickwindow():
     window.create_texture_from_image(gui.Image())
     window.grab_window()
     window.get_color()
-    window.get_render_target_size()
     window.set_text_render_type("native_text")
     with pytest.raises(InvalidParamError):
         window.set_text_render_type("test")

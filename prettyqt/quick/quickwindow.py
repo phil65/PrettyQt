@@ -3,7 +3,7 @@ from typing import Literal
 
 from qtpy import QtCore, QtGui, QtQuick
 
-from prettyqt import core, gui
+from prettyqt import gui
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -66,9 +66,6 @@ class QuickWindow(QtQuick.QQuickWindow):
 
     def get_color(self) -> gui.Color:
         return gui.Color(self.color())
-
-    def get_render_target_size(self) -> core.Size:
-        return core.Size(self.renderTargetSize())
 
     @staticmethod
     def set_text_render_type(typ: TextRenderTypeStr):
