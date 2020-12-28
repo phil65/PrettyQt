@@ -5,10 +5,11 @@ from typing import Iterator, Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors
+from prettyqt.utils import InvalidParamError, bidict, colors, mappers
 
 
-AUTO_FORMATTING = bidict(
+AUTO_FORMATTING = mappers.FlagMap(
+    QtWidgets.QTextEdit.AutoFormatting,
     none=QtWidgets.QTextEdit.AutoNone,
     bullet_list=QtWidgets.QTextEdit.AutoBulletList,
     all=QtWidgets.QTextEdit.AutoAll,
