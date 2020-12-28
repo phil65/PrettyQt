@@ -33,18 +33,6 @@ class CheckBoxDelegate(widgets.ItemDelegate):
         with cb.block_signals():
             cb.setCurrentText(current_selection)
 
-    def setModelData(self, combo, model, index):
-        """Override, gets called on self.commitData (?).
-
-        apply the newly selected dtype to the column if possible.
-        """
-        dtype = self.dtypes[combo.currentText()]
-        # s = model.data(index, model.DATA_ROLE)
-        try:
-            model.setData(index, dtype, model.DTYPE_ROLE)
-        except ValueError as e:
-            logger.error(e)
-
     @core.Slot()
     def currentIndexChanged(self):
         self.commitData.emit(self.sender())

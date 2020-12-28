@@ -26,8 +26,8 @@ def tablewidget():
     widget.setHorizontalHeaderLabels(["LIB", "CELL", "area"])
     item = widgets.TableWidgetItem("test")
     widget.setItem(0, 0, item)
-    return widget
     widget.setItem(1, 1, widgets.TableWidgetItem("test"))
+    return widget
 
 
 class QtTester:

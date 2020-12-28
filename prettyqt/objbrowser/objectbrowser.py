@@ -171,7 +171,6 @@ class ObjectBrowser(widgets.MainWindow):
         self.show_cols_submenu = widgets.Menu("Table columns")
         view_menu.add_menu(self.show_cols_submenu)
         actions = self.obj_tree.h_header.get_header_actions()
-        print(actions)
         self.show_cols_submenu.add_actions(actions)
         view_menu.addSeparator()
         view_menu.addAction(self.toggle_callable_action)
