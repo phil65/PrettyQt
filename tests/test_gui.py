@@ -17,6 +17,7 @@ clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
 # logger = logging.getLogger(__name__)
 
 
+@pytest.mark.filterwarnings("ignore::DeprecationWarning")
 @pytest.mark.parametrize("name, cls", clsmembers)
 def test_repr(name, cls):
     try:

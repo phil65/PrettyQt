@@ -254,7 +254,7 @@ def test_historystate():
 
 
 def test_itemselection():
-    selection = core.ItemSelection()
+    selection = core.ItemSelection(core.ModelIndex(), core.ModelIndex())
     index = core.ModelIndex()
     assert index not in selection
     for idx in selection:

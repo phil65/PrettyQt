@@ -60,6 +60,11 @@ class PolygonF(QtGui.QPolygonF):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, type(self)):
+            return False
+        return list(self) == [other.at(i) for i in range(other.size())]
+
     def get_point(self, index: int) -> core.PointF:
         return core.PointF(self.at(index))
 

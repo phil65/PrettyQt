@@ -24,11 +24,11 @@ TimeTypeStr = Literal["standard", "daylight", "generic"]
 
 
 class TimeZone(QtCore.QTimeZone):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args):
         if len(args) == 1 and isinstance(args[0], str):
             super().__init__(QtCore.QByteArray(args[0].encode()))
         else:
-            super().__init__(*args, **kwargs)
+            super().__init__(*args)
 
     def __repr__(self):
         return f"{type(self).__name__}({self.get_id()!r})"

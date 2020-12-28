@@ -1,7 +1,7 @@
-from typing import Callable, Literal, Optional
+from typing import Callable, Literal, Optional, Union
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, helpers, prettyprinter, types
 
 
@@ -105,7 +105,6 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         self.setAutoRepeat(state["auto_repeat"])
         self.setVisible(state["visible"])
         self.setFont(state["font"])
-        self.setShortcut(state["shortcut"])
         # self.setIcon(state["icon"])
         self.setIconText(state["icon_text"])
         self.setIconVisibleInMenu(state["icon_visible_in_menu"])
@@ -148,9 +147,12 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def set_shortcut(self, shortcut):
-        if shortcut:
-            self.setShortcut(shortcut)
+    def set_shortcut(self, shortcut: Union[None, QtGui.QKeySequence, str]):
+        if shortcut is None:
+            shortcut = ""
+        if isinstance(shortcut, str):
+            shortcut = gui.KeySequence(shortcut, gui.KeySequence.PortableText)
+        self.setShortcut(shortcut)
 
     def get_shortcut(self) -> Optional[gui.KeySequence]:
         shortcut = self.shortcut()

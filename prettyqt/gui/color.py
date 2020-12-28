@@ -6,7 +6,7 @@ from prettyqt.qt import QtGui
 
 
 class Color(QtGui.QColor):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args):
         # PySide2 workaround
         if len(args) == 1:
             if isinstance(args[0], QtGui.QColor):
@@ -15,9 +15,9 @@ class Color(QtGui.QColor):
                 super().__init__()
                 self.set_color(args[0])
             else:
-                super().__init__(*args, **kwargs)
+                super().__init__(*args)
         else:
-            super().__init__(*args, **kwargs)
+            super().__init__(*args)
 
     def __repr__(self):
         return (

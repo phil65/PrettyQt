@@ -22,10 +22,8 @@ QtWidgets.QAbstractScrollArea.__bases__ = (widgets.Frame,)
 class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.h_scrollbar = widgets.ScrollBar()
-        self.v_scrollbar = widgets.ScrollBar()
-        self.setHorizontalScrollBar(self.h_scrollbar)
-        self.setVerticalScrollBar(self.v_scrollbar)
+        self.setHorizontalScrollBar(widgets.ScrollBar(parent=self))
+        self.setVerticalScrollBar(widgets.ScrollBar(parent=self))
 
     def serialize_fields(self):
         return dict(
@@ -40,21 +38,21 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
         self.set_horizontal_scrollbar_policy(state["horizontal_scrollbar_policy"])
         self.set_vertical_scrollbar_policy(state["vertical_scrollbar_policy"])
 
-    # @property
-    # def h_scrollbar(self):
-    #     return self.horizontalScrollbar()
+    @property
+    def h_scrollbar(self):
+        return self.horizontalScrollBar()
 
-    # @h_scrollbar.setter
-    # def h_scrollbar(self, scrollbar):
-    #     self.setHorizontalScrollBar(scrollbar)
+    @h_scrollbar.setter
+    def h_scrollbar(self, scrollbar):
+        self.setHorizontalScrollBar(scrollbar)
 
-    # @property
-    # def v_scrollbar(self):
-    #     return self.verticalScrollBar()
+    @property
+    def v_scrollbar(self):
+        return self.verticalScrollBar()
 
-    # @v_scrollbar.setter
-    # def v_scrollbar(self, scrollbar):
-    #     self.setVerticalScrollBar(scrollbar)
+    @v_scrollbar.setter
+    def v_scrollbar(self, scrollbar):
+        self.setVerticalScrollBar(scrollbar)
 
     def set_size_adjust_policy(self, policy: SizePolicyStr):
         """Set size adjust policy.
