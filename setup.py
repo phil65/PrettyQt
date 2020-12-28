@@ -25,7 +25,7 @@ setup(
     entry_points={
         "pyinstaller40": ["hook-dirs=prettyqt.__pyinstaller:get_hook_dirs"],
     },
-    description="Pythonic layer on top of PyQt5 / PySide2",
+    description="Pythonic layer on top of PyQt5 / PySide2 / PySide6",
     install_requires=REQUIREMENTS,
     license="MIT license",
     python_requires=">=3.8.0",

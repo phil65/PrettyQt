@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "PrettyQt"
 version = "0.163.0"
-description = "A pythonic layer on top of PySide2 / PyQt5"
+description = "A pythonic layer on top of PyQt5 / PySide2 / PySide6"
 readme = 'docs/index.md'
 repository = "https://github.com/phil65/prettyqt"
 homepage = "https://github.com/phil65/prettyqt"

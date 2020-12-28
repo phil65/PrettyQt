@@ -1,4 +1,4 @@
-# prettyqt: Pythonic layer on top of PyQt5 / PySide2
+# prettyqt: Pythonic layer on top of PyQt5 / PySide2 / PySide6
 [![PyPI Latest Release](https://img.shields.io/pypi/v/prettyqt.svg)](https://pypi.org/project/prettyqt/)
 [![Package Status](https://img.shields.io/pypi/status/prettyqt.svg)](https://pypi.org/project/prettyqt/)
 [![License](https://img.shields.io/pypi/l/prettyqt.svg)](https://github.com/prettyqt-dev/prettyqt/blob/master/LICENSE)
@@ -9,7 +9,7 @@
 
 ## What is it?
 
-**PrettyQt** is a Python package that provides a pythonic layer on top of the GUI frameworks PyQt5 / PySide2.
+**PrettyQt** is a Python package that provides a pythonic layer on top of the GUI frameworks PyQt5 / PySide2 / PySide6.
 
 ## Main Features
 Here are just a few of the things that PrettyQt does well:
