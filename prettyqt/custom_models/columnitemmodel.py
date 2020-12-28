@@ -164,3 +164,19 @@ class ColumnItemModel(core.AbstractItemModel):
             return self._attr_cols[section].name
         else:
             return None
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+
+    class TestModel(ColumnItemModel):
+        def rowCount(self, parent=None):
+            return 5
+
+    app = widgets.app()
+    item = ColumnItem(name="Test", label=None)
+    model = TestModel(attr_cols=[item])
+    table = widgets.TableView()
+    table.set_model(model)
+    table.show()
+    app.main_loop()

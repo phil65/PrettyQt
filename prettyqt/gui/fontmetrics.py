@@ -16,3 +16,10 @@ class FontMetrics(QtGui.QFontMetrics):
 
     def get_tight_bounding_rect(self, text: str) -> core.Rect:
         return core.Rect(self.tightBoundingRect(text))
+
+
+if __name__ == "__main__":
+    app = QtGui.QGuiApplication([])
+    font = QtGui.QFont()
+    metrics = FontMetrics(font)
+    print(metrics.get_bounding_rect("test"))

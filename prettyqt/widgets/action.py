@@ -235,4 +235,3 @@ if __name__ == "__main__":
 
     app = widgets.app()
     action = Action(text="This is a test")
-    app.main_loop()
