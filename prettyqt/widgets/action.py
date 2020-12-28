@@ -67,7 +67,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         return f"{cls_name}({helpers.format_kwargs(self.serialize_fields())})"
 
     def serialize_fields(self):
-        return dict(
+        dct = dict(
             auto_repeat=self.autoRepeat(),
             text=self.text(),
             enabled=self.isEnabled(),
@@ -80,14 +80,16 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
             icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
             icon_text=self.iconText(),
             priority=self.get_priority(),
-            icon_visible=self.isIconVisibleInMenu(),
-            shortcut_visible=self.isShortcutVisibleInContextMenu(),
+            icon_visible_in_menu=self.isIconVisibleInMenu(),
+            shortcut_visible_in_context_menu=self.isShortcutVisibleInContextMenu(),
             menu_role=self.get_menu_role(),
             shortcut_context=self.get_shortcut_context(),
             status_tip=self.statusTip(),
             whats_this=self.whatsThis(),
-            menu=self.menu(),
         )
+        if core.VersionNumber.get_qt_version() < (6, 0, 0):
+            dct["menu"] = self.menu()
+        return dct
 
     def __setstate__(self, state):
         super().__setstate__(state)
@@ -100,6 +102,18 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         self.set_priority(state["priority"])
         self.set_shortcut_context(state["shortcut_context"])
         self.set_checkable(state["checkable"])
+        self.setAutoRepeat(state["auto_repeat"])
+        self.setVisible(state["visible"])
+        self.setFont(state["font"])
+        self.setShortcut(state["shortcut"])
+        # self.setIcon(state["icon"])
+        self.setIconText(state["icon_text"])
+        self.setIconVisibleInMenu(state["icon_visible_in_menu"])
+        self.setShortcutVisibleInContextMenu(state["shortcut_visible_in_context_menu"])
+        self.set_menu_role(state["menu_role"])
+        self.setWhatsThis(state["whats_this"])
+        # if core.VersionNumber.get_qt_version() < (6, 0, 0):
+        #     self.setMenu(state["menu"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
