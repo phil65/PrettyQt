@@ -126,10 +126,11 @@ class FontDatabase(QtGui.QFontDatabase):
                 raise OSError(f"Font is corrupt at: '{path}'")
         return font_id
 
-    def get_system_font(self, font_type: SystemFontStr):
+    @classmethod
+    def get_system_font(cls, font_type: SystemFontStr):
         if font_type not in SYSTEM_FONT:
             raise InvalidParamError(font_type, SYSTEM_FONT)
-        return self.systemFont(SYSTEM_FONT[font_type])
+        return cls.systemFont(SYSTEM_FONT[font_type])
 
 
 if __name__ == "__main__":

@@ -132,12 +132,11 @@ def test_font():
 
 
 def test_fontdatabase():
-    db = gui.FontDatabase()
     p = pathlib.Path()
-    db.add_fonts_from_folder(p)
-    db.get_system_font("smallest_readable")
+    gui.FontDatabase.add_fonts_from_folder(p)
+    gui.FontDatabase.get_system_font("smallest_readable")
     with pytest.raises(InvalidParamError):
-        db.get_system_font("test")
+        gui.FontDatabase.get_system_font("test")
 
 
 def test_fontinfo():
