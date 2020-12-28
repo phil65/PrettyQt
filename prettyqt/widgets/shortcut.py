@@ -49,4 +49,4 @@ class Shortcut(QtWidgets.QShortcut):
         Returns:
             Key sequence
         """
-        return gui.KeySequence(self.key())
+        return gui.KeySequence(self.key().toString(), gui.KeySequence.PortableText)

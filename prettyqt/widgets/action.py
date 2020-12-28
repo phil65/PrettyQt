@@ -142,7 +142,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         shortcut = self.shortcut()
         if not shortcut:
             return None
-        return gui.KeySequence(shortcut)
+        return gui.KeySequence(shortcut.toString(), gui.KeySequence.PortableText)
 
     def set_menu(self, menu):
         self.setMenu(menu)

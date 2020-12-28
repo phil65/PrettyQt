@@ -76,7 +76,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.setShortcut(seq)
 
     def get_shortcut(self) -> gui.KeySequence:
-        return gui.KeySequence(self.shortcut())
+        return gui.KeySequence(self.shortcut().toString(), gui.KeySequence.PortableText)
 
     def set_text(self, text: str):
         self.setText(text)
