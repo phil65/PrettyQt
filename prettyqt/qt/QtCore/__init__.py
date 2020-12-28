@@ -8,6 +8,8 @@ if PYQT5:
         QT_VERSION_STR,
         QT_VERSION_STR as __version__,
         QDateTime,
+        QDate,
+        QTime,
         pyqtBoundSignal,
         pyqtBoundSignal as SignalInstance,
         pyqtProperty,
@@ -22,6 +24,8 @@ if PYQT5:
     from PyQt5.QtCore import *
 
     QDateTime.toPython = QDateTime.toPyDateTime
+    QDate.toPython = QDate.toPyDate
+    QTime.toPython = QTime.toPyTime
 
     # Those are imported from `import *`
     del pyqtSignal, pyqtBoundSignal, pyqtSlot, pyqtProperty, QT_VERSION_STR
