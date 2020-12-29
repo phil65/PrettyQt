@@ -5229,7 +5229,7 @@ get_file_time<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fileTime</span><span class="p">(</span><span class="n">FILE_TIME</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">date</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">to_datetime</span><span class="p">(</span><span class="n">date</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">date</span><span class="o">.</span><span class="n">toPython</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
 </code></pre>
 </div>
 </details>

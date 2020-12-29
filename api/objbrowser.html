@@ -453,13 +453,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowser.ObjectBrowser.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowser.ObjectBrowser.browse" class="md-nav__link">
     browse()
   </a>
@@ -931,13 +924,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowser.ObjectBrowser.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowser.ObjectBrowser.browse" class="md-nav__link">
     browse()
   </a>
@@ -1261,94 +1247,6 @@ safe_data_fn<span class="p">(</span><span class="n">obj_fn</span><span class="p"
 <p>Object browser main application window.</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowser.ObjectBrowser.__init__">
-
-        <code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">''</span><span class="p">)</span>        </code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
-
-      </h4>
-<div class="doc doc-contents ">
-<p>Constructor.</p>
-<p>:param obj: any Python object or variable
-:param name: name of the object as it will appear in the root node</p>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">""</span><span class="p">):</span>
-    <span class="sd">"""Constructor.</span>
-
-<span class="sd">    :param obj: any Python object or variable</span>
-<span class="sd">    :param name: name of the object as it will appear in the root node</span>
-<span class="sd">    """</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_instance</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="s2">"mdi.language-python"</span><span class="p">)</span>
-    <span class="c1"># Model</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span> <span class="o">=</span> <span class="n">DEFAULT_ATTR_COLS</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_attr_details</span> <span class="o">=</span> <span class="n">DEFAULT_ATTR_DETAILS</span>
-
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"Reading model settings for window: </span><span class="si">%d</span><span class="s2">"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span><span class="p">)</span>
-    <span class="k">with</span> <span class="n">core</span><span class="o">.</span><span class="n">Settings</span><span class="p">(</span><span class="n">settings_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_settings_group_name</span><span class="p">(</span><span class="s2">"model"</span><span class="p">))</span> <span class="k">as</span> <span class="n">settings</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_auto_refresh</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"auto_refresh"</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"read auto_refresh: </span><span class="si">%r</span><span class="s2">"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_auto_refresh</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"refresh_rate"</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"read refresh_rate: </span><span class="si">%r</span><span class="s2">"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span><span class="p">)</span>
-
-        <span class="n">show_callable_attributes</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"show_callable_attributes"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"read show_callable_attributes: </span><span class="si">%r</span><span class="s2">"</span><span class="p">,</span> <span class="n">show_callable_attributes</span><span class="p">)</span>
-
-        <span class="n">show_special_attributes</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"show_special_attributes"</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"read show_special_attributes: </span><span class="si">%r</span><span class="s2">"</span><span class="p">,</span> <span class="n">show_special_attributes</span><span class="p">)</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span> <span class="o">=</span> <span class="n">objectbrowsertreemodel</span><span class="o">.</span><span class="n">ObjectBrowserTreeModel</span><span class="p">(</span>
-        <span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attr_cols</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span>
-    <span class="p">)</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span> <span class="o">=</span> <span class="n">objectbrowsertreemodel</span><span class="o">.</span><span class="n">ObjectBrowserTreeProxyModel</span><span class="p">(</span>
-        <span class="n">show_callable_attributes</span><span class="o">=</span><span class="n">show_callable_attributes</span><span class="p">,</span>
-        <span class="n">show_special_attributes</span><span class="o">=</span><span class="n">show_special_attributes</span><span class="p">,</span>
-    <span class="p">)</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="p">)</span>
-    <span class="c1"># self._proxy_tree_model.setSortRole(RegistryTableModel.SORT_ROLE)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">setDynamicSortFilter</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    <span class="c1"># self._proxy_tree_model.setSortCaseSensitivity(Qt.CaseInsensitive)</span>
-
-    <span class="c1"># Views</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_setup_actions</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_setup_views</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_setup_menu</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Object browser"</span><span class="p">)</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">_read_view_settings</span><span class="p">()</span>
-
-    <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span> <span class="o">&gt;</span> <span class="mi">0</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">setInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">)</span>
-
-    <span class="c1"># Update views with model</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">toggle_special_attribute_action</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">show_special_attributes</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">toggle_callable_action</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">show_callable_attributes</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh_action</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_refresh</span><span class="p">)</span>
-
-    <span class="c1"># Select first row so that a hidden root node will not be selected.</span>
-    <span class="n">first_row_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">first_item_index</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="n">first_row_index</span><span class="p">)</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">first_row_index</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowser.ObjectBrowser.browse">
 
         <code class="highlight language-python">
@@ -1410,8 +1308,19 @@ closeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="sd">"""Called when the window is closed."""</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"closeEvent"</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_write_model_settings</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_write_view_settings</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_finalize</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">toggle_callable_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">set_show_callables</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">toggle_special_attribute_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">set_show_special_attributes</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">refresh_action_f5</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">button_group</span><span class="o">.</span><span class="n">buttonClicked</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_change_details_field</span><span class="p">)</span>
+    <span class="n">selection_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+    <span class="n">selection_model</span><span class="o">.</span><span class="n">currentChanged</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_details</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
     <span class="sd">"""Set the reference in the browser list to None."""</span>

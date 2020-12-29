@@ -1084,6 +1084,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.action.Action.menu" class="md-nav__link">
+    menu()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.action.Action.set_icon" class="md-nav__link">
     set_icon()
   </a>
@@ -4924,6 +4931,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.action.Action.menu" class="md-nav__link">
+    menu()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.action.Action.set_icon" class="md-nav__link">
     set_icon()
   </a>
@@ -8243,7 +8257,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractbutton.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the button.</span>
 
 <span class="sd">    Args:</span>
@@ -10693,6 +10707,26 @@ get_shortcut_context<span class="p">(</span><span class="bp">self</span><span cl
 </div>
 </div>
 <div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.action.Action.menu">
+
+        <code class="highlight language-python">
+menu<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>menu(self) -&gt; QMenu</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_menu</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.widgets.action.Action.set_icon">
 
         <code class="highlight language-python">
@@ -10726,7 +10760,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
@@ -11822,7 +11856,7 @@ get_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['content', 'first_show', 'min_length', 'min_length_with_icon']</code></td>
+<td><code>Literal['content', 'first_show', 'min_length_with_icon']</code></td>
 <td>
 <p>size adjust policy</p>
 </td>
@@ -11960,7 +11994,7 @@ set_size_adjust_policy<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>Literal['content', 'first_show', 'min_length', 'min_length_with_icon']</code></td>
+<td><code>Literal['content', 'first_show', 'min_length_with_icon']</code></td>
 <td>
 <p>size adjust policy to use</p>
 </td>
@@ -18053,7 +18087,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/listwidgetitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
@@ -18988,7 +19022,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/menu.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the menu.</span>
 
 <span class="sd">    Args:</span>
@@ -19189,7 +19223,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/messagebox.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">IconStr</span><span class="p">]):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">IconStr</span><span class="p">]):</span>
     <span class="k">if</span> <span class="n">icon</span> <span class="ow">in</span> <span class="n">ICONS</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">ICONS</span><span class="p">[</span><span class="n">icon</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
@@ -20335,7 +20369,7 @@ get_key<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <span class="sd">    Returns:</span>
 <span class="sd">        Key sequence</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">KeySequence</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">KeySequence</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">(),</span> <span class="n">gui</span><span class="o">.</span><span class="n">KeySequence</span><span class="o">.</span><span class="n">PortableText</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -21331,7 +21365,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/systemtrayicon.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the system tray icon.</span>
 
 <span class="sd">    Args:</span>
@@ -21923,7 +21957,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tablewidgetitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
@@ -22159,7 +22193,7 @@ given index</p>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">widget</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">],</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">insert_at</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""Re-attach tab.</span>
@@ -22171,7 +22205,7 @@ given index</p>
 <span class="sd">        widget (Union[QtWidgets.QWidget, QtWidgets.QLayout]): the content widget</span>
 <span class="sd">            from the DetachedTab window</span>
 <span class="sd">        name (str): the name of the detached tab</span>
-<span class="sd">        icon (iconprovider.IconType, optional): the window icon for the detached tab</span>
+<span class="sd">        icon (types.IconType, optional): the window icon for the detached tab</span>
 <span class="sd">        insert_at (Optional[int], optional): insert the re-attached tab at the</span>
 <span class="sd">            given index</span>
 <span class="sd">    """</span>
@@ -23836,7 +23870,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>icon</code></td>
-<td><code>iconprovider.IconType</code></td>
+<td><code>types.IconType</code></td>
 <td>
 <p>icon to use</p>
 </td>
@@ -23855,7 +23889,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/treewidgetitem.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
@@ -23927,7 +23961,7 @@ set_clean_icon<span class="p">(</span><span class="bp">self</span><span class="p
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/undoview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
     <span class="sd">"""Set the icon for the clean button.</span>
 
 <span class="sd">    Args:</span>
@@ -24326,7 +24360,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">"""Set the window icon.</span>
 
 <span class="sd">    Args:</span>

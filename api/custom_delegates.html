@@ -376,13 +376,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setModelData" class="md-nav__link">
-    setModelData()
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1135,13 +1128,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setModelData" class="md-nav__link">
-    setModelData()
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1669,36 +1655,6 @@ setEditorData<span class="p">(</span><span class="bp">self</span><span class="p"
     <span class="n">current_selection</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
     <span class="k">with</span> <span class="n">cb</span><span class="o">.</span><span class="n">block_signals</span><span class="p">():</span>
         <span class="n">cb</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">current_selection</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.custom_delegates.checkboxdelegate.CheckBoxDelegate.setModelData">
-
-        <code class="highlight language-python">
-setModelData<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combo</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>Override, gets called on self.commitData (?).</p>
-<p>apply the newly selected dtype to the column if possible.</p>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">combo</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
-    <span class="sd">"""Override, gets called on self.commitData (?).</span>
-
-<span class="sd">    apply the newly selected dtype to the column if possible.</span>
-<span class="sd">    """</span>
-    <span class="n">dtype</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dtypes</span><span class="p">[</span><span class="n">combo</span><span class="o">.</span><span class="n">currentText</span><span class="p">()]</span>
-    <span class="c1"># s = model.data(index, model.DATA_ROLE)</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">DTYPE_ROLE</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
