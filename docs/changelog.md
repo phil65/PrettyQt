@@ -1,3 +1,15 @@
+## v0.164.0 (2020-12-29)
+
+### Feat
+
+- **CoreApplication**: add restart method
+
+### Fix
+
+- **FontDatabase**: make get_system_font a classmethod
+- ObjectBrowser signal fix for Qt6
+- **PdfWriter**: correctly inherit from Object and PagedPaintDevice
+
 ## v0.163.0 (2020-12-27)
 
 ### Feat
