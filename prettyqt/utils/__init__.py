@@ -1,8 +1,6 @@
 """Module containing helper functions."""
 
-import sys
 from typing import Iterable
-import traceback
 import logging
 
 import bidict as bdct
@@ -32,33 +30,3 @@ class InvalidParamError(ValueError):
         opts = " / ".join(repr(opt) for opt in valid_options)
         self.message = f"Invalid value: {value!r}. Allowed options are {opts}."
         super().__init__(self.message)
-
-
-def install_exceptionhook(debug=False):
-    def handleException(exc_type, exc_value, exc_traceback):
-        """Causes the application to quit in case of an unhandled exception.
-
-        Shows an error dialog before quitting when not in debugging mode.
-        """
-        logger.critical(
-            f"Bug: uncaught {exc_type.__name__}",
-            exc_info=(exc_type, exc_value, exc_traceback),
-        )
-        if debug:
-            sys.exit(1)
-        else:
-            from prettyqt import widgets
-
-            # Constructing a QApplication in case this hasn't been done yet.
-            _ = widgets.app()
-            lst = traceback.format_exception(exc_type, exc_value, exc_traceback)
-            msgBox = widgets.MessageBox(
-                icon="warning",
-                text=f"Bug: uncaught {exc_type.__name__}",
-                informative_text=str(exc_value),
-                details="".join(lst),
-            )
-            msgBox.exec_()
-            sys.exit(1)
-
-    sys.excepthook = handleException
