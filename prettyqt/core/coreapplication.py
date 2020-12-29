@@ -1,4 +1,6 @@
+import os
 import pathlib
+import sys
 from typing import Callable, List, Optional, Union
 
 from prettyqt import constants, core
@@ -85,3 +87,7 @@ class CoreApplication(QtCore.QCoreApplication):
 
     def main_loop(self) -> int:
         return self.exec_()
+
+    @staticmethod
+    def restart():
+        os.execl(sys.executable, sys.executable, *sys.argv)
