@@ -1,5 +1,8 @@
 """Object browser GUI in Qt."""
 
+
+from __future__ import annotations
+
 import hashlib
 import logging
 import sys
@@ -14,10 +17,6 @@ from prettyqt.objbrowser.attribute_model import DEFAULT_ATTR_COLS, DEFAULT_ATTR_
 logger = logging.getLogger(__name__)
 
 
-# The main window inherits from a Qt class, therefore it has many
-# ancestors public methods and attributes.
-# pylint: disable=R0901, R0902, R0904, W0201
-
 # It's not possible to use locals() as default for obj by taking take the locals
 # from one stack frame higher; you can't know if the ObjectBrowser.__init__ was
 # called directly, via the browse() wrapper or via a descendants' constructor.
@@ -27,36 +26,22 @@ class ObjectBrowser(widgets.MainWindow):
     """Object browser main application window."""
 
     _app = None  # Reference to the global application.
-    _browsers: List[Optional["ObjectBrowser"]] = []  # Keep lists of browser windows.
+    _browsers: List[Optional[ObjectBrowser]] = []  # Keep lists of browser windows.
 
     def __init__(self, obj, name: str = ""):
-        """Constructor.
-
-        :param obj: any Python object or variable
-        :param name: name of the object as it will appear in the root node
-        """
         super().__init__()
-
+        self.set_title("Object browser")
         self._instance_nr = self._add_instance()
         self.set_icon("mdi.language-python")
-        # Model
         self._attr_cols = DEFAULT_ATTR_COLS
         self._attr_details = DEFAULT_ATTR_DETAILS
 
         logger.debug("Reading model settings for window: %d", self._instance_nr)
         with core.Settings(settings_id=self._settings_group_name("model")) as settings:
             self._auto_refresh = settings.get("auto_refresh", False)
-            logger.debug("read auto_refresh: %r", self._auto_refresh)
-
             self._refresh_rate = settings.get("refresh_rate", 2)
-            logger.debug("read refresh_rate: %r", self._refresh_rate)
-
             show_callable_attributes = settings.get("show_callable_attributes", True)
-            logger.debug("read show_callable_attributes: %r", show_callable_attributes)
-
             show_special_attributes = settings.get("show_special_attributes", True)
-            logger.debug("read show_special_attributes: %r", show_special_attributes)
-
         self._tree_model = objectbrowsertreemodel.ObjectBrowserTreeModel(
             obj, name, attr_cols=self._attr_cols
         )
@@ -73,11 +58,89 @@ class ObjectBrowser(widgets.MainWindow):
 
         # Views
         self._setup_actions()
-        self._setup_views()
-        self._setup_menu()
-        self.set_title("Object browser")
+        self.central_splitter = widgets.Splitter(
+            parent=self, orientation=constants.VERTICAL
+        )
+        self.setCentralWidget(self.central_splitter)
 
-        self._read_view_settings()
+        # Tree widget
+        self.obj_tree = widgets.TreeView()
+        self.obj_tree.setRootIsDecorated(True)
+        self.obj_tree.setAlternatingRowColors(True)
+        self.obj_tree.set_model(self._proxy_tree_model)
+        self.obj_tree.set_selection_behaviour("rows")
+        self.obj_tree.setUniformRowHeights(True)
+        self.obj_tree.setAnimated(True)
+
+        # Stretch last column?
+        # It doesn't play nice when columns are hidden and then shown again.
+        self.obj_tree.h_header.set_id("table_header")
+        self.obj_tree.h_header.setSectionsMovable(True)
+        self.obj_tree.h_header.setStretchLastSection(False)
+        self.central_splitter.addWidget(self.obj_tree)
+
+        # Bottom pane
+        bottom_pane_widget = widgets.Widget()
+        bottom_pane_widget.set_layout("horizontal", spacing=0, margin=5)
+        self.central_splitter.addWidget(bottom_pane_widget)
+
+        group_box = widgets.GroupBox("Details")
+        bottom_pane_widget.box.addWidget(group_box)
+
+        group_box.set_layout("horizontal", margin=2)
+
+        # Radio buttons
+        radio_widget = widgets.Widget()
+        radio_widget.set_layout("vertical", margin=0)
+
+        self.button_group = widgets.ButtonGroup(self)
+        for button_id, attr_detail in enumerate(self._attr_details):
+            radio_button = widgets.RadioButton(attr_detail.name)
+            radio_widget.box.addWidget(radio_button)
+            self.button_group.addButton(radio_button, button_id)
+
+        self.button_group.buttonClicked.connect(self._change_details_field)
+        self.button_group.button(0).setChecked(True)
+
+        radio_widget.box.addStretch(1)
+        group_box.box.addWidget(radio_widget)
+
+        # Editor widget
+        font = gui.Font("Courier")
+        font.setFixedPitch(True)
+        # font.setPointSize(14)
+
+        self.editor = widgets.PlainTextEdit()
+        self.editor.setReadOnly(True)
+        self.editor.setFont(font)
+        group_box.box.addWidget(self.editor)
+
+        # Splitter parameters
+        self.central_splitter.setCollapsible(0, False)
+        self.central_splitter.setCollapsible(1, True)
+        self.central_splitter.setSizes([400, 200])
+        self.central_splitter.setStretchFactor(0, 10)
+        self.central_splitter.setStretchFactor(1, 0)
+
+        selection_model = self.obj_tree.selectionModel()
+        selection_model.currentChanged.connect(self._update_details)
+        menubar = self.menuBar()
+        file_menu = menubar.add_menu("&File")
+        file_menu.addAction("C&lose", self.close, "Ctrl+W")
+        file_menu.addAction("E&xit", lambda: widgets.app().closeAllWindows(), "Ctrl+Q")
+
+        view_menu = menubar.add_menu("&View")
+        view_menu.addAction("&Refresh", self._tree_model.refresh_tree, "Ctrl+R")
+        view_menu.addAction(self.toggle_auto_refresh_action)
+
+        view_menu.addSeparator()
+        self.show_cols_submenu = widgets.Menu("Table columns")
+        view_menu.add_menu(self.show_cols_submenu)
+        actions = self.obj_tree.h_header.get_header_actions()
+        self.show_cols_submenu.add_actions(actions)
+        view_menu.addSeparator()
+        view_menu.addAction(self.toggle_callable_action)
+        view_menu.addAction(self.toggle_special_attribute_action)
 
         assert self._refresh_rate > 0
         self._refresh_timer = core.Timer(self)
@@ -156,97 +219,6 @@ class ObjectBrowser(widgets.MainWindow):
         self.refresh_action_f5.triggered.connect(self._tree_model.refresh_tree)
         self.addAction(self.refresh_action_f5)
 
-    def _setup_menu(self):
-        """Set up the main menu."""
-        menubar = self.menuBar()
-        file_menu = menubar.add_menu("&File")
-        file_menu.addAction("C&lose", self.close, "Ctrl+W")
-        file_menu.addAction("E&xit", lambda: widgets.app().closeAllWindows(), "Ctrl+Q")
-
-        view_menu = menubar.add_menu("&View")
-        view_menu.addAction("&Refresh", self._tree_model.refresh_tree, "Ctrl+R")
-        view_menu.addAction(self.toggle_auto_refresh_action)
-
-        view_menu.addSeparator()
-        self.show_cols_submenu = widgets.Menu("Table columns")
-        view_menu.add_menu(self.show_cols_submenu)
-        actions = self.obj_tree.h_header.get_header_actions()
-        self.show_cols_submenu.add_actions(actions)
-        view_menu.addSeparator()
-        view_menu.addAction(self.toggle_callable_action)
-        view_menu.addAction(self.toggle_special_attribute_action)
-        # help_menu = menubar.addMenu("&Help")
-        # help_menu.addAction("&About", self.about)
-
-    def _setup_views(self):
-        """Create the UI widgets."""
-        self.central_splitter = widgets.Splitter(
-            parent=self, orientation=constants.VERTICAL
-        )
-        self.setCentralWidget(self.central_splitter)
-
-        # Tree widget
-        self.obj_tree = widgets.TreeView()
-        self.obj_tree.setRootIsDecorated(True)
-        self.obj_tree.setAlternatingRowColors(True)
-        self.obj_tree.set_model(self._proxy_tree_model)
-        self.obj_tree.set_selection_behaviour("rows")
-        self.obj_tree.setUniformRowHeights(True)
-        self.obj_tree.setAnimated(True)
-
-        # Stretch last column?
-        # It doesn't play nice when columns are hidden and then shown again.
-        self.obj_tree.h_header.set_id("table_header")
-        self.obj_tree.h_header.setSectionsMovable(True)
-        self.obj_tree.h_header.setStretchLastSection(False)
-        self.central_splitter.addWidget(self.obj_tree)
-
-        # Bottom pane
-        bottom_pane_widget = widgets.Widget()
-        bottom_pane_widget.set_layout("horizontal", spacing=0, margin=5)
-        self.central_splitter.addWidget(bottom_pane_widget)
-
-        group_box = widgets.GroupBox("Details")
-        bottom_pane_widget.box.addWidget(group_box)
-
-        group_box.set_layout("horizontal", margin=2)
-
-        # Radio buttons
-        radio_widget = widgets.Widget()
-        radio_widget.set_layout("vertical", margin=0)
-
-        self.button_group = widgets.ButtonGroup(self)
-        for button_id, attr_detail in enumerate(self._attr_details):
-            radio_button = widgets.RadioButton(attr_detail.name)
-            radio_widget.box.addWidget(radio_button)
-            self.button_group.addButton(radio_button, button_id)
-
-        self.button_group.buttonClicked.connect(self._change_details_field)
-        self.button_group.button(0).setChecked(True)
-
-        radio_widget.box.addStretch(1)
-        group_box.box.addWidget(radio_widget)
-
-        # Editor widget
-        font = gui.Font("Courier")
-        font.setFixedPitch(True)
-        # font.setPointSize(14)
-
-        self.editor = widgets.PlainTextEdit()
-        self.editor.setReadOnly(True)
-        self.editor.setFont(font)
-        group_box.box.addWidget(self.editor)
-
-        # Splitter parameters
-        self.central_splitter.setCollapsible(0, False)
-        self.central_splitter.setCollapsible(1, True)
-        self.central_splitter.setSizes([400, 200])
-        self.central_splitter.setStretchFactor(0, 10)
-        self.central_splitter.setStretchFactor(1, 0)
-
-        selection_model = self.obj_tree.selectionModel()
-        selection_model.currentChanged.connect(self._update_details)
-
     def _settings_group_name(self, postfix: str) -> str:
         """Construct a group name for the persistent settings.
 
@@ -272,44 +244,6 @@ class ObjectBrowser(widgets.MainWindow):
         settings_id = self._settings_group_name("model")
         logger.debug(f"New settings: {new}")
         with core.Settings(settings_id=settings_id) as settings:
-            settings.set_values(new)
-
-    def _read_view_settings(self):
-        """Read the persistent program settings."""
-        pos = core.Point(20 * self._instance_nr, 20 * self._instance_nr)
-        window_size = core.Size(1024, 700)
-        details_button_idx = 0
-
-        header = self.obj_tree.header()
-        logger.debug("Reading view settings for window: %d", self._instance_nr)
-        with core.Settings(settings_id=self._settings_group_name("view")) as settings:
-            pos = settings.get("main_window/pos", pos)
-            window_size = settings.get("main_window/size", window_size)
-            details_button_idx = settings.get("details_button_idx", details_button_idx)
-            splitter_state = settings.get("central_splitter/state")
-            if splitter_state:
-                self.central_splitter.restoreState(splitter_state)
-            if not self.obj_tree.h_header.load_state(settings, "table/header_state"):
-                column_sizes = [col.get_width() for col in self._attr_cols]
-                header.set_sizes(column_sizes)
-        self.resize(window_size)
-        self.move(pos)
-        button = self.button_group.button(details_button_idx)
-        if button is not None:
-            button.setChecked(True)
-
-    def _write_view_settings(self):
-        """Write the view settings to the persistent store."""
-        logger.debug("Writing view settings for window: %d", self._instance_nr)
-        new = {
-            "table/header_state": self.obj_tree.h_header.saveState(),
-            "central_splitter/state": self.central_splitter.saveState(),
-            "details_button_idx": self.button_group.checkedId(),
-            "main_window/pos": self.pos(),
-            "main_window/size": self.size(),
-        }
-        with core.Settings(settings_id=self._settings_group_name("view")) as settings:
-            logger.debug(f"Saving new settings: {new}")
             settings.set_values(new)
 
     @core.Slot(core.ModelIndex, core.ModelIndex)
@@ -357,11 +291,10 @@ class ObjectBrowser(widgets.MainWindow):
             self._refresh_timer.stop()
         self._auto_refresh = checked
 
-    def _finalize(self):
-        """Clean up resources when this window is closed.
-
-        Disconnects all signals for this window.
-        """
+    def closeEvent(self, event):
+        """Called when the window is closed."""
+        logger.debug("closeEvent")
+        self._write_model_settings()
         self._refresh_timer.stop()
         self._refresh_timer.timeout.disconnect(self._tree_model.refresh_tree)
         self.toggle_callable_action.toggled.disconnect(
@@ -375,13 +308,6 @@ class ObjectBrowser(widgets.MainWindow):
         self.button_group.buttonClicked.disconnect(self._change_details_field)
         selection_model = self.obj_tree.selectionModel()
         selection_model.currentChanged.disconnect(self._update_details)
-
-    def closeEvent(self, event):
-        """Called when the window is closed."""
-        logger.debug("closeEvent")
-        self._write_model_settings()
-        self._write_view_settings()
-        self._finalize()
         self.close()
         event.accept()
         """Set the reference in the browser list to None."""
