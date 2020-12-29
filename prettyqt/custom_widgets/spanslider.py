@@ -24,7 +24,7 @@ from typing import Literal, Optional, Tuple
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import colors
+from prettyqt.utils import colors, types
 
 
 SLIDER_STYLE = widgets.Style.CC_Slider
@@ -266,11 +266,11 @@ class SpanSlider(widgets.Slider):
             main = self._main_control == "upper"
             self.trigger_action("move", main)
 
-    def set_left_color(self, color: colors.ColorType):
+    def set_left_color(self, color: types.ColorType):
         self.gradient_left = colors.get_color(color)
         self.update()
 
-    def set_right_color(self, color: colors.ColorType):
+    def set_right_color(self, color: types.ColorType):
         self.gradient_right = colors.get_color(color)
         self.update()
 

@@ -1,11 +1,6 @@
-from typing import Union
-
 from prettyqt import gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.utils import types
 
-
-ColorType = Union[str, int, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None]
-ColorAndBrushType = Union[ColorType, QtGui.QBrush]
 
 WINDOW_ICON_COLOR = "darkcyan"
 
@@ -15,7 +10,7 @@ def set_window_icon_color(color):
     WINDOW_ICON_COLOR = color
 
 
-def get_color(color: ColorType) -> gui.Color:
+def get_color(color: types.ColorType) -> gui.Color:
     """Get gui.Color instance for given parameter.
 
     named colors are 'aliceblue', 'antiquewhite', 'aqua', 'aquamarine',

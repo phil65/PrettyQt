@@ -3,7 +3,7 @@ from typing import Iterator, List, Literal, Union
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, colors
+from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
 COMPOSITION_MODE = bidict(
@@ -124,7 +124,7 @@ class Painter(QtGui.QPainter):
         self,
         style: constants.PenStyleStr = "solid",
         width: float = 1.0,
-        color: colors.ColorType = "black",
+        color: types.ColorType = "black",
         join_style: constants.JoinStyleStr = "bevel",
         cap_style: constants.CapStyleStr = "square",
     ):
@@ -153,11 +153,11 @@ class Painter(QtGui.QPainter):
         """
         return gui.Pen(self.pen())
 
-    def set_color(self, color: colors.ColorType):
+    def set_color(self, color: types.ColorType):
         color = colors.get_color(color)
         self.setPen(color)
 
-    def set_brush(self, brush: Union[QtGui.QBrush, colors.ColorType]):
+    def set_brush(self, brush: Union[QtGui.QBrush, types.ColorType]):
         if not isinstance(brush, QtGui.QBrush):
             brush = colors.get_color(brush)
         self.setBrush(brush)

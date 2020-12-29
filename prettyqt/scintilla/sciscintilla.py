@@ -3,7 +3,7 @@ from typing import Literal, Optional
 from PyQt5 import Qsci, QtGui  # type: ignore
 
 from prettyqt import gui, widgets
-from prettyqt.utils import InvalidParamError, bidict, colors
+from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
 ARROW_MARKER_NUM = 8
@@ -204,13 +204,13 @@ class SciScintilla(Qsci.QsciScintilla):
         self.language = None
         self._lexer = None
 
-    def set_marker_background_color(self, color: colors.ColorType, marker_num):
+    def set_marker_background_color(self, color: types.ColorType, marker_num):
         self.setMarkerBackgroundColor(colors.get_color(color), marker_num)
 
-    def set_margins_background_color(self, color: colors.ColorType):
+    def set_margins_background_color(self, color: types.ColorType):
         self.setMarginsBackgroundColor(colors.get_color(color))
 
-    def highlight_current_line(self, color: colors.ColorType = "yellow"):
+    def highlight_current_line(self, color: types.ColorType = "yellow"):
         self.setCaretLineVisible(color is not None)
         self.setCaretLineBackgroundColor(colors.get_color(color))
 

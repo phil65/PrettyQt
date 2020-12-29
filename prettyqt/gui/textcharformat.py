@@ -2,7 +2,7 @@ from typing import Literal, Union
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, colors
+from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
 FONT_PROPERTY_INHERITANCE_BEHAVIOUR = bidict(
@@ -58,7 +58,7 @@ QtGui.QTextCharFormat.__bases__ = (gui.TextFormat,)
 class TextCharFormat(QtGui.QTextCharFormat):
     def __init__(
         self,
-        text_color: Union[colors.ColorType, QtGui.QBrush] = None,
+        text_color: Union[types.ColorType, QtGui.QBrush] = None,
         bold: bool = False,
         italic: bool = False,
     ):
@@ -69,12 +69,12 @@ class TextCharFormat(QtGui.QTextCharFormat):
             self.set_font_weight("bold")
         self.setFontItalic(italic)
 
-    def set_foreground_color(self, color: Union[colors.ColorType, QtGui.QBrush]):
+    def set_foreground_color(self, color: Union[types.ColorType, QtGui.QBrush]):
         if not isinstance(color, QtGui.QBrush):
             color = colors.get_color(color)
         self.setForeground(color)
 
-    def set_background_color(self, color: Union[colors.ColorType, QtGui.QBrush]):
+    def set_background_color(self, color: Union[types.ColorType, QtGui.QBrush]):
         if not isinstance(color, QtGui.QBrush):
             color = colors.get_color(color)
         self.setBackground(color)

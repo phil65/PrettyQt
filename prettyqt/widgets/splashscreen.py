@@ -3,7 +3,7 @@ from typing import Optional, Union
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import colors
+from prettyqt.utils import types
 
 
 QtWidgets.QSplashScreen.__bases__ = (widgets.Widget,)
@@ -32,7 +32,7 @@ class SplashScreen(QtWidgets.QSplashScreen):
     def set_text(
         self,
         text: str,
-        color: colors.ColorType = "black",
+        color: types.ColorType = "black",
         h_align: constants.HorizontalAlignmentStr = "center",
         v_align: constants.VerticalAlignmentStr = "bottom",
     ):

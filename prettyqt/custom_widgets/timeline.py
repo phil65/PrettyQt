@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import colors
+from prettyqt.utils import colors, types
 
 
 TEXT_COLOR = gui.Color("lightgray")
@@ -17,7 +17,7 @@ class VideoSample:
     def __init__(
         self,
         duration: float,
-        color: colors.ColorType = "yellow",
+        color: types.ColorType = "yellow",
         picture: Optional[QtGui.QPixmap] = None,
     ):
         self.duration = duration
@@ -73,7 +73,7 @@ class Timeline(widgets.Widget):
     def add_sample(
         self,
         duration: int,
-        color: colors.ColorType = "yellow",
+        color: types.ColorType = "yellow",
         picture: Optional[QtGui.QPixmap] = None,
     ) -> VideoSample:
         sample = VideoSample(duration, color, picture)
@@ -221,11 +221,11 @@ class Timeline(widgets.Widget):
     def get_scale(self) -> float:
         return self.duration / self.width()
 
-    def set_background_color(self, color: colors.ColorType):
+    def set_background_color(self, color: types.ColorType):
         color = colors.get_color(color)
         self.background_color = color
 
-    def set_text_color(self, color: colors.ColorType):
+    def set_text_color(self, color: types.ColorType):
         color = colors.get_color(color)
         self.text_color = color
 

@@ -30,7 +30,7 @@ from typing import Optional
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import colors
+from prettyqt.utils import colors, types
 
 
 class BaseWaitingSpinner(widgets.Widget):
@@ -156,7 +156,7 @@ class BaseWaitingSpinner(widgets.Widget):
     def set_roundness(self, roundness: float):
         self._roundness = max(0.0, min(100.0, roundness))
 
-    def set_color(self, color: colors.ColorType = "black"):
+    def set_color(self, color: types.ColorType = "black"):
         self._color = colors.get_color(color)
 
     def set_revolutions_per_second(self, _revolutions_per_second: float):

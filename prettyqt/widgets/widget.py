@@ -271,7 +271,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def get_palette(self) -> gui.Palette:
         return gui.Palette(self.palette())
 
-    def set_background_color(self, color: colors.ColorType) -> None:
+    def set_background_color(self, color: types.ColorType) -> None:
         col_str = "" if color is None else colors.get_color(color).name()
         with self.edit_stylesheet() as ss:
             ss.backgroundColor.setValue(col_str)

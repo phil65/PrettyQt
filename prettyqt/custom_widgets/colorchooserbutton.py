@@ -2,7 +2,7 @@ from typing import Optional
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import colors
+from prettyqt.utils import colors, types
 
 
 class ColorChooserButton(widgets.Widget):
@@ -10,7 +10,7 @@ class ColorChooserButton(widgets.Widget):
     value_changed = core.Signal(gui.Color)
 
     def __init__(
-        self, color: colors.ColorType = None, parent: Optional[QtWidgets.QWidget] = None
+        self, color: types.ColorType = None, parent: Optional[QtWidgets.QWidget] = None
     ):
         super().__init__(parent)
         layout = widgets.BoxLayout("horizontal", self)
@@ -51,7 +51,7 @@ class ColorChooserButton(widgets.Widget):
             self.set_current_color(new_color)
             self.value_changed.emit(new_color)
 
-    def set_current_color(self, color: colors.ColorType):
+    def set_current_color(self, color: types.ColorType):
         self._current_color = colors.get_color(color)
         self.lineedit.set_text(self._current_color.name().upper())
         icon = iconprovider.for_color(self._current_color)
@@ -63,7 +63,7 @@ class ColorChooserButton(widgets.Widget):
     def get_value(self) -> gui.Color:
         return self._current_color
 
-    def set_value(self, value: colors.ColorType):
+    def set_value(self, value: types.ColorType):
         self.set_current_color(value)
 
 

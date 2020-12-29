@@ -5,7 +5,7 @@ from typing import List, Literal, Optional, Union
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, helpers
+from prettyqt.utils import InvalidParamError, bidict, colors, helpers, types
 
 
 TEXT_INTERACTION = bidict(
@@ -219,7 +219,7 @@ class Label(QtWidgets.QLabel):
         self.setFont(font)
         return self
 
-    def set_color(self, color: colors.ColorType) -> Label:
+    def set_color(self, color: types.ColorType) -> Label:
         with self.edit_stylesheet() as ss:
             if color is None:
                 ss.color.setValue("")

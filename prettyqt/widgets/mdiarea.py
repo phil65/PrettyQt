@@ -1,8 +1,8 @@
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors
+from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
 VIEW_MODE = bidict(
@@ -118,7 +118,7 @@ class MdiArea(QtWidgets.QMdiArea):
 
     def set_background(
         self,
-        brush_or_color: Union[QtGui.QBrush, colors.ColorType],
+        brush_or_color: types.ColorAndBrushType,
         pattern: constants.PatternStr = "solid",
     ):
         if isinstance(brush_or_color, QtGui.QBrush):
