@@ -15,14 +15,14 @@ class SpacerItem(QtWidgets.QSpacerItem):
         h_policy: Union[QtWidgets.QSizePolicy.Policy, widgets.sizepolicy.SizePolicyStr],
         v_policy: Union[QtWidgets.QSizePolicy.Policy, widgets.sizepolicy.SizePolicyStr],
     ):
-        if h_policy in widgets.sizepolicy.SIZE_POLICY:
-            h_pol = widgets.sizepolicy.SIZE_POLICY[h_policy]
-        else:
+        if isinstance(h_policy, QtWidgets.QSizePolicy.Policy):
             h_pol = h_policy
-        if v_policy in widgets.sizepolicy.SIZE_POLICY:
-            v_pol = widgets.sizepolicy.SIZE_POLICY[v_policy]
         else:
+            h_pol = widgets.sizepolicy.SIZE_POLICY[h_policy]
+        if isinstance(v_policy, QtWidgets.QSizePolicy.Policy):
             v_pol = v_policy
+        else:
+            v_pol = widgets.sizepolicy.SIZE_POLICY[v_policy]
         super().__init__(w, h, h_pol, v_pol)
 
     def change_size(
@@ -32,12 +32,12 @@ class SpacerItem(QtWidgets.QSpacerItem):
         h_policy: widgets.sizepolicy.SizePolicyStr = "minimum",
         v_policy: widgets.sizepolicy.SizePolicyStr = "minimum",
     ):
-        if h_policy in widgets.sizepolicy.SIZE_POLICY:
-            h_pol = widgets.sizepolicy.SIZE_POLICY[h_policy]
-        else:
+        if isinstance(h_policy, QtWidgets.QSizePolicy.Policy):
             h_pol = h_policy
-        if v_policy in widgets.sizepolicy.SIZE_POLICY:
-            v_pol = widgets.sizepolicy.SIZE_POLICY[v_policy]
         else:
+            h_pol = widgets.sizepolicy.SIZE_POLICY[h_policy]
+        if isinstance(v_policy, QtWidgets.QSizePolicy.Policy):
             v_pol = v_policy
+        else:
+            v_pol = widgets.sizepolicy.SIZE_POLICY[v_policy]
         self.changeSize(w, h, h_pol, v_pol)
