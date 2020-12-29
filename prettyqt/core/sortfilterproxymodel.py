@@ -6,6 +6,19 @@ QtCore.QSortFilterProxyModel.__bases__ = (core.AbstractProxyModel,)
 
 
 class SortFilterProxyModel(QtCore.QSortFilterProxyModel):
+    def serialize_fields(self):
+        return dict(
+            dynamic_sort_filter=self.dynamicSortFilter(),
+            is_filter_case_sensitive=self.is_filter_case_sensitive(),
+            filter_key_column=self.filterKeyColumn(),
+            filter_regular_expression=self.get_filter_regular_expression(),
+            filter_role=self.filterRole(),
+            is_sort_locale_aware=self.isSortLocaleAware(),
+            recursive_filtering_enabled=self.isRecursiveFilteringEnabled(),
+            is_sort_case_sensitive=self.is_sort_case_sensitive(),
+            sort_role=self.sortRole(),
+        )
+
     # def set_filter_case_sensitivity(self, sensitivity: constants.CaseSensitivityStr):
     #     """Set the filter case sensitivity.
 
@@ -36,3 +49,16 @@ class SortFilterProxyModel(QtCore.QSortFilterProxyModel):
 
     def is_filter_case_sensitive(self) -> bool:
         return self.filterCaseSensitivity() == QtCore.Qt.CaseSensitive
+
+    def set_sort_case_sensitive(self, state: bool):
+        if state:
+            sensitivity = QtCore.Qt.CaseSensitive
+        else:
+            sensitivity = QtCore.Qt.CaseInsensitive
+        self.setSortCaseSensitivity(sensitivity)
+
+    def is_sort_case_sensitive(self) -> bool:
+        return self.sortCaseSensitivity() == QtCore.Qt.CaseSensitive
+
+    def get_filter_regular_expression(self) -> core.RegularExpression:
+        return core.RegularExpression(self.filterRegularExpression())
