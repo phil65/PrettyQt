@@ -40,15 +40,15 @@ class ObjectBrowser(widgets.MainWindow):
         with core.Settings(settings_id=self._settings_group_name("model")) as settings:
             self._auto_refresh = settings.get("auto_refresh", False)
             self._refresh_rate = settings.get("refresh_rate", 2)
-            show_callable_attributes = settings.get("show_callable_attributes", True)
-            show_special_attributes = settings.get("show_special_attributes", True)
+            show_callable_attrs = settings.get("show_callable_attrs", True)
+            show_special_attrs = settings.get("show_special_attrs", True)
         self._tree_model = objectbrowsertreemodel.ObjectBrowserTreeModel(
             obj, name, attr_cols=self._attr_cols
         )
 
         self._proxy_tree_model = objectbrowsertreemodel.ObjectBrowserTreeProxyModel(
-            show_callable_attributes=show_callable_attributes,
-            show_special_attributes=show_special_attributes,
+            show_callable_attrs=show_callable_attrs,
+            show_special_attrs=show_special_attrs,
         )
 
         self._proxy_tree_model.setSourceModel(self._tree_model)
@@ -148,8 +148,8 @@ class ObjectBrowser(widgets.MainWindow):
         self._refresh_timer.timeout.connect(self._tree_model.refresh_tree)
 
         # Update views with model
-        self.toggle_special_attribute_action.setChecked(show_special_attributes)
-        self.toggle_callable_action.setChecked(show_callable_attributes)
+        self.toggle_special_attribute_action.setChecked(show_special_attrs)
+        self.toggle_callable_action.setChecked(show_callable_attrs)
         self.toggle_auto_refresh_action.setChecked(self._auto_refresh)
 
         # Select first row so that a hidden root node will not be selected.
@@ -200,7 +200,7 @@ class ObjectBrowser(widgets.MainWindow):
             statustip="Shows or hides __special__ attributes",
         )
         self.toggle_special_attribute_action.toggled.connect(
-            self._proxy_tree_model.set_show_special_attributes
+            self._proxy_tree_model.set_show_special_attrs
         )
 
         # Toggle auto-refresh on/off
@@ -238,8 +238,8 @@ class ObjectBrowser(widgets.MainWindow):
         new = dict(
             auto_refresh=self._auto_refresh,
             refresh_rate=self._refresh_rate,
-            show_callable_attributes=self._proxy_tree_model.get_show_callables(),
-            show_special_attributes=self._proxy_tree_model.get_show_special_attributes(),
+            show_callable_attrs=self._proxy_tree_model.get_show_callables(),
+            show_special_attrs=self._proxy_tree_model.get_show_special_attrs(),
         )
         settings_id = self._settings_group_name("model")
         logger.debug(f"New settings: {new}")
@@ -301,7 +301,7 @@ class ObjectBrowser(widgets.MainWindow):
             self._proxy_tree_model.set_show_callables
         )
         self.toggle_special_attribute_action.toggled.disconnect(
-            self._proxy_tree_model.set_show_special_attributes
+            self._proxy_tree_model.set_show_special_attrs
         )
         self.toggle_auto_refresh_action.toggled.disconnect(self.toggle_auto_refresh)
         self.refresh_action_f5.triggered.disconnect(self._tree_model.refresh_tree)

@@ -405,24 +405,24 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
 
     def __init__(
         self,
-        show_callable_attributes: bool = True,
-        show_special_attributes: bool = True,
+        show_callable_attrs: bool = True,
+        show_special_attrs: bool = True,
         parent=None,
     ):
         """Constructor.
 
-        :param show_callable_attributes: if True the callables objects,
+        :param show_callable_attrs: if True the callables objects,
             i.e. objects (such as function) that  a __call__ method,
             will be displayed (in brown). If False they are hidden.
-        :param show_special_attributes: if True the objects special attributes,
+        :param show_special_attrs: if True the objects special attributes,
             i.e. methods with a name that starts and ends with two underscores,
             will be displayed (in italics). If False they are hidden.
         :param parent: the parent widget
         """
         super().__init__(parent)
 
-        self._show_callables = show_callable_attributes
-        self._show_special_attributes = show_special_attributes
+        self._show_callables = show_callable_attrs
+        self._show_special_attrs = show_special_attrs
 
     def tree_item(self, proxy_index: core.ModelIndex) -> ObjectBrowserTreeItem:
         index = self.mapToSource(proxy_index)
@@ -442,9 +442,9 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
         parent_item = self.sourceModel().tree_item(source_parent_index)
         tree_item = parent_item.child(source_row)
 
-        accept = (
-            self._show_special_attributes or not tree_item.is_special_attribute
-        ) and (self._show_callables or not tree_item.is_callable_attribute)
+        accept = (self._show_special_attrs or not tree_item.is_special_attribute) and (
+            self._show_callables or not tree_item.is_callable_attribute
+        )
 
         # logger.debug("filterAcceptsRow = {}: {}".format(accept, tree_item))
         return accept
@@ -458,11 +458,11 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
         self._show_callables = show_callables
         self.invalidateFilter()
 
-    def get_show_special_attributes(self) -> bool:
-        return self._show_special_attributes
+    def get_show_special_attrs(self) -> bool:
+        return self._show_special_attrs
 
-    def set_show_special_attributes(self, show_special_attributes: bool):
+    def set_show_special_attrs(self, show_special_attrs: bool):
         """Show/hide special attributes which begin with an underscore."""
-        logger.debug("set_show_special_attributes: %s", show_special_attributes)
-        self._show_special_attributes = show_special_attributes
+        logger.debug("set_show_special_attrs: %s", show_special_attrs)
+        self._show_special_attrs = show_special_attrs
         self.invalidateFilter()

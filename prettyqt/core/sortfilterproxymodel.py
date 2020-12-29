@@ -1,5 +1,3 @@
-from typing import List
-
 from prettyqt import core
 from prettyqt.qt import QtCore
 
@@ -8,9 +6,6 @@ QtCore.QSortFilterProxyModel.__bases__ = (core.AbstractProxyModel,)
 
 
 class SortFilterProxyModel(QtCore.QSortFilterProxyModel):
-
-    HEADER: List[str] = []
-
     # def set_filter_case_sensitivity(self, sensitivity: constants.CaseSensitivityStr):
     #     """Set the filter case sensitivity.
 

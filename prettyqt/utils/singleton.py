@@ -2,8 +2,8 @@ from prettyqt.qt import QtCore
 
 
 class Singleton(type(QtCore.QObject), type):  # type: ignore
-    def __init__(cls, name, bases, dict):
-        super().__init__(name, bases, dict)
+    def __init__(cls, name, bases, dct):
+        super().__init__(name, bases, dct)
         cls.instance = None
 
     def __call__(cls, *args, **kw):
