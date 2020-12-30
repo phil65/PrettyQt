@@ -95,6 +95,7 @@ from .dialog import BaseDialog, Dialog
 from .messagebox import MessageBox
 from .errormessage import ErrorMessage
 
+from .fileiconprovider import FileIconProvider
 from .filesystemmodel import FileSystemModel
 
 from .slider import Slider
@@ -265,6 +266,7 @@ __all__ = [
     "Dialog",
     "MessageBox",
     "ErrorMessage",
+    "FileIconProvider",
     "FileSystemModel",
     "LayoutItem",
     "Layout",
