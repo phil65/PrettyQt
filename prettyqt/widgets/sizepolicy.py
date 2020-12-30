@@ -76,6 +76,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
             horizontal_policy=self.get_horizontal_policy(),
             vertical_policy=self.get_vertical_policy(),
             retain_size_when_hidden=self.retainSizeWhenHidden(),
+            control_type=self.get_control_type(),
         )
 
     def __setstate__(self, state: Dict[str, Any]) -> None:
@@ -86,6 +87,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
         self.set_horizontal_policy(state["horizontal_policy"])
         self.set_vertical_policy(state["vertical_policy"])
         self.setRetainSizeWhenHidden(state["retain_size_when_hidden"])
+        self.set_control_type(state["control_type"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
