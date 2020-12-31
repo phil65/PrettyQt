@@ -2,7 +2,7 @@ import pathlib
 from typing import Callable, Union
 
 from prettyqt import core, webenginewidgets, widgets
-from prettyqt.qt import QtWebEngineWidgets
+from prettyqt.qt import QtCore, QtWebEngineWidgets
 
 
 QtWebEngineWidgets.QWebEngineView.__bases__ = (widgets.Widget,)
@@ -13,7 +13,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
         super().__init__(*args, **kwargs)
         self.setPage(webenginewidgets.WebEnginePage(self))
 
-    def set_url(self, url: Union[str, pathlib.Path]):
+    def set_url(self, url: Union[QtCore.QUrl, str, pathlib.Path]):
         """Set the url of the WebEngineView.
 
         Clears the view and loads the URL.
@@ -30,7 +30,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
     def get_url(self) -> core.Url:
         return core.Url(self.url())
 
-    def load_url(self, url: Union[str, pathlib.Path]):
+    def load_url(self, url: Union[QtCore.QUrl, str, pathlib.Path]):
         """Load the URL.
 
         Loads the specified url and displays it.
