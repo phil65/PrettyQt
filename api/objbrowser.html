@@ -659,8 +659,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.set_show_special_attributes" class="md-nav__link">
-    set_show_special_attributes()
+  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.set_show_special_attrs" class="md-nav__link">
+    set_show_special_attrs()
   </a>
   
 </li>
@@ -1130,8 +1130,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.set_show_special_attributes" class="md-nav__link">
-    set_show_special_attributes()
+  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.set_show_special_attrs" class="md-nav__link">
+    set_show_special_attrs()
   </a>
   
 </li>
@@ -1314,7 +1314,7 @@ closeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">set_show_callables</span>
     <span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">toggle_special_attribute_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">set_show_special_attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">set_show_special_attrs</span>
     <span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">refresh_action_f5</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">)</span>
@@ -1894,7 +1894,7 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.__init__">
 
         <code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callable_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_special_attributes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callable_attrs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -1903,10 +1903,10 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
       </h4>
 <div class="doc doc-contents ">
 <p>Constructor.</p>
-<p>:param show_callable_attributes: if True the callables objects,
+<p>:param show_callable_attrs: if True the callables objects,
     i.e. objects (such as function) that  a <strong>call</strong> method,
     will be displayed (in brown). If False they are hidden.
-:param show_special_attributes: if True the objects special attributes,
+:param show_special_attrs: if True the objects special attributes,
     i.e. methods with a name that starts and ends with two underscores,
     will be displayed (in italics). If False they are hidden.
 :param parent: the parent widget</p>
@@ -1915,24 +1915,24 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
-    <span class="n">show_callable_attributes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">show_special_attributes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">show_callable_attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">"""Constructor.</span>
 
-<span class="sd">    :param show_callable_attributes: if True the callables objects,</span>
+<span class="sd">    :param show_callable_attrs: if True the callables objects,</span>
 <span class="sd">        i.e. objects (such as function) that  a __call__ method,</span>
 <span class="sd">        will be displayed (in brown). If False they are hidden.</span>
-<span class="sd">    :param show_special_attributes: if True the objects special attributes,</span>
+<span class="sd">    :param show_special_attrs: if True the objects special attributes,</span>
 <span class="sd">        i.e. methods with a name that starts and ends with two underscores,</span>
 <span class="sd">        will be displayed (in italics). If False they are hidden.</span>
 <span class="sd">    :param parent: the parent widget</span>
 <span class="sd">    """</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
 
-    <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span> <span class="o">=</span> <span class="n">show_callable_attributes</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attributes</span> <span class="o">=</span> <span class="n">show_special_attributes</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span> <span class="o">=</span> <span class="n">show_callable_attrs</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span> <span class="o">=</span> <span class="n">show_special_attrs</span>
 </code></pre>
 </div>
 </details>
@@ -1956,9 +1956,9 @@ filterAcceptsRow<span class="p">(</span><span class="bp">self</span><span class=
     <span class="n">parent_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">source_parent_index</span><span class="p">)</span>
     <span class="n">tree_item</span> <span class="o">=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">source_row</span><span class="p">)</span>
 
-    <span class="n">accept</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attributes</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">is_special_attribute</span>
-    <span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">is_callable_attribute</span><span class="p">)</span>
+    <span class="n">accept</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">is_special_attribute</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">is_callable_attribute</span>
+    <span class="p">)</span>
 
     <span class="c1"># logger.debug("filterAcceptsRow = {}: {}".format(accept, tree_item))</span>
     <span class="k">return</span> <span class="n">accept</span>
@@ -2017,10 +2017,10 @@ set_show_callables<span class="p">(</span><span class="bp">self</span><span clas
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.set_show_special_attributes">
+<h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.set_show_special_attrs">
 
         <code class="highlight language-python">
-set_show_special_attributes<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attributes</span><span class="p">)</span>        </code>
+set_show_special_attrs<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -2029,10 +2029,10 @@ set_show_special_attributes<span class="p">(</span><span class="bp">self</span><
 <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_show_special_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attributes</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_show_special_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
     <span class="sd">"""Show/hide special attributes which begin with an underscore."""</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"set_show_special_attributes: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">show_special_attributes</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attributes</span> <span class="o">=</span> <span class="n">show_special_attributes</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"set_show_special_attrs: </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span> <span class="o">=</span> <span class="n">show_special_attrs</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">invalidateFilter</span><span class="p">()</span>
 </code></pre>
 </div>

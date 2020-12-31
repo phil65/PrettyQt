@@ -2796,7 +2796,7 @@ to display the new URL.</p>
 <tbody>
 <tr>
 <td><code>url</code></td>
-<td><code>Union[str, pathlib.Path]</code></td>
+<td><code>Union[PyQt5.QtCore.QUrl, str, pathlib.Path]</code></td>
 <td>
 <p>URL to load</p>
 </td>
@@ -2807,7 +2807,7 @@ to display the new URL.</p>
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""Load the URL.</span>
 
 <span class="sd">    Loads the specified url and displays it.</span>
@@ -2852,7 +2852,7 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tbody>
 <tr>
 <td><code>url</code></td>
-<td><code>Union[str, pathlib.Path]</code></td>
+<td><code>Union[PyQt5.QtCore.QUrl, str, pathlib.Path]</code></td>
 <td>
 <p>URL to set</p>
 </td>
@@ -2863,7 +2863,7 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
     <span class="sd">"""Set the url of the WebEngineView.</span>
 
 <span class="sd">    Clears the view and loads the URL.</span>
