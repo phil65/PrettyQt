@@ -1,5 +1,6 @@
 import pathlib
 from typing import Callable, Union
+import webbrowser
 
 from prettyqt import core, webenginewidgets, widgets
 from prettyqt.qt import QtCore, QtWebEngineWidgets
@@ -114,6 +115,20 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
         self, setting_name: webenginewidgets.webenginesettings.WebAttributeStr
     ) -> bool:
         return self.get_settings()[setting_name]
+
+    @classmethod
+    def register_as_browser(cls, tabwidget: widgets.TabWidget):
+        class BuiltInBrowser(webbrowser.BaseBrowser):
+            def open(self, url: str, new: int = 0, autoraise: bool = True):
+                # logger.info(f"opening {url} with builtin browser..")
+                webview = cls()
+                webview.load_url(url)
+                if new == 1:
+                    webview.show()
+                else:
+                    tabwidget.add_tab(webview, str(url), show=autoraise)
+
+        webbrowser.register("BuiltInBrowser", BuiltInBrowser)
 
 
 if __name__ == "__main__":
