@@ -99,6 +99,22 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
             flag |= QtWebEngineWidgets.QWebEnginePage.FindBackward
         self.findText(string, flag, callback)
 
+    def get_settings(self) -> webenginewidgets.WebEngineSettings:
+        settings = self.settings()
+        return webenginewidgets.WebEngineSettings(settings)
+
+    def set_setting(
+        self,
+        setting_name: webenginewidgets.webenginesettings.WebAttributeStr,
+        value: bool,
+    ):
+        self.get_settings()[setting_name] = value
+
+    def get_setting(
+        self, setting_name: webenginewidgets.webenginesettings.WebAttributeStr
+    ) -> bool:
+        return self.get_settings()[setting_name]
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
