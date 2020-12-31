@@ -11,6 +11,9 @@ from prettyqt.utils import InvalidParamError
 QtCore.QCoreApplication.__bases__ = (core.Object,)
 
 
+LOCALIZATION_PATH = pathlib.Path(__file__).parent.parent / "localization"
+
+
 class CoreApplication(QtCore.QCoreApplication):
     @classmethod
     def call_on_exit(cls, func: Callable):
@@ -65,9 +68,8 @@ class CoreApplication(QtCore.QCoreApplication):
     def load_language_file(self, file: Union[pathlib.Path, str]) -> core.Translator:
         translator = core.Translator(self)
         if file in ["de", "fr"]:
-            path = pathlib.Path(__file__).parent.parent
-            file = path / "localization" / f"qtbase_{file}.ts"
-        translator.load(str(file))
+            file = LOCALIZATION_PATH / f"qtbase_{file}.ts"
+        translator.load_file(file)
         self.installTranslator(translator)
         return translator
 
