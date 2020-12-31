@@ -1,12 +1,15 @@
+import logging
 import os
 import pathlib
 import sys
-from typing import Callable, List, Optional, Union
+from typing import Callable, List, Optional, Set, Union
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
+
+logger = logging.getLogger(__name__)
 
 QtCore.QCoreApplication.__bases__ = (core.Object,)
 
@@ -72,6 +75,23 @@ class CoreApplication(QtCore.QCoreApplication):
         translator.load_file(file)
         self.installTranslator(translator)
         return translator
+
+    def get_available_languages(self) -> Set[str]:
+        return {
+            str(path).split("_", maxsplit=1)[1][:-3]
+            for path in LOCALIZATION_PATH.iterdir()
+        }
+
+    def load_language(self, language: str):
+        translator = core.Translator(self)
+        if language not in self.get_available_languages():
+            raise ValueError("Language does not exist")
+        for file in LOCALIZATION_PATH.iterdir():
+            if file.stem.endswith(f"_{language}"):
+                path = LOCALIZATION_PATH / file.name
+                translator.load_file(path)
+                logger.debug(f"loading {path}")
+                self.installTranslator(translator)
 
     def post_event(
         self,
