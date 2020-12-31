@@ -1,3 +1,16 @@
+## v0.165.0 (2020-12-31)
+
+### Feat
+
+- **WebEngineView**: add register_as_browser method
+- **WebEngineView**: ass some settings-related methods
+- **Translator**: add load_file method
+- add FramelessWindow class
+- add webchannel module
+- **qt**: add QtWebchannel module
+- **widgets**: add FileIconProvider class
+- add prettyqt.qt.QtUiTools module
+
 ## v0.164.0 (2020-12-29)
 
 ### Feat
