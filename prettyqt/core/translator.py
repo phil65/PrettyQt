@@ -1,5 +1,5 @@
 import pathlib
-from typing import Optional
+from typing import Optional, Union
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -17,3 +17,6 @@ class Translator(QtCore.QTranslator):
         if not path:
             return None
         return pathlib.Path(path)
+
+    def load_file(self, path: Union[str, pathlib.Path]) -> bool:
+        return self.load(str(path))
