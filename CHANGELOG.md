@@ -1,3 +1,9 @@
+## v0.166.0 (2020-12-31)
+
+### Feat
+
+- **CoreApplication**: add get_available_languages and load_language methods
+
 ## v0.165.0 (2020-12-31)
 
 ### Feat
