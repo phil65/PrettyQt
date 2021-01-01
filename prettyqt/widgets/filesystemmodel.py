@@ -32,6 +32,12 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             return pathlib.Path(path)
         return super().data(index, role)
 
+    def get_file_info(self, index: QtCore.QModelIndex) -> core.FileInfo:
+        return core.FileInfo(self.fileInfo(index))
+
+    def get_file_path(self, index: QtCore.QModelIndex) -> pathlib.Path:
+        return pathlib.Path(self.filePath(index))
+
     def yield_child_indexes(
         self, index: QtCore.QModelIndex
     ) -> Iterator[QtCore.QModelIndex]:
@@ -92,6 +98,7 @@ if __name__ == "__main__":
     app = widgets.app()
     app.load_language("de")
     model = FileSystemModel()
+    model.set_root_path("root")
     tree = widgets.TreeView()
     tree.set_model(model)
     tree.show()
