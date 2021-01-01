@@ -75,4 +75,5 @@ def test_coreapplication(qapp):
     qapp.set_metadata(
         app_name="test", app_version="1.0.0", org_name="test", org_domain="test"
     )
-    qapp.load_language_file("de")
+    qapp.load_language("de")
+    qapp.removeTranslator(qapp.translators["de"])
