@@ -84,3 +84,15 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
                 if (folder / filename).is_file()
             ]
         return paths
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
+    app.load_language("de")
+    model = FileSystemModel()
+    tree = widgets.TreeView()
+    tree.set_model(model)
+    tree.show()
+    app.main_loop()

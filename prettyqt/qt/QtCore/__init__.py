@@ -1,8 +1,13 @@
 """Provides QtCore classes and functions."""
 
-import datetime
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
 
 from prettyqt.qt import PYQT5, PYSIDE2, PYSIDE6, PythonQtError
+
+if TYPE_CHECKING:
+    import datetime
 
 
 if PYQT5:
