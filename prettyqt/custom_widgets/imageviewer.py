@@ -1,4 +1,4 @@
-import pathlib
+import os
 from typing import Optional, Union
 
 from prettyqt import widgets
@@ -9,7 +9,7 @@ class ImageViewer(widgets.Widget):
     def __init__(
         self,
         title: str = "",
-        path: Union[pathlib.Path, str] = None,
+        path: Union[os.PathLike, str] = None,
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent)

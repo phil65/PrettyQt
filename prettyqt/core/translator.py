@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import pathlib
 from typing import Optional, Set, Union
 
@@ -23,9 +24,8 @@ class Translator(QtCore.QTranslator):
             return None
         return pathlib.Path(path)
 
-    def load_file(self, path: Union[str, pathlib.Path]):
-        if isinstance(path, str):
-            path = pathlib.Path(path)
+    def load_file(self, path: Union[str, os.PathLike]):
+        path = pathlib.Path(os.fspath(path))
         if not self.load(path.name, str(path.parent)):
             raise OSError(f"Invalid language file {path}")
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import pathlib
+import os
 from typing import List, Literal, Optional, Union
 
 from prettyqt import constants, core, gui, widgets
@@ -228,19 +228,19 @@ class Label(QtWidgets.QLabel):
                 ss.color.setValue(color.name())
         return self
 
-    def set_image(self, path: Union[pathlib.Path, str], width: int = 300) -> Label:
+    def set_image(self, path: Union[os.PathLike, str], width: int = 300) -> Label:
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText(
             "<html><head/><body><p>"
-            f"<img src={str(path)!r} width={str(width)!r}/>"
+            f"<img src={os.fspath(path)!r} width={str(width)!r}/>"
             "</p></body></html>"
         )
         return self
 
     @classmethod
     def image_from_path(
-        cls, path: Union[pathlib.Path, str], parent: Optional[QtWidgets.QWidget] = None
+        cls, path: Union[os.PathLike, str], parent: Optional[QtWidgets.QWidget] = None
     ) -> Label:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)

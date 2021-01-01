@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import pathlib
 from typing import Union
 
@@ -37,9 +38,8 @@ class Pixmap(QtGui.QPixmap):
         return self.cacheKey()
 
     @classmethod
-    def from_file(cls, path: Union[pathlib.Path, str]):
-        if isinstance(path, str):
-            path = pathlib.Path(path)
+    def from_file(cls, path: Union[os.PathLike, str]):
+        path = pathlib.Path(os.fspath(path))
         with path.open(mode="rb") as f:
             data = f.read()
         # Create widget

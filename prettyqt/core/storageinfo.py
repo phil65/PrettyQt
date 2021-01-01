@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import pathlib
 from typing import List, Optional, Union
 
@@ -9,13 +10,13 @@ from prettyqt.qt import QtCore
 class StorageInfo(QtCore.QStorageInfo):
     def __init__(
         self,
-        path: Optional[Union[QtCore.QStorageInfo, QtCore.QDir, str, pathlib.Path]] = None,
+        path: Optional[Union[QtCore.QStorageInfo, QtCore.QDir, str, os.PathLike]] = None,
     ):
         if path is None:
             super().__init__()
         else:
-            if isinstance(path, pathlib.Path):
-                path = str(path)
+            if isinstance(path, os.PathLike):  # type: ignore
+                path = os.fspath(path)
             super().__init__(path)
 
     def __bool__(self):

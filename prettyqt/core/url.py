@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import pathlib
 from typing import Any, Dict, Literal, Optional, Union
 
@@ -72,16 +73,15 @@ FormattingOptionStr = Literal[
 
 
 class Url(QtCore.QUrl):
-    def __init__(self, path: Optional[Union[QtCore.QUrl, str, pathlib.Path]] = None):
+    def __init__(self, path: Optional[Union[QtCore.QUrl, str, os.PathLike]] = None):
         if path is None:
             super().__init__()
         else:
-            if isinstance(path, (QtCore.QUrl, str)):
-                param = path
+            if isinstance(path, QtCore.QUrl):
+                super().__init__(path)
             else:
-                param = str(path)
-            super().__init__(param)
-            if isinstance(path, pathlib.Path):
+                super().__init__(os.fspath(path))
+            if isinstance(path, os.PathLike):  # type: ignore
                 self.setScheme("file")
 
     # def __str__(self):

@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import List, Union
 
@@ -22,8 +23,8 @@ class FileSystemWatcher(QtCore.QFileSystemWatcher):
     def get_paths(self) -> List[pathlib.Path]:
         return self.get_directories() + self.get_files()
 
-    def add_path(self, path: Union[str, pathlib.Path]) -> bool:
-        return self.addPath(str(path))
+    def add_path(self, path: Union[str, os.PathLike]) -> bool:
+        return self.addPath(os.fspath(path))
 
-    def add_paths(self, paths: List[Union[str, pathlib.Path]]):
-        self.addPaths([str(p) for p in paths])
+    def add_paths(self, paths: List[Union[str, os.PathLike]]):
+        self.addPaths([os.fspath(p) for p in paths])

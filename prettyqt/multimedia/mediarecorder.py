@@ -1,4 +1,4 @@
-import pathlib
+import os
 from typing import Literal, Union
 
 from prettyqt import core, multimedia
@@ -87,8 +87,8 @@ class MediaRecorder(QtMultimedia.QMediaRecorder):
         """
         return AVAILABILITY_STATUS.inverse[self.availability()]
 
-    def set_output_location(self, path: Union[pathlib.Path, str]):
-        self.setOutputLocation(core.Url(path))
+    def set_output_location(self, path: Union[os.PathLike, str]):
+        self.setOutputLocation(core.Url(os.fspath(path)))
 
     def get_output_location(self) -> str:
         return str(core.Url(self.outputLocation()))

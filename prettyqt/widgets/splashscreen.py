@@ -1,4 +1,4 @@
-import pathlib
+import os
 from typing import Optional, Union
 
 from prettyqt import constants, gui, widgets
@@ -11,9 +11,9 @@ QtWidgets.QSplashScreen.__bases__ = (widgets.Widget,)
 
 class SplashScreen(QtWidgets.QSplashScreen):
     def __init__(
-        self, path: Union[pathlib.Path, str, QtGui.QPixmap], width: Optional[int] = None
+        self, path: Union[os.PathLike, str, QtGui.QPixmap], width: Optional[int] = None
     ):
-        pix = gui.Pixmap(str(path)) if not isinstance(path, QtGui.QPixmap) else path
+        pix = gui.Pixmap(os.fspath(path)) if not isinstance(path, QtGui.QPixmap) else path
         if width:
             pix = pix.scaledToWidth(width)
         super().__init__(pix)

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import pathlib
 from typing import Optional, Union
 
@@ -10,7 +11,7 @@ from prettyqt.qt import QtWidgets
 class Image(widgets.Label):
     def __init__(
         self,
-        path: Union[pathlib.Path, str] = None,
+        path: Union[os.PathLike, str] = None,
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent=parent)
@@ -20,12 +21,12 @@ class Image(widgets.Label):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
-    def set_image(self, path: Union[pathlib.Path, str], width: int = 300):
+    def set_image(self, path: Union[os.PathLike, str], width: int = 300):
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText(
             "<html><head/><body><p>"
-            f"<img src={str(path)!r} width={str(width)!r}/>"
+            f"<img src={os.fspath(path)!r} width={str(width)!r}/>"
             "</p></body></html>"
         )
 

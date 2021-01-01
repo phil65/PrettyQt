@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import List, Literal, Union
 
@@ -38,11 +39,11 @@ class QmlEngine(QtQml.QQmlEngine):
         """
         return OBJECT_OWNERSHIP.inverse[self.objectOwnership(obj)]
 
-    def add_import_path(self, path: Union[str, pathlib.Path]):
-        self.addImportPath(str(path))
+    def add_import_path(self, path: Union[str, os.PathLike]):
+        self.addImportPath(os.fspath(path))
 
-    def add_plugin_path(self, path: Union[str, pathlib.Path]):
-        self.addPluginPath(str(path))
+    def add_plugin_path(self, path: Union[str, os.PathLike]):
+        self.addPluginPath(os.fspath(path))
 
     def get_plugin_paths(self) -> List[pathlib.Path]:
         return [pathlib.Path(p) for p in self.pluginPathList()]

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import contextlib
-import pathlib
+import os
 from typing import Literal, Union
 
 from prettyqt.qt import QtCore
@@ -19,8 +19,8 @@ LockErrorStr = Literal["none", "lock_failed", "permission", "unknown"]
 
 
 class LockFile(QtCore.QLockFile):
-    def __init__(self, path: Union[str, pathlib.Path]):
-        super().__init__(str(path))
+    def __init__(self, path: Union[str, os.PathLike]):
+        super().__init__(os.fspath(path))
 
     def get_error(self) -> LockErrorStr:
         return LOCK_ERROR.inverse[self.error()]

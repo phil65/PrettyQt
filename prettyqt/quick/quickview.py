@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import Literal, Union
 
@@ -28,7 +29,7 @@ QtQuick.QQuickView.__bases__ = (gui.Window,)
 class QuickView(QtQuick.QQuickView):
     def set_source(self, source: Union[str, pathlib.Path, QtCore.QUrl]):
         if isinstance(source, pathlib.Path):
-            source = str(source)
+            source = os.fspath(source)
         if isinstance(source, str):
             source = core.Url.fromLocalFile(source)
         self.setSource(source)

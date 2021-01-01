@@ -1,4 +1,4 @@
-import pathlib
+import os
 from typing import Literal, Union
 
 from prettyqt import core
@@ -18,12 +18,12 @@ MatchModeStr = Literal["default", "extension", "content"]
 class MimeDatabase(QtCore.QMimeDatabase):
     def get_mime_type_for_file(
         self,
-        path: Union[str, pathlib.Path, QtCore.QFileInfo],
+        path: Union[str, os.PathLike, QtCore.QFileInfo],
         match_mode: MatchModeStr = "default",
     ) -> core.MimeType:
         if match_mode not in MATCH_MODE:
             raise InvalidParamError(match_mode, MATCH_MODE)
-        if isinstance(path, pathlib.Path):
-            path = str(path)
+        if isinstance(path, os.PathLike):  # type: ignore
+            path = os.fspath(path)
         mime_type = self.mimeTypeForFile(path, MATCH_MODE[match_mode])
         return core.MimeType(mime_type)

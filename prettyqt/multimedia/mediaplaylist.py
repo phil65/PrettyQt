@@ -1,4 +1,4 @@
-import pathlib
+import os
 from typing import Iterator, Literal, Optional, Union
 
 from prettyqt import core, multimedia
@@ -40,9 +40,9 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
     #                 items=list(self))
 
     def add_media(
-        self, media: Union[pathlib.Path, str], pos: Optional[int] = None
+        self, media: Union[os.PathLike, str], pos: Optional[int] = None
     ) -> bool:
-        url = core.Url(str(media))
+        url = core.Url(os.fspath(media))
         mediacontent = multimedia.MediaContent(url)
         if pos is None:
             return self.addMedia(mediacontent)

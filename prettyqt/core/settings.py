@@ -1,6 +1,6 @@
 import contextlib
 import logging
-import pathlib
+import os
 from typing import Any, Dict, Iterator, List, Literal, Mapping, Optional, Tuple, Union
 
 from prettyqt import core
@@ -119,7 +119,7 @@ class Settings(QtCore.QSettings):
         return SCOPE.inverse[self.scope()]
 
     @classmethod
-    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: Union[str, pathlib.Path]):
+    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: Union[str, os.PathLike]):
         """Set the path to the settings file.
 
         Args:
@@ -133,7 +133,7 @@ class Settings(QtCore.QSettings):
             raise InvalidParamError(fmt, FORMAT)
         if scope not in SCOPE:
             raise InvalidParamError(scope, SCOPE)
-        cls.setPath(FORMAT[fmt], SCOPE[scope], str(path))
+        cls.setPath(FORMAT[fmt], SCOPE[scope], os.fspath(path))
 
     @contextlib.contextmanager
     def edit_group(self, prefix: str):
@@ -206,12 +206,13 @@ class Settings(QtCore.QSettings):
 def register_extensions(
     *exts: str,
     app_name: Optional[str] = None,
-    app_path: Union[None, str, pathlib.Path] = None,
+    app_path: Union[None, str, os.PathLike] = None,
 ):
     logger.debug(f"assigning extensions {exts} to {app_name}")
     s = Settings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.NativeFormat)
     if app_path is None:
         app_path = str(core.CoreApplication.get_application_file_path())
+    app_path = os.fspath(app_path)
     if app_name is None:
         app_name = core.CoreApplication.applicationName()
     for ext in exts:

@@ -30,8 +30,8 @@ class CoreApplication(QtCore.QCoreApplication):
         return pathlib.Path(cls.applicationDirPath())
 
     @classmethod
-    def add_library_path(cls, path: Union[pathlib.Path, str]):
-        cls.addLibraryPath(str(path))
+    def add_library_path(cls, path: Union[os.PathLike, str]):
+        cls.addLibraryPath(os.fspath(path))
 
     @classmethod
     def get_library_paths(cls) -> List[pathlib.Path]:

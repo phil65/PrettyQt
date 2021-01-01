@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import Dict, List, Optional, Union
 
@@ -76,12 +77,13 @@ class FileChooserButton(widgets.Widget):
         self.set_path(dialog.selected_file())
         self.value_changed.emit(self.path)
 
-    def set_path(self, path: Union[str, pathlib.Path, None]):
-        if isinstance(path, str):
-            self.path = pathlib.Path(path)
+    def set_path(self, path: Union[str, os.PathLike, None]):
+        if path is None:
+            self.path = None
+            self.lineedit.set_text("")
         else:
-            self.path = path
-        self.lineedit.set_text(str(path) if path is not None else "")
+            self.path = pathlib.Path(os.fspath(path))
+            self.lineedit.set_text(os.fspath(path))
 
     def get_value(self) -> Optional[pathlib.Path]:
         return self.path
