@@ -18,6 +18,9 @@ class FileInfo(QtCore.QFileInfo):
     def __str__(self):
         return self.absoluteFilePath()
 
+    def __fspath__(self):
+        return self.absoluteFilePath()
+
     def __getattr__(self, attr: str) -> Any:
         return getattr(self.get_absolute_file_path(), attr)
 

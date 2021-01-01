@@ -60,6 +60,9 @@ class Dir(QtCore.QDir):
     def __truediv__(self, other: str) -> pathlib.Path:
         return self.to_path() / other
 
+    def __fspath__(self):
+        return self.absolutePath()
+
     def to_path(self) -> pathlib.Path:
         return pathlib.Path(self.absolutePath())
 
