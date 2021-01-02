@@ -59,7 +59,7 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
         """
         return STATE.inverse[self.state()]
 
-    def start_animation(self, policy: DeletionPolicyStr):
+    def start_animation(self, policy: DeletionPolicyStr = "keep"):
         """Start the animation.
 
         Args:
