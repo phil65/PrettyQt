@@ -1,7 +1,10 @@
+from __future__ import annotations
+
 import os
 import pathlib
 from typing import List, Literal
 
+from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, helpers
 
@@ -64,6 +67,12 @@ class Dir(QtCore.QDir):
     def __fspath__(self) -> str:
         return self.absolutePath()
 
+    def __bool__(self):
+        return self.exists()
+
+    def __abs__(self) -> str:
+        return self.absolutePath()
+
     def to_path(self) -> pathlib.Path:
         return pathlib.Path(self.absolutePath())
 
@@ -76,3 +85,23 @@ class Dir(QtCore.QDir):
 
     def get_filter(self) -> List[FilterStr]:
         return [k for k, v in FILTERS.items() if v & self.filter()]
+
+    @classmethod
+    def get_current(cls) -> Dir:
+        return cls(cls.current())
+
+    @classmethod
+    def get_home(cls) -> Dir:
+        return cls(cls.home())
+
+    @classmethod
+    def get_current_path(cls) -> pathlib.Path:
+        return pathlib.Path(cls.currentPath())
+
+    @classmethod
+    def get_home_path(cls) -> pathlib.Path:
+        return pathlib.Path(cls.homePath())
+
+    @classmethod
+    def get_drives(cls) -> List[core.FileInfo]:
+        return [core.FileInfo(i) for i in cls.drives()]
