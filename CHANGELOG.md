@@ -1,3 +1,10 @@
+## v0.167.0 (2021-01-02)
+
+### Feat
+
+- **FileSystemModel**: add get_file_info and get_file_path methods
+- add __fspath__ to Dir and FileInfo classes
+
 ## v0.166.1 (2021-01-01)
 
 ### Fix
