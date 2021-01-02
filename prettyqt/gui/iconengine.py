@@ -1,4 +1,4 @@
-import pathlib
+import os
 from typing import List, Literal, Optional, Tuple, Union
 
 from prettyqt import core, gui
@@ -36,7 +36,7 @@ class IconEngine(QtGui.QIconEngine):
 
     def add_file(
         self,
-        path: Union[str, pathlib.Path],
+        path: Union[str, os.PathLike],
         size: Union[QtCore.QSize, Tuple[int, int], int],
         mode: gui.icon.ModeStr,
         state: gui.icon.StateStr,
@@ -49,7 +49,7 @@ class IconEngine(QtGui.QIconEngine):
             size = core.Size(*size)
         elif isinstance(size, int):
             size = core.Size(size, size)
-        self.addFile(str(path), size, gui.icon.MODE[mode], gui.icon.STATE[state])
+        self.addFile(os.fspath(path), size, gui.icon.MODE[mode], gui.icon.STATE[state])
 
     def add_pixmap(
         self,

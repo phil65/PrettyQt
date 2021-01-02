@@ -25,7 +25,7 @@ class Translator(QtCore.QTranslator):
         return pathlib.Path(path)
 
     def load_file(self, path: Union[str, os.PathLike]):
-        path = pathlib.Path(os.fspath(path))
+        path = pathlib.Path(path)
         if not self.load(path.name, str(path.parent)):
             raise OSError(f"Invalid language file {path}")
 

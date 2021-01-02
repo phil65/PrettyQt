@@ -3,6 +3,7 @@
 based on qtawesome
 """
 
+import os
 import pathlib
 from typing import Dict, Optional, Tuple, Union
 
@@ -224,8 +225,8 @@ def get_icon(
     """
     if isinstance(icon, QtGui.QIcon):
         return icon if as_qicon else gui.Icon(icon)
-    if isinstance(icon, pathlib.Path):
-        icon = str(icon)
+    if isinstance(icon, os.PathLike):  # type: ignore
+        icon = os.fspath(icon)
     if (icon, color, as_qicon) in icon_cache:
         return icon_cache[(icon, color, as_qicon)]
     if isinstance(icon, str) and icon.startswith("mdi."):

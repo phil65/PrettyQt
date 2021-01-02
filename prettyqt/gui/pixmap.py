@@ -39,7 +39,7 @@ class Pixmap(QtGui.QPixmap):
 
     @classmethod
     def from_file(cls, path: Union[os.PathLike, str]):
-        path = pathlib.Path(os.fspath(path))
+        path = pathlib.Path(path)
         with path.open(mode="rb") as f:
             data = f.read()
         # Create widget

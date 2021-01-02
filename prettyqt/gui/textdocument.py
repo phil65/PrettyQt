@@ -1,4 +1,4 @@
-import pathlib
+import os
 from typing import Iterator, Literal, Union
 
 from prettyqt import constants, core, gui
@@ -101,7 +101,7 @@ class TextDocument(QtGui.QTextDocument):
         return constants.CURSOR_MOVE_STYLE.inverse[self.defaultCursorMoveStyle()]
 
     def add_resource(
-        self, resource_type: ResourceTypeStr, name: Union[str, pathlib.Path], resource
+        self, resource_type: ResourceTypeStr, name: Union[str, os.PathLike], resource
     ):
         if resource_type not in RESOURCE_TYPES:
             raise InvalidParamError(resource_type, RESOURCE_TYPES)

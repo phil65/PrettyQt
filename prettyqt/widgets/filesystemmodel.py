@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import Iterator, List, Sequence, Union
 
@@ -57,8 +58,8 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
     def use_custom_icons(self, use: bool):
         self.setOption(OPTIONS["no_custom_icons"], not use)
 
-    def set_root_path(self, path: Union[str, pathlib.Path]) -> QtCore.QModelIndex:
-        path = str(path)
+    def set_root_path(self, path: Union[str, os.PathLike]) -> QtCore.QModelIndex:
+        path = os.fspath(path)
         if path in ["/", "root"]:
             path = core.Dir.rootPath()
         elif path == "home":

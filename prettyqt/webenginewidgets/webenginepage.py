@@ -1,4 +1,4 @@
-import pathlib
+import os
 from typing import Callable, Literal, Optional, Union
 
 from prettyqt import core, gui, webenginewidgets
@@ -209,7 +209,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
     def get_icon(self) -> gui.Icon:
         return gui.Icon(self.icon())
 
-    def set_url(self, url: Union[str, pathlib.Path]):
+    def set_url(self, url: Union[str, os.PathLike]):
         """Set the url of the WebEnginePage.
 
         Clears the Page and loads the URL.
@@ -217,8 +217,8 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         Args:
             url: URL to set
         """
-        if isinstance(url, pathlib.Path):
-            url = core.Url.fromLocalFile(str(url))
+        if isinstance(url, os.PathLike):  # type: ignore
+            url = core.Url.fromLocalFile(os.fspath(url))
         elif isinstance(url, str):
             url = core.Url(url)
         self.setUrl(url)
@@ -238,7 +238,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
     def get_contents_size(self) -> core.SizeF:
         return core.SizeF(self.contentsSize())
 
-    def load_url(self, url: Union[str, pathlib.Path]):
+    def load_url(self, url: Union[QtCore.QUrl, str, os.PathLike]):
         """Load the URL.
 
         Loads the specified url and displays it.
@@ -249,8 +249,8 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         Args:
             url: URL to load
         """
-        if isinstance(url, pathlib.Path):
-            url = core.Url.fromLocalFile(str(url))
+        if isinstance(url, os.PathLike):  # type: ignore
+            url = core.Url.fromLocalFile(os.fspath(url))
         elif isinstance(url, str):
             url = core.Url(url)
         self.load(url)

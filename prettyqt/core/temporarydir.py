@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import pathlib
 
 from prettyqt.qt import QtCore
@@ -18,9 +19,12 @@ class TemporaryDir(QtCore.QTemporaryDir):
     def __bool__(self):
         return self.isValid()
 
-    def __truediv__(self, other: str) -> pathlib.Path:
+    def __fspath__(self) -> str:
+        return self.path()
+
+    def __truediv__(self, other: os.PathLike) -> pathlib.Path:
         current = pathlib.Path(self.path())
-        return current / other
+        return current / os.fspath(other)
         # new = current / other
         # if new.suffix == "":
         #     return core.Dir(new)

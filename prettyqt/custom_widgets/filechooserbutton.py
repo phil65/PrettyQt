@@ -82,13 +82,13 @@ class FileChooserButton(widgets.Widget):
             self.path = None
             self.lineedit.set_text("")
         else:
-            self.path = pathlib.Path(os.fspath(path))
+            self.path = pathlib.Path(path)
             self.lineedit.set_text(os.fspath(path))
 
     def get_value(self) -> Optional[pathlib.Path]:
         return self.path
 
-    def set_value(self, value: Union[str, pathlib.Path]):
+    def set_value(self, value: Union[str, os.PathLike, None]):
         self.set_path(value)
 
 

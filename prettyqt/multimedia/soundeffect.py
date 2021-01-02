@@ -1,4 +1,4 @@
-import pathlib
+import os
 from typing import Literal, Union
 
 from prettyqt import core
@@ -22,9 +22,9 @@ class SoundEffect(QtMultimedia.QSoundEffect):
     def get_status(self) -> StatusStr:
         return STATUS.inverse[self.status()]
 
-    def set_source(self, source: Union[str, pathlib.Path, QtCore.QUrl]):
+    def set_source(self, source: Union[str, os.PathLike, QtCore.QUrl]):
         if not isinstance(source, QtCore.QUrl):
-            source = core.Url.from_user_input(str(source))
+            source = core.Url.from_user_input(os.fspath(source))
         self.setSource(source)
 
     def get_source(self) -> core.Url:

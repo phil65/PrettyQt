@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import List, Literal
 
@@ -57,10 +58,10 @@ class Dir(QtCore.QDir):
     def __reduce__(self):
         return type(self), (self.absolutePath(),)
 
-    def __truediv__(self, other: str) -> pathlib.Path:
-        return self.to_path() / other
+    def __truediv__(self, other: os.PathLike) -> pathlib.Path:
+        return self.to_path() / os.fspath(other)
 
-    def __fspath__(self):
+    def __fspath__(self) -> str:
         return self.absolutePath()
 
     def to_path(self) -> pathlib.Path:

@@ -12,8 +12,9 @@ from __future__ import annotations
 
 # Standard library imports
 import json
+import os
 import pathlib
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Union
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -232,7 +233,7 @@ class IconicFont(core.Object):
         prefix: str,
         ttf_filename: str,
         charmap_filename: str,
-        directory: pathlib.Path,
+        directory: Union[str, os.PathLike],
         md5: Optional[str] = None,
     ):
         """Load a font file and the associated charmap.
@@ -252,6 +253,7 @@ class IconicFont(core.Object):
         md5: str or None, optional
             md5 hash for font file
         """
+        directory = pathlib.Path(directory)
         hash_val = None if SYSTEM_FONTS else md5
         id_ = gui.FontDatabase.add_font(directory / ttf_filename, ttf_hash=hash_val)
         loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)

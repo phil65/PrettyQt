@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import Dict, List, Literal, Optional, Union
 
@@ -44,7 +45,7 @@ class FileDialog(QtWidgets.QFileDialog):
 
     def __init__(
         self,
-        path: Union[None, str, pathlib.Path] = None,
+        path: Union[None, str, os.PathLike] = None,
         mode: AcceptModeStr = "open",
         caption: Optional[str] = None,
         path_id: Optional[str] = None,
@@ -217,10 +218,9 @@ class FileDialog(QtWidgets.QFileDialog):
         """
         return pathlib.Path(self.directory().absolutePath())
 
-    def set_directory(self, path: Union[str, pathlib.Path]):
+    def set_directory(self, path: Union[str, os.PathLike]):
         """Set start directory."""
-        if isinstance(path, pathlib.Path):
-            path = str(path)
+        path = os.fspath(path)
         self.setDirectory(path)
 
     def set_filter(self, *filters: core.dir.FilterStr):

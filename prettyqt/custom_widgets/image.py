@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-import pathlib
 from typing import Optional, Union
 
 from prettyqt import gui, widgets
@@ -32,7 +31,7 @@ class Image(widgets.Label):
 
     @classmethod
     def from_path(
-        cls, path: Union[pathlib.Path, str], parent: Optional[QtWidgets.QWidget] = None
+        cls, path: Union[os.PathLike, str], parent: Optional[QtWidgets.QWidget] = None
     ) -> Image:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)

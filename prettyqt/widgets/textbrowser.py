@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import List, Union
 
@@ -47,9 +48,8 @@ class TextBrowser(QtWidgets.QTextBrowser):
     #     event.accept()
     #     self.show_markdown_file(self.filePath)
 
-    def set_markdown_file(self, file_path: Union[str, pathlib.Path]):
-        if isinstance(file_path, str):
-            file_path = pathlib.Path(file_path)
+    def set_markdown_file(self, file_path: Union[str, os.PathLike]):
+        file_path = pathlib.Path(file_path)
         with file_path.open() as f:
             file_content = f.read()
         self.set_markdown(file_content)
@@ -57,9 +57,8 @@ class TextBrowser(QtWidgets.QTextBrowser):
     def set_markdown(self, source: str):
         self.setMarkdown(source)
 
-    def set_rst_file(self, file_path: Union[str, pathlib.Path]):
-        if isinstance(file_path, str):
-            file_path = pathlib.Path(file_path)
+    def set_rst_file(self, file_path: Union[str, os.PathLike]):
+        file_path = pathlib.Path(file_path)
         with file_path.open() as f:
             file_content = f.read()
         self.set_rst(file_content)
@@ -73,8 +72,8 @@ class TextBrowser(QtWidgets.QTextBrowser):
     def get_search_paths(self) -> List[pathlib.Path]:
         return [pathlib.Path(p) for p in self.searchPaths()]
 
-    def set_search_paths(self, paths: List[Union[str, pathlib.Path]]):
-        self.setSearchPaths([str(p) for p in paths])
+    def set_search_paths(self, paths: List[Union[str, os.PathLike]]):
+        self.setSearchPaths([os.fspath(p) for p in paths])
 
 
 if __name__ == "__main__":

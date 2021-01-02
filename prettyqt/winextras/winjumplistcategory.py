@@ -1,5 +1,4 @@
 import os
-import pathlib
 from typing import Iterator, Literal, Optional, Union
 
 from prettyqt import iconprovider
@@ -42,14 +41,14 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
     def add_link(
         self,
         title: str,
-        exe_path: Union[str, pathlib.Path],
+        exe_path: Union[str, os.PathLike],
         arguments: Optional[list] = None,
         icon: types.IconType = None,
     ) -> None:
         icon = iconprovider.get_icon(icon)
         if arguments is None:
             arguments = []
-        self.addLink(icon, title, str(exe_path), arguments)
+        self.addLink(icon, title, os.fspath(exe_path), arguments)
 
 
 if __name__ == "__main__":

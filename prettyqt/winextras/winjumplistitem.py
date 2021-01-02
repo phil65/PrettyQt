@@ -31,8 +31,8 @@ class WinJumpListItem(QtWinExtras.QWinJumpListItem):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def set_file_path(self, path: Union[str, pathlib.Path]) -> None:
-        self.setFilePath(str(path))
+    def set_file_path(self, path: Union[str, os.PathLike]) -> None:
+        self.setFilePath(os.fspath(path))
 
     def get_file_path(self) -> pathlib.Path:
         return pathlib.Path(self.filePath())

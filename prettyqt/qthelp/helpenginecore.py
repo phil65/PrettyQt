@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtHelp
@@ -23,7 +23,9 @@ class HelpEngineCore(QtHelp.QHelpEngineCore):
             core.Url(i) for i in self.files(namespace_name, filter_name, extension_filter)
         ]
 
-    def find_file(self, url: QtCore.QUrl) -> core.Url:
+    def find_file(self, url: Union[QtCore.QUrl, str]) -> core.Url:
+        if not isinstance(url, QtCore.QUrl):
+            url = QtCore.QUrl(url)
         return core.Url(self.findFile(url))
 
 

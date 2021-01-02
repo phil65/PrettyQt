@@ -1,5 +1,6 @@
 import hashlib
 import logging
+import os
 import pathlib
 from typing import Literal, Optional, Union
 
@@ -95,9 +96,8 @@ WritingSystemStr = Literal[
 
 class FontDatabase(QtGui.QFontDatabase):
     @classmethod
-    def add_fonts_from_folder(cls, path: Union[str, pathlib.Path]):
-        if isinstance(path, str):
-            path = pathlib.Path(path)
+    def add_fonts_from_folder(cls, path: Union[str, os.PathLike]):
+        path = pathlib.Path(path)
         for p in path.iterdir():
             if p.suffix.lower() in [".ttf", ".otf"]:
                 logger.debug(f"adding font {p} to database.")
@@ -105,10 +105,9 @@ class FontDatabase(QtGui.QFontDatabase):
 
     @classmethod
     def add_font(
-        cls, path: Union[str, pathlib.Path], ttf_hash: Optional[str] = None
+        cls, path: Union[str, os.PathLike], ttf_hash: Optional[str] = None
     ) -> int:
-        if isinstance(path, str):
-            path = pathlib.Path(path)
+        path = pathlib.Path(path)
         font_id = cls.addApplicationFont(str(path))
         if not cls.applicationFontFamilies(font_id):
             raise RuntimeError(

@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import Any
 
@@ -7,8 +8,8 @@ from prettyqt.qt import QtCore
 
 class FileInfo(QtCore.QFileInfo):
     def __init__(self, *args, **kwargs):
-        if len(args) == 1 and isinstance(args[0], pathlib.Path):
-            super().__init__(str(args[0]))
+        if len(args) == 1 and isinstance(args[0], os.PathLike):  # type: ignore
+            super().__init__(os.fspath(args[0]))
         else:
             super().__init__(*args, **kwargs)
 
@@ -18,7 +19,7 @@ class FileInfo(QtCore.QFileInfo):
     def __str__(self):
         return self.absoluteFilePath()
 
-    def __fspath__(self):
+    def __fspath__(self) -> str:
         return self.absoluteFilePath()
 
     def __getattr__(self, attr: str) -> Any:

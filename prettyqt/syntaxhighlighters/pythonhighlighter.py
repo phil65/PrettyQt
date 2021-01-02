@@ -148,7 +148,13 @@ class PythonHighlighter(gui.SyntaxHighlighter):
         if not self.match_multiline(text, *TRI_SINGLE):
             self.match_multiline(text, *TRI_DOUBLE)
 
-    def match_multiline(self, text, delimiter, in_state, style):
+    def match_multiline(
+        self,
+        text: str,
+        delimiter: core.RegularExpression,
+        in_state: int,
+        style: gui.TextCharFormat,
+    ):
         """Do highlighting of multi-line strings.
 
         ``delimiter`` should be a

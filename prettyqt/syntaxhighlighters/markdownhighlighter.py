@@ -91,7 +91,9 @@ class MarkdownHighlighter(gui.SyntaxHighlighter):
         self.setCurrentBlockState(0)
         self._match_multiline(text, *TRI_SINGLE)
 
-    def _match_multiline(self, text, delimiter, style):
+    def _match_multiline(
+        self, text: str, delimiter: core.RegularExpression, style: gui.TextCharFormat
+    ):
         # If inside triple-single quotes, start at 0
         if self.previousBlockState() == 1:
             start = 0
