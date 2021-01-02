@@ -1,3 +1,4 @@
+import os
 import pathlib
 from typing import Literal, Union
 
@@ -36,8 +37,8 @@ class WinJumpListItem(QtWinExtras.QWinJumpListItem):
     def get_file_path(self) -> pathlib.Path:
         return pathlib.Path(self.filePath())
 
-    def set_working_directory(self, path: Union[str, pathlib.Path]) -> None:
-        self.setWorkingDirectory(str(path))
+    def set_working_directory(self, path: Union[str, os.PathLike]) -> None:
+        self.setWorkingDirectory(os.fspath(path))
 
     def get_working_directory(self) -> pathlib.Path:
         return pathlib.Path(self.workingDirectory())

@@ -1,5 +1,6 @@
+import os
 import pathlib
-from typing import Literal, Optional, Union
+from typing import Iterator, Literal, Optional, Union
 
 from prettyqt import iconprovider
 from prettyqt.qt import QtWinExtras
@@ -26,11 +27,14 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
     def __bool__(self):
         return not self.isEmpty()
 
+    def __iter__(self) -> Iterator[QtWinExtras.QWinJumpListItem]:
+        return iter(self.items())
+
     def get_type(self) -> TypeStr:
         return TYPES.inverse[self.type()]
 
-    def add_destination(self, destination: Union[str, pathlib.Path]) -> None:
-        self.addDestination(str(destination))
+    def add_destination(self, destination: Union[str, os.PathLike]) -> None:
+        self.addDestination(os.fspath(destination))
 
     def set_title(self, title: str) -> None:
         self.setTitle(title)
