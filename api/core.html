@@ -6538,7 +6538,7 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="highlight">
 <pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]):</span>
+<span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
     <span class="sd">"""Set the path to the settings file.</span>
 
 <span class="sd">    Args:</span>
@@ -6552,7 +6552,7 @@ set_path<span class="p">(</span><span class="n">fmt</span><span class="p">,</spa
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">FORMAT</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">scope</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCOPE</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">scope</span><span class="p">,</span> <span class="n">SCOPE</span><span class="p">)</span>
-    <span class="bp">cls</span><span class="o">.</span><span class="n">setPath</span><span class="p">(</span><span class="n">FORMAT</span><span class="p">[</span><span class="n">fmt</span><span class="p">],</span> <span class="n">SCOPE</span><span class="p">[</span><span class="n">scope</span><span class="p">],</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+    <span class="bp">cls</span><span class="o">.</span><span class="n">setPath</span><span class="p">(</span><span class="n">FORMAT</span><span class="p">[</span><span class="n">fmt</span><span class="p">],</span> <span class="n">SCOPE</span><span class="p">[</span><span class="n">scope</span><span class="p">],</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 </code></pre>
 </div>
 </details>
