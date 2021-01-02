@@ -57,7 +57,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
     def use_custom_icons(self, use: bool):
         self.setOption(OPTIONS["no_custom_icons"], not use)
 
-    def set_root_path(self, path: Union[str, pathlib.Path]):
+    def set_root_path(self, path: Union[str, pathlib.Path]) -> QtCore.QModelIndex:
         path = str(path)
         if path in ["/", "root"]:
             path = core.Dir.rootPath()
@@ -67,7 +67,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             path = core.Dir.tempPath()
         elif path == "current":
             path = core.Dir.currentPath()
-        self.setRootPath(path)
+        return self.setRootPath(path)
 
     def set_name_filters(self, filters, hide: bool = False):
         self.setNameFilters(filters)
