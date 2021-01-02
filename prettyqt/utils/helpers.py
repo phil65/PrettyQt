@@ -1,7 +1,7 @@
 import functools
 import operator
 import sys
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Mapping
 
 
 def string_to_num_array(array: str) -> List[float]:
@@ -9,7 +9,7 @@ def string_to_num_array(array: str) -> List[float]:
     return [int(i) if i.is_integer() else i for i in floats]
 
 
-def merge_flags(flags, mapping):
+def merge_flags(flags, mapping: Mapping):
     return functools.reduce(operator.ior, [mapping[t] for t in flags])
 
 
@@ -18,7 +18,7 @@ def format_kwargs(kwargs: Dict[str, Any]) -> str:
     return ", ".join(kwarg_list)
 
 
-def cut_off_str(obj, max_len: int):
+def cut_off_str(obj, max_len: int) -> str:
     """Create a string representation of an object, no longer than max_len characters.
 
     Uses repr(obj) to create the string representation. If this is longer than max_len -3

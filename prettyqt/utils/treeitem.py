@@ -56,7 +56,7 @@ class TreeItem(Generic[T]):
     def row(self) -> int:
         return self.parent_item.child_items.index(self) if self.parent_item else 0
 
-    def pretty_print(self, indent=0):
+    def pretty_print(self, indent: int = 0):
         logger.debug(indent * "    " + str(self))
         for child_item in self.child_items:
             child_item.pretty_print(indent + 1)

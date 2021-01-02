@@ -118,10 +118,10 @@ class CharIconPainter:
         state,
         options: List[Dict[str, Any]],
     ):
+        color_str, char = COLOR_OPTIONS[state][mode]
         for opt in options:
-            color, char = COLOR_OPTIONS[state][mode]
             painter.save()
-            color = gui.Color(opt[color])
+            color = gui.Color(opt[color_str])
             painter.setPen(color)
 
             # A 16 pixel-high icon yields a font size of 14, which is pixel perfect
@@ -279,7 +279,8 @@ class IconicFont(core.Object):
         if len(opts) != len(names):
             raise TypeError(f'"options" must be a list of size {len(names)}')
         parsed_options = [self._parse_options(o, kwargs, n) for o, n in zip(opts, names)]
-        icon = self._icon_by_painter(self.painter, parsed_options)
+        engine = CharIconEngine(self, self.painter, parsed_options)
+        icon = QtGui.QIcon(engine)
         self.icon_cache[cache_key] = icon
         return icon
 
@@ -355,8 +356,3 @@ class IconicFont(core.Object):
         if prefix[-1] == "s":  # solid style
             font.setStyleName("Solid")
         return font
-
-    def _icon_by_painter(self, painter: CharIconPainter, options) -> QtGui.QIcon:
-        """Return the icon corresponding to the given painter."""
-        engine = CharIconEngine(self, painter, options)
-        return QtGui.QIcon(engine)

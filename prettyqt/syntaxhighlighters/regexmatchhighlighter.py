@@ -1,3 +1,5 @@
+from typing import List, Tuple
+
 from prettyqt import gui
 
 
@@ -12,12 +14,12 @@ class RegexMatchHighlighter(gui.SyntaxHighlighter):
         super().__init__(document)
         self.spans = []
 
-    def set_spans(self, spans):
+    def set_spans(self, spans: List[Tuple[int, int]]):
         self.spans = spans
         # print(self.spans)
         self.rehighlight()
 
-    def _colorize(self, line_pos, match_len, match_num):
+    def _colorize(self, line_pos: int, match_len: int, match_num: int):
         fmt = FORMAT_1 if match_num % 2 == 0 else FORMAT_2
         self.setFormat(line_pos, match_len, fmt)
 
