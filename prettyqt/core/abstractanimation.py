@@ -97,6 +97,18 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
             raise InvalidParamError(policy, DELETION_POLICY)
         self.start(DELETION_POLICY[policy])
 
+    def restart_animation(self, policy: DeletionPolicyStr = "keep"):
+        """Restart the animation.
+
+        Args:
+            policy: animation policy
+
+        Raises:
+            InvalidParamError: animation policy does not exist
+        """
+        self.stop()
+        self.start_animation(policy)
+
 
 if __name__ == "__main__":
     anim1 = core.PropertyAnimation()
