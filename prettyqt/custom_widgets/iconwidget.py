@@ -4,6 +4,7 @@ from typing import Optional, Tuple, Union
 
 from prettyqt import core, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.utils import types
 
 
 class IconWidget(widgets.Label):
@@ -24,7 +25,7 @@ class IconWidget(widgets.Label):
         self._size = core.Size(16, 16)
         self.set_icon(iconprovider._icon(*names, **kwargs))
 
-    def set_icon(self, _icon: QtGui.QIcon):
+    def set_icon(self, _icon: types.IconType):
         """Set a new icon().
 
         Parameters
@@ -32,8 +33,8 @@ class IconWidget(widgets.Label):
         _icon: qtawesome.icon
             icon to set
         """
-        self._icon = _icon
-        self.setPixmap(_icon.pixmap(self._size))
+        self._icon = iconprovider.get_icon(_icon)
+        self.setPixmap(self._icon.pixmap(self._size))
 
     def set_icon_size(self, size: Union[int, QtCore.QSize, Tuple[int, int]]):
         if isinstance(size, tuple):
