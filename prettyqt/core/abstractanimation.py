@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Literal
 
 from prettyqt import core
@@ -32,6 +34,18 @@ QtCore.QAbstractAnimation.__bases__ = (core.Object,)
 class AbstractAnimation(QtCore.QAbstractAnimation):
     def __len__(self):
         return self.duration()
+
+    def __and__(self, other: AbstractAnimation) -> core.SequentialAnimationGroup:
+        group = core.SequentialAnimationGroup()
+        group.addAnimation(self)
+        group.addAnimation(other)
+        return group
+
+    def __or__(self, other: AbstractAnimation) -> core.ParallelAnimationGroup:
+        group = core.ParallelAnimationGroup()
+        group.addAnimation(self)
+        group.addAnimation(other)
+        return group
 
     def serialize_fields(self):
         return dict(
@@ -82,3 +96,10 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
         if policy not in DELETION_POLICY:
             raise InvalidParamError(policy, DELETION_POLICY)
         self.start(DELETION_POLICY[policy])
+
+
+if __name__ == "__main__":
+    anim1 = core.PropertyAnimation()
+    anim2 = core.PropertyAnimation()
+    group = anim1 | anim2
+    print(type(group))
