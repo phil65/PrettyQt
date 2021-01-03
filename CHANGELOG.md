@@ -1,3 +1,14 @@
+## v0.168.0 (2021-01-03)
+
+### Feat
+
+- **eventfilters**: add AnimatedToolTipEventFilter class
+- **Widget**: tooltip kwarg for set_flags method
+- **AbstractAnimation**: add restart_animation method
+- add custom_animations module
+- **AbstractAnimation**: implement __and__ and __or__
+- **Dir**: some additional methods
+
 ## v0.167.0 (2021-01-02)
 
 ### Feat
