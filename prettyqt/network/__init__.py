@@ -12,6 +12,7 @@ from .networkaddressentry import NetworkAddressEntry
 from .networkinterface import NetworkInterface
 from .networkdatagram import NetworkDatagram
 from .abstractsocket import AbstractSocket
+from .localsocket import LocalSocket
 from .localserver import LocalServer
 from .tcpserver import TcpServer
 from .tcpsocket import TcpSocket
@@ -23,6 +24,7 @@ from .networkaccessmanager import NetworkAccessManager
 __all__ = [
     "NetworkProxy",
     "AbstractSocket",
+    "LocalSocket",
     "HostAddress",
     "LocalServer",
     "TcpServer",
