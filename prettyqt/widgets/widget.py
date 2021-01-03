@@ -189,6 +189,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         stay_on_top: Optional[bool] = None,
         frameless: Optional[bool] = None,
         window: Optional[bool] = None,
+        tooltip: Optional[bool] = None,
     ) -> None:
         if minimize is not None:
             self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
@@ -202,6 +203,8 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             self.setWindowFlag(QtCore.Qt.FramelessWindowHint, frameless)
         if window is not None:
             self.setWindowFlag(QtCore.Qt.Window, window)
+        if tooltip is not None:
+            self.setWindowFlag(QtCore.Qt.ToolTip, tooltip)
 
     def set_attribute(
         self, attribute: constants.WidgetAttributeStr, state: bool = True
