@@ -16,8 +16,8 @@ class BaseDialog(QtWidgets.QDialog):
 
     def serialize_fields(self):
         return dict(
+            # modal=self.isModal(),
             layout=self.layout(),
-            is_maximized=self.isMaximized(),
             size_grip_enabled=self.isSizeGripEnabled(),
             size=(self.size().width(), self.size().height()),
         )
@@ -28,8 +28,6 @@ class BaseDialog(QtWidgets.QDialog):
             self.set_layout(state["layout"])
         self.resize(*state["size"])
         self.setSizeGripEnabled(state["size_grip_enabled"])
-        if state["is_maximized"]:
-            self.showMaximized()
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()

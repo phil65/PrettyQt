@@ -43,6 +43,8 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         self.setStatusTip(state.get("status_tip", ""))
         self.setStyleSheet(state.get("stylesheet", ""))
         self.setFont(state.get("font", ""))
+        if state["is_maximized"]:
+            self.showMaximized()
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -52,6 +54,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         return dict(
             layout=self.layout() if isinstance(self.layout(), widgets.Layout) else None,
             size_policy=self.get_size_policy(),
+            is_maximized=self.isMaximized(),
             actions=self.actions(),
             accessible_name=self.accessibleName(),
             tool_tip=self.toolTip(),
