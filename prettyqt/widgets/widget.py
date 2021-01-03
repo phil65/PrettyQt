@@ -1,4 +1,5 @@
 import contextlib
+import sys
 from typing import Any, Callable, Dict, Iterator, Literal, Optional, Union
 
 from deprecated import deprecated
@@ -73,6 +74,22 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             super().resize(*size[0])
         else:
             super().resize(*size)
+
+    def raise_to_top(self):
+        if sys.platform.startswith("win"):
+            import win32con
+            from win32gui import SetWindowPos
+
+            # set to always-on-top and disable it again. that way windows stays in front
+            flag = win32con.SWP_NOMOVE | win32con.SWP_NOSIZE | win32con.SWP_SHOWWINDOW
+            win_id = self.winId()
+            SetWindowPos(win_id, win32con.HWND_TOPMOST, 0, 0, 0, 0, flag)
+            SetWindowPos(win_id, win32con.HWND_NOTOPMOST, 0, 0, 0, 0, flag)
+        # state = (self.windowState() & ~Qt.WindowMinimized) | Qt.WindowActive
+        # self.setWindowState(state)
+        self.raise_()
+        self.show()
+        self.activateWindow()
 
     def set_icon(self, icon: types.IconType) -> None:
         """Set the window icon.
