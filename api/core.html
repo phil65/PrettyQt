@@ -317,6 +317,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.restart_animation" class="md-nav__link">
+    restart_animation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.core.abstractanimation.AbstractAnimation.set_direction" class="md-nav__link">
     set_direction()
   </a>
@@ -2101,6 +2108,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.core.abstractanimation.AbstractAnimation.restart_animation" class="md-nav__link">
+    restart_animation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.core.abstractanimation.AbstractAnimation.set_direction" class="md-nav__link">
     set_direction()
   </a>
@@ -3571,7 +3585,7 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['forward', 'backward']</code></td>
+<td><code>DirectionStr</code></td>
 <td>
 <p>animation direction</p>
 </td>
@@ -3613,7 +3627,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['stopped', 'paused', 'running']</code></td>
+<td><code>StateStr</code></td>
 <td>
 <p>animation state</p>
 </td>
@@ -3630,6 +3644,73 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <span class="sd">        animation state</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.core.abstractanimation.AbstractAnimation.restart_animation">
+
+        <code class="highlight language-python">
+restart_animation<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="o">=</span><span class="s1">'keep'</span><span class="p">)</span>        </code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Restart the animation.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>policy</code></td>
+<td><code>DeletionPolicyStr</code></td>
+<td>
+<p>animation policy</p>
+</td>
+<td><code>'keep'</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>animation policy does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">restart_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">DeletionPolicyStr</span> <span class="o">=</span> <span class="s2">"keep"</span><span class="p">):</span>
+    <span class="sd">"""Restart the animation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        policy: animation policy</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: animation policy does not exist</span>
+<span class="sd">    """</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">start_animation</span><span class="p">(</span><span class="n">policy</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -3658,7 +3739,7 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>direction</code></td>
-<td><code>Literal['forward', 'backward']</code></td>
+<td><code>DirectionStr</code></td>
 <td>
 <p>animation direction</p>
 </td>
@@ -3707,7 +3788,7 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <h4 class="doc doc-heading" id="prettyqt.core.abstractanimation.AbstractAnimation.start_animation">
 
         <code class="highlight language-python">
-start_animation<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span>        </code>
+start_animation<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="o">=</span><span class="s1">'keep'</span><span class="p">)</span>        </code>
 
 
       </h4>
@@ -3726,11 +3807,11 @@ start_animation<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>Literal['keep', 'delete']</code></td>
+<td><code>DeletionPolicyStr</code></td>
 <td>
 <p>animation policy</p>
 </td>
-<td><em>required</em></td>
+<td><code>'keep'</code></td>
 </tr>
 </tbody>
 </table>
@@ -3754,7 +3835,7 @@ start_animation<span class="p">(</span><span class="bp">self</span><span class="
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">start_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">DeletionPolicyStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">start_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">DeletionPolicyStr</span> <span class="o">=</span> <span class="s2">"keep"</span><span class="p">):</span>
     <span class="sd">"""Start the animation.</span>
 
 <span class="sd">    Args:</span>

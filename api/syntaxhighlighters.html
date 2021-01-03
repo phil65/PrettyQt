@@ -1707,7 +1707,13 @@ inside a multi-line string when this function is finished.</p>
 <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pythonhighlighter.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">match_multiline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">,</span> <span class="n">in_state</span><span class="p">,</span> <span class="n">style</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">match_multiline</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">delimiter</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpression</span><span class="p">,</span>
+    <span class="n">in_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sd">"""Do highlighting of multi-line strings.</span>
 
 <span class="sd">    ``delimiter`` should be a</span>
