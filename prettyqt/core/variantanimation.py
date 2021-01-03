@@ -8,9 +8,6 @@ QtCore.QVariantAnimation.__bases__ = (core.AbstractAnimation,)
 
 
 class VariantAnimation(QtCore.QVariantAnimation):
-    def __len__(self):
-        return self.duration()
-
     def __getitem__(self, value: float):
         return self.keyValueAt(value)
 

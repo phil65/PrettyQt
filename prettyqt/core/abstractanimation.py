@@ -30,6 +30,17 @@ QtCore.QAbstractAnimation.__bases__ = (core.Object,)
 
 
 class AbstractAnimation(QtCore.QAbstractAnimation):
+    def __len__(self):
+        return self.duration()
+
+    def serialize_fields(self):
+        return dict(
+            duration=self.duration(),
+            direction=self.get_direction(),
+            loop_count=self.loopCount(),
+            current_time=self.currentTime(),
+        )
+
     def set_direction(self, direction: DirectionStr):
         """Set animation direction.
 
