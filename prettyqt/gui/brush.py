@@ -1,3 +1,5 @@
+from typing import Optional
+
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
 
@@ -19,8 +21,11 @@ class Brush(QtGui.QBrush):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
-    def get_texture_image(self) -> gui.Image:
-        return gui.Image(self.textureImage())
+    def get_texture_image(self) -> Optional[gui.Image]:
+        img = self.textureImage()
+        if img.isNull():
+            return None
+        return gui.Image(img)
 
     def get_color(self) -> gui.Color:
         return gui.Color(self.color())
