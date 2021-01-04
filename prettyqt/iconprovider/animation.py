@@ -1,7 +1,7 @@
 from typing import Dict, Tuple
 
-from prettyqt import core
-from prettyqt.qt import QtWidgets
+from prettyqt import core, gui
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class Spin:
@@ -25,7 +25,7 @@ class Spin:
         self.info[self.parent_widget] = timer, angle, step
         self.parent_widget.update()
 
-    def setup(self, icon_painter, painter, rect):
+    def setup(self, icon_painter, painter: gui.Painter, rect: QtCore.QRect):
 
         if self.parent_widget not in self.info:
             timer = core.Timer(self.parent_widget)
@@ -34,10 +34,10 @@ class Spin:
             timer.start(self.interval)
         else:
             timer, angle, self.step = self.info[self.parent_widget]
-            with painter.offset_by(rect.width() * 0.5, rect.height() * 0.5):
+            with painter.offset_by(int(rect.width() * 0.5), int(rect.height() * 0.5)):
                 painter.rotate(angle)
 
 
 class Pulse(Spin):
-    def __init__(self, parent_widget):
+    def __init__(self, parent_widget: QtWidgets.QWidget):
         super().__init__(parent_widget, interval=300, step=45)

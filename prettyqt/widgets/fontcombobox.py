@@ -29,7 +29,7 @@ class FontComboBox(QtWidgets.QFontComboBox):
 
     def serialize_fields(self):
         return dict(
-            current_font=gui.Font(self.currentFont()),
+            current_font=self.get_current_font(),
             font_filters=self.get_font_filters(),
         )
 

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import contextlib
 from typing import Iterator, List, Literal, Union
 
@@ -57,19 +59,19 @@ class Painter(QtGui.QPainter):
         self.end()
 
     @contextlib.contextmanager
-    def paint_on(self, obj):
+    def paint_on(self, obj) -> Iterator[Painter]:
         self.begin(obj)
         yield self
         self.end()
 
     @contextlib.contextmanager
-    def backup_state(self):
+    def backup_state(self) -> Iterator[Painter]:
         self.save()
         yield self
         self.restore()
 
     @contextlib.contextmanager
-    def native_mode(self):
+    def native_mode(self) -> Iterator[Painter]:
         self.beginNativePainting()
         yield self
         self.endNativePainting()
@@ -105,17 +107,14 @@ class Painter(QtGui.QPainter):
     def fill_rect(
         self,
         rect: Union[QtCore.QRectF, QtCore.QRect],
-        color,
+        color: types.ColorType,
         pattern: constants.PatternStr = "solid",
     ):
         if pattern not in constants.PATTERN:
             raise InvalidParamError(pattern, constants.PATTERN)
         if isinstance(rect, tuple):
             rect = core.Rect(*rect)
-        if isinstance(color, str):
-            if color not in gui.Color.colorNames():
-                raise ValueError("Invalid value for color.")
-            color = gui.Color(color)
+        color = colors.get_color(color)
         if pattern != "solid":
             color = gui.Brush(color, constants.PATTERN[pattern])
         self.fillRect(rect, color)
@@ -127,7 +126,7 @@ class Painter(QtGui.QPainter):
         color: types.ColorType = "black",
         join_style: constants.JoinStyleStr = "bevel",
         cap_style: constants.CapStyleStr = "square",
-    ):
+    ) -> gui.Pen:
         """Set pen to use.
 
         Args:
@@ -144,6 +143,7 @@ class Painter(QtGui.QPainter):
         pen.setWidthF(width)
         pen.set_color(color)
         self.setPen(pen)
+        return pen
 
     def get_pen(self) -> gui.Pen:
         """Return current pen.
@@ -195,19 +195,21 @@ class Painter(QtGui.QPainter):
         return self.drawText(core.Rect(), QtCore.Qt.TextDontPrint, text)  # type: ignore
 
     @contextlib.contextmanager
-    def clip_path(self, operation: constants.ClipOperationStr = "replace"):
+    def clip_path(
+        self, operation: constants.ClipOperationStr = "replace"
+    ) -> Iterator[gui.PainterPath]:
         path = gui.PainterPath()
         yield path
         self.set_clip_path(path, operation)
 
     @contextlib.contextmanager
-    def apply_transform(self, combine: bool = True):
+    def apply_transform(self, combine: bool = True) -> Iterator[gui.Transform]:
         transform = gui.Transform()
         yield transform
         self.setTransform(transform, combine)
 
     @contextlib.contextmanager
-    def offset_by(self, x: int = 0, y: int = 0):
+    def offset_by(self, x: int = 0, y: int = 0) -> Iterator[Painter]:
         self.translate(x, y)
         yield self
         self.translate(-x, -y)

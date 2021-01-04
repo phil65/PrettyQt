@@ -1,4 +1,4 @@
-from typing import Union
+from typing import Literal, Union
 
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict
@@ -9,6 +9,8 @@ SEQUENCE_MATCHES = bidict(
     partial=QtGui.QKeySequence.PartialMatch,
     exact=QtGui.QKeySequence.ExactMatch,
 )
+
+SequenceMatchStr = Literal["none", "partial", "exact"]
 
 SEQUENCE_FORMATS = bidict(
     native=QtGui.QKeySequence.NativeText, portable=QtGui.QKeySequence.PortableText
@@ -115,13 +117,13 @@ class KeySequence(QtGui.QKeySequence):
     def __reduce__(self):
         return type(self), (self.toString(),)
 
-    def get_matches(self, seq: Union[QtGui.QKeySequence, str]):
+    def get_matches(self, seq: Union[QtGui.QKeySequence, str]) -> SequenceMatchStr:
         if isinstance(seq, str):
             seq = KeySequence(seq)
         return SEQUENCE_MATCHES.inverse[self.matches(seq)]
 
     @classmethod
-    def to_shortcut_str(cls, key, mod=0):
+    def to_shortcut_str(cls, key, mod: int = 0) -> str:
         for k, v in MODS.items():
             if mod & k:
                 key += v

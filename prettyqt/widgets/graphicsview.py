@@ -55,8 +55,8 @@ class GraphicsView(QtWidgets.QGraphicsView):
     def serialize_fields(self):
         return dict(
             scene=self.scene(),
-            background_brush=gui.Brush(self.backgroundBrush()),
-            foreground_brush=gui.Brush(self.foregroundBrush()),
+            background_brush=self.get_background_brush(),
+            foreground_brush=self.get_foreground_brush(),
             transformation_anchor=self.get_transformation_anchor(),
             resize_anchor=self.get_resize_anchor(),
             viewport_update_mode=self.get_viewport_update_mode(),
@@ -83,6 +83,12 @@ class GraphicsView(QtWidgets.QGraphicsView):
 
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
+
+    def get_background_brush(self) -> gui.Brush:
+        return gui.Brush(self.backgroundBrush())
+
+    def get_foreground_brush(self) -> gui.Brush:
+        return gui.Brush(self.foregroundBrush())
 
     def invalidate_scene(
         self, rect: QtCore.QRectF, layer: widgets.graphicsscene.SceneLayerStr = "all"

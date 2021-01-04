@@ -1,3 +1,5 @@
+from typing import Optional
+
 from prettyqt import gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError
@@ -7,15 +9,22 @@ QtWidgets.QWizardPage.__bases__ = (widgets.Widget,)
 
 
 class WizardPage(QtWidgets.QWizardPage):
-    def set_pixmap(self, typ: widgets.wizard.WizardPixmapStr, pixmap: QtGui.QPixmap):
+    def set_pixmap(
+        self, typ: widgets.wizard.WizardPixmapStr, pixmap: Optional[QtGui.QPixmap]
+    ):
         if typ not in widgets.wizard.WIZARD_PIXMAP:
             raise InvalidParamError(typ, widgets.wizard.WIZARD_PIXMAP)
+        if pixmap is None:
+            pixmap = QtGui.QPixmap()
         self.setPixmap(widgets.wizard.WIZARD_PIXMAP[typ], pixmap)
 
-    def get_pixmap(self, typ: widgets.wizard.WizardPixmapStr) -> gui.Pixmap:
+    def get_pixmap(self, typ: widgets.wizard.WizardPixmapStr) -> Optional[gui.Pixmap]:
         if typ not in widgets.wizard.WIZARD_PIXMAP:
             raise InvalidParamError(typ, widgets.wizard.WIZARD_PIXMAP)
-        return gui.Pixmap(self.pixmap(widgets.wizard.WIZARD_PIXMAP[typ]))
+        pix = gui.Pixmap(self.pixmap(widgets.wizard.WIZARD_PIXMAP[typ]))
+        if pix.isNull():
+            return None
+        return pix
 
     def set_button_text(self, button_type: widgets.wizard.WizardButtonStr, value: str):
         """Set text for given button type.

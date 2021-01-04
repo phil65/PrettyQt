@@ -38,7 +38,7 @@ class Pixmap(QtGui.QPixmap):
         return self.cacheKey()
 
     @classmethod
-    def from_file(cls, path: Union[os.PathLike, str]):
+    def from_file(cls, path: Union[os.PathLike, str]) -> Pixmap:
         path = pathlib.Path(path)
         with path.open(mode="rb") as f:
             data = f.read()
@@ -53,7 +53,7 @@ class Pixmap(QtGui.QPixmap):
     def get_rect(self) -> core.Rect:
         return core.Rect(self.rect())
 
-    def to_image(self):  # -> gui.Image:
+    def to_image(self) -> "gui.Image":
         return gui.Image(self.toImage())
 
     @classmethod

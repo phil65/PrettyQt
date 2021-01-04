@@ -73,7 +73,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
             text=self.text(),
             enabled=self.isEnabled(),
             visible=self.isVisible(),
-            font=gui.Font(self.font()),
+            font=self.get_font(),
             shortcut=self.get_shortcut(),
             tool_tip=self.toolTip(),
             checkable=self.isCheckable(),
@@ -166,6 +166,9 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         if not shortcut:
             return None
         return gui.KeySequence(shortcut.toString(), gui.KeySequence.PortableText)
+
+    def get_font(self) -> gui.Font:
+        return gui.Font(self.font())
 
     def set_menu(self, menu):
         try:

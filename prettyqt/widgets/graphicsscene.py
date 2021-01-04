@@ -27,16 +27,16 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
     def serialize_fields(self):
         return dict(
             items=self.items(),
-            background_brush=gui.Brush(self.backgroundBrush()),
-            foreground_brush=gui.Brush(self.foregroundBrush()),
+            background_brush=self.get_background_brush(),
+            foreground_brush=self.get_foreground_brush(),
             item_index_method=self.get_item_index_method(),
             minimum_render_size=self.minimumRenderSize(),
-            palette=gui.Palette(self.palette()),
+            palette=self.get_palette(),
             bsp_tree_depth=self.bspTreeDepth(),
             focus_on_touch=self.focusOnTouch(),
             sticky_focus=self.stickyFocus(),
             scene_rect=core.RectF(self.sceneRect()),
-            font=gui.Font(self.font()),
+            font=self.get_font(),
         )
 
     def __setitem__(self, state):
@@ -54,6 +54,18 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
 
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
+
+    def get_palette(self) -> gui.Palette:
+        return gui.Palette(self.palette())
+
+    def get_font(self) -> gui.Font:
+        return gui.Font(self.font())
+
+    def get_background_brush(self) -> gui.Brush:
+        return gui.Brush(self.backgroundBrush())
+
+    def get_foreground_brush(self) -> gui.Brush:
+        return gui.Brush(self.foregroundBrush())
 
     def add(self, item) -> QtWidgets.QGraphicsItem:
         if isinstance(item, QtWidgets.QGraphicsItem):

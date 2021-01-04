@@ -17,8 +17,8 @@ class PdfWriter(QtGui.QPdfWriter):
     def set_page_margins(
         self,
         margins: Union[Tuple[float, float, float, float], QtCore.QMarginsF],
-        unit: Optional[str] = None,
-    ):
+        unit: Optional[gui.pagelayout.UnitStr] = None,
+    ) -> bool:
         if isinstance(margins, tuple):
             margins = QtCore.QMarginsF(*margins)
         if unit is None:
@@ -32,4 +32,4 @@ class PdfWriter(QtGui.QPdfWriter):
 if __name__ == "__main__":
     app = gui.app()
     writer = PdfWriter("")
-    writer.setup(QtCore.QSize(1, 1))
+    writer.set_desktop_resolution()
