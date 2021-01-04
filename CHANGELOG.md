@@ -1,3 +1,16 @@
+## v0.169.0 (2021-01-04)
+
+### Feat
+
+- **RegularExpressionMatch**: add get_match_type method
+- **CoreApplication**: allow more types for version metadata
+- **Windows**: add workaround for raising window
+- **network**: add LocalSocket class
+
+### Fix
+
+- **CoreApplication**: fix setting metadata
+
 ## v0.168.0 (2021-01-03)
 
 ### Feat
