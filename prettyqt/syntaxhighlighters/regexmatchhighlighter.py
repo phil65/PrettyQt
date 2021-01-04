@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 from prettyqt import gui
 
@@ -12,9 +12,9 @@ FORMAT_2.set_background_color("lightblue")
 class RegexMatchHighlighter(gui.SyntaxHighlighter):
     def __init__(self, document=None):
         super().__init__(document)
-        self.spans = []
+        self.spans: Optional[List[Tuple[int, int]]] = []
 
-    def set_spans(self, spans: List[Tuple[int, int]]):
+    def set_spans(self, spans: Optional[List[Tuple[int, int]]]):
         self.spans = spans
         # print(self.spans)
         self.rehighlight()

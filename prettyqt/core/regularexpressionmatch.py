@@ -29,7 +29,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         return self.isValid()
 
     def get_match_type(self) -> core.regularexpression.MatchTypeStr:
-        return core.regularexpression.MATCH_TYPE.inv[self.matchType()]
+        return core.regularexpression.MATCH_TYPE.inverse[self.matchType()]
 
     def group(self, *groups: Union[int, str]) -> Union[Tuple[str, ...], str]:
         if len(groups) > 1:
