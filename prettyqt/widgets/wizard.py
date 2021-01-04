@@ -101,12 +101,17 @@ QtWidgets.QWizard.__bases__ = (widgets.BaseDialog,)
 
 class Wizard(QtWidgets.QWizard):
     def __getitem__(self, key: int) -> QtWidgets.QWizardPage:
-        return self.page(key)
+        p = self.page(key)
+        if p is None:
+            raise KeyError(key)
+        return p
 
     def __setitem__(self, key: int, value: QtWidgets.QWizardPage):
         return self.setPage(key, value)
 
     def __delitem__(self, key: int):
+        if key not in self.pageIds():
+            raise KeyError(key)
         return self.removePage(key)
 
     def __iter__(self) -> Iterator[QtWidgets.QWizardPage]:

@@ -29,13 +29,17 @@ class BoxSet(QtCharts.QBoxSet):
         )
 
     def __getitem__(self, index: Union[int, ValuePositionStr]) -> float:
-        if index in VALUE_POSITION:
+        if isinstance(index, str):
             index = VALUE_POSITION[index]
+        elif not (0 <= index <= 4):
+            raise KeyError(index)
         return self.at(index)
 
     def __setitem__(self, index: Union[int, ValuePositionStr], value: int):
-        if index in VALUE_POSITION:
+        if isinstance(index, str):
             index = VALUE_POSITION[index]
+        elif not (0 <= index <= 4):
+            raise KeyError(index)
         self.setValue(index, value)
 
     def get_pen(self) -> gui.Pen:

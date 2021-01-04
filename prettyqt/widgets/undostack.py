@@ -13,7 +13,10 @@ class UndoStack(QtWidgets.QUndoStack):
         return self.count()
 
     def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
-        return self.command(index)
+        cmd = self.command(index)
+        if cmd is None:
+            return KeyError(index)
+        return cmd
 
     @contextlib.contextmanager
     def create_macro(self, text: str):

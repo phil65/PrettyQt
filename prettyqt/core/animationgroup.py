@@ -16,16 +16,21 @@ class AnimationGroup(QtCore.QAnimationGroup):
     def __getitem__(self, index: slice) -> List[QtCore.QAbstractAnimation]:
         ...
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: Union[int, slice]):
         if isinstance(index, int):
             if index < 0:
-                index = len(self) + index
-            return self.animationAt(index)
+                index = self.animationCount() + index
+            anim = self.animationAt(index)
+            if anim is None:
+                raise KeyError(index)
+            return anim
         else:
             anims = [self.animationAt(i) for i in range(len(self))]
             return anims[index]
 
     def __setitem__(self, index: int, value: QtCore.QAbstractAnimation):
+        if not (0 <= index < self.animationCount()):
+            raise KeyError(index)
         self.takeAnimation(index)
         self.insertAnimation(index, value)
 
@@ -33,6 +38,8 @@ class AnimationGroup(QtCore.QAnimationGroup):
         return self.animationCount()
 
     def __delitem__(self, index: int):
+        if not (0 <= index < self.animationCount()):
+            raise KeyError(index)
         self.takeAnimation(index)
 
     def __add__(self, other: QtCore.QAbstractAnimation):

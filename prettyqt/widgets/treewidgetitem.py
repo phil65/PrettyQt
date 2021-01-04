@@ -51,7 +51,10 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         return self.childCount()
 
     def __getitem__(self, index: int) -> QtWidgets.QTreeWidgetItem:
-        return self.child(index)
+        item = self.child(index)
+        if item is None:
+            raise KeyError(index)
+        return item
 
     def __delitem__(self, index: int):
         self.takeChild(index)

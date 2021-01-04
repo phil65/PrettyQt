@@ -20,7 +20,10 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         return f"{type(self).__name__}()"
 
     def __getitem__(self, item: Union[int, str]) -> str:
-        return self.captured(item)
+        captured = self.captured(item)
+        if not captured:
+            raise KeyError(item)
+        return captured
 
     def __bool__(self):
         return self.isValid()

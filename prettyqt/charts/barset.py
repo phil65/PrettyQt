@@ -7,12 +7,18 @@ QtCharts.QBarSet.__bases__ = (core.Object,)
 
 class BarSet(QtCharts.QBarSet):
     def __delitem__(self, index: int):
+        if not (0 <= index < self.count()):
+            raise KeyError(index)
         self.remove(index)
 
-    def __getitem__(self, label: int) -> float:
-        return self.at(label)
+    def __getitem__(self, index: int) -> float:
+        if not (0 <= index < self.count()):
+            raise KeyError(index)
+        return self.at(index)
 
     def __setitem__(self, index: int, value: float):
+        if not (0 <= index < self.count()):
+            raise KeyError(index)
         self.replace(index, value)
 
     def __repr__(self):
