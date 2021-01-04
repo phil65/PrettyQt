@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Union
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
@@ -106,6 +106,11 @@ class TextStream(QtCore.QTextStream):
             current real number notation
         """
         return REAL_NUMBER_NOTATION.inverse[self.realNumberNotation()]
+
+    def set_codec(self, codec: Union[bytes, str]):
+        if isinstance(codec, str):
+            codec = codec.encode()
+        self.setCodec(codec)
 
 
 if __name__ == "__main__":
