@@ -22318,8 +22318,8 @@ detach_tab<span class="p">(</span><span class="bp">self</span><span class="p">,<
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
         <span class="n">point</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">(</span><span class="o">*</span><span class="n">point</span><span class="p">)</span>
     <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabText</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-    <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tabIcon</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isNull</span><span class="p">():</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tab_icon</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">icon</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">window</span><span class="p">()</span><span class="o">.</span><span class="n">windowIcon</span><span class="p">()</span>
     <span class="n">widget</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">widget</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
