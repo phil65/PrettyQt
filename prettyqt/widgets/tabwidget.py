@@ -153,8 +153,11 @@ class TabWidget(QtWidgets.QTabWidget):
             for i in range(self.count())
         ]
 
-    def tab_icon(self, i: int) -> gui.Icon:
-        return gui.Icon(self.tabIcon(i))
+    def tab_icon(self, i: int) -> Optional[gui.Icon]:
+        icon = self.tabIcon(i)
+        if icon.isNull():
+            return None
+        return gui.Icon(icon)
 
     def set_detachable(self):
         self.tab_bar.on_detach.connect(self.detach_tab)
@@ -179,8 +182,8 @@ class TabWidget(QtWidgets.QTabWidget):
         if isinstance(point, tuple):
             point = QtCore.QPoint(*point)
         name = self.tabText(index)
-        icon = self.tabIcon(index)
-        if icon.isNull():
+        icon = self.tab_icon(index)
+        if icon is None:
             icon = self.window().windowIcon()
         widget = self.widget(index)
 

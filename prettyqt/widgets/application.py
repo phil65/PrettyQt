@@ -42,7 +42,6 @@ class Application(QtWidgets.QApplication):
             start_drag_time=self.startDragTime(),
             style_sheet=self.styleSheet(),
             wheel_scroll_lines=self.wheelScrollLines(),
-            icon=gui.Icon(self.windowIcon()),
         )
 
     def store_widget_states(

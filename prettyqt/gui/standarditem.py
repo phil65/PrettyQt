@@ -16,7 +16,7 @@ class StandardItem(QtGui.QStandardItem):
             text=self.text(),
             tool_tip=self.toolTip(),
             status_tip=self.statusTip(),
-            icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
+            icon=self.get_icon(),
             data=self.data(),
         )
 
@@ -115,8 +115,11 @@ class StandardItem(QtGui.QStandardItem):
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())
 
-    def get_icon(self) -> gui.Icon:
-        return gui.Icon(self.icon())
+    def get_icon(self) -> Optional[gui.Icon]:
+        icon = self.icon()
+        if icon.isNull():
+            return None
+        return gui.Icon(icon)
 
     def add_item(
         self,

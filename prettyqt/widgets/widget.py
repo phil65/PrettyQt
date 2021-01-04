@@ -50,7 +50,6 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         return type(self), (), self.__getstate__()
 
     def serialize_fields(self) -> Dict[str, Any]:
-        icon = gui.Icon(self.windowIcon())
         return dict(
             layout=self.layout() if isinstance(self.layout(), widgets.Layout) else None,
             size_policy=self.get_size_policy(),
@@ -63,7 +62,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             enabled=self.isEnabled(),
             visible=self.isVisible(),
             stylesheet=self.styleSheet(),
-            icon=icon if not icon.isNull() else None,
+            icon=self.get_icon(),
             modality=self.get_modality(),
             whats_this=self.whatsThis(),
             contextmenu_policy=self.get_contextmenu_policy(),
@@ -102,6 +101,12 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         """
         icon = iconprovider.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
+
+    def get_icon(self) -> Optional[gui.Icon]:
+        icon = self.windowIcon()
+        if icon.isNull():
+            return None
+        return gui.Icon(self.windowIcon())
 
     def set_min_size(self, *size) -> None:
         self.setMinimumSize(*size)

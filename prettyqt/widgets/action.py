@@ -78,7 +78,7 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
             tool_tip=self.toolTip(),
             checkable=self.isCheckable(),
             checked=self.isChecked(),
-            icon=gui.Icon(self.icon()) if not self.icon().isNull() else None,
+            icon=self.get_icon(),
             icon_text=self.iconText(),
             priority=self.get_priority(),
             icon_visible_in_menu=self.isIconVisibleInMenu(),
@@ -147,6 +147,12 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         """
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
+
+    def get_icon(self) -> Optional[gui.Icon]:
+        icon = self.icon()
+        if icon.isNull():
+            return None
+        return gui.Icon(icon)
 
     def set_shortcut(self, shortcut: Union[None, QtGui.QKeySequence, str]):
         if shortcut is None:

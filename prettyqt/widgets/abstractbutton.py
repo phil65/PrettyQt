@@ -1,4 +1,4 @@
-from typing import Tuple, Union
+from typing import Optional, Tuple, Union
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -12,7 +12,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def serialize_fields(self):
         return dict(
             text=self.text(),
-            icon=self.get_icon() if not self.icon().isNull() else None,
+            icon=self.get_icon(),
             checkable=self.isCheckable(),
             checked=self.isChecked(),
             auto_exclusive=self.autoExclusive(),
@@ -53,8 +53,11 @@ class AbstractButton(QtWidgets.QAbstractButton):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def get_icon(self) -> gui.Icon:
-        return gui.Icon(self.icon())
+    def get_icon(self) -> Optional[gui.Icon]:
+        icon = self.icon()
+        if icon.isNull():
+            return None
+        return gui.Icon(icon)
 
     def set_style_icon(self, icon: widgets.style.StandardPixmapStr, size: int = 15):
         """Set theme icon for the button.

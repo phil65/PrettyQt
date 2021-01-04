@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, Literal
+from typing import Iterator, Literal, Optional
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
@@ -86,8 +86,11 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
     def get_font(self, column: int = 0) -> gui.Font:
         return gui.Font(self.font(column))
 
-    def get_icon(self, column: int = 0) -> gui.Icon:
-        return gui.Icon(self.icon(column))
+    def get_icon(self, column: int = 0) -> Optional[gui.Icon]:
+        icon = self.icon(column)
+        if icon is None:
+            return None
+        return gui.Icon(icon)
 
     def set_checkstate(self, state: constants.StateStr, column: int = 0):
         """Set checkstate of the checkbox.

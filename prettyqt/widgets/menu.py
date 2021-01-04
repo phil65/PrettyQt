@@ -58,8 +58,11 @@ class Menu(QtWidgets.QMenu):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def get_icon(self) -> gui.Icon:
-        return gui.Icon(self.icon())
+    def get_icon(self) -> Optional[gui.Icon]:
+        icon = self.icon()
+        if icon.isNull():
+            return None
+        return gui.Icon(icon)
 
     def add_separator(self, text: Optional[str] = None) -> widgets.WidgetAction:
         """Adds a separator showing an optional label.

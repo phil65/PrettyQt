@@ -1,4 +1,4 @@
-from typing import Any, Iterable, Literal, Mapping, Tuple, Union
+from typing import Any, Iterable, Literal, Mapping, Optional, Tuple, Union
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -122,8 +122,11 @@ class ComboBox(QtWidgets.QComboBox):
         else:
             self.addItem(label, userData=data)
 
-    def item_icon(self, index: int) -> gui.Icon:
-        return gui.Icon(self.itemIcon(index))
+    def item_icon(self, index: int) -> Optional[gui.Icon]:
+        icon = self.itemIcon(index)
+        if icon.isNull():
+            return None
+        return gui.Icon(icon)
 
     def set_insert_policy(self, policy: InsertPolicyStr):
         """Set insert policy.

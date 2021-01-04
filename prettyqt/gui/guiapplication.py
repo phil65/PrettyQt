@@ -1,5 +1,5 @@
 import contextlib
-from typing import List, Tuple, Union
+from typing import List, Optional, Tuple, Union
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
@@ -10,6 +10,9 @@ QtGui.QGuiApplication.__bases__ = (core.CoreApplication,)
 
 
 class GuiApplication(QtGui.QGuiApplication):
+    def serialize_fields(self):
+        return dict(icon=self.get_icon())
+
     @classmethod
     @contextlib.contextmanager
     def override_cursor(cls, cursor: constants.CursorShapeStr):
@@ -132,7 +135,10 @@ class GuiApplication(QtGui.QGuiApplication):
         icon = iconprovider.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
-    def get_icon(self) -> gui.Icon:
+    def get_icon(self) -> Optional[gui.Icon]:
+        icon = self.windowIcon()
+        if icon.isNull():
+            return None
         return gui.Icon(self.windowIcon())
 
     @classmethod
