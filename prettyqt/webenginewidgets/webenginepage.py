@@ -206,8 +206,11 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
             zoom_factor=self.zoomFactor(),
         )
 
-    def get_icon(self) -> gui.Icon:
-        return gui.Icon(self.icon())
+    def get_icon(self) -> Optional[gui.Icon]:
+        icon = self.icon()
+        if icon.isNull():
+            return None
+        return gui.Icon(icon)
 
     def set_url(self, url: Union[str, os.PathLike]):
         """Set the url of the WebEnginePage.

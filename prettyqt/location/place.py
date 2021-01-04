@@ -34,8 +34,11 @@ class Place(QtLocation.QPlace):
             raise InvalidParamError(typ, location.placecontent.TYPE)
         return self.content(location.placecontent.TYPE[typ])
 
-    def get_icon(self) -> location.PlaceIcon:
-        return location.PlaceIcon(self.icon())
+    def get_icon(self) -> Optional[location.PlaceIcon]:
+        icon = self.icon()
+        if icon.isEmpty():
+            return None
+        return location.PlaceIcon(icon)
 
     def get_location(self) -> positioning.GeoLocation:
         return positioning.GeoLocation(self.location())

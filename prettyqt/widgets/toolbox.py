@@ -26,7 +26,7 @@ class ToolBox(QtWidgets.QToolBox):
         for i, widget in enumerate(self.get_children()):
             dct = dict(
                 widget=widget,
-                icon=gui.Icon(self.itemIcon(i)),
+                icon=self.item_icon(i),
                 text=self.itemText(i),
                 enabled=self.isItemEnabled(i),
                 tool_tip=self.itemToolTip(i),
@@ -63,6 +63,12 @@ class ToolBox(QtWidgets.QToolBox):
             self.addItem(widget, icon, title)
         else:
             self.addItem(widget, title)
+
+    def item_icon(self, index: int) -> Optional[gui.Icon]:
+        icon = self.itemIcon(index)
+        if icon.isNull():
+            return None
+        return gui.Icon(icon)
 
 
 if __name__ == "__main__":

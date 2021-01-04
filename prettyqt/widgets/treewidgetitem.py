@@ -21,13 +21,12 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         return f"{type(self).__name__}()"
 
     def serialize_fields(self):
-        icon = self.icon(0)
         return dict(
             text=[self.text(i) for i in range(self.columnCount())],
             tool_tip=[self.toolTip(i) for i in range(self.columnCount())],
             status_tip=[self.statusTip(i) for i in range(self.columnCount())],
             checkstate=[self.get_checkstate(i) for i in range(self.columnCount())],
-            icon=gui.Icon(icon) if not icon.isNull() else None,
+            icon=[self.get_icon(i) for i in range(self.columnCount())],
             data=[self.data(i, QtCore.Qt.UserRole) for i in range(self.columnCount())],
         )
 
@@ -88,7 +87,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
 
     def get_icon(self, column: int = 0) -> Optional[gui.Icon]:
         icon = self.icon(column)
-        if icon is None:
+        if icon.isNull():
             return None
         return gui.Icon(icon)
 

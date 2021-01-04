@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 
 from prettyqt import location
 from prettyqt.qt import QtLocation
@@ -15,8 +15,11 @@ TypeStr = Literal["unknown", "place", "proposed_search"]
 
 
 class PlaceSearchResult(QtLocation.QPlaceSearchResult):
-    def get_icon(self) -> location.PlaceIcon:
-        return location.PlaceIcon(self.icon())
+    def get_icon(self) -> Optional[location.PlaceIcon]:
+        icon = self.icon()
+        if icon.isEmpty():
+            return None
+        return location.PlaceIcon(icon)
 
     def get_type(self) -> TypeStr:
         """Return result type.
