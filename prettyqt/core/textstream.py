@@ -1,4 +1,4 @@
-from typing import Literal, Union
+from typing import Iterator, Literal, Union
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
@@ -111,6 +111,13 @@ class TextStream(QtCore.QTextStream):
         if isinstance(codec, str):
             codec = codec.encode()
         self.setCodec(codec)
+
+    def read_lines(self) -> Iterator[str]:
+        while True:
+            msg = self.readLine()
+            if not msg:
+                return
+            yield msg
 
 
 if __name__ == "__main__":
