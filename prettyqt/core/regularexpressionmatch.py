@@ -1,6 +1,12 @@
-from typing import Any, Dict, Optional, Tuple, Union
+from __future__ import annotations
+
+from typing import TYPE_CHECKING, Any, Dict, Optional, Tuple, Union
 
 from prettyqt.qt import QtCore
+
+
+if TYPE_CHECKING:
+    from prettyqt import core
 
 
 class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
@@ -18,6 +24,9 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
 
     def __bool__(self):
         return self.isValid()
+
+    def get_match_type(self) -> core.regularexpression.MatchTypeStr:
+        return core.regularexpression.MATCH_TYPE.inv[self.matchType()]
 
     def group(self, *groups: Union[int, str]) -> Union[Tuple[str, ...], str]:
         if len(groups) > 1:
