@@ -31,3 +31,7 @@ class VariantAnimation(QtCore.QVariantAnimation):
             return curve.get_custom_type()
         else:
             return typ
+
+    def set_range(self, start, end):
+        self.setStartValue(start)
+        self.setEndValue(end)
