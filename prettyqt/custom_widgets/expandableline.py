@@ -72,11 +72,9 @@ class ExpandableLine(widgets.Widget):
         content_height = self.content_area.box.sizeHint().height() + 300
         for expand_anim in self.toggle_anim[:-1]:
             # expand_anim.setDuration(self._animation_duration)
-            expand_anim.setStartValue(collapsed_height)
-            expand_anim.setEndValue(collapsed_height + content_height)
+            expand_anim.set_range(collapsed_height, collapsed_height + content_height)
         content_anim = self.toggle_anim[-1]
-        content_anim.setStartValue(1)
-        content_anim.setEndValue(content_height)
+        content_anim.set_range(1, content_height)
 
 
 if __name__ == "__main__":
