@@ -58,14 +58,15 @@ class CoreApplication(QtCore.QCoreApplication):
         if app_name is not None:
             self.setApplicationName(app_name)
         if app_version is not None:
-            self.setApplicationVersion(app_name)  # type: ignore
+            self.setApplicationVersion(app_version)
         if org_name is not None:
             self.setOrganizationName(org_name)
         if org_domain is not None:
             self.setOrganizationDomain(org_domain)
-        # import ctypes
-        # myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
-        # ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
+        # if sys.platform.startswith("win"):
+        #     import ctypes
+        #     myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
+        #     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     @classmethod
     def load_language_file(cls, file: Union[pathlib.Path, str]) -> core.Translator:
