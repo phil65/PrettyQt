@@ -2,7 +2,7 @@ import logging
 import os
 import pathlib
 import sys
-from typing import Callable, Dict, List, Optional, Union
+from typing import Callable, Dict, List, Optional, Tuple, Union
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
@@ -51,13 +51,17 @@ class CoreApplication(QtCore.QCoreApplication):
     def set_metadata(
         self,
         app_name: Optional[str] = None,
-        app_version: Optional[str] = None,
+        app_version: Union[None, str, QtCore.QVersionNumber, Tuple[int, int, int]] = None,
         org_name: Optional[str] = None,
         org_domain: Optional[str] = None,
     ):
         if app_name is not None:
             self.setApplicationName(app_name)
         if app_version is not None:
+            if isinstance(app_version, QtCore.QVersionNumber):
+                app_version = app_version.toString()
+            elif isinstance(app_version, tuple):
+                app_version = ".".join(str(i) for i in app_version)
             self.setApplicationVersion(app_version)
         if org_name is not None:
             self.setOrganizationName(org_name)
