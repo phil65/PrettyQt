@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import core, location
 from prettyqt.qt import QtLocation
 

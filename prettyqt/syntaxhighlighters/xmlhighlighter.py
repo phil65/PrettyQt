@@ -1,5 +1,7 @@
 """Based on http://www.yasinuludag.com/blog/?p=49 ."""
 
+from __future__ import annotations
+
 from prettyqt import core, gui, syntaxhighlighters
 
 

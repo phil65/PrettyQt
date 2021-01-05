@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Literal
 
 from prettyqt import constants, core, widgets
@@ -89,8 +91,6 @@ class Scroller:
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-
     app = widgets.app()
     w = QtWidgets.QPlainTextEdit()
     scroller = Scroller.get_scroller(w)

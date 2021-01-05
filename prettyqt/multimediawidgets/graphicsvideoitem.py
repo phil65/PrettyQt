@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import constants, core, multimedia, widgets
 from prettyqt.qt import QtMultimediaWidgets
 from prettyqt.utils import InvalidParamError

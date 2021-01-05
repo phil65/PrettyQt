@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import constants
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError

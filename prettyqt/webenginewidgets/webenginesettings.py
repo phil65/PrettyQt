@@ -1,4 +1,6 @@
 # from prettyqt.qt import QtWebEngineWidgets
+from __future__ import annotations
+
 from typing import Literal
 
 from prettyqt import core

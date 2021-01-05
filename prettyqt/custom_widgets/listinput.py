@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import List, Optional, Type, Union
 
 from prettyqt import custom_validators, widgets

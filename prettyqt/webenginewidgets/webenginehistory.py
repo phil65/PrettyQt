@@ -1,5 +1,7 @@
 # from prettyqt.qt import QtWebEngineWidgets
 
+from __future__ import annotations
+
 from typing import Iterator, List
 
 from prettyqt import webenginewidgets

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from queue import Empty, Queue
 from typing import Callable, Literal, Optional
 

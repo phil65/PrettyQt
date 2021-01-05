@@ -2,12 +2,14 @@
 
 # from prettyqt.utils import bidict, InvalidParamError
 
+from __future__ import annotations
+
+
 # VERBOSITY_LEVEL = bidict(
 #     minimum=QtCore.QDebug.MinimumVerbosity,
 #     default=QtCore.QDebug.DefaultVerbosity,
 #     maximum=QtCore.QDebug.MaximumVerbosity,
 # )
-
 
 # class Debug(QtCore.QDebug):
 #     def set_verbosity(self, verbosity: str):

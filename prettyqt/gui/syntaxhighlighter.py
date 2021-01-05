@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Iterator, Optional, Pattern, Tuple
 
 from prettyqt import core, gui

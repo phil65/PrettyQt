@@ -5,9 +5,6 @@ See: https://github.com/PySide/Examples/blob/master/examples/itemviews/simpletre
      /simpletreemodel.py
 """
 
-# TODO: a lot of methods (e.g. rowCount) test if parent.column() > 0. This should probably
-# be replaced with an assert.
-
 from __future__ import annotations
 
 from collections import OrderedDict
@@ -19,6 +16,10 @@ from typing import Any, List, Optional
 from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtCore
 from prettyqt.utils import helpers, treeitem
+
+
+# TODO: a lot of methods (e.g. rowCount) test if parent.column() > 0. This should probably
+# be replaced with an assert.
 
 
 logger = logging.getLogger(__name__)

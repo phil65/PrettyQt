@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import charts, core
 from prettyqt.qt import QtCore
 from prettyqt.qt.QtCharts import QtCharts

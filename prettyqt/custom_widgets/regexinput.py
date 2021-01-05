@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Optional, Pattern, Union
 
 import regex as re

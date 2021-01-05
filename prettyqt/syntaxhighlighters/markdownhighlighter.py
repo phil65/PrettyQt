@@ -1,5 +1,7 @@
 """Syntax highlighter for Markdown markup language."""
 
+from __future__ import annotations
+
 from prettyqt import core, gui, syntaxhighlighters
 
 

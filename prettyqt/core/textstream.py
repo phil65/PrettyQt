@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Iterator, Literal, Union
 
 from prettyqt.qt import QtCore

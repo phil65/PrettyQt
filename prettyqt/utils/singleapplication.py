@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import sys
 
 from prettyqt import core, network, widgets

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import os
 from typing import List, Literal, Optional, Tuple, Union
 
@@ -119,8 +121,6 @@ class IconEngine(QtGui.QIconEngine):
 
 
 if __name__ == "__main__":
-    from prettyqt import gui
-
     app = gui.app()
     engine = IconEngine()
     print(repr(engine))

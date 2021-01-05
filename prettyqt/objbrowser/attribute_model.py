@@ -1,5 +1,7 @@
 """Module that defines AttributeModel."""
 
+from __future__ import annotations
+
 import inspect
 import logging
 import pprint

@@ -2,6 +2,8 @@
 # credits to Empyrical
 # https://gist.github.com/empyrical/a103c46f454a433e8798#file-decorator-py
 
+from __future__ import annotations
+
 import inspect
 import logging
 from typing import Callable, Optional, Tuple, get_type_hints

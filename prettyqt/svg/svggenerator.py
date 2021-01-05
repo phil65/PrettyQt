@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import core, gui
 from prettyqt.qt import QtSvg
 

@@ -1,6 +1,8 @@
 # based on https://stackoverflow.com/questions/58891116/delegate-with-radio-buttons
 # credits to musicamante
 
+from __future__ import annotations
+
 from typing import List, Optional
 
 from prettyqt import core, gui, widgets

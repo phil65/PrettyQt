@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import sre_constants
 from typing import Tuple
 

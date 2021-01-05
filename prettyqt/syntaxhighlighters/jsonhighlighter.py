@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import regex as re
 
 from prettyqt import gui

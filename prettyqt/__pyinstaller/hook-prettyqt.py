@@ -3,6 +3,8 @@
 # See the `PyInstaller manual <https://pyinstaller.readthedocs.io/>`_
 # for more information.
 #
+from __future__ import annotations
+
 from PyInstaller.utils.hooks import collect_data_files
 
 

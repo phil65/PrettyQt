@@ -1,5 +1,7 @@
 """Module containing helper functions."""
 
+from __future__ import annotations
+
 import collections
 import logging
 import sys

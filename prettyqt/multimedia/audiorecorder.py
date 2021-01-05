@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import multimedia
 from prettyqt.qt import QtMultimedia
 

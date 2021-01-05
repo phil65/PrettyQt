@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import functools
 import hashlib
 from typing import Iterable, List, Literal, Optional, Union

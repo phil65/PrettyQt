@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import core, custom_animations, widgets
 from prettyqt.qt import QtCore, QtWidgets
 

@@ -41,6 +41,8 @@
 #
 # $QT_END_LICENSE$
 
+from __future__ import annotations
+
 from typing import Any, List, NamedTuple, Tuple
 
 from prettyqt.qt import QtCore, QtGui, QtTest
