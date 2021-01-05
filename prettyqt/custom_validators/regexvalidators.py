@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple
+from typing import Optional, Pattern, Tuple, Union
 
 import regex as re
 
@@ -8,12 +8,15 @@ from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
 
 
+PatternType = Union[str, Pattern]
+
+
 class BaseRegexValidator(gui.Validator):
     def __init__(
-        self, parent: Optional[QtCore.QObject] = None, regex: Optional[str] = None
+        self, parent: Optional[QtCore.QObject] = None, regex: Optional[PatternType] = None
     ):
         super().__init__(parent)
-        self.regex = None
+        self.regex: Optional[Pattern] = None
         if regex:
             self.set_regex(regex)
 
@@ -28,8 +31,11 @@ class BaseRegexValidator(gui.Validator):
             return False
         return self.regex == other.regex
 
-    def set_regex(self, regex: str):
-        self.regex = re.compile(regex)
+    def set_regex(self, regex: PatternType):
+        if isinstance(regex, str):
+            self.regex = re.compile(regex)
+        else:
+            self.regex = regex
 
     def get_regex(self) -> str:
         if self.regex is None:
@@ -43,10 +49,10 @@ class BaseRegexValidator(gui.Validator):
             raise TypeError("Validator not initialized")
         if text == "":
             return self.Intermediate, text, pos
-        match = self.regex.match(text, partial=True)
+        match = self.regex.match(text, partial=True)  # type: ignore
         if match is None:
             return self.Invalid, text, pos
-        if match.partial:
+        if match.partial:  # type: ignore
             return self.Intermediate, text, pos
         else:
             return self.Acceptable, text, pos
