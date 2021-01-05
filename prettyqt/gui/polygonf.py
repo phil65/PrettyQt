@@ -24,7 +24,9 @@ class PolygonF(QtGui.QPolygonF):
     def __contains__(self, point: QtCore.QPointF) -> bool:
         return self.containsPoint(point, QtCore.Qt.OddEvenFill)
 
-    def __getitem__(self, index: int) -> core.Point:
+    def __getitem__(self, index: int) -> core.PointF:
+        if index >= self.size():
+            raise KeyError(index)
         return self.get_point(index)
 
     # def __setitem__(self, index: int, value: Union[QtCore.QPoint, Tuple[int, int]]):
