@@ -4,6 +4,7 @@
 
 import inspect
 import logging
+from typing import Callable, Optional, Tuple, get_type_hints
 
 from prettyqt import core
 
@@ -20,10 +21,12 @@ class _OverloadedSlotPlaceholder:
         return f"<placeholder slot {self.name} for function {self.original_name}>"
 
 
-def _build_arguments(func, original_func=None):
+def _build_arguments(
+    func: Callable, original_func: Optional[Callable] = None
+) -> Tuple[list, dict]:
     argspec = inspect.getfullargspec(func)
     args = argspec.args
-    annotations = argspec.annotations
+    annotations = get_type_hints(func)
 
     slot_args = []
     slot_kwargs = {}
@@ -55,7 +58,7 @@ def _build_arguments(func, original_func=None):
     return slot_args, slot_kwargs
 
 
-def AutoSlot(func):
+def AutoSlot(func: Callable):
     """A special slot decorator using function annotations to provide the argument types.
 
     It's just syntactic sugar for the slot decorators that already come with the
@@ -106,6 +109,6 @@ def AutoSlot(func):
         else:
             return func
 
-    func.overload = overload
+    func.overload = overload  # type: ignore
 
     return func
