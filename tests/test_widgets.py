@@ -1564,7 +1564,7 @@ def test_widgetaction(qtbot):
 def test_wizard(qtbot):
     w = widgets.Wizard()
     w.add_widget_as_page(widgets.Widget())
-    pix = gui.Pixmap()
+    pix = gui.Pixmap(100, 100)
     w.set_pixmap("background", pix)
     with pytest.raises(InvalidParamError):
         w.set_pixmap("test", pix)
@@ -1602,7 +1602,7 @@ def test_wizard(qtbot):
 
 def test_wizardpage(qtbot):
     page = widgets.WizardPage()
-    pix = gui.Pixmap()
+    pix = gui.Pixmap(100, 100)
     page.set_pixmap("background", pix)
     with pytest.raises(InvalidParamError):
         page.set_pixmap("test", pix)

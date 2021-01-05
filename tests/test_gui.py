@@ -35,8 +35,8 @@ def test_brush():
 def test_clipboard(qapp):
     cb = qapp.get_clipboard()
     mimedata = QtCore.QMimeData()
-    image = gui.Image()
-    pixmap = gui.Pixmap()
+    pixmap = gui.Pixmap(100, 100)
+    image = pixmap.toImage()
     cb.set_mimedata(mimedata)
     cb.set_image(image)
     cb.set_pixmap(pixmap)
