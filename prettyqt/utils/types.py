@@ -1,7 +1,7 @@
 import pathlib
 from typing import Dict, List, Union
 
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
@@ -49,6 +49,7 @@ VariantType = Union[
     QtGui.QPolygon,
     QtGui.QPolygonF,
     QtGui.QRegion,
+    QtWidgets.QSizePolicy,
     QtGui.QTextFormat,
     QtGui.QTextLength,
     QtGui.QVector2D,

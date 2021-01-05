@@ -48,7 +48,7 @@ class Layout(QtWidgets.QLayout):
     def __iter__(self):
         return iter(self[i] for i in range(self.count()))
 
-    def __contains__(self, item: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
+    def __contains__(self, item: Union[QtWidgets.QWidget, QtWidgets.QLayoutItem]):
         return self.indexOf(item) >= 0
 
     def serialize_fields(self):
