@@ -7486,7 +7486,7 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['source_over', 'destination_over', 'clear', 'source', 'destination', 'source_in', 'destination_in', 'source_out', 'destination_out', 'source_atop', 'destination_atop']</code></td>
+<td><code>CompositionModeStr</code></td>
 <td>
 <p>composition mode</p>
 </td>
@@ -7528,7 +7528,7 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 </thead>
 <tbody>
 <tr>
-<td><code>Pen</code></td>
+<td><code>gui.Pen</code></td>
 <td>
 <p>current pen</p>
 </td>
@@ -7617,7 +7617,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'solid', 'dash', 'dot', 'dash_dot', 'dash_dot_dot', 'custom_dash']</code></td>
+<td><code>constants.PenStyleStr</code></td>
 <td>
 <p>pen style to use</p>
 </td>
@@ -7633,7 +7633,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </tr>
 <tr>
 <td><code>color</code></td>
-<td><code>Union[str, int, PyQt5.QtCore.Qt.GlobalColor, PyQt5.QtGui.QColor, tuple]</code></td>
+<td><code>types.ColorType</code></td>
 <td>
 <p>pen color</p>
 </td>
@@ -7641,7 +7641,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </tr>
 <tr>
 <td><code>join_style</code></td>
-<td><code>Literal['miter', 'bevel', 'roundsvg_miter']</code></td>
+<td><code>constants.JoinStyleStr</code></td>
 <td>
 <p>pen join style to use</p>
 </td>
@@ -7649,7 +7649,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 </tr>
 <tr>
 <td><code>cap_style</code></td>
-<td><code>Literal['flat', 'square', 'round']</code></td>
+<td><code>constants.CapStyleStr</code></td>
 <td>
 <p>pen cap style to use</p>
 </td>
@@ -7667,7 +7667,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
     <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">"black"</span><span class="p">,</span>
     <span class="n">join_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span> <span class="o">=</span> <span class="s2">"bevel"</span><span class="p">,</span>
     <span class="n">cap_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span> <span class="o">=</span> <span class="s2">"square"</span><span class="p">,</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span><span class="p">:</span>
     <span class="sd">"""Set pen to use.</span>
 
 <span class="sd">    Args:</span>
@@ -7684,6 +7684,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
     <span class="n">pen</span><span class="o">.</span><span class="n">setWidthF</span><span class="p">(</span><span class="n">width</span><span class="p">)</span>
     <span class="n">pen</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pen</span>
 </code></pre>
 </div>
 </details>
