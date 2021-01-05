@@ -1,5 +1,7 @@
 """This module contains the editor widget implementation."""
 
+from __future__ import annotations
+
 import sre_constants
 from typing import List, Match, Optional, Pattern
 

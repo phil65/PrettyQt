@@ -2,6 +2,7 @@
 
 Contains QtGui-based classes
 """
+from __future__ import annotations
 
 from prettyqt.qt.QtGui import (
     QKeyEvent as KeyEvent,

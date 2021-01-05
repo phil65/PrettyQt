@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import gui, iconprovider
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, types

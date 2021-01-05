@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, colors, types

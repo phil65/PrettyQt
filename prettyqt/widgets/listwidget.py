@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Any, Iterable, Iterator, List, Mapping, Optional, Union
 
 from prettyqt import constants, core, iconprovider, widgets
