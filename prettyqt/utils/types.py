@@ -1,8 +1,10 @@
 import pathlib
-from typing import Dict, List, Union
+from typing import Any, Dict, List, Union
 
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
+
+JSONType = Union[str, int, float, bool, None, Dict[str, Any], List[Any]]
 
 IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
 
@@ -60,6 +62,7 @@ VariantType = Union[
     int,
     float,
     bytes,
+    None,
 ]
 
 Variant = Union[VariantType, List[VariantType], Dict[str, VariantType]]
