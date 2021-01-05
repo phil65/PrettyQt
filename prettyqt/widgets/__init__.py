@@ -201,6 +201,9 @@ from .pangesture import PanGesture
 from .pinchgesture import PinchGesture
 from .swipegesture import SwipeGesture
 
+from .itemeditorfactory import ItemEditorFactory
+from .itemeditorcreatorbase import ItemEditorCreatorBase
+
 
 def app():
     if Application.instance() is not None:
@@ -393,4 +396,6 @@ __all__ = [
     "PanGesture",
     "PinchGesture",
     "SwipeGesture",
+    "ItemEditorFactory",
+    "ItemEditorCreatorBase",
 ]
