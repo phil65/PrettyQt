@@ -93,8 +93,8 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
     def __iter__(self) -> Iterator[QtWidgets.QAbstractButton]:
         return iter(self.buttons())
 
-    def __contains__(self, item: ButtonStr):
-        return self[item] is not None
+    def __contains__(self, index: ButtonStr):
+        return self.button(BUTTONS[index]) is not None
 
     @classmethod
     def create(cls, **kwargs):

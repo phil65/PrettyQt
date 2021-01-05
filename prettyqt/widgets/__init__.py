@@ -201,8 +201,8 @@ from .pangesture import PanGesture
 from .pinchgesture import PinchGesture
 from .swipegesture import SwipeGesture
 
-from .itemeditorfactory import ItemEditorFactory
 from .itemeditorcreatorbase import ItemEditorCreatorBase
+from .itemeditorfactory import ItemEditorFactory
 
 
 def app():
