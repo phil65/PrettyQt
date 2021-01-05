@@ -200,7 +200,7 @@ class Settings(QtCore.QSettings):
         key = self.keys()[0]
         return (key, self.get_value(key))
 
-    def update(self, other: Mapping):
+    def update(self, other: Mapping[str, Any]):
         for k, v in other.items():
             self.set_value(k, v)
 
