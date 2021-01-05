@@ -27,7 +27,10 @@ class ListWidget(QtWidgets.QListWidget):
         return f"{type(self).__name__}: {self.count()} items"
 
     def __getitem__(self, row: int) -> QtWidgets.QListWidgetItem:
-        return self.item(row)
+        item = self.item(row)
+        if item is None:
+            raise KeyError(row)
+        return item
 
     def __delitem__(self, row: int):
         self.takeItem(row)

@@ -9,7 +9,10 @@ QtWidgets.QTableWidget.__bases__ = (widgets.TableView,)
 
 class TableWidget(QtWidgets.QTableWidget):
     def __getitem__(self, index: Tuple[int, int]) -> QtWidgets.QTableWidgetItem:
-        return self.item(*index)
+        item = self.item(*index)
+        if item is None:
+            raise KeyError(index)
+        return item
 
     def __setitem__(self, index: Tuple[int, int], value: QtWidgets.QTableWidgetItem):
         self.setItem(index[0], index[1], value)
