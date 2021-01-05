@@ -513,6 +513,13 @@ CONTEXT: bidict[ContextStr, QtCore.Qt.ShortcutContext] = bidict(
     application=QtCore.Qt.ApplicationShortcut,
 )
 
+TileRuleStr = Literal["stretch", "repeat", "round"]
+TILE_RULE: bidict[TileRuleStr, QtCore.Qt.TileRule] = bidict(
+    stretch=QtCore.Qt.StretchTile,
+    repeat=QtCore.Qt.RepeatTile,
+    round=QtCore.Qt.RoundTile,
+)
+
 GestureTypeStr = Literal["tap", "tap_and_hold", "pan", "pinch", "swipe", "custom"]
 GESTURE_TYPE: bidict[GestureTypeStr, QtCore.Qt.GestureType] = bidict(
     tap=QtCore.Qt.TapGesture,
