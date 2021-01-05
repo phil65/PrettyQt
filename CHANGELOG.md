@@ -1,3 +1,21 @@
+## v0.170.0 (2021-01-05)
+
+### Feat
+
+- **Validators**: also allow Pattern for set_regex
+- add tile rule constant
+- add SingleApplication class
+- **custom_widgets**: add Notification class
+- **TreeWidget**: add __contains__ method
+- **HelpContentWidget**: add index_of method
+- add __contains__ method to some widgets
+- **ItemEditorFactory**: add register_editor method
+- **widgets**: add ItemEditorCreatorBase / ItemEditorFactory
+- **types**: add Variant(Type)
+- **VariantAnimation**: add set_range method
+- **TextStream**: add read_lines method
+- **TextStream**: add set_codec method
+
 ## v0.169.0 (2021-01-04)
 
 ### Feat
