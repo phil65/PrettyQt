@@ -31,6 +31,9 @@ class StackedWidget(QtWidgets.QStackedWidget):
         # needed for PySide2
         return self.count()
 
+    def __contains__(self, item: QtWidgets.QWidget):
+        return self.indexOf(item) >= 0
+
     def serialize_fields(self):
         return dict(items=list(self))
 

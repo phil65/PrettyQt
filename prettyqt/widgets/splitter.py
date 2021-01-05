@@ -59,6 +59,9 @@ class Splitter(QtWidgets.QSplitter):
     def __len__(self) -> int:
         return self.count()
 
+    def __contains__(self, item: QtWidgets.QWidget):
+        return self.indexOf(item) >= 0
+
     def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
         self.add(other)
         return self

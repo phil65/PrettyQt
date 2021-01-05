@@ -59,6 +59,9 @@ class TabWidget(QtWidgets.QTabWidget):
                 raise KeyError("Widget not found")
             return result
 
+    def __contains__(self, item: QtWidgets.QWidget):
+        return self.indexOf(item) >= 0
+
     def serialize_fields(self):
         return dict(
             tabbar=self.tabBar(),

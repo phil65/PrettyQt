@@ -47,6 +47,9 @@ class ToolBox(QtWidgets.QToolBox):
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.get_children())
 
+    def __contains__(self, item: QtWidgets.QWidget):
+        return self.indexOf(item) >= 0
+
     def get_children(self) -> List[QtWidgets.QWidget]:
         return [self[i] for i in range(self.count())]
 
