@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Type
+from typing import Optional, Type
 
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -62,9 +62,13 @@ TYPES = {
 
 
 class ItemEditorFactory(QtWidgets.QItemEditorFactory):
-    def register_editor(self, typ: int, editor_cls: Type[QtWidgets.QWidget]):
+    def register_editor(
+        self, editor_cls: Type[QtWidgets.QWidget], typ: Optional[int] = None
+    ):
         class EditorCreator(widgets.ItemEditorCreatorBase):
             def createWidget(self, parent: QtWidgets.QWidget) -> QtWidgets.QWidget:
                 return editor_cls(parent=parent)
 
+        if typ is None:
+            typ = editor_cls.staticMetaObject.userProperty().userType()
         self.registerEditor(typ, EditorCreator())
