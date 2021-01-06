@@ -166,6 +166,7 @@ from .styleditemdelegate import StyledItemDelegate
 from .systemtrayicon import SystemTrayIcon
 
 from .layoutitem import LayoutItem
+from .widgetitem import WidgetItem
 from .layout import Layout
 from .spaceritem import SpacerItem
 from .formlayout import FormLayout
@@ -272,6 +273,7 @@ __all__ = [
     "FileIconProvider",
     "FileSystemModel",
     "LayoutItem",
+    "WidgetItem",
     "Layout",
     "FormLayout",
     "BoxLayout",
