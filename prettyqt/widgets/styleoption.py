@@ -4,4 +4,8 @@ from prettyqt.qt import QtWidgets
 
 
 class StyleOption(QtWidgets.QStyleOption):
-    pass
+    @classmethod
+    def based_on(cls, widget: QtWidgets.QWidget) -> StyleOption:
+        opt = cls()
+        opt.initFrom(widget)
+        return opt
