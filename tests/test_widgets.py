@@ -609,6 +609,13 @@ def test_label(qtbot):
     # assert label.get_text_interaction() == "by_mouse"
 
 
+def test_layoutitem(qtbot):
+    item = widgets.LayoutItem()
+    assert item.get_item() is None
+    item.set_alignment("right")
+    assert item.get_alignment() == "right"
+
+
 def test_lcdnumber(qtbot):
     lcd = widgets.LCDNumber()
     lcd.set_value(500)
