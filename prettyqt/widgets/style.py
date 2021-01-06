@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import Literal, Optional
 
 from prettyqt import core
-from prettyqt.qt import QtWidgets
-from prettyqt.utils import bidict
+from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.utils import InvalidParamError, bidict
 
 
 STANDARD_PIXMAP = dict(
@@ -237,6 +237,125 @@ SIMPLE_CONTROLS = dict(
     all=QtWidgets.QStyle.SC_All,
 )
 
+QStyle = QtWidgets.QStyle
+
+PRIMITIVE_ELEMENT = bidict(
+    panel_button_command=QStyle.PE_PanelButtonCommand,
+    frame_default_button=QStyle.PE_FrameDefaultButton,
+    panel_button_bevel=QStyle.PE_PanelButtonBevel,
+    panel_button_tool=QStyle.PE_PanelButtonTool,
+    panel_line_edit=QStyle.PE_PanelLineEdit,
+    indicator_button_drop_down=QStyle.PE_IndicatorButtonDropDown,
+    frame_focus_rect=QStyle.PE_FrameFocusRect,
+    indicator_arrow_up=QStyle.PE_IndicatorArrowUp,
+    indicator_arrow_down=QStyle.PE_IndicatorArrowDown,
+    indicator_arrow_right=QStyle.PE_IndicatorArrowRight,
+    indicator_arrow_left=QStyle.PE_IndicatorArrowLeft,
+    indicator_spin_up=QStyle.PE_IndicatorSpinUp,
+    indicator_spin_down=QStyle.PE_IndicatorSpinDown,
+    indicator_spin_plus=QStyle.PE_IndicatorSpinPlus,
+    indicator_spin_minus=QStyle.PE_IndicatorSpinMinus,
+    indicator_item_view_item_check=QStyle.PE_IndicatorItemViewItemCheck,
+    indicator_check_box=QStyle.PE_IndicatorCheckBox,
+    indicator_radio_button=QStyle.PE_IndicatorRadioButton,
+    indicator_dock_widget_resize_handle=QStyle.PE_IndicatorDockWidgetResizeHandle,
+    frame=QStyle.PE_Frame,
+    frame_menu=QStyle.PE_FrameMenu,
+    panel_menu_bar=QStyle.PE_PanelMenuBar,
+    panel_scroll_area_corner=QStyle.PE_PanelScrollAreaCorner,
+    frame_dock_widget=QStyle.PE_FrameDockWidget,
+    frame_tab_widget=QStyle.PE_FrameTabWidget,
+    frame_line_edit=QStyle.PE_FrameLineEdit,
+    frame_group_box=QStyle.PE_FrameGroupBox,
+    frame_button_bevel=QStyle.PE_FrameButtonBevel,
+    frame_button_tool=QStyle.PE_FrameButtonTool,
+    indicator_header_arrow=QStyle.PE_IndicatorHeaderArrow,
+    frame_status_bar_item=QStyle.PE_FrameStatusBarItem,
+    frame_window=QStyle.PE_FrameWindow,
+    indicator_menu_check_mark=QStyle.PE_IndicatorMenuCheckMark,
+    indicator_progress_chunk=QStyle.PE_IndicatorProgressChunk,
+    indicator_branch=QStyle.PE_IndicatorBranch,
+    indicator_tool_bar_handle=QStyle.PE_IndicatorToolBarHandle,
+    indicator_tool_bar_separator=QStyle.PE_IndicatorToolBarSeparator,
+    panel_tool_bar=QStyle.PE_PanelToolBar,
+    panel_tip_label=QStyle.PE_PanelTipLabel,
+    frame_tab_bar_base=QStyle.PE_FrameTabBarBase,
+    indicator_tab_tear_left=QStyle.PE_IndicatorTabTearLeft,
+    indicator_tab_tear_right=QStyle.PE_IndicatorTabTearRight,
+    indicator_column_view_arrow=QStyle.PE_IndicatorColumnViewArrow,
+    widget=QStyle.PE_Widget,
+    custom_base=QStyle.PE_CustomBase,
+    indicator_item_view_item_drop=QStyle.PE_IndicatorItemViewItemDrop,
+    panel_item_view_item=QStyle.PE_PanelItemViewItem,
+    panel_item_view_row=QStyle.PE_PanelItemViewRow,
+    panel_status_bar=QStyle.PE_PanelStatusBar,
+    indicator_tab_close=QStyle.PE_IndicatorTabClose,
+    panel_menu=QStyle.PE_PanelMenu,
+)
+
+SimpleControlStr = Literal[
+    "panel_button_command",
+    "frame_default_button",
+    "panel_button_bevel",
+    "panel_button_tool",
+    "panel_line_edit",
+    "indicator_button_drop_down",
+    "frame_focus_rect",
+    "indicator_arrow_up",
+    "indicator_arrow_down",
+    "indicator_arrow_right",
+    "indicator_arrow_left",
+    "indicator_spin_up",
+    "indicator_spin_down",
+    "indicator_spin_plus",
+    "indicator_spin_minus",
+    "indicator_item_view_item_check",
+    "indicator_check_box",
+    "indicator_radio_button",
+    "indicator_dock_widget_resize_handle",
+    "frame",
+    "frame_menu",
+    "panel_menu_bar",
+    "panel_scroll_area_corner",
+    "frame_dock_widget",
+    "frame_tab_widget",
+    "frame_line_edit",
+    "frame_group_box",
+    "frame_button_bevel",
+    "frame_button_tool",
+    "indicator_header_arrow",
+    "frame_status_bar_item",
+    "frame_window",
+    "indicator_menu_check_mark",
+    "indicator_progress_chunk",
+    "indicator_branch",
+    "indicator_tool_bar_handle",
+    "indicator_tool_bar_separator",
+    "panel_tool_bar",
+    "panel_tip_label",
+    "frame_tab_bar_base",
+    "indicator_tab_tear_left",
+    "indicator_tab_tear_right",
+    "indicator_column_view_arrow",
+    "widget",
+    "custom_base",
+    "indicator_item_view_item_drop",
+    "panel_item_view_item",
+    "panel_item_view_row",
+    "panel_status_bar",
+    "indicator_tab_close",
+    "panel_menu",
+]
+
 
 class Style(QtWidgets.QStyle):
-    pass
+    def draw_primitive(
+        self,
+        element: SimpleControlStr,
+        option: QtWidgets.QStyleOption,
+        painter: QtGui.QPainter,
+        widget: Optional[QtWidgets.QWidget] = None,
+    ):
+        if element not in PRIMITIVE_ELEMENT:
+            raise InvalidParamError(element, PRIMITIVE_ELEMENT)
+        self.drawPrimitive(PRIMITIVE_ELEMENT[element], option, painter, widget)
