@@ -17,6 +17,7 @@ from .stringornumberwidget import StringOrNumberWidget
 from .iconlabel import IconLabel
 from .iconwidget import IconWidget
 from .flowlayout import FlowLayout
+from .borderlayout import BorderLayout
 from .sidebarwidget import SidebarWidget
 from .colorchooserbutton import ColorChooserButton
 from .filechooserbutton import FileChooserButton
@@ -58,6 +59,7 @@ __all__ = [
     "IconLabel",
     "IconWidget",
     "FlowLayout",
+    "BorderLayout",
     "SidebarWidget",
     "ColorChooserButton",
     "FileChooserButton",
