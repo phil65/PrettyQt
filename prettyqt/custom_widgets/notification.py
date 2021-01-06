@@ -220,8 +220,7 @@ class Notification(widgets.Widget):
         Makes class Notification available in style sheets. Interal Qt function.
         Should not be called directly.
         """
-        o = widgets.StyleOption()
-        o.initFrom(self)
+        o = widgets.StyleOption.based_on(self)
         p = gui.Painter(self)
         self.style().drawPrimitive(widgets.Style.PE_Widget, o, p, self)
 
@@ -527,8 +526,7 @@ class NotificationArea(widgets.Widget):
         Makes class NotificationArea available in style sheets.
         Internal QT function (do not call directly).
         """
-        o = widgets.StyleOption()
-        o.initFrom(self)
+        o = widgets.StyleOption.based_on(self)
         p = gui.Painter(self)
         self.style().drawPrimitive(widgets.Style.PE_Widget, o, p, self)
 
