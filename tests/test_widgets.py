@@ -425,6 +425,19 @@ def test_graphicsgridlayout():
     layout.set_margin(0)
 
 
+def test_graphicspixmapitem(qtbot):
+    item = widgets.GraphicsPixmapItem()
+    item.set_transformation_mode("smooth")
+    assert item.get_transformation_mode() == "smooth"
+    with pytest.raises(InvalidParamError):
+        item.set_transformation_mode("test")
+    item.set_shape_mode("bounding_rect")
+    assert item.get_shape_mode() == "bounding_rect"
+    with pytest.raises(InvalidParamError):
+        item.set_shape_mode("test")
+    assert item.get_pixmap() is None
+
+
 def test_graphicsscene(qtbot):
     scene = widgets.GraphicsScene()
     icon = iconprovider.get_icon("mdi.help-circle-outline")

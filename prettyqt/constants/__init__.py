@@ -520,6 +520,12 @@ TILE_RULE: bidict[TileRuleStr, QtCore.Qt.TileRule] = bidict(
     round=QtCore.Qt.RoundTile,
 )
 
+TransformationModeStr = Literal["fast", "smooth"]
+TRANSFORMATION_MODE: bidict[TransformationModeStr, QtCore.Qt.TransformationMode] = bidict(
+    fast=QtCore.Qt.FastTransformation,
+    smooth=QtCore.Qt.SmoothTransformation,
+)
+
 GestureTypeStr = Literal["tap", "tap_and_hold", "pan", "pinch", "swipe", "custom"]
 GESTURE_TYPE: bidict[GestureTypeStr, QtCore.Qt.GestureType] = bidict(
     tap=QtCore.Qt.TapGesture,
