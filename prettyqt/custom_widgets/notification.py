@@ -172,8 +172,7 @@ class Notification(widgets.Widget):
                 The desired duration of the animation
 
         Raises:
-            TypeError
-                if duration is not an integer
+            TypeError: duration is not an integer
         """
         if type(duration) != int:
             raise TypeError("duration should be an integer")
@@ -200,8 +199,8 @@ class Notification(widgets.Widget):
 
         Raises
         ------
-        TypeError
-            if the wrong datatype is specified for any of the parameters.
+        TypeError: the wrong datatype is specified for any of the parameters.
+
         """
         if not callable(finishedCallback):
             raise TypeError("finishedCallback should be a callable")
@@ -248,8 +247,7 @@ class Notification(widgets.Widget):
                 The category specification
 
         Raises:
-            ValueError
-                if the category is other than one of the expected values.
+            ValueError: The category is other than one of the expected values.
         """
         allowed_values = ["primary", "success", "info", "warning", "danger"]
         if value not in allowed_values:
@@ -296,7 +294,7 @@ class NotificationArea(widgets.Widget):
                 The number of messages to display at the same time.
 
         Raises:
-            TypeError : if target_widget is not an object that inherits QWidget
+            TypeError : target_widget is not an object that inherits QWidget
         """
         if not isinstance(target_widget, QtWidgets.QWidget):
             raise TypeError("target_widget is not a QWidget (or child of it")
@@ -362,10 +360,8 @@ class NotificationArea(widgets.Widget):
                 The duration of the effect in milliseconds
 
         Raises:
-            TypeError
-                If the object passed for duration is not an int
-            ValueError
-                When duration is less than 0, or effect has an invalid value
+            TypeError: the object passed for duration is not an int
+            ValueError: duration is less than 0, or effect has an invalid value
         """
         if effect not in ["fade_in", None]:
             raise ValueError("Invalid entry effect")
@@ -389,10 +385,8 @@ class NotificationArea(widgets.Widget):
                 The duration of the effect in milliseconds
 
         Raises:
-            TypeError
-                If the object passed for duration is not an int
-            ValueError
-                When duration is less than 0, or effect has an invalid value
+            TypeError: the object passed for duration is not an int
+            ValueError: duration is less than 0, or effect has an invalid value
         """
         if effect not in ["fade_out", None]:
             raise ValueError("Invalid exit effect")
@@ -433,8 +427,7 @@ class NotificationArea(widgets.Widget):
                 will be shown.
 
         Raises:
-            ValueError
-                if the category is other than one of the expected values.
+            ValueError: the category is other than one of the expected values.
         """
         notification = Notification(
             message, category, timeout, autohide, buttontext, self
@@ -489,8 +482,7 @@ class NotificationArea(widgets.Widget):
                 object is retrieved by using self.sender()
 
         Raises:
-            ValueError
-                If notification is not None or a Notification
+            ValueError: notification is not None or a Notification
 
         """
         # This function also functions as a pyqt slot. In that case, no

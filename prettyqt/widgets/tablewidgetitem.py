@@ -62,7 +62,8 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         """Set text alignment of the checkbox.
 
         Args:
-            alignment: text alignment to use
+            horizontal: horizontal text alignment to use
+            vertical: vertical text alignment to use
 
         Raises:
             InvalidParamError: invalid text alignment

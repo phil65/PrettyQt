@@ -63,7 +63,7 @@ class GuiApplication(QtGui.QGuiApplication):
         """Set high dpi scale factor rounding policy.
 
         Args:
-            direction: rounding policy
+            policy: rounding policy
 
         Raises:
             InvalidParamError: rounding policy does not exist
