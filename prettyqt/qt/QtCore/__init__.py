@@ -53,6 +53,3 @@ elif PYSIDE2:
 elif PYSIDE6:
     from PySide6.QtCore import *  # type: ignore
     from PySide6.QtCore import __version__  # type: ignore
-
-dt = QDateTime(2000, 1, 1, 1, 1, 1)
-dt.toPython()
