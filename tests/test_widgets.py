@@ -399,6 +399,10 @@ def test_graphicsitem(qtbot):
     assert item.get_panel_modality() == "scene"
     with pytest.raises(InvalidParamError):
         item.set_panel_modality("test")
+    item.set_cache_mode("item_coordinate")
+    assert item.get_cache_mode() == "item_coordinate"
+    with pytest.raises(InvalidParamError):
+        item.set_cache_mode("test")
     item.set_focus("active_window")
     with pytest.raises(InvalidParamError):
         item.set_focus("test")

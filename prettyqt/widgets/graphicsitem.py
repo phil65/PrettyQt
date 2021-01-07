@@ -7,13 +7,21 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-MODALITY = bidict(
+PANEL_MODALITY = bidict(
     none=QtWidgets.QGraphicsItem.NonModal,
     panel=QtWidgets.QGraphicsItem.PanelModal,
     scene=QtWidgets.QGraphicsItem.SceneModal,
 )
 
 PanelModalityStr = Literal["none", "panel", "scene"]
+
+CACHE_MODE = bidict(
+    none=QtWidgets.QGraphicsItem.NoCache,
+    item_coordinate=QtWidgets.QGraphicsItem.ItemCoordinateCache,
+    device_coordinate=QtWidgets.QGraphicsItem.DeviceCoordinateCache,
+)
+
+CacheModeStr = Literal["none", "item_coordinate", "device_coordinate"]
 
 
 class GraphicsItem(QtWidgets.QGraphicsItem):
@@ -62,9 +70,9 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
         Raises:
             InvalidParamError: panel modality does not exist
         """
-        if modality not in MODALITY:
-            raise InvalidParamError(modality, MODALITY)
-        self.setPanelModality(MODALITY[modality])
+        if modality not in PANEL_MODALITY:
+            raise InvalidParamError(modality, PANEL_MODALITY)
+        self.setPanelModality(PANEL_MODALITY[modality])
 
     def get_panel_modality(self) -> PanelModalityStr:
         """Get the current modality modes as a string.
@@ -72,7 +80,28 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
         Returns:
             panel modality
         """
-        return MODALITY.inverse[self.panelModality()]
+        return PANEL_MODALITY.inverse[self.panelModality()]
+
+    def set_cache_mode(self, mode: CacheModeStr) -> None:
+        """Set cache mode.
+
+        Args:
+            mode: cache mode
+
+        Raises:
+            InvalidParamError: cache mode does not exist
+        """
+        if mode not in CACHE_MODE:
+            raise InvalidParamError(mode, CACHE_MODE)
+        self.setCacheMode(CACHE_MODE[mode])
+
+    def get_cache_mode(self) -> CacheModeStr:
+        """Get the current mode modes as a string.
+
+        Returns:
+            cache mode
+        """
+        return CACHE_MODE.inverse[self.cacheMode()]
 
     def get_shape(self) -> gui.PainterPath:
         return gui.PainterPath(self.shape())
