@@ -157,8 +157,5 @@ class TextCharFormat(QtGui.QTextCharFormat):
             raise InvalidParamError(hint, gui.font.STYLE_HINTS)
         self.setFontStyleHint(gui.font.STYLE_HINTS[hint])
 
-    def select_full_width(self, value: bool = True):
-        self.setProperty(QtGui.QTextFormat.FullWidthSelection, value)
-
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())

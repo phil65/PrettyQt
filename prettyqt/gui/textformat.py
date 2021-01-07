@@ -90,6 +90,9 @@ class TextFormat(QtGui.QTextFormat):
         """
         return constants.LAYOUT_DIRECTION.inverse[self.layoutDirection()]
 
+    def select_full_width(self, value: bool = True):
+        self.setProperty(QtGui.QTextFormat.FullWidthSelection, value)
+
 
 if __name__ == "__main__":
     fmt = TextFormat()
