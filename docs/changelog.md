@@ -1,3 +1,20 @@
+## v0.171.0 (2021-01-07)
+
+### Feat
+
+- **GraphicsItem**: add get/set_cache_mode methods
+- **GraphicsPixmapItem**: some additional methods
+- **custom_widgets**: add BorderLayout class
+- **widgets**: add WidgetItem class
+- **LayoutItem**: add get_item method
+- **LayoutItem**: add get/set_alignment methods
+- **Style**: add draw_primitive method
+- **StyleOption**: add based_on method
+
+### Fix
+
+- **AutoSlot**: use typing.get_type_hints
+
 ## v0.170.0 (2021-01-05)
 
 ### Feat
