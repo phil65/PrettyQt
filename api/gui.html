@@ -4291,7 +4291,7 @@
                 
                 <h1 id="gui-module">gui module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.gui" id="prettyqt.gui" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.gui" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>Gui module.</p>
@@ -4303,6 +4303,7 @@
         <code>color</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -4312,14 +4313,14 @@
         <code>Color</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.color.Color.__reduce__">
 
-        <code class="highlight language-python">
-__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -4341,8 +4342,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.color.Color.from_text">
 
-        <code class="highlight language-python">
-from_text<span class="p">(</span><span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">from_text</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -4384,6 +4384,7 @@ from_text<span class="p">(</span><span class="n">text</span><span class="p">)</s
         <code>colorspace</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -4393,14 +4394,14 @@ from_text<span class="p">(</span><span class="n">text</span><span class="p">)</s
         <code>ColorSpace</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.colorspace.ColorSpace.get_primaries">
 
-        <code class="highlight language-python">
-get_primaries<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_primaries</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PrimariesStr</span></code>
 
 
       </h4>
@@ -4416,7 +4417,7 @@ get_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['custom', 'srgb', 'adobe_rgb', 'dci_p3_d65', 'pro_photo_rgb']</code></td>
+<td><code>PrimariesStr</code></td>
 <td>
 <p>primaries</p>
 </td>
@@ -4441,8 +4442,7 @@ get_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.colorspace.ColorSpace.get_transfer_function">
 
-        <code class="highlight language-python">
-get_transfer_function<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_transfer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TransformFunctionStr</span></code>
 
 
       </h4>
@@ -4458,7 +4458,7 @@ get_transfer_function<span class="p">(</span><span class="bp">self</span><span c
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['custom', 'linear', 'gamma', 'srgb', 'pro_photo_rgb']</code></td>
+<td><code>TransformFunctionStr</code></td>
 <td>
 <p>transfer function</p>
 </td>
@@ -4483,8 +4483,7 @@ get_transfer_function<span class="p">(</span><span class="bp">self</span><span c
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.colorspace.ColorSpace.set_primaries">
 
-        <code class="highlight language-python">
-set_primaries<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">primaries</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_primaries</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">primaries</span><span class="p">:</span> <span class="n">PrimariesStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -4503,7 +4502,7 @@ set_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>primaries</code></td>
-<td><code>Literal['custom', 'srgb', 'adobe_rgb', 'dci_p3_d65', 'pro_photo_rgb']</code></td>
+<td><code>PrimariesStr</code></td>
 <td>
 <p>primaries to use</p>
 </td>
@@ -4551,8 +4550,7 @@ set_primaries<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.colorspace.ColorSpace.set_transfer_function">
 
-        <code class="highlight language-python">
-set_transfer_function<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_transfer_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fn</span><span class="p">:</span> <span class="n">TransformFunctionStr</span><span class="p">,</span> <span class="n">gamma</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">)</span></code>
 
 
       </h4>
@@ -4571,7 +4569,7 @@ set_transfer_function<span class="p">(</span><span class="bp">self</span><span c
 <tbody>
 <tr>
 <td><code>fn</code></td>
-<td><code>Literal['custom', 'linear', 'gamma', 'srgb', 'pro_photo_rgb']</code></td>
+<td><code>TransformFunctionStr</code></td>
 <td>
 <p>transfer function to use</p>
 </td>
@@ -4628,6 +4626,7 @@ set_transfer_function<span class="p">(</span><span class="bp">self</span><span c
         <code>cursor</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -4637,14 +4636,14 @@ set_transfer_function<span class="p">(</span><span class="bp">self</span><span c
         <code>Cursor</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.cursor.Cursor.get_shape">
 
-        <code class="highlight language-python">
-get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorShapeStr</span></code>
 
 
       </h4>
@@ -4660,7 +4659,7 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['arrow', 'uparrow', 'cross', 'wait', 'caret', 'size_vertical', 'size_horizonal', 'size_topright', 'size_topleft', 'size_all', 'blank', 'split_vertical', 'split_horizontal', 'pointing_hand', 'forbidden', 'open_hand', 'closed_hand', 'whats_this', 'busy', 'drag_move', 'drag_copy', 'drag_link', 'bitmap']</code></td>
+<td><code>constants.CursorShapeStr</code></td>
 <td>
 <p>cursor shape</p>
 </td>
@@ -4685,8 +4684,7 @@ get_shape<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.cursor.Cursor.set_shape">
 
-        <code class="highlight language-python">
-set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorShapeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -4705,7 +4703,7 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>shape</code></td>
-<td><code>Literal['arrow', 'uparrow', 'cross', 'wait', 'caret', 'size_vertical', 'size_horizonal', 'size_topright', 'size_topleft', 'size_all', 'blank', 'split_vertical', 'split_horizontal', 'pointing_hand', 'forbidden', 'open_hand', 'closed_hand', 'whats_this', 'busy', 'drag_move', 'drag_copy', 'drag_link', 'bitmap']</code></td>
+<td><code>constants.CursorShapeStr</code></td>
 <td>
 <p>shape to use</p>
 </td>
@@ -4762,6 +4760,7 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
         <code>font</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -4771,14 +4770,14 @@ set_shape<span class="p">(</span><span class="bp">self</span><span class="p">,</
         <code>Font</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.get_capitalization">
 
-        <code class="highlight language-python">
-get_capitalization<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_capitalization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CapitalizationStr</span></code>
 
 
       </h4>
@@ -4794,7 +4793,7 @@ get_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['mixed_case', 'all_uppercase', 'all_lowercase', 'small_caps', 'capitalize']</code></td>
+<td><code>CapitalizationStr</code></td>
 <td>
 <p>current font capitalization</p>
 </td>
@@ -4819,8 +4818,7 @@ get_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.get_hinting_preference">
 
-        <code class="highlight language-python">
-get_hinting_preference<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HintingPreferenceStr</span></code>
 
 
       </h4>
@@ -4836,7 +4834,7 @@ get_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['default', 'none', 'vertical', 'full']</code></td>
+<td><code>HintingPreferenceStr</code></td>
 <td>
 <p>current hinting preference</p>
 </td>
@@ -4861,8 +4859,7 @@ get_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.get_letter_spacing_type">
 
-        <code class="highlight language-python">
-get_letter_spacing_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_letter_spacing_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SpacingTypeStr</span></code>
 
 
       </h4>
@@ -4878,7 +4875,7 @@ get_letter_spacing_type<span class="p">(</span><span class="bp">self</span><span
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['percentage', 'absolute']</code></td>
+<td><code>SpacingTypeStr</code></td>
 <td>
 <p>current letter spacing type</p>
 </td>
@@ -4903,8 +4900,7 @@ get_letter_spacing_type<span class="p">(</span><span class="bp">self</span><span
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.get_style">
 
-        <code class="highlight language-python">
-get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StyleStr</span></code>
 
 
       </h4>
@@ -4920,7 +4916,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['normal', 'italic', 'oblique']</code></td>
+<td><code>StyleStr</code></td>
 <td>
 <p>current font style</p>
 </td>
@@ -4945,8 +4941,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.get_weight">
 
-        <code class="highlight language-python">
-get_weight<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WeightStr</span></code>
 
 
       </h4>
@@ -4962,7 +4957,7 @@ get_weight<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['thin', 'extra_light', 'light', 'normal', 'medium', 'demi_bold', 'bold', 'extra_bold', 'black']</code></td>
+<td><code>WeightStr</code></td>
 <td>
 <p>current font weight</p>
 </td>
@@ -4987,8 +4982,7 @@ get_weight<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_capitalization">
 
-        <code class="highlight language-python">
-set_capitalization<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capitalization</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_capitalization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">capitalization</span><span class="p">:</span> <span class="n">CapitalizationStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -5007,7 +5001,7 @@ set_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>capitalization</code></td>
-<td><code>Literal['mixed_case', 'all_uppercase', 'all_lowercase', 'small_caps', 'capitalize']</code></td>
+<td><code>CapitalizationStr</code></td>
 <td>
 <p>font capitalization</p>
 </td>
@@ -5055,8 +5049,7 @@ set_capitalization<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_hinting_preference">
 
-        <code class="highlight language-python">
-set_hinting_preference<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preference</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_hinting_preference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">preference</span><span class="p">:</span> <span class="n">HintingPreferenceStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -5075,7 +5068,7 @@ set_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>preference</code></td>
-<td><code>Literal['default', 'none', 'vertical', 'full']</code></td>
+<td><code>HintingPreferenceStr</code></td>
 <td>
 <p>hinting preference</p>
 </td>
@@ -5123,8 +5116,7 @@ set_hinting_preference<span class="p">(</span><span class="bp">self</span><span 
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_letter_spacing">
 
-        <code class="highlight language-python">
-set_letter_spacing<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">spacing</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_letter_spacing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">SpacingTypeStr</span><span class="p">,</span> <span class="n">spacing</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span></code>
 
 
       </h4>
@@ -5143,7 +5135,7 @@ set_letter_spacing<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['percentage', 'absolute']</code></td>
+<td><code>SpacingTypeStr</code></td>
 <td>
 <p>letter spacing type</p>
 </td>
@@ -5200,8 +5192,7 @@ set_letter_spacing<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_style">
 
-        <code class="highlight language-python">
-set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">StyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -5220,7 +5211,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['normal', 'italic', 'oblique']</code></td>
+<td><code>StyleStr</code></td>
 <td>
 <p>font style</p>
 </td>
@@ -5268,8 +5259,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_style_hint">
 
-        <code class="highlight language-python">
-set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">StyleHintStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -5288,7 +5278,7 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>hint</code></td>
-<td><code>Literal['any', 'sans_serif', 'serif', 'typewriter', 'decorative', 'monospace', 'fantasy', 'cursive', 'system']</code></td>
+<td><code>StyleHintStr</code></td>
 <td>
 <p>style hint</p>
 </td>
@@ -5336,8 +5326,7 @@ set_style_hint<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.font.Font.set_weight">
 
-        <code class="highlight language-python">
-set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">WeightStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -5356,7 +5345,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>weight</code></td>
-<td><code>Literal['thin', 'extra_light', 'light', 'normal', 'medium', 'demi_bold', 'bold', 'extra_bold', 'black']</code></td>
+<td><code>WeightStr</code></td>
 <td>
 <p>font weight</p>
 </td>
@@ -5413,6 +5402,7 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <code>gradient</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -5422,14 +5412,14 @@ set_weight<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <code>Gradient</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.gradient.Gradient.get_coordinate_mode">
 
-        <code class="highlight language-python">
-get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CoordinateModeStr</span></code>
 
 
       </h4>
@@ -5445,7 +5435,7 @@ get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['logical', 'object', 'stretch_to_device', 'object_bounding']</code></td>
+<td><code>CoordinateModeStr</code></td>
 <td>
 <p>coordinate mode</p>
 </td>
@@ -5470,8 +5460,7 @@ get_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.gradient.Gradient.get_spread">
 
-        <code class="highlight language-python">
-get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SpreadStr</span></code>
 
 
       </h4>
@@ -5487,7 +5476,7 @@ get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['pad', 'repeat', 'reflect']</code></td>
+<td><code>SpreadStr</code></td>
 <td>
 <p>spread method</p>
 </td>
@@ -5512,8 +5501,7 @@ get_spread<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.gradient.Gradient.get_type">
 
-        <code class="highlight language-python">
-get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span></code>
 
 
       </h4>
@@ -5529,7 +5517,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['linear', 'radial', 'conical', 'none']</code></td>
+<td><code>TypeStr</code></td>
 <td>
 <p>gradient type</p>
 </td>
@@ -5554,8 +5542,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.gradient.Gradient.set_coordinate_mode">
 
-        <code class="highlight language-python">
-set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CoordinateModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -5574,7 +5561,7 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['logical', 'object', 'stretch_to_device', 'object_bounding']</code></td>
+<td><code>CoordinateModeStr</code></td>
 <td>
 <p>coordinate mode</p>
 </td>
@@ -5622,8 +5609,7 @@ set_coordinate_mode<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.gradient.Gradient.set_spread">
 
-        <code class="highlight language-python">
-set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_spread</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">SpreadStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -5642,7 +5628,7 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>method</code></td>
-<td><code>Literal['pad', 'repeat', 'reflect']</code></td>
+<td><code>SpreadStr</code></td>
 <td>
 <p>spread method</p>
 </td>
@@ -5699,6 +5685,7 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <code>guiapplication</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -5708,14 +5695,14 @@ set_spread<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <code>GuiApplication</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.copy_to_clipboard">
 
-        <code class="highlight language-python">
-copy_to_clipboard<span class="p">(</span><span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">copy_to_clipboard</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -5741,8 +5728,7 @@ copy_to_clipboard<span class="p">(</span><span class="n">text</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.get_application_state">
 
-        <code class="highlight language-python">
-get_application_state<span class="p">()</span>        </code>
+<code class="highlight language-python"><span class="n">get_application_state</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">ApplicationStateStr</span><span class="p">]</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -5761,7 +5747,7 @@ get_application_state<span class="p">()</span>        </code>
 </thead>
 <tbody>
 <tr>
-<td><code>List[Literal['suspended', 'hidden', 'inactive', 'active']]</code></td>
+<td><code>List[constants.ApplicationStateStr]</code></td>
 <td>
 <p>application state</p>
 </td>
@@ -5791,8 +5777,7 @@ get_application_state<span class="p">()</span>        </code>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.get_high_dpi_scale_factor_rounding_policy">
 
-        <code class="highlight language-python">
-get_high_dpi_scale_factor_rounding_policy<span class="p">()</span>        </code>
+<code class="highlight language-python"><span class="n">get_high_dpi_scale_factor_rounding_policy</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">HighDpiScaleFactorRoundingPolicyStr</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -5811,7 +5796,7 @@ get_high_dpi_scale_factor_rounding_policy<span class="p">()</span>        </code
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['round', 'ceil', 'floor', 'round_prefer_floor', 'pass_through']</code></td>
+<td><code>constants.HighDpiScaleFactorRoundingPolicyStr</code></td>
 <td>
 <p>rounding policy</p>
 </td>
@@ -5841,8 +5826,7 @@ get_high_dpi_scale_factor_rounding_policy<span class="p">()</span>        </code
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.get_layout_direction">
 
-        <code class="highlight language-python">
-get_layout_direction<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">LayoutDirectionStr</span></code>
 
 
       </h4>
@@ -5858,7 +5842,7 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['left_to_right', 'right_to_left', 'auto']</code></td>
+<td><code>constants.LayoutDirectionStr</code></td>
 <td>
 <p>layout direction</p>
 </td>
@@ -5883,8 +5867,7 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.set_high_dpi_scale_factor_rounding_policy">
 
-        <code class="highlight language-python">
-set_high_dpi_scale_factor_rounding_policy<span class="p">(</span><span class="n">policy</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_high_dpi_scale_factor_rounding_policy</span><span class="p">(</span><span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">HighDpiScaleFactorRoundingPolicyStr</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -5905,8 +5888,8 @@ set_high_dpi_scale_factor_rounding_policy<span class="p">(</span><span class="n"
 </thead>
 <tbody>
 <tr>
-<td><code>direction</code></td>
-<td><code></code></td>
+<td><code>policy</code></td>
+<td><code>constants.HighDpiScaleFactorRoundingPolicyStr</code></td>
 <td>
 <p>rounding policy</p>
 </td>
@@ -5941,7 +5924,7 @@ set_high_dpi_scale_factor_rounding_policy<span class="p">(</span><span class="n"
     <span class="sd">"""Set high dpi scale factor rounding policy.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        direction: rounding policy</span>
+<span class="sd">        policy: rounding policy</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: rounding policy does not exist</span>
@@ -5961,8 +5944,7 @@ set_high_dpi_scale_factor_rounding_policy<span class="p">(</span><span class="n"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.set_icon">
 
-        <code class="highlight language-python">
-set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
       </h4>
@@ -5981,7 +5963,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>icon</code></td>
-<td><code>Union[PyQt5.QtGui.QIcon, str, pathlib.Path]</code></td>
+<td><code>types.IconType</code></td>
 <td>
 <p>icon to use</p>
 </td>
@@ -6008,8 +5990,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.guiapplication.GuiApplication.set_layout_direction">
 
-        <code class="highlight language-python">
-set_layout_direction<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">LayoutDirectionStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -6028,7 +6009,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>direction</code></td>
-<td><code>Literal['left_to_right', 'right_to_left', 'auto']</code></td>
+<td><code>constants.LayoutDirectionStr</code></td>
 <td>
 <p>layout direction</p>
 </td>
@@ -6085,6 +6066,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
         <code>imageiohandler</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -6094,14 +6076,14 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
         <code>ImageIOHandler</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.imageiohandler.ImageIOHandler.get_option">
 
-        <code class="highlight language-python">
-get_option<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span></code>
 
 
       </h4>
@@ -6120,7 +6102,7 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>Literal['size', 'clip_rect', 'scaled_size', 'scaled_clip_rect', 'description', 'compression_ratio', 'gamma', 'quality', 'name', 'subtype', 'incremental_reading', 'endianness', 'animation', 'background_color', 'supported_sub_types', 'optimized_write', 'progressive_scan_write', 'image_transformation']</code></td>
+<td><code>ImageOptionStr</code></td>
 <td>
 <p>option to get</p>
 </td>
@@ -6138,7 +6120,7 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </thead>
 <tbody>
 <tr>
-<td><code>Any</code></td>
+<td><code>types.Variant</code></td>
 <td>
 <p>option</p>
 </td>
@@ -6148,7 +6130,7 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
     <span class="sd">"""Return the value assigned to option.</span>
 
 <span class="sd">    Args:</span>
@@ -6168,8 +6150,7 @@ get_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.imageiohandler.ImageIOHandler.set_option">
 
-        <code class="highlight language-python">
-set_option<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">)</span></code>
 
 
       </h4>
@@ -6188,7 +6169,7 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>Literal['size', 'clip_rect', 'scaled_size', 'scaled_clip_rect', 'description', 'compression_ratio', 'gamma', 'quality', 'name', 'subtype', 'incremental_reading', 'endianness', 'animation', 'background_color', 'supported_sub_types', 'optimized_write', 'progressive_scan_write', 'image_transformation']</code></td>
+<td><code>ImageOptionStr</code></td>
 <td>
 <p>option to use</p>
 </td>
@@ -6196,7 +6177,7 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 </tr>
 <tr>
 <td><code>value</code></td>
-<td><code></code></td>
+<td><code>types.Variant</code></td>
 <td>
 <p>value to set</p>
 </td>
@@ -6224,7 +6205,7 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">):</span>
     <span class="sd">"""Set option to given value.</span>
 
 <span class="sd">    Args:</span>
@@ -6245,8 +6226,7 @@ set_option<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.imageiohandler.ImageIOHandler.supports_option">
 
-        <code class="highlight language-python">
-supports_option<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">supports_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
 
 
       </h4>
@@ -6265,7 +6245,7 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>Literal['size', 'clip_rect', 'scaled_size', 'scaled_clip_rect', 'description', 'compression_ratio', 'gamma', 'quality', 'name', 'subtype', 'incremental_reading', 'endianness', 'animation', 'background_color', 'supported_sub_types', 'optimized_write', 'progressive_scan_write', 'image_transformation']</code></td>
+<td><code>ImageOptionStr</code></td>
 <td>
 <p>option to check</p>
 </td>
@@ -6322,6 +6302,7 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
         <code>imagereader</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -6331,14 +6312,14 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
         <code>ImageReader</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.imagereader.ImageReader.get_error">
 
-        <code class="highlight language-python">
-get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ImageReaderErrorStr</span></code>
 
 
       </h4>
@@ -6354,7 +6335,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['file_not_found', 'device', 'unsupported_format', 'invalid_data', 'unknown']</code></td>
+<td><code>ImageReaderErrorStr</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -6379,8 +6360,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.imagereader.ImageReader.get_transformation">
 
-        <code class="highlight language-python">
-get_transformation<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TransformationStr</span></code>
 
 
       </h4>
@@ -6396,7 +6376,7 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'mirror', 'flip', 'rotate_180', 'roate_90', 'mirror_and_rotate_90', 'flip_and_rotate_90', 'rotate_270']</code></td>
+<td><code>gui.imageiohandler.TransformationStr</code></td>
 <td>
 <p>transformation</p>
 </td>
@@ -6421,8 +6401,7 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.imagereader.ImageReader.supports_option">
 
-        <code class="highlight language-python">
-supports_option<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">supports_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
 
 
       </h4>
@@ -6441,7 +6420,7 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>option</code></td>
-<td><code>Literal['size', 'clip_rect', 'scaled_size', 'scaled_clip_rect', 'description', 'compression_ratio', 'gamma', 'quality', 'name', 'subtype', 'incremental_reading', 'endianness', 'animation', 'background_color', 'supported_sub_types', 'optimized_write', 'progressive_scan_write', 'image_transformation']</code></td>
+<td><code>gui.imageiohandler.ImageOptionStr</code></td>
 <td>
 <p>option to check</p>
 </td>
@@ -6498,6 +6477,7 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
         <code>imagewriter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -6507,14 +6487,14 @@ supports_option<span class="p">(</span><span class="bp">self</span><span class="
         <code>ImageWriter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.imagewriter.ImageWriter.get_error">
 
-        <code class="highlight language-python">
-get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ImageWriterErrorStr</span></code>
 
 
       </h4>
@@ -6530,7 +6510,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['device', 'unsupported_format', 'invalid_image', 'unknown']</code></td>
+<td><code>ImageWriterErrorStr</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -6555,8 +6535,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.imagewriter.ImageWriter.get_transformation">
 
-        <code class="highlight language-python">
-get_transformation<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TransformationStr</span></code>
 
 
       </h4>
@@ -6572,7 +6551,7 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'mirror', 'flip', 'rotate_180', 'roate_90', 'mirror_and_rotate_90', 'flip_and_rotate_90', 'rotate_270']</code></td>
+<td><code>gui.imageiohandler.TransformationStr</code></td>
 <td>
 <p>transformation</p>
 </td>
@@ -6597,8 +6576,7 @@ get_transformation<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.imagewriter.ImageWriter.set_transformation">
 
-        <code class="highlight language-python">
-set_transformation<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_transformation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">imageiohandler</span><span class="o">.</span><span class="n">TransformationStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -6617,7 +6595,7 @@ set_transformation<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>origin</code></td>
-<td><code>Literal['none', 'mirror', 'flip', 'rotate_180', 'roate_90', 'mirror_and_rotate_90', 'flip_and_rotate_90', 'rotate_270']</code></td>
+<td><code>gui.imageiohandler.TransformationStr</code></td>
 <td>
 <p>transformation to use</p>
 </td>
@@ -6674,6 +6652,7 @@ set_transformation<span class="p">(</span><span class="bp">self</span><span clas
         <code>keysequence</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -6683,14 +6662,14 @@ set_transformation<span class="p">(</span><span class="bp">self</span><span clas
         <code>KeySequence</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.keysequence.KeySequence.__reduce__">
 
-        <code class="highlight language-python">
-__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -6721,6 +6700,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
         <code>movie</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -6730,14 +6710,14 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
         <code>Movie</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.movie.Movie.get_cache_mode">
 
-        <code class="highlight language-python">
-get_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_cache_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CacheModeStr</span></code>
 
 
       </h4>
@@ -6753,7 +6733,7 @@ get_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'all']</code></td>
+<td><code>CacheModeStr</code></td>
 <td>
 <p>cache mode</p>
 </td>
@@ -6778,8 +6758,7 @@ get_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.movie.Movie.get_state">
 
-        <code class="highlight language-python">
-get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MovieStateStr</span></code>
 
 
       </h4>
@@ -6795,7 +6774,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['not_running', 'paused', 'running']</code></td>
+<td><code>MovieStateStr</code></td>
 <td>
 <p>state</p>
 </td>
@@ -6820,8 +6799,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.movie.Movie.set_cache_mode">
 
-        <code class="highlight language-python">
-set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_cache_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CacheModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -6840,7 +6818,7 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['none', 'all']</code></td>
+<td><code>CacheModeStr</code></td>
 <td>
 <p>cache mode</p>
 </td>
@@ -6897,6 +6875,7 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
         <code>pagelayout</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -6906,14 +6885,14 @@ set_cache_mode<span class="p">(</span><span class="bp">self</span><span class="p
         <code>PageLayout</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pagelayout.PageLayout.get_mode">
 
-        <code class="highlight language-python">
-get_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeStr</span></code>
 
 
       </h4>
@@ -6929,7 +6908,7 @@ get_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['standard', 'full_page']</code></td>
+<td><code>ModeStr</code></td>
 <td>
 <p>mode</p>
 </td>
@@ -6954,8 +6933,7 @@ get_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pagelayout.PageLayout.get_orientation">
 
-        <code class="highlight language-python">
-get_orientation<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OrientationStr</span></code>
 
 
       </h4>
@@ -6971,7 +6949,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['portrait', 'landscape']</code></td>
+<td><code>OrientationStr</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -6996,8 +6974,7 @@ get_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pagelayout.PageLayout.get_units">
 
-        <code class="highlight language-python">
-get_units<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_units</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnitStr</span></code>
 
 
       </h4>
@@ -7013,7 +6990,7 @@ get_units<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['millimeter', 'point', 'inch', 'pica', 'didot', 'cicero']</code></td>
+<td><code>UnitStr</code></td>
 <td>
 <p>unit</p>
 </td>
@@ -7038,8 +7015,7 @@ get_units<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pagelayout.PageLayout.set_mode">
 
-        <code class="highlight language-python">
-set_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -7058,7 +7034,7 @@ set_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['standard', 'full_page']</code></td>
+<td><code>ModeStr</code></td>
 <td>
 <p>mode</p>
 </td>
@@ -7106,8 +7082,7 @@ set_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pagelayout.PageLayout.set_orientation">
 
-        <code class="highlight language-python">
-set_orientation<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">OrientationStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -7126,7 +7101,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>orientation</code></td>
-<td><code>Literal['portrait', 'landscape']</code></td>
+<td><code>OrientationStr</code></td>
 <td>
 <p>orientation</p>
 </td>
@@ -7174,8 +7149,7 @@ set_orientation<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pagelayout.PageLayout.set_units">
 
-        <code class="highlight language-python">
-set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_units</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">:</span> <span class="n">UnitStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -7194,7 +7168,7 @@ set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>unit</code></td>
-<td><code>Literal['millimeter', 'point', 'inch', 'pica', 'didot', 'cicero']</code></td>
+<td><code>UnitStr</code></td>
 <td>
 <p>unit</p>
 </td>
@@ -7251,6 +7225,7 @@ set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</
         <code>pagesize</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -7260,14 +7235,14 @@ set_units<span class="p">(</span><span class="bp">self</span><span class="p">,</
         <code>PageSize</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pagesize.PageSize.get_definition_units">
 
-        <code class="highlight language-python">
-get_definition_units<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_definition_units</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnitStr</span></code>
 
 
       </h4>
@@ -7283,7 +7258,7 @@ get_definition_units<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['millimeter', 'point', 'inch', 'pica', 'didot', 'cicero']</code></td>
+<td><code>UnitStr</code></td>
 <td>
 <p>unit</p>
 </td>
@@ -7311,8 +7286,7 @@ get_definition_units<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pagesize.PageSize.get_id">
 
-        <code class="highlight language-python">
-get_id<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
 
       </h4>
@@ -7362,6 +7336,7 @@ get_id<span class="p">(</span><span class="bp">self</span><span class="p">)</spa
         <code>paintdevice</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -7371,14 +7346,14 @@ get_id<span class="p">(</span><span class="bp">self</span><span class="p">)</spa
         <code>PaintDevice</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.paintdevice.PaintDevice.get_metric">
 
-        <code class="highlight language-python">
-get_metric<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="n">MetricStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
 
 
       </h4>
@@ -7397,7 +7372,7 @@ get_metric<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <tbody>
 <tr>
 <td><code>metric</code></td>
-<td><code>Literal['width', 'height', 'width_mm', 'height_mm', 'num_colors', 'depth', 'dpi_x', 'dpi_y', 'physical_dpi_x', 'physical_dpi_y', 'pixel_ratio', 'pixel_ratio_scaled']</code></td>
+<td><code>MetricStr</code></td>
 <td>
 <p>metric information to get</p>
 </td>
@@ -7454,6 +7429,7 @@ get_metric<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <code>painter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -7463,14 +7439,14 @@ get_metric<span class="p">(</span><span class="bp">self</span><span class="p">,<
         <code>Painter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painter.Painter.get_composition_mode">
 
-        <code class="highlight language-python">
-get_composition_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_composition_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CompositionModeStr</span></code>
 
 
       </h4>
@@ -7511,8 +7487,7 @@ get_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painter.Painter.get_pen">
 
-        <code class="highlight language-python">
-get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span></code>
 
 
       </h4>
@@ -7553,8 +7528,7 @@ get_pen<span class="p">(</span><span class="bp">self</span><span class="p">)</sp
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painter.Painter.set_composition_mode">
 
-        <code class="highlight language-python">
-set_composition_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_composition_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CompositionModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -7597,8 +7571,7 @@ set_composition_mode<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painter.Painter.set_pen">
 
-        <code class="highlight language-python">
-set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">'solid'</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">join_style</span><span class="o">=</span><span class="s1">'bevel'</span><span class="p">,</span> <span class="n">cap_style</span><span class="o">=</span><span class="s1">'square'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span> <span class="o">=</span> <span class="s1">'solid'</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s1">'black'</span><span class="p">,</span> <span class="n">join_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span> <span class="o">=</span> <span class="s1">'bevel'</span><span class="p">,</span> <span class="n">cap_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span> <span class="o">=</span> <span class="s1">'square'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span></code>
 
 
       </h4>
@@ -7702,6 +7675,7 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
         <code>painterpath</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -7711,14 +7685,14 @@ set_pen<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
         <code>PainterPath</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painterpath.PainterPath.get_fill_rule">
 
-        <code class="highlight language-python">
-get_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_fill_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">FillRuleStr</span></code>
 
 
       </h4>
@@ -7759,8 +7733,7 @@ get_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painterpath.PainterPath.set_fill_rule">
 
-        <code class="highlight language-python">
-set_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_fill_rule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rule</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">FillRuleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -7836,6 +7809,7 @@ set_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
         <code>painterpathstroker</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -7845,14 +7819,14 @@ set_fill_rule<span class="p">(</span><span class="bp">self</span><span class="p"
         <code>PainterPathStroker</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painterpathstroker.PainterPathStroker.get_cap_style">
 
-        <code class="highlight language-python">
-get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span></code>
 
 
       </h4>
@@ -7868,7 +7842,7 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['flat', 'square', 'round']</code></td>
+<td><code>constants.CapStyleStr</code></td>
 <td>
 <p>cap style</p>
 </td>
@@ -7893,8 +7867,7 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painterpathstroker.PainterPathStroker.get_join_style">
 
-        <code class="highlight language-python">
-get_join_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span></code>
 
 
       </h4>
@@ -7910,7 +7883,7 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['miter', 'bevel', 'roundsvg_miter']</code></td>
+<td><code>constants.JoinStyleStr</code></td>
 <td>
 <p>join style</p>
 </td>
@@ -7935,8 +7908,7 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painterpathstroker.PainterPathStroker.set_cap_style">
 
-        <code class="highlight language-python">
-set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -7955,7 +7927,7 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['flat', 'square', 'round']</code></td>
+<td><code>constants.CapStyleStr</code></td>
 <td>
 <p>cap style to use</p>
 </td>
@@ -8003,8 +7975,7 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.painterpathstroker.PainterPathStroker.set_join_style">
 
-        <code class="highlight language-python">
-set_join_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -8023,7 +7994,7 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['miter', 'bevel', 'roundsvg_miter']</code></td>
+<td><code>constants.JoinStyleStr</code></td>
 <td>
 <p>join style to use</p>
 </td>
@@ -8080,6 +8051,7 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
         <code>palette</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -8089,14 +8061,14 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
         <code>Palette</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.palette.Palette.get_color_group">
 
-        <code class="highlight language-python">
-get_color_group<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GroupStr</span></code>
 
 
       </h4>
@@ -8112,7 +8084,7 @@ get_color_group<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['disabled', 'active', 'inactive']</code></td>
+<td><code>GroupStr</code></td>
 <td>
 <p>color group</p>
 </td>
@@ -8137,8 +8109,7 @@ get_color_group<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.palette.Palette.set_color_group">
 
-        <code class="highlight language-python">
-set_color_group<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
       </h4>
@@ -8157,7 +8128,7 @@ set_color_group<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>group</code></td>
-<td><code>Literal['disabled', 'active', 'inactive']</code></td>
+<td><code>GroupStr</code></td>
 <td>
 <p>color group to use</p>
 </td>
@@ -8214,6 +8185,7 @@ set_color_group<span class="p">(</span><span class="bp">self</span><span class="
         <code>pen</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -8223,14 +8195,14 @@ set_color_group<span class="p">(</span><span class="bp">self</span><span class="
         <code>Pen</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.get_cap_style">
 
-        <code class="highlight language-python">
-get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span></code>
 
 
       </h4>
@@ -8246,7 +8218,7 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['flat', 'square', 'round']</code></td>
+<td><code>constants.CapStyleStr</code></td>
 <td>
 <p>cap style</p>
 </td>
@@ -8271,8 +8243,7 @@ get_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.get_join_style">
 
-        <code class="highlight language-python">
-get_join_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span></code>
 
 
       </h4>
@@ -8288,7 +8259,7 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['miter', 'bevel', 'roundsvg_miter']</code></td>
+<td><code>constants.JoinStyleStr</code></td>
 <td>
 <p>join style</p>
 </td>
@@ -8313,8 +8284,7 @@ get_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.get_style">
 
-        <code class="highlight language-python">
-get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span></code>
 
 
       </h4>
@@ -8330,7 +8300,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'solid', 'dash', 'dot', 'dash_dot', 'dash_dot_dot', 'custom_dash']</code></td>
+<td><code>constants.PenStyleStr</code></td>
 <td>
 <p>pen style</p>
 </td>
@@ -8355,8 +8325,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.set_cap_style">
 
-        <code class="highlight language-python">
-set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_cap_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -8375,7 +8344,7 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['flat', 'square', 'round']</code></td>
+<td><code>constants.CapStyleStr</code></td>
 <td>
 <p>cap style to use</p>
 </td>
@@ -8423,8 +8392,7 @@ set_cap_style<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.set_join_style">
 
-        <code class="highlight language-python">
-set_join_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_join_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -8443,7 +8411,7 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['miter', 'bevel', 'roundsvg_miter']</code></td>
+<td><code>constants.JoinStyleStr</code></td>
 <td>
 <p>join style to use</p>
 </td>
@@ -8491,8 +8459,7 @@ set_join_style<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.pen.Pen.set_style">
 
-        <code class="highlight language-python">
-set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -8511,7 +8478,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'solid', 'dash', 'dot', 'dash_dot', 'dash_dot_dot', 'custom_dash']</code></td>
+<td><code>constants.PenStyleStr</code></td>
 <td>
 <p>pen style to use</p>
 </td>
@@ -8568,6 +8535,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
         <code>polygon</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -8577,14 +8545,14 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
         <code>Polygon</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.polygon.Polygon.__reduce__">
 
-        <code class="highlight language-python">
-__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -8615,6 +8583,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
         <code>sessionmanager</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -8624,14 +8593,14 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
         <code>SessionManager</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.sessionmanager.SessionManager.get_restart_hint">
 
-        <code class="highlight language-python">
-get_restart_hint<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_restart_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RestartHintStr</span></code>
 
 
       </h4>
@@ -8647,7 +8616,7 @@ get_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['if_running', 'anyway', 'immediately', 'never']</code></td>
+<td><code>RestartHintStr</code></td>
 <td>
 <p>restart hint</p>
 </td>
@@ -8672,8 +8641,7 @@ get_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.sessionmanager.SessionManager.set_restart_hint">
 
-        <code class="highlight language-python">
-set_restart_hint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_restart_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">RestartHintStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -8692,7 +8660,7 @@ set_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['if_running', 'anyway', 'immediately', 'never']</code></td>
+<td><code>RestartHintStr</code></td>
 <td>
 <p>restart hint</p>
 </td>
@@ -8749,6 +8717,7 @@ set_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
         <code>standarditem</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -8758,14 +8727,14 @@ set_restart_hint<span class="p">(</span><span class="bp">self</span><span class=
         <code>StandardItem</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.standarditem.StandardItem.clone">
 
-        <code class="highlight language-python">
-clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">clone</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h4>
@@ -8787,8 +8756,7 @@ clone<span class="p">(</span><span class="bp">self</span><span class="p">)</span
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.standarditem.StandardItem.get_checkstate">
 
-        <code class="highlight language-python">
-get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span></code>
 
 
       </h4>
@@ -8829,8 +8797,7 @@ get_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.standarditem.StandardItem.set_checkstate">
 
-        <code class="highlight language-python">
-set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -8897,8 +8864,7 @@ set_checkstate<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.standarditem.StandardItem.set_icon">
 
-        <code class="highlight language-python">
-set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
       </h4>
@@ -8953,6 +8919,7 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
         <code>statictext</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -8962,14 +8929,14 @@ set_icon<span class="p">(</span><span class="bp">self</span><span class="p">,</s
         <code>StaticText</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.statictext.StaticText.get_performance_hint">
 
-        <code class="highlight language-python">
-get_performance_hint<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_performance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PerformanceHintStr</span></code>
 
 
       </h4>
@@ -8985,7 +8952,7 @@ get_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['moderate', 'aggressive']</code></td>
+<td><code>PerformanceHintStr</code></td>
 <td>
 <p>performance hint</p>
 </td>
@@ -9010,8 +8977,7 @@ get_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.statictext.StaticText.get_text_format">
 
-        <code class="highlight language-python">
-get_text_format<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_text_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
 
       </h4>
@@ -9055,8 +9021,7 @@ get_text_format<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.statictext.StaticText.set_performance_hint">
 
-        <code class="highlight language-python">
-set_performance_hint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_performance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">PerformanceHintStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -9075,7 +9040,7 @@ set_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>hint</code></td>
-<td><code>Literal['moderate', 'aggressive']</code></td>
+<td><code>PerformanceHintStr</code></td>
 <td>
 <p>performance hint to use</p>
 </td>
@@ -9123,8 +9088,7 @@ set_performance_hint<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.statictext.StaticText.set_text_format">
 
-        <code class="highlight language-python">
-set_text_format<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_format</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_text_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_format</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>
@@ -9203,6 +9167,7 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
         <code>surface</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -9212,14 +9177,14 @@ set_text_format<span class="p">(</span><span class="bp">self</span><span class="
         <code>Surface</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.surface.Surface.get_surface_class">
 
-        <code class="highlight language-python">
-get_surface_class<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_surface_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SurfaceClassStr</span></code>
 
 
       </h4>
@@ -9235,7 +9200,7 @@ get_surface_class<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['window', 'offscreen']</code></td>
+<td><code>SurfaceClassStr</code></td>
 <td>
 <p>surface class</p>
 </td>
@@ -9260,8 +9225,7 @@ get_surface_class<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.surface.Surface.get_surface_type">
 
-        <code class="highlight language-python">
-get_surface_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_surface_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SurfaceTypeStr</span></code>
 
 
       </h4>
@@ -9277,7 +9241,7 @@ get_surface_type<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['raster', 'open_gl', 'raster_gl', 'open_vg', 'vulkan', 'metal']</code></td>
+<td><code>SurfaceTypeStr</code></td>
 <td>
 <p>surface type</p>
 </td>
@@ -9311,6 +9275,7 @@ get_surface_type<span class="p">(</span><span class="bp">self</span><span class=
         <code>syntaxhighlighter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -9320,14 +9285,14 @@ get_surface_type<span class="p">(</span><span class="bp">self</span><span class=
         <code>SyntaxHighlighter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.syntaxhighlighter.SyntaxHighlighter.highlightBlock">
 
-        <code class="highlight language-python">
-highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>
@@ -9360,6 +9325,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>textblockuserdata</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -9369,10 +9335,13 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>TextBlockUserData</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <p>Storage for the user data associated with each line.</p>
 <div class="doc doc-children">
+
+
 
 
 
@@ -9396,6 +9365,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>textcharformat</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -9405,14 +9375,14 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>TextCharFormat</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcharformat.TextCharFormat.get_font_weight">
 
-        <code class="highlight language-python">
-get_font_weight<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WeightStr</span></code>
 
 
       </h4>
@@ -9428,7 +9398,7 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['thin', 'extra_light', 'light', 'normal', 'medium', 'demi_bold', 'bold', 'extra_bold', 'black']</code></td>
+<td><code>gui.font.WeightStr</code></td>
 <td>
 <p>current font weight</p>
 </td>
@@ -9453,8 +9423,7 @@ get_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcharformat.TextCharFormat.get_underline_style">
 
-        <code class="highlight language-python">
-get_underline_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnderlineStyleStr</span></code>
 
 
       </h4>
@@ -9470,7 +9439,7 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'single', 'dash', 'dot', 'dashdot', 'dashdotline', 'wave', 'spellcheck']</code></td>
+<td><code>UnderlineStyleStr</code></td>
 <td>
 <p>current underline style</p>
 </td>
@@ -9495,8 +9464,7 @@ get_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcharformat.TextCharFormat.get_vertical_alignment">
 
-        <code class="highlight language-python">
-get_vertical_alignment<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_vertical_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VerticalAlignmentStr</span></code>
 
 
       </h4>
@@ -9512,7 +9480,7 @@ get_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['normal', 'super_script', 'sub_script', 'middle', 'bottom', 'top', 'baseline']</code></td>
+<td><code>VerticalAlignmentStr</code></td>
 <td>
 <p>current vertical alignment</p>
 </td>
@@ -9537,8 +9505,7 @@ get_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcharformat.TextCharFormat.set_font_style_hint">
 
-        <code class="highlight language-python">
-set_font_style_hint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_font_style_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">StyleHintStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -9557,7 +9524,7 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>hint</code></td>
-<td><code>Literal['any', 'sans_serif', 'serif', 'typewriter', 'decorative', 'monospace', 'fantasy', 'cursive', 'system']</code></td>
+<td><code>gui.font.StyleHintStr</code></td>
 <td>
 <p>font style hint</p>
 </td>
@@ -9605,8 +9572,7 @@ set_font_style_hint<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcharformat.TextCharFormat.set_font_weight">
 
-        <code class="highlight language-python">
-set_font_weight<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_font_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">font</span><span class="o">.</span><span class="n">WeightStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -9625,7 +9591,7 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>weight</code></td>
-<td><code>Literal['thin', 'extra_light', 'light', 'normal', 'medium', 'demi_bold', 'bold', 'extra_bold', 'black']</code></td>
+<td><code>gui.font.WeightStr</code></td>
 <td>
 <p>font weight</p>
 </td>
@@ -9673,8 +9639,7 @@ set_font_weight<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcharformat.TextCharFormat.set_underline_style">
 
-        <code class="highlight language-python">
-set_underline_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_underline_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">UnderlineStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -9693,7 +9658,7 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'single', 'dash', 'dot', 'dashdot', 'dashdotline', 'wave', 'spellcheck']</code></td>
+<td><code>UnderlineStyleStr</code></td>
 <td>
 <p>underline style</p>
 </td>
@@ -9741,8 +9706,7 @@ set_underline_style<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcharformat.TextCharFormat.set_vertical_alignment">
 
-        <code class="highlight language-python">
-set_vertical_alignment<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_vertical_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">VerticalAlignmentStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -9761,7 +9725,7 @@ set_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>alignment</code></td>
-<td><code>Literal['normal', 'super_script', 'sub_script', 'middle', 'bottom', 'top', 'baseline']</code></td>
+<td><code>VerticalAlignmentStr</code></td>
 <td>
 <p>vertical alignment</p>
 </td>
@@ -9818,6 +9782,7 @@ set_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
         <code>textcursor</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -9827,14 +9792,14 @@ set_vertical_alignment<span class="p">(</span><span class="bp">self</span><span 
         <code>TextCursor</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcursor.TextCursor.edit_block">
 
-        <code class="highlight language-python">
-edit_block<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">edit_block</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h4>
@@ -9857,8 +9822,7 @@ edit_block<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcursor.TextCursor.select">
 
-        <code class="highlight language-python">
-select<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selection</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">SelectionTypeStr</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCursor</span><span class="o">.</span><span class="n">SelectionType</span><span class="p">])</span></code>
 
 
       </h4>
@@ -9881,8 +9845,7 @@ select<span class="p">(</span><span class="bp">self</span><span class="p">,</spa
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcursor.TextCursor.select_text">
 
-        <code class="highlight language-python">
-select_text<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">,</span> <span class="n">end_pos</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">select_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">MoveOperationStr</span><span class="p">],</span> <span class="n">end_pos</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">MoveOperationStr</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
 
       </h4>
@@ -9902,7 +9865,7 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 <tbody>
 <tr>
 <td><code>start_pos</code></td>
-<td><code>Union[int, Literal['no_move', 'start', 'start_of_line', 'start_of_block', 'start_of_word', 'previous_block', 'previous_char', 'previous_word', 'up', 'left', 'word_left', 'end', 'end_of_line', 'end_of_word', 'end_of_block', 'next_block', 'next_char', 'next_word', 'down', 'right', 'word_right', 'next_cell', 'previous_cell', 'next_row', 'previous_row']]</code></td>
+<td><code>Union[int, MoveOperationStr]</code></td>
 <td>
 <p>Start position</p>
 </td>
@@ -9910,7 +9873,7 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 </tr>
 <tr>
 <td><code>end_pos</code></td>
-<td><code>Union[int, Literal['no_move', 'start', 'start_of_line', 'start_of_block', 'start_of_word', 'previous_block', 'previous_char', 'previous_word', 'up', 'left', 'word_left', 'end', 'end_of_line', 'end_of_word', 'end_of_block', 'next_block', 'next_char', 'next_word', 'down', 'right', 'word_right', 'next_cell', 'previous_cell', 'next_row', 'previous_row']]</code></td>
+<td><code>Union[int, MoveOperationStr]</code></td>
 <td>
 <p>End position</p>
 </td>
@@ -9951,8 +9914,7 @@ select_text<span class="p">(</span><span class="bp">self</span><span class="p">,
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textcursor.TextCursor.set_position">
 
-        <code class="highlight language-python">
-set_position<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">'move'</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">MoveModeStr</span> <span class="o">=</span> <span class="s1">'move'</span><span class="p">)</span></code>
 
 
       </h4>
@@ -9979,7 +9941,7 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 </tr>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['move', 'keep']</code></td>
+<td><code>MoveModeStr</code></td>
 <td>
 <p>Move mode</p>
 </td>
@@ -10015,6 +9977,7 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
         <code>textdocument</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -10024,14 +9987,14 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
         <code>TextDocument</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textdocument.TextDocument.clear_stacks">
 
-        <code class="highlight language-python">
-clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stack</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">clear_stacks</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stack</span><span class="p">:</span> <span class="n">StackStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -10050,7 +10013,7 @@ clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">
 <tbody>
 <tr>
 <td><code>stack</code></td>
-<td><code>Literal['undo', 'redo', 'undo_and_redo']</code></td>
+<td><code>StackStr</code></td>
 <td>
 <p>stack to clear</p>
 </td>
@@ -10098,8 +10061,7 @@ clear_stacks<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textdocument.TextDocument.get_default_cursor_move_style">
 
-        <code class="highlight language-python">
-get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorMoveStyleStr</span></code>
 
 
       </h4>
@@ -10115,7 +10077,7 @@ get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['logical', 'visual']</code></td>
+<td><code>constants.CursorMoveStyleStr</code></td>
 <td>
 <p>cursor move style</p>
 </td>
@@ -10140,8 +10102,7 @@ get_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textdocument.TextDocument.set_default_cursor_move_style">
 
-        <code class="highlight language-python">
-set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_default_cursor_move_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorMoveStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -10160,7 +10121,7 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['logical', 'visual']</code></td>
+<td><code>constants.CursorMoveStyleStr</code></td>
 <td>
 <p>cursor move style</p>
 </td>
@@ -10217,6 +10178,7 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
         <code>textformat</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -10226,14 +10188,14 @@ set_default_cursor_move_style<span class="p">(</span><span class="bp">self</span
         <code>TextFormat</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textformat.TextFormat.get_layout_direction">
 
-        <code class="highlight language-python">
-get_layout_direction<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">LayoutDirectionStr</span></code>
 
 
       </h4>
@@ -10249,7 +10211,7 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['left_to_right', 'right_to_left', 'auto']</code></td>
+<td><code>constants.LayoutDirectionStr</code></td>
 <td>
 <p>layout direction</p>
 </td>
@@ -10274,8 +10236,7 @@ get_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textformat.TextFormat.set_layout_direction">
 
-        <code class="highlight language-python">
-set_layout_direction<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_layout_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">LayoutDirectionStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -10294,7 +10255,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>direction</code></td>
-<td><code>Literal['left_to_right', 'right_to_left', 'auto']</code></td>
+<td><code>constants.LayoutDirectionStr</code></td>
 <td>
 <p>layout direction</p>
 </td>
@@ -10351,6 +10312,7 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
         <code>textframeformat</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -10360,14 +10322,14 @@ set_layout_direction<span class="p">(</span><span class="bp">self</span><span cl
         <code>TextFrameFormat</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textframeformat.TextFrameFormat.get_border_style">
 
-        <code class="highlight language-python">
-get_border_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">BorderStyleStr</span></code>
 
 
       </h4>
@@ -10383,7 +10345,7 @@ get_border_style<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>BorderStyleStr</code></td>
 <td>
 <p>border style</p>
 </td>
@@ -10408,8 +10370,7 @@ get_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textframeformat.TextFrameFormat.get_page_break_policy">
 
-        <code class="highlight language-python">
-get_page_break_policy<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_page_break_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textformat</span><span class="o">.</span><span class="n">PageBreakFlagStr</span></code>
 
 
       </h4>
@@ -10425,7 +10386,7 @@ get_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['auto', 'always_before', 'always_after']</code></td>
+<td><code>gui.textformat.PageBreakFlagStr</code></td>
 <td>
 <p>page break policy</p>
 </td>
@@ -10450,8 +10411,7 @@ get_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textframeformat.TextFrameFormat.get_position">
 
-        <code class="highlight language-python">
-get_position<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PositionStr</span></code>
 
 
       </h4>
@@ -10467,7 +10427,7 @@ get_position<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['in_flow', 'flow_right', 'flow_left']</code></td>
+<td><code>PositionStr</code></td>
 <td>
 <p>position</p>
 </td>
@@ -10492,8 +10452,7 @@ get_position<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textframeformat.TextFrameFormat.set_border_style">
 
-        <code class="highlight language-python">
-set_border_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">BorderStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -10512,7 +10471,7 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>BorderStyleStr</code></td>
 <td>
 <p>border style</p>
 </td>
@@ -10560,8 +10519,7 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textframeformat.TextFrameFormat.set_page_break_policy">
 
-        <code class="highlight language-python">
-set_page_break_policy<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_page_break_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textformat</span><span class="o">.</span><span class="n">PageBreakFlagStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -10580,7 +10538,7 @@ set_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>Literal['auto', 'always_before', 'always_after']</code></td>
+<td><code>gui.textformat.PageBreakFlagStr</code></td>
 <td>
 <p>page break policy</p>
 </td>
@@ -10628,8 +10586,7 @@ set_page_break_policy<span class="p">(</span><span class="bp">self</span><span c
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textframeformat.TextFrameFormat.set_position">
 
-        <code class="highlight language-python">
-set_position<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">PositionStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -10648,7 +10605,7 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
 <tbody>
 <tr>
 <td><code>position</code></td>
-<td><code>Literal['in_flow', 'flow_right', 'flow_left']</code></td>
+<td><code>PositionStr</code></td>
 <td>
 <p>position</p>
 </td>
@@ -10705,6 +10662,7 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
         <code>textlength</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -10714,14 +10672,14 @@ set_position<span class="p">(</span><span class="bp">self</span><span class="p">
         <code>TextLength</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textlength.TextLength.get_type">
 
-        <code class="highlight language-python">
-get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span></code>
 
 
       </h4>
@@ -10737,7 +10695,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['variable', 'fixed', 'percentage']</code></td>
+<td><code>TypeStr</code></td>
 <td>
 <p>timer type</p>
 </td>
@@ -10771,6 +10729,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
         <code>textlistformat</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -10780,14 +10739,14 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
         <code>TextListFormat</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textlistformat.TextListFormat.get_style">
 
-        <code class="highlight language-python">
-get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StyleStr</span></code>
 
 
       </h4>
@@ -10803,7 +10762,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['disc', 'circle', 'square', 'decimal', 'lower_alpha', 'upper_alpha', 'lower_roman', 'upper_roman']</code></td>
+<td><code>StyleStr</code></td>
 <td>
 <p>current style</p>
 </td>
@@ -10828,8 +10787,7 @@ get_style<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.textlistformat.TextListFormat.set_style">
 
-        <code class="highlight language-python">
-set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">StyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -10848,7 +10806,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['disc', 'circle', 'square', 'decimal', 'lower_alpha', 'upper_alpha', 'lower_roman', 'upper_roman']</code></td>
+<td><code>StyleStr</code></td>
 <td>
 <p>style</p>
 </td>
@@ -10905,6 +10863,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
         <code>texttablecellformat</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -10914,14 +10873,14 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
         <code>TextTableCellFormat</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.texttablecellformat.TextTableCellFormat.get_bottom_border_style">
 
-        <code class="highlight language-python">
-get_bottom_border_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_bottom_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span></code>
 
 
       </h4>
@@ -10937,7 +10896,7 @@ get_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>gui.textframeformat.BorderStyleStr</code></td>
 <td>
 <p>bottom border style</p>
 </td>
@@ -10962,8 +10921,7 @@ get_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.texttablecellformat.TextTableCellFormat.get_left_border_style">
 
-        <code class="highlight language-python">
-get_left_border_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_left_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span></code>
 
 
       </h4>
@@ -10979,7 +10937,7 @@ get_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>gui.textframeformat.BorderStyleStr</code></td>
 <td>
 <p>left border style</p>
 </td>
@@ -11004,8 +10962,7 @@ get_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.texttablecellformat.TextTableCellFormat.get_right_border_style">
 
-        <code class="highlight language-python">
-get_right_border_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_right_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span></code>
 
 
       </h4>
@@ -11021,7 +10978,7 @@ get_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>gui.textframeformat.BorderStyleStr</code></td>
 <td>
 <p>right border style</p>
 </td>
@@ -11046,8 +11003,7 @@ get_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.texttablecellformat.TextTableCellFormat.get_top_border_style">
 
-        <code class="highlight language-python">
-get_top_border_style<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_top_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span></code>
 
 
       </h4>
@@ -11063,7 +11019,7 @@ get_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>gui.textframeformat.BorderStyleStr</code></td>
 <td>
 <p>top border style</p>
 </td>
@@ -11088,8 +11044,7 @@ get_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.texttablecellformat.TextTableCellFormat.set_border_style">
 
-        <code class="highlight language-python">
-set_border_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -11108,7 +11063,7 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>gui.textframeformat.BorderStyleStr</code></td>
 <td>
 <p>border style</p>
 </td>
@@ -11156,8 +11111,7 @@ set_border_style<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.texttablecellformat.TextTableCellFormat.set_bottom_border_style">
 
-        <code class="highlight language-python">
-set_bottom_border_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_bottom_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -11176,7 +11130,7 @@ set_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>gui.textframeformat.BorderStyleStr</code></td>
 <td>
 <p>bottom border style</p>
 </td>
@@ -11224,8 +11178,7 @@ set_bottom_border_style<span class="p">(</span><span class="bp">self</span><span
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.texttablecellformat.TextTableCellFormat.set_left_border_style">
 
-        <code class="highlight language-python">
-set_left_border_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_left_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -11244,7 +11197,7 @@ set_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>gui.textframeformat.BorderStyleStr</code></td>
 <td>
 <p>left border style</p>
 </td>
@@ -11292,8 +11245,7 @@ set_left_border_style<span class="p">(</span><span class="bp">self</span><span c
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.texttablecellformat.TextTableCellFormat.set_right_border_style">
 
-        <code class="highlight language-python">
-set_right_border_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_right_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -11312,7 +11264,7 @@ set_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>gui.textframeformat.BorderStyleStr</code></td>
 <td>
 <p>right border style</p>
 </td>
@@ -11360,8 +11312,7 @@ set_right_border_style<span class="p">(</span><span class="bp">self</span><span 
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.texttablecellformat.TextTableCellFormat.set_top_border_style">
 
-        <code class="highlight language-python">
-set_top_border_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_top_border_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textframeformat</span><span class="o">.</span><span class="n">BorderStyleStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -11380,7 +11331,7 @@ set_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>style</code></td>
-<td><code>Literal['none', 'dotted', 'dashed', 'solid', 'double', 'dot_dash', 'dot_dot_dash', 'groove', 'ridge', 'inset', 'outset']</code></td>
+<td><code>gui.textframeformat.BorderStyleStr</code></td>
 <td>
 <p>top border style</p>
 </td>
@@ -11437,6 +11388,7 @@ set_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
         <code>transform</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -11446,14 +11398,14 @@ set_top_border_style<span class="p">(</span><span class="bp">self</span><span cl
         <code>Transform</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.transform.Transform.__reduce__">
 
-        <code class="highlight language-python">
-__reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -11484,6 +11436,7 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
         <code>validator</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -11493,14 +11446,14 @@ __reduce__<span class="p">(</span><span class="bp">self</span><span class="p">)<
         <code>Validator</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.validator.Validator.__radd__">
 
-        <code class="highlight language-python">
-__radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="fm">__radd__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QValidator</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -11532,6 +11485,7 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
         <code>window</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -11541,14 +11495,14 @@ __radd__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
         <code>Window</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.window.Window.get_visibility">
 
-        <code class="highlight language-python">
-get_visibility<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VisibilityStr</span></code>
 
 
       </h4>
@@ -11564,7 +11518,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['windowed', 'minimized', 'maximized', 'fullscreen', 'automatic', 'hidden']</code></td>
+<td><code>VisibilityStr</code></td>
 <td>
 <p>window visibility</p>
 </td>
@@ -11589,8 +11543,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.window.Window.set_visibility">
 
-        <code class="highlight language-python">
-set_visibility<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visibility</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">visibility</span><span class="p">:</span> <span class="n">VisibilityStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -11609,7 +11562,7 @@ set_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>visibility</code></td>
-<td><code>Literal['windowed', 'minimized', 'maximized', 'fullscreen', 'automatic', 'hidden']</code></td>
+<td><code>VisibilityStr</code></td>
 <td>
 <p>window visibility</p>
 </td>
@@ -11657,8 +11610,7 @@ set_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.window.Window.start_system_resize">
 
-        <code class="highlight language-python">
-start_system_resize<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">start_system_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">edge</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">EdgeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
 
 
       </h4>
@@ -11677,7 +11629,7 @@ start_system_resize<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>edge</code></td>
-<td><code>Literal['top', 'left', 'right', 'bottom', 'top_left', 'top_right', 'bottom_left', 'bottom_right']</code></td>
+<td><code>constants.EdgeStr</code></td>
 <td>
 <p>edge to resize</p>
 </td>

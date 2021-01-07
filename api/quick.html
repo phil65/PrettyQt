@@ -883,7 +883,7 @@
                 
                 <h1 id="quick-module">quick module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.quick" id="prettyqt.quick" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.quick" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>quick module.</p>
@@ -895,6 +895,7 @@
         <code>quickitem</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -904,14 +905,14 @@
         <code>QuickItem</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.quick.quickitem.QuickItem.get_transform_origin">
 
-        <code class="highlight language-python">
-get_transform_origin<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TransformOriginStr</span></code>
 
 
       </h4>
@@ -927,7 +928,7 @@ get_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['top_left', 'top', 'top_right', 'left', 'center', 'right', 'bottom_left', 'bottom', 'bottom_right']</code></td>
+<td><code>TransformOriginStr</code></td>
 <td>
 <p>transform origin</p>
 </td>
@@ -952,8 +953,7 @@ get_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.quick.quickitem.QuickItem.set_transform_origin">
 
-        <code class="highlight language-python">
-set_transform_origin<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">TransformOriginStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -973,7 +973,7 @@ set_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>origin</code></td>
-<td><code>Literal['top_left', 'top', 'top_right', 'left', 'center', 'right', 'bottom_left', 'bottom', 'bottom_right']</code></td>
+<td><code>TransformOriginStr</code></td>
 <td>
 <p>transform origin to use</p>
 </td>
@@ -1032,6 +1032,7 @@ set_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
         <code>quickpainteditem</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1041,14 +1042,14 @@ set_transform_origin<span class="p">(</span><span class="bp">self</span><span cl
         <code>QuickPaintedItem</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.quick.quickpainteditem.QuickPaintedItem.get_render_target">
 
-        <code class="highlight language-python">
-get_render_target<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RenderTargetStr</span></code>
 
 
       </h4>
@@ -1064,7 +1065,7 @@ get_render_target<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['image', 'framebuffer_objectinverted_y_framebuffer_object']</code></td>
+<td><code>RenderTargetStr</code></td>
 <td>
 <p>render target</p>
 </td>
@@ -1089,8 +1090,7 @@ get_render_target<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.quick.quickpainteditem.QuickPaintedItem.set_render_target">
 
-        <code class="highlight language-python">
-set_render_target<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">RenderTargetStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1109,7 +1109,7 @@ set_render_target<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>target</code></td>
-<td><code>Literal['image', 'framebuffer_objectinverted_y_framebuffer_object']</code></td>
+<td><code>RenderTargetStr</code></td>
 <td>
 <p>render target to use</p>
 </td>
@@ -1166,6 +1166,7 @@ set_render_target<span class="p">(</span><span class="bp">self</span><span class
         <code>quickwindow</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1175,14 +1176,14 @@ set_render_target<span class="p">(</span><span class="bp">self</span><span class
         <code>QuickWindow</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.quick.quickwindow.QuickWindow.get_text_render_type">
 
-        <code class="highlight language-python">
-get_text_render_type<span class="p">()</span>        </code>
+<code class="highlight language-python"><span class="n">get_text_render_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TextRenderTypeStr</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-staticmethod"><code>staticmethod</code></small>
@@ -1201,7 +1202,7 @@ get_text_render_type<span class="p">()</span>        </code>
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['qt_text', 'native_text']</code></td>
+<td><code>TextRenderTypeStr</code></td>
 <td>
 <p>text render type</p>
 </td>
@@ -1227,8 +1228,7 @@ get_text_render_type<span class="p">()</span>        </code>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.quick.quickwindow.QuickWindow.set_text_render_type">
 
-        <code class="highlight language-python">
-set_text_render_type<span class="p">(</span><span class="n">typ</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_text_render_type</span><span class="p">(</span><span class="n">typ</span><span class="p">:</span> <span class="n">TextRenderTypeStr</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-staticmethod"><code>staticmethod</code></small>
@@ -1252,7 +1252,7 @@ the render type of existing elements will not be modified.</p>
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['qt_text', 'native_text']</code></td>
+<td><code>TextRenderTypeStr</code></td>
 <td>
 <p>text render type to use</p>
 </td>

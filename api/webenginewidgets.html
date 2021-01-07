@@ -1291,7 +1291,7 @@
                 
                 <h1 id="webenginewidgets-module">webenginewidgets module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.webenginewidgets" id="prettyqt.webenginewidgets" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.webenginewidgets" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>Webenginewidgets module.</p>
@@ -1303,6 +1303,7 @@
         <code>webenginedownloaditem</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1312,14 +1313,14 @@
         <code>WebEngineDownloadItem</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginedownloaditem.WebEngineDownloadItem.get_save_page_format">
 
-        <code class="highlight language-python">
-get_save_page_format<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SavePageFormatStr</span></code>
 
 
       </h4>
@@ -1335,7 +1336,7 @@ get_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unknown', 'single_html', 'complete_html', 'mime_html']</code></td>
+<td><code>SavePageFormatStr</code></td>
 <td>
 <p>Save page format</p>
 </td>
@@ -1360,8 +1361,7 @@ get_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginedownloaditem.WebEngineDownloadItem.set_save_page_format">
 
-        <code class="highlight language-python">
-set_save_page_format<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">SavePageFormatStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1380,7 +1380,7 @@ set_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>fmt</code></td>
-<td><code>Literal['unknown', 'single_html', 'complete_html', 'mime_html']</code></td>
+<td><code>SavePageFormatStr</code></td>
 <td>
 <p>save page format for the layout</p>
 </td>
@@ -1437,6 +1437,7 @@ set_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
         <code>webenginepage</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1446,6 +1447,7 @@ set_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
         <code>WebEnginePage</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <p>A web engine page holds the HTML document contents, link history + actions.</p>
@@ -1453,8 +1455,7 @@ set_save_page_format<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginepage.WebEnginePage.find_text">
 
-        <code class="highlight language-python">
-find_text<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">find_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1507,7 +1508,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
 </tr>
 <tr>
 <td><code>callback</code></td>
-<td><code>Optional[Callable[[bool], NoneType]]</code></td>
+<td><code>Optional[Callable[[bool], None]]</code></td>
 <td>
 <p>result callback</p>
 </td>
@@ -1567,8 +1568,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginepage.WebEnginePage.get_lifecycle_state">
 
-        <code class="highlight language-python">
-get_lifecycle_state<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifecycleStateStr</span></code>
 
 
       </h4>
@@ -1584,7 +1584,7 @@ get_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['active', 'frozen', 'discarded']</code></td>
+<td><code>LifecycleStateStr</code></td>
 <td>
 <p>lifecycle state</p>
 </td>
@@ -1609,8 +1609,7 @@ get_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginepage.WebEnginePage.load_url">
 
-        <code class="highlight language-python">
-load_url<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">])</span></code>
 
 
       </h4>
@@ -1632,7 +1631,7 @@ to display the new URL.</p>
 <tbody>
 <tr>
 <td><code>url</code></td>
-<td><code>Union[PyQt5.QtCore.QUrl, str, os.PathLike]</code></td>
+<td><code>Union[QtCore.QUrl, str, os.PathLike]</code></td>
 <td>
 <p>URL to load</p>
 </td>
@@ -1667,8 +1666,7 @@ to display the new URL.</p>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginepage.WebEnginePage.set_lifecycle_state">
 
-        <code class="highlight language-python">
-set_lifecycle_state<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">LifecycleStateStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1687,7 +1685,7 @@ set_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>state</code></td>
-<td><code>Literal['active', 'frozen', 'discarded']</code></td>
+<td><code>LifecycleStateStr</code></td>
 <td>
 <p>lifecycle state</p>
 </td>
@@ -1735,8 +1733,7 @@ set_lifecycle_state<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginepage.WebEnginePage.set_url">
 
-        <code class="highlight language-python">
-set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">])</span></code>
 
 
       </h4>
@@ -1788,8 +1785,7 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginepage.WebEnginePage.set_zoom">
 
-        <code class="highlight language-python">
-set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1846,6 +1842,7 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
         <code>webengineprofile</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1855,14 +1852,14 @@ set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</s
         <code>WebEngineProfile</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webengineprofile.WebEngineProfile.get_http_cache_type">
 
-        <code class="highlight language-python">
-get_http_cache_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HttpCacheTypeStr</span></code>
 
 
       </h4>
@@ -1878,7 +1875,7 @@ get_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'disk', 'memory']</code></td>
+<td><code>HttpCacheTypeStr</code></td>
 <td>
 <p>Http cache type</p>
 </td>
@@ -1903,8 +1900,7 @@ get_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webengineprofile.WebEngineProfile.get_persistent_cookie_policy">
 
-        <code class="highlight language-python">
-get_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PersistentCookiePolicyStr</span></code>
 
 
       </h4>
@@ -1920,7 +1916,7 @@ get_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'allow', 'force']</code></td>
+<td><code>PersistentCookiePolicyStr</code></td>
 <td>
 <p>Persistent cookie policy</p>
 </td>
@@ -1945,8 +1941,7 @@ get_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webengineprofile.WebEngineProfile.set_http_cache_type">
 
-        <code class="highlight language-python">
-set_http_cache_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">HttpCacheTypeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1965,7 +1960,7 @@ set_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['none', 'disk', 'memory']</code></td>
+<td><code>HttpCacheTypeStr</code></td>
 <td>
 <p>http cache type</p>
 </td>
@@ -2013,8 +2008,7 @@ set_http_cache_type<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webengineprofile.WebEngineProfile.set_persistent_cookie_policy">
 
-        <code class="highlight language-python">
-set_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2033,7 +2027,7 @@ set_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>Literal['none', 'allow', 'force']</code></td>
+<td><code>PersistentCookiePolicyStr</code></td>
 <td>
 <p>persistent cookie policy</p>
 </td>
@@ -2090,6 +2084,7 @@ set_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
         <code>webenginescript</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2099,14 +2094,14 @@ set_persistent_cookie_policy<span class="p">(</span><span class="bp">self</span>
         <code>WebEngineScript</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginescript.WebEngineScript.get_injection_point">
 
-        <code class="highlight language-python">
-get_injection_point<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InjectionPointStr</span></code>
 
 
       </h4>
@@ -2122,7 +2117,7 @@ get_injection_point<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['document_creation', 'document_ready', 'deferred']</code></td>
+<td><code>InjectionPointStr</code></td>
 <td>
 <p>injection point</p>
 </td>
@@ -2147,8 +2142,7 @@ get_injection_point<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginescript.WebEngineScript.set_injection_point">
 
-        <code class="highlight language-python">
-set_injection_point<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">InjectionPointStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2167,7 +2161,7 @@ set_injection_point<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>point</code></td>
-<td><code>Literal['document_creation', 'document_ready', 'deferred']</code></td>
+<td><code>InjectionPointStr</code></td>
 <td>
 <p>injection point to use</p>
 </td>
@@ -2224,6 +2218,7 @@ set_injection_point<span class="p">(</span><span class="bp">self</span><span cla
         <code>webenginesettings</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2233,14 +2228,14 @@ set_injection_point<span class="p">(</span><span class="bp">self</span><span cla
         <code>WebEngineSettings</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginesettings.WebEngineSettings.get_font_family">
 
-        <code class="highlight language-python">
-get_font_family<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">family</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
 
       </h4>
@@ -2259,7 +2254,7 @@ get_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>family</code></td>
-<td><code>Literal['standard', 'fixed', 'serif', 'sans_serif', 'cursive', 'fantasy', 'pictograph']</code></td>
+<td><code>FontFamilyStr</code></td>
 <td>
 <p>generic font family</p>
 </td>
@@ -2305,8 +2300,7 @@ get_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginesettings.WebEngineSettings.get_font_size">
 
-        <code class="highlight language-python">
-get_font_size<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
 
 
       </h4>
@@ -2325,7 +2319,7 @@ get_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['minimum', 'minimum_logical', 'default', 'default_fixed']</code></td>
+<td><code>FontSizeStr</code></td>
 <td>
 <p>font size type</p>
 </td>
@@ -2371,8 +2365,7 @@ get_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginesettings.WebEngineSettings.get_unknown_url_scheme_policy">
 
-        <code class="highlight language-python">
-get_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnknownUrlSchemePolicyStr</span></code>
 
 
       </h4>
@@ -2388,7 +2381,7 @@ get_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['disallow', 'allow_from_user_interaction', 'allow_all']</code></td>
+<td><code>UnknownUrlSchemePolicyStr</code></td>
 <td>
 <p>Unknown url scheme policy</p>
 </td>
@@ -2413,8 +2406,7 @@ get_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginesettings.WebEngineSettings.set_font_family">
 
-        <code class="highlight language-python">
-set_font_family<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">,</span> <span class="n">family</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2433,7 +2425,7 @@ set_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <tbody>
 <tr>
 <td><code>which</code></td>
-<td><code>Literal['standard', 'fixed', 'serif', 'sans_serif', 'cursive', 'fantasy', 'pictograph']</code></td>
+<td><code>FontFamilyStr</code></td>
 <td>
 <p>family to set</p>
 </td>
@@ -2490,8 +2482,7 @@ set_font_family<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginesettings.WebEngineSettings.set_font_size">
 
-        <code class="highlight language-python">
-set_font_size<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2510,7 +2501,7 @@ set_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['minimum', 'minimum_logical', 'default', 'default_fixed']</code></td>
+<td><code>FontSizeStr</code></td>
 <td>
 <p>font size type</p>
 </td>
@@ -2567,8 +2558,7 @@ set_font_size<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webenginesettings.WebEngineSettings.set_unknown_url_scheme_policy">
 
-        <code class="highlight language-python">
-set_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2587,7 +2577,7 @@ set_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>Literal['disallow', 'allow_from_user_interaction', 'allow_all']</code></td>
+<td><code>UnknownUrlSchemePolicyStr</code></td>
 <td>
 <p>unknown url scheme policy</p>
 </td>
@@ -2644,6 +2634,7 @@ set_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
         <code>webengineview</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2653,14 +2644,14 @@ set_unknown_url_scheme_policy<span class="p">(</span><span class="bp">self</span
         <code>WebEngineView</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webengineview.WebEngineView.find_text">
 
-        <code class="highlight language-python">
-find_text<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="n">backward</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">find_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2713,7 +2704,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
 </tr>
 <tr>
 <td><code>callback</code></td>
-<td><code>Callable[[bool], NoneType]</code></td>
+<td><code>Callable[[bool], None]</code></td>
 <td>
 <p>result callback</p>
 </td>
@@ -2773,8 +2764,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webengineview.WebEngineView.load_url">
 
-        <code class="highlight language-python">
-load_url<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">])</span></code>
 
 
       </h4>
@@ -2796,7 +2786,7 @@ to display the new URL.</p>
 <tbody>
 <tr>
 <td><code>url</code></td>
-<td><code>Union[PyQt5.QtCore.QUrl, str, os.PathLike]</code></td>
+<td><code>Union[QtCore.QUrl, str, os.PathLike]</code></td>
 <td>
 <p>URL to load</p>
 </td>
@@ -2831,8 +2821,7 @@ to display the new URL.</p>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webengineview.WebEngineView.set_url">
 
-        <code class="highlight language-python">
-set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">])</span></code>
 
 
       </h4>
@@ -2852,7 +2841,7 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <tbody>
 <tr>
 <td><code>url</code></td>
-<td><code>Union[PyQt5.QtCore.QUrl, str, os.PathLike]</code></td>
+<td><code>Union[QtCore.QUrl, str, os.PathLike]</code></td>
 <td>
 <p>URL to set</p>
 </td>
@@ -2884,8 +2873,7 @@ set_url<span class="p">(</span><span class="bp">self</span><span class="p">,</sp
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.webenginewidgets.webengineview.WebEngineView.set_zoom">
 
-        <code class="highlight language-python">
-set_zoom<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span></code>
 
 
       </h4>

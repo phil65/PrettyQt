@@ -789,7 +789,7 @@
                 
                 <h1 id="qml-module">qml module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.qml" id="prettyqt.qml" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.qml" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>Qml module.</p>
@@ -801,6 +801,7 @@
         <code>jsvalue</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -810,14 +811,14 @@
         <code>JSValue</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.qml.jsvalue.JSValue.from_object">
 
-        <code class="highlight language-python">
-from_object<span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">from_object</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -868,6 +869,7 @@ from_object<span class="p">(</span><span class="n">obj</span><span class="p">,</
         <code>qmlengine</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -877,14 +879,14 @@ from_object<span class="p">(</span><span class="n">obj</span><span class="p">,</
         <code>QmlEngine</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.qml.qmlengine.QmlEngine.get_object_ownership">
 
-        <code class="highlight language-python">
-get_object_ownership<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectOwnershipStr</span></code>
 
 
       </h4>
@@ -900,7 +902,7 @@ get_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['cpp', 'javascript']</code></td>
+<td><code>ObjectOwnershipStr</code></td>
 <td>
 <p>object ownership</p>
 </td>
@@ -925,8 +927,7 @@ get_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.qml.qmlengine.QmlEngine.set_object_ownership">
 
-        <code class="highlight language-python">
-set_object_ownership<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -945,7 +946,7 @@ set_object_ownership<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['cpp', 'javascript']</code></td>
+<td><code>ObjectOwnershipStr</code></td>
 <td>
 <p>object ownership to use</p>
 </td>

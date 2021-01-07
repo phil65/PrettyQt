@@ -1415,7 +1415,7 @@
                 
                 <h1 id="location-module">location module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.location" id="prettyqt.location" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.location" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>Location module.</p>
@@ -1424,6 +1424,7 @@
 <h2 class="doc doc-heading" id="prettyqt.location.geomaneuver">
 
         <code>geomaneuver</code>
+
 
 
       </h2>
@@ -1435,14 +1436,14 @@
         <code>GeoManeuver</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.geomaneuver.GeoManeuver.get_direction">
 
-        <code class="highlight language-python">
-get_direction<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InstructionDirectionStr</span></code>
 
 
       </h4>
@@ -1458,7 +1459,7 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'forward', 'bear_right', 'light_right', 'right', 'hard_right', 'u_turn_right', 'u_turn_left', 'hard_left', 'left', 'light_left', 'bear_left']</code></td>
+<td><code>InstructionDirectionStr</code></td>
 <td>
 <p>Direction</p>
 </td>
@@ -1483,8 +1484,7 @@ get_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.geomaneuver.GeoManeuver.set_direction">
 
-        <code class="highlight language-python">
-set_direction<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">InstructionDirectionStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1503,7 +1503,7 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
 <tbody>
 <tr>
 <td><code>direction</code></td>
-<td><code>Literal['none', 'forward', 'bear_right', 'light_right', 'right', 'hard_right', 'u_turn_right', 'u_turn_left', 'hard_left', 'left', 'light_left', 'bear_left']</code></td>
+<td><code>InstructionDirectionStr</code></td>
 <td>
 <p>Direction</p>
 </td>
@@ -1560,6 +1560,7 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
         <code>georouterequest</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1569,14 +1570,14 @@ set_direction<span class="p">(</span><span class="bp">self</span><span class="p"
         <code>GeoRouteRequest</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.georouterequest.GeoRouteRequest.get_feature_weight">
 
-        <code class="highlight language-python">
-get_feature_weight<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="n">FeatureTypeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FeatureWeightStr</span></code>
 
 
       </h4>
@@ -1592,7 +1593,7 @@ get_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['neutral', 'prefer', 'require', 'avoid', 'disallow']</code></td>
+<td><code>FeatureWeightStr</code></td>
 <td>
 <p>Feature weight</p>
 </td>
@@ -1619,8 +1620,7 @@ get_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.georouterequest.GeoRouteRequest.get_route_optimization">
 
-        <code class="highlight language-python">
-get_route_optimization<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RouteOptimizationStr</span></code>
 
 
       </h4>
@@ -1636,7 +1636,7 @@ get_route_optimization<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['shortest', 'fastest', 'most_economic', 'most_scenic']</code></td>
+<td><code>RouteOptimizationStr</code></td>
 <td>
 <p>Route optimization</p>
 </td>
@@ -1661,8 +1661,7 @@ get_route_optimization<span class="p">(</span><span class="bp">self</span><span 
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.georouterequest.GeoRouteRequest.set_feature_weight">
 
-        <code class="highlight language-python">
-set_feature_weight<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">weight</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="n">FeatureTypeStr</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">FeatureWeightStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1681,7 +1680,7 @@ set_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>feature</code></td>
-<td><code>Literal['none', 'toll', 'highway', 'public_transit', 'ferry', 'tunnel', 'dirt_road', 'parks', 'motor_pool_lane', 'traffic']</code></td>
+<td><code>FeatureTypeStr</code></td>
 <td>
 <p>Feature type</p>
 </td>
@@ -1689,7 +1688,7 @@ set_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 </tr>
 <tr>
 <td><code>weight</code></td>
-<td><code>Literal['neutral', 'prefer', 'require', 'avoid', 'disallow']</code></td>
+<td><code>FeatureWeightStr</code></td>
 <td>
 <p>Feature weight</p>
 </td>
@@ -1740,8 +1739,7 @@ set_feature_weight<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.georouterequest.GeoRouteRequest.set_route_optimization">
 
-        <code class="highlight language-python">
-set_route_optimization<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimization</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimization</span><span class="p">:</span> <span class="n">RouteOptimizationStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1760,7 +1758,7 @@ set_route_optimization<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>optimization</code></td>
-<td><code>Literal['shortest', 'fastest', 'most_economic', 'most_scenic']</code></td>
+<td><code>RouteOptimizationStr</code></td>
 <td>
 <p>Route optimization</p>
 </td>
@@ -1817,6 +1815,7 @@ set_route_optimization<span class="p">(</span><span class="bp">self</span><span 
         <code>place</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1826,14 +1825,14 @@ set_route_optimization<span class="p">(</span><span class="bp">self</span><span 
         <code>Place</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.place.Place.get_visibility">
 
-        <code class="highlight language-python">
-get_visibility<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">VisibilityStr</span></code>
 
 
       </h4>
@@ -1849,7 +1848,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unspecified', 'device', 'private', 'public']</code></td>
+<td><code>location.VisibilityStr</code></td>
 <td>
 <p>Visibility</p>
 </td>
@@ -1883,6 +1882,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
         <code>placecategory</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1892,14 +1892,14 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
         <code>PlaceCategory</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placecategory.PlaceCategory.get_visibility">
 
-        <code class="highlight language-python">
-get_visibility<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">VisibilityStr</span></code>
 
 
       </h4>
@@ -1915,7 +1915,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unspecified', 'device', 'private', 'public']</code></td>
+<td><code>location.VisibilityStr</code></td>
 <td>
 <p>Visibility</p>
 </td>
@@ -1949,6 +1949,7 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
         <code>placecontent</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1958,14 +1959,14 @@ get_visibility<span class="p">(</span><span class="bp">self</span><span class="p
         <code>PlaceContent</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placecontent.PlaceContent.get_type">
 
-        <code class="highlight language-python">
-get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span></code>
 
 
       </h4>
@@ -1981,7 +1982,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'image', 'review', 'editorial', 'custom']</code></td>
+<td><code>TypeStr</code></td>
 <td>
 <p>Place type</p>
 </td>
@@ -2015,6 +2016,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
         <code>placecontentrequest</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2024,14 +2026,14 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
         <code>PlaceContentRequest</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placecontentrequest.PlaceContentRequest.get_content_type">
 
-        <code class="highlight language-python">
-get_content_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TypeStr</span></code>
 
 
       </h4>
@@ -2047,7 +2049,7 @@ get_content_type<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'image', 'review', 'editorial', 'custom']</code></td>
+<td><code>location.placecontent.TypeStr</code></td>
 <td>
 <p>Relevance type</p>
 </td>
@@ -2072,8 +2074,7 @@ get_content_type<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placecontentrequest.PlaceContentRequest.set_content_type">
 
-        <code class="highlight language-python">
-set_content_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TypeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2092,7 +2093,7 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['none', 'image', 'review', 'editorial', 'custom']</code></td>
+<td><code>location.placecontent.TypeStr</code></td>
 <td>
 <p>Relevance type</p>
 </td>
@@ -2149,6 +2150,7 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
         <code>placeidreply</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2158,14 +2160,14 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
         <code>PlaceIdReply</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placeidreply.PlaceIdReply.get_operation_type">
 
-        <code class="highlight language-python">
-get_operation_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_operation_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OperationTypeStr</span></code>
 
 
       </h4>
@@ -2215,6 +2217,7 @@ get_operation_type<span class="p">(</span><span class="bp">self</span><span clas
         <code>placereply</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2224,14 +2227,14 @@ get_operation_type<span class="p">(</span><span class="bp">self</span><span clas
         <code>PlaceReply</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placereply.PlaceReply.get_error">
 
-        <code class="highlight language-python">
-get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span></code>
 
 
       </h4>
@@ -2247,7 +2250,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'place_does_not_exist', 'category_does_not_exist', 'communication', 'parse', 'permissions', 'unsupported', 'bad_argument', 'cancel', 'unknown']</code></td>
+<td><code>ErrorStr</code></td>
 <td>
 <p>Error type</p>
 </td>
@@ -2272,8 +2275,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placereply.PlaceReply.get_type">
 
-        <code class="highlight language-python">
-get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span></code>
 
 
       </h4>
@@ -2289,7 +2291,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['generic', 'details', 'search', 'search_suggestion', 'content', 'id', 'match']</code></td>
+<td><code>TypeStr</code></td>
 <td>
 <p>Type</p>
 </td>
@@ -2323,6 +2325,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
         <code>placesearchrequest</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2332,14 +2335,14 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
         <code>PlaceSearchRequest</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placesearchrequest.PlaceSearchRequest.get_relevance_hint">
 
-        <code class="highlight language-python">
-get_relevance_hint<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RelevanceHintStr</span></code>
 
 
       </h4>
@@ -2355,7 +2358,7 @@ get_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unspecified', 'distance', 'lexical_place_name']</code></td>
+<td><code>RelevanceHintStr</code></td>
 <td>
 <p>Relevance hint</p>
 </td>
@@ -2380,8 +2383,7 @@ get_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placesearchrequest.PlaceSearchRequest.get_visibility_scope">
 
-        <code class="highlight language-python">
-get_visibility_scope<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_visibility_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">VisibilityStr</span></code>
 
 
       </h4>
@@ -2397,7 +2399,7 @@ get_visibility_scope<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unspecified', 'device', 'private', 'public']</code></td>
+<td><code>location.VisibilityStr</code></td>
 <td>
 <p>Visibility scope</p>
 </td>
@@ -2422,8 +2424,7 @@ get_visibility_scope<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placesearchrequest.PlaceSearchRequest.set_relevance_hint">
 
-        <code class="highlight language-python">
-set_relevance_hint<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">RelevanceHintStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2442,7 +2443,7 @@ set_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
 <tbody>
 <tr>
 <td><code>hint</code></td>
-<td><code>Literal['unspecified', 'distance', 'lexical_place_name']</code></td>
+<td><code>RelevanceHintStr</code></td>
 <td>
 <p>Relevance hint</p>
 </td>
@@ -2499,6 +2500,7 @@ set_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
         <code>placesearchresult</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2508,14 +2510,14 @@ set_relevance_hint<span class="p">(</span><span class="bp">self</span><span clas
         <code>PlaceSearchResult</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.location.placesearchresult.PlaceSearchResult.get_type">
 
-        <code class="highlight language-python">
-get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span></code>
 
 
       </h4>
@@ -2531,7 +2533,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unknown', 'place', 'proposed_search']</code></td>
+<td><code>TypeStr</code></td>
 <td>
 <p>Result type</p>
 </td>

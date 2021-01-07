@@ -1241,7 +1241,7 @@
                 
                 <h1 id="syntaxhighlighters-module">syntaxhighlighters module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.syntaxhighlighters" id="prettyqt.syntaxhighlighters" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.syntaxhighlighters" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>syntaxhighlighters module.</p>
@@ -1253,6 +1253,7 @@
         <code>highlightrule</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1261,19 +1262,19 @@
 
         <code>HighlightRule</code>
 
+
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
   </span>
 
       </h3>
 <div class="doc doc-contents ">
-<p>HighlightRule(regex: Union[str, List[str]] = '', color: str = 'black', italic: bool = False, bold: bool = False, minimal: bool = False, font_size: Union[float, NoneType] = None, nth: int = 0, fmt: prettyqt.gui.textcharformat.TextCharFormat = TextCharFormat(2))</p>
+<p>HighlightRule(regex: 'Union[str, List[str]]' = '', color: 'str' = 'black', italic: 'bool' = False, bold: 'bool' = False, minimal: 'bool' = False, font_size: 'Optional[float]' = None, nth: 'int' = 0, fmt: 'gui.TextCharFormat' = TextCharFormat(2))</p>
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.highlightrule.HighlightRule.__init_subclass__">
 
-        <code class="highlight language-python">
-__init_subclass__<span class="p">()</span>        </code>
+<code class="highlight language-python"><span class="n">__init_subclass__</span><span class="p">()</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -1313,6 +1314,7 @@ overridden to extend subclasses.</p>
         <code>jsonhighlighter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1322,14 +1324,14 @@ overridden to extend subclasses.</p>
         <code>JsonHighlighter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.jsonhighlighter.JsonHighlighter.highlightBlock">
 
-        <code class="highlight language-python">
-highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1365,6 +1367,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>markdownhighlighter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <p>Syntax highlighter for Markdown markup language.</p>
@@ -1375,14 +1378,14 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>MarkdownHighlighter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.markdownhighlighter.MarkdownHighlighter.highlightBlock">
 
-        <code class="highlight language-python">
-highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1412,6 +1415,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>pygmentshighlighter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1421,6 +1425,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>PygmentsHighlighter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <p>Syntax highlighter that uses Pygments for parsing.</p>
@@ -1428,8 +1433,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.highlightBlock">
 
-        <code class="highlight language-python">
-highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1466,8 +1470,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.set_style">
 
-        <code class="highlight language-python">
-set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Style</span><span class="p">])</span></code>
 
 
       </h4>
@@ -1490,8 +1493,7 @@ set_style<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.set_style_sheet">
 
-        <code class="highlight language-python">
-set_style_sheet<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_style_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1531,8 +1533,7 @@ other, i.e. they cannot be used in conjunction.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="prettyqt.syntaxhighlighters.pygmentshighlighter.get_tokens_unprocessed">
 
-        <code class="highlight language-python">
-get_tokens_unprocessed<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">stack</span><span class="o">=</span><span class="p">(</span><span class="s1">'root'</span><span class="p">,))</span>        </code>
+<code class="highlight language-python"><span class="n">get_tokens_unprocessed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">stack</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'root'</span><span class="p">,))</span></code>
 
 
       </h3>
@@ -1616,8 +1617,7 @@ below), and use it to continue processing the current line.</p>
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="prettyqt.syntaxhighlighters.pygmentshighlighter.qstring_length">
 
-        <code class="highlight language-python">
-qstring_length<span class="p">(</span><span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">qstring_length</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
 
 
       </h3>
@@ -1649,6 +1649,7 @@ qstring_length<span class="p">(</span><span class="n">text</span><span class="p"
         <code>pythonhighlighter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <p>Syntax highlighter for the programming language Python.</p>
@@ -1659,6 +1660,7 @@ qstring_length<span class="p">(</span><span class="n">text</span><span class="p"
         <code>PythonHighlighter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <p>Syntax highlighter for the Python language.</p>
@@ -1666,8 +1668,7 @@ qstring_length<span class="p">(</span><span class="n">text</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.pythonhighlighter.PythonHighlighter.highlightBlock">
 
-        <code class="highlight language-python">
-highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1692,8 +1693,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.pythonhighlighter.PythonHighlighter.match_multiline">
 
-        <code class="highlight language-python">
-match_multiline<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">,</span> <span class="n">in_state</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">match_multiline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpression</span><span class="p">,</span> <span class="n">in_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1771,6 +1771,7 @@ inside a multi-line string when this function is finished.</p>
         <code>regexmatchhighlighter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1780,14 +1781,14 @@ inside a multi-line string when this function is finished.</p>
         <code>RegexMatchHighlighter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.regexmatchhighlighter.RegexMatchHighlighter.highlightBlock">
 
-        <code class="highlight language-python">
-highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1843,6 +1844,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>xmlhighlighter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <p>Based on http://www.yasinuludag.com/blog/?p=49 .</p>
@@ -1853,14 +1855,14 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>XmlHighlighter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.xmlhighlighter.XmlHighlighter.highlightBlock">
 
-        <code class="highlight language-python">
-highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1907,6 +1909,7 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>yamlhighlighter</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1916,14 +1919,14 @@ highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p
         <code>YamlHighlighter</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.yamlhighlighter.YamlHighlighter.highlightBlock">
 
-        <code class="highlight language-python">
-highlightBlock<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
 
 
       </h4>

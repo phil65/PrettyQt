@@ -963,7 +963,7 @@
                 
                 <h1 id="positioning-module">positioning module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.positioning" id="prettyqt.positioning" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.positioning" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>Positioning module.</p>
@@ -975,6 +975,7 @@
         <code>geoareamonitorsource</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -984,14 +985,14 @@
         <code>GeoAreaMonitorSource</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.positioning.geoareamonitorsource.GeoAreaMonitorSource.get_error">
 
-        <code class="highlight language-python">
-get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AreaMonitorFeatureStr</span></code>
 
 
       </h4>
@@ -1007,7 +1008,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['persistent_area', 'any_area']</code></td>
+<td><code>AreaMonitorFeatureStr</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -1041,6 +1042,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
         <code>geopositioninfosource</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1050,14 +1052,14 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
         <code>GeoPositionInfoSource</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.positioning.geopositioninfosource.GeoPositionInfoSource.get_error">
 
-        <code class="highlight language-python">
-get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span></code>
 
 
       </h4>
@@ -1073,7 +1075,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['access_error', 'closed_error', 'none', 'unknown_source']</code></td>
+<td><code>ErrorStr</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -1098,8 +1100,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.positioning.geopositioninfosource.GeoPositionInfoSource.get_preferred_positioning_methods">
 
-        <code class="highlight language-python">
-get_preferred_positioning_methods<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">PositioningMethodStr</span><span class="p">]</span></code>
 
 
       </h4>
@@ -1115,7 +1116,7 @@ get_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
 </thead>
 <tbody>
 <tr>
-<td><code>List[Literal['none', 'satellite', 'non_satellite', 'all']]</code></td>
+<td><code>List[PositioningMethodStr]</code></td>
 <td>
 <p>list of preferred positioning methods</p>
 </td>
@@ -1144,8 +1145,7 @@ get_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.positioning.geopositioninfosource.GeoPositionInfoSource.get_supported_positioning_methods">
 
-        <code class="highlight language-python">
-get_supported_positioning_methods<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_supported_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">PositioningMethodStr</span><span class="p">]</span></code>
 
 
       </h4>
@@ -1161,7 +1161,7 @@ get_supported_positioning_methods<span class="p">(</span><span class="bp">self</
 </thead>
 <tbody>
 <tr>
-<td><code>List[Literal['none', 'satellite', 'non_satellite', 'all']]</code></td>
+<td><code>List[PositioningMethodStr]</code></td>
 <td>
 <p>list of supported positioning methods</p>
 </td>
@@ -1190,8 +1190,7 @@ get_supported_positioning_methods<span class="p">(</span><span class="bp">self</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.positioning.geopositioninfosource.GeoPositionInfoSource.set_preferred_positioning_methods">
 
-        <code class="highlight language-python">
-set_preferred_positioning_methods<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">methods</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">methods</span><span class="p">:</span> <span class="n">PositioningMethodStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1210,7 +1209,7 @@ set_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
 <tbody>
 <tr>
 <td><code>methods</code></td>
-<td><code>Literal['none', 'satellite', 'non_satellite', 'all']</code></td>
+<td><code>PositioningMethodStr</code></td>
 <td>
 <p>positioning methods to use</p>
 </td>
@@ -1269,6 +1268,7 @@ set_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
         <code>geosatelliteinfo</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1278,14 +1278,14 @@ set_preferred_positioning_methods<span class="p">(</span><span class="bp">self</
         <code>GeoSatelliteInfo</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.positioning.geosatelliteinfo.GeoSatelliteInfo.get_satellite_system">
 
-        <code class="highlight language-python">
-get_satellite_system<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SatelliteSystemStr</span></code>
 
 
       </h4>
@@ -1301,7 +1301,7 @@ get_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['undefined', 'gps', 'glonass']</code></td>
+<td><code>SatelliteSystemStr</code></td>
 <td>
 <p>satellite system</p>
 </td>
@@ -1326,8 +1326,7 @@ get_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.positioning.geosatelliteinfo.GeoSatelliteInfo.set_satellite_system">
 
-        <code class="highlight language-python">
-set_satellite_system<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="n">SatelliteSystemStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1346,7 +1345,7 @@ set_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>system</code></td>
-<td><code>Literal['undefined', 'gps', 'glonass']</code></td>
+<td><code>SatelliteSystemStr</code></td>
 <td>
 <p>satellite system to use</p>
 </td>
@@ -1403,6 +1402,7 @@ set_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
         <code>geosatelliteinfosource</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1412,14 +1412,14 @@ set_satellite_system<span class="p">(</span><span class="bp">self</span><span cl
         <code>GeoSatelliteInfoSource</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.positioning.geosatelliteinfosource.GeoSatelliteInfoSource.get_error">
 
-        <code class="highlight language-python">
-get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span></code>
 
 
       </h4>
@@ -1435,7 +1435,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['access_error', 'closed_error', 'none', 'unknown_source']</code></td>
+<td><code>ErrorStr</code></td>
 <td>
 <p>error type</p>
 </td>

@@ -723,7 +723,7 @@
                 
                 <h1 id="bluetooth-module">bluetooth module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.bluetooth" id="prettyqt.bluetooth" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.bluetooth" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>bluetooth module.</p>
@@ -735,6 +735,7 @@
         <code>bluetoothdevicediscoveryagent</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -744,14 +745,14 @@
         <code>BluetoothDeviceDiscoveryAgent</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.bluetooth.bluetoothdevicediscoveryagent.BluetoothDeviceDiscoveryAgent.get_inquiry_type">
 
-        <code class="highlight language-python">
-get_inquiry_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_inquiry_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InquiryTypeStr</span></code>
 
 
       </h4>
@@ -767,7 +768,7 @@ get_inquiry_type<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unlimited', 'limited']</code></td>
+<td><code>InquiryTypeStr</code></td>
 <td>
 <p>inquiry type</p>
 </td>
@@ -792,8 +793,7 @@ get_inquiry_type<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.bluetooth.bluetoothdevicediscoveryagent.BluetoothDeviceDiscoveryAgent.set_inquiry_type">
 
-        <code class="highlight language-python">
-set_inquiry_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_inquiry_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">InquiryTypeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -812,7 +812,7 @@ set_inquiry_type<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['unlimited', 'limited']</code></td>
+<td><code>InquiryTypeStr</code></td>
 <td>
 <p>inquiry type</p>
 </td>

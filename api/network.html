@@ -1241,7 +1241,7 @@
                 
                 <h1 id="network-module">network module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.network" id="prettyqt.network" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.network" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>Network module.</p>
@@ -1253,6 +1253,7 @@
         <code>abstractsocket</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1262,14 +1263,14 @@
         <code>AbstractSocket</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.abstractsocket.AbstractSocket.set_pause_mode">
 
-        <code class="highlight language-python">
-set_pause_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_pause_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PauseModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1288,7 +1289,7 @@ set_pause_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['never', 'on_ssl_errors']</code></td>
+<td><code>PauseModeStr</code></td>
 <td>
 <p>pause mode</p>
 </td>
@@ -1345,6 +1346,7 @@ set_pause_mode<span class="p">(</span><span class="bp">self</span><span class="p
         <code>httpmultipart</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1354,14 +1356,14 @@ set_pause_mode<span class="p">(</span><span class="bp">self</span><span class="p
         <code>HttpMultiPart</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.httpmultipart.HttpMultiPart.set_content_type">
 
-        <code class="highlight language-python">
-set_content_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">ContentTypeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1380,7 +1382,7 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['mixed', 'related', 'form', 'alternative']</code></td>
+<td><code>ContentTypeStr</code></td>
 <td>
 <p>content type</p>
 </td>
@@ -1437,6 +1439,7 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
         <code>networkaccessmanager</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1446,14 +1449,14 @@ set_content_type<span class="p">(</span><span class="bp">self</span><span class=
         <code>NetworkAccessManager</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkaccessmanager.NetworkAccessManager.get">
 
-        <code class="highlight language-python">
-get<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">])</span></code>
 
 
       </h4>
@@ -1475,8 +1478,7 @@ get<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkaccessmanager.NetworkAccessManager.get_redirect_policy">
 
-        <code class="highlight language-python">
-get_redirect_policy<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">RedirectPolicyStr</span></code>
 
 
       </h4>
@@ -1492,7 +1494,7 @@ get_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['manual', 'no_less_safe', 'same_origin', 'user_verified']</code></td>
+<td><code>network.networkrequest.RedirectPolicyStr</code></td>
 <td>
 <p>redirect policy</p>
 </td>
@@ -1517,8 +1519,7 @@ get_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkaccessmanager.NetworkAccessManager.set_redirect_policy">
 
-        <code class="highlight language-python">
-set_redirect_policy<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">RedirectPolicyStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1537,7 +1538,7 @@ set_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>policy</code></td>
-<td><code>Literal['manual', 'no_less_safe', 'same_origin', 'user_verified']</code></td>
+<td><code>network.networkrequest.RedirectPolicyStr</code></td>
 <td>
 <p>redirect policy</p>
 </td>
@@ -1594,6 +1595,7 @@ set_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
         <code>networkaddressentry</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1603,14 +1605,14 @@ set_redirect_policy<span class="p">(</span><span class="bp">self</span><span cla
         <code>NetworkAddressEntry</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkaddressentry.NetworkAddressEntry.get_dns_eligibility">
 
-        <code class="highlight language-python">
-get_dns_eligibility<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DnsEligibilityStatusStr</span></code>
 
 
       </h4>
@@ -1626,7 +1628,7 @@ get_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unknown', 'eligible', 'ineligible']</code></td>
+<td><code>DnsEligibilityStatusStr</code></td>
 <td>
 <p>DNS eligibility</p>
 </td>
@@ -1651,8 +1653,7 @@ get_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkaddressentry.NetworkAddressEntry.set_dns_eligibility">
 
-        <code class="highlight language-python">
-set_dns_eligibility<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">DnsEligibilityStatusStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1671,7 +1672,7 @@ set_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
 <tbody>
 <tr>
 <td><code>status</code></td>
-<td><code>Literal['unknown', 'eligible', 'ineligible']</code></td>
+<td><code>DnsEligibilityStatusStr</code></td>
 <td>
 <p>DNS eligibility status</p>
 </td>
@@ -1728,6 +1729,7 @@ set_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
         <code>networkinterface</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1737,14 +1739,14 @@ set_dns_eligibility<span class="p">(</span><span class="bp">self</span><span cla
         <code>NetworkInterface</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkinterface.NetworkInterface.get_type">
 
-        <code class="highlight language-python">
-get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InterfaceTypeStr</span></code>
 
 
       </h4>
@@ -1794,6 +1796,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
         <code>networkproxy</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1803,14 +1806,14 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
         <code>NetworkProxy</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkproxy.NetworkProxy.get_type">
 
-        <code class="highlight language-python">
-get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProxyTypeStr</span></code>
 
 
       </h4>
@@ -1826,7 +1829,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'default', 'socks5', 'http', 'http_caching', 'ftp_caching']</code></td>
+<td><code>ProxyTypeStr</code></td>
 <td>
 <p>type</p>
 </td>
@@ -1851,8 +1854,7 @@ get_type<span class="p">(</span><span class="bp">self</span><span class="p">)</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkproxy.NetworkProxy.set_type">
 
-        <code class="highlight language-python">
-set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">ProxyTypeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1871,7 +1873,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['none', 'default', 'socks5', 'http', 'http_caching', 'ftp_caching']</code></td>
+<td><code>ProxyTypeStr</code></td>
 <td>
 <p>proxy type</p>
 </td>
@@ -1928,6 +1930,7 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
         <code>networkrequest</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -1937,14 +1940,14 @@ set_type<span class="p">(</span><span class="bp">self</span><span class="p">,</s
         <code>NetworkRequest</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkrequest.NetworkRequest.get_priority">
 
-        <code class="highlight language-python">
-get_priority<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PriorityStr</span></code>
 
 
       </h4>
@@ -1960,7 +1963,7 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['high', 'normal', 'low']</code></td>
+<td><code>PriorityStr</code></td>
 <td>
 <p>priority</p>
 </td>
@@ -1985,8 +1988,7 @@ get_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.networkrequest.NetworkRequest.set_priority">
 
-        <code class="highlight language-python">
-set_priority<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="n">PriorityStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2005,7 +2007,7 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
 <tbody>
 <tr>
 <td><code>priority</code></td>
-<td><code>Literal['high', 'normal', 'low']</code></td>
+<td><code>PriorityStr</code></td>
 <td>
 <p>priority</p>
 </td>
@@ -2062,6 +2064,7 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
         <code>tcpserver</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2071,14 +2074,14 @@ set_priority<span class="p">(</span><span class="bp">self</span><span class="p">
         <code>TcpServer</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.network.tcpserver.TcpServer.listen">
 
-        <code class="highlight language-python">
-listen<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">listen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">],</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
 
 
       </h4>

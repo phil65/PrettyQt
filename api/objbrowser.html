@@ -1161,7 +1161,7 @@
                 
                 <h1 id="objbrowser-module">objbrowser module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.objbrowser" id="prettyqt.objbrowser" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.objbrowser" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>Objbrowser package.</p>
@@ -1172,6 +1172,7 @@
         <code>attribute_model</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <p>Module that defines AttributeModel.</p>
@@ -1179,8 +1180,7 @@
 <div class="doc doc-object doc-function">
 <h3 class="doc doc-heading" id="prettyqt.objbrowser.attribute_model.safe_data_fn">
 
-        <code class="highlight language-python">
-safe_data_fn<span class="p">(</span><span class="n">obj_fn</span><span class="p">,</span> <span class="n">log_exceptions</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">safe_data_fn</span><span class="p">(</span><span class="n">obj_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">log_exceptions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span></code>
 
 
       </h3>
@@ -1232,6 +1232,7 @@ safe_data_fn<span class="p">(</span><span class="n">obj_fn</span><span class="p"
         <code>objectbrowser</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <p>Object browser GUI in Qt.</p>
@@ -1242,6 +1243,7 @@ safe_data_fn<span class="p">(</span><span class="n">obj_fn</span><span class="p"
         <code>ObjectBrowser</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <p>Object browser main application window.</p>
@@ -1249,8 +1251,7 @@ safe_data_fn<span class="p">(</span><span class="n">obj_fn</span><span class="p"
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowser.ObjectBrowser.browse">
 
-        <code class="highlight language-python">
-browse<span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">browse</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -1294,8 +1295,7 @@ browse<span class="p">(</span><span class="o">*</span><span class="n">args</span
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowser.ObjectBrowser.closeEvent">
 
-        <code class="highlight language-python">
-closeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1335,8 +1335,7 @@ closeEvent<span class="p">(</span><span class="bp">self</span><span class="p">,<
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowser.ObjectBrowser.toggle_auto_refresh">
 
-        <code class="highlight language-python">
-toggle_auto_refresh<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checked</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">toggle_auto_refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checked</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1371,6 +1370,7 @@ toggle_auto_refresh<span class="p">(</span><span class="bp">self</span><span cla
         <code>objectbrowsertreemodel</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <p>Module that defines the TreeModel.</p>
@@ -1385,6 +1385,7 @@ toggle_auto_refresh<span class="p">(</span><span class="bp">self</span><span cla
         <code>ObjectBrowserTreeItem</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <p>Tree node class that can be used to build trees of objects.</p>
@@ -1392,8 +1393,7 @@ toggle_auto_refresh<span class="p">(</span><span class="bp">self</span><span cla
 <div class="doc doc-object doc-attribute">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeItem.is_callable_attribute">
 
-        <code class="highlight">
-is_callable_attribute: <span class="nb">bool</span>        </code>
+<code class="highlight language-python"><span class="n">is_callable_attribute</span><span class="p">:</span> <span class="nb">bool</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -1408,8 +1408,7 @@ is_callable_attribute: <span class="nb">bool</span>        </code>
 <div class="doc doc-object doc-attribute">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeItem.is_special_attribute">
 
-        <code class="highlight">
-is_special_attribute: <span class="nb">bool</span>        </code>
+<code class="highlight language-python"><span class="n">is_special_attribute</span><span class="p">:</span> <span class="nb">bool</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -1430,6 +1429,7 @@ is_special_attribute: <span class="nb">bool</span>        </code>
         <code>ObjectBrowserTreeModel</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <p>Model that provides an interface to an objectree that is build of tree items.</p>
@@ -1437,8 +1437,7 @@ is_special_attribute: <span class="nb">bool</span>        </code>
 <div class="doc doc-object doc-attribute">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.inspected_node_is_visible">
 
-        <code class="highlight">
-inspected_node_is_visible        </code>
+<code class="highlight language-python"><span class="n">inspected_node_is_visible</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -1454,8 +1453,7 @@ inspected_node_is_visible        </code>
 <div class="doc doc-object doc-attribute">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.root_item">
 
-        <code class="highlight">
-root_item: <span class="n">ObjectBrowserTreeItem</span>        </code>
+<code class="highlight language-python"><span class="n">root_item</span><span class="p">:</span> <span class="n">ObjectBrowserTreeItem</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>
@@ -1470,8 +1468,7 @@ root_item: <span class="n">ObjectBrowserTreeItem</span>        </code>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.__init__">
 
-        <code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">obj_name</span><span class="o">=</span><span class="s1">''</span><span class="p">,</span> <span class="n">attr_cols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">obj_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">''</span><span class="p">,</span> <span class="n">attr_cols</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">custom_models</span><span class="o">.</span><span class="n">ColumnItem</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -1577,8 +1574,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.canFetchMore">
 
-        <code class="highlight language-python">
-canFetchMore<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">canFetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1603,8 +1599,7 @@ canFetchMore<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.fetchMore">
 
-        <code class="highlight language-python">
-fetchMore<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">fetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1641,8 +1636,7 @@ fetchMore<span class="p">(</span><span class="bp">self</span><span class="p">,</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.flags">
 
-        <code class="highlight language-python">
-flags<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1663,8 +1657,7 @@ flags<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.hasChildren">
 
-        <code class="highlight language-python">
-hasChildren<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">hasChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1687,8 +1680,7 @@ hasChildren<span class="p">(</span><span class="bp">self</span><span class="p">,
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.index">
 
-        <code class="highlight language-python">
-index<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span></code>
 
 
       </h4>
@@ -1728,8 +1720,7 @@ index<span class="p">(</span><span class="bp">self</span><span class="p">,</span
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.inspected_index">
 
-        <code class="highlight language-python">
-inspected_index<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">inspected_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span></code>
 
 
       </h4>
@@ -1752,8 +1743,7 @@ inspected_index<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.parent">
 
-        <code class="highlight language-python">
-parent<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span></code>
 
 
       </h4>
@@ -1782,8 +1772,7 @@ parent(self) -&gt; QObject</p>
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.refresh_tree">
 
-        <code class="highlight language-python">
-refresh_tree<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1833,8 +1822,7 @@ refresh_tree<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.root_index">
 
-        <code class="highlight language-python">
-root_index<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">root_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span></code>
 
 
       </h4>
@@ -1854,8 +1842,7 @@ root_index<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.rowCount">
 
-        <code class="highlight language-python">
-rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1886,6 +1873,7 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
         <code>ObjectBrowserTreeProxyModel</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <p>Proxy model that overrides the sorting and can filter out items.</p>
@@ -1893,8 +1881,7 @@ rowCount<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.__init__">
 
-        <code class="highlight language-python">
-__init__<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callable_attrs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callable_attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -1941,8 +1928,7 @@ __init__<span class="p">(</span><span class="bp">self</span><span class="p">,</s
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.filterAcceptsRow">
 
-        <code class="highlight language-python">
-filterAcceptsRow<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_row</span><span class="p">,</span> <span class="n">source_parent_index</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">filterAcceptsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">source_parent_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span></code>
 
 
       </h4>
@@ -1970,8 +1956,7 @@ filterAcceptsRow<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.first_item_index">
 
-        <code class="highlight language-python">
-first_item_index<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">first_item_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span></code>
 
 
       </h4>
@@ -1996,8 +1981,7 @@ first_item_index<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.set_show_callables">
 
-        <code class="highlight language-python">
-set_show_callables<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_show_callables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2019,8 +2003,7 @@ set_show_callables<span class="p">(</span><span class="bp">self</span><span clas
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.set_show_special_attrs">
 
-        <code class="highlight language-python">
-set_show_special_attrs<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_show_special_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span></code>
 
 
       </h4>

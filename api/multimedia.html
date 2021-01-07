@@ -1877,7 +1877,7 @@
                 
                 <h1 id="multimedia-module">multimedia module</h1>
 <div class="doc doc-object doc-module">
-<h2 class="hidden-toc" href="#prettyqt.multimedia" id="prettyqt.multimedia" style="visibility: hidden; position: absolute;">
+<h2 class="hidden-toc" id="prettyqt.multimedia" style="visibility: hidden; position: absolute;">
         </h2>
 <div class="doc doc-contents first">
 <p>Multimedia module.</p>
@@ -1886,6 +1886,7 @@
 <h2 class="doc doc-heading" id="prettyqt.multimedia.abstractvideobuffer">
 
         <code>abstractvideobuffer</code>
+
 
 
       </h2>
@@ -1897,14 +1898,14 @@
         <code>AbstractVideoBuffer</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.abstractvideobuffer.AbstractVideoBuffer.get_handle_type">
 
-        <code class="highlight language-python">
-get_handle_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_handle_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HandleTypeStr</span></code>
 
 
       </h4>
@@ -1920,7 +1921,7 @@ get_handle_type<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'gl_texture', 'xv_shm_image', 'core_image', 'pixmap', 'egl_image', 'user']</code></td>
+<td><code>HandleTypeStr</code></td>
 <td>
 <p>handle type</p>
 </td>
@@ -1945,8 +1946,7 @@ get_handle_type<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.abstractvideobuffer.AbstractVideoBuffer.get_map_mode">
 
-        <code class="highlight language-python">
-get_map_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_map_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MapModeStr</span></code>
 
 
       </h4>
@@ -1962,7 +1962,7 @@ get_map_mode<span class="p">(</span><span class="bp">self</span><span class="p">
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['not_mapped', 'read_only', 'write_only', 'read_write']</code></td>
+<td><code>MapModeStr</code></td>
 <td>
 <p>map mode</p>
 </td>
@@ -1987,8 +1987,7 @@ get_map_mode<span class="p">(</span><span class="bp">self</span><span class="p">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.abstractvideobuffer.AbstractVideoBuffer.map">
 
-        <code class="highlight language-python">
-map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">num_bytes</span><span class="p">,</span> <span class="n">bytes_per_line</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">num_bytes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">bytes_per_line</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2023,6 +2022,7 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
         <code>audioencodersettings</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2030,6 +2030,7 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <h3 class="doc doc-heading" id="prettyqt.multimedia.audioencodersettings.Settings">
 
         <code>Settings</code>
+
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
@@ -2039,6 +2040,16 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <div class="doc doc-contents ">
 <p>Settings(bitrate: 'int', channel_count: 'int', codec: 'str', encoding_mode: 'EncodingModeStr', encoding_options: 'Dict[str, Any]', quality: 'QualityStr', sample_rate: 'int')</p>
 <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2062,6 +2073,7 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
         <code>audioformat</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2069,6 +2081,7 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <h3 class="doc doc-heading" id="prettyqt.multimedia.audioformat.Settings">
 
         <code>Settings</code>
+
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
@@ -2078,6 +2091,15 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
 <div class="doc doc-contents ">
 <p>Settings(sample_rate: 'int', channel_count: 'int', sample_size: 'int', byte_order: 'EndianStr', sample_type: 'SampleTypeStr', codec: 'str')</p>
 <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2101,6 +2123,7 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
         <code>camera</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2110,14 +2133,14 @@ map<span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
         <code>Camera</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camera.Camera.get_capture_mode">
 
-        <code class="highlight language-python">
-get_capture_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_capture_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CaptureModeStr</span></code>
 
 
       </h4>
@@ -2133,7 +2156,7 @@ get_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['viewfinder', 'still_image', 'video']</code></td>
+<td><code>CaptureModeStr</code></td>
 <td>
 <p>capture mode</p>
 </td>
@@ -2158,8 +2181,7 @@ get_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camera.Camera.get_error">
 
-        <code class="highlight language-python">
-get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span></code>
 
 
       </h4>
@@ -2175,7 +2197,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'camera', 'invalid_request', 'service_missing', 'not_supported_feature']</code></td>
+<td><code>ErrorStr</code></td>
 <td>
 <p>error state</p>
 </td>
@@ -2200,8 +2222,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camera.Camera.get_lock_status">
 
-        <code class="highlight language-python">
-get_lock_status<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_lock_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LockStatusStr</span></code>
 
 
       </h4>
@@ -2217,7 +2238,7 @@ get_lock_status<span class="p">(</span><span class="bp">self</span><span class="
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unlocked', 'searching', 'locked']</code></td>
+<td><code>LockStatusStr</code></td>
 <td>
 <p>lock status</p>
 </td>
@@ -2242,8 +2263,7 @@ get_lock_status<span class="p">(</span><span class="bp">self</span><span class="
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camera.Camera.get_state">
 
-        <code class="highlight language-python">
-get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span></code>
 
 
       </h4>
@@ -2259,7 +2279,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unloaded', 'loaded', 'active']</code></td>
+<td><code>StateStr</code></td>
 <td>
 <p>state</p>
 </td>
@@ -2284,8 +2304,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camera.Camera.get_status">
 
-        <code class="highlight language-python">
-get_status<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span></code>
 
 
       </h4>
@@ -2301,7 +2320,7 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['active', 'starting', 'stopping', 'standby', 'loaded', 'loading', 'unloading', 'unloaded', 'unavailable']</code></td>
+<td><code>StatusStr</code></td>
 <td>
 <p>status</p>
 </td>
@@ -2326,8 +2345,7 @@ get_status<span class="p">(</span><span class="bp">self</span><span class="p">)<
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camera.Camera.set_capture_mode">
 
-        <code class="highlight language-python">
-set_capture_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_capture_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">CaptureModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2346,7 +2364,7 @@ set_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>position</code></td>
-<td><code>Literal['viewfinder', 'still_image', 'video']</code></td>
+<td><code>CaptureModeStr</code></td>
 <td>
 <p>capture mode</p>
 </td>
@@ -2403,6 +2421,7 @@ set_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
         <code>cameraexposure</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2412,14 +2431,14 @@ set_capture_mode<span class="p">(</span><span class="bp">self</span><span class=
         <code>CameraExposure</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraexposure.CameraExposure.get_exposure_mode">
 
-        <code class="highlight language-python">
-get_exposure_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_exposure_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExposureModeStr</span></code>
 
 
       </h4>
@@ -2435,7 +2454,7 @@ get_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['auto', 'manual', 'portrait', 'night', 'backlight', 'spotlight', 'sports', 'snow', 'beach', 'large_aperture', 'small_aperture', 'action', 'landscape', 'night_portrait', 'theatre', 'sunset', 'steady_photo', 'fireworks', 'party', 'candlelight', 'barcode', 'mode_vendor']</code></td>
+<td><code>ExposureModeStr</code></td>
 <td>
 <p>exposure mode</p>
 </td>
@@ -2460,8 +2479,7 @@ get_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraexposure.CameraExposure.get_flash_mode">
 
-        <code class="highlight language-python">
-get_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_flash_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FlashModeStr</span></code>
 
 
       </h4>
@@ -2477,7 +2495,7 @@ get_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['auto', 'flash_off', 'flash_on', 'red_eye_reduction', 'fill', 'torch', 'video_light', 'sync_front_curtain', 'sync_rear_curtain', 'manual']</code></td>
+<td><code>FlashModeStr</code></td>
 <td>
 <p>flash mode</p>
 </td>
@@ -2502,8 +2520,7 @@ get_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraexposure.CameraExposure.get_metering_mode">
 
-        <code class="highlight language-python">
-get_metering_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_metering_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MeteringModeStr</span></code>
 
 
       </h4>
@@ -2519,7 +2536,7 @@ get_metering_mode<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['matrix', 'average', 'spot']</code></td>
+<td><code>MeteringModeStr</code></td>
 <td>
 <p>metering mode</p>
 </td>
@@ -2544,8 +2561,7 @@ get_metering_mode<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraexposure.CameraExposure.set_exposure_mode">
 
-        <code class="highlight language-python">
-set_exposure_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_exposure_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ExposureModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2564,7 +2580,7 @@ set_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['auto', 'manual', 'portrait', 'night', 'backlight', 'spotlight', 'sports', 'snow', 'beach', 'large_aperture', 'small_aperture', 'action', 'landscape', 'night_portrait', 'theatre', 'sunset', 'steady_photo', 'fireworks', 'party', 'candlelight', 'barcode', 'mode_vendor']</code></td>
+<td><code>ExposureModeStr</code></td>
 <td>
 <p>exposure mode</p>
 </td>
@@ -2612,8 +2628,7 @@ set_exposure_mode<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraexposure.CameraExposure.set_flash_mode">
 
-        <code class="highlight language-python">
-set_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_flash_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">FlashModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2632,7 +2647,7 @@ set_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['auto', 'flash_off', 'flash_on', 'red_eye_reduction', 'fill', 'torch', 'video_light', 'sync_front_curtain', 'sync_rear_curtain', 'manual']</code></td>
+<td><code>FlashModeStr</code></td>
 <td>
 <p>flash mode</p>
 </td>
@@ -2680,8 +2695,7 @@ set_flash_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraexposure.CameraExposure.set_metering_mode">
 
-        <code class="highlight language-python">
-set_metering_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_metering_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">MeteringModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2700,7 +2714,7 @@ set_metering_mode<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['matrix', 'average', 'spot']</code></td>
+<td><code>MeteringModeStr</code></td>
 <td>
 <p>metering mode</p>
 </td>
@@ -2757,6 +2771,7 @@ set_metering_mode<span class="p">(</span><span class="bp">self</span><span class
         <code>camerafocus</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -2766,14 +2781,14 @@ set_metering_mode<span class="p">(</span><span class="bp">self</span><span class
         <code>CameraFocus</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camerafocus.CameraFocus.get_focus_mode">
 
-        <code class="highlight language-python">
-get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_focus_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusModeStr</span></code>
 
 
       </h4>
@@ -2789,7 +2804,7 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['manual', 'hyperfocal', 'infinity', 'auto', 'continuous', 'macro']</code></td>
+<td><code>FocusModeStr</code></td>
 <td>
 <p>focus mode</p>
 </td>
@@ -2814,8 +2829,7 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camerafocus.CameraFocus.get_focus_point_mode">
 
-        <code class="highlight language-python">
-get_focus_point_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_focus_point_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusPointModeStr</span></code>
 
 
       </h4>
@@ -2831,7 +2845,7 @@ get_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['auto', 'center', 'face_detection', 'custom']</code></td>
+<td><code>FocusPointModeStr</code></td>
 <td>
 <p>focus point mode</p>
 </td>
@@ -2856,8 +2870,7 @@ get_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camerafocus.CameraFocus.set_focus_mode">
 
-        <code class="highlight language-python">
-set_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_focus_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">FocusModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2876,7 +2889,7 @@ set_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['manual', 'hyperfocal', 'infinity', 'auto', 'continuous', 'macro']</code></td>
+<td><code>FocusModeStr</code></td>
 <td>
 <p>focus mode</p>
 </td>
@@ -2924,8 +2937,7 @@ set_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camerafocus.CameraFocus.set_focus_point_mode">
 
-        <code class="highlight language-python">
-set_focus_point_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_focus_point_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">FocusPointModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -2944,7 +2956,7 @@ set_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['auto', 'center', 'face_detection', 'custom']</code></td>
+<td><code>FocusPointModeStr</code></td>
 <td>
 <p>focus point mode</p>
 </td>
@@ -3001,6 +3013,7 @@ set_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
         <code>camerafocuszone</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3010,14 +3023,14 @@ set_focus_point_mode<span class="p">(</span><span class="bp">self</span><span cl
         <code>CameraFocusZone</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.camerafocuszone.CameraFocusZone.get_focus_mode">
 
-        <code class="highlight language-python">
-get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_focus_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FocusZoneStatusStr</span></code>
 
 
       </h4>
@@ -3033,7 +3046,7 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['invalid', 'unused', 'selected', 'focused']</code></td>
+<td><code>FocusZoneStatusStr</code></td>
 <td>
 <p>focus mode</p>
 </td>
@@ -3067,6 +3080,7 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
         <code>cameraimageprocessing</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3076,14 +3090,14 @@ get_focus_mode<span class="p">(</span><span class="bp">self</span><span class="p
         <code>CameraImageProcessing</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraimageprocessing.CameraImageProcessing.get_color_filter">
 
-        <code class="highlight language-python">
-get_color_filter<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_color_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ColorFilterStr</span></code>
 
 
       </h4>
@@ -3099,7 +3113,7 @@ get_color_filter<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'grayscale', 'negative', 'solarize', 'sepia', 'posterize', 'whiteboard', 'blackboard', 'aqua', 'vendor']</code></td>
+<td><code>ColorFilterStr</code></td>
 <td>
 <p>color filter</p>
 </td>
@@ -3124,8 +3138,7 @@ get_color_filter<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraimageprocessing.CameraImageProcessing.get_white_balance_mode">
 
-        <code class="highlight language-python">
-get_white_balance_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_white_balance_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WhiteBalanceModeStr</span></code>
 
 
       </h4>
@@ -3141,7 +3154,7 @@ get_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['auto', 'manual', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'flash', 'sunset', 'vendor']</code></td>
+<td><code>WhiteBalanceModeStr</code></td>
 <td>
 <p>white balance mode</p>
 </td>
@@ -3166,8 +3179,7 @@ get_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraimageprocessing.CameraImageProcessing.set_color_filter">
 
-        <code class="highlight language-python">
-set_color_filter<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_color_filter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ColorFilterStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -3186,7 +3198,7 @@ set_color_filter<span class="p">(</span><span class="bp">self</span><span class=
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['none', 'grayscale', 'negative', 'solarize', 'sepia', 'posterize', 'whiteboard', 'blackboard', 'aqua', 'vendor']</code></td>
+<td><code>ColorFilterStr</code></td>
 <td>
 <p>color filter</p>
 </td>
@@ -3234,8 +3246,7 @@ set_color_filter<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.cameraimageprocessing.CameraImageProcessing.set_white_balance_mode">
 
-        <code class="highlight language-python">
-set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_white_balance_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">WhiteBalanceModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -3254,7 +3265,7 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['auto', 'manual', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'flash', 'sunset', 'vendor']</code></td>
+<td><code>WhiteBalanceModeStr</code></td>
 <td>
 <p>white balance mode</p>
 </td>
@@ -3311,6 +3322,7 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
         <code>cameraviewfindersettings</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3318,6 +3330,7 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <h3 class="doc doc-heading" id="prettyqt.multimedia.cameraviewfindersettings.Settings">
 
         <code>Settings</code>
+
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
@@ -3327,6 +3340,14 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <div class="doc doc-contents ">
 <p>Settings(maximum_framerate: 'float', minimum_framerate: 'float', pixel_aspect_ratio: 'Tuple[int, int]', pixel_format: 'multimedia.videoframe.PixelFormatStr', resolution: 'Tuple[int, int]')</p>
 <div class="doc doc-children">
+
+
+
+
+
+
+
+
 
 
 
@@ -3350,6 +3371,7 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
         <code>imageencodersettings</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3357,6 +3379,7 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <h3 class="doc doc-heading" id="prettyqt.multimedia.imageencodersettings.Settings">
 
         <code>Settings</code>
+
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
@@ -3366,6 +3389,13 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
 <div class="doc doc-contents ">
 <p>Settings(codec: 'str', encoding_options: 'Dict[str, Any]', quality: 'QualityStr', resolution: 'Tuple[int, int]')</p>
 <div class="doc doc-children">
+
+
+
+
+
+
+
 
 
 
@@ -3389,6 +3419,7 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
         <code>mediaobject</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3398,14 +3429,14 @@ set_white_balance_mode<span class="p">(</span><span class="bp">self</span><span 
         <code>MediaObject</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.mediaobject.MediaObject.get_availability">
 
-        <code class="highlight language-python">
-get_availability<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AvailabilityStatusStr</span></code>
 
 
       </h4>
@@ -3421,7 +3452,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['available', 'service_missing', 'resource_error', 'busy']</code></td>
+<td><code>AvailabilityStatusStr</code></td>
 <td>
 <p>availability status</p>
 </td>
@@ -3455,6 +3486,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
         <code>mediaplayer</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3464,14 +3496,14 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
         <code>MediaPlayer</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.mediaplayer.MediaPlayer.get_error">
 
-        <code class="highlight language-python">
-get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span></code>
 
 
       </h4>
@@ -3487,7 +3519,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['none', 'resource', 'format', 'network', 'access_denied', 'service_missing']</code></td>
+<td><code>ErrorStr</code></td>
 <td>
 <p>error type</p>
 </td>
@@ -3512,8 +3544,7 @@ get_error<span class="p">(</span><span class="bp">self</span><span class="p">)</
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.mediaplayer.MediaPlayer.get_media_status">
 
-        <code class="highlight language-python">
-get_media_status<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_media_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MediaStatusStr</span></code>
 
 
       </h4>
@@ -3529,7 +3560,7 @@ get_media_status<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['unknown', 'no_media', 'loading', 'loaded', 'stalled', 'buffering', 'buffered', 'end', 'invalid']</code></td>
+<td><code>MediaStatusStr</code></td>
 <td>
 <p>media status</p>
 </td>
@@ -3554,8 +3585,7 @@ get_media_status<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.mediaplayer.MediaPlayer.get_state">
 
-        <code class="highlight language-python">
-get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span></code>
 
 
       </h4>
@@ -3571,7 +3601,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['stopped', 'playing', 'paused']</code></td>
+<td><code>StateStr</code></td>
 <td>
 <p>state</p>
 </td>
@@ -3605,6 +3635,7 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
         <code>mediaplaylist</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3614,14 +3645,14 @@ get_state<span class="p">(</span><span class="bp">self</span><span class="p">)</
         <code>MediaPlaylist</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.mediaplaylist.MediaPlaylist.get_playback_mode">
 
-        <code class="highlight language-python">
-get_playback_mode<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlaybackModeStr</span></code>
 
 
       </h4>
@@ -3637,7 +3668,7 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['item_once', 'item_in_loop', 'sequential', 'loop', 'random']</code></td>
+<td><code>PlaybackModeStr</code></td>
 <td>
 <p>playback mode</p>
 </td>
@@ -3662,8 +3693,7 @@ get_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.mediaplaylist.MediaPlaylist.set_playback_mode">
 
-        <code class="highlight language-python">
-set_playback_mode<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_playback_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PlaybackModeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -3682,7 +3712,7 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
 <tbody>
 <tr>
 <td><code>mode</code></td>
-<td><code>Literal['item_once', 'item_in_loop', 'sequential', 'loop', 'random']</code></td>
+<td><code>PlaybackModeStr</code></td>
 <td>
 <p>playback mode to use</p>
 </td>
@@ -3739,6 +3769,7 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
         <code>mediarecorder</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3748,14 +3779,14 @@ set_playback_mode<span class="p">(</span><span class="bp">self</span><span class
         <code>MediaRecorder</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.mediarecorder.MediaRecorder.get_availability">
 
-        <code class="highlight language-python">
-get_availability<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_availability</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AvailabilityStatusStr</span></code>
 
 
       </h4>
@@ -3771,7 +3802,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['available', 'service_missing', 'resource_error', 'busy']</code></td>
+<td><code>AvailabilityStatusStr</code></td>
 <td>
 <p>availability status</p>
 </td>
@@ -3805,6 +3836,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
         <code>videoencodersettings</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3812,6 +3844,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 <h3 class="doc doc-heading" id="prettyqt.multimedia.videoencodersettings.Settings">
 
         <code>Settings</code>
+
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-dataclass"><code>dataclass</code></small>
@@ -3821,6 +3854,16 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
 <div class="doc doc-contents ">
 <p>Settings(bitrate: 'int', codec: 'str', encoding_mode: 'EncodingModeStr', encoding_options: 'Dict[str, Any]', quality: 'QualityStr', frame_rate: 'float', resolution: 'Tuple[int, int]')</p>
 <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3844,6 +3887,7 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
         <code>videoframe</code>
 
 
+
       </h2>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
@@ -3853,14 +3897,14 @@ get_availability<span class="p">(</span><span class="bp">self</span><span class=
         <code>VideoFrame</code>
 
 
+
       </h3>
 <div class="doc doc-contents ">
 <div class="doc doc-children">
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.videoframe.VideoFrame.get_field_type">
 
-        <code class="highlight language-python">
-get_field_type<span class="p">(</span><span class="bp">self</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">get_field_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FieldTypeStr</span></code>
 
 
       </h4>
@@ -3876,7 +3920,7 @@ get_field_type<span class="p">(</span><span class="bp">self</span><span class="p
 </thead>
 <tbody>
 <tr>
-<td><code>Literal['progressive_frame', 'top_field', 'bottom_field', 'interlaced_frame']</code></td>
+<td><code>FieldTypeStr</code></td>
 <td>
 <p>Field type</p>
 </td>
@@ -3901,8 +3945,7 @@ get_field_type<span class="p">(</span><span class="bp">self</span><span class="p
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.multimedia.videoframe.VideoFrame.set_field_type">
 
-        <code class="highlight language-python">
-set_field_type<span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">)</span>        </code>
+<code class="highlight language-python"><span class="n">set_field_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FieldTypeStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -3921,7 +3964,7 @@ set_field_type<span class="p">(</span><span class="bp">self</span><span class="p
 <tbody>
 <tr>
 <td><code>typ</code></td>
-<td><code>Literal['progressive_frame', 'top_field', 'bottom_field', 'interlaced_frame']</code></td>
+<td><code>FieldTypeStr</code></td>
 <td>
 <p>capture mode</p>
 </td>
