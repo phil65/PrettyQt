@@ -25,7 +25,7 @@ def test_regexmatchesmodel(qttester):
     qttester.test_model(model, force_py=True)
 
 
-@pytest.mark.skipif(prettyqt.qt.API == "pyside6", reason="Only supported in Qt5")
+@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
 def test_playlistmodel(qttester):
     from prettyqt import multimedia
 

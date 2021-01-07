@@ -46,6 +46,9 @@ test_pyside2: ## run tests with pyside
 test_pyside6: ## run tests with pyside
 	export QT_API=pyside6; export USE_QT_API=pyside6; export PYTEST_QT_API=pyside2; poetry run pytest # --mypy
 
+test_pyqt6: ## run tests with pyside
+	export QT_API=pyqt6; export USE_QT_API=pyqt6; export PYTEST_QT_API=pyqt5; poetry run pytest # --mypy
+
 test: test_pyqt5 test_pyside2 test_pyside6 ## run tests with all frameworks
 
 mypy: ## run mypy type checking
