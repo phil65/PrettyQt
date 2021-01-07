@@ -45,6 +45,7 @@ plugins:
           python:
             rendering:
               show_source: true
+              show_signature_annotations: true
             selection:
               inherited_members: false
     # - mkapi
