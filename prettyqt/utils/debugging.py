@@ -26,7 +26,7 @@ def qt_message_handler(mode: QtCore.QtMsgType, context, message: str):
     logger.log(level, f"{message} ({context.file}:{context.line}, {context.file})")
 
 
-def install_exceptionhook(debug=False):
+def install_exceptionhook(debug: bool = False):
     def handleException(exc_type, exc_value, exc_traceback):
         """Causes the application to quit in case of an unhandled exception.
 
