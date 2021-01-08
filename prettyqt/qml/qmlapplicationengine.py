@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from typing import Iterator, Optional, Union
 
 from prettyqt import core
@@ -27,3 +28,8 @@ class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
         elif url is None:
             url = core.Url()
         self.loadData(data, url)
+
+    def load_file(self, file: Union[str, os.PathLike, QtCore.QUrl]):
+        if isinstance(file, os.PathLike):  # type: ignore
+            file = os.fspath(file)
+        self.load(file)
