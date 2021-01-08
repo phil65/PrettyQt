@@ -4,7 +4,7 @@ import os
 import pathlib
 from typing import List, Literal, Union
 
-from prettyqt import qml
+from prettyqt import core, qml
 from prettyqt.qt import QtCore, QtQml
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -52,3 +52,14 @@ class QmlEngine(QtQml.QQmlEngine):
 
     def get_import_paths(self) -> List[pathlib.Path]:
         return [pathlib.Path(p) for p in self.importPathList()]
+
+    def set_base_url(self, url: Union[str, QtCore.QUrl]):
+        if isinstance(url, str):
+            url = QtCore.QUrl(url)
+        self.setBaseUrl(url)
+
+    def get_base_url(self) -> core.Url:
+        return core.Url(self.baseUrl())
+
+    def set_offline_storage_path(self, path: Union[str, os.PathLike]):
+        self.setOfflineStoragePath(os.fspath(path))
