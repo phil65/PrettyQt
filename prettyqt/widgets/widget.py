@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import contextlib
+import os
+import pathlib
 import sys
 from typing import Any, Callable, Dict, Iterator, Literal, Optional, Union
 
@@ -318,7 +320,13 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         yield ss
         self.set_stylesheet(ss)
 
-    def set_stylesheet(self, ss: Union[str, qstylizer.style.StyleSheet]):
+    def set_stylesheet(
+        self, ss: Union[None, str, qstylizer.style.StyleSheet, os.PathLike]
+    ):
+        if isinstance(ss, os.PathLike):  # type: ignore
+            ss = pathlib.Path(ss).read_text()
+        elif ss is None:
+            ss = ""
         self.setStyleSheet(str(ss))
 
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import contextlib
 import logging
+import os
+import pathlib
 from typing import Iterator, Mapping, MutableMapping, Optional, Union
 
 import qstylizer.parser
@@ -112,7 +114,13 @@ class Application(QtWidgets.QApplication):
         yield ss
         self.set_stylesheet(ss)
 
-    def set_stylesheet(self, ss: Union[str, qstylizer.style.StyleSheet]):
+    def set_stylesheet(
+        self, ss: Union[None, str, qstylizer.style.StyleSheet, os.PathLike]
+    ):
+        if isinstance(ss, os.PathLike):  # type: ignore
+            ss = pathlib.Path(ss).read_text()
+        elif ss is None:
+            ss = ""
         self.setStyleSheet(str(ss))
 
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:
