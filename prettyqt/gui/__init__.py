@@ -44,6 +44,7 @@ from prettyqt.qt.QtGui import (
 # not available in PySide2
 # from prettyqt.qt.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
 
+from .textobjectinterface import TextObjectInterface
 from .screen import Screen
 from .keysequence import KeySequence
 from .surface import Surface
@@ -147,6 +148,7 @@ __all__ = [
     "NativeGestureEvent",
     "InputMethodQueryEvent",
     "InputMethodEvent",
+    "TextObjectInterface",
     "SessionManager",
     "CloseEvent",
     "DragLeaveEvent",
