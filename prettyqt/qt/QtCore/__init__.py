@@ -25,6 +25,10 @@ if PYQT5:
         pyqtSignal as Signal,
         pyqtSlot,
         pyqtSlot as Slot,
+        Q_ENUM,
+        Q_ENUM as QEnum,
+        Q_FLAG,
+        Q_FLAG as QFlag,
     )
 
     # For issue #153
@@ -46,7 +50,15 @@ if PYQT5:
     QTime.toPython = to_time
 
     # Those are imported from `import *`
-    del pyqtSignal, pyqtBoundSignal, pyqtSlot, pyqtProperty, QT_VERSION_STR
+    del (
+        pyqtSignal,
+        pyqtBoundSignal,
+        pyqtSlot,
+        pyqtProperty,
+        QT_VERSION_STR,
+        Q_FLAG,
+        Q_ENUM,
+    )
 elif PYSIDE2:
     from PySide2.QtCore import *
     from PySide2.QtCore import __version__  # type: ignore
