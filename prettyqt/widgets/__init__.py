@@ -24,6 +24,7 @@ from .application import Application
 from .sizepolicy import SizePolicy
 from .widget import Widget
 from .frame import Frame
+from .focusframe import FocusFrame
 from .abstractslider import AbstractSlider
 from .abstractscrollarea import AbstractScrollArea
 from .abstractbutton import AbstractButton
@@ -305,6 +306,7 @@ __all__ = [
     "StyleOptionToolButton",
     "StyleOptionFrame",
     "Frame",
+    "FocusFrame",
     "ListWidgetItem",
     "TreeWidgetItem",
     "TreeWidgetItemIterator",
