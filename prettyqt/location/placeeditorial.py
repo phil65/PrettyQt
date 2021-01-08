@@ -13,4 +13,4 @@ class PlaceEditorial(QtLocation.QPlaceEditorial):
 
 
 if __name__ == "__main__":
-    image = PlaceEditorial()
+    editorial = PlaceEditorial()

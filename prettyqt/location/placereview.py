@@ -16,4 +16,4 @@ class PlaceReview(QtLocation.QPlaceReview):
 
 
 if __name__ == "__main__":
-    image = PlaceReview()
+    review = PlaceReview()

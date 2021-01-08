@@ -4,15 +4,16 @@ from typing import List
 
 from prettyqt import location, positioning
 from prettyqt.qt import QtLocation
+from prettyqt.utils import types
 
 
 class GeoRoute(QtLocation.QGeoRoute):
-    def __setitem__(self, index: str, val):
+    def __setitem__(self, index: str, val: types.Variant):
         attrs = self.extendedAttributes()
         attrs[index] = val
         self.setExtendedAttributes(attrs)
 
-    def __getitem__(self, index: str):
+    def __getitem__(self, index: str) -> types.Variant:
         attr = self.extendedAttributes()
         if index not in attr:
             raise KeyError(f"Key {index!r} does not exist.")

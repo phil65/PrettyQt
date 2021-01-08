@@ -29,5 +29,5 @@ class PlaceCategory(QtLocation.QPlaceCategory):
 
 
 if __name__ == "__main__":
-    segment = PlaceCategory()
-    print(bool(segment))
+    category = PlaceCategory()
+    print(bool(category))
