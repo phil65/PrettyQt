@@ -1,0 +1,38 @@
+from __future__ import annotations
+
+from typing import Literal
+
+from prettyqt.qt import QtCore
+from prettyqt.utils import bidict
+
+
+ACCESS = bidict(
+    private=QtCore.QMetaMethod.Private,
+    protected=QtCore.QMetaMethod.Protected,
+    public=QtCore.QMetaMethod.Public,
+)
+
+AccessStr = Literal["private", "protected", "public"]
+
+METHOD_TYPE = bidict(
+    method=QtCore.QMetaMethod.Method,
+    signal=QtCore.QMetaMethod.Signal,
+    slot=QtCore.QMetaMethod.Slot,
+    constructor=QtCore.QMetaMethod.Constructor,
+)
+
+MethodTypeStr = Literal["method", "signal", "slot", "constructor"]
+
+
+class MetaMethod:
+    def __init__(self, metaobject: QtCore.QMetaMethod):
+        self.item = metaobject
+
+    def __bool__(self):
+        return self.item.isValid()
+
+    def get_access(self) -> AccessStr:
+        return ACCESS.inverse[self.item.access()]
+
+    def get_method_signature(self) -> str:
+        return bytes(self.item.methodSignature()).decode()

@@ -6,6 +6,7 @@ import inspect
 import itertools
 from typing import Any, DefaultDict, Dict, List, Optional, Type, TypeVar, Union
 
+from prettyqt import core
 import prettyqt.qt
 from prettyqt.qt import QtCore
 
@@ -65,6 +66,10 @@ class Object(QtCore.QObject):
 
     def has_id(self) -> bool:
         return self.objectName() != ""
+
+    @classmethod
+    def get_metaobject(cls) -> core.MetaObject:
+        return core.MetaObject(cls.staticMetaObject)
 
     # @property
     # def id(self) -> str:

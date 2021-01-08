@@ -22,6 +22,8 @@ from prettyqt.qt.QtCore import (
     QTimerEvent as TimerEvent,
     QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent,
 )
+from .metamethod import MetaMethod
+from .metaobject import MetaObject
 from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
 from .uuid import Uuid
@@ -161,6 +163,8 @@ __all__ = [
     "ChildEvent",
     "TimerEvent",
     "DynamicPropertyChangeEvent",
+    "MetaMethod",
+    "MetaObject",
     "Object",
     "CryptographicHash",
     "Uuid",
