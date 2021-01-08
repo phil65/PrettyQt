@@ -36,6 +36,14 @@ STACKS = bidict(
 
 StackStr = Literal["undo", "redo", "undo_and_redo"]
 
+FIND_FLAGS = bidict(
+    backward=QtGui.QTextDocument.FindBackward,
+    case_sensitive=QtGui.QTextDocument.FindCaseSensitively,
+    whole_words=QtGui.QTextDocument.FindWholeWords,
+)
+
+FindFlagStr = Literal["backward", "case_sensitive", "whole_words"]
+
 QtGui.QTextDocument.__bases__ = (core.Object,)
 
 
@@ -54,10 +62,10 @@ class TextDocument(QtGui.QTextDocument):
 
     def serialize_fields(self):
         return dict(
-            base_url=core.Url(self.baseUrl()),
-            default_font=gui.Font(self.defaultFont()),
+            base_url=self.get_base_url(),
+            default_font=self.get_default_font(),
             default_stylesheet=self.defaultStyleSheet(),
-            default_text_option=gui.TextOption(self.defaultTextOption()),
+            default_text_option=self.get_default_text_option(),
             document_margin=self.documentMargin(),
             maximum_block_count=self.maximumBlockCount(),
             is_modified=self.isModified(),
@@ -67,6 +75,15 @@ class TextDocument(QtGui.QTextDocument):
             undo_redo_enabled=self.isUndoRedoEnabled(),
             use_design_metrics=self.useDesignMetrics(),
         )
+
+    def get_base_url(self) -> core.Url:
+        return core.Url(self.baseUrl())
+
+    def get_default_font(self) -> gui.Font:
+        return gui.Font(self.defaultFont())
+
+    def get_default_text_option(self) -> gui.TextOption:
+        return gui.TextOption(self.defaultTextOption())
 
     def clear_stacks(self, stack: StackStr):
         """Clear undo / redo stack.
