@@ -184,6 +184,7 @@ from .colordialog import ColorDialog
 from .inputdialog import InputDialog
 from .buttongroup import ButtonGroup
 from .groupbox import GroupBox
+from .splitterhandle import SplitterHandle
 from .splitter import Splitter
 from .wizard import Wizard
 from .wizardpage import WizardPage
@@ -364,6 +365,7 @@ __all__ = [
     "DialogButtonBox",
     "ButtonGroup",
     "GroupBox",
+    "SplitterHandle",
     "Splitter",
     "Wizard",
     "WizardPage",
