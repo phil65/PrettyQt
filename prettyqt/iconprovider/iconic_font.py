@@ -11,21 +11,13 @@ methods returning instances of ``QIcon``.
 from __future__ import annotations
 
 # Standard library imports
-import json
-import os
-import pathlib
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
 
 
 # Third party imports
-
-
-# Linux packagers, please set this to True if you want to make qtawesome
-# use system fonts
-SYSTEM_FONTS = False
 
 _default_options = {
     "color": gui.Color(50, 50, 50),
@@ -134,7 +126,7 @@ class CharIconPainter:
             # Animation setup hook
             if (animation := opt.get("animation")) is not None:
                 animation.setup(self, painter, rect)
-            font = iconic.get_font(opt["prefix"], draw_size)
+            font = iconic.fonts[opt["prefix"]].get_font(draw_size)
             painter.setFont(font)
             if "offset" in opt:
                 rect.translate(
@@ -203,18 +195,8 @@ class IconicFont(core.Object):
         """
         super().__init__()
         self.painter = CharIconPainter()
-        self.font_name = {}
-        self.font_ids = {}
-        self.charmap = {}
         self.icon_cache = {}
-        for font in args:
-            self.load_font(
-                prefix=font.prefix,
-                ttf_filename=font.font_path,
-                charmap_filename=font.charmap_path,
-                md5=font.md5,
-                directory=font.path,
-            )
+        self.fonts = {font.prefix: font for font in args}
 
     def has_valid_font_ids(self) -> bool:
         """Validate instance's font ids are loaded to QFontDatabase.
@@ -223,54 +205,7 @@ class IconicFont(core.Object):
         in both cases it is possible that font is not available.
         """
         # Check stored font ids are still available
-        return all(
-            gui.FontDatabase.applicationFontFamilies(font_id)
-            for font_id in self.font_ids.values()
-        )
-
-    def load_font(
-        self,
-        prefix: str,
-        ttf_filename: str,
-        charmap_filename: str,
-        directory: Union[str, os.PathLike],
-        md5: Optional[str] = None,
-    ):
-        """Load a font file and the associated charmap.
-
-        If ``directory`` is None, the files will be looked for in ``./fonts/``.
-
-        Parameters
-        ----------
-        prefix: str
-            Prefix string to be used when accessing a given font set
-        ttf_filename: str
-            Ttf font filename
-        charmap_filename: str
-            Charmap filename
-        directory: pathlib.Path
-            Directory for font and charmap files
-        md5: str or None, optional
-            md5 hash for font file
-        """
-        directory = pathlib.Path(directory)
-        hash_val = None if SYSTEM_FONTS else md5
-        id_ = gui.FontDatabase.add_font(directory / ttf_filename, ttf_hash=hash_val)
-        loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)
-        self.font_ids[prefix] = id_
-        self.font_name[prefix] = loaded_font_families[0]
-
-        def hook(obj: dict) -> dict:
-            result = {}
-            for key in obj:
-                try:
-                    result[key] = chr(int(obj[key], 16))
-                except ValueError:
-                    raise FontError(f"Failed to load character {key}:{obj[key]}")
-            return result
-
-        with (directory / charmap_filename).open("r") as codes:
-            self.charmap[prefix] = json.load(codes, object_hook=hook)
+        return all(font.is_valid() for font in self.fonts.values())
 
     def icon(self, *names, **kwargs) -> QtGui.QIcon:
         """Return a QtGui.QIcon object corresponding to the provided icon name."""
@@ -327,11 +262,11 @@ class IconicFont(core.Object):
             if "." not in name:
                 raise Exception("Invalid icon name")
             prefix, n = name.split(".")
-            if prefix not in self.charmap:
+            if prefix not in self.fonts:
                 raise Exception(f"Invalid font prefix {prefix!r}")
-            if n not in self.charmap[prefix]:
+            if n not in self.fonts[prefix].charmap:
                 raise Exception(f"Invalid icon name {n!r} in font {prefix!r}")
-            chars.append(self.charmap[prefix][n])
+            chars.append(self.fonts[prefix].charmap[n])
         options.update(dict(zip(*(ICON_KW, chars))))
         options.update({"prefix": prefix})
 
@@ -348,13 +283,4 @@ class IconicFont(core.Object):
         options.setdefault("color_off_active", options["color_active"])
         options.setdefault("color_off_selected", options["color_selected"])
         options.setdefault("color_off_disabled", options["color_disabled"])
-
         return options
-
-    def get_font(self, prefix: str, size: float) -> gui.Font:
-        """Return a gui.Font corresponding to the given prefix and size."""
-        font = gui.Font(self.font_name[prefix])
-        font.setPixelSize(round(size))
-        if prefix[-1] == "s":  # solid style
-            font.setStyleName("Solid")
-        return font

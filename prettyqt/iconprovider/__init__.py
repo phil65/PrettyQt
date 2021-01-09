@@ -4,6 +4,7 @@ based on qtawesome
 """
 from __future__ import annotations
 
+import json
 import os
 import pathlib
 from typing import Dict, Optional, Tuple, Union
@@ -12,21 +13,53 @@ from prettyqt.qt import QtGui
 
 # Third party imports
 from prettyqt import gui
-from prettyqt.iconprovider.iconic_font import IconicFont, set_global_defaults
+from prettyqt.iconprovider.iconic_font import FontError, IconicFont, set_global_defaults
 from prettyqt.utils import types
 
 
 key_type = Tuple[Optional[str], Optional[str], bool]
 icon_cache: Dict[key_type, QtGui.QIcon] = {}
+# Linux packagers, please set this to True if you want to make qtawesome
+# use system fonts
+SYSTEM_FONTS = False
+
+
+def hook(obj: dict) -> dict:
+    result = {}
+    for key in obj:
+        try:
+            result[key] = chr(int(obj[key], 16))
+        except ValueError:
+            raise FontError(f"Failed to load character {key}:{obj[key]}")
+    return result
 
 
 class IconFont:
-    path = pathlib.Path(__file__).parent / "fonts"
+    path: pathlib.Path = pathlib.Path(__file__).parent / "fonts"
     prefix: str
     font_path: str
     charmap_path: str
     md5: str
     stylename: Optional[str] = None
+
+    def __init__(self):
+        hash_val = None if SYSTEM_FONTS else self.md5
+        id_ = gui.FontDatabase.add_font(self.path / self.font_path, ttf_hash=hash_val)
+        loaded_font_families = gui.FontDatabase.applicationFontFamilies(id_)
+        self.font_id = id_
+        self.font_name = loaded_font_families[0]
+        with (self.path / self.charmap_path).open("r") as codes:
+            self.charmap = json.load(codes, object_hook=hook)
+
+    def is_valid(self) -> bool:
+        return len(gui.FontDatabase.applicationFontFamilies(self.font_id)) > 0
+
+    def get_font(self, size: float) -> gui.Font:
+        font = gui.Font(self.font_name)
+        font.setPixelSize(round(size))
+        if self.stylename:  # solid style
+            font.setStyleName(self.stylename)
+        return font
 
 
 class FontAwesome4(IconFont):
@@ -83,12 +116,12 @@ def _instance() -> IconicFont:
     """
     if _resource["iconic"] is None or not _resource["iconic"].has_valid_font_ids():
         iconic = IconicFont(
-            FontAwesome4,
-            FontAwesome5,
-            FontAwesome5Brands,
-            FontAwesome5Solid,
-            ElusiveIcons,
-            MaterialDesignIcons,
+            FontAwesome4(),
+            FontAwesome5(),
+            FontAwesome5Brands(),
+            FontAwesome5Solid(),
+            ElusiveIcons(),
+            MaterialDesignIcons(),
         )
         _resource["iconic"] = iconic
         return iconic
