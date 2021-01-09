@@ -22,6 +22,7 @@ from prettyqt.qt.QtCore import (
     QTimerEvent as TimerEvent,
     QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent,
 )
+from .metaenum import MetaEnum
 from .metamethod import MetaMethod
 from .metaobject import MetaObject
 from .persistentmodelindex import PersistentModelIndex
@@ -163,6 +164,7 @@ __all__ = [
     "ChildEvent",
     "TimerEvent",
     "DynamicPropertyChangeEvent",
+    "MetaEnum",
     "MetaMethod",
     "MetaObject",
     "Object",

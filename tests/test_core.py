@@ -357,6 +357,33 @@ def test_marginsf():
         pass
 
 
+def test_metaenum():
+    metaobj = core.AbstractItemModel.get_metaobject()
+    enum = metaobj.get_enum(0)
+    assert enum.get_name() == "LayoutChangeHint"
+    assert enum.get_scope() == "QAbstractItemModel"
+    assert enum.get_enum_name() == "LayoutChangeHint"
+    assert enum["NoLayoutChangeHint"] == 0
+    assert bool(enum) is True
+    assert len(enum) > 0
+    repr(enum)
+
+
+def test_metamethod():
+    metaobj = core.AbstractItemModel.get_metaobject()
+    method = metaobj.get_method(0)
+    assert method.get_access() == "public"
+    assert method.get_method_type() == "signal"
+    method.get_method_signature()
+    repr(method)
+
+
+def test_metaobject():
+    metaobj = core.AbstractItemModel.get_metaobject()
+    metaobj.get_enums()
+    metaobj.get_constructors()
+
+
 def test_mimedata():
     mime_data = core.MimeData()
     mime_data.set_data("type a", "data")

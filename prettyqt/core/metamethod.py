@@ -31,8 +31,24 @@ class MetaMethod:
     def __bool__(self):
         return self.item.isValid()
 
+    def __repr__(self):
+        return f"{type(self).__name__}({self.get_name()!r})"
+
     def get_access(self) -> AccessStr:
         return ACCESS.inverse[self.item.access()]
 
+    def get_method_type(self) -> MethodTypeStr:
+        return METHOD_TYPE.inverse[self.item.methodType()]
+
     def get_method_signature(self) -> str:
         return bytes(self.item.methodSignature()).decode()
+
+    def get_name(self) -> str:
+        return bytes(self.item.name()).decode()
+
+
+if __name__ == "__main__":
+    from prettyqt import core
+
+    metaobj = core.Object.get_metaobject()
+    method = metaobj.get_method("to_json")

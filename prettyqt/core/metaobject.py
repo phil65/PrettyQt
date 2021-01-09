@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List
+from typing import List, Union
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -65,23 +65,33 @@ class MetaObject:
     def __init__(self, metaobject: QtCore.QMetaObject):
         self.item = metaobject
 
-    def get_enumerators(self) -> List[dict]:
-        enums = []
-        for i in range(self.item.enumeratorCount()):
-            enumerator = self.item.enumerator(i)
-            dct = dict(
-                name=enumerator.name(),
-                enum_name=enumerator.enumName(),
-                is_flag=enumerator.isFlag(),
-                is_scoped=enumerator.isScoped(),
-                key_count=enumerator.keyCount(),
-            )
-            enums.append(dct)
-        return enums
+    def get_method(self, index: Union[int, str]) -> core.MetaMethod:
+        if isinstance(index, int):
+            return self.get_methods()[index]
+        else:
+            for method in self.get_methods():
+                if method.get_name() == index:
+                    return method
+            raise KeyError(index)
+
+    def get_enum(self, index: Union[int, str]) -> core.MetaEnum:
+        if isinstance(index, int):
+            return self.get_enums()[index]
+        else:
+            for enumerator in self.get_enums():
+                if enumerator.get_name() == index:
+                    return enumerator
+            raise KeyError(index)
 
     def get_methods(self) -> List[core.MetaMethod]:
         return [
             core.MetaMethod(self.item.method(i)) for i in range(self.item.methodCount())
+        ]
+
+    def get_enums(self) -> List[core.MetaEnum]:
+        return [
+            core.MetaEnum(self.item.enumerator(i))
+            for i in range(self.item.enumeratorCount())
         ]
 
     def get_constructors(self) -> List[core.MetaMethod]:
@@ -89,3 +99,7 @@ class MetaObject:
             core.MetaMethod(self.item.constructor(i))
             for i in range(self.item.constructorCount())
         ]
+
+
+if __name__ == "__main__":
+    metaobj = core.Object.get_metaobject()
