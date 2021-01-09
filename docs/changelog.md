@@ -1,3 +1,16 @@
+## v0.172.0 (2021-01-09)
+
+### Feat
+
+- **Application**: add set_theme method
+- **gui**: add TextObjectInterface class
+- **PyQt5**: import QEnum and QFlag classes
+- **core**: add MetaMethod/MetaObject classes
+- **widgets**: add FocusFrame class
+- **quick**: add Quick(Async)ImageProvider classes
+- **QmlEngine**: add some more methods
+- **QmlApplicationEngine**: add load_file method
+
 ## v0.171.1 (2021-01-07)
 
 ### Fix

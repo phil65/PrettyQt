@@ -3,7 +3,7 @@ import pathlib
 
 __author__ = """Philipp Temminghoff"""
 __email__ = "phil65@kodi.tv"
-__version__ = "0.171.1"
+__version__ = "0.172.0"
 
 ROOT_PATH = pathlib.Path(__file__).parent
 
