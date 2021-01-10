@@ -10,7 +10,7 @@ import qstylizer.parser
 import qstylizer.style
 
 import prettyqt
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
 
@@ -130,9 +130,11 @@ class Application(QtWidgets.QApplication):
     def set_theme(self, theme: Literal["default", "dark"]):
         if theme == "default":
             self.set_stylesheet("")
+            iconprovider.set_defaults(color="black")
         elif theme == "dark":
             ss = (prettyqt.ROOT_PATH / "themes" / "darktheme.qss").read_text()
             self.set_stylesheet(ss)
+            iconprovider.set_defaults(color="white")
 
     def send_event(self, obj_or_str: Union[str, QtCore.QObject], event: QtCore.QEvent):
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
