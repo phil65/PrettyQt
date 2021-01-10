@@ -38,9 +38,12 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         self.setToolTipDuration(state.get("tooltip_duration", ""))
         self.setWindowTitle(state.get("window_title", ""))
         self.setWindowFilePath(state.get("window_file_path", ""))
-        self.setEnabled(state.get("enabled", ""))
-        self.setVisible(state.get("visible", ""))
-        self.set_icon(state.get("icon", ""))
+        self.setEnabled(state.get("enabled", True))
+        self.setVisible(state.get("visible", True))
+        self.setTabletTracking(state.get("tablet_tracking", True))
+        self.setWindowModified(state.get("window_modified", False))
+        self.setWindowOpacity(state.get("window_opacity", 1.0))
+        self.set_icon(state.get("icon"))
         self.set_modality(state.get("modality", ""))
         self.setWhatsThis(state.get("whats_this", ""))
         self.set_contextmenu_policy(state.get("contextmenu_policy", ""))
@@ -66,6 +69,9 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             window_title=self.windowTitle(),
             window_file_path=self.windowFilePath(),
             enabled=self.isEnabled(),
+            tablet_tracking=self.hasTabletTracking(),
+            window_modified=self.isWindowModified(),
+            window_opacity=self.windowOpacity(),
             visible=self.isVisible(),
             stylesheet=self.styleSheet(),
             icon=self.get_icon(),
