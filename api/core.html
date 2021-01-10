@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/core.html">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.3b61ea93.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.15aa0b43.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.75751829.min.css">
         
       
     
@@ -571,8 +571,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.core.datastream.DataStream.get_float_precision" class="md-nav__link">
-    get_float_precision()
+  <a href="#prettyqt.core.datastream.DataStream.get_floating_point_precision" class="md-nav__link">
+    get_floating_point_precision()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.get_status" class="md-nav__link">
+    get_status()
   </a>
   
 </li>
@@ -585,8 +592,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.core.datastream.DataStream.set_float_precision" class="md-nav__link">
-    set_float_precision()
+  <a href="#prettyqt.core.datastream.DataStream.set_floating_point_precision" class="md-nav__link">
+    set_floating_point_precision()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.set_status" class="md-nav__link">
+    set_status()
   </a>
   
 </li>
@@ -2362,8 +2376,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.core.datastream.DataStream.get_float_precision" class="md-nav__link">
-    get_float_precision()
+  <a href="#prettyqt.core.datastream.DataStream.get_floating_point_precision" class="md-nav__link">
+    get_floating_point_precision()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.get_status" class="md-nav__link">
+    get_status()
   </a>
   
 </li>
@@ -2376,8 +2397,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.core.datastream.DataStream.set_float_precision" class="md-nav__link">
-    set_float_precision()
+  <a href="#prettyqt.core.datastream.DataStream.set_floating_point_precision" class="md-nav__link">
+    set_floating_point_precision()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.core.datastream.DataStream.set_status" class="md-nav__link">
+    set_status()
   </a>
   
 </li>
@@ -4486,9 +4514,9 @@ emitted at end: endResetModel</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.get_float_precision">
+<h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.get_floating_point_precision">
 
-<code class="highlight language-python"><span class="n">get_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatPrecisionStr</span></code>
+<code class="highlight language-python"><span class="n">get_floating_point_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatingPointPrecisionStr</span></code>
 
 
       </h4>
@@ -4504,7 +4532,7 @@ emitted at end: endResetModel</p>
 </thead>
 <tbody>
 <tr>
-<td><code>FloatPrecisionStr</code></td>
+<td><code>FloatingPointPrecisionStr</code></td>
 <td>
 <p>floating point precision</p>
 </td>
@@ -4514,13 +4542,54 @@ emitted at end: endResetModel</p>
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">get_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatPrecisionStr</span><span class="p">:</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_floating_point_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatingPointPrecisionStr</span><span class="p">:</span>
     <span class="sd">"""Return floating point precision.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        floating point precision</span>
 <span class="sd">    """</span>
-    <span class="k">return</span> <span class="n">FLOAT_PRECISION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">floatingPointPrecision</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="n">FLOATING_POINT_PRECISION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">floatingPointPrecision</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.get_status">
+
+<code class="highlight language-python"><span class="n">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span></code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return status.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>StatusStr</code></td>
+<td>
+<p>status</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span><span class="p">:</span>
+    <span class="sd">"""Return status.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        status</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
 </code></pre>
 </div>
 </details>
@@ -4594,9 +4663,9 @@ emitted at end: endResetModel</p>
 </div>
 </div>
 <div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.set_float_precision">
+<h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.set_floating_point_precision">
 
-<code class="highlight language-python"><span class="n">set_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">FloatPrecisionStr</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">set_floating_point_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">FloatingPointPrecisionStr</span><span class="p">)</span></code>
 
 
       </h4>
@@ -4615,7 +4684,7 @@ emitted at end: endResetModel</p>
 <tbody>
 <tr>
 <td><code>precision</code></td>
-<td><code>FloatPrecisionStr</code></td>
+<td><code>FloatingPointPrecisionStr</code></td>
 <td>
 <p>floating point precision</p>
 </td>
@@ -4643,7 +4712,7 @@ emitted at end: endResetModel</p>
 <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_float_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">FloatPrecisionStr</span><span class="p">):</span>
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_floating_point_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">FloatingPointPrecisionStr</span><span class="p">):</span>
     <span class="sd">"""Set floating point precision.</span>
 
 <span class="sd">    Args:</span>
@@ -4652,9 +4721,76 @@ emitted at end: endResetModel</p>
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid precision</span>
 <span class="sd">    """</span>
-    <span class="k">if</span> <span class="n">precision</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FLOAT_PRECISION</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="n">FLOAT_PRECISION</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFloatingPointPrecision</span><span class="p">(</span><span class="n">FLOAT_PRECISION</span><span class="p">[</span><span class="n">precision</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">precision</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FLOATING_POINT_PRECISION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">precision</span><span class="p">,</span> <span class="n">FLOATING_POINT_PRECISION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setFloatingPointPrecision</span><span class="p">(</span><span class="n">FLOATING_POINT_PRECISION</span><span class="p">[</span><span class="n">precision</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.core.datastream.DataStream.set_status">
+
+<code class="highlight language-python"><span class="n">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">StatusStr</span><span class="p">)</span></code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set status.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>status</code></td>
+<td><code>StatusStr</code></td>
+<td>
+<p>status to use</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>invalid status</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">StatusStr</span><span class="p">):</span>
+    <span class="sd">"""Set status.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        status: status to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid status</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">STATUS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">STATUS</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setStatus</span><span class="p">(</span><span class="n">STATUS</span><span class="p">[</span><span class="n">status</span><span class="p">])</span>
 </code></pre>
 </div>
 </details>
@@ -8065,8 +8201,8 @@ emitted at end: endResetModel</p>
       
     </div>
     
-      <script src="../assets/javascripts/vendor.08c56446.min.js"></script>
-      <script src="../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({

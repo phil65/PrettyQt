@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/widgets.html">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.4">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.3b61ea93.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.15aa0b43.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.75751829.min.css">
         
       
     
@@ -3509,6 +3509,46 @@
         
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.splitter.Splitter.set_orientation" class="md-nav__link">
+    set_orientation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.widgets.splitterhandle" class="md-nav__link">
+    splitterhandle
+  </a>
+  
+    <nav class="md-nav" aria-label="splitterhandle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.splitterhandle.SplitterHandle" class="md-nav__link">
+    SplitterHandle
+  </a>
+  
+    <nav class="md-nav" aria-label="SplitterHandle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.splitterhandle.SplitterHandle.get_orientation" class="md-nav__link">
+    get_orientation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.splitterhandle.SplitterHandle.set_orientation" class="md-nav__link">
     set_orientation()
   </a>
   
@@ -7464,6 +7504,46 @@
         
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.splitter.Splitter.set_orientation" class="md-nav__link">
+    set_orientation()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.widgets.splitterhandle" class="md-nav__link">
+    splitterhandle
+  </a>
+  
+    <nav class="md-nav" aria-label="splitterhandle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.splitterhandle.SplitterHandle" class="md-nav__link">
+    SplitterHandle
+  </a>
+  
+    <nav class="md-nav" aria-label="SplitterHandle">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.splitterhandle.SplitterHandle.get_orientation" class="md-nav__link">
+    get_orientation()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.splitterhandle.SplitterHandle.set_orientation" class="md-nav__link">
     set_orientation()
   </a>
   
@@ -21649,6 +21729,140 @@ The keyboard shortcut moves keyboard focus to one of the group box's child widge
 </div>
 </div>
 <div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.widgets.splitterhandle">
+
+        <code>splitterhandle</code>
+
+
+
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.widgets.splitterhandle.SplitterHandle">
+
+        <code>SplitterHandle</code>
+
+
+
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.splitterhandle.SplitterHandle.get_orientation">
+
+<code class="highlight language-python"><span class="n">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span></code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current orientation.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>constants.OrientationStr</code></td>
+<td>
+<p>orientation</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/splitterhandle.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">:</span>
+    <span class="sd">"""Return current orientation.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        orientation</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">orientation</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.splitterhandle.SplitterHandle.set_orientation">
+
+<code class="highlight language-python"><span class="n">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">)</span></code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the orientation of the slider.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>orientation</code></td>
+<td><code>constants.OrientationStr</code></td>
+<td>
+<p>orientation for the slider</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>orientation does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/splitterhandle.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">):</span>
+    <span class="sd">"""Set the orientation of the slider.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        orientation: orientation for the slider</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: orientation does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">orientation</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setOrientation</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">[</span><span class="n">orientation</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="doc doc-object doc-module">
 <h2 class="doc doc-heading" id="prettyqt.widgets.styleoptionslider">
 
         <code>styleoptionslider</code>
@@ -26002,8 +26216,8 @@ resize(self, int, int)</p>
       
     </div>
     
-      <script src="../assets/javascripts/vendor.08c56446.min.js"></script>
-      <script src="../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      <script src="../assets/javascripts/vendor.93c04032.min.js"></script>
+      <script src="../assets/javascripts/bundle.83e5331e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
       
       <script>
         app = initialize({
