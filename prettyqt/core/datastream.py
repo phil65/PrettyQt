@@ -7,12 +7,12 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
-FLOAT_PRECISION = bidict(
+FLOATING_POINT_PRECISION = bidict(
     single=QtCore.QDataStream.SinglePrecision,
     double=QtCore.QDataStream.DoublePrecision,
 )
 
-FloatPrecisionStr = Literal["single", "double"]
+FloatingPointPrecisionStr = Literal["single", "double"]
 
 BYTE_ORDER = bidict(
     big_endian=QtCore.QDataStream.BigEndian,
@@ -20,6 +20,15 @@ BYTE_ORDER = bidict(
 )
 
 ByteOrderStr = Literal["big_endian", "little_endian"]
+
+STATUS = bidict(
+    ok=QtCore.QDataStream.Ok,
+    read_past_end=QtCore.QDataStream.ReadPastEnd,
+    read_corrupt_data=QtCore.QDataStream.ReadCorruptData,
+    write_failed=QtCore.QDataStream.WriteFailed,
+)
+
+StatusStr = Literal["ok", "read_past_end", "read_corrupt_data", "write_failed"]
 
 
 class DataStream(QtCore.QDataStream):
@@ -44,7 +53,28 @@ class DataStream(QtCore.QDataStream):
         """
         return BYTE_ORDER.inverse[self.byteOrder()]
 
-    def set_float_precision(self, precision: FloatPrecisionStr):
+    def set_status(self, status: StatusStr):
+        """Set status.
+
+        Args:
+            status: status to use
+
+        Raises:
+            InvalidParamError: invalid status
+        """
+        if status not in STATUS:
+            raise InvalidParamError(status, STATUS)
+        self.setStatus(STATUS[status])
+
+    def get_status(self) -> StatusStr:
+        """Return status.
+
+        Returns:
+            status
+        """
+        return STATUS.inverse[self.status()]
+
+    def set_floating_point_precision(self, precision: FloatingPointPrecisionStr):
         """Set floating point precision.
 
         Args:
@@ -53,17 +83,17 @@ class DataStream(QtCore.QDataStream):
         Raises:
             InvalidParamError: invalid precision
         """
-        if precision not in FLOAT_PRECISION:
-            raise InvalidParamError(precision, FLOAT_PRECISION)
-        self.setFloatingPointPrecision(FLOAT_PRECISION[precision])
+        if precision not in FLOATING_POINT_PRECISION:
+            raise InvalidParamError(precision, FLOATING_POINT_PRECISION)
+        self.setFloatingPointPrecision(FLOATING_POINT_PRECISION[precision])
 
-    def get_float_precision(self) -> FloatPrecisionStr:
+    def get_floating_point_precision(self) -> FloatingPointPrecisionStr:
         """Return floating point precision.
 
         Returns:
             floating point precision
         """
-        return FLOAT_PRECISION.inverse[self.floatingPointPrecision()]
+        return FLOATING_POINT_PRECISION.inverse[self.floatingPointPrecision()]
 
     @classmethod
     def create_bytearray(cls, data) -> QtCore.QByteArray:

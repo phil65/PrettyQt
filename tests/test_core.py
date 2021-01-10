@@ -137,14 +137,18 @@ def test_cryptographichash():
 
 def test_datastream():
     stream = core.DataStream()
-    stream.set_float_precision("double")
+    stream.set_floating_point_precision("double")
     with pytest.raises(InvalidParamError):
-        stream.set_float_precision("test")
-    assert stream.get_float_precision() == "double"
+        stream.set_floating_point_precision("test")
+    assert stream.get_floating_point_precision() == "double"
     stream.set_byte_order("big_endian")
     with pytest.raises(InvalidParamError):
         stream.set_byte_order("test")
     assert stream.get_byte_order() == "big_endian"
+    stream.set_status("read_corrupt_data")
+    with pytest.raises(InvalidParamError):
+        stream.set_status("test")
+    assert stream.get_status() == "read_corrupt_data"
 
 
 def test_date():
