@@ -37,6 +37,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         self.setToolTip(state.get("tool_tip", ""))
         self.setToolTipDuration(state.get("tooltip_duration", ""))
         self.setWindowTitle(state.get("window_title", ""))
+        self.setWindowFilePath(state.get("window_file_path", ""))
         self.setEnabled(state.get("enabled", ""))
         self.setVisible(state.get("visible", ""))
         self.set_icon(state.get("icon", ""))
@@ -63,6 +64,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             tool_tip=self.toolTip(),
             tooltip_duration=self.toolTipDuration(),
             window_title=self.windowTitle(),
+            window_file_path=self.windowFilePath(),
             enabled=self.isEnabled(),
             visible=self.isVisible(),
             stylesheet=self.styleSheet(),
@@ -500,9 +502,19 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     ):
         self.setMask(gui.Region(x, y, width, height, gui.region.REGION_TYPE[typ]))
 
+    def set_window_file_path(self, path: Union[str, os.PathLike]):
+        self.setWindowFilePath(os.fspath(path))
+
+    def get_window_file_path(self) -> Optional[pathlib.Path]:
+        path = self.windowFilePath()
+        if not path:
+            return None
+        return pathlib.Path(path)
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
     widget = Widget()
+    print(type(widget.windowFilePath()))
     widget.show()
     app.main_loop()
