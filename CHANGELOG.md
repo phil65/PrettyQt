@@ -1,3 +1,20 @@
+## v0.173.0 (2021-01-10)
+
+### Fix
+
+- correct icon color for dark mode
+
+### Feat
+
+- **custom_models**: add StorageInfoModel class
+- **DataStream**: add get/set_status methods
+- **custom_widgets**: add ElidedLabel class
+- **Painter**: add get_font_metrics method
+- **gui**: add TextLayout class
+- add SyncedProperty class
+- **Widget**: add get/set_window_file_path methods
+- **widgets**: add SplitterHandle class
+
 ## v0.172.0 (2021-01-09)
 
 ### Feat
