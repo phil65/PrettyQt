@@ -184,6 +184,9 @@ class Painter(QtGui.QPainter):
         """
         return COMPOSITION_MODE.inverse[self.compositionMode()]
 
+    def get_font_metrics(self) -> gui.FontMetrics:
+        return gui.FontMetrics(self.fontMetrics())
+
     def set_clip_path(
         self, path: QtGui.QPainterPath, operation: constants.ClipOperationStr = "replace"
     ):
