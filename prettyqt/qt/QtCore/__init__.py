@@ -27,6 +27,8 @@ if PYQT5:
         pyqtSlot as Slot,
         Q_ENUM,
         Q_ENUM as QEnum,
+        Q_ARG,
+        Q_ARG as QGenericArgument,
         Q_FLAG,
         Q_FLAG as QFlag,
     )
@@ -58,6 +60,7 @@ if PYQT5:
         QT_VERSION_STR,
         Q_FLAG,
         Q_ENUM,
+        Q_ARG,
     )
 elif PYSIDE2:
     from PySide2.QtCore import *
