@@ -119,7 +119,18 @@ class Dir(QtCore.QDir):
     def get_entry_info_list(
         self, sort_mode: SortFlagStr = "no_sort", filters: FilterStr = "none"
     ) -> List[core.FileInfo]:
-        return [core.FileInfo(i) for i in self.entryInfoList()]
+        return [
+            core.FileInfo(i)
+            for i in self.entryInfoList(SORT_FLAG[sort_mode], FILTERS[filters])
+        ]
+
+    def get_entry_list(
+        self, sort_mode: SortFlagStr = "no_sort", filters: FilterStr = "none"
+    ) -> List[pathlib.Path]:
+        return [
+            pathlib.Path(i)
+            for i in self.entryList(SORT_FLAG[sort_mode], FILTERS[filters])
+        ]
 
     @classmethod
     def get_current(cls) -> Dir:
