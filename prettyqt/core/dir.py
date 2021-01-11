@@ -10,6 +10,7 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 FILTERS = bidict(
+    none=QtCore.QDir.NoFilter,
     dirs=QtCore.QDir.Dirs,
     all_dirs=QtCore.QDir.AllDirs,
     files=QtCore.QDir.Files,
@@ -29,6 +30,7 @@ FILTERS = bidict(
 )
 
 FilterStr = Literal[
+    "none",
     "dirs",
     "all_dirs",
     "files",
@@ -45,6 +47,34 @@ FilterStr = Literal[
     "hidden",
     "system",
     "case_sensitive",
+]
+
+SORT_FLAG = bidict(
+    name=QtCore.QDir.Name,
+    time=QtCore.QDir.Time,
+    size=QtCore.QDir.Size,
+    type=QtCore.QDir.Type,
+    unsorted=QtCore.QDir.Unsorted,
+    no_sort=QtCore.QDir.NoSort,
+    dirs_first=QtCore.QDir.DirsFirst,
+    dirs_last=QtCore.QDir.DirsLast,
+    reversed=QtCore.QDir.Reversed,
+    ignore_case=QtCore.QDir.IgnoreCase,
+    locale_aware=QtCore.QDir.LocaleAware,
+)
+
+SortFlagStr = Literal[
+    "name",
+    "time",
+    "size",
+    "type",
+    "unsorted",
+    "no_sort",
+    "dirs_first",
+    "dirs_last",
+    "reversed",
+    "ignore_case",
+    "locale_aware",
 ]
 
 
@@ -85,6 +115,11 @@ class Dir(QtCore.QDir):
 
     def get_filter(self) -> List[FilterStr]:
         return [k for k, v in FILTERS.items() if v & self.filter()]
+
+    def get_entry_info_list(
+        self, sort_mode: SortFlagStr = "no_sort", filters: FilterStr = "none"
+    ) -> List[core.FileInfo]:
+        return [core.FileInfo(i) for i in self.entryInfoList()]
 
     @classmethod
     def get_current(cls) -> Dir:
