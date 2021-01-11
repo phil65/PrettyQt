@@ -1,3 +1,12 @@
+## v0.174.0 (2021-01-11)
+
+### Feat
+
+- **core**: add FileSelector class
+- **Dir**: add get_entry_info_list method
+- **Resource**: add set/get_file_name and register_resource methods
+- **Application**: add get_available_themes method
+
 ## v0.173.0 (2021-01-10)
 
 ### Fix
