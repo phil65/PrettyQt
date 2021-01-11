@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import contextlib
-from typing import List, Optional, Tuple, Union
+from typing import Iterator, List, Optional, Tuple, Union
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
@@ -34,6 +34,13 @@ class GuiApplication(QtGui.QGuiApplication):
     @classmethod
     def get_clipboard(cls) -> gui.Clipboard:
         return gui.Clipboard(cls.clipboard())
+
+    @classmethod
+    @contextlib.contextmanager
+    def edit_palette(cls) -> Iterator[gui.Palette]:
+        palette = gui.Palette(cls.palette())
+        yield palette
+        cls.setPalette(palette)
 
     def set_layout_direction(self, direction: constants.LayoutDirectionStr):
         """Set layout direction.
