@@ -157,6 +157,17 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
     def set_value(self, value: int):
         self.setValue(value)
 
+    def on_scrollbar_range_changed(self, minval, maxval):
+        if self.value() >= self.maximum() - 1:
+            self.setValue(maxval)
+
+    def set_auto_scroll_to_end(self, scroll: bool = True):
+        """Set to always scroll to the end when range changes."""
+        if scroll:
+            self.rangeChanged.connect(self.on_scrollbar_range_changed)
+        else:
+            self.rangeChanged.disconnect(self.on_scrollbar_range_changed)
+
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication([])
