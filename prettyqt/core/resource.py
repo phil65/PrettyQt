@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import os
 import pathlib
-from typing import Iterator, Literal
+from typing import Iterator, Literal, Union
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -47,3 +48,13 @@ class Resource(QtCore.QResource):
 
     def get_last_modified(self) -> core.DateTime:
         return core.DateTime(self.lastModified())
+
+    def set_file_name(self, path: Union[str, os.PathLike]):
+        self.setFileName(os.fspath(path))
+
+    def get_file_name(self) -> pathlib.Path:
+        return pathlib.Path(self.fileName())
+
+    @classmethod
+    def register_resource(cls, path: Union[str, os.PathLike], root: str = ""):
+        cls.registerResource(os.fspath(path), root)
