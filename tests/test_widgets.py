@@ -231,7 +231,7 @@ def test_datetimeedit(qtbot):
 
 def test_dialog(qtbot, qttester):
     dlg = widgets.Dialog(layout="horizontal")
-    qtbot.addWidget(dlg)
+    qtbot.add_widget(dlg)
     dlg.show()
     qttester.send_keypress(dlg, QtCore.Qt.Key_F11)
     dlg.delete_on_close()

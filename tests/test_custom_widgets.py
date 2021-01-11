@@ -220,7 +220,7 @@ def test_labeledslider(qtbot, qttester):
     slider = custom_widgets.LabeledSlider(["test1", "test2"], "vertical")
     slider = custom_widgets.LabeledSlider(["test1", "test2"])
     slider.show()
-    qtbot.addWidget(slider)
+    qtbot.add_widget(slider)
     qttester.send_mousepress(slider.sl, QtCore.Qt.LeftButton)
     qttester.send_mousemove(slider.sl, core.Point(20, 20))
     slider.repaint()
@@ -309,7 +309,7 @@ def test_selectionwidget(qtbot):
 
 def test_spanslider(qtbot, qttester):
     slider = custom_widgets.SpanSlider()
-    qtbot.addWidget(slider)
+    qtbot.add_widget(slider)
     slider.show()
     slider.set_lower_value(10)
     slider.set_upper_value(20)

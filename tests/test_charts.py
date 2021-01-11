@@ -78,7 +78,7 @@ def test_chartview(qtbot, qttester):
     widget = charts.ChartView()
     widget.show()
     widget.get_image()
-    qtbot.addWidget(widget)
+    qtbot.add_widget(widget)
     qttester.send_keypress(widget, QtCore.Qt.Key_F11)
     # qttester.send_keypress(widget, QtCore.Qt.Key_Minus)
     # qttester.send_keypress(widget, QtCore.Qt.Key_Plus)
