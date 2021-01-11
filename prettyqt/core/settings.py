@@ -5,6 +5,8 @@ import logging
 import os
 from typing import Any, Dict, Iterator, List, Literal, Mapping, Optional, Tuple, Union
 
+from deprecated import deprecated
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
@@ -204,23 +206,33 @@ class Settings(QtCore.QSettings):
         for k, v in other.items():
             self.set_value(k, v)
 
+    @classmethod
+    def register_extensions(
+        cls,
+        *exts: str,
+        app_name: Optional[str] = None,
+        app_path: Union[None, str, os.PathLike] = None,
+    ):
+        logger.debug(f"assigning extensions {exts} to {app_name}")
+        s = cls("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.NativeFormat)
+        if app_path is None:
+            app_path = str(core.CoreApplication.get_application_file_path())
+        app_path = os.fspath(app_path)
+        if app_name is None:
+            app_name = core.CoreApplication.applicationName()
+        for ext in exts:
+            s.setValue(f"{ext}/DefaultIcon/.", app_path)  # perhaps ,0 after app_path
+            s.setValue(f"{ext}/.", app_name)
+        s.setValue(f"{app_name}/shell/open/command/.", f"{app_path} %1")
 
+
+@deprecated(reason="This method is deprecated, use Settings.register_extensions instead.")
 def register_extensions(
     *exts: str,
     app_name: Optional[str] = None,
     app_path: Union[None, str, os.PathLike] = None,
 ):
-    logger.debug(f"assigning extensions {exts} to {app_name}")
-    s = Settings("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.NativeFormat)
-    if app_path is None:
-        app_path = str(core.CoreApplication.get_application_file_path())
-    app_path = os.fspath(app_path)
-    if app_name is None:
-        app_name = core.CoreApplication.applicationName()
-    for ext in exts:
-        s.setValue(f"{ext}/DefaultIcon/.", app_path)  # perhaps ,0 after app_path
-        s.setValue(f"{ext}/.", app_name)
-    s.setValue(f"{app_name}/shell/open/command/.", f"{app_path} %1")
+    core.Settings.register_extensions(*exts, app_name=app_name, app_path=app_path)
 
 
 if __name__ == "__main__":
