@@ -4,7 +4,7 @@ import contextlib
 import logging
 import os
 import pathlib
-from typing import Iterator, Literal, Mapping, MutableMapping, Optional, Union
+from typing import Dict, Iterator, Literal, Mapping, MutableMapping, Optional, Union
 
 import qstylizer.parser
 import qstylizer.style
@@ -23,6 +23,8 @@ SAVE_STATES = dict(
     mainwindows=QtWidgets.QMainWindow,
     headerviews=QtWidgets.QHeaderView,
 )
+
+ThemeStr = Literal["default", "dark"]
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
@@ -127,14 +129,18 @@ class Application(QtWidgets.QApplication):
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:
         return qstylizer.parser.parse(self.styleSheet())
 
-    def set_theme(self, theme: Literal["default", "dark"]):
+    def set_theme(self, theme: ThemeStr):
         if theme == "default":
             self.set_stylesheet("")
             iconprovider.set_defaults(color="black")
         elif theme == "dark":
             ss = (prettyqt.ROOT_PATH / "themes" / "darktheme.qss").read_text()
             self.set_stylesheet(ss)
-            iconprovider.set_defaults(color="white")
+            iconprovider.set_defaults(color="lightblue")
+
+    @classmethod
+    def get_available_themes(cls) -> Dict[ThemeStr, str]:
+        return dict(default="Default", dark="Dark")
 
     def send_event(self, obj_or_str: Union[str, QtCore.QObject], event: QtCore.QEvent):
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
