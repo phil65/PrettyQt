@@ -934,6 +934,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractslider.AbstractSlider.set_auto_scroll_to_end" class="md-nav__link">
+    set_auto_scroll_to_end()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractslider.AbstractSlider.set_horizontal" class="md-nav__link">
     set_horizontal()
   </a>
@@ -4924,6 +4931,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractslider.AbstractSlider.scroll_to_min" class="md-nav__link">
     scroll_to_min()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractslider.AbstractSlider.set_auto_scroll_to_end" class="md-nav__link">
+    set_auto_scroll_to_end()
   </a>
   
 </li>
@@ -10258,6 +10272,29 @@
 <pre><span></span><code><span class="k">def</span> <span class="nf">scroll_to_min</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
     <span class="sd">"""Scroll to the minimum value of the slider."""</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minimum</span><span class="p">())</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.abstractslider.AbstractSlider.set_auto_scroll_to_end">
+
+<code class="highlight language-python"><span class="n">set_auto_scroll_to_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scroll</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span></code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Set to always scroll to the end when range changes.</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/abstractslider.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_auto_scroll_to_end</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scroll</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+    <span class="sd">"""Set to always scroll to the end when range changes."""</span>
+    <span class="k">if</span> <span class="n">scroll</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rangeChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_scrollbar_range_changed</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rangeChanged</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_scrollbar_range_changed</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>
