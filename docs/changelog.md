@@ -1,3 +1,13 @@
+## v0.175.0 (2021-01-12)
+
+### Feat
+
+- add prettyqtest
+- **qml**: add register_qml_type method
+- **AbstractSlider**: add set_auto_scroll_to_end method
+- **GuiApplication**: add edit_palette context manager
+- **Dir**: add get_entry_list method
+
 ## v0.174.0 (2021-01-11)
 
 ### Feat
