@@ -31,6 +31,7 @@ if PYQT5:
         Q_ARG as QGenericArgument,
         Q_FLAG,
         Q_FLAG as QFlag,
+        PYQT_VERSION_STR as BINDING_VERSION,
     )
 
     # For issue #153
@@ -65,6 +66,8 @@ if PYQT5:
 elif PYSIDE2:
     from PySide2.QtCore import *
     from PySide2.QtCore import __version__  # type: ignore
+    from PySide2 import __version__ as BINDING_VERSION
 elif PYSIDE6:
     from PySide6.QtCore import *  # type: ignore
     from PySide6.QtCore import __version__  # type: ignore
+    from PySide6 import __version__ as BINDING_VERSION

@@ -38,16 +38,16 @@ lint: ## check style with flake8
 	flake8 prettyqt
 
 test_pyqt5: ## run tests with PyQt5
-	export QT_API=pyqt5; export USE_QT_API=pyqt5; export PYTEST_QT_API=pyqt5; poetry run pytest # --mypy
+	export QT_API=pyqt5; poetry run pytest # --mypy
 
 test_pyside2: ## run tests with pyside
-	export QT_API=pyside2; export USE_QT_API=pyside2; export PYTEST_QT_API=pyside2; poetry run pytest # --mypy
+	export QT_API=pyside2; poetry run pytest # --mypy
 
 test_pyside6: ## run tests with pyside
-	export QT_API=pyside6; export USE_QT_API=pyside6; export PYTEST_QT_API=pyside2; poetry run pytest # --mypy
+	export QT_API=pyside6; poetry run pytest # --mypy
 
 test_pyqt6: ## run tests with pyside
-	export QT_API=pyqt6; export USE_QT_API=pyqt6; export PYTEST_QT_API=pyqt5; poetry run pytest # --mypy
+	export QT_API=pyqt6; poetry run pytest # --mypy
 
 test: test_pyqt5 test_pyside2 test_pyside6 ## run tests with all frameworks
 

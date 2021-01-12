@@ -7,7 +7,7 @@ Contains QtCore-based classes
 
 import prettyqt.qt
 
-from prettyqt.qt.QtCore import (
+from prettyqt.qt.QtCore import (  # type: ignore
     Slot,
     Signal,
     Property,
@@ -21,6 +21,13 @@ from prettyqt.qt.QtCore import (
     QChildEvent as ChildEvent,
     QTimerEvent as TimerEvent,
     QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent,
+    QtCriticalMsg as CriticalMsg,
+    QtDebugMsg as DebugMsg,
+    QtFatalMsg as FatalMsg,
+    QtInfoMsg as InfoMsg,
+    QtMsgType as MsgType,
+    QtSystemMsg as SystemMsg,
+    QtWarningMsg as WarningMsg,
 )
 from .metaenum import MetaEnum
 from .metamethod import MetaMethod
@@ -282,4 +289,11 @@ __all__ = [
     "Collator",
     "JsonValue",
     "JsonDocument",
+    "CriticalMsg",
+    "DebugMsg",
+    "FatalMsg",
+    "InfoMsg",
+    "MsgType",
+    "SystemMsg",
+    "WarningMsg",
 ]

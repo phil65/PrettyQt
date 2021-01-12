@@ -304,7 +304,7 @@ def test_filedialog(qtbot):
     dlg.set_directory(path)
 
 
-def test_filesystemmodel(qtmodeltester):
+def test_filesystemmodel(qttester):
     model = widgets.FileSystemModel()
     model.set_root_path("/")
     idx = model.index(0, 0)
@@ -320,7 +320,7 @@ def test_filesystemmodel(qtmodeltester):
     with pytest.raises(InvalidParamError):
         model.set_filter("test")
     # modeltest.ModelTest(model)
-    # qtmodeltester.check(model, force_py=False)
+    # qttester.test_model(model, force_py=True)
 
 
 def test_fontcombobox(qtbot):
