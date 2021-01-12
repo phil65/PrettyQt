@@ -3,10 +3,25 @@ from typing import Literal
 
 from bidict import bidict
 from prettyqt.qt import QtCore
-
+import prettyqt.qt
 from prettyqt.utils import mappers
 
 Qt = QtCore.Qt
+
+if prettyqt.qt.API != "pyqt6":
+    Alignment = Qt.AlignmentFlag
+    Orientation = Qt.Orientation
+    ItemFlag = Qt.ItemFlag
+    DropAction = Qt.DropAction
+    Modifier = Qt.KeyboardModifier
+    Edge = Qt.Edge
+else:
+    Alignment = Qt.Alignment  # type: ignore
+    Orientation = Qt.Orientations  # type: ignore
+    ItemFlag = Qt.ItemFlags  # type: ignore
+    DropAction = Qt.DropActions  # type: ignore
+    Modifier = Qt.KeyboardModifiers  # type: ignore
+    Edge = Qt.Edges  # type: ignore
 
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
 USER_ROLE = Qt.ItemDataRole.UserRole
@@ -22,17 +37,17 @@ CHECKSTATE_ROLE = Qt.ItemDataRole.CheckStateRole
 ALIGNMENT_ROLE = Qt.ItemDataRole.TextAlignmentRole
 FONT_ROLE = Qt.ItemDataRole.FontRole
 
-ALIGN_LEFT = Qt.AlignmentFlag.AlignLeft
-ALIGN_RIGHT = Qt.AlignmentFlag.AlignRight
-ALIGN_H_CENTER = Qt.AlignmentFlag.AlignHCenter
-ALIGN_JUSTIFY = Qt.AlignmentFlag.AlignJustify
+ALIGN_LEFT = Alignment.AlignLeft
+ALIGN_RIGHT = Alignment.AlignRight
+ALIGN_H_CENTER = Alignment.AlignHCenter
+ALIGN_JUSTIFY = Alignment.AlignJustify
 
-ALIGN_TOP = Qt.AlignmentFlag.AlignTop
-ALIGN_BOTTOM = Qt.AlignmentFlag.AlignBottom
-ALIGN_V_CENTER = Qt.AlignmentFlag.AlignVCenter
-ALIGN_BASELINE = Qt.AlignmentFlag.AlignBaseline
+ALIGN_TOP = Alignment.AlignTop
+ALIGN_BOTTOM = Alignment.AlignBottom
+ALIGN_V_CENTER = Alignment.AlignVCenter
+ALIGN_BASELINE = Alignment.AlignBaseline
 
-Flag = Qt.AlignmentFlag
+Flag = Alignment
 ALIGN_CENTER = Flag.AlignCenter
 ALIGN_CENTER_LEFT = Flag.AlignVCenter | Flag.AlignLeft  # type: ignore
 ALIGN_CENTER_RIGHT = Flag.AlignVCenter | Flag.AlignRight  # type: ignore
@@ -43,29 +58,29 @@ ALIGN_BOTTOM_LEFT = Flag.AlignBottom | Flag.AlignLeft  # type: ignore
 ALIGN_BOTTOM_RIGHT = Flag.AlignBottom | Flag.AlignRight  # type: ignore
 ALIGN_BOTTOM_CENTER = Flag.AlignBottom | Flag.AlignHCenter  # type: ignore
 
-HORIZONTAL = Qt.Orientation.Horizontal
-VERTICAL = Qt.Orientation.Vertical
+HORIZONTAL = Orientation.Horizontal
+VERTICAL = Orientation.Vertical
 
 ASCENDING = Qt.SortOrder.AscendingOrder
 DESCENDING = Qt.SortOrder.DescendingOrder
 
-DROP_ENABLED = Qt.ItemFlag.ItemIsDropEnabled
-DRAG_ENABLED = Qt.ItemFlag.ItemIsDragEnabled
-IS_ENABLED = Qt.ItemFlag.ItemIsEnabled
-IS_SELECTABLE = Qt.ItemFlag.ItemIsSelectable
-IS_EDITABLE = Qt.ItemFlag.ItemIsEditable
-IS_CHECKABLE = Qt.ItemFlag.ItemIsUserCheckable
-IS_AUTO_TRISTATE = Qt.ItemFlag.ItemIsAutoTristate
-IS_USER_TRISTATE = Qt.ItemFlag.ItemIsUserTristate
-NO_FLAGS = Qt.ItemFlag.NoItemFlags
-NO_CHILDREN = Qt.ItemFlag.ItemNeverHasChildren
+DROP_ENABLED = ItemFlag.ItemIsDropEnabled
+DRAG_ENABLED = ItemFlag.ItemIsDragEnabled
+IS_ENABLED = ItemFlag.ItemIsEnabled
+IS_SELECTABLE = ItemFlag.ItemIsSelectable
+IS_EDITABLE = ItemFlag.ItemIsEditable
+IS_CHECKABLE = ItemFlag.ItemIsUserCheckable
+IS_AUTO_TRISTATE = ItemFlag.ItemIsAutoTristate
+IS_USER_TRISTATE = ItemFlag.ItemIsUserTristate
+NO_FLAGS = ItemFlag.NoItemFlags
+NO_CHILDREN = ItemFlag.ItemNeverHasChildren
 
-MOVE_ACTION = Qt.DropAction.MoveAction
-COPY_ACTION = Qt.DropAction.CopyAction
+MOVE_ACTION = DropAction.MoveAction
+COPY_ACTION = DropAction.CopyAction
 
 TEXT_WORD_WRAP = Qt.TextFlag.TextWordWrap
 
-CTRL_MOD = Qt.KeyboardModifier.ControlModifier
+CTRL_MOD = Modifier.ControlModifier
 
 KEY_F11 = Qt.Key.Key_F11
 KEY_DELETE = Qt.Key.Key_Delete
@@ -98,24 +113,24 @@ AlignmentStr = Literal[
 
 SIDES = mappers.FlagMap(
     Qt.Alignment,
-    left=Qt.AlignmentFlag.AlignLeft,
-    right=Qt.AlignmentFlag.AlignRight,
-    top=Qt.AlignmentFlag.AlignTop,
-    bottom=Qt.AlignmentFlag.AlignBottom,
+    left=Alignment.AlignLeft,
+    right=Alignment.AlignRight,
+    top=Alignment.AlignTop,
+    bottom=Alignment.AlignBottom,
 )
 
 SideStr = Literal["left", "right", "top", "bottom"]
 
 EDGES = mappers.FlagMap(
     Qt.Edges,
-    top=Qt.Edge.TopEdge,
-    left=Qt.Edge.LeftEdge,
-    right=Qt.Edge.RightEdge,
-    bottom=Qt.Edge.BottomEdge,
-    top_left=Qt.Edge.TopEdge | Qt.Edge.LeftEdge,  # type: ignore
-    top_right=Qt.Edge.TopEdge | Qt.Edge.RightEdge,  # type: ignore
-    bottom_left=Qt.Edge.BottomEdge | Qt.Edge.LeftEdge,  # type: ignore
-    bottom_right=Qt.Edge.BottomEdge | Qt.Edge.RightEdge,  # type: ignore
+    top=Edge.TopEdge,
+    left=Edge.LeftEdge,
+    right=Edge.RightEdge,
+    bottom=Edge.BottomEdge,
+    top_left=Edge.TopEdge | Edge.LeftEdge,  # type: ignore
+    top_right=Edge.TopEdge | Edge.RightEdge,  # type: ignore
+    bottom_left=Edge.BottomEdge | Edge.LeftEdge,  # type: ignore
+    bottom_right=Edge.BottomEdge | Edge.RightEdge,  # type: ignore
 )
 
 EdgeStr = Literal[
@@ -131,10 +146,10 @@ EdgeStr = Literal[
 
 H_ALIGNMENT = mappers.FlagMap(
     Qt.Alignment,
-    left=Qt.AlignmentFlag.AlignLeft,
-    right=Qt.AlignmentFlag.AlignRight,
-    center=Qt.AlignmentFlag.AlignHCenter,
-    justify=Qt.AlignmentFlag.AlignJustify,
+    left=Alignment.AlignLeft,
+    right=Alignment.AlignRight,
+    center=Alignment.AlignHCenter,
+    justify=Alignment.AlignJustify,
 )
 
 HorizontalAlignmentStr = Literal[
@@ -146,10 +161,10 @@ HorizontalAlignmentStr = Literal[
 
 V_ALIGNMENT = mappers.FlagMap(
     Qt.Alignment,
-    top=Qt.AlignmentFlag.AlignTop,
-    bottom=Qt.AlignmentFlag.AlignBottom,
-    center=Qt.AlignmentFlag.AlignVCenter,
-    baseline=Qt.AlignmentFlag.AlignBaseline,
+    top=Alignment.AlignTop,
+    bottom=Alignment.AlignBottom,
+    center=Alignment.AlignVCenter,
+    baseline=Alignment.AlignBaseline,
 )
 
 VerticalAlignmentStr = Literal[
@@ -161,7 +176,7 @@ VerticalAlignmentStr = Literal[
 
 OrientationStr = Literal["horizontal", "vertical"]
 ORIENTATION: bidict[OrientationStr, Qt.Orientation] = bidict(
-    horizontal=Qt.Orientation.Horizontal, vertical=Qt.Orientation.Vertical
+    horizontal=Orientation.Horizontal, vertical=Orientation.Vertical
 )
 
 StateStr = Literal["unchecked", "partial", "checked"]
