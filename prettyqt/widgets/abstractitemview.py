@@ -165,7 +165,9 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
 
     def selected_data(self) -> Generator[Any, None, None]:
         """Returns generator yielding selected userData."""
-        return (x.data(constants.USER_ROLE) for x in self.selected_indexes())
+        return (
+            x.data(constants.USER_ROLE) for x in self.selected_indexes()  # type: ignore
+        )
 
     def setup_dragdrop_move(self):
         self.setDragEnabled(True)

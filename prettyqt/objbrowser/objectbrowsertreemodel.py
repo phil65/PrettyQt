@@ -111,7 +111,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
     def flags(self, index: core.ModelIndex):
         if not index.isValid():
             return constants.NO_CHILDREN
-        return constants.IS_ENABLED | constants.IS_SELECTABLE
+        return constants.IS_ENABLED | constants.IS_SELECTABLE  # type: ignore
 
     def index(
         self, row: int, column: int, parent: Optional[core.ModelIndex] = None

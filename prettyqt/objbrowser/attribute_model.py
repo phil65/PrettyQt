@@ -154,7 +154,7 @@ ATTR_MODEL_LENGTH = custom_models.ColumnItem(
     # data_fn     = tio_length,
     label=safe_data_fn(len),
     col_visible=False,
-    alignment=constants.ALIGN_RIGHT,
+    alignment=constants.ALIGN_RIGHT,  # type: ignore
     width="small",
 )
 
@@ -163,7 +163,7 @@ ATTR_MODEL_ID = custom_models.ColumnItem(
     doc="The identifier of the object with calculated using the id() function",
     label=lambda tree_item: f"0x{id(tree_item.obj):X}",
     col_visible=False,
-    alignment=constants.ALIGN_RIGHT,
+    alignment=constants.ALIGN_RIGHT,  # type: ignore
     width="small",
 )
 

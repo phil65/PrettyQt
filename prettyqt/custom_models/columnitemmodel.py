@@ -42,15 +42,15 @@ class ColumnItem:
     def get_flag(self):
         flag = constants.NO_FLAGS
         if self.selectable:
-            flag |= constants.IS_SELECTABLE
+            flag |= constants.IS_SELECTABLE  # type: ignore
         if self.enabled:
-            flag |= constants.IS_ENABLED
+            flag |= constants.IS_ENABLED  # type: ignore
         if self.editable:
-            flag |= constants.IS_EDITABLE
+            flag |= constants.IS_EDITABLE  # type: ignore
         if self.checkable:
-            flag |= constants.IS_CHECKABLE
+            flag |= constants.IS_CHECKABLE  # type: ignore
         if self.tristate:
-            flag |= constants.IS_USER_TRISTATE
+            flag |= constants.IS_USER_TRISTATE  # type: ignore
         return flag
 
     def get_label(self, tree_item):
@@ -97,7 +97,7 @@ class ColumnItem:
 
     def get_alignment(self, tree_item) -> int:
         if self.alignment is None:
-            return constants.ALIGN_LEFT
+            return constants.ALIGN_LEFT  # type: ignore
         elif callable(self.alignment):
             return self.alignment(tree_item)
         elif isinstance(self.alignment, str):

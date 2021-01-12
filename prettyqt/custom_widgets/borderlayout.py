@@ -38,7 +38,7 @@ class BorderLayout(widgets.Layout):
         self.add_widgetitem(widgets.WidgetItem(widget), position)
 
     def expandingDirections(self):
-        return constants.HORIZONTAL | constants.VERTICAL
+        return constants.HORIZONTAL | constants.VERTICAL  # type: ignore
 
     def hasHeightForWidth(self) -> bool:
         return False

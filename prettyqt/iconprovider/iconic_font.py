@@ -148,7 +148,7 @@ class CharIconPainter:
             if (opacity := opt.get("opacity")) is not None:
                 painter.setOpacity(opacity)
 
-            painter.drawText(rect, int(constants.ALIGN_CENTER), opt[char])
+            painter.drawText(rect, int(constants.ALIGN_CENTER), opt[char])  # type: ignore
             painter.restore()
 
 
