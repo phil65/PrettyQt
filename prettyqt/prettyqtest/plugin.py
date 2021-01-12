@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from prettyqt import qt, widgets
+from prettyqt import gui, qt, widgets
 from prettyqt.prettyqtest.exceptions import (
     _is_exception_capture_enabled,
     _QtExceptionCaptureManager,
@@ -10,6 +10,7 @@ from prettyqt.prettyqtest.exceptions import (
 from prettyqt.prettyqtest.logging import QtLoggingPlugin, _QtMessageCapture
 from prettyqt.prettyqtest.qtbot import QtBot, _close_widgets
 from prettyqt.qt import QtCore
+from prettyqt.utils import modeltest
 
 
 # classes/functions imported here just for backward compatibility before we
@@ -75,16 +76,48 @@ def qtlog(request):
         return _QtMessageCapture([])  # pragma: no cover
 
 
-# @pytest.fixture
-# def qtmodeltester(request):
-#     """
-#     Fixture used to create a ModelTester instance to test models.
-#     """
-#     from prettyqt.utils.modeltest import ModelTester
+class QtTester:
+    @staticmethod
+    def send_keypress(widget, key):
+        event = gui.KeyEvent(QtCore.QEvent.KeyPress, key, QtCore.Qt.KeyboardModifiers())
+        widgets.Application.sendEvent(widget, event)
 
-#     tester = ModelTester(request.config)
-#     yield tester
-#     tester._cleanup()
+    @staticmethod
+    def send_mousepress(widget, key):
+        event = gui.MouseEvent(
+            QtCore.QEvent.MouseButtonRelease,
+            QtCore.QPointF(0, 0),
+            QtCore.QPointF(0, 0),
+            key,
+            QtCore.Qt.NoButton,
+            QtCore.Qt.KeyboardModifiers(),
+        )
+        widgets.Application.sendEvent(widget, event)
+
+    @staticmethod
+    def send_mousemove(widget, target=None, delay=0):
+        if target is None:
+            target = QtCore.QPointF(0, 0)
+        event = gui.MouseEvent(
+            QtCore.QEvent.MouseButtonRelease,
+            target,
+            QtCore.QPointF(0, 0),
+            QtCore.Qt.NoButton,
+            QtCore.Qt.NoButton,
+            QtCore.Qt.KeyboardModifiers(),
+        )
+        widgets.Application.sendEvent(widget, event)
+
+    @staticmethod
+    def test_model(model, force_py):
+        tester = modeltest.ModelTester(model)
+        tester.check(force_py=force_py)
+        tester._cleanup()
+
+
+@pytest.fixture
+def qttester():
+    return QtTester
 
 
 def pytest_addoption(parser):
