@@ -164,7 +164,7 @@ class ListWidget(QtWidgets.QListWidget):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     widget = ListWidget()
     widget.add("test", icon="mdi.timer")
     widget.add("test", icon="mdi.timer")

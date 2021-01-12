@@ -79,7 +79,7 @@ class TextBrowser(QtWidgets.QTextBrowser):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     reader = TextBrowser()
     reader.show()
     app.main_loop()

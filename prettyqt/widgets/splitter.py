@@ -122,7 +122,7 @@ class Splitter(QtWidgets.QSplitter):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     widget = Splitter()
     widget.show()
     app.main_loop()

@@ -28,7 +28,7 @@ class TableWidget(QtWidgets.QTableWidget):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     widget = TableWidget()
     widget.setHorizontalHeaderLabels(["testus"])
     widget.setColumnCount(1)

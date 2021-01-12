@@ -17,7 +17,7 @@ class RadioButton(QtWidgets.QRadioButton):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     widget = RadioButton("This is a test")
     widget.set_icon("mdi.timer")
     widget.show()

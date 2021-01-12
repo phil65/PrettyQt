@@ -17,7 +17,7 @@ class TreeWidget(QtWidgets.QTreeWidget):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     widget = TreeWidget()
     widget.show()
     app.main_loop()

@@ -176,7 +176,7 @@ class TextEdit(QtWidgets.QTextEdit):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     widget = TextEdit("This is a test")
     widget.show()
     app.main_loop()

@@ -73,8 +73,8 @@ class TreeView(QtWidgets.QTreeView):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
-    dlg = QtWidgets.QMainWindow()
+    app = widgets.app()
+    dlg = widgets.MainWindow()
     status_bar = TreeView()
     dlg.show()
     app.main_loop()

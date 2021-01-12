@@ -519,7 +519,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     widget = Widget()
     print(type(widget.windowFilePath()))
     widget.show()

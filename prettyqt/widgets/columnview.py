@@ -12,8 +12,8 @@ class ColumnView(QtWidgets.QColumnView):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
-    dlg = QtWidgets.QMainWindow()
+    app = widgets.app()
+    dlg = widgets.MainWindow()
     status_bar = ColumnView()
     dlg.show()
     app.main_loop()

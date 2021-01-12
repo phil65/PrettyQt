@@ -170,7 +170,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
 
 
 if __name__ == "__main__":
-    app = QtWidgets.QApplication([])
+    app = widgets.app()
     slider = AbstractSlider()
     slider.setRange(0, 100)
     slider.value_changed.connect(print)
