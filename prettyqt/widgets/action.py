@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Callable, Literal, Optional, Union
+import os
+from typing import Callable, Literal, Optional, Tuple, Union
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -129,8 +130,20 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
     def set_disabled(self):
         self.setEnabled(False)
 
-    def set_tooltip(self, text: str):
-        self.setToolTip(text)
+    def set_tooltip(
+        self,
+        tooltip: Union[str, os.PathLike],
+        size: Optional[Union[Tuple[int, int], QtCore.QSize]] = None,
+    ):
+        if isinstance(tooltip, os.PathLike):  # type: ignore
+            path = os.fspath(tooltip)
+            if size is None:
+                tooltip = f"<img src={path!r}>"
+            else:
+                if isinstance(size, QtCore.QSize):
+                    size = (size.width(), size.height())
+                tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
+        self.setToolTip(tooltip)
 
     def set_statustip(self, text: str):
         self.setStatusTip(text)

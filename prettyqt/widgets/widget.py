@@ -4,7 +4,7 @@ import contextlib
 import os
 import pathlib
 import sys
-from typing import Any, Callable, Dict, Iterator, Literal, Optional, Union
+from typing import Any, Callable, Dict, Iterator, Literal, Optional, Tuple, Union
 
 from deprecated import deprecated
 import qstylizer.parser
@@ -174,8 +174,20 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def get_title(self) -> str:
         return self.windowTitle()
 
-    def set_tooltip(self, text: str) -> None:
-        self.setToolTip(text)
+    def set_tooltip(
+        self,
+        tooltip: Union[str, os.PathLike],
+        size: Optional[Union[Tuple[int, int], QtCore.QSize]] = None,
+    ):
+        if isinstance(tooltip, os.PathLike):  # type: ignore
+            path = os.fspath(tooltip)
+            if size is None:
+                tooltip = f"<img src={path!r}>"
+            else:
+                if isinstance(size, QtCore.QSize):
+                    size = (size.width(), size.height())
+                tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
+        self.setToolTip(tooltip)
 
     def set_font(
         self,
