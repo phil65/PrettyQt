@@ -11,6 +11,13 @@ QtCore.QTimer.__bases__ = (core.Object,)
 
 
 class Timer(QtCore.QTimer):
+    def serialize_fields(self):
+        return dict(
+            interval=self.interval(),
+            single_shot=self.isSingleShot(),
+            timer_type=self.get_type(),
+        )
+
     @classmethod
     def single_shot(cls, callback: Callable) -> Timer:
         timer = cls()
@@ -47,3 +54,8 @@ class Timer(QtCore.QTimer):
     def restart(self):
         self.stop()
         self.start()
+
+
+if __name__ == "__main__":
+    timer = Timer()
+    timer.set_interval("2m")
