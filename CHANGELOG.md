@@ -1,3 +1,9 @@
+## v0.177.0 (2021-01-13)
+
+### Feat
+
+- allow args for app() methods
+
 ## v0.176.0 (2021-01-13)
 
 ### Feat
