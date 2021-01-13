@@ -41,9 +41,7 @@ def qapp(qapp_args, pytestconfig):
         global _qapp_instance
         _qapp_instance = widgets.Application(qapp_args)
         name = pytestconfig.getini("qt_qapp_name")
-        _qapp_instance.set_metadata(
-            app_name=name, app_version="1.0.0", org_name="test", org_domain="test"
-        )
+        _qapp_instance.setApplicationName(name)
         return _qapp_instance
     else:
         return app  # pragma: no cover
