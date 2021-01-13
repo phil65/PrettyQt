@@ -1,3 +1,14 @@
+## v0.176.0 (2021-01-13)
+
+### Feat
+
+- **Timer**: add start_timer method
+- **Timer**: add set_interval method
+- allow os.PathLike for using images in set_tooltip methods
+- **Movie**: add get_supported_formats method
+- **iconprovider**: add AwesomeQuickImageProvider class
+- **iconprovider**: add AwesomeFileIconProvider class
+
 ## v0.175.0 (2021-01-12)
 
 ### Feat
