@@ -5,6 +5,10 @@ Contains QtCore-based classes
 
 # from prettyqt.qt.QtCore import Signal
 
+from __future__ import annotations
+
+from typing import List, Optional
+
 import prettyqt.qt
 
 from prettyqt.qt.QtCore import (  # type: ignore
@@ -160,10 +164,11 @@ if VersionNumber.get_qt_version() < (6, 0, 0):
     from .statemachine import StateMachine
 
 
-def app():
-    if CoreApplication.instance() is not None:
-        return CoreApplication.instance()
-    return CoreApplication([])
+def app(args: Optional[List[str]] = None) -> CoreApplication:
+    instance = CoreApplication.instance()
+    if instance is not None:
+        return instance
+    return CoreApplication([] if args is None else args)
 
 
 __all__ = [

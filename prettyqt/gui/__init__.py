@@ -4,6 +4,8 @@ Contains QtGui-based classes
 """
 from __future__ import annotations
 
+from typing import List, Optional
+
 from prettyqt.qt.QtGui import (
     QKeyEvent as KeyEvent,
     QMouseEvent as MouseEvent,
@@ -131,10 +133,11 @@ if core.VersionNumber.get_qt_version() >= (5, 13, 0):
     from .colorspace import ColorSpace
 
 
-def app():
-    if GuiApplication.instance() is not None:
-        return GuiApplication.instance()
-    return GuiApplication([])
+def app(args: Optional[List[str]] = None) -> GuiApplication:
+    instance = GuiApplication.instance()
+    if instance is not None:
+        return instance
+    return GuiApplication([] if args is None else args)
 
 
 __all__ = [

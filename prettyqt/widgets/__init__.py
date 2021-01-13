@@ -3,6 +3,10 @@
 contains QtWidgets-based classes
 """
 
+from __future__ import annotations
+
+from typing import List, Optional
+
 from prettyqt import core
 from prettyqt.qt.QtWidgets import (
     QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent,
@@ -208,11 +212,12 @@ from .itemeditorcreatorbase import ItemEditorCreatorBase
 from .itemeditorfactory import ItemEditorFactory
 
 
-def app():
-    if Application.instance() is not None:
-        return Application.instance()
+def app(args: Optional[List[str]] = None) -> Application:
+    instance = Application.instance()
+    if instance is not None:
+        return instance
     Application.disable_window_help_button()
-    return Application([])
+    return Application([] if args is None else args)
 
 
 __all__ = [
