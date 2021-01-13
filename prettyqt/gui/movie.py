@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import List, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
@@ -66,6 +66,10 @@ class Movie(QtGui.QMovie):
 
     def get_format(self) -> bytes:
         return bytes(self.format())
+
+    @classmethod
+    def get_supported_formats(cls) -> List[str]:
+        return [bytes(i).decode() for i in cls.supportedFormats()]
 
 
 if __name__ == "__main__":
