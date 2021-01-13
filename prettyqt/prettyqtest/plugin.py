@@ -13,6 +13,9 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import modeltest
 
 
+qapp_instance = None
+
+
 @pytest.fixture(scope="session")
 def qapp_args():
     """Fixture that provides QApplication arguments to use.
@@ -31,12 +34,13 @@ def qapp_args():
 
 @pytest.fixture(scope="session")
 def qapp(qapp_args, pytestconfig):
-    app = widgets.Application(qapp_args)
+    global qapp_instance
+    qapp_instance = widgets.Application(qapp_args)
     name = pytestconfig.getini("qt_qapp_name")
-    app.set_metadata(
+    qapp_instance.set_metadata(
         app_name=name, app_version="1.0.0", org_name="test", org_domain="test"
     )
-    yield app
+    yield qapp_instance
 
 
 @pytest.fixture
