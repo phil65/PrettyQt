@@ -613,7 +613,7 @@ class CallbackBlocker:
         If :class:`TimeoutError` should be raised if a timeout occured.
 
         .. note:: contrary to the parameter of same name in
-            :meth:`pytestqt.qtbot.QtBot.waitCallback`, this parameter does not
+            :meth:`pytestqt.qtbot.QtBot.wait_callback`, this parameter does not
             consider the :ref:`qt_default_raising` option.
 
     :ivar list args:
@@ -698,7 +698,7 @@ class SignalEmittedError(Exception):
 
 
 class CallbackCalledTwiceError(Exception):
-    """Thrown by QtBot.waitCallback if a callback was called twice."""
+    """Thrown by QtBot.wait_callback if a callback was called twice."""
 
     pass
 

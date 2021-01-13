@@ -39,20 +39,20 @@ class QtBot:
 
     **Widgets**
 
-    .. automethod:: addWidget
-    .. automethod:: captureExceptions
-    .. automethod:: waitActive
-    .. automethod:: waitExposed
-    .. automethod:: waitForWindowShown
-    .. automethod:: stopForInteraction
+    .. automethod:: add_widget
+    .. automethod:: capture_exceptions
+    .. automethod:: wait_active
+    .. automethod:: wait_exposed
+    .. automethod:: wait_for_window_shown
+    .. automethod:: stop_for_interaction
     .. automethod:: wait
 
     **Signals and Events**
 
-    .. automethod:: waitSignal
-    .. automethod:: waitSignals
-    .. automethod:: assertNotEmitted
-    .. automethod:: waitUntil
+    .. automethod:: wait_signal
+    .. automethod:: wait_signals
+    .. automethod:: assert_not_emitted
+    .. automethod:: wait_until
 
     **Raw QTest API**
 
@@ -162,7 +162,7 @@ class QtBot:
         else:
             return True
 
-    def addWidget(self, widget, *, before_close_func=None):
+    def add_widget(self, widget, *, before_close_func=None):
         """Add a widget to be tracked by this bot.
 
         This is not required, but will ensure that the
@@ -178,10 +178,10 @@ class QtBot:
         .. note:: This method is also available as ``add_widget`` (pep-8 alias)
         """
         if not isinstance(widget, QtWidgets.QWidget):
-            raise TypeError("Need to pass a QWidget to addWidget!")
+            raise TypeError("Need to pass a QWidget to add_widget!")
         _add_widget(self._request.node, widget, before_close_func=before_close_func)
 
-    def waitActive(self, widget, timeout=5000):
+    def wait_active(self, widget, timeout=5000):
         """Context manager that waits for ``timeout`` ms or until the window is active.
 
         If window is not exposed within ``timeout`` milliseconds, raise ``TimeoutError``.
@@ -192,7 +192,7 @@ class QtBot:
 
         .. code-block:: python
 
-            with qtbot.waitActive(widget, timeout=500):
+            with qtbot.wait_active(widget, timeout=500):
                 show_action()
 
         :param QWidget widget:
@@ -212,7 +212,7 @@ class QtBot:
             "qWaitForWindowActive", "activated", widget, timeout
         )
 
-    def waitExposed(self, widget, timeout=5000):
+    def wait_exposed(self, widget, timeout=5000):
         """Context manager that waits for ``timeout`` ms or until the window is exposed.
 
         If the window is not exposed within ``timeout`` ms, raise ``TimeoutError``.
@@ -223,7 +223,7 @@ class QtBot:
 
         .. code-block:: python
 
-            with qtbot.waitExposed(splash, timeout=500):
+            with qtbot.wait_exposed(splash, timeout=500):
                 startup()
 
         :param QWidget widget:
@@ -243,7 +243,7 @@ class QtBot:
             "qWaitForWindowExposed", "exposed", widget, timeout
         )
 
-    def waitForWindowShown(self, widget) -> bool:
+    def wait_for_window_shown(self, widget) -> bool:
         """Wait until the window is shown in the screen.
 
         This is mainly useful for asynchronous systems like X11, where a window will be
@@ -253,7 +253,7 @@ class QtBot:
             Widget to wait on.
 
         .. note:: In ``PyQt5`` this function is considered deprecated in favor of
-        :meth:`waitExposed`.
+        :meth:`wait_exposed`.
 
         .. note:: This method is also available as ``wait_for_window_shown`` (pep-8 alias)
         """
@@ -262,7 +262,7 @@ class QtBot:
         else:
             return QtTest.QTest.qWaitForWindowShown(widget)
 
-    def stopForInteraction(self):
+    def stop_for_interaction(self):
         """Stop the current test flow, letting the user interact with any visible widget.
 
         This is mainly useful so that you can verify the current state of the program
@@ -284,9 +284,7 @@ class QtBot:
         for widget, visible in widget_and_visibility:
             widget.setVisible(visible)
 
-    stop = stopForInteraction
-
-    def waitSignal(
+    def wait_signal(
         self, signal=None, timeout: int = 1000, raising=None, check_params_cb=None
     ):
         """Stop current test until a signal is triggered.
@@ -296,13 +294,13 @@ class QtBot:
 
         Best used as a context manager::
 
-           with qtbot.waitSignal(signal, timeout=1000):
+           with qtbot.wait_signal(signal, timeout=1000):
                long_function_that_calls_signal()
 
         Also, you can use the :class:`SignalBlocker` directly if the context
         manager form is not convenient::
 
-           blocker = qtbot.waitSignal(signal, timeout=1000)
+           blocker = qtbot.wait_signal(signal, timeout=1000)
            blocker.connect(another_signal)
            long_function_that_calls_signal()
            blocker.wait()
@@ -349,7 +347,7 @@ class QtBot:
             blocker.connect(signal)
         return blocker
 
-    def waitSignals(
+    def wait_signals(
         self,
         signals=None,
         timeout: int = 1000,
@@ -365,13 +363,13 @@ class QtBot:
 
         Best used as a context manager::
 
-           with qtbot.waitSignals([signal1, signal2], timeout=1000):
+           with qtbot.wait_signals([signal1, signal2], timeout=1000):
                long_function_that_calls_signals()
 
         Also, you can use the :class:`MultiSignalBlocker` directly if the
         context manager form is not convenient::
 
-           blocker = qtbot.waitSignals(signals, timeout=1000)
+           blocker = qtbot.wait_signals(signals, timeout=1000)
            long_function_that_calls_signal()
            blocker.wait()
 
@@ -453,7 +451,7 @@ class QtBot:
         blocker.wait()
 
     @contextlib.contextmanager
-    def assertNotEmitted(self, signal, wait: int = 0):
+    def assert_not_emitted(self, signal, wait: int = 0):
         """Make sure the given ``signal`` doesn't get emitted.
 
         :param int wait:
@@ -467,11 +465,11 @@ class QtBot:
                   (pep-8 alias)
         """
         spy = SignalEmittedSpy(signal)
-        with spy, self.waitSignal(signal, timeout=wait, raising=False):
+        with spy, self.wait_signal(signal, timeout=wait, raising=False):
             yield
         spy.assert_not_emitted()
 
-    def waitUntil(self, callback: Callable, timeout: int = 1000):
+    def wait_until(self, callback: Callable, timeout: int = 1000):
         """Wait in a busy loop, calling the given callback periodically until timeout.
 
         ``callback()`` should raise ``AssertionError`` to indicate that the desired
@@ -484,7 +482,7 @@ class QtBot:
                 assert view_model.count() > 10
 
 
-            qtbot.waitUntil(view_updated)
+            qtbot.wait_until(view_updated)
 
         Another possibility is for ``callback()`` to return ``True`` when the desired
         condition is met, ``False`` otherwise. Useful specially with ``lambda`` for
@@ -493,7 +491,7 @@ class QtBot:
 
         .. code-block:: python
 
-            qtbot.waitUntil(lambda: view_model.count() > 10)
+            qtbot.wait_until(lambda: view_model.count() > 10)
 
         Note that this usage only accepts returning actual ``True`` and ``False`` values,
         so returning an empty list to express "falseness" raises a ``ValueError``.
@@ -515,7 +513,7 @@ class QtBot:
             elapsed_ms = elapsed * 1000
             return elapsed_ms > timeout
 
-        timeout_msg = f"waitUntil timed out in {timeout} miliseconds"
+        timeout_msg = f"wait_until timed out in {timeout} miliseconds"
 
         while True:
             try:
@@ -526,7 +524,7 @@ class QtBot:
             else:
                 if result not in (None, True, False):
                     raise ValueError(
-                        "waitUntil() callback must return None, "
+                        "wait_until() callback must return None, "
                         f"True or False, returned {result!r}"
                     )
 
@@ -541,7 +539,7 @@ class QtBot:
                     raise TimeoutError(timeout_msg)
             self.wait(10)
 
-    def waitCallback(self, timeout: int = 1000, raising=None):
+    def wait_callback(self, timeout: int = 1000, raising=None):
         """Stop current test until a callback is called.
 
         Used to stop the control flow of a test until the returned callback is
@@ -550,14 +548,14 @@ class QtBot:
 
         Best used as a context manager::
 
-           with qtbot.waitCallback() as callback:
+           with qtbot.wait_callback() as callback:
                function_taking_a_callback(callback)
            assert callback.args == [True]
 
         Also, you can use the :class:`CallbackBlocker` directly if the
         context manager form is not convenient::
 
-           blocker = qtbot.waitCallback(timeout=1000)
+           blocker = qtbot.wait_callback(timeout=1000)
            function_calling_a_callback(blocker)
            blocker.wait()
 
@@ -580,7 +578,7 @@ class QtBot:
         return blocker
 
     @contextlib.contextmanager
-    def captureExceptions(self):
+    def capture_exceptions(self):
         """Capture Qt virtual method exceptions that happen in block inside context.
 
         .. code-block:: python
@@ -597,8 +595,6 @@ class QtBot:
 
         with capture_exceptions() as exceptions:
             yield exceptions
-
-    capture_exceptions = captureExceptions
 
     @classmethod
     def _inject_qtest_methods(cls):
@@ -641,35 +637,6 @@ class QtBot:
             if method is not None:
                 setattr(cls, method_name, method)
 
-    # pep-8 aliases
-
-    def add_widget(self, *args, **kwargs):
-        return self.addWidget(*args, **kwargs)
-
-    def wait_active(self, *args, **kwargs):
-        return self.waitActive(*args, **kwargs)
-
-    def wait_exposed(self, *args, **kwargs):
-        return self.waitExposed(*args, **kwargs)
-
-    def wait_for_window_shown(self, *args, **kwargs):
-        return self.waitForWindowShown(*args, **kwargs)
-
-    def wait_signal(self, *args, **kwargs):
-        return self.waitSignal(*args, **kwargs)
-
-    def wait_signals(self, *args, **kwargs):
-        return self.waitSignals(*args, **kwargs)
-
-    def assert_not_emitted(self, *args, **kwargs):
-        return self.assertNotEmitted(*args, **kwargs)
-
-    def wait_until(self, *args, **kwargs):
-        return self.waitUntil(*args, **kwargs)
-
-    def wait_callback(self, *args, **kwargs):
-        return self.waitCallback(*args, **kwargs)
-
 
 def _add_widget(item, widget, *, before_close_func: Optional[Callable] = None):
     """Register a widget into the given pytest item for later closing."""
@@ -699,7 +666,7 @@ def _iter_widgets(item):
 
 
 class _WaitWidgetContextManager:
-    """Implementation used by ``waitActive`` and ``waitExposed`` methods."""
+    """Implementation used by ``wait_active`` and ``wait_exposed`` methods."""
 
     def __init__(self, method_name: str, adjective_name: str, widget, timeout: int):
         self._method_name = method_name

@@ -13,10 +13,6 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import modeltest
 
 
-# classes/functions imported here just for backward compatibility before we
-# split the implementation of this file in several modules
-
-
 @pytest.fixture(scope="session")
 def qapp_args():
     """Fixture that provides QApplication arguments to use.
@@ -62,7 +58,7 @@ _qapp_instance = None
 def qtbot(qapp, request):
     """Fixture used to create a QtBot instance for using during testing.
 
-    Make sure to call addWidget for each top-level widget you create to ensure
+    Make sure to call add_widget for each top-level widget you create to ensure
     that they are properly closed after the test ends.
     """
     result = QtBot(request)
@@ -129,18 +125,17 @@ def pytest_addoption(parser):
     parser.addini("qt_no_exception_capture", "disable automatic exception capture")
     parser.addini(
         "qt_default_raising",
-        "Default value for the raising parameter of qtbot.waitSignal/waitCallback",
+        "Default value for the raising parameter of qtbot.wait_signal/wait_callback",
     )
     parser.addini(
-        "qt_qapp_name", "The Qt application name to use", default="pytest-qt-qapp"
+        "qt_qapp_name", "The Qt application name to use", default="prettyqtest-app"
     )
 
     default_log_fail = QtLoggingPlugin.LOG_FAIL_OPTIONS[0]
+    opt = QtLoggingPlugin.LOG_FAIL_OPTIONS
     parser.addini(
         "qt_log_level_fail",
-        'log level in which tests can fail: {} (default: "{}")'.format(
-            QtLoggingPlugin.LOG_FAIL_OPTIONS, default_log_fail
-        ),
+        f'log level in which tests can fail: {opt} (default: "{default_log_fail}")',
         default=default_log_fail,
     )
     parser.addini(
