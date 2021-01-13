@@ -1,9 +1,27 @@
 from __future__ import annotations
 
+from datetime import timedelta
 import functools
 import operator
+import re
 import sys
 from typing import Any, Dict, List, Mapping
+
+
+REGEX = re.compile(
+    r"((?P<hours>\d+?)h)?((?P<minutes>\d+?)m)?"
+    r"((?P<seconds>\d+?)s)?((?P<milliseconds>\d+?)ms)?"
+)
+
+
+def parse_time(time_str: str) -> int:
+    parts = REGEX.match(time_str)
+    if not parts:
+        raise ValueError(time_str)
+    dct = parts.groupdict()
+    time_params = {name: int(param) for (name, param) in dct.items() if param}
+    secs = timedelta(**time_params).total_seconds()
+    return int(secs) * 1000
 
 
 def string_to_num_array(array: str) -> List[float]:

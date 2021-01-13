@@ -6,9 +6,10 @@ import inspect
 import itertools
 from typing import Any, DefaultDict, Dict, List, Optional, Type, TypeVar, Union
 
-from prettyqt import core
+from prettyqt import constants, core
 import prettyqt.qt
 from prettyqt.qt import QtCore
+from prettyqt.utils import helpers
 
 
 T = TypeVar("T", bound=QtCore.QObject)
@@ -127,3 +128,10 @@ class Object(QtCore.QObject):
                 if name is None or node.objectName() == name:
                     return node
         return None
+
+    def start_timer(
+        self, interval: Union[int, str], timer_type: constants.TimerTypeStr = "coarse"
+    ) -> int:
+        if isinstance(interval, str):
+            interval = helpers.parse_time(interval)
+        return self.startTimer(interval, constants.TIMER_TYPE[timer_type])

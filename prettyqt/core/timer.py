@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import Callable
+from typing import Callable, Union
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, helpers
 
 
 QtCore.QTimer.__bases__ = (core.Object,)
@@ -38,6 +38,11 @@ class Timer(QtCore.QTimer):
             timer type
         """
         return constants.TIMER_TYPE.inverse[self.timerType()]
+
+    def set_interval(self, interval: Union[int, str]):
+        if isinstance(interval, str):
+            interval = helpers.parse_time(interval)
+        self.setInterval(interval)
 
     def restart(self):
         self.stop()
