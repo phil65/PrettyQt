@@ -31,25 +31,12 @@ def qapp_args():
 
 @pytest.fixture(scope="session")
 def qapp(qapp_args, pytestconfig):
-    """Fixture that instantiates the QApplication instance that will be used by the tests.
-
-    You can use the ``qapp`` fixture in tests which require a ``QApplication``
-    to run, but where you don't need full ``qtbot`` functionality.
-    """
-    app = widgets.Application.instance()
-    if app is None:
-        global _qapp_instance
-        _qapp_instance = widgets.Application(qapp_args)
-        name = pytestconfig.getini("qt_qapp_name")
-        _qapp_instance.setApplicationName(name)
-        return _qapp_instance
-    else:
-        return app  # pragma: no cover
-
-
-# holds a global QApplication instance created in the qapp fixture; keeping
-# this reference alive avoids it being garbage collected too early
-_qapp_instance = None
+    app = widgets.Application(qapp_args)
+    name = pytestconfig.getini("qt_qapp_name")
+    app.set_metadata(
+        app_name=name, app_version="1.0.0", org_name="test", org_domain="test"
+    )
+    yield app
 
 
 @pytest.fixture
