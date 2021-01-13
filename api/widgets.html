@@ -9007,7 +9007,9 @@
           <div class="highlight">
 <pre><span></span><code><span class="k">def</span> <span class="nf">selected_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
     <span class="sd">"""Returns generator yielding selected userData."""</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_indexes</span><span class="p">())</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">selected_indexes</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+    <span class="p">)</span>
 </code></pre>
 </div>
 </details>
@@ -21566,6 +21568,11 @@ The keyboard shortcut moves keyboard focus to one of the group box's child widge
 <span class="sd">        tick position</span>
 <span class="sd">    """</span>
     <span class="k">return</span> <span class="n">TICK_POSITION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tickPosition</span><span class="p">()]</span>
+    <span class="c1"># if self.is_vertical():</span>
+    <span class="c1">#     if val == "above":</span>
+    <span class="c1">#         return "left"</span>
+    <span class="c1">#     elif val == "below":</span>
+    <span class="c1">#         return "right"</span>
 </code></pre>
 </div>
 </details>
