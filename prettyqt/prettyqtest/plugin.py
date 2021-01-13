@@ -3,14 +3,8 @@ from __future__ import annotations
 import pytest
 
 from prettyqt import gui, qt, widgets
-from prettyqt.prettyqtest.exceptions import (
-    _is_exception_capture_enabled,
-    _QtExceptionCaptureManager,
-)
-from prettyqt.prettyqtest.logging import QtLoggingPlugin, _QtMessageCapture
-from prettyqt.prettyqtest.qtbot import QtBot, _close_widgets
+from prettyqt.prettyqtest import exceptions, modeltest, qt_bot, qtlogging
 from prettyqt.qt import QtCore
-from prettyqt.utils import modeltest
 
 
 @pytest.fixture(scope="session")
@@ -46,7 +40,7 @@ def qtbot(qapp, request):
     Make sure to call add_widget for each top-level widget you create to ensure
     that they are properly closed after the test ends.
     """
-    result = QtBot(request)
+    result = qt_bot.QtBot(request)
     return result
 
 
@@ -56,7 +50,7 @@ def qtlog(request):
     if hasattr(request._pyfuncitem, "qt_log_capture"):
         return request._pyfuncitem.qt_log_capture
     else:
-        return _QtMessageCapture([])  # pragma: no cover
+        return qtlogging._QtMessageCapture([])  # pragma: no cover
 
 
 class QtTester:
@@ -110,14 +104,14 @@ def pytest_addoption(parser):
     parser.addini("qt_no_exception_capture", "disable automatic exception capture")
     parser.addini(
         "qt_default_raising",
-        "Default value for the raising parameter of qtbot.wait_signal/wait_callback",
+        "Default value for the raising parameter of qt_bot.wait_signal/wait_callback",
     )
     parser.addini(
         "qt_qapp_name", "The Qt application name to use", default="prettyqtest-app"
     )
 
-    default_log_fail = QtLoggingPlugin.LOG_FAIL_OPTIONS[0]
-    opt = QtLoggingPlugin.LOG_FAIL_OPTIONS
+    default_log_fail = qtlogging.QtLoggingPlugin.LOG_FAIL_OPTIONS[0]
+    opt = qtlogging.QtLoggingPlugin.LOG_FAIL_OPTIONS
     parser.addini(
         "qt_log_level_fail",
         f'log level in which tests can fail: {opt} (default: "{default_log_fail}")',
@@ -149,9 +143,9 @@ def pytest_addoption(parser):
 @pytest.mark.tryfirst
 def pytest_runtest_setup(item):
     """Hook called after before test setup starts, to start capturing exceptions asap."""
-    capture_enabled = _is_exception_capture_enabled(item)
+    capture_enabled = exceptions._is_exception_capture_enabled(item)
     if capture_enabled:
-        item.qt_exception_capture_manager = _QtExceptionCaptureManager()
+        item.qt_exception_capture_manager = exceptions._QtExceptionCaptureManager()
         item.qt_exception_capture_manager.start()
     yield
     _process_events()
@@ -164,7 +158,7 @@ def pytest_runtest_setup(item):
 def pytest_runtest_call(item):
     yield
     _process_events()
-    capture_enabled = _is_exception_capture_enabled(item)
+    capture_enabled = exceptions._is_exception_capture_enabled(item)
     if capture_enabled:
         item.qt_exception_capture_manager.fail_if_exceptions_occurred("CALL")
 
@@ -178,11 +172,11 @@ def pytest_runtest_teardown(item):
     Also, if exceptions have been captured during fixtures teardown, fail the test.
     """
     _process_events()
-    _close_widgets(item)
+    qt_bot._close_widgets(item)
     _process_events()
     yield
     _process_events()
-    capture_enabled = _is_exception_capture_enabled(item)
+    capture_enabled = exceptions._is_exception_capture_enabled(item)
     if capture_enabled:
         item.qt_exception_capture_manager.fail_if_exceptions_occurred("TEARDOWN")
         item.qt_exception_capture_manager.finish()
@@ -211,13 +205,11 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "no_qt_log: Turn off Qt logging capture.")
 
     if config.getoption("qt_log") and config.getoption("capture") != "no":
-        config.pluginmanager.register(QtLoggingPlugin(config), "_qt_logging")
+        config.pluginmanager.register(qtlogging.QtLoggingPlugin(config), "_qt_logging")
 
     # qt_api.set_qt_api(config.getini("qt_api"))
 
-    from .qtbot import QtBot
-
-    QtBot._inject_qtest_methods()
+    qt_bot.QtBot._inject_qtest_methods()
 
 
 def pytest_report_header():
