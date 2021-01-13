@@ -51,6 +51,14 @@ class Timer(QtCore.QTimer):
             interval = helpers.parse_time(interval)
         self.setInterval(interval)
 
+    def start_timer(self, interval: Union[None, int, str] = None):
+        if isinstance(interval, str):
+            interval = helpers.parse_time(interval)
+        if interval is None:
+            self.start()
+        else:
+            self.start(interval)
+
     def restart(self):
         self.stop()
         self.start()
