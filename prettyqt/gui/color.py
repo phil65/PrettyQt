@@ -110,5 +110,9 @@ class Color(QtGui.QColor):
         out = out.convertTo(start.spec())
         return out
 
+    def to_qsscolor(self) -> str:
+        """Convert Color to a string that can be used in a QStyleSheet."""
+        return f"rgba({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
+
     def as_qt(self) -> QtGui.QColor:
         return QtGui.QColor(self)
