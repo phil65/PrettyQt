@@ -71,11 +71,9 @@ class CollapsibleFrame(widgets.Frame):
         if self._is_collapsed:
             self.expand()
             self.expanded.emit()
-            return
         else:
             self.collapse()
             self.collapsed.emit()
-            return
 
 
 if __name__ == "__main__":
