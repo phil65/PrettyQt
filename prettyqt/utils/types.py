@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import pathlib
-from typing import TYPE_CHECKING, Any, Dict, List, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Protocol, Union
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtCore, QtGui, QtWidgets
+    from prettyqt.qt import QtCore, QtGui, QtWebEngineWidgets, QtWidgets
 
     JSONType = Union[str, int, float, bool, None, Dict[str, Any], List[Any]]
 
@@ -68,3 +68,33 @@ if TYPE_CHECKING:
     ]
 
     Variant = Union[VariantType, List[VariantType], Dict[str, VariantType]]
+
+    class Validatable(Protocol):
+        """An object with an isValid() method (e.g. QUrl)."""
+
+        def isValid(self) -> bool:
+            ...
+
+    QtSerializableType = Union[
+        QtCore.QByteArray,
+        QtCore.QUrl,
+        QtGui.QBrush,
+        QtGui.QColor,
+        QtGui.QCursor,
+        QtGui.QIcon,
+        QtGui.QIconEngine,
+        QtGui.QImage,
+        QtGui.QPalette,
+        QtGui.QPen,
+        QtGui.QPicture,
+        QtGui.QPixmap,
+        QtGui.QPolygon,
+        QtGui.QPolygonF,
+        QtGui.QRegion,
+        QtGui.QStandardItem,
+        QtGui.QTransform,
+        QtWidgets.QListWidgetItem,
+        QtWidgets.QTreeWidgetItem,
+        # QtGui.QColorSpace,
+        QtWebEngineWidgets.QWebEngineHistory,
+    ]
