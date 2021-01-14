@@ -5,7 +5,7 @@ import functools
 import operator
 import re
 import sys
-from typing import Any, Dict, List, Mapping
+from typing import Any, Dict, List, Mapping, Tuple
 
 
 REGEX = re.compile(
@@ -48,6 +48,30 @@ def cut_off_str(obj, max_len: int) -> str:
     if len(s) > max_len - 3:
         return s[: max_len - 3] + "..."
     return s
+
+
+def get_color_percentage(
+    color_1: Tuple[int, int, int, int], color_2: Tuple[int, int, int, int], percent: int
+) -> Tuple[int, int, int, int]:
+    """Get a color which is percent% interpolated between start and end.
+
+    Args:
+        color_1 : Start color components (R, G, B, A / H, S, V, A / H, S, L, A)
+        color_2 : End color components (R, G, B, A / H, S, V, A / H, S, L, A)
+        percent: Percentage to interpolate, 0-100.
+                 0: Start color will be returned.
+                 100: End color will be returned.
+
+    Return:
+        A (x, y, z, alpha) tuple with the interpolated color components.
+    """
+    if not 0 <= percent <= 100:
+        raise ValueError("percent needs to be between 0 and 100!")
+    x = round(color_1[0] + (color_2[0] - color_1[0]) * percent / 100)
+    y = round(color_1[1] + (color_2[1] - color_1[1]) * percent / 100)
+    z = round(color_1[2] + (color_2[2] - color_1[2]) * percent / 100)
+    a = round(color_1[3] + (color_2[3] - color_1[3]) * percent / 100)
+    return (x, y, z, a)
 
 
 def is_dark_mode() -> bool:
