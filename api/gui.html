@@ -381,6 +381,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.color.Color.interpolate_color" class="md-nav__link">
+    interpolate_color()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.color.Color.to_qsscolor" class="md-nav__link">
+    to_qsscolor()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2482,6 +2496,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.color.Color.interpolate_color" class="md-nav__link">
+    interpolate_color()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.color.Color.to_qsscolor" class="md-nav__link">
+    to_qsscolor()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4367,6 +4395,157 @@
         <span class="k">return</span> <span class="n">color</span>
     <span class="n">color</span><span class="o">.</span><span class="n">setNamedColor</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">color</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.color.Color.interpolate_color">
+
+<code class="highlight language-python"><span class="n">interpolate_color</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span> <span class="n">percent</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">colorspace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="o">.</span><span class="n">Spec</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Get an interpolated color value.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td><code>QtGui.QColor</code></td>
+<td>
+<p>The start color.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td><code>QtGui.QColor</code></td>
+<td>
+<p>The end color.</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>percent</code></td>
+<td><code>int</code></td>
+<td>
+<p>Which value to get (0 - 100)</p>
+</td>
+<td><em>required</em></td>
+</tr>
+<tr>
+<td><code>colorspace</code></td>
+<td><code>Optional[QtGui.QColor.Spec]</code></td>
+<td>
+<p>The desired interpolation color system,
+        QColor::{Rgb,Hsv,Hsl} (from QColor::Spec enum)
+        If None, start is used except when percent is 100.</p>
+</td>
+<td><code>1</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Color</code></td>
+<td>
+<p>The interpolated QColor, with the same spec as the given start color.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">interpolate_color</span><span class="p">(</span>
+    <span class="bp">cls</span><span class="p">,</span>
+    <span class="n">start</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span>
+    <span class="n">end</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span>
+    <span class="n">percent</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">colorspace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="o">.</span><span class="n">Spec</span><span class="p">]</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="o">.</span><span class="n">Rgb</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
+    <span class="sd">"""Get an interpolated color value.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        start: The start color.</span>
+<span class="sd">        end: The end color.</span>
+<span class="sd">        percent: Which value to get (0 - 100)</span>
+<span class="sd">        colorspace: The desired interpolation color system,</span>
+<span class="sd">                    QColor::{Rgb,Hsv,Hsl} (from QColor::Spec enum)</span>
+<span class="sd">                    If None, start is used except when percent is 100.</span>
+
+<span class="sd">    Return:</span>
+<span class="sd">        The interpolated QColor, with the same spec as the given start color.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">colorspace</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">percent</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Rgb</span><span class="p">:</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
+            <span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
+        <span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">setRgb</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Hsv</span><span class="p">:</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
+            <span class="n">start</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
+        <span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">setHsv</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Hsl</span><span class="p">:</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
+            <span class="n">start</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
+        <span class="p">)</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">setHsl</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid colorspace!"</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">convertTo</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">spec</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">out</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.color.Color.to_qsscolor">
+
+<code class="highlight language-python"><span class="n">to_qsscolor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Convert Color to a string that can be used in a QStyleSheet.</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">to_qsscolor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">"""Convert Color to a string that can be used in a QStyleSheet."""</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"rgba(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span><span class="si">}</span><span class="s2">)"</span>
 </code></pre>
 </div>
 </details>
