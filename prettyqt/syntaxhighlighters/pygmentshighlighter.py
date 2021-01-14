@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 import logging
 import pathlib
 from typing import Union
@@ -14,6 +15,7 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
+RE_LEXER_PATH = pathlib.Path(__file__).parent / "pygments" / "regularexpressionlexer.py"
 logger = logging.getLogger(__name__)
 
 
@@ -45,13 +47,13 @@ def get_tokens_unprocessed(self, text: str, stack=("root",)):
     else:
         statestack = list(stack)
     statetokens = tokendefs[statestack[-1]]
-    while 1:
+    while True:
         for rexmatch, action, new_state in statetokens:
             m = rexmatch(text, pos)
             if not m:
                 continue
             if action is not None:
-                if type(action) is _TokenType:
+                if isinstance(action, _TokenType):
                     yield pos, action, m.group()
                 else:
                     yield from action(self, m)
@@ -73,19 +75,18 @@ def get_tokens_unprocessed(self, text: str, stack=("root",)):
             elif new_state == "#push":
                 statestack.append(statestack[-1])
             else:
-                assert False, "wrong state def: %r" % new_state
+                assert False, f"wrong state def: {new_state!r}"
             statetokens = tokendefs[statestack[-1]]
             break
         else:
             try:
                 if text[pos] == "\n":
                     # at EOL, reset state to "root"
-                    pos += 1
                     statestack = ["root"]
                     statetokens = tokendefs["root"]
-                    yield pos, Text, "\n"
-                    continue
-                yield pos, Error, text[pos]
+                    yield pos + 1, Text, "\n"
+                else:
+                    yield pos, Error, text[pos]
                 pos += 1
             except IndexError:
                 break
@@ -109,9 +110,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self._formatter = HtmlFormatter(nowrap=True)
         self.set_style("default")
         if lexer == "regex":
-            path = pathlib.Path(__file__).parent
-            path = path / "pygments" / "regularexpressionlexer.py"
-            self._lexer = load_lexer_from_file(str(path))
+            self._lexer = load_lexer_from_file(str(RE_LEXER_PATH))
         else:
             self._lexer = get_lexer_by_name(lexer)
 
@@ -167,21 +166,16 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
 
     def _clear_caches(self):
         """Clear caches for brushes and formats."""
-        self._brushes = {}
-        self._formats = {}
+        self._get_brush.cache_clear()
+        self._get_format.cache_clear()
 
+    @functools.lru_cache(maxsize=None)
     def _get_format(self, token: str) -> QtGui.QTextCharFormat:
         """Returns a QTextCharFormat for token or None."""
-        if token in self._formats:
-            return self._formats[token]
-
         if self._style is None:
-            result = self._get_format_from_document(token, self._document)
+            return self._get_format_from_document(token, self._document)
         else:
-            result = self._get_format_from_style(token, self._style)
-
-        self._formats[token] = result
-        return result
+            return self._get_format_from_style(token, self._style)
 
     def _get_format_from_document(
         self, token: str, document: QtGui.QTextDocument
@@ -218,14 +212,11 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
                     result.set_font_style_hint("typewriter")
         return result
 
+    @functools.lru_cache(maxsize=None)
     def _get_brush(self, color: str) -> gui.Brush:
         """Return a brush for the color."""
-        result = self._brushes.get(color)
-        if result is None:
-            qcolor = gui.Color(f"#{color[:6]}")
-            result = gui.Brush(qcolor)
-            self._brushes[color] = result
-        return result
+        qcolor = gui.Color(f"#{color[:6]}")
+        return gui.Brush(qcolor)
 
 
 if __name__ == "__main__":
@@ -233,6 +224,6 @@ if __name__ == "__main__":
 
     app = widgets.app()
     editor = widgets.PlainTextEdit()
-    highlighter = PygmentsHighlighter(editor.document(), lexer="regex")
+    highlighter = PygmentsHighlighter(editor.document(), lexer="python")
     editor.show()
     app.main_loop()
