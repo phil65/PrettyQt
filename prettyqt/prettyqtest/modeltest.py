@@ -83,6 +83,7 @@ class ModelTester:
         self._remove: List[_Changing] = []
         self._changing: List[QtCore.QPersistentModelIndex] = []
         self._qt_tester = None
+        self.force_py = False
 
     def _debug(self, text):
         print("modeltest: " + text)
@@ -112,8 +113,8 @@ class ModelTester:
           is available.
         """
         assert self._model is not None
-
-        if HAS_QT_TESTER and not force_py:
+        self.force_py = force_py
+        if HAS_QT_TESTER and not self.force_py:
             tester = QtTest.QAbstractItemModelTester  # type: ignore
             reporting_mode = tester.FailureReportingMode.Warning
             self._qt_tester = tester(self._model, reporting_mode)
@@ -154,6 +155,8 @@ class ModelTester:
         self._run()
 
     def _cleanup(self):
+        if HAS_QT_TESTER and not self.force_py:
+            return
         self._model.columnsAboutToBeInserted.disconnect(self._run)
         self._model.columnsAboutToBeRemoved.disconnect(self._run)
         self._model.columnsInserted.disconnect(self._run)
