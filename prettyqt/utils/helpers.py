@@ -21,7 +21,7 @@ def parse_time(time_str: str) -> int:
     dct = parts.groupdict()
     time_params = {name: int(param) for (name, param) in dct.items() if param}
     secs = timedelta(**time_params).total_seconds()
-    return int(secs) * 1000
+    return int(secs * 1000)
 
 
 def string_to_num_array(array: str) -> List[float]:
