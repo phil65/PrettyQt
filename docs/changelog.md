@@ -1,3 +1,14 @@
+## v0.178.0 (2021-01-14)
+
+### Feat
+
+- **IODevice**: add __len__ method
+- **EventLoop**: throw exception when running twice
+- **Color**: add to_qsscolor method
+- **Color**: add interpolate_color method
+- **Locale**: add get_system_locale / get_system_language methods
+- use subclassed ItemEditorFactory as default factory
+
 ## v0.177.1 (2021-01-13)
 
 ### Fix
