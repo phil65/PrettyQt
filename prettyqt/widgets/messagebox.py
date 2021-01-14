@@ -127,7 +127,7 @@ class MessageBox(QtWidgets.QMessageBox):
             self.setIconPixmap(ico.get_pixmap(size=64))
 
     def show_blocking(self) -> ButtonStr:
-        return BUTTONS.inverse[self.exec_()]
+        return BUTTONS.inverse[self.main_loop()]
 
     def get_standard_buttons(self) -> List[ButtonStr]:
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]

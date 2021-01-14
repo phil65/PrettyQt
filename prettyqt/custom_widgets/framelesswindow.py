@@ -143,4 +143,4 @@ if __name__ == "__main__":
     m.set_widget(button)
     m.show()
     m.resize(240, 160)
-    app.exec_()
+    app.main_loop()

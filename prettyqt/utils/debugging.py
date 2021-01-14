@@ -44,13 +44,13 @@ def install_exceptionhook(debug: bool = False):
             # Constructing a QApplication in case this hasn't been done yet.
             _ = widgets.app()
             lst = traceback.format_exception(exc_type, exc_value, exc_traceback)
-            msgBox = widgets.MessageBox(
+            msg_box = widgets.MessageBox(
                 icon="warning",
                 text=f"Bug: uncaught {exc_type.__name__}",
                 informative_text=str(exc_value),
                 details="".join(lst),
             )
-            msgBox.exec_()
+            msg_box.main_loop()
             sys.exit(1)
 
     sys.excepthook = handleException

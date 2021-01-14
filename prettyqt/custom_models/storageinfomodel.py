@@ -183,4 +183,4 @@ if __name__ == "__main__":
     for column in range(view.model().columnCount()):
         view.resizeColumnToContents(column)
     view.show()
-    app.exec_()
+    app.main_loop()

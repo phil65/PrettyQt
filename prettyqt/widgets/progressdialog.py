@@ -40,4 +40,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = ProgressDialog()
     widget.show_message("test")
-    widget.exec_()
+    widget.main_loop()

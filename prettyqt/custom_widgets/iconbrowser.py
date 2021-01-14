@@ -132,7 +132,7 @@ class IconModel(core.StringListModel):
         self._icon_color = icon_color
 
     def flags(self, index):
-        return constants.IS_ENABLED | constants.IS_SELECTABLE
+        return constants.IS_ENABLED | constants.IS_SELECTABLE  # type: ignore
 
     def data(self, index, role):
         if role == constants.DECORATION_ROLE:
@@ -145,7 +145,7 @@ def run():
     app = widgets.app()
     browser = IconBrowser()
     browser.show()
-    sys.exit(app.exec_())
+    sys.exit(app.main_loop())
 
 
 if __name__ == "__main__":

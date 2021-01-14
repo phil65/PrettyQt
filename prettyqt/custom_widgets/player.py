@@ -136,7 +136,7 @@ class Player(widgets.MainWindow):
         movies_location = core.StandardPaths.get_writable_location("movies")
         if movies_location is not None:
             file_dialog.set_directory(movies_location)
-        if file_dialog.exec_() == widgets.Dialog.Accepted:
+        if file_dialog.main_loop() == widgets.Dialog.Accepted:
             self.playlist.add_media(file_dialog.selectedFiles()[0])
             self.player.play()
 

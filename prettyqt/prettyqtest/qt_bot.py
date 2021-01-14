@@ -279,7 +279,7 @@ class QtBot:
             if widget is not None:
                 widget_and_visibility.append((widget, widget.isVisible()))
 
-        widgets.Application.instance().exec_()
+        widgets.Application.instance().main_loop()
 
         for widget, visible in widget_and_visibility:
             widget.setVisible(visible)

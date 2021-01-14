@@ -220,4 +220,4 @@ if __name__ == "__main__":
     app = widgets.app()
     window = Window()
     window.show()
-    sys.exit(app.exec_())
+    sys.exit(app.main_loop())

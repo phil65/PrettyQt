@@ -56,10 +56,13 @@ class BaseDialog(QtWidgets.QDialog):
 
     def show_blocking(self) -> bool:
         self.show()
-        return bool(self.exec_())
+        return bool(self.main_loop())
 
     def is_accepted(self) -> bool:
         return self.result() == QtWidgets.QDialog.Accepted
+
+    def main_loop(self) -> int:
+        return self.exec_()
 
 
 class Dialog(BaseDialog):

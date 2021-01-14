@@ -48,7 +48,7 @@ class ColorChooserButton(widgets.Widget):
         if self._current_color:
             dlg.setCurrentColor(self._current_color)
 
-        if dlg.exec_():
+        if dlg.main_loop():
             new_color = dlg.current_color()
             self.set_current_color(new_color)
             self.value_changed.emit(new_color)
