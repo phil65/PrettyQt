@@ -46,6 +46,9 @@ QtCore.QIODevice.__bases__ = base
 
 
 class IODevice(QtCore.QIODevice):
+    def __len__(self):
+        return self.size()
+
     @contextlib.contextmanager
     def open_file(self, mode: OpenModeStr):
         if mode not in OPEN_MODES:
