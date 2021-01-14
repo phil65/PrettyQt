@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Optional
+import os
+from typing import Optional, Tuple, Union
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
@@ -92,6 +93,21 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         if icon.isNull():
             return None
         return gui.Icon(icon)
+
+    def set_tooltip(
+        self,
+        tooltip: Union[str, os.PathLike],
+        size: Optional[Union[Tuple[int, int], QtCore.QSize]] = None,
+    ):
+        if isinstance(tooltip, os.PathLike):  # type: ignore
+            path = os.fspath(tooltip)
+            if size is None:
+                tooltip = f"<img src={path!r}>"
+            else:
+                if isinstance(size, QtCore.QSize):
+                    size = (size.width(), size.height())
+                tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
+        self.setToolTip(tooltip)
 
 
 if __name__ == "__main__":
