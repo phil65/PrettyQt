@@ -72,3 +72,7 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         if typ is None:
             typ = editor_cls.staticMetaObject.userProperty().userType()
         self.registerEditor(typ, EditorCreator())
+
+
+factory = ItemEditorFactory()
+ItemEditorFactory.setDefaultFactory(factory)
