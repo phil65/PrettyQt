@@ -610,6 +610,14 @@ class Locale(QtCore.QLocale):
     def __reduce__(self):
         return type(self), (self.bcp47Name(),)
 
+    @classmethod
+    def get_system_locale(cls) -> Locale:
+        return cls(cls.system())
+
+    @classmethod
+    def get_system_language(cls) -> str:
+        return cls.get_system_locale().uiLanguages()[0]
+
 
 if __name__ == "__main__":
     locale = Locale()
