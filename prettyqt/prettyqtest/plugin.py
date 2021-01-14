@@ -1,14 +1,16 @@
 from __future__ import annotations
 
+from typing import Iterator, List, Optional, Type
+
 import pytest
 
 from prettyqt import gui, qt, widgets
 from prettyqt.prettyqtest import exceptions, modeltest, qt_bot, qtlogging
-from prettyqt.qt import QtCore
+from prettyqt.qt import QtCore, QtWidgets
 
 
 @pytest.fixture(scope="session")
-def qapp_args():
+def qapp_args() -> List[str]:
     """Fixture that provides QApplication arguments to use.
 
     You can override this fixture to pass different arguments to
@@ -24,7 +26,7 @@ def qapp_args():
 
 
 @pytest.fixture(scope="session")
-def qapp(qapp_args, pytestconfig):
+def qapp(qapp_args: List[str], pytestconfig) -> Iterator[widgets.Application]:
     app = widgets.Application(qapp_args)
     name = pytestconfig.getini("qt_qapp_name")
     app.set_metadata(
@@ -34,7 +36,7 @@ def qapp(qapp_args, pytestconfig):
 
 
 @pytest.fixture
-def qtbot(qapp, request):
+def qtbot(qapp: widgets.Application, request):
     """Fixture used to create a QtBot instance for using during testing.
 
     Make sure to call add_widget for each top-level widget you create to ensure
@@ -55,12 +57,12 @@ def qtlog(request):
 
 class QtTester:
     @staticmethod
-    def send_keypress(widget, key):
+    def send_keypress(widget: QtWidgets.QWidget, key):
         event = gui.KeyEvent(QtCore.QEvent.KeyPress, key, QtCore.Qt.KeyboardModifiers())
         widgets.Application.sendEvent(widget, event)
 
     @staticmethod
-    def send_mousepress(widget, key):
+    def send_mousepress(widget: QtWidgets.QWidget, key):
         event = gui.MouseEvent(
             QtCore.QEvent.MouseButtonRelease,
             QtCore.QPointF(0, 0),
@@ -72,7 +74,9 @@ class QtTester:
         widgets.Application.sendEvent(widget, event)
 
     @staticmethod
-    def send_mousemove(widget, target=None, delay=0):
+    def send_mousemove(
+        widget: QtWidgets.QWidget, target: Optional[QtCore.QPointF] = None, delay: int = 0
+    ):
         if target is None:
             target = QtCore.QPointF(0, 0)
         event = gui.MouseEvent(
@@ -86,14 +90,14 @@ class QtTester:
         widgets.Application.sendEvent(widget, event)
 
     @staticmethod
-    def test_model(model, force_py):
+    def test_model(model: QtCore.QAbstractItemModel, force_py: bool = False):
         tester = modeltest.ModelTester(model)
         tester.check(force_py=force_py)
         tester._cleanup()
 
 
 @pytest.fixture
-def qttester():
+def qttester() -> Type[QtTester]:
     return QtTester
 
 
@@ -212,7 +216,7 @@ def pytest_configure(config):
     qt_bot.QtBot._inject_qtest_methods()
 
 
-def pytest_report_header():
+def pytest_report_header() -> List[str]:
     fields = [
         f"{qt.API} {QtCore.BINDING_VERSION}",
         f"Qt runtime {str(QtCore.qVersion())}",
