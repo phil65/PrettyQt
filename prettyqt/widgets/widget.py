@@ -318,6 +318,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         pol.setWidthForHeight(qpol.hasWidthForHeight())
         pol.setHorizontalStretch(qpol.horizontalStretch())
         pol.setVerticalStretch(qpol.verticalStretch())
+        pol.setRetainSizeWhenHidden(qpol.retainSizeWhenHidden())
         return pol
 
     def get_palette(self) -> gui.Palette:
