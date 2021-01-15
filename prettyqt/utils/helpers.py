@@ -24,6 +24,12 @@ def parse_time(time_str: str) -> int:
     return int(secs * 1000)
 
 
+def format_seconds(seconds: float) -> str:
+    m, s = divmod(int(seconds), 60)
+    h, m = divmod(m, 60)
+    return f"{h:02}:{h:02}:{h:02}"
+
+
 def string_to_num_array(array: str) -> List[float]:
     floats = [float(i) for i in array.split(",")]
     return [int(i) if i.is_integer() else i for i in floats]

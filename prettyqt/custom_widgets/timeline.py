@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import colors, types
+from prettyqt.utils import colors, helpers, types
 
 
 TEXT_COLOR = gui.Color("lightgray")
@@ -92,7 +92,7 @@ class Timeline(widgets.Widget):
             qp.use_antialiasing()
             w = 0
             while (w := w + 100) <= self.width():
-                time_string = self.get_time_string(w * scale)
+                time_string = helpers.format_seconds(w * scale)
                 rect = core.Rect(w - 50, 0, 100, 100)
                 qp.drawText(rect, QtCore.Qt.AlignHCenter, time_string)
             # Draw down line
@@ -211,12 +211,6 @@ class Timeline(widgets.Widget):
                     self.selection_changed.emit(sample)
             else:
                 sample.color = sample.def_color
-
-    @staticmethod
-    def get_time_string(seconds: float) -> str:
-        m, s = divmod(int(seconds), 60)
-        h, m = divmod(m, 60)
-        return f"{h:02}:{h:02}:{h:02}"
 
     def get_scale(self) -> float:
         return self.duration / self.width()
