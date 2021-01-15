@@ -505,13 +505,17 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_mask(
         self,
-        x: int,
-        y: int,
-        width: int,
-        height: int,
+        area: Union[Tuple[int, int, int, int], QtCore.QRect, QtGui.QRegion, None],
         typ: gui.region.RegionTypeStr = "rectangle",
     ):
-        self.setMask(gui.Region(x, y, width, height, gui.region.REGION_TYPE[typ]))
+        if area is None:
+            self.clearMask()
+            return
+        if isinstance(area, tuple):
+            area = QtCore.QRect(*area)
+        if isinstance(area, QtCore.QRect):
+            area = gui.Region(area, gui.region.REGION_TYPE[typ])
+        self.setMask(area)
 
     def set_window_file_path(self, path: Union[str, os.PathLike]):
         self.setWindowFilePath(os.fspath(path))
