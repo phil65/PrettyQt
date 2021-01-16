@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import contextlib
-from typing import Iterator, List, Literal, Union
+from typing import Iterator, List, Literal, Optional, Union
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -121,7 +121,7 @@ class Painter(QtGui.QPainter):
 
     def set_pen(
         self,
-        style: constants.PenStyleStr = "solid",
+        style: Optional[constants.PenStyleStr] = "solid",
         width: float = 1.0,
         color: types.ColorType = "black",
         join_style: constants.JoinStyleStr = "bevel",
@@ -138,6 +138,9 @@ class Painter(QtGui.QPainter):
         """
         pen = gui.Pen()
         pen.set_style(style)
+        if style in ["none", None]:
+            self.setPen(pen)
+            return pen
         pen.set_cap_style(cap_style)
         pen.set_join_style(join_style)
         pen.setWidthF(width)

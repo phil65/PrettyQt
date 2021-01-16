@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Optional
+
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, colors, types
@@ -74,7 +76,7 @@ class Pen(QtGui.QPen):
         """
         return constants.JOIN_STYLE.inverse[self.joinStyle()]
 
-    def set_style(self, style: constants.PenStyleStr):
+    def set_style(self, style: Optional[constants.PenStyleStr]):
         """Set pen style to use.
 
         Args:
@@ -83,6 +85,8 @@ class Pen(QtGui.QPen):
         Raises:
             InvalidParamError: pen style does not exist
         """
+        if style is None:
+            style = "none"
         if style not in constants.PEN_STYLE:
             raise InvalidParamError(style, constants.PEN_STYLE)
         self.setStyle(constants.PEN_STYLE[style])
