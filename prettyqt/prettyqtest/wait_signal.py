@@ -1,11 +1,24 @@
 from __future__ import annotations
 
 import functools
-from typing import Callable, Dict, Iterable, List, Optional, Tuple, Union
+from typing import (
+    Callable,
+    Dict,
+    Iterable,
+    List,
+    Literal,
+    Optional,
+    Sequence,
+    Tuple,
+    Union,
+)
 
 from prettyqt import core
 from prettyqt.prettyqtest.exceptions import TimeoutError
 from prettyqt.qt import QtCore
+
+
+SignalOrSignalTuple = Union[QtCore.Signal, Tuple[QtCore.Signal, str]]
 
 
 class _AbstractSignalBlocker:
@@ -86,23 +99,23 @@ class _AbstractSignalBlocker:
         return signal_name
 
     def _extract_signal_from_signal_tuple(self, potential_signal_tuple):
-        if isinstance(potential_signal_tuple, tuple):
-            if len(potential_signal_tuple) != 2:
-                raise ValueError(
-                    "Signal tuple must have length of 2 (first element is the signal, "
-                    "the second element is the signal's name)."
-                )
-            signal_tuple = potential_signal_tuple
-            signal_name = signal_tuple[1]
-            if not isinstance(signal_name, str):
-                raise TypeError(
-                    "Invalid type for provided signal name, "
-                    "expected str but got {}".format(type(signal_name))
-                )
-            if not signal_name:
-                raise ValueError("The provided signal name may not be empty")
-            return signal_name
-        return ""
+        if not isinstance(potential_signal_tuple, tuple):
+            return ""
+        if len(potential_signal_tuple) != 2:
+            raise ValueError(
+                "Signal tuple must have length of 2 (first element is the signal, "
+                "the second element is the signal's name)."
+            )
+        signal_tuple = potential_signal_tuple
+        signal_name = signal_tuple[1]
+        if not isinstance(signal_name, str):
+            raise TypeError(
+                "Invalid type for provided signal name, "
+                "expected str but got {}".format(type(signal_name))
+            )
+        if not signal_name:
+            raise ValueError("The provided signal name may not be empty")
+        return signal_name
 
     def determine_signal_name(self, potential_signal_tuple) -> str:
         """Attempts to determine the signal's name.
@@ -138,9 +151,7 @@ class _AbstractSignalBlocker:
                 return ""
 
     @staticmethod
-    def get_signal_from_potential_signal_tuple(
-        signal_tuple: Union[QtCore.Signal, Tuple[QtCore.Signal, str]]
-    ):
+    def get_signal_from_potential_signal_tuple(signal_tuple: SignalOrSignalTuple):
         if isinstance(signal_tuple, tuple):
             return signal_tuple[0]
         return signal_tuple
@@ -197,7 +208,7 @@ class SignalBlocker(_AbstractSignalBlocker):
         self.check_params_callback = check_params_cb
         self.signal_name = ""
 
-    def connect(self, signal: Union[QtCore.Signal, Tuple[QtCore.Signal, str]]):
+    def connect(self, signal: SignalOrSignalTuple):
         """Connect to given signal, making `wait()` return once this signal is emitted.
 
         More than one signal can be connected, in which case **any** one of
@@ -276,7 +287,7 @@ class SignalAndArgs:
         return self._get_readable_signal_with_optional_args()
 
     def __eq__(self, other):
-        if isinstance(other, self.__class__):
+        if isinstance(other, type(self)):
             return self.__dict__ == other.__dict__
         else:
             return False
@@ -284,7 +295,8 @@ class SignalAndArgs:
 
 # Returns e.g. "3rd" for 3, or "21st" for 21
 def get_ordinal_str(n) -> str:
-    return "%d%s" % (n, {1: "st", 2: "nd", 3: "rd"}.get(n if n < 20 else n % 10, "th"))
+    ordinal_dict = {1: "st", 2: "nd", 3: "rd"}
+    return "%d%s" % (n, ordinal_dict.get(n if n < 20 else n % 10, "th"))
 
 
 class NoMatchingIndexFoundError(Exception):
@@ -309,7 +321,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
         timeout: int = 1000,
         raising: bool = True,
         check_params_cbs=None,
-        order="none",
+        order: Literal["none", "simple", "strict"] = "none",
     ):
         super().__init__(timeout, raising=raising)
         self._order = order
@@ -328,7 +340,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
         # maps from the unique Signal to the name of the signal (as string)
         self.all_signals_and_args: List[SignalAndArgs] = []  # SignalAndArgs instances
 
-    def add_signals(self, signals):
+    def add_signals(self, signals: Sequence[SignalOrSignalTuple]):
         """Add the given signal to the list of signals which :meth:`wait()` waits for.
 
         :param list signals: list of QtCore.Signal`s or tuples (QtCore.Signal, str)
@@ -345,7 +357,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
             error_message = self._get_order_violation_message() + error_message
         return error_message
 
-    def _determine_unique_signals(self, signals):
+    def _determine_unique_signals(self, signals: Sequence[SignalOrSignalTuple]):
         # create a map that maps from a unique signal to a list of indices
         # (positions) where this signal is expected (in case order matters)
         signals_as_str = [
@@ -370,13 +382,12 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
 
     def _determine_and_save_signal_name(self, unique_signal_tuple):
         signal_name = self.determine_signal_name(unique_signal_tuple)
-        if signal_name:  # might be an empty string if no name could be determined
-            unique_signal = self.get_signal_from_potential_signal_tuple(
-                unique_signal_tuple
-            )
-            self._signal_names[unique_signal] = signal_name
+        if not signal_name:  # might be an empty string if no name could be determined
+            return
+        unique_signal = self.get_signal_from_potential_signal_tuple(unique_signal_tuple)
+        self._signal_names[unique_signal] = signal_name
 
-    def _create_signal_emitted_indices(self, signals):
+    def _create_signal_emitted_indices(self, signals: Sequence[SignalOrSignalTuple]):
         for signal in signals:
             self._signals_emitted.append(False)
 
@@ -387,7 +398,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
             unique_signal.connect(slot)
             self._signals.append(unique_signal)
 
-    def _unique_signal_emitted(self, unique_signal, *args):
+    def _unique_signal_emitted(self, unique_signal: QtCore.Signal, *args):
         """Called when a given signal is emitted.
 
         If all expected signals have been emitted, quits the event loop and
@@ -404,13 +415,13 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
             finally:
                 self._loop.quit()
 
-    def _record_emitted_signal_if_possible(self, unique_signal, *args):
+    def _record_emitted_signal_if_possible(self, unique_signal: QtCore.Signal, *args):
         if self._are_signal_names_available():
             self.all_signals_and_args.append(
                 SignalAndArgs(signal_name=self._signal_names[unique_signal], args=args)
             )
 
-    def _check_signal_match(self, unique_signal, *args):
+    def _check_signal_match(self, unique_signal: QtCore.Signal, *args):
         if self._order == "none":
             # perform test for every matching index (stop after the first matching one)
             try:
@@ -439,10 +450,10 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
                             signal_name=self._signal_names[unique_signal], args=args
                         )
 
-    def _all_signals_emitted(self):
+    def _all_signals_emitted(self) -> bool:
         return not self._strict_order_violated and all(self._signals_emitted)
 
-    def _get_first_matching_index(self, unique_signal, *args):
+    def _get_first_matching_index(self, unique_signal: QtCore.Signal, *args) -> int:
         successfully_emitted = False
         successful_index = -1
         potential_indices = self._get_unemitted_signal_indices(unique_signal)
@@ -456,7 +467,9 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
 
         return successful_index
 
-    def _check_signal_matches_expected_index(self, unique_signal, *args):
+    def _check_signal_matches_expected_index(
+        self, unique_signal: QtCore.Signal, *args
+    ) -> bool:
         potential_indices = self._get_unemitted_signal_indices(unique_signal)
         if potential_indices:
             if self._signal_expected_index == potential_indices[0]:
@@ -466,7 +479,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
                     return True
         return False
 
-    def _violates_callback_at_index(self, index, *args):
+    def _violates_callback_at_index(self, index, *args) -> bool:
         """Check callback at the provided index that is violated due to invalid params.
 
         Returns False if there is no callback for that index, or if a callback exists
@@ -479,13 +492,9 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
                     return True
         return False
 
-    def _get_unemitted_signal_indices(self, signal):
+    def _get_unemitted_signal_indices(self, signal: QtCore.Signal) -> List[int]:
         """Return indices for provided signal for which NO signal has been emitted yet."""
-        return [
-            index
-            for index in self._signals_map[signal]
-            if not self._signals_emitted[index]
-        ]
+        return [i for i in self._signals_map[signal] if not self._signals_emitted[i]]
 
     def _are_signal_names_available(self) -> bool:
         return bool(self._signal_names)
@@ -516,21 +525,18 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
         return f"Emitted signals: {emitted_signals}. Missing: {missing_signals}"
 
     @staticmethod
-    def _format_as_array(list_of_strings) -> str:
+    def _format_as_array(list_of_strings: Iterable[str]) -> str:
         return "[{}]".format(", ".join(list_of_strings))
 
     def _get_order_violation_message(self) -> str:
-        expected_signal_as_str = self._get_signal_string_representation_for_index(
+        expected_signal_str = self._get_signal_string_representation_for_index(
             self._signal_expected_index
         )
         actual_signal_as_str = str(self._actual_signal_and_args_at_violation)
+        ordinal = get_ordinal_str(self._signal_expected_index + 1)
         return (
-            "Signal order violated! Expected {expected} as {ordinal} signal, "
-            "but received {actual} instead. "
-        ).format(
-            expected=expected_signal_as_str,
-            ordinal=get_ordinal_str(self._signal_expected_index + 1),
-            actual=actual_signal_as_str,
+            f"Signal order violated! Expected {expected_signal_str} as {ordinal} signal, "
+            f"but received {actual_signal_as_str} instead. "
         )
 
     def _get_missing_signal_indices(self) -> List[int]:
@@ -592,14 +598,15 @@ class SignalEmittedSpy:
         self.signal.disconnect(self.slot)
 
     def assert_not_emitted(self):
-        if self.emitted:
-            if self.args:
-                raise SignalEmittedError(
-                    "Signal %r unexpectedly emitted with "
-                    "arguments %r" % (self.signal, list(self.args))
-                )
-            else:
-                raise SignalEmittedError(f"Signal {self.signal!r} unexpectedly emitted")
+        if not self.emitted:
+            return
+        if self.args:
+            raise SignalEmittedError(
+                f"Signal {self.signal!r} unexpectedly emitted with "
+                f"arguments {list(self.args)!r}"
+            )
+        else:
+            raise SignalEmittedError(f"Signal {self.signal!r} unexpectedly emitted")
 
 
 class CallbackBlocker:
