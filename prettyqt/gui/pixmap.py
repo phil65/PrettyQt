@@ -6,6 +6,7 @@ from typing import Union
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
+from prettyqt.utils import colors, types
 
 
 QtGui.QPixmap.__bases__ = (gui.PaintDevice,)
@@ -69,10 +70,27 @@ class Pixmap(QtGui.QPixmap):
             painter.drawEllipse(px_size)
         return px
 
+    @classmethod
+    def create_checkerboard_pattern(
+        cls, n: int, color_1: types.ColorType, color_2: types.ColorType
+    ):
+        """Construct tileable checkerboard pattern for paint events."""
+        # Brush will be an n×n checkerboard pattern
+        pat = gui.Pixmap(2 * n, 2 * n)
+        bg0 = colors.get_color(color_1)
+        bg1 = colors.get_color(color_2)
+        with gui.Painter(pat) as p:
+            p.setPen(QtCore.Qt.NoPen)
+            # Paint a checkerboard pattern for the color to be overlaid on
+            p.fillRect(pat.rect(), bg0)
+            p.fillRect(0, 0, n, n, bg1)
+            p.fillRect(n, n, 2 * n, 2 * n, bg1)
+        return pat
+
 
 if __name__ == "__main__":
     from prettyqt import gui
 
     app = gui.app()
-    p = Pixmap()
+    p = Pixmap.create_checkerboard_pattern(100, "black", "white")
     print(bytes(p))
