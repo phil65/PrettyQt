@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import sys
 
-import prettyqt.qt
 from prettyqt.qt import QtCore
 
 
@@ -61,7 +60,7 @@ class VersionNumber(QtCore.QVersionNumber):
 
     @classmethod
     def get_qt_version(cls) -> VersionNumber:
-        return cls(*[int(i) for i in prettyqt.qt.QT_VERSION.split(".")])
+        return cls(*[int(i) for i in QtCore.__version__.split(".")])
 
     @classmethod
     def get_python_version(cls) -> VersionNumber:
