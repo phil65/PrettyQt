@@ -97,6 +97,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
     def serialize(self) -> Dict[str, Any]:
         return self.__getstate__()
 
+    @classmethod
     def clone(cls, qpol: QtWidgets.QSizePolicy) -> SizePolicy:
         pol = cls(qpol.horizontalPolicy(), qpol.verticalPolicy(), qpol.controlType())
         pol.setHeightForWidth(qpol.hasHeightForWidth())
