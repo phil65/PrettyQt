@@ -45,8 +45,26 @@ class ColorDialog(QtWidgets.QColorDialog):
     def current_color(self) -> gui.Color:
         return gui.Color(self.currentColor())
 
+    def get_qcolorshower(self) -> QtWidgets.QWidget:
+        return [
+            a
+            for a in self.children()
+            if hasattr(a, "metaObject") and a.metaObject().className() == "QColorShower"
+        ][0]
+
+    def get_qcolorshowlabel(self) -> QtWidgets.QFrame:
+        qcs = self.get_qcolorshower()
+        return [
+            b
+            for b in qcs.children()
+            if hasattr(b, "metaObject")
+            and b.metaObject().className() == "QColorShowLabel"
+        ][0]
+
 
 if __name__ == "__main__":
     app = widgets.app()
-    ColorDialog.get_color()
+    dlg = ColorDialog()
+    cs = dlg.get_qcolorshower()
+    print(type(cs))
     app.main_loop()
