@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Union
+from typing import List, Literal, Tuple, Union
 
 from prettyqt import constants, gui
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -126,6 +126,12 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
 
     def get_shape(self) -> gui.PainterPath:
         return gui.PainterPath(self.shape())
+
+    def set_scale(self, scale: Union[Tuple[float, float], float]):
+        if isinstance(scale, float):
+            self.setScale(scale)
+        else:
+            self.setTransform(gui.Transform.fromScale(scale[0], scale[1]), True)
 
 
 if __name__ == "__main__":
