@@ -62,6 +62,14 @@ TYPES = {
 
 
 class ItemEditorFactory(QtWidgets.QItemEditorFactory):
+    @classmethod
+    def register_default_editor(
+        cls, editor_cls: Type[QtWidgets.QWidget], typ: Optional[int] = None
+    ):
+        factory = cls.defaultFactory()
+        factory.register_editor(editor_cls, typ)
+        cls.setDefaultFactory(factory)
+
     def register_editor(
         self, editor_cls: Type[QtWidgets.QWidget], typ: Optional[int] = None
     ):
