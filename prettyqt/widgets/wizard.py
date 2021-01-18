@@ -121,6 +121,15 @@ class Wizard(QtWidgets.QWizard):
         self.addPage(other)
         return self
 
+    def serialize_fields(self):
+        return dict(
+            current_id=self.currentId(),
+            start_id=self.startId(),
+            sub_title_format=self.get_subtitle_format(),
+            title_format=self.get_title_format(),
+            wizard_style=self.get_wizard_style(),
+        )
+
     def add_widget_as_page(self, widget: QtWidgets.QWidget) -> None:
         page = widgets.WizardPage(self)
         layout = widgets.BoxLayout("vertical", self)

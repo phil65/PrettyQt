@@ -11,6 +11,9 @@ QtWidgets.QWizardPage.__bases__ = (widgets.Widget,)
 
 
 class WizardPage(QtWidgets.QWizardPage):
+    def serialize_fields(self):
+        return dict(title=self.title(), sub_title=self.subTitle())
+
     def set_pixmap(
         self, typ: widgets.wizard.WizardPixmapStr, pixmap: Optional[QtGui.QPixmap]
     ):
