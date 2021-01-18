@@ -83,10 +83,10 @@ class RegexInput(widgets.Widget):
     def set_value(self, value: Optional[Union[str, Pattern]]):
         if value is None:
             self.pattern = ""
-            self.flags = 0
+            self.compile_flags = 0
         elif isinstance(value, str):
             self.pattern = value
-            self.flags = 0
+            self.compile_flags = 0
         else:
             self.pattern = value.pattern
             self.compile_flags = value.flags
