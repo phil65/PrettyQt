@@ -124,17 +124,21 @@ class Painter(QtGui.QPainter):
         style: Optional[constants.PenStyleStr] = "solid",
         width: float = 1.0,
         color: types.ColorType = "black",
+        brush: Optional[QtGui.QBrush] = None,
+        miter_limit: float = 2.0,
         join_style: constants.JoinStyleStr = "bevel",
         cap_style: constants.CapStyleStr = "square",
     ) -> gui.Pen:
         """Set pen to use.
 
         Args:
-            style: pen style to use
+            style: pen style
             width: pen width
             color: pen color
-            join_style: pen join style to use
-            cap_style: pen cap style to use
+            brush: pen brush
+            miter_limit: miter limit
+            join_style: pen join style
+            cap_style: pen cap style
         """
         pen = gui.Pen()
         pen.set_style(style)
@@ -143,7 +147,10 @@ class Painter(QtGui.QPainter):
             return pen
         pen.set_cap_style(cap_style)
         pen.set_join_style(join_style)
+        pen.setMiterLimit(miter_limit)
         pen.setWidthF(width)
+        if brush is not None:
+            pen.setBrush(brush)
         pen.set_color(color)
         self.setPen(pen)
         return pen
