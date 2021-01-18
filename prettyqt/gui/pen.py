@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import List, Optional, Union
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
@@ -76,7 +76,7 @@ class Pen(QtGui.QPen):
         """
         return constants.JOIN_STYLE.inverse[self.joinStyle()]
 
-    def set_style(self, style: Optional[constants.PenStyleStr]):
+    def set_style(self, style: Optional[Union[constants.PenStyleStr, List[float]]]):
         """Set pen style to use.
 
         Args:
@@ -85,11 +85,14 @@ class Pen(QtGui.QPen):
         Raises:
             InvalidParamError: pen style does not exist
         """
-        if style is None:
-            style = "none"
-        if style not in constants.PEN_STYLE:
-            raise InvalidParamError(style, constants.PEN_STYLE)
-        self.setStyle(constants.PEN_STYLE[style])
+        if isinstance(style, list):
+            self.setDashPattern(style)
+        else:
+            if style is None:
+                style = "none"
+            if style not in constants.PEN_STYLE:
+                raise InvalidParamError(style, constants.PEN_STYLE)
+            self.setStyle(constants.PEN_STYLE[style])
 
     def get_style(self) -> constants.PenStyleStr:
         """Return current pen style.
