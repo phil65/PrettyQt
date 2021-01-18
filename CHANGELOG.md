@@ -1,3 +1,20 @@
+## v0.179.0 (2021-01-18)
+
+### Fix
+
+- RegexInput flags fix
+- **ModelTester**: correctly disconnect model
+
+### Feat
+
+- **Painter**: more kwargs for set_pen method
+- **Pen**: allow custom dash pattern for set_style
+- **ItemEditorFactory**: add register_default_editor method
+- **GraphicsItem**: add set_scale method
+- **Pixmap**: add create_checkerboard_pattern method
+- **ColorDialog**: add get_qcolorshower/get_qcolorshowlabel methods
+- **TableWidgetItem**: add set_tooltip method
+
 ## v0.178.0 (2021-01-14)
 
 ### Feat
