@@ -104,11 +104,11 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     #  "QSyntaxHighlighter" interface
     # ---------------------------------------------------------------------------
 
-    def __init__(self, parent: QtGui.QTextDocument, lexer: str):
+    def __init__(self, parent: QtGui.QTextDocument, lexer: str, style: str = "default"):
         super().__init__(parent)
         self._document = self.document()
         self._formatter = HtmlFormatter(nowrap=True)
-        self.set_style("default")
+        self.set_style(style)
         if lexer == "regex":
             self._lexer = load_lexer_from_file(str(RE_LEXER_PATH))
         else:
