@@ -1,3 +1,17 @@
+## v0.180.0 (2021-01-20)
+
+### Feat
+
+- **TextDocument**: add some methods related to default stylesheet editing
+- **PygmentsHighlighter**: add repr method
+- **PygmentsHighlighter**: add style kwarg
+- **QtCore**: add QClassInfo for PyQt5/6
+- **colors**: add interpolate_text_colors fn
+- **Color**: add from_hsv method
+- **gui**: add Drag class
+- **DataWidgetMapper**: add get_mapped_property_name method
+- **DataWidgetMapper**: add add_mapping method
+
 ## v0.179.0 (2021-01-18)
 
 ### Fix
