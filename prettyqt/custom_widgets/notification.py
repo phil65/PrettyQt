@@ -186,12 +186,12 @@ class Notification(widgets.Widget):
     def on_fade_in_finished(self):
         self.is_fading_in = False
 
-    def fade_out(self, finishedCallback: Callable, duration: int):
+    def fade_out(self, finished_callback: Callable, duration: int):
         """Fade out the notification.
 
         Parameters
         ----------
-        finishedCallback : callable
+        finished_callback : callable
             The function to call after the animation has finished (to for instance
             clean up the notification)
         duration : int
@@ -202,14 +202,14 @@ class Notification(widgets.Widget):
         TypeError: the wrong datatype is specified for any of the parameters.
 
         """
-        if not callable(finishedCallback):
-            raise TypeError("finishedCallback should be a callable")
+        if not callable(finished_callback):
+            raise TypeError("finished_callback should be a callable")
         if type(duration) != int:
             raise TypeError("duration should be an integer")
 
         self.setGraphicsEffect(self.opacity_effect)
         self.fade_out_anim.setDuration(duration)
-        self.fade_out_anim.finished.connect(lambda: finishedCallback(self))
+        self.fade_out_anim.finished.connect(lambda: finished_callback(self))
         self.is_being_removed = True
         self.fade_out_anim.start()
 
@@ -330,7 +330,7 @@ class NotificationArea(widgets.Widget):
         self.target_widget.resizeEvent = self.resizeEvent  # type: ignore
         self.hide()
 
-    def __delete_notification(self, notification=None):
+    def __delete_notification(self, notification: Notification):
         """Close and destroy the supplied notification."""
         notification.close()
         self.layout().removeWidget(notification)
@@ -440,7 +440,7 @@ class NotificationArea(widgets.Widget):
         else:
             self._show_notification(notification)
 
-    def _cursor_in_area(self):
+    def _cursor_in_area(self) -> bool:
         geom = self.geometry()
         top_left = self.mapToGlobal(geom.topLeft())
         bottom_right = self.mapToGlobal(geom.bottomRight())
