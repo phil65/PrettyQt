@@ -332,7 +332,6 @@ class ObjectBrowser(widgets.MainWindow):
         object_browser = cls(*args, **kwargs)
         object_browser.show()
         object_browser.raise_()
-        assert cls.app is not None, "QApplication object doesn't exist yet."
         return cls.app.main_loop()
 
 
