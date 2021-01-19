@@ -142,9 +142,10 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     # "PygmentsHighlighter" interface
     # ---------------------------------------------------------------------------
 
-    def set_style(self, style: Union[str, Style]):
-        """Sets the style to the specified Pygments style."""
-        if isinstance(style, str):
+    def set_style(self, style: Union[None, str, Style]):
+        if style is None:
+            style = get_style_by_name("default")
+        elif isinstance(style, str):
             style = get_style_by_name(style)
         self._style = style
         self._clear_caches()
