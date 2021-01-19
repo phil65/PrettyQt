@@ -114,6 +114,9 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         else:
             self._lexer = get_lexer_by_name(lexer)
 
+    def __repr__(self):
+        return f"{type(self).__name__}(lexer={self._lexer.aliases[0]!r})"
+
     def highlightBlock(self, string):
         """Highlight a block of text."""
         prev_data = self.currentBlock().previous().userData()
