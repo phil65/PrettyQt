@@ -43,6 +43,8 @@ if PYQT5:
         Q_ARG as QGenericArgument,
         Q_FLAG,
         Q_FLAG as QFlag,
+        Q_CLASSINFO,
+        Q_CLASSINFO as QClassInfo,
         PYQT_VERSION_STR as BINDING_VERSION,
     )
 
@@ -63,6 +65,7 @@ if PYQT5:
         Q_FLAG,
         Q_ENUM,
         Q_ARG,
+        Q_CLASSINFO,
     )
 elif PYQT6:
     from PyQt6.QtCore import (
@@ -82,6 +85,8 @@ elif PYQT6:
         pyqtEnum,
         pyqtEnum as QEnum,
         pyqtEnum as QFlag,
+        pyqtClassInfo,
+        pyqtClassInfo as QClassInfo,
         Q_ARG,
         Q_ARG as QGenericArgument,
         PYQT_VERSION_STR as BINDING_VERSION,
@@ -103,6 +108,7 @@ elif PYQT6:
         QT_VERSION_STR,
         pyqtEnum,
         Q_ARG,
+        pyqtClassInfo,
     )
 elif PYSIDE2:
     from PySide2.QtCore import *
