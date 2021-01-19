@@ -613,13 +613,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.set_style" class="md-nav__link">
-    set_style()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.set_style_sheet" class="md-nav__link">
     set_style_sheet()
   </a>
@@ -1037,13 +1030,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.set_style" class="md-nav__link">
-    set_style()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.set_style_sheet" class="md-nav__link">
     set_style_sheet()
   </a>
@@ -1449,29 +1435,6 @@ overridden to extend subclasses.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">currentBlock</span><span class="p">()</span><span class="o">.</span><span class="n">setUserData</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="c1"># Clean up for the next go-round.</span>
         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">_saved_state_stack</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.set_style">
-
-<code class="highlight language-python"><span class="n">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Style</span><span class="p">])</span></code>
-
-
-      </h4>
-<div class="doc doc-contents ">
-<p>Sets the style to the specified Pygments style.</p>
-<details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Style</span><span class="p">]):</span>
-    <span class="sd">"""Sets the style to the specified Pygments style."""</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">style</span> <span class="o">=</span> <span class="n">get_style_by_name</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">style</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
 </code></pre>
 </div>
 </details>
