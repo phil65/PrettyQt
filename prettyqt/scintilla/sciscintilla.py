@@ -212,7 +212,9 @@ class SciScintilla(Qsci.QsciScintilla):
     def set_margins_background_color(self, color: types.ColorType):
         self.setMarginsBackgroundColor(colors.get_color(color))
 
-    def highlight_current_line(self, color: types.ColorType = "yellow"):
+    def highlight_current_line(self, color: types.ColorType = None):
+        if color is None:
+            color = self.get_palette().get_color("highlight")
         self.setCaretLineVisible(color is not None)
         self.setCaretLineBackgroundColor(colors.get_color(color))
 
@@ -285,6 +287,7 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = SciScintilla()
     widget.set_syntaxhighlighter("python")
+    widget.highlight_current_line()
     widget.set_wrap_mode("anywhere")
     widget.show()
     app.main_loop()
