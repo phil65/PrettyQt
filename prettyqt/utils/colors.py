@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import List
+
 from prettyqt import gui
 from prettyqt.utils import types
 
@@ -51,3 +53,23 @@ def get_color(color: types.ColorType) -> gui.Color:
     if isinstance(color, (tuple, list)):
         return gui.Color(*color)
     return gui.Color(color)
+
+
+def interpolate_text_colors(
+    bg: types.ColorType, fg: types.ColorType, n_colors: int
+) -> List[gui.Color]:
+    bg = get_color(bg)
+    fg = get_color(fg)
+    pal = []
+    M = 35
+    HUE_BASE = 90 if bg.hue() == -1 else bg.hue()
+    for i in range(n_colors):
+        h = HUE_BASE + (360.0 / n_colors * i) % 360
+        s = 240.0
+        v = max(bg.value(), fg.value()) * 0.85
+        if (bg.hue() - M < h < bg.hue() + M) or (fg.hue() - M < h < fg.hue() + M):
+            h = ((bg.hue() + fg.hue()) / (i + 1)) % 360
+            s = ((bg.saturation() + fg.saturation() + 2 * i) / 2) % 256
+            v = ((bg.value() + fg.value() + 2 * i) / 2) % 256
+        pal.append(gui.Color.from_hsv(h, s, v))
+    return pal
