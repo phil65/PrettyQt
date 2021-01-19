@@ -47,6 +47,7 @@ from prettyqt.qt.QtGui import (
 # from prettyqt.qt.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
 
 from .textobjectinterface import TextObjectInterface
+from .drag import Drag
 from .screen import Screen
 from .keysequence import KeySequence
 from .surface import Surface
@@ -179,6 +180,7 @@ __all__ = [
     "DropEvent",
     "DragEnterEvent",
     "FocusEvent",
+    "Drag",
     "Screen",
     "Gradient",
     "LinearGradient",
