@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import Literal, Optional
 
 from prettyqt import constants, core
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -72,3 +72,12 @@ class DataWidgetMapper(QtWidgets.QDataWidgetMapper):
             submit policy
         """
         return SUBMIT_POLICY.inverse[self.submitPolicy()]
+
+    def add_mapping(
+        self, widget: QtWidgets.QWidget, section: int, property_name: Optional[str] = None
+    ):
+        if property_name is None:
+            self.addMapping(widget, section)
+        else:
+            ba = QtCore.QByteArray(property_name.encode())
+            self.addMapping(widget, section, ba)
