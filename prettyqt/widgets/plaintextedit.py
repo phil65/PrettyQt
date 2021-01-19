@@ -7,7 +7,7 @@ from deprecated import deprecated
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
 LINE_WRAP_MODE = bidict(
@@ -126,12 +126,13 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def highlight_current_line(self, color: types.ColorType = None):
         if color is None:
             color = self.get_palette().get_color("highlight")
+        else:
+            color = colors.get_color(color)
         extra_selections = []
 
         if not self.isReadOnly():
             selection = widgets.TextEdit.ExtraSelection()
-            line_color = gui.Color(color)
-            selection.format.setBackground(line_color)
+            selection.format.setBackground(color)
             selection.format.setProperty(QtGui.QTextFormat.FullWidthSelection, True)
             selection.cursor = self.textCursor()
             selection.cursor.clearSelection()

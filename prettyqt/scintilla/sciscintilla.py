@@ -215,8 +215,10 @@ class SciScintilla(Qsci.QsciScintilla):
     def highlight_current_line(self, color: types.ColorType = None):
         if color is None:
             color = self.get_palette().get_color("highlight")
+        else:
+            color = colors.get_color(color)
         self.setCaretLineVisible(color is not None)
-        self.setCaretLineBackgroundColor(colors.get_color(color))
+        self.setCaretLineBackgroundColor(color)
 
     def set_brace_matching(self, match_type: Optional[MatchTypeStr]):
         if match_type is None:
