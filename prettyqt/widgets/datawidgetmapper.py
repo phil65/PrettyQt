@@ -81,3 +81,6 @@ class DataWidgetMapper(QtWidgets.QDataWidgetMapper):
         else:
             ba = QtCore.QByteArray(property_name.encode())
             self.addMapping(widget, section, ba)
+
+    def get_mapped_property_name(self, widget: QtWidgets.QWidget) -> str:
+        return bytes(self.mappedPropertyName(widget)).decode()
