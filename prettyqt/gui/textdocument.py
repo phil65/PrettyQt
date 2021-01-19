@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+import contextlib
 import os
+import pathlib
 from typing import Iterator, Literal, Union
+
+import qstylizer.parser
+import qstylizer.style
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
@@ -126,6 +131,24 @@ class TextDocument(QtGui.QTextDocument):
             raise InvalidParamError(resource_type, RESOURCE_TYPES)
         url = core.Url(name)
         self.addResource(RESOURCE_TYPES[resource_type], url, resource)
+
+    @contextlib.contextmanager
+    def edit_default_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:
+        ss = self.get_default_stylesheet()
+        yield ss
+        self.set_default_stylesheet(ss)
+
+    def set_default_stylesheet(
+        self, ss: Union[None, str, qstylizer.style.StyleSheet, os.PathLike]
+    ):
+        if isinstance(ss, os.PathLike):  # type: ignore
+            ss = pathlib.Path(ss).read_text()
+        elif ss is None:
+            ss = ""
+        self.setDefaultStyleSheet(str(ss))
+
+    def get_default_stylesheet(self) -> qstylizer.style.StyleSheet:
+        return qstylizer.parser.parse(self.defaultStyleSheet())
 
 
 if __name__ == "__main__":
