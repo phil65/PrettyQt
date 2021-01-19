@@ -59,12 +59,12 @@ class Color(QtGui.QColor):
         return color
 
     @classmethod
-    def from_cmyk(cls, *args, **kwargs) -> Color:
-        return cls(cls.fromCmykF(*args, **kwargs))
+    def from_cmyk(cls, c: float, m: float, y: float, k: float, a: float = 1.0) -> Color:
+        return cls(cls.fromCmykF(c, m, y, k, a))
 
     @classmethod
-    def from_hsv(cls, *args, **kwargs) -> Color:
-        return cls(cls.fromHsv(*args, **kwargs))
+    def from_hsv(cls, h: float, s: float, v: float, a: float = 1.0) -> Color:
+        return cls(cls.fromHsvF(h, s, v, a))
 
     @classmethod
     def interpolate_color(
