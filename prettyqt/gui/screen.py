@@ -64,8 +64,11 @@ class Screen:
             constants.SCREEN_ORIENTATION[orientation_2],
         )
 
-    def grab_window(self, *args, **kwargs) -> gui.Pixmap:
-        return gui.Pixmap(self.grabWindow(*args, **kwargs))
+    def grab_window(
+        self, window: int = 0, x: int = 0, y: int = 0, width: int = -1, height: int = -1
+    ) -> gui.Pixmap:
+        px = self.grabWindow(window, x, y, width, height)
+        return gui.Pixmap(px)
 
     def get_virtual_siblings(self) -> List[Screen]:
         return [Screen(i) for i in self.virtualSiblings()]
