@@ -63,6 +63,10 @@ class Color(QtGui.QColor):
         return cls(cls.fromCmykF(*args, **kwargs))
 
     @classmethod
+    def from_hsv(cls, *args, **kwargs) -> Color:
+        return cls(cls.fromHsv(*args, **kwargs))
+
+    @classmethod
     def interpolate_color(
         cls,
         start: QtGui.QColor,
