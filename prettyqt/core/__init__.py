@@ -40,6 +40,7 @@ from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
 from .uuid import Uuid
 from .signalblocker import SignalBlocker
+from .abstractnativeeventfilter import AbstractNativeEventFilter
 
 # from .debug import Debug
 from .line import Line
@@ -184,6 +185,7 @@ __all__ = [
     "CryptographicHash",
     "Uuid",
     "SignalBlocker",
+    "AbstractNativeEventFilter",
     "SignalMapper",
     "SocketNotifier",
     # "Debug",
