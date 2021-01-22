@@ -98,7 +98,9 @@ class SidebarWidget(widgets.MainWindow):
         if show:
             self.area.box.setCurrentWidget(item)
 
-    def set_marker(self, item: Union[str, int, widgets.Widget], color="red"):
+    def set_marker(
+        self, item: Union[str, int, widgets.Widget], color: types.ColorType = "red"
+    ):
         widget = self._get_widget(item)
         if widget == self._get_current_widget():
             return

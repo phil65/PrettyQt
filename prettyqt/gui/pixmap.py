@@ -58,8 +58,8 @@ class Pixmap(QtGui.QPixmap):
         return gui.Image(self.toImage())
 
     @classmethod
-    def create_dot(cls, color="black", size: int = 16) -> Pixmap:
-        col = gui.Color(color)
+    def create_dot(cls, color: types.ColorType = "black", size: int = 16) -> Pixmap:
+        col = colors.get_color(color)
         px = cls(size, size)
         px.fill(QtCore.Qt.transparent)
         px_size = px.rect().adjusted(1, 1, -1, -1)

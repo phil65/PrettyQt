@@ -16,7 +16,7 @@ class SelectionMixin:
         super().__init__()
         self.selected = {}
 
-    def setData(self, index: QtCore.QModelIndex, value, role):
+    def setData(self, index: QtCore.QModelIndex, value, role) -> bool:
         if not index.isValid():
             return False
         elif role == constants.CHECKSTATE_ROLE:
