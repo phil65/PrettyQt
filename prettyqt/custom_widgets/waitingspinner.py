@@ -44,7 +44,7 @@ class BaseWaitingSpinner(widgets.Widget):
         super().__init__(parent=parent)
 
         # WAS IN initialize()
-        self._color = gui.Color("black")
+        self._color = self.get_palette().get_color("text")
         self._roundness = 100.0
         self._minimum_trail_opacity = 3.14159265358979323846
         self._trail_fade_percentage = 80.0
@@ -85,7 +85,7 @@ class BaseWaitingSpinner(widgets.Widget):
                 distance = self.linecount_distance_from_primary(
                     i, self._current_counter, self._line_num
                 )
-                color = self.current_line_color(
+                color = self._current_line_color(
                     distance,
                     self._line_num,
                     self._trail_fade_percentage,
@@ -193,7 +193,7 @@ class BaseWaitingSpinner(widgets.Widget):
             distance += total_lines
         return distance
 
-    def current_line_color(
+    def _current_line_color(
         self,
         count_distance: int,
         total_lines: int,
@@ -263,6 +263,7 @@ class WaitingSpinner(BaseWaitingSpinner):
 
 if __name__ == "__main__":
     app = widgets.app()
+    # app.set_theme("dark")
     mainwindow = widgets.MainWindow()
     spinner = WaitingSpinner(mainwindow)
     mainwindow.show()

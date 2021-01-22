@@ -132,8 +132,31 @@ class Application(QtWidgets.QApplication):
     def set_theme(self, theme: ThemeStr):
         if theme == "default":
             self.set_stylesheet("")
+            self.setPalette(gui.Palette())
             iconprovider.set_defaults(color="black")
         elif theme == "dark":
+            dark_pal = gui.Palette()
+            dark_pal.set_color("window", gui.Color(53, 53, 53))
+            dark_pal.set_color("window_text", QtCore.Qt.white)
+            dark_pal.set_color("window_text", gui.Color("grey"), group="disabled")
+            dark_pal.set_color("base", gui.Color(25, 25, 25))
+            dark_pal.set_color("alternate_base", gui.Color(53, 53, 53))
+            dark_pal.set_color("tool_tip_base", QtCore.Qt.white)
+            dark_pal.set_color("tool_tip_text", QtCore.Qt.white)
+            dark_pal.set_color("text", QtCore.Qt.white)
+            dark_pal.set_color("text", gui.Color("grey"), group="disabled")
+            dark_pal.set_color("button", gui.Color(53, 53, 53))
+            dark_pal.set_color("button_text", QtCore.Qt.white)
+            dark_pal.set_color("button_text", gui.Color("grey"), group="disabled")
+            dark_pal.set_color("bright_text", QtCore.Qt.red)
+            dark_pal.set_color("link", gui.Color(42, 130, 218))
+
+            dark_pal.set_color("highlight", gui.Color(42, 130, 218))
+            dark_pal.set_color("highlight", gui.Color(80, 80, 80), group="disabled")
+            dark_pal.set_color("highlighted_text", QtCore.Qt.black)
+            dark_pal.set_color("highlighted_text", gui.Color("grey"), group="disabled")
+
+            self.setPalette(dark_pal)
             ss = (prettyqt.ROOT_PATH / "themes" / "darktheme.qss").read_text()
             self.set_stylesheet(ss)
             iconprovider.set_defaults(color="lightblue")
