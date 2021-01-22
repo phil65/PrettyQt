@@ -137,6 +137,20 @@ class Palette(QtGui.QPalette):
         """
         return GROUP.inverse[self.colorGroup()]
 
+    def inverted(self) -> Palette:
+        pal = Palette()
+        for group in GROUP:
+            for role in ROLE:
+                color = self.get_color(role, group)
+                new = gui.Color(
+                    255 - color.red(),
+                    255 - color.green(),
+                    255 - color.blue(),
+                    color.alpha(),
+                )
+                pal.set_color(role, new, group)
+        return pal
+
 
 if __name__ == "__main__":
     pal = Palette()
