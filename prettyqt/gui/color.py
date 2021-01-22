@@ -114,9 +114,21 @@ class Color(QtGui.QColor):
         out = out.convertTo(start.spec())
         return out
 
+    def is_dark(self) -> bool:
+        """Check whether a color is 'dark'."""
+        return self.lightness() < 128
+
     def to_qsscolor(self) -> str:
         """Convert Color to a string that can be used in a QStyleSheet."""
         return f"rgba({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
 
     def as_qt(self) -> QtGui.QColor:
         return QtGui.QColor(self)
+
+    def inverted(self) -> Color:
+        return Color(
+            255 - self.red(),
+            255 - self.green(),
+            255 - self.blue(),
+            self.alpha(),
+        )
