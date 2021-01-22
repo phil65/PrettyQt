@@ -155,3 +155,7 @@ class Dir(QtCore.QDir):
     @classmethod
     def add_search_path(cls, prefix: str, path: Union[str, os.PathLike]):
         cls.addSearchPath(prefix, os.fspath(path))
+
+    @classmethod
+    def set_search_paths(cls, prefix: str, paths: List[Union[str, os.PathLike]]):
+        cls.setSearchPaths(prefix, [os.fspath(p) for p in paths])
