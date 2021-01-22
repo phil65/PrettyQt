@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import List, Literal
+from typing import List, Literal, Union
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -151,3 +151,7 @@ class Dir(QtCore.QDir):
     @classmethod
     def get_drives(cls) -> List[core.FileInfo]:
         return [core.FileInfo(i) for i in cls.drives()]
+
+    @classmethod
+    def add_search_path(cls, prefix: str, path: Union[str, os.PathLike]):
+        cls.addSearchPath(prefix, os.fspath(path))
