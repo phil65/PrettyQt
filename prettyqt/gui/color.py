@@ -1,9 +1,21 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Literal, Optional, Union
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import helpers
+from prettyqt.utils import InvalidParamError, bidict, helpers
+
+
+SPEC = bidict(
+    rgb=QtGui.QColor.Rgb,
+    hsv=QtGui.QColor.Hsv,
+    cmyk=QtGui.QColor.Cmyk,
+    hsl=QtGui.QColor.Hsl,
+    extended_rgb=QtGui.QColor.ExtendedRgb,
+    invalid=QtGui.QColor.Invalid,
+)
+
+SpecStr = Literal["rgb", "hsv", "cmyk", "hsl", "extended_rgb", "invalid"]
 
 
 class Color(QtGui.QColor):
@@ -72,7 +84,7 @@ class Color(QtGui.QColor):
         start: QtGui.QColor,
         end: QtGui.QColor,
         percent: int,
-        colorspace: Optional[QtGui.QColor.Spec] = QtGui.QColor.Rgb,
+        colorspace: Optional[SpecStr] = "rgb",
     ) -> Color:
         """Get an interpolated color value.
 
@@ -92,19 +104,20 @@ class Color(QtGui.QColor):
                 return cls(*end.getRgb())
             else:
                 return cls(*start.getRgb())
-
+        if colorspace not in SPEC:
+            raise InvalidParamError(colorspace, SPEC)
         out = cls()
-        if colorspace == cls.Rgb:
+        if colorspace == "rgb":
             components = helpers.get_color_percentage(
                 start.getRgb(), end.getRgb(), percent  # type: ignore
             )
             out.setRgb(*components)
-        elif colorspace == cls.Hsv:
+        elif colorspace == "hsv":
             components = helpers.get_color_percentage(
                 start.getHsv(), end.getHsv(), percent  # type: ignore
             )
             out.setHsv(*components)
-        elif colorspace == cls.Hsl:
+        elif colorspace == "hsl":
             components = helpers.get_color_percentage(
                 start.getHsl(), end.getHsl(), percent  # type: ignore
             )
