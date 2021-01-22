@@ -4,7 +4,7 @@ import contextlib
 import logging
 import os
 import pathlib
-from typing import Dict, Iterator, Literal, Mapping, MutableMapping, Optional, Union
+from typing import Dict, Iterator, Mapping, MutableMapping, Optional, Union
 
 import qstylizer.parser
 import qstylizer.style
@@ -24,7 +24,6 @@ SAVE_STATES = dict(
     headerviews=QtWidgets.QHeaderView,
 )
 
-ThemeStr = Literal["default", "dark"]
 
 QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
 
@@ -129,40 +128,18 @@ class Application(QtWidgets.QApplication):
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:
         return qstylizer.parser.parse(self.styleSheet())
 
-    def set_theme(self, theme: ThemeStr):
+    def set_theme(self, theme: constants.ThemeStr):
+        self.set_palette(theme)
         if theme == "default":
             self.set_stylesheet("")
-            self.setPalette(gui.Palette())
             iconprovider.set_defaults(color="black")
         elif theme == "dark":
-            dark_pal = gui.Palette()
-            dark_pal.set_color("window", gui.Color(53, 53, 53))
-            dark_pal.set_color("window_text", QtCore.Qt.white)
-            dark_pal.set_color("window_text", gui.Color("grey"), group="disabled")
-            dark_pal.set_color("base", gui.Color(25, 25, 25))
-            dark_pal.set_color("alternate_base", gui.Color(53, 53, 53))
-            dark_pal.set_color("tool_tip_base", QtCore.Qt.white)
-            dark_pal.set_color("tool_tip_text", QtCore.Qt.white)
-            dark_pal.set_color("text", QtCore.Qt.white)
-            dark_pal.set_color("text", gui.Color("grey"), group="disabled")
-            dark_pal.set_color("button", gui.Color(53, 53, 53))
-            dark_pal.set_color("button_text", QtCore.Qt.white)
-            dark_pal.set_color("button_text", gui.Color("grey"), group="disabled")
-            dark_pal.set_color("bright_text", QtCore.Qt.red)
-            dark_pal.set_color("link", gui.Color(42, 130, 218))
-
-            dark_pal.set_color("highlight", gui.Color(42, 130, 218))
-            dark_pal.set_color("highlight", gui.Color(80, 80, 80), group="disabled")
-            dark_pal.set_color("highlighted_text", QtCore.Qt.black)
-            dark_pal.set_color("highlighted_text", gui.Color("grey"), group="disabled")
-
-            self.setPalette(dark_pal)
             ss = (prettyqt.ROOT_PATH / "themes" / "darktheme.qss").read_text()
             self.set_stylesheet(ss)
             iconprovider.set_defaults(color="lightblue")
 
     @classmethod
-    def get_available_themes(cls) -> Dict[ThemeStr, str]:
+    def get_available_themes(cls) -> Dict[constants.ThemeStr, str]:
         return dict(default="Default", dark="Dark")
 
     def send_event(self, obj_or_str: Union[str, QtCore.QObject], event: QtCore.QEvent):

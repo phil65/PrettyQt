@@ -151,5 +151,33 @@ class GuiApplication(QtGui.QGuiApplication):
         return gui.Icon(self.windowIcon())
 
     @classmethod
+    def set_palette(cls, palette: Union[constants.ThemeStr, QtGui.QPalette]):
+        if palette == "default":
+            pal = gui.Palette()
+        elif palette == "dark":
+            pal = gui.Palette()
+            pal.set_color("window", gui.Color(53, 53, 53))
+            pal.set_color("window_text", "white")
+            pal.set_color("window_text", "grey", group="disabled")
+            pal.set_color("base", gui.Color(25, 25, 25))
+            pal.set_color("alternate_base", gui.Color(53, 53, 53))
+            pal.set_color("tool_tip_base", "white")
+            pal.set_color("tool_tip_text", "white")
+            pal.set_color("text", "white")
+            pal.set_color("text", "grey", group="disabled")
+            pal.set_color("button", gui.Color(53, 53, 53))
+            pal.set_color("button_text", "white")
+            pal.set_color("button_text", "grey", group="disabled")
+            pal.set_color("bright_text", "red")
+            pal.set_color("link", "dodgerblue")
+            pal.set_color("highlight", "dodgerblue")
+            pal.set_color("highlight", gui.Color(80, 80, 80), group="disabled")
+            pal.set_color("highlighted_text", "black")
+            pal.set_color("highlighted_text", "grey", group="disabled")
+        else:
+            pal = palette
+        cls.setPalette(pal)
+
+    @classmethod
     def get_palette(cls) -> gui.Palette:
         return gui.Palette(cls.palette())

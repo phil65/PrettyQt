@@ -86,6 +86,9 @@ KEY_F11 = Qt.Key.Key_F11
 KEY_DELETE = Qt.Key.Key_Delete
 
 
+ThemeStr = Literal["default", "dark"]
+
+
 ALIGNMENTS = mappers.FlagMap(
     Qt.Alignment,
     # none=int(Qt.Alignment(0)),
