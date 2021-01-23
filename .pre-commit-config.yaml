@@ -17,7 +17,7 @@ repos:
     # - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v2.11.0
+  rev: v2.14.0
   hooks:
     - id: commitizen
       stages: [commit-msg]
@@ -53,7 +53,7 @@ repos:
     args: [--py38-plus]
 
 -   repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.6.4
+    rev: v5.7.0
     hooks:
     - id: isort
       args: [--filter-files]
