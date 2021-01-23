@@ -384,6 +384,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.color.Color.is_dark" class="md-nav__link">
+    is_dark()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.color.Color.to_qsscolor" class="md-nav__link">
     to_qsscolor()
   </a>
@@ -2524,6 +2531,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.color.Color.is_dark" class="md-nav__link">
+    is_dark()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.color.Color.to_qsscolor" class="md-nav__link">
     to_qsscolor()
   </a>
@@ -4456,7 +4470,7 @@
 <div class="doc doc-object doc-method">
 <h4 class="doc doc-heading" id="prettyqt.gui.color.Color.interpolate_color">
 
-<code class="highlight language-python"><span class="n">interpolate_color</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span> <span class="n">percent</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">colorspace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="o">.</span><span class="n">Spec</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span></code>
+<code class="highlight language-python"><span class="n">interpolate_color</span><span class="p">(</span><span class="n">start</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span> <span class="n">end</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span> <span class="n">percent</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">colorspace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SpecStr</span><span class="p">]</span> <span class="o">=</span> <span class="s1">'rgb'</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -4502,13 +4516,13 @@
 </tr>
 <tr>
 <td><code>colorspace</code></td>
-<td><code>Optional[QtGui.QColor.Spec]</code></td>
+<td><code>Optional[SpecStr]</code></td>
 <td>
 <p>The desired interpolation color system,
         QColor::{Rgb,Hsv,Hsl} (from QColor::Spec enum)
         If None, start is used except when percent is 100.</p>
 </td>
-<td><code>1</code></td>
+<td><code>'rgb'</code></td>
 </tr>
 </tbody>
 </table>
@@ -4538,7 +4552,7 @@
     <span class="n">start</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span>
     <span class="n">end</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">,</span>
     <span class="n">percent</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">colorspace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="o">.</span><span class="n">Spec</span><span class="p">]</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="o">.</span><span class="n">Rgb</span><span class="p">,</span>
+    <span class="n">colorspace</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">SpecStr</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"rgb"</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
     <span class="sd">"""Get an interpolated color value.</span>
 
@@ -4558,19 +4572,20 @@
             <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
-
+    <span class="k">if</span> <span class="n">colorspace</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPEC</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">colorspace</span><span class="p">,</span> <span class="n">SPEC</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Rgb</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="s2">"rgb"</span><span class="p">:</span>
         <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
             <span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
         <span class="p">)</span>
         <span class="n">out</span><span class="o">.</span><span class="n">setRgb</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Hsv</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="s2">"hsv"</span><span class="p">:</span>
         <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
             <span class="n">start</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
         <span class="p">)</span>
         <span class="n">out</span><span class="o">.</span><span class="n">setHsv</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="bp">cls</span><span class="o">.</span><span class="n">Hsl</span><span class="p">:</span>
+    <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="s2">"hsl"</span><span class="p">:</span>
         <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
             <span class="n">start</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
         <span class="p">)</span>
@@ -4579,6 +4594,26 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Invalid colorspace!"</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">convertTo</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">spec</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">out</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.gui.color.Color.is_dark">
+
+<code class="highlight language-python"><span class="n">is_dark</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Check whether a color is 'dark'.</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">is_dark</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">"""Check whether a color is 'dark'."""</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lightness</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">128</span>
 </code></pre>
 </div>
 </details>
