@@ -1,3 +1,13 @@
+## v0.181.0 (2021-01-23)
+
+### Feat
+
+- **Color**: add is_dark and inverted methods
+- **Dir**: add set_search_paths method
+- **Palette**: add inverted method
+- **Dir**: add add_search_path method
+- **core**: add AbstractNativeEventFilter
+
 ## v0.180.0 (2021-01-20)
 
 ### Feat
