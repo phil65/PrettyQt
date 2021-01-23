@@ -81,7 +81,7 @@ class Url(QtCore.QUrl):
                 super().__init__(path)
             else:
                 super().__init__(os.fspath(path))
-            if isinstance(path, os.PathLike):  # type: ignore
+            if isinstance(path, os.PathLike):
                 self.setScheme("file")
 
     # def __str__(self):

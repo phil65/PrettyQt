@@ -141,7 +141,7 @@ class TextDocument(QtGui.QTextDocument):
     def set_default_stylesheet(
         self, ss: Union[None, str, qstylizer.style.StyleSheet, os.PathLike]
     ):
-        if isinstance(ss, os.PathLike):  # type: ignore
+        if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()
         elif ss is None:
             ss = ""

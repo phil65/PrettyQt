@@ -25,7 +25,7 @@ class MimeDatabase(QtCore.QMimeDatabase):
     ) -> core.MimeType:
         if match_mode not in MATCH_MODE:
             raise InvalidParamError(match_mode, MATCH_MODE)
-        if isinstance(path, os.PathLike):  # type: ignore
+        if isinstance(path, os.PathLike):
             path = os.fspath(path)
         mime_type = self.mimeTypeForFile(path, MATCH_MODE[match_mode])
         return core.MimeType(mime_type)

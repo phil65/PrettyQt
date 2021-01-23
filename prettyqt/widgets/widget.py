@@ -179,7 +179,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         tooltip: Union[str, os.PathLike],
         size: Optional[Union[Tuple[int, int], QtCore.QSize]] = None,
     ):
-        if isinstance(tooltip, os.PathLike):  # type: ignore
+        if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
             if size is None:
                 tooltip = f"<img src={path!r}>"
@@ -336,7 +336,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def set_stylesheet(
         self, ss: Union[None, str, qstylizer.style.StyleSheet, os.PathLike]
     ):
-        if isinstance(ss, os.PathLike):  # type: ignore
+        if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()
         elif ss is None:
             ss = ""

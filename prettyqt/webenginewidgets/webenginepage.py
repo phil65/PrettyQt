@@ -222,7 +222,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         Args:
             url: URL to set
         """
-        if isinstance(url, os.PathLike):  # type: ignore
+        if isinstance(url, os.PathLike):
             url = core.Url.fromLocalFile(os.fspath(url))
         elif isinstance(url, str):
             url = core.Url(url)
@@ -254,7 +254,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         Args:
             url: URL to load
         """
-        if isinstance(url, os.PathLike):  # type: ignore
+        if isinstance(url, os.PathLike):
             url = core.Url.fromLocalFile(os.fspath(url))
         elif isinstance(url, str):
             url = core.Url(url)

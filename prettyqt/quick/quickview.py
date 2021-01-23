@@ -30,7 +30,7 @@ QtQuick.QQuickView.__bases__ = (gui.Window,)
 
 class QuickView(QtQuick.QQuickView):
     def set_source(self, source: Union[str, os.PathLike, QtCore.QUrl]):
-        if isinstance(source, os.PathLike):  # type: ignore
+        if isinstance(source, os.PathLike):
             source = os.fspath(source)
         if isinstance(source, str):
             source = core.Url.fromLocalFile(source)

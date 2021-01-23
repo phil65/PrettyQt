@@ -259,7 +259,7 @@ def get_icon(
     """
     if isinstance(icon, QtGui.QIcon):
         return icon if as_qicon else gui.Icon(icon)
-    if isinstance(icon, os.PathLike):  # type: ignore
+    if isinstance(icon, os.PathLike):
         icon = os.fspath(icon)
     if (icon, color, as_qicon) in icon_cache:
         return icon_cache[(icon, color, as_qicon)]

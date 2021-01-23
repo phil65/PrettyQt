@@ -30,6 +30,6 @@ class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
         self.loadData(data, url)
 
     def load_file(self, file: Union[str, os.PathLike, QtCore.QUrl]):
-        if isinstance(file, os.PathLike):  # type: ignore
+        if isinstance(file, os.PathLike):
             file = os.fspath(file)
         self.load(file)

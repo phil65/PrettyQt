@@ -10,7 +10,7 @@ from prettyqt.qt import QtCore
 
 class FileInfo(QtCore.QFileInfo):
     def __init__(self, *args, **kwargs):
-        if len(args) == 1 and isinstance(args[0], os.PathLike):  # type: ignore
+        if len(args) == 1 and isinstance(args[0], os.PathLike):
             super().__init__(os.fspath(args[0]))
         else:
             super().__init__(*args, **kwargs)

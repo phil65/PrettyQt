@@ -99,7 +99,7 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         tooltip: Union[str, os.PathLike],
         size: Optional[Union[Tuple[int, int], QtCore.QSize]] = None,
     ):
-        if isinstance(tooltip, os.PathLike):  # type: ignore
+        if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
             if size is None:
                 tooltip = f"<img src={path!r}>"

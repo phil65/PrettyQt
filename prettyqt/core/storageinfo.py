@@ -15,7 +15,7 @@ class StorageInfo(QtCore.QStorageInfo):
         if path is None:
             super().__init__()
         else:
-            if isinstance(path, os.PathLike):  # type: ignore
+            if isinstance(path, os.PathLike):
                 path = os.fspath(path)
             super().__init__(path)
 
