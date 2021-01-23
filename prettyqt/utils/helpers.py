@@ -57,7 +57,7 @@ def cut_off_str(obj, max_len: int) -> str:
 
 
 def get_color_percentage(
-    color_1: Tuple[int, int, int, int], color_2: Tuple[int, int, int, int], percent: int
+    color_1: Tuple[int, int, int, int], color_2: Tuple[int, int, int, int], percent: float
 ) -> Tuple[int, int, int, int]:
     """Get a color which is percent% interpolated between start and end.
 
@@ -84,12 +84,12 @@ def is_dark_mode() -> bool:
     if sys.platform.startswith("win"):
         from prettyqt import core
 
-        p = (
+        path = (
             "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\"
             "Themes\\Personalize"
         )
-        s = core.Settings(p, core.Settings.NativeFormat)
-        return s.value("AppsUseLightTheme") == 0
+        settings = core.Settings(path, core.Settings.NativeFormat)
+        return settings.value("AppsUseLightTheme") == 0
     elif sys.platform == "darwin":
         import darkdetect
 

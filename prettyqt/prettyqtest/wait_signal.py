@@ -320,7 +320,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
         self,
         timeout: int = 1000,
         raising: bool = True,
-        check_params_cbs=None,
+        check_params_cbs: Optional[List[Callable]] = None,
         order: Literal["none", "simple", "strict"] = "none",
     ):
         super().__init__(timeout, raising=raising)
