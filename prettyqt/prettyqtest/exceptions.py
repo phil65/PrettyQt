@@ -61,7 +61,7 @@ class _QtExceptionCaptureManager:
             self.finish()
             exceptions = self.exceptions
             self.exceptions = []
-            prefix = "%s ERROR: " % when
+            prefix = f"{when} ERROR: "
             msg = prefix + format_captured_exceptions(exceptions)
             del exceptions[:]  # Don't keep exceptions alive longer.
             pytest.fail(msg, pytrace=False)
@@ -90,13 +90,3 @@ def _is_exception_capture_enabled(item):
         "qt_no_exception_capture"
     )
     return not disabled
-
-
-class TimeoutError(Exception):
-    """Exception thrown by :class:`pytestqt.qtbot.QtBot` methods."""
-
-    pass
-
-
-# backward compatibility alias
-SignalTimeoutError = TimeoutError

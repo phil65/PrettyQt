@@ -6,7 +6,6 @@ from typing import Callable, Literal, Optional
 import weakref
 
 from prettyqt import widgets
-from prettyqt.prettyqtest.exceptions import SignalTimeoutError, TimeoutError
 from prettyqt.prettyqtest.wait_signal import (
     CallbackBlocker,
     CallbackCalledTwiceError,
@@ -144,9 +143,7 @@ class QtBot:
 
     """
 
-    SignalTimeoutError = SignalTimeoutError
     SignalEmittedError = SignalEmittedError
-    TimeoutError = TimeoutError
     CallbackCalledTwiceError = CallbackCalledTwiceError
 
     def __init__(self, request):

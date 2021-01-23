@@ -14,7 +14,6 @@ from typing import (
 )
 
 from prettyqt import core
-from prettyqt.prettyqtest.exceptions import TimeoutError
 from prettyqt.qt import QtCore
 
 
