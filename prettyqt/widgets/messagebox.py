@@ -124,6 +124,16 @@ class MessageBox(QtWidgets.QMessageBox):
             for b in buttons:
                 self.add_button(b)
 
+    def serialize_fields(self):
+        return dict(
+            icon=self.get_icon(),
+            detailed_text=self.detailedText(),
+            icon_pixmap=self.get_icon_pixmap(),
+            informative_text=self.informativeText(),
+            text=self.text(),
+            text_format=self.get_text_format(),
+        )
+
     @classmethod
     def message(
         cls,
