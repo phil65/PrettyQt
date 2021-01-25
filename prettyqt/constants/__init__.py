@@ -15,6 +15,7 @@ if prettyqt.qt.API != "pyqt6":
     DropAction = Qt.DropAction
     Modifier = Qt.KeyboardModifier
     Edge = Qt.Edge
+    ImageConversionFlag = Qt.ImageConversionFlags
 else:
     Alignment = Qt.Alignment  # type: ignore
     Orientation = Qt.Orientations  # type: ignore
@@ -22,6 +23,7 @@ else:
     DropAction = Qt.DropActions  # type: ignore
     Modifier = Qt.KeyboardModifiers  # type: ignore
     Edge = Qt.Edges  # type: ignore
+    ImageConversionFlag = Qt.ImageConversionFlag  # type: ignore
 
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
 USER_ROLE = Qt.ItemDataRole.UserRole
@@ -214,6 +216,13 @@ MatchFlagStr = Literal[
     "wrap",
     "recursive",
 ]
+
+ImageConversionFlagStr = Literal["auto", "color_only", "mono_only"]
+IMAGE_CONVERSION_FLAGS: bidict[ImageConversionFlagStr, Qt.ImageConversionFlag] = bidict(
+    auto=Qt.ImageConversionFlag.AutoColor,
+    color_only=Qt.ImageConversionFlag.ColorOnly,
+    mono_only=Qt.ImageConversionFlag.MonoOnly,
+)
 
 FilterModeStr = Literal["starts_with", "contains", "ends_with"]
 FILTER_MODES = mappers.FlagMap(
