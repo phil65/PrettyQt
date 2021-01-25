@@ -6,7 +6,7 @@ from prettyqt import gui
 from prettyqt.utils import types
 
 
-WINDOW_ICON_COLOR = gui.Color("darkcyan")
+WINDOW_ICON_COLOR = "darkcyan"
 
 
 def set_window_icon_color(color: types.ColorType):
