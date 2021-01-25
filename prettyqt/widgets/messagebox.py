@@ -181,6 +181,18 @@ class MessageBox(QtWidgets.QMessageBox):
         """
         return TEXT_FORMAT.inverse[self.textFormat()]
 
+    def set_escape_button(self, button: Union[ButtonStr, QtWidgets.QAbstractButton]):
+        if isinstance(button, QtWidgets.QAbstractButton):
+            self.setEscapeButton(button)
+        else:
+            self.setEscapeButton(BUTTONS[button])
+
+    def set_default_button(self, button: Union[ButtonStr, QtWidgets.QPushButton]):
+        if isinstance(button, QtWidgets.QPushButton):
+            self.setDefaultButton(button)
+        else:
+            self.setDefaultButton(BUTTONS[button])
+
 
 if __name__ == "__main__":
     app = widgets.app()
