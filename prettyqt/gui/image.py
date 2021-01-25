@@ -29,6 +29,16 @@ class Image(QtGui.QImage):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
+    @classmethod
+    def from_ndarray(cls, arr) -> Image:
+        import numpy as np
+
+        height, width, channel = arr.shape
+        if arr.dtype in {np.float32, np.float64}:
+            arr = (255 * arr).round()
+        arr = arr.astype(np.uint8)
+        return cls(arr.data, width, height, channel * width, cls.Format_RGB888)
+
 
 if __name__ == "__main__":
     image = Image()
