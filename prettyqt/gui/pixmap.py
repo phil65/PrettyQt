@@ -48,6 +48,10 @@ class Pixmap(QtGui.QPixmap):
         pixmap.loadFromData(QtCore.QByteArray(data))
         return pixmap
 
+    @classmethod
+    def from_image(cls, img: QtGui.QImage, flags) -> Pixmap:
+        return cls(cls.fromImage(img, flags))
+
     def get_size(self) -> core.Size:
         return core.Size(self.size())
 
@@ -66,7 +70,8 @@ class Pixmap(QtGui.QPixmap):
         with gui.Painter(px) as painter:
             painter.use_antialiasing()
             painter.setBrush(col)
-            painter.set_pen(color=gui.Color(15, 15, 15), width=1)
+            pen_color = gui.Color(15, 15, 15)
+            painter.set_pen(color=pen_color, width=1)
             painter.drawEllipse(px_size)
         return px
 
