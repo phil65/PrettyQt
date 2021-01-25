@@ -82,7 +82,7 @@ class MessageBox(QtWidgets.QMessageBox):
         text: str = "",
         informative_text: str = "",
         details: str = "",
-        buttons: Optional[list] = None,
+        buttons: Optional[List[ButtonStr]] = None,
         parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent)
