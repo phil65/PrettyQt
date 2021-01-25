@@ -35,7 +35,8 @@ class RegexInput(widgets.Widget):
             "Flags", icon="mdi.flag-variant-outline"
         )
         self.label_error = widgets.Label()
-        self.label_error.set_color("red")
+        error_color = self.get_palette().get_color("highlight")
+        self.label_error.set_color(error_color)
         self.box[0, 0:1] = self.lineedit
         if show_flags:
             self.box[0, 2] = self.tb_flags
