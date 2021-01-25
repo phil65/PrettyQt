@@ -93,6 +93,14 @@ class TabWidget(QtWidgets.QTabWidget):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
+    def update_tab_bar_visibility(self):
+        """Update visibility of the tabBar depending of the number of tabs.
+
+        0 or 1 tab -> tabBar hidden, 2+ tabs - >tabBar visible
+        need to be called explicitly, or be connected to tabInserted/tabRemoved
+        """
+        self.tabBar().setVisible(self.count() > 1)
+
     def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
         """Set size of the icons."""
         if isinstance(size, int):
