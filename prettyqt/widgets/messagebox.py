@@ -63,6 +63,32 @@ ButtonStr = Literal[
     "ignore",
 ]
 
+BUTTON_ROLE = bidict(
+    invalid=QtWidgets.QMessageBox.InvalidRole,
+    accept=QtWidgets.QMessageBox.AcceptRole,
+    reject=QtWidgets.QMessageBox.RejectRole,
+    destructive=QtWidgets.QMessageBox.DestructiveRole,
+    action=QtWidgets.QMessageBox.ActionRole,
+    help=QtWidgets.QMessageBox.HelpRole,
+    yes=QtWidgets.QMessageBox.YesRole,
+    no=QtWidgets.QMessageBox.NoRole,
+    apply=QtWidgets.QMessageBox.ApplyRole,
+    reset=QtWidgets.QMessageBox.ResetRole,
+)
+
+ButtonRoleStr = Literal[
+    "invalid",
+    "accept",
+    "reject",
+    "destructive",
+    "action",
+    "help",
+    "yes",
+    "no",
+    "apply",
+    "reset",
+]
+
 TEXT_FORMAT = bidict(
     rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
 )
