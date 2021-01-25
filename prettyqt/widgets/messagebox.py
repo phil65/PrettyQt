@@ -4,7 +4,7 @@ import sys
 import traceback
 from typing import List, Literal, Optional, Union
 
-from prettyqt import core, iconprovider, widgets
+from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, types
 
@@ -128,6 +128,12 @@ class MessageBox(QtWidgets.QMessageBox):
 
     def show_blocking(self) -> ButtonStr:
         return BUTTONS.inverse[self.main_loop()]
+
+    def get_icon_pixmap(self) -> Optional[gui.Pixmap]:
+        pix = self.iconPixmap()
+        if pix.isNull():
+            return None
+        return gui.Pixmap(pix)
 
     def get_standard_buttons(self) -> List[ButtonStr]:
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
