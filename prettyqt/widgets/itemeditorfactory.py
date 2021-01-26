@@ -71,11 +71,17 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         cls.setDefaultFactory(factory)
 
     def register_editor(
-        self, editor_cls: Type[QtWidgets.QWidget], typ: Optional[int] = None
+        self,
+        editor_cls: Type[QtWidgets.QWidget],
+        typ: Optional[int] = None,
+        property_name: str = "",
     ):
         class EditorCreator(widgets.ItemEditorCreatorBase):
             def createWidget(self, parent: QtWidgets.QWidget) -> QtWidgets.QWidget:
                 return editor_cls(parent=parent)
+
+            def valuePropertyName(self) -> QtCore.QByteArray:
+                return QtCore.QByteArray(property_name.encode())
 
         if typ is None:
             typ = editor_cls.staticMetaObject.userProperty().userType()
