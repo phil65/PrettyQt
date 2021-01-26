@@ -1,3 +1,21 @@
+## v0.182.0 (2021-01-26)
+
+### Feat
+
+- **Image**: add invert_pixels method
+- **Color**: invert_alpha param for inverted method
+- **MetaObject**: type_filter kwarg for get_methods
+- **core**: add MetaProperty class
+- **MetaObject**: include_super param for get_ methods
+- **ItemEditorFactory**: add property_name kwarg to register_editor method
+- **TabWidget**: add update_tab_bar_visibility method
+- **Pixmap**: add from_image method
+- **MessageBox**: add some constants
+- **MessageBox**: add set_escape/default_button methods
+- **MessageBox**: add get_icon_pixmap method
+- **svg**: add SvgRenderer class
+- **Image**: add from_ndarray method
+
 ## v0.181.0 (2021-01-23)
 
 ### Feat
