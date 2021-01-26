@@ -138,10 +138,10 @@ class Color(QtGui.QColor):
     def as_qt(self) -> QtGui.QColor:
         return QtGui.QColor(self)
 
-    def inverted(self) -> Color:
+    def inverted(self, invert_alpha: bool = False) -> Color:
         return Color(
             255 - self.red(),
             255 - self.green(),
             255 - self.blue(),
-            self.alpha(),
+            255 - self.alpha() if invert_alpha else self.alpha(),
         )
