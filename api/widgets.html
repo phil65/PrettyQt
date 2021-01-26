@@ -3938,6 +3938,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.tabwidget.TabWidget.update_tab_bar_visibility" class="md-nav__link">
+    update_tab_bar_visibility()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7944,6 +7951,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.tabwidget.TabWidget.set_tab_shape" class="md-nav__link">
     set_tab_shape()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.tabwidget.TabWidget.update_tab_bar_visibility" class="md-nav__link">
+    update_tab_bar_visibility()
   </a>
   
 </li>
@@ -23435,6 +23449,32 @@ given index</p>
     <span class="k">if</span> <span class="n">shape</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TAB_SHAPES</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">shape</span><span class="p">,</span> <span class="n">TAB_SHAPES</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTabShape</span><span class="p">(</span><span class="n">TAB_SHAPES</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.widgets.tabwidget.TabWidget.update_tab_bar_visibility">
+
+<code class="highlight language-python"><span class="n">update_tab_bar_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+      </h4>
+<div class="doc doc-contents ">
+<p>Update visibility of the tabBar depending of the number of tabs.</p>
+<p>0 or 1 tab -&gt; tabBar hidden, 2+ tabs - &gt;tabBar visible
+need to be called explicitly, or be connected to tabInserted/tabRemoved</p>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/tabwidget.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">update_tab_bar_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">"""Update visibility of the tabBar depending of the number of tabs.</span>
+
+<span class="sd">    0 or 1 tab -&gt; tabBar hidden, 2+ tabs - &gt;tabBar visible</span>
+<span class="sd">    need to be called explicitly, or be connected to tabInserted/tabRemoved</span>
+<span class="sd">    """</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">tabBar</span><span class="p">()</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre>
 </div>
 </details>

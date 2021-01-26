@@ -478,6 +478,46 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#prettyqt.svg.svgrenderer" class="md-nav__link">
+    svgrenderer
+  </a>
+  
+    <nav class="md-nav" aria-label="svgrenderer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.svg.svgrenderer.SvgRenderer" class="md-nav__link">
+    SvgRenderer
+  </a>
+  
+    <nav class="md-nav" aria-label="SvgRenderer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.svg.svgrenderer.SvgRenderer.get_aspect_ratio_mode" class="md-nav__link">
+    get_aspect_ratio_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.svg.svgrenderer.SvgRenderer.set_aspect_ratio_mode" class="md-nav__link">
+    set_aspect_ratio_mode()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -615,6 +655,46 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#prettyqt.svg.svgrenderer" class="md-nav__link">
+    svgrenderer
+  </a>
+  
+    <nav class="md-nav" aria-label="svgrenderer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.svg.svgrenderer.SvgRenderer" class="md-nav__link">
+    SvgRenderer
+  </a>
+  
+    <nav class="md-nav" aria-label="SvgRenderer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.svg.svgrenderer.SvgRenderer.get_aspect_ratio_mode" class="md-nav__link">
+    get_aspect_ratio_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.svg.svgrenderer.SvgRenderer.set_aspect_ratio_mode" class="md-nav__link">
+    set_aspect_ratio_mode()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -636,21 +716,141 @@
 <p>svg module.</p>
 <p>contains QtSvg-based classes</p>
 <div class="doc doc-children">
+<div class="doc doc-object doc-module">
+<h2 class="doc doc-heading" id="prettyqt.svg.svgrenderer">
+
+        <code>svgrenderer</code>
 
 
 
+      </h2>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-class">
+<h3 class="doc doc-heading" id="prettyqt.svg.svgrenderer.SvgRenderer">
+
+        <code>SvgRenderer</code>
 
 
 
+      </h3>
+<div class="doc doc-contents ">
+<div class="doc doc-children">
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.svg.svgrenderer.SvgRenderer.get_aspect_ratio_mode">
+
+<code class="highlight language-python"><span class="n">get_aspect_ratio_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">AspectRatioModeStr</span></code>
 
 
+      </h4>
+<div class="doc doc-contents ">
+<p>Return current aspect ratio mode.</p>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>constants.AspectRatioModeStr</code></td>
+<td>
+<p>aspect ratio mode</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/svg/svgrenderer.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">get_aspect_ratio_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">AspectRatioModeStr</span><span class="p">:</span>
+    <span class="sd">"""Return current aspect ratio mode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        aspect ratio mode</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASPECT_RATIO_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">aspectRatioMode</span><span class="p">()]</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div class="doc doc-object doc-method">
+<h4 class="doc doc-heading" id="prettyqt.svg.svgrenderer.SvgRenderer.set_aspect_ratio_mode">
+
+<code class="highlight language-python"><span class="n">set_aspect_ratio_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AspectRatioModeStr</span><span class="p">)</span></code>
 
 
+      </h4>
+<div class="doc doc-contents ">
+<p>Set the aspect ratio mode.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td><code>constants.AspectRatioModeStr</code></td>
+<td>
+<p>aspect ratio mode</p>
+</td>
+<td><em>required</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>InvalidParamError</code></td>
+<td>
+<p>aspect ratio mode does not exist</p>
+</td>
+</tr>
+</tbody>
+</table>
+<details class="quote">
+          <summary>Source code in <code>prettyqt/svg/svgrenderer.py</code></summary>
+          <div class="highlight">
+<pre><span></span><code><span class="k">def</span> <span class="nf">set_aspect_ratio_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AspectRatioModeStr</span><span class="p">):</span>
+    <span class="sd">"""Set the aspect ratio mode.</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        mode: aspect ratio mode</span>
 
-
-
-  </div>
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: aspect ratio mode does not exist</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASPECT_RATIO_MODE</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASPECT_RATIO_MODE</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setAspectRatioMode</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">ASPECT_RATIO_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+</code></pre>
+</div>
+</details>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
                 
