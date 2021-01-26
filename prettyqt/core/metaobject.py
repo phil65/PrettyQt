@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Union
+from typing import List, Optional, Union
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -83,12 +83,20 @@ class MetaObject:
                     return enumerator
             raise KeyError(index)
 
-    def get_methods(self, include_super: bool = True) -> List[core.MetaMethod]:
+    def get_methods(
+        self,
+        include_super: bool = True,
+        type_filter: Optional[core.metamethod.MethodTypeStr] = None,
+    ) -> List[core.MetaMethod]:
         start = 0 if include_super else self.item.methodOffset()
-        return [
+        methods = [
             core.MetaMethod(self.item.method(i))
             for i in range(start, self.item.methodCount())
         ]
+        if type_filter is None:
+            return methods
+        else:
+            return [i for i in methods if i.get_method_type() == type_filter]
 
     def get_enums(self, include_super: bool = True) -> List[core.MetaEnum]:
         start = 0 if include_super else self.item.enumeratorOffset()
@@ -110,6 +118,14 @@ class MetaObject:
             for i in range(start, self.item.propertyCount())
         ]
 
+    def get_signals(self, include_super: bool = True) -> List[core.MetaMethod]:
+        return [
+            i
+            for i in self.get_methods(include_super=include_super)
+            if i.get_method_type() == "signal"
+        ]
+
 
 if __name__ == "__main__":
     metaobj = core.Object.get_metaobject()
+    print(metaobj.get_signals())
