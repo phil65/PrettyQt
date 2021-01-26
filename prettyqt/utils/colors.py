@@ -9,9 +9,9 @@ from prettyqt.utils import types
 WINDOW_ICON_COLOR = "darkcyan"
 
 
-def set_window_icon_color(color: types.ColorType):
+def set_window_icon_color(color: str):
     global WINDOW_ICON_COLOR
-    WINDOW_ICON_COLOR = get_color(color)
+    WINDOW_ICON_COLOR = color
 
 
 def get_color(color: types.ColorType) -> gui.Color:
