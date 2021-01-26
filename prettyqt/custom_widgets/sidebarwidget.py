@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from typing import Callable, Dict, Optional, Union
+from typing import Callable, Dict, Literal, Optional, Union
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import types
+
+
+AreaStr = Literal["top", "bottom"]
 
 
 class SidebarWidget(widgets.MainWindow):
@@ -15,7 +18,7 @@ class SidebarWidget(widgets.MainWindow):
         self,
         parent: Optional[QtWidgets.QWidget] = None,
         show_settings: bool = False,
-        main_layout: Union[str, QtWidgets.QLayout] = "vertical",
+        main_layout: Union[widgets.widget.LayoutStr, QtWidgets.QLayout] = "vertical",
     ):
         super().__init__(parent=parent)
         self.button_map: Dict[QtWidgets.QWidget, QtWidgets.QToolButton] = {}
@@ -61,7 +64,7 @@ class SidebarWidget(widgets.MainWindow):
         icon: types.IconType = None,
         show: bool = False,
         shortcut: Optional[str] = None,
-        area: str = "top",
+        area: AreaStr = "top",
     ):
         self.area.box.add(item)
         # button = widgets.ToolButton()
@@ -137,7 +140,7 @@ class SidebarWidget(widgets.MainWindow):
     def add_spacer(self) -> widgets.Widget:
         return self.sidebar.add_spacer()
 
-    def add_separator(self, text: Optional[str] = None, area: str = "top"):
+    def add_separator(self, text: Optional[str] = None, area: AreaStr = "top"):
         if area == "top":
             self.sidebar.add_separator(text, before=self.spacer_action)
         else:
@@ -150,7 +153,7 @@ class SidebarWidget(widgets.MainWindow):
         callback: Callable = None,
         checkable: bool = False,
         shortcut: Optional[str] = None,
-        area: str = "top",
+        area: AreaStr = "top",
     ):
         # act = self.sidebar.add_action(label=title,
         #                                      icon=icon,
