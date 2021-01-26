@@ -83,15 +83,18 @@ class MetaObject:
                     return enumerator
             raise KeyError(index)
 
-    def get_methods(self) -> List[core.MetaMethod]:
+    def get_methods(self, include_super: bool = True) -> List[core.MetaMethod]:
+        start = 0 if include_super else self.item.methodOffset()
         return [
-            core.MetaMethod(self.item.method(i)) for i in range(self.item.methodCount())
+            core.MetaMethod(self.item.method(i))
+            for i in range(start, self.item.methodCount())
         ]
 
-    def get_enums(self) -> List[core.MetaEnum]:
+    def get_enums(self, include_super: bool = True) -> List[core.MetaEnum]:
+        start = 0 if include_super else self.item.enumeratorOffset()
         return [
             core.MetaEnum(self.item.enumerator(i))
-            for i in range(self.item.enumeratorCount())
+            for i in range(start, self.item.enumeratorCount())
         ]
 
     def get_constructors(self) -> List[core.MetaMethod]:
