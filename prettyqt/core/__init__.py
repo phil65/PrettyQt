@@ -35,6 +35,7 @@ from prettyqt.qt.QtCore import (  # type: ignore
 )
 from .metaenum import MetaEnum
 from .metamethod import MetaMethod
+from .metaproperty import MetaProperty
 from .metaobject import MetaObject
 from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
@@ -180,6 +181,7 @@ __all__ = [
     "DynamicPropertyChangeEvent",
     "MetaEnum",
     "MetaMethod",
+    "MetaProperty",
     "MetaObject",
     "Object",
     "CryptographicHash",

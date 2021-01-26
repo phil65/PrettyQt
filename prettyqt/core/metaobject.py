@@ -103,6 +103,13 @@ class MetaObject:
             for i in range(self.item.constructorCount())
         ]
 
+    def get_properties(self, include_super: bool = True) -> List[core.MetaProperty]:
+        start = 0 if include_super else self.item.propertyOffset()
+        return [
+            core.MetaProperty(self.item.property(i))
+            for i in range(start, self.item.propertyCount())
+        ]
+
 
 if __name__ == "__main__":
     metaobj = core.Object.get_metaobject()
