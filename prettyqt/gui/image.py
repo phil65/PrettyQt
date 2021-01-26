@@ -39,6 +39,9 @@ class Image(QtGui.QImage):
         arr = arr.astype(np.uint8)
         return cls(arr.data, width, height, channel * width, cls.Format_RGB888)
 
+    def invert_pixels(self, invert_alpha: bool = False):
+        self.invertPixels(self.InvertRgba if invert_alpha else self.InvertRgb)
+
 
 if __name__ == "__main__":
     image = Image()
