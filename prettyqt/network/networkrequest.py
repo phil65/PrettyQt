@@ -7,6 +7,62 @@ from prettyqt.qt import QtCore, QtNetwork
 from prettyqt.utils import InvalidParamError, bidict
 
 
+Req = QtNetwork.QNetworkRequest
+
+ATTRIBUTE = bidict(
+    http_status_code=Req.HttpStatusCodeAttribute,
+    http_reason_phrase=Req.HttpReasonPhraseAttribute,
+    redirection_target=Req.RedirectionTargetAttribute,
+    connection_encrypted=Req.ConnectionEncryptedAttribute,
+    cache_load_control=Req.CacheLoadControlAttribute,
+    cache_save_control=Req.CacheSaveControlAttribute,
+    source_is_from_cache=Req.SourceIsFromCacheAttribute,
+    do_not_buffer_upload_data=Req.DoNotBufferUploadDataAttribute,
+    http_pipelining_allowed=Req.HttpPipeliningAllowedAttribute,
+    http_pipelining_was_used=Req.HttpPipeliningWasUsedAttribute,
+    custom_verb=Req.CustomVerbAttribute,
+    cookie_load_control=Req.CookieLoadControlAttribute,
+    cookie_save_control=Req.CookieSaveControlAttribute,
+    authentication_reuse=Req.AuthenticationReuseAttribute,
+    background_request=Req.BackgroundRequestAttribute,
+    http2_allowed=Req.Http2AllowedAttribute,
+    http2_was_used=Req.Http2WasUsedAttribute,
+    emit_all_upload_progress_signals=Req.EmitAllUploadProgressSignalsAttribute,
+    original_content_length=Req.OriginalContentLengthAttribute,
+    redirect_policy=Req.RedirectPolicyAttribute,
+    http2_direct=Req.Http2DirectAttribute,
+    auto_delete_reply_on_finish=Req.AutoDeleteReplyOnFinishAttribute,
+    user=Req.User,
+    user_max=Req.UserMax,
+)
+
+AttributeStr = Literal[
+    "http_status_code",
+    "http_reason_phrase",
+    "redirection_target",
+    "connection_encrypted",
+    "cache_load_control",
+    "cache_save_control",
+    "source_is_from_cache",
+    "do_not_buffer_upload_data",
+    "http_pipelining_allowed",
+    "http_pipelining_was_used",
+    "custom_verb",
+    "cookie_load_control",
+    "cookie_save_control",
+    "authentication_reuse",
+    "background_request",
+    "http2_allowed",
+    "http2_was_used",
+    "emit_all_upload_progress_signals",
+    "original_content_length",
+    "redirect_policy",
+    "http2_direct",
+    "auto_delete_reply_on_finish",
+    "user",
+    "user_max",
+]
+
 KNOWN_HEADER = bidict(
     content_disposition=QtNetwork.QNetworkRequest.ContentDispositionHeader,
     content_type=QtNetwork.QNetworkRequest.ContentTypeHeader,
