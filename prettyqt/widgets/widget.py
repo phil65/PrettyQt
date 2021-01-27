@@ -323,9 +323,10 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     @contextlib.contextmanager
     def updates_off(self) -> Iterator[None]:
+        updates = self.updatesEnabled()
         self.setUpdatesEnabled(False)
         yield None
-        self.setUpdatesEnabled(True)
+        self.setUpdatesEnabled(updates)
 
     @contextlib.contextmanager
     def edit_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:

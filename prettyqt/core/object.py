@@ -43,9 +43,9 @@ class Object(QtCore.QObject):
 
     @contextlib.contextmanager
     def block_signals(self):
-        self.blockSignals(True)
+        blocked = self.blockSignals(True)
         yield None
-        self.blockSignals(False)
+        self.blockSignals(blocked)
 
     def to_json(self):
         dct = self.__getstate__()
