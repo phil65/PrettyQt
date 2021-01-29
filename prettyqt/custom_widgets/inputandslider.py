@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional
+from typing import Optional, Tuple
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
@@ -11,7 +11,9 @@ class InputAndSlider(widgets.Widget):
     value_changed = core.Signal(int)
 
     def __init__(
-        self, bounds: Optional[tuple] = None, parent: Optional[QtWidgets.QWidget] = None
+        self,
+        bounds: Optional[Tuple[int, int]] = None,
+        parent: Optional[QtWidgets.QWidget] = None,
     ):
         super().__init__(parent)
         self.path = None

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import functools
 import pathlib
-from typing import Any, Callable, Dict, Iterable, Mapping, Optional, Union
+from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Union
 
 from prettyqt import custom_validators, custom_widgets, gui, widgets
 from prettyqt.utils import types
@@ -227,7 +227,7 @@ class IntList(DataItem):
     def __init__(
         self,
         label: str,
-        value: Optional[list] = None,
+        value: Optional[List[int]] = None,
         allow_single: bool = False,
         **kwargs,
     ):
@@ -245,7 +245,7 @@ class FloatList(DataItem):
     def __init__(
         self,
         label: str,
-        value: Optional[list] = None,
+        value: Optional[List[float]] = None,
         allow_single: bool = False,
         **kwargs,
     ):

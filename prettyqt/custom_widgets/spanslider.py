@@ -358,7 +358,7 @@ class SpanSlider(widgets.Slider):
     def _setup_painter(
         self,
         painter: widgets.StylePainter,
-        orientation: str,
+        orientation: Literal["horizontal", "vertical"],
         x1: int,
         y1: int,
         x2: int,
