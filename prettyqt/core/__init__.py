@@ -33,6 +33,8 @@ from prettyqt.qt.QtCore import (  # type: ignore
     QtSystemMsg as SystemMsg,
     QtWarningMsg as WarningMsg,
 )
+from .semaphore import Semaphore
+from .mutex import Mutex
 from .metaenum import MetaEnum
 from .metamethod import MetaMethod
 from .metaproperty import MetaProperty
@@ -305,4 +307,6 @@ __all__ = [
     "MsgType",
     "SystemMsg",
     "WarningMsg",
+    "Semaphore",
+    "Mutex",
 ]
