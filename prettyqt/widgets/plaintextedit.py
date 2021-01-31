@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import contextlib
-from typing import Iterator, Literal, Optional
+from typing import Iterator, Literal, Optional, Tuple
 
 from deprecated import deprecated
 
@@ -70,6 +70,31 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def allow_wheel_zoom(self, do_zoom: bool = True):
         self._allow_wheel_zoom = do_zoom
+
+    def goto_line(self, line_no: int):
+        doc = self.document()
+        lines = doc.blockCount()
+        assert 1 <= line_no <= lines
+        pos = doc.findBlockByLineNumber(line_no - 1).position()
+        with self.current_cursor() as text_cursor:
+            text_cursor.setPosition(pos)
+
+    def get_selected_text(self) -> str:
+        if self.textCursor().hasSelection():
+            return self.textCursor().selectedText()
+        else:
+            return ""
+
+    def get_current_line(self) -> int:
+        return self.textCursor().blockNumber()
+
+    def get_selected_rows(self) -> Tuple[int, int]:
+        start = self.textCursor().selectionStart()
+        end = self.textCursor().selectionEnd()
+        start_block_id = self.document().findBlock(start).blockNumber()
+        end_block_id = self.document().findBlock(end).blockNumber()
+
+        return (start_block_id, end_block_id)
 
     @contextlib.contextmanager
     def create_cursor(self) -> Iterator[gui.TextCursor]:
