@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import sys
 import traceback
-from typing import List, Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -108,8 +108,8 @@ class MessageBox(QtWidgets.QMessageBox):
         text: str = "",
         informative_text: str = "",
         details: str = "",
-        buttons: Optional[List[ButtonStr]] = None,
-        parent: Optional[QtWidgets.QWidget] = None,
+        buttons: list[ButtonStr] | None = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)
         self.set_icon(icon)
@@ -140,7 +140,7 @@ class MessageBox(QtWidgets.QMessageBox):
         text: str,
         title: str = "",
         icon: types.IconType = None,
-        detail_text: Optional[str] = None,
+        detail_text: str | None = None,
     ) -> str:
         m = cls("none", title, text)
         m.set_icon(icon)
@@ -155,7 +155,7 @@ class MessageBox(QtWidgets.QMessageBox):
         dlg = cls(text=str(value), title=str(exctype), icon="critical", details=tb)
         dlg.show_blocking()
 
-    def set_icon(self, icon: Union[types.IconType, IconStr]):
+    def set_icon(self, icon: types.IconType | IconStr):
         if icon in ICONS:
             self.setIcon(ICONS[icon])
         else:
@@ -165,13 +165,13 @@ class MessageBox(QtWidgets.QMessageBox):
     def show_blocking(self) -> ButtonStr:
         return BUTTONS.inverse[self.main_loop()]
 
-    def get_icon_pixmap(self) -> Optional[gui.Pixmap]:
+    def get_icon_pixmap(self) -> gui.Pixmap | None:
         pix = self.iconPixmap()
         if pix.isNull():
             return None
         return gui.Pixmap(pix)
 
-    def get_standard_buttons(self) -> List[ButtonStr]:
+    def get_standard_buttons(self) -> list[ButtonStr]:
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
 
     def add_button(self, button: ButtonStr) -> QtWidgets.QPushButton:
@@ -217,13 +217,13 @@ class MessageBox(QtWidgets.QMessageBox):
         """
         return TEXT_FORMAT.inverse[self.textFormat()]
 
-    def set_escape_button(self, button: Union[ButtonStr, QtWidgets.QAbstractButton]):
+    def set_escape_button(self, button: ButtonStr | QtWidgets.QAbstractButton):
         if isinstance(button, QtWidgets.QAbstractButton):
             self.setEscapeButton(button)
         else:
             self.setEscapeButton(BUTTONS[button])
 
-    def set_default_button(self, button: Union[ButtonStr, QtWidgets.QPushButton]):
+    def set_default_button(self, button: ButtonStr | QtWidgets.QPushButton):
         if isinstance(button, QtWidgets.QPushButton):
             self.setDefaultButton(button)
         else:

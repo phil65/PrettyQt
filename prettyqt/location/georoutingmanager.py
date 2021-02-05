@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from prettyqt import core, location
 from prettyqt.qt import QtLocation
 
@@ -21,7 +19,7 @@ class GeoRoutingManager:
 
     def get_supported_feature_types(
         self,
-    ) -> List[location.georouterequest.FeatureTypeStr]:
+    ) -> list[location.georouterequest.FeatureTypeStr]:
         return [
             k
             for k, v in location.georouterequest.FEATURE_TYPES.items()
@@ -30,7 +28,7 @@ class GeoRoutingManager:
 
     def get_supported_feature_weights(
         self,
-    ) -> List[location.georouterequest.FeatureWeightStr]:
+    ) -> list[location.georouterequest.FeatureWeightStr]:
         return [
             k
             for k, v in location.georouterequest.FEATURE_WEIGHTS.items()
@@ -39,7 +37,7 @@ class GeoRoutingManager:
 
     def get_supported_maneuver_details(
         self,
-    ) -> List[location.georouterequest.ManeuverDetailStr]:
+    ) -> list[location.georouterequest.ManeuverDetailStr]:
         return [
             k
             for k, v in location.georouterequest.MANEUVER_DETAIL.items()
@@ -48,21 +46,21 @@ class GeoRoutingManager:
 
     def get_supported_route_optimizations(
         self,
-    ) -> List[location.georouterequest.RouteOptimizationStr]:
+    ) -> list[location.georouterequest.RouteOptimizationStr]:
         return location.georouterequest.ROUTE_OPTIMIZATION.get_list(
             self.item.supportedRouteOptimizations()
         )
 
     def get_supported_segment_details(
         self,
-    ) -> List[location.georouterequest.SegmentDetailStr]:
+    ) -> list[location.georouterequest.SegmentDetailStr]:
         return [
             k
             for k, v in location.georouterequest.SEGMENT_DETAIL.items()
             if v & self.item.supportedSegmentDetails()
         ]
 
-    def get_supported_travel_modes(self) -> List[location.georouterequest.TravelModeStr]:
+    def get_supported_travel_modes(self) -> list[location.georouterequest.TravelModeStr]:
         return [
             k
             for k, v in location.georouterequest.TRAVEL_MODE.items()

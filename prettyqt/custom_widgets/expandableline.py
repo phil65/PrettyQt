@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
@@ -11,7 +9,7 @@ class ExpandableLine(widgets.Widget):
         self,
         title: str = "",
         animation_duration: int = 300,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
 
@@ -64,9 +62,9 @@ class ExpandableLine(widgets.Widget):
 
     def set_layout(
         self,
-        layout: Union[str, QtWidgets.QLayout, None],
-        margin: Optional[int] = None,
-        spacing: Optional[int] = None,
+        layout: str | QtWidgets.QLayout | None,
+        margin: int | None = None,
+        spacing: int | None = None,
     ) -> None:
         self.content_area.destroy()
         self.content_area.set_layout(layout, margin=margin, spacing=spacing)

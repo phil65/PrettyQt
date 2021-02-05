@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Tuple, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
@@ -35,7 +35,7 @@ class TextLine(QtGui.QTextLine):
     def get_position(self) -> core.Point:
         return core.Point(self.position())
 
-    def set_position(self, point: Union[QtCore.QPoint, Tuple[int, int]]):
+    def set_position(self, point: QtCore.QPoint | tuple[int, int]):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.setPosition(point)

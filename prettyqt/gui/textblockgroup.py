@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List
+from typing import Iterator
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
@@ -16,7 +16,7 @@ class TextBlockGroup(QtGui.QTextBlockGroup):
     def __iter__(self) -> Iterator[gui.TextBlock]:
         return iter(gui.TextBlock(i) for i in self.blockList())
 
-    def get_blocklist(self) -> List[gui.TextBlock]:
+    def get_blocklist(self) -> list[gui.TextBlock]:
         return [gui.TextBlock(i) for i in self.blockList()]
 
 

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
@@ -17,7 +15,7 @@ SYSTEM = bidict(
 
 
 class Calendar(QtCore.QCalendar):
-    def __init__(self, system: Union[str, QtCore.QCalendar.System] = "gregorian"):
+    def __init__(self, system: str | QtCore.QCalendar.System = "gregorian"):
         if isinstance(system, QtCore.QCalendar.System):
             typ = system
         else:

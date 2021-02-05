@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Optional
+from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -12,7 +12,7 @@ SideStr = Literal["left", "top", "right", "bottom"]
 class SideGrip(widgets.Widget):
     def __init__(
         self,
-        parent: Optional[QtWidgets.QWidget],
+        parent: QtWidgets.QWidget | None,
         edge: SideStr,
     ):
         super().__init__(parent=parent)
@@ -70,10 +70,10 @@ class SideGrip(widgets.Widget):
 class FramelessWindow(widgets.MainWindow):
     _grip_size = 4
 
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent=parent)
         self.set_flags(frameless=True)
-        sides: List[SideStr] = ["left", "top", "right", "bottom"]
+        sides: list[SideStr] = ["left", "top", "right", "bottom"]
         self.side_grips = [SideGrip(self, side) for side in sides]
         # corner grips should be "on top" of everything, otherwise the side grips
         # will take precedence on mouse events, so we are adding them *after*;

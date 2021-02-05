@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Dict, Literal, Optional, Union
+from typing import Callable, Literal
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -16,13 +16,13 @@ class SidebarWidget(widgets.MainWindow):
 
     def __init__(
         self,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
         show_settings: bool = False,
-        main_layout: Union[widgets.widget.LayoutStr, QtWidgets.QLayout] = "vertical",
+        main_layout: widgets.widget.LayoutStr | QtWidgets.QLayout = "vertical",
     ):
         super().__init__(parent=parent)
-        self.button_map: Dict[QtWidgets.QWidget, QtWidgets.QToolButton] = {}
-        self.icon_map: Dict[QtWidgets.QWidget, gui.Icon] = {}
+        self.button_map: dict[QtWidgets.QWidget, QtWidgets.QToolButton] = {}
+        self.icon_map: dict[QtWidgets.QWidget, gui.Icon] = {}
         self.sidebar = widgets.ToolBar()
         self.sidebar.set_id("SidebarWidget")
         self.sidebar.set_title("Sidebar")
@@ -63,7 +63,7 @@ class SidebarWidget(widgets.MainWindow):
         title: str,
         icon: types.IconType = None,
         show: bool = False,
-        shortcut: Optional[str] = None,
+        shortcut: str | None = None,
         area: AreaStr = "top",
     ):
         self.area.box.add(item)
@@ -102,7 +102,7 @@ class SidebarWidget(widgets.MainWindow):
             self.area.box.setCurrentWidget(item)
 
     def set_marker(
-        self, item: Union[str, int, widgets.Widget], color: types.ColorType = "red"
+        self, item: str | int | widgets.Widget, color: types.ColorType = "red"
     ):
         widget = self._get_widget(item)
         if widget == self._get_current_widget():
@@ -115,7 +115,7 @@ class SidebarWidget(widgets.MainWindow):
         icon = gui.Icon(px)
         self.button_map[widget].set_icon(icon)
 
-    def _get_widget(self, item: Union[str, int, widgets.Widget]):
+    def _get_widget(self, item: str | int | widgets.Widget):
         if isinstance(item, int):
             return self.area.box[item]
         if isinstance(item, str):
@@ -130,7 +130,7 @@ class SidebarWidget(widgets.MainWindow):
                 return k
         raise RuntimeError("no page activated.")
 
-    def set_tab(self, item: Union[str, int, widgets.Widget]):
+    def set_tab(self, item: str | int | widgets.Widget):
         widget = self._get_widget(item)
         current = self.area.box.currentWidget()
         self.button_map[current].setChecked(False)
@@ -140,7 +140,7 @@ class SidebarWidget(widgets.MainWindow):
     def add_spacer(self) -> widgets.Widget:
         return self.sidebar.add_spacer()
 
-    def add_separator(self, text: Optional[str] = None, area: AreaStr = "top"):
+    def add_separator(self, text: str | None = None, area: AreaStr = "top"):
         if area == "top":
             self.sidebar.add_separator(text, before=self.spacer_action)
         else:
@@ -152,7 +152,7 @@ class SidebarWidget(widgets.MainWindow):
         icon: types.IconType = None,
         callback: Callable = None,
         checkable: bool = False,
-        shortcut: Optional[str] = None,
+        shortcut: str | None = None,
         area: AreaStr = "top",
     ):
         # act = self.sidebar.add_action(label=title,

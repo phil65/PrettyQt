@@ -11,7 +11,7 @@ methods returning instances of ``QIcon``.
 from __future__ import annotations
 
 # Standard library imports
-from typing import Any, Dict, List
+from typing import Any
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -109,7 +109,7 @@ class CharIconPainter:
         rect,
         mode,
         state,
-        options: List[Dict[str, Any]],
+        options: list[dict[str, Any]],
     ):
         color_str, char = COLOR_OPTIONS[state][mode]
         for opt in options:
@@ -223,7 +223,7 @@ class IconicFont(core.Object):
 
     def _parse_options(
         self, specific_options: dict, general_options: dict, name: str
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         options = dict(_default_options, **general_options)
         options.update(specific_options)
 

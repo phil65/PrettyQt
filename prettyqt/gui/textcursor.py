@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import contextlib
-from typing import Literal, Tuple, Union
+from typing import Literal
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
@@ -94,20 +94,20 @@ class TextCursor(QtGui.QTextCursor):
         """
         self.setPosition(pos, MOVE_MODE[mode])
 
-    def select(self, selection: Union[SelectionTypeStr, QtGui.QTextCursor.SelectionType]):
+    def select(self, selection: SelectionTypeStr | QtGui.QTextCursor.SelectionType):
         if isinstance(selection, QtGui.QTextCursor.SelectionType):
             sel = selection
         else:
             sel = SELECTION_TYPE[selection]
         super().select(sel)
 
-    def span(self) -> Tuple[int, int]:
+    def span(self) -> tuple[int, int]:
         return (self.anchor(), self.position())
 
     def select_text(
         self,
-        start_pos: Union[int, MoveOperationStr],
-        end_pos: Union[int, MoveOperationStr],
+        start_pos: int | MoveOperationStr,
+        end_pos: int | MoveOperationStr,
     ) -> str:
         """Select text from start position to end position.
 
@@ -130,7 +130,7 @@ class TextCursor(QtGui.QTextCursor):
     def replace_text(
         self,
         start_pos: int,
-        end_pos: Union[MoveOperationStr, int],
+        end_pos: MoveOperationStr | int,
         to_replace: str,
     ):
         self.set_position(start_pos)

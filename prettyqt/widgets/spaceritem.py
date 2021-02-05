@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
@@ -14,8 +12,8 @@ class SpacerItem(QtWidgets.QSpacerItem):
         self,
         w: int,
         h: int,
-        h_policy: Union[QtWidgets.QSizePolicy.Policy, widgets.sizepolicy.SizePolicyStr],
-        v_policy: Union[QtWidgets.QSizePolicy.Policy, widgets.sizepolicy.SizePolicyStr],
+        h_policy: QtWidgets.QSizePolicy.Policy | widgets.sizepolicy.SizePolicyStr,
+        v_policy: QtWidgets.QSizePolicy.Policy | widgets.sizepolicy.SizePolicyStr,
     ):
         if isinstance(h_policy, QtWidgets.QSizePolicy.Policy):
             h_pol = h_policy

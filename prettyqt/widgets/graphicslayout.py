@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List
+from typing import Iterator
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
@@ -31,7 +31,7 @@ class GraphicsLayout(QtWidgets.QGraphicsLayout):
         # for PySide2
         return self.count()
 
-    def get_children(self) -> List[QtWidgets.QGraphicsItem]:
+    def get_children(self) -> list[QtWidgets.QGraphicsItem]:
         return list(self)
 
     def set_margin(self, margin: int):

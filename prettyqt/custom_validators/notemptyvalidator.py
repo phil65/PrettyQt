@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Tuple
-
 from prettyqt import gui
 from prettyqt.qt import QtGui
 
@@ -12,7 +10,7 @@ class NotEmptyValidator(gui.Validator):
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> Tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[QtGui.QValidator.State, str, int]:
         if text == "":
             return (self.Intermediate, text, pos)
         return self.Acceptable, text, pos

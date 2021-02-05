@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -20,7 +20,7 @@ MatchModeStr = Literal["default", "extension", "content"]
 class MimeDatabase(QtCore.QMimeDatabase):
     def get_mime_type_for_file(
         self,
-        path: Union[str, os.PathLike, QtCore.QFileInfo],
+        path: str | os.PathLike | QtCore.QFileInfo,
         match_mode: MatchModeStr = "default",
     ) -> core.MimeType:
         if match_mode not in MATCH_MODE:

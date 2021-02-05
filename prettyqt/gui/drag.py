@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError
@@ -23,7 +21,7 @@ class Drag(QtGui.QDrag):
         px = self.dragCursor(constants.DROP_ACTION[action])
         return gui.Pixmap(px)
 
-    def get_supported_actions(self) -> List[constants.DropActionStr]:
+    def get_supported_actions(self) -> list[constants.DropActionStr]:
         return [
             k for k, v in constants.DROP_ACTION.items() if v & self.supportedActions()
         ]

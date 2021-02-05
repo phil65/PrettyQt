@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Iterator, Tuple, Union
+from typing import Callable, Iterator
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -17,7 +17,7 @@ class VariantAnimation(QtCore.QVariantAnimation):
     def __setitem__(self, key: float, value: types.Variant):
         self.setKeyValueAt(key, value)
 
-    def __iter__(self) -> Iterator[Tuple[float, types.Variant]]:
+    def __iter__(self) -> Iterator[tuple[float, types.Variant]]:
         return iter(self.keyValues())
 
     def serialize_fields(self):
@@ -28,7 +28,7 @@ class VariantAnimation(QtCore.QVariantAnimation):
         )
 
     def set_easing(
-        self, easing_type: Union[core.easingcurve.TypeStr, Callable[[float], float]]
+        self, easing_type: core.easingcurve.TypeStr | Callable[[float], float]
     ):
         curve = core.EasingCurve()
         if isinstance(easing_type, str):
@@ -37,7 +37,7 @@ class VariantAnimation(QtCore.QVariantAnimation):
             curve.set_custom_type(easing_type)
         self.setEasingCurve(curve)
 
-    def get_easing(self) -> Union[core.easingcurve.TypeStr, Callable[[float], float]]:
+    def get_easing(self) -> core.easingcurve.TypeStr | Callable[[float], float]:
         curve = core.EasingCurve(self.easingCurve())
         typ = curve.get_type()
         if typ == "custom":

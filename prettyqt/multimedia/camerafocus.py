@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core, multimedia
 from prettyqt.qt import QtMultimedia
@@ -93,7 +93,7 @@ class CameraFocus(core.Object):
             raise InvalidParamError(mode, FOCUS_POINT_MODE)
         return self.item.isFocusPointModeSupported(FOCUS_POINT_MODE[mode])
 
-    def get_focus_zones(self) -> List[multimedia.CameraFocusZone]:
+    def get_focus_zones(self) -> list[multimedia.CameraFocusZone]:
         return [multimedia.CameraFocusZone(i) for i in self.item.focusZones()]
 
 

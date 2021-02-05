@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import location, positioning
 from prettyqt.qt import QtLocation, QtPositioning
@@ -25,7 +25,7 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
         """
         return location.VISIBILITY.inverse[self.visibilityScope()]
 
-    def get_categories(self) -> List[location.PlaceCategory]:
+    def get_categories(self) -> list[location.PlaceCategory]:
         return [location.PlaceCategory(i) for i in self.categories()]
 
     def get_search_area(self) -> positioning.GeoShape:

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore
 
@@ -10,9 +8,7 @@ class RegexMatchesModel(core.AbstractTableModel):
 
     HEADER = ["Start", "End", "Value", "Groups"]
 
-    def __init__(
-        self, matches: Optional[list] = None, parent: Optional[QtCore.QObject] = None
-    ):
+    def __init__(self, matches: list | None = None, parent: QtCore.QObject | None = None):
         super().__init__(parent=parent)
         self.matches = matches if matches else list()
 
@@ -21,7 +17,7 @@ class RegexMatchesModel(core.AbstractTableModel):
 
     def headerData(  # type: ignore
         self, section: int, orientation: QtCore.Qt.Orientation, role: int
-    ) -> Optional[str]:
+    ) -> str | None:
         if role == constants.DISPLAY_ROLE:
             if orientation == constants.HORIZONTAL:
                 return self.HEADER[section]

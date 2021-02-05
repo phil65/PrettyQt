@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterable, Optional, Tuple, Union
+from typing import Iterable
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
@@ -12,8 +12,8 @@ QtWidgets.QGraphicsGridLayout.__bases__ = (widgets.GraphicsLayout,)
 
 class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
     def __getitem__(
-        self, idx: Union[Tuple[int, int], int]
-    ) -> Optional[QtWidgets.QGraphicsLayoutItem]:
+        self, idx: tuple[int, int] | int
+    ) -> QtWidgets.QGraphicsLayoutItem | None:
         if isinstance(idx, tuple):
             return self.itemAt(*idx)
         else:
@@ -21,7 +21,7 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
 
     def __setitem__(
         self,
-        idx: Tuple[Union[int, slice], Union[int, slice]],
+        idx: tuple[int | slice, int | slice],
         value: QtWidgets.QGraphicsLayoutItem,
     ):
         row, col = idx
@@ -55,9 +55,7 @@ class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
 
     def __add__(
         self,
-        other: Union[
-            Iterable[QtWidgets.QGraphicsLayoutItem], QtWidgets.QGraphicsLayoutItem
-        ],
+        other: (Iterable[QtWidgets.QGraphicsLayoutItem] | QtWidgets.QGraphicsLayoutItem),
     ):
         if isinstance(other, Iterable):
             for i, control in enumerate(other):

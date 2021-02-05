@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Iterator, Literal
+from typing import Any, Iterator, Literal
 
 from prettyqt.qt import QtMultimedia
 from prettyqt.utils import InvalidParamError, bidict
@@ -35,7 +35,7 @@ class Settings:
     channel_count: int
     codec: str
     encoding_mode: EncodingModeStr
-    encoding_options: Dict[str, Any]
+    encoding_options: dict[str, Any]
     quality: QualityStr
     sample_rate: int
 
@@ -93,7 +93,7 @@ class AudioEncoderSettings(QtMultimedia.QAudioEncoderSettings):
             sample_rate=self.sampleRate(),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self.to_dataclass())
 
     @classmethod
@@ -109,6 +109,6 @@ class AudioEncoderSettings(QtMultimedia.QAudioEncoderSettings):
         return instance
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> AudioEncoderSettings:
+    def from_dict(cls, data: dict[str, Any]) -> AudioEncoderSettings:
         settings = Settings(**data)
         return cls.from_dataclass(settings)

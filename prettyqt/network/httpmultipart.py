@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
@@ -37,7 +37,7 @@ class HttpMultiPart(QtNetwork.QHttpMultiPart):
             raise InvalidParamError(typ, CONTENT_TYPES)
         self.setContentType(CONTENT_TYPES[typ])
 
-    def set_boundary(self, boundary: Union[str, bytes, QtCore.QByteArray]):
+    def set_boundary(self, boundary: str | bytes | QtCore.QByteArray):
         if isinstance(boundary, str):
             boundary = boundary.encode()
         if isinstance(boundary, bytes):

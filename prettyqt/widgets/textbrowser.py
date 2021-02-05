@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import List, Union
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
@@ -50,7 +49,7 @@ class TextBrowser(QtWidgets.QTextBrowser):
     #     event.accept()
     #     self.show_markdown_file(self.filePath)
 
-    def set_markdown_file(self, file_path: Union[str, os.PathLike]):
+    def set_markdown_file(self, file_path: str | os.PathLike):
         file_path = pathlib.Path(file_path)
         with file_path.open() as f:
             file_content = f.read()
@@ -59,7 +58,7 @@ class TextBrowser(QtWidgets.QTextBrowser):
     def set_markdown(self, source: str):
         self.setMarkdown(source)
 
-    def set_rst_file(self, file_path: Union[str, os.PathLike]):
+    def set_rst_file(self, file_path: str | os.PathLike):
         file_path = pathlib.Path(file_path)
         with file_path.open() as f:
             file_content = f.read()
@@ -71,10 +70,10 @@ class TextBrowser(QtWidgets.QTextBrowser):
         html = docutils.core.publish_string(source, writer_name="html")
         self.setHtml(str(html))
 
-    def get_search_paths(self) -> List[pathlib.Path]:
+    def get_search_paths(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.searchPaths()]
 
-    def set_search_paths(self, paths: List[Union[str, os.PathLike]]):
+    def set_search_paths(self, paths: list[str | os.PathLike]):
         self.setSearchPaths([os.fspath(p) for p in paths])
 
 

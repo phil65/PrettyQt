@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError
@@ -15,7 +13,7 @@ class WizardPage(QtWidgets.QWizardPage):
         return dict(title=self.title(), sub_title=self.subTitle())
 
     def set_pixmap(
-        self, typ: widgets.wizard.WizardPixmapStr, pixmap: Optional[QtGui.QPixmap]
+        self, typ: widgets.wizard.WizardPixmapStr, pixmap: QtGui.QPixmap | None
     ):
         if typ not in widgets.wizard.WIZARD_PIXMAP:
             raise InvalidParamError(typ, widgets.wizard.WIZARD_PIXMAP)
@@ -23,7 +21,7 @@ class WizardPage(QtWidgets.QWizardPage):
             pixmap = QtGui.QPixmap()
         self.setPixmap(widgets.wizard.WIZARD_PIXMAP[typ], pixmap)
 
-    def get_pixmap(self, typ: widgets.wizard.WizardPixmapStr) -> Optional[gui.Pixmap]:
+    def get_pixmap(self, typ: widgets.wizard.WizardPixmapStr) -> gui.Pixmap | None:
         if typ not in widgets.wizard.WIZARD_PIXMAP:
             raise InvalidParamError(typ, widgets.wizard.WIZARD_PIXMAP)
         pix = gui.Pixmap(self.pixmap(widgets.wizard.WIZARD_PIXMAP[typ]))

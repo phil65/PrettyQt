@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Dict, List, Optional, Union
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
@@ -14,11 +13,11 @@ class FileChooserButton(widgets.Widget):
 
     def __init__(
         self,
-        extensions: Optional[Dict[str, List[str]]] = None,
+        extensions: dict[str, list[str]] | None = None,
         mode: widgets.filedialog.AcceptModeStr = "save",
         file_mode: widgets.filedialog.FileModeStr = "existing_files",
-        root: Union[None, str, pathlib.Path] = None,
-        parent: Optional[QtWidgets.QWidget] = None,
+        root: None | str | pathlib.Path = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         """Initialize FileChooserButton.
 
@@ -32,7 +31,7 @@ class FileChooserButton(widgets.Widget):
             parent: parent widget
         """
         super().__init__(parent)
-        self.path: Optional[pathlib.Path] = None
+        self.path: pathlib.Path | None = None
         self.extensions = extensions
         self.mode: widgets.filedialog.AcceptModeStr = mode
         self.file_mode: widgets.filedialog.FileModeStr = file_mode
@@ -79,7 +78,7 @@ class FileChooserButton(widgets.Widget):
         self.set_path(dialog.selected_file())
         self.value_changed.emit(self.path)
 
-    def set_path(self, path: Union[str, os.PathLike, None]):
+    def set_path(self, path: str | os.PathLike | None):
         if path is None:
             self.path = None
             self.lineedit.set_text("")
@@ -87,10 +86,10 @@ class FileChooserButton(widgets.Widget):
             self.path = pathlib.Path(path)
             self.lineedit.set_text(os.fspath(path))
 
-    def get_value(self) -> Optional[pathlib.Path]:
+    def get_value(self) -> pathlib.Path | None:
         return self.path
 
-    def set_value(self, value: Union[str, os.PathLike, None]):
+    def set_value(self, value: str | os.PathLike | None):
         self.set_path(value)
 
 

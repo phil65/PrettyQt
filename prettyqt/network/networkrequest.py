@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
@@ -125,9 +125,7 @@ CacheLoadControlStr = Literal[
 
 
 class NetworkRequest(QtNetwork.QNetworkRequest):
-    def __init__(
-        self, obj: Optional[Union[QtCore.QUrl, str, QtNetwork.QNetworkRequest]] = None
-    ):
+    def __init__(self, obj: QtCore.QUrl | str | QtNetwork.QNetworkRequest | None = None):
         if isinstance(obj, QtNetwork.QNetworkRequest):
             super().__init__(obj)
         else:
@@ -148,19 +146,19 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
             raise InvalidParamError(name, KNOWN_HEADER)
         return self.header(KNOWN_HEADER[name])
 
-    def set_headers(self, headers: Dict[str, str]):
+    def set_headers(self, headers: dict[str, str]):
         for k, v in headers.items():
             self.setRawHeader(
                 QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode())
             )
 
-    def get_headers(self) -> Dict[str, str]:
+    def get_headers(self) -> dict[str, str]:
         return {
             bytes(h).decode(): bytes(self.rawHeader(h)).decode()
             for h in self.rawHeaderList()
         }
 
-    def set_url(self, url: Union[str, QtCore.QUrl]):
+    def set_url(self, url: str | QtCore.QUrl):
         url = core.Url(url)
         self.setUrl(url)
 

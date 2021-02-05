@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import core
 from prettyqt.qt import QtCore
 
@@ -14,7 +12,7 @@ class PropertyAnimation(QtCore.QPropertyAnimation):
         self.setTargetObject(obj)
         self.set_property_name(attribute)
 
-    def set_property_name(self, name: Union[str, bytes, QtCore.QByteArray]):
+    def set_property_name(self, name: str | bytes | QtCore.QByteArray):
         if isinstance(name, str):
             name = name.encode()
         if isinstance(name, bytes):

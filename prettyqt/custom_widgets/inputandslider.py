@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple
-
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
@@ -12,8 +10,8 @@ class InputAndSlider(widgets.Widget):
 
     def __init__(
         self,
-        bounds: Optional[Tuple[int, int]] = None,
-        parent: Optional[QtWidgets.QWidget] = None,
+        bounds: tuple[int, int] | None = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)
         self.path = None

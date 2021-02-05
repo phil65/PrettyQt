@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from PyQt5 import Qsci, QtGui  # type: ignore
 
@@ -220,7 +220,7 @@ class SciScintilla(Qsci.QsciScintilla):
         self.setCaretLineVisible(color is not None)
         self.setCaretLineBackgroundColor(color)
 
-    def set_brace_matching(self, match_type: Optional[MatchTypeStr]):
+    def set_brace_matching(self, match_type: MatchTypeStr | None):
         if match_type is None:
             match_type = "none"
         if match_type not in MATCH_TYPE:
@@ -271,7 +271,7 @@ class SciScintilla(Qsci.QsciScintilla):
         else:
             self.markerAdd(nline, marker_num)
 
-    def set_wrap_mode(self, mode: Optional[WrapModeStr]):
+    def set_wrap_mode(self, mode: WrapModeStr | None):
         if mode is None:
             mode = "none"
         if mode not in WRAP_MODE:

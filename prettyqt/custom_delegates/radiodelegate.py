@@ -3,17 +3,15 @@
 
 from __future__ import annotations
 
-from typing import List, Optional
-
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
 class RadioDelegate(widgets.StyledItemDelegate):
-    def __init__(self, parent: QtWidgets.QWidget, items: List[str]):
+    def __init__(self, parent: QtWidgets.QWidget, items: list[str]):
         super().__init__(parent)
         self.items = items
-        self.choices: List[Optional[int]] = [None for i in self.items]
+        self.choices: list[int | None] = [None for i in self.items]
 
     def createEditor(
         self,

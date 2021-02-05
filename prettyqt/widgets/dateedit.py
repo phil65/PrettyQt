@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import datetime
-from typing import Union
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -28,13 +27,13 @@ class DateEdit(QtWidgets.QDateEdit):
             range=(self.min_date(), self.max_date()),
         )
 
-    def set_value(self, value: Union[QtCore.QDate, datetime.date]):
+    def set_value(self, value: QtCore.QDate | datetime.date):
         self.setDate(value)  # type: ignore
 
     def set_range(
         self,
-        lower: Union[QtCore.QDate, datetime.date],
-        upper: Union[QtCore.QDate, datetime.date],
+        lower: QtCore.QDate | datetime.date,
+        upper: QtCore.QDate | datetime.date,
     ):
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setDateRange(lower, upper)  # type: ignore

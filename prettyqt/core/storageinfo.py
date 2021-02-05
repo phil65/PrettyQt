@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import List, Optional, Union
 
 from prettyqt.qt import QtCore
 
@@ -10,7 +9,7 @@ from prettyqt.qt import QtCore
 class StorageInfo(QtCore.QStorageInfo):
     def __init__(
         self,
-        path: Optional[Union[QtCore.QStorageInfo, QtCore.QDir, str, os.PathLike]] = None,
+        path: QtCore.QStorageInfo | QtCore.QDir | str | os.PathLike | None = None,
     ):
         if path is None:
             super().__init__()
@@ -42,5 +41,5 @@ class StorageInfo(QtCore.QStorageInfo):
         return cls(cls.root())
 
     @classmethod
-    def get_mounted_volumes(cls) -> List[StorageInfo]:
+    def get_mounted_volumes(cls) -> list[StorageInfo]:
         return [cls(i) for i in cls.mountedVolumes()]

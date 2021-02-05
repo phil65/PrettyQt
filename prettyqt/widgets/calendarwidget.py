@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import datetime
-from typing import Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -52,18 +52,18 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
     def get_value(self) -> datetime.date:
         return self.get_date()
 
-    def set_value(self, value: Union[QtCore.QDate, datetime.date]):
+    def set_value(self, value: QtCore.QDate | datetime.date):
         self.setSelectedDate(value)  # type: ignore
 
     def set_range(
         self,
-        min_val: Union[QtCore.QDate, datetime.date],
-        max_val: Union[QtCore.QDate, datetime.date],
+        min_val: QtCore.QDate | datetime.date,
+        max_val: QtCore.QDate | datetime.date,
     ):
         self.setMinimumDate(min_val)  # type: ignore
         self.setMaximumDate(max_val)  # type: ignore
 
-    def set_selection_mode(self, mode: Optional[SelectionModeStr]):
+    def set_selection_mode(self, mode: SelectionModeStr | None):
         """Set selection mode for given calendar widget.
 
         Args:

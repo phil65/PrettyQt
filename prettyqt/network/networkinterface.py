@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import network
 from prettyqt.qt import QtNetwork
@@ -72,15 +72,15 @@ class NetworkInterface(QtNetwork.QNetworkInterface):
         """
         return INTERFACE_TYPE.inverse[self.type()]
 
-    def get_address_entries(self) -> List[network.NetworkAddressEntry]:
+    def get_address_entries(self) -> list[network.NetworkAddressEntry]:
         return [network.NetworkAddressEntry(i) for i in self.addressEntries()]
 
     @staticmethod
-    def get_all_addresses() -> List[network.HostAddress]:
+    def get_all_addresses() -> list[network.HostAddress]:
         return [network.HostAddress(i) for i in NetworkInterface.allAddresses()]
 
     @staticmethod
-    def get_all_interfaces() -> List[network.HostAddress]:
+    def get_all_interfaces() -> list[network.HostAddress]:
         return [network.NetworkInterface(i) for i in NetworkInterface.allInterfaces()]
 
     @staticmethod

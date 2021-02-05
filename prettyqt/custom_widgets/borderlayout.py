@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import enum
-from typing import List, Literal, Optional
+from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -28,14 +28,14 @@ class BorderLayout(widgets.Layout):
 
     def __init__(
         self,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
         margin: int = 0,
-        spacing: Optional[int] = None,
+        spacing: int | None = None,
     ):
         super().__init__(parent)  # type: ignore
         self.set_margin(margin)
         self.setSpacing(spacing if spacing is not None else -1)
-        self.items: List[ItemWrapper] = []
+        self.items: list[ItemWrapper] = []
 
     def __del__(self):
         item = self.takeAt(0)
@@ -61,7 +61,7 @@ class BorderLayout(widgets.Layout):
     def count(self) -> int:
         return len(self.items)
 
-    def itemAt(self, index: int) -> Optional[QtWidgets.QWidgetItem]:  # type: ignore
+    def itemAt(self, index: int) -> QtWidgets.QWidgetItem | None:  # type: ignore
         if index < len(self.items):
             return self.items[index].item
         return None
@@ -159,7 +159,7 @@ class BorderLayout(widgets.Layout):
     def sizeHint(self) -> core.Size:
         return self.calculate_size("size_hint")
 
-    def takeAt(self, index: int) -> Optional[QtWidgets.QWidgetItem]:  # type: ignore
+    def takeAt(self, index: int) -> QtWidgets.QWidgetItem | None:  # type: ignore
         if 0 <= index < len(self.items):
             layout_struct = self.items.pop(index)
             return layout_struct.item

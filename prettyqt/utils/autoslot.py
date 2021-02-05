@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import inspect
 import logging
-from typing import Callable, Optional, Tuple, get_type_hints
+from typing import Callable, get_type_hints
 
 from prettyqt import core
 
@@ -24,8 +24,8 @@ class _OverloadedSlotPlaceholder:
 
 
 def _build_arguments(
-    func: Callable, original_func: Optional[Callable] = None
-) -> Tuple[list, dict]:
+    func: Callable, original_func: Callable | None = None
+) -> tuple[list, dict]:
     argspec = inspect.getfullargspec(func)
     args = argspec.args
     annotations = get_type_hints(func)

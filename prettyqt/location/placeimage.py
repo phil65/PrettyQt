@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import core, location
 from prettyqt.qt import QtCore, QtLocation
 
@@ -13,7 +11,7 @@ class PlaceImage(QtLocation.QPlaceImage):
     def __str__(self):
         return self.imageId()
 
-    def set_url(self, url: Union[str, QtCore.QUrl]):
+    def set_url(self, url: str | QtCore.QUrl):
         url = core.Url(url)
         self.setUrl(url)
 

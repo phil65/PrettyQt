@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from prettyqt import gui
 from prettyqt.utils import types
 
@@ -57,7 +55,7 @@ def get_color(color: types.ColorType) -> gui.Color:
 
 def interpolate_text_colors(
     bg: types.ColorType, fg: types.ColorType, n_colors: int
-) -> List[gui.Color]:
+) -> list[gui.Color]:
     bg = get_color(bg)
     fg = get_color(fg)
     pal = []

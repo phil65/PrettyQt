@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Callable, Literal, Optional, Tuple, Union
+from typing import Callable, Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -42,16 +42,16 @@ QtWidgets.QAction.__bases__ = (core.Object,)
 class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
     def __init__(
         self,
-        parent: Optional[QtCore.QObject] = None,
+        parent: QtCore.QObject | None = None,
         text: str = "",
         icon: types.IconType = None,
-        shortcut: Optional[str] = None,
+        shortcut: str | None = None,
         tooltip: str = "",
         checkable: bool = False,
         checked: bool = False,
         statustip: str = "",
         enabled: bool = True,
-        callback: Optional[Callable] = None,
+        callback: Callable | None = None,
     ):
         super().__init__(parent)
         self._menu = None
@@ -132,8 +132,8 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
 
     def set_tooltip(
         self,
-        tooltip: Union[str, os.PathLike],
-        size: Optional[Union[Tuple[int, int], QtCore.QSize]] = None,
+        tooltip: str | os.PathLike,
+        size: tuple[int, int] | QtCore.QSize | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -163,20 +163,20 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def get_icon(self) -> Optional[gui.Icon]:
+    def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         if icon.isNull():
             return None
         return gui.Icon(icon)
 
-    def set_shortcut(self, shortcut: Union[None, QtGui.QKeySequence, str]):
+    def set_shortcut(self, shortcut: None | QtGui.QKeySequence | str):
         if shortcut is None:
             shortcut = ""
         if isinstance(shortcut, str):
             shortcut = gui.KeySequence(shortcut, gui.KeySequence.PortableText)
         self.setShortcut(shortcut)
 
-    def get_shortcut(self) -> Optional[gui.KeySequence]:
+    def get_shortcut(self) -> gui.KeySequence | None:
         shortcut = self.shortcut()
         if not shortcut:
             return None

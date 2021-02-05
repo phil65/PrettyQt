@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from prettyqt import positioning
 from prettyqt.qt import QtPositioning
 
@@ -30,7 +28,7 @@ class GeoPolygon(QtPositioning.QGeoPolygon):
         self.addCoordinate(other)
         return self
 
-    def get_path(self) -> List[positioning.GeoCoordinate]:
+    def get_path(self) -> list[positioning.GeoCoordinate]:
         return [positioning.GeoCoordinate(p) for p in self.path()]
 
 

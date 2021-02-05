@@ -3,7 +3,6 @@ from __future__ import annotations
 import functools
 import logging
 import pathlib
-from typing import Union
 
 from pygments.formatters.html import HtmlFormatter
 from pygments.lexer import Error, RegexLexer, Text, _TokenType
@@ -142,7 +141,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     # "PygmentsHighlighter" interface
     # ---------------------------------------------------------------------------
 
-    def set_style(self, style: Union[None, str, Style]):
+    def set_style(self, style: None | str | Style):
         if style is None:
             style = get_style_by_name("default")
         elif isinstance(style, str):

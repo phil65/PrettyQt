@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtPositioning
@@ -67,7 +67,7 @@ class GeoPositionInfoSource(QtPositioning.QGeoPositionInfoSource):
         flags = helpers.merge_flags(methods, POSITIONING_METHODS)
         self.setPreferredPositioningMethods(flags)
 
-    def get_preferred_positioning_methods(self) -> List[PositioningMethodStr]:
+    def get_preferred_positioning_methods(self) -> list[PositioningMethodStr]:
         """Return list of preferred positioning methods.
 
         Returns:
@@ -79,7 +79,7 @@ class GeoPositionInfoSource(QtPositioning.QGeoPositionInfoSource):
             if v & self.preferredPositioningMethods()
         ]
 
-    def get_supported_positioning_methods(self) -> List[PositioningMethodStr]:
+    def get_supported_positioning_methods(self) -> list[PositioningMethodStr]:
         """Return list of supported positioning methods.
 
         Returns:

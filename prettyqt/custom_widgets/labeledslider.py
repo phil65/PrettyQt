@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Optional, Sequence
+from typing import Sequence
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtWidgets
@@ -16,7 +16,7 @@ class LabeledSlider(widgets.Widget):
         self,
         labels: Sequence[str],
         orientation: constants.OrientationStr = "horizontal",
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
 

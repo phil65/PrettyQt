@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -27,10 +27,8 @@ class Slider(QtWidgets.QSlider):
 
     def __init__(
         self,
-        orientation: Union[
-            constants.OrientationStr, QtCore.Qt.Orientation
-        ] = "horizontal",
-        parent: Optional[QtWidgets.QWidget] = None,
+        orientation: (constants.OrientationStr | QtCore.Qt.Orientation) = "horizontal",
+        parent: QtWidgets.QWidget | None = None,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):
             ori = orientation

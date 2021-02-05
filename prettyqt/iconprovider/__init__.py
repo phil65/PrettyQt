@@ -7,7 +7,7 @@ from __future__ import annotations
 import json
 import os
 import pathlib
-from typing import Dict, Optional, Tuple, Union
+from typing import Optional, Tuple
 
 from prettyqt.qt import QtGui
 
@@ -18,7 +18,7 @@ from prettyqt.utils import types
 
 
 key_type = Tuple[Optional[str], Optional[str], bool]
-icon_cache: Dict[key_type, QtGui.QIcon] = {}
+icon_cache: dict[key_type, QtGui.QIcon] = {}
 # Linux packagers, please set this to True if you want to make qtawesome
 # use system fonts
 SYSTEM_FONTS = False
@@ -40,7 +40,7 @@ class IconFont:
     font_path: str
     charmap_path: str
     md5: str
-    stylename: Optional[str] = None
+    stylename: str | None = None
 
     def __init__(self):
         hash_val = None if SYSTEM_FONTS else self.md5
@@ -105,7 +105,7 @@ class MaterialDesignIcons(IconFont):
     md5 = "b0fd91bb29dcb296a9a37f8bda0a2d85"
 
 
-_resource: Dict[str, Optional[IconicFont]] = {"iconic": None}
+_resource: dict[str, IconicFont | None] = {"iconic": None}
 
 
 def _instance() -> IconicFont:
@@ -226,7 +226,7 @@ def _icon(*names, **kwargs) -> QtGui.QIcon:
     return _instance().icon(*names, **kwargs)
 
 
-def for_color(color: Union[str, QtGui.QColor]) -> gui.Icon:
+def for_color(color: str | QtGui.QColor) -> gui.Icon:
     if isinstance(color, str):
         color = gui.Color.from_text(color)
     if color.isValid():
@@ -250,7 +250,7 @@ def set_defaults(**kwargs):
 
 
 def get_icon(
-    icon: types.IconType, color: Optional[str] = None, as_qicon: bool = False
+    icon: types.IconType, color: str | None = None, as_qicon: bool = False
 ) -> QtGui.QIcon:
     """Get icon with given color.
 

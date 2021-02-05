@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, List, Literal, Tuple
+from typing import Any, Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
@@ -93,7 +93,7 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
             stops=self.get_stops(),
         )
 
-    def serialize(self) -> Dict[str, Any]:
+    def serialize(self) -> dict[str, Any]:
         return self.serialize_fields()
 
     def set_coordinate_mode(self, mode: CoordinateModeStr):
@@ -146,7 +146,7 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
         """
         return TYPE.inverse[self.type()]
 
-    def get_stops(self) -> List[Tuple[float, gui.Color]]:
+    def get_stops(self) -> list[tuple[float, gui.Color]]:
         return [(i, gui.Color(j)) for (i, j) in self.stops()]
 
 

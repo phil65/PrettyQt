@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List, Optional, Union
-
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
@@ -9,20 +7,20 @@ from prettyqt.qt import QtCore, QtWidgets
 class FlowLayout(widgets.Layout):
     def __init__(
         self,
-        parent: Optional[QtWidgets.QWidget] = None,
-        margin: Optional[int] = None,
+        parent: QtWidgets.QWidget | None = None,
+        margin: int | None = None,
         spacing: int = -1,
     ):
         super().__init__(parent)  # type: ignore
         if margin is not None:
             self.set_margin(margin)
         self.set_spacing(spacing)
-        self.items: List[QtWidgets.QLayoutItem] = []
+        self.items: list[QtWidgets.QLayoutItem] = []
 
     def serialize_fields(self):
         return dict(items=self.get_children())
 
-    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]) -> FlowLayout:
+    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout) -> FlowLayout:
         if not isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
             raise TypeError()
         self.add(other)
@@ -46,12 +44,12 @@ class FlowLayout(widgets.Layout):
     def count(self) -> int:
         return len(self.items)
 
-    def itemAt(self, index: int) -> Optional[QtWidgets.QLayoutItem]:  # type: ignore
+    def itemAt(self, index: int) -> QtWidgets.QLayoutItem | None:  # type: ignore
         if 0 <= index < len(self.items):
             return self.items[index]
         return None
 
-    def takeAt(self, index: int) -> Optional[QtWidgets.QLayoutItem]:  # type: ignore
+    def takeAt(self, index: int) -> QtWidgets.QLayoutItem | None:  # type: ignore
         if 0 <= index < len(self.items):
             return self.items.pop(index)
         return None

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Tuple, Union
+from typing import Literal
 
 from prettyqt import constants, gui
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -65,14 +65,14 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
 
     def colliding_items(
         self, mode: constants.ItemSelectionModeStr = "intersects_shape"
-    ) -> List[QtWidgets.QGraphicsItem]:
+    ) -> list[QtWidgets.QGraphicsItem]:
         if mode not in constants.ITEM_SELECTION_MODE:
             raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
         return self.collidingItems(constants.ITEM_SELECTION_MODE[mode])
 
     def collides_with(
         self,
-        item: Union[QtGui.QPainterPath, QtWidgets.QGraphicsItem],
+        item: QtGui.QPainterPath | QtWidgets.QGraphicsItem,
         mode: constants.ItemSelectionModeStr = "intersects_shape",
     ) -> bool:
         if mode not in constants.ITEM_SELECTION_MODE:
@@ -127,7 +127,7 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
     def get_shape(self) -> gui.PainterPath:
         return gui.PainterPath(self.shape())
 
-    def set_scale(self, scale: Union[Tuple[float, float], float]):
+    def set_scale(self, scale: tuple[float, float] | float):
         if isinstance(scale, float):
             self.setScale(scale)
         else:

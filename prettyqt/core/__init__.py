@@ -7,8 +7,6 @@ Contains QtCore-based classes
 
 from __future__ import annotations
 
-from typing import List, Optional
-
 import prettyqt.qt
 
 from prettyqt.qt.QtCore import (  # type: ignore
@@ -168,7 +166,7 @@ if VersionNumber.get_qt_version() < (6, 0, 0):
     from .statemachine import StateMachine
 
 
-def app(args: Optional[List[str]] = None) -> CoreApplication:
+def app(args: list[str] | None = None) -> CoreApplication:
     instance = CoreApplication.instance()
     if instance is not None:
         return instance

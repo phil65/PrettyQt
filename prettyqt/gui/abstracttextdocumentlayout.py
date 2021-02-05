@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple, Union
-
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
 
@@ -23,8 +21,8 @@ class AbstractTextDocumentLayout(QtGui.QAbstractTextDocumentLayout):
         return core.RectF(self.frameBoundingRect(frame))
 
     def hit_test(
-        self, point: Union[core.PointF, Tuple[float, float]], fuzzy: bool = False
-    ) -> Optional[int]:
+        self, point: core.PointF | tuple[float, float], fuzzy: bool = False
+    ) -> int | None:
         if isinstance(point, tuple):
             point = core.PointF(*point)
         accuracy = QtCore.Qt.FuzzyHit if fuzzy else QtCore.Qt.ExactHit

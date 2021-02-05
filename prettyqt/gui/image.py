@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Tuple
-
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
 
@@ -16,13 +14,13 @@ class Image(QtGui.QImage):
     def __setstate__(self, ba):
         core.DataStream.write_bytearray(ba, self)
 
-    def __setitem__(self, index: Tuple[int, int], value):
+    def __setitem__(self, index: tuple[int, int], value):
         self.setPixel(index[0], index[1], value)
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __getitem__(self, index: Tuple[int, int]):
+    def __getitem__(self, index: tuple[int, int]):
         return self.pixel(index[0], index[1])
 
     def __bytes__(self):

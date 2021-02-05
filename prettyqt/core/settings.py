@@ -3,7 +3,7 @@ from __future__ import annotations
 import contextlib
 import logging
 import os
-from typing import Any, Dict, Iterator, List, Literal, Mapping, Optional, Tuple, Union
+from typing import Any, Iterator, Literal, Mapping
 
 from deprecated import deprecated
 
@@ -26,7 +26,7 @@ QtCore.QSettings.__bases__ = (core.Object,)
 
 
 class Settings(QtCore.QSettings):
-    def __init__(self, *args, settings_id: Optional[str] = None):
+    def __init__(self, *args, settings_id: str | None = None):
         super().__init__(*args)
         self.settings_id = settings_id
 
@@ -56,20 +56,20 @@ class Settings(QtCore.QSettings):
             raise KeyError(key)
         return self.remove(key)
 
-    def __iter__(self) -> Iterator[Tuple[str, Any]]:
+    def __iter__(self) -> Iterator[tuple[str, Any]]:
         return iter(self.items())
 
     def __len__(self) -> int:
         return len(self.allKeys())
 
     @classmethod
-    def build_from_dict(cls, dct: Dict[str, Any]):
+    def build_from_dict(cls, dct: dict[str, Any]):
         settings = cls()
         for k, v in dct.items():
             settings.set_value(k, v)
         return settings
 
-    def as_dict(self) -> Dict[str, Any]:
+    def as_dict(self) -> dict[str, Any]:
         return {k: v for k, v in self.items()}
 
     def set_value(self, key: str, value):
@@ -77,7 +77,7 @@ class Settings(QtCore.QSettings):
             raise RuntimeError("no app name defined")
         self.setValue(key, dict(value=value))
 
-    def set_values(self, dct: Dict[str, Any]):
+    def set_values(self, dct: dict[str, Any]):
         for k, v in dct.items():
             self.set_value(k, v)
 
@@ -123,7 +123,7 @@ class Settings(QtCore.QSettings):
         return SCOPE.inverse[self.scope()]
 
     @classmethod
-    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: Union[str, os.PathLike]):
+    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: str | os.PathLike):
         """Set the path to the settings file.
 
         Args:
@@ -184,7 +184,7 @@ class Settings(QtCore.QSettings):
             return default
         return self.get_value(key)
 
-    def keys(self) -> List[str]:
+    def keys(self) -> list[str]:
         return self.allKeys()
 
     def values(self) -> Iterator[Any]:
@@ -198,7 +198,7 @@ class Settings(QtCore.QSettings):
             return self.get_value(key)
         raise KeyError(key)
 
-    def popitem(self) -> Tuple[str, Any]:
+    def popitem(self) -> tuple[str, Any]:
         key = self.keys()[0]
         return (key, self.get_value(key))
 
@@ -210,8 +210,8 @@ class Settings(QtCore.QSettings):
     def register_extensions(
         cls,
         *exts: str,
-        app_name: Optional[str] = None,
-        app_path: Union[None, str, os.PathLike] = None,
+        app_name: str | None = None,
+        app_path: None | str | os.PathLike = None,
     ):
         logger.debug(f"assigning extensions {exts} to {app_name}")
         s = cls("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.NativeFormat)
@@ -229,8 +229,8 @@ class Settings(QtCore.QSettings):
 @deprecated(reason="This method is deprecated, use Settings.register_extensions instead.")
 def register_extensions(
     *exts: str,
-    app_name: Optional[str] = None,
-    app_path: Union[None, str, os.PathLike] = None,
+    app_name: str | None = None,
+    app_path: None | str | os.PathLike = None,
 ):
     core.Settings.register_extensions(*exts, app_name=app_name, app_path=app_path)
 

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List, Optional
-
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, helpers, types
@@ -18,7 +16,7 @@ class VideoSample:
         self,
         duration: float,
         color: types.ColorType = "yellow",
-        picture: Optional[QtGui.QPixmap] = None,
+        picture: QtGui.QPixmap | None = None,
     ):
         self.duration = duration
         self.color = colors.get_color(color)  # Floating color
@@ -48,7 +46,7 @@ class Timeline(widgets.Widget):
         self.selected_sample = None
         self._clicking = False  # Check if mouse left button is being pressed
         self._is_in = False  # check if user is in the widget
-        self.video_samples: List[VideoSample] = []  # List of video samples
+        self.video_samples: list[VideoSample] = []  # List of video samples
         self.setMouseTracking(True)  # Mouse events
         self.setAutoFillBackground(True)  # background
         self.setGeometry(300, 300, self.length, 200)
@@ -74,7 +72,7 @@ class Timeline(widgets.Widget):
         self,
         duration: int,
         color: types.ColorType = "yellow",
-        picture: Optional[QtGui.QPixmap] = None,
+        picture: QtGui.QPixmap | None = None,
     ) -> VideoSample:
         sample = VideoSample(duration, color, picture)
         self.add(sample)

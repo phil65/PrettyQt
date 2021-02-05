@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Dict
+from typing import Callable
 
 from prettyqt import constants
 from prettyqt.qt import QtCore
@@ -8,7 +8,7 @@ from prettyqt.qt import QtCore
 
 class SelectionMixin:
 
-    CHECKSTATE: Dict[int, Callable] = {}  # column: identifier
+    CHECKSTATE: dict[int, Callable] = {}  # column: identifier
     dataChanged: QtCore.Signal
     DATA_ROLE: int
 

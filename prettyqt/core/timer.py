@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Union
+from typing import Callable
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
@@ -46,12 +46,12 @@ class Timer(QtCore.QTimer):
         """
         return constants.TIMER_TYPE.inverse[self.timerType()]
 
-    def set_interval(self, interval: Union[int, str]):
+    def set_interval(self, interval: int | str):
         if isinstance(interval, str):
             interval = helpers.parse_time(interval)
         self.setInterval(interval)
 
-    def start_timer(self, interval: Union[None, int, str] = None):
+    def start_timer(self, interval: None | int | str = None):
         if isinstance(interval, str):
             interval = helpers.parse_time(interval)
         if interval is None:

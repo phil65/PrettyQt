@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import List, Literal, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -113,12 +113,12 @@ class Dir(QtCore.QDir):
         flags = helpers.merge_flags(filters, FILTERS)
         self.setFilter(flags)
 
-    def get_filter(self) -> List[FilterStr]:
+    def get_filter(self) -> list[FilterStr]:
         return [k for k, v in FILTERS.items() if v & self.filter()]
 
     def get_entry_info_list(
         self, sort_mode: SortFlagStr = "no_sort", filters: FilterStr = "none"
-    ) -> List[core.FileInfo]:
+    ) -> list[core.FileInfo]:
         return [
             core.FileInfo(i)
             for i in self.entryInfoList(SORT_FLAG[sort_mode], FILTERS[filters])
@@ -126,7 +126,7 @@ class Dir(QtCore.QDir):
 
     def get_entry_list(
         self, sort_mode: SortFlagStr = "no_sort", filters: FilterStr = "none"
-    ) -> List[pathlib.Path]:
+    ) -> list[pathlib.Path]:
         return [
             pathlib.Path(i)
             for i in self.entryList(SORT_FLAG[sort_mode], FILTERS[filters])
@@ -149,13 +149,13 @@ class Dir(QtCore.QDir):
         return pathlib.Path(cls.homePath())
 
     @classmethod
-    def get_drives(cls) -> List[core.FileInfo]:
+    def get_drives(cls) -> list[core.FileInfo]:
         return [core.FileInfo(i) for i in cls.drives()]
 
     @classmethod
-    def add_search_path(cls, prefix: str, path: Union[str, os.PathLike]):
+    def add_search_path(cls, prefix: str, path: str | os.PathLike):
         cls.addSearchPath(prefix, os.fspath(path))
 
     @classmethod
-    def set_search_paths(cls, prefix: str, paths: List[Union[str, os.PathLike]]):
+    def set_search_paths(cls, prefix: str, paths: list[str | os.PathLike]):
         cls.setSearchPaths(prefix, [os.fspath(p) for p in paths])

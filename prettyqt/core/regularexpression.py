@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Dict, Iterator, Literal, Optional, Tuple, Union
+from typing import Callable, Iterator, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -36,7 +36,7 @@ MATCH_OPTIONS = bidict(
 class RegularExpression(QtCore.QRegularExpression):
     def __init__(
         self,
-        pattern: Union[str, QtCore.QRegularExpression] = "",
+        pattern: str | QtCore.QRegularExpression = "",
         flags: QtCore.QRegularExpression.PatternOption = FLAGS["none"],
     ):
         if isinstance(pattern, QtCore.QRegularExpression):
@@ -70,7 +70,7 @@ class RegularExpression(QtCore.QRegularExpression):
         self,
         text: str,
         offset: int = 0,
-        match_type: Union[MatchTypeStr, QtCore.QRegularExpression.MatchType] = "normal",
+        match_type: MatchTypeStr | QtCore.QRegularExpression.MatchType = "normal",
         anchored: bool = False,
     ) -> core.RegularExpressionMatch:
         if isinstance(match_type, str):
@@ -85,8 +85,8 @@ class RegularExpression(QtCore.QRegularExpression):
         return core.RegularExpressionMatch(match)
 
     def fullmatch(
-        self, string: str, pos: int = 0, endpos: Optional[int] = None
-    ) -> Optional[core.RegularExpressionMatch]:
+        self, string: str, pos: int = 0, endpos: int | None = None
+    ) -> core.RegularExpressionMatch | None:
         if endpos:
             string = string[:endpos]
         match = super().match(string, pos)
@@ -96,7 +96,7 @@ class RegularExpression(QtCore.QRegularExpression):
             return None
 
     def finditer(
-        self, string: str, pos: int = 0, endpos: Optional[int] = None
+        self, string: str, pos: int = 0, endpos: int | None = None
     ) -> Iterator[core.RegularExpressionMatch]:
         for match in self.globalMatch(string[:endpos], offset=pos):
             match.pos = pos
@@ -104,13 +104,11 @@ class RegularExpression(QtCore.QRegularExpression):
             match.string = string
             yield match
 
-    def findall(self, string: str, pos: int = 0, endpos: Optional[int] = None) -> list:
+    def findall(self, string: str, pos: int = 0, endpos: int | None = None) -> list:
         matches = list(self.globalMatch(string[:endpos], offset=pos))
         return [m.groups() if len(m.groups()) > 1 else m.group(0) for m in matches]
 
-    def subn(
-        self, repl: Union[str, Callable], string: str, count: int = 0
-    ) -> Tuple[str, int]:
+    def subn(self, repl: str | Callable, string: str, count: int = 0) -> tuple[str, int]:
         result = string
         matches = self.global_match(string)
         matches = list(matches)
@@ -126,11 +124,11 @@ class RegularExpression(QtCore.QRegularExpression):
             result = result[: m.start()] + to_replace + result[m.end() :]
         return (result, min(len(matches), count))
 
-    def sub(self, repl: Union[str, Callable], string: str, count: int = 0) -> str:
+    def sub(self, repl: str | Callable, string: str, count: int = 0) -> str:
         res = self.subn(repl, string, count)
         return res[0]
 
-    def search(self, string: str, pos: int = 0, endpos: Optional[int] = None):
+    def search(self, string: str, pos: int = 0, endpos: int | None = None):
         match = super().match(string[:endpos], pos)
         return match if match.hasMatch() else None
 
@@ -172,7 +170,7 @@ class RegularExpression(QtCore.QRegularExpression):
         return self.captureCount()
 
     @property
-    def groupindex(self) -> Dict[str, int]:
+    def groupindex(self) -> dict[str, int]:
         return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1)}
 
     @property

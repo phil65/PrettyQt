@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, List
+from typing import Any
 
 from bidict import bidict
 
@@ -29,6 +29,6 @@ class FlagMap:
     def __getattr__(self, attr):
         return getattr(self.bidict, attr)
 
-    def get_list(self, flag) -> List[Any]:
+    def get_list(self, flag) -> list[Any]:
         flag = int(flag)
         return [k for k, v in self.bidict.items() if v & flag]

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import datetime
-from typing import Union
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -30,8 +29,8 @@ class TimeEdit(QtWidgets.QTimeEdit):
 
     def set_range(
         self,
-        lower: Union[QtCore.QTime, datetime.time],
-        upper: Union[QtCore.QTime, datetime.time],
+        lower: QtCore.QTime | datetime.time,
+        upper: QtCore.QTime | datetime.time,
     ):
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setTimeRange(lower, upper)  # type: ignore
@@ -39,7 +38,7 @@ class TimeEdit(QtWidgets.QTimeEdit):
     def get_value(self) -> datetime.time:
         return self.get_time()
 
-    def set_value(self, value: Union[datetime.time, QtCore.QTime]):
+    def set_value(self, value: datetime.time | QtCore.QTime):
         return self.setTime(value)  # type: ignore
 
 

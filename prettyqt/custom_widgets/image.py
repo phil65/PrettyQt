@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-from typing import Optional, Union
 
 from prettyqt import gui, widgets
 from prettyqt.qt import QtWidgets
@@ -10,8 +9,8 @@ from prettyqt.qt import QtWidgets
 class Image(widgets.Label):
     def __init__(
         self,
-        path: Union[os.PathLike, str] = None,
-        parent: Optional[QtWidgets.QWidget] = None,
+        path: os.PathLike | str | None = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
         if path:
@@ -20,7 +19,7 @@ class Image(widgets.Label):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
-    def set_image(self, path: Union[os.PathLike, str], width: int = 300):
+    def set_image(self, path: os.PathLike | str, width: int = 300):
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText(
@@ -31,7 +30,7 @@ class Image(widgets.Label):
 
     @classmethod
     def from_path(
-        cls, path: Union[os.PathLike, str], parent: Optional[QtWidgets.QWidget] = None
+        cls, path: os.PathLike | str, parent: QtWidgets.QWidget | None = None
     ) -> Image:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)

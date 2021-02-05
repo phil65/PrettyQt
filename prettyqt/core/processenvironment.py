@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Iterator, Tuple
+from typing import Iterator
 
 from prettyqt.qt import QtCore
 
@@ -23,7 +23,7 @@ class ProcessEnvironment(QtCore.QProcessEnvironment):
     def __setitem__(self, index: str, value: str):
         return self.insert(index, value)
 
-    def __iter__(self) -> Iterator[Tuple[str, str]]:
+    def __iter__(self) -> Iterator[tuple[str, str]]:
         return iter((k, self.value(k)) for k in self.keys())
 
     @classmethod
@@ -31,7 +31,7 @@ class ProcessEnvironment(QtCore.QProcessEnvironment):
         return cls(cls.systemEnvironment())
 
     @classmethod
-    def from_dict(cls, dictionary: Dict[str, str]) -> ProcessEnvironment:
+    def from_dict(cls, dictionary: dict[str, str]) -> ProcessEnvironment:
         env = cls()
         for k, v in dictionary.items():
             env.insert(k, v)

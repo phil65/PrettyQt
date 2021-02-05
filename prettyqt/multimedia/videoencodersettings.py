@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Iterator, Literal, Tuple
+from typing import Any, Iterator, Literal
 
 from prettyqt.qt import QtMultimedia
 from prettyqt.utils import InvalidParamError, bidict
@@ -32,10 +32,10 @@ class Settings:
     bitrate: int
     codec: str
     encoding_mode: EncodingModeStr
-    encoding_options: Dict[str, Any]
+    encoding_options: dict[str, Any]
     quality: QualityStr
     frame_rate: float
-    resolution: Tuple[int, int]
+    resolution: tuple[int, int]
 
 
 class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
@@ -92,7 +92,7 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
             quality=self.get_quality(),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self.to_dataclass())
 
     @classmethod
@@ -108,6 +108,6 @@ class VideoEncoderSettings(QtMultimedia.QVideoEncoderSettings):
         return instance
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> VideoEncoderSettings:
+    def from_dict(cls, data: dict[str, Any]) -> VideoEncoderSettings:
         settings = Settings(**data)
         return cls.from_dataclass(settings)

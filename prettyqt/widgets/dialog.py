@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtWidgets
 
@@ -73,9 +71,9 @@ class Dialog(BaseDialog):
         self,
         title: str = "",
         icon=None,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
         delete_on_close: bool = True,
-        layout: Union[None, str, QtWidgets.QLayout] = None,
+        layout: None | str | QtWidgets.QLayout = None,
     ):
         super().__init__(parent=parent)
         if self.DEFAULT_SIZE:

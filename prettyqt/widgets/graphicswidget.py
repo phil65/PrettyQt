@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Tuple, Union
+from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -24,7 +24,7 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
             focus_policy=self.get_focus_policy(),
         )
 
-    def set_layout(self, layout: Union[LayoutStr, QtWidgets.QGraphicsLayout, None]):
+    def set_layout(self, layout: LayoutStr | QtWidgets.QGraphicsLayout | None):
         if layout is None:
             return
         if isinstance(layout, QtWidgets.QGraphicsLayout):
@@ -61,7 +61,7 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
         return constants.FOCUS_POLICY.inverse[self.focusPolicy()]
 
     def window_frame_section_at(
-        self, point: Union[QtCore.QPoint, Tuple[int, int]]
+        self, point: QtCore.QPoint | tuple[int, int]
     ) -> constants.WindowFrameSectionStr:
         """Return the window frame section at given position.
 

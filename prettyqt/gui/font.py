@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Literal
+from typing import Any, Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
@@ -169,7 +169,7 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def serialize(self) -> Dict[str, Any]:
+    def serialize(self) -> dict[str, Any]:
         return self.__getstate__()
 
     @property

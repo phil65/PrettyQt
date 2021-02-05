@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any
 
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
@@ -19,7 +19,7 @@ class Cursor(QtGui.QCursor):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
-    def serialize_fields(self) -> Dict[str, Any]:
+    def serialize_fields(self) -> dict[str, Any]:
         return dict(shape=self.get_shape())
 
     def set_shape(self, shape: constants.CursorShapeStr):

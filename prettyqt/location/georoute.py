@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from prettyqt import location, positioning
 from prettyqt.qt import QtLocation
 from prettyqt.utils import types
@@ -28,5 +26,5 @@ class GeoRoute(QtLocation.QGeoRoute):
     def get_first_route_segment(self) -> location.GeoRouteSegment:
         return location.GeoRouteSegment(self.firstRouteSegment())
 
-    def get_path(self) -> List[positioning.GeoCoordinate]:
+    def get_path(self) -> list[positioning.GeoCoordinate]:
         return [positioning.GeoCoordinate(i) for i in self.path()]

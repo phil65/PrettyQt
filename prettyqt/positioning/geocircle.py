@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple, Union
-
 from prettyqt import positioning
 from prettyqt.qt import QtPositioning
 
@@ -12,12 +10,11 @@ QtPositioning.QGeoCircle.__bases__ = (positioning.GeoShape,)
 class GeoCircle(QtPositioning.QGeoCircle):
     def __init__(
         self,
-        center_or_other: Optional[
-            Union[
-                QtPositioning.QGeoShape, QtPositioning.QGeoCoordinate, Tuple[float, float]
-            ]
-        ] = None,
-        radius: Optional[float] = None,
+        center_or_other: None
+        | (
+            QtPositioning.QGeoShape | QtPositioning.QGeoCoordinate | tuple[float, float]
+        ) = None,
+        radius: float | None = None,
     ):
         if center_or_other is None:
             super().__init__()

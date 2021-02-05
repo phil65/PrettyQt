@@ -1,20 +1,18 @@
 from __future__ import annotations
 
-from typing import Dict, Union
-
 from prettyqt import network
 from prettyqt.qt import QtCore, QtNetwork
 
 
 class HttpPart(QtNetwork.QHttpPart):
-    def set_body(self, body: Union[str, bytes, QtCore.QByteArray]):
+    def set_body(self, body: str | bytes | QtCore.QByteArray):
         if isinstance(body, str):
             body = body.encode()
         if isinstance(body, bytes):
             body = QtCore.QByteArray(body)
         self.setBody(body)
 
-    def set_headers(self, headers: Dict[str, str]):
+    def set_headers(self, headers: dict[str, str]):
         for k, v in headers.items():
             self.setRawHeader(
                 QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode())

@@ -2,26 +2,26 @@ from __future__ import annotations
 
 from importlib import metadata
 import pkgutil
-from typing import List, Optional, Sequence
+from typing import Sequence
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 
 
-def load_dist_info(name: str) -> Optional[metadata.Distribution]:
+def load_dist_info(name: str) -> metadata.Distribution | None:
     try:
         return metadata.distribution(name)
     except metadata.PackageNotFoundError:
         return None
 
 
-def list_system_modules() -> List[metadata.Distribution]:
+def list_system_modules() -> list[metadata.Distribution]:
     modules = (test.name for test in pkgutil.iter_modules())
     distributions = (load_dist_info(i) for i in modules)
     return [i for i in distributions if i is not None]
 
 
-def list_package_requirements(package_name: str) -> List[metadata.Distribution]:
+def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     dist = metadata.distribution(package_name)
     modules = (i.split(" ")[0] for i in dist.requires) if dist.requires else []
     distributions = (load_dist_info(i) for i in modules)
@@ -35,7 +35,7 @@ class ImportlibDistributionModel(core.AbstractTableModel):
     def __init__(
         self,
         distributions: Sequence[metadata.Distribution],
-        parent: Optional[QtCore.QObject] = None,
+        parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
         self.distributions = distributions
@@ -79,14 +79,14 @@ class ImportlibDistributionModel(core.AbstractTableModel):
 
     @classmethod
     def from_system(
-        cls, parent: Optional[QtCore.QObject] = None
+        cls, parent: QtCore.QObject | None = None
     ) -> ImportlibDistributionModel:
         distributions = list_system_modules()
         return cls(distributions, parent)
 
     @classmethod
     def from_package(
-        cls, package_name: str, parent: Optional[QtCore.QObject] = None
+        cls, package_name: str, parent: QtCore.QObject | None = None
     ) -> ImportlibDistributionModel:
         distributions = list_package_requirements(package_name)
         return cls(distributions, parent)

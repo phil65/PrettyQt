@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import multimedia
 from prettyqt.qt import QtMultimedia
@@ -158,10 +158,10 @@ class Camera(QtMultimedia.QCamera):
         """
         return CAPTURE_MODES.inverse[self.captureMode()]
 
-    def get_supported_locks(self) -> List[LockTypeStr]:
+    def get_supported_locks(self) -> list[LockTypeStr]:
         return [k for k, v in LOCK_TYPES.items() if v & self.supportedLocks()]
 
-    def get_requested_locks(self) -> List[LockTypeStr]:
+    def get_requested_locks(self) -> list[LockTypeStr]:
         return [k for k, v in LOCK_TYPES.items() if v & self.requestedLocks()]
 
     def get_focus(self) -> multimedia.CameraFocus:

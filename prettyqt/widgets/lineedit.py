@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -37,7 +37,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self,
         default_value: str = "",
         read_only: bool = False,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(default_value, parent)
         self.textChanged.connect(self._set_validation_color)
@@ -124,7 +124,7 @@ class LineEdit(QtWidgets.QLineEdit):
         self.set_validator(validator)
         return validator
 
-    def set_range(self, lower: Optional[int], upper: Optional[int]):
+    def set_range(self, lower: int | None, upper: int | None):
         val = gui.IntValidator()
         val.set_range(lower, upper)
         self.set_validator(val)

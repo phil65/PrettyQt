@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any
 
 from deprecated import deprecated
 
@@ -27,13 +27,13 @@ class DockWidget(QtWidgets.QDockWidget):
             self.set_title(title)
         self.set_allowed_areas("all")
 
-    def __setstate__(self, state: Dict[str, Any]) -> None:
+    def __setstate__(self, state: dict[str, Any]) -> None:
         self.set_widget(state["widget"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def serialize_fields(self) -> Dict[str, Any]:
+    def serialize_fields(self) -> dict[str, Any]:
         return dict(widget=self.widget())
 
     def set_widget(self, widget: QtWidgets.QWidget):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, Literal, Tuple, Union
+from typing import Iterator, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -32,7 +32,7 @@ class LineF(QtCore.QLineF):
             raise KeyError(index)
 
     def __setitem__(
-        self, index: Literal[0, 1], value: Union[QtCore.QPointF, Tuple[float, float]]
+        self, index: Literal[0, 1], value: QtCore.QPointF | tuple[float, float]
     ):
         if index == 0:
             self.set_p1(value)
@@ -41,13 +41,13 @@ class LineF(QtCore.QLineF):
         else:
             raise KeyError(index)
 
-    def set_p1(self, point: Union[QtCore.QPointF, Tuple[float, float]]):
+    def set_p1(self, point: QtCore.QPointF | tuple[float, float]):
         self.setP1(core.PointF(*point) if isinstance(point, tuple) else point)
 
     def get_p1(self) -> core.PointF:
         return core.PointF(self.p1())
 
-    def set_p2(self, point: Union[QtCore.QPointF, Tuple[float, float]]):
+    def set_p2(self, point: QtCore.QPointF | tuple[float, float]):
         self.setP2(core.PointF(*point) if isinstance(point, tuple) else point)
 
     def get_p2(self) -> core.PointF:

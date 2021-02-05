@@ -2,14 +2,13 @@
 from __future__ import annotations
 
 import pathlib
-from typing import Optional
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
 class QuickRefWidget(widgets.Widget):
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
 
         self.resize(608, 353)

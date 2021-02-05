@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -232,7 +232,7 @@ class GraphicsView(QtWidgets.QGraphicsView):
         flags = helpers.merge_flags(items, OPTIMIZATION_FLAGS)
         self.setOptimizationFlags(flags)
 
-    def get_optimization_flags(self) -> List[OptimizationFlagStr]:
+    def get_optimization_flags(self) -> list[OptimizationFlagStr]:
         return [k for k, v in OPTIMIZATION_FLAGS.items() if v & self.optimizationFlags()]
 
 

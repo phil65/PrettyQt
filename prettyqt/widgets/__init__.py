@@ -5,8 +5,6 @@ contains QtWidgets-based classes
 
 from __future__ import annotations
 
-from typing import List, Optional
-
 from prettyqt import core
 from prettyqt.qt.QtWidgets import (
     QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent,
@@ -212,7 +210,7 @@ from .itemeditorcreatorbase import ItemEditorCreatorBase
 from .itemeditorfactory import ItemEditorFactory
 
 
-def app(args: Optional[List[str]] = None) -> Application:
+def app(args: list[str] | None = None) -> Application:
     instance = Application.instance()
     if instance is not None:
         return instance

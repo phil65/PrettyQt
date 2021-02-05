@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -26,8 +26,8 @@ QtWidgets.QLayout.__bases__ = (core.Object, widgets.LayoutItem)
 
 class Layout(QtWidgets.QLayout):
     def __getitem__(
-        self, index: Union[str, int]
-    ) -> Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
+        self, index: str | int
+    ) -> QtWidgets.QWidget | QtWidgets.QLayout | None:
         if isinstance(index, int):
             item = self.itemAt(index)
             widget = item.widget()
@@ -50,7 +50,7 @@ class Layout(QtWidgets.QLayout):
     def __iter__(self):
         return iter(self[i] for i in range(self.count()))
 
-    def __contains__(self, item: Union[QtWidgets.QWidget, QtWidgets.QLayoutItem]):
+    def __contains__(self, item: QtWidgets.QWidget | QtWidgets.QLayoutItem):
         return self.indexOf(item) >= 0
 
     def serialize_fields(self):
@@ -60,7 +60,7 @@ class Layout(QtWidgets.QLayout):
             enabled=self.isEnabled(),
         )
 
-    def get_children(self) -> List[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
+    def get_children(self) -> list[QtWidgets.QWidget | QtWidgets.QLayout]:
         return list(self)
 
     def set_margin(self, margin: int):
@@ -93,7 +93,7 @@ class Layout(QtWidgets.QLayout):
     def set_alignment(
         self,
         alignment: constants.AlignmentStr,
-        item: Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout]] = None,
+        item: QtWidgets.QWidget | QtWidgets.QLayout | None = None,
     ):
         """Set the alignment for widget / layout to alignment.
 
@@ -113,7 +113,7 @@ class Layout(QtWidgets.QLayout):
         else:
             return self.setAlignment(constants.ALIGNMENTS[alignment])
 
-    def add(self, *item: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
+    def add(self, *item: QtWidgets.QWidget | QtWidgets.QLayout):
         for i in item:
             if isinstance(i, QtWidgets.QWidget):
                 self.addWidget(i)

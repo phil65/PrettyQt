@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
 
@@ -23,7 +21,7 @@ class Brush(QtGui.QBrush):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
-    def get_texture_image(self) -> Optional[gui.Image]:
+    def get_texture_image(self) -> gui.Image | None:
         img = self.textureImage()
         if img.isNull():
             return None

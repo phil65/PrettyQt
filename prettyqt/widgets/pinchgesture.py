@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
@@ -28,7 +28,7 @@ class PinchGesture(QtWidgets.QPinchGesture):
     def get_last_center_point(self) -> core.PointF:
         return core.PointF(self.lastCenterPoint())
 
-    def get_change_flags(self) -> List[ChangeFlagStr]:
+    def get_change_flags(self) -> list[ChangeFlagStr]:
         return [k for k, v in CHANGE_FLAGS.items() if v & self.changeFlags()]
 
     def set_change_flags(self, **kwargs):
@@ -38,7 +38,7 @@ class PinchGesture(QtWidgets.QPinchGesture):
                 flag |= CHANGE_FLAGS[k]
         self.setChangeFlags(flag)
 
-    def get_total_change_flags(self) -> List[ChangeFlagStr]:
+    def get_total_change_flags(self) -> list[ChangeFlagStr]:
         return [k for k, v in CHANGE_FLAGS.items() if v & self.totalChangeFlags()]
 
     def set_total_change_flags(self, **kwargs):

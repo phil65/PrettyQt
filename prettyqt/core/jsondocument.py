@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import core
 from prettyqt.qt import QtCore
 
@@ -13,11 +11,11 @@ class JsonDocument(QtCore.QJsonDocument):
     def __repr__(self):
         return f"{type(self).__name__}({self.toVariant()!r})"
 
-    def __getitem__(self, index: Union[int, str]):
+    def __getitem__(self, index: int | str):
         val = self.array() if self.isArray() else self.object()
         return core.JsonValue(val[index])  # type: ignore
 
-    def __setitem__(self, index: Union[int, str], value):
+    def __setitem__(self, index: int | str, value):
         if self.isArray():
             if not isinstance(index, int):
                 raise TypeError()

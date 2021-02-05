@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
@@ -24,8 +24,8 @@ class BoxLayout(QtWidgets.QBoxLayout):
     def __init__(
         self,
         orientation: Literal["horizontal", "vertical"] = "horizontal",
-        parent: Optional[QtWidgets.QWidget] = None,
-        margin: Optional[int] = None,
+        parent: QtWidgets.QWidget | None = None,
+        margin: int | None = None,
     ):
         o = self.TopToBottom if orientation == "vertical" else self.LeftToRight
         super().__init__(o, parent)
@@ -44,7 +44,7 @@ class BoxLayout(QtWidgets.QBoxLayout):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
+    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
         self.add(other)
         return self
 

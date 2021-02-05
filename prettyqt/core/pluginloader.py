@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -19,7 +19,7 @@ QtCore.QPluginLoader.__bases__ = (core.Object,)
 
 
 class PluginLoader(QtCore.QPluginLoader):
-    def get_load_hints(self) -> List[LoadHintStr]:
+    def get_load_hints(self) -> list[LoadHintStr]:
         return [
             k
             for k, v in core.library.LOAD_HINTS.items()  # type: ignore

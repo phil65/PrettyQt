@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-from typing import Optional, Tuple, Union
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
@@ -57,8 +56,8 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
 
     def set_text_alignment(
         self,
-        horizontal: Optional[constants.HorizontalAlignmentStr] = None,
-        vertical: Optional[constants.VerticalAlignmentStr] = None,
+        horizontal: constants.HorizontalAlignmentStr | None = None,
+        vertical: constants.VerticalAlignmentStr | None = None,
     ):
         """Set text alignment of the checkbox.
 
@@ -88,7 +87,7 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())
 
-    def get_icon(self) -> Optional[gui.Icon]:
+    def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         if icon.isNull():
             return None
@@ -96,8 +95,8 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
 
     def set_tooltip(
         self,
-        tooltip: Union[str, os.PathLike],
-        size: Optional[Union[Tuple[int, int], QtCore.QSize]] = None,
+        tooltip: str | os.PathLike,
+        size: tuple[int, int] | QtCore.QSize | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)

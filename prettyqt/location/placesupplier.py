@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from prettyqt import core, location
 from prettyqt.qt import QtCore, QtLocation
 
@@ -10,13 +8,13 @@ class PlaceSupplier(QtLocation.QPlaceSupplier):
     def __bool__(self):
         return not self.isEmpty()
 
-    def get_icon(self) -> Optional[location.PlaceIcon]:
+    def get_icon(self) -> location.PlaceIcon | None:
         icon = self.icon()
         if icon.isEmpty():
             return None
         return location.PlaceIcon(icon)
 
-    def set_url(self, url: Union[str, QtCore.QUrl]):
+    def set_url(self, url: str | QtCore.QUrl):
         url = core.Url(url)
         self.setUrl(url)
 

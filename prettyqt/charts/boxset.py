@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt.QtCharts import QtCharts
@@ -30,14 +30,14 @@ class BoxSet(QtCharts.QBoxSet):
             f"{self.label()!r})"
         )
 
-    def __getitem__(self, index: Union[int, ValuePositionStr]) -> float:
+    def __getitem__(self, index: int | ValuePositionStr) -> float:
         if isinstance(index, str):
             index = VALUE_POSITION[index]
         elif not (0 <= index <= 4):
             raise KeyError(index)
         return self.at(index)
 
-    def __setitem__(self, index: Union[int, ValuePositionStr], value: int):
+    def __setitem__(self, index: int | ValuePositionStr, value: int):
         if isinstance(index, str):
             index = VALUE_POSITION[index]
         elif not (0 <= index <= 4):

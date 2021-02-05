@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtWebEngineWidgets
@@ -82,10 +82,10 @@ class WebEngineContextMenuData(QtWebEngineWidgets.QWebEngineContextMenuData):
     def get_media_type(self) -> MediaTypeStr:
         return MEDIA_TYPES.inverse[self.mediaType()]
 
-    def get_media_flags(self) -> List[MediaFlagStr]:
+    def get_media_flags(self) -> list[MediaFlagStr]:
         return [k for k, v in MEDIA_FLAGS.items() if v & self.mediaFlags()]
 
-    def get_edit_flags(self) -> List[MediaFlagStr]:
+    def get_edit_flags(self) -> list[MediaFlagStr]:
         return [k for k, v in EDIT_FLAGS.items() if v & self.editFlags()]
 
     def can_undo(self) -> bool:

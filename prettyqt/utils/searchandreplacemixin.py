@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 import re
-from typing import Callable, Optional
+from typing import Callable
 
 from prettyqt import gui
 
@@ -31,7 +31,7 @@ class SearchAndReplaceMixin:
     setTextCursor: Callable
 
     def initialize_search_and_replace(self) -> None:
-        self.search_buffer: Optional[str] = None
+        self.search_buffer: str | None = None
 
     def search_and_replace(self, arg: str) -> None:
         """Main search and replace function.

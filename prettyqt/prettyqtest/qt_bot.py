@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import functools
-from typing import Callable, Literal, Optional
+from typing import Callable, Literal
 import weakref
 
 from prettyqt import widgets
@@ -635,7 +635,7 @@ class QtBot:
                 setattr(cls, method_name, method)
 
 
-def _add_widget(item, widget, *, before_close_func: Optional[Callable] = None):
+def _add_widget(item, widget, *, before_close_func: Callable | None = None):
     """Register a widget into the given pytest item for later closing."""
     qt_widgets = getattr(item, "qt_widgets", [])
     qt_widgets.append((weakref.ref(widget), before_close_func))

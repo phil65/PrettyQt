@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import datetime
-from typing import Union
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
@@ -31,7 +30,7 @@ class DateTime(QtCore.QDateTime):
     def get_timezone(self) -> core.TimeZone:
         return core.TimeZone(self.timeZone())
 
-    def set_timezone(self, zone: Union[str, QtCore.QTimeZone]):
+    def set_timezone(self, zone: str | QtCore.QTimeZone):
         if isinstance(zone, str):
             self.setTimeZone(core.TimeZone(zone))
         else:

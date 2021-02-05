@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
 class ButtonDelegate(widgets.ItemDelegate):
-    def __init__(self, parent: Optional[QtWidgets.QWidget], role=QtCore.Qt.UserRole):
+    def __init__(self, parent: QtWidgets.QWidget | None, role=QtCore.Qt.UserRole):
         super().__init__(parent)
         self.fn_role = role
 

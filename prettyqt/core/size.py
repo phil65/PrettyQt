@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Tuple, Union
-
 from prettyqt.qt import QtCore
 
 
@@ -15,7 +13,7 @@ class Size(QtCore.QSize):
     def __reduce__(self):
         return type(self), (self.width(), self.height())
 
-    def expanded_to(self, size: Union[QtCore.QSize, Tuple[int, int]]) -> Size:
+    def expanded_to(self, size: QtCore.QSize | tuple[int, int]) -> Size:
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
         return Size(self.expandedTo(size))

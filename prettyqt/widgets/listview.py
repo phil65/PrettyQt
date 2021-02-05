@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Tuple, Union
+from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -185,7 +185,7 @@ class ListView(QtWidgets.QListView):
         """
         return FLOW.inverse[self.flow()]
 
-    def set_grid_size(self, size: Union[QtCore.QSize, Tuple[int, int]]):
+    def set_grid_size(self, size: QtCore.QSize | tuple[int, int]):
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
         self.setGridSize(size)

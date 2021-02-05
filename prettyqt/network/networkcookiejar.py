@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List, Union
+from typing import Iterator
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
@@ -14,7 +14,7 @@ class NetworkCookieJar(QtNetwork.QNetworkCookieJar):
         self.insertCookie(other)
         return self
 
-    def __getitem__(self, url: str) -> List[QtNetwork.QNetworkCookie]:
+    def __getitem__(self, url: str) -> list[QtNetwork.QNetworkCookie]:
         url = core.Url(url)
         return self.cookiesForUrl(url)
 
@@ -25,6 +25,6 @@ class NetworkCookieJar(QtNetwork.QNetworkCookieJar):
         return iter(self.allCookies())
 
     def set_cookies_from_url(
-        self, cookies: List[QtNetwork.QNetworkCookie], url: Union[QtCore.QUrl, str]
+        self, cookies: list[QtNetwork.QNetworkCookie], url: QtCore.QUrl | str
     ) -> bool:
         return self.setCookiesFromUrl(cookies, QtCore.QUrl(url))

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import core, network
 from prettyqt.qt import QtNetwork
@@ -41,13 +41,13 @@ class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
     def get_ip(self) -> network.HostAddress:
         return network.HostAddress(self.ip())
 
-    def set_ip(self, ip: Union[QtNetwork.QHostAddress, str]):
+    def set_ip(self, ip: QtNetwork.QHostAddress | str):
         self.setIp(network.HostAddress(ip))
 
     def get_netmask(self) -> network.HostAddress:
         return network.HostAddress(self.netmask())
 
-    def set_netmask(self, netmask: Union[QtNetwork.QHostAddress, str]):
+    def set_netmask(self, netmask: QtNetwork.QHostAddress | str):
         self.setNetmask(network.HostAddress(netmask))
 
     def get_preferred_lifetime(self) -> core.DeadlineTimer:

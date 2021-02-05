@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core, location
 from prettyqt.qt import QtLocation
@@ -134,19 +134,19 @@ class GeoServiceProvider(QtLocation.QGeoServiceProvider):
     def get_geocoding_error(self) -> ErrorStr:
         return ERROR.inverse[self.geocodingError()]
 
-    def get_geocoding_features(self) -> List[GeocodingFeatureStr]:
+    def get_geocoding_features(self) -> list[GeocodingFeatureStr]:
         return [k for k, v in GEOCODING_FEATURES.items() if v & self.geocodingFeatures()]
 
     def get_mapping_error(self) -> ErrorStr:
         return ERROR.inverse[self.mappingError()]
 
-    def get_mapping_features(self) -> List[MappingFeatureStr]:
+    def get_mapping_features(self) -> list[MappingFeatureStr]:
         return [k for k, v in MAPPING_FEATURES.items() if v & self.mappingFeatures()]
 
     def get_navigation_error(self) -> ErrorStr:
         return ERROR.inverse[self.navigationError()]
 
-    def get_navigation_features(self) -> List[NavigationFeatureStr]:
+    def get_navigation_features(self) -> list[NavigationFeatureStr]:
         return [
             k for k, v in NAVIGATION_FEATURES.items() if v & self.navigationFeatures()
         ]
@@ -154,13 +154,13 @@ class GeoServiceProvider(QtLocation.QGeoServiceProvider):
     def get_places_error(self) -> ErrorStr:
         return ERROR.inverse[self.placesError()]
 
-    def get_places_features(self) -> List[PlaceFeatureStr]:
+    def get_places_features(self) -> list[PlaceFeatureStr]:
         return [k for k, v in PLACES_FEATURES.items() if v & self.placesFeatures()]
 
     def get_routing_error(self) -> ErrorStr:
         return ERROR.inverse[self.routingError()]
 
-    def get_routing_features(self) -> List[RoutingFeatureStr]:
+    def get_routing_features(self) -> list[RoutingFeatureStr]:
         return [k for k, v in ROUTING_FEATURES.items() if v & self.routingFeatures()]
 
     def get_geocoding_manager(self) -> location.GeoCodingManager:

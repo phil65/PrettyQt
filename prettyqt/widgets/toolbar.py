@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Callable, Dict, List, Optional, Tuple, Union
+from typing import Any, Callable
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -16,7 +16,7 @@ class ToolBar(QtWidgets.QToolBar):
         self.set_icon_size(24)
         self.menu_buttons = list()
 
-    def __setstate__(self, state: Dict[str, Any]) -> None:
+    def __setstate__(self, state: dict[str, Any]) -> None:
         super().__setstate__(state)
         self.addActions(state["actions"])
 
@@ -29,7 +29,7 @@ class ToolBar(QtWidgets.QToolBar):
     def __repr__(self):
         return f"{type(self).__name__}({self.windowTitle()!r})"
 
-    def add(self, item: Union[QtWidgets.QAction, QtWidgets.QWidget]):
+    def add(self, item: QtWidgets.QAction | QtWidgets.QWidget):
         if isinstance(item, QtWidgets.QAction):
             self.addAction(item)
         else:
@@ -47,7 +47,7 @@ class ToolBar(QtWidgets.QToolBar):
         return btn
 
     def add_separator(
-        self, text: Optional[str] = None, before: QtWidgets.QAction = None
+        self, text: str | None = None, before: QtWidgets.QAction = None
     ) -> QtWidgets.QAction:
         """Adds a separator showing an optional label.
 
@@ -91,7 +91,7 @@ class ToolBar(QtWidgets.QToolBar):
         self,
         label: str,
         icon: types.IconType = None,
-        callback: Optional[Callable] = None,
+        callback: Callable | None = None,
         checkable: bool = False,
     ) -> QtWidgets.QAction:
         icon = iconprovider.get_icon(icon)
@@ -107,7 +107,7 @@ class ToolBar(QtWidgets.QToolBar):
         spacer.set_size_policy("expanding", "expanding")
         return self.addWidget(spacer)
 
-    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+    def set_icon_size(self, size: int | tuple[int, int] | QtCore.QSize):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)
@@ -142,7 +142,7 @@ class ToolBar(QtWidgets.QToolBar):
         flag = helpers.merge_flags(areas, constants.TOOLBAR_AREA)
         self.setAllowedAreas(flag)
 
-    def get_allowed_areas(self) -> List[constants.ToolbarAreaStr]:
+    def get_allowed_areas(self) -> list[constants.ToolbarAreaStr]:
         return [
             k
             for k, v in constants.TOOLBAR_AREA.items()

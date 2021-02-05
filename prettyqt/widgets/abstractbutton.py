@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple, Union
-
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, types
@@ -55,7 +53,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def get_icon(self) -> Optional[gui.Icon]:
+    def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         if icon.isNull():
             return None
@@ -74,7 +72,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
         self.set_icon(qicon)
         self.setIconSize(core.Size(size, size))
 
-    def set_shortcut(self, shortcut: Union[None, QtGui.QKeySequence, str]):
+    def set_shortcut(self, shortcut: None | QtGui.QKeySequence | str):
         if shortcut is None:
             shortcut = ""
         if isinstance(shortcut, str):
@@ -87,7 +85,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def set_text(self, text: str):
         self.setText(text)
 
-    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+    def set_icon_size(self, size: int | tuple[int, int] | QtCore.QSize):
         """Set size of the icon."""
         if isinstance(size, int):
             size = core.Size(size, size)

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Iterator, Optional, Union
+from typing import Iterator
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtQml
@@ -16,8 +16,8 @@ class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
 
     def load_data(
         self,
-        data: Union[QtCore.QByteArray, bytes, str],
-        url: Optional[Union[QtCore.QUrl, str]] = None,
+        data: QtCore.QByteArray | bytes | str,
+        url: QtCore.QUrl | str | None = None,
     ):
         if isinstance(data, str):
             data = data.encode()
@@ -29,7 +29,7 @@ class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
             url = core.Url()
         self.loadData(data, url)
 
-    def load_file(self, file: Union[str, os.PathLike, QtCore.QUrl]):
+    def load_file(self, file: str | os.PathLike | QtCore.QUrl):
         if isinstance(file, os.PathLike):
             file = os.fspath(file)
         self.load(file)

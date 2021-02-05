@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Union
+from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
@@ -35,20 +35,20 @@ class ImageWriter(QtGui.QImageWriter):
     def get_subtype(self) -> str:
         return bytes(self.subType()).decode()
 
-    def get_supported_image_formats(self) -> List[str]:
+    def get_supported_image_formats(self) -> list[str]:
         return [bytes(i).decode() for i in self.supportedImageFormats()]
 
-    def get_supported_subtypes(self) -> List[str]:
+    def get_supported_subtypes(self) -> list[str]:
         return [bytes(i).decode() for i in self.supportedSubTypes()]
 
-    def set_subtype(self, subtype: Union[str, bytes, QtCore.QByteArray]):
+    def set_subtype(self, subtype: str | bytes | QtCore.QByteArray):
         if isinstance(subtype, str):
             subtype = subtype.encode()
         if isinstance(subtype, bytes):
             subtype = QtCore.QByteArray(subtype)
         self.setSubType(subtype)
 
-    def set_format(self, fmt: Union[str, bytes, QtCore.QByteArray]):
+    def set_format(self, fmt: str | bytes | QtCore.QByteArray):
         if isinstance(fmt, str):
             fmt = fmt.encode()
         if isinstance(fmt, bytes):

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Dict, Tuple
-
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtWidgets
 
@@ -13,7 +11,7 @@ class Spin:
         self.parent_widget = parent_widget
         self.interval = interval
         self.step = step
-        self.info: Dict[QtWidgets.QWidget, Tuple[core.Timer, int, int]] = {}
+        self.info: dict[QtWidgets.QWidget, tuple[core.Timer, int, int]] = {}
 
     def _update(self):
         if self.parent_widget not in self.info:

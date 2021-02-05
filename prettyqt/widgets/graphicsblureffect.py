@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
@@ -38,5 +38,5 @@ class GraphicsBlurEffect(QtWidgets.QGraphicsBlurEffect):
             flags = QtWidgets.QGraphicsBlurEffect.BlurHint()
         self.setBlurHints(flags)
 
-    def get_blur_hints(self) -> List[BlurHintStr]:
+    def get_blur_hints(self) -> list[BlurHintStr]:
         return [k for k, v in BLUR_HINTS.items() if v & self.blurHints()]

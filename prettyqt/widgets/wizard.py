@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, Literal, Optional
+from typing import Iterator, Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -216,14 +216,14 @@ class Wizard(QtWidgets.QWizard):
             raise InvalidParamError(button_type, WIZARD_BUTTON)
         return self.buttonText(WIZARD_BUTTON[button_type])
 
-    def set_pixmap(self, typ: WizardPixmapStr, pixmap: Optional[QtGui.QPixmap]):
+    def set_pixmap(self, typ: WizardPixmapStr, pixmap: QtGui.QPixmap | None):
         if typ not in WIZARD_PIXMAP:
             raise InvalidParamError(typ, WIZARD_PIXMAP)
         if pixmap is None:
             pixmap = QtGui.QPixmap()
         self.setPixmap(WIZARD_PIXMAP[typ], pixmap)
 
-    def get_pixmap(self, typ: WizardPixmapStr) -> Optional[gui.Pixmap]:
+    def get_pixmap(self, typ: WizardPixmapStr) -> gui.Pixmap | None:
         if typ not in WIZARD_PIXMAP:
             raise InvalidParamError(typ, WIZARD_PIXMAP)
         pix = gui.Pixmap(self.pixmap(WIZARD_PIXMAP[typ]))

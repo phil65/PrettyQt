@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui, QtWidgets
@@ -354,7 +354,7 @@ class Style(QtWidgets.QStyle):
         element: SimpleControlStr,
         option: QtWidgets.QStyleOption,
         painter: QtGui.QPainter,
-        widget: Optional[QtWidgets.QWidget] = None,
+        widget: QtWidgets.QWidget | None = None,
     ):
         if element not in PRIMITIVE_ELEMENT:
             raise InvalidParamError(element, PRIMITIVE_ELEMENT)

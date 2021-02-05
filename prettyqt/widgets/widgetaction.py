@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtWidgets
 
@@ -10,7 +8,7 @@ QtWidgets.QWidgetAction.__bases__ = (widgets.Action,)
 
 
 class WidgetAction(QtWidgets.QWidgetAction):
-    def __init__(self, parent: Optional[QtCore.QObject] = None):
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)  # type: ignore
         self._menu = None  # bc of PySide inheritance also defined here
 

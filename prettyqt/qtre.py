@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple, Union
+from typing import Any, Callable, Iterator
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -40,10 +40,10 @@ class Match(core.RegularExpressionMatch):
     def __repr__(self):
         return f"<re.Match object; span={self.span()}, match={self.groups()}>"
 
-    def __getitem__(self, item: Union[str, int]) -> str:
+    def __getitem__(self, item: str | int) -> str:
         return self.captured(item)
 
-    def group(self, *groups: Union[str, int]) -> Union[tuple, str]:
+    def group(self, *groups: str | int) -> tuple | str:
         if len(groups) > 1:
             return tuple(self.captured(i) for i in groups)
         if len(groups) == 0:
@@ -58,7 +58,7 @@ class Match(core.RegularExpressionMatch):
             for i in range(self.re.captureCount())
         )
 
-    def groupdict(self, default=None) -> Dict[str, Any]:
+    def groupdict(self, default=None) -> dict[str, Any]:
         if self.lastindex is None:
             return {}
         groups = [
@@ -74,16 +74,16 @@ class Match(core.RegularExpressionMatch):
     def end(self, group: int = 0) -> int:
         return self.capturedEnd(group)
 
-    def span(self, group: int = 0) -> Tuple[int, int]:
+    def span(self, group: int = 0) -> tuple[int, int]:
         return (self.capturedStart(group), self.capturedEnd(group))
 
     @property
-    def lastindex(self) -> Optional[int]:
+    def lastindex(self) -> int | None:
         idx = self.lastCapturedIndex()
         return None if idx == -1 else idx
 
     @property
-    def lastgroup(self) -> Optional[str]:
+    def lastgroup(self) -> str | None:
         if self.lastCapturedIndex() == -1:
             return None
         return self.re.namedCaptureGroups()[self.lastCapturedIndex()]
@@ -106,14 +106,14 @@ class Pattern(core.RegularExpression):
         super().__init__(pattern, flag)
 
     def match(  # type: ignore[override]
-        self, string: str, pos: int = 0, endpos: Optional[int] = None
-    ) -> Optional[Match]:
+        self, string: str, pos: int = 0, endpos: int | None = None
+    ) -> Match | None:
         match = super().match(string[:endpos], pos)
         return Match(match) if match.hasMatch() else None
 
     def fullmatch(
-        self, string: str, pos: int = 0, endpos: Optional[int] = None
-    ) -> Optional[Match]:
+        self, string: str, pos: int = 0, endpos: int | None = None
+    ) -> Match | None:
         if endpos:
             string = string[:endpos]
         match = super().match(string, pos)
@@ -123,7 +123,7 @@ class Pattern(core.RegularExpression):
             return None
 
     def finditer(
-        self, string: str, pos: int = 0, endpos: Optional[int] = None
+        self, string: str, pos: int = 0, endpos: int | None = None
     ) -> Iterator[Match]:
         for match in self.globalMatch(string[:endpos], offset=pos):
             match.pos = pos
@@ -131,11 +131,11 @@ class Pattern(core.RegularExpression):
             match.string = string
             yield match
 
-    def findall(self, string: str, pos: int = 0, endpos: Optional[int] = None) -> list:
+    def findall(self, string: str, pos: int = 0, endpos: int | None = None) -> list:
         matches = list(self.globalMatch(string[:endpos], offset=pos))
         return [m.groups() if len(m.groups()) > 1 else m.group(0) for m in matches]
 
-    def subn(self, repl: Union[str, Callable], string: str, count: int = 0):
+    def subn(self, repl: str | Callable, string: str, count: int = 0):
         result = string
         matches = self.global_match(string)
         matches = list(matches)
@@ -151,11 +151,11 @@ class Pattern(core.RegularExpression):
             result = result[: m.start()] + to_replace + result[m.end() :]
         return (result, min(len(matches), count))
 
-    def sub(self, repl: Union[str, Callable], string: str, count: int = 0):
+    def sub(self, repl: str | Callable, string: str, count: int = 0):
         res = self.subn(repl, string, count)
         return res[0]
 
-    def search(self, string: str, pos: int = 0, endpos: Optional[int] = None):
+    def search(self, string: str, pos: int = 0, endpos: int | None = None):
         match = super().match(string[:endpos], pos)
         return match if match.hasMatch() else None
 
@@ -187,7 +187,7 @@ class Pattern(core.RegularExpression):
         return self.captureCount()
 
     @property
-    def groupindex(self) -> Dict[str, int]:
+    def groupindex(self) -> dict[str, int]:
         return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1)}
 
     @property
@@ -199,20 +199,18 @@ def compile(pattern: str, flags: int = 0) -> Pattern:
     return Pattern(pattern, flags)
 
 
-def search(pattern: str, string: str, flags: int = 0) -> Optional[core.RegularExpression]:
+def search(pattern: str, string: str, flags: int = 0) -> core.RegularExpression | None:
     compiled = compile(pattern, flags)
     match = compiled.search(string)
     return match
 
 
-def match(pattern: str, string: str, flags: int = 0) -> Optional[core.RegularExpression]:
+def match(pattern: str, string: str, flags: int = 0) -> core.RegularExpression | None:
     compiled = compile(pattern, flags)
     return compiled.match(string)
 
 
-def fullmatch(
-    pattern: str, string: str, flags: int = 0
-) -> Optional[core.RegularExpression]:
+def fullmatch(pattern: str, string: str, flags: int = 0) -> core.RegularExpression | None:
     compiled = compile(pattern, flags)
     return compiled.fullmatch(string)
 
@@ -222,7 +220,7 @@ def fullmatch(
 #     return compiled.split(string, maxsplit)
 
 
-def findall(pattern: str, string: str, flags: int = 0) -> List[str]:
+def findall(pattern: str, string: str, flags: int = 0) -> list[str]:
     compiled = compile(pattern, flags)
     return compiled.findall(string)
 
@@ -239,7 +237,7 @@ def sub(pattern: str, repl: str, string: str, count: int = 0, flags: int = 0) ->
 
 def subn(
     pattern: str, repl: str, string: str, count: int = 0, flags: int = 0
-) -> Tuple[str, int]:
+) -> tuple[str, int]:
     compiled = compile(pattern, flags)
     return compiled.subn(repl, string, count)
 

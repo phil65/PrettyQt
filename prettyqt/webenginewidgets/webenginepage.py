@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Callable, Literal, Optional, Union
+from typing import Callable, Literal
 
 from prettyqt import core, gui, webenginewidgets
 from prettyqt.qt import QtCore, QtWebEngineWidgets
@@ -208,13 +208,13 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
             zoom_factor=self.zoomFactor(),
         )
 
-    def get_icon(self) -> Optional[gui.Icon]:
+    def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         if icon.isNull():
             return None
         return gui.Icon(icon)
 
-    def set_url(self, url: Union[str, os.PathLike]):
+    def set_url(self, url: str | os.PathLike):
         """Set the url of the WebEnginePage.
 
         Clears the Page and loads the URL.
@@ -243,7 +243,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
     def get_contents_size(self) -> core.SizeF:
         return core.SizeF(self.contentsSize())
 
-    def load_url(self, url: Union[QtCore.QUrl, str, os.PathLike]):
+    def load_url(self, url: QtCore.QUrl | str | os.PathLike):
         """Load the URL.
 
         Loads the specified url and displays it.
@@ -275,7 +275,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         string: str,
         backward: bool = False,
         case_sensitive: bool = False,
-        callback: Optional[Callable[[bool], None]] = None,
+        callback: Callable[[bool], None] | None = None,
     ):
         """Find text in the current page.
 
@@ -338,7 +338,7 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
 
     def set_feature_permission(
         self,
-        url: Union[QtCore.QUrl, str],
+        url: QtCore.QUrl | str,
         feature: FeatureStr,
         policy: PermissionPolicyStr,
     ):

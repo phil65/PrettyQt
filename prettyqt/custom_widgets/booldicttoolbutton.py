@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Dict, Optional
-
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import types
@@ -14,8 +12,8 @@ class BoolDictToolButton(widgets.ToolButton):
         self,
         title: str,
         icon: types.IconType = None,
-        dct: Dict[str, str] = None,
-        parent: Optional[QtWidgets.QWidget] = None,
+        dct: dict[str, str] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
         self.set_text(title)
@@ -33,7 +31,7 @@ class BoolDictToolButton(widgets.ToolButton):
         self.button_menu[key].setChecked(value)
         self.value_changed.emit(self.as_dict())
 
-    def set_dict(self, dct: Dict[str, str]):
+    def set_dict(self, dct: dict[str, str]):
         self.button_menu.clear()
         for k, v in dct.items():
             action = widgets.Action()
@@ -44,7 +42,7 @@ class BoolDictToolButton(widgets.ToolButton):
             self.button_menu.add(action)
         self.value_changed.emit(self.as_dict())
 
-    def as_dict(self) -> Dict[str, bool]:
+    def as_dict(self) -> dict[str, bool]:
         return {act.get_id(): act.isChecked() for act in self.button_menu}
 
 

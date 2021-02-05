@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from prettyqt import constants
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
@@ -34,7 +32,7 @@ class LayoutItem(QtWidgets.QLayoutItem):
 
     def get_item(
         self,
-    ) -> Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout, QtWidgets.QSpacerItem]]:
+    ) -> QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QSpacerItem | None:
         if content := self.widget():
             return content
         if content := self.layout():

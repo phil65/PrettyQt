@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Optional
+from typing import Callable
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
@@ -15,9 +15,9 @@ class PushButton(QtWidgets.QPushButton):
 
     def __init__(
         self,
-        label: Optional[str] = None,
-        parent: Optional[QtWidgets.QWidget] = None,
-        callback: Optional[Callable] = None,
+        label: str | None = None,
+        parent: QtWidgets.QWidget | None = None,
+        callback: Callable | None = None,
     ):
         if label is None:
             label = ""

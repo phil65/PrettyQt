@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List, Optional, Union
-
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
@@ -65,7 +63,7 @@ class MetaObject:
     def __init__(self, metaobject: QtCore.QMetaObject):
         self.item = metaobject
 
-    def get_method(self, index: Union[int, str]) -> core.MetaMethod:
+    def get_method(self, index: int | str) -> core.MetaMethod:
         if isinstance(index, int):
             return self.get_methods()[index]
         else:
@@ -74,7 +72,7 @@ class MetaObject:
                     return method
             raise KeyError(index)
 
-    def get_enum(self, index: Union[int, str]) -> core.MetaEnum:
+    def get_enum(self, index: int | str) -> core.MetaEnum:
         if isinstance(index, int):
             return self.get_enums()[index]
         else:
@@ -86,8 +84,8 @@ class MetaObject:
     def get_methods(
         self,
         include_super: bool = True,
-        type_filter: Optional[core.metamethod.MethodTypeStr] = None,
-    ) -> List[core.MetaMethod]:
+        type_filter: core.metamethod.MethodTypeStr | None = None,
+    ) -> list[core.MetaMethod]:
         start = 0 if include_super else self.item.methodOffset()
         methods = [
             core.MetaMethod(self.item.method(i))
@@ -98,27 +96,27 @@ class MetaObject:
         else:
             return [i for i in methods if i.get_method_type() == type_filter]
 
-    def get_enums(self, include_super: bool = True) -> List[core.MetaEnum]:
+    def get_enums(self, include_super: bool = True) -> list[core.MetaEnum]:
         start = 0 if include_super else self.item.enumeratorOffset()
         return [
             core.MetaEnum(self.item.enumerator(i))
             for i in range(start, self.item.enumeratorCount())
         ]
 
-    def get_constructors(self) -> List[core.MetaMethod]:
+    def get_constructors(self) -> list[core.MetaMethod]:
         return [
             core.MetaMethod(self.item.constructor(i))
             for i in range(self.item.constructorCount())
         ]
 
-    def get_properties(self, include_super: bool = True) -> List[core.MetaProperty]:
+    def get_properties(self, include_super: bool = True) -> list[core.MetaProperty]:
         start = 0 if include_super else self.item.propertyOffset()
         return [
             core.MetaProperty(self.item.property(i))
             for i in range(start, self.item.propertyCount())
         ]
 
-    def get_signals(self, include_super: bool = True) -> List[core.MetaMethod]:
+    def get_signals(self, include_super: bool = True) -> list[core.MetaMethod]:
         return [
             i
             for i in self.get_methods(include_super=include_super)

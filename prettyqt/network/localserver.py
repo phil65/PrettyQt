@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core, network
 from prettyqt.qt import QtNetwork
@@ -31,7 +31,7 @@ class LocalServer(QtNetwork.QLocalServer):
         flags = helpers.merge_flags(name, SOCKET_OPTION)
         self.setSocketOptions(flags)
 
-    def get_socket_options(self) -> List[SocketOptionStr]:
+    def get_socket_options(self) -> list[SocketOptionStr]:
         return [k for k, v in SOCKET_OPTION.items() if v & self.socketOptions()]
 
 

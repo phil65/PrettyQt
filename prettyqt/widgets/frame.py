@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
@@ -62,7 +62,7 @@ class Frame(QtWidgets.QFrame):
             raise InvalidParamError(style, SHADOW)
         self.setFrameShadow(SHADOW[style])
 
-    def get_frame_shadow(self) -> Optional[ShadowStr]:
+    def get_frame_shadow(self) -> ShadowStr | None:
         """Return current frame shadow.
 
         Returns:

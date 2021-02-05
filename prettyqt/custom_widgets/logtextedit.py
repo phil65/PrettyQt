@@ -4,7 +4,6 @@ import logging
 import re
 import sys
 import traceback
-from typing import Optional
 
 from prettyqt import gui, widgets
 from prettyqt.utils import signallogger
@@ -27,7 +26,7 @@ logger = logging.getLogger(__name__)
 
 class Highlighter:
     placeholder: str
-    color: Optional[str] = None
+    color: str | None = None
     italic: bool = False
     bold: bool = False
 

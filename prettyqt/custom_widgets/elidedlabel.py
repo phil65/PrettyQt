@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
 
@@ -12,7 +10,7 @@ class ElidedLabel(widgets.Frame):
     def __init__(
         self,
         text: str = "",
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
         self.elided = False

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
 
@@ -27,7 +25,7 @@ class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
             return False
         return self.regularExpression() == other.regularExpression()
 
-    def set_regex(self, regex: Union[str, core.RegularExpression], flags=0):
+    def set_regex(self, regex: str | core.RegularExpression, flags=0):
         if isinstance(regex, str):
             regex = core.RegularExpression(regex, flags)
         self.setRegularExpression(regex)

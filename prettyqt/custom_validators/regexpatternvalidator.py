@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import sre_constants
-from typing import Tuple
 
 import regex as re
 
@@ -21,7 +20,7 @@ class RegexPatternValidator(gui.Validator):
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> Tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[QtGui.QValidator.State, str, int]:
         # if text == "":
         #     self.compiled = None
         #     return (self.Intermediate, text, pos)

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import positioning
 from prettyqt.qt import QtCore, QtPositioning
 from prettyqt.utils import bidict
@@ -20,7 +18,7 @@ QtPositioning.QNmeaPositionInfoSource.__bases__ = (positioning.GeoPositionInfoSo
 class NmeaPositionInfoSource(QtPositioning.QNmeaPositionInfoSource):
     def __init__(
         self,
-        update_mode: Union[QtPositioning.QNmeaPositionInfoSource.UpdateMode, str],
+        update_mode: QtPositioning.QNmeaPositionInfoSource.UpdateMode | str,
         parent: QtCore.QObject,
     ):
         if isinstance(update_mode, QtPositioning.QNmeaPositionInfoSource.UpdateMode):

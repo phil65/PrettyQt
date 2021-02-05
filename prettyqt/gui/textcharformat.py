@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
@@ -60,7 +60,7 @@ QtGui.QTextCharFormat.__bases__ = (gui.TextFormat,)
 class TextCharFormat(QtGui.QTextCharFormat):
     def __init__(
         self,
-        text_color: Union[types.ColorType, QtGui.QBrush] = None,
+        text_color: types.ColorType | QtGui.QBrush = None,
         bold: bool = False,
         italic: bool = False,
     ):
@@ -71,12 +71,12 @@ class TextCharFormat(QtGui.QTextCharFormat):
             self.set_font_weight("bold")
         self.setFontItalic(italic)
 
-    def set_foreground_color(self, color: Union[types.ColorType, QtGui.QBrush]):
+    def set_foreground_color(self, color: types.ColorType | QtGui.QBrush):
         if not isinstance(color, QtGui.QBrush):
             color = colors.get_color(color)
         self.setForeground(color)
 
-    def set_background_color(self, color: Union[types.ColorType, QtGui.QBrush]):
+    def set_background_color(self, color: types.ColorType | QtGui.QBrush):
         if not isinstance(color, QtGui.QBrush):
             color = colors.get_color(color)
         self.setBackground(color)

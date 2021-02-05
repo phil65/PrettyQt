@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Iterable, Literal, Mapping, Optional, Tuple, Union
+from typing import Any, Iterable, Literal, Mapping
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -102,7 +102,7 @@ class ComboBox(QtWidgets.QComboBox):
         data = self.itemData(index)
         self.value_changed.emit(data)
 
-    def add_items(self, items: Union[Iterable, Mapping], default=NoData):
+    def add_items(self, items: Iterable | Mapping, default=NoData):
         if isinstance(items, Mapping):
             for k, v in items.items():
                 self.addItem(v, userData=k)
@@ -124,7 +124,7 @@ class ComboBox(QtWidgets.QComboBox):
         else:
             self.addItem(label, userData=data)
 
-    def item_icon(self, index: int) -> Optional[gui.Icon]:
+    def item_icon(self, index: int) -> gui.Icon | None:
         icon = self.itemIcon(index)
         if icon.isNull():
             return None
@@ -172,7 +172,7 @@ class ComboBox(QtWidgets.QComboBox):
         """
         return SIZE_ADJUST_POLICY.inverse[self.sizeAdjustPolicy()]
 
-    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+    def set_icon_size(self, size: int | tuple[int, int] | QtCore.QSize):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)

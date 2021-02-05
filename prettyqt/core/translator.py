@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Optional, Set, Union
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -18,19 +17,19 @@ class Translator(QtCore.QTranslator):
     def __bool__(self):
         return not self.isEmpty()
 
-    def get_file_path(self) -> Optional[pathlib.Path]:
+    def get_file_path(self) -> pathlib.Path | None:
         path = self.filePath()
         if not path:
             return None
         return pathlib.Path(path)
 
-    def load_file(self, path: Union[str, os.PathLike]):
+    def load_file(self, path: str | os.PathLike):
         path = pathlib.Path(path)
         if not self.load(path.name, str(path.parent)):
             raise OSError(f"Invalid language file {path}")
 
     @classmethod
-    def get_available_languages(cls) -> Set[str]:
+    def get_available_languages(cls) -> set[str]:
         return {
             str(path).split("_", maxsplit=1)[1][:-3]
             for path in LOCALIZATION_PATH.iterdir()

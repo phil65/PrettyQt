@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
@@ -11,7 +9,7 @@ class OptionalWidget(widgets.GroupBox):
         self,
         widget: QtWidgets.QWidget,
         title: str = "",
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(checkable=True, title=title)
         self.set_layout("vertical")

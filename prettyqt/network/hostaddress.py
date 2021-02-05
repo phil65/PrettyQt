@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import network
 from prettyqt.qt import QtNetwork
@@ -46,7 +46,7 @@ class HostAddress(QtNetwork.QHostAddress):
     def get_protocol(self) -> NetworkLayerProtocolStr:
         return network.abstractsocket.NETWORK_LAYER_PROTOCOL.inverse[self.protocol()]
 
-    def set_address(self, address: Union[int, str]):
+    def set_address(self, address: int | str):
         if address in SPECIAL_ADDRESS:
             address = SPECIAL_ADDRESS[address]
         ret = self.setAddress(address)

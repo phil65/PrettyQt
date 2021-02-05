@@ -5,7 +5,7 @@ import functools
 import operator
 import re
 import sys
-from typing import Any, Dict, List, Mapping, Tuple
+from typing import Any, Mapping
 
 
 REGEX = re.compile(
@@ -30,7 +30,7 @@ def format_seconds(seconds: float) -> str:
     return f"{h:02}:{h:02}:{h:02}"
 
 
-def string_to_num_array(array: str) -> List[float]:
+def string_to_num_array(array: str) -> list[float]:
     floats = [float(i) for i in array.split(",")]
     return [int(i) if i.is_integer() else i for i in floats]
 
@@ -39,7 +39,7 @@ def merge_flags(flags, mapping: Mapping):
     return functools.reduce(operator.ior, [mapping[t] for t in flags])
 
 
-def format_kwargs(kwargs: Dict[str, Any]) -> str:
+def format_kwargs(kwargs: dict[str, Any]) -> str:
     kwarg_list = [f"{k}={repr(v)}" for k, v in kwargs.items()]
     return ", ".join(kwarg_list)
 
@@ -57,8 +57,8 @@ def cut_off_str(obj, max_len: int) -> str:
 
 
 def get_color_percentage(
-    color_1: Tuple[int, int, int, int], color_2: Tuple[int, int, int, int], percent: float
-) -> Tuple[int, int, int, int]:
+    color_1: tuple[int, int, int, int], color_2: tuple[int, int, int, int], percent: float
+) -> tuple[int, int, int, int]:
     """Get a color which is percent% interpolated between start and end.
 
     Args:

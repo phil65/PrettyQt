@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
@@ -13,7 +11,7 @@ class Dial(QtWidgets.QDial):
 
     value_changed = core.Signal(int)
 
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
         self.valueChanged.connect(self.on_value_change)
 

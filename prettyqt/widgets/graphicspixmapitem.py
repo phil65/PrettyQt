@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtWidgets
@@ -69,7 +69,7 @@ class GraphicsPixmapItem(QtWidgets.QGraphicsPixmapItem):
         """
         return SHAPE_MODE.inverse[self.shapeMode()]
 
-    def get_pixmap(self) -> Optional[gui.Pixmap]:
+    def get_pixmap(self) -> gui.Pixmap | None:
         pix = self.pixmap()
         if pix.isNull():
             return None

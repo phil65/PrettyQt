@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional, Tuple, Union
+from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
@@ -43,7 +43,7 @@ class FormLayout(QtWidgets.QFormLayout):
         self.setVerticalSpacing(8)
 
     def __setitem__(
-        self, index: Union[int, Tuple[int, RoleStr]], value: Union[str, QtWidgets.QWidget]
+        self, index: int | tuple[int, RoleStr], value: str | QtWidgets.QWidget
     ):
         if isinstance(index, tuple):
             row = index[0]
@@ -63,7 +63,7 @@ class FormLayout(QtWidgets.QFormLayout):
         """Needed for PySide2."""
         return self.rowCount()
 
-    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout, tuple]):
+    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout | tuple):
         self.add(other)
         return self
 
@@ -83,7 +83,7 @@ class FormLayout(QtWidgets.QFormLayout):
             self.set_widget(item, pos[0], pos[1])
 
     def set_widget(
-        self, widget: Union[str, QtWidgets.QWidget], row: int, role: RoleStr = "both"
+        self, widget: str | QtWidgets.QWidget, row: int, role: RoleStr = "both"
     ):
         if isinstance(widget, str):
             widget = widgets.Label(widget)
@@ -91,14 +91,14 @@ class FormLayout(QtWidgets.QFormLayout):
 
     def get_widget(
         self, row: int, role: RoleStr = "both"
-    ) -> Union[QtWidgets.QLayout, QtWidgets.QWidget]:
+    ) -> QtWidgets.QLayout | QtWidgets.QWidget:
         item = self.itemAt(row, ROLE[role])
         widget = item.widget()
         if widget is None:
             widget = item.layout()
         return widget
 
-    def get_item_position(self, index: int) -> Optional[Tuple[int, RoleStr]]:
+    def get_item_position(self, index: int) -> tuple[int, RoleStr] | None:
         pos = self.getItemPosition(index)  # type: ignore
         if pos[0] == -1:  # type: ignore
             return None

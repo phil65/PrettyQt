@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import functools
 import hashlib
-from typing import Iterable, List, Literal, Optional, Union
+from typing import Iterable, Literal
 
 from deprecated import deprecated
 
@@ -29,8 +29,8 @@ class HeaderView(QtWidgets.QHeaderView):
 
     def __init__(
         self,
-        orientation: Union[constants.OrientationStr, QtCore.Qt.Orientation],
-        parent: Optional[QtWidgets.QWidget] = None,
+        orientation: constants.OrientationStr | QtCore.Qt.Orientation,
+        parent: QtWidgets.QWidget | None = None,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):
             ori = orientation
@@ -47,15 +47,13 @@ class HeaderView(QtWidgets.QHeaderView):
         columns_hash = hashlib.md5(column_names.encode()).hexdigest()
         return f"{type(self).__name__}_{columns_hash}.state"
 
-    def save_state(
-        self, settings: Optional[core.Settings] = None, key: Optional[str] = None
-    ):
+    def save_state(self, settings: core.Settings | None = None, key: str | None = None):
         settings = core.Settings() if settings is None else settings
         key = self.generate_header_id() if key is None else key
         settings.set_value(key, self.saveState())
 
     def load_state(
-        self, settings: Optional[core.Settings] = None, key: Optional[str] = None
+        self, settings: core.Settings | None = None, key: str | None = None
     ) -> bool:
         settings = core.Settings() if settings is None else settings
         key = self.generate_header_id() if key is None else key
@@ -69,10 +67,10 @@ class HeaderView(QtWidgets.QHeaderView):
         self.resizeSections(MODES[mode])
 
     @deprecated(reason="This method is deprecated, use set_resize_mode instead.")
-    def resize_mode(self, mode: ModeStr, col: Optional[int] = None):
+    def resize_mode(self, mode: ModeStr, col: int | None = None):
         self.set_resize_mode(mode, col)
 
-    def set_resize_mode(self, mode: ModeStr, col: Optional[int] = None):
+    def set_resize_mode(self, mode: ModeStr, col: int | None = None):
         if mode not in MODES:
             raise InvalidParamError(mode, MODES)
         if col is None:
@@ -80,7 +78,7 @@ class HeaderView(QtWidgets.QHeaderView):
         else:
             self.setSectionResizeMode(col, MODES[mode])
 
-    def get_section_labels(self) -> List[str]:
+    def get_section_labels(self) -> list[str]:
         model = self.model()
         return [
             model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
@@ -94,7 +92,7 @@ class HeaderView(QtWidgets.QHeaderView):
         menu.add_actions(actions)
         menu.exec_(self.mapToGlobal(event.pos()))
 
-    def get_header_actions(self) -> List[widgets.Action]:
+    def get_header_actions(self) -> list[widgets.Action]:
         actions = list()
         labels = self.get_section_labels()[1:]
         for i, header_label in enumerate(labels, start=1):
@@ -109,12 +107,12 @@ class HeaderView(QtWidgets.QHeaderView):
         self.section_vis_changed.emit(i, hide)
         self.setSectionHidden(i, hide)
 
-    def set_sizes(self, sizes: Iterable[Optional[int]]):
+    def set_sizes(self, sizes: Iterable[int | None]):
         for i, size in enumerate(sizes):
             if size is not None:
                 self.resizeSection(i, size)
 
-    def set_default_section_size(self, size: Optional[int]):
+    def set_default_section_size(self, size: int | None):
         if size is None:
             self.resetDefaultSectionSize()
         else:

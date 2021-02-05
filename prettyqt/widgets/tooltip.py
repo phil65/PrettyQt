@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
@@ -9,7 +7,7 @@ class ToolTip(QtWidgets.QToolTip):
     @classmethod
     def show_text(
         cls,
-        position: Optional[QtCore.QPoint] = None,
+        position: QtCore.QPoint | None = None,
         text: str = "",
         linebreak_px: int = 400,
     ):

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import List, Literal, Optional, Tuple, Union
+from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -38,8 +38,8 @@ class IconEngine(QtGui.QIconEngine):
 
     def add_file(
         self,
-        path: Union[str, os.PathLike],
-        size: Union[QtCore.QSize, Tuple[int, int], int],
+        path: str | os.PathLike,
+        size: QtCore.QSize | tuple[int, int] | int,
         mode: gui.icon.ModeStr,
         state: gui.icon.StateStr,
     ):
@@ -67,7 +67,7 @@ class IconEngine(QtGui.QIconEngine):
 
     def get_actual_size(
         self,
-        size: Union[QtCore.QSize, Tuple[int, int], int],
+        size: QtCore.QSize | tuple[int, int] | int,
         mode: gui.icon.ModeStr = "normal",
         state: gui.icon.StateStr = "off",
     ) -> core.Size:
@@ -85,7 +85,7 @@ class IconEngine(QtGui.QIconEngine):
 
     def get_available_sizes(
         self, mode: gui.icon.ModeStr = "normal", state: gui.icon.StateStr = "off"
-    ) -> List[core.Size]:
+    ) -> list[core.Size]:
         if mode not in gui.icon.MODE:
             raise InvalidParamError(mode, gui.icon.MODE)
         if state not in gui.icon.STATE:
@@ -97,10 +97,10 @@ class IconEngine(QtGui.QIconEngine):
 
     def get_pixmap(
         self,
-        size: Union[QtCore.QSize, Tuple[int, int], int],
+        size: QtCore.QSize | tuple[int, int] | int,
         mode: gui.icon.ModeStr = "normal",
         state: gui.icon.StateStr = "off",
-        scale: Optional[float] = None,
+        scale: float | None = None,
     ) -> gui.Pixmap:
         if mode not in gui.icon.MODE:
             raise InvalidParamError(mode, gui.icon.MODE)

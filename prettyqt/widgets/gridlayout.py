@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, Optional, Tuple, Union
+from typing import Iterator
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -12,8 +12,8 @@ QtWidgets.QGridLayout.__bases__ = (widgets.Layout,)
 
 class GridLayout(QtWidgets.QGridLayout):
     def __getitem__(
-        self, idx: Union[Tuple[int, int], int, str]
-    ) -> Optional[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
+        self, idx: tuple[int, int] | int | str
+    ) -> QtWidgets.QWidget | QtWidgets.QLayout | None:
         if isinstance(idx, tuple):
             item = self.itemAtPosition(*idx)
         elif isinstance(idx, int):
@@ -27,8 +27,8 @@ class GridLayout(QtWidgets.QGridLayout):
 
     def __setitem__(
         self,
-        idx: Tuple[Union[int, slice], Union[int, slice]],
-        value: Union[QtWidgets.QWidget, QtWidgets.QLayout, QtWidgets.QLayoutItem],
+        idx: tuple[int | slice, int | slice],
+        value: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem,
     ):
         row, col = idx
         rowspan = row.stop - row.start + 1 if isinstance(row, slice) else 1
@@ -53,14 +53,14 @@ class GridLayout(QtWidgets.QGridLayout):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __iter__(self) -> Iterator[Union[QtWidgets.QWidget, QtWidgets.QLayout]]:
+    def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout]:
         return iter(item for i in range(self.count()) if (item := self[i]) is not None)
 
     def __add__(
         self,
-        other: Union[
-            tuple, list, QtWidgets.QWidget, QtWidgets.QLayout, QtWidgets.QLayoutItem
-        ],
+        other: (
+            tuple | list | QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem
+        ),
     ):
         if isinstance(other, (tuple, list)):
             for i, control in enumerate(other):
@@ -71,7 +71,7 @@ class GridLayout(QtWidgets.QGridLayout):
 
     def add(
         self,
-        item: Union[QtWidgets.QWidget, QtWidgets.QLayout, QtWidgets.QLayoutItem],
+        item: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem,
         rowstart: int,
         colstart: int,
         rowspan: int = 1,
@@ -84,9 +84,7 @@ class GridLayout(QtWidgets.QGridLayout):
         else:
             self.addItem(item, rowstart, colstart, rowspan, colspan)
 
-    def append(
-        self, item: Union[QtWidgets.QWidget, QtWidgets.QLayout, QtWidgets.QLayoutItem]
-    ):
+    def append(self, item: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
     def set_origin_corner(self, corner: constants.CornerStr):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List, Optional, Union
+from typing import Iterator
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -13,10 +13,8 @@ QtWidgets.QSplitter.__bases__ = (widgets.Frame,)
 class Splitter(QtWidgets.QSplitter):
     def __init__(
         self,
-        orientation: Union[
-            constants.OrientationStr, QtCore.Qt.Orientation
-        ] = "horizontal",
-        parent: Optional[QtWidgets.QWidget] = None,
+        orientation: (constants.OrientationStr | QtCore.Qt.Orientation) = "horizontal",
+        parent: QtWidgets.QWidget | None = None,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):
             ori = orientation
@@ -24,7 +22,7 @@ class Splitter(QtWidgets.QSplitter):
             ori = constants.ORIENTATION[orientation]
         super().__init__(ori, parent)
 
-    def __getitem__(self, index: Union[int, str]) -> QtWidgets.QWidget:
+    def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
         else:
@@ -64,11 +62,11 @@ class Splitter(QtWidgets.QSplitter):
     def __contains__(self, item: QtWidgets.QWidget):
         return self.indexOf(item) >= 0
 
-    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
+    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
         self.add(other)
         return self
 
-    def get_children(self) -> List[QtWidgets.QWidget]:
+    def get_children(self) -> list[QtWidgets.QWidget]:
         return [self[i] for i in range(self.count())]
 
     def add_widget(self, widget: QtWidgets.QWidget):
@@ -80,7 +78,7 @@ class Splitter(QtWidgets.QSplitter):
         self.addWidget(widget)
         return widget
 
-    def add(self, *item: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
+    def add(self, *item: QtWidgets.QWidget | QtWidgets.QLayout):
         for i in item:
             if isinstance(i, QtWidgets.QWidget):
                 self.add_widget(i)
@@ -92,7 +90,7 @@ class Splitter(QtWidgets.QSplitter):
         cls,
         *widgets: QtWidgets.QWidget,
         horizontal: bool = False,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         splitter = cls("horizontal" if horizontal else "vertical", parent=parent)
         for widget in widgets:

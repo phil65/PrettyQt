@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt.qt import QtMultimedia
 from prettyqt.utils import bidict
@@ -31,9 +31,7 @@ MapModeStr = Literal["not_mapped", "read_only", "write_only", "read_write"]
 
 
 class AbstractVideoBuffer(QtMultimedia.QAbstractVideoBuffer):
-    def __init__(
-        self, handle_type: Union[QtMultimedia.QAbstractVideoBuffer.HandleType, str]
-    ):
+    def __init__(self, handle_type: QtMultimedia.QAbstractVideoBuffer.HandleType | str):
         if isinstance(handle_type, QtMultimedia.QAbstractVideoBuffer.HandleType):
             typ = handle_type
         else:
@@ -61,7 +59,7 @@ class AbstractVideoBuffer(QtMultimedia.QAbstractVideoBuffer):
 
     def map_planes(
         self,
-        mode: Union[int, str],
+        mode: int | str,
         num_bytes: int,
         bytes_per_line: int = 4,
         data: int = 4,
@@ -72,7 +70,7 @@ class AbstractVideoBuffer(QtMultimedia.QAbstractVideoBuffer):
 
     def map(
         self,
-        mode: Union[int, str],
+        mode: int | str,
         num_bytes: int,
         bytes_per_line: int = 4,
     ):

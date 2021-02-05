@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtWidgets
@@ -21,7 +21,7 @@ QtWidgets.QActionGroup.__bases__ = (core.Object,)
 
 
 class ActionGroup(QtWidgets.QActionGroup):
-    def __init__(self, parent: Optional[QtCore.QObject] = None):
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)  # type: ignore
 
     def __len__(self) -> int:
@@ -43,7 +43,7 @@ class ActionGroup(QtWidgets.QActionGroup):
         self.setVisible(state.get("visible", ""))
         self.set_exclusion_policy(state.get("exclusion_policy", ""))
 
-    def set_exclusion_policy(self, policy: Optional[ExclusionPolicyStr]):
+    def set_exclusion_policy(self, policy: ExclusionPolicyStr | None):
         """Set exclusion policy to use.
 
         Args:

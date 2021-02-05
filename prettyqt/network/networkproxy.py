@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, List, Literal
+from typing import Literal
 
 from prettyqt import network
 from prettyqt.qt import QtCore, QtNetwork
@@ -47,7 +47,7 @@ ProxyTypeStr = Literal[
 
 
 class NetworkProxy(QtNetwork.QNetworkProxy):
-    def get_capabilities(self) -> List[CapabilityStr]:
+    def get_capabilities(self) -> list[CapabilityStr]:
         return [k for k, v in CAPABILITIES.items() if v & self.capabilities()]
 
     def set_capabilities(self, *capability: CapabilityStr):
@@ -67,13 +67,13 @@ class NetworkProxy(QtNetwork.QNetworkProxy):
             raise InvalidParamError(name, network.networkrequest.KNOWN_HEADER)
         self.setHeader(network.networkrequest.KNOWN_HEADER[name], value)
 
-    def get_headers(self) -> Dict[str, str]:
+    def get_headers(self) -> dict[str, str]:
         return {
             bytes(h).decode(): bytes(self.rawHeader(h)).decode()
             for h in self.rawHeaderList()
         }
 
-    def set_headers(self, headers: Dict[str, str]):
+    def set_headers(self, headers: dict[str, str]):
         for k, v in headers.items():
             self.setRawHeader(
                 QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode())

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import pathlib
-from typing import List, Literal, Optional
+from typing import Literal
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
@@ -53,7 +53,7 @@ StandardLocationStr = Literal[
 
 
 class StandardPaths(QtCore.QStandardPaths):
-    def __class_getitem__(cls, name: StandardLocationStr) -> List[pathlib.Path]:
+    def __class_getitem__(cls, name: StandardLocationStr) -> list[pathlib.Path]:
         return cls.get_standard_locations(name)
 
     @classmethod
@@ -61,13 +61,11 @@ class StandardPaths(QtCore.QStandardPaths):
         return cls.displayName(STANDARD_LOCATION[location])
 
     @classmethod
-    def get_writable_location(
-        cls, location: StandardLocationStr
-    ) -> Optional[pathlib.Path]:
+    def get_writable_location(cls, location: StandardLocationStr) -> pathlib.Path | None:
         path = cls.writableLocation(STANDARD_LOCATION[location])
         return pathlib.Path(path) if path else None
 
     @classmethod
-    def get_standard_locations(cls, location: StandardLocationStr) -> List[pathlib.Path]:
+    def get_standard_locations(cls, location: StandardLocationStr) -> list[pathlib.Path]:
         paths = cls.standardLocations(STANDARD_LOCATION[location])
         return [pathlib.Path(p) for p in paths]

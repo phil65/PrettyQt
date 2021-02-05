@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Union, overload
+from typing import overload
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -15,10 +15,10 @@ class AnimationGroup(QtCore.QAnimationGroup):
         ...
 
     @overload
-    def __getitem__(self, index: slice) -> List[QtCore.QAbstractAnimation]:
+    def __getitem__(self, index: slice) -> list[QtCore.QAbstractAnimation]:
         ...
 
-    def __getitem__(self, index: Union[int, slice]):
+    def __getitem__(self, index: int | slice):
         if isinstance(index, int):
             if index < 0:
                 index = self.animationCount() + index
@@ -49,7 +49,7 @@ class AnimationGroup(QtCore.QAnimationGroup):
         return self
 
     def add_property_animation(
-        self, obj: QtCore.QObject, attribute: Union[str, bytes, QtCore.QByteArray]
+        self, obj: QtCore.QObject, attribute: str | bytes | QtCore.QByteArray
     ) -> core.PropertyAnimation:
         if isinstance(attribute, str):
             attribute = attribute.encode()

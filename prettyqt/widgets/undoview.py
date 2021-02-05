@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import iconprovider, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import types
@@ -23,7 +21,7 @@ class UndoView(QtWidgets.QUndoView):
         icon = iconprovider.get_icon(icon)
         self.setCleanIcon(icon)
 
-    def set_value(self, value: Union[QtWidgets.QUndoGroup, QtWidgets.QUndoStack]):
+    def set_value(self, value: QtWidgets.QUndoGroup | QtWidgets.QUndoStack):
         if isinstance(value, QtWidgets.QUndoGroup):
             self.setGroup(value)
         else:

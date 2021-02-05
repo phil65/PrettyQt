@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
@@ -18,7 +16,7 @@ QtCore.QEventLoop.__bases__ = (core.Object,)
 
 
 class EventLoop(QtCore.QEventLoop):
-    def __init__(self, parent: Optional[QtCore.QObject] = None) -> None:
+    def __init__(self, parent: QtCore.QObject | None = None) -> None:
         super().__init__(parent)
         self._executing = False
 

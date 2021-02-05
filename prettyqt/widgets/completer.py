@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtWidgets
@@ -28,10 +28,10 @@ QtWidgets.QCompleter.__bases__ = (core.Object,)
 
 
 class Completer(QtWidgets.QCompleter):
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
 
-    def set_sort_mode(self, mode: Optional[SortModeStr]):
+    def set_sort_mode(self, mode: SortModeStr | None):
         """Set sort mode to use.
 
         Args:

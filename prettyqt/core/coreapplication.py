@@ -4,7 +4,7 @@ import logging
 import os
 import pathlib
 import sys
-from typing import Callable, Dict, List, Optional, Tuple, Union
+from typing import Callable
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
@@ -17,7 +17,7 @@ QtCore.QCoreApplication.__bases__ = (core.Object,)
 
 
 class CoreApplication(QtCore.QCoreApplication):
-    translators: Dict[str, core.Translator] = dict()
+    translators: dict[str, core.Translator] = dict()
 
     @classmethod
     def call_on_exit(cls, func: Callable):
@@ -32,11 +32,11 @@ class CoreApplication(QtCore.QCoreApplication):
         return pathlib.Path(cls.applicationDirPath())
 
     @classmethod
-    def add_library_path(cls, path: Union[os.PathLike, str]):
+    def add_library_path(cls, path: os.PathLike | str):
         cls.addLibraryPath(os.fspath(path))
 
     @classmethod
-    def get_library_paths(cls) -> List[pathlib.Path]:
+    def get_library_paths(cls) -> list[pathlib.Path]:
         return [pathlib.Path(i) for i in cls.libraryPaths()]
 
     @classmethod
@@ -52,10 +52,10 @@ class CoreApplication(QtCore.QCoreApplication):
 
     def set_metadata(
         self,
-        app_name: Optional[str] = None,
-        app_version: Union[None, str, QtCore.QVersionNumber, Tuple[int, int, int]] = None,
-        org_name: Optional[str] = None,
-        org_domain: Optional[str] = None,
+        app_name: str | None = None,
+        app_version: None | str | QtCore.QVersionNumber | tuple[int, int, int] = None,
+        org_name: str | None = None,
+        org_domain: str | None = None,
     ):
         if app_name is not None:
             self.setApplicationName(app_name)
@@ -75,7 +75,7 @@ class CoreApplication(QtCore.QCoreApplication):
         #     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     @classmethod
-    def load_language_file(cls, file: Union[pathlib.Path, str]) -> core.Translator:
+    def load_language_file(cls, file: pathlib.Path | str) -> core.Translator:
         translator = core.Translator()
         translator.load_file(file)
         cls.installTranslator(translator)
@@ -93,7 +93,7 @@ class CoreApplication(QtCore.QCoreApplication):
         self,
         obj: QtCore.QObject,
         event: QtCore.QEvent,
-        priority: Union[int, constants.EventPriorityStr] = "normal",
+        priority: int | constants.EventPriorityStr = "normal",
     ):
         if isinstance(priority, int):
             prio = priority

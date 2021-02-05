@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, List, Literal, Optional, Tuple, Union
+from typing import Literal
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -30,7 +30,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def __init__(
         self,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
         closable: bool = False,
         detachable: bool = False,
     ) -> None:
@@ -44,7 +44,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
         # Used to keep a reference to detached tabs since their QMainWindow
         # does not have a parent
-        self.detached_tabs: Dict[str, DetachedTab] = {}
+        self.detached_tabs: dict[str, DetachedTab] = {}
         if detachable:
             self.set_detachable()
         self.set_closable(closable)
@@ -101,7 +101,7 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         self.tabBar().setVisible(self.count() > 1)
 
-    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+    def set_icon_size(self, size: int | tuple[int, int] | QtCore.QSize):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)
@@ -154,7 +154,7 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         return TAB_POSITION.inverse[self.tabPosition()]
 
-    def get_children(self) -> List[tuple]:
+    def get_children(self) -> list[tuple]:
         return [
             (
                 self.widget(i),
@@ -166,7 +166,7 @@ class TabWidget(QtWidgets.QTabWidget):
             for i in range(self.count())
         ]
 
-    def tab_icon(self, i: int) -> Optional[gui.Icon]:
+    def tab_icon(self, i: int) -> gui.Icon | None:
         icon = self.tabIcon(i)
         if icon.isNull():
             return None
@@ -181,7 +181,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self.setTabsClosable(closable)
 
     @core.Slot(int, QtCore.QPoint)
-    def detach_tab(self, index: int, point: Union[QtCore.QPoint, Tuple[int, int]]):
+    def detach_tab(self, index: int, point: QtCore.QPoint | tuple[int, int]):
         """Detach tab by removing its contents and placing them in a DetachedTab window.
 
         Args:
@@ -219,10 +219,10 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def add_tab(
         self,
-        item: Union[QtWidgets.QWidget, QtWidgets.QLayout],
+        item: QtWidgets.QWidget | QtWidgets.QLayout,
         label: str,
         icon: types.IconType = None,
-        position: Optional[int] = None,
+        position: int | None = None,
         show: bool = False,
     ) -> int:
         if isinstance(item, QtWidgets.QLayout):
@@ -243,10 +243,10 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def attach_tab(
         self,
-        widget: Union[QtWidgets.QWidget, QtWidgets.QLayout],
+        widget: QtWidgets.QWidget | QtWidgets.QLayout,
         name: str,
         icon: types.IconType = None,
-        insert_at: Optional[int] = None,
+        insert_at: int | None = None,
     ):
         """Re-attach tab.
 
@@ -288,9 +288,7 @@ class TabWidget(QtWidgets.QTabWidget):
         """Create a tab containing delivered widget."""
         self.add_tab(widget, title, icon="mdi.widgets", show=True)
 
-    def set_tab(
-        self, index: int, position: str, widget: Optional[QtWidgets.QWidget] = None
-    ):
+    def set_tab(self, index: int, position: str, widget: QtWidgets.QWidget | None = None):
         self.tabBar().set_tab(index, position, widget)
 
 

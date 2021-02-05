@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtMultimedia
 
@@ -10,9 +8,9 @@ class PlaylistModel(core.AbstractTableModel):
 
     HEADER = ["Name"]
 
-    def __init__(self, parent: Optional[QtCore.QObject] = None):
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)
-        self._playlist: Optional[QtMultimedia.QMediaPlaylist] = None
+        self._playlist: QtMultimedia.QMediaPlaylist | None = None
 
     def rowCount(self, parent=None):
         if self._playlist is None:
@@ -33,10 +31,10 @@ class PlaylistModel(core.AbstractTableModel):
                 return core.FileInfo(location.path()).fileName()
         return None
 
-    def get_playlist(self) -> Optional[QtMultimedia.QMediaPlaylist]:
+    def get_playlist(self) -> QtMultimedia.QMediaPlaylist | None:
         return self._playlist
 
-    def set_playlist(self, playlist: Optional[QtMultimedia.QMediaPlaylist]):
+    def set_playlist(self, playlist: QtMultimedia.QMediaPlaylist | None):
         if self._playlist is not None:
             self._playlist.mediaAboutToBeInserted.disconnect(self.beginInsertItems)
             self._playlist.mediaInserted.disconnect(self.endInsertRows)

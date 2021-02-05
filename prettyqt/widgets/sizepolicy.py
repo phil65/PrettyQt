@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Literal
+from typing import Any, Literal
 
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, helpers, prettyprinter
@@ -81,7 +81,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
             control_type=self.get_control_type(),
         )
 
-    def __setstate__(self, state: Dict[str, Any]) -> None:
+    def __setstate__(self, state: dict[str, Any]) -> None:
         self.setHeightForWidth(state["has_height_for_width"])
         self.setWidthForHeight(state["has_width_for_height"])
         self.setHorizontalStretch(state["horizontal_stretch"])
@@ -94,7 +94,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def serialize(self) -> Dict[str, Any]:
+    def serialize(self) -> dict[str, Any]:
         return self.__getstate__()
 
     @classmethod

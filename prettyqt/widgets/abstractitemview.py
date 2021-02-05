@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Any, Generator, List, Literal, Optional, Tuple, Union
+from typing import Any, Generator, Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -81,7 +81,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
             return
         super().selectAll()
 
-    def set_model(self, model: Optional[QtCore.QAbstractItemModel]):
+    def set_model(self, model: QtCore.QAbstractItemModel | None):
         """Delete old selection model explicitely, seems to help with memory usage."""
         old_model = self.model()
         old_sel_model = self.selectionModel()
@@ -97,8 +97,8 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
     def set_delegate(
         self,
         delegate: QtWidgets.QItemDelegate,
-        column: Optional[int] = None,
-        row: Optional[int] = None,
+        column: int | None = None,
+        row: int | None = None,
         persistent: bool = False,
     ):
         if column is not None:
@@ -129,7 +129,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         with self.edit_stylesheet() as ss:
             ss.QHeaderView.section.backgroundColor.setValue(color)
 
-    def current_index(self) -> Optional[QtCore.QModelIndex]:
+    def current_index(self) -> QtCore.QModelIndex | None:
         if self.selectionModel() is None:
             return None
         return self.selectionModel().currentIndex()
@@ -140,17 +140,17 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         idx = self.selectionModel().currentIndex()
         return idx.data(QtCore.Qt.UserRole)
 
-    def current_row(self) -> Optional[int]:
+    def current_row(self) -> int | None:
         if self.selectionModel() is None:
             return None
         return self.selectionModel().currentIndex().row()
 
-    def current_column(self) -> Optional[int]:
+    def current_column(self) -> int | None:
         if self.selectionModel() is None:
             return None
         return self.selectionModel().currentIndex().column()
 
-    def selected_indexes(self) -> List[QtCore.QModelIndex]:
+    def selected_indexes(self) -> list[QtCore.QModelIndex]:
         """Returns list of selected indexes in first row."""
         indexes = (x for x in self.selectedIndexes() if x.column() == 0)
         return sorted(indexes, key=lambda x: x.row())
@@ -176,7 +176,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         self.setDefaultDropAction(QtCore.Qt.MoveAction)
         self.setDropIndicatorShown(True)
 
-    def set_edit_triggers(self, *triggers: Optional[EditTriggerStr]):
+    def set_edit_triggers(self, *triggers: EditTriggerStr | None):
         items = ["none" if t is None else t for t in triggers]
         for item in items:
             if item not in EDIT_TRIGGERS:
@@ -184,7 +184,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         flags = helpers.merge_flags(items, EDIT_TRIGGERS)
         self.setEditTriggers(flags)
 
-    def get_edit_triggers(self) -> List[EditTriggerStr]:
+    def get_edit_triggers(self) -> list[EditTriggerStr]:
         return [k for k, v in EDIT_TRIGGERS.items() if v & self.editTriggers()]
 
     def set_selection_behaviour(self, behaviour: SelectionBehaviourStr):
@@ -229,7 +229,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         """
         return DRAG_DROP_MODE.inverse[self.dragDropMode()]
 
-    def set_selection_mode(self, mode: Optional[SelectionModeStr]):
+    def set_selection_mode(self, mode: SelectionModeStr | None):
         """Set selection mode for given item view.
 
         Args:
@@ -338,7 +338,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         p.highlight_inactive()
         self.setPalette(p)
 
-    def set_icon_size(self, size: Union[int, QtCore.QSize, Tuple[int, int]]):
+    def set_icon_size(self, size: int | QtCore.QSize | tuple[int, int]):
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
         elif isinstance(size, int):

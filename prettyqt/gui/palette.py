@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Literal
+from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
@@ -97,7 +97,7 @@ class Palette(QtGui.QPalette):
         color = colors.get_color(color)
         self.setColor(GROUP[group], ROLE[role], color)
 
-    def get_colors(self, group: GroupStr = "active") -> Dict[str, gui.Color]:
+    def get_colors(self, group: GroupStr = "active") -> dict[str, gui.Color]:
         return {k: self.get_color(k, group) for k in ROLE.keys()}
 
     def get_color(self, role: RoleStr, group: GroupStr = "active") -> gui.Color:
@@ -110,7 +110,7 @@ class Palette(QtGui.QPalette):
             brush = gui.Brush(colors.get_color(brush))
         self.setBrush(GROUP[group], ROLE[role], brush)
 
-    def get_brushes(self, group: GroupStr = "active") -> Dict[str, gui.Brush]:
+    def get_brushes(self, group: GroupStr = "active") -> dict[str, gui.Brush]:
         return {k: self.get_brush(k, group) for k in ROLE.keys()}
 
     def get_brush(self, role: RoleStr, group: GroupStr = "active") -> gui.Brush:

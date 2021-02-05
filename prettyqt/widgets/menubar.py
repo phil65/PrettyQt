@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Union, overload
+from typing import overload
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
@@ -10,7 +10,7 @@ QtWidgets.QMenuBar.__bases__ = (widgets.Widget,)
 
 
 class MenuBar(QtWidgets.QMenuBar):
-    def __add__(self, other: Union[QtWidgets.QAction, QtWidgets.QMenu]):
+    def __add__(self, other: QtWidgets.QAction | QtWidgets.QMenu):
         self.add(other)
         return self
 
@@ -20,7 +20,7 @@ class MenuBar(QtWidgets.QMenuBar):
             native_menu_bar=self.isNativeMenuBar(),
         )
 
-    def add_action(self, action: Union[QtWidgets.QAction, str]) -> QtWidgets.QAction:
+    def add_action(self, action: QtWidgets.QAction | str) -> QtWidgets.QAction:
         if isinstance(action, str):
             action = widgets.Action(parent=self, text=action)
         self.addAction(action)
@@ -51,7 +51,7 @@ class MenuBar(QtWidgets.QMenuBar):
     def add_separator(self):
         self.addSeparator()
 
-    def add(self, *items: Union[QtWidgets.QMenu, QtWidgets.QAction]):
+    def add(self, *items: QtWidgets.QMenu | QtWidgets.QAction):
         for i in items:
             if isinstance(i, QtWidgets.QMenu):
                 action = widgets.Action(parent=self)

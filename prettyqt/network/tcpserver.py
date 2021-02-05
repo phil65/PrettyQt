@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import core, network
 from prettyqt.qt import QtNetwork
 
@@ -11,7 +9,7 @@ QtNetwork.QTcpServer.__bases__ = (core.Object,)
 
 class TcpServer(QtNetwork.QTcpServer):
     def listen(  # type: ignore
-        self, address: Union[str, QtNetwork.QHostAddress], port: int = 0
+        self, address: str | QtNetwork.QHostAddress, port: int = 0
     ) -> bool:
         if isinstance(address, str):
             address = network.HostAddress(address)

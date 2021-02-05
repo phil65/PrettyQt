@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, Optional, Pattern, Tuple
+from typing import Iterator, Pattern
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -13,11 +13,11 @@ class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
 
     RULES: list = []
 
-    def __init__(self, parent: Optional[QtCore.QObject] = None):
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)  # type: ignore
 
     @classmethod
-    def yield_rules(cls) -> Iterator[Tuple[Pattern, int, gui.TextCharFormat]]:
+    def yield_rules(cls) -> Iterator[tuple[Pattern, int, gui.TextCharFormat]]:
         for Rule in cls.RULES:
             if isinstance(Rule.compiled, list):
                 for i in Rule.compiled:

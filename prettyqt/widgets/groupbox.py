@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
@@ -21,7 +19,7 @@ class GroupBox(QtWidgets.QGroupBox):
         self,
         title: str = "",
         checkable: bool = False,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(title, parent)
         self.setCheckable(checkable)

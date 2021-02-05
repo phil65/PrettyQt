@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -52,9 +52,9 @@ class CommandLineParser(QtCore.QCommandLineParser):
     def add_option(
         self,
         name: str,
-        description: Optional[str] = None,
-        value_name: Optional[str] = None,
-        default_value: Optional[str] = None,
+        description: str | None = None,
+        value_name: str | None = None,
+        default_value: str | None = None,
     ) -> core.CommandLineOption:
         if description is None:
             description = ""

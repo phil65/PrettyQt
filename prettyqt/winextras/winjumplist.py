@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List, Union
+from typing import Iterator
 
 from prettyqt import core, winextras
 from prettyqt.qt import QtWinExtras
@@ -13,7 +13,7 @@ class WinJumpList(QtWinExtras.QWinJumpList):
     def __setitem__(
         self,
         key: str,
-        val: Union[List[QtWinExtras.QWinJumpListItem], QtWinExtras.QWinJumpListCategory],
+        val: list[QtWinExtras.QWinJumpListItem] | QtWinExtras.QWinJumpListCategory,
     ):
         if isinstance(val, QtWinExtras.QWinJumpListCategory):
             self.addCategory(val)

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
@@ -33,21 +31,21 @@ ITERATOR_FLAGS = bidict(
 class TreeWidgetItemIterator(QtWidgets.QTreeWidgetItemIterator):
     def __init__(
         self,
-        other: Union[
-            QtWidgets.QTreeWidget,
-            QtWidgets.QTreeWidgetItem,
-            QtWidgets.QTreeWidgetItemIterator,
-        ],
-        flags: Optional[QtWidgets.QTreeWidgetItemIterator.IteratorFlags] = None,
-        hidden: Optional[bool] = None,
-        selected: Optional[bool] = None,
-        selectable: Optional[bool] = None,
-        draggable: Optional[bool] = None,
-        droppable: Optional[bool] = None,
-        has_children: Optional[bool] = None,
-        checked: Optional[bool] = None,
-        enabled: Optional[bool] = None,
-        editable: Optional[bool] = None,
+        other: (
+            QtWidgets.QTreeWidget
+            | QtWidgets.QTreeWidgetItem
+            | QtWidgets.QTreeWidgetItemIterator
+        ),
+        flags: QtWidgets.QTreeWidgetItemIterator.IteratorFlags | None = None,
+        hidden: bool | None = None,
+        selected: bool | None = None,
+        selectable: bool | None = None,
+        draggable: bool | None = None,
+        droppable: bool | None = None,
+        has_children: bool | None = None,
+        checked: bool | None = None,
+        enabled: bool | None = None,
+        editable: bool | None = None,
         user_flag: bool = False,
     ):
         if isinstance(other, QtWidgets.QTreeWidgetItemIterator):

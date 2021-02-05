@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
@@ -53,7 +51,7 @@ class StarEditor(widgets.Widget):
     # A signal to tell the delegate when we've finished editing.
     editing_finished = core.Signal()
 
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         """Initialize the editor object, making sure we can watch mouse events."""
         super().__init__(parent)
 

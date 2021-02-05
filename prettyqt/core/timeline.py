@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Literal, Union
+from typing import Callable, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -63,7 +63,7 @@ class TimeLine(QtCore.QTimeLine):
         return STATE.inverse[self.state()]
 
     def set_easing(
-        self, easing_type: Union[core.easingcurve.TypeStr, Callable[[float], float]]
+        self, easing_type: core.easingcurve.TypeStr | Callable[[float], float]
     ) -> core.EasingCurve:
         curve = core.EasingCurve()
         if isinstance(easing_type, str):
@@ -73,7 +73,7 @@ class TimeLine(QtCore.QTimeLine):
         self.setEasingCurve(curve)
         return curve
 
-    def get_easing(self) -> Union[core.easingcurve.TypeStr, Callable[[float], float]]:
+    def get_easing(self) -> core.easingcurve.TypeStr | Callable[[float], float]:
         curve = core.EasingCurve(self.easingCurve())
         typ = curve.get_type()
         if typ == "custom":

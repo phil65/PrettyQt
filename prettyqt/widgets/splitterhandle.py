@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
@@ -13,7 +11,7 @@ QtWidgets.QSplitterHandle.__bases__ = (widgets.Widget,)
 class SplitterHandle(QtWidgets.QSplitterHandle):
     def __init__(
         self,
-        orientation: Union[constants.OrientationStr, QtCore.Qt.Orientation],
+        orientation: constants.OrientationStr | QtCore.Qt.Orientation,
         parent: QtWidgets.QSplitter,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):

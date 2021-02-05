@@ -28,7 +28,6 @@ SOFTWARE.
 from __future__ import annotations
 
 import math
-from typing import Optional
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -38,7 +37,7 @@ from prettyqt.utils import colors, types
 class BaseWaitingSpinner(widgets.Widget):
     def __init__(
         self,
-        parent: Optional[QtWidgets.QWidget],
+        parent: QtWidgets.QWidget | None,
         modality: constants.ModalityStr = "none",
     ):
         super().__init__(parent=parent)
@@ -222,7 +221,7 @@ class BaseWaitingSpinner(widgets.Widget):
 class WaitingSpinner(BaseWaitingSpinner):
     def __init__(
         self,
-        parent: Optional[QtWidgets.QWidget],
+        parent: QtWidgets.QWidget | None,
         center_on_parent: bool = True,
         disable_parent: bool = True,
         modality: constants.ModalityStr = "none",

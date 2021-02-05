@@ -4,7 +4,7 @@
 from __future__ import annotations
 
 import logging
-from typing import Generic, List, Optional, Sequence, TypeVar
+from typing import Generic, Sequence, TypeVar
 
 from prettyqt.utils import helpers
 
@@ -19,10 +19,10 @@ T = TypeVar("T", bound="TreeItem")  # Declare type variable
 class TreeItem(Generic[T]):
     """Tree node class that can be used to build trees of objects."""
 
-    def __init__(self, obj, parent: Optional[T] = None):
+    def __init__(self, obj, parent: T | None = None):
         self.parent_item = parent
         self.obj = obj
-        self.child_items: List[T] = []
+        self.child_items: list[T] = []
         self.has_children = True
         self.children_fetched = False
 
@@ -50,7 +50,7 @@ class TreeItem(Generic[T]):
     def child_count(self) -> int:
         return len(self.child_items)
 
-    def parent(self) -> Optional[T]:
+    def parent(self) -> T | None:
         return self.parent_item
 
     def row(self) -> int:

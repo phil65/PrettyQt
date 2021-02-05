@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Literal, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtWebEngineCore
@@ -19,14 +19,14 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
     def __repr__(self):
         return f"{type(self).__name__}({self.get_url()})"
 
-    def set_headers(self, headers: Dict[str, str]):
+    def set_headers(self, headers: dict[str, str]):
         for k, v in headers.items():
             self.setHeader(QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode()))
 
-    def get_headers(self) -> Dict[str, str]:
+    def get_headers(self) -> dict[str, str]:
         return {bytes(h).decode(): bytes(self.header(h)).decode() for h in self.headers()}
 
-    def set_url(self, url: Union[str, QtCore.QUrl]):
+    def set_url(self, url: str | QtCore.QUrl):
         url = core.Url(url)
         self.setUrl(url)
 

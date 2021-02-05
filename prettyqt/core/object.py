@@ -4,7 +4,7 @@ from collections import defaultdict
 import contextlib
 import inspect
 import itertools
-from typing import Any, DefaultDict, Dict, List, Optional, Type, TypeVar, Union
+from typing import Any, DefaultDict, TypeVar
 
 from prettyqt import constants, core
 import prettyqt.qt
@@ -33,7 +33,7 @@ class Object(QtCore.QObject):
     def serialize_fields(self):
         return dict(object_name=self.objectName())
 
-    def serialize(self) -> Dict[str, Any]:
+    def serialize(self) -> dict[str, Any]:
         dct = {}
         for klass in reversed(inspect.getmro(type(self))):
             if "serialize_fields" in klass.__dict__:
@@ -82,10 +82,10 @@ class Object(QtCore.QObject):
 
     def find_children(
         self,
-        typ: Type[T] = QtCore.QObject,
-        name: Optional[Union[str, QtCore.QRegularExpression]] = None,
+        typ: type[T] = QtCore.QObject,
+        name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
-    ) -> List[T]:
+    ) -> list[T]:
         if recursive:
             flag = QtCore.Qt.FindChildrenRecursively
         else:
@@ -101,10 +101,10 @@ class Object(QtCore.QObject):
 
     def find_child(
         self,
-        typ: Type[T] = QtCore.QObject,
-        name: Optional[Union[str, QtCore.QRegularExpression]] = None,
+        typ: type[T] = QtCore.QObject,
+        name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
-    ) -> Optional[T]:
+    ) -> T | None:
         if recursive:
             flag = QtCore.Qt.FindChildrenRecursively
         else:
@@ -119,8 +119,8 @@ class Object(QtCore.QObject):
             return item if recursive or item.parent() == self else None  # type: ignore
 
     def find_parent(
-        self, typ: Type[QtCore.QObject], name: Optional[str] = None
-    ) -> Optional[QtCore.QObject]:
+        self, typ: type[QtCore.QObject], name: str | None = None
+    ) -> QtCore.QObject | None:
         node = self
         while node:
             node = node.parent()
@@ -130,7 +130,7 @@ class Object(QtCore.QObject):
         return None
 
     def start_timer(
-        self, interval: Union[int, str], timer_type: constants.TimerTypeStr = "coarse"
+        self, interval: int | str, timer_type: constants.TimerTypeStr = "coarse"
     ) -> int:
         if isinstance(interval, str):
             interval = helpers.parse_time(interval)

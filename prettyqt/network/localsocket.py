@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtNetwork
@@ -65,7 +65,7 @@ class LocalSocket(QtNetwork.QLocalSocket):
 
     def connect_to_server(
         self,
-        server_name: Optional[str] = None,
+        server_name: str | None = None,
         mode: core.iodevice.OpenModeStr = "read_write",
     ):
         if mode not in core.iodevice.OPEN_MODES:

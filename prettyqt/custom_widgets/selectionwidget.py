@@ -1,16 +1,6 @@
 from __future__ import annotations
 
-from typing import (
-    Any,
-    Dict,
-    Iterable,
-    Iterator,
-    Literal,
-    Mapping,
-    Optional,
-    Tuple,
-    Union,
-)
+from typing import Any, Iterable, Iterator, Literal, Mapping
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtWidgets
@@ -27,19 +17,19 @@ class SelectionWidget(widgets.GroupBox):
         self,
         label: str = "",
         layout: constants.OrientationStr = "horizontal",
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(title=label, parent=parent)
         self.box = widgets.BoxLayout(layout)
-        self.widget_custom: Optional[widgets.Widget] = None
+        self.widget_custom: widgets.Widget | None = None
         self.rb_other = widgets.RadioButton()
-        self.buttons: Dict[widgets.RadioButton, Any] = {}
+        self.buttons: dict[widgets.RadioButton, Any] = {}
         self.set_layout(self.box)
 
-    def __iter__(self) -> Iterator[Tuple[widgets.RadioButton, Any]]:
+    def __iter__(self) -> Iterator[tuple[widgets.RadioButton, Any]]:
         return iter(self.buttons.items())
 
-    def add_items(self, items: Union[Iterable, Mapping]):
+    def add_items(self, items: Iterable | Mapping):
         if isinstance(items, Mapping):
             for k, v in items.items():
                 self.add(v, k)
@@ -78,8 +68,8 @@ class SelectionWidget(widgets.GroupBox):
         self,
         label: str = "Other",
         typ: TypeStr = "string",
-        default: Union[None, float, str] = None,
-        regex: Optional[str] = None,
+        default: None | float | str = None,
+        regex: str | None = None,
     ):
         if typ == "string":
             self.widget_custom = widgets.LineEdit()

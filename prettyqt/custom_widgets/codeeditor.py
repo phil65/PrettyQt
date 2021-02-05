@@ -1,15 +1,11 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
 class CodeEditor(widgets.PlainTextEdit):
-    def __init__(
-        self, language: str = "python", parent: Optional[QtWidgets.QWidget] = None
-    ):
+    def __init__(self, language: str = "python", parent: QtWidgets.QWidget | None = None):
         super().__init__(parent=parent)
         self.line_area = LineNumberArea(self)
         self.blockCountChanged.connect(self.update_line_area_width)

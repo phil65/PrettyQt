@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import charts, constants, core, widgets
 from prettyqt.qt.QtCharts import QtCharts
@@ -142,7 +142,7 @@ class Chart(QtCharts.QChart):
     def get_theme(self) -> ThemeStr:
         return THEMES.inverse[self.theme()]
 
-    def get_animation_options(self) -> List[AnimationOptionStr]:
+    def get_animation_options(self) -> list[AnimationOptionStr]:
         return [k for k, v in ANIMATION_OPTIONS.items() if v & self.animationOptions()]
 
     def get_animation_easing_curve(self) -> core.EasingCurve:

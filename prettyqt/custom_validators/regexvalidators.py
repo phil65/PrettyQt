@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, Pattern, Tuple, Union
+from typing import Pattern, Union
 
 import regex as re
 
@@ -13,10 +13,10 @@ PatternType = Union[str, Pattern]
 
 class BaseRegexValidator(gui.Validator):
     def __init__(
-        self, parent: Optional[QtCore.QObject] = None, regex: Optional[PatternType] = None
+        self, parent: QtCore.QObject | None = None, regex: PatternType | None = None
     ):
         super().__init__(parent)
-        self.regex: Optional[Pattern] = None
+        self.regex: Pattern | None = None
         if regex:
             self.set_regex(regex)
 
@@ -44,7 +44,7 @@ class BaseRegexValidator(gui.Validator):
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> Tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[QtGui.QValidator.State, str, int]:
         if self.regex is None:
             raise TypeError("Validator not initialized")
         if text == "":
@@ -59,9 +59,7 @@ class BaseRegexValidator(gui.Validator):
 
 
 class IntListValidator(BaseRegexValidator):
-    def __init__(
-        self, allow_single: bool = True, parent: Optional[QtCore.QObject] = None
-    ):
+    def __init__(self, allow_single: bool = True, parent: QtCore.QObject | None = None):
         super().__init__(parent=parent)
         self.allow_single = allow_single
         if allow_single:
@@ -77,9 +75,7 @@ class IntListValidator(BaseRegexValidator):
 
 
 class FloatListValidator(BaseRegexValidator):
-    def __init__(
-        self, allow_single: bool = True, parent: Optional[QtCore.QObject] = None
-    ):
+    def __init__(self, allow_single: bool = True, parent: QtCore.QObject | None = None):
         super().__init__(parent=parent)
         self.allow_single = allow_single
         if allow_single:

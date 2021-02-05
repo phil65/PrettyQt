@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import contextlib
-from typing import Optional
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -88,9 +87,9 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
     @contextlib.contextmanager
     def remove_rows(
         self,
-        first: Optional[int] = None,
-        last: Optional[int] = None,
-        parent: Optional[QtCore.QModelIndex] = None,
+        first: int | None = None,
+        last: int | None = None,
+        parent: QtCore.QModelIndex | None = None,
     ):
         parent = QtCore.QModelIndex() if parent is None else parent
         first = first if first is not None else 0
@@ -102,9 +101,9 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
     @contextlib.contextmanager
     def remove_columns(
         self,
-        first: Optional[int] = None,
-        last: Optional[int] = None,
-        parent: Optional[QtCore.QModelIndex] = None,
+        first: int | None = None,
+        last: int | None = None,
+        parent: QtCore.QModelIndex | None = None,
     ):
         parent = QtCore.QModelIndex() if parent is None else parent
         first = first if first is not None else 0
@@ -116,9 +115,9 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
     @contextlib.contextmanager
     def insert_rows(
         self,
-        first: Optional[int] = None,
-        last: Optional[int] = None,
-        parent: Optional[QtCore.QModelIndex] = None,
+        first: int | None = None,
+        last: int | None = None,
+        parent: QtCore.QModelIndex | None = None,
     ):
         parent = QtCore.QModelIndex() if parent is None else parent
         first = first if first is not None else 0
@@ -128,7 +127,7 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         self.endInsertRows()
 
     @contextlib.contextmanager
-    def append_rows(self, num_rows: int, parent: Optional[QtCore.QModelIndex] = None):
+    def append_rows(self, num_rows: int, parent: QtCore.QModelIndex | None = None):
         parent = QtCore.QModelIndex() if parent is None else parent
         self.beginInsertRows(parent, self.rowCount(), self.rowCount() + num_rows - 1)
         yield None
@@ -137,9 +136,9 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
     @contextlib.contextmanager
     def insert_columns(
         self,
-        first: Optional[int] = None,
-        last: Optional[int] = None,
-        parent: Optional[QtCore.QModelIndex] = None,
+        first: int | None = None,
+        last: int | None = None,
+        parent: QtCore.QModelIndex | None = None,
     ):
         parent = QtCore.QModelIndex() if parent is None else parent
         first = first if first is not None else 0

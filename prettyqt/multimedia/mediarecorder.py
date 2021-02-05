@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import core, multimedia
 from prettyqt.qt import QtMultimedia
@@ -89,7 +89,7 @@ class MediaRecorder(QtMultimedia.QMediaRecorder):
         """
         return AVAILABILITY_STATUS.inverse[self.availability()]
 
-    def set_output_location(self, path: Union[os.PathLike, str]):
+    def set_output_location(self, path: os.PathLike | str):
         self.setOutputLocation(core.Url(os.fspath(path)))
 
     def get_output_location(self) -> str:

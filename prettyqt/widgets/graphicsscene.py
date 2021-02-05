@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Optional, Tuple, Union
+from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -98,9 +98,9 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
 
     def add_polygon(
         self,
-        polygon: Union[QtGui.QPolygonF, QtGui.QPolygon],
-        pen: Optional[QtGui.QPen] = None,
-        brush: Optional[QtGui.QBrush] = None,
+        polygon: QtGui.QPolygonF | QtGui.QPolygon,
+        pen: QtGui.QPen | None = None,
+        brush: QtGui.QBrush | None = None,
     ) -> widgets.GraphicsPolygonItem:
         if isinstance(polygon, QtGui.QPolygon):
             polygon = gui.PolygonF(polygon)
@@ -116,8 +116,8 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
     def add_path(
         self,
         path: QtGui.QPainterPath,
-        pen: Optional[QtGui.QPen] = None,
-        brush: Optional[QtGui.QBrush] = None,
+        pen: QtGui.QPen | None = None,
+        brush: QtGui.QBrush | None = None,
     ) -> widgets.GraphicsPathItem:
         g_item = widgets.GraphicsPathItem()
         g_item.setPath(path)
@@ -130,9 +130,9 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
 
     def add_rect(
         self,
-        rect: Union[QtCore.QRectF, QtCore.QRect, Tuple[float, float, float, float]],
-        pen: Optional[QtGui.QPen] = None,
-        brush: Optional[QtGui.QBrush] = None,
+        rect: QtCore.QRectF | QtCore.QRect | tuple[float, float, float, float],
+        pen: QtGui.QPen | None = None,
+        brush: QtGui.QBrush | None = None,
     ) -> widgets.GraphicsRectItem:
         if isinstance(rect, QtCore.QRect):
             rect_ = core.RectF(rect)
@@ -151,8 +151,8 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
 
     def add_line(
         self,
-        line: Union[QtCore.QLineF, QtCore.QLine, Tuple[float, float, float, float]],
-        pen: Optional[QtGui.QPen] = None,
+        line: QtCore.QLineF | QtCore.QLine | tuple[float, float, float, float],
+        pen: QtGui.QPen | None = None,
     ) -> widgets.GraphicsLineItem:
         if isinstance(line, QtCore.QLine):
             line = core.LineF(line)
@@ -167,9 +167,9 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
 
     def add_ellipse(
         self,
-        ellipse: Union[QtCore.QRectF, QtCore.QRect, Tuple[float, float, float, float]],
-        pen: Optional[QtGui.QPen] = None,
-        brush: Optional[QtGui.QBrush] = None,
+        ellipse: QtCore.QRectF | QtCore.QRect | tuple[float, float, float, float],
+        pen: QtGui.QPen | None = None,
+        brush: QtGui.QBrush | None = None,
     ) -> widgets.GraphicsEllipseItem:
         if isinstance(ellipse, QtCore.QRect):
             ell = core.RectF(ellipse)
@@ -187,7 +187,7 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
         return g_item
 
     def add_text(
-        self, text: str, font: Optional[QtGui.QFont] = None
+        self, text: str, font: QtGui.QFont | None = None
     ) -> widgets.GraphicsTextItem:
         g_item = widgets.GraphicsTextItem()
         g_item.setPlainText(text)
@@ -197,7 +197,7 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
         return g_item
 
     def add_simple_text(
-        self, text: str, font: Optional[QtGui.QFont] = None
+        self, text: str, font: QtGui.QFont | None = None
     ) -> widgets.GraphicsSimpleTextItem:
         g_item = widgets.GraphicsSimpleTextItem()
         g_item.setText(text)
@@ -216,7 +216,7 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
         self,
         item: QtWidgets.QGraphicsItem,
         mode: constants.ItemSelectionModeStr = "intersects_shape",
-    ) -> List[QtWidgets.QGraphicsItem]:
+    ) -> list[QtWidgets.QGraphicsItem]:
         if mode not in constants.ITEM_SELECTION_MODE:
             raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
         return self.collidingItems(item, constants.ITEM_SELECTION_MODE[mode])

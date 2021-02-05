@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Tuple, Union
-
 from prettyqt import core
 from prettyqt.qt import QtWidgets
 
@@ -15,12 +13,12 @@ class SlideAnimation(core.PropertyAnimation):
         self.set_start_value(core.Point(0, 0))
         self.setDuration(duration)
 
-    def set_start_value(self, point: Union[core.Point, Tuple[int, int]]):
+    def set_start_value(self, point: core.Point | tuple[int, int]):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.setStartValue(point)
 
-    def set_end_value(self, point: Union[core.Point, Tuple[int, int]]):
+    def set_end_value(self, point: core.Point | tuple[int, int]):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.setEndValue(point)

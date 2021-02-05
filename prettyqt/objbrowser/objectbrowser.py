@@ -7,7 +7,6 @@ import hashlib
 import logging
 import sys
 import traceback
-from typing import List, Optional
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.objbrowser import objectbrowsertreemodel
@@ -26,7 +25,7 @@ class ObjectBrowser(widgets.MainWindow):
     """Object browser main application window."""
 
     _app = None  # Reference to the global application.
-    _browsers: List[Optional[ObjectBrowser]] = []  # Keep lists of browser windows.
+    _browsers: list[ObjectBrowser | None] = []  # Keep lists of browser windows.
 
     def __init__(self, obj, name: str = ""):
         super().__init__()

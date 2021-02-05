@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, Literal, Tuple, Union
+from typing import Iterator, Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtGui
@@ -32,18 +32,16 @@ class PainterPath(QtGui.QPainterPath):
     def __iter__(self) -> Iterator[QtGui.QPainterPath.Element]:
         return iter(self.elementAt(i) for i in range(self.elementCount()))
 
-    def __setitem__(self, index: int, value: Tuple[int, int]):
+    def __setitem__(self, index: int, value: tuple[int, int]):
         self.setElementPositionAt(index, *value)
 
     def __bool__(self):
         return not self.isEmpty()
 
-    def __contains__(
-        self, item: Union[QtCore.QPointF, QtCore.QRectF, QtGui.QPainterPath]
-    ):
+    def __contains__(self, item: QtCore.QPointF | QtCore.QRectF | QtGui.QPainterPath):
         return self.contains(item)
 
-    def add_rect(self, rect: Union[QtCore.QRectF, QtCore.QRect]):
+    def add_rect(self, rect: QtCore.QRectF | QtCore.QRect):
         if isinstance(rect, QtCore.QRect):
             rect = QtCore.QRectF(rect)
         self.addRect(rect)

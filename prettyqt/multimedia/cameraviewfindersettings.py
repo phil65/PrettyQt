@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Iterator, Tuple
+from typing import Any, Iterator
 
 from prettyqt import multimedia
 from prettyqt.qt import QtMultimedia
@@ -12,9 +12,9 @@ from prettyqt.utils import InvalidParamError
 class Settings:
     maximum_framerate: float
     minimum_framerate: float
-    pixel_aspect_ratio: Tuple[int, int]
+    pixel_aspect_ratio: tuple[int, int]
     pixel_format: multimedia.videoframe.PixelFormatStr
-    resolution: Tuple[int, int]
+    resolution: tuple[int, int]
 
 
 class CameraViewfinderSettings(QtMultimedia.QCameraViewfinderSettings):
@@ -58,7 +58,7 @@ class CameraViewfinderSettings(QtMultimedia.QCameraViewfinderSettings):
             resolution=(size.width(), size.height()),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self.to_dataclass())
 
     @classmethod
@@ -72,6 +72,6 @@ class CameraViewfinderSettings(QtMultimedia.QCameraViewfinderSettings):
         return instance
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> CameraViewfinderSettings:
+    def from_dict(cls, data: dict[str, Any]) -> CameraViewfinderSettings:
         settings = Settings(**data)
         return cls.from_dataclass(settings)

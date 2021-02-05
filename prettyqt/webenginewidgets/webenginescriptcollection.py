@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List, Union
-
 from prettyqt.qt import QtWebEngineWidgets
 
 
@@ -26,9 +24,10 @@ class WebEngineScriptCollection:
 
     def __add__(
         self,
-        other: Union[
-            QtWebEngineWidgets.QWebEngineScript, List[QtWebEngineWidgets.QWebEngineScript]
-        ],
+        other: (
+            QtWebEngineWidgets.QWebEngineScript
+            | list[QtWebEngineWidgets.QWebEngineScript]
+        ),
     ):
         self.item.insert(other)
         return self

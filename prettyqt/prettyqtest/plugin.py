@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List, Optional, Type
+from typing import Iterator
 
 import pytest
 
@@ -10,7 +10,7 @@ from prettyqt.qt import QtCore, QtWidgets
 
 
 @pytest.fixture(scope="session")
-def qapp_args() -> List[str]:
+def qapp_args() -> list[str]:
     """Fixture that provides QApplication arguments to use.
 
     You can override this fixture to pass different arguments to
@@ -26,7 +26,7 @@ def qapp_args() -> List[str]:
 
 
 @pytest.fixture(scope="session")
-def qapp(qapp_args: List[str], pytestconfig) -> Iterator[widgets.Application]:
+def qapp(qapp_args: list[str], pytestconfig) -> Iterator[widgets.Application]:
     app = widgets.Application(qapp_args)
     name = pytestconfig.getini("qt_qapp_name")
     app.set_metadata(
@@ -75,7 +75,7 @@ class QtTester:
 
     @staticmethod
     def send_mousemove(
-        widget: QtWidgets.QWidget, target: Optional[QtCore.QPointF] = None, delay: int = 0
+        widget: QtWidgets.QWidget, target: QtCore.QPointF | None = None, delay: int = 0
     ):
         if target is None:
             target = QtCore.QPointF(0, 0)
@@ -97,7 +97,7 @@ class QtTester:
 
 
 @pytest.fixture
-def qttester() -> Type[QtTester]:
+def qttester() -> type[QtTester]:
     return QtTester
 
 
@@ -216,7 +216,7 @@ def pytest_configure(config):
     qt_bot.QtBot._inject_qtest_methods()
 
 
-def pytest_report_header() -> List[str]:
+def pytest_report_header() -> list[str]:
     fields = [
         f"{qt.API} {QtCore.BINDING_VERSION}",
         f"Qt runtime {str(QtCore.qVersion())}",

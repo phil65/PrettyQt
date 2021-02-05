@@ -4,7 +4,7 @@ import hashlib
 import logging
 import os
 import pathlib
-from typing import Literal, Optional, Union
+from typing import Literal
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict
@@ -98,7 +98,7 @@ WritingSystemStr = Literal[
 
 class FontDatabase(QtGui.QFontDatabase):
     @classmethod
-    def add_fonts_from_folder(cls, path: Union[str, os.PathLike]):
+    def add_fonts_from_folder(cls, path: str | os.PathLike):
         path = pathlib.Path(path)
         for p in path.iterdir():
             if p.suffix.lower() in [".ttf", ".otf"]:
@@ -106,9 +106,7 @@ class FontDatabase(QtGui.QFontDatabase):
                 cls.addApplicationFont(str(p))
 
     @classmethod
-    def add_font(
-        cls, path: Union[str, os.PathLike], ttf_hash: Optional[str] = None
-    ) -> int:
+    def add_font(cls, path: str | os.PathLike, ttf_hash: str | None = None) -> int:
         path = pathlib.Path(path)
         font_id = cls.addApplicationFont(str(path))
         if not cls.applicationFontFamilies(font_id):

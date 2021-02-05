@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
@@ -82,7 +82,7 @@ class LCDNumber(QtWidgets.QLCDNumber):
         """
         return SEGMENT_STYLE.inverse[self.segmentStyle()]
 
-    def set_value(self, value: Union[float, str]):
+    def set_value(self, value: float | str):
         self.display(value)
 
     def get_value(self) -> float:

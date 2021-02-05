@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
@@ -19,7 +17,7 @@ class AmesomeFileIconProvider(widgets.FileIconProvider):
         self.network_icon = iconprovider.get_icon("mdi.folder-network")
 
     def icon(
-        self, icon: Union[QtWidgets.QFileIconProvider.IconType, QtCore.QFileInfo]
+        self, icon: QtWidgets.QFileIconProvider.IconType | QtCore.QFileInfo
     ) -> gui.Icon:
         if isinstance(icon, QtCore.QFileInfo):
             if icon.isDir():

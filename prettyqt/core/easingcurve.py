@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Literal, Union
+from typing import Callable, Literal
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
@@ -103,9 +103,7 @@ CurveMethod = Callable[[float], float]
 
 
 class EasingCurve(QtCore.QEasingCurve):
-    def __init__(
-        self, other_or_type: Union[TypeStr, int, QtCore.QEasingCurve] = "linear"
-    ):
+    def __init__(self, other_or_type: TypeStr | int | QtCore.QEasingCurve = "linear"):
         if isinstance(other_or_type, str) and other_or_type in TYPE:
             typ = TYPE[other_or_type]
         else:

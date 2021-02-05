@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import List, Literal, Union
+from typing import Literal
 
 from prettyqt import core, qml
 from prettyqt.qt import QtCore, QtQml
@@ -41,19 +41,19 @@ class QmlEngine(QtQml.QQmlEngine):
         """
         return OBJECT_OWNERSHIP.inverse[self.objectOwnership(obj)]
 
-    def add_import_path(self, path: Union[str, os.PathLike]):
+    def add_import_path(self, path: str | os.PathLike):
         self.addImportPath(os.fspath(path))
 
-    def add_plugin_path(self, path: Union[str, os.PathLike]):
+    def add_plugin_path(self, path: str | os.PathLike):
         self.addPluginPath(os.fspath(path))
 
-    def get_plugin_paths(self) -> List[pathlib.Path]:
+    def get_plugin_paths(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.pluginPathList()]
 
-    def get_import_paths(self) -> List[pathlib.Path]:
+    def get_import_paths(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.importPathList()]
 
-    def set_base_url(self, url: Union[str, QtCore.QUrl]):
+    def set_base_url(self, url: str | QtCore.QUrl):
         if isinstance(url, str):
             url = QtCore.QUrl(url)
         self.setBaseUrl(url)
@@ -61,5 +61,5 @@ class QmlEngine(QtQml.QQmlEngine):
     def get_base_url(self) -> core.Url:
         return core.Url(self.baseUrl())
 
-    def set_offline_storage_path(self, path: Union[str, os.PathLike]):
+    def set_offline_storage_path(self, path: str | os.PathLike):
         self.setOfflineStoragePath(os.fspath(path))

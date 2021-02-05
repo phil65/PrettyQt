@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
@@ -15,7 +13,7 @@ class ProgressDialog(QtWidgets.QProgressDialog):
     Wrapper for QtWidgets.QProgressDialog
     """
 
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent=parent)
 
         progress_bar = widgets.ProgressBar()

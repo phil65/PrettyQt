@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import constants, core, gui
 from prettyqt.qt.QtCharts import QtCharts
 
@@ -10,7 +8,7 @@ QtCharts.QAbstractAxis.__bases__ = (core.Object,)
 
 
 class AbstractAxis(QtCharts.QAbstractAxis):
-    def get_alignment(self) -> Optional[constants.SideStr]:
+    def get_alignment(self) -> constants.SideStr | None:
         """Return current alignment.
 
         Returns:
@@ -21,7 +19,7 @@ class AbstractAxis(QtCharts.QAbstractAxis):
             return None
         return constants.SIDES.inverse[alignment]
 
-    def get_orientation(self) -> Optional[constants.OrientationStr]:
+    def get_orientation(self) -> constants.OrientationStr | None:
         """Return current orientation.
 
         Returns:

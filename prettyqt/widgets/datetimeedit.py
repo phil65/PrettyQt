@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import datetime
-from typing import List, Literal, Union
+from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -80,13 +80,13 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
             raise InvalidParamError(section, SECTIONS)
         self.setCurrentSection(SECTIONS[section])
 
-    def get_displayed_sections(self) -> List[SectionsStr]:
+    def get_displayed_sections(self) -> list[SectionsStr]:
         return [k for k, v in SECTIONS.items() if v & self.displayedSections()]
 
     def set_range(
         self,
-        lower: Union[QtCore.QDateTime, datetime.datetime],
-        upper: Union[QtCore.QDateTime, datetime.datetime],
+        lower: QtCore.QDateTime | datetime.datetime,
+        upper: QtCore.QDateTime | datetime.datetime,
     ):
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setDateTimeRange(lower, upper)  # type: ignore

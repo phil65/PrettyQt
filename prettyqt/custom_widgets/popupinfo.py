@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
@@ -9,9 +7,7 @@ from prettyqt.qt import QtCore, QtWidgets
 class PopupInfo(widgets.Dialog):
     """Dialog overlay to show some info to user."""
 
-    def __init__(
-        self, parent: Optional[QtWidgets.QWidget] = None, text: Optional[str] = None
-    ):
+    def __init__(self, parent: QtWidgets.QWidget | None = None, text: str | None = None):
         super().__init__(parent=parent)
         self.timer = core.Timer.single_shot(callback=self.close)
         self.label = widgets.Label()

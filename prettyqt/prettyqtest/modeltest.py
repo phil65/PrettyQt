@@ -43,7 +43,7 @@
 
 from __future__ import annotations
 
-from typing import Any, List, NamedTuple, Tuple
+from typing import Any, NamedTuple
 
 from prettyqt.qt import QtCore, QtGui, QtTest
 
@@ -57,7 +57,7 @@ class _Changing(NamedTuple):
 
 HAS_QT_TESTER = hasattr(QtTest, "QAbstractItemModelTester")
 
-TYPES: List[Tuple[QtCore.Qt.ItemDataRole, Tuple[type, ...]]] = [
+TYPES: list[tuple[QtCore.Qt.ItemDataRole, tuple[type, ...]]] = [
     (QtCore.Qt.DisplayRole, (str,)),
     (QtCore.Qt.ToolTipRole, (str,)),
     (QtCore.Qt.StatusTipRole, (str,)),
@@ -79,9 +79,9 @@ class ModelTester:
     def __init__(self, model: QtCore.QAbstractItemModel):
         self._model = model
         self._fetching_more = False
-        self._insert: List[_Changing] = []
-        self._remove: List[_Changing] = []
-        self._changing: List[QtCore.QPersistentModelIndex] = []
+        self._insert: list[_Changing] = []
+        self._remove: list[_Changing] = []
+        self._changing: list[QtCore.QPersistentModelIndex] = []
         self._qt_tester = None
         self.force_py = False
 

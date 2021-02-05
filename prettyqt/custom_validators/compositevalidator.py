@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List, Optional, Tuple
+from typing import Iterator
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
@@ -9,8 +9,8 @@ from prettyqt.qt import QtCore, QtGui
 class CompositeValidator(gui.Validator):
     def __init__(
         self,
-        validators: Optional[List[gui.Validator]] = None,
-        parent: Optional[QtCore.QObject] = None,
+        validators: list[gui.Validator] | None = None,
+        parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
         self.validators = validators if validators is not None else []
@@ -46,7 +46,7 @@ class CompositeValidator(gui.Validator):
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> Tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[QtGui.QValidator.State, str, int]:
         vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
         return min(vals), text, pos
 

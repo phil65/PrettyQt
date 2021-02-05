@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtBluetooth
@@ -80,7 +80,7 @@ class BluetoothDeviceDiscoveryAgent(QtBluetooth.QBluetoothDeviceDiscoveryAgent):
     def get_error(self) -> ErrorStr:
         return ERROR.inverse[self.error()]
 
-    def get_supported_discovery_methods(self) -> List[DiscoveryMethodStr]:
+    def get_supported_discovery_methods(self) -> list[DiscoveryMethodStr]:
         return [
             k
             for k, v in DISCOVERY_METHODS.items()

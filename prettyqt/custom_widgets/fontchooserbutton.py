@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
 
@@ -12,8 +10,8 @@ class FontChooserButton(widgets.Widget):
 
     def __init__(
         self,
-        font: Optional[QtGui.QFont] = None,
-        parent: Optional[QtWidgets.QWidget] = None,
+        font: QtGui.QFont | None = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)
         self._current_font = font
@@ -53,14 +51,14 @@ class FontChooserButton(widgets.Widget):
             self.set_current_font(dlg.current_font())
             self.value_changed.emit(dlg.current_font())
 
-    def set_current_font(self, font: Union[str, QtGui.QFont]):
+    def set_current_font(self, font: str | QtGui.QFont):
         if isinstance(font, str):
             self._current_font = gui.Font(font)
         else:
             self._current_font = font
         self.lineedit.setText(self._current_font.family())
 
-    def set_value(self, value: Union[str, QtGui.QFont]):
+    def set_value(self, value: str | QtGui.QFont):
         self.set_current_font(value)
 
     def get_value(self):

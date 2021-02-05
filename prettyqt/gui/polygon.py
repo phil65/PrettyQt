@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List, Tuple, Union
+from typing import Iterator
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
@@ -28,7 +28,7 @@ class Polygon(QtGui.QPolygon):
             raise KeyError(index)
         return self.get_point(index)
 
-    def __setitem__(self, index: int, value: Union[QtCore.QPoint, Tuple[int, int]]):
+    def __setitem__(self, index: int, value: QtCore.QPoint | tuple[int, int]):
         if isinstance(value, tuple):
             p = core.Point(*value)
         else:
@@ -68,10 +68,10 @@ class Polygon(QtGui.QPolygon):
         # PySide2 doesnt have self.point method
         return core.Point(self.value(index))
 
-    def get_points(self) -> List[core.Point]:
+    def get_points(self) -> list[core.Point]:
         return [self.get_point(i) for i in range(self.size())]
 
-    def add_points(self, *points: Union[Tuple[float, float], core.Point]):
+    def add_points(self, *points: tuple[float, float] | core.Point):
         for p in points:
             if isinstance(p, tuple):
                 p = core.Point(*p)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
@@ -74,7 +74,7 @@ class DataWidgetMapper(QtWidgets.QDataWidgetMapper):
         return SUBMIT_POLICY.inverse[self.submitPolicy()]
 
     def add_mapping(
-        self, widget: QtWidgets.QWidget, section: int, property_name: Optional[str] = None
+        self, widget: QtWidgets.QWidget, section: int, property_name: str | None = None
     ):
         if property_name is None:
             self.addMapping(widget, section)

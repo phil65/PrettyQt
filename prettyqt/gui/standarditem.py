@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Iterator, List, Optional, Tuple, Union
+from typing import Iterator
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
@@ -35,7 +35,7 @@ class StandardItem(QtGui.QStandardItem):
         return bytes(ba)
 
     def __getitem__(
-        self, index: Union[int, Tuple[int, int], QtCore.QModelIndex]
+        self, index: int | tuple[int, int] | QtCore.QModelIndex
     ) -> QtGui.QStandardItem:
         if isinstance(index, int):
             return self.child(index)
@@ -44,7 +44,7 @@ class StandardItem(QtGui.QStandardItem):
         else:
             raise KeyError(index)
 
-    def __delitem__(self, index: Union[int, Tuple[int, int]]):
+    def __delitem__(self, index: int | tuple[int, int]):
         if isinstance(index, int):
             item = self.takeRow(index)
         else:
@@ -56,16 +56,16 @@ class StandardItem(QtGui.QStandardItem):
     def __iter__(self) -> Iterator[QtGui.QStandardItem]:
         return iter(self.get_children())
 
-    def __add__(self, other: Union[str, QtGui.QStandardItem]) -> StandardItem:
+    def __add__(self, other: str | QtGui.QStandardItem) -> StandardItem:
         if isinstance(other, (QtGui.QStandardItem, str)):
             self.add(other)
             return self
         raise TypeError("wrong type for addition")
 
-    def get_children(self) -> List[QtGui.QStandardItem]:
+    def get_children(self) -> list[QtGui.QStandardItem]:
         return [self.child(index) for index in range(self.rowCount())]
 
-    def add(self, *item: Union[str, QtGui.QStandardItem]):
+    def add(self, *item: str | QtGui.QStandardItem):
         for i in item:
             if isinstance(i, str):
                 i = gui.StandardItem(i)
@@ -116,7 +116,7 @@ class StandardItem(QtGui.QStandardItem):
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())
 
-    def get_icon(self) -> Optional[gui.Icon]:
+    def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         if icon.isNull():
             return None
@@ -124,8 +124,8 @@ class StandardItem(QtGui.QStandardItem):
 
     def set_tooltip(
         self,
-        tooltip: Union[str, os.PathLike],
-        size: Optional[Union[Tuple[int, int], QtCore.QSize]] = None,
+        tooltip: str | os.PathLike,
+        size: tuple[int, int] | QtCore.QSize | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -141,20 +141,20 @@ class StandardItem(QtGui.QStandardItem):
         self,
         name: str = "",
         icon: types.IconType = None,
-        data: Optional[dict] = None,
-        foreground: Optional[QtGui.QBrush] = None,
-        background: Optional[QtGui.QBrush] = None,
-        font: Optional[QtGui.QFont] = None,
+        data: dict | None = None,
+        foreground: QtGui.QBrush | None = None,
+        background: QtGui.QBrush | None = None,
+        font: QtGui.QFont | None = None,
         selectable: bool = True,
         enabled: bool = True,
         editable: bool = False,
-        status_tip: Optional[str] = None,
-        tool_tip: Optional[str] = None,
-        whats_this: Optional[str] = None,
+        status_tip: str | None = None,
+        tool_tip: str | None = None,
+        whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
-        checkstate: Optional[constants.StateStr] = None,
-        flags: Optional[QtCore.Qt.ItemFlags] = None,
-        size_hint: Optional[QtCore.QSize] = None,
+        checkstate: constants.StateStr | None = None,
+        flags: QtCore.Qt.ItemFlags | None = None,
+        size_hint: QtCore.QSize | None = None,
         is_user_type: bool = False,
     ) -> StandardItem:
         item = StandardItem(name)

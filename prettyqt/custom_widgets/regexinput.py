@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, Pattern, Union
+from typing import Pattern
 
 import regex as re
 
@@ -25,7 +25,7 @@ class RegexInput(widgets.Widget):
         self,
         show_flags: bool = True,
         show_error: bool = True,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
         self.set_layout("grid")
@@ -81,7 +81,7 @@ class RegexInput(widgets.Widget):
         for identifier, flag in MAP.items():
             self.tb_flags[identifier] = bool(value & flag)
 
-    def set_value(self, value: Optional[Union[str, Pattern]]):
+    def set_value(self, value: str | Pattern | None):
         if value is None:
             self.pattern = ""
             self.compile_flags = 0

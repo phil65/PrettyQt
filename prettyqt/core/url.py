@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Any, Dict, Literal, Optional, Union
+from typing import Any, Literal
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
@@ -73,7 +73,7 @@ FormattingOptionStr = Literal[
 
 
 class Url(QtCore.QUrl):
-    def __init__(self, path: Optional[Union[QtCore.QUrl, str, os.PathLike]] = None):
+    def __init__(self, path: QtCore.QUrl | str | os.PathLike | None = None):
         if path is None:
             super().__init__()
         else:
@@ -96,7 +96,7 @@ class Url(QtCore.QUrl):
     def serialize_fields(self):
         return dict(path=self.toString())
 
-    def serialize(self) -> Dict[str, Any]:
+    def serialize(self) -> dict[str, Any]:
         return self.serialize_fields()
 
     def to_string(self) -> str:
@@ -114,7 +114,7 @@ class Url(QtCore.QUrl):
         return self.isLocalFile()
 
     @classmethod
-    def from_user_input(cls, url: str, working_dir: Optional[str] = None) -> Url:
+    def from_user_input(cls, url: str, working_dir: str | None = None) -> Url:
         if working_dir is None:
             working_dir = ""
         return cls(cls.fromUserInput(url, working_dir))

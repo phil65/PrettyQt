@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Iterable, Iterator, List, Mapping, Optional, Union
+from typing import Any, Iterable, Iterator, Mapping
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -19,7 +19,7 @@ class ListWidget(QtWidgets.QListWidget):
     value_changed = core.Signal(object)
 
     def __init__(
-        self, parent: Optional[QtWidgets.QWidget] = None, selection_mode: str = "single"
+        self, parent: QtWidgets.QWidget | None = None, selection_mode: str = "single"
     ):
         super().__init__(parent)
         self.itemSelectionChanged.connect(self.on_index_change)
@@ -73,10 +73,10 @@ class ListWidget(QtWidgets.QListWidget):
         data = self.get_value()
         self.value_changed.emit(data)
 
-    def get_children(self) -> List[QtWidgets.QListWidgetItem]:
+    def get_children(self) -> list[QtWidgets.QListWidgetItem]:
         return [self.item(row) for row in range(self.count())]
 
-    def add_items(self, items: Union[Iterable, Mapping]):
+    def add_items(self, items: Iterable | Mapping):
         if isinstance(items, Mapping):
             for k, v in items.items():
                 self.add(v, k)
@@ -91,18 +91,18 @@ class ListWidget(QtWidgets.QListWidget):
         self,
         name: str = "",
         icon: types.IconType = None,
-        data: Optional[dict] = None,
-        foreground: Optional[QtGui.QBrush] = None,
-        background: Optional[QtGui.QBrush] = None,
-        font: Optional[QtGui.QFont] = None,
+        data: dict | None = None,
+        foreground: QtGui.QBrush | None = None,
+        background: QtGui.QBrush | None = None,
+        font: QtGui.QFont | None = None,
         selected: bool = None,
-        status_tip: Optional[str] = None,
-        tool_tip: Optional[str] = None,
-        whats_this: Optional[str] = None,
+        status_tip: str | None = None,
+        tool_tip: str | None = None,
+        whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
-        checkstate: Optional[constants.StateStr] = None,
-        flags: Optional[QtCore.Qt.ItemFlags] = None,
-        size_hint: Optional[QtCore.QSize] = None,
+        checkstate: constants.StateStr | None = None,
+        flags: QtCore.Qt.ItemFlags | None = None,
+        size_hint: QtCore.QSize | None = None,
         is_user_type: bool = False,
     ) -> widgets.ListWidgetItem:
         typ = 1 if is_user_type else 0
@@ -144,7 +144,7 @@ class ListWidget(QtWidgets.QListWidget):
         item.setData(QtCore.Qt.UserRole, data)
         self.addItem(item)
 
-    def get_value(self) -> List[Any]:
+    def get_value(self) -> list[Any]:
         return [i.data(QtCore.Qt.UserRole) for i in self.selectedItems()]
 
     def set_value(self, value):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List
+from typing import Iterator
 
 from prettyqt import location
 from prettyqt.qt import QtLocation
@@ -31,7 +31,7 @@ class PlaceSearchReply(QtLocation.QPlaceSearchReply):
         reply.setRequest(request)
         return reply
 
-    def get_results(self) -> List[location.PlaceSearchResult]:
+    def get_results(self) -> list[location.PlaceSearchResult]:
         return [location.PlaceSearchResult(i) for i in self.results()]
 
     def get_next_page_request(self) -> location.PlaceSearchRequest:

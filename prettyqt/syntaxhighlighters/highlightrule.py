@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import List, Optional, Union
 
 import regex as re
 
@@ -13,12 +12,12 @@ from prettyqt import gui
 
 @dataclass
 class HighlightRule:
-    regex: Union[str, List[str]] = ""
+    regex: str | list[str] = ""
     color: str = "black"
     italic: bool = False
     bold: bool = False
     minimal: bool = False
-    font_size: Optional[float] = None
+    font_size: float | None = None
     nth: int = 0
     compiled = None
     fmt: gui.TextCharFormat = gui.TextCharFormat()

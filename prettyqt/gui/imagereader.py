@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Union
+from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -56,10 +56,10 @@ class ImageReader(QtGui.QImageReader):
     def get_subtype(self) -> str:
         return bytes(self.subType()).decode()
 
-    def get_supported_subtypes(self) -> List[str]:
+    def get_supported_subtypes(self) -> list[str]:
         return [bytes(i).decode() for i in self.supportedSubTypes()]
 
-    def set_format(self, fmt: Union[str, bytes, QtCore.QByteArray]):
+    def set_format(self, fmt: str | bytes | QtCore.QByteArray):
         if isinstance(fmt, str):
             fmt = fmt.encode()
         if isinstance(fmt, bytes):
@@ -91,21 +91,21 @@ class ImageReader(QtGui.QImageReader):
         return self.supportsOption(gui.imageiohandler.IMAGE_OPTION[option])
 
     @staticmethod
-    def get_image_format(obj: Union[str, QtCore.QIODevice]) -> str:
+    def get_image_format(obj: str | QtCore.QIODevice) -> str:
         return bytes(ImageReader.imageFormat(obj)).decode()
 
     @staticmethod
-    def get_supported_image_formats() -> List[str]:
+    def get_supported_image_formats() -> list[str]:
         return [bytes(i).decode() for i in ImageReader.supportedImageFormats()]
 
     @staticmethod
-    def get_supported_mime_types() -> List[str]:
+    def get_supported_mime_types() -> list[str]:
         return [bytes(i).decode() for i in ImageReader.supportedMimeTypes()]
 
     @staticmethod
     def get_image_formats_for_mime_type(
-        typ: Union[str, bytes, QtCore.QByteArray]
-    ) -> List[str]:
+        typ: str | bytes | QtCore.QByteArray,
+    ) -> list[str]:
         if isinstance(typ, str):
             typ = typ.encode()
         if isinstance(typ, bytes):

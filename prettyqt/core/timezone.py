@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -46,9 +46,9 @@ class TimeZone(QtCore.QTimeZone):
 
     def get_display_name(
         self,
-        datetime: Union[QtCore.QDateTime, TimeTypeStr],
+        datetime: QtCore.QDateTime | TimeTypeStr,
         name_type: NameTypeStr = "default",
-        locale: Optional[core.Locale] = None,
+        locale: core.Locale | None = None,
     ) -> str:
         if isinstance(datetime, str):
             if datetime not in TIME_TYPE:

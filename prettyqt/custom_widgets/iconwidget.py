@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple, Union
-
 from prettyqt import core, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import types
@@ -19,9 +17,9 @@ class IconWidget(widgets.Label):
     it also have setIcon() and setIconSize() functions
     """
 
-    def __init__(self, *names, parent: Optional[QtWidgets.QWidget] = None, **kwargs):
+    def __init__(self, *names, parent: QtWidgets.QWidget | None = None, **kwargs):
         super().__init__(parent=parent)
-        self._icon: Optional[QtGui.QIcon] = None
+        self._icon: QtGui.QIcon | None = None
         self._size = core.Size(16, 16)
         self.set_icon(iconprovider._icon(*names, **kwargs))
 
@@ -36,7 +34,7 @@ class IconWidget(widgets.Label):
         self._icon = iconprovider.get_icon(_icon)
         self.setPixmap(self._icon.pixmap(self._size))
 
-    def set_icon_size(self, size: Union[int, QtCore.QSize, Tuple[int, int]]):
+    def set_icon_size(self, size: int | QtCore.QSize | tuple[int, int]):
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
         elif isinstance(size, int):

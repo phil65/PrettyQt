@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List, Optional, Tuple, Union
+from typing import Iterator
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
@@ -12,7 +12,7 @@ QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
 
 class StandardItemModel(QtGui.QStandardItemModel):
     def __getitem__(
-        self, index: Union[int, Tuple[int, int], QtCore.QModelIndex]
+        self, index: int | tuple[int, int] | QtCore.QModelIndex
     ) -> QtGui.QStandardItem:
         if isinstance(index, int):
             item = self.item(index)
@@ -24,7 +24,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
             raise KeyError(index)
         return item
 
-    def __delitem__(self, index: Union[int, Tuple[int, int]]):
+    def __delitem__(self, index: int | tuple[int, int]):
         if isinstance(index, int):
             item = self.takeRow(index)
         elif isinstance(index, tuple):
@@ -46,16 +46,16 @@ class StandardItemModel(QtGui.QStandardItemModel):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __add__(self, other: Union[str, QtGui.QStandardItem]) -> StandardItemModel:
+    def __add__(self, other: str | QtGui.QStandardItem) -> StandardItemModel:
         if isinstance(other, (QtGui.QStandardItem, str)):
             self.add(other)
             return self
         raise TypeError("wrong type for addition")
 
-    def get_children(self) -> List[QtGui.QStandardItem]:
+    def get_children(self) -> list[QtGui.QStandardItem]:
         return [self.item(index) for index in range(self.rowCount())]
 
-    def add(self, *item: Union[str, QtGui.QStandardItem]):
+    def add(self, *item: str | QtGui.QStandardItem):
         for i in item:
             if isinstance(i, str):
                 i = gui.StandardItem(i)
@@ -63,7 +63,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
 
     def find_items(
         self, text: str, column: int = 0, mode: constants.MatchFlagStr = "exact"
-    ) -> List[QtGui.QStandardItem]:
+    ) -> list[QtGui.QStandardItem]:
         if mode not in constants.MATCH_FLAGS:
             raise InvalidParamError(mode, constants.MATCH_FLAGS)
         return self.findItems(text, constants.MATCH_FLAGS[mode], column)
@@ -72,20 +72,20 @@ class StandardItemModel(QtGui.QStandardItemModel):
         self,
         name: str = "",
         icon: types.IconType = None,
-        data: Optional[dict] = None,
-        foreground: Optional[QtGui.QBrush] = None,
-        background: Optional[QtGui.QBrush] = None,
-        font: Optional[QtGui.QFont] = None,
+        data: dict | None = None,
+        foreground: QtGui.QBrush | None = None,
+        background: QtGui.QBrush | None = None,
+        font: QtGui.QFont | None = None,
         selectable: bool = True,
         enabled: bool = True,
         editable: bool = False,
-        status_tip: Optional[str] = None,
-        tool_tip: Optional[str] = None,
-        whats_this: Optional[str] = None,
+        status_tip: str | None = None,
+        tool_tip: str | None = None,
+        whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
-        checkstate: Optional[constants.StateStr] = None,
-        flags: Optional[QtCore.Qt.ItemFlags] = None,
-        size_hint: Optional[QtCore.QSize] = None,
+        checkstate: constants.StateStr | None = None,
+        flags: QtCore.Qt.ItemFlags | None = None,
+        size_hint: QtCore.QSize | None = None,
         is_user_type: bool = False,
     ) -> gui.StandardItem:
         item = gui.StandardItem(name)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Optional
+from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
@@ -35,7 +35,7 @@ class InputDialog(QtWidgets.QInputDialog):
         title: str = "",
         label: str = "",
         icon: types.IconType = None,
-    ) -> Optional[int]:
+    ) -> int | None:
         par = widgets.Dialog()
         par.set_icon(icon)
         v = cls.getInt(par, title, label, value=0)
@@ -47,7 +47,7 @@ class InputDialog(QtWidgets.QInputDialog):
         title: str = "",
         label: str = "",
         icon: types.IconType = None,
-    ) -> Optional[float]:
+    ) -> float | None:
         par = widgets.Dialog()
         par.set_icon(icon)
         v = cls.getDouble(par, title, label, value=0.0)
@@ -61,7 +61,7 @@ class InputDialog(QtWidgets.QInputDialog):
         icon: types.IconType = None,
         default_value: str = "",
         echo_mode: widgets.lineedit.EchoModeStr = "normal",
-    ) -> Optional[str]:
+    ) -> str | None:
         par = widgets.Dialog()
         par.set_icon(icon)
         if echo_mode not in widgets.lineedit.ECHO_MODE:
@@ -74,12 +74,12 @@ class InputDialog(QtWidgets.QInputDialog):
     @classmethod
     def get_item(
         cls,
-        items: List[str],
+        items: list[str],
         title: str = "",
         label: str = "",
         icon: types.IconType = None,
         editable: bool = False,
-    ) -> Optional[str]:
+    ) -> str | None:
         par = widgets.Dialog()
         par.set_icon(icon)
         v = cls.getItem(par, title, label, items, editable=editable, current=0)

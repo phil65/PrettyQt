@@ -5,7 +5,7 @@ from __future__ import annotations
 import inspect
 import logging
 import pprint
-from typing import Callable, Dict
+from typing import Callable
 
 from prettyqt import constants, custom_models, gui
 from prettyqt.qt import QtGui
@@ -35,7 +35,7 @@ SPECIAL_ATTR_FONT = QtGui.QFont()  # Font for __special_attributes__
 SPECIAL_ATTR_FONT.setItalic(True)
 
 
-TYPE_CHECK: Dict[Callable, str] = {
+TYPE_CHECK: dict[Callable, str] = {
     inspect.isasyncgen: "Async generator",
     inspect.ismethoddescriptor: "Method descriptor",
     inspect.ismethod: "Method",

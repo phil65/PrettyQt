@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict
@@ -119,7 +119,7 @@ class KeySequence(QtGui.QKeySequence):
     def __reduce__(self):
         return type(self), (self.toString(),)
 
-    def get_matches(self, seq: Union[QtGui.QKeySequence, str]) -> SequenceMatchStr:
+    def get_matches(self, seq: QtGui.QKeySequence | str) -> SequenceMatchStr:
         if isinstance(seq, str):
             seq = KeySequence(seq)
         return SEQUENCE_MATCHES.inverse[self.matches(seq)]

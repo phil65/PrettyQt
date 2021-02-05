@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import contextlib
-from typing import Iterator, List, Literal, Optional, Union
+from typing import Iterator, Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -84,7 +84,7 @@ class Painter(QtGui.QPainter):
 
     def draw_image(
         self,
-        target: Union[QtCore.QPoint, QtCore.QPointF, QtCore.QRect, QtCore.QRectF],
+        target: QtCore.QPoint | QtCore.QPointF | QtCore.QRect | QtCore.QRectF,
         frame_buffer: QtGui.QImage,
     ):
         self.set_composition_mode("source_atop")
@@ -92,9 +92,9 @@ class Painter(QtGui.QPainter):
 
     def draw_polygon(
         self,
-        points: Union[
-            QtGui.QPolygon, QtGui.QPolygonF, List[QtCore.QPoint], List[QtCore.QPointF]
-        ],
+        points: (
+            QtGui.QPolygon | QtGui.QPolygonF | list[QtCore.QPoint] | list[QtCore.QPointF]
+        ),
         fill_rule: constants.FillRuleStr = "odd_even",
     ):
         if fill_rule not in constants.FILL_RULE:
@@ -106,7 +106,7 @@ class Painter(QtGui.QPainter):
 
     def fill_rect(
         self,
-        rect: Union[QtCore.QRectF, QtCore.QRect],
+        rect: QtCore.QRectF | QtCore.QRect,
         color: types.ColorType,
         pattern: constants.PatternStr = "solid",
     ):
@@ -121,10 +121,10 @@ class Painter(QtGui.QPainter):
 
     def set_pen(
         self,
-        style: Optional[constants.PenStyleStr] = "solid",
+        style: constants.PenStyleStr | None = "solid",
         width: float = 1.0,
         color: types.ColorType = "black",
-        brush: Optional[QtGui.QBrush] = None,
+        brush: QtGui.QBrush | None = None,
         miter_limit: float = 2.0,
         join_style: constants.JoinStyleStr = "bevel",
         cap_style: constants.CapStyleStr = "square",
@@ -167,7 +167,7 @@ class Painter(QtGui.QPainter):
         color = colors.get_color(color)
         self.setPen(color)
 
-    def set_brush(self, brush: Union[QtGui.QBrush, types.ColorType]):
+    def set_brush(self, brush: QtGui.QBrush | types.ColorType):
         if not isinstance(brush, QtGui.QBrush):
             brush = colors.get_color(brush)
         self.setBrush(brush)

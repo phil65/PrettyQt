@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import contextlib
-from typing import Iterator, Literal, Optional, Tuple
+from typing import Iterator, Literal
 
 from deprecated import deprecated
 
@@ -28,12 +28,12 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def __init__(
         self,
         text: str = "",
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
         read_only: bool = False,
     ):
         super().__init__(text, parent)
         self._allow_wheel_zoom = False
-        self.validator: Optional[QtGui.QValidator] = None
+        self.validator: QtGui.QValidator | None = None
         self.textChanged.connect(self._on_value_change)
         self.set_read_only(read_only)
 
@@ -88,7 +88,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def get_current_line(self) -> int:
         return self.textCursor().blockNumber()
 
-    def get_selected_rows(self) -> Tuple[int, int]:
+    def get_selected_rows(self) -> tuple[int, int]:
         start = self.textCursor().selectionStart()
         end = self.textCursor().selectionEnd()
         start_block_id = self.document().findBlock(start).blockNumber()
@@ -128,7 +128,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def set_text(self, text: str):
         self.setPlainText(text)
 
-    def set_syntaxhighlighter(self, syntax: str, style: Optional[str] = None):
+    def set_syntaxhighlighter(self, syntax: str, style: str | None = None):
         self._hl = syntaxhighlighters.PygmentsHighlighter(self.document(), syntax)
         if style is not None:
             self._hl.set_style(style)
@@ -224,7 +224,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         color = "orange" if not self.is_valid() else None
         self.set_background_color(color)
 
-    def set_validator(self, validator: Optional[QtGui.QValidator]):
+    def set_validator(self, validator: QtGui.QValidator | None):
         self.validator = validator
         self._set_validation_color()
 

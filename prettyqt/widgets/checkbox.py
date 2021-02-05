@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
@@ -17,7 +15,7 @@ class CheckBox(QtWidgets.QCheckBox):
     def __init__(
         self,
         label: str = "",
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
         checked: bool = False,
     ):
         super().__init__(label, parent)

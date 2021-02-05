@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List, Optional, Tuple, Union
-
 from prettyqt import core, location, positioning
 from prettyqt.qt import QtLocation, QtPositioning
 
@@ -27,20 +25,20 @@ class PlaceManager(core.Object):
     def get_category(self, cat_id: str) -> location.PlaceCategory:
         return location.PlaceCategory(self.item.category(cat_id))
 
-    def get_child_categories(self, cat_id: str) -> List[location.PlaceCategory]:
+    def get_child_categories(self, cat_id: str) -> list[location.PlaceCategory]:
         return [location.PlaceCategory(i) for i in self.item.childCategories(cat_id)]
 
-    def get_locales(self) -> List[core.Locale]:
+    def get_locales(self) -> list[core.Locale]:
         return [core.Locale(i) for i in self.locales()]
 
     def search_place(
         self,
         search_term: str,
-        coord: Union[Tuple[float, float], QtPositioning.QGeoCoordinate],
-        radius: Optional[float] = None,
-        limit: Optional[int] = None,
-        relevance: Optional[location.placesearchrequest.RelevanceHintStr] = None,
-        categories: Optional[List[str]] = None,
+        coord: tuple[float, float] | QtPositioning.QGeoCoordinate,
+        radius: float | None = None,
+        limit: int | None = None,
+        relevance: location.placesearchrequest.RelevanceHintStr | None = None,
+        categories: list[str] | None = None,
     ):
         request = location.PlaceSearchRequest()
         request.setSearchTerm(search_term)

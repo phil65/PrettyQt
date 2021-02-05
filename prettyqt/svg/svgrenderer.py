@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import os
-from typing import Union
 
 from prettyqt import constants, core
 from prettyqt.qt import QtSvg
@@ -12,7 +11,7 @@ QtSvg.QSvgRenderer.__bases__ = (core.Object,)
 
 
 class SvgRenderer(QtSvg.QSvgRenderer):
-    def load_file(self, path: Union[str, os.PathLike]):
+    def load_file(self, path: str | os.PathLike):
         result = self.load(os.fspath(path))
         if not result:
             raise ValueError("invalid path")

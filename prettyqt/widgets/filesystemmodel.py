@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Iterator, List, Sequence, Union
+from typing import Iterator, Sequence
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtWidgets
@@ -60,7 +60,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
     def use_custom_icons(self, use: bool):
         self.setOption(OPTIONS["no_custom_icons"], not use)
 
-    def set_root_path(self, path: Union[str, os.PathLike]) -> QtCore.QModelIndex:
+    def set_root_path(self, path: str | os.PathLike) -> QtCore.QModelIndex:
         path = os.fspath(path)
         if path in ["/", "root"]:
             path = core.Dir.rootPath()
@@ -81,7 +81,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
             raise InvalidParamError(filter_mode, core.dir.FILTERS)
         self.setFilter(core.dir.FILTERS[filter_mode])
 
-    def get_paths(self, indexes: Sequence[QtCore.QModelIndex]) -> List[pathlib.Path]:
+    def get_paths(self, indexes: Sequence[QtCore.QModelIndex]) -> list[pathlib.Path]:
         paths = [i.data(self.DATA_ROLE) for i in indexes]
         if not paths:
             return []

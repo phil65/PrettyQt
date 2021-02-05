@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import math
-from typing import Iterator, List, Tuple, Union
+from typing import Iterator
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -70,10 +70,10 @@ class PolygonF(QtGui.QPolygonF):
     def get_point(self, index: int) -> core.PointF:
         return core.PointF(self.at(index))
 
-    def get_points(self) -> List[core.PointF]:
+    def get_points(self) -> list[core.PointF]:
         return [self.get_point(i) for i in range(self.size())]
 
-    def add_points(self, *points: Union[Tuple[float, float], core.Point]):
+    def add_points(self, *points: tuple[float, float] | core.Point):
         for p in points:
             if isinstance(p, tuple):
                 p = core.Point(*p)

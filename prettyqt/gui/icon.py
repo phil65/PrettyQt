@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Tuple, Union
+from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -52,7 +52,7 @@ class Icon(QtGui.QIcon):
 
     def get_available_sizes(
         self, mode: ModeStr = "normal", state: StateStr = "off"
-    ) -> List[core.Size]:
+    ) -> list[core.Size]:
         if mode not in MODE:
             raise InvalidParamError(mode, MODE)
         if state not in STATE:
@@ -61,7 +61,7 @@ class Icon(QtGui.QIcon):
 
     def add_pixmap(
         self,
-        data: Union[QtCore.QByteArray, QtGui.QPixmap, bytes],
+        data: QtCore.QByteArray | QtGui.QPixmap | bytes,
         mode: ModeStr = "normal",
         state: StateStr = "off",
     ):
@@ -80,7 +80,7 @@ class Icon(QtGui.QIcon):
 
     def get_pixmap(
         self,
-        size: Union[QtCore.QSize, Tuple[int, int], int],
+        size: QtCore.QSize | tuple[int, int] | int,
         mode: ModeStr = "normal",
         state: StateStr = "off",
     ) -> QtGui.QPixmap:
@@ -96,7 +96,7 @@ class Icon(QtGui.QIcon):
 
     def get_actual_size(
         self,
-        size: Union[QtCore.QSize, Tuple[int, int], int],
+        size: QtCore.QSize | tuple[int, int] | int,
         mode: ModeStr = "normal",
         state: StateStr = "off",
     ) -> core.Size:

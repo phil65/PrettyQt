@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core, positioning
 from prettyqt.qt import QtLocation
@@ -79,10 +79,10 @@ TravelModeStr = Literal["car", "pedestrian", "bicycle", "public_transit", "truck
 
 
 class GeoRouteRequest(QtLocation.QGeoRouteRequest):
-    def get_waypoints(self) -> List[positioning.GeoCoordinate]:
+    def get_waypoints(self) -> list[positioning.GeoCoordinate]:
         return [positioning.GeoCoordinate(wp) for wp in self.waypoints()]
 
-    def get_exclude_areas(self) -> List[positioning.GeoRectangle]:
+    def get_exclude_areas(self) -> list[positioning.GeoRectangle]:
         return [positioning.GeoRectangle(wp) for wp in self.excludeAreas()]
 
     def get_departure_time(self) -> core.DateTime:
@@ -135,7 +135,7 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
         """
         return ROUTE_OPTIMIZATION.inverse[self.routeOptimization()]
 
-    def get_travel_modes(self) -> List[TravelModeStr]:
+    def get_travel_modes(self) -> list[TravelModeStr]:
         return [k for k, v in TRAVEL_MODE.items() if v & self.travelModes()]
 
     def set_travel_modes(self, *mode: TravelModeStr):
@@ -145,7 +145,7 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
         flags = helpers.merge_flags(mode, TRAVEL_MODE)
         self.setTravelModes(flags)
 
-    def get_feature_types(self) -> List[FeatureTypeStr]:
+    def get_feature_types(self) -> list[FeatureTypeStr]:
         return [k for k, v in FEATURE_TYPES.items() for t in self.featureTypes() if v & t]
 
 

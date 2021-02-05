@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core, texttospeech
 from prettyqt.qt import QtTextToSpeech
@@ -29,13 +29,13 @@ class TextToSpeech(QtTextToSpeech.QTextToSpeech):
     def get_locale(self) -> core.Locale:
         return core.Locale(self.locale())
 
-    def get_available_locales(self) -> List[core.Locale]:
+    def get_available_locales(self) -> list[core.Locale]:
         return [core.Locale(locale) for locale in self.availableLocales()]
 
     def get_voice(self) -> texttospeech.Voice:
         return texttospeech.Voice(self.voice())
 
-    def get_available_voices(self) -> List[texttospeech.Voice]:
+    def get_available_voices(self) -> list[texttospeech.Voice]:
         return [texttospeech.Voice(voice) for voice in self.availableVoices()]
 
 

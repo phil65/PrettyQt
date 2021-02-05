@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List
+from typing import Iterator
 
 from prettyqt import location
 from prettyqt.qt import QtLocation
@@ -27,7 +27,7 @@ class PlaceMatchReply(QtLocation.QPlaceMatchReply):
         reply.setRequest(request)
         return reply
 
-    def get_places(self) -> List[location.Place]:
+    def get_places(self) -> list[location.Place]:
         return [location.Place(i) for i in self.places()]
 
     def get_request(self) -> location.PlaceMatchRequest:

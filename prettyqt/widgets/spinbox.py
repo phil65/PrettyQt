@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
@@ -15,10 +13,10 @@ class SpinBox(QtWidgets.QSpinBox):
 
     def __init__(
         self,
-        parent: Optional[QtWidgets.QWidget] = None,
-        min_value: Optional[int] = None,
-        max_value: Optional[int] = None,
-        default_value: Optional[int] = None,
+        parent: QtWidgets.QWidget | None = None,
+        min_value: int | None = None,
+        max_value: int | None = None,
+        default_value: int | None = None,
     ):
         super().__init__(parent)
         self.valueChanged.connect(self.value_changed)
@@ -50,7 +48,7 @@ class SpinBox(QtWidgets.QSpinBox):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def set_range(self, start: Optional[int], end: Optional[int]):
+    def set_range(self, start: int | None, end: int | None):
         if start is None:
             start = -2147483647
         if end is None:

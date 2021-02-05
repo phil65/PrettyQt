@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
@@ -25,7 +25,7 @@ class ProgressBar(QtWidgets.QProgressBar):
     """
 
     def __init__(
-        self, text_visible: bool = True, parent: Optional[QtWidgets.QWidget] = None
+        self, text_visible: bool = True, parent: QtWidgets.QWidget | None = None
     ):
         super().__init__(parent=parent)
         self.setTextVisible(text_visible)

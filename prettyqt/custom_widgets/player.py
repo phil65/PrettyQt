@@ -1,14 +1,13 @@
 from __future__ import annotations
 
 import sys
-from typing import Optional
 
 from prettyqt import constants, core, gui, multimedia, multimediawidgets, widgets
 from prettyqt.qt import QtWidgets
 
 
 class Player(widgets.MainWindow):
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
         self.playback_rate = 1.0
         self.playlist = multimedia.MediaPlaylist(self)

@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Tuple, Union
-
 from prettyqt.qt import QtCore
 
 
@@ -12,7 +10,7 @@ class MetaEnum:
     def __bool__(self):
         return self.item.isValid()
 
-    def __getitem__(self, index: Union[str, Tuple[str, str]]) -> int:
+    def __getitem__(self, index: str | tuple[str, str]) -> int:
         if isinstance(index, str):
             result = self.item.keyToValue(index)[0]  # type: ignore
         else:

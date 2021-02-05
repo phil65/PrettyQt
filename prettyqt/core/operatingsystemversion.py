@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -23,10 +23,10 @@ OsTypeStr = Literal["android", "ios", "mac_os", "tv_os", "watch_os", "windows", 
 class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
     def __init__(
         self,
-        typ: Union[QtCore.QOperatingSystemVersion.OSType, str],
+        typ: QtCore.QOperatingSystemVersion.OSType | str,
         major: int,
-        minor: Optional[int] = None,
-        micro: Optional[int] = None,
+        minor: int | None = None,
+        micro: int | None = None,
     ):
         if isinstance(typ, str):
             os_type = OS_TYPE[typ]

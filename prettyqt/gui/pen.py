@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List, Optional, Union
-
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, colors, types
@@ -76,7 +74,7 @@ class Pen(QtGui.QPen):
         """
         return constants.JOIN_STYLE.inverse[self.joinStyle()]
 
-    def set_style(self, style: Optional[Union[constants.PenStyleStr, List[float]]]):
+    def set_style(self, style: constants.PenStyleStr | list[float] | None):
         """Set pen style to use.
 
         Args:

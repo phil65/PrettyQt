@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import sre_constants
-from typing import List, Match, Optional, Pattern
+from typing import Match, Pattern
 
 import regex as re
 
@@ -20,7 +20,7 @@ class RegexEditorWidget(widgets.Widget):
         title: str = "Regex Editor",
         regex: str = "",
         teststring: str = "",
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)
         self.resize(1200, 800)
@@ -29,8 +29,8 @@ class RegexEditorWidget(widgets.Widget):
         self.set_layout("horizontal")
         self.left_layout = widgets.BoxLayout("vertical")
         self.right_layout = widgets.BoxLayout("vertical")
-        self.prog: Optional[Pattern] = None
-        self.matches: List[Match] = list()
+        self.prog: Pattern | None = None
+        self.matches: list[Match] = list()
         self.groupbox = widgets.GroupBox(title="Regular expression")
         self.grid = widgets.GridLayout(self.groupbox)
         self.layout_toprow = widgets.BoxLayout("horizontal")
@@ -85,7 +85,7 @@ class RegexEditorWidget(widgets.Widget):
 
     def on_match_list_current_change(self, index_new, index_old):
         model = self.table_matches.model()
-        span = model.data(index_new, constants.USER_ROLE)
+        span = model.data(index_new, constants.USER_ROLE)  # type: ignore
         self.textedit_teststring.select_text(*span)
 
     def _update_view(self) -> None:

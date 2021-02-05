@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Dict, List, Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
@@ -47,13 +47,13 @@ class FileDialog(QtWidgets.QFileDialog):
 
     def __init__(
         self,
-        path: Union[None, str, os.PathLike] = None,
+        path: None | str | os.PathLike = None,
         mode: AcceptModeStr = "open",
-        caption: Optional[str] = None,
-        path_id: Optional[str] = None,
-        extension_filter: Optional[dict] = None,
+        caption: str | None = None,
+        path_id: str | None = None,
+        extension_filter: dict | None = None,
         file_mode: FileModeStr = "existing_files",
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
         self.set_title(caption)
@@ -170,22 +170,22 @@ class FileDialog(QtWidgets.QFileDialog):
         """
         self.setFileMode(FILE_MODE[mode])
 
-    def selected_files(self) -> List[pathlib.Path]:
+    def selected_files(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.selectedFiles()]
 
-    def selected_file(self) -> Optional[pathlib.Path]:
+    def selected_file(self) -> pathlib.Path | None:
         selected = self.selectedFiles()
         return pathlib.Path(selected[0]) if selected else None
 
-    def choose_folder(self) -> Optional[List[pathlib.Path]]:
+    def choose_folder(self) -> list[pathlib.Path] | None:
         self.set_file_mode("directory")
         return self.choose()
 
-    def open_file(self) -> Optional[List[pathlib.Path]]:
+    def open_file(self) -> list[pathlib.Path] | None:
         self.set_file_mode("existing_file")
         return self.choose()
 
-    def choose(self) -> Optional[List[pathlib.Path]]:
+    def choose(self) -> list[pathlib.Path] | None:
         result = self.main_loop()
         if result != self.Accepted:
             return None
@@ -196,7 +196,7 @@ class FileDialog(QtWidgets.QFileDialog):
             settings.setValue(self.path_id, str(folder_path))
         return paths
 
-    def set_extension_filter(self, extension_dict: Dict[str, List[str]]):
+    def set_extension_filter(self, extension_dict: dict[str, list[str]]):
         """Set filter based on given dictionary.
 
         dict must contain "'name': ['.ext1', '.ext2']" as key-value pairs
@@ -220,7 +220,7 @@ class FileDialog(QtWidgets.QFileDialog):
         """
         return pathlib.Path(self.directory().absolutePath())
 
-    def set_directory(self, path: Union[str, os.PathLike]):
+    def set_directory(self, path: str | os.PathLike):
         """Set start directory."""
         path = os.fspath(path)
         self.setDirectory(path)
@@ -232,7 +232,7 @@ class FileDialog(QtWidgets.QFileDialog):
         flags = helpers.merge_flags(filters, core.dir.FILTERS)
         self.setFilter(flags)
 
-    def get_filter(self) -> List[core.dir.FilterStr]:
+    def get_filter(self) -> list[core.dir.FilterStr]:
         return [k for k, v in core.dir.FILTERS.items() if v & self.filter()]
 
 

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Iterator, List
+from typing import Iterator
 
 from prettyqt import webenginewidgets
 from prettyqt.qt import QtWebEngineWidgets
@@ -27,7 +27,7 @@ class WebEngineHistory:
         items = [webenginewidgets.WebEngineHistoryItem(i) for i in self.history.items()]
         return iter(items)
 
-    def get_items(self) -> List[webenginewidgets.WebEngineHistoryItem]:
+    def get_items(self) -> list[webenginewidgets.WebEngineHistoryItem]:
         return [webenginewidgets.WebEngineHistoryItem(i) for i in self.history.items()]
 
 

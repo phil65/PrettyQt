@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtMultimedia
@@ -24,7 +24,7 @@ class SoundEffect(QtMultimedia.QSoundEffect):
     def get_status(self) -> StatusStr:
         return STATUS.inverse[self.status()]
 
-    def set_source(self, source: Union[str, os.PathLike, QtCore.QUrl]):
+    def set_source(self, source: str | os.PathLike | QtCore.QUrl):
         if not isinstance(source, QtCore.QUrl):
             source = core.Url.from_user_input(os.fspath(source))
         self.setSource(source)
@@ -32,7 +32,7 @@ class SoundEffect(QtMultimedia.QSoundEffect):
     def get_source(self) -> core.Url:
         return core.Url(self.source())
 
-    def set_loop_count(self, count: Union[Literal["inf"], int]):
+    def set_loop_count(self, count: Literal["inf"] | int):
         if count == "inf":
             count = QtMultimedia.QSoundEffect.Infinite
         self.setLoopCount(count)

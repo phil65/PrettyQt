@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtWidgets
@@ -29,7 +29,7 @@ OptionStr = Literal["dont_use_custom_dir_icons"]
 
 
 class FileIconProvider(QtWidgets.QFileIconProvider):
-    def get_icon(self, typ: Union[IconTypeStr, QtCore.QFileInfo]) -> gui.Icon:
+    def get_icon(self, typ: IconTypeStr | QtCore.QFileInfo) -> gui.Icon:
         if not isinstance(typ, QtCore.QFileInfo):
             param = ICON_TYPE[typ]
         else:

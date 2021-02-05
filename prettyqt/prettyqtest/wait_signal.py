@@ -1,17 +1,7 @@
 from __future__ import annotations
 
 import functools
-from typing import (
-    Callable,
-    Dict,
-    Iterable,
-    List,
-    Literal,
-    Optional,
-    Sequence,
-    Tuple,
-    Union,
-)
+from typing import Callable, Iterable, Literal, Sequence, Tuple, Union
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -38,7 +28,7 @@ class _AbstractSignalBlocker:
         self.signal_triggered = False
         self.raising = raising
         # will be initialized by inheriting implementations
-        self._signals: List[QtCore.Signal] = []
+        self._signals: list[QtCore.Signal] = []
         self._timeout_message = ""
         if timeout is None or timeout == 0:
             self._timer = None
@@ -198,12 +188,12 @@ class SignalBlocker(_AbstractSignalBlocker):
         self,
         timeout: int = 1000,
         raising: bool = True,
-        check_params_cb: Optional[Callable] = None,
+        check_params_cb: Callable | None = None,
     ):
         super().__init__(timeout, raising=raising)
-        self._signals: List[QtCore.Signal] = []
-        self.args: Optional[Iterable] = None
-        self.all_args: List[tuple] = []
+        self._signals: list[QtCore.Signal] = []
+        self.args: Iterable | None = None
+        self.all_args: list[tuple] = []
         self.check_params_callback = check_params_cb
         self.signal_name = ""
 
@@ -319,25 +309,25 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
         self,
         timeout: int = 1000,
         raising: bool = True,
-        check_params_cbs: Optional[List[Callable]] = None,
+        check_params_cbs: list[Callable] | None = None,
         order: Literal["none", "simple", "strict"] = "none",
     ):
         super().__init__(timeout, raising=raising)
         self._order = order
         self._check_params_callbacks = check_params_cbs
-        self._signals_emitted: List[bool] = []
+        self._signals_emitted: list[bool] = []
         # list of booleans, indicates whether the signal was already emitted
-        self._signals_map: Dict[QtCore.Signal, List[int]] = {}
+        self._signals_map: dict[QtCore.Signal, list[int]] = {}
         # maps from a unique Signal to a list of indices where to expect signal emits
-        self._signals: List[QtCore.Signal] = []
+        self._signals: list[QtCore.Signal] = []
         # list of all Signals (for compatibility with _AbstractSignalBlocker)
-        self._slots: List[Callable] = []  # list of slot functions
+        self._slots: list[Callable] = []  # list of slot functions
         self._signal_expected_index = 0  # only used when forcing order
         self._strict_order_violated = False
-        self._actual_signal_and_args_at_violation: Optional[SignalAndArgs] = None
-        self._signal_names: Dict[QtCore.Signal, str] = {}
+        self._actual_signal_and_args_at_violation: SignalAndArgs | None = None
+        self._signal_names: dict[QtCore.Signal, str] = {}
         # maps from the unique Signal to the name of the signal (as string)
-        self.all_signals_and_args: List[SignalAndArgs] = []  # SignalAndArgs instances
+        self.all_signals_and_args: list[SignalAndArgs] = []  # SignalAndArgs instances
 
     def add_signals(self, signals: Sequence[SignalOrSignalTuple]):
         """Add the given signal to the list of signals which :meth:`wait()` waits for.
@@ -363,7 +353,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
             str(self.get_signal_from_potential_signal_tuple(signal)) for signal in signals
         ]
         # maps from a signal-string to one of the signal instances (the first one found)
-        signal_str_to_unique_signal: Dict[str, QtCore.Signal] = {}
+        signal_str_to_unique_signal: dict[str, QtCore.Signal] = {}
         for index, signal_str in enumerate(signals_as_str):
             signal = self.get_signal_from_potential_signal_tuple(signals[index])
             potential_tuple = signals[index]
@@ -491,7 +481,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
                     return True
         return False
 
-    def _get_unemitted_signal_indices(self, signal: QtCore.Signal) -> List[int]:
+    def _get_unemitted_signal_indices(self, signal: QtCore.Signal) -> list[int]:
         """Return indices for provided signal for which NO signal has been emitted yet."""
         return [i for i in self._signals_map[signal] if not self._signals_emitted[i]]
 
@@ -538,7 +528,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
             f"but received {actual_signal_as_str} instead. "
         )
 
-    def _get_missing_signal_indices(self) -> List[int]:
+    def _get_missing_signal_indices(self) -> list[int]:
         return [
             index
             for index, value in enumerate(self._signals_emitted)
@@ -634,11 +624,11 @@ class CallbackBlocker:
     def __init__(self, timeout: int = 1000, raising: bool = True):
         self.timeout = timeout
         self.raising = raising
-        self.args: Optional[list] = None
-        self.kwargs: Optional[dict] = None
+        self.args: list | None = None
+        self.kwargs: dict | None = None
         self.called = False
         self._loop = core.EventLoop()
-        self._timer: Optional[core.Timer] = None
+        self._timer: core.Timer | None = None
         if timeout is not None:
             self._timer = core.Timer(self._loop)
             self._timer.setSingleShot(True)

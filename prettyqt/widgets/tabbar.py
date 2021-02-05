@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional, Tuple, Union
+from typing import Literal
 
 from deprecated import deprecated
 
@@ -49,18 +49,18 @@ QtWidgets.QTabBar.__bases__ = (widgets.Widget,)
 class TabBar(QtWidgets.QTabBar):
     on_detach = QtCore.Signal(int, QtCore.QPoint)
 
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None) -> None:
+    def __init__(self, parent: QtWidgets.QWidget | None = None) -> None:
         super().__init__(parent)
 
         self.setAcceptDrops(True)
         self.set_elide_mode("right")
         self.set_selection_behavior_on_remove("left_tab")
 
-    def __getitem__(self, index: Tuple[int, str]):
+    def __getitem__(self, index: tuple[int, str]):
         return self.tabButton(index[0], POSITIONS[index[1]])
 
     def __setitem__(
-        self, index: Tuple[int, PositionStr], value: Optional[QtWidgets.QWidget]
+        self, index: tuple[int, PositionStr], value: QtWidgets.QWidget | None
     ):
         self.set_tab(index[0], index[1], value)
 
@@ -94,7 +94,7 @@ class TabBar(QtWidgets.QTabBar):
         pos = QtGui.QCursor.pos()
         self.on_detach.emit(tab, pos)
 
-    def set_icon_size(self, size: Union[int, Tuple[int, int], QtCore.QSize]):
+    def set_icon_size(self, size: int | tuple[int, int] | QtCore.QSize):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)
@@ -106,7 +106,7 @@ class TabBar(QtWidgets.QTabBar):
         return core.Size(self.iconSize())
 
     def set_tab(
-        self, index: int, position: PositionStr, widget: Optional[QtWidgets.QWidget]
+        self, index: int, position: PositionStr, widget: QtWidgets.QWidget | None
     ) -> None:
         self.setTabButton(index, POSITIONS[position], widget)  # type: ignore
 

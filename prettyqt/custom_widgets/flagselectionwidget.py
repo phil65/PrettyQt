@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Iterable, Iterator, Literal, Mapping, Optional, Tuple, Union
+from typing import Iterable, Iterator, Literal, Mapping
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
@@ -13,17 +13,17 @@ class FlagSelectionWidget(widgets.GroupBox):
         self,
         label: str = "",
         layout: Literal["horizontal", "vertical"] = "vertical",
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(title=label, parent=parent)
         self.box = widgets.BoxLayout(layout)
-        self.buttons: Dict[widgets.CheckBox, int] = {}
+        self.buttons: dict[widgets.CheckBox, int] = {}
         self.set_layout(self.box)
 
-    def __iter__(self) -> Iterator[Tuple[widgets.CheckBox, int]]:
+    def __iter__(self) -> Iterator[tuple[widgets.CheckBox, int]]:
         return iter(self.buttons.items())
 
-    def add_items(self, items: Union[Iterable, Mapping]):
+    def add_items(self, items: Iterable | Mapping):
         if isinstance(items, Mapping):
             for k, v in items.items():
                 self.add(v, k)

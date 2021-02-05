@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import Iterator, Literal, Optional, Union
+from typing import Iterator, Literal
 
 from prettyqt import core, multimedia
 from prettyqt.qt import QtMultimedia
@@ -41,9 +41,7 @@ class MediaPlaylist(QtMultimedia.QMediaPlaylist):
     #                 playback_mode=self.get_playback_mode(),
     #                 items=list(self))
 
-    def add_media(
-        self, media: Union[os.PathLike, str], pos: Optional[int] = None
-    ) -> bool:
+    def add_media(self, media: os.PathLike | str, pos: int | None = None) -> bool:
         url = core.Url(os.fspath(media))
         mediacontent = multimedia.MediaContent(url)
         if pos is None:

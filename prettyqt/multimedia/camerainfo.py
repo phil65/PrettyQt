@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt.qt import QtMultimedia
 
 
@@ -14,7 +12,7 @@ class CameraInfo(QtMultimedia.QCameraInfo):
         return iter(cls(i) for i in cls.availableCameras())
 
     @classmethod
-    def get_camera(cls, name: Optional[str] = None) -> Optional[CameraInfo]:
+    def get_camera(cls, name: str | None = None) -> CameraInfo | None:
         if name is None:
             return cls(cls.defaultCamera())
         for cam in cls.get_cameras():

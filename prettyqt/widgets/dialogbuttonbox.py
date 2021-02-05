@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, Iterator, Literal, Optional, Sequence, Union
+from typing import Callable, Iterator, Literal, Sequence
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -139,7 +139,7 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         return [self.add_default_button(btn) for btn in buttons]
 
     def add_default_button(
-        self, button: ButtonStr, callback: Optional[Callable] = None
+        self, button: ButtonStr, callback: Callable | None = None
     ) -> QtWidgets.QPushButton:
         """Add a default button.
 
@@ -163,9 +163,9 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
 
     def add_button(
         self,
-        button: Union[QtWidgets.QPushButton, ButtonStr],
+        button: QtWidgets.QPushButton | ButtonStr,
         role: RoleStr = "accept",
-        callback: Optional[Callable] = None,
+        callback: Callable | None = None,
     ) -> widgets.PushButton:
         """Add a button.
 

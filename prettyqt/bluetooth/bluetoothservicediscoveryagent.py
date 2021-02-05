@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List, Union
-
 from prettyqt import bluetooth, core
 from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
@@ -38,10 +36,10 @@ class BluetoothServiceDiscoveryAgent(QtBluetooth.QBluetoothServiceDiscoveryAgent
         return ERRORS.inverse[self.error()]
 
     def set_remote_address(
-        self, address: Union[str, int, QtBluetooth.QBluetoothAddress]
+        self, address: str | int | QtBluetooth.QBluetoothAddress
     ) -> bool:
         address = bluetooth.BluetoothAddress(address)
         return self.setRemoteAddress(address)
 
-    def get_discovered_services(self) -> List[bluetooth.BluetoothServiceInfo]:
+    def get_discovered_services(self) -> list[bluetooth.BluetoothServiceInfo]:
         return [bluetooth.BluetoothServiceInfo(i) for i in self.discoveredServices()]

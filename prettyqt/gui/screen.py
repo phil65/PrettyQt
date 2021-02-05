@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError
@@ -70,7 +68,7 @@ class Screen:
         px = self.grabWindow(window, x, y, width, height)
         return gui.Pixmap(px)
 
-    def get_virtual_siblings(self) -> List[Screen]:
+    def get_virtual_siblings(self) -> list[Screen]:
         return [Screen(i) for i in self.virtualSiblings()]
 
     # def serialize_fields(self):

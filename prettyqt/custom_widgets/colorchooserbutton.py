@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import colors, types
@@ -12,7 +10,7 @@ class ColorChooserButton(widgets.Widget):
     value_changed = core.Signal(gui.Color)
 
     def __init__(
-        self, color: types.ColorType = None, parent: Optional[QtWidgets.QWidget] = None
+        self, color: types.ColorType = None, parent: QtWidgets.QWidget | None = None
     ):
         super().__init__(parent)
         layout = widgets.BoxLayout("horizontal", self)

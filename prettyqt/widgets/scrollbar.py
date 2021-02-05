@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
@@ -15,10 +13,8 @@ class ScrollBar(QtWidgets.QScrollBar):
 
     def __init__(
         self,
-        orientation: Union[
-            QtCore.Qt.Orientation, constants.OrientationStr
-        ] = "horizontal",
-        parent: Optional[QtWidgets.QWidget] = None,
+        orientation: (QtCore.Qt.Orientation | constants.OrientationStr) = "horizontal",
+        parent: QtWidgets.QWidget | None = None,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):
             ori = orientation

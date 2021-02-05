@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal, Union
+from typing import Literal
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
@@ -42,10 +42,10 @@ BoundaryTypeStr = Literal[
 class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
     def __init__(
         self,
-        string_or_other: Union[str, QtCore.QTextBoundaryFinder] = "",
-        boundary_type: Union[
-            QtCore.QTextBoundaryFinder.BoundaryType, BoundaryTypeStr
-        ] = "grapheme",
+        string_or_other: str | QtCore.QTextBoundaryFinder = "",
+        boundary_type: (
+            QtCore.QTextBoundaryFinder.BoundaryType | BoundaryTypeStr
+        ) = "grapheme",
     ):
         if isinstance(string_or_other, QtCore.QTextBoundaryFinder):
             super().__init__(string_or_other)
@@ -77,7 +77,7 @@ class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
     def get_boundary_type(self) -> BoundaryTypeStr:
         return BOUNDARY_TYPES.inverse[self.type()]
 
-    def get_boundary_reasons(self) -> List[BoundaryReasonStr]:
+    def get_boundary_reasons(self) -> list[BoundaryReasonStr]:
         return [k for k, v in BOUNDARY_REASONS.items() if v & self.boundaryReasons()]
 
 

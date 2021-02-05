@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Iterator, List, Union
+from typing import Any, Iterator
 
 import orjson as json
 
@@ -20,7 +20,7 @@ class MimeData(QtCore.QMimeData):
     def __getitem__(self, index: str) -> str:
         return self.get_data(index)
 
-    def __setitem__(self, index: str, value: Union[QtCore.QByteArray, bytes, str]):
+    def __setitem__(self, index: str, value: QtCore.QByteArray | bytes | str):
         if isinstance(value, str):
             value = value.encode()
         if not isinstance(value, QtCore.QByteArray):
@@ -46,7 +46,7 @@ class MimeData(QtCore.QMimeData):
         data = self.data(mime_type)
         return json.loads(bytes(data))
 
-    def keys(self) -> List[str]:
+    def keys(self) -> list[str]:
         return self.formats()
 
     def values(self) -> Iterator[Any]:

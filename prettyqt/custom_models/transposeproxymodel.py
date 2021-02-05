@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import core
 from prettyqt.qt import QtCore
 
@@ -23,19 +21,19 @@ class TransposeProxyModel(core.AbstractProxyModel):
         return self._source_model.index(proxy_index.column(), proxy_index.row())
 
     def index(
-        self, row: int, column: int, parent: Optional[core.ModelIndex] = None
+        self, row: int, column: int, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
         return self.createIndex(row, column)
 
     def parent(self, index: core.ModelIndex):  # type: ignore
         return None
 
-    def rowCount(self, parent: Optional[core.ModelIndex] = None) -> int:
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         if parent is None:
             parent = core.ModelIndex()
         return self._source_model.columnCount(parent)
 
-    def columnCount(self, parent: Optional[core.ModelIndex] = None) -> int:
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         if parent is None:
             parent = core.ModelIndex()
         return self._source_model.rowCount(parent)

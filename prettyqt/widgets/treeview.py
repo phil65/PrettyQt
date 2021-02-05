@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
@@ -66,7 +64,7 @@ class TreeView(QtWidgets.QTreeView):
         else:
             self.h_header.resize_sections("interactive")
 
-    def sort_by_column(self, column: Optional[int], ascending: bool = True):
+    def sort_by_column(self, column: int | None, ascending: bool = True):
         column = -1 if column is None else column
         order = constants.ASCENDING if ascending else constants.DESCENDING
         self.sortByColumn(column, order)

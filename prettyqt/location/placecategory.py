@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import location
 from prettyqt.qt import QtLocation
 
@@ -13,7 +11,7 @@ class PlaceCategory(QtLocation.QPlaceCategory):
     def __bool__(self):
         return not self.isEmpty()
 
-    def get_icon(self) -> Optional[location.PlaceIcon]:
+    def get_icon(self) -> location.PlaceIcon | None:
         icon = self.icon()
         if icon.isEmpty():
             return None

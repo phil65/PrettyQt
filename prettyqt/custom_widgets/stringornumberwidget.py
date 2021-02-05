@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
@@ -10,7 +8,7 @@ class StringOrNumberWidget(widgets.GroupBox):
 
     value_changed = core.Signal(object)
 
-    def __init__(self, title: str = "", parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, title: str = "", parent: QtWidgets.QWidget | None = None):
         super().__init__(checkable=False, title=title)
         self.set_layout("vertical")
         self.rb_lineedit = widgets.RadioButton("String")
@@ -37,14 +35,14 @@ class StringOrNumberWidget(widgets.GroupBox):
         value = self.get_value()
         self.value_changed.emit(value)
 
-    def get_value(self) -> Union[float, str]:
+    def get_value(self) -> float | str:
         if self.rb_spinbox.isChecked():
             val = self.spinbox.get_value()
             return int(val) if val.is_integer() else val
         else:
             return self.lineedit.get_value()
 
-    def set_value(self, value: Union[float, str]):
+    def set_value(self, value: float | str):
         if isinstance(value, str):
             self.rb_lineedit.setChecked(True)
             self.lineedit.set_value(value)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, List, Literal, Optional, Tuple
+from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -13,7 +13,7 @@ BarStyleStr = Literal["donut", "pie", "line", "expand"]
 VALUE_TYPE = ["value", "percent", "max"]
 ValueTypeStr = Literal["value", "percent", "max"]
 
-VALUE_MAP: Dict[str, ValueTypeStr] = {
+VALUE_MAP: dict[str, ValueTypeStr] = {
     r"%v": "value",
     r"%p": "percent",
     r"%m": "max",
@@ -28,7 +28,7 @@ class RoundProgressBar(widgets.Widget):
     POSITION_RIGHT = 0.0
     POSITION_BOTTOM = -90.0
 
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
         self._min_value = 0.0
         self._max_value = 100.0
@@ -41,7 +41,7 @@ class RoundProgressBar(widgets.Widget):
         self.number_format = "%p%"
         self.decimals = 1
         self._update_flags: ValueTypeStr = "percent"
-        self.gradient_data: List[QtGui.QColor] = list()
+        self.gradient_data: list[QtGui.QColor] = list()
 
     def minimum(self):
         return self._min_value
@@ -75,7 +75,7 @@ class RoundProgressBar(widgets.Widget):
             self.data_pen_width = width
             self.update()
 
-    def set_data_colors(self, stop_points: List[QtGui.QColor]):
+    def set_data_colors(self, stop_points: list[QtGui.QColor]):
         if stop_points != self.gradient_data:
             self.gradient_data = stop_points
             self._rebuild_brush = True
@@ -194,7 +194,7 @@ class RoundProgressBar(widgets.Widget):
             painter.set_pen(color=shadow_color, width=self.data_pen_width)
             painter.drawPath(data_path)
 
-    def _calculate_inner_rect(self, outer_radius: float) -> Tuple[core.RectF, float]:
+    def _calculate_inner_rect(self, outer_radius: float) -> tuple[core.RectF, float]:
         if self.bar_style in ("line", "expand"):
             inner_radius = outer_radius - self.outline_pen_width
         else:

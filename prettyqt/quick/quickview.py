@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtQuick
@@ -29,7 +29,7 @@ QtQuick.QQuickView.__bases__ = (gui.Window,)
 
 
 class QuickView(QtQuick.QQuickView):
-    def set_source(self, source: Union[str, os.PathLike, QtCore.QUrl]):
+    def set_source(self, source: str | os.PathLike | QtCore.QUrl):
         if isinstance(source, os.PathLike):
             source = os.fspath(source)
         if isinstance(source, str):

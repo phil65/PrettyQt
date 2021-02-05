@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 import logging
-from typing import Callable, List, Optional, Union
+from typing import Callable
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -19,17 +19,17 @@ class ColumnItem:
     """Determines how an object attribute is shown."""
 
     name: str
-    label: Optional[Callable]
-    checkstate: Optional[Callable] = None
+    label: Callable | None
+    checkstate: Callable | None = None
     doc: str = "<no help available>"
     col_visible: bool = True
-    width: Union[int, str] = SMALL_COL_WIDTH
-    alignment: Optional[Union[Callable, int]] = None
+    width: int | str = SMALL_COL_WIDTH
+    alignment: Callable | int | None = None
     line_wrap: gui.textoption.WordWrapModeStr = "none"
-    foreground_color: Optional[Union[Callable, str]] = None
-    background_color: Optional[Union[Callable, str]] = None
-    decoration: Optional[Union[Callable, QtGui.QIcon]] = None
-    font: Optional[Union[Callable, QtGui.QFont]] = None
+    foreground_color: Callable | str | None = None
+    background_color: Callable | str | None = None
+    decoration: Callable | QtGui.QIcon | None = None
+    font: Callable | QtGui.QFont | None = None
     selectable: bool = True
     enabled: bool = True
     editable: bool = False
@@ -119,8 +119,8 @@ class ColumnItemModel(core.AbstractItemModel):
 
     def __init__(
         self,
-        attr_cols: Optional[List[ColumnItem]] = None,
-        parent: Optional[QtCore.QObject] = None,
+        attr_cols: list[ColumnItem] | None = None,
+        parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
         self._attr_cols = attr_cols if attr_cols is not None else []

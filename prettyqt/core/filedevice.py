@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import datetime
-from typing import Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -79,7 +79,7 @@ class FileDevice(QtCore.QFileDevice):
         return self.fileName()
 
     def set_file_time(
-        self, file_time: Union[QtCore.QDateTime, datetime.datetime], typ: FileTimeStr
+        self, file_time: QtCore.QDateTime | datetime.datetime, typ: FileTimeStr
     ) -> bool:
         """Set file time.
 
@@ -93,7 +93,7 @@ class FileDevice(QtCore.QFileDevice):
             raise InvalidParamError(typ, FILE_TIME)
         return self.setFileTime(file_time, FILE_TIME[typ])  # type: ignore
 
-    def get_file_time(self, typ: FileTimeStr) -> Optional[datetime.datetime]:
+    def get_file_time(self, typ: FileTimeStr) -> datetime.datetime | None:
         """Return current file time.
 
         Returns:

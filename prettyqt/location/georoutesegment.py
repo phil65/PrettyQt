@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import List
-
 from prettyqt import location, positioning
 from prettyqt.qt import QtLocation
 
@@ -16,7 +14,7 @@ class GeoRouteSegment(QtLocation.QGeoRouteSegment):
     def get_maneuver(self) -> location.GeoManeuver:
         return location.GeoManeuver(self.maneuver())
 
-    def get_path(self) -> List[positioning.GeoCoordinate]:
+    def get_path(self) -> list[positioning.GeoCoordinate]:
         return [positioning.GeoCoordinate(i) for i in self.path()]
 
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Tuple
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
@@ -38,7 +38,7 @@ class Transform(QtGui.QTransform):
     def __setstate__(self, ba):
         core.DataStream.write_bytearray(ba, self)
 
-    def __getitem__(self, value: Tuple[int, int]) -> float:
+    def __getitem__(self, value: tuple[int, int]) -> float:
         if value[0] == 0:
             if value[1] == 0:
                 return self.m11()

@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
 class SingleLineTextEdit(widgets.PlainTextEdit):
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent=parent)
         self.textChanged.connect(self._on_text_changed)
         font_metrics = self.get_font_metrics()

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from queue import Empty, Queue
-from typing import Callable, Literal, Optional
+from typing import Callable, Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
@@ -89,7 +89,7 @@ class Notification(widgets.Widget):
         category: CategoryStr,
         timeout=None,
         autohide: bool = False,
-        buttontext: Optional[str] = None,
+        buttontext: str | None = None,
         *args,
         **kwargs,
     ):
@@ -406,7 +406,7 @@ class NotificationArea(widgets.Widget):
         category: CategoryStr,
         timeout: int = 5000,
         autohide: bool = False,
-        buttontext: Optional[str] = None,
+        buttontext: str | None = None,
     ):
         """Display a notification.
 
@@ -472,7 +472,7 @@ class NotificationArea(widgets.Widget):
             core.Timer.singleShot(notification.timeout, lambda: self.remove(notification))
 
     @core.Slot()
-    def remove(self, notification: Optional[Notification] = None):
+    def remove(self, notification: Notification | None = None):
         """Removes a notification.
 
         Arguments:

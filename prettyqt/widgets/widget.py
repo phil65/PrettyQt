@@ -4,7 +4,7 @@ import contextlib
 import os
 import pathlib
 import sys
-from typing import Any, Callable, Dict, Iterator, Literal, Optional, Tuple, Union
+from typing import Any, Callable, Iterator, Literal
 
 from deprecated import deprecated
 import qstylizer.parser
@@ -29,7 +29,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         params = helpers.format_kwargs(self.serialize_fields())
         return f"{cls_name}({params})"
 
-    def __setstate__(self, state: Dict[str, Any]) -> None:
+    def __setstate__(self, state: dict[str, Any]) -> None:
         if self.layout() is None:
             self.set_layout(state["layout"])
         self.setSizePolicy(state["size_policy"])
@@ -57,7 +57,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def serialize_fields(self) -> Dict[str, Any]:
+    def serialize_fields(self) -> dict[str, Any]:
         return dict(
             layout=self.layout() if isinstance(self.layout(), widgets.Layout) else None,
             size_policy=self.get_size_policy(),
@@ -114,7 +114,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         icon = iconprovider.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
-    def get_icon(self) -> Optional[gui.Icon]:
+    def get_icon(self) -> gui.Icon | None:
         icon = self.windowIcon()
         if icon.isNull():
             return None
@@ -126,22 +126,22 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def set_max_size(self, *size) -> None:
         self.setMaximumSize(*size)
 
-    def set_min_width(self, width: Optional[int]) -> None:
+    def set_min_width(self, width: int | None) -> None:
         if width is None:
             width = 0
         self.setMinimumWidth(width)
 
-    def set_max_width(self, width: Optional[int]) -> None:
+    def set_max_width(self, width: int | None) -> None:
         if width is None:
             width = 16777215  # QtWidgets.QWIDGETSIZE_MAX
         self.setMaximumWidth(width)
 
-    def set_min_height(self, height: Optional[int]) -> None:
+    def set_min_height(self, height: int | None) -> None:
         if height is None:
             height = 0
         self.setMinimumHeight(height)
 
-    def set_max_height(self, height: Optional[int]) -> None:
+    def set_max_height(self, height: int | None) -> None:
         if height is None:
             height = 16777215  # QtWidgets.QWIDGETSIZE_MAX
         self.setMaximumHeight(height)
@@ -176,8 +176,8 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_tooltip(
         self,
-        tooltip: Union[str, os.PathLike],
-        size: Optional[Union[Tuple[int, int], QtCore.QSize]] = None,
+        tooltip: str | os.PathLike,
+        size: tuple[int, int] | QtCore.QSize | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -191,7 +191,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_font(
         self,
-        font_name: Optional[str] = None,
+        font_name: str | None = None,
         font_size: int = -1,
         weight: int = -1,
         italic: bool = False,
@@ -232,13 +232,13 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_flags(
         self,
-        minimize: Optional[bool] = None,
-        maximize: Optional[bool] = None,
-        close: Optional[bool] = None,
-        stay_on_top: Optional[bool] = None,
-        frameless: Optional[bool] = None,
-        window: Optional[bool] = None,
-        tooltip: Optional[bool] = None,
+        minimize: bool | None = None,
+        maximize: bool | None = None,
+        close: bool | None = None,
+        stay_on_top: bool | None = None,
+        frameless: bool | None = None,
+        window: bool | None = None,
+        tooltip: bool | None = None,
     ) -> None:
         if minimize is not None:
             self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
@@ -291,8 +291,8 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_size_policy(
         self,
-        horizontal: Optional[widgets.sizepolicy.SizePolicyStr] = None,
-        vertical: Optional[widgets.sizepolicy.SizePolicyStr] = None,
+        horizontal: widgets.sizepolicy.SizePolicyStr | None = None,
+        vertical: widgets.sizepolicy.SizePolicyStr | None = None,
     ) -> None:
         """Set the sizes policy.
 
@@ -334,9 +334,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         yield ss
         self.set_stylesheet(ss)
 
-    def set_stylesheet(
-        self, ss: Union[None, str, qstylizer.style.StyleSheet, os.PathLike]
-    ):
+    def set_stylesheet(self, ss: None | str | qstylizer.style.StyleSheet | os.PathLike):
         if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()
         elif ss is None:
@@ -412,9 +410,9 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_layout(
         self,
-        layout: Union[LayoutStr, QtWidgets.QLayout, None],
-        margin: Optional[int] = None,
-        spacing: Optional[int] = None,
+        layout: LayoutStr | QtWidgets.QLayout | None,
+        margin: int | None = None,
+        spacing: int | None = None,
     ):
         if layout is None:
             return
@@ -448,7 +446,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
-    def set_cursor(self, cursor: Union[constants.CursorShapeStr, QtGui.QCursor]) -> None:
+    def set_cursor(self, cursor: constants.CursorShapeStr | QtGui.QCursor) -> None:
         if isinstance(cursor, QtGui.QCursor):
             curs = cursor
         else:
@@ -506,7 +504,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_mask(
         self,
-        area: Union[Tuple[int, int, int, int], QtCore.QRect, QtGui.QRegion, None],
+        area: tuple[int, int, int, int] | QtCore.QRect | QtGui.QRegion | None,
         typ: gui.region.RegionTypeStr = "rectangle",
     ):
         if area is None:
@@ -518,10 +516,10 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             area = gui.Region(area, gui.region.REGION_TYPE[typ])
         self.setMask(area)
 
-    def set_window_file_path(self, path: Union[str, os.PathLike]):
+    def set_window_file_path(self, path: str | os.PathLike):
         self.setWindowFilePath(os.fspath(path))
 
-    def get_window_file_path(self) -> Optional[pathlib.Path]:
+    def get_window_file_path(self) -> pathlib.Path | None:
         path = self.windowFilePath()
         if not path:
             return None

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, List, Optional, Union
+from typing import Iterator
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
@@ -11,7 +11,7 @@ QtWidgets.QToolBox.__bases__ = (widgets.Frame,)
 
 
 class ToolBox(QtWidgets.QToolBox):
-    def __getitem__(self, index: Union[int, str]) -> QtWidgets.QWidget:
+    def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
         else:
@@ -52,13 +52,13 @@ class ToolBox(QtWidgets.QToolBox):
     def __contains__(self, item: QtWidgets.QWidget):
         return self.indexOf(item) >= 0
 
-    def get_children(self) -> List[QtWidgets.QWidget]:
+    def get_children(self) -> list[QtWidgets.QWidget]:
         return [self[i] for i in range(self.count())]
 
     def add_widget(
         self,
         widget: QtWidgets.QWidget,
-        title: Optional[str] = None,
+        title: str | None = None,
         icon: types.IconType = None,
     ):
         if title is None:
@@ -69,7 +69,7 @@ class ToolBox(QtWidgets.QToolBox):
         else:
             self.addItem(widget, title)
 
-    def item_icon(self, index: int) -> Optional[gui.Icon]:
+    def item_icon(self, index: int) -> gui.Icon | None:
         icon = self.itemIcon(index)
         if icon.isNull():
             return None

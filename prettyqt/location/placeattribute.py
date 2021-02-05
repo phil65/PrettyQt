@@ -1,15 +1,13 @@
 from __future__ import annotations
 
-from typing import Optional, Union
-
 from prettyqt.qt import QtLocation
 
 
 class PlaceAttribute(QtLocation.QPlaceAttribute):
     def __init__(
         self,
-        other_or_label: Union[None, str, QtLocation.QPlaceAttribute] = None,
-        value: Optional[str] = None,
+        other_or_label: None | str | QtLocation.QPlaceAttribute = None,
+        value: str | None = None,
     ):
         if isinstance(other_or_label, QtLocation.QPlaceAttribute):
             super().__init__(other_or_label)

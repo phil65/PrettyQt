@@ -4,7 +4,7 @@
 
 from __future__ import annotations
 
-from typing import Literal, Optional, Tuple
+from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -55,7 +55,7 @@ class SpanSlider(widgets.Slider):
     upper_pos_changed = core.Signal(float)
     slider_pressed = core.Signal(object)
 
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__("horizontal", parent)
         self.rangeChanged.connect(self.update_range)
         self.sliderReleased.connect(self._move_pressed_handle)
@@ -66,7 +66,7 @@ class SpanSlider(widgets.Slider):
         self.upper_pos = 0.0
         self.offset = 0
         self.position = 0.0
-        self.last_pressed: Optional[str] = None
+        self.last_pressed: str | None = None
         self.upper_pressed = widgets.Style.SC_None
         self.lower_pressed = widgets.Style.SC_None
         self.movement: MovementModeStr = "no_crossing"
@@ -205,10 +205,10 @@ class SpanSlider(widgets.Slider):
     def on_value_change(self):
         self.value_changed.emit(self.lower_val, self.upper_val)
 
-    def get_value(self) -> Tuple[float, float]:
+    def get_value(self) -> tuple[float, float]:
         return (self.lower_val, self.upper_val)
 
-    def set_value(self, value: Tuple[float, float]):
+    def set_value(self, value: tuple[float, float]):
         self.set_lower_value(value[0])
         self.set_upper_value(value[1])
 
@@ -470,7 +470,7 @@ class SpanSlider(widgets.Slider):
 
 
 class SpanSliderWidget(widgets.Widget):
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent=parent)
         self.set_layout("grid")
         self.slider = SpanSlider()

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import contextlib
-from typing import Iterator, List, Optional, Tuple, Union
+from typing import Iterator
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
@@ -97,7 +97,7 @@ class GuiApplication(QtGui.QGuiApplication):
         ]
 
     @classmethod
-    def get_application_state(cls) -> List[constants.ApplicationStateStr]:
+    def get_application_state(cls) -> list[constants.ApplicationStateStr]:
         """Get the current application state.
 
         Returns:
@@ -112,12 +112,12 @@ class GuiApplication(QtGui.QGuiApplication):
     def get_primary_screen(self) -> gui.Screen:
         return gui.Screen(self.primaryScreen())
 
-    def get_screen_at(self, point: Union[Tuple[int, int], QtCore.QPoint]) -> gui.Screen:
+    def get_screen_at(self, point: tuple[int, int] | QtCore.QPoint) -> gui.Screen:
         if isinstance(point, tuple):
             point = QtCore.QPoint(*point)
         return gui.Screen(self.screenAt(point))
 
-    def get_screens(self) -> List[gui.Screen]:
+    def get_screens(self) -> list[gui.Screen]:
         return [gui.Screen(i) for i in self.screens()]
 
     @classmethod
@@ -144,14 +144,14 @@ class GuiApplication(QtGui.QGuiApplication):
         icon = iconprovider.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
         self.setWindowIcon(icon)
 
-    def get_icon(self) -> Optional[gui.Icon]:
+    def get_icon(self) -> gui.Icon | None:
         icon = self.windowIcon()
         if icon.isNull():
             return None
         return gui.Icon(self.windowIcon())
 
     @classmethod
-    def set_palette(cls, palette: Union[constants.ThemeStr, QtGui.QPalette]):
+    def set_palette(cls, palette: constants.ThemeStr | QtGui.QPalette):
         if palette == "default":
             pal = gui.Palette()
         elif palette == "dark":

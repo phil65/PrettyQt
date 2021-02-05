@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import functools
 import pathlib
-from typing import Any, Callable, Dict, Iterable, List, Mapping, Optional, Union
+from typing import Any, Callable, Iterable, Mapping
 
 from prettyqt import custom_validators, custom_widgets, gui, widgets
 from prettyqt.utils import types
@@ -13,7 +13,7 @@ class DataItem:
         self,
         label: str,
         value=None,
-        optional: Optional[str] = None,
+        optional: str | None = None,
         include: bool = True,
         enabled_on=None,
         disabled_on=None,
@@ -66,9 +66,9 @@ class Float(DataItem):
     def __init__(
         self,
         label: str,
-        value: Optional[float] = None,
-        min_val: Optional[float] = None,
-        max_val: Optional[float] = None,
+        value: float | None = None,
+        min_val: float | None = None,
+        max_val: float | None = None,
         unit: str = "",
         step: float = 0.1,
         slider: bool = False,
@@ -93,9 +93,9 @@ class Int(DataItem):
     def __init__(
         self,
         label: str,
-        value: Optional[int] = None,
-        min_val: Optional[int] = 0,
-        max_val: Optional[int] = None,
+        value: int | None = None,
+        min_val: int | None = 0,
+        max_val: int | None = None,
         unit: str = "",
         step: int = 1,
         slider: bool = False,
@@ -107,7 +107,7 @@ class Int(DataItem):
         self.unit = unit
         self.slider = slider
 
-    def _create_widget(self) -> Union[custom_widgets.InputAndSlider, widgets.SpinBox]:
+    def _create_widget(self) -> custom_widgets.InputAndSlider | widgets.SpinBox:
         min_val = self.range[0]
         max_val = self.range[1]
         if min_val is not None and max_val is not None:
@@ -146,9 +146,9 @@ class String(DataItem):
     def __init__(
         self,
         label: str,
-        value: Optional[str] = None,
+        value: str | None = None,
         notempty: bool = False,
-        regex: Optional[str] = None,
+        regex: str | None = None,
         **kwargs,
     ):
         super().__init__(label, value=value, **kwargs)
@@ -171,7 +171,7 @@ class String(DataItem):
 
 class RegexPattern(DataItem):
     def __init__(
-        self, label: str, value: Optional[str] = None, notempty: bool = False, **kwargs
+        self, label: str, value: str | None = None, notempty: bool = False, **kwargs
     ):
         super().__init__(label, value=value, **kwargs)
         self.notempty = notempty
@@ -189,7 +189,7 @@ class RegexPattern(DataItem):
 
 class Code(DataItem):
     def __init__(
-        self, label: str, value: Optional[str] = None, language: str = "python", **kwargs
+        self, label: str, value: str | None = None, language: str = "python", **kwargs
     ):
         super().__init__(label, value=value, **kwargs)
         self.language = language
@@ -205,7 +205,7 @@ class Regex(DataItem):
     def __init__(
         self,
         label: str,
-        value: Optional[str] = None,
+        value: str | None = None,
         show_flags: bool = True,
         show_error: bool = False,
         **kwargs,
@@ -227,7 +227,7 @@ class IntList(DataItem):
     def __init__(
         self,
         label: str,
-        value: Optional[List[int]] = None,
+        value: list[int] | None = None,
         allow_single: bool = False,
         **kwargs,
     ):
@@ -245,7 +245,7 @@ class FloatList(DataItem):
     def __init__(
         self,
         label: str,
-        value: Optional[List[float]] = None,
+        value: list[float] | None = None,
         allow_single: bool = False,
         **kwargs,
     ):
@@ -295,7 +295,7 @@ class Enum(DataItem):
     def __init__(
         self,
         label: str,
-        choices: Union[Iterable, Mapping],
+        choices: Iterable | Mapping,
         value: Any = None,
         radio: bool = False,
         **kwargs,
@@ -306,7 +306,7 @@ class Enum(DataItem):
 
     def _create_widget(
         self,
-    ) -> Union[custom_widgets.ColorChooserButton, widgets.ComboBox]:
+    ) -> custom_widgets.ColorChooserButton | widgets.ComboBox:
         if self.radio:
             widget = custom_widgets.SelectionWidget(layout="vertical")
         else:
@@ -331,8 +331,8 @@ class MultipleChoice(DataItem):
     def __init__(
         self,
         label: str,
-        choices: Union[Iterable, Mapping],
-        value: Optional[list] = None,
+        choices: Iterable | Mapping,
+        value: list | None = None,
         **kwargs,
     ):
         super().__init__(label, value=value, **kwargs)
@@ -362,9 +362,9 @@ class File(DataItem):
         self,
         label: str,
         formats: str = "*",
-        value: Union[None, str, pathlib.Path] = None,
+        value: None | str | pathlib.Path = None,
         save: bool = True,
-        root: Union[None, str, pathlib.Path] = None,
+        root: None | str | pathlib.Path = None,
         **kwargs,
     ):
         super().__init__(label, value=value, **kwargs)
@@ -387,8 +387,8 @@ class Folder(DataItem):
     def __init__(
         self,
         label: str,
-        value: Union[None, str, pathlib.Path] = None,
-        root: Union[None, str, pathlib.Path] = None,
+        value: None | str | pathlib.Path = None,
+        root: None | str | pathlib.Path = None,
         mode: widgets.filedialog.AcceptModeStr = "open",
         **kwargs,
     ):
@@ -442,9 +442,9 @@ class DataSetMeta(type):
 
 
 class DataSet(metaclass=DataSetMeta):
-    _items: Dict[str, DataItem]
+    _items: dict[str, DataItem]
 
-    def __init__(self, title: str = "", comment: Optional[str] = None, icon=""):
+    def __init__(self, title: str = "", comment: str | None = None, icon=""):
         # self.widget = custom_widgets.SettingsWidget()
         self.dialog_title = title
         self.dialog_comment = comment
@@ -495,7 +495,7 @@ class DataSet(metaclass=DataSetMeta):
         on_update()
         return dialog
 
-    def edit(self, preset: Optional[dict] = None) -> bool:
+    def edit(self, preset: dict | None = None) -> bool:
         dialog = self.create_dialog()
         if preset:
             for item in dialog.layout():

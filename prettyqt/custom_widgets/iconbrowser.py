@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import sys
-from typing import Optional
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtGui, QtWidgets
@@ -107,7 +106,7 @@ class IconBrowser(widgets.MainWindow):
 class IconListView(widgets.ListView):
     """A QListView that scales its grid size to always show same amount of items."""
 
-    def __init__(self, parent: Optional[QtWidgets.QWidget] = None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
         self.set_vertical_scrollbar_policy("always_on")
         self.VIEW_COLUMNS = 5

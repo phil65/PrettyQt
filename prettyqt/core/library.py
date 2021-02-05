@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -36,7 +36,7 @@ class Library(QtCore.QLibrary):
     def __repr__(self):
         return f"{type(self).__name__}({self.fileName()!r})"
 
-    def get_load_hints(self) -> List[LoadHintStr]:
+    def get_load_hints(self) -> list[LoadHintStr]:
         return [k for k, v in LOAD_HINTS.items() if v & self.loadHints()]
 
     def set_load_hints(self, **kwargs):

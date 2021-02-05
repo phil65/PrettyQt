@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
@@ -44,7 +44,7 @@ AlgorithmStr = Literal[
 
 
 class CryptographicHash(QtCore.QCryptographicHash):
-    def __init__(self, method: Union[QtCore.QCryptographicHash.Algorithm, AlgorithmStr]):
+    def __init__(self, method: QtCore.QCryptographicHash.Algorithm | AlgorithmStr):
         if isinstance(method, QtCore.QCryptographicHash.Algorithm):
             arg = method
         else:

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import positioning
 from prettyqt.qt import QtLocation
@@ -59,7 +59,7 @@ class GeoManeuver(QtLocation.QGeoManeuver):
     def get_position(self) -> positioning.GeoCoordinate:
         return positioning.GeoCoordinate(self.position())
 
-    def get_waypoint(self) -> Optional[positioning.GeoCoordinate]:
+    def get_waypoint(self) -> positioning.GeoCoordinate | None:
         wp = self.waypoint()
         if not wp.isValid():
             return None

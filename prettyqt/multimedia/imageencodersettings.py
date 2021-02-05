@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Iterator, Literal, Tuple
+from typing import Any, Iterator, Literal
 
 from prettyqt.qt import QtMultimedia
 from prettyqt.utils import InvalidParamError, bidict
@@ -21,9 +21,9 @@ QualityStr = Literal["very_low", "low", "normal", "high", "very_high"]
 @dataclass
 class Settings:
     codec: str
-    encoding_options: Dict[str, Any]
+    encoding_options: dict[str, Any]
     quality: QualityStr
-    resolution: Tuple[int, int]
+    resolution: tuple[int, int]
 
 
 class ImageEncoderSettings(QtMultimedia.QImageEncoderSettings):
@@ -63,7 +63,7 @@ class ImageEncoderSettings(QtMultimedia.QImageEncoderSettings):
             quality=self.get_quality(),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self.to_dataclass())
 
     @classmethod
@@ -76,6 +76,6 @@ class ImageEncoderSettings(QtMultimedia.QImageEncoderSettings):
         return instance
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> ImageEncoderSettings:
+    def from_dict(cls, data: dict[str, Any]) -> ImageEncoderSettings:
         settings = Settings(**data)
         return cls.from_dataclass(settings)

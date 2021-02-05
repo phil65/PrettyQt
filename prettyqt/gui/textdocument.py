@@ -3,7 +3,7 @@ from __future__ import annotations
 import contextlib
 import os
 import pathlib
-from typing import Iterator, Literal, Union
+from typing import Iterator, Literal
 
 import qstylizer.parser
 import qstylizer.style
@@ -125,7 +125,7 @@ class TextDocument(QtGui.QTextDocument):
         return constants.CURSOR_MOVE_STYLE.inverse[self.defaultCursorMoveStyle()]
 
     def add_resource(
-        self, resource_type: ResourceTypeStr, name: Union[str, os.PathLike], resource
+        self, resource_type: ResourceTypeStr, name: str | os.PathLike, resource
     ):
         if resource_type not in RESOURCE_TYPES:
             raise InvalidParamError(resource_type, RESOURCE_TYPES)
@@ -139,7 +139,7 @@ class TextDocument(QtGui.QTextDocument):
         self.set_default_stylesheet(ss)
 
     def set_default_stylesheet(
-        self, ss: Union[None, str, qstylizer.style.StyleSheet, os.PathLike]
+        self, ss: None | str | qstylizer.style.StyleSheet | os.PathLike
     ):
         if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()

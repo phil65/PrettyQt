@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import iconprovider
 from prettyqt.qt import QtWinExtras
@@ -19,7 +19,7 @@ TypeStr = Literal["destination", "link", "separator"]
 
 
 class WinJumpListItem(QtWinExtras.QWinJumpListItem):
-    def __init__(self, typ: Union[QtWinExtras.QWinJumpListItem.Type, TypeStr]) -> None:
+    def __init__(self, typ: QtWinExtras.QWinJumpListItem.Type | TypeStr) -> None:
         if isinstance(typ, QtWinExtras.QWinJumpListItem.Type):
             param = typ
         else:
@@ -33,13 +33,13 @@ class WinJumpListItem(QtWinExtras.QWinJumpListItem):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def set_file_path(self, path: Union[str, os.PathLike]) -> None:
+    def set_file_path(self, path: str | os.PathLike) -> None:
         self.setFilePath(os.fspath(path))
 
     def get_file_path(self) -> pathlib.Path:
         return pathlib.Path(self.filePath())
 
-    def set_working_directory(self, path: Union[str, os.PathLike]) -> None:
+    def set_working_directory(self, path: str | os.PathLike) -> None:
         self.setWorkingDirectory(os.fspath(path))
 
     def get_working_directory(self) -> pathlib.Path:

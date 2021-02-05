@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Callable, Iterator, List, Optional, Union
+from typing import Any, Callable, Iterator
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
@@ -15,7 +15,7 @@ class Menu(QtWidgets.QMenu):
         self,
         title: str = "",
         icon: types.IconType = None,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(title, parent=parent)
         self.set_icon(icon)
@@ -60,13 +60,13 @@ class Menu(QtWidgets.QMenu):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def get_icon(self) -> Optional[gui.Icon]:
+    def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         if icon.isNull():
             return None
         return gui.Icon(icon)
 
-    def add_separator(self, text: Optional[str] = None) -> widgets.WidgetAction:
+    def add_separator(self, text: str | None = None) -> widgets.WidgetAction:
         """Adds a separator showing an optional label.
 
         Args:
@@ -91,13 +91,13 @@ class Menu(QtWidgets.QMenu):
 
     def add_action(
         self,
-        label: Union[str, widgets.Action],
+        label: str | widgets.Action,
         callback: Callable = None,
-        icon: Optional[Any] = None,
+        icon: Any | None = None,
         checkable: bool = False,
         checked: bool = False,
-        shortcut: Optional[str] = None,
-        status_tip: Optional[str] = None,
+        shortcut: str | None = None,
+        status_tip: str | None = None,
     ) -> widgets.Action:
         """Add an action to the menu.
 
@@ -130,7 +130,7 @@ class Menu(QtWidgets.QMenu):
         self.addAction(action)
         return action
 
-    def add_actions(self, actions: List[QtWidgets.QAction]):
+    def add_actions(self, actions: list[QtWidgets.QAction]):
         self.addActions(actions)
 
     def add_menu(self, menu: QtWidgets.QMenu) -> QtWidgets.QAction:

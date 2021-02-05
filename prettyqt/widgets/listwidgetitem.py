@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional
-
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, types
@@ -79,7 +77,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())
 
-    def get_icon(self) -> Optional[gui.Icon]:
+    def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         if icon.isNull():
             return None

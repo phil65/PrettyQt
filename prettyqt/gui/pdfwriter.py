@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Optional, Tuple, Union
-
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError
@@ -18,8 +16,8 @@ class PdfWriter(QtGui.QPdfWriter):
 
     def set_page_margins(
         self,
-        margins: Union[Tuple[float, float, float, float], QtCore.QMarginsF],
-        unit: Optional[gui.pagelayout.UnitStr] = None,
+        margins: tuple[float, float, float, float] | QtCore.QMarginsF,
+        unit: gui.pagelayout.UnitStr | None = None,
     ) -> bool:
         if isinstance(margins, tuple):
             margins = QtCore.QMarginsF(*margins)

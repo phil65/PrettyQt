@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import core, network
 from prettyqt.qt import QtCore, QtNetwork
@@ -176,11 +176,11 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
 
     def bind_to(
         self,
-        address: Union[str, QtNetwork.QHostAddress],
+        address: str | QtNetwork.QHostAddress,
         port: int = 0,
-        bind_mode: Union[
-            QtNetwork.QAbstractSocket.BindMode, BindModeStr
-        ] = "default_for_platform",
+        bind_mode: (
+            QtNetwork.QAbstractSocket.BindMode | BindModeStr
+        ) = "default_for_platform",
     ) -> bool:
         if isinstance(address, str):
             address = QtNetwork.QHostAddress(address)
@@ -194,12 +194,10 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
         self,
         hostname: str,
         port: int,
-        open_mode: Union[
-            QtCore.QIODevice.OpenMode, core.iodevice.OpenModeStr
-        ] = "read_write",
-        protocol: Union[
-            QtNetwork.QAbstractSocket.NetworkLayerProtocol, NetworkLayerProtocolStr
-        ] = "any_ip",
+        open_mode: (QtCore.QIODevice.OpenMode | core.iodevice.OpenModeStr) = "read_write",
+        protocol: (
+            QtNetwork.QAbstractSocket.NetworkLayerProtocol | NetworkLayerProtocolStr
+        ) = "any_ip",
     ):
         if isinstance(open_mode, QtCore.QIODevice.OpenMode):
             mode = open_mode

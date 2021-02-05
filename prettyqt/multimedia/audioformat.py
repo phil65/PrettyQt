@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass
-from typing import Any, Dict, Iterator, Literal
+from typing import Any, Iterator, Literal
 
 from prettyqt.qt import QtMultimedia
 from prettyqt.utils import InvalidParamError, bidict
@@ -84,7 +84,7 @@ class AudioFormat(QtMultimedia.QAudioFormat):
             codec=self.codec(),
         )
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return asdict(self.to_dataclass())
 
     @classmethod
@@ -99,7 +99,7 @@ class AudioFormat(QtMultimedia.QAudioFormat):
         return instance
 
     @classmethod
-    def from_dict(cls, data: Dict[str, Any]) -> AudioFormat:
+    def from_dict(cls, data: dict[str, Any]) -> AudioFormat:
         settings = Settings(**data)
         return cls.from_dataclass(settings)
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, Literal, Tuple
+from typing import Iterator, Literal
 
 from prettyqt import charts
 from prettyqt.qt.QtCharts import QtCharts
@@ -30,7 +30,7 @@ class CategoryAxis(QtCharts.QCategoryAxis):
     def __iter__(self) -> Iterator[str]:
         return iter(self.categoriesLabels())
 
-    def __add__(self, other: Tuple[str, int]) -> CategoryAxis:
+    def __add__(self, other: tuple[str, int]) -> CategoryAxis:
         self.append(*other)
         return self
 

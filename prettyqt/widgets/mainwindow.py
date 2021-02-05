@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from typing import List, Optional, Sequence
+from typing import Sequence
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
@@ -51,7 +51,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def set_widget(self, widget: Optional[QtWidgets.QWidget]):
+    def set_widget(self, widget: QtWidgets.QWidget | None):
         if widget is None:
             self.takeCentralWidget()
         else:
@@ -175,10 +175,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.set_modality("application")
         self.show()
 
-    def get_docks(self) -> List[QtWidgets.QDockWidget]:
+    def get_docks(self) -> list[QtWidgets.QDockWidget]:
         return self.find_children(QtWidgets.QDockWidget, recursive=False)
 
-    def get_toolbars(self) -> List[QtWidgets.QToolBar]:
+    def get_toolbars(self) -> list[QtWidgets.QToolBar]:
         return self.find_children(QtWidgets.QToolBar, recursive=False)
 
     def toggle_fullscreen(self):

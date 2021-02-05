@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Union
+from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -104,7 +104,7 @@ class DataStream(QtCore.QDataStream):
 
     @classmethod
     def write_bytearray(
-        cls, ba: Union[QtCore.QByteArray, bytes], write_to: types.QtSerializableType
+        cls, ba: QtCore.QByteArray | bytes, write_to: types.QtSerializableType
     ):
         if not isinstance(ba, QtCore.QByteArray):
             ba = QtCore.QByteArray(ba)

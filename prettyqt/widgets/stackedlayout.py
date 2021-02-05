@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Union
-
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
@@ -20,7 +18,7 @@ class StackedLayout(QtWidgets.QStackedLayout):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __add__(self, other: Union[QtWidgets.QWidget, QtWidgets.QLayout]):
+    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
         self.add(other)
         return self
 

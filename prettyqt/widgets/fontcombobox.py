@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Literal
+from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
@@ -59,7 +59,7 @@ class FontComboBox(QtWidgets.QFontComboBox):
         flags = helpers.merge_flags(filters, FONT_FILTERS)
         self.setFontFilters(flags)
 
-    def get_font_filters(self) -> List[FontFilterStr]:
+    def get_font_filters(self) -> list[FontFilterStr]:
         """Return list of font filters.
 
         Returns:

@@ -4,7 +4,7 @@ import contextlib
 import logging
 import os
 import pathlib
-from typing import Dict, Iterator, Mapping, MutableMapping, Optional, Union
+from typing import Iterator, Mapping, MutableMapping
 
 import qstylizer.parser
 import qstylizer.style
@@ -51,7 +51,7 @@ class Application(QtWidgets.QApplication):
         )
 
     def store_widget_states(
-        self, settings: Optional[MutableMapping] = None, key: str = "states"
+        self, settings: MutableMapping | None = None, key: str = "states"
     ):
         settings = core.Settings() if settings is None else settings
         result = {}
@@ -63,9 +63,7 @@ class Application(QtWidgets.QApplication):
             }
         settings[key] = result
 
-    def restore_widget_states(
-        self, settings: Optional[Mapping] = None, key: str = "states"
-    ):
+    def restore_widget_states(self, settings: Mapping | None = None, key: str = "states"):
         settings = core.Settings() if settings is None else settings
         for category, v in SAVE_STATES.items():
             items = settings[key].get(category)
@@ -90,7 +88,7 @@ class Application(QtWidgets.QApplication):
         popup.exec_()
 
     @classmethod
-    def get_mainwindow(cls) -> Optional[QtWidgets.QMainWindow]:
+    def get_mainwindow(cls) -> QtWidgets.QMainWindow | None:
         widget_list = cls.instance().topLevelWidgets()
         for widget in widget_list:
             if isinstance(widget, QtWidgets.QMainWindow):
@@ -98,7 +96,7 @@ class Application(QtWidgets.QApplication):
         return None
 
     @classmethod
-    def get_widget(cls, name: str) -> Optional[QtWidgets.QWidget]:
+    def get_widget(cls, name: str) -> QtWidgets.QWidget | None:
         mw = cls.get_mainwindow()
         if mw is None:
             logger.warning("Trying to get widget from nonexistent mainwindow")
@@ -116,9 +114,7 @@ class Application(QtWidgets.QApplication):
         yield ss
         self.set_stylesheet(ss)
 
-    def set_stylesheet(
-        self, ss: Union[None, str, qstylizer.style.StyleSheet, os.PathLike]
-    ):
+    def set_stylesheet(self, ss: None | str | qstylizer.style.StyleSheet | os.PathLike):
         if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()
         elif ss is None:
@@ -139,10 +135,10 @@ class Application(QtWidgets.QApplication):
             iconprovider.set_defaults(color="lightblue")
 
     @classmethod
-    def get_available_themes(cls) -> Dict[constants.ThemeStr, str]:
+    def get_available_themes(cls) -> dict[constants.ThemeStr, str]:
         return dict(default="Default", dark="Dark")
 
-    def send_event(self, obj_or_str: Union[str, QtCore.QObject], event: QtCore.QEvent):
+    def send_event(self, obj_or_str: str | QtCore.QObject, event: QtCore.QEvent):
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
         if obj is None:
             raise ValueError(obj)
@@ -150,9 +146,9 @@ class Application(QtWidgets.QApplication):
 
     def post_event(
         self,
-        obj_or_str: Union[str, QtCore.QObject],
+        obj_or_str: str | QtCore.QObject,
         event: QtCore.QEvent,
-        priority: Union[int, constants.EventPriorityStr] = "normal",
+        priority: int | constants.EventPriorityStr = "normal",
     ):
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
         if obj is None:

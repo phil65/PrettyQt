@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import os
-from typing import List, Literal, Optional, Union
+from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -92,8 +92,8 @@ class Label(QtWidgets.QLabel):
 
     def set_alignment(
         self,
-        horizontal: Optional[constants.HorizontalAlignmentStr] = None,
-        vertical: Optional[constants.VerticalAlignmentStr] = None,
+        horizontal: constants.HorizontalAlignmentStr | None = None,
+        vertical: constants.VerticalAlignmentStr | None = None,
     ):
         """Set the alignment of the label's contents."""
         if horizontal is None and vertical is not None:
@@ -172,7 +172,7 @@ class Label(QtWidgets.QLabel):
         self.setTextInteractionFlags(flags)
         return self
 
-    def get_text_interaction(self) -> List[TextInteractionStr]:
+    def get_text_interaction(self) -> list[TextInteractionStr]:
         """Return current text interaction mode.
 
         Returns:
@@ -228,7 +228,7 @@ class Label(QtWidgets.QLabel):
                 ss.color.setValue(color.name())
         return self
 
-    def set_image(self, path: Union[os.PathLike, str], width: int = 300) -> Label:
+    def set_image(self, path: os.PathLike | str, width: int = 300) -> Label:
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText(
@@ -240,7 +240,7 @@ class Label(QtWidgets.QLabel):
 
     @classmethod
     def image_from_path(
-        cls, path: Union[os.PathLike, str], parent: Optional[QtWidgets.QWidget] = None
+        cls, path: os.PathLike | str, parent: QtWidgets.QWidget | None = None
     ) -> Label:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)

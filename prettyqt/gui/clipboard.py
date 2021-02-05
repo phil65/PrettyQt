@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -26,14 +26,14 @@ class Clipboard:
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def set_pixmap(self, pixmap: Optional[QtGui.QPixmap], mode: ModeStr = "clipboard"):
+    def set_pixmap(self, pixmap: QtGui.QPixmap | None, mode: ModeStr = "clipboard"):
         if mode not in MODES:
             raise InvalidParamError(mode, MODES)
         if pixmap is None:
             pixmap = QtGui.QPixmap()
         self.item.setPixmap(pixmap, MODES[mode])
 
-    def get_pixmap(self, mode: ModeStr = "clipboard") -> Optional[gui.Pixmap]:
+    def get_pixmap(self, mode: ModeStr = "clipboard") -> gui.Pixmap | None:
         if mode not in MODES:
             raise InvalidParamError(mode, MODES)
         pix = gui.Pixmap(self.item.pixmap(MODES[mode]))
@@ -41,14 +41,14 @@ class Clipboard:
             return None
         return pix
 
-    def set_image(self, image: Optional[QtGui.QImage], mode: ModeStr = "clipboard"):
+    def set_image(self, image: QtGui.QImage | None, mode: ModeStr = "clipboard"):
         if mode not in MODES:
             raise InvalidParamError(mode, MODES)
         if image is None:
             image = QtGui.QImage()
         self.item.setImage(image, MODES[mode])
 
-    def get_image(self, mode: ModeStr = "clipboard") -> Optional[gui.Image]:
+    def get_image(self, mode: ModeStr = "clipboard") -> gui.Image | None:
         if mode not in MODES:
             raise InvalidParamError(mode, MODES)
         img = gui.Image(self.item.image(MODES[mode]))

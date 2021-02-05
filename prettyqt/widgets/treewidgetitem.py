@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator, Literal, Optional
+from typing import Iterator, Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
@@ -85,7 +85,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
     def get_font(self, column: int = 0) -> gui.Font:
         return gui.Font(self.font(column))
 
-    def get_icon(self, column: int = 0) -> Optional[gui.Icon]:
+    def get_icon(self, column: int = 0) -> gui.Icon | None:
         icon = self.icon(column)
         if icon.isNull():
             return None

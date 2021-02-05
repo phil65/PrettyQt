@@ -11,7 +11,7 @@ from collections import OrderedDict
 from difflib import SequenceMatcher
 import inspect
 import logging
-from typing import Any, List, Optional
+from typing import Any
 
 from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtCore
@@ -36,7 +36,7 @@ class ObjectBrowserTreeItem(treeitem.TreeItem):
         name,
         obj_path,
         is_attribute,
-        parent: Optional[ObjectBrowserTreeItem] = None,
+        parent: ObjectBrowserTreeItem | None = None,
     ):
         super().__init__(obj, parent=parent)
         # self.parent_item = parent
@@ -70,8 +70,8 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         self,
         obj: Any,
         obj_name: str = "",
-        attr_cols: Optional[List[custom_models.ColumnItem]] = None,
-        parent: Optional[QtCore.QObject] = None,
+        attr_cols: list[custom_models.ColumnItem] | None = None,
+        parent: QtCore.QObject | None = None,
     ):
         """Constructor.
 
@@ -114,7 +114,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         return constants.IS_ENABLED | constants.IS_SELECTABLE  # type: ignore
 
     def index(
-        self, row: int, column: int, parent: Optional[core.ModelIndex] = None
+        self, row: int, column: int, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
 
         if parent is None:
@@ -149,7 +149,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
 
         return self.createIndex(parent_item.row(), 0, parent_item)
 
-    def rowCount(self, parent: Optional[core.ModelIndex] = None):
+    def rowCount(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
 
         if parent.column() > 0:
@@ -158,14 +158,14 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         else:
             return self.tree_item(parent).child_count()
 
-    def hasChildren(self, parent: Optional[core.ModelIndex] = None):
+    def hasChildren(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return 0
         else:
             return self.tree_item(parent).has_children
 
-    def canFetchMore(self, parent: Optional[core.ModelIndex] = None):
+    def canFetchMore(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return 0
@@ -174,7 +174,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             # logger.debug("canFetchMore: {} = {}".format(parent, result))
             return result
 
-    def fetchMore(self, parent: Optional[core.ModelIndex] = None):
+    def fetchMore(self, parent: core.ModelIndex | None = None):
         """Fetches the children given the model index of a parent node.
 
         Adds the children to the parent.
