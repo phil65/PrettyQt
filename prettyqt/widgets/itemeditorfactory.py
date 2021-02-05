@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Type
+
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
@@ -62,7 +64,7 @@ TYPES = {
 class ItemEditorFactory(QtWidgets.QItemEditorFactory):
     @classmethod
     def register_default_editor(
-        cls, editor_cls: type[QtWidgets.QWidget], typ: int | None = None
+        cls, editor_cls: Type[QtWidgets.QWidget], typ: int | None = None
     ):
         factory = cls.defaultFactory()
         factory.register_editor(editor_cls, typ)
@@ -70,7 +72,7 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
 
     def register_editor(
         self,
-        editor_cls: type[QtWidgets.QWidget],
+        editor_cls: Type[QtWidgets.QWidget],
         typ: int | None = None,
         property_name: str = "",
     ):

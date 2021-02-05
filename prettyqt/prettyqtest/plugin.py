@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator
+from typing import Iterator, Type
 
 import pytest
 
@@ -97,7 +97,7 @@ class QtTester:
 
 
 @pytest.fixture
-def qttester() -> type[QtTester]:
+def qttester() -> Type[QtTester]:
     return QtTester
 
 
