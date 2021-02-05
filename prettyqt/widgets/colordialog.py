@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from typing import Literal, Optional
+from typing import Literal
 
 from prettyqt import gui, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import colors, types
 
 
@@ -35,7 +35,7 @@ class ColorDialog(QtWidgets.QColorDialog):
         cls,
         preset: types.ColorType = None,
         allow_alpha: bool = False,
-        parent: Optional[QtWidgets.QWidget] = None,
+        parent: QtWidgets.QWidget | None = None,
     ) -> gui.Color:
         preset = colors.get_color(preset)
         kwargs = dict(options=cls.ShowAlphaChannel) if allow_alpha else {}
@@ -61,10 +61,56 @@ class ColorDialog(QtWidgets.QColorDialog):
             and b.metaObject().className() == "QColorShowLabel"
         ][0]
 
+    def replace_qcolorshowlabel(self, widget: QtWidgets.QWidget):
+        # Find the dialog widget used to display the current
+        # color, so we can replace it with our implementation
+        qcs = self.get_qcolorshower()
+        qcsl = self.get_qcolorshowlabel()
+        qcs.layout().replaceWidget(qcsl, widget)
+        # Make sure it doesn't receive signals while hidden
+        qcsl.blockSignals(True)
+        qcsl.hide()
+        widget.show()
+
+
+class CPAlphaShowLabel(widgets.Label):
+    """Label which displays the currently-active color using checkerboard alpha.
+
+    A replacement for QColorDialog's QColorShowLabel.
+    """
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        # Length in pixels of a side of the checkerboard squares
+        # (Pattern is made up of 2×2 squares, total size 2n × 2n)
+        self.checkerboard_size = 8
+        # Start out transparent by default
+        self.color = self.parent().currentColor()
+        self.parent().currentColorChanged.connect(self.update_color)
+        self.pattern = gui.Pixmap.create_checkerboard_pattern(
+            self.checkerboard_size, "#aaa", "#ccc"
+        )
+
+    def update_color(self, color: QtGui.QColor):
+        self.color = color
+        self.repaint()
+
+    def paintEvent(self, event):
+        """Show the current color using checkerboard alpha."""
+        event.accept()
+        with gui.Painter(self) as p:
+            p.set_pen(None)
+            if self.color.alphaF() < 1.0:
+                p.drawTiledPixmap(event.rect(), self.pattern, QtCore.QPoint(4, 4))
+            p.fillRect(event.rect(), self.color)
+
 
 if __name__ == "__main__":
     app = widgets.app()
     dlg = ColorDialog()
+    dlg.setOptions(ColorDialog.ShowAlphaChannel)
+    label = CPAlphaShowLabel(dlg)
+    dlg.replace_qcolorshowlabel(label)
     cs = dlg.get_qcolorshower()
-    print(type(cs))
+    dlg.show()
     app.main_loop()
