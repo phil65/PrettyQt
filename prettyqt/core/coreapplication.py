@@ -47,7 +47,7 @@ class CoreApplication(QtCore.QCoreApplication):
     def disable_window_help_button(cls, state: bool = True):
         try:
             cls.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton, state)
-        except AttributeError:
+        except AttributeError:  # attribute not available in Qt6
             pass
 
     def set_metadata(

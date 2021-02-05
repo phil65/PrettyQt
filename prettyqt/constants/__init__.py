@@ -912,7 +912,7 @@ APPLICATION_ATTRIBUTE: bidict[ApplicationAttributeStr, Qt.ApplicationAttribute] 
     compress_tablet_events=Att.AA_CompressTabletEvents,
     dont_check_open_gl_context_thread=Att.AA_DontCheckOpenGLContextThreadAffinity,
     disable_shader_disk_cache=Att.AA_DisableShaderDiskCache,
-    disable_window_context_help_button=Att.AA_DisableWindowContextHelpButton,
+    # disable_window_context_help_button=Att.AA_DisableWindowContextHelpButton,
     disable_session_manager=Att.AA_DisableSessionManager,
     disable_native_virtual_keyboard=Att.AA_DisableNativeVirtualKeyboard,
 )
