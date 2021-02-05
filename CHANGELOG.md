@@ -1,3 +1,9 @@
+## v0.183.2 (2021-02-05)
+
+### Fix
+
+- another try to fix docs generation
+
 ## v0.183.1 (2021-02-05)
 
 ### Fix
