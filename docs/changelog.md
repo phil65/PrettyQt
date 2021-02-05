@@ -1,3 +1,21 @@
+## v0.183.0 (2021-02-05)
+
+### Feat
+
+- **JSEngine**: add eval method
+- **Pixmap**: add rotated method
+- **ColorDialog**: add replace_qcolorshowlabel
+- **JSValue**: add __call__ method
+- **PlainTextEdit**: add some more methods
+- **core**: add Slot method
+- **core**: add Mutex/Semaphore classes
+- **LineEdit**: add some signals
+- **svg**: add SvgWidget class
+
+### Fix
+
+- correctly keep state when using block_signals / updates_off context managers
+
 ## v0.182.1 (2021-01-26)
 
 ### Fix
