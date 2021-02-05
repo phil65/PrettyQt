@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import os
 import pathlib
-from typing import Union
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -39,7 +38,7 @@ class Pixmap(QtGui.QPixmap):
         return self.cacheKey()
 
     @classmethod
-    def from_file(cls, path: Union[os.PathLike, str]) -> Pixmap:
+    def from_file(cls, path: os.PathLike | str) -> Pixmap:
         path = pathlib.Path(path)
         with path.open(mode="rb") as f:
             data = f.read()
@@ -60,6 +59,12 @@ class Pixmap(QtGui.QPixmap):
 
     def to_image(self) -> gui.Image:
         return gui.Image(self.toImage())
+
+    def rotated(self, rotation: int) -> Pixmap:
+        w, h = self.width(), self.height()
+        pixmap = self.transformed(gui.Transform().rotate(rotation))
+        new_w, new_h = pixmap.width(), pixmap.height()
+        return pixmap.copy((new_w - w) // 2, (new_h - h) // 2, w, h)
 
     @classmethod
     def create_dot(cls, color: types.ColorType = "black", size: int = 16) -> Pixmap:
