@@ -4,7 +4,7 @@ from collections import defaultdict
 import contextlib
 import inspect
 import itertools
-from typing import Any, DefaultDict, Type, TypeVar
+from typing import Any, DefaultDict, TypeVar
 
 from prettyqt import constants, core
 import prettyqt.qt
@@ -82,7 +82,7 @@ class Object(QtCore.QObject):
 
     def find_children(
         self,
-        typ: Type[T] = QtCore.QObject,
+        typ: type[T] = QtCore.QObject,
         name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
     ) -> list[T]:
@@ -101,7 +101,7 @@ class Object(QtCore.QObject):
 
     def find_child(
         self,
-        typ: Type[T] = QtCore.QObject,
+        typ: type[T] = QtCore.QObject,
         name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
     ) -> T | None:
@@ -119,7 +119,7 @@ class Object(QtCore.QObject):
             return item if recursive or item.parent() == self else None  # type: ignore
 
     def find_parent(
-        self, typ: Type[QtCore.QObject], name: str | None = None
+        self, typ: type[QtCore.QObject], name: str | None = None
     ) -> QtCore.QObject | None:
         node = self
         while node:
