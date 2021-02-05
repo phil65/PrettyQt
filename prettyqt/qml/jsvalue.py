@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import logging
-from typing import Optional, Union
 
 from prettyqt import qml
 from prettyqt.qt import QtQml
@@ -27,13 +26,13 @@ class JSValue(QtQml.QJSValue):
     def __len__(self):
         return self.property("length").toVariant()
 
-    def __getitem__(self, index: Union[int, str]):
+    def __getitem__(self, index: int | str):
         return self.property(index).toVariant()
 
     def __delitem__(self, index: str):
         self.deleteProperty(index)
 
-    def __setitem__(self, index: Union[int, str], value):
+    def __setitem__(self, index: int | str, value):
         self.setProperty(index, value)
 
     def __iter__(self):
@@ -43,10 +42,14 @@ class JSValue(QtQml.QJSValue):
     def __contains__(self, index: str):
         return self.hasProperty(index)
 
+    def __call__(self, *args) -> JSValue:
+        result = self.call(args)
+        return JSValue(result)
+
     def get_value(self):
         return self.toVariant()
 
-    def get_error_type(self) -> Optional[str]:
+    def get_error_type(self) -> str | None:
         error_type = self.errorType()
         return ERROR_TYPES.inverse.get(error_type)
 
