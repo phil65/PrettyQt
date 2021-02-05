@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Dict, Literal, Optional, Union
+from typing import Any, Literal
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, helpers
@@ -39,7 +39,7 @@ class Color(QtGui.QColor):
         )
 
     def __str__(self):
-        return self.name()
+        return self.name() if self.alpha() == 255 else self.name(self.HexArgb)
 
     def __reduce__(self):
         return type(self), (self.red(), self.green(), self.blue(), self.alpha())
@@ -47,10 +47,10 @@ class Color(QtGui.QColor):
     def serialize_fields(self):
         return dict(color=self.toString())
 
-    def serialize(self) -> Dict[str, Any]:
+    def serialize(self) -> dict[str, Any]:
         return self.serialize_fields()
 
-    def set_color(self, color: Union[str, tuple]):
+    def set_color(self, color: str | tuple):
         if isinstance(color, str):
             self.setNamedColor(color)
         else:
@@ -84,7 +84,7 @@ class Color(QtGui.QColor):
         start: QtGui.QColor,
         end: QtGui.QColor,
         percent: int,
-        colorspace: Optional[SpecStr] = "rgb",
+        colorspace: SpecStr | None = "rgb",
     ) -> Color:
         """Get an interpolated color value.
 
