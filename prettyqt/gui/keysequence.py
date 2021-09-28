@@ -2,7 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt.qt import QtCore, QtGui
+from prettyqt import constants
+from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 
@@ -17,13 +18,6 @@ SequenceMatchStr = Literal["none", "partial", "exact"]
 SEQUENCE_FORMATS = bidict(
     native=QtGui.QKeySequence.NativeText, portable=QtGui.QKeySequence.PortableText
 )
-
-MODS = {
-    QtCore.Qt.ShiftModifier: QtCore.Qt.SHIFT,
-    QtCore.Qt.ControlModifier: QtCore.Qt.CTRL,
-    QtCore.Qt.AltModifier: QtCore.Qt.ALT,
-    QtCore.Qt.MetaModifier: QtCore.Qt.META,
-}
 
 STANDARD_KEYS = bidict(
     add_tab=int(QtGui.QKeySequence.AddTab),
@@ -126,7 +120,7 @@ class KeySequence(QtGui.QKeySequence):
 
     @classmethod
     def to_shortcut_str(cls, key, mod: int = 0) -> str:
-        for k, v in MODS.items():
+        for k, v in constants.MODIFIER_TO_KEY.items():
             if mod & k:
                 key += v
         return str(cls(key))

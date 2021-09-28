@@ -179,6 +179,26 @@ VerticalAlignmentStr = Literal[
     "baseline",
 ]
 
+MODIFIER_TO_KEY = {
+    QtCore.Qt.ShiftModifier: QtCore.Qt.SHIFT,
+    QtCore.Qt.ControlModifier: QtCore.Qt.CTRL,
+    QtCore.Qt.AltModifier: QtCore.Qt.ALT,
+    QtCore.Qt.MetaModifier: QtCore.Qt.META,
+}
+
+KeyboardmodifierStr = Literal[
+    "none", "shift", "ctrl", "alt", "meta", "keypad", "group_switch"
+]
+KEYBOARD_MODIFIERS: bidict[KeyboardmodifierStr, Qt.KeyboardModifier] = bidict(
+    none=Qt.KeyboardModifier.NoModifier,
+    shift=Qt.KeyboardModifier.ShiftModifier,
+    ctrl=Qt.KeyboardModifier.ControlModifier,
+    alt=Qt.KeyboardModifier.AltModifier,
+    meta=Qt.KeyboardModifier.MetaModifier,
+    keypad=Qt.KeyboardModifier.KeypadModifier,
+    group_switch=Qt.KeyboardModifier.GroupSwitchModifier,
+)
+
 OrientationStr = Literal["horizontal", "vertical"]
 ORIENTATION: bidict[OrientationStr, Qt.Orientation] = bidict(
     horizontal=Orientation.Horizontal, vertical=Orientation.Vertical
