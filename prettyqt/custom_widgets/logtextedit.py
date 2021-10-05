@@ -138,7 +138,8 @@ class ThreadName(Highlighter):
     bold = True
 
     def format_string(self, record: logging.LogRecord) -> str:
-        return record.threadName
+        name = record.threadName
+        return name if name else ""
 
 
 class ProcessName(Highlighter):
@@ -146,7 +147,8 @@ class ProcessName(Highlighter):
     bold = True
 
     def format_string(self, record: logging.LogRecord) -> str:
-        return record.processName
+        name = record.processName
+        return name if name else ""
 
 
 class RelativeCreated(Highlighter):

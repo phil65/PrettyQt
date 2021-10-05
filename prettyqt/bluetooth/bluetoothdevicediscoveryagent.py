@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtBluetooth
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 DISCOVERY_METHODS = bidict(
@@ -37,37 +37,37 @@ ErrorStr = Literal[
     "unknown",
 ]
 
-INQUIRY_TYPES = bidict(
-    unlimited=QtBluetooth.QBluetoothDeviceDiscoveryAgent.GeneralUnlimitedInquiry,
-    limited=QtBluetooth.QBluetoothDeviceDiscoveryAgent.LimitedInquiry,
-)
+# INQUIRY_TYPES = bidict(
+#     unlimited=QtBluetooth.QBluetoothDeviceDiscoveryAgent.GeneralUnlimitedInquiry,
+#     limited=QtBluetooth.QBluetoothDeviceDiscoveryAgent.LimitedInquiry,
+# )
 
-InquiryTypeStr = Literal["unlimited", "limited"]
+# InquiryTypeStr = Literal["unlimited", "limited"]
 
 QtBluetooth.QBluetoothDeviceDiscoveryAgent.__bases__ = (core.Object,)
 
 
 class BluetoothDeviceDiscoveryAgent(QtBluetooth.QBluetoothDeviceDiscoveryAgent):
-    def set_inquiry_type(self, typ: InquiryTypeStr):
-        """Set inquiry type.
+    # def set_inquiry_type(self, typ: InquiryTypeStr):
+    #     """Set inquiry type.
 
-        Args:
-            typ: inquiry type
+    #     Args:
+    #         typ: inquiry type
 
-        Raises:
-            InvalidParamError: inquiry type does not exist
-        """
-        if typ not in INQUIRY_TYPES:
-            raise InvalidParamError(typ, INQUIRY_TYPES)
-        self.setInquiryType(INQUIRY_TYPES[typ])
+    #     Raises:
+    #         InvalidParamError: inquiry type does not exist
+    #     """
+    #     if typ not in INQUIRY_TYPES:
+    #         raise InvalidParamError(typ, INQUIRY_TYPES)
+    #     self.setInquiryType(INQUIRY_TYPES[typ])
 
-    def get_inquiry_type(self) -> InquiryTypeStr:
-        """Get the current inquiry type.
+    # def get_inquiry_type(self) -> InquiryTypeStr:
+    #     """Get the current inquiry type.
 
-        Returns:
-            inquiry type
-        """
-        return INQUIRY_TYPES.inverse[self.inquiryType()]
+    #     Returns:
+    #         inquiry type
+    #     """
+    #     return INQUIRY_TYPES.inverse[self.inquiryType()]
 
     def start_discovery(self, classic: bool = False, low_energy: bool = False):
         flag = 0
