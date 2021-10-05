@@ -1,21 +1,21 @@
-# from prettyqt.qt import QtWebEngineWidgets
+# from prettyqt.qt import QtWebEngineCore
 from __future__ import annotations
 
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtWebEngineWidgets
+from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
 FONT_FAMILY = bidict(
-    standard=QtWebEngineWidgets.QWebEngineSettings.StandardFont,
-    fixed=QtWebEngineWidgets.QWebEngineSettings.FixedFont,
-    serif=QtWebEngineWidgets.QWebEngineSettings.SerifFont,
-    sans_serif=QtWebEngineWidgets.QWebEngineSettings.SansSerifFont,
-    cursive=QtWebEngineWidgets.QWebEngineSettings.CursiveFont,
-    fantasy=QtWebEngineWidgets.QWebEngineSettings.FantasyFont,
-    pictograph=QtWebEngineWidgets.QWebEngineSettings.PictographFont,
+    standard=QtWebEngineCore.QWebEngineSettings.StandardFont,
+    fixed=QtWebEngineCore.QWebEngineSettings.FixedFont,
+    serif=QtWebEngineCore.QWebEngineSettings.SerifFont,
+    sans_serif=QtWebEngineCore.QWebEngineSettings.SansSerifFont,
+    cursive=QtWebEngineCore.QWebEngineSettings.CursiveFont,
+    fantasy=QtWebEngineCore.QWebEngineSettings.FantasyFont,
+    pictograph=QtWebEngineCore.QWebEngineSettings.PictographFont,
 )
 
 FontFamilyStr = Literal[
@@ -23,15 +23,15 @@ FontFamilyStr = Literal[
 ]
 
 FONT_SIZE = bidict(
-    minimum=QtWebEngineWidgets.QWebEngineSettings.MinimumFontSize,
-    minimum_logical=QtWebEngineWidgets.QWebEngineSettings.MinimumLogicalFontSize,
-    default=QtWebEngineWidgets.QWebEngineSettings.DefaultFontSize,
-    default_fixed=QtWebEngineWidgets.QWebEngineSettings.DefaultFixedFontSize,
+    minimum=QtWebEngineCore.QWebEngineSettings.MinimumFontSize,
+    minimum_logical=QtWebEngineCore.QWebEngineSettings.MinimumLogicalFontSize,
+    default=QtWebEngineCore.QWebEngineSettings.DefaultFontSize,
+    default_fixed=QtWebEngineCore.QWebEngineSettings.DefaultFixedFontSize,
 )
 
 FontSizeStr = Literal["minimum", "minimum_logical", "default", "default_fixed"]
 
-mod = QtWebEngineWidgets.QWebEngineSettings
+mod = QtWebEngineCore.QWebEngineSettings
 
 UNKNOWN_URL_SCHEME_POLICY = bidict(
     disallow=mod.DisallowUnknownUrlSchemes,
@@ -113,7 +113,7 @@ WebAttributeStr = Literal[
 
 
 class WebEngineSettings:
-    def __init__(self, item: QtWebEngineWidgets.QWebEngineSettings):
+    def __init__(self, item: QtWebEngineCore.QWebEngineSettings):
         self.item = item
 
     def __getattr__(self, val):

@@ -1,16 +1,16 @@
 from __future__ import annotations
 
-from prettyqt.qt import QtWebEngineWidgets
+from prettyqt.qt import QtWebEngineCore
 
 
 class WebEngineScriptCollection:
-    def __init__(self, item: QtWebEngineWidgets.QWebEngineScriptCollection):
+    def __init__(self, item: QtWebEngineCore.QWebEngineScriptCollection):
         self.item = item
 
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def __getitem__(self, index: str) -> QtWebEngineWidgets.QWebEngineScript:
+    def __getitem__(self, index: str) -> QtWebEngineCore.QWebEngineScript:
         return self.item.findScript(index)
 
     def __len__(self):
@@ -19,14 +19,13 @@ class WebEngineScriptCollection:
     def __iter__(self):
         return iter(self.item.toList())
 
-    def __contains__(self, other: QtWebEngineWidgets.QWebEngineScript):
+    def __contains__(self, other: QtWebEngineCore.QWebEngineScript):
         return self.item.contains(other)
 
     def __add__(
         self,
         other: (
-            QtWebEngineWidgets.QWebEngineScript
-            | list[QtWebEngineWidgets.QWebEngineScript]
+            QtWebEngineCore.QWebEngineScript | list[QtWebEngineCore.QWebEngineScript]
         ),
     ):
         self.item.insert(other)

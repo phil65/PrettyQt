@@ -2,28 +2,28 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt.qt import QtWebEngineWidgets
+from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
 INJECTION_POINT = bidict(
-    document_creation=QtWebEngineWidgets.QWebEngineScript.DocumentCreation,
-    document_ready=QtWebEngineWidgets.QWebEngineScript.DocumentReady,
-    deferred=QtWebEngineWidgets.QWebEngineScript.Deferred,
+    document_creation=QtWebEngineCore.QWebEngineScript.DocumentCreation,
+    document_ready=QtWebEngineCore.QWebEngineScript.DocumentReady,
+    deferred=QtWebEngineCore.QWebEngineScript.Deferred,
 )
 
 InjectionPointStr = Literal["document_creation", "document_ready", "deferred"]
 
 SCRIPT_WORLD_IDS = bidict(
-    main_world=QtWebEngineWidgets.QWebEngineScript.MainWorld,
-    application_world=QtWebEngineWidgets.QWebEngineScript.ApplicationWorld,
-    user_world=QtWebEngineWidgets.QWebEngineScript.UserWorld,
+    main_world=QtWebEngineCore.QWebEngineScript.MainWorld,
+    application_world=QtWebEngineCore.QWebEngineScript.ApplicationWorld,
+    user_world=QtWebEngineCore.QWebEngineScript.UserWorld,
 )
 
 ScriptWorldIdStr = Literal["main_world", "application_world", "user_world"]
 
 
-class WebEngineScript(QtWebEngineWidgets.QWebEngineScript):
+class WebEngineScript(QtWebEngineCore.QWebEngineScript):
     def set_injection_point(self, point: InjectionPointStr):
         """Set injection point.
 

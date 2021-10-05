@@ -5,8 +5,24 @@ from prettyqt.qt import PYQT5, PYQT6, PYSIDE2, PYSIDE6, PythonQtError
 
 if PYQT5:
     from PyQt5.QtWebEngineCore import *
+    from PyQt5.QtWebEngineWidgets import (
+        QWebEngineHistory,
+        QWebEngineHistoryItem,
+        QWebEngineScript,
+        QWebEngineScriptCollection,
+        QWebEngineProfile,
+        QWebEngineSettings,
+    )
 elif PYSIDE2:
     from PySide2.QtWebEngineCore import *
+    from PySide2.QtWebEngineWidgets import (
+        QWebEngineHistory,
+        QWebEngineHistoryItem,
+        QWebEngineScript,
+        QWebEngineScriptCollection,
+        QWebEngineProfile,
+        QWebEngineSettings,
+    )
 elif PYQT6:
     from PyQt6.QtWebEngineCore import *
 elif PYSIDE6:

@@ -1,34 +1,34 @@
-# from prettyqt.qt import QtWebEngineWidgets
+# from prettyqt.qt import QtWebEngineCore
 
 from __future__ import annotations
 
 from typing import Literal
 
 from prettyqt import core, webenginewidgets
-from prettyqt.qt import QtWebEngineWidgets
+from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
 HTTP_CACHE_TYPE = bidict(
-    none=QtWebEngineWidgets.QWebEngineProfile.NoCache,
-    disk=QtWebEngineWidgets.QWebEngineProfile.DiskHttpCache,
-    memory=QtWebEngineWidgets.QWebEngineProfile.MemoryHttpCache,
+    none=QtWebEngineCore.QWebEngineProfile.NoCache,
+    disk=QtWebEngineCore.QWebEngineProfile.DiskHttpCache,
+    memory=QtWebEngineCore.QWebEngineProfile.MemoryHttpCache,
 )
 
 HttpCacheTypeStr = Literal["none", "disk", "memory"]
 
 PERSISTENT_COOKIE_POLICY = bidict(
-    none=QtWebEngineWidgets.QWebEngineProfile.NoPersistentCookies,
-    allow=QtWebEngineWidgets.QWebEngineProfile.AllowPersistentCookies,
-    force=QtWebEngineWidgets.QWebEngineProfile.ForcePersistentCookies,
+    none=QtWebEngineCore.QWebEngineProfile.NoPersistentCookies,
+    allow=QtWebEngineCore.QWebEngineProfile.AllowPersistentCookies,
+    force=QtWebEngineCore.QWebEngineProfile.ForcePersistentCookies,
 )
 
 PersistentCookiePolicyStr = Literal["none", "allow", "force"]
 
-QtWebEngineWidgets.QWebEngineProfile.__bases__ = (core.Object,)
+QtWebEngineCore.QWebEngineProfile.__bases__ = (core.Object,)
 
 
-class WebEngineProfile(QtWebEngineWidgets.QWebEngineProfile):
+class WebEngineProfile(QtWebEngineCore.QWebEngineProfile):
     def set_persistent_cookie_policy(self, policy: PersistentCookiePolicyStr):
         """Set the persistent cookie policy.
 

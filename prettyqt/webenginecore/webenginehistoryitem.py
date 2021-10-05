@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core
-from prettyqt.qt import QtWebEngineWidgets
+from prettyqt.qt import QtWebEngineCore
 
 
-class WebEngineHistoryItem(QtWebEngineWidgets.QWebEngineHistoryItem):
+class WebEngineHistoryItem(QtWebEngineCore.QWebEngineHistoryItem):
     def get_url(self) -> core.Url:
         return core.Url(self.url())
 
