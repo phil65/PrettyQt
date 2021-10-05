@@ -28,7 +28,10 @@ orjson = "^3.2.0"
 regex = "^2021"
 
 PyQt5 = {version = "^5.15.0", optional=true}
-PyQt6 = {version = "^6.0.0", optional=true}
+PyQt6 = {version = "^6.2.0", optional=true}
+PyQt6-Charts = {version = "^6.2.0", optional=true}
+PyQt6-WebEngine = {version = "^6.2.0", optional=true}
+PyQt6-QScintilla = {version = "^2.0.0", optional=true}
 pyside2 = {version = "^5.15.0", python = "<3.10", optional=true}
 pyside6 = {version = "^6.0.0", python = "<3.10", optional=true}
 PyQtWebEngine = {version = "^5.15.0", optional=true}
@@ -45,16 +48,16 @@ pytest = "^6.0.0"
 pip = "^20.1.1"
 flake8 = "^3.8.3"
 flake8-comprehensions = "^3.1.0"
-pytest-cov = "^2.10.0"
+pytest-cov = "^3.0.0"
 mypy = "^0"
 pylint = "^2.5.3"
 pytest-xvfb = {version = "^2.0.0", markers = "sys_platform == 'linux'"}
 codecov = "^2.1.7"
-coverage = "^5.1"
+coverage = "^6.0"
 mkdocs = "^1.1.2"
 mkdocs-material = "^7.0.0"
 mkdocstrings = "^0"
-pymdown-extensions = "^8.0"
+pymdown-extensions = "^9.0"
 black = "^21.4b1"
 devtools = "^0"
 
@@ -62,7 +65,7 @@ devtools = "^0"
 pyqt5 = ["PyQt5", "PyQtWebEngine", "PyQtChart", "QScintilla"]
 pyside2 = ["pyside2"]
 pyside6 = ["pyside6"]
-pyqt6 = ["pyqt6"]
+pyqt6 = ["pyqt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla"]
 addons = ["docutils"]
 
 [tool.pytest.ini_options]
