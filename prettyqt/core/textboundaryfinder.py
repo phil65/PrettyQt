@@ -7,12 +7,12 @@ from prettyqt.utils import bidict
 
 
 BOUNDARY_REASONS = bidict(
-    not_at_boundary=QtCore.QTextBoundaryFinder.NotAtBoundary,
-    break_opportunity=QtCore.QTextBoundaryFinder.BreakOpportunity,
-    start_of_item=QtCore.QTextBoundaryFinder.StartOfItem,
-    end_of_item=QtCore.QTextBoundaryFinder.EndOfItem,
-    mandatory_break=QtCore.QTextBoundaryFinder.MandatoryBreak,
-    soft_hyphen=QtCore.QTextBoundaryFinder.SoftHyphen,
+    not_at_boundary=QtCore.QTextBoundaryFinder.BoundaryReason.NotAtBoundary,
+    break_opportunity=QtCore.QTextBoundaryFinder.BoundaryReason.BreakOpportunity,
+    start_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.StartOfItem,
+    end_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.EndOfItem,
+    mandatory_break=QtCore.QTextBoundaryFinder.BoundaryReason.MandatoryBreak,
+    soft_hyphen=QtCore.QTextBoundaryFinder.BoundaryReason.SoftHyphen,
 )
 
 BoundaryReasonStr = Literal[
@@ -25,10 +25,10 @@ BoundaryReasonStr = Literal[
 ]
 
 BOUNDARY_TYPES = bidict(
-    grapheme=QtCore.QTextBoundaryFinder.Grapheme,
-    word=QtCore.QTextBoundaryFinder.Word,
-    line=QtCore.QTextBoundaryFinder.Line,
-    sentence=QtCore.QTextBoundaryFinder.Sentence,
+    grapheme=QtCore.QTextBoundaryFinder.BoundaryType.Grapheme,
+    word=QtCore.QTextBoundaryFinder.BoundaryType.Word,
+    line=QtCore.QTextBoundaryFinder.BoundaryType.Line,
+    sentence=QtCore.QTextBoundaryFinder.BoundaryType.Sentence,
 )
 
 BoundaryTypeStr = Literal[

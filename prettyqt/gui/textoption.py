@@ -7,10 +7,10 @@ from prettyqt.utils import bidict
 
 
 WORD_WRAP_MODE = bidict(
-    none=QtGui.QTextOption.NoWrap,
-    word=QtGui.QTextOption.WordWrap,
-    anywhere=QtGui.QTextOption.WrapAnywhere,
-    boundary_or_anywhere=QtGui.QTextOption.WrapAtWordBoundaryOrAnywhere,
+    none=QtGui.QTextOption.WrapMode.NoWrap,
+    word=QtGui.QTextOption.WrapMode.WordWrap,
+    anywhere=QtGui.QTextOption.WrapMode.WrapAnywhere,
+    boundary_or_anywhere=QtGui.QTextOption.WrapMode.WrapAtWordBoundaryOrAnywhere,
 )
 
 WordWrapModeStr = Literal["none", "word", "anywhere", "boundary_or_anywhere"]

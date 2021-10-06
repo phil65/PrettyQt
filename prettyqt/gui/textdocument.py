@@ -15,36 +15,36 @@ from prettyqt.utils import InvalidParamError, bidict
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
     MARKDOWN_FEATURES = bidict(
-        no_html=QtGui.QTextDocument.MarkdownNoHTML,
-        commonmark=QtGui.QTextDocument.MarkdownDialectCommonMark,
-        github=QtGui.QTextDocument.MarkdownDialectGitHub,
+        no_html=QtGui.QTextDocument.MarkdownFeature.MarkdownNoHTML,
+        commonmark=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectCommonMark,
+        github=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectGitHub,
     )
 
 MarkdownFeatureStr = Literal["no_html", "commonmark", "github"]
 
 RESOURCE_TYPES = bidict(
-    unknown=QtGui.QTextDocument.UnknownResource,
-    html=QtGui.QTextDocument.HtmlResource,
-    image=QtGui.QTextDocument.ImageResource,
-    stylesheet=QtGui.QTextDocument.StyleSheetResource,
-    markdown=QtGui.QTextDocument.MarkdownResource,
-    user=QtGui.QTextDocument.UserResource,
+    unknown=QtGui.QTextDocument.ResourceType.UnknownResource,
+    html=QtGui.QTextDocument.ResourceType.HtmlResource,
+    image=QtGui.QTextDocument.ResourceType.ImageResource,
+    stylesheet=QtGui.QTextDocument.ResourceType.StyleSheetResource,
+    markdown=QtGui.QTextDocument.ResourceType.MarkdownResource,
+    user=QtGui.QTextDocument.ResourceType.UserResource,
 )
 
 ResourceTypeStr = Literal["unknown", "html", "image", "stylesheet", "markdown", "user"]
 
 STACKS = bidict(
-    undo=QtGui.QTextDocument.UndoStack,
-    redo=QtGui.QTextDocument.RedoStack,
-    undo_and_redo=QtGui.QTextDocument.UndoAndRedoStacks,
+    undo=QtGui.QTextDocument.Stacks.UndoStack,
+    redo=QtGui.QTextDocument.Stacks.RedoStack,
+    undo_and_redo=QtGui.QTextDocument.Stacks.UndoAndRedoStacks,
 )
 
 StackStr = Literal["undo", "redo", "undo_and_redo"]
 
 FIND_FLAGS = bidict(
-    backward=QtGui.QTextDocument.FindBackward,
-    case_sensitive=QtGui.QTextDocument.FindCaseSensitively,
-    whole_words=QtGui.QTextDocument.FindWholeWords,
+    backward=QtGui.QTextDocument.FindFlag.FindBackward,
+    case_sensitive=QtGui.QTextDocument.FindFlag.FindCaseSensitively,
+    whole_words=QtGui.QTextDocument.FindFlag.FindWholeWords,
 )
 
 FindFlagStr = Literal["backward", "case_sensitive", "whole_words"]

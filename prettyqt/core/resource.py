@@ -10,9 +10,9 @@ from prettyqt.utils import bidict
 
 
 COMPRESSION = bidict(
-    none=QtCore.QResource.NoCompression,
-    zlib=QtCore.QResource.ZlibCompression,
-    zstd=QtCore.QResource.ZstdCompression,
+    none=QtCore.QResource.Compression.NoCompression,
+    zlib=QtCore.QResource.Compression.ZlibCompression,
+    zstd=QtCore.QResource.Compression.ZstdCompression,
 )
 
 CompressionStr = Literal["none", "zlib", "zstd"]

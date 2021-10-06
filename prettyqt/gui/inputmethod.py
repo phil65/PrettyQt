@@ -6,7 +6,8 @@ from prettyqt.utils import bidict
 
 
 ACTION = bidict(
-    click=QtGui.QInputMethod.Click, context_menu=QtGui.QInputMethod.ContextMenu
+    click=QtGui.QInputMethod.Action.Click,
+    context_menu=QtGui.QInputMethod.Action.ContextMenu,
 )
 
 QtGui.QInputMethod.__bases__ = (core.Object,)

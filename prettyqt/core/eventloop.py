@@ -6,10 +6,10 @@ from prettyqt.utils import bidict
 
 
 PROCESS_EVENT_FLAGS = bidict(
-    all=QtCore.QEventLoop.AllEvents,
-    exclude_user_input=QtCore.QEventLoop.ExcludeUserInputEvents,
-    exclude_socket_notifiers=QtCore.QEventLoop.ExcludeSocketNotifiers,
-    wait_for_more=QtCore.QEventLoop.WaitForMoreEvents,
+    all=QtCore.QEventLoop.ProcessEventsFlag.AllEvents,
+    exclude_user_input=QtCore.QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents,
+    exclude_socket_notifiers=QtCore.QEventLoop.ProcessEventsFlag.ExcludeSocketNotifiers,
+    wait_for_more=QtCore.QEventLoop.ProcessEventsFlag.WaitForMoreEvents,
 )
 
 QtCore.QEventLoop.__bases__ = (core.Object,)

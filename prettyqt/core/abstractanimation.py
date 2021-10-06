@@ -8,22 +8,23 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 DELETION_POLICY = bidict(
-    keep=QtCore.QAbstractAnimation.KeepWhenStopped,
-    delete=QtCore.QAbstractAnimation.DeleteWhenStopped,
+    keep=QtCore.QAbstractAnimation.DeletionPolicy.KeepWhenStopped,
+    delete=QtCore.QAbstractAnimation.DeletionPolicy.DeleteWhenStopped,
 )
 
 DeletionPolicyStr = Literal["keep", "delete"]
 
 DIRECTION = bidict(
-    forward=QtCore.QAbstractAnimation.Forward, backward=QtCore.QAbstractAnimation.Backward
+    forward=QtCore.QAbstractAnimation.Direction.Forward,
+    backward=QtCore.QAbstractAnimation.Direction.Backward,
 )
 
 DirectionStr = Literal["forward", "backward"]
 
 STATE = bidict(
-    stopped=QtCore.QAbstractAnimation.Stopped,
-    paused=QtCore.QAbstractAnimation.Paused,
-    running=QtCore.QAbstractAnimation.Running,
+    stopped=QtCore.QAbstractAnimation.State.Stopped,
+    paused=QtCore.QAbstractAnimation.State.Paused,
+    running=QtCore.QAbstractAnimation.State.Running,
 )
 
 StateStr = Literal["stopped", "paused", "running"]

@@ -8,24 +8,24 @@ from prettyqt.utils import InvalidParamError, bidict, types
 
 
 FLOATING_POINT_PRECISION = bidict(
-    single=QtCore.QDataStream.SinglePrecision,
-    double=QtCore.QDataStream.DoublePrecision,
+    single=QtCore.QDataStream.FloatingPointPrecision.SinglePrecision,
+    double=QtCore.QDataStream.FloatingPointPrecision.DoublePrecision,
 )
 
 FloatingPointPrecisionStr = Literal["single", "double"]
 
 BYTE_ORDER = bidict(
-    big_endian=QtCore.QDataStream.BigEndian,
-    little_endian=QtCore.QDataStream.LittleEndian,
+    big_endian=QtCore.QDataStream.ByteOrder.BigEndian,
+    little_endian=QtCore.QDataStream.ByteOrder.LittleEndian,
 )
 
 ByteOrderStr = Literal["big_endian", "little_endian"]
 
 STATUS = bidict(
-    ok=QtCore.QDataStream.Ok,
-    read_past_end=QtCore.QDataStream.ReadPastEnd,
-    read_corrupt_data=QtCore.QDataStream.ReadCorruptData,
-    write_failed=QtCore.QDataStream.WriteFailed,
+    ok=QtCore.QDataStream.Status.Ok,
+    read_past_end=QtCore.QDataStream.Status.ReadPastEnd,
+    read_corrupt_data=QtCore.QDataStream.Status.ReadCorruptData,
+    write_failed=QtCore.QDataStream.Status.WriteFailed,
 )
 
 StatusStr = Literal["ok", "read_past_end", "read_corrupt_data", "write_failed"]

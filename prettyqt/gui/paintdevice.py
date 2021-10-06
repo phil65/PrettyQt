@@ -7,18 +7,18 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 METRICS = bidict(
-    width=QtGui.QPaintDevice.PdmWidth,
-    height=QtGui.QPaintDevice.PdmHeight,
-    width_mm=QtGui.QPaintDevice.PdmWidthMM,
-    height_mm=QtGui.QPaintDevice.PdmHeightMM,
-    num_colors=QtGui.QPaintDevice.PdmNumColors,
-    depth=QtGui.QPaintDevice.PdmDepth,
-    dpi_x=QtGui.QPaintDevice.PdmDpiX,
-    dpi_y=QtGui.QPaintDevice.PdmDpiY,
-    physical_dpi_x=QtGui.QPaintDevice.PdmPhysicalDpiX,
-    physical_dpi_y=QtGui.QPaintDevice.PdmPhysicalDpiY,
-    pixel_ratio=QtGui.QPaintDevice.PdmDevicePixelRatio,
-    pixel_ratio_scaled=QtGui.QPaintDevice.PdmDevicePixelRatioScaled,
+    width=QtGui.QPaintDevice.PaintDeviceMetric.PdmWidth,
+    height=QtGui.QPaintDevice.PaintDeviceMetric.PdmHeight,
+    width_mm=QtGui.QPaintDevice.PaintDeviceMetric.PdmWidthMM,
+    height_mm=QtGui.QPaintDevice.PaintDeviceMetric.PdmHeightMM,
+    num_colors=QtGui.QPaintDevice.PaintDeviceMetric.PdmNumColors,
+    depth=QtGui.QPaintDevice.PaintDeviceMetric.PdmDepth,
+    dpi_x=QtGui.QPaintDevice.PaintDeviceMetric.PdmDpiX,
+    dpi_y=QtGui.QPaintDevice.PaintDeviceMetric.PdmDpiY,
+    physical_dpi_x=QtGui.QPaintDevice.PaintDeviceMetric.PdmPhysicalDpiX,
+    physical_dpi_y=QtGui.QPaintDevice.PaintDeviceMetric.PdmPhysicalDpiY,
+    pixel_ratio=QtGui.QPaintDevice.PaintDeviceMetric.PdmDevicePixelRatio,
+    pixel_ratio_scaled=QtGui.QPaintDevice.PaintDeviceMetric.PdmDevicePixelRatioScaled,
 )
 
 MetricStr = Literal[

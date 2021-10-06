@@ -7,11 +7,11 @@ from prettyqt.utils import bidict
 
 
 CLOCK_TYPE = bidict(
-    system_time=QtCore.QElapsedTimer.SystemTime,
-    monotonic_clock=QtCore.QElapsedTimer.MonotonicClock,
-    tick_counter=QtCore.QElapsedTimer.TickCounter,
-    mach_absolute_time=QtCore.QElapsedTimer.MachAbsoluteTime,
-    performance_counter=QtCore.QElapsedTimer.PerformanceCounter,
+    system_time=QtCore.QElapsedTimer.ClockType.SystemTime,
+    monotonic_clock=QtCore.QElapsedTimer.ClockType.MonotonicClock,
+    tick_counter=QtCore.QElapsedTimer.ClockType.TickCounter,
+    mach_absolute_time=QtCore.QElapsedTimer.ClockType.MachAbsoluteTime,
+    performance_counter=QtCore.QElapsedTimer.ClockType.PerformanceCounter,
 )
 
 ClockTypeStr = Literal[

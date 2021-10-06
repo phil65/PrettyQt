@@ -8,13 +8,13 @@ from prettyqt.utils import bidict
 
 
 OS_TYPE = bidict(
-    android=QtCore.QOperatingSystemVersion.Android,
-    ios=QtCore.QOperatingSystemVersion.IOS,
-    mac_os=QtCore.QOperatingSystemVersion.MacOS,
-    tv_os=QtCore.QOperatingSystemVersion.TvOS,
-    watch_os=QtCore.QOperatingSystemVersion.WatchOS,
-    windows=QtCore.QOperatingSystemVersion.Windows,
-    unknown=QtCore.QOperatingSystemVersion.Unknown,
+    android=QtCore.QOperatingSystemVersion.OSType.Android,
+    ios=QtCore.QOperatingSystemVersion.OSType.IOS,
+    mac_os=QtCore.QOperatingSystemVersion.OSType.MacOS,
+    tv_os=QtCore.QOperatingSystemVersion.OSType.TvOS,
+    watch_os=QtCore.QOperatingSystemVersion.OSType.WatchOS,
+    windows=QtCore.QOperatingSystemVersion.OSType.Windows,
+    unknown=QtCore.QOperatingSystemVersion.OSType.Unknown,
 )
 
 OsTypeStr = Literal["android", "ios", "mac_os", "tv_os", "watch_os", "windows", "unknown"]

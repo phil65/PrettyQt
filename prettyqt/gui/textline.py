@@ -8,15 +8,15 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 CURSOR_POSITION = bidict(
-    cursor_between_characters=QtGui.QTextLine.CursorBetweenCharacters,
-    cursor_on_character=QtGui.QTextLine.CursorOnCharacter,
+    cursor_between_characters=QtGui.QTextLine.CursorPosition.CursorBetweenCharacters,
+    cursor_on_character=QtGui.QTextLine.CursorPosition.CursorOnCharacter,
 )
 
 CursorPositionStr = Literal["cursor_between_characters", "cursor_on_character"]
 
 EDGE = bidict(
-    leading=QtGui.QTextLine.Leading,
-    trailing=QtGui.QTextLine.Trailing,
+    leading=QtGui.QTextLine.Edge.Leading,
+    trailing=QtGui.QTextLine.Edge.Trailing,
 )
 
 EdgeStr = Literal["leading", "trailing"]

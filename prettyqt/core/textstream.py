@@ -7,20 +7,20 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 FIELD_ALIGNMENT = bidict(
-    left=QtCore.QTextStream.AlignLeft,
-    right=QtCore.QTextStream.AlignRight,
-    center=QtCore.QTextStream.AlignCenter,
-    accounting_style=QtCore.QTextStream.AlignAccountingStyle,
+    left=QtCore.QTextStream.FieldAlignment.AlignLeft,
+    right=QtCore.QTextStream.FieldAlignment.AlignRight,
+    center=QtCore.QTextStream.FieldAlignment.AlignCenter,
+    accounting_style=QtCore.QTextStream.FieldAlignment.AlignAccountingStyle,
 )
 
 FieldAlignmentStr = Literal["left", "right", "center", "accounting_style"]
 
 NUMBER_FLAGS = bidict(
-    show_base=QtCore.QTextStream.ShowBase,
-    force_point=QtCore.QTextStream.ForcePoint,
-    force_sign=QtCore.QTextStream.ForceSign,
-    uppercase_base=QtCore.QTextStream.UppercaseBase,
-    uppercase_digits=QtCore.QTextStream.UppercaseDigits,
+    show_base=QtCore.QTextStream.NumberFlag.ShowBase,
+    force_point=QtCore.QTextStream.NumberFlag.ForcePoint,
+    force_sign=QtCore.QTextStream.NumberFlag.ForceSign,
+    uppercase_base=QtCore.QTextStream.NumberFlag.UppercaseBase,
+    uppercase_digits=QtCore.QTextStream.NumberFlag.UppercaseDigits,
 )
 
 NumberFlagStr = Literal[
@@ -28,18 +28,18 @@ NumberFlagStr = Literal[
 ]
 
 REAL_NUMBER_NOTATION = bidict(
-    scientific=QtCore.QTextStream.ScientificNotation,
-    fixed=QtCore.QTextStream.FixedNotation,
-    smart=QtCore.QTextStream.SmartNotation,
+    scientific=QtCore.QTextStream.RealNumberNotation.ScientificNotation,
+    fixed=QtCore.QTextStream.RealNumberNotation.FixedNotation,
+    smart=QtCore.QTextStream.RealNumberNotation.SmartNotation,
 )
 
 RealNumberNotationStr = Literal["scientific", "fixed", "smart"]
 
 STATUS = bidict(
-    ok=QtCore.QTextStream.Ok,
-    read_past_end=QtCore.QTextStream.ReadPastEnd,
-    read_corrupt_data=QtCore.QTextStream.ReadCorruptData,
-    write_failed=QtCore.QTextStream.WriteFailed,
+    ok=QtCore.QTextStream.Status.Ok,
+    read_past_end=QtCore.QTextStream.Status.ReadPastEnd,
+    read_corrupt_data=QtCore.QTextStream.Status.ReadCorruptData,
+    write_failed=QtCore.QTextStream.Status.WriteFailed,
 )
 
 StatusStr = Literal["ok", "read_past_end", "read_corrupt_data", "write_failed"]

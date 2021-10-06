@@ -9,14 +9,14 @@ from prettyqt.utils import bidict
 
 
 COMPONENT_FORMATTING_OPTIONS = bidict(
-    pretty_decoded=QtCore.QUrl.PrettyDecoded,
-    encode_spaces=QtCore.QUrl.EncodeSpaces,
-    encode_unicode=QtCore.QUrl.EncodeUnicode,
-    encode_delimiters=QtCore.QUrl.EncodeDelimiters,
-    encode_reserved=QtCore.QUrl.EncodeReserved,
-    decode_reserved=QtCore.QUrl.DecodeReserved,
-    fully_encoded=QtCore.QUrl.FullyEncoded,
-    fully_decoded=QtCore.QUrl.FullyDecoded,
+    pretty_decoded=QtCore.QUrl.ComponentFormattingOption.PrettyDecoded,
+    encode_spaces=QtCore.QUrl.ComponentFormattingOption.EncodeSpaces,
+    encode_unicode=QtCore.QUrl.ComponentFormattingOption.EncodeUnicode,
+    encode_delimiters=QtCore.QUrl.ComponentFormattingOption.EncodeDelimiters,
+    encode_reserved=QtCore.QUrl.ComponentFormattingOption.EncodeReserved,
+    decode_reserved=QtCore.QUrl.ComponentFormattingOption.DecodeReserved,
+    fully_encoded=QtCore.QUrl.ComponentFormattingOption.FullyEncoded,
+    fully_decoded=QtCore.QUrl.ComponentFormattingOption.FullyDecoded,
 )
 
 ComponentFormattingStr = Literal[
@@ -32,27 +32,27 @@ ComponentFormattingStr = Literal[
 
 
 PARSING_MODES = bidict(
-    tolerant=QtCore.QUrl.TolerantMode,
-    strict=QtCore.QUrl.StrictMode,
-    decoded=QtCore.QUrl.DecodedMode,
+    tolerant=QtCore.QUrl.ParsingMode.TolerantMode,
+    strict=QtCore.QUrl.ParsingMode.StrictMode,
+    decoded=QtCore.QUrl.ParsingMode.DecodedMode,
 )
 
 ParsingModeStr = Literal["tolerant", "strict", "decoded"]
 
 FORMATTING_OPTIONS = bidict(
-    none=0,  # QtCore.QUrl.None
-    remove_scheme=QtCore.QUrl.RemoveScheme,
-    remove_password=QtCore.QUrl.RemovePassword,
-    remove_user_info=QtCore.QUrl.RemoveUserInfo,
-    remove_port=QtCore.QUrl.RemovePort,
-    remove_authority=QtCore.QUrl.RemoveAuthority,
-    remove_path=QtCore.QUrl.RemovePath,
-    remove_query=QtCore.QUrl.RemoveQuery,
-    remove_fragment=QtCore.QUrl.RemoveFragment,
-    remove_filename=QtCore.QUrl.RemoveFilename,
-    prefer_local_file=QtCore.QUrl.PreferLocalFile,
-    strip_trailing_slash=QtCore.QUrl.StripTrailingSlash,
-    normalize_path_segments=QtCore.QUrl.NormalizePathSegments,
+    none=0,  # QtCore.QUrl.UrlFormattingOption.None
+    remove_scheme=QtCore.QUrl.UrlFormattingOption.RemoveScheme,
+    remove_password=QtCore.QUrl.UrlFormattingOption.RemovePassword,
+    remove_user_info=QtCore.QUrl.UrlFormattingOption.RemoveUserInfo,
+    remove_port=QtCore.QUrl.UrlFormattingOption.RemovePort,
+    remove_authority=QtCore.QUrl.UrlFormattingOption.RemoveAuthority,
+    remove_path=QtCore.QUrl.UrlFormattingOption.RemovePath,
+    remove_query=QtCore.QUrl.UrlFormattingOption.RemoveQuery,
+    remove_fragment=QtCore.QUrl.UrlFormattingOption.RemoveFragment,
+    remove_filename=QtCore.QUrl.UrlFormattingOption.RemoveFilename,
+    prefer_local_file=QtCore.QUrl.UrlFormattingOption.PreferLocalFile,
+    strip_trailing_slash=QtCore.QUrl.UrlFormattingOption.StripTrailingSlash,
+    normalize_path_segments=QtCore.QUrl.UrlFormattingOption.NormalizePathSegments,
 )
 
 FormattingOptionStr = Literal[

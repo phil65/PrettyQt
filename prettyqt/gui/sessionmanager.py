@@ -8,10 +8,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 RESTART_HINT = bidict(
-    if_running=QtGui.QSessionManager.RestartIfRunning,
-    anyway=QtGui.QSessionManager.RestartAnyway,
-    immediately=QtGui.QSessionManager.RestartImmediately,
-    never=QtGui.QSessionManager.RestartNever,
+    if_running=QtGui.QSessionManager.RestartHint.RestartIfRunning,
+    anyway=QtGui.QSessionManager.RestartHint.RestartAnyway,
+    immediately=QtGui.QSessionManager.RestartHint.RestartImmediately,
+    never=QtGui.QSessionManager.RestartHint.RestartNever,
 )
 
 RestartHintStr = Literal["if_running", "anyway", "immediately", "never"]

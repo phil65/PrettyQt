@@ -8,9 +8,9 @@ from prettyqt.utils import bidict
 
 
 TYPE = bidict(
-    read=QtCore.QSocketNotifier.Read,
-    write=QtCore.QSocketNotifier.Write,
-    exception=QtCore.QSocketNotifier.Exception,
+    read=QtCore.QSocketNotifier.Type.Read,
+    write=QtCore.QSocketNotifier.Type.Write,
+    exception=QtCore.QSocketNotifier.Type.Exception,
 )
 
 TypeStr = Literal["read", "write", "exception"]

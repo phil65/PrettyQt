@@ -15,9 +15,9 @@ CHECK_INDEX_OPTIONS = bidict(
 )
 
 LAYOUT_CHANGE_HINT = bidict(
-    none=QtCore.QAbstractItemModel.NoLayoutChangeHint,
-    vertical_sort=QtCore.QAbstractItemModel.VerticalSortHint,
-    horizontal_sort=QtCore.QAbstractItemModel.HorizontalSortHint,
+    none=QtCore.QAbstractItemModel.LayoutChangeHint.NoLayoutChangeHint,
+    vertical_sort=QtCore.QAbstractItemModel.LayoutChangeHint.VerticalSortHint,
+    horizontal_sort=QtCore.QAbstractItemModel.LayoutChangeHint.HorizontalSortHint,
 )
 
 

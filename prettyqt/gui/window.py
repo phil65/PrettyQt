@@ -8,17 +8,17 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 ANCESTER_MODES = bidict(
-    exclude_transients=QtGui.QWindow.ExcludeTransients,
-    include_transients=QtGui.QWindow.IncludeTransients,
+    exclude_transients=QtGui.QWindow.AncestorMode.ExcludeTransients,
+    include_transients=QtGui.QWindow.AncestorMode.IncludeTransients,
 )
 
 VISIBILITY = bidict(
-    windowed=QtGui.QWindow.Windowed,
-    minimized=QtGui.QWindow.Minimized,
-    maximized=QtGui.QWindow.Maximized,
-    fullscreen=QtGui.QWindow.FullScreen,
-    automatic=QtGui.QWindow.AutomaticVisibility,
-    hidden=QtGui.QWindow.Hidden,
+    windowed=QtGui.QWindow.Visibility.Windowed,
+    minimized=QtGui.QWindow.Visibility.Minimized,
+    maximized=QtGui.QWindow.Visibility.Maximized,
+    fullscreen=QtGui.QWindow.Visibility.FullScreen,
+    automatic=QtGui.QWindow.Visibility.AutomaticVisibility,
+    hidden=QtGui.QWindow.Visibility.Hidden,
 )
 
 VisibilityStr = Literal[

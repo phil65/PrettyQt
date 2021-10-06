@@ -9,9 +9,9 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 MATCH_MODE = bidict(
-    default=QtCore.QMimeDatabase.MatchDefault,
-    extension=QtCore.QMimeDatabase.MatchExtension,
-    content=QtCore.QMimeDatabase.MatchContent,
+    default=QtCore.QMimeDatabase.MatchMode.MatchDefault,
+    extension=QtCore.QMimeDatabase.MatchMode.MatchExtension,
+    content=QtCore.QMimeDatabase.MatchMode.MatchContent,
 )
 
 MatchModeStr = Literal["default", "extension", "content"]

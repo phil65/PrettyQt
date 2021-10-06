@@ -7,16 +7,19 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
+mod = QtCore.QCommandLineParser
+op = mod.OptionsAfterPositionalArgumentsMode
+
 OPTIONS_AFTER_POS_ARG = bidict(
-    options=QtCore.QCommandLineParser.ParseAsOptions,
-    positional_arguments=QtCore.QCommandLineParser.ParseAsPositionalArguments,
+    options=op.ParseAsOptions,
+    positional_arguments=op.ParseAsPositionalArguments,
 )
 
 OptionsAfterPosArgStr = Literal["options", "positional_arguments"]
 
 SINGLE_DASH_WORD = bidict(
-    compacted_short=QtCore.QCommandLineParser.ParseAsCompactedShortOptions,
-    long=QtCore.QCommandLineParser.ParseAsLongOptions,
+    compacted_short=mod.SingleDashWordOptionMode.ParseAsCompactedShortOptions,
+    long=mod.SingleDashWordOptionMode.ParseAsLongOptions,
 )
 
 SingleDashWordStr = Literal["compacted_short", "long"]

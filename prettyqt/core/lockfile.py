@@ -9,10 +9,10 @@ from prettyqt.utils import bidict
 
 
 LOCK_ERROR = bidict(
-    none=QtCore.QLockFile.NoError,
-    lock_failed=QtCore.QLockFile.LockFailedError,
-    permission=QtCore.QLockFile.PermissionError,
-    unknown=QtCore.QLockFile.UnknownError,
+    none=QtCore.QLockFile.LockError.NoError,
+    lock_failed=QtCore.QLockFile.LockError.LockFailedError,
+    permission=QtCore.QLockFile.LockError.PermissionError,
+    unknown=QtCore.QLockFile.LockError.UnknownError,
 )
 
 LockErrorStr = Literal["none", "lock_failed", "permission", "unknown"]

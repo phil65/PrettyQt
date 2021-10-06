@@ -7,18 +7,18 @@ from prettyqt.utils import bidict
 
 
 ACCESS = bidict(
-    private=QtCore.QMetaMethod.Private,
-    protected=QtCore.QMetaMethod.Protected,
-    public=QtCore.QMetaMethod.Public,
+    private=QtCore.QMetaMethod.Access.Private,
+    protected=QtCore.QMetaMethod.Access.Protected,
+    public=QtCore.QMetaMethod.Access.Public,
 )
 
 AccessStr = Literal["private", "protected", "public"]
 
 METHOD_TYPE = bidict(
-    method=QtCore.QMetaMethod.Method,
-    signal=QtCore.QMetaMethod.Signal,
-    slot=QtCore.QMetaMethod.Slot,
-    constructor=QtCore.QMetaMethod.Constructor,
+    method=QtCore.QMetaMethod.MethodType.Method,
+    signal=QtCore.QMetaMethod.MethodType.Signal,
+    slot=QtCore.QMetaMethod.MethodType.Slot,
+    constructor=QtCore.QMetaMethod.MethodType.Constructor,
 )
 
 MethodTypeStr = Literal["method", "signal", "slot", "constructor"]

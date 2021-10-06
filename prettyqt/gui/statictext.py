@@ -8,8 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 PERFORMANCE_HINT = bidict(
-    moderate=QtGui.QStaticText.ModerateCaching,
-    aggressive=QtGui.QStaticText.AggressiveCaching,
+    moderate=QtGui.QStaticText.PerformanceHint.ModerateCaching,
+    aggressive=QtGui.QStaticText.PerformanceHint.AggressiveCaching,
 )
 
 PerformanceHintStr = Literal["moderate", "aggressive"]

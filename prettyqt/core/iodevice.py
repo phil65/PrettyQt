@@ -17,16 +17,16 @@ else:
 
 OPEN_MODES = mappers.FlagMap(
     mod.OpenModeFlag,
-    not_open=mod.NotOpen,
-    read_only=mod.ReadOnly,
-    write_only=mod.WriteOnly,
-    read_write=mod.ReadWrite,
-    append=mod.Append,
-    truncate=mod.Truncate,
-    text=mod.Text,
-    unbuffered=mod.Unbuffered,
-    new_only=mod.NewOnly,
-    existing_only=mod.ExistingOnly,
+    not_open=mod.OpenModeFlag.NotOpen,
+    read_only=mod.OpenModeFlag.ReadOnly,
+    write_only=mod.OpenModeFlag.WriteOnly,
+    read_write=mod.OpenModeFlag.ReadWrite,
+    append=mod.OpenModeFlag.Append,
+    truncate=mod.OpenModeFlag.Truncate,
+    text=mod.OpenModeFlag.Text,
+    unbuffered=mod.OpenModeFlag.Unbuffered,
+    new_only=mod.OpenModeFlag.NewOnly,
+    existing_only=mod.OpenModeFlag.ExistingOnly,
 )
 
 OpenModeStr = Literal[

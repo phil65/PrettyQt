@@ -14,11 +14,15 @@ from prettyqt.utils import InvalidParamError, bidict
 
 logger = logging.getLogger(__name__)
 
-FORMAT = bidict(native=QtCore.QSettings.NativeFormat, ini=QtCore.QSettings.IniFormat)
+FORMAT = bidict(
+    native=QtCore.QSettings.Format.NativeFormat, ini=QtCore.QSettings.Format.IniFormat
+)
 
 FormatStr = Literal["user", "system"]
 
-SCOPE = bidict(user=QtCore.QSettings.UserScope, system=QtCore.QSettings.SystemScope)
+SCOPE = bidict(
+    user=QtCore.QSettings.Scope.UserScope, system=QtCore.QSettings.Scope.SystemScope
+)
 
 ScopeStr = Literal["user", "system"]
 

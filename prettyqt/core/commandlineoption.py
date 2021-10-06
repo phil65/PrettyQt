@@ -5,8 +5,8 @@ from prettyqt.utils import bidict
 
 
 FLAGS = bidict(
-    hidden_from_help=QtCore.QCommandLineOption.HiddenFromHelp,
-    short_option_style=QtCore.QCommandLineOption.ShortOptionStyle,
+    hidden_from_help=QtCore.QCommandLineOption.Flag.HiddenFromHelp,
+    short_option_style=QtCore.QCommandLineOption.Flag.ShortOptionStyle,
 )
 
 

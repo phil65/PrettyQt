@@ -11,8 +11,8 @@ from prettyqt.utils import InvalidParamError, bidict
 ICON_ENGINE_HOOK = bidict(
     # available_sizes=QtGui.QIconEngine.AvailableSizesHook,
     # icon_name=QtGui.QIconEngine.IconNameHook,
-    is_null=QtGui.QIconEngine.IsNullHook,
-    scaled_pixmap=QtGui.QIconEngine.ScaledPixmapHook,
+    is_null=QtGui.QIconEngine.IconEngineHook.IsNullHook,
+    scaled_pixmap=QtGui.QIconEngine.IconEngineHook.ScaledPixmapHook,
 )
 
 IconEngineHookStr = Literal["available_sizes", "icon_name", "is_null", "scaled_pixmap"]

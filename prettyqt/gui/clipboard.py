@@ -8,9 +8,9 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 MODES = bidict(
-    clipboard=QtGui.QClipboard.Clipboard,
-    selection=QtGui.QClipboard.Selection,
-    find_buffer=QtGui.QClipboard.FindBuffer,
+    clipboard=QtGui.QClipboard.Mode.Clipboard,
+    selection=QtGui.QClipboard.Mode.Selection,
+    find_buffer=QtGui.QClipboard.Mode.FindBuffer,
 )
 
 ModeStr = Literal["clipboard", "selection", "find_buffer"]

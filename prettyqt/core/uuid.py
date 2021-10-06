@@ -7,31 +7,31 @@ from prettyqt.utils import bidict
 
 
 STRING_FORMATS = bidict(
-    with_braces=QtCore.QUuid.WithBraces,
-    without_braces=QtCore.QUuid.WithoutBraces,
-    id_128=QtCore.QUuid.Id128,
+    with_braces=QtCore.QUuid.StringFormat.WithBraces,
+    without_braces=QtCore.QUuid.StringFormat.WithoutBraces,
+    id_128=QtCore.QUuid.StringFormat.Id128,
 )
 
 StringFormatStr = Literal["with_braces", "without_braces", "id_128"]
 
 VARIANTS = bidict(
-    unknown=QtCore.QUuid.VarUnknown,
-    ncs=QtCore.QUuid.NCS,
-    dce=QtCore.QUuid.DCE,
-    microsoft=QtCore.QUuid.Microsoft,
-    reserved=QtCore.QUuid.Reserved,
+    unknown=QtCore.QUuid.Variant.VarUnknown,
+    ncs=QtCore.QUuid.Variant.NCS,
+    dce=QtCore.QUuid.Variant.DCE,
+    microsoft=QtCore.QUuid.Variant.Microsoft,
+    reserved=QtCore.QUuid.Variant.Reserved,
 )
 
 VariantStr = Literal["unknown", "ncs", "dce", "microsoft", "reserved"]
 
 VERSION = bidict(
-    unknown=QtCore.QUuid.VerUnknown,
-    time=QtCore.QUuid.Time,
-    embedded_posix=QtCore.QUuid.EmbeddedPOSIX,
-    name=QtCore.QUuid.Name,
-    # md5=QtCore.QUuid.Md5,
-    random=QtCore.QUuid.Random,
-    sha1=QtCore.QUuid.Sha1,
+    unknown=QtCore.QUuid.Version.VerUnknown,
+    time=QtCore.QUuid.Version.Time,
+    embedded_posix=QtCore.QUuid.Version.EmbeddedPOSIX,
+    name=QtCore.QUuid.Version.Name,
+    # md5=QtCore.QUuid.Version.Md5,
+    random=QtCore.QUuid.Version.Random,
+    sha1=QtCore.QUuid.Version.Sha1,
 )
 
 VersionStr = Literal["unknown", "time", "embedded_posix", "name", "random", "sha1"]

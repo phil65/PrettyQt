@@ -10,23 +10,23 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 FILTERS = bidict(
-    none=QtCore.QDir.NoFilter,
-    dirs=QtCore.QDir.Dirs,
-    all_dirs=QtCore.QDir.AllDirs,
-    files=QtCore.QDir.Files,
-    drives=QtCore.QDir.Drives,
-    no_sym_links=QtCore.QDir.NoSymLinks,
-    no_dot_and_dotdot=QtCore.QDir.NoDotAndDotDot,
-    no_dot=QtCore.QDir.NoDot,
-    no_dotdot=QtCore.QDir.NoDotDot,
-    all_entries=QtCore.QDir.AllEntries,
-    readable=QtCore.QDir.Readable,
-    writable=QtCore.QDir.Writable,
-    executable=QtCore.QDir.Executable,
-    modified=QtCore.QDir.Modified,
-    hidden=QtCore.QDir.Hidden,
-    system=QtCore.QDir.System,
-    case_sensitive=QtCore.QDir.CaseSensitive,
+    none=QtCore.QDir.Filter.NoFilter,
+    dirs=QtCore.QDir.Filter.Dirs,
+    all_dirs=QtCore.QDir.Filter.AllDirs,
+    files=QtCore.QDir.Filter.Files,
+    drives=QtCore.QDir.Filter.Drives,
+    no_sym_links=QtCore.QDir.Filter.NoSymLinks,
+    no_dot_and_dotdot=QtCore.QDir.Filter.NoDotAndDotDot,
+    no_dot=QtCore.QDir.Filter.NoDot,
+    no_dotdot=QtCore.QDir.Filter.NoDotDot,
+    all_entries=QtCore.QDir.Filter.AllEntries,
+    readable=QtCore.QDir.Filter.Readable,
+    writable=QtCore.QDir.Filter.Writable,
+    executable=QtCore.QDir.Filter.Executable,
+    modified=QtCore.QDir.Filter.Modified,
+    hidden=QtCore.QDir.Filter.Hidden,
+    system=QtCore.QDir.Filter.System,
+    case_sensitive=QtCore.QDir.Filter.CaseSensitive,
 )
 
 FilterStr = Literal[
@@ -50,17 +50,17 @@ FilterStr = Literal[
 ]
 
 SORT_FLAG = bidict(
-    name=QtCore.QDir.Name,
-    time=QtCore.QDir.Time,
-    size=QtCore.QDir.Size,
-    type=QtCore.QDir.Type,
-    unsorted=QtCore.QDir.Unsorted,
-    no_sort=QtCore.QDir.NoSort,
-    dirs_first=QtCore.QDir.DirsFirst,
-    dirs_last=QtCore.QDir.DirsLast,
-    reversed=QtCore.QDir.Reversed,
-    ignore_case=QtCore.QDir.IgnoreCase,
-    locale_aware=QtCore.QDir.LocaleAware,
+    name=QtCore.QDir.SortFlag.Name,
+    time=QtCore.QDir.SortFlag.Time,
+    size=QtCore.QDir.SortFlag.Size,
+    type=QtCore.QDir.SortFlag.Type,
+    unsorted=QtCore.QDir.SortFlag.Unsorted,
+    no_sort=QtCore.QDir.SortFlag.NoSort,
+    dirs_first=QtCore.QDir.SortFlag.DirsFirst,
+    dirs_last=QtCore.QDir.SortFlag.DirsLast,
+    reversed=QtCore.QDir.SortFlag.Reversed,
+    ignore_case=QtCore.QDir.SortFlag.IgnoreCase,
+    locale_aware=QtCore.QDir.SortFlag.LocaleAware,
 )
 
 SortFlagStr = Literal[

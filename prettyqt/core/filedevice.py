@@ -9,21 +9,21 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 FILE_ERROR = bidict(
-    none=QtCore.QFileDevice.NoError,
-    read=QtCore.QFileDevice.ReadError,
-    write=QtCore.QFileDevice.WriteError,
-    fatal=QtCore.QFileDevice.FatalError,
-    resource=QtCore.QFileDevice.ResourceError,
-    open=QtCore.QFileDevice.OpenError,
-    abort=QtCore.QFileDevice.AbortError,
-    time_out=QtCore.QFileDevice.TimeOutError,
-    unspecified=QtCore.QFileDevice.UnspecifiedError,
-    remove=QtCore.QFileDevice.RemoveError,
-    rename=QtCore.QFileDevice.RenameError,
-    position=QtCore.QFileDevice.PositionError,
-    resize=QtCore.QFileDevice.ResizeError,
-    permissions=QtCore.QFileDevice.PermissionsError,
-    copy=QtCore.QFileDevice.CopyError,
+    none=QtCore.QFileDevice.FileError.NoError,
+    read=QtCore.QFileDevice.FileError.ReadError,
+    write=QtCore.QFileDevice.FileError.WriteError,
+    fatal=QtCore.QFileDevice.FileError.FatalError,
+    resource=QtCore.QFileDevice.FileError.ResourceError,
+    open=QtCore.QFileDevice.FileError.OpenError,
+    abort=QtCore.QFileDevice.FileError.AbortError,
+    time_out=QtCore.QFileDevice.FileError.TimeOutError,
+    unspecified=QtCore.QFileDevice.FileError.UnspecifiedError,
+    remove=QtCore.QFileDevice.FileError.RemoveError,
+    rename=QtCore.QFileDevice.FileError.RenameError,
+    position=QtCore.QFileDevice.FileError.PositionError,
+    resize=QtCore.QFileDevice.FileError.ResizeError,
+    permissions=QtCore.QFileDevice.FileError.PermissionsError,
+    copy=QtCore.QFileDevice.FileError.CopyError,
 )
 
 FileErrorStr = Literal[
@@ -45,27 +45,27 @@ FileErrorStr = Literal[
 ]
 
 FILE_TIME = bidict(
-    access=QtCore.QFileDevice.FileAccessTime,
-    birth=QtCore.QFileDevice.FileBirthTime,
-    metadata_change=QtCore.QFileDevice.FileMetadataChangeTime,
-    modification=QtCore.QFileDevice.FileModificationTime,
+    access=QtCore.QFileDevice.FileTime.FileAccessTime,
+    birth=QtCore.QFileDevice.FileTime.FileBirthTime,
+    metadata_change=QtCore.QFileDevice.FileTime.FileMetadataChangeTime,
+    modification=QtCore.QFileDevice.FileTime.FileModificationTime,
 )
 
 FileTimeStr = Literal["access", "birth", "metadata_change", "modification"]
 
 PERMISSIONS = bidict(
-    read_owner=QtCore.QFileDevice.ReadOwner,
-    write_owner=QtCore.QFileDevice.WriteOwner,
-    exe_owner=QtCore.QFileDevice.ExeOwner,
-    read_user=QtCore.QFileDevice.ReadUser,
-    write_user=QtCore.QFileDevice.WriteUser,
-    exe_user=QtCore.QFileDevice.ExeUser,
-    read_group=QtCore.QFileDevice.ReadGroup,
-    write_group=QtCore.QFileDevice.WriteGroup,
-    exe_group=QtCore.QFileDevice.ExeGroup,
-    read_other=QtCore.QFileDevice.ReadOther,
-    write_other=QtCore.QFileDevice.WriteOther,
-    exe_other=QtCore.QFileDevice.ExeOther,
+    read_owner=QtCore.QFileDevice.Permission.ReadOwner,
+    write_owner=QtCore.QFileDevice.Permission.WriteOwner,
+    exe_owner=QtCore.QFileDevice.Permission.ExeOwner,
+    read_user=QtCore.QFileDevice.Permission.ReadUser,
+    write_user=QtCore.QFileDevice.Permission.WriteUser,
+    exe_user=QtCore.QFileDevice.Permission.ExeUser,
+    read_group=QtCore.QFileDevice.Permission.ReadGroup,
+    write_group=QtCore.QFileDevice.Permission.WriteGroup,
+    exe_group=QtCore.QFileDevice.Permission.ExeGroup,
+    read_other=QtCore.QFileDevice.Permission.ReadOther,
+    write_other=QtCore.QFileDevice.Permission.WriteOther,
+    exe_other=QtCore.QFileDevice.Permission.ExeOther,
 )
 
 QtCore.QFileDevice.__bases__ = (core.IODevice,)

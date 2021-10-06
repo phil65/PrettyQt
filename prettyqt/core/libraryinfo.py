@@ -8,21 +8,26 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
+if core.VersionNumber.get_qt_version() >= (6, 0, 0):
+    mod = QtCore.QLibraryInfo.LibraryPath
+else:
+    mod = QtCore.QLibraryInfo.LibraryLocation
+
 LOCATION = bidict(
-    prefix=QtCore.QLibraryInfo.PrefixPath,
-    documentation=QtCore.QLibraryInfo.DocumentationPath,
-    headers=QtCore.QLibraryInfo.HeadersPath,
-    libraries=QtCore.QLibraryInfo.LibrariesPath,
-    library_executables=QtCore.QLibraryInfo.LibraryExecutablesPath,
-    binaries=QtCore.QLibraryInfo.BinariesPath,
-    plugins=QtCore.QLibraryInfo.PluginsPath,
-    qml2_imports=QtCore.QLibraryInfo.Qml2ImportsPath,
-    arch_data=QtCore.QLibraryInfo.ArchDataPath,
-    data=QtCore.QLibraryInfo.DataPath,
-    translations=QtCore.QLibraryInfo.TranslationsPath,
-    examples=QtCore.QLibraryInfo.ExamplesPath,
-    tests=QtCore.QLibraryInfo.TestsPath,
-    settings=QtCore.QLibraryInfo.SettingsPath,
+    prefix=mod.PrefixPath,
+    documentation=mod.DocumentationPath,
+    headers=mod.HeadersPath,
+    libraries=mod.LibrariesPath,
+    library_executables=mod.LibraryExecutablesPath,
+    binaries=mod.BinariesPath,
+    plugins=mod.PluginsPath,
+    qml2_imports=mod.Qml2ImportsPath,
+    arch_data=mod.ArchDataPath,
+    data=mod.DataPath,
+    translations=mod.TranslationsPath,
+    examples=mod.ExamplesPath,
+    tests=mod.TestsPath,
+    settings=mod.SettingsPath,
 )
 
 LocationStr = Literal[

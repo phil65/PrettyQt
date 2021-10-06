@@ -7,14 +7,17 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
-DIRECTION = bidict(forward=QtCore.QTimeLine.Forward, backward=QtCore.QTimeLine.Backward)
+DIRECTION = bidict(
+    forward=QtCore.QTimeLine.Direction.Forward,
+    backward=QtCore.QTimeLine.Direction.Backward,
+)
 
 DirectionStr = Literal["forward", "backward"]
 
 STATE = bidict(
-    not_running=QtCore.QTimeLine.NotRunning,
-    paused=QtCore.QTimeLine.Paused,
-    running=QtCore.QTimeLine.Running,
+    not_running=QtCore.QTimeLine.State.NotRunning,
+    paused=QtCore.QTimeLine.State.Paused,
+    running=QtCore.QTimeLine.State.Running,
 )
 
 StateStr = Literal["not_running", "paused", "running"]

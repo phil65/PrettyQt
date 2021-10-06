@@ -8,15 +8,15 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 MODE = bidict(
-    normal=QtGui.QIcon.Normal,
-    disabled=QtGui.QIcon.Disabled,
-    active=QtGui.QIcon.Active,
-    selected=QtGui.QIcon.Selected,
+    normal=QtGui.QIcon.Mode.Normal,
+    disabled=QtGui.QIcon.Mode.Disabled,
+    active=QtGui.QIcon.Mode.Active,
+    selected=QtGui.QIcon.Mode.Selected,
 )
 
 ModeStr = Literal["normal", "disabled", "active", "selected"]
 
-STATE = bidict(off=QtGui.QIcon.Off, on=QtGui.QIcon.On)
+STATE = bidict(off=QtGui.QIcon.State.Off, on=QtGui.QIcon.State.On)
 
 StateStr = Literal["off", "on"]
 
