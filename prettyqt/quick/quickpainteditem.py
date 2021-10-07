@@ -7,16 +7,18 @@ from prettyqt.qt import QtQuick
 from prettyqt.utils import InvalidParamError, bidict
 
 
+mod = QtQuick.QQuickPaintedItem
+
 PERFORMANCE_HINT = bidict(
-    fast_fbo_resizing=QtQuick.QQuickPaintedItem.FastFBOResizing,
+    fast_fbo_resizing=mod.PerformanceHint.FastFBOResizing,
 )
 
 PerformanceHintStr = Literal["fast_fbo_resizing"]
 
 RENDER_TARGET = bidict(
-    image=QtQuick.QQuickPaintedItem.Image,
-    framebuffer_object=QtQuick.QQuickPaintedItem.FramebufferObject,
-    inverted_y_framebuffer_object=QtQuick.QQuickPaintedItem.InvertedYFramebufferObject,
+    image=mod.RenderTarget.Image,
+    framebuffer_object=mod.RenderTarget.FramebufferObject,
+    inverted_y_framebuffer_object=mod.RenderTarget.InvertedYFramebufferObject,
 )
 
 RenderTargetStr = Literal["image", "framebuffer_object" "inverted_y_framebuffer_object"]

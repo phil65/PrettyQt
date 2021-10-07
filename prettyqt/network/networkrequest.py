@@ -10,30 +10,30 @@ from prettyqt.utils import InvalidParamError, bidict
 Req = QtNetwork.QNetworkRequest
 
 ATTRIBUTE = bidict(
-    http_status_code=Req.HttpStatusCodeAttribute,
-    http_reason_phrase=Req.HttpReasonPhraseAttribute,
-    redirection_target=Req.RedirectionTargetAttribute,
-    connection_encrypted=Req.ConnectionEncryptedAttribute,
-    cache_load_control=Req.CacheLoadControlAttribute,
-    cache_save_control=Req.CacheSaveControlAttribute,
-    source_is_from_cache=Req.SourceIsFromCacheAttribute,
-    do_not_buffer_upload_data=Req.DoNotBufferUploadDataAttribute,
-    http_pipelining_allowed=Req.HttpPipeliningAllowedAttribute,
-    http_pipelining_was_used=Req.HttpPipeliningWasUsedAttribute,
-    custom_verb=Req.CustomVerbAttribute,
-    cookie_load_control=Req.CookieLoadControlAttribute,
-    cookie_save_control=Req.CookieSaveControlAttribute,
-    authentication_reuse=Req.AuthenticationReuseAttribute,
-    background_request=Req.BackgroundRequestAttribute,
-    http2_allowed=Req.Http2AllowedAttribute,
-    http2_was_used=Req.Http2WasUsedAttribute,
-    emit_all_upload_progress_signals=Req.EmitAllUploadProgressSignalsAttribute,
-    original_content_length=Req.OriginalContentLengthAttribute,
-    redirect_policy=Req.RedirectPolicyAttribute,
-    http2_direct=Req.Http2DirectAttribute,
-    auto_delete_reply_on_finish=Req.AutoDeleteReplyOnFinishAttribute,
-    user=Req.User,
-    user_max=Req.UserMax,
+    http_status_code=Req.Attribute.HttpStatusCodeAttribute,
+    http_reason_phrase=Req.Attribute.HttpReasonPhraseAttribute,
+    redirection_target=Req.Attribute.RedirectionTargetAttribute,
+    connection_encrypted=Req.Attribute.ConnectionEncryptedAttribute,
+    cache_load_control=Req.Attribute.CacheLoadControlAttribute,
+    cache_save_control=Req.Attribute.CacheSaveControlAttribute,
+    source_is_from_cache=Req.Attribute.SourceIsFromCacheAttribute,
+    do_not_buffer_upload_data=Req.Attribute.DoNotBufferUploadDataAttribute,
+    http_pipelining_allowed=Req.Attribute.HttpPipeliningAllowedAttribute,
+    http_pipelining_was_used=Req.Attribute.HttpPipeliningWasUsedAttribute,
+    custom_verb=Req.Attribute.CustomVerbAttribute,
+    cookie_load_control=Req.Attribute.CookieLoadControlAttribute,
+    cookie_save_control=Req.Attribute.CookieSaveControlAttribute,
+    authentication_reuse=Req.Attribute.AuthenticationReuseAttribute,
+    background_request=Req.Attribute.BackgroundRequestAttribute,
+    http2_allowed=Req.Attribute.Http2AllowedAttribute,
+    http2_was_used=Req.Attribute.Http2WasUsedAttribute,
+    emit_all_upload_progress_signals=Req.Attribute.EmitAllUploadProgressSignalsAttribute,
+    original_content_length=Req.Attribute.OriginalContentLengthAttribute,
+    redirect_policy=Req.Attribute.RedirectPolicyAttribute,
+    http2_direct=Req.Attribute.Http2DirectAttribute,
+    auto_delete_reply_on_finish=Req.Attribute.AutoDeleteReplyOnFinishAttribute,
+    user=Req.Attribute.User,
+    user_max=Req.Attribute.UserMax,
 )
 
 AttributeStr = Literal[
@@ -64,19 +64,19 @@ AttributeStr = Literal[
 ]
 
 KNOWN_HEADER = bidict(
-    content_disposition=QtNetwork.QNetworkRequest.ContentDispositionHeader,
-    content_type=QtNetwork.QNetworkRequest.ContentTypeHeader,
-    content_length=QtNetwork.QNetworkRequest.ContentLengthHeader,
-    location=QtNetwork.QNetworkRequest.LocationHeader,
-    last_modified=QtNetwork.QNetworkRequest.LastModifiedHeader,
-    if_modified_since=QtNetwork.QNetworkRequest.IfModifiedSinceHeader,
-    etag=QtNetwork.QNetworkRequest.ETagHeader,
-    if_match=QtNetwork.QNetworkRequest.IfMatchHeader,
-    if_none_match=QtNetwork.QNetworkRequest.IfNoneMatchHeader,
-    cookie=QtNetwork.QNetworkRequest.CookieHeader,
-    set_cooke=QtNetwork.QNetworkRequest.SetCookieHeader,
-    user_agent=QtNetwork.QNetworkRequest.UserAgentHeader,
-    server=QtNetwork.QNetworkRequest.ServerHeader,
+    content_disposition=Req.KnownHeaders.ContentDispositionHeader,
+    content_type=Req.KnownHeaders.ContentTypeHeader,
+    content_length=Req.KnownHeaders.ContentLengthHeader,
+    location=Req.KnownHeaders.LocationHeader,
+    last_modified=Req.KnownHeaders.LastModifiedHeader,
+    if_modified_since=Req.KnownHeaders.IfModifiedSinceHeader,
+    etag=Req.KnownHeaders.ETagHeader,
+    if_match=Req.KnownHeaders.IfMatchHeader,
+    if_none_match=Req.KnownHeaders.IfNoneMatchHeader,
+    cookie=Req.KnownHeaders.CookieHeader,
+    set_cooke=Req.KnownHeaders.SetCookieHeader,
+    user_agent=Req.KnownHeaders.UserAgentHeader,
+    server=Req.KnownHeaders.ServerHeader,
 )
 
 KnownHeaderStr = Literal[
@@ -96,27 +96,27 @@ KnownHeaderStr = Literal[
 ]
 
 PRIORITY = bidict(
-    high=QtNetwork.QNetworkRequest.HighPriority,
-    normal=QtNetwork.QNetworkRequest.NormalPriority,
-    low=QtNetwork.QNetworkRequest.LowPriority,
+    high=Req.Priority.HighPriority,
+    normal=Req.Priority.NormalPriority,
+    low=Req.Priority.LowPriority,
 )
 
 PriorityStr = Literal["high", "normal", "low"]
 
 REDIRECT_POLICIES = bidict(
-    manual=QtNetwork.QNetworkRequest.ManualRedirectPolicy,
-    no_less_safe=QtNetwork.QNetworkRequest.NoLessSafeRedirectPolicy,
-    same_origin=QtNetwork.QNetworkRequest.SameOriginRedirectPolicy,
-    user_verified=QtNetwork.QNetworkRequest.UserVerifiedRedirectPolicy,
+    manual=Req.RedirectPolicy.ManualRedirectPolicy,
+    no_less_safe=Req.RedirectPolicy.NoLessSafeRedirectPolicy,
+    same_origin=Req.RedirectPolicy.SameOriginRedirectPolicy,
+    user_verified=Req.RedirectPolicy.UserVerifiedRedirectPolicy,
 )
 
 RedirectPolicyStr = Literal["manual", "no_less_safe", "same_origin", "user_verified"]
 
 CACHE_LOAD_CONTROL = bidict(
-    always_network=QtNetwork.QNetworkRequest.AlwaysNetwork,
-    prefer_network=QtNetwork.QNetworkRequest.PreferNetwork,
-    prefer_cache=QtNetwork.QNetworkRequest.PreferCache,
-    always_cache=QtNetwork.QNetworkRequest.AlwaysCache,
+    always_network=Req.CacheLoadControlAlwaysNetwork,
+    prefer_network=Req.CacheLoadControlPreferNetwork,
+    prefer_cache=Req.CacheLoadControlPreferCache,
+    always_cache=Req.CacheLoadControlAlwaysCache,
 )
 
 CacheLoadControlStr = Literal[

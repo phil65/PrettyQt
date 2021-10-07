@@ -8,17 +8,17 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 ECHO_MODE = bidict(
-    normal=QtWidgets.QLineEdit.Normal,
-    no_echo=QtWidgets.QLineEdit.NoEcho,
-    password=QtWidgets.QLineEdit.Password,
-    echo_on_edit=QtWidgets.QLineEdit.PasswordEchoOnEdit,
+    normal=QtWidgets.QLineEdit.EchoMode.Normal,
+    no_echo=QtWidgets.QLineEdit.EchoMode.NoEcho,
+    password=QtWidgets.QLineEdit.EchoMode.Password,
+    echo_on_edit=QtWidgets.QLineEdit.EchoMode.PasswordEchoOnEdit,
 )
 
 EchoModeStr = Literal["normal", "no_echo", "password", "echo_on_edit"]
 
 ACTION_POSITION = bidict(
-    leading=QtWidgets.QLineEdit.LeadingPosition,
-    trailing=QtWidgets.QLineEdit.TrailingPosition,
+    leading=QtWidgets.QLineEdit.ActionPosition.LeadingPosition,
+    trailing=QtWidgets.QLineEdit.ActionPosition.TrailingPosition,
 )
 
 ActionPositionStr = Literal["leading", "trailing"]

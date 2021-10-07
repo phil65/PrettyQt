@@ -7,12 +7,12 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 SPEC = bidict(
-    rgb=QtGui.QColor.Rgb,
-    hsv=QtGui.QColor.Hsv,
-    cmyk=QtGui.QColor.Cmyk,
-    hsl=QtGui.QColor.Hsl,
-    extended_rgb=QtGui.QColor.ExtendedRgb,
-    invalid=QtGui.QColor.Invalid,
+    rgb=QtGui.QColor.Spec.Rgb,
+    hsv=QtGui.QColor.Spec.Hsv,
+    cmyk=QtGui.QColor.Spec.Cmyk,
+    hsl=QtGui.QColor.Spec.Hsl,
+    extended_rgb=QtGui.QColor.Spec.ExtendedRgb,
+    invalid=QtGui.QColor.Spec.Invalid,
 )
 
 SpecStr = Literal["rgb", "hsv", "cmyk", "hsl", "extended_rgb", "invalid"]

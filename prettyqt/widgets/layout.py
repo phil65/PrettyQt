@@ -8,12 +8,12 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 SIZE_CONSTRAINT = bidict(
-    default=QtWidgets.QLayout.SetDefaultConstraint,
-    fixed=QtWidgets.QLayout.SetFixedSize,
-    minimum=QtWidgets.QLayout.SetMinimumSize,
-    maximum=QtWidgets.QLayout.SetMaximumSize,
-    min_and_max=QtWidgets.QLayout.SetMinAndMaxSize,
-    none=QtWidgets.QLayout.SetNoConstraint,
+    default=QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint,
+    fixed=QtWidgets.QLayout.SizeConstraint.SetFixedSize,
+    minimum=QtWidgets.QLayout.SizeConstraint.SetMinimumSize,
+    maximum=QtWidgets.QLayout.SizeConstraint.SetMaximumSize,
+    min_and_max=QtWidgets.QLayout.SizeConstraint.SetMinAndMaxSize,
+    none=QtWidgets.QLayout.SizeConstraint.SetNoConstraint,
 )
 
 SizeConstraintStr = Literal[

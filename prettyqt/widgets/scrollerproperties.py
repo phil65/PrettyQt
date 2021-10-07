@@ -6,47 +6,47 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-QScrollerProperties = QtWidgets.QScrollerProperties
+mod = QtWidgets.QScrollerProperties
 
 FRAME_RATES = bidict(
-    fps_60=QScrollerProperties.Fps60,
-    fps_30=QScrollerProperties.Fps30,
-    fps_20=QScrollerProperties.Fps20,
-    standard=QScrollerProperties.Standard,
+    fps_60=mod.FrameRates.Fps60,
+    fps_30=mod.FrameRates.Fps30,
+    fps_20=mod.FrameRates.Fps20,
+    standard=mod.FrameRates.Standard,
 )
 
 FrameRateStr = Literal["fps_60", "fps_30", "fps_20", "standard"]
 
 OVERSHOOT_POLICY = bidict(
-    when_scrollable=QScrollerProperties.OvershootWhenScrollable,
-    always_off=QScrollerProperties.OvershootAlwaysOff,
-    always_on=QScrollerProperties.OvershootAlwaysOn,
+    when_scrollable=mod.OvershootPolicy.OvershootWhenScrollable,
+    always_off=mod.OvershootPolicy.OvershootAlwaysOff,
+    always_on=mod.OvershootPolicy.OvershootAlwaysOn,
 )
 
 OvershootPolicyStr = Literal["when_scrollable", "always_off", "always_on"]
 
 SCROLL_METRIC = bidict(
-    mouse_press_event_delay=QScrollerProperties.MousePressEventDelay,
-    drag_start_distance=QScrollerProperties.DragStartDistance,
-    drag_velocity_smoothing_factor=QScrollerProperties.DragVelocitySmoothingFactor,
-    axis_lock_threshold=QScrollerProperties.AxisLockThreshold,
-    scrolling_curve=QScrollerProperties.ScrollingCurve,
-    deceleration_factor=QScrollerProperties.DecelerationFactor,
-    minimum_velocity=QScrollerProperties.MinimumVelocity,
-    maximum_velocity=QScrollerProperties.MaximumVelocity,
-    maximum_click_through_velocity=QScrollerProperties.MaximumClickThroughVelocity,
-    accelerating_flick_maximum_time=QScrollerProperties.AcceleratingFlickMaximumTime,
-    accelerating_flick_speedup_factor=QScrollerProperties.AcceleratingFlickSpeedupFactor,
-    snap_position_ratio=QScrollerProperties.SnapPositionRatio,
-    snap_time=QScrollerProperties.SnapTime,
-    overshoot_drag_resistance_factor=QScrollerProperties.OvershootDragResistanceFactor,
-    overshoot_drag_distance_factor=QScrollerProperties.OvershootDragDistanceFactor,
-    overshoot_scroll_distance_factor=QScrollerProperties.OvershootScrollDistanceFactor,
-    overshoot_scroll_time=QScrollerProperties.OvershootScrollTime,
-    horizontal_overshoot_policy=QScrollerProperties.HorizontalOvershootPolicy,
-    vertical_overshoot_policy=QScrollerProperties.VerticalOvershootPolicy,
-    frame_rate=QScrollerProperties.FrameRate,
-    scroll_metric_count=QScrollerProperties.ScrollMetricCount,
+    mouse_press_event_delay=mod.ScrollMetric.MousePressEventDelay,
+    drag_start_distance=mod.ScrollMetric.DragStartDistance,
+    drag_velocity_smoothing_factor=mod.ScrollMetric.DragVelocitySmoothingFactor,
+    axis_lock_threshold=mod.ScrollMetric.AxisLockThreshold,
+    scrolling_curve=mod.ScrollMetric.ScrollingCurve,
+    deceleration_factor=mod.ScrollMetric.DecelerationFactor,
+    minimum_velocity=mod.ScrollMetric.MinimumVelocity,
+    maximum_velocity=mod.ScrollMetric.MaximumVelocity,
+    maximum_click_through_velocity=mod.ScrollMetric.MaximumClickThroughVelocity,
+    accelerating_flick_maximum_time=mod.ScrollMetric.AcceleratingFlickMaximumTime,
+    accelerating_flick_speedup_factor=mod.ScrollMetric.AcceleratingFlickSpeedupFactor,
+    snap_position_ratio=mod.ScrollMetric.SnapPositionRatio,
+    snap_time=mod.ScrollMetric.SnapTime,
+    overshoot_drag_resistance_factor=mod.ScrollMetric.OvershootDragResistanceFactor,
+    overshoot_drag_distance_factor=mod.ScrollMetric.OvershootDragDistanceFactor,
+    overshoot_scroll_distance_factor=mod.ScrollMetric.OvershootScrollDistanceFactor,
+    overshoot_scroll_time=mod.ScrollMetric.OvershootScrollTime,
+    horizontal_overshoot_policy=mod.ScrollMetric.HorizontalOvershootPolicy,
+    vertical_overshoot_policy=mod.ScrollMetric.VerticalOvershootPolicy,
+    frame_rate=mod.ScrollMetric.FrameRate,
+    scroll_metric_count=mod.ScrollMetric.ScrollMetricCount,
 )
 
 ScrollmetricStr = Literal[

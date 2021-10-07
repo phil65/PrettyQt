@@ -11,10 +11,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 RUBBER_BAND = bidict(
-    none=QtCharts.QChartView.NoRubberBand,
-    vertical=QtCharts.QChartView.VerticalRubberBand,
-    horizontal=QtCharts.QChartView.HorizontalRubberBand,
-    rectangle=QtCharts.QChartView.RectangleRubberBand,
+    none=QtCharts.QChartView.RubberBand.NoRubberBand,
+    vertical=QtCharts.QChartView.RubberBand.VerticalRubberBand,
+    horizontal=QtCharts.QChartView.RubberBand.HorizontalRubberBand,
+    rectangle=QtCharts.QChartView.RubberBand.RectangleRubberBand,
 )
 
 RubberBandStr = Literal["none", "vertical", "horizontal", "rectangle"]

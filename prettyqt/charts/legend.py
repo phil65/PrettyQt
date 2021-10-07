@@ -8,10 +8,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 MARKER_SHAPES = bidict(
-    default=QtCharts.QLegend.MarkerShapeDefault,
-    rectangle=QtCharts.QLegend.MarkerShapeRectangle,
-    circle=QtCharts.QLegend.MarkerShapeCircle,
-    from_series=QtCharts.QLegend.MarkerShapeFromSeries,
+    default=QtCharts.QLegend.MarkerShape.MarkerShapeDefault,
+    rectangle=QtCharts.QLegend.MarkerShape.MarkerShapeRectangle,
+    circle=QtCharts.QLegend.MarkerShape.MarkerShapeCircle,
+    from_series=QtCharts.QLegend.MarkerShape.MarkerShapeFromSeries,
 )
 
 MarkerShapeStr = Literal["default", "rectangle", "circle", "from_series"]

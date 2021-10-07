@@ -8,12 +8,12 @@ from prettyqt.utils import bidict
 
 
 ATTRIBUTE = bidict(
-    direction=QtPositioning.QGeoPositionInfo.Direction,
-    ground_speed=QtPositioning.QGeoPositionInfo.GroundSpeed,
-    vertical_speed=QtPositioning.QGeoPositionInfo.VerticalSpeed,
-    magnetic_variation=QtPositioning.QGeoPositionInfo.MagneticVariation,
-    horizontal_accuracy=QtPositioning.QGeoPositionInfo.HorizontalAccuracy,
-    vertical_accuracy=QtPositioning.QGeoPositionInfo.VerticalAccuracy,
+    direction=QtPositioning.QGeoPositionInfo.Attribute.Direction,
+    ground_speed=QtPositioning.QGeoPositionInfo.Attribute.GroundSpeed,
+    vertical_speed=QtPositioning.QGeoPositionInfo.Attribute.VerticalSpeed,
+    magnetic_variation=QtPositioning.QGeoPositionInfo.Attribute.MagneticVariation,
+    horizontal_accuracy=QtPositioning.QGeoPositionInfo.Attribute.HorizontalAccuracy,
+    vertical_accuracy=QtPositioning.QGeoPositionInfo.Attribute.VerticalAccuracy,
 )
 
 AttributeStr = Literal[

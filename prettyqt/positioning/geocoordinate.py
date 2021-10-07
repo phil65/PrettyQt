@@ -4,21 +4,21 @@ from prettyqt.qt import QtPositioning
 from prettyqt.utils import bidict
 
 
-QGeoCoordinate = QtPositioning.QGeoCoordinate
+mod = QtPositioning.QGeoCoordinate
 
 COORDINATE_FORMATS = bidict(
-    default=QGeoCoordinate.Degrees,
-    with_hemisphere=QGeoCoordinate.DegreesWithHemisphere,
-    min=QGeoCoordinate.DegreesMinutes,
-    min_with_hemisphere=QGeoCoordinate.DegreesMinutesWithHemisphere,
-    min_sec=QGeoCoordinate.DegreesMinutesSeconds,
-    min_sec_with_hemisphere=QGeoCoordinate.DegreesMinutesSecondsWithHemisphere,
+    default=mod.CoordinateFormat.Degrees,
+    with_hemisphere=mod.CoordinateFormat.DegreesWithHemisphere,
+    min=mod.CoordinateFormat.DegreesMinutes,
+    min_with_hemisphere=mod.CoordinateFormat.DegreesMinutesWithHemisphere,
+    min_sec=mod.CoordinateFormat.DegreesMinutesSeconds,
+    min_sec_with_hemisphere=mod.CoordinateFormat.DegreesMinutesSecondsWithHemisphere,
 )
 
 COORDINATE_TYPES = bidict(
-    invalid=QtPositioning.QGeoCoordinate.InvalidCoordinate,
-    two_d=QtPositioning.QGeoCoordinate.Coordinate2D,
-    three_d=QtPositioning.QGeoCoordinate.Coordinate3D,
+    invalid=mod.CoordinateType.InvalidCoordinate,
+    two_d=mod.CoordinateType.Coordinate2D,
+    three_d=mod.CoordinateType.Coordinate3D,
 )
 
 

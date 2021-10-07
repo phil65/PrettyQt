@@ -7,10 +7,12 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, types
 
 
+mod = QtWidgets.QTreeWidgetItem
+
 CHILD_INDICATOR_POLICY = bidict(
-    show=QtWidgets.QTreeWidgetItem.ShowIndicator,
-    dont_show=QtWidgets.QTreeWidgetItem.DontShowIndicator,
-    dont_show_when_childless=QtWidgets.QTreeWidgetItem.DontShowIndicatorWhenChildless,
+    show=mod.ChildIndicatorPolicy.ShowIndicator,
+    dont_show=mod.ChildIndicatorPolicy.DontShowIndicator,
+    dont_show_when_childless=mod.ChildIndicatorPolicy.DontShowIndicatorWhenChildless,
 )
 
 ChildIndicatorPolicyStr = Literal["show", "dont_show", "dont_show_when_childless"]

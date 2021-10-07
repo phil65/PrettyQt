@@ -5,11 +5,11 @@ from prettyqt.utils import bidict
 
 
 SHAPE_TYPES = bidict(
-    unknown=QtPositioning.QGeoShape.UnknownType,
-    rectangle=QtPositioning.QGeoShape.RectangleType,
-    circle=QtPositioning.QGeoShape.CircleType,
-    path=QtPositioning.QGeoShape.PathType,
-    polygon=QtPositioning.QGeoShape.PolygonType,
+    unknown=QtPositioning.QGeoShape.ShapeType.UnknownType,
+    rectangle=QtPositioning.QGeoShape.ShapeType.RectangleType,
+    circle=QtPositioning.QGeoShape.ShapeType.CircleType,
+    path=QtPositioning.QGeoShape.ShapeType.PathType,
+    polygon=QtPositioning.QGeoShape.ShapeType.PolygonType,
 )
 
 

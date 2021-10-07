@@ -9,11 +9,11 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 CREATE_TEXTURE_OPTION = bidict(
-    has_alpha_channel=QtQuick.QQuickWindow.TextureHasAlphaChannel,
-    has_mipmaps=QtQuick.QQuickWindow.TextureHasMipmaps,
-    owns_gl_texture=QtQuick.QQuickWindow.TextureOwnsGLTexture,
-    can_use_atlas=QtQuick.QQuickWindow.TextureCanUseAtlas,
-    is_opaque=QtQuick.QQuickWindow.TextureIsOpaque,
+    has_alpha_channel=QtQuick.QQuickWindow.CreateTextureOption.TextureHasAlphaChannel,
+    has_mipmaps=QtQuick.QQuickWindow.CreateTextureOption.TextureHasMipmaps,
+    owns_gl_texture=QtQuick.QQuickWindow.CreateTextureOption.TextureOwnsGLTexture,
+    can_use_atlas=QtQuick.QQuickWindow.CreateTextureOption.TextureCanUseAtlas,
+    is_opaque=QtQuick.QQuickWindow.CreateTextureOption.TextureIsOpaque,
 )
 
 CreateTextureOptionStr = Literal[
@@ -25,12 +25,12 @@ CreateTextureOptionStr = Literal[
 ]
 
 RENDER_STAGE = bidict(
-    before_synchronizing=QtQuick.QQuickWindow.BeforeSynchronizingStage,
-    after_synchronizing=QtQuick.QQuickWindow.AfterSynchronizingStage,
-    before_rendering=QtQuick.QQuickWindow.BeforeRenderingStage,
-    after_rendering=QtQuick.QQuickWindow.AfterRenderingStage,
-    after_swap=QtQuick.QQuickWindow.AfterSwapStage,
-    no_stage=QtQuick.QQuickWindow.NoStage,
+    before_synchronizing=QtQuick.QQuickWindow.RenderStage.BeforeSynchronizingStage,
+    after_synchronizing=QtQuick.QQuickWindow.RenderStage.AfterSynchronizingStage,
+    before_rendering=QtQuick.QQuickWindow.RenderStage.BeforeRenderingStage,
+    after_rendering=QtQuick.QQuickWindow.RenderStage.AfterRenderingStage,
+    after_swap=QtQuick.QQuickWindow.RenderStage.AfterSwapStage,
+    no_stage=QtQuick.QQuickWindow.RenderStage.NoStage,
 )
 
 RenderStageStr = Literal[
@@ -43,8 +43,8 @@ RenderStageStr = Literal[
 ]
 
 TEXT_RENDER_TYPE = bidict(
-    qt_text=QtQuick.QQuickWindow.QtTextRendering,
-    native_text=QtQuick.QQuickWindow.NativeTextRendering,
+    qt_text=QtQuick.QQuickWindow.TextRenderType.QtTextRendering,
+    native_text=QtQuick.QQuickWindow.TextRenderType.NativeTextRendering,
 )
 
 TextRenderTypeStr = Literal["qt_text", "native_text"]

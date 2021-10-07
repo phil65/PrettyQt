@@ -7,16 +7,18 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
+mod = QtWidgets.QWizard
+
 WIZARD_BUTTON = bidict(
-    back=QtWidgets.QWizard.BackButton,
-    next=QtWidgets.QWizard.NextButton,
-    commit=QtWidgets.QWizard.CommitButton,
-    finish=QtWidgets.QWizard.FinishButton,
-    cancel=QtWidgets.QWizard.CancelButton,
-    help=QtWidgets.QWizard.HelpButton,
-    custom_1=QtWidgets.QWizard.CustomButton1,
-    custom_2=QtWidgets.QWizard.CustomButton2,
-    custom_3=QtWidgets.QWizard.CustomButton3,
+    back=mod.WizardButton.BackButton,
+    next=mod.WizardButton.NextButton,
+    commit=mod.WizardButton.CommitButton,
+    finish=mod.WizardButton.FinishButton,
+    cancel=mod.WizardButton.CancelButton,
+    help=mod.WizardButton.HelpButton,
+    custom_1=mod.WizardButton.CustomButton1,
+    custom_2=mod.WizardButton.CustomButton2,
+    custom_3=mod.WizardButton.CustomButton3,
 )
 
 WizardButtonStr = Literal[
@@ -32,23 +34,23 @@ WizardButtonStr = Literal[
 ]
 
 WIZARD_OPTIONS = bidict(
-    independent_pages=QtWidgets.QWizard.IndependentPages,
-    ignore_subtitles=QtWidgets.QWizard.IgnoreSubTitles,
-    extended_watermark_bitmap=QtWidgets.QWizard.ExtendedWatermarkPixmap,
-    no_default_button=QtWidgets.QWizard.NoDefaultButton,
-    no_back_button_on_start_page=QtWidgets.QWizard.NoBackButtonOnStartPage,
-    no_back_button_on_last_page=QtWidgets.QWizard.NoBackButtonOnLastPage,
-    disabled_back_button_on_last_page=QtWidgets.QWizard.DisabledBackButtonOnLastPage,
-    next_button_on_last_page=QtWidgets.QWizard.HaveNextButtonOnLastPage,
-    finish_button_on_early_pages=QtWidgets.QWizard.HaveFinishButtonOnEarlyPages,
-    no_cancel_button=QtWidgets.QWizard.NoCancelButton,
-    cancel_button_on_left=QtWidgets.QWizard.CancelButtonOnLeft,
-    help_button=QtWidgets.QWizard.HaveHelpButton,
-    help_button_on_right=QtWidgets.QWizard.HelpButtonOnRight,
-    custom_button_1=QtWidgets.QWizard.HaveCustomButton1,
-    custom_button_2=QtWidgets.QWizard.HaveCustomButton2,
-    custom_button_3=QtWidgets.QWizard.HaveCustomButton3,
-    no_cancel_button_on_last_page=QtWidgets.QWizard.NoCancelButtonOnLastPage,
+    independent_pages=mod.WizardOption.IndependentPages,
+    ignore_subtitles=mod.WizardOption.IgnoreSubTitles,
+    extended_watermark_bitmap=mod.WizardOption.ExtendedWatermarkPixmap,
+    no_default_button=mod.WizardOption.NoDefaultButton,
+    no_back_button_on_start_page=mod.WizardOption.NoBackButtonOnStartPage,
+    no_back_button_on_last_page=mod.WizardOption.NoBackButtonOnLastPage,
+    disabled_back_button_on_last_page=mod.WizardOption.DisabledBackButtonOnLastPage,
+    next_button_on_last_page=mod.WizardOption.HaveNextButtonOnLastPage,
+    finish_button_on_early_pages=mod.WizardOption.HaveFinishButtonOnEarlyPages,
+    no_cancel_button=mod.WizardOption.NoCancelButton,
+    cancel_button_on_left=mod.WizardOption.CancelButtonOnLeft,
+    help_button=mod.WizardOption.HaveHelpButton,
+    help_button_on_right=mod.WizardOption.HelpButtonOnRight,
+    custom_button_1=mod.WizardOption.HaveCustomButton1,
+    custom_button_2=mod.WizardOption.HaveCustomButton2,
+    custom_button_3=mod.WizardOption.HaveCustomButton3,
+    no_cancel_button_on_last_page=mod.WizardOption.NoCancelButtonOnLastPage,
 )
 
 WizardOptionStr = Literal[
@@ -72,29 +74,31 @@ WizardOptionStr = Literal[
 ]
 
 WIZARD_PIXMAP = bidict(
-    watermark=QtWidgets.QWizard.WatermarkPixmap,
-    logo=QtWidgets.QWizard.LogoPixmap,
-    banner=QtWidgets.QWizard.BannerPixmap,
-    background=QtWidgets.QWizard.BackgroundPixmap,
+    watermark=mod.WizardPixmap.WatermarkPixmap,
+    logo=mod.WizardPixmap.LogoPixmap,
+    banner=mod.WizardPixmap.BannerPixmap,
+    background=mod.WizardPixmap.BackgroundPixmap,
 )
 
 WizardPixmapStr = Literal["watermark", "logo", "banner", "background"]
 
 WIZARD_STYLE = bidict(
-    classic=QtWidgets.QWizard.ClassicStyle,
-    modern=QtWidgets.QWizard.ModernStyle,
-    mac=QtWidgets.QWizard.MacStyle,
-    aero=QtWidgets.QWizard.AeroStyle,
+    classic=mod.WizardStyle.ClassicStyle,
+    modern=mod.WizardStyle.ModernStyle,
+    mac=mod.WizardStyle.MacStyle,
+    aero=mod.WizardStyle.AeroStyle,
 )
 
 WizardStyleStr = Literal["classic", "modern", "mac", "aero"]
 
 TEXT_FORMATS = bidict(
-    rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
+    rich=QtCore.Qt.TextFormat.RichText,
+    plain=QtCore.Qt.TextFormat.PlainText,
+    auto=QtCore.Qt.TextFormat.AutoText,
 )
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    TEXT_FORMATS["markdown"] = QtCore.Qt.MarkdownText
+    TEXT_FORMATS["markdown"] = QtCore.Qt.TextFormat.MarkdownText
 
 QtWidgets.QWizard.__bases__ = (widgets.BaseDialog,)
 

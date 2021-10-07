@@ -8,11 +8,11 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 FLAGS = bidict(
-    clips_children_to_shape=QtQuick.QQuickItem.ItemClipsChildrenToShape,
-    accepts_input_method=QtQuick.QQuickItem.ItemAcceptsInputMethod,
-    is_focus_scope=QtQuick.QQuickItem.ItemIsFocusScope,
-    has_contents=QtQuick.QQuickItem.ItemHasContents,
-    accepts_drops=QtQuick.QQuickItem.ItemAcceptsDrops,
+    clips_children_to_shape=QtQuick.QQuickItem.Flag.ItemClipsChildrenToShape,
+    accepts_input_method=QtQuick.QQuickItem.Flag.ItemAcceptsInputMethod,
+    is_focus_scope=QtQuick.QQuickItem.Flag.ItemIsFocusScope,
+    has_contents=QtQuick.QQuickItem.Flag.ItemHasContents,
+    accepts_drops=QtQuick.QQuickItem.Flag.ItemAcceptsDrops,
 )
 
 FlagStr = Literal[
@@ -24,17 +24,17 @@ FlagStr = Literal[
 ]
 
 ITEM_CHANGE = bidict(
-    child_added_change=QtQuick.QQuickItem.ItemChildAddedChange,
-    child_removed_change=QtQuick.QQuickItem.ItemChildRemovedChange,
-    item_scene_change=QtQuick.QQuickItem.ItemSceneChange,
-    visible_has_changed=QtQuick.QQuickItem.ItemVisibleHasChanged,
-    parent_has_changed=QtQuick.QQuickItem.ItemParentHasChanged,
-    opacity_has_changed=QtQuick.QQuickItem.ItemOpacityHasChanged,
-    active_focus_has_changed=QtQuick.QQuickItem.ItemActiveFocusHasChanged,
-    rotation_has_changed=QtQuick.QQuickItem.ItemRotationHasChanged,
-    pixel_ratio_has_changed=QtQuick.QQuickItem.ItemDevicePixelRatioHasChanged,
-    anti_aliasing_has_changed=QtQuick.QQuickItem.ItemAntialiasingHasChanged,
-    enabled_has_changed=QtQuick.QQuickItem.ItemEnabledHasChanged,
+    child_added_change=QtQuick.QQuickItem.ItemChange.ItemChildAddedChange,
+    child_removed_change=QtQuick.QQuickItem.ItemChange.ItemChildRemovedChange,
+    item_scene_change=QtQuick.QQuickItem.ItemChange.ItemSceneChange,
+    visible_has_changed=QtQuick.QQuickItem.ItemChange.ItemVisibleHasChanged,
+    parent_has_changed=QtQuick.QQuickItem.ItemChange.ItemParentHasChanged,
+    opacity_has_changed=QtQuick.QQuickItem.ItemChange.ItemOpacityHasChanged,
+    active_focus_has_changed=QtQuick.QQuickItem.ItemChange.ItemActiveFocusHasChanged,
+    rotation_has_changed=QtQuick.QQuickItem.ItemChange.ItemRotationHasChanged,
+    pixel_ratio_has_changed=QtQuick.QQuickItem.ItemChange.ItemDevicePixelRatioHasChanged,
+    anti_aliasing_has_changed=QtQuick.QQuickItem.ItemChange.ItemAntialiasingHasChanged,
+    enabled_has_changed=QtQuick.QQuickItem.ItemChange.ItemEnabledHasChanged,
 )
 
 ItemChangeStr = Literal[
@@ -52,15 +52,15 @@ ItemChangeStr = Literal[
 ]
 
 TRANSFORM_ORIGIN = bidict(
-    top_left=QtQuick.QQuickItem.TopLeft,
-    top=QtQuick.QQuickItem.Top,
-    top_right=QtQuick.QQuickItem.TopRight,
-    left=QtQuick.QQuickItem.Left,
-    center=QtQuick.QQuickItem.Center,
-    right=QtQuick.QQuickItem.Right,
-    bottom_left=QtQuick.QQuickItem.BottomLeft,
-    bottom=QtQuick.QQuickItem.Bottom,
-    bottom_right=QtQuick.QQuickItem.BottomRight,
+    top_left=QtQuick.QQuickItem.TransformOrigin.TopLeft,
+    top=QtQuick.QQuickItem.TransformOrigin.Top,
+    top_right=QtQuick.QQuickItem.TransformOrigin.TopRight,
+    left=QtQuick.QQuickItem.TransformOrigin.Left,
+    center=QtQuick.QQuickItem.TransformOrigin.Center,
+    right=QtQuick.QQuickItem.TransformOrigin.Right,
+    bottom_left=QtQuick.QQuickItem.TransformOrigin.BottomLeft,
+    bottom=QtQuick.QQuickItem.TransformOrigin.Bottom,
+    bottom_right=QtQuick.QQuickItem.TransformOrigin.BottomRight,
 )
 
 TransformOriginStr = Literal[

@@ -6,18 +6,18 @@ from prettyqt.utils import bidict, types
 
 
 ACTIVATION_REASONS = bidict(
-    unknown=QtWidgets.QSystemTrayIcon.Unknown,
-    context=QtWidgets.QSystemTrayIcon.Context,
-    double_click=QtWidgets.QSystemTrayIcon.DoubleClick,
-    trigger=QtWidgets.QSystemTrayIcon.Trigger,
-    middle_click=QtWidgets.QSystemTrayIcon.MiddleClick,
+    unknown=QtWidgets.QSystemTrayIcon.ActivationReason.Unknown,
+    context=QtWidgets.QSystemTrayIcon.ActivationReason.Context,
+    double_click=QtWidgets.QSystemTrayIcon.ActivationReason.DoubleClick,
+    trigger=QtWidgets.QSystemTrayIcon.ActivationReason.Trigger,
+    middle_click=QtWidgets.QSystemTrayIcon.ActivationReason.MiddleClick,
 )
 
 MESSAGE_ICONS = bidict(
-    none=QtWidgets.QSystemTrayIcon.NoIcon,
-    information=QtWidgets.QSystemTrayIcon.Information,
-    warning=QtWidgets.QSystemTrayIcon.Warning,
-    critical=QtWidgets.QSystemTrayIcon.Critical,
+    none=QtWidgets.QSystemTrayIcon.MessageIcon.NoIcon,
+    information=QtWidgets.QSystemTrayIcon.MessageIcon.Information,
+    warning=QtWidgets.QSystemTrayIcon.MessageIcon.Warning,
+    critical=QtWidgets.QSystemTrayIcon.MessageIcon.Critical,
 )
 
 

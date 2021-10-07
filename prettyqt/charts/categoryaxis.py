@@ -8,8 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 LABELS_POSITIONS = bidict(
-    center=QtCharts.QCategoryAxis.AxisLabelsPositionCenter,
-    on_value=QtCharts.QCategoryAxis.AxisLabelsPositionOnValue,
+    center=QtCharts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionCenter,
+    on_value=QtCharts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionOnValue,
 )
 
 LabelsPositionStr = Literal["center", "on_value"]

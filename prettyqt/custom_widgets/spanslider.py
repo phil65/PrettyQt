@@ -29,9 +29,9 @@ from prettyqt.utils import colors, types
 # THE SOFTWARE.
 
 
-SLIDER_STYLE = widgets.Style.CC_Slider
-HANDLE_STYLE = widgets.Style.SC_SliderHandle
-GROOVE_STYLE = widgets.Style.SC_SliderGroove
+SLIDER_STYLE = widgets.Style.ComplexControl.CC_Slider
+HANDLE_STYLE = widgets.Style.SubControl.SC_SliderHandle
+GROOVE_STYLE = widgets.Style.SubControl.SC_SliderGroove
 
 
 MOVEMENT_MODE = ["no_crossing", "no_overlap", "free"]

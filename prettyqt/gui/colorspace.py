@@ -8,11 +8,11 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 NAMED_COLOR_SPACE = bidict(
-    srgb=QtGui.QColorSpace.SRgb,
-    srgb_linear=QtGui.QColorSpace.SRgbLinear,
-    adobe_rgb=QtGui.QColorSpace.AdobeRgb,
-    display_p3=QtGui.QColorSpace.DisplayP3,
-    pro_photo_rgb=QtGui.QColorSpace.ProPhotoRgb,
+    srgb=QtGui.QColorSpace.NamedColorSpace.SRgb,
+    srgb_linear=QtGui.QColorSpace.NamedColorSpace.SRgbLinear,
+    adobe_rgb=QtGui.QColorSpace.NamedColorSpace.AdobeRgb,
+    display_p3=QtGui.QColorSpace.NamedColorSpace.DisplayP3,
+    pro_photo_rgb=QtGui.QColorSpace.NamedColorSpace.ProPhotoRgb,
 )
 
 NamedColorSpaceStr = Literal[

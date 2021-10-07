@@ -10,22 +10,22 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 REMOVE_BEHAVIOUR = bidict(
-    left_tab=QtWidgets.QTabBar.SelectLeftTab,
-    right_tab=QtWidgets.QTabBar.SelectRightTab,
-    previous_tab=QtWidgets.QTabBar.SelectPreviousTab,
+    left_tab=QtWidgets.QTabBar.SelectionBehavior.SelectLeftTab,
+    right_tab=QtWidgets.QTabBar.SelectionBehavior.SelectRightTab,
+    previous_tab=QtWidgets.QTabBar.SelectionBehavior.SelectPreviousTab,
 )
 
 RemoveBehaviourStr = Literal["left_tab", "right_tab", "previous_tab"]
 
 SHAPE = bidict(
-    rounded_north=QtWidgets.QTabBar.RoundedNorth,
-    rounded_south=QtWidgets.QTabBar.RoundedSouth,
-    rounded_west=QtWidgets.QTabBar.RoundedWest,
-    rounded_east=QtWidgets.QTabBar.RoundedEast,
-    triangular_north=QtWidgets.QTabBar.TriangularNorth,
-    triangular_south=QtWidgets.QTabBar.TriangularSouth,
-    triangular_west=QtWidgets.QTabBar.TriangularWest,
-    triangular_east=QtWidgets.QTabBar.TriangularEast,
+    rounded_north=QtWidgets.QTabBar.Shape.RoundedNorth,
+    rounded_south=QtWidgets.QTabBar.Shape.RoundedSouth,
+    rounded_west=QtWidgets.QTabBar.Shape.RoundedWest,
+    rounded_east=QtWidgets.QTabBar.Shape.RoundedEast,
+    triangular_north=QtWidgets.QTabBar.Shape.TriangularNorth,
+    triangular_south=QtWidgets.QTabBar.Shape.TriangularSouth,
+    triangular_west=QtWidgets.QTabBar.Shape.TriangularWest,
+    triangular_east=QtWidgets.QTabBar.Shape.TriangularEast,
 )
 
 ShapeStr = Literal[
@@ -39,7 +39,10 @@ ShapeStr = Literal[
     "triangular_east",
 ]
 
-POSITIONS = bidict(left=QtWidgets.QTabBar.LeftSide, right=QtWidgets.QTabBar.RightSide)
+POSITIONS = bidict(
+    left=QtWidgets.QTabBar.ButtonPosition.LeftSide,
+    right=QtWidgets.QTabBar.ButtonPosition.RightSide,
+)
 
 PositionStr = Literal["left", "right"]
 

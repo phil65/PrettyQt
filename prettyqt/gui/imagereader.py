@@ -8,11 +8,11 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 IMAGE_READER_ERROR = bidict(
-    file_not_found=QtGui.QImageReader.FileNotFoundError,
-    device=QtGui.QImageReader.DeviceError,
-    unsupported_format=QtGui.QImageReader.UnsupportedFormatError,
-    invalid_data=QtGui.QImageReader.InvalidDataError,
-    unknown=QtGui.QImageReader.UnknownError,
+    file_not_found=QtGui.QImageReader.ImageReaderError.FileNotFoundError,
+    device=QtGui.QImageReader.ImageReaderError.DeviceError,
+    unsupported_format=QtGui.QImageReader.ImageReaderError.UnsupportedFormatError,
+    invalid_data=QtGui.QImageReader.ImageReaderError.InvalidDataError,
+    unknown=QtGui.QImageReader.ImageReaderError.UnknownError,
 )
 
 ImageReaderErrorStr = Literal[

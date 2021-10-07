@@ -6,10 +6,10 @@ from prettyqt.utils import bidict
 
 
 EXTENSIONS = bidict(
-    translation=QtQml.QJSEngine.TranslationExtension,
-    console=QtQml.QJSEngine.ConsoleExtension,
-    garbage_collection=QtQml.QJSEngine.GarbageCollectionExtension,
-    all=QtQml.QJSEngine.AllExtensions,
+    translation=QtQml.QJSEngine.Extension.TranslationExtension,
+    console=QtQml.QJSEngine.Extension.ConsoleExtension,
+    garbage_collection=QtQml.QJSEngine.Extension.GarbageCollectionExtension,
+    all=QtQml.QJSEngine.Extension.AllExtensions,
 )
 
 QtQml.QJSEngine.__bases__ = (core.Object,)

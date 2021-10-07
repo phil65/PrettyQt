@@ -8,10 +8,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 IMAGE_WRITER_ERROR = bidict(
-    device=QtGui.QImageWriter.DeviceError,
-    unsupported_format=QtGui.QImageWriter.UnsupportedFormatError,
-    invalid_image=QtGui.QImageWriter.InvalidImageError,
-    unknown=QtGui.QImageWriter.UnknownError,
+    device=QtGui.QImageWriter.ImageWriterError.DeviceError,
+    unsupported_format=QtGui.QImageWriter.ImageWriterError.UnsupportedFormatError,
+    invalid_image=QtGui.QImageWriter.ImageWriterError.InvalidImageError,
+    unknown=QtGui.QImageWriter.ImageWriterError.UnknownError,
 )
 
 ImageWriterErrorStr = Literal["device", "unsupported_format", "invalid_image", "unknown"]

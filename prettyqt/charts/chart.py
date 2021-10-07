@@ -9,14 +9,14 @@ from prettyqt.utils import InvalidParamError, bidict
 
 THEMES = bidict(
     {
-        "Light": QtCharts.QChart.ChartThemeLight,
-        "Blue Cerulean": QtCharts.QChart.ChartThemeBlueCerulean,
-        "Dark": QtCharts.QChart.ChartThemeDark,
-        "Brown Sand": QtCharts.QChart.ChartThemeBrownSand,
-        "Blue NCS": QtCharts.QChart.ChartThemeBlueNcs,
-        "High Contrast": QtCharts.QChart.ChartThemeHighContrast,
-        "Blue Icy": QtCharts.QChart.ChartThemeBlueIcy,
-        "Qt": QtCharts.QChart.ChartThemeQt,
+        "Light": QtCharts.QChart.ChartTheme.ChartThemeLight,
+        "Blue Cerulean": QtCharts.QChart.ChartTheme.ChartThemeBlueCerulean,
+        "Dark": QtCharts.QChart.ChartTheme.ChartThemeDark,
+        "Brown Sand": QtCharts.QChart.ChartTheme.ChartThemeBrownSand,
+        "Blue NCS": QtCharts.QChart.ChartTheme.ChartThemeBlueNcs,
+        "High Contrast": QtCharts.QChart.ChartTheme.ChartThemeHighContrast,
+        "Blue Icy": QtCharts.QChart.ChartTheme.ChartThemeBlueIcy,
+        "Qt": QtCharts.QChart.ChartTheme.ChartThemeQt,
     }
 )
 
@@ -32,18 +32,18 @@ ThemeStr = Literal[
 ]
 
 ANIMATION_OPTIONS = bidict(
-    none=QtCharts.QChart.NoAnimation,
-    grid_axis=QtCharts.QChart.GridAxisAnimations,
-    series=QtCharts.QChart.SeriesAnimations,
-    all=QtCharts.QChart.AllAnimations,
+    none=QtCharts.QChart.AnimationOption.NoAnimation,
+    grid_axis=QtCharts.QChart.AnimationOption.GridAxisAnimations,
+    series=QtCharts.QChart.AnimationOption.SeriesAnimations,
+    all=QtCharts.QChart.AnimationOption.AllAnimations,
 )
 
 AnimationOptionStr = Literal["none", "grid_axis", "series", "all"]
 
 CHART_TYPES = bidict(
-    undefined=QtCharts.QChart.ChartTypeUndefined,
-    cartesian=QtCharts.QChart.ChartTypeCartesian,
-    polar=QtCharts.QChart.ChartTypePolar,
+    undefined=QtCharts.QChart.ChartType.ChartTypeUndefined,
+    cartesian=QtCharts.QChart.ChartType.ChartTypeCartesian,
+    polar=QtCharts.QChart.ChartType.ChartTypePolar,
 )
 
 ChartTypeStr = Literal["undefined", "cartesian", "polar"]

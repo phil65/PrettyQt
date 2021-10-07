@@ -9,15 +9,15 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 SECTIONS = bidict(
-    none=QtWidgets.QDateTimeEdit.NoSection,
-    am_pm=QtWidgets.QDateTimeEdit.AmPmSection,
-    msec=QtWidgets.QDateTimeEdit.MSecSection,
-    second=QtWidgets.QDateTimeEdit.SecondSection,
-    minute=QtWidgets.QDateTimeEdit.MinuteSection,
-    hour=QtWidgets.QDateTimeEdit.HourSection,
-    day=QtWidgets.QDateTimeEdit.DaySection,
-    month=QtWidgets.QDateTimeEdit.MonthSection,
-    year=QtWidgets.QDateTimeEdit.YearSection,
+    none=QtWidgets.QDateTimeEdit.Section.NoSection,
+    am_pm=QtWidgets.QDateTimeEdit.Section.AmPmSection,
+    msec=QtWidgets.QDateTimeEdit.Section.MSecSection,
+    second=QtWidgets.QDateTimeEdit.Section.SecondSection,
+    minute=QtWidgets.QDateTimeEdit.Section.MinuteSection,
+    hour=QtWidgets.QDateTimeEdit.Section.HourSection,
+    day=QtWidgets.QDateTimeEdit.Section.DaySection,
+    month=QtWidgets.QDateTimeEdit.Section.MonthSection,
+    year=QtWidgets.QDateTimeEdit.Section.YearSection,
 )
 
 SectionsStr = Literal[

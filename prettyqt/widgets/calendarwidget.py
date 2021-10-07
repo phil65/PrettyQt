@@ -9,24 +9,24 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 SELECTION_MODE = bidict(
-    none=QtWidgets.QCalendarWidget.NoSelection,
-    single=QtWidgets.QCalendarWidget.SingleSelection,
+    none=QtWidgets.QCalendarWidget.SelectionMode.NoSelection,
+    single=QtWidgets.QCalendarWidget.SelectionMode.SingleSelection,
 )
 
 SelectionModeStr = Literal["none", "single"]
 
 VERTICAL_HEADER_FORMAT = bidict(
-    none=QtWidgets.QCalendarWidget.NoVerticalHeader,
-    week_numbers=QtWidgets.QCalendarWidget.ISOWeekNumbers,
+    none=QtWidgets.QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader,
+    week_numbers=QtWidgets.QCalendarWidget.VerticalHeaderFormat.ISOWeekNumbers,
 )
 
 VerticalHeaderFormatStr = Literal["none", "week_numbers"]
 
 HORIZONTAL_HEADER_FORMAT = bidict(
-    single_letter=QtWidgets.QCalendarWidget.SingleLetterDayNames,
-    short=QtWidgets.QCalendarWidget.ShortDayNames,
-    long=QtWidgets.QCalendarWidget.LongDayNames,
-    none=QtWidgets.QCalendarWidget.NoHorizontalHeader,
+    single_letter=QtWidgets.QCalendarWidget.HorizontalHeaderFormat.SingleLetterDayNames,
+    short=QtWidgets.QCalendarWidget.HorizontalHeaderFormat.ShortDayNames,
+    long=QtWidgets.QCalendarWidget.HorizontalHeaderFormat.LongDayNames,
+    none=QtWidgets.QCalendarWidget.HorizontalHeaderFormat.NoHorizontalHeader,
 )
 
 HorizontalHeaderFormatStr = Literal["single_letter", "short", "long", "none"]

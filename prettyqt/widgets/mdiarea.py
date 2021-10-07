@@ -8,24 +8,25 @@ from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
 VIEW_MODE = bidict(
-    default=QtWidgets.QMdiArea.SubWindowView, tabbed=QtWidgets.QMdiArea.TabbedView
+    default=QtWidgets.QMdiArea.ViewMode.SubWindowView,
+    tabbed=QtWidgets.QMdiArea.ViewMode.TabbedView,
 )
 
 ViewModeStr = Literal["default", "tabbed"]
 
 WINDOW_ORDER = bidict(
-    creation=QtWidgets.QMdiArea.CreationOrder,
-    stacking=QtWidgets.QMdiArea.StackingOrder,
-    activation_history=QtWidgets.QMdiArea.ActivationHistoryOrder,
+    creation=QtWidgets.QMdiArea.WindowOrder.CreationOrder,
+    stacking=QtWidgets.QMdiArea.WindowOrder.StackingOrder,
+    activation_history=QtWidgets.QMdiArea.WindowOrder.ActivationHistoryOrder,
 )
 
 WindowOrderStr = Literal["creation", "stacking", "activation_history"]
 
 TAB_POSITION = bidict(
-    north=QtWidgets.QTabWidget.North,
-    south=QtWidgets.QTabWidget.South,
-    west=QtWidgets.QTabWidget.West,
-    east=QtWidgets.QTabWidget.East,
+    north=QtWidgets.QTabWidget.TabPosition.North,
+    south=QtWidgets.QTabWidget.TabPosition.South,
+    west=QtWidgets.QTabWidget.TabPosition.West,
+    east=QtWidgets.QTabWidget.TabPosition.East,
 )
 
 TabPositionStr = Literal["north", "south", "west", "east"]

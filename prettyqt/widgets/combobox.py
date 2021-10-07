@@ -7,14 +7,16 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, types
 
 
+mod = QtWidgets.QComboBox
+
 INSERT_POLICY = bidict(
-    no_insert=QtWidgets.QComboBox.NoInsert,
-    top=QtWidgets.QComboBox.InsertAtTop,
-    current=QtWidgets.QComboBox.InsertAtCurrent,
-    bottom=QtWidgets.QComboBox.InsertAtBottom,
-    after_current=QtWidgets.QComboBox.InsertAfterCurrent,
-    before_current=QtWidgets.QComboBox.InsertBeforeCurrent,
-    alphabetically=QtWidgets.QComboBox.InsertAlphabetically,
+    no_insert=mod.InsertPolicy.NoInsert,
+    top=mod.InsertPolicy.InsertAtTop,
+    current=mod.InsertPolicy.InsertAtCurrent,
+    bottom=mod.InsertPolicy.InsertAtBottom,
+    after_current=mod.InsertPolicy.InsertAfterCurrent,
+    before_current=mod.InsertPolicy.InsertBeforeCurrent,
+    alphabetically=mod.InsertPolicy.InsertAlphabetically,
 )
 
 InsertPolicyStr = Literal[
@@ -28,10 +30,10 @@ InsertPolicyStr = Literal[
 ]
 
 SIZE_ADJUST_POLICY = bidict(
-    content=QtWidgets.QComboBox.AdjustToContents,
-    first_show=QtWidgets.QComboBox.AdjustToContentsOnFirstShow,
-    # min_length=QtWidgets.QComboBox.AdjustToMinimumContentsLength,
-    min_length_with_icon=QtWidgets.QComboBox.AdjustToMinimumContentsLengthWithIcon,
+    content=mod.SizeAdjustPolicy.AdjustToContents,
+    first_show=mod.SizeAdjustPolicy.AdjustToContentsOnFirstShow,
+    # min_length=mod.SizeAdjustPolicy.AdjustToMinimumContentsLength,
+    min_length_with_icon=mod.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon,
 )
 
 SizeAdjustPolicyStr = Literal[

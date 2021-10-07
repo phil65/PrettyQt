@@ -8,10 +8,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 LABELS_POSITIONS = bidict(
-    center=QtCharts.QAbstractBarSeries.LabelsCenter,
-    inside_end=QtCharts.QAbstractBarSeries.LabelsInsideEnd,
-    inside_base=QtCharts.QAbstractBarSeries.LabelsInsideBase,
-    outside_end=QtCharts.QAbstractBarSeries.LabelsOutsideEnd,
+    center=QtCharts.QAbstractBarSeries.LabelsPosition.LabelsCenter,
+    inside_end=QtCharts.QAbstractBarSeries.LabelsPosition.LabelsInsideEnd,
+    inside_base=QtCharts.QAbstractBarSeries.LabelsPosition.LabelsInsideBase,
+    outside_end=QtCharts.QAbstractBarSeries.LabelsPosition.LabelsOutsideEnd,
 )
 
 LabelsPositionStr = Literal["center", "inside_end", "inside_base", "outside_end"]

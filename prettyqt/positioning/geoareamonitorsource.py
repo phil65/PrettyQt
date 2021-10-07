@@ -10,18 +10,20 @@ from prettyqt.utils import bidict
 QtPositioning.QGeoAreaMonitorSource.__bases__ = (core.Object,)
 
 
+mod = QtPositioning.QGeoAreaMonitorSource
+
 ERRORS = bidict(
-    access_error=QtPositioning.QGeoAreaMonitorSource.AccessError,
-    insufficient_pos_info=QtPositioning.QGeoAreaMonitorSource.InsufficientPositionInfo,
-    none=QtPositioning.QGeoAreaMonitorSource.NoError,
-    unknown_source=QtPositioning.QGeoAreaMonitorSource.UnknownSourceError,
+    access_error=mod.Error.AccessError,
+    insufficient_pos_info=mod.Error.InsufficientPositionInfo,
+    none=mod.Error.NoError,
+    unknown_source=mod.Error.UnknownSourceError,
 )
 
 ErrorStr = Literal["access_error", "insufficient_pos_info", "none", "unknown_source"]
 
 AREA_MONITOR_FEATURES = bidict(
-    persistent_area=QtPositioning.QGeoAreaMonitorSource.PersistentAreaMonitorFeature,
-    any_area=QtPositioning.QGeoAreaMonitorSource.AnyAreaMonitorFeature,
+    persistent_area=mod.AreaMonitorFeature.PersistentAreaMonitorFeature,
+    any_area=mod.AreaMonitorFeature.AnyAreaMonitorFeature,
 )
 
 AreaMonitorFeatureStr = Literal["persistent_area", "any_area"]

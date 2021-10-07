@@ -8,17 +8,17 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 COMPLETION_MODE = bidict(
-    popup=QtWidgets.QCompleter.PopupCompletion,
-    inline=QtWidgets.QCompleter.InlineCompletion,
-    unfiltered_popup=QtWidgets.QCompleter.UnfilteredPopupCompletion,
+    popup=QtWidgets.QCompleter.CompletionMode.PopupCompletion,
+    inline=QtWidgets.QCompleter.CompletionMode.InlineCompletion,
+    unfiltered_popup=QtWidgets.QCompleter.CompletionMode.UnfilteredPopupCompletion,
 )
 
 CompletionModeStr = Literal["popup", "inline", "unfiltered_popup"]
 
 SORT_MODE = bidict(
-    unsorted=QtWidgets.QCompleter.UnsortedModel,
-    case_sensitive=QtWidgets.QCompleter.CaseSensitivelySortedModel,
-    case_insensitive=QtWidgets.QCompleter.CaseInsensitivelySortedModel,
+    unsorted=QtWidgets.QCompleter.ModelSorting.UnsortedModel,
+    case_sensitive=QtWidgets.QCompleter.ModelSorting.CaseSensitivelySortedModel,
+    case_insensitive=QtWidgets.QCompleter.ModelSorting.CaseInsensitivelySortedModel,
 )
 
 SortModeStr = Literal["unsorted", "case_sensitive", "case_insensitive"]

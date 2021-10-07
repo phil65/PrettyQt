@@ -9,19 +9,19 @@ from prettyqt.utils import InvalidParamError, bidict, colors, mappers, types
 
 
 AUTO_FORMATTING = mappers.FlagMap(
-    QtWidgets.QTextEdit.AutoFormatting,
-    none=QtWidgets.QTextEdit.AutoNone,
-    bullet_list=QtWidgets.QTextEdit.AutoBulletList,
-    all=QtWidgets.QTextEdit.AutoAll,
+    QtWidgets.QTextEdit.AutoFormattingFlag,
+    none=QtWidgets.QTextEdit.AutoFormattingFlag.AutoNone,
+    bullet_list=QtWidgets.QTextEdit.AutoFormattingFlag.AutoBulletList,
+    all=QtWidgets.QTextEdit.AutoFormattingFlag.AutoAll,
 )
 
 AutoFormattingStr = Literal["none", "bullet_list", "all"]
 
 LINE_WRAP_MODE = bidict(
-    none=QtWidgets.QTextEdit.NoWrap,
-    widget_width=QtWidgets.QTextEdit.WidgetWidth,
-    fixed_pixel_width=QtWidgets.QTextEdit.FixedPixelWidth,
-    fixed_column_width=QtWidgets.QTextEdit.FixedColumnWidth,
+    none=QtWidgets.QTextEdit.LineWrapMode.NoWrap,
+    widget_width=QtWidgets.QTextEdit.LineWrapMode.WidgetWidth,
+    fixed_pixel_width=QtWidgets.QTextEdit.LineWrapMode.FixedPixelWidth,
+    fixed_column_width=QtWidgets.QTextEdit.LineWrapMode.FixedColumnWidth,
 )
 
 LineWrapModeStr = Literal[

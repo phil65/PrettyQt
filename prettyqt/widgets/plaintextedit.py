@@ -11,8 +11,8 @@ from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
 LINE_WRAP_MODE = bidict(
-    none=QtWidgets.QPlainTextEdit.NoWrap,
-    widget_width=QtWidgets.QPlainTextEdit.WidgetWidth,
+    none=QtWidgets.QPlainTextEdit.LineWrapMode.NoWrap,
+    widget_width=QtWidgets.QPlainTextEdit.LineWrapMode.WidgetWidth,
 )
 
 LineWrapModeStr = Literal["none", "widget_width"]

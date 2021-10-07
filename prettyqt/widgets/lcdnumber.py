@@ -8,18 +8,18 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 MODE = bidict(
-    hex=QtWidgets.QLCDNumber.Hex,
-    decimal=QtWidgets.QLCDNumber.Dec,
-    octal=QtWidgets.QLCDNumber.Oct,
-    binary=QtWidgets.QLCDNumber.Bin,
+    hex=QtWidgets.QLCDNumber.Mode.Hex,
+    decimal=QtWidgets.QLCDNumber.Mode.Dec,
+    octal=QtWidgets.QLCDNumber.Mode.Oct,
+    binary=QtWidgets.QLCDNumber.Mode.Bin,
 )
 
 ModeStr = Literal["hex", "decimal", "octal", "binary"]
 
 SEGMENT_STYLE = bidict(
-    outline=QtWidgets.QLCDNumber.Outline,
-    filled=QtWidgets.QLCDNumber.Filled,
-    flat=QtWidgets.QLCDNumber.Flat,
+    outline=QtWidgets.QLCDNumber.SegmentStyle.Outline,
+    filled=QtWidgets.QLCDNumber.SegmentStyle.Filled,
+    flat=QtWidgets.QLCDNumber.SegmentStyle.Flat,
 )
 
 SegmentStyleStr = Literal["outline", "filled", "flat"]

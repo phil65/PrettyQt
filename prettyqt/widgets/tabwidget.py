@@ -8,16 +8,17 @@ from prettyqt.utils import InvalidParamError, bidict, types
 
 
 TAB_SHAPES = bidict(
-    rounded=QtWidgets.QTabWidget.Rounded, triangular=QtWidgets.QTabWidget.Triangular
+    rounded=QtWidgets.QTabWidget.TabShape.Rounded,
+    triangular=QtWidgets.QTabWidget.TabShape.Triangular,
 )
 
 TabShapeStr = Literal["rounded", "triangular"]
 
 TAB_POSITION = bidict(
-    north=QtWidgets.QTabWidget.North,
-    south=QtWidgets.QTabWidget.South,
-    west=QtWidgets.QTabWidget.West,
-    east=QtWidgets.QTabWidget.East,
+    north=QtWidgets.QTabWidget.TabPosition.North,
+    south=QtWidgets.QTabWidget.TabPosition.South,
+    west=QtWidgets.QTabWidget.TabPosition.West,
+    east=QtWidgets.QTabWidget.TabPosition.East,
 )
 
 TabPositionStr = Literal["north", "south", "west", "east"]

@@ -4,16 +4,18 @@ from prettyqt.qt import QtQml
 from prettyqt.utils import bidict
 
 
+mod = QtQml.QQmlImageProviderBase
+
 FLAGS = bidict(
-    force_async_image_loading=QtQml.QQmlImageProviderBase.ForceAsynchronousImageLoading,
+    force_async_image_loading=mod.Flag.ForceAsynchronousImageLoading,
 )
 
 
 IMAGE_TYPE = bidict(
-    image=QtQml.QQmlImageProviderBase.Image,
-    pixmap=QtQml.QQmlImageProviderBase.Pixmap,
-    texture=QtQml.QQmlImageProviderBase.Texture,
-    image_response=QtQml.QQmlImageProviderBase.ImageResponse,
+    image=mod.ImageType.Image,
+    pixmap=mod.ImageType.Pixmap,
+    texture=mod.ImageType.Texture,
+    image_response=mod.ImageType.ImageResponse,
 )
 
 

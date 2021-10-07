@@ -8,7 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 TICK_TYPES = bidict(
-    dynamic=QtCharts.QValueAxis.TicksDynamic, fixed=QtCharts.QValueAxis.TicksFixed
+    dynamic=QtCharts.QValueAxis.TickType.TicksDynamic,
+    fixed=QtCharts.QValueAxis.TickType.TicksFixed,
 )
 
 TickTypeStr = Literal["dynamic", "fixed"]

@@ -10,8 +10,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 OBJECT_OWNERSHIP = bidict(
-    cpp=QtQml.QQmlEngine.CppOwnership,
-    javascript=QtQml.QQmlEngine.JavaScriptOwnership,
+    cpp=QtQml.QQmlEngine.ObjectOwnership.CppOwnership,
+    javascript=QtQml.QQmlEngine.ObjectOwnership.JavaScriptOwnership,
 )
 
 ObjectOwnershipStr = Literal["cpp", "javascript"]

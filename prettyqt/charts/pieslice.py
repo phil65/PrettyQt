@@ -8,10 +8,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 LABEL_POSITION = bidict(
-    outside=QtCharts.QPieSlice.LabelOutside,
-    inside_horizontal=QtCharts.QPieSlice.LabelInsideHorizontal,
-    inside_tangential=QtCharts.QPieSlice.LabelInsideTangential,
-    inside_normal=QtCharts.QPieSlice.LabelInsideNormal,
+    outside=QtCharts.QPieSlice.LabelPosition.LabelOutside,
+    inside_horizontal=QtCharts.QPieSlice.LabelPosition.LabelInsideHorizontal,
+    inside_tangential=QtCharts.QPieSlice.LabelPosition.LabelInsideTangential,
+    inside_normal=QtCharts.QPieSlice.LabelPosition.LabelInsideNormal,
 )
 
 LabelPositionStr = Literal[

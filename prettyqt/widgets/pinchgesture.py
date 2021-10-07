@@ -8,9 +8,9 @@ from prettyqt.utils import bidict
 
 
 CHANGE_FLAGS = bidict(
-    scale_factor=QtWidgets.QPinchGesture.ScaleFactorChanged,
-    rotation_angle=QtWidgets.QPinchGesture.RotationAngleChanged,
-    center_point=QtWidgets.QPinchGesture.CenterPointChanged,
+    scale_factor=QtWidgets.QPinchGesture.ChangeFlag.ScaleFactorChanged,
+    rotation_angle=QtWidgets.QPinchGesture.ChangeFlag.RotationAngleChanged,
+    center_point=QtWidgets.QPinchGesture.ChangeFlag.CenterPointChanged,
 )
 
 ChangeFlagStr = Literal["scale_factor", "rotation_angle", "center_point"]

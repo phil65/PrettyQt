@@ -9,21 +9,21 @@ from prettyqt.utils import InvalidParamError, bidict, helpers, prettyprinter, ty
 
 
 PRIORITIES = bidict(
-    low=QtWidgets.QAction.LowPriority,
-    normal=QtWidgets.QAction.NormalPriority,
-    high=QtWidgets.QAction.HighPriority,
+    low=QtWidgets.QAction.Priority.LowPriority,
+    normal=QtWidgets.QAction.Priority.NormalPriority,
+    high=QtWidgets.QAction.Priority.HighPriority,
 )
 
 PriorityStr = Literal["low", "normal", "high"]
 
 ROLES = bidict(
-    none=QtWidgets.QAction.NoRole,
-    text_heuristic=QtWidgets.QAction.TextHeuristicRole,
-    application_specific=QtWidgets.QAction.ApplicationSpecificRole,
-    about_qt=QtWidgets.QAction.AboutQtRole,
-    about=QtWidgets.QAction.AboutRole,
-    preferences=QtWidgets.QAction.PreferencesRole,
-    quit=QtWidgets.QAction.QuitRole,
+    none=QtWidgets.QAction.MenuRole.NoRole,
+    text_heuristic=QtWidgets.QAction.MenuRole.TextHeuristicRole,
+    application_specific=QtWidgets.QAction.MenuRole.ApplicationSpecificRole,
+    about_qt=QtWidgets.QAction.MenuRole.AboutQtRole,
+    about=QtWidgets.QAction.MenuRole.AboutRole,
+    preferences=QtWidgets.QAction.MenuRole.PreferencesRole,
+    quit=QtWidgets.QAction.MenuRole.QuitRole,
 )
 
 RoleStr = Literal[

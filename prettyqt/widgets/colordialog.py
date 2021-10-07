@@ -8,9 +8,9 @@ from prettyqt.utils import colors, types
 
 
 OPTIONS = dict(
-    show_alpha=QtWidgets.QColorDialog.ShowAlphaChannel,
-    no_buttons=QtWidgets.QColorDialog.NoButtons,
-    no_native=QtWidgets.QColorDialog.DontUseNativeDialog,
+    show_alpha=QtWidgets.QColorDialog.ColorDialogOption.ShowAlphaChannel,
+    no_buttons=QtWidgets.QColorDialog.ColorDialogOption.NoButtons,
+    no_native=QtWidgets.QColorDialog.ColorDialogOption.DontUseNativeDialog,
 )
 
 OptionStr = Literal["show_alpha", "no_buttons", "no_native"]

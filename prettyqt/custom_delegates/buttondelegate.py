@@ -5,7 +5,9 @@ from prettyqt.qt import QtCore, QtWidgets
 
 
 class ButtonDelegate(widgets.ItemDelegate):
-    def __init__(self, parent: QtWidgets.QWidget | None, role=QtCore.Qt.UserRole):
+    def __init__(
+        self, parent: QtWidgets.QWidget | None, role=QtCore.Qt.ItemDataRole.UserRole
+    ):
         super().__init__(parent)
         self.fn_role = role
 

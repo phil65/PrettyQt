@@ -10,12 +10,12 @@ from prettyqt.utils import bidict
 logger = logging.getLogger()
 
 ERROR_TYPES = bidict(
-    generic=QtQml.QJSValue.GenericError,
-    range=QtQml.QJSValue.RangeError,
-    reference=QtQml.QJSValue.ReferenceError,
-    syntax=QtQml.QJSValue.SyntaxError,
-    type=QtQml.QJSValue.TypeError,
-    uri=QtQml.QJSValue.URIError,
+    generic=QtQml.QJSValue.ErrorType.GenericError,
+    range=QtQml.QJSValue.ErrorType.RangeError,
+    reference=QtQml.QJSValue.ErrorType.ReferenceError,
+    syntax=QtQml.QJSValue.ErrorType.SyntaxError,
+    type=QtQml.QJSValue.ErrorType.TypeError,
+    uri=QtQml.QJSValue.ErrorType.URIError,
 )
 
 

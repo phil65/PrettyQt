@@ -8,10 +8,10 @@ from prettyqt.utils import bidict
 
 
 ERROR = bidict(
-    access_error=QtPositioning.QGeoSatelliteInfoSource.AccessError,
-    closed_error=QtPositioning.QGeoSatelliteInfoSource.ClosedError,
-    none=QtPositioning.QGeoSatelliteInfoSource.NoError,
-    unknown_source=QtPositioning.QGeoSatelliteInfoSource.UnknownSourceError,
+    access_error=QtPositioning.QGeoSatelliteInfoSource.Error.AccessError,
+    closed_error=QtPositioning.QGeoSatelliteInfoSource.Error.ClosedError,
+    none=QtPositioning.QGeoSatelliteInfoSource.Error.NoError,
+    unknown_source=QtPositioning.QGeoSatelliteInfoSource.Error.UnknownSourceError,
 )
 
 ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]

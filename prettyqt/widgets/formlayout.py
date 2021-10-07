@@ -7,26 +7,28 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
+mod = QtWidgets.QFormLayout
+
 ROLE = bidict(
-    left=QtWidgets.QFormLayout.LabelRole,
-    right=QtWidgets.QFormLayout.FieldRole,
-    both=QtWidgets.QFormLayout.SpanningRole,
+    left=mod.ItemRole.LabelRole,
+    right=mod.ItemRole.FieldRole,
+    both=mod.ItemRole.SpanningRole,
 )
 
 RoleStr = Literal["left", "right", "both"]
 
 ROW_WRAP_POLICY = bidict(
-    dont_wrap=QtWidgets.QFormLayout.DontWrapRows,
-    wrap_long=QtWidgets.QFormLayout.WrapLongRows,
-    wrap_all=QtWidgets.QFormLayout.WrapAllRows,
+    dont_wrap=mod.RowWrapPolicy.DontWrapRows,
+    wrap_long=mod.RowWrapPolicy.WrapLongRows,
+    wrap_all=mod.RowWrapPolicy.WrapAllRows,
 )
 
 RowWrapPolicyStr = Literal["dont_wrap", "wrap_long", "wrap_all"]
 
 FIELD_GROWTH_POLICY = bidict(
-    fields_stay_at_size=QtWidgets.QFormLayout.FieldsStayAtSizeHint,
-    expanding_fields_grow=QtWidgets.QFormLayout.ExpandingFieldsGrow,
-    all_non_fixed_fields_grow=QtWidgets.QFormLayout.AllNonFixedFieldsGrow,
+    fields_stay_at_size=mod.FieldGrowthPolicy.FieldsStayAtSizeHint,
+    expanding_fields_grow=mod.FieldGrowthPolicy.ExpandingFieldsGrow,
+    all_non_fixed_fields_grow=mod.FieldGrowthPolicy.AllNonFixedFieldsGrow,
 )
 
 FieldGrowthPolicyStr = Literal[

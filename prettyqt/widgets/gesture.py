@@ -8,8 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 GESTURE_CANCEL_POLICY = bidict(
-    none=QtWidgets.QGesture.CancelNone,
-    all_in_context=QtWidgets.QGesture.CancelAllInContext,
+    none=QtWidgets.QGesture.GestureCancelPolicy.CancelNone,
+    all_in_context=QtWidgets.QGesture.GestureCancelPolicy.CancelAllInContext,
 )
 
 GestureCancelPolicyStr = Literal["none", "all_in_context"]

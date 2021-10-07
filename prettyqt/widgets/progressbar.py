@@ -8,8 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 TEXT_DIRECTIONS = bidict(
-    top_to_bottom=QtWidgets.QProgressBar.TopToBottom,
-    bottom_to_top=QtWidgets.QProgressBar.BottomToTop,
+    top_to_bottom=QtWidgets.QProgressBar.Direction.TopToBottom,
+    bottom_to_top=QtWidgets.QProgressBar.Direction.BottomToTop,
 )
 
 TextDirectionStr = Literal["top_to_bottom", "bottom_to_top"]

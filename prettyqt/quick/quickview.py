@@ -10,17 +10,17 @@ from prettyqt.utils import bidict
 
 
 RESIZE_MODES = bidict(
-    view_to_root_object=QtQuick.QQuickView.SizeViewToRootObject,
-    root_object_to_view=QtQuick.QQuickView.SizeRootObjectToView,
+    view_to_root_object=QtQuick.QQuickView.ResizeMode.SizeViewToRootObject,
+    root_object_to_view=QtQuick.QQuickView.ResizeMode.SizeRootObjectToView,
 )
 
 ResizeModeStr = Literal["view_to_root_object", "root_object_to_view"]
 
 STATUS = bidict(
-    null=QtQuick.QQuickView.Null,
-    ready=QtQuick.QQuickView.Ready,
-    loading=QtQuick.QQuickView.Loading,
-    error=QtQuick.QQuickView.Error,
+    null=QtQuick.QQuickView.Status.Null,
+    ready=QtQuick.QQuickView.Status.Ready,
+    loading=QtQuick.QQuickView.Status.Loading,
+    error=QtQuick.QQuickView.Status.Error,
 )
 
 StatusStr = Literal["null", "ready", "loading", "error"]

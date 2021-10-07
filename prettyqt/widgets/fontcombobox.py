@@ -8,11 +8,11 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 FONT_FILTERS = bidict(
-    all=QtWidgets.QFontComboBox.AllFonts,
-    scalable=QtWidgets.QFontComboBox.ScalableFonts,
-    non_scalable=QtWidgets.QFontComboBox.NonScalableFonts,
-    monospaced=QtWidgets.QFontComboBox.MonospacedFonts,
-    proportional=QtWidgets.QFontComboBox.ProportionalFonts,
+    all=QtWidgets.QFontComboBox.FontFilter.AllFonts,
+    scalable=QtWidgets.QFontComboBox.FontFilter.ScalableFonts,
+    non_scalable=QtWidgets.QFontComboBox.FontFilter.NonScalableFonts,
+    monospaced=QtWidgets.QFontComboBox.FontFilter.MonospacedFonts,
+    proportional=QtWidgets.QFontComboBox.FontFilter.ProportionalFonts,
 )
 
 FontFilterStr = Literal["all", "scalable", "non_scalable", "monospaced", "proportional"]

@@ -8,9 +8,9 @@ from prettyqt.utils import InvalidParamError, bidict, types
 
 
 POPUP_MODE = bidict(
-    delayed=QtWidgets.QToolButton.DelayedPopup,
-    menu_button=QtWidgets.QToolButton.MenuButtonPopup,
-    instant=QtWidgets.QToolButton.InstantPopup,
+    delayed=QtWidgets.QToolButton.ToolButtonPopupMode.DelayedPopup,
+    menu_button=QtWidgets.QToolButton.ToolButtonPopupMode.MenuButtonPopup,
+    instant=QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup,
 )
 
 PopupModeStr = Literal["delayed", "menu_button", "instant"]

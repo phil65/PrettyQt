@@ -9,14 +9,14 @@ from prettyqt.utils import InvalidParamError, bidict, colors, helpers, types
 
 
 TEXT_INTERACTION = bidict(
-    none=QtCore.Qt.NoTextInteraction,
-    by_mouse=QtCore.Qt.TextSelectableByMouse,
-    by_keyboard=QtCore.Qt.TextSelectableByKeyboard,
-    accessible_by_mouse=QtCore.Qt.LinksAccessibleByMouse,
-    accessible_by_keyboard=QtCore.Qt.LinksAccessibleByKeyboard,
-    text_editable=QtCore.Qt.TextEditable,
-    like_text_editor=QtCore.Qt.TextEditorInteraction,
-    like_text_browser=QtCore.Qt.TextBrowserInteraction,
+    none=QtCore.Qt.TextInteractionFlag.NoTextInteraction,
+    by_mouse=QtCore.Qt.TextInteractionFlag.TextSelectableByMouse,
+    by_keyboard=QtCore.Qt.TextInteractionFlag.TextSelectableByKeyboard,
+    accessible_by_mouse=QtCore.Qt.TextInteractionFlag.LinksAccessibleByMouse,
+    accessible_by_keyboard=QtCore.Qt.TextInteractionFlag.LinksAccessibleByKeyboard,
+    text_editable=QtCore.Qt.TextInteractionFlag.TextEditable,
+    like_text_editor=QtCore.Qt.TextInteractionFlag.TextEditorInteraction,
+    like_text_browser=QtCore.Qt.TextInteractionFlag.TextBrowserInteraction,
 )
 
 TextInteractionStr = Literal[
@@ -31,11 +31,13 @@ TextInteractionStr = Literal[
 ]
 
 TEXT_FORMAT = bidict(
-    rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
+    rich=QtCore.Qt.TextFormat.RichText,
+    plain=QtCore.Qt.TextFormat.PlainText,
+    auto=QtCore.Qt.TextFormat.AutoText,
 )
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    TEXT_FORMAT["markdown"] = QtCore.Qt.MarkdownText
+    TEXT_FORMAT["markdown"] = QtCore.Qt.TextFormat.MarkdownText
 
 TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 

@@ -8,8 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 POLAR_ORIENTATIONS = bidict(
-    radial=QtCharts.QPolarChart.PolarOrientationRadial,
-    angular=QtCharts.QPolarChart.PolarOrientationAngular,
+    radial=QtCharts.QPolarChart.PolarOrientation.PolarOrientationRadial,
+    angular=QtCharts.QPolarChart.PolarOrientation.PolarOrientationAngular,
 )
 
 PolarOrientationStr = Literal["radial", "angular"]

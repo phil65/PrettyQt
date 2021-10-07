@@ -38,7 +38,7 @@ class TransposeProxyModel(core.AbstractProxyModel):
             parent = core.ModelIndex()
         return self._source_model.rowCount(parent)
 
-    def data(self, index: core.ModelIndex, role=QtCore.Qt.DisplayRole):
+    def data(self, index: core.ModelIndex, role=QtCore.Qt.ItemDataRole.DisplayRole):
         if not index.isValid():
             return False
         return self._source_model.data(self.mapFromSource(index), role)

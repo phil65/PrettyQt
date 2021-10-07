@@ -12,10 +12,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 MODES = bidict(
-    interactive=QtWidgets.QHeaderView.Interactive,
-    fixed=QtWidgets.QHeaderView.Fixed,
-    stretch=QtWidgets.QHeaderView.Stretch,
-    resize_to_contents=QtWidgets.QHeaderView.ResizeToContents,
+    interactive=QtWidgets.QHeaderView.ResizeMode.Interactive,
+    fixed=QtWidgets.QHeaderView.ResizeMode.Fixed,
+    stretch=QtWidgets.QHeaderView.ResizeMode.Stretch,
+    resize_to_contents=QtWidgets.QHeaderView.ResizeMode.ResizeToContents,
 )
 
 ModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]

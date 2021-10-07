@@ -7,8 +7,8 @@ from prettyqt.utils import bidict
 
 
 RAW_FORMS = bidict(
-    name_and_value_only=QtNetwork.QNetworkCookie.NameAndValueOnly,
-    full=QtNetwork.QNetworkCookie.Full,
+    name_and_value_only=QtNetwork.QNetworkCookie.RawForm.NameAndValueOnly,
+    full=QtNetwork.QNetworkCookie.RawForm.Full,
 )
 
 

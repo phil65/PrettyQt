@@ -8,8 +8,8 @@ from prettyqt.utils import bidict
 QNmeaPositionInfoSource = QtPositioning.QNmeaPositionInfoSource
 
 UPDATE_MODES = bidict(
-    real_time=QtPositioning.QNmeaPositionInfoSource.RealTimeMode,
-    simulation=QtPositioning.QNmeaPositionInfoSource.SimulationMode,
+    real_time=QtPositioning.QNmeaPositionInfoSource.UpdateMode.RealTimeMode,
+    simulation=QtPositioning.QNmeaPositionInfoSource.UpdateMode.SimulationMode,
 )
 
 QtPositioning.QNmeaPositionInfoSource.__bases__ = (positioning.GeoPositionInfoSource,)

@@ -8,18 +8,18 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 INPUT = bidict(
-    press=QtWidgets.QScroller.InputPress,
-    move=QtWidgets.QScroller.InputMove,
-    release=QtWidgets.QScroller.InputRelease,
+    press=QtWidgets.QScroller.Input.InputPress,
+    move=QtWidgets.QScroller.Input.InputMove,
+    release=QtWidgets.QScroller.Input.InputRelease,
 )
 
 InputStr = Literal["press", "move", "release"]
 
 SCROLLER_GESTURE_TYPE = bidict(
-    touch=QtWidgets.QScroller.TouchGesture,
-    left_mouse_button=QtWidgets.QScroller.LeftMouseButtonGesture,
-    middle_mouse_button=QtWidgets.QScroller.MiddleMouseButtonGesture,
-    right_mouse_button=QtWidgets.QScroller.RightMouseButtonGesture,
+    touch=QtWidgets.QScroller.ScrollerGestureType.TouchGesture,
+    left_mouse_button=QtWidgets.QScroller.ScrollerGestureType.LeftMouseButtonGesture,
+    middle_mouse_button=QtWidgets.QScroller.ScrollerGestureType.MiddleMouseButtonGesture,
+    right_mouse_button=QtWidgets.QScroller.ScrollerGestureType.RightMouseButtonGesture,
 )
 
 ScrollGestureTypeStr = Literal[
@@ -27,10 +27,10 @@ ScrollGestureTypeStr = Literal[
 ]
 
 STATE = bidict(
-    inactive=QtWidgets.QScroller.Inactive,
-    pressed=QtWidgets.QScroller.Pressed,
-    dragging=QtWidgets.QScroller.Dragging,
-    scrolling=QtWidgets.QScroller.Scrolling,
+    inactive=QtWidgets.QScroller.State.Inactive,
+    pressed=QtWidgets.QScroller.State.Pressed,
+    dragging=QtWidgets.QScroller.State.Dragging,
+    scrolling=QtWidgets.QScroller.State.Scrolling,
 )
 
 StateStr = Literal["inactive", "pressed", "dragging", "scrolling"]

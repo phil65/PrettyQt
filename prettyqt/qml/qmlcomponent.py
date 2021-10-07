@@ -6,15 +6,15 @@ from prettyqt.utils import bidict
 
 
 COMPILATION_MODES = bidict(
-    prefer_synchronous=QtQml.QQmlComponent.PreferSynchronous,
-    asynchronous=QtQml.QQmlComponent.Asynchronous,
+    prefer_synchronous=QtQml.QQmlComponent.CompilationMode.PreferSynchronous,
+    asynchronous=QtQml.QQmlComponent.CompilationMode.Asynchronous,
 )
 
 STATUS = bidict(
-    null=QtQml.QQmlComponent.Null,
-    ready=QtQml.QQmlComponent.Ready,
-    loading=QtQml.QQmlComponent.Loading,
-    error=QtQml.QQmlComponent.Error,
+    null=QtQml.QQmlComponent.Status.Null,
+    ready=QtQml.QQmlComponent.Status.Ready,
+    loading=QtQml.QQmlComponent.Status.Loading,
+    error=QtQml.QQmlComponent.Status.Error,
 )
 
 QtQml.QQmlComponent.__bases__ = (core.Object,)

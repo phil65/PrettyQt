@@ -8,11 +8,11 @@ from prettyqt.utils import bidict
 
 
 VALUE_POSITION = bidict(
-    lower_extreme=QtCharts.QBoxSet.LowerExtreme,
-    lower_quartile=QtCharts.QBoxSet.LowerQuartile,
-    median=QtCharts.QBoxSet.Median,
-    upper_quartile=QtCharts.QBoxSet.UpperQuartile,
-    upper_extreme=QtCharts.QBoxSet.UpperExtreme,
+    lower_extreme=QtCharts.QBoxSet.ValuePositions.LowerExtreme,
+    lower_quartile=QtCharts.QBoxSet.ValuePositions.LowerQuartile,
+    median=QtCharts.QBoxSet.ValuePositions.Median,
+    upper_quartile=QtCharts.QBoxSet.ValuePositions.UpperQuartile,
+    upper_extreme=QtCharts.QBoxSet.ValuePositions.UpperExtreme,
 )
 
 ValuePositionStr = Literal[

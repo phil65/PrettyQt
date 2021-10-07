@@ -8,8 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 SUBMIT_POLICY = bidict(
-    auto=QtWidgets.QDataWidgetMapper.AutoSubmit,
-    manual=QtWidgets.QDataWidgetMapper.ManualSubmit,
+    auto=QtWidgets.QDataWidgetMapper.SubmitPolicy.AutoSubmit,
+    manual=QtWidgets.QDataWidgetMapper.SubmitPolicy.ManualSubmit,
 )
 
 SubmitPolicyStr = Literal["auto", "manual"]

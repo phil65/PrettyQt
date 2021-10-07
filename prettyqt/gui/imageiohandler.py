@@ -6,26 +6,28 @@ from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, mappers, types
 
 
+mod = QtGui.QImageIOHandler
+
 IMAGE_OPTION = bidict(
-    size=QtGui.QImageIOHandler.Size,
-    clip_rect=QtGui.QImageIOHandler.ClipRect,
-    scaled_size=QtGui.QImageIOHandler.ScaledSize,
-    scaled_clip_rect=QtGui.QImageIOHandler.ScaledClipRect,
-    description=QtGui.QImageIOHandler.Description,
-    compression_ratio=QtGui.QImageIOHandler.CompressionRatio,
-    gamma=QtGui.QImageIOHandler.Gamma,
-    quality=QtGui.QImageIOHandler.Quality,
-    name=QtGui.QImageIOHandler.Name,
-    subtype=QtGui.QImageIOHandler.SubType,
-    incremental_reading=QtGui.QImageIOHandler.IncrementalReading,
-    endianness=QtGui.QImageIOHandler.Endianness,
-    animation=QtGui.QImageIOHandler.Animation,
-    background_color=QtGui.QImageIOHandler.BackgroundColor,
-    # image_format=QtGui.QImageIOHandler.ImageFormat,
-    supported_sub_types=QtGui.QImageIOHandler.SupportedSubTypes,
-    optimized_write=QtGui.QImageIOHandler.OptimizedWrite,
-    progressive_scan_write=QtGui.QImageIOHandler.ProgressiveScanWrite,
-    image_transformation=QtGui.QImageIOHandler.ImageTransformation,
+    size=mod.ImageOption.Size,
+    clip_rect=mod.ImageOption.ClipRect,
+    scaled_size=mod.ImageOption.ScaledSize,
+    scaled_clip_rect=mod.ImageOption.ScaledClipRect,
+    description=mod.ImageOption.Description,
+    compression_ratio=mod.ImageOption.CompressionRatio,
+    gamma=mod.ImageOption.Gamma,
+    quality=mod.ImageOption.Quality,
+    name=mod.ImageOption.Name,
+    subtype=mod.ImageOption.SubType,
+    incremental_reading=mod.ImageOption.IncrementalReading,
+    endianness=mod.ImageOption.Endianness,
+    animation=mod.ImageOption.Animation,
+    background_color=mod.ImageOption.BackgroundColor,
+    # image_format=mod.ImageOption.ImageFormat,
+    supported_sub_types=mod.ImageOption.SupportedSubTypes,
+    optimized_write=mod.ImageOption.OptimizedWrite,
+    progressive_scan_write=mod.ImageOption.ProgressiveScanWrite,
+    image_transformation=mod.ImageOption.ImageTransformation,
 )
 
 ImageOptionStr = Literal[
@@ -51,15 +53,15 @@ ImageOptionStr = Literal[
 ]
 
 TRANSFORMATION = mappers.FlagMap(
-    QtGui.QImageIOHandler.Transformations,
-    none=QtGui.QImageIOHandler.TransformationNone,
-    mirror=QtGui.QImageIOHandler.TransformationMirror,
-    flip=QtGui.QImageIOHandler.TransformationFlip,
-    rotate_180=QtGui.QImageIOHandler.TransformationRotate180,
-    roate_90=QtGui.QImageIOHandler.TransformationRotate90,
-    mirror_and_rotate_90=QtGui.QImageIOHandler.TransformationMirrorAndRotate90,
-    flip_and_rotate_90=QtGui.QImageIOHandler.TransformationFlipAndRotate90,
-    rotate_270=QtGui.QImageIOHandler.TransformationRotate270,
+    mod.Transformation,
+    none=mod.Transformation.TransformationNone,
+    mirror=mod.Transformation.TransformationMirror,
+    flip=mod.Transformation.TransformationFlip,
+    rotate_180=mod.Transformation.TransformationRotate180,
+    roate_90=mod.Transformation.TransformationRotate90,
+    mirror_and_rotate_90=mod.Transformation.TransformationMirrorAndRotate90,
+    flip_and_rotate_90=mod.Transformation.TransformationFlipAndRotate90,
+    rotate_270=mod.Transformation.TransformationRotate270,
 )
 
 TransformationStr = Literal[
@@ -74,7 +76,7 @@ TransformationStr = Literal[
 ]
 
 
-class ImageIOHandler(QtGui.QImageIOHandler):
+class ImageIOHandler(mod):
     def __getitem__(self, key: ImageOptionStr) -> types.Variant:
         return self.get_option(key)
 

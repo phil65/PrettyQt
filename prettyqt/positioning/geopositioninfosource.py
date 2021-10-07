@@ -10,19 +10,19 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 QGeoPositionInfoSource = QtPositioning.QGeoPositionInfoSource
 
 POSITIONING_METHODS = bidict(
-    none=QGeoPositionInfoSource.NoPositioningMethods,
-    satellite=QGeoPositionInfoSource.SatellitePositioningMethods,
-    non_satellite=QGeoPositionInfoSource.NonSatellitePositioningMethods,
-    all=QGeoPositionInfoSource.AllPositioningMethods,
+    none=QGeoPositionInfoSource.PositioningMethod.NoPositioningMethods,
+    satellite=QGeoPositionInfoSource.PositioningMethod.SatellitePositioningMethods,
+    non_satellite=QGeoPositionInfoSource.PositioningMethod.NonSatellitePositioningMethods,
+    all=QGeoPositionInfoSource.PositioningMethod.AllPositioningMethods,
 )
 
 PositioningMethodStr = Literal["none", "satellite", "non_satellite", "all"]
 
 ERRORS = bidict(
-    access_error=QtPositioning.QGeoPositionInfoSource.AccessError,
-    closed_error=QtPositioning.QGeoPositionInfoSource.ClosedError,
-    none=QtPositioning.QGeoPositionInfoSource.NoError,
-    unknown_source=QtPositioning.QGeoPositionInfoSource.UnknownSourceError,
+    access_error=QGeoPositionInfoSource.Error.AccessError,
+    closed_error=QGeoPositionInfoSource.Error.ClosedError,
+    none=QGeoPositionInfoSource.Error.NoError,
+    unknown_source=QGeoPositionInfoSource.Error.UnknownSourceError,
 )
 
 ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]

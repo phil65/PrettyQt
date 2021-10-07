@@ -8,10 +8,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 DIRECTION = bidict(
-    left_to_right=QtWidgets.QBoxLayout.LeftToRight,
-    right_to_left=QtWidgets.QBoxLayout.RightToLeft,
-    top_to_bottom=QtWidgets.QBoxLayout.TopToBottom,
-    bottom_to_top=QtWidgets.QBoxLayout.BottomToTop,
+    left_to_right=QtWidgets.QBoxLayout.Direction.LeftToRight,
+    right_to_left=QtWidgets.QBoxLayout.Direction.RightToLeft,
+    top_to_bottom=QtWidgets.QBoxLayout.Direction.TopToBottom,
+    bottom_to_top=QtWidgets.QBoxLayout.Direction.BottomToTop,
 )
 
 DirectionStr = Literal["left_to_right", "right_to_left", "top_to_bottom", "bottom_to_top"]

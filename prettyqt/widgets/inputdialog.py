@@ -7,10 +7,12 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, types
 
 
+mod = QtWidgets.QInputDialog
+
 INPUT_DIALOG_OPTION = bidict(
-    no_buttons=QtWidgets.QInputDialog.NoButtons,
-    use_listview_for_combobox_items=QtWidgets.QInputDialog.UseListViewForComboBoxItems,
-    use_plaintextedit_for_text_input=QtWidgets.QInputDialog.UsePlainTextEditForTextInput,
+    no_buttons=mod.InputDialogOption.NoButtons,
+    use_listview_for_combobox_items=mod.InputDialogOption.UseListViewForComboBoxItems,
+    use_plaintextedit_for_text_input=mod.InputDialogOption.UsePlainTextEditForTextInput,
 )
 
 InputDialogOptionStr = Literal[
@@ -18,9 +20,9 @@ InputDialogOptionStr = Literal[
 ]
 
 INPUT_MODE = bidict(
-    text=QtWidgets.QInputDialog.TextInput,
-    int=QtWidgets.QInputDialog.IntInput,
-    double=QtWidgets.QInputDialog.DoubleInput,
+    text=mod.InputMode.TextInput,
+    int=mod.InputMode.IntInput,
+    double=mod.InputMode.DoubleInput,
 )
 
 InputModeStr = Literal["text", "int", "double"]

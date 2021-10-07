@@ -9,8 +9,8 @@ QtWidgets.QMdiSubWindow.__bases__ = (widgets.Widget,)
 
 
 SUB_WINDOW_OPTION = bidict(
-    rubber_band_resize=QtWidgets.QMdiSubWindow.RubberBandResize,
-    rubber_band_move=QtWidgets.QMdiSubWindow.RubberBandMove,
+    rubber_band_resize=QtWidgets.QMdiSubWindow.SubWindowOption.RubberBandResize,
+    rubber_band_move=QtWidgets.QMdiSubWindow.SubWindowOption.RubberBandMove,
 )
 
 

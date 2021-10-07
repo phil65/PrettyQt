@@ -7,35 +7,37 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-VIEW_MODE = bidict(list=QtWidgets.QListView.ListMode, icon=QtWidgets.QListView.IconMode)
+VIEW_MODE = bidict(
+    list=QtWidgets.QListView.ViewMode.ListMode, icon=QtWidgets.QListView.ViewMode.IconMode
+)
 
 ViewModeStr = Literal["list", "icon"]
 
 MOVEMENT = bidict(
-    static=QtWidgets.QListView.Static,
-    free=QtWidgets.QListView.Free,
-    snap=QtWidgets.QListView.Snap,
+    static=QtWidgets.QListView.Movement.Static,
+    free=QtWidgets.QListView.Movement.Free,
+    snap=QtWidgets.QListView.Movement.Snap,
 )
 
 MovementStr = Literal["static", "free", "snap"]
 
 FLOW = bidict(
-    left_to_right=QtWidgets.QListView.LeftToRight,
-    top_to_bottom=QtWidgets.QListView.TopToBottom,
+    left_to_right=QtWidgets.QListView.Flow.LeftToRight,
+    top_to_bottom=QtWidgets.QListView.Flow.TopToBottom,
 )
 
 FlowStr = Literal["left_to_right", "top_to_bottom"]
 
 LAYOUT_MODE = bidict(
-    single_pass=QtWidgets.QListView.SinglePass,
-    batched=QtWidgets.QListView.Batched,
+    single_pass=QtWidgets.QListView.LayoutMode.SinglePass,
+    batched=QtWidgets.QListView.LayoutMode.Batched,
 )
 
 LayoutModeStr = Literal["single_pass", "batched"]
 
 RESIZE_MODE = bidict(
-    fixed=QtWidgets.QListView.Fixed,
-    adjust=QtWidgets.QListView.Adjust,
+    fixed=QtWidgets.QListView.ResizeMode.Fixed,
+    adjust=QtWidgets.QListView.ResizeMode.Adjust,
 )
 
 ResizeModeStr = Literal["fixed", "adjust"]

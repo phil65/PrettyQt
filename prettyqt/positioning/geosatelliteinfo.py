@@ -7,16 +7,16 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 SATELLITE_SYSTEMS = bidict(
-    undefined=QtPositioning.QGeoSatelliteInfo.Undefined,
-    gps=QtPositioning.QGeoSatelliteInfo.GPS,
-    glonass=QtPositioning.QGeoSatelliteInfo.GLONASS,
+    undefined=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.Undefined,
+    gps=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.GPS,
+    glonass=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.GLONASS,
 )
 
 SatelliteSystemStr = Literal["undefined", "gps", "glonass"]
 
 ATTRIBUTE = bidict(
-    elevation=QtPositioning.QGeoSatelliteInfo.Elevation,
-    azimuth=QtPositioning.QGeoSatelliteInfo.Azimuth,
+    elevation=QtPositioning.QGeoSatelliteInfo.Attribute.Elevation,
+    azimuth=QtPositioning.QGeoSatelliteInfo.Attribute.Azimuth,
 )
 
 AttributeStr = Literal["elevation", "azimuth"]

@@ -8,10 +8,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 TICK_POSITION = bidict(
-    none=QtWidgets.QSlider.NoTicks,
-    both_sides=QtWidgets.QSlider.TicksBothSides,
-    above=QtWidgets.QSlider.TicksAbove,
-    below=QtWidgets.QSlider.TicksBelow,
+    none=QtWidgets.QSlider.TickPosition.NoTicks,
+    both_sides=QtWidgets.QSlider.TickPosition.TicksBothSides,
+    above=QtWidgets.QSlider.TickPosition.TicksAbove,
+    below=QtWidgets.QSlider.TickPosition.TicksBelow,
 )
 
 TickPositionAllStr = Literal["none", "both_sides", "above", "below", "left", "right"]

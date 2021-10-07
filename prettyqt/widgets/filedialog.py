@@ -10,31 +10,34 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 FILE_MODE = bidict(
-    existing_file=QtWidgets.QFileDialog.ExistingFile,
-    existing_files=QtWidgets.QFileDialog.ExistingFiles,
-    any_file=QtWidgets.QFileDialog.AnyFile,
-    directory=QtWidgets.QFileDialog.Directory,
+    existing_file=QtWidgets.QFileDialog.FileMode.ExistingFile,
+    existing_files=QtWidgets.QFileDialog.FileMode.ExistingFiles,
+    any_file=QtWidgets.QFileDialog.FileMode.AnyFile,
+    directory=QtWidgets.QFileDialog.FileMode.Directory,
 )
 
 FileModeStr = Literal["existing_file", "existing_files", "any_file", "directory"]
 
 LABEL = bidict(
-    look_in=QtWidgets.QFileDialog.LookIn,
-    filename=QtWidgets.QFileDialog.FileName,
-    filetype=QtWidgets.QFileDialog.FileType,
-    accept=QtWidgets.QFileDialog.Accept,
-    reject=QtWidgets.QFileDialog.Reject,
+    look_in=QtWidgets.QFileDialog.DialogLabel.LookIn,
+    filename=QtWidgets.QFileDialog.DialogLabel.FileName,
+    filetype=QtWidgets.QFileDialog.DialogLabel.FileType,
+    accept=QtWidgets.QFileDialog.DialogLabel.Accept,
+    reject=QtWidgets.QFileDialog.DialogLabel.Reject,
 )
 
 LabelStr = Literal["look_in", "filename", "filetype", "accept"]
 
 ACCEPT_MODE = bidict(
-    save=QtWidgets.QFileDialog.AcceptSave, open=QtWidgets.QFileDialog.AcceptOpen
+    save=QtWidgets.QFileDialog.AcceptMode.AcceptSave,
+    open=QtWidgets.QFileDialog.AcceptMode.AcceptOpen,
 )
 
 AcceptModeStr = Literal["save", "open"]
 
-VIEW_MODE = bidict(detail=QtWidgets.QFileDialog.Detail, list=QtWidgets.QFileDialog.List)
+VIEW_MODE = bidict(
+    detail=QtWidgets.QFileDialog.ViewMode.Detail, list=QtWidgets.QFileDialog.ViewMode.List
+)
 
 ViewModeStr = Literal["detail", "list"]
 
