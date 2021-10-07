@@ -8,12 +8,12 @@ from prettyqt.utils import bidict
 
 
 TRANSFORMATION_TYPE = bidict(
-    none=QtGui.QTransform.TxNone,
-    translate=QtGui.QTransform.TxTranslate,
-    scale=QtGui.QTransform.TxScale,
-    rotate=QtGui.QTransform.TxRotate,
-    shear=QtGui.QTransform.TxShear,
-    project=QtGui.QTransform.TxProject,
+    none=QtGui.QTransform.TransformationType.TxNone,
+    translate=QtGui.QTransform.TransformationType.TxTranslate,
+    scale=QtGui.QTransform.TransformationType.TxScale,
+    rotate=QtGui.QTransform.TransformationType.TxRotate,
+    shear=QtGui.QTransform.TransformationType.TxShear,
+    project=QtGui.QTransform.TransformationType.TxProject,
 )
 
 TransformationTypeStr = Literal[

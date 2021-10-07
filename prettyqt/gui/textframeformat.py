@@ -8,25 +8,25 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 POSITIONS = bidict(
-    in_flow=QtGui.QTextFrameFormat.InFlow,
-    flow_left=QtGui.QTextFrameFormat.FloatLeft,
-    flow_right=QtGui.QTextFrameFormat.FloatRight,
+    in_flow=QtGui.QTextFrameFormat.Position.InFlow,
+    flow_left=QtGui.QTextFrameFormat.Position.FloatLeft,
+    flow_right=QtGui.QTextFrameFormat.Position.FloatRight,
 )
 
 PositionStr = Literal["in_flow", "flow_right", "flow_left"]
 
 BORDER_STYLES = bidict(
-    none=QtGui.QTextFrameFormat.BorderStyle_None,
-    dotted=QtGui.QTextFrameFormat.BorderStyle_Dotted,
-    dashed=QtGui.QTextFrameFormat.BorderStyle_Dashed,
-    solid=QtGui.QTextFrameFormat.BorderStyle_Solid,
-    double=QtGui.QTextFrameFormat.BorderStyle_Double,
-    dot_dash=QtGui.QTextFrameFormat.BorderStyle_DotDash,
-    dot_dot_dash=QtGui.QTextFrameFormat.BorderStyle_DotDotDash,
-    groove=QtGui.QTextFrameFormat.BorderStyle_Groove,
-    ridge=QtGui.QTextFrameFormat.BorderStyle_Ridge,
-    inset=QtGui.QTextFrameFormat.BorderStyle_Inset,
-    outset=QtGui.QTextFrameFormat.BorderStyle_Outset,
+    none=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_None,
+    dotted=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Dotted,
+    dashed=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Dashed,
+    solid=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Solid,
+    double=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Double,
+    dot_dash=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_DotDash,
+    dot_dot_dash=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_DotDotDash,
+    groove=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Groove,
+    ridge=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Ridge,
+    inset=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Inset,
+    outset=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Outset,
 )
 
 BorderStyleStr = Literal[

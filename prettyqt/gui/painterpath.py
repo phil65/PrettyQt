@@ -8,10 +8,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 ELEMENT_TYPES = bidict(
-    move_to_element=QtGui.QPainterPath.MoveToElement,
-    line_to_element=QtGui.QPainterPath.LineToElement,
-    curve_to_element=QtGui.QPainterPath.CurveToElement,
-    curve_to_data_element=QtGui.QPainterPath.CurveToDataElement,
+    move_to_element=QtGui.QPainterPath.ElementType.MoveToElement,
+    line_to_element=QtGui.QPainterPath.ElementType.LineToElement,
+    curve_to_element=QtGui.QPainterPath.ElementType.CurveToElement,
+    curve_to_data_element=QtGui.QPainterPath.ElementType.CurveToDataElement,
 )
 
 ElementTypeStr = Literal[

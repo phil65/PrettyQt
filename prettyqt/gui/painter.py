@@ -9,17 +9,17 @@ from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
 COMPOSITION_MODE = bidict(
-    source_over=QtGui.QPainter.CompositionMode_SourceOver,
-    destination_over=QtGui.QPainter.CompositionMode_DestinationOver,
-    clear=QtGui.QPainter.CompositionMode_Clear,
-    source=QtGui.QPainter.CompositionMode_Source,
-    destination=QtGui.QPainter.CompositionMode_Destination,
-    source_in=QtGui.QPainter.CompositionMode_SourceIn,
-    destination_in=QtGui.QPainter.CompositionMode_DestinationIn,
-    source_out=QtGui.QPainter.CompositionMode_SourceOut,
-    destination_out=QtGui.QPainter.CompositionMode_DestinationOut,
-    source_atop=QtGui.QPainter.CompositionMode_SourceAtop,
-    destination_atop=QtGui.QPainter.CompositionMode_DestinationAtop,
+    source_over=QtGui.QPainter.CompositionMode.CompositionMode_SourceOver,
+    destination_over=QtGui.QPainter.CompositionMode.CompositionMode_DestinationOver,
+    clear=QtGui.QPainter.CompositionMode.CompositionMode_Clear,
+    source=QtGui.QPainter.CompositionMode.CompositionMode_Source,
+    destination=QtGui.QPainter.CompositionMode.CompositionMode_Destination,
+    source_in=QtGui.QPainter.CompositionMode.CompositionMode_SourceIn,
+    destination_in=QtGui.QPainter.CompositionMode.CompositionMode_DestinationIn,
+    source_out=QtGui.QPainter.CompositionMode.CompositionMode_SourceOut,
+    destination_out=QtGui.QPainter.CompositionMode.CompositionMode_DestinationOut,
+    source_atop=QtGui.QPainter.CompositionMode.CompositionMode_SourceAtop,
+    destination_atop=QtGui.QPainter.CompositionMode.CompositionMode_DestinationAtop,
 )
 
 CompositionModeStr = Literal[
@@ -37,10 +37,10 @@ CompositionModeStr = Literal[
 ]
 
 RENDER_HINTS = bidict(
-    antialiasing=QtGui.QPainter.Antialiasing,
-    text_antialiasing=QtGui.QPainter.TextAntialiasing,
-    smooth_pixmap_transform=QtGui.QPainter.SmoothPixmapTransform,
-    lossless_image_rendering=QtGui.QPainter.LosslessImageRendering,
+    antialiasing=QtGui.QPainter.RenderHint.Antialiasing,
+    text_antialiasing=QtGui.QPainter.RenderHint.TextAntialiasing,
+    smooth_pixmap_transform=QtGui.QPainter.RenderHint.SmoothPixmapTransform,
+    lossless_image_rendering=QtGui.QPainter.RenderHint.LosslessImageRendering,
 )
 
 RenderHintStr = Literal[

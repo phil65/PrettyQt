@@ -7,36 +7,38 @@ from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 
-MOVE_MODE = bidict(move=QtGui.QTextCursor.MoveAnchor, keep=QtGui.QTextCursor.KeepAnchor)
+MOVE_MODE = bidict(
+    move=QtGui.QTextCursor.MoveMode.MoveAnchor, keep=QtGui.QTextCursor.MoveMode.KeepAnchor
+)
 
 MoveModeStr = Literal["move", "keep"]
 
 MOVE_OPERATION = bidict(
-    no_move=QtGui.QTextCursor.NoMove,
-    start=QtGui.QTextCursor.Start,
-    start_of_line=QtGui.QTextCursor.StartOfLine,
-    start_of_block=QtGui.QTextCursor.StartOfBlock,
-    start_of_word=QtGui.QTextCursor.StartOfWord,
-    previous_block=QtGui.QTextCursor.PreviousBlock,
-    previous_char=QtGui.QTextCursor.PreviousCharacter,
-    previous_word=QtGui.QTextCursor.PreviousWord,
-    up=QtGui.QTextCursor.Up,
-    left=QtGui.QTextCursor.Left,
-    word_left=QtGui.QTextCursor.WordLeft,
-    end=QtGui.QTextCursor.End,
-    end_of_line=QtGui.QTextCursor.EndOfLine,
-    end_of_word=QtGui.QTextCursor.EndOfWord,
-    end_of_block=QtGui.QTextCursor.EndOfBlock,
-    next_block=QtGui.QTextCursor.NextBlock,
-    next_char=QtGui.QTextCursor.NextCharacter,
-    next_word=QtGui.QTextCursor.NextWord,
-    down=QtGui.QTextCursor.Down,
-    right=QtGui.QTextCursor.Right,
-    word_right=QtGui.QTextCursor.WordRight,
-    next_cell=QtGui.QTextCursor.NextCell,
-    previous_cell=QtGui.QTextCursor.PreviousCell,
-    next_row=QtGui.QTextCursor.NextRow,
-    previous_row=QtGui.QTextCursor.PreviousRow,
+    no_move=QtGui.QTextCursor.MoveOperation.NoMove,
+    start=QtGui.QTextCursor.MoveOperation.Start,
+    start_of_line=QtGui.QTextCursor.MoveOperation.StartOfLine,
+    start_of_block=QtGui.QTextCursor.MoveOperation.StartOfBlock,
+    start_of_word=QtGui.QTextCursor.MoveOperation.StartOfWord,
+    previous_block=QtGui.QTextCursor.MoveOperation.PreviousBlock,
+    previous_char=QtGui.QTextCursor.MoveOperation.PreviousCharacter,
+    previous_word=QtGui.QTextCursor.MoveOperation.PreviousWord,
+    up=QtGui.QTextCursor.MoveOperation.Up,
+    left=QtGui.QTextCursor.MoveOperation.Left,
+    word_left=QtGui.QTextCursor.MoveOperation.WordLeft,
+    end=QtGui.QTextCursor.MoveOperation.End,
+    end_of_line=QtGui.QTextCursor.MoveOperation.EndOfLine,
+    end_of_word=QtGui.QTextCursor.MoveOperation.EndOfWord,
+    end_of_block=QtGui.QTextCursor.MoveOperation.EndOfBlock,
+    next_block=QtGui.QTextCursor.MoveOperation.NextBlock,
+    next_char=QtGui.QTextCursor.MoveOperation.NextCharacter,
+    next_word=QtGui.QTextCursor.MoveOperation.NextWord,
+    down=QtGui.QTextCursor.MoveOperation.Down,
+    right=QtGui.QTextCursor.MoveOperation.Right,
+    word_right=QtGui.QTextCursor.MoveOperation.WordRight,
+    next_cell=QtGui.QTextCursor.MoveOperation.NextCell,
+    previous_cell=QtGui.QTextCursor.MoveOperation.PreviousCell,
+    next_row=QtGui.QTextCursor.MoveOperation.NextRow,
+    previous_row=QtGui.QTextCursor.MoveOperation.PreviousRow,
 )
 
 MoveOperationStr = Literal[
@@ -68,10 +70,10 @@ MoveOperationStr = Literal[
 ]
 
 SELECTION_TYPE = bidict(
-    document=QtGui.QTextCursor.Document,
-    block_under_cursor=QtGui.QTextCursor.BlockUnderCursor,
-    line_under_cursor=QtGui.QTextCursor.LineUnderCursor,
-    word_under_cursor=QtGui.QTextCursor.WordUnderCursor,
+    document=QtGui.QTextCursor.SelectionType.Document,
+    block_under_cursor=QtGui.QTextCursor.SelectionType.BlockUnderCursor,
+    line_under_cursor=QtGui.QTextCursor.SelectionType.LineUnderCursor,
+    word_under_cursor=QtGui.QTextCursor.SelectionType.WordUnderCursor,
 )
 
 SelectionTypeStr = Literal[

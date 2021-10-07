@@ -8,21 +8,21 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 SHADOW = bidict(
-    plain=QtWidgets.QFrame.Plain,
-    raised=QtWidgets.QFrame.Raised,
-    sunken=QtWidgets.QFrame.Sunken,
+    plain=QtWidgets.QFrame.Shadow.Plain,
+    raised=QtWidgets.QFrame.Shadow.Raised,
+    sunken=QtWidgets.QFrame.Shadow.Sunken,
 )
 
 ShadowStr = Literal["plain", "raised", "sunken"]
 
 FRAME_SHAPE = bidict(
-    no_frame=QtWidgets.QFrame.NoFrame,
-    box=QtWidgets.QFrame.Box,
-    panel=QtWidgets.QFrame.Panel,
-    styled_panel=QtWidgets.QFrame.StyledPanel,
-    h_line=QtWidgets.QFrame.HLine,
-    v_line=QtWidgets.QFrame.VLine,
-    win_panel=QtWidgets.QFrame.WinPanel,
+    no_frame=QtWidgets.QFrame.Shape.NoFrame,
+    box=QtWidgets.QFrame.Shape.Box,
+    panel=QtWidgets.QFrame.Shape.Panel,
+    styled_panel=QtWidgets.QFrame.Shape.StyledPanel,
+    h_line=QtWidgets.QFrame.Shape.HLine,
+    v_line=QtWidgets.QFrame.Shape.VLine,
+    win_panel=QtWidgets.QFrame.Shape.WinPanel,
 )
 
 FrameShapeStr = Literal[

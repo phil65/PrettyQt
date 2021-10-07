@@ -8,17 +8,17 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 PANEL_MODALITY = bidict(
-    none=QtWidgets.QGraphicsItem.NonModal,
-    panel=QtWidgets.QGraphicsItem.PanelModal,
-    scene=QtWidgets.QGraphicsItem.SceneModal,
+    none=QtWidgets.QGraphicsItem.PanelModality.NonModal,
+    panel=QtWidgets.QGraphicsItem.PanelModality.PanelModal,
+    scene=QtWidgets.QGraphicsItem.PanelModality.SceneModal,
 )
 
 PanelModalityStr = Literal["none", "panel", "scene"]
 
 CACHE_MODE = bidict(
-    none=QtWidgets.QGraphicsItem.NoCache,
-    item_coordinate=QtWidgets.QGraphicsItem.ItemCoordinateCache,
-    device_coordinate=QtWidgets.QGraphicsItem.DeviceCoordinateCache,
+    none=QtWidgets.QGraphicsItem.CacheMode.NoCache,
+    item_coordinate=QtWidgets.QGraphicsItem.CacheMode.ItemCoordinateCache,
+    device_coordinate=QtWidgets.QGraphicsItem.CacheMode.DeviceCoordinateCache,
 )
 
 CacheModeStr = Literal["none", "item_coordinate", "device_coordinate"]

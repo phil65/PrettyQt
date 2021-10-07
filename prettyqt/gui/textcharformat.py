@@ -7,20 +7,22 @@ from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
+mod = QtGui.QTextCharFormat
+
 FONT_PROPERTY_INHERITANCE_BEHAVIOUR = bidict(
-    none=QtGui.QTextCharFormat.FontPropertiesSpecifiedOnly,
-    single=QtGui.QTextCharFormat.FontPropertiesAll,
+    none=mod.FontPropertiesInheritanceBehavior.FontPropertiesSpecifiedOnly,
+    single=mod.FontPropertiesInheritanceBehavior.FontPropertiesAll,
 )
 
 UNDERLINE_STYLE = bidict(
-    none=QtGui.QTextCharFormat.NoUnderline,
-    single=QtGui.QTextCharFormat.SingleUnderline,
-    dash=QtGui.QTextCharFormat.DashUnderline,
-    dot=QtGui.QTextCharFormat.DotLine,
-    dashdot=QtGui.QTextCharFormat.DashDotLine,
-    dashdotline=QtGui.QTextCharFormat.DashDotDotLine,
-    wave=QtGui.QTextCharFormat.WaveUnderline,
-    spellcheck=QtGui.QTextCharFormat.SpellCheckUnderline,
+    none=mod.UnderlineStyle.NoUnderline,
+    single=mod.UnderlineStyle.SingleUnderline,
+    dash=mod.UnderlineStyle.DashUnderline,
+    dot=mod.UnderlineStyle.DotLine,
+    dashdot=mod.UnderlineStyle.DashDotLine,
+    dashdotline=mod.UnderlineStyle.DashDotDotLine,
+    wave=mod.UnderlineStyle.WaveUnderline,
+    spellcheck=mod.UnderlineStyle.SpellCheckUnderline,
 )
 
 UnderlineStyleStr = Literal[
@@ -35,13 +37,13 @@ UnderlineStyleStr = Literal[
 ]
 
 VERTICAL_ALIGNMENT = bidict(
-    normal=QtGui.QTextCharFormat.AlignNormal,
-    super_script=QtGui.QTextCharFormat.AlignSuperScript,
-    sub_script=QtGui.QTextCharFormat.AlignSubScript,
-    middle=QtGui.QTextCharFormat.AlignMiddle,
-    bottom=QtGui.QTextCharFormat.AlignBottom,
-    top=QtGui.QTextCharFormat.AlignTop,
-    baseline=QtGui.QTextCharFormat.AlignBaseline,
+    normal=QtGui.QTextCharFormat.VerticalAlignment.AlignNormal,
+    super_script=QtGui.QTextCharFormat.VerticalAlignment.AlignSuperScript,
+    sub_script=QtGui.QTextCharFormat.VerticalAlignment.AlignSubScript,
+    middle=QtGui.QTextCharFormat.VerticalAlignment.AlignMiddle,
+    bottom=QtGui.QTextCharFormat.VerticalAlignment.AlignBottom,
+    top=QtGui.QTextCharFormat.VerticalAlignment.AlignTop,
+    baseline=QtGui.QTextCharFormat.VerticalAlignment.AlignBaseline,
 )
 
 VerticalAlignmentStr = Literal[

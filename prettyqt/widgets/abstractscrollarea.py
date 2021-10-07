@@ -10,9 +10,9 @@ from prettyqt.utils import InvalidParamError, bidict
 area = QtWidgets.QAbstractScrollArea
 
 SIZE_POLICY = bidict(
-    content=area.AdjustToContents,
-    first_show=area.AdjustToContentsOnFirstShow,
-    ignored=area.AdjustIgnored,
+    content=area.SizeAdjustPolicy.AdjustToContents,
+    first_show=area.SizeAdjustPolicy.AdjustToContentsOnFirstShow,
+    ignored=area.SizeAdjustPolicy.AdjustIgnored,
 )
 
 SizePolicyStr = Literal["content", "first_show", "ignored"]

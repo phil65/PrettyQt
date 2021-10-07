@@ -5,26 +5,26 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-QStyleOptionHeader = QtWidgets.QStyleOptionHeader
+mod = QtWidgets.QStyleOptionHeader
 
 SECTION_POSITION = bidict(
-    beginning=QtWidgets.QStyleOptionHeader.Beginning,
-    middle=QtWidgets.QStyleOptionHeader.Middle,
-    end=QtWidgets.QStyleOptionHeader.End,
-    only_one_section=QtWidgets.QStyleOptionHeader.OnlyOneSection,
+    beginning=mod.SectionPosition.Beginning,
+    middle=mod.SectionPosition.Middle,
+    end=mod.SectionPosition.End,
+    only_one_section=mod.SectionPosition.OnlyOneSection,
 )
 
 SELECTED_POSITION = bidict(
-    not_adjacent=QStyleOptionHeader.NotAdjacent,
-    next_is_selected=QStyleOptionHeader.NextIsSelected,
-    previous_is_selected=QStyleOptionHeader.PreviousIsSelected,
-    next_and_previous_are_selected=QStyleOptionHeader.NextAndPreviousAreSelected,
+    not_adjacent=mod.SelectedPosition.NotAdjacent,
+    next_is_selected=mod.SelectedPosition.NextIsSelected,
+    previous_is_selected=mod.SelectedPosition.PreviousIsSelected,
+    next_and_previous_are_selected=mod.SelectedPosition.NextAndPreviousAreSelected,
 )
 
 SORT_INDICATOR = bidict(
-    none=QtWidgets.QStyleOptionHeader.SortIndicator(0),  # type: ignore
-    sort_up=QtWidgets.QStyleOptionHeader.SortUp,
-    sort_down=QtWidgets.QStyleOptionHeader.SortDown,
+    none=mod.SortIndicator(0),  # type: ignore
+    sort_up=mod.SortIndicator.SortUp,
+    sort_down=mod.SortIndicator.SortDown,
 )
 
 

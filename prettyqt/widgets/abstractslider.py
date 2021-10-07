@@ -8,14 +8,14 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 SLIDER_ACTION = bidict(
-    none=QtWidgets.QAbstractSlider.SliderNoAction,
-    single_step_add=QtWidgets.QAbstractSlider.SliderSingleStepAdd,
-    single_step_sub=QtWidgets.QAbstractSlider.SliderSingleStepSub,
-    page_step_add=QtWidgets.QAbstractSlider.SliderPageStepAdd,
-    page_step_sub=QtWidgets.QAbstractSlider.SliderPageStepSub,
-    to_minimum=QtWidgets.QAbstractSlider.SliderToMinimum,
-    to_maximum=QtWidgets.QAbstractSlider.SliderToMaximum,
-    move=QtWidgets.QAbstractSlider.SliderMove,
+    none=QtWidgets.QAbstractSlider.SliderAction.SliderNoAction,
+    single_step_add=QtWidgets.QAbstractSlider.SliderAction.SliderSingleStepAdd,
+    single_step_sub=QtWidgets.QAbstractSlider.SliderAction.SliderSingleStepSub,
+    page_step_add=QtWidgets.QAbstractSlider.SliderAction.SliderPageStepAdd,
+    page_step_sub=QtWidgets.QAbstractSlider.SliderAction.SliderPageStepSub,
+    to_minimum=QtWidgets.QAbstractSlider.SliderAction.SliderToMinimum,
+    to_maximum=QtWidgets.QAbstractSlider.SliderAction.SliderToMaximum,
+    move=QtWidgets.QAbstractSlider.SliderAction.SliderMove,
 )
 
 SliderActionStr = Literal[

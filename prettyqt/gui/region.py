@@ -8,8 +8,8 @@ from prettyqt.utils import bidict
 
 
 REGION_TYPE = bidict(
-    rectangle=QtGui.QRegion.Rectangle,
-    ellipse=QtGui.QRegion.Ellipse,
+    rectangle=QtGui.QRegion.RegionType.Rectangle,
+    ellipse=QtGui.QRegion.RegionType.Ellipse,
 )
 
 RegionTypeStr = Literal["rectangle", "ellipse"]

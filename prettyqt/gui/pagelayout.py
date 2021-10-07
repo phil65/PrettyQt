@@ -8,24 +8,26 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 MODES = bidict(
-    standard=QtGui.QPageLayout.StandardMode, full_page=QtGui.QPageLayout.FullPageMode
+    standard=QtGui.QPageLayout.Mode.StandardMode,
+    full_page=QtGui.QPageLayout.Mode.FullPageMode,
 )
 
 ModeStr = Literal["standard", "full_page"]
 
 ORIENTATIONS = bidict(
-    portrait=QtGui.QPageLayout.Portrait, landscape=QtGui.QPageLayout.Landscape
+    portrait=QtGui.QPageLayout.Orientation.Portrait,
+    landscape=QtGui.QPageLayout.Orientation.Landscape,
 )
 
 OrientationStr = Literal["portrait", "landscape"]
 
 UNITS = bidict(
-    millimeter=QtGui.QPageLayout.Millimeter,
-    point=QtGui.QPageLayout.Point,
-    inch=QtGui.QPageLayout.Inch,
-    pica=QtGui.QPageLayout.Pica,
-    didot=QtGui.QPageLayout.Didot,
-    cicero=QtGui.QPageLayout.Cicero,
+    millimeter=QtGui.QPageLayout.Unit.Millimeter,
+    point=QtGui.QPageLayout.Unit.Point,
+    inch=QtGui.QPageLayout.Unit.Inch,
+    pica=QtGui.QPageLayout.Unit.Pica,
+    didot=QtGui.QPageLayout.Unit.Didot,
+    cicero=QtGui.QPageLayout.Unit.Cicero,
 )
 
 UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]

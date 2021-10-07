@@ -7,14 +7,16 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict
 
 
+mod = QtWidgets.QFileIconProvider
+
 ICON_TYPE = bidict(
-    computer=QtWidgets.QFileIconProvider.Computer,
-    desktop=QtWidgets.QFileIconProvider.Desktop,
-    trashcan=QtWidgets.QFileIconProvider.Trashcan,
-    network=QtWidgets.QFileIconProvider.Network,
-    drive=QtWidgets.QFileIconProvider.Drive,
-    folder=QtWidgets.QFileIconProvider.Folder,
-    file=QtWidgets.QFileIconProvider.File,
+    computer=mod.IconType.Computer,
+    desktop=mod.IconType.Desktop,
+    trashcan=mod.IconType.Trashcan,
+    network=mod.IconType.Network,
+    drive=mod.IconType.Drive,
+    folder=mod.IconType.Folder,
+    file=mod.IconType.File,
 )
 
 IconTypeStr = Literal[
@@ -22,7 +24,7 @@ IconTypeStr = Literal[
 ]
 
 OPTIONS = bidict(
-    dont_use_custom_dir_icons=QtWidgets.QFileIconProvider.DontUseCustomDirectoryIcons,
+    dont_use_custom_dir_icons=mod.Option.DontUseCustomDirectoryIcons,
 )
 
 OptionStr = Literal["dont_use_custom_dir_icons"]

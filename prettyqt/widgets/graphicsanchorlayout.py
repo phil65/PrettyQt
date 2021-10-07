@@ -8,12 +8,12 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 EDGE = bidict(
-    left=QtCore.Qt.AnchorLeft,
-    horizontal_center=QtCore.Qt.AnchorHorizontalCenter,
-    right=QtCore.Qt.AnchorRight,
-    top=QtCore.Qt.AnchorTop,
-    vertical_center=QtCore.Qt.AnchorVerticalCenter,
-    bottom=QtCore.Qt.AnchorBottom,
+    left=QtCore.Qt.AnchorPoint.AnchorLeft,
+    horizontal_center=QtCore.Qt.AnchorPoint.AnchorHorizontalCenter,
+    right=QtCore.Qt.AnchorPoint.AnchorRight,
+    top=QtCore.Qt.AnchorPoint.AnchorTop,
+    vertical_center=QtCore.Qt.AnchorPoint.AnchorVerticalCenter,
+    bottom=QtCore.Qt.AnchorPoint.AnchorBottom,
 )
 
 EdgeStr = Literal[

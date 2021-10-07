@@ -11,42 +11,42 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 logger = logging.getLogger(__name__)
 
 EDIT_TRIGGERS = bidict(
-    none=QtWidgets.QAbstractItemView.NoEditTriggers,
-    double_click=QtWidgets.QAbstractItemView.DoubleClicked,
-    edit_key=QtWidgets.QAbstractItemView.EditKeyPressed,
+    none=QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers,
+    double_click=QtWidgets.QAbstractItemView.EditTrigger.DoubleClicked,
+    edit_key=QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed,
 )
 
 EditTriggerStr = Literal["none", "double_click", "edit_key"]
 
 SELECTION_BEHAVIOUR = bidict(
-    rows=QtWidgets.QAbstractItemView.SelectRows,
-    columns=QtWidgets.QAbstractItemView.SelectColumns,
-    items=QtWidgets.QAbstractItemView.SelectItems,
+    rows=QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows,
+    columns=QtWidgets.QAbstractItemView.SelectionBehavior.SelectColumns,
+    items=QtWidgets.QAbstractItemView.SelectionBehavior.SelectItems,
 )
 
 SelectionBehaviourStr = Literal["rows", "columns", "items"]
 
 SELECTION_MODE = bidict(
-    single=QtWidgets.QAbstractItemView.SingleSelection,
-    extended=QtWidgets.QAbstractItemView.ExtendedSelection,
-    multi=QtWidgets.QAbstractItemView.MultiSelection,
-    none=QtWidgets.QAbstractItemView.NoSelection,
+    single=QtWidgets.QAbstractItemView.SelectionMode.SingleSelection,
+    extended=QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection,
+    multi=QtWidgets.QAbstractItemView.SelectionMode.MultiSelection,
+    none=QtWidgets.QAbstractItemView.SelectionMode.NoSelection,
 )
 
 SelectionModeStr = Literal["single", "extended", "multi", "none"]
 
 SCROLL_MODE = bidict(
-    item=QtWidgets.QAbstractItemView.ScrollPerItem,
-    pixel=QtWidgets.QAbstractItemView.ScrollPerPixel,
+    item=QtWidgets.QAbstractItemView.ScrollMode.ScrollPerItem,
+    pixel=QtWidgets.QAbstractItemView.ScrollMode.ScrollPerPixel,
 )
 
 ScrollModeStr = Literal["item", "pixel"]
 
 SCROLL_HINT = bidict(
-    ensure_visible=QtWidgets.QAbstractItemView.EnsureVisible,
-    position_at_top=QtWidgets.QAbstractItemView.PositionAtTop,
-    position_at_bottom=QtWidgets.QAbstractItemView.PositionAtBottom,
-    position_at_center=QtWidgets.QAbstractItemView.PositionAtCenter,
+    ensure_visible=QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible,
+    position_at_top=QtWidgets.QAbstractItemView.ScrollHint.PositionAtTop,
+    position_at_bottom=QtWidgets.QAbstractItemView.ScrollHint.PositionAtBottom,
+    position_at_center=QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter,
 )
 
 ScrollHintStr = Literal[
@@ -54,11 +54,11 @@ ScrollHintStr = Literal[
 ]
 
 DRAG_DROP_MODE = bidict(
-    none=QtWidgets.QAbstractItemView.NoDragDrop,
-    drag=QtWidgets.QAbstractItemView.DragOnly,
-    drop=QtWidgets.QAbstractItemView.DropOnly,
-    drag_drop=QtWidgets.QAbstractItemView.DragDrop,
-    internal_move=QtWidgets.QAbstractItemView.InternalMove,
+    none=QtWidgets.QAbstractItemView.DragDropMode.NoDragDrop,
+    drag=QtWidgets.QAbstractItemView.DragDropMode.DragOnly,
+    drop=QtWidgets.QAbstractItemView.DragDropMode.DropOnly,
+    drag_drop=QtWidgets.QAbstractItemView.DragDropMode.DragDrop,
+    internal_move=QtWidgets.QAbstractItemView.DragDropMode.InternalMove,
 )
 
 DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal"]

@@ -15,11 +15,13 @@ PERFORMANCE_HINT = bidict(
 PerformanceHintStr = Literal["moderate", "aggressive"]
 
 TEXT_FORMAT = bidict(
-    rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
+    rich=QtCore.Qt.TextFormat.RichText,
+    plain=QtCore.Qt.TextFormat.PlainText,
+    auto=QtCore.Qt.TextFormat.AutoText,
 )
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    TEXT_FORMAT["markdown"] = QtCore.Qt.MarkdownText
+    TEXT_FORMAT["markdown"] = QtCore.Qt.TextFormat.MarkdownText
 
 
 class StaticText(QtGui.QStaticText):

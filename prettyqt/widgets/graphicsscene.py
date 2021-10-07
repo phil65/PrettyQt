@@ -8,16 +8,17 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 SCENE_LAYER = bidict(
-    item=QtWidgets.QGraphicsScene.ItemLayer,
-    background=QtWidgets.QGraphicsScene.BackgroundLayer,
-    foreground=QtWidgets.QGraphicsScene.ForegroundLayer,
-    all=QtWidgets.QGraphicsScene.AllLayers,
+    item=QtWidgets.QGraphicsScene.SceneLayer.ItemLayer,
+    background=QtWidgets.QGraphicsScene.SceneLayer.BackgroundLayer,
+    foreground=QtWidgets.QGraphicsScene.SceneLayer.ForegroundLayer,
+    all=QtWidgets.QGraphicsScene.SceneLayer.AllLayers,
 )
 
 SceneLayerStr = Literal["item", "background", "foreground", "all"]
 
 ITEM_INDEX_METHOD = bidict(
-    bsp_tree=QtWidgets.QGraphicsScene.BspTreeIndex, none=QtWidgets.QGraphicsScene.NoIndex
+    bsp_tree=QtWidgets.QGraphicsScene.ItemIndexMethod.BspTreeIndex,
+    none=QtWidgets.QGraphicsScene.ItemIndexMethod.NoIndex,
 )
 
 ItemIndexMethodStr = Literal["bsp_tree", "none"]

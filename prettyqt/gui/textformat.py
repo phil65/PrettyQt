@@ -8,31 +8,31 @@ from prettyqt.utils import InvalidParamError, bidict, mappers
 
 
 FORMAT_TYPE = bidict(
-    invalid=QtGui.QTextFormat.InvalidFormat,
-    block=QtGui.QTextFormat.BlockFormat,
-    char=QtGui.QTextFormat.CharFormat,
-    list=QtGui.QTextFormat.ListFormat,
-    frame=QtGui.QTextFormat.FrameFormat,
-    user=QtGui.QTextFormat.UserFormat,
+    invalid=QtGui.QTextFormat.FormatType.InvalidFormat,
+    block=QtGui.QTextFormat.FormatType.BlockFormat,
+    char=QtGui.QTextFormat.FormatType.CharFormat,
+    list=QtGui.QTextFormat.FormatType.ListFormat,
+    frame=QtGui.QTextFormat.FormatType.FrameFormat,
+    user=QtGui.QTextFormat.FormatType.UserFormat,
 )
 
 FormatTypeStr = Literal["invalid", "block", "char", "list", "frame", "user"]
 
 OBJECT_TYPE = bidict(
-    none=QtGui.QTextFormat.NoObject,
-    image=QtGui.QTextFormat.ImageObject,
-    table=QtGui.QTextFormat.TableObject,
-    table_cell=QtGui.QTextFormat.TableCellObject,
-    user=QtGui.QTextFormat.UserObject,
+    none=QtGui.QTextFormat.ObjectTypes.NoObject,
+    image=QtGui.QTextFormat.ObjectTypes.ImageObject,
+    table=QtGui.QTextFormat.ObjectTypes.TableObject,
+    table_cell=QtGui.QTextFormat.ObjectTypes.TableCellObject,
+    user=QtGui.QTextFormat.ObjectTypes.UserObject,
 )
 
 ObjectTypeStr = Literal["none", "image", "table", "table_cell", "user"]
 
 PAGE_BREAK_FLAG = mappers.FlagMap(
-    QtGui.QTextFormat.PageBreakFlags,
-    auto=QtGui.QTextFormat.PageBreak_Auto,
-    always_before=QtGui.QTextFormat.PageBreak_AlwaysBefore,
-    always_after=QtGui.QTextFormat.PageBreak_AlwaysAfter,
+    QtGui.QTextFormat.PageBreakFlag,
+    auto=QtGui.QTextFormat.PageBreakFlag.PageBreak_Auto,
+    always_before=QtGui.QTextFormat.PageBreakFlag.PageBreak_AlwaysBefore,
+    always_after=QtGui.QTextFormat.PageBreakFlag.PageBreak_AlwaysAfter,
 )
 
 PageBreakFlagStr = Literal["auto", "always_before", "always_after"]

@@ -5,17 +5,19 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
+mod = QtWidgets.QStyleOptionToolBox
+
 SELECTED_POSITION = bidict(
-    not_adjacent=QtWidgets.QStyleOptionToolBox.NotAdjacent,
-    next_is_selected=QtWidgets.QStyleOptionToolBox.NextIsSelected,
-    previous_is_selected=QtWidgets.QStyleOptionToolBox.PreviousIsSelected,
+    not_adjacent=mod.SelectedPosition.NotAdjacent,
+    next_is_selected=mod.SelectedPosition.NextIsSelected,
+    previous_is_selected=mod.SelectedPosition.PreviousIsSelected,
 )
 
 TAB_POSITION = bidict(
-    beginning=QtWidgets.QStyleOptionToolBox.Beginning,
-    middle=QtWidgets.QStyleOptionToolBox.Middle,
-    end=QtWidgets.QStyleOptionToolBox.End,
-    only_one_tab=QtWidgets.QStyleOptionToolBox.OnlyOneTab,
+    beginning=mod.TabPosition.Beginning,
+    middle=mod.TabPosition.Middle,
+    end=mod.TabPosition.End,
+    only_one_tab=mod.TabPosition.OnlyOneTab,
 )
 
 

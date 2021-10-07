@@ -8,24 +8,24 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 BUTTONS = bidict(
-    cancel=QtWidgets.QDialogButtonBox.Cancel,
-    ok=QtWidgets.QDialogButtonBox.Ok,
-    save=QtWidgets.QDialogButtonBox.Save,
-    open=QtWidgets.QDialogButtonBox.Open,
-    close=QtWidgets.QDialogButtonBox.Close,
-    discard=QtWidgets.QDialogButtonBox.Discard,
-    apply=QtWidgets.QDialogButtonBox.Apply,
-    reset=QtWidgets.QDialogButtonBox.Reset,
-    restore_defaults=QtWidgets.QDialogButtonBox.RestoreDefaults,
-    help=QtWidgets.QDialogButtonBox.Help,
-    save_all=QtWidgets.QDialogButtonBox.SaveAll,
-    yes=QtWidgets.QDialogButtonBox.Yes,
-    yes_to_all=QtWidgets.QDialogButtonBox.YesToAll,
-    no=QtWidgets.QDialogButtonBox.No,
-    no_to_all=QtWidgets.QDialogButtonBox.NoToAll,
-    abort=QtWidgets.QDialogButtonBox.Abort,
-    retry=QtWidgets.QDialogButtonBox.Retry,
-    ignore=QtWidgets.QDialogButtonBox.Ignore,
+    cancel=QtWidgets.QDialogButtonBox.StandardButton.Cancel,
+    ok=QtWidgets.QDialogButtonBox.StandardButton.Ok,
+    save=QtWidgets.QDialogButtonBox.StandardButton.Save,
+    open=QtWidgets.QDialogButtonBox.StandardButton.Open,
+    close=QtWidgets.QDialogButtonBox.StandardButton.Close,
+    discard=QtWidgets.QDialogButtonBox.StandardButton.Discard,
+    apply=QtWidgets.QDialogButtonBox.StandardButton.Apply,
+    reset=QtWidgets.QDialogButtonBox.StandardButton.Reset,
+    restore_defaults=QtWidgets.QDialogButtonBox.StandardButton.RestoreDefaults,
+    help=QtWidgets.QDialogButtonBox.StandardButton.Help,
+    save_all=QtWidgets.QDialogButtonBox.StandardButton.SaveAll,
+    yes=QtWidgets.QDialogButtonBox.StandardButton.Yes,
+    yes_to_all=QtWidgets.QDialogButtonBox.StandardButton.YesToAll,
+    no=QtWidgets.QDialogButtonBox.StandardButton.No,
+    no_to_all=QtWidgets.QDialogButtonBox.StandardButton.NoToAll,
+    abort=QtWidgets.QDialogButtonBox.StandardButton.Abort,
+    retry=QtWidgets.QDialogButtonBox.StandardButton.Retry,
+    ignore=QtWidgets.QDialogButtonBox.StandardButton.Ignore,
 )
 
 ButtonStr = Literal[
@@ -50,16 +50,16 @@ ButtonStr = Literal[
 ]
 
 ROLES = bidict(
-    invalid=QtWidgets.QDialogButtonBox.InvalidRole,
-    accept=QtWidgets.QDialogButtonBox.AcceptRole,
-    reject=QtWidgets.QDialogButtonBox.RejectRole,
-    destructive=QtWidgets.QDialogButtonBox.DestructiveRole,
-    action=QtWidgets.QDialogButtonBox.ActionRole,
-    help=QtWidgets.QDialogButtonBox.HelpRole,
-    yes=QtWidgets.QDialogButtonBox.YesRole,
-    no=QtWidgets.QDialogButtonBox.NoRole,
-    apply=QtWidgets.QDialogButtonBox.ApplyRole,
-    reset=QtWidgets.QDialogButtonBox.ResetRole,
+    invalid=QtWidgets.QDialogButtonBox.ButtonRole.InvalidRole,
+    accept=QtWidgets.QDialogButtonBox.ButtonRole.AcceptRole,
+    reject=QtWidgets.QDialogButtonBox.ButtonRole.RejectRole,
+    destructive=QtWidgets.QDialogButtonBox.ButtonRole.DestructiveRole,
+    action=QtWidgets.QDialogButtonBox.ButtonRole.ActionRole,
+    help=QtWidgets.QDialogButtonBox.ButtonRole.HelpRole,
+    yes=QtWidgets.QDialogButtonBox.ButtonRole.YesRole,
+    no=QtWidgets.QDialogButtonBox.ButtonRole.NoRole,
+    apply=QtWidgets.QDialogButtonBox.ButtonRole.ApplyRole,
+    reset=QtWidgets.QDialogButtonBox.ButtonRole.ResetRole,
 )
 
 RoleStr = Literal[

@@ -7,7 +7,9 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-SHAPE = bidict(line=QtWidgets.QRubberBand.Line, rectangle=QtWidgets.QRubberBand.Rectangle)
+SHAPE = bidict(
+    line=QtWidgets.QRubberBand.Shape.Line, rectangle=QtWidgets.QRubberBand.Shape.Rectangle
+)
 
 ShapeStr = Literal["line", "rectangle"]
 

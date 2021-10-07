@@ -8,27 +8,27 @@ from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
 ROLE = bidict(
-    window=QtGui.QPalette.Window,  # same as Background
-    window_text=QtGui.QPalette.WindowText,  # same as Foreground
-    base=QtGui.QPalette.Base,
-    alternate_base=QtGui.QPalette.AlternateBase,
-    tool_tip_base=QtGui.QPalette.ToolTipBase,
-    tool_tip_text=QtGui.QPalette.ToolTipText,
-    placeholder_text=QtGui.QPalette.PlaceholderText,
-    text=QtGui.QPalette.Text,
-    button=QtGui.QPalette.Button,
-    button_text=QtGui.QPalette.ButtonText,
-    bright_text=QtGui.QPalette.BrightText,
-    light=QtGui.QPalette.Light,
-    midlight=QtGui.QPalette.Midlight,
-    dark=QtGui.QPalette.Dark,
-    mid=QtGui.QPalette.Mid,
-    shadow=QtGui.QPalette.Shadow,
-    highlight=QtGui.QPalette.Highlight,
-    highlighted_text=QtGui.QPalette.HighlightedText,
-    link=QtGui.QPalette.Link,
-    link_visited=QtGui.QPalette.LinkVisited,
-    none=QtGui.QPalette.NoRole,
+    window=QtGui.QPalette.ColorRole.Window,  # same as Background
+    window_text=QtGui.QPalette.ColorRole.WindowText,  # same as Foreground
+    base=QtGui.QPalette.ColorRole.Base,
+    alternate_base=QtGui.QPalette.ColorRole.AlternateBase,
+    tool_tip_base=QtGui.QPalette.ColorRole.ToolTipBase,
+    tool_tip_text=QtGui.QPalette.ColorRole.ToolTipText,
+    placeholder_text=QtGui.QPalette.ColorRole.PlaceholderText,
+    text=QtGui.QPalette.ColorRole.Text,
+    button=QtGui.QPalette.ColorRole.Button,
+    button_text=QtGui.QPalette.ColorRole.ButtonText,
+    bright_text=QtGui.QPalette.ColorRole.BrightText,
+    light=QtGui.QPalette.ColorRole.Light,
+    midlight=QtGui.QPalette.ColorRole.Midlight,
+    dark=QtGui.QPalette.ColorRole.Dark,
+    mid=QtGui.QPalette.ColorRole.Mid,
+    shadow=QtGui.QPalette.ColorRole.Shadow,
+    highlight=QtGui.QPalette.ColorRole.Highlight,
+    highlighted_text=QtGui.QPalette.ColorRole.HighlightedText,
+    link=QtGui.QPalette.ColorRole.Link,
+    link_visited=QtGui.QPalette.ColorRole.LinkVisited,
+    none=QtGui.QPalette.ColorRole.NoRole,
 )
 
 RoleStr = Literal[
@@ -56,9 +56,9 @@ RoleStr = Literal[
 ]
 
 GROUP = bidict(
-    disabled=QtGui.QPalette.Disabled,
-    active=QtGui.QPalette.Active,
-    inactive=QtGui.QPalette.Inactive,
+    disabled=QtGui.QPalette.ColorGroup.Disabled,
+    active=QtGui.QPalette.ColorGroup.Active,
+    inactive=QtGui.QPalette.ColorGroup.Inactive,
 )
 
 GroupStr = Literal["disabled", "active", "inactive"]

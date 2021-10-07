@@ -10,35 +10,35 @@ from prettyqt.utils import InvalidParamError, bidict, types
 
 
 ICONS = bidict(
-    none=QtWidgets.QMessageBox.NoIcon,
-    information=QtWidgets.QMessageBox.Information,
-    warning=QtWidgets.QMessageBox.Warning,
-    critical=QtWidgets.QMessageBox.Critical,
-    question=QtWidgets.QMessageBox.Question,
+    none=QtWidgets.QMessageBox.Icon.NoIcon,
+    information=QtWidgets.QMessageBox.Icon.Information,
+    warning=QtWidgets.QMessageBox.Icon.Warning,
+    critical=QtWidgets.QMessageBox.Icon.Critical,
+    question=QtWidgets.QMessageBox.Icon.Question,
 )
 
 IconStr = Literal["none", "information", "warning", "critical", "question"]
 
 BUTTONS = bidict(
-    none=QtWidgets.QMessageBox.NoButton,
-    cancel=QtWidgets.QMessageBox.Cancel,
-    ok=QtWidgets.QMessageBox.Ok,
-    save=QtWidgets.QMessageBox.Save,
-    open=QtWidgets.QMessageBox.Open,
-    close=QtWidgets.QMessageBox.Close,
-    discard=QtWidgets.QMessageBox.Discard,
-    apply=QtWidgets.QMessageBox.Apply,
-    reset=QtWidgets.QMessageBox.Reset,
-    restore_defaults=QtWidgets.QMessageBox.RestoreDefaults,
-    help=QtWidgets.QMessageBox.Help,
-    save_all=QtWidgets.QMessageBox.SaveAll,
-    yes=QtWidgets.QMessageBox.Yes,
-    yes_to_all=QtWidgets.QMessageBox.YesToAll,
-    no=QtWidgets.QMessageBox.No,
-    no_to_all=QtWidgets.QMessageBox.NoToAll,
-    abort=QtWidgets.QMessageBox.Abort,
-    retry=QtWidgets.QMessageBox.Retry,
-    ignore=QtWidgets.QMessageBox.Ignore,
+    none=QtWidgets.QMessageBox.StandardButton.NoButton,
+    cancel=QtWidgets.QMessageBox.StandardButton.Cancel,
+    ok=QtWidgets.QMessageBox.StandardButton.Ok,
+    save=QtWidgets.QMessageBox.StandardButton.Save,
+    open=QtWidgets.QMessageBox.StandardButton.Open,
+    close=QtWidgets.QMessageBox.StandardButton.Close,
+    discard=QtWidgets.QMessageBox.StandardButton.Discard,
+    apply=QtWidgets.QMessageBox.StandardButton.Apply,
+    reset=QtWidgets.QMessageBox.StandardButton.Reset,
+    restore_defaults=QtWidgets.QMessageBox.StandardButton.RestoreDefaults,
+    help=QtWidgets.QMessageBox.StandardButton.Help,
+    save_all=QtWidgets.QMessageBox.StandardButton.SaveAll,
+    yes=QtWidgets.QMessageBox.StandardButton.Yes,
+    yes_to_all=QtWidgets.QMessageBox.StandardButton.YesToAll,
+    no=QtWidgets.QMessageBox.StandardButton.No,
+    no_to_all=QtWidgets.QMessageBox.StandardButton.NoToAll,
+    abort=QtWidgets.QMessageBox.StandardButton.Abort,
+    retry=QtWidgets.QMessageBox.StandardButton.Retry,
+    ignore=QtWidgets.QMessageBox.StandardButton.Ignore,
 )
 
 ButtonStr = Literal[
@@ -64,16 +64,16 @@ ButtonStr = Literal[
 ]
 
 BUTTON_ROLE = bidict(
-    invalid=QtWidgets.QMessageBox.InvalidRole,
-    accept=QtWidgets.QMessageBox.AcceptRole,
-    reject=QtWidgets.QMessageBox.RejectRole,
-    destructive=QtWidgets.QMessageBox.DestructiveRole,
-    action=QtWidgets.QMessageBox.ActionRole,
-    help=QtWidgets.QMessageBox.HelpRole,
-    yes=QtWidgets.QMessageBox.YesRole,
-    no=QtWidgets.QMessageBox.NoRole,
-    apply=QtWidgets.QMessageBox.ApplyRole,
-    reset=QtWidgets.QMessageBox.ResetRole,
+    invalid=QtWidgets.QMessageBox.ButtonRole.InvalidRole,
+    accept=QtWidgets.QMessageBox.ButtonRole.AcceptRole,
+    reject=QtWidgets.QMessageBox.ButtonRole.RejectRole,
+    destructive=QtWidgets.QMessageBox.ButtonRole.DestructiveRole,
+    action=QtWidgets.QMessageBox.ButtonRole.ActionRole,
+    help=QtWidgets.QMessageBox.ButtonRole.HelpRole,
+    yes=QtWidgets.QMessageBox.ButtonRole.YesRole,
+    no=QtWidgets.QMessageBox.ButtonRole.NoRole,
+    apply=QtWidgets.QMessageBox.ButtonRole.ApplyRole,
+    reset=QtWidgets.QMessageBox.ButtonRole.ResetRole,
 )
 
 ButtonRoleStr = Literal[
@@ -90,10 +90,12 @@ ButtonRoleStr = Literal[
 ]
 
 TEXT_FORMAT = bidict(
-    rich=QtCore.Qt.RichText, plain=QtCore.Qt.PlainText, auto=QtCore.Qt.AutoText
+    rich=QtCore.Qt.TextFormat.RichText,
+    plain=QtCore.Qt.TextFormat.PlainText,
+    auto=QtCore.Qt.TextFormat.AutoText,
 )
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    TEXT_FORMAT["markdown"] = QtCore.Qt.MarkdownText
+    TEXT_FORMAT["markdown"] = QtCore.Qt.TextFormat.MarkdownText
 
 TextFormatStr = Literal["rich", "plain", "auto"]
 

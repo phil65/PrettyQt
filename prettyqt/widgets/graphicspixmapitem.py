@@ -8,9 +8,9 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 SHAPE_MODE = bidict(
-    mask=QtWidgets.QGraphicsPixmapItem.MaskShape,
-    bounding_rect=QtWidgets.QGraphicsPixmapItem.BoundingRectShape,
-    heuristic_mask=QtWidgets.QGraphicsPixmapItem.HeuristicMaskShape,
+    mask=QtWidgets.QGraphicsPixmapItem.ShapeMode.MaskShape,
+    bounding_rect=QtWidgets.QGraphicsPixmapItem.ShapeMode.BoundingRectShape,
+    heuristic_mask=QtWidgets.QGraphicsPixmapItem.ShapeMode.HeuristicMaskShape,
 )
 
 ShapeModeStr = Literal["mask", "bounding_rect", "heuristic_mask"]

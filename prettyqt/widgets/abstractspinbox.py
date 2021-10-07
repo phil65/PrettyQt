@@ -8,23 +8,23 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 CORRECTION_MODES = bidict(
-    to_previous=QtWidgets.QSpinBox.CorrectToPreviousValue,
-    to_nearest=QtWidgets.QSpinBox.CorrectToNearestValue,
+    to_previous=QtWidgets.QSpinBox.CorrectionMode.CorrectToPreviousValue,
+    to_nearest=QtWidgets.QSpinBox.CorrectionMode.CorrectToNearestValue,
 )
 
 CorrectionModeStr = Literal["to_previous", "to_nearest"]
 
 SYMBOLS = bidict(
-    up_down=QtWidgets.QSpinBox.UpDownArrows,
-    plus_minus=QtWidgets.QSpinBox.PlusMinus,
-    none=QtWidgets.QSpinBox.NoButtons,
+    up_down=QtWidgets.QSpinBox.ButtonSymbols.UpDownArrows,
+    plus_minus=QtWidgets.QSpinBox.ButtonSymbols.PlusMinus,
+    none=QtWidgets.QSpinBox.ButtonSymbols.NoButtons,
 )
 
 SymbolStr = Literal["up_down", "plus_minus", "none"]
 
 STEP_TYPES = bidict(
-    default=QtWidgets.QSpinBox.DefaultStepType,
-    adaptive=QtWidgets.QSpinBox.AdaptiveDecimalStepType,
+    default=QtWidgets.QSpinBox.StepType.DefaultStepType,
+    adaptive=QtWidgets.QSpinBox.StepType.AdaptiveDecimalStepType,
 )
 
 StepTypeStr = Literal["default", "adaptive"]

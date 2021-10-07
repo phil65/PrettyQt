@@ -7,13 +7,13 @@ from prettyqt.utils import InvalidParamError, bidict, helpers, prettyprinter
 
 
 SIZE_POLICY = bidict(
-    fixed=QtWidgets.QSizePolicy.Fixed,
-    minimum=QtWidgets.QSizePolicy.Minimum,
-    maximum=QtWidgets.QSizePolicy.Maximum,
-    preferred=QtWidgets.QSizePolicy.Preferred,
-    expanding=QtWidgets.QSizePolicy.Expanding,
-    minimum_expanding=QtWidgets.QSizePolicy.MinimumExpanding,
-    ignored=QtWidgets.QSizePolicy.Ignored,
+    fixed=QtWidgets.QSizePolicy.Policy.Fixed,
+    minimum=QtWidgets.QSizePolicy.Policy.Minimum,
+    maximum=QtWidgets.QSizePolicy.Policy.Maximum,
+    preferred=QtWidgets.QSizePolicy.Policy.Preferred,
+    expanding=QtWidgets.QSizePolicy.Policy.Expanding,
+    minimum_expanding=QtWidgets.QSizePolicy.Policy.MinimumExpanding,
+    ignored=QtWidgets.QSizePolicy.Policy.Ignored,
 )
 
 SizePolicyStr = Literal[
@@ -27,21 +27,21 @@ SizePolicyStr = Literal[
 ]
 
 CONTROL_TYPE = bidict(
-    default=QtWidgets.QSizePolicy.DefaultType,
-    buttonbox=QtWidgets.QSizePolicy.ButtonBox,
-    checkbox=QtWidgets.QSizePolicy.CheckBox,
-    combobox=QtWidgets.QSizePolicy.ComboBox,
-    frame=QtWidgets.QSizePolicy.Frame,
-    groupbox=QtWidgets.QSizePolicy.GroupBox,
-    label=QtWidgets.QSizePolicy.Label,
-    line=QtWidgets.QSizePolicy.Line,
-    lineedit=QtWidgets.QSizePolicy.LineEdit,
-    pushbutton=QtWidgets.QSizePolicy.PushButton,
-    radiobutton=QtWidgets.QSizePolicy.RadioButton,
-    slider=QtWidgets.QSizePolicy.Slider,
-    spinbox=QtWidgets.QSizePolicy.SpinBox,
-    tabwidget=QtWidgets.QSizePolicy.TabWidget,
-    toolbutton=QtWidgets.QSizePolicy.ToolButton,
+    default=QtWidgets.QSizePolicy.ControlType.DefaultType,
+    buttonbox=QtWidgets.QSizePolicy.ControlType.ButtonBox,
+    checkbox=QtWidgets.QSizePolicy.ControlType.CheckBox,
+    combobox=QtWidgets.QSizePolicy.ControlType.ComboBox,
+    frame=QtWidgets.QSizePolicy.ControlType.Frame,
+    groupbox=QtWidgets.QSizePolicy.ControlType.GroupBox,
+    label=QtWidgets.QSizePolicy.ControlType.Label,
+    line=QtWidgets.QSizePolicy.ControlType.Line,
+    lineedit=QtWidgets.QSizePolicy.ControlType.LineEdit,
+    pushbutton=QtWidgets.QSizePolicy.ControlType.PushButton,
+    radiobutton=QtWidgets.QSizePolicy.ControlType.RadioButton,
+    slider=QtWidgets.QSizePolicy.ControlType.Slider,
+    spinbox=QtWidgets.QSizePolicy.ControlType.SpinBox,
+    tabwidget=QtWidgets.QSizePolicy.ControlType.TabWidget,
+    toolbutton=QtWidgets.QSizePolicy.ControlType.ToolButton,
 )
 
 ControlTypeStr = Literal[

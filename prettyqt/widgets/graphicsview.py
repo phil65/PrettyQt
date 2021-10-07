@@ -7,50 +7,52 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, helpers, mappers
 
 
+mod = QtWidgets.QGraphicsView
+
 DRAG_MODE = bidict(
-    none=QtWidgets.QGraphicsView.NoDrag,
-    scroll_hand=QtWidgets.QGraphicsView.ScrollHandDrag,
-    rubber_band=QtWidgets.QGraphicsView.RubberBandDrag,
+    none=mod.DragMode.NoDrag,
+    scroll_hand=mod.DragMode.ScrollHandDrag,
+    rubber_band=mod.DragMode.RubberBandDrag,
 )
 
 DragModeStr = Literal["none", "scroll_hand", "rubber_band"]
 
 CACHE_MODES = mappers.FlagMap(
-    QtWidgets.QGraphicsView.CacheMode,
-    none=QtWidgets.QGraphicsView.CacheNone,
-    background=QtWidgets.QGraphicsView.CacheBackground,
+    mod.CacheModeFlag,
+    none=mod.CacheModeFlag.CacheNone,
+    background=mod.CacheModeFlag.CacheBackground,
 )
 
 CacheModeStr = Literal["none", "background"]
 
 OPTIMIZATION_FLAGS = bidict(
-    # dont_clip_painter=QtWidgets.QGraphicsView.DontClipPainter,
-    dont_save_painter_state=QtWidgets.QGraphicsView.DontSavePainterState,
-    dont_adjust_for_antialiasing=QtWidgets.QGraphicsView.DontAdjustForAntialiasing,
+    # dont_clip_painter=mod.OptimizationFlag.DontClipPainter,
+    dont_save_painter_state=mod.OptimizationFlag.DontSavePainterState,
+    dont_adjust_for_antialiasing=mod.OptimizationFlag.DontAdjustForAntialiasing,
 )
 
 OptimizationFlagStr = Literal["dont_save_painter_state", "dont_adjust_for_antialiasing"]
 
 VIEWPORT_ANCHOR = bidict(
-    none=QtWidgets.QGraphicsView.NoAnchor,
-    view_center=QtWidgets.QGraphicsView.AnchorViewCenter,
-    under_mouse=QtWidgets.QGraphicsView.AnchorUnderMouse,
+    none=mod.ViewportAnchor.NoAnchor,
+    view_center=mod.ViewportAnchor.AnchorViewCenter,
+    under_mouse=mod.ViewportAnchor.AnchorUnderMouse,
 )
 
 ViewportAnchorStr = Literal["none", "view_center", "under_mouse"]
 
 VIEWPORT_UPDATE_MODE = bidict(
-    full=QtWidgets.QGraphicsView.FullViewportUpdate,
-    minimal=QtWidgets.QGraphicsView.MinimalViewportUpdate,
-    smart=QtWidgets.QGraphicsView.SmartViewportUpdate,
-    bounding_rect=QtWidgets.QGraphicsView.BoundingRectViewportUpdate,
-    none=QtWidgets.QGraphicsView.NoViewportUpdate,
+    full=mod.ViewportUpdateMode.FullViewportUpdate,
+    minimal=mod.ViewportUpdateMode.MinimalViewportUpdate,
+    smart=mod.ViewportUpdateMode.SmartViewportUpdate,
+    bounding_rect=mod.ViewportUpdateMode.BoundingRectViewportUpdate,
+    none=mod.ViewportUpdateMode.NoViewportUpdate,
 )
 
 ViewportUpdateModeStr = Literal["full", "minimal", "smart", "bounding_rect", "none"]
 
 
-QtWidgets.QGraphicsView.__bases__ = (widgets.AbstractScrollArea,)
+mod.__bases__ = (widgets.AbstractScrollArea,)
 
 
 class GraphicsView(QtWidgets.QGraphicsView):

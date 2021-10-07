@@ -7,9 +7,9 @@ from prettyqt.utils import bidict
 
 
 TYPES = bidict(
-    variable=QtGui.QTextLength.VariableLength,
-    fixed=QtGui.QTextLength.FixedLength,
-    percentage=QtGui.QTextLength.PercentageLength,
+    variable=QtGui.QTextLength.Type.VariableLength,
+    fixed=QtGui.QTextLength.Type.FixedLength,
+    percentage=QtGui.QTextLength.Type.PercentageLength,
 )
 
 TypeStr = Literal["variable", "fixed", "percentage"]

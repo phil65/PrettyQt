@@ -8,9 +8,9 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 BLUR_HINTS = bidict(
-    performance=QtWidgets.QGraphicsBlurEffect.PerformanceHint,
-    quality=QtWidgets.QGraphicsBlurEffect.QualityHint,
-    animation=QtWidgets.QGraphicsBlurEffect.AnimationHint,
+    performance=QtWidgets.QGraphicsBlurEffect.BlurHint.PerformanceHint,
+    quality=QtWidgets.QGraphicsBlurEffect.BlurHint.QualityHint,
+    animation=QtWidgets.QGraphicsBlurEffect.BlurHint.AnimationHint,
 )
 
 BlurHintStr = Literal["performance", "quality", "animation"]

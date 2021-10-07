@@ -7,14 +7,16 @@ from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict
 
 
-CACHE_MODE = bidict(none=QtGui.QMovie.CacheNone, all=QtGui.QMovie.CacheAll)
+CACHE_MODE = bidict(
+    none=QtGui.QMovie.CacheMode.CacheNone, all=QtGui.QMovie.CacheMode.CacheAll
+)
 
 CacheModeStr = Literal["none", "all"]
 
 MOVIE_STATE = bidict(
-    not_running=QtGui.QMovie.NotRunning,
-    paused=QtGui.QMovie.Paused,
-    running=QtGui.QMovie.Running,
+    not_running=QtGui.QMovie.MovieState.NotRunning,
+    paused=QtGui.QMovie.MovieState.Paused,
+    running=QtGui.QMovie.MovieState.Running,
 )
 
 MovieStateStr = Literal["not_running", "paused", "running"]

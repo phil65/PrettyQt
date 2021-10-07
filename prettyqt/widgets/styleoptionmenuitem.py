@@ -6,20 +6,20 @@ from prettyqt.utils import bidict
 
 
 CHECK_TYPE = bidict(
-    not_checkable=QtWidgets.QStyleOptionMenuItem.NotCheckable,
-    exclusive=QtWidgets.QStyleOptionMenuItem.Exclusive,
-    non_exclusive=QtWidgets.QStyleOptionMenuItem.NonExclusive,
+    not_checkable=QtWidgets.QStyleOptionMenuItem.CheckType.NotCheckable,
+    exclusive=QtWidgets.QStyleOptionMenuItem.CheckType.Exclusive,
+    non_exclusive=QtWidgets.QStyleOptionMenuItem.CheckType.NonExclusive,
 )
 
 MENU_ITEM_TYPE = bidict(
-    normal=QtWidgets.QStyleOptionMenuItem.Normal,
-    default_item=QtWidgets.QStyleOptionMenuItem.DefaultItem,
-    separator=QtWidgets.QStyleOptionMenuItem.Separator,
-    sub_menu=QtWidgets.QStyleOptionMenuItem.SubMenu,
-    scroller=QtWidgets.QStyleOptionMenuItem.Scroller,
-    tear_off=QtWidgets.QStyleOptionMenuItem.TearOff,
-    margin=QtWidgets.QStyleOptionMenuItem.Margin,
-    empty_area=QtWidgets.QStyleOptionMenuItem.EmptyArea,
+    normal=QtWidgets.QStyleOptionMenuItem.MenuItemType.Normal,
+    default_item=QtWidgets.QStyleOptionMenuItem.MenuItemType.DefaultItem,
+    separator=QtWidgets.QStyleOptionMenuItem.MenuItemType.Separator,
+    sub_menu=QtWidgets.QStyleOptionMenuItem.MenuItemType.SubMenu,
+    scroller=QtWidgets.QStyleOptionMenuItem.MenuItemType.Scroller,
+    tear_off=QtWidgets.QStyleOptionMenuItem.MenuItemType.TearOff,
+    margin=QtWidgets.QStyleOptionMenuItem.MenuItemType.Margin,
+    empty_area=QtWidgets.QStyleOptionMenuItem.MenuItemType.EmptyArea,
 )
 
 

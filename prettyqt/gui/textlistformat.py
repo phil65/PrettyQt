@@ -8,14 +8,14 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 STYLES = bidict(
-    disc=QtGui.QTextListFormat.ListDisc,
-    circle=QtGui.QTextListFormat.ListCircle,
-    square=QtGui.QTextListFormat.ListSquare,
-    decimal=QtGui.QTextListFormat.ListDecimal,
-    lower_alpha=QtGui.QTextListFormat.ListLowerAlpha,
-    upper_alpha=QtGui.QTextListFormat.ListUpperAlpha,
-    lower_roman=QtGui.QTextListFormat.ListLowerRoman,
-    upper_roman=QtGui.QTextListFormat.ListUpperRoman,
+    disc=QtGui.QTextListFormat.Style.ListDisc,
+    circle=QtGui.QTextListFormat.Style.ListCircle,
+    square=QtGui.QTextListFormat.Style.ListSquare,
+    decimal=QtGui.QTextListFormat.Style.ListDecimal,
+    lower_alpha=QtGui.QTextListFormat.Style.ListLowerAlpha,
+    upper_alpha=QtGui.QTextListFormat.Style.ListUpperAlpha,
+    lower_roman=QtGui.QTextListFormat.Style.ListLowerRoman,
+    upper_roman=QtGui.QTextListFormat.Style.ListUpperRoman,
 )
 
 StyleStr = Literal[
