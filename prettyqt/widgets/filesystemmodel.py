@@ -4,16 +4,16 @@ import os
 import pathlib
 from typing import Iterator, Sequence
 
-from prettyqt import core
+from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
     OPTIONS = bidict(
-        dont_watch_changes=QtWidgets.QFileSystemModel.DontWatchForChanges,
-        dont_resolve_symlinks=QtWidgets.QFileSystemModel.DontResolveSymlinks,
-        no_custom_icons=QtWidgets.QFileSystemModel.DontUseCustomDirectoryIcons,
+        dont_watch_changes=QtWidgets.QFileSystemModel.Option.DontWatchForChanges,
+        dont_resolve_symlinks=QtWidgets.QFileSystemModel.Option.DontResolveSymlinks,
+        no_custom_icons=QtWidgets.QFileSystemModel.Option.DontUseCustomDirectoryIcons,
     )
 
 QtWidgets.QFileSystemModel.__bases__ = (core.AbstractItemModel,)
@@ -22,14 +22,14 @@ QtWidgets.QFileSystemModel.__bases__ = (core.AbstractItemModel,)
 class FileSystemModel(QtWidgets.QFileSystemModel):
     """Class to populate a filesystem treeview."""
 
-    DATA_ROLE = QtCore.Qt.UserRole + 33
+    DATA_ROLE = constants.USER_ROLE + 33  # type: ignore
     content_type = "files"
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setReadOnly(False)
 
-    def data(self, index, role=QtCore.Qt.DisplayRole):
+    def data(self, index, role=QtCore.Qt.ItemDataRole.DisplayRole):
         if role == self.DATA_ROLE:
             path = index.data(self.FilePathRole)
             return pathlib.Path(path)

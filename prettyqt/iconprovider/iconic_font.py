@@ -76,17 +76,17 @@ VALID_OPTIONS = [
 ]
 
 COLOR_OPTIONS = {
-    QtGui.QIcon.On: {
-        QtGui.QIcon.Normal: ("color_on", "on"),
-        QtGui.QIcon.Disabled: ("color_on_disabled", "on_disabled"),
-        QtGui.QIcon.Active: ("color_on_active", "on_active"),
-        QtGui.QIcon.Selected: ("color_on_selected", "on_selected"),
+    QtGui.QIcon.State.On: {
+        QtGui.QIcon.Mode.Normal: ("color_on", "on"),
+        QtGui.QIcon.Mode.Disabled: ("color_on_disabled", "on_disabled"),
+        QtGui.QIcon.Mode.Active: ("color_on_active", "on_active"),
+        QtGui.QIcon.Mode.Selected: ("color_on_selected", "on_selected"),
     },
-    QtGui.QIcon.Off: {
-        QtGui.QIcon.Normal: ("color_off", "off"),
-        QtGui.QIcon.Disabled: ("color_off_disabled", "off_disabled"),
-        QtGui.QIcon.Active: ("color_off_active", "off_active"),
-        QtGui.QIcon.Selected: ("color_off_selected", "off_selected"),
+    QtGui.QIcon.State.Off: {
+        QtGui.QIcon.Mode.Normal: ("color_off", "off"),
+        QtGui.QIcon.Mode.Disabled: ("color_off_disabled", "off_disabled"),
+        QtGui.QIcon.Mode.Active: ("color_off_active", "off_active"),
+        QtGui.QIcon.Mode.Selected: ("color_off_selected", "off_selected"),
     },
 }
 

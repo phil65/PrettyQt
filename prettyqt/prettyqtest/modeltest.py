@@ -58,16 +58,16 @@ class _Changing(NamedTuple):
 HAS_QT_TESTER = hasattr(QtTest, "QAbstractItemModelTester")
 
 TYPES: list[tuple[QtCore.Qt.ItemDataRole, tuple[type, ...]]] = [
-    (QtCore.Qt.DisplayRole, (str,)),
-    (QtCore.Qt.ToolTipRole, (str,)),
-    (QtCore.Qt.StatusTipRole, (str,)),
-    (QtCore.Qt.WhatsThisRole, (str,)),
-    (QtCore.Qt.SizeHintRole, (QtCore.QSize,)),
-    (QtCore.Qt.FontRole, (QtGui.QFont,)),
-    (QtCore.Qt.BackgroundRole, (QtGui.QColor, QtGui.QBrush)),
-    (QtCore.Qt.ForegroundRole, (QtGui.QColor, QtGui.QBrush)),
+    (QtCore.Qt.ItemDataRole.DisplayRole, (str,)),
+    (QtCore.Qt.ItemDataRole.ToolTipRole, (str,)),
+    (QtCore.Qt.ItemDataRole.StatusTipRole, (str,)),
+    (QtCore.Qt.ItemDataRole.WhatsThisRole, (str,)),
+    (QtCore.Qt.ItemDataRole.SizeHintRole, (QtCore.QSize,)),
+    (QtCore.Qt.ItemDataRole.FontRole, (QtGui.QFont,)),
+    (QtCore.Qt.ItemDataRole.BackgroundRole, (QtGui.QColor, QtGui.QBrush)),
+    (QtCore.Qt.ItemDataRole.ForegroundRole, (QtGui.QColor, QtGui.QBrush)),
     (
-        QtCore.Qt.DecorationRole,
+        QtCore.Qt.ItemDataRole.DecorationRole,
         (QtGui.QPixmap, QtGui.QImage, QtGui.QIcon, QtGui.QColor, QtGui.QBrush),
     ),
 ]
@@ -93,7 +93,7 @@ class ModelTester:
         if index is None:
             return "<None>"
         elif not index.isValid():
-            return "<invalid> (0x{:x})".format(id(index))
+            return f"<invalid> (0x{id(index):x})"
         else:
             data = self._model.data(index, QtCore.Qt.DisplayRole)
             return "{}/{} {!r} (0x{:x})".format(
@@ -451,7 +451,7 @@ class ModelTester:
                 # doesn't change.
                 newer_index = self._model.index(r, c, parent)
                 assert index == newer_index
-        self._debug("Children check for {} done".format(self._modelindex_debug(parent)))
+        self._debug(f"Children check for {self._modelindex_debug(parent)} done")
 
     def _test_data(self):
         """Test model's implementation of data()."""
@@ -553,7 +553,7 @@ class ModelTester:
 
         for ii in range(start, end + 1):
             idx = self._model.index(ii, 0, parent)
-            self._debug(" item {} inserted: {}".format(ii, self._modelindex_debug(idx)))
+            self._debug(f" item {ii} inserted: {self._modelindex_debug(idx)}")
         self._debug("")
 
         assert current_size == expected_size

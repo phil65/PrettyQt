@@ -8,15 +8,16 @@ from prettyqt.utils import bidict
 
 
 SEQUENCE_MATCHES = bidict(
-    none=QtGui.QKeySequence.NoMatch,
-    partial=QtGui.QKeySequence.PartialMatch,
-    exact=QtGui.QKeySequence.ExactMatch,
+    none=QtGui.QKeySequence.SequenceMatch.NoMatch,
+    partial=QtGui.QKeySequence.SequenceMatch.PartialMatch,
+    exact=QtGui.QKeySequence.SequenceMatch.ExactMatch,
 )
 
 SequenceMatchStr = Literal["none", "partial", "exact"]
 
 SEQUENCE_FORMATS = bidict(
-    native=QtGui.QKeySequence.NativeText, portable=QtGui.QKeySequence.PortableText
+    native=QtGui.QKeySequence.SequenceFormat.NativeText,
+    portable=QtGui.QKeySequence.SequenceFormat.PortableText,
 )
 
 STANDARD_KEYS = bidict(

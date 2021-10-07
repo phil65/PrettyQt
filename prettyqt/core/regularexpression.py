@@ -8,28 +8,33 @@ from prettyqt.utils import bidict
 
 
 FLAGS = bidict(
-    none=QtCore.QRegularExpression.NoPatternOption,
-    ignorecase=QtCore.QRegularExpression.CaseInsensitiveOption,
-    dotall=QtCore.QRegularExpression.DotMatchesEverythingOption,
-    multiline=QtCore.QRegularExpression.MultilineOption,
-    verbose=QtCore.QRegularExpression.ExtendedPatternSyntaxOption,
-    inverted_greedyness=QtCore.QRegularExpression.InvertedGreedinessOption,
-    dont_capture=QtCore.QRegularExpression.DontCaptureOption,
-    unicode=QtCore.QRegularExpression.UseUnicodePropertiesOption,
+    none=QtCore.QRegularExpression.PatternOption.NoPatternOption,
+    ignorecase=QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption,
+    dotall=QtCore.QRegularExpression.PatternOption.DotMatchesEverythingOption,
+    multiline=QtCore.QRegularExpression.PatternOption.MultilineOption,
+    verbose=QtCore.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
+    inverted_greedyness=QtCore.QRegularExpression.PatternOption.InvertedGreedinessOption,
+    dont_capture=QtCore.QRegularExpression.PatternOption.DontCaptureOption,
+    unicode=QtCore.QRegularExpression.PatternOption.UseUnicodePropertiesOption,
 )
 
 MATCH_TYPE = bidict(
-    normal=QtCore.QRegularExpression.NormalMatch,
-    prefer_complete=QtCore.QRegularExpression.PartialPreferCompleteMatch,
-    prefer_first=QtCore.QRegularExpression.PartialPreferFirstMatch,
-    no_match=QtCore.QRegularExpression.NoMatch,
+    normal=QtCore.QRegularExpression.MatchType.NormalMatch,
+    prefer_complete=QtCore.QRegularExpression.MatchType.PartialPreferCompleteMatch,
+    prefer_first=QtCore.QRegularExpression.MatchType.PartialPreferFirstMatch,
+    no_match=QtCore.QRegularExpression.MatchType.NoMatch,
 )
 
 MatchTypeStr = Literal["normal", "prefer_complete", "prefer_first", "no_match"]
 
+if core.VersionNumber.get_qt_version() >= (6, 0, 0):
+    opt = QtCore.QRegularExpression.MatchOption.AnchorAtOffsetMatchOption  # type: ignore
+else:
+    opt = QtCore.QRegularExpression.MatchOption.AnchoredMatchOption
+
 MATCH_OPTIONS = bidict(
-    none=QtCore.QRegularExpression.NoMatchOption,
-    anchored=QtCore.QRegularExpression.AnchoredMatchOption,
+    none=QtCore.QRegularExpression.MatchOption.NoMatchOption,
+    anchored=opt,
 )
 
 

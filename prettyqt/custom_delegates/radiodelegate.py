@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from prettyqt import core, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
@@ -82,7 +82,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         editor.setMask(mask)
 
     def setEditorData(self, editor: QtWidgets.QWidget, index: QtCore.QModelIndex):
-        value = index.data(QtCore.Qt.DisplayRole)
+        value = index.data(constants.DISPLAY_ROLE)  # type: ignore
         if value in self.items:
             editor.button_group.button(self.items.index(value)).setChecked(True)
 
@@ -94,7 +94,9 @@ class RadioDelegate(widgets.StyledItemDelegate):
     ):
         button = editor.button_group.checkedId()
         if button >= 0:
-            model.setData(index, self.items[button], QtCore.Qt.DisplayRole)
+            model.setData(
+                index, self.items[button], constants.DISPLAY_ROLE  # type: ignore
+            )
             self.choices[button] = index.row()
 
 
