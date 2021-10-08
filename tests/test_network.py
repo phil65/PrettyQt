@@ -9,7 +9,7 @@ def test_hostaddress():
     address = network.HostAddress()
     address.set_address("localhost")
     repr(address)
-    assert str(address) == "0.0.0.2"
+    assert str(address) in ["0.0.0.2", "127.0.0.1"]
     assert address.get_protocol() == "ipv4"
 
 

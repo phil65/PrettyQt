@@ -291,7 +291,10 @@ def test_intvalidator():
 
 
 def test_keysequence():
-    assert gui.KeySequence.to_shortcut_str(0x41, QtCore.Qt.ShiftModifier) == "Shift+A"
+    assert (
+        gui.KeySequence.to_shortcut_str(0x41, QtCore.Qt.KeyboardModifier.ShiftModifier)
+        == "Shift+A"
+    )
     seq = gui.KeySequence("Ctrl+C")
     assert seq.get_matches("Ctrl+C") == "exact"
     with open("data.pkl", "wb") as jar:
@@ -544,7 +547,7 @@ def test_pagesize():
     assert size.get_id() == "custom"
     with pytest.raises(ValueError):
         size.get_definition_units()
-    size = gui.PageSize(gui.PageSize.A3)
+    size = gui.PageSize(gui.PageSize.PageSizeId.A3)
     with open("data.pkl", "wb") as jar:
         pickle.dump(size, jar)
     with open("data.pkl", "rb") as jar:

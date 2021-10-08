@@ -86,7 +86,7 @@ def test_chartview(qtbot, qttester):
     qttester.send_keypress(widget, QtCore.Qt.Key_Right)
     qttester.send_keypress(widget, QtCore.Qt.Key_Up)
     qttester.send_keypress(widget, QtCore.Qt.Key_Down)
-    qttester.send_mousepress(widget, QtCore.Qt.RightButton)
+    qttester.send_mousepress(widget, QtCore.Qt.MouseButton.RightButton)
     qttester.send_mousemove(widget, delay=100)
 
 

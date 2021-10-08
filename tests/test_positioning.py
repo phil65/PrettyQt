@@ -20,7 +20,7 @@ def test_geolocation():
     location = positioning.GeoLocation()
     location.get_address()
     location.get_coordinate()
-    location.get_bounding_box()
+    location.get_bounding_shape()
 
 
 def test_geocoordinate():
