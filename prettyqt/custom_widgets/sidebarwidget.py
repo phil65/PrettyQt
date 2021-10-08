@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Callable, Literal
 
-from prettyqt import gui, iconprovider, widgets
+from prettyqt import constants, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import types
 
@@ -52,7 +52,7 @@ class SidebarWidget(widgets.MainWindow):
         self.setCentralWidget(w)
 
     def _on_orientation_change(self, orientation: QtCore.Qt.Orientation):
-        if orientation == QtCore.Qt.Horizontal:
+        if orientation == constants.HORIZONTAL:
             self.settings_btn.setFixedSize(34, 34)
         else:
             self.settings_btn.setFixedSize(self.BUTTON_WIDTH, self.SETTINGS_BUTTON_HEIGHT)

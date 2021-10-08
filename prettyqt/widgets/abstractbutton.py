@@ -76,11 +76,15 @@ class AbstractButton(QtWidgets.QAbstractButton):
         if shortcut is None:
             shortcut = ""
         if isinstance(shortcut, str):
-            shortcut = gui.KeySequence(shortcut, gui.KeySequence.PortableText)
+            shortcut = gui.KeySequence(
+                shortcut, gui.KeySequence.SequenceFormat.PortableText
+            )
         self.setShortcut(shortcut)
 
     def get_shortcut(self) -> gui.KeySequence:
-        return gui.KeySequence(self.shortcut().toString(), gui.KeySequence.PortableText)
+        return gui.KeySequence(
+            self.shortcut().toString(), gui.KeySequence.SequenceFormat.PortableText
+        )
 
     def set_text(self, text: str):
         self.setText(text)

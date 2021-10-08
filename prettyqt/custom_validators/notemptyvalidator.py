@@ -12,8 +12,8 @@ class NotEmptyValidator(gui.Validator):
         self, text: str, pos: int = 0
     ) -> tuple[QtGui.QValidator.State, str, int]:
         if text == "":
-            return (self.Intermediate, text, pos)
-        return self.Acceptable, text, pos
+            return (self.State.Intermediate, text, pos)
+        return self.State.Acceptable, text, pos
 
 
 if __name__ == "__main__":

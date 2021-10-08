@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from prettyqt import core, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, core, widgets
+from prettyqt.qt import QtWidgets
 
 
 class ExpandableLine(widgets.Widget):
@@ -43,7 +43,9 @@ class ExpandableLine(widgets.Widget):
         base_layout = widgets.GridLayout()
         base_layout.setVerticalSpacing(0)
         base_layout.set_margin(0)
-        base_layout.addWidget(self.expand_btn, 0, 0, 1, 1, QtCore.Qt.AlignLeft)
+        base_layout.addWidget(
+            self.expand_btn, 0, 0, 1, 1, constants.ALIGN_LEFT
+        )  # type: ignore
         base_layout[0, 2] = header_line
         base_layout[1, 0:2] = self.content_area
         self.setLayout(base_layout)

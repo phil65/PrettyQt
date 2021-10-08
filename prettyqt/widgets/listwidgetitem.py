@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, types
 
 
@@ -22,7 +22,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
             status_tip=self.statusTip(),
             checkstate=self.get_checkstate(),
             icon=self.get_icon(),
-            data=self.data(QtCore.Qt.UserRole),
+            data=self.data(constants.USER_ROLE),  # type: ignore
         )
 
     def __getstate__(self):

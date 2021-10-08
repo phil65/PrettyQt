@@ -8,12 +8,12 @@ from prettyqt.utils import bidict
 
 
 INTERFACE_FLAGS = bidict(
-    is_up=QtNetwork.QNetworkInterface.IsUp,
-    is_running=QtNetwork.QNetworkInterface.IsRunning,
-    can_broadcast=QtNetwork.QNetworkInterface.CanBroadcast,
-    is_loop_back=QtNetwork.QNetworkInterface.IsLoopBack,
-    is_point_to_point=QtNetwork.QNetworkInterface.IsPointToPoint,
-    can_multicast=QtNetwork.QNetworkInterface.CanMulticast,
+    is_up=QtNetwork.QNetworkInterface.InterfaceFlag.IsUp,
+    is_running=QtNetwork.QNetworkInterface.InterfaceFlag.IsRunning,
+    can_broadcast=QtNetwork.QNetworkInterface.InterfaceFlag.CanBroadcast,
+    is_loop_back=QtNetwork.QNetworkInterface.InterfaceFlag.IsLoopBack,
+    is_point_to_point=QtNetwork.QNetworkInterface.InterfaceFlag.IsPointToPoint,
+    can_multicast=QtNetwork.QNetworkInterface.InterfaceFlag.CanMulticast,
 )
 
 InterfaceFlagStr = Literal[
@@ -26,20 +26,20 @@ InterfaceFlagStr = Literal[
 ]
 
 INTERFACE_TYPE = bidict(
-    unknown=QtNetwork.QNetworkInterface.Unknown,
-    loopback=QtNetwork.QNetworkInterface.Loopback,
-    virtual=QtNetwork.QNetworkInterface.Virtual,
-    ethernet=QtNetwork.QNetworkInterface.Ethernet,
-    wifi=QtNetwork.QNetworkInterface.Wifi,
-    can_bus=QtNetwork.QNetworkInterface.CanBus,
-    fddi=QtNetwork.QNetworkInterface.Fddi,
-    ppp=QtNetwork.QNetworkInterface.Ppp,
-    slip=QtNetwork.QNetworkInterface.Slip,
-    phonet=QtNetwork.QNetworkInterface.Phonet,
-    ieee802154=QtNetwork.QNetworkInterface.Ieee802154,
-    sixlowpan=QtNetwork.QNetworkInterface.SixLoWPAN,
-    ieee80216=QtNetwork.QNetworkInterface.Ieee80216,
-    ieee1394=QtNetwork.QNetworkInterface.Ieee1394,
+    unknown=QtNetwork.QNetworkInterface.InterfaceType.Unknown,
+    loopback=QtNetwork.QNetworkInterface.InterfaceType.Loopback,
+    virtual=QtNetwork.QNetworkInterface.InterfaceType.Virtual,
+    ethernet=QtNetwork.QNetworkInterface.InterfaceType.Ethernet,
+    wifi=QtNetwork.QNetworkInterface.InterfaceType.Wifi,
+    can_bus=QtNetwork.QNetworkInterface.InterfaceType.CanBus,
+    fddi=QtNetwork.QNetworkInterface.InterfaceType.Fddi,
+    ppp=QtNetwork.QNetworkInterface.InterfaceType.Ppp,
+    slip=QtNetwork.QNetworkInterface.InterfaceType.Slip,
+    phonet=QtNetwork.QNetworkInterface.InterfaceType.Phonet,
+    ieee802154=QtNetwork.QNetworkInterface.InterfaceType.Ieee802154,
+    sixlowpan=QtNetwork.QNetworkInterface.InterfaceType.SixLoWPAN,
+    ieee80216=QtNetwork.QNetworkInterface.InterfaceType.Ieee80216,
+    ieee1394=QtNetwork.QNetworkInterface.InterfaceType.Ieee1394,
 )
 
 InterfaceTypeStr = Literal[

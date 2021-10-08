@@ -45,6 +45,7 @@ from __future__ import annotations
 
 from typing import Any, NamedTuple
 
+from prettyqt import constants
 from prettyqt.qt import QtCore, QtGui, QtTest
 
 
@@ -204,7 +205,7 @@ class ModelTester:
         assert self._column_count(QtCore.QModelIndex()) >= 0
         self._fetch_more(QtCore.QModelIndex())
         flags = self._model.flags(QtCore.QModelIndex())
-        assert flags == QtCore.Qt.ItemIsDropEnabled or not flags
+        assert flags == constants.DROP_ENABLED or not flags
         self._has_children(QtCore.QModelIndex())
 
         has_row = self._model.hasIndex(0, 0)
@@ -665,8 +666,8 @@ class ModelTester:
         assert bottom_right.column() < self._column_count(common_parent)
 
     def _on_header_data_changed(self, orientation, start: int, end: int):
-        assert orientation in [QtCore.Qt.Horizontal, QtCore.Qt.Vertical]
-        is_vertical = orientation == QtCore.Qt.Vertical
+        assert orientation in [constants.HORIZONTAL, constants.VERTICAL]
+        is_vertical = orientation == constants.VERTICAL
         count = self._model.rowCount() if is_vertical else self._column_count()
         assert 0 <= start <= end < count
 

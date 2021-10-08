@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
@@ -86,14 +86,14 @@ class FlowLayout(widgets.Layout):
         y = rect.y()
         line_height = 0
         space = self.spacing()
-        pb = widgets.SizePolicy.PushButton
+        pb = widgets.SizePolicy.ControlType.PushButton
         for item in self.items:
             wid = item.widget()
-            space_x = space + wid.style().layoutSpacing(pb, pb, QtCore.Qt.Horizontal)
+            space_x = space + wid.style().layoutSpacing(pb, pb, constants.HORIZONTAL)
             next_x = x + item.sizeHint().width() + space_x
             if next_x - space_x > rect.right() and line_height > 0:
                 x = rect.x()
-                space_y = space + wid.style().layoutSpacing(pb, pb, QtCore.Qt.Vertical)
+                space_y = space + wid.style().layoutSpacing(pb, pb, constants.VERTICAL)
                 y = y + line_height + space_y
                 next_x = x + item.sizeHint().width() + space_x
                 line_height = 0

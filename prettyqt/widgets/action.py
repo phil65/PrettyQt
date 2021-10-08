@@ -173,14 +173,18 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
         if shortcut is None:
             shortcut = ""
         if isinstance(shortcut, str):
-            shortcut = gui.KeySequence(shortcut, gui.KeySequence.PortableText)
+            shortcut = gui.KeySequence(
+                shortcut, gui.KeySequence.SequenceFormat.PortableText
+            )
         self.setShortcut(shortcut)
 
     def get_shortcut(self) -> gui.KeySequence | None:
         shortcut = self.shortcut()
         if not shortcut:
             return None
-        return gui.KeySequence(shortcut.toString(), gui.KeySequence.PortableText)
+        return gui.KeySequence(
+            shortcut.toString(), gui.KeySequence.SequenceFormat.PortableText
+        )
 
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())

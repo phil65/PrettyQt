@@ -7,11 +7,13 @@ from prettyqt.qt import QtCore, QtNetwork
 from prettyqt.utils import InvalidParamError, bidict, mappers
 
 
+mod = QtNetwork.QAbstractSocket
+
 BIND_MODE = bidict(
-    share_address=QtNetwork.QAbstractSocket.ShareAddress,
-    dont_share_address=QtNetwork.QAbstractSocket.DontShareAddress,
-    reuse_address_hint=QtNetwork.QAbstractSocket.ReuseAddressHint,
-    default_for_platform=QtNetwork.QAbstractSocket.DefaultForPlatform,
+    share_address=mod.BindFlag.ShareAddress,
+    dont_share_address=mod.BindFlag.DontShareAddress,
+    reuse_address_hint=mod.BindFlag.ReuseAddressHint,
+    default_for_platform=mod.BindFlag.DefaultForPlatform,
 )
 
 BindModeStr = Literal[
@@ -22,49 +24,49 @@ BindModeStr = Literal[
 ]
 
 NETWORK_LAYER_PROTOCOL = bidict(
-    ipv4=QtNetwork.QAbstractSocket.IPv4Protocol,
-    ipv6=QtNetwork.QAbstractSocket.IPv6Protocol,
-    any_ip=QtNetwork.QAbstractSocket.AnyIPProtocol,
-    unknown=QtNetwork.QAbstractSocket.UnknownNetworkLayerProtocol,
+    ipv4=mod.NetworkLayerProtocol.IPv4Protocol,
+    ipv6=mod.NetworkLayerProtocol.IPv6Protocol,
+    any_ip=mod.NetworkLayerProtocol.AnyIPProtocol,
+    unknown=mod.NetworkLayerProtocol.UnknownNetworkLayerProtocol,
 )
 
 NetworkLayerProtocolStr = Literal["ipv4", "ipv6", "any_ip", "unknown"]
 
 PAUSE_MODES = mappers.FlagMap(
-    QtNetwork.QAbstractSocket.PauseModes,
-    never=QtNetwork.QAbstractSocket.PauseNever,
-    on_ssl_errors=QtNetwork.QAbstractSocket.PauseOnSslErrors,
+    mod.PauseMode,
+    never=mod.PauseMode.PauseNever,
+    on_ssl_errors=mod.PauseMode.PauseOnSslErrors,
 )
 
 PauseModeStr = Literal["never", "on_ssl_errors"]
 
-QAbstractSocket = QtNetwork.QAbstractSocket
+mod = mod
 
 SOCKET_ERROR = bidict(
-    connection_refused=QAbstractSocket.ConnectionRefusedError,
-    remote_host_closed=QAbstractSocket.RemoteHostClosedError,
-    host_not_found=QAbstractSocket.HostNotFoundError,
-    socket_access=QAbstractSocket.SocketAccessError,
-    socket_resource=QAbstractSocket.SocketResourceError,
-    socket_timeout=QAbstractSocket.SocketTimeoutError,
-    diagram_too_large=QAbstractSocket.DatagramTooLargeError,
-    network=QAbstractSocket.NetworkError,
-    address_in_use=QAbstractSocket.AddressInUseError,
-    socket_address_not_available=QAbstractSocket.SocketAddressNotAvailableError,
-    unsupported_socket_operation=QAbstractSocket.UnsupportedSocketOperationError,
-    proxy_authentication_required=QAbstractSocket.ProxyAuthenticationRequiredError,
-    ssl_handshake_failed=QAbstractSocket.SslHandshakeFailedError,
-    unfinished_socket_operation=QAbstractSocket.UnfinishedSocketOperationError,
-    proxy_connection_refused=QAbstractSocket.ProxyConnectionRefusedError,
-    proxy_connection_closed=QAbstractSocket.ProxyConnectionClosedError,
-    proxy_connection_timeout=QAbstractSocket.ProxyConnectionTimeoutError,
-    proxy_not_found=QAbstractSocket.ProxyNotFoundError,
-    proxy_protocol=QAbstractSocket.ProxyProtocolError,
-    operation=QAbstractSocket.OperationError,
-    ssl_internal=QAbstractSocket.SslInternalError,
-    ssl_invalid_user_data=QAbstractSocket.SslInvalidUserDataError,
-    temporary=QAbstractSocket.TemporaryError,
-    unknown_socket=QAbstractSocket.UnknownSocketError,
+    connection_refused=mod.SocketError.ConnectionRefusedError,
+    remote_host_closed=mod.SocketError.RemoteHostClosedError,
+    host_not_found=mod.SocketError.HostNotFoundError,
+    socket_access=mod.SocketError.SocketAccessError,
+    socket_resource=mod.SocketError.SocketResourceError,
+    socket_timeout=mod.SocketError.SocketTimeoutError,
+    diagram_too_large=mod.SocketError.DatagramTooLargeError,
+    network=mod.SocketError.NetworkError,
+    address_in_use=mod.SocketError.AddressInUseError,
+    socket_address_not_available=mod.SocketError.SocketAddressNotAvailableError,
+    unsupported_socket_operation=mod.SocketError.UnsupportedSocketOperationError,
+    proxy_authentication_required=mod.SocketError.ProxyAuthenticationRequiredError,
+    ssl_handshake_failed=mod.SocketError.SslHandshakeFailedError,
+    unfinished_socket_operation=mod.SocketError.UnfinishedSocketOperationError,
+    proxy_connection_refused=mod.SocketError.ProxyConnectionRefusedError,
+    proxy_connection_closed=mod.SocketError.ProxyConnectionClosedError,
+    proxy_connection_timeout=mod.SocketError.ProxyConnectionTimeoutError,
+    proxy_not_found=mod.SocketError.ProxyNotFoundError,
+    proxy_protocol=mod.SocketError.ProxyProtocolError,
+    operation=mod.SocketError.OperationError,
+    ssl_internal=mod.SocketError.SslInternalError,
+    ssl_invalid_user_data=mod.SocketError.SslInvalidUserDataError,
+    temporary=mod.SocketError.TemporaryError,
+    unknown_socket=mod.SocketError.UnknownSocketError,
 )
 
 SocketErrorStr = Literal[
@@ -95,14 +97,14 @@ SocketErrorStr = Literal[
 ]
 
 SOCKET_OPTION = bidict(
-    low_delay=QtNetwork.QAbstractSocket.LowDelayOption,
-    keep_alive=QtNetwork.QAbstractSocket.KeepAliveOption,
-    multicast_ttl=QtNetwork.QAbstractSocket.MulticastTtlOption,
-    multicast_loopback=QtNetwork.QAbstractSocket.MulticastLoopbackOption,
-    type_of_service=QtNetwork.QAbstractSocket.TypeOfServiceOption,
-    send_buffer_size_socket=QtNetwork.QAbstractSocket.SendBufferSizeSocketOption,
-    receive_buffer_size=QtNetwork.QAbstractSocket.ReceiveBufferSizeSocketOption,
-    path_mtu_socket=QtNetwork.QAbstractSocket.PathMtuSocketOption,
+    low_delay=mod.SocketOption.LowDelayOption,
+    keep_alive=mod.SocketOption.KeepAliveOption,
+    multicast_ttl=mod.SocketOption.MulticastTtlOption,
+    multicast_loopback=mod.SocketOption.MulticastLoopbackOption,
+    type_of_service=mod.SocketOption.TypeOfServiceOption,
+    send_buffer_size_socket=mod.SocketOption.SendBufferSizeSocketOption,
+    receive_buffer_size=mod.SocketOption.ReceiveBufferSizeSocketOption,
+    path_mtu_socket=mod.SocketOption.PathMtuSocketOption,
 )
 
 SocketOptionStr = Literal[
@@ -117,13 +119,13 @@ SocketOptionStr = Literal[
 ]
 
 SOCKET_STATE = bidict(
-    unconnected=QtNetwork.QAbstractSocket.UnconnectedState,
-    host_lookup=QtNetwork.QAbstractSocket.HostLookupState,
-    connecting=QtNetwork.QAbstractSocket.ConnectingState,
-    connected=QtNetwork.QAbstractSocket.ConnectedState,
-    bound=QtNetwork.QAbstractSocket.BoundState,
-    closing=QtNetwork.QAbstractSocket.ClosingState,
-    listening=QtNetwork.QAbstractSocket.ListeningState,
+    unconnected=mod.SocketState.UnconnectedState,
+    host_lookup=mod.SocketState.HostLookupState,
+    connecting=mod.SocketState.ConnectingState,
+    connected=mod.SocketState.ConnectedState,
+    bound=mod.SocketState.BoundState,
+    closing=mod.SocketState.ClosingState,
+    listening=mod.SocketState.ListeningState,
 )
 
 SocketStateStr = Literal[
@@ -137,10 +139,10 @@ SocketStateStr = Literal[
 ]
 
 SOCKET_TYPE = bidict(
-    tcp=QtNetwork.QAbstractSocket.TcpSocket,
-    udp=QtNetwork.QAbstractSocket.UdpSocket,
-    sctp=QtNetwork.QAbstractSocket.SctpSocket,
-    unknown=QtNetwork.QAbstractSocket.UnknownSocketType,
+    tcp=mod.SocketType.TcpSocket,
+    udp=mod.SocketType.UdpSocket,
+    sctp=mod.SocketType.SctpSocket,
+    unknown=mod.SocketType.UnknownSocketType,
 )
 
 SocketTypeStr = Literal["tcp", "udp", "sctp", "unknown"]

@@ -23,10 +23,10 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__(*args, **kwargs)
         self.setMenuBar(widgets.MenuBar())
         self.setDockOptions(
-            self.AllowTabbedDocks
-            | self.AllowNestedDocks
-            | self.GroupedDragging
-            | self.AnimatedDocks
+            self.DockOption.AllowTabbedDocks  # type: ignore
+            | self.DockOption.AllowNestedDocks
+            | self.DockOption.GroupedDragging
+            | self.DockOption.AnimatedDocks
         )
 
     def __getitem__(self, index: str) -> QtWidgets.QWidget:

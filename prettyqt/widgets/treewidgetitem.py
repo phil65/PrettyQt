@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Iterator, Literal
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, types
 
 
@@ -23,13 +23,17 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         return f"{type(self).__name__}()"
 
     def serialize_fields(self):
+        data = [
+            self.data(i, constants.USER_ROLE)  # type: ignore
+            for i in range(self.columnCount())
+        ]
         return dict(
             text=[self.text(i) for i in range(self.columnCount())],
             tool_tip=[self.toolTip(i) for i in range(self.columnCount())],
             status_tip=[self.statusTip(i) for i in range(self.columnCount())],
             checkstate=[self.get_checkstate(i) for i in range(self.columnCount())],
             icon=[self.get_icon(i) for i in range(self.columnCount())],
-            data=[self.data(i, QtCore.Qt.UserRole) for i in range(self.columnCount())],
+            data=data,
         )
 
     def __getstate__(self):
@@ -65,7 +69,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         return self
 
     def sort_children(self, column: int, descending: bool = False):
-        order = QtCore.Qt.DescendingOrder if descending else QtCore.Qt.AscendingOrder
+        order = constants.DESCENDING if descending else constants.ASCENDING
         self.sortChildren(column, order)
 
     def set_icon(self, icon: types.IconType, column: int = 0):

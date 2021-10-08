@@ -122,7 +122,7 @@ class KeySequence(QtGui.QKeySequence):
     @classmethod
     def to_shortcut_str(cls, key, mod: int = 0) -> str:
         for k, v in constants.MODIFIER_TO_KEY.items():
-            if mod & k:
+            if mod & k:  # type: ignore
                 key += v
         return str(cls(key))
 

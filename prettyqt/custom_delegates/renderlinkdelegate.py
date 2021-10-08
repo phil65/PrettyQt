@@ -19,7 +19,10 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
             font.setUnderline(True)
             painter.setFont(font)
             painter.setPen(option.palette.link().color())
-        painter.drawText(option.rect, QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter, text)
+        painter.drawText(
+            option.rect,
+            constants.ALIGN_LEFT | constants.ALIGN_V_CENTER,  # type: ignore
+        )
         painter.restore()
 
     def editorEvent(self, event, model, option, index):
@@ -31,11 +34,11 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         fm = gui.FontMetricsF(font)
         rect = fm.get_bounding_rect(
             core.RectF(option.rect),
-            QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter,
+            constants.ALIGN_LEFT | constants.ALIGN_V_CENTER,  # type: ignore
             text,
         )
         if (
-            event.type() == QtCore.QEvent.MouseButtonPress
+            event.type() == QtCore.QEvent.Type.MouseButtonPress
             and event.button() == QtCore.Qt.LeftButton
             and event.localPos() in rect
         ):

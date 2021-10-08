@@ -66,7 +66,7 @@ class ListWidget(QtWidgets.QListWidget):
         )
 
     def sort(self, reverse: bool = False):
-        order = QtCore.Qt.DescendingOrder if reverse else QtCore.Qt.AscendingOrder
+        order = constants.DESCENDING if reverse else constants.ASCENDING
         self.sortItems(order)
 
     def on_index_change(self):
@@ -141,15 +141,15 @@ class ListWidget(QtWidgets.QListWidget):
             data = label
         item = widgets.ListWidgetItem(label)
         item.set_icon(icon)
-        item.setData(QtCore.Qt.UserRole, data)
+        item.setData(constants.USER_ROLE, data)  # type: ignore
         self.addItem(item)
 
     def get_value(self) -> list[Any]:
-        return [i.data(QtCore.Qt.UserRole) for i in self.selectedItems()]
+        return [i.data(constants.USER_ROLE) for i in self.selectedItems()]
 
     def set_value(self, value):
         for i in self.get_children():
-            if i.data(QtCore.Qt.UserRole) in value:
+            if i.data(constants.USER_ROLE) in value:  # type: ignore
                 self.setCurrentItem(i)
                 break
 

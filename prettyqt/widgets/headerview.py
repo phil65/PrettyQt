@@ -81,7 +81,9 @@ class HeaderView(QtWidgets.QHeaderView):
     def get_section_labels(self) -> list[str]:
         model = self.model()
         return [
-            model.headerData(i, QtCore.Qt.Horizontal, QtCore.Qt.DisplayRole)
+            model.headerData(
+                i, constants.HORIZONTAL, constants.DISPLAY_ROLE  # type: ignore
+            )
             for i in range(self.count())
         ]
 

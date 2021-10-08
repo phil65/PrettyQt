@@ -30,7 +30,7 @@ class ChartView(QtCharts.QChartView):
         super().__init__(*args, **kwargs)
         chart = charts.Chart()
         self.setChart(chart)
-        self.setRenderHint(gui.Painter.Antialiasing)
+        self.setRenderHint(gui.Painter.RenderHint.Antialiasing)
         self.set_rubber_band("rectangle")
         # self.setDragMode(self.RubberBandDrag)
 
@@ -65,7 +65,7 @@ class ChartView(QtCharts.QChartView):
 
     def mouseReleaseEvent(self, event: QtGui.QMouseEvent):
         """Override to allow dragging the chart."""
-        if event.button() == QtCore.Qt.RightButton:
+        if event.button() == QtCore.Qt.MouseButton.RightButton:
             widgets.Application.restoreOverrideCursor()
             event.accept()
             return
@@ -73,7 +73,7 @@ class ChartView(QtCharts.QChartView):
 
     def mousePressEvent(self, event: QtGui.QMouseEvent):
         """Override to allow dragging the chart."""
-        if event.button() == QtCore.Qt.RightButton:
+        if event.button() == QtCore.Qt.MouseButton.RightButton:
             cursor = gui.Cursor(QtCore.Qt.SizeAllCursor)
             widgets.Application.setOverrideCursor(cursor)
             self.last_mouse_pos = event.pos()
@@ -84,7 +84,7 @@ class ChartView(QtCharts.QChartView):
     def mouseMoveEvent(self, event: QtGui.QMouseEvent):
         """Override to allow dragging the chart."""
         # pan the chart with a middle mouse drag
-        if event.buttons() & QtCore.Qt.RightButton:
+        if event.buttons() & QtCore.Qt.MouseButton.RightButton:  # type: ignore
             if not self.last_mouse_pos:
                 return
             pos_diff = event.pos() - self.last_mouse_pos

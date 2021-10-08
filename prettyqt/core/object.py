@@ -87,9 +87,9 @@ class Object(QtCore.QObject):
         recursive: bool = True,
     ) -> list[T]:
         if recursive:
-            flag = QtCore.Qt.FindChildrenRecursively
+            flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
-            flag = QtCore.Qt.FindDirectChildrenOnly
+            flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
         if prettyqt.qt.API == "pyqt5":
             return self.findChildren(typ, name=name, options=flag)  # type: ignore
         else:
@@ -106,9 +106,9 @@ class Object(QtCore.QObject):
         recursive: bool = True,
     ) -> T | None:
         if recursive:
-            flag = QtCore.Qt.FindChildrenRecursively
+            flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
-            flag = QtCore.Qt.FindDirectChildrenOnly
+            flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
         if prettyqt.qt.API == "pyqt5":
             return self.findChild(typ, name, flag)  # type: ignore
         else:

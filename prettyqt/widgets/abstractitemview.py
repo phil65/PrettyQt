@@ -138,7 +138,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         if self.selectionModel() is None:
             return None
         idx = self.selectionModel().currentIndex()
-        return idx.data(QtCore.Qt.UserRole)
+        return idx.data(constants.USER_ROLE)  # type: ignore
 
     def current_row(self) -> int | None:
         if self.selectionModel() is None:
@@ -172,8 +172,8 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
     def setup_dragdrop_move(self):
         self.setDragEnabled(True)
         self.setAcceptDrops(True)
-        self.setDragDropMode(self.DragDrop)
-        self.setDefaultDropAction(QtCore.Qt.MoveAction)
+        self.setDragDropMode(self.DragDropMode.DragDrop)
+        self.setDefaultDropAction(constants.MOVE_ACTION)
         self.setDropIndicatorShown(True)
 
     def set_edit_triggers(self, *triggers: EditTriggerStr | None):

@@ -67,13 +67,13 @@ class SpanSlider(widgets.Slider):
         self.offset = 0
         self.position = 0.0
         self.last_pressed: str | None = None
-        self.upper_pressed = widgets.Style.SC_None
-        self.lower_pressed = widgets.Style.SC_None
+        self.upper_pressed = widgets.Style.SubControl.SC_None
+        self.lower_pressed = widgets.Style.SubControl.SC_None
         self.movement: MovementModeStr = "no_crossing"
         self._main_control: Literal["lower", "upper"] = "lower"
         self._first_movement = False
         self._block_tracking = False
-        dark_color = self.palette().color(gui.Palette.Dark)
+        dark_color = self.palette().color(gui.Palette.ColorRole.Dark)
         self.gradient_left = dark_color.lighter(110)
         self.gradient_right = dark_color.lighter(110)
 

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from prettyqt import widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QTreeWidget.__bases__ = (widgets.TreeView,)
@@ -12,7 +12,7 @@ class TreeWidget(QtWidgets.QTreeWidget):
         return self.indexOfTopLevelItem(other) >= 0
 
     def sort(self, column: int = 0, reverse: bool = False):
-        order = QtCore.Qt.DescendingOrder if reverse else QtCore.Qt.AscendingOrder
+        order = constants.DESCENDING if reverse else constants.ASCENDING
         self.sortItems(column, order)
 
 

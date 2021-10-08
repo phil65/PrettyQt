@@ -109,10 +109,10 @@ class DialogButtonBox(QtWidgets.QDialogButtonBox):
         self.button_clicked.emit(button.objectName())
 
     def set_horizontal(self):
-        self.setOrientation(QtCore.Qt.Horizontal)
+        self.setOrientation(constants.HORIZONTAL)
 
     def set_vertical(self):
-        self.setOrientation(QtCore.Qt.Vertical)
+        self.setOrientation(constants.VERTICAL)
 
     def set_orientation(self, orientation: constants.OrientationStr):
         """Set the orientation of the button box.

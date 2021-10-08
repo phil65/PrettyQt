@@ -8,20 +8,20 @@ from prettyqt.utils import bidict
 
 
 STATES = bidict(
-    stopped=QtMultimedia.QMediaPlayer.StoppedState,
-    playing=QtMultimedia.QMediaPlayer.PlayingState,
-    paused=QtMultimedia.QMediaPlayer.PausedState,
+    stopped=QtMultimedia.QMediaPlayer.State.StoppedState,
+    playing=QtMultimedia.QMediaPlayer.State.PlayingState,
+    paused=QtMultimedia.QMediaPlayer.State.PausedState,
 )
 
 StateStr = Literal["stopped", "playing", "paused"]
 
 ERROR = bidict(
-    none=QtMultimedia.QMediaPlayer.NoError,
-    resource=QtMultimedia.QMediaPlayer.ResourceError,
-    format=QtMultimedia.QMediaPlayer.FormatError,
-    network=QtMultimedia.QMediaPlayer.NetworkError,
-    access_denied=QtMultimedia.QMediaPlayer.AccessDeniedError,
-    service_missing=QtMultimedia.QMediaPlayer.ServiceMissingError,
+    none=QtMultimedia.QMediaPlayer.Error.NoError,
+    resource=QtMultimedia.QMediaPlayer.Error.ResourceError,
+    format=QtMultimedia.QMediaPlayer.Error.FormatError,
+    network=QtMultimedia.QMediaPlayer.Error.NetworkError,
+    access_denied=QtMultimedia.QMediaPlayer.Error.AccessDeniedError,
+    service_missing=QtMultimedia.QMediaPlayer.Error.ServiceMissingError,
 )
 
 ErrorStr = Literal[
@@ -29,15 +29,15 @@ ErrorStr = Literal[
 ]
 
 MEDIA_STATUS = bidict(
-    unknown=QtMultimedia.QMediaPlayer.UnknownMediaStatus,
-    no_media=QtMultimedia.QMediaPlayer.NoMedia,
-    loading=QtMultimedia.QMediaPlayer.LoadingMedia,
-    loaded=QtMultimedia.QMediaPlayer.LoadedMedia,
-    stalled=QtMultimedia.QMediaPlayer.StalledMedia,
-    buffering=QtMultimedia.QMediaPlayer.BufferingMedia,
-    buffered=QtMultimedia.QMediaPlayer.BufferedMedia,
-    end=QtMultimedia.QMediaPlayer.EndOfMedia,
-    invalid=QtMultimedia.QMediaPlayer.InvalidMedia,
+    unknown=QtMultimedia.QMediaPlayer.MediaStatus.UnknownMediaStatus,
+    no_media=QtMultimedia.QMediaPlayer.MediaStatus.NoMedia,
+    loading=QtMultimedia.QMediaPlayer.MediaStatus.LoadingMedia,
+    loaded=QtMultimedia.QMediaPlayer.MediaStatus.LoadedMedia,
+    stalled=QtMultimedia.QMediaPlayer.MediaStatus.StalledMedia,
+    buffering=QtMultimedia.QMediaPlayer.MediaStatus.BufferingMedia,
+    buffered=QtMultimedia.QMediaPlayer.MediaStatus.BufferedMedia,
+    end=QtMultimedia.QMediaPlayer.MediaStatus.EndOfMedia,
+    invalid=QtMultimedia.QMediaPlayer.MediaStatus.InvalidMedia,
 )
 
 MediaStatusStr = Literal[

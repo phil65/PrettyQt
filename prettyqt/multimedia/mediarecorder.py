@@ -9,18 +9,18 @@ from prettyqt.utils import bidict
 
 
 STATES = bidict(
-    stopped=QtMultimedia.QMediaRecorder.StoppedState,
-    recording=QtMultimedia.QMediaRecorder.RecordingState,
-    paused=QtMultimedia.QMediaRecorder.PausedState,
+    stopped=QtMultimedia.QMediaRecorder.State.StoppedState,
+    recording=QtMultimedia.QMediaRecorder.State.RecordingState,
+    paused=QtMultimedia.QMediaRecorder.State.PausedState,
 )
 
 StateStr = Literal["stopped", "recording", "paused"]
 
 ERRORS = bidict(
-    none=QtMultimedia.QMediaRecorder.NoError,
-    resource=QtMultimedia.QMediaRecorder.ResourceError,
-    format=QtMultimedia.QMediaRecorder.FormatError,
-    out_of_space=QtMultimedia.QMediaRecorder.OutOfSpaceError,
+    none=QtMultimedia.QMediaRecorder.Error.NoError,
+    resource=QtMultimedia.QMediaRecorder.Error.ResourceError,
+    format=QtMultimedia.QMediaRecorder.Error.FormatError,
+    out_of_space=QtMultimedia.QMediaRecorder.Error.OutOfSpaceError,
 )
 
 ErrorStr = Literal["none", "resource", "format", "out_of_space"]
@@ -48,10 +48,10 @@ MediaStatusStr = Literal[
 ]
 
 AVAILABILITY_STATUS = bidict(
-    available=QtMultimedia.QMultimedia.Available,
-    service_missing=QtMultimedia.QMultimedia.ServiceMissing,
-    resource_error=QtMultimedia.QMultimedia.ResourceError,
-    busy=QtMultimedia.QMultimedia.Busy,
+    available=QtMultimedia.QMultimedia.AvailabilityStatus.Available,
+    service_missing=QtMultimedia.QMultimedia.AvailabilityStatus.ServiceMissing,
+    resource_error=QtMultimedia.QMultimedia.AvailabilityStatus.ResourceError,
+    busy=QtMultimedia.QMultimedia.AvailabilityStatus.Busy,
 )
 
 AvailabilityStatusStr = Literal["available", "service_missing", "resource_error", "busy"]

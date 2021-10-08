@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -69,7 +69,7 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         Returns:
             True if horizontal, else False
         """
-        return self.orientation() == QtCore.Qt.Horizontal
+        return self.orientation() == constants.HORIZONTAL
 
     def is_vertical(self) -> bool:
         """Check if silder is vertical.
@@ -77,15 +77,15 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
         Returns:
             True if vertical, else False
         """
-        return self.orientation() == QtCore.Qt.Vertical
+        return self.orientation() == constants.VERTICAL
 
     def set_horizontal(self):
         """Set slider orientation to horizontal."""
-        self.setOrientation(QtCore.Qt.Horizontal)
+        self.setOrientation(constants.HORIZONTAL)
 
     def set_vertical(self):
         """Set slider orientation to vertical."""
-        self.setOrientation(QtCore.Qt.Vertical)
+        self.setOrientation(constants.VERTICAL)
 
     def set_orientation(self, orientation: constants.OrientationStr):
         """Set the orientation of the slider.

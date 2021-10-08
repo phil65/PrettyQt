@@ -8,12 +8,12 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 OPERATION = bidict(
-    head=QtNetwork.QNetworkAccessManager.HeadOperation,
-    get=QtNetwork.QNetworkAccessManager.GetOperation,
-    put=QtNetwork.QNetworkAccessManager.PutOperation,
-    post=QtNetwork.QNetworkAccessManager.PostOperation,
-    delete=QtNetwork.QNetworkAccessManager.DeleteOperation,
-    custom=QtNetwork.QNetworkAccessManager.CustomOperation,
+    head=QtNetwork.QNetworkAccessManager.Operation.HeadOperation,
+    get=QtNetwork.QNetworkAccessManager.Operation.GetOperation,
+    put=QtNetwork.QNetworkAccessManager.Operation.PutOperation,
+    post=QtNetwork.QNetworkAccessManager.Operation.PostOperation,
+    delete=QtNetwork.QNetworkAccessManager.Operation.DeleteOperation,
+    custom=QtNetwork.QNetworkAccessManager.Operation.CustomOperation,
 )
 
 OperationStr = Literal["head", "get", "put", "post", "delete", "custom"]

@@ -28,7 +28,7 @@ class StarRating:
     ):
         """Paint the stars (and/or diamonds if we're in editing mode)."""
         painter.save()
-        painter.setRenderHint(painter.Antialiasing, True)
+        painter.setRenderHint(painter.RenderHint.Antialiasing, True)
         painter.setPen(QtCore.Qt.NoPen)
         painter.setBrush(palette.highlight() if is_editable else palette.windowText())
         y_offset = (rect.height() - PAINTING_SCALE_FACTOR) / 2

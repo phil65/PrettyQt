@@ -18,7 +18,11 @@ class Collator(QtCore.QCollator):
             state: case sensitive
 
         """
-        sensitivity = QtCore.Qt.CaseSensitive if state else QtCore.Qt.CaseInsensitive
+        sensitivity = (
+            QtCore.Qt.CaseSensitivity.CaseSensitive
+            if state
+            else QtCore.Qt.CaseSensitivity.CaseInsensitive
+        )
         self.setCaseSensitivity(sensitivity)
 
     def is_case_sensitive(self) -> bool:

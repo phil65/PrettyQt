@@ -8,13 +8,13 @@ from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 CAPABILITIES = bidict(
-    tunneling=QtNetwork.QNetworkProxy.TunnelingCapability,
-    listening=QtNetwork.QNetworkProxy.ListeningCapability,
-    udp_tunneling=QtNetwork.QNetworkProxy.UdpTunnelingCapability,
-    caching=QtNetwork.QNetworkProxy.CachingCapability,
-    host_name_lookup=QtNetwork.QNetworkProxy.HostNameLookupCapability,
-    sctp_tunneling=QtNetwork.QNetworkProxy.SctpTunnelingCapability,
-    sctp_listening=QtNetwork.QNetworkProxy.SctpListeningCapability,
+    tunneling=QtNetwork.QNetworkProxy.Capability.TunnelingCapability,
+    listening=QtNetwork.QNetworkProxy.Capability.ListeningCapability,
+    udp_tunneling=QtNetwork.QNetworkProxy.Capability.UdpTunnelingCapability,
+    caching=QtNetwork.QNetworkProxy.Capability.CachingCapability,
+    host_name_lookup=QtNetwork.QNetworkProxy.Capability.HostNameLookupCapability,
+    sctp_tunneling=QtNetwork.QNetworkProxy.Capability.SctpTunnelingCapability,
+    sctp_listening=QtNetwork.QNetworkProxy.Capability.SctpListeningCapability,
 )
 
 CapabilityStr = Literal[
@@ -28,12 +28,12 @@ CapabilityStr = Literal[
 ]
 
 PROXY_TYPES = bidict(
-    none=QtNetwork.QNetworkProxy.NoProxy,
-    default=QtNetwork.QNetworkProxy.DefaultProxy,
-    socks5=QtNetwork.QNetworkProxy.Socks5Proxy,
-    http=QtNetwork.QNetworkProxy.HttpProxy,
-    http_caching=QtNetwork.QNetworkProxy.HttpCachingProxy,
-    ftp_caching=QtNetwork.QNetworkProxy.FtpCachingProxy,
+    none=QtNetwork.QNetworkProxy.ProxyType.NoProxy,
+    default=QtNetwork.QNetworkProxy.ProxyType.DefaultProxy,
+    socks5=QtNetwork.QNetworkProxy.ProxyType.Socks5Proxy,
+    http=QtNetwork.QNetworkProxy.ProxyType.HttpProxy,
+    http_caching=QtNetwork.QNetworkProxy.ProxyType.HttpCachingProxy,
+    ftp_caching=QtNetwork.QNetworkProxy.ProxyType.FtpCachingProxy,
 )
 
 ProxyTypeStr = Literal[

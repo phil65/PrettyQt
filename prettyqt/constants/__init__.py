@@ -7,22 +7,16 @@ import prettyqt.qt
 from prettyqt.utils import mappers
 
 Qt = QtCore.Qt
+Alignment = Qt.AlignmentFlag
+Orientation = Qt.Orientation
+ItemFlag = Qt.ItemFlag
+DropAction = Qt.DropAction
+Modifier = Qt.KeyboardModifier
+Edge = Qt.Edge
 
 if prettyqt.qt.API != "pyqt6":
-    Alignment = Qt.AlignmentFlag
-    Orientation = Qt.Orientation
-    ItemFlag = Qt.ItemFlag
-    DropAction = Qt.DropAction
-    Modifier = Qt.KeyboardModifier
-    Edge = Qt.Edge
     ImageConversionFlag = Qt.ImageConversionFlags
 else:
-    Alignment = Qt.Alignment  # type: ignore
-    Orientation = Qt.Orientations  # type: ignore
-    ItemFlag = Qt.ItemFlags  # type: ignore
-    DropAction = Qt.DropActions  # type: ignore
-    Modifier = Qt.KeyboardModifiers  # type: ignore
-    Edge = Qt.Edges  # type: ignore
     ImageConversionFlag = Qt.ImageConversionFlag  # type: ignore
 
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
@@ -92,7 +86,7 @@ ThemeStr = Literal["default", "dark"]
 
 
 ALIGNMENTS = mappers.FlagMap(
-    Qt.Alignment,
+    Alignment,
     # none=int(Qt.Alignment(0)),
     left=ALIGN_LEFT,
     right=ALIGN_RIGHT,
@@ -117,7 +111,7 @@ AlignmentStr = Literal[
 ]
 
 SIDES = mappers.FlagMap(
-    Qt.Alignment,
+    Alignment,
     left=Alignment.AlignLeft,
     right=Alignment.AlignRight,
     top=Alignment.AlignTop,
@@ -127,7 +121,7 @@ SIDES = mappers.FlagMap(
 SideStr = Literal["left", "right", "top", "bottom"]
 
 EDGES = mappers.FlagMap(
-    Qt.Edges,
+    Qt.Edge,
     top=Edge.TopEdge,
     left=Edge.LeftEdge,
     right=Edge.RightEdge,
@@ -150,7 +144,7 @@ EdgeStr = Literal[
 ]
 
 H_ALIGNMENT = mappers.FlagMap(
-    Qt.Alignment,
+    Alignment,
     left=Alignment.AlignLeft,
     right=Alignment.AlignRight,
     center=Alignment.AlignHCenter,
@@ -165,7 +159,7 @@ HorizontalAlignmentStr = Literal[
 ]
 
 V_ALIGNMENT = mappers.FlagMap(
-    Qt.Alignment,
+    Alignment,
     top=Alignment.AlignTop,
     bottom=Alignment.AlignBottom,
     center=Alignment.AlignVCenter,
@@ -180,10 +174,10 @@ VerticalAlignmentStr = Literal[
 ]
 
 MODIFIER_TO_KEY = {
-    QtCore.Qt.ShiftModifier: QtCore.Qt.SHIFT,
-    QtCore.Qt.ControlModifier: QtCore.Qt.CTRL,
-    QtCore.Qt.AltModifier: QtCore.Qt.ALT,
-    QtCore.Qt.MetaModifier: QtCore.Qt.META,
+    QtCore.Qt.KeyboardModifier.ShiftModifier: QtCore.Qt.Modifier.SHIFT,
+    QtCore.Qt.KeyboardModifier.ControlModifier: QtCore.Qt.Modifier.CTRL,
+    QtCore.Qt.KeyboardModifier.AltModifier: QtCore.Qt.Modifier.ALT,
+    QtCore.Qt.KeyboardModifier.MetaModifier: QtCore.Qt.Modifier.META,
 }
 
 KeyboardmodifierStr = Literal[
@@ -212,16 +206,16 @@ STATE: bidict[StateStr, Qt.CheckState] = bidict(
 )
 
 MATCH_FLAGS = dict(
-    exact=Qt.MatchExactly,
-    fixed_string=Qt.MatchFixedString,
-    contains=Qt.MatchContains,
-    starts_with=Qt.MatchStartsWith,
-    ends_with=Qt.MatchEndsWith,
-    case_sensitive=Qt.MatchCaseSensitive,
-    regex=Qt.MatchRegularExpression,
-    wildcard=Qt.MatchWildcard,
-    wrap=Qt.MatchWrap,
-    recursive=Qt.MatchRecursive,
+    exact=Qt.MatchFlag.MatchExactly,
+    fixed_string=Qt.MatchFlag.MatchFixedString,
+    contains=Qt.MatchFlag.MatchContains,
+    starts_with=Qt.MatchFlag.MatchStartsWith,
+    ends_with=Qt.MatchFlag.MatchEndsWith,
+    case_sensitive=Qt.MatchFlag.MatchCaseSensitive,
+    regex=Qt.MatchFlag.MatchRegularExpression,
+    wildcard=Qt.MatchFlag.MatchWildcard,
+    wrap=Qt.MatchFlag.MatchWrap,
+    recursive=Qt.MatchFlag.MatchRecursive,
 )
 
 MatchFlagStr = Literal[
@@ -246,7 +240,7 @@ IMAGE_CONVERSION_FLAGS: bidict[ImageConversionFlagStr, Qt.ImageConversionFlag] =
 
 FilterModeStr = Literal["starts_with", "contains", "ends_with"]
 FILTER_MODES = mappers.FlagMap(
-    Qt.MatchFlags,
+    Qt.MatchFlag,
     starts_with=Qt.MatchFlag.MatchStartsWith,
     contains=Qt.MatchFlag.MatchContains,
     ends_with=Qt.MatchFlag.MatchEndsWith,
@@ -271,7 +265,7 @@ DOCK_POSITION: bidict[DockPositionStr, Qt.DockWidgetArea] = bidict(
 )
 
 DockPositionsStr = Literal["top", "bottom", "left", "right", "all"]
-DOCK_POSITIONS: bidict[DockPositionsStr, Qt.DockWidgetAreas] = bidict(
+DOCK_POSITIONS: bidict[DockPositionsStr, Qt.DockWidgetArea] = bidict(
     top=Qt.DockWidgetArea.TopDockWidgetArea,
     bottom=Qt.DockWidgetArea.BottomDockWidgetArea,
     left=Qt.DockWidgetArea.LeftDockWidgetArea,
@@ -587,6 +581,7 @@ GESTURE_TYPE: bidict[GestureTypeStr, Qt.GestureType] = bidict(
 
 GestureStateStr = Literal["none", "started", "updated", "finished", "canceled"]
 GESTURE_STATE: bidict[GestureStateStr, Qt.GestureState] = bidict(
+    # not available on PyQt6
     none=Qt.GestureState(0),  # type: ignore # GestureState.NoGesture
     started=Qt.GestureState.GestureStarted,
     updated=Qt.GestureState.GestureUpdated,
@@ -642,12 +637,12 @@ WINDOW_FLAGS: bidict[WindowFlagStr, Qt.WindowType] = bidict(
 
 WindowStateStr = Literal["none", "minimized", "maximized", "fullscreen", "active"]
 WINDOW_STATES = mappers.FlagMap(
-    Qt.WindowStates,
-    none=Qt.WindowNoState,
-    minimized=Qt.WindowMinimized,
-    maximized=Qt.WindowMaximized,
-    fullscreen=Qt.WindowFullScreen,
-    active=Qt.WindowActive,
+    Qt.WindowState,
+    none=Qt.WindowState.WindowNoState,
+    minimized=Qt.WindowState.WindowMinimized,
+    maximized=Qt.WindowState.WindowMaximized,
+    fullscreen=Qt.WindowState.WindowFullScreen,
+    active=Qt.WindowState.WindowActive,
 )
 
 FillRuleStr = Literal["odd_even", "winding"]
@@ -917,15 +912,15 @@ APPLICATION_ATTRIBUTE: bidict[ApplicationAttributeStr, Qt.ApplicationAttribute] 
     use_96_dpi=Att.AA_Use96Dpi,
     synthesize_touch_for_mouse_events=Att.AA_SynthesizeTouchForUnhandledMouseEvents,
     synthesize_touch_for_touch_events=Att.AA_SynthesizeMouseForUnhandledTouchEvents,
-    use_high_dpi_pixmaps=Att.AA_UseHighDpiPixmaps,
+    # use_high_dpi_pixmaps=Att.AA_UseHighDpiPixmaps, # not available on PyQt6
     force_raster_widgets=Att.AA_ForceRasterWidgets,
     use_desktop_open_gl=Att.AA_UseDesktopOpenGL,
     use_open_gl_es=Att.AA_UseOpenGLES,
     use_software_open_gl=Att.AA_UseSoftwareOpenGL,
     share_open_gl_contexts=Att.AA_ShareOpenGLContexts,
     set_palette=Att.AA_SetPalette,
-    enable_high_dpi_scaling=Att.AA_EnableHighDpiScaling,
-    disable_high_dpi_scaling=Att.AA_DisableHighDpiScaling,
+    # enable_high_dpi_scaling=Att.AA_EnableHighDpiScaling, # not available on PyQt6
+    # disable_high_dpi_scaling=Att.AA_DisableHighDpiScaling, # not available on PyQt6
     use_style_sheet_propagation_in_styles=Att.AA_UseStyleSheetPropagationInWidgetStyles,
     dont_use_native_dialogs=Att.AA_DontUseNativeDialogs,
     synthesize_mouse_for_tablet_events=Att.AA_SynthesizeMouseForUnhandledTabletEvents,

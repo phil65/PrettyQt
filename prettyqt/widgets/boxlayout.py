@@ -27,7 +27,11 @@ class BoxLayout(QtWidgets.QBoxLayout):
         parent: QtWidgets.QWidget | None = None,
         margin: int | None = None,
     ):
-        o = self.TopToBottom if orientation == "vertical" else self.LeftToRight
+        o = (
+            self.Direction.TopToBottom
+            if orientation == "vertical"
+            else self.Direction.LeftToRight
+        )
         super().__init__(o, parent)
         if margin is not None:
             self.set_margin(margin)

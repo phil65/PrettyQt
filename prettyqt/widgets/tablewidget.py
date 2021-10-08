@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from prettyqt import widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, widgets
+from prettyqt.qt import QtWidgets
 
 
 QtWidgets.QTableWidget.__bases__ = (widgets.TableView,)
@@ -21,7 +21,7 @@ class TableWidget(QtWidgets.QTableWidget):
         self.takeItem(*index)
 
     def sort(self, column: int = 0, reverse: bool = False):
-        order = QtCore.Qt.DescendingOrder if reverse else QtCore.Qt.AscendingOrder
+        order = constants.DESCENDING if reverse else constants.ASCENDING
         self.sortItems(column, order)
 
 

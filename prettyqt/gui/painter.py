@@ -102,7 +102,7 @@ class Painter(QtGui.QPainter):
         self.drawPolygon(points, fillRule=constants.FILL_RULE[fill_rule])  # type: ignore
 
     def use_antialiasing(self):
-        self.setRenderHint(self.Antialiasing, True)
+        self.setRenderHint(self.RenderHint.Antialiasing, True)
 
     def fill_rect(
         self,

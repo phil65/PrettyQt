@@ -18,14 +18,14 @@ SYNTAX = bidict(
 SyntaxStr = Literal["host_port_user_info", "host_port", "host", "path"]
 
 FLAGS = bidict(
-    secure_scheme=QWebEngineUrlScheme.SecureScheme,
-    local_scheme=QWebEngineUrlScheme.LocalScheme,
-    local_access_allowed=QWebEngineUrlScheme.LocalAccessAllowed,
-    no_access_allowed=QWebEngineUrlScheme.NoAccessAllowed,
-    service_workers_allowed=QWebEngineUrlScheme.ServiceWorkersAllowed,
-    view_source_allowed=QWebEngineUrlScheme.ViewSourceAllowed,
-    content_security_policy_ignored=QWebEngineUrlScheme.ContentSecurityPolicyIgnored,
-    cors_enabled=QWebEngineUrlScheme.CorsEnabled,
+    secure_scheme=QWebEngineUrlScheme.Flag.SecureScheme,
+    local_scheme=QWebEngineUrlScheme.Flag.LocalScheme,
+    local_access_allowed=QWebEngineUrlScheme.Flag.LocalAccessAllowed,
+    no_access_allowed=QWebEngineUrlScheme.Flag.NoAccessAllowed,
+    service_workers_allowed=QWebEngineUrlScheme.Flag.ServiceWorkersAllowed,
+    view_source_allowed=QWebEngineUrlScheme.Flag.ViewSourceAllowed,
+    content_security_policy_ignored=QWebEngineUrlScheme.Flag.ContentSecurityPolicyIgnored,
+    cors_enabled=QWebEngineUrlScheme.Flag.CorsEnabled,
 )
 
 

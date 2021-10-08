@@ -7,13 +7,15 @@ from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict
 
 
+mod = QtNetwork.QHostAddress
+
 CONVERSION_MODE = bidict(
-    strict=QtNetwork.QHostAddress.StrictConversion,
-    v4_mapped_to_ipv4=QtNetwork.QHostAddress.ConvertV4MappedToIPv4,
-    v4_compat_to_ipv4=QtNetwork.QHostAddress.ConvertV4CompatToIPv4,
-    localhost=QtNetwork.QHostAddress.ConvertLocalHost,
-    unspecified_address=QtNetwork.QHostAddress.ConvertUnspecifiedAddress,
-    tolerant=QtNetwork.QHostAddress.TolerantConversion,
+    strict=mod.ConversionModeFlag.StrictConversion,
+    v4_mapped_to_ipv4=mod.ConversionModeFlag.ConvertV4MappedToIPv4,
+    v4_compat_to_ipv4=mod.ConversionModeFlag.ConvertV4CompatToIPv4,
+    localhost=mod.ConversionModeFlag.ConvertLocalHost,
+    unspecified_address=mod.ConversionModeFlag.ConvertUnspecifiedAddress,
+    tolerant=mod.ConversionModeFlag.TolerantConversion,
 )
 
 SPECIAL_ADDRESS = bidict(

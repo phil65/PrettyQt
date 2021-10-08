@@ -30,7 +30,7 @@ class JsonDocument(QtCore.QJsonDocument):
             self.setObject(obj)
 
     def to_string(self, indented: bool = False) -> str:
-        flag = QtCore.QJsonDocument.Indented if indented else QtCore.QJsonDocument.Compact
+        flag = self.JsonFormat.Indented if indented else self.JsonFormat.Compact
         return bytes(self.toJson(flag)).decode()
 
     @classmethod

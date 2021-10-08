@@ -29,15 +29,15 @@ class RegexPatternValidator(gui.Validator):
         except sre_constants.error as e:
             self.error_occured.emit(str(e))
             self.pattern_updated.emit(None)
-            return self.Intermediate, text, pos
+            return self.State.Intermediate, text, pos
         except re._regex_core.error as e:
             self.error_occured.emit(str(e))
             self.pattern_updated.emit(None)
-            return self.Intermediate, text, pos
+            return self.State.Intermediate, text, pos
         else:
             self.error_occured.emit("")
             self.pattern_updated.emit(compiled)
-            return self.Acceptable, text, pos
+            return self.State.Acceptable, text, pos
 
 
 if __name__ == "__main__":

@@ -54,13 +54,13 @@ class TreeView(QtWidgets.QTreeView):
         self.setIndentation(indentation)
 
     def setup_list_style(self):
-        self.setSelectionBehavior(self.SelectRows)
+        self.setSelectionBehavior(self.SelectionBehavior.SelectRows)
         self.h_header.setStretchLastSection(True)
 
     def adapt_sizes(self):
         model = self.model()
         if model is not None and (model.rowCount() * model.columnCount()) < 1000:
-            self.h_header.resizeSections(self.h_header.ResizeToContents)
+            self.h_header.resizeSections(self.h_header.ResizeMode.ResizeToContents)
         else:
             self.h_header.resize_sections("interactive")
 

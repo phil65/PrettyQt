@@ -8,10 +8,10 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 CONTENT_TYPES = bidict(
-    mixed=QtNetwork.QHttpMultiPart.MixedType,
-    related=QtNetwork.QHttpMultiPart.RelatedType,
-    form=QtNetwork.QHttpMultiPart.FormDataType,
-    alternative=QtNetwork.QHttpMultiPart.AlternativeType,
+    mixed=QtNetwork.QHttpMultiPart.ContentType.MixedType,
+    related=QtNetwork.QHttpMultiPart.ContentType.RelatedType,
+    form=QtNetwork.QHttpMultiPart.ContentType.FormDataType,
+    alternative=QtNetwork.QHttpMultiPart.ContentType.AlternativeType,
 )
 
 ContentTypeStr = Literal["mixed", "related", "form", "alternative"]

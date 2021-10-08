@@ -44,7 +44,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         return editor
 
     def eventFilter(self, source: QtWidgets.QWidget, event: QtCore.QEvent) -> bool:
-        if event.type() == core.Event.MouseButtonPress:
+        if event.type() == core.Event.Type.MouseButtonPress:
             if isinstance(source, QtWidgets.QRadioButton):
                 if not source.parent().hasFocus():
                     # the parent has no focus, set it and ignore the click
@@ -53,11 +53,11 @@ class RadioDelegate(widgets.StyledItemDelegate):
             elif not source.hasFocus():
                 # the container has been clicked, check
                 source.setFocus()
-        elif event.type() == core.Event.FocusIn:
+        elif event.type() == core.Event.Type.FocusIn:
             # event received as a consequence of setFocus
             # clear the mask to show it completely
             source.clearMask()
-        elif event.type() == core.Event.FocusOut:
+        elif event.type() == core.Event.Type.FocusOut:
             # another widget has requested focus, set the mask
             source.setMask(source.property(b"offMask"))
             # update the table viewport to get rid of possible

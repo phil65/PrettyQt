@@ -66,7 +66,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
     ) -> list[QtGui.QStandardItem]:
         if mode not in constants.MATCH_FLAGS:
             raise InvalidParamError(mode, constants.MATCH_FLAGS)
-        return self.findItems(text, constants.MATCH_FLAGS[mode], column)
+        return self.findItems(text, constants.MATCH_FLAGS[mode], column)  # type: ignore
 
     def add_item(
         self,

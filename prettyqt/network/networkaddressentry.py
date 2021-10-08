@@ -8,9 +8,9 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 DNS_ELIGIBILITY_STATUS = bidict(
-    unknown=QtNetwork.QNetworkAddressEntry.DnsEligibilityUnknown,
-    eligible=QtNetwork.QNetworkAddressEntry.DnsEligible,
-    ineligible=QtNetwork.QNetworkAddressEntry.DnsIneligible,
+    unknown=QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus.DnsEligibilityUnknown,
+    eligible=QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus.DnsEligible,
+    ineligible=QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus.DnsIneligible,
 )
 
 DnsEligibilityStatusStr = Literal["unknown", "eligible", "ineligible"]

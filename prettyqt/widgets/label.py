@@ -87,8 +87,10 @@ class Label(QtWidgets.QLabel):
 
     def allow_links(self) -> Label:
         # self.setText("<a href=\"http://example.com/\">Click Here!</a>")
-        self.setTextFormat(QtCore.Qt.RichText)
-        self.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
+        self.setTextFormat(QtCore.Qt.TextFormat.RichText)
+        self.setTextInteractionFlags(
+            QtCore.Qt.TextInteractionFlag.TextBrowserInteraction  # type: ignore
+        )
         self.setOpenExternalLinks(True)
         return self
 
@@ -111,22 +113,22 @@ class Label(QtWidgets.QLabel):
 
     def get_horizontal_alignment(self) -> constants.HorizontalAlignmentStr:
         align = self.alignment()
-        if align & QtCore.Qt.AlignRight:
+        if align & constants.ALIGN_RIGHT:  # type: ignore
             return "right"
-        elif align & QtCore.Qt.AlignHCenter:
+        elif align & constants.ALIGN_H_CENTER:  # type: ignore
             return "center"
-        elif align & QtCore.Qt.AlignJustify:
+        elif align & constants.ALIGN_JUSTIFY:  # type: ignore
             return "justify"
         else:
             return "left"
 
     def get_vertical_alignment(self) -> constants.VerticalAlignmentStr:
         align = self.alignment()
-        if align & QtCore.Qt.AlignTop:
+        if align & constants.ALIGN_TOP:  # type: ignore
             return "top"
-        elif align & QtCore.Qt.AlignBottom:
+        elif align & constants.ALIGN_BOTTOM:  # type: ignore
             return "bottom"
-        elif align & QtCore.Qt.AlignBaseline:
+        elif align & constants.ALIGN_BASELINE:  # type: ignore
             return "baseline"
         else:
             return "center"

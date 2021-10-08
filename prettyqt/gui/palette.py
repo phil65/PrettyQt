@@ -88,8 +88,8 @@ class Palette(QtGui.QPalette):
         return f"{type(self).__name__}({self['button']}, {self['window']})"
 
     def highlight_inactive(self):
-        color = self.color(self.Active, self.Highlight)
-        self.setColor(self.Inactive, self.Highlight, color)
+        color = self.color(self.ColorGroup.Active, self.ColorRole.Highlight)
+        self.setColor(self.ColorGroup.Inactive, self.ColorRole.Highlight, color)
 
     def set_color(
         self, role: RoleStr, color: types.ColorType, group: GroupStr = "active"

@@ -7,18 +7,20 @@ from prettyqt.qt import QtNetwork
 from prettyqt.utils import InvalidParamError, bidict
 
 
+mod = QtNetwork.QLocalSocket
+
 LOCAL_SOCKET_ERROR = bidict(
-    connection_refused=QtNetwork.QLocalSocket.ConnectionRefusedError,
-    peer_closed=QtNetwork.QLocalSocket.PeerClosedError,
-    server_not_found=QtNetwork.QLocalSocket.ServerNotFoundError,
-    socket_access=QtNetwork.QLocalSocket.SocketAccessError,
-    socket_resource=QtNetwork.QLocalSocket.SocketResourceError,
-    socket_timeout=QtNetwork.QLocalSocket.SocketTimeoutError,
-    datagram_too_large=QtNetwork.QLocalSocket.DatagramTooLargeError,
-    connection=QtNetwork.QLocalSocket.ConnectionError,
-    unsupported_socket_operation=QtNetwork.QLocalSocket.UnsupportedSocketOperationError,
-    operation=QtNetwork.QLocalSocket.OperationError,
-    unknown_socket=QtNetwork.QLocalSocket.UnknownSocketError,
+    connection_refused=mod.LocalSocketError.ConnectionRefusedError,
+    peer_closed=mod.LocalSocketError.PeerClosedError,
+    server_not_found=mod.LocalSocketError.ServerNotFoundError,
+    socket_access=mod.LocalSocketError.SocketAccessError,
+    socket_resource=mod.LocalSocketError.SocketResourceError,
+    socket_timeout=mod.LocalSocketError.SocketTimeoutError,
+    datagram_too_large=mod.LocalSocketError.DatagramTooLargeError,
+    connection=mod.LocalSocketError.ConnectionError,
+    unsupported_socket_operation=mod.LocalSocketError.UnsupportedSocketOperationError,
+    operation=mod.LocalSocketError.OperationError,
+    unknown_socket=mod.LocalSocketError.UnknownSocketError,
 )
 
 LocalSocketErrorStr = Literal[
@@ -36,10 +38,10 @@ LocalSocketErrorStr = Literal[
 ]
 
 LOCAL_SOCKET_STATE = bidict(
-    unconnected=QtNetwork.QLocalSocket.UnconnectedState,
-    connecting=QtNetwork.QLocalSocket.ConnectingState,
-    connected=QtNetwork.QLocalSocket.ConnectedState,
-    closing=QtNetwork.QLocalSocket.ClosingState,
+    unconnected=mod.LocalSocketState.UnconnectedState,
+    connecting=mod.LocalSocketState.ConnectingState,
+    connected=mod.LocalSocketState.ConnectedState,
+    closing=mod.LocalSocketState.ClosingState,
 )
 
 LocalSocketStateStr = Literal[

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
@@ -57,7 +57,7 @@ class CodeEditor(widgets.PlainTextEdit):
                 if block.isVisible() and (bottom >= event.rect().top()):
                     number = str(block_number + 1)
                     painter.drawText(
-                        0, int(top), width, height, QtCore.Qt.AlignRight, number
+                        0, int(top), width, height, constants.ALIGN_RIGHT, number
                     )
                 block = block.next()
                 top = bottom

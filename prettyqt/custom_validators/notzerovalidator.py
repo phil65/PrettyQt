@@ -9,8 +9,8 @@ class NotZeroValidator(gui.Validator):
         self, text: str, pos: int = 0
     ) -> tuple[QtGui.QValidator.State, str, int]:
         if text == "0":
-            return self.Intermediate, text, pos
-        return self.Acceptable, text, pos
+            return self.State.Intermediate, text, pos
+        return self.State.Acceptable, text, pos
 
     def __eq__(self, other: object):
         return isinstance(other, NotZeroValidator)

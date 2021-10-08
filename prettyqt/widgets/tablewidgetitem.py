@@ -21,7 +21,7 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
             status_tip=self.statusTip(),
             checkstate=self.get_checkstate(),
             icon=self.get_icon(),
-            data=self.data(QtCore.Qt.UserRole),
+            data=self.data(constants.USER_ROLE),  # type: ignore
         )
 
     def set_icon(self, icon: types.IconType):

@@ -8,8 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 METHODS = bidict(
-    get=QtWebEngineCore.QWebEngineHttpRequest.Get,
-    post=QtWebEngineCore.QWebEngineHttpRequest.Post,
+    get=QtWebEngineCore.QWebEngineHttpRequest.Method.Get,
+    post=QtWebEngineCore.QWebEngineHttpRequest.Method.Post,
 )
 
 MethodStr = Literal["get", "post"]
