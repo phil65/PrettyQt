@@ -12,6 +12,7 @@ if PYQT5:
         QWebEngineScriptCollection,
         QWebEngineProfile,
         QWebEngineSettings,
+        QWebEnginePage,
     )
 elif PYSIDE2:
     from PySide2.QtWebEngineCore import *
@@ -22,6 +23,7 @@ elif PYSIDE2:
         QWebEngineScriptCollection,
         QWebEngineProfile,
         QWebEngineSettings,
+        QWebEnginePage,
     )
 elif PYQT6:
     from PyQt6.QtWebEngineCore import *

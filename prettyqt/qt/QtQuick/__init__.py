@@ -1,10 +1,12 @@
 """Provides QtQuick classes and functions."""
 
-from prettyqt.qt import PYQT5, PYSIDE2, PYSIDE6, PythonQtError
+from prettyqt.qt import PYQT5, PYQT6, PYSIDE2, PYSIDE6, PythonQtError
 
 
 if PYQT5:
     from PyQt5.QtQuick import *
+elif PYQT6:
+    from PyQt6.QtQuick import *
 elif PYSIDE2:
     from PySide2.QtQuick import *
 elif PYSIDE6:
