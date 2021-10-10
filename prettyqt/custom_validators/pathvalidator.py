@@ -11,8 +11,8 @@ class PathValidator(gui.Validator):
 
     def validate(self, text: str, pos: int = 0):
         if pathlib.Path(text).exists():
-            return self.Acceptable, text, pos
-        return self.Intermediate, text, pos
+            return self.State.Acceptable, text, pos
+        return self.State.Intermediate, text, pos
 
 
 if __name__ == "__main__":

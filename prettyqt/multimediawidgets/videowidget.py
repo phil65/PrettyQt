@@ -19,7 +19,10 @@ class VideoWidget(QtMultimediaWidgets.QVideoWidget):
         self.doubleclick_for_fullscreen = value
 
     def mouseDoubleClickEvent(self, event):
-        if event.button() == QtCore.Qt.LeftButton and self.doubleclick_for_fullscreen:
+        if (
+            event.button() == QtCore.Qt.MouseButton.LeftButton
+            and self.doubleclick_for_fullscreen
+        ):
             self.setFullScreen(not self.isFullScreen())
             event.accept()
         return super().mouseDoubleClickEvent(event)

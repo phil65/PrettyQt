@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
+import prettyqt
 from prettyqt import constants, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, mappers
@@ -91,7 +92,11 @@ class TextFormat(QtGui.QTextFormat):
         return constants.LAYOUT_DIRECTION.inverse[self.layoutDirection()]
 
     def select_full_width(self, value: bool = True):
-        self.setProperty(QtGui.QTextFormat.FullWidthSelection, value)
+        if prettyqt.qt.API != "pyqt6":
+            prop = QtGui.QTextFormat.FullWidthSelection
+        else:
+            prop = QtGui.QTextFormat.Property.FullWidthSelection  # type: ignore
+        self.setProperty(prop, value)
 
 
 if __name__ == "__main__":

@@ -11,9 +11,9 @@ from prettyqt.utils import InvalidParamError, bidict, colors, types
 ARROW_MARKER_NUM = 8
 
 MATCH_TYPE = bidict(
-    none=Qsci.QsciScintilla.NoBraceMatch,
-    strict=Qsci.QsciScintilla.StrictBraceMatch,
-    sloppy=Qsci.QsciScintilla.SloppyBraceMatch,
+    none=Qsci.QsciScintilla.BraceMatch.NoBraceMatch,
+    strict=Qsci.QsciScintilla.BraceMatch.StrictBraceMatch,
+    sloppy=Qsci.QsciScintilla.BraceMatch.SloppyBraceMatch,
 )
 
 MatchTypeStr = Literal["none", "strict", "sloppy"]
@@ -99,35 +99,35 @@ LexerStr = Literal[
 ]
 
 MARKER = bidict(
-    circle=Qsci.QsciScintilla.Circle,
-    rectangle=Qsci.QsciScintilla.Rectangle,
-    right_triangle=Qsci.QsciScintilla.RightTriangle,
-    small_rectangle=Qsci.QsciScintilla.SmallRectangle,
-    right_arrow=Qsci.QsciScintilla.RightArrow,
-    invisible=Qsci.QsciScintilla.Invisible,
-    down_triangle=Qsci.QsciScintilla.DownTriangle,
-    minus=Qsci.QsciScintilla.Minus,
-    plus=Qsci.QsciScintilla.Plus,
-    vertical_line=Qsci.QsciScintilla.VerticalLine,
-    bottom_left_corner=Qsci.QsciScintilla.BottomLeftCorner,
-    left_side_splitter=Qsci.QsciScintilla.LeftSideSplitter,
-    boxed_plus=Qsci.QsciScintilla.BoxedPlus,
-    boxed_plus_connected=Qsci.QsciScintilla.BoxedPlusConnected,
-    boxed_minus=Qsci.QsciScintilla.BoxedMinus,
-    boxed_minus_connected=Qsci.QsciScintilla.BoxedMinusConnected,
-    rounded_bottom_left_corner=Qsci.QsciScintilla.RoundedBottomLeftCorner,
-    left_side_rounded_splitter=Qsci.QsciScintilla.LeftSideRoundedSplitter,
-    circled_plus=Qsci.QsciScintilla.CircledPlus,
-    circled_plus_connected=Qsci.QsciScintilla.CircledPlusConnected,
-    circled_minus=Qsci.QsciScintilla.CircledMinus,
-    circled_minus_connected=Qsci.QsciScintilla.CircledMinusConnected,
-    background=Qsci.QsciScintilla.Background,
-    three_dots=Qsci.QsciScintilla.ThreeDots,
-    three_right_arrows=Qsci.QsciScintilla.ThreeRightArrows,
-    full_rectangle=Qsci.QsciScintilla.FullRectangle,
-    left_rectangle=Qsci.QsciScintilla.LeftRectangle,
-    underline=Qsci.QsciScintilla.Underline,
-    bookmark=Qsci.QsciScintilla.Bookmark,
+    circle=Qsci.QsciScintilla.MarkerSymbol.Circle,
+    rectangle=Qsci.QsciScintilla.MarkerSymbol.Rectangle,
+    right_triangle=Qsci.QsciScintilla.MarkerSymbol.RightTriangle,
+    small_rectangle=Qsci.QsciScintilla.MarkerSymbol.SmallRectangle,
+    right_arrow=Qsci.QsciScintilla.MarkerSymbol.RightArrow,
+    invisible=Qsci.QsciScintilla.MarkerSymbol.Invisible,
+    down_triangle=Qsci.QsciScintilla.MarkerSymbol.DownTriangle,
+    minus=Qsci.QsciScintilla.MarkerSymbol.Minus,
+    plus=Qsci.QsciScintilla.MarkerSymbol.Plus,
+    vertical_line=Qsci.QsciScintilla.MarkerSymbol.VerticalLine,
+    bottom_left_corner=Qsci.QsciScintilla.MarkerSymbol.BottomLeftCorner,
+    left_side_splitter=Qsci.QsciScintilla.MarkerSymbol.LeftSideSplitter,
+    boxed_plus=Qsci.QsciScintilla.MarkerSymbol.BoxedPlus,
+    boxed_plus_connected=Qsci.QsciScintilla.MarkerSymbol.BoxedPlusConnected,
+    boxed_minus=Qsci.QsciScintilla.MarkerSymbol.BoxedMinus,
+    boxed_minus_connected=Qsci.QsciScintilla.MarkerSymbol.BoxedMinusConnected,
+    rounded_bottom_left_corner=Qsci.QsciScintilla.MarkerSymbol.RoundedBottomLeftCorner,
+    left_side_rounded_splitter=Qsci.QsciScintilla.MarkerSymbol.LeftSideRoundedSplitter,
+    circled_plus=Qsci.QsciScintilla.MarkerSymbol.CircledPlus,
+    circled_plus_connected=Qsci.QsciScintilla.MarkerSymbol.CircledPlusConnected,
+    circled_minus=Qsci.QsciScintilla.MarkerSymbol.CircledMinus,
+    circled_minus_connected=Qsci.QsciScintilla.MarkerSymbol.CircledMinusConnected,
+    background=Qsci.QsciScintilla.MarkerSymbol.Background,
+    three_dots=Qsci.QsciScintilla.MarkerSymbol.ThreeDots,
+    three_right_arrows=Qsci.QsciScintilla.MarkerSymbol.ThreeRightArrows,
+    full_rectangle=Qsci.QsciScintilla.MarkerSymbol.FullRectangle,
+    left_rectangle=Qsci.QsciScintilla.MarkerSymbol.LeftRectangle,
+    underline=Qsci.QsciScintilla.MarkerSymbol.Underline,
+    bookmark=Qsci.QsciScintilla.MarkerSymbol.Bookmark,
 )
 
 MarkerStr = Literal[
@@ -163,10 +163,10 @@ MarkerStr = Literal[
 ]
 
 WRAP_MODE = bidict(
-    none=Qsci.QsciScintilla.WrapNone,
-    word=Qsci.QsciScintilla.WrapWord,
-    anywhere=Qsci.QsciScintilla.WrapCharacter,
-    whitespace=Qsci.QsciScintilla.WrapWhitespace,
+    none=Qsci.QsciScintilla.WrapMode.WrapNone,
+    word=Qsci.QsciScintilla.WrapMode.WrapWord,
+    anywhere=Qsci.QsciScintilla.WrapMode.WrapCharacter,
+    whitespace=Qsci.QsciScintilla.WrapMode.WrapWhitespace,
 )
 
 WrapModeStr = Literal["none", "word", "anywhere", "whitespace"]

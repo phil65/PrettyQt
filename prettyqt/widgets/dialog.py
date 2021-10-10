@@ -33,15 +33,15 @@ class BaseDialog(QtWidgets.QDialog):
         return type(self), (), self.__getstate__()
 
     def keyPressEvent(self, e):
-        if e.key() == QtCore.Qt.Key_Escape:
+        if e.key() == QtCore.Qt.Key.Key_Escape:
             self.close()
-        elif e.key() == QtCore.Qt.Key_F11:
+        elif e.key() == QtCore.Qt.Key.Key_F11:
             self.showNormal() if self.isMaximized() else self.showMaximized()
         else:
             super().keyPressEvent(e)
 
     def delete_on_close(self):
-        self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
+        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose)
 
     def add_widget(self, widget: QtWidgets.QWidget) -> QtWidgets.QWidget:
         self.box += widget

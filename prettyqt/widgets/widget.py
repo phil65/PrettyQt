@@ -238,22 +238,34 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         stay_on_top: bool | None = None,
         frameless: bool | None = None,
         window: bool | None = None,
+        dialog: bool | None = None,
         tooltip: bool | None = None,
+        tool: bool | None = None,
+        customize: bool | None = None,
+        window_title: bool | None = None,
     ) -> None:
         if minimize is not None:
-            self.setWindowFlag(QtCore.Qt.WindowMinimizeButtonHint, minimize)
+            self.setWindowFlag(QtCore.Qt.WindowType.WindowMinimizeButtonHint, minimize)
         if maximize is not None:
-            self.setWindowFlag(QtCore.Qt.WindowMaximizeButtonHint, maximize)
+            self.setWindowFlag(QtCore.Qt.WindowType.WindowMaximizeButtonHint, maximize)
         if close is not None:
-            self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, close)
+            self.setWindowFlag(QtCore.Qt.WindowType.WindowCloseButtonHint, close)
         if stay_on_top is not None:
-            self.setWindowFlag(QtCore.Qt.WindowStaysOnTopHint, stay_on_top)
+            self.setWindowFlag(QtCore.Qt.WindowType.WindowStaysOnTopHint, stay_on_top)
         if frameless is not None:
-            self.setWindowFlag(QtCore.Qt.FramelessWindowHint, frameless)
+            self.setWindowFlag(QtCore.Qt.WindowType.FramelessWindowHint, frameless)
         if window is not None:
-            self.setWindowFlag(QtCore.Qt.Window, window)
+            self.setWindowFlag(QtCore.Qt.WindowType.Window, window)
+        if dialog is not None:
+            self.setWindowFlag(QtCore.Qt.WindowType.Dialog, dialog)
         if tooltip is not None:
-            self.setWindowFlag(QtCore.Qt.ToolTip, tooltip)
+            self.setWindowFlag(QtCore.Qt.WindowType.ToolTip, tooltip)
+        if tool is not None:
+            self.setWindowFlag(QtCore.Qt.WindowType.Tool, tool)
+        if customize is not None:
+            self.setWindowFlag(QtCore.Qt.WindowType.CustomizeWindowHint, customize)
+        if window_title is not None:
+            self.setWindowFlag(QtCore.Qt.WindowType.WindowTitleHint, window_title)
 
     def set_attribute(
         self, attribute: constants.WidgetAttributeStr, state: bool = True

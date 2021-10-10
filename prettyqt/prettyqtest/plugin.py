@@ -58,17 +58,19 @@ def qtlog(request):
 class QtTester:
     @staticmethod
     def send_keypress(widget: QtWidgets.QWidget, key):
-        event = gui.KeyEvent(QtCore.QEvent.KeyPress, key, QtCore.Qt.KeyboardModifiers())
+        event = gui.KeyEvent(
+            QtCore.QEvent.Type.KeyPress, key, QtCore.Qt.KeyboardModifiers()
+        )
         widgets.Application.sendEvent(widget, event)
 
     @staticmethod
     def send_mousepress(widget: QtWidgets.QWidget, key):
-        event = gui.MouseEvent(
-            QtCore.QEvent.MouseButtonRelease,
+        event = gui.MouseEvent(  # type: ignore
+            QtCore.QEvent.Type.MouseButtonRelease,
             QtCore.QPointF(0, 0),
             QtCore.QPointF(0, 0),
             key,
-            QtCore.Qt.NoButton,
+            QtCore.Qt.MouseButton.NoButton,
             QtCore.Qt.KeyboardModifiers(),
         )
         widgets.Application.sendEvent(widget, event)
@@ -79,12 +81,12 @@ class QtTester:
     ):
         if target is None:
             target = QtCore.QPointF(0, 0)
-        event = gui.MouseEvent(
-            QtCore.QEvent.MouseButtonRelease,
+        event = gui.MouseEvent(  # type: ignore
+            QtCore.QEvent.Type.MouseButtonRelease,
             target,
             QtCore.QPointF(0, 0),
-            QtCore.Qt.NoButton,
-            QtCore.Qt.NoButton,
+            QtCore.Qt.MouseButton.NoButton,
+            QtCore.Qt.MouseButton.NoButton,
             QtCore.Qt.KeyboardModifiers(),
         )
         widgets.Application.sendEvent(widget, event)

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 
 
 class PopupInfo(widgets.Dialog):
@@ -11,12 +11,7 @@ class PopupInfo(widgets.Dialog):
         super().__init__(parent=parent)
         self.timer = core.Timer.single_shot(callback=self.close)
         self.label = widgets.Label()
-        self.setWindowFlags(
-            self.windowFlags()
-            | QtCore.Qt.Tool
-            | QtCore.Qt.WindowStaysOnTopHint
-            | QtCore.Qt.FramelessWindowHint
-        )
+        self.set_flags(stay_on_top=True, frameless=True, tool=True)
         layout = widgets.BoxLayout("vertical")
         layout.set_margin(20)
         self.set_layout(layout)

@@ -39,7 +39,7 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         )
         if (
             event.type() == QtCore.QEvent.Type.MouseButtonPress
-            and event.button() == QtCore.Qt.LeftButton
+            and event.button() == QtCore.Qt.MouseButton.LeftButton
             and event.localPos() in rect
         ):
             text = index.data()

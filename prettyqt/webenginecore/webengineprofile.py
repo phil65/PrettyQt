@@ -9,18 +9,20 @@ from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
+mod = QtWebEngineCore.QWebEngineProfile
+
 HTTP_CACHE_TYPE = bidict(
-    none=QtWebEngineCore.QWebEngineProfile.NoCache,
-    disk=QtWebEngineCore.QWebEngineProfile.DiskHttpCache,
-    memory=QtWebEngineCore.QWebEngineProfile.MemoryHttpCache,
+    none=mod.HttpCacheType.NoCache,
+    disk=mod.HttpCacheType.DiskHttpCache,
+    memory=mod.HttpCacheType.MemoryHttpCache,
 )
 
 HttpCacheTypeStr = Literal["none", "disk", "memory"]
 
 PERSISTENT_COOKIE_POLICY = bidict(
-    none=QtWebEngineCore.QWebEngineProfile.NoPersistentCookies,
-    allow=QtWebEngineCore.QWebEngineProfile.AllowPersistentCookies,
-    force=QtWebEngineCore.QWebEngineProfile.ForcePersistentCookies,
+    none=mod.PersistentCookiesPolicy.NoPersistentCookies,
+    allow=mod.PersistentCookiesPolicy.AllowPersistentCookies,
+    force=mod.PersistentCookiesPolicy.ForcePersistentCookies,
 )
 
 PersistentCookiePolicyStr = Literal["none", "allow", "force"]

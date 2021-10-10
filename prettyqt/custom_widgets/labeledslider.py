@@ -56,9 +56,11 @@ class LabeledSlider(widgets.Widget):
         st_slider.initFrom(self.sl)
         st_slider.orientation = self.sl.orientation()
 
-        length = style.pixelMetric(widgets.Style.PM_SliderLength, st_slider, self.sl)
+        length = style.pixelMetric(
+            widgets.Style.PixelMetric.PM_SliderLength, st_slider, self.sl
+        )
         available = style.pixelMetric(
-            widgets.Style.PM_SliderSpaceAvailable, st_slider, self.sl
+            widgets.Style.PixelMetric.PM_SliderSpaceAvailable, st_slider, self.sl
         )
 
         painter = gui.Painter(self)

@@ -119,7 +119,9 @@ class MessageBox(QtWidgets.QMessageBox):
         self.setInformativeText(informative_text)
         self.setWindowTitle(title)
         self.setWindowFlags(
-            QtCore.Qt.Dialog | QtCore.Qt.WindowTitleHint | QtCore.Qt.CustomizeWindowHint
+            QtCore.Qt.WindowType.Dialog  # type: ignore
+            | QtCore.Qt.WindowType.WindowTitleHint
+            | QtCore.Qt.WindowType.CustomizeWindowHint
         )
         self.setDetailedText(details)
         if isinstance(buttons, list):

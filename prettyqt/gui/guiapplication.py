@@ -128,8 +128,8 @@ class GuiApplication(QtGui.QGuiApplication):
     def copy_to_clipboard(cls, text: str):
         """Sets clipboard to supplied text."""
         cb = cls.clipboard()
-        cb.clear(mode=cb.Clipboard)
-        cb.setText(text, mode=cb.Clipboard)
+        cb.clear(mode=cb.Mode.Clipboard)
+        cb.setText(text, mode=cb.Mode.Clipboard)
 
     @classmethod
     def get_font(cls) -> gui.Font:

@@ -178,7 +178,7 @@ class Timeline(widgets.Widget):
         self.update()
 
     def mousePressEvent(self, e):
-        if e.button() == QtCore.Qt.LeftButton:
+        if e.button() == QtCore.Qt.MouseButton.LeftButton:
             x = e.pos().x()
             self.position_changed.emit(x)
             self.pointer_time_pos = x * self.get_scale()
@@ -189,7 +189,7 @@ class Timeline(widgets.Widget):
             self._clicking = True  # Set clicking check to true
 
     def mouseReleaseEvent(self, e):
-        if e.button() == QtCore.Qt.LeftButton:
+        if e.button() == QtCore.Qt.MouseButton.LeftButton:
             self._clicking = False  # Set clicking check to false
 
     def enterEvent(self, e):

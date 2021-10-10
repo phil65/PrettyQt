@@ -100,7 +100,9 @@ class SpanSlider(widgets.Slider):
 
         opt = widgets.StyleOptionSlider()
         self.initStyleOption(opt)
-        m = self.style().pixelMetric(widgets.Style.PM_MaximumDragDistance, opt, self)
+        m = self.style().pixelMetric(
+            widgets.Style.PixelMetric.PM_MaximumDragDistance, opt, self
+        )
         pixel_pos = self.pick(event.pos()) - self.offset
         new_pos = float(self._pixel_pos_to_value(pixel_pos))
         if m >= 0:
@@ -144,7 +146,7 @@ class SpanSlider(widgets.Slider):
     def mouseReleaseEvent(self, event):
         super().mouseReleaseEvent(event)
         self.setSliderDown(False)
-        self.lower_pressed = self.upper_pressed = widgets.Style.SC_None
+        self.lower_pressed = self.upper_pressed = widgets.Style.SubControl.SC_None
         self.update()
 
     def paintEvent(self, event):
@@ -153,7 +155,7 @@ class SpanSlider(widgets.Slider):
         # ticks
         opt = widgets.StyleOptionSlider()
         self.initStyleOption(opt)
-        opt.subControls = widgets.Style.SC_SliderTickmarks
+        opt.subControls = widgets.Style.SubControl.SC_SliderTickmarks
         painter.draw_complex_control("slider", opt)
 
         # groove
@@ -364,7 +366,7 @@ class SpanSlider(widgets.Slider):
         x2: int,
         y2: int,
     ):
-        highlight = self.palette().color(gui.Palette.Highlight)
+        highlight = self.palette().color(gui.Palette.ColorRole.Highlight)
         gradient = gui.LinearGradient(x1, y1, x2, y2)
         gradient[0] = highlight.darker(120)
         gradient[1] = highlight.lighter(108)
@@ -415,7 +417,7 @@ class SpanSlider(widgets.Slider):
 
         if pressed == HANDLE_STYLE:
             opt.activeSubControls = pressed
-            opt.state |= widgets.Style.State_Sunken
+            opt.state |= widgets.Style.StateFlag.State_Sunken
         painter.draw_complex_control("slider", opt)
 
     def get_style_option(self, handle: HandleStr) -> widgets.StyleOptionSlider:

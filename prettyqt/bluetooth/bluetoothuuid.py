@@ -5,10 +5,8 @@ from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
 
-if core.VersionNumber.get_qt_version() >= (6, 2, 0):
-    md = QtBluetooth.QBluetoothUuid.CharacteristicType
-else:
-    md = QtBluetooth.QBluetoothUuid
+md = QtBluetooth.QBluetoothUuid.CharacteristicType
+
 
 CHARACTERISTIC_TYPES = bidict(
     aerobic_heart_rate_lower=md.AerobicHeartRateLowerLimit,
@@ -150,10 +148,7 @@ CHARACTERISTIC_TYPES = bidict(
     wind_chill=md.WindChill,
 )
 
-if core.VersionNumber.get_qt_version() >= (6, 2, 0):
-    dt = QtBluetooth.QBluetoothUuid.DescriptorType
-else:
-    dt = QtBluetooth.QBluetoothUuid
+dt = QtBluetooth.QBluetoothUuid.DescriptorType
 
 DESCRIPTOR_TYPE = bidict(
     characteristic_extended_properties=dt.CharacteristicExtendedProperties,
@@ -171,10 +166,7 @@ DESCRIPTOR_TYPE = bidict(
     unknown_descriptor_type=dt.UnknownDescriptorType,
 )
 
-if core.VersionNumber.get_qt_version() >= (6, 2, 0):
-    pu = QtBluetooth.QBluetoothUuid.ProtocolUuid
-else:
-    pu = QtBluetooth.QBluetoothUuid
+pu = QtBluetooth.QBluetoothUuid.ProtocolUuid
 
 PROTOCOL_UUID = bidict(
     sdp=pu.Sdp,
@@ -204,10 +196,7 @@ PROTOCOL_UUID = bidict(
     l2_cap=pu.L2cap,
 )
 
-if core.VersionNumber.get_qt_version() >= (6, 2, 0):
-    su = QtBluetooth.QBluetoothUuid.ServiceClassUuid
-else:
-    su = QtBluetooth.QBluetoothUuid
+su = QtBluetooth.QBluetoothUuid.ServiceClassUuid
 
 SERVICE_CLASS_UUID = bidict(
     service_discovery_server=su.ServiceDiscoveryServer,

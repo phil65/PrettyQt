@@ -11,30 +11,30 @@ from prettyqt.utils import InvalidParamError, bidict
 Item = QtWebEngineWidgets.QWebEngineDownloadItem
 
 DOWNLOAD_INTERRUPT_REASONS = bidict(
-    none=Item.NoReason,
-    file_failed=Item.FileFailed,
-    file_access_denied=Item.FileAccessDenied,
-    file_no_space=Item.FileNoSpace,
-    filename_too_long=Item.FileNameTooLong,
-    file_too_large=Item.FileTooLarge,
-    file_virus_infected=Item.FileVirusInfected,
-    file_transient_error=Item.FileTransientError,
-    file_blocked=Item.FileBlocked,
-    file_security_check_failed=Item.FileSecurityCheckFailed,
-    file_too_short=Item.FileTooShort,
-    file_hash_mismatch=Item.FileHashMismatch,
-    network_fialed=Item.NetworkFailed,
-    network_timeout=Item.NetworkTimeout,
-    network_disconnected=Item.NetworkDisconnected,
-    network_server_down=Item.NetworkServerDown,
-    network_invalid_request=Item.NetworkInvalidRequest,
-    server_failed=Item.ServerFailed,
-    server_bad_content=Item.ServerBadContent,
-    server_unauthorized=Item.ServerUnauthorized,
-    server_cert_problem=Item.ServerCertProblem,
-    server_forbidden=Item.ServerForbidden,
-    server_unreachable=Item.ServerUnreachable,
-    user_canceled=Item.UserCanceled,
+    none=Item.DownloadInterruptReason.NoReason,
+    file_failed=Item.DownloadInterruptReason.FileFailed,
+    file_access_denied=Item.DownloadInterruptReason.FileAccessDenied,
+    file_no_space=Item.DownloadInterruptReason.FileNoSpace,
+    filename_too_long=Item.DownloadInterruptReason.FileNameTooLong,
+    file_too_large=Item.DownloadInterruptReason.FileTooLarge,
+    file_virus_infected=Item.DownloadInterruptReason.FileVirusInfected,
+    file_transient_error=Item.DownloadInterruptReason.FileTransientError,
+    file_blocked=Item.DownloadInterruptReason.FileBlocked,
+    file_security_check_failed=Item.DownloadInterruptReason.FileSecurityCheckFailed,
+    file_too_short=Item.DownloadInterruptReason.FileTooShort,
+    file_hash_mismatch=Item.DownloadInterruptReason.FileHashMismatch,
+    network_fialed=Item.DownloadInterruptReason.NetworkFailed,
+    network_timeout=Item.DownloadInterruptReason.NetworkTimeout,
+    network_disconnected=Item.DownloadInterruptReason.NetworkDisconnected,
+    network_server_down=Item.DownloadInterruptReason.NetworkServerDown,
+    network_invalid_request=Item.DownloadInterruptReason.NetworkInvalidRequest,
+    server_failed=Item.DownloadInterruptReason.ServerFailed,
+    server_bad_content=Item.DownloadInterruptReason.ServerBadContent,
+    server_unauthorized=Item.DownloadInterruptReason.ServerUnauthorized,
+    server_cert_problem=Item.DownloadInterruptReason.ServerCertProblem,
+    server_forbidden=Item.DownloadInterruptReason.ServerForbidden,
+    server_unreachable=Item.DownloadInterruptReason.ServerUnreachable,
+    user_canceled=Item.DownloadInterruptReason.UserCanceled,
 )
 
 DownloadInterruptReasonStr = Literal[
@@ -65,11 +65,11 @@ DownloadInterruptReasonStr = Literal[
 ]
 
 DOWNLOAD_STATE = bidict(
-    requested=QtWebEngineWidgets.QWebEngineDownloadItem.DownloadRequested,
-    in_progress=QtWebEngineWidgets.QWebEngineDownloadItem.DownloadInProgress,
-    completed=QtWebEngineWidgets.QWebEngineDownloadItem.DownloadCompleted,
-    cancelled=QtWebEngineWidgets.QWebEngineDownloadItem.DownloadCancelled,
-    interrupted=QtWebEngineWidgets.QWebEngineDownloadItem.DownloadInterrupted,
+    requested=Item.DownloadState.DownloadRequested,
+    in_progress=Item.DownloadState.DownloadInProgress,
+    completed=Item.DownloadState.DownloadCompleted,
+    cancelled=Item.DownloadState.DownloadCancelled,
+    interrupted=Item.DownloadState.DownloadInterrupted,
 )
 
 DownloadStateStr = Literal[
@@ -77,10 +77,10 @@ DownloadStateStr = Literal[
 ]
 
 SAVE_PAGE_FORMAT = bidict(
-    unknown=QtWebEngineWidgets.QWebEngineDownloadItem.UnknownSaveFormat,
-    single_html=QtWebEngineWidgets.QWebEngineDownloadItem.SingleHtmlSaveFormat,
-    complete_html=QtWebEngineWidgets.QWebEngineDownloadItem.CompleteHtmlSaveFormat,
-    mime_html=QtWebEngineWidgets.QWebEngineDownloadItem.MimeHtmlSaveFormat,
+    unknown=Item.SavePageFormat.UnknownSaveFormat,
+    single_html=Item.SavePageFormat.SingleHtmlSaveFormat,
+    complete_html=Item.SavePageFormat.CompleteHtmlSaveFormat,
+    mime_html=Item.SavePageFormat.MimeHtmlSaveFormat,
 )
 
 SavePageFormatStr = Literal["unknown", "single_html", "complete_html", "mime_html"]

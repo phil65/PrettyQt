@@ -6,6 +6,7 @@ import pathlib
 import sys
 from typing import Callable
 
+import prettyqt
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
@@ -41,12 +42,14 @@ class CoreApplication(QtCore.QCoreApplication):
 
     @classmethod
     def use_hdpi_bitmaps(cls, state: bool = True):
-        cls.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, state)
+        if not prettyqt.qt.API.endswith("6"):
+            cls.setAttribute(QtCore.Qt.ApplicationAttribute.AA_UseHighDpiPixmaps, state)
 
     @classmethod
     def disable_window_help_button(cls, state: bool = True):
         try:
-            cls.setAttribute(QtCore.Qt.AA_DisableWindowContextHelpButton, state)
+            attr = QtCore.Qt.ApplicationAttribute.AA_DisableWindowContextHelpButton
+            cls.setAttribute(attr, state)
         except AttributeError:  # attribute not available in Qt6
             pass
 

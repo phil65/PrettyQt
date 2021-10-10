@@ -205,7 +205,9 @@ class Painter(QtGui.QPainter):
         self.setClipPath(path, constants.CLIP_OPERATION[operation])
 
     def get_text_rect(self, text: str) -> core.Rect:
-        return self.drawText(core.Rect(), QtCore.Qt.TextDontPrint, text)  # type: ignore
+        return self.drawText(
+            core.Rect(), QtCore.Qt.TextFlag.TextDontPrint, text
+        )  # type: ignore
 
     @contextlib.contextmanager
     def clip_path(

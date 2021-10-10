@@ -8,10 +8,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
-if core.VersionNumber.get_qt_version() >= (6, 0, 0):
-    mod = QtCore.QLibraryInfo.LibraryPath
-else:
-    mod = QtCore.QLibraryInfo.LibraryLocation
+mod = QtCore.QLibraryInfo.LibraryPath
 
 LOCATION = bidict(
     prefix=mod.PrefixPath,

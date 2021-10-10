@@ -11,11 +11,11 @@ from prettyqt.utils import bidict
 
 
 LOAD_HINTS = bidict(
-    resolve_all_symbols=QtCore.QLibrary.ResolveAllSymbolsHint,
-    export_external_symbols=QtCore.QLibrary.ExportExternalSymbolsHint,
-    load_archive_member=QtCore.QLibrary.LoadArchiveMemberHint,
-    prevent_unload=QtCore.QLibrary.PreventUnloadHint,
-    deep_bind=QtCore.QLibrary.DeepBindHint,
+    resolve_all_symbols=QtCore.QLibrary.LoadHint.ResolveAllSymbolsHint,
+    export_external_symbols=QtCore.QLibrary.LoadHint.ExportExternalSymbolsHint,
+    load_archive_member=QtCore.QLibrary.LoadHint.LoadArchiveMemberHint,
+    prevent_unload=QtCore.QLibrary.LoadHint.PreventUnloadHint,
+    deep_bind=QtCore.QLibrary.LoadHint.DeepBindHint,
 )
 
 LoadHintStr = Literal[

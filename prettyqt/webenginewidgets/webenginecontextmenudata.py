@@ -10,15 +10,15 @@ from prettyqt.utils import bidict
 mod = QtWebEngineWidgets.QWebEngineContextMenuData
 
 EDIT_FLAGS = bidict(
-    undo=mod.CanUndo,
-    redo=mod.CanRedo,
-    cut=mod.CanCut,
-    copy=mod.CanCopy,
-    paste=mod.CanPaste,
-    delete=mod.CanDelete,
-    select_all=mod.CanSelectAll,
-    translate=mod.CanTranslate,
-    edit_richly=mod.CanEditRichly,
+    undo=mod.EditFlag.CanUndo,
+    redo=mod.EditFlag.CanRedo,
+    cut=mod.EditFlag.CanCut,
+    copy=mod.EditFlag.CanCopy,
+    paste=mod.EditFlag.CanPaste,
+    delete=mod.EditFlag.CanDelete,
+    select_all=mod.EditFlag.CanSelectAll,
+    translate=mod.EditFlag.CanTranslate,
+    edit_richly=mod.EditFlag.CanEditRichly,
 )
 
 EditFlagStr = Literal[
@@ -34,16 +34,16 @@ EditFlagStr = Literal[
 ]
 
 MEDIA_FLAGS = bidict(
-    in_error=mod.MediaInError,
-    paused=mod.MediaPaused,
-    muted=mod.MediaMuted,
-    loop=mod.MediaLoop,
-    can_save=mod.MediaCanSave,
-    has_audio=mod.MediaHasAudio,
-    can_toggle_controls=mod.MediaCanToggleControls,
-    controls=mod.MediaControls,
-    can_print=mod.MediaCanPrint,
-    can_rotate=mod.MediaCanRotate,
+    in_error=mod.MediaFlag.MediaInError,
+    paused=mod.MediaFlag.MediaPaused,
+    muted=mod.MediaFlag.MediaMuted,
+    loop=mod.MediaFlag.MediaLoop,
+    can_save=mod.MediaFlag.MediaCanSave,
+    has_audio=mod.MediaFlag.MediaHasAudio,
+    can_toggle_controls=mod.MediaFlag.MediaCanToggleControls,
+    controls=mod.MediaFlag.MediaControls,
+    can_print=mod.MediaFlag.MediaCanPrint,
+    can_rotate=mod.MediaFlag.MediaCanRotate,
 )
 
 MediaFlagStr = Literal[
@@ -60,13 +60,13 @@ MediaFlagStr = Literal[
 ]
 
 MEDIA_TYPES = bidict(
-    none=mod.MediaTypeNone,
-    image=mod.MediaTypeImage,
-    video=mod.MediaTypeVideo,
-    audio=mod.MediaTypeAudio,
-    canvas=mod.MediaTypeCanvas,
-    file=mod.MediaTypeFile,
-    plugin=mod.MediaTypePlugin,
+    none=mod.MediaType.MediaTypeNone,
+    image=mod.MediaType.MediaTypeImage,
+    video=mod.MediaType.MediaTypeVideo,
+    audio=mod.MediaType.MediaTypeAudio,
+    canvas=mod.MediaType.MediaTypeCanvas,
+    file=mod.MediaType.MediaTypeFile,
+    plugin=mod.MediaType.MediaTypePlugin,
 )
 
 MediaTypeStr = Literal["none", "image", "video", "audio", "canvas", "file", "plugin"]

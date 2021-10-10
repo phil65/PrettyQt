@@ -3,7 +3,6 @@
 import inspect
 import pathlib
 import pickle
-import sys
 import tempfile
 
 import pytest
@@ -526,7 +525,7 @@ def test_propertyanimation():
 
     animation.set_easing(test)
     # PySide2 looses custom fn here
-    if prettyqt.qt.API == "pyqt5":
+    if prettyqt.qt.API.startswith("pyqt"):
         assert animation.get_easing() == test
     else:
         with pytest.raises(AttributeError):
@@ -668,9 +667,8 @@ def test_standardpaths():
     assert path is not None
     path = core.StandardPaths.get_standard_locations("cache")
     assert path != []
-    if sys.version_info >= (3, 7):
-        path = core.StandardPaths["cache"]
-        assert path != []
+    path = core.StandardPaths["cache"]
+    assert path != []
     name = core.StandardPaths.get_display_name("cache")
     assert name in ["Cache", "Caches"]
 

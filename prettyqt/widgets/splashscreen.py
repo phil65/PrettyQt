@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 
 from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import types
 
 
@@ -16,9 +16,7 @@ class SplashScreen(QtWidgets.QSplashScreen):
         if width:
             pix = pix.scaledToWidth(width)
         super().__init__(pix)
-        self.setWindowFlags(
-            QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.FramelessWindowHint
-        )
+        self.set_flags(stay_on_top=True, frameless=True)
         self.setEnabled(False)
 
     def __enter__(self):
