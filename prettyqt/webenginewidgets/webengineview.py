@@ -4,7 +4,7 @@ import os
 from typing import Callable
 import webbrowser
 
-from prettyqt import core, webenginewidgets, widgets
+from prettyqt import core, webenginecore, widgets
 from prettyqt.qt import QtCore, QtWebEngineWidgets
 
 
@@ -14,7 +14,7 @@ QtWebEngineWidgets.QWebEngineView.__bases__ = (widgets.Widget,)
 class WebEngineView(QtWebEngineWidgets.QWebEngineView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.setPage(webenginewidgets.WebEnginePage(self))
+        self.setPage(webenginecore.WebEnginePage(self))
 
     def set_url(self, url: QtCore.QUrl | str | os.PathLike):
         """Set the url of the WebEngineView.
@@ -95,26 +95,26 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
                 pass
 
             callback = do_nothing
-        flag = QtWebEngineWidgets.QWebEnginePage.FindFlags()
+        flag = webenginecore.WebEnginePage.FindFlag(0)
         if case_sensitive:
-            flag |= QtWebEngineWidgets.QWebEnginePage.FindCaseSensitively
+            flag |= webenginecore.WebEnginePage.FindFlag.FindCaseSensitively
         if backward:
-            flag |= QtWebEngineWidgets.QWebEnginePage.FindBackward
+            flag |= webenginecore.WebEnginePage.FindFlag.FindBackward
         self.findText(string, flag, callback)
 
-    def get_settings(self) -> webenginewidgets.WebEngineSettings:
+    def get_settings(self) -> webenginecore.WebEngineSettings:
         settings = self.settings()
-        return webenginewidgets.WebEngineSettings(settings)
+        return webenginecore.WebEngineSettings(settings)
 
     def set_setting(
         self,
-        setting_name: webenginewidgets.webenginesettings.WebAttributeStr,
+        setting_name: webenginecore.webenginesettings.WebAttributeStr,
         value: bool,
     ):
         self.get_settings()[setting_name] = value
 
     def get_setting(
-        self, setting_name: webenginewidgets.webenginesettings.WebAttributeStr
+        self, setting_name: webenginecore.webenginesettings.WebAttributeStr
     ) -> bool:
         return self.get_settings()[setting_name]
 

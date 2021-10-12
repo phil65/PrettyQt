@@ -3,11 +3,11 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtWebEngineWidgets
+from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import bidict
 
 
-mod = QtWebEngineWidgets.QWebEngineContextMenuData
+mod = QtWebEngineCore.QWebEngineContextMenuRequest
 
 EDIT_FLAGS = bidict(
     undo=mod.EditFlag.CanUndo,
@@ -72,7 +72,7 @@ MEDIA_TYPES = bidict(
 MediaTypeStr = Literal["none", "image", "video", "audio", "canvas", "file", "plugin"]
 
 
-class WebEngineContextMenuData(QtWebEngineWidgets.QWebEngineContextMenuData):
+class WebEngineContextMenuRequest(QtWebEngineCore.QWebEngineContextMenuRequest):
     def get_media_url(self) -> core.Url:
         return core.Url(self.mediaUrl())
 
@@ -117,9 +117,9 @@ class WebEngineContextMenuData(QtWebEngineWidgets.QWebEngineContextMenuData):
 
 
 if __name__ == "__main__":
-    from prettyqt import webenginewidgets, widgets
+    from prettyqt import webenginecore, widgets
 
     app = widgets.app()
-    page = webenginewidgets.WebEnginePage()
+    page = webenginecore.WebEnginePage()
     context_menu_data = page.get_context_menu_data()
     app.main_loop()

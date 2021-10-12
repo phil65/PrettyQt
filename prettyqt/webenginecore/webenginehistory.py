@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Iterator
 
-from prettyqt import webenginewidgets
+from prettyqt import webenginecore
 from prettyqt.qt import QtWebEngineWidgets
 
 
@@ -19,23 +19,23 @@ class WebEngineHistory:
         # pyside2 does not support len(self.history)
         return self.history.count()
 
-    def __getitem__(self, index: int) -> webenginewidgets.WebEngineHistoryItem:
+    def __getitem__(self, index: int) -> webenginecore.WebEngineHistoryItem:
         item = self.history.itemAt(index)
-        return webenginewidgets.WebEngineHistoryItem(item)
+        return webenginecore.WebEngineHistoryItem(item)
 
-    def __iter__(self) -> Iterator[webenginewidgets.WebEngineHistoryItem]:
-        items = [webenginewidgets.WebEngineHistoryItem(i) for i in self.history.items()]
+    def __iter__(self) -> Iterator[webenginecore.WebEngineHistoryItem]:
+        items = [webenginecore.WebEngineHistoryItem(i) for i in self.history.items()]
         return iter(items)
 
-    def get_items(self) -> list[webenginewidgets.WebEngineHistoryItem]:
-        return [webenginewidgets.WebEngineHistoryItem(i) for i in self.history.items()]
+    def get_items(self) -> list[webenginecore.WebEngineHistoryItem]:
+        return [webenginecore.WebEngineHistoryItem(i) for i in self.history.items()]
 
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    page = webenginewidgets.WebEnginePage()
+    page = webenginecore.WebEnginePage()
     page.load_url("http://www.google.de")
     page.load_url("http://www.google.com")
     history = page.history()

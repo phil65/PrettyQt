@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from prettyqt import core
 from prettyqt.qt import QtWebEngineCore
 
 
@@ -11,7 +12,10 @@ class WebEngineScriptCollection:
         return getattr(self.item, val)
 
     def __getitem__(self, index: str) -> QtWebEngineCore.QWebEngineScript:
-        return self.item.findScript(index)
+        if core.VersionNumber.get_qt_version() < (6, 0, 0):
+            return self.item.findScript(index)
+        else:
+            return self.item.find(index)[0]
 
     def __len__(self):
         return self.item.count()
@@ -33,12 +37,12 @@ class WebEngineScriptCollection:
 
 
 if __name__ == "__main__":
-    from prettyqt import webenginewidgets, widgets
+    from prettyqt import webenginecore, widgets
 
     app = widgets.app()
-    page = webenginewidgets.WebEnginePage()
+    page = webenginecore.WebEnginePage()
     scripts = page.scripts()
-    script = webenginewidgets.WebEngineScript()
+    script = webenginecore.WebEngineScript()
     script.setName("test")
     item = WebEngineScriptCollection(scripts)
     assert bool(item) is False

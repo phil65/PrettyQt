@@ -3,23 +3,25 @@ from __future__ import annotations
 import os
 from typing import Callable, Literal
 
-from prettyqt import core, gui, webenginewidgets
-from prettyqt.qt import QtCore, QtWebEngineWidgets
+from prettyqt import core, gui, webenginecore
+from prettyqt.qt import QtCore, QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
-QtWebEngineWidgets.QWebEnginePage.__bases__ = (core.Object,)
+QtWebEngineCore.QWebEnginePage.__bases__ = (core.Object,)
 
+
+mod = QtWebEngineCore.QWebEnginePage
 
 FEATURE = bidict(
-    notifications=QtWebEngineWidgets.QWebEnginePage.Notifications,
-    geolocation=QtWebEngineWidgets.QWebEnginePage.Geolocation,
-    media_audio_capture=QtWebEngineWidgets.QWebEnginePage.MediaAudioCapture,
-    media_video_capture=QtWebEngineWidgets.QWebEnginePage.MediaVideoCapture,
-    media_audiovideo_capture=QtWebEngineWidgets.QWebEnginePage.MediaAudioVideoCapture,
-    mouse_lock=QtWebEngineWidgets.QWebEnginePage.MouseLock,
-    desktop_video_capture=QtWebEngineWidgets.QWebEnginePage.DesktopVideoCapture,
-    desktop_audiovideo_capture=QtWebEngineWidgets.QWebEnginePage.DesktopAudioVideoCapture,
+    notifications=mod.Feature.Notifications,
+    geolocation=mod.Feature.Geolocation,
+    media_audio_capture=mod.Feature.MediaAudioCapture,
+    media_video_capture=mod.Feature.MediaVideoCapture,
+    media_audiovideo_capture=mod.Feature.MediaAudioVideoCapture,
+    mouse_lock=mod.Feature.MouseLock,
+    desktop_video_capture=mod.Feature.DesktopVideoCapture,
+    desktop_audiovideo_capture=mod.Feature.DesktopAudioVideoCapture,
 )
 
 FeatureStr = Literal[
@@ -34,105 +36,105 @@ FeatureStr = Literal[
 ]
 
 FILE_SELECTION_MODE = bidict(
-    open=QtWebEngineWidgets.QWebEnginePage.FileSelectOpen,
-    open_multiple=QtWebEngineWidgets.QWebEnginePage.FileSelectOpenMultiple,
+    open=mod.FileSelectionMode.FileSelectOpen,
+    open_multiple=mod.FileSelectionMode.FileSelectOpenMultiple,
 )
 
 FileSelectionModeStr = Literal["open", "open_multiple"]
 
 FIND_FLAGS = bidict(
-    backward=QtWebEngineWidgets.QWebEnginePage.FindBackward,
-    case_sensitive=QtWebEngineWidgets.QWebEnginePage.FindCaseSensitively,
+    backward=mod.FindFlag.FindBackward,
+    case_sensitive=mod.FindFlag.FindCaseSensitively,
 )
 
 FindFlagStr = Literal["backward", "case_sensitive"]
 
 JS_CONSOLE_MESSAGE_LEVEL = bidict(
-    info=QtWebEngineWidgets.QWebEnginePage.InfoMessageLevel,
-    warning=QtWebEngineWidgets.QWebEnginePage.WarningMessageLevel,
-    error=QtWebEngineWidgets.QWebEnginePage.ErrorMessageLevel,
+    info=mod.JavaScriptConsoleMessageLevel.InfoMessageLevel,
+    warning=mod.JavaScriptConsoleMessageLevel.WarningMessageLevel,
+    error=mod.JavaScriptConsoleMessageLevel.ErrorMessageLevel,
 )
 
 LIFECYCLE_STATE = bidict(
-    active=QtWebEngineWidgets.QWebEnginePage.LifecycleState.Active,
-    frozen=QtWebEngineWidgets.QWebEnginePage.LifecycleState.Frozen,
-    discarded=QtWebEngineWidgets.QWebEnginePage.LifecycleState.Discarded,
+    active=mod.LifecycleState.Active,
+    frozen=mod.LifecycleState.Frozen,
+    discarded=mod.LifecycleState.Discarded,
 )
 
 LifecycleStateStr = Literal["active", "frozen", "discarded"]
 
 NAVIGATION_TYPES = bidict(
-    link_clicked=QtWebEngineWidgets.QWebEnginePage.NavigationTypeLinkClicked,
-    typed=QtWebEngineWidgets.QWebEnginePage.NavigationTypeTyped,
-    form_submitted=QtWebEngineWidgets.QWebEnginePage.NavigationTypeFormSubmitted,
-    back_forward=QtWebEngineWidgets.QWebEnginePage.NavigationTypeBackForward,
-    reload=QtWebEngineWidgets.QWebEnginePage.NavigationTypeReload,
-    redirect=QtWebEngineWidgets.QWebEnginePage.NavigationTypeRedirect,
-    other=QtWebEngineWidgets.QWebEnginePage.NavigationTypeOther,
+    link_clicked=mod.NavigationType.NavigationTypeLinkClicked,
+    typed=mod.NavigationType.NavigationTypeTyped,
+    form_submitted=mod.NavigationType.NavigationTypeFormSubmitted,
+    back_forward=mod.NavigationType.NavigationTypeBackForward,
+    reload=mod.NavigationType.NavigationTypeReload,
+    redirect=mod.NavigationType.NavigationTypeRedirect,
+    other=mod.NavigationType.NavigationTypeOther,
 )
 
 PERMISSION_POLICY = bidict(
-    unknown=QtWebEngineWidgets.QWebEnginePage.PermissionUnknown,
-    granted_by_user=QtWebEngineWidgets.QWebEnginePage.PermissionGrantedByUser,
-    denied_by_user=QtWebEngineWidgets.QWebEnginePage.PermissionDeniedByUser,
+    unknown=mod.PermissionPolicy.PermissionUnknown,
+    granted_by_user=mod.PermissionPolicy.PermissionGrantedByUser,
+    denied_by_user=mod.PermissionPolicy.PermissionDeniedByUser,
 )
 
 PermissionPolicyStr = Literal["unknown", "granted_by_user", "denied_by_user"]
 
 RENDER_PROCESS_TERMINATION_STATUS = bidict(
-    normal=QtWebEngineWidgets.QWebEnginePage.NormalTerminationStatus,
-    abnormal=QtWebEngineWidgets.QWebEnginePage.AbnormalTerminationStatus,
-    crashed=QtWebEngineWidgets.QWebEnginePage.CrashedTerminationStatus,
-    killed=QtWebEngineWidgets.QWebEnginePage.KilledTerminationStatus,
+    normal=mod.RenderProcessTerminationStatus.NormalTerminationStatus,
+    abnormal=mod.RenderProcessTerminationStatus.AbnormalTerminationStatus,
+    crashed=mod.RenderProcessTerminationStatus.CrashedTerminationStatus,
+    killed=mod.RenderProcessTerminationStatus.KilledTerminationStatus,
 )
 
 WEB_ACTION = bidict(
-    none=QtWebEngineWidgets.QWebEnginePage.NoWebAction,
-    back=QtWebEngineWidgets.QWebEnginePage.Back,
-    forward=QtWebEngineWidgets.QWebEnginePage.Forward,
-    stop=QtWebEngineWidgets.QWebEnginePage.Stop,
-    reload=QtWebEngineWidgets.QWebEnginePage.Reload,
-    reload_and_bypass_cache=QtWebEngineWidgets.QWebEnginePage.ReloadAndBypassCache,
-    cut=QtWebEngineWidgets.QWebEnginePage.Cut,
-    copy=QtWebEngineWidgets.QWebEnginePage.Copy,
-    paste=QtWebEngineWidgets.QWebEnginePage.Paste,
-    undo=QtWebEngineWidgets.QWebEnginePage.Undo,
-    redo=QtWebEngineWidgets.QWebEnginePage.Redo,
-    select_all=QtWebEngineWidgets.QWebEnginePage.SelectAll,
-    paste_and_match_style=QtWebEngineWidgets.QWebEnginePage.PasteAndMatchStyle,
-    open_link_in_this_window=QtWebEngineWidgets.QWebEnginePage.OpenLinkInThisWindow,
-    open_link_in_new_window=QtWebEngineWidgets.QWebEnginePage.OpenLinkInNewWindow,
-    open_link_in_new_tab=QtWebEngineWidgets.QWebEnginePage.OpenLinkInNewTab,
-    open_link_in_new_bg_tab=QtWebEngineWidgets.QWebEnginePage.OpenLinkInNewBackgroundTab,
-    copy_link_to_clipboard=QtWebEngineWidgets.QWebEnginePage.CopyLinkToClipboard,
-    copy_image_to_clipboard=QtWebEngineWidgets.QWebEnginePage.CopyImageToClipboard,
-    copy_image_url_to_clipboard=QtWebEngineWidgets.QWebEnginePage.CopyImageUrlToClipboard,
-    copy_media_url_to_clipboard=QtWebEngineWidgets.QWebEnginePage.CopyMediaUrlToClipboard,
-    toggle_media_controls=QtWebEngineWidgets.QWebEnginePage.ToggleMediaControls,
-    toggle_media_loop=QtWebEngineWidgets.QWebEnginePage.ToggleMediaLoop,
-    toggle_media_play_pause=QtWebEngineWidgets.QWebEnginePage.ToggleMediaPlayPause,
-    toggle_media_mute=QtWebEngineWidgets.QWebEnginePage.ToggleMediaMute,
-    download_link_to_disk=QtWebEngineWidgets.QWebEnginePage.DownloadLinkToDisk,
-    download_image_to_disk=QtWebEngineWidgets.QWebEnginePage.DownloadImageToDisk,
-    download_media_to_disk=QtWebEngineWidgets.QWebEnginePage.DownloadMediaToDisk,
-    inspect_element=QtWebEngineWidgets.QWebEnginePage.InspectElement,
-    exit_fullscreen=QtWebEngineWidgets.QWebEnginePage.ExitFullScreen,
-    request_close=QtWebEngineWidgets.QWebEnginePage.RequestClose,
-    unselect=QtWebEngineWidgets.QWebEnginePage.Unselect,
-    save_page=QtWebEngineWidgets.QWebEnginePage.SavePage,
-    view_source=QtWebEngineWidgets.QWebEnginePage.ViewSource,
-    toggle_bold=QtWebEngineWidgets.QWebEnginePage.ToggleBold,
-    toggle_italic=QtWebEngineWidgets.QWebEnginePage.ToggleItalic,
-    toggle_underline=QtWebEngineWidgets.QWebEnginePage.ToggleUnderline,
-    toggle_strikethrough=QtWebEngineWidgets.QWebEnginePage.ToggleStrikethrough,
-    align_left=QtWebEngineWidgets.QWebEnginePage.AlignLeft,
-    align_center=QtWebEngineWidgets.QWebEnginePage.AlignCenter,
-    align_right=QtWebEngineWidgets.QWebEnginePage.AlignRight,
-    align_justified=QtWebEngineWidgets.QWebEnginePage.AlignJustified,
-    indent=QtWebEngineWidgets.QWebEnginePage.Indent,
-    outdent=QtWebEngineWidgets.QWebEnginePage.Outdent,
-    insert_ordered_list=QtWebEngineWidgets.QWebEnginePage.InsertOrderedList,
-    insert_unordered_list=QtWebEngineWidgets.QWebEnginePage.InsertUnorderedList,
+    none=mod.WebAction.NoWebAction,
+    back=mod.WebAction.Back,
+    forward=mod.WebAction.Forward,
+    stop=mod.WebAction.Stop,
+    reload=mod.WebAction.Reload,
+    reload_and_bypass_cache=mod.WebAction.ReloadAndBypassCache,
+    cut=mod.WebAction.Cut,
+    copy=mod.WebAction.Copy,
+    paste=mod.WebAction.Paste,
+    undo=mod.WebAction.Undo,
+    redo=mod.WebAction.Redo,
+    select_all=mod.WebAction.SelectAll,
+    paste_and_match_style=mod.WebAction.PasteAndMatchStyle,
+    open_link_in_this_window=mod.WebAction.OpenLinkInThisWindow,
+    open_link_in_new_window=mod.WebAction.OpenLinkInNewWindow,
+    open_link_in_new_tab=mod.WebAction.OpenLinkInNewTab,
+    open_link_in_new_bg_tab=mod.WebAction.OpenLinkInNewBackgroundTab,
+    copy_link_to_clipboard=mod.WebAction.CopyLinkToClipboard,
+    copy_image_to_clipboard=mod.WebAction.CopyImageToClipboard,
+    copy_image_url_to_clipboard=mod.WebAction.CopyImageUrlToClipboard,
+    copy_media_url_to_clipboard=mod.WebAction.CopyMediaUrlToClipboard,
+    toggle_media_controls=mod.WebAction.ToggleMediaControls,
+    toggle_media_loop=mod.WebAction.ToggleMediaLoop,
+    toggle_media_play_pause=mod.WebAction.ToggleMediaPlayPause,
+    toggle_media_mute=mod.WebAction.ToggleMediaMute,
+    download_link_to_disk=mod.WebAction.DownloadLinkToDisk,
+    download_image_to_disk=mod.WebAction.DownloadImageToDisk,
+    download_media_to_disk=mod.WebAction.DownloadMediaToDisk,
+    inspect_element=mod.WebAction.InspectElement,
+    exit_fullscreen=mod.WebAction.ExitFullScreen,
+    request_close=mod.WebAction.RequestClose,
+    unselect=mod.WebAction.Unselect,
+    save_page=mod.WebAction.SavePage,
+    view_source=mod.WebAction.ViewSource,
+    toggle_bold=mod.WebAction.ToggleBold,
+    toggle_italic=mod.WebAction.ToggleItalic,
+    toggle_underline=mod.WebAction.ToggleUnderline,
+    toggle_strikethrough=mod.WebAction.ToggleStrikethrough,
+    align_left=mod.WebAction.AlignLeft,
+    align_center=mod.WebAction.AlignCenter,
+    align_right=mod.WebAction.AlignRight,
+    align_justified=mod.WebAction.AlignJustified,
+    indent=mod.WebAction.Indent,
+    outdent=mod.WebAction.Outdent,
+    insert_ordered_list=mod.WebAction.InsertOrderedList,
+    insert_unordered_list=mod.WebAction.InsertUnorderedList,
 )
 
 WebActionStr = Literal[
@@ -185,14 +187,14 @@ WebActionStr = Literal[
 ]
 
 WEB_WINDOW_TYPES = bidict(
-    browser_window=QtWebEngineWidgets.QWebEnginePage.WebBrowserWindow,
-    browser_tab=QtWebEngineWidgets.QWebEnginePage.WebBrowserTab,
-    dialog=QtWebEngineWidgets.QWebEnginePage.WebDialog,
-    browser_bg_tab=QtWebEngineWidgets.QWebEnginePage.WebBrowserBackgroundTab,
+    browser_window=mod.WebWindowType.WebBrowserWindow,
+    browser_tab=mod.WebWindowType.WebBrowserTab,
+    dialog=mod.WebWindowType.WebDialog,
+    browser_bg_tab=mod.WebWindowType.WebBrowserBackgroundTab,
 )
 
 
-class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
+class WebEnginePage(QtWebEngineCore.QWebEnginePage):
     """A web engine page holds the HTML document contents, link history + actions."""
 
     def serialize_fields(self):
@@ -305,11 +307,11 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
                 pass
 
             callback = do_nothing
-        flag = QtWebEngineWidgets.QWebEnginePage.FindFlags()
+        flag = QtWebEngineCore.QWebEnginePage.FindFlag(0)
         if case_sensitive:
-            flag |= self.FindCaseSensitively
+            flag |= self.FindFlag.FindCaseSensitively
         if backward:
-            flag |= self.FindBackward
+            flag |= self.FindFlag.FindBackward
         self.findText(string, flag, callback)
 
     def set_lifecycle_state(self, state: LifecycleStateStr):
@@ -345,31 +347,31 @@ class WebEnginePage(QtWebEngineWidgets.QWebEnginePage):
         url = core.Url(url)
         self.setFeaturePermission(url, FEATURE[feature], PERMISSION_POLICY[policy])
 
-    def get_history(self) -> webenginewidgets.WebEngineHistory:
+    def get_history(self) -> webenginecore.WebEngineHistory:
         hist = self.history()
-        return webenginewidgets.WebEngineHistory(hist)
+        return webenginecore.WebEngineHistory(hist)
 
-    def get_settings(self) -> webenginewidgets.WebEngineSettings:
+    def get_settings(self) -> webenginecore.WebEngineSettings:
         settings = self.settings()
-        return webenginewidgets.WebEngineSettings(settings)
+        return webenginecore.WebEngineSettings(settings)
 
     def set_setting(
         self,
-        setting_name: webenginewidgets.webenginesettings.WebAttributeStr,
+        setting_name: webenginecore.webenginesettings.WebAttributeStr,
         value: bool,
     ):
         self.get_settings()[setting_name] = value
 
     def get_setting(
-        self, setting_name: webenginewidgets.webenginesettings.WebAttributeStr
+        self, setting_name: webenginecore.webenginesettings.WebAttributeStr
     ) -> bool:
         return self.get_settings()[setting_name]
 
-    def get_scripts(self) -> webenginewidgets.WebEngineScriptCollection:
-        return webenginewidgets.WebEngineScriptCollection(self.scripts())
+    def get_scripts(self) -> webenginecore.WebEngineScriptCollection:
+        return webenginecore.WebEngineScriptCollection(self.scripts())
 
-    def get_context_menu_data(self) -> webenginewidgets.WebEngineContextMenuData:
-        return webenginewidgets.WebEngineContextMenuData(self.contextMenuData())
+    def get_context_menu_data(self) -> webenginecore.WebEngineContextMenuRequest:
+        return webenginecore.WebEngineContextMenuRequest(self.contextMenuData())
 
     # def choose_files(
     #     self,

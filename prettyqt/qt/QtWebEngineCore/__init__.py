@@ -13,6 +13,8 @@ if PYQT5:
         QWebEngineProfile,
         QWebEngineSettings,
         QWebEnginePage,
+        QWebEngineDownloadItem as QWebEngineDownloadRequest,
+        QWebEngineContextMenuData as QWebEngineContextMenuRequest,
     )
 elif PYSIDE2:
     from PySide2.QtWebEngineCore import *
@@ -24,6 +26,8 @@ elif PYSIDE2:
         QWebEngineProfile,
         QWebEngineSettings,
         QWebEnginePage,
+        QWebEngineDownloadItem as QWebEngineDownloadRequest,
+        QWebEngineContextMenuData as QWebEngineContextMenuRequest,
     )
 elif PYQT6:
     from PyQt6.QtWebEngineCore import *

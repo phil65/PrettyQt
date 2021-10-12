@@ -205,9 +205,9 @@ class WebEngineSettings:
 
 
 if __name__ == "__main__":
-    from prettyqt import webenginewidgets, widgets
+    from prettyqt import webenginecore, widgets
 
     app = widgets.app()
-    page = webenginewidgets.WebEnginePage()
+    page = webenginecore.WebEnginePage()
     settings = page.get_settings()
     app.main_loop()

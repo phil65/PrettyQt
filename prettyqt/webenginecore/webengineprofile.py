@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core, webenginewidgets
+from prettyqt import core, webenginecore
 from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -73,8 +73,8 @@ class WebEngineProfile(QtWebEngineCore.QWebEngineProfile):
         """
         return HTTP_CACHE_TYPE.inverse[self.httpCacheType()]
 
-    def get_scripts(self) -> webenginewidgets.WebEngineScriptCollection:
-        return webenginewidgets.WebEngineScriptCollection(self.scripts())
+    def get_scripts(self) -> webenginecore.WebEngineScriptCollection:
+        return webenginecore.WebEngineScriptCollection(self.scripts())
 
 
 if __name__ == "__main__":

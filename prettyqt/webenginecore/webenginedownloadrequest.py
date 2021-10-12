@@ -2,13 +2,11 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt.qt import QtWebEngineWidgets
-
-# from prettyqt import core
+from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
-Item = QtWebEngineWidgets.QWebEngineDownloadItem
+Item = QtWebEngineCore.QWebEngineDownloadRequest
 
 DOWNLOAD_INTERRUPT_REASONS = bidict(
     none=Item.DownloadInterruptReason.NoReason,
@@ -85,11 +83,11 @@ SAVE_PAGE_FORMAT = bidict(
 
 SavePageFormatStr = Literal["unknown", "single_html", "complete_html", "mime_html"]
 
-# QtWebEngineWidgets.QWebEngineDownloadItem.__bases__ = (core.Object,)
+# Item.__bases__ = (core.Object,)
 
 
-class WebEngineDownloadItem:
-    def __init__(self, item: QtWebEngineWidgets.QWebEngineDownloadItem):
+class WebEngineDownloadRequest:
+    def __init__(self, item: QtWebEngineCore.QWebEngineDownloadRequest):
         self.item = item
 
     def __getattr__(self, val):
