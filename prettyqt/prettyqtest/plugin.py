@@ -59,7 +59,9 @@ class QtTester:
     @staticmethod
     def send_keypress(widget: QtWidgets.QWidget, key):
         event = gui.KeyEvent(
-            QtCore.QEvent.Type.KeyPress, key, QtCore.Qt.KeyboardModifiers()
+            QtCore.QEvent.Type.KeyPress,
+            key,
+            QtCore.Qt.KeyboardModifier(0),  # type: ignore
         )
         widgets.Application.sendEvent(widget, event)
 
@@ -71,7 +73,7 @@ class QtTester:
             QtCore.QPointF(0, 0),
             key,
             QtCore.Qt.MouseButton.NoButton,
-            QtCore.Qt.KeyboardModifiers(),
+            QtCore.Qt.KeyboardModifier(0),  # type: ignore
         )
         widgets.Application.sendEvent(widget, event)
 
@@ -87,7 +89,7 @@ class QtTester:
             QtCore.QPointF(0, 0),
             QtCore.Qt.MouseButton.NoButton,
             QtCore.Qt.MouseButton.NoButton,
-            QtCore.Qt.KeyboardModifiers(),
+            QtCore.Qt.KeyboardModifier(0),  # type: ignore
         )
         widgets.Application.sendEvent(widget, event)
 

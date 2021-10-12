@@ -18,6 +18,9 @@ elif PYQT6:
         QShortcut,
         QFileSystemModel,
     )
+    from PyQt6.QtWidgets import QMenu  # type: ignore
+
+    QMenu.exec_ = QMenu.exec  # type: ignore
 elif PYSIDE6:
     from PySide6.QtWidgets import *  # type: ignore
     from PySide6.QtGui import (  # type: ignore

@@ -7,34 +7,31 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
+mod = QtCore.QRegularExpression
+
 FLAGS = bidict(
-    none=QtCore.QRegularExpression.PatternOption.NoPatternOption,
-    ignorecase=QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption,
-    dotall=QtCore.QRegularExpression.PatternOption.DotMatchesEverythingOption,
-    multiline=QtCore.QRegularExpression.PatternOption.MultilineOption,
-    verbose=QtCore.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
-    inverted_greedyness=QtCore.QRegularExpression.PatternOption.InvertedGreedinessOption,
-    dont_capture=QtCore.QRegularExpression.PatternOption.DontCaptureOption,
-    unicode=QtCore.QRegularExpression.PatternOption.UseUnicodePropertiesOption,
+    none=mod.PatternOption.NoPatternOption,
+    ignorecase=mod.PatternOption.CaseInsensitiveOption,
+    dotall=mod.PatternOption.DotMatchesEverythingOption,
+    multiline=mod.PatternOption.MultilineOption,
+    verbose=mod.PatternOption.ExtendedPatternSyntaxOption,
+    inverted_greedyness=mod.PatternOption.InvertedGreedinessOption,
+    dont_capture=mod.PatternOption.DontCaptureOption,
+    unicode=mod.PatternOption.UseUnicodePropertiesOption,
 )
 
 MATCH_TYPE = bidict(
-    normal=QtCore.QRegularExpression.MatchType.NormalMatch,
-    prefer_complete=QtCore.QRegularExpression.MatchType.PartialPreferCompleteMatch,
-    prefer_first=QtCore.QRegularExpression.MatchType.PartialPreferFirstMatch,
-    no_match=QtCore.QRegularExpression.MatchType.NoMatch,
+    normal=mod.MatchType.NormalMatch,
+    prefer_complete=mod.MatchType.PartialPreferCompleteMatch,
+    prefer_first=mod.MatchType.PartialPreferFirstMatch,
+    no_match=mod.MatchType.NoMatch,
 )
 
 MatchTypeStr = Literal["normal", "prefer_complete", "prefer_first", "no_match"]
 
-if core.VersionNumber.get_qt_version() >= (6, 0, 0):
-    opt = QtCore.QRegularExpression.MatchOption.AnchorAtOffsetMatchOption  # type: ignore
-else:
-    opt = QtCore.QRegularExpression.MatchOption.AnchoredMatchOption
-
 MATCH_OPTIONS = bidict(
-    none=QtCore.QRegularExpression.MatchOption.NoMatchOption,
-    anchored=opt,
+    none=mod.MatchOption.NoMatchOption,
+    anchored=mod.MatchOption.AnchorAtOffsetMatchOption,  # type: ignore
 )
 
 
@@ -48,7 +45,7 @@ class RegularExpression(QtCore.QRegularExpression):
             super().__init__(pattern)
         else:
             if isinstance(flags, int):
-                flags = core.RegularExpression.PatternOptions(flags)  # type: ignore
+                flags = core.RegularExpression.PatternOption(flags)  # type: ignore
             super().__init__(pattern, flags)  # type: ignore
 
     def __repr__(self):

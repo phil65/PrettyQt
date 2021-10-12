@@ -4,27 +4,29 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
+mod = QtWidgets.QTreeWidgetItemIterator
+
 ITERATOR_FLAGS = bidict(
-    all=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.All,
-    hidden=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.Hidden,
-    not_hidden=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.NotHidden,
-    selected=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.Selected,
-    unselected=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.Unselected,
-    selectable=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.Selectable,
-    not_selectable=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.NotSelectable,
-    drag_enabled=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.DragEnabled,
-    drag_disabled=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.DragDisabled,
-    drop_enabled=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.DropEnabled,
-    drop_disabled=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.DropDisabled,
-    has_children=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.HasChildren,
-    no_children=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.NoChildren,
-    checked=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.Checked,
-    not_checked=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.NotChecked,
-    enabled=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.Enabled,
-    disabled=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.Disabled,
-    editable=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.Editable,
-    not_editable=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.NotEditable,
-    user_flag=QtWidgets.QTreeWidgetItemIterator.IteratorFlag.UserFlag,
+    all=mod.IteratorFlag.All,
+    hidden=mod.IteratorFlag.Hidden,
+    not_hidden=mod.IteratorFlag.NotHidden,
+    selected=mod.IteratorFlag.Selected,
+    unselected=mod.IteratorFlag.Unselected,
+    selectable=mod.IteratorFlag.Selectable,
+    not_selectable=mod.IteratorFlag.NotSelectable,
+    drag_enabled=mod.IteratorFlag.DragEnabled,
+    drag_disabled=mod.IteratorFlag.DragDisabled,
+    drop_enabled=mod.IteratorFlag.DropEnabled,
+    drop_disabled=mod.IteratorFlag.DropDisabled,
+    has_children=mod.IteratorFlag.HasChildren,
+    no_children=mod.IteratorFlag.NoChildren,
+    checked=mod.IteratorFlag.Checked,
+    not_checked=mod.IteratorFlag.NotChecked,
+    enabled=mod.IteratorFlag.Enabled,
+    disabled=mod.IteratorFlag.Disabled,
+    editable=mod.IteratorFlag.Editable,
+    not_editable=mod.IteratorFlag.NotEditable,
+    user_flag=mod.IteratorFlag.UserFlag,
 )
 
 
@@ -36,7 +38,7 @@ class TreeWidgetItemIterator(QtWidgets.QTreeWidgetItemIterator):
             | QtWidgets.QTreeWidgetItem
             | QtWidgets.QTreeWidgetItemIterator
         ),
-        flags: QtWidgets.QTreeWidgetItemIterator.IteratorFlags | None = None,
+        flags: QtWidgets.QTreeWidgetItemIterator.IteratorFlag | None = None,
         hidden: bool | None = None,
         selected: bool | None = None,
         selectable: bool | None = None,
@@ -52,45 +54,45 @@ class TreeWidgetItemIterator(QtWidgets.QTreeWidgetItemIterator):
             super().__init__(other)
         else:
             if flags is None:
-                flags = QtWidgets.QTreeWidgetItemIterator.All
+                flags = mod.All  # type: ignore
             if hidden is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.Hidden
+                flags |= mod.Hidden  # type: ignore
             elif hidden is False:
-                flags |= QtWidgets.QTreeWidgetItemIterator.NotHidden
+                flags |= mod.NotHidden  # type: ignore
             if selected is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.Selected
+                flags |= mod.Selected  # type: ignore
             elif selected is False:
-                flags |= QtWidgets.QTreeWidgetItemIterator.Unselected
+                flags |= mod.Unselected  # type: ignore
             if selectable is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.Selectable
+                flags |= mod.Selectable  # type: ignore
             elif selectable is False:
-                flags |= QtWidgets.QTreeWidgetItemIterator.NotSelectable
+                flags |= mod.NotSelectable  # type: ignore
             if draggable is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.DragEnabled
+                flags |= mod.DragEnabled  # type: ignore
             elif draggable is False:
-                flags |= QtWidgets.QTreeWidgetItemIterator.DragDisabled
+                flags |= mod.DragDisabled  # type: ignore
             if droppable is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.DropEnabled
+                flags |= mod.DropEnabled  # type: ignore
             elif droppable is False:
-                flags |= QtWidgets.QTreeWidgetItemIterator.DropDisabled
+                flags |= mod.DropDisabled  # type: ignore
             if has_children is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.HasChildren
+                flags |= mod.HasChildren  # type: ignore
             elif has_children is False:
-                flags |= QtWidgets.QTreeWidgetItemIterator.NoChildren
+                flags |= mod.NoChildren  # type: ignore
             if checked is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.Checked
+                flags |= mod.Checked  # type: ignore
             elif checked is False:
-                flags |= QtWidgets.QTreeWidgetItemIterator.NotChecked
+                flags |= mod.NotChecked  # type: ignore
             if enabled is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.Enabled
+                flags |= mod.Enabled  # type: ignore
             elif enabled is False:
-                flags |= QtWidgets.QTreeWidgetItemIterator.Disabled
+                flags |= mod.Disabled  # type: ignore
             if editable is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.Editable
+                flags |= mod.Editable  # type: ignore
             elif editable is False:
-                flags |= QtWidgets.QTreeWidgetItemIterator.NotEditable
+                flags |= mod.NotEditable  # type: ignore
             if user_flag is True:
-                flags |= QtWidgets.QTreeWidgetItemIterator.UserFlag
+                flags |= mod.UserFlag  # type: ignore
             super().__init__(other, flags)  # type: ignore
 
 

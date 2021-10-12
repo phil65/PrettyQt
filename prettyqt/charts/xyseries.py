@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import prettyqt
 from prettyqt import charts, gui
 from prettyqt.qt import QtCore
 from prettyqt.qt.QtCharts import QtCharts
@@ -33,7 +34,11 @@ class XYSeries(QtCharts.QXYSeries):
         return self
 
     def serialize_fields(self):
-        return dict(points=self.pointsVector())
+        if prettyqt.qt.API == "pyqt6":
+            points = [self.at(i) for i in range(self.count())]
+        else:
+            points = self.pointsVector()
+        return dict(points=points)
 
     def get_pen(self) -> gui.Pen:
         return gui.Pen(self.pen())

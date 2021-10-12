@@ -50,8 +50,8 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
             flag |= CHECK_INDEX_OPTIONS["do_not_use_parent"]  # type: ignore
         if parent_is_invalid:
             flag |= CHECK_INDEX_OPTIONS["parent_is_invalid"]  # type: ignore
-        check_flag = QtCore.QAbstractItemModel.CheckIndexOptions(flag)  # type: ignore
-        return self.checkIndex(index, check_flag)
+        check_flag = QtCore.QAbstractItemModel.CheckIndexOptions() | flag  # type: ignore
+        return self.checkIndex(index, check_flag)  # type: ignore
 
     @contextlib.contextmanager
     def change_layout(self):

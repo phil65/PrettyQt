@@ -2,12 +2,16 @@
 
 from __future__ import annotations
 
+
+# import sys
 from typing import TYPE_CHECKING
 
 from prettyqt.qt import PYQT5, PYQT6, PYSIDE2, PYSIDE6
 
 if TYPE_CHECKING:
     import datetime
+
+# sys.setrecursionlimit(2000)
 
 
 def to_datetime(self) -> datetime.datetime:
@@ -54,7 +58,10 @@ if PYQT5:
     QDateTime.toPython = to_datetime
     QDate.toPython = to_date
     QTime.toPython = to_time
-
+    QLibraryInfo.LibraryPath = QLibraryInfo.LibraryLocation
+    QRegularExpression.MatchOption.AnchorAtOffsetMatchOption = (  # type: ignore
+        QRegularExpression.MatchOption.AnchoredMatchOption
+    )
     # Those are imported from `import *`
     del (
         pyqtSignal,
@@ -90,7 +97,15 @@ elif PYQT6:
         Q_ARG,
         Q_ARG as QGenericArgument,
         PYQT_VERSION_STR as BINDING_VERSION,
+        QtMsgType,
     )
+
+    QtCriticalMsg = QtMsgType.QtCriticalMsg
+    QtDebugMsg = QtMsgType.QtDebugMsg
+    QtFatalMsg = QtMsgType.QtFatalMsg
+    QtInfoMsg = QtMsgType.QtInfoMsg
+    QtSystemMsg = QtMsgType.QtSystemMsg
+    QtWarningMsg = QtMsgType.QtWarningMsg
 
     # For issue #153
     from PyQt6.QtCore import *
@@ -114,6 +129,11 @@ elif PYSIDE2:
     from PySide2.QtCore import *
     from PySide2.QtCore import __version__  # type: ignore
     from PySide2 import __version__ as BINDING_VERSION
+
+    QLibraryInfo.LibraryPath = QLibraryInfo.LibraryLocation
+    QRegularExpression.MatchOption.AnchorAtOffsetMatchOption = (  # type: ignore
+        QRegularExpression.MatchOption.AnchoredMatchOption
+    )
 elif PYSIDE6:
     from PySide6.QtCore import *  # type: ignore
     from PySide6.QtCore import __version__  # type: ignore
