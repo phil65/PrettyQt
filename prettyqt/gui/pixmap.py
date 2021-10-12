@@ -70,7 +70,7 @@ class Pixmap(QtGui.QPixmap):
     def create_dot(cls, color: types.ColorType = "black", size: int = 16) -> Pixmap:
         col = colors.get_color(color)
         px = cls(size, size)
-        px.fill(QtCore.Qt.transparent)
+        px.fill(QtCore.Qt.GlobalColor.transparent)  # type: ignore
         px_size = px.rect().adjusted(1, 1, -1, -1)
         with gui.Painter(px) as painter:
             painter.use_antialiasing()

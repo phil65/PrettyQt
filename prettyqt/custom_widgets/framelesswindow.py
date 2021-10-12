@@ -17,13 +17,13 @@ class SideGrip(widgets.Widget):
     ):
         super().__init__(parent=parent)
         if edge == "left":
-            self.set_cursor("size_horizonal")
+            self.set_cursor("size_horizontal")
             self.resize_fn = self.resize_left
         elif edge == "top":
             self.set_cursor("size_vertical")
             self.resize_fn = self.resize_top
         elif edge == "right":
-            self.set_cursor("size_horizonal")
+            self.set_cursor("size_horizontal")
             self.resize_fn = self.resize_right
         else:
             self.set_cursor("size_vertical")

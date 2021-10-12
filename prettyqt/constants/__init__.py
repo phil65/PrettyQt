@@ -330,7 +330,7 @@ CursorShapeStr = Literal[
     "wait",
     "caret",
     "size_vertical",
-    "size_horizonal",
+    "size_horizontal",
     "size_topright",
     "size_topleft",
     "size_all",
@@ -355,7 +355,7 @@ CURSOR_SHAPE: bidict[CursorShapeStr, Qt.CursorShape] = bidict(
     wait=Qt.CursorShape.WaitCursor,
     caret=Qt.CursorShape.IBeamCursor,
     size_vertical=Qt.CursorShape.SizeVerCursor,
-    size_horizonal=Qt.CursorShape.SizeHorCursor,
+    size_horizontal=Qt.CursorShape.SizeHorCursor,
     size_topright=Qt.CursorShape.SizeBDiagCursor,
     size_topleft=Qt.CursorShape.SizeFDiagCursor,
     size_all=Qt.CursorShape.SizeAllCursor,
@@ -581,13 +581,13 @@ GESTURE_TYPE: bidict[GestureTypeStr, Qt.GestureType] = bidict(
 
 GestureStateStr = Literal["none", "started", "updated", "finished", "canceled"]
 GESTURE_STATE: bidict[GestureStateStr, Qt.GestureState] = bidict(
-    # not available on PyQt6
-    none=Qt.GestureState(0),  # type: ignore # GestureState.NoGesture
     started=Qt.GestureState.GestureStarted,
     updated=Qt.GestureState.GestureUpdated,
     finished=Qt.GestureState.GestureFinished,
     canceled=Qt.GestureState.GestureCanceled,
 )
+if prettyqt.qt.API != "pyqt6":
+    GESTURE_STATE["none"] = Qt.GestureState(0)  # type: ignore
 
 ScrollBarPolicyStr = Literal["always_on", "always_off", "as_needed"]
 SCROLLBAR_POLICY: bidict[ScrollBarPolicyStr, Qt.ScrollBarPolicy] = bidict(

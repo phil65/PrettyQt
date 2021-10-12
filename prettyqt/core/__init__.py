@@ -147,7 +147,7 @@ from .jsonvalue import JsonValue
 from .jsondocument import JsonDocument
 
 # not available in PySide2
-if prettyqt.qt.API == "pyqt5":
+if prettyqt.qt.API.startswith("pyqt"):
     from .library import Library  # type: ignore
     from .pluginloader import PluginLoader  # type: ignore
 

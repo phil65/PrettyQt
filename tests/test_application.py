@@ -35,7 +35,7 @@ def test_application(qapp):
     qapp.store_widget_states()
     qapp.restore_widget_states()
     event = QtGui.QKeyEvent(
-        QtCore.QEvent.KeyPress, QtCore.Qt.Key_Down, QtCore.Qt.KeyboardModifiers(0)
+        QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key_Down, QtCore.Qt.KeyboardModifier(0)
     )
     assert qapp.send_event("test", event) is True
     qapp.post_event("test", event)

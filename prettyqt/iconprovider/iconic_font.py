@@ -170,7 +170,7 @@ class CharIconEngine(gui.IconEngine):
 
     def pixmap(self, size, mode, state) -> QtGui.QPixmap:
         pm = QtGui.QPixmap(size)
-        pm.fill(QtCore.Qt.transparent)
+        pm.fill(QtCore.Qt.GlobalColor.transparent)  # type: ignore
         rect = core.Rect(ZERO_COORD, size)
         painter = gui.Painter(pm)
         self.paint(painter, rect, mode, state)

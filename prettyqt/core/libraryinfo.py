@@ -53,7 +53,8 @@ class LibraryInfo(QtCore.QLibraryInfo):
     def get_location(cls, location: LocationStr) -> pathlib.Path:
         if location not in LOCATION:
             raise InvalidParamError(location, LOCATION)
-        return pathlib.Path(cls.location(LOCATION[location]))
+        path = cls.location(LOCATION[location])
+        return pathlib.Path(path)
 
     @classmethod
     def get_version(cls) -> core.VersionNumber:

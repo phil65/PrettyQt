@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import network
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, mappers
 
 
 mod = QtNetwork.QHostAddress
@@ -18,14 +18,15 @@ CONVERSION_MODE = bidict(
     tolerant=mod.ConversionModeFlag.TolerantConversion,
 )
 
-SPECIAL_ADDRESS = bidict(
-    null=int(QtNetwork.QHostAddress.Null),
-    localhost=int(QtNetwork.QHostAddress.LocalHost),
-    localhost_ipv6=int(QtNetwork.QHostAddress.LocalHostIPv6),
-    broadcast=int(QtNetwork.QHostAddress.Broadcast),
-    any_ipv4=int(QtNetwork.QHostAddress.AnyIPv4),
-    any_ipv6=int(QtNetwork.QHostAddress.AnyIPv6),
-    any=int(QtNetwork.QHostAddress.Any),
+SPECIAL_ADDRESS = mappers.FlagMap(
+    mod.SpecialAddress,
+    null=mod.SpecialAddress.Null,
+    localhost=mod.SpecialAddress.LocalHost,
+    localhost_ipv6=mod.SpecialAddress.LocalHostIPv6,
+    broadcast=mod.SpecialAddress.Broadcast,
+    any_ipv4=mod.SpecialAddress.AnyIPv4,
+    any_ipv6=mod.SpecialAddress.AnyIPv6,
+    any=mod.SpecialAddress.Any,
 )
 
 SpecialAddressStr = Literal[

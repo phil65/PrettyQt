@@ -27,7 +27,7 @@ class PluginLoader(QtCore.QPluginLoader):
         ]
 
     def set_load_hints(self, **kwargs):
-        flag = QtCore.QLibrary.LoadHint()  # type: ignore
+        flag = QtCore.QLibrary.LoadHint(0)  # type: ignore
         for k, v in kwargs.items():
             if v is True:
                 flag |= core.library.LOAD_HINTS[k]  # type: ignore

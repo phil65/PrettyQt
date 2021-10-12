@@ -8,7 +8,10 @@ from bidict import bidict
 class FlagMap:
     def __init__(self, initializer, **kwargs):
         self.initializer = initializer
-        kwargs = {k: int(v) for k, v in kwargs.items()}
+        try:
+            kwargs = {k: v.value for k, v in kwargs.items()}
+        except AttributeError:
+            kwargs = {k: int(v) for k, v in kwargs.items()}
         self.bidict: bidict[str, int] = bidict(**kwargs)
 
         class Inverter:

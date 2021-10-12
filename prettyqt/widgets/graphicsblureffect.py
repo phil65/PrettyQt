@@ -35,7 +35,7 @@ class GraphicsBlurEffect(QtWidgets.QGraphicsBlurEffect):
         if hints:
             flags = helpers.merge_flags(hints, BLUR_HINTS)
         else:
-            flags = QtWidgets.QGraphicsBlurEffect.BlurHint()
+            flags = QtWidgets.QGraphicsBlurEffect.BlurHint(0)  # type: ignore
         self.setBlurHints(flags)
 
     def get_blur_hints(self) -> list[BlurHintStr]:
