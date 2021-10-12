@@ -31,7 +31,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade pip
-        pip install poetry --pre
+        pip install poetry
         poetry install -E pyqt5
     - name: Test with pytest
       run: |
