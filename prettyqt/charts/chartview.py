@@ -37,21 +37,21 @@ class ChartView(QtCharts.QChartView):
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         """Handle keypress events to allow navigation via keyboard."""
         key = event.key()
-        if key == QtCore.Qt.Key_Escape:
+        if key == QtCore.Qt.Key.Key_Escape:
             self.chart().zoomReset()
-        elif key == QtCore.Qt.Key_Plus:
+        elif key == QtCore.Qt.Key.Key_Plus:
             self.chart().zoom_by_factor(ZOOM_IN_FACTOR)
-        elif key == QtCore.Qt.Key_Minus:
+        elif key == QtCore.Qt.Key.Key_Minus:
             self.chart().zoom_by_factor(ZOOM_OUT_FACTOR)
-        elif key == QtCore.Qt.Key_Left:
+        elif key == QtCore.Qt.Key.Key_Left:
             self.chart().scroll(-SCROLL_STEP_SIZE, 0)
-        elif key == QtCore.Qt.Key_Right:
+        elif key == QtCore.Qt.Key.Key_Right:
             self.chart().scroll(SCROLL_STEP_SIZE, 0)
-        elif key == QtCore.Qt.Key_Up:
+        elif key == QtCore.Qt.Key.Key_Up:
             self.chart().scroll(0, SCROLL_STEP_SIZE)
-        elif key == QtCore.Qt.Key_Down:
+        elif key == QtCore.Qt.Key.Key_Down:
             self.chart().scroll(0, -SCROLL_STEP_SIZE)
-        elif key == QtCore.Qt.Key_0:
+        elif key == QtCore.Qt.Key.Key_0:
             self.chart().apply_nice_numbers()
         else:
             super().keyPressEvent(event)
