@@ -54,45 +54,45 @@ class TreeWidgetItemIterator(QtWidgets.QTreeWidgetItemIterator):
             super().__init__(other)
         else:
             if flags is None:
-                flags = mod.All  # type: ignore
+                flags = mod.IteratorFlag.All  # type: ignore
             if hidden is True:
-                flags |= mod.Hidden  # type: ignore
+                flags |= mod.IteratorFlag.Hidden  # type: ignore
             elif hidden is False:
-                flags |= mod.NotHidden  # type: ignore
+                flags |= mod.IteratorFlag.NotHidden  # type: ignore
             if selected is True:
-                flags |= mod.Selected  # type: ignore
+                flags |= mod.IteratorFlag.Selected  # type: ignore
             elif selected is False:
-                flags |= mod.Unselected  # type: ignore
+                flags |= mod.IteratorFlag.Unselected  # type: ignore
             if selectable is True:
-                flags |= mod.Selectable  # type: ignore
+                flags |= mod.IteratorFlag.Selectable  # type: ignore
             elif selectable is False:
-                flags |= mod.NotSelectable  # type: ignore
+                flags |= mod.IteratorFlag.NotSelectable  # type: ignore
             if draggable is True:
-                flags |= mod.DragEnabled  # type: ignore
+                flags |= mod.IteratorFlag.DragEnabled  # type: ignore
             elif draggable is False:
-                flags |= mod.DragDisabled  # type: ignore
+                flags |= mod.IteratorFlag.DragDisabled  # type: ignore
             if droppable is True:
-                flags |= mod.DropEnabled  # type: ignore
+                flags |= mod.IteratorFlag.DropEnabled  # type: ignore
             elif droppable is False:
-                flags |= mod.DropDisabled  # type: ignore
+                flags |= mod.IteratorFlag.DropDisabled  # type: ignore
             if has_children is True:
-                flags |= mod.HasChildren  # type: ignore
+                flags |= mod.IteratorFlag.HasChildren  # type: ignore
             elif has_children is False:
-                flags |= mod.NoChildren  # type: ignore
+                flags |= mod.IteratorFlag.NoChildren  # type: ignore
             if checked is True:
-                flags |= mod.Checked  # type: ignore
+                flags |= mod.IteratorFlag.Checked  # type: ignore
             elif checked is False:
-                flags |= mod.NotChecked  # type: ignore
+                flags |= mod.IteratorFlag.NotChecked  # type: ignore
             if enabled is True:
-                flags |= mod.Enabled  # type: ignore
+                flags |= mod.IteratorFlag.Enabled  # type: ignore
             elif enabled is False:
-                flags |= mod.Disabled  # type: ignore
+                flags |= mod.IteratorFlag.Disabled  # type: ignore
             if editable is True:
-                flags |= mod.Editable  # type: ignore
+                flags |= mod.IteratorFlag.Editable  # type: ignore
             elif editable is False:
-                flags |= mod.NotEditable  # type: ignore
+                flags |= mod.IteratorFlag.NotEditable  # type: ignore
             if user_flag is True:
-                flags |= mod.UserFlag  # type: ignore
+                flags |= mod.IteratorFlag.UserFlag  # type: ignore
             super().__init__(other, flags)  # type: ignore
 
 
