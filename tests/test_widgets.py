@@ -1450,7 +1450,7 @@ def test_treewidgetitemiterator(qtbot):
     item = widgets.TreeWidget()
     widgets.TreeWidgetItemIterator(
         item,
-        flags=True,
+        flags=None,
         hidden=True,
         selected=True,
         selectable=True,
