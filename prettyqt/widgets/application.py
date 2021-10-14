@@ -89,7 +89,10 @@ class Application(QtWidgets.QApplication):
 
     @classmethod
     def get_mainwindow(cls) -> QtWidgets.QMainWindow | None:
-        widget_list = cls.instance().topLevelWidgets()
+        inst = cls.instance()
+        if inst is None:
+            return None
+        widget_list = inst.topLevelWidgets()
         for widget in widget_list:
             if isinstance(widget, QtWidgets.QMainWindow):
                 return widget

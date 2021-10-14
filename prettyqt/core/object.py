@@ -90,7 +90,7 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        if prettyqt.qt.API == "pyqt5":
+        if prettyqt.qt.API != "pyside2":
             return self.findChildren(typ, name=name, options=flag)  # type: ignore
         else:
             if name is None:
@@ -109,7 +109,7 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        if prettyqt.qt.API == "pyqt5":
+        if prettyqt.qt.API != "pyside2":
             return self.findChild(typ, name, flag)  # type: ignore
         else:
             if name is None:
