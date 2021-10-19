@@ -12,6 +12,6 @@ class NoFocusDelegate(widgets.StyledItemDelegate):
         option: QtWidgets.QStyleOptionViewItem,
         index: QtCore.QModelIndex,
     ):
-        if option.state & widgets.Style.State_HasFocus:
-            option.state = option.state ^ widgets.Style.State_HasFocus
+        if option.state & widgets.Style.StateFlag.State_HasFocus:
+            option.state = option.state ^ widgets.Style.StateFlag.State_HasFocus
         super().paint(painter, option, index)

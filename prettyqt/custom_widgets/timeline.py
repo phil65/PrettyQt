@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, gui, iconprovider, widgets
+from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, helpers, types
 
@@ -92,7 +92,7 @@ class Timeline(widgets.Widget):
             while (w := w + 100) <= self.width():
                 time_string = helpers.format_seconds(w * scale)
                 rect = core.Rect(w - 50, 0, 100, 100)
-                qp.drawText(rect, QtCore.Qt.AlignHCenter, time_string)
+                qp.drawText(rect, constants.ALIGN_H_CENTER, time_string)
             # Draw down line
             qp.set_pen(color=PEN_COLOR, width=5)
             qp.drawLine(0, 40, self.width(), 40)

@@ -25,7 +25,11 @@ class AbstractTextDocumentLayout(QtGui.QAbstractTextDocumentLayout):
     ) -> int | None:
         if isinstance(point, tuple):
             point = core.PointF(*point)
-        accuracy = QtCore.Qt.FuzzyHit if fuzzy else QtCore.Qt.ExactHit
+        accuracy = (
+            QtCore.Qt.HitTestAccuracy.FuzzyHit
+            if fuzzy
+            else QtCore.Qt.HitTestAccuracy.ExactHit
+        )
         result = self.hitTest(point, accuracy)
         if result == -1:
             return None

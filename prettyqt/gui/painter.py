@@ -173,7 +173,11 @@ class Painter(QtGui.QPainter):
         self.setBrush(brush)
 
     def set_transparent_background(self, transparent: bool = True):
-        mode = QtCore.Qt.TransparentMode if transparent else QtCore.Qt.OpaqueMode
+        mode = (
+            QtCore.Qt.BGMode.TransparentMode
+            if transparent
+            else QtCore.Qt.BGMode.OpaqueMode
+        )
         self.setBackgroundMode(mode)
 
     def set_composition_mode(self, mode: CompositionModeStr):

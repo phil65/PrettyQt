@@ -88,7 +88,7 @@ def is_dark_mode() -> bool:
             "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\"
             "Themes\\Personalize"
         )
-        settings = core.Settings(path, core.Settings.NativeFormat)
+        settings = core.Settings(path, core.Settings.Format.NativeFormat)
         return settings.value("AppsUseLightTheme") == 0
     elif sys.platform == "darwin":
         import darkdetect

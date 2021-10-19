@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Any, Dict, List, Protocol, Union
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtCore, QtGui, QtWebEngineWidgets, QtWidgets
+    from prettyqt.qt import QtCore, QtGui, QtWebEngineCore, QtWidgets
 
     JSONType = Union[str, int, float, bool, None, Dict[str, Any], List[Any]]
 
@@ -96,5 +96,5 @@ if TYPE_CHECKING:
         QtWidgets.QListWidgetItem,
         QtWidgets.QTreeWidgetItem,
         # QtGui.QColorSpace,
-        QtWebEngineWidgets.QWebEngineHistory,
+        QtWebEngineCore.QWebEngineHistory,
     ]

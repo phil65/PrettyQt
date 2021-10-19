@@ -105,7 +105,7 @@ QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
 class MessageBox(QtWidgets.QMessageBox):
     def __init__(
         self,
-        icon: types.IconType = None,
+        icon: types.IconType | IconStr = None,
         title: str = "",
         text: str = "",
         informative_text: str = "",

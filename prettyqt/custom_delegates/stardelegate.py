@@ -29,16 +29,16 @@ class StarRating:
         """Paint the stars (and/or diamonds if we're in editing mode)."""
         painter.save()
         painter.setRenderHint(painter.RenderHint.Antialiasing, True)
-        painter.setPen(QtCore.Qt.NoPen)
+        painter.setPen(QtCore.Qt.PenStyle.NoPen)
         painter.setBrush(palette.highlight() if is_editable else palette.windowText())
         y_offset = (rect.height() - PAINTING_SCALE_FACTOR) / 2
         painter.translate(rect.x(), rect.y() + y_offset)
         painter.scale(PAINTING_SCALE_FACTOR, PAINTING_SCALE_FACTOR)
         for i in range(self.max_stars):
             if i < self.star_count:
-                painter.drawPolygon(STAR_POLYGON, QtCore.Qt.WindingFill)
+                painter.drawPolygon(STAR_POLYGON, QtCore.Qt.FillRule.WindingFill)
             elif is_editable:
-                painter.drawPolygon(DIAMOND_POLYGON, QtCore.Qt.WindingFill)
+                painter.drawPolygon(DIAMOND_POLYGON, QtCore.Qt.FillRule.WindingFill)
             else:
                 break
             painter.translate(1.0, 0.0)
@@ -99,7 +99,7 @@ class StarDelegate(widgets.StyledItemDelegate):
 
         # If the row is currently selected, we need to make sure we
         # paint the background accordingly.
-        if option.state & widgets.Style.State_Selected:
+        if option.state & widgets.Style.StateFlag.State_Selected:
             # The original C++ example used option.palette.foreground() to
             # get the brush for painting, but there are a couple of
             # problems with that:
@@ -158,7 +158,8 @@ if __name__ == "__main__":
     table_widget = widgets.TableWidget(1, 2)
     table_widget.set_delegate(StarDelegate(), column=1)
     table_widget.setEditTriggers(
-        widgets.AbstractItemView.DoubleClicked | widgets.AbstractItemView.SelectedClicked
+        widgets.AbstractItemView.EditTrigger.DoubleClicked  # type: ignore
+        | widgets.AbstractItemView.EditTrigger.SelectedClicked
     )
     table_widget.set_selection_behaviour("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Rating"])

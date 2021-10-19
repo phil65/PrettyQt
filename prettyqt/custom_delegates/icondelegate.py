@@ -28,12 +28,12 @@ class IconDelegate(widgets.StyledItemDelegate):
         if not value:
             return
         margin = 10
-        mode = gui.Icon.Normal
+        mode = gui.Icon.Mode.Normal
 
-        if not (option.state & widgets.Style.State_Enabled):
-            mode = gui.Icon.Disabled
-        elif option.state & widgets.Style.State_Selected:
-            mode = gui.Icon.Selected
+        if not (option.state & widgets.Style.StateFlag.State_Enabled):
+            mode = gui.Icon.Mode.Disabled
+        elif option.state & widgets.Style.StateFlag.State_Selected:
+            mode = gui.Icon.Mode.Selected
 
         if isinstance(value, QtGui.QPixmap):
             icon = QtGui.QIcon(value)
@@ -49,13 +49,17 @@ class IconDelegate(widgets.StyledItemDelegate):
             option.decorationSize = value.size() / value.devicePixelRatio()
 
         elif isinstance(value, QtGui.QIcon):
-            is_on = option.state & widgets.Style.State_Open
-            state = gui.Icon.On if is_on else gui.Icon.Off
+            is_on = option.state & widgets.Style.StateFlag.State_Open
+            state = gui.Icon.State.On if is_on else gui.Icon.State.Off
             actual_size = option.icon.actualSize(option.decorationSize, mode, state)
             option.decorationSize = option.decorationSize & actual_size
         r = core.Rect(core.Point(), option.decorationSize)
         r.moveCenter(option.rect.center())
         r.setRight(option.rect.right() - margin)
-        state = gui.Icon.On if option.state & widgets.Style.State_Open else gui.Icon.Off
+        state = (
+            gui.Icon.State.On
+            if option.state & widgets.Style.StateFlag.State_Open
+            else gui.Icon.State.Off
+        )
         alignment = constants.ALIGN_RIGHT | constants.ALIGN_V_CENTER  # type: ignore
         icon.paint(painter, r, alignment, mode, state)

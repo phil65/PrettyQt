@@ -218,7 +218,7 @@ class Settings(QtCore.QSettings):
         app_path: None | str | os.PathLike = None,
     ):
         logger.debug(f"assigning extensions {exts} to {app_name}")
-        s = cls("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.NativeFormat)
+        s = cls("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.Format.NativeFormat)
         if app_path is None:
             app_path = str(core.CoreApplication.get_application_file_path())
         app_path = os.fspath(app_path)

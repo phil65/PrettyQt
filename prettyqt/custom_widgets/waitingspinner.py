@@ -93,7 +93,10 @@ class BaseWaitingSpinner(widgets.Widget):
                 )
                 painter.setBrush(color)
                 painter.drawRoundedRect(
-                    rect, self._roundness, self._roundness, QtCore.Qt.RelativeSize
+                    rect,
+                    self._roundness,
+                    self._roundness,
+                    QtCore.Qt.SizeMode.RelativeSize,
                 )
 
     def start(self):

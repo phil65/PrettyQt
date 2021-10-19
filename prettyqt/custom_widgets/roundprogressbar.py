@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError
 
@@ -145,7 +145,7 @@ class RoundProgressBar(widgets.Widget):
         elif self.bar_style == "line":
             base_color = self.palette().base().color()
             painter.set_pen(color=base_color, width=self.outline_pen_width)
-            painter.setBrush(QtCore.Qt.NoBrush)
+            painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
             width = self.outline_pen_width / 2
             adjusted = rect.adjusted(width, width, -width, -width)
             painter.drawEllipse(adjusted)
@@ -170,7 +170,7 @@ class RoundProgressBar(widgets.Widget):
         elif self.bar_style == "line":
             color = self.palette().highlight().color()
             painter.set_pen(color=color, width=self.data_pen_width)
-            painter.setBrush(QtCore.Qt.NoBrush)
+            painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
             pen_width = self.outline_pen_width / 2
             adjusted = rect.adjusted(pen_width, pen_width, -pen_width, -pen_width)
             if value == self._max_value:
@@ -226,7 +226,8 @@ class RoundProgressBar(widgets.Widget):
         font.setPixelSize(max(font_size, 1))
         painter.setFont(font)
         painter.setPen(self.palette().text().color())
-        painter.drawText(inner_rect, QtCore.Qt.AlignCenter, self._value_to_text(value))
+        text = self._value_to_text(value)
+        painter.drawText(inner_rect, constants.ALIGN_CENTER, text)  # type: ignore
 
     def _value_to_text(self, value: float) -> str:
         text_to_draw = self.number_format

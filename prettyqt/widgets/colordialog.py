@@ -38,8 +38,10 @@ class ColorDialog(QtWidgets.QColorDialog):
         parent: QtWidgets.QWidget | None = None,
     ) -> gui.Color:
         preset = colors.get_color(preset)
-        kwargs = dict(options=cls.ShowAlphaChannel) if allow_alpha else {}
-        color = cls.getColor(preset, parent, **kwargs)
+        kwargs = (
+            dict(options=cls.ColorDialogOption.ShowAlphaChannel) if allow_alpha else {}
+        )
+        color = cls.getColor(preset, parent, **kwargs)  # type: ignore
         return gui.Color(color)
 
     def current_color(self) -> gui.Color:
@@ -108,7 +110,7 @@ class CPAlphaShowLabel(widgets.Label):
 if __name__ == "__main__":
     app = widgets.app()
     dlg = ColorDialog()
-    dlg.setOptions(ColorDialog.ShowAlphaChannel)
+    dlg.setOptions(ColorDialog.ColorDialogOption.ShowAlphaChannel)  # type: ignore
     label = CPAlphaShowLabel(dlg)
     dlg.replace_qcolorshowlabel(label)
     cs = dlg.get_qcolorshower()

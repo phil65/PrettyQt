@@ -44,23 +44,23 @@ class SortFilterProxyModel(QtCore.QSortFilterProxyModel):
 
     def set_filter_case_sensitive(self, state: bool):
         if state:
-            sensitivity = QtCore.Qt.CaseSensitive
+            sensitivity = QtCore.Qt.CaseSensitivity.CaseSensitive
         else:
-            sensitivity = QtCore.Qt.CaseInsensitive
+            sensitivity = QtCore.Qt.CaseSensitivity.CaseInsensitive
         self.setFilterCaseSensitivity(sensitivity)
 
     def is_filter_case_sensitive(self) -> bool:
-        return self.filterCaseSensitivity() == QtCore.Qt.CaseSensitive
+        return self.filterCaseSensitivity() == QtCore.Qt.CaseSensitivity.CaseSensitive
 
     def set_sort_case_sensitive(self, state: bool):
         if state:
-            sensitivity = QtCore.Qt.CaseSensitive
+            sensitivity = QtCore.Qt.CaseSensitivity.CaseSensitive
         else:
-            sensitivity = QtCore.Qt.CaseInsensitive
+            sensitivity = QtCore.Qt.CaseSensitivity.CaseInsensitive
         self.setSortCaseSensitivity(sensitivity)
 
     def is_sort_case_sensitive(self) -> bool:
-        return self.sortCaseSensitivity() == QtCore.Qt.CaseSensitive
+        return self.sortCaseSensitivity() == QtCore.Qt.CaseSensitivity.CaseSensitive
 
     def get_filter_regular_expression(self) -> core.RegularExpression:
         return core.RegularExpression(self.filterRegularExpression())

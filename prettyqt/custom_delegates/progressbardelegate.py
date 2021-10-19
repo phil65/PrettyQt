@@ -14,7 +14,7 @@ class ProgressBarDelegate(widgets.StyledItemDelegate):
         progressBar_option.text = f"{progress}%"
         progressBar_option.textVisible = True
         widgets.Application.style().drawControl(
-            widgets.Style.CE_ProgressBar, progressBar_option, painter
+            widgets.Style.ControlElement.CE_ProgressBar, progressBar_option, painter
         )
 
 
@@ -28,7 +28,8 @@ if __name__ == "__main__":
     table_widget = widgets.TableWidget(1, 2)
     table_widget.set_delegate(ProgressBarDelegate(), column=1)
     table_widget.setEditTriggers(
-        widgets.AbstractItemView.DoubleClicked | widgets.AbstractItemView.SelectedClicked
+        widgets.AbstractItemView.EditTrigger.DoubleClicked  # type: ignore
+        | widgets.AbstractItemView.EditTrigger.SelectedClicked
     )
     table_widget.set_selection_behaviour("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Progress"])

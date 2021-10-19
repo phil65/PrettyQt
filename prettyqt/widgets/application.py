@@ -82,7 +82,10 @@ class Application(QtWidgets.QApplication):
             f"{self.organizationDomain()}"
         )
         popup = widgets.MessageBox(
-            widgets.MessageBox.NoIcon, title, text, buttons=widgets.MessageBox.Ok
+            "none",
+            title,
+            text,
+            buttons=["ok"],
         )
         popup.set_icon("mdi.information-outline")
         popup.exec_()

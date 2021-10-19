@@ -35,10 +35,12 @@ class Image(QtGui.QImage):
         if arr.dtype in {np.float32, np.float64}:
             arr = (255 * arr).round()
         arr = arr.astype(np.uint8)
-        return cls(arr.data, width, height, channel * width, cls.Format_RGB888)
+        return cls(arr.data, width, height, channel * width, cls.Format.Format_RGB888)
 
     def invert_pixels(self, invert_alpha: bool = False):
-        self.invertPixels(self.InvertRgba if invert_alpha else self.InvertRgb)
+        self.invertPixels(
+            self.InvertMode.InvertRgba if invert_alpha else self.InvertMode.InvertRgb
+        )
 
 
 if __name__ == "__main__":

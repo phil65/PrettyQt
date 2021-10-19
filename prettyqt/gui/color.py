@@ -39,7 +39,7 @@ class Color(QtGui.QColor):
         )
 
     def __str__(self):
-        return self.name() if self.alpha() == 255 else self.name(self.HexArgb)
+        return self.name() if self.alpha() == 255 else self.name(self.NameFormat.HexArgb)
 
     def __reduce__(self):
         return type(self), (self.red(), self.green(), self.blue(), self.alpha())

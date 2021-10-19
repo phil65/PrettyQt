@@ -14,7 +14,7 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
 
         # I only wanted it for mouse over, but you'll probably want to remove
         # this condition
-        if option.state and widgets.Style.State_MouseOver:
+        if option.state and widgets.Style.StateFlag.State_MouseOver:
             font = option.font
             font.setUnderline(True)
             painter.setFont(font)
