@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-from PyQt5 import Qsci, QtGui  # type: ignore
-
 from prettyqt import gui, widgets
+from prettyqt.qt import Qsci, QtGui  # type: ignore
 from prettyqt.utils import InvalidParamError, bidict, colors, types
 
 
@@ -185,7 +184,7 @@ class SciScintilla(Qsci.QsciScintilla):
         self.setMarginsFont(font)
 
         # Margin 0 is used for line numbers
-        self.setMarginWidth(0, font.metrics.width("00000") + 6)
+        self.setMarginWidth(0, font.metrics.horizontalAdvance("00000") + 6)
         self.setMarginLineNumbers(0, True)
         self.set_margins_background_color("lightgrey")
 

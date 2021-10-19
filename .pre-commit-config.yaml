@@ -32,6 +32,7 @@ repos:
     - id: mypy
       # args: [--ignore-missing-imports]
       additional_dependencies: [pyside2, types-Deprecated, types-docutils, types-orjson]
+      exclude: '.*(sciscintilla)\.py'
 
 - repo: https://gitlab.com/pycqa/flake8
   rev: 3.9.2
