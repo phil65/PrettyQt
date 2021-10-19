@@ -9,6 +9,7 @@ elif PYSIDE2:
     from PySide2.QtWidgets import *
 elif PYQT6:
     from PyQt6.QtWidgets import *  # type: ignore
+    from PyQt6.QtOpenGLWidgets import QOpenGLWidget  # type: ignore
     from PyQt6.QtGui import (  # type: ignore
         QAction,
         QActionGroup,
@@ -23,6 +24,7 @@ elif PYQT6:
     QMenu.exec_ = QMenu.exec  # type: ignore
 elif PYSIDE6:
     from PySide6.QtWidgets import *  # type: ignore
+    from PySide6.QtOpenGLWidgets import QOpenGLWidget  # type: ignore
     from PySide6.QtGui import (  # type: ignore
         QAction,
         QActionGroup,
