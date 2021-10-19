@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui
-from prettyqt.qt.QtCharts import QtCharts
+from prettyqt.qt import QtCharts
 
 
 QtCharts.QCandlestickSet.__bases__ = (core.Object,)

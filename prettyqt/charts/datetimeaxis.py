@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime
 
 from prettyqt import charts
-from prettyqt.qt.QtCharts import QtCharts
+from prettyqt.qt import QtCharts
 
 
 QtCharts.QDateTimeAxis.__bases__ = (charts.AbstractAxis,)

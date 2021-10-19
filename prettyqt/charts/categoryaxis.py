@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Iterator, Literal
 
 from prettyqt import charts
-from prettyqt.qt.QtCharts import QtCharts
+from prettyqt.qt import QtCharts
 from prettyqt.utils import InvalidParamError, bidict
 
 

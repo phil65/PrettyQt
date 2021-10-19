@@ -5,8 +5,7 @@ from typing import Literal
 from deprecated import deprecated
 
 from prettyqt import charts, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.qt.QtCharts import QtCharts
+from prettyqt.qt import QtCharts, QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -74,7 +73,7 @@ class ChartView(QtCharts.QChartView):
     def mousePressEvent(self, event: QtGui.QMouseEvent):
         """Override to allow dragging the chart."""
         if event.button() == QtCore.Qt.MouseButton.RightButton:
-            cursor = gui.Cursor(QtCore.Qt.SizeAllCursor)
+            cursor = gui.Cursor(QtCore.Qt.CursorShape.SizeAllCursor)
             widgets.Application.setOverrideCursor(cursor)
             self.last_mouse_pos = event.pos()
             event.accept()
