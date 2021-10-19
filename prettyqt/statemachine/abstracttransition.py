@@ -3,21 +3,21 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
+from prettyqt.qt import QtStateMachine
 from prettyqt.utils import InvalidParamError, bidict
 
 
 TRANSITION_TYPE = bidict(
-    exclusive=QtCore.QAbstractTransition.ExternalTransition,
-    parallel=QtCore.QAbstractTransition.InternalTransition,
+    exclusive=QtStateMachine.QAbstractTransition.ExternalTransition,
+    parallel=QtStateMachine.QAbstractTransition.InternalTransition,
 )
 
 TransitionTypeStr = Literal["exclusive", "parallel"]
 
-QtCore.QAbstractTransition.__bases__ = (core.Object,)
+QtStateMachine.QAbstractTransition.__bases__ = (core.Object,)
 
 
-class AbstractTransition(QtCore.QAbstractTransition):
+class AbstractTransition(QtStateMachine.QAbstractTransition):
     def set_transition_type(self, typ: TransitionTypeStr):
         """Set transition type.
 

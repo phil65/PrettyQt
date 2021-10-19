@@ -2,22 +2,22 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
-from prettyqt.qt import QtCore
+from prettyqt import statemachine
+from prettyqt.qt import QtStateMachine
 from prettyqt.utils import InvalidParamError, bidict
 
 
 HISTORY_TYPE = bidict(
-    shallow=QtCore.QHistoryState.ShallowHistory,
-    deep=QtCore.QHistoryState.DeepHistory,
+    shallow=QtStateMachine.QHistoryState.ShallowHistory,
+    deep=QtStateMachine.QHistoryState.DeepHistory,
 )
 
 HistoryTypeStr = Literal["shallow", "deep"]
 
-QtCore.QHistoryState.__bases__ = (core.AbstractState,)
+QtStateMachine.QHistoryState.__bases__ = (statemachine.AbstractState,)
 
 
-class HistoryState(QtCore.QHistoryState):
+class HistoryState(QtStateMachine.QHistoryState):
     def set_history_type(self, typ: HistoryTypeStr):
         """Set history type to use.
 

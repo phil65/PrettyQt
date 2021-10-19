@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from prettyqt import core
-from prettyqt.qt import QtCore
+from prettyqt.qt import QtStateMachine
 
 
-QtCore.QAbstractState.__bases__ = (core.Object,)
+QtStateMachine.QAbstractState.__bases__ = (core.Object,)
 
 
-class AbstractState(QtCore.QAbstractState):
+class AbstractState(QtStateMachine.QAbstractState):
     def serialize_fields(self):
         return dict(active=self.active())
 

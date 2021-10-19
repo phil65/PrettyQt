@@ -2,29 +2,30 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
-from prettyqt.qt import QtCore
+from prettyqt import statemachine
+from prettyqt.qt import QtStateMachine
 from prettyqt.utils import InvalidParamError, bidict
 
 
 CHILD_MODE = bidict(
-    exclusive=QtCore.QState.ExclusiveStates, parallel=QtCore.QState.ParallelStates
+    exclusive=QtStateMachine.QState.ExclusiveStates,
+    parallel=QtStateMachine.QState.ParallelStates,
 )
 
 ChildModeStr = Literal["exclusive", "parallel"]
 
 RESTORE_POLICY = bidict(
-    dont_restore=QtCore.QState.DontRestoreProperties,
-    restore=QtCore.QState.RestoreProperties,
+    dont_restore=QtStateMachine.QState.DontRestoreProperties,
+    restore=QtStateMachine.QState.RestoreProperties,
 )
 
 RestorePolicyStr = Literal["dont_restore", "restore"]
 
 
-QtCore.QState.__bases__ = (core.AbstractState,)
+QtStateMachine.QState.__bases__ = (statemachine.AbstractState,)
 
 
-class State(QtCore.QState):
+class State(QtStateMachine.QState):
     def set_child_mode(self, mode: ChildModeStr):
         """Set child mode to use.
 

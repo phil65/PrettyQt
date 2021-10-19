@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
-from prettyqt.qt import QtCore
+from prettyqt import statemachine
+from prettyqt.qt import QtCore, QtStateMachine
 from prettyqt.utils import InvalidParamError, bidict
 
 
-sm = QtCore.QStateMachine
+sm = QtStateMachine.QStateMachine
 
 ERROR = bidict(
     none=sm.NoError,
@@ -32,11 +32,11 @@ PRIORITY = bidict(
 
 PriorityStr = Literal["normal", "high"]
 
-QtCore.QStateMachine.__bases__ = (core.State,)
+QtStateMachine.QStateMachine.__bases__ = (statemachine.State,)
 
 
-class StateMachine(QtCore.QStateMachine):
-    def __add__(self, other: QtCore.QAbstractState) -> StateMachine:
+class StateMachine(QtStateMachine.QStateMachine):
+    def __add__(self, other: QtStateMachine.QAbstractState) -> StateMachine:
         self.addState(other)
         return self
 
@@ -48,7 +48,7 @@ class StateMachine(QtCore.QStateMachine):
             raise InvalidParamError(priority, PRIORITY)
         self.postEvent(event, PRIORITY[priority])
 
-    def set_global_restore_policy(self, policy: core.state.RestorePolicyStr):
+    def set_global_restore_policy(self, policy: statemachine.state.RestorePolicyStr):
         """Set restore policy to use.
 
         Args:
@@ -57,14 +57,14 @@ class StateMachine(QtCore.QStateMachine):
         Raises:
             InvalidParamError: restore policy does not exist
         """
-        if policy not in core.state.RESTORE_POLICY:
-            raise InvalidParamError(policy, core.state.RESTORE_POLICY)
-        self.setGlobalRestorePolicy(core.state.RESTORE_POLICY[policy])
+        if policy not in statemachine.state.RESTORE_POLICY:
+            raise InvalidParamError(policy, statemachine.state.RESTORE_POLICY)
+        self.setGlobalRestorePolicy(statemachine.state.RESTORE_POLICY[policy])
 
-    def get_global_restore_policy(self) -> core.state.RestorePolicyStr:
+    def get_global_restore_policy(self) -> statemachine.state.RestorePolicyStr:
         """Return current restore policy.
 
         Returns:
             restore policy
         """
-        return core.state.RESTORE_POLICY.inverse[self.globalRestorePolicy()]
+        return statemachine.state.RESTORE_POLICY.inverse[self.globalRestorePolicy()]

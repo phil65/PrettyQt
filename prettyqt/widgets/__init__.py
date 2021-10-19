@@ -5,7 +5,6 @@ contains QtWidgets-based classes
 
 from __future__ import annotations
 
-from prettyqt import core
 from prettyqt.qt.QtWidgets import (
     QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent,
     QGraphicsSceneMouseEvent as GraphicsSceneMouseEvent,
@@ -106,9 +105,6 @@ from .dial import Dial
 
 from .dockwidget import DockWidget
 
-if core.VersionNumber.get_qt_version() < (6, 0, 0):
-    from .keyeventtransition import KeyEventTransition
-    from .mouseeventtransition import MouseEventTransition
 from .action import Action
 from .actiongroup import ActionGroup
 from .shortcut import Shortcut
