@@ -19,8 +19,11 @@ elif PYQT6:
         QShortcut,
         QFileSystemModel,
     )
-    from PyQt6.QtWidgets import QMenu  # type: ignore
 
+    QTextEdit.setTabStopWidth = QTextEdit.setTabStopDistance
+    QTextEdit.tabStopWidth = QTextEdit.tabStopDistance
+    QPlainTextEdit.setTabStopWidth = QPlainTextEdit.setTabStopDistance
+    QPlainTextEdit.tabStopWidth = QPlainTextEdit.tabStopDistance
     QMenu.exec_ = QMenu.exec  # type: ignore
 elif PYSIDE6:
     from PySide6.QtWidgets import *  # type: ignore
@@ -33,5 +36,10 @@ elif PYSIDE6:
         QUndoGroup,
         QShortcut,
     )
+
+    QTextEdit.setTabStopWidth = QTextEdit.setTabStopDistance
+    QTextEdit.tabStopWidth = QTextEdit.tabStopDistance
+    QPlainTextEdit.setTabStopWidth = QPlainTextEdit.setTabStopDistance
+    QPlainTextEdit.tabStopWidth = QPlainTextEdit.tabStopDistance
 else:
     raise PythonQtError("No Qt bindings could be found")
