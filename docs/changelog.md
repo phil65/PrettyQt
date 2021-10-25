@@ -1,8 +1,14 @@
-## v0.183.5 (2021-10-26)
+## v0.183.6 (2021-10-26)
 
 ### Fix
 
+- more qt compat stuff
 - generate docs on py3.9
+
+## v0.183.5 (2021-10-12)
+
+### Fix
+
 - only test on 3.9 / macos10
 
 ## v0.183.4 (2021-10-12)
