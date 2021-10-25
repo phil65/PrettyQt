@@ -12,9 +12,6 @@ class Shortcut(QtWidgets.QShortcut):
     def __str__(self):
         return self.key().toString()
 
-    def __int__(self):
-        return self.id()
-
     def serialize_field(self):
         return dict(
             auto_repeat=self.autoRepeat(),
@@ -51,4 +48,6 @@ class Shortcut(QtWidgets.QShortcut):
         Returns:
             Key sequence
         """
-        return gui.KeySequence(self.key().toString(), gui.KeySequence.PortableText)
+        return gui.KeySequence(
+            self.key().toString(), gui.KeySequence.SequenceFormat.PortableText
+        )
