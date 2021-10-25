@@ -8,7 +8,7 @@ from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
 
 
-PatternType = Union[str, Pattern]
+PatternType = Union[str, Pattern]  # todo: move this to types?
 
 
 class BaseRegexValidator(gui.Validator):
