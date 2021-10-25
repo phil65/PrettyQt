@@ -24,19 +24,19 @@ class AmesomeFileIconProvider(widgets.FileIconProvider):
                 return self.folder_icon
             elif icon.isFile():
                 return self.file_icon
-        elif icon == widgets.FileIconProvider.Folder:
+        elif icon == widgets.FileIconProvider.IconType.Folder:
             return self.folder_icon
-        # elif icon == widgets.FileIconProvider.File:
+        # elif icon == widgets.FileIconProvider.IconType.File:
         #     return self.file_icon
-        elif icon == widgets.FileIconProvider.Computer:
+        elif icon == widgets.FileIconProvider.IconType.Computer:
             return self.computer_icon
-        elif icon == widgets.FileIconProvider.Desktop:
+        elif icon == widgets.FileIconProvider.IconType.Desktop:
             return self.desktop_icon
-        elif icon == widgets.FileIconProvider.Trashcan:
+        elif icon == widgets.FileIconProvider.IconType.Trashcan:
             return self.trashcan_icon
-        elif icon == widgets.FileIconProvider.Network:
+        elif icon == widgets.FileIconProvider.IconType.Network:
             return self.network_icon
-        elif icon == widgets.FileIconProvider.Drive:
+        elif icon == widgets.FileIconProvider.IconType.Drive:
             return self.drive_icon
         return self.file_icon
 

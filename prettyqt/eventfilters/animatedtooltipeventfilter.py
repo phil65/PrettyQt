@@ -22,7 +22,7 @@ class AnimatedToolTipEventFilter(QtWidgets.QAbstractButton):
         self.animation = self.slide_anim | self.fade_anim
 
     def eventFilter(self, obj: QtWidgets.QAbstractButton, event: QtCore.QEvent):
-        if event.type() == QtCore.QEvent.Enter:
+        if event.type() == QtCore.QEvent.Type.Enter:
             # self.tool_tip.adjustSize()
             self.tool_tip.setText(obj.toolTip())
             self.tool_tip.show()
@@ -45,10 +45,10 @@ class AnimatedToolTipEventFilter(QtWidgets.QAbstractButton):
             self.slide_anim.set_start_value(center + delta)
             self.slide_anim.set_end_value(center)
             self.animation.start_animation()
-        elif event.type() == QtCore.QEvent.Leave:
+        elif event.type() == QtCore.QEvent.Type.Leave:
             self.tool_tip.hide()
             self.animation.stop()
-        elif event.type() == QtCore.QEvent.ToolTip:
+        elif event.type() == QtCore.QEvent.Type.ToolTip:
             return True
         return super().eventFilter(obj, event)
 

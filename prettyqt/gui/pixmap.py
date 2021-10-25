@@ -90,7 +90,7 @@ class Pixmap(QtGui.QPixmap):
         bg0 = colors.get_color(color_1)
         bg1 = colors.get_color(color_2)
         with gui.Painter(pat) as p:
-            p.setPen(QtCore.Qt.NoPen)
+            p.setPen(QtCore.Qt.PenStyle.NoPen)
             # Paint a checkerboard pattern for the color to be overlaid on
             p.fillRect(pat.rect(), bg0)
             p.fillRect(0, 0, n, n, bg1)
