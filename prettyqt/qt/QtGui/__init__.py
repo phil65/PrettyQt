@@ -7,6 +7,12 @@ if PYQT5:
     from PyQt5.QtGui import *
 elif PYQT6:
     from PyQt6.QtGui import *
+
+    def pos(self, *a):
+        _pos = self.position(*a)
+        return _pos.toPoint()
+
+    QMouseEvent.pos = pos  # type: ignore
 elif PYSIDE2:
     from PySide2.QtGui import *
 elif PYSIDE6:

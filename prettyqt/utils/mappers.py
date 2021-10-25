@@ -16,7 +16,10 @@ class FlagMap:
 
         class Inverter:
             def __getitem__(self2, value):
-                return self.bidict.inverse[int(value)]
+                try:
+                    return self.bidict.inverse[int(value)]
+                except TypeError:
+                    return self.bidict.inverse[value.value]
 
         self.inverse = Inverter()
 
