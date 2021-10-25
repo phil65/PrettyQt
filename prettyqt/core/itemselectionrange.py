@@ -13,7 +13,7 @@ class ItemSelectionRange(QtCore.QItemSelectionRange):
         return not self.isEmpty()
 
     def __iter__(self) -> Iterator[QtCore.QModelIndex]:
-        return iter(self.indexes())
+        return iter(self.indexes())  # type: ignore
 
     def __len__(self):
         return len(self.indexes())

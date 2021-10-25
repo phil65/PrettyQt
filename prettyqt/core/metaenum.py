@@ -18,7 +18,7 @@ class MetaEnum:
             result = self.item.keysToValue(val)[0]  # type: ignore
         if result == -1:
             raise KeyError(index)
-        return result
+        return result  # type: ignore
 
     def __repr__(self):
         return f"{type(self).__name__}({self.get_name()!r})"

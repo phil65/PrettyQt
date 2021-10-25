@@ -43,7 +43,7 @@ class TextLine(QtGui.QTextLine):
     def cursor_to_x(self, cursor_pos: int, edge: EdgeStr = "leading") -> float:
         if edge not in EDGE:
             raise InvalidParamError(edge, EDGE)
-        return self.cursorToX(cursor_pos, EDGE[edge])
+        return self.cursorToX(cursor_pos, EDGE[edge])  # type: ignore
 
     def x_to_cursor(
         self, x: float, cursor_pos: CursorPositionStr = "cursor_between_characters"

@@ -152,8 +152,8 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
 
     def selected_indexes(self) -> list[QtCore.QModelIndex]:
         """Returns list of selected indexes in first row."""
-        indexes = (x for x in self.selectedIndexes() if x.column() == 0)
-        return sorted(indexes, key=lambda x: x.row())
+        indexes = (x for x in self.selectedIndexes() if x.column() == 0)  # type: ignore
+        return sorted(indexes, key=lambda x: x.row())  # type: ignore
 
     def selected_names(self) -> Generator[Any, None, None]:
         """Returns generator yielding item names."""

@@ -58,7 +58,7 @@ if PYQT5:
     QDateTime.toPython = to_datetime
     QDate.toPython = to_date
     QTime.toPython = to_time
-    QLibraryInfo.LibraryPath = QLibraryInfo.LibraryLocation
+    QLibraryInfo.LibraryPath = QLibraryInfo.LibraryLocation  # type: ignore
     QRegularExpression.MatchOption.AnchorAtOffsetMatchOption = (  # type: ignore
         QRegularExpression.MatchOption.AnchoredMatchOption
     )
@@ -114,6 +114,7 @@ elif PYQT6:
     QDate.toPython = to_date
     QTime.toPython = to_time
 
+    QLibraryInfo.location = QLibraryInfo.path  # type: ignore
     # Those are imported from `import *`
     del (
         pyqtSignal,
@@ -130,7 +131,7 @@ elif PYSIDE2:
     from PySide2.QtCore import __version__  # type: ignore
     from PySide2 import __version__ as BINDING_VERSION
 
-    QLibraryInfo.LibraryPath = QLibraryInfo.LibraryLocation
+    QLibraryInfo.LibraryPath = QLibraryInfo.LibraryLocation  # type: ignore
     QRegularExpression.MatchOption.AnchorAtOffsetMatchOption = (  # type: ignore
         QRegularExpression.MatchOption.AnchoredMatchOption
     )

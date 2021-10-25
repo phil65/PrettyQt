@@ -32,12 +32,6 @@ class SpacerItem(QtWidgets.QSpacerItem):
         h_policy: widgets.sizepolicy.SizePolicyStr = "minimum",
         v_policy: widgets.sizepolicy.SizePolicyStr = "minimum",
     ):
-        if isinstance(h_policy, QtWidgets.QSizePolicy.Policy):
-            h_pol = h_policy
-        else:
-            h_pol = widgets.sizepolicy.SIZE_POLICY[h_policy]
-        if isinstance(v_policy, QtWidgets.QSizePolicy.Policy):
-            v_pol = v_policy
-        else:
-            v_pol = widgets.sizepolicy.SIZE_POLICY[v_policy]
+        h_pol = widgets.sizepolicy.SIZE_POLICY[h_policy]
+        v_pol = widgets.sizepolicy.SIZE_POLICY[v_policy]
         self.changeSize(w, h, h_pol, v_pol)

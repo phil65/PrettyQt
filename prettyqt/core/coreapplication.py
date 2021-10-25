@@ -22,7 +22,10 @@ class CoreApplication(QtCore.QCoreApplication):
 
     @classmethod
     def call_on_exit(cls, func: Callable):
-        cls.instance().aboutToQuit.connect(func)
+        instance = cls.instance()
+        if instance is None:
+            raise RuntimeError("No QApplication running")
+        instance.aboutToQuit.connect(func)
 
     @classmethod
     def get_application_file_path(cls) -> pathlib.Path:
