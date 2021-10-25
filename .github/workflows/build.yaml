@@ -21,7 +21,8 @@ jobs:
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
-        sudo apt-get install x11-utils libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xfixes0 libpulse-mainloop-glib0 libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-alsa gstreamer1.0-libav libxvidcore4 qt5-image-formats-plugins bluez bluetooth blueman python3-pyqt5 python3-pyqt5.qtwebengine qtwayland5 speech-dispatcher-espeak-ng flite libflite1 libqt5texttospeech5 libqt5bluetooth5 libqt5svg5 pulseaudio qtspeech5-flite-plugin speech-dispatcher speech-dispatcher-flite pyqt5-dev-tools
+        sudo apt-get install x11-utils libxkbcommon-x11-0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-randr0 libxcb-render-util0 libxcb-xinerama0 libxcb-xfixes0 libpulse-mainloop-glib0 libgstreamer1.0-0 gstreamer1.0-tools gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-alsa gstreamer1.0-libav libxvidcore4 bluez bluetooth blueman speech-dispatcher-espeak-ng flite libflite1 pulseaudio speech-dispatcher speech-dispatcher-flite
+        sudo apt-get qt5-image-formats-plugins python3-pyqt5 python3-pyqt5.qtwebengine qtwayland5 libqt5texttospeech5 libqt5bluetooth5 libqt5svg5 qtspeech5-flite-plugin pyqt5-dev-tools
     # - name: Run services
     #   if: runner.os == 'Linux'
     #   run: |
