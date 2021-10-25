@@ -34,7 +34,7 @@ PyQt6-Charts = {version = "^6.2.0", optional=true}
 PyQt6-WebEngine = {version = "^6.2.0", optional=true}
 PyQt6-QScintilla = {version = "^2.0.0", optional=true}
 pyside2 = {version = "^5.15.0", python = "<3.10", optional=true}
-pyside6 = {version = "^6.0.0", python = "<3.10", optional=true}
+pyside6 = {version = "^6.0.0", python = "<3.11", optional=true}
 PyQtWebEngine = {version = "^5.15.0", optional=true}
 PyQtChart = {version = "^5.15.0", optional=true}
 QScintilla = {version = "^2.11.5", optional=true}
