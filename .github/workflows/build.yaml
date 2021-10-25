@@ -38,7 +38,7 @@ jobs:
       run: |
         poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
     - name: Create documentation
-      if: matrix.python-version == '3.10'
+      if: matrix.python-version == '3.10' && runner.os == 'Linux'
       run: |
         poetry run mkdocs build
     - name: Build and publish
