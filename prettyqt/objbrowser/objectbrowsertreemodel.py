@@ -260,7 +260,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
                     logger.debug("Unable to sort dictionary keys: %s", ex)
 
             path_strings = [
-                "{}[{!r}]".format(obj_path, item[0]) if obj_path else item[0]
+                f"{obj_path}[{item[0]!r}]" if obj_path else item[0]
                 for item in obj_children
             ]
 
