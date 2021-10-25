@@ -2,12 +2,9 @@
 
 import pytest
 
-from prettyqt import core
+from prettyqt import core, positioning
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
-
-
-positioning = pytest.importorskip("prettyqt.positioning")
 
 
 def test_geoaddress():
