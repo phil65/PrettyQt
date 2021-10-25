@@ -19,6 +19,7 @@ from prettyqt.utils import InvalidParamError
 def test_jsengine():
     engine = qml.JSEngine()
     engine.install_extensions("translation")
+    engine.eval("")
 
 
 def test_qmlengine():

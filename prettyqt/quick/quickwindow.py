@@ -55,7 +55,7 @@ QtQuick.QQuickWindow.__bases__ = (gui.Window,)
 
 class QuickWindow(QtQuick.QQuickWindow):
     def create_texture_from_image(self, image: QtGui.QImage, **kwargs):
-        flag = self.CreateTextureOption()
+        flag = self.CreateTextureOption(0)
         for key, val in kwargs.items():
             if val is True:
                 v = CREATE_TEXTURE_OPTION[key]

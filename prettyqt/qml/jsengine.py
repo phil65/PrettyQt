@@ -29,7 +29,7 @@ class JSEngine(QtQml.QJSEngine):
 
     def eval(self, program: str):
         result = self.evaluate(program)
-        return qml.JSValue(result)
+        return qml.JSValue(result)  # type: ignore
 
 
 if __name__ == "__main__":
