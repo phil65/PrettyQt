@@ -24,7 +24,8 @@ pytest-qt = "prettyqt.prettyqtest.plugin"
 python = "^3.8"
 bidict = "^0"
 docutils = {version = "^0.17", optional=true}
-orjson = "^3.2.0"
+orjson = {version = "^3", python = "<3.10", optional=true}
+
 regex = "^2021"
 
 PyQt5 = {version = "^5.15.0", optional=true}
@@ -69,7 +70,7 @@ pyqt5 = ["PyQt5", "PyQtWebEngine", "PyQtChart", "QScintilla"]
 pyside2 = ["pyside2"]
 pyside6 = ["pyside6"]
 pyqt6 = ["pyqt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla"]
-addons = ["docutils"]
+addons = ["docutils", "orjson"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"

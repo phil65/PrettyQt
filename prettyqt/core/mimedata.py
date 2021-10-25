@@ -2,15 +2,12 @@ from __future__ import annotations
 
 from typing import Any, Iterator
 
-import orjson as json
-
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import types
+from prettyqt.utils import helpers, types
 
 
 QtCore.QMimeData.__bases__ = (core.Object,)
-OPTS = json.OPT_NAIVE_UTC | json.OPT_SERIALIZE_NUMPY
 
 
 class MimeData(QtCore.QMimeData):
@@ -37,14 +34,14 @@ class MimeData(QtCore.QMimeData):
         self.setData(mime_type, QtCore.QByteArray(data.encode()))
 
     def set_json_data(self, mime_type: str, data: types.JSONType):
-        self.setData(mime_type, QtCore.QByteArray(json.dumps(data, option=OPTS)))
+        self.setData(mime_type, QtCore.QByteArray(helpers.dump_json(data)))
 
     def get_data(self, mime_type: str) -> str:
         return bytes(self.data(mime_type)).decode()
 
     def get_json_data(self, mime_type: str) -> types.JSONType:
         data = self.data(mime_type)
-        return json.loads(bytes(data))
+        return helpers.load_json(bytes(data))
 
     def keys(self) -> list[str]:
         return self.formats()

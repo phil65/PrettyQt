@@ -14,6 +14,29 @@ REGEX = re.compile(
 )
 
 
+def dump_json(data):
+    try:
+        import orjson
+
+        OPTS = orjson.OPT_NAIVE_UTC | orjson.OPT_SERIALIZE_NUMPY
+        return orjson.dumps(data, option=OPTS)
+    except (ImportError, ModuleNotFoundError):
+        import json
+
+        return json.dumps(data).encode()
+
+
+def load_json(data):
+    try:
+        import orjson
+
+        return orjson.loads(data)
+    except (ImportError, ModuleNotFoundError):
+        import json
+
+        return json.loads(data)
+
+
 def parse_time(time_str: str) -> int:
     parts = REGEX.match(time_str)
     if not parts:
