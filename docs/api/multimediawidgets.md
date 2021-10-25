@@ -1,4 +1,0 @@
-multimediawidgets module
-========================
-
-::: prettyqt.multimediawidgets
