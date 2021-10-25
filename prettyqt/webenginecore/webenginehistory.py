@@ -1,15 +1,13 @@
-# from prettyqt.qt import QtWebEngineWidgets
-
 from __future__ import annotations
 
 from typing import Iterator
 
 from prettyqt import webenginecore
-from prettyqt.qt import QtWebEngineWidgets
+from prettyqt.qt import QtWebEngineCore
 
 
 class WebEngineHistory:
-    def __init__(self, history: QtWebEngineWidgets.QWebEngineHistory):
+    def __init__(self, history: QtWebEngineCore.QWebEngineHistory):
         self.history = history
 
     def __getattr__(self, val):
