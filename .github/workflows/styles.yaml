@@ -1,6 +1,9 @@
 name: compile_styles
 
-on: [push]
+on:
+  create:
+    tags:
+      - v*
 
 jobs:
   ci:
@@ -19,7 +22,7 @@ jobs:
           - name: MacOS
             extension: "*.dylib"
             runs-on: macos-latest
-        python: [3.7, 3.8, 3.9]
+        python: ["3.9", "3.10"]
         qt: [5.15.2]
 
     steps:
@@ -35,7 +38,7 @@ jobs:
           python-version: ${{ matrix.python }}
           architecture: x64
       - name: install pyqt5
-        run: pip install pyqt5==5.15.2
+        run: pip install pyqt5==${{ matrix.qt }}
       - name: before
         uses: GabrielBB/xvfb-action@v1.2
         with:
