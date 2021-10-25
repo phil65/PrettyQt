@@ -214,7 +214,8 @@ class Record:
     :ivar bool ignored: If this record matches a regex from the "qt_log_ignore"
         option.
     :ivar context: a namedtuple containing the attributes ``file``,
-        ``function``, ``line``. Only available in Qt5, otherwise is None.
+        ``function``, ``line``. Can be None if no context is available for the
+        message.
     """
 
     _type_name_map = {

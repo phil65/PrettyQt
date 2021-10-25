@@ -21,7 +21,7 @@ from prettyqt.qt import QtTest, QtWidgets
 OrderStr = Literal["none", "simple", "strict"]
 
 
-def _parse_ini_boolean(value):
+def _parse_ini_boolean(value) -> bool:
     if value in (True, False):
         return value
     try:
@@ -159,7 +159,7 @@ class QtBot:
         else:
             return True
 
-    def add_widget(self, widget, *, before_close_func=None):
+    def add_widget(self, widget: QtWidgets.QWidget, *, before_close_func=None):
         """Add a widget to be tracked by this bot.
 
         This is not required, but will ensure that the
@@ -178,7 +178,7 @@ class QtBot:
             raise TypeError("Need to pass a QWidget to add_widget!")
         _add_widget(self._request.node, widget, before_close_func=before_close_func)
 
-    def wait_active(self, widget, timeout=5000):
+    def wait_active(self, widget: QtWidgets.QWidget, timeout=5000):
         """Context manager that waits for ``timeout`` ms or until the window is active.
 
         If window is not exposed within ``timeout`` milliseconds, raise ``TimeoutError``.
@@ -209,7 +209,7 @@ class QtBot:
             "qWaitForWindowActive", "activated", widget, timeout
         )
 
-    def wait_exposed(self, widget, timeout=5000):
+    def wait_exposed(self, widget: QtWidgets.QWidget, timeout: int = 5000):
         """Context manager that waits for ``timeout`` ms or until the window is exposed.
 
         If the window is not exposed within ``timeout`` ms, raise ``TimeoutError``.
@@ -240,7 +240,9 @@ class QtBot:
             "qWaitForWindowExposed", "exposed", widget, timeout
         )
 
-    def wait_for_window_shown(self, widget) -> bool:
+    def wait_for_window_shown(
+        self, widget: QtWidgets.QWidget, timeout: int = 5000
+    ) -> bool:
         """Wait until the window is shown in the screen.
 
         This is mainly useful for asynchronous systems like X11, where a window will be
@@ -249,17 +251,20 @@ class QtBot:
         :param QWidget widget:
             Widget to wait on.
 
+        :param int|None timeout:
+            How many milliseconds to wait for.
+
         .. note:: In ``PyQt5`` this function is considered deprecated in favor of
         :meth:`wait_exposed`.
 
         .. note:: This method is also available as ``wait_for_window_shown`` (pep-8 alias)
         """
         if hasattr(QtTest.QTest, "qWaitForWindowExposed"):
-            return QtTest.QTest.qWaitForWindowExposed(widget)
+            return QtTest.QTest.qWaitForWindowExposed(widget, timeout)
         else:
-            return QtTest.QTest.qWaitForWindowShown(widget)
+            return QtTest.QTest.qWaitForWindowShown(widget, timeout)
 
-    def stop_for_interaction(self):
+    def stop(self):
         """Stop the current test flow, letting the user interact with any visible widget.
 
         This is mainly useful so that you can verify the current state of the program
@@ -276,13 +281,15 @@ class QtBot:
             if widget is not None:
                 widget_and_visibility.append((widget, widget.isVisible()))
 
-        widgets.Application.instance().main_loop()
-
+        inst = widgets.Application.instance()
+        if inst is None:
+            raise RuntimeError("No Application running")
+        inst.main_loop()
         for widget, visible in widget_and_visibility:
             widget.setVisible(visible)
 
     def wait_signal(
-        self, signal=None, timeout: int = 1000, raising=None, check_params_cb=None
+        self, signal, timeout: int = 5000, raising=None, check_params_cb=None
     ):
         """Stop current test until a signal is triggered.
 
@@ -313,7 +320,7 @@ class QtBot:
         :param Signal signal:
             A signal to wait for, or a tuple ``(signal, signal_name_as_str)``
             to improve the error message that is part
-            of ``TimeoutError``. Set to ``None`` to just use timeout.
+            of ``TimeoutError``.
         :param int timeout:
             How many milliseconds to wait before resuming control flow.
         :param bool raising:
@@ -328,26 +335,18 @@ class QtBot:
             and return ``True`` if parameters match, ``False`` otherwise.
         :returns:
             ``SignalBlocker`` object. Call ``SignalBlocker.wait()`` to wait.
-
-        .. note::
-            Cannot have both ``signals`` and ``timeout`` equal ``None``, or
-            else you will block indefinitely. We throw an error if this occurs.
-
-        .. note::
-            This method is also available as ``wait_signal`` (pep-8 alias)
         """
         raising = self._should_raise(raising)
         blocker = SignalBlocker(
             timeout=timeout, raising=raising, check_params_cb=check_params_cb
         )
-        if signal is not None:
-            blocker.connect(signal)
+        blocker.connect(signal)
         return blocker
 
     def wait_signals(
         self,
-        signals=None,
-        timeout: int = 1000,
+        signals,
+        timeout: int = 5000,
         raising=None,
         check_params_cbs=None,
         order: OrderStr = "none",
@@ -408,12 +407,6 @@ class QtBot:
         :returns:
             ``MultiSignalBlocker`` object. Call ``MultiSignalBlocker.wait()``
             to wait.
-
-        .. note::
-           Cannot have both ``signals`` and ``timeout`` equal ``None``, or
-           else you will block indefinitely. We throw an error if this occurs.
-
-        .. note:: This method is also available as ``wait_signals`` (pep-8 alias)
         """
         if order not in ["none", "simple", "strict"]:
             raise ValueError("order has to be set to 'none', 'simple' or 'strict'")
@@ -423,10 +416,8 @@ class QtBot:
         if check_params_cbs:
             if len(check_params_cbs) != len(signals):
                 raise ValueError(
-                    "Number of callbacks ({}) does not "
-                    "match number of signals ({})!".format(
-                        len(check_params_cbs), len(signals)
-                    )
+                    f"Number of callbacks ({len(check_params_cbs)}) does not "
+                    f"match number of signals ({len(signals)})!"
                 )
         blocker = MultiSignalBlocker(
             timeout=timeout,
@@ -434,8 +425,7 @@ class QtBot:
             order=order,
             check_params_cbs=check_params_cbs,
         )
-        if signals is not None:
-            blocker.add_signals(signals)
+        blocker.add_signals(signals)
         return blocker
 
     def wait(self, ms: int):
@@ -457,16 +447,13 @@ class QtBot:
             catches signals emitted inside the ``with``-block.
 
         This is intended to be used as a context manager.
-
-        .. note:: This method is also available as ``assert_not_emitted``
-                  (pep-8 alias)
         """
         spy = SignalEmittedSpy(signal)
         with spy, self.wait_signal(signal, timeout=wait, raising=False):
             yield
         spy.assert_not_emitted()
 
-    def wait_until(self, callback: Callable, timeout: int = 1000):
+    def wait_until(self, callback: Callable, timeout: int = 5000):
         """Wait in a busy loop, calling the given callback periodically until timeout.
 
         ``callback()`` should raise ``AssertionError`` to indicate that the desired
@@ -497,8 +484,6 @@ class QtBot:
         :param timeout: timeout value in ms.
         :raises ValueError: if the return value from the callback is anything other than
             ``None``, ``True`` or ``False``.
-
-        .. note:: This method is also available as ``wait_until`` (pep-8 alias)
         """
         __tracebackhide__ = True
         import time
@@ -536,7 +521,7 @@ class QtBot:
                     raise TimeoutError(timeout_msg)
             self.wait(10)
 
-    def wait_callback(self, timeout: int = 1000, raising=None):
+    def wait_callback(self, timeout: int = 5000, raising=None):
         """Stop current test until a callback is called.
 
         Used to stop the control flow of a test until the returned callback is
@@ -567,8 +552,6 @@ class QtBot:
         :returns:
             A ``CallbackBlocker`` object which can be used directly as a
             callback as it implements ``__call__``.
-
-        .. note:: This method is also available as ``wait_callback`` (pep-8 alias)
         """
         raising = self._should_raise(raising)
         blocker = CallbackBlocker(timeout=timeout, raising=raising)
@@ -585,8 +568,6 @@ class QtBot:
 
             # exception is a list of sys.exc_info tuples
             assert len(exceptions) == 1
-
-        .. note:: This method is also available as ``capture_exceptions`` (pep-8 alias)
         """
         from prettyqt.prettyqtest.exceptions import capture_exceptions
 
@@ -635,7 +616,9 @@ class QtBot:
                 setattr(cls, method_name, method)
 
 
-def _add_widget(item, widget, *, before_close_func: Callable | None = None):
+def _add_widget(
+    item, widget: QtWidgets.QWidget, *, before_close_func: Callable | None = None
+):
     """Register a widget into the given pytest item for later closing."""
     qt_widgets = getattr(item, "qt_widgets", [])
     qt_widgets.append((weakref.ref(widget), before_close_func))

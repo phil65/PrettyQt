@@ -22,7 +22,7 @@ class _AbstractSignalBlocker:
 
     """
 
-    def __init__(self, timeout: int = 1000, raising: bool = True):
+    def __init__(self, timeout: int = 5000, raising: bool = True):
         self._loop = core.EventLoop()
         self.timeout = timeout
         self.signal_triggered = False
@@ -186,7 +186,7 @@ class SignalBlocker(_AbstractSignalBlocker):
 
     def __init__(
         self,
-        timeout: int = 1000,
+        timeout: int = 5000,
         raising: bool = True,
         check_params_cb: Callable | None = None,
     ):
@@ -307,7 +307,7 @@ class MultiSignalBlocker(_AbstractSignalBlocker):
 
     def __init__(
         self,
-        timeout: int = 1000,
+        timeout: int = 5000,
         raising: bool = True,
         check_params_cbs: list[Callable] | None = None,
         order: Literal["none", "simple", "strict"] = "none",
@@ -621,7 +621,7 @@ class CallbackBlocker:
         the callback wasn't called at all.
     """
 
-    def __init__(self, timeout: int = 1000, raising: bool = True):
+    def __init__(self, timeout: int = 5000, raising: bool = True):
         self.timeout = timeout
         self.raising = raising
         self.args: list | None = None
