@@ -21,7 +21,7 @@ class CategoryAxis(QtCharts.QCategoryAxis):
     def __delitem__(self, index: str):
         self.remove(index)
 
-    def __getitem__(self, label: str) -> str:
+    def __getitem__(self, label: int | slice) -> str | list[str]:
         return self.categoriesLabels()[label]
 
     def __setitem__(self, index: str, value: str):

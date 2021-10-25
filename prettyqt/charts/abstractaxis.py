@@ -15,7 +15,7 @@ class AbstractAxis(QtCharts.QAbstractAxis):
             alignment
         """
         alignment = self.alignment()
-        if int(alignment) == 0:
+        if alignment == constants.ALIGN_NONE:
             return None
         return constants.SIDES.inverse[alignment]
 
@@ -26,7 +26,7 @@ class AbstractAxis(QtCharts.QAbstractAxis):
             orientation
         """
         orientation = self.orientation()
-        if int(orientation) == 0:
+        if orientation == constants.ORIENTATION_NONE:
             return None
         return constants.ORIENTATION.inverse[orientation]
 

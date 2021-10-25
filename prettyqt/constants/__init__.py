@@ -33,6 +33,7 @@ CHECKSTATE_ROLE = Qt.ItemDataRole.CheckStateRole
 ALIGNMENT_ROLE = Qt.ItemDataRole.TextAlignmentRole
 FONT_ROLE = Qt.ItemDataRole.FontRole
 
+ALIGN_NONE = Alignment(0)
 ALIGN_LEFT = Alignment.AlignLeft
 ALIGN_RIGHT = Alignment.AlignRight
 ALIGN_H_CENTER = Alignment.AlignHCenter
@@ -54,6 +55,7 @@ ALIGN_BOTTOM_LEFT = Flag.AlignBottom | Flag.AlignLeft  # type: ignore
 ALIGN_BOTTOM_RIGHT = Flag.AlignBottom | Flag.AlignRight  # type: ignore
 ALIGN_BOTTOM_CENTER = Flag.AlignBottom | Flag.AlignHCenter  # type: ignore
 
+ORIENTATION_NONE = Orientation(0)
 HORIZONTAL = Orientation.Horizontal
 VERTICAL = Orientation.Vertical
 
