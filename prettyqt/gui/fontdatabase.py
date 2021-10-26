@@ -102,7 +102,7 @@ class FontDatabase(QtGui.QFontDatabase):
         path = pathlib.Path(path)
         for p in path.iterdir():
             if p.suffix.lower() in [".ttf", ".otf"]:
-                logger.debug(f"adding font {p} to database.")
+                logger.debug(f"adding font {p!r} to database.")
                 cls.addApplicationFont(str(p))
 
     @classmethod
@@ -111,7 +111,7 @@ class FontDatabase(QtGui.QFontDatabase):
         font_id = cls.addApplicationFont(str(path))
         if not cls.applicationFontFamilies(font_id):
             raise RuntimeError(
-                f"Font '{path}' appears to be empty. "
+                f"Font {path!r} appears to be empty. "
                 "If you are on Windows 10, please read "
                 "https://support.microsoft.com/"
                 "en-us/kb/3053676 "
@@ -121,7 +121,7 @@ class FontDatabase(QtGui.QFontDatabase):
         if ttf_hash is not None:
             content = path.read_bytes()
             if hashlib.md5(content).hexdigest() != ttf_hash:
-                raise OSError(f"Font is corrupt at: '{path}'")
+                raise OSError(f"Font is corrupt at: {path!r}")
         return font_id
 
     @classmethod
