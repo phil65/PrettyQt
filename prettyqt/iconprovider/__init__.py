@@ -98,11 +98,39 @@ class ElusiveIcons(IconFont):
     md5 = "207966b04c032d5b873fd595a211582e"
 
 
-class MaterialDesignIcons(IconFont):
+class MaterialDesign5Icons(IconFont):
     prefix = "mdi"
-    font_path = "materialdesignicons-webfont.ttf"
-    charmap_path = "materialdesignicons-webfont-charmap.json"
-    md5 = "b0fd91bb29dcb296a9a37f8bda0a2d85"
+    font_path = "materialdesignicons5-webfont.ttf"
+    charmap_path = "materialdesignicons5-webfont-charmap.json"
+    md5 = "b7d40e7ef80c1d4af6d94902af66e524"
+
+
+class MaterialDesign6Icons(IconFont):
+    prefix = "mdi6"
+    font_path = "materialdesignicons6-webfont.ttf"
+    charmap_path = "materialdesignicons6-webfont-charmap.json"
+    md5 = "9a2f455e7cbce011368aee95d292613b"
+
+
+class PhosphorIcons(IconFont):
+    prefix = "ph"
+    font_path = "phosphor.ttf"
+    charmap_path = "phosphor-charmap.json"
+    md5 = "5b8dc57388b2d86243566b996cc3a789"
+
+
+class RemixIcons(IconFont):
+    prefix = "ri"
+    font_path = "remixicon.ttf"
+    charmap_path = "remixicon-charmap.json"
+    md5 = "888e61f04316f10bddfff7bee10c6dd0"
+
+
+class CodiconIcons(IconFont):
+    prefix = "msc"
+    font_path = "codicon.ttf"
+    charmap_path = "codicon-charmap.json"
+    md5 = "ca2f9e22cee3a59156b3eded74d87784"
 
 
 _resource: dict[str, IconicFont | None] = {"iconic": None}
@@ -121,7 +149,11 @@ def _instance() -> IconicFont:
             FontAwesome5Brands(),
             FontAwesome5Solid(),
             ElusiveIcons(),
-            MaterialDesignIcons(),
+            MaterialDesign5Icons(),
+            MaterialDesign6Icons(),
+            PhosphorIcons(),
+            RemixIcons(),
+            CodiconIcons(),
         )
         _resource["iconic"] = iconic
         return iconic
