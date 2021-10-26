@@ -4,7 +4,7 @@ from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
-class AmesomeFileIconProvider(widgets.FileIconProvider):
+class AwesomeFileIconProvider(widgets.FileIconProvider):
     def __init__(self):
         super().__init__()
         self.folder_icon = iconprovider.get_icon("mdi.folder")
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     app.load_language("de")
     model = widgets.FileSystemModel()
     model.set_root_path("root")
-    prov = AmesomeFileIconProvider()
+    prov = AwesomeFileIconProvider()
     model.setIconProvider(prov)
     tree = widgets.TreeView()
     tree.set_model(model)
