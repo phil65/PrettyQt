@@ -23,7 +23,7 @@ jobs:
             extension: "*.dylib"
             runs-on: macos-latest
         python: ["3.9", "3.10"]
-        qt: [5.15.2]
+        qt: [5.15.5]
 
     steps:
       - name: Checkout
