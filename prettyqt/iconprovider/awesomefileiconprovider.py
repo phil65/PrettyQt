@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import mimetypes
+
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
@@ -39,6 +41,32 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
         elif icon == widgets.FileIconProvider.IconType.Drive:
             return self.drive_icon
         return self.file_icon
+
+    @staticmethod
+    def mimetype_icon(path, fallback=None):
+        """Try to create an icon from theme using the file mimetype.
+
+        E.g.::
+
+            return self.mimetype_icon(
+                path, fallback=':/icons/text-x-python.png')
+
+        :param path: file path for which the icon must be created
+        :param fallback: fallback icon path (qrc or file system)
+        :returns: QIcon or None if the file mimetype icon could not be found.
+        """
+        mime = mimetypes.guess_type(path)[0]
+        if mime:
+            icon = mime.replace("/", "-")
+            # if system.WINDOWS:
+            #     return icons.file()
+            if gui.Icon.hasThemeIcon(icon):
+                icon = gui.Icon.fromTheme(icon)
+                if not icon.isNull():
+                    return icon
+        if fallback:
+            return gui.Icon(fallback)
+        return gui.Icon.fromTheme("text-x-generic")
 
 
 if __name__ == "__main__":
