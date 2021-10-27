@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any, Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, helpers
+from prettyqt.utils import InvalidParamError, bidict, helpers, types
 
 
 SPEC = bidict(
@@ -145,3 +145,22 @@ class Color(QtGui.QColor):
             255 - self.blue(),
             255 - self.alpha() if invert_alpha else self.alpha(),
         )
+
+    @classmethod
+    def drift_color(cls, color: types.ColorAndBrushType, factor: int = 110):
+        """Return color that is lighter or darker than the base color.
+
+        If base_color.lightness is higher than 128, the returned color is darker
+        otherwise is is lighter.
+        :param base_color: The base color to drift from
+        ;:param factor: drift factor (%)
+        :return A lighter or darker color.
+        """
+        base_color = cls(color)
+        if base_color.lightness() > 128:
+            return base_color.darker(factor)
+        else:
+            if base_color == Color("#000000"):
+                return cls.drift_color(cls("#101010"), factor + 20)
+            else:
+                return base_color.lighter(factor + 10)
