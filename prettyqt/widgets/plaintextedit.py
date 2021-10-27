@@ -149,6 +149,16 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         """
         self.setReadOnly(value)
 
+    def show_whitespace_and_tabs(self, show: bool):
+        """Set show white spaces flag."""
+        doc = self.document()
+        options = doc.defaultTextOption()
+        if show:
+            options.setFlags(options.flags() | QtGui.QTextOption.ShowTabsAndSpaces)
+        else:
+            options.setFlags(options.flags() & ~QtGui.QTextOption.ShowTabsAndSpaces)
+        doc.setDefaultTextOption(options)
+
     def highlight_current_line(self, color: types.ColorType = None):
         if color is None:
             color = self.get_palette().get_color("highlight")
@@ -163,7 +173,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
                 prop = QtGui.QTextFormat.FullWidthSelection
             else:
                 prop = QtGui.QTextFormat.Property.FullWidthSelection  # type: ignore
-                selection.format.setProperty(prop, True)
+            selection.format.setProperty(prop, True)
             selection.cursor = self.textCursor()
             selection.cursor.clearSelection()
             extra_selections.append(selection)
@@ -257,6 +267,7 @@ if __name__ == "__main__":
     val = custom_validators.RegexPatternValidator()
     app = widgets.app()
     widget = PlainTextEdit("This is a test")
+    widget.show_whitespace_and_tabs(True)
     widget.set_validator(val)
     with widget.current_cursor() as c:
         c.select_text(2, 4)
