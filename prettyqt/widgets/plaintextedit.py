@@ -5,7 +5,6 @@ from typing import Iterator, Literal
 
 from deprecated import deprecated
 
-import prettyqt
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
 from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors, types
@@ -174,10 +173,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         if not self.isReadOnly():
             selection = widgets.TextEdit.ExtraSelection()
             selection.format.setBackground(color)
-            if prettyqt.qt.API != "pyqt6":
-                prop = QtGui.QTextFormat.FullWidthSelection
-            else:
-                prop = QtGui.QTextFormat.Property.FullWidthSelection  # type: ignore
+            prop = QtGui.QTextFormat.Property.FullWidthSelection
             selection.format.setProperty(prop, True)
             selection.cursor = self.textCursor()
             selection.cursor.clearSelection()
