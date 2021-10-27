@@ -32,11 +32,16 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         parent: QtWidgets.QWidget | None = None,
         read_only: bool = False,
     ):
-        super().__init__(text, parent)
+        super().__init__(parent)
         self._allow_wheel_zoom = False
         self.validator: QtGui.QValidator | None = None
         self.textChanged.connect(self._on_value_change)
         self.set_read_only(read_only)
+        doc = gui.TextDocument(self)
+        layout = widgets.PlainTextDocumentLayout(doc)
+        doc.setDocumentLayout(layout)
+        self.setDocument(doc)
+        self.set_text(text)
 
     def serialize_fields(self):
         return dict(
