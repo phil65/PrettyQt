@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore
 
 
 class FadeInAnimation(core.PropertyAnimation):
@@ -14,7 +14,7 @@ class FadeInAnimation(core.PropertyAnimation):
         self.setEndValue(1.0)
         self.setDuration(duration)
 
-    def apply_to(self, obj: QtWidgets.QWidget, attribute: str = "windowOpacity"):
+    def apply_to(self, obj: QtCore.QObject, attribute: str = "windowOpacity"):
         super().apply_to(obj, attribute)
 
 

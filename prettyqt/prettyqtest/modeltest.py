@@ -96,7 +96,7 @@ class ModelTester:
         elif not index.isValid():
             return f"<invalid> (0x{id(index):x})"
         else:
-            data = self._model.data(index, QtCore.Qt.DisplayRole)
+            data = self._model.data(index, QtCore.Qt.ItemDataRole.DisplayRole)
             return "{}/{} {!r} (0x{:x})".format(
                 index.row(), index.column(), data, id(index)
             )
@@ -116,9 +116,9 @@ class ModelTester:
         assert self._model is not None
         self.force_py = force_py
         if HAS_QT_TESTER and not self.force_py:
-            tester = QtTest.QAbstractItemModelTester  # type: ignore
-            reporting_mode = tester.FailureReportingMode.Warning
-            self._qt_tester = tester(self._model, reporting_mode)
+            Tester = QtTest.QAbstractItemModelTester  # type: ignore
+            reporting_mode = Tester.FailureReportingMode.Warning
+            self._qt_tester = Tester(self._model, reporting_mode)  # type: ignore
             self._debug("Using Qt C++ tester")
             return
 
@@ -480,9 +480,9 @@ class ModelTester:
         state = self._model.data(self._model.index(0, 0), QtCore.Qt.CheckStateRole)
         assert state in [
             None,
-            QtCore.Qt.Unchecked,
-            QtCore.Qt.PartiallyChecked,
-            QtCore.Qt.Checked,
+            QtCore.Qt.CheckState.Unchecked,
+            QtCore.Qt.CheckState.PartiallyChecked,
+            QtCore.Qt.CheckState.Checked,
         ]
 
     def _on_rows_about_to_be_inserted(

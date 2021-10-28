@@ -118,7 +118,7 @@ class SearchAndReplaceMixin:
             t.insertText(replace_buffer)
             length = len(replace_buffer)
             t.setPosition(t.position() - length)
-            t.setPosition(t.position() + length, gui.TextCursor.KeepAnchor)
+            t.setPosition(t.position() + length, gui.TextCursor.MoveMode.KeepAnchor)
             self.setTextCursor(t)
             logger.info(
                 f"Replaced on line {t.blockNumber()}, " f"pos {t.positionInBlock()}"

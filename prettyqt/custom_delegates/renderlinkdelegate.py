@@ -30,7 +30,7 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         font = index.data(constants.FONT_ROLE)
         # alignment = index.data(constants.ALIGNMENT_ROLE)
         if font is None:
-            font = widgets.Application.get_font()
+            font = gui.GuiApplication.get_font()
         fm = gui.FontMetricsF(font)
         rect = fm.get_bounding_rect(
             core.RectF(option.rect),

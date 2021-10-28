@@ -8,15 +8,15 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 CHILD_MODE = bidict(
-    exclusive=QtStateMachine.QState.ExclusiveStates,
-    parallel=QtStateMachine.QState.ParallelStates,
+    exclusive=QtStateMachine.QState.ChildMode.ExclusiveStates,
+    parallel=QtStateMachine.QState.ChildMode.ParallelStates,
 )
 
 ChildModeStr = Literal["exclusive", "parallel"]
 
 RESTORE_POLICY = bidict(
-    dont_restore=QtStateMachine.QState.DontRestoreProperties,
-    restore=QtStateMachine.QState.RestoreProperties,
+    dont_restore=QtStateMachine.QState.RestorePolicy.DontRestoreProperties,
+    restore=QtStateMachine.QState.RestorePolicy.RestoreProperties,
 )
 
 RestorePolicyStr = Literal["dont_restore", "restore"]

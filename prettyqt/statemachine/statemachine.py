@@ -7,7 +7,7 @@ from prettyqt.qt import QtCore, QtStateMachine
 from prettyqt.utils import InvalidParamError, bidict
 
 
-sm = QtStateMachine.QStateMachine
+sm = QtStateMachine.QStateMachine.Error
 
 ERROR = bidict(
     none=sm.NoError,
@@ -26,8 +26,8 @@ ErrorStr = Literal[
 ]
 
 PRIORITY = bidict(
-    normal=sm.NormalPriority,
-    high=sm.HighPriority,
+    normal=QtStateMachine.QStateMachine.EventPriority.NormalPriority,
+    high=QtStateMachine.QStateMachine.EventPriority.HighPriority,
 )
 
 PriorityStr = Literal["normal", "high"]

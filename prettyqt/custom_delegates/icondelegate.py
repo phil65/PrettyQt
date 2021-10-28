@@ -16,7 +16,7 @@ class IconDelegate(widgets.StyledItemDelegate):
     ):
         """Override to paint an icon based on given Pixmap / Color / Icon.
 
-        Pixmap / Color / Icon must be set to 'QtCore.Qt.UserRole + 1000'
+        Pixmap / Color / Icon must be set to 'QtCore.Qt.ItemDataRole.UserRole + 1000'
 
         Args:
             painter (QtGui.QPainter): painter to paint the icon
@@ -37,7 +37,7 @@ class IconDelegate(widgets.StyledItemDelegate):
 
         if isinstance(value, QtGui.QPixmap):
             icon = QtGui.QIcon(value)
-            option.decorationSize = value.size() / value.devicePixelRatio()
+            option.decorationSize = int(value.size() / value.devicePixelRatio())
 
         elif isinstance(value, QtGui.QColor):
             pixmap = QtGui.QPixmap(option.decorationSize)
@@ -46,7 +46,7 @@ class IconDelegate(widgets.StyledItemDelegate):
 
         elif isinstance(value, QtGui.QImage):
             icon = QtGui.QIcon(QtGui.QPixmap.fromImage(value))
-            option.decorationSize = value.size() / value.devicePixelRatio()
+            option.decorationSize = int(value.size() / value.devicePixelRatio())
 
         elif isinstance(value, QtGui.QIcon):
             is_on = option.state & widgets.Style.StateFlag.State_Open

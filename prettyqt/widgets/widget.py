@@ -377,7 +377,11 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         with self.edit_font() as font:
             yield font
 
+    @deprecated(reason="This method is deprecated, use set_context_menu_policy instead.")
     def set_contextmenu_policy(self, policy: constants.ContextPolicyStr) -> None:
+        return self.set_context_menu_policy(policy)
+
+    def set_context_menu_policy(self, policy: constants.ContextPolicyStr) -> None:
         """Set contextmenu policy for given item view.
 
         Args:

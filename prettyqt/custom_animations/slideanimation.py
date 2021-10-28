@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore
 
 
 class SlideAnimation(core.PropertyAnimation):
@@ -23,7 +23,7 @@ class SlideAnimation(core.PropertyAnimation):
             point = core.Point(*point)
         self.setEndValue(point)
 
-    def apply_to(self, obj: QtWidgets.QWidget, attribute: str = "pos"):
+    def apply_to(self, obj: QtCore.QObject, attribute: str = "pos"):
         super().apply_to(obj, attribute)
 
 

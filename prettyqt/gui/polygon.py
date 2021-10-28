@@ -21,7 +21,7 @@ class Polygon(QtGui.QPolygon):
         return not self.isEmpty()
 
     def __contains__(self, point: QtCore.QPoint) -> bool:
-        return self.containsPoint(point, QtCore.Qt.OddEvenFill)
+        return self.containsPoint(point, QtCore.Qt.FillRule.OddEvenFill)
 
     def __getitem__(self, index: int) -> core.Point:
         if index >= self.size():

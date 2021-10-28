@@ -29,7 +29,7 @@ class EventLoop(QtCore.QEventLoop):
         if self._executing:
             raise AssertionError("Eventloop is already running!")
         self._executing = True
-        flag = QtCore.QEventLoop.ProcessEventFlags(0)
+        flag = QtCore.QEventLoop.ProcessEventFlag(0)
         if not user_input:
             flag |= 1
         if not socket_notifiers:

@@ -175,7 +175,7 @@ class TabWidget(QtWidgets.QTabWidget):
 
     def set_detachable(self):
         self.tab_bar.on_detach.connect(self.detach_tab)
-        widgets.Application.call_on_exit(self.close_detached_tabs)
+        core.CoreApplication.call_on_exit(self.close_detached_tabs)
         self.setMovable(True)
 
     def set_closable(self, closable: bool = True):

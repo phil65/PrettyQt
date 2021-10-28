@@ -37,6 +37,6 @@ if __name__ == "__main__":
 
     print("hre")
     read, write = os.pipe()
-    notifier = SocketNotifier(read, QtCore.QSocketNotifier.Read)
+    notifier = SocketNotifier(read, QtCore.QSocketNotifier.Type.Read)
     print(repr(notifier))
     app.main_loop()

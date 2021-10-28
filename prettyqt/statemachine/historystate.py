@@ -8,8 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 HISTORY_TYPE = bidict(
-    shallow=QtStateMachine.QHistoryState.ShallowHistory,
-    deep=QtStateMachine.QHistoryState.DeepHistory,
+    shallow=QtStateMachine.QHistoryState.HistoryType.ShallowHistory,
+    deep=QtStateMachine.QHistoryState.HistoryType.DeepHistory,
 )
 
 HistoryTypeStr = Literal["shallow", "deep"]

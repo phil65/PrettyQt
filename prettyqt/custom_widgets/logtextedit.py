@@ -5,7 +5,7 @@ import re
 import sys
 import traceback
 
-from prettyqt import gui, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.utils import signallogger
 
 
@@ -205,7 +205,7 @@ class LogTextEdit(widgets.PlainTextEdit):
         # self.handler.log_line.connect(self.append_text)
         self.handler = signallogger.RecordSignalLogger()
         self.handler.signals.log_record.connect(self.append_record)
-        widgets.Application.call_on_exit(lambda: logger.removeHandler(self.handler))
+        core.CoreApplication.call_on_exit(lambda: logger.removeHandler(self.handler))
         self.handler.setLevel(logging.INFO)
         logger.addHandler(self.handler)
         fmt = logging.Formatter("%(asctime)s  %(levelname)s  %(message)s")

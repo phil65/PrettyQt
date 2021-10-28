@@ -74,7 +74,7 @@ class QtBot:
 
         :param QWidget widget: the widget that will receive the event
 
-        :param str|int key: key to send, it can be either a Qt.Key_* constant or
+        :param str|int key: key to send, it can be either a Qt.Key constant or
         a single character string.
 
         .. _keyboard modifiers:
@@ -82,13 +82,13 @@ class QtBot:
         :param Qt.KeyboardModifier modifier: flags OR'ed together representing other
             modifier keys also pressed. Possible flags are:
 
-            * ``Qt.NoModifier``: No modifier key.
-            * ``Qt.ShiftModifier``: A Shift key on the keyboard.
-            * ``Qt.ControlModifier``: A Ctrl key on the keyboard.
-            * ``Qt.AltModifier``: An Alt key on the keyboard.
-            * ``Qt.MetaModifier``: A Meta key on the keyboard.
-            * ``Qt.KeypadModifier``: A keypad button.
-            * ``Qt.GroupSwitchModifier``: X11 only. A Mode_switch key on the keyboard.
+            * ``NoModifier``: No modifier key.
+            * ``ShiftModifier``: A Shift key on the keyboard.
+            * ``ControlModifier``: A Ctrl key on the keyboard.
+            * ``AltModifier``: An Alt key on the keyboard.
+            * ``MetaModifier``: A Meta key on the keyboard.
+            * ``KeypadModifier``: A keypad button.
+            * ``GroupSwitchModifier``: X11 only. A Mode_switch key on the keyboard.
 
         :param int delay: after the event, delay the test for this miliseconds (if > 0).
 
@@ -97,7 +97,7 @@ class QtBot:
 
         Auxilliary method that converts the given constant ot its equivalent ascii.
 
-        :param Qt.Key_* key: one of the constants for keys in the Qt namespace.
+        :param Qt.Key.Key_* key: one of the constants for keys in the Qt namespace.
 
         :return type: str
         :returns: the equivalent character string.
