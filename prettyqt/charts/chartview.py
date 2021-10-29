@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import Literal
 
-from deprecated import deprecated
-
 from prettyqt import charts, core, gui, widgets
 from prettyqt.qt import QtCharts, QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
@@ -95,10 +93,6 @@ class ChartView(QtCharts.QChartView):
             widgets.Application.restoreOverrideCursor()
 
         super().mouseMoveEvent(event)
-
-    @deprecated(reason="This method is deprecated, use save_as_image instead.")
-    def save(self):
-        self.save_as_image()
 
     @core.Slot()
     def save_as_image(self):
