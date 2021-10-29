@@ -48,7 +48,12 @@ class CompositeValidator(gui.Validator):
         self, text: str, pos: int = 0
     ) -> tuple[QtGui.QValidator.State, str, int]:
         vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
-        return min(vals), text, pos
+        if self.State.Invalid in vals:
+            return self.State.Invalid, text, pos
+        elif self.State.Intermediate in vals:
+            return self.State.Intermediate, text, pos
+        else:
+            return self.State.Acceptable, text, pos
 
 
 if __name__ == "__main__":
