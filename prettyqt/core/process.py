@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 from typing import Literal
 
 from prettyqt import core
@@ -138,3 +139,9 @@ class Process(QtCore.QProcess):
 
     def get_exit_status(self) -> ExitStatusStr:
         return EXIT_STATUS.inverse[self.exitStatus()]
+
+    @contextlib.contextmanager
+    def edit_process_environment(self):
+        env = self.processEnvironment()
+        yield env
+        self.setProcessEnvironment(env)
