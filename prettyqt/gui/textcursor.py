@@ -109,6 +109,15 @@ class TextCursor(QtGui.QTextCursor):
     def span(self) -> tuple[int, int]:
         return (self.anchor(), self.position())
 
+    def get_cursor_position(self) -> tuple[int, int]:
+        """Return the QTextCursor position.
+
+        The position is a tuple made up of
+        the line number (0 based) and the column number (0 based).
+        :return: tuple(line, column)
+        """
+        return (self.blockNumber(), self.columnNumber())
+
     def select_text(
         self,
         start_pos: int | MoveOperationStr,
