@@ -52,7 +52,7 @@ class BaseRegexValidator(gui.Validator):
         match = self.regex.match(text, partial=True)  # type: ignore
         if match is None:
             return self.State.Invalid, text, pos
-        if match.partial:  # type: ignore
+        elif match.partial:  # type: ignore
             return self.State.Intermediate, text, pos
         else:
             return self.State.Acceptable, text, pos

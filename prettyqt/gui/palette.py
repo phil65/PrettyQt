@@ -57,7 +57,7 @@ RoleStr = Literal[
 
 GROUP = bidict(
     disabled=QtGui.QPalette.ColorGroup.Disabled,
-    active=QtGui.QPalette.ColorGroup.Active,
+    active=QtGui.QPalette.ColorGroup.Active,  # normal
     inactive=QtGui.QPalette.ColorGroup.Inactive,
 )
 
