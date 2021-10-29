@@ -564,13 +564,13 @@ def test_headerview(qtbot):
     with pytest.raises(InvalidParamError):
         header.set_resize_mode("test")
     header.resize_sections("interactive")
-    header.set_contextmenu_policy("custom")
+    header.set_context_menu_policy("custom")
     header.set_default_section_size(None)
     header.set_default_section_size(30)
     header.stretch_last_section()
     with pytest.raises(InvalidParamError):
-        header.set_contextmenu_policy("test")
-    assert header.get_contextmenu_policy() == "custom"
+        header.set_context_menu_policy("test")
+    assert header.get_context_menu_policy() == "custom"
     header.set_custom_menu(test)
     header.set_sizes([100])
     assert len(header.get_section_labels()) == 4

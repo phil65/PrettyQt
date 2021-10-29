@@ -46,7 +46,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         self.set_icon(state.get("icon"))
         self.set_modality(state.get("modality", ""))
         self.setWhatsThis(state.get("whats_this", ""))
-        self.set_contextmenu_policy(state.get("contextmenu_policy", ""))
+        self.set_context_menu_policy(state.get("contextmenu_policy", ""))
         self.set_focus_policy(state.get("focus_policy", ""))
         self.setStatusTip(state.get("status_tip", ""))
         self.setStyleSheet(state.get("stylesheet", ""))
@@ -77,7 +77,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             icon=self.get_icon(),
             modality=self.get_modality(),
             whats_this=self.whatsThis(),
-            contextmenu_policy=self.get_contextmenu_policy(),
+            contextmenu_policy=self.get_context_menu_policy(),
             focus_policy=self.get_focus_policy(),
             status_tip=self.statusTip(),
             font=self.get_font(),
@@ -394,7 +394,16 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             raise InvalidParamError(policy, constants.CONTEXT_POLICY)
         self.setContextMenuPolicy(constants.CONTEXT_POLICY[policy])
 
+    @deprecated(reason="This method is deprecated, use get_context_menu_policy instead.")
     def get_contextmenu_policy(self) -> constants.ContextPolicyStr:
+        """Return current contextmenu policy.
+
+        Returns:
+            contextmenu policy
+        """
+        return self.get_context_menu_policy()
+
+    def get_context_menu_policy(self) -> constants.ContextPolicyStr:
         """Return current contextmenu policy.
 
         Returns:
@@ -424,7 +433,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         return constants.WINDOW_STATES.inverse[self.windowState()]
 
     def set_custom_menu(self, method: Callable) -> None:
-        self.set_contextmenu_policy("custom")
+        self.set_context_menu_policy("custom")
         self.customContextMenuRequested.connect(method)
 
     def set_layout(
