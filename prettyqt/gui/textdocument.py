@@ -62,6 +62,9 @@ class TextDocument(QtGui.QTextDocument):
     def __iter__(self) -> Iterator[gui.TextBlock]:
         return iter(self[i] for i in range(self.blockCount()))
 
+    def __repr__(self):
+        return f"{type(self).__name__}({self.toPlainText()!r})"
+
     def set_text(self, text: str):
         self.setPlainText(text)
 
@@ -87,8 +90,24 @@ class TextDocument(QtGui.QTextDocument):
     def get_default_font(self) -> gui.Font:
         return gui.Font(self.defaultFont())
 
+    def set_default_text_option(self, opt: QtGui.QTextOption):
+        self.setDefaultTextOption(gui.TextOption(opt))
+
     def get_default_text_option(self) -> gui.TextOption:
         return gui.TextOption(self.defaultTextOption())
+
+    def set_flags(self, **flags):
+        current = self.flags()
+        for k, v in flags.items():
+            if v:
+                current = current | gui.textoption.FLAG[k]
+            else:
+                current = current & ~gui.textoption.FLAG[k]
+        self.setFlags(current)
+        # if show:
+        #     self.setFlags(self.flags() | QtGui.QTextOption.ShowTabsAndSpaces)
+        # else:
+        #     self.setFlags(self.flags() & ~QtGui.QTextOption.ShowTabsAndSpaces)
 
     def clear_stacks(self, stack: StackStr):
         """Clear undo / redo stack.
@@ -150,8 +169,15 @@ class TextDocument(QtGui.QTextDocument):
     def get_default_stylesheet(self) -> qstylizer.style.StyleSheet:
         return qstylizer.parser.parse(self.defaultStyleSheet())
 
+    def find_line_position(self, line_no: int) -> int:
+        lines = self.blockCount()
+        assert 1 <= line_no <= lines
+        return self.findBlockByLineNumber(line_no - 1).position()
+
 
 if __name__ == "__main__":
     doc = TextDocument("This is a test\nHello")
+    doc.set_default_text_option(QtGui.QTextOption())
+    print(doc.get_default_text_option())
     for i in doc:
         print(i)
