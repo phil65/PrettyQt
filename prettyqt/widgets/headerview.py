@@ -25,7 +25,8 @@ QtWidgets.QHeaderView.__bases__ = (widgets.AbstractItemView,)
 
 class HeaderView(QtWidgets.QHeaderView):
 
-    section_vis_changed = QtCore.Signal(int, bool)
+    section_vis_changed = core.Signal(int, bool)
+    section_resized_by_user = core.Signal(int, int, int)
 
     def __init__(
         self,
@@ -39,7 +40,20 @@ class HeaderView(QtWidgets.QHeaderView):
         super().__init__(ori, parent=parent)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
+        self.sectionResized.connect(self.sectionResizeEvent)
         self._widget_name = parent.get_id() if parent is not None else ""
+
+    def mousePressEvent(self, e):
+        super().mousePressEvent(e)
+        self._handle_section_is_pressed = self.cursor().shape() == QtCore.Qt.SplitHCursor
+
+    def mouseReleaseEvent(self, e):
+        super().mouseReleaseEvent(e)
+        self._handle_section_is_pressed = False
+
+    def sectionResizeEvent(self, logical_index, old_size, new_size):
+        if self._handle_section_is_pressed:
+            self.section_resized_by_user.emit(logical_index, old_size, new_size)
 
     def generate_header_id(self):
         # return f"{self._widget_name}.state"
