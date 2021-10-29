@@ -82,6 +82,9 @@ SelectionTypeStr = Literal[
 
 
 class TextCursor(QtGui.QTextCursor):
+    def __str__(self):
+        return self.selectedText()
+
     def move_position(
         self, operation: MoveOperationStr, mode: MoveModeStr = "move", n: int = 1
     ) -> bool:
