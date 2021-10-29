@@ -83,7 +83,7 @@ SelectionTypeStr = Literal[
 
 class TextCursor(QtGui.QTextCursor):
     def __str__(self):
-        return self.selectedText()
+        return self.selectedText().replace("\u2029", "\n")
 
     def move_position(
         self, operation: MoveOperationStr, mode: MoveModeStr = "move", n: int = 1
@@ -152,3 +152,14 @@ class TextCursor(QtGui.QTextCursor):
         self.beginEditBlock()
         yield
         self.endEditBlock()
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
+    widget = widgets.PlainTextEdit()
+    widget.show()
+    app.main_loop()
+    cursor = widget.get_text_cursor()
+    print(str(cursor))
