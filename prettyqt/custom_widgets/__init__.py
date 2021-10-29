@@ -33,6 +33,7 @@ from .roundprogressbar import RoundProgressBar
 
 # from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
+from .standardiconswidget import StandardIconsWidget
 
 # Deprecated: should be imported from custom_delegates instead
 from prettyqt.custom_delegates.buttondelegate import ButtonDelegate
@@ -77,4 +78,5 @@ __all__ = [
     # "StarRating",
     "VideoSample",
     "RegexEditorWidget",
+    "StandardIconsWidget",
 ]
