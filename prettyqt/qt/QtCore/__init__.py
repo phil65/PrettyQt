@@ -113,7 +113,7 @@ elif PYQT6:
     QDateTime.toPython = to_datetime
     QDate.toPython = to_date
     QTime.toPython = to_time
-
+    QCoreApplication.exec_ = QCoreApplication.exec  # type: ignore
     QLibraryInfo.location = QLibraryInfo.path  # type: ignore
     # Those are imported from `import *`
     del (
