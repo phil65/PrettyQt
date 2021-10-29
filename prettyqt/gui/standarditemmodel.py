@@ -52,6 +52,12 @@ class StandardItemModel(QtGui.QStandardItemModel):
             return self
         raise TypeError("wrong type for addition")
 
+    @classmethod
+    def create_single_item_model(cls, *args, **kwargs):
+        mdl = cls(1, 1)
+        mdl.add_item(*args, **kwargs)
+        return mdl
+
     def get_children(self) -> list[QtGui.QStandardItem]:
         return [self.item(index) for index in range(self.rowCount())]
 
