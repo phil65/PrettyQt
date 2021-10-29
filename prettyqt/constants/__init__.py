@@ -82,7 +82,7 @@ ThemeStr = Literal["default", "dark"]
 
 
 ALIGNMENTS = mappers.FlagMap(
-    Qt.Alignment,
+    Qt.AlignmentFlag,
     # none=int(Qt.Alignment(0)),
     left=ALIGN_LEFT,
     right=ALIGN_RIGHT,
