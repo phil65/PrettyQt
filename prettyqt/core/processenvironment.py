@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterator
+from typing import Iterator, Mapping
 
 from prettyqt.qt import QtCore
 
@@ -14,7 +14,7 @@ class ProcessEnvironment(QtCore.QProcessEnvironment):
 
     def __getitem__(self, index: str) -> str:
         if index not in self:
-            raise KeyError("Environment variable not set")
+            raise KeyError("Environment variable not set.")
         return self.value(index)
 
     def __delitem__(self, index: str):
@@ -26,12 +26,19 @@ class ProcessEnvironment(QtCore.QProcessEnvironment):
     def __iter__(self) -> Iterator[tuple[str, str]]:
         return iter((k, self.value(k)) for k in self.keys())
 
+    def update(self, other: Mapping[str, str]):
+        for k, v in other.items():
+            self.insert(k, v)
+
+    def items(self):
+        return list(self)
+
     @classmethod
     def get_system_environment(cls) -> ProcessEnvironment:
         return cls(cls.systemEnvironment())
 
     @classmethod
-    def from_dict(cls, dictionary: dict[str, str]) -> ProcessEnvironment:
+    def from_dict(cls, dictionary: Mapping[str, str]) -> ProcessEnvironment:
         env = cls()
         for k, v in dictionary.items():
             env.insert(k, v)
