@@ -16,6 +16,12 @@ class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
     def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)  # type: ignore
 
+    def get_current_block(self) -> gui.TextBlock:
+        return gui.TextBlock(self.currentBlock())
+
+    def get_format(self, position: int) -> gui.TextBlock:
+        return gui.TextCharFormat(self.format(position))
+
     @classmethod
     def yield_rules(cls) -> Iterator[tuple[Pattern, int, gui.TextCharFormat]]:
         for Rule in cls.RULES:
