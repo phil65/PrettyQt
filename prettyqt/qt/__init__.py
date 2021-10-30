@@ -1,11 +1,18 @@
 """Provides Qt init stuff."""
 
+from typing import Literal
 import os
 import importlib
 
 
 class PythonQtError(ImportError):
     pass
+
+
+def set_env_vars(qt_binding: Literal["PyQt5", "PyQt6", "PySide2", "PySide6"]):
+    ENV_VARS = ["QT_API", "USE_QT_API", "PYTEST_QT_API", "PYQTGRAPH_QT_LIB"]
+    for var in ENV_VARS:
+        os.environ[var] = qt_binding
 
 
 # the order in the tuple represents the search order when importing the package
