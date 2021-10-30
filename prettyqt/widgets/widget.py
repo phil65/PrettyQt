@@ -23,7 +23,6 @@ LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
 
 class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     box: QtWidgets.QLayout
-    resized = core.Signal(QtCore.QSize, QtCore.QSize)
 
     def __repr__(self) -> str:
         cls_name = type(self).__name__
@@ -83,11 +82,6 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             status_tip=self.statusTip(),
             font=self.get_font(),
         )
-
-    def resizeEvent(self, event):
-        """Emit a resize signal for widgets that need to adapt its size."""
-        super().resizeEvent(event)
-        self.resized.emit(event.size(), event.oldSize())
 
     def resize(self, *size) -> None:
         if isinstance(size[0], tuple):
