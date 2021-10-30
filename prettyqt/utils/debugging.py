@@ -7,7 +7,7 @@ import logging
 import sys
 import traceback
 
-from prettyqt import widgets
+from prettyqt import qt, widgets
 from prettyqt.qt import QtCore
 
 
@@ -61,3 +61,18 @@ def count_objects():
     objects = win.findChildren(QtCore.QObject)
     counter = collections.Counter([type(o) for o in objects])
     logger.info(counter)
+
+
+def is_deleted(obj) -> bool:
+    if qt.API == "pyside2":
+        import shiboken2
+
+        return not shiboken2.isValid(obj)
+    elif qt.API == "pyside6":
+        import shiboken6
+
+        return not shiboken6.isValid(obj)
+    else:
+        import sip
+
+        return sip.isdeleted(obj)
