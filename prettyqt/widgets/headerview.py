@@ -41,6 +41,7 @@ class HeaderView(QtWidgets.QHeaderView):
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
         self.sectionResized.connect(self.sectionResizeEvent)
+        self._handle_section_is_pressed = False
         self._widget_name = parent.get_id() if parent is not None else ""
 
     def mousePressEvent(self, e):
