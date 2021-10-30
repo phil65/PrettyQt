@@ -91,6 +91,9 @@ class TextEdit(QtWidgets.QTextEdit):
         yield cursor
         self.setTextCursor(cursor)
 
+    def get_text_cursor(self) -> gui.TextCursor:
+        return gui.TextCursor(self.textCursor())
+
     def set_text(self, text: str) -> None:
         self.setPlainText(text)
 
