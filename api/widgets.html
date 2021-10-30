@@ -12,7 +12,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/widgets.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.4">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.5">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.db9e7362.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.cdeb8541.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -554,6 +554,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -2427,6 +2429,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.headerview.HeaderView.mousePressEvent" class="md-nav__link">
+    mousePressEvent()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.headerview.HeaderView.mouseReleaseEvent" class="md-nav__link">
+    mouseReleaseEvent()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3216,6 +3232,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.set_word_wrap_mode" class="md-nav__link">
     set_word_wrap_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.show_whitespace_and_tabs" class="md-nav__link">
+    show_whitespace_and_tabs()
   </a>
   
 </li>
@@ -4339,6 +4362,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.widget.Widget.get_context_menu_policy" class="md-nav__link">
+    get_context_menu_policy()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.widget.Widget.get_contextmenu_policy" class="md-nav__link">
     get_contextmenu_policy()
   </a>
@@ -4374,8 +4404,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.widgets.widget.Widget.set_contextmenu_policy" class="md-nav__link">
-    set_contextmenu_policy()
+  <a href="#prettyqt.widgets.widget.Widget.set_context_menu_policy" class="md-nav__link">
+    set_context_menu_policy()
   </a>
   
 </li>
@@ -4618,6 +4648,8 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -6491,6 +6523,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.headerview.HeaderView.mousePressEvent" class="md-nav__link">
+    mousePressEvent()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.headerview.HeaderView.mouseReleaseEvent" class="md-nav__link">
+    mouseReleaseEvent()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -7280,6 +7326,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.set_word_wrap_mode" class="md-nav__link">
     set_word_wrap_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.plaintextedit.PlainTextEdit.show_whitespace_and_tabs" class="md-nav__link">
+    show_whitespace_and_tabs()
   </a>
   
 </li>
@@ -8403,6 +8456,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.widget.Widget.get_context_menu_policy" class="md-nav__link">
+    get_context_menu_policy()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.widget.Widget.get_contextmenu_policy" class="md-nav__link">
     get_contextmenu_policy()
   </a>
@@ -8438,8 +8498,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.widgets.widget.Widget.set_contextmenu_policy" class="md-nav__link">
-    set_contextmenu_policy()
+  <a href="#prettyqt.widgets.widget.Widget.set_context_menu_policy" class="md-nav__link">
+    set_context_menu_policy()
   </a>
   
 </li>
@@ -19323,6 +19383,7 @@ HeaderView            (<span title="PyQt5.QtWidgets.QHeaderView">QHeaderView</sp
 
 
 
+
   <div class="doc doc-object doc-method">
 
 
@@ -19353,6 +19414,61 @@ HeaderView            (<span title="PyQt5.QtWidgets.QHeaderView">QHeaderView</sp
 
 
 
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.headerview.HeaderView.mousePressEvent" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>mousePressEvent(self, QMouseEvent)</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/headerview.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handle_section_is_pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span><span class="o">.</span><span class="n">shape</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SplitHCursor</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.headerview.HeaderView.mouseReleaseEvent" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>mouseReleaseEvent(self, QMouseEvent)</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/headerview.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_handle_section_is_pressed</span> <span class="o">=</span> <span class="kc">False</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
@@ -24009,6 +24125,7 @@ PlainTextEdit            (<span title="PyQt5.QtWidgets.QPlainTextEdit">QPlainTex
 
 
 
+
   <div class="doc doc-object doc-method">
 
 
@@ -24255,6 +24372,39 @@ PlainTextEdit            (<span title="PyQt5.QtWidgets.QPlainTextEdit">QPlainTex
 
   </div>
 
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.plaintextedit.PlainTextEdit.show_whitespace_and_tabs" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">show_whitespace_and_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Set show white spaces flag.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/plaintextedit.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">show_whitespace_and_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set show white spaces flag.&quot;&quot;&quot;</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="p">()</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">defaultTextOption</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">setFlags</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">flags</span><span class="p">()</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextOption</span><span class="o">.</span><span class="n">Flag</span><span class="o">.</span><span class="n">ShowTabsAndSpaces</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">options</span><span class="o">.</span><span class="n">setFlags</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">flags</span><span class="p">()</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QTextOption</span><span class="o">.</span><span class="n">Flag</span><span class="o">.</span><span class="n">ShowTabsAndSpaces</span><span class="p">)</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">setDefaultTextOption</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
@@ -28825,6 +28975,7 @@ TextEdit            (<span title="PyQt5.QtWidgets.QTextEdit">QTextEdit</span>)
 
 
 
+
   <div class="doc doc-object doc-method">
 
 
@@ -30486,6 +30637,52 @@ Widget            (<span title="prettyqt.utils.prettyprinter.PrettyPrinter">Pret
 
 
 
+<h4 id="prettyqt.widgets.widget.Widget.get_context_menu_policy" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_context_menu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return current contextmenu policy.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>constants.ContextPolicyStr</code></td>
+      <td><p>contextmenu policy</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_context_menu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return current contextmenu policy.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        contextmenu policy</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contextMenuPolicy</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
 <h4 id="prettyqt.widgets.widget.Widget.get_contextmenu_policy" class="doc doc-heading">
 <code class="codehilite language-python"><span class="n">get_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span></code>
 
@@ -30513,13 +30710,14 @@ Widget            (<span title="prettyqt.utils.prettyprinter.PrettyPrinter">Pret
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span><span class="p">:</span>
+          <div class="codehilite"><pre><span></span><code><span class="nd">@deprecated</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">&quot;This method is deprecated, use get_context_menu_policy instead.&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">get_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Return current contextmenu policy.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        contextmenu policy</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CONTEXT_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contextMenuPolicy</span><span class="p">()]</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_context_menu_policy</span><span class="p">()</span>
 </code></pre></div>
         </details>
     </div>
@@ -30717,8 +30915,8 @@ resize(self, int, int)</p>
 
 
 
-<h4 id="prettyqt.widgets.widget.Widget.set_contextmenu_policy" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span></code>
+<h4 id="prettyqt.widgets.widget.Widget.set_context_menu_policy" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">set_context_menu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span></code>
 
 
 </h4>
@@ -30763,7 +30961,7 @@ resize(self, int, int)</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_contextmenu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_context_menu_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ContextPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Set contextmenu policy for given item view.</span>
 
 <span class="sd">    Args:</span>
@@ -30780,6 +30978,7 @@ resize(self, int, int)</p>
     </div>
 
   </div>
+
 
 
 
