@@ -161,9 +161,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         doc = self.document()
         options = doc.defaultTextOption()
         if show:
-            options.setFlags(options.flags() | QtGui.QTextOption.ShowTabsAndSpaces)
+            options.setFlags(options.flags() | QtGui.QTextOption.Flag.ShowTabsAndSpaces)
         else:
-            options.setFlags(options.flags() & ~QtGui.QTextOption.ShowTabsAndSpaces)
+            options.setFlags(options.flags() & ~QtGui.QTextOption.Flag.ShowTabsAndSpaces)
         doc.setDefaultTextOption(options)
 
     def highlight_current_line(self, color: types.ColorType = None):
