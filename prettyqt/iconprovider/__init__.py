@@ -12,7 +12,7 @@ from typing import Optional, Tuple
 from prettyqt.qt import QtGui
 
 # Third party imports
-from prettyqt import gui
+from prettyqt import gui, paths
 from prettyqt.iconprovider.iconic_font import FontError, IconicFont, set_global_defaults
 from prettyqt.utils import types
 
@@ -35,7 +35,7 @@ def hook(obj: dict) -> dict:
 
 
 class IconFont:
-    path: pathlib.Path = pathlib.Path(__file__).parent / "fonts"
+    path: pathlib.Path = paths.ICON_FONT_PATH
     prefix: str
     font_path: str
     charmap_path: str

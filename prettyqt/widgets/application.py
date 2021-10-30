@@ -9,8 +9,7 @@ from typing import Iterator, Mapping, MutableMapping
 import qstylizer.parser
 import qstylizer.style
 
-import prettyqt
-from prettyqt import constants, core, gui, iconprovider, widgets
+from prettyqt import constants, core, gui, iconprovider, paths, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
 
@@ -136,7 +135,7 @@ class Application(QtWidgets.QApplication):
             self.set_stylesheet("")
             iconprovider.set_defaults(color="black")
         elif theme == "dark":
-            ss = (prettyqt.ROOT_PATH / "themes" / "darktheme.qss").read_text()
+            ss = (paths.THEMES_PATH / "darktheme.qss").read_text()
             self.set_stylesheet(ss)
             iconprovider.set_defaults(color="lightblue")
 

@@ -1,11 +1,8 @@
 """Top-level package for PrettyQt."""
-import pathlib
 
 __author__ = """Philipp Temminghoff"""
 __email__ = "phil65@kodi.tv"
 __version__ = "0.183.6"
-
-ROOT_PATH = pathlib.Path(__file__).parent
 
 
 def debug():

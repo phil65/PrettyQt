@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import functools
 import logging
-import pathlib
 
 from pygments.formatters.html import HtmlFormatter
 from pygments.lexer import Error, RegexLexer, Text, _TokenType
@@ -10,11 +9,10 @@ from pygments.lexers import get_lexer_by_name, load_lexer_from_file
 from pygments.style import Style
 from pygments.styles import get_style_by_name
 
-from prettyqt import gui
+from prettyqt import gui, paths
 from prettyqt.qt import QtGui
 
 
-RE_LEXER_PATH = pathlib.Path(__file__).parent / "pygments" / "regularexpressionlexer.py"
 logger = logging.getLogger(__name__)
 
 
@@ -109,7 +107,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self._formatter = HtmlFormatter(nowrap=True)
         self.set_style(style)
         if lexer == "regex":
-            self._lexer = load_lexer_from_file(str(RE_LEXER_PATH))
+            self._lexer = load_lexer_from_file(str(paths.RE_LEXER_PATH))
         else:
             self._lexer = get_lexer_by_name(lexer)
 
