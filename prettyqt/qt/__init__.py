@@ -1,6 +1,7 @@
 """Provides Qt init stuff."""
 
-from typing import Literal
+from typing import Callable, Literal
+import operator
 import os
 import importlib
 
@@ -52,3 +53,8 @@ PYQT5 = API == "pyqt5"
 PYQT6 = API == "pyqt6"
 PYSIDE2 = API == "pyside2"
 PYSIDE6 = API == "pyside6"
+
+
+flag_to_int: Callable = (
+    operator.attrgetter("value") if API == "pyqt6" else int  # type: ignore
+)

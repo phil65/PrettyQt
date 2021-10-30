@@ -4,22 +4,18 @@ from typing import Any
 
 from bidict import bidict
 
+from prettyqt import qt
+
 
 class FlagMap:
     def __init__(self, initializer, **kwargs):
         self.initializer = initializer
-        try:
-            kwargs = {k: v.value for k, v in kwargs.items()}
-        except AttributeError:
-            kwargs = {k: int(v) for k, v in kwargs.items()}
+        kwargs = {k: qt.flag_to_int(v) for k, v in kwargs.items()}
         self.bidict: bidict[str, int] = bidict(**kwargs)
 
         class Inverter:
             def __getitem__(self2, value):
-                try:
-                    return self.bidict.inverse[int(value)]
-                except TypeError:
-                    return self.bidict.inverse[value.value]
+                return self.bidict.inverse[qt.flag_to_int(value)]
 
         self.inverse = Inverter()
 
