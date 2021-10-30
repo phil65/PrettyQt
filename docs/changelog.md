@@ -1,3 +1,40 @@
+## v0.184.0 (2021-10-30)
+
+### Feat
+
+- **qt**: add flag_to_int method
+- **debugging**: add is_deleted fn
+- **TextEdit**: add get_text_cursor method
+- **PlainTextEdit**: add get_text_cursor method
+- better package support by using importlib.resources for resource files
+- add qt.set_env_vars
+- fallback to installed qt package in case environment var QT_API is invalid / empty
+- **TextBlock**: add some methods related to syntax highlighting
+- **HeaderView**: add section_resized_by_user signal
+- **Widget**: add resized signal
+- add StandardIconsWidget class
+- **TextCursor**: add get_cursor_position method
+- **SyntaxHighlighter**: add get_current_block / get_format
+- **Process**: add edit_environment method
+- **Widget**: rename get/set_context_menu_policy methods
+- **TextLayout**: add get_text_option method
+- **TextDocument**: add some more methods
+- **TextCursor**: add __str__ method
+- **StandardItemModel**: add create_single_item_model classmethod
+- **ProcessEnvironment**: add update() / items() methods
+- **Color**: add drift_color classmethod
+- **PlaintextEdit**: TextDocument by default
+- **PlainTextEdit**: add show_whitespace_and_tabs method
+- add mimetype_icon fn for FileIconProvider
+- Add MenuRecentFiles class
+- update iconsets
+
+### Fix
+
+- **TextCursor**: correctly convert EOL in __str__
+- qt6 flag fix
+- typo in AwesomeFileIconProvider
+
 ## v0.183.6 (2021-10-26)
 
 ### Fix
