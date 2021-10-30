@@ -113,6 +113,9 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         yield cursor
         self.setTextCursor(cursor)
 
+    def get_text_cursor(self) -> gui.TextCursor:
+        return gui.TextCursor(self.textCursor())
+
     def move_cursor(
         self,
         operation: gui.textcursor.MoveOperationStr,
