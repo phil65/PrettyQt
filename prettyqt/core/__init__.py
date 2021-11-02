@@ -92,9 +92,9 @@ from .buffer import Buffer
 from .settings import Settings
 from .timezone import TimeZone
 from .date import Date
-from .time import Time
-from .datetime import DateTime
-from .calendar import Calendar
+from ._time import Time
+from ._datetime import DateTime
+from ._calendar import Calendar
 from .resource import Resource
 from .size import Size
 from .sizef import SizeF
