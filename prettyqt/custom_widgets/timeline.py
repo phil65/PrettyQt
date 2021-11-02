@@ -166,7 +166,7 @@ class Timeline(widgets.Widget):
             qp.drawLine(line)
 
     def mouseMoveEvent(self, e):
-        self._position = e.pos()
+        self._position = e.position()
 
         # if mouse is being pressed, update pointer
         if self._clicking:
@@ -179,7 +179,7 @@ class Timeline(widgets.Widget):
 
     def mousePressEvent(self, e):
         if e.button() == QtCore.Qt.MouseButton.LeftButton:
-            x = e.pos().x()
+            x = e.position().x()
             self.position_changed.emit(x)
             self.pointer_time_pos = x * self.get_scale()
 

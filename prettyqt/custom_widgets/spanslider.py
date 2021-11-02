@@ -83,11 +83,11 @@ class SpanSlider(widgets.Slider):
             return
 
         self.upper_pressed = self._handle_mouse_press(
-            event.pos(), self.upper_pressed, self.upper_val, "upper"
+            event.position(), self.upper_pressed, self.upper_val, "upper"
         )
         if self.upper_pressed != HANDLE_STYLE:
             self.lower_pressed = self._handle_mouse_press(
-                event.pos(), self.lower_pressed, self.lower_val, "lower"
+                event.position(), self.lower_pressed, self.lower_val, "lower"
             )
 
         self._first_movement = True
@@ -103,11 +103,11 @@ class SpanSlider(widgets.Slider):
         m = self.style().pixelMetric(
             widgets.Style.PixelMetric.PM_MaximumDragDistance, opt, self
         )
-        pixel_pos = self.pick(event.pos()) - self.offset
+        pixel_pos = self.pick(event.position()) - self.offset
         new_pos = float(self._pixel_pos_to_value(pixel_pos))
         if m >= 0:
             r = self.rect().adjusted(-m, -m, m, m)
-            if not r.contains(event.pos()):
+            if not r.contains(event.position()):
                 new_pos = self.position
 
         # pick the preferred handle on the first movement

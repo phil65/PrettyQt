@@ -107,7 +107,7 @@ class HeaderView(QtWidgets.QHeaderView):
         menu = widgets.Menu(parent=self)
         actions = self.get_header_actions()
         menu.add_actions(actions)
-        menu.exec_(self.mapToGlobal(event.pos()))
+        menu.exec_(self.mapToGlobal(event.position()))
 
     def get_header_actions(self) -> list[widgets.Action]:
         actions = list()

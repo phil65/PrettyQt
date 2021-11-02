@@ -73,7 +73,7 @@ class ChartView(QtCharts.QChartView):
         if event.button() == QtCore.Qt.MouseButton.RightButton:
             cursor = gui.Cursor(QtCore.Qt.CursorShape.SizeAllCursor)
             widgets.Application.setOverrideCursor(cursor)
-            self.last_mouse_pos = event.pos()
+            self.last_mouse_pos = event.position()
             event.accept()
 
         super().mousePressEvent(event)
@@ -84,10 +84,10 @@ class ChartView(QtCharts.QChartView):
         if event.buttons() & QtCore.Qt.MouseButton.RightButton:  # type: ignore
             if not self.last_mouse_pos:
                 return
-            pos_diff = event.pos() - self.last_mouse_pos
+            pos_diff = event.position() - self.last_mouse_pos
             self.chart().scroll(-pos_diff.x(), pos_diff.y())
 
-            self.last_mouse_pos = event.pos()
+            self.last_mouse_pos = event.position()
             event.accept()
 
             widgets.Application.restoreOverrideCursor()
@@ -149,3 +149,10 @@ class ChartView(QtCharts.QChartView):
     #     if alignment not in constants.SIDES:
     #         raise ValueError(f"{alignment!r} not a valid alignment.")
     #     self.chart().legend().setAlignment(constants.SIDES[alignment])
+
+
+if __name__ == "__main__":
+    app = widgets.app()
+    widget = ChartView()
+    widget.show()
+    app.main_loop()
