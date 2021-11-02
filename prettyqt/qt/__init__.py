@@ -48,6 +48,7 @@ if not qt_api:
 # os.environ.setdefault("QT_API", "pyqt6")
 
 API = qt_api
+QT_VERSION = 6 if API.endswith("6") else 5
 
 PYQT5 = API == "pyqt5"
 PYQT6 = API == "pyqt6"
