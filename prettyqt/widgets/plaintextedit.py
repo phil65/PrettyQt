@@ -253,7 +253,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         self.set_validator(validator)
         return validator
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         if self.validator is None:
             return True
         return self.validator.is_valid_value(self.text())
@@ -261,7 +261,7 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
     def set_value(self, value: str):
         self.setPlainText(value)
 
-    def get_value(self):
+    def get_value(self) -> str:
         return self.text()
 
 
