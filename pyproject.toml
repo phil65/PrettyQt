@@ -65,6 +65,7 @@ mkdocstrings = "^0"
 pymdown-extensions = "^9.0"
 black = "^21.4b1"
 devtools = "^0"
+commitizen = "^2.20.0"
 
 [tool.poetry.extras]
 pyqt5 = ["PyQt5", "PyQtWebEngine", "PyQtChart", "QScintilla"]
