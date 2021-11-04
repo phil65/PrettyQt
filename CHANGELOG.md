@@ -1,3 +1,13 @@
+## v0.185.0 (2021-11-04)
+
+### Feat
+
+- add QT_VERSION var to qt module
+
+### Fix
+
+- **core**: dont shadow builtin libraries
+
 ## v0.184.0 (2021-10-30)
 
 ### Feat
