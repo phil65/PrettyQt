@@ -150,6 +150,7 @@ exclude = '''
 name = "cz_conventional_commits"
 version = "0.185.0"
 tag_format = "v$version"
+update_changelog_on_bump = true
 version_files = [
     "prettyqt/__init__.py:__version__",
     "setup.py:version",

@@ -69,4 +69,5 @@ changelog: ## create changelog
 	mv CHANGELOG.md docs/changelog.md
 
 bump: ## version bump
-	poetry run python scripts/bump.py
+	poetry run cz bump
+	cp CHANGELOG.md docs/changelog.md
