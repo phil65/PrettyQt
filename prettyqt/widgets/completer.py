@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -95,6 +95,28 @@ class Completer(QtWidgets.QCompleter):
             filter mode
         """
         return constants.FILTER_MODES.inverse[self.filterMode()]
+
+    def set_case_sensitive(self, state: bool):
+        """Set case sensitivity.
+
+        Args:
+            state: case sensitive
+
+        """
+        sensitivity = (
+            QtCore.Qt.CaseSensitivity.CaseSensitive
+            if state
+            else QtCore.Qt.CaseSensitivity.CaseInsensitive
+        )
+        self.setCaseSensitivity(sensitivity)
+
+    def is_case_sensitive(self) -> bool:
+        """Return case sensitivity.
+
+        Returns:
+            case sensitivity
+        """
+        return bool(self.caseSensitivity())
 
 
 if __name__ == "__main__":
