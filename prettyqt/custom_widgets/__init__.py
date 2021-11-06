@@ -30,6 +30,7 @@ from .popupinfo import PopupInfo
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
 from .roundprogressbar import RoundProgressBar
+from .subsequencecompleter import SubsequenceCompleter
 
 # from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
@@ -79,4 +80,5 @@ __all__ = [
     "VideoSample",
     "RegexEditorWidget",
     "StandardIconsWidget",
+    "SubsequenceCompleter",
 ]
