@@ -80,6 +80,35 @@ KEY_DELETE = Qt.Key.Key_Delete
 
 ThemeStr = Literal["default", "dark"]
 
+ITEM_DATA_ROLE = bidict(
+    display=DISPLAY_ROLE,
+    user=USER_ROLE,
+    sort=SORT_ROLE,
+    edit=EDIT_ROLE,
+    tooltip=TOOLTIP_ROLE,
+    statustip=STATUSTIP_ROLE,
+    decoration=DECORATION_ROLE,
+    checkstate=CHECKSTATE_ROLE,
+    alignment=ALIGNMENT_ROLE,
+    font=FONT_ROLE,
+    foreground=FOREGROUND_ROLE,
+    background=BACKGROUND_ROLE,
+)
+
+ItemDataRoleStr = Literal[
+    "display",
+    "user",
+    "sort",
+    "edit",
+    "tooltip",
+    "statustip",
+    "decoration",
+    "checkstate",
+    "alignment",
+    "font",
+    "foreground",
+    "background",
+]
 
 ALIGNMENTS = mappers.FlagMap(
     Qt.AlignmentFlag,

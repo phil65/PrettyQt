@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core
+from prettyqt import constants, core
 from prettyqt.qt import QtCore
 
 
@@ -64,3 +64,6 @@ class SortFilterProxyModel(QtCore.QSortFilterProxyModel):
 
     def get_filter_regular_expression(self) -> core.RegularExpression:
         return core.RegularExpression(self.filterRegularExpression())
+
+    def set_sort_role(self, role: constants.ItemDataRoleStr):
+        self.setSortRole(constants.ITEM_DATA_ROLE[role])
