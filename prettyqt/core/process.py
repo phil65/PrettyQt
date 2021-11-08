@@ -140,8 +140,17 @@ class Process(QtCore.QProcess):
     def get_exit_status(self) -> ExitStatusStr:
         return EXIT_STATUS.inverse[self.exitStatus()]
 
+    def get_process_environment(self) -> core.ProcessEnvironment:
+        return core.ProcessEnvironment(self.processEnvironment())
+
     @contextlib.contextmanager
     def edit_process_environment(self):
-        env = self.processEnvironment()
+        env = self.get_process_environment()
         yield env
         self.setProcessEnvironment(env)
+
+
+if __name__ == "__main__":
+    process = core.Process()
+    env = process.get_process_environment()
+    print(env.items())
