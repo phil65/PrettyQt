@@ -25,6 +25,9 @@ class TextBlock(QtGui.QTextBlock):
     def __bool__(self):
         return self.isValid()
 
+    def __str__(self):
+        return self.text()
+
     def get_previous(self) -> TextBlock:
         return TextBlock(self.previous())
 
