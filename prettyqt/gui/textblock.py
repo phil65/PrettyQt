@@ -12,7 +12,7 @@ class UserData(QtGui.QTextBlockUserData):
         self.data = data
 
     def __repr__(self):
-        return f"UserData({repr(self.data)})"
+        return f"{type(self).__name__}({repr(self.data)})"
 
 
 class TextBlock(QtGui.QTextBlock):

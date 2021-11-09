@@ -60,7 +60,9 @@ class TextDocument(QtGui.QTextDocument):
         return self.blockCount()
 
     def __iter__(self) -> Iterator[gui.TextBlock]:
-        return iter(self[i] for i in range(self.blockCount()))
+        return iter(
+            gui.TextBlock(self.findBlockByNumber(i)) for i in range(self.blockCount())
+        )
 
     def __repr__(self):
         return f"{type(self).__name__}({self.toPlainText()!r})"
