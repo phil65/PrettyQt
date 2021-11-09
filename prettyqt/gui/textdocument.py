@@ -65,6 +65,28 @@ class TextDocument(QtGui.QTextDocument):
     def __repr__(self):
         return f"{type(self).__name__}({self.toPlainText()!r})"
 
+    def get_first_block(self) -> gui.TextBlock:
+        return gui.TextBlock(self.firstBlock())
+
+    def get_last_block(self) -> gui.TextBlock:
+        return gui.TextBlock(self.lastBlock())
+
+    def find_block_by_number(self, number: int) -> gui.TextBlock:
+        block = self.findBlockByNumber(number)
+        if not block.isValid():
+            raise ValueError(
+                f"{number} not a valid block index. Block count: {self.blockCount()}"
+            )
+        return gui.TextBlock(block)
+
+    def find_block_by_line_number(self, line_number: int) -> gui.TextBlock:
+        block = self.findBlockByLineNumber(line_number)
+        if not block.isValid():
+            raise ValueError(
+                f"{line_number} not a valid line index. Line count: {self.lineCount()}"
+            )
+        return gui.TextBlock(block)
+
     def set_text(self, text: str):
         self.setPlainText(text)
 
