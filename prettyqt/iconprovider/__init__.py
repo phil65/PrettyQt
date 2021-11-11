@@ -51,6 +51,13 @@ class IconFont:
         with (self.path / self.charmap_path).open("r") as codes:
             self.charmap = json.load(codes, object_hook=hook)
 
+    def __dir__(self):
+        icons = [i.replace("-", "_") for i in self.charmap.keys()]
+        return list(super().__dir__()) + icons
+
+    def __getattr__(self, name: str):
+        return f"{self.prefix}.{name.replace('_', '-')}"
+
     def is_valid(self) -> bool:
         return len(gui.FontDatabase.applicationFontFamilies(self.font_id)) > 0
 
