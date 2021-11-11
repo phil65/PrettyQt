@@ -1,3 +1,20 @@
+## v0.186.0 (2021-11-11)
+
+### Feat
+
+- **WebEnginePage**: add some more methods
+- **Color**: add get_name method
+- **iconprovider**: add __dir__ and __getattr__ methods to iconsets
+- **TextDocument**: add some more methods
+- **TextBlock**: add __str__ method
+- **Process**: add get_process_environment method
+- **qml**: add clear_type_registrations method
+- **FileIconProvider**: support os.PathLike for get_icon
+- **custom_widgets**: add SubsequenceCompleter class
+- **Completer**: add set/is_case_sensitive methods
+- **custom_models**: add SubsequenceSortFilterProxyModel class
+- **SortFilterProxyModel**: add set_sort_role method
+
 ## v0.185.0 (2021-11-04)
 
 ### Feat
