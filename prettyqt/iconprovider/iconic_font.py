@@ -15,7 +15,7 @@ from typing import Any
 
 from prettyqt import constants, core, gui
 from prettyqt.iconprovider import chariconengine
-from prettyqt.qt import QtGui
+from prettyqt.qt import QtCore, QtGui
 
 
 _default_options = {
@@ -103,9 +103,9 @@ class CharIconPainter:
         self,
         iconic: IconicFont,
         painter: gui.Painter,
-        rect,
-        mode,
-        state,
+        rect: QtCore.QRect,
+        mode: QtGui.QIcon.Mode,
+        state: QtGui.QIcon.State,
         options: list[dict[str, Any]],
     ):
         color_str, char = COLOR_OPTIONS[state][mode]
