@@ -14,10 +14,9 @@ from __future__ import annotations
 from typing import Any
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.iconprovider import chariconengine
+from prettyqt.qt import QtGui
 
-
-# Third party imports
 
 _default_options = {
     "color": gui.Color(50, 50, 50),
@@ -25,8 +24,6 @@ _default_options = {
     "opacity": 1.0,
     "scale_factor": 1.0,
 }
-
-ZERO_COORD = core.Point(0, 0)
 
 ICON_KW = [
     "char",
@@ -156,27 +153,6 @@ class FontError(Exception):
     """Exception for font errors."""
 
 
-class CharIconEngine(gui.IconEngine):
-    """Specialization of QtGui.QIconEngine used to draw font-based icons."""
-
-    def __init__(self, iconic: QtCore.QObject, painter, options):
-        super().__init__()
-        self.iconic = iconic
-        self.painter = painter
-        self.options = options
-
-    def paint(self, painter: QtGui.QPainter, rect: QtCore.QRect, mode, state):
-        self.painter.paint(self.iconic, painter, rect, mode, state, self.options)
-
-    def pixmap(self, size, mode, state) -> QtGui.QPixmap:
-        pm = QtGui.QPixmap(size)
-        pm.fill(QtCore.Qt.GlobalColor.transparent)  # type: ignore
-        rect = core.Rect(ZERO_COORD, size)
-        painter = gui.Painter(pm)
-        self.paint(painter, rect, mode, state)
-        return pm
-
-
 class IconicFont(core.Object):
     """Main class for managing iconic fonts."""
 
@@ -216,7 +192,7 @@ class IconicFont(core.Object):
         if len(opts) != len(names):
             raise TypeError(f'"options" must be a list of size {len(names)}')
         parsed_options = [self._parse_options(o, kwargs, n) for o, n in zip(opts, names)]
-        engine = CharIconEngine(self, self.painter, parsed_options)
+        engine = chariconengine.CharIconEngine(self, self.painter, parsed_options)
         icon = QtGui.QIcon(engine)
         self.icon_cache[cache_key] = icon
         return icon
