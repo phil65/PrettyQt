@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
+from deprecated import deprecated
+
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, helpers, types
 
@@ -16,6 +18,13 @@ SPEC = bidict(
 )
 
 SpecStr = Literal["rgb", "hsv", "cmyk", "hsl", "extended_rgb", "invalid"]
+
+NAME_FORMAT = bidict(
+    hex_rgb=QtGui.QColor.NameFormat.HexRgb, hex_argb=QtGui.QColor.NameFormat.HexArgb
+)
+
+NameFormatStr = Literal["hex_rgb", "hex_argb"]
+NameStr = Literal["hex_rgb", "hex_argb", "svg_rgb", "svg_argb" "qcss_rgb", "qcss_argb"]
 
 
 class Color(QtGui.QColor):
@@ -131,6 +140,24 @@ class Color(QtGui.QColor):
         """Check whether a color is 'dark'."""
         return self.lightness() < 128
 
+    def get_name(self, name_format: NameStr = "hex_argb") -> str:
+        if name_format == "svg_rgb":
+            if not self.isValid():
+                return 'fill=""'
+            return f'fill="rgb({self.red()}, {self.green()}, {self.blue()})"'
+        elif name_format == "svg_argb":
+            if not self.isValid():
+                return 'fill=""'
+            fill_str = f"rgb({self.red()}, {self.green()}, {self.blue()})"
+            return f'fill="{fill_str}" fill-opacity="{self.alpha()}"'
+        elif name_format == "qcss_argb":
+            return f"rgba({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
+        elif name_format == "qcss_rgb":
+            return f"rgb({self.red()}, {self.green()}, {self.blue()})"
+        else:
+            return self.name(NAME_FORMAT[name_format])
+
+    @deprecated(reason="This method is deprecated, use Color.get_name instead.")
     def to_qsscolor(self) -> str:
         """Convert Color to a string that can be used in a QStyleSheet."""
         return f"rgba({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
